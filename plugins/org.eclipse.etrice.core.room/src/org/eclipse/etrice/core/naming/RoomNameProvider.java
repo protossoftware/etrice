@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -33,7 +32,6 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -181,15 +179,9 @@ public class RoomNameProvider {
 		if (s==null) {
 			return TOP_STATE_NAME;
 		}
-		else if (s instanceof BaseState) {
-			return ((BaseState) s).getName();
+		else {
+			return s.getName();
 		}
-		else if (s instanceof RefinedState) {
-			return ((RefinedState) s).getBase().getName();
-		}
-		
-		assert(false): "Unexpected State class "+s.eClass().getName();
-		return null;
 	}
 	
 	public static String getStatePathName(State s) {

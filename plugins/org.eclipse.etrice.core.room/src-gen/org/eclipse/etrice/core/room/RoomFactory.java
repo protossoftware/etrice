@@ -441,13 +441,13 @@ public interface RoomFactory extends EFactory
   StateMachine createStateMachine();
 
   /**
-   * Returns a new object of class '<em>Base State</em>'.
+   * Returns a new object of class '<em>Simple State</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Base State</em>'.
+   * @return a new object of class '<em>Simple State</em>'.
    * @generated
    */
-  BaseState createBaseState();
+  SimpleState createSimpleState();
 
   /**
    * Returns a new object of class '<em>Refined State</em>'.

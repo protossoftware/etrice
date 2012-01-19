@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateTerminal;
 
 /**
@@ -40,7 +40,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * @generated
    * @ordered
    */
-  protected BaseState state;
+  protected State state;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,12 +68,12 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * <!-- end-user-doc -->
    * @generated
    */
-  public BaseState getState()
+  public State getState()
   {
     if (state != null && state.eIsProxy())
     {
       InternalEObject oldState = (InternalEObject)state;
-      state = (BaseState)eResolveProxy(oldState);
+      state = (State)eResolveProxy(oldState);
       if (state != oldState)
       {
         if (eNotificationRequired())
@@ -88,7 +88,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * <!-- end-user-doc -->
    * @generated
    */
-  public BaseState basicGetState()
+  public State basicGetState()
   {
     return state;
   }
@@ -98,9 +98,9 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setState(BaseState newState)
+  public void setState(State newState)
   {
-    BaseState oldState = state;
+    State oldState = state;
     state = newState;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STATE_TERMINAL__STATE, oldState, state));
@@ -134,7 +134,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
     switch (featureID)
     {
       case RoomPackage.STATE_TERMINAL__STATE:
-        setState((BaseState)newValue);
+        setState((State)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class StateTerminalImpl extends TransitionTerminalImpl implements StateTe
     switch (featureID)
     {
       case RoomPackage.STATE_TERMINAL__STATE:
-        setState((BaseState)null);
+        setState((State)null);
         return;
     }
     super.eUnset(featureID);

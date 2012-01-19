@@ -4040,11 +4040,11 @@ ruleState returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getStateAccess().getBaseStateParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getStateAccess().getSimpleStateParserRuleCall_0()); 
     }
-    this_BaseState_0=ruleBaseState
+    this_SimpleState_0=ruleSimpleState
     { 
-        $current = $this_BaseState_0.current; 
+        $current = $this_SimpleState_0.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -4343,33 +4343,33 @@ ruleStateMachine returns [EObject current=null]
 
 
 
-// Entry rule entryRuleBaseState
-entryRuleBaseState returns [EObject current=null] 
+// Entry rule entryRuleSimpleState
+entryRuleSimpleState returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getBaseStateRule()); }
-	 iv_ruleBaseState=ruleBaseState 
-	 { $current=$iv_ruleBaseState.current; } 
+	{ newCompositeNode(grammarAccess.getSimpleStateRule()); }
+	 iv_ruleSimpleState=ruleSimpleState 
+	 { $current=$iv_ruleSimpleState.current; } 
 	 EOF 
 ;
 
-// Rule BaseState
-ruleBaseState returns [EObject current=null] 
+// Rule SimpleState
+ruleSimpleState returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (	otherlv_0='State' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getBaseStateAccess().getStateKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getSimpleStateAccess().getStateKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getBaseStateAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_1_0, grammarAccess.getSimpleStateAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getBaseStateRule());
+	            $current = createModelElement(grammarAccess.getSimpleStateRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -4382,11 +4382,11 @@ ruleBaseState returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
 	    }
 		lv_docu_2_0=ruleDocumentation		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	            $current = createModelElementForParent(grammarAccess.getSimpleStateRule());
 	        }
        		set(
        			$current, 
@@ -4399,20 +4399,20 @@ ruleBaseState returns [EObject current=null]
 )
 )?(	otherlv_3='{' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_3_0());
+    	newLeafNode(otherlv_3, grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0());
     }
 (	otherlv_4='entry' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getBaseStateAccess().getEntryKeyword_3_1_0());
+    	newLeafNode(otherlv_4, grammarAccess.getSimpleStateAccess().getEntryKeyword_3_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
+	        newCompositeNode(grammarAccess.getSimpleStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
 	    }
 		lv_entryCode_5_0=ruleDetailCode		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	            $current = createModelElementForParent(grammarAccess.getSimpleStateRule());
 	        }
        		set(
        			$current, 
@@ -4425,16 +4425,16 @@ ruleBaseState returns [EObject current=null]
 )
 ))?(	otherlv_6='exit' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getBaseStateAccess().getExitKeyword_3_2_0());
+    	newLeafNode(otherlv_6, grammarAccess.getSimpleStateAccess().getExitKeyword_3_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
+	        newCompositeNode(grammarAccess.getSimpleStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
 	    }
 		lv_exitCode_7_0=ruleDetailCode		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	            $current = createModelElementForParent(grammarAccess.getSimpleStateRule());
 	        }
        		set(
        			$current, 
@@ -4447,16 +4447,16 @@ ruleBaseState returns [EObject current=null]
 )
 ))?(	otherlv_8='do' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0());
+    	newLeafNode(otherlv_8, grammarAccess.getSimpleStateAccess().getDoKeyword_3_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
+	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
 	    }
 		lv_doCode_9_0=ruleDetailCode		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	            $current = createModelElementForParent(grammarAccess.getSimpleStateRule());
 	        }
        		set(
        			$current, 
@@ -4469,16 +4469,16 @@ ruleBaseState returns [EObject current=null]
 )
 ))?(	otherlv_10='subgraph' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0());
+    	newLeafNode(otherlv_10, grammarAccess.getSimpleStateAccess().getSubgraphKeyword_3_4_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBaseStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); 
+	        newCompositeNode(grammarAccess.getSimpleStateAccess().getSubgraphPlainStateGraphParserRuleCall_3_4_1_0()); 
 	    }
 		lv_subgraph_11_0=rulePlainStateGraph		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getBaseStateRule());
+	            $current = createModelElementForParent(grammarAccess.getSimpleStateRule());
 	        }
        		set(
        			$current, 
@@ -4491,7 +4491,7 @@ ruleBaseState returns [EObject current=null]
 )
 ))?	otherlv_12='}' 
     {
-    	newLeafNode(otherlv_12, grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5());
+    	newLeafNode(otherlv_12, grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_5());
     }
 )?)
 ;
@@ -4526,7 +4526,7 @@ ruleRefinedState returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getRefinedStateAccess().getBaseBaseStateCrossReference_1_0()); 
+	        newCompositeNode(grammarAccess.getRefinedStateAccess().getTargetStateCrossReference_1_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
@@ -5896,7 +5896,7 @@ ruleStateTerminal returns [EObject current=null]
         }
 	otherlv_0=RULE_ID
 	{
-		newLeafNode(otherlv_0, grammarAccess.getStateTerminalAccess().getStateBaseStateCrossReference_0()); 
+		newLeafNode(otherlv_0, grammarAccess.getStateTerminalAccess().getStateStateCrossReference_0()); 
 	}
 
 )
@@ -5985,7 +5985,7 @@ ruleSubStateTrPointTerminal returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_2, grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateCrossReference_2_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getSubStateTrPointTerminalAccess().getStateStateCrossReference_2_0()); 
 	}
 
 )

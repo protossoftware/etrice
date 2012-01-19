@@ -13,9 +13,13 @@
 
 package org.eclipse.etrice.core.naming;
 
+import java.util.HashMap;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
@@ -42,6 +46,22 @@ public class RoomQualifiedNameProvider extends
 //		return fqn;
 //    }
 	
+	private HashMap<RefinedState, String> rs2uuid = new HashMap<RefinedState, String>();
+	
+	public RoomQualifiedNameProvider() {
+		super();
+	}
+	
+    public QualifiedName qualifiedName(RefinedState rs) {
+    	// RefinedStates can never be in conflict, whether the target reference is resolved or not
+    	String uuid = rs2uuid.get(rs);
+    	if (uuid==null) {
+    		uuid = EcoreUtil.generateUUID();
+    		rs2uuid.put(rs, uuid);
+    	}
+    	return getFullyQualifiedName(rs.eContainer()).append(uuid);
+    }
+    
     public QualifiedName qualifiedName(Message m) {
     	ProtocolClass pc = (ProtocolClass) m.eContainer();
     	String list;

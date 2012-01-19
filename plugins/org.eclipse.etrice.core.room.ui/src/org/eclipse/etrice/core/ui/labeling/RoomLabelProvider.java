@@ -16,7 +16,6 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -33,6 +32,8 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -126,7 +127,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "SubSystemRef.gif";
 	}
 
-	String image(BaseState state) {
+	String image(SimpleState state) {
 		return "State.gif";
 	}
 
@@ -312,15 +313,8 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return m.getName()+signature;
 	}
 	
-	String text(BaseState s) {
+	String text(State s) {
 		return s.getName();
-	}
-	
-	String text(RefinedState rs) {
-		if (rs.getBase()!=null)
-			return text(rs.getBase());
-		
-		return "";
 	}
 
 	private Styler getKeywordStyler() {

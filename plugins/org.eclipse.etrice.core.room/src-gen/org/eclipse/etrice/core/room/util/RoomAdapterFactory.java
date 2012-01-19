@@ -309,9 +309,9 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createStateMachineAdapter();
       }
       @Override
-      public Adapter caseBaseState(BaseState object)
+      public Adapter caseSimpleState(SimpleState object)
       {
-        return createBaseStateAdapter();
+        return createSimpleStateAdapter();
       }
       @Override
       public Adapter caseRefinedState(RefinedState object)
@@ -1161,16 +1161,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.BaseState <em>Base State</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.BaseState
+   * @see org.eclipse.etrice.core.room.SimpleState
    * @generated
    */
-  public Adapter createBaseStateAdapter()
+  public Adapter createSimpleStateAdapter()
   {
     return null;
   }

@@ -434,13 +434,13 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.BASE_STATE:
+      case RoomPackage.SIMPLE_STATE:
       {
-        BaseState baseState = (BaseState)theEObject;
-        T result = caseBaseState(baseState);
-        if (result == null) result = caseState(baseState);
-        if (result == null) result = caseStateGraphNode(baseState);
-        if (result == null) result = caseStateGraphItem(baseState);
+        SimpleState simpleState = (SimpleState)theEObject;
+        T result = caseSimpleState(simpleState);
+        if (result == null) result = caseState(simpleState);
+        if (result == null) result = caseStateGraphNode(simpleState);
+        if (result == null) result = caseStateGraphItem(simpleState);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1412,17 +1412,17 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Base State</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Simple State</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Base State</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Simple State</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseBaseState(BaseState object)
+  public T caseSimpleState(SimpleState object)
   {
     return null;
   }

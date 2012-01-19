@@ -2668,18 +2668,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cBaseStateParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSimpleStateParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRefinedStateParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//State:
-		//	BaseState | RefinedState;
+		//	SimpleState | RefinedState;
 		public ParserRule getRule() { return rule; }
 
-		//BaseState | RefinedState
+		//SimpleState | RefinedState
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//BaseState
-		public RuleCall getBaseStateParserRuleCall_0() { return cBaseStateParserRuleCall_0; }
+		//SimpleState
+		public RuleCall getSimpleStateParserRuleCall_0() { return cSimpleStateParserRuleCall_0; }
 
 		//RefinedState
 		public RuleCall getRefinedStateParserRuleCall_1() { return cRefinedStateParserRuleCall_1; }
@@ -2839,8 +2839,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
-	public class BaseStateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BaseState");
+	public class SimpleStateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2867,11 +2867,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubgraphPlainStateGraphParserRuleCall_3_4_1_0 = (RuleCall)cSubgraphAssignment_3_4_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
-		//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-		//
-		//// in RefinedState to still have both features in the common base class State
-		//
-		//BaseState:
+		//SimpleState:
 		//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
 		//	doCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?;
 		public ParserRule getRule() { return rule; }
@@ -2958,9 +2954,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefinedState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefinedStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cBaseAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cBaseBaseStateCrossReference_1_0 = (CrossReference)cBaseAssignment_1.eContents().get(0);
-		private final RuleCall cBaseBaseStateFQNParserRuleCall_1_0_1 = (RuleCall)cBaseBaseStateCrossReference_1_0.eContents().get(1);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetStateCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetStateFQNParserRuleCall_1_0_1 = (RuleCall)cTargetStateCrossReference_1_0.eContents().get(1);
 		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -2983,25 +2979,25 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//RefinedState:
-		//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+		//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
 		//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
-		//exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
+		//"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)?
+		//("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"RefinedState"
 		public Keyword getRefinedStateKeyword_0() { return cRefinedStateKeyword_0; }
 
-		//base=[BaseState|FQN]
-		public Assignment getBaseAssignment_1() { return cBaseAssignment_1; }
+		//target=[State|FQN]
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
 
-		//[BaseState|FQN]
-		public CrossReference getBaseBaseStateCrossReference_1_0() { return cBaseBaseStateCrossReference_1_0; }
+		//[State|FQN]
+		public CrossReference getTargetStateCrossReference_1_0() { return cTargetStateCrossReference_1_0; }
 
 		//FQN
-		public RuleCall getBaseBaseStateFQNParserRuleCall_1_0_1() { return cBaseBaseStateFQNParserRuleCall_1_0_1; }
+		public RuleCall getTargetStateFQNParserRuleCall_1_0_1() { return cTargetStateFQNParserRuleCall_1_0_1; }
 
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
@@ -3780,21 +3776,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateTerminal");
 		private final Assignment cStateAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cStateBaseStateCrossReference_0 = (CrossReference)cStateAssignment.eContents().get(0);
-		private final RuleCall cStateBaseStateIDTerminalRuleCall_0_1 = (RuleCall)cStateBaseStateCrossReference_0.eContents().get(1);
+		private final CrossReference cStateStateCrossReference_0 = (CrossReference)cStateAssignment.eContents().get(0);
+		private final RuleCall cStateStateIDTerminalRuleCall_0_1 = (RuleCall)cStateStateCrossReference_0.eContents().get(1);
 		
 		//StateTerminal:
-		//	state=[BaseState];
+		//	state=[State];
 		public ParserRule getRule() { return rule; }
 
-		//state=[BaseState]
+		//state=[State]
 		public Assignment getStateAssignment() { return cStateAssignment; }
 
-		//[BaseState]
-		public CrossReference getStateBaseStateCrossReference_0() { return cStateBaseStateCrossReference_0; }
+		//[State]
+		public CrossReference getStateStateCrossReference_0() { return cStateStateCrossReference_0; }
 
 		//ID
-		public RuleCall getStateBaseStateIDTerminalRuleCall_0_1() { return cStateBaseStateIDTerminalRuleCall_0_1; }
+		public RuleCall getStateStateIDTerminalRuleCall_0_1() { return cStateStateIDTerminalRuleCall_0_1; }
 	}
 
 	public class TrPointTerminalElements extends AbstractParserRuleElementFinder {
@@ -3833,14 +3829,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTrPointTrPointIDTerminalRuleCall_0_0_1 = (RuleCall)cTrPointTrPointCrossReference_0_0.eContents().get(1);
 		private final Keyword cOfKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cStateBaseStateCrossReference_2_0 = (CrossReference)cStateAssignment_2.eContents().get(0);
-		private final RuleCall cStateBaseStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateBaseStateCrossReference_2_0.eContents().get(1);
+		private final CrossReference cStateStateCrossReference_2_0 = (CrossReference)cStateAssignment_2.eContents().get(0);
+		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//SubStateTrPointTerminal:
-		//	trPoint=[TrPoint] "of" state=[BaseState];
+		//	trPoint=[TrPoint] "of" state=[State];
 		public ParserRule getRule() { return rule; }
 
-		//trPoint=[TrPoint] "of" state=[BaseState]
+		//trPoint=[TrPoint] "of" state=[State]
 		public Group getGroup() { return cGroup; }
 
 		//trPoint=[TrPoint]
@@ -3855,14 +3851,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"of"
 		public Keyword getOfKeyword_1() { return cOfKeyword_1; }
 
-		//state=[BaseState]
+		//state=[State]
 		public Assignment getStateAssignment_2() { return cStateAssignment_2; }
 
-		//[BaseState]
-		public CrossReference getStateBaseStateCrossReference_2_0() { return cStateBaseStateCrossReference_2_0; }
+		//[State]
+		public CrossReference getStateStateCrossReference_2_0() { return cStateStateCrossReference_2_0; }
 
 		//ID
-		public RuleCall getStateBaseStateIDTerminalRuleCall_2_0_1() { return cStateBaseStateIDTerminalRuleCall_2_0_1; }
+		public RuleCall getStateStateIDTerminalRuleCall_2_0_1() { return cStateStateIDTerminalRuleCall_2_0_1; }
 	}
 
 	public class ChoicepointTerminalElements extends AbstractParserRuleElementFinder {
@@ -4299,7 +4295,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private StateGraphElements pStateGraph;
 	private PlainStateGraphElements pPlainStateGraph;
 	private StateMachineElements pStateMachine;
-	private BaseStateElements pBaseState;
+	private SimpleStateElements pSimpleState;
 	private RefinedStateElements pRefinedState;
 	private DetailCodeElements pDetailCode;
 	private TrPointElements pTrPoint;
@@ -4845,7 +4841,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//State:
-	//	BaseState | RefinedState;
+	//	SimpleState | RefinedState;
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -4885,23 +4881,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getStateMachineAccess().getRule();
 	}
 
-	//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-	//
-	//// in RefinedState to still have both features in the common base class State
-	//
-	//BaseState:
+	//SimpleState:
 	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
 	//	doCode=DetailCode)? ("subgraph" subgraph=PlainStateGraph)? "}")?;
-	public BaseStateElements getBaseStateAccess() {
-		return (pBaseState != null) ? pBaseState : (pBaseState = new BaseStateElements());
+	public SimpleStateElements getSimpleStateAccess() {
+		return (pSimpleState != null) ? pSimpleState : (pSimpleState = new SimpleStateElements());
 	}
 	
-	public ParserRule getBaseStateRule() {
-		return getBaseStateAccess().getRule();
+	public ParserRule getSimpleStateRule() {
+		return getSimpleStateAccess().getRule();
 	}
 
 	//RefinedState:
-	//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+	//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
 	//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 	public RefinedStateElements getRefinedStateAccess() {
 		return (pRefinedState != null) ? pRefinedState : (pRefinedState = new RefinedStateElements());
@@ -5061,7 +5053,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateTerminal:
-	//	state=[BaseState];
+	//	state=[State];
 	public StateTerminalElements getStateTerminalAccess() {
 		return (pStateTerminal != null) ? pStateTerminal : (pStateTerminal = new StateTerminalElements());
 	}
@@ -5081,7 +5073,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubStateTrPointTerminal:
-	//	trPoint=[TrPoint] "of" state=[BaseState];
+	//	trPoint=[TrPoint] "of" state=[State];
 	public SubStateTrPointTerminalElements getSubStateTrPointTerminalAccess() {
 		return (pSubStateTrPointTerminal != null) ? pSubStateTrPointTerminal : (pSubStateTrPointTerminal = new SubStateTrPointTerminalElements());
 	}

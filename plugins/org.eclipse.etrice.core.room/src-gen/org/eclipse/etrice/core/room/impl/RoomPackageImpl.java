@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -70,6 +69,7 @@ import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -425,7 +425,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass baseStateEClass = null;
+  private EClass simpleStateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2324,9 +2324,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBaseState()
+  public EClass getSimpleState()
   {
-    return baseStateEClass;
+    return simpleStateEClass;
   }
 
   /**
@@ -2334,9 +2334,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBaseState_Name()
+  public EAttribute getSimpleState_Name()
   {
-    return (EAttribute)baseStateEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)simpleStateEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2354,7 +2354,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRefinedState_Base()
+  public EReference getRefinedState_Target()
   {
     return (EReference)refinedStateEClass.getEStructuralFeatures().get(0);
   }
@@ -3159,11 +3159,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     stateMachineEClass = createEClass(STATE_MACHINE);
     createEAttribute(stateMachineEClass, STATE_MACHINE__DATA_DRIVEN);
 
-    baseStateEClass = createEClass(BASE_STATE);
-    createEAttribute(baseStateEClass, BASE_STATE__NAME);
+    simpleStateEClass = createEClass(SIMPLE_STATE);
+    createEAttribute(simpleStateEClass, SIMPLE_STATE__NAME);
 
     refinedStateEClass = createEClass(REFINED_STATE);
-    createEReference(refinedStateEClass, REFINED_STATE__BASE);
+    createEReference(refinedStateEClass, REFINED_STATE__TARGET);
 
     detailCodeEClass = createEClass(DETAIL_CODE);
     createEAttribute(detailCodeEClass, DETAIL_CODE__COMMANDS);
@@ -3300,7 +3300,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     stateGraphNodeEClass.getESuperTypes().add(this.getStateGraphItem());
     stateEClass.getESuperTypes().add(this.getStateGraphNode());
     stateMachineEClass.getESuperTypes().add(this.getStateGraph());
-    baseStateEClass.getESuperTypes().add(this.getState());
+    simpleStateEClass.getESuperTypes().add(this.getState());
     refinedStateEClass.getESuperTypes().add(this.getState());
     trPointEClass.getESuperTypes().add(this.getStateGraphNode());
     transitionPointEClass.getESuperTypes().add(this.getTrPoint());
@@ -3537,11 +3537,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(stateMachineEClass, StateMachine.class, "StateMachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStateMachine_DataDriven(), ecorePackage.getEBoolean(), "dataDriven", null, 0, 1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(baseStateEClass, BaseState.class, "BaseState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBaseState_Name(), ecorePackage.getEString(), "name", null, 0, 1, BaseState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(simpleStateEClass, SimpleState.class, "SimpleState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSimpleState_Name(), ecorePackage.getEString(), "name", null, 0, 1, SimpleState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(refinedStateEClass, RefinedState.class, "RefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRefinedState_Base(), this.getBaseState(), null, "base", null, 0, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRefinedState_Target(), this.getState(), null, "target", null, 0, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(detailCodeEClass, DetailCode.class, "DetailCode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDetailCode_Commands(), ecorePackage.getEString(), "commands", null, 0, -1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3585,14 +3585,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(transitionTerminalEClass, TransitionTerminal.class, "TransitionTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(stateTerminalEClass, StateTerminal.class, "StateTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateTerminal_State(), this.getBaseState(), null, "state", null, 0, 1, StateTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateTerminal_State(), this.getState(), null, "state", null, 0, 1, StateTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trPointTerminalEClass, TrPointTerminal.class, "TrPointTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTrPointTerminal_TrPoint(), this.getTrPoint(), null, "trPoint", null, 0, 1, TrPointTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subStateTrPointTerminalEClass, SubStateTrPointTerminal.class, "SubStateTrPointTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSubStateTrPointTerminal_TrPoint(), this.getTrPoint(), null, "trPoint", null, 0, 1, SubStateTrPointTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSubStateTrPointTerminal_State(), this.getBaseState(), null, "state", null, 0, 1, SubStateTrPointTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubStateTrPointTerminal_State(), this.getState(), null, "state", null, 0, 1, SubStateTrPointTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(choicepointTerminalEClass, ChoicepointTerminal.class, "ChoicepointTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getChoicepointTerminal_Cp(), this.getChoicePoint(), null, "cp", null, 0, 1, ChoicepointTerminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

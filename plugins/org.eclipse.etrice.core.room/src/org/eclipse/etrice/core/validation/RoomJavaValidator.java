@@ -13,6 +13,7 @@
 
 package org.eclipse.etrice.core.validation;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -28,9 +29,11 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateMachine;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -111,6 +114,29 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			ac = ac.getBase();
 		}
 		while (ac!=null);
+	}
+	
+	@Check
+	public void checkRefinedStateUnique(RefinedState rs) {
+		StateGraph sg = (StateGraph) rs.eContainer();
+		TreeIterator<EObject> it = sg.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj!=rs && obj instanceof RefinedState)
+				if (rs.getTarget()==((RefinedState)obj).getTarget()) {
+					if (rs.eContainer().eContainer() instanceof ActorClass)
+						error("refined state conflicts with nested refined state with same target", RoomPackage.Literals.REFINED_STATE__TARGET);
+					else
+						error("refined state not unique", RoomPackage.Literals.REFINED_STATE__TARGET);
+				}
+		}
+	}
+	
+	@Check
+	public void checkStateNameUnique(SimpleState s) {
+		Result result = ValidationUtil.isUniqueName(s, s.getName());
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
 	private SubSystemClass getSubSystemClass(EObject obj) {
