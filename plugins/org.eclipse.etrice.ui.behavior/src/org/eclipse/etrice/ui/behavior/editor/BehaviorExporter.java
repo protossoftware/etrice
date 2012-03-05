@@ -25,7 +25,7 @@ import org.eclipse.ui.PlatformUI;
 
 public class BehaviorExporter {
 
-	private static final String SUFFIX = ".behavior.jpg";
+	private static final String SUFFIX = "_behavior.jpg";
 
 	public static void export(ActorClass ac, String folder) {
 		DiagramAccess da = new DiagramAccess();

@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Documentation;
@@ -15,6 +16,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
@@ -65,6 +68,8 @@ public class DocGen implements IRoomGenerator {
     _builder.append("\\documentclass[titlepage]{article}");
     _builder.newLine();
     _builder.append("\\usepackage{graphicx}");
+    _builder.newLine();
+    _builder.append("\\parindent 0pt");
     _builder.newLine();
     _builder.append("\\makeatletter");
     _builder.newLine();
@@ -264,7 +269,7 @@ public class DocGen implements IRoomGenerator {
   
   public StringConcatenation generateDataClassDoc(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\\subsection {");
+    _builder.append("\\level{2} {");
     String _name = dc.getName();
     _builder.append(_name, "");
     _builder.append("}");
@@ -305,7 +310,7 @@ public class DocGen implements IRoomGenerator {
   public StringConcatenation generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
-    _builder.append("\\subsection {");
+    _builder.append("\\level{2} {");
     String _name = pc.getName();
     _builder.append(_name, "	");
     _builder.append("}");
@@ -420,18 +425,17 @@ public class DocGen implements IRoomGenerator {
     {
       EList<ActorClass> _actorClasses = model.getActorClasses();
       for(final ActorClass ac : _actorClasses) {
+        _builder.append("\\newpage");
+        _builder.newLine();
+        _builder.append("\t");
         StringConcatenation _generateActorClassDoc = this.generateActorClassDoc(root, model, ac);
-        _builder.append(_generateActorClassDoc, "");
+        _builder.append(_generateActorClassDoc, "	");
         _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
   }
   
-  /**
-   * «IF fileExists(ac.name) == "true"»
-   * «ENDIF»
-   */
   public StringConcatenation generateActorClassDoc(final Root root, final RoomModel model, final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
@@ -439,14 +443,14 @@ public class DocGen implements IRoomGenerator {
       String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "images\\");
       String _name = ac.getName();
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ".jpg");
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_structure.jpg");
       String filename = _operator_plus_2;
       String _replaceAll = filename.replaceAll("\\\\", "/");
       filename = _replaceAll;
       String _replaceAll_1 = filename.replaceAll("/", "//");
-      String filename1 = _replaceAll_1;
+      String latexFilename = _replaceAll_1;
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\\subsection{");
+      _builder.append("\\level{2}{");
       String _name_1 = ac.getName();
       _builder.append(_name_1, "");
       _builder.append("}");
@@ -462,40 +466,259 @@ public class DocGen implements IRoomGenerator {
         String _fileExists = this.fileExists(filename);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
-          _builder.append("\\begin{figure}[h]");
-          _builder.newLine();
-          _builder.append("\\begin{center}");
-          _builder.newLine();
-          _builder.append("\\includegraphics[scale=0.6]{");
-          _builder.append(filename1, "");
-          _builder.append("}");
+          String _name_2 = ac.getName();
+          String _operator_plus_3 = StringExtensions.operator_plus(_name_2, " Structure");
+          StringConcatenation _includeGraphics = this.includeGraphics(latexFilename, "0.4", _operator_plus_3);
+          _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
-          _builder.append("\\caption{Blinky Toplevel Structure}");
-          _builder.newLine();
-          _builder.append("\\end{center}");
-          _builder.newLine();
-          _builder.append("\\end{figure}");
-          _builder.newLine();
         }
       }
       _builder.newLine();
-      _builder.append("\\level{4}{Attributes}");
+      _builder.append("\\level{3}{Attributes}");
       _builder.newLine();
       EList<Attribute> _attributes = ac.getAttributes();
       StringConcatenation _generateAttributesDoc = this.generateAttributesDoc(_attributes);
       _builder.append(_generateAttributesDoc, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("\\level{3}{Behavior}");
-      _builder.newLine();
-      _builder.append("\\level{4}{Operations}");
+      _builder.append("\\level{3}{Operations}");
       _builder.newLine();
       EList<StandardOperation> _operations = ac.getOperations();
       StringConcatenation _generateOperationsDoc = this.generateOperationsDoc(_operations);
       _builder.append(_generateOperationsDoc, "");
       _builder.newLineIfNotEmpty();
-      _builder.append("\\level{4}{Statemachine}");
+      {
+        boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(ac);
+        if (_hasNonEmptyStateMachine) {
+          _builder.append("\\level{3}{Statemachine}");
+          _builder.newLine();
+          StringConcatenation _generateFsmDoc = this.generateFsmDoc(model, ac);
+          _builder.append(_generateFsmDoc, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public StringConcatenation generateFsmDoc(final RoomModel model, final ActorClass ac) {
+    StringConcatenation _xblockexpression = null;
+    {
+      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+      String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "images\\");
+      String _name = ac.getName();
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_behavior.jpg");
+      String filename = _operator_plus_2;
+      String _replaceAll = filename.replaceAll("\\\\", "/");
+      filename = _replaceAll;
+      String _replaceAll_1 = filename.replaceAll("/", "//");
+      String latexFilename = _replaceAll_1;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\level{4}{Top Level}");
       _builder.newLine();
+      {
+        String _fileExists = this.fileExists(filename);
+        boolean _equals = _fileExists.equals("true");
+        if (_equals) {
+          String _name_1 = ac.getName();
+          String _operator_plus_3 = StringExtensions.operator_plus(_name_1, " Top State");
+          StringConcatenation _includeGraphics = this.includeGraphics(latexFilename, "0.4", _operator_plus_3);
+          _builder.append(_includeGraphics, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      _builder.append("\\begin{par}");
+      _builder.newLine();
+      {
+        StateGraph _stateMachine = ac.getStateMachine();
+        EList<State> _states = _stateMachine.getStates();
+        for(final State s : _states) {
+          {
+            Documentation _docu = s.getDocu();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_docu, null);
+            if (_operator_notEquals) {
+              _builder.append("\\textbf{State description} \\textit{");
+              String _statePathName = this.roomExt.getStatePathName(s);
+              String _replaceAll_2 = _statePathName.replaceAll("_", "-");
+              _builder.append(_replaceAll_2, "");
+              _builder.append("}:");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline");
+              _builder.newLine();
+              Documentation _docu_1 = s.getDocu();
+              StringConcatenation _generateDocText = this.generateDocText(_docu_1);
+              _builder.append(_generateDocText, "");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline\\newline");
+              _builder.newLine();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      {
+        StateGraph _stateMachine_1 = ac.getStateMachine();
+        EList<ChoicePoint> _chPoints = _stateMachine_1.getChPoints();
+        for(final ChoicePoint c : _chPoints) {
+          {
+            Documentation _docu_2 = c.getDocu();
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_docu_2, null);
+            if (_operator_notEquals_1) {
+              _builder.append("\\textbf{Choicepoint description} \\textit{");
+              String _name_2 = c.getName();
+              _builder.append(_name_2, "");
+              _builder.append("}:");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline");
+              _builder.newLine();
+              Documentation _docu_3 = c.getDocu();
+              StringConcatenation _generateDocText_1 = this.generateDocText(_docu_3);
+              _builder.append(_generateDocText_1, "");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline\\newline");
+              _builder.newLine();
+            }
+          }
+        }
+      }
+      _builder.append("\\end{par}");
+      _builder.newLine();
+      _builder.newLine();
+      {
+        StateGraph _stateMachine_2 = ac.getStateMachine();
+        EList<State> _states_1 = _stateMachine_2.getStates();
+        for(final State s_1 : _states_1) {
+          {
+            boolean _isLeaf = this.roomExt.isLeaf(s_1);
+            boolean _operator_not = BooleanExtensions.operator_not(_isLeaf);
+            if (_operator_not) {
+              StringConcatenation _generateStateDoc = this.generateStateDoc(model, ac, s_1);
+              _builder.append(_generateStateDoc, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public StringConcatenation generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
+    StringConcatenation _xblockexpression = null;
+    {
+      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+      String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "images\\");
+      String _name = ac.getName();
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
+      String _statePathName = this.roomExt.getStatePathName(state);
+      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _statePathName);
+      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_behavior.jpg");
+      String filename = _operator_plus_4;
+      String _replaceAll = filename.replaceAll("\\\\", "/");
+      filename = _replaceAll;
+      String _replaceAll_1 = filename.replaceAll("/", "//");
+      String latexFilename = _replaceAll_1;
+      String _operator_plus_5 = StringExtensions.operator_plus("Gen Filename: ", filename);
+      this.logger.logInfo(_operator_plus_5);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\level{4}{Subgraph ");
+      String _statePathName_1 = this.roomExt.getStatePathName(state);
+      String _replaceAll_2 = _statePathName_1.replaceAll("_", "-");
+      _builder.append(_replaceAll_2, "");
+      _builder.append("}");
+      _builder.newLineIfNotEmpty();
+      {
+        String _fileExists = this.fileExists(filename);
+        boolean _equals = _fileExists.equals("true");
+        if (_equals) {
+          String _name_1 = ac.getName();
+          String _operator_plus_6 = StringExtensions.operator_plus(_name_1, "_");
+          String _statePathName_2 = this.roomExt.getStatePathName(state);
+          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _statePathName_2);
+          StringConcatenation _includeGraphics = this.includeGraphics(latexFilename, "0.4", _operator_plus_7);
+          _builder.append(_includeGraphics, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      _builder.append("\\begin{par}");
+      _builder.newLine();
+      {
+        StateGraph _subgraph = state.getSubgraph();
+        EList<State> _states = _subgraph.getStates();
+        for(final State s : _states) {
+          {
+            Documentation _docu = s.getDocu();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_docu, null);
+            if (_operator_notEquals) {
+              _builder.append("\\textbf{State description} \\textit{");
+              String _statePathName_3 = this.roomExt.getStatePathName(s);
+              String _replaceAll_3 = _statePathName_3.replaceAll("_", "-");
+              _builder.append(_replaceAll_3, "");
+              _builder.append("}:");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline");
+              _builder.newLine();
+              Documentation _docu_1 = s.getDocu();
+              StringConcatenation _generateDocText = this.generateDocText(_docu_1);
+              _builder.append(_generateDocText, "");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline\\newline");
+              _builder.newLine();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      {
+        StateGraph _subgraph_1 = state.getSubgraph();
+        EList<ChoicePoint> _chPoints = _subgraph_1.getChPoints();
+        for(final ChoicePoint c : _chPoints) {
+          {
+            Documentation _docu_2 = c.getDocu();
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_docu_2, null);
+            if (_operator_notEquals_1) {
+              _builder.append("\\textbf{Choicepoint description} \\textit{");
+              String _name_2 = c.getName();
+              _builder.append(_name_2, "");
+              _builder.append("}:");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline");
+              _builder.newLine();
+              Documentation _docu_3 = c.getDocu();
+              StringConcatenation _generateDocText_1 = this.generateDocText(_docu_3);
+              _builder.append(_generateDocText_1, "");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\newline\\newline");
+              _builder.newLine();
+            }
+          }
+        }
+      }
+      _builder.append("\\end{par}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      {
+        StateGraph _subgraph_2 = state.getSubgraph();
+        EList<State> _states_1 = _subgraph_2.getStates();
+        for(final State s_1 : _states_1) {
+          {
+            boolean _isLeaf = this.roomExt.isLeaf(s_1);
+            boolean _operator_not = BooleanExtensions.operator_not(_isLeaf);
+            if (_operator_not) {
+              StringConcatenation _generateStateDoc = this.generateStateDoc(model, ac, s_1);
+              _builder.append(_generateStateDoc, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -643,7 +866,8 @@ public class DocGen implements IRoomGenerator {
   
   public String fileExists(final String f) {
       File _file = new File(f);
-      boolean _exists = _file.exists();
+      final File file = _file;
+      boolean _exists = file.exists();
       final boolean exist = _exists;
       boolean _operator_equals = ObjectExtensions.operator_equals(((Boolean)exist), ((Boolean)true));
       if (_operator_equals) {
@@ -659,6 +883,35 @@ public class DocGen implements IRoomGenerator {
           return "false";
         }
       }
+  }
+  
+  public StringConcatenation includeGraphics(final String filename, final String scale, final String caption) {
+    StringConcatenation _xblockexpression = null;
+    {
+      String _replaceAll = caption.replaceAll("_", "-");
+      String latexCaption = _replaceAll;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\begin{figure}[h]");
+      _builder.newLine();
+      _builder.append("\\begin{center}");
+      _builder.newLine();
+      _builder.append("\\includegraphics[scale=");
+      _builder.append(scale, "");
+      _builder.append("]{");
+      _builder.append(filename, "");
+      _builder.append("}");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\\caption{");
+      _builder.append(latexCaption, "");
+      _builder.append("}");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\\end{center}");
+      _builder.newLine();
+      _builder.append("\\end{figure}");
+      _builder.newLine();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   public String irgendwas(final Root root, final ActorClass ac) {

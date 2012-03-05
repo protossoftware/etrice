@@ -17,8 +17,9 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -40,8 +41,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
@@ -76,6 +77,8 @@ public class ExportDiagramsHandler extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		final IEditorPart editor = window.getActivePage().getActiveEditor();
 		if (editor instanceof XtextEditor) {
+			final IPath path = ((FileEditorInput)editor.getEditorInput()).getPath();
+			
 			ISelection selection = HandlerUtil.getCurrentSelection(event);
 			if (selection instanceof IStructuredSelection) {
 				// event from the xtext editor's outline view
@@ -93,7 +96,7 @@ public class ExportDiagramsHandler extends AbstractHandler {
 									EObject object = resource.getEObject(fragment);
 									
 									if (object instanceof RoomModel)
-										exportDiagrams((RoomModel)object, editor.getSite().getShell());
+										exportDiagrams((RoomModel)object, path, editor.getSite().getShell());
 								}
 							}
 						});
@@ -104,18 +107,12 @@ public class ExportDiagramsHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected void exportDiagrams(RoomModel model, Shell shell) {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell,
-				ResourcesPlugin.getWorkspace().getRoot(),
-				false,
-				"Select a destination folder:");
-		dialog.showClosedProjects(false);
-		dialog.open();
-		Object[] results = dialog.getResult();	
-		if ((results != null) && (results.length > 0) && (results[0] instanceof IPath)) {
-			IPath path = (IPath)results[0];
-			IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-			IFolder file = workspaceRoot.getFolder(path);
+	protected void exportDiagrams(RoomModel model, IPath modelPath, Shell shell) {
+//		IProject project = ResourcesPlugin.getWorkspace().getRoot().getFile(modelPath).getProject();
+		IContainer container = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(modelPath.removeLastSegments(1));
+		IProject project = container.getProject();
+		IFolder file = project.getFolder("doc-gen/images");
+		if (file!=null) {
 			String folder = file.getLocation().toOSString();
 		
 			for (ActorClass ac : model.getActorClasses()) {
