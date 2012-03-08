@@ -200,7 +200,7 @@ public class GenericStateMachineGenerator {
       _builder.append(_genExtra, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("//*** Entry and Exit Codes");
+      _builder.append("/* Entry and Exit Codes */");
       _builder.newLine();
       {
         StateGraph _stateMachine = xpac.getStateMachine();
@@ -258,7 +258,7 @@ public class GenericStateMachineGenerator {
         }
       }
       _builder.newLine();
-      _builder.append("//*** Action Codes");
+      _builder.append("/* Action Codes */");
       _builder.newLine();
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();

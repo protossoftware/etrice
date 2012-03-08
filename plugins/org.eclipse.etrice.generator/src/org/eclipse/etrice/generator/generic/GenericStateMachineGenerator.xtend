@@ -100,7 +100,7 @@ class GenericStateMachineGenerator {
 
 		«genExtra(xpac, ac)»
 		
-		//*** Entry and Exit Codes
+		/* Entry and Exit Codes */
 		«FOR state : xpac.stateMachine.getStateList()»
 			«IF xpac.isOwnObject(state)»
 				«IF state.hasEntryCode()»
@@ -116,7 +116,7 @@ class GenericStateMachineGenerator {
 			«ENDIF»
 		«ENDFOR»
 		
-		//*** Action Codes
+		/* Action Codes */
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, tr instanceof NonInitialTransition)»«IF tr instanceof NonInitialTransition»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
