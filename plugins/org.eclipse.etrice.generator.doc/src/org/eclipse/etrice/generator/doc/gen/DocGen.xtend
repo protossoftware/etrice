@@ -16,11 +16,13 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import java.io.File
+import java.io.*
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.Documentation
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.Message
@@ -51,6 +53,7 @@ class DocGen implements IRoomGenerator {
 	def generateModelDoc(Root root, RoomModel model) {'''
 		\documentclass[titlepage]{article}
 		\usepackage{graphicx}
+		\parindent 0pt
 		\makeatletter
 		\newcommand\level[1]{%
 		   \ifcase#1\relax\expandafter\chapter\or
@@ -133,7 +136,7 @@ class DocGen implements IRoomGenerator {
 	'''}
 
 	def generateDataClassDoc(Root root, DataClass dc) {'''
-		\subsection {«dc.name»}
+		\level{2} {«dc.name»}
 		«dc.docu.generateDocText»
 		\level{3}{Attributes}
 		«dc.attributes.generateAttributesDoc»
@@ -151,7 +154,7 @@ class DocGen implements IRoomGenerator {
 	}
 	
 	def generateProtocolClassDoc(Root root, ProtocolClass pc) {'''
-		\subsection {«pc.name»}
+		\level{2} {«pc.name»}
 		«pc.docu.generateDocText»
 		\level{3}{Incoming Messages}
 	
@@ -180,41 +183,116 @@ class DocGen implements IRoomGenerator {
 	
 	def generateAllActorClassDocs(Root root, RoomModel model) {'''
 		«FOR ac : model.actorClasses»
+		\newpage
 			«root.generateActorClassDoc(model,ac)»
 		«ENDFOR»			
 		'''
 	}
-	/*
-		«IF fileExists(ac.name) == "true"»
-			«ENDIF» */
+	
 	def generateActorClassDoc(Root root, RoomModel model, ActorClass ac) {
-	var filename = model.docGenerationTargetPath + "images\\" + ac.name + ".jpg"
-	filename = filename.replaceAll("\\\\","/");
-	var filename1 = filename.replaceAll("/","//") 
-	'''
-		\subsection{«ac.name»}
+		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_structure.jpg"
+		filename = filename.replaceAll("\\\\","/");
+		var latexFilename = filename.replaceAll("/","//") 
+		'''
+		\level{2}{«ac.name»}
 		«ac.docu.generateDocText»
 		\level{3}{Structure}
 		
 		«IF fileExists(filename).equals("true")»
-			\begin{figure}[h]
-			\begin{center}
-			\includegraphics[scale=0.6]{«filename1»}
-			\caption{Blinky Toplevel Structure}
-			\end{center}
-			\end{figure}
+			«includeGraphics(latexFilename,"0.4",ac.name + " Structure")»
 		«ENDIF»
 		
-		\level{4}{Attributes}
+		\level{3}{Attributes}
 		«ac.attributes.generateAttributesDoc»
 		
-		\level{3}{Behavior}
-		\level{4}{Operations}
+		\level{3}{Operations}
 		«ac.operations.generateOperationsDoc»
-		\level{4}{Statemachine}
-	'''
+		«IF ac.hasNonEmptyStateMachine»
+			\level{3}{Statemachine}
+			«generateFsmDoc(model, ac)»
+		«ENDIF»
+		'''
 	}
-	
+
+	def generateFsmDoc(RoomModel model, ActorClass ac){
+		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_behavior.jpg"
+		filename = filename.replaceAll("\\\\","/");
+		var latexFilename = filename.replaceAll("/","//")
+		 
+		'''
+		\level{4}{Top Level}
+		«IF fileExists(filename).equals("true")»
+			«includeGraphics(latexFilename,"0.4",ac.name + " Top State")»
+		«ENDIF»
+		
+		\begin{par}
+		«FOR s : ac.stateMachine.states»
+			«IF s.docu != null»	
+				\textbf{State description} \textit{«s.statePathName.replaceAll("_","-")»}:
+				\newline
+				«generateDocText(s.docu)»
+				\newline\newline
+			«ENDIF»
+		«ENDFOR»
+
+		«FOR c : ac.stateMachine.chPoints»
+			«IF c.docu != null»
+				\textbf{Choicepoint description} \textit{«c.name»}:
+				\newline
+				«generateDocText(c.docu)»
+				\newline\newline
+			«ENDIF»
+		«ENDFOR»
+		\end{par}
+		
+		«FOR s : ac.stateMachine.states»	
+			«IF !s.isLeaf»
+				«generateStateDoc(model, ac, s)»
+			«ENDIF»
+		«ENDFOR»		
+		'''
+	}
+		
+	def generateStateDoc(RoomModel model, ActorClass ac, State state){
+		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.statePathName + "_behavior.jpg"
+		filename = filename.replaceAll("\\\\","/");
+		var latexFilename = filename.replaceAll("/","//"); 
+
+		logger.logInfo("Gen Filename: " + filename); 
+		'''
+		\level{4}{Subgraph «state.statePathName.replaceAll("_","-")»}
+		«IF fileExists(filename).equals("true")»
+			«includeGraphics(latexFilename,"0.4",ac.name + "_" + state.statePathName)»
+		«ENDIF»
+		
+		\begin{par}
+		«FOR s : state.subgraph.states»
+			«IF s.docu != null»	
+				\textbf{State description} \textit{«s.statePathName.replaceAll("_","-")»}:
+				\newline
+				«generateDocText(s.docu)»
+				\newline\newline
+			«ENDIF»
+		«ENDFOR»
+
+		«FOR c : state.subgraph.chPoints»
+			«IF c.docu != null»
+				\textbf{Choicepoint description} \textit{«c.name»}:
+				\newline
+				«generateDocText(c.docu)»
+				\newline\newline
+			«ENDIF»
+		«ENDFOR»
+		\end{par}
+			
+		«FOR s : state.subgraph.states»	
+			«IF !s.isLeaf»
+				«generateStateDoc(model, ac, s)»
+			«ENDIF»
+		«ENDFOR»		
+		'''		
+	}
+
 	def generateAttributesDoc(List<Attribute> attributes) {
 		'''
 		«IF !attributes.empty»
@@ -260,7 +338,8 @@ class DocGen implements IRoomGenerator {
 	}
 	
 	def fileExists(String f){
-		val exist = (new File(f)).exists();
+		val file = new File(f);
+		val exist = file.exists();
 			if (exist == true) {
 				// File or directory exists
 				logger.logInfo("File found ! " + f); 
@@ -271,8 +350,19 @@ class DocGen implements IRoomGenerator {
 				return "false"
 		}
 	}
+		
+	def includeGraphics(String filename, String scale, String caption){
+		var latexCaption = caption.replaceAll("_","-");
+		'''
+			\begin{figure}[h]
+			\begin{center}
+			\includegraphics[scale=«scale»]{«filename»}
+			\caption{«latexCaption»}
+			\end{center}
+			\end{figure}
+		'''
+	}
 
-	
 	def irgendwas(Root root, ActorClass ac){
 		return ac.name + ".bla"
 	}

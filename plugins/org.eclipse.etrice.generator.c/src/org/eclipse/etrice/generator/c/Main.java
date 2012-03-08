@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.c.gen.Validator;
 import org.eclipse.etrice.generator.c.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -51,7 +50,7 @@ public class Main extends AbstractGenerator {
 	private IGenerator mainGenerator;
 
 	@Inject
-	protected InstanceDiagramGen instanceDiagramGenerator; 
+	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
 	@Inject
 	private Validator validator;
@@ -110,7 +109,7 @@ public class Main extends AbstractGenerator {
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
 		if (genInstDiag) {
-			instanceDiagramGenerator.doGenerate(genModel);
+			mainDocGenerator.doGenerate(genModel);
 		}
 		logger.logInfo("-- finished code generation");
 		
