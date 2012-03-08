@@ -317,6 +317,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
     }
     _builder.newLine();
+    {
+      boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine) {
+        _builder.newLine();
+        StringConcatenation _genHeaderConstants = this.stateMachineGen.genHeaderConstants(xpac, ac);
+        _builder.append(_genHeaderConstants, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
     _builder.append("/* variable part of ActorClass (RAM) */");
     _builder.newLine();
     _builder.append("struct ");
@@ -363,8 +373,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\t");
     _builder.newLine();
     {
-      boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(xpac);
-      if (_hasNonEmptyStateMachine) {
+      boolean _hasNonEmptyStateMachine_1 = this.roomExt.hasNonEmptyStateMachine(xpac);
+      if (_hasNonEmptyStateMachine_1) {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");

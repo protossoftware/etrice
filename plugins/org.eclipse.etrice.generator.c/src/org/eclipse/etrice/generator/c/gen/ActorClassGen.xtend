@@ -124,6 +124,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 			} «xpac.name»_const;
 		«ENDIF»
 		
+		«IF xpac.hasNonEmptyStateMachine»
+			
+			«stateMachineGen.genHeaderConstants(xpac, ac)»
+		«ENDIF»
+		
 		/* variable part of ActorClass (RAM) */
 		struct «xpac.name» {
 			«IF !(ac.allEndPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)»

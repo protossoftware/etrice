@@ -17,22 +17,35 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   @Inject
   private RoomExtensions _roomExtensions;
   
+  public StringConcatenation genHeaderConstants(final ExpandedActorClass xpac, final ActorClass ac) {
+    StringConcatenation _xblockexpression = null;
+    {
+      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(xpac);
+      int _size = _allBaseStates.size();
+      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
+      int _size_1 = _allLeafStates.size();
+      int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)_size_1));
+      int _operator_plus = IntegerExtensions.operator_plus(((Integer)_operator_minus), ((Integer)2));
+      int historySize = _operator_plus;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* constant for state machine data */");
+      _builder.newLine();
+      _builder.append("#define HISTORY_SIZE ");
+      _builder.append(historySize, "");
+      _builder.newLineIfNotEmpty();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
   public StringConcatenation genDataMembers(final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* state machine variables */");
     _builder.newLine();
     _builder.append("etInt16 state;");
     _builder.newLine();
-    _builder.append("etInt16 history[");
-    List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(xpac);
-    int _size = _allBaseStates.size();
-    List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
-    int _size_1 = _allLeafStates.size();
-    int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)_size_1));
-    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_operator_minus), ((Integer)2));
-    _builder.append(_operator_plus, "");
-    _builder.append("];");
-    _builder.newLineIfNotEmpty();
+    _builder.append("etInt16 history[HISTORY_SIZE];");
+    _builder.newLine();
     return _builder;
   }
   
@@ -46,12 +59,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.append("int i;");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("for (i=0; i<");
-    List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
-    int _size = _allLeafStates.size();
-    _builder.append(_size, "	");
-    _builder.append("; ++i)");
-    _builder.newLineIfNotEmpty();
+    _builder.append("for (i=0; i<HISTORY_SIZE; ++i)");
+    _builder.newLine();
     _builder.append("\t\t");
     _builder.append("self->history[i] = NO_STATE;");
     _builder.newLine();
