@@ -8,8 +8,10 @@
 package org.eclipse.etrice.generator.java.newwizard;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -22,12 +24,16 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
 /**
@@ -42,6 +48,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject project;
 	protected IProject runtimeProject;
 	protected String initialProjectName;
+	protected URI modelURI;
 	
 	private String[] additionalLaunchConfigLines = new String[] {
 		"<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>"
@@ -109,9 +116,10 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/model"),
 							true, projectLocation, progressMonitor);
-					ProjectCreator.createModel(URI.createPlatformResourceURI("/"
+					modelURI = URI.createPlatformResourceURI("/"
 							+ baseName
-							+ "/model/"+baseName+".room", true),
+							+ "/model/"+baseName+".room", true);
+					ProjectCreator.createModel(modelURI,
 							baseName);
 
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
@@ -147,12 +155,18 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					.getActivePage();
 			final IWorkbenchPart activePart = page.getActivePart();
 			if (activePart instanceof ISetSelectionTarget) {
-				final ISelection targetSelection = new StructuredSelection(
-						project);
+				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+				IFile model = workspaceRoot.getFile(new Path(modelURI.toPlatformString(true)));
+				final ISelection targetSelection = new StructuredSelection(model);
+				final IFileEditorInput input = new FileEditorInput(model);
 				getShell().getDisplay().asyncExec(new Runnable() {
 					public void run() {
 						((ISetSelectionTarget) activePart)
 								.selectReveal(targetSelection);
+						try {
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.etrice.core.Room");
+						} catch (PartInitException e) {
+						}
 					}
 				});
 			}
