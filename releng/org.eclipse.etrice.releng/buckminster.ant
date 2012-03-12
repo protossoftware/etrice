@@ -8,19 +8,19 @@
 			<!-- workspace defaults -->
 			<property name="checkoutLocation" value="${root}/etrice_local_repo/" />
 			<property name="output" value="${checkoutLocation}/plugins/org.eclipse.etrice.doc/html/javadoc" />
-			<property name="targetPlatform" value="${eclipse.home}" />
+			<!--property name="targetPlatform" value="${eclipse.home}" /-->
 
 			<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 
 
 			<echo message="Source code location ${sourcesLocation}" />
 			<echo message="Javadoc output location ${output}" />
-			<echo message="Target platform path ${targetPlatform}" />
+			<echo message="Target platform path ${target.platform}" />
 
 			<!-- Define classpath -->
 			<path id="javadoc-classpath">
-				<fileset dir="${targetPlatform}">
-					<include name="**/*.jar" />
+				<fileset dir="${target.platform}">
+				  	<include name="*.jar"/>
 				</fileset>
 			</path>
 
@@ -28,7 +28,19 @@
 			<delete dir="${output}" />
 			<mkdir dir="${output}" />
 
-			<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" Verbose="no" windowtitle="${projectName} Documentation">
+			<javadoc
+				destdir="${output}"
+				Encoding="ISO-8859-1"
+				classpathref="javadoc-classpath"
+				maxmemory="1024m"
+				source="1.6"
+				useexternalfile="true"
+				author="true"
+				version="true"
+				use="true"
+				Verbose="no"
+				windowtitle="${projectName} Documentation">
+				
 				<fileset dir="${sourcesLocation}" defaultexcludes="true">
 					<include name="**/*.java" />
 					<exclude name="**/testdata/**" />
