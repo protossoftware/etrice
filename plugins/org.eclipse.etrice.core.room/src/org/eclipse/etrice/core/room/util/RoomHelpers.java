@@ -195,20 +195,27 @@ public class RoomHelpers {
 	}
 	
 	public static boolean hasDirectSubStructure(State s) {
-		if (s.getSubgraph()==null)
+		return !isEmpty(s.getSubgraph());
+	}
+
+	public static boolean hasNonEmptyStateMachine(ActorClass ac) {
+		return isEmpty(ac.getStateMachine());
+	}
+	
+	private static boolean isEmpty(StateGraph sg) {
+		if (sg==null)
+			return true;
+		
+		if (!sg.getStates().isEmpty())
+			return false;
+		if (!sg.getTransitions().isEmpty())
+			return false;
+		if (!sg.getTrPoints().isEmpty())
+			return false;
+		if (!sg.getChPoints().isEmpty())
 			return false;
 		
-		StateGraph sg = s.getSubgraph();
-		if (!sg.getStates().isEmpty())
-			return true;
-		if (!sg.getTransitions().isEmpty())
-			return true;
-		if (!sg.getTrPoints().isEmpty())
-			return true;
-		if (!sg.getChPoints().isEmpty())
-			return true;
-		
-		return false;
+		return true;
 	}
 
 	/**
