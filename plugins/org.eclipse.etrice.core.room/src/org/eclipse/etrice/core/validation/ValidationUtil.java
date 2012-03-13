@@ -263,16 +263,19 @@ public class ValidationUtil {
 	public static boolean isMultipleConnectable(Port port, ActorContainerRef ref) {
 		if (port.isReplicated())
 			return true;
-		
-		if (port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
-			if (ref==null && !port.isConjugated())
+
+		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN) {
+			if (ref == null) {
+				if (isRelay(port))
+					return !port.isConjugated();
+				else
+					return port.isConjugated();
+			} else if (ref != null && port.isConjugated())
 				return false;
-			if (ref!=null && port.isConjugated())
-				return false;
-			
+
 			return true;
 		}
-		
+
 		return false;
 	}
 

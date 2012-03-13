@@ -14,7 +14,6 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.Root;
@@ -447,9 +446,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.newLine();
     {
-      StateGraph _stateMachine = ac.getStateMachine();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_stateMachine, null);
-      if (_operator_notEquals_1) {
+      boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(ac);
+      if (_hasNonEmptyStateMachine) {
         _builder.append("\t");
         StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
         _builder.append(_genStateMachine, "	");

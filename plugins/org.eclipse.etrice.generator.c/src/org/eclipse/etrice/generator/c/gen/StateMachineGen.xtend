@@ -24,17 +24,26 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	
 	@Inject extension RoomExtensions
 	
+	def genHeaderConstants(ExpandedActorClass xpac, ActorClass ac) {
+		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
+		var historySize = xpac.allBaseStates.size - xpac.allLeafStates.size + 2
+	'''
+	/* constant for state machine data */
+	#define HISTORY_SIZE «historySize»
+	'''
+	}
+	
 	def genDataMembers(ExpandedActorClass xpac, ActorClass ac) {'''
 		/* state machine variables */
 		etInt16 state;
-		etInt16 history[«xpac.allBaseStates.size - xpac.allLeafStates.size + 2/* TODO: can save one entry if NO_STATE=-1 but influences Java */»];
+		etInt16 history[HISTORY_SIZE];
 	'''}
 	
 	def genInitialization(ExpandedActorClass xpac, ActorClass ac) {'''
 		self->state = STATE_TOP;
 		{
 			int i;
-			for (i=0; i<«xpac.allLeafStates.size»; ++i)
+			for (i=0; i<HISTORY_SIZE; ++i)
 				self->history[i] = NO_STATE;
 		}
 		executeInitTransition(self);

@@ -708,7 +708,7 @@ public class InterfaceItemSupport {
 	public static void createRefItems(ActorContainerRef acr, ContainerShape refShape, IFeatureProvider featureProvider) {
 		
 		ActorContainerClass refClass = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-		List<? extends InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass, true);
+		List<InterfaceItem> refItems = RoomHelpers.getInterfaceItems(refClass, true);
 		
 		if (refShape!=null && refClass!=null &&!refItems.isEmpty()) {
 			
@@ -728,8 +728,12 @@ public class InterfaceItemSupport {
 					List<InterfaceItem> extRefItems = RoomHelpers.getInterfaceItems(extRefClass, true);
 					List<InterfaceItem> intRefItems = SupportUtil.getInterfaceItems(refShape, featureProvider);
 					
-					int scaleX = refAcShape.getGraphicsAlgorithm().getWidth()/ActorContainerRefSupport.DEFAULT_SIZE_X;
-					int scaleY = refAcShape.getGraphicsAlgorithm().getHeight()/ActorContainerRefSupport.DEFAULT_SIZE_Y;
+					// relate visible rectangle sizes to each other and compute scale factors
+					double scaleX = (refAcShape.getGraphicsAlgorithm().getWidth()-2*StructureClassSupport.MARGIN)
+							/(double)(refShape.getGraphicsAlgorithm().getWidth()-2*ActorContainerRefSupport.MARGIN);
+					double scaleY = (refAcShape.getGraphicsAlgorithm().getHeight()-2*StructureClassSupport.MARGIN)
+							/(double)(refShape.getGraphicsAlgorithm().getHeight()-2*ActorContainerRefSupport.MARGIN);
+					
 					for (Shape childShape : refAcShape.getChildren()) {
 						bo = featureProvider.getBusinessObjectForPictogramElement(childShape);
 						if (bo instanceof InterfaceItem) {
@@ -738,8 +742,16 @@ public class InterfaceItemSupport {
 
 								EObject ownObject = SupportUtil.getOwnObject((InterfaceItem)bo, rs);
 								if (!intRefItems.contains(ownObject)) {
-									int x = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getX()/scaleX;
-									int y = ITEM_SIZE_SMALL/2 + childShape.getGraphicsAlgorithm().getY()/scaleY;
+									// original mid points relative to visible rectangle
+									int origMidX = childShape.getGraphicsAlgorithm().getX();
+									int origMidY = childShape.getGraphicsAlgorithm().getY();
+									int x = (int) (origMidX/scaleX);
+									int y = (int) (origMidY/scaleY);
+									
+									// translate to get mid points relative to invisible rectangle
+									x += ActorContainerRefSupport.MARGIN;
+									y += ActorContainerRefSupport.MARGIN;
+									
 									SupportUtil.addItem(ownObject, x, y, refShape, featureProvider);
 								}
 							}

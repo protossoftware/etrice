@@ -137,7 +137,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				destroyUser();
 			}	
 		
-			«IF ac.stateMachine != null»
+			«IF ac.hasNonEmptyStateMachine»
 				«stateMachineGen.genStateMachine(xpac, ac)»
 			«ELSEIF !xpac.hasStateMachine()»
 				//--------------------- no state machine

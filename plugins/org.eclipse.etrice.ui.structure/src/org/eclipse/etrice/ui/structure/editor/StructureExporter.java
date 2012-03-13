@@ -20,7 +20,7 @@ import org.eclipse.etrice.ui.structure.DiagramAccess;
 
 public class StructureExporter {
 
-	private static final String SUFFIX = ".structure.jpg";
+	private static final String SUFFIX = "_structure.jpg";
 
 	public static void export(StructureClass ac, String folder) {
 		DiagramAccess da = new DiagramAccess();
