@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -20,6 +21,7 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.ChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -36,7 +38,9 @@ import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
+import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
+import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
@@ -44,6 +48,8 @@ import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
@@ -72,10 +78,13 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class ChoicePointSupport {
 	
-	public static final int ITEM_SIZE = StateGraphSupport.MARGIN;
+	public static final int ITEM_SIZE = (int) (StateGraphSupport.MARGIN*0.625);
 
 	protected static final int LINE_WIDTH = 2;
 	protected static final IColorConstant DARK_COLOR = new ColorConstant(0, 0, 0);
@@ -87,6 +96,8 @@ public class ChoicePointSupport {
 		
 		private static class CreateFeature extends AbstractCreateFeature {
 	
+			private boolean doneChanges = false;
+
 			public CreateFeature(IFeatureProvider fp, String name, String description) {
 				super(fp, name, description);
 			}
@@ -98,23 +109,37 @@ public class ChoicePointSupport {
 	
 			@Override
 			public Object[] create(ICreateContext context) {
+				
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
+				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 
 				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 				if (inherited) {
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
 					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 
 				// create choice point and add it
 		    	ChoicePoint cp = RoomFactory.eINSTANCE.createChoicePoint();
-				String name = RoomNameProvider.getUniqueChoicePointName(sg);
-				cp.setName(name);
+				cp.setName(RoomNameProvider.getUniqueChoicePointName(sg));
 				sg.getChPoints().add(cp);
-		        
+
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				ChoicePointPropertyDialog dlg = new ChoicePointPropertyDialog(shell, cp);
+				if (dlg.open()!=Window.OK) {
+					if (inherited) {
+						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					}
+					else {
+						sg.getChPoints().remove(cp);
+					}
+					doneChanges = false;
+					return EMPTY;
+				}
+				
 		        // do the add
 		        addGraphicalRepresentation(context, cp);
+		        doneChanges = true;
 	
 		        // return newly created business object(s)
 		        return new Object[] { cp };
@@ -130,6 +155,11 @@ public class ChoicePointSupport {
 						}
 					}
 				return false;
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 		
@@ -228,6 +258,60 @@ public class ChoicePointSupport {
 				}
 				
 				return canMove;
+			}
+		}
+		
+		private static class PropertyFeature extends AbstractCustomFeature {
+
+			private String name;
+			private String description;
+			private boolean doneChanges = false;
+
+			public PropertyFeature(IFeatureProvider fp) {
+				super(fp);
+				this.name = "Edit Choice Point";
+				this.description = "Edit Choice Point";
+			}
+
+			@Override
+			public String getName() {
+				return name;
+			}
+			
+			@Override
+			public String getDescription() {
+				return description;
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ChoicePoint) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement pe = context.getPictogramElements()[0];
+				ChoicePoint cp = (ChoicePoint) getBusinessObjectForPictogramElement(pe);
+				
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				ChoicePointPropertyDialog dlg = new ChoicePointPropertyDialog(shell, cp);
+				if (dlg.open()!=Window.OK)
+					throw new OperationCanceledException();
+
+				doneChanges = true;
+				updateFigure(cp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 		
@@ -367,6 +451,11 @@ public class ChoicePointSupport {
 		}
 		
 		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] { new PropertyFeature(fp) };
+		}
+		
+		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new UpdateFeature(fp);
 		}
@@ -442,6 +531,22 @@ public class ChoicePointSupport {
             GraphicsAlgorithm rectangle =
                 invisible.getGraphicsAlgorithmChildren().get(0);
             return rectangle;
+		}
+		
+		@Override
+		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			PictogramElement pe = ga.getPictogramElement();
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof ChoicePoint) {
+				return ((ChoicePoint) bo).getName();
+			}
+			
+			return super.getToolTip(ga);
 		}
 		
 		@Override
