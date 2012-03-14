@@ -70,7 +70,7 @@ class DataClassGen {
 			public «dc.name»() {
 				super();
 				
-				«dc.attributes.attributeInitialization»
+				«dc.attributes.attributeInitialization(true)»
 			}
 			
 			// constructor using fields

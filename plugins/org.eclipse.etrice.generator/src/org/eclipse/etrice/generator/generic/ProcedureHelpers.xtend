@@ -83,7 +83,7 @@ class ProcedureHelpers {
 		return result+"}"
 	}
 	
-	def attributeInitialization(List<Attribute> attribs) {
+	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
@@ -98,7 +98,7 @@ class ProcedureHelpers {
 							«a.name»[i] = «a.defaultValueLiteral»;
 						}
 					«ENDIF»
-				«ELSE»
+				«ELSEIF !useClassDefaultsOnly»
 					«IF a.size==0»
 						«a.name» = «a.refType.type.defaultValue»;
 					«ELSE»

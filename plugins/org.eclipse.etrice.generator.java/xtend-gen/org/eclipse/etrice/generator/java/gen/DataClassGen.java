@@ -156,7 +156,7 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("\t\t");
     EList<Attribute> _attributes_3 = dc.getAttributes();
-    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_3);
+    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_3, true);
     _builder.append(_attributeInitialization, "		");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
