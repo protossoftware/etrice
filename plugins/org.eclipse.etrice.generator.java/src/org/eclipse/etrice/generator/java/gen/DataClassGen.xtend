@@ -141,7 +141,7 @@ class DataClassGen {
 				«IF a.size==0»
 					copy.«a.name» = «a.name».deepCopy();
 				«ELSE»
-					for (int i=0;i<«a.size»;i++){
+					for (int i=0;i<«a.name».length;i++){
 						copy.«a.name»[i] = «a.name»[i].deepCopy();
 					}
 				«ENDIF»
@@ -149,7 +149,7 @@ class DataClassGen {
 				«IF a.size==0»
 					copy.«a.name» = «a.name»;
 				«ELSE»
-					for (int i=0;i<«a.size»;i++){
+					for (int i=0;i<«a.name».length;i++){
 						copy.«a.name»[i] = «a.name»[i];
 					}
 				«ENDIF»

@@ -16,16 +16,14 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import java.io.File
-import java.io.*
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.Documentation
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.State
-import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.StandardOperation
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.base.IRoomGenerator
@@ -115,9 +113,10 @@ class DocGen implements IRoomGenerator {
 		\newpage
 		\listoffigures
 		\newpage
-		\section{Modeldescription}
+		\section{Model Description}
 		«model.docu.generateDocText»
-		
+		\section{Subsystem Description}
+		«root.generateAllSubSysClassDocs(model)»
 		\section{Protocol Class Description}
 		«root.generateAllProtocolClassDocs(model)»
 		\section{Data Class Description}
@@ -126,6 +125,18 @@ class DocGen implements IRoomGenerator {
 		«root.generateAllActorClassDocs(model)»
 		
 		\end{document}
+	'''
+	}
+	
+	def generateAllSubSysClassDocs(Root root, RoomModel model){'''
+	«FOR ssc : model.subSystemClasses»
+		«root.generateSubSysClassDoc(ssc)»
+	«ENDFOR»
+	'''
+	}
+	def generateSubSysClassDoc(Root root, SubSystemClass ssc){'''
+		\level{2} {«ssc.name»}
+		
 	'''
 	}
 	
@@ -228,7 +239,7 @@ class DocGen implements IRoomGenerator {
 		\begin{par}
 		«FOR s : ac.stateMachine.states»
 			«IF s.docu != null»	
-				\textbf{State description} \textit{«s.statePathName.replaceAll("_","-")»}:
+				\textbf{State description} \textit{«s.statePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
 				\newline\newline
@@ -260,7 +271,7 @@ class DocGen implements IRoomGenerator {
 
 		logger.logInfo("Gen Filename: " + filename); 
 		'''
-		\level{4}{Subgraph «state.statePathName.replaceAll("_","-")»}
+		\level{4}{Subgraph «state.statePathName.replaceAll("_","\\\\_")»}
 		«IF fileExists(filename).equals("true")»
 			«includeGraphics(latexFilename,"0.4",ac.name + "_" + state.statePathName)»
 		«ENDIF»
@@ -268,7 +279,7 @@ class DocGen implements IRoomGenerator {
 		\begin{par}
 		«FOR s : state.subgraph.states»
 			«IF s.docu != null»	
-				\textbf{State description} \textit{«s.statePathName.replaceAll("_","-")»}:
+				\textbf{State description} \textit{«s.statePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
 				\newline\newline
@@ -321,7 +332,11 @@ class DocGen implements IRoomGenerator {
 				Arguments: & «FOR pa : op.arguments SEPARATOR ", "»«pa.name»:«pa.refType.type.name»«ENDFOR»\\
 				«IF op.docu != null»
 					\hline
-					\multicolumn{2} {|l|} {«generateDocText(op.docu)»}\\
+					«IF op.docu.toString.length > 85»
+						\multicolumn{2} {|p{13cm}|} {«generateDocText(op.docu)»}\\
+					«ELSE»
+						\multicolumn{2} {|l|} {«generateDocText(op.docu)»}\\
+					«ENDIF»
 				«ENDIF»
 				\hline
 			\end{tabular}
@@ -340,6 +355,7 @@ class DocGen implements IRoomGenerator {
 	def fileExists(String f){
 		val file = new File(f);
 		val exist = file.exists();
+		
 			if (exist == true) {
 				// File or directory exists
 				logger.logInfo("File found ! " + f); 
@@ -352,7 +368,7 @@ class DocGen implements IRoomGenerator {
 	}
 		
 	def includeGraphics(String filename, String scale, String caption){
-		var latexCaption = caption.replaceAll("_","-");
+		var latexCaption = caption.replaceAll("_","\\\\_");
 		'''
 			\begin{figure}[h]
 			\begin{center}
@@ -363,7 +379,7 @@ class DocGen implements IRoomGenerator {
 		'''
 	}
 
-	def irgendwas(Root root, ActorClass ac){
+	def irgendwas(Root root, ActorClass ac){		
 		return ac.name + ".bla"
 	}
 }
