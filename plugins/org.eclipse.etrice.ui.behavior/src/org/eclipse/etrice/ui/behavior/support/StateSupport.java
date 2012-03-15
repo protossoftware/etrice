@@ -165,6 +165,7 @@ public class StateSupport {
 					else {
 						sg.getStates().remove(s);
 					}
+					doneChanges = false;
 					return EMPTY;
 				}
 		        

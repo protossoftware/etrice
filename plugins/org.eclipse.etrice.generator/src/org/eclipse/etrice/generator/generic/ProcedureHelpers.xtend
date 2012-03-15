@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.ComplexType
 
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 import org.eclipse.etrice.generator.base.ILogger
@@ -83,7 +84,7 @@ class ProcedureHelpers {
 		return result+"}"
 	}
 	
-	def attributeInitialization(List<Attribute> attribs) {
+	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
@@ -98,14 +99,16 @@ class ProcedureHelpers {
 							«a.name»[i] = «a.defaultValueLiteral»;
 						}
 					«ENDIF»
-				«ELSE»
+				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
 					«IF a.size==0»
 						«a.name» = «a.refType.type.defaultValue»;
 					«ELSE»
 						«a.name» = new «a.refType.type.typeName»[«a.size»];
-						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «a.refType.type.defaultValue»;
-						}
+						«IF !useClassDefaultsOnly»
+							for (int i=0;i<«a.size»;i++){
+								«a.name»[i] = «a.refType.type.defaultValue»;
+							}
+						«ENDIF»
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»

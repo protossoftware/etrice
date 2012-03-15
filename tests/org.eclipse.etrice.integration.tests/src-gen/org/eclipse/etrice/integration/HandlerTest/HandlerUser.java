@@ -126,7 +126,7 @@ public class HandlerUser extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	protected void entry_state0() {
 		System.out.println("state 0 entry action");
 		crcGen.update(13);
@@ -168,7 +168,7 @@ public class HandlerUser extends ActorClassBase {
 		crcGen.update(112);
 	}
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action no guard ");
 		crcGen.update(11);

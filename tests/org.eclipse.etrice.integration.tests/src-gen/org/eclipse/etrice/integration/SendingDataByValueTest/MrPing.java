@@ -126,9 +126,9 @@ public class MrPing extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__waitForPong() {
 		int i;
 		int[] intArray;
@@ -215,9 +215,11 @@ public class MrPing extends ActorClassBase {
 		int[] intArray = data.getOwnType().getArrayFromInt32();
 		for (int i=0;i<intArray.length;i++) {intArray[i] = 10+i;}
 		data.getOwnType().setArrayFromInt32(intArray);
+		int[] intArrayShort=data.getArrayFromInt32();
+		for (int j=0;j<intArrayShort.length;j++) {intArray[j] = 10+j;}
 		
 		// use convenient function
-		PingPongPort.ping((byte)45,(short)34,80,'c',(float)3.14,7.12345,"Hase !",intArray,data.getOwnType());
+		PingPongPort.ping((byte)45,(short)34,80,'c',(float)3.14,7.12345,"Hase !",intArrayShort,data.getOwnType());
 		
 		crcGen.update(13);
 	}

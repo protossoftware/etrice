@@ -112,7 +112,7 @@ public class a_HFSM extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	protected void entry_State1() {
 		fct.s1_entry();
 	}
@@ -150,7 +150,7 @@ public class a_HFSM extends ActorClassBase {
 		fct.s4_exit();
 	}
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__State1() {
 		fct.init_action();
 	}

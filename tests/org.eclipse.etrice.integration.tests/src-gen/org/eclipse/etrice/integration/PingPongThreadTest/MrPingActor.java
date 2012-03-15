@@ -107,9 +107,9 @@ public class MrPingActor extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__waitForTimer() {
 		count = 0;
 		timer.Start(10);

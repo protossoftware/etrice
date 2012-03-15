@@ -104,12 +104,12 @@ public class ATimingService extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	protected void entry_Operational() {
 		// prepare
 	}
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__Operational() {
 		timerService = new Timer();
 	}

@@ -85,7 +85,29 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			pgmArgs = VariablesPlugin.getDefault().getStringVariableManager()
 					.performStringSubstitution(pgmArgs);
 
-			String[] args = pgmArgs.split("[ \t]");
+			// split at single spaces but keep strings in double quotes as single argument
+			// (with double quotes removed)
+			ArrayList<String> res = new ArrayList<String>();
+			int begin = 0;
+			int end = pgmArgs.indexOf(' ');
+			boolean inQuotes = false;
+			while (end>0) {
+				if (pgmArgs.charAt(begin)=='\"')
+					inQuotes = true;
+				if ((inQuotes && pgmArgs.charAt(end-1)=='\"')) {
+					inQuotes = false;
+				}
+				
+				if (!inQuotes) {
+					res.add(pgmArgs.substring(begin, end).replace("\"", ""));
+					begin = end+1;
+				}
+				end = pgmArgs.indexOf(' ', end+1);
+			}
+			res.add(pgmArgs.substring(begin).replace("\"", ""));
+			
+			String[] args = new String[res.size()];
+			res.toArray(args);
 
 			final MessageConsole myConsole = findConsole(getConsoleName());
 			Display.getDefault().syncExec(new Runnable() {
@@ -152,7 +174,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		@SuppressWarnings("unchecked")
 		ArrayList<String> models = (ArrayList<String>) configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
 		for (String model : models){
-			argString.append(" "+model);
+			argString.append(" \""+model+"\"");
 		}
 	}
 	

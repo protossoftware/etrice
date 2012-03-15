@@ -98,9 +98,9 @@ public class MrPong extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
 		p.setI8Val((byte)(p.getI8Val()+1));
 		

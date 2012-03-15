@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Java Generator
 Bundle-Vendor: eTrice (Incubation)
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.java;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.1.0",

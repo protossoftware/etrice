@@ -271,7 +271,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     EList<Attribute> _attributes_2 = ac.getAttributes();
-    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_2);
+    StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_2, false);
     _builder.append(_attributeInitialization, "		");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

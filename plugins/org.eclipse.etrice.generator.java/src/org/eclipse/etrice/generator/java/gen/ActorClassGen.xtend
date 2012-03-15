@@ -101,7 +101,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 				setClassName("«ac.name»");
 				
-				«ac.attributes.attributeInitialization»
+				«ac.attributes.attributeInitialization(false)»
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»

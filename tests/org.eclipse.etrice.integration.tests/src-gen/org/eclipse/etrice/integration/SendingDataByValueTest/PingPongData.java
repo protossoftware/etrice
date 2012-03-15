@@ -116,10 +116,12 @@ public class PingPongData {
 		copy.f32Val = f32Val;
 		copy.f64Val = f64Val;
 		copy.stringVal = stringVal;
-		for (int i=0;i<5;i++){
+		for (int i=0;i<arrayFromInt32.length;i++){
 			copy.arrayFromInt32[i] = arrayFromInt32[i];
 		}
-		copy.ownType = ownType.deepCopy();
+		if (ownType!=null) {
+			copy.ownType = ownType.deepCopy();
+		}
 		return copy;
 	}
 };
