@@ -106,9 +106,9 @@ public class ALogService extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String fileName) {
 		Date d=new Date(tStart);
 		try{

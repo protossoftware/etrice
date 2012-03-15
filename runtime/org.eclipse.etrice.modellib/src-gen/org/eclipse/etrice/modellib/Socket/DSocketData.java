@@ -31,8 +31,6 @@ public class DSocketData {
 		super();
 		
 		// initialize attributes
-		size = 0;
-		data = "";
 	}
 	
 	// constructor using fields

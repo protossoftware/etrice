@@ -38,9 +38,6 @@ public class InternalLogData {
 		super();
 		
 		// initialize attributes
-		userString = "";
-		sender = "";
-		timeStamp = 0;
 	}
 	
 	// constructor using fields
