@@ -73,6 +73,7 @@ public class PingPongDataDeep {
 		super();
 		
 		// initialize attributes
+		arrayFromInt32 = new int[10];
 	}
 	
 	// constructor using fields
