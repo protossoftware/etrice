@@ -88,7 +88,6 @@ public class PingPongData {
 		f64Val = 47114711.08150815;
 		stringVal = "Du alter Depp !";
 		arrayFromInt32 = new int[] {1,2,3,4,5};
-		ownType = new PingPongDataDeep();
 	}
 	
 	// constructor using fields
@@ -116,7 +115,7 @@ public class PingPongData {
 		copy.f32Val = f32Val;
 		copy.f64Val = f64Val;
 		copy.stringVal = stringVal;
-		for (int i=0;i<5;i++){
+		for (int i=0;i<arrayFromInt32.length;i++){
 			copy.arrayFromInt32[i] = arrayFromInt32[i];
 		}
 		copy.ownType = ownType.deepCopy();

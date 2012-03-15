@@ -84,9 +84,9 @@ public class MrPongActor2 extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__waitForPing() {
 		// simulate blocking call e.g. Queue
 		try{

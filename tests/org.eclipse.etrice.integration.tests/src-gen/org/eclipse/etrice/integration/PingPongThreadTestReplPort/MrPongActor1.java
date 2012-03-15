@@ -84,9 +84,9 @@ public class MrPongActor1 extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
 		PingPongPort.pong();
 	}

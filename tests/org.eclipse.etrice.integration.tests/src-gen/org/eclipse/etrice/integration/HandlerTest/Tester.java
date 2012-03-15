@@ -87,9 +87,9 @@ public class Tester extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__state0() {
 		TestPort1.msg1(2);
 		System.out.println("msg1(2) sent ");

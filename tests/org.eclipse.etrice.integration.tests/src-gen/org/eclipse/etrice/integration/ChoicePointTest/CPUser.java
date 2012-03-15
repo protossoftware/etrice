@@ -105,7 +105,7 @@ public class CPUser extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	protected void entry_state0() {
 		System.out.println("state0: entry code");
 		crcGen.update(12);
@@ -132,7 +132,7 @@ public class CPUser extends ActorClassBase {
 		crcGen.update(23);
 	}
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__cp0() {
 		System.out.println("Top Level init transition");
 		crcGen.update(10);
