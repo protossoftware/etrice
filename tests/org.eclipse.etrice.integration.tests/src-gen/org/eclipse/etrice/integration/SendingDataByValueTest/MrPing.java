@@ -312,8 +312,7 @@ public class MrPing extends ActorClassBase {
 			{
 				PingPongData p = (PingPongData) generic_data;
 				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort(ifitem, p);
-				if ((p.i32Val==2) && (p.i8Val==46)
-				) {
+				if ((p.i32Val==2) && (p.i8Val==46)) {
 				action_TRANS_cp0_TO_state0_COND_tr3(ifitem, p);
 				return STATE_state0;}
 				else {
@@ -336,8 +335,7 @@ public class MrPing extends ActorClassBase {
 			{
 				int p = (Integer) generic_data;
 				action_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort(ifitem, p);
-				if ((p==28) && (crcGen.getCrc()==1187)
-				) {
+				if ((p==28) && (crcGen.getCrc()==1187)) {
 				action_TRANS_cp1_TO_TestOk_COND_tr9(ifitem, p);
 				return STATE_TestOk;}
 				else {

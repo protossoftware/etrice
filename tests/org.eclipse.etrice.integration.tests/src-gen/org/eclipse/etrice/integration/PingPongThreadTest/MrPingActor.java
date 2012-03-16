@@ -175,8 +175,7 @@ public class MrPingActor extends ActorClassBase {
 			case CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort:
 			{
 				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(ifitem);
-				if (pongCount < 2
-				) {
+				if (pongCount < 2) {
 				return STATE_waitForPong;}
 				else {
 				action_TRANS_cp0_TO_waitForTimer(ifitem);

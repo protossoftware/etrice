@@ -231,7 +231,7 @@ public class HandlerUser extends ActorClassBase {
 		System.out.println("state 0/2 self transition action");
 		crcGen.update(25);
 	}
-	protected void action_state0_TRANS_tp2_TO_state0_state1_tp0(InterfaceItemBase ifitem) {
+	protected void action_state0_TRANS_tp2_TO_state0_state1_tp0() {
 		System.out.println("state 0 tp2 transition action");
 		crcGen.update(15);
 	}
@@ -255,7 +255,7 @@ public class HandlerUser extends ActorClassBase {
 		System.out.println("state 0 tp1 action P1 => 6");
 		crcGen.update(121);
 	}
-	protected void action_state0_state1_TRANS_tp0_TO_state7(InterfaceItemBase ifitem) {
+	protected void action_state0_state1_TRANS_tp0_TO_state7() {
 		System.out.println("state 0/1 transition entry action");
 		crcGen.update(22);
 	}
@@ -336,17 +336,16 @@ public class HandlerUser extends ActorClassBase {
 			{
 				action_TRANS_INITIAL_TO__state0_tp2();
 				entry_state0();
-				action_state0_TRANS_tp2_TO_state0_state1_tp0(ifitem);
+				action_state0_TRANS_tp2_TO_state0_state1_tp0();
 				entry_state0_state1();
-				action_state0_state1_TRANS_tp0_TO_state7(ifitem);
+				action_state0_state1_TRANS_tp0_TO_state7();
 				return STATE_state0_state1_state7;
 			}
 			case CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1:
 			{
 				int p1 = (Integer) generic_data;
 				action_TRANS_state0_TO_cp1_BY_msg1TestPort1(ifitem, p1);
-				if (p1!=4
-				) {
+				if (p1!=4) {
 				action_TRANS_cp1_TO_state0_COND_tr10(ifitem, p1);
 				return STATE_state0;}
 				else {
@@ -375,8 +374,7 @@ public class HandlerUser extends ActorClassBase {
 			{
 				int p1 = (Integer) generic_data;
 				action_TRANS_tp1_TO_cp0_BY_msg6TestPort1(ifitem, p1);
-				if (crcGen.getCrc()==7268
-				) {
+				if (crcGen.getCrc()==7268) {
 				action_TRANS_cp0_TO_testOk_COND_tr3(ifitem, p1);
 				return STATE_testOk;}
 				else {

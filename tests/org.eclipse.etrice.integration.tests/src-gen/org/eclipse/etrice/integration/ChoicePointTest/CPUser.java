@@ -139,11 +139,11 @@ public class CPUser extends ActorClassBase {
 		crcGen.update(10);
 		counter = 0;
 	}
-	protected void action_TRANS_cp0_TO_state0(InterfaceItemBase ifitem) {
+	protected void action_TRANS_cp0_TO_state0() {
 		System.out.println("choice0: else code");
 		crcGen.update(17);
 	}
-	protected void action_TRANS_cp0_TO_state0_COND_LastCheck(InterfaceItemBase ifitem) {
+	protected void action_TRANS_cp0_TO_state0_COND_LastCheck() {
 		System.out.println("choice0: true code");
 		crcGen.update(15);
 	}
@@ -254,32 +254,28 @@ public class CPUser extends ActorClassBase {
 			case CHAIN_TRANS_INITIAL_TO__cp0:
 			{
 				action_TRANS_INITIAL_TO__cp0();
-				if (counter == 0
-				) {
-				action_TRANS_cp0_TO_state0_COND_LastCheck(ifitem);
+				if (counter == 0) {
+				action_TRANS_cp0_TO_state0_COND_LastCheck();
 				return STATE_state0;}
 				else {
-				action_TRANS_cp0_TO_state0(ifitem);
+				action_TRANS_cp0_TO_state0();
 				return STATE_state0;}
 			}
 			case CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1:
 			{
 				action_TRANS_state0_TO_cp1_BY_msg1TestPort1(ifitem);
-				if (counter == 4
-				) {
+				if (counter == 4) {
 				action_TRANS_cp1_TO_state1_tp0_COND_tr3(ifitem);
 				entry_state1();
 				action_state1_TRANS_tp0_TO_cp0(ifitem);
-				if (counter == 4
-				) {
+				if (counter == 4) {
 				action_state1_TRANS_cp0_TO_state0_COND_tr0(ifitem);
 				return STATE_state1_state0;}
 				else {
 				action_state1_TRANS_cp0_TO_state0(ifitem);
 				return STATE_state1_state0;}
 				}
-				else if (counter == 3
-				) {
+				else if (counter == 3) {
 				action_TRANS_cp1_TO_state1_COND_tr11(ifitem);
 				return STATE_state1;}
 				else {
@@ -289,8 +285,7 @@ public class CPUser extends ActorClassBase {
 			case CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1:
 			{
 				action_TRANS_state1_TO_cp2_BY_msg1TestPort1(ifitem);
-				if (crcGen.getCrc()==26639
-				) {
+				if (crcGen.getCrc()==26639) {
 				action_TRANS_cp2_TO_testOk_COND_tr6(ifitem);
 				return STATE_testOk;}
 				else {
