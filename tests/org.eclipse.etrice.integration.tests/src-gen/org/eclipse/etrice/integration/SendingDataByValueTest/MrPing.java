@@ -103,6 +103,7 @@ public class MrPing extends ActorClassBase {
 	public static final int CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort = 7;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
 	public static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
 	
@@ -402,114 +403,114 @@ public class MrPing extends ActorClassBase {
 			switch (this.state) {
 				case STATE_waitForPong:
 					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_state0:
 					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{ PingPongData p = (PingPongData) generic_data;
-						if (p.getI32Val()==3)
-						{
-							chain = CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort;
-							catching_state = STATE_TOP;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pong:
+							{ PingPongData p = (PingPongData) generic_data;
+							if (p.getI32Val()==3)
+							{
+								chain = CHAIN_TRANS_state0_TO_state1_BY_pongPingPongPort;
+								catching_state = STATE_TOP;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_state1:
 					switch(trigger) {
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_state1_TO_state2_BY_pongSimplePingPongPort;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_state2:
 					switch(trigger) {
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_state2_TO_cp1_BY_pongSimplePingPongPort;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_TestFalse:
 					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_TestOk:
 					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_PingPongPort__pongSimple:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongPingPongPort_tr0;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_PingPongPort__pongSimple:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_pongSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 			}

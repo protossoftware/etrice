@@ -98,6 +98,7 @@ public class HandlerUser extends ActorClassBase {
 	public static final int CHAIN_state0_state1_TRANS_INITIAL_TO__state7 = 18;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_TestPort1__msg1 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg1;
 	public static final int TRIG_TestPort1__msg2 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg2;
 	public static final int TRIG_TestPort1__msg3 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg3;
@@ -518,297 +519,297 @@ public class HandlerUser extends ActorClassBase {
 			switch (this.state) {
 				case STATE_state0_state1_state7:
 					switch(trigger) {
-					case TRIG_TestPort1__msg5:
-						{
-							chain = CHAIN_state0_TRANS_state1_TO_state2_BY_msg5TestPort1;
-							catching_state = STATE_state0;
-						}
-					break;
-					case TRIG_TestPort1__msg1:
-						{ int p1 = (Integer) generic_data;
-						if (p1==8)
-						{
-							chain = CHAIN_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6;
-							catching_state = STATE_state0;
-						} else 
-						if (p1==5)
-						{
-							chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5;
-							catching_state = STATE_state0;
-							is_handler = true;
-							skip_entry = true;
-						} else 
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						} else 
-						if (p1==7)
-						{
-							chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-							is_handler = true;
-						} else 
-						if (p1==12)
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						} else 
-						if (p1==3)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg3:
-						{
-							chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
-							catching_state = STATE_state0;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_TestPort1__msg4:
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
-							catching_state = STATE_state0;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_TestPort1__msg2:
-						{ int p1 = (Integer) generic_data;
-						if (p1==5)
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
-							catching_state = STATE_state0;
-						} else 
-						if (p1==6)
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
-							catching_state = STATE_state0;
-						} else 
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg6:
-						{
-							chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg5:
+							{
+								chain = CHAIN_state0_TRANS_state1_TO_state2_BY_msg5TestPort1;
+								catching_state = STATE_state0;
+							}
+						break;
+						case TRIG_TestPort1__msg1:
+							{ int p1 = (Integer) generic_data;
+							if (p1==8)
+							{
+								chain = CHAIN_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6;
+								catching_state = STATE_state0;
+							} else 
+							if (p1==5)
+							{
+								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5;
+								catching_state = STATE_state0;
+								is_handler = true;
+								skip_entry = true;
+							} else 
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+							} else 
+							if (p1==7)
+							{
+								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+								is_handler = true;
+							} else 
+							if (p1==12)
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							} else 
+							if (p1==3)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg3:
+							{
+								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
+								catching_state = STATE_state0;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_TestPort1__msg4:
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
+								catching_state = STATE_state0;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_TestPort1__msg2:
+							{ int p1 = (Integer) generic_data;
+							if (p1==5)
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
+								catching_state = STATE_state0;
+							} else 
+							if (p1==6)
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
+								catching_state = STATE_state0;
+							} else 
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg6:
+							{
+								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_state0_state2:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3;
-							catching_state = STATE_state0;
-						}
-					break;
-					case TRIG_TestPort1__msg3:
-						{
-							chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
-							catching_state = STATE_state0;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_TestPort1__msg4:
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
-							catching_state = STATE_state0;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_TestPort1__msg2:
-						{ int p1 = (Integer) generic_data;
-						if (p1==5)
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
-							catching_state = STATE_state0;
-						} else 
-						if (p1==6)
-						{
-							chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
-							catching_state = STATE_state0;
-						} else 
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg6:
-						{
-							chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{
+								chain = CHAIN_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3;
+								catching_state = STATE_state0;
+							}
+						break;
+						case TRIG_TestPort1__msg3:
+							{
+								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
+								catching_state = STATE_state0;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_TestPort1__msg4:
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
+								catching_state = STATE_state0;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_TestPort1__msg2:
+							{ int p1 = (Integer) generic_data;
+							if (p1==5)
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
+								catching_state = STATE_state0;
+							} else 
+							if (p1==6)
+							{
+								chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
+								catching_state = STATE_state0;
+							} else 
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg6:
+							{
+								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_testOk:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{ int p1 = (Integer) generic_data;
-						if (p1==7)
-						{
-							chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-							is_handler = true;
-						} else 
-						if (p1==12)
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						} else 
-						if (p1==3)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg2:
-						{ int p1 = (Integer) generic_data;
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg6:
-						{
-							chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{ int p1 = (Integer) generic_data;
+							if (p1==7)
+							{
+								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+								is_handler = true;
+							} else 
+							if (p1==12)
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							} else 
+							if (p1==3)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg2:
+							{ int p1 = (Integer) generic_data;
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg6:
+							{
+								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_testFalse:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{ int p1 = (Integer) generic_data;
-						if (p1==7)
-						{
-							chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-							is_handler = true;
-						} else 
-						if (p1==12)
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						} else 
-						if (p1==3)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg2:
-						{ int p1 = (Integer) generic_data;
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg6:
-						{
-							chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{ int p1 = (Integer) generic_data;
+							if (p1==7)
+							{
+								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+								is_handler = true;
+							} else 
+							if (p1==12)
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							} else 
+							if (p1==3)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg2:
+							{ int p1 = (Integer) generic_data;
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg6:
+							{
+								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_state1:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{ int p1 = (Integer) generic_data;
-						if (p1==7)
-						{
-							chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-							is_handler = true;
-						} else 
-						if (p1==12)
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						} else 
-						if (p1==3)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg2:
-						{ int p1 = (Integer) generic_data;
-						if (p1==4)
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-						}
-					break;
-					case TRIG_TestPort1__msg6:
-						{
-							chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{ int p1 = (Integer) generic_data;
+							if (p1==7)
+							{
+								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+								is_handler = true;
+							} else 
+							if (p1==12)
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							} else 
+							if (p1==3)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg2:
+							{ int p1 = (Integer) generic_data;
+							if (p1==4)
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+							}
+						break;
+						case TRIG_TestPort1__msg6:
+							{
+								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

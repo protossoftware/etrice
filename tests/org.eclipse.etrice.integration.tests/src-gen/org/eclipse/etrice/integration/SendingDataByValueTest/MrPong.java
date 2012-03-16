@@ -80,6 +80,7 @@ public class MrPong extends ActorClassBase {
 	public static final int CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1 = 3;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__ping = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_ping;
 	public static final int TRIG_PingPongPort__pingSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_pingSimple;
 	
@@ -198,18 +199,18 @@ public class MrPong extends ActorClassBase {
 			switch (this.state) {
 				case STATE_reply:
 					switch(trigger) {
-					case TRIG_PingPongPort__ping:
-						{
-							chain = CHAIN_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pingSimple:
-						{
-							chain = CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_PingPongPort__ping:
+							{
+								chain = CHAIN_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pingSimple:
+							{
+								chain = CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

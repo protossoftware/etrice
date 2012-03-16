@@ -84,6 +84,7 @@ public class CPUser extends ActorClassBase {
 	public static final int CHAIN_state1_TRANS_INITIAL_TO__state0 = 6;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_TestPort1__msg1 = IFITEM_TestPort1 + EVT_SHIFT*TestProtocol.IN_msg1;
 	
 	// state names
@@ -377,60 +378,60 @@ public class CPUser extends ActorClassBase {
 			switch (this.state) {
 				case STATE_state0:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{
+								chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_state1_state0:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{ 
-						if (counter==2)
-						{
-							chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						} else 
-						if (counter==1)
-						{
-							chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
-							catching_state = STATE_TOP;
-						} else 
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{ 
+							if (counter==2)
+							{
+								chain = CHAIN_TRANS_state1_TO_cp2_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+							} else 
+							if (counter==1)
+							{
+								chain = CHAIN_TRANS_state1_TO_state0_BY_msg1TestPort1;
+								catching_state = STATE_TOP;
+							} else 
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+							}
+						break;
 					}
 					break;
 				case STATE_testOk:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_testFalse:
 					switch(trigger) {
-					case TRIG_TestPort1__msg1:
-						{
-							chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_TestPort1__msg1:
+							{
+								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr8;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 			}
