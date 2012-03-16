@@ -138,13 +138,15 @@ class DataClassGen {
 		'''
 		«FOR a : attributes»
 			«IF a.refType.type instanceof ComplexType»
-				«IF a.size==0»
-					copy.«a.name» = «a.name».deepCopy();
-				«ELSE»
-					for (int i=0;i<«a.name».length;i++){
-						copy.«a.name»[i] = «a.name»[i].deepCopy();
-					}
-				«ENDIF»
+				if («a.name»!=null) {
+					«IF a.size==0»
+						copy.«a.name» = «a.name».deepCopy();
+					«ELSE»
+						for (int i=0;i<«a.name».length;i++){
+							copy.«a.name»[i] = «a.name»[i].deepCopy();
+						}
+					«ENDIF»
+				}
 			«ELSE»
 				«IF a.size==0»
 					copy.«a.name» = «a.name»;
