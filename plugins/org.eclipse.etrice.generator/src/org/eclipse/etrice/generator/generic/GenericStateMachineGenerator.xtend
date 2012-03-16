@@ -33,11 +33,11 @@ import static org.eclipse.xtext.util.Tuples.*
 
 class GenericStateMachineGenerator {
 
-	@Inject public extension ILanguageExtension langExt
-	@Inject public extension RoomExtensions roomExt
-	@Inject public extension GenericProtocolClassGenerator pcGen
-	@Inject public extension org.eclipse.etrice.generator.generic.AbstractLanguageGenerator languageGen
-	@Inject public ITranslationProvider translator
+	@Inject protected extension ILanguageExtension langExt
+	@Inject protected extension RoomExtensions roomExt
+	@Inject protected extension GenericProtocolClassGenerator pcGen
+	@Inject protected extension org.eclipse.etrice.generator.generic.AbstractLanguageGenerator languageGen
+	@Inject protected ITranslationProvider translator
 
 	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {
 		// with inheritance we exclude inherited base states
@@ -134,7 +134,8 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.getTransitionList()»
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
-				«var hasArgs = tr instanceof NonInitialTransition && !(tr instanceof GuardedTransition)»
+				«var start = xpac.getChain(tr).transition»
+				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
 					«xpac.getActionCode(tr, dct)»
 				}
@@ -175,7 +176,7 @@ class GenericStateMachineGenerator {
 				«FOR tc : allchains»
 					case «tc.getChainId()»:
 					{
-						«xpac.getExecuteChain(tc)»
+						«xpac.getExecuteChain(tc, dct)»
 					}
 				«ENDFOR»
 			}

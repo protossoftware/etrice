@@ -234,11 +234,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
-		«IF xpac.hasNonEmptyStateMachine»
+		«IF dataDriven || async»
 			void «xpac.name»_execute(«xpac.name»* self){
 				ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "_execute")
+				«IF xpac.hasNonEmptyStateMachine»
 					
-				receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
+					receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
+				«ENDIF»
 				
 				ET_MSC_LOGGER_SYNC_EXIT
 			}

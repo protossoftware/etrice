@@ -42,19 +42,19 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @SuppressWarnings("all")
 public class GenericStateMachineGenerator {
   @Inject
-  public ILanguageExtension langExt;
+  protected ILanguageExtension langExt;
   
   @Inject
-  public RoomExtensions roomExt;
+  protected RoomExtensions roomExt;
   
   @Inject
-  public GenericProtocolClassGenerator pcGen;
+  protected GenericProtocolClassGenerator pcGen;
   
   @Inject
-  public AbstractLanguageGenerator languageGen;
+  protected AbstractLanguageGenerator languageGen;
   
   @Inject
-  public ITranslationProvider translator;
+  protected ITranslationProvider translator;
   
   private String genStateIdConstants(final ExpandedActorClass xpac, final ActorClass ac) {
       int _xifexpression = (int) 0;
@@ -324,12 +324,16 @@ public class GenericStateMachineGenerator {
               _operator_and = BooleanExtensions.operator_and(_isOwnObject_1, _hasActionCode);
             }
             if (_operator_and) {
+              TransitionChain _chain = xpac.getChain(tr);
+              Transition _transition = _chain.getTransition();
+              Transition start = _transition;
+              _builder.newLineIfNotEmpty();
               boolean _operator_and_1 = false;
-              if (!(tr instanceof NonInitialTransition)) {
+              if (!(start instanceof NonInitialTransition)) {
                 _operator_and_1 = false;
               } else {
-                boolean _operator_not_1 = BooleanExtensions.operator_not((tr instanceof GuardedTransition));
-                _operator_and_1 = BooleanExtensions.operator_and((tr instanceof NonInitialTransition), _operator_not_1);
+                boolean _operator_not_1 = BooleanExtensions.operator_not((start instanceof GuardedTransition));
+                _operator_and_1 = BooleanExtensions.operator_and((start instanceof NonInitialTransition), _operator_not_1);
               }
               boolean hasArgs = _operator_and_1;
               _builder.newLineIfNotEmpty();
@@ -512,7 +516,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          String _executeChain = this.languageGen.getExecuteChain(xpac, tc);
+          String _executeChain = this.languageGen.getExecuteChain(xpac, tc, dct);
           _builder.append(_executeChain, "			");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
@@ -638,8 +642,8 @@ public class GenericStateMachineGenerator {
                   _builder.append("state = executeTransitionChain(");
                   String _selfPointer_9 = this.langExt.selfPointer(true);
                   _builder.append(_selfPointer_9, "					");
-                  TransitionChain _chain = xpac.getChain(sub_initt);
-                  String _chainId_1 = this.roomExt.getChainId(_chain);
+                  TransitionChain _chain_1 = xpac.getChain(sub_initt);
+                  String _chainId_1 = this.roomExt.getChainId(_chain_1);
                   _builder.append(_chainId_1, "					");
                   {
                     if (handleEvents) {
@@ -754,8 +758,8 @@ public class GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("int chain = ");
-      TransitionChain _chain_1 = xpac.getChain(initt);
-      String _chainId_2 = this.roomExt.getChainId(_chain_1);
+      TransitionChain _chain_2 = xpac.getChain(initt);
+      String _chainId_2 = this.roomExt.getChainId(_chain_2);
       _builder.append(_chainId_2, "	");
       _builder.append(";");
       _builder.newLineIfNotEmpty();

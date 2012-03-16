@@ -115,7 +115,7 @@ public class SubSystemClassGen {
     }
   }
   
-  public StringConcatenation generateHeaderFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private StringConcatenation generateHeaderFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -199,7 +199,7 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  public StringConcatenation generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private StringConcatenation generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -507,7 +507,7 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  public StringConcatenation generateInstanceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private StringConcatenation generateInstanceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1021,7 +1021,7 @@ public class SubSystemClassGen {
       return result;
   }
   
-  public StringConcatenation generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private StringConcatenation generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1167,7 +1167,7 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  public StringConcatenation generateDatadrivenExecutes(final Root root, final SubSystemInstance ssi) {
+  private StringConcatenation generateDatadrivenExecutes(final Root root, final SubSystemInstance ssi) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();

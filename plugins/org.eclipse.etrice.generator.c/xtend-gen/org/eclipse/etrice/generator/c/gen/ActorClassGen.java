@@ -697,8 +697,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine_3 = this.roomExt.hasNonEmptyStateMachine(xpac);
-        if (_hasNonEmptyStateMachine_3) {
+        boolean _operator_or_1 = false;
+        if (dataDriven) {
+          _operator_or_1 = true;
+        } else {
+          _operator_or_1 = BooleanExtensions.operator_or(dataDriven, async);
+        }
+        if (_operator_or_1) {
           _builder.append("void ");
           String _name_6 = xpac.getName();
           _builder.append(_name_6, "");
@@ -713,17 +718,22 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_name_8, "	");
           _builder.append("\", \"_execute\")");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("receiveEvent(self");
           {
-            if (handleEvents) {
-              _builder.append(", NULL, 0, NULL");
+            boolean _hasNonEmptyStateMachine_3 = this.roomExt.hasNonEmptyStateMachine(xpac);
+            if (_hasNonEmptyStateMachine_3) {
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("receiveEvent(self");
+              {
+                if (handleEvents) {
+                  _builder.append(", NULL, 0, NULL");
+                }
+              }
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");

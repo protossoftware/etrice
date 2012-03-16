@@ -5,8 +5,6 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.util.Pair;
@@ -101,11 +99,6 @@ public class JavaExtensions implements ILanguageExtension {
   
   public String voidPointer() {
     return "Object";
-  }
-  
-  public String getExecuteChainCode(final ExpandedActorClass ac, final TransitionChain tc) {
-    String _executeChain = this.languageGen.getExecuteChain(ac, tc);
-    return _executeChain;
   }
   
   public String arrayDeclaration(final String type, final int size, final String name) {

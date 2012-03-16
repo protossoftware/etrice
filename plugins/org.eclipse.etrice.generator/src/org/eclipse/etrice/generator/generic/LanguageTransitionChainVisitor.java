@@ -19,8 +19,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.etrice.generator.extensions.Extensions;
@@ -29,28 +28,29 @@ import com.google.inject.Inject;
 
 public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 
-	private ExpandedActorClass ac;
-	@Inject private AbstractLanguageGenerator javaGen;
 	@Inject private ILanguageExtension langExt;
-	private String typedData = "";
-	private String dataArg = "";
-	private boolean dataDriven = false;
+	private DetailCodeTranslator dct;
+	private String typedData;
+	private String dataArg;
+	private boolean dataDriven;
 
-	LanguageTransitionChainVisitor(ExpandedActorClass ac) {
-		this.ac = ac;
+	public LanguageTransitionChainVisitor(DetailCodeTranslator dct) {
+		this.dct = dct;
 	}
 	
-	void init(TransitionChain tc) {
+	public void init(TransitionChain tc, String dataArg, String typedData) {
+		this.dataArg = dataArg;
+		this.typedData = typedData;
+
+		dataDriven = false;
+		
 		if (tc.getTransition() instanceof TriggeredTransition) {
-			// we rely on the previous checking during the generator model creation
-			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
-			
-			String[] result = javaGen.getArglistAndTypedData(data);
-			dataArg = result[0];
-			typedData = result[1];
 			dataDriven = false;
 		}
 		else if (tc.getTransition() instanceof GuardedTransition) {
+			dataDriven = true;
+		}
+		else if (tc.getTransition() instanceof InitialTransition) {
 			dataDriven = true;
 		}
 	}
@@ -83,7 +83,7 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 		if (!isFirst )
 			result = "}\nelse ";
 
-		result += "if ("+ac.getCode(tr.getCondition())+") {\n";
+		result += "if ("+dct.translateDetailCode(tr.getCondition())+") {\n";
 		
 		return result;
 	}
