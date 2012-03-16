@@ -95,7 +95,7 @@ public class GeneratorModelBuilder {
 	private ILogger logger;
 	
 	/**
-	 * an isntance of a diagnostician
+	 * an instance of a diagnostician
 	 */
 	private IDiagnostician diagnostician;
 

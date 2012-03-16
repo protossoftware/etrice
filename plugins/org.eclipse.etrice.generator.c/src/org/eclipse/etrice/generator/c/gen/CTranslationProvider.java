@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -73,13 +74,21 @@ public class CTranslationProvider implements ITranslationProvider {
 		String result = orig;
 		if (item instanceof Port) {
 			Port p = (Port) item;
-			if (p.getMultiplicity()==1)
-				result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
-			else {
-				if (index==null)
-					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+			if (p.getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
+				if (p.getMultiplicity()==1)
+					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+				else {
+					if (index==null)
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+					else
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+				}
+			}
+			else if (p.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+				if (p.isConjugated())
+					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_set(&(self->"+item.getName()+")"+argtext+")";
 				else
-					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
 			}
 			
 			result += " /* "+orig+" */";
@@ -98,7 +107,13 @@ public class CTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig) {
-		return null;
+		String result = orig;
+		if (item instanceof Port) {
+			Port p = (Port) item;
+			result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
+			result += " /* "+orig+" */";
+		}
+		return result;
 	}
 
 	@Override
@@ -110,6 +125,10 @@ public class CTranslationProvider implements ITranslationProvider {
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("ifitem.index"))
 			return "((etReplSubPort*)ifitem)->index";
+		
+		if (tag.equals("MODEL_LOCATION")) {
+			return RoomNameProvider.getDetailCodeLocation(code);
+		}
 		
 		logger.logInfo("unrecognized tag '"+tag+"' in "
 				+RoomNameProvider.getDetailCodeLocation(code)+" of "

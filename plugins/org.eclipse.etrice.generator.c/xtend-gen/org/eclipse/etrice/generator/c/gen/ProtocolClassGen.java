@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -22,6 +23,8 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -79,7 +82,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
   }
   
-  public StringConcatenation generateHeaderFile(final Root root, final ProtocolClass pc) {
+  private StringConcatenation generateHeaderFile(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -127,20 +130,44 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
     }
     _builder.newLine();
-    _builder.append("/* message IDs */");
-    _builder.newLine();
-    String _genMessageIDs = this.genMessageIDs(pc);
-    _builder.append(_genMessageIDs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("/*--------------------- port classes */");
-    _builder.newLine();
-    StringConcatenation _portClassHeader = this.portClassHeader(pc, ((Boolean)false));
-    _builder.append(_portClassHeader, "");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _portClassHeader_1 = this.portClassHeader(pc, ((Boolean)true));
-    _builder.append(_portClassHeader_1, "");
-    _builder.newLineIfNotEmpty();
+    {
+      CommunicationType _commType = pc.getCommType();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
+      if (_operator_equals) {
+        _builder.newLine();
+        _builder.append("/* message IDs */");
+        _builder.newLine();
+        String _genMessageIDs = this.genMessageIDs(pc);
+        _builder.append(_genMessageIDs, "");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("/*--------------------- port structs and methods */");
+        _builder.newLine();
+        StringConcatenation _portClassHeader = this.portClassHeader(pc, ((Boolean)false));
+        _builder.append(_portClassHeader, "");
+        _builder.newLineIfNotEmpty();
+        StringConcatenation _portClassHeader_1 = this.portClassHeader(pc, ((Boolean)true));
+        _builder.append(_portClassHeader_1, "");
+        _builder.newLineIfNotEmpty();
+      } else {
+        CommunicationType _commType_1 = pc.getCommType();
+        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_commType_1, CommunicationType.DATA_DRIVEN);
+        if (_operator_equals_1) {
+          _builder.append("/*--------------------- port structs and methods */");
+          _builder.newLine();
+          StringConcatenation _genDataDrivenPortHeaders = this.genDataDrivenPortHeaders(pc);
+          _builder.append(_genDataDrivenPortHeaders, "");
+          _builder.newLineIfNotEmpty();
+        } else {
+          CommunicationType _commType_2 = pc.getCommType();
+          boolean _operator_equals_2 = ObjectExtensions.operator_equals(_commType_2, CommunicationType.SYNCHRONOUS);
+          if (_operator_equals_2) {
+            _builder.append("#error \"synchronoue protocols not implemented yet\"");
+            _builder.newLine();
+          }
+        }
+      }
+    }
     _builder.newLine();
     _builder.append("/*--------------------- debug helpers */");
     _builder.newLine();
@@ -166,7 +193,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateSourceFile(final Root root, final ProtocolClass pc) {
+  private StringConcatenation generateSourceFile(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -201,35 +228,45 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("/*--------------------- port classes */");
+    _builder.append("/*--------------------- port methods */");
     _builder.newLine();
-    StringConcatenation _portClassSource = this.portClassSource(pc, ((Boolean)false));
-    _builder.append(_portClassSource, "");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _portClassSource_1 = this.portClassSource(pc, ((Boolean)true));
-    _builder.append(_portClassSource_1, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("/*--------------------- debug helpers */");
-    _builder.newLine();
-    StringConcatenation _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
-    _builder.append(_generateDebugHelpersImplementation, "");
-    _builder.newLineIfNotEmpty();
+    {
+      CommunicationType _commType = pc.getCommType();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
+      if (_operator_equals) {
+        StringConcatenation _portClassSource = this.portClassSource(pc, ((Boolean)false));
+        _builder.append(_portClassSource, "");
+        _builder.newLineIfNotEmpty();
+        StringConcatenation _portClassSource_1 = this.portClassSource(pc, ((Boolean)true));
+        _builder.append(_portClassSource_1, "");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("/*--------------------- debug helpers */");
+        _builder.newLine();
+        StringConcatenation _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
+        _builder.append(_generateDebugHelpersImplementation, "");
+        _builder.newLineIfNotEmpty();
+      } else {
+        CommunicationType _commType_1 = pc.getCommType();
+        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_commType_1, CommunicationType.DATA_DRIVEN);
+        if (_operator_equals_1) {
+          StringConcatenation _genDataDrivenPortSources = this.genDataDrivenPortSources(pc);
+          _builder.append(_genDataDrivenPortSources, "");
+          _builder.newLineIfNotEmpty();
+        } else {
+          CommunicationType _commType_2 = pc.getCommType();
+          boolean _operator_equals_2 = ObjectExtensions.operator_equals(_commType_2, CommunicationType.SYNCHRONOUS);
+          if (_operator_equals_2) {
+            _builder.append("#error \"synchronoue protocols not implemented yet\"");
+            _builder.newLine();
+          }
+        }
+      }
+    }
     return _builder;
   }
   
-  public StringConcatenation portClass(final ProtocolClass pc, final Boolean conj) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation portClassHeader(final ProtocolClass pc, final Boolean conj) {
+  private StringConcatenation portClassHeader(final ProtocolClass pc, final Boolean conj) {
     StringConcatenation _xblockexpression = null;
     {
       String _portClassName = this.roomExt.getPortClassName(pc, conj);
@@ -336,7 +373,233 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _xblockexpression;
   }
   
-  public StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
+  private StringConcatenation genDataDrivenPortHeaders(final ProtocolClass pc) {
+    StringConcatenation _xblockexpression = null;
+    {
+      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+          public Boolean apply(final Message m) {
+            VarDecl _data = m.getData();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
+            return ((Boolean)_operator_notEquals);
+          }
+        };
+      Iterable<Message> _filter = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      Iterable<Message> sentMsgs = _filter;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* data driven send port (conjugated) */");
+      _builder.newLine();
+      _builder.append("typedef struct {");
+      _builder.newLine();
+      {
+        for(final Message msg : sentMsgs) {
+          _builder.append("\t");
+          VarDecl _data = msg.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _typeName = this._typeHelpers.typeName(_type);
+          String typeName = _typeName;
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _xifexpression = null;
+          VarDecl _data_1 = msg.getData();
+          RefableType _refType_1 = _data_1.getRefType();
+          boolean _isRef = _refType_1.isRef();
+          if (_isRef) {
+            _xifexpression = "*";
+          } else {
+            _xifexpression = "";
+          }
+          String refp = _xifexpression;
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(typeName, "	");
+          _builder.append(refp, "	");
+          _builder.append(" ");
+          String _name = msg.getName();
+          _builder.append(_name, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      String _portClassName = this.roomExt.getPortClassName(pc, true);
+      _builder.append(_portClassName, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("/* data driven receive port (regular) */");
+      _builder.newLine();
+      _builder.append("typedef struct {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("const ");
+      String _portClassName_1 = this.roomExt.getPortClassName(pc, true);
+      _builder.append(_portClassName_1, "	");
+      _builder.append("* peer;");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      String _portClassName_2 = this.roomExt.getPortClassName(pc, false);
+      _builder.append(_portClassName_2, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        for(final Message message : sentMsgs) {
+          VarDecl _data_2 = message.getData();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data_2, null);
+          boolean hasData = _operator_notEquals;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_1 = null;
+          if (hasData) {
+            VarDecl _data_3 = message.getData();
+            RefableType _refType_2 = _data_3.getRefType();
+            DataType _type_1 = _refType_2.getType();
+            String _typeName_1 = this._typeHelpers.typeName(_type_1);
+            _xifexpression_1 = _typeName_1;
+          } else {
+            _xifexpression_1 = "";
+          }
+          String typeName_1 = _xifexpression_1;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_2 = null;
+          boolean _operator_and = false;
+          if (!hasData) {
+            _operator_and = false;
+          } else {
+            VarDecl _data_4 = message.getData();
+            RefableType _refType_3 = _data_4.getRefType();
+            DataType _type_2 = _refType_3.getType();
+            boolean _operator_not = BooleanExtensions.operator_not((_type_2 instanceof PrimitiveType));
+            _operator_and = BooleanExtensions.operator_and(hasData, _operator_not);
+          }
+          if (_operator_and) {
+            _xifexpression_2 = "*";
+          } else {
+            _xifexpression_2 = "";
+          }
+          String refp_1 = _xifexpression_2;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_3 = null;
+          if (hasData) {
+            String _operator_plus = StringExtensions.operator_plus(", ", typeName_1);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, refp_1);
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, " data");
+            _xifexpression_3 = _operator_plus_2;
+          } else {
+            _xifexpression_3 = "";
+          }
+          String data = _xifexpression_3;
+          _builder.newLineIfNotEmpty();
+          String _portClassName_3 = this.roomExt.getPortClassName(pc, true);
+          String _name_1 = message.getName();
+          String _messageSetterSignature = this.messageSetterSignature(_portClassName_3, _name_1, data);
+          _builder.append(_messageSetterSignature, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          String _portClassName_4 = this.roomExt.getPortClassName(pc, false);
+          String _name_2 = message.getName();
+          String _messageGetterSignature = this.messageGetterSignature(_portClassName_4, _name_2, typeName_1);
+          _builder.append(_messageGetterSignature, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private StringConcatenation genDataDrivenPortSources(final ProtocolClass pc) {
+    StringConcatenation _xblockexpression = null;
+    {
+      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+          public Boolean apply(final Message m) {
+            VarDecl _data = m.getData();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_data, null);
+            return ((Boolean)_operator_notEquals);
+          }
+        };
+      Iterable<Message> _filter = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      Iterable<Message> messages = _filter;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        for(final Message message : messages) {
+          VarDecl _data = message.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _typeName = this._typeHelpers.typeName(_type);
+          String typeName = _typeName;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression = null;
+          VarDecl _data_1 = message.getData();
+          RefableType _refType_1 = _data_1.getRefType();
+          DataType _type_1 = _refType_1.getType();
+          boolean _operator_not = BooleanExtensions.operator_not((_type_1 instanceof PrimitiveType));
+          if (_operator_not) {
+            _xifexpression = "*";
+          } else {
+            _xifexpression = "";
+          }
+          String refp = _xifexpression;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_1 = null;
+          VarDecl _data_2 = message.getData();
+          RefableType _refType_2 = _data_2.getRefType();
+          DataType _type_2 = _refType_2.getType();
+          if ((_type_2 instanceof PrimitiveType)) {
+            _xifexpression_1 = "&";
+          } else {
+            _xifexpression_1 = "";
+          }
+          String refa = _xifexpression_1;
+          _builder.newLineIfNotEmpty();
+          String _operator_plus = StringExtensions.operator_plus(", ", typeName);
+          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, refp);
+          String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, " data");
+          String data = _operator_plus_2;
+          _builder.newLineIfNotEmpty();
+          String _portClassName = this.roomExt.getPortClassName(pc, true);
+          String _name = message.getName();
+          String _messageSetterSignature = this.messageSetterSignature(_portClassName, _name, data);
+          _builder.append(_messageSetterSignature, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("self->");
+          String _name_1 = message.getName();
+          _builder.append(_name_1, "	");
+          _builder.append(" = data;");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+          String _portClassName_1 = this.roomExt.getPortClassName(pc, false);
+          String _name_2 = message.getName();
+          String _messageGetterSignature = this.messageGetterSignature(_portClassName_1, _name_2, typeName);
+          _builder.append(_messageGetterSignature, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("return self->peer->");
+          String _name_3 = message.getName();
+          _builder.append(_name_3, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private StringConcatenation portClassSource(final ProtocolClass pc, final Boolean conj) {
     StringConcatenation _xblockexpression = null;
     {
       String _portClassName = this.roomExt.getPortClassName(pc, conj);
@@ -572,6 +835,29 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _operator_plus_8;
   }
   
+  private String messageSetterSignature(final String className, final String messageName, final String data) {
+    String _operator_plus = StringExtensions.operator_plus("void ", className);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, messageName);
+    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "_set(");
+    String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, className);
+    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "* self");
+    String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, data);
+    String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ")");
+    return _operator_plus_7;
+  }
+  
+  private String messageGetterSignature(final String className, final String messageName, final String type) {
+    String _operator_plus = StringExtensions.operator_plus(type, " ");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, className);
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
+    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, messageName);
+    String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_get(const ");
+    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, className);
+    String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "* const self)");
+    return _operator_plus_6;
+  }
+  
   private StringConcatenation messageCall(final Message m) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = m.getName();
@@ -592,7 +878,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateDebugHelpersImplementation(final Root root, final ProtocolClass pc) {
+  private StringConcatenation generateDebugHelpersImplementation(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("/* message names as strings for debugging (generate MSC) */");

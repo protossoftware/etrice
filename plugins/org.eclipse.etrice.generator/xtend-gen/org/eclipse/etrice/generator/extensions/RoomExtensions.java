@@ -32,7 +32,9 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -817,36 +819,38 @@ public class RoomExtensions {
       return hasGuard;
   }
   
-  public boolean hasEntryCode(final State s) {
-    boolean _operator_and = false;
-    DetailCode _entryCode = s.getEntryCode();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_entryCode, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
+  public boolean empty(final DetailCode dc) {
+    boolean _operator_or = false;
+    boolean _operator_equals = ObjectExtensions.operator_equals(dc, null);
+    if (_operator_equals) {
+      _operator_or = true;
     } else {
-      DetailCode _entryCode_1 = s.getEntryCode();
-      EList<String> _commands = _entryCode_1.getCommands();
-      int _size = _commands.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_greaterThan);
+      EList<String> _commands = dc.getCommands();
+      boolean _isEmpty = _commands.isEmpty();
+      _operator_or = BooleanExtensions.operator_or(_operator_equals, _isEmpty);
     }
-    return _operator_and;
+    return _operator_or;
+  }
+  
+  public boolean hasEntryCode(final State s) {
+    DetailCode _entryCode = s.getEntryCode();
+    boolean _empty = this.empty(_entryCode);
+    boolean _operator_not = BooleanExtensions.operator_not(_empty);
+    return _operator_not;
   }
   
   public boolean hasExitCode(final State s) {
-    boolean _operator_and = false;
     DetailCode _exitCode = s.getExitCode();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_exitCode, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      DetailCode _exitCode_1 = s.getExitCode();
-      EList<String> _commands = _exitCode_1.getCommands();
-      int _size = _commands.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_greaterThan);
-    }
-    return _operator_and;
+    boolean _empty = this.empty(_exitCode);
+    boolean _operator_not = BooleanExtensions.operator_not(_empty);
+    return _operator_not;
+  }
+  
+  public boolean hasDoCode(final State s) {
+    DetailCode _doCode = s.getDoCode();
+    boolean _empty = this.empty(_doCode);
+    boolean _operator_not = BooleanExtensions.operator_not(_empty);
+    return _operator_not;
   }
   
   public String getEntryCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
@@ -873,13 +877,31 @@ public class RoomExtensions {
       DetailCode _exitCode = s.getExitCode();
       String _code = ac.getCode(_exitCode);
       String _operator_plus = StringExtensions.operator_plus(_code, "super.");
-      String _entryCodeOperationName = RoomNameProv.getEntryCodeOperationName(s);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _entryCodeOperationName);
+      String _exitCodeOperationName = RoomNameProv.getExitCodeOperationName(s);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _exitCodeOperationName);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "();\n");
       _xifexpression = _operator_plus_2;
     } else {
       DetailCode _exitCode_1 = s.getExitCode();
       String _translateDetailCode = dct.translateDetailCode(_exitCode_1);
+      _xifexpression = _translateDetailCode;
+    }
+    return _xifexpression;
+  }
+  
+  public String getDoCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
+    String _xifexpression = null;
+    if ((s instanceof RefinedState)) {
+      DetailCode _doCode = s.getDoCode();
+      String _code = ac.getCode(_doCode);
+      String _operator_plus = StringExtensions.operator_plus(_code, "super.");
+      String _doCodeOperationName = RoomNameProv.getDoCodeOperationName(s);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _doCodeOperationName);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "();\n");
+      _xifexpression = _operator_plus_2;
+    } else {
+      DetailCode _doCode_1 = s.getDoCode();
+      String _translateDetailCode = dct.translateDetailCode(_doCode_1);
       _xifexpression = _translateDetailCode;
     }
     return _xifexpression;
@@ -971,5 +993,28 @@ public class RoomExtensions {
         res.addAll(_transitionList);
       }
       return res;
+  }
+  
+  public List<Transition> getOutgoingTransitionsHierarchical(final ExpandedActorClass ac, final State s) {
+      ArrayList<Transition> _arrayList = new ArrayList<Transition>();
+      ArrayList<Transition> result = _arrayList;
+      EList<Transition> _outgoingTransitions = ac.getOutgoingTransitions(s);
+      result.addAll(_outgoingTransitions);
+      EObject _eContainer = s.eContainer();
+      StateGraph sg = ((StateGraph) _eContainer);
+      EList<TrPoint> _trPoints = sg.getTrPoints();
+      for (final TrPoint tp : _trPoints) {
+        if ((tp instanceof TransitionPoint)) {
+          EList<Transition> _outgoingTransitions_1 = ac.getOutgoingTransitions(tp);
+          result.addAll(_outgoingTransitions_1);
+        }
+      }
+      EObject _eContainer_1 = sg.eContainer();
+      if ((_eContainer_1 instanceof State)) {
+        EObject _eContainer_2 = sg.eContainer();
+        List<Transition> _outgoingTransitionsHierarchical = this.getOutgoingTransitionsHierarchical(ac, ((State) _eContainer_2));
+        result.addAll(_outgoingTransitionsHierarchical);
+      }
+      return result;
   }
 }

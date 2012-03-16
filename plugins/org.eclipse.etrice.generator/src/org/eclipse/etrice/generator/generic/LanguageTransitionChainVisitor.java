@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
@@ -33,6 +34,7 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	@Inject private ILanguageExtension langExt;
 	private String typedData = "";
 	private String dataArg = "";
+	private boolean dataDriven = false;
 
 	LanguageTransitionChainVisitor(ExpandedActorClass ac) {
 		this.ac = ac;
@@ -46,6 +48,10 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 			String[] result = javaGen.getArglistAndTypedData(data);
 			dataArg = result[0];
 			typedData = result[1];
+			dataDriven = false;
+		}
+		else if (tc.getTransition() instanceof GuardedTransition) {
+			dataDriven = true;
 		}
 	}
 
@@ -54,6 +60,8 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	public String genActionOperationCall(Transition tr) {
 		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
 			if (tr instanceof InitialTransition)
+				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+			else if (dataDriven)
 				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else
 				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";

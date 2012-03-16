@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.BaseState
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.InitialTransition
 import org.eclipse.etrice.core.room.Message
@@ -40,6 +41,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
+import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
@@ -456,12 +458,20 @@ class RoomExtensions {
 	
 	// TODO. in the following methods handle inheritance language independent and proper
 	
+	def boolean empty(DetailCode dc) {
+		dc==null || dc.commands.empty
+	}
+	
 	def boolean hasEntryCode(State s) {
-		s.entryCode!=null && s.entryCode.commands.size>0
+		!s.entryCode.empty
 	}
 
 	def boolean hasExitCode(State s) {
-		s.exitCode!=null && s.exitCode.commands.size>0
+		!s.exitCode.empty
+	}
+
+	def boolean hasDoCode(State s) {
+		!s.doCode.empty
 	}
 
 	def String getEntryCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
@@ -473,9 +483,16 @@ class RoomExtensions {
 
 	def String getExitCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			ac.getCode(s.exitCode)+"super."+s.getEntryCodeOperationName()+"();\n"
+			ac.getCode(s.exitCode)+"super."+s.getExitCodeOperationName()+"();\n"
 		else
 			dct.translateDetailCode(s.exitCode)
+	}
+
+	def String getDoCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
+		if (s instanceof RefinedState)
+			ac.getCode(s.doCode)+"super."+s.getDoCodeOperationName()+"();\n"
+		else
+			dct.translateDetailCode(s.doCode)
 	}
 	
 	def boolean hasActionCode(Transition t) {
@@ -524,5 +541,26 @@ class RoomExtensions {
 		return res
 	}
 	
+
+	def List<Transition> getOutgoingTransitionsHierarchical(ExpandedActorClass ac, State s) {
+		var result = new ArrayList<Transition>()
+		
+		// own transitions
+		result.addAll(ac.getOutgoingTransitions(s))
+
+		// transition points on same level
+		var sg = s.eContainer() as StateGraph
+		for (tp : sg.getTrPoints()) {
+			if (tp instanceof TransitionPoint)
+				result.addAll(ac.getOutgoingTransitions(tp))
+		}
+		
+		// recurse to super states
+		if (sg.eContainer() instanceof State) {
+			result.addAll(getOutgoingTransitionsHierarchical(ac, sg.eContainer() as State))
+		}
+		
+		return result;
+	}
 	
 }
