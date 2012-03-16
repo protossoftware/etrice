@@ -41,6 +41,7 @@ import org.eclipse.xtext.scoping.IScope;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -98,9 +99,14 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 					return ValidationStatus.error("multiplicity must be -1 or positive");
 				if (!mayChange) {
 					if (old==1 && (m>1 || m==-1))
-						return ValidationStatus.error("cannot make connected port replicated");
+						return ValidationStatus.error("cannot change connected port to replicated");
 					if ((old>1 || old==-1) && m==1)
-						return ValidationStatus.error("cannot make connected port not replicated");
+						return ValidationStatus.error("cannot change connected port to not replicated");
+				}
+				
+				if (port.getProtocol()!=null && port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+					if (m!=1)
+						return ValidationStatus.error("data driven ports can not be replicated");
 				}
 			}
 			return Status.OK_STATUS;
