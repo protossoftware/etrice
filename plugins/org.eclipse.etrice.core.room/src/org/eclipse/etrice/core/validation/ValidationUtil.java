@@ -266,14 +266,14 @@ public class ValidationUtil {
 
 		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN) {
 			if (ref == null) {
+				// this port is local in the structure class
 				if (isRelay(port))
 					return !port.isConjugated();
 				else
 					return port.isConjugated();
-			} else if (ref != null && port.isConjugated())
-				return false;
-
-			return true;
+			}
+			else
+				return port.isConjugated();
 		}
 
 		return false;
@@ -297,6 +297,9 @@ public class ValidationUtil {
 		
 		if (p1.getProtocol()!=p2.getProtocol())
 			return Result.error("protocols don't match");
+		
+		if (p1.getProtocol().getCommType()!=p2.getProtocol().getCommType())
+			return Result.error("protocol communication types don't match");
 		
 		if (ref1==null && ref2==null)
 			return Result.error("cannot connect two local ports");
