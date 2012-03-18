@@ -84,6 +84,7 @@ public class ATimingService extends ActorClassBase {
 	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3 = 5;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
 	public static final int TRIG_timeout__Start = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Start;
 	public static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
@@ -223,30 +224,30 @@ public class ATimingService extends ActorClassBase {
 			switch (this.state) {
 				case STATE_Operational:
 					switch(trigger) {
-					case TRIG_timeout__Start:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timeout__Kill:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__Start:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__Kill:
-						{
-							chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timeout__Start:
+							{
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_timeout__Kill:
+							{
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__Start:
+							{
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__Kill:
+							{
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

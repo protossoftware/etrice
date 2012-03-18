@@ -87,6 +87,7 @@ public class MrPingActor extends ActorClassBase {
 	public static final int CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer = 3;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort2__pong = IFITEM_PingPongPort2 + EVT_SHIFT*PingPongProtocol.OUT_pong;
 	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
 	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
@@ -174,8 +175,7 @@ public class MrPingActor extends ActorClassBase {
 			case CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort:
 			{
 				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(ifitem);
-				if (pongCount < 2
-				) {
+				if (pongCount < 2) {
 				return STATE_waitForPong;}
 				else {
 				action_TRANS_cp0_TO_waitForTimer(ifitem);
@@ -228,28 +228,28 @@ public class MrPingActor extends ActorClassBase {
 			switch (this.state) {
 				case STATE_waitForTimer:
 					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__timeoutTick:
+							{
+								chain = CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_waitForPong:
 					switch(trigger) {
-					case TRIG_PingPongPort2__pong:
-						{
-							chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_PingPongPort2__pong:
+							{
+								chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

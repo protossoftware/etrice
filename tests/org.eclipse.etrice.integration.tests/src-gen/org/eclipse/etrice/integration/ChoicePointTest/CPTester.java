@@ -66,6 +66,7 @@ public class CPTester extends ActorClassBase {
 	public static final int CHAIN_TRANS_INITIAL_TO__state0 = 1;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","state0"

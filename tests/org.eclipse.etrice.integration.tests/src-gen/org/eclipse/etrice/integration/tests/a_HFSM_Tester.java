@@ -83,6 +83,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 	public static final int CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee = 8;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_testee__init_action = IFITEM_testee + EVT_SHIFT*p_HFSM.OUT_init_action;
 	public static final int TRIG_testee__s1_entry = IFITEM_testee + EVT_SHIFT*p_HFSM.OUT_s1_entry;
 	public static final int TRIG_testee__s1_exit = IFITEM_testee + EVT_SHIFT*p_HFSM.OUT_s1_exit;
@@ -277,72 +278,72 @@ public class a_HFSM_Tester extends ActorClassBase {
 			switch (this.state) {
 				case STATE_State1:
 					switch(trigger) {
-					case TRIG_testee__init_action:
-						{
-							chain = CHAIN_TRANS_State1_TO_State2_BY_init_actiontestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__init_action:
+							{
+								chain = CHAIN_TRANS_State1_TO_State2_BY_init_actiontestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State2:
 					switch(trigger) {
-					case TRIG_testee__s1_entry:
-						{
-							chain = CHAIN_TRANS_State2_TO_State3_BY_s1_entrytestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s1_entry:
+							{
+								chain = CHAIN_TRANS_State2_TO_State3_BY_s1_entrytestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State3:
 					switch(trigger) {
-					case TRIG_testee__s1_exit:
-						{
-							chain = CHAIN_TRANS_State3_TO_State4_BY_s1_exittestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s1_exit:
+							{
+								chain = CHAIN_TRANS_State3_TO_State4_BY_s1_exittestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State4:
 					switch(trigger) {
-					case TRIG_testee__s1_m1_s2_action:
-						{
-							chain = CHAIN_TRANS_State4_TO_State5_BY_s1_m1_s2_actiontestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s1_m1_s2_action:
+							{
+								chain = CHAIN_TRANS_State4_TO_State5_BY_s1_m1_s2_actiontestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State5:
 					switch(trigger) {
-					case TRIG_testee__s2_entry:
-						{
-							chain = CHAIN_TRANS_State5_TO_State6_BY_s2_entrytestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s2_entry:
+							{
+								chain = CHAIN_TRANS_State5_TO_State6_BY_s2_entrytestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State6:
 					switch(trigger) {
-					case TRIG_testee__s2_m1_s2s1_action:
-						{
-							chain = CHAIN_TRANS_State6_TO_State7_BY_s2_m1_s2s1_actiontestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s2_m1_s2s1_action:
+							{
+								chain = CHAIN_TRANS_State6_TO_State7_BY_s2_m1_s2s1_actiontestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_State7:
 					switch(trigger) {
-					case TRIG_testee__s2s1_entry:
-						{
-							chain = CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_testee__s2s1_entry:
+							{
+								chain = CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_TestPass:

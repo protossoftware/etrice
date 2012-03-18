@@ -36,6 +36,10 @@ public class RoomNameProv {
 		return "exit_"+getGenStatePathName(s);
 	}
 	
+	public static String getDoCodeOperationName(State s) {
+		return "do_"+getGenStatePathName(s);
+	}
+	
 	public static String getGenChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}

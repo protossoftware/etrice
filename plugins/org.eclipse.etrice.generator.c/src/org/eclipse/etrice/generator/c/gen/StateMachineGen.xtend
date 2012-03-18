@@ -29,21 +29,21 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		var historySize = xpac.allBaseStates.size - xpac.allLeafStates.size + 2
 	'''
 	/* constant for state machine data */
-	#define HISTORY_SIZE «historySize»
+	#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
 	'''
 	}
 	
 	def genDataMembers(ExpandedActorClass xpac, ActorClass ac) {'''
 		/* state machine variables */
 		etInt16 state;
-		etInt16 history[HISTORY_SIZE];
+		etInt16 history[«ac.name.toUpperCase»_HISTORY_SIZE];
 	'''}
 	
 	def genInitialization(ExpandedActorClass xpac, ActorClass ac) {'''
 		self->state = STATE_TOP;
 		{
 			int i;
-			for (i=0; i<HISTORY_SIZE; ++i)
+			for (i=0; i<«ac.name.toUpperCase»_HISTORY_SIZE; ++i)
 				self->history[i] = NO_STATE;
 		}
 		executeInitTransition(self);

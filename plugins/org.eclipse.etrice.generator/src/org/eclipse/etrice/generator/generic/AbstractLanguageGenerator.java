@@ -20,15 +20,26 @@ import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 public abstract class AbstractLanguageGenerator {
 
-	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
-		LanguageTransitionChainVisitor tcv = new LanguageTransitionChainVisitor(ac);
+	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc, DetailCodeTranslator dct) {
+		LanguageTransitionChainVisitor tcv = new LanguageTransitionChainVisitor(dct);
 		AbstractGenerator.getInjector().injectMembers(tcv);
-		tcv.init(tc);
+
+		String dataArg = "";
+		String typedData = "";
+		if (tc.getTransition() instanceof TriggeredTransition) {
+			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
+			String[] result = getArglistAndTypedData(data);
+			dataArg = result[0];
+			typedData = result[1];
+		}
+		tcv.init(tc, dataArg, typedData);
+		
 		return tc.genExecuteChain(tcv);
 	}
 

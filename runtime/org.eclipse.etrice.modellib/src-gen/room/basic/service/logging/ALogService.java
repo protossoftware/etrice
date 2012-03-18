@@ -86,6 +86,7 @@ public class ALogService extends ActorClassBase {
 	public static final int CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1 = 4;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_log__close = IFITEM_log + EVT_SHIFT*Log.IN_close;
 	public static final int TRIG_log__internalLog = IFITEM_log + EVT_SHIFT*Log.IN_internalLog;
 	public static final int TRIG_log__open = IFITEM_log + EVT_SHIFT*Log.IN_open;
@@ -232,28 +233,28 @@ public class ALogService extends ActorClassBase {
 			switch (this.state) {
 				case STATE_closed:
 					switch(trigger) {
-					case TRIG_log__open:
-						{
-							chain = CHAIN_TRANS_closed_TO_opened_BY_openlog;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_log__open:
+							{
+								chain = CHAIN_TRANS_closed_TO_opened_BY_openlog;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_opened:
 					switch(trigger) {
-					case TRIG_log__close:
-						{
-							chain = CHAIN_TRANS_opened_TO_closed_BY_closelog;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_log__internalLog:
-						{
-							chain = CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_log__close:
+							{
+								chain = CHAIN_TRANS_opened_TO_closed_BY_closelog;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_log__internalLog:
+							{
+								chain = CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

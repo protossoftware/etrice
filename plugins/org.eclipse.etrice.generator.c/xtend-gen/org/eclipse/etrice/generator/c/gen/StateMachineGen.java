@@ -30,7 +30,11 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/* constant for state machine data */");
       _builder.newLine();
-      _builder.append("#define HISTORY_SIZE ");
+      _builder.append("#define ");
+      String _name = ac.getName();
+      String _upperCase = _name.toUpperCase();
+      _builder.append(_upperCase, "");
+      _builder.append("_HISTORY_SIZE ");
       _builder.append(historySize, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = (_builder);
@@ -44,8 +48,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.newLine();
     _builder.append("etInt16 state;");
     _builder.newLine();
-    _builder.append("etInt16 history[HISTORY_SIZE];");
-    _builder.newLine();
+    _builder.append("etInt16 history[");
+    String _name = ac.getName();
+    String _upperCase = _name.toUpperCase();
+    _builder.append(_upperCase, "");
+    _builder.append("_HISTORY_SIZE];");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -59,8 +67,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.append("int i;");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("for (i=0; i<HISTORY_SIZE; ++i)");
-    _builder.newLine();
+    _builder.append("for (i=0; i<");
+    String _name = ac.getName();
+    String _upperCase = _name.toUpperCase();
+    _builder.append(_upperCase, "	");
+    _builder.append("_HISTORY_SIZE; ++i)");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("self->history[i] = NO_STATE;");
     _builder.newLine();

@@ -81,6 +81,7 @@ public class a_HFSM extends ActorClassBase {
 	public static final int CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7 = 11;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_fct__m1 = IFITEM_fct + EVT_SHIFT*p_HFSM.IN_m1;
 	public static final int TRIG_fct__m2 = IFITEM_fct + EVT_SHIFT*p_HFSM.IN_m2;
 	public static final int TRIG_fct__m3 = IFITEM_fct + EVT_SHIFT*p_HFSM.IN_m3;
@@ -370,199 +371,199 @@ public class a_HFSM extends ActorClassBase {
 			switch (this.state) {
 				case STATE_State1:
 					switch(trigger) {
-					case TRIG_fct__m1:
-						{
-							chain = CHAIN_TRANS_State1_TO_State2_tp0_BY_m1fct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__reset:
-						{
-							chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m8:
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m9:
-						{
-							chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_fct__m1:
+							{
+								chain = CHAIN_TRANS_State1_TO_State2_tp0_BY_m1fct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__reset:
+							{
+								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m8:
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m9:
+							{
+								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_State2_State1:
 					switch(trigger) {
-					case TRIG_fct__m2:
-						{
-							chain = CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct;
-							catching_state = STATE_State2;
-						}
-					break;
-					case TRIG_fct__m5:
-						{
-							chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
-							catching_state = STATE_State2;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m6:
-						{
-							chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
-							catching_state = STATE_State2;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m4:
-						{
-							chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m7:
-						{
-							chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__reset:
-						{
-							chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m8:
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m9:
-						{
-							chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_fct__m2:
+							{
+								chain = CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct;
+								catching_state = STATE_State2;
+							}
+						break;
+						case TRIG_fct__m5:
+							{
+								chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
+								catching_state = STATE_State2;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m6:
+							{
+								chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
+								catching_state = STATE_State2;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m4:
+							{
+								chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m7:
+							{
+								chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__reset:
+							{
+								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m8:
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m9:
+							{
+								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_State2_State2:
 					switch(trigger) {
-					case TRIG_fct__m3:
-						{
-							chain = CHAIN_State2_TRANS_State2_TO_tp1_BY_m3fct;
-							catching_state = STATE_State2;
-						}
-					break;
-					case TRIG_fct__m5:
-						{
-							chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
-							catching_state = STATE_State2;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m6:
-						{
-							chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
-							catching_state = STATE_State2;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m4:
-						{
-							chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m7:
-						{
-							chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__reset:
-						{
-							chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m8:
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m9:
-						{
-							chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_fct__m3:
+							{
+								chain = CHAIN_State2_TRANS_State2_TO_tp1_BY_m3fct;
+								catching_state = STATE_State2;
+							}
+						break;
+						case TRIG_fct__m5:
+							{
+								chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
+								catching_state = STATE_State2;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m6:
+							{
+								chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
+								catching_state = STATE_State2;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m4:
+							{
+								chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m7:
+							{
+								chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__reset:
+							{
+								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m8:
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m9:
+							{
+								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_State3:
 					switch(trigger) {
-					case TRIG_fct__reset:
-						{
-							chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m8:
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m9:
-						{
-							chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_fct__reset:
+							{
+								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m8:
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m9:
+							{
+								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 				case STATE_State4:
 					switch(trigger) {
-					case TRIG_fct__reset:
-						{
-							chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_fct__m8:
-						{
-							chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
-							catching_state = STATE_TOP;
-							skip_entry = true;
-						}
-					break;
-					case TRIG_fct__m9:
-						{
-							chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
-							catching_state = STATE_TOP;
-							is_handler = true;
-							skip_entry = true;
-						}
-					break;
+						case TRIG_fct__reset:
+							{
+								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_fct__m8:
+							{
+								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								catching_state = STATE_TOP;
+								skip_entry = true;
+							}
+						break;
+						case TRIG_fct__m9:
+							{
+								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								catching_state = STATE_TOP;
+								is_handler = true;
+								skip_entry = true;
+							}
+						break;
 					}
 					break;
 			}

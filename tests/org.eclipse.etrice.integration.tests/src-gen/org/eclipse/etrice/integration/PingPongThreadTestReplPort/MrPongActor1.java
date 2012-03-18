@@ -67,6 +67,7 @@ public class MrPongActor1 extends ActorClassBase {
 	public static final int CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger = 2;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__ping = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_ping;
 	
 	// state names
@@ -171,12 +172,12 @@ public class MrPongActor1 extends ActorClassBase {
 			switch (this.state) {
 				case STATE_waitForPing:
 					switch(trigger) {
-					case TRIG_PingPongPort__ping:
-						{
-							chain = CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_PingPongPort__ping:
+							{
+								chain = CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

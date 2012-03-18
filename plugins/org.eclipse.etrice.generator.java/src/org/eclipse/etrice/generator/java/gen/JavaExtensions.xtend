@@ -21,8 +21,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator
 import java.util.List
@@ -82,10 +80,6 @@ class JavaExtensions implements ILanguageExtension {
 
 	//-------------------------------------------------------
 	// transition chain visitor
-		
-	def String getExecuteChainCode(ExpandedActorClass ac, TransitionChain tc) {
-		return languageGen.getExecuteChain(ac, tc)
-	}
 
 	override String arrayDeclaration(String type, int size, String name) {
 		type+" "+name+"[]";
