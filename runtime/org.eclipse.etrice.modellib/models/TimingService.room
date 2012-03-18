@@ -2,12 +2,10 @@ RoomModel room.basic.service.timing {
 
 	import room.basic.types.java.* from "JavaTypes.room"
 
-	ExternalType Integer -> Integer
-	
 	ActorClass ATimingService {
 		Interface {
-			SPP timer: PTimer
 			SPP timeout: PTimeout
+			SPP timer: PTimer
 		}
 		Structure {
 			usercode1 {
@@ -17,9 +15,7 @@ RoomModel room.basic.service.timing {
 				"private Timer timerService = null;"
 				"private int taskCount = 0;"
 				"private static final int PURGE_LIMIT = 1000;"
-			}
-			ServiceImplementation of timer
-			ServiceImplementation of timeout
+			} ServiceImplementation of timeout ServiceImplementation of timer
 		}
 		Behavior {
 			Operation stop() {
@@ -35,37 +31,45 @@ RoomModel room.basic.service.timing {
 				}
 				Transition tr1: Operational -> Operational {
 					triggers {
-						<Start:timeout>
+						<internalStart: timeout>
 					}
 					action {
 						"// start timeout"
 						"taskCount++;"
 						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);"
+						"timerService.schedule(((PTimeoutPort)ifitem).getTask(), ((TimerData)td).getTime());"
 					}
 				}
 				Transition tr2: Operational -> Operational {
 					triggers {
-						<Kill:timeout>
+						<Kill: timeout>
 					}
+
 					// nothing to do to kill timeout (handled by timerService)
+
+					action {
+						"// nothing to do to kill timer (handled by timer)"
+					}
 				}
 				Transition tr3: Operational -> Operational {
 					triggers {
-						<Start:timer>
+						<internalStart: timer>
 					}
 					action {
 						"// start timer"
 						"taskCount++;"
 						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);"
+						"int t = td.getTime();"
+						"timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(),t,t);"
 					}
 				}
 				Transition tr4: Operational -> Operational {
 					triggers {
-						<Kill:timer>
+						<Kill: timer>
 					}
-					// nothing to do to kill timer (handled by timer)
+					action {
+						"// nothing to do to kill timer (handled by timer)"
+					}
 				}
 				State Operational {
 					entry {
@@ -81,13 +85,13 @@ RoomModel room.basic.service.timing {
 			"import java.util.TimerTask;"
 		}
 		usercode2 {
-			"static protected class FireTimerTask extends TimerTask {
+		"static protected class FireTimeoutTask extends TimerTask {
 	
 				private int time;
 				private int id;
 				private PTimerPort port;
 	
-				public FireTimerTask(int time, int id, PTimerPort port) {
+				public FireTimeoutTask(int time, int id, PTimerPort port) {
 					this.time = time;
 					this.id = id;
 					this.port = port;
@@ -95,7 +99,8 @@ RoomModel room.basic.service.timing {
 	
 				@Override
 				public void run() {
-					port.timer(id);
+					TimerData td = new TimerData(0,id);
+					port.internalTimeout(td);
 				}
 				
 				public int getTime() {
@@ -106,83 +111,55 @@ RoomModel room.basic.service.timing {
 					return id;
 				}
 			}
-			
-			static protected class TimerData {
-				int time;
-				int id;
-				public TimerData(int time, int id) {
-					this.time = time;
-					this.id = id;
-				}
-			}"
+			"
 		}
 		incoming {
-			Message Start (time_ms : int32)
-			Message Kill ()
+			Message Kill()
+			private Message internalStart(td: TimerData)
 		}
 		outgoing {
-			Message timerTick ()
+			Message timerTick()
+			private Message internalTimeout(td: TimerData)
 		}
-		regular PortClass {
+		regular PortClass
+		{
 			usercode {
-				"private FireTimerTask task = null;
+			"private FireTimeoutTask task = null;
 				
 				public TimerTask getTask() { return task; }"
 			}
-			handle Start {
-				"//regular PortClass handle start
+			handle internalStart {
+			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
-				task = new FireTimerTask(td.time, td.id, this);
-				getActor().receiveEvent(this, IN_Start, td.time);"
+				task = new FireTimeoutTask(td.time, td.id, this);
+				getActor().receiveEvent(this, IN_internalStart, td);"
 			}
 			handle Kill {
-				"//regular PortClass handle kill
+			"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData();
-				if (task!=null && task.getId()==id) {
+				TimerData td = (TimerData)dataMsg.getData();
+				if (task!=null && task.getId()==td.getId()) {
 					task.cancel();
 				}"
 			}
-			Operation timer(id: Integer) {
-				"//regular PortClass Operation timer
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-						getPeerAddress(), messageStrings[OUT_timerTick]);
-	
-				getPeerMsgReceiver().receive(
-						new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));"
-			}
 		}
-		
-		conjugate PortClass {
+		conjugate PortClass
+		{
 			usercode {
-				"private int currentId = 0;
-				private boolean active = false;"
+			"private int currentId = 0;
+			private boolean active = false;"
 			}
-			handle timerTick {
-				"//conjugate PortClass handle timer
+			handle internalTimeout {
+			"//conjugate PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData();
-				if (active && id==currentId) {
-					getActor().receiveEvent(this, msg.getEvtId(), null);
+				TimerData td = (TimerData) dataMsg.getData();
+				if (active && td.getId()==currentId) {
+					getActor().receiveEvent(this, OUT_timerTick, null);
 				}"
 			}
-			handle Start {
-				"//conjugate PortClass handle start
-				if (active)
-					return;
-					
-				active = true;
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-						getPeerAddress(), messageStrings[IN_Start]);
-	
-				getPeerMsgReceiver()
-						.receive(
-								new EventWithDataMessage(getPeerAddress(),
-										IN_Start, new TimerData(time_ms, ++currentId)));"
-			}
 			handle Kill {
-				"//conjugate PortClass kill
+			"//conjugate PortClass kill
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Kill]);
 	
@@ -192,6 +169,15 @@ RoomModel room.basic.service.timing {
 							new EventWithDataMessage(getPeerAddress(), IN_Kill, currentId));
 				}"
 			}
+			Operation Start(time_ms: int32) sends internalStart {
+			"
+				if (active) return;
+				active = true;
+
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, new TimerData(time_ms,++currentId)));
+			"
+			}
 		}
 	}
 
@@ -200,7 +186,7 @@ RoomModel room.basic.service.timing {
 			"import java.util.TimerTask;"
 		}
 		usercode2 {
-			"static protected class FireTimeoutTask extends TimerTask {
+		"static protected class FireTimeoutTask extends TimerTask {
 	
 				private int time;
 				private int id;
@@ -214,7 +200,8 @@ RoomModel room.basic.service.timing {
 	
 				@Override
 				public void run() {
-					port.timeout(id);
+					TimerData td = new TimerData(0,id);
+					port.internalTimeout(td);
 				}
 				
 				public int getTime() {
@@ -225,94 +212,79 @@ RoomModel room.basic.service.timing {
 					return id;
 				}
 			}
-			
-			static protected class TimeoutData {
-				int time;
-				int id;
-				public TimeoutData(int time, int id) {
-					this.time = time;
-					this.id = id;
-				}
-			}"
+			"
 		}
 		incoming {
-			Message Start (time_ms : int32)
-			Message Kill ()
+			Message Kill()
+			private Message internalStart(td: TimerData)
 		}
 		outgoing {
-			Message timeoutTick ()
+			Message timeoutTick()
+			private Message internalTimeout(td: TimerData)
 		}
-		regular PortClass {
+		regular PortClass
+		{
 			usercode {
-				"private FireTimeoutTask task = null;
+			"private FireTimeoutTask task = null;
 				
 				public TimerTask getTask() { return task; }"
 			}
-			handle Start {
-				"//regular PortClass handle start
+			handle internalStart {
+			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				TimeoutData td = (TimeoutData)dataMsg.getData();
+				TimerData td = (TimerData)dataMsg.getData();
 				task = new FireTimeoutTask(td.time, td.id, this);
-				getActor().receiveEvent(this, IN_Start, td.time);"
+				getActor().receiveEvent(this, IN_internalStart, td);"
 			}
 			handle Kill {
-				"//regular PortClass handle kill
+			"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData();
-				if (task!=null && task.getId()==id) {
+				TimerData td = (TimerData)dataMsg.getData();
+				if (task!=null && task.getId()==td.getId()) {
 					task.cancel();
 				}"
 			}
-			Operation timeout(id: Integer) {
-				"//regular PortClass Operation timeout
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-						getPeerAddress(), messageStrings[OUT_timeoutTick]);
-	
-				getPeerMsgReceiver().receive(
-						new EventWithDataMessage(getPeerAddress(), OUT_timeoutTick, id));"
-			}
 		}
-		
-		conjugate PortClass {
+		conjugate PortClass
+		{
 			usercode {
-				"private int currentId = 0;
-				private boolean active = false;"
+			"private int currentId = 0;
+			private boolean active = false;"
 			}
-			handle timeoutTick {
-				"//conjugate PortClass handle timeout
+			handle internalTimeout {
+			"//conjugate PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-				int id = (Integer)dataMsg.getData();
-				if (active && id==currentId) {
+				TimerData td = (TimerData) dataMsg.getData();
+				if (active && td.getId()==currentId) {
 					active = false;
-					getActor().receiveEvent(this, msg.getEvtId(), null);
+					getActor().receiveEvent(this, OUT_timeoutTick, null);
 				}"
 			}
-			handle Start {
-				"//conjugate PortClass handle start
-				if (active)
-					return;
-					
-				active = true;
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-						getPeerAddress(), messageStrings[IN_Start]);
-	
-				getPeerMsgReceiver()
-						.receive(
-								new EventWithDataMessage(getPeerAddress(),
-										IN_Start, new TimeoutData(time_ms, ++currentId)));"
-			}
 			handle Kill {
-				"//conjugate PortClass kill
+			"//conjugate PortClass kill
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Kill]);
 	
 				if (active) {
 					active = false;
 					getPeerMsgReceiver().receive(
-							new EventWithDataMessage(getPeerAddress(), IN_Kill, new Integer(currentId)));
+							new EventWithDataMessage(getPeerAddress(), IN_Kill, currentId));
 				}"
+			}
+			Operation Start(time_ms: int32) sends internalStart {
+			"
+				if (active) return;
+				active = true;
+
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, new TimerData(time_ms,++currentId)));
+		"
 			}
 		}
 	}
 
+	DataClass TimerData {
+		Attribute time: int32
+		Attribute id: int32
+	}
 }
