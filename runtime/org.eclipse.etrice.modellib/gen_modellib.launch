@@ -7,6 +7,7 @@
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/Socket.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/TimingService.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/ALogService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/TcpService.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
