@@ -392,7 +392,7 @@ public class GeneratorModelBuilder {
 					// replicated ports have subsequent object IDs
 					int multiplicity = pi.getPort().getMultiplicity();
 					if (multiplicity==-1)
-						multiplicity = pi.getBindings().size();
+						multiplicity = pi.getPeers().size();
 					pi.setObjId(counter);
 					counter += multiplicity;
 				}
