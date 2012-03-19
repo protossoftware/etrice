@@ -1945,36 +1945,140 @@ ruleMessageHandler returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getMessageHandlerAccess().getInMessageHandlerParserRuleCall_0()); 
+    }
+    this_InMessageHandler_0=ruleInMessageHandler
+    { 
+        $current = $this_InMessageHandler_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getMessageHandlerAccess().getOutMessageHandlerParserRuleCall_1()); 
+    }
+    this_OutMessageHandler_1=ruleOutMessageHandler
+    { 
+        $current = $this_OutMessageHandler_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleInMessageHandler
+entryRuleInMessageHandler returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getInMessageHandlerRule()); }
+	 iv_ruleInMessageHandler=ruleInMessageHandler 
+	 { $current=$iv_ruleInMessageHandler.current; } 
+	 EOF 
+;
+
+// Rule InMessageHandler
+ruleInMessageHandler returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
 (	otherlv_0='handle' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getMessageHandlerAccess().getHandleKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getInMessageHandlerAccess().getHandleKeyword_0());
+    }
+	otherlv_1='incoming' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getInMessageHandlerAccess().getIncomingKeyword_1());
     }
 (
 (
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMessageHandlerRule());
+	            $current = createModelElement(grammarAccess.getInMessageHandlerRule());
 	        }
         }
-	otherlv_1=RULE_ID
+	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_1, grammarAccess.getMessageHandlerAccess().getMsgMessageCrossReference_1_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getInMessageHandlerAccess().getMsgMessageCrossReference_2_0()); 
 	}
 
 )
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getInMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0()); 
 	    }
-		lv_detailCode_2_0=ruleDetailCode		{
+		lv_detailCode_3_0=ruleDetailCode		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMessageHandlerRule());
+	            $current = createModelElementForParent(grammarAccess.getInMessageHandlerRule());
 	        }
        		set(
        			$current, 
        			"detailCode",
-        		lv_detailCode_2_0, 
+        		lv_detailCode_3_0, 
+        		"DetailCode");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleOutMessageHandler
+entryRuleOutMessageHandler returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOutMessageHandlerRule()); }
+	 iv_ruleOutMessageHandler=ruleOutMessageHandler 
+	 { $current=$iv_ruleOutMessageHandler.current; } 
+	 EOF 
+;
+
+// Rule OutMessageHandler
+ruleOutMessageHandler returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='handle' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getOutMessageHandlerAccess().getHandleKeyword_0());
+    }
+	otherlv_1='outgoing' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getOutMessageHandlerAccess().getOutgoingKeyword_1());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOutMessageHandlerRule());
+	        }
+        }
+	otherlv_2=RULE_ID
+	{
+		newLeafNode(otherlv_2, grammarAccess.getOutMessageHandlerAccess().getMsgMessageCrossReference_2_0()); 
+	}
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOutMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0()); 
+	    }
+		lv_detailCode_3_0=ruleDetailCode		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOutMessageHandlerRule());
+	        }
+       		set(
+       			$current, 
+       			"detailCode",
+        		lv_detailCode_3_0, 
         		"DetailCode");
 	        afterParserOrEnumRuleCall();
 	    }

@@ -128,14 +128,14 @@ RoomModel room.basic.service.timing {
 				
 				public TimerTask getTask() { return task; }"
 			}
-			handle internalStart {
+			handle incoming internalStart {
 			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
 				task = new FireTimeoutTask(td.time, td.id, this);
 				getActor().receiveEvent(this, IN_internalStart, td);"
 			}
-			handle Kill {
+			handle incoming Kill {
 			"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
@@ -150,7 +150,7 @@ RoomModel room.basic.service.timing {
 			"private int currentId = 0;
 			private boolean active = false;"
 			}
-			handle internalTimeout {
+			handle outgoing internalTimeout {
 			"//conjugate PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData) dataMsg.getData();
@@ -158,7 +158,7 @@ RoomModel room.basic.service.timing {
 					getActor().receiveEvent(this, OUT_timerTick, null);
 				}"
 			}
-			handle Kill {
+			handle incoming Kill {
 			"//conjugate PortClass kill
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Kill]);
@@ -229,14 +229,14 @@ RoomModel room.basic.service.timing {
 				
 				public TimerTask getTask() { return task; }"
 			}
-			handle internalStart {
+			handle incoming internalStart {
 			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
 				task = new FireTimeoutTask(td.time, td.id, this);
 				getActor().receiveEvent(this, IN_internalStart, td);"
 			}
-			handle Kill {
+			handle incoming Kill {
 			"//regular PortClass handle kill
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
@@ -251,7 +251,7 @@ RoomModel room.basic.service.timing {
 			"private int currentId = 0;
 			private boolean active = false;"
 			}
-			handle internalTimeout {
+			handle outgoing internalTimeout {
 			"//conjugate PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData) dataMsg.getData();
@@ -260,7 +260,7 @@ RoomModel room.basic.service.timing {
 					getActor().receiveEvent(this, OUT_timeoutTick, null);
 				}"
 			}
-			handle Kill {
+			handle incoming Kill {
 			"//conjugate PortClass kill
 				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
 						getPeerAddress(), messageStrings[IN_Kill]);

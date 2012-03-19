@@ -28,12 +28,12 @@ public class ATimingService extends ActorClassBase {
 	//--------------------- ports
 	//--------------------- saps
 	//--------------------- services
-	protected PTimerReplPort timer = null;
 	protected PTimeoutReplPort timeout = null;
+	protected PTimerReplPort timer = null;
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_timer = 1;
-	public static final int IFITEM_timeout = 2;
+	public static final int IFITEM_timeout = 1;
+	public static final int IFITEM_timer = 2;
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -53,8 +53,8 @@ public class ATimingService extends ActorClassBase {
 		// own ports
 		// own saps
 		// own service implementations
-		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
 		timeout = new PTimeoutReplPort(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
+		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
 	}
 	
 
@@ -80,15 +80,15 @@ public class ATimingService extends ActorClassBase {
 	public static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
 	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2 = 2;
 	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4 = 3;
-	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1 = 4;
-	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3 = 5;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimeout_tr1 = 4;
+	public static final int CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimer_tr3 = 5;
 	
 	/* triggers */
 	public static final int POLLING = 0;
 	public static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
-	public static final int TRIG_timeout__Start = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Start;
+	public static final int TRIG_timeout__internalStart = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_internalStart;
 	public static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
-	public static final int TRIG_timer__Start = IFITEM_timer + EVT_SHIFT*PTimer.IN_Start;
+	public static final int TRIG_timer__internalStart = IFITEM_timer + EVT_SHIFT*PTimer.IN_internalStart;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","Operational"
@@ -114,17 +114,24 @@ public class ATimingService extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__Operational() {
 		timerService = new Timer();
 	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(InterfaceItemBase ifitem, int time_ms) {
+	protected void action_TRANS_Operational_TO_Operational_BY_internalStarttimeout_tr1(InterfaceItemBase ifitem, TimerData td) {
 		// start timeout
 		taskCount++;
 		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.schedule(((PTimeoutPort)ifitem).getTask(), time_ms);
+		timerService.schedule(((PTimeoutPort)ifitem).getTask(), ((TimerData)td).getTime());
 	}
-	protected void action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(InterfaceItemBase ifitem, int time_ms) {
+	protected void action_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2(InterfaceItemBase ifitem) {
+		// nothing to do to kill timer (handled by timer)
+	}
+	protected void action_TRANS_Operational_TO_Operational_BY_internalStarttimer_tr3(InterfaceItemBase ifitem, TimerData td) {
 		// start timer
 		taskCount++;
 		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(), time_ms, time_ms);
+		int t = td.getTime();
+		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(),t,t);
+	}
+	protected void action_TRANS_Operational_TO_Operational_BY_Killtimer_tr4(InterfaceItemBase ifitem) {
+		// nothing to do to kill timer (handled by timer)
 	}
 	
 	/**
@@ -159,24 +166,26 @@ public class ATimingService extends ActorClassBase {
 				action_TRANS_INITIAL_TO__Operational();
 				return STATE_Operational;
 			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1:
+			case CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimeout_tr1:
 			{
-				int time_ms = (Integer) generic_data;
-				action_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1(ifitem, time_ms);
+				TimerData td = (TimerData) generic_data;
+				action_TRANS_Operational_TO_Operational_BY_internalStarttimeout_tr1(ifitem, td);
 				return STATE_Operational;
 			}
 			case CHAIN_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2:
 			{
+				action_TRANS_Operational_TO_Operational_BY_Killtimeout_tr2(ifitem);
 				return STATE_Operational;
 			}
-			case CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3:
+			case CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimer_tr3:
 			{
-				int time_ms = (Integer) generic_data;
-				action_TRANS_Operational_TO_Operational_BY_Starttimer_tr3(ifitem, time_ms);
+				TimerData td = (TimerData) generic_data;
+				action_TRANS_Operational_TO_Operational_BY_internalStarttimer_tr3(ifitem, td);
 				return STATE_Operational;
 			}
 			case CHAIN_TRANS_Operational_TO_Operational_BY_Killtimer_tr4:
 			{
+				action_TRANS_Operational_TO_Operational_BY_Killtimer_tr4(ifitem);
 				return STATE_Operational;
 			}
 		}
@@ -224,9 +233,9 @@ public class ATimingService extends ActorClassBase {
 			switch (this.state) {
 				case STATE_Operational:
 					switch(trigger) {
-						case TRIG_timeout__Start:
+						case TRIG_timeout__internalStart:
 							{
-								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimeout_tr1;
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimeout_tr1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -236,9 +245,9 @@ public class ATimingService extends ActorClassBase {
 								catching_state = STATE_TOP;
 							}
 						break;
-						case TRIG_timer__Start:
+						case TRIG_timer__internalStart:
 							{
-								chain = CHAIN_TRANS_Operational_TO_Operational_BY_Starttimer_tr3;
+								chain = CHAIN_TRANS_Operational_TO_Operational_BY_internalStarttimer_tr3;
 								catching_state = STATE_TOP;
 							}
 						break;

@@ -174,6 +174,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createMessageHandlerAdapter();
       }
       @Override
+      public Adapter caseInMessageHandler(InMessageHandler object)
+      {
+        return createInMessageHandlerAdapter();
+      }
+      @Override
+      public Adapter caseOutMessageHandler(OutMessageHandler object)
+      {
+        return createOutMessageHandlerAdapter();
+      }
+      @Override
       public Adapter caseProtocolSemantics(ProtocolSemantics object)
       {
         return createProtocolSemanticsAdapter();
@@ -751,6 +761,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMessageHandlerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InMessageHandler <em>In Message Handler</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.InMessageHandler
+   * @generated
+   */
+  public Adapter createInMessageHandlerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutMessageHandler <em>Out Message Handler</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.OutMessageHandler
+   * @generated
+   */
+  public Adapter createOutMessageHandlerAdapter()
   {
     return null;
   }

@@ -1224,38 +1224,102 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class MessageHandlerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MessageHandler");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHandleKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cMsgAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cMsgMessageCrossReference_1_0 = (CrossReference)cMsgAssignment_1.eContents().get(0);
-		private final RuleCall cMsgMessageIDTerminalRuleCall_1_0_1 = (RuleCall)cMsgMessageCrossReference_1_0.eContents().get(1);
-		private final Assignment cDetailCodeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDetailCodeDetailCodeParserRuleCall_2_0 = (RuleCall)cDetailCodeAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cInMessageHandlerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cOutMessageHandlerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//MessageHandler:
-		//	"handle" msg=[Message] detailCode=DetailCode;
+		//	InMessageHandler | OutMessageHandler;
 		public ParserRule getRule() { return rule; }
 
-		//"handle" msg=[Message] detailCode=DetailCode
+		//InMessageHandler | OutMessageHandler
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//InMessageHandler
+		public RuleCall getInMessageHandlerParserRuleCall_0() { return cInMessageHandlerParserRuleCall_0; }
+
+		//OutMessageHandler
+		public RuleCall getOutMessageHandlerParserRuleCall_1() { return cOutMessageHandlerParserRuleCall_1; }
+	}
+
+	public class InMessageHandlerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InMessageHandler");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHandleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cIncomingKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
+		private final Assignment cDetailCodeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
+		
+		//InMessageHandler:
+		//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
+		public ParserRule getRule() { return rule; }
+
+		//"handle" "incoming" msg=[Message] detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
 		//"handle"
 		public Keyword getHandleKeyword_0() { return cHandleKeyword_0; }
 
+		//"incoming"
+		public Keyword getIncomingKeyword_1() { return cIncomingKeyword_1; }
+
 		//msg=[Message]
-		public Assignment getMsgAssignment_1() { return cMsgAssignment_1; }
+		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
 		//[Message]
-		public CrossReference getMsgMessageCrossReference_1_0() { return cMsgMessageCrossReference_1_0; }
+		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
 
 		//ID
-		public RuleCall getMsgMessageIDTerminalRuleCall_1_0_1() { return cMsgMessageIDTerminalRuleCall_1_0_1; }
+		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
 
 		//detailCode=DetailCode
-		public Assignment getDetailCodeAssignment_2() { return cDetailCodeAssignment_2; }
+		public Assignment getDetailCodeAssignment_3() { return cDetailCodeAssignment_3; }
 
 		//DetailCode
-		public RuleCall getDetailCodeDetailCodeParserRuleCall_2_0() { return cDetailCodeDetailCodeParserRuleCall_2_0; }
+		public RuleCall getDetailCodeDetailCodeParserRuleCall_3_0() { return cDetailCodeDetailCodeParserRuleCall_3_0; }
+	}
+
+	public class OutMessageHandlerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OutMessageHandler");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHandleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOutgoingKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
+		private final Assignment cDetailCodeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
+		
+		//OutMessageHandler:
+		//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
+		public ParserRule getRule() { return rule; }
+
+		//"handle" "outgoing" msg=[Message] detailCode=DetailCode
+		public Group getGroup() { return cGroup; }
+
+		//"handle"
+		public Keyword getHandleKeyword_0() { return cHandleKeyword_0; }
+
+		//"outgoing"
+		public Keyword getOutgoingKeyword_1() { return cOutgoingKeyword_1; }
+
+		//msg=[Message]
+		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
+
+		//[Message]
+		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
+
+		//ID
+		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
+
+		//detailCode=DetailCode
+		public Assignment getDetailCodeAssignment_3() { return cDetailCodeAssignment_3; }
+
+		//DetailCode
+		public RuleCall getDetailCodeDetailCodeParserRuleCall_3_0() { return cDetailCodeDetailCodeParserRuleCall_3_0; }
 	}
 
 	public class ProtocolSemanticsElements extends AbstractParserRuleElementFinder {
@@ -2580,8 +2644,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
-		//// TODOHRR: support replicated actors
-		//
 		//ActorRef:
 		//	"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
@@ -4376,6 +4438,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private MessageElements pMessage;
 	private PortClassElements pPortClass;
 	private MessageHandlerElements pMessageHandler;
+	private InMessageHandlerElements pInMessageHandler;
+	private OutMessageHandlerElements pOutMessageHandler;
 	private ProtocolSemanticsElements pProtocolSemantics;
 	private SemanticsRuleElements pSemanticsRule;
 	private ActorCommunicationTypeElements unknownRuleActorCommunicationType;
@@ -4670,13 +4734,33 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MessageHandler:
-	//	"handle" msg=[Message] detailCode=DetailCode;
+	//	InMessageHandler | OutMessageHandler;
 	public MessageHandlerElements getMessageHandlerAccess() {
 		return (pMessageHandler != null) ? pMessageHandler : (pMessageHandler = new MessageHandlerElements());
 	}
 	
 	public ParserRule getMessageHandlerRule() {
 		return getMessageHandlerAccess().getRule();
+	}
+
+	//InMessageHandler:
+	//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
+	public InMessageHandlerElements getInMessageHandlerAccess() {
+		return (pInMessageHandler != null) ? pInMessageHandler : (pInMessageHandler = new InMessageHandlerElements());
+	}
+	
+	public ParserRule getInMessageHandlerRule() {
+		return getInMessageHandlerAccess().getRule();
+	}
+
+	//OutMessageHandler:
+	//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
+	public OutMessageHandlerElements getOutMessageHandlerAccess() {
+		return (pOutMessageHandler != null) ? pOutMessageHandler : (pOutMessageHandler = new OutMessageHandlerElements());
+	}
+	
+	public ParserRule getOutMessageHandlerRule() {
+		return getOutMessageHandlerAccess().getRule();
 	}
 
 	//ProtocolSemantics:
@@ -4945,8 +5029,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSPPointAccess().getRule();
 	}
 
-	//// TODOHRR: support replicated actors
-	//
 	//ActorRef:
 	//	"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {

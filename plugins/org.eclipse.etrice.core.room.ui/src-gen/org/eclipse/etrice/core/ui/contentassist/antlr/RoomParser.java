@@ -48,6 +48,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5(), "rule__PortOperation__Alternatives_5");
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5_0_1(), "rule__PortOperation__Alternatives_5_0_1");
 					put(grammarAccess.getPortClassAccess().getAlternatives_2(), "rule__PortClass__Alternatives_2");
+					put(grammarAccess.getMessageHandlerAccess().getAlternatives(), "rule__MessageHandler__Alternatives");
 					put(grammarAccess.getSemanticsRuleAccess().getAlternatives_1_1(), "rule__SemanticsRule__Alternatives_1_1");
 					put(grammarAccess.getActorClassAccess().getAlternatives_7_6(), "rule__ActorClass__Alternatives_7_6");
 					put(grammarAccess.getInterfaceItemAccess().getAlternatives(), "rule__InterfaceItem__Alternatives");
@@ -102,7 +103,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageAccess().getGroup(), "rule__Message__Group__0");
 					put(grammarAccess.getPortClassAccess().getGroup(), "rule__PortClass__Group__0");
 					put(grammarAccess.getPortClassAccess().getGroup_1(), "rule__PortClass__Group_1__0");
-					put(grammarAccess.getMessageHandlerAccess().getGroup(), "rule__MessageHandler__Group__0");
+					put(grammarAccess.getInMessageHandlerAccess().getGroup(), "rule__InMessageHandler__Group__0");
+					put(grammarAccess.getOutMessageHandlerAccess().getGroup(), "rule__OutMessageHandler__Group__0");
 					put(grammarAccess.getProtocolSemanticsAccess().getGroup(), "rule__ProtocolSemantics__Group__0");
 					put(grammarAccess.getSemanticsRuleAccess().getGroup(), "rule__SemanticsRule__Group__0");
 					put(grammarAccess.getSemanticsRuleAccess().getGroup_1(), "rule__SemanticsRule__Group_1__0");
@@ -255,8 +257,10 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortClassAccess().getAttributesAssignment_2_0(), "rule__PortClass__AttributesAssignment_2_0");
 					put(grammarAccess.getPortClassAccess().getOperationsAssignment_2_1(), "rule__PortClass__OperationsAssignment_2_1");
 					put(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_2_2(), "rule__PortClass__MsgHandlersAssignment_2_2");
-					put(grammarAccess.getMessageHandlerAccess().getMsgAssignment_1(), "rule__MessageHandler__MsgAssignment_1");
-					put(grammarAccess.getMessageHandlerAccess().getDetailCodeAssignment_2(), "rule__MessageHandler__DetailCodeAssignment_2");
+					put(grammarAccess.getInMessageHandlerAccess().getMsgAssignment_2(), "rule__InMessageHandler__MsgAssignment_2");
+					put(grammarAccess.getInMessageHandlerAccess().getDetailCodeAssignment_3(), "rule__InMessageHandler__DetailCodeAssignment_3");
+					put(grammarAccess.getOutMessageHandlerAccess().getMsgAssignment_2(), "rule__OutMessageHandler__MsgAssignment_2");
+					put(grammarAccess.getOutMessageHandlerAccess().getDetailCodeAssignment_3(), "rule__OutMessageHandler__DetailCodeAssignment_3");
 					put(grammarAccess.getProtocolSemanticsAccess().getRulesAssignment_3(), "rule__ProtocolSemantics__RulesAssignment_3");
 					put(grammarAccess.getSemanticsRuleAccess().getMsgAssignment_0(), "rule__SemanticsRule__MsgAssignment_0");
 					put(grammarAccess.getSemanticsRuleAccess().getFollowUpsAssignment_1_1_0(), "rule__SemanticsRule__FollowUpsAssignment_1_1_0");

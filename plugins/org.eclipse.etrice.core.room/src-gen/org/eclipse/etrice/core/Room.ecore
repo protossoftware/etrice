@@ -151,6 +151,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailCode" eType="#//DetailCode"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InMessageHandler" eSuperTypes="#//MessageHandler"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutMessageHandler" eSuperTypes="#//MessageHandler"/>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolSemantics">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//SemanticsRule" containment="true"/>

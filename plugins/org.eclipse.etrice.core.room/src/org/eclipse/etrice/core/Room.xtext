@@ -120,8 +120,15 @@ PortClass:
 		msgHandlers+=MessageHandler)+
 	'}';
 
-MessageHandler:
-	'handle' msg=[Message|ID]
+MessageHandler: InMessageHandler|OutMessageHandler;
+
+InMessageHandler:
+	'handle' 'incoming' msg=[Message|ID]
+		detailCode=DetailCode
+	;
+
+OutMessageHandler:
+	'handle' 'outgoing' msg=[Message|ID]
 		detailCode=DetailCode
 	;
 
@@ -260,7 +267,6 @@ SPPoint:
 	ref=[ActorContainerRef|ID] '.'  service=[SPPRef|ID]
 ;
 
-// TODOHRR: support replicated actors
 ActorRef:
 	'ActorRef' name=ID ':' type=[ActorClass|FQN] (docu=Documentation)?;
 

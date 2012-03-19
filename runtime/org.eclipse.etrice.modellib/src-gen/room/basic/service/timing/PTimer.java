@@ -16,18 +16,19 @@ public class PTimer {
 	// message IDs
 	public static final int MSG_MIN = 0;
 	public static final int OUT_timerTick = 1;
-	public static final int IN_Start = 2;
+	public static final int OUT_internalTimeout = 2;
 	public static final int IN_Kill = 3;
-	public static final int MSG_MAX = 4;
+	public static final int IN_internalStart = 4;
+	public static final int MSG_MAX = 5;
 
 	/*--------------------- begin user code ---------------------*/
-		static protected class FireTimerTask extends TimerTask {
+		static protected class FireTimeoutTask extends TimerTask {
 		
 					private int time;
 					private int id;
 					private PTimerPort port;
 		
-					public FireTimerTask(int time, int id, PTimerPort port) {
+					public FireTimeoutTask(int time, int id, PTimerPort port) {
 						this.time = time;
 						this.id = id;
 						this.port = port;
@@ -35,7 +36,8 @@ public class PTimer {
 		
 					@Override
 					public void run() {
-						port.timer(id);
+						TimerData td = new TimerData(0,id);
+						port.internalTimeout(td);
 					}
 					
 					public int getTime() {
@@ -46,18 +48,9 @@ public class PTimer {
 						return id;
 					}
 				}
-				
-				static protected class TimerData {
-					int time;
-					int id;
-					public TimerData(int time, int id) {
-						this.time = time;
-						this.id = id;
-					}
-				}
 	/*--------------------- end user code ---------------------*/
 
-	private static String messageStrings[] = {"MIN", "timerTick", "Start","Kill","MAX"};
+	private static String messageStrings[] = {"MIN", "timerTick","internalTimeout", "Kill","internalStart","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -73,7 +66,7 @@ public class PTimer {
 	// port class
 	static public class PTimerPort extends PortBase {
 		/*--------------------- begin user code ---------------------*/
-			private FireTimerTask task = null;
+			private FireTimeoutTask task = null;
 						
 						public TimerTask getTask() { return task; }
 		/*--------------------- end user code ---------------------*/
@@ -99,21 +92,21 @@ public class PTimer {
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
-						case IN_Start:
+						case IN_internalStart:
 						{
-							//regular PortClass handle start
+							
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 											TimerData td = (TimerData)dataMsg.getData();
-											task = new FireTimerTask(td.time, td.id, this);
-											getActor().receiveEvent(this, IN_Start, td.time);
+											task = new FireTimeoutTask(td.time, td.id, this);
+											getActor().receiveEvent(this, IN_internalStart, td);
 						}
 						break;
 						case IN_Kill:
 						{
 							//regular PortClass handle kill
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-											int id = (Integer)dataMsg.getData();
-											if (task!=null && task.getId()==id) {
+											TimerData td = (TimerData)dataMsg.getData();
+											if (task!=null && task.getId()==td.getId()) {
 												task.cancel();
 											}
 						}
@@ -129,14 +122,6 @@ public class PTimer {
 	
 		/*--------------------- attributes ---------------------*/
 		/*--------------------- operations ---------------------*/
-		public void timer(Integer id) {
-			//regular PortClass Operation timer
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[OUT_timerTick]);
-				
-							getPeerMsgReceiver().receive(
-									new EventWithDataMessage(getPeerAddress(), OUT_timerTick, id));
-		}
 		
 		// sent messages
 		public void timerTick() {
@@ -146,6 +131,16 @@ public class PTimer {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timerTick));
 				}
+		private void internalTimeout(TimerData td) {
+			if (messageStrings[ OUT_internalTimeout] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_internalTimeout]);
+			}
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimeout, td.deepCopy()));
+		}
+		public void internalTimeout(int time, int id) {
+			internalTimeout(new TimerData(time, id));
+		}
 	}
 	
 	// replicated port class
@@ -181,6 +176,11 @@ public class PTimer {
 				ports.get(i).timerTick();
 			}
 		}
+		private void internalTimeout(TimerData td){
+			for (int i=0; i<replication; ++i) {
+				ports.get(i).internalTimeout( td);
+			}
+		}
 	}
 	
 	
@@ -188,7 +188,7 @@ public class PTimer {
 	static public class PTimerConjPort extends PortBase {
 		/*--------------------- begin user code ---------------------*/
 			private int currentId = 0;
-						private boolean active = false;
+					private boolean active = false;
 		/*--------------------- end user code ---------------------*/
 		// constructors
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
@@ -212,13 +212,13 @@ public class PTimer {
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
-						case OUT_timerTick:
+						case OUT_internalTimeout:
 						{
-							//conjugate PortClass handle timer
+							//conjugate PortClass handle timeout
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-											int id = (Integer)dataMsg.getData();
-											if (active && id==currentId) {
-												getActor().receiveEvent(this, msg.getEvtId(), null);
+											TimerData td = (TimerData) dataMsg.getData();
+											if (active && td.getId()==currentId) {
+												getActor().receiveEvent(this, OUT_timerTick, null);
 											}
 						}
 						break;
@@ -233,22 +233,16 @@ public class PTimer {
 	
 		/*--------------------- attributes ---------------------*/
 		/*--------------------- operations ---------------------*/
+		public void Start(int time_ms) {
+			
+							if (active) return;
+							active = true;
+			
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, new TimerData(time_ms,++currentId)));
+		}
 		
 		// sent messages
-		public void Start(int time_ms) {
-				//conjugate PortClass handle start
-							if (active)
-								return;
-								
-							active = true;
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[IN_Start]);
-				
-							getPeerMsgReceiver()
-									.receive(
-											new EventWithDataMessage(getPeerAddress(),
-													IN_Start, new TimerData(time_ms, ++currentId)));
-		}
 		public void Kill() {
 				//conjugate PortClass kill
 							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
@@ -259,6 +253,16 @@ public class PTimer {
 								getPeerMsgReceiver().receive(
 										new EventWithDataMessage(getPeerAddress(), IN_Kill, currentId));
 							}
+		}
+		private void internalStart(TimerData td) {
+			if (messageStrings[ IN_internalStart] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
+			}
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, td.deepCopy()));
+		}
+		public void internalStart(int time, int id) {
+			internalStart(new TimerData(time, id));
 		}
 	}
 	
@@ -290,14 +294,14 @@ public class PTimer {
 		}
 		
 		// incoming messages
-		public void Start(int time_ms){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).Start( time_ms);
-			}
-		}
 		public void Kill(){
 			for (int i=0; i<replication; ++i) {
 				ports.get(i).Kill();
+			}
+		}
+		private void internalStart(TimerData td){
+			for (int i=0; i<replication; ++i) {
+				ports.get(i).internalStart( td);
 			}
 		}
 	}

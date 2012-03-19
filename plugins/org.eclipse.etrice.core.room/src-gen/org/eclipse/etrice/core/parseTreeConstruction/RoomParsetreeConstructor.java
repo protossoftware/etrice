@@ -49,63 +49,65 @@ protected class ThisRootNode extends RootToken {
 			case 15: return new ProtocolClass_Group(this, this, 15, inst);
 			case 16: return new Message_Group(this, this, 16, inst);
 			case 17: return new PortClass_Group(this, this, 17, inst);
-			case 18: return new MessageHandler_Group(this, this, 18, inst);
-			case 19: return new ProtocolSemantics_Group(this, this, 19, inst);
-			case 20: return new SemanticsRule_Group(this, this, 20, inst);
-			case 21: return new ActorClass_Group(this, this, 21, inst);
-			case 22: return new InterfaceItem_Alternatives(this, this, 22, inst);
-			case 23: return new Port_Group(this, this, 23, inst);
-			case 24: return new ExternalPort_Group(this, this, 24, inst);
-			case 25: return new SAPRef_Group(this, this, 25, inst);
-			case 26: return new SPPRef_Group(this, this, 26, inst);
-			case 27: return new ServiceImplementation_Group(this, this, 27, inst);
-			case 28: return new LogicalSystem_Group(this, this, 28, inst);
-			case 29: return new ActorContainerRef_Alternatives(this, this, 29, inst);
-			case 30: return new SubSystemRef_Group(this, this, 30, inst);
-			case 31: return new SubSystemClass_Group(this, this, 31, inst);
-			case 32: return new LogicalThread_Group(this, this, 32, inst);
-			case 33: return new ActorInstancePath_Group(this, this, 33, inst);
-			case 34: return new Binding_Group(this, this, 34, inst);
-			case 35: return new BindingEndPoint_Group(this, this, 35, inst);
-			case 36: return new LayerConnection_Group(this, this, 36, inst);
-			case 37: return new SAPoint_Alternatives(this, this, 37, inst);
-			case 38: return new RefSAPoint_Group(this, this, 38, inst);
-			case 39: return new RelaySAPoint_Group(this, this, 39, inst);
-			case 40: return new SPPoint_Group(this, this, 40, inst);
-			case 41: return new ActorRef_Group(this, this, 41, inst);
-			case 42: return new StateGraphNode_Alternatives(this, this, 42, inst);
-			case 43: return new StateGraphItem_Alternatives(this, this, 43, inst);
-			case 44: return new State_Alternatives(this, this, 44, inst);
-			case 45: return new StateGraph_Group(this, this, 45, inst);
-			case 46: return new StateMachine_Group(this, this, 46, inst);
-			case 47: return new BaseState_Group(this, this, 47, inst);
-			case 48: return new RefinedState_Group(this, this, 48, inst);
-			case 49: return new DetailCode_Group(this, this, 49, inst);
-			case 50: return new TrPoint_Alternatives(this, this, 50, inst);
-			case 51: return new TransitionPoint_Group(this, this, 51, inst);
-			case 52: return new EntryPoint_Group(this, this, 52, inst);
-			case 53: return new ExitPoint_Group(this, this, 53, inst);
-			case 54: return new ChoicePoint_Group(this, this, 54, inst);
-			case 55: return new Transition_Alternatives(this, this, 55, inst);
-			case 56: return new NonInitialTransition_Alternatives(this, this, 56, inst);
-			case 57: return new TransitionChainStartTransition_Alternatives(this, this, 57, inst);
-			case 58: return new InitialTransition_Group(this, this, 58, inst);
-			case 59: return new ContinuationTransition_Group(this, this, 59, inst);
-			case 60: return new TriggeredTransition_Group(this, this, 60, inst);
-			case 61: return new GuardedTransition_Group(this, this, 61, inst);
-			case 62: return new CPBranchTransition_Group(this, this, 62, inst);
-			case 63: return new TransitionTerminal_Alternatives(this, this, 63, inst);
-			case 64: return new StateTerminal_StateAssignment(this, this, 64, inst);
-			case 65: return new TrPointTerminal_Group(this, this, 65, inst);
-			case 66: return new SubStateTrPointTerminal_Group(this, this, 66, inst);
-			case 67: return new ChoicepointTerminal_Group(this, this, 67, inst);
-			case 68: return new Trigger_Group(this, this, 68, inst);
-			case 69: return new MessageFromIf_Group(this, this, 69, inst);
-			case 70: return new Guard_Group(this, this, 70, inst);
-			case 71: return new Documentation_Group(this, this, 71, inst);
-			case 72: return new Annotation_Group(this, this, 72, inst);
-			case 73: return new KeyValue_Group(this, this, 73, inst);
-			case 74: return new Import_Group(this, this, 74, inst);
+			case 18: return new MessageHandler_Alternatives(this, this, 18, inst);
+			case 19: return new InMessageHandler_Group(this, this, 19, inst);
+			case 20: return new OutMessageHandler_Group(this, this, 20, inst);
+			case 21: return new ProtocolSemantics_Group(this, this, 21, inst);
+			case 22: return new SemanticsRule_Group(this, this, 22, inst);
+			case 23: return new ActorClass_Group(this, this, 23, inst);
+			case 24: return new InterfaceItem_Alternatives(this, this, 24, inst);
+			case 25: return new Port_Group(this, this, 25, inst);
+			case 26: return new ExternalPort_Group(this, this, 26, inst);
+			case 27: return new SAPRef_Group(this, this, 27, inst);
+			case 28: return new SPPRef_Group(this, this, 28, inst);
+			case 29: return new ServiceImplementation_Group(this, this, 29, inst);
+			case 30: return new LogicalSystem_Group(this, this, 30, inst);
+			case 31: return new ActorContainerRef_Alternatives(this, this, 31, inst);
+			case 32: return new SubSystemRef_Group(this, this, 32, inst);
+			case 33: return new SubSystemClass_Group(this, this, 33, inst);
+			case 34: return new LogicalThread_Group(this, this, 34, inst);
+			case 35: return new ActorInstancePath_Group(this, this, 35, inst);
+			case 36: return new Binding_Group(this, this, 36, inst);
+			case 37: return new BindingEndPoint_Group(this, this, 37, inst);
+			case 38: return new LayerConnection_Group(this, this, 38, inst);
+			case 39: return new SAPoint_Alternatives(this, this, 39, inst);
+			case 40: return new RefSAPoint_Group(this, this, 40, inst);
+			case 41: return new RelaySAPoint_Group(this, this, 41, inst);
+			case 42: return new SPPoint_Group(this, this, 42, inst);
+			case 43: return new ActorRef_Group(this, this, 43, inst);
+			case 44: return new StateGraphNode_Alternatives(this, this, 44, inst);
+			case 45: return new StateGraphItem_Alternatives(this, this, 45, inst);
+			case 46: return new State_Alternatives(this, this, 46, inst);
+			case 47: return new StateGraph_Group(this, this, 47, inst);
+			case 48: return new StateMachine_Group(this, this, 48, inst);
+			case 49: return new BaseState_Group(this, this, 49, inst);
+			case 50: return new RefinedState_Group(this, this, 50, inst);
+			case 51: return new DetailCode_Group(this, this, 51, inst);
+			case 52: return new TrPoint_Alternatives(this, this, 52, inst);
+			case 53: return new TransitionPoint_Group(this, this, 53, inst);
+			case 54: return new EntryPoint_Group(this, this, 54, inst);
+			case 55: return new ExitPoint_Group(this, this, 55, inst);
+			case 56: return new ChoicePoint_Group(this, this, 56, inst);
+			case 57: return new Transition_Alternatives(this, this, 57, inst);
+			case 58: return new NonInitialTransition_Alternatives(this, this, 58, inst);
+			case 59: return new TransitionChainStartTransition_Alternatives(this, this, 59, inst);
+			case 60: return new InitialTransition_Group(this, this, 60, inst);
+			case 61: return new ContinuationTransition_Group(this, this, 61, inst);
+			case 62: return new TriggeredTransition_Group(this, this, 62, inst);
+			case 63: return new GuardedTransition_Group(this, this, 63, inst);
+			case 64: return new CPBranchTransition_Group(this, this, 64, inst);
+			case 65: return new TransitionTerminal_Alternatives(this, this, 65, inst);
+			case 66: return new StateTerminal_StateAssignment(this, this, 66, inst);
+			case 67: return new TrPointTerminal_Group(this, this, 67, inst);
+			case 68: return new SubStateTrPointTerminal_Group(this, this, 68, inst);
+			case 69: return new ChoicepointTerminal_Group(this, this, 69, inst);
+			case 70: return new Trigger_Group(this, this, 70, inst);
+			case 71: return new MessageFromIf_Group(this, this, 71, inst);
+			case 72: return new Guard_Group(this, this, 72, inst);
+			case 73: return new Documentation_Group(this, this, 73, inst);
+			case 74: return new Annotation_Group(this, this, 74, inst);
+			case 75: return new KeyValue_Group(this, this, 75, inst);
+			case 76: return new Import_Group(this, this, 76, inst);
 			default: return null;
 		}	
 	}	
@@ -6153,7 +6155,7 @@ protected class PortClass_MsgHandlersAssignment_2_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new MessageHandler_Group(this, this, 0, inst);
+			case 0: return new MessageHandler_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6216,33 +6218,147 @@ protected class PortClass_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule MessageHandler ****************
  *
  * MessageHandler:
- * 	"handle" msg=[Message] detailCode=DetailCode;
+ * 	InMessageHandler | OutMessageHandler;
  *
  **/
 
-// "handle" msg=[Message] detailCode=DetailCode
-protected class MessageHandler_Group extends GroupToken {
-	
-	public MessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// InMessageHandler | OutMessageHandler
+protected class MessageHandler_Alternatives extends AlternativesToken {
+
+	public MessageHandler_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getMessageHandlerAccess().getGroup();
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getMessageHandlerAccess().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new MessageHandler_DetailCodeAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new MessageHandler_InMessageHandlerParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new MessageHandler_OutMessageHandlerParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getMessageHandlerRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getInMessageHandlerRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getOutMessageHandlerRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// InMessageHandler
+protected class MessageHandler_InMessageHandlerParserRuleCall_0 extends RuleCallToken {
+	
+	public MessageHandler_InMessageHandlerParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getMessageHandlerAccess().getInMessageHandlerParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InMessageHandler_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInMessageHandlerRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(InMessageHandler_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// OutMessageHandler
+protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCallToken {
+	
+	public MessageHandler_OutMessageHandlerParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getMessageHandlerAccess().getOutMessageHandlerParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new OutMessageHandler_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOutMessageHandlerRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(OutMessageHandler_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule MessageHandler ****************/
+
+
+/************ begin Rule InMessageHandler ****************
+ *
+ * InMessageHandler:
+ * 	"handle" "incoming" msg=[Message] detailCode=DetailCode;
+ *
+ **/
+
+// "handle" "incoming" msg=[Message] detailCode=DetailCode
+protected class InMessageHandler_Group extends GroupToken {
+	
+	public InMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getInMessageHandlerAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InMessageHandler_DetailCodeAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInMessageHandlerRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -6250,15 +6366,15 @@ protected class MessageHandler_Group extends GroupToken {
 }
 
 // "handle"
-protected class MessageHandler_HandleKeyword_0 extends KeywordToken  {
+protected class InMessageHandler_HandleKeyword_0 extends KeywordToken  {
 	
-	public MessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMessageHandlerAccess().getHandleKeyword_0();
+		return grammarAccess.getInMessageHandlerAccess().getHandleKeyword_0();
 	}
 
     @Override
@@ -6270,22 +6386,44 @@ protected class MessageHandler_HandleKeyword_0 extends KeywordToken  {
 
 }
 
-// msg=[Message]
-protected class MessageHandler_MsgAssignment_1 extends AssignmentToken  {
+// "incoming"
+protected class InMessageHandler_IncomingKeyword_1 extends KeywordToken  {
 	
-	public MessageHandler_MsgAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InMessageHandler_IncomingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getMessageHandlerAccess().getMsgAssignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getInMessageHandlerAccess().getIncomingKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new MessageHandler_HandleKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InMessageHandler_HandleKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// msg=[Message]
+protected class InMessageHandler_MsgAssignment_2 extends AssignmentToken  {
+	
+	public InMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getInMessageHandlerAccess().getMsgAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InMessageHandler_IncomingKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6296,9 +6434,9 @@ protected class MessageHandler_MsgAssignment_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msg");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMessageHandlerAccess().getMsgMessageCrossReference_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getInMessageHandlerAccess().getMsgMessageCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getMessageHandlerAccess().getMsgMessageCrossReference_1_0(); 
+				element = grammarAccess.getInMessageHandlerAccess().getMsgMessageCrossReference_2_0(); 
 				return obj;
 			}
 		}
@@ -6308,15 +6446,15 @@ protected class MessageHandler_MsgAssignment_1 extends AssignmentToken  {
 }
 
 // detailCode=DetailCode
-protected class MessageHandler_DetailCodeAssignment_2 extends AssignmentToken  {
+protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
 	
-	public MessageHandler_DetailCodeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMessageHandlerAccess().getDetailCodeAssignment_2();
+		return grammarAccess.getInMessageHandlerAccess().getDetailCodeAssignment_3();
 	}
 
     @Override
@@ -6335,7 +6473,7 @@ protected class MessageHandler_DetailCodeAssignment_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDetailCodeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_2_0(); 
+				element = grammarAccess.getInMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6347,14 +6485,180 @@ protected class MessageHandler_DetailCodeAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new MessageHandler_MsgAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InMessageHandler_MsgAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule MessageHandler ****************/
+/************ end Rule InMessageHandler ****************/
+
+
+/************ begin Rule OutMessageHandler ****************
+ *
+ * OutMessageHandler:
+ * 	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
+ *
+ **/
+
+// "handle" "outgoing" msg=[Message] detailCode=DetailCode
+protected class OutMessageHandler_Group extends GroupToken {
+	
+	public OutMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getOutMessageHandlerAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new OutMessageHandler_DetailCodeAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOutMessageHandlerRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "handle"
+protected class OutMessageHandler_HandleKeyword_0 extends KeywordToken  {
+	
+	public OutMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getOutMessageHandlerAccess().getHandleKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// "outgoing"
+protected class OutMessageHandler_OutgoingKeyword_1 extends KeywordToken  {
+	
+	public OutMessageHandler_OutgoingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getOutMessageHandlerAccess().getOutgoingKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new OutMessageHandler_HandleKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// msg=[Message]
+protected class OutMessageHandler_MsgAssignment_2 extends AssignmentToken  {
+	
+	public OutMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOutMessageHandlerAccess().getMsgAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new OutMessageHandler_OutgoingKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("msg",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msg");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getOutMessageHandlerAccess().getMsgMessageCrossReference_2_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getOutMessageHandlerAccess().getMsgMessageCrossReference_2_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// detailCode=DetailCode
+protected class OutMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
+	
+	public OutMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOutMessageHandlerAccess().getDetailCodeAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new DetailCode_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("detailCode",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("detailCode");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getDetailCodeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getOutMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new OutMessageHandler_MsgAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule OutMessageHandler ****************/
 
 
 /************ begin Rule ProtocolSemantics ****************
@@ -12558,8 +12862,6 @@ protected class SPPoint_ServiceAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule ActorRef ****************
  *
- * // TODOHRR: support replicated actors
- * 
  * ActorRef:
  * 	"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?;
  *

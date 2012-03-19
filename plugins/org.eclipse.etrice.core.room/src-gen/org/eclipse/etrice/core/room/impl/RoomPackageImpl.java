@@ -42,6 +42,7 @@ import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.Import;
+import org.eclipse.etrice.core.room.InMessageHandler;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
@@ -53,6 +54,7 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.OutMessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -233,6 +235,20 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass messageHandlerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass inMessageHandlerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass outMessageHandlerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1524,6 +1540,26 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EReference getMessageHandler_DetailCode()
   {
     return (EReference)messageHandlerEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInMessageHandler()
+  {
+    return inMessageHandlerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOutMessageHandler()
+  {
+    return outMessageHandlerEClass;
   }
 
   /**
@@ -3088,6 +3124,10 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(messageHandlerEClass, MESSAGE_HANDLER__MSG);
     createEReference(messageHandlerEClass, MESSAGE_HANDLER__DETAIL_CODE);
 
+    inMessageHandlerEClass = createEClass(IN_MESSAGE_HANDLER);
+
+    outMessageHandlerEClass = createEClass(OUT_MESSAGE_HANDLER);
+
     protocolSemanticsEClass = createEClass(PROTOCOL_SEMANTICS);
     createEReference(protocolSemanticsEClass, PROTOCOL_SEMANTICS__RULES);
 
@@ -3328,6 +3368,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     standardOperationEClass.getESuperTypes().add(this.getOperation());
     portOperationEClass.getESuperTypes().add(this.getOperation());
     protocolClassEClass.getESuperTypes().add(this.getRoomClass());
+    inMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
+    outMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     actorClassEClass.getESuperTypes().add(this.getActorContainerClass());
     portEClass.getESuperTypes().add(this.getInterfaceItem());
     sapRefEClass.getESuperTypes().add(this.getInterfaceItem());
@@ -3462,6 +3504,10 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(messageHandlerEClass, MessageHandler.class, "MessageHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMessageHandler_Msg(), this.getMessage(), null, "msg", null, 0, 1, MessageHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessageHandler_DetailCode(), this.getDetailCode(), null, "detailCode", null, 0, 1, MessageHandler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(inMessageHandlerEClass, InMessageHandler.class, "InMessageHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(outMessageHandlerEClass, OutMessageHandler.class, "OutMessageHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(protocolSemanticsEClass, ProtocolSemantics.class, "ProtocolSemantics", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocolSemantics_Rules(), this.getSemanticsRule(), null, "rules", null, 0, -1, ProtocolSemantics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

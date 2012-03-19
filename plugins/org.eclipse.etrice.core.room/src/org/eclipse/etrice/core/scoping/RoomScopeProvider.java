@@ -27,10 +27,12 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.InMessageHandler;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
+import org.eclipse.etrice.core.room.OutMessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -674,12 +676,14 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		ProtocolClass pc = RoomHelpers.getProtocolClass(handler);
 		if (pc!=null) {
-			for (Message m : pc.getIncomingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
-			for (Message m : pc.getOutgoingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
+			if (handler instanceof InMessageHandler)
+				for (Message m : pc.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
+			if (handler instanceof OutMessageHandler)
+				for (Message m : pc.getOutgoingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);

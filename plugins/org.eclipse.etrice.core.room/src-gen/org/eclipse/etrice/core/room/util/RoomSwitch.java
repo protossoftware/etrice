@@ -226,6 +226,22 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.IN_MESSAGE_HANDLER:
+      {
+        InMessageHandler inMessageHandler = (InMessageHandler)theEObject;
+        T result = caseInMessageHandler(inMessageHandler);
+        if (result == null) result = caseMessageHandler(inMessageHandler);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.OUT_MESSAGE_HANDLER:
+      {
+        OutMessageHandler outMessageHandler = (OutMessageHandler)theEObject;
+        T result = caseOutMessageHandler(outMessageHandler);
+        if (result == null) result = caseMessageHandler(outMessageHandler);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.PROTOCOL_SEMANTICS:
       {
         ProtocolSemantics protocolSemantics = (ProtocolSemantics)theEObject;
@@ -978,6 +994,38 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMessageHandler(MessageHandler object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>In Message Handler</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>In Message Handler</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInMessageHandler(InMessageHandler object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Out Message Handler</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Out Message Handler</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOutMessageHandler(OutMessageHandler object)
   {
     return null;
   }

@@ -88,6 +88,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.MESSAGE: return createMessage();
       case RoomPackage.PORT_CLASS: return createPortClass();
       case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
+      case RoomPackage.IN_MESSAGE_HANDLER: return createInMessageHandler();
+      case RoomPackage.OUT_MESSAGE_HANDLER: return createOutMessageHandler();
       case RoomPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
       case RoomPackage.SEMANTICS_RULE: return createSemanticsRule();
       case RoomPackage.ACTOR_CLASS: return createActorClass();
@@ -393,6 +395,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     MessageHandlerImpl messageHandler = new MessageHandlerImpl();
     return messageHandler;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InMessageHandler createInMessageHandler()
+  {
+    InMessageHandlerImpl inMessageHandler = new InMessageHandlerImpl();
+    return inMessageHandler;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutMessageHandler createOutMessageHandler()
+  {
+    OutMessageHandlerImpl outMessageHandler = new OutMessageHandlerImpl();
+    return outMessageHandler;
   }
 
   /**

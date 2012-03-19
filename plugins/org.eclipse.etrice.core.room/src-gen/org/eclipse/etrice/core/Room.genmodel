@@ -119,6 +119,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//MessageHandler/msg"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//MessageHandler/detailCode"/>
     </genClasses>
+    <genClasses ecoreClass="Room.ecore#//InMessageHandler"/>
+    <genClasses ecoreClass="Room.ecore#//OutMessageHandler"/>
     <genClasses ecoreClass="Room.ecore#//ProtocolSemantics">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolSemantics/rules"/>
     </genClasses>

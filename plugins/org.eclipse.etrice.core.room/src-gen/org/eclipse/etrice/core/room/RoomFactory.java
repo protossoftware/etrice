@@ -198,6 +198,24 @@ public interface RoomFactory extends EFactory
   MessageHandler createMessageHandler();
 
   /**
+   * Returns a new object of class '<em>In Message Handler</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>In Message Handler</em>'.
+   * @generated
+   */
+  InMessageHandler createInMessageHandler();
+
+  /**
+   * Returns a new object of class '<em>Out Message Handler</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Out Message Handler</em>'.
+   * @generated
+   */
+  OutMessageHandler createOutMessageHandler();
+
+  /**
    * Returns a new object of class '<em>Protocol Semantics</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
