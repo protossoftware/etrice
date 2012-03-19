@@ -4,13 +4,13 @@
 	</testsuite>
 	<testsuite name="TestEtMessageQueue" tests="0" failures="0" errors="0" time="0">
 		<testcase name="TestEtMessageQueue_testPushPop" time="0"/>
-		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="109"/>
+		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="102"/>
 	</testsuite>
 	<testsuite name="TestEtMessageService" tests="0" failures="0" errors="0" time="0">
 		<testcase name="TestEtMessageService_init" time="0"/>
-		<testcase name="TestEtMessageService_GetPushPopReturn" time="0"/>
-		<testcase name="TestEtMessageService_GetReturn" time="1"/>
-		<testcase name="TestEtMessageService_execute" time="0"/>
+		<testcase name="TestEtMessageService_GetPushPopReturn" time="1"/>
+		<testcase name="TestEtMessageService_GetReturn" time="0"/>
+		<testcase name="TestEtMessageService_execute" time="1"/>
 		<testcase name="TestEtMessageService_getMessagePoolLowWaterMark" time="1"/>
 	</testsuite>
 	<testsuite name="TestEtUnit" tests="0" failures="0" errors="0" time="0">

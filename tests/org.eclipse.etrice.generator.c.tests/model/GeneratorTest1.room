@@ -1,0 +1,104 @@
+RoomModel GeneratorTest1 {
+	import room.basic.types.c.* from "CTypes.room"
+	
+	SubSystemClass SS {
+		ActorRef tester: Tester
+		ActorRef testee: Testee
+		Binding testee.tester and tester.testee
+	}
+
+	ActorClass Tester{
+		Interface {
+			conjugated Port testee: PTestTrigger
+		}
+		Structure {
+			external Port testee
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> State1 { }
+				Transition tr0: State1 -> Done {
+					triggers {
+						<done: testee>
+					}
+				}
+				State State1 {
+					entry {
+						"testee.trigger();"
+					}
+				}
+				State Done
+			}
+		}
+	}
+
+	ActorClass Testee{
+		Interface {
+			
+			Port tester: PTestTrigger
+		}
+		Structure {
+			usercode3 {
+				"#include \"etUnit/etUnit.h\""
+			}
+			external Port tester
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> tp0 of State1 {
+					action {
+						"etUnit_openAll(\"tmp/testlog\",\"GeneratorTest1\", \"GeneratorTest1\", \"GeneratorTest1\");"
+						"static etInt16 resultlist[] = {1,2,3,4,5,6,7};"
+						"EXPECT_ORDER_START(resultlist, 7);"
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 1);"
+					}
+				}
+				State State1 {
+					entry {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 2);"
+					}
+					subgraph {
+						Transition tr0: my tp0 -> State1 {
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 3);"
+							}
+						}
+						Transition tr1: State1 -> Done {
+							triggers {
+								<trigger: tester>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 6);"
+								"tester.done();"
+							}
+						}
+						EntryPoint tp0
+						State State1 {
+							entry {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 4);"
+							}
+							exit {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 5);"
+							}
+						}
+						State Done {
+							entry {
+								"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 7);"
+								"etUnit_closeAll();"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PTestTrigger{
+		incoming {
+			Message trigger()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+}
