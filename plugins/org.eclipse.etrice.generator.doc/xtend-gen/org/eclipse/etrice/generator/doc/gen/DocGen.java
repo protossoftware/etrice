@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
@@ -25,6 +26,7 @@ import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -226,13 +228,17 @@ public class DocGen implements IRoomGenerator {
     _builder.newLine();
     _builder.append("\\newpage");
     _builder.newLine();
-    _builder.append("\\section{Modeldescription}");
+    _builder.append("\\section{Model Description}");
     _builder.newLine();
     Documentation _docu = model.getDocu();
     StringConcatenation _generateDocText = this.generateDocText(_docu);
     _builder.append(_generateDocText, "");
     _builder.newLineIfNotEmpty();
+    _builder.append("\\section{Subsystem Description}");
     _builder.newLine();
+    StringConcatenation _generateAllSubSysClassDocs = this.generateAllSubSysClassDocs(root, model);
+    _builder.append(_generateAllSubSysClassDocs, "");
+    _builder.newLineIfNotEmpty();
     _builder.append("\\section{Protocol Class Description}");
     _builder.newLine();
     StringConcatenation _generateAllProtocolClassDocs = this.generateAllProtocolClassDocs(root, model);
@@ -250,6 +256,30 @@ public class DocGen implements IRoomGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\\end{document}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public StringConcatenation generateAllSubSysClassDocs(final Root root, final RoomModel model) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
+      for(final SubSystemClass ssc : _subSystemClasses) {
+        StringConcatenation _generateSubSysClassDoc = this.generateSubSysClassDoc(root, ssc);
+        _builder.append(_generateSubSysClassDoc, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public StringConcatenation generateSubSysClassDoc(final Root root, final SubSystemClass ssc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\\level{2} {");
+    String _name = ssc.getName();
+    _builder.append(_name, "");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder;
   }
@@ -542,7 +572,7 @@ public class DocGen implements IRoomGenerator {
             if (_operator_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
               String _statePathName = this.roomExt.getStatePathName(s);
-              String _replaceAll_2 = _statePathName.replaceAll("_", "-");
+              String _replaceAll_2 = _statePathName.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_2, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
@@ -628,7 +658,7 @@ public class DocGen implements IRoomGenerator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Subgraph ");
       String _statePathName_1 = this.roomExt.getStatePathName(state);
-      String _replaceAll_2 = _statePathName_1.replaceAll("_", "-");
+      String _replaceAll_2 = _statePathName_1.replaceAll("_", "\\\\_");
       _builder.append(_replaceAll_2, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
@@ -658,7 +688,7 @@ public class DocGen implements IRoomGenerator {
             if (_operator_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
               String _statePathName_3 = this.roomExt.getStatePathName(s);
-              String _replaceAll_3 = _statePathName_3.replaceAll("_", "-");
+              String _replaceAll_3 = _statePathName_3.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_3, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
@@ -829,13 +859,29 @@ public class DocGen implements IRoomGenerator {
             _builder.append("\t");
             _builder.append("\\hline");
             _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\\multicolumn{2} {|l|} {");
-            Documentation _docu_1 = op.getDocu();
-            StringConcatenation _generateDocText = this.generateDocText(_docu_1);
-            _builder.append(_generateDocText, "	");
-            _builder.append("}\\\\");
-            _builder.newLineIfNotEmpty();
+            {
+              Documentation _docu_1 = op.getDocu();
+              String _string = _docu_1.toString();
+              int _length = _string.length();
+              boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_length), ((Integer)85));
+              if (_operator_greaterThan) {
+                _builder.append("\t");
+                _builder.append("\\multicolumn{2} {|p{13cm}|} {");
+                Documentation _docu_2 = op.getDocu();
+                StringConcatenation _generateDocText = this.generateDocText(_docu_2);
+                _builder.append(_generateDocText, "	");
+                _builder.append("}\\\\");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("\t");
+                _builder.append("\\multicolumn{2} {|l|} {");
+                Documentation _docu_3 = op.getDocu();
+                StringConcatenation _generateDocText_1 = this.generateDocText(_docu_3);
+                _builder.append(_generateDocText_1, "	");
+                _builder.append("}\\\\");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.append("\t");
@@ -888,7 +934,7 @@ public class DocGen implements IRoomGenerator {
   public StringConcatenation includeGraphics(final String filename, final String scale, final String caption) {
     StringConcatenation _xblockexpression = null;
     {
-      String _replaceAll = caption.replaceAll("_", "-");
+      String _replaceAll = caption.replaceAll("_", "\\\\_");
       String latexCaption = _replaceAll;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\begin{figure}[h]");
