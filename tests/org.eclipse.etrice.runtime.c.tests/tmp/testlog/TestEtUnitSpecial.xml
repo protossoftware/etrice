@@ -1,0 +1,5 @@
+<testsuites name="TestEtUnitSpecial" tests="0" failures="0" errors="0" time="0">
+	<testsuite name="etUnit" tests="0" failures="0" errors="0" time="0">
+		<testcase name="openAll and closeAll" time="0"/>
+	</testsuite>
+</testsuites>
