@@ -31,14 +31,27 @@ class InstanceDiagramGen implements IRoomGenerator {
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger
 	
-	override doGenerate(Root root) {
-		for (sc: root.subSystemInstances) {
-			var path = sc.subSystemClass.getDocGenerationTargetPath+sc.subSystemClass.getPath
-			var file = sc.subSystemClass.name+".dot"
-			logger.logInfo("generating instance diagram: '"+file+"' in '"+path+"'")
+		override doGenerate(Root root) {
+		for (model: root.models) {
+			var path = model.docGenerationTargetPath+ "/images"
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(sc, sc.subSystemClass))
+			var file2 = "dot2jpg.bat"
+			for(sc:root.subSystemInstances){
+				var file = sc.name+"_instanceTree.dot"
+				logger.logInfo("generating LaTeX documentation: '"+file+"' in '"+path+"'")
+				fileAccess.generateFile(file, root.generate(sc,sc.subSystemClass))
+			}
+			fileAccess.generateFile(file2, root.generate2jpg())
 		}
+	}
+	
+	// generate batch file to convert .dot to .jpg
+	// dot -Tjpg -oSS.jpg SS.dot	
+	def generate2jpg(Root root){'''
+		«FOR sc : root.subSystemInstances»
+			dot -Tjpg -o «sc.name»_instanceTree.jpg «sc.name»_instanceTree.dot
+		«ENDFOR»
+	'''
 	}
 	
 	def generate(Root root, SubSystemInstance ssi, SubSystemClass ssc) {'''
