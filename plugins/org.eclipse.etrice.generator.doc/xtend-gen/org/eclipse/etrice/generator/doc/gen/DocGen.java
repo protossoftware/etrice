@@ -71,6 +71,10 @@ public class DocGen implements IRoomGenerator {
     _builder.newLine();
     _builder.append("\\usepackage{graphicx}");
     _builder.newLine();
+    _builder.append("\\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}");
+    _builder.newLine();
+    _builder.append("\\usepackage{nonfloat}");
+    _builder.newLine();
     _builder.append("\\parindent 0pt");
     _builder.newLine();
     _builder.append("\\makeatletter");
@@ -254,7 +258,6 @@ public class DocGen implements IRoomGenerator {
     StringConcatenation _generateAllActorClassDocs = this.generateAllActorClassDocs(root, model);
     _builder.append(_generateAllActorClassDocs, "");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("\\end{document}");
     _builder.newLine();
     return _builder;
@@ -282,6 +285,83 @@ public class DocGen implements IRoomGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder;
+  }
+  
+  public StringConcatenation generateAllSubSysClassDocs(final Root root, final RoomModel model) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
+      for(final SubSystemClass ssc : _subSystemClasses) {
+        StringConcatenation _generateSubSysClassDoc = this.generateSubSysClassDoc(root, model, ssc);
+        _builder.append(_generateSubSysClassDoc, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public StringConcatenation generateSubSysClassDoc(final Root root, final RoomModel model, final SubSystemClass ssc) {
+    StringConcatenation _xblockexpression = null;
+    {
+      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+      String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "images\\");
+      String _name = ssc.getName();
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_structure.jpg");
+      String filename = _operator_plus_2;
+      String _replaceAll = filename.replaceAll("\\\\", "/");
+      filename = _replaceAll;
+      String _replaceAll_1 = filename.replaceAll("/", "//");
+      String latexFilename = _replaceAll_1;
+      String _docGenerationTargetPath_1 = this.roomExt.getDocGenerationTargetPath(model);
+      String _operator_plus_3 = StringExtensions.operator_plus(_docGenerationTargetPath_1, "images\\");
+      String _name_1 = ssc.getName();
+      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _name_1);
+      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "_instanceTree.jpg");
+      String filenamei = _operator_plus_5;
+      String _replaceAll_2 = filenamei.replaceAll("\\\\", "/");
+      filenamei = _replaceAll_2;
+      String _replaceAll_3 = filenamei.replaceAll("/", "//");
+      String latexFilenamei = _replaceAll_3;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\level{2}{");
+      String _name_2 = ssc.getName();
+      _builder.append(_name_2, "");
+      _builder.append("}");
+      _builder.newLineIfNotEmpty();
+      Documentation _docu = ssc.getDocu();
+      StringConcatenation _generateDocText = this.generateDocText(_docu);
+      _builder.append(_generateDocText, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\\level{3}{Structure}");
+      _builder.newLine();
+      {
+        String _fileExists = this.fileExists(filename);
+        boolean _equals = _fileExists.equals("true");
+        if (_equals) {
+          String _name_3 = ssc.getName();
+          String _operator_plus_6 = StringExtensions.operator_plus(_name_3, " Structure");
+          StringConcatenation _includeGraphics = this.includeGraphics(latexFilename, "0.4", _operator_plus_6);
+          _builder.append(_includeGraphics, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\\level{3}{Instance Tree}");
+      _builder.newLine();
+      {
+        String _fileExists_1 = this.fileExists(filename);
+        boolean _equals_1 = _fileExists_1.equals("true");
+        if (_equals_1) {
+          String _name_4 = ssc.getName();
+          String _operator_plus_7 = StringExtensions.operator_plus(_name_4, " Instance Tree");
+          StringConcatenation _includeGraphics_1 = this.includeGraphics(latexFilenamei, "0.5", _operator_plus_7);
+          _builder.append(_includeGraphics_1, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   public StringConcatenation generateAllDataClassDocs(final Root root, final RoomModel model) {
@@ -455,11 +535,8 @@ public class DocGen implements IRoomGenerator {
     {
       EList<ActorClass> _actorClasses = model.getActorClasses();
       for(final ActorClass ac : _actorClasses) {
-        _builder.append("\\newpage");
-        _builder.newLine();
-        _builder.append("\t");
         StringConcatenation _generateActorClassDoc = this.generateActorClassDoc(root, model, ac);
-        _builder.append(_generateActorClassDoc, "	");
+        _builder.append(_generateActorClassDoc, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -937,8 +1014,6 @@ public class DocGen implements IRoomGenerator {
       String _replaceAll = caption.replaceAll("_", "\\\\_");
       String latexCaption = _replaceAll;
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\\begin{figure}[h]");
-      _builder.newLine();
       _builder.append("\\begin{center}");
       _builder.newLine();
       _builder.append("\\includegraphics[scale=");
@@ -947,13 +1022,11 @@ public class DocGen implements IRoomGenerator {
       _builder.append(filename, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
-      _builder.append("\\caption{");
+      _builder.append("\\figcaption{");
       _builder.append(latexCaption, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       _builder.append("\\end{center}");
-      _builder.newLine();
-      _builder.append("\\end{figure}");
       _builder.newLine();
       _xblockexpression = (_builder);
     }

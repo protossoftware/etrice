@@ -51,6 +51,8 @@ class DocGen implements IRoomGenerator {
 	def generateModelDoc(Root root, RoomModel model) {'''
 		\documentclass[titlepage]{article}
 		\usepackage{graphicx}
+		\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}
+		\usepackage{nonfloat}
 		\parindent 0pt
 		\makeatletter
 		\newcommand\level[1]{%
@@ -123,21 +125,38 @@ class DocGen implements IRoomGenerator {
 		«root.generateAllDataClassDocs(model)»
 		\section{Actor Class Description}
 		«root.generateAllActorClassDocs(model)»
-		
 		\end{document}
 	'''
 	}
 	
 	def generateAllSubSysClassDocs(Root root, RoomModel model){'''
 	«FOR ssc : model.subSystemClasses»
-		«root.generateSubSysClassDoc(ssc)»
+		«root.generateSubSysClassDoc(model, ssc)»
 	«ENDFOR»
 	'''
 	}
-	def generateSubSysClassDoc(Root root, SubSystemClass ssc){'''
-		\level{2} {«ssc.name»}
+
+	def generateSubSysClassDoc(Root root, RoomModel model, SubSystemClass ssc) {
+		var filename = model.docGenerationTargetPath + "images\\" + ssc.name + "_structure.jpg"
+		filename = filename.replaceAll("\\\\","/");
+		var latexFilename = filename.replaceAll("/","//")
+
+		var filenamei = model.docGenerationTargetPath + "images\\" + ssc.name + "_instanceTree.jpg"
+		filenamei = filenamei.replaceAll("\\\\","/");
+		var latexFilenamei = filenamei.replaceAll("/","//") 
 		
-	'''
+		'''
+		\level{2}{«ssc.name»}
+		«ssc.docu.generateDocText»
+		\level{3}{Structure}
+		«IF fileExists(filename).equals("true")»
+			«includeGraphics(latexFilename,"0.4",ssc.name + " Structure")»
+		«ENDIF»
+		\level{3}{Instance Tree}
+		«IF fileExists(filename).equals("true")»
+			«includeGraphics(latexFilenamei,"0.5",ssc.name + " Instance Tree")»
+		«ENDIF»
+		'''
 	}
 	
 	def generateAllDataClassDocs(Root root, RoomModel model){'''
@@ -194,7 +213,6 @@ class DocGen implements IRoomGenerator {
 	
 	def generateAllActorClassDocs(Root root, RoomModel model) {'''
 		«FOR ac : model.actorClasses»
-		\newpage
 			«root.generateActorClassDoc(model,ac)»
 		«ENDFOR»			
 		'''
@@ -370,12 +388,10 @@ class DocGen implements IRoomGenerator {
 	def includeGraphics(String filename, String scale, String caption){
 		var latexCaption = caption.replaceAll("_","\\\\_");
 		'''
-			\begin{figure}[h]
 			\begin{center}
 			\includegraphics[scale=«scale»]{«filename»}
-			\caption{«latexCaption»}
+			\figcaption{«latexCaption»}
 			\end{center}
-			\end{figure}
 		'''
 	}
 

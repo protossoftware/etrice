@@ -1,6 +1,0 @@
-<testsuites name="TestCGenerator" tests="0" failures="0" errors="0" time="0">
-	<testsuite name="TestDataClass" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestDataClass_Operations" time="0"/>
-		<testcase name="TestDataClass_testDataClassDeepCopy" time="0"/>
-	</testsuite>
-</testsuites>
