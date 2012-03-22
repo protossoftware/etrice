@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
@@ -30,30 +31,52 @@ public class InstanceDiagramGen implements IRoomGenerator {
   private ILogger logger;
   
   public void doGenerate(final Root root) {
-    EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (final SubSystemInstance sc : _subSystemInstances) {
+    EList<RoomModel> _models = root.getModels();
+    for (final RoomModel model : _models) {
       {
-        SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, _path);
+        String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+        String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "/images");
         String path = _operator_plus;
-        SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        String _name = _subSystemClass_2.getName();
-        String _operator_plus_1 = StringExtensions.operator_plus(_name, ".dot");
-        String file = _operator_plus_1;
-        String _operator_plus_2 = StringExtensions.operator_plus("generating instance diagram: \'", file);
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "\' in \'");
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, path);
-        String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "\'");
-        this.logger.logInfo(_operator_plus_5);
         this.fileAccess.setOutputPath(path);
-        SubSystemClass _subSystemClass_3 = sc.getSubSystemClass();
-        StringConcatenation _generate = this.generate(root, sc, _subSystemClass_3);
-        this.fileAccess.generateFile(file, _generate);
+        String file2 = "dot2jpg.bat";
+        EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
+        for (final SubSystemInstance sc : _subSystemInstances) {
+          {
+            String _name = sc.getName();
+            String _operator_plus_1 = StringExtensions.operator_plus(_name, "_instanceTree.dot");
+            String file = _operator_plus_1;
+            String _operator_plus_2 = StringExtensions.operator_plus("generating LaTeX documentation: \'", file);
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "\' in \'");
+            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, path);
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "\'");
+            this.logger.logInfo(_operator_plus_5);
+            SubSystemClass _subSystemClass = sc.getSubSystemClass();
+            StringConcatenation _generate = this.generate(root, sc, _subSystemClass);
+            this.fileAccess.generateFile(file, _generate);
+          }
+        }
+        StringConcatenation _generate2jpg = this.generate2jpg(root);
+        this.fileAccess.generateFile(file2, _generate2jpg);
       }
     }
+  }
+  
+  public StringConcatenation generate2jpg(final Root root) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
+      for(final SubSystemInstance sc : _subSystemInstances) {
+        _builder.append("dot -Tjpg -o ");
+        String _name = sc.getName();
+        _builder.append(_name, "");
+        _builder.append("_instanceTree.jpg ");
+        String _name_1 = sc.getName();
+        _builder.append(_name_1, "");
+        _builder.append("_instanceTree.dot");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
   }
   
   public StringConcatenation generate(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
