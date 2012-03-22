@@ -567,21 +567,13 @@ public class GeneratorModelBuilder {
 		for (Binding bind : bindings) {
 			BindingInstance bi = ETriceGenFactory.eINSTANCE.createBindingInstance();
 			
-			if (bind.getEndpoint1().getActorRef()==null && bind.getEndpoint2().getActorRef()!=null) {
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint1()));
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
-			}
-			else if (bind.getEndpoint1().getActorRef()!=null && bind.getEndpoint2().getActorRef()==null) {
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint1()));
-			}
-			else if (bind.getEndpoint1().getActorRef()!=null && bind.getEndpoint2().getActorRef()!=null) {
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint1()));
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
-			}
-			else {
+			if (bind.getEndpoint1().getActorRef()==null && bind.getEndpoint2().getActorRef()==null) {
 				int idx = bindings.indexOf(bind);
 				diagnostician.error("binding connects two ports of the same actor", bind, RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
+			}
+			else {
+				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint1()));
+				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
 			}
 			
 			ai.getBindings().add(bi);
