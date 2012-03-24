@@ -47,6 +47,9 @@ import com.google.inject.Provider;
  */
 public abstract class AbstractGenerator {
 
+	public static final int GENERATOR_OK = 0;
+	public static final int GENERATOR_ERROR = 1;
+
 	protected static ILineOutput output = new StdLineOutput();
 	private static Injector injector;
 
@@ -60,11 +63,11 @@ public abstract class AbstractGenerator {
 	 * @param generatorModule a Guice module from which the {@link Injector} is created
 	 * @return
 	 */
-	protected static void createAndRunGenerator(Module generatorModule, String[] args) {
+	protected static int createAndRunGenerator(Module generatorModule, String[] args) {
 		injector = Guice.createInjector(generatorModule);
 		AbstractGenerator generator = injector.getInstance(AbstractGenerator.class);
 		generator.logger.setOutput(output);
-		generator.runGenerator(args);
+		return generator.runGenerator(args);
 	}
 
 	public static Injector getInjector() {
@@ -220,7 +223,8 @@ public abstract class AbstractGenerator {
 	/**
 	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
 	 * @param args
+	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
-	protected abstract void runGenerator(String[] args);
+	protected abstract int runGenerator(String[] args);
 
 }

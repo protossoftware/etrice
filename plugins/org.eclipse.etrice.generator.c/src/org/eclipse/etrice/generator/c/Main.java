@@ -43,7 +43,9 @@ public class Main extends AbstractGenerator {
 	}
 
 	public static void main(String[] args) {
-		createAndRunGenerator(new GeneratorModule(), args);
+		int ret = createAndRunGenerator(new GeneratorModule(), args);
+		if (ret!=GENERATOR_OK)
+			System.exit(ret);
 	}
 
 	@Inject
@@ -55,11 +57,11 @@ public class Main extends AbstractGenerator {
 	@Inject
 	private Validator validator;
 	
-	public void runGenerator(String[] args) {
+	public int runGenerator(String[] args) {
 		if (args.length == 0) {
 			logger.logError(Main.class.getName()+" - aborting: no arguments!", null);
 			printUsage();
-			return;
+			return GENERATOR_ERROR;
 		}
 
 		// parsing arguments
@@ -86,7 +88,10 @@ public class Main extends AbstractGenerator {
 
 		setupRoomModel();
 
-		runGenerator(uriList, genModelPath, genInstDiag, asLibrary);
+		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary))
+			return GENERATOR_ERROR;
+		
+		return GENERATOR_OK;
 	}
 
 	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary) {
