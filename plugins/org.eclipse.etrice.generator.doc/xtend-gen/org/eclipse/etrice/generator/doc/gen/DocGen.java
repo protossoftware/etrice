@@ -268,30 +268,6 @@ public class DocGen implements IRoomGenerator {
     {
       EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
       for(final SubSystemClass ssc : _subSystemClasses) {
-        StringConcatenation _generateSubSysClassDoc = this.generateSubSysClassDoc(root, ssc);
-        _builder.append(_generateSubSysClassDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  public StringConcatenation generateSubSysClassDoc(final Root root, final SubSystemClass ssc) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\\level{2} {");
-    String _name = ssc.getName();
-    _builder.append(_name, "");
-    _builder.append("}");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation generateAllSubSysClassDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
-      for(final SubSystemClass ssc : _subSystemClasses) {
         StringConcatenation _generateSubSysClassDoc = this.generateSubSysClassDoc(root, model, ssc);
         _builder.append(_generateSubSysClassDoc, "");
         _builder.newLineIfNotEmpty();

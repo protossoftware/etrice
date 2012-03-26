@@ -42,8 +42,10 @@ public class Main extends AbstractGenerator {
 		output.println("      -lib                              # if specified all classes are generated and no instances");
 	}
 
-	public static int main(String[] args) {
-		return createAndRunGenerator(new GeneratorModule(), args);
+	public static void main(String[] args) {
+		int ret = createAndRunGenerator(new GeneratorModule(), args);
+		if (ret!=GENERATOR_OK)
+			System.exit(ret);
 	}
 
 	@Inject
