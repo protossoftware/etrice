@@ -22,6 +22,7 @@ import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.StructureInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import static java.lang.Runtime.*
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 
 @Singleton
@@ -42,6 +43,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 				fileAccess.generateFile(file, root.generate(sc,sc.subSystemClass))
 			}
 			fileAccess.generateFile(file2, root.generate2jpg())
+			runDot2Jpg()
 		}
 	}
 	
@@ -51,7 +53,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 		«FOR sc : root.subSystemInstances»
 			dot -Tjpg -o «sc.name»_instanceTree.jpg «sc.name»_instanceTree.dot
 		«ENDFOR»
-	'''
+		'''
 	}
 	
 	def generate(Root root, SubSystemInstance ssi, SubSystemClass ssc) {'''
@@ -73,5 +75,15 @@ class InstanceDiagramGen implements IRoomGenerator {
 		«FOR sub_ai : ai.instances»
 			«instance(sub_ai)»
 		«ENDFOR»
-	'''}	
+	'''}
+
+ 	def runDot2Jpg(){
+ 		try{
+			getRuntime.exec("dot2jpg.bat");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
 }
+	
