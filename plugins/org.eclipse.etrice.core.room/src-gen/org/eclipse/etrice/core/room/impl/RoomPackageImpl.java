@@ -1287,6 +1287,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getStandardOperation_Destructor()
+  {
+    return (EAttribute)standardOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPortOperation()
   {
     return portOperationEClass;
@@ -3092,6 +3102,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(operationEClass, OPERATION__DETAIL_CODE);
 
     standardOperationEClass = createEClass(STANDARD_OPERATION);
+    createEAttribute(standardOperationEClass, STANDARD_OPERATION__DESTRUCTOR);
 
     portOperationEClass = createEClass(PORT_OPERATION);
     createEReference(portOperationEClass, PORT_OPERATION__SENDS_MSG);
@@ -3473,6 +3484,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getOperation_DetailCode(), this.getDetailCode(), null, "detailCode", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(standardOperationEClass, StandardOperation.class, "StandardOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStandardOperation_Destructor(), ecorePackage.getEBoolean(), "destructor", null, 0, 1, StandardOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(portOperationEClass, PortOperation.class, "PortOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPortOperation_SendsMsg(), this.getMessage(), null, "sendsMsg", null, 0, 1, PortOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

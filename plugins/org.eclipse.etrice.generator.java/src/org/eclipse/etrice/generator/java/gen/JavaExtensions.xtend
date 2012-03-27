@@ -84,4 +84,18 @@ class JavaExtensions implements ILanguageExtension {
 	override String arrayDeclaration(String type, int size, String name) {
 		type+" "+name+"[]";
 	}
+	
+	override String constructorName(String cls) {
+		cls
+	}
+	override String destructorName(String cls) {
+		cls+"_dtor"
+	}
+	override String constructorReturnType() {
+		""
+	}
+	override String destructorReturnType() {
+		"void"
+	}
+	
 }

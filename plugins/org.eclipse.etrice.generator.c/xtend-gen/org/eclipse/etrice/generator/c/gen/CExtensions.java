@@ -202,4 +202,20 @@ public class CExtensions implements ILanguageExtension {
     String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "]");
     return _operator_plus_4;
   }
+  
+  public String constructorName(final String cls) {
+    return "ctor";
+  }
+  
+  public String destructorName(final String cls) {
+    return "dtor";
+  }
+  
+  public String constructorReturnType() {
+    return "void";
+  }
+  
+  public String destructorReturnType() {
+    return "void";
+  }
 }

@@ -107,4 +107,21 @@ public class JavaExtensions implements ILanguageExtension {
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "[]");
     return _operator_plus_2;
   }
+  
+  public String constructorName(final String cls) {
+    return cls;
+  }
+  
+  public String destructorName(final String cls) {
+    String _operator_plus = StringExtensions.operator_plus(cls, "_dtor");
+    return _operator_plus;
+  }
+  
+  public String constructorReturnType() {
+    return "";
+  }
+  
+  public String destructorReturnType() {
+    return "void";
+  }
 }

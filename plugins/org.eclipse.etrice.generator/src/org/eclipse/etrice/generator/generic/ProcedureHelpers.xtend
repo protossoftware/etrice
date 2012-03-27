@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.ComplexType
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 import org.eclipse.etrice.generator.base.ILogger
@@ -153,7 +154,9 @@ class ProcedureHelpers {
 	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«operationSignature(operation, classname, true)»;
+			«IF !(languageExt.usesInheritance && operation.constructor)»
+				«operationSignature(operation, classname, true)»;
+			«ENDIF»
 		«ENDFOR»
 		'''
 	}
@@ -162,32 +165,41 @@ class ProcedureHelpers {
 	'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«operationSignature(operation, classname, false)» {
-				«FOR command : operation.detailCode.commands»
-					«command»
-				«ENDFOR»
-			}
+			«IF !(languageExt.usesInheritance && operation.constructor)»
+				«operationSignature(operation, classname, false)» {
+					«FOR command : operation.detailCode.commands»
+						«command»
+					«ENDFOR»
+				}
+			«ENDIF»
 		«ENDFOR»
 		'''
 	}
 
-	def operationsImplementation(ActorClass ac, String classname) {
+	def operationsImplementation(ActorClass ac) {
 		translator.setActorClass(ac)
 		var dct = new DetailCodeTranslator(ac, translator)
 		
 	'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : ac.operations»
-			«operationSignature(operation, classname, false)» {
-				«dct.translateDetailCode(operation.detailCode)»
-			}
+			«IF !(languageExt.usesInheritance && operation.constructor)»
+				«operationSignature(operation, ac.name, false)» {
+					«dct.translateDetailCode(operation.detailCode)»
+				}
+			«ENDIF»
 		«ENDFOR»
 		'''
 	}
 	
 	
 	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
-		classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype), isDeclaration);
+		if (operation.constructor)
+			classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType, isDeclaration)
+		else if (operation.destructor)
+			classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType, isDeclaration)
+		else
+			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype), isDeclaration)
 	}
 
 	def private dataTypeToString(RefableType type) {

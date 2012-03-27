@@ -19,6 +19,8 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.CommunicationType
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.etrice.generator.etricegen.ActorInstance
@@ -130,10 +132,14 @@ class SubSystemClassGen {
 		static «ssc.name» «ssc.name»Inst = {"«ssc.name»"};
 		
 		void «ssc.name»_initActorInstances(void);
+		void «ssc.name»_constructActorInstances(void);
 
 		void «ssc.name»_init(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "init")
 			etLogger_logInfoF("%s_init", «ssc.name»Inst.name);
+			
+			/* construct all actors */
+			«ssc.name»_constructActorInstances();
 			
 			/* initialization of all message services */
 			etMessageService_init(&msgService_Thread1, msgBuffer_Thread1, MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_Thread1_receiveMessage);
@@ -186,6 +192,21 @@ class SubSystemClassGen {
 		void «ssc.name»_destroy(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "destroy")
 			etLogger_logInfoF("%s_destroy", «ssc.name»Inst.name);
+			«FOR ai : ssi.allContainedInstances.reverseView»
+				«IF !ai.actorClass.operations.filter(op|op.destructor).empty»
+					«ai.actorClass.name»_dtor(&«ai.path.getPathName()»);
+				«ENDIF»
+			«ENDFOR»
+			ET_MSC_LOGGER_SYNC_EXIT
+		}
+
+		void «ssc.name»_constructActorInstances(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "constructActorInstances")
+			«FOR ai : ssi.allContainedInstances»
+				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
+					«ai.actorClass.name»_ctor(&«ai.path.getPathName()»);
+				«ENDIF»
+			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 

@@ -19,6 +19,7 @@ import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 import org.eclipse.etrice.generator.extensions.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -47,7 +48,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 	}
 	
-	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {'''
+	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {
+		val ctor = ac.operations.filter(op|op.constructor).head
+		val dtor = ac.operations.filter(op|op.destructor).head
+		
+	'''
 		package «ac.getPackage»;
 		
 		import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -77,10 +82,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR ep : ac.getEndPorts()»
 				protected «ep.getPortClassName()» «ep.name» = null;
 			«ENDFOR»
+			
 			//--------------------- saps
 			«FOR sap : ac.strSAPs»
 				protected «sap.getPortClassName()» «sap.name» = null;
 			«ENDFOR»
+			
 			//--------------------- services
 			«FOR svc : ac.serviceImplementations»
 				protected «svc.getPortClassName()» «svc.spp.name» = null;
@@ -90,7 +97,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«genInterfaceItemConstants(xpac, ac)»
 				
 			«helpers.attributes(ac.attributes)»
-			«helpers.operationsImplementation(ac.operations, ac.name)»
+			«helpers.operationsImplementation(ac)»
 		
 			//--------------------- construction
 			public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -107,14 +114,25 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«FOR ep : ac.getEndPorts()»
 					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF»); 
 				«ENDFOR»
+				
 				// own saps
 				«FOR sap : ac.strSAPs»
 					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0, port_addr[IFITEM_«sap.name»][0], peer_addr[IFITEM_«sap.name»][0]); 
 				«ENDFOR»
+				
 				// own service implementations
 				«FOR svc : ac.serviceImplementations»
 					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name», port_addr[IFITEM_«svc.spp.name»], peer_addr[IFITEM_«svc.spp.name»]); 
 				«ENDFOR»
+				«IF ctor!=null»
+					
+					{
+						// user defined constructor body
+						«FOR l : ctor.detailCode.commands»
+							«l»
+						«ENDFOR»
+					}
+				«ENDIF»
 			}
 			
 		
@@ -135,7 +153,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			public void destroy(){
 				destroyUser();
-			}	
+				«IF dtor!=null»
+					
+					«FOR l : dtor.detailCode.commands»
+						«l»
+					«ENDFOR»
+				«ENDIF»
+			}
 		
 			«IF ac.hasNonEmptyStateMachine»
 				«stateMachineGen.genStateMachine(xpac, ac)»

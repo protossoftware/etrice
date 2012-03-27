@@ -184,6 +184,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<Port> _filter_2 = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
       Iterable<Port> recvPorts = _filter_2;
+      ActorCommunicationType _commType = ac.getCommType();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_commType, ActorCommunicationType.DATA_DRIVEN);
+      boolean dataDriven = _operator_equals;
+      ActorCommunicationType _commType_1 = ac.getCommType();
+      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+      boolean async = _operator_equals_1;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -293,8 +299,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final Port ep : eventPorts) {
               {
                 int _multiplicity = ep.getMultiplicity();
-                boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
-                if (_operator_equals) {
+                boolean _operator_equals_2 = ObjectExtensions.operator_equals(((Integer)_multiplicity), ((Integer)1));
+                if (_operator_equals_2) {
                   _builder.append("\t");
                   _builder.append("const ");
                   String _portClassName = this.roomExt.getPortClassName(ep);
@@ -317,8 +323,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final Port ep_1 : recvPorts) {
               {
                 int _multiplicity_1 = ep_1.getMultiplicity();
-                boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_multiplicity_1), ((Integer)1));
-                if (_operator_equals_1) {
+                boolean _operator_equals_3 = ObjectExtensions.operator_equals(((Integer)_multiplicity_1), ((Integer)1));
+                if (_operator_equals_3) {
                   _builder.append("\t");
                   _builder.append("const ");
                   String _portClassName_1 = this.roomExt.getPortClassName(ep_1);
@@ -458,8 +464,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Port ep_3 : sendPorts) {
           {
             int _multiplicity_3 = ep_3.getMultiplicity();
-            boolean _operator_equals_2 = ObjectExtensions.operator_equals(((Integer)_multiplicity_3), ((Integer)1));
-            if (_operator_equals_2) {
+            boolean _operator_equals_4 = ObjectExtensions.operator_equals(((Integer)_multiplicity_3), ((Integer)1));
+            if (_operator_equals_4) {
               _builder.append("\t");
               String _portClassName_3 = this.roomExt.getPortClassName(ep_3);
               _builder.append(_portClassName_3, "	");
@@ -511,8 +517,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine_2 = this.roomExt.hasNonEmptyStateMachine(xpac);
-        if (_hasNonEmptyStateMachine_2) {
+        boolean _operator_or = false;
+        if (dataDriven) {
+          _operator_or = true;
+        } else {
+          _operator_or = BooleanExtensions.operator_or(dataDriven, async);
+        }
+        if (_operator_or) {
           _builder.append("void ");
           String _name_19 = xpac.getName();
           _builder.append(_name_19, "");
@@ -710,7 +721,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("_execute(");
           String _name_7 = xpac.getName();
           _builder.append(_name_7, "");
-          _builder.append("* self){");
+          _builder.append("* self) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
@@ -744,8 +755,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      String _name_9 = ac.getName();
-      StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(ac, _name_9);
+      StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(ac);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

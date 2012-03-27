@@ -895,13 +895,22 @@ public interface RoomPackage extends EPackage
   int STANDARD_OPERATION__DETAIL_CODE = OPERATION__DETAIL_CODE;
 
   /**
+   * The feature id for the '<em><b>Destructor</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STANDARD_OPERATION__DESTRUCTOR = OPERATION_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Standard Operation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STANDARD_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 0;
+  int STANDARD_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PortOperationImpl <em>Port Operation</em>}' class.
@@ -4480,6 +4489,17 @@ public interface RoomPackage extends EPackage
   EClass getStandardOperation();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.StandardOperation#isDestructor <em>Destructor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Destructor</em>'.
+   * @see org.eclipse.etrice.core.room.StandardOperation#isDestructor()
+   * @see #getStandardOperation()
+   * @generated
+   */
+  EAttribute getStandardOperation_Destructor();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.PortOperation <em>Port Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6802,6 +6822,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass STANDARD_OPERATION = eINSTANCE.getStandardOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Destructor</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STANDARD_OPERATION__DESTRUCTOR = eINSTANCE.getStandardOperation_Destructor();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.PortOperationImpl <em>Port Operation</em>}' class.

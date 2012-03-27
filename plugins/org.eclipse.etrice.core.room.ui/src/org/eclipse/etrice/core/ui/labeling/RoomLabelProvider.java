@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -299,7 +300,8 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		String signature = RoomHelpers.getSignature(op);
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
 			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
-		StyledString result = new StyledString(op.getName()+signature+rt);
+		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";
+		StyledString result = new StyledString(destr+op.getName()+signature+rt);
 		int pos = result.toString().indexOf(" sends ");
 		if (pos>=0)
 			result.setStyle(pos+1, 5, getKeywordStyler());

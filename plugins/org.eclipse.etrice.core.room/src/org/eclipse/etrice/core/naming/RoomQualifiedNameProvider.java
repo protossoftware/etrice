@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.naming;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
@@ -63,4 +64,10 @@ public class RoomQualifiedNameProvider extends
     	return null;
     }
     
+    public QualifiedName qualifiedName(StandardOperation op) {
+    	if (op.isDestructor())
+    		return getFullyQualifiedName(op.eContainer()).append("~"+op.getName());
+    	else
+    		return getFullyQualifiedName(op.eContainer()).append(op.getName());
+    }
 }

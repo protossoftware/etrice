@@ -658,102 +658,110 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StandardOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOperationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cArgumentsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cArgumentsVarDeclParserRuleCall_3_0_0 = (RuleCall)cArgumentsAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cArgumentsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cArgumentsVarDeclParserRuleCall_3_1_1_0 = (RuleCall)cArgumentsAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Alternatives cAlternatives_5_1 = (Alternatives)cGroup_5.eContents().get(1);
-		private final Keyword cVoidKeyword_5_1_0 = (Keyword)cAlternatives_5_1.eContents().get(0);
-		private final Assignment cReturntypeAssignment_5_1_1 = (Assignment)cAlternatives_5_1.eContents().get(1);
-		private final RuleCall cReturntypeRefableTypeParserRuleCall_5_1_1_0 = (RuleCall)cReturntypeAssignment_5_1_1.eContents().get(0);
-		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
-		private final Assignment cDetailCodeAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cDetailCodeDetailCodeParserRuleCall_7_0 = (RuleCall)cDetailCodeAssignment_7.eContents().get(0);
+		private final Assignment cDestructorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cDestructorTildeKeyword_1_0 = (Keyword)cDestructorAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Assignment cArgumentsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cArgumentsVarDeclParserRuleCall_4_0_0 = (RuleCall)cArgumentsAssignment_4_0.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
+		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cArgumentsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cArgumentsVarDeclParserRuleCall_4_1_1_0 = (RuleCall)cArgumentsAssignment_4_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cColonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Alternatives cAlternatives_6_1 = (Alternatives)cGroup_6.eContents().get(1);
+		private final Keyword cVoidKeyword_6_1_0 = (Keyword)cAlternatives_6_1.eContents().get(0);
+		private final Assignment cReturntypeAssignment_6_1_1 = (Assignment)cAlternatives_6_1.eContents().get(1);
+		private final RuleCall cReturntypeRefableTypeParserRuleCall_6_1_1_0 = (RuleCall)cReturntypeAssignment_6_1_1.eContents().get(0);
+		private final Assignment cDocuAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cDocuDocumentationParserRuleCall_7_0 = (RuleCall)cDocuAssignment_7.eContents().get(0);
+		private final Assignment cDetailCodeAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cDetailCodeDetailCodeParserRuleCall_8_0 = (RuleCall)cDetailCodeAssignment_8.eContents().get(0);
 		
 		//StandardOperation:
-		//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType))?
-		//	docu=Documentation? detailCode=DetailCode;
+		//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//	returntype=RefableType))? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType))?
-		//docu=Documentation? detailCode=DetailCode
+		//"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//returntype=RefableType))? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
 		//"Operation"
 		public Keyword getOperationKeyword_0() { return cOperationKeyword_0; }
 
+		//destructor?="~"?
+		public Assignment getDestructorAssignment_1() { return cDestructorAssignment_1; }
+
+		//"~"
+		public Keyword getDestructorTildeKeyword_1_0() { return cDestructorTildeKeyword_1_0; }
+
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
 		//(arguments+=VarDecl ("," arguments+=VarDecl)*)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//arguments+=VarDecl
-		public Assignment getArgumentsAssignment_3_0() { return cArgumentsAssignment_3_0; }
+		public Assignment getArgumentsAssignment_4_0() { return cArgumentsAssignment_4_0; }
 
 		//VarDecl
-		public RuleCall getArgumentsVarDeclParserRuleCall_3_0_0() { return cArgumentsVarDeclParserRuleCall_3_0_0; }
+		public RuleCall getArgumentsVarDeclParserRuleCall_4_0_0() { return cArgumentsVarDeclParserRuleCall_4_0_0; }
 
 		//("," arguments+=VarDecl)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
+		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
 		//arguments+=VarDecl
-		public Assignment getArgumentsAssignment_3_1_1() { return cArgumentsAssignment_3_1_1; }
+		public Assignment getArgumentsAssignment_4_1_1() { return cArgumentsAssignment_4_1_1; }
 
 		//VarDecl
-		public RuleCall getArgumentsVarDeclParserRuleCall_3_1_1_0() { return cArgumentsVarDeclParserRuleCall_3_1_1_0; }
+		public RuleCall getArgumentsVarDeclParserRuleCall_4_1_1_0() { return cArgumentsVarDeclParserRuleCall_4_1_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
 		//(":" ("void" | returntype=RefableType))?
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_6() { return cGroup_6; }
 
 		//":"
-		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
+		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
 
 		//"void" | returntype=RefableType
-		public Alternatives getAlternatives_5_1() { return cAlternatives_5_1; }
+		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
 		//"void"
-		public Keyword getVoidKeyword_5_1_0() { return cVoidKeyword_5_1_0; }
+		public Keyword getVoidKeyword_6_1_0() { return cVoidKeyword_6_1_0; }
 
 		//returntype=RefableType
-		public Assignment getReturntypeAssignment_5_1_1() { return cReturntypeAssignment_5_1_1; }
+		public Assignment getReturntypeAssignment_6_1_1() { return cReturntypeAssignment_6_1_1; }
 
 		//RefableType
-		public RuleCall getReturntypeRefableTypeParserRuleCall_5_1_1_0() { return cReturntypeRefableTypeParserRuleCall_5_1_1_0; }
+		public RuleCall getReturntypeRefableTypeParserRuleCall_6_1_1_0() { return cReturntypeRefableTypeParserRuleCall_6_1_1_0; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
+		public Assignment getDocuAssignment_7() { return cDocuAssignment_7; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_7_0() { return cDocuDocumentationParserRuleCall_7_0; }
 
 		//detailCode=DetailCode
-		public Assignment getDetailCodeAssignment_7() { return cDetailCodeAssignment_7; }
+		public Assignment getDetailCodeAssignment_8() { return cDetailCodeAssignment_8; }
 
 		//DetailCode
-		public RuleCall getDetailCodeDetailCodeParserRuleCall_7_0() { return cDetailCodeDetailCodeParserRuleCall_7_0; }
+		public RuleCall getDetailCodeDetailCodeParserRuleCall_8_0() { return cDetailCodeDetailCodeParserRuleCall_8_0; }
 	}
 
 	public class PortOperationElements extends AbstractParserRuleElementFinder {
@@ -4664,8 +4672,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StandardOperation:
-	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType))?
-	//	docu=Documentation? detailCode=DetailCode;
+	//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+	//	returntype=RefableType))? docu=Documentation? detailCode=DetailCode;
 	public StandardOperationElements getStandardOperationAccess() {
 		return (pStandardOperation != null) ? pStandardOperation : (pStandardOperation = new StandardOperationElements());
 	}

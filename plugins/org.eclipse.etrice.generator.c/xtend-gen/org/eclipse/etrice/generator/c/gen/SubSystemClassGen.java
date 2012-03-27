@@ -13,7 +13,9 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.etricegen.ActorInstance;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -291,10 +294,15 @@ public class SubSystemClassGen {
     _builder.append(_name_7, "");
     _builder.append("_initActorInstances(void);");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("void ");
     String _name_8 = ssc.getName();
     _builder.append(_name_8, "");
+    _builder.append("_constructActorInstances(void);");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("void ");
+    String _name_9 = ssc.getName();
+    _builder.append(_name_9, "");
     _builder.append("_init(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -302,9 +310,19 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfoF(\"%s_init\", ");
-    String _name_9 = ssc.getName();
-    _builder.append(_name_9, "	");
+    String _name_10 = ssc.getName();
+    _builder.append(_name_10, "	");
     _builder.append("Inst.name);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/* construct all actors */");
+    _builder.newLine();
+    _builder.append("\t");
+    String _name_11 = ssc.getName();
+    _builder.append(_name_11, "	");
+    _builder.append("_constructActorInstances();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -320,8 +338,8 @@ public class SubSystemClassGen {
     _builder.append("/* init all actors */");
     _builder.newLine();
     _builder.append("\t");
-    String _name_10 = ssc.getName();
-    _builder.append(_name_10, "	");
+    String _name_12 = ssc.getName();
+    _builder.append(_name_12, "	");
     _builder.append("_initActorInstances();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -333,8 +351,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_11 = ssc.getName();
-    _builder.append(_name_11, "");
+    String _name_13 = ssc.getName();
+    _builder.append(_name_13, "");
     _builder.append("_start(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -342,8 +360,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfoF(\"%s_start\", ");
-    String _name_12 = ssc.getName();
-    _builder.append(_name_12, "	");
+    String _name_14 = ssc.getName();
+    _builder.append(_name_14, "	");
     _builder.append("Inst.name);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -353,8 +371,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_13 = ssc.getName();
-    _builder.append(_name_13, "");
+    String _name_15 = ssc.getName();
+    _builder.append(_name_15, "");
     _builder.append("_run(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -433,8 +451,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_14 = ssc.getName();
-    _builder.append(_name_14, "");
+    String _name_16 = ssc.getName();
+    _builder.append(_name_16, "");
     _builder.append("_stop(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -442,26 +460,6 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfoF(\"%s_stop\", ");
-    String _name_15 = ssc.getName();
-    _builder.append(_name_15, "	");
-    _builder.append("Inst.name);");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("void ");
-    String _name_16 = ssc.getName();
-    _builder.append(_name_16, "");
-    _builder.append("_destroy(void){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"SubSys\", \"destroy\")");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("etLogger_logInfoF(\"%s_destroy\", ");
     String _name_17 = ssc.getName();
     _builder.append(_name_17, "	");
     _builder.append("Inst.name);");
@@ -475,25 +473,123 @@ public class SubSystemClassGen {
     _builder.append("void ");
     String _name_18 = ssc.getName();
     _builder.append(_name_18, "");
+    _builder.append("_destroy(void){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"SubSys\", \"destroy\")");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("etLogger_logInfoF(\"%s_destroy\", ");
+    String _name_19 = ssc.getName();
+    _builder.append(_name_19, "	");
+    _builder.append("Inst.name);");
+    _builder.newLineIfNotEmpty();
+    {
+      EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+      Iterable<ActorInstance> _reverseView = ListExtensions.<ActorInstance>reverseView(_allContainedInstances);
+      for(final ActorInstance ai : _reverseView) {
+        {
+          ActorClass _actorClass = ai.getActorClass();
+          EList<StandardOperation> _operations = _actorClass.getOperations();
+          final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+              public Boolean apply(final StandardOperation op) {
+                boolean _isDestructor = op.isDestructor();
+                return ((Boolean)_isDestructor);
+              }
+            };
+          Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
+          boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+          boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+          if (_operator_not) {
+            _builder.append("\t");
+            ActorClass _actorClass_1 = ai.getActorClass();
+            String _name_20 = _actorClass_1.getName();
+            _builder.append(_name_20, "	");
+            _builder.append("_dtor(&");
+            String _path = ai.getPath();
+            String _pathName = this.roomExt.getPathName(_path);
+            _builder.append(_pathName, "	");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("void ");
+    String _name_21 = ssc.getName();
+    _builder.append(_name_21, "");
+    _builder.append("_constructActorInstances(void){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
+    String _name_22 = ssc.getName();
+    _builder.append(_name_22, "	");
+    _builder.append("\", \"constructActorInstances\")");
+    _builder.newLineIfNotEmpty();
+    {
+      EList<ActorInstance> _allContainedInstances_1 = ssi.getAllContainedInstances();
+      for(final ActorInstance ai_1 : _allContainedInstances_1) {
+        {
+          ActorClass _actorClass_2 = ai_1.getActorClass();
+          EList<StandardOperation> _operations_1 = _actorClass_2.getOperations();
+          final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+              public Boolean apply(final StandardOperation op) {
+                boolean _isConstructor = RoomHelpers.isConstructor(op);
+                return ((Boolean)_isConstructor);
+              }
+            };
+          Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
+          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
+          if (_operator_not_1) {
+            _builder.append("\t");
+            ActorClass _actorClass_3 = ai_1.getActorClass();
+            String _name_23 = _actorClass_3.getName();
+            _builder.append(_name_23, "	");
+            _builder.append("_ctor(&");
+            String _path_1 = ai_1.getPath();
+            String _pathName_1 = this.roomExt.getPathName(_path_1);
+            _builder.append(_pathName_1, "	");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("\t");
+    _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("void ");
+    String _name_24 = ssc.getName();
+    _builder.append(_name_24, "");
     _builder.append("_initActorInstances(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-    String _name_19 = ssc.getName();
-    _builder.append(_name_19, "	");
+    String _name_25 = ssc.getName();
+    _builder.append(_name_25, "	");
     _builder.append("\", \"initActorInstances\")");
     _builder.newLineIfNotEmpty();
     {
-      EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-      for(final ActorInstance ai : _allContainedInstances) {
+      EList<ActorInstance> _allContainedInstances_2 = ssi.getAllContainedInstances();
+      for(final ActorInstance ai_2 : _allContainedInstances_2) {
         _builder.append("\t");
-        ActorClass _actorClass = ai.getActorClass();
-        String _name_20 = _actorClass.getName();
-        _builder.append(_name_20, "	");
+        ActorClass _actorClass_4 = ai_2.getActorClass();
+        String _name_26 = _actorClass_4.getName();
+        _builder.append(_name_26, "	");
         _builder.append("_init(&");
-        String _path = ai.getPath();
-        String _pathName = this.roomExt.getPathName(_path);
-        _builder.append(_pathName, "	");
+        String _path_2 = ai_2.getPath();
+        String _pathName_2 = this.roomExt.getPathName(_path_2);
+        _builder.append(_pathName_2, "	");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }

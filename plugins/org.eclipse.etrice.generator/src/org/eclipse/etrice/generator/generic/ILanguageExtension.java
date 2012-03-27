@@ -128,4 +128,9 @@ public interface ILanguageExtension {
 	 * @return a string that represents the declaration
 	 */
 	String arrayDeclaration(String type, int size, String name);
+	
+	String constructorName(String cls);
+	String destructorName(String cls);
+	String constructorReturnType();
+	String destructorReturnType();
 }

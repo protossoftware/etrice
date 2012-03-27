@@ -13,6 +13,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
@@ -458,10 +459,23 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _operationSignature = this.operationSignature(operation, classname, true);
-        _builder.append(_operationSignature, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _operator_and = false;
+          boolean _usesInheritance = this.languageExt.usesInheritance();
+          if (!_usesInheritance) {
+            _operator_and = false;
+          } else {
+            boolean _isConstructor = RoomHelpers.isConstructor(operation);
+            _operator_and = BooleanExtensions.operator_and(_usesInheritance, _isConstructor);
+          }
+          boolean _operator_not = BooleanExtensions.operator_not(_operator_and);
+          if (_operator_not) {
+            StringConcatenation _operationSignature = this.operationSignature(operation, classname, true);
+            _builder.append(_operationSignature, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder;
@@ -473,27 +487,40 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        StringConcatenation _operationSignature = this.operationSignature(operation, classname, false);
-        _builder.append(_operationSignature, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
         {
-          DetailCode _detailCode = operation.getDetailCode();
-          EList<String> _commands = _detailCode.getCommands();
-          for(final String command : _commands) {
-            _builder.append("\t");
-            _builder.append(command, "	");
+          boolean _operator_and = false;
+          boolean _usesInheritance = this.languageExt.usesInheritance();
+          if (!_usesInheritance) {
+            _operator_and = false;
+          } else {
+            boolean _isConstructor = RoomHelpers.isConstructor(operation);
+            _operator_and = BooleanExtensions.operator_and(_usesInheritance, _isConstructor);
+          }
+          boolean _operator_not = BooleanExtensions.operator_not(_operator_and);
+          if (_operator_not) {
+            StringConcatenation _operationSignature = this.operationSignature(operation, classname, false);
+            _builder.append(_operationSignature, "");
+            _builder.append(" {");
             _builder.newLineIfNotEmpty();
+            {
+              DetailCode _detailCode = operation.getDetailCode();
+              EList<String> _commands = _detailCode.getCommands();
+              for(final String command : _commands) {
+                _builder.append("\t");
+                _builder.append(command, "	");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("}");
+            _builder.newLine();
           }
         }
-        _builder.append("}");
-        _builder.newLine();
       }
     }
     return _builder;
   }
   
-  public StringConcatenation operationsImplementation(final ActorClass ac, final String classname) {
+  public StringConcatenation operationsImplementation(final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
       this.translator.setActorClass(ac);
@@ -505,17 +532,31 @@ public class ProcedureHelpers {
       {
         EList<StandardOperation> _operations = ac.getOperations();
         for(final StandardOperation operation : _operations) {
-          StringConcatenation _operationSignature = this.operationSignature(operation, classname, false);
-          _builder.append(_operationSignature, "");
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          DetailCode _detailCode = operation.getDetailCode();
-          String _translateDetailCode = dct.translateDetailCode(_detailCode);
-          _builder.append(_translateDetailCode, "	");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
+          {
+            boolean _operator_and = false;
+            boolean _usesInheritance = this.languageExt.usesInheritance();
+            if (!_usesInheritance) {
+              _operator_and = false;
+            } else {
+              boolean _isConstructor = RoomHelpers.isConstructor(operation);
+              _operator_and = BooleanExtensions.operator_and(_usesInheritance, _isConstructor);
+            }
+            boolean _operator_not = BooleanExtensions.operator_not(_operator_and);
+            if (_operator_not) {
+              String _name = ac.getName();
+              StringConcatenation _operationSignature = this.operationSignature(operation, _name, false);
+              _builder.append(_operationSignature, "");
+              _builder.append(" {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              DetailCode _detailCode = operation.getDetailCode();
+              String _translateDetailCode = dct.translateDetailCode(_detailCode);
+              _builder.append(_translateDetailCode, "	");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
         }
       }
       _xblockexpression = (_builder);
@@ -524,14 +565,34 @@ public class ProcedureHelpers {
   }
   
   private StringConcatenation operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
-    String _name = operation.getName();
-    EList<VarDecl> _arguments = operation.getArguments();
-    StringConcatenation _BuildArgumentList = this.BuildArgumentList(_arguments);
-    String _string = _BuildArgumentList.toString();
-    RefableType _returntype = operation.getReturntype();
-    String _dataTypeToString = this.dataTypeToString(_returntype);
-    StringConcatenation _classOperationSignature = this.classOperationSignature(classname, _name, _string, _dataTypeToString, isDeclaration);
-    return _classOperationSignature;
+    StringConcatenation _xifexpression = null;
+    boolean _isConstructor = RoomHelpers.isConstructor(operation);
+    if (_isConstructor) {
+      String _constructorName = this.languageExt.constructorName(classname);
+      String _constructorReturnType = this.languageExt.constructorReturnType();
+      StringConcatenation _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType, isDeclaration);
+      _xifexpression = _classOperationSignature;
+    } else {
+      StringConcatenation _xifexpression_1 = null;
+      boolean _isDestructor = RoomHelpers.isDestructor(operation);
+      if (_isDestructor) {
+        String _destructorName = this.languageExt.destructorName(classname);
+        String _destructorReturnType = this.languageExt.destructorReturnType();
+        StringConcatenation _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType, isDeclaration);
+        _xifexpression_1 = _classOperationSignature_1;
+      } else {
+        String _name = operation.getName();
+        EList<VarDecl> _arguments = operation.getArguments();
+        StringConcatenation _BuildArgumentList = this.BuildArgumentList(_arguments);
+        String _string = _BuildArgumentList.toString();
+        RefableType _returntype = operation.getReturntype();
+        String _dataTypeToString = this.dataTypeToString(_returntype);
+        StringConcatenation _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString, isDeclaration);
+        _xifexpression_1 = _classOperationSignature_2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   private String dataTypeToString(final RefableType type) {
