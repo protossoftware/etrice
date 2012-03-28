@@ -298,14 +298,18 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 
 		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getType().getName():"";
 		String signature = RoomHelpers.getSignature(op);
+		String special = RoomHelpers.isConstructor(op)? "ctor " : RoomHelpers.isDestructor(op)? "dtor " : "";
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
 			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
 		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";
-		StyledString result = new StyledString(destr+op.getName()+signature+rt);
+		StyledString result = new StyledString(special+destr+op.getName()+signature+rt);
 		int pos = result.toString().indexOf(" sends ");
 		if (pos>=0)
 			result.setStyle(pos+1, 5, getKeywordStyler());
 
+		if (!special.isEmpty())
+			result.setStyle(0, 4, getKeywordStyler());
+		
 		return result;
 	}
 	
