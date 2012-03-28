@@ -496,9 +496,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("public void destroy(){");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("destroyUser();");
-      _builder.newLine();
       {
         boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(dtor, null);
         if (_operator_notEquals_2) {
