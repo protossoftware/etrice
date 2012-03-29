@@ -44,25 +44,17 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
 		}		
 	
-		for (Keyword k: f.findKeywords("(", "|")) {
+		for (Keyword k: f.findKeywords("(", "|", ".", "*")) {
 			c.setNoSpace().around(k);
 		}
 		
-		for (Keyword k: f.findKeywords("<")) {
+		for (Keyword k: f.findKeywords("<", "~")) {
 			c.setNoSpace().after(k);
 		}
-		for (Keyword k: f.findKeywords(")", ">", ",")) {
+		for (Keyword k: f.findKeywords(")", ">", ",", ":")) {
 			c.setNoSpace().before(k);
 		}
 		
-		for (Keyword k: f.findKeywords(":")) {
-			c.setNoSpace().before(k);
-		}
-		
-		for (Keyword k: f.findKeywords(".")) {
-			c.setNoSpace().around(k);
-		}
-
 		for (Keyword k: f.findKeywords("entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
 				"incoming", "outgoing", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
 			c.setLinewrap().before(k);
@@ -96,7 +88,8 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getSAPRefRule());
 		c.setLinewrap().around(f.getSPPRefRule());
 		c.setLinewrap().around(f.getAttributeRule());
-		c.setLinewrap().around(f.getOperationRule());
+		c.setLinewrap().around(f.getStandardOperationRule());
+		c.setLinewrap().around(f.getPortOperationRule());
 
 		// state graph items
 		c.setLinewrap().around(f.getStateRule());

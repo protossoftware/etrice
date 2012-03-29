@@ -152,7 +152,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 			
 			public void destroy(){
-				destroyUser();
 				«IF dtor!=null»
 					
 					«FOR l : dtor.detailCode.commands»
