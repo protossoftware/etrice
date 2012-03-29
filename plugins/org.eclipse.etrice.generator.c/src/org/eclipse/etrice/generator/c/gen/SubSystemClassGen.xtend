@@ -94,6 +94,8 @@ class SubSystemClassGen {
 		void «ssc.name»_stop(void); 	/* lifecycle stop	 */
 		void «ssc.name»_destroy(void); 	/* lifecycle destroy */
 		
+		void «ssc.name»_shutdown(void);  /* shutdown the dispatcher loop */
+		
 		«helpers.userCode(ssc.userCode2)»
 		
 		«generateIncludeGuardEnd(ssc.name)»
@@ -127,9 +129,10 @@ class SubSystemClassGen {
 		/* data for SubSysten «ssc.name» */
 		typedef struct «ssc.name» {
 			char *name;
+			volatile int shutdownRequest;
 		} «ssc.name»;
 		
-		static «ssc.name» «ssc.name»Inst = {"«ssc.name»"};
+		static «ssc.name» «ssc.name»Inst = {"«ssc.name»",0};
 		
 		void «ssc.name»_initActorInstances(void);
 		void «ssc.name»_constructActorInstances(void);
@@ -160,7 +163,7 @@ class SubSystemClassGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "run")
 			
 			#ifdef ET_RUNTIME_ENDLESS
-				while(TRUE){
+				while(!(«ssc.name»Inst.shutdownRequest)){
 					if (etTimer_executeNeeded()){
 						etMessageService_execute(&msgService_Thread1);
 						«generateDatadrivenExecutes(root, ssi)»
@@ -168,7 +171,7 @@ class SubSystemClassGen {
 				}
 			#else
 				uint32 loopCounter = 0;
-				while(TRUE){
+				while(!(«ssc.name»Inst.shutdownRequest)){
 					if (etTimer_executeNeeded()){
 						etMessageService_execute(&msgService_Thread1);
 						«generateDatadrivenExecutes(root, ssi)»
@@ -199,6 +202,14 @@ class SubSystemClassGen {
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
+
+		void «ssc.name»_shutdown(void){
+			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "shutdown")
+			etLogger_logInfoF("%s_shutdown", «ssc.name»Inst.name);
+			«ssc.name»Inst.shutdownRequest = 1;
+			ET_MSC_LOGGER_SYNC_EXIT
+		}
+
 
 		void «ssc.name»_constructActorInstances(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "constructActorInstances")
