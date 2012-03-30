@@ -13,12 +13,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
@@ -107,13 +110,16 @@ public class RoomDiagramEditor extends DiagramEditor {
 					});
 					if (!result.isEmpty()) {
 						boolean error = false;
+						MultiStatus ms = new MultiStatus(Activator.PLUGIN_ID, Status.ERROR, "validation errors during diagram save", null);
 						for (Issue issue : result) {
 							if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR) {
+								ms.add(new Status(Status.ERROR, Activator.PLUGIN_ID, issue.getMessage()));
 								error = true;
 							}
 						}
 						if (error) {
 							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
+							Activator.getDefault().getLog().log(ms);
 							return;
 						}
 					}
