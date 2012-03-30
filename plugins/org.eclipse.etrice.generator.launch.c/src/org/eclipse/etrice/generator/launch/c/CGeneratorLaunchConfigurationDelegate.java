@@ -46,6 +46,7 @@ public class CGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfig
 	@Override
 	protected void runGenerator(String[] args, ILineOutput out) {
 		Main.setOutput(out);
+		Main.setTerminateOnError(false);
 		Main.main(args);
 	}
 

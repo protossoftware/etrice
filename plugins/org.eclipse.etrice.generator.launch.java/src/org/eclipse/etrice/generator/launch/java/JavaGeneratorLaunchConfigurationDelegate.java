@@ -46,6 +46,7 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 	@Override
 	protected void runGenerator(String[] args, ILineOutput out) {
 		org.eclipse.etrice.generator.java.Main.setOutput(out);
+		org.eclipse.etrice.generator.java.Main.setTerminateOnError(false);
 		org.eclipse.etrice.generator.java.Main.main(args);
 	}
 

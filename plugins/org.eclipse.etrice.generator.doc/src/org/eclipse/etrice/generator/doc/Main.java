@@ -44,7 +44,7 @@ public class Main extends AbstractGenerator {
 
 	public static void main(String[] args) {
 		int ret = createAndRunGenerator(new GeneratorModule(), args);
-		if (ret!=GENERATOR_OK)
+		if (isTerminateOnError() && ret!=GENERATOR_OK)
 			System.exit(ret);
 	}
 

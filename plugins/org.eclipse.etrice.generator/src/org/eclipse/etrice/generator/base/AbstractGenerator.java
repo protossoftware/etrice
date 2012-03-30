@@ -49,6 +49,16 @@ public abstract class AbstractGenerator {
 
 	public static final int GENERATOR_OK = 0;
 	public static final int GENERATOR_ERROR = 1;
+	
+	private static boolean terminateOnError = true;
+	
+	public static void setTerminateOnError(boolean terminateOnError) {
+		AbstractGenerator.terminateOnError = terminateOnError;
+	}
+	
+	public static boolean isTerminateOnError() {
+		return terminateOnError;
+	}
 
 	protected static ILineOutput output = new StdLineOutput();
 	private static Injector injector;
@@ -57,6 +67,7 @@ public abstract class AbstractGenerator {
 		if (out!=null)
 			output = out;
 	}
+	
 
 	/**
 	 * creates an instance of the generator and invokes the {@link #runGenerator(String[])} method
@@ -128,7 +139,7 @@ public abstract class AbstractGenerator {
 				logger.logError("-- terminating", null);
 				return null;
 			}
-			URI genModelURI = genModelPath!=null? URI.createURI(genModelPath) : URI.createFileURI("tmp.rim");
+			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = rs.createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
 			if (genModelPath!=null) {
