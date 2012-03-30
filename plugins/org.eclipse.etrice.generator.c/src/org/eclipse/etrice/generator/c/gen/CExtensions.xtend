@@ -131,4 +131,18 @@ class CExtensions implements ILanguageExtension {
 	override String arrayDeclaration(String type, int size, String name) {
 		type+" "+name+"["+size+"]";
 	}
+	
+	override String constructorName(String cls) {
+		"ctor"
+	}
+	override String destructorName(String cls) {
+		"dtor"
+	}
+	override String constructorReturnType() {
+		"void"
+	}
+	override String destructorReturnType() {
+		"void"
+	}
+	
 }

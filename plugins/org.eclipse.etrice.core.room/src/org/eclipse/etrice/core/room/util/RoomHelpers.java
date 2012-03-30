@@ -33,12 +33,15 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -626,6 +629,28 @@ public class RoomHelpers {
 		return conjugated? protocol.getConjugate():protocol.getRegular();
 	}
 
+	public static boolean isConstructor(Operation op) {
+		if (op instanceof PortOperation)
+			return false;
+		
+		RoomClass cls = (RoomClass) op.eContainer();
+		if (cls.getName().equals(op.getName()))
+			return !((StandardOperation)op).isDestructor();
+		
+		return false;
+	}
+
+	public static boolean isDestructor(Operation op) {
+		if (op instanceof PortOperation)
+			return false;
+		
+		RoomClass cls = (RoomClass) op.eContainer();
+		if (cls.getName().equals(op.getName()))
+			return ((StandardOperation)op).isDestructor();
+		
+		return false;
+	}
+	
 	public static String getSignature(Operation op) {
 		/* TODO TS: create complete signature including return type and ref */
 		String signature = "";
@@ -651,4 +676,23 @@ public class RoomHelpers {
 		return signature;
 	}
 	
+	public static boolean hasConstructor(ActorClass ac) {
+		for (StandardOperation op : ac.getOperations()) {
+			if (op.getName().equals(ac.getName()))
+				if (!op.isDestructor())
+					return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean hasDestructor(ActorClass ac) {
+		for (StandardOperation op : ac.getOperations()) {
+			if (op.getName().equals(ac.getName()))
+				if (op.isDestructor())
+					return true;
+		}
+		
+		return false;
+	}
 }

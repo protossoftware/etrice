@@ -41,11 +41,13 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
@@ -332,6 +334,22 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (pc.getCommType()==CommunicationType.DATA_DRIVEN)
 			if (msg.getData()==null)
 				error("Messages of data driven protocols must carry data", RoomPackage.Literals.MESSAGE__DATA);
+	}
+
+	@Check
+	public void checkOperation(StandardOperation op) {
+		if (RoomHelpers.isConstructor(op)) {
+			if (!op.getArguments().isEmpty())
+				error("Constructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
+			if (op.getReturntype()!=null)
+				error("Constructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+		}
+		else if (RoomHelpers.isDestructor(op)) {
+			if (!op.getArguments().isEmpty())
+				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
+			if (op.getReturntype()!=null)
+				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+		}
 	}
 	
 	private void error(Result result) {

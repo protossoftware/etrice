@@ -87,7 +87,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//StandardOperation"/>
+    <genClasses ecoreClass="Room.ecore#//StandardOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//StandardOperation/destructor"/>
+    </genClasses>
     <genClasses ecoreClass="Room.ecore#//PortOperation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//PortOperation/sendsMsg"/>
     </genClasses>

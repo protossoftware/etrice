@@ -75,7 +75,7 @@ Attribute:
 Operation: StandardOperation | PortOperation; 
 
 StandardOperation:
-	'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=RefableType)))?
+	'Operation' (destructor?='~')? name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=RefableType)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
 ;

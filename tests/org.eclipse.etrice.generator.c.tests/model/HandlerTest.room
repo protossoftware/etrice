@@ -1,0 +1,323 @@
+RoomModel HandlerTest {
+	import room.basic.types.c.* from "CTypes.room"
+	
+	LogicalSystem System_HandlerTest {
+		SubSystemRef SubSystem_HandlerTest: SubSystem_HandlerTest
+	}
+
+	SubSystemClass SubSystem_HandlerTest {
+		ActorRef HandlerTest_Top: HandlerTest_Top
+//		LogicalThread t1 prio=5 {HandlerTest_Top.tester}
+//		LogicalThread t2 prio=5 {HandlerTest_Top.handlerUser}
+	}
+
+	ActorClass HandlerTest_Top {
+		Structure {
+			ActorRef tester: Tester
+			ActorRef handlerUser: HandlerUser
+			
+			Binding tester.TestPort1 and handlerUser.TestPort1
+		}
+		Behavior { }
+	}
+
+	ActorClass HandlerUser {
+		Interface {
+			Port TestPort1: TestProtocol
+	
+	
+		}
+		Structure {	
+			usercode3 {
+				"#include \"etUnit/etUnit.h\""
+			}
+			external Port TestPort1
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition E22: my tp0 -> my tp0 {
+					triggers {
+						<msg1: TestPort1>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 22);"
+					}
+				}
+				Transition E30: my tp1 -> my tp1 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==3"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 30);"
+					}
+				}
+				Transition init: initial -> tp2 of E2_E3 {
+					action {
+						"etUnit_openAll(\"tmp/testlog\",\"GeneratorTest1\", \"GeneratorTest1\", \"GeneratorTest1\");"
+						"static etInt16 resultlist[] = {1,2,17,14,18,19,22,20,15,3,30,2,14,19,24,20,15,3,25,27,28,22,24,20,15,12,14,19,20,15,10,5,6,7,5,9,6,11,5,6,7,5,6,3,32,50};"
+						"EXPECT_ORDER_START(resultlist, 46);"
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 1);"
+					}
+				}
+				Transition E25: E2_E3 -> cp cp1 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==4"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 25);"
+					}
+				}
+				Transition E31: my tp1 -> my tp1 {
+					triggers {
+						<msg2: TestPort1 guard {
+							"p1==4"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 31);"
+					}
+				}
+				Transition E24: my tp0 -> E2_E3 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==7"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 24);"
+					}
+				}
+				Transition E23: my tp0 -> my tp0 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"p1==12"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 23);"
+					}
+				}
+				Transition E27: cp cp1 -> E28_E29 {
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 27);"
+					}
+				}
+				Transition E26: cp cp1 -> E2_E3 {
+					cond {
+						"p1!=4"
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 26);"
+					}
+				}
+				Transition E32: my tp1 -> testFinished {
+					triggers {
+						<msg6: TestPort1>
+					}
+					action {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 32);"
+					}
+				}
+				ChoicePoint cp1
+				handler TransitionPoint tp0
+				TransitionPoint tp1
+				State E2_E3 {
+					entry {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 2);"
+					}
+					exit {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 3);"
+					}
+					subgraph {
+						Transition E13: E14_E15 -> E5_E6 {
+							triggers {
+								<msg5: TestPort1>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 13);"
+							}
+						}
+						Transition E9: my tp0 -> my tp0 {
+							triggers {
+								<msg3: TestPort1>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 9);"
+							}
+						}
+						Transition E11: my tp1 -> my tp1 {
+							triggers {
+								<msg4: TestPort1>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 11);"
+							}
+						}
+						Transition E7: E5_E6 -> E5_E6 {
+							triggers {
+								<msg1: TestPort1>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 7);"
+							}
+						}
+						Transition E17: my tp2 -> tp0 of E14_E15 {
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 17);"
+							}
+						}
+						Transition E8: my tp0 -> my tp0 {
+							triggers {
+								<msg1: TestPort1 guard {
+									"p1==5"
+								}>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 8);"
+							}
+						}
+						Transition init: initial -> E5_E6 {
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 4);"
+							}
+						}
+						Transition E16: E14_E15 -> E14_E15 {
+							triggers {
+								<msg1: TestPort1 guard {
+									"p1==8"
+								}>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 16);"
+							}
+						}
+						Transition E12: my tp1 -> E14_E15 {
+							triggers {
+								<msg2: TestPort1 guard {
+									"p1==5"
+								}>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 12);"
+							}
+						}
+						Transition E10: my tp1 -> E5_E6 {
+							triggers {
+								<msg2: TestPort1 guard {
+									"p1==6"
+								}>
+							}
+							action {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 10);"
+							}
+						}
+						handler TransitionPoint tp0
+						TransitionPoint tp1
+						EntryPoint tp2
+						State E14_E15 {
+							entry {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 14);"
+							}
+							exit {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 15);"
+							}
+							subgraph {
+								Transition E18: my tp0 -> E19_E20 {
+									action {
+										"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 18);"
+									}
+								}
+								Transition init: initial -> E19_E20 {
+									action {
+										"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 21);"
+									}
+								}
+								EntryPoint tp0
+								State E19_E20 {
+									entry {
+										"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 19);"
+									}
+									exit {
+										"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 20);"
+									}
+								}
+							}
+						}
+						State E5_E6 {
+							entry {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 5);"
+							}
+							exit {
+								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 6);"
+							}
+						}
+					}
+				}
+				State testFinished {
+					entry {
+						"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 50);"
+						"etUnit_closeAll();"
+					}
+				}
+				State E28_E29 {
+					entry {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 28);"
+					}
+					exit {
+						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 29);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Tester {
+		Interface {
+			conjugated Port TestPort1: TestProtocol
+		}
+		Structure {
+			external Port TestPort1
+			
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"TestPort1.msg1(2);"
+						"TestPort1.msg1(3);"
+						"TestPort1.msg1(7);"
+						"TestPort1.msg1(4);"
+						"TestPort1.msg1(5);"
+						"TestPort1.msg1(7);"
+						"TestPort1.msg2(5);"
+						"TestPort1.msg2(6);"
+						""
+						"TestPort1.msg1(5);"
+						"TestPort1.msg3();"
+						"TestPort1.msg4();"
+						"TestPort1.msg1(8);"
+						"TestPort1.msg6(12);"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass TestProtocol {
+		incoming {
+			Message msg1(p1:int32)
+			Message msg2(p1:int32)
+			Message msg3()
+			Message msg4()
+			Message msg5(p1:int32)
+			Message msg6(p1:int32)
+		}
+	}
+
+}

@@ -75,6 +75,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		var eventPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN)
 		var sendPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN && p.conjugated)
 		var recvPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
+		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
+		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		
 	'''
 		/**
@@ -168,7 +170,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		void «xpac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg);
 		
-		«IF xpac.hasNonEmptyStateMachine»
+		«IF dataDriven || async»
 			void «xpac.name»_execute(«xpac.name»* self);
 		«ENDIF»
 		
@@ -235,7 +237,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 		
 		«IF dataDriven || async»
-			void «xpac.name»_execute(«xpac.name»* self){
+			void «xpac.name»_execute(«xpac.name»* self) {
 				ET_MSC_LOGGER_SYNC_ENTRY("«xpac.name»", "_execute")
 				«IF xpac.hasNonEmptyStateMachine»
 					
@@ -246,7 +248,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 		«ENDIF»
 		
-		«helpers.operationsImplementation(ac, ac.name)»
+		«helpers.operationsImplementation(ac)»
 		
 		'''
 	}
