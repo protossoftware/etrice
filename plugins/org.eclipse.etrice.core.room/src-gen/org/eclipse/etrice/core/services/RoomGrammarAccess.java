@@ -2637,18 +2637,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cActorRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cTypeActorClassCrossReference_3_0 = (CrossReference)cTypeAssignment_3.eContents().get(0);
-		private final RuleCall cTypeActorClassFQNParserRuleCall_3_0_1 = (RuleCall)cTypeActorClassCrossReference_3_0.eContents().get(1);
-		private final Assignment cDocuAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cSizeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cSizeINTTerminalRuleCall_2_1_0 = (RuleCall)cSizeAssignment_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cTypeActorClassCrossReference_4_0 = (CrossReference)cTypeAssignment_4.eContents().get(0);
+		private final RuleCall cTypeActorClassFQNParserRuleCall_4_0_1 = (RuleCall)cTypeActorClassCrossReference_4_0.eContents().get(1);
+		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
 		//ActorRef:
-		//	"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?;
+		//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?
+		//"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"ActorRef"
@@ -2660,23 +2665,38 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//("[" size=INT "]")?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
+
+		//size=INT
+		public Assignment getSizeAssignment_2_1() { return cSizeAssignment_2_1; }
+
+		//INT
+		public RuleCall getSizeINTTerminalRuleCall_2_1_0() { return cSizeINTTerminalRuleCall_2_1_0; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
+
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
 		//type=[ActorClass|FQN]
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
 
 		//[ActorClass|FQN]
-		public CrossReference getTypeActorClassCrossReference_3_0() { return cTypeActorClassCrossReference_3_0; }
+		public CrossReference getTypeActorClassCrossReference_4_0() { return cTypeActorClassCrossReference_4_0; }
 
 		//FQN
-		public RuleCall getTypeActorClassFQNParserRuleCall_3_0_1() { return cTypeActorClassFQNParserRuleCall_3_0_1; }
+		public RuleCall getTypeActorClassFQNParserRuleCall_4_0_1() { return cTypeActorClassFQNParserRuleCall_4_0_1; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_4() { return cDocuAssignment_4; }
+		public Assignment getDocuAssignment_5() { return cDocuAssignment_5; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_4_0() { return cDocuDocumentationParserRuleCall_4_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_5_0() { return cDocuDocumentationParserRuleCall_5_0; }
 	}
 
 	public class StateGraphNodeElements extends AbstractParserRuleElementFinder {
@@ -5030,7 +5050,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorRef:
-	//	"ActorRef" name=ID ":" type=[ActorClass|FQN] docu=Documentation?;
+	//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {
 		return (pActorRef != null) ? pActorRef : (pActorRef = new ActorRefElements());
 	}

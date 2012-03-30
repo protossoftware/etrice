@@ -22,6 +22,8 @@ import org.eclipse.etrice.generator.etricegen.ETriceGenPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.ActorInstanceImpl#getActorClass <em>Actor Class</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.ActorInstanceImpl#getReplIdx <em>Repl Idx</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.etricegen.impl.ActorInstanceImpl#getUnindexedName <em>Unindexed Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,6 +39,35 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * @ordered
 	 */
 	protected ActorClass actorClass;
+
+	/**
+	 * The default value of the '{@link #getReplIdx() <em>Repl Idx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReplIdx()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int REPL_IDX_EDEFAULT = -1;
+	/**
+	 * The cached value of the '{@link #getReplIdx() <em>Repl Idx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReplIdx()
+	 * @generated
+	 * @ordered
+	 */
+	protected int replIdx = REPL_IDX_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUnindexedName() <em>Unindexed Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUnindexedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String UNINDEXED_NAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,12 +131,46 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getReplIdx() {
+		return replIdx;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReplIdx(int newReplIdx) {
+		int oldReplIdx = replIdx;
+		replIdx = newReplIdx;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX, oldReplIdx, replIdx));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getUnindexedName() {
+		return (getReplIdx()>=0)? getName().substring(0, getName().lastIndexOf('_')) : getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ETriceGenPackage.ACTOR_INSTANCE__ACTOR_CLASS:
 				if (resolve) return getActorClass();
 				return basicGetActorClass();
+			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
+				return getReplIdx();
+			case ETriceGenPackage.ACTOR_INSTANCE__UNINDEXED_NAME:
+				return getUnindexedName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,6 +185,9 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 		switch (featureID) {
 			case ETriceGenPackage.ACTOR_INSTANCE__ACTOR_CLASS:
 				setActorClass((ActorClass)newValue);
+				return;
+			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
+				setReplIdx((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,6 +204,9 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 			case ETriceGenPackage.ACTOR_INSTANCE__ACTOR_CLASS:
 				setActorClass((ActorClass)null);
 				return;
+			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
+				setReplIdx(REPL_IDX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -150,8 +221,28 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 		switch (featureID) {
 			case ETriceGenPackage.ACTOR_INSTANCE__ACTOR_CLASS:
 				return actorClass != null;
+			case ETriceGenPackage.ACTOR_INSTANCE__REPL_IDX:
+				return replIdx != REPL_IDX_EDEFAULT;
+			case ETriceGenPackage.ACTOR_INSTANCE__UNINDEXED_NAME:
+				return UNINDEXED_NAME_EDEFAULT == null ? getUnindexedName() != null : !UNINDEXED_NAME_EDEFAULT.equals(getUnindexedName());
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (replIdx: ");
+		result.append(replIdx);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ActorInstanceImpl

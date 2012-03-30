@@ -2437,13 +2437,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_REF__DOCU = ACTOR_CONTAINER_REF__DOCU;
 
   /**
+   * The feature id for the '<em><b>Size</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_REF__SIZE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_REF__TYPE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 0;
+  int ACTOR_REF__TYPE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Actor Ref</em>' class.
@@ -2452,7 +2461,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_REF_FEATURE_COUNT = ACTOR_CONTAINER_REF_FEATURE_COUNT + 1;
+  int ACTOR_REF_FEATURE_COUNT = ACTOR_CONTAINER_REF_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphItemImpl <em>State Graph Item</em>}' class.
@@ -5495,6 +5504,17 @@ public interface RoomPackage extends EPackage
   EClass getActorRef();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorRef#getSize <em>Size</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Size</em>'.
+   * @see org.eclipse.etrice.core.room.ActorRef#getSize()
+   * @see #getActorRef()
+   * @generated
+   */
+  EAttribute getActorRef_Size();
+
+  /**
    * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ActorRef#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7622,6 +7642,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass ACTOR_REF = eINSTANCE.getActorRef();
+
+    /**
+     * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTOR_REF__SIZE = eINSTANCE.getActorRef_Size();
 
     /**
      * The meta object literal for the '<em><b>Type</b></em>' reference feature.

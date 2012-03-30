@@ -12,14 +12,15 @@
 
 package org.eclipse.etrice.generator.builder;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -410,46 +411,63 @@ public class GeneratorModelBuilder {
 	
 	/**
 	 * hierarchically (i.e. recursively) creates all instances implied by this component
-	 * @param comp - the component class
+	 * @param ssc - the component class
 	 * @return the newly created hierarchy of instances
 	 */
-	private SubSystemInstance createSubSystemInstance(SubSystemClass comp) {
-		logger.logInfo("GeneratorModelBuilder: creating component instance from "+comp.getName());
+	private SubSystemInstance createSubSystemInstance(SubSystemClass ssc) {
+		logger.logInfo("GeneratorModelBuilder: creating subsystem class from "+ssc.getName());
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
 		allObjects.add(instance);
 		
-		instance.setName(comp.getName());
-		instance.setSubSystemClass(comp);
+		instance.setName(ssc.getName());
+		instance.setSubSystemClass(ssc);
 		
 		// TODOHRR: enumerate object ids per thread
 		
-		for (ActorRef ar : comp.getActorRefs()) {
-			instance.getInstances().add(recursivelyCreateActorInstances(ar));
+		for (ActorRef ar : ssc.getActorRefs()) {
+			addRefInstances(instance, ar);
 		}
 		
 		// bindings are handled now since port instances of sub-actor instances are available
-		createBindingInstances(instance, comp.getBindings());
-		createConnectionInstances(instance, comp.getConnections());
+		createBindingInstances(instance, ssc.getBindings());
+		createConnectionInstances(instance, ssc.getConnections());
 		
 		return instance;
 	}
 	
 	/**
-	 * hierarchically (i.e. recursively) creates all instances implied by this actor
-	 * @param aref - create the instance sub-tree of this actor reference
-	 * @param instance - the root component instance
-	 * @return the newly created actor instance
+	 * hierarchically (i.e. recursively) creates all instances implied by this actor ref
+	 * 
+	 * @param aref
+	 * @return
 	 */
 	private ActorInstance recursivelyCreateActorInstances(ActorRef aref) {
-		logger.logInfo("GeneratorModelBuilder: creating actor instance "+aref.getName()+" from "+aref.getType().getName());
+		return recursivelyCreateActorInstances(aref, -1);
+	}
+	
+	/**
+	 * hierarchically (i.e. recursively) creates all instances implied by this actor ref
+	 * 
+	 * @param aref - create the instance sub-tree of this actor reference
+	 * @param idx - index in replication array or -1 if no replication 
+	 * @return the newly created actor instance
+	 */
+	private ActorInstance recursivelyCreateActorInstances(ActorRef aref, int idx) {
+		String name = aref.getName();
+		if (idx>=0)
+			name += "_"+idx;
+		
+		logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
 		allObjects.add(ai);
 		
-		ai.setName(aref.getName());
+		ai.setName(name);
 		ActorClass ac = aref.getType();
 		ai.setActorClass(ac);
+		if (idx>=0)
+			ai.setReplIdx(idx);
 
 		// create a list of super classes, super first, sub-classes last
 		LinkedList<ActorClass> classes = new LinkedList<ActorClass>();
@@ -468,17 +486,39 @@ public class GeneratorModelBuilder {
 			
 			// recurse down into sub-actors
 			for (ActorRef ar : acl.getActorRefs()) {
-				ai.getInstances().add(recursivelyCreateActorInstances(ar));
+				addRefInstances(ai, ar);
 			}
 			
 		}
+		
+		// bindings and layer connections are handled now since port instances of sub-actor instances are available
+		// this has to be done in one step per actor instance
+		// so we collect all bindings and connections first
+		ArrayList<Binding> bindings = new ArrayList<Binding>();
+		ArrayList<LayerConnection> connections = new ArrayList<LayerConnection>();
 		for (ActorClass acl : classes) {
-			// bindings are handled now since port instances of sub-actor instances are available
-			createBindingInstances(ai, acl.getBindings());
-			createConnectionInstances(ai, acl.getConnections());
+			bindings.addAll(acl.getBindings());
+			connections.addAll(acl.getConnections());
 		}
+		createBindingInstances(ai, bindings);
+		createConnectionInstances(ai, connections);
 		
 		return ai;
+	}
+
+	/**
+	 * create instances for this actor ref
+	 * 
+	 * @param si the container structure instance
+	 * @param ar the actor ref
+	 */
+	private void addRefInstances(StructureInstance si, ActorRef ar) {
+		if (ar.getSize()>1) {
+			for (int idx=0; idx<ar.getSize(); ++idx)
+				si.getInstances().add(recursivelyCreateActorInstances(ar, idx));
+		}
+		else
+			si.getInstances().add(recursivelyCreateActorInstances(ar));
 	}
 
 	/**
@@ -557,45 +597,140 @@ public class GeneratorModelBuilder {
 		}
 	}
 	
+	private static final String SEP = "#";
+	
 	/**
 	 * create binding instances. Since bindings connect port instances the ports can point back to their bindings
 	 * using EOpposite
-	 * @param ai - create bindings for this actor instance
+	 * @param si - create bindings for this actor instance
 	 * @param bindings - a list of bindings
 	 */
-	private void createBindingInstances(StructureInstance ai, EList<Binding> bindings) {
+	private void createBindingInstances(StructureInstance si, List<Binding> bindings) {
+		HashMap<String, ArrayList<PortInstance>> ep2portInstances = initPortInstanceMap(si, bindings);
+		
 		for (Binding bind : bindings) {
-			BindingInstance bi = ETriceGenFactory.eINSTANCE.createBindingInstance();
-			
 			if (bind.getEndpoint1().getActorRef()==null && bind.getEndpoint2().getActorRef()==null) {
 				int idx = bindings.indexOf(bind);
 				diagnostician.error("binding connects two ports of the same actor", bind, RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
 			}
 			else {
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint1()));
-				bi.getPorts().add(getPortInstance(ai, bind.getEndpoint2()));
+				ArrayList<PortInstance> ep1Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint1()));
+				ArrayList<PortInstance> ep2Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint2()));
+				int nBind = ep1Ports.size()>ep2Ports.size()? ep2Ports.size():ep1Ports.size();
+				for (int i=0; i<nBind; ++i) {
+					createBindingInstance(si, ep1Ports.get(0), ep2Ports.get(0));
+					ep1Ports.remove(0);
+					ep2Ports.remove(0);
+				}
 			}
-			
-			ai.getBindings().add(bi);
+		}
+	}
+
+	private void createBindingInstance(StructureInstance si, PortInstance pi1, PortInstance pi2) {
+		BindingInstance bi = ETriceGenFactory.eINSTANCE.createBindingInstance();
+		
+		bi.getPorts().add(pi1);
+		bi.getPorts().add(pi2);
+		
+		si.getBindings().add(bi);
+	}
+
+	private HashMap<String, ArrayList<PortInstance>> initPortInstanceMap(StructureInstance si, List<Binding> bindings) {
+		HashMap<String, ArrayList<PortInstance>> ep2portInstances = new HashMap<String, ArrayList<PortInstance>>();
+		for (PortInstance pi : si.getPorts()) {
+			if (pi.getKind()!=PortKind.EXTERNAL) {
+				addPortInstance(pi, getEndPointKey(null, pi), ep2portInstances);
+			}
+		}
+		for (ActorInstance sub : si.getInstances()) {
+			boolean forceMultFixed = sub.getReplIdx()>1;
+			for (PortInstance pi : sub.getPorts()) {
+				if (pi.getKind()!=PortKind.INTERNAL) {
+					if (forceMultFixed && pi.getPort().getMultiplicity()<0)
+						diagnostician.error("port multiplicity of replicated actor has to be fixed", pi.getPort(), RoomPackage.eINSTANCE.getPort_Multiplicity());
+					addPortInstance(pi, getEndPointKey(sub, pi), ep2portInstances);
+				}
+			}
+		}
+		
+		// in a second step the actually needed number of instances for multiplicity * is filled into the list
+		HashSet<String> multAny = new HashSet<String>();
+		for (Binding bind : bindings) {
+			addNeededInstance(getEndPointKey(bind.getEndpoint1()), ep2portInstances, multAny);
+			addNeededInstance(getEndPointKey(bind.getEndpoint2()), ep2portInstances, multAny);
+		}
+		
+		return ep2portInstances;
+	}
+
+	private void addNeededInstance(String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
+		ArrayList<PortInstance> ports = ep2portInstances.get(key);
+		
+		if (ports.get(0).getPort().getMultiplicity()<0) {
+			if (multAny.contains(key)) {
+				// we just register
+				multAny.add(key);
+			}
+			else {
+				// we add another copy of this instance
+				ports.add(ports.get(0));
+			}
 		}
 	}
 	
+	private String getEndPointKey(ActorInstance ai, PortInstance pi) {
+		return (ai!=null? ai.getUnindexedName():"")+SEP+pi.getPort().getName();
+	}
+	
+	private String getEndPointKey(BindingEndPoint ep) {
+		return getEndPointKey(ep.getActorRef(), ep.getPort());
+	}
+	
+	private String getEndPointKey(ActorContainerRef ref, Port port) {
+		return ref==null? SEP+port.getName() : ref.getName()+SEP+port.getName();
+	}
+	
+	/**
+	 * add the port instance to the map. Replicated ports are added 'multiplicity' times. If the multiplicity is * then the port is added once.
+	 *  
+	 * @param pi
+	 * @param ep2portInstances
+	 */
+	private void addPortInstance(PortInstance pi, String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances) {
+		ArrayList<PortInstance> ports = ep2portInstances.get(key);
+		if (ports==null) {
+			ports = new ArrayList<PortInstance>();
+			ep2portInstances.put(key, ports);
+		}
+		int repl = pi.getPort().getMultiplicity();
+		if (repl<=0)
+			repl = 1;
+		for (int i=0; i<repl; ++i)
+			ports.add(pi);
+	}
+
 	/**
 	 * Create layer connection instances.
 	 * @param si - create layer connections for this actor instance
 	 * @param connections - a list of layer connections
 	 */
-	private void createConnectionInstances(StructureInstance si, EList<LayerConnection> connections) {
+	private void createConnectionInstances(StructureInstance si, List<LayerConnection> connections) {
 		for (LayerConnection lc : connections) {
-			ConnectionInstance ci = ETriceGenFactory.eINSTANCE.createConnectionInstance();
 			
-			ci.setConnection(lc);
-			
+			SPPoint to = lc.getTo();
+			SPPInstance toSPPinst = getSPPInstance(si, to.getRef(), to.getService());
+
 			SAPoint from = lc.getFrom();
 			if (from instanceof RefSAPoint) {
 				if (((RefSAPoint)from).getRef() instanceof ActorRef) {
-					ActorInstance fromAI = getActorInstance(si, ((ActorRef)((RefSAPoint)from).getRef()));
-					ci.setFromAI(fromAI);
+					List<ActorInstance> fromInstances = getActorInstances(si, ((ActorRef)((RefSAPoint)from).getRef()));
+					for (ActorInstance fromInst : fromInstances) {
+						ConnectionInstance ci = ETriceGenFactory.eINSTANCE.createConnectionInstance();
+						ci.setConnection(lc);
+						ci.setFromAI(fromInst);
+						ci.setToSPP(toSPPinst);
+						si.getConnections().add(ci);
+					}
 				}
 				else {
 					//TODOHRR: handle SubSystemRef
@@ -603,23 +738,22 @@ public class GeneratorModelBuilder {
 				}
 			}
 			else if (from instanceof RelaySAPoint) {
-				SPPInstance sppi = getSPPInstance(si, null, ((RelaySAPoint)from).getRelay());
-				if (sppi.getOutgoing()!=null) {
-					ActorContainerClass acr = (ActorContainerClass) sppi.getSpp().eContainer();
-					int idx = acr.getIfSPPs().indexOf(sppi.getSpp());
-					diagnostician.error("SPPRef has several outgoing layer connections!", sppi.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
+				SPPInstance fromSPPinst = getSPPInstance(si, null, ((RelaySAPoint)from).getRelay());
+				if (fromSPPinst.getOutgoing()!=null) {
+					ActorContainerClass acr = (ActorContainerClass) fromSPPinst.getSpp().eContainer();
+					int idx = acr.getIfSPPs().indexOf(fromSPPinst.getSpp());
+					diagnostician.error("SPPRef has several outgoing layer connections!", fromSPPinst.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
 				}
-				ci.setFromSPP(sppi);
+				ConnectionInstance ci = ETriceGenFactory.eINSTANCE.createConnectionInstance();
+				ci.setConnection(lc);
+				ci.setFromSPP(fromSPPinst);
+				ci.setToSPP(toSPPinst);
+				si.getConnections().add(ci);
 			}
 			else {
 				assert(false): "unknown type of "+from.eClass().getName();
 			}
 			
-			SPPoint to = lc.getTo();
-			SPPInstance sppi = getSPPInstance(si, to.getRef(), to.getService());
-			ci.setToSPP(sppi);
-			
-			si.getConnections().add(ci);
 		}
 	}
 	
@@ -640,9 +774,9 @@ public class GeneratorModelBuilder {
 		}
 		else {
 			if (ar instanceof ActorRef) {
-				ActorInstance subai = getActorInstance(si, (ActorRef)ar);
-				if (subai!=null)
-					return getSPPInstance(subai, null, spp);
+				List<ActorInstance> subais = getActorInstances(si, (ActorRef)ar);
+				if (!subais.isEmpty())
+					return getSPPInstance(subais.get(0), null, spp);
 			}
 			else if (ar instanceof SubSystemRef) {
 				// TODOHRR: handle SubSystemRef
@@ -658,52 +792,14 @@ public class GeneratorModelBuilder {
 	 * @param ar
 	 * @return
 	 */
-	private ActorInstance getActorInstance(StructureInstance si, ActorRef ar) {
+	private List<ActorInstance> getActorInstances(StructureInstance si, ActorRef ar) {
+		ArrayList<ActorInstance> result = new ArrayList<ActorInstance>();
 		for (ActorInstance subai : si.getInstances()) {
-			if (subai.getName().equals(ar.getName())) {
-				return subai;
+			if (subai.getUnindexedName().equals(ar.getName())) {
+				result.add(subai);
 			}
 		}
-		return null;
-	}
-	
-	/**
-	 * get a port instance for a binding endpoint
-	 * @param si - consider this actor instance
-	 * @param be - the binding endpoint to match
-	 * @return the port instance found
-	 */
-	private PortInstance getPortInstance(StructureInstance si, BindingEndPoint be) {
-		if (be.getActorRef()==null) {
-			for (PortInstance pi : si.getPorts()) {
-				if (pi.getPort()==be.getPort()) {
-					if (pi.getKind()==PortKind.EXTERNAL) {
-						EStructuralFeature feature = (((Binding)be.eContainer()).getEndpoint1()==be)? RoomPackage.eINSTANCE.getBinding_Endpoint1()
-								: RoomPackage.eINSTANCE.getBinding_Endpoint2();
-						diagnostician.error("binding connects external end port to sub-actor interface", be.eContainer(), feature);
-					}
-					return pi;
-				}
-			}
-		}
-		else {
-			for (ActorInstance subai : si.getInstances()) {
-				if (subai.getName().equals(be.getActorRef().getName())) {
-					for (PortInstance pi : subai.getPorts()) {
-						if (pi.getPort()==be.getPort()) {
-							if (pi.getKind()==PortKind.INTERNAL) {
-								EStructuralFeature feature = (((Binding)be.eContainer()).getEndpoint1()==be)? RoomPackage.eINSTANCE.getBinding_Endpoint1()
-										: RoomPackage.eINSTANCE.getBinding_Endpoint2();
-								diagnostician.error("binding connects to sub-actor internal end port", be.eContainer(), feature);
-							}
-							return pi;
-						}
-					}
-				}
-			}
-		}
-		
-		return null;
+		return result;
 	}
 	
 	/**

@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -106,6 +107,22 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 			return Status.OK_STATUS;
 		}
 	}
+	
+	class SizeValidator implements IValidator {
+
+		public SizeValidator() {
+		}
+
+		@Override
+		public IStatus validate(Object value) {
+			if (value instanceof Integer) {
+				int m = (Integer) value;
+				if (m<=0)
+					return ValidationStatus.error("multiplicity must not be positive");
+			}
+			return Status.OK_STATUS;
+		}
+	}
 
 	private ActorContainerRef ref;
 	private IScope scope;
@@ -156,20 +173,47 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
         	}
 		}
 		
-		Text name = createText(body, "Name:", ref, RoomPackage.eINSTANCE.getActorContainerRef_Name(), nv);
+		Text name = createText(body, "&Name:", ref, RoomPackage.eINSTANCE.getActorContainerRef_Name(), nv);
 		Combo refClass = refIsActor?
-				createComboUsingDesc(body, "Actor Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
-			:	createComboUsingDesc(body, "SubSystem Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+				createComboUsingDesc(body, "Actor &Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
+			:	createComboUsingDesc(body, "SubSystem &Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 
 		createDecorator(name, "invalid name");
 		createDecorator(refClass, "no class selected");
 
 		if (!newRef) {
 			refClass.setEnabled(false);
+			createInfoDecorator(refClass, "class fixed for exisiting ref");
 		}
 
+		if (ref instanceof ActorRef) {
+			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Size(), new SizeValidator());
+			if (hasInterfacePortWithMultiplicityAny(((ActorRef) ref).getType())) {
+				size.setEnabled(false);
+				createInfoDecorator(size, "size fixed since actor has interface ports with multiplicity *");
+			}
+			else {
+				createDecorator(size, "multiplicity");
+			}
+		}
+		
 		name.selectAll();
 		name.setFocus();
+	}
+
+	/**
+	 * @param ac
+	 * @return
+	 */
+	private boolean hasInterfacePortWithMultiplicityAny(ActorClass ac) {
+		if (ac==null)
+			return false;
+		
+		for (Port p : ac.getIfPorts()) {
+			if (p.getMultiplicity()<0)
+				return true;
+		}
+		return false;
 	}
 
 	@Override

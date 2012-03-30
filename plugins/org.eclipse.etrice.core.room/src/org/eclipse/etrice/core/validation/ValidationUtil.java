@@ -264,6 +264,9 @@ public class ValidationUtil {
 		if (port.isReplicated())
 			return true;
 
+		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getSize()>1)
+			return true;
+		
 		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN) {
 			if (ref == null) {
 				// this port is local in the structure class
@@ -367,6 +370,16 @@ public class ValidationUtil {
 		
 		return false;
 	}
+
+	public static boolean isReferencedAsReplicatedInModel(ActorClass ac) {
+		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(ac, ac.eResource().getResourceSet());
+		for (Setting ref : refs) {
+			if (ref.getEObject() instanceof ActorRef)
+				return ((ActorRef)ref.getEObject()).getSize()>1;
+		}
+		
+		return false;
+	}
 	
 	public static boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc) {
 		return isConnected(port, ref, sc, null);
@@ -441,6 +454,7 @@ public class ValidationUtil {
 		//		if (isConnectedDst(dst, dstRef, sc, exclude))
 		//			return Result.error("destination SPP is already connected");
 		
+		
 		return Result.ok();
 	}
 
@@ -459,6 +473,10 @@ public class ValidationUtil {
 		if ((src==null && ref==null) || (src!=null && ref!=null))
 			return false;
 
+		if (ref instanceof ActorRef)
+			if (((ActorRef) ref).getSize()>1)
+				return false;
+		
 		// in case of ref!=null no further checks possible
 		// the connection is attached to an ActorContainerRef
 		// which can be multiply connected
@@ -492,9 +510,10 @@ public class ValidationUtil {
 	public static boolean isConnectedSrc(SPPRef src, StructureClass sc, LayerConnection exclude) {
 		for (LayerConnection lc : sc.getConnections()) {
 			if (lc!=exclude)
-				if (lc.getFrom() instanceof RelaySAPoint)
+				if (lc.getFrom() instanceof RelaySAPoint) {
 					if (((RelaySAPoint)lc.getFrom()).getRelay()==src)
 						return true;
+				}
 		}
 		
 		if (sc instanceof ActorClass) {

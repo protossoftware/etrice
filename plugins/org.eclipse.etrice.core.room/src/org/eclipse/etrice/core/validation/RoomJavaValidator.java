@@ -36,12 +36,13 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
@@ -119,7 +120,31 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 		}
 	}
+	
+	@Check
+	public void checkRefHasFixedMultiplicityPorts(ActorRef ar) {
+		if (ar.getSize()>1) {
+			ActorClass ac = ar.getType();
+			if (ar!=null) {
+				for (Port p : ac.getIfPorts()) {
+					if (p.getMultiplicity()<0) {
+						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
+						error("replicated actor must not have replicated port with arbitrary multiplicity", RoomPackage.Literals.ACTOR_CONTAINER_CLASS__ACTOR_REFS, idx);
+					}
+				}
+			}
+		}
+	}
 
+	@Check
+	public void checkLayerConnectiontarget(LayerConnection lc) {
+		if (lc.getTo().getRef() instanceof ActorRef)
+			if (((ActorRef)lc.getTo().getRef()).getSize()>1) {
+				int idx = ((StructureClass)lc.eContainer()).getConnections().indexOf(lc);
+				error("layer connection must not connect to replicated actor", RoomPackage.Literals.STRUCTURE_CLASS__CONNECTIONS, idx);
+			}
+	}
+	
 	@Check
 	public void checkBaseClassesNotCircular(DataClass dc) {
 		if (dc==null)

@@ -275,6 +275,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//SPPRef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorRef" eSuperTypes="#//ActorContainerRef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraphNode" eSuperTypes="#//StateGraphItem"/>

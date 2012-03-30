@@ -208,6 +208,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPoint/service"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/size"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorRef/type"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//StateGraphNode"/>

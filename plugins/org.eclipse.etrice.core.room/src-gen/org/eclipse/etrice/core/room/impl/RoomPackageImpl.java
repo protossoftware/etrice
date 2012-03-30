@@ -2237,9 +2237,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getActorRef_Size()
+  {
+    return (EAttribute)actorRefEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getActorRef_Type()
   {
-    return (EReference)actorRefEClass.getEStructuralFeatures().get(0);
+    return (EReference)actorRefEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3217,6 +3227,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(spPointEClass, SP_POINT__SERVICE);
 
     actorRefEClass = createEClass(ACTOR_REF);
+    createEAttribute(actorRefEClass, ACTOR_REF__SIZE);
     createEReference(actorRefEClass, ACTOR_REF__TYPE);
 
     stateGraphNodeEClass = createEClass(STATE_GRAPH_NODE);
@@ -3600,6 +3611,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getSPPoint_Service(), this.getSPPRef(), null, "service", null, 0, 1, SPPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorRefEClass, ActorRef.class, "ActorRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getActorRef_Size(), ecorePackage.getEInt(), "size", "1", 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorRef_Type(), this.getActorClass(), null, "type", null, 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateGraphNodeEClass, StateGraphNode.class, "StateGraphNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

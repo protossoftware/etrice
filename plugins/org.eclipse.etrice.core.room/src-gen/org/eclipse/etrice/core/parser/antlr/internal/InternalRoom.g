@@ -4120,9 +4120,35 @@ ruleActorRef returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2=':' 
+)(	otherlv_2='[' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getActorRefAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getActorRefAccess().getLeftSquareBracketKeyword_2_0());
+    }
+(
+(
+		lv_size_3_0=RULE_INT
+		{
+			newLeafNode(lv_size_3_0, grammarAccess.getActorRefAccess().getSizeINTTerminalRuleCall_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getActorRefRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"size",
+        		lv_size_3_0, 
+        		"INT");
+	    }
+
+)
+)	otherlv_4=']' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getActorRefAccess().getRightSquareBracketKeyword_2_2());
+    }
+)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getActorRefAccess().getColonKeyword_3());
     }
 (
 (
@@ -4132,7 +4158,7 @@ ruleActorRef returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getActorRefAccess().getTypeActorClassCrossReference_3_0()); 
+	        newCompositeNode(grammarAccess.getActorRefAccess().getTypeActorClassCrossReference_4_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
@@ -4142,16 +4168,16 @@ ruleActorRef returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorRefAccess().getDocuDocumentationParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getActorRefAccess().getDocuDocumentationParserRuleCall_5_0()); 
 	    }
-		lv_docu_4_0=ruleDocumentation		{
+		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorRefRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_4_0, 
+        		lv_docu_7_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }

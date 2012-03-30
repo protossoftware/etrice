@@ -27,6 +27,7 @@ process(EClass this) :
     switch (name) {
         case "Port": (eAllAttributes.select(e|e.name=="multiplicity").first().setDefaultValueLiteral("1")
         			-> addOperation("isReplicated", getEcoreDataType("EBoolean")))
+        case "ActorRef": (eAllAttributes.select(e|e.name=="size").first().setDefaultValueLiteral("1"))
         case "State": (addOperation("getName", getEcoreDataType("EString")))
         case "StateGraphItem": (addOperation("getName", getEcoreDataType("EString")))
         default:    null

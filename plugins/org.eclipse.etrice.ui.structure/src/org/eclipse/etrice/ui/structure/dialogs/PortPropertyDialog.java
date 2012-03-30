@@ -83,10 +83,12 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 
 		private boolean mayChange;
 		private int old;
+		private boolean multAnyAllowed;
 
-		public MultiplicityValidator(boolean mayChange, int old) {
+		public MultiplicityValidator(boolean mayChange, int old, boolean multAnyAllowed) {
 			this.mayChange = mayChange;
 			this.old = old;
+			this.multAnyAllowed = multAnyAllowed;
 		}
 
 		@Override
@@ -103,6 +105,8 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 					if ((old>1 || old==-1) && m==1)
 						return ValidationStatus.error("cannot change connected port to not replicated");
 				}
+				if (m==-1 && !multAnyAllowed)
+					return ValidationStatus.error("multiplicity * not allowed (actor used replicated)");
 				
 				if (port.getProtocol()!=null && port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
 					if (m!=1)
@@ -195,9 +199,15 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	@Override
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
 		boolean connected = ValidationUtil.isReferencedInModel(port);
+		boolean multiplicityAnyAllowed = true;
+		ActorContainerClass parent = (ActorContainerClass) port.eContainer();
+		if (parent instanceof ActorClass) {
+			 if (ValidationUtil.isReferencedAsReplicatedInModel((ActorClass) parent))
+				 multiplicityAnyAllowed = false;
+		}
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
-		MultiplicityValidator mv = new MultiplicityValidator(newPort || !connected, port.getMultiplicity());
+		MultiplicityValidator mv = new MultiplicityValidator(newPort || !connected, port.getMultiplicity(), multiplicityAnyAllowed);
 
 		ArrayList<IEObjectDescription> protocols = new ArrayList<IEObjectDescription>();
         Iterator<IEObjectDescription> it = scope.getAllElements().iterator();
@@ -208,30 +218,37 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
         		protocols.add(desc);
 		}
 		
-		Text name = createText(body, "Name:", port, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
-		Combo protocol = createComboUsingDesc(body, "Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
-		Button conj = createCheck(body, "Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
+		Text name = createText(body, "&Name:", port, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
+		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
 			createRelayCheck(body, !connected, mform.getToolkit());
 		
 		Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 		String2MultiplicityConverter s2m = new String2MultiplicityConverter();
-		Text multi = createText(body, "Multiplicity:", port, RoomPackage.eINSTANCE.getPort_Multiplicity(), mv, s2m, m2s, false);
+		Text multi = createText(body, "&Multiplicity:", port, RoomPackage.eINSTANCE.getPort_Multiplicity(), mv, s2m, m2s, false);
 		
 		if (!newPort) {
-			// TODOHRR: check whether port is used externally?
 			if (connected) {
 				protocol.setEnabled(false);
+				createInfoDecorator(protocol, "only changeable for unconnected ports");
 				conj.setEnabled(false);
-				if (port.getMultiplicity()==1)
+				createInfoDecorator(conj, "only changeable for unconnected ports");
+				if (port.getMultiplicity()==1) {
 					multi.setEnabled(false);
+					createInfoDecorator(multi, "only changeable for unconnected ports");
+				}
 			}
 			
 			if (refitem) {
 				name.setEnabled(false);
+				createInfoDecorator(name, "inherited");
 				protocol.setEnabled(false);
+				createInfoDecorator(protocol, "inherited");
 				conj.setEnabled(false);
+				createInfoDecorator(conj, "inherited");
 				multi.setEnabled(false);
+				createInfoDecorator(multi, "inherited");
 			}
 		}
 		

@@ -517,6 +517,24 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getActorInstance_ReplIdx() {
+		return (EAttribute)actorInstanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getActorInstance_UnindexedName() {
+		return (EAttribute)actorInstanceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInterfaceItemInstance() {
 		return interfaceItemInstanceEClass;
 	}
@@ -881,6 +899,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		actorInstanceEClass = createEClass(ACTOR_INSTANCE);
 		createEReference(actorInstanceEClass, ACTOR_INSTANCE__ACTOR_CLASS);
+		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__REPL_IDX);
+		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__UNINDEXED_NAME);
 
 		interfaceItemInstanceEClass = createEClass(INTERFACE_ITEM_INSTANCE);
 		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PEERS);
@@ -1020,6 +1040,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(actorInstanceEClass, ActorInstance.class, "ActorInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActorInstance_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActorInstance_ReplIdx(), ecorePackage.getEInt(), "replIdx", "-1", 0, 1, ActorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActorInstance_UnindexedName(), ecorePackage.getEString(), "unindexedName", null, 0, 1, ActorInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(interfaceItemInstanceEClass, InterfaceItemInstance.class, "InterfaceItemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInterfaceItemInstance_Peers(), this.getInterfaceItemInstance(), null, "peers", null, 0, -1, InterfaceItemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

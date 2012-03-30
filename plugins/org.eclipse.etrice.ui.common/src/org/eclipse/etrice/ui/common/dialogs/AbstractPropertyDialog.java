@@ -403,6 +403,16 @@ public abstract class AbstractPropertyDialog extends FormDialog {
         return controlDecoration;
 	}
 
+	protected ControlDecoration createInfoDecorator(Control ctrl, String message) {
+		ControlDecoration controlDecoration = new ControlDecoration(ctrl, SWT.LEFT | SWT.TOP);
+		controlDecoration.setDescriptionText(message);
+		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
+				FieldDecorationRegistry.DEC_INFORMATION);
+		controlDecoration.setImage(fieldDecoration.getImage());
+
+        return controlDecoration;
+	}
+
 	protected DataBindingContext getBindingContext() {
 		return bindingContext;
 	}

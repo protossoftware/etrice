@@ -680,13 +680,31 @@ public interface ETriceGenPackage extends EPackage {
 	int ACTOR_INSTANCE__ACTOR_CLASS = STRUCTURE_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Repl Idx</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INSTANCE__REPL_IDX = STRUCTURE_INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Unindexed Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INSTANCE__UNINDEXED_NAME = STRUCTURE_INSTANCE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Actor Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 1;
+	int ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.generator.etricegen.impl.InterfaceItemInstanceImpl <em>Interface Item Instance</em>}' class.
@@ -1912,6 +1930,28 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getActorInstance_ActorClass();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.ActorInstance#getReplIdx <em>Repl Idx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Repl Idx</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.ActorInstance#getReplIdx()
+	 * @see #getActorInstance()
+	 * @generated
+	 */
+	EAttribute getActorInstance_ReplIdx();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.etricegen.ActorInstance#getUnindexedName <em>Unindexed Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unindexed Name</em>'.
+	 * @see org.eclipse.etrice.generator.etricegen.ActorInstance#getUnindexedName()
+	 * @see #getActorInstance()
+	 * @generated
+	 */
+	EAttribute getActorInstance_UnindexedName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.generator.etricegen.InterfaceItemInstance <em>Interface Item Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2553,6 +2593,22 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTOR_INSTANCE__ACTOR_CLASS = eINSTANCE.getActorInstance_ActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Repl Idx</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR_INSTANCE__REPL_IDX = eINSTANCE.getActorInstance_ReplIdx();
+
+		/**
+		 * The meta object literal for the '<em><b>Unindexed Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR_INSTANCE__UNINDEXED_NAME = eINSTANCE.getActorInstance_UnindexedName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.generator.etricegen.impl.InterfaceItemInstanceImpl <em>Interface Item Instance</em>}' class.
