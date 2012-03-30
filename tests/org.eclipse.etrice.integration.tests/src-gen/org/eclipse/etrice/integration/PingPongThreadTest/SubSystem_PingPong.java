@@ -38,12 +38,12 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 	public void instantiateActors(){
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,115);
-		Address addr_item_SystemPort_1 = new Address(0,0,116);
-		Address addr_item_SystemPort_2 = new Address(0,0,117);
-		Address addr_item_SystemPort_3 = new Address(0,0,118);
-		Address addr_item_SystemPort_4 = new Address(0,0,119);
-		Address addr_item_SystemPort_5 = new Address(0,0,120);
+		Address addr_item_SystemPort_0 = new Address(0,0,116);
+		Address addr_item_SystemPort_1 = new Address(0,0,117);
+		Address addr_item_SystemPort_2 = new Address(0,0,118);
+		Address addr_item_SystemPort_3 = new Address(0,0,119);
+		Address addr_item_SystemPort_4 = new Address(0,0,120);
+		Address addr_item_SystemPort_5 = new Address(0,0,121);
 		
 		// actor instance /SubSystem_PingPong/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -177,17 +177,17 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			"services",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_services},
-				null,
 				{
 					addr_item__SubSystem_PingPong_services_timeout_0
-				}
+				},
+				null
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_5},
-				null,
 				{
 					addr_item__SubSystem_PingPong_application_MrPing_timer
-				}
+				},
+				null
 			}
 		); 
 

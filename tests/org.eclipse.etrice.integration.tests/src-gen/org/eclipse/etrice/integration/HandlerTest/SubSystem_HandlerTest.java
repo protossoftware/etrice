@@ -34,10 +34,10 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 	public void instantiateActors(){
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,109);
-		Address addr_item_SystemPort_1 = new Address(0,0,110);
-		Address addr_item_SystemPort_2 = new Address(0,0,111);
-		Address addr_item_SystemPort_3 = new Address(0,0,112);
+		Address addr_item_SystemPort_0 = new Address(0,0,110);
+		Address addr_item_SystemPort_1 = new Address(0,0,111);
+		Address addr_item_SystemPort_2 = new Address(0,0,112);
+		Address addr_item_SystemPort_3 = new Address(0,0,113);
 		
 		// actor instance /SubSystem_HandlerTest/HandlerTest_Top itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -115,17 +115,17 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 			"timerService",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_HandlerTest_timerService},
-				null,
 				{
 					addr_item__SubSystem_HandlerTest_timerService_timeout_0
-				}
+				},
+				null
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
-				null,
 				{
 					addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_timer
-				}
+				},
+				null
 			}
 		); 
 

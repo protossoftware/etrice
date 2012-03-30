@@ -148,7 +148,7 @@ public class Log {
 			d.timeStamp=System.currentTimeMillis();
 			d.sender=getInstancePath();
 			if (getPeerAddress()!=null)
-			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d));
+			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d.deepCopy()));
 			}
 		}
 		
