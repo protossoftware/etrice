@@ -149,7 +149,7 @@ public class RoomNameProvider {
 		}
 		else {
 			String fromName = getTerminalName(((NonInitialTransition) t).getFrom());
-			String fromTo = "TRANS_"+fromName+"_TO_"+toName;
+			String fromTo = "TRANS_"+t.getName()+"_FROM_"+fromName+"_TO_"+toName;
 			if (t instanceof TriggeredTransition) {
 				if (fromName.equals(toName))
 					return fromTo + "_BY_" + getTriggerName((TriggeredTransition) t) + "_" + t.getName();
