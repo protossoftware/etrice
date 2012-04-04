@@ -70,5 +70,16 @@ public abstract class AbstractLanguageGenerator {
 		return getArglistAndTypedData(m.getData())[2];
 	}
 	
+	/**
+	 * return three strings used by the generator
+	 * 
+	 * @param data the variable declaration
+	 * @return an array of three strings
+	 * <ol>
+	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variabley</li>
+	 *  <li>the data as it appears in a method call</li>
+	 *  <li>the data as it is used in the method declaration</li>
+	 *  </ol>
+	 */
 	public abstract String[] getArglistAndTypedData(VarDecl data);
 }

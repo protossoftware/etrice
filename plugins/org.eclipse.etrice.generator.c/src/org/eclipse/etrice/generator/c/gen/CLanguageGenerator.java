@@ -15,6 +15,7 @@ public class CLanguageGenerator extends AbstractLanguageGenerator {
 		boolean byVal = false;
 		if (data.getRefType().getType() instanceof PrimitiveType) {
 			typeName = ((PrimitiveType)data.getRefType().getType()).getTargetName();
+			castTypeName = typeName+"*";
 			String ct = ((PrimitiveType)data.getRefType().getType()).getCastName();
 			byVal = true;
 			if (ct!=null && !ct.isEmpty())
