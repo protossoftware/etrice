@@ -190,10 +190,17 @@ public class DetailCodeTranslator {
 	}
 
 	private void proceedToToken(String text, Position curr) {
+		proceedToToken(text, curr, true);
+	}
+	
+	private void proceedToToken(String text, Position curr, boolean skipString) {
 		boolean stop = false;
 		while (curr.pos<text.length() && !stop) {
 			if (text.charAt(curr.pos)=='"') {
-				skipString(text, curr);
+				if (skipString)
+					skipString(text, curr);
+				else
+					stop = true;
 			}
 			else if (text.charAt(curr.pos)=='/') {
 				if (curr.pos+1<text.length()) {
@@ -248,7 +255,7 @@ public class DetailCodeTranslator {
 		
 		boolean stop = false;
 		do {
-			proceedToToken(text, curr);
+			proceedToToken(text, curr, false);
 			if (text.charAt(curr.pos)!=')') {
 				String arg = getParam(text, curr);
 				result.add(arg);
