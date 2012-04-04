@@ -109,12 +109,12 @@ public class TestStates extends TestInstanceModelBuilderBase {
 //			LogicalSystem.out.println("ct "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}
 		
-		Transition t = (Transition) getStateGraphItem(cts, "State3_TRANS_tp1_TO_State3");
+		Transition t = (Transition) getStateGraphItem(cts, "State3_TRANS_tr1_FROM_tp1_TO_State3");
 		assertNotNull("transition", t);
 
 		ExpandedActorClass xpac = root.getXpActorClasses().get(0);
 		TransitionChain chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
 	}
 }

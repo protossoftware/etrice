@@ -127,18 +127,18 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 //			LogicalSystem.out.println("ct "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}
 		
-		Transition t = (Transition) getStateGraphItem(cts, "State3_TRANS_tp1_TO_State3");
+		Transition t = (Transition) getStateGraphItem(cts, "State3_TRANS_tr1_FROM_tp1_TO_State3");
 		assertNotNull("transition", t);
 
 		TransitionChain chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
 		
-		t = (Transition) getStateGraphItem(cts, "State3_TRANS_tp6_TO_State2");
+		t = (Transition) getStateGraphItem(cts, "State3_TRANS_tr8_FROM_tp6_TO_State2");
 		assertNotNull("transition", t);
 
 		chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_State5_TO_State3_tp6_BY_aport", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr12_FROM_State5_TO_State3_tp6_BY_aport", RoomNameProvider.getFullPath(chain.getTransition()));
 	}
 }
