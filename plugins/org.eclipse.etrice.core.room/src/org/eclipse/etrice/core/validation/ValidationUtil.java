@@ -73,16 +73,16 @@ public class ValidationUtil {
 		private EStructuralFeature feature;
 		private int index;
 
-		static Result ok() {
+		public static Result ok() {
 			return new Result(true, "", null, null, 0);
 		}
-		static Result error(String msg) {
+		public static Result error(String msg) {
 			return new Result(false, msg, null, null, -1);
 		}
-		static Result error(String msg, EObject source, EStructuralFeature feature) {
+		public static Result error(String msg, EObject source, EStructuralFeature feature) {
 			return new Result(false, msg, source, feature, -1);
 		}
-		static Result error(String msg, EObject source, EStructuralFeature feature, int index) {
+		public static Result error(String msg, EObject source, EStructuralFeature feature, int index) {
 			return new Result(false, msg, source, feature, index);
 		}
 		
