@@ -106,6 +106,15 @@ public interface ILanguageExtension {
 	 */
 	String booleanConstant(boolean b);
 	
+
+	/**
+	 *  literal for pointer
+	 * 
+	 * @return * for C/C++, nothing for Java
+	 */
+	String pointerLiteral();
+	
+	
 	/**
 	 * a literal for the null pointer
 	 * 
@@ -127,7 +136,7 @@ public interface ILanguageExtension {
 	 * @param name
 	 * @return a string that represents the declaration
 	 */
-	String arrayDeclaration(String type, int size, String name);
+	String arrayDeclaration(String type, int size, String name, boolean isRef);
 	
 	String constructorName(String cls);
 	String destructorName(String cls);

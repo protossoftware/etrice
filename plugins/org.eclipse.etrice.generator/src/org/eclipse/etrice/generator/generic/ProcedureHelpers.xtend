@@ -56,9 +56,9 @@ class ProcedureHelpers {
 		/*--------------------- attributes ---------------------*/
 		«FOR attribute : attribs»
 			«IF attribute.size==0»
-				«attribute.refType.type.typeName» «attribute.name»;
+				«attribute.refType.type.typeName»«IF attribute.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
 			«ELSE»
-				«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name)»;
+				«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name, attribute.refType.ref)»;
 			«ENDIF» 
 		«ENDFOR»
 	'''
@@ -206,14 +206,18 @@ class ProcedureHelpers {
 		return if (type==null)
 			"void"
 		else 
-			type.type.typeName
+			if (type.isRef){
+				type.type.typeName+languageExt.pointerLiteral();
+			}else{
+				type.type.typeName
+			}
 	}
 
 	/*
 	 * builds comma separated argument list as string from EList<VarDecl> arguments
 	 */
 	def private BuildArgumentList(EList<VarDecl> arguments){
-		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName» «argument.name»«ENDFOR»'''
+		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName»«IF argument.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «argument.name»«ENDFOR»'''
 	}
 	
 	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){

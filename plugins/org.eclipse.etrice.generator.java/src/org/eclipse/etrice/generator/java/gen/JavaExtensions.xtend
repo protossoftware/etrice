@@ -75,13 +75,14 @@ class JavaExtensions implements ILanguageExtension {
 		b.toString
 	}
 	
+	override String pointerLiteral() { "" }
 	override String nullPointer() { "null" }
 	override String voidPointer() { "Object" }
 
 	//-------------------------------------------------------
 	// transition chain visitor
 
-	override String arrayDeclaration(String type, int size, String name) {
+	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
 		type+" "+name+"[]";
 	}
 	

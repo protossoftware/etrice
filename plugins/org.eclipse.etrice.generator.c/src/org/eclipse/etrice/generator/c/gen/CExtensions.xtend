@@ -122,14 +122,19 @@ class CExtensions implements ILanguageExtension {
 		if (b) "TRUE" else "FALSE"
 	}
 	
+	override String pointerLiteral() { "*" }
 	override String nullPointer() { "NULL" }
 	override String voidPointer() { "void*" }
 	
 	//-------------------------------------------------------
 	// transition chain visitor
 	
-	override String arrayDeclaration(String type, int size, String name) {
-		type+" "+name+"["+size+"]";
+	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
+		if (isRef){
+			type+"* "+name+"["+size+"]";
+		}else {
+			type+" "+name+"["+size+"]";
+		}
 	}
 	
 	override String constructorName(String cls) {

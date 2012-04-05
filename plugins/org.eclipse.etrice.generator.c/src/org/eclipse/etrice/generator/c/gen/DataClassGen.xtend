@@ -72,6 +72,12 @@ class DataClassGen {
 			«helpers.attributes(dc.allAttributes)»
 		} «dc.name»;
 		
+		«FOR a:dc.allAttributes»
+			«IF a.defaultValueLiteral!=null»
+				«logger.logInfo(dc.name+" "+a.name+": Attribute initialization not supported in C")»
+			«ENDIF»
+		«ENDFOR»
+		
 «««		TODO: do we need setters and getters for C and C++ ?
 		
 		«helpers.operationsDeclaration(dc.operations, dc.name)»

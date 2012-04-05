@@ -159,6 +159,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDFOR»
 
 			«helpers.attributes(ac.allAttributes)»
+
+		«FOR a:ac.allAttributes»
+			«IF a.defaultValueLiteral!=null»
+				«logger.logInfo(ac.name+" "+a.name+": Attribute initialization not supported in C")»
+			«ENDIF»
+		«ENDFOR»
 			
 			«IF xpac.hasNonEmptyStateMachine»
 			
