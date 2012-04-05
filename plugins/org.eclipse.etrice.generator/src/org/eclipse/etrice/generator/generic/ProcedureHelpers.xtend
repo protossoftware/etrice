@@ -102,12 +102,16 @@ class ProcedureHelpers {
 					«ENDIF»
 				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
 					«IF a.size==0»
-						«a.name» = «a.refType.type.defaultValue»;
+						«IF a.refType.isRef»
+							«a.name» = «languageExt.nullPointer()»;
+						«ELSE»
+							«a.name» = «a.refType.type.defaultValue»;
+						«ENDIF»
 					«ELSE»
 						«a.name» = new «a.refType.type.typeName»[«a.size»];
 						«IF !useClassDefaultsOnly»
 							for (int i=0;i<«a.size»;i++){
-								«a.name»[i] = «a.refType.type.defaultValue»;
+								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«a.refType.type.defaultValue»«ENDIF»;
 							}
 						«ENDIF»
 					«ENDIF»
