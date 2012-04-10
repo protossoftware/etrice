@@ -143,7 +143,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«FOR message : messages»
 				«var hasData = message.data!=null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
+				«var refp = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
 				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
 				«messageSignature(portClassName, message.name, "", data)»;
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
@@ -207,19 +207,20 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var replPortClassName = pc.getPortClassName(conj, true)
 		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
 		var dir = if (conj) "IN_" else "OUT_"
-		
+
 		'''
 			«FOR message : messages»
 				«var hasData = message.data!=null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
-				«var refa = if (hasData && (message.data.refType.type instanceof PrimitiveType)) "&" else ""»
-				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
+				«var refp = if (hasData && ((message.data.refType.ref))) "*" else ""»
+				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
+				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
+				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
 					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 					if (self->receiveMessageFunc!=NULL) {
-						«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
+						«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -228,7 +229,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					int i;
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					for (i=0; i<self->size; ++i) {
-						«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
+						«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}
@@ -236,7 +237,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 					if (0<=idx && idx<self->size) {
-						«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName, refa+"data")»
+						«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 					}
 					ET_MSC_LOGGER_SYNC_EXIT
 				}

@@ -30,6 +30,7 @@ RoomModel HandlerTest {
 		Structure {	
 			usercode3 {
 				"#include \"etUnit/etUnit.h\""
+				"#include \"SubSystem_HandlerTest.h\""
 			}
 			external Port TestPort1
 			Attribute counter: int32
@@ -262,6 +263,7 @@ RoomModel HandlerTest {
 					entry {
 						"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 50);"
 						"etUnit_closeAll();"
+						"SubSystem_HandlerTest_shutdown();"
 					}
 				}
 				State E28_E29 {
