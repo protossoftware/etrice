@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.naming;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
@@ -62,6 +63,11 @@ public class RoomQualifiedNameProvider extends
     	
     	assert(false): "unexpected state graph container";
     	return null;
+    }
+    
+    public QualifiedName qualifiedName(PortClass pc) {
+    	ProtocolClass p = (ProtocolClass) pc.eContainer();
+    	return getFullyQualifiedName(p).append(p.getRegular()==pc? "regular":"conjugated");
     }
     
     public QualifiedName qualifiedName(StandardOperation op) {
