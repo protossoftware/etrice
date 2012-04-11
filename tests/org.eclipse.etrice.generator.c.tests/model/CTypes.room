@@ -16,6 +16,6 @@ RoomModel room.basic.types.c {
 	PrimitiveType float64 -> float64 default "0"
 
 	// TODO: define strings for C
-	// PrimitiveType string -> string (String) default "\"\""  
-	
+	PrimitiveType charPtr -> charPtr default "0"
+	PrimitiveType string -> charPtr default "0"  
 }

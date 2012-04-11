@@ -1,7 +1,7 @@
 RoomModel ChoicePointTest {
-	
+
 	import room.basic.types.c.* from "CTypes.room"
-	
+
 	LogicalSystem System_HandlerTest {
 		SubSystemRef SubSystem_CPTest: SubSystem_CPTest
 	}
@@ -24,9 +24,10 @@ RoomModel ChoicePointTest {
 			Port TestPort1: TestProtocol
 		}
 		Structure {
-			usercode3{
-				"#include \"etUnit/etUnit.h\""			}
-
+			usercode3 {
+				"#include \"etUnit/etUnit.h\""
+				"#include \"SubSystem_CPTest.h\""
+			}
 			external Port TestPort1
 			Attribute counter: int32
 		}
@@ -173,6 +174,7 @@ RoomModel ChoicePointTest {
 					entry {
 						"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 20);"
 						"etUnit_closeAll();"
+						"SubSystem_CPTest_shutdown();"
 					}
 				}
 			}

@@ -322,11 +322,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           if (!hasData) {
             _operator_and = false;
           } else {
+            boolean _operator_or = false;
             VarDecl _data_2 = message.getData();
             RefableType _refType_1 = _data_2.getRefType();
             DataType _type_1 = _refType_1.getType();
             boolean _operator_not = BooleanExtensions.operator_not((_type_1 instanceof PrimitiveType));
-            _operator_and = BooleanExtensions.operator_and(hasData, _operator_not);
+            if (_operator_not) {
+              _operator_or = true;
+            } else {
+              VarDecl _data_3 = message.getData();
+              RefableType _refType_2 = _data_3.getRefType();
+              boolean _isRef = _refType_2.isRef();
+              _operator_or = BooleanExtensions.operator_or(_operator_not, _isRef);
+            }
+            _operator_and = BooleanExtensions.operator_and(hasData, _operator_or);
           }
           if (_operator_and) {
             _xifexpression_2 = "*";
@@ -648,9 +657,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           } else {
             VarDecl _data_2 = message.getData();
             RefableType _refType_1 = _data_2.getRefType();
-            DataType _type_1 = _refType_1.getType();
-            boolean _operator_not = BooleanExtensions.operator_not((_type_1 instanceof PrimitiveType));
-            _operator_and = BooleanExtensions.operator_and(hasData, _operator_not);
+            boolean _isRef = _refType_1.isRef();
+            _operator_and = BooleanExtensions.operator_and(hasData, _isRef);
           }
           if (_operator_and) {
             _xifexpression_3 = "*";
@@ -664,28 +672,66 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           if (!hasData) {
             _operator_and_1 = false;
           } else {
+            boolean _operator_or = false;
             VarDecl _data_3 = message.getData();
             RefableType _refType_2 = _data_3.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            _operator_and_1 = BooleanExtensions.operator_and(hasData, (_type_2 instanceof PrimitiveType));
+            DataType _type_1 = _refType_2.getType();
+            boolean _operator_not = BooleanExtensions.operator_not((_type_1 instanceof PrimitiveType));
+            if (_operator_not) {
+              _operator_or = true;
+            } else {
+              VarDecl _data_4 = message.getData();
+              RefableType _refType_3 = _data_4.getRefType();
+              boolean _isRef_1 = _refType_3.isRef();
+              _operator_or = BooleanExtensions.operator_or(_operator_not, _isRef_1);
+            }
+            _operator_and_1 = BooleanExtensions.operator_and(hasData, _operator_or);
           }
           if (_operator_and_1) {
-            _xifexpression_4 = "&";
+            _xifexpression_4 = "*";
           } else {
             _xifexpression_4 = "";
           }
-          String refa = _xifexpression_4;
+          String refpd = _xifexpression_4;
           _builder.newLineIfNotEmpty();
           String _xifexpression_5 = null;
+          boolean _operator_and_2 = false;
+          boolean _operator_and_3 = false;
+          if (!hasData) {
+            _operator_and_3 = false;
+          } else {
+            VarDecl _data_5 = message.getData();
+            RefableType _refType_4 = _data_5.getRefType();
+            DataType _type_2 = _refType_4.getType();
+            boolean _operator_not_1 = BooleanExtensions.operator_not((_type_2 instanceof PrimitiveType));
+            _operator_and_3 = BooleanExtensions.operator_and(hasData, _operator_not_1);
+          }
+          if (!_operator_and_3) {
+            _operator_and_2 = false;
+          } else {
+            VarDecl _data_6 = message.getData();
+            RefableType _refType_5 = _data_6.getRefType();
+            boolean _isRef_2 = _refType_5.isRef();
+            boolean _operator_not_2 = BooleanExtensions.operator_not(_isRef_2);
+            _operator_and_2 = BooleanExtensions.operator_and(_operator_and_3, _operator_not_2);
+          }
+          if (_operator_and_2) {
+            _xifexpression_5 = "";
+          } else {
+            _xifexpression_5 = "&";
+          }
+          String refa = _xifexpression_5;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_6 = null;
           if (hasData) {
             String _operator_plus = StringExtensions.operator_plus(", ", typeName);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, refp);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, refpd);
             String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, " data");
-            _xifexpression_5 = _operator_plus_2;
+            _xifexpression_6 = _operator_plus_2;
           } else {
-            _xifexpression_5 = "";
+            _xifexpression_6 = "";
           }
-          String data = _xifexpression_5;
+          String data = _xifexpression_6;
           _builder.newLineIfNotEmpty();
           _builder.newLine();
           String _name = message.getName();
@@ -709,8 +755,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String _name_3 = message.getName();
           String _operator_plus_3 = StringExtensions.operator_plus(dir, _name_3);
           String _memberInUse = this.stdExt.memberInUse(_name_2, _operator_plus_3);
-          String _operator_plus_4 = StringExtensions.operator_plus(refa, "data");
-          String _sendMessageCall = this.sendMessageCall(hasData, "self", _memberInUse, typeName, _operator_plus_4);
+          String _operator_plus_4 = StringExtensions.operator_plus(typeName, refp);
+          String _operator_plus_5 = StringExtensions.operator_plus(refa, "data");
+          String _sendMessageCall = this.sendMessageCall(hasData, "self", _memberInUse, _operator_plus_4, _operator_plus_5);
           _builder.append(_sendMessageCall, "		");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -744,10 +791,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t\t");
           String _name_6 = pc.getName();
           String _name_7 = message.getName();
-          String _operator_plus_5 = StringExtensions.operator_plus(dir, _name_7);
-          String _memberInUse_1 = this.stdExt.memberInUse(_name_6, _operator_plus_5);
-          String _operator_plus_6 = StringExtensions.operator_plus(refa, "data");
-          String _sendMessageCall_1 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[i])", _memberInUse_1, typeName, _operator_plus_6);
+          String _operator_plus_6 = StringExtensions.operator_plus(dir, _name_7);
+          String _memberInUse_1 = this.stdExt.memberInUse(_name_6, _operator_plus_6);
+          String _operator_plus_7 = StringExtensions.operator_plus(typeName, refp);
+          String _operator_plus_8 = StringExtensions.operator_plus(refa, "data");
+          String _sendMessageCall_1 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[i])", _memberInUse_1, _operator_plus_7, _operator_plus_8);
           _builder.append(_sendMessageCall_1, "		");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -760,8 +808,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
           _builder.newLine();
           String _name_8 = message.getName();
-          String _operator_plus_7 = StringExtensions.operator_plus(", int idx", data);
-          String _messageSignature_2 = this.messageSignature(replPortClassName, _name_8, "", _operator_plus_7);
+          String _operator_plus_9 = StringExtensions.operator_plus(", int idx", data);
+          String _messageSignature_2 = this.messageSignature(replPortClassName, _name_8, "", _operator_plus_9);
           _builder.append(_messageSignature_2, "");
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
@@ -779,10 +827,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t\t");
           String _name_10 = pc.getName();
           String _name_11 = message.getName();
-          String _operator_plus_8 = StringExtensions.operator_plus(dir, _name_11);
-          String _memberInUse_2 = this.stdExt.memberInUse(_name_10, _operator_plus_8);
-          String _operator_plus_9 = StringExtensions.operator_plus(refa, "data");
-          String _sendMessageCall_2 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", _memberInUse_2, typeName, _operator_plus_9);
+          String _operator_plus_10 = StringExtensions.operator_plus(dir, _name_11);
+          String _memberInUse_2 = this.stdExt.memberInUse(_name_10, _operator_plus_10);
+          String _operator_plus_11 = StringExtensions.operator_plus(typeName, refp);
+          String _operator_plus_12 = StringExtensions.operator_plus(refa, "data");
+          String _sendMessageCall_2 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", _memberInUse_2, _operator_plus_11, _operator_plus_12);
           _builder.append(_sendMessageCall_2, "		");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");

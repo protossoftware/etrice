@@ -12,20 +12,35 @@ public class CLanguageGenerator extends AbstractLanguageGenerator {
 		
 		String typeName = data.getRefType().getType().getName();
 		String castTypeName = typeName+"*";
-		boolean byVal = false;
+		String typedData;
+		//boolean byVal = false;
 		if (data.getRefType().getType() instanceof PrimitiveType) {
 			typeName = ((PrimitiveType)data.getRefType().getType()).getTargetName();
 			castTypeName = typeName+"*";
 			String ct = ((PrimitiveType)data.getRefType().getType()).getCastName();
-			byVal = true;
-			if (ct!=null && !ct.isEmpty())
+			//byVal = true;
+			if (ct!=null && !ct.isEmpty()){
 				castTypeName = ct;
+			}
+			if (data.getRefType().isRef()) {
+				//byVal = false;
+				typedData = typeName+" "+data.getName() + " = **(("+castTypeName+"*) generic_data);\n";
+			} else {
+				//byVal = true;
+				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n";
+			}
 		}
 		else {
-			typeName = typeName+"*";
+			if (data.getRefType().isRef()) {
+				typeName = typeName+"*";
+				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+"*) generic_data);\n";
+			}else{
+				typeName = typeName+"*";
+				typedData = typeName+" "+data.getName() + " = (("+castTypeName+") generic_data);\n";
+			}
 		}
 
-		String typedData = typeName+" "+data.getName() + " = "+(byVal? "*":"")+"(("+castTypeName+") generic_data);\n";
+		//typedData = typeName+" "+data.getName() + " = "+(byVal? "*":"")+"(("+castTypeName+") generic_data);\n";
 		String dataArg = ", "+data.getName();
 		String typedArgList = ", "+typeName+" "+data.getName();
 		
