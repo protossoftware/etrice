@@ -198,7 +198,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	
 	@Override
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
-		boolean connected = ValidationUtil.isReferencedInModel(port);
+		Result notReferenced = ValidationUtil.isFreeOfReferences(port);
 		boolean multiplicityAnyAllowed = true;
 		ActorContainerClass parent = (ActorContainerClass) port.eContainer();
 		if (parent instanceof ActorClass) {
@@ -207,7 +207,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		}
 		NameValidator nv = new NameValidator();
 		ProtocolValidator pv = new ProtocolValidator();
-		MultiplicityValidator mv = new MultiplicityValidator(newPort || !connected, port.getMultiplicity(), multiplicityAnyAllowed);
+		MultiplicityValidator mv = new MultiplicityValidator(newPort || notReferenced.isOk(), port.getMultiplicity(), multiplicityAnyAllowed);
 
 		ArrayList<IEObjectDescription> protocols = new ArrayList<IEObjectDescription>();
         Iterator<IEObjectDescription> it = scope.getAllElements().iterator();
@@ -222,21 +222,21 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
-			createRelayCheck(body, !connected, mform.getToolkit());
+			createRelayCheck(body, notReferenced, mform.getToolkit());
 		
 		Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 		String2MultiplicityConverter s2m = new String2MultiplicityConverter();
 		Text multi = createText(body, "&Multiplicity:", port, RoomPackage.eINSTANCE.getPort_Multiplicity(), mv, s2m, m2s, false);
 		
 		if (!newPort) {
-			if (connected) {
+			if (!notReferenced.isOk()) {
 				protocol.setEnabled(false);
-				createInfoDecorator(protocol, "only changeable for unconnected ports");
+				createInfoDecorator(protocol, notReferenced.getMsg());
 				conj.setEnabled(false);
-				createInfoDecorator(conj, "only changeable for unconnected ports");
+				createInfoDecorator(conj, notReferenced.getMsg());
 				if (port.getMultiplicity()==1) {
 					multi.setEnabled(false);
-					createInfoDecorator(multi, "only changeable for unconnected ports");
+					createInfoDecorator(multi, notReferenced.getMsg());
 				}
 			}
 			
@@ -260,14 +260,17 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		name.setFocus();
 	}
 
-	private void createRelayCheck(Composite parent, boolean enabled, FormToolkit toolkit) {
+	private void createRelayCheck(Composite parent, Result notReferenced, FormToolkit toolkit) {
 		Label l = toolkit.createLabel(parent, "Is Relay Port:", SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 		
 		relayCheck = toolkit.createButton(parent, "", SWT.CHECK);
 		relayCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		relayCheck.setSelection(relay);
-		relayCheck.setEnabled(enabled);
+		relayCheck.setEnabled(notReferenced.isOk());
+		
+		if (!notReferenced.isOk())
+			createInfoDecorator(relayCheck, notReferenced.getMsg());
 	}
 	
 	@Override

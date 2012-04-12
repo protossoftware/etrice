@@ -359,16 +359,25 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
-	public static boolean isReferencedInModel(Port port) {
+	public static Result isFreeOfReferences(Port port) {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(port, port.eResource().getResourceSet());
+		boolean bound = false;
+		boolean usedByFSM = false;
 		for (Setting ref : refs) {
 			if (ref.getEObject() instanceof BindingEndPoint)
-				return true;
+				bound = true;
 			else if (ref.getEObject() instanceof MessageFromIf)
-				return true;
+				usedByFSM = true;
 		}
 		
-		return false;
+		if (bound && usedByFSM)
+			return Result.error("port is bound and also used by state machine (triggers)");
+		else if (bound)
+			return Result.error("port is bound (may be externally)");
+		else if (usedByFSM)
+			return Result.error("port is used by state machine (triggers)");
+		
+		return Result.ok();
 	}
 
 	public static boolean isReferencedAsReplicatedInModel(ActorClass ac) {
