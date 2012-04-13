@@ -665,13 +665,13 @@ public class GeneratorModelBuilder {
 
 	private void addNeededInstance(String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
 		ArrayList<PortInstance> ports = ep2portInstances.get(key);
-		
-		if (ports.get(0).getPort().getMultiplicity()<0) {
-			if (multAny.contains(key)) {
+
+		Port port = ports.get(0).getPort();
+		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN || port.getMultiplicity() < 0) {
+			if (!multAny.contains(key)) {
 				// we just register
 				multAny.add(key);
-			}
-			else {
+			} else {
 				// we add another copy of this instance
 				ports.add(ports.get(0));
 			}
