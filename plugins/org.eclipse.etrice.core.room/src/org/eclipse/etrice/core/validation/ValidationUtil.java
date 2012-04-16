@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -111,60 +112,34 @@ public class ValidationUtil {
 		}
 	}
 	
-	/**
-	 * check whether dc1 is super type of dc2 
-	 * @param dc1
-	 * @param dc2
-	 * @return <code>true</code> if dc1 or one of its base types is identical to dc2
-	 */
-	public static boolean isKindOf(DataClass dc1, DataClass dc2) {
-		if (dc2==null)
-			return false;
+	public static boolean isCircularClassHierarchy(DataClass dc) {
+		HashSet<DataClass> classes = new HashSet<DataClass>();
+		classes.add(dc);
 		
-		while (dc1!=null) {
-			if (dc2==dc1)
+		while (dc.getBase()!=null) {
+			dc = dc.getBase();
+			if (classes.contains(dc))
 				return true;
-			dc1 = dc1.getBase();
+			
+			classes.add(dc);
 		}
+		
 		return false;
 	}
 
-	/**
-	 * check whether dc1 is base class of dc2
-	 * @param dc1
-	 * @param dc2
-	 * @return <code>true</code> if dc1 is base class of dc2
-	 */
-	public static boolean isBaseOf(DataClass dc1, DataClass dc2) {
-		return isKindOf(dc2.getBase(), dc1);
-	}
-
-	/**
-	 * check whether pc1 is super type of pc2 
-	 * @param pc1
-	 * @param pc2
-	 * @return <code>true</code> if pc1 or one of its base types is identical to pc2
-	 */
-	public static boolean isKindOf(ProtocolClass pc1, ProtocolClass pc2) {
-		if (pc2==null)
-			return false;
+	public static boolean isCircularClassHierarchy(ProtocolClass pc) {
+		HashSet<ProtocolClass> classes = new HashSet<ProtocolClass>();
+		classes.add(pc);
 		
-		while (pc1!=null) {
-			if (pc2==pc1)
+		while (pc.getBase()!=null) {
+			pc = pc.getBase();
+			if (classes.contains(pc))
 				return true;
-			pc1 = pc1.getBase();
+			
+			classes.add(pc);
 		}
+		
 		return false;
-	}
-
-	/**
-	 * check whether pc1 is base class of pc2
-	 * @param pc1
-	 * @param pc2
-	 * @return <code>true</code> if pc1 is base class of pc2
-	 */
-	public static boolean isBaseOf(ProtocolClass pc1, ProtocolClass pc2) {
-		return isKindOf(pc2.getBase(), pc1);
 	}
 
 	/**
@@ -173,26 +148,35 @@ public class ValidationUtil {
 	 * @param ac2
 	 * @return <code>true</code> if ac1 or one of its base types is identical to ac2
 	 */
-	public static boolean isKindOf(ActorClass ac1, ActorClass ac2) {
+	private static boolean isKindOf(ActorClass ac1, ActorClass ac2) {
 		if (ac2==null)
+			return false;
+
+		if (ac1==null || isCircularClassHierarchy(ac1))
 			return false;
 		
 		while (ac1!=null) {
 			if (ac2==ac1)
 				return true;
+			
 			ac1 = ac1.getBase();
 		}
 		return false;
 	}
 
-	/**
-	 * check whether ac1 is base class of ac2
-	 * @param ac1
-	 * @param ac2
-	 * @return <code>true</code> if ac1 is base class of ac2
-	 */
-	public static boolean isBaseOf(ActorClass ac1, ActorClass ac2) {
-		return isKindOf(ac2.getBase(), ac1);
+	public static boolean isCircularClassHierarchy(ActorClass ac) {
+		HashSet<ActorClass> classes = new HashSet<ActorClass>();
+		classes.add(ac);
+		
+		while (ac.getBase()!=null) {
+			ac = ac.getBase();
+			if (classes.contains(ac))
+				return true;
+			
+			classes.add(ac);
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -753,6 +737,9 @@ public class ValidationUtil {
 		if (item.eContainer() instanceof ActorClass) {
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
 			ActorClass ac = (ActorClass) item.eContainer();
+			if (isCircularClassHierarchy(ac))
+				return Result.ok();
+			
 			do {
 				all.addAll(ac.getIfPorts());
 				all.addAll(ac.getIntPorts());

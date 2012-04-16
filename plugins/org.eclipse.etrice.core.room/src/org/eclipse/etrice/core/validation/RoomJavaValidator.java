@@ -152,9 +152,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (dc==null)
 			return;
 		
-		DataClass base = dc.getBase();
-		if (base!=null && ValidationUtil.isBaseOf(dc, base))
-			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+		if (ValidationUtil.isCircularClassHierarchy(dc))
+			error("Base classes are circular", RoomPackage.eINSTANCE.getDataClass_Base());
 	}
 
 	@Check
@@ -169,6 +168,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		
 		DataClass dc = (DataClass) att.eContainer();
+		if (ValidationUtil.isCircularClassHierarchy(dc))
+			return;
+		
 		while (dc!=null) {
 			if (att.getRefType().getType()==dc)
 				error("Attribute type must not refer to own class or a super class", RoomPackage.Literals.ATTRIBUTE__REF_TYPE);
@@ -182,9 +184,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (pc==null)
 			return;
 		
-		ProtocolClass base = pc.getBase();
-		if (base!=null && ValidationUtil.isBaseOf(pc, base))
-			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+		if (ValidationUtil.isCircularClassHierarchy(pc))
+			error("Base classes are circular", RoomPackage.eINSTANCE.getProtocolClass_Base());
 	}
 
 	@Check
@@ -192,14 +193,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (ac==null)
 			return;
 		
-		ActorClass base = ac.getBase();
-		if (base!=null && ValidationUtil.isBaseOf(ac, base))
+		if (ValidationUtil.isCircularClassHierarchy(ac))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 	
 	@Check
 	public void checkExecModelConsistent(ActorClass ac) {
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return;
+		
 		ActorCommunicationType commType = ac.getCommType();
+		
 		while (ac.getBase()!=null) {
 			ac = ac.getBase();
 

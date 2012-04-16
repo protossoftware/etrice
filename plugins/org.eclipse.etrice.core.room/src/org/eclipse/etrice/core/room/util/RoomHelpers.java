@@ -51,6 +51,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 
 /**
  * description
@@ -451,6 +452,8 @@ public class RoomHelpers {
 	
 	public static List<InterfaceItem> getAllInterfaceItems(ActorClass ac) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
 		
 		while (ac!=null) {
 			result.addAll(ac.getIntPorts());
