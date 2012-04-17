@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:documentation xml:lang="en">etUnit test result schema.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="testsuite" type="testsuite"/>
+  <xs:simpleType name="ISO8601_DATETIME_PATTERN">
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="testsuites">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="testsuite">
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="testsuite">
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="testsuite">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="testcase">
+        <xs:complexType>
+          <xs:choice minOccurs="0">
+            <xs:element name="error">
+                <xs:complexType mixed="true">
+			        <xs:sequence>
+			            <xs:element name="expected" type="xs:string"/>
+			            <xs:element name="actual" type="xs:string"/>
+			        </xs:sequence>
+			     </xs:complexType> 
+            </xs:element>
+            <xs:element name="failure">
+                <xs:complexType mixed="true">
+			        <xs:sequence>
+			            <xs:element name="expected" type="xs:string"/>
+			            <xs:element name="actual" type="xs:string"/>
+			        </xs:sequence>
+			     </xs:complexType> 
+            </xs:element>
+          </xs:choice>
+          <xs:attribute name="name" type="xs:token" use="required">
+          </xs:attribute>
+          <xs:attribute name="classname" type="xs:token" use="required">
+          </xs:attribute>
+          <xs:attribute name="time" type="xs:decimal" use="required">
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="timestamp" type="ISO8601_DATETIME_PATTERN" use="required">
+    </xs:attribute>
+    <xs:attribute name="tests" type="xs:int" use="required">
+    </xs:attribute>
+    <xs:attribute name="failures" type="xs:int" use="required">
+    </xs:attribute>
+    <xs:attribute name="errors" type="xs:int" use="required">
+    </xs:attribute>
+    <xs:attribute name="skipped" type="xs:int">
+    </xs:attribute>
+    <xs:attribute name="time" type="xs:decimal" use="required">
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="pre-string">
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
