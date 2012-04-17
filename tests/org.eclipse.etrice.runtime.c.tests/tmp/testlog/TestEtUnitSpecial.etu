@@ -1,0 +1,4 @@
+etUnit report
+ts start: etUnit
+tc start 11: openAll and closeAll
+tc end 11: 0

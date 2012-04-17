@@ -44,7 +44,7 @@ void DummyMessageDispatcher(const etMessage* msg){
 	}
 }
 
-void TestEtMessageService_init(void){
+void TestEtMessageService_init(etInt16 id){
 
 	etMessageService msgService;
 	uint16 max = 6;
@@ -54,15 +54,15 @@ void TestEtMessageService_init(void){
 
 	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
 
-	EXPECT_EQUAL_PTR("msgService.messagePool.first", msgBuffer, msgService.messagePool.first);
-	EXPECT_EQUAL_PTR("msgService.messagePool in between", &msgBuffer[3*blockSize], msgService.messagePool.first->next->next->next);
-	EXPECT_EQUAL_PTR("msgService.messagePool.last(1)", &msgBuffer[5*blockSize], msgService.messagePool.first->next->next->next->next->next);
-	EXPECT_EQUAL_PTR("msgService.messagePool.last(2)", &msgBuffer[5*blockSize], msgService.messagePool.last);
-	EXPECT_EQUAL_PTR("msgService.messagePool.last.next", 0, msgService.messagePool.last->next);
+	EXPECT_EQUAL_PTR(id, "msgService.messagePool.first", msgBuffer, msgService.messagePool.first);
+	EXPECT_EQUAL_PTR(id, "msgService.messagePool in between", &msgBuffer[3*blockSize], msgService.messagePool.first->next->next->next);
+	EXPECT_EQUAL_PTR(id, "msgService.messagePool.last(1)", &msgBuffer[5*blockSize], msgService.messagePool.first->next->next->next->next->next);
+	EXPECT_EQUAL_PTR(id, "msgService.messagePool.last(2)", &msgBuffer[5*blockSize], msgService.messagePool.last);
+	EXPECT_EQUAL_PTR(id, "msgService.messagePool.last.next", 0, msgService.messagePool.last->next);
 
 }
 
-void TestEtMessageService_GetPushPopReturn(void){
+void TestEtMessageService_GetPushPopReturn(etInt16 id){
 
 	etMessageService msgService;
 	uint16 max = 6;
@@ -75,7 +75,7 @@ void TestEtMessageService_GetPushPopReturn(void){
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 
-	EXPECT_EQUAL_INT16("msgService.messagePool.size", 4, msgService.messagePool.size);
+	EXPECT_EQUAL_INT16(id, "msgService.messagePool.size", 4, msgService.messagePool.size);
 
 	// define content
 	msg1->address = 11;
@@ -87,28 +87,27 @@ void TestEtMessageService_GetPushPopReturn(void){
 	etMessageService_pushMessage(&msgService, msg2);
 	etMessageService_pushMessage(&msgService, msg1);
 
-	EXPECT_EQUAL_INT16("msgService.messageQueue.size", 2, msgService.messageQueue.size);
+	EXPECT_EQUAL_INT16(id, "msgService.messageQueue.size", 2, msgService.messageQueue.size);
 
 	// pop messages from queue
 	etMessage* rcvMsg1 = etMessageService_popMessage(&msgService);
 	etMessage* rcvMsg2 = etMessageService_popMessage(&msgService);
 
-	EXPECT_EQUAL_INT16("msgService.messageQueue.size",0, msgService.messageQueue.size);
+	EXPECT_EQUAL_INT16(id, "msgService.messageQueue.size",0, msgService.messageQueue.size);
 
 
-	EXPECT_EQUAL_INT16("msgService.popMessage", 22, rcvMsg1->address);
-	EXPECT_EQUAL_INT16("msgService.popMessage", 222, rcvMsg1->evtID);
-	EXPECT_EQUAL_INT16("msgService.popMessage", 11, rcvMsg2->address);
-	EXPECT_EQUAL_INT16("msgService.popMessage", 111, rcvMsg2->evtID);
+	EXPECT_EQUAL_INT16(id, "msgService.popMessage", 22, rcvMsg1->address);
+	EXPECT_EQUAL_INT16(id, "msgService.popMessage", 222, rcvMsg1->evtID);
+	EXPECT_EQUAL_INT16(id, "msgService.popMessage", 11, rcvMsg2->address);
+	EXPECT_EQUAL_INT16(id, "msgService.popMessage", 111, rcvMsg2->evtID);
 
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg1);
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg2);
 
-	EXPECT_EQUAL_INT16("msgService.messagePool.size", 6, msgService.messagePool.size);
-
+	EXPECT_EQUAL_INT16(id, "msgService.messagePool.size", 6, msgService.messagePool.size);
 }
 
-void TestEtMessageService_GetReturn(void){
+void TestEtMessageService_GetReturn(etInt16 id){
 
 	etMessageService msgService;
 	uint16 max = 2;
@@ -121,22 +120,22 @@ void TestEtMessageService_GetReturn(void){
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessage* msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessage* msg3 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
-	EXPECT_TRUE("msgService getMessageBuffer", msg1!=NULL);
-	EXPECT_TRUE("msgService getMessageBuffer", msg2!=NULL);
-	EXPECT_EQUAL_PTR("msgService getMessageBuffer", msg3, NULL);
+	EXPECT_TRUE(id, "msgService getMessageBuffer", msg1!=NULL);
+	EXPECT_TRUE(id, "msgService getMessageBuffer", msg2!=NULL);
+	EXPECT_EQUAL_PTR(id, "msgService getMessageBuffer", msg3, NULL);
 
 	// return messages
 	etMessageService_returnMessageBuffer(&msgService, msg1);
 	etMessageService_returnMessageBuffer(&msgService, msg2);
-	EXPECT_EQUAL_INT16("msgService.messagePool.size", 2, msgService.messagePool.size);
+	EXPECT_EQUAL_INT16(id, "msgService.messagePool.size", 2, msgService.messagePool.size);
 
 	// get message bigger than blocksize
 	etMessage* msg4 = etMessageService_getMessageBuffer(&msgService, 33);
-	EXPECT_EQUAL_PTR("msgService getMessageBuffer", msg4, NULL);
+	EXPECT_EQUAL_PTR(id, "msgService getMessageBuffer", msg4, NULL);
 
 }
 
-void TestEtMessageService_execute(void){
+void TestEtMessageService_execute(etInt16 id){
 	etMessageService msgService;
 	uint16 max = 6;
 	uint16 blockSize = 32;
@@ -160,12 +159,12 @@ void TestEtMessageService_execute(void){
 
 	/* make sure that receivedEventIDCounter==0 and receivedEventIDs[n]==0*/
 	etMessageService_execute(&msgService);
-	EXPECT_EQUAL_INT16("deliverAllMessages msg1", msg1->evtID, receivedEventIDs[0]);
-	EXPECT_EQUAL_INT16("deliverAllMessages msg2", msg2->evtID, receivedEventIDs[1]);
-	EXPECT_EQUAL_INT16("deliverAllMessages receivedEventIDCounter", 2, receivedEventIDCounter);
+	EXPECT_EQUAL_INT16(id, "deliverAllMessages msg1", msg1->evtID, receivedEventIDs[0]);
+	EXPECT_EQUAL_INT16(id, "deliverAllMessages msg2", msg2->evtID, receivedEventIDs[1]);
+	EXPECT_EQUAL_INT16(id, "deliverAllMessages receivedEventIDCounter", 2, receivedEventIDCounter);
 }
 
-void TestEtMessageService_getMessagePoolLowWaterMark(void){
+void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	etMessageService msgService;
 	uint16 max = 6;
 	uint16 blockSize = 32;
@@ -173,7 +172,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(void){
 
 	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
 
-	EXPECT_EQUAL_INT16("inital low water mark", max, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "inital low water mark", max, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 	// get messages from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -189,7 +188,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(void){
 	etMessageService_pushMessage(&msgService, msg2);
 	etMessageService_pushMessage(&msgService, msg1);
 
-	EXPECT_EQUAL_INT16("low water mark 1", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 1", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 	// pop messages from queue
 	etMessage* rcvMsg1 = etMessageService_popMessage(&msgService);
@@ -198,7 +197,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(void){
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg1);
 	etMessageService_returnMessageBuffer(&msgService, rcvMsg2);
 
-	EXPECT_EQUAL_INT16("low water mark 2", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 2", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	msg2 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -206,7 +205,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(void){
 	etMessageService_pushMessage(&msgService, msg1);
 
 	/*still the same*/
-	EXPECT_EQUAL_INT16("low water mark 3", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 3", max-2, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
 	etMessageService_pushMessage(&msgService, msg2);
@@ -218,13 +217,13 @@ void TestEtMessageService_getMessagePoolLowWaterMark(void){
 	etMessageService_pushMessage(&msgService, msg2);
 
 	/*  no message left */
-	EXPECT_EQUAL_INT16("low water mark 4", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 4", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 	msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
-	EXPECT_EQUAL_PTR("check message for NULL", NULL, msg1);
+	EXPECT_EQUAL_PTR(id, "check message for NULL", NULL, msg1);
 
 	/*  still no message left */
-	EXPECT_EQUAL_INT16("low water mark 6", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
+	EXPECT_EQUAL_INT16(id, "low water mark 6", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
 
 }

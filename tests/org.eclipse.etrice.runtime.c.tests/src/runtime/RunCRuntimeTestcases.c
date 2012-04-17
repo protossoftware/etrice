@@ -31,6 +31,7 @@
 
 
 void RunCRuntimeTestcases(void){
+	etInt16 id;
 	etUnit_open("tmp/testlog","TestCRuntime");
 
 	TestEtMessage_runSuite();
@@ -42,8 +43,8 @@ void RunCRuntimeTestcases(void){
 
 	/* special situation for testing openAll and closeAll of etUnit
 	 * this has to be done outside of etUnit_open and etUnit_close */
-	etUnit_openAll("tmp/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
-	EXPECT_TRUE("Open and Close", TRUE);
-	etUnit_closeAll();
+	id = etUnit_openAll("tmp/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
+	EXPECT_TRUE(id, "Open and Close", TRUE);
+	etUnit_closeAll(id);
 }
 
