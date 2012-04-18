@@ -24,13 +24,13 @@ import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 
 
 @Singleton
 class TypeHelpers {
 
-	@Inject AbstractLanguageGenerator languageGen
+	@Inject AbstractTransitionChainGenerator chainGenerator
 	
 	def String typeName(DataType type) {
 		if (type instanceof PrimitiveType)
@@ -56,6 +56,6 @@ class TypeHelpers {
 	}
 
 	def String getTypedDataDefinition(Message m) {
-		return languageGen.getTypedData(m)
+		return chainGenerator.generateTypedData(m)
 	}
 }

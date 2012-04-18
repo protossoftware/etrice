@@ -24,10 +24,10 @@ import org.eclipse.etrice.core.room.TriggeredTransition
 import org.eclipse.etrice.core.room.NonInitialTransition
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger
-import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 import org.eclipse.etrice.generator.base.ITranslationProvider
-import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
 
@@ -36,7 +36,7 @@ class GenericStateMachineGenerator {
 	@Inject protected extension ILanguageExtension langExt
 	@Inject protected extension RoomExtensions roomExt
 	@Inject protected extension GenericProtocolClassGenerator pcGen
-	@Inject protected extension org.eclipse.etrice.generator.generic.AbstractLanguageGenerator languageGen
+	@Inject protected extension org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator languageGen
 	@Inject protected ITranslationProvider translator
 
 	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {
@@ -136,7 +136,7 @@ class GenericStateMachineGenerator {
 			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
-				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.getArgumentList(xpac, tr)»«ENDIF») {
+				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.generateArgumentList(xpac, tr)»«ENDIF») {
 					«xpac.getActionCode(tr, dct)»
 				}
 			«ENDIF»
@@ -176,7 +176,7 @@ class GenericStateMachineGenerator {
 				«FOR tc : allchains»
 					case «tc.getChainId()»:
 					{
-						«xpac.getExecuteChain(tc, dct)»
+						«xpac.generateExecuteChain(tc, dct)»
 					}
 				«ENDFOR»
 			}

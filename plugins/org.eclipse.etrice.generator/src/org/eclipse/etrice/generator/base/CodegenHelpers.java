@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.extensions;
+package org.eclipse.etrice.generator.base;
 
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.State;
@@ -22,27 +22,25 @@ import org.eclipse.etrice.generator.etricegen.TransitionChain;
  * @author Henrik Rentz-Reichert
  *
  */
-public class Extensions {
-
-	// public static interface used by Xtend
+public class CodegenHelpers {
 	
 	public static String getActionCodeOperationName(Transition t) {
 		return "action_"+RoomNameProvider.getFullPath(t);
 	}
 	
 	public static String getEntryCodeOperationName(State s) {
-		return "entry_"+getStatePathName(s);
+		return "entry_"+getGenStatePathName(s);
 	}
 	
 	public static String getExitCodeOperationName(State s) {
-		return "exit_"+getStatePathName(s);
+		return "exit_"+getGenStatePathName(s);
 	}
 	
 	public static String getDoCodeOperationName(State s) {
-		return "do_"+getStatePathName(s);
+		return "do_"+getGenStatePathName(s);
 	}
 	
-	public static String getChainId(TransitionChain tc) {
+	public static String getGenChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}
 	
@@ -57,11 +55,11 @@ public class Extensions {
 			return (State) s.eContainer().eContainer();
 	}
 	
-	public static String getStatePathName(State s) {
+	public static String getGenStatePathName(State s) {
 		return RoomNameProvider.getFullPath(s);
 	}
 	
-	public static String getStateId(State s) {
+	public static String getGenStateId(State s) {
 		if (s==null)
 			return "STATE_"+RoomNameProvider.getStateName(s);
 		else
@@ -69,7 +67,7 @@ public class Extensions {
 	}
 	
 	public static String getParentStateId(State s) {
-		return getStateId(getParentState(s));
+		return getGenStateId(getParentState(s));
 	}
 
 }

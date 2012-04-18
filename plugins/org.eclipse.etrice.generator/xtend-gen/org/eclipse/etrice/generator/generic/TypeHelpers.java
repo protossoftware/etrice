@@ -8,14 +8,14 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 @Singleton
 public class TypeHelpers {
   @Inject
-  private AbstractLanguageGenerator languageGen;
+  private AbstractTransitionChainGenerator chainGenerator;
   
   public String typeName(final DataType type) {
     if ((type instanceof PrimitiveType)) {
@@ -59,7 +59,7 @@ public class TypeHelpers {
   }
   
   public String getTypedDataDefinition(final Message m) {
-    String _typedData = this.languageGen.getTypedData(m);
-    return _typedData;
+    String _generateTypedData = this.chainGenerator.generateTypedData(m);
+    return _generateTypedData;
   }
 }

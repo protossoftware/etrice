@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.etrice.generator.extensions.PrepareFileSystem
+import org.eclipse.etrice.generator.generic.PrepareFileSystem
 
 @Singleton
 class MainGen implements IGenerator {

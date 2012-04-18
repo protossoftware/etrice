@@ -14,9 +14,8 @@
 	collection of convenience functions for code generation
 */
 
-package org.eclipse.etrice.generator.extensions
+package org.eclipse.etrice.generator.generic
 
-import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
 import java.util.ArrayList
@@ -50,13 +49,10 @@ import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
-import static extension org.eclipse.etrice.generator.extensions.RoomNameProv.*
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 
 @Singleton
 class RoomExtensions {
-
-	// for the time being we need a delegate to the static methods of the RoomNameProvider
-	@Inject extension RoomNameProv nameProvider
 
 	//-------------------------------------------------------
 	// union methods

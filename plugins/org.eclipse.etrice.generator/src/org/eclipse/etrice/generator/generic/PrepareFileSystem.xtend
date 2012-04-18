@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.extensions
+package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.generator.base.ILogger
 import org.eclipse.etrice.generator.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class PrepareFileSystem {
@@ -58,10 +58,12 @@ class PrepareFileSystem {
 		}
 	}
 	
-	def readmeText() {'''
-	This directory is an eTrice code generation target.
-	It will be erased every time the generator is executed.
-	
-	DO NOT PLACE OTHER FILES HERE!
-	'''}
+	def readmeText() {
+		'''
+			This directory is an eTrice code generation target.
+			It will be erased every time the generator is executed.
+			
+			DO NOT PLACE OTHER FILES HERE!
+		'''
+	}
 }

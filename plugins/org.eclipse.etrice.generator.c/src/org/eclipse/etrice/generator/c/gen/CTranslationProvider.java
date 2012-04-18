@@ -28,7 +28,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.generator.base.ILogger;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
-import org.eclipse.etrice.generator.extensions.RoomExtensions;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 
 import com.google.inject.Inject;

@@ -2,12 +2,12 @@ package org.eclipse.etrice.generator.java.gen;
 
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 
-public class JavaLanguageGenerator extends AbstractLanguageGenerator {
+public class JavaLanguageGenerator extends AbstractTransitionChainGenerator {
 
 	@Override
-	public String[] getArglistAndTypedData(VarDecl data) {
+	protected String[] generateArglistAndTypedData(VarDecl data) {
 		if (data==null)
 			return new String[] {"", "", ""};
 		

@@ -19,14 +19,21 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
-import org.eclipse.etrice.generator.extensions.Extensions;
 
 import com.google.inject.Inject;
 
-public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
+/**
+ * Implementation of the {@link org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor ITransitionChainVisitor} interface.
+ * Uses an {@link org.eclipse.etrice.generator.generic.ILanguageExtension ILanguageExtension} for target language specific things.
+ * 
+ * @author Henrik Rentz-Reichert
+ *
+ */
+public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	@Inject private ILanguageExtension langExt;
 	private DetailCodeTranslator dct;
@@ -34,11 +41,11 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	private String dataArg;
 	private boolean dataDriven;
 
-	public LanguageTransitionChainVisitor(DetailCodeTranslator dct) {
+	protected TransitionChainVisitor(DetailCodeTranslator dct) {
 		this.dct = dct;
 	}
 	
-	public void init(TransitionChain tc, String dataArg, String typedData) {
+	protected void init(TransitionChain tc, String dataArg, String typedData) {
 		this.dataArg = dataArg;
 		this.typedData = typedData;
 
@@ -60,21 +67,21 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	public String genActionOperationCall(Transition tr) {
 		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
 			if (tr instanceof InitialTransition)
-				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)
-				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else
-				return Extensions.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
+				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 		}
 		return "";
 	}
 
 	public String genEntryOperationCall(State state) {
-		return Extensions.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return CodegenHelpers.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genExitOperationCall(State state) {
-		return Extensions.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return CodegenHelpers.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {
@@ -98,7 +105,7 @@ public class LanguageTransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genReturnState(State state) {
-		return "return " + Extensions.getStateId(state) + ";";
+		return "return " + CodegenHelpers.getGenStateId(state) + ";";
 	}
 
 	public String genTypedData() {

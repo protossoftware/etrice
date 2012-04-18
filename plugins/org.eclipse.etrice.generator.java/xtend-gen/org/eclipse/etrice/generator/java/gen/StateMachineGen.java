@@ -6,8 +6,8 @@ import java.util.List;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.generator.extensions.RoomExtensions;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")

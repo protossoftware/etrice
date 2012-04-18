@@ -24,17 +24,22 @@ import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
-public abstract class AbstractLanguageGenerator {
+/**
+ * base class for 
+ * @author Henrik Rentz-Reichert
+ *
+ */
+public abstract class AbstractTransitionChainGenerator {
 
-	public String getExecuteChain(ExpandedActorClass ac, TransitionChain tc, DetailCodeTranslator dct) {
-		LanguageTransitionChainVisitor tcv = new LanguageTransitionChainVisitor(dct);
+	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc, DetailCodeTranslator dct) {
+		TransitionChainVisitor tcv = new TransitionChainVisitor(dct);
 		AbstractGenerator.getInjector().injectMembers(tcv);
 
 		String dataArg = "";
 		String typedData = "";
 		if (tc.getTransition() instanceof TriggeredTransition) {
 			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
-			String[] result = getArglistAndTypedData(data);
+			String[] result = generateArglistAndTypedData(data);
 			dataArg = result[0];
 			typedData = result[1];
 		}
@@ -43,7 +48,7 @@ public abstract class AbstractLanguageGenerator {
 		return tc.genExecuteChain(tcv);
 	}
 
-	public String getArgumentList(ExpandedActorClass xpac, Transition t) {
+	public String generateArgumentList(ExpandedActorClass xpac, Transition t) {
 		if (t instanceof InitialTransition)
 			// actually is InitialTransition
 			return "";
@@ -55,19 +60,19 @@ public abstract class AbstractLanguageGenerator {
 		Trigger trigger = ((TriggeredTransition)chain.getTransition()).getTriggers().get(0);
 		MessageFromIf mif = trigger.getMsgFromIfPairs().get(0);
 		
-		return getTypedArgumentList(mif.getMessage());
+		return generateTypedArgumentList(mif.getMessage());
 	}
 
-	public String getArgumentList(Message m) {
-		return getArglistAndTypedData(m.getData())[0];
+	public String generateArgumentList(Message m) {
+		return generateArglistAndTypedData(m.getData())[0];
 	}
 
-	public String getTypedData(Message m) {
-		return getArglistAndTypedData(m.getData())[1];
+	public String generateTypedData(Message m) {
+		return generateArglistAndTypedData(m.getData())[1];
 	}
 
-	public String getTypedArgumentList(Message m) {
-		return getArglistAndTypedData(m.getData())[2];
+	public String generateTypedArgumentList(Message m) {
+		return generateArglistAndTypedData(m.getData())[2];
 	}
 	
 	/**
@@ -81,5 +86,5 @@ public abstract class AbstractLanguageGenerator {
 	 *  <li>the data as it is used in the method declaration</li>
 	 *  </ol>
 	 */
-	public abstract String[] getArglistAndTypedData(VarDecl data);
+	protected abstract String[] generateArglistAndTypedData(VarDecl data);
 }

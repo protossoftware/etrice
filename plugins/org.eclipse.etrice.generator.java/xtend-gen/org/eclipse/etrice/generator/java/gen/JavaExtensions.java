@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -15,11 +15,11 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @Singleton
 public class JavaExtensions implements ILanguageExtension {
   @Inject
-  private AbstractLanguageGenerator languageGen;
+  private AbstractTransitionChainGenerator chainGenerator;
   
   public String getTypedDataDefinition(final Message m) {
-    String _typedData = this.languageGen.getTypedData(m);
-    return _typedData;
+    String _generateTypedData = this.chainGenerator.generateTypedData(m);
+    return _generateTypedData;
   }
   
   public String getJavaFileName(final RoomClass rc) {
