@@ -9,7 +9,6 @@
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.etunit.converter" componentType="buckminster"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">

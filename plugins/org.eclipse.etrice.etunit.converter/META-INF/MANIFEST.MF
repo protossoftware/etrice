@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: etUnit File Converter
 Bundle-SymbolicName: org.eclipse.etrice.etunit.converter;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: eTrice (Incubation)
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.etunit.converter.Etunit,
