@@ -149,6 +149,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
 			«ENDFOR»
+			
+		«IF (pc.getPortClass(conj) != null)»	
+			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, portClassName)»
+			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, replPortClassName)»
+		«ENDIF»
+		
+		«IF pc.handlesReceive(conj)»
+			void «portClassName»_handleReceive(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
+		«ENDIF»
+			
 		'''
 	}
 	
@@ -216,32 +226,64 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
 				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
 				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
+				«var hdlr = message.getSendHandler(conj)»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
-					ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-					if (self->receiveMessageFunc!=NULL) {
-						«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-					}
-					ET_MSC_LOGGER_SYNC_EXIT
+					«IF hdlr != null»
+						«FOR command : hdlr.detailCode.commands»	«command»
+						«ENDFOR»									
+					«ELSE»
+						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
+						if (self->receiveMessageFunc!=NULL) {
+							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						}
+						ET_MSC_LOGGER_SYNC_EXIT
+					«ENDIF»
 				}
 				
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
-					int i;
-					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-					for (i=0; i<self->size; ++i) {
-						«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-					}
-					ET_MSC_LOGGER_SYNC_EXIT
+					«IF hdlr != null»
+						int i;
+						for (i=0; i<self->size; ++i) {
+							«portClassName»_«message.name»((«portClassName»*)&self->ports[i]«data»);
+						}					
+					«ELSE»
+						int i;
+						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
+						for (i=0; i<self->size; ++i) {
+							«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						}
+						ET_MSC_LOGGER_SYNC_EXIT
+					«ENDIF»
 				}
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
-					ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-					if (0<=idx && idx<self->size) {
-						«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-					}
-					ET_MSC_LOGGER_SYNC_EXIT
+					«IF hdlr != null»
+						«portClassName»_«message.name»((«portClassName»*)&self->ports[idx]«data»);
+					«ELSE»					
+						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
+						if (0<=idx && idx<self->size) {
+							«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						}
+						ET_MSC_LOGGER_SYNC_EXIT
+					«ENDIF»
 				}
 			«ENDFOR»
+			
+			«IF (pc.getPortClass(conj) != null)»
+				«helpers.operationsImplementation(pc.getPortClass(conj).operations, portClassName)»
+				«helpers.operationsImplementation(pc.getPortClass(conj).operations, replPortClassName)»
+			«ENDIF»
+
+			// getReplication
+			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
+				return self->size;
+			}
+			
+			«IF pc.handlesReceive(conj)»
+				«genReceiveHandlers(pc,conj)»
+			«ENDIF»
+			
 		'''
 	}
 
@@ -279,6 +321,26 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 //	}
 //	'''
 //	}
+	
+	def private genReceiveHandlers(ProtocolClass pc, Boolean conj){
+	var portClassName = pc.getPortClassName(conj)
+	var replPortClassName = pc.getPortClassName(conj, true)
+	
+	'''
+	/* receiver handlers */
+	void «portClassName»_handleReceive(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
+		switch (msg->evtID){
+		«FOR h:getReceiveHandlers(pc,conj)»
+		case «pc.name»_«h.msg.codeName»:
+			«userCode(h.detailCode)»
+		break;
+	«ENDFOR»		
+		default:receiveMessageFunc(actor, self, msg);
+		break;
+		}
+	}
+	'''}	
+	
 	
 	def private generateDebugHelpersImplementation(Root root, ProtocolClass pc){'''
 		

@@ -372,7 +372,7 @@ class SubSystemClassGen {
 			var comma = if (idx<pi.peers.size-1) "," else ""
 			result = result +
 				"{&"+ai.path.getPathName()+", "
-				+ai.actorClass.name+"_ReceiveMessage, " 
+				+ai.actorClass.name+"_receiveMessage, " 
 				+"&msgService_Thread1, "
 				+p.objId+", "
 				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
@@ -405,19 +405,29 @@ class SubSystemClassGen {
 						«IF pi.replicated»
 							«FOR peer: pi.peers»
 								case «pi.objId+pi.peers.indexOf(peer)»:
-									etPort_receive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
-									break;
+								«IF (pi.interfaceItem.protocol. handlesReceive(pi.isConjugated()))»
+									«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated())»_handleReceive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+								«ELSE»
+									//etPort_receive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+									«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+								«ENDIF»
+								break;
 							«ENDFOR»
 						«ELSE»
 							case «pi.objId»:
-								etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
-								break;
+							«IF (pi.interfaceItem.protocol. handlesReceive(pi.isConjugated()))»
+								«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated())»_handleReceive((etPort*)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+							«ELSE»
+								//etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
+								«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
+							«ENDIF»
+							break;
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 
 				default:
-					etLogger_logErrorF("MessageService_Thread1_ReceiveMessage: address %d does not exist ", msg->address);
+					etLogger_logErrorF("MessageService_Thread1_receiveMessage: address %d does not exist ", msg->address);
 					break;
 			}
 			ET_MSC_LOGGER_SYNC_EXIT
