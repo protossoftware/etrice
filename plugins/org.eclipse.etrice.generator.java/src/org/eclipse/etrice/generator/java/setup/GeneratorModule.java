@@ -21,7 +21,7 @@ import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
 import org.eclipse.etrice.generator.java.gen.MainGen;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator;
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 
 
@@ -39,7 +39,7 @@ public class GeneratorModule extends GeneratorBaseModule {
 
 		// bind language specific code to generic Interfaces
 		binder.bind(ILanguageExtension.class).to(JavaExtensions.class);
-		binder.bind(AbstractLanguageGenerator.class).to(JavaLanguageGenerator.class);
+		binder.bind(AbstractTransitionChainGenerator.class).to(JavaLanguageGenerator.class);
 
 		binder.bind(ITranslationProvider.class).to(JavaTranslationProvider.class);
 	}

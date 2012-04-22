@@ -11,7 +11,7 @@ import org.eclipse.etrice.generator.c.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.c.gen.SubSystemClassGen;
 import org.eclipse.etrice.generator.c.gen.SubSystemRunnerGen;
 import org.eclipse.etrice.generator.etricegen.Root;
-import org.eclipse.etrice.generator.extensions.PrepareFileSystem;
+import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;

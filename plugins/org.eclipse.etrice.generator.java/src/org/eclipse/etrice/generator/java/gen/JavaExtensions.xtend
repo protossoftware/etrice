@@ -22,7 +22,7 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.AbstractLanguageGenerator
+import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
 import org.eclipse.xtext.util.Pair
 
@@ -30,11 +30,11 @@ import org.eclipse.xtext.util.Pair
 @Singleton
 class JavaExtensions implements ILanguageExtension {
 
-	@Inject AbstractLanguageGenerator languageGen
+	@Inject AbstractTransitionChainGenerator chainGenerator
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return languageGen.getTypedData(m)
+		return chainGenerator.generateTypedData(m)
 	}
 
 
@@ -78,9 +78,6 @@ class JavaExtensions implements ILanguageExtension {
 	override String pointerLiteral() { "" }
 	override String nullPointer() { "null" }
 	override String voidPointer() { "Object" }
-
-	//-------------------------------------------------------
-	// transition chain visitor
 
 	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
 		type+" "+name+"[]";

@@ -1,20 +1,27 @@
-<testsuites name="TestCRuntime" tests="0" failures="0" errors="0" time="0">
-	<testsuite name="TestMessage" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestEtMessage_testBasicMessage" time="0"/>
-	</testsuite>
-	<testsuite name="TestEtMessageQueue" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestEtMessageQueue_testPushPop" time="0"/>
-		<testcase name="TestEtMessageQueue_testMassiveMessaging" time="102"/>
-	</testsuite>
-	<testsuite name="TestEtMessageService" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestEtMessageService_init" time="0"/>
-		<testcase name="TestEtMessageService_GetPushPopReturn" time="1"/>
-		<testcase name="TestEtMessageService_GetReturn" time="0"/>
-		<testcase name="TestEtMessageService_execute" time="1"/>
-		<testcase name="TestEtMessageService_getMessagePoolLowWaterMark" time="1"/>
-	</testsuite>
-	<testsuite name="TestEtUnit" tests="0" failures="0" errors="0" time="0">
-		<testcase name="TestEtUnit_Expect_Order" time="0"/>
-		<testcase name="TestEtUnit_Expect" time="0"/>
-	</testsuite>
+<?xml version="1.0" encoding="ASCII"?>
+<testsuites>
+  <testsuite failures="1" name=" TestMessage" tests="1" time="0">
+    <testcase name="TestEtMessage_testBasicMessage" time="0">
+      <failure><expected>334</expected><actual>333</actual>msg1.NextMsg: expected=334, actual=333
+ at ..\src\runtime\TestEtMessage.c:35</failure>
+    </testcase>
+  </testsuite>
+  <testsuite failures="0" name=" TestEtMessageQueue" tests="2" time="170">
+    <testcase name="TestEtMessageQueue_testPushPop" time="0"/>
+    <testcase name="TestEtMessageQueue_testMassiveMessaging" time="170"/>
+  </testsuite>
+  <testsuite failures="0" name=" TestEtMessageService" tests="5" time="4">
+    <testcase name="TestEtMessageService_init" time="0"/>
+    <testcase name="TestEtMessageService_GetPushPopReturn" time="1"/>
+    <testcase name="TestEtMessageService_GetReturn" time="1"/>
+    <testcase name="TestEtMessageService_execute" time="1"/>
+    <testcase name="TestEtMessageService_getMessagePoolLowWaterMark" time="1"/>
+  </testsuite>
+  <testsuite failures="1" name=" TestEtUnit" tests="2" time="0">
+    <testcase name="TestEtUnit_Expect_Order" time="0"/>
+    <testcase name="TestEtUnit_Expect" time="0">
+      <failure><expected>2686618</expected><actual>2686619</actual>EXPECT_EQUAL_PTR: expected=2686618, actual=2686619
+ at ..\src\runtime\TestEtUnit.c:46</failure>
+    </testcase>
+  </testsuite>
 </testsuites>

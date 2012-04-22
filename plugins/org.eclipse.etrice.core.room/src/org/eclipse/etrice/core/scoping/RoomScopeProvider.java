@@ -187,6 +187,10 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (ac!=null) {
 			classes.addFirst(ac);
 			while (ac.getBase()!=null) {
+				if (ac==ac.getBase())
+					// avoid endless loop - circularity in class hierarchy detected elsewhere
+					break;
+
 				ac = ac.getBase();
 				classes.addFirst(ac);
 			}	

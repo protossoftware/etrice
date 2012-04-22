@@ -138,8 +138,29 @@ public interface ILanguageExtension {
 	 */
 	String arrayDeclaration(String type, int size, String name, boolean isRef);
 	
+	/**
+	 * name for the constructor (without namespace if applicable)
+	 * 
+	 * @param cls the class name
+	 * @return the constructor name
+	 */
 	String constructorName(String cls);
+	
+	/**
+	 * name for the destructor (without namespace if applicable)
+	 * 
+	 * @param cls the class name
+	 * @return the destructor name
+	 */
 	String destructorName(String cls);
+	
+	/**
+	 * @return a typename for the return type (might be empty)
+	 */
 	String constructorReturnType();
+	
+	/**
+	 * @return a typename for the return type (might be empty)
+	 */
 	String destructorReturnType();
 }

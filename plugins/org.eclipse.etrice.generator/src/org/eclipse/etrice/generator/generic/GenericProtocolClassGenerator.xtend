@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageFromIf
-import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
 

@@ -23,7 +23,7 @@ import org.eclipse.etrice.generator.etricegen.StructureInstance
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import static java.lang.Runtime.*
-import org.eclipse.etrice.generator.extensions.RoomExtensions
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class InstanceDiagramGen implements IRoomGenerator {
