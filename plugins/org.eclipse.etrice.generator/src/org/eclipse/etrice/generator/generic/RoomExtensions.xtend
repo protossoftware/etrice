@@ -46,6 +46,10 @@ import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.generator.etricegen.PortInstance
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
+import org.eclipse.etrice.generator.etricegen.SAPInstance
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
@@ -284,6 +288,22 @@ class RoomExtensions {
 		return false;
 	}
 
+	def boolean isConjugated(InterfaceItemInstance iii) {
+		if (iii instanceof PortInstance) {
+			return (iii as PortInstance).port.conjugated
+		}
+		else if (iii instanceof SAPInstance)  {
+			return true
+		}
+		else if (iii instanceof ServiceImplInstance) {
+			return false
+		}
+		else {
+			// should not happen
+			return false
+		}
+	}
+	
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return new ArrayList<MessageHandler>()
