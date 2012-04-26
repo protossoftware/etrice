@@ -49,6 +49,7 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 						org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 	
+	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
 		return PlatformRelativeUriResolver.class;
 	}
