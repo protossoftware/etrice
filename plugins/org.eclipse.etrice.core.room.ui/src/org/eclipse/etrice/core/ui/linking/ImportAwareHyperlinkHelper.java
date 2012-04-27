@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.contentassist;
+package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -41,6 +41,9 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 	@Inject
 	private PlatformRelativeUriResolver uriResolver;
 	
+	public ImportAwareHyperlinkHelper() {
+		super();
+	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper#createHyperlinksByOffset(org.eclipse.xtext.resource.XtextResource, int, org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor)
 	 */

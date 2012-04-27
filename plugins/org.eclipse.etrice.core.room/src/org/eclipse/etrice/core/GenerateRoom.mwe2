@@ -83,7 +83,9 @@ Workflow {
 			 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
+				// HOWTO: use URI imports - configure validator
                 composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+                
                 composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
             }
             
