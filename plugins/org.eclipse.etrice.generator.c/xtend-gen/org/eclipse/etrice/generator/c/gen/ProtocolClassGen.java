@@ -883,7 +883,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("int i;");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("for (i=0; i<self->size; ++i) {");
+              _builder.append("for (i=0; i<((etReplPort*)self)->size; ++i) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
@@ -891,9 +891,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("_");
               String _name_5 = message.getName();
               _builder.append(_name_5, "		");
-              _builder.append("((");
-              _builder.append(portClassName, "		");
-              _builder.append("*)&self->ports[i]");
+              _builder.append("((etPort*)&((etReplPort*)self)->ports[i]");
               _builder.append(data, "		");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -913,7 +911,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("\")");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              _builder.append("for (i=0; i<self->size; ++i) {");
+              _builder.append("for (i=0; i<((etReplPort*)self)->size; ++i) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
@@ -923,7 +921,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _memberInUse_1 = this.stdExt.memberInUse(_name_7, _operator_plus_6);
               String _operator_plus_7 = StringExtensions.operator_plus(typeName, refp);
               String _operator_plus_8 = StringExtensions.operator_plus(refa, "data");
-              String _sendMessageCall_1 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[i])", _memberInUse_1, _operator_plus_7, _operator_plus_8);
+              String _sendMessageCall_1 = this.sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", _memberInUse_1, _operator_plus_7, _operator_plus_8);
               _builder.append(_sendMessageCall_1, "		");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -951,9 +949,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("_");
               String _name_10 = message.getName();
               _builder.append(_name_10, "	");
-              _builder.append("((");
-              _builder.append(portClassName, "	");
-              _builder.append("*)&self->ports[idx]");
+              _builder.append("((etPort*)&((etReplPort*)self)->ports[idx]");
               _builder.append(data, "	");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -967,7 +963,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("\")");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              _builder.append("if (0<=idx && idx<self->size) {");
+              _builder.append("if (0<=idx && idx<((etReplPort*)self)->size) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
@@ -977,7 +973,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _memberInUse_2 = this.stdExt.memberInUse(_name_12, _operator_plus_10);
               String _operator_plus_11 = StringExtensions.operator_plus(typeName, refp);
               String _operator_plus_12 = StringExtensions.operator_plus(refa, "data");
-              String _sendMessageCall_2 = this.sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", _memberInUse_2, _operator_plus_11, _operator_plus_12);
+              String _sendMessageCall_2 = this.sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", _memberInUse_2, _operator_plus_11, _operator_plus_12);
               _builder.append(_sendMessageCall_2, "		");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -1019,7 +1015,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("* self) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("return self->size;");
+      _builder.append("return ((etReplPort*)self)->size;");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

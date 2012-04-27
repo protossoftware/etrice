@@ -259,14 +259,14 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
 					«IF hdlr != null»
 						int i;
-						for (i=0; i<self->size; ++i) {
-							«portClassName»_«message.name»((«portClassName»*)&self->ports[i]«data»);
+						for (i=0; i<((etReplPort*)self)->size; ++i) {
+							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«data»);
 						}					
 					«ELSE»
 						int i;
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						for (i=0; i<self->size; ++i) {
-							«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						for (i=0; i<((etReplPort*)self)->size; ++i) {
+							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -274,11 +274,11 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					«IF hdlr != null»
-						«portClassName»_«message.name»((«portClassName»*)&self->ports[idx]«data»);
+						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«data»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						if (0<=idx && idx<self->size) {
-							«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						if (0<=idx && idx<((etReplPort*)self)->size) {
+							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -292,7 +292,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 
 			// getReplication
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
-				return self->size;
+				return ((etReplPort*)self)->size;
 			}
 			
 			«IF pc.handlesReceive(conj)»
