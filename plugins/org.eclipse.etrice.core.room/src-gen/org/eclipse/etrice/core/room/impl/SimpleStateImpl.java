@@ -12,23 +12,23 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SimpleState;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Base State</b></em>'.
+ * An implementation of the model object '<em><b>Simple State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.BaseStateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BaseStateImpl extends StateImpl implements BaseState
+public class SimpleStateImpl extends StateImpl implements SimpleState
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,7 +55,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BaseStateImpl()
+  protected SimpleStateImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.BASE_STATE;
+    return RoomPackage.Literals.SIMPLE_STATE;
   }
 
   /**
@@ -91,7 +91,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.BASE_STATE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SIMPLE_STATE__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
   {
     switch (featureID)
     {
-      case RoomPackage.BASE_STATE__NAME:
+      case RoomPackage.SIMPLE_STATE__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
   {
     switch (featureID)
     {
-      case RoomPackage.BASE_STATE__NAME:
+      case RoomPackage.SIMPLE_STATE__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
   {
     switch (featureID)
     {
-      case RoomPackage.BASE_STATE__NAME:
+      case RoomPackage.SIMPLE_STATE__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class BaseStateImpl extends StateImpl implements BaseState
   {
     switch (featureID)
     {
-      case RoomPackage.BASE_STATE__NAME:
+      case RoomPackage.SIMPLE_STATE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class BaseStateImpl extends StateImpl implements BaseState
     return result.toString();
   }
 
-} //BaseStateImpl
+} //SimpleStateImpl

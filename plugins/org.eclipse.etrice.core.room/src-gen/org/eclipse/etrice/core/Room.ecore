@@ -292,7 +292,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//StateGraphNode">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return (this instanceof org.eclipse.etrice.core.room.BaseState)? ((org.eclipse.etrice.core.room.BaseState)this).getName() :((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null? &quot;&quot;:((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();"/>
+        <details key="body" value="return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? &quot;&quot;:((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
@@ -316,11 +316,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
         eType="#//Transition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BaseState" eSuperTypes="#//State">
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//State">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//BaseState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DetailCode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" unique="false"
@@ -369,14 +369,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTerminal"/>
   <eClassifiers xsi:type="ecore:EClass" name="StateTerminal" eSuperTypes="#//TransitionTerminal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//BaseState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrPointTerminal" eSuperTypes="#//TransitionTerminal">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubStateTrPointTerminal" eSuperTypes="#//TransitionTerminal">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//BaseState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoicepointTerminal" eSuperTypes="#//TransitionTerminal">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cp" eType="#//ChoicePoint"/>

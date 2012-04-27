@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
@@ -152,7 +152,7 @@ public class StateSupport {
 				}
 				
 				// create new State and add it
-				BaseState s = RoomFactory.eINSTANCE.createBaseState();
+				SimpleState s = RoomFactory.eINSTANCE.createSimpleState();
 				s.setName(RoomNameProvider.getUniqueStateName(sg));
 				sg.getStates().add(s);
 		        
@@ -505,7 +505,7 @@ public class StateSupport {
 						// do we already have a RefinedState pointing to s?
 						for (State st : ac.getStateMachine().getStates()) {
 							if (st instanceof RefinedState)
-								if (((RefinedState) st).getBase()==s) {
+								if (((RefinedState) st).getTarget()==s) {
 									rs = (RefinedState) st;
 									break;
 								}
@@ -514,7 +514,7 @@ public class StateSupport {
 						// if not so create one
 						if (rs==null) {
 							rs = RoomFactory.eINSTANCE.createRefinedState();
-							rs.setBase((BaseState) s);
+							rs.setTarget(s);
 							ac.getStateMachine().getStates().add(rs);
 						}
 						s = rs;

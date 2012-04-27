@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -16,7 +16,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
-class StateGraphContext {
+public class StateGraphContext {
 	private ArrayList<StateGraphContext> children = new ArrayList<StateGraphContext>();
 	
 	private StateGraph stateGraph;
@@ -25,9 +25,9 @@ class StateGraphContext {
 	private ArrayList<TrPoint> trPoints = new ArrayList<TrPoint>();
 	private ArrayList<Transition> transitions = new ArrayList<Transition>();
 	
-	static HashMap<EObject, StateGraphContext> obj2ctx = new HashMap<EObject, StateGraphContext>();
+	private static HashMap<EObject, StateGraphContext> obj2ctx = new HashMap<EObject, StateGraphContext>();
 	
-	static StateGraphContext createContextTree(ActorClass ac) {
+	public static StateGraphContext createContextTree(ActorClass ac) {
 		
 		// the top level state graph is always the one of our actor class
 		if (ac.getStateMachine()==null || ac.getStateMachine().eIsProxy()) {
@@ -90,31 +90,12 @@ class StateGraphContext {
 		}
 	}
 
-	private void merge(StateGraphContext derived) {
-		for (State s : derived.getStates()) {
-			states.add(s);
-			obj2ctx.put(s, this);
-		}
-		for (ChoicePoint cp : derived.getChPoints()) {
-			chPoints.add(cp);
-			obj2ctx.put(cp, this);
-		}
-		for (TrPoint tp : derived.getTrPoints()) {
-			trPoints.add(tp);
-			obj2ctx.put(tp, this);
-		}
-		for (Transition t : derived.getTransitions()) {
-			transitions.add(t);
-			obj2ctx.put(t, this);
-		}
-	}
-
 	private void merge(StateGraph derived) {
 		stateGraph = derived;
 		
 		// add derived contents up to refined states
 		for (State s : derived.getStates()) {
-			if (s instanceof BaseState) {
+			if (s instanceof SimpleState) {
 				states.add(s);
 				obj2ctx.put(s, this);
 			}
@@ -134,28 +115,24 @@ class StateGraphContext {
 
 		// recurse for non-refined states
 		for (State s : derived.getStates()) {
-			if (s instanceof BaseState)
+			if (s instanceof SimpleState)
 				if (s.getSubgraph()!=null)
 					children.add(new StateGraphContext(s.getSubgraph()));
 		}
 		
-		// refined states (need no recursion since refined states can only occur on the top level)
+		// refined states
 		for (State refined : derived.getStates()) {
 			if (refined instanceof RefinedState) {
-				State base = ((RefinedState) refined).getBase();
+				State base = ((RefinedState) refined).getTarget();
 				StateGraphContext ctx = obj2ctx.get(base);
 				assert(ctx!=null): "should have visited base state already";
 				
 				// remove base and put refined in place
 				ctx.getStates().remove(base);
 				ctx.getStates().add(refined);
+				obj2ctx.put(refined, this);
 				
 				// merge sub contexts
-				StateGraphContext sub = null;
-				if (RoomHelpers.hasDirectSubStructure(refined)) {
-					sub = new StateGraphContext(refined.getSubgraph());
-					ctx.getChildren().add(sub);
-				}
 				if (RoomHelpers.hasDirectSubStructure(base)) {
 					StateGraphContext basesub = null;
 					for (StateGraphContext bs : ctx.getChildren()) {
@@ -165,14 +142,17 @@ class StateGraphContext {
 						}
 					}
 					if (basesub!=null) {
-						if (sub!=null) {
-							ctx.getChildren().remove(basesub);
-							sub.merge(basesub);
+						if (RoomHelpers.hasDirectSubStructure(refined)) {
+							basesub.merge(refined.getSubgraph());
 						}
 					}
 					else {
 						assert(false): "context not found";
 					}
+				}
+				else if (RoomHelpers.hasDirectSubStructure(refined)) {
+					StateGraphContext sub = new StateGraphContext(refined.getSubgraph());
+					ctx.getChildren().add(sub);
 				}
 			}
 		}
@@ -236,18 +216,15 @@ class StateGraphContext {
 	}
 
 	private String getText(StateGraph sg) {
-		ActorClass parent = getActorClass(sg);
-		return "state graph of "+(parent==null? "?":parent.getName());
+		ActorClass ac = getActorClass(sg);
+		EObject parent = sg.eContainer();
+		String item = parent instanceof ActorClass? "diagram" : (parent.eClass().getName()+" "+((State)parent).getName());
+		return "state graph of "+item+" of "+(ac==null? "?":ac.getName());
 	}
 
-	private String getText(StateGraphItem sg) {
-		ActorClass parent = getActorClass(sg);
-		String name = "?";
-		if (sg instanceof State)
-			name = "st "+((State) sg).getName();
-		else if (sg instanceof TrPoint)
-			name = "tp "+((TrPoint) sg).getName();
-		return name+" of "+(parent==null? "?":parent.getName());
+	private String getText(StateGraphItem item) {
+		ActorClass ac = getActorClass(item);
+		return item.eClass().getName()+" "+item.getName()+" of "+(ac==null? "?":ac.getName());
 	}
 
 	private ActorClass getActorClass(EObject obj) {

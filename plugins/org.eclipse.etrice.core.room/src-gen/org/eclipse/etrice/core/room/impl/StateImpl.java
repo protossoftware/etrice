@@ -357,7 +357,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    */
   public String getName()
   {
-    return (this instanceof org.eclipse.etrice.core.room.BaseState)? ((org.eclipse.etrice.core.room.BaseState)this).getName() :((org.eclipse.etrice.core.room.RefinedState)this).getBase()==null? "":((org.eclipse.etrice.core.room.RefinedState)this).getBase().getName();
+    return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? "":((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :"";
   }
 
   /**

@@ -23,7 +23,6 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.BaseState
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.ExternalPort
@@ -34,6 +33,7 @@ import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefinedState
+import org.eclipse.etrice.core.room.SimpleState
 import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.ServiceImplementation
@@ -386,7 +386,7 @@ class RoomExtensions {
 	def List<State> getBaseStateList(StateGraph sg) {
 		var ret = new ArrayList<State>()
 		for(e : sg.getStateList()){
-			if(e instanceof BaseState){
+			if(e instanceof SimpleState){
 				ret.add(e)
 			}
 		}

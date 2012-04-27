@@ -277,7 +277,7 @@ ActorRef:
 StateGraphNode: State | ChoicePoint | TrPoint;
 StateGraphItem: StateGraphNode | Transition;
 
-State: BaseState | RefinedState;
+State: SimpleState | RefinedState;
 
 StateGraph:
 	{StateGraph}
@@ -301,9 +301,7 @@ StateMachine returns StateGraph:
 		)*
 	'}';
 
-// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-// in RefinedState to still have both features in the common base class State
-BaseState:
+SimpleState:
 	'State' name=ID (docu=Documentation)? ('{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
@@ -312,7 +310,7 @@ BaseState:
 	'}')?;
 
 RefinedState:
-	'RefinedState' base=[BaseState|FQN] (docu=Documentation)? '{'
+	'RefinedState' target=[State|FQN] (docu=Documentation)? '{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('do' doCode=DetailCode)?
@@ -387,11 +385,11 @@ CPBranchTransition:
 TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 
 StateTerminal:
-	state=[BaseState|ID];
+	state=[State|ID];
 TrPointTerminal:
 	'my' trPoint=[TrPoint|ID];
 SubStateTrPointTerminal:
-	trPoint=[TrPoint|ID] 'of' state=[BaseState|ID];
+	trPoint=[TrPoint|ID] 'of' state=[State|ID];
 ChoicepointTerminal:
 	'cp' cp=[ChoicePoint|ID];
 

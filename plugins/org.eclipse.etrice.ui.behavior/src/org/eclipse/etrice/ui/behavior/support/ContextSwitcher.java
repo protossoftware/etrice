@@ -1,5 +1,8 @@
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -17,21 +20,67 @@ import org.eclipse.graphiti.services.Graphiti;
 public class ContextSwitcher {
 
 	public static void goUp(Diagram diagram, StateGraph sg) {
+		// if the container is a state we can go up, else we are already on top
 		if (sg.eContainer() instanceof State) {
-			State s = (State) sg.eContainer();
+			ActorClass ac = SupportUtil.getActorClass(diagram);
+			StateGraph parent = getVirtualParent(sg, ac);
 			
-			// we follow the chain of base states
-			while (s instanceof RefinedState)
-				s = ((RefinedState)s).getBase();
-			
-			// and finally go up
-			StateGraph superSG = (StateGraph) s.eContainer();
-			
-			if (superSG.eContainer() instanceof ActorClass)
+			if (parent.eContainer() instanceof ActorClass)
 				ContextSwitcher.switchTop(diagram);
 			else
-				ContextSwitcher.switchTo(diagram, superSG);
+				ContextSwitcher.switchTo(diagram, parent);
 		}
+	}
+
+	/**
+	 * @param sg
+	 * @param ac
+	 * @return
+	 */
+	private static StateGraph getVirtualParent(StateGraph sg, ActorClass ac) {
+		State s = (State) sg.eContainer();
+		
+		// try to find a RefinedState pointing to the parent of s
+		if (s.eContainer().eContainer() instanceof State) {
+			ArrayList<ActorClass> hierarchy = new ArrayList<ActorClass>();
+			do {
+				hierarchy.add(0, ac);
+				ac = ac.getBase();
+			}
+			while (ac!=null);
+			
+			RefinedState targeting = getTargetingState(hierarchy.iterator(), (State) s.eContainer().eContainer());
+			if (targeting!=null)
+				return targeting.getSubgraph();
+		}
+		
+		// follow the target chain as long as the refined state resides in the top level
+		while (s instanceof RefinedState && s.eContainer().eContainer() instanceof ActorClass)
+			s = ((RefinedState)s).getTarget();
+		
+		return (StateGraph) s.eContainer();
+	}
+
+	/**
+	 * @param it
+	 * @param s
+	 * @return
+	 */
+	private static RefinedState getTargetingState(Iterator<ActorClass> acit, State s) {
+		ActorClass ac = acit.next();
+		TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (next instanceof RefinedState) {
+				if (((RefinedState) next).getTarget()==s)
+					return (RefinedState) next;
+			}
+		}
+		
+		if (acit.hasNext())
+			return getTargetingState(acit, s);
+		
+		return null;
 	}
 
 	public static void switchTop(Diagram diagram) {

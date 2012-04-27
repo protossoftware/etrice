@@ -34,12 +34,12 @@ public interface StateTerminal extends TransitionTerminal
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State</em>' reference.
-   * @see #setState(BaseState)
+   * @see #setState(State)
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateTerminal_State()
    * @model
    * @generated
    */
-  BaseState getState();
+  State getState();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.StateTerminal#getState <em>State</em>}' reference.
@@ -49,6 +49,6 @@ public interface StateTerminal extends TransitionTerminal
    * @see #getState()
    * @generated
    */
-  void setState(BaseState value);
+  void setState(State value);
 
 } // StateTerminal

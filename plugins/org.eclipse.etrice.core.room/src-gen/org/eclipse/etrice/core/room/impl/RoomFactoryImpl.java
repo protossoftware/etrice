@@ -117,7 +117,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.STATE_GRAPH_ITEM: return createStateGraphItem();
       case RoomPackage.STATE: return createState();
       case RoomPackage.STATE_GRAPH: return createStateGraph();
-      case RoomPackage.BASE_STATE: return createBaseState();
+      case RoomPackage.SIMPLE_STATE: return createSimpleState();
       case RoomPackage.REFINED_STATE: return createRefinedState();
       case RoomPackage.DETAIL_CODE: return createDetailCode();
       case RoomPackage.TR_POINT: return createTrPoint();
@@ -721,10 +721,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public BaseState createBaseState()
+  public SimpleState createSimpleState()
   {
-    BaseStateImpl baseState = new BaseStateImpl();
-    return baseState;
+    SimpleStateImpl simpleState = new SimpleStateImpl();
+    return simpleState;
   }
 
   /**

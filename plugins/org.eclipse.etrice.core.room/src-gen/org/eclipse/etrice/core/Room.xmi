@@ -1249,9 +1249,9 @@
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="BaseState">
+    <rules xsi:type="xtext:ParserRule" name="SimpleState">
       <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SimpleState"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="State"/>
@@ -1297,10 +1297,10 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="RefinedState"/>
-        <elements xsi:type="xtext:Assignment" feature="base" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="target" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//State"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.80"/>
           </terminal>
@@ -1624,7 +1624,7 @@
       <alternatives xsi:type="xtext:Assignment" feature="state" operator="=">
         <terminal xsi:type="xtext:CrossReference">
           <type metamodel="/0/@metamodelDeclarations.1">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//State"/>
           </type>
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </terminal>
@@ -1663,7 +1663,7 @@
         <elements xsi:type="xtext:Assignment" feature="state" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//BaseState"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//State"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </terminal>

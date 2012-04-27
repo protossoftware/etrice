@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.State;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,14 +33,14 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class RefinedStateImpl extends StateImpl implements RefinedState
 {
   /**
-   * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBase()
+   * @see #getTarget()
    * @generated
    * @ordered
    */
-  protected BaseState base;
+  protected State target;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,19 +68,19 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
-  public BaseState getBase()
+  public State getTarget()
   {
-    if (base != null && base.eIsProxy())
+    if (target != null && target.eIsProxy())
     {
-      InternalEObject oldBase = (InternalEObject)base;
-      base = (BaseState)eResolveProxy(oldBase);
-      if (base != oldBase)
+      InternalEObject oldTarget = (InternalEObject)target;
+      target = (State)eResolveProxy(oldTarget);
+      if (target != oldTarget)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.REFINED_STATE__BASE, oldBase, base));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.REFINED_STATE__TARGET, oldTarget, target));
       }
     }
-    return base;
+    return target;
   }
 
   /**
@@ -88,9 +88,9 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
-  public BaseState basicGetBase()
+  public State basicGetTarget()
   {
-    return base;
+    return target;
   }
 
   /**
@@ -98,12 +98,12 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBase(BaseState newBase)
+  public void setTarget(State newTarget)
   {
-    BaseState oldBase = base;
-    base = newBase;
+    State oldTarget = target;
+    target = newTarget;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REFINED_STATE__BASE, oldBase, base));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.REFINED_STATE__TARGET, oldTarget, target));
   }
 
   /**
@@ -116,9 +116,9 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
   {
     switch (featureID)
     {
-      case RoomPackage.REFINED_STATE__BASE:
-        if (resolve) return getBase();
-        return basicGetBase();
+      case RoomPackage.REFINED_STATE__TARGET:
+        if (resolve) return getTarget();
+        return basicGetTarget();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -133,8 +133,8 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
   {
     switch (featureID)
     {
-      case RoomPackage.REFINED_STATE__BASE:
-        setBase((BaseState)newValue);
+      case RoomPackage.REFINED_STATE__TARGET:
+        setTarget((State)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,8 +150,8 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
   {
     switch (featureID)
     {
-      case RoomPackage.REFINED_STATE__BASE:
-        setBase((BaseState)null);
+      case RoomPackage.REFINED_STATE__TARGET:
+        setTarget((State)null);
         return;
     }
     super.eUnset(featureID);
@@ -167,8 +167,8 @@ public class RefinedStateImpl extends StateImpl implements RefinedState
   {
     switch (featureID)
     {
-      case RoomPackage.REFINED_STATE__BASE:
-        return base != null;
+      case RoomPackage.REFINED_STATE__TARGET:
+        return target != null;
     }
     return super.eIsSet(featureID);
   }

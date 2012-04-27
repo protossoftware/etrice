@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
+import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
 import org.eclipse.etrice.ui.behavior.support.InitialPointSupport;
 import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
@@ -270,7 +271,7 @@ public class ProviderDispatcher {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			if (context.getPictogramElement() instanceof Diagram)
-				return new AutoUpdateFeature(this);
+				return new DiagramUpdateFeature(this);
 			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)

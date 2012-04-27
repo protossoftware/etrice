@@ -377,6 +377,9 @@ public class StateGraphSupport {
 
 			@Override
 			public boolean update(IUpdateContext context) {
+				if (context!=null)
+					return false;
+				
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {

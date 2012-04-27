@@ -3552,21 +3552,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleStateMachine"
 
 
-    // $ANTLR start "entryRuleBaseState"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1302:1: entryRuleBaseState : ruleBaseState EOF ;
-    public final void entryRuleBaseState() throws RecognitionException {
+    // $ANTLR start "entryRuleSimpleState"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1302:1: entryRuleSimpleState : ruleSimpleState EOF ;
+    public final void entryRuleSimpleState() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1303:1: ( ruleBaseState EOF )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1304:1: ruleBaseState EOF
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1303:1: ( ruleSimpleState EOF )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1304:1: ruleSimpleState EOF
             {
-             before(grammarAccess.getBaseStateRule()); 
-            pushFollow(FOLLOW_ruleBaseState_in_entryRuleBaseState2711);
-            ruleBaseState();
+             before(grammarAccess.getSimpleStateRule()); 
+            pushFollow(FOLLOW_ruleSimpleState_in_entryRuleSimpleState2711);
+            ruleSimpleState();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBaseState2718); 
+             after(grammarAccess.getSimpleStateRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleState2718); 
 
             }
 
@@ -3579,35 +3579,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleBaseState"
+    // $ANTLR end "entryRuleSimpleState"
 
 
-    // $ANTLR start "ruleBaseState"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1311:1: ruleBaseState : ( ( rule__BaseState__Group__0 ) ) ;
-    public final void ruleBaseState() throws RecognitionException {
+    // $ANTLR start "ruleSimpleState"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1311:1: ruleSimpleState : ( ( rule__SimpleState__Group__0 ) ) ;
+    public final void ruleSimpleState() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1315:2: ( ( ( rule__BaseState__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1316:1: ( ( rule__BaseState__Group__0 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1315:2: ( ( ( rule__SimpleState__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1316:1: ( ( rule__SimpleState__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1316:1: ( ( rule__BaseState__Group__0 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1317:1: ( rule__BaseState__Group__0 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1316:1: ( ( rule__SimpleState__Group__0 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1317:1: ( rule__SimpleState__Group__0 )
             {
-             before(grammarAccess.getBaseStateAccess().getGroup()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1318:1: ( rule__BaseState__Group__0 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1318:2: rule__BaseState__Group__0
+             before(grammarAccess.getSimpleStateAccess().getGroup()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1318:1: ( rule__SimpleState__Group__0 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:1318:2: rule__SimpleState__Group__0
             {
-            pushFollow(FOLLOW_rule__BaseState__Group__0_in_ruleBaseState2744);
-            rule__BaseState__Group__0();
+            pushFollow(FOLLOW_rule__SimpleState__Group__0_in_ruleSimpleState2744);
+            rule__SimpleState__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup()); 
 
             }
 
@@ -3626,7 +3626,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleBaseState"
+    // $ANTLR end "ruleSimpleState"
 
 
     // $ANTLR start "entryRuleRefinedState"
@@ -7392,13 +7392,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__State__Alternatives"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2567:1: rule__State__Alternatives : ( ( ruleBaseState ) | ( ruleRefinedState ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2567:1: rule__State__Alternatives : ( ( ruleSimpleState ) | ( ruleRefinedState ) );
     public final void rule__State__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2571:1: ( ( ruleBaseState ) | ( ruleRefinedState ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2571:1: ( ( ruleSimpleState ) | ( ruleRefinedState ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -7416,18 +7416,18 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2572:1: ( ruleBaseState )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2572:1: ( ruleSimpleState )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2572:1: ( ruleBaseState )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2573:1: ruleBaseState
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2572:1: ( ruleSimpleState )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:2573:1: ruleSimpleState
                     {
-                     before(grammarAccess.getStateAccess().getBaseStateParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleBaseState_in_rule__State__Alternatives5486);
-                    ruleBaseState();
+                     before(grammarAccess.getStateAccess().getSimpleStateParserRuleCall_0()); 
+                    pushFollow(FOLLOW_ruleSimpleState_in_rule__State__Alternatives5486);
+                    ruleSimpleState();
 
                     state._fsp--;
 
-                     after(grammarAccess.getStateAccess().getBaseStateParserRuleCall_0()); 
+                     after(grammarAccess.getStateAccess().getSimpleStateParserRuleCall_0()); 
 
                     }
 
@@ -34978,23 +34978,23 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__StateMachine__Group__4__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12822:1: rule__BaseState__Group__0 : rule__BaseState__Group__0__Impl rule__BaseState__Group__1 ;
-    public final void rule__BaseState__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12822:1: rule__SimpleState__Group__0 : rule__SimpleState__Group__0__Impl rule__SimpleState__Group__1 ;
+    public final void rule__SimpleState__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12826:1: ( rule__BaseState__Group__0__Impl rule__BaseState__Group__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12827:2: rule__BaseState__Group__0__Impl rule__BaseState__Group__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12826:1: ( rule__SimpleState__Group__0__Impl rule__SimpleState__Group__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12827:2: rule__SimpleState__Group__0__Impl rule__SimpleState__Group__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group__0__Impl_in_rule__BaseState__Group__025883);
-            rule__BaseState__Group__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group__0__Impl_in_rule__SimpleState__Group__025883);
+            rule__SimpleState__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group__1_in_rule__BaseState__Group__025886);
-            rule__BaseState__Group__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group__1_in_rule__SimpleState__Group__025886);
+            rule__SimpleState__Group__1();
 
             state._fsp--;
 
@@ -35013,12 +35013,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__0"
+    // $ANTLR end "rule__SimpleState__Group__0"
 
 
-    // $ANTLR start "rule__BaseState__Group__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12834:1: rule__BaseState__Group__0__Impl : ( 'State' ) ;
-    public final void rule__BaseState__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12834:1: rule__SimpleState__Group__0__Impl : ( 'State' ) ;
+    public final void rule__SimpleState__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35029,9 +35029,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12839:1: ( 'State' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12840:1: 'State'
             {
-             before(grammarAccess.getBaseStateAccess().getStateKeyword_0()); 
-            match(input,74,FOLLOW_74_in_rule__BaseState__Group__0__Impl25914); 
-             after(grammarAccess.getBaseStateAccess().getStateKeyword_0()); 
+             before(grammarAccess.getSimpleStateAccess().getStateKeyword_0()); 
+            match(input,74,FOLLOW_74_in_rule__SimpleState__Group__0__Impl25914); 
+             after(grammarAccess.getSimpleStateAccess().getStateKeyword_0()); 
 
             }
 
@@ -35050,26 +35050,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12853:1: rule__BaseState__Group__1 : rule__BaseState__Group__1__Impl rule__BaseState__Group__2 ;
-    public final void rule__BaseState__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12853:1: rule__SimpleState__Group__1 : rule__SimpleState__Group__1__Impl rule__SimpleState__Group__2 ;
+    public final void rule__SimpleState__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12857:1: ( rule__BaseState__Group__1__Impl rule__BaseState__Group__2 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12858:2: rule__BaseState__Group__1__Impl rule__BaseState__Group__2
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12857:1: ( rule__SimpleState__Group__1__Impl rule__SimpleState__Group__2 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12858:2: rule__SimpleState__Group__1__Impl rule__SimpleState__Group__2
             {
-            pushFollow(FOLLOW_rule__BaseState__Group__1__Impl_in_rule__BaseState__Group__125945);
-            rule__BaseState__Group__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group__1__Impl_in_rule__SimpleState__Group__125945);
+            rule__SimpleState__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group__2_in_rule__BaseState__Group__125948);
-            rule__BaseState__Group__2();
+            pushFollow(FOLLOW_rule__SimpleState__Group__2_in_rule__SimpleState__Group__125948);
+            rule__SimpleState__Group__2();
 
             state._fsp--;
 
@@ -35088,35 +35088,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__1"
+    // $ANTLR end "rule__SimpleState__Group__1"
 
 
-    // $ANTLR start "rule__BaseState__Group__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12865:1: rule__BaseState__Group__1__Impl : ( ( rule__BaseState__NameAssignment_1 ) ) ;
-    public final void rule__BaseState__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12865:1: rule__SimpleState__Group__1__Impl : ( ( rule__SimpleState__NameAssignment_1 ) ) ;
+    public final void rule__SimpleState__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12869:1: ( ( ( rule__BaseState__NameAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12870:1: ( ( rule__BaseState__NameAssignment_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12869:1: ( ( ( rule__SimpleState__NameAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12870:1: ( ( rule__SimpleState__NameAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12870:1: ( ( rule__BaseState__NameAssignment_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12871:1: ( rule__BaseState__NameAssignment_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12870:1: ( ( rule__SimpleState__NameAssignment_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12871:1: ( rule__SimpleState__NameAssignment_1 )
             {
-             before(grammarAccess.getBaseStateAccess().getNameAssignment_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12872:1: ( rule__BaseState__NameAssignment_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12872:2: rule__BaseState__NameAssignment_1
+             before(grammarAccess.getSimpleStateAccess().getNameAssignment_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12872:1: ( rule__SimpleState__NameAssignment_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12872:2: rule__SimpleState__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__BaseState__NameAssignment_1_in_rule__BaseState__Group__1__Impl25975);
-            rule__BaseState__NameAssignment_1();
+            pushFollow(FOLLOW_rule__SimpleState__NameAssignment_1_in_rule__SimpleState__Group__1__Impl25975);
+            rule__SimpleState__NameAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getNameAssignment_1()); 
+             after(grammarAccess.getSimpleStateAccess().getNameAssignment_1()); 
 
             }
 
@@ -35135,26 +35135,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group__1__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group__2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12882:1: rule__BaseState__Group__2 : rule__BaseState__Group__2__Impl rule__BaseState__Group__3 ;
-    public final void rule__BaseState__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12882:1: rule__SimpleState__Group__2 : rule__SimpleState__Group__2__Impl rule__SimpleState__Group__3 ;
+    public final void rule__SimpleState__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12886:1: ( rule__BaseState__Group__2__Impl rule__BaseState__Group__3 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12887:2: rule__BaseState__Group__2__Impl rule__BaseState__Group__3
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12886:1: ( rule__SimpleState__Group__2__Impl rule__SimpleState__Group__3 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12887:2: rule__SimpleState__Group__2__Impl rule__SimpleState__Group__3
             {
-            pushFollow(FOLLOW_rule__BaseState__Group__2__Impl_in_rule__BaseState__Group__226005);
-            rule__BaseState__Group__2__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group__2__Impl_in_rule__SimpleState__Group__226005);
+            rule__SimpleState__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group__3_in_rule__BaseState__Group__226008);
-            rule__BaseState__Group__3();
+            pushFollow(FOLLOW_rule__SimpleState__Group__3_in_rule__SimpleState__Group__226008);
+            rule__SimpleState__Group__3();
 
             state._fsp--;
 
@@ -35173,24 +35173,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__2"
+    // $ANTLR end "rule__SimpleState__Group__2"
 
 
-    // $ANTLR start "rule__BaseState__Group__2__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12894:1: rule__BaseState__Group__2__Impl : ( ( rule__BaseState__DocuAssignment_2 )? ) ;
-    public final void rule__BaseState__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__2__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12894:1: rule__SimpleState__Group__2__Impl : ( ( rule__SimpleState__DocuAssignment_2 )? ) ;
+    public final void rule__SimpleState__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12898:1: ( ( ( rule__BaseState__DocuAssignment_2 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12899:1: ( ( rule__BaseState__DocuAssignment_2 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12898:1: ( ( ( rule__SimpleState__DocuAssignment_2 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12899:1: ( ( rule__SimpleState__DocuAssignment_2 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12899:1: ( ( rule__BaseState__DocuAssignment_2 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12900:1: ( rule__BaseState__DocuAssignment_2 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12899:1: ( ( rule__SimpleState__DocuAssignment_2 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12900:1: ( rule__SimpleState__DocuAssignment_2 )?
             {
-             before(grammarAccess.getBaseStateAccess().getDocuAssignment_2()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12901:1: ( rule__BaseState__DocuAssignment_2 )?
+             before(grammarAccess.getSimpleStateAccess().getDocuAssignment_2()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12901:1: ( rule__SimpleState__DocuAssignment_2 )?
             int alt121=2;
             int LA121_0 = input.LA(1);
 
@@ -35199,10 +35199,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt121) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12901:2: rule__BaseState__DocuAssignment_2
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12901:2: rule__SimpleState__DocuAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__BaseState__DocuAssignment_2_in_rule__BaseState__Group__2__Impl26035);
-                    rule__BaseState__DocuAssignment_2();
+                    pushFollow(FOLLOW_rule__SimpleState__DocuAssignment_2_in_rule__SimpleState__Group__2__Impl26035);
+                    rule__SimpleState__DocuAssignment_2();
 
                     state._fsp--;
 
@@ -35212,7 +35212,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getDocuAssignment_2()); 
+             after(grammarAccess.getSimpleStateAccess().getDocuAssignment_2()); 
 
             }
 
@@ -35231,21 +35231,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__2__Impl"
+    // $ANTLR end "rule__SimpleState__Group__2__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group__3"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12911:1: rule__BaseState__Group__3 : rule__BaseState__Group__3__Impl ;
-    public final void rule__BaseState__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__3"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12911:1: rule__SimpleState__Group__3 : rule__SimpleState__Group__3__Impl ;
+    public final void rule__SimpleState__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12915:1: ( rule__BaseState__Group__3__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12916:2: rule__BaseState__Group__3__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12915:1: ( rule__SimpleState__Group__3__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12916:2: rule__SimpleState__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group__3__Impl_in_rule__BaseState__Group__326066);
-            rule__BaseState__Group__3__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group__3__Impl_in_rule__SimpleState__Group__326066);
+            rule__SimpleState__Group__3__Impl();
 
             state._fsp--;
 
@@ -35264,24 +35264,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__3"
+    // $ANTLR end "rule__SimpleState__Group__3"
 
 
-    // $ANTLR start "rule__BaseState__Group__3__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12922:1: rule__BaseState__Group__3__Impl : ( ( rule__BaseState__Group_3__0 )? ) ;
-    public final void rule__BaseState__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group__3__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12922:1: rule__SimpleState__Group__3__Impl : ( ( rule__SimpleState__Group_3__0 )? ) ;
+    public final void rule__SimpleState__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12926:1: ( ( ( rule__BaseState__Group_3__0 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12927:1: ( ( rule__BaseState__Group_3__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12926:1: ( ( ( rule__SimpleState__Group_3__0 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12927:1: ( ( rule__SimpleState__Group_3__0 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12927:1: ( ( rule__BaseState__Group_3__0 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12928:1: ( rule__BaseState__Group_3__0 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12927:1: ( ( rule__SimpleState__Group_3__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12928:1: ( rule__SimpleState__Group_3__0 )?
             {
-             before(grammarAccess.getBaseStateAccess().getGroup_3()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12929:1: ( rule__BaseState__Group_3__0 )?
+             before(grammarAccess.getSimpleStateAccess().getGroup_3()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12929:1: ( rule__SimpleState__Group_3__0 )?
             int alt122=2;
             int LA122_0 = input.LA(1);
 
@@ -35290,10 +35290,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt122) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12929:2: rule__BaseState__Group_3__0
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12929:2: rule__SimpleState__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__BaseState__Group_3__0_in_rule__BaseState__Group__3__Impl26093);
-                    rule__BaseState__Group_3__0();
+                    pushFollow(FOLLOW_rule__SimpleState__Group_3__0_in_rule__SimpleState__Group__3__Impl26093);
+                    rule__SimpleState__Group_3__0();
 
                     state._fsp--;
 
@@ -35303,7 +35303,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup_3()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup_3()); 
 
             }
 
@@ -35322,26 +35322,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group__3__Impl"
+    // $ANTLR end "rule__SimpleState__Group__3__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12947:1: rule__BaseState__Group_3__0 : rule__BaseState__Group_3__0__Impl rule__BaseState__Group_3__1 ;
-    public final void rule__BaseState__Group_3__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12947:1: rule__SimpleState__Group_3__0 : rule__SimpleState__Group_3__0__Impl rule__SimpleState__Group_3__1 ;
+    public final void rule__SimpleState__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12951:1: ( rule__BaseState__Group_3__0__Impl rule__BaseState__Group_3__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12952:2: rule__BaseState__Group_3__0__Impl rule__BaseState__Group_3__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12951:1: ( rule__SimpleState__Group_3__0__Impl rule__SimpleState__Group_3__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12952:2: rule__SimpleState__Group_3__0__Impl rule__SimpleState__Group_3__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__0__Impl_in_rule__BaseState__Group_3__026132);
-            rule__BaseState__Group_3__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__0__Impl_in_rule__SimpleState__Group_3__026132);
+            rule__SimpleState__Group_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3__1_in_rule__BaseState__Group_3__026135);
-            rule__BaseState__Group_3__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__1_in_rule__SimpleState__Group_3__026135);
+            rule__SimpleState__Group_3__1();
 
             state._fsp--;
 
@@ -35360,12 +35360,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__0"
+    // $ANTLR end "rule__SimpleState__Group_3__0"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12959:1: rule__BaseState__Group_3__0__Impl : ( '{' ) ;
-    public final void rule__BaseState__Group_3__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12959:1: rule__SimpleState__Group_3__0__Impl : ( '{' ) ;
+    public final void rule__SimpleState__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35376,9 +35376,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12964:1: ( '{' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12965:1: '{'
             {
-             before(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_3_0()); 
-            match(input,19,FOLLOW_19_in_rule__BaseState__Group_3__0__Impl26163); 
-             after(grammarAccess.getBaseStateAccess().getLeftCurlyBracketKeyword_3_0()); 
+             before(grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0()); 
+            match(input,19,FOLLOW_19_in_rule__SimpleState__Group_3__0__Impl26163); 
+             after(grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0()); 
 
             }
 
@@ -35397,26 +35397,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12978:1: rule__BaseState__Group_3__1 : rule__BaseState__Group_3__1__Impl rule__BaseState__Group_3__2 ;
-    public final void rule__BaseState__Group_3__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12978:1: rule__SimpleState__Group_3__1 : rule__SimpleState__Group_3__1__Impl rule__SimpleState__Group_3__2 ;
+    public final void rule__SimpleState__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12982:1: ( rule__BaseState__Group_3__1__Impl rule__BaseState__Group_3__2 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12983:2: rule__BaseState__Group_3__1__Impl rule__BaseState__Group_3__2
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12982:1: ( rule__SimpleState__Group_3__1__Impl rule__SimpleState__Group_3__2 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12983:2: rule__SimpleState__Group_3__1__Impl rule__SimpleState__Group_3__2
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__1__Impl_in_rule__BaseState__Group_3__126194);
-            rule__BaseState__Group_3__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__1__Impl_in_rule__SimpleState__Group_3__126194);
+            rule__SimpleState__Group_3__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3__2_in_rule__BaseState__Group_3__126197);
-            rule__BaseState__Group_3__2();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__2_in_rule__SimpleState__Group_3__126197);
+            rule__SimpleState__Group_3__2();
 
             state._fsp--;
 
@@ -35435,24 +35435,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__1"
+    // $ANTLR end "rule__SimpleState__Group_3__1"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12990:1: rule__BaseState__Group_3__1__Impl : ( ( rule__BaseState__Group_3_1__0 )? ) ;
-    public final void rule__BaseState__Group_3__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12990:1: rule__SimpleState__Group_3__1__Impl : ( ( rule__SimpleState__Group_3_1__0 )? ) ;
+    public final void rule__SimpleState__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12994:1: ( ( ( rule__BaseState__Group_3_1__0 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12995:1: ( ( rule__BaseState__Group_3_1__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12994:1: ( ( ( rule__SimpleState__Group_3_1__0 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12995:1: ( ( rule__SimpleState__Group_3_1__0 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12995:1: ( ( rule__BaseState__Group_3_1__0 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12996:1: ( rule__BaseState__Group_3_1__0 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12995:1: ( ( rule__SimpleState__Group_3_1__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12996:1: ( rule__SimpleState__Group_3_1__0 )?
             {
-             before(grammarAccess.getBaseStateAccess().getGroup_3_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12997:1: ( rule__BaseState__Group_3_1__0 )?
+             before(grammarAccess.getSimpleStateAccess().getGroup_3_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12997:1: ( rule__SimpleState__Group_3_1__0 )?
             int alt123=2;
             int LA123_0 = input.LA(1);
 
@@ -35461,10 +35461,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt123) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12997:2: rule__BaseState__Group_3_1__0
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:12997:2: rule__SimpleState__Group_3_1__0
                     {
-                    pushFollow(FOLLOW_rule__BaseState__Group_3_1__0_in_rule__BaseState__Group_3__1__Impl26224);
-                    rule__BaseState__Group_3_1__0();
+                    pushFollow(FOLLOW_rule__SimpleState__Group_3_1__0_in_rule__SimpleState__Group_3__1__Impl26224);
+                    rule__SimpleState__Group_3_1__0();
 
                     state._fsp--;
 
@@ -35474,7 +35474,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup_3_1()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup_3_1()); 
 
             }
 
@@ -35493,26 +35493,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__1__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13007:1: rule__BaseState__Group_3__2 : rule__BaseState__Group_3__2__Impl rule__BaseState__Group_3__3 ;
-    public final void rule__BaseState__Group_3__2() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13007:1: rule__SimpleState__Group_3__2 : rule__SimpleState__Group_3__2__Impl rule__SimpleState__Group_3__3 ;
+    public final void rule__SimpleState__Group_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13011:1: ( rule__BaseState__Group_3__2__Impl rule__BaseState__Group_3__3 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13012:2: rule__BaseState__Group_3__2__Impl rule__BaseState__Group_3__3
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13011:1: ( rule__SimpleState__Group_3__2__Impl rule__SimpleState__Group_3__3 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13012:2: rule__SimpleState__Group_3__2__Impl rule__SimpleState__Group_3__3
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__2__Impl_in_rule__BaseState__Group_3__226255);
-            rule__BaseState__Group_3__2__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__2__Impl_in_rule__SimpleState__Group_3__226255);
+            rule__SimpleState__Group_3__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3__3_in_rule__BaseState__Group_3__226258);
-            rule__BaseState__Group_3__3();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__3_in_rule__SimpleState__Group_3__226258);
+            rule__SimpleState__Group_3__3();
 
             state._fsp--;
 
@@ -35531,24 +35531,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__2"
+    // $ANTLR end "rule__SimpleState__Group_3__2"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__2__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13019:1: rule__BaseState__Group_3__2__Impl : ( ( rule__BaseState__Group_3_2__0 )? ) ;
-    public final void rule__BaseState__Group_3__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__2__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13019:1: rule__SimpleState__Group_3__2__Impl : ( ( rule__SimpleState__Group_3_2__0 )? ) ;
+    public final void rule__SimpleState__Group_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13023:1: ( ( ( rule__BaseState__Group_3_2__0 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13024:1: ( ( rule__BaseState__Group_3_2__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13023:1: ( ( ( rule__SimpleState__Group_3_2__0 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13024:1: ( ( rule__SimpleState__Group_3_2__0 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13024:1: ( ( rule__BaseState__Group_3_2__0 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13025:1: ( rule__BaseState__Group_3_2__0 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13024:1: ( ( rule__SimpleState__Group_3_2__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13025:1: ( rule__SimpleState__Group_3_2__0 )?
             {
-             before(grammarAccess.getBaseStateAccess().getGroup_3_2()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13026:1: ( rule__BaseState__Group_3_2__0 )?
+             before(grammarAccess.getSimpleStateAccess().getGroup_3_2()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13026:1: ( rule__SimpleState__Group_3_2__0 )?
             int alt124=2;
             int LA124_0 = input.LA(1);
 
@@ -35557,10 +35557,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt124) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13026:2: rule__BaseState__Group_3_2__0
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13026:2: rule__SimpleState__Group_3_2__0
                     {
-                    pushFollow(FOLLOW_rule__BaseState__Group_3_2__0_in_rule__BaseState__Group_3__2__Impl26285);
-                    rule__BaseState__Group_3_2__0();
+                    pushFollow(FOLLOW_rule__SimpleState__Group_3_2__0_in_rule__SimpleState__Group_3__2__Impl26285);
+                    rule__SimpleState__Group_3_2__0();
 
                     state._fsp--;
 
@@ -35570,7 +35570,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup_3_2()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup_3_2()); 
 
             }
 
@@ -35589,26 +35589,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__2__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__2__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__3"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13036:1: rule__BaseState__Group_3__3 : rule__BaseState__Group_3__3__Impl rule__BaseState__Group_3__4 ;
-    public final void rule__BaseState__Group_3__3() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__3"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13036:1: rule__SimpleState__Group_3__3 : rule__SimpleState__Group_3__3__Impl rule__SimpleState__Group_3__4 ;
+    public final void rule__SimpleState__Group_3__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13040:1: ( rule__BaseState__Group_3__3__Impl rule__BaseState__Group_3__4 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13041:2: rule__BaseState__Group_3__3__Impl rule__BaseState__Group_3__4
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13040:1: ( rule__SimpleState__Group_3__3__Impl rule__SimpleState__Group_3__4 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13041:2: rule__SimpleState__Group_3__3__Impl rule__SimpleState__Group_3__4
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__3__Impl_in_rule__BaseState__Group_3__326316);
-            rule__BaseState__Group_3__3__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__3__Impl_in_rule__SimpleState__Group_3__326316);
+            rule__SimpleState__Group_3__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3__4_in_rule__BaseState__Group_3__326319);
-            rule__BaseState__Group_3__4();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__4_in_rule__SimpleState__Group_3__326319);
+            rule__SimpleState__Group_3__4();
 
             state._fsp--;
 
@@ -35627,24 +35627,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__3"
+    // $ANTLR end "rule__SimpleState__Group_3__3"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__3__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13048:1: rule__BaseState__Group_3__3__Impl : ( ( rule__BaseState__Group_3_3__0 )? ) ;
-    public final void rule__BaseState__Group_3__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__3__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13048:1: rule__SimpleState__Group_3__3__Impl : ( ( rule__SimpleState__Group_3_3__0 )? ) ;
+    public final void rule__SimpleState__Group_3__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13052:1: ( ( ( rule__BaseState__Group_3_3__0 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13053:1: ( ( rule__BaseState__Group_3_3__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13052:1: ( ( ( rule__SimpleState__Group_3_3__0 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13053:1: ( ( rule__SimpleState__Group_3_3__0 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13053:1: ( ( rule__BaseState__Group_3_3__0 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13054:1: ( rule__BaseState__Group_3_3__0 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13053:1: ( ( rule__SimpleState__Group_3_3__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13054:1: ( rule__SimpleState__Group_3_3__0 )?
             {
-             before(grammarAccess.getBaseStateAccess().getGroup_3_3()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13055:1: ( rule__BaseState__Group_3_3__0 )?
+             before(grammarAccess.getSimpleStateAccess().getGroup_3_3()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13055:1: ( rule__SimpleState__Group_3_3__0 )?
             int alt125=2;
             int LA125_0 = input.LA(1);
 
@@ -35653,10 +35653,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt125) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13055:2: rule__BaseState__Group_3_3__0
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13055:2: rule__SimpleState__Group_3_3__0
                     {
-                    pushFollow(FOLLOW_rule__BaseState__Group_3_3__0_in_rule__BaseState__Group_3__3__Impl26346);
-                    rule__BaseState__Group_3_3__0();
+                    pushFollow(FOLLOW_rule__SimpleState__Group_3_3__0_in_rule__SimpleState__Group_3__3__Impl26346);
+                    rule__SimpleState__Group_3_3__0();
 
                     state._fsp--;
 
@@ -35666,7 +35666,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup_3_3()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup_3_3()); 
 
             }
 
@@ -35685,26 +35685,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__3__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__3__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__4"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13065:1: rule__BaseState__Group_3__4 : rule__BaseState__Group_3__4__Impl rule__BaseState__Group_3__5 ;
-    public final void rule__BaseState__Group_3__4() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__4"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13065:1: rule__SimpleState__Group_3__4 : rule__SimpleState__Group_3__4__Impl rule__SimpleState__Group_3__5 ;
+    public final void rule__SimpleState__Group_3__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13069:1: ( rule__BaseState__Group_3__4__Impl rule__BaseState__Group_3__5 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13070:2: rule__BaseState__Group_3__4__Impl rule__BaseState__Group_3__5
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13069:1: ( rule__SimpleState__Group_3__4__Impl rule__SimpleState__Group_3__5 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13070:2: rule__SimpleState__Group_3__4__Impl rule__SimpleState__Group_3__5
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__4__Impl_in_rule__BaseState__Group_3__426377);
-            rule__BaseState__Group_3__4__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__4__Impl_in_rule__SimpleState__Group_3__426377);
+            rule__SimpleState__Group_3__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3__5_in_rule__BaseState__Group_3__426380);
-            rule__BaseState__Group_3__5();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__5_in_rule__SimpleState__Group_3__426380);
+            rule__SimpleState__Group_3__5();
 
             state._fsp--;
 
@@ -35723,24 +35723,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__4"
+    // $ANTLR end "rule__SimpleState__Group_3__4"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__4__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13077:1: rule__BaseState__Group_3__4__Impl : ( ( rule__BaseState__Group_3_4__0 )? ) ;
-    public final void rule__BaseState__Group_3__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__4__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13077:1: rule__SimpleState__Group_3__4__Impl : ( ( rule__SimpleState__Group_3_4__0 )? ) ;
+    public final void rule__SimpleState__Group_3__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13081:1: ( ( ( rule__BaseState__Group_3_4__0 )? ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13082:1: ( ( rule__BaseState__Group_3_4__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13081:1: ( ( ( rule__SimpleState__Group_3_4__0 )? ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13082:1: ( ( rule__SimpleState__Group_3_4__0 )? )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13082:1: ( ( rule__BaseState__Group_3_4__0 )? )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13083:1: ( rule__BaseState__Group_3_4__0 )?
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13082:1: ( ( rule__SimpleState__Group_3_4__0 )? )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13083:1: ( rule__SimpleState__Group_3_4__0 )?
             {
-             before(grammarAccess.getBaseStateAccess().getGroup_3_4()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13084:1: ( rule__BaseState__Group_3_4__0 )?
+             before(grammarAccess.getSimpleStateAccess().getGroup_3_4()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13084:1: ( rule__SimpleState__Group_3_4__0 )?
             int alt126=2;
             int LA126_0 = input.LA(1);
 
@@ -35749,10 +35749,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt126) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13084:2: rule__BaseState__Group_3_4__0
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13084:2: rule__SimpleState__Group_3_4__0
                     {
-                    pushFollow(FOLLOW_rule__BaseState__Group_3_4__0_in_rule__BaseState__Group_3__4__Impl26407);
-                    rule__BaseState__Group_3_4__0();
+                    pushFollow(FOLLOW_rule__SimpleState__Group_3_4__0_in_rule__SimpleState__Group_3__4__Impl26407);
+                    rule__SimpleState__Group_3_4__0();
 
                     state._fsp--;
 
@@ -35762,7 +35762,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getGroup_3_4()); 
+             after(grammarAccess.getSimpleStateAccess().getGroup_3_4()); 
 
             }
 
@@ -35781,21 +35781,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__4__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__4__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__5"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13094:1: rule__BaseState__Group_3__5 : rule__BaseState__Group_3__5__Impl ;
-    public final void rule__BaseState__Group_3__5() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__5"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13094:1: rule__SimpleState__Group_3__5 : rule__SimpleState__Group_3__5__Impl ;
+    public final void rule__SimpleState__Group_3__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13098:1: ( rule__BaseState__Group_3__5__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13099:2: rule__BaseState__Group_3__5__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13098:1: ( rule__SimpleState__Group_3__5__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13099:2: rule__SimpleState__Group_3__5__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3__5__Impl_in_rule__BaseState__Group_3__526438);
-            rule__BaseState__Group_3__5__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3__5__Impl_in_rule__SimpleState__Group_3__526438);
+            rule__SimpleState__Group_3__5__Impl();
 
             state._fsp--;
 
@@ -35814,12 +35814,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__5"
+    // $ANTLR end "rule__SimpleState__Group_3__5"
 
 
-    // $ANTLR start "rule__BaseState__Group_3__5__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13105:1: rule__BaseState__Group_3__5__Impl : ( '}' ) ;
-    public final void rule__BaseState__Group_3__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3__5__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13105:1: rule__SimpleState__Group_3__5__Impl : ( '}' ) ;
+    public final void rule__SimpleState__Group_3__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35830,9 +35830,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13110:1: ( '}' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13111:1: '}'
             {
-             before(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5()); 
-            match(input,20,FOLLOW_20_in_rule__BaseState__Group_3__5__Impl26466); 
-             after(grammarAccess.getBaseStateAccess().getRightCurlyBracketKeyword_3_5()); 
+             before(grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_5()); 
+            match(input,20,FOLLOW_20_in_rule__SimpleState__Group_3__5__Impl26466); 
+             after(grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_5()); 
 
             }
 
@@ -35851,26 +35851,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3__5__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3__5__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_1__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13136:1: rule__BaseState__Group_3_1__0 : rule__BaseState__Group_3_1__0__Impl rule__BaseState__Group_3_1__1 ;
-    public final void rule__BaseState__Group_3_1__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_1__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13136:1: rule__SimpleState__Group_3_1__0 : rule__SimpleState__Group_3_1__0__Impl rule__SimpleState__Group_3_1__1 ;
+    public final void rule__SimpleState__Group_3_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13140:1: ( rule__BaseState__Group_3_1__0__Impl rule__BaseState__Group_3_1__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13141:2: rule__BaseState__Group_3_1__0__Impl rule__BaseState__Group_3_1__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13140:1: ( rule__SimpleState__Group_3_1__0__Impl rule__SimpleState__Group_3_1__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13141:2: rule__SimpleState__Group_3_1__0__Impl rule__SimpleState__Group_3_1__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_1__0__Impl_in_rule__BaseState__Group_3_1__026509);
-            rule__BaseState__Group_3_1__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_1__0__Impl_in_rule__SimpleState__Group_3_1__026509);
+            rule__SimpleState__Group_3_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3_1__1_in_rule__BaseState__Group_3_1__026512);
-            rule__BaseState__Group_3_1__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_1__1_in_rule__SimpleState__Group_3_1__026512);
+            rule__SimpleState__Group_3_1__1();
 
             state._fsp--;
 
@@ -35889,12 +35889,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_1__0"
+    // $ANTLR end "rule__SimpleState__Group_3_1__0"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_1__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13148:1: rule__BaseState__Group_3_1__0__Impl : ( 'entry' ) ;
-    public final void rule__BaseState__Group_3_1__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_1__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13148:1: rule__SimpleState__Group_3_1__0__Impl : ( 'entry' ) ;
+    public final void rule__SimpleState__Group_3_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35905,9 +35905,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13153:1: ( 'entry' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13154:1: 'entry'
             {
-             before(grammarAccess.getBaseStateAccess().getEntryKeyword_3_1_0()); 
-            match(input,75,FOLLOW_75_in_rule__BaseState__Group_3_1__0__Impl26540); 
-             after(grammarAccess.getBaseStateAccess().getEntryKeyword_3_1_0()); 
+             before(grammarAccess.getSimpleStateAccess().getEntryKeyword_3_1_0()); 
+            match(input,75,FOLLOW_75_in_rule__SimpleState__Group_3_1__0__Impl26540); 
+             after(grammarAccess.getSimpleStateAccess().getEntryKeyword_3_1_0()); 
 
             }
 
@@ -35926,21 +35926,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_1__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_1__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_1__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13167:1: rule__BaseState__Group_3_1__1 : rule__BaseState__Group_3_1__1__Impl ;
-    public final void rule__BaseState__Group_3_1__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_1__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13167:1: rule__SimpleState__Group_3_1__1 : rule__SimpleState__Group_3_1__1__Impl ;
+    public final void rule__SimpleState__Group_3_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13171:1: ( rule__BaseState__Group_3_1__1__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13172:2: rule__BaseState__Group_3_1__1__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13171:1: ( rule__SimpleState__Group_3_1__1__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13172:2: rule__SimpleState__Group_3_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_1__1__Impl_in_rule__BaseState__Group_3_1__126571);
-            rule__BaseState__Group_3_1__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_1__1__Impl_in_rule__SimpleState__Group_3_1__126571);
+            rule__SimpleState__Group_3_1__1__Impl();
 
             state._fsp--;
 
@@ -35959,35 +35959,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_1__1"
+    // $ANTLR end "rule__SimpleState__Group_3_1__1"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_1__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13178:1: rule__BaseState__Group_3_1__1__Impl : ( ( rule__BaseState__EntryCodeAssignment_3_1_1 ) ) ;
-    public final void rule__BaseState__Group_3_1__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_1__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13178:1: rule__SimpleState__Group_3_1__1__Impl : ( ( rule__SimpleState__EntryCodeAssignment_3_1_1 ) ) ;
+    public final void rule__SimpleState__Group_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13182:1: ( ( ( rule__BaseState__EntryCodeAssignment_3_1_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13183:1: ( ( rule__BaseState__EntryCodeAssignment_3_1_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13182:1: ( ( ( rule__SimpleState__EntryCodeAssignment_3_1_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13183:1: ( ( rule__SimpleState__EntryCodeAssignment_3_1_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13183:1: ( ( rule__BaseState__EntryCodeAssignment_3_1_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13184:1: ( rule__BaseState__EntryCodeAssignment_3_1_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13183:1: ( ( rule__SimpleState__EntryCodeAssignment_3_1_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13184:1: ( rule__SimpleState__EntryCodeAssignment_3_1_1 )
             {
-             before(grammarAccess.getBaseStateAccess().getEntryCodeAssignment_3_1_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13185:1: ( rule__BaseState__EntryCodeAssignment_3_1_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13185:2: rule__BaseState__EntryCodeAssignment_3_1_1
+             before(grammarAccess.getSimpleStateAccess().getEntryCodeAssignment_3_1_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13185:1: ( rule__SimpleState__EntryCodeAssignment_3_1_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13185:2: rule__SimpleState__EntryCodeAssignment_3_1_1
             {
-            pushFollow(FOLLOW_rule__BaseState__EntryCodeAssignment_3_1_1_in_rule__BaseState__Group_3_1__1__Impl26598);
-            rule__BaseState__EntryCodeAssignment_3_1_1();
+            pushFollow(FOLLOW_rule__SimpleState__EntryCodeAssignment_3_1_1_in_rule__SimpleState__Group_3_1__1__Impl26598);
+            rule__SimpleState__EntryCodeAssignment_3_1_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getEntryCodeAssignment_3_1_1()); 
+             after(grammarAccess.getSimpleStateAccess().getEntryCodeAssignment_3_1_1()); 
 
             }
 
@@ -36006,26 +36006,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_1__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_1__1__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_2__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13199:1: rule__BaseState__Group_3_2__0 : rule__BaseState__Group_3_2__0__Impl rule__BaseState__Group_3_2__1 ;
-    public final void rule__BaseState__Group_3_2__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_2__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13199:1: rule__SimpleState__Group_3_2__0 : rule__SimpleState__Group_3_2__0__Impl rule__SimpleState__Group_3_2__1 ;
+    public final void rule__SimpleState__Group_3_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13203:1: ( rule__BaseState__Group_3_2__0__Impl rule__BaseState__Group_3_2__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13204:2: rule__BaseState__Group_3_2__0__Impl rule__BaseState__Group_3_2__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13203:1: ( rule__SimpleState__Group_3_2__0__Impl rule__SimpleState__Group_3_2__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13204:2: rule__SimpleState__Group_3_2__0__Impl rule__SimpleState__Group_3_2__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_2__0__Impl_in_rule__BaseState__Group_3_2__026632);
-            rule__BaseState__Group_3_2__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_2__0__Impl_in_rule__SimpleState__Group_3_2__026632);
+            rule__SimpleState__Group_3_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3_2__1_in_rule__BaseState__Group_3_2__026635);
-            rule__BaseState__Group_3_2__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_2__1_in_rule__SimpleState__Group_3_2__026635);
+            rule__SimpleState__Group_3_2__1();
 
             state._fsp--;
 
@@ -36044,12 +36044,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_2__0"
+    // $ANTLR end "rule__SimpleState__Group_3_2__0"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_2__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13211:1: rule__BaseState__Group_3_2__0__Impl : ( 'exit' ) ;
-    public final void rule__BaseState__Group_3_2__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_2__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13211:1: rule__SimpleState__Group_3_2__0__Impl : ( 'exit' ) ;
+    public final void rule__SimpleState__Group_3_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -36060,9 +36060,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13216:1: ( 'exit' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13217:1: 'exit'
             {
-             before(grammarAccess.getBaseStateAccess().getExitKeyword_3_2_0()); 
-            match(input,76,FOLLOW_76_in_rule__BaseState__Group_3_2__0__Impl26663); 
-             after(grammarAccess.getBaseStateAccess().getExitKeyword_3_2_0()); 
+             before(grammarAccess.getSimpleStateAccess().getExitKeyword_3_2_0()); 
+            match(input,76,FOLLOW_76_in_rule__SimpleState__Group_3_2__0__Impl26663); 
+             after(grammarAccess.getSimpleStateAccess().getExitKeyword_3_2_0()); 
 
             }
 
@@ -36081,21 +36081,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_2__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_2__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_2__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13230:1: rule__BaseState__Group_3_2__1 : rule__BaseState__Group_3_2__1__Impl ;
-    public final void rule__BaseState__Group_3_2__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_2__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13230:1: rule__SimpleState__Group_3_2__1 : rule__SimpleState__Group_3_2__1__Impl ;
+    public final void rule__SimpleState__Group_3_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13234:1: ( rule__BaseState__Group_3_2__1__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13235:2: rule__BaseState__Group_3_2__1__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13234:1: ( rule__SimpleState__Group_3_2__1__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13235:2: rule__SimpleState__Group_3_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_2__1__Impl_in_rule__BaseState__Group_3_2__126694);
-            rule__BaseState__Group_3_2__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_2__1__Impl_in_rule__SimpleState__Group_3_2__126694);
+            rule__SimpleState__Group_3_2__1__Impl();
 
             state._fsp--;
 
@@ -36114,35 +36114,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_2__1"
+    // $ANTLR end "rule__SimpleState__Group_3_2__1"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_2__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13241:1: rule__BaseState__Group_3_2__1__Impl : ( ( rule__BaseState__ExitCodeAssignment_3_2_1 ) ) ;
-    public final void rule__BaseState__Group_3_2__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_2__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13241:1: rule__SimpleState__Group_3_2__1__Impl : ( ( rule__SimpleState__ExitCodeAssignment_3_2_1 ) ) ;
+    public final void rule__SimpleState__Group_3_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13245:1: ( ( ( rule__BaseState__ExitCodeAssignment_3_2_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13246:1: ( ( rule__BaseState__ExitCodeAssignment_3_2_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13245:1: ( ( ( rule__SimpleState__ExitCodeAssignment_3_2_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13246:1: ( ( rule__SimpleState__ExitCodeAssignment_3_2_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13246:1: ( ( rule__BaseState__ExitCodeAssignment_3_2_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13247:1: ( rule__BaseState__ExitCodeAssignment_3_2_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13246:1: ( ( rule__SimpleState__ExitCodeAssignment_3_2_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13247:1: ( rule__SimpleState__ExitCodeAssignment_3_2_1 )
             {
-             before(grammarAccess.getBaseStateAccess().getExitCodeAssignment_3_2_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13248:1: ( rule__BaseState__ExitCodeAssignment_3_2_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13248:2: rule__BaseState__ExitCodeAssignment_3_2_1
+             before(grammarAccess.getSimpleStateAccess().getExitCodeAssignment_3_2_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13248:1: ( rule__SimpleState__ExitCodeAssignment_3_2_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13248:2: rule__SimpleState__ExitCodeAssignment_3_2_1
             {
-            pushFollow(FOLLOW_rule__BaseState__ExitCodeAssignment_3_2_1_in_rule__BaseState__Group_3_2__1__Impl26721);
-            rule__BaseState__ExitCodeAssignment_3_2_1();
+            pushFollow(FOLLOW_rule__SimpleState__ExitCodeAssignment_3_2_1_in_rule__SimpleState__Group_3_2__1__Impl26721);
+            rule__SimpleState__ExitCodeAssignment_3_2_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getExitCodeAssignment_3_2_1()); 
+             after(grammarAccess.getSimpleStateAccess().getExitCodeAssignment_3_2_1()); 
 
             }
 
@@ -36161,26 +36161,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_2__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_2__1__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_3__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13262:1: rule__BaseState__Group_3_3__0 : rule__BaseState__Group_3_3__0__Impl rule__BaseState__Group_3_3__1 ;
-    public final void rule__BaseState__Group_3_3__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_3__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13262:1: rule__SimpleState__Group_3_3__0 : rule__SimpleState__Group_3_3__0__Impl rule__SimpleState__Group_3_3__1 ;
+    public final void rule__SimpleState__Group_3_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13266:1: ( rule__BaseState__Group_3_3__0__Impl rule__BaseState__Group_3_3__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13267:2: rule__BaseState__Group_3_3__0__Impl rule__BaseState__Group_3_3__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13266:1: ( rule__SimpleState__Group_3_3__0__Impl rule__SimpleState__Group_3_3__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13267:2: rule__SimpleState__Group_3_3__0__Impl rule__SimpleState__Group_3_3__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_3__0__Impl_in_rule__BaseState__Group_3_3__026755);
-            rule__BaseState__Group_3_3__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_3__0__Impl_in_rule__SimpleState__Group_3_3__026755);
+            rule__SimpleState__Group_3_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3_3__1_in_rule__BaseState__Group_3_3__026758);
-            rule__BaseState__Group_3_3__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_3__1_in_rule__SimpleState__Group_3_3__026758);
+            rule__SimpleState__Group_3_3__1();
 
             state._fsp--;
 
@@ -36199,12 +36199,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_3__0"
+    // $ANTLR end "rule__SimpleState__Group_3_3__0"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_3__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13274:1: rule__BaseState__Group_3_3__0__Impl : ( 'do' ) ;
-    public final void rule__BaseState__Group_3_3__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_3__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13274:1: rule__SimpleState__Group_3_3__0__Impl : ( 'do' ) ;
+    public final void rule__SimpleState__Group_3_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -36215,9 +36215,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13279:1: ( 'do' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13280:1: 'do'
             {
-             before(grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0()); 
-            match(input,77,FOLLOW_77_in_rule__BaseState__Group_3_3__0__Impl26786); 
-             after(grammarAccess.getBaseStateAccess().getDoKeyword_3_3_0()); 
+             before(grammarAccess.getSimpleStateAccess().getDoKeyword_3_3_0()); 
+            match(input,77,FOLLOW_77_in_rule__SimpleState__Group_3_3__0__Impl26786); 
+             after(grammarAccess.getSimpleStateAccess().getDoKeyword_3_3_0()); 
 
             }
 
@@ -36236,21 +36236,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_3__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_3__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_3__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13293:1: rule__BaseState__Group_3_3__1 : rule__BaseState__Group_3_3__1__Impl ;
-    public final void rule__BaseState__Group_3_3__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_3__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13293:1: rule__SimpleState__Group_3_3__1 : rule__SimpleState__Group_3_3__1__Impl ;
+    public final void rule__SimpleState__Group_3_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13297:1: ( rule__BaseState__Group_3_3__1__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13298:2: rule__BaseState__Group_3_3__1__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13297:1: ( rule__SimpleState__Group_3_3__1__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13298:2: rule__SimpleState__Group_3_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_3__1__Impl_in_rule__BaseState__Group_3_3__126817);
-            rule__BaseState__Group_3_3__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_3__1__Impl_in_rule__SimpleState__Group_3_3__126817);
+            rule__SimpleState__Group_3_3__1__Impl();
 
             state._fsp--;
 
@@ -36269,35 +36269,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_3__1"
+    // $ANTLR end "rule__SimpleState__Group_3_3__1"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_3__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13304:1: rule__BaseState__Group_3_3__1__Impl : ( ( rule__BaseState__DoCodeAssignment_3_3_1 ) ) ;
-    public final void rule__BaseState__Group_3_3__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_3__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13304:1: rule__SimpleState__Group_3_3__1__Impl : ( ( rule__SimpleState__DoCodeAssignment_3_3_1 ) ) ;
+    public final void rule__SimpleState__Group_3_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13308:1: ( ( ( rule__BaseState__DoCodeAssignment_3_3_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13309:1: ( ( rule__BaseState__DoCodeAssignment_3_3_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13308:1: ( ( ( rule__SimpleState__DoCodeAssignment_3_3_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13309:1: ( ( rule__SimpleState__DoCodeAssignment_3_3_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13309:1: ( ( rule__BaseState__DoCodeAssignment_3_3_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13310:1: ( rule__BaseState__DoCodeAssignment_3_3_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13309:1: ( ( rule__SimpleState__DoCodeAssignment_3_3_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13310:1: ( rule__SimpleState__DoCodeAssignment_3_3_1 )
             {
-             before(grammarAccess.getBaseStateAccess().getDoCodeAssignment_3_3_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13311:1: ( rule__BaseState__DoCodeAssignment_3_3_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13311:2: rule__BaseState__DoCodeAssignment_3_3_1
+             before(grammarAccess.getSimpleStateAccess().getDoCodeAssignment_3_3_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13311:1: ( rule__SimpleState__DoCodeAssignment_3_3_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13311:2: rule__SimpleState__DoCodeAssignment_3_3_1
             {
-            pushFollow(FOLLOW_rule__BaseState__DoCodeAssignment_3_3_1_in_rule__BaseState__Group_3_3__1__Impl26844);
-            rule__BaseState__DoCodeAssignment_3_3_1();
+            pushFollow(FOLLOW_rule__SimpleState__DoCodeAssignment_3_3_1_in_rule__SimpleState__Group_3_3__1__Impl26844);
+            rule__SimpleState__DoCodeAssignment_3_3_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getDoCodeAssignment_3_3_1()); 
+             after(grammarAccess.getSimpleStateAccess().getDoCodeAssignment_3_3_1()); 
 
             }
 
@@ -36316,26 +36316,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_3__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_3__1__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_4__0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13325:1: rule__BaseState__Group_3_4__0 : rule__BaseState__Group_3_4__0__Impl rule__BaseState__Group_3_4__1 ;
-    public final void rule__BaseState__Group_3_4__0() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_4__0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13325:1: rule__SimpleState__Group_3_4__0 : rule__SimpleState__Group_3_4__0__Impl rule__SimpleState__Group_3_4__1 ;
+    public final void rule__SimpleState__Group_3_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13329:1: ( rule__BaseState__Group_3_4__0__Impl rule__BaseState__Group_3_4__1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13330:2: rule__BaseState__Group_3_4__0__Impl rule__BaseState__Group_3_4__1
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13329:1: ( rule__SimpleState__Group_3_4__0__Impl rule__SimpleState__Group_3_4__1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13330:2: rule__SimpleState__Group_3_4__0__Impl rule__SimpleState__Group_3_4__1
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_4__0__Impl_in_rule__BaseState__Group_3_4__026878);
-            rule__BaseState__Group_3_4__0__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_4__0__Impl_in_rule__SimpleState__Group_3_4__026878);
+            rule__SimpleState__Group_3_4__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__BaseState__Group_3_4__1_in_rule__BaseState__Group_3_4__026881);
-            rule__BaseState__Group_3_4__1();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_4__1_in_rule__SimpleState__Group_3_4__026881);
+            rule__SimpleState__Group_3_4__1();
 
             state._fsp--;
 
@@ -36354,12 +36354,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_4__0"
+    // $ANTLR end "rule__SimpleState__Group_3_4__0"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_4__0__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13337:1: rule__BaseState__Group_3_4__0__Impl : ( 'subgraph' ) ;
-    public final void rule__BaseState__Group_3_4__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_4__0__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13337:1: rule__SimpleState__Group_3_4__0__Impl : ( 'subgraph' ) ;
+    public final void rule__SimpleState__Group_3_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -36370,9 +36370,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13342:1: ( 'subgraph' )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13343:1: 'subgraph'
             {
-             before(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0()); 
-            match(input,78,FOLLOW_78_in_rule__BaseState__Group_3_4__0__Impl26909); 
-             after(grammarAccess.getBaseStateAccess().getSubgraphKeyword_3_4_0()); 
+             before(grammarAccess.getSimpleStateAccess().getSubgraphKeyword_3_4_0()); 
+            match(input,78,FOLLOW_78_in_rule__SimpleState__Group_3_4__0__Impl26909); 
+             after(grammarAccess.getSimpleStateAccess().getSubgraphKeyword_3_4_0()); 
 
             }
 
@@ -36391,21 +36391,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_4__0__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_4__0__Impl"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_4__1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13356:1: rule__BaseState__Group_3_4__1 : rule__BaseState__Group_3_4__1__Impl ;
-    public final void rule__BaseState__Group_3_4__1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_4__1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13356:1: rule__SimpleState__Group_3_4__1 : rule__SimpleState__Group_3_4__1__Impl ;
+    public final void rule__SimpleState__Group_3_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13360:1: ( rule__BaseState__Group_3_4__1__Impl )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13361:2: rule__BaseState__Group_3_4__1__Impl
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13360:1: ( rule__SimpleState__Group_3_4__1__Impl )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13361:2: rule__SimpleState__Group_3_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__BaseState__Group_3_4__1__Impl_in_rule__BaseState__Group_3_4__126940);
-            rule__BaseState__Group_3_4__1__Impl();
+            pushFollow(FOLLOW_rule__SimpleState__Group_3_4__1__Impl_in_rule__SimpleState__Group_3_4__126940);
+            rule__SimpleState__Group_3_4__1__Impl();
 
             state._fsp--;
 
@@ -36424,35 +36424,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_4__1"
+    // $ANTLR end "rule__SimpleState__Group_3_4__1"
 
 
-    // $ANTLR start "rule__BaseState__Group_3_4__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13367:1: rule__BaseState__Group_3_4__1__Impl : ( ( rule__BaseState__SubgraphAssignment_3_4_1 ) ) ;
-    public final void rule__BaseState__Group_3_4__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__Group_3_4__1__Impl"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13367:1: rule__SimpleState__Group_3_4__1__Impl : ( ( rule__SimpleState__SubgraphAssignment_3_4_1 ) ) ;
+    public final void rule__SimpleState__Group_3_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13371:1: ( ( ( rule__BaseState__SubgraphAssignment_3_4_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13372:1: ( ( rule__BaseState__SubgraphAssignment_3_4_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13371:1: ( ( ( rule__SimpleState__SubgraphAssignment_3_4_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13372:1: ( ( rule__SimpleState__SubgraphAssignment_3_4_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13372:1: ( ( rule__BaseState__SubgraphAssignment_3_4_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13373:1: ( rule__BaseState__SubgraphAssignment_3_4_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13372:1: ( ( rule__SimpleState__SubgraphAssignment_3_4_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13373:1: ( rule__SimpleState__SubgraphAssignment_3_4_1 )
             {
-             before(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_4_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13374:1: ( rule__BaseState__SubgraphAssignment_3_4_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13374:2: rule__BaseState__SubgraphAssignment_3_4_1
+             before(grammarAccess.getSimpleStateAccess().getSubgraphAssignment_3_4_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13374:1: ( rule__SimpleState__SubgraphAssignment_3_4_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13374:2: rule__SimpleState__SubgraphAssignment_3_4_1
             {
-            pushFollow(FOLLOW_rule__BaseState__SubgraphAssignment_3_4_1_in_rule__BaseState__Group_3_4__1__Impl26967);
-            rule__BaseState__SubgraphAssignment_3_4_1();
+            pushFollow(FOLLOW_rule__SimpleState__SubgraphAssignment_3_4_1_in_rule__SimpleState__Group_3_4__1__Impl26967);
+            rule__SimpleState__SubgraphAssignment_3_4_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getBaseStateAccess().getSubgraphAssignment_3_4_1()); 
+             after(grammarAccess.getSimpleStateAccess().getSubgraphAssignment_3_4_1()); 
 
             }
 
@@ -36471,7 +36471,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__Group_3_4__1__Impl"
+    // $ANTLR end "rule__SimpleState__Group_3_4__1__Impl"
 
 
     // $ANTLR start "rule__RefinedState__Group__0"
@@ -36588,31 +36588,31 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RefinedState__Group__1__Impl"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13431:1: rule__RefinedState__Group__1__Impl : ( ( rule__RefinedState__BaseAssignment_1 ) ) ;
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13431:1: rule__RefinedState__Group__1__Impl : ( ( rule__RefinedState__TargetAssignment_1 ) ) ;
     public final void rule__RefinedState__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13435:1: ( ( ( rule__RefinedState__BaseAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13436:1: ( ( rule__RefinedState__BaseAssignment_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13435:1: ( ( ( rule__RefinedState__TargetAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13436:1: ( ( rule__RefinedState__TargetAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13436:1: ( ( rule__RefinedState__BaseAssignment_1 ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13437:1: ( rule__RefinedState__BaseAssignment_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13436:1: ( ( rule__RefinedState__TargetAssignment_1 ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13437:1: ( rule__RefinedState__TargetAssignment_1 )
             {
-             before(grammarAccess.getRefinedStateAccess().getBaseAssignment_1()); 
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13438:1: ( rule__RefinedState__BaseAssignment_1 )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13438:2: rule__RefinedState__BaseAssignment_1
+             before(grammarAccess.getRefinedStateAccess().getTargetAssignment_1()); 
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13438:1: ( rule__RefinedState__TargetAssignment_1 )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:13438:2: rule__RefinedState__TargetAssignment_1
             {
-            pushFollow(FOLLOW_rule__RefinedState__BaseAssignment_1_in_rule__RefinedState__Group__1__Impl27093);
-            rule__RefinedState__BaseAssignment_1();
+            pushFollow(FOLLOW_rule__RefinedState__TargetAssignment_1_in_rule__RefinedState__Group__1__Impl27093);
+            rule__RefinedState__TargetAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getRefinedStateAccess().getBaseAssignment_1()); 
+             after(grammarAccess.getRefinedStateAccess().getTargetAssignment_1()); 
 
             }
 
@@ -55586,9 +55586,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__StateMachine__TransitionsAssignment_3_3"
 
 
-    // $ANTLR start "rule__BaseState__NameAssignment_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20760:1: rule__BaseState__NameAssignment_1 : ( RULE_ID ) ;
-    public final void rule__BaseState__NameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__NameAssignment_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20760:1: rule__SimpleState__NameAssignment_1 : ( RULE_ID ) ;
+    public final void rule__SimpleState__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55599,9 +55599,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20765:1: ( RULE_ID )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20766:1: RULE_ID
             {
-             before(grammarAccess.getBaseStateAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__BaseState__NameAssignment_141846); 
-             after(grammarAccess.getBaseStateAccess().getNameIDTerminalRuleCall_1_0()); 
+             before(grammarAccess.getSimpleStateAccess().getNameIDTerminalRuleCall_1_0()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleState__NameAssignment_141846); 
+             after(grammarAccess.getSimpleStateAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
 
@@ -55620,12 +55620,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__NameAssignment_1"
+    // $ANTLR end "rule__SimpleState__NameAssignment_1"
 
 
-    // $ANTLR start "rule__BaseState__DocuAssignment_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20775:1: rule__BaseState__DocuAssignment_2 : ( ruleDocumentation ) ;
-    public final void rule__BaseState__DocuAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__DocuAssignment_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20775:1: rule__SimpleState__DocuAssignment_2 : ( ruleDocumentation ) ;
+    public final void rule__SimpleState__DocuAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55636,13 +55636,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20780:1: ( ruleDocumentation )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20781:1: ruleDocumentation
             {
-             before(grammarAccess.getBaseStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleDocumentation_in_rule__BaseState__DocuAssignment_241877);
+             before(grammarAccess.getSimpleStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_ruleDocumentation_in_rule__SimpleState__DocuAssignment_241877);
             ruleDocumentation();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
+             after(grammarAccess.getSimpleStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
 
             }
 
@@ -55661,12 +55661,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__DocuAssignment_2"
+    // $ANTLR end "rule__SimpleState__DocuAssignment_2"
 
 
-    // $ANTLR start "rule__BaseState__EntryCodeAssignment_3_1_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20790:1: rule__BaseState__EntryCodeAssignment_3_1_1 : ( ruleDetailCode ) ;
-    public final void rule__BaseState__EntryCodeAssignment_3_1_1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__EntryCodeAssignment_3_1_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20790:1: rule__SimpleState__EntryCodeAssignment_3_1_1 : ( ruleDetailCode ) ;
+    public final void rule__SimpleState__EntryCodeAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55677,13 +55677,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20795:1: ( ruleDetailCode )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20796:1: ruleDetailCode
             {
-             before(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
-            pushFollow(FOLLOW_ruleDetailCode_in_rule__BaseState__EntryCodeAssignment_3_1_141908);
+             before(grammarAccess.getSimpleStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
+            pushFollow(FOLLOW_ruleDetailCode_in_rule__SimpleState__EntryCodeAssignment_3_1_141908);
             ruleDetailCode();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
+             after(grammarAccess.getSimpleStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
 
             }
 
@@ -55702,12 +55702,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__EntryCodeAssignment_3_1_1"
+    // $ANTLR end "rule__SimpleState__EntryCodeAssignment_3_1_1"
 
 
-    // $ANTLR start "rule__BaseState__ExitCodeAssignment_3_2_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20805:1: rule__BaseState__ExitCodeAssignment_3_2_1 : ( ruleDetailCode ) ;
-    public final void rule__BaseState__ExitCodeAssignment_3_2_1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__ExitCodeAssignment_3_2_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20805:1: rule__SimpleState__ExitCodeAssignment_3_2_1 : ( ruleDetailCode ) ;
+    public final void rule__SimpleState__ExitCodeAssignment_3_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55718,13 +55718,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20810:1: ( ruleDetailCode )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20811:1: ruleDetailCode
             {
-             before(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
-            pushFollow(FOLLOW_ruleDetailCode_in_rule__BaseState__ExitCodeAssignment_3_2_141939);
+             before(grammarAccess.getSimpleStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
+            pushFollow(FOLLOW_ruleDetailCode_in_rule__SimpleState__ExitCodeAssignment_3_2_141939);
             ruleDetailCode();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
+             after(grammarAccess.getSimpleStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
 
             }
 
@@ -55743,12 +55743,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__ExitCodeAssignment_3_2_1"
+    // $ANTLR end "rule__SimpleState__ExitCodeAssignment_3_2_1"
 
 
-    // $ANTLR start "rule__BaseState__DoCodeAssignment_3_3_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20820:1: rule__BaseState__DoCodeAssignment_3_3_1 : ( ruleDetailCode ) ;
-    public final void rule__BaseState__DoCodeAssignment_3_3_1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__DoCodeAssignment_3_3_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20820:1: rule__SimpleState__DoCodeAssignment_3_3_1 : ( ruleDetailCode ) ;
+    public final void rule__SimpleState__DoCodeAssignment_3_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55759,13 +55759,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20825:1: ( ruleDetailCode )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20826:1: ruleDetailCode
             {
-             before(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
-            pushFollow(FOLLOW_ruleDetailCode_in_rule__BaseState__DoCodeAssignment_3_3_141970);
+             before(grammarAccess.getSimpleStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
+            pushFollow(FOLLOW_ruleDetailCode_in_rule__SimpleState__DoCodeAssignment_3_3_141970);
             ruleDetailCode();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
+             after(grammarAccess.getSimpleStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
 
             }
 
@@ -55784,12 +55784,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__DoCodeAssignment_3_3_1"
+    // $ANTLR end "rule__SimpleState__DoCodeAssignment_3_3_1"
 
 
-    // $ANTLR start "rule__BaseState__SubgraphAssignment_3_4_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20835:1: rule__BaseState__SubgraphAssignment_3_4_1 : ( ruleStateGraph ) ;
-    public final void rule__BaseState__SubgraphAssignment_3_4_1() throws RecognitionException {
+    // $ANTLR start "rule__SimpleState__SubgraphAssignment_3_4_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20835:1: rule__SimpleState__SubgraphAssignment_3_4_1 : ( ruleStateGraph ) ;
+    public final void rule__SimpleState__SubgraphAssignment_3_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55800,13 +55800,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20840:1: ( ruleStateGraph )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20841:1: ruleStateGraph
             {
-             before(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_4_1_0()); 
-            pushFollow(FOLLOW_ruleStateGraph_in_rule__BaseState__SubgraphAssignment_3_4_142001);
+             before(grammarAccess.getSimpleStateAccess().getSubgraphStateGraphParserRuleCall_3_4_1_0()); 
+            pushFollow(FOLLOW_ruleStateGraph_in_rule__SimpleState__SubgraphAssignment_3_4_142001);
             ruleStateGraph();
 
             state._fsp--;
 
-             after(grammarAccess.getBaseStateAccess().getSubgraphStateGraphParserRuleCall_3_4_1_0()); 
+             after(grammarAccess.getSimpleStateAccess().getSubgraphStateGraphParserRuleCall_3_4_1_0()); 
 
             }
 
@@ -55825,12 +55825,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__BaseState__SubgraphAssignment_3_4_1"
+    // $ANTLR end "rule__SimpleState__SubgraphAssignment_3_4_1"
 
 
-    // $ANTLR start "rule__RefinedState__BaseAssignment_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20850:1: rule__RefinedState__BaseAssignment_1 : ( ( ruleFQN ) ) ;
-    public final void rule__RefinedState__BaseAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__RefinedState__TargetAssignment_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20850:1: rule__RefinedState__TargetAssignment_1 : ( ( ruleFQN ) ) ;
+    public final void rule__RefinedState__TargetAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -55841,21 +55841,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20855:1: ( ( ruleFQN ) )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20856:1: ( ruleFQN )
             {
-             before(grammarAccess.getRefinedStateAccess().getBaseBaseStateCrossReference_1_0()); 
+             before(grammarAccess.getRefinedStateAccess().getTargetStateCrossReference_1_0()); 
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20857:1: ( ruleFQN )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:20858:1: ruleFQN
             {
-             before(grammarAccess.getRefinedStateAccess().getBaseBaseStateFQNParserRuleCall_1_0_1()); 
-            pushFollow(FOLLOW_ruleFQN_in_rule__RefinedState__BaseAssignment_142036);
+             before(grammarAccess.getRefinedStateAccess().getTargetStateFQNParserRuleCall_1_0_1()); 
+            pushFollow(FOLLOW_ruleFQN_in_rule__RefinedState__TargetAssignment_142036);
             ruleFQN();
 
             state._fsp--;
 
-             after(grammarAccess.getRefinedStateAccess().getBaseBaseStateFQNParserRuleCall_1_0_1()); 
+             after(grammarAccess.getRefinedStateAccess().getTargetStateFQNParserRuleCall_1_0_1()); 
 
             }
 
-             after(grammarAccess.getRefinedStateAccess().getBaseBaseStateCrossReference_1_0()); 
+             after(grammarAccess.getRefinedStateAccess().getTargetStateCrossReference_1_0()); 
 
             }
 
@@ -55874,7 +55874,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__RefinedState__BaseAssignment_1"
+    // $ANTLR end "rule__RefinedState__TargetAssignment_1"
 
 
     // $ANTLR start "rule__RefinedState__DocuAssignment_2"
@@ -57494,17 +57494,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21482:1: ( ( RULE_ID ) )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21483:1: ( RULE_ID )
             {
-             before(grammarAccess.getStateTerminalAccess().getStateBaseStateCrossReference_0()); 
+             before(grammarAccess.getStateTerminalAccess().getStateStateCrossReference_0()); 
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21484:1: ( RULE_ID )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21485:1: RULE_ID
             {
-             before(grammarAccess.getStateTerminalAccess().getStateBaseStateIDTerminalRuleCall_0_1()); 
+             before(grammarAccess.getStateTerminalAccess().getStateStateIDTerminalRuleCall_0_1()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__StateTerminal__StateAssignment43328); 
-             after(grammarAccess.getStateTerminalAccess().getStateBaseStateIDTerminalRuleCall_0_1()); 
+             after(grammarAccess.getStateTerminalAccess().getStateStateIDTerminalRuleCall_0_1()); 
 
             }
 
-             after(grammarAccess.getStateTerminalAccess().getStateBaseStateCrossReference_0()); 
+             after(grammarAccess.getStateTerminalAccess().getStateStateCrossReference_0()); 
 
             }
 
@@ -57629,17 +57629,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21539:1: ( ( RULE_ID ) )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21540:1: ( RULE_ID )
             {
-             before(grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateCrossReference_2_0()); 
+             before(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateCrossReference_2_0()); 
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21541:1: ( RULE_ID )
             // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:21542:1: RULE_ID
             {
-             before(grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateIDTerminalRuleCall_2_0_1()); 
+             before(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateIDTerminalRuleCall_2_0_1()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SubStateTrPointTerminal__StateAssignment_243445); 
-             after(grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateIDTerminalRuleCall_2_0_1()); 
+             after(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateIDTerminalRuleCall_2_0_1()); 
 
             }
 
-             after(grammarAccess.getSubStateTrPointTerminalAccess().getStateBaseStateCrossReference_2_0()); 
+             after(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateCrossReference_2_0()); 
 
             }
 
@@ -58624,9 +58624,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleStateMachine_in_entryRuleStateMachine2651 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStateMachine2658 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StateMachine__Group__0_in_ruleStateMachine2684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBaseState_in_entryRuleBaseState2711 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBaseState2718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__0_in_ruleBaseState2744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleState_in_entryRuleSimpleState2711 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleState2718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__0_in_ruleSimpleState2744 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState2771 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState2778 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__0_in_ruleRefinedState2804 = new BitSet(new long[]{0x0000000000000002L});
@@ -58754,7 +58754,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleState_in_rule__StateGraphNode__Alternatives5419 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleChoicePoint_in_rule__StateGraphNode__Alternatives5436 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTrPoint_in_rule__StateGraphNode__Alternatives5453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBaseState_in_rule__State__Alternatives5486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleState_in_rule__State__Alternatives5486 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefinedState_in_rule__State__Alternatives5503 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StateGraph__StatesAssignment_2_0_in_rule__StateGraph__Alternatives_25535 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StateGraph__TrPointsAssignment_2_1_in_rule__StateGraph__Alternatives_25553 = new BitSet(new long[]{0x0000000000000002L});
@@ -59652,60 +59652,60 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__StateMachine__Alternatives_3_in_rule__StateMachine__Group__3__Impl25783 = new BitSet(new long[]{0x0000000000000002L,0x00000100001F8400L});
     public static final BitSet FOLLOW_rule__StateMachine__Group__4__Impl_in_rule__StateMachine__Group__425814 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_20_in_rule__StateMachine__Group__4__Impl25842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__0__Impl_in_rule__BaseState__Group__025883 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__1_in_rule__BaseState__Group__025886 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_rule__BaseState__Group__0__Impl25914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__1__Impl_in_rule__BaseState__Group__125945 = new BitSet(new long[]{0x0000000400080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__2_in_rule__BaseState__Group__125948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__NameAssignment_1_in_rule__BaseState__Group__1__Impl25975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__2__Impl_in_rule__BaseState__Group__226005 = new BitSet(new long[]{0x0000000400080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__3_in_rule__BaseState__Group__226008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__DocuAssignment_2_in_rule__BaseState__Group__2__Impl26035 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group__3__Impl_in_rule__BaseState__Group__326066 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__0_in_rule__BaseState__Group__3__Impl26093 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__0__Impl_in_rule__BaseState__Group_3__026132 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__1_in_rule__BaseState__Group_3__026135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__BaseState__Group_3__0__Impl26163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__1__Impl_in_rule__BaseState__Group_3__126194 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__2_in_rule__BaseState__Group_3__126197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_1__0_in_rule__BaseState__Group_3__1__Impl26224 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__2__Impl_in_rule__BaseState__Group_3__226255 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__3_in_rule__BaseState__Group_3__226258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_2__0_in_rule__BaseState__Group_3__2__Impl26285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__3__Impl_in_rule__BaseState__Group_3__326316 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__4_in_rule__BaseState__Group_3__326319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__0_in_rule__BaseState__Group_3__3__Impl26346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__4__Impl_in_rule__BaseState__Group_3__426377 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__5_in_rule__BaseState__Group_3__426380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_4__0_in_rule__BaseState__Group_3__4__Impl26407 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3__5__Impl_in_rule__BaseState__Group_3__526438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__BaseState__Group_3__5__Impl26466 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_1__0__Impl_in_rule__BaseState__Group_3_1__026509 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_1__1_in_rule__BaseState__Group_3_1__026512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_75_in_rule__BaseState__Group_3_1__0__Impl26540 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_1__1__Impl_in_rule__BaseState__Group_3_1__126571 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__EntryCodeAssignment_3_1_1_in_rule__BaseState__Group_3_1__1__Impl26598 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_2__0__Impl_in_rule__BaseState__Group_3_2__026632 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_2__1_in_rule__BaseState__Group_3_2__026635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_76_in_rule__BaseState__Group_3_2__0__Impl26663 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_2__1__Impl_in_rule__BaseState__Group_3_2__126694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__ExitCodeAssignment_3_2_1_in_rule__BaseState__Group_3_2__1__Impl26721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__0__Impl_in_rule__BaseState__Group_3_3__026755 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__1_in_rule__BaseState__Group_3_3__026758 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_77_in_rule__BaseState__Group_3_3__0__Impl26786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_3__1__Impl_in_rule__BaseState__Group_3_3__126817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__DoCodeAssignment_3_3_1_in_rule__BaseState__Group_3_3__1__Impl26844 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_4__0__Impl_in_rule__BaseState__Group_3_4__026878 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_4__1_in_rule__BaseState__Group_3_4__026881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_78_in_rule__BaseState__Group_3_4__0__Impl26909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__Group_3_4__1__Impl_in_rule__BaseState__Group_3_4__126940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BaseState__SubgraphAssignment_3_4_1_in_rule__BaseState__Group_3_4__1__Impl26967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__0__Impl_in_rule__SimpleState__Group__025883 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__1_in_rule__SimpleState__Group__025886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_rule__SimpleState__Group__0__Impl25914 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__1__Impl_in_rule__SimpleState__Group__125945 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__2_in_rule__SimpleState__Group__125948 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__NameAssignment_1_in_rule__SimpleState__Group__1__Impl25975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__2__Impl_in_rule__SimpleState__Group__226005 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__3_in_rule__SimpleState__Group__226008 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__DocuAssignment_2_in_rule__SimpleState__Group__2__Impl26035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group__3__Impl_in_rule__SimpleState__Group__326066 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__0_in_rule__SimpleState__Group__3__Impl26093 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__0__Impl_in_rule__SimpleState__Group_3__026132 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__1_in_rule__SimpleState__Group_3__026135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__SimpleState__Group_3__0__Impl26163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__1__Impl_in_rule__SimpleState__Group_3__126194 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__2_in_rule__SimpleState__Group_3__126197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_1__0_in_rule__SimpleState__Group_3__1__Impl26224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__2__Impl_in_rule__SimpleState__Group_3__226255 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__3_in_rule__SimpleState__Group_3__226258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_2__0_in_rule__SimpleState__Group_3__2__Impl26285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__3__Impl_in_rule__SimpleState__Group_3__326316 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__4_in_rule__SimpleState__Group_3__326319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_3__0_in_rule__SimpleState__Group_3__3__Impl26346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__4__Impl_in_rule__SimpleState__Group_3__426377 = new BitSet(new long[]{0x0000000000100000L,0x0000000000007800L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__5_in_rule__SimpleState__Group_3__426380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_4__0_in_rule__SimpleState__Group_3__4__Impl26407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3__5__Impl_in_rule__SimpleState__Group_3__526438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__SimpleState__Group_3__5__Impl26466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_1__0__Impl_in_rule__SimpleState__Group_3_1__026509 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_1__1_in_rule__SimpleState__Group_3_1__026512 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_75_in_rule__SimpleState__Group_3_1__0__Impl26540 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_1__1__Impl_in_rule__SimpleState__Group_3_1__126571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__EntryCodeAssignment_3_1_1_in_rule__SimpleState__Group_3_1__1__Impl26598 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_2__0__Impl_in_rule__SimpleState__Group_3_2__026632 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_2__1_in_rule__SimpleState__Group_3_2__026635 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_76_in_rule__SimpleState__Group_3_2__0__Impl26663 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_2__1__Impl_in_rule__SimpleState__Group_3_2__126694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__ExitCodeAssignment_3_2_1_in_rule__SimpleState__Group_3_2__1__Impl26721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_3__0__Impl_in_rule__SimpleState__Group_3_3__026755 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_3__1_in_rule__SimpleState__Group_3_3__026758 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_77_in_rule__SimpleState__Group_3_3__0__Impl26786 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_3__1__Impl_in_rule__SimpleState__Group_3_3__126817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__DoCodeAssignment_3_3_1_in_rule__SimpleState__Group_3_3__1__Impl26844 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_4__0__Impl_in_rule__SimpleState__Group_3_4__026878 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_4__1_in_rule__SimpleState__Group_3_4__026881 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_78_in_rule__SimpleState__Group_3_4__0__Impl26909 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__Group_3_4__1__Impl_in_rule__SimpleState__Group_3_4__126940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleState__SubgraphAssignment_3_4_1_in_rule__SimpleState__Group_3_4__1__Impl26967 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__0__Impl_in_rule__RefinedState__Group__027001 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__1_in_rule__RefinedState__Group__027004 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_79_in_rule__RefinedState__Group__0__Impl27032 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__1__Impl_in_rule__RefinedState__Group__127063 = new BitSet(new long[]{0x0000000400080000L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__2_in_rule__RefinedState__Group__127066 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RefinedState__BaseAssignment_1_in_rule__RefinedState__Group__1__Impl27093 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RefinedState__TargetAssignment_1_in_rule__RefinedState__Group__1__Impl27093 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__2__Impl_in_rule__RefinedState__Group__227123 = new BitSet(new long[]{0x0000000400080000L});
     public static final BitSet FOLLOW_rule__RefinedState__Group__3_in_rule__RefinedState__Group__227126 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefinedState__DocuAssignment_2_in_rule__RefinedState__Group__2__Impl27153 = new BitSet(new long[]{0x0000000000000002L});
@@ -60277,13 +60277,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleTrPoint_in_rule__StateMachine__TrPointsAssignment_3_141753 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleChoicePoint_in_rule__StateMachine__ChPointsAssignment_3_241784 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTransition_in_rule__StateMachine__TransitionsAssignment_3_341815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__BaseState__NameAssignment_141846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_rule__BaseState__DocuAssignment_241877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rule__BaseState__EntryCodeAssignment_3_1_141908 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rule__BaseState__ExitCodeAssignment_3_2_141939 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rule__BaseState__DoCodeAssignment_3_3_141970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_rule__BaseState__SubgraphAssignment_3_4_142001 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__RefinedState__BaseAssignment_142036 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleState__NameAssignment_141846 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_rule__SimpleState__DocuAssignment_241877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rule__SimpleState__EntryCodeAssignment_3_1_141908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rule__SimpleState__ExitCodeAssignment_3_2_141939 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rule__SimpleState__DoCodeAssignment_3_3_141970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_rule__SimpleState__SubgraphAssignment_3_4_142001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__RefinedState__TargetAssignment_142036 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__RefinedState__DocuAssignment_242071 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__RefinedState__EntryCodeAssignment_4_142102 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__RefinedState__ExitCodeAssignment_5_142133 = new BitSet(new long[]{0x0000000000000002L});

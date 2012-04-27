@@ -2630,14 +2630,14 @@ public interface RoomPackage extends EPackage
   int STATE_GRAPH_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.BaseStateImpl <em>Base State</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.BaseStateImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBaseState()
+   * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
    * @generated
    */
-  int BASE_STATE = 48;
+  int SIMPLE_STATE = 48;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -2646,7 +2646,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__DOCU = STATE__DOCU;
+  int SIMPLE_STATE__DOCU = STATE__DOCU;
 
   /**
    * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
@@ -2655,7 +2655,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
+  int SIMPLE_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
 
   /**
    * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
@@ -2664,7 +2664,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__EXIT_CODE = STATE__EXIT_CODE;
+  int SIMPLE_STATE__EXIT_CODE = STATE__EXIT_CODE;
 
   /**
    * The feature id for the '<em><b>Do Code</b></em>' containment reference.
@@ -2673,7 +2673,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__DO_CODE = STATE__DO_CODE;
+  int SIMPLE_STATE__DO_CODE = STATE__DO_CODE;
 
   /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -2682,7 +2682,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__SUBGRAPH = STATE__SUBGRAPH;
+  int SIMPLE_STATE__SUBGRAPH = STATE__SUBGRAPH;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2691,16 +2691,16 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__NAME = STATE_FEATURE_COUNT + 0;
+  int SIMPLE_STATE__NAME = STATE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Base State</em>' class.
+   * The number of structural features of the '<em>Simple State</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BASE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
+  int SIMPLE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
@@ -2758,13 +2758,13 @@ public interface RoomPackage extends EPackage
   int REFINED_STATE__SUBGRAPH = STATE__SUBGRAPH;
 
   /**
-   * The feature id for the '<em><b>Base</b></em>' reference.
+   * The feature id for the '<em><b>Target</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFINED_STATE__BASE = STATE_FEATURE_COUNT + 0;
+  int REFINED_STATE__TARGET = STATE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Refined State</em>' class.
@@ -5685,25 +5685,25 @@ public interface RoomPackage extends EPackage
   EReference getStateGraph_Transitions();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.BaseState <em>Base State</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Base State</em>'.
-   * @see org.eclipse.etrice.core.room.BaseState
+   * @return the meta object for class '<em>Simple State</em>'.
+   * @see org.eclipse.etrice.core.room.SimpleState
    * @generated
    */
-  EClass getBaseState();
+  EClass getSimpleState();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.BaseState#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.SimpleState#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.BaseState#getName()
-   * @see #getBaseState()
+   * @see org.eclipse.etrice.core.room.SimpleState#getName()
+   * @see #getSimpleState()
    * @generated
    */
-  EAttribute getBaseState_Name();
+  EAttribute getSimpleState_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefinedState <em>Refined State</em>}'.
@@ -5716,15 +5716,15 @@ public interface RoomPackage extends EPackage
   EClass getRefinedState();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedState#getBase <em>Base</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedState#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Base</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedState#getBase()
+   * @return the meta object for the reference '<em>Target</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedState#getTarget()
    * @see #getRefinedState()
    * @generated
    */
-  EReference getRefinedState_Base();
+  EReference getRefinedState_Target();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.DetailCode <em>Detail Code</em>}'.
@@ -7800,14 +7800,14 @@ public interface RoomPackage extends EPackage
     EReference STATE_GRAPH__TRANSITIONS = eINSTANCE.getStateGraph_Transitions();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.BaseStateImpl <em>Base State</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.BaseStateImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBaseState()
+     * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
      * @generated
      */
-    EClass BASE_STATE = eINSTANCE.getBaseState();
+    EClass SIMPLE_STATE = eINSTANCE.getSimpleState();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -7815,7 +7815,7 @@ public interface RoomPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BASE_STATE__NAME = eINSTANCE.getBaseState_Name();
+    EAttribute SIMPLE_STATE__NAME = eINSTANCE.getSimpleState_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
@@ -7828,12 +7828,12 @@ public interface RoomPackage extends EPackage
     EClass REFINED_STATE = eINSTANCE.getRefinedState();
 
     /**
-     * The meta object literal for the '<em><b>Base</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Target</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference REFINED_STATE__BASE = eINSTANCE.getRefinedState_Base();
+    EReference REFINED_STATE__TARGET = eINSTANCE.getRefinedState_Target();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl <em>Detail Code</em>}' class.
