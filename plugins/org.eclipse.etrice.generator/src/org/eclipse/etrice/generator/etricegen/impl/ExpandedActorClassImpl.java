@@ -40,7 +40,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -266,7 +265,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			while (it.hasNext()) {
 				EObject obj = it.next();
 				if (obj instanceof StateGraphItem)
-				addOwnObject((StateGraphItem)obj);
+					addOwnObject((StateGraphItem)obj);
 			}
 			
 			sm.getChPoints().addAll(self.getChPoints());
@@ -282,6 +281,10 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 	/**
 	 * remove refined states and relocate their respective contents to the
 	 * corresponding base state
+	 * 
+	 * This task is simplified by the fact that transition terminals point to SimpleStates only.
+	 * Otherwise we had to redirect those references here.
+	 * 
 	 * @param sg - the current context (will be called recursively)
 	 * @param remove - if true the refined states are removed, if false they are moved
 	 *    to be siblings of their base states
@@ -292,7 +295,7 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			if (s instanceof RefinedState) {
 				RefinedState rs = (RefinedState) s;
 				refinedstates.add(rs);
-				BaseState bs = rs.getBase();
+				State bs = RoomHelpers.getBaseState(rs);
 				if (!remove) {
 					StateGraph parent = (StateGraph) bs.eContainer();
 					parent.getStates().add(rs);
@@ -1130,13 +1133,12 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 					if (node.eContainer().eContainer() instanceof State) {
 						// in this case 
 						State newTarget = (State) node.eContainer().eContainer();
-						BaseState newBaseTarget = (newTarget instanceof BaseState)? (BaseState)newTarget:((RefinedState)newTarget).getBase();
 						
 						StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
-						st.setState(newBaseTarget);
+						st.setState(newTarget);
 						t.setTo(st);
 						
-						node = newBaseTarget;
+						node = newTarget;
 					}
 				}
 			}

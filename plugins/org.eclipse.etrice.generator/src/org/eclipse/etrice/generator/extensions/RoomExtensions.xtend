@@ -23,7 +23,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.BaseState
+import org.eclipse.etrice.core.room.SimpleState
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.InitialTransition
 import org.eclipse.etrice.core.room.Message
@@ -315,7 +315,7 @@ class RoomExtensions {
 	def List<State> getBaseStateList(StateGraph sg) {
 		var ret = new ArrayList<State>()
 		for(e : sg.getStateList()){
-			if(e instanceof BaseState){
+			if(e instanceof SimpleState){
 				ret.add(e)
 			}
 		}

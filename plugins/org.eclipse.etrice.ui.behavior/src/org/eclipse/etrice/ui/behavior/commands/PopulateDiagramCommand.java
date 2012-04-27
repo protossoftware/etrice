@@ -53,15 +53,15 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 		//System.out.println(tree);
 		
-		addStateGraph(tree, diagram);
+		addStateGraph(tree);
 		
 		ContextSwitcher.switchTop(diagram);
 	}
 
-	private void addStateGraph(StateGraphContext ctx, ContainerShape parent) {
+	private void addStateGraph(StateGraphContext ctx) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ctx.getStateGraph());
-		addContext.setTargetContainer(parent);
+		addContext.setTargetContainer(diagram);
 		addContext.setX(StateGraphSupport.MARGIN);
 		addContext.setY(StateGraphSupport.MARGIN);
 		
@@ -77,7 +77,7 @@ public class PopulateDiagramCommand extends RecordingCommand {
 		SupportUtil.addChoicePoints(ctx.getChPoints(), sgShape, fp, node2anchor);
 
 		for (StateGraphContext sub : ctx.getChildren()) {
-			addStateGraph(sub, parent);
+			addStateGraph(sub);
 		}
 		
 		SupportUtil.getSubTpAnchors(sgShape, node2anchor);

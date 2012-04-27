@@ -48,7 +48,7 @@ public class TestStates extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		assertEquals("number of states", 7, instances.get(RoomPackage.eINSTANCE.getBaseState()).size());
+		assertEquals("number of states", 7, instances.get(RoomPackage.eINSTANCE.getSimpleState()).size());
 		assertEquals("number of choice points", 1, instances.get(RoomPackage.eINSTANCE.getChoicePoint()).size());
 		assertEquals("number of transition points", 2, instances.get(RoomPackage.eINSTANCE.getTransitionPoint()).size());
 		assertEquals("number of entry points", 1, instances.get(RoomPackage.eINSTANCE.getEntryPoint()).size());
@@ -70,7 +70,7 @@ public class TestStates extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testGraph() {
-		ArrayList<EObject> states = instances.get(RoomPackage.eINSTANCE.getBaseState());
+		ArrayList<EObject> states = instances.get(RoomPackage.eINSTANCE.getSimpleState());
 //		for (EObject obj : states) {
 //			LogicalSystem.out.println("state "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}

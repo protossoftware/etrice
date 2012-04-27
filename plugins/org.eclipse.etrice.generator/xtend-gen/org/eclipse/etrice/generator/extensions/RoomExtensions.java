@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -27,6 +26,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -467,7 +467,7 @@ public class RoomExtensions {
       ArrayList<State> ret = _arrayList;
       List<State> _stateList = this.getStateList(sg);
       for (final State e : _stateList) {
-        if ((e instanceof BaseState)) {
+        if ((e instanceof SimpleState)) {
           ret.add(e);
         }
       }

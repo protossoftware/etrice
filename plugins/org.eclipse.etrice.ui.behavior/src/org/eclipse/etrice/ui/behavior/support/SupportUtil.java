@@ -16,7 +16,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -134,12 +133,12 @@ public class SupportUtil {
 	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac,
 			ContainerShape targetContainer, IFeatureProvider fp) {
 
-		BaseState base = (BaseState) sg.eContainer();
+		State base = (State) sg.eContainer();
 		
 		RefinedState rs = null;
 		for (State s : ac.getStateMachine().getStates()) {
 			if (s instanceof RefinedState)
-				if (((RefinedState) s).getBase()==base) {
+				if (((RefinedState) s).getTarget()==base) {
 					rs = (RefinedState) s;
 					break;
 				}
@@ -147,7 +146,7 @@ public class SupportUtil {
 		if (rs==null) {
 			// we have to insert a refined state first
 			rs = RoomFactory.eINSTANCE.createRefinedState();
-			rs.setBase(base);
+			rs.setTarget(base);
 			ac.getStateMachine().getStates().add(rs);
 		}
 		
@@ -166,7 +165,7 @@ public class SupportUtil {
 	public static void undoInsertRefinedState(StateGraph sg, ActorClass ac,
 			ContainerShape targetContainer, IFeatureProvider fp) {
 		RefinedState rs = (RefinedState) sg.eContainer();
-		fp.link(targetContainer, rs.getBase().getSubgraph());
+		fp.link(targetContainer, rs.getTarget().getSubgraph());
 		
 		if (!(RoomHelpers.hasDetailCode(rs.getEntryCode()) || RoomHelpers.hasDetailCode(rs.getExitCode()))) {
 			ac.getStateMachine().getStates().remove(rs);
@@ -217,7 +216,7 @@ public class SupportUtil {
 			if (obj instanceof TrPoint) {
 				Object parent = fp.getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
 				if (parent instanceof State) {
-					BaseState state = (parent instanceof RefinedState)? ((RefinedState)parent).getBase() : (BaseState)parent;
+					State state = (parent instanceof RefinedState)? ((RefinedState)parent).getTarget() : (State)parent;
 					SubStateTrPointTerminal sstpt = RoomFactory.eINSTANCE.createSubStateTrPointTerminal();
 					sstpt.setState(state);
 					sstpt.setTrPoint((TrPoint) obj);
@@ -230,7 +229,7 @@ public class SupportUtil {
 				}
 			}
 			else if (obj instanceof State) {
-				BaseState state = (obj instanceof RefinedState)? ((RefinedState)obj).getBase() : (BaseState)obj;
+				State state = (obj instanceof RefinedState)? ((RefinedState)obj).getTarget() : (State)obj;
 				StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
 				st.setState(state);
 				return st;
