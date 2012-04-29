@@ -243,6 +243,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
 				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
 				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
+				«var dataCall = if (hasData) ", data" else ""»
 				«var hdlr = message.getSendHandler(conj)»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
@@ -260,7 +261,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 					«IF hdlr != null»
 						int i;
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«data»);
+							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«dataCall»);
 						}					
 					«ELSE»
 						int i;
@@ -274,7 +275,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					«IF hdlr != null»
-						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«data»);
+						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«dataCall»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						if (0<=idx && idx<((etReplPort*)self)->size) {

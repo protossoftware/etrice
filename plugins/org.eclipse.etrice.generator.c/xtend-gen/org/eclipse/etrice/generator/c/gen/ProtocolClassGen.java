@@ -821,6 +821,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           }
           String data = _xifexpression_6;
           _builder.newLineIfNotEmpty();
+          String _xifexpression_7 = null;
+          if (hasData) {
+            _xifexpression_7 = ", data";
+          } else {
+            _xifexpression_7 = "";
+          }
+          String dataCall = _xifexpression_7;
+          _builder.newLineIfNotEmpty();
           MessageHandler _sendHandler = this.roomExt.getSendHandler(message, conj);
           MessageHandler hdlr = _sendHandler;
           _builder.newLineIfNotEmpty();
@@ -892,7 +900,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _name_5 = message.getName();
               _builder.append(_name_5, "		");
               _builder.append("((etPort*)&((etReplPort*)self)->ports[i]");
-              _builder.append(data, "		");
+              _builder.append(dataCall, "		");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -950,7 +958,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _name_10 = message.getName();
               _builder.append(_name_10, "	");
               _builder.append("((etPort*)&((etReplPort*)self)->ports[idx]");
-              _builder.append(data, "	");
+              _builder.append(dataCall, "	");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             } else {
