@@ -372,7 +372,7 @@ class SubSystemClassGen {
 			var comma = if (idx<pi.peers.size-1) "," else ""
 			result = result +
 				"{&"+ai.path.getPathName()+", "
-				+ai.actorClass.name+"_ReceiveMessage, " 
+				+ai.actorClass.name+"_receiveMessage, " 
 				+"&msgService_Thread1, "
 				+p.objId+", "
 				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
