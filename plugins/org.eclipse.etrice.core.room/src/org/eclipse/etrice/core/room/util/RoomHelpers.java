@@ -269,6 +269,39 @@ public class RoomHelpers {
 		return result.toString();
 	}
 
+	/**
+	 * The default resolution mechanism will return a SimpleState.
+	 * This methods searches for RefinedStates targeting the simple state.
+	 * 
+	 * @param sg the context for the search
+	 * @param state the target state
+	 * 
+	 * @return a refined state targeting state or state itself
+	 */
+	public static State getRefinedStateFor(StateGraph sg, State state) {
+		// first we look for RefinedStates in the current context
+		for (State s : sg.getStates()) {
+			if (s instanceof RefinedState && s.getName().equals(state.getName())) {
+				return s;
+			}
+		}
+		
+		// then we check whether our container has a base state/class
+		if (sg.eContainer() instanceof State) {
+			if (sg.eContainer() instanceof RefinedState) {
+				return getRefinedStateFor(((RefinedState)sg.eContainer()).getTarget().getSubgraph(), state);
+			}
+		}
+		else if (sg.eContainer() instanceof ActorClass) {
+			ActorClass ac = (ActorClass) sg.eContainer();
+			if (ac.getBase()!=null && ac.getBase().getStateMachine()!=null)
+				return getRefinedStateFor(ac.getBase().getStateMachine(), state);
+		}
+		
+		// nothing found, return original state
+		return state;
+	}
+
 	public static boolean isGuarded(Trigger trig) {
 		return trig.getGuard()!=null && RoomHelpers.hasDetailCode(trig.getGuard().getGuard());
 	}

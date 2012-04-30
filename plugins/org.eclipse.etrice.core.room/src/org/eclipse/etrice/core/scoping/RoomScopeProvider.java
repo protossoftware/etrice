@@ -250,8 +250,12 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_SubStateTrPointTerminal_trPoint(SubStateTrPointTerminal ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
+		StateGraph parent = getStateGraph(ep);
 		if (ep.getState()!=null) {
 			State epState = ep.getState();
+			
+			// check if there is a refined state for this state
+			epState = RoomHelpers.getRefinedStateFor(parent, epState);
 			
 			if (epState.getSubgraph()!=null) {
 				List<TrPoint> tps = RoomHelpers.getAllTrPoints(epState.getSubgraph());
