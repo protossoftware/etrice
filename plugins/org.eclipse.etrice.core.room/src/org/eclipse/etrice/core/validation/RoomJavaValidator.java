@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -159,6 +160,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkAttributeNotCircular(Attribute att) {
 		if (att.eContainer() instanceof ActorClass)
+			// no circle possible
+			return;
+		
+		if (att.eContainer() instanceof PortClass)
 			// no circle possible
 			return;
 		

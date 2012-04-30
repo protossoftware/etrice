@@ -4,14 +4,19 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -733,24 +738,100 @@ public class SubSystemClassGen {
       }
     }
     _builder.newLine();
+    _builder.append("/* forward declaration of variable port structs */\t\t");
+    _builder.newLine();
     {
       EList<ActorInstance> _allContainedInstances_1 = ssi.getAllContainedInstances();
       for(final ActorInstance ai_1 : _allContainedInstances_1) {
-        _builder.newLine();
-        _builder.append("/* instance ");
-        String _path_1 = ai_1.getPath();
-        String _pathName_1 = this.roomExt.getPathName(_path_1);
-        _builder.append(_pathName_1, "");
-        _builder.append(" */");
-        _builder.newLineIfNotEmpty();
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
           boolean _isEmpty = _orderedIfItemInstances.isEmpty();
           if (_isEmpty) {
+            _builder.append("/*nothing to do */");
+            _builder.newLine();
+          } else {
+            {
+              EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai_1.getOrderedIfItemInstances();
+              for(final InterfaceItemInstance pi : _orderedIfItemInstances_1) {
+                {
+                  InterfaceItem _interfaceItem = pi.getInterfaceItem();
+                  ProtocolClass _protocol = _interfaceItem.getProtocol();
+                  boolean _isConjugated = this.roomExt.isConjugated(pi);
+                  PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
+                  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_portClass, null);
+                  if (_operator_notEquals) {
+                    {
+                      InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
+                      ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+                      boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
+                      PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
+                      EList<Attribute> _attributes = _portClass_1.getAttributes();
+                      boolean _isEmpty_1 = _attributes.isEmpty();
+                      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
+                      if (_operator_not) {
+                        {
+                          boolean _isReplicated = pi.isReplicated();
+                          if (_isReplicated) {
+                            _builder.append("static ");
+                            InterfaceItem _interfaceItem_2 = pi.getInterfaceItem();
+                            ProtocolClass _protocol_2 = _interfaceItem_2.getProtocol();
+                            boolean _isConjugated_2 = this.roomExt.isConjugated(pi);
+                            String _portClassName = this.roomExt.getPortClassName(_protocol_2, _isConjugated_2);
+                            _builder.append(_portClassName, "");
+                            _builder.append("_var ");
+                            String _path_1 = pi.getPath();
+                            String _pathName_1 = this.roomExt.getPathName(_path_1);
+                            _builder.append(_pathName_1, "");
+                            _builder.append("_var[");
+                            EList<InterfaceItemInstance> _peers = pi.getPeers();
+                            int _size = _peers.size();
+                            _builder.append(_size, "");
+                            _builder.append("];");
+                            _builder.newLineIfNotEmpty();
+                          } else {
+                            _builder.append("static ");
+                            InterfaceItem _interfaceItem_3 = pi.getInterfaceItem();
+                            ProtocolClass _protocol_3 = _interfaceItem_3.getProtocol();
+                            boolean _isConjugated_3 = this.roomExt.isConjugated(pi);
+                            String _portClassName_1 = this.roomExt.getPortClassName(_protocol_3, _isConjugated_3);
+                            _builder.append(_portClassName_1, "");
+                            _builder.append("_var ");
+                            String _path_2 = pi.getPath();
+                            String _pathName_2 = this.roomExt.getPathName(_path_2);
+                            _builder.append(_pathName_2, "");
+                            _builder.append("_var;");
+                            _builder.newLineIfNotEmpty();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    _builder.newLine();
+    {
+      EList<ActorInstance> _allContainedInstances_2 = ssi.getAllContainedInstances();
+      for(final ActorInstance ai_2 : _allContainedInstances_2) {
+        _builder.newLine();
+        _builder.append("/* instance ");
+        String _path_3 = ai_2.getPath();
+        String _pathName_3 = this.roomExt.getPathName(_path_3);
+        _builder.append(_pathName_3, "");
+        _builder.append(" */");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
+          boolean _isEmpty_2 = _orderedIfItemInstances_2.isEmpty();
+          if (_isEmpty_2) {
             _builder.append("/* no ports/saps/services - nothing to initialize statically */");
             _builder.newLine();
           } else {
-            StringConcatenation _genActorInstanceInitializer = this.genActorInstanceInitializer(root, ai_1);
+            StringConcatenation _genActorInstanceInitializer = this.genActorInstanceInitializer(root, ai_2);
             _builder.append(_genActorInstanceInitializer, "");
             _builder.newLineIfNotEmpty();
           }
@@ -884,7 +965,7 @@ public class SubSystemClassGen {
           _builder.append("] = {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, index} */");
+          _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
             boolean hasAnyElements = false;
@@ -924,7 +1005,7 @@ public class SubSystemClassGen {
           _builder.append("_const = {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */");
+          _builder.append("/* Ports: {varData, msgService, peerAddress, localId} */");
           _builder.newLine();
           {
             boolean hasAnyElements_1 = false;
@@ -1053,28 +1134,51 @@ public class SubSystemClassGen {
         _xifexpression_2 = _indexOf;
       }
       int idx = _xifexpression_2;
-      String _path = ai.getPath();
-      String _pathName = this.roomExt.getPathName(_path);
-      String _operator_plus_1 = StringExtensions.operator_plus("{&", _pathName);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ", ");
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, recvMsg);
-      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ", ");
-      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "&msgService_Thread1, ");
-      int _operator_plus_6 = IntegerExtensions.operator_plus(((Integer)objId), ((Integer)idx));
-      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)_operator_plus_6));
-      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ", ");
+      String _interfaceItemInstanceData = this.getInterfaceItemInstanceData(pi);
+      String _operator_plus_1 = StringExtensions.operator_plus("{", _interfaceItemInstanceData);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ",");
+      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "&msgService_Thread1, ");
+      int _operator_plus_4 = IntegerExtensions.operator_plus(((Integer)objId), ((Integer)idx));
+      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_3, ((Integer)_operator_plus_4));
+      String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ", ");
       ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
       int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-      int _operator_plus_9 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_8, ((Integer)_operator_plus_9));
-      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "} /* Port ");
+      int _operator_plus_7 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
+      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_6, ((Integer)_operator_plus_7));
+      String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, "} /* Port ");
       String _name_1 = pi.getName();
-      String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, _name_1);
-      String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, " */");
-      _xblockexpression = (_operator_plus_13);
+      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _name_1);
+      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, " */");
+      _xblockexpression = (_operator_plus_11);
     }
     return _xblockexpression;
+  }
+  
+  private String getInterfaceItemInstanceData(final InterfaceItemInstance pi) {
+      InterfaceItem _interfaceItem = pi.getInterfaceItem();
+      ProtocolClass _protocol = _interfaceItem.getProtocol();
+      boolean _isConjugated = this.roomExt.isConjugated(pi);
+      PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
+      boolean _operator_equals = ObjectExtensions.operator_equals(_portClass, null);
+      if (_operator_equals) {
+        return "0";
+      }
+      InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
+      ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+      boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
+      PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
+      EList<Attribute> _attributes = _portClass_1.getAttributes();
+      boolean _isEmpty = _attributes.isEmpty();
+      if (_isEmpty) {
+        return "0";
+      } else {
+        String _path = pi.getPath();
+        String _pathName = this.roomExt.getPathName(_path);
+        String _operator_plus = StringExtensions.operator_plus("&", _pathName);
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_var");
+        return _operator_plus_1;
+      }
   }
   
   private String genRecvPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
@@ -1124,35 +1228,42 @@ public class SubSystemClassGen {
             _xifexpression = "";
           }
           String comma = _xifexpression;
-          String _operator_plus = StringExtensions.operator_plus(result, "{&");
-          String _path = ai.getPath();
-          String _pathName = this.roomExt.getPathName(_path);
-          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _pathName);
-          String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ", ");
-          ActorClass _actorClass = ai.getActorClass();
-          String _name = _actorClass.getName();
-          String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _name);
-          String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_ReceiveMessage, ");
-          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "&msgService_Thread1, ");
+          String _interfaceItemInstanceData = this.getInterfaceItemInstanceData(pi);
+          String iiiD = _interfaceItemInstanceData;
+          String _xifexpression_1 = null;
+          boolean _equals = iiiD.equals("0");
+          if (_equals) {
+            String _operator_plus = StringExtensions.operator_plus(iiiD, ",");
+            _xifexpression_1 = _operator_plus;
+          } else {
+            String _operator_plus_1 = StringExtensions.operator_plus(iiiD, "[");
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ((Integer)idx));
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "],");
+            _xifexpression_1 = _operator_plus_3;
+          }
+          iiiD = _xifexpression_1;
+          String _operator_plus_4 = StringExtensions.operator_plus(result, "{");
+          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, iiiD);
+          String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "&msgService_Thread1, ");
           int _objId = p.getObjId();
-          String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ((Integer)_objId));
-          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ", ");
+          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ((Integer)_objId));
+          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ", ");
           ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
           InterfaceItem _interfaceItem = pi.getInterfaceItem();
           int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-          int _operator_plus_8 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-          String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_7, ((Integer)_operator_plus_8));
-          String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, ", ");
-          String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, ((Integer)idx));
-          String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, "}");
-          String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, comma);
-          String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, " /* Repl Sub Port ");
-          String _name_1 = pi.getName();
-          String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, _name_1);
-          String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, " idx +");
-          String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, ((Integer)idx));
-          String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, "*/\n");
-          result = _operator_plus_18;
+          int _operator_plus_9 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
+          String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_8, ((Integer)_operator_plus_9));
+          String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, ", ");
+          String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, ((Integer)idx));
+          String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, "}");
+          String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, comma);
+          String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, " /* Repl Sub Port ");
+          String _name = pi.getName();
+          String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, _name);
+          String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, " idx +");
+          String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, ((Integer)idx));
+          String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, "*/\n");
+          result = _operator_plus_19;
         }
       }
       return result;
@@ -1234,23 +1345,129 @@ public class SubSystemClassGen {
                     _builder.append(_operator_plus, "		");
                     _builder.append(":");
                     _builder.newLineIfNotEmpty();
+                    {
+                      InterfaceItem _interfaceItem = pi.getInterfaceItem();
+                      ProtocolClass _protocol = _interfaceItem.getProtocol();
+                      boolean _isConjugated = this.roomExt.isConjugated(pi);
+                      boolean _handlesReceive = this.roomExt.handlesReceive(_protocol, _isConjugated);
+                      if (_handlesReceive) {
+                        _builder.append("\t\t");
+                        _builder.append("switch (msg->evtID){");
+                        _builder.newLine();
+                        {
+                          InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
+                          ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+                          boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
+                          List<MessageHandler> _receiveHandlers = this.roomExt.getReceiveHandlers(_protocol_1, _isConjugated_1);
+                          for(final MessageHandler h : _receiveHandlers) {
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("case ");
+                            InterfaceItem _interfaceItem_2 = pi.getInterfaceItem();
+                            ProtocolClass _protocol_2 = _interfaceItem_2.getProtocol();
+                            String _name_1 = _protocol_2.getName();
+                            _builder.append(_name_1, "			");
+                            _builder.append("_");
+                            Message _msg = h.getMsg();
+                            String _codeName = this.roomExt.getCodeName(_msg);
+                            _builder.append(_codeName, "			");
+                            _builder.append(":");
+                            _builder.newLineIfNotEmpty();
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("\t");
+                            InterfaceItem _interfaceItem_3 = pi.getInterfaceItem();
+                            ProtocolClass _protocol_3 = _interfaceItem_3.getProtocol();
+                            boolean _isConjugated_2 = this.roomExt.isConjugated(pi);
+                            String _portClassName = this.roomExt.getPortClassName(_protocol_3, _isConjugated_2);
+                            _builder.append(_portClassName, "				");
+                            _builder.append("_");
+                            Message _msg_1 = h.getMsg();
+                            String _name_2 = _msg_1.getName();
+                            _builder.append(_name_2, "				");
+                            _builder.append("_receiveHandler((etPort *)&");
+                            String _path_1 = ai.getPath();
+                            String _pathName = this.roomExt.getPathName(_path_1);
+                            _builder.append(_pathName, "				");
+                            _builder.append("_const.");
+                            String _name_3 = pi.getName();
+                            _builder.append(_name_3, "				");
+                            _builder.append(".ports[");
+                            EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+                            int _indexOf_1 = _peers_2.indexOf(peer);
+                            _builder.append(_indexOf_1, "				");
+                            _builder.append("],msg,(void*)&");
+                            String _path_2 = ai.getPath();
+                            String _pathName_1 = this.roomExt.getPathName(_path_2);
+                            _builder.append(_pathName_1, "				");
+                            _builder.append(",");
+                            ActorClass _actorClass = ai.getActorClass();
+                            String _name_4 = _actorClass.getName();
+                            _builder.append(_name_4, "				");
+                            _builder.append("_receiveMessage);");
+                            _builder.newLineIfNotEmpty();
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("break;");
+                            _builder.newLine();
+                          }
+                        }
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("default: ");
+                        ActorClass _actorClass_1 = ai.getActorClass();
+                        String _name_5 = _actorClass_1.getName();
+                        _builder.append(_name_5, "			");
+                        _builder.append("_receiveMessage((void*)&");
+                        String _path_3 = ai.getPath();
+                        String _pathName_2 = this.roomExt.getPathName(_path_3);
+                        _builder.append(_pathName_2, "			");
+                        _builder.append(",(etPort*)&");
+                        String _path_4 = ai.getPath();
+                        String _pathName_3 = this.roomExt.getPathName(_path_4);
+                        _builder.append(_pathName_3, "			");
+                        _builder.append("_const.");
+                        String _name_6 = pi.getName();
+                        _builder.append(_name_6, "			");
+                        _builder.append(".ports[");
+                        EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
+                        int _indexOf_2 = _peers_3.indexOf(peer);
+                        _builder.append(_indexOf_2, "			");
+                        _builder.append("], msg);");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("break;");
+                        _builder.newLine();
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("}\t\t\t\t\t\t\t\t\t\t");
+                        _builder.newLine();
+                      } else {
+                        _builder.append("\t\t");
+                        ActorClass _actorClass_2 = ai.getActorClass();
+                        String _name_7 = _actorClass_2.getName();
+                        _builder.append(_name_7, "		");
+                        _builder.append("_receiveMessage((void*)&");
+                        String _path_5 = ai.getPath();
+                        String _pathName_4 = this.roomExt.getPathName(_path_5);
+                        _builder.append(_pathName_4, "		");
+                        _builder.append(",(etPort*)&");
+                        String _path_6 = ai.getPath();
+                        String _pathName_5 = this.roomExt.getPathName(_path_6);
+                        _builder.append(_pathName_5, "		");
+                        _builder.append("_const.");
+                        String _name_8 = pi.getName();
+                        _builder.append(_name_8, "		");
+                        _builder.append(".ports[");
+                        EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
+                        int _indexOf_3 = _peers_4.indexOf(peer);
+                        _builder.append(_indexOf_3, "		");
+                        _builder.append("], msg);");
+                        _builder.newLineIfNotEmpty();
+                      }
+                    }
                     _builder.append("\t\t");
-                    _builder.append("\t");
-                    _builder.append("etPort_receive((etPort*)&");
-                    String _path_1 = ai.getPath();
-                    String _pathName = this.roomExt.getPathName(_path_1);
-                    _builder.append(_pathName, "			");
-                    _builder.append("_const.");
-                    String _name_1 = pi.getName();
-                    _builder.append(_name_1, "			");
-                    _builder.append(".ports[");
-                    EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-                    int _indexOf_1 = _peers_2.indexOf(peer);
-                    _builder.append(_indexOf_1, "			");
-                    _builder.append("], msg);");
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t");
-                    _builder.append("\t");
                     _builder.append("break;");
                     _builder.newLine();
                   }
@@ -1262,19 +1479,111 @@ public class SubSystemClassGen {
                 _builder.append(_objId_1, "		");
                 _builder.append(":");
                 _builder.newLineIfNotEmpty();
+                {
+                  InterfaceItem _interfaceItem_4 = pi.getInterfaceItem();
+                  ProtocolClass _protocol_4 = _interfaceItem_4.getProtocol();
+                  boolean _isConjugated_3 = this.roomExt.isConjugated(pi);
+                  boolean _handlesReceive_1 = this.roomExt.handlesReceive(_protocol_4, _isConjugated_3);
+                  if (_handlesReceive_1) {
+                    _builder.append("\t\t");
+                    _builder.append("switch (msg->evtID){");
+                    _builder.newLine();
+                    {
+                      InterfaceItem _interfaceItem_5 = pi.getInterfaceItem();
+                      ProtocolClass _protocol_5 = _interfaceItem_5.getProtocol();
+                      boolean _isConjugated_4 = this.roomExt.isConjugated(pi);
+                      List<MessageHandler> _receiveHandlers_1 = this.roomExt.getReceiveHandlers(_protocol_5, _isConjugated_4);
+                      for(final MessageHandler h_1 : _receiveHandlers_1) {
+                        _builder.append("\t\t");
+                        _builder.append("case ");
+                        InterfaceItem _interfaceItem_6 = pi.getInterfaceItem();
+                        ProtocolClass _protocol_6 = _interfaceItem_6.getProtocol();
+                        String _name_9 = _protocol_6.getName();
+                        _builder.append(_name_9, "		");
+                        _builder.append("_");
+                        Message _msg_2 = h_1.getMsg();
+                        String _codeName_1 = this.roomExt.getCodeName(_msg_2);
+                        _builder.append(_codeName_1, "		");
+                        _builder.append(":");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        InterfaceItem _interfaceItem_7 = pi.getInterfaceItem();
+                        ProtocolClass _protocol_7 = _interfaceItem_7.getProtocol();
+                        boolean _isConjugated_5 = this.roomExt.isConjugated(pi);
+                        String _portClassName_1 = this.roomExt.getPortClassName(_protocol_7, _isConjugated_5);
+                        _builder.append(_portClassName_1, "			");
+                        _builder.append("_");
+                        Message _msg_3 = h_1.getMsg();
+                        String _name_10 = _msg_3.getName();
+                        _builder.append(_name_10, "			");
+                        _builder.append("_receiveHandler((etPort *)&");
+                        String _path_7 = ai.getPath();
+                        String _pathName_6 = this.roomExt.getPathName(_path_7);
+                        _builder.append(_pathName_6, "			");
+                        _builder.append("_const.");
+                        String _name_11 = pi.getName();
+                        _builder.append(_name_11, "			");
+                        _builder.append(",msg,(void*)&");
+                        String _path_8 = ai.getPath();
+                        String _pathName_7 = this.roomExt.getPathName(_path_8);
+                        _builder.append(_pathName_7, "			");
+                        _builder.append(",");
+                        ActorClass _actorClass_3 = ai.getActorClass();
+                        String _name_12 = _actorClass_3.getName();
+                        _builder.append(_name_12, "			");
+                        _builder.append("_receiveMessage);");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t");
+                        _builder.append("break;");
+                        _builder.newLine();
+                      }
+                    }
+                    _builder.append("\t\t");
+                    _builder.append("default: ");
+                    ActorClass _actorClass_4 = ai.getActorClass();
+                    String _name_13 = _actorClass_4.getName();
+                    _builder.append(_name_13, "		");
+                    _builder.append("_receiveMessage((void*)&");
+                    String _path_9 = ai.getPath();
+                    String _pathName_8 = this.roomExt.getPathName(_path_9);
+                    _builder.append(_pathName_8, "		");
+                    _builder.append(",(etPort*)&");
+                    String _path_10 = ai.getPath();
+                    String _pathName_9 = this.roomExt.getPathName(_path_10);
+                    _builder.append(_pathName_9, "		");
+                    _builder.append("_const.");
+                    String _name_14 = pi.getName();
+                    _builder.append(_name_14, "		");
+                    _builder.append(", msg);");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t");
+                    _builder.append("break;");
+                    _builder.newLine();
+                    _builder.append("\t\t");
+                    _builder.append("}");
+                    _builder.newLine();
+                  } else {
+                    _builder.append("\t\t");
+                    ActorClass _actorClass_5 = ai.getActorClass();
+                    String _name_15 = _actorClass_5.getName();
+                    _builder.append(_name_15, "		");
+                    _builder.append("_receiveMessage((void*)&");
+                    String _path_11 = ai.getPath();
+                    String _pathName_10 = this.roomExt.getPathName(_path_11);
+                    _builder.append(_pathName_10, "		");
+                    _builder.append(",(etPort*)&");
+                    String _path_12 = ai.getPath();
+                    String _pathName_11 = this.roomExt.getPathName(_path_12);
+                    _builder.append(_pathName_11, "		");
+                    _builder.append("_const.");
+                    String _name_16 = pi.getName();
+                    _builder.append(_name_16, "		");
+                    _builder.append(", msg);");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
                 _builder.append("\t\t");
-                _builder.append("\t");
-                _builder.append("etPort_receive(&");
-                String _path_2 = ai.getPath();
-                String _pathName_1 = this.roomExt.getPathName(_path_2);
-                _builder.append(_pathName_1, "			");
-                _builder.append("_const.");
-                String _name_2 = pi.getName();
-                _builder.append(_name_2, "			");
-                _builder.append(", msg);");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("\t");
                 _builder.append("break;");
                 _builder.newLine();
               }
@@ -1288,9 +1597,9 @@ public class SubSystemClassGen {
     _builder.append("default:");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("etLogger_logErrorF(\"MessageService_Thread1_ReceiveMessage: address %d does not exist \", msg->address);");
+    _builder.append("etLogger_logErrorF(\"MessageService_Thread1_receiveMessage: address %d does not exist \", msg->address);");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("break;");
     _builder.newLine();
     _builder.append("\t");

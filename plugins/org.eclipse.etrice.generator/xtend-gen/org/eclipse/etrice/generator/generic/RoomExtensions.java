@@ -41,6 +41,10 @@ import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.generator.etricegen.PortInstance;
+import org.eclipse.etrice.generator.etricegen.SAPInstance;
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -440,6 +444,24 @@ public class RoomExtensions {
         }
       }
       return false;
+  }
+  
+  public boolean isConjugated(final InterfaceItemInstance iii) {
+    if ((iii instanceof PortInstance)) {
+      Port _port = ((PortInstance) iii).getPort();
+      boolean _isConjugated = _port.isConjugated();
+      return _isConjugated;
+    } else {
+      if ((iii instanceof SAPInstance)) {
+        return true;
+      } else {
+        if ((iii instanceof ServiceImplInstance)) {
+          return false;
+        } else {
+          return false;
+        }
+      }
+    }
   }
   
   public List<MessageHandler> getReceiveHandlers(final ProtocolClass pc, final boolean conj) {
