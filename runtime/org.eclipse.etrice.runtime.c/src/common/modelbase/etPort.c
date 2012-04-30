@@ -16,13 +16,14 @@
 #include "platform/etMemory.h"
 #include <string.h>
 
+/*
 void etPort_receive(const etPort* self, const etMessage* msg) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "receive")
 	if (self->receiveMessageFunc!=NULL)
 		(self->receiveMessageFunc)(self->myActor, (void*)self, msg);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
-
+*/
 
 void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data) {
 	int offset = MEM_CEIL(sizeof(etMessage));

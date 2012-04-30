@@ -136,31 +136,48 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
 		
 		'''
+		typedef etPort «portClassName»;
+		typedef etReplPort «replPortClassName»;
 		
-			typedef etPort «portClassName»;
-			typedef etReplPort «replPortClassName»;
+		«IF pc.getPortClass(conj)!=null»	
+			«IF !(pc.getPortClass(conj).attributes.empty)»
+/* variable part of PortClass (RAM) */
+typedef struct «portClassName»_var «portClassName»_var; 
+struct «portClassName»_var {
+	«helpers.attributes(pc.getPortClass(conj).attributes)»
+	};
+				«FOR a:pc.getPortClass(conj).attributes»
+					«IF a.defaultValueLiteral!=null»
+						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
+					«ENDIF»
+				«ENDFOR»
+			«ENDIF»
+		«ENDIF»
 			
-			«FOR message : messages»
-				«var hasData = message.data!=null»
-				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
-				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
-				«messageSignature(portClassName, message.name, "", data)»;
-				«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
-				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
-			«ENDFOR»
+		«FOR message : messages»
+			«var hasData = message.data!=null»
+			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
+			«var refp = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
+			«var data = if (hasData) ", "+typeName+refp+" data" else ""»
+			«messageSignature(portClassName, message.name, "", data)»;
+			«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
+			«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
+		«ENDFOR»
 			
 		«IF (pc.getPortClass(conj) != null)»	
 			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, portClassName)»
 			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, replPortClassName)»
 		«ENDIF»
 		
-		«IF pc.handlesReceive(conj)»
-			void «portClassName»_handleReceive(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
+ 		«IF pc.handlesReceive(conj)»
+			«FOR h:getReceiveHandlers(pc,conj)»
+void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
+			«ENDFOR»
 		«ENDIF»
-			
 		'''
 	}
+
+
 	
 	def private genDataDrivenPortHeaders(ProtocolClass pc) {
 		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
@@ -226,6 +243,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
 				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
 				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
+				«var dataCall = if (hasData) ", data" else ""»
 				«var hdlr = message.getSendHandler(conj)»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
@@ -234,9 +252,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						«ENDFOR»									
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-						if (self->receiveMessageFunc!=NULL) {
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
@@ -244,14 +260,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
 					«IF hdlr != null»
 						int i;
-						for (i=0; i<self->size; ++i) {
-							«portClassName»_«message.name»((«portClassName»*)&self->ports[i]«data»);
+						for (i=0; i<((etReplPort*)self)->size; ++i) {
+							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«dataCall»);
 						}					
 					«ELSE»
 						int i;
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						for (i=0; i<self->size; ++i) {
-							«sendMessageCall(hasData, "(etPort*)(&self->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						for (i=0; i<((etReplPort*)self)->size; ++i) {
+							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -259,11 +275,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					«IF hdlr != null»
-						«portClassName»_«message.name»((«portClassName»*)&self->ports[idx]«data»);
+						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«dataCall»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						if (0<=idx && idx<self->size) {
-							«sendMessageCall(hasData, "(etPort*)(&self->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						if (0<=idx && idx<((etReplPort*)self)->size) {
+							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -277,7 +293,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 			// getReplication
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
-				return self->size;
+				return ((etReplPort*)self)->size;
 			}
 			
 			«IF pc.handlesReceive(conj)»
@@ -328,18 +344,15 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	'''
 	/* receiver handlers */
-	void «portClassName»_handleReceive(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-		switch (msg->evtID){
-		«FOR h:getReceiveHandlers(pc,conj)»
-		case «pc.name»_«h.msg.codeName»:
+	«FOR h:getReceiveHandlers(pc,conj)»
+		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
 			«userCode(h.detailCode)»
-		break;
-	«ENDFOR»		
-		default:receiveMessageFunc(actor, self, msg);
-		break;
+			/* hand over the message to the actor:      */
+			/* (*receiveMessageFunc)(actor, self, msg); */
 		}
-	}
+	«ENDFOR»
 	'''}	
+
 	
 	
 	def private generateDebugHelpersImplementation(Root root, ProtocolClass pc){'''

@@ -11,8 +11,6 @@ void etTimer_init(void);
 uint32 getNSecFromTarget(void);
 uint32 getSecFromTarget(void);
 
-uint64 getTargetTimeUs(void);
-
 void getTimeFromTarget(etTargetTime_t *t);
 
 int isTimeGreaterThanActualTime(const etTargetTime_t *t);
