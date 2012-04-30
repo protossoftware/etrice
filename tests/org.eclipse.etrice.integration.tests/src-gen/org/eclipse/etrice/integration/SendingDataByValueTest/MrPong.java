@@ -18,7 +18,9 @@ public class MrPong extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PingPongProtocolPort PingPongPort = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -48,7 +50,9 @@ public class MrPong extends ActorClassBase {
 
 		// own ports
 		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -67,8 +71,7 @@ public class MrPong extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -76,8 +79,8 @@ public class MrPong extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__reply = 1;
-	public static final int CHAIN_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0 = 2;
-	public static final int CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1 = 3;
+	public static final int CHAIN_TRANS_tr0_FROM_reply_TO_reply_BY_pingPingPongPort_tr0 = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_reply_TO_reply_BY_pingSimplePingPongPort_tr1 = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -102,13 +105,13 @@ public class MrPong extends ActorClassBase {
 	/* Entry and Exit Codes */
 	
 	/* Action Codes */
-	protected void action_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
+	protected void action_TRANS_tr0_FROM_reply_TO_reply_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, PingPongData p) {
 		p.setI8Val((byte)(p.getI8Val()+1));
 		
 		
 		PingPongPort.pong(p);
 	}
-	protected void action_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
+	protected void action_TRANS_tr1_FROM_reply_TO_reply_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int p) {
 		PingPongPort.pongSimple(++p);
 	}
 	
@@ -139,16 +142,16 @@ public class MrPong extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0:
+			case CHAIN_TRANS_tr0_FROM_reply_TO_reply_BY_pingPingPongPort_tr0:
 			{
 				PingPongData p = (PingPongData) generic_data;
-				action_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0(ifitem, p);
+				action_TRANS_tr0_FROM_reply_TO_reply_BY_pingPingPongPort_tr0(ifitem, p);
 				return STATE_reply;
 			}
-			case CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1:
+			case CHAIN_TRANS_tr1_FROM_reply_TO_reply_BY_pingSimplePingPongPort_tr1:
 			{
 				int p = (Integer) generic_data;
-				action_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1(ifitem, p);
+				action_TRANS_tr1_FROM_reply_TO_reply_BY_pingSimplePingPongPort_tr1(ifitem, p);
 				return STATE_reply;
 			}
 			case CHAIN_TRANS_INITIAL_TO__reply:
@@ -201,13 +204,13 @@ public class MrPong extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_PingPongPort__ping:
 							{
-								chain = CHAIN_TRANS_reply_TO_reply_BY_pingPingPongPort_tr0;
+								chain = CHAIN_TRANS_tr0_FROM_reply_TO_reply_BY_pingPingPongPort_tr0;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_PingPongPort__pingSimple:
 							{
-								chain = CHAIN_TRANS_reply_TO_reply_BY_pingSimplePingPongPort_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_reply_TO_reply_BY_pingSimplePingPongPort_tr1;
 								catching_state = STATE_TOP;
 							}
 						break;

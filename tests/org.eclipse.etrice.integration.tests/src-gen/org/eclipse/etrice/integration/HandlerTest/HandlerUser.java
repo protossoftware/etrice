@@ -25,7 +25,9 @@ public class HandlerUser extends ActorClassBase {
 	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -45,7 +47,9 @@ public class HandlerUser extends ActorClassBase {
 
 		// own ports
 		TestPort1 = new TestProtocolPort(this, "TestPort1", IFITEM_TestPort1, 0, port_addr[IFITEM_TestPort1][0], peer_addr[IFITEM_TestPort1][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -64,8 +68,7 @@ public class HandlerUser extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -79,22 +82,22 @@ public class HandlerUser extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__state0_tp2 = 1;
-	public static final int CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1 = 2;
-	public static final int CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1 = 3;
-	public static final int CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0 = 4;
-	public static final int CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6 = 5;
-	public static final int CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1 = 6;
-	public static final int CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1 = 7;
-	public static final int CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5 = 8;
+	public static final int CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0 = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1 = 3;
+	public static final int CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1 = 4;
+	public static final int CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5 = 5;
+	public static final int CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6 = 6;
+	public static final int CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1 = 7;
+	public static final int CHAIN_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1 = 8;
 	public static final int CHAIN_state0_TRANS_INITIAL_TO__state2 = 9;
-	public static final int CHAIN_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6 = 10;
-	public static final int CHAIN_state0_TRANS_state1_TO_state2_BY_msg5TestPort1 = 11;
-	public static final int CHAIN_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3 = 12;
-	public static final int CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5 = 13;
-	public static final int CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1 = 14;
-	public static final int CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1 = 15;
-	public static final int CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1 = 16;
-	public static final int CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2 = 17;
+	public static final int CHAIN_state0_TRANS_tr0_FROM_state1_TO_state2_BY_msg5TestPort1 = 10;
+	public static final int CHAIN_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1 = 11;
+	public static final int CHAIN_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2 = 12;
+	public static final int CHAIN_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3 = 13;
+	public static final int CHAIN_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5 = 14;
+	public static final int CHAIN_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6 = 15;
+	public static final int CHAIN_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1 = 16;
+	public static final int CHAIN_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1 = 17;
 	public static final int CHAIN_state0_state1_TRANS_INITIAL_TO__state7 = 18;
 	
 	/* triggers */
@@ -170,11 +173,11 @@ public class HandlerUser extends ActorClassBase {
 	}
 	
 	/* Action Codes */
-	protected void action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action no guard ");
 		crcGen.update(11);
 	}
-	protected void action_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level self transition action P1=>3");
 		crcGen.update(12);
 	}
@@ -182,60 +185,60 @@ public class HandlerUser extends ActorClassBase {
 		System.out.println("top level initial transition");
 		crcGen.update(10);
 	}
-	protected void action_TRANS_cp0_TO_testFalse(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr2_FROM_cp0_TO_testFalse(InterfaceItemBase ifitem, int p1) {
 		System.out.println("Test false");
 		RTServices.getInstance().getSubSystem().testFinished(1);
 	}
-	protected void action_TRANS_cp0_TO_testOk_COND_tr3(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr3_FROM_cp0_TO_testOk_COND_tr3(InterfaceItemBase ifitem, int p1) {
 		System.out.println("Test ok");
 		RTServices.getInstance().getSubSystem().testFinished(0);
 	}
-	protected void action_TRANS_state0_TO_cp1_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr9 transition action");
 		crcGen.update(114);
 	}
-	protected void action_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level self transition action P1=>4");
 		crcGen.update(50);
 	}
-	protected void action_TRANS_tp0_TO_state0_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action p1=>7 ");
 		crcGen.update(70);
 	}
-	protected void action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action p1=>12 ");
 		crcGen.update(110);
 	}
-	protected void action_TRANS_cp1_TO_state1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr8_FROM_cp1_TO_state1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr8 transition action");
 		crcGen.update(113);
 	}
-	protected void action_TRANS_cp1_TO_state0_COND_tr10(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr10_FROM_cp1_TO_state0_COND_tr10(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr4 transition action");
 		crcGen.update(115);
 	}
-	protected void action_TRANS_tp1_TO_cp0_BY_msg6TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tp1 transition to choice action");
 		crcGen.update(117);
 		System.out.printf("CRC: %d \n", crcGen.getCrc());
 	}
-	protected void action_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1(InterfaceItemBase ifitem) {
+	protected void action_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1(InterfaceItemBase ifitem) {
 		System.out.println("state 0 handler action no guard");
 		crcGen.update(20);
 	}
-	protected void action_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2(InterfaceItemBase ifitem) {
+	protected void action_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2(InterfaceItemBase ifitem) {
 		System.out.println("state 0 tp1 self transition action");
 		crcGen.update(21);
 	}
-	protected void action_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3(InterfaceItemBase ifitem, int p1) {
+	protected void action_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0/2 self transition action");
 		crcGen.update(25);
 	}
-	protected void action_state0_TRANS_tp2_TO_state0_state1_tp0() {
+	protected void action_state0_TRANS_tr4_FROM_tp2_TO_state0_state1_tp0() {
 		System.out.println("state 0 tp2 transition action");
 		crcGen.update(15);
 	}
-	protected void action_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
+	protected void action_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 handler action P1 => 5");
 		crcGen.update(52);
 	}
@@ -243,19 +246,19 @@ public class HandlerUser extends ActorClassBase {
 		System.out.println("state 0 initial transition");
 		crcGen.update(53);
 	}
-	protected void action_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
+	protected void action_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0/1 self transition");
 		crcGen.update(54);
 	}
-	protected void action_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 tp1 p1=>5");
 		crcGen.update(120);
 	}
-	protected void action_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 tp1 action P1 => 6");
 		crcGen.update(121);
 	}
-	protected void action_state0_state1_TRANS_tp0_TO_state7() {
+	protected void action_state0_state1_TRANS_tr0_FROM_tp0_TO_state7() {
 		System.out.println("state 0/1 transition entry action");
 		crcGen.update(22);
 	}
@@ -320,92 +323,92 @@ public class HandlerUser extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0:
+			case CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0(ifitem, p1);
+				action_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0(ifitem, p1);
 				return STATE_TOP;
 			}
-			case CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1:
+			case CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1(ifitem, p1);
+				action_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1(ifitem, p1);
 				return STATE_TOP;
 			}
 			case CHAIN_TRANS_INITIAL_TO__state0_tp2:
 			{
 				action_TRANS_INITIAL_TO__state0_tp2();
 				entry_state0();
-				action_state0_TRANS_tp2_TO_state0_state1_tp0();
+				action_state0_TRANS_tr4_FROM_tp2_TO_state0_state1_tp0();
 				entry_state0_state1();
-				action_state0_state1_TRANS_tp0_TO_state7();
+				action_state0_state1_TRANS_tr0_FROM_tp0_TO_state7();
 				return STATE_state0_state1_state7;
 			}
-			case CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1:
+			case CHAIN_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_state0_TO_cp1_BY_msg1TestPort1(ifitem, p1);
+				action_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1(ifitem, p1);
 				if (p1!=4) {
-				action_TRANS_cp1_TO_state0_COND_tr10(ifitem, p1);
+				action_TRANS_tr10_FROM_cp1_TO_state0_COND_tr10(ifitem, p1);
 				return STATE_state0;}
 				else {
-				action_TRANS_cp1_TO_state1(ifitem, p1);
+				action_TRANS_tr8_FROM_cp1_TO_state1(ifitem, p1);
 				return STATE_state1;}
 			}
-			case CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5:
+			case CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5(ifitem, p1);
+				action_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5(ifitem, p1);
 				return STATE_TOP;
 			}
-			case CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1:
+			case CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp0_TO_state0_BY_msg1TestPort1(ifitem, p1);
+				action_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1(ifitem, p1);
 				return STATE_state0;
 			}
-			case CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6:
+			case CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6(ifitem, p1);
+				action_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6(ifitem, p1);
 				return STATE_TOP;
 			}
-			case CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1:
+			case CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tp1_TO_cp0_BY_msg6TestPort1(ifitem, p1);
+				action_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1(ifitem, p1);
 				if (crcGen.getCrc()==7268) {
-				action_TRANS_cp0_TO_testOk_COND_tr3(ifitem, p1);
+				action_TRANS_tr3_FROM_cp0_TO_testOk_COND_tr3(ifitem, p1);
 				return STATE_testOk;}
 				else {
-				action_TRANS_cp0_TO_testFalse(ifitem, p1);
+				action_TRANS_tr2_FROM_cp0_TO_testFalse(ifitem, p1);
 				return STATE_testFalse;}
 			}
-			case CHAIN_state0_TRANS_state1_TO_state2_BY_msg5TestPort1:
+			case CHAIN_state0_TRANS_tr0_FROM_state1_TO_state2_BY_msg5TestPort1:
 			{
 				int p1 = (Integer) generic_data;
 				return STATE_state0_state2;
 			}
-			case CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1:
+			case CHAIN_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1:
 			{
-				action_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1(ifitem);
+				action_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1(ifitem);
 				return STATE_state0;
 			}
-			case CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2:
+			case CHAIN_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2:
 			{
-				action_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2(ifitem);
+				action_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2(ifitem);
 				return STATE_state0;
 			}
-			case CHAIN_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3:
+			case CHAIN_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3:
 			{
 				int p1 = (Integer) generic_data;
-				action_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3(ifitem, p1);
+				action_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3(ifitem, p1);
 				return STATE_state0_state2;
 			}
-			case CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5:
+			case CHAIN_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5:
 			{
 				int p1 = (Integer) generic_data;
-				action_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5(ifitem, p1);
+				action_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5(ifitem, p1);
 				return STATE_state0;
 			}
 			case CHAIN_state0_TRANS_INITIAL_TO__state2:
@@ -413,22 +416,22 @@ public class HandlerUser extends ActorClassBase {
 				action_state0_TRANS_INITIAL_TO__state2();
 				return STATE_state0_state2;
 			}
-			case CHAIN_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6:
+			case CHAIN_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6:
 			{
 				int p1 = (Integer) generic_data;
-				action_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6(ifitem, p1);
+				action_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6(ifitem, p1);
 				return STATE_state0_state1;
 			}
-			case CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1:
+			case CHAIN_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1(ifitem, p1);
+				action_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1(ifitem, p1);
 				return STATE_state0_state1;
 			}
-			case CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1:
+			case CHAIN_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1(ifitem, p1);
+				action_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1(ifitem, p1);
 				return STATE_state0_state2;
 			}
 			case CHAIN_state0_state1_TRANS_INITIAL_TO__state7:
@@ -519,7 +522,7 @@ public class HandlerUser extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_TestPort1__msg5:
 							{
-								chain = CHAIN_state0_TRANS_state1_TO_state2_BY_msg5TestPort1;
+								chain = CHAIN_state0_TRANS_tr0_FROM_state1_TO_state2_BY_msg5TestPort1;
 								catching_state = STATE_state0;
 							}
 						break;
@@ -527,42 +530,42 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==8)
 							{
-								chain = CHAIN_state0_TRANS_state1_TO_state1_BY_msg1TestPort1_tr6;
+								chain = CHAIN_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6;
 								catching_state = STATE_state0;
 							} else 
 							if (p1==5)
 							{
-								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr5;
+								chain = CHAIN_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5;
 								catching_state = STATE_state0;
 								is_handler = true;
 								skip_entry = true;
 							} else 
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_state0_TO_cp1_BY_msg1TestPort1;
+								chain = CHAIN_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1;
 								catching_state = STATE_TOP;
 							} else 
 							if (p1==7)
 							{
-								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								chain = CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1;
 								catching_state = STATE_TOP;
 								is_handler = true;
 							} else 
 							if (p1==12)
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
 							} else 
 							if (p1==3)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							} else 
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								chain = CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -571,7 +574,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg3:
 							{
-								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
+								chain = CHAIN_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1;
 								catching_state = STATE_state0;
 								is_handler = true;
 								skip_entry = true;
@@ -579,7 +582,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg4:
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
+								chain = CHAIN_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2;
 								catching_state = STATE_state0;
 								skip_entry = true;
 							}
@@ -588,17 +591,17 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==5)
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
+								chain = CHAIN_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1;
 								catching_state = STATE_state0;
 							} else 
 							if (p1==6)
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
+								chain = CHAIN_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1;
 								catching_state = STATE_state0;
 							} else 
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
@@ -606,7 +609,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -616,13 +619,13 @@ public class HandlerUser extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_TestPort1__msg1:
 							{
-								chain = CHAIN_state0_TRANS_state2_TO_state2_BY_msg1TestPort1_tr3;
+								chain = CHAIN_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3;
 								catching_state = STATE_state0;
 							}
 						break;
 						case TRIG_TestPort1__msg3:
 							{
-								chain = CHAIN_state0_TRANS_tp0_TO_tp0_BY_msg3TestPort1_tr1;
+								chain = CHAIN_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1;
 								catching_state = STATE_state0;
 								is_handler = true;
 								skip_entry = true;
@@ -630,7 +633,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg4:
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_tp1_BY_msg4TestPort1_tr2;
+								chain = CHAIN_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2;
 								catching_state = STATE_state0;
 								skip_entry = true;
 							}
@@ -639,17 +642,17 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==5)
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_state1_BY_msg2TestPort1;
+								chain = CHAIN_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1;
 								catching_state = STATE_state0;
 							} else 
 							if (p1==6)
 							{
-								chain = CHAIN_state0_TRANS_tp1_TO_state2_BY_msg2TestPort1;
+								chain = CHAIN_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1;
 								catching_state = STATE_state0;
 							} else 
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
@@ -657,7 +660,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -669,25 +672,25 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==7)
 							{
-								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								chain = CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1;
 								catching_state = STATE_TOP;
 								is_handler = true;
 							} else 
 							if (p1==12)
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
 							} else 
 							if (p1==3)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							} else 
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								chain = CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -698,7 +701,7 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
@@ -706,7 +709,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -718,25 +721,25 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==7)
 							{
-								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								chain = CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1;
 								catching_state = STATE_TOP;
 								is_handler = true;
 							} else 
 							if (p1==12)
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
 							} else 
 							if (p1==3)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							} else 
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								chain = CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -747,7 +750,7 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
@@ -755,7 +758,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -767,25 +770,25 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==7)
 							{
-								chain = CHAIN_TRANS_tp0_TO_state0_BY_msg1TestPort1;
+								chain = CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1;
 								catching_state = STATE_TOP;
 								is_handler = true;
 							} else 
 							if (p1==12)
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
 							} else 
 							if (p1==3)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg1TestPort1_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							} else 
 							{
-								chain = CHAIN_TRANS_tp0_TO_tp0_BY_msg1TestPort1_tr0;
+								chain = CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -796,7 +799,7 @@ public class HandlerUser extends ActorClassBase {
 							{ int p1 = (Integer) generic_data;
 							if (p1==4)
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_msg2TestPort1_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
@@ -804,7 +807,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;

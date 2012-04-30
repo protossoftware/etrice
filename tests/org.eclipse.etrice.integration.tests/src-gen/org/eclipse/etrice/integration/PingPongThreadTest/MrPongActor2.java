@@ -18,7 +18,9 @@ public class MrPongActor2 extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PingPongProtocolPort PingPongPort = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -36,7 +38,9 @@ public class MrPongActor2 extends ActorClassBase {
 
 		// own ports
 		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -55,8 +59,7 @@ public class MrPongActor2 extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -64,7 +67,7 @@ public class MrPongActor2 extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__waitForPing = 1;
-	public static final int CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger = 2;
+	public static final int CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger = 2;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -94,7 +97,7 @@ public class MrPongActor2 extends ActorClassBase {
 		Thread.sleep(5000);
 		}catch (InterruptedException e){}
 	}
-	protected void action_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
+	protected void action_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
 		PingPongPort.pong();
 	}
 	
@@ -130,9 +133,9 @@ public class MrPongActor2 extends ActorClassBase {
 				action_TRANS_INITIAL_TO__waitForPing();
 				return STATE_waitForPing;
 			}
-			case CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger:
+			case CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger:
 			{
-				action_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(ifitem);
+				action_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(ifitem);
 				return STATE_waitForPing;
 			}
 		}
@@ -181,7 +184,7 @@ public class MrPongActor2 extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_PingPongPort__ping:
 							{
-								chain = CHAIN_TRANS_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger;
+								chain = CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger;
 								catching_state = STATE_TOP;
 							}
 						break;

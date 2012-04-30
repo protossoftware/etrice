@@ -16,7 +16,9 @@ public class PingPongTop extends ActorClassBase {
 
 	
 	//--------------------- ports
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -32,7 +34,9 @@ public class PingPongTop extends ActorClassBase {
 		// initialize attributes
 
 		// own ports
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -51,8 +55,7 @@ public class PingPongTop extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	//--------------------- no state machine
 	@Override

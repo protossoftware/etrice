@@ -18,7 +18,9 @@ public class a_HFSM extends ActorClassBase {
 	
 	//--------------------- ports
 	protected p_HFSMPort fct = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -36,7 +38,9 @@ public class a_HFSM extends ActorClassBase {
 
 		// own ports
 		fct = new p_HFSMPort(this, "fct", IFITEM_fct, 0, port_addr[IFITEM_fct][0], peer_addr[IFITEM_fct][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -55,8 +59,7 @@ public class a_HFSM extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -68,17 +71,17 @@ public class a_HFSM extends ActorClassBase {
 	public static final int STATE_State4 = 7;
 	
 	/* transition chains */
-	public static final int CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct = 1;
-	public static final int CHAIN_State2_TRANS_State2_TO_tp1_BY_m3fct = 2;
-	public static final int CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3 = 3;
-	public static final int CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4 = 4;
+	public static final int CHAIN_State2_TRANS_tr1_FROM_State1_TO_State2_BY_m2fct = 1;
+	public static final int CHAIN_State2_TRANS_tr2_FROM_State2_TO_tp1_BY_m3fct = 2;
+	public static final int CHAIN_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3 = 3;
+	public static final int CHAIN_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4 = 4;
 	public static final int CHAIN_TRANS_INITIAL_TO__State1 = 5;
-	public static final int CHAIN_TRANS_State1_TO_State2_tp0_BY_m1fct = 6;
-	public static final int CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5 = 7;
-	public static final int CHAIN_TRANS_State2_TO_State4_BY_m4fct = 8;
-	public static final int CHAIN_TRANS_tp0_TO_State1_BY_resetfct = 9;
-	public static final int CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6 = 10;
-	public static final int CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7 = 11;
+	public static final int CHAIN_TRANS_tr1_FROM_State1_TO_State2_tp0_BY_m1fct = 6;
+	public static final int CHAIN_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct = 7;
+	public static final int CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct = 8;
+	public static final int CHAIN_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5 = 9;
+	public static final int CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6 = 10;
+	public static final int CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7 = 11;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -155,40 +158,40 @@ public class a_HFSM extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__State1() {
 		fct.init_action();
 	}
-	protected void action_TRANS_State1_TO_State2_tp0_BY_m1fct(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr1_FROM_State1_TO_State2_tp0_BY_m1fct(InterfaceItemBase ifitem) {
 		fct.s1_m1_s2_action();
 	}
-	protected void action_TRANS_State2_tp1_TO_State3(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr2_FROM_State2_tp1_TO_State3(InterfaceItemBase ifitem) {
 		fct.s2__s3_action();
 	}
-	protected void action_TRANS_State2_TO_State4_BY_m4fct(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct(InterfaceItemBase ifitem) {
 		fct.s2_m4_s4_action();
 	}
-	protected void action_TRANS_tp0_TO_State1_BY_resetfct(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct(InterfaceItemBase ifitem) {
 		fct.top_reset_s2_action();
 	}
-	protected void action_TRANS_State2_TO_State2_BY_m7fct_tr5(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5(InterfaceItemBase ifitem) {
 		fct.s2_m7_s2_action();
 	}
-	protected void action_TRANS_tp1_TO_tp1_BY_m8fct_tr6(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6(InterfaceItemBase ifitem) {
 		fct.top_s8_top_action();
 	}
-	protected void action_TRANS_tp2_TO_tp2_BY_m9fct_tr7(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7(InterfaceItemBase ifitem) {
 		fct.top_s9_top_action();
 	}
-	protected void action_State2_TRANS_tp0_TO_State1(InterfaceItemBase ifitem) {
+	protected void action_State2_TRANS_tr0_FROM_tp0_TO_State1(InterfaceItemBase ifitem) {
 		fct.s2_m1_s2s1_action();
 	}
-	protected void action_State2_TRANS_State1_TO_State2_BY_m2fct(InterfaceItemBase ifitem) {
+	protected void action_State2_TRANS_tr1_FROM_State1_TO_State2_BY_m2fct(InterfaceItemBase ifitem) {
 		fct.s2s1_m2_s2s2_action();
 	}
-	protected void action_State2_TRANS_State2_TO_tp1_BY_m3fct(InterfaceItemBase ifitem) {
+	protected void action_State2_TRANS_tr2_FROM_State2_TO_tp1_BY_m3fct(InterfaceItemBase ifitem) {
 		fct.s2s2_m3_action();
 	}
-	protected void action_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3(InterfaceItemBase ifitem) {
+	protected void action_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3(InterfaceItemBase ifitem) {
 		fct.s2_m5_s2_action();
 	}
-	protected void action_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4(InterfaceItemBase ifitem) {
+	protected void action_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4(InterfaceItemBase ifitem) {
 		fct.s2_m6_s2_action();
 	}
 	
@@ -250,58 +253,58 @@ public class a_HFSM extends ActorClassBase {
 				action_TRANS_INITIAL_TO__State1();
 				return STATE_State1;
 			}
-			case CHAIN_TRANS_State1_TO_State2_tp0_BY_m1fct:
+			case CHAIN_TRANS_tr1_FROM_State1_TO_State2_tp0_BY_m1fct:
 			{
-				action_TRANS_State1_TO_State2_tp0_BY_m1fct(ifitem);
+				action_TRANS_tr1_FROM_State1_TO_State2_tp0_BY_m1fct(ifitem);
 				entry_State2();
-				action_State2_TRANS_tp0_TO_State1(ifitem);
+				action_State2_TRANS_tr0_FROM_tp0_TO_State1(ifitem);
 				return STATE_State2_State1;
 			}
-			case CHAIN_TRANS_State2_TO_State4_BY_m4fct:
+			case CHAIN_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct:
 			{
-				action_TRANS_State2_TO_State4_BY_m4fct(ifitem);
+				action_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct(ifitem);
 				return STATE_State4;
 			}
-			case CHAIN_TRANS_tp0_TO_State1_BY_resetfct:
+			case CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct:
 			{
-				action_TRANS_tp0_TO_State1_BY_resetfct(ifitem);
+				action_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct(ifitem);
 				return STATE_State1;
 			}
-			case CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5:
+			case CHAIN_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5:
 			{
-				action_TRANS_State2_TO_State2_BY_m7fct_tr5(ifitem);
+				action_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5(ifitem);
 				return STATE_State2;
 			}
-			case CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6:
+			case CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6:
 			{
-				action_TRANS_tp1_TO_tp1_BY_m8fct_tr6(ifitem);
+				action_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6(ifitem);
 				return STATE_TOP;
 			}
-			case CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7:
+			case CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7:
 			{
-				action_TRANS_tp2_TO_tp2_BY_m9fct_tr7(ifitem);
+				action_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7(ifitem);
 				return STATE_TOP;
 			}
-			case CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct:
+			case CHAIN_State2_TRANS_tr1_FROM_State1_TO_State2_BY_m2fct:
 			{
-				action_State2_TRANS_State1_TO_State2_BY_m2fct(ifitem);
+				action_State2_TRANS_tr1_FROM_State1_TO_State2_BY_m2fct(ifitem);
 				return STATE_State2_State2;
 			}
-			case CHAIN_State2_TRANS_State2_TO_tp1_BY_m3fct:
+			case CHAIN_State2_TRANS_tr2_FROM_State2_TO_tp1_BY_m3fct:
 			{
-				action_State2_TRANS_State2_TO_tp1_BY_m3fct(ifitem);
+				action_State2_TRANS_tr2_FROM_State2_TO_tp1_BY_m3fct(ifitem);
 				exit_State2();
-				action_TRANS_State2_tp1_TO_State3(ifitem);
+				action_TRANS_tr2_FROM_State2_tp1_TO_State3(ifitem);
 				return STATE_State3;
 			}
-			case CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3:
+			case CHAIN_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3:
 			{
-				action_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3(ifitem);
+				action_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3(ifitem);
 				return STATE_State2;
 			}
-			case CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4:
+			case CHAIN_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4:
 			{
-				action_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4(ifitem);
+				action_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4(ifitem);
 				return STATE_State2;
 			}
 		}
@@ -373,26 +376,26 @@ public class a_HFSM extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_fct__m1:
 							{
-								chain = CHAIN_TRANS_State1_TO_State2_tp0_BY_m1fct;
+								chain = CHAIN_TRANS_tr1_FROM_State1_TO_State2_tp0_BY_m1fct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__reset:
 							{
-								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								chain = CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m8:
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m9:
 							{
-								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								chain = CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -404,20 +407,20 @@ public class a_HFSM extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_fct__m2:
 							{
-								chain = CHAIN_State2_TRANS_State1_TO_State2_BY_m2fct;
+								chain = CHAIN_State2_TRANS_tr1_FROM_State1_TO_State2_BY_m2fct;
 								catching_state = STATE_State2;
 							}
 						break;
 						case TRIG_fct__m5:
 							{
-								chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
+								chain = CHAIN_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3;
 								catching_state = STATE_State2;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m6:
 							{
-								chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
+								chain = CHAIN_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4;
 								catching_state = STATE_State2;
 								is_handler = true;
 								skip_entry = true;
@@ -425,32 +428,32 @@ public class a_HFSM extends ActorClassBase {
 						break;
 						case TRIG_fct__m4:
 							{
-								chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
+								chain = CHAIN_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m7:
 							{
-								chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__reset:
 							{
-								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								chain = CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m8:
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m9:
 							{
-								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								chain = CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -462,20 +465,20 @@ public class a_HFSM extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_fct__m3:
 							{
-								chain = CHAIN_State2_TRANS_State2_TO_tp1_BY_m3fct;
+								chain = CHAIN_State2_TRANS_tr2_FROM_State2_TO_tp1_BY_m3fct;
 								catching_state = STATE_State2;
 							}
 						break;
 						case TRIG_fct__m5:
 							{
-								chain = CHAIN_State2_TRANS_tp3_TO_tp3_BY_m5fct_tr3;
+								chain = CHAIN_State2_TRANS_tr3_FROM_tp3_TO_tp3_BY_m5fct_tr3;
 								catching_state = STATE_State2;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m6:
 							{
-								chain = CHAIN_State2_TRANS_tp4_TO_tp4_BY_m6fct_tr4;
+								chain = CHAIN_State2_TRANS_tr4_FROM_tp4_TO_tp4_BY_m6fct_tr4;
 								catching_state = STATE_State2;
 								is_handler = true;
 								skip_entry = true;
@@ -483,32 +486,32 @@ public class a_HFSM extends ActorClassBase {
 						break;
 						case TRIG_fct__m4:
 							{
-								chain = CHAIN_TRANS_State2_TO_State4_BY_m4fct;
+								chain = CHAIN_TRANS_tr3_FROM_State2_TO_State4_BY_m4fct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m7:
 							{
-								chain = CHAIN_TRANS_State2_TO_State2_BY_m7fct_tr5;
+								chain = CHAIN_TRANS_tr5_FROM_State2_TO_State2_BY_m7fct_tr5;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__reset:
 							{
-								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								chain = CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m8:
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m9:
 							{
-								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								chain = CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -520,20 +523,20 @@ public class a_HFSM extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_fct__reset:
 							{
-								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								chain = CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m8:
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m9:
 							{
-								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								chain = CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;
@@ -545,20 +548,20 @@ public class a_HFSM extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_fct__reset:
 							{
-								chain = CHAIN_TRANS_tp0_TO_State1_BY_resetfct;
+								chain = CHAIN_TRANS_tr4_FROM_tp0_TO_State1_BY_resetfct;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_fct__m8:
 							{
-								chain = CHAIN_TRANS_tp1_TO_tp1_BY_m8fct_tr6;
+								chain = CHAIN_TRANS_tr6_FROM_tp1_TO_tp1_BY_m8fct_tr6;
 								catching_state = STATE_TOP;
 								skip_entry = true;
 							}
 						break;
 						case TRIG_fct__m9:
 							{
-								chain = CHAIN_TRANS_tp2_TO_tp2_BY_m9fct_tr7;
+								chain = CHAIN_TRANS_tr7_FROM_tp2_TO_tp2_BY_m9fct_tr7;
 								catching_state = STATE_TOP;
 								is_handler = true;
 								skip_entry = true;

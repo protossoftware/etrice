@@ -21,7 +21,9 @@ public class a_HFSM_Tester extends ActorClassBase {
 	
 	//--------------------- ports
 	protected p_HFSMConjPort testee = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -39,7 +41,9 @@ public class a_HFSM_Tester extends ActorClassBase {
 
 		// own ports
 		testee = new p_HFSMConjPort(this, "testee", IFITEM_testee, 0, port_addr[IFITEM_testee][0], peer_addr[IFITEM_testee][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -58,8 +62,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -74,13 +77,13 @@ public class a_HFSM_Tester extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__State1 = 1;
-	public static final int CHAIN_TRANS_State1_TO_State2_BY_init_actiontestee = 2;
-	public static final int CHAIN_TRANS_State2_TO_State3_BY_s1_entrytestee = 3;
-	public static final int CHAIN_TRANS_State3_TO_State4_BY_s1_exittestee = 4;
-	public static final int CHAIN_TRANS_State4_TO_State5_BY_s1_m1_s2_actiontestee = 5;
-	public static final int CHAIN_TRANS_State5_TO_State6_BY_s2_entrytestee = 6;
-	public static final int CHAIN_TRANS_State6_TO_State7_BY_s2_m1_s2s1_actiontestee = 7;
-	public static final int CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee = 8;
+	public static final int CHAIN_TRANS_tr1_FROM_State1_TO_State2_BY_init_actiontestee = 2;
+	public static final int CHAIN_TRANS_tr2_FROM_State2_TO_State3_BY_s1_entrytestee = 3;
+	public static final int CHAIN_TRANS_tr3_FROM_State3_TO_State4_BY_s1_exittestee = 4;
+	public static final int CHAIN_TRANS_tr4_FROM_State4_TO_State5_BY_s1_m1_s2_actiontestee = 5;
+	public static final int CHAIN_TRANS_tr5_FROM_State5_TO_State6_BY_s2_entrytestee = 6;
+	public static final int CHAIN_TRANS_tr6_FROM_State6_TO_State7_BY_s2_m1_s2s1_actiontestee = 7;
+	public static final int CHAIN_TRANS_tr7_FROM_State7_TO_TestPass_BY_s2s1_entrytestee = 8;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -120,7 +123,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 	}
 	
 	/* Action Codes */
-	protected void action_TRANS_State2_TO_State3_BY_s1_entrytestee(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr2_FROM_State2_TO_State3_BY_s1_entrytestee(InterfaceItemBase ifitem) {
 		testee.m1();
 	}
 	
@@ -183,32 +186,32 @@ public class a_HFSM_Tester extends ActorClassBase {
 			{
 				return STATE_State1;
 			}
-			case CHAIN_TRANS_State1_TO_State2_BY_init_actiontestee:
+			case CHAIN_TRANS_tr1_FROM_State1_TO_State2_BY_init_actiontestee:
 			{
 				return STATE_State2;
 			}
-			case CHAIN_TRANS_State2_TO_State3_BY_s1_entrytestee:
+			case CHAIN_TRANS_tr2_FROM_State2_TO_State3_BY_s1_entrytestee:
 			{
-				action_TRANS_State2_TO_State3_BY_s1_entrytestee(ifitem);
+				action_TRANS_tr2_FROM_State2_TO_State3_BY_s1_entrytestee(ifitem);
 				return STATE_State3;
 			}
-			case CHAIN_TRANS_State3_TO_State4_BY_s1_exittestee:
+			case CHAIN_TRANS_tr3_FROM_State3_TO_State4_BY_s1_exittestee:
 			{
 				return STATE_State4;
 			}
-			case CHAIN_TRANS_State4_TO_State5_BY_s1_m1_s2_actiontestee:
+			case CHAIN_TRANS_tr4_FROM_State4_TO_State5_BY_s1_m1_s2_actiontestee:
 			{
 				return STATE_State5;
 			}
-			case CHAIN_TRANS_State5_TO_State6_BY_s2_entrytestee:
+			case CHAIN_TRANS_tr5_FROM_State5_TO_State6_BY_s2_entrytestee:
 			{
 				return STATE_State6;
 			}
-			case CHAIN_TRANS_State6_TO_State7_BY_s2_m1_s2s1_actiontestee:
+			case CHAIN_TRANS_tr6_FROM_State6_TO_State7_BY_s2_m1_s2s1_actiontestee:
 			{
 				return STATE_State7;
 			}
-			case CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee:
+			case CHAIN_TRANS_tr7_FROM_State7_TO_TestPass_BY_s2s1_entrytestee:
 			{
 				return STATE_TestPass;
 			}
@@ -280,7 +283,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__init_action:
 							{
-								chain = CHAIN_TRANS_State1_TO_State2_BY_init_actiontestee;
+								chain = CHAIN_TRANS_tr1_FROM_State1_TO_State2_BY_init_actiontestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -290,7 +293,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s1_entry:
 							{
-								chain = CHAIN_TRANS_State2_TO_State3_BY_s1_entrytestee;
+								chain = CHAIN_TRANS_tr2_FROM_State2_TO_State3_BY_s1_entrytestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -300,7 +303,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s1_exit:
 							{
-								chain = CHAIN_TRANS_State3_TO_State4_BY_s1_exittestee;
+								chain = CHAIN_TRANS_tr3_FROM_State3_TO_State4_BY_s1_exittestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -310,7 +313,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s1_m1_s2_action:
 							{
-								chain = CHAIN_TRANS_State4_TO_State5_BY_s1_m1_s2_actiontestee;
+								chain = CHAIN_TRANS_tr4_FROM_State4_TO_State5_BY_s1_m1_s2_actiontestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -320,7 +323,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s2_entry:
 							{
-								chain = CHAIN_TRANS_State5_TO_State6_BY_s2_entrytestee;
+								chain = CHAIN_TRANS_tr5_FROM_State5_TO_State6_BY_s2_entrytestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -330,7 +333,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s2_m1_s2s1_action:
 							{
-								chain = CHAIN_TRANS_State6_TO_State7_BY_s2_m1_s2s1_actiontestee;
+								chain = CHAIN_TRANS_tr6_FROM_State6_TO_State7_BY_s2_m1_s2s1_actiontestee;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -340,7 +343,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_testee__s2s1_entry:
 							{
-								chain = CHAIN_TRANS_State7_TO_TestPass_BY_s2s1_entrytestee;
+								chain = CHAIN_TRANS_tr7_FROM_State7_TO_TestPass_BY_s2s1_entrytestee;
 								catching_state = STATE_TOP;
 							}
 						break;

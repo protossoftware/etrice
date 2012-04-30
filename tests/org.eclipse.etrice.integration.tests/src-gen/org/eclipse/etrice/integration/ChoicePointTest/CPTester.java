@@ -18,7 +18,9 @@ public class CPTester extends ActorClassBase {
 	
 	//--------------------- ports
 	protected TestProtocolConjPort TestPort1 = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -36,7 +38,9 @@ public class CPTester extends ActorClassBase {
 
 		// own ports
 		TestPort1 = new TestProtocolConjPort(this, "TestPort1", IFITEM_TestPort1, 0, port_addr[IFITEM_TestPort1][0], peer_addr[IFITEM_TestPort1][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -55,8 +59,7 @@ public class CPTester extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
