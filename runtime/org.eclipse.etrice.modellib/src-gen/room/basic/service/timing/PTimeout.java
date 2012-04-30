@@ -251,8 +251,10 @@ public class PTimeout {
 				
 							if (active) {
 								active = false;
+								TimerData td = new TimerData();
+								td.setId(currentId);
 								getPeerMsgReceiver().receive(
-										new EventWithDataMessage(getPeerAddress(), IN_Kill, currentId));
+										new EventWithDataMessage(getPeerAddress(), IN_Kill, td));
 							}
 		}
 		private void internalStart(TimerData td) {

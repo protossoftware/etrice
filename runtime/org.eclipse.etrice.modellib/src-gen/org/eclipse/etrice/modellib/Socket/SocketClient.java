@@ -18,7 +18,9 @@ public class SocketClient extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PSocketPort fct = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -36,7 +38,9 @@ public class SocketClient extends ActorClassBase {
 
 		// own ports
 		fct = new PSocketPort(this, "fct", IFITEM_fct, 0, port_addr[IFITEM_fct][0], peer_addr[IFITEM_fct][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
 	
@@ -55,8 +59,7 @@ public class SocketClient extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	//--------------------- no state machine
 	@Override
