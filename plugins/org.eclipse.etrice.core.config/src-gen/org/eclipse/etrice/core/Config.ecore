@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="config"
+    nsURI="http://www.eclipse.org/etrice/core/Config" nsPrefix="config">
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClassConfigs" upperBound="-1"
+        eType="#//ActorClassConfig" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actorInstanceConfigs" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorClassConfig">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+  </eClassifiers>
+</ecore:EPackage>

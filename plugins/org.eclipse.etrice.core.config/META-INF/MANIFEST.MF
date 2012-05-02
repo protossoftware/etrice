@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.etrice.core.config
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Name: eTrice Config DSL
+Bundle-Vendor: eTrice (Incubation)
+Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.config; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=reexport,
@@ -12,7 +12,27 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ org.eclipse.etrice.core.room;bundle-version="0.2.0"
 Import-Package: org.apache.log4j,
- org.apache.commons.logging
+ org.apache.commons.logging,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtend2.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.etrice.core,
+ org.eclipse.etrice.core.services,
+ org.eclipse.etrice.core.config,
+ org.eclipse.etrice.core.config.impl,
+ org.eclipse.etrice.core.config.util,
+ org.eclipse.etrice.core.serializer,
+ org.eclipse.etrice.core.parser.antlr,
+ org.eclipse.etrice.core.parser.antlr.internal,
+ org.eclipse.etrice.core.validation,
+ org.eclipse.etrice.core.scoping,
+ org.eclipse.etrice.core.generator,
+ org.eclipse.etrice.core.formatting
