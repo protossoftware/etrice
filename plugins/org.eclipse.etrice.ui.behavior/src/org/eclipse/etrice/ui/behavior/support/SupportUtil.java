@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -377,6 +378,35 @@ public class SupportUtil {
 			if (bo instanceof State)
 				getAnchors((State) bo, childShape, node2anchor);
 		}
+	}
+
+	public static ContainerShape addStateGraph(StateGraphContext ctx, Diagram diagram, IFeatureProvider fp) {
+		AddContext addContext = new AddContext();
+		addContext.setNewObject(ctx.getStateGraph());
+		addContext.setTargetContainer(diagram);
+		addContext.setX(StateGraphSupport.MARGIN);
+		addContext.setY(StateGraphSupport.MARGIN);
+		
+		ContainerShape sgShape = (ContainerShape) fp.addIfPossible(addContext);
+		if (sgShape==null)
+			return null;
+		
+		final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
+		
+		addInitialPointIff(ctx.getTransitions(), sgShape, fp, node2anchor);
+		addTransitionPoints(ctx.getTrPoints(), sgShape, fp, node2anchor);
+		addStates(ctx.getStates(), sgShape, fp, node2anchor);
+		addChoicePoints(ctx.getChPoints(), sgShape, fp, node2anchor);
+
+		for (StateGraphContext sub : ctx.getChildren()) {
+			addStateGraph(sub, diagram, fp);
+		}
+		
+		getSubTpAnchors(sgShape, node2anchor);
+		
+		addTransitions(ctx.getTransitions(), sgShape, fp, node2anchor);
+		
+		return sgShape;
 	}
 
 	public static void addTransitions(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,

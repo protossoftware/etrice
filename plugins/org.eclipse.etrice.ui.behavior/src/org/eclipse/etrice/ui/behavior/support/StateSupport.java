@@ -563,7 +563,7 @@ public class StateSupport {
 				State s = (State) bo;
 				ActorClass mainAc = SupportUtil.getActorClass(getDiagram());
 				
-				// check if ref still owned/inherited anymore
+				// check if state still owned/inherited
 				{
 					ActorClass ac = RoomHelpers.getActorClass(s);
 					ActorClass tmp = mainAc;
@@ -576,7 +576,7 @@ public class StateSupport {
 					while (!found && tmp!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("Ref not inherited anymore");
+						return Reason.createTrueReason("State not inherited anymore");
 				}
 				
 				// check sub structure hint

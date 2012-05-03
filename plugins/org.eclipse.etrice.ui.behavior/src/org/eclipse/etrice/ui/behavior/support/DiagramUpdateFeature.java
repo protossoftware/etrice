@@ -16,12 +16,14 @@ import java.util.ArrayList;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
+import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
+import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.Reason;
@@ -86,8 +88,26 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public boolean update(IUpdateContext context) {
-		IReason needed = updateNeeded(context);
-		return false;
+		ActorClass ac = SupportUtil.getActorClass(getDiagram());
+		StateGraphContext tree = StateGraphContext.createContextTree(ac);
+
+		usedShapes.clear();
+		
+		boolean changed = update(tree);
+		
+		// remove unused state graph shapes
+		for (Shape sgshape : getDiagram().getChildren()) {
+			if (!usedShapes.contains(sgshape)) {
+				IRemoveContext rc = new RemoveContext(sgshape);
+				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
+				if (removeFeature != null) {
+					removeFeature.remove(rc);
+					changed = true;
+				}
+			}
+		}
+		
+		return changed;
 	}
 
 	/**
@@ -98,53 +118,81 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		StateGraph sg = ctx.getStateGraph();
 		ContainerShape cont = findStateGraphContainer(sg);
 		if (cont==null)
-			return Reason.createTrueReason();
+			return Reason.createTrueReason("sub graph missing");
 		
 		usedShapes.add(cont);
 		
-		// check contents
-		IReason needed = itemsNeeded(cont, ctx.getStates());
-		if (needed.toBoolean())
-			return needed;
-		needed = itemsNeeded(cont, ctx.getChPoints());
-		if (needed.toBoolean())
-			return needed;
-		needed = itemsNeeded(cont, ctx.getTrPoints());
-		if (needed.toBoolean())
-			return needed;
+		StateGraphUpdateContext context = new StateGraphUpdateContext(cont, ctx);
+		IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
+		if (updateFeature!=null && updateFeature.canUpdate(context)) {
+			IReason needUpdate = updateFeature.updateNeeded(context);
+			if (needUpdate.toBoolean())
+				return needUpdate;
+		}
+		
+		for (Shape child : cont.getChildren()) {
+			UpdateContext uf = new UpdateContext(child);
+			updateFeature = getFeatureProvider().getUpdateFeature(uf);
+			if (updateFeature!=null && updateFeature.canUpdate(uf)) {
+				IReason needUpdate = updateFeature.updateNeeded(uf);
+				if (needUpdate.toBoolean())
+					return needUpdate;
+			}
+		}
 		
 		// recursion
 		for (StateGraphContext child : ctx.getChildren()) {
-			needed = updateNeeded(child);
-			if (needed.toBoolean())
-				return needed;
+			IReason needUpdate = updateNeeded(child);
+			if (needUpdate.toBoolean())
+				return needUpdate;
 		}
 		
 		return Reason.createFalseReason();
 	}
 
 	/**
-	 * @param cont
-	 * @param items
+	 * @param ctx
+	 * @return
 	 */
-	private IReason itemsNeeded(ContainerShape cont, ArrayList<? extends StateGraphItem> items) {
-		for (StateGraphItem item : items) {
-			ContainerShape child = findStateGraphItemContainer(item, cont);
-			if (child==null)
-				return Reason.createTrueReason();
-
-			usedShapes.add(child);
-
-			UpdateContext context = new UpdateContext(child);
+	private boolean update(StateGraphContext ctx) {
+		boolean changed = false;
+		
+		StateGraph sg = ctx.getStateGraph();
+		ContainerShape cont = findStateGraphContainer(sg);
+		if (cont==null) {
+			// create
+			cont = SupportUtil.addStateGraph(ctx, getDiagram(), getFeatureProvider());
+			changed = true;
+			usedShapes.add(cont);
+		}
+		else {
+			// update
+			StateGraphUpdateContext context = new StateGraphUpdateContext(cont, ctx);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
 			if (updateFeature!=null && updateFeature.canUpdate(context)) {
-				IReason needed = updateFeature.updateNeeded(context);
-				if (needed.toBoolean())
-					return needed;
+				changed = updateFeature.update(context);
+			}
+			usedShapes.add(cont);
+			
+			// need a copy since original list may be modified by removal of shapes
+			ArrayList<Shape> children = new ArrayList<Shape>(cont.getChildren());
+			
+			for (Shape child : children) {
+				UpdateContext uf = new UpdateContext(child);
+				updateFeature = getFeatureProvider().getUpdateFeature(uf);
+				if (updateFeature!=null && updateFeature.canUpdate(uf)) {
+					changed = updateFeature.update(uf);
+				}
 			}
 		}
 		
-		return Reason.createFalseReason();
+		// recursion
+		for (StateGraphContext child : ctx.getChildren()) {
+			if (update(child))
+				changed = true;
+		}
+		
+		return changed;
 	}
 
 	/**
@@ -155,19 +203,6 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		for (Shape child : getDiagram().getChildren()) {
 			Object bo = getBusinessObjectForPictogramElement(child);
 			if (bo==sg)
-				return (ContainerShape) child;
-		}
-		return null;
-	}
-
-	/**
-	 * @param stateGraph
-	 * @return
-	 */
-	private ContainerShape findStateGraphItemContainer(StateGraphItem item, ContainerShape cont) {
-		for (Shape child : cont.getChildren()) {
-			Object bo = getBusinessObjectForPictogramElement(child);
-			if (bo==item)
 				return (ContainerShape) child;
 		}
 		return null;

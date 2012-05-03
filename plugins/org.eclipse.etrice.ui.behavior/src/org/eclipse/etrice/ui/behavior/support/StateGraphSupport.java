@@ -18,14 +18,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -44,7 +43,6 @@ import org.eclipse.graphiti.features.context.ILayoutContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
@@ -309,55 +307,59 @@ public class StateGraphSupport {
 				String reason = "";
 				int missing = 0;
 				
-				// check for states added in model not present in diagram (including inherited)
-				{
-					List<State> expectedStates = RoomHelpers.getAllStates(sg);
-					List<State> presentStates = SupportUtil.getStates(shape, fp);
-					for (State state : expectedStates) {
-						if (!presentStates.contains(state))
-							++missing;
+				if (context instanceof StateGraphUpdateContext) {
+					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
+					
+					// check for states added in model not present in diagram (including inherited)
+					{
+						List<State> expectedStates = ctx.getStates();
+						List<State> presentStates = SupportUtil.getStates(shape, fp);
+						for (State state : expectedStates) {
+							if (!presentStates.contains(state))
+								++missing;
+						}
+						if (missing>0)
+							reason += missing+" missing states\n";
 					}
-					if (missing>0)
-						reason += missing+" missing states\n";
-				}
-				
-				// check for transition points added in model not present in diagram (including inherited)
-				{
-					missing = 0;
-					List<TrPoint> expectedTrPoints = RoomHelpers.getAllTrPoints(sg);
-					List<TrPoint> presentTrPoints = SupportUtil.getTrPoints(sg, shape, fp);
-					for (TrPoint tp : expectedTrPoints) {
-						if (!presentTrPoints.contains(tp))
-							++missing;
+					
+					// check for transition points added in model not present in diagram (including inherited)
+					{
+						missing = 0;
+						List<TrPoint> expectedTrPoints = ctx.getTrPoints();
+						List<TrPoint> presentTrPoints = SupportUtil.getTrPoints(sg, shape, fp);
+						for (TrPoint tp : expectedTrPoints) {
+							if (!presentTrPoints.contains(tp))
+								++missing;
+						}
+						if (missing>0)
+							reason += missing+" missing transition points\n";
 					}
-					if (missing>0)
-						reason += missing+" missing transition points\n";
-				}
-				
-				// check for choice points added in model not present in diagram (including inherited)
-				{
-					missing = 0;
-					List<ChoicePoint> expectedCPs = RoomHelpers.getAllChoicePoints(sg);
-					List<ChoicePoint> presentCPs = SupportUtil.getChoicePoints(shape, fp);
-					for (ChoicePoint cp : expectedCPs) {
-						if (!presentCPs.contains(cp))
-							++missing;
+					
+					// check for choice points added in model not present in diagram (including inherited)
+					{
+						missing = 0;
+						List<ChoicePoint> expectedCPs = ctx.getChPoints();
+						List<ChoicePoint> presentCPs = SupportUtil.getChoicePoints(shape, fp);
+						for (ChoicePoint cp : expectedCPs) {
+							if (!presentCPs.contains(cp))
+								++missing;
+						}
+						if (missing>0)
+							reason += missing+" missing choice points\n";
 					}
-					if (missing>0)
-						reason += missing+" missing choice points\n";
-				}
-
-				// check for bindings added in model not present in diagram (including inherited)
-				{
-					missing = 0;
-					List<Transition> expectedBindings = RoomHelpers.getAllTransitions(sg);
-					List<Transition> presentBindings = SupportUtil.getTransitions(getDiagram(), fp);
-					for (Transition binding : expectedBindings) {
-						if (!presentBindings.contains(binding))
-							++missing;
+					
+					// check for transitions added in model not present in diagram (including inherited)
+					{
+						missing = 0;
+						List<Transition> expectedTrans = ctx.getTransitions();
+						List<Transition> presentTrans = SupportUtil.getTransitions(getDiagram(), fp);
+						for (Transition trans : expectedTrans) {
+							if (!presentTrans.contains(trans))
+								++missing;
+						}
+						if (missing>0)
+							reason += missing+" missing transitions\n";
 					}
-					if (missing>0)
-						reason += missing+" missing transitions\n";
 				}
 
 				// check state path
@@ -377,11 +379,10 @@ public class StateGraphSupport {
 
 			@Override
 			public boolean update(IUpdateContext context) {
-				if (context!=null)
-					return false;
-				
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
+				
+				/*
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					IRemoveContext rc = new RemoveContext(containerShape);
 					IFeatureProvider featureProvider = getFeatureProvider();
@@ -392,10 +393,15 @@ public class StateGraphSupport {
 					EcoreUtil.delete((EObject) bo);
 					return true;
 				}
-
+				*/
 				StateGraph sg = (StateGraph) bo;
 				ContainerShape shape = (ContainerShape) context.getPictogramElement();
-				addMissingItems(sg, shape, fp);
+				
+				if (context instanceof StateGraphUpdateContext) {
+					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
+
+					addMissingItems(sg, ctx, shape, fp);
+				}
 				
 				if (!shape.getChildren().isEmpty()) {
 					Shape labelShape = shape.getChildren().get(0);
@@ -558,14 +564,14 @@ public class StateGraphSupport {
 			return new ICustomFeature[] { new GoUpFeature(fp) };
 		}
 		
-		private static void addMissingItems(StateGraph sg, ContainerShape shape, IFeatureProvider fp) {
+		private static void addMissingItems(StateGraph sg, StateGraphContext ctx, ContainerShape shape, IFeatureProvider fp) {
 
 			HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 			
 			// states
 			{
 				List<State> present = SupportUtil.getStates(shape, fp, node2anchor);
-				List<State> expected = RoomHelpers.getAllStates(sg);
+				List<State> expected = ctx.getStates();
 				List<State> items = new ArrayList<State>();
 				for (State item : expected) {
 					if (!present.contains(item))
@@ -577,7 +583,7 @@ public class StateGraphSupport {
 			// transition points
 			{
 				List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, node2anchor);
-				List<TrPoint> expected = RoomHelpers.getAllTrPoints(sg);
+				List<TrPoint> expected = ctx.getTrPoints();
 				List<TrPoint> items = new ArrayList<TrPoint>();
 				for (TrPoint item : expected) {
 					if (!present.contains(item))
@@ -589,7 +595,7 @@ public class StateGraphSupport {
 			// choice points
 			{
 				List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, node2anchor);
-				List<ChoicePoint> expected = RoomHelpers.getAllChoicePoints(sg);
+				List<ChoicePoint> expected = ctx.getChPoints();
 				List<ChoicePoint> items = new ArrayList<ChoicePoint>();
 				for (ChoicePoint item : expected) {
 					if (!present.contains(item))
@@ -603,7 +609,7 @@ public class StateGraphSupport {
 			// transitions
 			{
 				List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
-				List<Transition> expected = RoomHelpers.getAllTransitions(sg);
+				List<Transition> expected = ctx.getTransitions();
 				List<Transition> items = new ArrayList<Transition>();
 				for (Transition trans : expected) {
 					if (!present.contains(trans))

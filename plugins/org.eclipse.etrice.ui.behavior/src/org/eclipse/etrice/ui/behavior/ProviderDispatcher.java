@@ -82,7 +82,7 @@ public class ProviderDispatcher {
 			
 			if (theEObject.eIsProxy()) {
         		if (RoomFragmentProvider.isState(theEObject))
-        			return stateGraphSupport.getFeatureProvider();
+        			return stateSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isChoicePoint(theEObject))
