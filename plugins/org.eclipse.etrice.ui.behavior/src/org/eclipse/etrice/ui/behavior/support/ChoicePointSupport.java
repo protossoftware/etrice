@@ -375,7 +375,7 @@ public class ChoicePointSupport {
 				}
 				ChoicePoint cp = (ChoicePoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(cp, containerShape);
+				boolean inherited = SupportUtil.isInherited(cp, (ContainerShape)containerShape.eContainer());
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateFigure(cp, containerShape, dark, manageColor(BRIGHT_COLOR));

@@ -622,7 +622,7 @@ public class TrPointSupport {
 				}
 				TrPoint tp = (TrPoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(tp, containerShape);
+				boolean inherited = SupportUtil.isInherited(tp, (ContainerShape)containerShape.eContainer());
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));

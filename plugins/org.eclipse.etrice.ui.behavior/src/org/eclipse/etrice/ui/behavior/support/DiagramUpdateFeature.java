@@ -96,7 +96,8 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		boolean changed = update(tree);
 		
 		// remove unused state graph shapes
-		for (Shape sgshape : getDiagram().getChildren()) {
+		ArrayList<Shape> children = new ArrayList<Shape>(getDiagram().getChildren());
+		for (Shape sgshape : children) {
 			if (!usedShapes.contains(sgshape)) {
 				IRemoveContext rc = new RemoveContext(sgshape);
 				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);

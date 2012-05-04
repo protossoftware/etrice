@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.HashMap;
+
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -500,22 +502,40 @@ public class StateSupport {
 					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 					if (inherited) {
 						ActorClass ac = SupportUtil.getActorClass(getDiagram());
+						
+						HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
+						for (State st : ac.getStateMachine().getStates()) {
+							if (st instanceof RefinedState)
+								target2rs.put(((RefinedState) st).getTarget(), (RefinedState) st);
+						}
+						
 						RefinedState rs = null;
 						
 						// do we already have a RefinedState pointing to s?
-						for (State st : ac.getStateMachine().getStates()) {
-							if (st instanceof RefinedState)
-								if (((RefinedState) st).getTarget()==s) {
-									rs = (RefinedState) st;
+						if (target2rs.containsKey(s)) {
+							rs = target2rs.get(s);
+						}
+						else {
+							// we have to create one and place it in the best fitting context
+							StateGraph sg = null;
+							State parent = s;
+							while (s.eContainer().eContainer() instanceof State) {
+								parent = (State) s.eContainer().eContainer();
+								if (target2rs.containsKey(parent)) {
+									RefinedState bestFitting = target2rs.get(parent);
+									if (bestFitting.getSubgraph()==null)
+										bestFitting.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+									sg = bestFitting.getSubgraph();
 									break;
 								}
-						}
-						
-						// if not so create one
-						if (rs==null) {
+							}
+							
+							if (sg==null)
+								sg = ac.getStateMachine();
+							
 							rs = RoomFactory.eINSTANCE.createRefinedState();
 							rs.setTarget(s);
-							ac.getStateMachine().getStates().add(rs);
+							sg.getStates().add(rs);
 						}
 						s = rs;
 					}
