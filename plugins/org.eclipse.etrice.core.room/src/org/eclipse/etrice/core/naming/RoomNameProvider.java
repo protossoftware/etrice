@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -56,8 +57,8 @@ import org.eclipse.etrice.core.room.util.RoomSwitch;
 
 public class RoomNameProvider {
 	
-	private static final String TOP_STATE_NAME = "TOP";
-	private static final String PATH_SEP = "_";
+	public static final String TOP_STATE_NAME = "TOP";
+	public static final String PATH_SEP = "_";
 	
 	private static RoomSwitch<String> nameProvider = new RoomSwitch<String>() {
 		public String caseState(State object) { return RoomNameProvider.getStateName(object); }
@@ -194,6 +195,9 @@ public class RoomNameProvider {
 	}
 	
 	public static String getParentPath(StateGraphItem item) {
+		if (item instanceof RefinedState)
+			item = ((RefinedState)item).getTarget();
+		
 		State parent = getParentState(item);
 		if (parent==null)
 			return "";

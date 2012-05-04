@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -45,6 +46,7 @@ import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -845,6 +847,34 @@ public class ValidationUtil {
 						RoomPackage.eINSTANCE.getState_DoCode());
 			}
 		}
+		return Result.ok();
+	}
+	
+	public static Result checkTopLevelRefinedStates(ActorClass ac) {
+		if (ac.getStateMachine()==null)
+			return Result.ok();
+		
+		ArrayList<String> paths = new ArrayList<String>();
+		for (org.eclipse.etrice.core.room.State s : ac.getStateMachine().getStates()) {
+			if (s instanceof RefinedState)
+				paths.add(RoomNameProvider.getFullPath(s));
+		}
+		for (org.eclipse.etrice.core.room.State s : ac.getStateMachine().getStates()) {
+			if (s instanceof RefinedState) {
+				String fullPath = RoomNameProvider.getFullPath(s);
+				for (String path : paths) {
+					if (!fullPath.equals(path) && fullPath.startsWith(path) && fullPath.charAt(path.length())==RoomNameProvider.PATH_SEP.charAt(0)) {
+						int idx = ac.getStateMachine().getStates().indexOf(s);
+						return Result.error(
+								"RefinedState has to be in the context of "+path,
+								ac.getStateMachine(),
+								RoomPackage.Literals.STATE_GRAPH__STATES,
+								idx);
+					}
+				}
+			}
+		}
+
 		return Result.ok();
 	}
 }

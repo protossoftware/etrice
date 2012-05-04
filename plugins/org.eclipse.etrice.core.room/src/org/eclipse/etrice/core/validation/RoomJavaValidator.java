@@ -222,6 +222,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
+	public void checkTopLevelRefinedStates(ActorClass ac) {
+		Result result = ValidationUtil.checkTopLevelRefinedStates(ac);
+		if (!result.isOk())
+			error(result);
+	}
+	
+	@Check
 	public void checkRefinedStateUnique(RefinedState rs) {
 		StateGraph sg = (StateGraph) rs.eContainer();
 		TreeIterator<EObject> it = sg.eAllContents();
