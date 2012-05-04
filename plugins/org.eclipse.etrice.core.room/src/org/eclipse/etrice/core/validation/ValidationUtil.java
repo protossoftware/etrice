@@ -692,15 +692,19 @@ public class ValidationUtil {
 	}
 
 	public static Result isValid(TrPoint tp) {
+		if (!isUniqueName(tp, tp.getName()).isOk())
+			return Result.error("name is not unique", tp, RoomPackage.Literals.TR_POINT__NAME);
+		
 		if (tp instanceof TransitionPoint)
 			return Result.ok();
 		
-		if (tp.eContainer().eContainer() instanceof State)
-			return Result.ok();
+		if (!(tp.eContainer().eContainer() instanceof State)) {
+			StateGraph sg = (StateGraph) tp.eContainer();
+			int idx = sg.getTrPoints().indexOf(tp);
+			return Result.error("entry and exit points forbidden on top level state graph", tp.eContainer(), RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+		}
+		return Result.ok();
 		
-		StateGraph sg = (StateGraph) tp.eContainer();
-		int idx = sg.getTrPoints().indexOf(tp);
-		return Result.error("entry and exit points forbidden on top level state graph", tp.eContainer(), RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 	}
 
 	public static Result isUniqueName(InterfaceItem item) {

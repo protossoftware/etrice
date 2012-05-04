@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -302,6 +303,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		Result result = ValidationUtil.isValid(tp);
 		if (!result.isOk())
 			error(result);
+	}
+	
+	@Check
+	public void checkChoicePoint(ChoicePoint cp) {
+		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
+			error("name is not unique", RoomPackage.Literals.CHOICE_POINT__NAME);
 	}
 	
 	@Check

@@ -176,12 +176,12 @@ public class RoomHelpers {
 			return true;
 		
 		if (ac.getStateMachine()!=null) {
-			for (State s : ac.getStateMachine().getStates()) {
+			for (State s : getAllStateTrees(ac.getStateMachine())) {
 				State predecessor = s;
 				while (predecessor instanceof RefinedState) {
 					predecessor = ((RefinedState) predecessor).getTarget();
 					if (predecessor==state) {
-						// we have a chain form s -> state
+						// we have a chain from s -> state
 						// check this chain
 						predecessor = s;
 						while (predecessor instanceof RefinedState) {
@@ -230,7 +230,7 @@ public class RoomHelpers {
 	 */
 	public static State getTargettingState(State state, ActorClass ac) {
 		State targetting = state;
-		for (State s : ac.getStateMachine().getStates()) {
+		for (State s : getAllStateTrees(ac.getStateMachine())) {
 			State predecessor = s;
 			while (predecessor instanceof RefinedState) {
 				predecessor = ((RefinedState) predecessor).getTarget();
