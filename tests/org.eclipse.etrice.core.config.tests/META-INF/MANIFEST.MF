@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.etrice.core.config.tests
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Name: eTrice Config DSL Tests
+Bundle-Vendor: eTrice (Incubation)
+Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.config.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.etrice.core.config,
