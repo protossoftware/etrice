@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.room.RefableType
 
 
-
 @Singleton
 class ProcedureHelpers {
 
@@ -216,7 +215,7 @@ class ProcedureHelpers {
 				type.type.typeName
 			}
 	}
-
+	
 	/*
 	 * builds comma separated argument list as string from EList<VarDecl> arguments
 	 */
