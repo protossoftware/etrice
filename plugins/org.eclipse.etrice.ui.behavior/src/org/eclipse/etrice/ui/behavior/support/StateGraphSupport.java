@@ -12,8 +12,6 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -57,7 +55,6 @@ import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Font;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
-import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -400,7 +397,7 @@ public class StateGraphSupport {
 				if (context instanceof StateGraphUpdateContext) {
 					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 
-					addMissingItems(sg, ctx, shape, fp);
+					SupportUtil.addMissingItems(sg, ctx, shape, fp);
 				}
 				
 				if (!shape.getChildren().isEmpty()) {
@@ -562,61 +559,6 @@ public class StateGraphSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] { new GoUpFeature(fp) };
-		}
-		
-		private static void addMissingItems(StateGraph sg, StateGraphContext ctx, ContainerShape shape, IFeatureProvider fp) {
-
-			HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
-			
-			// states
-			{
-				List<State> present = SupportUtil.getStates(shape, fp, node2anchor);
-				List<State> expected = ctx.getStates();
-				List<State> items = new ArrayList<State>();
-				for (State item : expected) {
-					if (!present.contains(item))
-						items.add(item);
-				}
-	        	SupportUtil.addStates(items, shape, fp, node2anchor);
-			}
-			
-			// transition points
-			{
-				List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, node2anchor);
-				List<TrPoint> expected = ctx.getTrPoints();
-				List<TrPoint> items = new ArrayList<TrPoint>();
-				for (TrPoint item : expected) {
-					if (!present.contains(item))
-						items.add(item);
-				}
-	        	SupportUtil.addTransitionPoints(items, shape, fp, node2anchor);
-			}
-			
-			// choice points
-			{
-				List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, node2anchor);
-				List<ChoicePoint> expected = ctx.getChPoints();
-				List<ChoicePoint> items = new ArrayList<ChoicePoint>();
-				for (ChoicePoint item : expected) {
-					if (!present.contains(item))
-						items.add(item);
-				}
-	        	SupportUtil.addChoicePoints(items, shape, fp, node2anchor);
-			}
-			
-			SupportUtil.getSubTpAnchors(shape, node2anchor);
-
-			// transitions
-			{
-				List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
-				List<Transition> expected = ctx.getTransitions();
-				List<Transition> items = new ArrayList<Transition>();
-				for (Transition trans : expected) {
-					if (!present.contains(trans))
-						items.add(trans);
-				}
-				SupportUtil.addTransitions(items, shape, fp, node2anchor);
-			}
 		}
 	}
 

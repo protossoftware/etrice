@@ -13,7 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -63,6 +65,13 @@ public class SupportUtil {
 	private static final String TP = "tp:";
 	private static final String CP = "cp:";
 	private static final String SEP = ".";
+	
+	public static EObject getOwnObject(EObject obj, ResourceSet rs) {
+		URI uri = EcoreUtil.getURI(obj);
+		EObject own = rs.getEObject(uri, true);
+		assert(own!=null): "own object must exist";
+		return own;
+	}
 	
 	public static boolean isInherited(StateGraphItem item, ContainerShape cs) {
 		EObject container = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(cs);
@@ -131,29 +140,8 @@ public class SupportUtil {
 	 * @param fp
 	 * @return
 	 */
-	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac,
-			ContainerShape targetContainer, IFeatureProvider fp) {
-
-		State base = (State) sg.eContainer();
-		
-		RefinedState rs = null;
-		for (State s : ac.getStateMachine().getStates()) {
-			if (s instanceof RefinedState)
-				if (((RefinedState) s).getTarget()==base) {
-					rs = (RefinedState) s;
-					break;
-				}
-		}
-		if (rs==null) {
-			// we have to insert a refined state first
-			rs = RoomFactory.eINSTANCE.createRefinedState();
-			rs.setTarget(base);
-			ac.getStateMachine().getStates().add(rs);
-		}
-		
-		// now we create a state graph and change the context
-		sg = RoomFactory.eINSTANCE.createStateGraph();
-		rs.setSubgraph(sg);
+	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac, ContainerShape targetContainer, IFeatureProvider fp) {
+		sg = getRefinedStateSubGraph((State) sg.eContainer(), ac);
 		fp.link(targetContainer, sg);
 		return sg;
 	}
@@ -171,6 +159,51 @@ public class SupportUtil {
 		if (!(RoomHelpers.hasDetailCode(rs.getEntryCode()) || RoomHelpers.hasDetailCode(rs.getExitCode()))) {
 			ac.getStateMachine().getStates().remove(rs);
 		}
+	}
+
+	/**
+	 * @param s
+	 * @param ac
+	 * @return
+	 */
+	public static StateGraph getRefinedStateSubGraph(State s, ActorClass ac) {
+		HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
+		for (State st : ac.getStateMachine().getStates()) {
+			if (st instanceof RefinedState)
+				target2rs.put(((RefinedState) st).getTarget(), (RefinedState) st);
+		}
+		
+		RefinedState rs = null;
+		
+		// do we already have a RefinedState pointing to s?
+		if (target2rs.containsKey(s)) {
+			rs = target2rs.get(s);
+		}
+		else {
+			// we have to create one and place it in the best fitting context
+			StateGraph sg = null;
+			State parent = s;
+			while (s.eContainer().eContainer() instanceof State) {
+				parent = (State) s.eContainer().eContainer();
+				if (target2rs.containsKey(parent)) {
+					RefinedState bestFitting = target2rs.get(parent);
+					if (bestFitting.getSubgraph()==null)
+						bestFitting.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+					sg = bestFitting.getSubgraph();
+					break;
+				}
+			}
+			
+			if (sg==null)
+				sg = ac.getStateMachine();
+			
+			rs = RoomFactory.eINSTANCE.createRefinedState();
+			rs.setTarget(s);
+			sg.getStates().add(rs);
+		}
+		rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+		
+		return rs.getSubgraph();
 	}
 
 	/**
@@ -301,7 +334,7 @@ public class SupportUtil {
 		return getStates(shape, fp, null);
 	}
 	
-	public static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
 		List<State> items = new ArrayList<State>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -323,7 +356,7 @@ public class SupportUtil {
 	 * @param fp
 	 * @return
 	 */
-	public static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
 		List<ChoicePoint> items = new ArrayList<ChoicePoint>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -340,7 +373,7 @@ public class SupportUtil {
 		return getTrPoints(sg, shape, fp, null);
 	}
 	
-	public static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
 		List<TrPoint> items = new ArrayList<TrPoint>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -372,7 +405,7 @@ public class SupportUtil {
 	 * @param sgShape
 	 * @param node2anchor
 	 */
-	public static void getSubTpAnchors(ContainerShape sgShape, HashMap<String, Anchor> node2anchor) {
+	private static void getSubTpAnchors(ContainerShape sgShape, HashMap<String, Anchor> node2anchor) {
 		for (Shape childShape : sgShape.getChildren()) {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(childShape);
 			if (bo instanceof State)
@@ -408,8 +441,63 @@ public class SupportUtil {
 		
 		return sgShape;
 	}
+	
+	public static void addMissingItems(StateGraph sg, StateGraphContext ctx, ContainerShape shape, IFeatureProvider fp) {
 
-	public static void addTransitions(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
+		HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
+		
+		// states
+		{
+			List<State> present = SupportUtil.getStates(shape, fp, node2anchor);
+			List<State> expected = ctx.getStates();
+			List<State> items = new ArrayList<State>();
+			for (State item : expected) {
+				if (!present.contains(item))
+					items.add(item);
+			}
+        	SupportUtil.addStates(items, shape, fp, node2anchor);
+		}
+		
+		// transition points
+		{
+			List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, node2anchor);
+			List<TrPoint> expected = ctx.getTrPoints();
+			List<TrPoint> items = new ArrayList<TrPoint>();
+			for (TrPoint item : expected) {
+				if (!present.contains(item))
+					items.add(item);
+			}
+        	SupportUtil.addTransitionPoints(items, shape, fp, node2anchor);
+		}
+		
+		// choice points
+		{
+			List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, node2anchor);
+			List<ChoicePoint> expected = ctx.getChPoints();
+			List<ChoicePoint> items = new ArrayList<ChoicePoint>();
+			for (ChoicePoint item : expected) {
+				if (!present.contains(item))
+					items.add(item);
+			}
+        	SupportUtil.addChoicePoints(items, shape, fp, node2anchor);
+		}
+		
+		SupportUtil.getSubTpAnchors(shape, node2anchor);
+
+		// transitions
+		{
+			List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
+			List<Transition> expected = ctx.getTransitions();
+			List<Transition> items = new ArrayList<Transition>();
+			for (Transition trans : expected) {
+				if (!present.contains(trans))
+					items.add(trans);
+			}
+			SupportUtil.addTransitions(items, shape, fp, node2anchor);
+		}
+	}
+
+	private static void addTransitions(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 
 		for (Transition trans : transitions) {
@@ -432,7 +520,7 @@ public class SupportUtil {
 		}
 	}
 
-	public static void addTransitionPoints(List<TrPoint> trps, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addTransitionPoints(List<TrPoint> trps, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
@@ -446,7 +534,7 @@ public class SupportUtil {
 		}
 	}
 
-	public static void addTrPoint(TrPoint tp, ContainerShape sgShape,
+	private static void addTrPoint(TrPoint tp, ContainerShape sgShape,
 			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(tp);
@@ -459,7 +547,7 @@ public class SupportUtil {
 		node2anchor.put(getKey(tp, (StateGraph) tp.eContainer()), pe.getAnchors().get(0));
 	}
 
-	public static void addStates(List<State> states, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addStates(List<State> states, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
@@ -473,7 +561,7 @@ public class SupportUtil {
 		}
 	}
 
-	public static void addState(State s, ContainerShape sgShape,
+	private static void addState(State s, ContainerShape sgShape,
 			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(s);
@@ -487,7 +575,7 @@ public class SupportUtil {
 		node2anchor.put(getKey(s, null), pe.getAnchors().get(0));
 	}
 
-	public static void addChoicePoints(List<ChoicePoint> cps, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addChoicePoints(List<ChoicePoint> cps, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
 		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
@@ -501,7 +589,7 @@ public class SupportUtil {
 		}
 	}
 
-	public static void addChoicePoint(ChoicePoint cp, ContainerShape sgShape,
+	private static void addChoicePoint(ChoicePoint cp, ContainerShape sgShape,
 			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(cp);
@@ -515,7 +603,7 @@ public class SupportUtil {
 		node2anchor.put(getKey(cp, null), pe.getAnchors().get(0));
 	}
 
-	public static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 
 		StateGraph sg = null;
@@ -540,7 +628,7 @@ public class SupportUtil {
 		node2anchor.put(INITIAL, pe.getAnchors().get(0));
 	}
 
-	public static void getAnchors(State state, PictogramElement stateShape,
+	private static void getAnchors(State state, PictogramElement stateShape,
 			final HashMap<String, Anchor> node2anchor) {
 		
 		if (stateShape instanceof ContainerShape) {
@@ -561,7 +649,7 @@ public class SupportUtil {
 		}
 	}
 
-	public static String getKey(EObject obj, StateGraph sg) {
+	private static String getKey(EObject obj, StateGraph sg) {
 		if (obj instanceof TrPoint) {
 			TrPoint tp = (TrPoint) obj;
 			if (tp.eContainer()==sg)

@@ -12,16 +12,13 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
-import java.util.HashMap;
-
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -499,51 +496,20 @@ public class StateSupport {
 				if (bo instanceof State) {
 					State s = (State) bo;
 					
+					StateGraph newSG = null;
+					
 					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 					if (inherited) {
-						ActorClass ac = SupportUtil.getActorClass(getDiagram());
-						
-						HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
-						for (State st : ac.getStateMachine().getStates()) {
-							if (st instanceof RefinedState)
-								target2rs.put(((RefinedState) st).getTarget(), (RefinedState) st);
-						}
-						
-						RefinedState rs = null;
-						
-						// do we already have a RefinedState pointing to s?
-						if (target2rs.containsKey(s)) {
-							rs = target2rs.get(s);
-						}
-						else {
-							// we have to create one and place it in the best fitting context
-							StateGraph sg = null;
-							State parent = s;
-							while (s.eContainer().eContainer() instanceof State) {
-								parent = (State) s.eContainer().eContainer();
-								if (target2rs.containsKey(parent)) {
-									RefinedState bestFitting = target2rs.get(parent);
-									if (bestFitting.getSubgraph()==null)
-										bestFitting.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-									sg = bestFitting.getSubgraph();
-									break;
-								}
-							}
-							
-							if (sg==null)
-								sg = ac.getStateMachine();
-							
-							rs = RoomFactory.eINSTANCE.createRefinedState();
-							rs.setTarget(s);
-							sg.getStates().add(rs);
-						}
-						s = rs;
+						newSG = SupportUtil.getRefinedStateSubGraph(s, SupportUtil.getActorClass(getDiagram()));
+						s = (State) newSG.eContainer();
+					}
+					else {
+						s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+						newSG = s.getSubgraph();
 					}
 
-					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-
 					AddContext addContext = new AddContext();
-					addContext.setNewObject(s.getSubgraph());
+					addContext.setNewObject(newSG);
 					addContext.setTargetContainer(getDiagram());
 					addContext.setX(StateGraphSupport.MARGIN);
 					addContext.setY(StateGraphSupport.MARGIN);
