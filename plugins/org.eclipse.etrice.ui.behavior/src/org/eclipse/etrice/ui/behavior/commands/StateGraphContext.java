@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -15,6 +16,18 @@ import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
+import org.eclipse.etrice.ui.behavior.support.StateSupport;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.styles.Point;
+import org.eclipse.graphiti.mm.algorithms.styles.StylesFactory;
+import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.services.ILinkService;
 
 public class StateGraphContext {
 	private ArrayList<StateGraphContext> children = new ArrayList<StateGraphContext>();
@@ -24,6 +37,7 @@ public class StateGraphContext {
 	private ArrayList<ChoicePoint> chPoints = new ArrayList<ChoicePoint>();
 	private ArrayList<TrPoint> trPoints = new ArrayList<TrPoint>();
 	private ArrayList<Transition> transitions = new ArrayList<Transition>();
+	private HashMap<EObject, Point> obj2pos = null;
 	
 	private static HashMap<EObject, StateGraphContext> obj2ctx = new HashMap<EObject, StateGraphContext>();
 	
@@ -56,9 +70,77 @@ public class StateGraphContext {
 			}
 		}
 		
+		tree.obj2pos = new HashMap<EObject, Point>();
+		mapPositions(ac.getBase(), ac.eResource().getResourceSet(), tree.obj2pos);
+		
+		makePositionsAvailableToChildrenContexts(tree);
+		
 		return tree;
 	}
 	
+	/**
+	 * Propagate the position map to all children recursively
+	 * 
+	 * @param tree
+	 */
+	private static void makePositionsAvailableToChildrenContexts(StateGraphContext tree) {
+		for (StateGraphContext child : tree.getChildren()) {
+			child.obj2pos = tree.obj2pos;
+			makePositionsAvailableToChildrenContexts(child);
+		}
+	}
+
+	/**
+	 * Load base class diagrams recursively and put midpoint positions relative to boundary rectangle into map
+	 * 
+	 * @param ac
+	 * @param obj2pos
+	 */
+	private static void mapPositions(ActorClass ac, ResourceSet rs, HashMap<EObject, Point> obj2pos) {
+		if (ac==null)
+			return;
+
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
+		if (diagram==null)
+			return;
+		
+		ILinkService linkService = Graphiti.getLinkService();
+		for (Shape sgShape : diagram.getChildren()) {
+			// this is the level of StateGraphs
+			if (sgShape instanceof ContainerShape) {
+				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
+					// this is the level of States, TrPoints and ChoicePoints
+					EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
+					EObject ownObject = SupportUtil.getOwnObject(obj, rs);
+					GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
+					if (ownObject!=null && ga!=null) {
+						Point pos = StylesFactory.eINSTANCE.createPoint();
+						pos.setX(ga.getX() + ga.getWidth() /2 - StateGraphSupport.MARGIN);
+						pos.setY(ga.getY() + ga.getHeight()/2 - StateGraphSupport.MARGIN);
+						obj2pos.put(ownObject, pos);
+					}
+					if (sgItemShape instanceof ContainerShape) {
+						for (Shape trPointShape : ((ContainerShape) sgShape).getChildren()) {
+							// this is the level of entry/exit points located on states
+							obj = linkService.getBusinessObjectForLinkedPictogramElement(trPointShape);
+							ownObject = SupportUtil.getOwnObject(obj, rs);
+							ga = trPointShape.getGraphicsAlgorithm();
+							if (ownObject!=null && ga!=null) {
+								Point pos = StylesFactory.eINSTANCE.createPoint();
+								pos.setX(ga.getX() + ga.getWidth() /2 - StateSupport.MARGIN);
+								pos.setY(ga.getY() + ga.getHeight()/2 - StateSupport.MARGIN);
+								obj2pos.put(ownObject, pos);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// recursion
+		mapPositions(ac.getBase(), rs, obj2pos);
+	}
+
 	private StateGraphContext(StateGraph sg) {
 		this.stateGraph = sg;
 		
