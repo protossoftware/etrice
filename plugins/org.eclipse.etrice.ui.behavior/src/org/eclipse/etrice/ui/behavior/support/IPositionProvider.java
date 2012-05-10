@@ -15,7 +15,6 @@ package org.eclipse.etrice.ui.behavior.support;
 import java.util.List;
 
 import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.graphiti.mm.algorithms.styles.Point;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -23,8 +22,55 @@ import org.eclipse.graphiti.mm.algorithms.styles.Point;
  */
 public interface IPositionProvider {
 
+	public static class PosAndSize {
+		private int x;
+		private int y;
+		private int width;
+		private int height;
+		
+		/**
+		 * @param x
+		 * @param y
+		 * @param width
+		 * @param height
+		 */
+		public PosAndSize(int x, int y, int width, int height) {
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+		}
+
+		/**
+		 * @return the x
+		 */
+		public int getX() {
+			return x;
+		}
+
+		/**
+		 * @return the y
+		 */
+		public int getY() {
+			return y;
+		}
+
+		/**
+		 * @return the width
+		 */
+		public int getWidth() {
+			return width;
+		}
+
+		/**
+		 * @return the height
+		 */
+		public int getHeight() {
+			return height;
+		}
+	}
+
 	public void setScale(double sx, double sy);
 
-	public <T extends StateGraphNode> List<Point> getPositions(List<T> items);
-	public Point getPosition(StateGraphNode node);
+	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
 }

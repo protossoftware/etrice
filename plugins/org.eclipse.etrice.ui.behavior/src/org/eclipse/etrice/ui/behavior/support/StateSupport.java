@@ -213,16 +213,24 @@ public class StateSupport {
 				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.STATE_TYPE);
 	
+				int x = context.getX();
+				int y = context.getY();
 				int width = context.getWidth();
 				int height = context.getHeight();
+				
 				if (width<=0) {
 					width = DEFAULT_SIZE_X;
 					IDimension sz = GraphitiUi.getUiLayoutService().calculateTextSize(s.getName(), getDiagram().getFonts().get(0));
 					if (width<sz.getWidth()+TEXT_MARGIN)
 						width = sz.getWidth()+TEXT_MARGIN;
 				}
+				else
+					x += width/2;
+				
 				if (height<=0)
 					height = DEFAULT_SIZE_Y;
+				else
+					y += height/2;
 			
 				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
@@ -230,7 +238,7 @@ public class StateSupport {
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
-							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
+							x-(width/2+MARGIN), y-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 
 					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, manageColor(BACKGROUND));
 					

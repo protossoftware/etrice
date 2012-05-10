@@ -396,7 +396,7 @@ public class StateGraphSupport {
 				if (context instanceof StateGraphUpdateContext) {
 					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 
-					//SupportUtil.updateStateGraph(sg, ctx, sgShape, fp);
+					SupportUtil.updateStateGraph(sg, ctx, sgShape, fp);
 				}
 				
 				if (!sgShape.getChildren().isEmpty()) {

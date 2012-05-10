@@ -198,6 +198,11 @@ public class ChoicePointSupport {
 				int x = context.getX()-ITEM_SIZE;
 				int y = context.getY()-ITEM_SIZE;
 				
+				if (context.getWidth()>0)
+					x += context.getWidth()/2;
+				if (context.getHeight()>0)
+					y += context.getHeight()/2;
+				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				IGaService gaService = Graphiti.getGaService();
 				{

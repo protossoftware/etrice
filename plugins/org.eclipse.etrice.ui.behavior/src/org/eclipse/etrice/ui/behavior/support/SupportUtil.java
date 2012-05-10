@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
+import org.eclipse.etrice.ui.behavior.support.IPositionProvider.PosAndSize;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -342,7 +343,7 @@ public class SupportUtil {
 			if (bo instanceof State) {
 				items.add((State)bo);
 				if (item2anchor!=null)
-					item2anchor.put(getKey((State)bo, null), ch.getAnchors().get(0));
+					item2anchor.put(getKey((State)bo), ch.getAnchors().get(0));
 			}
 		}
 		return items;
@@ -364,7 +365,7 @@ public class SupportUtil {
 			if (bo instanceof ChoicePoint) {
 				items.add((ChoicePoint)bo);
 				if (item2anchor!=null)
-					item2anchor.put(getKey((ChoicePoint)bo, null), ch.getAnchors().get(0));
+					item2anchor.put(getKey((ChoicePoint)bo), ch.getAnchors().get(0));
 			}
 		}
 		return items;
@@ -381,7 +382,7 @@ public class SupportUtil {
 			if (bo instanceof TrPoint) {
 				items.add((TrPoint)bo);
 				if (item2anchor!=null)
-					item2anchor.put(getKey((TrPoint)bo, sg), ch.getAnchors().get(0));
+					item2anchor.put(getKey((TrPoint)bo), ch.getAnchors().get(0));
 			}
 		}
 		return items;
@@ -508,8 +509,8 @@ public class SupportUtil {
 			HashMap<String, Anchor> node2anchor) {
 
 		for (Transition trans : transitions) {
-			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom(), null);
-			String to = getKey(trans.getTo(), null);
+			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom());
+			String to = getKey(trans.getTo());
 			Anchor src = node2anchor.get(from);
 			Anchor dst = node2anchor.get(to);
 
@@ -530,7 +531,7 @@ public class SupportUtil {
 	private static void addStateGraphNodes(List<? extends StateGraphNode> trps, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
-		List<Point> positions = positionProvider.getPositions(trps);
+		List<PosAndSize> positions = positionProvider.getPositions(trps);
 		
 		int idx = 0;
 		for (StateGraphNode tp : trps) {
@@ -540,17 +541,21 @@ public class SupportUtil {
 	}
 
 	private static void addStateGraphNode(StateGraphNode tp, ContainerShape sgShape,
-			Point pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+			PosAndSize pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(tp);
 		addContext.setTargetContainer(sgShape);
 		addContext.setX(pos.getX());
 		addContext.setY(pos.getY());
+		if (pos.getWidth()>0 && pos.getHeight()>0) {
+			addContext.setWidth(pos.getWidth());
+			addContext.setHeight(pos.getHeight());
+		}
 		
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
 		assert(pe!=null): tp.eClass().getName()+" should have been created";
 		assert(!pe.getAnchors().isEmpty()): tp.eClass().getName()+" should have an anchor";
-		node2anchor.put(getKey(tp, (StateGraph) tp.eContainer()), pe.getAnchors().get(0));
+		node2anchor.put(getKey(tp), pe.getAnchors().get(0));
 	}
 
 	private static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
@@ -582,7 +587,7 @@ public class SupportUtil {
 			final HashMap<String, Anchor> node2anchor) {
 		
 		if (stateShape instanceof ContainerShape) {
-			node2anchor.put(getKey(state, null), ((ContainerShape)stateShape).getAnchors().get(0));
+			node2anchor.put(getKey(state), ((ContainerShape)stateShape).getAnchors().get(0));
 			for (Shape child : ((ContainerShape) stateShape).getChildren()) {
 				if (child instanceof ContainerShape) {
 					ContainerShape childShape = (ContainerShape) child;
@@ -590,7 +595,7 @@ public class SupportUtil {
 						if (!childShape.getLink().getBusinessObjects().isEmpty()) {
 							EObject obj = childShape.getLink().getBusinessObjects().get(0);
 							if (obj instanceof EntryPoint || obj instanceof ExitPoint) {
-								node2anchor.put(getKey(obj, null), childShape.getAnchors().get(0));
+								node2anchor.put(getKey(obj, true), childShape.getAnchors().get(0));
 							}
 						}
 					}
@@ -599,10 +604,14 @@ public class SupportUtil {
 		}
 	}
 
-	private static String getKey(EObject obj, StateGraph sg) {
+	private static String getKey(EObject obj) {
+		return getKey(obj, false);
+	}
+	
+	private static String getKey(EObject obj, boolean subTp) {
 		if (obj instanceof TrPoint) {
 			TrPoint tp = (TrPoint) obj;
-			if (tp.eContainer()==sg)
+			if (!subTp)
 				return TP+tp.getName();
 			else {
 				if (tp.eContainer().eContainer() instanceof State) {

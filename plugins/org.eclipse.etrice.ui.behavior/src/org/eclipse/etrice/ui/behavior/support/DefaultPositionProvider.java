@@ -26,8 +26,6 @@ import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
-import org.eclipse.graphiti.mm.algorithms.styles.Point;
-import org.eclipse.graphiti.mm.algorithms.styles.StylesFactory;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -39,10 +37,11 @@ import org.eclipse.graphiti.services.ILinkService;
  *
  */
 public class DefaultPositionProvider implements IPositionProvider {
-
 	private static class Position {
 		double x;
 		double y;
+		double sx;
+		double sy;
 	}
 	
 	private HashMap<String, Position> obj2pos = new HashMap<String, Position>();
@@ -63,30 +62,11 @@ public class DefaultPositionProvider implements IPositionProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.ui.behavior.support.IPositionProvider#getPosition(org.eclipse.emf.ecore.EObject)
-	 */
-	@Override
-	public Point getPosition(StateGraphNode obj) {
-		if (obj instanceof State) {
-			
-		}
-		else if (obj instanceof TrPoint) {
-			
-		}
-		else if (obj instanceof ChoicePoint) {
-			
-		}
-		
-		assert(false): "unexpected sub type";
-		return null;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.behavior.support.IPositionProvider#getPositions(java.util.List)
 	 */
 	@Override
-	public <T extends StateGraphNode> List<Point> getPositions(List<T> items) {
-		ArrayList<Point> result = new ArrayList<Point>(items.size());
+	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items) {
+		ArrayList<PosAndSize> result = new ArrayList<PosAndSize>(items.size());
 		
 		if (items.isEmpty())
 			return result;
@@ -96,9 +76,17 @@ public class DefaultPositionProvider implements IPositionProvider {
 		for (T item : items) {
 			Position pos = obj2pos.get(RoomNameProvider.getFullPath(item));
 			if (pos!=null) {
-				Point pt = StylesFactory.eINSTANCE.createPoint();
-				pt.setX((int) (pos.x * scaleX) + StateGraphSupport.MARGIN);
-				pt.setY((int) (pos.y * scaleY) + StateGraphSupport.MARGIN);
+				int margin = 0;
+				if (item instanceof State)
+					margin = StateSupport.MARGIN;
+				else if (item instanceof TrPoint)
+					margin = TrPointSupport.MARGIN;
+				PosAndSize pt = new PosAndSize(
+						(int) (pos.x * scaleX) + margin,
+						(int) (pos.y * scaleY) + margin,
+						(int) (pos.sx * scaleX),
+						(int) (pos.sy * scaleY)
+					);
 				result.add(idx, pt);
 			}
 			else {
@@ -124,9 +112,12 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		for (int i=0; i<items.size(); ++i) {
 			if (result.get(i)==null) {
-				Point pt = StylesFactory.eINSTANCE.createPoint();
-				pt.setX(pos);
-				pt.setY(h);
+				PosAndSize pt = new PosAndSize(
+						pos,
+						h,
+						0,
+						0
+					);
 				result.set(i, pt);
 				
 				pos += delta;
@@ -166,9 +157,16 @@ public class DefaultPositionProvider implements IPositionProvider {
 					if (obj instanceof StateGraphItem) {
 						GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
 						if (ga!=null) {
+							int margin = 0;
+							if (obj instanceof State)
+								margin = StateSupport.MARGIN;
+							else if (obj instanceof TrPoint)
+								margin = TrPointSupport.MARGIN;
 							Position pos = new Position();
-							pos.x = (ga.getX() + ga.getWidth() /2 - StateGraphSupport.MARGIN) / width;
-							pos.y = (ga.getY() + ga.getHeight()/2 - StateGraphSupport.MARGIN) / height;
+							pos.x = ga.getX() / width;
+							pos.y = ga.getY() / height;
+							pos.sx = (ga.getWidth() - 2*margin) / width;
+							pos.sy = (ga.getHeight()- 2*margin) / height;
 							obj2pos.put(RoomNameProvider.getFullPath((StateGraphItem) obj), pos);
 						}
 						// Entry and Exit Points on State borders are treated by the insertion of the State
