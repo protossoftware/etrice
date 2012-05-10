@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -426,10 +427,13 @@ public class SupportUtil {
 		
 		final HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 		
+		GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+		ctx.getPositionProvider().setScale(borderRect.getWidth(), borderRect.getHeight());
+		
 		addInitialPointIff(ctx.getTransitions(), sgShape, fp, node2anchor);
-		addTransitionPoints(ctx.getTrPoints(), sgShape, fp, node2anchor);
-		addStates(ctx.getStates(), sgShape, fp, node2anchor);
-		addChoicePoints(ctx.getChPoints(), sgShape, fp, node2anchor);
+		addStateGraphNodes(ctx.getTrPoints(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
+		addStateGraphNodes(ctx.getStates(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
+		addStateGraphNodes(ctx.getChPoints(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
 
 		for (StateGraphContext sub : ctx.getChildren()) {
 			addStateGraph(sub, diagram, fp);
@@ -442,58 +446,61 @@ public class SupportUtil {
 		return sgShape;
 	}
 	
-	public static void addMissingItems(StateGraph sg, StateGraphContext ctx, ContainerShape shape, IFeatureProvider fp) {
+	public static void updateStateGraph(StateGraph sg, StateGraphContext ctx, ContainerShape sgShape, IFeatureProvider fp) {
 
 		HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
 		
+		GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+		ctx.getPositionProvider().setScale(borderRect.getWidth(), borderRect.getHeight());
+		
 		// states
 		{
-			List<State> present = SupportUtil.getStates(shape, fp, node2anchor);
+			List<State> present = SupportUtil.getStates(sgShape, fp, node2anchor);
 			List<State> expected = ctx.getStates();
 			List<State> items = new ArrayList<State>();
 			for (State item : expected) {
 				if (!present.contains(item))
 					items.add(item);
 			}
-        	SupportUtil.addStates(items, shape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 		
 		// transition points
 		{
-			List<TrPoint> present = SupportUtil.getTrPoints(sg, shape, fp, node2anchor);
+			List<TrPoint> present = SupportUtil.getTrPoints(sg, sgShape, fp, node2anchor);
 			List<TrPoint> expected = ctx.getTrPoints();
 			List<TrPoint> items = new ArrayList<TrPoint>();
 			for (TrPoint item : expected) {
 				if (!present.contains(item))
 					items.add(item);
 			}
-        	SupportUtil.addTransitionPoints(items, shape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 		
 		// choice points
 		{
-			List<ChoicePoint> present = SupportUtil.getChoicePoints(shape, fp, node2anchor);
+			List<ChoicePoint> present = SupportUtil.getChoicePoints(sgShape, fp, node2anchor);
 			List<ChoicePoint> expected = ctx.getChPoints();
 			List<ChoicePoint> items = new ArrayList<ChoicePoint>();
 			for (ChoicePoint item : expected) {
 				if (!present.contains(item))
 					items.add(item);
 			}
-        	SupportUtil.addChoicePoints(items, shape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 		
-		SupportUtil.getSubTpAnchors(shape, node2anchor);
+		SupportUtil.getSubTpAnchors(sgShape, node2anchor);
 
 		// transitions
 		{
-			List<Transition> present = SupportUtil.getTransitions((Diagram) shape.eContainer(), fp);
+			List<Transition> present = SupportUtil.getTransitions((Diagram) sgShape.eContainer(), fp);
 			List<Transition> expected = ctx.getTransitions();
 			List<Transition> items = new ArrayList<Transition>();
 			for (Transition trans : expected) {
 				if (!present.contains(trans))
 					items.add(trans);
 			}
-			SupportUtil.addTransitions(items, shape, fp, node2anchor);
+			SupportUtil.addTransitions(items, sgShape, fp, node2anchor);
 		}
 	}
 
@@ -520,87 +527,30 @@ public class SupportUtil {
 		}
 	}
 
-	private static void addTransitionPoints(List<TrPoint> trps, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addStateGraphNodes(List<? extends StateGraphNode> trps, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
-		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
-		int n = trps.size();
-		int delta = width/(n+1);
+		List<Point> positions = positionProvider.getPositions(trps);
 		
-		int pos = delta;
-		for (TrPoint tp : trps) {
-			addTrPoint(tp, sgShape, pos+StateSupport.MARGIN, fp, node2anchor);
-			pos += delta;
+		int idx = 0;
+		for (StateGraphNode tp : trps) {
+			addStateGraphNode(tp, sgShape, positions.get(idx), fp, node2anchor);
+			++idx;
 		}
 	}
 
-	private static void addTrPoint(TrPoint tp, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+	private static void addStateGraphNode(StateGraphNode tp, ContainerShape sgShape,
+			Point pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(tp);
 		addContext.setTargetContainer(sgShape);
-		addContext.setX(pos);
-		addContext.setY(0);
+		addContext.setX(pos.getX());
+		addContext.setY(pos.getY());
 		
 		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
-		assert(!pe.getAnchors().isEmpty()): "transition point should have an anchor";
+		assert(pe!=null): tp.eClass().getName()+" should have been created";
+		assert(!pe.getAnchors().isEmpty()): tp.eClass().getName()+" should have an anchor";
 		node2anchor.put(getKey(tp, (StateGraph) tp.eContainer()), pe.getAnchors().get(0));
-	}
-
-	private static void addStates(List<State> states, ContainerShape sgShape, IFeatureProvider fp,
-			HashMap<String, Anchor> node2anchor) {
-		
-		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
-		int n = states.size();
-		int delta = width/(n+1);
-		
-		int pos = delta;
-		for (State s : states) {
-			addState(s, sgShape, pos+StateSupport.MARGIN, fp, node2anchor);
-			pos += delta;
-		}
-	}
-
-	private static void addState(State s, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(s);
-		addContext.setTargetContainer(sgShape);
-		addContext.setX(pos);
-		addContext.setY(StateGraphSupport.DEFAULT_SIZE_Y/4);
-		
-		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
-		assert(pe!=null): "state should have been created";
-		assert(!pe.getAnchors().isEmpty()): "state should have an anchor";
-		node2anchor.put(getKey(s, null), pe.getAnchors().get(0));
-	}
-
-	private static void addChoicePoints(List<ChoicePoint> cps, ContainerShape sgShape, IFeatureProvider fp,
-			HashMap<String, Anchor> node2anchor) {
-		
-		int width = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0).getWidth();
-		int n = cps.size();
-		int delta = width/(n+1);
-		
-		int pos = delta;
-		for (ChoicePoint cp : cps) {
-			addChoicePoint(cp, sgShape, pos+ChoicePointSupport.ITEM_SIZE, fp, node2anchor);
-			pos += delta;
-		}
-	}
-
-	private static void addChoicePoint(ChoicePoint cp, ContainerShape sgShape,
-			int pos, IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(cp);
-		addContext.setTargetContainer(sgShape);
-		addContext.setX(pos);
-		addContext.setY(StateGraphSupport.DEFAULT_SIZE_Y/2);
-		
-		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
-		assert(pe!=null): "choice point should have been created";
-		assert(!pe.getAnchors().isEmpty()): "choice point should have an anchor";
-		node2anchor.put(getKey(cp, null), pe.getAnchors().get(0));
 	}
 
 	private static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,

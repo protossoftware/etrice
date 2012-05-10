@@ -376,8 +376,8 @@ public class StateGraphSupport {
 
 			@Override
 			public boolean update(IUpdateContext context) {
-				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				Object bo = getBusinessObjectForPictogramElement(containerShape);
+				ContainerShape sgShape = (ContainerShape) context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(sgShape);
 				
 				/*
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
@@ -392,16 +392,15 @@ public class StateGraphSupport {
 				}
 				*/
 				StateGraph sg = (StateGraph) bo;
-				ContainerShape shape = (ContainerShape) context.getPictogramElement();
 				
 				if (context instanceof StateGraphUpdateContext) {
 					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 
-					SupportUtil.addMissingItems(sg, ctx, shape, fp);
+					//SupportUtil.updateStateGraph(sg, ctx, sgShape, fp);
 				}
 				
-				if (!shape.getChildren().isEmpty()) {
-					Shape labelShape = shape.getChildren().get(0);
+				if (!sgShape.getChildren().isEmpty()) {
+					Shape labelShape = sgShape.getChildren().get(0);
 					GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
 					if (ga instanceof Text)
 						((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(sg));
