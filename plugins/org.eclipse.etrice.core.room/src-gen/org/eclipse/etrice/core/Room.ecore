@@ -56,9 +56,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LiteralType">
+    <eLiterals name="BOOL" literal="ptBoolean"/>
+    <eLiterals name="INT" value="1" literal="ptInteger"/>
+    <eLiterals name="REAL" value="2" literal="ptReal"/>
+    <eLiterals name="CHAR" value="3" literal="ptCharacter"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//RoomClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//DataType"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//LiteralType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="castName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
