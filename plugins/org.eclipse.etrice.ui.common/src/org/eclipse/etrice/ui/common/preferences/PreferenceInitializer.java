@@ -34,7 +34,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.HOR_GRID_UNIT, 10);
 		store.setDefault(PreferenceConstants.VER_GRID_UNIT, 10);
 		store.setDefault(PreferenceConstants.CONFIRM_DELETE, true);
-		store.setDefault(PreferenceConstants.SAVE_ON_FOCUS_LOST, false);
+		store.setDefault(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, false);
 	}
 
 }

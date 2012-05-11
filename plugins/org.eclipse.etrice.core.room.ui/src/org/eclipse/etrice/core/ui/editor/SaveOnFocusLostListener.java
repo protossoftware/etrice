@@ -10,15 +10,13 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.common.editor;
+package org.eclipse.etrice.core.ui.editor;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.etrice.ui.common.Activator;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
-import org.eclipse.graphiti.ui.editor.DiagramEditor;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -26,12 +24,10 @@ import org.eclipse.ui.IWorkbenchPart;
  */
 public class SaveOnFocusLostListener implements IPartListener {
 
-	private DiagramEditor editor;
-	private IPreferenceStore store;
+	private XtextEditor editor;
 
-	public SaveOnFocusLostListener(DiagramEditor editor) {
+	public SaveOnFocusLostListener(XtextEditor editor) {
 		this.editor = editor;
-		this.store = Activator.getDefault().getPreferenceStore();
 	}
 
 	/* (non-Javadoc)
@@ -58,12 +54,18 @@ public class SaveOnFocusLostListener implements IPartListener {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IPartListener#partDeactivated(org.eclipse.ui.IWorkbenchPart)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
-		boolean save = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+		if (!(editor instanceof IValidatingEditor))
+			return;
+		
+		boolean save =  Platform.getPreferencesService().getBoolean(
+				"org.eclipse.etrice.ui.common",
+				PreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false, null);
+		
 		if (save && editor.isDirty())
-			editor.doSave(new NullProgressMonitor());
+			if (((IValidatingEditor)editor).isValid())
+				editor.doSave(new NullProgressMonitor());
 	}
 
 	/* (non-Javadoc)
