@@ -31,9 +31,9 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
-
 
 @Singleton
 class SubSystemClassGen {
@@ -42,6 +42,7 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -278,9 +279,9 @@ class SubSystemClassGen {
 					«IF pi.interfaceItem.protocol.getPortClass(pi.conjugated)!=null»
 						«IF !pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes.empty»
 							«IF pi.replicated»
-								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»];
+								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»]={«genReplPortAttributeInitializer(pi)»};
 							«ELSE»
-								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var;
+								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var={«genPortAttributeInitializer(pi)»};
 							«ENDIF»
 						«ENDIF»
 					«ENDIF»		
@@ -300,7 +301,26 @@ class SubSystemClassGen {
 		
 	'''
 	}
-
+		
+	def private genReplPortAttributeInitializer(InterfaceItemInstance pi){
+		var int i
+		var retval="" 
+		i=pi.peers.size
+		
+		while (i>0){
+			retval=retval+"
+			{"+genPortAttributeInitializer(pi)+"}"
+			i=i-1
+			if (i>0){retval=retval+","}
+		}
+		return retval
+	}	
+	
+	def private genPortAttributeInitializer(InterfaceItemInstance pi){
+		'''
+		«FOR attr:pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes SEPARATOR ","»«IF attr.defaultValueLiteral != null»«attr.defaultValueLiteral»«ELSE»«attr.refType.type.defaultValue»«ENDIF»«ENDFOR»'''
+	}
+	
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
 		var instName = ai.path.pathName
 		

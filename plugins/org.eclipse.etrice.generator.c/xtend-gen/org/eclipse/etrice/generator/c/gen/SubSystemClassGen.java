@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -18,6 +19,7 @@ import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -31,6 +33,7 @@ import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.etricegen.SubSystemInstance;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -57,6 +60,9 @@ public class SubSystemClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
+  
+  @Inject
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private ILogger logger;
@@ -786,7 +792,10 @@ public class SubSystemClassGen {
                             EList<InterfaceItemInstance> _peers = pi.getPeers();
                             int _size = _peers.size();
                             _builder.append(_size, "");
-                            _builder.append("];");
+                            _builder.append("]={");
+                            String _genReplPortAttributeInitializer = this.genReplPortAttributeInitializer(pi);
+                            _builder.append(_genReplPortAttributeInitializer, "");
+                            _builder.append("};");
                             _builder.newLineIfNotEmpty();
                           } else {
                             _builder.append("static ");
@@ -799,7 +808,10 @@ public class SubSystemClassGen {
                             String _path_2 = pi.getPath();
                             String _pathName_2 = this.roomExt.getPathName(_path_2);
                             _builder.append(_pathName_2, "");
-                            _builder.append("_var;");
+                            _builder.append("_var={");
+                            StringConcatenation _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
+                            _builder.append(_genPortAttributeInitializer, "");
+                            _builder.append("};");
                             _builder.newLineIfNotEmpty();
                           }
                         }
@@ -839,6 +851,68 @@ public class SubSystemClassGen {
       }
     }
     _builder.newLine();
+    return _builder;
+  }
+  
+  private String genReplPortAttributeInitializer(final InterfaceItemInstance pi) {
+      int i = 0;
+      String retval = "";
+      EList<InterfaceItemInstance> _peers = pi.getPeers();
+      int _size = _peers.size();
+      i = _size;
+      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
+      Boolean _xwhileexpression = _operator_greaterThan;
+      while (_xwhileexpression) {
+        {
+          String _operator_plus = StringExtensions.operator_plus(retval, "\r\n\t\t\t{");
+          StringConcatenation _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
+          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _genPortAttributeInitializer);
+          String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "}");
+          retval = _operator_plus_2;
+          int _operator_minus = IntegerExtensions.operator_minus(((Integer)i), ((Integer)1));
+          i = _operator_minus;
+          boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
+          if (_operator_greaterThan_1) {
+            String _operator_plus_3 = StringExtensions.operator_plus(retval, ",");
+            retval = _operator_plus_3;
+          }
+        }
+        boolean _operator_greaterThan_2 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
+        _xwhileexpression = _operator_greaterThan_2;
+      }
+      return retval;
+  }
+  
+  private StringConcatenation genPortAttributeInitializer(final InterfaceItemInstance pi) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      InterfaceItem _interfaceItem = pi.getInterfaceItem();
+      ProtocolClass _protocol = _interfaceItem.getProtocol();
+      boolean _isConjugated = this.roomExt.isConjugated(pi);
+      PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
+      EList<Attribute> _attributes = _portClass.getAttributes();
+      boolean hasAnyElements = false;
+      for(final Attribute attr : _attributes) {
+        if (!hasAnyElements) {
+          hasAnyElements = true;
+        } else {
+          _builder.appendImmediate(",", "");
+        }
+        {
+          String _defaultValueLiteral = attr.getDefaultValueLiteral();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
+          if (_operator_notEquals) {
+            String _defaultValueLiteral_1 = attr.getDefaultValueLiteral();
+            _builder.append(_defaultValueLiteral_1, "");
+          } else {
+            RefableType _refType = attr.getRefType();
+            DataType _type = _refType.getType();
+            String _defaultValue = this._typeHelpers.defaultValue(_type);
+            _builder.append(_defaultValue, "");
+          }
+        }
+      }
+    }
     return _builder;
   }
   
