@@ -89,7 +89,7 @@ public class RoomDiagramEditor extends DiagramEditor {
 		ResourceSet rs = getEditingDomain().getResourceSet();
 		for (Resource res : rs.getResources()) {
 			if (res instanceof XtextResource) {
-				if (res.isModified()) {
+				if (res.isLoaded() && res.isModified()) {
 					XtextResource xres = (XtextResource) res;
 					ISerializer serializer = xres.getSerializer();
 					
