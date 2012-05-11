@@ -48,6 +48,8 @@ public class RoomDiagramEditor extends DiagramEditor {
 	@Inject
 	protected IResourceValidator resourceValidator;
 
+	private SaveOnFocusLostListener partListener;
+	
 	private ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 
 	public RoomDiagramEditor() {
@@ -76,6 +78,8 @@ public class RoomDiagramEditor extends DiagramEditor {
 	@Override
 	public void dispose() {
 		mte.unsetTarget(getEditingDomain());
+
+		getSite().getPage().removePartListener(partListener);
 		
 		super.dispose();
 	}
@@ -133,6 +137,9 @@ public class RoomDiagramEditor extends DiagramEditor {
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
+
+		partListener = new SaveOnFocusLostListener(this);
+		getSite().getPage().addPartListener(partListener);
 		
 		/* we have to save here whether changes have been done or not to get rid of the dirty state
 		 * CAUTION: save in

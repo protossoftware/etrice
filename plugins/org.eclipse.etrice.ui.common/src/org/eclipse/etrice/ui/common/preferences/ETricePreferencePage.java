@@ -50,6 +50,12 @@ public class ETricePreferencePage
 					"&Confirm diagram element deletion",
 					getFieldEditorParent()));
 		
+		BooleanFieldEditor autoSave = new BooleanFieldEditor(
+				PreferenceConstants.SAVE_ON_FOCUS_LOST,
+				"Auto-save diagram when focus changes",
+				getFieldEditorParent());
+		addField(autoSave);
+
 		BooleanFieldEditor useGrid = new BooleanFieldEditor(
 			PreferenceConstants.USE_GRID,
 			"Use &Grid (grid settings apply to new diagrams only)",
