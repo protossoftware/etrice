@@ -1598,13 +1598,13 @@ protected class ComplexType_ExternalTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule PrimitiveType ****************
  *
  * PrimitiveType:
- * 	"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
- * 	docu=Documentation?;
+ * 	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+ * 	defaultValueLiteral=STRING docu=Documentation?;
  *
  **/
 
-// "PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-// docu=Documentation?
+// "PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+// defaultValueLiteral=STRING docu=Documentation?
 protected class PrimitiveType_Group extends GroupToken {
 	
 	public PrimitiveType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1619,8 +1619,8 @@ protected class PrimitiveType_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_DocuAssignment_7(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new PrimitiveType_DefaultValueLiteralAssignment_6(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new PrimitiveType_DocuAssignment_9(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PrimitiveType_DefaultValueLiteralAssignment_8(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1689,16 +1689,16 @@ protected class PrimitiveType_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "->"
-protected class PrimitiveType_HyphenMinusGreaterThanSignKeyword_2 extends KeywordToken  {
+// ":"
+protected class PrimitiveType_ColonKeyword_2 extends KeywordToken  {
 	
-	public PrimitiveType_HyphenMinusGreaterThanSignKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getHyphenMinusGreaterThanSignKeyword_2();
+		return grammarAccess.getPrimitiveTypeAccess().getColonKeyword_2();
 	}
 
     @Override
@@ -1711,22 +1711,78 @@ protected class PrimitiveType_HyphenMinusGreaterThanSignKeyword_2 extends Keywor
 
 }
 
-// targetName=FQN
-protected class PrimitiveType_TargetNameAssignment_3 extends AssignmentToken  {
+// type=LiteralType
+protected class PrimitiveType_TypeAssignment_3 extends AssignmentToken  {
 	
-	public PrimitiveType_TargetNameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_TypeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getTargetNameAssignment_3();
+		return grammarAccess.getPrimitiveTypeAccess().getTypeAssignment_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_HyphenMinusGreaterThanSignKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_ColonKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getTypeLiteralTypeEnumRuleCall_3_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getPrimitiveTypeAccess().getTypeLiteralTypeEnumRuleCall_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "->"
+protected class PrimitiveType_HyphenMinusGreaterThanSignKeyword_4 extends KeywordToken  {
+	
+	public PrimitiveType_HyphenMinusGreaterThanSignKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getPrimitiveTypeAccess().getHyphenMinusGreaterThanSignKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PrimitiveType_TypeAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// targetName=FQN
+protected class PrimitiveType_TargetNameAssignment_5 extends AssignmentToken  {
+	
+	public PrimitiveType_TargetNameAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPrimitiveTypeAccess().getTargetNameAssignment_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PrimitiveType_HyphenMinusGreaterThanSignKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1735,9 +1791,9 @@ protected class PrimitiveType_TargetNameAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("targetName",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("targetName");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_3_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_3_0();
+			element = grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0();
 			return obj;
 		}
 		return null;
@@ -1746,21 +1802,21 @@ protected class PrimitiveType_TargetNameAssignment_3 extends AssignmentToken  {
 }
 
 // ("(" castName=FQN ")")?
-protected class PrimitiveType_Group_4 extends GroupToken {
+protected class PrimitiveType_Group_6 extends GroupToken {
 	
-	public PrimitiveType_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getGroup_4();
+		return grammarAccess.getPrimitiveTypeAccess().getGroup_6();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_RightParenthesisKeyword_4_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_RightParenthesisKeyword_6_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1768,21 +1824,21 @@ protected class PrimitiveType_Group_4 extends GroupToken {
 }
 
 // "("
-protected class PrimitiveType_LeftParenthesisKeyword_4_0 extends KeywordToken  {
+protected class PrimitiveType_LeftParenthesisKeyword_6_0 extends KeywordToken  {
 	
-	public PrimitiveType_LeftParenthesisKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_LeftParenthesisKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getLeftParenthesisKeyword_4_0();
+		return grammarAccess.getPrimitiveTypeAccess().getLeftParenthesisKeyword_6_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_TargetNameAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_TargetNameAssignment_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1790,21 +1846,21 @@ protected class PrimitiveType_LeftParenthesisKeyword_4_0 extends KeywordToken  {
 }
 
 // castName=FQN
-protected class PrimitiveType_CastNameAssignment_4_1 extends AssignmentToken  {
+protected class PrimitiveType_CastNameAssignment_6_1 extends AssignmentToken  {
 	
-	public PrimitiveType_CastNameAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_CastNameAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getCastNameAssignment_4_1();
+		return grammarAccess.getPrimitiveTypeAccess().getCastNameAssignment_6_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_LeftParenthesisKeyword_4_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_LeftParenthesisKeyword_6_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1813,9 +1869,9 @@ protected class PrimitiveType_CastNameAssignment_4_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("castName",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("castName");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_4_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_6_1_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_4_1_0();
+			element = grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_6_1_0();
 			return obj;
 		}
 		return null;
@@ -1824,21 +1880,21 @@ protected class PrimitiveType_CastNameAssignment_4_1 extends AssignmentToken  {
 }
 
 // ")"
-protected class PrimitiveType_RightParenthesisKeyword_4_2 extends KeywordToken  {
+protected class PrimitiveType_RightParenthesisKeyword_6_2 extends KeywordToken  {
 	
-	public PrimitiveType_RightParenthesisKeyword_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_RightParenthesisKeyword_6_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getRightParenthesisKeyword_4_2();
+		return grammarAccess.getPrimitiveTypeAccess().getRightParenthesisKeyword_6_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_CastNameAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_CastNameAssignment_6_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1847,22 +1903,22 @@ protected class PrimitiveType_RightParenthesisKeyword_4_2 extends KeywordToken  
 
 
 // "default"
-protected class PrimitiveType_DefaultKeyword_5 extends KeywordToken  {
+protected class PrimitiveType_DefaultKeyword_7 extends KeywordToken  {
 	
-	public PrimitiveType_DefaultKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_DefaultKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getDefaultKeyword_5();
+		return grammarAccess.getPrimitiveTypeAccess().getDefaultKeyword_7();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_Group_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new PrimitiveType_TargetNameAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new PrimitiveType_Group_6(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PrimitiveType_TargetNameAssignment_5(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1870,21 +1926,21 @@ protected class PrimitiveType_DefaultKeyword_5 extends KeywordToken  {
 }
 
 // defaultValueLiteral=STRING
-protected class PrimitiveType_DefaultValueLiteralAssignment_6 extends AssignmentToken  {
+protected class PrimitiveType_DefaultValueLiteralAssignment_8 extends AssignmentToken  {
 	
-	public PrimitiveType_DefaultValueLiteralAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_DefaultValueLiteralAssignment_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralAssignment_6();
+		return grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralAssignment_8();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveType_DefaultKeyword_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveType_DefaultKeyword_7(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1893,9 +1949,9 @@ protected class PrimitiveType_DefaultValueLiteralAssignment_6 extends Assignment
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("defaultValueLiteral",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("defaultValueLiteral");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_8_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_0();
+			element = grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_8_0();
 			return obj;
 		}
 		return null;
@@ -1904,15 +1960,15 @@ protected class PrimitiveType_DefaultValueLiteralAssignment_6 extends Assignment
 }
 
 // docu=Documentation?
-protected class PrimitiveType_DocuAssignment_7 extends AssignmentToken  {
+protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
 	
-	public PrimitiveType_DocuAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveType_DocuAssignment_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeAccess().getDocuAssignment_7();
+		return grammarAccess.getPrimitiveTypeAccess().getDocuAssignment_9();
 	}
 
     @Override
@@ -1931,7 +1987,7 @@ protected class PrimitiveType_DocuAssignment_7 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDocumentationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getPrimitiveTypeAccess().getDocuDocumentationParserRuleCall_7_0(); 
+				element = grammarAccess.getPrimitiveTypeAccess().getDocuDocumentationParserRuleCall_9_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1943,7 +1999,7 @@ protected class PrimitiveType_DocuAssignment_7 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PrimitiveType_DefaultValueLiteralAssignment_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new PrimitiveType_DefaultValueLiteralAssignment_8(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -20622,13 +20678,35 @@ protected class KeyValue_ValueAssignment_2 extends AssignmentToken  {
  *
  * // HOWTO: use a combination of URI global scopes and namespace aware local scope provider
  * 
- * // this is confugured in the work flow by
+ * // this is configured in the work flow by
  * 
  * //			fragment = scoping.ImportURIScopingFragment {}
  * 
  * // and by overriding configureIScopeProviderDelegate in the runtime module with 
  * 
  * //			ImportedNamespaceAwareLocalScopeProvider
+ * 
+ * // also configure in the RuntimeModule
+ * 
+ * //	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+ * 
+ * //		return PlatformRelativeUriResolver.class;
+ * 
+ * //	}
+ * 
+ * // and in the UiRuntimeModule
+ * 
+ * //	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+ * 
+ * //		return GlobalNonPlatformURIEditorOpener.class;
+ * 
+ * //	}
+ * 
+ * //	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+ * 
+ * //		return ImportAwareHyperlinkHelper.class;
+ * 
+ * //	}
  * 
  * // the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
  * 

@@ -47,6 +47,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
@@ -640,6 +641,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EEnum literalTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EEnum communicationTypeEEnum = null;
 
   /**
@@ -1037,7 +1045,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPrimitiveType_TargetName()
+  public EAttribute getPrimitiveType_Type()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1047,7 +1055,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPrimitiveType_CastName()
+  public EAttribute getPrimitiveType_TargetName()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(1);
   }
@@ -1057,9 +1065,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPrimitiveType_DefaultValueLiteral()
+  public EAttribute getPrimitiveType_CastName()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getPrimitiveType_DefaultValueLiteral()
+  {
+    return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2997,6 +3015,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getLiteralType()
+  {
+    return literalTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getCommunicationType()
   {
     return communicationTypeEEnum;
@@ -3082,6 +3110,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     complexTypeEClass = createEClass(COMPLEX_TYPE);
 
     primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
+    createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__TYPE);
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__TARGET_NAME);
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__CAST_NAME);
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL);
@@ -3347,6 +3376,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(importEClass, IMPORT__IMPORT_URI);
 
     // Create enums
+    literalTypeEEnum = createEEnum(LITERAL_TYPE);
     communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
     actorCommunicationTypeEEnum = createEEnum(ACTOR_COMMUNICATION_TYPE);
   }
@@ -3465,6 +3495,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(complexTypeEClass, ComplexType.class, "ComplexType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPrimitiveType_Type(), this.getLiteralType(), "type", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPrimitiveType_TargetName(), ecorePackage.getEString(), "targetName", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPrimitiveType_CastName(), ecorePackage.getEString(), "castName", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPrimitiveType_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3736,6 +3767,12 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
+    initEEnum(literalTypeEEnum, LiteralType.class, "LiteralType");
+    addEEnumLiteral(literalTypeEEnum, LiteralType.BOOL);
+    addEEnumLiteral(literalTypeEEnum, LiteralType.INT);
+    addEEnumLiteral(literalTypeEEnum, LiteralType.REAL);
+    addEEnumLiteral(literalTypeEEnum, LiteralType.CHAR);
+
     initEEnum(communicationTypeEEnum, CommunicationType.class, "CommunicationType");
     addEEnumLiteral(communicationTypeEEnum, CommunicationType.EVENT_DRIVEN);
     addEEnumLiteral(communicationTypeEEnum, CommunicationType.DATA_DRIVEN);
