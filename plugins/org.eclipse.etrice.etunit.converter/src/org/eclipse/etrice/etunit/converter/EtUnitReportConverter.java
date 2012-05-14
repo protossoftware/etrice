@@ -43,23 +43,37 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
-	private static final Object OPTION_COMBINE = "-combine";
+	private static final Object OPTION_COMBINE = "-combined";
+	private static final Object OPTION_ONLY_COMBINE = "-only_combined";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		boolean combineResults = false;
+		
+		// check options and create file list
+		boolean combinedResults = false;
+		boolean onlyCombinedResults = false;
 		String combinedFile = null;
 		ArrayList<String> files = new ArrayList<String>();
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals(OPTION_COMBINE)) {
-				combineResults = true;
+				combinedResults = true;
 				if (++i<args.length) {
 					combinedFile = args[i];
 				}
 				else {
 					System.err.println("Error: "+OPTION_COMBINE+" must be followed by filename");
+				}
+			}
+			else if (args[i].equals(OPTION_ONLY_COMBINE)) {
+				combinedResults = true;
+				onlyCombinedResults = true;
+				if (++i<args.length) {
+					combinedFile = args[i];
+				}
+				else {
+					System.err.println("Error: "+OPTION_ONLY_COMBINE+" must be followed by filename");
 				}
 			}
 			else {
@@ -79,7 +93,7 @@ public class EtUnitReportConverter {
 			File report = new File(file);
 			if (report.exists()) {
 				DocumentRoot root = createParseTree(report);
-				if (root!=null) {
+				if (root!=null && !onlyCombinedResults) {
 					saveJUnitReport(root, report, rs);
 				}
 			}
@@ -88,7 +102,7 @@ public class EtUnitReportConverter {
 			}
 		}
 		
-		if (combineResults) {
+		if (combinedResults) {
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
 			root.setTestsuites(testsuites);

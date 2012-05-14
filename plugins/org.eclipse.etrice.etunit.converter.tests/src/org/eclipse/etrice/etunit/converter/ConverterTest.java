@@ -60,12 +60,24 @@ public class ConverterTest {
 	}
 
 	@Test
-	public void testCombined() {
+	public void testCombine() {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report1.etu");
 		args.add(basePath+"report2.etu");
 		args.add("-combine");
 		args.add(basePath+"combined.xml");
+		
+		String[] arguments = new String[args.size()];
+		EtUnitReportConverter.main(args.toArray(arguments));
+	}
+
+	@Test
+	public void testOnlyCombine() {
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(basePath+"report3.etu");
+		args.add(basePath+"report4.etu");
+		args.add("-only_combine");
+		args.add(basePath+"only_combined.xml");
 		
 		String[] arguments = new String[args.size()];
 		EtUnitReportConverter.main(args.toArray(arguments));
