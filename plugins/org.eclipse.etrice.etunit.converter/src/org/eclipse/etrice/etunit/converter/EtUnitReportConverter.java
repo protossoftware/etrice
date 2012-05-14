@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -42,11 +43,30 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
+	private static final Object OPTION_COMBINE = "-combine";
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length==0) {
+		boolean combineResults = false;
+		String combinedFile = null;
+		ArrayList<String> files = new ArrayList<String>();
+		for (int i=0; i<args.length; ++i) {
+			if (args[i].equals(OPTION_COMBINE)) {
+				combineResults = true;
+				if (++i<args.length) {
+					combinedFile = args[i];
+				}
+				else {
+					System.err.println("Error: "+OPTION_COMBINE+" must be followed by filename");
+				}
+			}
+			else {
+				files.add(args[i]);
+			}
+		}
+		if (files.isEmpty()) {
 			System.err.println("Error: no reports specified");
 			return;
 		}
@@ -55,28 +75,65 @@ public class EtUnitReportConverter {
 		
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new EtunitResourceFactoryImpl());
-		for (int i = 0; i < args.length; i++) {
-			File report = new File(args[i]);
+		for (String file : files) {
+			File report = new File(file);
 			if (report.exists()) {
 				DocumentRoot root = createParseTree(report);
 				if (root!=null) {
-					URI uri = URI.createFileURI(report.toString());
-					uri = uri.trimFileExtension();
-					uri = uri.appendFileExtension("xml");
-					Resource resource = rs.createResource(uri);
-					resource.getContents().add(root);
-					try {
-						resource.save(Collections.EMPTY_MAP);
-						System.out.println("saved "+uri);
-					} catch (IOException e) {
-						e.printStackTrace();
-						System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
-					}
+					saveJUnitReport(root, report, rs);
 				}
 			}
 			else {
-				System.err.println("Error: report "+args[i]+" does not exist");
+				System.err.println("Error: report "+file+" does not exist");
 			}
+		}
+		
+		if (combineResults) {
+			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
+			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
+			root.setTestsuites(testsuites);
+
+			for (Resource res : rs.getResources()) {
+				DocumentRoot r = (DocumentRoot) res.getContents().get(0);
+				testsuites.getTestsuite().addAll(r.getTestsuites().getTestsuite());
+			}
+			
+			computeAndSetInfo(testsuites);
+			
+			File report = new File(combinedFile);
+			saveJUnitReport(root, report, rs);
+		}
+	}
+
+	private static void computeAndSetInfo(TestsuitesType testsuites) {
+		for (TestsuiteType ts : testsuites.getTestsuite()) {
+			int failures = 0;
+			BigDecimal time = new BigDecimal(0);
+			for (TestcaseType tc : ts.getTestcase()) {
+				if (tc.getTime()!=null)
+					time = time.add(tc.getTime());
+				if (tc.getFailure()!=null)
+					++failures;
+			}
+			ts.setTests(ts.getTestcase().size());
+			ts.setFailures(failures);
+			ts.setTime(time);
+		}
+	}
+
+	private static void saveJUnitReport(DocumentRoot root, File report,
+			ResourceSet rs) {
+		URI uri = URI.createFileURI(report.toString());
+		uri = uri.trimFileExtension();
+		uri = uri.appendFileExtension("xml");
+		Resource resource = rs.createResource(uri);
+		resource.getContents().add(root);
+		try {
+			resource.save(Collections.EMPTY_MAP);
+			System.out.println("saved "+uri);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
 		}
 	}
 
@@ -164,19 +221,7 @@ public class EtUnitReportConverter {
 			
 			bufRead.close();
 			
-			for (TestsuiteType ts : testsuites.getTestsuite()) {
-				int failures = 0;
-				BigDecimal time = new BigDecimal(0);
-				for (TestcaseType tc : ts.getTestcase()) {
-					if (tc.getTime()!=null)
-						time = time.add(tc.getTime());
-					if (tc.getFailure()!=null)
-						++failures;
-				}
-				ts.setTests(ts.getTestcase().size());
-				ts.setFailures(failures);
-				ts.setTime(time);
-			}
+			computeAndSetInfo(testsuites);
 			
 			return root;
 		} catch (FileNotFoundException e) {
