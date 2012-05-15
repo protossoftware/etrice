@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.common.preferences;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -43,6 +42,14 @@ public class ETricePreferencePage
 	
 	public void createFieldEditors() {
 		addLabel("");
+		addLabel("Textual Model Editor");
+		BooleanFieldEditor autoSaveText = new BooleanFieldEditor(
+				PreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST,
+				"Auto-save textual model when focus changes",
+				getFieldEditorParent());
+		addField(autoSaveText);
+		
+		addLabel("");
 		addLabel("Diagram Editors");
 		addField(
 				new BooleanFieldEditor(
@@ -50,6 +57,12 @@ public class ETricePreferencePage
 					"&Confirm diagram element deletion",
 					getFieldEditorParent()));
 		
+		BooleanFieldEditor autoSave = new BooleanFieldEditor(
+				PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST,
+				"Auto-save diagram when focus changes",
+				getFieldEditorParent());
+		addField(autoSave);
+
 		BooleanFieldEditor useGrid = new BooleanFieldEditor(
 			PreferenceConstants.USE_GRID,
 			"Use &Grid (grid settings apply to new diagrams only)",
@@ -106,7 +119,7 @@ public class ETricePreferencePage
 		Label label = new Label(getFieldEditorParent(), SWT.None);
 		GridData data = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2, 1);
 		label.setLayoutData(data);
-		label.setForeground(ColorConstants.red);
+		//label.setForeground(ColorConstants.red);
 		if (message != null)
 			label.setText(message);
 	}

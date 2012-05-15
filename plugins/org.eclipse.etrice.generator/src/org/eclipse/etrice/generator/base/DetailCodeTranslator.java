@@ -156,13 +156,13 @@ public class DetailCodeTranslator {
 	private String getPortIndex(String text, Position curr, InterfaceItem item) {
 		proceedToToken(text, curr);
 
-		if (text.charAt(curr.pos)!='[')
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!='[')
 			return null;
 		++curr.pos;
 		
 		String token = getIndex(text, curr);
 
-		if (text.charAt(curr.pos)!=']')
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!=']')
 			return null;
 		++curr.pos;
 		
@@ -227,7 +227,7 @@ public class DetailCodeTranslator {
 	private Message getMessage(String text, Position curr, InterfaceItem item, boolean outgoing) {
 		proceedToToken(text, curr);
 
-		if (text.charAt(curr.pos)!='.')
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
 			return null;
 		++curr.pos;
 		
@@ -247,7 +247,7 @@ public class DetailCodeTranslator {
 	private ArrayList<String> getArgs(String text, Position curr) {
 		proceedToToken(text, curr);
 
-		if (text.charAt(curr.pos)!='(')
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!='(')
 			return null;
 		++curr.pos;
 		
@@ -256,19 +256,19 @@ public class DetailCodeTranslator {
 		boolean stop = false;
 		do {
 			proceedToToken(text, curr, false);
-			if (text.charAt(curr.pos)!=')') {
+			if (curr.pos<text.length() && text.charAt(curr.pos)!=')') {
 				String arg = getParam(text, curr);
 				result.add(arg);
 				proceedToToken(text, curr);
 			}
-			if (text.charAt(curr.pos)==',')
+			if (curr.pos<text.length() && text.charAt(curr.pos)==',')
 				++curr.pos;
 			else
 				stop = true;
 		}
 		while (!stop);
 
-		if (text.charAt(curr.pos)!=')')
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!=')')
 			return null;
 		
 		++curr.pos;

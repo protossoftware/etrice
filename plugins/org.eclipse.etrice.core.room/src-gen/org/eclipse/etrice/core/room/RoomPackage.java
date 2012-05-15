@@ -539,13 +539,22 @@ public interface RoomPackage extends EPackage
   int PRIMITIVE_TYPE__DOCU = DATA_TYPE__DOCU;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRIMITIVE_TYPE__TYPE = DATA_TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Target Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__TARGET_NAME = DATA_TYPE_FEATURE_COUNT + 0;
+  int PRIMITIVE_TYPE__TARGET_NAME = DATA_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Cast Name</b></em>' attribute.
@@ -554,7 +563,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__CAST_NAME = DATA_TYPE_FEATURE_COUNT + 1;
+  int PRIMITIVE_TYPE__CAST_NAME = DATA_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
@@ -563,7 +572,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL = DATA_TYPE_FEATURE_COUNT + 2;
+  int PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL = DATA_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Primitive Type</em>' class.
@@ -572,7 +581,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 3;
+  int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl <em>External Type</em>}' class.
@@ -3864,6 +3873,16 @@ public interface RoomPackage extends EPackage
   int IMPORT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.LiteralType
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
+   * @generated
+   */
+  int LITERAL_TYPE = 76;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3871,7 +3890,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 76;
+  int COMMUNICATION_TYPE = 77;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -3881,7 +3900,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 77;
+  int ACTOR_COMMUNICATION_TYPE = 78;
 
 
   /**
@@ -4226,6 +4245,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getPrimitiveType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.PrimitiveType#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.etrice.core.room.PrimitiveType#getType()
+   * @see #getPrimitiveType()
+   * @generated
+   */
+  EAttribute getPrimitiveType_Type();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.PrimitiveType#getTargetName <em>Target Name</em>}'.
@@ -6317,6 +6347,16 @@ public interface RoomPackage extends EPackage
   EAttribute getImport_ImportURI();
 
   /**
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Literal Type</em>'.
+   * @see org.eclipse.etrice.core.room.LiteralType
+   * @generated
+   */
+  EEnum getLiteralType();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6632,6 +6672,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PRIMITIVE_TYPE__TYPE = eINSTANCE.getPrimitiveType_Type();
 
     /**
      * The meta object literal for the '<em><b>Target Name</b></em>' attribute feature.
@@ -8334,6 +8382,16 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.LiteralType
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
+     * @generated
+     */
+    EEnum LITERAL_TYPE = eINSTANCE.getLiteralType();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.

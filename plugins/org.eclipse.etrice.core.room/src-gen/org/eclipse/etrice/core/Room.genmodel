@@ -9,6 +9,12 @@
     editorPluginID="org.eclipse.etrice.core.room.editor">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//LiteralType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/BOOL"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/INT"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/REAL"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/CHAR"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/EVENT_DRIVEN"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/DATA_DRIVEN"/>
@@ -58,6 +64,7 @@
     <genClasses ecoreClass="Room.ecore#//DataType"/>
     <genClasses ecoreClass="Room.ecore#//ComplexType"/>
     <genClasses ecoreClass="Room.ecore#//PrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/targetName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/castName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/defaultValueLiteral"/>

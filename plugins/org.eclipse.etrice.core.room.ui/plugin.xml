@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.etrice.core.ui.editor.RoomEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="room"

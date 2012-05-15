@@ -593,63 +593,85 @@ rulePrimitiveType returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2='->' 
+)	otherlv_2=':' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPrimitiveTypeAccess().getHyphenMinusGreaterThanSignKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getPrimitiveTypeAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getTypeLiteralTypeEnumRuleCall_3_0()); 
 	    }
-		lv_targetName_3_0=ruleFQN		{
+		lv_type_3_0=ruleLiteralType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
+	        }
+       		set(
+       			$current, 
+       			"type",
+        		lv_type_3_0, 
+        		"LiteralType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4='->' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPrimitiveTypeAccess().getHyphenMinusGreaterThanSignKeyword_4());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0()); 
+	    }
+		lv_targetName_5_0=ruleFQN		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
 	        }
        		set(
        			$current, 
        			"targetName",
-        		lv_targetName_3_0, 
+        		lv_targetName_5_0, 
         		"FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4='(' 
+)(	otherlv_6='(' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPrimitiveTypeAccess().getLeftParenthesisKeyword_4_0());
+    	newLeafNode(otherlv_6, grammarAccess.getPrimitiveTypeAccess().getLeftParenthesisKeyword_6_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_6_1_0()); 
 	    }
-		lv_castName_5_0=ruleFQN		{
+		lv_castName_7_0=ruleFQN		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
 	        }
        		set(
        			$current, 
        			"castName",
-        		lv_castName_5_0, 
+        		lv_castName_7_0, 
         		"FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_6=')' 
+)	otherlv_8=')' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getPrimitiveTypeAccess().getRightParenthesisKeyword_4_2());
+    	newLeafNode(otherlv_8, grammarAccess.getPrimitiveTypeAccess().getRightParenthesisKeyword_6_2());
     }
-)?	otherlv_7='default' 
+)?	otherlv_9='default' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getPrimitiveTypeAccess().getDefaultKeyword_5());
+    	newLeafNode(otherlv_9, grammarAccess.getPrimitiveTypeAccess().getDefaultKeyword_7());
     }
 (
 (
-		lv_defaultValueLiteral_8_0=RULE_STRING
+		lv_defaultValueLiteral_10_0=RULE_STRING
 		{
-			newLeafNode(lv_defaultValueLiteral_8_0, grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_0()); 
+			newLeafNode(lv_defaultValueLiteral_10_0, grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_8_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -658,7 +680,7 @@ rulePrimitiveType returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"defaultValueLiteral",
-        		lv_defaultValueLiteral_8_0, 
+        		lv_defaultValueLiteral_10_0, 
         		"STRING");
 	    }
 
@@ -666,16 +688,16 @@ rulePrimitiveType returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getDocuDocumentationParserRuleCall_9_0()); 
 	    }
-		lv_docu_9_0=ruleDocumentation		{
+		lv_docu_11_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_9_0, 
+        		lv_docu_11_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -6815,6 +6837,37 @@ ruleMULTIPLICITY returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     ;
 
 
+
+
+
+// Rule LiteralType
+ruleLiteralType returns [Enumerator current=null] 
+    @init { enterRule(); }
+    @after { leaveRule(); }:
+((	enumLiteral_0='ptBoolean' 
+	{
+        $current = grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_0, grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0()); 
+    }
+)
+    |(	enumLiteral_1='ptInteger' 
+	{
+        $current = grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_1, grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1()); 
+    }
+)
+    |(	enumLiteral_2='ptReal' 
+	{
+        $current = grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_2, grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2()); 
+    }
+)
+    |(	enumLiteral_3='ptCharacter' 
+	{
+        $current = grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_3, grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3()); 
+    }
+));
 
 
 

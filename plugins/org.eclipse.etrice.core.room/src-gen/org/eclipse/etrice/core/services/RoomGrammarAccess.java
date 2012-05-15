@@ -308,27 +308,30 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPrimitiveTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTargetNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTargetNameFQNParserRuleCall_3_0 = (RuleCall)cTargetNameAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cCastNameAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cCastNameFQNParserRuleCall_4_1_0 = (RuleCall)cCastNameAssignment_4_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Keyword cDefaultKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cDefaultValueLiteralAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_6_0 = (RuleCall)cDefaultValueLiteralAssignment_6.eContents().get(0);
-		private final Assignment cDocuAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cDocuDocumentationParserRuleCall_7_0 = (RuleCall)cDocuAssignment_7.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTypeLiteralTypeEnumRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cTargetNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTargetNameFQNParserRuleCall_5_0 = (RuleCall)cTargetNameAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cLeftParenthesisKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cCastNameAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cCastNameFQNParserRuleCall_6_1_0 = (RuleCall)cCastNameAssignment_6_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
+		private final Keyword cDefaultKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cDefaultValueLiteralAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_8_0 = (RuleCall)cDefaultValueLiteralAssignment_8.eContents().get(0);
+		private final Assignment cDocuAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cDocuDocumentationParserRuleCall_9_0 = (RuleCall)cDocuAssignment_9.eContents().get(0);
 		
 		//PrimitiveType:
-		//	"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-		//	docu=Documentation?;
+		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//	defaultValueLiteral=STRING docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-		//docu=Documentation?
+		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//defaultValueLiteral=STRING docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"PrimitiveType"
@@ -340,44 +343,53 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+
+		//type=LiteralType
+		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+
+		//LiteralType
+		public RuleCall getTypeLiteralTypeEnumRuleCall_3_0() { return cTypeLiteralTypeEnumRuleCall_3_0; }
+
 		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
+		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
 
 		//targetName=FQN
-		public Assignment getTargetNameAssignment_3() { return cTargetNameAssignment_3; }
+		public Assignment getTargetNameAssignment_5() { return cTargetNameAssignment_5; }
 
 		//FQN
-		public RuleCall getTargetNameFQNParserRuleCall_3_0() { return cTargetNameFQNParserRuleCall_3_0; }
+		public RuleCall getTargetNameFQNParserRuleCall_5_0() { return cTargetNameFQNParserRuleCall_5_0; }
 
 		//("(" castName=FQN ")")?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_6() { return cGroup_6; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
+		public Keyword getLeftParenthesisKeyword_6_0() { return cLeftParenthesisKeyword_6_0; }
 
 		//castName=FQN
-		public Assignment getCastNameAssignment_4_1() { return cCastNameAssignment_4_1; }
+		public Assignment getCastNameAssignment_6_1() { return cCastNameAssignment_6_1; }
 
 		//FQN
-		public RuleCall getCastNameFQNParserRuleCall_4_1_0() { return cCastNameFQNParserRuleCall_4_1_0; }
+		public RuleCall getCastNameFQNParserRuleCall_6_1_0() { return cCastNameFQNParserRuleCall_6_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
+		public Keyword getRightParenthesisKeyword_6_2() { return cRightParenthesisKeyword_6_2; }
 
 		//"default"
-		public Keyword getDefaultKeyword_5() { return cDefaultKeyword_5; }
+		public Keyword getDefaultKeyword_7() { return cDefaultKeyword_7; }
 
 		//defaultValueLiteral=STRING
-		public Assignment getDefaultValueLiteralAssignment_6() { return cDefaultValueLiteralAssignment_6; }
+		public Assignment getDefaultValueLiteralAssignment_8() { return cDefaultValueLiteralAssignment_8; }
 
 		//STRING
-		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_6_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_6_0; }
+		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_8_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_8_0; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_7() { return cDocuAssignment_7; }
+		public Assignment getDocuAssignment_9() { return cDocuAssignment_9; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_7_0() { return cDocuDocumentationParserRuleCall_7_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_9_0() { return cDocuDocumentationParserRuleCall_9_0; }
 	}
 
 	public class ExternalTypeElements extends AbstractParserRuleElementFinder {
@@ -4376,6 +4388,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	public class LiteralTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cBOOLEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cBOOLPtBooleanKeyword_0_0 = (Keyword)cBOOLEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cINTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cINTPtIntegerKeyword_1_0 = (Keyword)cINTEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cREALEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cREALPtRealKeyword_2_0 = (Keyword)cREALEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cCHAREnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cCHARPtCharacterKeyword_3_0 = (Keyword)cCHAREnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum LiteralType:
+		//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+		public EnumRule getRule() { return rule; }
+
+		//BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//BOOL="ptBoolean"
+		public EnumLiteralDeclaration getBOOLEnumLiteralDeclaration_0() { return cBOOLEnumLiteralDeclaration_0; }
+
+		//"ptBoolean"
+		public Keyword getBOOLPtBooleanKeyword_0_0() { return cBOOLPtBooleanKeyword_0_0; }
+
+		//INT="ptInteger"
+		public EnumLiteralDeclaration getINTEnumLiteralDeclaration_1() { return cINTEnumLiteralDeclaration_1; }
+
+		//"ptInteger"
+		public Keyword getINTPtIntegerKeyword_1_0() { return cINTPtIntegerKeyword_1_0; }
+
+		//REAL="ptReal"
+		public EnumLiteralDeclaration getREALEnumLiteralDeclaration_2() { return cREALEnumLiteralDeclaration_2; }
+
+		//"ptReal"
+		public Keyword getREALPtRealKeyword_2_0() { return cREALPtRealKeyword_2_0; }
+
+		//CHAR="ptCharacter"
+		public EnumLiteralDeclaration getCHAREnumLiteralDeclaration_3() { return cCHAREnumLiteralDeclaration_3; }
+
+		//"ptCharacter"
+		public Keyword getCHARPtCharacterKeyword_3_0() { return cCHARPtCharacterKeyword_3_0; }
+	}
+
 	public class CommunicationTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "CommunicationType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -4470,6 +4526,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private ActorContainerClassElements pActorContainerClass;
 	private VarDeclElements pVarDecl;
 	private RefableTypeElements pRefableType;
+	private LiteralTypeElements unknownRuleLiteralType;
 	private DataTypeElements pDataType;
 	private ComplexTypeElements pComplexType;
 	private PrimitiveTypeElements pPrimitiveType;
@@ -4634,6 +4691,16 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefableTypeAccess().getRule();
 	}
 
+	//enum LiteralType:
+	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+	public LiteralTypeElements getLiteralTypeAccess() {
+		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
+	}
+	
+	public EnumRule getLiteralTypeRule() {
+		return getLiteralTypeAccess().getRule();
+	}
+
 	//DataType:
 	//	PrimitiveType | ComplexType;
 	public DataTypeElements getDataTypeAccess() {
@@ -4655,8 +4722,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveType:
-	//	"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-	//	docu=Documentation?;
+	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
 	}

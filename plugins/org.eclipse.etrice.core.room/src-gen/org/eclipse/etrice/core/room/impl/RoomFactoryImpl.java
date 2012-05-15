@@ -160,6 +160,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case RoomPackage.LITERAL_TYPE:
+        return createLiteralTypeFromString(eDataType, initialValue);
       case RoomPackage.COMMUNICATION_TYPE:
         return createCommunicationTypeFromString(eDataType, initialValue);
       case RoomPackage.ACTOR_COMMUNICATION_TYPE:
@@ -179,6 +181,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case RoomPackage.LITERAL_TYPE:
+        return convertLiteralTypeToString(eDataType, instanceValue);
       case RoomPackage.COMMUNICATION_TYPE:
         return convertCommunicationTypeToString(eDataType, instanceValue);
       case RoomPackage.ACTOR_COMMUNICATION_TYPE:
@@ -1022,6 +1026,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LiteralType createLiteralTypeFromString(EDataType eDataType, String initialValue)
+  {
+    LiteralType result = LiteralType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertLiteralTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

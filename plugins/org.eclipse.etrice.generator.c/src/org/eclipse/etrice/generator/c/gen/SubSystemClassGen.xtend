@@ -31,9 +31,9 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
-
 
 @Singleton
 class SubSystemClassGen {
@@ -42,6 +42,7 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -268,7 +269,26 @@ class SubSystemClassGen {
 		«FOR ai : ssi.allContainedInstances»
 			static «ai.actorClass.name» «ai.path.getPathName()»;
 		«ENDFOR»
-
+		
+		/* forward declaration of variable port structs */		
+		«FOR ai: ssi.allContainedInstances»
+			«IF ai.orderedIfItemInstances.empty»
+/*nothing to do */
+			«ELSE»
+				«FOR pi:ai.orderedIfItemInstances»
+					«IF pi.interfaceItem.protocol.getPortClass(pi.conjugated)!=null»
+						«IF !pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes.empty»
+							«IF pi.replicated»
+								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»]={«genReplPortAttributeInitializer(pi)»};
+							«ELSE»
+								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var={«genPortAttributeInitializer(pi)»};
+							«ENDIF»
+						«ENDIF»
+					«ENDIF»		
+				«ENDFOR»
+			«ENDIF» 
+		«ENDFOR»
+		
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
@@ -281,7 +301,26 @@ class SubSystemClassGen {
 		
 	'''
 	}
-
+		
+	def private genReplPortAttributeInitializer(InterfaceItemInstance pi){
+		var int i
+		var retval="" 
+		i=pi.peers.size
+		
+		while (i>0){
+			retval=retval+"
+			{"+genPortAttributeInitializer(pi)+"}"
+			i=i-1
+			if (i>0){retval=retval+","}
+		}
+		return retval
+	}	
+	
+	def private genPortAttributeInitializer(InterfaceItemInstance pi){
+		'''
+		«FOR attr:pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes SEPARATOR ","»«IF attr.defaultValueLiteral != null»«attr.defaultValueLiteral»«ELSE»«attr.refType.type.defaultValue»«ENDIF»«ENDFOR»'''
+	}
+	
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
 		var instName = ai.path.pathName
 		
@@ -313,7 +352,7 @@ class SubSystemClassGen {
 	'''
 		«IF haveReplSubPorts»
 			static const etReplSubPort «replSubPortsArray»[«offset»] = {
-				/* Replicated Sub Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId, index} */
+				/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
 				«FOR pi : replPorts SEPARATOR ","»
 					«genReplSubPortInitializers(root, ai, pi)»
 				«ENDFOR»
@@ -321,7 +360,7 @@ class SubSystemClassGen {
 		«ENDIF»
 		«IF !(eventPorts.empty && recvPorts.empty)»
 			static const «ai.actorClass.name»_const «instName»_const = {
-				/* Ports: {myActor, etReceiveMessage, msgService, peerAddress, localId} */
+				/* Ports: {varData, msgService, peerAddress, localId} */
 				«FOR pi : eventPorts SEPARATOR ","»
 					«IF pi.simple»
 						«genPortInitializer(root, ai, pi)»
@@ -345,13 +384,22 @@ class SubSystemClassGen {
 		var objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		var idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		
-		"{&"+ai.path.getPathName()+", "
-		+recvMsg+", " 
+		"{"+getInterfaceItemInstanceData(pi)+"," 
 		+"&msgService_Thread1, "
 		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 		+"} /* Port "+pi.name+" */"
 	}
+	
+	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){
+		if (pi.interfaceItem.protocol.getPortClass(pi.conjugated)== null) return "0"
+		if (pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes.empty){
+			return "0"
+		}else{
+			return "&"+pi.path.pathName+"_var"
+		}
+	}
+	
 	
 	def private String genRecvPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		if (pi.peers.empty)
@@ -370,9 +418,10 @@ class SubSystemClassGen {
 		for (p: pi.peers) {
 			var idx = pi.peers.indexOf(p)
 			var comma = if (idx<pi.peers.size-1) "," else ""
+			var iiiD = getInterfaceItemInstanceData(pi)
+			iiiD = if (iiiD.equals("0")) iiiD+"," else iiiD+"["+idx+"],"
 			result = result +
-				"{&"+ai.path.getPathName()+", "
-				+ai.actorClass.name+"_receiveMessage, " 
+				"{"+iiiD 
 				+"&msgService_Thread1, "
 				+p.objId+", "
 				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
@@ -401,24 +450,38 @@ class SubSystemClassGen {
 			
 				«FOR ai : ssi.allContainedInstances»
 					/* interface items of «ai.path» */
-					«FOR pi : ai.orderedIfItemInstances.filter(p|p.interfaceItem.protocol.commType==CommunicationType::EVENT_DRIVEN)»
+					«FOR pi : ai. orderedIfItemInstances.filter(p|p.interfaceItem.protocol.commType==CommunicationType::EVENT_DRIVEN)»
 						«IF pi.replicated»
 							«FOR peer: pi.peers»
 								case «pi.objId+pi.peers.indexOf(peer)»:
-								«IF (pi.interfaceItem.protocol. handlesReceive(pi.isConjugated()))»
-									«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated())»_handleReceive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+								«IF (pi.interfaceItem.protocol.handlesReceive(pi.isConjugated()))»
+									switch (msg->evtID){
+										«FOR h:getReceiveHandlers(pi.interfaceItem.protocol,pi.isConjugated())»
+											case «pi.interfaceItem.protocol.name»_«h.msg.codeName»:
+												«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+											break;
+										«ENDFOR»
+										default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+										break;
+										}										
 								«ELSE»
-									//etPort_receive((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
 									«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
 								«ENDIF»
 								break;
 							«ENDFOR»
 						«ELSE»
 							case «pi.objId»:
-							«IF (pi.interfaceItem.protocol. handlesReceive(pi.isConjugated()))»
-								«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated())»_handleReceive((etPort*)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+							«IF (pi.interfaceItem.protocol.handlesReceive(pi.isConjugated()))» 
+								switch (msg->evtID){
+								«FOR h:getReceiveHandlers(pi.interfaceItem.protocol,pi.isConjugated())»
+									case «pi.interfaceItem.protocol.name»_«h.msg.codeName»:
+										«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+									break;
+								«ENDFOR»
+								default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
+								break;
+								}
 							«ELSE»
-								//etPort_receive(&«ai.path.pathName»_const.«pi.name», msg);
 								«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
 							«ENDIF»
 							break;
@@ -428,13 +491,13 @@ class SubSystemClassGen {
 
 				default:
 					etLogger_logErrorF("MessageService_Thread1_receiveMessage: address %d does not exist ", msg->address);
-					break;
+				break;
 			}
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		'''
 	}
-
+	
 	def private generateDatadrivenExecutes(Root root, SubSystemInstance ssi) {'''
 		«FOR ai : ssi.allContainedInstances»
 			«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
