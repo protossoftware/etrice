@@ -64,7 +64,7 @@ public class ConverterTest {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report1.etu");
 		args.add(basePath+"report2.etu");
-		args.add("-combine");
+		args.add(EtUnitReportConverter.OPTION_COMBINE);
 		args.add(basePath+"combined.xml");
 		
 		String[] arguments = new String[args.size()];
@@ -76,7 +76,7 @@ public class ConverterTest {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report3.etu");
 		args.add(basePath+"report4.etu");
-		args.add("-only_combine");
+		args.add(EtUnitReportConverter.OPTION_ONLY_COMBINE);
 		args.add(basePath+"only_combined.xml");
 		
 		String[] arguments = new String[args.size()];

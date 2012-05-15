@@ -43,8 +43,8 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
-	private static final Object OPTION_COMBINE = "-combined";
-	private static final Object OPTION_ONLY_COMBINE = "-only_combined";
+	public static final String OPTION_COMBINE = "-combined";
+	public static final String OPTION_ONLY_COMBINE = "-only_combined";
 
 	/**
 	 * @param args
