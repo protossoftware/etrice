@@ -61,56 +61,54 @@ public class DefaultPositionProvider implements IPositionProvider {
 		this.scaleY = sy;
 	}
 
+	public PosAndSize getPosition(StateGraphNode node) {
+		Position pos = obj2pos.get(RoomNameProvider.getFullPath(node));
+		if (pos==null)
+			return null;
+		
+		int margin = getMargin(node);
+		PosAndSize pt = new PosAndSize(
+				(int) (pos.x * scaleX) + margin,
+				(int) (pos.y * scaleY) + margin,
+				(int) (pos.sx * scaleX),
+				(int) (pos.sy * scaleY)
+			);
+		return pt;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.behavior.support.IPositionProvider#getPositions(java.util.List)
 	 */
 	@Override
-	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items) {
-		ArrayList<PosAndSize> result = new ArrayList<PosAndSize>(items.size());
+	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> nodes) {
+		ArrayList<PosAndSize> result = new ArrayList<PosAndSize>(nodes.size());
 		
-		if (items.isEmpty())
+		if (nodes.isEmpty())
 			return result;
 		
 		int n = 0;
-		int idx = 0;
-		for (T item : items) {
-			Position pos = obj2pos.get(RoomNameProvider.getFullPath(item));
-			if (pos!=null) {
-				int margin = 0;
-				if (item instanceof State)
-					margin = StateSupport.MARGIN;
-				else if (item instanceof TrPoint)
-					margin = TrPointSupport.MARGIN;
-				PosAndSize pt = new PosAndSize(
-						(int) (pos.x * scaleX) + margin,
-						(int) (pos.y * scaleY) + margin,
-						(int) (pos.sx * scaleX),
-						(int) (pos.sy * scaleY)
-					);
-				result.add(idx, pt);
-			}
-			else {
-				result.add(idx, null);
+		for (T node : nodes) {
+			PosAndSize pt = getPosition(node);
+			result.add(pt);
+			if (pt==null)
 				n++;
-			}
-			idx++;
 		}
 
 		int delta = (int) (scaleX/(n+1));
 		int pos = delta;
 		
 		int h = StateGraphSupport.MARGIN;
-		if (items.get(0) instanceof State)
+		if (nodes.get(0) instanceof State)
 			h = StateGraphSupport.MARGIN + StateGraphSupport.DEFAULT_SIZE_Y/4;
-		else if (items.get(0) instanceof ChoicePoint)
+		else if (nodes.get(0) instanceof ChoicePoint)
 			h = StateGraphSupport.MARGIN + StateGraphSupport.DEFAULT_SIZE_Y/2;
-		else if (items.get(0) instanceof TrPoint)
+		else if (nodes.get(0) instanceof TrPoint)
 			h = StateGraphSupport.MARGIN;
 		else {
 			assert(false): "unexpected sub type";
 		}
 		
-		for (int i=0; i<items.size(); ++i) {
+		for (int i=0; i<nodes.size(); ++i) {
 			if (result.get(i)==null) {
 				PosAndSize pt = new PosAndSize(
 						pos,
@@ -122,7 +120,6 @@ public class DefaultPositionProvider implements IPositionProvider {
 				
 				pos += delta;
 			}
-			idx++;
 		}
 		
 		return result;
@@ -154,14 +151,10 @@ public class DefaultPositionProvider implements IPositionProvider {
 				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
 					// this is the level of States, TrPoints and ChoicePoints
 					EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
-					if (obj instanceof StateGraphItem) {
+					if (obj instanceof StateGraphNode) {
 						GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
 						if (ga!=null) {
-							int margin = 0;
-							if (obj instanceof State)
-								margin = StateSupport.MARGIN;
-							else if (obj instanceof TrPoint)
-								margin = TrPointSupport.MARGIN;
+							int margin = getMargin((StateGraphNode) obj);
 							Position pos = new Position();
 							pos.x = ga.getX() / width;
 							pos.y = ga.getY() / height;
@@ -179,4 +172,12 @@ public class DefaultPositionProvider implements IPositionProvider {
 		mapPositions(ac.getBase());
 	}
 
+	private int getMargin(StateGraphNode node) {
+		if (node instanceof State)
+			return StateSupport.MARGIN;
+		else if (node instanceof TrPoint)
+			return TrPointSupport.MARGIN;
+		
+		return 0;
+	}
 }

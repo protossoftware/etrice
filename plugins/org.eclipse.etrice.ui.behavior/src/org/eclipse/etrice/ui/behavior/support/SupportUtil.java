@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -55,6 +56,8 @@ import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.services.IGaService;
+import org.eclipse.graphiti.services.ILinkService;
 
 /**
  * @author Henrik Rentz-Reichert - Initial contribution and API
@@ -333,10 +336,10 @@ public class SupportUtil {
 	}
 	
 	public static List<State> getStates(ContainerShape shape, IFeatureProvider fp) {
-		return getStates(shape, fp, null);
+		return getStates(shape, fp, null, null);
 	}
 	
-	private static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<State> getStates(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor, List<Shape> stateShapes) {
 		List<State> items = new ArrayList<State>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -344,21 +347,18 @@ public class SupportUtil {
 				items.add((State)bo);
 				if (item2anchor!=null)
 					item2anchor.put(getKey((State)bo), ch.getAnchors().get(0));
+				if (stateShapes!=null)
+					stateShapes.add(ch);
 			}
 		}
 		return items;
 	}
 
 	public static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp) {
-		return getChoicePoints(shape, fp, null);
+		return getChoicePoints(shape, fp, null, null);
 	}
 	
-	/**
-	 * @param shape
-	 * @param fp
-	 * @return
-	 */
-	private static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<ChoicePoint> getChoicePoints(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor, List<Shape> cpShapes) {
 		List<ChoicePoint> items = new ArrayList<ChoicePoint>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -366,16 +366,18 @@ public class SupportUtil {
 				items.add((ChoicePoint)bo);
 				if (item2anchor!=null)
 					item2anchor.put(getKey((ChoicePoint)bo), ch.getAnchors().get(0));
+				if (cpShapes!=null)
+					cpShapes.add(ch);
 			}
 		}
 		return items;
 	}
 	
 	public static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp) {
-		return getTrPoints(sg, shape, fp, null);
+		return getTrPoints(sg, shape, fp, null, null);
 	}
 	
-	private static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor) {
+	private static List<TrPoint> getTrPoints(StateGraph sg, ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> item2anchor, List<Shape> tpShapes) {
 		List<TrPoint> items = new ArrayList<TrPoint>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -383,6 +385,8 @@ public class SupportUtil {
 				items.add((TrPoint)bo);
 				if (item2anchor!=null)
 					item2anchor.put(getKey((TrPoint)bo), ch.getAnchors().get(0));
+				if (tpShapes!=null)
+					tpShapes.add(ch);
 			}
 		}
 		return items;
@@ -456,38 +460,53 @@ public class SupportUtil {
 		
 		// states
 		{
-			List<State> present = SupportUtil.getStates(sgShape, fp, node2anchor);
+			ArrayList<Shape> shapes = new ArrayList<Shape>();
+			List<State> present = SupportUtil.getStates(sgShape, fp, node2anchor, shapes);
 			List<State> expected = ctx.getStates();
-			List<State> items = new ArrayList<State>();
+			List<State> toAdd = new ArrayList<State>();
+			List<State> toUpdate = new ArrayList<State>();
 			for (State item : expected) {
-				if (!present.contains(item))
-					items.add(item);
+				if (present.contains(item))
+					toUpdate.add(item);
+				else
+					toAdd.add(item);
 			}
-        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
 		}
 		
 		// transition points
 		{
-			List<TrPoint> present = SupportUtil.getTrPoints(sg, sgShape, fp, node2anchor);
+			ArrayList<Shape> shapes = new ArrayList<Shape>();
+			List<TrPoint> present = SupportUtil.getTrPoints(sg, sgShape, fp, node2anchor, shapes);
 			List<TrPoint> expected = ctx.getTrPoints();
-			List<TrPoint> items = new ArrayList<TrPoint>();
+			List<TrPoint> toAdd = new ArrayList<TrPoint>();
+			List<TrPoint> toUpdate = new ArrayList<TrPoint>();
 			for (TrPoint item : expected) {
-				if (!present.contains(item))
-					items.add(item);
+				if (present.contains(item))
+					toUpdate.add(item);
+				else
+					toAdd.add(item);
 			}
-        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
 		}
 		
 		// choice points
 		{
-			List<ChoicePoint> present = SupportUtil.getChoicePoints(sgShape, fp, node2anchor);
+			ArrayList<Shape> shapes = new ArrayList<Shape>();
+			List<ChoicePoint> present = SupportUtil.getChoicePoints(sgShape, fp, node2anchor, shapes);
 			List<ChoicePoint> expected = ctx.getChPoints();
-			List<ChoicePoint> items = new ArrayList<ChoicePoint>();
+			List<ChoicePoint> toAdd = new ArrayList<ChoicePoint>();
+			List<ChoicePoint> toUpdate = new ArrayList<ChoicePoint>();
 			for (ChoicePoint item : expected) {
-				if (!present.contains(item))
-					items.add(item);
+				if (present.contains(item))
+					toUpdate.add(item);
+				else
+					toAdd.add(item);
 			}
-        	SupportUtil.addStateGraphNodes(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
 		}
 		
 		SupportUtil.getSubTpAnchors(sgShape, node2anchor);
@@ -528,14 +547,14 @@ public class SupportUtil {
 		}
 	}
 
-	private static void addStateGraphNodes(List<? extends StateGraphNode> trps, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addStateGraphNodes(List<? extends StateGraphNode> nodes, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 		
-		List<PosAndSize> positions = positionProvider.getPositions(trps);
+		List<PosAndSize> positions = positionProvider.getPositions(nodes);
 		
 		int idx = 0;
-		for (StateGraphNode tp : trps) {
-			addStateGraphNode(tp, sgShape, positions.get(idx), fp, node2anchor);
+		for (StateGraphNode node : nodes) {
+			addStateGraphNode(node, sgShape, positions.get(idx), fp, node2anchor);
 			++idx;
 		}
 	}
@@ -556,6 +575,43 @@ public class SupportUtil {
 		assert(pe!=null): tp.eClass().getName()+" should have been created";
 		assert(!pe.getAnchors().isEmpty()): tp.eClass().getName()+" should have an anchor";
 		node2anchor.put(getKey(tp), pe.getAnchors().get(0));
+	}
+
+	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, IPositionProvider positionProvider, List<Shape> shapes) {
+		
+		ILinkService linkService = Graphiti.getLinkService();
+		IGaService gaService = Graphiti.getGaService();
+		
+		for (StateGraphNode node : nodes) {
+			PosAndSize ps = positionProvider.getPosition(node);
+			if (ps==null)
+				continue;
+			
+			// TODO: sub-optimal since quadratic effort - use combined list for nodes and shapes or similar solution
+			for (Shape shape : shapes) {
+				EObject bo = linkService.getBusinessObjectForLinkedPictogramElement(shape);
+				if (bo==node) {
+					GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
+					System.out.println(RoomNameProvider.getName(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
+					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
+
+					int margin = 0;
+					if (node instanceof State)
+						margin = StateSupport.MARGIN;
+					else if (node instanceof TrPoint)
+						margin = TrPointSupport.MARGIN;
+					
+					gaService.setLocationAndSize(
+							ga,
+							ps.getX()-margin,
+							ps.getY()-margin,
+							ps.getWidth()+2*margin,
+							ps.getHeight()+2*margin
+						);
+					break;
+				}
+			}
+		}
 	}
 
 	private static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,

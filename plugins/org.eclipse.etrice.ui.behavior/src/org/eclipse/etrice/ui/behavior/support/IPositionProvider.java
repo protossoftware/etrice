@@ -72,5 +72,6 @@ public interface IPositionProvider {
 
 	public void setScale(double sx, double sy);
 
+	public PosAndSize getPosition(StateGraphNode node);
 	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
 }
