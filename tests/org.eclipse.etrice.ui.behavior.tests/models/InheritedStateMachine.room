@@ -1,0 +1,101 @@
+RoomModel InheritedStateMachine {
+
+	ActorClass Base {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> b0 { }
+				Transition tr0: b0 -> cp cp0 {
+					triggers {
+						<x: p0>
+					}
+				}
+				Transition tr1: cp cp0 -> b2
+				Transition tr2: cp cp0 -> tp0 of b1 {
+					cond {
+						"true"
+					}
+				}
+				Transition tr3: tp1 of b1 -> b2
+				ChoicePoint cp0
+				TransitionPoint tp0
+				State b0
+				State b1 {
+					subgraph {
+						EntryPoint tp0
+						ExitPoint tp1
+					}
+				}
+				State b2
+			}
+		}
+	}
+
+	ActorClass Derived extends Base {
+		Structure { }
+		Behavior {
+			StateMachine {
+				RefinedState b1 {
+					subgraph {
+						Transition tr0: my tp0 -> d11
+						Transition tr1: d11 -> my tp1 {
+							triggers {
+								<x: p0>
+							}
+						}
+						State d11
+					}
+				}
+				RefinedState b2 {
+					subgraph {
+						State d21
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass DoubleDerived extends Derived {
+		Structure { }
+		Behavior {
+			StateMachine {
+				RefinedState b1 {
+					subgraph {
+						RefinedState d11 {
+							subgraph {
+								State dd111
+							}
+						}
+						State dd12
+						State dd13
+					}
+				}
+				RefinedState b2 {
+					subgraph {
+						State xt2
+						RefinedState d21 {
+							subgraph {
+								State dd211
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message x()
+		}
+		outgoing {
+			Message x()
+		}
+	}
+
+}
