@@ -308,27 +308,30 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPrimitiveTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTargetNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTargetNameFQNParserRuleCall_3_0 = (RuleCall)cTargetNameAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cCastNameAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cCastNameFQNParserRuleCall_4_1_0 = (RuleCall)cCastNameAssignment_4_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Keyword cDefaultKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cDefaultValueLiteralAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_6_0 = (RuleCall)cDefaultValueLiteralAssignment_6.eContents().get(0);
-		private final Assignment cDocuAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cDocuDocumentationParserRuleCall_7_0 = (RuleCall)cDocuAssignment_7.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTypeLiteralTypeEnumRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cTargetNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTargetNameFQNParserRuleCall_5_0 = (RuleCall)cTargetNameAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cLeftParenthesisKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cCastNameAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cCastNameFQNParserRuleCall_6_1_0 = (RuleCall)cCastNameAssignment_6_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
+		private final Keyword cDefaultKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cDefaultValueLiteralAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_8_0 = (RuleCall)cDefaultValueLiteralAssignment_8.eContents().get(0);
+		private final Assignment cDocuAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cDocuDocumentationParserRuleCall_9_0 = (RuleCall)cDocuAssignment_9.eContents().get(0);
 		
 		//PrimitiveType:
-		//	"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-		//	docu=Documentation?;
+		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//	defaultValueLiteral=STRING docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-		//docu=Documentation?
+		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//defaultValueLiteral=STRING docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"PrimitiveType"
@@ -340,44 +343,53 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+
+		//type=LiteralType
+		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+
+		//LiteralType
+		public RuleCall getTypeLiteralTypeEnumRuleCall_3_0() { return cTypeLiteralTypeEnumRuleCall_3_0; }
+
 		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
+		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
 
 		//targetName=FQN
-		public Assignment getTargetNameAssignment_3() { return cTargetNameAssignment_3; }
+		public Assignment getTargetNameAssignment_5() { return cTargetNameAssignment_5; }
 
 		//FQN
-		public RuleCall getTargetNameFQNParserRuleCall_3_0() { return cTargetNameFQNParserRuleCall_3_0; }
+		public RuleCall getTargetNameFQNParserRuleCall_5_0() { return cTargetNameFQNParserRuleCall_5_0; }
 
 		//("(" castName=FQN ")")?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_6() { return cGroup_6; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
+		public Keyword getLeftParenthesisKeyword_6_0() { return cLeftParenthesisKeyword_6_0; }
 
 		//castName=FQN
-		public Assignment getCastNameAssignment_4_1() { return cCastNameAssignment_4_1; }
+		public Assignment getCastNameAssignment_6_1() { return cCastNameAssignment_6_1; }
 
 		//FQN
-		public RuleCall getCastNameFQNParserRuleCall_4_1_0() { return cCastNameFQNParserRuleCall_4_1_0; }
+		public RuleCall getCastNameFQNParserRuleCall_6_1_0() { return cCastNameFQNParserRuleCall_6_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
+		public Keyword getRightParenthesisKeyword_6_2() { return cRightParenthesisKeyword_6_2; }
 
 		//"default"
-		public Keyword getDefaultKeyword_5() { return cDefaultKeyword_5; }
+		public Keyword getDefaultKeyword_7() { return cDefaultKeyword_7; }
 
 		//defaultValueLiteral=STRING
-		public Assignment getDefaultValueLiteralAssignment_6() { return cDefaultValueLiteralAssignment_6; }
+		public Assignment getDefaultValueLiteralAssignment_8() { return cDefaultValueLiteralAssignment_8; }
 
 		//STRING
-		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_6_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_6_0; }
+		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_8_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_8_0; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_7() { return cDocuAssignment_7; }
+		public Assignment getDocuAssignment_9() { return cDocuAssignment_9; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_7_0() { return cDocuDocumentationParserRuleCall_7_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_9_0() { return cDocuDocumentationParserRuleCall_9_0; }
 	}
 
 	public class ExternalTypeElements extends AbstractParserRuleElementFinder {
@@ -2758,18 +2770,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cBaseStateParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSimpleStateParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRefinedStateParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//State:
-		//	BaseState | RefinedState;
+		//	SimpleState | RefinedState;
 		public ParserRule getRule() { return rule; }
 
-		//BaseState | RefinedState
+		//SimpleState | RefinedState
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//BaseState
-		public RuleCall getBaseStateParserRuleCall_0() { return cBaseStateParserRuleCall_0; }
+		//SimpleState
+		public RuleCall getSimpleStateParserRuleCall_0() { return cSimpleStateParserRuleCall_0; }
 
 		//RefinedState
 		public RuleCall getRefinedStateParserRuleCall_1() { return cRefinedStateParserRuleCall_1; }
@@ -2901,8 +2913,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class BaseStateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BaseState");
+	public class SimpleStateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2929,11 +2941,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubgraphStateGraphParserRuleCall_3_4_1_0 = (RuleCall)cSubgraphAssignment_3_4_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
-		//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-		//
-		//// in RefinedState to still have both features in the common base class State
-		//
-		//BaseState:
+		//SimpleState:
 		//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
 		//	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
 		public ParserRule getRule() { return rule; }
@@ -3020,9 +3028,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefinedState");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefinedStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cBaseAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cBaseBaseStateCrossReference_1_0 = (CrossReference)cBaseAssignment_1.eContents().get(0);
-		private final RuleCall cBaseBaseStateFQNParserRuleCall_1_0_1 = (RuleCall)cBaseBaseStateCrossReference_1_0.eContents().get(1);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetStateCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetStateFQNParserRuleCall_1_0_1 = (RuleCall)cTargetStateCrossReference_1_0.eContents().get(1);
 		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -3045,25 +3053,25 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//RefinedState:
-		//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+		//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
 		//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
-		//exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
+		//"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)?
+		//("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"RefinedState"
 		public Keyword getRefinedStateKeyword_0() { return cRefinedStateKeyword_0; }
 
-		//base=[BaseState|FQN]
-		public Assignment getBaseAssignment_1() { return cBaseAssignment_1; }
+		//target=[State|FQN]
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
 
-		//[BaseState|FQN]
-		public CrossReference getBaseBaseStateCrossReference_1_0() { return cBaseBaseStateCrossReference_1_0; }
+		//[State|FQN]
+		public CrossReference getTargetStateCrossReference_1_0() { return cTargetStateCrossReference_1_0; }
 
 		//FQN
-		public RuleCall getBaseBaseStateFQNParserRuleCall_1_0_1() { return cBaseBaseStateFQNParserRuleCall_1_0_1; }
+		public RuleCall getTargetStateFQNParserRuleCall_1_0_1() { return cTargetStateFQNParserRuleCall_1_0_1; }
 
 		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
@@ -3858,21 +3866,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateTerminal");
 		private final Assignment cStateAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cStateBaseStateCrossReference_0 = (CrossReference)cStateAssignment.eContents().get(0);
-		private final RuleCall cStateBaseStateIDTerminalRuleCall_0_1 = (RuleCall)cStateBaseStateCrossReference_0.eContents().get(1);
+		private final CrossReference cStateStateCrossReference_0 = (CrossReference)cStateAssignment.eContents().get(0);
+		private final RuleCall cStateStateIDTerminalRuleCall_0_1 = (RuleCall)cStateStateCrossReference_0.eContents().get(1);
 		
 		//StateTerminal:
-		//	state=[BaseState];
+		//	state=[State];
 		public ParserRule getRule() { return rule; }
 
-		//state=[BaseState]
+		//state=[State]
 		public Assignment getStateAssignment() { return cStateAssignment; }
 
-		//[BaseState]
-		public CrossReference getStateBaseStateCrossReference_0() { return cStateBaseStateCrossReference_0; }
+		//[State]
+		public CrossReference getStateStateCrossReference_0() { return cStateStateCrossReference_0; }
 
 		//ID
-		public RuleCall getStateBaseStateIDTerminalRuleCall_0_1() { return cStateBaseStateIDTerminalRuleCall_0_1; }
+		public RuleCall getStateStateIDTerminalRuleCall_0_1() { return cStateStateIDTerminalRuleCall_0_1; }
 	}
 
 	public class TrPointTerminalElements extends AbstractParserRuleElementFinder {
@@ -3911,14 +3919,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTrPointTrPointIDTerminalRuleCall_0_0_1 = (RuleCall)cTrPointTrPointCrossReference_0_0.eContents().get(1);
 		private final Keyword cOfKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cStateBaseStateCrossReference_2_0 = (CrossReference)cStateAssignment_2.eContents().get(0);
-		private final RuleCall cStateBaseStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateBaseStateCrossReference_2_0.eContents().get(1);
+		private final CrossReference cStateStateCrossReference_2_0 = (CrossReference)cStateAssignment_2.eContents().get(0);
+		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//SubStateTrPointTerminal:
-		//	trPoint=[TrPoint] "of" state=[BaseState];
+		//	trPoint=[TrPoint] "of" state=[State];
 		public ParserRule getRule() { return rule; }
 
-		//trPoint=[TrPoint] "of" state=[BaseState]
+		//trPoint=[TrPoint] "of" state=[State]
 		public Group getGroup() { return cGroup; }
 
 		//trPoint=[TrPoint]
@@ -3933,14 +3941,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"of"
 		public Keyword getOfKeyword_1() { return cOfKeyword_1; }
 
-		//state=[BaseState]
+		//state=[State]
 		public Assignment getStateAssignment_2() { return cStateAssignment_2; }
 
-		//[BaseState]
-		public CrossReference getStateBaseStateCrossReference_2_0() { return cStateBaseStateCrossReference_2_0; }
+		//[State]
+		public CrossReference getStateStateCrossReference_2_0() { return cStateStateCrossReference_2_0; }
 
 		//ID
-		public RuleCall getStateBaseStateIDTerminalRuleCall_2_0_1() { return cStateBaseStateIDTerminalRuleCall_2_0_1; }
+		public RuleCall getStateStateIDTerminalRuleCall_2_0_1() { return cStateStateIDTerminalRuleCall_2_0_1; }
 	}
 
 	public class ChoicepointTerminalElements extends AbstractParserRuleElementFinder {
@@ -4226,13 +4234,35 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 		//
-		//// this is confugured in the work flow by
+		//// this is configured in the work flow by
 		//
 		////			fragment = scoping.ImportURIScopingFragment {}
 		//
 		//// and by overriding configureIScopeProviderDelegate in the runtime module with 
 		//
 		////			ImportedNamespaceAwareLocalScopeProvider
+		//
+		//// also configure in the RuntimeModule
+		//
+		////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		//
+		////		return PlatformRelativeUriResolver.class;
+		//
+		////	}
+		//
+		//// and in the UiRuntimeModule
+		//
+		////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+		//
+		////		return GlobalNonPlatformURIEditorOpener.class;
+		//
+		////	}
+		//
+		////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		//
+		////		return ImportAwareHyperlinkHelper.class;
+		//
+		////	}
 		//
 		//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 		//
@@ -4358,6 +4388,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	public class LiteralTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cBOOLEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cBOOLPtBooleanKeyword_0_0 = (Keyword)cBOOLEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cINTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cINTPtIntegerKeyword_1_0 = (Keyword)cINTEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cREALEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cREALPtRealKeyword_2_0 = (Keyword)cREALEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cCHAREnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cCHARPtCharacterKeyword_3_0 = (Keyword)cCHAREnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum LiteralType:
+		//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+		public EnumRule getRule() { return rule; }
+
+		//BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//BOOL="ptBoolean"
+		public EnumLiteralDeclaration getBOOLEnumLiteralDeclaration_0() { return cBOOLEnumLiteralDeclaration_0; }
+
+		//"ptBoolean"
+		public Keyword getBOOLPtBooleanKeyword_0_0() { return cBOOLPtBooleanKeyword_0_0; }
+
+		//INT="ptInteger"
+		public EnumLiteralDeclaration getINTEnumLiteralDeclaration_1() { return cINTEnumLiteralDeclaration_1; }
+
+		//"ptInteger"
+		public Keyword getINTPtIntegerKeyword_1_0() { return cINTPtIntegerKeyword_1_0; }
+
+		//REAL="ptReal"
+		public EnumLiteralDeclaration getREALEnumLiteralDeclaration_2() { return cREALEnumLiteralDeclaration_2; }
+
+		//"ptReal"
+		public Keyword getREALPtRealKeyword_2_0() { return cREALPtRealKeyword_2_0; }
+
+		//CHAR="ptCharacter"
+		public EnumLiteralDeclaration getCHAREnumLiteralDeclaration_3() { return cCHAREnumLiteralDeclaration_3; }
+
+		//"ptCharacter"
+		public Keyword getCHARPtCharacterKeyword_3_0() { return cCHARPtCharacterKeyword_3_0; }
+	}
+
 	public class CommunicationTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "CommunicationType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -4452,6 +4526,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private ActorContainerClassElements pActorContainerClass;
 	private VarDeclElements pVarDecl;
 	private RefableTypeElements pRefableType;
+	private LiteralTypeElements unknownRuleLiteralType;
 	private DataTypeElements pDataType;
 	private ComplexTypeElements pComplexType;
 	private PrimitiveTypeElements pPrimitiveType;
@@ -4497,7 +4572,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private StateElements pState;
 	private StateGraphElements pStateGraph;
 	private StateMachineElements pStateMachine;
-	private BaseStateElements pBaseState;
+	private SimpleStateElements pSimpleState;
 	private RefinedStateElements pRefinedState;
 	private DetailCodeElements pDetailCode;
 	private TrPointElements pTrPoint;
@@ -4616,6 +4691,16 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefableTypeAccess().getRule();
 	}
 
+	//enum LiteralType:
+	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+	public LiteralTypeElements getLiteralTypeAccess() {
+		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
+	}
+	
+	public EnumRule getLiteralTypeRule() {
+		return getLiteralTypeAccess().getRule();
+	}
+
 	//DataType:
 	//	PrimitiveType | ComplexType;
 	public DataTypeElements getDataTypeAccess() {
@@ -4637,8 +4722,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveType:
-	//	"PrimitiveType" name=ID "->" targetName=FQN ("(" castName=FQN ")")? "default" defaultValueLiteral=STRING
-	//	docu=Documentation?;
+	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
 	}
@@ -5092,7 +5177,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//State:
-	//	BaseState | RefinedState;
+	//	SimpleState | RefinedState;
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -5122,23 +5207,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getStateMachineAccess().getRule();
 	}
 
-	//// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-	//
-	//// in RefinedState to still have both features in the common base class State
-	//
-	//BaseState:
+	//SimpleState:
 	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
 	//	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
-	public BaseStateElements getBaseStateAccess() {
-		return (pBaseState != null) ? pBaseState : (pBaseState = new BaseStateElements());
+	public SimpleStateElements getSimpleStateAccess() {
+		return (pSimpleState != null) ? pSimpleState : (pSimpleState = new SimpleStateElements());
 	}
 	
-	public ParserRule getBaseStateRule() {
-		return getBaseStateAccess().getRule();
+	public ParserRule getSimpleStateRule() {
+		return getSimpleStateAccess().getRule();
 	}
 
 	//RefinedState:
-	//	"RefinedState" base=[BaseState|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+	//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
 	//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 	public RefinedStateElements getRefinedStateAccess() {
 		return (pRefinedState != null) ? pRefinedState : (pRefinedState = new RefinedStateElements());
@@ -5308,7 +5389,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateTerminal:
-	//	state=[BaseState];
+	//	state=[State];
 	public StateTerminalElements getStateTerminalAccess() {
 		return (pStateTerminal != null) ? pStateTerminal : (pStateTerminal = new StateTerminalElements());
 	}
@@ -5328,7 +5409,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubStateTrPointTerminal:
-	//	trPoint=[TrPoint] "of" state=[BaseState];
+	//	trPoint=[TrPoint] "of" state=[State];
 	public SubStateTrPointTerminalElements getSubStateTrPointTerminalAccess() {
 		return (pSubStateTrPointTerminal != null) ? pSubStateTrPointTerminal : (pSubStateTrPointTerminal = new SubStateTrPointTerminalElements());
 	}
@@ -5413,13 +5494,35 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 	//
-	//// this is confugured in the work flow by
+	//// this is configured in the work flow by
 	//
 	////			fragment = scoping.ImportURIScopingFragment {}
 	//
 	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
 	//
 	////			ImportedNamespaceAwareLocalScopeProvider
+	//
+	//// also configure in the RuntimeModule
+	//
+	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	//
+	////		return PlatformRelativeUriResolver.class;
+	//
+	////	}
+	//
+	//// and in the UiRuntimeModule
+	//
+	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	//
+	////		return GlobalNonPlatformURIEditorOpener.class;
+	//
+	////	}
+	//
+	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	//
+	////		return ImportAwareHyperlinkHelper.class;
+	//
+	////	}
 	//
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//

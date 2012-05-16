@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
+import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
 import org.eclipse.etrice.ui.behavior.support.InitialPointSupport;
 import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
-import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -81,7 +81,7 @@ public class ProviderDispatcher {
 			
 			if (theEObject.eIsProxy()) {
         		if (RoomFragmentProvider.isState(theEObject))
-        			return stateGraphSupport.getFeatureProvider();
+        			return stateSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isChoicePoint(theEObject))
@@ -270,7 +270,7 @@ public class ProviderDispatcher {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			if (context.getPictogramElement() instanceof Diagram)
-				return new AutoUpdateFeature(this);
+				return new DiagramUpdateFeature(this);
 			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)

@@ -25,8 +25,10 @@ public class MrPingActor extends ActorClassBase {
 	protected PingPongProtocolConjPort PingPongPort = null;
 	protected PingPongProtocolConjPort PingPongPort2 = null;
 	protected PingPongProtocolConjPort PingPongPort3 = null;
+	
 	//--------------------- saps
 	protected PTimeoutConjPort timer = null;
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
@@ -53,8 +55,10 @@ public class MrPingActor extends ActorClassBase {
 		PingPongPort = new PingPongProtocolConjPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
 		PingPongPort2 = new PingPongProtocolConjPort(this, "PingPongPort2", IFITEM_PingPongPort2, 0, port_addr[IFITEM_PingPongPort2][0], peer_addr[IFITEM_PingPongPort2][0]); 
 		PingPongPort3 = new PingPongProtocolConjPort(this, "PingPongPort3", IFITEM_PingPongPort3, 0, port_addr[IFITEM_PingPongPort3][0], peer_addr[IFITEM_PingPongPort3][0]); 
+		
 		// own saps
 		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		
 		// own service implementations
 	}
 	
@@ -73,8 +77,7 @@ public class MrPingActor extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -83,8 +86,8 @@ public class MrPingActor extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__waitForTimer = 1;
-	public static final int CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort = 2;
-	public static final int CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer = 3;
+	public static final int CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer = 2;
+	public static final int CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -115,15 +118,15 @@ public class MrPingActor extends ActorClassBase {
 		count = 0;
 		timer.Start(10);
 	}
-	protected void action_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		PingPongPort.ping();
 		PingPongPort2.ping();
 		pongCount = 0;
 	}
-	protected void action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(InterfaceItemBase ifitem) {
 		pongCount++;
 	}
-	protected void action_TRANS_cp0_TO_waitForTimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr5_FROM_cp0_TO_waitForTimer(InterfaceItemBase ifitem) {
 		if (count++ > 100) {
 		RTServices.getInstance().getSubSystem().testFinished(0);
 		} else {
@@ -167,18 +170,18 @@ public class MrPingActor extends ActorClassBase {
 				action_TRANS_INITIAL_TO__waitForTimer();
 				return STATE_waitForTimer;
 			}
-			case CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer:
 			{
-				action_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(ifitem);
 				return STATE_waitForPong;
 			}
-			case CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort:
+			case CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort:
 			{
-				action_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(ifitem);
+				action_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort(ifitem);
 				if (pongCount < 2) {
 				return STATE_waitForPong;}
 				else {
-				action_TRANS_cp0_TO_waitForTimer(ifitem);
+				action_TRANS_tr5_FROM_cp0_TO_waitForTimer(ifitem);
 				return STATE_waitForTimer;}
 			}
 		}
@@ -230,7 +233,7 @@ public class MrPingActor extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_timer__timeoutTick:
 							{
-								chain = CHAIN_TRANS_waitForTimer_TO_waitForPong_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -240,13 +243,13 @@ public class MrPingActor extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_PingPongPort2__pong:
 							{
-								chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
+								chain = CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_PingPongPort__pong:
 							{
-								chain = CHAIN_TRANS_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
+								chain = CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort2pongPingPongPort;
 								catching_state = STATE_TOP;
 							}
 						break;

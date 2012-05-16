@@ -17,9 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.BaseState;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -152,7 +151,7 @@ public class StateSupport {
 				}
 				
 				// create new State and add it
-				BaseState s = RoomFactory.eINSTANCE.createBaseState();
+				SimpleState s = RoomFactory.eINSTANCE.createSimpleState();
 				s.setName(RoomNameProvider.getUniqueStateName(sg));
 				sg.getStates().add(s);
 		        
@@ -214,16 +213,24 @@ public class StateSupport {
 				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.STATE_TYPE);
 	
+				int x = context.getX();
+				int y = context.getY();
 				int width = context.getWidth();
 				int height = context.getHeight();
+				
 				if (width<=0) {
 					width = DEFAULT_SIZE_X;
 					IDimension sz = GraphitiUi.getUiLayoutService().calculateTextSize(s.getName(), getDiagram().getFonts().get(0));
 					if (width<sz.getWidth()+TEXT_MARGIN)
 						width = sz.getWidth()+TEXT_MARGIN;
 				}
+				else
+					x += width/2;
+				
 				if (height<=0)
 					height = DEFAULT_SIZE_Y;
+				else
+					y += height/2;
 			
 				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
@@ -231,7 +238,7 @@ public class StateSupport {
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
-							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
+							x-(width/2+MARGIN), y-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 
 					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, manageColor(BACKGROUND));
 					
@@ -497,33 +504,20 @@ public class StateSupport {
 				if (bo instanceof State) {
 					State s = (State) bo;
 					
+					StateGraph newSG = null;
+					
 					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 					if (inherited) {
-						ActorClass ac = SupportUtil.getActorClass(getDiagram());
-						RefinedState rs = null;
-						
-						// do we already have a RefinedState pointing to s?
-						for (State st : ac.getStateMachine().getStates()) {
-							if (st instanceof RefinedState)
-								if (((RefinedState) st).getBase()==s) {
-									rs = (RefinedState) st;
-									break;
-								}
-						}
-						
-						// if not so create one
-						if (rs==null) {
-							rs = RoomFactory.eINSTANCE.createRefinedState();
-							rs.setBase((BaseState) s);
-							ac.getStateMachine().getStates().add(rs);
-						}
-						s = rs;
+						newSG = SupportUtil.getRefinedStateSubGraph(s, SupportUtil.getActorClass(getDiagram()));
+						s = (State) newSG.eContainer();
+					}
+					else {
+						s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+						newSG = s.getSubgraph();
 					}
 
-					s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-
 					AddContext addContext = new AddContext();
-					addContext.setNewObject(s.getSubgraph());
+					addContext.setNewObject(newSG);
 					addContext.setTargetContainer(getDiagram());
 					addContext.setX(StateGraphSupport.MARGIN);
 					addContext.setY(StateGraphSupport.MARGIN);
@@ -563,7 +557,7 @@ public class StateSupport {
 				State s = (State) bo;
 				ActorClass mainAc = SupportUtil.getActorClass(getDiagram());
 				
-				// check if ref still owned/inherited anymore
+				// check if state still owned/inherited
 				{
 					ActorClass ac = RoomHelpers.getActorClass(s);
 					ActorClass tmp = mainAc;
@@ -576,7 +570,7 @@ public class StateSupport {
 					while (!found && tmp!=null);
 					
 					if (!found)
-						return Reason.createTrueReason("Ref not inherited anymore");
+						return Reason.createTrueReason("State not inherited anymore");
 				}
 				
 				// check sub structure hint

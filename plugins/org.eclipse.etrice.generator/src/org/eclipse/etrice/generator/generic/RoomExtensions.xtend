@@ -23,7 +23,6 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.BaseState
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.ExternalPort
@@ -34,6 +33,7 @@ import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefinedState
+import org.eclipse.etrice.core.room.SimpleState
 import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.ServiceImplementation
@@ -46,6 +46,10 @@ import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.generator.etricegen.PortInstance
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
+import org.eclipse.etrice.generator.etricegen.SAPInstance
 import org.eclipse.etrice.generator.etricegen.TransitionChain
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
@@ -284,6 +288,22 @@ class RoomExtensions {
 		return false;
 	}
 
+	def boolean isConjugated(InterfaceItemInstance iii) {
+		if (iii instanceof PortInstance) {
+			return (iii as PortInstance).port.conjugated
+		}
+		else if (iii instanceof SAPInstance)  {
+			return true
+		}
+		else if (iii instanceof ServiceImplInstance) {
+			return false
+		}
+		else {
+			// should not happen
+			return false
+		}
+	}
+	
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return new ArrayList<MessageHandler>()
@@ -366,7 +386,7 @@ class RoomExtensions {
 	def List<State> getBaseStateList(StateGraph sg) {
 		var ret = new ArrayList<State>()
 		for(e : sg.getStateList()){
-			if(e instanceof BaseState){
+			if(e instanceof SimpleState){
 				ret.add(e)
 			}
 		}

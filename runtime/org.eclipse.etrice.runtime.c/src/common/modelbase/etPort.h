@@ -21,8 +21,7 @@
 #include "messaging/etMessageService.h"
 
 typedef struct {
-	void* myActor;
-	etActorReceiveMessage receiveMessageFunc;
+	void* varData;
 	etMessageService* msgService;
 	etAddressId peerAddress;
 	etAddressId localId;
@@ -34,8 +33,7 @@ typedef struct {
 } etPort;
 
 typedef struct {
-	void* myActor;
-	etActorReceiveMessage receiveMessageFunc;
+	void* varData;
 	etMessageService* msgService;
 	etAddressId peerAddress;
 	etAddressId localId;
@@ -54,7 +52,7 @@ typedef struct {
 
 typedef etPort* InterfaceItemBase;
 
-void etPort_receive(const etPort* self, const etMessage* msg);
+//void etPort_receive(const etPort* self, const etMessage* msg);
 void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data);
 
 

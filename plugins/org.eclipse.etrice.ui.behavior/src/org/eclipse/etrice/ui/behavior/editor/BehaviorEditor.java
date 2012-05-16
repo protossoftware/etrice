@@ -116,15 +116,17 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		ActorClass ac = SupportUtil.getActorClass(diagram);
 		
-		ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
-		for (State s : ac.getStateMachine().getStates()) {
-			if (s instanceof RefinedState) {
-				if (isUnused((RefinedState)s))
-					toBeRemoved.add((RefinedState) s);
+		if (ac.getStateMachine()!=null) {
+			ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
+			for (State s : ac.getStateMachine().getStates()) {
+				if (s instanceof RefinedState) {
+					if (isUnused((RefinedState)s))
+						toBeRemoved.add((RefinedState) s);
+				}
 			}
+			
+			ac.getStateMachine().getStates().removeAll(toBeRemoved);
 		}
-		
-		ac.getStateMachine().getStates().removeAll(toBeRemoved);
 	}
 
 	/**
@@ -148,7 +150,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 
 		// if our current context is an empty state graph we go one level up
 		StateGraph current = ContextSwitcher.getCurrentStateGraph(diagram);
-		if (current.eContainer() instanceof State) {
+		if (current!=null && current.eContainer() instanceof State) {
 			State s = (State) current.eContainer();
 			if (!RoomHelpers.hasDirectSubStructure(s)) {
 				ContextSwitcher.goUp(diagram, current);

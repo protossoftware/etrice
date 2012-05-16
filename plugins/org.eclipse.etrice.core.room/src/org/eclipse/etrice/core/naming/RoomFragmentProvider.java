@@ -245,7 +245,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	public static boolean isState(EObject obj) {
 		URI uri = EcoreUtil.getURI(obj);
 		if (uri!=null && uri.fragment()!=null) {
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getBaseState().getName()))
+			if (uri.fragment().startsWith("BaseState"))
+				return true;
+			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getSimpleState().getName()))
 				return true;
 			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getRefinedState().getName()))
 				return true;
@@ -346,7 +348,8 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			else if (type.equals(RoomPackage.eINSTANCE.getLayerConnection().getName())) {
 				return getLayerConnection(rc, remainder);
 			}
-			else if (type.equals(RoomPackage.eINSTANCE.getBaseState().getName())
+			else if (type.equals("BaseState")
+					|| type.equals(RoomPackage.eINSTANCE.getSimpleState().getName())
 					|| type.equals(RoomPackage.eINSTANCE.getRefinedState().getName())) {
 				return getState(rc, remainder);
 			}

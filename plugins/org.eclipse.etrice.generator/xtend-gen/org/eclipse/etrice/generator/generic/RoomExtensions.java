@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -28,6 +27,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -41,6 +41,10 @@ import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.etricegen.ActiveTrigger;
 import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.generator.etricegen.PortInstance;
+import org.eclipse.etrice.generator.etricegen.SAPInstance;
+import org.eclipse.etrice.generator.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.generator.etricegen.TransitionChain;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -442,6 +446,24 @@ public class RoomExtensions {
       return false;
   }
   
+  public boolean isConjugated(final InterfaceItemInstance iii) {
+    if ((iii instanceof PortInstance)) {
+      Port _port = ((PortInstance) iii).getPort();
+      boolean _isConjugated = _port.isConjugated();
+      return _isConjugated;
+    } else {
+      if ((iii instanceof SAPInstance)) {
+        return true;
+      } else {
+        if ((iii instanceof ServiceImplInstance)) {
+          return false;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
+  
   public List<MessageHandler> getReceiveHandlers(final ProtocolClass pc, final boolean conj) {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _operator_equals = ObjectExtensions.operator_equals(_portClass, null);
@@ -584,7 +606,7 @@ public class RoomExtensions {
       ArrayList<State> ret = _arrayList;
       List<State> _stateList = this.getStateList(sg);
       for (final State e : _stateList) {
-        if ((e instanceof BaseState)) {
+        if ((e instanceof SimpleState)) {
           ret.add(e);
         }
       }

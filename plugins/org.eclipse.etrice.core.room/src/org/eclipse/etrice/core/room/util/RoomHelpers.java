@@ -42,6 +42,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -175,18 +176,18 @@ public class RoomHelpers {
 			return true;
 		
 		if (ac.getStateMachine()!=null) {
-			for (State s : ac.getStateMachine().getStates()) {
+			for (State s : getAllStateTrees(ac.getStateMachine())) {
 				State predecessor = s;
 				while (predecessor instanceof RefinedState) {
-					predecessor = ((RefinedState) s).getBase();
+					predecessor = ((RefinedState) predecessor).getTarget();
 					if (predecessor==state) {
-						// we have a chain form s -> state
+						// we have a chain from s -> state
 						// check this chain
 						predecessor = s;
 						while (predecessor instanceof RefinedState) {
 							if (hasDirectSubStructure(predecessor))
 								return true;
-							predecessor = ((RefinedState) s).getBase();
+							predecessor = ((RefinedState) s).getTarget();
 							if (predecessor==state)
 								break;
 						}
@@ -229,10 +230,10 @@ public class RoomHelpers {
 	 */
 	public static State getTargettingState(State state, ActorClass ac) {
 		State targetting = state;
-		for (State s : ac.getStateMachine().getStates()) {
+		for (State s : getAllStateTrees(ac.getStateMachine())) {
 			State predecessor = s;
 			while (predecessor instanceof RefinedState) {
-				predecessor = ((RefinedState) s).getBase();
+				predecessor = ((RefinedState) predecessor).getTarget();
 				if (predecessor==state)
 					targetting = s;
 			}
@@ -268,36 +269,83 @@ public class RoomHelpers {
 		return result.toString();
 	}
 
+	/**
+	 * The default resolution mechanism will return a SimpleState.
+	 * This methods searches for RefinedStates targeting the simple state.
+	 * 
+	 * @param sg the context for the search
+	 * @param state the target state
+	 * 
+	 * @return a refined state targeting state or state itself
+	 */
+	public static State getRefinedStateFor(StateGraph sg, State state) {
+		// first we look for RefinedStates in the current context
+		for (State s : sg.getStates()) {
+			if (s instanceof RefinedState && s.getName().equals(state.getName())) {
+				return s;
+			}
+		}
+		
+		// then we check whether our container has a base state/class
+		if (sg.eContainer() instanceof State) {
+			if (sg.eContainer() instanceof RefinedState) {
+				return getRefinedStateFor(((RefinedState)sg.eContainer()).getTarget().getSubgraph(), state);
+			}
+		}
+		else if (sg.eContainer() instanceof ActorClass) {
+			ActorClass ac = (ActorClass) sg.eContainer();
+			if (ac.getBase()!=null && ac.getBase().getStateMachine()!=null)
+				return getRefinedStateFor(ac.getBase().getStateMachine(), state);
+		}
+		
+		// nothing found, return original state
+		return state;
+	}
+
 	public static boolean isGuarded(Trigger trig) {
 		return trig.getGuard()!=null && RoomHelpers.hasDetailCode(trig.getGuard().getGuard());
 	}
+
 	public static List<State> getAllStates(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States());
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), false);
+	}
+
+	public static List<State> getAllStateTrees(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), true);
 	}
 
 	public static List<TrPoint> getAllTrPoints(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), false);
 	}
 
 	public static List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), false);
 	}
 
 	public static List<Transition> getAllTransitions(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), false);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature) {
+	private static <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature, boolean recurse) {
 		ArrayList<T> result = new ArrayList<T>();
 		
-		do {
+		while (sg!=null) {
 			Object items = sg.eGet(feature);
 			if (items instanceof List<?>)
 				result.addAll((List<? extends T>) items);
 			
+			if (recurse) {
+				for (State s : sg.getStates()) {
+					if (s.getSubgraph()!=null) {
+						List<T> subItems = getAllStateGraphItems(s.getSubgraph(), feature, recurse);
+						result.addAll(subItems);
+					}
+				}
+			}
+			
 			if (sg.eContainer() instanceof RefinedState) {
-				sg = ((RefinedState)sg.eContainer()).getBase().getSubgraph();
+				sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
 			}
 			else if (sg.eContainer() instanceof ActorClass) {
 				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
@@ -307,7 +355,6 @@ public class RoomHelpers {
 				break;
 			}
 		}
-		while (sg!=null);
 		
 		return result;
 	}
@@ -337,7 +384,7 @@ public class RoomHelpers {
 			}
 			
 			if (sg.eContainer() instanceof RefinedState) {
-				sg = ((RefinedState)sg.eContainer()).getBase().getSubgraph();
+				sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
 			}
 			else if (sg.eContainer() instanceof ActorClass) {
 				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
@@ -400,12 +447,12 @@ public class RoomHelpers {
 	*/
 	
 	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
-		List<T> states = RoomHelpers.getAllStateGraphItems(sg, feature);
+		List<T> items = RoomHelpers.getAllStateGraphItems(sg, feature, false);
 		
 		HashSet<String> names = new HashSet<String>();
-		for (T s : states) {
-			if (s!=skip)
-				names.add(s.getName());
+		for (T item : items) {
+			if (item!=skip)
+				names.add(item.getName());
 		}
 		
 		return names;
@@ -678,6 +725,34 @@ public class RoomHelpers {
 		signature = "("+signature+")";
 		return signature;
 	}
+
+	/**
+	 * return the {@link BaseState} of a {@link State}
+	 * @param s
+	 * @return the state itself if a BaseState or the BaseState for a {@link RefinedState}
+	 */
+	public static SimpleState getBaseState(State s) {
+		if (s instanceof SimpleState)
+			return (SimpleState) s;
+		else if (s instanceof RefinedState)
+			return getBaseState(((RefinedState) s).getTarget());
+		else
+			return null;
+	}
+
+	public static List<State> getReferencedStatesRecursively(RefinedState rs) {
+		ArrayList<State> result = new ArrayList<State>();
+		
+		State target = rs.getTarget();
+		result.add(target);
+		
+		if (target instanceof RefinedState) {
+			List<State> refs = getReferencedStatesRecursively((RefinedState) target);
+			result.addAll(refs);
+		}
+		
+		return result;
+	}
 	
 	public static boolean hasConstructor(ActorClass ac) {
 		for (StandardOperation op : ac.getOperations()) {
@@ -696,6 +771,20 @@ public class RoomHelpers {
 					return true;
 		}
 		
+		return false;
+	}
+	public static boolean referencesStateRecursively(RefinedState rs, State referenced) {
+		State target = rs.getTarget();
+		if (target==referenced)
+			return true;
+		
+		if (target instanceof SimpleState)
+			return false;
+		
+		if (target instanceof RefinedState)
+			return referencesStateRecursively((RefinedState) target, referenced);
+		
+		assert(false): "unexpected sub type";
 		return false;
 	}
 }

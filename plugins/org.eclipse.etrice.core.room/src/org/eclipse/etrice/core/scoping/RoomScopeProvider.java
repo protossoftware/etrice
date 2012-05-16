@@ -13,8 +13,11 @@
 package org.eclipse.etrice.core.scoping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +25,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -44,6 +46,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.SemanticsRule;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
@@ -130,48 +133,20 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		return false;
 	}
-	
-	/**
-	 * recursively collect all {@link BaseState}s of an actor class in a list
-	 * @param ac
-	 * @param states
-	 */
-	private void collectAllStates(ActorClass ac,
-			LinkedList<BaseState> states) {
-		while (ac!=null) {
-			collectStates(ac.getStateMachine(), states);
-			ac = ac.getBase();
-		}
-	}
-
-	private void collectStates(StateGraph sg,
-			LinkedList<BaseState> states) {
-		
-		if (sg==null)
-			return;
-		
-		for (State s : sg.getStates()) {
-			if (s instanceof BaseState)
-				states.add((BaseState) s);
-		}
-		for (State s : sg.getStates()) {
-			collectStates(s.getSubgraph(), states);
-		}
-	}
 
 	/**
 	 * compute the path of a {@link BaseState}
 	 * @param bs
 	 * @return the path
 	 */
-	private QualifiedName getStatePath(BaseState bs) {
+	private QualifiedName getStatePath(State bs) {
 		EObject parent = bs.eContainer().eContainer();
-		if (parent instanceof BaseState)
-			return getStatePath((BaseState) parent).append(bs.getName());
+		if (parent instanceof SimpleState)
+			return getStatePath((SimpleState) parent).append(bs.getName());
 		else if (parent instanceof RefinedState) {
-			BaseState base = ((RefinedState) parent).getBase();
-			if (base!=null)
-				return getStatePath(base).append(bs.getName());
+			State target = ((RefinedState) parent).getTarget();
+			if (target!=null)
+				return getStatePath(target).append(bs.getName());
 		}
 		return QualifiedName.create(bs.getName());
 	}
@@ -215,62 +190,37 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	/**
-	 * return the {@link BaseState} of a {@link State}
-	 * @param s
-	 * @return the state itself if a BaseState or the BaseState for a {@link RefinedState}
-	 */
-	private BaseState getBaseState(State s) {
-		if (s instanceof BaseState)
-			return (BaseState) s;
-		else if (s instanceof RefinedState)
-			return ((RefinedState) s).getBase();
-		else
-			return null;
-	}
-
-	private IScope getStateScopes(EObject obj) {
-		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
-		// first state in container hierarchy
-		StateGraph parent = getStateGraph(obj);
-		
-		// collect states of my parent
-		if (parent!=null) {
-			for (State s : parent.getStates()) {
-				BaseState bs = getBaseState(s);
-				scopes.add(EObjectDescription.create(bs.getName(), bs));
-			}
-		
-			// if my parent is a refined state we also add its base state contents
-			if (parent.eContainer() instanceof RefinedState) {
-				parent = ((RefinedState) parent.eContainer()).getBase().getSubgraph();
-				if (parent!=null)
-					for (State s : parent.getStates()) {
-						BaseState bs = getBaseState(s);
-						scopes.add(EObjectDescription.create(bs.getName(), bs));
-					}
-			}
-			else if (parent.eContainer() instanceof ActorClass) {
-				ActorClass ac = (ActorClass) parent.eContainer();
-				if (ac.getBase()!=null) {
-					for (State s : ac.getBase().getStateMachine().getStates()) {
-						BaseState bs = getBaseState(s);
-						scopes.add(EObjectDescription.create(bs.getName(), bs));
-					}
-				}
-			}
-		}
-		return new SimpleScope(IScope.NULLSCOPE, scopes);
-	}
-
-	/**
 	 * returns a flat list of State scopes for a {@link StateTerminal}
 	 * @param st - the transition endpoint or terminal
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */
 	public IScope scope_StateTerminal_state(StateTerminal st, EReference ref) {
-		return getStateScopes(st);
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+
+		// first state graph in container hierarchy
+		StateGraph parent = getStateGraph(st);
+		getStateScopes(parent, scopes);
+
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
+	/**
+	 * @param parent
+	 * @param scopes
+	 */
+	private void getStateScopes(StateGraph parent, final List<IEObjectDescription> scopes) {
+		List<State> states = RoomHelpers.getAllStates(parent);
+		HashMap<String, SimpleState> name2state = new HashMap<String, SimpleState>();
+		for (State s : states) {
+			// returning SimpleStates only simplifies the relocation task in the generator model:
+			// there we shuffle RefinedState contents to SimpleStates and remove the RefinedStates.
+			// If we had references to RefinedStates we had to redirect those
+			name2state.put(s.getName(), RoomHelpers.getBaseState(s));
+		}
+		for (Entry<String, SimpleState> entry : name2state.entrySet()) {
+			scopes.add(EObjectDescription.create(entry.getKey(), entry.getValue()));
+		}
 	}
 
 	/**
@@ -283,9 +233,10 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		StateGraph parent = getStateGraph(ep);
-		StateGraph targetStateGraph = parent;
-		
-		getTrPointScopes(scopes, targetStateGraph);
+		List<TrPoint> tps = RoomHelpers.getAllTrPoints(parent);
+		for (TrPoint tp : tps) {
+			scopes.add(EObjectDescription.create(tp.getName(), tp));
+		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
@@ -300,41 +251,21 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		StateGraph parent = getStateGraph(ep);
-		StateGraph targetStateGraph = parent;
 		if (ep.getState()!=null) {
-			targetStateGraph = ep.getState().getSubgraph();	// always a BaseState
+			State epState = ep.getState();
 			
-			// if one of our siblings is a RefinedState of our target we take that as target
-			for (State sibling : parent.getStates()) {
-				if (sibling instanceof RefinedState) {
-					if (((RefinedState)sibling).getBase()==ep.getState())
-						targetStateGraph = sibling.getSubgraph();
+			// check if there is a refined state for this state
+			epState = RoomHelpers.getRefinedStateFor(parent, epState);
+			
+			if (epState.getSubgraph()!=null) {
+				List<TrPoint> tps = RoomHelpers.getAllTrPoints(epState.getSubgraph());
+				for (TrPoint tp : tps) {
+					scopes.add(EObjectDescription.create(tp.getName(), tp));
 				}
 			}
 		}
 		
-		if (targetStateGraph!=null)
-			getTrPointScopes(scopes, targetStateGraph);
-		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
-	}
-
-	private void getTrPointScopes(final List<IEObjectDescription> scopes,
-			StateGraph sg) {
-		
-		// collect transition points of this state
-		for (TrPoint tp : sg.getTrPoints()) {
-			scopes.add(EObjectDescription.create(tp.getName(), tp));
-		}
-		
-		// if this state is a refined state we also add its base state transition points
-		if (sg.eContainer() instanceof RefinedState) {
-			sg = ((RefinedState) sg.eContainer()).getBase().getSubgraph();
-			if (sg!=null)
-				for (TrPoint tp : sg.getTrPoints()) {
-					scopes.add(EObjectDescription.create(tp.getName(), tp));
-				}
-		}
 	}
 
 	/**
@@ -344,7 +275,13 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @return a list of scopes
 	 */
 	public IScope scope_SubStateTrPointTerminal_state(SubStateTrPointTerminal st, EReference ref) {
-		return getStateScopes(st);
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		// first state graph in container hierarchy
+		StateGraph parent = getStateGraph(st);
+		getStateScopes(parent, scopes);
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
 	/**
@@ -356,30 +293,11 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_ChoicepointTerminal_cp(ChoicepointTerminal ct, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		// first state in container hierarchy
+		// first state graph in container hierarchy
 		StateGraph parent = getStateGraph(ct);
-		
-		// collect choicepoints of my parent
-		if (parent!=null)
-			for (ChoicePoint cp : parent.getChPoints()) {
-				scopes.add(EObjectDescription.create(cp.getName(), cp));
-			}
-		
-		// if my parent is a refined state we also add its base state contents
-		if (parent.eContainer() instanceof RefinedState) {
-			parent = ((RefinedState) parent.eContainer()).getBase().getSubgraph();
-			if (parent!=null)
-				for (ChoicePoint cp : parent.getChPoints()) {
-					scopes.add(EObjectDescription.create(cp.getName(), cp));
-				}
-		}
-		else if (parent.eContainer() instanceof ActorClass) {
-			ActorClass ac = (ActorClass) parent.eContainer();
-			if (ac.getBase()!=null) {
-				for (ChoicePoint cp : ac.getBase().getStateMachine().getChPoints()) {
-					scopes.add(EObjectDescription.create(cp.getName(), cp));
-				}
-			}
+		List<ChoicePoint> choicePoints = RoomHelpers.getAllChoicePoints(parent);
+		for (ChoicePoint cp : choicePoints) {
+			scopes.add(EObjectDescription.create(cp.getName(), cp));
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
@@ -536,16 +454,57 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */
-	public IScope scope_RefinedState_base(RefinedState rs, EReference ref) {
+	public IScope scope_RefinedState_target(RefinedState rs, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		ActorClass ac = getActorClass(rs);
-		LinkedList<BaseState> states = new LinkedList<BaseState>();
-		collectAllStates(ac.getBase(), states);
-		for (BaseState bs : states) {
-			scopes.add(EObjectDescription.create(getStatePath(bs), bs));
+		StateGraph sg = getStateGraph(rs);
+		if (sg.eContainer() instanceof ActorClass) {
+			if (ac.getBase()!=null) {
+				ac = ac.getBase();
+				HashSet<State> covered = new HashSet<State>();
+				ArrayList<State> states = new ArrayList<State>();
+				while (ac!=null) {
+					recursivelyAddStates(ac.getStateMachine(), covered, states);
+					ac = ac.getBase();
+				}
+				for (State s : states) {
+					scopes.add(EObjectDescription.create(getStatePath(s), s));
+				}
+			}
 		}
+		else if (sg.eContainer() instanceof RefinedState) {
+			sg = ((RefinedState) sg.eContainer()).getTarget().getSubgraph();
+			if (sg!=null)
+				for (State s : sg.getStates()) {
+					scopes.add(EObjectDescription.create(s.getName(), s));
+				}
+		}
+		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
+	/**
+	 * @param sg
+	 * @param covered
+	 * @param states
+	 */
+	private void recursivelyAddStates(StateGraph sg, HashSet<State> covered, ArrayList<State> states) {
+		for (State s : sg.getStates()) {
+			if (s instanceof SimpleState && !covered.contains(s)) {
+				states.add(s);
+			}
+			else if (s instanceof RefinedState && !covered.contains(s)) {
+				states.add(s);
+				covered.add(((RefinedState) s).getTarget());
+			}
+		}
+		
+		// recursion
+		for (State s : sg.getStates()) {
+			if (s.getSubgraph()!=null)
+				recursivelyAddStates(s.getSubgraph(), covered, states);
+		}
 	}
 	
 	/**

@@ -1,0 +1,26 @@
+etUnit report
+ts start: TestMessage
+tc start 1: TestEtMessage_testBasicMessage
+tc end 1: 0
+ts start: TestEtMessageQueue
+tc start 2: TestEtMessageQueue_testPushPop
+tc fail 2: #334#333#..\src\runtime\TestEtMessageQueue.c:42#rcvMsg2->evtID: expected=334, actual=333
+tc end 2: 0
+tc start 3: TestEtMessageQueue_testMassiveMessaging
+tc end 3: 187
+ts start: TestEtMessageService
+tc start 4: TestEtMessageService_init
+tc end 4: 0
+tc start 5: TestEtMessageService_GetPushPopReturn
+tc end 5: 0
+tc start 6: TestEtMessageService_GetReturn
+tc end 6: 16
+tc start 7: TestEtMessageService_execute
+tc end 7: 0
+tc start 8: TestEtMessageService_getMessagePoolLowWaterMark
+tc end 8: 0
+ts start: TestEtUnit
+tc start 9: TestEtUnit_Expect_Order
+tc end 9: 0
+tc start 10: TestEtUnit_Expect
+tc end 10: 0

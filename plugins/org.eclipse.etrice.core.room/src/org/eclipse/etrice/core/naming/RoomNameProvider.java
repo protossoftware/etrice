@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.BaseState;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -58,8 +57,8 @@ import org.eclipse.etrice.core.room.util.RoomSwitch;
 
 public class RoomNameProvider {
 	
-	private static final String TOP_STATE_NAME = "TOP";
-	private static final String PATH_SEP = "_";
+	public static final String TOP_STATE_NAME = "TOP";
+	public static final String PATH_SEP = "_";
 	
 	private static RoomSwitch<String> nameProvider = new RoomSwitch<String>() {
 		public String caseState(State object) { return RoomNameProvider.getStateName(object); }
@@ -186,15 +185,9 @@ public class RoomNameProvider {
 		if (s==null) {
 			return TOP_STATE_NAME;
 		}
-		else if (s instanceof BaseState) {
-			return ((BaseState) s).getName();
+		else {
+			return s.getName();
 		}
-		else if (s instanceof RefinedState) {
-			return ((RefinedState) s).getBase().getName();
-		}
-		
-		assert(false): "Unexpected State class "+s.eClass().getName();
-		return null;
 	}
 	
 	public static String getStatePathName(State s) {
@@ -202,6 +195,9 @@ public class RoomNameProvider {
 	}
 	
 	public static String getParentPath(StateGraphItem item) {
+		if (item instanceof RefinedState)
+			item = ((RefinedState)item).getTarget();
+		
 		State parent = getParentState(item);
 		if (parent==null)
 			return "";

@@ -26,7 +26,9 @@ public class ALogService extends ActorClassBase {
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
+	
 	//--------------------- saps
+	
 	//--------------------- services
 	protected LogReplPort log = null;
 
@@ -51,7 +53,9 @@ public class ALogService extends ActorClassBase {
 		// initialize attributes
 
 		// own ports
+		
 		// own saps
+		
 		// own service implementations
 		log = new LogReplPort(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
 	}
@@ -71,8 +75,7 @@ public class ALogService extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -81,9 +84,9 @@ public class ALogService extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__closed = 1;
-	public static final int CHAIN_TRANS_closed_TO_opened_BY_openlog = 2;
-	public static final int CHAIN_TRANS_opened_TO_closed_BY_closelog = 3;
-	public static final int CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1 = 4;
+	public static final int CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog = 2;
+	public static final int CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog = 3;
+	public static final int CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1 = 4;
 	
 	/* triggers */
 	public static final int POLLING = 0;
@@ -110,7 +113,7 @@ public class ALogService extends ActorClassBase {
 	/* Entry and Exit Codes */
 	
 	/* Action Codes */
-	protected void action_TRANS_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String fileName) {
+	protected void action_TRANS_open_FROM_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String fileName) {
 		Date d=new Date(tStart);
 		try{
 		file=new FileOutputStream(fileName);
@@ -121,12 +124,12 @@ public class ALogService extends ActorClassBase {
 		System.out.println("Log file not opened !");
 		}
 	}
-	protected void action_TRANS_opened_TO_closed_BY_closelog(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr0_FROM_opened_TO_closed_BY_closelog(InterfaceItemBase ifitem) {
 		p.flush();
 		p.close();
 		p=null;
 	}
-	protected void action_TRANS_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData data) {
+	protected void action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData data) {
 		p.println("Timestamp: " + Long.toString(data.timeStamp-tStart) + "ms");
 		p.println("SenderInstance: "+ data.sender);
 		p.println("UserString: " + data.userString);
@@ -169,21 +172,21 @@ public class ALogService extends ActorClassBase {
 			{
 				return STATE_closed;
 			}
-			case CHAIN_TRANS_closed_TO_opened_BY_openlog:
+			case CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog:
 			{
 				String fileName = (String) generic_data;
-				action_TRANS_closed_TO_opened_BY_openlog(ifitem, fileName);
+				action_TRANS_open_FROM_closed_TO_opened_BY_openlog(ifitem, fileName);
 				return STATE_opened;
 			}
-			case CHAIN_TRANS_opened_TO_closed_BY_closelog:
+			case CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog:
 			{
-				action_TRANS_opened_TO_closed_BY_closelog(ifitem);
+				action_TRANS_tr0_FROM_opened_TO_closed_BY_closelog(ifitem);
 				return STATE_closed;
 			}
-			case CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1:
+			case CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1:
 			{
 				InternalLogData data = (InternalLogData) generic_data;
-				action_TRANS_opened_TO_opened_BY_internalLoglog_tr1(ifitem, data);
+				action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(ifitem, data);
 				return STATE_opened;
 			}
 		}
@@ -235,7 +238,7 @@ public class ALogService extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_log__open:
 							{
-								chain = CHAIN_TRANS_closed_TO_opened_BY_openlog;
+								chain = CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -245,13 +248,13 @@ public class ALogService extends ActorClassBase {
 					switch(trigger) {
 						case TRIG_log__close:
 							{
-								chain = CHAIN_TRANS_opened_TO_closed_BY_closelog;
+								chain = CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog;
 								catching_state = STATE_TOP;
 							}
 						break;
 						case TRIG_log__internalLog:
 							{
-								chain = CHAIN_TRANS_opened_TO_opened_BY_internalLoglog_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1;
 								catching_state = STATE_TOP;
 							}
 						break;

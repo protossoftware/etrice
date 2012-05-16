@@ -539,13 +539,22 @@ public interface RoomPackage extends EPackage
   int PRIMITIVE_TYPE__DOCU = DATA_TYPE__DOCU;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRIMITIVE_TYPE__TYPE = DATA_TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Target Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__TARGET_NAME = DATA_TYPE_FEATURE_COUNT + 0;
+  int PRIMITIVE_TYPE__TARGET_NAME = DATA_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Cast Name</b></em>' attribute.
@@ -554,7 +563,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__CAST_NAME = DATA_TYPE_FEATURE_COUNT + 1;
+  int PRIMITIVE_TYPE__CAST_NAME = DATA_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
@@ -563,7 +572,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL = DATA_TYPE_FEATURE_COUNT + 2;
+  int PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL = DATA_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Primitive Type</em>' class.
@@ -572,7 +581,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 3;
+  int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl <em>External Type</em>}' class.
@@ -2630,14 +2639,14 @@ public interface RoomPackage extends EPackage
   int STATE_GRAPH_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.BaseStateImpl <em>Base State</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.BaseStateImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBaseState()
+   * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
    * @generated
    */
-  int BASE_STATE = 48;
+  int SIMPLE_STATE = 48;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -2646,7 +2655,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__DOCU = STATE__DOCU;
+  int SIMPLE_STATE__DOCU = STATE__DOCU;
 
   /**
    * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
@@ -2655,7 +2664,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
+  int SIMPLE_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
 
   /**
    * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
@@ -2664,7 +2673,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__EXIT_CODE = STATE__EXIT_CODE;
+  int SIMPLE_STATE__EXIT_CODE = STATE__EXIT_CODE;
 
   /**
    * The feature id for the '<em><b>Do Code</b></em>' containment reference.
@@ -2673,7 +2682,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__DO_CODE = STATE__DO_CODE;
+  int SIMPLE_STATE__DO_CODE = STATE__DO_CODE;
 
   /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -2682,7 +2691,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__SUBGRAPH = STATE__SUBGRAPH;
+  int SIMPLE_STATE__SUBGRAPH = STATE__SUBGRAPH;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2691,16 +2700,16 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BASE_STATE__NAME = STATE_FEATURE_COUNT + 0;
+  int SIMPLE_STATE__NAME = STATE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Base State</em>' class.
+   * The number of structural features of the '<em>Simple State</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BASE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
+  int SIMPLE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
@@ -2758,13 +2767,13 @@ public interface RoomPackage extends EPackage
   int REFINED_STATE__SUBGRAPH = STATE__SUBGRAPH;
 
   /**
-   * The feature id for the '<em><b>Base</b></em>' reference.
+   * The feature id for the '<em><b>Target</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFINED_STATE__BASE = STATE_FEATURE_COUNT + 0;
+  int REFINED_STATE__TARGET = STATE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Refined State</em>' class.
@@ -3864,6 +3873,16 @@ public interface RoomPackage extends EPackage
   int IMPORT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.LiteralType
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
+   * @generated
+   */
+  int LITERAL_TYPE = 76;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3871,7 +3890,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 76;
+  int COMMUNICATION_TYPE = 77;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -3881,7 +3900,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 77;
+  int ACTOR_COMMUNICATION_TYPE = 78;
 
 
   /**
@@ -4226,6 +4245,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getPrimitiveType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.PrimitiveType#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.etrice.core.room.PrimitiveType#getType()
+   * @see #getPrimitiveType()
+   * @generated
+   */
+  EAttribute getPrimitiveType_Type();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.PrimitiveType#getTargetName <em>Target Name</em>}'.
@@ -5685,25 +5715,25 @@ public interface RoomPackage extends EPackage
   EReference getStateGraph_Transitions();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.BaseState <em>Base State</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Base State</em>'.
-   * @see org.eclipse.etrice.core.room.BaseState
+   * @return the meta object for class '<em>Simple State</em>'.
+   * @see org.eclipse.etrice.core.room.SimpleState
    * @generated
    */
-  EClass getBaseState();
+  EClass getSimpleState();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.BaseState#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.SimpleState#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.BaseState#getName()
-   * @see #getBaseState()
+   * @see org.eclipse.etrice.core.room.SimpleState#getName()
+   * @see #getSimpleState()
    * @generated
    */
-  EAttribute getBaseState_Name();
+  EAttribute getSimpleState_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefinedState <em>Refined State</em>}'.
@@ -5716,15 +5746,15 @@ public interface RoomPackage extends EPackage
   EClass getRefinedState();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedState#getBase <em>Base</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedState#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Base</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedState#getBase()
+   * @return the meta object for the reference '<em>Target</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedState#getTarget()
    * @see #getRefinedState()
    * @generated
    */
-  EReference getRefinedState_Base();
+  EReference getRefinedState_Target();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.DetailCode <em>Detail Code</em>}'.
@@ -6317,6 +6347,16 @@ public interface RoomPackage extends EPackage
   EAttribute getImport_ImportURI();
 
   /**
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Literal Type</em>'.
+   * @see org.eclipse.etrice.core.room.LiteralType
+   * @generated
+   */
+  EEnum getLiteralType();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6632,6 +6672,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PRIMITIVE_TYPE__TYPE = eINSTANCE.getPrimitiveType_Type();
 
     /**
      * The meta object literal for the '<em><b>Target Name</b></em>' attribute feature.
@@ -7800,14 +7848,14 @@ public interface RoomPackage extends EPackage
     EReference STATE_GRAPH__TRANSITIONS = eINSTANCE.getStateGraph_Transitions();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.BaseStateImpl <em>Base State</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.BaseStateImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBaseState()
+     * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
      * @generated
      */
-    EClass BASE_STATE = eINSTANCE.getBaseState();
+    EClass SIMPLE_STATE = eINSTANCE.getSimpleState();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -7815,7 +7863,7 @@ public interface RoomPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BASE_STATE__NAME = eINSTANCE.getBaseState_Name();
+    EAttribute SIMPLE_STATE__NAME = eINSTANCE.getSimpleState_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
@@ -7828,12 +7876,12 @@ public interface RoomPackage extends EPackage
     EClass REFINED_STATE = eINSTANCE.getRefinedState();
 
     /**
-     * The meta object literal for the '<em><b>Base</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Target</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference REFINED_STATE__BASE = eINSTANCE.getRefinedState_Base();
+    EReference REFINED_STATE__TARGET = eINSTANCE.getRefinedState_Target();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl <em>Detail Code</em>}' class.
@@ -8334,6 +8382,16 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.LiteralType
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
+     * @generated
+     */
+    EEnum LITERAL_TYPE = eINSTANCE.getLiteralType();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.

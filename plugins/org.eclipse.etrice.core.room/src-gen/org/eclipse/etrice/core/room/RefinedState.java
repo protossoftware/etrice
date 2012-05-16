@@ -15,7 +15,7 @@ package org.eclipse.etrice.core.room;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.RefinedState#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.RefinedState#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ package org.eclipse.etrice.core.room;
 public interface RefinedState extends State
 {
   /**
-   * Returns the value of the '<em><b>Base</b></em>' reference.
+   * Returns the value of the '<em><b>Target</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Base</em>' reference isn't clear,
+   * If the meaning of the '<em>Target</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Base</em>' reference.
-   * @see #setBase(BaseState)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getRefinedState_Base()
+   * @return the value of the '<em>Target</em>' reference.
+   * @see #setTarget(State)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRefinedState_Target()
    * @model
    * @generated
    */
-  BaseState getBase();
+  State getTarget();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.RefinedState#getBase <em>Base</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.RefinedState#getTarget <em>Target</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Base</em>' reference.
-   * @see #getBase()
+   * @param value the new value of the '<em>Target</em>' reference.
+   * @see #getTarget()
    * @generated
    */
-  void setBase(BaseState value);
+  void setTarget(State value);
 
 } // RefinedState

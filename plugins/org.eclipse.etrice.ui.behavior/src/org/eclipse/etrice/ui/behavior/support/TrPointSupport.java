@@ -252,6 +252,12 @@ public class TrPointSupport {
 				int y = context.getY();
 				int width = parentShape.getGraphicsAlgorithm().getWidth();
 				int height = parentShape.getGraphicsAlgorithm().getHeight();
+				
+				if (context.getWidth()>0)
+					x += context.getWidth()/2;
+				if (context.getHeight()>0)
+					y += context.getHeight()/2;
+
 				{
 					int dx = (x<=width/2)? x:width-x;
 					int dy = (y<=height/2)? y:height-y;
@@ -622,7 +628,7 @@ public class TrPointSupport {
 				}
 				TrPoint tp = (TrPoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(tp, containerShape);
+				boolean inherited = SupportUtil.isInherited(tp, (ContainerShape)containerShape.eContainer());
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));

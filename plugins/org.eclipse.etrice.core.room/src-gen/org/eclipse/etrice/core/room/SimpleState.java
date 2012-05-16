@@ -9,21 +9,21 @@ package org.eclipse.etrice.core.room;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Base State</b></em>'.
+ * A representation of the model object '<em><b>Simple State</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.BaseState#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.SimpleState#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getBaseState()
+ * @see org.eclipse.etrice.core.room.RoomPackage#getSimpleState()
  * @model
  * @generated
  */
-public interface BaseState extends State
+public interface SimpleState extends State
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -35,14 +35,14 @@ public interface BaseState extends State
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getBaseState_Name()
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSimpleState_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.BaseState#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.SimpleState#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -51,4 +51,4 @@ public interface BaseState extends State
    */
   void setName(String value);
 
-} // BaseState
+} // SimpleState

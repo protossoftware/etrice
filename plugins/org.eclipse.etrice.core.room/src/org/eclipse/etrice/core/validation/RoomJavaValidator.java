@@ -13,6 +13,7 @@
 
 package org.eclipse.etrice.core.validation;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +26,7 @@ import org.eclipse.etrice.core.room.ActorInstancePath;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -36,11 +38,14 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -162,6 +167,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			// no circle possible
 			return;
 		
+		if (att.eContainer() instanceof PortClass)
+			// no circle possible
+			return;
+		
 		if (!(att.eContainer() instanceof DataClass)) {
 			assert(false): "unexpected parent class";
 			return;
@@ -210,6 +219,36 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (commType!=ac.getCommType())
 				error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getActorClass_CommType());
 		}
+	}
+	
+	@Check
+	public void checkTopLevelRefinedStates(ActorClass ac) {
+		Result result = ValidationUtil.checkTopLevelRefinedStates(ac);
+		if (!result.isOk())
+			error(result);
+	}
+	
+	@Check
+	public void checkRefinedStateUnique(RefinedState rs) {
+		StateGraph sg = (StateGraph) rs.eContainer();
+		TreeIterator<EObject> it = sg.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj!=rs && obj instanceof RefinedState)
+				if (rs.getTarget()==((RefinedState)obj).getTarget()) {
+					if (rs.eContainer().eContainer() instanceof ActorClass)
+						error("refined state conflicts with nested refined state with same target", RoomPackage.Literals.REFINED_STATE__TARGET);
+					else
+						error("refined state not unique", RoomPackage.Literals.REFINED_STATE__TARGET);
+				}
+		}
+	}
+	
+	@Check
+	public void checkStateNameUnique(SimpleState s) {
+		Result result = ValidationUtil.isUniqueName(s, s.getName());
+		if (!result.isOk())
+			error(result.getMsg(), RoomPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
 	private SubSystemClass getSubSystemClass(EObject obj) {
@@ -271,6 +310,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		Result result = ValidationUtil.isValid(tp);
 		if (!result.isOk())
 			error(result);
+	}
+	
+	@Check
+	public void checkChoicePoint(ChoicePoint cp) {
+		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
+			error("name is not unique", RoomPackage.Literals.CHOICE_POINT__NAME);
 	}
 	
 	@Check

@@ -1,13 +1,13 @@
 RoomModel room.basic.types.java {
 
-	PrimitiveType boolean -> boolean (Boolean) default "false"
-	PrimitiveType char -> char (Char) default "0"
-	PrimitiveType int8 -> byte (Byte) default "0"
-	PrimitiveType int16 -> short (Short) default "0"
-	PrimitiveType int32 -> int (Integer) default "0"
-	PrimitiveType int64 -> long (Long) default "0"
-	PrimitiveType float32 -> float (Float) default "0"
-	PrimitiveType float64 -> double (Double) default "0"
-	PrimitiveType string -> String (String) default "\"\""
+	PrimitiveType boolean: ptBoolean -> boolean (Boolean) default "false"
+	PrimitiveType char: ptCharacter -> char (Char) default "0"
+	PrimitiveType int8: ptInteger -> byte (Byte) default "0"
+	PrimitiveType int16: ptInteger -> short (Short) default "0"
+	PrimitiveType int32: ptInteger -> int (Integer) default "0"
+	PrimitiveType int64: ptInteger -> long (Long) default "0"
+	PrimitiveType float32: ptReal -> float (Float) default "0"
+	PrimitiveType float64: ptReal -> double (Double) default "0"
+	PrimitiveType string: ptCharacter -> String (String) default "\"\""
 	
 }

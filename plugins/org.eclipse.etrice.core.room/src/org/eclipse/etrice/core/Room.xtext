@@ -51,10 +51,17 @@ VarDecl:
 
 RefableType: type=[DataType|FQN] (ref?='ref')?;
 
+enum LiteralType:
+	BOOL='ptBoolean' |
+	INT='ptInteger' |
+	REAL='ptReal' |
+	CHAR='ptCharacter' 
+;
+
 DataType: PrimitiveType | ComplexType;
 ComplexType: DataClass | ExternalType;
 
-PrimitiveType: 'PrimitiveType' name=ID '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
+PrimitiveType: 'PrimitiveType' name=ID ':' type=LiteralType '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
 
 ExternalType: 'ExternalType' name=ID '->' targetName=FQN (docu=Documentation)?;
 
@@ -277,7 +284,7 @@ ActorRef:
 StateGraphNode: State | ChoicePoint | TrPoint;
 StateGraphItem: StateGraphNode | Transition;
 
-State: BaseState | RefinedState;
+State: SimpleState | RefinedState;
 
 StateGraph:
 	{StateGraph}
@@ -301,9 +308,7 @@ StateMachine returns StateGraph:
 		)*
 	'}';
 
-// entry and exit code have multiplicity many: in BaseState to be able to add derived class codes here,
-// in RefinedState to still have both features in the common base class State
-BaseState:
+SimpleState:
 	'State' name=ID (docu=Documentation)? ('{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
@@ -312,7 +317,7 @@ BaseState:
 	'}')?;
 
 RefinedState:
-	'RefinedState' base=[BaseState|FQN] (docu=Documentation)? '{'
+	'RefinedState' target=[State|FQN] (docu=Documentation)? '{'
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('do' doCode=DetailCode)?
@@ -387,11 +392,11 @@ CPBranchTransition:
 TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 
 StateTerminal:
-	state=[BaseState|ID];
+	state=[State|ID];
 TrPointTerminal:
 	'my' trPoint=[TrPoint|ID];
 SubStateTrPointTerminal:
-	trPoint=[TrPoint|ID] 'of' state=[BaseState|ID];
+	trPoint=[TrPoint|ID] 'of' state=[State|ID];
 ChoicepointTerminal:
 	'cp' cp=[ChoicePoint|ID];
 
@@ -418,10 +423,21 @@ Annotation: '@' name=ID ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')
 KeyValue: key=ID '=' value=STRING;
 
 // HOWTO: use a combination of URI global scopes and namespace aware local scope provider
-// this is confugured in the work flow by
+// this is configured in the work flow by
 //			fragment = scoping.ImportURIScopingFragment {}
 // and by overriding configureIScopeProviderDelegate in the runtime module with 
 //			ImportedNamespaceAwareLocalScopeProvider
+// also configure in the RuntimeModule
+//	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+//		return PlatformRelativeUriResolver.class;
+//	}
+// and in the UiRuntimeModule
+//	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+//		return GlobalNonPlatformURIEditorOpener.class;
+//	}
+//	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+//		return ImportAwareHyperlinkHelper.class;
+//	}
 // the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 // the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 Import :
