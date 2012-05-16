@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.eclipse.etrice.generator.launch.cpp.CppGeneratorLaunchConfigurationDelegate"
+            delegateDescription="Generates C++ source code from ROOM models"
+            delegateName="eTrice C++ Generator Delegate"
+            id="org.eclipse.etrice.generator.launch.cpp.launchConfigurationType"
+            modes="run,debug"
+            name="eTrice C++ Generator">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.etrice.generator.launch.cpp.launchConfigurationType"
+            icon="icons/eTrice-launch.gif"
+            id="org.eclipse.etrice.generator.launch.cpp.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.etrice.generator.launch.cpp.CppGeneratorLaunchConfigurationTabGroup"
+            description="Tab Group for eTrice C++ Generator Launch Configurations"
+            id="org.eclipse.etrice.generator.launch.cpp.launchConfigurationTabGroup"
+            type="org.eclipse.etrice.generator.launch.cpp.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+</plugin>
