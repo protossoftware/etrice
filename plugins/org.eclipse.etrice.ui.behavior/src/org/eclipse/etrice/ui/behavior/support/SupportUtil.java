@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -46,6 +45,7 @@ import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
+import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -188,7 +188,7 @@ public class SupportUtil {
 			// we have to create one and place it in the best fitting context
 			StateGraph sg = null;
 			State parent = s;
-			while (s.eContainer().eContainer() instanceof State) {
+			while (parent.eContainer().eContainer() instanceof State) {
 				parent = (State) s.eContainer().eContainer();
 				if (target2rs.containsKey(parent)) {
 					RefinedState bestFitting = target2rs.get(parent);
@@ -472,7 +472,7 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		// transition points
@@ -489,7 +489,7 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		// choice points
@@ -506,7 +506,7 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		SupportUtil.getSubTpAnchors(sgShape, node2anchor);
@@ -577,7 +577,7 @@ public class SupportUtil {
 		node2anchor.put(getKey(tp), pe.getAnchors().get(0));
 	}
 
-	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, IPositionProvider positionProvider, List<Shape> shapes) {
+	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, List<Shape> shapes, IPositionProvider positionProvider, IFeatureProvider fp) {
 		
 		ILinkService linkService = Graphiti.getLinkService();
 		IGaService gaService = Graphiti.getGaService();
@@ -592,8 +592,8 @@ public class SupportUtil {
 				EObject bo = linkService.getBusinessObjectForLinkedPictogramElement(shape);
 				if (bo==node) {
 					GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
-					System.out.println(RoomNameProvider.getName(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
-					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
+//					System.out.println(RoomNameProvider.getFullPath(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
+//					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
 
 					int margin = 0;
 					if (node instanceof State)
@@ -608,6 +608,9 @@ public class SupportUtil {
 							ps.getWidth()+2*margin,
 							ps.getHeight()+2*margin
 						);
+					
+					LayoutContext lc = new LayoutContext(shape);
+					fp.layoutIfPossible(lc);
 					break;
 				}
 			}
