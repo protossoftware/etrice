@@ -676,13 +676,23 @@ public class StateSupport {
 				if (!super.canResizeShape(context))
 					return false;
 				
-				int width = context.getWidth()-MARGIN;
-				int height = context.getHeight()-MARGIN;
-				if (width>0 && height>0)
-					if (width < MIN_SIZE_X+MARGIN || height < MIN_SIZE_Y+MARGIN)
-						return false;
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				
-				return true;
+				if (bo instanceof State) {
+					State s = (State) bo;
+					if (SupportUtil.isInherited(getDiagram(), s))
+						return false;
+					
+					int width = context.getWidth()-MARGIN;
+					int height = context.getHeight()-MARGIN;
+					if (width>0 && height>0)
+						if (width < MIN_SIZE_X+MARGIN || height < MIN_SIZE_Y+MARGIN)
+							return false;
+					
+					return true;
+				}
+				
+				return false;
 			}
 			
 			@Override

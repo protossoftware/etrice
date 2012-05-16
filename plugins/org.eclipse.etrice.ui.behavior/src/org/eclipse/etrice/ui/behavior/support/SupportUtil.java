@@ -591,6 +591,7 @@ public class SupportUtil {
 			for (Shape shape : shapes) {
 				EObject bo = linkService.getBusinessObjectForLinkedPictogramElement(shape);
 				if (bo==node) {
+					// relocate and resize the invisible rectangle
 					GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
 //					System.out.println(RoomNameProvider.getFullPath(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
 //					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
@@ -609,6 +610,7 @@ public class SupportUtil {
 							ps.getHeight()+2*margin
 						);
 					
+					// have to call the layout to adjust the visible border
 					LayoutContext lc = new LayoutContext(shape);
 					fp.layoutIfPossible(lc);
 					break;

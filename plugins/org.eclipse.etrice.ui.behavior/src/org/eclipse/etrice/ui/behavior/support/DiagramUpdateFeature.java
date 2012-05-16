@@ -27,6 +27,7 @@ import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.Reason;
+import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
@@ -80,6 +81,12 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 			}
 		}
 		
+		// check for dangling connections
+		for (Connection conn : getDiagram().getConnections()) {
+			if (conn.getStart()==null || conn.getEnd()==null)
+				return Reason.createTrueReason();
+		}
+		
 		return Reason.createFalseReason();
 	}
 
@@ -100,6 +107,19 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		for (Shape sgshape : children) {
 			if (!usedShapes.contains(sgshape)) {
 				IRemoveContext rc = new RemoveContext(sgshape);
+				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
+				if (removeFeature != null) {
+					removeFeature.remove(rc);
+					changed = true;
+				}
+			}
+		}
+		
+		// remove dangling connections
+		ArrayList<Connection> connections = new ArrayList<Connection>(getDiagram().getConnections());
+		for (Connection conn : connections) {
+			if (conn.getStart()==null || conn.getEnd()==null) {
+				IRemoveContext rc = new RemoveContext(conn);
 				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
 				if (removeFeature != null) {
 					removeFeature.remove(rc);
