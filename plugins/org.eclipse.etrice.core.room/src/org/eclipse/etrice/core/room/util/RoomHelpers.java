@@ -10,13 +10,17 @@ package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Annotation;
@@ -773,6 +777,7 @@ public class RoomHelpers {
 		
 		return false;
 	}
+	
 	public static boolean referencesStateRecursively(RefinedState rs, State referenced) {
 		State target = rs.getTarget();
 		if (target==referenced)
@@ -786,5 +791,45 @@ public class RoomHelpers {
 		
 		assert(false): "unexpected sub type";
 		return false;
+	}
+
+	/**
+	 * @param ac
+	 * @return
+	 */
+	public static Map<RefinedState, RefinedState> getRefinedStatesToRelocate(ActorClass ac) {
+		
+		// collect RefinedStates and some information
+		ArrayList<RefinedState> refinedStates = new ArrayList<RefinedState>();
+		ArrayList<String> paths = new ArrayList<String>();
+		HashMap<String, RefinedState> path2rs = new HashMap<String, RefinedState>();
+		TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof RefinedState) {
+				refinedStates.add((RefinedState) obj);
+				String path = RoomNameProvider.getFullPath((RefinedState) obj);
+				paths.add(path);
+				path2rs.put(path, (RefinedState) obj);
+			}
+		}
+		
+		// we sort the paths to have paths with same beginning in descending length
+		java.util.Collections.sort(paths, java.util.Collections.reverseOrder());
+		
+		// find the best matching context
+		HashMap<RefinedState, RefinedState> rs2parent = new HashMap<RefinedState, RefinedState>();
+		for (RefinedState rs : refinedStates) {
+			String fullPath = RoomNameProvider.getFullPath(rs);
+			for (String path : paths) {
+				if (!fullPath.equals(path) && fullPath.startsWith(path) && fullPath.charAt(path.length())==RoomNameProvider.PATH_SEP.charAt(0)) {
+					RefinedState parent = path2rs.get(path);
+					if (!(parent.getSubgraph()!=null && parent.getSubgraph().getStates().contains(rs)))
+						rs2parent.put(rs, parent);
+					break;
+				}
+			}
+		}
+		return rs2parent;
 	}
 }

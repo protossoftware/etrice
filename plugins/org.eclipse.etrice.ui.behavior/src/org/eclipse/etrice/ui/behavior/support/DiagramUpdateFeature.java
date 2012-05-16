@@ -30,6 +30,7 @@ import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.platform.IDiagramEditor;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -110,7 +111,8 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
 				if (removeFeature != null) {
 					removeFeature.remove(rc);
-					changed = true;
+					if (removeFeature.hasDoneChanges())
+						changed = true;
 				}
 			}
 		}
@@ -123,10 +125,16 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 				IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
 				if (removeFeature != null) {
 					removeFeature.remove(rc);
-					changed = true;
+					if (removeFeature.hasDoneChanges())
+						changed = true;
 				}
 			}
 		}
+		
+		// if we inserted states they have been selected: reset the selection
+		IDiagramEditor diagramEditor = getFeatureProvider().getDiagramTypeProvider().getDiagramEditor();
+		if (diagramEditor != null)
+			diagramEditor.setPictogramElementForSelection(null);
 		
 		return changed;
 	}

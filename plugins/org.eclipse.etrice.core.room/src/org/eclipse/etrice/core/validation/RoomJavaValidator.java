@@ -13,6 +13,8 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -223,9 +225,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkTopLevelRefinedStates(ActorClass ac) {
-		Result result = ValidationUtil.checkTopLevelRefinedStates(ac);
-		if (!result.isOk())
-			error(result);
+		List<Result> errors = ValidationUtil.checkTopLevelRefinedStates(ac);
+		for (Result err : errors) {
+			error(err);
+		}
 	}
 	
 	@Check

@@ -15,6 +15,8 @@ package org.eclipse.etrice.core.validation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -850,31 +852,23 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static Result checkTopLevelRefinedStates(ActorClass ac) {
+	public static List<Result> checkTopLevelRefinedStates(ActorClass ac) {
+		ArrayList<Result> errors = new ArrayList<ValidationUtil.Result>();
 		if (ac.getStateMachine()==null)
-			return Result.ok();
+			return errors;
 		
-		ArrayList<String> paths = new ArrayList<String>();
-		for (org.eclipse.etrice.core.room.State s : ac.getStateMachine().getStates()) {
-			if (s instanceof RefinedState)
-				paths.add(RoomNameProvider.getFullPath(s));
+		Map<RefinedState, RefinedState> rs2parent = RoomHelpers.getRefinedStatesToRelocate(ac);
+		for (RefinedState rs : rs2parent.keySet()) {
+			RefinedState parent = rs2parent.get(rs);
+			String path = RoomNameProvider.getFullPath(parent);
+			int idx = ((StateGraph)rs.eContainer()).getStates().indexOf(rs);
+			errors.add(Result.error(
+					"RefinedState has to be in the context of "+path,
+					rs.eContainer(),
+					RoomPackage.Literals.STATE_GRAPH__STATES,
+					idx));
 		}
-		for (org.eclipse.etrice.core.room.State s : ac.getStateMachine().getStates()) {
-			if (s instanceof RefinedState) {
-				String fullPath = RoomNameProvider.getFullPath(s);
-				for (String path : paths) {
-					if (!fullPath.equals(path) && fullPath.startsWith(path) && fullPath.charAt(path.length())==RoomNameProvider.PATH_SEP.charAt(0)) {
-						int idx = ac.getStateMachine().getStates().indexOf(s);
-						return Result.error(
-								"RefinedState has to be in the context of "+path,
-								ac.getStateMachine(),
-								RoomPackage.Literals.STATE_GRAPH__STATES,
-								idx);
-					}
-				}
-			}
-		}
-
-		return Result.ok();
+		
+		return errors;
 	}
 }

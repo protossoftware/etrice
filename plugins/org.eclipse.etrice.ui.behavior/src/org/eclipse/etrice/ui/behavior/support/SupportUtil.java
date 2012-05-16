@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -58,6 +59,7 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.ILinkService;
+import org.eclipse.core.runtime.Assert;
 
 /**
  * @author Henrik Rentz-Reichert - Initial contribution and API
@@ -462,6 +464,7 @@ public class SupportUtil {
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<State> present = SupportUtil.getStates(sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<State> expected = ctx.getStates();
 			List<State> toAdd = new ArrayList<State>();
 			List<State> toUpdate = new ArrayList<State>();
@@ -479,6 +482,7 @@ public class SupportUtil {
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<TrPoint> present = SupportUtil.getTrPoints(sg, sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<TrPoint> expected = ctx.getTrPoints();
 			List<TrPoint> toAdd = new ArrayList<TrPoint>();
 			List<TrPoint> toUpdate = new ArrayList<TrPoint>();
@@ -496,6 +500,7 @@ public class SupportUtil {
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<ChoicePoint> present = SupportUtil.getChoicePoints(sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<ChoicePoint> expected = ctx.getChPoints();
 			List<ChoicePoint> toAdd = new ArrayList<ChoicePoint>();
 			List<ChoicePoint> toUpdate = new ArrayList<ChoicePoint>();
@@ -521,6 +526,19 @@ public class SupportUtil {
 					items.add(trans);
 			}
 			SupportUtil.addTransitions(items, sgShape, fp, node2anchor);
+		}
+	}
+
+	/**
+	 * @param items
+	 */
+	private static void checkDuplicates(List<? extends StateGraphItem> items) {
+		for (StateGraphItem item : items) {
+			if (items.indexOf(item)!=items.lastIndexOf(item)) {
+				Assert.isTrue(
+						items.indexOf(item)==items.lastIndexOf(item),
+						"multiple occurrences of "+RoomNameProvider.getFullPath(item));
+			}
 		}
 	}
 
