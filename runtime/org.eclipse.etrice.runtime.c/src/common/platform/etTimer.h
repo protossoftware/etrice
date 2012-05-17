@@ -1,3 +1,6 @@
+#ifndef _ETTIMER_H_
+#define _ETTIMER_H_
+
 
 #include "etDatatypes.h"
 
@@ -22,3 +25,5 @@ uint32 getTimeBaseNS(void);
 uint32 getTimeBaseUS(void);
 
 uint32 getTimeBaseMS(void);
+
+#endif /* ETTIMER_H_ */
