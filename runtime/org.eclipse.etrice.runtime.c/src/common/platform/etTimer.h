@@ -10,8 +10,8 @@
  *
  *******************************************************************************/
 
-#ifndef __ETTIMER_H__
-#define __ETTIMER_H__
+#ifndef _ETTIMER_H_
+#define _ETTIMER_H_
 
 #include "etDatatypes.h"
 

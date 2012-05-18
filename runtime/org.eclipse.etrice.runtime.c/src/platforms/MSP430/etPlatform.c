@@ -49,9 +49,44 @@ static void prvSetupHardware(void) {
 	/* select port pin functions */
 	halBoardInit();
 
+	P1DIR |= 0x03;
+	P2DIR &= ~0xC0;
+	P2REN |= 0xC0;
+	P2OUT |= 0xC0;
+
 	LFXT_Start(XT1DRIVE_0); 								/* enable oszillator */
 	Init_FLL_Settle((unsigned short) ulCPU_Clock_KHz, 488);	/* clock divisor */
 
 
+}
+
+unsigned char getButtonStatus(unsigned int id){
+	switch (id){
+	case 1:return P2IN & 0x80;
+		break;
+	case 2:return P2IN & 0x40;
+		break;
+	default: return 0xFF;
+	};
+}
+
+void setLedPin (unsigned int id, unsigned int onOff){
+	switch (id){
+	case 1:
+		if (onOff){
+			P1OUT |= 0x01;
+		}else{
+			P1OUT &= ~0x01;
+		}
+		break;
+	case 2:
+		if (onOff){
+			P1OUT |= 0x02;
+		}else{
+			P1OUT &= ~0x02;
+		}
+		break;
+	default:
+	}
 }
 

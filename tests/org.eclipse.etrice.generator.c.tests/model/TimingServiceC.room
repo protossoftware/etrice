@@ -91,7 +91,7 @@ RoomModel room.basic.service.timingC {
 						}else{
 						// right position found
 						block->next=temp;
-						if(temp2==usedTcbsRoot){
+						if(temp==usedTcbsRoot){
 							usedTcbsRoot=block;
 							}else{
 							temp2->next=block;
