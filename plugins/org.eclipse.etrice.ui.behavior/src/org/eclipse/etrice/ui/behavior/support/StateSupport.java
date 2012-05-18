@@ -110,6 +110,7 @@ public class StateSupport {
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
+	private static final IColorConstant INHERITED_BACKGROUND = new ColorConstant(230, 230, 230);
 
 	private static class FeatureProvider extends DefaultFeatureProvider {
 
@@ -234,13 +235,14 @@ public class StateSupport {
 			
 				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				Color bgColor = manageColor(inherited?INHERITED_BACKGROUND:BACKGROUND);
 				IGaService gaService = Graphiti.getGaService();
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
 					gaService.setLocationAndSize(invisibleRectangle,
 							x-(width/2+MARGIN), y-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 
-					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, manageColor(BACKGROUND));
+					RoundedRectangle rect = createFigure(s, invisibleRectangle, lineColor, bgColor);
 					
 					// anchor for direct transitions to this state
 					ChopboxAnchor anchor = peCreateService.createChopboxAnchor(containerShape);
@@ -404,7 +406,8 @@ public class StateSupport {
 				
 				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-				createFigure(s, invisibleRect, lineColor, manageColor(BACKGROUND));
+				Color bgColor = manageColor(inherited?INHERITED_BACKGROUND:BACKGROUND);
+				createFigure(s, invisibleRect, lineColor, bgColor);
 				
 				GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
