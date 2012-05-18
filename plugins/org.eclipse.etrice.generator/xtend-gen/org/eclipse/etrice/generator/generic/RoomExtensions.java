@@ -222,9 +222,9 @@ public class RoomExtensions {
       return _strSAPs;
     } else {
       ActorClass _base_1 = ac.getBase();
-      EList<SAPRef> _strSAPs_1 = _base_1.getStrSAPs();
-      EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
-      List<SAPRef> _union = this.<SAPRef>union(_strSAPs_1, _strSAPs_2);
+      List<SAPRef> _allSAPs = this.getAllSAPs(_base_1);
+      EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
+      List<SAPRef> _union = this.<SAPRef>union(_allSAPs, _strSAPs_1);
       _xifexpression = _union;
     }
     return _xifexpression;
@@ -239,9 +239,9 @@ public class RoomExtensions {
       return _serviceImplementations;
     } else {
       ActorClass _base_1 = ac.getBase();
-      EList<ServiceImplementation> _serviceImplementations_1 = _base_1.getServiceImplementations();
-      EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
-      List<ServiceImplementation> _union = this.<ServiceImplementation>union(_serviceImplementations_1, _serviceImplementations_2);
+      List<ServiceImplementation> _allServiceImplementations = this.getAllServiceImplementations(_base_1);
+      EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
+      List<ServiceImplementation> _union = this.<ServiceImplementation>union(_allServiceImplementations, _serviceImplementations_1);
       _xifexpression = _union;
     }
     return _xifexpression;
@@ -261,9 +261,9 @@ public class RoomExtensions {
       return _attributes;
     } else {
       DataClass _base_1 = dc.getBase();
-      EList<Attribute> _attributes_1 = _base_1.getAttributes();
-      List<Attribute> _allAttributes = this.getAllAttributes(dc);
-      List<Attribute> _union = this.<Attribute>union(_attributes_1, _allAttributes);
+      List<Attribute> _allAttributes = this.getAllAttributes(_base_1);
+      EList<Attribute> _attributes_1 = dc.getAttributes();
+      List<Attribute> _union = this.<Attribute>union(_allAttributes, _attributes_1);
       _xifexpression = _union;
     }
     return _xifexpression;
@@ -278,9 +278,9 @@ public class RoomExtensions {
       return _attributes;
     } else {
       ActorClass _base_1 = ac.getBase();
-      EList<Attribute> _attributes_1 = _base_1.getAttributes();
-      List<Attribute> _allAttributes = this.getAllAttributes(ac);
-      List<Attribute> _union = this.<Attribute>union(_attributes_1, _allAttributes);
+      List<Attribute> _allAttributes = this.getAllAttributes(_base_1);
+      EList<Attribute> _attributes_1 = ac.getAttributes();
+      List<Attribute> _union = this.<Attribute>union(_allAttributes, _attributes_1);
       _xifexpression = _union;
     }
     return _xifexpression;

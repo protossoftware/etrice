@@ -170,14 +170,14 @@ class RoomExtensions {
 		if (ac.base==null)
 			return ac.strSAPs
 		else
-			ac.base.strSAPs.union(ac.strSAPs)
+			ac.base.allSAPs.union(ac.strSAPs)
 	}
 
 	def List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
 		if (ac.base==null)
 			return ac.serviceImplementations
 		else
-			ac.base.serviceImplementations.union(ac.serviceImplementations)
+			ac.base.allServiceImplementations.union(ac.serviceImplementations)
 	}
 	
 	// make a valid identifier from a path string
@@ -189,14 +189,14 @@ class RoomExtensions {
 		if (dc.base==null)
 			return dc.attributes
 		else
-			dc.base.attributes.union(dc.allAttributes)
+			dc.base.allAttributes.union(dc.attributes)
 	}
 
 	def List<Attribute> getAllAttributes(ActorClass ac) {
 		if (ac.base==null)
 			return ac.attributes
 		else
-			ac.base.attributes.union(ac.allAttributes)
+			ac.base.allAttributes.union(ac.attributes)
 	}
 
 	//-------------------------------------------------------
