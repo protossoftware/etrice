@@ -81,7 +81,7 @@ public class CTranslationProvider implements ITranslationProvider {
 					if (index==null)
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 					else
-						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 				}
 			}
 			else if (p.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
@@ -100,7 +100,7 @@ public class CTranslationProvider implements ITranslationProvider {
 			if (index==null)
 				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			else
-				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 		}
 		return result;
 	}
