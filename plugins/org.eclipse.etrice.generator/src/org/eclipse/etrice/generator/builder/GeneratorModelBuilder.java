@@ -656,24 +656,29 @@ public class GeneratorModelBuilder {
 		// in a second step the actually needed number of instances for multiplicity * is filled into the list
 		HashSet<String> multAny = new HashSet<String>();
 		for (Binding bind : bindings) {
-			addNeededInstance(getEndPointKey(bind.getEndpoint1()), ep2portInstances, multAny);
-			addNeededInstance(getEndPointKey(bind.getEndpoint2()), ep2portInstances, multAny);
+			String ep1Key = getEndPointKey(bind.getEndpoint1());
+			String ep2Key = getEndPointKey(bind.getEndpoint2());
+			addNeededInstance(ep1Key, ep2Key, ep2portInstances, multAny);
+			addNeededInstance(ep2Key, ep1Key, ep2portInstances, multAny);
 		}
 		
 		return ep2portInstances;
 	}
 
-	private void addNeededInstance(String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
+	private void addNeededInstance(String key, String peerKey, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
 		ArrayList<PortInstance> ports = ep2portInstances.get(key);
+		ArrayList<PortInstance> peers = ep2portInstances.get(peerKey);
 
 		Port port = ports.get(0).getPort();
 		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN || port.getMultiplicity() < 0) {
-			if (!multAny.contains(key)) {
-				// we just register
-				multAny.add(key);
-			} else {
-				// we add another copy of this instance
-				ports.add(ports.get(0));
+			for (@SuppressWarnings("unused") PortInstance peer : peers) {
+				if (!multAny.contains(key)) {
+					// we just register
+					multAny.add(key);
+				} else {
+					// we add another copy of this instance
+					ports.add(ports.get(0));
+				}
 			}
 		}
 	}
