@@ -408,7 +408,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine = xpac.getStateMachine();
         boolean _isEmpty_4 = RoomHelpers.isEmpty(_stateMachine);
-        if (_isEmpty_4) {
+        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_4);
+        if (_operator_not) {
           _builder.newLine();
           StringConcatenation _genHeaderConstants = this.stateMachineGen.genHeaderConstants(xpac, ac);
           _builder.append(_genHeaderConstants, "");
@@ -448,8 +449,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           boolean _isEmpty_8 = _allServiceImplementations_2.isEmpty();
           _operator_and_3 = BooleanExtensions.operator_and(_operator_and_4, _isEmpty_8);
         }
-        boolean _operator_not = BooleanExtensions.operator_not(_operator_and_3);
-        if (_operator_not) {
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_operator_and_3);
+        if (_operator_not_1) {
           _builder.append("\t");
           _builder.append("const ");
           String _name_14 = ac.getName();
@@ -511,7 +512,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
         boolean _isEmpty_9 = RoomHelpers.isEmpty(_stateMachine_1);
-        if (_isEmpty_9) {
+        boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_9);
+        if (_operator_not_2) {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
@@ -659,7 +661,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine = xpac.getStateMachine();
         boolean _isEmpty = RoomHelpers.isEmpty(_stateMachine);
-        if (_isEmpty) {
+        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+        if (_operator_not) {
           StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
           _builder.append(_genStateMachine, "");
           _builder.newLineIfNotEmpty();
@@ -683,7 +686,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
         boolean _isEmpty_1 = RoomHelpers.isEmpty(_stateMachine_1);
-        if (_isEmpty_1) {
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
+        if (_operator_not_1) {
           _builder.append("\t");
           StringConcatenation _genInitialization = this.stateMachineGen.genInitialization(xpac, ac);
           _builder.append(_genInitialization, "	");
@@ -711,7 +715,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine_2 = xpac.getStateMachine();
         boolean _isEmpty_2 = RoomHelpers.isEmpty(_stateMachine_2);
-        if (_isEmpty_2) {
+        boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_2);
+        if (_operator_not_2) {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
@@ -758,7 +763,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           {
             StateGraph _stateMachine_3 = xpac.getStateMachine();
             boolean _isEmpty_3 = RoomHelpers.isEmpty(_stateMachine_3);
-            if (_isEmpty_3) {
+            boolean _operator_not_3 = BooleanExtensions.operator_not(_isEmpty_3);
+            if (_operator_not_3) {
               _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");

@@ -141,7 +141,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			} «ac.name»_const;
 		«ENDIF»
 		
-		«IF xpac.stateMachine.empty»
+		«IF !xpac.stateMachine.empty»
 			
 			«stateMachineGen.genHeaderConstants(xpac, ac)»
 		«ENDIF»
@@ -167,7 +167,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 		«ENDFOR»
 			
-			«IF xpac.stateMachine.empty»
+			«IF !xpac.stateMachine.empty»
 			
 				«stateMachineGen.genDataMembers(xpac, ac)»
 			«ENDIF»
@@ -220,13 +220,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* interface item IDs */
 		«genInterfaceItemConstants(xpac, ac)»
 
-		«IF xpac.stateMachine.empty»
+		«IF !xpac.stateMachine.empty»
 			«stateMachineGen.genStateMachine(xpac, ac)»
 		«ENDIF»
 		
 		void «ac.name»_init(«ac.name»* self){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "init")
-			«IF xpac.stateMachine.empty»
+			«IF !xpac.stateMachine.empty»
 				«stateMachineGen.genInitialization(xpac, ac)»
 			«ENDIF»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -235,7 +235,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		void «ac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
-			«IF xpac.stateMachine.empty»
+			«IF !xpac.stateMachine.empty»
 				
 				receiveEvent(self«IF handleEvents», (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage)))«ENDIF»);
 			«ENDIF»
@@ -246,7 +246,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«IF dataDriven || async»
 			void «ac.name»_execute(«ac.name»* self) {
 				ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_execute")
-				«IF xpac.stateMachine.empty»
+				«IF !xpac.stateMachine.empty»
 					
 					receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
 				«ENDIF»
