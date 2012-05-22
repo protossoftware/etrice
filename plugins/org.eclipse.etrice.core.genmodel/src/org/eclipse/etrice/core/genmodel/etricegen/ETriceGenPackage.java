@@ -12,8 +12,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.eclipse.etrice.core.room.RoomPackage;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -1358,202 +1356,13 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS = 16;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS__NAME = RoomPackage.ACTOR_CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__DOCU = RoomPackage.ACTOR_CLASS__DOCU;
-
-	/**
-	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__BINDINGS = RoomPackage.ACTOR_CLASS__BINDINGS;
-
-	/**
-	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__CONNECTIONS = RoomPackage.ACTOR_CLASS__CONNECTIONS;
-
-	/**
-	 * The feature id for the '<em><b>If SP Ps</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__IF_SP_PS = RoomPackage.ACTOR_CLASS__IF_SP_PS;
-
-	/**
-	 * The feature id for the '<em><b>User Code1</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__USER_CODE1 = RoomPackage.ACTOR_CLASS__USER_CODE1;
-
-	/**
-	 * The feature id for the '<em><b>User Code2</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__USER_CODE2 = RoomPackage.ACTOR_CLASS__USER_CODE2;
-
-	/**
-	 * The feature id for the '<em><b>User Code3</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__USER_CODE3 = RoomPackage.ACTOR_CLASS__USER_CODE3;
-
-	/**
-	 * The feature id for the '<em><b>Actor Refs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ACTOR_REFS = RoomPackage.ACTOR_CLASS__ACTOR_REFS;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ABSTRACT = RoomPackage.ACTOR_CLASS__ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Comm Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__COMM_TYPE = RoomPackage.ACTOR_CLASS__COMM_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Base</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__BASE = RoomPackage.ACTOR_CLASS__BASE;
-
-	/**
-	 * The feature id for the '<em><b>If Ports</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__IF_PORTS = RoomPackage.ACTOR_CLASS__IF_PORTS;
-
-	/**
-	 * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__STRUCTURE_DOCU = RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU;
-
-	/**
-	 * The feature id for the '<em><b>Int Ports</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__INT_PORTS = RoomPackage.ACTOR_CLASS__INT_PORTS;
-
-	/**
-	 * The feature id for the '<em><b>Ext Ports</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__EXT_PORTS = RoomPackage.ACTOR_CLASS__EXT_PORTS;
-
-	/**
-	 * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Str SA Ps</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__STR_SA_PS = RoomPackage.ACTOR_CLASS__STR_SA_PS;
-
-	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ATTRIBUTES = RoomPackage.ACTOR_CLASS__ATTRIBUTES;
-
-	/**
-	 * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__BEHAVIOR_DOCU = RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ANNOTATIONS = RoomPackage.ACTOR_CLASS__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__OPERATIONS = RoomPackage.ACTOR_CLASS__OPERATIONS;
+	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = 0;
 
 	/**
 	 * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -1562,16 +1371,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS__STATE_MACHINE = RoomPackage.ACTOR_CLASS__STATE_MACHINE;
-
-	/**
-	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = RoomPackage.ACTOR_CLASS_FEATURE_COUNT + 0;
+	int EXPANDED_ACTOR_CLASS__STATE_MACHINE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Expanded Actor Class</em>' class.
@@ -1580,7 +1380,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = RoomPackage.ACTOR_CLASS_FEATURE_COUNT + 1;
+	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
@@ -2305,6 +2105,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getExpandedActorClass_ActorClass();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getStateMachine <em>State Machine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>State Machine</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getStateMachine()
+	 * @see #getExpandedActorClass()
+	 * @generated
+	 */
+	EReference getExpandedActorClass_StateMachine();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2897,6 +2708,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_ACTOR_CLASS__ACTOR_CLASS = eINSTANCE.getExpandedActorClass_ActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>State Machine</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPANDED_ACTOR_CLASS__STATE_MACHINE = eINSTANCE.getExpandedActorClass_StateMachine();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.

@@ -148,7 +148,7 @@
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="IDiagnostician" instanceTypeName="IDiagnostician"
       abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpandedActorClass" eSuperTypes="../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedActorClass">
     <eOperations name="prepare">
       <eParameters name="validator" eType="#//IDiagnostician"/>
     </eOperations>
@@ -202,5 +202,7 @@
       <eParameters name="out" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

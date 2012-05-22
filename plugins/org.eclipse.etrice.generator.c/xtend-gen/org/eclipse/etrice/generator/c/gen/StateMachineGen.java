@@ -20,9 +20,9 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   public StringConcatenation genHeaderConstants(final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
-      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(xpac);
+      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
       int _size = _allBaseStates.size();
-      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
+      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(ac);
       int _size_1 = _allLeafStates.size();
       int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)_size_1));
       int _operator_plus = IntegerExtensions.operator_plus(((Integer)_operator_minus), ((Integer)2));

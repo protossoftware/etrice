@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
@@ -68,7 +70,6 @@ import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.impl.ActorClassImpl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -79,12 +80,13 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getActorClass <em>Actor Class</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedActorClass {
+public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActorClass {
 	
 	private class NodeData {
 		private LinkedList<Transition> inTrans = new LinkedList<Transition>();
@@ -133,6 +135,16 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 	 * @ordered
 	 */
 	protected ActorClass actorClass;
+
+	/**
+	 * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateMachine()
+	 * @generated
+	 * @ordered
+	 */
+	protected StateGraph stateMachine;
 
 	private static final String TRIGGER_SEP = "#";
 	
@@ -203,6 +215,49 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		actorClass = newActorClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS, oldActorClass, actorClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateGraph getStateMachine() {
+		return stateMachine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStateMachine(StateGraph newStateMachine, NotificationChain msgs) {
+		StateGraph oldStateMachine = stateMachine;
+		stateMachine = newStateMachine;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE, oldStateMachine, newStateMachine);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStateMachine(StateGraph newStateMachine) {
+		if (newStateMachine != stateMachine) {
+			NotificationChain msgs = null;
+			if (stateMachine != null)
+				msgs = ((InternalEObject)stateMachine).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE, null, msgs);
+			if (newStateMachine != null)
+				msgs = ((InternalEObject)newStateMachine).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE, null, msgs);
+			msgs = basicSetStateMachine(newStateMachine, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE, newStateMachine, newStateMachine));
 	}
 
 	private void validationError(String msg, EObject obj, EStructuralFeature feature) {
@@ -393,23 +448,23 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		}
 		if (initCount==0) {
 			if (sg.eContainer() instanceof State) {
-				if (!isAbstract()) {
+				if (!getActorClass().isAbstract()) {
 					// having no initial transition in a nested state is valid only if there is no transition to history
 					// except of self transitions
 					// i.e. no incoming transition of the state itself
 					NodeData data = node2data.get((State)sg.eContainer());
 					if (data!=null && data.getLoopTransitions().size()!=data.getInTrans().size())
-						validationError(getName()+": Having no initial transition in a nested state is valid only if there is no transition to history except of self transitions!",
+						validationError(getActorClass().getName()+": Having no initial transition in a nested state is valid only if there is no transition to history except of self transitions!",
 								sg.eContainer(), RoomPackage.eINSTANCE.getState_Subgraph());
 				}
 			}
 			else {
-				validationError(getName()+": The TOP level has to have an initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+				validationError(getActorClass().getName()+": The TOP level has to have an initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 			}
 		}
 		else {
 			if (initCount>1)
-				validationError(getName()+": There has to be exactly one initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
+				validationError(getActorClass().getName()+": There has to be exactly one initial transition!", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 		}
 		
 		for (ChoicePoint cp : sg.getChPoints()) {
@@ -417,17 +472,17 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			int idx = sg.getChPoints().indexOf(cp);
 			
 			if (data==null) {
-				validationError(getName()+": ChoicePoint is not connected!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+				validationError(getActorClass().getName()+": ChoicePoint is not connected!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 			else {
 				if (data.getInTrans().size()!=1)
-					validationError(getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (data.getOutTrans().size()<2)
-					validationError(getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (getDefaultBranch(data.getOutTrans())==null)
-					validationError(getName()+": ChoicePoint has no default branch!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint has no default branch!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (!data.getLoopTransitions().isEmpty())
-					validationError(getName()+": ChoicePoint is connected to itself!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint is connected to itself!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 		}
 		
@@ -437,32 +492,32 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getName()+": TrPoint is not connected", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getActorClass().getName()+": TrPoint is not connected", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
-					if (!isAbstract() && data.getInTrans().isEmpty())
-						validationError(getName()+": TrPoint has no incoming transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					if (!getActorClass().isAbstract() && data.getInTrans().isEmpty())
+						validationError(getActorClass().getName()+": TrPoint has no incoming transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getName()+": TrPoint must have at most one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint must have at most one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getName()+": TrPoint must have exactly one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint must have exactly one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getName()+": TrPoint must have no self transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint must have no self transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getName()+": TrPoint must have no incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint must have no incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -1177,6 +1232,20 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 	public ContinuationTransition getDefaultBranch(EList<Transition> out) {
 		return getDefaultBranch((List<Transition>)out);
 	}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE:
+				return basicSetStateMachine(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
 	private ContinuationTransition getDefaultBranch(List<Transition> out) {
 		for (Transition t : out) {
 			if (t instanceof ContinuationTransition)
@@ -1196,6 +1265,8 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				if (resolve) return getActorClass();
 				return basicGetActorClass();
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE:
+				return getStateMachine();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1210,6 +1281,9 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				setActorClass((ActorClass)newValue);
+				return;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE:
+				setStateMachine((StateGraph)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1226,6 +1300,9 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				setActorClass((ActorClass)null);
 				return;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE:
+				setStateMachine((StateGraph)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1240,6 +1317,8 @@ public class ExpandedActorClassImpl extends ActorClassImpl implements ExpandedAc
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				return actorClass != null;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__STATE_MACHINE:
+				return stateMachine != null;
 		}
 		return super.eIsSet(featureID);
 	}

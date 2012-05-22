@@ -1018,9 +1018,7 @@ public class GeneratorModelBuilder {
 			+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
-		xpac.setName(ac.getName());
 		xpac.setActorClass(ac);
-		xpac.setAbstract(ac.isAbstract());
 		
 		xpac.prepare(diagnostician);
 		

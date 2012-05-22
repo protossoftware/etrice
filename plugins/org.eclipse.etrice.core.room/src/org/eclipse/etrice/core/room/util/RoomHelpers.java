@@ -211,7 +211,7 @@ public class RoomHelpers {
 		return isEmpty(ac.getStateMachine());
 	}
 	
-	private static boolean isEmpty(StateGraph sg) {
+	public static boolean isEmpty(StateGraph sg) {
 		if (sg==null)
 			return true;
 		

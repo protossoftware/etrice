@@ -8,17 +8,26 @@ package org.eclipse.etrice.core.genmodel.etricegen.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.etrice.core.genmodel.etricegen.*;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,22 +152,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExpandedActorClass(ExpandedActorClass object) {
 				return createExpandedActorClassAdapter();
-			}
-			@Override
-			public Adapter caseRoomClass(RoomClass object) {
-				return createRoomClassAdapter();
-			}
-			@Override
-			public Adapter caseStructureClass(StructureClass object) {
-				return createStructureClassAdapter();
-			}
-			@Override
-			public Adapter caseActorContainerClass(ActorContainerClass object) {
-				return createActorContainerClassAdapter();
-			}
-			@Override
-			public Adapter caseActorClass(ActorClass object) {
-				return createActorClassAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -415,62 +408,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpandedActorClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomClass <em>Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.room.RoomClass
-	 * @generated
-	 */
-	public Adapter createRoomClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StructureClass <em>Structure Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.room.StructureClass
-	 * @generated
-	 */
-	public Adapter createStructureClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorContainerClass <em>Actor Container Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.room.ActorContainerClass
-	 * @generated
-	 */
-	public Adapter createActorContainerClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.room.ActorClass
-	 * @generated
-	 */
-	public Adapter createActorClassAdapter() {
 		return null;
 	}
 

@@ -832,6 +832,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExpandedActorClass_StateMachine() {
+		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getPortKind() {
 		return portKindEEnum;
 	}
@@ -946,6 +955,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		expandedActorClassEClass = createEClass(EXPANDED_ACTOR_CLASS);
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__ACTOR_CLASS);
+		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__STATE_MACHINE);
 
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
@@ -990,7 +1000,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		sapInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
 		sppInstanceEClass.getESuperTypes().add(this.getInstanceBase());
 		serviceImplInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
-		expandedActorClassEClass.getESuperTypes().add(theRoomPackage.getActorClass());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1102,6 +1111,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(expandedActorClassEClass, ExpandedActorClass.class, "ExpandedActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpandedActorClass_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedActorClass_StateMachine(), theRoomPackage.getStateGraph(), null, "stateMachine", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, null, "prepare", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIDiagnostician(), "validator", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -973,22 +973,6 @@ public class RoomExtensions {
       return false;
   }
   
-  public boolean hasNonEmptyStateMachine(final ActorClass ac) {
-    boolean _operator_and = false;
-    StateGraph _stateMachine = ac.getStateMachine();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_stateMachine, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      StateGraph _stateMachine_1 = ac.getStateMachine();
-      EList<State> _states = _stateMachine_1.getStates();
-      boolean _isEmpty = _states.isEmpty();
-      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_not);
-    }
-    return _operator_and;
-  }
-  
   public List<Transition> getTransitionList(final State s) {
     boolean _isLeaf = this.isLeaf(s);
     if (_isLeaf) {

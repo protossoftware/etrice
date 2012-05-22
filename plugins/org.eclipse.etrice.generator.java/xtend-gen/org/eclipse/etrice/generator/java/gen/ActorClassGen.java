@@ -517,7 +517,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\t");
           StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
