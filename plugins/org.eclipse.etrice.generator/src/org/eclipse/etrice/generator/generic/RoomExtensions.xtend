@@ -373,11 +373,12 @@ class RoomExtensions {
 
 	def List<State> getStateList(StateGraph sg){
 		var ret = new ArrayList<State>()
-		for (e : sg.states){
-			ret.add(e)
-			var tmp=e.subgraph
-			if(tmp!=null){
-				ret.addAll(e.subgraph.stateList)
+		if (sg!=null) {
+			for (e : sg.states){
+				ret.add(e)
+				if (e.subgraph!=null){
+					ret.addAll(e.subgraph.stateList)
+				}
 			}
 		}
 		return ret
@@ -385,9 +386,11 @@ class RoomExtensions {
 
 	def List<State> getBaseStateList(StateGraph sg) {
 		var ret = new ArrayList<State>()
-		for(e : sg.getStateList()){
-			if(e instanceof SimpleState){
-				ret.add(e)
+		if (sg!=null) {
+			for (e : sg.getStateList()){
+				if (e instanceof SimpleState){
+					ret.add(e)
+				}
 			}
 		}
 		return ret

@@ -208,7 +208,7 @@ public class RoomHelpers {
 	}
 
 	public static boolean hasNonEmptyStateMachine(ActorClass ac) {
-		return isEmpty(ac.getStateMachine());
+		return !isEmpty(ac.getStateMachine());
 	}
 	
 	public static boolean isEmpty(StateGraph sg) {

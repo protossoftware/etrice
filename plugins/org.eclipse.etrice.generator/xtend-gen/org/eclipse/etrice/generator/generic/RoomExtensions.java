@@ -584,17 +584,19 @@ public class RoomExtensions {
   public List<State> getStateList(final StateGraph sg) {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> ret = _arrayList;
-      EList<State> _states = sg.getStates();
-      for (final State e : _states) {
-        {
-          ret.add(e);
-          StateGraph _subgraph = e.getSubgraph();
-          StateGraph tmp = _subgraph;
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(tmp, null);
-          if (_operator_notEquals) {
-            StateGraph _subgraph_1 = e.getSubgraph();
-            List<State> _stateList = this.getStateList(_subgraph_1);
-            ret.addAll(_stateList);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(sg, null);
+      if (_operator_notEquals) {
+        EList<State> _states = sg.getStates();
+        for (final State e : _states) {
+          {
+            ret.add(e);
+            StateGraph _subgraph = e.getSubgraph();
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_subgraph, null);
+            if (_operator_notEquals_1) {
+              StateGraph _subgraph_1 = e.getSubgraph();
+              List<State> _stateList = this.getStateList(_subgraph_1);
+              ret.addAll(_stateList);
+            }
           }
         }
       }
@@ -604,10 +606,13 @@ public class RoomExtensions {
   public List<State> getBaseStateList(final StateGraph sg) {
       ArrayList<State> _arrayList = new ArrayList<State>();
       ArrayList<State> ret = _arrayList;
-      List<State> _stateList = this.getStateList(sg);
-      for (final State e : _stateList) {
-        if ((e instanceof SimpleState)) {
-          ret.add(e);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(sg, null);
+      if (_operator_notEquals) {
+        List<State> _stateList = this.getStateList(sg);
+        for (final State e : _stateList) {
+          if ((e instanceof SimpleState)) {
+            ret.add(e);
+          }
         }
       }
       return ret;
