@@ -18,9 +18,9 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
-import org.eclipse.etrice.generator.base.ILogger
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.generic.RoomExtensions

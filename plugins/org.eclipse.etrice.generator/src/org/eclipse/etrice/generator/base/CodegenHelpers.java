@@ -16,7 +16,7 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.generator.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 
 /**
  * @author Henrik Rentz-Reichert

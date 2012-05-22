@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;

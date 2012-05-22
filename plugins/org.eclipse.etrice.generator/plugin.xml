@@ -10,12 +10,6 @@
 
 <plugin>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.eclipse.org/etrice/generator"
-            class="org.eclipse.etrice.generator.etricegen.ETriceGenPackage"
-            genModel="model/etricegen.genmodel"/>
-   </extension>
 
 
 </plugin>

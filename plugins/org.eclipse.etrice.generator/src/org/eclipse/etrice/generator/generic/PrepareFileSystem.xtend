@@ -18,8 +18,8 @@ import java.io.File
 import java.util.HashSet
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.etrice.generator.base.ILogger
-import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 

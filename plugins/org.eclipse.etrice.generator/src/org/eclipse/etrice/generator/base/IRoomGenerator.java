@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
-import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 
 /**
  * @author Henrik Rentz-Reichert

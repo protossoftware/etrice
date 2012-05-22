@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.generator.base;
 
+import org.eclipse.etrice.core.genmodel.base.ILogger;
+
 
 /**
  * An ILineOutputLogger will send its output to the specified {@link org.eclipse.etrice.generator.base.ILogger ILogger} if one is set.

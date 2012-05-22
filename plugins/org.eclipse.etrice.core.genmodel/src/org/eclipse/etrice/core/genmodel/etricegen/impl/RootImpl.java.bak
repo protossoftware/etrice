@@ -1,0 +1,464 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.eclipse.etrice.core.genmodel.etricegen.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.SubSystemClass;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Root</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemInstances <em>Sub System Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getModels <em>Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpActorClasses <em>Xp Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedDataClasses <em>Used Data Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedActorClasses <em>Used Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class RootImpl extends EObjectImpl implements Root {
+	/**
+	 * The default value of the '{@link #isLibrary() <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLibrary()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LIBRARY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLibrary() <em>Library</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLibrary()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean library = LIBRARY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSubSystemInstances() <em>Sub System Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubSystemInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SubSystemInstance> subSystemInstances;
+
+	/**
+	 * The cached value of the '{@link #getModels() <em>Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RoomModel> models;
+
+	/**
+	 * The cached value of the '{@link #getXpActorClasses() <em>Xp Actor Classes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getXpActorClasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExpandedActorClass> xpActorClasses;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RootImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ETriceGenPackage.Literals.ROOT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isLibrary() {
+		return library;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLibrary(boolean newLibrary) {
+		boolean oldLibrary = library;
+		library = newLibrary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ROOT__LIBRARY, oldLibrary, library));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SubSystemInstance> getSubSystemInstances() {
+		if (subSystemInstances == null) {
+			subSystemInstances = new EObjectContainmentEList<SubSystemInstance>(SubSystemInstance.class, this, ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES);
+		}
+		return subSystemInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<RoomModel> getModels() {
+		if (models == null) {
+			models = new EObjectResolvingEList<RoomModel>(RoomModel.class, this, ETriceGenPackage.ROOT__MODELS);
+		}
+		return models;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ExpandedActorClass> getXpActorClasses() {
+		if (xpActorClasses == null) {
+			xpActorClasses = new EObjectContainmentEList<ExpandedActorClass>(ExpandedActorClass.class, this, ETriceGenPackage.ROOT__XP_ACTOR_CLASSES);
+		}
+		return xpActorClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataClass> getUsedDataClasses() {
+		// TODO: implement this method to return the 'Used Data Classes' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProtocolClass> getUsedProtocolClasses() {
+		// TODO: implement this method to return the 'Used Protocol Classes' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ActorClass> getUsedActorClasses() {
+		// TODO: implement this method to return the 'Used Actor Classes' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<RoomModel> getUsedRoomModels() {
+		// TODO: implement this method to return the 'Used Room Models' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SubSystemClass> getSubSystemClasses() {
+		// TODO: implement this method to return the 'Sub System Classes' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<RoomModel> getReferencedModels(RoomClass cls) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProtocolClass> getReferencedProtocolClasses(ActorClass cls) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpandedActorClass getExpandedActorClass(ActorInstance ai) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
+				return ((InternalEList<?>)getSubSystemInstances()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
+				return ((InternalEList<?>)getXpActorClasses()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				return isLibrary();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
+				return getSubSystemInstances();
+			case ETriceGenPackage.ROOT__MODELS:
+				return getModels();
+			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
+				return getXpActorClasses();
+			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
+				return getUsedDataClasses();
+			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
+				return getUsedProtocolClasses();
+			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
+				return getUsedActorClasses();
+			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
+				return getUsedRoomModels();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				return getSubSystemClasses();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				setLibrary((Boolean)newValue);
+				return;
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
+				getSubSystemInstances().clear();
+				getSubSystemInstances().addAll((Collection<? extends SubSystemInstance>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__MODELS:
+				getModels().clear();
+				getModels().addAll((Collection<? extends RoomModel>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
+				getXpActorClasses().clear();
+				getXpActorClasses().addAll((Collection<? extends ExpandedActorClass>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
+				getUsedDataClasses().clear();
+				getUsedDataClasses().addAll((Collection<? extends DataClass>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
+				getUsedProtocolClasses().clear();
+				getUsedProtocolClasses().addAll((Collection<? extends ProtocolClass>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
+				getUsedActorClasses().clear();
+				getUsedActorClasses().addAll((Collection<? extends ActorClass>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
+				getUsedRoomModels().clear();
+				getUsedRoomModels().addAll((Collection<? extends RoomModel>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				getSubSystemClasses().clear();
+				getSubSystemClasses().addAll((Collection<? extends SubSystemClass>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				setLibrary(LIBRARY_EDEFAULT);
+				return;
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
+				getSubSystemInstances().clear();
+				return;
+			case ETriceGenPackage.ROOT__MODELS:
+				getModels().clear();
+				return;
+			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
+				getXpActorClasses().clear();
+				return;
+			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
+				getUsedDataClasses().clear();
+				return;
+			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
+				getUsedProtocolClasses().clear();
+				return;
+			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
+				getUsedActorClasses().clear();
+				return;
+			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
+				getUsedRoomModels().clear();
+				return;
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				getSubSystemClasses().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case ETriceGenPackage.ROOT__LIBRARY:
+				return library != LIBRARY_EDEFAULT;
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
+				return subSystemInstances != null && !subSystemInstances.isEmpty();
+			case ETriceGenPackage.ROOT__MODELS:
+				return models != null && !models.isEmpty();
+			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
+				return xpActorClasses != null && !xpActorClasses.isEmpty();
+			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
+				return !getUsedDataClasses().isEmpty();
+			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
+				return !getUsedProtocolClasses().isEmpty();
+			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
+				return !getUsedActorClasses().isEmpty();
+			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
+				return !getUsedRoomModels().isEmpty();
+			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
+				return !getSubSystemClasses().isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (library: ");
+		result.append(library);
+		result.append(')');
+		return result.toString();
+	}
+
+} //RootImpl

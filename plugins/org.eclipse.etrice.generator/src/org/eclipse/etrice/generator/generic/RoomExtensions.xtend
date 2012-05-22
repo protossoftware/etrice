@@ -44,13 +44,13 @@ import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.generator.etricegen.ActiveTrigger
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
-import org.eclipse.etrice.generator.etricegen.PortInstance
-import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
-import org.eclipse.etrice.generator.etricegen.SAPInstance
-import org.eclipse.etrice.generator.etricegen.TransitionChain
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*

@@ -21,12 +21,12 @@ import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.CommunicationType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
-import org.eclipse.etrice.generator.base.ILogger
-import org.eclipse.etrice.generator.etricegen.Root
-import org.eclipse.etrice.generator.etricegen.ActorInstance
-import org.eclipse.etrice.generator.etricegen.PortInstance
-import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
-import org.eclipse.etrice.generator.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers

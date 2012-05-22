@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*

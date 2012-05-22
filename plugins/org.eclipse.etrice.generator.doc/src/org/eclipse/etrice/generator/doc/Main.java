@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
-import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.xtext.generator.IGenerator;
 

@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -21,8 +23,6 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 /**
  * base class for 
