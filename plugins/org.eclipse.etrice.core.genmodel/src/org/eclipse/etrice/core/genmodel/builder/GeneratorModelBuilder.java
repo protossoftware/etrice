@@ -1013,7 +1013,7 @@ public class GeneratorModelBuilder {
 	 * @param ac - the original model class
 	 * @return - the newly created expanded actor class
 	 */
-	private ExpandedActorClass createExpandedActorClass(ActorClass ac) {
+	public ExpandedActorClass createExpandedActorClass(ActorClass ac) {
 		logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
 			+" of "+((RoomModel)ac.eContainer()).getName());
 

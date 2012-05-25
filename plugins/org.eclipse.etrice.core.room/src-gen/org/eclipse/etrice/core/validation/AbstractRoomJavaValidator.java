@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.ComposedChecks;
 
-@ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class, org.eclipse.xtext.validation.NamesAreUniqueValidator.class})
+@ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class, org.eclipse.xtext.validation.NamesAreUniqueValidator.class, org.eclipse.etrice.core.validation.ValidatorExtensionManager.class})
 public class AbstractRoomJavaValidator extends AbstractDeclarativeValidator {
 
 	@Override
