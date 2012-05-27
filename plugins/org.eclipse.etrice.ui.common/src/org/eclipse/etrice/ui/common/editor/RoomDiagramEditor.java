@@ -8,7 +8,9 @@
 
 package org.eclipse.etrice.ui.common.editor;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +95,15 @@ public class RoomDiagramEditor extends DiagramEditor {
 		ResourceSet rs = getEditingDomain().getResourceSet();
 		for (Resource res : rs.getResources()) {
 			if (res instanceof XtextResource) {
-				if (res.isLoaded() && res.isModified()) {
+				if (res.isModified()) {
+					if (!res.isLoaded())
+						try {
+							res.load(Collections.EMPTY_MAP);
+						} catch (IOException e) {
+							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: couldn't load referenced resource "+res.getURI());
+							return;
+						}
+
 					XtextResource xres = (XtextResource) res;
 					ISerializer serializer = xres.getSerializer();
 					
