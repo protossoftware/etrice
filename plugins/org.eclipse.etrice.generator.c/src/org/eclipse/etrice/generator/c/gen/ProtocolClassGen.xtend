@@ -72,7 +72,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include "«dataClass.name».h"
 		«ENDFOR»
-
+		
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»
 			
 			/* message IDs */
@@ -174,6 +174,7 @@ struct «portClassName»_var {
 void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
 			«ENDFOR»
 		«ENDIF»
+etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 		'''
 	}
 
