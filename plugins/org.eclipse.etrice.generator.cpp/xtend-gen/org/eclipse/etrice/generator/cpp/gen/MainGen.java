@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.generator.cpp.gen.DataClassGen;
+import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -17,6 +18,9 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 public class MainGen implements IGenerator {
   @Inject
   private DataClassGen dataClassGen;
+  
+  @Inject
+  private ProtocolClassGen protocolClassGen;
   
   @Inject
   private PrepareFileSystem prepFS;
@@ -33,6 +37,7 @@ public class MainGen implements IGenerator {
   
   public void doGenerate(final Root e) {
       this.dataClassGen.doGenerate(e);
+      this.protocolClassGen.doGenerate(e);
       boolean _isLibrary = e.isLibrary();
       boolean _operator_not = BooleanExtensions.operator_not(_isLibrary);
       if (_operator_not) {

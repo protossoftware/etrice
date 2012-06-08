@@ -80,7 +80,7 @@ public class CppExtensions implements ILanguageExtension {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final Pair<String,String> entry : entries) {
-        _builder.append("public static final int ");
+        _builder.append("static const int ");
         String _first = entry.getFirst();
         _builder.append(_first, "");
         _builder.append(" = ");
@@ -138,7 +138,8 @@ public class CppExtensions implements ILanguageExtension {
   public StringConcatenation getIncludeGuardString(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("_");
-    String _upperCase = filename.toUpperCase();
+    String _replaceAll = filename.replaceAll("\\/.", "_");
+    String _upperCase = _replaceAll.toUpperCase();
     _builder.append(_upperCase, "");
     _builder.append("_H_");
     return _builder;

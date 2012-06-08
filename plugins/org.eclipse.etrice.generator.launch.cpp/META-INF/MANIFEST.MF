@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: eTrice Java Generator Launcher
-Bundle-SymbolicName: org.eclipse.etrice.generator.launch.java;singleton:=true
+Bundle-Name: eTrice Cpp Generator Launcher
+Bundle-SymbolicName: org.eclipse.etrice.generator.launch.cpp;singleton:=true
 Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: org.eclipse.etrice.generator.launch.cpp.Activator
 Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.1.0",

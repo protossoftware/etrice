@@ -24,7 +24,7 @@ import org.eclipse.etrice.generator.generic.PrepareFileSystem
 class MainGen implements IGenerator {
 	
 	@Inject DataClassGen dataClassGen
-//	@Inject ProtocolClassGen protocolClassGen
+	@Inject ProtocolClassGen protocolClassGen
 //	@Inject ActorClassGen actorClassGen
 //	@Inject SubSystemClassGen subsystemClassGen
 //	@Inject SubSystemRunnerGen subsystemRunnerGen
@@ -41,7 +41,7 @@ class MainGen implements IGenerator {
 	
 	def void doGenerate(Root e) {
 		dataClassGen.doGenerate(e);
-//		protocolClassGen.doGenerate(e);
+		protocolClassGen.doGenerate(e);
 //		actorClassGen.doGenerate(e);
 //		subsystemClassGen.doGenerate(e);
 		

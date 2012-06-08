@@ -67,7 +67,7 @@ class CppExtensions implements ILanguageExtension {
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		'''
 		«FOR entry: entries»
-			public static final int «entry.first» = «entry.second»;
+			static const int «entry.first» = «entry.second»;
 		«ENDFOR»
 		'''.toString
 	}
@@ -98,7 +98,7 @@ class CppExtensions implements ILanguageExtension {
 	}
 	
 	def getIncludeGuardString(String filename){
-		'''_«filename.toUpperCase»_H_'''
+		'''_«filename.replaceAll("\\/.", "_").toUpperCase»_H_'''
 	}
 
 	def generateIncludeGuardBegin(String filename){'''
