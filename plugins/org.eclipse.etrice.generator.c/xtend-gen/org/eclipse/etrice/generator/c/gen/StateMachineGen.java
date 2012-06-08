@@ -3,9 +3,9 @@ package org.eclipse.etrice.generator.c.gen;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -20,9 +20,9 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   public StringConcatenation genHeaderConstants(final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
-      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(xpac);
+      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
       int _size = _allBaseStates.size();
-      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(xpac);
+      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(ac);
       int _size_1 = _allLeafStates.size();
       int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)_size_1));
       int _operator_plus = IntegerExtensions.operator_plus(((Integer)_operator_minus), ((Integer)2));

@@ -23,10 +23,10 @@ import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
 
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.base.ILogger;
-import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.generator.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 
 public class RoomModelValidator extends RoomJavaValidator implements ILogger {
 

@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem

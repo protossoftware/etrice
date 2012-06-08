@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.GuardedTransition;
@@ -21,13 +23,11 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
-import org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.generator.etricegen.TransitionChain;
 
 import com.google.inject.Inject;
 
 /**
- * Implementation of the {@link org.eclipse.etrice.generator.etricegen.ITransitionChainVisitor ITransitionChainVisitor} interface.
+ * Implementation of the {@link org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor ITransitionChainVisitor} interface.
  * Uses an {@link org.eclipse.etrice.generator.generic.ILanguageExtension ILanguageExtension} for target language specific things.
  * 
  * @author Henrik Rentz-Reichert

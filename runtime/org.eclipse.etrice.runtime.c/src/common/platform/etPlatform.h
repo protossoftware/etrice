@@ -10,6 +10,9 @@
  *
  *******************************************************************************/
 
+#ifndef __ETPLATFORM_H__
+#define __ETPLATFORM_H__
+
 /*
  * etPlatform.h defines a generic interface for platform specific implementations
  *
@@ -25,3 +28,4 @@ void etUserPreRun(void);
 void etUserPostRun(void);
 void etUserExit(void);
 
+#endif /* __ETPLATFORM_H__ */

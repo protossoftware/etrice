@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -150,6 +151,9 @@ public abstract class AbstractStateMachineTest extends TestBase {
 	 * @return true if state graph item is not owned by the given actor class
 	 */
 	private boolean isInherited(ActorClass ac, StateGraphItem item) {
+		if (item instanceof RefinedState)
+			return true;
+		
 		EObject owner = item.eContainer();
 		while (owner!=null) {
 			if (owner instanceof ActorClass)

@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.etrice.generator.java.gen.ActorClassGen;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;

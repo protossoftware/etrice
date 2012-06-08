@@ -12,7 +12,13 @@
 
 package org.eclipse.etrice.core.ui.quickfix;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
 
 public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 
@@ -27,4 +33,22 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 //		});
 //	}
 
+	@Override
+	public List<IssueResolution> getResolutions(Issue issue) {
+		List<IssueResolution> result = new ArrayList<IssueResolution>();
+		
+		result.addAll(super.getResolutions(issue));
+		
+		IssueResolutionAcceptor acceptor = getIssueResolutionAcceptorProvider().get();
+		QuickfixExtensionManager.getInstance().getResolutions(issue, acceptor);
+		
+		result.addAll(acceptor.getIssueResolutions());
+		
+		return result;
+	}
+	
+	@Override
+		public boolean hasResolutionFor(String issueCode) {
+			return super.hasResolutionFor(issueCode) || QuickfixExtensionManager.getInstance().hasResolutionFor(issueCode);
+		}
 }

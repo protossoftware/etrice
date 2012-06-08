@@ -44,13 +44,13 @@ import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.generator.etricegen.ActiveTrigger
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.etricegen.InterfaceItemInstance
-import org.eclipse.etrice.generator.etricegen.PortInstance
-import org.eclipse.etrice.generator.etricegen.ServiceImplInstance
-import org.eclipse.etrice.generator.etricegen.SAPInstance
-import org.eclipse.etrice.generator.etricegen.TransitionChain
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
@@ -170,14 +170,14 @@ class RoomExtensions {
 		if (ac.base==null)
 			return ac.strSAPs
 		else
-			ac.base.strSAPs.union(ac.strSAPs)
+			ac.base.allSAPs.union(ac.strSAPs)
 	}
 
 	def List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
 		if (ac.base==null)
 			return ac.serviceImplementations
 		else
-			ac.base.serviceImplementations.union(ac.serviceImplementations)
+			ac.base.allServiceImplementations.union(ac.serviceImplementations)
 	}
 	
 	// make a valid identifier from a path string
@@ -189,14 +189,14 @@ class RoomExtensions {
 		if (dc.base==null)
 			return dc.attributes
 		else
-			dc.base.attributes.union(dc.allAttributes)
+			dc.base.allAttributes.union(dc.attributes)
 	}
 
 	def List<Attribute> getAllAttributes(ActorClass ac) {
 		if (ac.base==null)
 			return ac.attributes
 		else
-			ac.base.attributes.union(ac.allAttributes)
+			ac.base.allAttributes.union(ac.attributes)
 	}
 
 	//-------------------------------------------------------
@@ -373,11 +373,12 @@ class RoomExtensions {
 
 	def List<State> getStateList(StateGraph sg){
 		var ret = new ArrayList<State>()
-		for (e : sg.states){
-			ret.add(e)
-			var tmp=e.subgraph
-			if(tmp!=null){
-				ret.addAll(e.subgraph.stateList)
+		if (sg!=null) {
+			for (e : sg.states){
+				ret.add(e)
+				if (e.subgraph!=null){
+					ret.addAll(e.subgraph.stateList)
+				}
 			}
 		}
 		return ret
@@ -385,9 +386,11 @@ class RoomExtensions {
 
 	def List<State> getBaseStateList(StateGraph sg) {
 		var ret = new ArrayList<State>()
-		for(e : sg.getStateList()){
-			if(e instanceof SimpleState){
-				ret.add(e)
+		if (sg!=null) {
+			for (e : sg.getStateList()){
+				if (e instanceof SimpleState){
+					ret.add(e)
+				}
 			}
 		}
 		return ret
@@ -536,10 +539,6 @@ class RoomExtensions {
 				return true
 		}
 		return false
-	}
-	
-	def boolean hasNonEmptyStateMachine(ActorClass ac) {
-		ac.stateMachine!=null && !ac.stateMachine.states.empty
 	}
 	
 	def List<Transition> getTransitionList(State s) {

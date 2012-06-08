@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 
@@ -26,7 +26,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	
 	def genHeaderConstants(ExpandedActorClass xpac, ActorClass ac) {
 		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
-		var historySize = xpac.allBaseStates.size - xpac.allLeafStates.size + 2
+		var historySize = ac.allBaseStates.size - ac.allLeafStates.size + 2
 	'''
 	/* constant for state machine data */
 	#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»

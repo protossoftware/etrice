@@ -10,6 +10,7 @@ package org.eclipse.etrice.ui.behavior.editor;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -101,6 +103,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		getEditingDomain().getCommandStack().execute(new RecordingCommand(getEditingDomain()) {
 			protected void doExecute() {
 				removeEmptySubgraphs();
+				rebaseRefinedStates();
 				removeUnusedRefinedStates();
 			}
 		});
@@ -112,8 +115,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 * 
 	 */
 	protected void removeUnusedRefinedStates() {
-		@SuppressWarnings("restriction")
-		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
 		ActorClass ac = SupportUtil.getActorClass(diagram);
 		
 		if (ac.getStateMachine()!=null) {
@@ -180,6 +182,23 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		// need to recursively delete the shapes to avoid dangling HREFs
 		for (Shape shape : toBeRemoved) {
 			EcoreUtil.delete(shape, true);
+		}
+	}
+	
+	protected void rebaseRefinedStates() {
+		ActorClass ac = getActorClass();
+
+		if (ac.getStateMachine()==null)
+			return;
+		
+		Map<RefinedState, RefinedState> rs2parent = RoomHelpers.getRefinedStatesToRelocate(ac);
+		
+		// move all to the new context
+		for (RefinedState rs : rs2parent.keySet()) {
+			RefinedState parent = rs2parent.get(rs);
+			if (parent.getSubgraph()==null)
+				parent.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+			parent.getSubgraph().getStates().add(rs);
 		}
 	}
 }

@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
-import org.eclipse.etrice.generator.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.generator.etricegen.IDiagnostician;
-import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -107,7 +107,7 @@ public abstract class AbstractGenerator {
 	protected void setupRoomModel() {
 		Injector roomInjector = new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
 		validator = roomInjector.getInstance(IResourceValidator.class);
-		org.eclipse.etrice.generator.SetupGenerator.doSetup();
+		org.eclipse.etrice.core.genmodel.SetupGenmodel.doSetup();
 	}
 
 	/**

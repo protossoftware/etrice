@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -81,7 +81,7 @@ public class CTranslationProvider implements ITranslationProvider {
 					if (index==null)
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 					else
-						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 				}
 			}
 			else if (p.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
@@ -100,7 +100,7 @@ public class CTranslationProvider implements ITranslationProvider {
 			if (index==null)
 				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			else
-				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+", "+index+")";
+				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 		}
 		return result;
 	}

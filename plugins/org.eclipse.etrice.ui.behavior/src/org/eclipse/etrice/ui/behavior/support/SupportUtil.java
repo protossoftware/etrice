@@ -46,6 +46,7 @@ import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
+import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -58,6 +59,7 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.ILinkService;
+import org.eclipse.core.runtime.Assert;
 
 /**
  * @author Henrik Rentz-Reichert - Initial contribution and API
@@ -188,7 +190,7 @@ public class SupportUtil {
 			// we have to create one and place it in the best fitting context
 			StateGraph sg = null;
 			State parent = s;
-			while (s.eContainer().eContainer() instanceof State) {
+			while (parent.eContainer().eContainer() instanceof State) {
 				parent = (State) s.eContainer().eContainer();
 				if (target2rs.containsKey(parent)) {
 					RefinedState bestFitting = target2rs.get(parent);
@@ -462,6 +464,7 @@ public class SupportUtil {
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<State> present = SupportUtil.getStates(sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<State> expected = ctx.getStates();
 			List<State> toAdd = new ArrayList<State>();
 			List<State> toUpdate = new ArrayList<State>();
@@ -472,13 +475,14 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		// transition points
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<TrPoint> present = SupportUtil.getTrPoints(sg, sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<TrPoint> expected = ctx.getTrPoints();
 			List<TrPoint> toAdd = new ArrayList<TrPoint>();
 			List<TrPoint> toUpdate = new ArrayList<TrPoint>();
@@ -489,13 +493,14 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		// choice points
 		{
 			ArrayList<Shape> shapes = new ArrayList<Shape>();
 			List<ChoicePoint> present = SupportUtil.getChoicePoints(sgShape, fp, node2anchor, shapes);
+			checkDuplicates(present);
 			List<ChoicePoint> expected = ctx.getChPoints();
 			List<ChoicePoint> toAdd = new ArrayList<ChoicePoint>();
 			List<ChoicePoint> toUpdate = new ArrayList<ChoicePoint>();
@@ -506,7 +511,7 @@ public class SupportUtil {
 					toAdd.add(item);
 			}
         	SupportUtil.addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
-        	SupportUtil.updateStateGraphNodes(toUpdate, ctx.getPositionProvider(), shapes);
+        	SupportUtil.updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
 		}
 		
 		SupportUtil.getSubTpAnchors(sgShape, node2anchor);
@@ -521,6 +526,19 @@ public class SupportUtil {
 					items.add(trans);
 			}
 			SupportUtil.addTransitions(items, sgShape, fp, node2anchor);
+		}
+	}
+
+	/**
+	 * @param items
+	 */
+	private static void checkDuplicates(List<? extends StateGraphItem> items) {
+		for (StateGraphItem item : items) {
+			if (items.indexOf(item)!=items.lastIndexOf(item)) {
+				Assert.isTrue(
+						items.indexOf(item)==items.lastIndexOf(item),
+						"multiple occurrences of "+RoomNameProvider.getFullPath(item));
+			}
 		}
 	}
 
@@ -577,7 +595,7 @@ public class SupportUtil {
 		node2anchor.put(getKey(tp), pe.getAnchors().get(0));
 	}
 
-	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, IPositionProvider positionProvider, List<Shape> shapes) {
+	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, List<Shape> shapes, IPositionProvider positionProvider, IFeatureProvider fp) {
 		
 		ILinkService linkService = Graphiti.getLinkService();
 		IGaService gaService = Graphiti.getGaService();
@@ -591,9 +609,10 @@ public class SupportUtil {
 			for (Shape shape : shapes) {
 				EObject bo = linkService.getBusinessObjectForLinkedPictogramElement(shape);
 				if (bo==node) {
+					// relocate and resize the invisible rectangle
 					GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
-					System.out.println(RoomNameProvider.getName(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
-					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
+//					System.out.println(RoomNameProvider.getFullPath(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
+//					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
 
 					int margin = 0;
 					if (node instanceof State)
@@ -608,6 +627,10 @@ public class SupportUtil {
 							ps.getWidth()+2*margin,
 							ps.getHeight()+2*margin
 						);
+					
+					// have to call the layout to adjust the visible border
+					LayoutContext lc = new LayoutContext(shape);
+					fp.layoutIfPossible(lc);
 					break;
 				}
 			}

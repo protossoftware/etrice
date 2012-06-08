@@ -22,8 +22,8 @@ import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.GuardedTransition
 import org.eclipse.etrice.core.room.TriggeredTransition
 import org.eclipse.etrice.core.room.NonInitialTransition
-import org.eclipse.etrice.generator.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.etricegen.ActiveTrigger
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
 import org.eclipse.etrice.generator.base.ITranslationProvider

@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.generator.java.gen;
 
-import org.eclipse.etrice.generator.base.ILogger;
-import org.eclipse.etrice.generator.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.base.ILogger;
 
 import com.google.inject.Inject;
 

@@ -5,6 +5,8 @@ import com.google.inject.Singleton;
 import java.io.File;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -20,9 +22,8 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.base.ILogger;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
-import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -571,7 +572,7 @@ public class DocGen implements IRoomGenerator {
       _builder.append(_generateOperationsDoc, "");
       _builder.newLineIfNotEmpty();
       {
-        boolean _hasNonEmptyStateMachine = this.roomExt.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\\level{3}{Statemachine}");
           _builder.newLine();

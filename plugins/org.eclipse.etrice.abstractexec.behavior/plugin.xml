@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.etrice.core.room.validation">
+      <validator
+            class="org.eclipse.etrice.abstractexec.behavior.DemoValidator"
+            classToCheck="org.eclipse.etrice.core.room.ActorClass"
+            mode="FAST">
+      </validator>
+      <validator
+            class="org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator"
+            classToCheck="org.eclipse.etrice.core.room.ActorClass"
+            mode="FAST">
+      </validator>
+   </extension>
+   <extension
+         point="org.eclipse.etrice.core.room.ui.quickfix">
+      <quickfixProvider
+            class="org.eclipse.etrice.abstractexec.behavior.DemoQuickfix"
+            code="demo_issue">
+      </quickfixProvider>
+   </extension>
+
+</plugin>
