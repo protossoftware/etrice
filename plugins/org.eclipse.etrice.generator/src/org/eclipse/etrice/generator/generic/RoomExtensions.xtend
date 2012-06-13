@@ -211,7 +211,10 @@ class RoomExtensions {
 	}
 
 	def String getPortClassName(Port p){
-		p.protocol.getPortClassName(p.conjugated, p.replicated)
+		if (p.protocol instanceof ProtocolClass)
+			(p.protocol as ProtocolClass).getPortClassName(p.conjugated, p.replicated)
+		else
+			""
 	}
 
 	def String getPortClassName(ExternalPort p){

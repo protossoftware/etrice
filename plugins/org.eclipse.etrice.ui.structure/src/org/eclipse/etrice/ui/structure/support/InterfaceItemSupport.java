@@ -694,7 +694,7 @@ public class InterfaceItemSupport {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof InterfaceItem) {
 				String name = ((InterfaceItem) bo).getName();
-				String protocol = ((InterfaceItem) bo).getProtocol().getName();
+				String protocol = RoomHelpers.getGeneralProtocol(((InterfaceItem) bo)).getName();
 				if (bo instanceof Port)
 					if (((Port) bo).isConjugated())
 						protocol = "conj "+protocol;

@@ -31,7 +31,7 @@ RoomModel :
 		primitiveTypes+=PrimitiveType	|
 		externalTypes+=ExternalType	|
 		dataClasses+=DataClass	|
-		protocolClasses+=ProtocolClass |
+		protocolClasses+=GeneralProtocolClass |
 		actorClasses+=ActorClass  |
 		subSystemClasses+=SubSystemClass |
 		systems+=LogicalSystem
@@ -39,7 +39,7 @@ RoomModel :
 	'}'
 ;
 
-RoomClass: DataType | ProtocolClass | StructureClass;
+RoomClass: DataType | GeneralProtocolClass | StructureClass;
 StructureClass: ActorContainerClass | LogicalSystem;
 ActorContainerClass: ActorClass | SubSystemClass;
 
@@ -102,6 +102,8 @@ enum CommunicationType:
 	SYNCHRONOUS='sync'
 ;
 
+GeneralProtocolClass: ProtocolClass | CompoundProtocolClass;
+
 ProtocolClass:
 	(commType=CommunicationType)?
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
@@ -115,6 +117,14 @@ ProtocolClass:
 		(semantics=ProtocolSemantics)?
 	'}';
 	
+CompoundProtocolClass:
+	'CompoundProtocolClass' name=ID (docu=Documentation)? '{'
+		subProtocols+=SubProtocol+
+	'}'
+;
+
+SubProtocol: 'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
+
 Message:
 	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')'
 	(docu=Documentation)?;
@@ -202,7 +212,7 @@ ActorClass:
 InterfaceItem: Port | SAPRef | SPPRef;
 
 Port:
-	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[ProtocolClass|FQN] (docu=Documentation)?;
+	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[GeneralProtocolClass|FQN] (docu=Documentation)?;
 ExternalPort:
 	'external' 'Port' ifport=[Port|ID] ;
 
@@ -255,7 +265,7 @@ Binding:
 	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
 	
 BindingEndPoint:
-	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID];
+	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID] ('sub' sub=[SubProtocol|ID])?;
 
 LayerConnection:
 	'LayerConnection' from=SAPoint 'satisfied_by' to=SPPoint 

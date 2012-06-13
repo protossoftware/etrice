@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
@@ -29,6 +30,7 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -642,7 +644,13 @@ public class RoomHelpers {
 	public static List<Message> getMessageList(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
 		if (item instanceof Port) {
-			protocol = ((Port) item).getProtocol();
+			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
+				// end ports (for which this is called) can have no CompoundProtocolClass
+				assert(false): "unexpected protocol type";
+				return null;
+			}
+			
+			protocol = (ProtocolClass) ((Port) item).getProtocol();
 			if (((Port) item).isConjugated())
 				outgoing = !outgoing;
 		}
@@ -665,7 +673,13 @@ public class RoomHelpers {
 		ProtocolClass protocol = null;
 		boolean conjugated = false;
 		if (item instanceof Port) {
-			protocol = ((Port) item).getProtocol();
+			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
+				// end ports (for which this is called) can have no CompoundProtocolClass
+				assert(false): "unexpected protocol type";
+				return null;
+			}
+			
+			protocol = (ProtocolClass) ((Port) item).getProtocol();
 			conjugated = ((Port) item).isConjugated();
 		}
 		else if (item instanceof SAPRef) {
@@ -681,6 +695,28 @@ public class RoomHelpers {
 		}
 		
 		return conjugated? protocol.getConjugate():protocol.getRegular();
+	}
+	
+	/**
+	 * returns true if this is a relay port
+	 * 
+	 * @param port
+	 * @return true if relay port
+	 */
+	public static boolean isRelay(Port port) {
+		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
+		if (acc instanceof ActorClass) {
+			if (((ActorClass)acc).getIfPorts().contains(port)) {
+				for (ExternalPort xp : ((ActorClass)acc).getExtPorts()) {
+					if (xp.getIfport()==port)
+						return false;
+				}
+				return true;
+			}
+			return false;
+		}
+		else
+			return true;
 	}
 
 	public static boolean isConstructor(Operation op) {
@@ -831,5 +867,34 @@ public class RoomHelpers {
 			}
 		}
 		return rs2parent;
+	}
+	
+	public static ProtocolClass getProtocol(InterfaceItem item) {
+		if (item instanceof Port) {
+			if (((Port)item).getProtocol() instanceof ProtocolClass)
+				return (ProtocolClass) ((Port)item).getProtocol();
+			else
+				return null;
+		}
+		else if (item instanceof SAPRef)
+			return ((SAPRef)item).getProtocol();
+		else if (item instanceof SPPRef)
+			return ((SPPRef)item).getProtocol();
+		
+		assert(false): "unexpected sub type";
+		return null;
+	}
+	
+	public static GeneralProtocolClass getGeneralProtocol(InterfaceItem item) {
+		if (item instanceof Port) {
+			return ((Port)item).getProtocol();
+		}
+		else if (item instanceof SAPRef)
+			return ((SAPRef)item).getProtocol();
+		else if (item instanceof SPPRef)
+			return ((SPPRef)item).getProtocol();
+		
+		assert(false): "unexpected sub type";
+		return null;
 	}
 }

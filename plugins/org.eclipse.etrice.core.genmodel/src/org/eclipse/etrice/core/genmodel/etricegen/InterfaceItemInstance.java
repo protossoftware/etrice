@@ -9,6 +9,7 @@ package org.eclipse.etrice.core.genmodel.etricegen;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.ProtocolClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +19,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getPeers <em>Peers</em>}</li>
  * </ul>
  * </p>
@@ -27,6 +29,21 @@ import org.eclipse.etrice.core.room.InterfaceItem;
  * @generated
  */
 public interface InterfaceItemInstance extends InstanceBase {
+	/**
+	 * Returns the value of the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Protocol</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Protocol</em>' reference.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getInterfaceItemInstance_Protocol()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	ProtocolClass getProtocol();
+
 	/**
 	 * Returns the value of the '<em><b>Peers</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance}.

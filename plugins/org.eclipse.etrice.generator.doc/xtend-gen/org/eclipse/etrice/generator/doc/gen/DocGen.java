@@ -3,6 +3,7 @@ package org.eclipse.etrice.generator.doc.gen;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -10,9 +11,11 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Documentation;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
@@ -20,6 +23,7 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -384,8 +388,8 @@ public class DocGen implements IRoomGenerator {
   public StringConcatenation generateAllProtocolClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EList<ProtocolClass> _protocolClasses = model.getProtocolClasses();
-      for(final ProtocolClass pc : _protocolClasses) {
+      EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
+      for(final GeneralProtocolClass pc : _protocolClasses) {
         StringConcatenation _generateProtocolClassDoc = this.generateProtocolClassDoc(root, pc);
         _builder.append(_generateProtocolClassDoc, "");
         _builder.newLineIfNotEmpty();
@@ -394,7 +398,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
+  protected StringConcatenation _generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
     _builder.append("\\level{2} {");
@@ -503,6 +507,48 @@ public class DocGen implements IRoomGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("\\end{tabular}\t\t\t");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  protected StringConcatenation _generateProtocolClassDoc(final Root root, final CompoundProtocolClass pc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\\level{2} {");
+    String _name = pc.getName();
+    _builder.append(_name, "");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
+    Documentation _docu = pc.getDocu();
+    StringConcatenation _generateDocText = this.generateDocText(_docu);
+    _builder.append(_generateDocText, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\\level{3}{Sub Protocols}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\\begin{tabular}[ht]{|l|l|}");
+    _builder.newLine();
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("Name & Protocol\\\\");
+    _builder.newLine();
+    {
+      EList<SubProtocol> _subProtocols = pc.getSubProtocols();
+      for(final SubProtocol sub : _subProtocols) {
+        _builder.append("\\hline");
+        _builder.newLine();
+        String _name_1 = sub.getName();
+        _builder.append(_name_1, "");
+        _builder.append(" & ");
+        GeneralProtocolClass _protocol = sub.getProtocol();
+        String _name_2 = _protocol.getName();
+        _builder.append(_name_2, "");
+        _builder.append("\\\\");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\\end{tabular}");
     _builder.newLine();
     return _builder;
   }
@@ -1014,5 +1060,16 @@ public class DocGen implements IRoomGenerator {
     String _name = ac.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".bla");
     return _operator_plus;
+  }
+  
+  public StringConcatenation generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {
+    if (pc instanceof CompoundProtocolClass) {
+      return _generateProtocolClassDoc(root, (CompoundProtocolClass)pc);
+    } else if (pc instanceof ProtocolClass) {
+      return _generateProtocolClassDoc(root, (ProtocolClass)pc);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(root, pc).toString());
+    }
   }
 }

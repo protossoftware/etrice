@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
@@ -21,6 +22,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +34,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl#getPeers <em>Peers</em>}</li>
  * </ul>
  * </p>
@@ -63,6 +69,34 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	@Override
 	protected EClass eStaticClass() {
 		return ETriceGenPackage.Literals.INTERFACE_ITEM_INSTANCE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ProtocolClass getProtocol() {
+		ProtocolClass protocol = basicGetProtocol();
+		return protocol != null && protocol.eIsProxy() ? (ProtocolClass)eResolveProxy((InternalEObject)protocol) : protocol;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated MPT
+	 */
+	public ProtocolClass basicGetProtocol() {
+		InterfaceItem item = getInterfaceItem();
+		if (item instanceof SAPRef)
+			return ((SAPRef)this.getInterfaceItem()).getProtocol();
+		else if (item instanceof SPPRef)
+			return ((SPPRef)item).getProtocol();
+		else if (item instanceof Port) {
+			if (((Port)item).getProtocol() instanceof ProtocolClass)
+				return (ProtocolClass) ((Port)item).getProtocol();
+		}
+		return null;
 	}
 
 	/**
@@ -157,6 +191,9 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PROTOCOL:
+				if (resolve) return getProtocol();
+				return basicGetProtocol();
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS:
 				return getPeers();
 		}
@@ -203,6 +240,8 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PROTOCOL:
+				return basicGetProtocol() != null;
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE__PEERS:
 				return peers != null && !peers.isEmpty();
 		}

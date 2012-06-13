@@ -760,13 +760,22 @@ public interface ETriceGenPackage extends EPackage {
 	int INTERFACE_ITEM_INSTANCE__NOBJ_IDS = INSTANCE_BASE__NOBJ_IDS;
 
 	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_ITEM_INSTANCE__PROTOCOL = INSTANCE_BASE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_ITEM_INSTANCE__PEERS = INSTANCE_BASE_FEATURE_COUNT + 0;
+	int INTERFACE_ITEM_INSTANCE__PEERS = INSTANCE_BASE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Interface Item Instance</em>' class.
@@ -775,7 +784,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_ITEM_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 1;
+	int INTERFACE_ITEM_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl <em>Port Instance</em>}' class.
@@ -831,6 +840,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int PORT_INSTANCE__NOBJ_IDS = INTERFACE_ITEM_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_INSTANCE__PROTOCOL = INTERFACE_ITEM_INSTANCE__PROTOCOL;
 
 	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
@@ -897,13 +915,22 @@ public interface ETriceGenPackage extends EPackage {
 	int BINDING_INSTANCE__PORTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Binding</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_INSTANCE__BINDING = 1;
+
+	/**
 	 * The number of structural features of the '<em>Binding Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_INSTANCE_FEATURE_COUNT = 1;
+	int BINDING_INSTANCE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SAPInstanceImpl <em>SAP Instance</em>}' class.
@@ -959,6 +986,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SAP_INSTANCE__NOBJ_IDS = INTERFACE_ITEM_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAP_INSTANCE__PROTOCOL = INTERFACE_ITEM_INSTANCE__PROTOCOL;
 
 	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
@@ -1132,6 +1168,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SERVICE_IMPL_INSTANCE__NOBJ_IDS = INTERFACE_ITEM_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_IMPL_INSTANCE__PROTOCOL = INTERFACE_ITEM_INSTANCE__PROTOCOL;
 
 	/**
 	 * The feature id for the '<em><b>Peers</b></em>' reference list.
@@ -1762,6 +1807,17 @@ public interface ETriceGenPackage extends EPackage {
 	EClass getInterfaceItemInstance();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getProtocol <em>Protocol</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Protocol</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getProtocol()
+	 * @see #getInterfaceItemInstance()
+	 * @generated
+	 */
+	EReference getInterfaceItemInstance_Protocol();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance#getPeers <em>Peers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1835,6 +1891,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBindingInstance_Ports();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.BindingInstance#getBinding <em>Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Binding</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.BindingInstance#getBinding()
+	 * @see #getBindingInstance()
+	 * @generated
+	 */
+	EReference getBindingInstance_Binding();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.SAPInstance <em>SAP Instance</em>}'.
@@ -2432,6 +2499,14 @@ public interface ETriceGenPackage extends EPackage {
 		EClass INTERFACE_ITEM_INSTANCE = eINSTANCE.getInterfaceItemInstance();
 
 		/**
+		 * The meta object literal for the '<em><b>Protocol</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERFACE_ITEM_INSTANCE__PROTOCOL = eINSTANCE.getInterfaceItemInstance_Protocol();
+
+		/**
 		 * The meta object literal for the '<em><b>Peers</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2490,6 +2565,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BINDING_INSTANCE__PORTS = eINSTANCE.getBindingInstance_Ports();
+
+		/**
+		 * The meta object literal for the '<em><b>Binding</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_INSTANCE__BINDING = eINSTANCE.getBindingInstance_Binding();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SAPInstanceImpl <em>SAP Instance</em>}' class.

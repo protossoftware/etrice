@@ -544,8 +544,17 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInterfaceItemInstance_Peers() {
+	public EReference getInterfaceItemInstance_Protocol() {
 		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInterfaceItemInstance_Peers() {
+		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -600,6 +609,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getBindingInstance_Ports() {
 		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingInstance_Binding() {
+		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -912,6 +930,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__UNINDEXED_NAME);
 
 		interfaceItemInstanceEClass = createEClass(INTERFACE_ITEM_INSTANCE);
+		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PROTOCOL);
 		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PEERS);
 
 		portInstanceEClass = createEClass(PORT_INSTANCE);
@@ -921,6 +940,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		bindingInstanceEClass = createEClass(BINDING_INSTANCE);
 		createEReference(bindingInstanceEClass, BINDING_INSTANCE__PORTS);
+		createEReference(bindingInstanceEClass, BINDING_INSTANCE__BINDING);
 
 		sapInstanceEClass = createEClass(SAP_INSTANCE);
 		createEReference(sapInstanceEClass, SAP_INSTANCE__SAP);
@@ -1053,6 +1073,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEAttribute(getActorInstance_UnindexedName(), ecorePackage.getEString(), "unindexedName", null, 0, 1, ActorInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(interfaceItemInstanceEClass, InterfaceItemInstance.class, "InterfaceItemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInterfaceItemInstance_Protocol(), theRoomPackage.getProtocolClass(), null, "protocol", null, 0, 1, InterfaceItemInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getInterfaceItemInstance_Peers(), this.getInterfaceItemInstance(), null, "peers", null, 0, -1, InterfaceItemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(interfaceItemInstanceEClass, ecorePackage.getEBoolean(), "isReplicated", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1070,6 +1091,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(bindingInstanceEClass, BindingInstance.class, "BindingInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBindingInstance_Ports(), this.getPortInstance(), this.getPortInstance_Bindings(), "ports", null, 0, 2, BindingInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingInstance_Binding(), theRoomPackage.getBinding(), null, "binding", null, 0, 1, BindingInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sapInstanceEClass, SAPInstance.class, "SAPInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAPInstance_Sap(), theRoomPackage.getSAPRef(), null, "sap", null, 0, 1, SAPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

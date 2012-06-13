@@ -50,6 +50,7 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -711,10 +712,13 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			HashMap<String, EList<Message>> name2msgs) {
 		name2ifitem.put(p.getName(), p);
 		
+		if (!(p.getProtocol() instanceof ProtocolClass))
+			return;
+		
 		if (p.isConjugated())
-			name2msgs.put(p.getName(), p.getProtocol().getOutgoingMessages());
+			name2msgs.put(p.getName(), ((ProtocolClass)p.getProtocol()).getOutgoingMessages());
 		else
-			name2msgs.put(p.getName(), p.getProtocol().getIncomingMessages());
+			name2msgs.put(p.getName(), ((ProtocolClass)p.getProtocol()).getIncomingMessages());
 	}
 
 	private void mapSAP(SAPRef sap, HashMap<String, InterfaceItem> name2ifitem,

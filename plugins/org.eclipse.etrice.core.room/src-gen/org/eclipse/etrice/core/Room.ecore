@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
         eType="#//DataClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
-        eType="#//ProtocolClass" containment="true"/>
+        eType="#//GeneralProtocolClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
         eType="#//ActorClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
@@ -117,7 +117,8 @@
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
     <eLiterals name="SYNCHRONOUS" value="2" literal="sync"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//RoomClass">
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralProtocolClass" eSuperTypes="#//RoomClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//GeneralProtocolClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//CommunicationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ProtocolClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
@@ -136,6 +137,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="#//ProtocolSemantics"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundProtocolClass" eSuperTypes="#//GeneralProtocolClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subProtocols" upperBound="-1"
+        eType="#//SubProtocol" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubProtocol">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priv" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -206,7 +215,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//InterfaceItem">
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -217,14 +225,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="conjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifport" eType="#//Port"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPPRef"/>
   </eClassifiers>
@@ -265,6 +278,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BindingEndPoint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorRef" eType="#//ActorContainerRef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//SubProtocol"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LayerConnection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//SAPoint"

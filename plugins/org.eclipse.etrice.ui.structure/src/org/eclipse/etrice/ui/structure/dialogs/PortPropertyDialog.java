@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -42,7 +44,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -50,6 +54,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 
 public class PortPropertyDialog extends AbstractPropertyDialog {
 
@@ -74,6 +79,10 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		public IStatus validate(Object value) {
 			if (value==null)
 				return ValidationStatus.error("select a protocol");
+			
+			if (value instanceof CompoundProtocolClass)
+				if (!relay)
+					return ValidationStatus.error("compound protocol only possible for relay port");
 			
 			return Status.OK_STATUS;
 		}
@@ -108,13 +117,30 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 				if (m==-1 && !multAnyAllowed)
 					return ValidationStatus.error("multiplicity * not allowed (actor used replicated)");
 				
-				if (port.getProtocol()!=null && port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+				if (port.getProtocol()!=null)
+					if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
 					if (m!=1)
 						return ValidationStatus.error("data driven ports can not be replicated");
 				}
 			}
 			return Status.OK_STATUS;
 		}
+	}
+	
+	class RelayValidator implements IValidator {
+
+		/* (non-Javadoc)
+		 * @see org.eclipse.core.databinding.validation.IValidator#validate(java.lang.Object)
+		 */
+		@Override
+		public IStatus validate(Object value) {
+			if (!((Boolean)value).booleanValue())
+				if (port.getProtocol() instanceof CompoundProtocolClass)
+					return ValidationStatus.error("external end port must not have compound protocol");
+			
+			return Status.OK_STATUS;
+		}
+		
 	}
 
 	static class Multiplicity2StringConverter extends Converter {
@@ -159,6 +185,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	private boolean internal;
 	private Button relayCheck = null;
 	private boolean relay;
+	private boolean oldRelay;
 
 	public PortPropertyDialog(Shell shell, Port port, IScope scope, ActorContainerClass acc, boolean newPort, boolean refitem, boolean internal) {
 		super(shell, "Edit Port");
@@ -170,6 +197,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		this.internal = internal;
 		
 		relay = isPortRelay();
+		oldRelay = relay;
 	}
 
 	private boolean isPortRelay() {
@@ -214,12 +242,12 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
         while (it.hasNext()) {
         	IEObjectDescription desc = it.next();
         	EObject obj = desc.getEObjectOrProxy();
-        	if (obj instanceof ProtocolClass)
+        	if (obj instanceof GeneralProtocolClass)
         		protocols.add(desc);
 		}
 		
 		Text name = createText(body, "&Name:", port, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
-		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, ProtocolClass.class, RoomPackage.eINSTANCE.getInterfaceItem_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, GeneralProtocolClass.class, RoomPackage.eINSTANCE.getPort_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
 			createRelayCheck(body, notReferenced, mform.getToolkit());
@@ -268,33 +296,42 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		relayCheck.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		relayCheck.setSelection(relay);
 		relayCheck.setEnabled(notReferenced.isOk());
+
+		RelayValidator validator = new RelayValidator();
+		UpdateValueStrategy t2m = new UpdateValueStrategy();
+		t2m.setAfterConvertValidator(validator);
+		t2m.setBeforeSetValidator(validator);
+		UpdateValueStrategy m2t = new UpdateValueStrategy();
+		m2t.setAfterConvertValidator(validator);
+		m2t.setBeforeSetValidator(validator);
+
+		getBindingContext().bindValue(SWTObservables.observeSelection(relayCheck), PojoObservables.observeValue(
+				this, "relay"), t2m, m2t);
 		
-		if (!notReferenced.isOk())
+		if (notReferenced.isOk())
+			createDecorator(relayCheck, "");
+		else
 			createInfoDecorator(relayCheck, notReferenced.getMsg());
 	}
 	
 	@Override
 	protected void okPressed() {
-		if (relayCheck!=null) {
-			if (relay!=relayCheck.getSelection()) {
-				relay = relayCheck.getSelection();
-				
-				// we know it's an ActorClass if we created the relayCheck in the first place
-				ActorClass ac = (ActorClass) acc;
-				
-				if (relay) {
-					for (ExternalPort xp : ac.getExtPorts()) {
-						if (xp.getIfport()==port) {
-							ac.getExtPorts().remove(xp);
-							break;
-						}
+		if (relay!=oldRelay) {
+			// we know it's an ActorClass (else the flag couldn't have changed)
+			ActorClass ac = (ActorClass) acc;
+			
+			if (relay) {
+				for (ExternalPort xp : ac.getExtPorts()) {
+					if (xp.getIfport()==port) {
+						ac.getExtPorts().remove(xp);
+						break;
 					}
 				}
-				else {
-					ExternalPort xp = RoomFactory.eINSTANCE.createExternalPort();
-					xp.setIfport(port);
-					ac.getExtPorts().add(xp);
-				}
+			}
+			else {
+				ExternalPort xp = RoomFactory.eINSTANCE.createExternalPort();
+				xp.setIfport(port);
+				ac.getExtPorts().add(xp);
 			}
 		}
 		
@@ -304,5 +341,13 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	@Override
 	protected Image getImage() {
 		return Activator.getImage("icons/Structure.gif");
+	}
+
+	public boolean isRelay() {
+		return relay;
+	}
+
+	public void setRelay(boolean relay) {
+		this.relay = relay;
 	}
 }

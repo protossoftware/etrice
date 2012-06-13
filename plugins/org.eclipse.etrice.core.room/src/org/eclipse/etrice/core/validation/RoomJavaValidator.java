@@ -357,7 +357,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("multiplicity must not be 0", RoomPackage.eINSTANCE.getPort_Multiplicity());
 		if (port.getMultiplicity()<-1)
 			error("multiplicity must be -1 or positive", RoomPackage.eINSTANCE.getPort_Multiplicity());
-		if (port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN && port.getMultiplicity()!=1)
+		if (port.getProtocol() instanceof ProtocolClass)
+			if (((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN && port.getMultiplicity()!=1)
 			error("multiplicity must be 1 for data driven ports", RoomPackage.eINSTANCE.getPort_Multiplicity());
 	}
 	

@@ -15,6 +15,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -141,8 +142,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       List<Port> _allEndPorts = this.roomExt.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
-            ProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = _protocol.getCommType();
+            GeneralProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
             boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
             return ((Boolean)_operator_equals);
           }
@@ -153,8 +154,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _operator_and = false;
-            ProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = _protocol.getCommType();
+            GeneralProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
             boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.DATA_DRIVEN);
             if (!_operator_equals) {
               _operator_and = false;
@@ -171,8 +172,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _operator_and = false;
-            ProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = _protocol.getCommType();
+            GeneralProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
             boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.DATA_DRIVEN);
             if (!_operator_equals) {
               _operator_and = false;

@@ -13,9 +13,12 @@
 package org.eclipse.etrice.core.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -35,6 +38,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -98,6 +102,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 
 	String image(ProtocolClass pc) {
 		return "ProtocolClass.gif";
+	}
+
+	String image(CompoundProtocolClass pc) {
+		return "CompoundProtocolClass.gif";
+	}
+
+	String image(SubProtocol pc) {
+		return "SubProtocol.gif";
 	}
 
 	String image(ActorClass ac) {
@@ -225,6 +237,10 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return pc.getName()+base;
 	}
 	
+	String text(SubProtocol pc) {
+		return pc.getName()+": "+pc.getProtocol().getName();
+	}
+	
 	String text(ActorClass ac) {
 		String base = ac.getBase()!=null? " extends "+ac.getBase().getName():"";
 		return ac.getName()+base;
@@ -249,6 +265,10 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		String multiplicity = p.getMultiplicity()>1? ("["+p.getMultiplicity()+"]") : p.getMultiplicity()==-1? "[*]" : "";
 		String protocol = p.getProtocol()!=null? (" : "+p.getProtocol().getName()):"";
 		return conjugated+" "+location+" Port "+p.getName()+multiplicity+protocol;
+	}
+	
+	String text(Binding bind) {
+		return RoomNameProvider.getDisplayName(bind);
 	}
 	
 	String text(ExternalPort ep) {

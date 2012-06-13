@@ -39,12 +39,16 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -573,7 +577,12 @@ public class RootImpl extends EObjectImpl implements Root {
 			subSystemClasses = new BasicEList<SubSystemClass>();
 			for (RoomModel mdl : getModels()) {
 				usedDataClasses.addAll(mdl.getDataClasses());
-				usedProtocolClasses.addAll(mdl.getProtocolClasses());
+				
+				for (GeneralProtocolClass gpc : mdl.getProtocolClasses()) {
+					if (gpc instanceof ProtocolClass)
+						usedProtocolClasses.add((ProtocolClass) gpc);
+				}
+				
 				usedActorClasses.addAll(mdl.getActorClasses());
 				subSystemClasses.addAll(mdl.getSubSystemClasses());
 				usedRoomModels.add(mdl);
@@ -703,7 +712,12 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void getInterfaceItemProtocolClasses(
 			HashSet<ProtocolClass> protocolClasses, EList<? extends InterfaceItem> items) {
 		for (InterfaceItem ii : items) {
-			protocolClasses.add(ii.getProtocol());
+			if (ii instanceof Port && ((Port)ii).getProtocol() instanceof ProtocolClass)
+				protocolClasses.add((ProtocolClass) ((Port)ii).getProtocol());
+			else if (ii instanceof SAPRef)
+				protocolClasses.add(((SAPRef)ii).getProtocol());
+			else if (ii instanceof SPPRef)
+				protocolClasses.add(((SPPRef)ii).getProtocol());
 		}
 	}
 

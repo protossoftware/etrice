@@ -424,6 +424,34 @@ finally {
 
 
 
+// Entry rule entryRuleGeneralProtocolClass
+entryRuleGeneralProtocolClass 
+:
+{ before(grammarAccess.getGeneralProtocolClassRule()); }
+	 ruleGeneralProtocolClass
+{ after(grammarAccess.getGeneralProtocolClassRule()); } 
+	 EOF 
+;
+
+// Rule GeneralProtocolClass
+ruleGeneralProtocolClass
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getGeneralProtocolClassAccess().getAlternatives()); }
+(rule__GeneralProtocolClass__Alternatives)
+{ after(grammarAccess.getGeneralProtocolClassAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleProtocolClass
 entryRuleProtocolClass 
 :
@@ -443,6 +471,62 @@ ruleProtocolClass
 { before(grammarAccess.getProtocolClassAccess().getGroup()); }
 (rule__ProtocolClass__Group__0)
 { after(grammarAccess.getProtocolClassAccess().getGroup()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+// Entry rule entryRuleCompoundProtocolClass
+entryRuleCompoundProtocolClass 
+:
+{ before(grammarAccess.getCompoundProtocolClassRule()); }
+	 ruleCompoundProtocolClass
+{ after(grammarAccess.getCompoundProtocolClassRule()); } 
+	 EOF 
+;
+
+// Rule CompoundProtocolClass
+ruleCompoundProtocolClass
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getGroup()); }
+(rule__CompoundProtocolClass__Group__0)
+{ after(grammarAccess.getCompoundProtocolClassAccess().getGroup()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+// Entry rule entryRuleSubProtocol
+entryRuleSubProtocol 
+:
+{ before(grammarAccess.getSubProtocolRule()); }
+	 ruleSubProtocol
+{ after(grammarAccess.getSubProtocolRule()); } 
+	 EOF 
+;
+
+// Rule SubProtocol
+ruleSubProtocol
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getSubProtocolAccess().getGroup()); }
+(rule__SubProtocol__Group__0)
+{ after(grammarAccess.getSubProtocolAccess().getGroup()); }
 )
 
 ;
@@ -2429,6 +2513,28 @@ rule__PortOperation__Alternatives_5_0_1
 { before(grammarAccess.getPortOperationAccess().getReturntypeAssignment_5_0_1_1()); }
 (rule__PortOperation__ReturntypeAssignment_5_0_1_1)
 { after(grammarAccess.getPortOperationAccess().getReturntypeAssignment_5_0_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__GeneralProtocolClass__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getGeneralProtocolClassAccess().getProtocolClassParserRuleCall_0()); }
+	ruleProtocolClass
+{ after(grammarAccess.getGeneralProtocolClassAccess().getProtocolClassParserRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getGeneralProtocolClassAccess().getCompoundProtocolClassParserRuleCall_1()); }
+	ruleCompoundProtocolClass
+{ after(grammarAccess.getGeneralProtocolClassAccess().getCompoundProtocolClassParserRuleCall_1()); }
 )
 
 ;
@@ -7034,6 +7140,331 @@ rule__ProtocolClass__Group_12__2__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+
+
+
+
+
+
+rule__CompoundProtocolClass__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__0__Impl
+	rule__CompoundProtocolClass__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getCompoundProtocolClassKeyword_0()); }
+
+	'CompoundProtocolClass' 
+
+{ after(grammarAccess.getCompoundProtocolClassAccess().getCompoundProtocolClassKeyword_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CompoundProtocolClass__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__1__Impl
+	rule__CompoundProtocolClass__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getNameAssignment_1()); }
+(rule__CompoundProtocolClass__NameAssignment_1)
+{ after(grammarAccess.getCompoundProtocolClassAccess().getNameAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CompoundProtocolClass__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__2__Impl
+	rule__CompoundProtocolClass__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getDocuAssignment_2()); }
+(rule__CompoundProtocolClass__DocuAssignment_2)?
+{ after(grammarAccess.getCompoundProtocolClassAccess().getDocuAssignment_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CompoundProtocolClass__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__3__Impl
+	rule__CompoundProtocolClass__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getLeftCurlyBracketKeyword_3()); }
+
+	'{' 
+
+{ after(grammarAccess.getCompoundProtocolClassAccess().getLeftCurlyBracketKeyword_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CompoundProtocolClass__Group__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__4__Impl
+	rule__CompoundProtocolClass__Group__5
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__4__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_4()); }
+(rule__CompoundProtocolClass__SubProtocolsAssignment_4)
+{ after(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_4()); }
+)
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_4()); }
+(rule__CompoundProtocolClass__SubProtocolsAssignment_4)*
+{ after(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_4()); }
+)
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CompoundProtocolClass__Group__5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__CompoundProtocolClass__Group__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__Group__5__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getRightCurlyBracketKeyword_5()); }
+
+	'}' 
+
+{ after(grammarAccess.getCompoundProtocolClassAccess().getRightCurlyBracketKeyword_5()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rule__SubProtocol__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubProtocol__Group__0__Impl
+	rule__SubProtocol__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getSubProtocolKeyword_0()); }
+
+	'SubProtocol' 
+
+{ after(grammarAccess.getSubProtocolAccess().getSubProtocolKeyword_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__SubProtocol__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubProtocol__Group__1__Impl
+	rule__SubProtocol__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getNameAssignment_1()); }
+(rule__SubProtocol__NameAssignment_1)
+{ after(grammarAccess.getSubProtocolAccess().getNameAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__SubProtocol__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubProtocol__Group__2__Impl
+	rule__SubProtocol__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getColonKeyword_2()); }
+
+	':' 
+
+{ after(grammarAccess.getSubProtocolAccess().getColonKeyword_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__SubProtocol__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubProtocol__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getProtocolAssignment_3()); }
+(rule__SubProtocol__ProtocolAssignment_3)
+{ after(grammarAccess.getSubProtocolAccess().getProtocolAssignment_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -11928,6 +12359,7 @@ rule__BindingEndPoint__Group__1
     }
 :
 	rule__BindingEndPoint__Group__1__Impl
+	rule__BindingEndPoint__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -11948,6 +12380,36 @@ rule__BindingEndPoint__Group__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__BindingEndPoint__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BindingEndPoint__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BindingEndPoint__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBindingEndPointAccess().getGroup_2()); }
+(rule__BindingEndPoint__Group_2__0)?
+{ after(grammarAccess.getBindingEndPointAccess().getGroup_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -12005,6 +12467,69 @@ rule__BindingEndPoint__Group_0__1__Impl
 	'.' 
 
 { after(grammarAccess.getBindingEndPointAccess().getFullStopKeyword_0_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__BindingEndPoint__Group_2__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BindingEndPoint__Group_2__0__Impl
+	rule__BindingEndPoint__Group_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BindingEndPoint__Group_2__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBindingEndPointAccess().getSubKeyword_2_0()); }
+
+	'sub' 
+
+{ after(grammarAccess.getBindingEndPointAccess().getSubKeyword_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__BindingEndPoint__Group_2__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__BindingEndPoint__Group_2__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BindingEndPoint__Group_2__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBindingEndPointAccess().getSubAssignment_2_1()); }
+(rule__BindingEndPoint__SubAssignment_2_1)
+{ after(grammarAccess.getBindingEndPointAccess().getSubAssignment_2_1()); }
 )
 
 ;
@@ -18465,8 +18990,8 @@ rule__RoomModel__ProtocolClassesAssignment_5_3
     }
 :
 (
-{ before(grammarAccess.getRoomModelAccess().getProtocolClassesProtocolClassParserRuleCall_5_3_0()); }
-	ruleProtocolClass{ after(grammarAccess.getRoomModelAccess().getProtocolClassesProtocolClassParserRuleCall_5_3_0()); }
+{ before(grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_3_0()); }
+	ruleGeneralProtocolClass{ after(grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_3_0()); }
 )
 
 ;
@@ -19331,6 +19856,85 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__CompoundProtocolClass__NameAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getNameIDTerminalRuleCall_1_0()); }
+	RULE_ID{ after(grammarAccess.getCompoundProtocolClassAccess().getNameIDTerminalRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__DocuAssignment_2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getDocuDocumentationParserRuleCall_2_0()); }
+	ruleDocumentation{ after(grammarAccess.getCompoundProtocolClassAccess().getDocuDocumentationParserRuleCall_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CompoundProtocolClass__SubProtocolsAssignment_4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsSubProtocolParserRuleCall_4_0()); }
+	ruleSubProtocol{ after(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsSubProtocolParserRuleCall_4_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__NameAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0()); }
+	RULE_ID{ after(grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubProtocol__ProtocolAssignment_3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassCrossReference_3_0()); }
+(
+{ before(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1()); }
+	ruleFQN{ after(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1()); }
+)
+{ after(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassCrossReference_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__Message__PrivAssignment_0
     @init {
 		int stackSize = keepStackSize();
@@ -20022,12 +20626,12 @@ rule__Port__ProtocolAssignment_5
     }
 :
 (
-{ before(grammarAccess.getPortAccess().getProtocolProtocolClassCrossReference_5_0()); }
+{ before(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassCrossReference_5_0()); }
 (
-{ before(grammarAccess.getPortAccess().getProtocolProtocolClassFQNParserRuleCall_5_0_1()); }
-	ruleFQN{ after(grammarAccess.getPortAccess().getProtocolProtocolClassFQNParserRuleCall_5_0_1()); }
+{ before(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1()); }
+	ruleFQN{ after(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1()); }
 )
-{ after(grammarAccess.getPortAccess().getProtocolProtocolClassCrossReference_5_0()); }
+{ after(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassCrossReference_5_0()); }
 )
 
 ;
@@ -20596,6 +21200,25 @@ rule__BindingEndPoint__PortAssignment_1
 	RULE_ID{ after(grammarAccess.getBindingEndPointAccess().getPortPortIDTerminalRuleCall_1_0_1()); }
 )
 { after(grammarAccess.getBindingEndPointAccess().getPortPortCrossReference_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__BindingEndPoint__SubAssignment_2_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getBindingEndPointAccess().getSubSubProtocolCrossReference_2_1_0()); }
+(
+{ before(grammarAccess.getBindingEndPointAccess().getSubSubProtocolIDTerminalRuleCall_2_1_0_1()); }
+	RULE_ID{ after(grammarAccess.getBindingEndPointAccess().getSubSubProtocolIDTerminalRuleCall_2_1_0_1()); }
+)
+{ after(grammarAccess.getBindingEndPointAccess().getSubSubProtocolCrossReference_2_1_0()); }
 )
 
 ;

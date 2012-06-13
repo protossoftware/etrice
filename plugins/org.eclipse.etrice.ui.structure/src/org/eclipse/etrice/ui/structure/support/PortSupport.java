@@ -32,7 +32,7 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog;
@@ -125,7 +125,7 @@ public class PortSupport extends InterfaceItemSupport {
 		        }
 		        
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
+		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getPort_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, true, false, internal);
 				if (dlg.open()!=Window.OK) {
@@ -212,7 +212,7 @@ public class PortSupport extends InterfaceItemSupport {
 					boolean refport = isRefItem(context.getPictogramElements()[0]);
 					
 			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getInterfaceItem_Protocol());
+			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getPort_Protocol());
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
@@ -392,7 +392,7 @@ public class PortSupport extends InterfaceItemSupport {
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightDolor) {
 
-			boolean relay = ValidationUtil.isRelay(port);
+			boolean relay = RoomHelpers.isRelay(port);
 			
 			int size = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
 			int margin = refport?MARGIN_SMALL:MARGIN;
@@ -550,7 +550,7 @@ public class PortSupport extends InterfaceItemSupport {
 		String kind = "";
 		if (port.isConjugated())
 			kind += "C";
-		if (ValidationUtil.isRelay(port))
+		if (RoomHelpers.isRelay(port))
 			kind += "R";
 		if (port.isReplicated())
 			kind += "M";

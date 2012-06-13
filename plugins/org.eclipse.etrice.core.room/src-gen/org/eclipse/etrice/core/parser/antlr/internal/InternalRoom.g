@@ -200,9 +200,9 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getProtocolClassesProtocolClassParserRuleCall_5_3_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_3_0()); 
 	    }
-		lv_protocolClasses_8_0=ruleProtocolClass		{
+		lv_protocolClasses_8_0=ruleGeneralProtocolClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
@@ -210,7 +210,7 @@ ruleRoomModel returns [EObject current=null]
        			$current, 
        			"protocolClasses",
         		lv_protocolClasses_8_0, 
-        		"ProtocolClass");
+        		"GeneralProtocolClass");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1457,6 +1457,46 @@ rulePortOperation returns [EObject current=null]
 
 
 
+// Entry rule entryRuleGeneralProtocolClass
+entryRuleGeneralProtocolClass returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getGeneralProtocolClassRule()); }
+	 iv_ruleGeneralProtocolClass=ruleGeneralProtocolClass 
+	 { $current=$iv_ruleGeneralProtocolClass.current; } 
+	 EOF 
+;
+
+// Rule GeneralProtocolClass
+ruleGeneralProtocolClass returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getGeneralProtocolClassAccess().getProtocolClassParserRuleCall_0()); 
+    }
+    this_ProtocolClass_0=ruleProtocolClass
+    { 
+        $current = $this_ProtocolClass_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getGeneralProtocolClassAccess().getCompoundProtocolClassParserRuleCall_1()); 
+    }
+    this_CompoundProtocolClass_1=ruleCompoundProtocolClass
+    { 
+        $current = $this_CompoundProtocolClass_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleProtocolClass
 entryRuleProtocolClass returns [EObject current=null] 
 	:
@@ -1753,6 +1793,155 @@ ruleProtocolClass returns [EObject current=null]
     	newLeafNode(otherlv_28, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_14());
     }
 )
+;
+
+
+
+
+
+// Entry rule entryRuleCompoundProtocolClass
+entryRuleCompoundProtocolClass returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getCompoundProtocolClassRule()); }
+	 iv_ruleCompoundProtocolClass=ruleCompoundProtocolClass 
+	 { $current=$iv_ruleCompoundProtocolClass.current; } 
+	 EOF 
+;
+
+// Rule CompoundProtocolClass
+ruleCompoundProtocolClass returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='CompoundProtocolClass' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getCompoundProtocolClassAccess().getCompoundProtocolClassKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getCompoundProtocolClassAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCompoundProtocolClassRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCompoundProtocolClassAccess().getDocuDocumentationParserRuleCall_2_0()); 
+	    }
+		lv_docu_2_0=ruleDocumentation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCompoundProtocolClassRule());
+	        }
+       		set(
+       			$current, 
+       			"docu",
+        		lv_docu_2_0, 
+        		"Documentation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?	otherlv_3='{' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getCompoundProtocolClassAccess().getLeftCurlyBracketKeyword_3());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsSubProtocolParserRuleCall_4_0()); 
+	    }
+		lv_subProtocols_4_0=ruleSubProtocol		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCompoundProtocolClassRule());
+	        }
+       		add(
+       			$current, 
+       			"subProtocols",
+        		lv_subProtocols_4_0, 
+        		"SubProtocol");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)+	otherlv_5='}' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getCompoundProtocolClassAccess().getRightCurlyBracketKeyword_5());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleSubProtocol
+entryRuleSubProtocol returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getSubProtocolRule()); }
+	 iv_ruleSubProtocol=ruleSubProtocol 
+	 { $current=$iv_ruleSubProtocol.current; } 
+	 EOF 
+;
+
+// Rule SubProtocol
+ruleSubProtocol returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='SubProtocol' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSubProtocolAccess().getSubProtocolKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSubProtocolRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID");
+	    }
+
+)
+)	otherlv_2=':' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getSubProtocolAccess().getColonKeyword_2());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSubProtocolRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassCrossReference_3_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
 ;
 
 
@@ -2907,7 +3096,7 @@ rulePort returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getPortAccess().getProtocolProtocolClassCrossReference_5_0()); 
+	        newCompositeNode(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassCrossReference_5_0()); 
 	    }
 		ruleFQN		{ 
 	        afterParserOrEnumRuleCall();
@@ -3882,7 +4071,24 @@ ruleBindingEndPoint returns [EObject current=null]
 	}
 
 )
-))
+)(	otherlv_3='sub' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getBindingEndPointAccess().getSubKeyword_2_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBindingEndPointRule());
+	        }
+        }
+	otherlv_4=RULE_ID
+	{
+		newLeafNode(otherlv_4, grammarAccess.getBindingEndPointAccess().getSubSubProtocolCrossReference_2_1_0()); 
+	}
+
+)
+))?)
 ;
 
 

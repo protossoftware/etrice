@@ -21,6 +21,8 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -490,5 +492,16 @@ public class RoomNameProvider {
 			assert(false): "unexpected detaild code location";
 			return "???";
 		}
+	}
+
+	public static String getDisplayName(BindingEndPoint ep) {
+		if (ep.getSub()!=null)
+			return ep.getPort().getName()+" sub "+ep.getSub().getName();
+		else
+			return ep.getPort().getName();
+	}
+
+	public static String getDisplayName(Binding bind) {
+		return getDisplayName(bind.getEndpoint1())+" and "+getDisplayName(bind.getEndpoint2());
 	}
 }

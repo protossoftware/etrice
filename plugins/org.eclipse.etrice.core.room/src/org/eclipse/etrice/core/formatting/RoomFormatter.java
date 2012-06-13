@@ -56,7 +56,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		}
 		
 		for (Keyword k: f.findKeywords("entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
-				"incoming", "outgoing", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
+				"incoming", "outgoing", "SubProtocol", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
 			c.setLinewrap().before(k);
 		}
 		

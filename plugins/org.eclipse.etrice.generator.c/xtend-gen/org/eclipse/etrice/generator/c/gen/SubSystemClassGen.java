@@ -760,15 +760,13 @@ public class SubSystemClassGen {
               EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai_1.getOrderedIfItemInstances();
               for(final InterfaceItemInstance pi : _orderedIfItemInstances_1) {
                 {
-                  InterfaceItem _interfaceItem = pi.getInterfaceItem();
-                  ProtocolClass _protocol = _interfaceItem.getProtocol();
+                  ProtocolClass _protocol = pi.getProtocol();
                   boolean _isConjugated = this.roomExt.isConjugated(pi);
                   PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
                   boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_portClass, null);
                   if (_operator_notEquals) {
                     {
-                      InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
-                      ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+                      ProtocolClass _protocol_1 = pi.getProtocol();
                       boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
                       PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
                       EList<Attribute> _attributes = _portClass_1.getAttributes();
@@ -779,8 +777,7 @@ public class SubSystemClassGen {
                           boolean _isReplicated = pi.isReplicated();
                           if (_isReplicated) {
                             _builder.append("static ");
-                            InterfaceItem _interfaceItem_2 = pi.getInterfaceItem();
-                            ProtocolClass _protocol_2 = _interfaceItem_2.getProtocol();
+                            ProtocolClass _protocol_2 = pi.getProtocol();
                             boolean _isConjugated_2 = this.roomExt.isConjugated(pi);
                             String _portClassName = this.roomExt.getPortClassName(_protocol_2, _isConjugated_2);
                             _builder.append(_portClassName, "");
@@ -799,8 +796,7 @@ public class SubSystemClassGen {
                             _builder.newLineIfNotEmpty();
                           } else {
                             _builder.append("static ");
-                            InterfaceItem _interfaceItem_3 = pi.getInterfaceItem();
-                            ProtocolClass _protocol_3 = _interfaceItem_3.getProtocol();
+                            ProtocolClass _protocol_3 = pi.getProtocol();
                             boolean _isConjugated_3 = this.roomExt.isConjugated(pi);
                             String _portClassName_1 = this.roomExt.getPortClassName(_protocol_3, _isConjugated_3);
                             _builder.append(_portClassName_1, "");
@@ -886,8 +882,7 @@ public class SubSystemClassGen {
   private StringConcatenation genPortAttributeInitializer(final InterfaceItemInstance pi) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      InterfaceItem _interfaceItem = pi.getInterfaceItem();
-      ProtocolClass _protocol = _interfaceItem.getProtocol();
+      ProtocolClass _protocol = pi.getProtocol();
       boolean _isConjugated = this.roomExt.isConjugated(pi);
       PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
       EList<Attribute> _attributes = _portClass.getAttributes();
@@ -957,8 +952,7 @@ public class SubSystemClassGen {
       ArrayList<InterfaceItemInstance> eventPorts = _arrayList_1;
       final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
-            InterfaceItem _interfaceItem = p.getInterfaceItem();
-            ProtocolClass _protocol = _interfaceItem.getProtocol();
+            ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
             boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
             return ((Boolean)_operator_equals);
@@ -969,8 +963,7 @@ public class SubSystemClassGen {
       CollectionExtensions.<InterfaceItemInstance>addAll(eventPorts, _union);
       final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
-            InterfaceItem _interfaceItem = p.getInterfaceItem();
-            ProtocolClass _protocol = _interfaceItem.getProtocol();
+            ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
             boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.DATA_DRIVEN);
             return ((Boolean)_operator_equals);
@@ -1230,16 +1223,14 @@ public class SubSystemClassGen {
   }
   
   private String getInterfaceItemInstanceData(final InterfaceItemInstance pi) {
-      InterfaceItem _interfaceItem = pi.getInterfaceItem();
-      ProtocolClass _protocol = _interfaceItem.getProtocol();
+      ProtocolClass _protocol = pi.getProtocol();
       boolean _isConjugated = this.roomExt.isConjugated(pi);
       PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
       boolean _operator_equals = ObjectExtensions.operator_equals(_portClass, null);
       if (_operator_equals) {
         return "0";
       }
-      InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
-      ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+      ProtocolClass _protocol_1 = pi.getProtocol();
       boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
       PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
       EList<Attribute> _attributes = _portClass_1.getAttributes();
@@ -1395,8 +1386,7 @@ public class SubSystemClassGen {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
           final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
               public Boolean apply(final InterfaceItemInstance p) {
-                InterfaceItem _interfaceItem = p.getInterfaceItem();
-                ProtocolClass _protocol = _interfaceItem.getProtocol();
+                ProtocolClass _protocol = p.getProtocol();
                 CommunicationType _commType = _protocol.getCommType();
                 boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
                 return ((Boolean)_operator_equals);
@@ -1420,8 +1410,7 @@ public class SubSystemClassGen {
                     _builder.append(":");
                     _builder.newLineIfNotEmpty();
                     {
-                      InterfaceItem _interfaceItem = pi.getInterfaceItem();
-                      ProtocolClass _protocol = _interfaceItem.getProtocol();
+                      ProtocolClass _protocol = pi.getProtocol();
                       boolean _isConjugated = this.roomExt.isConjugated(pi);
                       boolean _handlesReceive = this.roomExt.handlesReceive(_protocol, _isConjugated);
                       if (_handlesReceive) {
@@ -1429,16 +1418,14 @@ public class SubSystemClassGen {
                         _builder.append("switch (msg->evtID){");
                         _builder.newLine();
                         {
-                          InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
-                          ProtocolClass _protocol_1 = _interfaceItem_1.getProtocol();
+                          ProtocolClass _protocol_1 = pi.getProtocol();
                           boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
                           List<MessageHandler> _receiveHandlers = this.roomExt.getReceiveHandlers(_protocol_1, _isConjugated_1);
                           for(final MessageHandler h : _receiveHandlers) {
                             _builder.append("\t\t");
                             _builder.append("\t");
                             _builder.append("case ");
-                            InterfaceItem _interfaceItem_2 = pi.getInterfaceItem();
-                            ProtocolClass _protocol_2 = _interfaceItem_2.getProtocol();
+                            ProtocolClass _protocol_2 = pi.getProtocol();
                             String _name_1 = _protocol_2.getName();
                             _builder.append(_name_1, "			");
                             _builder.append("_");
@@ -1450,8 +1437,7 @@ public class SubSystemClassGen {
                             _builder.append("\t\t");
                             _builder.append("\t");
                             _builder.append("\t");
-                            InterfaceItem _interfaceItem_3 = pi.getInterfaceItem();
-                            ProtocolClass _protocol_3 = _interfaceItem_3.getProtocol();
+                            ProtocolClass _protocol_3 = pi.getProtocol();
                             boolean _isConjugated_2 = this.roomExt.isConjugated(pi);
                             String _portClassName = this.roomExt.getPortClassName(_protocol_3, _isConjugated_2);
                             _builder.append(_portClassName, "				");
@@ -1554,8 +1540,7 @@ public class SubSystemClassGen {
                 _builder.append(":");
                 _builder.newLineIfNotEmpty();
                 {
-                  InterfaceItem _interfaceItem_4 = pi.getInterfaceItem();
-                  ProtocolClass _protocol_4 = _interfaceItem_4.getProtocol();
+                  ProtocolClass _protocol_4 = pi.getProtocol();
                   boolean _isConjugated_3 = this.roomExt.isConjugated(pi);
                   boolean _handlesReceive_1 = this.roomExt.handlesReceive(_protocol_4, _isConjugated_3);
                   if (_handlesReceive_1) {
@@ -1563,15 +1548,13 @@ public class SubSystemClassGen {
                     _builder.append("switch (msg->evtID){");
                     _builder.newLine();
                     {
-                      InterfaceItem _interfaceItem_5 = pi.getInterfaceItem();
-                      ProtocolClass _protocol_5 = _interfaceItem_5.getProtocol();
+                      ProtocolClass _protocol_5 = pi.getProtocol();
                       boolean _isConjugated_4 = this.roomExt.isConjugated(pi);
                       List<MessageHandler> _receiveHandlers_1 = this.roomExt.getReceiveHandlers(_protocol_5, _isConjugated_4);
                       for(final MessageHandler h_1 : _receiveHandlers_1) {
                         _builder.append("\t\t");
                         _builder.append("case ");
-                        InterfaceItem _interfaceItem_6 = pi.getInterfaceItem();
-                        ProtocolClass _protocol_6 = _interfaceItem_6.getProtocol();
+                        ProtocolClass _protocol_6 = pi.getProtocol();
                         String _name_9 = _protocol_6.getName();
                         _builder.append(_name_9, "		");
                         _builder.append("_");
@@ -1582,8 +1565,7 @@ public class SubSystemClassGen {
                         _builder.newLineIfNotEmpty();
                         _builder.append("\t\t");
                         _builder.append("\t");
-                        InterfaceItem _interfaceItem_7 = pi.getInterfaceItem();
-                        ProtocolClass _protocol_7 = _interfaceItem_7.getProtocol();
+                        ProtocolClass _protocol_7 = pi.getProtocol();
                         boolean _isConjugated_5 = this.roomExt.isConjugated(pi);
                         String _portClassName_1 = this.roomExt.getPortClassName(_protocol_7, _isConjugated_5);
                         _builder.append(_portClassName_1, "			");

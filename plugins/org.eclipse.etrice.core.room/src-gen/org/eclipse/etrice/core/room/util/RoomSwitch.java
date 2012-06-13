@@ -197,11 +197,36 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.GENERAL_PROTOCOL_CLASS:
+      {
+        GeneralProtocolClass generalProtocolClass = (GeneralProtocolClass)theEObject;
+        T result = caseGeneralProtocolClass(generalProtocolClass);
+        if (result == null) result = caseRoomClass(generalProtocolClass);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.PROTOCOL_CLASS:
       {
         ProtocolClass protocolClass = (ProtocolClass)theEObject;
         T result = caseProtocolClass(protocolClass);
+        if (result == null) result = caseGeneralProtocolClass(protocolClass);
         if (result == null) result = caseRoomClass(protocolClass);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.COMPOUND_PROTOCOL_CLASS:
+      {
+        CompoundProtocolClass compoundProtocolClass = (CompoundProtocolClass)theEObject;
+        T result = caseCompoundProtocolClass(compoundProtocolClass);
+        if (result == null) result = caseGeneralProtocolClass(compoundProtocolClass);
+        if (result == null) result = caseRoomClass(compoundProtocolClass);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.SUB_PROTOCOL:
+      {
+        SubProtocol subProtocol = (SubProtocol)theEObject;
+        T result = caseSubProtocol(subProtocol);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -935,6 +960,22 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>General Protocol Class</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>General Protocol Class</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGeneralProtocolClass(GeneralProtocolClass object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Protocol Class</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -946,6 +987,38 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseProtocolClass(ProtocolClass object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compound Protocol Class</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compound Protocol Class</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompoundProtocolClass(CompoundProtocolClass object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Sub Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Sub Protocol</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSubProtocol(SubProtocol object)
   {
     return null;
   }

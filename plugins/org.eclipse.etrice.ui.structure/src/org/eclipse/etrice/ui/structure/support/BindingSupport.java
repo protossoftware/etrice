@@ -12,11 +12,25 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
+import org.eclipse.etrice.ui.structure.dialogs.SubProtocolSelectionDialog;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -29,22 +43,28 @@ import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
+import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
+import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.IReconnectionContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
@@ -55,24 +75,16 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class BindingSupport {
 
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 
-	class FeatureProvider extends DefaultFeatureProvider {
+	static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
@@ -110,7 +122,7 @@ public class BindingSupport {
 				
 				ActorContainerRef tgtRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac).isOk();
+				return ValidationUtil.isConnectable(src, srcRef, null, tgt, tgtRef, null, ac, null, false).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
@@ -144,8 +156,8 @@ public class BindingSupport {
 				IFeatureProvider featureProvider = getFeatureProvider();
 				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
 				Port dst = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
-				StructureClass ac = SupportUtil.getParent(context, featureProvider);
-				if (src!=null && dst!=null && ac!=null) {
+				StructureClass sc = SupportUtil.getParent(context, featureProvider);
+				if (src!=null && dst!=null && sc!=null) {
 					Binding bind = RoomFactory.eINSTANCE.createBinding();
 					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
 					ActorContainerRef ar1 = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
@@ -157,7 +169,20 @@ public class BindingSupport {
 					ep2.setActorRef(ar2);
 					bind.setEndpoint1(ep1);
 					bind.setEndpoint2(ep2);
-					ac.getBindings().add(bind);
+
+					GeneralProtocolClass srcGPC = src.getProtocol();
+					GeneralProtocolClass dstGPC = dst.getProtocol();
+					if (srcGPC instanceof GeneralProtocolClass || dstGPC instanceof GeneralProtocolClass) {
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, dst, null, sc);
+						if (dlg.open()!=Window.OK)
+							throw new OperationCanceledException();
+						
+						ep1.setSub(dlg.getSelected().getLeft());
+						ep2.setSub(dlg.getSelected().getRight());
+					}
+					
+					sc.getBindings().add(bind);
 					
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(bind);
@@ -271,7 +296,10 @@ public class BindingSupport {
 				
 				ActorContainerRef tgtRef = SupportUtil.getRef(atgt, featureProvider);
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, ac, bind).isOk();
+				return ValidationUtil.isConnectable(
+						src, srcRef, bind.getEndpoint1().getSub(),
+						tgt, tgtRef, bind.getEndpoint2().getSub(),
+						ac, bind, true).isOk();
 			}
 			
 			@Override
@@ -281,10 +309,8 @@ public class BindingSupport {
 				IFeatureProvider featureProvider = getFeatureProvider();
 				Port src = SupportUtil.getPort(context.getConnection().getStart(), featureProvider);
 				Port dst = SupportUtil.getPort(context.getConnection().getEnd(), featureProvider);
-				StructureClass ac = SupportUtil.getParent(getDiagram(), featureProvider);
-				if (src!=null && dst!=null && ac!=null) {
-					doneChanges = true;
-
+				StructureClass sc = SupportUtil.getParent(getDiagram(), featureProvider);
+				if (src!=null && dst!=null && sc!=null) {
 					Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getConnection());
 					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
 					ActorContainerRef ar1 = SupportUtil.getRef(context.getConnection().getStart(), featureProvider);
@@ -294,8 +320,23 @@ public class BindingSupport {
 					ActorContainerRef ar2 = SupportUtil.getRef(context.getConnection().getEnd(), featureProvider);
 					ep2.setPort(dst);
 					ep2.setActorRef(ar2);
+					
+					GeneralProtocolClass srcGPC = src.getProtocol();
+					GeneralProtocolClass dstGPC = dst.getProtocol();
+					if (srcGPC instanceof GeneralProtocolClass || dstGPC instanceof GeneralProtocolClass) {
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, dst, bind, sc);
+						if (dlg.open()!=Window.OK)
+							return;
+						
+						ep1.setSub(dlg.getSelected().getLeft());
+						ep2.setSub(dlg.getSelected().getRight());
+					}
+					
 					bind.setEndpoint1(ep1);
 					bind.setEndpoint2(ep2);
+
+					doneChanges = true;
 				}
 			}
 			
@@ -378,6 +419,55 @@ public class BindingSupport {
 			}
 		}
 		
+		private static class PropertyFeature extends AbstractCustomFeature {
+
+			private boolean doneChanges;
+
+			public PropertyFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Edit Binding...";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Edit Binding Properties";
+			}
+
+			public boolean canExecute(ICustomContext context) {
+				return getBusinessObjectForPictogramElement(context.getPictogramElements()[0]) instanceof Binding;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				doneChanges = false;
+				Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+				StructureClass sc = (StructureClass) bind.eContainer();
+				
+		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(
+						shell, bind.getEndpoint1().getPort(), bind.getEndpoint2().getPort(), bind, sc);
+				if (dlg.open()!=Window.OK)
+					return;
+				
+				bind.getEndpoint1().setSub(dlg.getSelected().getLeft());
+				bind.getEndpoint2().setSub(dlg.getSelected().getRight());
+				
+				doneChanges = true;
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
+		}
+		
 		private IFeatureProvider fp;
 		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -419,9 +509,35 @@ public class BindingSupport {
 		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
 			return new DeleteFeature(fp);
 		}
+		
+		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] { new PropertyFeature(fp) };
+		}
 	}
 	
 	class BehaviorProvider extends DefaultToolBehaviorProvider {
+		
+		@Override
+		public String getToolTip(GraphicsAlgorithm ga) {
+			// if this is called we know there is a business object!=null
+			PictogramElement pe = ga.getPictogramElement();
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof Binding) {
+				Binding bind = (Binding) bo;
+				return RoomNameProvider.getDisplayName(bind);
+			}
+			
+			return super.getToolTip(ga);
+		}
+	
+		@Override
+		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
 
 		public BehaviorProvider(IDiagramTypeProvider dtp) {
 			super(dtp);

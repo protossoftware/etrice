@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.Message;
@@ -312,11 +313,18 @@ public class RoomExtensions {
   }
   
   public String getPortClassName(final Port p) {
-    ProtocolClass _protocol = p.getProtocol();
-    boolean _isConjugated = p.isConjugated();
-    boolean _isReplicated = p.isReplicated();
-    String _portClassName = this.getPortClassName(_protocol, _isConjugated, _isReplicated);
-    return _portClassName;
+    String _xifexpression = null;
+    GeneralProtocolClass _protocol = p.getProtocol();
+    if ((_protocol instanceof ProtocolClass)) {
+      GeneralProtocolClass _protocol_1 = p.getProtocol();
+      boolean _isConjugated = p.isConjugated();
+      boolean _isReplicated = p.isReplicated();
+      String _portClassName = this.getPortClassName(((ProtocolClass) _protocol_1), _isConjugated, _isReplicated);
+      _xifexpression = _portClassName;
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
   }
   
   public String getPortClassName(final ExternalPort p) {

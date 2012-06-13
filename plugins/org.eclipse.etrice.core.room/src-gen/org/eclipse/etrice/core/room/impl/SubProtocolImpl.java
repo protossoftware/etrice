@@ -9,27 +9,30 @@ package org.eclipse.etrice.core.room.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SubProtocol;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Interface Item</b></em>'.
+ * An implementation of the model object '<em><b>Sub Protocol</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SubProtocolImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SubProtocolImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements InterfaceItem
+public class SubProtocolImpl extends MinimalEObjectImpl.Container implements SubProtocol
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -52,11 +55,21 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   protected String name = NAME_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProtocol()
+   * @generated
+   * @ordered
+   */
+  protected GeneralProtocolClass protocol;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected InterfaceItemImpl()
+  protected SubProtocolImpl()
   {
     super();
   }
@@ -69,7 +82,7 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.INTERFACE_ITEM;
+    return RoomPackage.Literals.SUB_PROTOCOL;
   }
 
   /**
@@ -92,7 +105,50 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SUB_PROTOCOL__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GeneralProtocolClass getProtocol()
+  {
+    if (protocol != null && protocol.eIsProxy())
+    {
+      InternalEObject oldProtocol = (InternalEObject)protocol;
+      protocol = (GeneralProtocolClass)eResolveProxy(oldProtocol);
+      if (protocol != oldProtocol)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SUB_PROTOCOL__PROTOCOL, oldProtocol, protocol));
+      }
+    }
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GeneralProtocolClass basicGetProtocol()
+  {
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setProtocol(GeneralProtocolClass newProtocol)
+  {
+    GeneralProtocolClass oldProtocol = protocol;
+    protocol = newProtocol;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SUB_PROTOCOL__PROTOCOL, oldProtocol, protocol));
   }
 
   /**
@@ -105,8 +161,11 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case RoomPackage.INTERFACE_ITEM__NAME:
+      case RoomPackage.SUB_PROTOCOL__NAME:
         return getName();
+      case RoomPackage.SUB_PROTOCOL__PROTOCOL:
+        if (resolve) return getProtocol();
+        return basicGetProtocol();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,8 +180,11 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case RoomPackage.INTERFACE_ITEM__NAME:
+      case RoomPackage.SUB_PROTOCOL__NAME:
         setName((String)newValue);
+        return;
+      case RoomPackage.SUB_PROTOCOL__PROTOCOL:
+        setProtocol((GeneralProtocolClass)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -138,8 +200,11 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case RoomPackage.INTERFACE_ITEM__NAME:
+      case RoomPackage.SUB_PROTOCOL__NAME:
         setName(NAME_EDEFAULT);
+        return;
+      case RoomPackage.SUB_PROTOCOL__PROTOCOL:
+        setProtocol((GeneralProtocolClass)null);
         return;
     }
     super.eUnset(featureID);
@@ -155,8 +220,10 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case RoomPackage.INTERFACE_ITEM__NAME:
+      case RoomPackage.SUB_PROTOCOL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RoomPackage.SUB_PROTOCOL__PROTOCOL:
+        return protocol != null;
     }
     return super.eIsSet(featureID);
   }
@@ -178,4 +245,4 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
     return result.toString();
   }
 
-} //InterfaceItemImpl
+} //SubProtocolImpl

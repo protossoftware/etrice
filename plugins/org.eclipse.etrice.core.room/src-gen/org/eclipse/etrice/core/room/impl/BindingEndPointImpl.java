@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SubProtocol;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +29,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getActorRef <em>Actor Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getPort <em>Port</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getSub <em>Sub</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +56,16 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected Port port;
+
+  /**
+   * The cached value of the '{@link #getSub() <em>Sub</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSub()
+   * @generated
+   * @ordered
+   */
+  protected SubProtocol sub;
 
   /**
    * <!-- begin-user-doc -->
@@ -167,6 +179,49 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public SubProtocol getSub()
+  {
+    if (sub != null && sub.eIsProxy())
+    {
+      InternalEObject oldSub = (InternalEObject)sub;
+      sub = (SubProtocol)eResolveProxy(oldSub);
+      if (sub != oldSub)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.BINDING_END_POINT__SUB, oldSub, sub));
+      }
+    }
+    return sub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubProtocol basicGetSub()
+  {
+    return sub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSub(SubProtocol newSub)
+  {
+    SubProtocol oldSub = sub;
+    sub = newSub;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.BINDING_END_POINT__SUB, oldSub, sub));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -178,6 +233,9 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
       case RoomPackage.BINDING_END_POINT__PORT:
         if (resolve) return getPort();
         return basicGetPort();
+      case RoomPackage.BINDING_END_POINT__SUB:
+        if (resolve) return getSub();
+        return basicGetSub();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,6 +255,9 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
         return;
       case RoomPackage.BINDING_END_POINT__PORT:
         setPort((Port)newValue);
+        return;
+      case RoomPackage.BINDING_END_POINT__SUB:
+        setSub((SubProtocol)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -218,6 +279,9 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
       case RoomPackage.BINDING_END_POINT__PORT:
         setPort((Port)null);
         return;
+      case RoomPackage.BINDING_END_POINT__SUB:
+        setSub((SubProtocol)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -236,6 +300,8 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
         return actorRef != null;
       case RoomPackage.BINDING_END_POINT__PORT:
         return port != null;
+      case RoomPackage.BINDING_END_POINT__SUB:
+        return sub != null;
     }
     return super.eIsSet(featureID);
   }

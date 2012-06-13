@@ -100,6 +100,7 @@
     <genClasses ecoreClass="Room.ecore#//PortOperation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//PortOperation/sendsMsg"/>
     </genClasses>
+    <genClasses ecoreClass="Room.ecore#//GeneralProtocolClass"/>
     <genClasses ecoreClass="Room.ecore#//ProtocolClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ProtocolClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/base"/>
@@ -111,6 +112,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/regular"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/conjugate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/semantics"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//CompoundProtocolClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//CompoundProtocolClass/subProtocols"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SubProtocol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//SubProtocol/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubProtocol/protocol"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/priv"/>
@@ -155,19 +163,23 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//InterfaceItem/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//InterfaceItem/protocol"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/multiplicity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Port/protocol"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Port/docu"/>
       <genOperations ecoreOperation="Room.ecore#//Port/isReplicated"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ExternalPort">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ExternalPort/ifport"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SAPRef"/>
-    <genClasses ecoreClass="Room.ecore#//SPPRef"/>
+    <genClasses ecoreClass="Room.ecore#//SAPRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SAPRef/protocol"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SPPRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPRef/protocol"/>
+    </genClasses>
     <genClasses ecoreClass="Room.ecore#//ServiceImplementation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ServiceImplementation/spp"/>
     </genClasses>
@@ -200,6 +212,7 @@
     <genClasses ecoreClass="Room.ecore#//BindingEndPoint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/actorRef"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/port"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//BindingEndPoint/sub"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//LayerConnection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LayerConnection/from"/>

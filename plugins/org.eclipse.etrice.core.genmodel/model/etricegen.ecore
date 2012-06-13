@@ -88,6 +88,8 @@
     <eOperations name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isRelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="getInterfaceItem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="peers" upperBound="-1"
         eType="#//InterfaceItemInstance"/>
   </eClassifiers>
@@ -105,6 +107,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BindingInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="2" eType="#//PortInstance"
         eOpposite="#//PortInstance/bindings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAPInstance" eSuperTypes="#//InterfaceItemInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPRef"/>

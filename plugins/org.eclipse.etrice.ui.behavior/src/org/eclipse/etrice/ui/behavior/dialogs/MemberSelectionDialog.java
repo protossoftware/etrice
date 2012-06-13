@@ -145,6 +145,7 @@ public class MemberSelectionDialog extends FormDialog {
 		
 		viewer = new TableViewer(body, SWT.FULL_SELECTION | SWT.BORDER | SWT.H_SCROLL);
 		
+		// HOWTO: add table columns
 		TableColumn col0 = new TableColumn(viewer.getTable(), SWT.NONE);
 		col0.setText("type");
 		TableColumn col1 = new TableColumn(viewer.getTable(), SWT.NONE);
@@ -178,7 +179,7 @@ public class MemberSelectionDialog extends FormDialog {
 			}
 		});
 
-		// the tree layout is crucial!
+		// the table layout is crucial!
 		TableColumnLayout layout = new TableColumnLayout();
 		body.setLayout(layout);
 

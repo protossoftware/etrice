@@ -3,6 +3,7 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -94,7 +95,7 @@ public class GenericProtocolClassGenerator {
             _xifexpression = "IN_";
           }
           String direction = _xifexpression;
-          ProtocolClass _protocol = p.getProtocol();
+          GeneralProtocolClass _protocol = p.getProtocol();
           String _name = _protocol.getName();
           String _name_1 = msg.getName();
           String _operator_plus = StringExtensions.operator_plus(direction, _name_1);

@@ -16,6 +16,7 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
@@ -73,9 +74,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 	
 	def private generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
-		var eventPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN)
-		var sendPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN && p.conjugated)
-		var recvPorts = ac.allEndPorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
+		var eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
+		var sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
+		var recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
 		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		

@@ -20,10 +20,8 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
@@ -168,7 +166,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private TableViewer mifViewer;
 	private List<InterfaceItem> interfaceItems = new ArrayList<InterfaceItem>();
 	private TableViewer triggerViewer;
-	private EList<Message> currentMsgs;
+	private List<Message> currentMsgs;
 	private DetailCodeToString m2s;
 	private StringToDetailCode s2m;
 	private StringToDetailCode s2m_not_null;
@@ -280,7 +278,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			return false;
 		
 		for (InterfaceItem item : interfaceItems) {
-			if (!getMessages(item).isEmpty())
+			if (!RoomHelpers.getMessageList(item, false).isEmpty())
 				return true;
 		}
 		return false;
@@ -569,7 +567,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						currentMsgs = getMessages(mif.getFrom());
+						currentMsgs = RoomHelpers.getMessageList(mif.getFrom(), false);
 						int pos = 0;
 						int idx = -1;
 						for (Message message : currentMsgs) {
@@ -592,19 +590,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 
-	private EList<Message> getMessages(InterfaceItem item) {
-		boolean regular = true;
-		if (item instanceof Port) {
-			if (((Port)item).isConjugated())
-				regular = false;
-		}
-		else if (item instanceof SAPRef)
-			regular = false;
-		
-		return regular? item.getProtocol().getIncomingMessages()
-				: item.getProtocol().getOutgoingMessages();
-	}
-
 	private void addNewTrigger() {
 		Trigger tri = RoomFactory.eINSTANCE.createTrigger();
 		EList<Trigger> triggers = ((TriggeredTransition) trans).getTriggers();
@@ -622,9 +607,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private MessageFromIf createDefaultMif() {
 		MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
 		for (InterfaceItem item : interfaceItems) {
-			if (!getMessages(item).isEmpty()) {
+			List<Message> msgs = RoomHelpers.getMessageList(item, false);
+			if (!msgs.isEmpty()) {
 				mif.setFrom(item);
-				mif.setMessage(getMessages(item).get(0));
+				mif.setMessage(msgs.get(0));
 				return mif;
 			}
 		}

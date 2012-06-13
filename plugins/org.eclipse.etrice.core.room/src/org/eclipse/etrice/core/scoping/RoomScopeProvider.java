@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InMessageHandler;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -50,6 +51,7 @@ import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -314,15 +316,25 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		InterfaceItem item = mfi.getFrom();
 		if (item!=null) {
-			ProtocolClass protocol = item.getProtocol();
+			ProtocolClass protocol = null;
 			boolean conjugated = false;
-			if (item instanceof Port)
+			if (item instanceof Port && ((Port)item).getProtocol() instanceof ProtocolClass) {
+				protocol = (ProtocolClass) ((Port)item).getProtocol();
 				conjugated = ((Port)item).isConjugated();
-			else if (item instanceof SAPRef)
-				conjugated = true;
-			for (Message msg : conjugated?protocol.getOutgoingMessages():protocol.getIncomingMessages()) {
-				scopes.add(EObjectDescription.create(msg.getName(), msg));
 			}
+			else if (item instanceof SAPRef) {
+				protocol = ((SAPRef)item).getProtocol();
+				conjugated = true;
+			}
+			else if (item instanceof SPPRef) {
+				protocol = ((SPPRef)item).getProtocol();
+				conjugated = false;
+			}
+			
+			if (protocol!=null)
+				for (Message msg : conjugated?protocol.getOutgoingMessages():protocol.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(msg.getName(), msg));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
@@ -445,6 +457,28 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			}
 		}
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
+	/**
+	 * returns a flat list of SubProtocol scopes for a {@link BindingEndPoint}
+	 * @param ep - the endpoint
+	 * @param ref - not used
+	 * @return a list of scopes
+	 */
+	public IScope scope_BindingEndPoint_sub(BindingEndPoint ep, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		if (ep.getPort()!=null) {
+			if (ep.getPort().getProtocol() instanceof CompoundProtocolClass) {
+				CompoundProtocolClass pc = (CompoundProtocolClass) ep.getPort().getProtocol();
+
+				for (SubProtocol sub : pc.getSubProtocols()) {
+					scopes.add(EObjectDescription.create(sub.getName(), sub));
+				}
+			}
+		}
+		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 	

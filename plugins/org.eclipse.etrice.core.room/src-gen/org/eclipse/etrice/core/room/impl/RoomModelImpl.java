@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalType;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.PrimitiveType;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -136,7 +136,7 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * @generated
    * @ordered
    */
-  protected EList<ProtocolClass> protocolClasses;
+  protected EList<GeneralProtocolClass> protocolClasses;
 
   /**
    * The cached value of the '{@link #getActorClasses() <em>Actor Classes</em>}' containment reference list.
@@ -321,11 +321,11 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ProtocolClass> getProtocolClasses()
+  public EList<GeneralProtocolClass> getProtocolClasses()
   {
     if (protocolClasses == null)
     {
-      protocolClasses = new EObjectContainmentEList<ProtocolClass>(ProtocolClass.class, this, RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES);
+      protocolClasses = new EObjectContainmentEList<GeneralProtocolClass>(GeneralProtocolClass.class, this, RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES);
     }
     return protocolClasses;
   }
@@ -473,7 +473,7 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return;
       case RoomPackage.ROOM_MODEL__PROTOCOL_CLASSES:
         getProtocolClasses().clear();
-        getProtocolClasses().addAll((Collection<? extends ProtocolClass>)newValue);
+        getProtocolClasses().addAll((Collection<? extends GeneralProtocolClass>)newValue);
         return;
       case RoomPackage.ROOM_MODEL__ACTOR_CLASSES:
         getActorClasses().clear();

@@ -9,6 +9,7 @@ package org.eclipse.etrice.core.genmodel.etricegen.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.etrice.core.genmodel.etricegen.*;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;

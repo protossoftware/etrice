@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -74,24 +75,28 @@ public class CTranslationProvider implements ITranslationProvider {
 		String result = orig;
 		if (item instanceof Port) {
 			Port p = (Port) item;
-			if (p.getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
-				if (p.getMultiplicity()==1)
-					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
-				else {
-					if (index==null)
-						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
-					else
-						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
+			if (p.getProtocol() instanceof ProtocolClass) {
+
+				ProtocolClass pc = (ProtocolClass) p.getProtocol();
+				if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
+					if (p.getMultiplicity()==1)
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+					else {
+						if (index==null)
+							result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+						else
+							result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
+					}
 				}
+				else if (pc.getCommType()==CommunicationType.DATA_DRIVEN) {
+					if (p.isConjugated())
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_set(&(self->"+item.getName()+")"+argtext+")";
+					else
+						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
+				}
+				
+				result += " /* "+orig+" */";
 			}
-			else if (p.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
-				if (p.isConjugated())
-					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_set(&(self->"+item.getName()+")"+argtext+")";
-				else
-					result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
-			}
-			
-			result += " /* "+orig+" */";
 		}
 		else if (item instanceof SAPRef) {
 			result = roomExt.getPortClassName(((SAPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";

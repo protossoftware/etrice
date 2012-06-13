@@ -276,12 +276,12 @@ class SubSystemClassGen {
 /*nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
-					«IF pi.interfaceItem.protocol.getPortClass(pi.conjugated)!=null»
-						«IF !pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes.empty»
+					«IF pi.protocol.getPortClass(pi.conjugated)!=null»
+						«IF !pi.protocol.getPortClass(pi.conjugated).attributes.empty»
 							«IF pi.replicated»
-								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»]={«genReplPortAttributeInitializer(pi)»};
+								static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»]={«genReplPortAttributeInitializer(pi)»};
 							«ELSE»
-								static «pi.interfaceItem.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var={«genPortAttributeInitializer(pi)»};
+								static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var={«genPortAttributeInitializer(pi)»};
 							«ENDIF»
 						«ENDIF»
 					«ENDIF»		
@@ -318,7 +318,7 @@ class SubSystemClassGen {
 	
 	def private genPortAttributeInitializer(InterfaceItemInstance pi){
 		'''
-		«FOR attr:pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes SEPARATOR ","»«IF attr.defaultValueLiteral != null»«attr.defaultValueLiteral»«ELSE»«attr.refType.type.defaultValue»«ENDIF»«ENDFOR»'''
+		«FOR attr:pi.protocol.getPortClass(pi.conjugated).attributes SEPARATOR ","»«IF attr.defaultValueLiteral != null»«attr.defaultValueLiteral»«ELSE»«attr.refType.type.defaultValue»«ENDIF»«ENDFOR»'''
 	}
 	
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
@@ -333,9 +333,9 @@ class SubSystemClassGen {
 		
 		// list of event ports, simple first, then replicated
 		var eventPorts = new ArrayList<InterfaceItemInstance>()
-		eventPorts.addAll(simplePorts.filter(p|p.interfaceItem.protocol.commType==CommunicationType::EVENT_DRIVEN).union(replPorts))
+		eventPorts.addAll(simplePorts.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN).union(replPorts))
 
-		var dataPorts = simplePorts.filter(p|p.interfaceItem.protocol.commType==CommunicationType::DATA_DRIVEN)
+		var dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
 		var recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
 		var sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
 		
@@ -392,8 +392,8 @@ class SubSystemClassGen {
 	}
 	
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){
-		if (pi.interfaceItem.protocol.getPortClass(pi.conjugated)== null) return "0"
-		if (pi.interfaceItem.protocol.getPortClass(pi.conjugated).attributes.empty){
+		if (pi.protocol.getPortClass(pi.conjugated)== null) return "0"
+		if (pi.protocol.getPortClass(pi.conjugated).attributes.empty){
 			return "0"
 		}else{
 			return "&"+pi.path.pathName+"_var"
@@ -450,15 +450,15 @@ class SubSystemClassGen {
 			
 				«FOR ai : ssi.allContainedInstances»
 					/* interface items of «ai.path» */
-					«FOR pi : ai. orderedIfItemInstances.filter(p|p.interfaceItem.protocol.commType==CommunicationType::EVENT_DRIVEN)»
+					«FOR pi : ai. orderedIfItemInstances.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN)»
 						«IF pi.replicated»
 							«FOR peer: pi.peers»
 								case «pi.objId+pi.peers.indexOf(peer)»:
-								«IF (pi.interfaceItem.protocol.handlesReceive(pi.isConjugated()))»
+								«IF (pi.protocol.handlesReceive(pi.isConjugated()))»
 									switch (msg->evtID){
-										«FOR h:getReceiveHandlers(pi.interfaceItem.protocol,pi.isConjugated())»
-											case «pi.interfaceItem.protocol.name»_«h.msg.codeName»:
-												«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+										«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
+											case «pi.protocol.name»_«h.msg.codeName»:
+												«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
 											break;
 										«ENDFOR»
 										default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
@@ -471,11 +471,11 @@ class SubSystemClassGen {
 							«ENDFOR»
 						«ELSE»
 							case «pi.objId»:
-							«IF (pi.interfaceItem.protocol.handlesReceive(pi.isConjugated()))» 
+							«IF (pi.protocol.handlesReceive(pi.isConjugated()))» 
 								switch (msg->evtID){
-								«FOR h:getReceiveHandlers(pi.interfaceItem.protocol,pi.isConjugated())»
-									case «pi.interfaceItem.protocol.name»_«h.msg.codeName»:
-										«pi.interfaceItem.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+								«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
+									case «pi.protocol.name»_«h.msg.codeName»:
+										«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
 									break;
 								«ENDFOR»
 								default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);

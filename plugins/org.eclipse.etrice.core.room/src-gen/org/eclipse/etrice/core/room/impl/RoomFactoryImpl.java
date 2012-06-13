@@ -84,7 +84,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.OPERATION: return createOperation();
       case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
       case RoomPackage.PORT_OPERATION: return createPortOperation();
+      case RoomPackage.GENERAL_PROTOCOL_CLASS: return createGeneralProtocolClass();
       case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
+      case RoomPackage.COMPOUND_PROTOCOL_CLASS: return createCompoundProtocolClass();
+      case RoomPackage.SUB_PROTOCOL: return createSubProtocol();
       case RoomPackage.MESSAGE: return createMessage();
       case RoomPackage.PORT_CLASS: return createPortClass();
       case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
@@ -362,10 +365,43 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public GeneralProtocolClass createGeneralProtocolClass()
+  {
+    GeneralProtocolClassImpl generalProtocolClass = new GeneralProtocolClassImpl();
+    return generalProtocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ProtocolClass createProtocolClass()
   {
     ProtocolClassImpl protocolClass = new ProtocolClassImpl();
     return protocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundProtocolClass createCompoundProtocolClass()
+  {
+    CompoundProtocolClassImpl compoundProtocolClass = new CompoundProtocolClassImpl();
+    return compoundProtocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubProtocol createSubProtocol()
+  {
+    SubProtocolImpl subProtocol = new SubProtocolImpl();
+    return subProtocol;
   }
 
   /**
