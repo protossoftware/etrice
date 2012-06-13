@@ -190,6 +190,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//ActorCommunicationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalAnnotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifPorts" upperBound="-1"
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="#//Documentation"

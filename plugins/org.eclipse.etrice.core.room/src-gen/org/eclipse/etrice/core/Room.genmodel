@@ -149,6 +149,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/generalAnnotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/ifPorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structureDocu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/intPorts"/>

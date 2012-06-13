@@ -740,6 +740,9 @@
           </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="generalAnnotations" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.80"/>
+        </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="Interface"/>
           <elements xsi:type="xtext:Keyword" value="{"/>

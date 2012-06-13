@@ -44,6 +44,7 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getGeneralAnnotations <em>General Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIfPorts <em>If Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIntPorts <em>Int Ports</em>}</li>
@@ -111,6 +112,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected ActorClass base;
+
+  /**
+   * The cached value of the '{@link #getGeneralAnnotations() <em>General Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getGeneralAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> generalAnnotations;
 
   /**
    * The cached value of the '{@link #getIfPorts() <em>If Ports</em>}' containment reference list.
@@ -330,6 +341,20 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     base = newBase;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__BASE, oldBase, base));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Annotation> getGeneralAnnotations()
+  {
+    if (generalAnnotations == null)
+    {
+      generalAnnotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS);
+    }
+    return generalAnnotations;
   }
 
   /**
@@ -598,6 +623,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS:
+        return ((InternalEList<?>)getGeneralAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return ((InternalEList<?>)getIfPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
@@ -641,6 +668,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
+      case RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS:
+        return getGeneralAnnotations();
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return getIfPorts();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
@@ -686,6 +715,10 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return;
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS:
+        getGeneralAnnotations().clear();
+        getGeneralAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         getIfPorts().clear();
@@ -751,6 +784,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)null);
         return;
+      case RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS:
+        getGeneralAnnotations().clear();
+        return;
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         getIfPorts().clear();
         return;
@@ -804,6 +840,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return commType != COMM_TYPE_EDEFAULT;
       case RoomPackage.ACTOR_CLASS__BASE:
         return base != null;
+      case RoomPackage.ACTOR_CLASS__GENERAL_ANNOTATIONS:
+        return generalAnnotations != null && !generalAnnotations.isEmpty();
       case RoomPackage.ACTOR_CLASS__IF_PORTS:
         return ifPorts != null && !ifPorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:

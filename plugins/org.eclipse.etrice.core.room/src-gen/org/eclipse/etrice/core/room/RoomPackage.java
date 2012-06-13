@@ -1646,13 +1646,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__BASE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>General Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__GENERAL_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>If Ports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__IF_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
+  int ACTOR_CLASS__IF_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
@@ -1661,7 +1670,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
+  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Int Ports</b></em>' containment reference list.
@@ -1670,7 +1679,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__INT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
+  int ACTOR_CLASS__INT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Ext Ports</b></em>' containment reference list.
@@ -1679,7 +1688,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__EXT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
+  int ACTOR_CLASS__EXT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
@@ -1688,7 +1697,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
+  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Str SA Ps</b></em>' containment reference list.
@@ -1697,7 +1706,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STR_SA_PS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
+  int ACTOR_CLASS__STR_SA_PS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1706,7 +1715,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
+  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
 
   /**
    * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
@@ -1715,7 +1724,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1724,7 +1733,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+  int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1733,7 +1742,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
+  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
 
   /**
    * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -1742,7 +1751,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
+  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
 
   /**
    * The number of structural features of the '<em>Actor Class</em>' class.
@@ -1751,7 +1760,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
+  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 15;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
@@ -5119,6 +5128,17 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_Base();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getGeneralAnnotations <em>General Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>General Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getGeneralAnnotations()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_GeneralAnnotations();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7484,6 +7504,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ACTOR_CLASS__BASE = eINSTANCE.getActorClass_Base();
+
+    /**
+     * The meta object literal for the '<em><b>General Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__GENERAL_ANNOTATIONS = eINSTANCE.getActorClass_GeneralAnnotations();
 
     /**
      * The meta object literal for the '<em><b>If Ports</b></em>' containment reference list feature.

@@ -185,6 +185,7 @@ enum ActorCommunicationType:
 ActorClass:
 	(abstract?='abstract'? & commType=ActorCommunicationType?)
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
+		generalAnnotations+=Annotation*
 		('Interface' '{'
 			ifPorts+=Port*
 			ifSPPs+=SPPRef*
