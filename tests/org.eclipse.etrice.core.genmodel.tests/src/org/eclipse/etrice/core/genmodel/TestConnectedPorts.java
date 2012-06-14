@@ -68,7 +68,7 @@ public class TestConnectedPorts extends TestInstanceModelBuilderBase {
 		assertEquals("internal port expected", PortKind.INTERNAL, p.getKind());
 		assertTrue("conjuagted port expected", p.getPort().isConjugated());
 		assertEquals("port connected once", 1, p.getPeers().size());
-		PortInstance peer = (PortInstance) getInstance(p.getPeers(), "/CMain/test_a2/sub/p2");
+		PortInstance peer = (PortInstance) getInstance(p.getPeers(), "/CMain/test_a2/subact/p2");
 		assertNotNull("peer expected", peer);
 		PortInstance start = (PortInstance) getInstance(peer.getPeers(), "/CMain/test_a2/int_end");
 		assertNotNull("peer expected", start);
@@ -79,7 +79,7 @@ public class TestConnectedPorts extends TestInstanceModelBuilderBase {
 	public void testExternalEndPortConnectedToRelayPort() {
 		ArrayList<EObject> ports = instances.get(ETriceGenPackage.eINSTANCE.getPortInstance());
 		
-		PortInstance p = (PortInstance) getInstance(ports, "/CMain/test_a2/sub/p1");
+		PortInstance p = (PortInstance) getInstance(ports, "/CMain/test_a2/subact/p1");
 		assertNotNull("port expected", p);
 		assertEquals("external port expected", PortKind.EXTERNAL, p.getKind());
 		assertEquals("port connected once", 1, p.getPeers().size());

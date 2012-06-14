@@ -1,6 +1,6 @@
 RoomModel states {
 
-	PrimitiveType int32 -> int32 (Integer) default "0"
+	PrimitiveType int32: ptInteger -> int32 (Integer) default "0"
 
 	ProtocolClass PTest1 {
 		incoming {

@@ -30,9 +30,9 @@ RoomModel connected_ports {
 		Structure {
 			external Port ext_end
 			conjugated Port int_end : PTest
-			ActorRef sub : ASub
-			Binding sub.p1 and relay
-			Binding sub.p2 and int_end
+			ActorRef subact : ASub
+			Binding subact.p1 and relay
+			Binding subact.p2 and int_end
 		}
 		Behavior {
 		}
