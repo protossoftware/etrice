@@ -52,4 +52,13 @@ public interface InterfaceItem extends EObject
    */
   void setName(String value);
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof org.eclipse.etrice.core.room.Port)\nreturn ((org.eclipse.etrice.core.room.Port) this).getProtocol();\nelse if (this instanceof org.eclipse.etrice.core.room.SAPRef)\nreturn ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();\nelse if (this instanceof org.eclipse.etrice.core.room.SPPRef)\nreturn ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;'"
+   * @generated
+   */
+  GeneralProtocolClass getGeneralProtocol();
+
 } // InterfaceItem

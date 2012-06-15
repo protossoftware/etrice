@@ -10,6 +10,7 @@
  * 
  *******************************************************************************/
 
+// possible improvement: http://christiandietrich.wordpress.com/2011/07/22/customizing-xtext-metamodel-inference-using-xtend2/
 
 import ecore;
 import xtext;
@@ -30,6 +31,7 @@ process(EClass this) :
         case "ActorRef": (eAllAttributes.select(e|e.name=="size").first().setDefaultValueLiteral("1"))
         case "State": (addOperation("getName", getEcoreDataType("EString")))
         case "StateGraphItem": (addOperation("getName", getEcoreDataType("EString")))
+        case "InterfaceItem": (addOperation("getGeneralProtocol", ePackage.getEClassifier("GeneralProtocolClass")))
         default:    null
     }
 ;
@@ -71,6 +73,14 @@ create EAnnotation newDelegatingBodyAnnotation(EClass cls, EOperation op) :
 				})
 			case "isReplicated":
 				(d.setValue("return multiplicity>1 || multiplicity==-1;"))
+			case "getGeneralProtocol":
+				(d.setValue("if (this instanceof org.eclipse.etrice.core.room.Port)\n"
+					+"return ((org.eclipse.etrice.core.room.Port) this).getProtocol();\n"
+					+"else if (this instanceof org.eclipse.etrice.core.room.SAPRef)\n"
+					+"return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();\n"
+					+"else if (this instanceof org.eclipse.etrice.core.room.SPPRef)\n"
+					+"return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();"
+					+"return null;"))
 	        default:    null
 	    } ->
         details.add(d) ->

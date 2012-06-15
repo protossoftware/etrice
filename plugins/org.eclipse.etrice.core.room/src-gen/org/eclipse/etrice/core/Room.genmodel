@@ -164,6 +164,7 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//InterfaceItem/name"/>
+      <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getGeneralProtocol"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -93,6 +94,21 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.INTERFACE_ITEM__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GeneralProtocolClass getGeneralProtocol()
+  {
+    if (this instanceof org.eclipse.etrice.core.room.Port)
+    return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
+    else if (this instanceof org.eclipse.etrice.core.room.SAPRef)
+    return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();
+    else if (this instanceof org.eclipse.etrice.core.room.SPPRef)
+    return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;
   }
 
   /**
