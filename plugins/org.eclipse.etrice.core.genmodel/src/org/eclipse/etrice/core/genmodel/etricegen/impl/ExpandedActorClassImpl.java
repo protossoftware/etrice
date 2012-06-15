@@ -1239,6 +1239,15 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EObject getOrig(EObject copy) {
+		return copy2orig.get(copy);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

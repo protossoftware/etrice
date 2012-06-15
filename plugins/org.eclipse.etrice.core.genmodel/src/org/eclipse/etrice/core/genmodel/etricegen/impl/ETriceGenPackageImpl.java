@@ -1193,6 +1193,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		op = addEOperation(expandedActorClassEClass, theRoomPackage.getContinuationTransition(), "getDefaultBranch", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getTransition(), "out", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(expandedActorClassEClass, ecorePackage.getEObject(), "getOrig", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");
 		addEEnumLiteral(portKindEEnum, PortKind.EXTERNAL);

@@ -260,4 +260,12 @@ public interface ExpandedActorClass extends EObject {
 	 */
 	ContinuationTransition getDefaultBranch(EList<Transition> out);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EObject getOrig(EObject copy);
+
 } // ExpandedActorClass
