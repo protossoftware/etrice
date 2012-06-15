@@ -115,11 +115,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   private boolean hasBehaviorAnnotation(final ExpandedActorClass xpac, final String annotation) {
       ActorClass _actorClass = xpac.getActorClass();
-      EList<Annotation> _annotations = _actorClass.getAnnotations();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_annotations, null);
+      EList<Annotation> _behaviorAnnotations = _actorClass.getBehaviorAnnotations();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_behaviorAnnotations, null);
       if (_operator_notEquals) {
         ActorClass _actorClass_1 = xpac.getActorClass();
-        EList<Annotation> _annotations_1 = _actorClass_1.getAnnotations();
+        EList<Annotation> _behaviorAnnotations_1 = _actorClass_1.getBehaviorAnnotations();
         final Function1<Annotation,Boolean> _function = new Function1<Annotation,Boolean>() {
             public Boolean apply(final Annotation e) {
               String _name = e.getName();
@@ -127,7 +127,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               return ((Boolean)_operator_equals);
             }
           };
-        Annotation _findFirst = IterableExtensions.<Annotation>findFirst(_annotations_1, _function);
+        Annotation _findFirst = IterableExtensions.<Annotation>findFirst(_behaviorAnnotations_1, _function);
         boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_findFirst, null);
         if (_operator_notEquals_1) {
           return true;

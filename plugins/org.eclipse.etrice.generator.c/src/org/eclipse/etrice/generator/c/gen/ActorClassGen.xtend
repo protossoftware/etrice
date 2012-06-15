@@ -65,8 +65,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 	
 	def private hasBehaviorAnnotation(ExpandedActorClass xpac, String annotation) {
-		if (xpac.actorClass.annotations != null){
-			if(xpac.actorClass.annotations.findFirst(e|e.name == annotation) != null){
+		if (xpac.actorClass.behaviorAnnotations != null){
+			if(xpac.actorClass.behaviorAnnotations.findFirst(e|e.name == annotation) != null){
 				return true;
 			}
 		}
