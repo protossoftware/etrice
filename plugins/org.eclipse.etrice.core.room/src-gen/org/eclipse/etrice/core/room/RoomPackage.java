@@ -236,13 +236,22 @@ public interface RoomPackage extends EPackage
   int STRUCTURE_CLASS__DOCU = ROOM_CLASS__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRUCTURE_CLASS__ANNOTATIONS = ROOM_CLASS_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STRUCTURE_CLASS__BINDINGS = ROOM_CLASS_FEATURE_COUNT + 0;
+  int STRUCTURE_CLASS__BINDINGS = ROOM_CLASS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
@@ -251,7 +260,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRUCTURE_CLASS__CONNECTIONS = ROOM_CLASS_FEATURE_COUNT + 1;
+  int STRUCTURE_CLASS__CONNECTIONS = ROOM_CLASS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Structure Class</em>' class.
@@ -260,7 +269,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRUCTURE_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 2;
+  int STRUCTURE_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl <em>Actor Container Class</em>}' class.
@@ -289,6 +298,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int ACTOR_CONTAINER_CLASS__DOCU = STRUCTURE_CLASS__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CONTAINER_CLASS__ANNOTATIONS = STRUCTURE_CLASS__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -667,13 +685,22 @@ public interface RoomPackage extends EPackage
   int DATA_CLASS__BASE = COMPLEX_TYPE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATA_CLASS__ANNOTATIONS = COMPLEX_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>User Code1</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_CLASS__USER_CODE1 = COMPLEX_TYPE_FEATURE_COUNT + 1;
+  int DATA_CLASS__USER_CODE1 = COMPLEX_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>User Code2</b></em>' containment reference.
@@ -682,7 +709,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__USER_CODE2 = COMPLEX_TYPE_FEATURE_COUNT + 2;
+  int DATA_CLASS__USER_CODE2 = COMPLEX_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>User Code3</b></em>' containment reference.
@@ -691,7 +718,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__USER_CODE3 = COMPLEX_TYPE_FEATURE_COUNT + 3;
+  int DATA_CLASS__USER_CODE3 = COMPLEX_TYPE_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -700,7 +727,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__ATTRIBUTES = COMPLEX_TYPE_FEATURE_COUNT + 4;
+  int DATA_CLASS__ATTRIBUTES = COMPLEX_TYPE_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -709,7 +736,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS__OPERATIONS = COMPLEX_TYPE_FEATURE_COUNT + 5;
+  int DATA_CLASS__OPERATIONS = COMPLEX_TYPE_FEATURE_COUNT + 6;
 
   /**
    * The number of structural features of the '<em>Data Class</em>' class.
@@ -718,7 +745,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_CLASS_FEATURE_COUNT = COMPLEX_TYPE_FEATURE_COUNT + 6;
+  int DATA_CLASS_FEATURE_COUNT = COMPLEX_TYPE_FEATURE_COUNT + 7;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -1023,13 +1050,22 @@ public interface RoomPackage extends EPackage
   int GENERAL_PROTOCOL_CLASS__DOCU = ROOM_CLASS__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERAL_PROTOCOL_CLASS__ANNOTATIONS = ROOM_CLASS_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>General Protocol Class</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GENERAL_PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 0;
+  int GENERAL_PROTOCOL_CLASS_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl <em>Protocol Class</em>}' class.
@@ -1058,6 +1094,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int PROTOCOL_CLASS__DOCU = GENERAL_PROTOCOL_CLASS__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS__ANNOTATIONS = GENERAL_PROTOCOL_CLASS__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Comm Type</b></em>' attribute.
@@ -1185,6 +1230,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int COMPOUND_PROTOCOL_CLASS__DOCU = GENERAL_PROTOCOL_CLASS__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_PROTOCOL_CLASS__ANNOTATIONS = GENERAL_PROTOCOL_CLASS__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Sub Protocols</b></em>' containment reference list.
@@ -1556,6 +1610,15 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__DOCU = ACTOR_CONTAINER_CLASS__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1646,22 +1709,13 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__BASE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>General Annotations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__GENERAL_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
-
-  /**
    * The feature id for the '<em><b>If Ports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__IF_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
+  int ACTOR_CLASS__IF_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
@@ -1670,7 +1724,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
+  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Int Ports</b></em>' containment reference list.
@@ -1679,7 +1733,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__INT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
+  int ACTOR_CLASS__INT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Ext Ports</b></em>' containment reference list.
@@ -1688,7 +1742,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__EXT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
+  int ACTOR_CLASS__EXT_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
@@ -1697,7 +1751,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
+  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Str SA Ps</b></em>' containment reference list.
@@ -1706,7 +1760,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STR_SA_PS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
+  int ACTOR_CLASS__STR_SA_PS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1715,7 +1769,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
 
   /**
    * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
@@ -1724,16 +1778,16 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
 
   /**
-   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * The feature id for the '<em><b>Behavior Annotations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
+  int ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1742,7 +1796,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
+  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
 
   /**
    * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -1751,7 +1805,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
+  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
 
   /**
    * The number of structural features of the '<em>Actor Class</em>' class.
@@ -1760,7 +1814,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 15;
+  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
@@ -2013,6 +2067,15 @@ public interface RoomPackage extends EPackage
   int LOGICAL_SYSTEM__DOCU = STRUCTURE_CLASS__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOGICAL_SYSTEM__ANNOTATIONS = STRUCTURE_CLASS__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2158,6 +2221,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int SUB_SYSTEM_CLASS__DOCU = ACTOR_CONTAINER_CLASS__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -4195,6 +4267,17 @@ public interface RoomPackage extends EPackage
   EClass getStructureClass();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StructureClass#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.StructureClass#getAnnotations()
+   * @see #getStructureClass()
+   * @generated
+   */
+  EReference getStructureClass_Annotations();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4462,6 +4545,17 @@ public interface RoomPackage extends EPackage
   EReference getDataClass_Base();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getAnnotations()
+   * @see #getDataClass()
+   * @generated
+   */
+  EReference getDataClass_Annotations();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.DataClass#getUserCode1 <em>User Code1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4697,6 +4791,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getGeneralProtocolClass();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.GeneralProtocolClass#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.GeneralProtocolClass#getAnnotations()
+   * @see #getGeneralProtocolClass()
+   * @generated
+   */
+  EReference getGeneralProtocolClass_Annotations();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ProtocolClass <em>Protocol Class</em>}'.
@@ -5128,17 +5233,6 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_Base();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getGeneralAnnotations <em>General Annotations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>General Annotations</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getGeneralAnnotations()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_GeneralAnnotations();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5227,15 +5321,15 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_BehaviorDocu();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getAnnotations <em>Annotations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Annotations</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getAnnotations()
+   * @return the meta object for the containment reference list '<em>Behavior Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations()
    * @see #getActorClass()
    * @generated
    */
-  EReference getActorClass_Annotations();
+  EReference getActorClass_BehaviorAnnotations();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}'.
@@ -6762,6 +6856,14 @@ public interface RoomPackage extends EPackage
     EClass STRUCTURE_CLASS = eINSTANCE.getStructureClass();
 
     /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STRUCTURE_CLASS__ANNOTATIONS = eINSTANCE.getStructureClass_Annotations();
+
+    /**
      * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6978,6 +7080,14 @@ public interface RoomPackage extends EPackage
     EReference DATA_CLASS__BASE = eINSTANCE.getDataClass_Base();
 
     /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATA_CLASS__ANNOTATIONS = eINSTANCE.getDataClass_Annotations();
+
+    /**
      * The meta object literal for the '<em><b>User Code1</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7162,6 +7272,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass GENERAL_PROTOCOL_CLASS = eINSTANCE.getGeneralProtocolClass();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERAL_PROTOCOL_CLASS__ANNOTATIONS = eINSTANCE.getGeneralProtocolClass_Annotations();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl <em>Protocol Class</em>}' class.
@@ -7506,14 +7624,6 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__BASE = eINSTANCE.getActorClass_Base();
 
     /**
-     * The meta object literal for the '<em><b>General Annotations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__GENERAL_ANNOTATIONS = eINSTANCE.getActorClass_GeneralAnnotations();
-
-    /**
      * The meta object literal for the '<em><b>If Ports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7578,12 +7688,12 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__BEHAVIOR_DOCU = eINSTANCE.getActorClass_BehaviorDocu();
 
     /**
-     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Behavior Annotations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTOR_CLASS__ANNOTATIONS = eINSTANCE.getActorClass_Annotations();
+    EReference ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = eINSTANCE.getActorClass_BehaviorAnnotations();
 
     /**
      * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.

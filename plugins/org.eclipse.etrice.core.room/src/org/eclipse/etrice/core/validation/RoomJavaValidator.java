@@ -297,8 +297,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);
-		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.eINSTANCE.getBinding_Endpoint1());
+		if (!result.isOk()) {
+			EObject sc = bind.eContainer();
+			@SuppressWarnings("unchecked")
+			int idx = ((List<EObject>)sc.eGet(bind.eContainingFeature())).indexOf(bind);
+			error(result.getMsg(), sc, bind.eContainingFeature(), idx);
+		}
 	}
 	
 	@Check

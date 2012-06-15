@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getGeneralAnnotations <em>General Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIntPorts <em>Int Ports</em>}</li>
@@ -28,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStrSAPs <em>Str SA Ps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}</li>
  * </ul>
@@ -120,22 +119,6 @@ public interface ActorClass extends ActorContainerClass
    * @generated
    */
   void setBase(ActorClass value);
-
-  /**
-   * Returns the value of the '<em><b>General Annotations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>General Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>General Annotations</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_GeneralAnnotations()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Annotation> getGeneralAnnotations();
 
   /**
    * Returns the value of the '<em><b>If Ports</b></em>' containment reference list.
@@ -286,20 +269,20 @@ public interface ActorClass extends ActorContainerClass
   void setBehaviorDocu(Documentation value);
 
   /**
-   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Behavior Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Behavior Annotations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Annotations</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Annotations()
+   * @return the value of the '<em>Behavior Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_BehaviorAnnotations()
    * @model containment="true"
    * @generated
    */
-  EList<Annotation> getAnnotations();
+  EList<Annotation> getBehaviorAnnotations();
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

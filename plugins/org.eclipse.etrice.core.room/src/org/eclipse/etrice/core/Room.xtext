@@ -68,6 +68,7 @@ ExternalType: 'ExternalType' name=ID '->' targetName=FQN (docu=Documentation)?;
 // TODOHRR: define detail level language?
 DataClass:
 	'DataClass' name=ID (docu=Documentation)? ('extends' base=[DataClass|FQN])? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
@@ -107,6 +108,7 @@ GeneralProtocolClass: ProtocolClass | CompoundProtocolClass;
 ProtocolClass:
 	(commType=CommunicationType)?
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
@@ -119,6 +121,7 @@ ProtocolClass:
 	
 CompoundProtocolClass:
 	'CompoundProtocolClass' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
 		subProtocols+=SubProtocol+
 	'}'
 ;
@@ -185,7 +188,7 @@ enum ActorCommunicationType:
 ActorClass:
 	(abstract?='abstract'? & commType=ActorCommunicationType?)
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
-		generalAnnotations+=Annotation*
+		annotations+=Annotation*
 		('Interface' '{'
 			ifPorts+=Port*
 			ifSPPs+=SPPRef*
@@ -204,7 +207,7 @@ ActorClass:
 			connections+=LayerConnection*
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
-			annotations+=Annotation*
+			behaviorAnnotations+=Annotation*
 			operations+=StandardOperation*
 			(stateMachine=StateMachine)?
 		'}')?
@@ -227,6 +230,7 @@ ServiceImplementation:
 
 LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
 		subSystems+=SubSystemRef*
 		bindings+=Binding*
 		connections+=LayerConnection*
@@ -239,6 +243,7 @@ SubSystemRef:
 
 SubSystemClass:
 	'SubSystemClass' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?

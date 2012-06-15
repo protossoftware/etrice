@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.core.room.StructureClass;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getConnections <em>Connections</em>}</li>
  * </ul>
@@ -39,6 +41,16 @@ import org.eclipse.etrice.core.room.StructureClass;
  */
 public class StructureClassImpl extends RoomClassImpl implements StructureClass
 {
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
+
   /**
    * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -85,6 +97,20 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.STRUCTURE_CLASS__ANNOTATIONS);
+    }
+    return annotations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Binding> getBindings()
   {
     if (bindings == null)
@@ -118,6 +144,8 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
   {
     switch (featureID)
     {
+      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.STRUCTURE_CLASS__BINDINGS:
         return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
       case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
@@ -136,6 +164,8 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
   {
     switch (featureID)
     {
+      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+        return getAnnotations();
       case RoomPackage.STRUCTURE_CLASS__BINDINGS:
         return getBindings();
       case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:
@@ -155,6 +185,10 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
   {
     switch (featureID)
     {
+      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+        return;
       case RoomPackage.STRUCTURE_CLASS__BINDINGS:
         getBindings().clear();
         getBindings().addAll((Collection<? extends Binding>)newValue);
@@ -177,6 +211,9 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
   {
     switch (featureID)
     {
+      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case RoomPackage.STRUCTURE_CLASS__BINDINGS:
         getBindings().clear();
         return;
@@ -197,6 +234,8 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
   {
     switch (featureID)
     {
+      case RoomPackage.STRUCTURE_CLASS__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case RoomPackage.STRUCTURE_CLASS__BINDINGS:
         return bindings != null && !bindings.isEmpty();
       case RoomPackage.STRUCTURE_CLASS__CONNECTIONS:

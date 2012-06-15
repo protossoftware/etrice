@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode3 <em>User Code3</em>}</li>
@@ -56,6 +57,22 @@ public interface DataClass extends ComplexType
    * @generated
    */
   void setBase(DataClass value);
+
+  /**
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Annotations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Annotation> getAnnotations();
 
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' containment reference.

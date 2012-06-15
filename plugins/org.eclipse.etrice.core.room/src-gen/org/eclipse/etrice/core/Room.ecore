@@ -30,6 +30,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructureClass" eSuperTypes="#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//Binding" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
@@ -75,6 +77,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//ComplexType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
@@ -117,7 +121,10 @@
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
     <eLiterals name="SYNCHRONOUS" value="2" literal="sync"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneralProtocolClass" eSuperTypes="#//RoomClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralProtocolClass" eSuperTypes="#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//GeneralProtocolClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//CommunicationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ProtocolClass"/>
@@ -190,8 +197,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//ActorCommunicationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ActorClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generalAnnotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifPorts" upperBound="-1"
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structureDocu" eType="#//Documentation"
@@ -208,7 +213,7 @@
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="#//Documentation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorAnnotations" upperBound="-1"
         eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//StandardOperation" containment="true"/>

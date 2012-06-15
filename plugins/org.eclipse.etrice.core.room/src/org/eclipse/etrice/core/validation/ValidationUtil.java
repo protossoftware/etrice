@@ -282,6 +282,9 @@ public class ValidationUtil {
 		if (p1==p2)
 			return Result.error("no self connection allowed, ports are indentical");
 
+		if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
+			return Result.error("ports are already bound");
+		
 		// check protocol compatibility
 		{
 			GeneralProtocolClass pc1 = p1.getProtocol();
@@ -398,6 +401,51 @@ public class ValidationUtil {
 		}
 		
 		return Result.ok();
+	}
+
+	/**
+	 * @param p1
+	 * @param ref1
+	 * @param p2
+	 * @param ref2
+	 * @param sc
+	 * @param exclude
+	 * @return
+	 */
+	private static boolean alreadyConnected(Port p1, ActorContainerRef ref1,
+			Port p2, ActorContainerRef ref2, StructureClass sc, Binding exclude) {
+		
+		HashSet<String> bindings = new HashSet<String>();
+		String key = getKey(p1, ref1, p2, ref2);
+		bindings.add(key);
+		for (Binding bind : sc.getBindings()) {
+			if (bind==exclude)
+				continue;
+
+			key = getKey(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
+					bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef());
+			if (!bindings.add(key))
+				return true;
+		}
+		return false;
+	}
+
+	private static String getKey(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2) {
+		String ep1 = getEndpointName(p1, ref1);
+		String ep2 = getEndpointName(p2, ref2);
+		// we order endpoint names to be able to identify bindings with exchanged endpoints
+		return (ep1.compareTo(ep2)>0)? ep1+ep2:ep2+ep1;
+	}
+	/**
+	 * @param p1
+	 * @param ref1
+	 * @return
+	 */
+	private static String getEndpointName(Port p1, ActorContainerRef ref1) {
+		if (ref1==null)
+			return p1.getName()+"#.";
+		else
+			return p1.getName()+"#"+ref1.getName();
 	}
 
 	public static Result isFreeOfReferences(Port port) {
