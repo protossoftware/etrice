@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug
+ * 
+ *******************************************************************************/
 module org.eclipse.etrice.core.GenerateConfig
 
 import org.eclipse.emf.mwe.utils.*
@@ -13,7 +24,7 @@ Workflow {
     bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
-		registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel"
+        registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel"
     }
 
     component = DirectoryCleaner {
@@ -76,7 +87,8 @@ Workflow {
             // fragment = exporting.SimpleNamesFragment {}
 
             // scoping and exporting API
-            fragment = scoping.ImportNamespacesScopingFragment {}
+            fragment = scoping.ImportURIScopingFragment {}
+            // fragment = scoping.ImportNamespacesScopingFragment {}
             fragment = exporting.QualifiedNamesFragment {}
             fragment = builder.BuilderIntegrationFragment {}
 
@@ -118,7 +130,7 @@ Workflow {
             fragment = refactoring.RefactorElementNameFragment {}
 
             // provides the necessary bindings for java types integration
-            fragment = types.TypesGeneratorFragment {}
+            // fragment = types.TypesGeneratorFragment {}
 
             // generates the required bindings only if the grammar inherits from Xbase
             fragment = xbase.XbaseGeneratorFragment {}

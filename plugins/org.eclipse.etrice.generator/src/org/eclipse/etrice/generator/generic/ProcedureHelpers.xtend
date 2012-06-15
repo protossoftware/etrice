@@ -36,6 +36,7 @@ class ProcedureHelpers {
 
 	@Inject extension ILanguageExtension languageExt
 	@Inject public ITranslationProvider translator
+	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 
@@ -88,7 +89,9 @@ class ProcedureHelpers {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«IF a.defaultValueLiteral!=null»
+				«IF a.configDefaultValue!=null»
+					«a.name» = «a.configDefaultValue»;
+				«ELSEIF a.defaultValueLiteral!=null»
 					«IF a.size==0»
 						«a.name» = «a.defaultValueLiteral»;
 					«ELSEIF a.defaultValueLiteral.startsWith("{")»
@@ -152,6 +155,9 @@ class ProcedureHelpers {
 		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
+	def invokeSetter(Attribute attribute, String classname, String value){
+		'''set«attribute.name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
+	}
 	
 	// Operations
 	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''

@@ -134,7 +134,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 					}
 				«ENDIF»
 			}
-			
+			//--------------------- attributes getter and setter
+			«attributeSettersGettersImplementation(ac.attributes, ac.name)»
 		
 			//--------------------- lifecycle functions
 			public void init(){

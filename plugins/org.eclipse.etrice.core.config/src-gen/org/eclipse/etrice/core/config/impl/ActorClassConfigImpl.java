@@ -6,15 +6,23 @@
  */
 package org.eclipse.etrice.core.config.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.config.ActorClassConfig;
+import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
 
 import org.eclipse.etrice.core.room.ActorClass;
@@ -26,23 +34,34 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl#getActorClass <em>Actor Class</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl#getActor <em>Actor</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implements ActorClassConfig
+public class ActorClassConfigImpl extends ConfigElementImpl implements ActorClassConfig
 {
   /**
-   * The cached value of the '{@link #getActorClass() <em>Actor Class</em>}' reference.
+   * The cached value of the '{@link #getActor() <em>Actor</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActorClass()
+   * @see #getActor()
    * @generated
    * @ordered
    */
-  protected ActorClass actorClass;
+  protected ActorClass actor;
+
+  /**
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttributes()
+   * @generated
+   * @ordered
+   */
+  protected EList<AttrClassConfig> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -70,19 +89,20 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorClass getActorClass()
+  @Override
+public ActorClass getActor()
   {
-    if (actorClass != null && actorClass.eIsProxy())
+    if (actor != null && actor.eIsProxy())
     {
-      InternalEObject oldActorClass = (InternalEObject)actorClass;
-      actorClass = (ActorClass)eResolveProxy(oldActorClass);
-      if (actorClass != oldActorClass)
+      InternalEObject oldActor = (InternalEObject)actor;
+      actor = (ActorClass)eResolveProxy(oldActor);
+      if (actor != oldActor)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS, oldActorClass, actorClass));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR, oldActor, actor));
       }
     }
-    return actorClass;
+    return actor;
   }
 
   /**
@@ -90,9 +110,9 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorClass basicGetActorClass()
+  public ActorClass basicGetActor()
   {
-    return actorClass;
+    return actor;
   }
 
   /**
@@ -100,12 +120,44 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setActorClass(ActorClass newActorClass)
+  @Override
+public void setActor(ActorClass newActor)
   {
-    ActorClass oldActorClass = actorClass;
-    actorClass = newActorClass;
+    ActorClass oldActor = actor;
+    actor = newActor;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS, oldActorClass, actorClass));
+      eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR, oldActor, actor));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EList<AttrClassConfig> getAttributes()
+  {
+    if (attributes == null)
+    {
+      attributes = new EObjectContainmentEList<AttrClassConfig>(AttrClassConfig.class, this, ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES);
+    }
+    return attributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -118,9 +170,11 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS:
-        if (resolve) return getActorClass();
-        return basicGetActorClass();
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR:
+        if (resolve) return getActor();
+        return basicGetActor();
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,13 +184,18 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS:
-        setActorClass((ActorClass)newValue);
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR:
+        setActor((ActorClass)newValue);
+        return;
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends AttrClassConfig>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -152,8 +211,11 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS:
-        setActorClass((ActorClass)null);
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR:
+        setActor((ActorClass)null);
+        return;
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -169,8 +231,10 @@ public class ActorClassConfigImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR_CLASS:
-        return actorClass != null;
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ACTOR:
+        return actor != null;
+      case ConfigPackage.ACTOR_CLASS_CONFIG__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

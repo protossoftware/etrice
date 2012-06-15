@@ -2,19 +2,24 @@ package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.config.AttrInstanceConfig;
+import org.eclipse.etrice.core.config.Literal;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.Indexed;
+import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
@@ -35,6 +40,9 @@ public class SubSystemClassGen {
   
   @Inject
   private RoomExtensions roomExt;
+  
+  @Inject
+  private ConfigExtension configExt;
   
   @Inject
   private ProcedureHelpers helpers;
@@ -563,6 +571,71 @@ public class SubSystemClassGen {
         _builder.newLine();
       }
     }
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// apply instance attribute configurations");
+    _builder.newLine();
+    {
+      EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
+      for(final ActorInstance ai_3 : _allContainedInstances_8) {
+        _builder.append("\t\t");
+        List<AttrInstanceConfig> _configAttributes = this.configExt.getConfigAttributes(ai_3);
+        List<AttrInstanceConfig> attrConfigs = _configAttributes;
+        _builder.newLineIfNotEmpty();
+        {
+          boolean _isEmpty_5 = attrConfigs.isEmpty();
+          boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_5);
+          if (_operator_not_2) {
+            _builder.append("\t\t");
+            _builder.append("{");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            String aiName = "inst";
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            ActorClass _actorClass_1 = ai_3.getActorClass();
+            String _name_6 = _actorClass_1.getName();
+            _builder.append(_name_6, "			");
+            _builder.append(" ");
+            _builder.append(aiName, "			");
+            _builder.append(" = (");
+            ActorClass _actorClass_2 = ai_3.getActorClass();
+            String _name_7 = _actorClass_2.getName();
+            _builder.append(_name_7, "			");
+            _builder.append(") instances[");
+            EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
+            int _indexOf_8 = _allContainedInstances_9.indexOf(ai_3);
+            _builder.append(_indexOf_8, "			");
+            _builder.append("];");
+            _builder.newLineIfNotEmpty();
+            {
+              for(final AttrInstanceConfig attrConfig : attrConfigs) {
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append(aiName, "			");
+                _builder.append(".");
+                Attribute _attribute = attrConfig.getAttribute();
+                ActorClass _actorClass_3 = ai_3.getActorClass();
+                String _name_8 = _actorClass_3.getName();
+                Literal _value_1 = attrConfig.getValue();
+                Attribute _attribute_1 = attrConfig.getAttribute();
+                String _stringValue = this.configExt.stringValue(_value_1, _attribute_1);
+                StringConcatenation _invokeSetter = this.helpers.invokeSetter(_attribute, _name_8, _stringValue);
+                _builder.append(_invokeSetter, "			");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("// create the subsystem system port\t");
@@ -580,9 +653,9 @@ public class SubSystemClassGen {
     _builder.append("new Address[]{");
     _builder.newLine();
     {
-      EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
+      EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
       boolean hasAnyElements_4 = false;
-      for(final ActorInstance ai_3 : _allContainedInstances_8) {
+      for(final ActorInstance ai_4 : _allContainedInstances_10) {
         if (!hasAnyElements_4) {
           hasAnyElements_4 = true;
         } else {
@@ -590,9 +663,9 @@ public class SubSystemClassGen {
         }
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_SystemPort_");
-        EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
-        int _indexOf_8 = _allContainedInstances_9.indexOf(ai_3);
-        _builder.append(_indexOf_8, "					");
+        EList<ActorInstance> _allContainedInstances_11 = comp.getAllContainedInstances();
+        int _indexOf_9 = _allContainedInstances_11.indexOf(ai_4);
+        _builder.append(_indexOf_9, "					");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -606,9 +679,9 @@ public class SubSystemClassGen {
     _builder.append("new Address[]{");
     _builder.newLine();
     {
-      EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
+      EList<ActorInstance> _allContainedInstances_12 = comp.getAllContainedInstances();
       boolean hasAnyElements_5 = false;
-      for(final ActorInstance ai_4 : _allContainedInstances_10) {
+      for(final ActorInstance ai_5 : _allContainedInstances_12) {
         if (!hasAnyElements_5) {
           hasAnyElements_5 = true;
         } else {
@@ -616,7 +689,7 @@ public class SubSystemClassGen {
         }
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_");
-        String _path_10 = ai_4.getPath();
+        String _path_10 = ai_5.getPath();
         String _pathName_8 = this.roomExt.getPathName(_path_10);
         _builder.append(_pathName_8, "					");
         _builder.newLineIfNotEmpty();

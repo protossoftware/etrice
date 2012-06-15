@@ -163,4 +163,11 @@ public interface ILanguageExtension {
 	 * @return a typename for the return type (might be empty)
 	 */
 	String destructorReturnType();
+	
+	/**
+	 * 
+	 * @param s string text
+	 * @return expression assignable to char array
+	 */
+	String toCharArrayExpr(String s);
 }

@@ -95,5 +95,7 @@ class JavaExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
-	
+	override String toCharArrayExpr(String s){
+		"\"" + s + "\".toCharArray()"
+	}
 }

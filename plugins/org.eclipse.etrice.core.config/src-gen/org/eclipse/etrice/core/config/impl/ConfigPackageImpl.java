@@ -14,9 +14,22 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.etrice.core.config.ActorClassConfig;
+import org.eclipse.etrice.core.config.ActorInstanceConfig;
+import org.eclipse.etrice.core.config.AttrClassConfig;
+import org.eclipse.etrice.core.config.AttrConfig;
+import org.eclipse.etrice.core.config.AttrInstanceConfig;
+import org.eclipse.etrice.core.config.BooleanLiteral;
+import org.eclipse.etrice.core.config.ConfigElement;
 import org.eclipse.etrice.core.config.ConfigFactory;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.IntLiteral;
+import org.eclipse.etrice.core.config.Literal;
+import org.eclipse.etrice.core.config.NumberLiteral;
+import org.eclipse.etrice.core.config.RealLiteral;
+import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.StringLiteral;
 
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -40,7 +53,98 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass configElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass actorClassConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actorInstanceConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attrConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attrClassConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attrInstanceConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refPathEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass importEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass booleanLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numberLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringLiteralEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -113,7 +217,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getConfigModel()
+  @Override
+public EClass getConfigModel()
   {
     return configModelEClass;
   }
@@ -123,7 +228,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getConfigModel_ActorClassConfigs()
+  @Override
+public EReference getConfigModel_Imports()
   {
     return (EReference)configModelEClass.getEStructuralFeatures().get(0);
   }
@@ -133,9 +239,10 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConfigModel_ActorInstanceConfigs()
+  @Override
+public EReference getConfigModel_ConfigElements()
   {
-    return (EAttribute)configModelEClass.getEStructuralFeatures().get(1);
+    return (EReference)configModelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -143,7 +250,19 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getActorClassConfig()
+  @Override
+public EClass getConfigElement()
+  {
+    return configElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getActorClassConfig()
   {
     return actorClassConfigEClass;
   }
@@ -153,7 +272,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorClassConfig_ActorClass()
+  @Override
+public EReference getActorClassConfig_Actor()
   {
     return (EReference)actorClassConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -163,7 +283,305 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConfigFactory getConfigFactory()
+  @Override
+public EReference getActorClassConfig_Attributes()
+  {
+    return (EReference)actorClassConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getActorInstanceConfig()
+  {
+    return actorInstanceConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getActorInstanceConfig_Root()
+  {
+    return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getActorInstanceConfig_Path()
+  {
+    return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getActorInstanceConfig_Attributes()
+  {
+    return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getAttrConfig()
+  {
+    return attrConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getAttrConfig_Attribute()
+  {
+    return (EReference)attrConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getAttrConfig_Value()
+  {
+    return (EReference)attrConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getAttrClassConfig()
+  {
+    return attrClassConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getAttrClassConfig_Min()
+  {
+    return (EReference)attrClassConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EReference getAttrClassConfig_Max()
+  {
+    return (EReference)attrClassConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getAttrInstanceConfig()
+  {
+    return attrInstanceConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getRefPath()
+  {
+    return refPathEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getRefPath_Refs()
+  {
+    return (EAttribute)refPathEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getImport()
+  {
+    return importEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getImport_ImportedNamespace()
+  {
+    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getImport_ImportURI()
+  {
+    return (EAttribute)importEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getLiteral()
+  {
+    return literalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getBooleanLiteral()
+  {
+    return booleanLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getBooleanLiteral_IsTrue()
+  {
+    return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getNumberLiteral()
+  {
+    return numberLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getRealLiteral()
+  {
+    return realLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getRealLiteral_Value()
+  {
+    return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getIntLiteral()
+  {
+    return intLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getIntLiteral_Value()
+  {
+    return (EAttribute)intLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EClass getStringLiteral()
+  {
+    return stringLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public EAttribute getStringLiteral_Value()
+  {
+    return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+public ConfigFactory getConfigFactory()
   {
     return (ConfigFactory)getEFactoryInstance();
   }
@@ -189,11 +607,52 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     // Create classes and their features
     configModelEClass = createEClass(CONFIG_MODEL);
-    createEReference(configModelEClass, CONFIG_MODEL__ACTOR_CLASS_CONFIGS);
-    createEAttribute(configModelEClass, CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS);
+    createEReference(configModelEClass, CONFIG_MODEL__IMPORTS);
+    createEReference(configModelEClass, CONFIG_MODEL__CONFIG_ELEMENTS);
+
+    configElementEClass = createEClass(CONFIG_ELEMENT);
 
     actorClassConfigEClass = createEClass(ACTOR_CLASS_CONFIG);
-    createEReference(actorClassConfigEClass, ACTOR_CLASS_CONFIG__ACTOR_CLASS);
+    createEReference(actorClassConfigEClass, ACTOR_CLASS_CONFIG__ACTOR);
+    createEReference(actorClassConfigEClass, ACTOR_CLASS_CONFIG__ATTRIBUTES);
+
+    actorInstanceConfigEClass = createEClass(ACTOR_INSTANCE_CONFIG);
+    createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ROOT);
+    createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__PATH);
+    createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
+
+    attrConfigEClass = createEClass(ATTR_CONFIG);
+    createEReference(attrConfigEClass, ATTR_CONFIG__ATTRIBUTE);
+    createEReference(attrConfigEClass, ATTR_CONFIG__VALUE);
+
+    attrClassConfigEClass = createEClass(ATTR_CLASS_CONFIG);
+    createEReference(attrClassConfigEClass, ATTR_CLASS_CONFIG__MIN);
+    createEReference(attrClassConfigEClass, ATTR_CLASS_CONFIG__MAX);
+
+    attrInstanceConfigEClass = createEClass(ATTR_INSTANCE_CONFIG);
+
+    refPathEClass = createEClass(REF_PATH);
+    createEAttribute(refPathEClass, REF_PATH__REFS);
+
+    importEClass = createEClass(IMPORT);
+    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+    createEAttribute(importEClass, IMPORT__IMPORT_URI);
+
+    literalEClass = createEClass(LITERAL);
+
+    booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
+    createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__IS_TRUE);
+
+    numberLiteralEClass = createEClass(NUMBER_LITERAL);
+
+    realLiteralEClass = createEClass(REAL_LITERAL);
+    createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
+
+    intLiteralEClass = createEClass(INT_LITERAL);
+    createEAttribute(intLiteralEClass, INT_LITERAL__VALUE);
+
+    stringLiteralEClass = createEClass(STRING_LITERAL);
+    createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
   }
 
   /**
@@ -228,14 +687,68 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    actorClassConfigEClass.getESuperTypes().add(this.getConfigElement());
+    actorInstanceConfigEClass.getESuperTypes().add(this.getConfigElement());
+    attrClassConfigEClass.getESuperTypes().add(this.getAttrConfig());
+    attrInstanceConfigEClass.getESuperTypes().add(this.getAttrConfig());
+    booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
+    numberLiteralEClass.getESuperTypes().add(this.getLiteral());
+    realLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
+    intLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
+    stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 
     // Initialize classes and features; add operations and parameters
     initEClass(configModelEClass, ConfigModel.class, "ConfigModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getConfigModel_ActorClassConfigs(), this.getActorClassConfig(), null, "actorClassConfigs", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getConfigModel_ActorInstanceConfigs(), ecorePackage.getEString(), "actorInstanceConfigs", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConfigModel_Imports(), this.getImport(), null, "imports", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConfigModel_ConfigElements(), this.getConfigElement(), null, "configElements", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    addEOperation(configModelEClass, this.getActorClassConfig(), "getActorClassConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(configModelEClass, this.getActorInstanceConfig(), "getActorInstanceConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    initEClass(configElementEClass, ConfigElement.class, "ConfigElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(actorClassConfigEClass, ActorClassConfig.class, "ActorClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getActorClassConfig_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorClassConfig_Actor(), theRoomPackage.getActorClass(), null, "actor", null, 0, 1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorClassConfig_Attributes(), this.getAttrClassConfig(), null, "attributes", null, 0, -1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(actorInstanceConfigEClass, ActorInstanceConfig.class, "ActorInstanceConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getActorInstanceConfig_Root(), theRoomPackage.getSubSystemClass(), null, "root", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceConfig_Path(), this.getRefPath(), null, "path", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attrConfigEClass, AttrConfig.class, "AttrConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAttrConfig_Attribute(), theRoomPackage.getAttribute(), null, "attribute", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrConfig_Value(), this.getLiteral(), null, "value", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attrClassConfigEClass, AttrClassConfig.class, "AttrClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAttrClassConfig_Min(), this.getNumberLiteral(), null, "min", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrClassConfig_Max(), this.getNumberLiteral(), null, "max", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attrInstanceConfigEClass, AttrInstanceConfig.class, "AttrInstanceConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRefPath_Refs(), ecorePackage.getEString(), "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBooleanLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIntLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

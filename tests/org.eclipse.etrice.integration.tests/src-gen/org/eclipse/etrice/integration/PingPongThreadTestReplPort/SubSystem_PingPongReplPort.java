@@ -182,6 +182,8 @@ public class SubSystem_PingPongReplPort extends SubSystemClassBase{
 				null
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

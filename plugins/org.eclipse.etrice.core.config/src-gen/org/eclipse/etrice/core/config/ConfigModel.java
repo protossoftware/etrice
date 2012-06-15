@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getActorClassConfigs <em>Actor Class Configs</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getActorInstanceConfigs <em>Actor Instance Configs</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getConfigElements <em>Config Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,35 +30,53 @@ import org.eclipse.emf.ecore.EObject;
 public interface ConfigModel extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Actor Class Configs</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.config.ActorClassConfig}.
+   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.Import}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Actor Class Configs</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Actor Class Configs</em>' containment reference list.
-   * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_ActorClassConfigs()
+   * @return the value of the '<em>Imports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_Imports()
    * @model containment="true"
+   * @generated
+   */
+  EList<Import> getImports();
+
+  /**
+   * Returns the value of the '<em><b>Config Elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.ConfigElement}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Config Elements</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Config Elements</em>' containment reference list.
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_ConfigElements()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ConfigElement> getConfigElements();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();\r\n\t       \t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t       \t\t\t\tif(element instanceof ActorClassConfig)\r\n\t       \t\t\t\t\tlist.add((ActorClassConfig) element);\r\n\t       \t\t return list;'"
    * @generated
    */
   EList<ActorClassConfig> getActorClassConfigs();
 
   /**
-   * Returns the value of the '<em><b>Actor Instance Configs</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actor Instance Configs</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Actor Instance Configs</em>' attribute list.
-   * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_ActorInstanceConfigs()
-   * @model unique="false"
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof ActorInstanceConfig)\r\n\t\t\t\t\t\tlist.add((ActorInstanceConfig) element);\r\n\t\t\t\treturn list;'"
    * @generated
    */
-  EList<String> getActorInstanceConfigs();
+  EList<ActorInstanceConfig> getActorInstanceConfigs();
 
 } // ConfigModel
