@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class PedastrianLightWnd extends Frame {
 	// Konstructor
-	public PedastrianLightWnd (){
+	public PedastrianLightWnd (int ipPort){
 		super("PedestrianLightsGUI");		
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints gbc;
@@ -33,7 +33,7 @@ public class PedastrianLightWnd extends Frame {
 		layout.setConstraints(pedLights,gbc);
 		add(pedLights);
 		
-		statusLine.setText("listening on TCP Port 4444");
+		statusLine.setText("listening on TCP Port " + ipPort);
 		statusLine.setEditable(false);
 		statusLine.setFocusable(false);
 		gbc = makeGbc(0,0,2,1);
@@ -51,7 +51,7 @@ public class PedastrianLightWnd extends Frame {
 
 		// open socket 
 		try {
-			ServerSocket echod = new ServerSocket(4444);
+			ServerSocket echod = new ServerSocket(ipPort);
 			Socket socket = echod.accept();
 			statusLine.setText("connected !");
 
