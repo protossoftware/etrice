@@ -30,7 +30,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		// * getActor(Class|Instance)Config()
 		// * / ConfigModel:
 		//	imports+=Import* configElements+=ConfigElement*;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* configElements+=ConfigElement*
@@ -54,13 +53,13 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cActorClassConfigParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cActorInstanceConfigParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cProtocolClassConfigParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ConfigElement:
-		//	ActorClassConfig | ActorInstanceConfig;
-		@Override
+		//	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 		public ParserRule getRule() { return rule; }
 
-		//ActorClassConfig | ActorInstanceConfig
+		//ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ActorClassConfig
@@ -68,6 +67,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ActorInstanceConfig
 		public RuleCall getActorInstanceConfigParserRuleCall_1() { return cActorInstanceConfigParserRuleCall_1; }
+
+		//ProtocolClassConfig
+		public RuleCall getProtocolClassConfigParserRuleCall_2() { return cProtocolClassConfigParserRuleCall_2; }
 	}
 
 	public class ActorClassConfigElements extends AbstractParserRuleElementFinder {
@@ -87,7 +89,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * duplicates config, attributes
 		//	 * / ActorClassConfig:
 		//	"ActorClassConfig" actor=[room::ActorClass|FQN] "{" attributes+=AttrClassConfig* "}";
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"ActorClassConfig" actor=[room::ActorClass|FQN] "{" attributes+=AttrClassConfig* "}"
@@ -131,7 +132,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cAttributesAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_5_0 = (RuleCall)cAttributesAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cPortsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cPortsPortInstanceConfigParserRuleCall_6_0 = (RuleCall)cPortsAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		/// *
 		//	 * Validation: 
@@ -140,11 +143,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * Proposal:
 		//	 * attributes
 		//	 * / ActorInstanceConfig:
-		//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* "}";
-		@Override
+		//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+		//	ports+=PortInstanceConfig* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* "}"
+		//"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+		//ports+=PortInstanceConfig* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"ActorInstanceConfig"
@@ -177,8 +181,168 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//AttrInstanceConfig
 		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_5_0() { return cAttributesAttrInstanceConfigParserRuleCall_5_0; }
 
+		//ports+=PortInstanceConfig*
+		public Assignment getPortsAssignment_6() { return cPortsAssignment_6; }
+
+		//PortInstanceConfig
+		public RuleCall getPortsPortInstanceConfigParserRuleCall_6_0() { return cPortsPortInstanceConfigParserRuleCall_6_0; }
+
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
+
+	public class ProtocolClassConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ProtocolClassConfig");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cProtocolClassConfigKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cProtocolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cProtocolProtocolClassCrossReference_1_0 = (CrossReference)cProtocolAssignment_1.eContents().get(0);
+		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_1_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
+		private final Keyword cRegularKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cRegularAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cRegularPortClassConfigParserRuleCall_3_0_1_0 = (RuleCall)cRegularAssignment_3_0_1.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cUnorderedGroup_3.eContents().get(1);
+		private final Keyword cConjugateKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cConjugatedAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cConjugatedPortClassConfigParserRuleCall_3_1_1_0 = (RuleCall)cConjugatedAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//ProtocolClassConfig:
+		//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
+		//	conjugated=PortClassConfig)?) "}";
+		public ParserRule getRule() { return rule; }
+
+		//"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
+		//conjugated=PortClassConfig)?) "}"
+		public Group getGroup() { return cGroup; }
+
+		//"ProtocolClassConfig"
+		public Keyword getProtocolClassConfigKeyword_0() { return cProtocolClassConfigKeyword_0; }
+
+		//protocol=[room::ProtocolClass|FQN]
+		public Assignment getProtocolAssignment_1() { return cProtocolAssignment_1; }
+
+		//[room::ProtocolClass|FQN]
+		public CrossReference getProtocolProtocolClassCrossReference_1_0() { return cProtocolProtocolClassCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getProtocolProtocolClassFQNParserRuleCall_1_0_1() { return cProtocolProtocolClassFQNParserRuleCall_1_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//("regular" regular=PortClassConfig)? & ("conjugate" conjugated=PortClassConfig)?
+		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
+
+		//("regular" regular=PortClassConfig)?
+		public Group getGroup_3_0() { return cGroup_3_0; }
+
+		//"regular"
+		public Keyword getRegularKeyword_3_0_0() { return cRegularKeyword_3_0_0; }
+
+		//regular=PortClassConfig
+		public Assignment getRegularAssignment_3_0_1() { return cRegularAssignment_3_0_1; }
+
+		//PortClassConfig
+		public RuleCall getRegularPortClassConfigParserRuleCall_3_0_1_0() { return cRegularPortClassConfigParserRuleCall_3_0_1_0; }
+
+		//("conjugate" conjugated=PortClassConfig)?
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//"conjugate"
+		public Keyword getConjugateKeyword_3_1_0() { return cConjugateKeyword_3_1_0; }
+
+		//conjugated=PortClassConfig
+		public Assignment getConjugatedAssignment_3_1_1() { return cConjugatedAssignment_3_1_1; }
+
+		//PortClassConfig
+		public RuleCall getConjugatedPortClassConfigParserRuleCall_3_1_1_0() { return cConjugatedPortClassConfigParserRuleCall_3_1_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+
+	public class PortClassConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PortClassConfig");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cPortClassConfigAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPortKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cAttributesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAttributesAttrClassConfigParserRuleCall_3_0 = (RuleCall)cAttributesAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//PortClassConfig:
+		//	{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}";
+		public ParserRule getRule() { return rule; }
+
+		//{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}"
+		public Group getGroup() { return cGroup; }
+
+		//{PortClassConfig}
+		public Action getPortClassConfigAction_0() { return cPortClassConfigAction_0; }
+
+		//"Port"
+		public Keyword getPortKeyword_1() { return cPortKeyword_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//attributes+=AttrClassConfig*
+		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
+
+		//AttrClassConfig
+		public RuleCall getAttributesAttrClassConfigParserRuleCall_3_0() { return cAttributesAttrClassConfigParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+
+	public class PortInstanceConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PortInstanceConfig");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cInterfaceItemKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cItemInterfaceItemCrossReference_1_0 = (CrossReference)cItemAssignment_1.eContents().get(0);
+		private final RuleCall cItemInterfaceItemIDTerminalRuleCall_1_0_1 = (RuleCall)cItemInterfaceItemCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cAttributesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_3_0 = (RuleCall)cAttributesAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//PortInstanceConfig:
+		//	"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}";
+		public ParserRule getRule() { return rule; }
+
+		//"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}"
+		public Group getGroup() { return cGroup; }
+
+		//"InterfaceItem"
+		public Keyword getInterfaceItemKeyword_0() { return cInterfaceItemKeyword_0; }
+
+		//item=[room::InterfaceItem]
+		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
+
+		//[room::InterfaceItem]
+		public CrossReference getItemInterfaceItemCrossReference_1_0() { return cItemInterfaceItemCrossReference_1_0; }
+
+		//ID
+		public RuleCall getItemInterfaceItemIDTerminalRuleCall_1_0_1() { return cItemInterfaceItemIDTerminalRuleCall_1_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//attributes+=AttrInstanceConfig*
+		public Assignment getAttributesAssignment_3() { return cAttributesAssignment_3; }
+
+		//AttrInstanceConfig
+		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class AttrConfigElements extends AbstractParserRuleElementFinder {
@@ -194,7 +358,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * correct Literal
 		//	 * / AttrConfig:
 		//	AttrClassConfig | AttrInstanceConfig;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AttrClassConfig | AttrInstanceConfig
@@ -217,7 +380,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueLiteralParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_3_1 = (UnorderedGroup)cGroup_3.eContents().get(1);
@@ -238,18 +401,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * correct min, max type + available
 		//	 * min <= value <= max
 		//	 * if !value -> min <= attribute.defaultValue <= max
+		//	 * character length
 		//	 * 
 		//	 * / AttrClassConfig:
-		//	"attr" attribute=[room::Attribute] ("=" value=Literal)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
+		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
 		//	max=NumberLiteral)?) "}")?;
-		@Override
 		public ParserRule getRule() { return rule; }
 
-		//"attr" attribute=[room::Attribute] ("=" value=Literal)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
+		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
 		//max=NumberLiteral)?) "}")?
 		public Group getGroup() { return cGroup; }
 
-		//"attr"
+		//"Attr"
 		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
 
 		//attribute=[room::Attribute]
@@ -261,17 +424,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
 
-		//("=" value=Literal)?
+		//("=" value=LiteralArray)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
 
-		//value=Literal
+		//value=LiteralArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 
-		//Literal
-		public RuleCall getValueLiteralParserRuleCall_2_1_0() { return cValueLiteralParserRuleCall_2_1_0; }
+		//LiteralArray
+		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
 
 		//("{" (("min" "=" min=NumberLiteral)? & ("max" "=" max=NumberLiteral)?) "}")?
 		public Group getGroup_3() { return cGroup_3; }
@@ -326,17 +489,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueLiteralParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//AttrInstanceConfig:
-		//	"attr" attribute=[room::Attribute] ("=" value=Literal)?;
-		@Override
+		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?;
 		public ParserRule getRule() { return rule; }
 
-		//"attr" attribute=[room::Attribute] ("=" value=Literal)?
+		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?
 		public Group getGroup() { return cGroup; }
 
-		//"attr"
+		//"Attr"
 		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
 
 		//attribute=[room::Attribute]
@@ -348,17 +510,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
 
-		//("=" value=Literal)?
+		//("=" value=LiteralArray)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
 
-		//value=Literal
+		//value=LiteralArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 
-		//Literal
-		public RuleCall getValueLiteralParserRuleCall_2_1_0() { return cValueLiteralParserRuleCall_2_1_0; }
+		//LiteralArray
+		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
 	}
 
 	public class RefPathElements extends AbstractParserRuleElementFinder {
@@ -376,7 +538,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * for ActorInstanceConfig
 		//	 * / RefPath:
 		//	refs+=ID ("/" refs+=ID)*;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//refs+=ID ("/" refs+=ID)*
@@ -417,7 +578,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
 		//Import:
 		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING
@@ -459,7 +619,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ImportedFQN:
 		//	FQN ".*"?;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FQN ".*"?
@@ -482,7 +641,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//FQN:
 		//	ID ("." ID)*;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -501,12 +659,15 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 
-	public class LiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cBooleanLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cNumberLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cStringLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+	public class LiteralArrayElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralArray");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cLiteralsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cLiteralsLiteralParserRuleCall_0_0 = (RuleCall)cLiteralsAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cLiteralsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cLiteralsLiteralParserRuleCall_1_1_0 = (RuleCall)cLiteralsAssignment_1_1.eContents().get(0);
 		
 		//// -----------------------------------------------------------------------------
 		////enum Unit:
@@ -523,10 +684,42 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		////	HZ = 'Hz'|
 		////	KW
 		////;
+		//LiteralArray:
+		//	literals+=Literal ("," literals+=Literal)*;
+		public ParserRule getRule() { return rule; }
+
+		//literals+=Literal ("," literals+=Literal)*
+		public Group getGroup() { return cGroup; }
+
+		//literals+=Literal
+		public Assignment getLiteralsAssignment_0() { return cLiteralsAssignment_0; }
+
+		//Literal
+		public RuleCall getLiteralsLiteralParserRuleCall_0_0() { return cLiteralsLiteralParserRuleCall_0_0; }
+
+		//("," literals+=Literal)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//","
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+
+		//literals+=Literal
+		public Assignment getLiteralsAssignment_1_1() { return cLiteralsAssignment_1_1; }
+
+		//Literal
+		public RuleCall getLiteralsLiteralParserRuleCall_1_1_0() { return cLiteralsLiteralParserRuleCall_1_1_0; }
+	}
+
+	public class LiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cBooleanLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNumberLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cStringLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
 		//// Value Types for Attributes
 		//Literal:
 		//	BooleanLiteral | NumberLiteral | StringLiteral;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//BooleanLiteral | NumberLiteral | StringLiteral
@@ -553,7 +746,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//BooleanLiteral:
 		//	{BooleanLiteral} ("false" | isTrue?="true");
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{BooleanLiteral} ("false" | isTrue?="true")
@@ -583,7 +775,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//NumberLiteral:
 		//	IntLiteral | RealLiteral;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//IntLiteral | RealLiteral
@@ -605,7 +796,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RealLiteral:
 		//	{RealLiteral} value=Real;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{RealLiteral} value=Real
@@ -630,7 +820,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//IntLiteral:
 		//	{IntLiteral} value=Integer;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{IntLiteral} value=Integer
@@ -655,7 +844,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//StringLiteral:
 		//	{StringLiteral} value=STRING;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{StringLiteral} value=STRING
@@ -679,7 +867,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Integer returns ecore::EInt:
 		//	SignedInteger | Hexadecimal;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//SignedInteger | Hexadecimal
@@ -702,7 +889,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SignedInteger hidden():
 		//	("+" | "-")? INT;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("+" | "-")? INT
@@ -727,7 +913,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Hexadecimal hidden():
 		//	HEX;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//HEX
@@ -744,7 +929,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Real returns ecore::EDouble:
 		//	Decimal | DotDecimal | DecimalDot | DecimalExp;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Decimal | DotDecimal | DecimalDot | DecimalExp
@@ -775,7 +959,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Decimal hidden():
 		//	("+" | "-")? INT "." INT;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("+" | "-")? INT "." INT
@@ -811,7 +994,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DotDecimal hidden():
 		//	("+" | "-")? "." INT;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("+" | "-")? "." INT
@@ -844,7 +1026,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DecimalDot hidden():
 		//	("+" | "-")? INT ".";
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("+" | "-")? INT "."
@@ -883,7 +1064,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DecimalExp hidden():
 		//	("+" | "-")? INT "." INT ID ("+" | "-")? INT;
-		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("+" | "-")? INT "." INT ID ("+" | "-")? INT
@@ -928,6 +1108,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	private ConfigElementElements pConfigElement;
 	private ActorClassConfigElements pActorClassConfig;
 	private ActorInstanceConfigElements pActorInstanceConfig;
+	private ProtocolClassConfigElements pProtocolClassConfig;
+	private PortClassConfigElements pPortClassConfig;
+	private PortInstanceConfigElements pPortInstanceConfig;
 	private AttrConfigElements pAttrConfig;
 	private AttrClassConfigElements pAttrClassConfig;
 	private AttrInstanceConfigElements pAttrInstanceConfig;
@@ -935,6 +1118,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	private ImportElements pImport;
 	private ImportedFQNElements pImportedFQN;
 	private FQNElements pFQN;
+	private LiteralArrayElements pLiteralArray;
 	private LiteralElements pLiteral;
 	private BooleanLiteralElements pBooleanLiteral;
 	private NumberLiteralElements pNumberLiteral;
@@ -962,7 +1146,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 	}
 	
-	@Override
 	public Grammar getGrammar() {	
 		return grammarProvider.getGrammar(this);
 	}
@@ -987,7 +1170,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConfigElement:
-	//	ActorClassConfig | ActorInstanceConfig;
+	//	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
 		return (pConfigElement != null) ? pConfigElement : (pConfigElement = new ConfigElementElements());
 	}
@@ -1016,13 +1199,45 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	 * Proposal:
 	//	 * attributes
 	//	 * / ActorInstanceConfig:
-	//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* "}";
+	//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+	//	ports+=PortInstanceConfig* "}";
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {
 		return (pActorInstanceConfig != null) ? pActorInstanceConfig : (pActorInstanceConfig = new ActorInstanceConfigElements());
 	}
 	
 	public ParserRule getActorInstanceConfigRule() {
 		return getActorInstanceConfigAccess().getRule();
+	}
+
+	//ProtocolClassConfig:
+	//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
+	//	conjugated=PortClassConfig)?) "}";
+	public ProtocolClassConfigElements getProtocolClassConfigAccess() {
+		return (pProtocolClassConfig != null) ? pProtocolClassConfig : (pProtocolClassConfig = new ProtocolClassConfigElements());
+	}
+	
+	public ParserRule getProtocolClassConfigRule() {
+		return getProtocolClassConfigAccess().getRule();
+	}
+
+	//PortClassConfig:
+	//	{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}";
+	public PortClassConfigElements getPortClassConfigAccess() {
+		return (pPortClassConfig != null) ? pPortClassConfig : (pPortClassConfig = new PortClassConfigElements());
+	}
+	
+	public ParserRule getPortClassConfigRule() {
+		return getPortClassConfigAccess().getRule();
+	}
+
+	//PortInstanceConfig:
+	//	"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}";
+	public PortInstanceConfigElements getPortInstanceConfigAccess() {
+		return (pPortInstanceConfig != null) ? pPortInstanceConfig : (pPortInstanceConfig = new PortInstanceConfigElements());
+	}
+	
+	public ParserRule getPortInstanceConfigRule() {
+		return getPortInstanceConfigAccess().getRule();
 	}
 
 	/// *
@@ -1045,9 +1260,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	 * correct min, max type + available
 	//	 * min <= value <= max
 	//	 * if !value -> min <= attribute.defaultValue <= max
+	//	 * character length
 	//	 * 
 	//	 * / AttrClassConfig:
-	//	"attr" attribute=[room::Attribute] ("=" value=Literal)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
+	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
 	//	max=NumberLiteral)?) "}")?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
 		return (pAttrClassConfig != null) ? pAttrClassConfig : (pAttrClassConfig = new AttrClassConfigElements());
@@ -1058,7 +1274,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrInstanceConfig:
-	//	"attr" attribute=[room::Attribute] ("=" value=Literal)?;
+	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
 	}
@@ -1126,6 +1342,16 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	////	HZ = 'Hz'|
 	////	KW
 	////;
+	//LiteralArray:
+	//	literals+=Literal ("," literals+=Literal)*;
+	public LiteralArrayElements getLiteralArrayAccess() {
+		return (pLiteralArray != null) ? pLiteralArray : (pLiteralArray = new LiteralArrayElements());
+	}
+	
+	public ParserRule getLiteralArrayRule() {
+		return getLiteralArrayAccess().getRule();
+	}
+
 	//// Value Types for Attributes
 	//Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;

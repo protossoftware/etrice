@@ -64,12 +64,12 @@ public interface AttrConfig extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(Literal)
+   * @see #setValue(LiteralArray)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrConfig_Value()
    * @model containment="true"
    * @generated
    */
-  Literal getValue();
+  LiteralArray getValue();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.config.AttrConfig#getValue <em>Value</em>}' containment reference.
@@ -79,6 +79,6 @@ public interface AttrConfig extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(Literal value);
+  void setValue(LiteralArray value);
 
 } // AttrConfig

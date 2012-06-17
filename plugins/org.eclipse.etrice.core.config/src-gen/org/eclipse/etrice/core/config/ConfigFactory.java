@@ -63,6 +63,33 @@ public interface ConfigFactory extends EFactory
   ActorInstanceConfig createActorInstanceConfig();
 
   /**
+   * Returns a new object of class '<em>Protocol Class Config</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Protocol Class Config</em>'.
+   * @generated
+   */
+  ProtocolClassConfig createProtocolClassConfig();
+
+  /**
+   * Returns a new object of class '<em>Port Class Config</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Port Class Config</em>'.
+   * @generated
+   */
+  PortClassConfig createPortClassConfig();
+
+  /**
+   * Returns a new object of class '<em>Port Instance Config</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Port Instance Config</em>'.
+   * @generated
+   */
+  PortInstanceConfig createPortInstanceConfig();
+
+  /**
    * Returns a new object of class '<em>Attr Config</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -106,6 +133,15 @@ public interface ConfigFactory extends EFactory
    * @generated
    */
   Import createImport();
+
+  /**
+   * Returns a new object of class '<em>Literal Array</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal Array</em>'.
+   * @generated
+   */
+  LiteralArray createLiteralArray();
 
   /**
    * Returns a new object of class '<em>Literal</em>'.

@@ -50,6 +50,13 @@ public class Tester extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public TestProtocolConjPort getTestPort1 (){
+		return this.TestPort1;
+	}
+	public PTimeoutConjPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

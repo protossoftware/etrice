@@ -45,6 +45,10 @@ public class MrPongActor1 extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PingPongProtocolPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPorts <em>Ports</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,5 +98,21 @@ public interface ActorInstanceConfig extends ConfigElement
    * @generated
    */
   EList<AttrInstanceConfig> getAttributes();
+
+  /**
+   * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.PortInstanceConfig}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ports</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Ports()
+   * @model containment="true"
+   * @generated
+   */
+  EList<PortInstanceConfig> getPorts();
 
 } // ActorInstanceConfig

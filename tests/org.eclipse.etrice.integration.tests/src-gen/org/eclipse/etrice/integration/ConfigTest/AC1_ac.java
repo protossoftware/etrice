@@ -9,50 +9,35 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
-import org.eclipse.etrice.integration.ConfigTest.ProtocolForConfig.*;
-
-/*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
-/*--------------------- end user code ---------------------*/
+import org.eclipse.etrice.integration.ConfigTest.PortProtocol.*;
 
 
-public class Testee extends ActorClassBase {
+
+public class AC1_ac extends ActorClassBase {
 
 	
 	//--------------------- ports
-	protected ProtocolForConfigPort port1 = null;
+	protected PortProtocolConjPort Conj_port = null;
 	
 	//--------------------- saps
 	
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_port1 = 1;
+	public static final int IFITEM_Conj_port = 1;
 		
 	/*--------------------- attributes ---------------------*/
-	boolean bool1;
-	boolean bool2;
-	boolean bool3;
-	int int1;
-	int int2;
-	int int3;
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public Testee(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public AC1_ac(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("Testee");
+		setClassName("AC1_ac");
 		
 		// initialize attributes
-		bool1 = true;
-		bool2 = false;
-		bool3 = false;
-		int1 = 100;
-		int2 = 210;
-		int3 = 310;
 
 		// own ports
-		port1 = new ProtocolForConfigPort(this, "port1", IFITEM_port1, 0, port_addr[IFITEM_port1][0], peer_addr[IFITEM_port1][0]); 
+		Conj_port = new PortProtocolConjPort(this, "Conj_port", IFITEM_Conj_port, 0, port_addr[IFITEM_Conj_port][0], peer_addr[IFITEM_Conj_port][0]); 
 		
 		// own saps
 		
@@ -60,41 +45,9 @@ public class Testee extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
-	public void setBool1 (boolean bool1) {
-		 this.bool1 = bool1;
-	}
-	public boolean getBool1 () {
-		return this.bool1;
-	}
-	public void setBool2 (boolean bool2) {
-		 this.bool2 = bool2;
-	}
-	public boolean getBool2 () {
-		return this.bool2;
-	}
-	public void setBool3 (boolean bool3) {
-		 this.bool3 = bool3;
-	}
-	public boolean getBool3 () {
-		return this.bool3;
-	}
-	public void setInt1 (int int1) {
-		 this.int1 = int1;
-	}
-	public int getInt1 () {
-		return this.int1;
-	}
-	public void setInt2 (int int2) {
-		 this.int2 = int2;
-	}
-	public int getInt2 () {
-		return this.int2;
-	}
-	public void setInt3 (int int3) {
-		 this.int3 = int3;
-	}
-	public int getInt3 () {
-		return this.int3;
+	//--------------------- port getters
+	public PortProtocolConjPort getConj_port (){
+		return this.Conj_port;
 	}
 
 	//--------------------- lifecycle functions
@@ -140,15 +93,8 @@ public class Testee extends ActorClassBase {
 	
 	/* Entry and Exit Codes */
 	protected void entry_Done() {
-		if (bool1 != true || bool2 != false || bool3 != true ){
-			RTServices.getInstance().getSubSystem().testFinished(1);
-		}
-		else if (int1 != 100 || int2 != 210 || int3 != 301){
-			RTServices.getInstance().getSubSystem().testFinished(2);
-		}
-		else {
-			RTServices.getInstance().getSubSystem().testFinished(0);
-		}
+		if(Conj_port.varCheck())
+			Conj_port.portTestSucc();
 	}
 	
 	/* Action Codes */

@@ -69,6 +69,13 @@ public class MrPingActor extends ActorClassBase {
 	public int getPongCount () {
 		return this.pongCount;
 	}
+	//--------------------- port getters
+	public PingPongProtocolConjReplPort getPingPongPort (){
+		return this.PingPongPort;
+	}
+	public PTimeoutConjPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

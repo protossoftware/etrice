@@ -12,7 +12,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
 
-public class ConfigText_Top extends ActorClassBase {
+public class ConfigText_Top_ac extends ActorClassBase {
 
 	
 	//--------------------- ports
@@ -27,9 +27,9 @@ public class ConfigText_Top extends ActorClassBase {
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public ConfigText_Top(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public ConfigText_Top_ac(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("ConfigText_Top");
+		setClassName("ConfigText_Top_ac");
 		
 		// initialize attributes
 
@@ -41,6 +41,7 @@ public class ConfigText_Top extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){

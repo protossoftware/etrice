@@ -67,7 +67,7 @@ public class p_HFSM {
 	static public class p_HFSMPort extends PortBase {
 		// constructors
 		public p_HFSMPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public p_HFSMPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -432,7 +432,7 @@ public class p_HFSM {
 	static public class p_HFSMConjPort extends PortBase {
 		// constructors
 		public p_HFSMConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public p_HFSMConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {

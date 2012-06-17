@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
-import org.eclipse.etrice.core.config.Literal;
+import org.eclipse.etrice.core.config.LiteralArray;
 
 import org.eclipse.etrice.core.room.Attribute;
 
@@ -55,7 +55,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * @generated
    * @ordered
    */
-  protected Literal value;
+  protected LiteralArray value;
 
   /**
    * <!-- begin-user-doc -->
@@ -83,8 +83,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Attribute getAttribute()
+  public Attribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
     {
@@ -114,8 +113,7 @@ public Attribute getAttribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setAttribute(Attribute newAttribute)
+  public void setAttribute(Attribute newAttribute)
   {
     Attribute oldAttribute = attribute;
     attribute = newAttribute;
@@ -128,8 +126,7 @@ public void setAttribute(Attribute newAttribute)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Literal getValue()
+  public LiteralArray getValue()
   {
     return value;
   }
@@ -139,9 +136,9 @@ public Literal getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(Literal newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(LiteralArray newValue, NotificationChain msgs)
   {
-    Literal oldValue = value;
+    LiteralArray oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -156,8 +153,7 @@ public Literal getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(Literal newValue)
+  public void setValue(LiteralArray newValue)
   {
     if (newValue != value)
     {
@@ -222,7 +218,7 @@ public void setValue(Literal newValue)
         setAttribute((Attribute)newValue);
         return;
       case ConfigPackage.ATTR_CONFIG__VALUE:
-        setValue((Literal)newValue);
+        setValue((LiteralArray)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -242,7 +238,7 @@ public void setValue(Literal newValue)
         setAttribute((Attribute)null);
         return;
       case ConfigPackage.ATTR_CONFIG__VALUE:
-        setValue((Literal)null);
+        setValue((LiteralArray)null);
         return;
     }
     super.eUnset(featureID);

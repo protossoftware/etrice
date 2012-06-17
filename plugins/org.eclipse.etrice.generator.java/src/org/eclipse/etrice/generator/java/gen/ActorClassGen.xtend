@@ -136,6 +136,16 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 			//--------------------- attributes getter and setter
 			«attributeSettersGettersImplementation(ac.attributes, ac.name)»
+			//--------------------- port getters
+			«FOR ep : ac.getEndPorts()»
+				«ep.portClassName.getterImplementation(ep.name, ac.name)»
+			«ENDFOR»
+			«FOR sap : ac.strSAPs»
+				«sap.portClassName.getterImplementation(sap.name, ac.name)»
+			«ENDFOR»
+			«FOR svc : ac.serviceImplementations»
+				«svc.portClassName.getterImplementation(svc.spp.name, ac.name)»
+			«ENDFOR»
 		
 			//--------------------- lifecycle functions
 			public void init(){

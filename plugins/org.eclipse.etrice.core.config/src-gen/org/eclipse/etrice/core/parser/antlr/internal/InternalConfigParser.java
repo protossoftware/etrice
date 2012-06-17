@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalConfigParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_HEX", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'ActorClassConfig'", "'{'", "'}'", "'ActorInstanceConfig'", "'/'", "'attr'", "'='", "'min'", "'max'", "'import'", "'from'", "'model'", "'.*'", "'.'", "'false'", "'true'", "'+'", "'-'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_HEX", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'ActorClassConfig'", "'{'", "'}'", "'ActorInstanceConfig'", "'/'", "'ProtocolClassConfig'", "'regular'", "'conjugate'", "'Port'", "'InterfaceItem'", "'Attr'", "'='", "'min'", "'max'", "'import'", "'from'", "'model'", "'.*'", "'.'", "','", "'false'", "'true'", "'+'", "'-'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -38,11 +38,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
     public static final int RULE_SL_COMMENT=9;
     public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=8;
+    public static final int T__30=30;
     public static final int T__19=19;
+    public static final int T__31=31;
     public static final int RULE_HEX=7;
     public static final int RULE_STRING=5;
+    public static final int T__32=32;
+    public static final int T__33=33;
     public static final int T__16=16;
+    public static final int T__34=34;
     public static final int T__15=15;
+    public static final int T__35=35;
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int T__12=12;
@@ -150,7 +156,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==21) ) {
+                if ( (LA1_0==26) ) {
                     alt1=1;
                 }
 
@@ -199,7 +205,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==12||LA2_0==15) ) {
+                if ( (LA2_0==12||LA2_0==15||LA2_0==17) ) {
                     alt2=1;
                 }
 
@@ -299,7 +305,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConfigElement"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:133:1: ruleConfigElement returns [EObject current=null] : (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:133:1: ruleConfigElement returns [EObject current=null] : (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig | this_ProtocolClassConfig_2= ruleProtocolClassConfig ) ;
     public final EObject ruleConfigElement() throws RecognitionException {
         EObject current = null;
 
@@ -307,29 +313,40 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
         EObject this_ActorInstanceConfig_1 = null;
 
+        EObject this_ProtocolClassConfig_2 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:136:28: ( (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:137:1: (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:136:28: ( (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig | this_ProtocolClassConfig_2= ruleProtocolClassConfig ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:137:1: (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig | this_ProtocolClassConfig_2= ruleProtocolClassConfig )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:137:1: (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0==12) ) {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:137:1: (this_ActorClassConfig_0= ruleActorClassConfig | this_ActorInstanceConfig_1= ruleActorInstanceConfig | this_ProtocolClassConfig_2= ruleProtocolClassConfig )
+            int alt3=3;
+            switch ( input.LA(1) ) {
+            case 12:
+                {
                 alt3=1;
-            }
-            else if ( (LA3_0==15) ) {
+                }
+                break;
+            case 15:
+                {
                 alt3=2;
-            }
-            else {
+                }
+                break;
+            case 17:
+                {
+                alt3=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
+
             switch (alt3) {
                 case 1 :
                     // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:138:5: this_ActorClassConfig_0= ruleActorClassConfig
@@ -367,6 +384,24 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
+                case 3 :
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:158:5: this_ProtocolClassConfig_2= ruleProtocolClassConfig
+                    {
+                     
+                            newCompositeNode(grammarAccess.getConfigElementAccess().getProtocolClassConfigParserRuleCall_2()); 
+                        
+                    pushFollow(FOLLOW_ruleProtocolClassConfig_in_ruleConfigElement301);
+                    this_ProtocolClassConfig_2=ruleProtocolClassConfig();
+
+                    state._fsp--;
+
+                     
+                            current = this_ProtocolClassConfig_2; 
+                            afterParserOrEnumRuleCall();
+                        
+
+                    }
+                    break;
 
             }
 
@@ -388,7 +423,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleActorClassConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:164:1: entryRuleActorClassConfig returns [EObject current=null] : iv_ruleActorClassConfig= ruleActorClassConfig EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:174:1: entryRuleActorClassConfig returns [EObject current=null] : iv_ruleActorClassConfig= ruleActorClassConfig EOF ;
     public final EObject entryRuleActorClassConfig() throws RecognitionException {
         EObject current = null;
 
@@ -396,17 +431,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:165:2: (iv_ruleActorClassConfig= ruleActorClassConfig EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:166:2: iv_ruleActorClassConfig= ruleActorClassConfig EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:175:2: (iv_ruleActorClassConfig= ruleActorClassConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:176:2: iv_ruleActorClassConfig= ruleActorClassConfig EOF
             {
              newCompositeNode(grammarAccess.getActorClassConfigRule()); 
-            pushFollow(FOLLOW_ruleActorClassConfig_in_entryRuleActorClassConfig309);
+            pushFollow(FOLLOW_ruleActorClassConfig_in_entryRuleActorClassConfig336);
             iv_ruleActorClassConfig=ruleActorClassConfig();
 
             state._fsp--;
 
              current =iv_ruleActorClassConfig; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorClassConfig319); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleActorClassConfig346); 
 
             }
 
@@ -424,7 +459,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleActorClassConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:173:1: ruleActorClassConfig returns [EObject current=null] : (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:183:1: ruleActorClassConfig returns [EObject current=null] : (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) ;
     public final EObject ruleActorClassConfig() throws RecognitionException {
         EObject current = null;
 
@@ -437,21 +472,21 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:176:28: ( (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:177:1: (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:186:28: ( (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:187:1: (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:177:1: (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:177:3: otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}'
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:187:1: (otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:187:3: otherlv_0= 'ActorClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}'
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleActorClassConfig356); 
+            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleActorClassConfig383); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getActorClassConfigAccess().getActorClassConfigKeyword_0());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:181:1: ( ( ruleFQN ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:182:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:191:1: ( ( ruleFQN ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:192:1: ( ruleFQN )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:182:1: ( ruleFQN )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:183:3: ruleFQN
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:192:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:193:3: ruleFQN
             {
 
             			if (current==null) {
@@ -461,7 +496,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getActorClassConfigAccess().getActorActorClassCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleActorClassConfig379);
+            pushFollow(FOLLOW_ruleFQN_in_ruleActorClassConfig406);
             ruleFQN();
 
             state._fsp--;
@@ -475,32 +510,32 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleActorClassConfig391); 
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleActorClassConfig418); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getActorClassConfigAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:200:1: ( (lv_attributes_3_0= ruleAttrClassConfig ) )*
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:210:1: ( (lv_attributes_3_0= ruleAttrClassConfig ) )*
             loop4:
             do {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==17) ) {
+                if ( (LA4_0==22) ) {
                     alt4=1;
                 }
 
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:201:1: (lv_attributes_3_0= ruleAttrClassConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:211:1: (lv_attributes_3_0= ruleAttrClassConfig )
             	    {
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:201:1: (lv_attributes_3_0= ruleAttrClassConfig )
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:202:3: lv_attributes_3_0= ruleAttrClassConfig
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:211:1: (lv_attributes_3_0= ruleAttrClassConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:212:3: lv_attributes_3_0= ruleAttrClassConfig
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getActorClassConfigAccess().getAttributesAttrClassConfigParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttrClassConfig_in_ruleActorClassConfig412);
+            	    pushFollow(FOLLOW_ruleAttrClassConfig_in_ruleActorClassConfig439);
             	    lv_attributes_3_0=ruleAttrClassConfig();
 
             	    state._fsp--;
@@ -528,7 +563,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleActorClassConfig425); 
+            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleActorClassConfig452); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getActorClassConfigAccess().getRightCurlyBracketKeyword_4());
                 
@@ -553,7 +588,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleActorInstanceConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:230:1: entryRuleActorInstanceConfig returns [EObject current=null] : iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:240:1: entryRuleActorInstanceConfig returns [EObject current=null] : iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF ;
     public final EObject entryRuleActorInstanceConfig() throws RecognitionException {
         EObject current = null;
 
@@ -561,17 +596,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:231:2: (iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:232:2: iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:241:2: (iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:242:2: iv_ruleActorInstanceConfig= ruleActorInstanceConfig EOF
             {
              newCompositeNode(grammarAccess.getActorInstanceConfigRule()); 
-            pushFollow(FOLLOW_ruleActorInstanceConfig_in_entryRuleActorInstanceConfig461);
+            pushFollow(FOLLOW_ruleActorInstanceConfig_in_entryRuleActorInstanceConfig488);
             iv_ruleActorInstanceConfig=ruleActorInstanceConfig();
 
             state._fsp--;
 
              current =iv_ruleActorInstanceConfig; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorInstanceConfig471); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleActorInstanceConfig498); 
 
             }
 
@@ -589,37 +624,39 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleActorInstanceConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:239:1: ruleActorInstanceConfig returns [EObject current=null] : (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* otherlv_6= '}' ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:249:1: ruleActorInstanceConfig returns [EObject current=null] : (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* ( (lv_ports_6_0= rulePortInstanceConfig ) )* otherlv_7= '}' ) ;
     public final EObject ruleActorInstanceConfig() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
-        Token otherlv_6=null;
+        Token otherlv_7=null;
         EObject lv_path_3_0 = null;
 
         EObject lv_attributes_5_0 = null;
+
+        EObject lv_ports_6_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:242:28: ( (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* otherlv_6= '}' ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:243:1: (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* otherlv_6= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:252:28: ( (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* ( (lv_ports_6_0= rulePortInstanceConfig ) )* otherlv_7= '}' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:253:1: (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* ( (lv_ports_6_0= rulePortInstanceConfig ) )* otherlv_7= '}' )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:243:1: (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* otherlv_6= '}' )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:243:3: otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* otherlv_6= '}'
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:253:1: (otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* ( (lv_ports_6_0= rulePortInstanceConfig ) )* otherlv_7= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:253:3: otherlv_0= 'ActorInstanceConfig' ( ( ruleFQN ) ) otherlv_2= '/' ( (lv_path_3_0= ruleRefPath ) ) otherlv_4= '{' ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )* ( (lv_ports_6_0= rulePortInstanceConfig ) )* otherlv_7= '}'
             {
-            otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleActorInstanceConfig508); 
+            otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleActorInstanceConfig535); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getActorInstanceConfigAccess().getActorInstanceConfigKeyword_0());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:247:1: ( ( ruleFQN ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:248:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:257:1: ( ( ruleFQN ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:258:1: ( ruleFQN )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:248:1: ( ruleFQN )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:249:3: ruleFQN
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:258:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:259:3: ruleFQN
             {
 
             			if (current==null) {
@@ -629,7 +666,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getActorInstanceConfigAccess().getRootSubSystemClassCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleActorInstanceConfig531);
+            pushFollow(FOLLOW_ruleFQN_in_ruleActorInstanceConfig558);
             ruleFQN();
 
             state._fsp--;
@@ -643,20 +680,20 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleActorInstanceConfig543); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleActorInstanceConfig570); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getActorInstanceConfigAccess().getSolidusKeyword_2());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:266:1: ( (lv_path_3_0= ruleRefPath ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:267:1: (lv_path_3_0= ruleRefPath )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:276:1: ( (lv_path_3_0= ruleRefPath ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:277:1: (lv_path_3_0= ruleRefPath )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:267:1: (lv_path_3_0= ruleRefPath )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:268:3: lv_path_3_0= ruleRefPath
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:277:1: (lv_path_3_0= ruleRefPath )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:278:3: lv_path_3_0= ruleRefPath
             {
              
             	        newCompositeNode(grammarAccess.getActorInstanceConfigAccess().getPathRefPathParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleRefPath_in_ruleActorInstanceConfig564);
+            pushFollow(FOLLOW_ruleRefPath_in_ruleActorInstanceConfig591);
             lv_path_3_0=ruleRefPath();
 
             state._fsp--;
@@ -678,32 +715,32 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleActorInstanceConfig576); 
+            otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleActorInstanceConfig603); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getActorInstanceConfigAccess().getLeftCurlyBracketKeyword_4());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:288:1: ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )*
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:298:1: ( (lv_attributes_5_0= ruleAttrInstanceConfig ) )*
             loop5:
             do {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( (LA5_0==17) ) {
+                if ( (LA5_0==22) ) {
                     alt5=1;
                 }
 
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:289:1: (lv_attributes_5_0= ruleAttrInstanceConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:299:1: (lv_attributes_5_0= ruleAttrInstanceConfig )
             	    {
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:289:1: (lv_attributes_5_0= ruleAttrInstanceConfig )
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:290:3: lv_attributes_5_0= ruleAttrInstanceConfig
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:299:1: (lv_attributes_5_0= ruleAttrInstanceConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:300:3: lv_attributes_5_0= ruleAttrInstanceConfig
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getActorInstanceConfigAccess().getAttributesAttrInstanceConfigParserRuleCall_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttrInstanceConfig_in_ruleActorInstanceConfig597);
+            	    pushFollow(FOLLOW_ruleAttrInstanceConfig_in_ruleActorInstanceConfig624);
             	    lv_attributes_5_0=ruleAttrInstanceConfig();
 
             	    state._fsp--;
@@ -731,9 +768,58 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,14,FOLLOW_14_in_ruleActorInstanceConfig610); 
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:316:3: ( (lv_ports_6_0= rulePortInstanceConfig ) )*
+            loop6:
+            do {
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                	newLeafNode(otherlv_6, grammarAccess.getActorInstanceConfigAccess().getRightCurlyBracketKeyword_6());
+                if ( (LA6_0==21) ) {
+                    alt6=1;
+                }
+
+
+                switch (alt6) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:317:1: (lv_ports_6_0= rulePortInstanceConfig )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:317:1: (lv_ports_6_0= rulePortInstanceConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:318:3: lv_ports_6_0= rulePortInstanceConfig
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getActorInstanceConfigAccess().getPortsPortInstanceConfigParserRuleCall_6_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_rulePortInstanceConfig_in_ruleActorInstanceConfig646);
+            	    lv_ports_6_0=rulePortInstanceConfig();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getActorInstanceConfigRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"ports",
+            	            		lv_ports_6_0, 
+            	            		"PortInstanceConfig");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
+            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleActorInstanceConfig659); 
+
+                	newLeafNode(otherlv_7, grammarAccess.getActorInstanceConfigAccess().getRightCurlyBracketKeyword_7());
                 
 
             }
@@ -755,8 +841,634 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleActorInstanceConfig"
 
 
+    // $ANTLR start "entryRuleProtocolClassConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:346:1: entryRuleProtocolClassConfig returns [EObject current=null] : iv_ruleProtocolClassConfig= ruleProtocolClassConfig EOF ;
+    public final EObject entryRuleProtocolClassConfig() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleProtocolClassConfig = null;
+
+
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:347:2: (iv_ruleProtocolClassConfig= ruleProtocolClassConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:348:2: iv_ruleProtocolClassConfig= ruleProtocolClassConfig EOF
+            {
+             newCompositeNode(grammarAccess.getProtocolClassConfigRule()); 
+            pushFollow(FOLLOW_ruleProtocolClassConfig_in_entryRuleProtocolClassConfig695);
+            iv_ruleProtocolClassConfig=ruleProtocolClassConfig();
+
+            state._fsp--;
+
+             current =iv_ruleProtocolClassConfig; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProtocolClassConfig705); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleProtocolClassConfig"
+
+
+    // $ANTLR start "ruleProtocolClassConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:355:1: ruleProtocolClassConfig returns [EObject current=null] : (otherlv_0= 'ProtocolClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) ) otherlv_8= '}' ) ;
+    public final EObject ruleProtocolClassConfig() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
+        Token otherlv_8=null;
+        EObject lv_regular_5_0 = null;
+
+        EObject lv_conjugated_7_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:358:28: ( (otherlv_0= 'ProtocolClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) ) otherlv_8= '}' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:359:1: (otherlv_0= 'ProtocolClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) ) otherlv_8= '}' )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:359:1: (otherlv_0= 'ProtocolClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) ) otherlv_8= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:359:3: otherlv_0= 'ProtocolClassConfig' ( ( ruleFQN ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) ) otherlv_8= '}'
+            {
+            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleProtocolClassConfig742); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getProtocolClassConfigAccess().getProtocolClassConfigKeyword_0());
+                
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:363:1: ( ( ruleFQN ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:364:1: ( ruleFQN )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:364:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:365:3: ruleFQN
+            {
+
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getProtocolClassConfigRule());
+            	        }
+                    
+             
+            	        newCompositeNode(grammarAccess.getProtocolClassConfigAccess().getProtocolProtocolClassCrossReference_1_0()); 
+            	    
+            pushFollow(FOLLOW_ruleFQN_in_ruleProtocolClassConfig765);
+            ruleFQN();
+
+            state._fsp--;
+
+             
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleProtocolClassConfig777); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getProtocolClassConfigAccess().getLeftCurlyBracketKeyword_2());
+                
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:382:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:384:1: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:384:1: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:385:2: ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* )
+            {
+             
+            	  getUnorderedGroupHelper().enter(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3());
+            	
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:388:2: ( ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:389:3: ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )*
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:389:3: ( ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) ) )*
+            loop7:
+            do {
+                int alt7=3;
+                int LA7_0 = input.LA(1);
+
+                if ( LA7_0 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 0) ) {
+                    alt7=1;
+                }
+                else if ( LA7_0 ==19 && getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 1) ) {
+                    alt7=2;
+                }
+
+
+                switch (alt7) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:391:4: ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:391:4: ({...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:392:5: {...}? => ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 0) ) {
+            	        throw new FailedPredicateException(input, "ruleProtocolClassConfig", "getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 0)");
+            	    }
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:392:116: ( ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:393:6: ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) )
+            	    {
+            	     
+            	    	 				  getUnorderedGroupHelper().select(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 0);
+            	    	 				
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:396:6: ({...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:396:7: {...}? => (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleProtocolClassConfig", "true");
+            	    }
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:396:16: (otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:396:18: otherlv_4= 'regular' ( (lv_regular_5_0= rulePortClassConfig ) )
+            	    {
+            	    otherlv_4=(Token)match(input,18,FOLLOW_18_in_ruleProtocolClassConfig835); 
+
+            	        	newLeafNode(otherlv_4, grammarAccess.getProtocolClassConfigAccess().getRegularKeyword_3_0_0());
+            	        
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:400:1: ( (lv_regular_5_0= rulePortClassConfig ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:401:1: (lv_regular_5_0= rulePortClassConfig )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:401:1: (lv_regular_5_0= rulePortClassConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:402:3: lv_regular_5_0= rulePortClassConfig
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getProtocolClassConfigAccess().getRegularPortClassConfigParserRuleCall_3_0_1_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_rulePortClassConfig_in_ruleProtocolClassConfig856);
+            	    lv_regular_5_0=rulePortClassConfig();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getProtocolClassConfigRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"regular",
+            	            		lv_regular_5_0, 
+            	            		"PortClassConfig");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3());
+            	    	 				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:425:4: ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:425:4: ({...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:426:5: {...}? => ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 1) ) {
+            	        throw new FailedPredicateException(input, "ruleProtocolClassConfig", "getUnorderedGroupHelper().canSelect(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 1)");
+            	    }
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:426:116: ( ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:427:6: ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) )
+            	    {
+            	     
+            	    	 				  getUnorderedGroupHelper().select(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 1);
+            	    	 				
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:430:6: ({...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:430:7: {...}? => (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleProtocolClassConfig", "true");
+            	    }
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:430:16: (otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:430:18: otherlv_6= 'conjugate' ( (lv_conjugated_7_0= rulePortClassConfig ) )
+            	    {
+            	    otherlv_6=(Token)match(input,19,FOLLOW_19_in_ruleProtocolClassConfig924); 
+
+            	        	newLeafNode(otherlv_6, grammarAccess.getProtocolClassConfigAccess().getConjugateKeyword_3_1_0());
+            	        
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:434:1: ( (lv_conjugated_7_0= rulePortClassConfig ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:435:1: (lv_conjugated_7_0= rulePortClassConfig )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:435:1: (lv_conjugated_7_0= rulePortClassConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:436:3: lv_conjugated_7_0= rulePortClassConfig
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getProtocolClassConfigAccess().getConjugatedPortClassConfigParserRuleCall_3_1_1_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_rulePortClassConfig_in_ruleProtocolClassConfig945);
+            	    lv_conjugated_7_0=rulePortClassConfig();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getProtocolClassConfigRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"conjugated",
+            	            		lv_conjugated_7_0, 
+            	            		"PortClassConfig");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3());
+            	    	 				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop7;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+             
+            	  getUnorderedGroupHelper().leave(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3());
+            	
+
+            }
+
+            otherlv_8=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClassConfig998); 
+
+                	newLeafNode(otherlv_8, grammarAccess.getProtocolClassConfigAccess().getRightCurlyBracketKeyword_4());
+                
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleProtocolClassConfig"
+
+
+    // $ANTLR start "entryRulePortClassConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:478:1: entryRulePortClassConfig returns [EObject current=null] : iv_rulePortClassConfig= rulePortClassConfig EOF ;
+    public final EObject entryRulePortClassConfig() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePortClassConfig = null;
+
+
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:479:2: (iv_rulePortClassConfig= rulePortClassConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:480:2: iv_rulePortClassConfig= rulePortClassConfig EOF
+            {
+             newCompositeNode(grammarAccess.getPortClassConfigRule()); 
+            pushFollow(FOLLOW_rulePortClassConfig_in_entryRulePortClassConfig1034);
+            iv_rulePortClassConfig=rulePortClassConfig();
+
+            state._fsp--;
+
+             current =iv_rulePortClassConfig; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePortClassConfig1044); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePortClassConfig"
+
+
+    // $ANTLR start "rulePortClassConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:487:1: rulePortClassConfig returns [EObject current=null] : ( () otherlv_1= 'Port' otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) ;
+    public final EObject rulePortClassConfig() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_attributes_3_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:490:28: ( ( () otherlv_1= 'Port' otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:491:1: ( () otherlv_1= 'Port' otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:491:1: ( () otherlv_1= 'Port' otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:491:2: () otherlv_1= 'Port' otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrClassConfig ) )* otherlv_4= '}'
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:491:2: ()
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:492:5: 
+            {
+
+                    current = forceCreateModelElement(
+                        grammarAccess.getPortClassConfigAccess().getPortClassConfigAction_0(),
+                        current);
+                
+
+            }
+
+            otherlv_1=(Token)match(input,20,FOLLOW_20_in_rulePortClassConfig1090); 
+
+                	newLeafNode(otherlv_1, grammarAccess.getPortClassConfigAccess().getPortKeyword_1());
+                
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_rulePortClassConfig1102); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getPortClassConfigAccess().getLeftCurlyBracketKeyword_2());
+                
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:505:1: ( (lv_attributes_3_0= ruleAttrClassConfig ) )*
+            loop8:
+            do {
+                int alt8=2;
+                int LA8_0 = input.LA(1);
+
+                if ( (LA8_0==22) ) {
+                    alt8=1;
+                }
+
+
+                switch (alt8) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:506:1: (lv_attributes_3_0= ruleAttrClassConfig )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:506:1: (lv_attributes_3_0= ruleAttrClassConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:507:3: lv_attributes_3_0= ruleAttrClassConfig
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getPortClassConfigAccess().getAttributesAttrClassConfigParserRuleCall_3_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleAttrClassConfig_in_rulePortClassConfig1123);
+            	    lv_attributes_3_0=ruleAttrClassConfig();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getPortClassConfigRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"attributes",
+            	            		lv_attributes_3_0, 
+            	            		"AttrClassConfig");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop8;
+                }
+            } while (true);
+
+            otherlv_4=(Token)match(input,14,FOLLOW_14_in_rulePortClassConfig1136); 
+
+                	newLeafNode(otherlv_4, grammarAccess.getPortClassConfigAccess().getRightCurlyBracketKeyword_4());
+                
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePortClassConfig"
+
+
+    // $ANTLR start "entryRulePortInstanceConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:535:1: entryRulePortInstanceConfig returns [EObject current=null] : iv_rulePortInstanceConfig= rulePortInstanceConfig EOF ;
+    public final EObject entryRulePortInstanceConfig() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePortInstanceConfig = null;
+
+
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:536:2: (iv_rulePortInstanceConfig= rulePortInstanceConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:537:2: iv_rulePortInstanceConfig= rulePortInstanceConfig EOF
+            {
+             newCompositeNode(grammarAccess.getPortInstanceConfigRule()); 
+            pushFollow(FOLLOW_rulePortInstanceConfig_in_entryRulePortInstanceConfig1172);
+            iv_rulePortInstanceConfig=rulePortInstanceConfig();
+
+            state._fsp--;
+
+             current =iv_rulePortInstanceConfig; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePortInstanceConfig1182); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePortInstanceConfig"
+
+
+    // $ANTLR start "rulePortInstanceConfig"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:544:1: rulePortInstanceConfig returns [EObject current=null] : (otherlv_0= 'InterfaceItem' ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )* otherlv_4= '}' ) ;
+    public final EObject rulePortInstanceConfig() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_attributes_3_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:547:28: ( (otherlv_0= 'InterfaceItem' ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )* otherlv_4= '}' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:548:1: (otherlv_0= 'InterfaceItem' ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )* otherlv_4= '}' )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:548:1: (otherlv_0= 'InterfaceItem' ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )* otherlv_4= '}' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:548:3: otherlv_0= 'InterfaceItem' ( (otherlv_1= RULE_ID ) ) otherlv_2= '{' ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )* otherlv_4= '}'
+            {
+            otherlv_0=(Token)match(input,21,FOLLOW_21_in_rulePortInstanceConfig1219); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getPortInstanceConfigAccess().getInterfaceItemKeyword_0());
+                
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:552:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:1: (otherlv_1= RULE_ID )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:554:3: otherlv_1= RULE_ID
+            {
+
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getPortInstanceConfigRule());
+            	        }
+                    
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePortInstanceConfig1239); 
+
+            		newLeafNode(otherlv_1, grammarAccess.getPortInstanceConfigAccess().getItemInterfaceItemCrossReference_1_0()); 
+            	
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_rulePortInstanceConfig1251); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getPortInstanceConfigAccess().getLeftCurlyBracketKeyword_2());
+                
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:569:1: ( (lv_attributes_3_0= ruleAttrInstanceConfig ) )*
+            loop9:
+            do {
+                int alt9=2;
+                int LA9_0 = input.LA(1);
+
+                if ( (LA9_0==22) ) {
+                    alt9=1;
+                }
+
+
+                switch (alt9) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:570:1: (lv_attributes_3_0= ruleAttrInstanceConfig )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:570:1: (lv_attributes_3_0= ruleAttrInstanceConfig )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:571:3: lv_attributes_3_0= ruleAttrInstanceConfig
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getPortInstanceConfigAccess().getAttributesAttrInstanceConfigParserRuleCall_3_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleAttrInstanceConfig_in_rulePortInstanceConfig1272);
+            	    lv_attributes_3_0=ruleAttrInstanceConfig();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getPortInstanceConfigRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"attributes",
+            	            		lv_attributes_3_0, 
+            	            		"AttrInstanceConfig");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop9;
+                }
+            } while (true);
+
+            otherlv_4=(Token)match(input,14,FOLLOW_14_in_rulePortInstanceConfig1285); 
+
+                	newLeafNode(otherlv_4, grammarAccess.getPortInstanceConfigAccess().getRightCurlyBracketKeyword_4());
+                
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePortInstanceConfig"
+
+
     // $ANTLR start "entryRuleAttrClassConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:320:1: entryRuleAttrClassConfig returns [EObject current=null] : iv_ruleAttrClassConfig= ruleAttrClassConfig EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:601:1: entryRuleAttrClassConfig returns [EObject current=null] : iv_ruleAttrClassConfig= ruleAttrClassConfig EOF ;
     public final EObject entryRuleAttrClassConfig() throws RecognitionException {
         EObject current = null;
 
@@ -764,17 +1476,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:321:2: (iv_ruleAttrClassConfig= ruleAttrClassConfig EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:322:2: iv_ruleAttrClassConfig= ruleAttrClassConfig EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:602:2: (iv_ruleAttrClassConfig= ruleAttrClassConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:603:2: iv_ruleAttrClassConfig= ruleAttrClassConfig EOF
             {
              newCompositeNode(grammarAccess.getAttrClassConfigRule()); 
-            pushFollow(FOLLOW_ruleAttrClassConfig_in_entryRuleAttrClassConfig648);
+            pushFollow(FOLLOW_ruleAttrClassConfig_in_entryRuleAttrClassConfig1323);
             iv_ruleAttrClassConfig=ruleAttrClassConfig();
 
             state._fsp--;
 
              current =iv_ruleAttrClassConfig; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAttrClassConfig658); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAttrClassConfig1333); 
 
             }
 
@@ -792,7 +1504,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAttrClassConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:329:1: ruleAttrClassConfig returns [EObject current=null] : (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:610:1: ruleAttrClassConfig returns [EObject current=null] : (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? ) ;
     public final EObject ruleAttrClassConfig() throws RecognitionException {
         EObject current = null;
 
@@ -815,28 +1527,28 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:332:28: ( (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:333:1: (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:613:28: ( (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:1: (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:333:1: (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:333:3: otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )?
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:1: (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:3: otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )?
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleAttrClassConfig695); 
+            otherlv_0=(Token)match(input,22,FOLLOW_22_in_ruleAttrClassConfig1370); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAttrClassConfigAccess().getAttrKeyword_0());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:337:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:338:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:619:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:338:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:339:3: otherlv_1= RULE_ID
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:619:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:620:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getAttrClassConfigRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttrClassConfig715); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttrClassConfig1390); 
 
             		newLeafNode(otherlv_1, grammarAccess.getAttrClassConfigAccess().getAttributeAttributeCrossReference_1_0()); 
             	
@@ -846,32 +1558,32 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:350:2: (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:631:2: (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA6_0==18) ) {
-                alt6=1;
+            if ( (LA10_0==23) ) {
+                alt10=1;
             }
-            switch (alt6) {
+            switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:350:4: otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:631:4: otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) )
                     {
-                    otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleAttrClassConfig728); 
+                    otherlv_2=(Token)match(input,23,FOLLOW_23_in_ruleAttrClassConfig1403); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAttrClassConfigAccess().getEqualsSignKeyword_2_0());
                         
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:354:1: ( (lv_value_3_0= ruleLiteral ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:355:1: (lv_value_3_0= ruleLiteral )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:635:1: ( (lv_value_3_0= ruleLiteralArray ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:636:1: (lv_value_3_0= ruleLiteralArray )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:355:1: (lv_value_3_0= ruleLiteral )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:356:3: lv_value_3_0= ruleLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:636:1: (lv_value_3_0= ruleLiteralArray )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:637:3: lv_value_3_0= ruleLiteralArray
                     {
                      
-                    	        newCompositeNode(grammarAccess.getAttrClassConfigAccess().getValueLiteralParserRuleCall_2_1_0()); 
+                    	        newCompositeNode(grammarAccess.getAttrClassConfigAccess().getValueLiteralArrayParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleLiteral_in_ruleAttrClassConfig749);
-                    lv_value_3_0=ruleLiteral();
+                    pushFollow(FOLLOW_ruleLiteralArray_in_ruleAttrClassConfig1424);
+                    lv_value_3_0=ruleLiteralArray();
 
                     state._fsp--;
 
@@ -883,7 +1595,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"value",
                             		lv_value_3_0, 
-                            		"Literal");
+                            		"LiteralArray");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -898,90 +1610,90 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:372:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:653:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}' )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA8_0==13) ) {
-                alt8=1;
+            if ( (LA12_0==13) ) {
+                alt12=1;
             }
-            switch (alt8) {
+            switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:372:6: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:653:6: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) ) otherlv_12= '}'
                     {
-                    otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleAttrClassConfig764); 
+                    otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleAttrClassConfig1439); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getAttrClassConfigAccess().getLeftCurlyBracketKeyword_3_0());
                         
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:376:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:378:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:657:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:659:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:378:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:379:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:659:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:660:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* )
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1());
                     	
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:382:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:383:3: ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )*
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:663:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )* )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:664:3: ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )*
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:383:3: ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )*
-                    loop7:
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:664:3: ( ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) ) )*
+                    loop11:
                     do {
-                        int alt7=3;
-                        int LA7_0 = input.LA(1);
+                        int alt11=3;
+                        int LA11_0 = input.LA(1);
 
-                        if ( LA7_0 ==19 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 0) ) {
-                            alt7=1;
+                        if ( LA11_0 ==24 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 0) ) {
+                            alt11=1;
                         }
-                        else if ( LA7_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 1) ) {
-                            alt7=2;
+                        else if ( LA11_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 1) ) {
+                            alt11=2;
                         }
 
 
-                        switch (alt7) {
+                        switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:385:4: ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:666:4: ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:385:4: ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:386:5: {...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:666:4: ({...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:667:5: {...}? => ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleAttrClassConfig", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:386:114: ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:387:6: ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:667:114: ( ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:668:6: ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:390:6: ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:390:7: {...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:671:6: ({...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:671:7: {...}? => (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleAttrClassConfig", "true");
                     	    }
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:390:16: (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:390:18: otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:671:16: (otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:671:18: otherlv_6= 'min' otherlv_7= '=' ( (lv_min_8_0= ruleNumberLiteral ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,19,FOLLOW_19_in_ruleAttrClassConfig822); 
+                    	    otherlv_6=(Token)match(input,24,FOLLOW_24_in_ruleAttrClassConfig1497); 
 
                     	        	newLeafNode(otherlv_6, grammarAccess.getAttrClassConfigAccess().getMinKeyword_3_1_0_0());
                     	        
-                    	    otherlv_7=(Token)match(input,18,FOLLOW_18_in_ruleAttrClassConfig834); 
+                    	    otherlv_7=(Token)match(input,23,FOLLOW_23_in_ruleAttrClassConfig1509); 
 
                     	        	newLeafNode(otherlv_7, grammarAccess.getAttrClassConfigAccess().getEqualsSignKeyword_3_1_0_1());
                     	        
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:398:1: ( (lv_min_8_0= ruleNumberLiteral ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:399:1: (lv_min_8_0= ruleNumberLiteral )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:679:1: ( (lv_min_8_0= ruleNumberLiteral ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:680:1: (lv_min_8_0= ruleNumberLiteral )
                     	    {
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:399:1: (lv_min_8_0= ruleNumberLiteral )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:400:3: lv_min_8_0= ruleNumberLiteral
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:680:1: (lv_min_8_0= ruleNumberLiteral )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:681:3: lv_min_8_0= ruleNumberLiteral
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getAttrClassConfigAccess().getMinNumberLiteralParserRuleCall_3_1_0_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig855);
+                    	    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig1530);
                     	    lv_min_8_0=ruleNumberLiteral();
 
                     	    state._fsp--;
@@ -1022,47 +1734,47 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:423:4: ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:704:4: ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:423:4: ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:424:5: {...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:704:4: ({...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:705:5: {...}? => ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleAttrClassConfig", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:424:114: ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:425:6: ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:705:114: ( ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:706:6: ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:428:6: ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:428:7: {...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:709:6: ({...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:709:7: {...}? => (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleAttrClassConfig", "true");
                     	    }
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:428:16: (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:428:18: otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:709:16: (otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:709:18: otherlv_9= 'max' otherlv_10= '=' ( (lv_max_11_0= ruleNumberLiteral ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,20,FOLLOW_20_in_ruleAttrClassConfig923); 
+                    	    otherlv_9=(Token)match(input,25,FOLLOW_25_in_ruleAttrClassConfig1598); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getAttrClassConfigAccess().getMaxKeyword_3_1_1_0());
                     	        
-                    	    otherlv_10=(Token)match(input,18,FOLLOW_18_in_ruleAttrClassConfig935); 
+                    	    otherlv_10=(Token)match(input,23,FOLLOW_23_in_ruleAttrClassConfig1610); 
 
                     	        	newLeafNode(otherlv_10, grammarAccess.getAttrClassConfigAccess().getEqualsSignKeyword_3_1_1_1());
                     	        
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:436:1: ( (lv_max_11_0= ruleNumberLiteral ) )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:437:1: (lv_max_11_0= ruleNumberLiteral )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:717:1: ( (lv_max_11_0= ruleNumberLiteral ) )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:718:1: (lv_max_11_0= ruleNumberLiteral )
                     	    {
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:437:1: (lv_max_11_0= ruleNumberLiteral )
-                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:438:3: lv_max_11_0= ruleNumberLiteral
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:718:1: (lv_max_11_0= ruleNumberLiteral )
+                    	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:719:3: lv_max_11_0= ruleNumberLiteral
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getAttrClassConfigAccess().getMaxNumberLiteralParserRuleCall_3_1_1_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig956);
+                    	    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig1631);
                     	    lv_max_11_0=ruleNumberLiteral();
 
                     	    state._fsp--;
@@ -1104,7 +1816,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop7;
+                    	    break loop11;
                         }
                     } while (true);
 
@@ -1120,7 +1832,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_12=(Token)match(input,14,FOLLOW_14_in_ruleAttrClassConfig1009); 
+                    otherlv_12=(Token)match(input,14,FOLLOW_14_in_ruleAttrClassConfig1684); 
 
                         	newLeafNode(otherlv_12, grammarAccess.getAttrClassConfigAccess().getRightCurlyBracketKeyword_3_2());
                         
@@ -1151,7 +1863,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAttrInstanceConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:480:1: entryRuleAttrInstanceConfig returns [EObject current=null] : iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:761:1: entryRuleAttrInstanceConfig returns [EObject current=null] : iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF ;
     public final EObject entryRuleAttrInstanceConfig() throws RecognitionException {
         EObject current = null;
 
@@ -1159,17 +1871,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:481:2: (iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:482:2: iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:762:2: (iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:763:2: iv_ruleAttrInstanceConfig= ruleAttrInstanceConfig EOF
             {
              newCompositeNode(grammarAccess.getAttrInstanceConfigRule()); 
-            pushFollow(FOLLOW_ruleAttrInstanceConfig_in_entryRuleAttrInstanceConfig1047);
+            pushFollow(FOLLOW_ruleAttrInstanceConfig_in_entryRuleAttrInstanceConfig1722);
             iv_ruleAttrInstanceConfig=ruleAttrInstanceConfig();
 
             state._fsp--;
 
              current =iv_ruleAttrInstanceConfig; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAttrInstanceConfig1057); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAttrInstanceConfig1732); 
 
             }
 
@@ -1187,7 +1899,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAttrInstanceConfig"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:489:1: ruleAttrInstanceConfig returns [EObject current=null] : (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:770:1: ruleAttrInstanceConfig returns [EObject current=null] : (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? ) ;
     public final EObject ruleAttrInstanceConfig() throws RecognitionException {
         EObject current = null;
 
@@ -1200,28 +1912,28 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:492:28: ( (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:493:1: (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:773:28: ( (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:774:1: (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:493:1: (otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )? )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:493:3: otherlv_0= 'attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )?
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:774:1: (otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:774:3: otherlv_0= 'Attr' ( (otherlv_1= RULE_ID ) ) (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )?
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleAttrInstanceConfig1094); 
+            otherlv_0=(Token)match(input,22,FOLLOW_22_in_ruleAttrInstanceConfig1769); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAttrInstanceConfigAccess().getAttrKeyword_0());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:497:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:498:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:778:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:779:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:498:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:499:3: otherlv_1= RULE_ID
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:779:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:780:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getAttrInstanceConfigRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttrInstanceConfig1114); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttrInstanceConfig1789); 
 
             		newLeafNode(otherlv_1, grammarAccess.getAttrInstanceConfigAccess().getAttributeAttributeCrossReference_1_0()); 
             	
@@ -1231,32 +1943,32 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:510:2: (otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) ) )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:791:2: (otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) ) )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA9_0==18) ) {
-                alt9=1;
+            if ( (LA13_0==23) ) {
+                alt13=1;
             }
-            switch (alt9) {
+            switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:510:4: otherlv_2= '=' ( (lv_value_3_0= ruleLiteral ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:791:4: otherlv_2= '=' ( (lv_value_3_0= ruleLiteralArray ) )
                     {
-                    otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleAttrInstanceConfig1127); 
+                    otherlv_2=(Token)match(input,23,FOLLOW_23_in_ruleAttrInstanceConfig1802); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAttrInstanceConfigAccess().getEqualsSignKeyword_2_0());
                         
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:514:1: ( (lv_value_3_0= ruleLiteral ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:515:1: (lv_value_3_0= ruleLiteral )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:795:1: ( (lv_value_3_0= ruleLiteralArray ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:796:1: (lv_value_3_0= ruleLiteralArray )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:515:1: (lv_value_3_0= ruleLiteral )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:516:3: lv_value_3_0= ruleLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:796:1: (lv_value_3_0= ruleLiteralArray )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:797:3: lv_value_3_0= ruleLiteralArray
                     {
                      
-                    	        newCompositeNode(grammarAccess.getAttrInstanceConfigAccess().getValueLiteralParserRuleCall_2_1_0()); 
+                    	        newCompositeNode(grammarAccess.getAttrInstanceConfigAccess().getValueLiteralArrayParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleLiteral_in_ruleAttrInstanceConfig1148);
-                    lv_value_3_0=ruleLiteral();
+                    pushFollow(FOLLOW_ruleLiteralArray_in_ruleAttrInstanceConfig1823);
+                    lv_value_3_0=ruleLiteralArray();
 
                     state._fsp--;
 
@@ -1268,7 +1980,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"value",
                             		lv_value_3_0, 
-                            		"Literal");
+                            		"LiteralArray");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1304,7 +2016,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRefPath"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:540:1: entryRuleRefPath returns [EObject current=null] : iv_ruleRefPath= ruleRefPath EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:821:1: entryRuleRefPath returns [EObject current=null] : iv_ruleRefPath= ruleRefPath EOF ;
     public final EObject entryRuleRefPath() throws RecognitionException {
         EObject current = null;
 
@@ -1312,17 +2024,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:541:2: (iv_ruleRefPath= ruleRefPath EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:542:2: iv_ruleRefPath= ruleRefPath EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:822:2: (iv_ruleRefPath= ruleRefPath EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:823:2: iv_ruleRefPath= ruleRefPath EOF
             {
              newCompositeNode(grammarAccess.getRefPathRule()); 
-            pushFollow(FOLLOW_ruleRefPath_in_entryRuleRefPath1186);
+            pushFollow(FOLLOW_ruleRefPath_in_entryRuleRefPath1861);
             iv_ruleRefPath=ruleRefPath();
 
             state._fsp--;
 
              current =iv_ruleRefPath; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefPath1196); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefPath1871); 
 
             }
 
@@ -1340,7 +2052,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRefPath"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:549:1: ruleRefPath returns [EObject current=null] : ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:830:1: ruleRefPath returns [EObject current=null] : ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) ;
     public final EObject ruleRefPath() throws RecognitionException {
         EObject current = null;
 
@@ -1351,19 +2063,19 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:552:28: ( ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:833:28: ( ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:834:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:2: ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:834:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:834:2: ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:553:2: ( (lv_refs_0_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:554:1: (lv_refs_0_0= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:834:2: ( (lv_refs_0_0= RULE_ID ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:835:1: (lv_refs_0_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:554:1: (lv_refs_0_0= RULE_ID )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:555:3: lv_refs_0_0= RULE_ID
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:835:1: (lv_refs_0_0= RULE_ID )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:836:3: lv_refs_0_0= RULE_ID
             {
-            lv_refs_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath1238); 
+            lv_refs_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath1913); 
 
             			newLeafNode(lv_refs_0_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_0_0()); 
             		
@@ -1383,32 +2095,32 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:571:2: (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
-            loop10:
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:852:2: (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
+            loop14:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( (LA10_0==16) ) {
-                    alt10=1;
+                if ( (LA14_0==16) ) {
+                    alt14=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt14) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:571:4: otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:852:4: otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) )
             	    {
-            	    otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleRefPath1256); 
+            	    otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleRefPath1931); 
 
             	        	newLeafNode(otherlv_1, grammarAccess.getRefPathAccess().getSolidusKeyword_1_0());
             	        
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:575:1: ( (lv_refs_2_0= RULE_ID ) )
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:576:1: (lv_refs_2_0= RULE_ID )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:856:1: ( (lv_refs_2_0= RULE_ID ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:857:1: (lv_refs_2_0= RULE_ID )
             	    {
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:576:1: (lv_refs_2_0= RULE_ID )
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:577:3: lv_refs_2_0= RULE_ID
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:857:1: (lv_refs_2_0= RULE_ID )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:858:3: lv_refs_2_0= RULE_ID
             	    {
-            	    lv_refs_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath1273); 
+            	    lv_refs_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath1948); 
 
             	    			newLeafNode(lv_refs_2_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_1_1_0()); 
             	    		
@@ -1433,7 +2145,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop14;
                 }
             } while (true);
 
@@ -1458,7 +2170,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:601:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:882:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1466,17 +2178,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:602:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:603:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:883:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:884:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport1316);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport1991);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport1326); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport2001); 
 
             }
 
@@ -1494,7 +2206,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:610:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:891:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1508,49 +2220,49 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:613:28: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:894:28: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:895:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:614:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:895:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:895:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleImport1363); 
+            otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleImport2038); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' )
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' )
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA11_0==RULE_ID) ) {
-                alt11=1;
+            if ( (LA15_0==RULE_ID) ) {
+                alt15=1;
             }
-            else if ( (LA11_0==23) ) {
-                alt11=2;
+            else if ( (LA15_0==28) ) {
+                alt15=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 11, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
-            switch (alt11) {
+            switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from'
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:618:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:619:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:1: (lv_importedNamespace_1_0= ruleImportedFQN )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:619:1: (lv_importedNamespace_1_0= ruleImportedFQN )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:620:3: lv_importedNamespace_1_0= ruleImportedFQN
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:901:3: lv_importedNamespace_1_0= ruleImportedFQN
                     {
                      
                     	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport1386);
+                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport2061);
                     lv_importedNamespace_1_0=ruleImportedFQN();
 
                     state._fsp--;
@@ -1572,7 +2284,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleImport1398); 
+                    otherlv_2=(Token)match(input,27,FOLLOW_27_in_ruleImport2073); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
                         
@@ -1583,9 +2295,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:641:7: otherlv_3= 'model'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:922:7: otherlv_3= 'model'
                     {
-                    otherlv_3=(Token)match(input,23,FOLLOW_23_in_ruleImport1417); 
+                    otherlv_3=(Token)match(input,28,FOLLOW_28_in_ruleImport2092); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
                         
@@ -1595,13 +2307,13 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:645:2: ( (lv_importURI_4_0= RULE_STRING ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:646:1: (lv_importURI_4_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:926:2: ( (lv_importURI_4_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:927:1: (lv_importURI_4_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:646:1: (lv_importURI_4_0= RULE_STRING )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:647:3: lv_importURI_4_0= RULE_STRING
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:927:1: (lv_importURI_4_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:928:3: lv_importURI_4_0= RULE_STRING
             {
-            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport1435); 
+            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport2110); 
 
             			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
             		
@@ -1642,7 +2354,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:671:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:952:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -1650,17 +2362,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:672:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:673:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:953:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:954:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1477);
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN2152);
             iv_ruleImportedFQN=ruleImportedFQN();
 
             state._fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN1488); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN2163); 
 
             }
 
@@ -1678,7 +2390,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportedFQN"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:680:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:961:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1689,16 +2401,16 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:683:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:684:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:964:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:965:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:684:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:685:5: this_FQN_0= ruleFQN (kw= '.*' )?
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:965:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:966:5: this_FQN_0= ruleFQN (kw= '.*' )?
             {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN1535);
+            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN2210);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -1709,18 +2421,18 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
              
                     afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:695:1: (kw= '.*' )?
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:976:1: (kw= '.*' )?
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA12_0==24) ) {
-                alt12=1;
+            if ( (LA16_0==29) ) {
+                alt16=1;
             }
-            switch (alt12) {
+            switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:696:2: kw= '.*'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:977:2: kw= '.*'
                     {
-                    kw=(Token)match(input,24,FOLLOW_24_in_ruleImportedFQN1554); 
+                    kw=(Token)match(input,29,FOLLOW_29_in_ruleImportedFQN2229); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
@@ -1752,7 +2464,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:709:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:990:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -1760,17 +2472,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:710:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:711:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:991:2: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:992:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1597);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN2272);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1608); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN2283); 
 
             }
 
@@ -1788,7 +2500,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:718:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:999:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1799,40 +2511,40 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:721:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:722:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1002:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1003:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:722:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:722:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1003:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1003:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1648); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN2323); 
 
             		current.merge(this_ID_0);
                 
              
                 newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:729:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop13:
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1010:1: (kw= '.' this_ID_2= RULE_ID )*
+            loop17:
             do {
-                int alt13=2;
-                int LA13_0 = input.LA(1);
+                int alt17=2;
+                int LA17_0 = input.LA(1);
 
-                if ( (LA13_0==25) ) {
-                    alt13=1;
+                if ( (LA17_0==30) ) {
+                    alt17=1;
                 }
 
 
-                switch (alt13) {
+                switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:730:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1011:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,25,FOLLOW_25_in_ruleFQN1667); 
+            	    kw=(Token)match(input,30,FOLLOW_30_in_ruleFQN2342); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1682); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN2357); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -1844,7 +2556,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop13;
+            	    break loop17;
                 }
             } while (true);
 
@@ -1868,8 +2580,174 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleFQN"
 
 
+    // $ANTLR start "entryRuleLiteralArray"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1031:1: entryRuleLiteralArray returns [EObject current=null] : iv_ruleLiteralArray= ruleLiteralArray EOF ;
+    public final EObject entryRuleLiteralArray() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleLiteralArray = null;
+
+
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1032:2: (iv_ruleLiteralArray= ruleLiteralArray EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1033:2: iv_ruleLiteralArray= ruleLiteralArray EOF
+            {
+             newCompositeNode(grammarAccess.getLiteralArrayRule()); 
+            pushFollow(FOLLOW_ruleLiteralArray_in_entryRuleLiteralArray2404);
+            iv_ruleLiteralArray=ruleLiteralArray();
+
+            state._fsp--;
+
+             current =iv_ruleLiteralArray; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteralArray2414); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleLiteralArray"
+
+
+    // $ANTLR start "ruleLiteralArray"
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1040:1: ruleLiteralArray returns [EObject current=null] : ( ( (lv_literals_0_0= ruleLiteral ) ) (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )* ) ;
+    public final EObject ruleLiteralArray() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        EObject lv_literals_0_0 = null;
+
+        EObject lv_literals_2_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1043:28: ( ( ( (lv_literals_0_0= ruleLiteral ) ) (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )* ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1044:1: ( ( (lv_literals_0_0= ruleLiteral ) ) (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )* )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1044:1: ( ( (lv_literals_0_0= ruleLiteral ) ) (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )* )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1044:2: ( (lv_literals_0_0= ruleLiteral ) ) (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )*
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1044:2: ( (lv_literals_0_0= ruleLiteral ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1045:1: (lv_literals_0_0= ruleLiteral )
+            {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1045:1: (lv_literals_0_0= ruleLiteral )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1046:3: lv_literals_0_0= ruleLiteral
+            {
+             
+            	        newCompositeNode(grammarAccess.getLiteralArrayAccess().getLiteralsLiteralParserRuleCall_0_0()); 
+            	    
+            pushFollow(FOLLOW_ruleLiteral_in_ruleLiteralArray2460);
+            lv_literals_0_0=ruleLiteral();
+
+            state._fsp--;
+
+
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getLiteralArrayRule());
+            	        }
+                   		add(
+                   			current, 
+                   			"literals",
+                    		lv_literals_0_0, 
+                    		"Literal");
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1062:2: (otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) ) )*
+            loop18:
+            do {
+                int alt18=2;
+                int LA18_0 = input.LA(1);
+
+                if ( (LA18_0==31) ) {
+                    alt18=1;
+                }
+
+
+                switch (alt18) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1062:4: otherlv_1= ',' ( (lv_literals_2_0= ruleLiteral ) )
+            	    {
+            	    otherlv_1=(Token)match(input,31,FOLLOW_31_in_ruleLiteralArray2473); 
+
+            	        	newLeafNode(otherlv_1, grammarAccess.getLiteralArrayAccess().getCommaKeyword_1_0());
+            	        
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1066:1: ( (lv_literals_2_0= ruleLiteral ) )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1067:1: (lv_literals_2_0= ruleLiteral )
+            	    {
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1067:1: (lv_literals_2_0= ruleLiteral )
+            	    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1068:3: lv_literals_2_0= ruleLiteral
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getLiteralArrayAccess().getLiteralsLiteralParserRuleCall_1_1_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleLiteral_in_ruleLiteralArray2494);
+            	    lv_literals_2_0=ruleLiteral();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getLiteralArrayRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"literals",
+            	            		lv_literals_2_0, 
+            	            		"Literal");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop18;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLiteralArray"
+
+
     // $ANTLR start "entryRuleLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:750:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1092:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
     public final EObject entryRuleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -1877,17 +2755,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:751:2: (iv_ruleLiteral= ruleLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:752:2: iv_ruleLiteral= ruleLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1093:2: (iv_ruleLiteral= ruleLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1094:2: iv_ruleLiteral= ruleLiteral EOF
             {
              newCompositeNode(grammarAccess.getLiteralRule()); 
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral1729);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral2532);
             iv_ruleLiteral=ruleLiteral();
 
             state._fsp--;
 
              current =iv_ruleLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral1739); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral2542); 
 
             }
 
@@ -1905,7 +2783,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:759:1: ruleLiteral returns [EObject current=null] : (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1101:1: ruleLiteral returns [EObject current=null] : (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) ;
     public final EObject ruleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -1919,47 +2797,47 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:762:28: ( (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:763:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1104:28: ( (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1105:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:763:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
-            int alt14=3;
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1105:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
+            int alt19=3;
             switch ( input.LA(1) ) {
-            case 26:
-            case 27:
+            case 32:
+            case 33:
                 {
-                alt14=1;
+                alt19=1;
                 }
                 break;
             case RULE_INT:
             case RULE_HEX:
-            case 25:
-            case 28:
-            case 29:
+            case 30:
+            case 34:
+            case 35:
                 {
-                alt14=2;
+                alt19=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt14=3;
+                alt19=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 14, 0, input);
+                    new NoViableAltException("", 19, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt14) {
+            switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:764:5: this_BooleanLiteral_0= ruleBooleanLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1106:5: this_BooleanLiteral_0= ruleBooleanLiteral
                     {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getBooleanLiteralParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleBooleanLiteral_in_ruleLiteral1786);
+                    pushFollow(FOLLOW_ruleBooleanLiteral_in_ruleLiteral2589);
                     this_BooleanLiteral_0=ruleBooleanLiteral();
 
                     state._fsp--;
@@ -1972,12 +2850,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:774:5: this_NumberLiteral_1= ruleNumberLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1116:5: this_NumberLiteral_1= ruleNumberLiteral
                     {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getNumberLiteralParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleLiteral1813);
+                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleLiteral2616);
                     this_NumberLiteral_1=ruleNumberLiteral();
 
                     state._fsp--;
@@ -1990,12 +2868,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:784:5: this_StringLiteral_2= ruleStringLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1126:5: this_StringLiteral_2= ruleStringLiteral
                     {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral1840);
+                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral2643);
                     this_StringLiteral_2=ruleStringLiteral();
 
                     state._fsp--;
@@ -2028,7 +2906,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBooleanLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:800:1: entryRuleBooleanLiteral returns [EObject current=null] : iv_ruleBooleanLiteral= ruleBooleanLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1142:1: entryRuleBooleanLiteral returns [EObject current=null] : iv_ruleBooleanLiteral= ruleBooleanLiteral EOF ;
     public final EObject entryRuleBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2036,17 +2914,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:801:2: (iv_ruleBooleanLiteral= ruleBooleanLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:802:2: iv_ruleBooleanLiteral= ruleBooleanLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1143:2: (iv_ruleBooleanLiteral= ruleBooleanLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1144:2: iv_ruleBooleanLiteral= ruleBooleanLiteral EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRule()); 
-            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1875);
+            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral2678);
             iv_ruleBooleanLiteral=ruleBooleanLiteral();
 
             state._fsp--;
 
              current =iv_ruleBooleanLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral1885); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral2688); 
 
             }
 
@@ -2064,7 +2942,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBooleanLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:809:1: ruleBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1151:1: ruleBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
     public final EObject ruleBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2074,14 +2952,14 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:812:28: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:813:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1154:28: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1155:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:813:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:813:2: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1155:1: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1155:2: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:813:2: ()
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:814:5: 
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1155:2: ()
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1156:5: 
             {
 
                     current = forceCreateModelElement(
@@ -2091,27 +2969,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:819:2: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1161:2: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA15_0==26) ) {
-                alt15=1;
+            if ( (LA20_0==32) ) {
+                alt20=1;
             }
-            else if ( (LA15_0==27) ) {
-                alt15=2;
+            else if ( (LA20_0==33) ) {
+                alt20=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 15, 0, input);
+                    new NoViableAltException("", 20, 0, input);
 
                 throw nvae;
             }
-            switch (alt15) {
+            switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:819:4: otherlv_1= 'false'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1161:4: otherlv_1= 'false'
                     {
-                    otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleBooleanLiteral1932); 
+                    otherlv_1=(Token)match(input,32,FOLLOW_32_in_ruleBooleanLiteral2735); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0());
                         
@@ -2119,15 +2997,15 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:824:6: ( (lv_isTrue_2_0= 'true' ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1166:6: ( (lv_isTrue_2_0= 'true' ) )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:824:6: ( (lv_isTrue_2_0= 'true' ) )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:825:1: (lv_isTrue_2_0= 'true' )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1166:6: ( (lv_isTrue_2_0= 'true' ) )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1167:1: (lv_isTrue_2_0= 'true' )
                     {
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:825:1: (lv_isTrue_2_0= 'true' )
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:826:3: lv_isTrue_2_0= 'true'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1167:1: (lv_isTrue_2_0= 'true' )
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1168:3: lv_isTrue_2_0= 'true'
                     {
-                    lv_isTrue_2_0=(Token)match(input,27,FOLLOW_27_in_ruleBooleanLiteral1956); 
+                    lv_isTrue_2_0=(Token)match(input,33,FOLLOW_33_in_ruleBooleanLiteral2759); 
 
                             newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
                         
@@ -2170,7 +3048,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNumberLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:847:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1189:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
     public final EObject entryRuleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2178,17 +3056,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:848:2: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:849:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1190:2: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1191:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
             {
              newCompositeNode(grammarAccess.getNumberLiteralRule()); 
-            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral2006);
+            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral2809);
             iv_ruleNumberLiteral=ruleNumberLiteral();
 
             state._fsp--;
 
              current =iv_ruleNumberLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral2016); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral2819); 
 
             }
 
@@ -2206,7 +3084,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNumberLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:856:1: ruleNumberLiteral returns [EObject current=null] : (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1198:1: ruleNumberLiteral returns [EObject current=null] : (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) ;
     public final EObject ruleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2218,69 +3096,69 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:859:28: ( (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:860:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1201:28: ( (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1202:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:860:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
-            int alt16=2;
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1202:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
+            int alt21=2;
             switch ( input.LA(1) ) {
-            case 28:
+            case 34:
                 {
-                int LA16_1 = input.LA(2);
+                int LA21_1 = input.LA(2);
 
-                if ( (LA16_1==RULE_INT) ) {
-                    int LA16_3 = input.LA(3);
+                if ( (LA21_1==RULE_INT) ) {
+                    int LA21_3 = input.LA(3);
 
-                    if ( (LA16_3==25) ) {
-                        alt16=2;
+                    if ( (LA21_3==30) ) {
+                        alt21=2;
                     }
-                    else if ( (LA16_3==EOF||(LA16_3>=13 && LA16_3<=14)||LA16_3==17||(LA16_3>=19 && LA16_3<=20)) ) {
-                        alt16=1;
+                    else if ( (LA21_3==EOF||(LA21_3>=13 && LA21_3<=14)||(LA21_3>=21 && LA21_3<=22)||(LA21_3>=24 && LA21_3<=25)||LA21_3==31) ) {
+                        alt21=1;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 16, 3, input);
+                            new NoViableAltException("", 21, 3, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA16_1==25) ) {
-                    alt16=2;
+                else if ( (LA21_1==30) ) {
+                    alt21=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 16, 1, input);
+                        new NoViableAltException("", 21, 1, input);
 
                     throw nvae;
                 }
                 }
                 break;
-            case 29:
+            case 35:
                 {
-                int LA16_2 = input.LA(2);
+                int LA21_2 = input.LA(2);
 
-                if ( (LA16_2==RULE_INT) ) {
-                    int LA16_3 = input.LA(3);
+                if ( (LA21_2==RULE_INT) ) {
+                    int LA21_3 = input.LA(3);
 
-                    if ( (LA16_3==25) ) {
-                        alt16=2;
+                    if ( (LA21_3==30) ) {
+                        alt21=2;
                     }
-                    else if ( (LA16_3==EOF||(LA16_3>=13 && LA16_3<=14)||LA16_3==17||(LA16_3>=19 && LA16_3<=20)) ) {
-                        alt16=1;
+                    else if ( (LA21_3==EOF||(LA21_3>=13 && LA21_3<=14)||(LA21_3>=21 && LA21_3<=22)||(LA21_3>=24 && LA21_3<=25)||LA21_3==31) ) {
+                        alt21=1;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 16, 3, input);
+                            new NoViableAltException("", 21, 3, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA16_2==25) ) {
-                    alt16=2;
+                else if ( (LA21_2==30) ) {
+                    alt21=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 16, 2, input);
+                        new NoViableAltException("", 21, 2, input);
 
                     throw nvae;
                 }
@@ -2288,17 +3166,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_INT:
                 {
-                int LA16_3 = input.LA(2);
+                int LA21_3 = input.LA(2);
 
-                if ( (LA16_3==25) ) {
-                    alt16=2;
+                if ( (LA21_3==30) ) {
+                    alt21=2;
                 }
-                else if ( (LA16_3==EOF||(LA16_3>=13 && LA16_3<=14)||LA16_3==17||(LA16_3>=19 && LA16_3<=20)) ) {
-                    alt16=1;
+                else if ( (LA21_3==EOF||(LA21_3>=13 && LA21_3<=14)||(LA21_3>=21 && LA21_3<=22)||(LA21_3>=24 && LA21_3<=25)||LA21_3==31) ) {
+                    alt21=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 16, 3, input);
+                        new NoViableAltException("", 21, 3, input);
 
                     throw nvae;
                 }
@@ -2306,29 +3184,29 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_HEX:
                 {
-                alt16=1;
+                alt21=1;
                 }
                 break;
-            case 25:
+            case 30:
                 {
-                alt16=2;
+                alt21=2;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 16, 0, input);
+                    new NoViableAltException("", 21, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt16) {
+            switch (alt21) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:861:5: this_IntLiteral_0= ruleIntLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1203:5: this_IntLiteral_0= ruleIntLiteral
                     {
                      
                             newCompositeNode(grammarAccess.getNumberLiteralAccess().getIntLiteralParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleNumberLiteral2063);
+                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleNumberLiteral2866);
                     this_IntLiteral_0=ruleIntLiteral();
 
                     state._fsp--;
@@ -2341,12 +3219,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:871:5: this_RealLiteral_1= ruleRealLiteral
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1213:5: this_RealLiteral_1= ruleRealLiteral
                     {
                      
                             newCompositeNode(grammarAccess.getNumberLiteralAccess().getRealLiteralParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleNumberLiteral2090);
+                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleNumberLiteral2893);
                     this_RealLiteral_1=ruleRealLiteral();
 
                     state._fsp--;
@@ -2379,7 +3257,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRealLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:887:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1229:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
     public final EObject entryRuleRealLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2387,17 +3265,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:888:2: (iv_ruleRealLiteral= ruleRealLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:889:2: iv_ruleRealLiteral= ruleRealLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1230:2: (iv_ruleRealLiteral= ruleRealLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1231:2: iv_ruleRealLiteral= ruleRealLiteral EOF
             {
              newCompositeNode(grammarAccess.getRealLiteralRule()); 
-            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral2125);
+            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral2928);
             iv_ruleRealLiteral=ruleRealLiteral();
 
             state._fsp--;
 
              current =iv_ruleRealLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral2135); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral2938); 
 
             }
 
@@ -2415,7 +3293,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRealLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:896:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleReal ) ) ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1238:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleReal ) ) ) ;
     public final EObject ruleRealLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2425,14 +3303,14 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:899:28: ( ( () ( (lv_value_1_0= ruleReal ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:1: ( () ( (lv_value_1_0= ruleReal ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1241:28: ( ( () ( (lv_value_1_0= ruleReal ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1242:1: ( () ( (lv_value_1_0= ruleReal ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:1: ( () ( (lv_value_1_0= ruleReal ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:2: () ( (lv_value_1_0= ruleReal ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1242:1: ( () ( (lv_value_1_0= ruleReal ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1242:2: () ( (lv_value_1_0= ruleReal ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:900:2: ()
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:901:5: 
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1242:2: ()
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1243:5: 
             {
 
                     current = forceCreateModelElement(
@@ -2442,16 +3320,16 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:906:2: ( (lv_value_1_0= ruleReal ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:907:1: (lv_value_1_0= ruleReal )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1248:2: ( (lv_value_1_0= ruleReal ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1249:1: (lv_value_1_0= ruleReal )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:907:1: (lv_value_1_0= ruleReal )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:908:3: lv_value_1_0= ruleReal
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1249:1: (lv_value_1_0= ruleReal )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1250:3: lv_value_1_0= ruleReal
             {
              
             	        newCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleReal_in_ruleRealLiteral2190);
+            pushFollow(FOLLOW_ruleReal_in_ruleRealLiteral2993);
             lv_value_1_0=ruleReal();
 
             state._fsp--;
@@ -2494,7 +3372,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIntLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:932:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1274:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
     public final EObject entryRuleIntLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2502,17 +3380,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:933:2: (iv_ruleIntLiteral= ruleIntLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:934:2: iv_ruleIntLiteral= ruleIntLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1275:2: (iv_ruleIntLiteral= ruleIntLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1276:2: iv_ruleIntLiteral= ruleIntLiteral EOF
             {
              newCompositeNode(grammarAccess.getIntLiteralRule()); 
-            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral2226);
+            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3029);
             iv_ruleIntLiteral=ruleIntLiteral();
 
             state._fsp--;
 
              current =iv_ruleIntLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral2236); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral3039); 
 
             }
 
@@ -2530,7 +3408,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIntLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:941:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleInteger ) ) ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1283:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleInteger ) ) ) ;
     public final EObject ruleIntLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2540,14 +3418,14 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:944:28: ( ( () ( (lv_value_1_0= ruleInteger ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:945:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1286:28: ( ( () ( (lv_value_1_0= ruleInteger ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1287:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:945:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:945:2: () ( (lv_value_1_0= ruleInteger ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1287:1: ( () ( (lv_value_1_0= ruleInteger ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1287:2: () ( (lv_value_1_0= ruleInteger ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:945:2: ()
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:946:5: 
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1287:2: ()
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1288:5: 
             {
 
                     current = forceCreateModelElement(
@@ -2557,16 +3435,16 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:951:2: ( (lv_value_1_0= ruleInteger ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:952:1: (lv_value_1_0= ruleInteger )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1293:2: ( (lv_value_1_0= ruleInteger ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1294:1: (lv_value_1_0= ruleInteger )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:952:1: (lv_value_1_0= ruleInteger )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:953:3: lv_value_1_0= ruleInteger
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1294:1: (lv_value_1_0= ruleInteger )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1295:3: lv_value_1_0= ruleInteger
             {
              
             	        newCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleInteger_in_ruleIntLiteral2291);
+            pushFollow(FOLLOW_ruleInteger_in_ruleIntLiteral3094);
             lv_value_1_0=ruleInteger();
 
             state._fsp--;
@@ -2609,7 +3487,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:977:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1319:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final EObject entryRuleStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2617,17 +3495,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:978:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:979:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1320:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1321:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRule()); 
-            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral2327);
+            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3130);
             iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
 
              current =iv_ruleStringLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral2337); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral3140); 
 
             }
 
@@ -2645,7 +3523,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringLiteral"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:986:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1328:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -2654,14 +3532,14 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:989:28: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:990:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1331:28: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1332:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:990:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:990:2: () ( (lv_value_1_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1332:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1332:2: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:990:2: ()
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:991:5: 
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1332:2: ()
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1333:5: 
             {
 
                     current = forceCreateModelElement(
@@ -2671,13 +3549,13 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:996:2: ( (lv_value_1_0= RULE_STRING ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:997:1: (lv_value_1_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1338:2: ( (lv_value_1_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1339:1: (lv_value_1_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:997:1: (lv_value_1_0= RULE_STRING )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:998:3: lv_value_1_0= RULE_STRING
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1339:1: (lv_value_1_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1340:3: lv_value_1_0= RULE_STRING
             {
-            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral2388); 
+            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral3191); 
 
             			newLeafNode(lv_value_1_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             		
@@ -2718,7 +3596,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInteger"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1022:1: entryRuleInteger returns [String current=null] : iv_ruleInteger= ruleInteger EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1364:1: entryRuleInteger returns [String current=null] : iv_ruleInteger= ruleInteger EOF ;
     public final String entryRuleInteger() throws RecognitionException {
         String current = null;
 
@@ -2726,17 +3604,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1023:2: (iv_ruleInteger= ruleInteger EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1024:2: iv_ruleInteger= ruleInteger EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1365:2: (iv_ruleInteger= ruleInteger EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1366:2: iv_ruleInteger= ruleInteger EOF
             {
              newCompositeNode(grammarAccess.getIntegerRule()); 
-            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger2430);
+            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger3233);
             iv_ruleInteger=ruleInteger();
 
             state._fsp--;
 
              current =iv_ruleInteger.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger2441); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger3244); 
 
             }
 
@@ -2754,7 +3632,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInteger"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1031:1: ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1373:1: ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal ) ;
     public final AntlrDatatypeRuleToken ruleInteger() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2766,33 +3644,33 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1034:28: ( (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1035:1: (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1376:28: ( (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1377:1: (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1035:1: (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal )
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1377:1: (this_SignedInteger_0= ruleSignedInteger | this_Hexadecimal_1= ruleHexadecimal )
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA17_0==RULE_INT||(LA17_0>=28 && LA17_0<=29)) ) {
-                alt17=1;
+            if ( (LA22_0==RULE_INT||(LA22_0>=34 && LA22_0<=35)) ) {
+                alt22=1;
             }
-            else if ( (LA17_0==RULE_HEX) ) {
-                alt17=2;
+            else if ( (LA22_0==RULE_HEX) ) {
+                alt22=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 17, 0, input);
+                    new NoViableAltException("", 22, 0, input);
 
                 throw nvae;
             }
-            switch (alt17) {
+            switch (alt22) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1036:5: this_SignedInteger_0= ruleSignedInteger
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1378:5: this_SignedInteger_0= ruleSignedInteger
                     {
                      
                             newCompositeNode(grammarAccess.getIntegerAccess().getSignedIntegerParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleSignedInteger_in_ruleInteger2488);
+                    pushFollow(FOLLOW_ruleSignedInteger_in_ruleInteger3291);
                     this_SignedInteger_0=ruleSignedInteger();
 
                     state._fsp--;
@@ -2807,12 +3685,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1048:5: this_Hexadecimal_1= ruleHexadecimal
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1390:5: this_Hexadecimal_1= ruleHexadecimal
                     {
                      
                             newCompositeNode(grammarAccess.getIntegerAccess().getHexadecimalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleHexadecimal_in_ruleInteger2521);
+                    pushFollow(FOLLOW_ruleHexadecimal_in_ruleInteger3324);
                     this_Hexadecimal_1=ruleHexadecimal();
 
                     state._fsp--;
@@ -2847,7 +3725,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSignedInteger"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1066:1: entryRuleSignedInteger returns [String current=null] : iv_ruleSignedInteger= ruleSignedInteger EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1408:1: entryRuleSignedInteger returns [String current=null] : iv_ruleSignedInteger= ruleSignedInteger EOF ;
     public final String entryRuleSignedInteger() throws RecognitionException {
         String current = null;
 
@@ -2858,17 +3736,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1070:2: (iv_ruleSignedInteger= ruleSignedInteger EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1071:2: iv_ruleSignedInteger= ruleSignedInteger EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1412:2: (iv_ruleSignedInteger= ruleSignedInteger EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1413:2: iv_ruleSignedInteger= ruleSignedInteger EOF
             {
              newCompositeNode(grammarAccess.getSignedIntegerRule()); 
-            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2573);
+            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger3376);
             iv_ruleSignedInteger=ruleSignedInteger();
 
             state._fsp--;
 
              current =iv_ruleSignedInteger.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger2584); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger3387); 
 
             }
 
@@ -2889,7 +3767,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSignedInteger"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1081:1: ruleSignedInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1423:1: ruleSignedInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleSignedInteger() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2900,27 +3778,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1085:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1086:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1427:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1428:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1086:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1086:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1428:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1428:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1086:2: (kw= '+' | kw= '-' )?
-            int alt18=3;
-            int LA18_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1428:2: (kw= '+' | kw= '-' )?
+            int alt23=3;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA18_0==28) ) {
-                alt18=1;
+            if ( (LA23_0==34) ) {
+                alt23=1;
             }
-            else if ( (LA18_0==29) ) {
-                alt18=2;
+            else if ( (LA23_0==35) ) {
+                alt23=2;
             }
-            switch (alt18) {
+            switch (alt23) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1087:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1429:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleSignedInteger2627); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleSignedInteger3430); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getPlusSignKeyword_0_0()); 
@@ -2929,9 +3807,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1094:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1436:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleSignedInteger2646); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleSignedInteger3449); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getHyphenMinusKeyword_0_1()); 
@@ -2942,7 +3820,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignedInteger2663); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignedInteger3466); 
 
             		current.merge(this_INT_2);
                 
@@ -2973,7 +3851,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleHexadecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1117:1: entryRuleHexadecimal returns [String current=null] : iv_ruleHexadecimal= ruleHexadecimal EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1459:1: entryRuleHexadecimal returns [String current=null] : iv_ruleHexadecimal= ruleHexadecimal EOF ;
     public final String entryRuleHexadecimal() throws RecognitionException {
         String current = null;
 
@@ -2984,17 +3862,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1121:2: (iv_ruleHexadecimal= ruleHexadecimal EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1122:2: iv_ruleHexadecimal= ruleHexadecimal EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1463:2: (iv_ruleHexadecimal= ruleHexadecimal EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1464:2: iv_ruleHexadecimal= ruleHexadecimal EOF
             {
              newCompositeNode(grammarAccess.getHexadecimalRule()); 
-            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2719);
+            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal3522);
             iv_ruleHexadecimal=ruleHexadecimal();
 
             state._fsp--;
 
              current =iv_ruleHexadecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal2730); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal3533); 
 
             }
 
@@ -3015,7 +3893,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleHexadecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1132:1: ruleHexadecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_HEX_0= RULE_HEX ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1474:1: ruleHexadecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_HEX_0= RULE_HEX ;
     public final AntlrDatatypeRuleToken ruleHexadecimal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3025,10 +3903,10 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1136:28: (this_HEX_0= RULE_HEX )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1137:5: this_HEX_0= RULE_HEX
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1478:28: (this_HEX_0= RULE_HEX )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1479:5: this_HEX_0= RULE_HEX
             {
-            this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal2773); 
+            this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal3576); 
 
             		current.merge(this_HEX_0);
                 
@@ -3056,7 +3934,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleReal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1155:1: entryRuleReal returns [String current=null] : iv_ruleReal= ruleReal EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1497:1: entryRuleReal returns [String current=null] : iv_ruleReal= ruleReal EOF ;
     public final String entryRuleReal() throws RecognitionException {
         String current = null;
 
@@ -3064,17 +3942,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1156:2: (iv_ruleReal= ruleReal EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1157:2: iv_ruleReal= ruleReal EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1498:2: (iv_ruleReal= ruleReal EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1499:2: iv_ruleReal= ruleReal EOF
             {
              newCompositeNode(grammarAccess.getRealRule()); 
-            pushFollow(FOLLOW_ruleReal_in_entryRuleReal2822);
+            pushFollow(FOLLOW_ruleReal_in_entryRuleReal3625);
             iv_ruleReal=ruleReal();
 
             state._fsp--;
 
              current =iv_ruleReal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReal2833); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReal3636); 
 
             }
 
@@ -3092,7 +3970,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleReal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1164:1: ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1506:1: ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp ) ;
     public final AntlrDatatypeRuleToken ruleReal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3108,20 +3986,20 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1167:28: ( (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1168:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1509:28: ( (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1510:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1168:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )
-            int alt19=4;
-            alt19 = dfa19.predict(input);
-            switch (alt19) {
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1510:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )
+            int alt24=4;
+            alt24 = dfa24.predict(input);
+            switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1169:5: this_Decimal_0= ruleDecimal
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1511:5: this_Decimal_0= ruleDecimal
                     {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleDecimal_in_ruleReal2880);
+                    pushFollow(FOLLOW_ruleDecimal_in_ruleReal3683);
                     this_Decimal_0=ruleDecimal();
 
                     state._fsp--;
@@ -3136,12 +4014,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1181:5: this_DotDecimal_1= ruleDotDecimal
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1523:5: this_DotDecimal_1= ruleDotDecimal
                     {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDotDecimalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleDotDecimal_in_ruleReal2913);
+                    pushFollow(FOLLOW_ruleDotDecimal_in_ruleReal3716);
                     this_DotDecimal_1=ruleDotDecimal();
 
                     state._fsp--;
@@ -3156,12 +4034,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1193:5: this_DecimalDot_2= ruleDecimalDot
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1535:5: this_DecimalDot_2= ruleDecimalDot
                     {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalDotParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleDecimalDot_in_ruleReal2946);
+                    pushFollow(FOLLOW_ruleDecimalDot_in_ruleReal3749);
                     this_DecimalDot_2=ruleDecimalDot();
 
                     state._fsp--;
@@ -3176,12 +4054,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1205:5: this_DecimalExp_3= ruleDecimalExp
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1547:5: this_DecimalExp_3= ruleDecimalExp
                     {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDecimalExp_in_ruleReal2979);
+                    pushFollow(FOLLOW_ruleDecimalExp_in_ruleReal3782);
                     this_DecimalExp_3=ruleDecimalExp();
 
                     state._fsp--;
@@ -3216,7 +4094,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1223:1: entryRuleDecimal returns [String current=null] : iv_ruleDecimal= ruleDecimal EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1565:1: entryRuleDecimal returns [String current=null] : iv_ruleDecimal= ruleDecimal EOF ;
     public final String entryRuleDecimal() throws RecognitionException {
         String current = null;
 
@@ -3227,17 +4105,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1227:2: (iv_ruleDecimal= ruleDecimal EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1228:2: iv_ruleDecimal= ruleDecimal EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1569:2: (iv_ruleDecimal= ruleDecimal EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1570:2: iv_ruleDecimal= ruleDecimal EOF
             {
              newCompositeNode(grammarAccess.getDecimalRule()); 
-            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal3031);
+            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal3834);
             iv_ruleDecimal=ruleDecimal();
 
             state._fsp--;
 
              current =iv_ruleDecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal3042); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal3845); 
 
             }
 
@@ -3258,7 +4136,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1238:1: ruleDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1580:1: ruleDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDecimal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3270,27 +4148,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1242:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1243:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1584:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1585:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1243:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1243:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1585:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1585:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1243:2: (kw= '+' | kw= '-' )?
-            int alt20=3;
-            int LA20_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1585:2: (kw= '+' | kw= '-' )?
+            int alt25=3;
+            int LA25_0 = input.LA(1);
 
-            if ( (LA20_0==28) ) {
-                alt20=1;
+            if ( (LA25_0==34) ) {
+                alt25=1;
             }
-            else if ( (LA20_0==29) ) {
-                alt20=2;
+            else if ( (LA25_0==35) ) {
+                alt25=2;
             }
-            switch (alt20) {
+            switch (alt25) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1244:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1586:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleDecimal3085); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleDecimal3888); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
@@ -3299,9 +4177,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1251:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1593:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleDecimal3104); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleDecimal3907); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
@@ -3312,19 +4190,19 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal3121); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal3924); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,25,FOLLOW_25_in_ruleDecimal3139); 
+            kw=(Token)match(input,30,FOLLOW_30_in_ruleDecimal3942); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
                 
-            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal3154); 
+            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal3957); 
 
             		current.merge(this_INT_4);
                 
@@ -3355,7 +4233,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDotDecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1287:1: entryRuleDotDecimal returns [String current=null] : iv_ruleDotDecimal= ruleDotDecimal EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1629:1: entryRuleDotDecimal returns [String current=null] : iv_ruleDotDecimal= ruleDotDecimal EOF ;
     public final String entryRuleDotDecimal() throws RecognitionException {
         String current = null;
 
@@ -3366,17 +4244,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1291:2: (iv_ruleDotDecimal= ruleDotDecimal EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1292:2: iv_ruleDotDecimal= ruleDotDecimal EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1633:2: (iv_ruleDotDecimal= ruleDotDecimal EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1634:2: iv_ruleDotDecimal= ruleDotDecimal EOF
             {
              newCompositeNode(grammarAccess.getDotDecimalRule()); 
-            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal3210);
+            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal4013);
             iv_ruleDotDecimal=ruleDotDecimal();
 
             state._fsp--;
 
              current =iv_ruleDotDecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal3221); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal4024); 
 
             }
 
@@ -3397,7 +4275,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDotDecimal"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1302:1: ruleDotDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1644:1: ruleDotDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDotDecimal() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3408,27 +4286,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1306:28: ( ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1307:1: ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1648:28: ( ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1649:1: ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1307:1: ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1307:2: (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1649:1: ( (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1649:2: (kw= '+' | kw= '-' )? kw= '.' this_INT_3= RULE_INT
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1307:2: (kw= '+' | kw= '-' )?
-            int alt21=3;
-            int LA21_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1649:2: (kw= '+' | kw= '-' )?
+            int alt26=3;
+            int LA26_0 = input.LA(1);
 
-            if ( (LA21_0==28) ) {
-                alt21=1;
+            if ( (LA26_0==34) ) {
+                alt26=1;
             }
-            else if ( (LA21_0==29) ) {
-                alt21=2;
+            else if ( (LA26_0==35) ) {
+                alt26=2;
             }
-            switch (alt21) {
+            switch (alt26) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1308:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1650:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleDotDecimal3264); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleDotDecimal4067); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDotDecimalAccess().getPlusSignKeyword_0_0()); 
@@ -3437,9 +4315,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1315:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1657:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleDotDecimal3283); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleDotDecimal4086); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDotDecimalAccess().getHyphenMinusKeyword_0_1()); 
@@ -3450,12 +4328,12 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            kw=(Token)match(input,25,FOLLOW_25_in_ruleDotDecimal3298); 
+            kw=(Token)match(input,30,FOLLOW_30_in_ruleDotDecimal4101); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDotDecimalAccess().getFullStopKeyword_1()); 
                 
-            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDotDecimal3313); 
+            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDotDecimal4116); 
 
             		current.merge(this_INT_3);
                 
@@ -3486,7 +4364,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDecimalDot"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1344:1: entryRuleDecimalDot returns [String current=null] : iv_ruleDecimalDot= ruleDecimalDot EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1686:1: entryRuleDecimalDot returns [String current=null] : iv_ruleDecimalDot= ruleDecimalDot EOF ;
     public final String entryRuleDecimalDot() throws RecognitionException {
         String current = null;
 
@@ -3497,17 +4375,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1348:2: (iv_ruleDecimalDot= ruleDecimalDot EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1349:2: iv_ruleDecimalDot= ruleDecimalDot EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1690:2: (iv_ruleDecimalDot= ruleDecimalDot EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1691:2: iv_ruleDecimalDot= ruleDecimalDot EOF
             {
              newCompositeNode(grammarAccess.getDecimalDotRule()); 
-            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot3369);
+            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot4172);
             iv_ruleDecimalDot=ruleDecimalDot();
 
             state._fsp--;
 
              current =iv_ruleDecimalDot.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot3380); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot4183); 
 
             }
 
@@ -3528,7 +4406,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDecimalDot"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1359:1: ruleDecimalDot returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1701:1: ruleDecimalDot returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' ) ;
     public final AntlrDatatypeRuleToken ruleDecimalDot() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3539,27 +4417,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1363:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1364:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1705:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1706:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1364:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1364:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.'
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1706:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1706:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.'
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1364:2: (kw= '+' | kw= '-' )?
-            int alt22=3;
-            int LA22_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1706:2: (kw= '+' | kw= '-' )?
+            int alt27=3;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA22_0==28) ) {
-                alt22=1;
+            if ( (LA27_0==34) ) {
+                alt27=1;
             }
-            else if ( (LA22_0==29) ) {
-                alt22=2;
+            else if ( (LA27_0==35) ) {
+                alt27=2;
             }
-            switch (alt22) {
+            switch (alt27) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1365:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1707:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleDecimalDot3423); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleDecimalDot4226); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalDotAccess().getPlusSignKeyword_0_0()); 
@@ -3568,9 +4446,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1372:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1714:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleDecimalDot3442); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleDecimalDot4245); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalDotAccess().getHyphenMinusKeyword_0_1()); 
@@ -3581,14 +4459,14 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalDot3459); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalDot4262); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalDotAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,25,FOLLOW_25_in_ruleDecimalDot3477); 
+            kw=(Token)match(input,30,FOLLOW_30_in_ruleDecimalDot4280); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalDotAccess().getFullStopKeyword_2()); 
@@ -3617,7 +4495,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDecimalExp"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1401:1: entryRuleDecimalExp returns [String current=null] : iv_ruleDecimalExp= ruleDecimalExp EOF ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1743:1: entryRuleDecimalExp returns [String current=null] : iv_ruleDecimalExp= ruleDecimalExp EOF ;
     public final String entryRuleDecimalExp() throws RecognitionException {
         String current = null;
 
@@ -3628,17 +4506,17 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1405:2: (iv_ruleDecimalExp= ruleDecimalExp EOF )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1406:2: iv_ruleDecimalExp= ruleDecimalExp EOF
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1747:2: (iv_ruleDecimalExp= ruleDecimalExp EOF )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1748:2: iv_ruleDecimalExp= ruleDecimalExp EOF
             {
              newCompositeNode(grammarAccess.getDecimalExpRule()); 
-            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp3528);
+            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp4331);
             iv_ruleDecimalExp=ruleDecimalExp();
 
             state._fsp--;
 
              current =iv_ruleDecimalExp.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp3539); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp4342); 
 
             }
 
@@ -3659,7 +4537,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDecimalExp"
-    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1416:1: ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1758:1: ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDecimalExp() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3673,27 +4551,27 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1420:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT ) )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1421:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1762:28: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT ) )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1763:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1421:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT )
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1421:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1763:1: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT )
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1763:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT this_ID_5= RULE_ID (kw= '+' | kw= '-' )? this_INT_8= RULE_INT
             {
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1421:2: (kw= '+' | kw= '-' )?
-            int alt23=3;
-            int LA23_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1763:2: (kw= '+' | kw= '-' )?
+            int alt28=3;
+            int LA28_0 = input.LA(1);
 
-            if ( (LA23_0==28) ) {
-                alt23=1;
+            if ( (LA28_0==34) ) {
+                alt28=1;
             }
-            else if ( (LA23_0==29) ) {
-                alt23=2;
+            else if ( (LA28_0==35) ) {
+                alt28=2;
             }
-            switch (alt23) {
+            switch (alt28) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1422:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1764:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleDecimalExp3582); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleDecimalExp4385); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
@@ -3702,9 +4580,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1429:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1771:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleDecimalExp3601); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleDecimalExp4404); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
@@ -3715,47 +4593,47 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp3618); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp4421); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,25,FOLLOW_25_in_ruleDecimalExp3636); 
+            kw=(Token)match(input,30,FOLLOW_30_in_ruleDecimalExp4439); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
                 
-            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp3651); 
+            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp4454); 
 
             		current.merge(this_INT_4);
                 
              
                 newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
                 
-            this_ID_5=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDecimalExp3671); 
+            this_ID_5=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDecimalExp4474); 
 
             		current.merge(this_ID_5);
                 
              
                 newLeafNode(this_ID_5, grammarAccess.getDecimalExpAccess().getIDTerminalRuleCall_4()); 
                 
-            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1461:1: (kw= '+' | kw= '-' )?
-            int alt24=3;
-            int LA24_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1803:1: (kw= '+' | kw= '-' )?
+            int alt29=3;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA24_0==28) ) {
-                alt24=1;
+            if ( (LA29_0==34) ) {
+                alt29=1;
             }
-            else if ( (LA24_0==29) ) {
-                alt24=2;
+            else if ( (LA29_0==35) ) {
+                alt29=2;
             }
-            switch (alt24) {
+            switch (alt29) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1462:2: kw= '+'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1804:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleDecimalExp3690); 
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleDecimalExp4493); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
@@ -3764,9 +4642,9 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1469:2: kw= '-'
+                    // ../org.eclipse.etrice.core.config/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.g:1811:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleDecimalExp3709); 
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleDecimalExp4512); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
@@ -3777,7 +4655,7 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_8=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp3726); 
+            this_INT_8=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp4529); 
 
             		current.merge(this_INT_8);
                 
@@ -3809,201 +4687,231 @@ public class InternalConfigParser extends AbstractInternalAntlrParser {
     // Delegated rules
 
 
-    protected DFA19 dfa19 = new DFA19(this);
-    static final String DFA19_eotS =
+    protected DFA24 dfa24 = new DFA24(this);
+    static final String DFA24_eotS =
         "\12\uffff";
-    static final String DFA19_eofS =
-        "\5\uffff\1\7\1\10\3\uffff";
-    static final String DFA19_minS =
-        "\3\6\1\31\1\uffff\1\6\1\4\3\uffff";
-    static final String DFA19_maxS =
-        "\1\35\3\31\1\uffff\2\24\3\uffff";
-    static final String DFA19_acceptS =
-        "\4\uffff\1\2\2\uffff\1\3\1\1\1\4";
-    static final String DFA19_specialS =
+    static final String DFA24_eofS =
+        "\5\uffff\1\6\1\uffff\1\11\2\uffff";
+    static final String DFA24_minS =
+        "\3\6\1\36\1\uffff\1\6\1\uffff\1\4\2\uffff";
+    static final String DFA24_maxS =
+        "\1\43\3\36\1\uffff\1\37\1\uffff\1\37\2\uffff";
+    static final String DFA24_acceptS =
+        "\4\uffff\1\2\1\uffff\1\3\1\uffff\1\4\1\1";
+    static final String DFA24_specialS =
         "\12\uffff}>";
-    static final String[] DFA19_transitionS = {
-            "\1\3\22\uffff\1\4\2\uffff\1\1\1\2",
-            "\1\3\22\uffff\1\4",
-            "\1\3\22\uffff\1\4",
+    static final String[] DFA24_transitionS = {
+            "\1\3\27\uffff\1\4\3\uffff\1\1\1\2",
+            "\1\3\27\uffff\1\4",
+            "\1\3\27\uffff\1\4",
             "\1\5",
             "",
-            "\1\6\6\uffff\2\7\2\uffff\1\7\1\uffff\2\7",
-            "\1\11\10\uffff\2\10\2\uffff\1\10\1\uffff\2\10",
+            "\1\7\6\uffff\2\6\6\uffff\2\6\1\uffff\2\6\5\uffff\1\6",
             "",
+            "\1\10\10\uffff\2\11\6\uffff\2\11\1\uffff\2\11\5\uffff\1\11",
             "",
             ""
     };
 
-    static final short[] DFA19_eot = DFA.unpackEncodedString(DFA19_eotS);
-    static final short[] DFA19_eof = DFA.unpackEncodedString(DFA19_eofS);
-    static final char[] DFA19_min = DFA.unpackEncodedStringToUnsignedChars(DFA19_minS);
-    static final char[] DFA19_max = DFA.unpackEncodedStringToUnsignedChars(DFA19_maxS);
-    static final short[] DFA19_accept = DFA.unpackEncodedString(DFA19_acceptS);
-    static final short[] DFA19_special = DFA.unpackEncodedString(DFA19_specialS);
-    static final short[][] DFA19_transition;
+    static final short[] DFA24_eot = DFA.unpackEncodedString(DFA24_eotS);
+    static final short[] DFA24_eof = DFA.unpackEncodedString(DFA24_eofS);
+    static final char[] DFA24_min = DFA.unpackEncodedStringToUnsignedChars(DFA24_minS);
+    static final char[] DFA24_max = DFA.unpackEncodedStringToUnsignedChars(DFA24_maxS);
+    static final short[] DFA24_accept = DFA.unpackEncodedString(DFA24_acceptS);
+    static final short[] DFA24_special = DFA.unpackEncodedString(DFA24_specialS);
+    static final short[][] DFA24_transition;
 
     static {
-        int numStates = DFA19_transitionS.length;
-        DFA19_transition = new short[numStates][];
+        int numStates = DFA24_transitionS.length;
+        DFA24_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA19_transition[i] = DFA.unpackEncodedString(DFA19_transitionS[i]);
+            DFA24_transition[i] = DFA.unpackEncodedString(DFA24_transitionS[i]);
         }
     }
 
-    class DFA19 extends DFA {
+    class DFA24 extends DFA {
 
-        public DFA19(BaseRecognizer recognizer) {
+        public DFA24(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 19;
-            this.eot = DFA19_eot;
-            this.eof = DFA19_eof;
-            this.min = DFA19_min;
-            this.max = DFA19_max;
-            this.accept = DFA19_accept;
-            this.special = DFA19_special;
-            this.transition = DFA19_transition;
+            this.decisionNumber = 24;
+            this.eot = DFA24_eot;
+            this.eof = DFA24_eof;
+            this.min = DFA24_min;
+            this.max = DFA24_max;
+            this.accept = DFA24_accept;
+            this.special = DFA24_special;
+            this.transition = DFA24_transition;
         }
         public String getDescription() {
-            return "1168:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )";
+            return "1510:1: (this_Decimal_0= ruleDecimal | this_DotDecimal_1= ruleDotDecimal | this_DecimalDot_2= ruleDecimalDot | this_DecimalExp_3= ruleDecimalExp )";
         }
     }
  
 
     public static final BitSet FOLLOW_ruleConfigModel_in_entryRuleConfigModel75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleConfigModel85 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_ruleConfigModel131 = new BitSet(new long[]{0x0000000000209002L});
-    public static final BitSet FOLLOW_ruleConfigElement_in_ruleConfigModel153 = new BitSet(new long[]{0x0000000000009002L});
+    public static final BitSet FOLLOW_ruleImport_in_ruleConfigModel131 = new BitSet(new long[]{0x0000000004029002L});
+    public static final BitSet FOLLOW_ruleConfigElement_in_ruleConfigModel153 = new BitSet(new long[]{0x0000000000029002L});
     public static final BitSet FOLLOW_ruleConfigElement_in_entryRuleConfigElement190 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleConfigElement200 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleActorClassConfig_in_ruleConfigElement247 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleActorInstanceConfig_in_ruleConfigElement274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorClassConfig_in_entryRuleActorClassConfig309 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorClassConfig319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleActorClassConfig356 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleActorClassConfig379 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleActorClassConfig391 = new BitSet(new long[]{0x0000000000024000L});
-    public static final BitSet FOLLOW_ruleAttrClassConfig_in_ruleActorClassConfig412 = new BitSet(new long[]{0x0000000000024000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClassConfig425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorInstanceConfig_in_entryRuleActorInstanceConfig461 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorInstanceConfig471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleActorInstanceConfig508 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleActorInstanceConfig531 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleActorInstanceConfig543 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceConfig564 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleActorInstanceConfig576 = new BitSet(new long[]{0x0000000000024000L});
-    public static final BitSet FOLLOW_ruleAttrInstanceConfig_in_ruleActorInstanceConfig597 = new BitSet(new long[]{0x0000000000024000L});
-    public static final BitSet FOLLOW_14_in_ruleActorInstanceConfig610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAttrClassConfig_in_entryRuleAttrClassConfig648 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAttrClassConfig658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleAttrClassConfig695 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAttrClassConfig715 = new BitSet(new long[]{0x0000000000042002L});
-    public static final BitSet FOLLOW_18_in_ruleAttrClassConfig728 = new BitSet(new long[]{0x000000003E0000E0L});
-    public static final BitSet FOLLOW_ruleLiteral_in_ruleAttrClassConfig749 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13_in_ruleAttrClassConfig764 = new BitSet(new long[]{0x0000000000184000L});
-    public static final BitSet FOLLOW_19_in_ruleAttrClassConfig822 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleAttrClassConfig834 = new BitSet(new long[]{0x00000000320000C0L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig855 = new BitSet(new long[]{0x0000000000184000L});
-    public static final BitSet FOLLOW_20_in_ruleAttrClassConfig923 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleAttrClassConfig935 = new BitSet(new long[]{0x00000000320000C0L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig956 = new BitSet(new long[]{0x0000000000184000L});
-    public static final BitSet FOLLOW_14_in_ruleAttrClassConfig1009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAttrInstanceConfig_in_entryRuleAttrInstanceConfig1047 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAttrInstanceConfig1057 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleAttrInstanceConfig1094 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAttrInstanceConfig1114 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_18_in_ruleAttrInstanceConfig1127 = new BitSet(new long[]{0x000000003E0000E0L});
-    public static final BitSet FOLLOW_ruleLiteral_in_ruleAttrInstanceConfig1148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath1186 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefPath1196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath1238 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleRefPath1256 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath1273 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport1316 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport1326 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleImport1363 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport1386 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleImport1398 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_23_in_ruleImport1417 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport1435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1477 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN1488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN1535 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_ruleImportedFQN1554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1597 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1648 = new BitSet(new long[]{0x0000000002000002L});
-    public static final BitSet FOLLOW_25_in_ruleFQN1667 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1682 = new BitSet(new long[]{0x0000000002000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral1729 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral1739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBooleanLiteral_in_ruleLiteral1786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleLiteral1813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral1840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1875 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral1885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleBooleanLiteral1932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleBooleanLiteral1956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral2006 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral2016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleNumberLiteral2063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleNumberLiteral2090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral2125 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral2135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReal_in_ruleRealLiteral2190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral2226 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral2236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInteger_in_ruleIntLiteral2291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral2327 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral2337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral2388 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger2430 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInteger2441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignedInteger_in_ruleInteger2488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexadecimal_in_ruleInteger2521 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2573 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger2584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleSignedInteger2627 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_29_in_ruleSignedInteger2646 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSignedInteger2663 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2719 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal2730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal2773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal2822 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReal2833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimal_in_ruleReal2880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDotDecimal_in_ruleReal2913 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalDot_in_ruleReal2946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalExp_in_ruleReal2979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal3031 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal3042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleDecimal3085 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_29_in_ruleDecimal3104 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal3121 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleDecimal3139 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal3154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal3210 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal3221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleDotDecimal3264 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_29_in_ruleDotDecimal3283 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleDotDecimal3298 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDotDecimal3313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot3369 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot3380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleDecimalDot3423 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_29_in_ruleDecimalDot3442 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalDot3459 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleDecimalDot3477 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp3528 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp3539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleDecimalExp3582 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_29_in_ruleDecimalExp3601 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp3618 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleDecimalExp3636 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp3651 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleDecimalExp3671 = new BitSet(new long[]{0x0000000030000040L});
-    public static final BitSet FOLLOW_28_in_ruleDecimalExp3690 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_29_in_ruleDecimalExp3709 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp3726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProtocolClassConfig_in_ruleConfigElement301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorClassConfig_in_entryRuleActorClassConfig336 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleActorClassConfig346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleActorClassConfig383 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleActorClassConfig406 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleActorClassConfig418 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_ruleAttrClassConfig_in_ruleActorClassConfig439 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClassConfig452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorInstanceConfig_in_entryRuleActorInstanceConfig488 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleActorInstanceConfig498 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleActorInstanceConfig535 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleActorInstanceConfig558 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleActorInstanceConfig570 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceConfig591 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleActorInstanceConfig603 = new BitSet(new long[]{0x0000000000604000L});
+    public static final BitSet FOLLOW_ruleAttrInstanceConfig_in_ruleActorInstanceConfig624 = new BitSet(new long[]{0x0000000000604000L});
+    public static final BitSet FOLLOW_rulePortInstanceConfig_in_ruleActorInstanceConfig646 = new BitSet(new long[]{0x0000000000204000L});
+    public static final BitSet FOLLOW_14_in_ruleActorInstanceConfig659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProtocolClassConfig_in_entryRuleProtocolClassConfig695 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProtocolClassConfig705 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleProtocolClassConfig742 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleProtocolClassConfig765 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleProtocolClassConfig777 = new BitSet(new long[]{0x00000000000C4000L});
+    public static final BitSet FOLLOW_18_in_ruleProtocolClassConfig835 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rulePortClassConfig_in_ruleProtocolClassConfig856 = new BitSet(new long[]{0x00000000000C4000L});
+    public static final BitSet FOLLOW_19_in_ruleProtocolClassConfig924 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rulePortClassConfig_in_ruleProtocolClassConfig945 = new BitSet(new long[]{0x00000000000C4000L});
+    public static final BitSet FOLLOW_14_in_ruleProtocolClassConfig998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePortClassConfig_in_entryRulePortClassConfig1034 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePortClassConfig1044 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rulePortClassConfig1090 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_rulePortClassConfig1102 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_ruleAttrClassConfig_in_rulePortClassConfig1123 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_14_in_rulePortClassConfig1136 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePortInstanceConfig_in_entryRulePortInstanceConfig1172 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePortInstanceConfig1182 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rulePortInstanceConfig1219 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePortInstanceConfig1239 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_rulePortInstanceConfig1251 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_ruleAttrInstanceConfig_in_rulePortInstanceConfig1272 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_14_in_rulePortInstanceConfig1285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAttrClassConfig_in_entryRuleAttrClassConfig1323 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAttrClassConfig1333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleAttrClassConfig1370 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAttrClassConfig1390 = new BitSet(new long[]{0x0000000000802002L});
+    public static final BitSet FOLLOW_23_in_ruleAttrClassConfig1403 = new BitSet(new long[]{0x0000000F400000E0L});
+    public static final BitSet FOLLOW_ruleLiteralArray_in_ruleAttrClassConfig1424 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_ruleAttrClassConfig1439 = new BitSet(new long[]{0x0000000003004000L});
+    public static final BitSet FOLLOW_24_in_ruleAttrClassConfig1497 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleAttrClassConfig1509 = new BitSet(new long[]{0x0000000C400000C0L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig1530 = new BitSet(new long[]{0x0000000003004000L});
+    public static final BitSet FOLLOW_25_in_ruleAttrClassConfig1598 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleAttrClassConfig1610 = new BitSet(new long[]{0x0000000C400000C0L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAttrClassConfig1631 = new BitSet(new long[]{0x0000000003004000L});
+    public static final BitSet FOLLOW_14_in_ruleAttrClassConfig1684 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAttrInstanceConfig_in_entryRuleAttrInstanceConfig1722 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAttrInstanceConfig1732 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleAttrInstanceConfig1769 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAttrInstanceConfig1789 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_23_in_ruleAttrInstanceConfig1802 = new BitSet(new long[]{0x0000000F400000E0L});
+    public static final BitSet FOLLOW_ruleLiteralArray_in_ruleAttrInstanceConfig1823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath1861 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefPath1871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath1913 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleRefPath1931 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath1948 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport1991 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport2001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleImport2038 = new BitSet(new long[]{0x0000000010000010L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport2061 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleImport2073 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_28_in_ruleImport2092 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport2110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN2152 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN2163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN2210 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleImportedFQN2229 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN2272 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN2283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN2323 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_30_in_ruleFQN2342 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN2357 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_ruleLiteralArray_in_entryRuleLiteralArray2404 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteralArray2414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_ruleLiteralArray2460 = new BitSet(new long[]{0x0000000080000002L});
+    public static final BitSet FOLLOW_31_in_ruleLiteralArray2473 = new BitSet(new long[]{0x0000000F400000E0L});
+    public static final BitSet FOLLOW_ruleLiteral_in_ruleLiteralArray2494 = new BitSet(new long[]{0x0000000080000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral2532 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral2542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBooleanLiteral_in_ruleLiteral2589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleLiteral2616 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral2643 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral2678 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral2688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleBooleanLiteral2735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleBooleanLiteral2759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral2809 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral2819 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleNumberLiteral2866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleNumberLiteral2893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral2928 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral2938 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReal_in_ruleRealLiteral2993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3029 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral3039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInteger_in_ruleIntLiteral3094 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3130 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral3140 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral3191 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger3233 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInteger3244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignedInteger_in_ruleInteger3291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexadecimal_in_ruleInteger3324 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger3376 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger3387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleSignedInteger3430 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_35_in_ruleSignedInteger3449 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSignedInteger3466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal3522 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal3533 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal3576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal3625 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReal3636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimal_in_ruleReal3683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDotDecimal_in_ruleReal3716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalDot_in_ruleReal3749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalExp_in_ruleReal3782 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal3834 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal3845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDecimal3888 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_35_in_ruleDecimal3907 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal3924 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleDecimal3942 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal3957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal4013 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal4024 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDotDecimal4067 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_35_in_ruleDotDecimal4086 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleDotDecimal4101 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDotDecimal4116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot4172 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot4183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDecimalDot4226 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_35_in_ruleDecimalDot4245 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalDot4262 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleDecimalDot4280 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp4331 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp4342 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDecimalExp4385 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_35_in_ruleDecimalExp4404 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp4421 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_ruleDecimalExp4439 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp4454 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleDecimalExp4474 = new BitSet(new long[]{0x0000000C00000040L});
+    public static final BitSet FOLLOW_34_in_ruleDecimalExp4493 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_35_in_ruleDecimalExp4512 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp4529 = new BitSet(new long[]{0x0000000000000002L});
 
 }

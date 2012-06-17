@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.contentassist.AbstractConfigProposalProvider;
@@ -152,31 +153,52 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	}
 
 	@Override
+	public void complete_BooleanLiteral(EObject model, RuleCall ruleCall,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		String mult = "";
+		if (model instanceof AttrConfig) {
+			Attribute attr = ((AttrConfig) model).getAttribute();
+			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
+			LiteralType type = ConfigUtil.getLiteralType(attr);
+			if (type != LiteralType.BOOL)
+				return;
+		}
+
+		acceptor.accept(createCompletionProposal("", "Boolean" + mult, null,
+				context));
+	}
+
+	@Override
 	public void complete_IntLiteral(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		String mult = "";
 		if (model instanceof AttrConfig) {
-			LiteralType type = ConfigUtil.getLiteralType(((AttrConfig) model)
-					.getAttribute());
+			Attribute attr = ((AttrConfig) model).getAttribute();
+			mult = (attr.getSize() > 0) ? "[" + (attr.getSize() + 1) + "]" : "";
+			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.INT && type != LiteralType.REAL)
 				return;
 		}
 
-		acceptor.accept(createCompletionProposal("", "Integer", null, context));
-		acceptor.accept(createCompletionProposal("", "Hexadecimal", null,
+		acceptor.accept(createCompletionProposal("", "Integer" + mult, null,
 				context));
+		acceptor.accept(createCompletionProposal("", "Hexadecimal" + mult,
+				null, context));
 	}
 
 	@Override
 	public void complete_RealLiteral(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		String mult = "";
 		if (model instanceof AttrConfig) {
-			LiteralType type = ConfigUtil.getLiteralType(((AttrConfig) model)
-					.getAttribute());
+			Attribute attr = ((AttrConfig) model).getAttribute();
+			mult = (attr.getSize() > 0) ? "[" + (attr.getSize() + 1) + "]" : "";
+			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.REAL)
 				return;
 		}
 
-		acceptor.accept(createCompletionProposal("", "Real value", null,
+		acceptor.accept(createCompletionProposal("", "Real" + mult, null,
 				context));
 	}
 

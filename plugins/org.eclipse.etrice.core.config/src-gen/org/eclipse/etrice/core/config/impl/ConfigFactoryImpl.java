@@ -72,11 +72,15 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
       case ConfigPackage.CONFIG_ELEMENT: return createConfigElement();
       case ConfigPackage.ACTOR_CLASS_CONFIG: return createActorClassConfig();
       case ConfigPackage.ACTOR_INSTANCE_CONFIG: return createActorInstanceConfig();
+      case ConfigPackage.PROTOCOL_CLASS_CONFIG: return createProtocolClassConfig();
+      case ConfigPackage.PORT_CLASS_CONFIG: return createPortClassConfig();
+      case ConfigPackage.PORT_INSTANCE_CONFIG: return createPortInstanceConfig();
       case ConfigPackage.ATTR_CONFIG: return createAttrConfig();
       case ConfigPackage.ATTR_CLASS_CONFIG: return createAttrClassConfig();
       case ConfigPackage.ATTR_INSTANCE_CONFIG: return createAttrInstanceConfig();
       case ConfigPackage.REF_PATH: return createRefPath();
       case ConfigPackage.IMPORT: return createImport();
+      case ConfigPackage.LITERAL_ARRAY: return createLiteralArray();
       case ConfigPackage.LITERAL: return createLiteral();
       case ConfigPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case ConfigPackage.NUMBER_LITERAL: return createNumberLiteral();
@@ -93,8 +97,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ConfigModel createConfigModel()
+  public ConfigModel createConfigModel()
   {
     ConfigModelImpl configModel = new ConfigModelImpl();
     return configModel;
@@ -105,8 +108,7 @@ public ConfigModel createConfigModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ConfigElement createConfigElement()
+  public ConfigElement createConfigElement()
   {
     ConfigElementImpl configElement = new ConfigElementImpl();
     return configElement;
@@ -117,8 +119,7 @@ public ConfigElement createConfigElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ActorClassConfig createActorClassConfig()
+  public ActorClassConfig createActorClassConfig()
   {
     ActorClassConfigImpl actorClassConfig = new ActorClassConfigImpl();
     return actorClassConfig;
@@ -129,8 +130,7 @@ public ActorClassConfig createActorClassConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ActorInstanceConfig createActorInstanceConfig()
+  public ActorInstanceConfig createActorInstanceConfig()
   {
     ActorInstanceConfigImpl actorInstanceConfig = new ActorInstanceConfigImpl();
     return actorInstanceConfig;
@@ -141,8 +141,40 @@ public ActorInstanceConfig createActorInstanceConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AttrConfig createAttrConfig()
+  public ProtocolClassConfig createProtocolClassConfig()
+  {
+    ProtocolClassConfigImpl protocolClassConfig = new ProtocolClassConfigImpl();
+    return protocolClassConfig;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PortClassConfig createPortClassConfig()
+  {
+    PortClassConfigImpl portClassConfig = new PortClassConfigImpl();
+    return portClassConfig;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PortInstanceConfig createPortInstanceConfig()
+  {
+    PortInstanceConfigImpl portInstanceConfig = new PortInstanceConfigImpl();
+    return portInstanceConfig;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AttrConfig createAttrConfig()
   {
     AttrConfigImpl attrConfig = new AttrConfigImpl();
     return attrConfig;
@@ -153,8 +185,7 @@ public AttrConfig createAttrConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AttrClassConfig createAttrClassConfig()
+  public AttrClassConfig createAttrClassConfig()
   {
     AttrClassConfigImpl attrClassConfig = new AttrClassConfigImpl();
     return attrClassConfig;
@@ -165,8 +196,7 @@ public AttrClassConfig createAttrClassConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AttrInstanceConfig createAttrInstanceConfig()
+  public AttrInstanceConfig createAttrInstanceConfig()
   {
     AttrInstanceConfigImpl attrInstanceConfig = new AttrInstanceConfigImpl();
     return attrInstanceConfig;
@@ -177,8 +207,7 @@ public AttrInstanceConfig createAttrInstanceConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RefPath createRefPath()
+  public RefPath createRefPath()
   {
     RefPathImpl refPath = new RefPathImpl();
     return refPath;
@@ -189,8 +218,7 @@ public RefPath createRefPath()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Import createImport()
+  public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -201,8 +229,18 @@ public Import createImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Literal createLiteral()
+  public LiteralArray createLiteralArray()
+  {
+    LiteralArrayImpl literalArray = new LiteralArrayImpl();
+    return literalArray;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
     return literal;
@@ -213,8 +251,7 @@ public Literal createLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public BooleanLiteral createBooleanLiteral()
+  public BooleanLiteral createBooleanLiteral()
   {
     BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
     return booleanLiteral;
@@ -225,8 +262,7 @@ public BooleanLiteral createBooleanLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumberLiteral createNumberLiteral()
+  public NumberLiteral createNumberLiteral()
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
     return numberLiteral;
@@ -237,8 +273,7 @@ public NumberLiteral createNumberLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RealLiteral createRealLiteral()
+  public RealLiteral createRealLiteral()
   {
     RealLiteralImpl realLiteral = new RealLiteralImpl();
     return realLiteral;
@@ -249,8 +284,7 @@ public RealLiteral createRealLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public IntLiteral createIntLiteral()
+  public IntLiteral createIntLiteral()
   {
     IntLiteralImpl intLiteral = new IntLiteralImpl();
     return intLiteral;
@@ -261,8 +295,7 @@ public IntLiteral createIntLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public StringLiteral createStringLiteral()
+  public StringLiteral createStringLiteral()
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
     return stringLiteral;
@@ -273,8 +306,7 @@ public StringLiteral createStringLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ConfigPackage getConfigPackage()
+  public ConfigPackage getConfigPackage()
   {
     return (ConfigPackage)getEPackage();
   }

@@ -191,13 +191,133 @@ public interface ConfigPackage extends EPackage
   int ACTOR_INSTANCE_CONFIG__ATTRIBUTES = CONFIG_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG__PORTS = CONFIG_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
    * The number of structural features of the '<em>Actor Instance Config</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 3;
+  int ACTOR_INSTANCE_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl <em>Protocol Class Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getProtocolClassConfig()
+   * @generated
+   */
+  int PROTOCOL_CLASS_CONFIG = 4;
+
+  /**
+   * The feature id for the '<em><b>Protocol</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS_CONFIG__PROTOCOL = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Regular</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS_CONFIG__REGULAR = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Conjugated</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS_CONFIG__CONJUGATED = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Protocol Class Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_CLASS_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.PortClassConfigImpl <em>Port Class Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.PortClassConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortClassConfig()
+   * @generated
+   */
+  int PORT_CLASS_CONFIG = 5;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT_CLASS_CONFIG__ATTRIBUTES = 0;
+
+  /**
+   * The number of structural features of the '<em>Port Class Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT_CLASS_CONFIG_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl <em>Port Instance Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortInstanceConfig()
+   * @generated
+   */
+  int PORT_INSTANCE_CONFIG = 6;
+
+  /**
+   * The feature id for the '<em><b>Item</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT_INSTANCE_CONFIG__ITEM = 0;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT_INSTANCE_CONFIG__ATTRIBUTES = 1;
+
+  /**
+   * The number of structural features of the '<em>Port Instance Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT_INSTANCE_CONFIG_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl <em>Attr Config</em>}' class.
@@ -207,7 +327,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrConfig()
    * @generated
    */
-  int ATTR_CONFIG = 4;
+  int ATTR_CONFIG = 7;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -244,7 +364,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrClassConfig()
    * @generated
    */
-  int ATTR_CLASS_CONFIG = 5;
+  int ATTR_CLASS_CONFIG = 8;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -299,7 +419,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrInstanceConfig()
    * @generated
    */
-  int ATTR_INSTANCE_CONFIG = 6;
+  int ATTR_INSTANCE_CONFIG = 9;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -336,7 +456,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefPath()
    * @generated
    */
-  int REF_PATH = 7;
+  int REF_PATH = 10;
 
   /**
    * The feature id for the '<em><b>Refs</b></em>' attribute list.
@@ -364,7 +484,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 8;
+  int IMPORT = 11;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -394,6 +514,34 @@ public interface ConfigPackage extends EPackage
   int IMPORT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.LiteralArrayImpl <em>Literal Array</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.LiteralArrayImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteralArray()
+   * @generated
+   */
+  int LITERAL_ARRAY = 12;
+
+  /**
+   * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_ARRAY__LITERALS = 0;
+
+  /**
+   * The number of structural features of the '<em>Literal Array</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_ARRAY_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.LiteralImpl <em>Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -401,7 +549,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 9;
+  int LITERAL = 13;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -420,7 +568,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 10;
+  int BOOLEAN_LITERAL = 14;
 
   /**
    * The feature id for the '<em><b>Is True</b></em>' attribute.
@@ -448,7 +596,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 11;
+  int NUMBER_LITERAL = 15;
 
   /**
    * The number of structural features of the '<em>Number Literal</em>' class.
@@ -467,7 +615,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRealLiteral()
    * @generated
    */
-  int REAL_LITERAL = 12;
+  int REAL_LITERAL = 16;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -495,7 +643,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 13;
+  int INT_LITERAL = 17;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -523,7 +671,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 14;
+  int STRING_LITERAL = 18;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -662,6 +810,113 @@ public interface ConfigPackage extends EPackage
   EReference getActorInstanceConfig_Attributes();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPorts <em>Ports</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Ports</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig#getPorts()
+   * @see #getActorInstanceConfig()
+   * @generated
+   */
+  EReference getActorInstanceConfig_Ports();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ProtocolClassConfig <em>Protocol Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Protocol Class Config</em>'.
+   * @see org.eclipse.etrice.core.config.ProtocolClassConfig
+   * @generated
+   */
+  EClass getProtocolClassConfig();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.ProtocolClassConfig#getProtocol <em>Protocol</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Protocol</em>'.
+   * @see org.eclipse.etrice.core.config.ProtocolClassConfig#getProtocol()
+   * @see #getProtocolClassConfig()
+   * @generated
+   */
+  EReference getProtocolClassConfig_Protocol();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.ProtocolClassConfig#getRegular <em>Regular</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Regular</em>'.
+   * @see org.eclipse.etrice.core.config.ProtocolClassConfig#getRegular()
+   * @see #getProtocolClassConfig()
+   * @generated
+   */
+  EReference getProtocolClassConfig_Regular();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.ProtocolClassConfig#getConjugated <em>Conjugated</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Conjugated</em>'.
+   * @see org.eclipse.etrice.core.config.ProtocolClassConfig#getConjugated()
+   * @see #getProtocolClassConfig()
+   * @generated
+   */
+  EReference getProtocolClassConfig_Conjugated();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.PortClassConfig <em>Port Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Port Class Config</em>'.
+   * @see org.eclipse.etrice.core.config.PortClassConfig
+   * @generated
+   */
+  EClass getPortClassConfig();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.PortClassConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.PortClassConfig#getAttributes()
+   * @see #getPortClassConfig()
+   * @generated
+   */
+  EReference getPortClassConfig_Attributes();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.PortInstanceConfig <em>Port Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Port Instance Config</em>'.
+   * @see org.eclipse.etrice.core.config.PortInstanceConfig
+   * @generated
+   */
+  EClass getPortInstanceConfig();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.PortInstanceConfig#getItem <em>Item</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Item</em>'.
+   * @see org.eclipse.etrice.core.config.PortInstanceConfig#getItem()
+   * @see #getPortInstanceConfig()
+   * @generated
+   */
+  EReference getPortInstanceConfig_Item();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.PortInstanceConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.PortInstanceConfig#getAttributes()
+   * @see #getPortInstanceConfig()
+   * @generated
+   */
+  EReference getPortInstanceConfig_Attributes();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.AttrConfig <em>Attr Config</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -787,6 +1042,27 @@ public interface ConfigPackage extends EPackage
    * @generated
    */
   EAttribute getImport_ImportURI();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.LiteralArray <em>Literal Array</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal Array</em>'.
+   * @see org.eclipse.etrice.core.config.LiteralArray
+   * @generated
+   */
+  EClass getLiteralArray();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.LiteralArray#getLiterals <em>Literals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Literals</em>'.
+   * @see org.eclipse.etrice.core.config.LiteralArray#getLiterals()
+   * @see #getLiteralArray()
+   * @generated
+   */
+  EReference getLiteralArray_Literals();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.Literal <em>Literal</em>}'.
@@ -1012,6 +1288,92 @@ public interface ConfigPackage extends EPackage
     EReference ACTOR_INSTANCE_CONFIG__ATTRIBUTES = eINSTANCE.getActorInstanceConfig_Attributes();
 
     /**
+     * The meta object literal for the '<em><b>Ports</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_INSTANCE_CONFIG__PORTS = eINSTANCE.getActorInstanceConfig_Ports();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl <em>Protocol Class Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getProtocolClassConfig()
+     * @generated
+     */
+    EClass PROTOCOL_CLASS_CONFIG = eINSTANCE.getProtocolClassConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Protocol</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROTOCOL_CLASS_CONFIG__PROTOCOL = eINSTANCE.getProtocolClassConfig_Protocol();
+
+    /**
+     * The meta object literal for the '<em><b>Regular</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROTOCOL_CLASS_CONFIG__REGULAR = eINSTANCE.getProtocolClassConfig_Regular();
+
+    /**
+     * The meta object literal for the '<em><b>Conjugated</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROTOCOL_CLASS_CONFIG__CONJUGATED = eINSTANCE.getProtocolClassConfig_Conjugated();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.PortClassConfigImpl <em>Port Class Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.PortClassConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortClassConfig()
+     * @generated
+     */
+    EClass PORT_CLASS_CONFIG = eINSTANCE.getPortClassConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PORT_CLASS_CONFIG__ATTRIBUTES = eINSTANCE.getPortClassConfig_Attributes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl <em>Port Instance Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortInstanceConfig()
+     * @generated
+     */
+    EClass PORT_INSTANCE_CONFIG = eINSTANCE.getPortInstanceConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Item</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PORT_INSTANCE_CONFIG__ITEM = eINSTANCE.getPortInstanceConfig_Item();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PORT_INSTANCE_CONFIG__ATTRIBUTES = eINSTANCE.getPortInstanceConfig_Attributes();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl <em>Attr Config</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1116,6 +1478,24 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.LiteralArrayImpl <em>Literal Array</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.LiteralArrayImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteralArray()
+     * @generated
+     */
+    EClass LITERAL_ARRAY = eINSTANCE.getLiteralArray();
+
+    /**
+     * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LITERAL_ARRAY__LITERALS = eINSTANCE.getLiteralArray_Literals();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.LiteralImpl <em>Literal</em>}' class.

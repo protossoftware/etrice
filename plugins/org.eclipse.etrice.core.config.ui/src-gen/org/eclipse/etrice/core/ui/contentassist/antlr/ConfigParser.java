@@ -54,6 +54,11 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConfigModelAccess().getGroup(), "rule__ConfigModel__Group__0");
 					put(grammarAccess.getActorClassConfigAccess().getGroup(), "rule__ActorClassConfig__Group__0");
 					put(grammarAccess.getActorInstanceConfigAccess().getGroup(), "rule__ActorInstanceConfig__Group__0");
+					put(grammarAccess.getProtocolClassConfigAccess().getGroup(), "rule__ProtocolClassConfig__Group__0");
+					put(grammarAccess.getProtocolClassConfigAccess().getGroup_3_0(), "rule__ProtocolClassConfig__Group_3_0__0");
+					put(grammarAccess.getProtocolClassConfigAccess().getGroup_3_1(), "rule__ProtocolClassConfig__Group_3_1__0");
+					put(grammarAccess.getPortClassConfigAccess().getGroup(), "rule__PortClassConfig__Group__0");
+					put(grammarAccess.getPortInstanceConfigAccess().getGroup(), "rule__PortInstanceConfig__Group__0");
 					put(grammarAccess.getAttrClassConfigAccess().getGroup(), "rule__AttrClassConfig__Group__0");
 					put(grammarAccess.getAttrClassConfigAccess().getGroup_2(), "rule__AttrClassConfig__Group_2__0");
 					put(grammarAccess.getAttrClassConfigAccess().getGroup_3(), "rule__AttrClassConfig__Group_3__0");
@@ -68,6 +73,8 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
+					put(grammarAccess.getLiteralArrayAccess().getGroup(), "rule__LiteralArray__Group__0");
+					put(grammarAccess.getLiteralArrayAccess().getGroup_1(), "rule__LiteralArray__Group_1__0");
 					put(grammarAccess.getBooleanLiteralAccess().getGroup(), "rule__BooleanLiteral__Group__0");
 					put(grammarAccess.getRealLiteralAccess().getGroup(), "rule__RealLiteral__Group__0");
 					put(grammarAccess.getIntLiteralAccess().getGroup(), "rule__IntLiteral__Group__0");
@@ -84,6 +91,13 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorInstanceConfigAccess().getRootAssignment_1(), "rule__ActorInstanceConfig__RootAssignment_1");
 					put(grammarAccess.getActorInstanceConfigAccess().getPathAssignment_3(), "rule__ActorInstanceConfig__PathAssignment_3");
 					put(grammarAccess.getActorInstanceConfigAccess().getAttributesAssignment_5(), "rule__ActorInstanceConfig__AttributesAssignment_5");
+					put(grammarAccess.getActorInstanceConfigAccess().getPortsAssignment_6(), "rule__ActorInstanceConfig__PortsAssignment_6");
+					put(grammarAccess.getProtocolClassConfigAccess().getProtocolAssignment_1(), "rule__ProtocolClassConfig__ProtocolAssignment_1");
+					put(grammarAccess.getProtocolClassConfigAccess().getRegularAssignment_3_0_1(), "rule__ProtocolClassConfig__RegularAssignment_3_0_1");
+					put(grammarAccess.getProtocolClassConfigAccess().getConjugatedAssignment_3_1_1(), "rule__ProtocolClassConfig__ConjugatedAssignment_3_1_1");
+					put(grammarAccess.getPortClassConfigAccess().getAttributesAssignment_3(), "rule__PortClassConfig__AttributesAssignment_3");
+					put(grammarAccess.getPortInstanceConfigAccess().getItemAssignment_1(), "rule__PortInstanceConfig__ItemAssignment_1");
+					put(grammarAccess.getPortInstanceConfigAccess().getAttributesAssignment_3(), "rule__PortInstanceConfig__AttributesAssignment_3");
 					put(grammarAccess.getAttrClassConfigAccess().getAttributeAssignment_1(), "rule__AttrClassConfig__AttributeAssignment_1");
 					put(grammarAccess.getAttrClassConfigAccess().getValueAssignment_2_1(), "rule__AttrClassConfig__ValueAssignment_2_1");
 					put(grammarAccess.getAttrClassConfigAccess().getMinAssignment_3_1_0_2(), "rule__AttrClassConfig__MinAssignment_3_1_0_2");
@@ -94,10 +108,13 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
 					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
+					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_0(), "rule__LiteralArray__LiteralsAssignment_0");
+					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_1_1(), "rule__LiteralArray__LiteralsAssignment_1_1");
 					put(grammarAccess.getBooleanLiteralAccess().getIsTrueAssignment_1_1(), "rule__BooleanLiteral__IsTrueAssignment_1_1");
 					put(grammarAccess.getRealLiteralAccess().getValueAssignment_1(), "rule__RealLiteral__ValueAssignment_1");
 					put(grammarAccess.getIntLiteralAccess().getValueAssignment_1(), "rule__IntLiteral__ValueAssignment_1");
 					put(grammarAccess.getStringLiteralAccess().getValueAssignment_1(), "rule__StringLiteral__ValueAssignment_1");
+					put(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), "rule__ProtocolClassConfig__UnorderedGroup_3");
 					put(grammarAccess.getAttrClassConfigAccess().getUnorderedGroup_3_1(), "rule__AttrClassConfig__UnorderedGroup_3_1");
 				}
 			};

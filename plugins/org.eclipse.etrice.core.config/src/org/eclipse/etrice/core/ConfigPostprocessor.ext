@@ -12,6 +12,7 @@
 
 import ecore;
 import xtext;
+import room;
 
 process(xtext::GeneratedMetamodel this) :
   process(ePackage)
@@ -42,18 +43,28 @@ process(EClass this) :
 			 		if(element instanceof ActorInstanceConfig)
 						list.add((ActorInstanceConfig) element);
 				return list;'
+			)->addOperation(
+		   		"getProtocolClassConfigs",
+	       		ePackage.getEClassifier("ProtocolClassConfig"),
+	       		-1,
+	       		'EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
+				for(ConfigElement element : this.getConfigElements())
+			 		if(element instanceof ProtocolClassConfig)
+						list.add((ProtocolClassConfig) element);
+				return list;'
 			))
 		default: null
 	}
 ;
 	
+
+
 create ecore::EOperation addOperation(ecore::EClassifier c, String strName, ecore::EClassifier type, Integer upperBound, String strBody):
 	setName(strName) ->
 	setEType(type) -> 
 	setUpperBound(upperBound)->
 	addBodyAnnotation(strBody)->
 	((ecore::EClass)c).eOperations.add(this);
-
 
 create ecore::EAnnotation addBodyAnnotation(ecore::EOperation op, String strBody):
 	setSource("http://www.eclipse.org/emf/2002/GenModel") ->

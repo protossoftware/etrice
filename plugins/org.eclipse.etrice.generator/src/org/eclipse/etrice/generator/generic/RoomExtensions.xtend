@@ -202,6 +202,21 @@ class RoomExtensions {
 	//-------------------------------------------------------
 	// protocol related methods
 	
+	def dispatch String getPortClassName(Port p){
+		if (p.protocol instanceof ProtocolClass)
+			(p.protocol as ProtocolClass).getPortClassName(p.conjugated, p.replicated)
+		else
+			""
+	}
+	
+	def dispatch getPortClassName(SAPRef sap) {
+		return sap.protocol.getPortClassName(true)
+	}
+
+	def dispatch String getPortClassName(SPPRef spp) {
+		return spp.protocol.getPortClassName(false, true)
+	}
+	
 	def String getPortClassName(ProtocolClass p, boolean conj) {
 		getPortClassName(p, conj, false)
 	}
@@ -210,27 +225,12 @@ class RoomExtensions {
 		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
 	}
 
-	def String getPortClassName(Port p){
-		if (p.protocol instanceof ProtocolClass)
-			(p.protocol as ProtocolClass).getPortClassName(p.conjugated, p.replicated)
-		else
-			""
-	}
-
 	def String getPortClassName(ExternalPort p){
 		return p.ifport.getPortClassName()
 	}
 
-	def String getPortClassName(SAPRef sap) {
-		return sap.protocol.getPortClassName(true)
-	}
-
 	def String getPortClassName(ServiceImplementation svc) {
 		return svc.spp.protocol.getPortClassName(false, true)
-	}
-
-	def String getPortClassName(SPPRef spp) {
-		return spp.protocol.getPortClassName(false, true)
 	}
 
 	// message lists with super class messages, super classes first

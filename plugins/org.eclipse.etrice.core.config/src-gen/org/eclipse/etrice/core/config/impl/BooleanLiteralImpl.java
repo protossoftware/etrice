@@ -76,8 +76,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isIsTrue()
+  public boolean isIsTrue()
   {
     return isTrue;
   }
@@ -87,8 +86,7 @@ public boolean isIsTrue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setIsTrue(boolean newIsTrue)
+  public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
     isTrue = newIsTrue;
