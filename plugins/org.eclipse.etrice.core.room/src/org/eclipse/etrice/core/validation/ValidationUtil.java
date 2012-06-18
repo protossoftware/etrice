@@ -929,10 +929,9 @@ public class ValidationUtil {
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
-		else {
+		else if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
 			if (tr instanceof GuardedTransition) {
-				if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN)
-					return Result.error("event driven state machine must not contain guarded transition",
+				return Result.error("event driven state machine must not contain guarded transition",
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
@@ -947,6 +946,16 @@ public class ValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 		}
+		else if (ac.getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+			if (tr instanceof ContinuationTransition) {
+				// if at this point no continuation transition is allowed it probably should be a triggered or guarded transition
+				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
+				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
+					return Result.error("trigger/guard must not be empty",
+							tr.eContainer(),
+							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}		}
 		return Result.ok();
 	}
 	
