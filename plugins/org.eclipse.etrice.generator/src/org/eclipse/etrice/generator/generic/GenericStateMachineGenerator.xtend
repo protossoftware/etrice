@@ -283,6 +283,8 @@ class GenericStateMachineGenerator {
 								break;
 								«genEventDrivenTriggers(xpac, state, atlist, dct)»
 							}
+						«ELSE»
+							«genDataDrivenTriggers(xpac, state, dct)»
 						«ENDIF»
 					«ELSEIF dataDriven»
 						«genDataDrivenTriggers(xpac, state, dct)»
