@@ -8,10 +8,10 @@ void etTimer_init(void){
 }
 
 uint64 getTargetTimeUs(void){
-	struct timeval time;
-	gettimeofday(&time, NULL);
+	struct timeval currentTime;
+	gettimeofday(&currentTime, NULL);
 
-	return time.tv_sec * 1000000L + time.tv_usec;
+	return currentTime.tv_sec * 1000000L + currentTime.tv_usec;
 }
 
 etBool etTimer_executeNeeded(void){
@@ -31,3 +31,9 @@ etBool etTimer_executeNeeded(void){
 	}
 }
 
+void getTimeFromTarget(etTargetTime_t *t){
+	struct timeval currentTime;
+	gettimeofday(&currentTime, NULL);
+	t->sec = currentTime.tv_sec;
+	t->nSec = currentTime.tv_usec*1000;
+}
