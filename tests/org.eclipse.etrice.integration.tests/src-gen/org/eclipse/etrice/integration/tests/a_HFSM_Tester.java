@@ -46,7 +46,12 @@ public class a_HFSM_Tester extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public p_HFSMConjPort getTestee (){
+		return this.testee;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

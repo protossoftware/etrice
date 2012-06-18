@@ -3,6 +3,7 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Singleton;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -23,6 +24,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
@@ -287,6 +289,33 @@ public class RoomExtensions {
     return _xifexpression;
   }
   
+  protected String _getPortClassName(final Port p) {
+    String _xifexpression = null;
+    GeneralProtocolClass _protocol = p.getProtocol();
+    if ((_protocol instanceof ProtocolClass)) {
+      GeneralProtocolClass _protocol_1 = p.getProtocol();
+      boolean _isConjugated = p.isConjugated();
+      boolean _isReplicated = p.isReplicated();
+      String _portClassName = this.getPortClassName(((ProtocolClass) _protocol_1), _isConjugated, _isReplicated);
+      _xifexpression = _portClassName;
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
+  }
+  
+  protected String _getPortClassName(final SAPRef sap) {
+    ProtocolClass _protocol = sap.getProtocol();
+    String _portClassName = this.getPortClassName(_protocol, true);
+    return _portClassName;
+  }
+  
+  protected String _getPortClassName(final SPPRef spp) {
+    ProtocolClass _protocol = spp.getProtocol();
+    String _portClassName = this.getPortClassName(_protocol, false, true);
+    return _portClassName;
+  }
+  
   public String getPortClassName(final ProtocolClass p, final boolean conj) {
     String _portClassName = this.getPortClassName(p, conj, false);
     return _portClassName;
@@ -312,42 +341,15 @@ public class RoomExtensions {
     return _operator_plus_2;
   }
   
-  public String getPortClassName(final Port p) {
-    String _xifexpression = null;
-    GeneralProtocolClass _protocol = p.getProtocol();
-    if ((_protocol instanceof ProtocolClass)) {
-      GeneralProtocolClass _protocol_1 = p.getProtocol();
-      boolean _isConjugated = p.isConjugated();
-      boolean _isReplicated = p.isReplicated();
-      String _portClassName = this.getPortClassName(((ProtocolClass) _protocol_1), _isConjugated, _isReplicated);
-      _xifexpression = _portClassName;
-    } else {
-      _xifexpression = "";
-    }
-    return _xifexpression;
-  }
-  
   public String getPortClassName(final ExternalPort p) {
     Port _ifport = p.getIfport();
     String _portClassName = this.getPortClassName(_ifport);
     return _portClassName;
   }
   
-  public String getPortClassName(final SAPRef sap) {
-    ProtocolClass _protocol = sap.getProtocol();
-    String _portClassName = this.getPortClassName(_protocol, true);
-    return _portClassName;
-  }
-  
   public String getPortClassName(final ServiceImplementation svc) {
     SPPRef _spp = svc.getSpp();
     ProtocolClass _protocol = _spp.getProtocol();
-    String _portClassName = this.getPortClassName(_protocol, false, true);
-    return _portClassName;
-  }
-  
-  public String getPortClassName(final SPPRef spp) {
-    ProtocolClass _protocol = spp.getProtocol();
     String _portClassName = this.getPortClassName(_protocol, false, true);
     return _portClassName;
   }
@@ -1031,5 +1033,18 @@ public class RoomExtensions {
         result.addAll(_outgoingTransitionsHierarchical);
       }
       return result;
+  }
+  
+  public String getPortClassName(final InterfaceItem p) {
+    if (p instanceof Port) {
+      return _getPortClassName((Port)p);
+    } else if (p instanceof SAPRef) {
+      return _getPortClassName((SAPRef)p);
+    } else if (p instanceof SPPRef) {
+      return _getPortClassName((SPPRef)p);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(p).toString());
+    }
   }
 }

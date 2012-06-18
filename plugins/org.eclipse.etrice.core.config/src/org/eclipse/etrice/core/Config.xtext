@@ -1,30 +1,180 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug and Thomas Schuetz (initial contribution)
+ * 
+ *******************************************************************************/
 grammar org.eclipse.etrice.core.Config with org.eclipse.xtext.common.Terminals
 
 generate config "http://www.eclipse.org/etrice/core/Config"
-
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import 'platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore' as room
 
-
+/*
+ * Postprocessor:
+ * getActor(Class|Instance)Config()
+ */
 ConfigModel:
-	actorClassConfigs+=ActorClassConfig*
-	actorInstanceConfigs+=ActorInstanceConfig*
-	;
-	
-	
+	imports+=Import*
+	configElements+=ConfigElement*;
+
+ConfigElement:
+	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+
+	/*
+	 * Validation:
+	 * duplicates config, attributes
+	 */
 ActorClassConfig:
-	'ActorClassConfig' actorClass = [room::ActorClass] '{'
-		
-	'}' 
-;
+	'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
+	attributes+=AttrClassConfig*
+	'}';
 
-// ActorInstanceConfig MySS.AR1.AR2 {
-// 		min = 1
-//		max = 5
-// }
-
+	/*
+	 * Validation: 
+	 * duplicates config, attributes
+	 * valid instance reference
+	 * Proposal:
+	 * attributes
+	 */
 ActorInstanceConfig:
-	'ActorInstanceConfig' /* root=[room::SubSystemClass|FQN] '/' path=RefPath */ '{'
-		
-	'}' 
+	'ActorInstanceConfig' root=[room::SubSystemClass|FQN] '/' path=RefPath '{'
+	attributes+=AttrInstanceConfig*
+	ports+=PortInstanceConfig*
+	'}';
+
+ProtocolClassConfig:
+	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
+	(('regular' regular=PortClassConfig)? &
+	('conjugate' conjugated=PortClassConfig)?)
+	'}';
+
+PortClassConfig:
+	{PortClassConfig} 'Port' '{'
+	attributes+=AttrClassConfig*
+	'}';
+
+PortInstanceConfig:
+	'InterfaceItem' item=[room::InterfaceItem|ID] '{'
+	attributes+=AttrInstanceConfig*
+	'}';
+
+	/*
+	 * Validation:
+	 * correct value type
+	 * Proposal:
+	 * correct Literal
+	 */
+AttrConfig:
+	AttrClassConfig | AttrInstanceConfig;
+
+	/*
+	 * Validation:
+	 * correct min, max type + available
+	 * min <= value <= max
+	 * if !value -> min <= attribute.defaultValue <= max
+	 * character length
+	 * 
+	 */
+AttrClassConfig:
+	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
+	(('min' '=' min=NumberLiteral)? &
+	('max' '=' max=NumberLiteral)?)
+	'}')?;
+
+AttrInstanceConfig:
+	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)?;
+
+	/*
+	 * Proposal:
+	 * for ActorInstanceConfig
+	 */
+RefPath:
+	refs+=ID ('/' refs+=ID)*;
+
+	// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
+Import:
+	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+
+ImportedFQN:
+	FQN ('.*')?;
+
+FQN:
+	ID ('.' ID)*;
+
+	// -----------------------------------------------------------------------------
+
+//enum Unit:
+//	N|
+//	W|
+//	S = 's'|
+//	KG = 'kg'|
+//	M = 'm'|
+//	C|
+//	NM|
+//	RPM|
+//	V|
+//	A|
+//	HZ = 'Hz'|
+//	KW
+//;
+
+// LiteralArray = BooleanLiteral+|NumberLiteral+
+// LiteralArray = StringLiteral
+LiteralArray:
+	literals+=Literal (',' literals+=Literal)*
 ;
+
+// Value Types for Attributes
+Literal:
+	BooleanLiteral |
+	NumberLiteral |
+	StringLiteral;
+
+BooleanLiteral:
+	{BooleanLiteral} ('false' | isTrue?='true');
+
+NumberLiteral:
+	IntLiteral | RealLiteral;
+
+RealLiteral:
+	{RealLiteral} value=Real;
+
+IntLiteral:
+	{IntLiteral} value=Integer;
+
+StringLiteral:
+	{StringLiteral} value=STRING;
+
+Integer returns ecore::EInt:
+	SignedInteger | Hexadecimal;
+
+SignedInteger hidden():
+	('+' | '-')? INT;
+
+Hexadecimal hidden():
+	HEX;
+
+Real returns ecore::EDouble:
+	Decimal | DotDecimal | DecimalDot | DecimalExp;
+
+Decimal hidden():
+	('+' | '-')? INT '.' INT;
+
+DotDecimal hidden():
+	('+' | '-')? '.' INT;
+
+DecimalDot hidden():
+	('+' | '-')? INT '.';
+
+DecimalExp hidden():
+	('+' | '-')? INT '.' INT ID ('+' | '-')? INT;
+	//DecimalPosExp hidden():
+//	('+' | '-')? INT '.' INT ID; 
+terminal HEX:
+	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;

@@ -17,13 +17,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.config.ActorClassConfig;
+import org.eclipse.etrice.core.config.ActorInstanceConfig;
+import org.eclipse.etrice.core.config.ConfigElement;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,8 +35,8 @@ import org.eclipse.etrice.core.config.ConfigPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getActorClassConfigs <em>Actor Class Configs</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getActorInstanceConfigs <em>Actor Instance Configs</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getConfigElements <em>Config Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,24 +45,24 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 public class ConfigModelImpl extends MinimalEObjectImpl.Container implements ConfigModel
 {
   /**
-   * The cached value of the '{@link #getActorClassConfigs() <em>Actor Class Configs</em>}' containment reference list.
+   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActorClassConfigs()
+   * @see #getImports()
    * @generated
    * @ordered
    */
-  protected EList<ActorClassConfig> actorClassConfigs;
+  protected EList<Import> imports;
 
   /**
-   * The cached value of the '{@link #getActorInstanceConfigs() <em>Actor Instance Configs</em>}' attribute list.
+   * The cached value of the '{@link #getConfigElements() <em>Config Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActorInstanceConfigs()
+   * @see #getConfigElements()
    * @generated
    * @ordered
    */
-  protected EList<String> actorInstanceConfigs;
+  protected EList<ConfigElement> configElements;
 
   /**
    * <!-- begin-user-doc -->
@@ -87,13 +90,13 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ActorClassConfig> getActorClassConfigs()
+  public EList<Import> getImports()
   {
-    if (actorClassConfigs == null)
+    if (imports == null)
     {
-      actorClassConfigs = new EObjectContainmentEList<ActorClassConfig>(ActorClassConfig.class, this, ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS);
+      imports = new EObjectContainmentEList<Import>(Import.class, this, ConfigPackage.CONFIG_MODEL__IMPORTS);
     }
-    return actorClassConfigs;
+    return imports;
   }
 
   /**
@@ -101,13 +104,55 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getActorInstanceConfigs()
+  public EList<ConfigElement> getConfigElements()
   {
-    if (actorInstanceConfigs == null)
+    if (configElements == null)
     {
-      actorInstanceConfigs = new EDataTypeEList<String>(String.class, this, ConfigPackage.CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS);
+      configElements = new EObjectContainmentEList<ConfigElement>(ConfigElement.class, this, ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS);
     }
-    return actorInstanceConfigs;
+    return configElements;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ActorClassConfig> getActorClassConfigs()
+  {
+    EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
+             			for(ConfigElement element : this.getConfigElements())
+             				if(element instanceof ActorClassConfig)
+             					list.add((ActorClassConfig) element);
+             		 return list;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ActorInstanceConfig> getActorInstanceConfigs()
+  {
+    EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
+            for(ConfigElement element : this.getConfigElements())
+           		if(element instanceof ActorInstanceConfig)
+                list.add((ActorInstanceConfig) element);
+            return list;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ProtocolClassConfig> getProtocolClassConfigs()
+  {
+    EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
+            for(ConfigElement element : this.getConfigElements())
+           		if(element instanceof ProtocolClassConfig)
+                list.add((ProtocolClassConfig) element);
+            return list;
   }
 
   /**
@@ -120,8 +165,10 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     switch (featureID)
     {
-      case ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS:
-        return ((InternalEList<?>)getActorClassConfigs()).basicRemove(otherEnd, msgs);
+      case ConfigPackage.CONFIG_MODEL__IMPORTS:
+        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS:
+        return ((InternalEList<?>)getConfigElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -136,10 +183,10 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     switch (featureID)
     {
-      case ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS:
-        return getActorClassConfigs();
-      case ConfigPackage.CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS:
-        return getActorInstanceConfigs();
+      case ConfigPackage.CONFIG_MODEL__IMPORTS:
+        return getImports();
+      case ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS:
+        return getConfigElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,13 +202,13 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     switch (featureID)
     {
-      case ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS:
-        getActorClassConfigs().clear();
-        getActorClassConfigs().addAll((Collection<? extends ActorClassConfig>)newValue);
+      case ConfigPackage.CONFIG_MODEL__IMPORTS:
+        getImports().clear();
+        getImports().addAll((Collection<? extends Import>)newValue);
         return;
-      case ConfigPackage.CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS:
-        getActorInstanceConfigs().clear();
-        getActorInstanceConfigs().addAll((Collection<? extends String>)newValue);
+      case ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS:
+        getConfigElements().clear();
+        getConfigElements().addAll((Collection<? extends ConfigElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -177,11 +224,11 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     switch (featureID)
     {
-      case ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS:
-        getActorClassConfigs().clear();
+      case ConfigPackage.CONFIG_MODEL__IMPORTS:
+        getImports().clear();
         return;
-      case ConfigPackage.CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS:
-        getActorInstanceConfigs().clear();
+      case ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS:
+        getConfigElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -197,29 +244,12 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   {
     switch (featureID)
     {
-      case ConfigPackage.CONFIG_MODEL__ACTOR_CLASS_CONFIGS:
-        return actorClassConfigs != null && !actorClassConfigs.isEmpty();
-      case ConfigPackage.CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS:
-        return actorInstanceConfigs != null && !actorInstanceConfigs.isEmpty();
+      case ConfigPackage.CONFIG_MODEL__IMPORTS:
+        return imports != null && !imports.isEmpty();
+      case ConfigPackage.CONFIG_MODEL__CONFIG_ELEMENTS:
+        return configElements != null && !configElements.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (actorInstanceConfigs: ");
-    result.append(actorInstanceConfigs);
-    result.append(')');
-    return result.toString();
   }
 
 } //ConfigModelImpl

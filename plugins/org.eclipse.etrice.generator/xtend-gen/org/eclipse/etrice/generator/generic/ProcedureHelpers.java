@@ -17,6 +17,7 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
+import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -35,6 +36,9 @@ public class ProcedureHelpers {
   
   @Inject
   public ITranslationProvider translator;
+  
+  @Inject
+  private ConfigExtension _configExtension;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -180,24 +184,24 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Attribute a : attribs) {
+        String _initValue = this._configExtension.getInitValue(a);
+        String value = _initValue;
+        _builder.newLineIfNotEmpty();
         {
-          String _defaultValueLiteral = a.getDefaultValueLiteral();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(value, null);
           if (_operator_notEquals) {
             {
-              int _size = a.getSize();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
-              if (_operator_equals) {
+              boolean _isArray = this._configExtension.isArray(a);
+              boolean _operator_not = BooleanExtensions.operator_not(_isArray);
+              if (_operator_not) {
                 String _name = a.getName();
                 _builder.append(_name, "");
                 _builder.append(" = ");
-                String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
-                _builder.append(_defaultValueLiteral_1, "");
+                _builder.append(value, "");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               } else {
-                String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
-                boolean _startsWith = _defaultValueLiteral_2.startsWith("{");
+                boolean _startsWith = value.startsWith("{");
                 if (_startsWith) {
                   String _name_1 = a.getName();
                   _builder.append(_name_1, "");
@@ -207,8 +211,7 @@ public class ProcedureHelpers {
                   String _typeName = this._typeHelpers.typeName(_type);
                   _builder.append(_typeName, "");
                   _builder.append("[] ");
-                  String _defaultValueLiteral_3 = a.getDefaultValueLiteral();
-                  _builder.append(_defaultValueLiteral_3, "");
+                  _builder.append(value, "");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 } else {
@@ -220,21 +223,20 @@ public class ProcedureHelpers {
                   String _typeName_1 = this._typeHelpers.typeName(_type_1);
                   _builder.append(_typeName_1, "");
                   _builder.append("[");
-                  int _size_1 = a.getSize();
-                  _builder.append(_size_1, "");
+                  int _size = a.getSize();
+                  _builder.append(_size, "");
                   _builder.append("];");
                   _builder.newLineIfNotEmpty();
                   _builder.append("for (int i=0;i<");
-                  int _size_2 = a.getSize();
-                  _builder.append(_size_2, "");
+                  int _size_1 = a.getSize();
+                  _builder.append(_size_1, "");
                   _builder.append(";i++){");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   String _name_3 = a.getName();
                   _builder.append(_name_3, "	");
                   _builder.append("[i] = ");
-                  String _defaultValueLiteral_4 = a.getDefaultValueLiteral();
-                  _builder.append(_defaultValueLiteral_4, "	");
+                  _builder.append(value, "	");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
@@ -250,21 +252,21 @@ public class ProcedureHelpers {
             if ((_type_2 instanceof ComplexType)) {
               _operator_or_1 = true;
             } else {
-              int _size_3 = a.getSize();
-              boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_3), ((Integer)1));
+              int _size_2 = a.getSize();
+              boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_2), ((Integer)1));
               _operator_or_1 = BooleanExtensions.operator_or((_type_2 instanceof ComplexType), _operator_greaterThan);
             }
             if (_operator_or_1) {
               _operator_or = true;
             } else {
-              boolean _operator_not = BooleanExtensions.operator_not(useClassDefaultsOnly);
-              _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_not);
+              boolean _operator_not_1 = BooleanExtensions.operator_not(useClassDefaultsOnly);
+              _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_not_1);
             }
             if (_operator_or) {
               {
-                int _size_4 = a.getSize();
-                boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_4), ((Integer)0));
-                if (_operator_equals_1) {
+                int _size_3 = a.getSize();
+                boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_3), ((Integer)0));
+                if (_operator_equals) {
                   {
                     RefableType _refType_3 = a.getRefType();
                     boolean _isRef = _refType_3.isRef();
@@ -297,16 +299,16 @@ public class ProcedureHelpers {
                   String _typeName_2 = this._typeHelpers.typeName(_type_4);
                   _builder.append(_typeName_2, "");
                   _builder.append("[");
-                  int _size_5 = a.getSize();
-                  _builder.append(_size_5, "");
+                  int _size_4 = a.getSize();
+                  _builder.append(_size_4, "");
                   _builder.append("];");
                   _builder.newLineIfNotEmpty();
                   {
-                    boolean _operator_not_1 = BooleanExtensions.operator_not(useClassDefaultsOnly);
-                    if (_operator_not_1) {
+                    boolean _operator_not_2 = BooleanExtensions.operator_not(useClassDefaultsOnly);
+                    if (_operator_not_2) {
                       _builder.append("for (int i=0;i<");
-                      int _size_6 = a.getSize();
-                      _builder.append(_size_6, "");
+                      int _size_5 = a.getSize();
+                      _builder.append(_size_5, "");
                       _builder.append(";i++){");
                       _builder.newLineIfNotEmpty();
                       _builder.append("\t");
@@ -483,6 +485,55 @@ public class ProcedureHelpers {
         _builder.append(_name, "");
       }
     }
+    return _builder;
+  }
+  
+  public StringConcatenation getterImplementation(final String typeName, final String name, final String classname) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _accessLevelPublic = this.languageExt.accessLevelPublic();
+    _builder.append(_accessLevelPublic, "");
+    _builder.append(typeName, "");
+    _builder.append(" get");
+    String _firstUpper = StringExtensions.toFirstUpper(name);
+    _builder.append(_firstUpper, "");
+    _builder.append(" (");
+    String _selfPointer = this.languageExt.selfPointer(classname, false);
+    _builder.append(_selfPointer, "");
+    _builder.append("){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("return ");
+    String _memberAccess = this.languageExt.memberAccess();
+    _builder.append(_memberAccess, "	");
+    _builder.append(name, "	");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    return _builder;
+  }
+  
+  public StringConcatenation invokeGetter(final String name, final String classname) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("get");
+    String _firstUpper = StringExtensions.toFirstUpper(name);
+    _builder.append(_firstUpper, "");
+    _builder.append("(");
+    String _selfPointer = this.languageExt.selfPointer(classname, true);
+    _builder.append(_selfPointer, "");
+    _builder.append(")");
+    return _builder;
+  }
+  
+  public StringConcatenation invokeSetter(final String name, final String classname, final String value) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("set");
+    String _firstUpper = StringExtensions.toFirstUpper(name);
+    _builder.append(_firstUpper, "");
+    _builder.append("(");
+    String _selfPointer = this.languageExt.selfPointer(classname, true);
+    _builder.append(_selfPointer, "");
+    _builder.append(value, "");
+    _builder.append(")");
     return _builder;
   }
   

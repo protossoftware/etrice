@@ -69,7 +69,24 @@ public class MrPing extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	public void setI32Array (int[] i32Array) {
+		 this.i32Array = i32Array;
+	}
+	public int[] getI32Array () {
+		return this.i32Array;
+	}
+	public void setData (PingPongData data) {
+		 this.data = data;
+	}
+	public PingPongData getData () {
+		return this.data;
+	}
+	//--------------------- port getters
+	public PingPongProtocolConjPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -334,7 +334,7 @@ public class ValidationUtil {
 					return Result.error("protocol communication types don't match");
 			}
 			if (compoundInvolved) {
-				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, p2, sc, exclude);
+				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, ref1, p2, ref2, sc, exclude);
 				if (matches.isEmpty())
 					return Result.error("no matching sub protocol(s) found");
 				if (matches.size()==1)
@@ -420,6 +420,13 @@ public class ValidationUtil {
 		bindings.add(key);
 		for (Binding bind : sc.getBindings()) {
 			if (bind==exclude)
+				continue;
+			
+			if (!(bind.getEndpoint1().getPort()==p1 && bind.getEndpoint1().getActorRef()==ref1
+					&& bind.getEndpoint2().getPort()==p2 && bind.getEndpoint2().getActorRef()==ref2))
+				continue;
+			if (!(bind.getEndpoint2().getPort()==p1 && bind.getEndpoint2().getActorRef()==ref1
+					&& bind.getEndpoint1().getPort()==p2 && bind.getEndpoint1().getActorRef()==ref2))
 				continue;
 
 			key = getKey(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
@@ -922,12 +929,13 @@ public class ValidationUtil {
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
-		else {
-			if (tr instanceof GuardedTransition)
+		else if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
+			if (tr instanceof GuardedTransition) {
 				return Result.error("event driven state machine must not contain guarded transition",
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}
 			else if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a triggered transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
@@ -938,6 +946,16 @@ public class ValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 		}
+		else if (ac.getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+			if (tr instanceof ContinuationTransition) {
+				// if at this point no continuation transition is allowed it probably should be a triggered or guarded transition
+				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
+				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
+					return Result.error("trigger/guard must not be empty",
+							tr.eContainer(),
+							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}		}
 		return Result.ok();
 	}
 	

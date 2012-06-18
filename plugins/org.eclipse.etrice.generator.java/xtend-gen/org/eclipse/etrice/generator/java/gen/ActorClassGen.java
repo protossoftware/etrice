@@ -450,7 +450,54 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("//--------------------- attributes getter and setter");
       _builder.newLine();
+      _builder.append("\t");
+      EList<Attribute> _attributes_3 = ac.getAttributes();
+      String _name_24 = ac.getName();
+      StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_3, _name_24);
+      _builder.append(_attributeSettersGettersImplementation, "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("//--------------------- port getters");
+      _builder.newLine();
+      {
+        List<Port> _endPorts_2 = this.roomExt.getEndPorts(ac);
+        for(final Port ep_2 : _endPorts_2) {
+          _builder.append("\t");
+          String _portClassName_6 = this.roomExt.getPortClassName(ep_2);
+          String _name_25 = ep_2.getName();
+          String _name_26 = ac.getName();
+          StringConcatenation _terImplementation = this.helpers.getterImplementation(_portClassName_6, _name_25, _name_26);
+          _builder.append(_terImplementation, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
+        EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
+        for(final SAPRef sap_2 : _strSAPs_2) {
+          _builder.append("\t");
+          String _portClassName_7 = this.roomExt.getPortClassName(sap_2);
+          String _name_27 = sap_2.getName();
+          String _name_28 = ac.getName();
+          StringConcatenation _terImplementation_1 = this.helpers.getterImplementation(_portClassName_7, _name_27, _name_28);
+          _builder.append(_terImplementation_1, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
+        EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
+        for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
+          _builder.append("\t");
+          String _portClassName_8 = this.roomExt.getPortClassName(svc_2);
+          SPPRef _spp_6 = svc_2.getSpp();
+          String _name_29 = _spp_6.getName();
+          String _name_30 = ac.getName();
+          StringConcatenation _terImplementation_2 = this.helpers.getterImplementation(_portClassName_8, _name_29, _name_30);
+          _builder.append(_terImplementation_2, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- lifecycle functions");

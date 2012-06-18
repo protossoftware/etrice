@@ -43,7 +43,12 @@ public class CPTester extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public TestProtocolConjPort getTestPort1 (){
+		return this.TestPort1;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

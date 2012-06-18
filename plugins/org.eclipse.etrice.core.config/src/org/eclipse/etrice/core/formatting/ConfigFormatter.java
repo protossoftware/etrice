@@ -3,8 +3,11 @@
  */
 package org.eclipse.etrice.core.formatting;
 
+import org.eclipse.etrice.core.services.ConfigGrammarAccess;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * This class contains custom formatting description.
@@ -18,10 +21,45 @@ public class ConfigFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getSL_COMMENTRule());
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getML_COMMENTRule());
-//		c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+		ConfigGrammarAccess f = (ConfigGrammarAccess) getGrammarAccess();
+
+		// general
+		
+		c.setAutoLinewrap(120);
+		c.setLinewrap(2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(2).before(f.getML_COMMENTRule());
+		
+		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}")) {
+			c.setLinewrap().after(pair.getFirst());
+			c.setIndentationIncrement().after(pair.getFirst());
+			c.setLinewrap().before(pair.getSecond());
+			c.setIndentationDecrement().before(pair.getSecond());
+			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
+		}		
+	
+		for (Keyword k: f.findKeywords("(", "|", ".", "*")) {
+			c.setNoSpace().around(k);
+		}
+		
+		for (Keyword k: f.findKeywords("<", "~")) {
+			c.setNoSpace().after(k);
+		}
+		for (Keyword k: f.findKeywords(")", ">", ",", ":")) {
+			c.setNoSpace().before(k);
+		}
+		
+		for (Keyword k: f.findKeywords("regular","conjugate")) {
+			c.setLinewrap().before(k);
+		}
+		
+		c.setLinewrap(1).after(f.getImportRule());
+		
+		c.setLinewrap(2).around(f.getActorClassConfigRule());
+		c.setLinewrap(2).around(f.getProtocolClassConfigRule());
+		c.setLinewrap(2).around(f.getActorInstanceConfigRule());
+		
+		c.setLinewrap(1).around(f.getAttrClassConfigRule());
+		c.setLinewrap(1).around(f.getAttrInstanceConfigRule());
+		c.setLinewrap(1).around(f.getPortInstanceConfigRule());
 	}
 }

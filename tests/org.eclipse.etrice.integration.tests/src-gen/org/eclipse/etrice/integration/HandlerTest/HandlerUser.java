@@ -52,7 +52,18 @@ public class HandlerUser extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	public void setCounter (int counter) {
+		 this.counter = counter;
+	}
+	public int getCounter () {
+		return this.counter;
+	}
+	//--------------------- port getters
+	public TestProtocolPort getTestPort1 (){
+		return this.TestPort1;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

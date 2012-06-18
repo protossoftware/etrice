@@ -84,9 +84,94 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
         return createConfigModelAdapter();
       }
       @Override
+      public Adapter caseConfigElement(ConfigElement object)
+      {
+        return createConfigElementAdapter();
+      }
+      @Override
       public Adapter caseActorClassConfig(ActorClassConfig object)
       {
         return createActorClassConfigAdapter();
+      }
+      @Override
+      public Adapter caseActorInstanceConfig(ActorInstanceConfig object)
+      {
+        return createActorInstanceConfigAdapter();
+      }
+      @Override
+      public Adapter caseProtocolClassConfig(ProtocolClassConfig object)
+      {
+        return createProtocolClassConfigAdapter();
+      }
+      @Override
+      public Adapter casePortClassConfig(PortClassConfig object)
+      {
+        return createPortClassConfigAdapter();
+      }
+      @Override
+      public Adapter casePortInstanceConfig(PortInstanceConfig object)
+      {
+        return createPortInstanceConfigAdapter();
+      }
+      @Override
+      public Adapter caseAttrConfig(AttrConfig object)
+      {
+        return createAttrConfigAdapter();
+      }
+      @Override
+      public Adapter caseAttrClassConfig(AttrClassConfig object)
+      {
+        return createAttrClassConfigAdapter();
+      }
+      @Override
+      public Adapter caseAttrInstanceConfig(AttrInstanceConfig object)
+      {
+        return createAttrInstanceConfigAdapter();
+      }
+      @Override
+      public Adapter caseRefPath(RefPath object)
+      {
+        return createRefPathAdapter();
+      }
+      @Override
+      public Adapter caseImport(Import object)
+      {
+        return createImportAdapter();
+      }
+      @Override
+      public Adapter caseLiteralArray(LiteralArray object)
+      {
+        return createLiteralArrayAdapter();
+      }
+      @Override
+      public Adapter caseLiteral(Literal object)
+      {
+        return createLiteralAdapter();
+      }
+      @Override
+      public Adapter caseBooleanLiteral(BooleanLiteral object)
+      {
+        return createBooleanLiteralAdapter();
+      }
+      @Override
+      public Adapter caseNumberLiteral(NumberLiteral object)
+      {
+        return createNumberLiteralAdapter();
+      }
+      @Override
+      public Adapter caseRealLiteral(RealLiteral object)
+      {
+        return createRealLiteralAdapter();
+      }
+      @Override
+      public Adapter caseIntLiteral(IntLiteral object)
+      {
+        return createIntLiteralAdapter();
+      }
+      @Override
+      public Adapter caseStringLiteral(StringLiteral object)
+      {
+        return createStringLiteralAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -126,6 +211,21 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ConfigElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.ConfigElement
+   * @generated
+   */
+  public Adapter createConfigElementAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ActorClassConfig <em>Actor Class Config</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -136,6 +236,246 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActorClassConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ActorInstanceConfig <em>Actor Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig
+   * @generated
+   */
+  public Adapter createActorInstanceConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ProtocolClassConfig <em>Protocol Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.ProtocolClassConfig
+   * @generated
+   */
+  public Adapter createProtocolClassConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.PortClassConfig <em>Port Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.PortClassConfig
+   * @generated
+   */
+  public Adapter createPortClassConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.PortInstanceConfig <em>Port Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.PortInstanceConfig
+   * @generated
+   */
+  public Adapter createPortInstanceConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.AttrConfig <em>Attr Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.AttrConfig
+   * @generated
+   */
+  public Adapter createAttrConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.AttrClassConfig <em>Attr Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.AttrClassConfig
+   * @generated
+   */
+  public Adapter createAttrClassConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.AttrInstanceConfig <em>Attr Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.AttrInstanceConfig
+   * @generated
+   */
+  public Adapter createAttrInstanceConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.RefPath <em>Ref Path</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.RefPath
+   * @generated
+   */
+  public Adapter createRefPathAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.Import <em>Import</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.Import
+   * @generated
+   */
+  public Adapter createImportAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.LiteralArray <em>Literal Array</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.LiteralArray
+   * @generated
+   */
+  public Adapter createLiteralArrayAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.Literal <em>Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.Literal
+   * @generated
+   */
+  public Adapter createLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.BooleanLiteral <em>Boolean Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.BooleanLiteral
+   * @generated
+   */
+  public Adapter createBooleanLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.NumberLiteral <em>Number Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.NumberLiteral
+   * @generated
+   */
+  public Adapter createNumberLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.RealLiteral <em>Real Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.RealLiteral
+   * @generated
+   */
+  public Adapter createRealLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.IntLiteral <em>Int Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.IntLiteral
+   * @generated
+   */
+  public Adapter createIntLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.StringLiteral <em>String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.StringLiteral
+   * @generated
+   */
+  public Adapter createStringLiteralAdapter()
   {
     return null;
   }

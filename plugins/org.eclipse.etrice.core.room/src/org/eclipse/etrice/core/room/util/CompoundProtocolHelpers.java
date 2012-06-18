@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.room.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
@@ -54,7 +55,7 @@ public class CompoundProtocolHelpers {
 		}
 	}
 	
-	public static List<Match> getMatches(Port left, Port right, StructureClass sc, Binding exclude) {
+	public static List<Match> getMatches(Port left, ActorContainerRef leftRef, Port right, ActorContainerRef rightRef, StructureClass sc, Binding exclude) {
 		List<Match> matches = getMatches(left.getProtocol(), right.getProtocol());
 		
 		boolean leftCompound = left.getProtocol() instanceof CompoundProtocolClass;
@@ -63,6 +64,13 @@ public class CompoundProtocolHelpers {
 		boolean isBound = false;
 		for (Binding bind : sc.getBindings()) {
 			if (bind==exclude)
+				continue;
+			
+			if (!(bind.getEndpoint1().getPort()==left && bind.getEndpoint1().getActorRef()==leftRef
+					&& bind.getEndpoint2().getPort()==right && bind.getEndpoint2().getActorRef()==rightRef))
+				continue;
+			if (!(bind.getEndpoint2().getPort()==left && bind.getEndpoint2().getActorRef()==leftRef
+					&& bind.getEndpoint1().getPort()==right && bind.getEndpoint1().getActorRef()==rightRef))
 				continue;
 			
 			isBound = true;

@@ -55,7 +55,27 @@ public class MrPingActor extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	public void setCount (int count) {
+		 this.count = count;
+	}
+	public int getCount () {
+		return this.count;
+	}
+	public void setPongCount (int pongCount) {
+		 this.pongCount = pongCount;
+	}
+	public int getPongCount () {
+		return this.pongCount;
+	}
+	//--------------------- port getters
+	public PingPongProtocolConjReplPort getPingPongPort (){
+		return this.PingPongPort;
+	}
+	public PTimeoutConjPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -96,6 +96,8 @@ public class SubSystem_CPTest extends SubSystemClassBase{
 				}
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

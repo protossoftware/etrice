@@ -1032,14 +1032,20 @@ public class GenericStateMachineGenerator {
                   _builder.append("\t");
                   _builder.append("}");
                   _builder.newLine();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  StringConcatenation _genDataDrivenTriggers_1 = this.genDataDrivenTriggers(xpac, state, dct);
+                  _builder.append(_genDataDrivenTriggers_1, "		");
+                  _builder.newLineIfNotEmpty();
                 }
               }
             } else {
               if (dataDriven) {
                 _builder.append("\t");
                 _builder.append("\t");
-                StringConcatenation _genDataDrivenTriggers_1 = this.genDataDrivenTriggers(xpac, state, dct);
-                _builder.append(_genDataDrivenTriggers_1, "		");
+                StringConcatenation _genDataDrivenTriggers_2 = this.genDataDrivenTriggers(xpac, state, dct);
+                _builder.append(_genDataDrivenTriggers_2, "		");
                 _builder.newLineIfNotEmpty();
               } else {
                 if (eventDriven) {

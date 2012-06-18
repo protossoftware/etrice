@@ -10,11 +10,67 @@
   <genPackages prefix="Config" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Config.ecore#/">
     <genClasses ecoreClass="Config.ecore#//ConfigModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ConfigModel/actorClassConfigs"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//ConfigModel/actorInstanceConfigs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ConfigModel/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ConfigModel/configElements"/>
+      <genOperations ecoreOperation="Config.ecore#//ConfigModel/getActorClassConfigs"/>
+      <genOperations ecoreOperation="Config.ecore#//ConfigModel/getActorInstanceConfigs"/>
+      <genOperations ecoreOperation="Config.ecore#//ConfigModel/getProtocolClassConfigs"/>
     </genClasses>
+    <genClasses ecoreClass="Config.ecore#//ConfigElement"/>
     <genClasses ecoreClass="Config.ecore#//ActorClassConfig">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//ActorClassConfig/actorClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//ActorClassConfig/actor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ActorClassConfig/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//ActorInstanceConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//ActorInstanceConfig/root"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ActorInstanceConfig/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ActorInstanceConfig/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ActorInstanceConfig/ports"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//ProtocolClassConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//ProtocolClassConfig/protocol"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ProtocolClassConfig/regular"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ProtocolClassConfig/conjugated"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//PortClassConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//PortClassConfig/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//PortInstanceConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//PortInstanceConfig/item"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//PortInstanceConfig/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//AttrConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//AttrConfig/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//AttrConfig/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//AttrClassConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//AttrClassConfig/min"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//AttrClassConfig/max"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//AttrInstanceConfig"/>
+    <genClasses ecoreClass="Config.ecore#//RefPath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RefPath/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importedNamespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importURI"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//LiteralArray">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//LiteralArray/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//Literal"/>
+    <genClasses ecoreClass="Config.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//BooleanLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//NumberLiteral"/>
+    <genClasses ecoreClass="Config.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//StringLiteral/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.dialogs;
 
 import java.util.List;
 
+import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -113,16 +114,13 @@ public class SubProtocolSelectionDialog extends FormDialog {
 	private List<Match> matches;
 	private Match selected;
 
-	/**
-	 * @param shell
-	 */
-	public SubProtocolSelectionDialog(Shell shell, Port src, Port dst, Binding bind, StructureClass sc) {
+	public SubProtocolSelectionDialog(Shell shell, Port src, ActorContainerRef srcRef, Port dst, ActorContainerRef dstRef, Binding bind, StructureClass sc) {
 		super(shell);
 		
 		this.src = src;
 		this.dst = dst;
 		
-		matches = CompoundProtocolHelpers.getMatches(src, dst, sc, bind);
+		matches = CompoundProtocolHelpers.getMatches(src, srcRef, dst, dstRef, sc, bind);
 
 		// find match to select
 		if (bind!=null) {
