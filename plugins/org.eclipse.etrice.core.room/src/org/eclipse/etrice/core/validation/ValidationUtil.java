@@ -930,11 +930,13 @@ public class ValidationUtil {
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
 		else {
-			if (tr instanceof GuardedTransition)
-				return Result.error("event driven state machine must not contain guarded transition",
+			if (tr instanceof GuardedTransition) {
+				if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN)
+					return Result.error("event driven state machine must not contain guarded transition",
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}
 			else if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a triggered transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
