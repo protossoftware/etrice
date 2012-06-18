@@ -46,7 +46,8 @@ public class a_HFSM_Tester extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
 
 	//--------------------- lifecycle functions
 	public void init(){

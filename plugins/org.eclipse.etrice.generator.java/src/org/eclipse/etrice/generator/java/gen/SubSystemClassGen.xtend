@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 
 
@@ -32,6 +33,7 @@ class SubSystemClassGen {
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
+	@Inject extension ConfigExtension configExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject ILogger logger
 	
@@ -162,6 +164,20 @@ class SubSystemClassGen {
 							«ENDFOR»
 						}
 					); 
+				«ENDFOR»
+				
+				// apply instance attribute configurations
+				«FOR ai : comp.allContainedInstances»
+					«var attrConfigs = ai.getConfigAttributes()»
+					«IF !attrConfigs.empty»
+						{
+							«var aiName = "inst"»
+							«ai.actorClass.name» «aiName» = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
+							«FOR attrConfig : attrConfigs»
+								«aiName».«attrConfig.attribute.invokeSetter(ai.actorClass.name, attrConfig.value.stringValue(attrConfig.attribute))»;
+							«ENDFOR»
+						}
+					«ENDIF»
 				«ENDFOR»
 		
 				// create the subsystem system port	

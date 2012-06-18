@@ -96,6 +96,8 @@ public class SubSys_SendingData extends SubSystemClassBase{
 				}
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

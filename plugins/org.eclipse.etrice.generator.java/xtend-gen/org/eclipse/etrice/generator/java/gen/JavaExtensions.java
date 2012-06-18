@@ -128,4 +128,10 @@ public class JavaExtensions implements ILanguageExtension {
   public String destructorReturnType() {
     return "void";
   }
+  
+  public String toCharArrayExpr(final String s) {
+    String _operator_plus = StringExtensions.operator_plus("\"", s);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\".toCharArray()");
+    return _operator_plus_1;
+  }
 }

@@ -1,0 +1,73 @@
+RoomModel org.eclipse.etrice.integration.ConfigTest {
+
+	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib/models/JavaTypes.room"
+
+	SubSystemClass SubSystemConfigTest {
+		ActorRef top : ConfigText_Top
+	}
+	
+	ActorClass ConfigText_Top {
+		Structure {
+			ActorRef testee: Testee
+		}
+		Behavior { }
+	}
+
+	ActorClass Testee {
+		Interface {
+			Port port1: ProtocolForConfig
+		}
+		Structure {
+			usercode1{
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
+			external Port port1
+			Attribute bool1: boolean = "true"
+			Attribute bool2: boolean = "true"
+			Attribute bool3: boolean = "true"
+			Attribute int1: int32 = "100"
+			Attribute int2: int32 = "200"
+			Attribute int3: int32 = "300"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Done { }
+				State Done {
+					entry {
+						"if (bool1 != true || bool2 != false || bool3 != true ){"
+						"\tRTServices.getInstance().getSubSystem().testFinished(1);"
+						"}"
+						"else if (int1 != 100 || int2 != 210 || int3 != 301){"
+						"\tRTServices.getInstance().getSubSystem().testFinished(2);"
+						"}"
+						"else {"
+						"\tRTServices.getInstance().getSubSystem().testFinished(0);"
+						"}"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass ProtocolForConfig {
+		incoming {
+			Message inMessage(data:  int32)
+		}
+		outgoing {
+			Message outMess(data: int32)
+		}
+		regular PortClass {
+			handle incoming inMessage {
+				"// detail code"
+			}
+			handle outgoing outMess {
+				"// out"
+			}
+			Attribute channel: int32 = "123"
+			Operation getChannel(): int32 {
+				"return channel;"
+			}
+		}
+	}
+
+}

@@ -71,22 +71,22 @@ public interface ConfigPackage extends EPackage
   int CONFIG_MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Actor Class Configs</b></em>' containment reference list.
+   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONFIG_MODEL__ACTOR_CLASS_CONFIGS = 0;
+  int CONFIG_MODEL__IMPORTS = 0;
 
   /**
-   * The feature id for the '<em><b>Actor Instance Configs</b></em>' attribute list.
+   * The feature id for the '<em><b>Config Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS = 1;
+  int CONFIG_MODEL__CONFIG_ELEMENTS = 1;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -98,6 +98,25 @@ public interface ConfigPackage extends EPackage
   int CONFIG_MODEL_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ConfigElementImpl <em>Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ConfigElementImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigElement()
+   * @generated
+   */
+  int CONFIG_ELEMENT = 1;
+
+  /**
+   * The number of structural features of the '<em>Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ELEMENT_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl <em>Actor Class Config</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -105,16 +124,25 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getActorClassConfig()
    * @generated
    */
-  int ACTOR_CLASS_CONFIG = 1;
+  int ACTOR_CLASS_CONFIG = 2;
 
   /**
-   * The feature id for the '<em><b>Actor Class</b></em>' reference.
+   * The feature id for the '<em><b>Actor</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_CONFIG__ACTOR_CLASS = 0;
+  int ACTOR_CLASS_CONFIG__ACTOR = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS_CONFIG__ATTRIBUTES = CONFIG_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Actor Class Config</em>' class.
@@ -123,7 +151,397 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_CONFIG_FEATURE_COUNT = 1;
+  int ACTOR_CLASS_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl <em>Actor Instance Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getActorInstanceConfig()
+   * @generated
+   */
+  int ACTOR_INSTANCE_CONFIG = 3;
+
+  /**
+   * The feature id for the '<em><b>Root</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG__ROOT = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Path</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG__PATH = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG__ATTRIBUTES = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Actor Instance Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl <em>Attr Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.AttrConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrConfig()
+   * @generated
+   */
+  int ATTR_CONFIG = 4;
+
+  /**
+   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CONFIG__ATTRIBUTE = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CONFIG__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Attr Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CONFIG_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl <em>Attr Class Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.AttrClassConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrClassConfig()
+   * @generated
+   */
+  int ATTR_CLASS_CONFIG = 5;
+
+  /**
+   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG__ATTRIBUTE = ATTR_CONFIG__ATTRIBUTE;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG__VALUE = ATTR_CONFIG__VALUE;
+
+  /**
+   * The feature id for the '<em><b>Min</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG__MIN = ATTR_CONFIG_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Max</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG__MAX = ATTR_CONFIG_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Attr Class Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl <em>Attr Instance Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrInstanceConfig()
+   * @generated
+   */
+  int ATTR_INSTANCE_CONFIG = 6;
+
+  /**
+   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG__ATTRIBUTE = ATTR_CONFIG__ATTRIBUTE;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG__VALUE = ATTR_CONFIG__VALUE;
+
+  /**
+   * The number of structural features of the '<em>Attr Instance Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.RefPathImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefPath()
+   * @generated
+   */
+  int REF_PATH = 7;
+
+  /**
+   * The feature id for the '<em><b>Refs</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_PATH__REFS = 0;
+
+  /**
+   * The number of structural features of the '<em>Ref Path</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_PATH_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ImportImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
+   * @generated
+   */
+  int IMPORT = 8;
+
+  /**
+   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORTED_NAMESPACE = 0;
+
+  /**
+   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORT_URI = 1;
+
+  /**
+   * The number of structural features of the '<em>Import</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.LiteralImpl <em>Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.LiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteral()
+   * @generated
+   */
+  int LITERAL = 9;
+
+  /**
+   * The number of structural features of the '<em>Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.BooleanLiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getBooleanLiteral()
+   * @generated
+   */
+  int BOOLEAN_LITERAL = 10;
+
+  /**
+   * The feature id for the '<em><b>Is True</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_LITERAL__IS_TRUE = LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Boolean Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.NumberLiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getNumberLiteral()
+   * @generated
+   */
+  int NUMBER_LITERAL = 11;
+
+  /**
+   * The number of structural features of the '<em>Number Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.RealLiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRealLiteral()
+   * @generated
+   */
+  int REAL_LITERAL = 12;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL__VALUE = NUMBER_LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Real Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.IntLiteralImpl <em>Int Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.IntLiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getIntLiteral()
+   * @generated
+   */
+  int INT_LITERAL = 13;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INT_LITERAL__VALUE = NUMBER_LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Int Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INT_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.StringLiteralImpl <em>String Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.StringLiteralImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getStringLiteral()
+   * @generated
+   */
+  int STRING_LITERAL = 14;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>String Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 
   /**
@@ -137,26 +555,36 @@ public interface ConfigPackage extends EPackage
   EClass getConfigModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ConfigModel#getActorClassConfigs <em>Actor Class Configs</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ConfigModel#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actor Class Configs</em>'.
-   * @see org.eclipse.etrice.core.config.ConfigModel#getActorClassConfigs()
+   * @return the meta object for the containment reference list '<em>Imports</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigModel#getImports()
    * @see #getConfigModel()
    * @generated
    */
-  EReference getConfigModel_ActorClassConfigs();
+  EReference getConfigModel_Imports();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.config.ConfigModel#getActorInstanceConfigs <em>Actor Instance Configs</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ConfigModel#getConfigElements <em>Config Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Actor Instance Configs</em>'.
-   * @see org.eclipse.etrice.core.config.ConfigModel#getActorInstanceConfigs()
+   * @return the meta object for the containment reference list '<em>Config Elements</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigModel#getConfigElements()
    * @see #getConfigModel()
    * @generated
    */
-  EAttribute getConfigModel_ActorInstanceConfigs();
+  EReference getConfigModel_ConfigElements();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ConfigElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Element</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigElement
+   * @generated
+   */
+  EClass getConfigElement();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ActorClassConfig <em>Actor Class Config</em>}'.
@@ -169,15 +597,300 @@ public interface ConfigPackage extends EPackage
   EClass getActorClassConfig();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.ActorClassConfig#getActorClass <em>Actor Class</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.ActorClassConfig#getActor <em>Actor</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Actor Class</em>'.
-   * @see org.eclipse.etrice.core.config.ActorClassConfig#getActorClass()
+   * @return the meta object for the reference '<em>Actor</em>'.
+   * @see org.eclipse.etrice.core.config.ActorClassConfig#getActor()
    * @see #getActorClassConfig()
    * @generated
    */
-  EReference getActorClassConfig_ActorClass();
+  EReference getActorClassConfig_Actor();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ActorClassConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.ActorClassConfig#getAttributes()
+   * @see #getActorClassConfig()
+   * @generated
+   */
+  EReference getActorClassConfig_Attributes();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ActorInstanceConfig <em>Actor Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Actor Instance Config</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig
+   * @generated
+   */
+  EClass getActorInstanceConfig();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot <em>Root</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Root</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot()
+   * @see #getActorInstanceConfig()
+   * @generated
+   */
+  EReference getActorInstanceConfig_Root();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPath <em>Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Path</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig#getPath()
+   * @see #getActorInstanceConfig()
+   * @generated
+   */
+  EReference getActorInstanceConfig_Path();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig#getAttributes()
+   * @see #getActorInstanceConfig()
+   * @generated
+   */
+  EReference getActorInstanceConfig_Attributes();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.AttrConfig <em>Attr Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Attr Config</em>'.
+   * @see org.eclipse.etrice.core.config.AttrConfig
+   * @generated
+   */
+  EClass getAttrConfig();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.AttrConfig#getAttribute <em>Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Attribute</em>'.
+   * @see org.eclipse.etrice.core.config.AttrConfig#getAttribute()
+   * @see #getAttrConfig()
+   * @generated
+   */
+  EReference getAttrConfig_Attribute();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.AttrConfig#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.AttrConfig#getValue()
+   * @see #getAttrConfig()
+   * @generated
+   */
+  EReference getAttrConfig_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.AttrClassConfig <em>Attr Class Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Attr Class Config</em>'.
+   * @see org.eclipse.etrice.core.config.AttrClassConfig
+   * @generated
+   */
+  EClass getAttrClassConfig();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.AttrClassConfig#getMin <em>Min</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Min</em>'.
+   * @see org.eclipse.etrice.core.config.AttrClassConfig#getMin()
+   * @see #getAttrClassConfig()
+   * @generated
+   */
+  EReference getAttrClassConfig_Min();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.AttrClassConfig#getMax <em>Max</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Max</em>'.
+   * @see org.eclipse.etrice.core.config.AttrClassConfig#getMax()
+   * @see #getAttrClassConfig()
+   * @generated
+   */
+  EReference getAttrClassConfig_Max();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.AttrInstanceConfig <em>Attr Instance Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Attr Instance Config</em>'.
+   * @see org.eclipse.etrice.core.config.AttrInstanceConfig
+   * @generated
+   */
+  EClass getAttrInstanceConfig();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.RefPath <em>Ref Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Ref Path</em>'.
+   * @see org.eclipse.etrice.core.config.RefPath
+   * @generated
+   */
+  EClass getRefPath();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.config.RefPath#getRefs <em>Refs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Refs</em>'.
+   * @see org.eclipse.etrice.core.config.RefPath#getRefs()
+   * @see #getRefPath()
+   * @generated
+   */
+  EAttribute getRefPath_Refs();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.Import <em>Import</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Import</em>'.
+   * @see org.eclipse.etrice.core.config.Import
+   * @generated
+   */
+  EClass getImport();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+   * @see org.eclipse.etrice.core.config.Import#getImportedNamespace()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportedNamespace();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.Import#getImportURI <em>Import URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Import URI</em>'.
+   * @see org.eclipse.etrice.core.config.Import#getImportURI()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportURI();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.Literal <em>Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal</em>'.
+   * @see org.eclipse.etrice.core.config.Literal
+   * @generated
+   */
+  EClass getLiteral();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.BooleanLiteral <em>Boolean Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Literal</em>'.
+   * @see org.eclipse.etrice.core.config.BooleanLiteral
+   * @generated
+   */
+  EClass getBooleanLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.BooleanLiteral#isIsTrue <em>Is True</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Is True</em>'.
+   * @see org.eclipse.etrice.core.config.BooleanLiteral#isIsTrue()
+   * @see #getBooleanLiteral()
+   * @generated
+   */
+  EAttribute getBooleanLiteral_IsTrue();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.NumberLiteral <em>Number Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Number Literal</em>'.
+   * @see org.eclipse.etrice.core.config.NumberLiteral
+   * @generated
+   */
+  EClass getNumberLiteral();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.RealLiteral <em>Real Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Real Literal</em>'.
+   * @see org.eclipse.etrice.core.config.RealLiteral
+   * @generated
+   */
+  EClass getRealLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.RealLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.RealLiteral#getValue()
+   * @see #getRealLiteral()
+   * @generated
+   */
+  EAttribute getRealLiteral_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.IntLiteral <em>Int Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Int Literal</em>'.
+   * @see org.eclipse.etrice.core.config.IntLiteral
+   * @generated
+   */
+  EClass getIntLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.IntLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.IntLiteral#getValue()
+   * @see #getIntLiteral()
+   * @generated
+   */
+  EAttribute getIntLiteral_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.StringLiteral <em>String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Literal</em>'.
+   * @see org.eclipse.etrice.core.config.StringLiteral
+   * @generated
+   */
+  EClass getStringLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.StringLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.StringLiteral#getValue()
+   * @see #getStringLiteral()
+   * @generated
+   */
+  EAttribute getStringLiteral_Value();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -213,20 +926,30 @@ public interface ConfigPackage extends EPackage
     EClass CONFIG_MODEL = eINSTANCE.getConfigModel();
 
     /**
-     * The meta object literal for the '<em><b>Actor Class Configs</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONFIG_MODEL__ACTOR_CLASS_CONFIGS = eINSTANCE.getConfigModel_ActorClassConfigs();
+    EReference CONFIG_MODEL__IMPORTS = eINSTANCE.getConfigModel_Imports();
 
     /**
-     * The meta object literal for the '<em><b>Actor Instance Configs</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Config Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONFIG_MODEL__ACTOR_INSTANCE_CONFIGS = eINSTANCE.getConfigModel_ActorInstanceConfigs();
+    EReference CONFIG_MODEL__CONFIG_ELEMENTS = eINSTANCE.getConfigModel_ConfigElements();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ConfigElementImpl <em>Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ConfigElementImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigElement()
+     * @generated
+     */
+    EClass CONFIG_ELEMENT = eINSTANCE.getConfigElement();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl <em>Actor Class Config</em>}' class.
@@ -239,12 +962,252 @@ public interface ConfigPackage extends EPackage
     EClass ACTOR_CLASS_CONFIG = eINSTANCE.getActorClassConfig();
 
     /**
-     * The meta object literal for the '<em><b>Actor Class</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Actor</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTOR_CLASS_CONFIG__ACTOR_CLASS = eINSTANCE.getActorClassConfig_ActorClass();
+    EReference ACTOR_CLASS_CONFIG__ACTOR = eINSTANCE.getActorClassConfig_Actor();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS_CONFIG__ATTRIBUTES = eINSTANCE.getActorClassConfig_Attributes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl <em>Actor Instance Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getActorInstanceConfig()
+     * @generated
+     */
+    EClass ACTOR_INSTANCE_CONFIG = eINSTANCE.getActorInstanceConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Root</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_INSTANCE_CONFIG__ROOT = eINSTANCE.getActorInstanceConfig_Root();
+
+    /**
+     * The meta object literal for the '<em><b>Path</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_INSTANCE_CONFIG__PATH = eINSTANCE.getActorInstanceConfig_Path();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_INSTANCE_CONFIG__ATTRIBUTES = eINSTANCE.getActorInstanceConfig_Attributes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl <em>Attr Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.AttrConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrConfig()
+     * @generated
+     */
+    EClass ATTR_CONFIG = eINSTANCE.getAttrConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_CONFIG__ATTRIBUTE = eINSTANCE.getAttrConfig_Attribute();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_CONFIG__VALUE = eINSTANCE.getAttrConfig_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl <em>Attr Class Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.AttrClassConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrClassConfig()
+     * @generated
+     */
+    EClass ATTR_CLASS_CONFIG = eINSTANCE.getAttrClassConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Min</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_CLASS_CONFIG__MIN = eINSTANCE.getAttrClassConfig_Min();
+
+    /**
+     * The meta object literal for the '<em><b>Max</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_CLASS_CONFIG__MAX = eINSTANCE.getAttrClassConfig_Max();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl <em>Attr Instance Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrInstanceConfig()
+     * @generated
+     */
+    EClass ATTR_INSTANCE_CONFIG = eINSTANCE.getAttrInstanceConfig();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.RefPathImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefPath()
+     * @generated
+     */
+    EClass REF_PATH = eINSTANCE.getRefPath();
+
+    /**
+     * The meta object literal for the '<em><b>Refs</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REF_PATH__REFS = eINSTANCE.getRefPath_Refs();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ImportImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
+     * @generated
+     */
+    EClass IMPORT = eINSTANCE.getImport();
+
+    /**
+     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+    /**
+     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.LiteralImpl <em>Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.LiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteral()
+     * @generated
+     */
+    EClass LITERAL = eINSTANCE.getLiteral();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.BooleanLiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getBooleanLiteral()
+     * @generated
+     */
+    EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Is True</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_LITERAL__IS_TRUE = eINSTANCE.getBooleanLiteral_IsTrue();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.NumberLiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getNumberLiteral()
+     * @generated
+     */
+    EClass NUMBER_LITERAL = eINSTANCE.getNumberLiteral();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.RealLiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRealLiteral()
+     * @generated
+     */
+    EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REAL_LITERAL__VALUE = eINSTANCE.getRealLiteral_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.IntLiteralImpl <em>Int Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.IntLiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getIntLiteral()
+     * @generated
+     */
+    EClass INT_LITERAL = eINSTANCE.getIntLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INT_LITERAL__VALUE = eINSTANCE.getIntLiteral_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.StringLiteralImpl <em>String Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.StringLiteralImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getStringLiteral()
+     * @generated
+     */
+    EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
 
   }
 

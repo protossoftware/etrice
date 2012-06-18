@@ -128,6 +128,8 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 				null
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",
