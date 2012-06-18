@@ -1,0 +1,21 @@
+RoomModel room.basic.types.c {
+
+	PrimitiveType boolean: ptBoolean -> boolean default "FALSE"
+	PrimitiveType char: ptCharacter -> char default "0"
+	PrimitiveType int8: ptInteger -> int8 default "0"
+	PrimitiveType int16: ptInteger -> int16 default "0"
+	PrimitiveType int32: ptInteger -> int32 default "0"
+	PrimitiveType int64: ptInteger -> int64 default "0"
+
+	PrimitiveType uint8: ptInteger -> uint8 default "0"
+	PrimitiveType uint16: ptInteger -> uint16 default "0"
+	PrimitiveType uint32: ptInteger -> uint32 default "0"
+	PrimitiveType uint64: ptInteger -> uint64 default "0"
+
+	PrimitiveType float32:ptReal -> float32 default "0"
+	PrimitiveType float64:ptReal -> float64 default "0"
+
+	// TODO: define strings for C
+	PrimitiveType charPtr:ptCharacter -> charPtr default "0"
+	PrimitiveType string:ptCharacter -> charPtr default "0"  
+}
