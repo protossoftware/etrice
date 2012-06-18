@@ -106,6 +106,28 @@ public class ConfigSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ConfigPackage.PROTOCOL_CLASS_CONFIG:
+      {
+        ProtocolClassConfig protocolClassConfig = (ProtocolClassConfig)theEObject;
+        T result = caseProtocolClassConfig(protocolClassConfig);
+        if (result == null) result = caseConfigElement(protocolClassConfig);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.PORT_CLASS_CONFIG:
+      {
+        PortClassConfig portClassConfig = (PortClassConfig)theEObject;
+        T result = casePortClassConfig(portClassConfig);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.PORT_INSTANCE_CONFIG:
+      {
+        PortInstanceConfig portInstanceConfig = (PortInstanceConfig)theEObject;
+        T result = casePortInstanceConfig(portInstanceConfig);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ConfigPackage.ATTR_CONFIG:
       {
         AttrConfig attrConfig = (AttrConfig)theEObject;
@@ -140,6 +162,13 @@ public class ConfigSwitch<T> extends Switch<T>
       {
         Import import_ = (Import)theEObject;
         T result = caseImport(import_);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.LITERAL_ARRAY:
+      {
+        LiteralArray literalArray = (LiteralArray)theEObject;
+        T result = caseLiteralArray(literalArray);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -261,6 +290,54 @@ public class ConfigSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Protocol Class Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Protocol Class Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseProtocolClassConfig(ProtocolClassConfig object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Port Class Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Port Class Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePortClassConfig(PortClassConfig object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Port Instance Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Port Instance Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePortInstanceConfig(PortInstanceConfig object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Attr Config</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -336,6 +413,22 @@ public class ConfigSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseImport(Import object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal Array</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal Array</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteralArray(LiteralArray object)
   {
     return null;
   }

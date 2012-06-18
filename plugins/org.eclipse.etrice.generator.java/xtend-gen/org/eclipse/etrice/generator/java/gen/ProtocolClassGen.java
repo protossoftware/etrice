@@ -232,7 +232,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("super(actor, name, localId, 0, addr, peerAddress);");
+      _builder.append("this(actor, name, localId, 0, addr, peerAddress);");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("DebuggingService.getInstance().addPortInstance(this);");
@@ -248,6 +248,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t\t");
       _builder.append("super(actor, name, localId, idx, addr, peerAddress);");
       _builder.newLine();
+      {
+        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(pclass, null);
+        if (_operator_notEquals_1) {
+          _builder.append("\t\t");
+          EList<Attribute> _attributes = pclass.getAttributes();
+          StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes, true);
+          _builder.append(_attributeInitialization, "		");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t\t");
       _builder.append("DebuggingService.getInstance().addPortInstance(this);");
       _builder.newLine();
@@ -364,12 +374,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(pclass, null);
-        if (_operator_notEquals_1) {
+        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(pclass, null);
+        if (_operator_notEquals_2) {
           _builder.append("\t");
-          EList<Attribute> _attributes = pclass.getAttributes();
-          StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
-          _builder.append(_attributes_1, "	");
+          EList<Attribute> _attributes_1 = pclass.getAttributes();
+          StringConcatenation _attributes_2 = this.helpers.attributes(_attributes_1);
+          _builder.append(_attributes_2, "	");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("// TODO JH: Avoid collision attr getters/setter <-> user operations");
+          _builder.newLine();
+          _builder.append("\t");
+          EList<Attribute> _attributes_3 = pclass.getAttributes();
+          StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_3, null);
+          _builder.append(_attributeSettersGettersImplementation, "	");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           EList<PortOperation> _operations = pclass.getOperations();

@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
@@ -35,6 +36,7 @@ class SubSystemClassGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ConfigExtension configExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -168,13 +170,47 @@ class SubSystemClassGen {
 				
 				// apply instance attribute configurations
 				«FOR ai : comp.allContainedInstances»
-					«var attrConfigs = ai.getConfigAttributes()»
-					«IF !attrConfigs.empty»
+					«var attrConfigs = ai.configAttributes»
+					«var portConfigs = ai.getConfigPorts»
+					«IF !attrConfigs.empty || !portConfigs.empty»
 						{
 							«var aiName = "inst"»
 							«ai.actorClass.name» «aiName» = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
 							«FOR attrConfig : attrConfigs»
-								«aiName».«attrConfig.attribute.invokeSetter(ai.actorClass.name, attrConfig.value.stringValue(attrConfig.attribute))»;
+								«var a = attrConfig.attribute»
+								«var value = attrConfig.value.stringValue(a)»
+								«IF !a.isArray»
+									«aiName».«a.name.invokeSetter(ai.actorClass.name, value)»;
+								«ELSEIF value.startsWith("{")»
+									«aiName».«a.name.invokeSetter(ai.actorClass.name, "new "+a.refType.type.typeName+"[]"+value)»;
+								«ELSE»
+									{
+										«a.refType.type.typeName»[] array = «aiName».«a.name.invokeGetter(ai.actorClass.name)»;
+										for (int i=0;i<«a.size»;i++){
+											array[i] = «value»;
+										}
+									}
+								«ENDIF»
+							«ENDFOR»
+							«FOR portConfig : portConfigs»
+								«var portName = "port"»«var item = portConfig.item»
+								«FOR attrConfig : portConfig.attributes»
+									«var a = attrConfig.attribute»
+									«var value = attrConfig.value.stringValue(a)»
+									«var refToItem = aiName+"."+item.name.invokeGetter(item.portClassName)»
+									«IF !a.isArray»
+										«refToItem».«a.name.invokeSetter(item.portClassName, value)»;
+									«ELSEIF value.startsWith("{")»
+										«refToItem».«a.name.invokeSetter(ai.actorClass.name, "new "+a.refType.type.typeName+"[]"+value)»;
+									«ELSE»
+										{
+											«a.refType.type.typeName»[] array = «refToItem».«a.name.invokeGetter(ai.actorClass.name)»;
+											for (int i=0;i<«a.size»;i++){
+												array[i] = «value»;
+											}
+										}
+									«ENDIF»
+								«ENDFOR»
 							«ENDFOR»
 						}
 					«ENDIF»

@@ -29,6 +29,9 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
 import org.eclipse.etrice.core.config.NumberLiteral;
+import org.eclipse.etrice.core.config.PortClassConfig;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
@@ -37,15 +40,17 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.xtext.validation.Check;
 
 public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	@Check
 	public void checkConfigModel(ConfigModel model) {
-		// duplicate class config check
+		// duplicate actor class config check
 		Set<ActorClass> actorClasses = new HashSet<ActorClass>();
 		for (ActorClassConfig classConfig : model.getActorClassConfigs()) {
 			if (actorClasses.contains(classConfig.getActor()))
@@ -55,18 +60,29 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			else
 				actorClasses.add(classConfig.getActor());
 		}
-		// duplicate instance config check
-		Set<String> instanceRefs = new HashSet<String>();
+		// duplicate actor instance config check
+		Set<String> actorRefs = new HashSet<String>();
 		for (ActorInstanceConfig instanceConfig : model
 				.getActorInstanceConfigs()) {
 			String ref = instanceConfig.getRoot().getName()
 					+ refPathToString(instanceConfig.getPath());
-			if (instanceRefs.contains(ref))
-				error("duplicate instance config", model,
+			if (actorRefs.contains(ref))
+				error("duplicate actor instance config", model,
 						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
 						model.getConfigElements().indexOf(instanceConfig));
 			else
-				instanceRefs.add(ref);
+				actorRefs.add(ref);
+		}
+		// duplicate protocol class config check
+		Set<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
+		for (ProtocolClassConfig protocolConfig : model
+				.getProtocolClassConfigs()) {
+			if (protocolClasses.contains(protocolConfig.getProtocol()))
+				error("duplicate protocol class config", model,
+						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
+						model.getConfigElements().indexOf(protocolConfig));
+			else
+				protocolClasses.add(protocolConfig.getProtocol());
 		}
 	}
 
@@ -90,9 +106,32 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 									.getActorInstanceConfig_Path());
 			}
 		}
+		// duplicate port instance config check
+		Set<InterfaceItem> items = new HashSet<InterfaceItem>();
+		for (PortInstanceConfig portConfig : config.getPorts()) {
+			InterfaceItem item = portConfig.getItem();
+			if (items.contains(item))
+				error("duplicate port instance config",
+						ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PORTS,
+						config.getPorts().indexOf(portConfig));
+			else
+				items.add(item);
+		}
 
 		checkDuplicateAttributes(config.getAttributes(),
 				ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
+	}
+
+	@Check
+	public void checkPortClassConfig(PortClassConfig config) {
+		checkDuplicateAttributes(config.getAttributes(),
+				ConfigPackage.Literals.PORT_CLASS_CONFIG__ATTRIBUTES);
+	}
+
+	@Check
+	public void checkPortInstanceConfig(PortInstanceConfig config) {
+		checkDuplicateAttributes(config.getAttributes(),
+				ConfigPackage.Literals.PORT_INSTANCE_CONFIG__ATTRIBUTES);
 	}
 
 	private void checkDuplicateAttributes(
@@ -142,43 +181,52 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 	}
 
 	private void checkAttrConfigValue(PrimitiveType primitive, AttrConfig config) {
-		Literal value = config.getValue();
-		if (value == null)
+		if (config.getValue() == null)
 			return;
 
+		List<Literal> values = config.getValue().getLiterals();
 		EReference valueRef = ConfigPackage.eINSTANCE.getAttrConfig_Value();
+		EReference arrayRef = ConfigPackage.eINSTANCE
+				.getLiteralArray_Literals();
 		LiteralType type = primitive.getType();
 		Attribute attribute = config.getAttribute();
+		int attrMult = (attribute.getSize() > 0) ? attribute.getSize() : 1;
+		if (values.size() > attrMult)
+			error("too many values, multiplicity is " + attrMult, valueRef);
+		if (values.size() > 1 && values.size() < attrMult)
+			error("not enough values, multiplicity is " + attrMult, valueRef);
 		// type check
-		switch (type) {
-		case BOOL:
-			if (!(value instanceof BooleanLiteral))
-				error("must be boolean value", valueRef);
-			break;
-		case REAL:
-			if (!(value instanceof NumberLiteral))
-				error("must be an integer or real value", valueRef);
-			break;
-		case INT:
-			if (!(value instanceof IntLiteral))
-				error("must be an integer", valueRef);
-			break;
-		case CHAR:
-			if (!(value instanceof StringLiteral))
-				error("must be a string", valueRef);
-			else {
-				StringLiteral strValue = (StringLiteral) value;
-				int maxLength = attribute.getSize() + 1;
-				if (maxLength < strValue.getValue().length())
-					error("too many characters - maximal length is "
-							+ maxLength, valueRef);
+		for (Literal value : values) {
+			switch (type) {
+			case BOOL:
+				if (!(value instanceof BooleanLiteral))
+					error("must be boolean value", valueRef);
+				break;
+			case REAL:
+				if (!(value instanceof NumberLiteral))
+					error("must be an integer or real value", valueRef);
+				break;
+			case INT:
+				if (!(value instanceof IntLiteral))
+					error("must be an integer", valueRef);
+				break;
+			case CHAR:
+				if (!(value instanceof StringLiteral))
+					error("must be a string", valueRef);
+				else {
+					if (values.size() > 1)
+						error("multiplicity must be one", valueRef);
+					StringLiteral strValue = (StringLiteral) value;
+					if (attrMult < strValue.getValue().length())
+						error("too many characters - maximal length is "
+								+ attrMult, valueRef);
+				}
+				break;
 			}
-			break;
 		}
 
 		// numeric check
-		if ((type == LiteralType.INT || type == LiteralType.REAL)
-				&& value instanceof NumberLiteral) {
+		if ((type == LiteralType.INT || type == LiteralType.REAL)) {
 			ActorClassConfig classConfig = null;
 			if (config.eContainer() instanceof ActorInstanceConfig) {
 				ActorInstanceConfig actorConfig = (ActorInstanceConfig) config
@@ -208,18 +256,24 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (attrClassConfig != null) {
 				NumberLiteral min = attrClassConfig.getMin();
 				NumberLiteral max = attrClassConfig.getMax();
-				double dValue = ConfigUtil
-						.literalToDouble((NumberLiteral) value);
+				for (Literal value : values) {
+					if (!(value instanceof NumberLiteral))
+						continue;
 
-				if (min != null) {
-					double dMin = ConfigUtil.literalToDouble(min);
-					if (dMin > dValue)
-						error("value is less than minimum", valueRef);
-				}
-				if (max != null) {
-					double dMax = ConfigUtil.literalToDouble(max);
-					if (dMax < dValue)
-						error("value exceeds maximum", valueRef);
+					double dValue = ConfigUtil
+							.literalToDouble((NumberLiteral) value);
+					if (min != null) {
+						double dMin = ConfigUtil.literalToDouble(min);
+						if (dMin > dValue)
+							error("value is less than minimum", arrayRef,
+									values.indexOf(value));
+					}
+					if (max != null) {
+						double dMax = ConfigUtil.literalToDouble(max);
+						if (dMax < dValue)
+							error("value exceeds maximum", arrayRef,
+									values.indexOf(value));
+					}
 				}
 			}
 		}

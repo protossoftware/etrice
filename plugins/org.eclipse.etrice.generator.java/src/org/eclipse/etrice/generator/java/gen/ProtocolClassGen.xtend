@@ -101,11 +101,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDIF»
 			// constructors
 			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-				super(actor, name, localId, 0, addr, peerAddress);
+				this(actor, name, localId, 0, addr, peerAddress);
 				DebuggingService.getInstance().addPortInstance(this);
 			}
 			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
+				«IF pclass!=null»
+					«helpers.attributeInitialization(pclass.attributes, true)»
+				«ENDIF»
 				DebuggingService.getInstance().addPortInstance(this);
 			}
 		
@@ -146,6 +149,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 			«IF pclass!=null»
 				«helpers.attributes(pclass.attributes)»
+				// TODO JH: Avoid collision attr getters/setter <-> user operations
+				«attributeSettersGettersImplementation(pclass.attributes, null)»
 				«helpers.operationsImplementation(pclass.operations, portClassName)»
 			«ENDIF»
 			

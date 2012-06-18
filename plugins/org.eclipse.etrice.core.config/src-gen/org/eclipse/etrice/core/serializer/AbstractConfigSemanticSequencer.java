@@ -12,6 +12,10 @@ import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.IntLiteral;
+import org.eclipse.etrice.core.config.LiteralArray;
+import org.eclipse.etrice.core.config.PortClassConfig;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
@@ -53,7 +57,6 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
 	
-	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ConfigPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ConfigPackage.ACTOR_CLASS_CONFIG:
@@ -111,6 +114,31 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case ConfigPackage.LITERAL_ARRAY:
+				if(context == grammarAccess.getLiteralArrayRule()) {
+					sequence_LiteralArray(context, (LiteralArray) semanticObject); 
+					return; 
+				}
+				else break;
+			case ConfigPackage.PORT_CLASS_CONFIG:
+				if(context == grammarAccess.getPortClassConfigRule()) {
+					sequence_PortClassConfig(context, (PortClassConfig) semanticObject); 
+					return; 
+				}
+				else break;
+			case ConfigPackage.PORT_INSTANCE_CONFIG:
+				if(context == grammarAccess.getPortInstanceConfigRule()) {
+					sequence_PortInstanceConfig(context, (PortInstanceConfig) semanticObject); 
+					return; 
+				}
+				else break;
+			case ConfigPackage.PROTOCOL_CLASS_CONFIG:
+				if(context == grammarAccess.getConfigElementRule() ||
+				   context == grammarAccess.getProtocolClassConfigRule()) {
+					sequence_ProtocolClassConfig(context, (ProtocolClassConfig) semanticObject); 
+					return; 
+				}
+				else break;
 			case ConfigPackage.REAL_LITERAL:
 				if(context == grammarAccess.getLiteralRule() ||
 				   context == grammarAccess.getNumberLiteralRule() ||
@@ -147,7 +175,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (root=[SubSystemClass|FQN] path=RefPath attributes+=AttrInstanceConfig*)
+	 *     (root=[SubSystemClass|FQN] path=RefPath attributes+=AttrInstanceConfig* ports+=PortInstanceConfig*)
 	 */
 	protected void sequence_ActorInstanceConfig(EObject context, ActorInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -156,7 +184,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=Literal? (min=NumberLiteral? max=NumberLiteral?)?)
+	 *     (attribute=[Attribute|ID] value=LiteralArray? (min=NumberLiteral? max=NumberLiteral?)?)
 	 */
 	protected void sequence_AttrClassConfig(EObject context, AttrClassConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -165,7 +193,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=Literal?)
+	 *     (attribute=[Attribute|ID] value=LiteralArray?)
 	 */
 	protected void sequence_AttrInstanceConfig(EObject context, AttrInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -212,6 +240,42 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (literals+=Literal literals+=Literal*)
+	 */
+	protected void sequence_LiteralArray(EObject context, LiteralArray semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (attributes+=AttrClassConfig*)
+	 */
+	protected void sequence_PortClassConfig(EObject context, PortClassConfig semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (item=[InterfaceItem|ID] attributes+=AttrInstanceConfig*)
+	 */
+	protected void sequence_PortInstanceConfig(EObject context, PortInstanceConfig semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (protocol=[ProtocolClass|FQN] regular=PortClassConfig? conjugated=PortClassConfig?)
+	 */
+	protected void sequence_ProtocolClassConfig(EObject context, ProtocolClassConfig semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

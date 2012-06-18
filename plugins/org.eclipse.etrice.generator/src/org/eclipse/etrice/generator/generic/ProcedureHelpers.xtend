@@ -89,17 +89,16 @@ class ProcedureHelpers {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«IF a.configDefaultValue!=null»
-					«a.name» = «a.configDefaultValue»;
-				«ELSEIF a.defaultValueLiteral!=null»
-					«IF a.size==0»
-						«a.name» = «a.defaultValueLiteral»;
-					«ELSEIF a.defaultValueLiteral.startsWith("{")»
-							«a.name» = new «a.refType.type.typeName»[] «a.defaultValueLiteral»;
+				«var value = a.initValue»
+				«IF value!=null»
+					«IF !a.isArray»
+						«a.name» = «value»;
+					«ELSEIF value.startsWith("{")»
+						«a.name» = new «a.refType.type.typeName»[] «value»;
 					«ELSE»
 						«a.name» = new «a.refType.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «a.defaultValueLiteral»;
+							«a.name»[i] = «value»;
 						}
 					«ENDIF»
 				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
@@ -155,8 +154,20 @@ class ProcedureHelpers {
 		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
-	def invokeSetter(Attribute attribute, String classname, String value){
-		'''set«attribute.name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
+	// generic setters & getters
+	
+	def getterImplementation(String typeName, String name, String classname){'''
+		«languageExt.accessLevelPublic()»«typeName» get«name.toFirstUpper()» («languageExt.selfPointer(classname, false)»){
+			return «languageExt.memberAccess()»«name»;
+		}'''
+	}
+	
+	def invokeGetter(String name, String classname){
+		'''get«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»)'''
+	}
+	
+	def invokeSetter(String name, String classname, String value){
+		'''set«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
 	}
 	
 	// Operations

@@ -83,6 +83,10 @@ public class MrPing extends ActorClassBase {
 	public PingPongData getData () {
 		return this.data;
 	}
+	//--------------------- port getters
+	public PingPongProtocolConjPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -79,4 +79,13 @@ public interface ConfigModel extends EObject
    */
   EList<ActorInstanceConfig> getActorInstanceConfigs();
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof ProtocolClassConfig)\r\n\t\t\t\t\t\tlist.add((ProtocolClassConfig) element);\r\n\t\t\t\treturn list;'"
+   * @generated
+   */
+  EList<ProtocolClassConfig> getProtocolClassConfigs();
+
 } // ConfigModel

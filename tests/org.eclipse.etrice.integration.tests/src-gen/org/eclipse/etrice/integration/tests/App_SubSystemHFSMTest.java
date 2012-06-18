@@ -41,6 +41,7 @@ public class App_SubSystemHFSMTest extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){

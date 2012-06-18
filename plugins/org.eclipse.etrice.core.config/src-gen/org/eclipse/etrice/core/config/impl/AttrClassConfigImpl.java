@@ -80,8 +80,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumberLiteral getMin()
+  public NumberLiteral getMin()
   {
     return min;
   }
@@ -108,8 +107,7 @@ public NumberLiteral getMin()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMin(NumberLiteral newMin)
+  public void setMin(NumberLiteral newMin)
   {
     if (newMin != min)
     {
@@ -130,8 +128,7 @@ public void setMin(NumberLiteral newMin)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumberLiteral getMax()
+  public NumberLiteral getMax()
   {
     return max;
   }
@@ -158,8 +155,7 @@ public NumberLiteral getMax()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setMax(NumberLiteral newMax)
+  public void setMax(NumberLiteral newMax)
   {
     if (newMax != max)
     {

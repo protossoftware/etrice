@@ -3,69 +3,157 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib/models/JavaTypes.room"
 
 	SubSystemClass SubSystemConfigTest {
-		ActorRef top : ConfigText_Top
+		ActorRef top: ConfigText_Top_ac
 	}
-	
-	ActorClass ConfigText_Top {
+
+	ActorClass ConfigText_Top_ac {
 		Structure {
-			ActorRef testee: Testee
+			ActorRef testee: Testee_ac
 		}
 		Behavior { }
 	}
 
-	ActorClass Testee {
+	ActorClass AC1_ac {
 		Interface {
-			Port port1: ProtocolForConfig
+			conjugated Port Conj_port: PortProtocol
 		}
 		Structure {
-			usercode1{
-				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
-			}
-			external Port port1
-			Attribute bool1: boolean = "true"
-			Attribute bool2: boolean = "true"
-			Attribute bool3: boolean = "true"
-			Attribute int1: int32 = "100"
-			Attribute int2: int32 = "200"
-			Attribute int3: int32 = "300"
+			external Port Conj_port
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> Done { }
 				State Done {
-					entry {
-						"if (bool1 != true || bool2 != false || bool3 != true ){"
-						"\tRTServices.getInstance().getSubSystem().testFinished(1);"
-						"}"
-						"else if (int1 != 100 || int2 != 210 || int3 != 301){"
-						"\tRTServices.getInstance().getSubSystem().testFinished(2);"
-						"}"
-						"else {"
-						"\tRTServices.getInstance().getSubSystem().testFinished(0);"
-						"}"
+					entry{
+						"if(Conj_port.varCheck())"
+						"\tConj_port.portTestSucc();"
 					}
 				}
 			}
 		}
 	}
 
-	ProtocolClass ProtocolForConfig {
+	ActorClass Testee_ac {
+		Structure {
+			usercode1 {
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
+			Port Reg_port: PortProtocol
+			Attribute bool_r: boolean = "true"
+			Attribute bool_c: boolean = "true"
+			Attribute bool_i: boolean = "true"
+			Attribute int_r: int32 = "100"
+			Attribute int_c: int32 = "200"
+			Attribute int_i: int32 = "300"
+			Attribute float_r: float64 = "11.11"
+			Attribute float_c: float64 = "22.22"
+			Attribute float_i: float64 = "33.33"
+
+			// Attribute char_r: char = "R"
+			Attribute char_c: char = "C"
+			Attribute char_i: char = "I"
+
+			// Attribute string_r[20] : string = "ROOM will bloom"
+			Attribute string_c [ 20 ]: char = "ROOM Zoom"
+			Attribute string_i [ 20 ]: char = "ROOM Boom"
+			Attribute array1_r [ 1 ]: int32 = "0"
+			Attribute array1_c [ 1 ]: int32 = "0"
+			Attribute array1_i [ 1 ]: int32 = "0"
+			Attribute array2_r [ 2 ]: boolean = "{true, true}"
+			Attribute array2_c [ 2 ]: boolean = "{true, false}"
+			Attribute array2_i [ 2 ]: boolean = "{true, false}"
+			ActorRef AR1: AC1_ac
+			Binding Reg_port and AR1.Conj_port
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Testing { }
+				Transition tr1: Testing -> Done{
+					triggers{
+						<portTestSucc : Reg_port>
+					}
+				}
+				State Testing {
+					entry {
+						"if(Reg_port.varCheck())"
+						"\tReg_port.conjCheck();"
+					}
+				}
+				State Done {
+					entry {
+						"if (bool_r != true || bool_c != false || bool_i != true )"
+						"\tRTServices.getInstance().getSubSystem().testFinished(1);"
+						"else if (int_r != 100 || int_c != 210 || int_i != 301)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(2);"
+						"else if (float_r != 11.11 || float_c !=0xFFFFFF || float_i != 0.00001)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(3);"
+						"//char_r != \'R\'"
+						"else if (char_c != \'A\' || char_i != \'C\')"
+						"\tRTServices.getInstance().getSubSystem().testFinished(4);"
+						"// string_r.equals(\"ROOM will bloom\")"
+						"else if (string_c.equals(\"ROOM-Coon\") || string_i.equals(\"ROOM 2 Moon\"))"
+						"\tRTServices.getInstance().getSubSystem().testFinished(5);"
+						"if(array1_r[0] != 0 || array1_c[0] != 99 || array1_i[0] != 4)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(6);"
+						"if(array2_r[0] != true || array2_r[1] != true)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(7);"
+						"if(array2_c[0] != false || array2_c[1] != false)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(8);"
+						"if(array2_i[0] != false || array2_i[1] != true)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(9);"
+						"else"
+						"\tRTServices.getInstance().getSubSystem().testFinished(0);"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PortProtocol {
+		usercode1 {
+			"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+		}
 		incoming {
-			Message inMessage(data:  int32)
+			Message portTestSucc()					
 		}
 		outgoing {
-			Message outMess(data: int32)
+			Message conjCheck()
 		}
-		regular PortClass {
-			handle incoming inMessage {
-				"// detail code"
+		regular PortClass
+		{
+			Attribute float_r: float32 = "4"
+			Attribute float_c: float32 = "16"
+			Attribute float_i: float32 = "256"
+			Operation varCheck():boolean {
+				"int testValue = 0;"
+				"if(float_r != 4 || float_c != 3 || float_i != 25)"
+				"\ttestValue = 20;"
+				"if(testValue != 0)"
+					"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
+				"return testValue == 0;"
 			}
-			handle outgoing outMess {
-				"// out"
-			}
-			Attribute channel: int32 = "123"
-			Operation getChannel(): int32 {
-				"return channel;"
+		}
+		conjugate PortClass
+		{
+			Attribute array1_r [ 1 ]: float32 = "1000"
+			Attribute array1_c [ 1 ]: float32 = "1001"
+			Attribute array1_i [ 1 ]: float32 = "1002"
+			Attribute array2_r [ 2 ]: int64 = "{11,22}"
+			Attribute array2_c [ 2 ]: int64 = "{0,0}"
+			Attribute array2_i [ 2 ]: int64 = "{0,0}"
+			Operation varCheck():boolean {
+				"int testValue = 0;"
+				"if(array1_r[0] != 1000 || array1_c[0] != 1 || array1_i[0] != 256)"
+				"\ttestValue = 10;"
+				"if(array2_r[0] != 11 || array2_r[1] != 22)"
+				"\ttestValue = 11;"
+				"if(array2_c[0] != 16 || array2_c[1] != 32)"
+				"\ttestValue = 12;"
+				"if(array2_i[0] != 1 || array2_i[1] != 2)"
+				"\ttestValue = 13;"
+				"if(testValue != 0)"
+					"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
+				"return testValue == 0;"
 			}
 		}
 	}

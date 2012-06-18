@@ -76,8 +76,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -87,8 +86,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

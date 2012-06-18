@@ -76,8 +76,7 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getValue()
+  public int getValue()
   {
     return value;
   }
@@ -87,8 +86,7 @@ public int getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(int newValue)
+  public void setValue(int newValue)
   {
     int oldValue = value;
     value = newValue;

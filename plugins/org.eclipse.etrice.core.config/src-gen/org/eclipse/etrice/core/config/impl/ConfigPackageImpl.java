@@ -26,7 +26,11 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
+import org.eclipse.etrice.core.config.LiteralArray;
 import org.eclipse.etrice.core.config.NumberLiteral;
+import org.eclipse.etrice.core.config.PortClassConfig;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
@@ -74,6 +78,27 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass protocolClassConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass portClassConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass portInstanceConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass attrConfigEClass = null;
 
   /**
@@ -103,6 +128,13 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * @generated
    */
   private EClass importEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalArrayEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -217,8 +249,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getConfigModel()
+  public EClass getConfigModel()
   {
     return configModelEClass;
   }
@@ -228,8 +259,7 @@ public EClass getConfigModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getConfigModel_Imports()
+  public EReference getConfigModel_Imports()
   {
     return (EReference)configModelEClass.getEStructuralFeatures().get(0);
   }
@@ -239,8 +269,7 @@ public EReference getConfigModel_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getConfigModel_ConfigElements()
+  public EReference getConfigModel_ConfigElements()
   {
     return (EReference)configModelEClass.getEStructuralFeatures().get(1);
   }
@@ -250,8 +279,7 @@ public EReference getConfigModel_ConfigElements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getConfigElement()
+  public EClass getConfigElement()
   {
     return configElementEClass;
   }
@@ -261,8 +289,7 @@ public EClass getConfigElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getActorClassConfig()
+  public EClass getActorClassConfig()
   {
     return actorClassConfigEClass;
   }
@@ -272,8 +299,7 @@ public EClass getActorClassConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getActorClassConfig_Actor()
+  public EReference getActorClassConfig_Actor()
   {
     return (EReference)actorClassConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -283,8 +309,7 @@ public EReference getActorClassConfig_Actor()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getActorClassConfig_Attributes()
+  public EReference getActorClassConfig_Attributes()
   {
     return (EReference)actorClassConfigEClass.getEStructuralFeatures().get(1);
   }
@@ -294,8 +319,7 @@ public EReference getActorClassConfig_Attributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getActorInstanceConfig()
+  public EClass getActorInstanceConfig()
   {
     return actorInstanceConfigEClass;
   }
@@ -305,8 +329,7 @@ public EClass getActorInstanceConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getActorInstanceConfig_Root()
+  public EReference getActorInstanceConfig_Root()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -316,8 +339,7 @@ public EReference getActorInstanceConfig_Root()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getActorInstanceConfig_Path()
+  public EReference getActorInstanceConfig_Path()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(1);
   }
@@ -327,8 +349,7 @@ public EReference getActorInstanceConfig_Path()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getActorInstanceConfig_Attributes()
+  public EReference getActorInstanceConfig_Attributes()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(2);
   }
@@ -338,8 +359,107 @@ public EReference getActorInstanceConfig_Attributes()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttrConfig()
+  public EReference getActorInstanceConfig_Ports()
+  {
+    return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getProtocolClassConfig()
+  {
+    return protocolClassConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolClassConfig_Protocol()
+  {
+    return (EReference)protocolClassConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolClassConfig_Regular()
+  {
+    return (EReference)protocolClassConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolClassConfig_Conjugated()
+  {
+    return (EReference)protocolClassConfigEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPortClassConfig()
+  {
+    return portClassConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPortClassConfig_Attributes()
+  {
+    return (EReference)portClassConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPortInstanceConfig()
+  {
+    return portInstanceConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPortInstanceConfig_Item()
+  {
+    return (EReference)portInstanceConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPortInstanceConfig_Attributes()
+  {
+    return (EReference)portInstanceConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAttrConfig()
   {
     return attrConfigEClass;
   }
@@ -349,8 +469,7 @@ public EClass getAttrConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttrConfig_Attribute()
+  public EReference getAttrConfig_Attribute()
   {
     return (EReference)attrConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -360,8 +479,7 @@ public EReference getAttrConfig_Attribute()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttrConfig_Value()
+  public EReference getAttrConfig_Value()
   {
     return (EReference)attrConfigEClass.getEStructuralFeatures().get(1);
   }
@@ -371,8 +489,7 @@ public EReference getAttrConfig_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttrClassConfig()
+  public EClass getAttrClassConfig()
   {
     return attrClassConfigEClass;
   }
@@ -382,8 +499,7 @@ public EClass getAttrClassConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttrClassConfig_Min()
+  public EReference getAttrClassConfig_Min()
   {
     return (EReference)attrClassConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -393,8 +509,7 @@ public EReference getAttrClassConfig_Min()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAttrClassConfig_Max()
+  public EReference getAttrClassConfig_Max()
   {
     return (EReference)attrClassConfigEClass.getEStructuralFeatures().get(1);
   }
@@ -404,8 +519,7 @@ public EReference getAttrClassConfig_Max()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAttrInstanceConfig()
+  public EClass getAttrInstanceConfig()
   {
     return attrInstanceConfigEClass;
   }
@@ -415,8 +529,7 @@ public EClass getAttrInstanceConfig()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRefPath()
+  public EClass getRefPath()
   {
     return refPathEClass;
   }
@@ -426,8 +539,7 @@ public EClass getRefPath()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRefPath_Refs()
+  public EAttribute getRefPath_Refs()
   {
     return (EAttribute)refPathEClass.getEStructuralFeatures().get(0);
   }
@@ -437,8 +549,7 @@ public EAttribute getRefPath_Refs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -448,8 +559,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportedNamespace()
+  public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -459,8 +569,7 @@ public EAttribute getImport_ImportedNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportURI()
+  public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(1);
   }
@@ -470,8 +579,27 @@ public EAttribute getImport_ImportURI()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getLiteral()
+  public EClass getLiteralArray()
+  {
+    return literalArrayEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLiteralArray_Literals()
+  {
+    return (EReference)literalArrayEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLiteral()
   {
     return literalEClass;
   }
@@ -481,8 +609,7 @@ public EClass getLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getBooleanLiteral()
+  public EClass getBooleanLiteral()
   {
     return booleanLiteralEClass;
   }
@@ -492,8 +619,7 @@ public EClass getBooleanLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getBooleanLiteral_IsTrue()
+  public EAttribute getBooleanLiteral_IsTrue()
   {
     return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -503,8 +629,7 @@ public EAttribute getBooleanLiteral_IsTrue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNumberLiteral()
+  public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
   }
@@ -514,8 +639,7 @@ public EClass getNumberLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRealLiteral()
+  public EClass getRealLiteral()
   {
     return realLiteralEClass;
   }
@@ -525,8 +649,7 @@ public EClass getRealLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRealLiteral_Value()
+  public EAttribute getRealLiteral_Value()
   {
     return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -536,8 +659,7 @@ public EAttribute getRealLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getIntLiteral()
+  public EClass getIntLiteral()
   {
     return intLiteralEClass;
   }
@@ -547,8 +669,7 @@ public EClass getIntLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getIntLiteral_Value()
+  public EAttribute getIntLiteral_Value()
   {
     return (EAttribute)intLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -558,8 +679,7 @@ public EAttribute getIntLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getStringLiteral()
+  public EClass getStringLiteral()
   {
     return stringLiteralEClass;
   }
@@ -569,8 +689,7 @@ public EClass getStringLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getStringLiteral_Value()
+  public EAttribute getStringLiteral_Value()
   {
     return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -580,8 +699,7 @@ public EAttribute getStringLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ConfigFactory getConfigFactory()
+  public ConfigFactory getConfigFactory()
   {
     return (ConfigFactory)getEFactoryInstance();
   }
@@ -620,6 +738,19 @@ public ConfigFactory getConfigFactory()
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ROOT);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__PATH);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
+    createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__PORTS);
+
+    protocolClassConfigEClass = createEClass(PROTOCOL_CLASS_CONFIG);
+    createEReference(protocolClassConfigEClass, PROTOCOL_CLASS_CONFIG__PROTOCOL);
+    createEReference(protocolClassConfigEClass, PROTOCOL_CLASS_CONFIG__REGULAR);
+    createEReference(protocolClassConfigEClass, PROTOCOL_CLASS_CONFIG__CONJUGATED);
+
+    portClassConfigEClass = createEClass(PORT_CLASS_CONFIG);
+    createEReference(portClassConfigEClass, PORT_CLASS_CONFIG__ATTRIBUTES);
+
+    portInstanceConfigEClass = createEClass(PORT_INSTANCE_CONFIG);
+    createEReference(portInstanceConfigEClass, PORT_INSTANCE_CONFIG__ITEM);
+    createEReference(portInstanceConfigEClass, PORT_INSTANCE_CONFIG__ATTRIBUTES);
 
     attrConfigEClass = createEClass(ATTR_CONFIG);
     createEReference(attrConfigEClass, ATTR_CONFIG__ATTRIBUTE);
@@ -637,6 +768,9 @@ public ConfigFactory getConfigFactory()
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
     createEAttribute(importEClass, IMPORT__IMPORT_URI);
+
+    literalArrayEClass = createEClass(LITERAL_ARRAY);
+    createEReference(literalArrayEClass, LITERAL_ARRAY__LITERALS);
 
     literalEClass = createEClass(LITERAL);
 
@@ -689,6 +823,7 @@ public ConfigFactory getConfigFactory()
     // Add supertypes to classes
     actorClassConfigEClass.getESuperTypes().add(this.getConfigElement());
     actorInstanceConfigEClass.getESuperTypes().add(this.getConfigElement());
+    protocolClassConfigEClass.getESuperTypes().add(this.getConfigElement());
     attrClassConfigEClass.getESuperTypes().add(this.getAttrConfig());
     attrInstanceConfigEClass.getESuperTypes().add(this.getAttrConfig());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -706,6 +841,8 @@ public ConfigFactory getConfigFactory()
 
     addEOperation(configModelEClass, this.getActorInstanceConfig(), "getActorInstanceConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+    addEOperation(configModelEClass, this.getProtocolClassConfig(), "getProtocolClassConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
     initEClass(configElementEClass, ConfigElement.class, "ConfigElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(actorClassConfigEClass, ActorClassConfig.class, "ActorClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -716,10 +853,23 @@ public ConfigFactory getConfigFactory()
     initEReference(getActorInstanceConfig_Root(), theRoomPackage.getSubSystemClass(), null, "root", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorInstanceConfig_Path(), this.getRefPath(), null, "path", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceConfig_Ports(), this.getPortInstanceConfig(), null, "ports", null, 0, -1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(protocolClassConfigEClass, ProtocolClassConfig.class, "ProtocolClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getProtocolClassConfig_Protocol(), theRoomPackage.getProtocolClass(), null, "protocol", null, 0, 1, ProtocolClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProtocolClassConfig_Regular(), this.getPortClassConfig(), null, "regular", null, 0, 1, ProtocolClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProtocolClassConfig_Conjugated(), this.getPortClassConfig(), null, "conjugated", null, 0, 1, ProtocolClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(portClassConfigEClass, PortClassConfig.class, "PortClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPortClassConfig_Attributes(), this.getAttrClassConfig(), null, "attributes", null, 0, -1, PortClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(portInstanceConfigEClass, PortInstanceConfig.class, "PortInstanceConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPortInstanceConfig_Item(), theRoomPackage.getInterfaceItem(), null, "item", null, 0, 1, PortInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPortInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, PortInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attrConfigEClass, AttrConfig.class, "AttrConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttrConfig_Attribute(), theRoomPackage.getAttribute(), null, "attribute", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttrConfig_Value(), this.getLiteral(), null, "value", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrConfig_Value(), this.getLiteralArray(), null, "value", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attrClassConfigEClass, AttrClassConfig.class, "AttrClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttrClassConfig_Min(), this.getNumberLiteral(), null, "min", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -733,6 +883,9 @@ public ConfigFactory getConfigFactory()
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(literalArrayEClass, LiteralArray.class, "LiteralArray", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLiteralArray_Literals(), this.getLiteral(), null, "literals", null, 0, -1, LiteralArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

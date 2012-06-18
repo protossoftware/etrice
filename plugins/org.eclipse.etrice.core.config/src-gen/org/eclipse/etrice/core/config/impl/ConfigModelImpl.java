@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.config.ConfigElement;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,8 +90,7 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Import> getImports()
+  public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -104,8 +104,7 @@ public EList<Import> getImports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ConfigElement> getConfigElements()
+  public EList<ConfigElement> getConfigElements()
   {
     if (configElements == null)
     {
@@ -119,8 +118,7 @@ public EList<ConfigElement> getConfigElements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ActorClassConfig> getActorClassConfigs()
+  public EList<ActorClassConfig> getActorClassConfigs()
   {
     EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
              			for(ConfigElement element : this.getConfigElements())
@@ -134,13 +132,26 @@ public EList<ActorClassConfig> getActorClassConfigs()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ActorInstanceConfig> getActorInstanceConfigs()
+  public EList<ActorInstanceConfig> getActorInstanceConfigs()
   {
     EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
             for(ConfigElement element : this.getConfigElements())
            		if(element instanceof ActorInstanceConfig)
                 list.add((ActorInstanceConfig) element);
+            return list;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ProtocolClassConfig> getProtocolClassConfigs()
+  {
+    EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
+            for(ConfigElement element : this.getConfigElements())
+           		if(element instanceof ProtocolClassConfig)
+                list.add((ProtocolClassConfig) element);
             return list;
   }
 

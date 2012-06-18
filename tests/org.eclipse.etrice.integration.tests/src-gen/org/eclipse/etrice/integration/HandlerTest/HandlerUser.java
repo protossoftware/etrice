@@ -60,6 +60,10 @@ public class HandlerUser extends ActorClassBase {
 	public int getCounter () {
 		return this.counter;
 	}
+	//--------------------- port getters
+	public TestProtocolPort getTestPort1 (){
+		return this.TestPort1;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

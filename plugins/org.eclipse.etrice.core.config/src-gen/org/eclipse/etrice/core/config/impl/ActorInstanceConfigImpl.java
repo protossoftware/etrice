@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.RefPath;
 
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -38,6 +39,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getPorts <em>Ports</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +78,16 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
   protected EList<AttrInstanceConfig> attributes;
 
   /**
+   * The cached value of the '{@link #getPorts() <em>Ports</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPorts()
+   * @generated
+   * @ordered
+   */
+  protected EList<PortInstanceConfig> ports;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -101,8 +113,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SubSystemClass getRoot()
+  public SubSystemClass getRoot()
   {
     if (root != null && root.eIsProxy())
     {
@@ -132,8 +143,7 @@ public SubSystemClass getRoot()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRoot(SubSystemClass newRoot)
+  public void setRoot(SubSystemClass newRoot)
   {
     SubSystemClass oldRoot = root;
     root = newRoot;
@@ -146,8 +156,7 @@ public void setRoot(SubSystemClass newRoot)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RefPath getPath()
+  public RefPath getPath()
   {
     return path;
   }
@@ -174,8 +183,7 @@ public RefPath getPath()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPath(RefPath newPath)
+  public void setPath(RefPath newPath)
   {
     if (newPath != path)
     {
@@ -196,14 +204,27 @@ public void setPath(RefPath newPath)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<AttrInstanceConfig> getAttributes()
+  public EList<AttrInstanceConfig> getAttributes()
   {
     if (attributes == null)
     {
       attributes = new EObjectContainmentEList<AttrInstanceConfig>(AttrInstanceConfig.class, this, ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
     }
     return attributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<PortInstanceConfig> getPorts()
+  {
+    if (ports == null)
+    {
+      ports = new EObjectContainmentEList<PortInstanceConfig>(PortInstanceConfig.class, this, ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS);
+    }
+    return ports;
   }
 
   /**
@@ -220,6 +241,8 @@ public EList<AttrInstanceConfig> getAttributes()
         return basicSetPath(null, msgs);
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS:
+        return ((InternalEList<?>)getPorts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -241,6 +264,8 @@ public EList<AttrInstanceConfig> getAttributes()
         return getPath();
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:
         return getAttributes();
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS:
+        return getPorts();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -266,6 +291,10 @@ public EList<AttrInstanceConfig> getAttributes()
         getAttributes().clear();
         getAttributes().addAll((Collection<? extends AttrInstanceConfig>)newValue);
         return;
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS:
+        getPorts().clear();
+        getPorts().addAll((Collection<? extends PortInstanceConfig>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -289,6 +318,9 @@ public EList<AttrInstanceConfig> getAttributes()
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:
         getAttributes().clear();
         return;
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS:
+        getPorts().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -309,6 +341,8 @@ public EList<AttrInstanceConfig> getAttributes()
         return path != null;
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__PORTS:
+        return ports != null && !ports.isEmpty();
     }
     return super.eIsSet(featureID);
   }

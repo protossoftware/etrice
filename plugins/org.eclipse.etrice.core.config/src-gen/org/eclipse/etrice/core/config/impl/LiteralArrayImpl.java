@@ -8,48 +8,53 @@ package org.eclipse.etrice.core.config.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.config.ConfigPackage;
-import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.Literal;
+import org.eclipse.etrice.core.config.LiteralArray;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Ref Path</b></em>'.
+ * An implementation of the model object '<em><b>Literal Array</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.impl.RefPathImpl#getRefs <em>Refs</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.LiteralArrayImpl#getLiterals <em>Literals</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
+public class LiteralArrayImpl extends MinimalEObjectImpl.Container implements LiteralArray
 {
   /**
-   * The cached value of the '{@link #getRefs() <em>Refs</em>}' attribute list.
+   * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefs()
+   * @see #getLiterals()
    * @generated
    * @ordered
    */
-  protected EList<String> refs;
+  protected EList<Literal> literals;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RefPathImpl()
+  protected LiteralArrayImpl()
   {
     super();
   }
@@ -62,7 +67,7 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
   @Override
   protected EClass eStaticClass()
   {
-    return ConfigPackage.Literals.REF_PATH;
+    return ConfigPackage.Literals.LITERAL_ARRAY;
   }
 
   /**
@@ -70,13 +75,29 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getRefs()
+  public EList<Literal> getLiterals()
   {
-    if (refs == null)
+    if (literals == null)
     {
-      refs = new EDataTypeEList<String>(String.class, this, ConfigPackage.REF_PATH__REFS);
+      literals = new EObjectContainmentEList<Literal>(Literal.class, this, ConfigPackage.LITERAL_ARRAY__LITERALS);
     }
-    return refs;
+    return literals;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ConfigPackage.LITERAL_ARRAY__LITERALS:
+        return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -89,8 +110,8 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
   {
     switch (featureID)
     {
-      case ConfigPackage.REF_PATH__REFS:
-        return getRefs();
+      case ConfigPackage.LITERAL_ARRAY__LITERALS:
+        return getLiterals();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -106,9 +127,9 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
   {
     switch (featureID)
     {
-      case ConfigPackage.REF_PATH__REFS:
-        getRefs().clear();
-        getRefs().addAll((Collection<? extends String>)newValue);
+      case ConfigPackage.LITERAL_ARRAY__LITERALS:
+        getLiterals().clear();
+        getLiterals().addAll((Collection<? extends Literal>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -124,8 +145,8 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
   {
     switch (featureID)
     {
-      case ConfigPackage.REF_PATH__REFS:
-        getRefs().clear();
+      case ConfigPackage.LITERAL_ARRAY__LITERALS:
+        getLiterals().clear();
         return;
     }
     super.eUnset(featureID);
@@ -141,27 +162,10 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
   {
     switch (featureID)
     {
-      case ConfigPackage.REF_PATH__REFS:
-        return refs != null && !refs.isEmpty();
+      case ConfigPackage.LITERAL_ARRAY__LITERALS:
+        return literals != null && !literals.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (refs: ");
-    result.append(refs);
-    result.append(')');
-    return result.toString();
-  }
-
-} //RefPathImpl
+} //LiteralArrayImpl

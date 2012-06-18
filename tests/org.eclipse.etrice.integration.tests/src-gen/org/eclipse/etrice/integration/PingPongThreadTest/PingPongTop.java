@@ -41,6 +41,7 @@ public class PingPongTop extends ActorClassBase {
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){

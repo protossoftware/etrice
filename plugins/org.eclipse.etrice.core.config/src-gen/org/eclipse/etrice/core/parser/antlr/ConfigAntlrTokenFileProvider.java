@@ -8,7 +8,6 @@ import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class ConfigAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	
-	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/etrice/core/parser/antlr/internal/InternalConfig.tokens");

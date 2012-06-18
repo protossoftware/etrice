@@ -24,7 +24,7 @@ ConfigModel:
 	configElements+=ConfigElement*;
 
 ConfigElement:
-	ActorClassConfig | ActorInstanceConfig;
+	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 
 	/*
 	 * Validation:
@@ -45,6 +45,23 @@ ActorClassConfig:
 ActorInstanceConfig:
 	'ActorInstanceConfig' root=[room::SubSystemClass|FQN] '/' path=RefPath '{'
 	attributes+=AttrInstanceConfig*
+	ports+=PortInstanceConfig*
+	'}';
+
+ProtocolClassConfig:
+	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
+	(('regular' regular=PortClassConfig)? &
+	('conjugate' conjugated=PortClassConfig)?)
+	'}';
+
+PortClassConfig:
+	{PortClassConfig} 'Port' '{'
+	attributes+=AttrClassConfig*
+	'}';
+
+PortInstanceConfig:
+	'InterfaceItem' item=[room::InterfaceItem|ID] '{'
+	attributes+=AttrInstanceConfig*
 	'}';
 
 	/*
@@ -61,16 +78,17 @@ AttrConfig:
 	 * correct min, max type + available
 	 * min <= value <= max
 	 * if !value -> min <= attribute.defaultValue <= max
+	 * character length
 	 * 
 	 */
 AttrClassConfig:
-	'attr' attribute=[room::Attribute] ('=' value=Literal)? ('{'
+	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
 	(('min' '=' min=NumberLiteral)? &
 	('max' '=' max=NumberLiteral)?)
 	'}')?;
 
 AttrInstanceConfig:
-	'attr' attribute=[room::Attribute] ('=' value=Literal)?;
+	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)?;
 
 	/*
 	 * Proposal:
@@ -106,6 +124,12 @@ FQN:
 //	KW
 //;
 
+// LiteralArray = BooleanLiteral+|NumberLiteral+
+// LiteralArray = StringLiteral
+LiteralArray:
+	literals+=Literal (',' literals+=Literal)*
+;
+
 // Value Types for Attributes
 Literal:
 	BooleanLiteral |
@@ -137,7 +161,7 @@ Hexadecimal hidden():
 	HEX;
 
 Real returns ecore::EDouble:
-	Decimal | DotDecimal | DecimalDot | DecimalExp ;
+	Decimal | DotDecimal | DecimalDot | DecimalExp;
 
 Decimal hidden():
 	('+' | '-')? INT '.' INT;
@@ -150,7 +174,7 @@ DecimalDot hidden():
 
 DecimalExp hidden():
 	('+' | '-')? INT '.' INT ID ('+' | '-')? INT;
-//DecimalPosExp hidden():
+	//DecimalPosExp hidden():
 //	('+' | '-')? INT '.' INT ID; 
 terminal HEX:
 	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
