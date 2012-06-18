@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
@@ -172,9 +173,9 @@ public class BindingSupport {
 
 					GeneralProtocolClass srcGPC = src.getProtocol();
 					GeneralProtocolClass dstGPC = dst.getProtocol();
-					if (srcGPC instanceof GeneralProtocolClass || dstGPC instanceof GeneralProtocolClass) {
+					if (srcGPC instanceof CompoundProtocolClass || dstGPC instanceof CompoundProtocolClass) {
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, dst, null, sc);
+						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, null, sc);
 						if (dlg.open()!=Window.OK)
 							throw new OperationCanceledException();
 						
@@ -325,7 +326,7 @@ public class BindingSupport {
 					GeneralProtocolClass dstGPC = dst.getProtocol();
 					if (srcGPC instanceof GeneralProtocolClass || dstGPC instanceof GeneralProtocolClass) {
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, dst, bind, sc);
+						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, bind, sc);
 						if (dlg.open()!=Window.OK)
 							return;
 						
@@ -452,7 +453,10 @@ public class BindingSupport {
 				
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(
-						shell, bind.getEndpoint1().getPort(), bind.getEndpoint2().getPort(), bind, sc);
+						shell,
+						bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
+						bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),
+						bind, sc);
 				if (dlg.open()!=Window.OK)
 					return;
 				

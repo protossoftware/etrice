@@ -334,7 +334,7 @@ public class ValidationUtil {
 					return Result.error("protocol communication types don't match");
 			}
 			if (compoundInvolved) {
-				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, p2, sc, exclude);
+				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, ref1, p2, ref2, sc, exclude);
 				if (matches.isEmpty())
 					return Result.error("no matching sub protocol(s) found");
 				if (matches.size()==1)
@@ -420,6 +420,13 @@ public class ValidationUtil {
 		bindings.add(key);
 		for (Binding bind : sc.getBindings()) {
 			if (bind==exclude)
+				continue;
+			
+			if (!(bind.getEndpoint1().getPort()==p1 && bind.getEndpoint1().getActorRef()==ref1
+					&& bind.getEndpoint2().getPort()==p2 && bind.getEndpoint2().getActorRef()==ref2))
+				continue;
+			if (!(bind.getEndpoint2().getPort()==p1 && bind.getEndpoint2().getActorRef()==ref1
+					&& bind.getEndpoint1().getPort()==p2 && bind.getEndpoint1().getActorRef()==ref2))
 				continue;
 
 			key = getKey(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
