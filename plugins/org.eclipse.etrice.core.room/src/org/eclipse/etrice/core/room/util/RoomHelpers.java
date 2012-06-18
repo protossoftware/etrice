@@ -564,6 +564,10 @@ public class RoomHelpers {
 		return isAnnotationPresent(ac.getAnnotations(), name);
 	}
 	
+	public static boolean isBehaviorAnnotationPresent(ActorClass ac, String name) {
+		return isAnnotationPresent(ac.getBehaviorAnnotations(), name);
+	}
+	
 	public static boolean isAnnotationPresent(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
 			if (annotation.getName().equals(name))
@@ -574,6 +578,10 @@ public class RoomHelpers {
 	
 	public static List<KeyValue> getAttributes(ActorClass ac, String name) {
 		return getAttributes(ac.getAnnotations(), name);
+	}
+	
+	public static List<KeyValue> getBehaviorAttributes(ActorClass ac, String name) {
+		return getAttributes(ac.getBehaviorAnnotations(), name);
 	}
 	
 	public static List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
@@ -588,6 +596,10 @@ public class RoomHelpers {
 		return isAttributePresent(ac.getAnnotations(), name, key);
 	}
 	
+	public static boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
+		return isAttributePresent(ac.getBehaviorAnnotations(), name, key);
+	}
+	
 	public static boolean isAttributePresent(List<Annotation> annotations, String name, String key) {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
@@ -599,6 +611,10 @@ public class RoomHelpers {
 	
 	public static String getAttribute(ActorClass ac, String name, String key) {
 		return getAttribute(ac.getAnnotations(), name, key);
+	}
+	
+	public static String getBehaviorAttribute(ActorClass ac, String name, String key) {
+		return getAttribute(ac.getBehaviorAnnotations(), name, key);
 	}
 	
 	public static String getAttribute(List<Annotation> annotations, String name, String key) {
