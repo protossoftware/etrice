@@ -13,6 +13,11 @@
             classToCheck="org.eclipse.etrice.core.room.ActorClass"
             mode="FAST">
       </validator>
+      <validator
+            class="org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator"
+            classToCheck="org.eclipse.etrice.core.room.ActorClass"
+            mode="FAST">
+      </validator>
    </extension>
    <extension
          point="org.eclipse.etrice.core.room.ui.quickfix">
