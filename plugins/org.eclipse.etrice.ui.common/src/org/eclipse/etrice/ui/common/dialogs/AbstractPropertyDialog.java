@@ -303,6 +303,21 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return text;
 	}
 	
+	protected Text createFixedText(Composite parent, String label, String txt, boolean multiline) {
+		Label l = toolkit.createLabel(parent, label, SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
+		
+		int style = SWT.BORDER;
+		if (multiline)
+			style |= SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL;
+		Text text = toolkit.createText(parent, txt, style);
+		GridData gd = new GridData(multiline?GridData.FILL_BOTH:GridData.FILL_HORIZONTAL);
+		text.setLayoutData(gd);
+		text.setEnabled(false);
+		
+		return text;
+	}
+	
 	protected Button createCheck(Composite parent, String label, EObject obj, EAttribute att) {
 		return createCheck(parent, label, obj, att, null);
 	}

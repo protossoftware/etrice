@@ -9,7 +9,6 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -22,7 +21,6 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -51,6 +49,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
@@ -174,9 +173,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private Text guardText;
 	private Button removeMifButton;
 	private boolean triggerError = false;
+	private boolean inherited;
 
-	public TransitionPropertyDialog(Shell shell, StateGraph sg, Transition trans) {
-		super(shell, "Edit Transition", getActorClass(sg));
+	public TransitionPropertyDialog(Shell shell, ActorClass ac, Transition trans) {
+		super(shell, "Edit Transition", ac);
 		this.trans = trans;
 
 		m2s = new DetailCodeToString();
@@ -184,19 +184,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		s2m = new StringToDetailCode();
 		s2m_not_null = new StringToDetailCode(false);
 		
-		interfaceItems = RoomHelpers.getAllInterfaceItems(getActorClass());
-	}
-
-	private static ActorClass getActorClass(StateGraph sg) {
-		EObject obj = sg;
-		while (obj!=null) {
-			if (obj instanceof ActorClass) {
-				return (ActorClass) obj;
-				
-			}
-			obj = obj.eContainer();
-		}
-		return null;
+		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+		inherited = RoomHelpers.getActorClass(trans)!=ac;
 	}
 
 	@Override
@@ -205,8 +194,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	}
 
 	@Override
-	protected void createContent(IManagedForm mform, Composite body,
-			DataBindingContext bindingContext) {
+	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
 		
 		if (!(trans instanceof InitialTransition)) {
 			NameValidator nv = new NameValidator();
@@ -271,6 +259,17 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		
 		createMembersAndMessagesButtons(body);
+		
+		if (inherited)
+			disableAll(body);
+	}
+
+	private void disableAll(Composite parent) {
+		for (Control child : parent.getChildren()) {
+			child.setEnabled(false);
+			if (child instanceof Composite)
+				disableAll((Composite) child);
+		}
 	}
 
 	private boolean triggersAvailable() {
@@ -292,6 +291,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		if (ok && triggerError) {
 			ok = false;
 			setValidationText("no triggers available");
+		}
+		if (ok && inherited) {
+			ok = false;
+			setValidationText("inherited transition not editable");
 		}
 		super.updateValidationFeedback(ok);
 	}
@@ -315,7 +318,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		tableCompartment.setLayoutData(gd);
 
-		Table triggerTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		Table triggerTable = toolkit.createTable(tableCompartment, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 50;
 		gd.widthHint = 100;
@@ -376,7 +379,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		tableCompartment.setLayoutData(gd);
 
-		Table mifTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		Table mifTable = toolkit.createTable(tableCompartment, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 50;
 		gd.widthHint = 100;
@@ -665,7 +668,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		super.createButtonsForButtonBar(parent);
-		if (!triggersAvailable())
+		if (inherited || !triggersAvailable())
 			getButton(IDialogConstants.OK_ID).setEnabled(false);
 	}
 	

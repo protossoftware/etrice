@@ -202,7 +202,7 @@ public class TransitionSupport {
 					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
 					if (dlg.open()!=Window.OK) {
 						if (inherited) {
 							SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
@@ -331,8 +331,8 @@ public class TransitionSupport {
 				if (!super.canReconnect(context))
 					return false;
 				
-				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
-				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
 				if (inherited)
 					return false;
 
@@ -343,7 +343,6 @@ public class TransitionSupport {
 				else
 					tgt = context.getNewAnchor();
 				
-				Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
 				return SupportUtil.canConnect(src, tgt, trans, (ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
 			}
 			
@@ -358,6 +357,7 @@ public class TransitionSupport {
 				// in the following we set source and target of the connection regardless of whether they have changed
 				// if the type of the transition changed we create a new one and open the property dialog
 				
+				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				Transition orig = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
 				Transition trans = null;
 				if (src==null) {
@@ -398,7 +398,6 @@ public class TransitionSupport {
 					trans = t;
 				}
 				else {
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
 					NonInitialTransition t = ac.getCommType()==ActorCommunicationType.DATA_DRIVEN?
 						((orig instanceof GuardedTransition)?
 							(GuardedTransition)orig : RoomFactory.eINSTANCE.createGuardedTransition()
@@ -428,7 +427,7 @@ public class TransitionSupport {
 					sg.getTransitions().add(trans);
 					
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+					TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, ac, trans);
 					if (dlg.open()!=Window.OK) {
 						sg.getTransitions().add(orig);
 						sg.getTransitions().remove(trans);
@@ -579,12 +578,10 @@ public class TransitionSupport {
 					pe = (PictogramElement) pe.eContainer();
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
 				Connection conn = (Connection) pe;
-				StateGraph sg = (StateGraph)trans.eContainer();
-				StateGraph currentSG = SupportUtil.getStateGraph((ContainerShape) conn.getStart().eContainer(), getFeatureProvider());
-				boolean inherited = SupportUtil.isInherited(getDiagram(), currentSG);
+				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, sg, trans);
+				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
 				if (dlg.open()!=Window.OK)
 					throw new OperationCanceledException();
 
