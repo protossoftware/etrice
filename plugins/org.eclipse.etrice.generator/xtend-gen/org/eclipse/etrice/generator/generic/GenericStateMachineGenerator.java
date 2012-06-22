@@ -316,12 +316,20 @@ public class GenericStateMachineGenerator {
         for(final Transition tr : _transitionList) {
           {
             boolean _operator_and = false;
-            boolean _isOwnObject_1 = xpac.isOwnObject(tr);
-            if (!_isOwnObject_1) {
+            boolean _operator_or_2 = false;
+            boolean _usesInheritance_1 = this.langExt.usesInheritance();
+            boolean _operator_not_1 = BooleanExtensions.operator_not(_usesInheritance_1);
+            if (_operator_not_1) {
+              _operator_or_2 = true;
+            } else {
+              boolean _isOwnObject_1 = xpac.isOwnObject(tr);
+              _operator_or_2 = BooleanExtensions.operator_or(_operator_not_1, _isOwnObject_1);
+            }
+            if (!_operator_or_2) {
               _operator_and = false;
             } else {
               boolean _hasActionCode = this.roomExt.hasActionCode(tr);
-              _operator_and = BooleanExtensions.operator_and(_isOwnObject_1, _hasActionCode);
+              _operator_and = BooleanExtensions.operator_and(_operator_or_2, _hasActionCode);
             }
             if (_operator_and) {
               TransitionChain _chain = xpac.getChain(tr);
@@ -332,8 +340,8 @@ public class GenericStateMachineGenerator {
               if (!(start instanceof NonInitialTransition)) {
                 _operator_and_1 = false;
               } else {
-                boolean _operator_not_1 = BooleanExtensions.operator_not((start instanceof GuardedTransition));
-                _operator_and_1 = BooleanExtensions.operator_and((start instanceof NonInitialTransition), _operator_not_1);
+                boolean _operator_not_2 = BooleanExtensions.operator_not((start instanceof GuardedTransition));
+                _operator_and_1 = BooleanExtensions.operator_and((start instanceof NonInitialTransition), _operator_not_2);
               }
               boolean hasArgs = _operator_and_1;
               _builder.newLineIfNotEmpty();
@@ -736,8 +744,8 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _usesInheritance_1 = this.langExt.usesInheritance();
-        if (_usesInheritance_1) {
+        boolean _usesInheritance_2 = this.langExt.usesInheritance();
+        if (_usesInheritance_2) {
           String _accessLevelPublic = this.langExt.accessLevelPublic();
           _builder.append(_accessLevelPublic, "");
         } else {
@@ -804,8 +812,8 @@ public class GenericStateMachineGenerator {
       _builder.append("/* receiveEvent contains the main implementation of the FSM */");
       _builder.newLine();
       {
-        boolean _usesInheritance_2 = this.langExt.usesInheritance();
-        if (_usesInheritance_2) {
+        boolean _usesInheritance_3 = this.langExt.usesInheritance();
+        if (_usesInheritance_3) {
           String _accessLevelPublic_1 = this.langExt.accessLevelPublic();
           _builder.append(_accessLevelPublic_1, "");
         } else {
@@ -835,8 +843,8 @@ public class GenericStateMachineGenerator {
           _builder.append(_nullPointer_4, "	");
           _builder.append(")? POLLING : ");
           {
-            boolean _usesInheritance_3 = this.langExt.usesInheritance();
-            if (_usesInheritance_3) {
+            boolean _usesInheritance_4 = this.langExt.usesInheritance();
+            if (_usesInheritance_4) {
               _builder.append("ifitem.getLocalId()");
             } else {
               _builder.append("ifitem->localId");
@@ -849,8 +857,8 @@ public class GenericStateMachineGenerator {
             _builder.append("\t");
             _builder.append("int trigger = ");
             {
-              boolean _usesInheritance_4 = this.langExt.usesInheritance();
-              if (_usesInheritance_4) {
+              boolean _usesInheritance_5 = this.langExt.usesInheritance();
+              if (_usesInheritance_5) {
                 _builder.append("ifitem.getLocalId()");
               } else {
                 _builder.append("ifitem->localId");

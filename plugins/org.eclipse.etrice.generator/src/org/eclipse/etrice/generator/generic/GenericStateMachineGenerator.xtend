@@ -133,7 +133,7 @@ class GenericStateMachineGenerator {
 		
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.getTransitionList()»
-			«IF xpac.isOwnObject(tr) && tr.hasActionCode()»
+			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.generateArgumentList(xpac, tr)»«ENDIF») {
