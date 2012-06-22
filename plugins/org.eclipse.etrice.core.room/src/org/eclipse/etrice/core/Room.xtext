@@ -158,7 +158,19 @@ ProtocolSemantics:
 		rules+=SemanticsRule*
 	'}';
 
-SemanticsRule: msg=[Message|ID]
+SemanticsRule: InSemanticsRule | OutSemanticsRule;
+
+InSemanticsRule: 'in' ':' msg=[Message|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;
+
+OutSemanticsRule: 'out' ':' msg=[Message|ID]
 	('->'
 		(
 			followUps+=SemanticsRule

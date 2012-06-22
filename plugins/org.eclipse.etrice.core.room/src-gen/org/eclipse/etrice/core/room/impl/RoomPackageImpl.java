@@ -44,6 +44,7 @@ import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InMessageHandler;
+import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
@@ -57,6 +58,7 @@ import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.OutMessageHandler;
+import org.eclipse.etrice.core.room.OutSemanticsRule;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -288,6 +290,20 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass semanticsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass inSemanticsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass outSemanticsRuleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1752,6 +1768,26 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EReference getSemanticsRule_FollowUps()
   {
     return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInSemanticsRule()
+  {
+    return inSemanticsRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOutSemanticsRule()
+  {
+    return outSemanticsRuleEClass;
   }
 
   /**
@@ -3341,6 +3377,10 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(semanticsRuleEClass, SEMANTICS_RULE__MSG);
     createEReference(semanticsRuleEClass, SEMANTICS_RULE__FOLLOW_UPS);
 
+    inSemanticsRuleEClass = createEClass(IN_SEMANTICS_RULE);
+
+    outSemanticsRuleEClass = createEClass(OUT_SEMANTICS_RULE);
+
     actorClassEClass = createEClass(ACTOR_CLASS);
     createEAttribute(actorClassEClass, ACTOR_CLASS__ABSTRACT);
     createEAttribute(actorClassEClass, ACTOR_CLASS__COMM_TYPE);
@@ -3583,6 +3623,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     compoundProtocolClassEClass.getESuperTypes().add(this.getGeneralProtocolClass());
     inMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     outMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
+    inSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
+    outSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
     actorClassEClass.getESuperTypes().add(this.getActorContainerClass());
     portEClass.getESuperTypes().add(this.getInterfaceItem());
     sapRefEClass.getESuperTypes().add(this.getInterfaceItem());
@@ -3742,6 +3784,10 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(semanticsRuleEClass, SemanticsRule.class, "SemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSemanticsRule_Msg(), this.getMessage(), null, "msg", null, 0, 1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSemanticsRule_FollowUps(), this.getSemanticsRule(), null, "followUps", null, 0, -1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(inSemanticsRuleEClass, InSemanticsRule.class, "InSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(outSemanticsRuleEClass, OutSemanticsRule.class, "OutSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(actorClassEClass, ActorClass.class, "ActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getActorClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

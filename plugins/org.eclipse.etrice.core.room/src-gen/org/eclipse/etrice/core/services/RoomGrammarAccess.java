@@ -1515,82 +1515,202 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class SemanticsRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SemanticsRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMsgAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cMsgMessageCrossReference_0_0 = (CrossReference)cMsgAssignment_0.eContents().get(0);
-		private final RuleCall cMsgMessageIDTerminalRuleCall_0_0_1 = (RuleCall)cMsgMessageCrossReference_0_0.eContents().get(1);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Assignment cFollowUpsAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_1_1_0_0 = (RuleCall)cFollowUpsAssignment_1_1_0.eContents().get(0);
-		private final Group cGroup_1_1_1 = (Group)cAlternatives_1_1.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_1_1_1_0 = (Keyword)cGroup_1_1_1.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_1_1_1_1_0 = (RuleCall)cFollowUpsAssignment_1_1_1_1.eContents().get(0);
-		private final Group cGroup_1_1_1_2 = (Group)cGroup_1_1_1.eContents().get(2);
-		private final Keyword cCommaKeyword_1_1_1_2_0 = (Keyword)cGroup_1_1_1_2.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_1_1_1_2_1 = (Assignment)cGroup_1_1_1_2.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_1_1_1_2_1_0 = (RuleCall)cFollowUpsAssignment_1_1_1_2_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_1_1_1_3 = (Keyword)cGroup_1_1_1.eContents().get(3);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cInSemanticsRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cOutSemanticsRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SemanticsRule:
-		//	msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?;
+		//	InSemanticsRule | OutSemanticsRule;
 		public ParserRule getRule() { return rule; }
 
-		//msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
+		//InSemanticsRule | OutSemanticsRule
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//InSemanticsRule
+		public RuleCall getInSemanticsRuleParserRuleCall_0() { return cInSemanticsRuleParserRuleCall_0; }
+
+		//OutSemanticsRule
+		public RuleCall getOutSemanticsRuleParserRuleCall_1() { return cOutSemanticsRuleParserRuleCall_1; }
+	}
+
+	public class InSemanticsRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InSemanticsRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cInKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
+		private final Assignment cFollowUpsAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0 = (RuleCall)cFollowUpsAssignment_3_1_0.eContents().get(0);
+		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
+		private final Assignment cFollowUpsAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_1.eContents().get(0);
+		private final Group cGroup_3_1_1_2 = (Group)cGroup_3_1_1.eContents().get(2);
+		private final Keyword cCommaKeyword_3_1_1_2_0 = (Keyword)cGroup_3_1_1_2.eContents().get(0);
+		private final Assignment cFollowUpsAssignment_3_1_1_2_1 = (Assignment)cGroup_3_1_1_2.eContents().get(1);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
+		
+		//InSemanticsRule:
+		//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//	")"))?;
+		public ParserRule getRule() { return rule; }
+
+		//"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//")"))?
 		public Group getGroup() { return cGroup; }
 
+		//"in"
+		public Keyword getInKeyword_0() { return cInKeyword_0; }
+
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
 		//msg=[Message]
-		public Assignment getMsgAssignment_0() { return cMsgAssignment_0; }
+		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
 		//[Message]
-		public CrossReference getMsgMessageCrossReference_0_0() { return cMsgMessageCrossReference_0_0; }
+		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
 
 		//ID
-		public RuleCall getMsgMessageIDTerminalRuleCall_0_0_1() { return cMsgMessageIDTerminalRuleCall_0_0_1; }
+		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
 
 		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_1_0() { return cHyphenMinusGreaterThanSignKeyword_1_0; }
+		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
 
 		//followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
 
 		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_1_1_0() { return cFollowUpsAssignment_1_1_0; }
+		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
 
 		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_1_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_1_1_0_0; }
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
 
 		//"(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
+		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_1_1_1_0() { return cLeftParenthesisKeyword_1_1_1_0; }
+		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
 
 		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_1_1_1_1() { return cFollowUpsAssignment_1_1_1_1; }
+		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
 
 		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_1_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_1_1_1_1_0; }
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
 
 		//("," followUps+=SemanticsRule)+
-		public Group getGroup_1_1_1_2() { return cGroup_1_1_1_2; }
+		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
 
 		//","
-		public Keyword getCommaKeyword_1_1_1_2_0() { return cCommaKeyword_1_1_1_2_0; }
+		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
 
 		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_1_1_1_2_1() { return cFollowUpsAssignment_1_1_1_2_1; }
+		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
 
 		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_1_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_1_1_1_2_1_0; }
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_1_1_1_3() { return cRightParenthesisKeyword_1_1_1_3; }
+		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
+	}
+
+	public class OutSemanticsRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OutSemanticsRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cOutKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
+		private final Assignment cFollowUpsAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0 = (RuleCall)cFollowUpsAssignment_3_1_0.eContents().get(0);
+		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
+		private final Assignment cFollowUpsAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_1.eContents().get(0);
+		private final Group cGroup_3_1_1_2 = (Group)cGroup_3_1_1.eContents().get(2);
+		private final Keyword cCommaKeyword_3_1_1_2_0 = (Keyword)cGroup_3_1_1_2.eContents().get(0);
+		private final Assignment cFollowUpsAssignment_3_1_1_2_1 = (Assignment)cGroup_3_1_1_2.eContents().get(1);
+		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
+		
+		//OutSemanticsRule:
+		//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//	")"))?;
+		public ParserRule getRule() { return rule; }
+
+		//"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//")"))?
+		public Group getGroup() { return cGroup; }
+
+		//"out"
+		public Keyword getOutKeyword_0() { return cOutKeyword_0; }
+
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+
+		//msg=[Message]
+		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
+
+		//[Message]
+		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
+
+		//ID
+		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
+
+		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
+
+		//followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
+		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
+
+		//followUps+=SemanticsRule
+		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
+
+		//SemanticsRule
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
+
+		//"(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
+		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
+
+		//followUps+=SemanticsRule
+		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
+
+		//SemanticsRule
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
+
+		//("," followUps+=SemanticsRule)+
+		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
+
+		//followUps+=SemanticsRule
+		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
+
+		//SemanticsRule
+		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
 	}
 
 	public class ActorClassElements extends AbstractParserRuleElementFinder {
@@ -4728,6 +4848,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private OutMessageHandlerElements pOutMessageHandler;
 	private ProtocolSemanticsElements pProtocolSemantics;
 	private SemanticsRuleElements pSemanticsRule;
+	private InSemanticsRuleElements pInSemanticsRule;
+	private OutSemanticsRuleElements pOutSemanticsRule;
 	private ActorCommunicationTypeElements unknownRuleActorCommunicationType;
 	private ActorClassElements pActorClass;
 	private InterfaceItemElements pInterfaceItem;
@@ -5101,13 +5223,35 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SemanticsRule:
-	//	msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?;
+	//	InSemanticsRule | OutSemanticsRule;
 	public SemanticsRuleElements getSemanticsRuleAccess() {
 		return (pSemanticsRule != null) ? pSemanticsRule : (pSemanticsRule = new SemanticsRuleElements());
 	}
 	
 	public ParserRule getSemanticsRuleRule() {
 		return getSemanticsRuleAccess().getRule();
+	}
+
+	//InSemanticsRule:
+	//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+	//	")"))?;
+	public InSemanticsRuleElements getInSemanticsRuleAccess() {
+		return (pInSemanticsRule != null) ? pInSemanticsRule : (pInSemanticsRule = new InSemanticsRuleElements());
+	}
+	
+	public ParserRule getInSemanticsRuleRule() {
+		return getInSemanticsRuleAccess().getRule();
+	}
+
+	//OutSemanticsRule:
+	//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+	//	")"))?;
+	public OutSemanticsRuleElements getOutSemanticsRuleAccess() {
+		return (pOutSemanticsRule != null) ? pOutSemanticsRule : (pOutSemanticsRule = new OutSemanticsRuleElements());
+	}
+	
+	public ParserRule getOutSemanticsRuleRule() {
+		return getOutSemanticsRuleAccess().getRule();
 	}
 
 	//// **************************************************************

@@ -31,11 +31,13 @@ import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InMessageHandler;
+import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.OutMessageHandler;
+import org.eclipse.etrice.core.room.OutSemanticsRule;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -553,12 +555,14 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		ProtocolClass pc = RoomHelpers.getProtocolClass(sr);
 		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
 		for (ProtocolClass bpc : classes) {
-			for (Message m : bpc.getIncomingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
-			for (Message m : bpc.getOutgoingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
+			if (sr instanceof InSemanticsRule)
+				for (Message m : bpc.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
+			if (sr instanceof OutSemanticsRule)
+				for (Message m : bpc.getOutgoingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);

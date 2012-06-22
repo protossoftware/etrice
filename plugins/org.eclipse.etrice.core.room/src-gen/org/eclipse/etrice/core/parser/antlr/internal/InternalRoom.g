@@ -2442,54 +2442,79 @@ ruleSemanticsRule returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(
+    { 
+        newCompositeNode(grammarAccess.getSemanticsRuleAccess().getInSemanticsRuleParserRuleCall_0()); 
+    }
+    this_InSemanticsRule_0=ruleInSemanticsRule
+    { 
+        $current = $this_InSemanticsRule_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getSemanticsRuleAccess().getOutSemanticsRuleParserRuleCall_1()); 
+    }
+    this_OutSemanticsRule_1=ruleOutSemanticsRule
+    { 
+        $current = $this_OutSemanticsRule_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleInSemanticsRule
+entryRuleInSemanticsRule returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getInSemanticsRuleRule()); }
+	 iv_ruleInSemanticsRule=ruleInSemanticsRule 
+	 { $current=$iv_ruleInSemanticsRule.current; } 
+	 EOF 
+;
+
+// Rule InSemanticsRule
+ruleInSemanticsRule returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='in' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getInSemanticsRuleAccess().getInKeyword_0());
+    }
+	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getInSemanticsRuleAccess().getColonKeyword_1());
+    }
+(
 (
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getSemanticsRuleRule());
+	            $current = createModelElement(grammarAccess.getInSemanticsRuleRule());
 	        }
         }
-	otherlv_0=RULE_ID
+	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_0, grammarAccess.getSemanticsRuleAccess().getMsgMessageCrossReference_0_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getInSemanticsRuleAccess().getMsgMessageCrossReference_2_0()); 
 	}
 
 )
-)(	otherlv_1='->' 
+)(	otherlv_3='->' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_1_0());
+    	newLeafNode(otherlv_3, grammarAccess.getInSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
     }
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_1_1_0_0()); 
-	    }
-		lv_followUps_2_0=ruleSemanticsRule		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getSemanticsRuleRule());
-	        }
-       		add(
-       			$current, 
-       			"followUps",
-        		lv_followUps_2_0, 
-        		"SemanticsRule");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)
-    |(	otherlv_3='(' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getSemanticsRuleAccess().getLeftParenthesisKeyword_1_1_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_1_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0()); 
 	    }
 		lv_followUps_4_0=ruleSemanticsRule		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getSemanticsRuleRule());
+	            $current = createModelElementForParent(grammarAccess.getInSemanticsRuleRule());
 	        }
        		add(
        			$current, 
@@ -2500,18 +2525,19 @@ ruleSemanticsRule returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_5=',' 
+)
+    |(	otherlv_5='(' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getSemanticsRuleAccess().getCommaKeyword_1_1_1_2_0());
+    	newLeafNode(otherlv_5, grammarAccess.getInSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_1_1_1_2_1_0()); 
+	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
 	    }
 		lv_followUps_6_0=ruleSemanticsRule		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getSemanticsRuleRule());
+	            $current = createModelElementForParent(grammarAccess.getInSemanticsRuleRule());
 	        }
        		add(
        			$current, 
@@ -2522,9 +2548,144 @@ ruleSemanticsRule returns [EObject current=null]
 	    }
 
 )
-))+	otherlv_7=')' 
+)(	otherlv_7=',' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getSemanticsRuleAccess().getRightParenthesisKeyword_1_1_1_3());
+    	newLeafNode(otherlv_7, grammarAccess.getInSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0()); 
+	    }
+		lv_followUps_8_0=ruleSemanticsRule		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getInSemanticsRuleRule());
+	        }
+       		add(
+       			$current, 
+       			"followUps",
+        		lv_followUps_8_0, 
+        		"SemanticsRule");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))+	otherlv_9=')' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getInSemanticsRuleAccess().getRightParenthesisKeyword_3_1_1_3());
+    }
+)))?)
+;
+
+
+
+
+
+// Entry rule entryRuleOutSemanticsRule
+entryRuleOutSemanticsRule returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOutSemanticsRuleRule()); }
+	 iv_ruleOutSemanticsRule=ruleOutSemanticsRule 
+	 { $current=$iv_ruleOutSemanticsRule.current; } 
+	 EOF 
+;
+
+// Rule OutSemanticsRule
+ruleOutSemanticsRule returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='out' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getOutSemanticsRuleAccess().getOutKeyword_0());
+    }
+	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getOutSemanticsRuleAccess().getColonKeyword_1());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOutSemanticsRuleRule());
+	        }
+        }
+	otherlv_2=RULE_ID
+	{
+		newLeafNode(otherlv_2, grammarAccess.getOutSemanticsRuleAccess().getMsgMessageCrossReference_2_0()); 
+	}
+
+)
+)(	otherlv_3='->' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getOutSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0()); 
+	    }
+		lv_followUps_4_0=ruleSemanticsRule		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOutSemanticsRuleRule());
+	        }
+       		add(
+       			$current, 
+       			"followUps",
+        		lv_followUps_4_0, 
+        		"SemanticsRule");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(	otherlv_5='(' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getOutSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
+	    }
+		lv_followUps_6_0=ruleSemanticsRule		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOutSemanticsRuleRule());
+	        }
+       		add(
+       			$current, 
+       			"followUps",
+        		lv_followUps_6_0, 
+        		"SemanticsRule");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_7=',' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getOutSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0()); 
+	    }
+		lv_followUps_8_0=ruleSemanticsRule		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOutSemanticsRuleRule());
+	        }
+       		add(
+       			$current, 
+       			"followUps",
+        		lv_followUps_8_0, 
+        		"SemanticsRule");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))+	otherlv_9=')' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getOutSemanticsRuleAccess().getRightParenthesisKeyword_3_1_1_3());
     }
 )))?)
 ;

@@ -261,6 +261,24 @@ public interface RoomFactory extends EFactory
   SemanticsRule createSemanticsRule();
 
   /**
+   * Returns a new object of class '<em>In Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>In Semantics Rule</em>'.
+   * @generated
+   */
+  InSemanticsRule createInSemanticsRule();
+
+  /**
+   * Returns a new object of class '<em>Out Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Out Semantics Rule</em>'.
+   * @generated
+   */
+  OutSemanticsRule createOutSemanticsRule();
+
+  /**
    * Returns a new object of class '<em>Actor Class</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
