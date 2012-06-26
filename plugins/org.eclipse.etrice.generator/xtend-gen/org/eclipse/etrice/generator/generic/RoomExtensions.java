@@ -889,17 +889,16 @@ public class RoomExtensions {
   public String getEntryCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
     String _xifexpression = null;
     if ((s instanceof RefinedState)) {
-      String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(s);
-      String _operator_plus = StringExtensions.operator_plus("super.", _entryCodeOperationName);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "();\n");
-      DetailCode _entryCode = s.getEntryCode();
-      String _code = ac.getCode(_entryCode);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _code);
-      _xifexpression = _operator_plus_2;
-    } else {
+      State _target = ((RefinedState) s).getTarget();
+      String _entryCode = this.getEntryCode(ac, _target, dct);
       DetailCode _entryCode_1 = s.getEntryCode();
       String _translateDetailCode = dct.translateDetailCode(_entryCode_1);
-      _xifexpression = _translateDetailCode;
+      String _operator_plus = StringExtensions.operator_plus(_entryCode, _translateDetailCode);
+      _xifexpression = _operator_plus;
+    } else {
+      DetailCode _entryCode_2 = s.getEntryCode();
+      String _translateDetailCode_1 = dct.translateDetailCode(_entryCode_2);
+      _xifexpression = _translateDetailCode_1;
     }
     return _xifexpression;
   }
@@ -908,16 +907,15 @@ public class RoomExtensions {
     String _xifexpression = null;
     if ((s instanceof RefinedState)) {
       DetailCode _exitCode = s.getExitCode();
-      String _code = ac.getCode(_exitCode);
-      String _operator_plus = StringExtensions.operator_plus(_code, "super.");
-      String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(s);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _exitCodeOperationName);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "();\n");
-      _xifexpression = _operator_plus_2;
+      String _translateDetailCode = dct.translateDetailCode(_exitCode);
+      State _target = ((RefinedState) s).getTarget();
+      String _exitCode_1 = this.getExitCode(ac, _target, dct);
+      String _operator_plus = StringExtensions.operator_plus(_translateDetailCode, _exitCode_1);
+      _xifexpression = _operator_plus;
     } else {
-      DetailCode _exitCode_1 = s.getExitCode();
-      String _translateDetailCode = dct.translateDetailCode(_exitCode_1);
-      _xifexpression = _translateDetailCode;
+      DetailCode _exitCode_2 = s.getExitCode();
+      String _translateDetailCode_1 = dct.translateDetailCode(_exitCode_2);
+      _xifexpression = _translateDetailCode_1;
     }
     return _xifexpression;
   }
@@ -926,16 +924,15 @@ public class RoomExtensions {
     String _xifexpression = null;
     if ((s instanceof RefinedState)) {
       DetailCode _doCode = s.getDoCode();
-      String _code = ac.getCode(_doCode);
-      String _operator_plus = StringExtensions.operator_plus(_code, "super.");
-      String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(s);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _doCodeOperationName);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "();\n");
-      _xifexpression = _operator_plus_2;
+      String _translateDetailCode = dct.translateDetailCode(_doCode);
+      State _target = ((RefinedState) s).getTarget();
+      String _doCode_1 = this.getDoCode(ac, _target, dct);
+      String _operator_plus = StringExtensions.operator_plus(_translateDetailCode, _doCode_1);
+      _xifexpression = _operator_plus;
     } else {
-      DetailCode _doCode_1 = s.getDoCode();
-      String _translateDetailCode = dct.translateDetailCode(_doCode_1);
-      _xifexpression = _translateDetailCode;
+      DetailCode _doCode_2 = s.getDoCode();
+      String _translateDetailCode_1 = dct.translateDetailCode(_doCode_2);
+      _xifexpression = _translateDetailCode_1;
     }
     return _xifexpression;
   }

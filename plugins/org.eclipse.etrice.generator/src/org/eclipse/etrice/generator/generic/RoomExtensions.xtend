@@ -498,21 +498,21 @@ class RoomExtensions {
 
 	def String getEntryCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			"super."+s.getEntryCodeOperationName()+"();\n"+ac.getCode(s.entryCode)
+			getEntryCode(ac, (s as RefinedState).target, dct)+dct.translateDetailCode(s.entryCode)
 		else
 			dct.translateDetailCode(s.entryCode)
 	}
 
 	def String getExitCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			ac.getCode(s.exitCode)+"super."+s.getExitCodeOperationName()+"();\n"
+			dct.translateDetailCode(s.exitCode)+getExitCode(ac, (s as RefinedState).target, dct)
 		else
 			dct.translateDetailCode(s.exitCode)
 	}
 
 	def String getDoCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
 		if (s instanceof RefinedState)
-			ac.getCode(s.doCode)+"super."+s.getDoCodeOperationName()+"();\n"
+			dct.translateDetailCode(s.doCode)+getDoCode(ac, (s as RefinedState).target, dct)
 		else
 			dct.translateDetailCode(s.doCode)
 	}

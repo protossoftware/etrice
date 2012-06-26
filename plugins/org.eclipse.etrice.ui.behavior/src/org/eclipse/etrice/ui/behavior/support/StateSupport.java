@@ -12,11 +12,14 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
@@ -336,19 +339,22 @@ public class StateSupport {
 		private static class PropertyFeature extends AbstractCustomFeature {
 
 			private boolean doneChanges = false;
+			private boolean inherited;
 			
-			public PropertyFeature(IFeatureProvider fp) {
+			public PropertyFeature(IFeatureProvider fp, boolean inherited) {
 				super(fp);
+				
+				this.inherited = inherited;
 			}
 
 			@Override
 			public String getName() {
-				return "Edit State...";
+				return inherited? "Edit State..." : "View State";
 			}
 			
 			@Override
 			public String getDescription() {
-				return "Edit State Properties";
+				return inherited? "Edit State Properties" : "View State Properties";
 			}
 			
 			@Override
@@ -511,8 +517,11 @@ public class StateSupport {
 					
 					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
 					if (inherited) {
-						newSG = SupportUtil.getRefinedStateSubGraph(s, SupportUtil.getActorClass(getDiagram()));
+						newSG = SupportUtil.getSubGraphOfRefinedStateFor(s, SupportUtil.getActorClass(getDiagram()));
 						s = (State) newSG.eContainer();
+						
+						// replace old business object with new refined state
+						link(container, s);
 					}
 					else {
 						s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
@@ -531,6 +540,56 @@ public class StateSupport {
 					}
 					
 					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
+				}
+			}
+		}
+		
+		private static class CreateRefinedStateFeature extends AbstractCustomFeature implements
+				ICustomFeature {
+
+			public CreateRefinedStateFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Refine and Edit State";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Refine and edit this inherited state";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement pe = context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(pe);
+				if (bo instanceof SimpleState) {
+					if (((State) bo).getSubgraph()==null)
+						return SupportUtil.isInherited(getDiagram(), (State) bo);
+				}
+				return false;
+			}
+			
+			@Override
+			public void execute(ICustomContext context) {
+				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+
+				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
+				Object bo = getBusinessObjectForPictogramElement(container);
+				SimpleState s = (SimpleState) bo;
+				RefinedState rs = SupportUtil.getRefinedStateFor(s, SupportUtil.getActorClass(getDiagram()));
+				
+				// replace old business object with new refined state
+				link(container, rs);
+
+				ICustomFeature[] features = getFeatureProvider().getCustomFeatures(context);
+				for (ICustomFeature cf : features) {
+					if (cf instanceof PropertyFeature) {
+						cf.execute(context);
+						break;
+					}
 				}
 			}
 		}
@@ -842,7 +901,28 @@ public class StateSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp), new GoDownFeature(fp), new CreateSubGraphFeature(fp) };
+			PictogramElement pe = context.getPictogramElements()[0];
+			Object bo = getBusinessObjectForPictogramElement(pe);
+			
+			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
+			
+			if (bo instanceof State) {
+				State s = (State) bo;
+				boolean inherited = SupportUtil.isInherited(getDiagramTypeProvider().getDiagram(), s);
+				boolean editable = !inherited || s instanceof RefinedState;
+				result.add(new PropertyFeature(fp, editable));
+				if (!editable)
+					result.add(new CreateRefinedStateFeature(fp));
+				
+				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
+				if (RoomHelpers.hasSubStructure(s, ac))
+					result.add(new GoDownFeature(fp));
+				else
+					result.add(new CreateSubGraphFeature(fp));
+			}
+			
+			ICustomFeature features[] = new ICustomFeature[result.size()];
+			return result.toArray(features);
 		}
 	}
 	

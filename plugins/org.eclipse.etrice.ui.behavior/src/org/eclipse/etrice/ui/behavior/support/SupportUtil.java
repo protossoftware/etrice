@@ -148,7 +148,7 @@ public class SupportUtil {
 	 * @return
 	 */
 	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac, ContainerShape targetContainer, IFeatureProvider fp) {
-		sg = getRefinedStateSubGraph((State) sg.eContainer(), ac);
+		sg = getSubGraphOfRefinedStateFor((State) sg.eContainer(), ac);
 		fp.link(targetContainer, sg);
 		return sg;
 	}
@@ -173,7 +173,16 @@ public class SupportUtil {
 	 * @param ac
 	 * @return
 	 */
-	public static StateGraph getRefinedStateSubGraph(State s, ActorClass ac) {
+	public static StateGraph getSubGraphOfRefinedStateFor(State s, ActorClass ac) {
+		RefinedState rs = getRefinedStateFor(s, ac);
+		
+		if (rs.getSubgraph()==null)
+			rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+	
+		return rs.getSubgraph();
+	}
+
+	public static RefinedState getRefinedStateFor(State s, ActorClass ac) {
 		HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
 		for (State st : ac.getStateMachine().getStates()) {
 			if (st instanceof RefinedState)
@@ -208,9 +217,7 @@ public class SupportUtil {
 			rs.setTarget(s);
 			sg.getStates().add(rs);
 		}
-		rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-		
-		return rs.getSubgraph();
+		return rs;
 	}
 
 	/**

@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -912,5 +913,28 @@ public class RoomHelpers {
 		
 		assert(false): "unexpected sub type";
 		return null;
+	}
+
+	public static String getBaseEntryCode(RefinedState state) {
+		return getBaseCode(state, RoomPackage.Literals.STATE__ENTRY_CODE);
+	}
+
+	public static String getBaseExitCode(RefinedState state) {
+		return getBaseCode(state, RoomPackage.Literals.STATE__EXIT_CODE);
+	}
+	
+	private static String getBaseCode(RefinedState state, EStructuralFeature feat) {
+		StringBuffer result = new StringBuffer();
+		
+		State base = state.getTarget();
+		while (base!=null) {
+			String code = getDetailCode((DetailCode) base.eGet(feat));
+			result.append(code);
+			if (base instanceof RefinedState)
+				base = ((RefinedState)base).getTarget();
+			else
+				break;
+		}
+		return result.toString();
 	}
 }
