@@ -166,7 +166,7 @@ public class DetailCodeTranslator {
 			return null;
 		++curr.pos;
 		
-		return token;
+		return translateText(token);
 	}
 
 	/**
