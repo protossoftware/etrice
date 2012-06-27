@@ -476,8 +476,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				validationError(getActorClass().getName()+": ChoicePoint is not connected!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 			else {
-				if (data.getInTrans().size()!=1)
-					validationError(getActorClass().getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+				// several incoming transitions possible, see bug 340496
+//				if (data.getInTrans().size()!=1)
+//					validationError(getActorClass().getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (data.getOutTrans().size()<2)
 					validationError(getActorClass().getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (getDefaultBranch(data.getOutTrans())==null)
