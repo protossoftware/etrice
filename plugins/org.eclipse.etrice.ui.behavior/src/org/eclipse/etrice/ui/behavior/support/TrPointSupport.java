@@ -816,7 +816,9 @@ public class TrPointSupport {
 				EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(0), true);
 			}
 			
-			createFigure(tp, false, container, invisibleRect, dark, bright);
+			EObject parentObj = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(container.getContainer());
+			boolean subtp = parentObj instanceof State;
+			createFigure(tp, subtp, container, invisibleRect, dark, bright);
 			
 			GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 			if (ga instanceof Text) {
