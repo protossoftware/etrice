@@ -578,7 +578,6 @@ public class TransitionSupport {
 					pe = (PictogramElement) pe.eContainer();
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
 				Connection conn = (Connection) pe;
-				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
@@ -587,6 +586,7 @@ public class TransitionSupport {
 
 				doneChanges = true;
 				
+				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
 				Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
 		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
 		        		lineColor:manageColor(FILL_COLOR);

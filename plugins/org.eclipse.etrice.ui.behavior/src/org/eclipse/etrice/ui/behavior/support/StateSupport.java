@@ -236,9 +236,9 @@ public class StateSupport {
 				else
 					y += height/2;
 			
-				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
-				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-				Color bgColor = manageColor(inherited?INHERITED_BACKGROUND:BACKGROUND);
+				boolean showInherited = SupportUtil.showAsInherited(getDiagram(), s);
+				Color lineColor = manageColor(showInherited?INHERITED_COLOR:LINE_COLOR);
+				Color bgColor = manageColor(showInherited?INHERITED_BACKGROUND:BACKGROUND);
 				IGaService gaService = Graphiti.getGaService();
 				{
 					final Rectangle invisibleRectangle = gaService.createInvisibleRectangle(containerShape);
@@ -318,7 +318,7 @@ public class StateSupport {
 						while (!borderGA.getGraphicsAlgorithmChildren().isEmpty()) {
 							EcoreUtil.delete(borderGA.getGraphicsAlgorithmChildren().get(0), true);
 						}
-						Color lineColor = manageColor(SupportUtil.isInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
+						Color lineColor = manageColor(SupportUtil.showAsInherited(getDiagram(), s)?INHERITED_COLOR:LINE_COLOR);
 						addHints(s, (RoundedRectangle) borderGA, lineColor);
 					}
 
@@ -415,9 +415,9 @@ public class StateSupport {
 					EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(0), true);
 				}
 				
-				boolean inherited = SupportUtil.isInherited(getDiagram(), s);
-				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-				Color bgColor = manageColor(inherited?INHERITED_BACKGROUND:BACKGROUND);
+				boolean showInherite = SupportUtil.showAsInherited(getDiagram(), s);
+				Color lineColor = manageColor(showInherite?INHERITED_COLOR:LINE_COLOR);
+				Color bgColor = manageColor(showInherite?INHERITED_BACKGROUND:BACKGROUND);
 				createFigure(s, invisibleRect, lineColor, bgColor);
 				
 				GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();

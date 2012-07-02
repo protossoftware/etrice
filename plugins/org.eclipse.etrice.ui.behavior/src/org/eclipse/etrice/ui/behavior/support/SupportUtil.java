@@ -100,6 +100,15 @@ public class SupportUtil {
 	}
 	
 	public static boolean isInherited(Diagram diag, EObject obj) {
+	
+		if (obj instanceof RefinedState)
+			return true;
+
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
+	}
+	
+	public static boolean showAsInherited(Diagram diag, State obj) {
+	
 		if (obj instanceof RefinedState)
 			return true;
 
