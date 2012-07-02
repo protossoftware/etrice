@@ -239,4 +239,8 @@ public class CExtensions implements ILanguageExtension {
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\"");
     return _operator_plus_1;
   }
+  
+  public String superCall(final String baseClassName, final String method, final String args) {
+    return "";
+  }
 }

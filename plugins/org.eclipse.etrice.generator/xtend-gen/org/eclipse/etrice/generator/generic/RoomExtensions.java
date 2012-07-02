@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
@@ -31,7 +32,6 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -47,6 +47,7 @@ import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -853,88 +854,57 @@ public class RoomExtensions {
   }
   
   public boolean empty(final DetailCode dc) {
-    boolean _operator_or = false;
-    boolean _operator_equals = ObjectExtensions.operator_equals(dc, null);
-    if (_operator_equals) {
-      _operator_or = true;
-    } else {
-      EList<String> _commands = dc.getCommands();
-      boolean _isEmpty = _commands.isEmpty();
-      _operator_or = BooleanExtensions.operator_or(_operator_equals, _isEmpty);
-    }
-    return _operator_or;
+    String _detailCode = RoomHelpers.getDetailCode(dc);
+    boolean _operator_equals = ObjectExtensions.operator_equals(_detailCode, "");
+    return _operator_equals;
   }
   
   public boolean hasEntryCode(final State s) {
-    DetailCode _entryCode = s.getEntryCode();
-    boolean _empty = this.empty(_entryCode);
-    boolean _operator_not = BooleanExtensions.operator_not(_empty);
-    return _operator_not;
+      DetailCode _entryCode = s.getEntryCode();
+      boolean _empty = this.empty(_entryCode);
+      boolean _operator_not = BooleanExtensions.operator_not(_empty);
+      if (_operator_not) {
+        return true;
+      }
+      if ((s instanceof ExpandedRefinedState)) {
+        String _inheritedEntry = ((ExpandedRefinedState) s).getInheritedEntry();
+        boolean _isEmpty = _inheritedEntry.isEmpty();
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        return _operator_not_1;
+      }
+      return false;
   }
   
   public boolean hasExitCode(final State s) {
-    DetailCode _exitCode = s.getExitCode();
-    boolean _empty = this.empty(_exitCode);
-    boolean _operator_not = BooleanExtensions.operator_not(_empty);
-    return _operator_not;
+      DetailCode _exitCode = s.getExitCode();
+      boolean _empty = this.empty(_exitCode);
+      boolean _operator_not = BooleanExtensions.operator_not(_empty);
+      if (_operator_not) {
+        return true;
+      }
+      if ((s instanceof ExpandedRefinedState)) {
+        String _inheritedExit = ((ExpandedRefinedState) s).getInheritedExit();
+        boolean _isEmpty = _inheritedExit.isEmpty();
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        return _operator_not_1;
+      }
+      return false;
   }
   
   public boolean hasDoCode(final State s) {
-    DetailCode _doCode = s.getDoCode();
-    boolean _empty = this.empty(_doCode);
-    boolean _operator_not = BooleanExtensions.operator_not(_empty);
-    return _operator_not;
-  }
-  
-  public String getEntryCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
-      State _target = ((RefinedState) s).getTarget();
-      String _entryCode = this.getEntryCode(ac, _target, dct);
-      DetailCode _entryCode_1 = s.getEntryCode();
-      String _translateDetailCode = dct.translateDetailCode(_entryCode_1);
-      String _operator_plus = StringExtensions.operator_plus(_entryCode, _translateDetailCode);
-      _xifexpression = _operator_plus;
-    } else {
-      DetailCode _entryCode_2 = s.getEntryCode();
-      String _translateDetailCode_1 = dct.translateDetailCode(_entryCode_2);
-      _xifexpression = _translateDetailCode_1;
-    }
-    return _xifexpression;
-  }
-  
-  public String getExitCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
-      DetailCode _exitCode = s.getExitCode();
-      String _translateDetailCode = dct.translateDetailCode(_exitCode);
-      State _target = ((RefinedState) s).getTarget();
-      String _exitCode_1 = this.getExitCode(ac, _target, dct);
-      String _operator_plus = StringExtensions.operator_plus(_translateDetailCode, _exitCode_1);
-      _xifexpression = _operator_plus;
-    } else {
-      DetailCode _exitCode_2 = s.getExitCode();
-      String _translateDetailCode_1 = dct.translateDetailCode(_exitCode_2);
-      _xifexpression = _translateDetailCode_1;
-    }
-    return _xifexpression;
-  }
-  
-  public String getDoCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
       DetailCode _doCode = s.getDoCode();
-      String _translateDetailCode = dct.translateDetailCode(_doCode);
-      State _target = ((RefinedState) s).getTarget();
-      String _doCode_1 = this.getDoCode(ac, _target, dct);
-      String _operator_plus = StringExtensions.operator_plus(_translateDetailCode, _doCode_1);
-      _xifexpression = _operator_plus;
-    } else {
-      DetailCode _doCode_2 = s.getDoCode();
-      String _translateDetailCode_1 = dct.translateDetailCode(_doCode_2);
-      _xifexpression = _translateDetailCode_1;
-    }
-    return _xifexpression;
+      boolean _empty = this.empty(_doCode);
+      boolean _operator_not = BooleanExtensions.operator_not(_empty);
+      if (_operator_not) {
+        return true;
+      }
+      if ((s instanceof ExpandedRefinedState)) {
+        String _inheritedDo = ((ExpandedRefinedState) s).getInheritedDo();
+        boolean _isEmpty = _inheritedDo.isEmpty();
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        return _operator_not_1;
+      }
+      return false;
   }
   
   public boolean hasActionCode(final Transition t) {

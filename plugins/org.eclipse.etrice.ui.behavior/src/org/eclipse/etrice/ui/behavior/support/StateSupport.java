@@ -339,22 +339,22 @@ public class StateSupport {
 		private static class PropertyFeature extends AbstractCustomFeature {
 
 			private boolean doneChanges = false;
-			private boolean inherited;
+			private boolean editable;
 			
-			public PropertyFeature(IFeatureProvider fp, boolean inherited) {
+			public PropertyFeature(IFeatureProvider fp, boolean editable) {
 				super(fp);
 				
-				this.inherited = inherited;
+				this.editable = editable;
 			}
 
 			@Override
 			public String getName() {
-				return inherited? "Edit State..." : "View State";
+				return editable? "Edit State..." : "View State";
 			}
 			
 			@Override
 			public String getDescription() {
-				return inherited? "Edit State Properties" : "View State Properties";
+				return editable? "Edit State Properties" : "View State Properties";
 			}
 			
 			@Override
@@ -386,7 +386,11 @@ public class StateSupport {
 			}
 
 			private void adjustSubgraphLabels(State s, ActorClass ac) {
-				if (RoomHelpers.hasSubStructure(s, ac)) {
+				if (s instanceof RefinedState)
+					// the name hasn't changed, nothing to do
+					return;
+				
+				if (RoomHelpers.hasDirectSubStructure(s)) {
 					// update the path text in the sub graph
 					ContainerShape subShape = ContextSwitcher.getContext(getDiagram(), s.getSubgraph());
 					if (subShape!=null && !subShape.getChildren().isEmpty()) {
@@ -395,9 +399,10 @@ public class StateSupport {
 						if (ga instanceof Text)
 							((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(s.getSubgraph()));
 					}
-					for (State sub : s.getSubgraph().getStates()) {
-						adjustSubgraphLabels(sub, ac);
-					}
+					if (s.getSubgraph()!=null)
+						for (State sub : s.getSubgraph().getStates()) {
+							adjustSubgraphLabels(sub, ac);
+						}
 				}
 			}
 
@@ -450,8 +455,10 @@ public class StateSupport {
 				PictogramElement pe = context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
-					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
-					if (targetting.getSubgraph()!=null)
+//					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
+//					if (targetting.getSubgraph()!=null)
+//						return true;
+					if (RoomHelpers.hasSubStructure((State) bo, SupportUtil.getActorClass(getDiagram())))
 						return true;
 				}
 				return false;
@@ -463,9 +470,16 @@ public class StateSupport {
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof State) {
-					State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
-					if (targetting.getSubgraph()!=null) {
-						ContextSwitcher.switchTo(getDiagram(), targetting.getSubgraph());
+					//State targetting = SupportUtil.getTargettingState((State) bo, getDiagram());
+					State hasSub = (State) bo;
+					while (!RoomHelpers.hasDirectSubStructure(hasSub)) {
+						if (hasSub instanceof RefinedState)
+							hasSub = ((RefinedState) hasSub).getTarget();
+						else
+							return;
+					}
+					if (hasSub.getSubgraph()!=null) {
+						ContextSwitcher.switchTo(getDiagram(), hasSub.getSubgraph());
 					}
 				}
 			}
@@ -498,8 +512,9 @@ public class StateSupport {
 				PictogramElement pe = context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
-					if (((State) bo).getSubgraph()==null)
-						return true;
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					boolean isBaseClassState = RoomHelpers.getActorClass((State) bo)!=ac;
+					return isBaseClassState || !RoomHelpers.hasSubStructure((State) bo, ac);
 				}
 				return false;
 			}
@@ -515,8 +530,8 @@ public class StateSupport {
 					
 					StateGraph newSG = null;
 					
-					boolean inherited = SupportUtil.isInherited(getDiagram(), s);
-					if (inherited) {
+					boolean isBaseClassState = RoomHelpers.getActorClass(s)!=SupportUtil.getActorClass(getDiagram());
+					if (isBaseClassState) {
 						newSG = SupportUtil.getSubGraphOfRefinedStateFor(s, SupportUtil.getActorClass(getDiagram()));
 						s = (State) newSG.eContainer();
 						
@@ -565,9 +580,10 @@ public class StateSupport {
 			public boolean canExecute(ICustomContext context) {
 				PictogramElement pe = context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(pe);
-				if (bo instanceof SimpleState) {
-					if (((State) bo).getSubgraph()==null)
-						return SupportUtil.isInherited(getDiagram(), (State) bo);
+				if (bo instanceof State) {
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					boolean isBaseClassState = RoomHelpers.getActorClass((State) bo)!=ac;
+					return isBaseClassState;
 				}
 				return false;
 			}
@@ -908,13 +924,13 @@ public class StateSupport {
 			
 			if (bo instanceof State) {
 				State s = (State) bo;
-				boolean inherited = SupportUtil.isInherited(getDiagramTypeProvider().getDiagram(), s);
-				boolean editable = !inherited || s instanceof RefinedState;
+				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
+				//boolean inherited = SupportUtil.isInherited(getDiagramTypeProvider().getDiagram(), s);
+				boolean editable = RoomHelpers.getActorClass(s)==ac;
 				result.add(new PropertyFeature(fp, editable));
 				if (!editable)
 					result.add(new CreateRefinedStateFeature(fp));
 				
-				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
 				if (RoomHelpers.hasSubStructure(s, ac))
 					result.add(new GoDownFeature(fp));
 				else
@@ -1077,15 +1093,15 @@ public class StateSupport {
 			doHint.setLineWidth(LINE_WIDTH);
 			gaService.setLocation(doHint, x, y);
 			
-			if (!RoomHelpers.hasDetailCode(s.getEntryCode())) {
+			if (!RoomHelpers.hasEntryCode(s, true)) {
 				entryHint.setLineVisible(false);
 			}
 			
-			if (!RoomHelpers.hasDetailCode(s.getExitCode())) {
+			if (!RoomHelpers.hasExitCode(s, true)) {
 				exitHint.setLineVisible(false);
 			}
 			
-			if (!RoomHelpers.hasDetailCode(s.getDoCode())) {
+			if (!RoomHelpers.hasDoCode(s, true)) {
 				doHint.setLineVisible(false);
 			}
 		}
@@ -1100,8 +1116,10 @@ public class StateSupport {
 		
 		// entry and exit code
 		hint = border.getGraphicsAlgorithmChildren().get(1);
-		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getEntryCode()));
+		hint.setLineVisible(RoomHelpers.hasEntryCode(s, true));
 		hint = border.getGraphicsAlgorithmChildren().get(2);
-		hint.setLineVisible(RoomHelpers.hasDetailCode(s.getExitCode()));
+		hint.setLineVisible(RoomHelpers.hasExitCode(s, true));
+		hint = border.getGraphicsAlgorithmChildren().get(3);
+		hint.setLineVisible(RoomHelpers.hasDoCode(s, true));
 	}
 }

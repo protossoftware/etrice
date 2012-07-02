@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
@@ -239,70 +240,9 @@ public class GenericStateMachineGenerator {
               _operator_or_1 = BooleanExtensions.operator_or(_operator_not, _isOwnObject);
             }
             if (_operator_or_1) {
-              {
-                boolean _hasEntryCode = this.roomExt.hasEntryCode(state);
-                if (_hasEntryCode) {
-                  String _accessLevelProtected = this.langExt.accessLevelProtected();
-                  _builder.append(_accessLevelProtected, "");
-                  _builder.append("void ");
-                  String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(state);
-                  _builder.append(_entryCodeOperationName, "");
-                  _builder.append("(");
-                  String _name = ac.getName();
-                  String _selfPointer = this.langExt.selfPointer(_name, false);
-                  _builder.append(_selfPointer, "");
-                  _builder.append(") {");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  String _entryCode = this.roomExt.getEntryCode(xpac, state, dct);
-                  _builder.append(_entryCode, "	");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-              {
-                boolean _hasExitCode = this.roomExt.hasExitCode(state);
-                if (_hasExitCode) {
-                  String _accessLevelProtected_1 = this.langExt.accessLevelProtected();
-                  _builder.append(_accessLevelProtected_1, "");
-                  _builder.append("void ");
-                  String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(state);
-                  _builder.append(_exitCodeOperationName, "");
-                  _builder.append("(");
-                  String _name_1 = ac.getName();
-                  String _selfPointer_1 = this.langExt.selfPointer(_name_1, false);
-                  _builder.append(_selfPointer_1, "");
-                  _builder.append(") {");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  String _exitCode = this.roomExt.getExitCode(xpac, state, dct);
-                  _builder.append(_exitCode, "	");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-              {
-                boolean _hasDoCode = this.roomExt.hasDoCode(state);
-                if (_hasDoCode) {
-                  _builder.append("static void ");
-                  String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(state);
-                  _builder.append(_doCodeOperationName, "");
-                  _builder.append("(");
-                  String _name_2 = ac.getName();
-                  String _selfPointer_2 = this.langExt.selfPointer(_name_2, false);
-                  _builder.append(_selfPointer_2, "");
-                  _builder.append(") {");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  String _doCode = this.roomExt.getDoCode(xpac, state, dct);
-                  _builder.append(_doCode, "	");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
+              StringConcatenation _genActionCodeMethods = this.genActionCodeMethods(xpac, state, dct);
+              _builder.append(_genActionCodeMethods, "");
+              _builder.newLineIfNotEmpty();
             }
           }
         }
@@ -345,15 +285,15 @@ public class GenericStateMachineGenerator {
               }
               boolean hasArgs = _operator_and_1;
               _builder.newLineIfNotEmpty();
-              String _accessLevelProtected_2 = this.langExt.accessLevelProtected();
-              _builder.append(_accessLevelProtected_2, "");
+              String _accessLevelProtected = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected, "");
               _builder.append("void ");
               String _actionCodeOperationName = CodegenHelpers.getActionCodeOperationName(tr);
               _builder.append(_actionCodeOperationName, "");
               _builder.append("(");
-              String _name_3 = ac.getName();
-              String _selfPointer_3 = this.langExt.selfPointer(_name_3, hasArgs);
-              _builder.append(_selfPointer_3, "");
+              String _name = ac.getName();
+              String _selfPointer = this.langExt.selfPointer(_name, hasArgs);
+              _builder.append(_selfPointer, "");
               {
                 if (hasArgs) {
                   _builder.append("InterfaceItemBase ifitem");
@@ -397,9 +337,9 @@ public class GenericStateMachineGenerator {
       String _accessLevelPrivate = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate, "");
       _builder.append("void exitTo(");
-      String _name_4 = ac.getName();
-      String _selfPointer_4 = this.langExt.selfPointer(_name_4, true);
-      _builder.append(_selfPointer_4, "");
+      String _name_1 = ac.getName();
+      String _selfPointer_1 = this.langExt.selfPointer(_name_1, true);
+      _builder.append(_selfPointer_1, "");
       _builder.append("int current, int to, boolean handler) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -421,14 +361,14 @@ public class GenericStateMachineGenerator {
           _builder.append("\t\t\t");
           _builder.append("\t");
           {
-            boolean _hasExitCode_1 = this.roomExt.hasExitCode(state_1);
-            if (_hasExitCode_1) {
+            boolean _hasExitCode = this.roomExt.hasExitCode(state_1);
+            if (_hasExitCode) {
               _builder.append("if (!handler) ");
-              String _exitCodeOperationName_1 = CodegenHelpers.getExitCodeOperationName(state_1);
-              _builder.append(_exitCodeOperationName_1, "				");
+              String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(state_1);
+              _builder.append(_exitCodeOperationName, "				");
               _builder.append("(");
-              String _selfPointer_5 = this.langExt.selfPointer(false);
-              _builder.append(_selfPointer_5, "				");
+              String _selfPointer_2 = this.langExt.selfPointer(false);
+              _builder.append(_selfPointer_2, "				");
               _builder.append(");");
             }
           }
@@ -490,9 +430,9 @@ public class GenericStateMachineGenerator {
       String _accessLevelPrivate_1 = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate_1, "");
       _builder.append("int executeTransitionChain(");
-      String _name_5 = ac.getName();
-      String _selfPointer_6 = this.langExt.selfPointer(_name_5, true);
-      _builder.append(_selfPointer_6, "");
+      String _name_2 = ac.getName();
+      String _selfPointer_3 = this.langExt.selfPointer(_name_2, true);
+      _builder.append(_selfPointer_3, "");
       _builder.append("int chain");
       {
         if (handleEvents) {
@@ -561,9 +501,9 @@ public class GenericStateMachineGenerator {
       String _accessLevelPrivate_2 = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate_2, "");
       _builder.append("int enterHistory(");
-      String _name_6 = ac.getName();
-      String _selfPointer_7 = this.langExt.selfPointer(_name_6, true);
-      _builder.append(_selfPointer_7, "");
+      String _name_3 = ac.getName();
+      String _selfPointer_4 = this.langExt.selfPointer(_name_3, true);
+      _builder.append(_selfPointer_4, "");
       _builder.append("int state, boolean handler, boolean skip_entry) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -588,14 +528,14 @@ public class GenericStateMachineGenerator {
           _builder.append("\t\t\t");
           _builder.append("\t");
           {
-            boolean _hasEntryCode_1 = this.roomExt.hasEntryCode(state_2);
-            if (_hasEntryCode_1) {
+            boolean _hasEntryCode = this.roomExt.hasEntryCode(state_2);
+            if (_hasEntryCode) {
               _builder.append("if (!(skip_entry || handler)) ");
-              String _entryCodeOperationName_1 = CodegenHelpers.getEntryCodeOperationName(state_2);
-              _builder.append(_entryCodeOperationName_1, "				");
+              String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(state_2);
+              _builder.append(_entryCodeOperationName, "				");
               _builder.append("(");
-              String _selfPointer_8 = this.langExt.selfPointer(false);
-              _builder.append(_selfPointer_8, "				");
+              String _selfPointer_5 = this.langExt.selfPointer(false);
+              _builder.append(_selfPointer_5, "				");
               _builder.append(");");
             }
           }
@@ -648,8 +588,8 @@ public class GenericStateMachineGenerator {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("state = executeTransitionChain(");
-                  String _selfPointer_9 = this.langExt.selfPointer(true);
-                  _builder.append(_selfPointer_9, "					");
+                  String _selfPointer_6 = this.langExt.selfPointer(true);
+                  _builder.append(_selfPointer_6, "					");
                   TransitionChain _chain_1 = xpac.getChain(sub_initt);
                   String _chainId_1 = this.roomExt.getChainId(_chain_1);
                   _builder.append(_chainId_1, "					");
@@ -754,9 +694,9 @@ public class GenericStateMachineGenerator {
         }
       }
       _builder.append("void executeInitTransition(");
-      String _name_7 = ac.getName();
-      String _selfPointer_10 = this.langExt.selfPointer(_name_7, false);
-      _builder.append(_selfPointer_10, "");
+      String _name_4 = ac.getName();
+      String _selfPointer_7 = this.langExt.selfPointer(_name_4, false);
+      _builder.append(_selfPointer_7, "");
       _builder.append(") {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -773,8 +713,8 @@ public class GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("int next = executeTransitionChain(");
-      String _selfPointer_11 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_11, "	");
+      String _selfPointer_8 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_8, "	");
       _builder.append("chain");
       {
         if (handleEvents) {
@@ -790,8 +730,8 @@ public class GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("next = enterHistory(");
-      String _selfPointer_12 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_12, "	");
+      String _selfPointer_9 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_9, "	");
       _builder.append("next, ");
       String _booleanConstant_2 = this.langExt.booleanConstant(false);
       _builder.append(_booleanConstant_2, "	");
@@ -802,8 +742,8 @@ public class GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("setState(");
-      String _selfPointer_13 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_13, "	");
+      String _selfPointer_10 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_10, "	");
       _builder.append("next);");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
@@ -822,9 +762,9 @@ public class GenericStateMachineGenerator {
         }
       }
       _builder.append("void receiveEvent(");
-      String _name_8 = ac.getName();
-      String _selfPointer_14 = this.langExt.selfPointer(_name_8, handleEvents);
-      _builder.append(_selfPointer_14, "");
+      String _name_5 = ac.getName();
+      String _selfPointer_11 = this.langExt.selfPointer(_name_5, handleEvents);
+      _builder.append(_selfPointer_11, "");
       {
         if (handleEvents) {
           _builder.append("InterfaceItemBase ifitem, int evt, ");
@@ -914,16 +854,16 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("exitTo(");
-      String _selfPointer_15 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_15, "		");
+      String _selfPointer_12 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_12, "		");
       String _memberAccess_5 = this.langExt.memberAccess();
       _builder.append(_memberAccess_5, "		");
       _builder.append("state, catching_state, is_handler);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("int next = executeTransitionChain(");
-      String _selfPointer_16 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_16, "		");
+      String _selfPointer_13 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_13, "		");
       _builder.append("chain");
       {
         if (handleEvents) {
@@ -934,14 +874,14 @@ public class GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("next = enterHistory(");
-      String _selfPointer_17 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_17, "		");
+      String _selfPointer_14 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_14, "		");
       _builder.append("next, is_handler, skip_entry);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("setState(");
-      String _selfPointer_18 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_18, "		");
+      String _selfPointer_15 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_15, "		");
       _builder.append("next);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -1338,6 +1278,141 @@ public class GenericStateMachineGenerator {
       }
     }
     return _builder;
+  }
+  
+  private StringConcatenation genActionCodeMethods(final ExpandedActorClass xpac, final State state, final DetailCodeTranslator dct) {
+    StringConcatenation _xblockexpression = null;
+    {
+      ActorClass _actorClass = xpac.getActorClass();
+      String _name = _actorClass.getName();
+      String _selfPointer = this.langExt.selfPointer(_name, false);
+      final String selfPtr = _selfPointer;
+      String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(state);
+      final String entryOp = _entryCodeOperationName;
+      String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(state);
+      final String exitOp = _exitCodeOperationName;
+      String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(state);
+      final String doOp = _doCodeOperationName;
+      DetailCode _entryCode = state.getEntryCode();
+      String _translateDetailCode = dct.translateDetailCode(_entryCode);
+      String entry = _translateDetailCode;
+      DetailCode _exitCode = state.getExitCode();
+      String _translateDetailCode_1 = dct.translateDetailCode(_exitCode);
+      String exit = _translateDetailCode_1;
+      DetailCode _doCode = state.getDoCode();
+      String _translateDetailCode_2 = dct.translateDetailCode(_doCode);
+      String docode = _translateDetailCode_2;
+      if ((state instanceof ExpandedRefinedState)) {
+        {
+          final ExpandedRefinedState rs = ((ExpandedRefinedState) state);
+          boolean _usesInheritance = this.langExt.usesInheritance();
+          if (_usesInheritance) {
+            {
+              ActorClass _actorClass_1 = xpac.getActorClass();
+              ActorClass _base = _actorClass_1.getBase();
+              String _name_1 = _base.getName();
+              final String baseName = _name_1;
+              String _inheritedEntry = rs.getInheritedEntry();
+              boolean _isEmpty = _inheritedEntry.isEmpty();
+              boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+              if (_operator_not) {
+                String _superCall = this.langExt.superCall(baseName, entryOp, "");
+                String _operator_plus = StringExtensions.operator_plus(_superCall, entry);
+                entry = _operator_plus;
+              }
+              String _inheritedExit = rs.getInheritedExit();
+              boolean _isEmpty_1 = _inheritedExit.isEmpty();
+              boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
+              if (_operator_not_1) {
+                String _superCall_1 = this.langExt.superCall(baseName, exitOp, "");
+                String _operator_plus_1 = StringExtensions.operator_plus(exit, _superCall_1);
+                exit = _operator_plus_1;
+              }
+              String _inheritedDo = rs.getInheritedDo();
+              boolean _isEmpty_2 = _inheritedDo.isEmpty();
+              boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_2);
+              if (_operator_not_2) {
+                String _superCall_2 = this.langExt.superCall(baseName, doOp, "");
+                String _operator_plus_2 = StringExtensions.operator_plus(_superCall_2, docode);
+                docode = _operator_plus_2;
+              }
+            }
+          } else {
+            {
+              String _inheritedEntry_1 = rs.getInheritedEntry();
+              String _operator_plus_3 = StringExtensions.operator_plus(_inheritedEntry_1, entry);
+              entry = _operator_plus_3;
+              String _inheritedExit_1 = rs.getInheritedExit();
+              String _operator_plus_4 = StringExtensions.operator_plus(exit, _inheritedExit_1);
+              exit = _operator_plus_4;
+              String _inheritedDo_1 = rs.getInheritedDo();
+              String _operator_plus_5 = StringExtensions.operator_plus(_inheritedDo_1, docode);
+              docode = _operator_plus_5;
+            }
+          }
+        }
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isEmpty_3 = entry.isEmpty();
+        boolean _operator_not_3 = BooleanExtensions.operator_not(_isEmpty_3);
+        if (_operator_not_3) {
+          String _accessLevelProtected = this.langExt.accessLevelProtected();
+          _builder.append(_accessLevelProtected, "");
+          _builder.append("void ");
+          _builder.append(entryOp, "");
+          _builder.append("(");
+          _builder.append(selfPtr, "");
+          _builder.append(") {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(entry, "	");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _isEmpty_4 = exit.isEmpty();
+        boolean _operator_not_4 = BooleanExtensions.operator_not(_isEmpty_4);
+        if (_operator_not_4) {
+          String _accessLevelProtected_1 = this.langExt.accessLevelProtected();
+          _builder.append(_accessLevelProtected_1, "");
+          _builder.append("void ");
+          _builder.append(exitOp, "");
+          _builder.append("(");
+          _builder.append(selfPtr, "");
+          _builder.append(") {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(exit, "	");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _isEmpty_5 = docode.isEmpty();
+        boolean _operator_not_5 = BooleanExtensions.operator_not(_isEmpty_5);
+        if (_operator_not_5) {
+          String _accessLevelProtected_2 = this.langExt.accessLevelProtected();
+          _builder.append(_accessLevelProtected_2, "");
+          _builder.append(" void ");
+          _builder.append(doOp, "");
+          _builder.append("(");
+          _builder.append(selfPtr, "");
+          _builder.append(") {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(docode, "	");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   private StringConcatenation guard(final Transition tt, final String trigger, final ExpandedActorClass ac, final DetailCodeTranslator dct) {

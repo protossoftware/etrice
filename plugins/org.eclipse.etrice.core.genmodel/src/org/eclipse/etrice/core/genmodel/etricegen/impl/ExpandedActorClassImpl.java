@@ -6,6 +6,7 @@
  */
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +32,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -39,7 +41,6 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -271,19 +272,19 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	
 	private void buildStateGraph() {
 		// create a list of super classes, super first, sub-classes last
-		LinkedList<StateGraph> sms = new LinkedList<StateGraph>();
+		ArrayList<StateGraph> sms = new ArrayList<StateGraph>();
 		ActorClass orig = getActorClass();
 		if (orig.getStateMachine()!=null)
-			sms.addFirst(orig.getStateMachine());
+			sms.add(0, orig.getStateMachine());
 		while (orig.getBase()!=null) {
 			orig = orig.getBase();
 			if (orig.getStateMachine()!=null)
-				sms.addFirst(orig.getStateMachine());
+				sms.add(0, orig.getStateMachine());
 		}
 		
 		// create a self contained copy of all actor classes
 		// references to interface items (ports, saps and spps) point to contents of the original actor class
-		//Collection<StateGraph> all = EcoreUtil.copyAll(sms);
+		// Collection<StateGraph> all = EcoreUtil.copyAll(sms);
 		// we use the copier directly since we need access to the map
 		Copier copier = new Copier();
 	    Collection<StateGraph> all = copier.copyAll(sms);
@@ -293,14 +294,23 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			copy2orig.put(c, o);
 		}
 		
-		// remove self from this list
-		StateGraph self = null;
-		for (Iterator<StateGraph> it = all.iterator(); it.hasNext();) {
-			self = it.next();
-		}
-		all.remove(self);
+	    if (getActorClass().getStateMachine()!=null) {
+	    	// last state machine is ours
+	    	StateGraph self = null;
+	    	for (Iterator<StateGraph> it = all.iterator(); it.hasNext();) {
+	    		self = it.next();
+	    	}
+	    	
+	    	// flag own objects
+			TreeIterator<EObject> it = self.eAllContents();
+			while (it.hasNext()) {
+				EObject obj = it.next();
+				if (obj instanceof StateGraphItem)
+					addOwnObject((StateGraphItem)obj);
+			}
+	    }
 		
-		// now we move all base class state machine contents to our state machine
+		// now we move all state machine contents to our state machine
 		StateGraph sm = RoomFactory.eINSTANCE.createStateGraph();
 		setStateMachine(sm);
 		for (StateGraph sml : all) {
@@ -310,75 +320,34 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			sm.getTransitions().addAll(sml.getTransitions());
 		}
 		
-		// then we relocate the refined state contents to their respective base state and remove all refined states
-		relocateRefinedStateContents(sm, true);
-		
-		if (getActorClass().getStateMachine()!=null) {
-			TreeIterator<EObject> it = self.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				if (obj instanceof StateGraphItem)
-					addOwnObject((StateGraphItem)obj);
-			}
-			
-			sm.getChPoints().addAll(self.getChPoints());
-			sm.getStates().addAll(self.getStates());
-			sm.getTrPoints().addAll(self.getTrPoints());
-			sm.getTransitions().addAll(self.getTransitions());
-			
-			// then we relocate the refined state contents to their respective base state while keeping all refined states
-			relocateRefinedStateContents(sm, false);
-		}
+		introduceExpandedRefinedStates(sm);
 	}
 
 	/**
-	 * remove refined states and relocate their respective contents to the
-	 * corresponding base state
-	 * 
-	 * This task is simplified by the fact that transition terminals point to SimpleStates only.
-	 * Otherwise we had to redirect those references here.
+	 * replace refined state with a ExpandedRefinedState but as replacement of the ultimate SimpleState
+	 * the refined state is targeting
 	 * 
 	 * @param sg - the current context (will be called recursively)
-	 * @param remove - if true the refined states are removed, if false they are moved
-	 *    to be siblings of their base states
 	 */
-	private void relocateRefinedStateContents(StateGraph sg, boolean remove) {
-		LinkedList<RefinedState> refinedstates = new LinkedList<RefinedState>();
-		for (State s : sg.getStates()) {
+	private void introduceExpandedRefinedStates(StateGraph sg) {
+		// need to make a copy of the list because we will modify the original list
+		ArrayList<State> states = new ArrayList<State>(sg.getStates());
+		for (State s : states) {
 			if (s instanceof RefinedState) {
 				RefinedState rs = (RefinedState) s;
-				refinedstates.add(rs);
-				State bs = RoomHelpers.getBaseState(rs);
-				if (!remove) {
-					StateGraph parent = (StateGraph) bs.eContainer();
-					parent.getStates().add(rs);
-				}
-
-				// relocate contents
-				StateGraph fromSG = rs.getSubgraph();
-				if (fromSG!=null) {
-					StateGraph toSG = bs.getSubgraph();
-					if (toSG==null) {
-						toSG = RoomFactory.eINSTANCE.createStateGraph();
-						bs.setSubgraph(toSG);
-					}
-					toSG.getChPoints().addAll(fromSG.getChPoints());
-					toSG.getStates().addAll(fromSG.getStates());
-					toSG.getTrPoints().addAll(fromSG.getTrPoints());
-					toSG.getTransitions().addAll(fromSG.getTransitions());
-				}
+				
+				ExpandedRefinedState state = ETriceGenFactory.eINSTANCE.createExpandedRefinedState();
+				state.init(rs);
+				copy2orig.put(state, getOrig(rs));
+				if (isOwnObject(rs))
+					addOwnObject(state);
 			}
 		}
 		
-		if (remove) {
-			// remove empty refined states
-			sg.getStates().removeAll(refinedstates);
-		}
-		
-		// recurse down into states
+		// recurse down into sub graph
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				relocateRefinedStateContents(s.getSubgraph(), remove);
+				introduceExpandedRefinedStates(s.getSubgraph());
 		}
 	}
 	
@@ -979,22 +948,6 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			ac = ac.getBase();
 		}
 		return false;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getCode(DetailCode code) {
-		if (code.getCommands().isEmpty())
-			return "";
-		
-		String result = "";
-		for (String cmd : code.getCommands()) {
-			result += cmd + "\n";
-		}
-		return result;
 	}
 
 	/**

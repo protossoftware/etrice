@@ -98,4 +98,7 @@ class JavaExtensions implements ILanguageExtension {
 	override String toCharArrayExpr(String s){
 		"\"" + s + "\".toCharArray()"
 	}
+	override String superCall(String baseClassName, String method, String args) {
+		"super."+method+"("+args+");"
+	}
 }

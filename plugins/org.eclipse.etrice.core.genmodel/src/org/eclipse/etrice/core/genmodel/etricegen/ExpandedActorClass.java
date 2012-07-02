@@ -146,14 +146,6 @@ public interface ExpandedActorClass extends EObject {
 	 * @model
 	 * @generated
 	 */
-	String getCode(DetailCode code);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
 	String getTriggerCodeName(MessageFromIf mif);
 
 	/**

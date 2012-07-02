@@ -44,8 +44,10 @@ import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
@@ -481,40 +483,37 @@ class RoomExtensions {
 	// TODO. in the following methods handle inheritance language independent and proper
 	
 	def boolean empty(DetailCode dc) {
-		dc==null || dc.commands.empty
+		dc.detailCode==""
 	}
-	
+
 	def boolean hasEntryCode(State s) {
-		!s.entryCode.empty
+		if (!s.entryCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedEntry.empty
+			
+		return false
 	}
 
 	def boolean hasExitCode(State s) {
-		!s.exitCode.empty
+		if (!s.exitCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedExit.empty
+			
+		return false
 	}
 
 	def boolean hasDoCode(State s) {
-		!s.doCode.empty
-	}
-
-	def String getEntryCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			getEntryCode(ac, (s as RefinedState).target, dct)+dct.translateDetailCode(s.entryCode)
-		else
-			dct.translateDetailCode(s.entryCode)
-	}
-
-	def String getExitCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			dct.translateDetailCode(s.exitCode)+getExitCode(ac, (s as RefinedState).target, dct)
-		else
-			dct.translateDetailCode(s.exitCode)
-	}
-
-	def String getDoCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			dct.translateDetailCode(s.doCode)+getDoCode(ac, (s as RefinedState).target, dct)
-		else
-			dct.translateDetailCode(s.doCode)
+		if (!s.doCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedDo.empty
+			
+		return false
 	}
 	
 	def boolean hasActionCode(Transition t) {

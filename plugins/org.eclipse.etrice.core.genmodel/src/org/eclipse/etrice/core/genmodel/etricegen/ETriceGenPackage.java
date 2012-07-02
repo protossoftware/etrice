@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -1428,6 +1429,106 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl <em>Expanded Refined State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedRefinedState()
+	 * @generated
+	 */
+	int EXPANDED_REFINED_STATE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Docu</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__DOCU = RoomPackage.SIMPLE_STATE__DOCU;
+
+	/**
+	 * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__ENTRY_CODE = RoomPackage.SIMPLE_STATE__ENTRY_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__EXIT_CODE = RoomPackage.SIMPLE_STATE__EXIT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Do Code</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__DO_CODE = RoomPackage.SIMPLE_STATE__DO_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__SUBGRAPH = RoomPackage.SIMPLE_STATE__SUBGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__NAME = RoomPackage.SIMPLE_STATE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Inherited Entry</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__INHERITED_ENTRY = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Inherited Exit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__INHERITED_EXIT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Inherited Do</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE__INHERITED_DO = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Expanded Refined State</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_REFINED_STATE_FEATURE_COUNT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1435,7 +1536,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 17;
+	int PORT_KIND = 18;
 
 
 	/**
@@ -2183,6 +2284,49 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getExpandedActorClass_StateMachine();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState <em>Expanded Refined State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expanded Refined State</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
+	 * @generated
+	 */
+	EClass getExpandedRefinedState();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Inherited Entry</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry()
+	 * @see #getExpandedRefinedState()
+	 * @generated
+	 */
+	EAttribute getExpandedRefinedState_InheritedEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Inherited Exit</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit()
+	 * @see #getExpandedRefinedState()
+	 * @generated
+	 */
+	EAttribute getExpandedRefinedState_InheritedExit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Inherited Do</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo()
+	 * @see #getExpandedRefinedState()
+	 * @generated
+	 */
+	EAttribute getExpandedRefinedState_InheritedDo();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2799,6 +2943,40 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_ACTOR_CLASS__STATE_MACHINE = eINSTANCE.getExpandedActorClass_StateMachine();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl <em>Expanded Refined State</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedRefinedState()
+		 * @generated
+		 */
+		EClass EXPANDED_REFINED_STATE = eINSTANCE.getExpandedRefinedState();
+
+		/**
+		 * The meta object literal for the '<em><b>Inherited Entry</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDED_REFINED_STATE__INHERITED_ENTRY = eINSTANCE.getExpandedRefinedState_InheritedEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Inherited Exit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDED_REFINED_STATE__INHERITED_EXIT = eINSTANCE.getExpandedRefinedState_InheritedExit();
+
+		/**
+		 * The meta object literal for the '<em><b>Inherited Do</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPANDED_REFINED_STATE__INHERITED_DO = eINSTANCE.getExpandedRefinedState_InheritedDo();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.

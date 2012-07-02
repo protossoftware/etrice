@@ -150,4 +150,7 @@ class CExtensions implements ILanguageExtension {
 		"\"" + s + "\"";
 	}
 	
+	override String superCall(String baseClassName, String method, String args) {
+		""
+	}
 }

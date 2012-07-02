@@ -49,7 +49,7 @@ public class DetailCodeTranslator {
 	
 	public String translateDetailCode(DetailCode code) {
 		if (code==null)
-			return null;
+			return "";
 		
 		// concatenate lines
 		StringBuilder text = new StringBuilder();

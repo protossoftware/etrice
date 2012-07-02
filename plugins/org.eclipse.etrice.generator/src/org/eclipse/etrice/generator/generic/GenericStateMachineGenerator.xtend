@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.GuardedTransition
 import org.eclipse.etrice.core.room.TriggeredTransition
 import org.eclipse.etrice.core.room.NonInitialTransition
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.DetailCodeTranslator
@@ -113,21 +114,7 @@ class GenericStateMachineGenerator {
 		/* Entry and Exit Codes */
 		«FOR state : xpac.stateMachine.getStateList()»
 			«IF !langExt.usesInheritance || xpac.isOwnObject(state)»
-				«IF state.hasEntryCode()»
-					«langExt.accessLevelProtected»void «state.getEntryCodeOperationName()»(«langExt.selfPointer(ac.name, false)») {
-						«xpac.getEntryCode(state, dct)»
-					}
-				«ENDIF»
-				«IF state.hasExitCode()»
-					«langExt.accessLevelProtected»void «state.getExitCodeOperationName()»(«langExt.selfPointer(ac.name, false)») {
-						«xpac.getExitCode(state, dct)»
-					}
-				«ENDIF»
-				«IF state.hasDoCode()»
-					static void «state.getDoCodeOperationName()»(«langExt.selfPointer(ac.name, false)») {
-						«xpac.getDoCode(state, dct)»
-					}
-				«ENDIF»
+				«xpac.genActionCodeMethods(state, dct)»
 			«ENDIF»
 		«ENDFOR»
 		
@@ -368,5 +355,51 @@ class GenericStateMachineGenerator {
 			«genDoCodes(state.eContainer.eContainer as State)»
 		«ENDIF»
 	'''}
+	
+	def private genActionCodeMethods(ExpandedActorClass xpac, State state, DetailCodeTranslator dct) {
+		val selfPtr = langExt.selfPointer(xpac.actorClass.name, false)
+		val entryOp = state.getEntryCodeOperationName()
+		val exitOp = state.getExitCodeOperationName()
+		val doOp = state.getDoCodeOperationName()
+		var entry = dct.translateDetailCode(state.entryCode)
+		var exit = dct.translateDetailCode(state.exitCode)
+		var docode = dct.translateDetailCode(state.doCode)
+		if (state instanceof ExpandedRefinedState) {
+			val rs = state as ExpandedRefinedState
+			if (langExt.usesInheritance) {
+				// we call the super method in the generated code
+				val baseName = xpac.actorClass.base.name
+				if (!rs.inheritedEntry.empty)
+					entry = langExt.superCall(baseName, entryOp, "") + entry
+				if (!rs.inheritedExit.empty)
+					exit = exit + langExt.superCall(baseName, exitOp, "")
+				if (!rs.inheritedDo.empty)
+					docode = langExt.superCall(baseName, doOp, "") + docode
+			}
+			else {
+				// the inherited code is added directly
+				entry = rs.inheritedEntry + entry
+				exit = exit + rs.inheritedExit
+				docode = rs.inheritedDo + docode
+			}
+		}
+		'''
+		«IF !entry.empty»
+			«langExt.accessLevelProtected»void «entryOp»(«selfPtr») {
+				«entry»
+			}
+		«ENDIF»
+		«IF !exit.empty»
+			«langExt.accessLevelProtected»void «exitOp»(«selfPtr») {
+				«exit»
+			}
+		«ENDIF»
+		«IF !docode.empty»
+			«langExt.accessLevelProtected» void «doOp»(«selfPtr») {
+				«docode»
+			}
+		«ENDIF»
+		'''
+	}
 	
 }

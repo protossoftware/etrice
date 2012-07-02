@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,8 +47,8 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -182,6 +181,18 @@ public class RoomHelpers {
 		if (hasDirectSubStructure(state))
 			return true;
 		
+		if (state instanceof RefinedState) {
+			State target = ((RefinedState) state).getTarget();
+			while (target!=null) {
+				if (hasDirectSubStructure(target))
+					return true;
+				if (target instanceof RefinedState)
+					target = ((RefinedState) target).getTarget();
+				else
+					break;
+			}
+		}
+		
 		if (ac.getStateMachine()!=null) {
 			for (State s : getAllStateTrees(ac.getStateMachine())) {
 				State predecessor = s;
@@ -257,22 +268,71 @@ public class RoomHelpers {
 		return true;
 	}
 
+	public static boolean hasEntryCode(State s, boolean includeInherited) {
+		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__ENTRY_CODE);
+	}
+
+	public static boolean hasExitCode(State s, boolean includeInherited) {
+		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__EXIT_CODE);
+	}
+
+	public static boolean hasDoCode(State s, boolean includeInherited) {
+		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__DO_CODE);
+	}
+	
+	private static boolean hasDetailCode(State s, boolean includeInherited, EReference feature) {
+		DetailCode dc = (DetailCode) s.eGet(feature);
+		if (hasDetailCode(dc))
+			return true;
+		
+		if (includeInherited && s instanceof RefinedState)
+			return !getInheritedCode((RefinedState) s, feature).isEmpty();
+		
+		return false;
+	}
+
 	/**
-	 * @param action
+	 * @param code a detail code
+	 * @return the concatenation of all lines including new line characters (also last line)
+	 */
+	public static String getDetailCode(DetailCode code) {
+		if (code==null || code.getCommands().isEmpty())
+			return "";
+		
+		StringBuilder result = new StringBuilder();
+		for (String cmd : code.getCommands()) {
+			result.append(cmd + "\n");
+		}
+		return result.toString();
+	}
+
+	public static String getInheritedEntryCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE);
+	}
+
+	public static String getInheritedExitCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE);
+	}
+
+	public static String getInheritedDoCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE);
+	}
+	
+	/**
+	 * @param rs
+	 * @param code
 	 * @return
 	 */
-	public static String getDetailCode(DetailCode dc) {
-		if (dc==null)
-			return "";
-		if (dc.getCommands().isEmpty())
-			return "";
-		
-		Iterator<String> it = dc.getCommands().iterator();
-		StringBuilder result = new StringBuilder(it.next());
-		while (it.hasNext()) {
-			result.append("\n").append(it.next());
+	private static String getInheritedCode(RefinedState rs, EReference code) {
+		StringBuffer result = new StringBuffer();
+		State s = rs.getTarget();
+		while (s!=null) {
+			result.append(RoomHelpers.getDetailCode((DetailCode) s.eGet(code)));
+			if (s instanceof RefinedState)
+				s = ((RefinedState) s).getTarget();
+			else
+				break;
 		}
-		
 		return result.toString();
 	}
 

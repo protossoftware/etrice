@@ -134,4 +134,12 @@ public class JavaExtensions implements ILanguageExtension {
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\".toCharArray()");
     return _operator_plus_1;
   }
+  
+  public String superCall(final String baseClassName, final String method, final String args) {
+    String _operator_plus = StringExtensions.operator_plus("super.", method);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "(");
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, args);
+    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ");");
+    return _operator_plus_3;
+  }
 }
