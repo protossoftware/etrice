@@ -424,7 +424,12 @@ public class TestDetailCodeTranslator {
 	@Test (timeout=1000)
 	public void testLargeFile() {
 		DetailCode dc = getLargeFile();
+		
+		// this adds a trailing \n
 		String orig = RoomHelpers.getDetailCode(dc);
+		
+		// remove trailing \n
+		orig = orig.substring(0, orig.length()-1);
 		
 		String result = translator.translateDetailCode(dc);
 		
