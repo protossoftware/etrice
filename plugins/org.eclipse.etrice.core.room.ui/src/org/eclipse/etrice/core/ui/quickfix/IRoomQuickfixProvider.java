@@ -1,8 +1,5 @@
 package org.eclipse.etrice.core.ui.quickfix;
 
-import java.util.List;
-
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 
