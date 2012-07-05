@@ -188,7 +188,7 @@
         locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
      <command
            commandId="org.eclipse.etrice.core.room.ui.exportDiagrams"
-           label="Export Diagrams..."
+           label="Export Diagrams"
            style="push">
         <visibleWhen
               checkEnabled="true">
