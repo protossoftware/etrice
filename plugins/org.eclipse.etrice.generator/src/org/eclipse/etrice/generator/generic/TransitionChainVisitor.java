@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -20,7 +21,6 @@ import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 
@@ -36,25 +36,21 @@ import com.google.inject.Inject;
 public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	@Inject private ILanguageExtension langExt;
+	private ExpandedActorClass xpac;
+	private ITypedDataProvider dataProvider;
 	private DetailCodeTranslator dct;
-	private String typedData;
-	private String dataArg;
 	private boolean dataDriven;
 
-	protected TransitionChainVisitor(DetailCodeTranslator dct) {
+	protected TransitionChainVisitor(ExpandedActorClass xpac, ITypedDataProvider dataProvider, DetailCodeTranslator dct) {
+		this.xpac = xpac;
+		this.dataProvider = dataProvider;
 		this.dct = dct;
 	}
 	
-	protected void init(TransitionChain tc, String dataArg, String typedData) {
-		this.dataArg = dataArg;
-		this.typedData = typedData;
-
+	protected void init(TransitionChain tc) {
 		dataDriven = false;
 		
-		if (tc.getTransition() instanceof TriggeredTransition) {
-			dataDriven = false;
-		}
-		else if (tc.getTransition() instanceof GuardedTransition) {
+		if (tc.getTransition() instanceof GuardedTransition) {
 			dataDriven = true;
 		}
 		else if (tc.getTransition() instanceof InitialTransition) {
@@ -65,13 +61,18 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	// ITransitionChainVisitor interface
 	
 	public String genActionOperationCall(Transition tr) {
+
 		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
 			if (tr instanceof InitialTransition)
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
-			else
+			else {
+				String[] result = dataProvider.generateArglistAndTypedData(xpac.getData(tr));
+				String dataArg = result[0];
+				
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
+			}
 		}
 		return "";
 	}
@@ -108,8 +109,9 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 		return "return " + CodegenHelpers.getGenStateId(state) + ";";
 	}
 
-	public String genTypedData() {
-		return typedData;
+	public String genTypedData(TransitionChain tc) {
+		String[] result = dataProvider.generateArglistAndTypedData(tc.getData());
+		return result[1];
 	}
 
 }

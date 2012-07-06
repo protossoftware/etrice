@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 
@@ -44,6 +45,7 @@ import org.eclipse.etrice.core.room.TransitionPoint;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#isSkipEntry <em>Skip Entry</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getData <em>Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +81,16 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @ordered
 	 */
 	protected boolean skipEntry = SKIP_ENTRY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getData() <em>Data</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getData()
+	 * @generated
+	 * @ordered
+	 */
+	protected VarDecl data;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +173,44 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarDecl getData() {
+		if (data != null && data.eIsProxy()) {
+			InternalEObject oldData = (InternalEObject)data;
+			data = (VarDecl)eResolveProxy(oldData);
+			if (data != oldData) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
+			}
+		}
+		return data;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarDecl basicGetData() {
+		return data;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setData(VarDecl newData) {
+		VarDecl oldData = data;
+		data = newData;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public State getStateContext() {
@@ -201,7 +251,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		ExpandedActorClass ac = getExpandedActorClass();
 		
 		StringBuilder result = new StringBuilder();
-		result.append(tcv.genTypedData());
+		result.append(tcv.genTypedData(this));
 		genChainCode(getTransition(), ac, tcv, result);
 		return result.toString();
 	}
@@ -300,6 +350,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				return basicGetTransition();
 			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
 				return isSkipEntry();
+			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+				if (resolve) return getData();
+				return basicGetData();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,6 +370,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				return;
 			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
 				setSkipEntry((Boolean)newValue);
+				return;
+			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+				setData((VarDecl)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -336,6 +392,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
 				setSkipEntry(SKIP_ENTRY_EDEFAULT);
 				return;
+			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+				setData((VarDecl)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -352,6 +411,8 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				return transition != null;
 			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
 				return skipEntry != SKIP_ENTRY_EDEFAULT;
+			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+				return data != null;
 		}
 		return super.eIsSet(featureID);
 	}

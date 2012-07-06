@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +22,7 @@ import org.eclipse.etrice.core.room.Transition;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#isSkipEntry <em>Skip Entry</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData <em>Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +83,32 @@ public interface TransitionChain extends EObject {
 	 * @generated
 	 */
 	void setSkipEntry(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Data</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Data</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data</em>' reference.
+	 * @see #setData(VarDecl)
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getTransitionChain_Data()
+	 * @model
+	 * @generated
+	 */
+	VarDecl getData();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData <em>Data</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Data</em>' reference.
+	 * @see #getData()
+	 * @generated
+	 */
+	void setData(VarDecl value);
 
 	/**
 	 * <!-- begin-user-doc -->

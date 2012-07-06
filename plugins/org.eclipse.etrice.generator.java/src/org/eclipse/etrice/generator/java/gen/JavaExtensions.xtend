@@ -34,7 +34,7 @@ class JavaExtensions implements ILanguageExtension {
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m)
+		return chainGenerator.generateTypedData(m.data)
 	}
 
 

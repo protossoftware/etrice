@@ -28,6 +28,8 @@ import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
@@ -41,8 +43,10 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -996,5 +1000,81 @@ public class RoomHelpers {
 				break;
 		}
 		return result.toString();
+	}
+
+	/**
+	 * @param types
+	 * @return
+	 */
+	public static RefableType getLastCommonSuperType(List<RefableType> types) {
+		int nref = 0;
+		int ndc = 0;
+		for (RefableType rt : types) {
+			if (rt==null)
+				// no data
+				return null;
+			
+			if (rt.getType() instanceof DataClass)
+				++ndc;
+			
+			if (rt.isRef())
+				++nref;
+		}
+		
+		// all or none can be ref
+		if (!(nref==0 || nref==types.size()))
+			return null;
+		
+		if (ndc==0) {
+			// in this case all types have to be the same
+			DataType type = types.get(0).getType();
+			for (RefableType rt : types) {
+				if (rt.getType()!=type)
+					return null;
+			}
+			return types.get(0);
+		}
+		else if (ndc==types.size()) {
+			// in this case we have to find a common super type
+			ArrayList<ArrayList<DataClass>> allSuperTypes = new ArrayList<ArrayList<DataClass>>();
+			for (RefableType rt : types) {
+				DataClass dc = (DataClass) rt.getType();
+				ArrayList<DataClass> superTypes = new ArrayList<DataClass>();
+				allSuperTypes.add(superTypes);
+				
+				// add base classes first
+				while (dc!=null) {
+					superTypes.add(0, dc);
+					dc = dc.getBase();
+				}
+			}
+			int min = allSuperTypes.get(0).size();
+			DataClass common = allSuperTypes.get(0).get(0);
+			for (ArrayList<DataClass> superTypes : allSuperTypes) {
+				min = Math.min(min, superTypes.size());
+				if (superTypes.get(0)!=common)
+					return null;
+			}
+			
+			// common is a candidate
+			
+			// lets try to improve
+			tryImprove:
+				for (int idx = 1; idx<min; ++idx) {
+					DataClass better = allSuperTypes.get(0).get(idx);
+					for (ArrayList<DataClass> superTypes : allSuperTypes) {
+						if (superTypes.get(idx)!=better)
+							break tryImprove;
+					}
+					common = better;
+				}
+			
+			RefableType rt = RoomFactory.eINSTANCE.createRefableType();
+			rt.setRef(nref>0);
+			rt.setType(common);
+			return rt;
+		}
+		
+		return null;
 	}
 }

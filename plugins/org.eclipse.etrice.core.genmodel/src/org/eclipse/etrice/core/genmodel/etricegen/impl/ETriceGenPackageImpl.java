@@ -822,6 +822,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTransitionChain_Data() {
+		return (EReference)transitionChainEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getITransitionChainVisitor() {
 		return iTransitionChainVisitorEClass;
 	}
@@ -1012,6 +1021,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		transitionChainEClass = createEClass(TRANSITION_CHAIN);
 		createEReference(transitionChainEClass, TRANSITION_CHAIN__TRANSITION);
 		createEAttribute(transitionChainEClass, TRANSITION_CHAIN__SKIP_ENTRY);
+		createEReference(transitionChainEClass, TRANSITION_CHAIN__DATA);
 
 		iTransitionChainVisitorEClass = createEClass(ITRANSITION_CHAIN_VISITOR);
 
@@ -1169,6 +1179,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(transitionChainEClass, TransitionChain.class, "TransitionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionChain_Transition(), theRoomPackage.getTransition(), null, "transition", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransitionChain_SkipEntry(), ecorePackage.getEBoolean(), "skipEntry", "false", 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransitionChain_Data(), theRoomPackage.getVarDecl(), null, "data", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(transitionChainEClass, theRoomPackage.getState(), "getStateContext", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1242,6 +1253,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEObject(), "getOrig", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(expandedActorClassEClass, theRoomPackage.getVarDecl(), "getData", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theRoomPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(expandedRefinedStateEClass, ExpandedRefinedState.class, "ExpandedRefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpandedRefinedState_InheritedEntry(), ecorePackage.getEString(), "inheritedEntry", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

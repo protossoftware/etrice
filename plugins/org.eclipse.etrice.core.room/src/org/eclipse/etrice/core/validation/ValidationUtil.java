@@ -733,16 +733,6 @@ public class ValidationUtil {
 			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof ExitPoint)
 				return Result.error("sub state exit point can not be transition target", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// sub state EntryPoint is valid as destination
-			for (Transition t : sg.getTransitions()) {
-				if (t==trans)
-					continue;
-
-				if (t.getTo() instanceof SubStateTrPointTerminal) {
-					SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)t.getTo();
-					if (tpt.getTrPoint()==((SubStateTrPointTerminal) tgt).getTrPoint())
-						return Result.error("target transition point already is connected", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
-				}
-			}
 		}
 
 		return Result.ok();

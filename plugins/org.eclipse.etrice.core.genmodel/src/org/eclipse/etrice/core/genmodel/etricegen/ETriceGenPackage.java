@@ -1345,13 +1345,22 @@ public interface ETriceGenPackage extends EPackage {
 	int TRANSITION_CHAIN__SKIP_ENTRY = 1;
 
 	/**
+	 * The feature id for the '<em><b>Data</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_CHAIN__DATA = 2;
+
+	/**
 	 * The number of structural features of the '<em>Transition Chain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_CHAIN_FEATURE_COUNT = 2;
+	int TRANSITION_CHAIN_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.
@@ -2230,6 +2239,17 @@ public interface ETriceGenPackage extends EPackage {
 	EAttribute getTransitionChain_SkipEntry();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData <em>Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Data</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData()
+	 * @see #getTransitionChain()
+	 * @generated
+	 */
+	EReference getTransitionChain_Data();
+
+	/**
 	 * Returns the meta object for class '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2897,6 +2917,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRANSITION_CHAIN__SKIP_ENTRY = eINSTANCE.getTransitionChain_SkipEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Data</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION_CHAIN__DATA = eINSTANCE.getTransitionChain_Data();
 
 		/**
 		 * The meta object literal for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.

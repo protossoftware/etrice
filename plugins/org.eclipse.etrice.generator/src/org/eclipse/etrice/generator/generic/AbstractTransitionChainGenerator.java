@@ -15,10 +15,7 @@ package org.eclipse.etrice.generator.generic;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
@@ -29,21 +26,12 @@ import org.eclipse.etrice.generator.base.DetailCodeTranslator;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractTransitionChainGenerator {
+public abstract class AbstractTransitionChainGenerator implements ITypedDataProvider {
 
 	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc, DetailCodeTranslator dct) {
-		TransitionChainVisitor tcv = new TransitionChainVisitor(dct);
+		TransitionChainVisitor tcv = new TransitionChainVisitor(ac, this, dct);
 		AbstractGenerator.getInjector().injectMembers(tcv);
-
-		String dataArg = "";
-		String typedData = "";
-		if (tc.getTransition() instanceof TriggeredTransition) {
-			VarDecl data = ((TriggeredTransition)tc.getTransition()).getTriggers().get(0).getMsgFromIfPairs().get(0).getMessage().getData();
-			String[] result = generateArglistAndTypedData(data);
-			dataArg = result[0];
-			typedData = result[1];
-		}
-		tcv.init(tc, dataArg, typedData);
+		tcv.init(tc);
 		
 		return tc.genExecuteChain(tcv);
 	}
@@ -57,34 +45,18 @@ public abstract class AbstractTransitionChainGenerator {
 		if (!(chain.getTransition() instanceof TriggeredTransition))
 			return "";
 		
-		Trigger trigger = ((TriggeredTransition)chain.getTransition()).getTriggers().get(0);
-		MessageFromIf mif = trigger.getMsgFromIfPairs().get(0);
-		
-		return generateTypedArgumentList(mif.getMessage());
+		return generateTypedArgumentList(xpac.getData(t));
 	}
 
-	public String generateArgumentList(Message m) {
-		return generateArglistAndTypedData(m.getData())[0];
+	public String generateArgumentList(VarDecl data) {
+		return generateArglistAndTypedData(data)[0];
 	}
 
-	public String generateTypedData(Message m) {
-		return generateArglistAndTypedData(m.getData())[1];
+	public String generateTypedData(VarDecl data) {
+		return generateArglistAndTypedData(data)[1];
 	}
 
-	public String generateTypedArgumentList(Message m) {
-		return generateArglistAndTypedData(m.getData())[2];
+	public String generateTypedArgumentList(VarDecl data) {
+		return generateArglistAndTypedData(data)[2];
 	}
-	
-	/**
-	 * return three strings used by the generator
-	 * 
-	 * @param data the variable declaration
-	 * @return an array of three strings
-	 * <ol>
-	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variabley</li>
-	 *  <li>the data as it appears in a method call</li>
-	 *  <li>the data as it is used in the method declaration</li>
-	 *  </ol>
-	 */
-	protected abstract String[] generateArglistAndTypedData(VarDecl data);
 }

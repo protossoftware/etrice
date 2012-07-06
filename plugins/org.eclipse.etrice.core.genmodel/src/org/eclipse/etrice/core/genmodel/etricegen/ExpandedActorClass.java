@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -257,5 +258,13 @@ public interface ExpandedActorClass extends EObject {
 	 * @generated
 	 */
 	EObject getOrig(EObject copy);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	VarDecl getData(Transition trans);
 
 } // ExpandedActorClass

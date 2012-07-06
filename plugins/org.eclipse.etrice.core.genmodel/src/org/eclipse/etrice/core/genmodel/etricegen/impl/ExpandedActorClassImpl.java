@@ -52,6 +52,7 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -90,7 +91,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActorClass {
 	
-	private class NodeData {
+	private static class NodeData {
 		private LinkedList<Transition> inTrans = new LinkedList<Transition>();
 		private LinkedList<Transition> outTrans = new LinkedList<Transition>();
 		private LinkedList<Transition> loopTrans = null;
@@ -127,6 +128,29 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			return loopTrans;
 		}
 	}
+
+	/**
+	 * transition chains may merge in a choice point or in an entry or exit point.
+	 * We call all merged transition chains a transition chain bundle
+	 *
+	 */
+	private static class TransitionChainBundle {
+		private ArrayList<TransitionChain> chains = new ArrayList<TransitionChain>();
+		private VarDecl commonData = null;
+	}
+	
+	private static class TransitionToChainBundleMap extends HashMap<Transition, TransitionChainBundle> {
+		private static final long serialVersionUID = 1L;
+
+		void put(Transition t, TransitionChain tc) {
+			TransitionChainBundle tcb = get(t);
+			if (tcb==null) {
+				tcb = new TransitionChainBundle();
+				put(t, tcb);
+			}
+			tcb.chains.add(tc);
+		}
+	}
 	
 	/**
 	 * The cached value of the '{@link #getActorClass() <em>Actor Class</em>}' reference.
@@ -159,7 +183,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	private HashMap<State, LinkedList<ActiveTrigger>> state2triggers = null;
 	private HashMap<String, MessageFromIf> triggerstring2mif = null;
 	private LinkedList<TransitionChain> trchains = null;
-	private HashMap<Transition, TransitionChain> trans2chain = null;
+	private TransitionToChainBundleMap trans2chainBundle = null;
 	private HashMap<EObject, EObject> copy2orig = null;
 
 	/**
@@ -713,6 +737,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		if (t instanceof TriggeredTransition) {
 			VarDecl data = null;
+			
+			// TODO: after introduction of VarDecl after 'action' leave this to validation
+			
 			boolean first = true;
 			for (Trigger tr : ((TriggeredTransition)t).getTriggers()) {
 				for (MessageFromIf mif : tr.getMsgFromIfPairs()) {
@@ -743,6 +770,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	
 			if (first)
 				validationError("Triggered transition has to have a message from interface!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+			
+			tc.setData(data);
 		}
 		
 		collectChainTransitions(tc, t);
@@ -751,7 +780,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 
 	private void collectChainTransitions(TransitionChain tc, Transition t) {
-		trans2chain.put(t, tc);
+		trans2chainBundle.put(t, tc);
 
 		// should always hold true
 //		assert(t instanceof NonInitialTransition): "A transition chain must not contain initial transitions!";
@@ -780,12 +809,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		}
 	}
 
-	private void findTriggeredTransitionChains(StateGraph sg) {
+	private void findTransitionChains(StateGraph sg, Class<?> cls) {
 		for (Transition t : sg.getTransitions()) {
-			if (t instanceof TriggeredTransition) {
-				addTransitionChain(t);
-			}
-			else if (t instanceof InitialTransition) {
+			if (cls.isInstance(t) || t instanceof InitialTransition) {
 				addTransitionChain(t);
 			}
 		}
@@ -793,24 +819,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// recurse into sub graphs of states
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				findTriggeredTransitionChains(s.getSubgraph());
-		}
-	}
-
-	private void findGuardedTransitionChains(StateGraph sg) {
-		for (Transition t : sg.getTransitions()) {
-			if (t instanceof GuardedTransition) {
-				addTransitionChain(t);
-			}
-			else if (t instanceof InitialTransition) {
-				addTransitionChain(t);
-			}
-		}
-		
-		// recurse into sub graphs of states
-		for (State s : sg.getStates()) {
-			if (s.getSubgraph()!=null)
-				findGuardedTransitionChains(s.getSubgraph());
+				findTransitionChains(s.getSubgraph(), cls);
 		}
 	}
 
@@ -833,7 +842,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		state2triggers = new HashMap<State, LinkedList<ActiveTrigger>>();
 		triggerstring2mif = new HashMap<String, MessageFromIf>();
 		trchains = new LinkedList<TransitionChain>();
-		trans2chain = new HashMap<Transition, TransitionChain>();
+		trans2chainBundle = new TransitionToChainBundleMap();
 		copy2orig = new HashMap<EObject, EObject>();
 		
 		buildStateGraph();
@@ -845,14 +854,41 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			return;
 		
 		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
-			findGuardedTransitionChains(getStateMachine());
+			findTransitionChains(getStateMachine(), GuardedTransition.class);
 		}
 		else {
 			// event driven state machine
 			findLeafStateTriggers(getStateMachine());
 			fillTriggerStringMap();
-			findTriggeredTransitionChains(getStateMachine());
+			findTransitionChains(getStateMachine(), TriggeredTransition.class);
+			computeCommonChainData();
 			checkTransitionChains(getStateMachine());
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void computeCommonChainData() {
+		for (TransitionChainBundle tcb : trans2chainBundle.values()) {
+			if (tcb.chains.size()==1)
+				tcb.commonData = tcb.chains.get(0).getData();
+			else {
+				ArrayList<RefableType> types = new ArrayList<RefableType>();
+				for (TransitionChain chain : tcb.chains) {
+					if (chain.getData()!=null)
+						types.add(chain.getData().getRefType());
+					else
+						types.add(null);
+				}
+				RefableType rt = RoomHelpers.getLastCommonSuperType(types);
+				if (rt!=null) {
+					VarDecl vd = RoomFactory.eINSTANCE.createVarDecl();
+					vd.setName("data");
+					vd.setRefType(rt);
+					tcb.commonData = vd;
+				}
+			}
 		}
 	}
 
@@ -874,7 +910,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		state2triggers = null;
 		triggerstring2mif = null;
 		trchains = null;
-		trans2chain = null;
+		trans2chainBundle = null;
 		copy2orig = null;
 	}
 
@@ -1081,7 +1117,27 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * @generated NOT
 	 */
 	public TransitionChain getChain(Transition trans) {
-		return trans2chain.get(trans);
+		TransitionChainBundle tcb = trans2chainBundle.get(trans);
+		if (tcb.chains.isEmpty())
+			return null;
+		
+		return tcb.chains.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public VarDecl getData(Transition trans) {
+		TransitionChainBundle tcb = trans2chainBundle.get(trans);
+		if (tcb.chains.isEmpty())
+			return null;
+		
+		if (tcb.chains.size()==1)
+			return tcb.chains.get(0).getData();
+		
+		return tcb.commonData;
 	}
 
 	/**
