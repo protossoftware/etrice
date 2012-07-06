@@ -16,17 +16,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.ConfigStandaloneSetup;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -52,6 +58,12 @@ public abstract class AbstractGenerator {
 	public static final int GENERATOR_ERROR = 1;
 	
 	private static boolean terminateOnError = true;
+	private static AbstractGenerator instance = null;
+
+	protected static ILineOutput output = new StdLineOutput();
+	private static Injector injector;
+	
+	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
 	
 	public static void setTerminateOnError(boolean terminateOnError) {
 		AbstractGenerator.terminateOnError = terminateOnError;
@@ -61,14 +73,18 @@ public abstract class AbstractGenerator {
 		return terminateOnError;
 	}
 
-	protected static ILineOutput output = new StdLineOutput();
-	private static Injector injector;
-
 	public static void setOutput(ILineOutput out) {
 		if (out!=null)
 			output = out;
 	}
 	
+	public static AbstractGenerator getInstance() {
+		return instance;
+	}
+	
+	protected AbstractGenerator() {
+		instance = this;
+	}
 
 	/**
 	 * creates an instance of the generator and invokes the {@link #runGenerator(String[])} method
@@ -99,6 +115,9 @@ public abstract class AbstractGenerator {
 	
 	@Inject
 	protected PlatformRelativeUriResolver uriResolver;
+	
+	@Inject
+	protected ITranslationProvider translationProvider;
 	
 	protected IResourceValidator validator;
 
@@ -147,6 +166,9 @@ public abstract class AbstractGenerator {
 				logger.logError("-- terminating", null);
 				return null;
 			}
+			
+			translateDetailCodes(gmRoot);
+			
 			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = rs.createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
@@ -239,6 +261,65 @@ public abstract class AbstractGenerator {
 		return ok;
 	}
 
+	/**
+	 * create detail code translations once and for all
+	 * @param gmRoot
+	 */
+	protected void translateDetailCodes(Root gmRoot) {
+		for (ExpandedActorClass xpac : gmRoot.getXpActorClasses()) {
+			DetailCodeTranslator dct = new DetailCodeTranslator(xpac.getActorClass(), translationProvider);
+			translateDetailCodesOfTree(xpac.getActorClass(), dct);
+			translateDetailCodesOfTree(xpac.getStateMachine(), dct);
+		}
+		
+		for (DataClass dc : gmRoot.getUsedDataClasses()) {
+			DetailCodeTranslator dct = new DetailCodeTranslator(dc, translationProvider);
+			translateDetailCodesOfTree(dc, dct);
+		}
+		
+		for (ProtocolClass pc : gmRoot.getUsedProtocolClasses()) {
+			if (pc.getConjugate()!=null) {
+				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugate(), translationProvider);
+				translateDetailCodesOfTree(pc.getConjugate(), dct);
+			}
+			if (pc.getRegular()!=null) {
+				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getRegular(), translationProvider);
+				translateDetailCodesOfTree(pc.getRegular(), dct);
+			}
+			
+			DetailCodeTranslator dct = new DetailCodeTranslator(pc, translationProvider);
+			translateDetailCodesOfTree(pc.getUserCode1(), dct);
+			translateDetailCodesOfTree(pc.getUserCode2(), dct);
+			translateDetailCodesOfTree(pc.getUserCode3(), dct);
+		}
+	}
+	
+	protected void translateDetailCodesOfTree(EObject container, DetailCodeTranslator dct) {
+		if (container==null)
+			return;
+		if (container instanceof DetailCode) {
+			DetailCode dc = (DetailCode) container;
+			detailcode2string.put(dc, dct.translateDetailCode(dc));
+			return;
+		}
+		
+		TreeIterator<EObject> it = container.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof DetailCode) {
+				DetailCode dc = (DetailCode) obj;
+				detailcode2string.put(dc, dct.translateDetailCode(dc));
+			}
+		}
+	}
+
+	public String getTranslatedCode(DetailCode dc) {
+		String code = detailcode2string.get(dc);
+		if (code==null)
+			return "";
+		return code;
+	}
+	
 	/**
 	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
 	 * @param args

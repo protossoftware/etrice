@@ -23,9 +23,8 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
-import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -53,9 +52,6 @@ public class GenericStateMachineGenerator {
   
   @Inject
   protected AbstractTransitionChainGenerator languageGen;
-  
-  @Inject
-  protected ITranslationProvider translator;
   
   private String genStateIdConstants(final ExpandedActorClass xpac, final ActorClass ac) {
       int _xifexpression = (int) 0;
@@ -180,9 +176,6 @@ public class GenericStateMachineGenerator {
   public StringConcatenation genStateMachine(final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
-      this.translator.setActorClass(ac);
-      DetailCodeTranslator _detailCodeTranslator = new DetailCodeTranslator(ac, this.translator);
-      DetailCodeTranslator dct = _detailCodeTranslator;
       ActorCommunicationType _commType = ac.getCommType();
       boolean _operator_equals = ObjectExtensions.operator_equals(_commType, ActorCommunicationType.ASYNCHRONOUS);
       boolean async = _operator_equals;
@@ -240,7 +233,7 @@ public class GenericStateMachineGenerator {
               _operator_or_1 = BooleanExtensions.operator_or(_operator_not, _isOwnObject);
             }
             if (_operator_or_1) {
-              StringConcatenation _genActionCodeMethods = this.genActionCodeMethods(xpac, state, dct);
+              StringConcatenation _genActionCodeMethods = this.genActionCodeMethods(xpac, state);
               _builder.append(_genActionCodeMethods, "");
               _builder.newLineIfNotEmpty();
             }
@@ -304,8 +297,10 @@ public class GenericStateMachineGenerator {
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              String _actionCode = this.roomExt.getActionCode(xpac, tr, dct);
-              _builder.append(_actionCode, "	");
+              AbstractGenerator _instance = AbstractGenerator.getInstance();
+              DetailCode _action = tr.getAction();
+              String _translatedCode = _instance.getTranslatedCode(_action);
+              _builder.append(_translatedCode, "	");
               _builder.newLineIfNotEmpty();
               _builder.append("}");
               _builder.newLine();
@@ -464,7 +459,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          String _generateExecuteChain = this.languageGen.generateExecuteChain(xpac, tc, dct);
+          String _generateExecuteChain = this.languageGen.generateExecuteChain(xpac, tc);
           _builder.append(_generateExecuteChain, "			");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
@@ -836,7 +831,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          StringConcatenation _genStateSwitch = this.genStateSwitch(xpac, dct);
+          StringConcatenation _genStateSwitch = this.genStateSwitch(xpac);
           _builder.append(_genStateSwitch, "		");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -844,7 +839,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
         } else {
           _builder.append("\t");
-          StringConcatenation _genStateSwitch_1 = this.genStateSwitch(xpac, dct);
+          StringConcatenation _genStateSwitch_1 = this.genStateSwitch(xpac);
           _builder.append(_genStateSwitch_1, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -902,7 +897,7 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  private StringConcatenation genStateSwitch(final ExpandedActorClass xpac, final DetailCodeTranslator dct) {
+  private StringConcatenation genStateSwitch(final ExpandedActorClass xpac) {
     StringConcatenation _xblockexpression = null;
     {
       ActorClass _actorClass = xpac.getActorClass();
@@ -962,7 +957,7 @@ public class GenericStateMachineGenerator {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("\t");
-                  StringConcatenation _genDataDrivenTriggers = this.genDataDrivenTriggers(xpac, state, dct);
+                  StringConcatenation _genDataDrivenTriggers = this.genDataDrivenTriggers(xpac, state);
                   _builder.append(_genDataDrivenTriggers, "			");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -973,7 +968,7 @@ public class GenericStateMachineGenerator {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("\t");
-                  StringConcatenation _genEventDrivenTriggers = this.genEventDrivenTriggers(xpac, state, atlist, dct);
+                  StringConcatenation _genEventDrivenTriggers = this.genEventDrivenTriggers(xpac, state, atlist);
                   _builder.append(_genEventDrivenTriggers, "			");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -983,7 +978,7 @@ public class GenericStateMachineGenerator {
                 } else {
                   _builder.append("\t");
                   _builder.append("\t");
-                  StringConcatenation _genDataDrivenTriggers_1 = this.genDataDrivenTriggers(xpac, state, dct);
+                  StringConcatenation _genDataDrivenTriggers_1 = this.genDataDrivenTriggers(xpac, state);
                   _builder.append(_genDataDrivenTriggers_1, "		");
                   _builder.newLineIfNotEmpty();
                 }
@@ -992,7 +987,7 @@ public class GenericStateMachineGenerator {
               if (dataDriven) {
                 _builder.append("\t");
                 _builder.append("\t");
-                StringConcatenation _genDataDrivenTriggers_2 = this.genDataDrivenTriggers(xpac, state, dct);
+                StringConcatenation _genDataDrivenTriggers_2 = this.genDataDrivenTriggers(xpac, state);
                 _builder.append(_genDataDrivenTriggers_2, "		");
                 _builder.newLineIfNotEmpty();
               } else {
@@ -1013,7 +1008,7 @@ public class GenericStateMachineGenerator {
                       _builder.append("\t");
                       _builder.append("\t");
                       _builder.append("\t");
-                      StringConcatenation _genEventDrivenTriggers_1 = this.genEventDrivenTriggers(xpac, state, atlist_1, dct);
+                      StringConcatenation _genEventDrivenTriggers_1 = this.genEventDrivenTriggers(xpac, state, atlist_1);
                       _builder.append(_genEventDrivenTriggers_1, "			");
                       _builder.newLineIfNotEmpty();
                       _builder.append("\t");
@@ -1039,7 +1034,7 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  private StringConcatenation genDataDrivenTriggers(final ExpandedActorClass xpac, final State state, final DetailCodeTranslator dct) {
+  private StringConcatenation genDataDrivenTriggers(final ExpandedActorClass xpac, final State state) {
     StringConcatenation _builder = new StringConcatenation();
     StringConcatenation _genDoCodes = this.genDoCodes(state);
     _builder.append(_genDoCodes, "");
@@ -1056,9 +1051,10 @@ public class GenericStateMachineGenerator {
     {
       for(final Transition tr : transitions) {
         _builder.append("if (");
+        AbstractGenerator _instance = AbstractGenerator.getInstance();
         DetailCode _guard = ((GuardedTransition) tr).getGuard();
-        String _translateDetailCode = dct.translateDetailCode(_guard);
-        _builder.append(_translateDetailCode, "");
+        String _translatedCode = _instance.getTranslatedCode(_guard);
+        _builder.append(_translatedCode, "");
         _builder.append(")");
         _builder.newLineIfNotEmpty();
         _builder.append("{");
@@ -1110,7 +1106,7 @@ public class GenericStateMachineGenerator {
     return _builder;
   }
   
-  private StringConcatenation genEventDrivenTriggers(final ExpandedActorClass xpac, final State state, final List<ActiveTrigger> atlist, final DetailCodeTranslator dct) {
+  private StringConcatenation genEventDrivenTriggers(final ExpandedActorClass xpac, final State state, final List<ActiveTrigger> atlist) {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final ActiveTrigger at : atlist) {
@@ -1150,7 +1146,7 @@ public class GenericStateMachineGenerator {
             _builder.append("\t");
             Transition _transition = chain.getTransition();
             String _trigger_1 = at.getTrigger();
-            StringConcatenation _guard = this.guard(_transition, _trigger_1, xpac, dct);
+            StringConcatenation _guard = this.guard(_transition, _trigger_1, xpac);
             _builder.append(_guard, "	");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -1218,7 +1214,7 @@ public class GenericStateMachineGenerator {
     return _builder;
   }
   
-  private StringConcatenation _guard(final TriggeredTransition tt, final String trigger, final ExpandedActorClass ac, final DetailCodeTranslator dct) {
+  private StringConcatenation _guard(final TriggeredTransition tt, final String trigger, final ExpandedActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
       EList<Trigger> _triggers = tt.getTriggers();
@@ -1235,10 +1231,11 @@ public class GenericStateMachineGenerator {
         boolean _hasGuard = this.roomExt.hasGuard(tr);
         if (_hasGuard) {
           _builder.append("if (");
+          AbstractGenerator _instance = AbstractGenerator.getInstance();
           Guard _guard = tr.getGuard();
           DetailCode _guard_1 = _guard.getGuard();
-          String _translateDetailCode = dct.translateDetailCode(_guard_1);
-          _builder.append(_translateDetailCode, "");
+          String _translatedCode = _instance.getTranslatedCode(_guard_1);
+          _builder.append(_translatedCode, "");
           _builder.append(")");
           _builder.newLineIfNotEmpty();
         }
@@ -1248,7 +1245,7 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  private StringConcatenation _guard(final Transition t, final String trigger, final ExpandedActorClass ac, final DetailCodeTranslator dct) {
+  private StringConcatenation _guard(final Transition t, final String trigger, final ExpandedActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* error */");
     _builder.newLine();
@@ -1280,7 +1277,7 @@ public class GenericStateMachineGenerator {
     return _builder;
   }
   
-  private StringConcatenation genActionCodeMethods(final ExpandedActorClass xpac, final State state, final DetailCodeTranslator dct) {
+  private StringConcatenation genActionCodeMethods(final ExpandedActorClass xpac, final State state) {
     StringConcatenation _xblockexpression = null;
     {
       ActorClass _actorClass = xpac.getActorClass();
@@ -1293,15 +1290,18 @@ public class GenericStateMachineGenerator {
       final String exitOp = _exitCodeOperationName;
       String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(state);
       final String doOp = _doCodeOperationName;
+      AbstractGenerator _instance = AbstractGenerator.getInstance();
       DetailCode _entryCode = state.getEntryCode();
-      String _translateDetailCode = dct.translateDetailCode(_entryCode);
-      String entry = _translateDetailCode;
+      String _translatedCode = _instance.getTranslatedCode(_entryCode);
+      String entry = _translatedCode;
+      AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
       DetailCode _exitCode = state.getExitCode();
-      String _translateDetailCode_1 = dct.translateDetailCode(_exitCode);
-      String exit = _translateDetailCode_1;
+      String _translatedCode_1 = _instance_1.getTranslatedCode(_exitCode);
+      String exit = _translatedCode_1;
+      AbstractGenerator _instance_2 = AbstractGenerator.getInstance();
       DetailCode _doCode = state.getDoCode();
-      String _translateDetailCode_2 = dct.translateDetailCode(_doCode);
-      String docode = _translateDetailCode_2;
+      String _translatedCode_2 = _instance_2.getTranslatedCode(_doCode);
+      String docode = _translatedCode_2;
       if ((state instanceof ExpandedRefinedState)) {
         {
           final ExpandedRefinedState rs = ((ExpandedRefinedState) state);
@@ -1415,11 +1415,11 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  private StringConcatenation guard(final Transition tt, final String trigger, final ExpandedActorClass ac, final DetailCodeTranslator dct) {
+  private StringConcatenation guard(final Transition tt, final String trigger, final ExpandedActorClass ac) {
     if (tt instanceof TriggeredTransition) {
-      return _guard((TriggeredTransition)tt, trigger, ac, dct);
+      return _guard((TriggeredTransition)tt, trigger, ac);
     } else {
-      return _guard(tt, trigger, ac, dct);
+      return _guard(tt, trigger, ac);
     }
   }
 }

@@ -26,9 +26,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.base.DetailCodeTranslator
-import org.eclipse.etrice.generator.base.ITranslationProvider
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
 
@@ -38,7 +37,6 @@ class GenericStateMachineGenerator {
 	@Inject protected extension RoomExtensions roomExt
 	@Inject protected extension GenericProtocolClassGenerator pcGen
 	@Inject protected extension org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator languageGen
-	@Inject protected ITranslationProvider translator
 
 	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {
 		// with inheritance we exclude inherited base states
@@ -91,8 +89,6 @@ class GenericStateMachineGenerator {
 	}
 	
 	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {
-		translator.setActorClass(ac)
-		var dct = new DetailCodeTranslator(ac, translator)
 		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		var eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
@@ -114,7 +110,7 @@ class GenericStateMachineGenerator {
 		/* Entry and Exit Codes */
 		«FOR state : xpac.stateMachine.getStateList()»
 			«IF !langExt.usesInheritance || xpac.isOwnObject(state)»
-				«xpac.genActionCodeMethods(state, dct)»
+				«xpac.genActionCodeMethods(state)»
 			«ENDIF»
 		«ENDFOR»
 		
@@ -124,7 +120,7 @@ class GenericStateMachineGenerator {
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.generateArgumentList(xpac, tr)»«ENDIF») {
-					«xpac.getActionCode(tr, dct)»
+					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
 				}
 			«ENDIF»
 		«ENDFOR»
@@ -163,7 +159,7 @@ class GenericStateMachineGenerator {
 				«FOR tc : allchains»
 					case «tc.getChainId()»:
 					{
-						«xpac.generateExecuteChain(tc, dct)»
+						«xpac.generateExecuteChain(tc)»
 					}
 				«ENDFOR»
 			}
@@ -234,10 +230,10 @@ class GenericStateMachineGenerator {
 			
 			«IF handleEvents»
 				if (!handleSystemEvent(ifitem, evt, generic_data)) {
-					«genStateSwitch(xpac, dct)»
+					«genStateSwitch(xpac)»
 				}
 			«ELSE»
-				«genStateSwitch(xpac, dct)»
+				«genStateSwitch(xpac)»
 			«ENDIF»
 			if (chain != NOT_CAUGHT) {
 				exitTo(«langExt.selfPointer(true)»«langExt.memberAccess»state, catching_state, is_handler);
@@ -252,7 +248,7 @@ class GenericStateMachineGenerator {
 		//******************************************
 	'''}
 	
-	def private genStateSwitch(ExpandedActorClass xpac, DetailCodeTranslator dct) {
+	def private genStateSwitch(ExpandedActorClass xpac) {
 		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
 		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
@@ -266,20 +262,20 @@ class GenericStateMachineGenerator {
 						«IF !atlist.isEmpty»
 							switch(trigger) {
 							case POLLING:
-								«genDataDrivenTriggers(xpac, state, dct)»
+								«genDataDrivenTriggers(xpac, state)»
 								break;
-								«genEventDrivenTriggers(xpac, state, atlist, dct)»
+								«genEventDrivenTriggers(xpac, state, atlist)»
 							}
 						«ELSE»
-							«genDataDrivenTriggers(xpac, state, dct)»
+							«genDataDrivenTriggers(xpac, state)»
 						«ENDIF»
 					«ELSEIF dataDriven»
-						«genDataDrivenTriggers(xpac, state, dct)»
+						«genDataDrivenTriggers(xpac, state)»
 					«ELSEIF eventDriven»
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
 							switch(trigger) {
-								«genEventDrivenTriggers(xpac, state, atlist, dct)»
+								«genEventDrivenTriggers(xpac, state, atlist)»
 							}
 						«ENDIF»
 					«ENDIF»
@@ -289,12 +285,12 @@ class GenericStateMachineGenerator {
 		'''
 	}
 	
-	def private genDataDrivenTriggers(ExpandedActorClass xpac, State state, DetailCodeTranslator dct) {
+	def private genDataDrivenTriggers(ExpandedActorClass xpac, State state) {
 		'''
 			«genDoCodes(state)»
 			«var transitions = xpac.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)»
 			«FOR tr : transitions»
-				if («dct.translateDetailCode((tr as GuardedTransition).guard)»)
+				if («AbstractGenerator::getInstance().getTranslatedCode((tr as GuardedTransition).guard)»)
 				{
 					«var chain = xpac.getChain(tr)»
 					chain = «chain.getChainId()»;
@@ -309,7 +305,7 @@ class GenericStateMachineGenerator {
 		'''
 	}
 	
-	def private genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist, DetailCodeTranslator dct) {
+	def private genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist) {
 		'''
 			«FOR at : atlist»
 				case «xpac.getTriggerCodeName(at.trigger)»:
@@ -317,7 +313,7 @@ class GenericStateMachineGenerator {
 					«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»
 						«var chain = xpac.getChain(tt)»
-						«guard(chain.transition, at.trigger, xpac, dct)»
+						«guard(chain.transition, at.trigger, xpac)»
 						{
 							chain = «chain.getChainId()»;
 							catching_state = «chain.getContextId()»;
@@ -332,16 +328,16 @@ class GenericStateMachineGenerator {
 	}
 	def genExtra(ExpandedActorClass xpac, ActorClass ac) {''''''}
 	
-	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac, DetailCodeTranslator dct) {
+	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {
 		var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
 	'''
 		«IF tr.hasGuard()»
-			if («dct.translateDetailCode(tr.guard.guard)»)
+			if («AbstractGenerator::getInstance().getTranslatedCode(tr.guard.guard)»)
 		«ENDIF»
 	'''
 	}
 
-	def private dispatch guard(Transition t, String trigger, ExpandedActorClass ac, DetailCodeTranslator dct) {
+	def private dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {
 	'''
 		/* error */
 	'''
@@ -356,14 +352,14 @@ class GenericStateMachineGenerator {
 		«ENDIF»
 	'''}
 	
-	def private genActionCodeMethods(ExpandedActorClass xpac, State state, DetailCodeTranslator dct) {
+	def private genActionCodeMethods(ExpandedActorClass xpac, State state) {
 		val selfPtr = langExt.selfPointer(xpac.actorClass.name, false)
 		val entryOp = state.getEntryCodeOperationName()
 		val exitOp = state.getExitCodeOperationName()
 		val doOp = state.getDoCodeOperationName()
-		var entry = dct.translateDetailCode(state.entryCode)
-		var exit = dct.translateDetailCode(state.exitCode)
-		var docode = dct.translateDetailCode(state.doCode)
+		var entry = AbstractGenerator::getInstance().getTranslatedCode(state.entryCode)
+		var exit = AbstractGenerator::getInstance().getTranslatedCode(state.exitCode)
+		var docode = AbstractGenerator::getInstance().getTranslatedCode(state.doCode)
 		if (state instanceof ExpandedRefinedState) {
 			val rs = state as ExpandedRefinedState
 			if (langExt.usesInheritance) {

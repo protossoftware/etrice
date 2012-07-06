@@ -49,7 +49,6 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
@@ -921,12 +920,6 @@ public class RoomExtensions {
       _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_greaterThan);
     }
     return _operator_and;
-  }
-  
-  public String getActionCode(final ExpandedActorClass ac, final Transition t, final DetailCodeTranslator dct) {
-    DetailCode _action = t.getAction();
-    String _translateDetailCode = dct.translateDetailCode(_action);
-    return _translateDetailCode;
   }
   
   public String getContextId(final TransitionChain tc) {

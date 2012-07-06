@@ -51,7 +51,6 @@ import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
-import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
 import static org.eclipse.etrice.generator.base.CodegenHelpers.*
 
@@ -518,9 +517,6 @@ class RoomExtensions {
 	
 	def boolean hasActionCode(Transition t) {
 		t.action!=null && t.action.commands.size>0
-	}
-	def String getActionCode(ExpandedActorClass ac, Transition t, DetailCodeTranslator dct) {
-		dct.translateDetailCode(t.action)
 	}
 	
 	def String getContextId(TransitionChain tc) {

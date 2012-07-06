@@ -21,8 +21,8 @@ import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 
 import com.google.inject.Inject;
 
@@ -38,13 +38,11 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	@Inject private ILanguageExtension langExt;
 	private ExpandedActorClass xpac;
 	private ITypedDataProvider dataProvider;
-	private DetailCodeTranslator dct;
 	private boolean dataDriven;
 
-	protected TransitionChainVisitor(ExpandedActorClass xpac, ITypedDataProvider dataProvider, DetailCodeTranslator dct) {
+	protected TransitionChainVisitor(ExpandedActorClass xpac, ITypedDataProvider dataProvider) {
 		this.xpac = xpac;
 		this.dataProvider = dataProvider;
-		this.dct = dct;
 	}
 	
 	protected void init(TransitionChain tc) {
@@ -91,7 +89,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 		if (!isFirst )
 			result = "}\nelse ";
 
-		result += "if ("+dct.translateDetailCode(tr.getCondition())+") {\n";
+		result += "if ("+AbstractGenerator.getInstance().getTranslatedCode(tr.getCondition())+") {\n";
 		
 		return result;
 	}

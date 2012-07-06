@@ -541,6 +541,18 @@ public class RoomHelpers {
 		return result;
 	}
 	
+	public static List<Attribute> getAllAttributes(DataClass dc) {
+		ArrayList<Attribute> result = new ArrayList<Attribute>();
+		
+		while (dc!=null) {
+			result.addAll(dc.getAttributes());
+			
+			dc = dc.getBase();
+		}
+		
+		return result;
+	}
+
 	public static List<Operation> getAllOperations(ActorClass ac) {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
@@ -548,6 +560,18 @@ public class RoomHelpers {
 			result.addAll(ac.getOperations());
 			
 			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+
+	public static List<Operation> getAllOperations(DataClass dc) {
+		ArrayList<Operation> result = new ArrayList<Operation>();
+		
+		while (dc!=null) {
+			result.addAll(dc.getOperations());
+			
+			dc = dc.getBase();
 		}
 		
 		return result;

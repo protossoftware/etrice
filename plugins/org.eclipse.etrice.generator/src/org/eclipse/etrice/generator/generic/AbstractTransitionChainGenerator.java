@@ -19,7 +19,6 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 
 /**
  * base class for 
@@ -28,8 +27,8 @@ import org.eclipse.etrice.generator.base.DetailCodeTranslator;
  */
 public abstract class AbstractTransitionChainGenerator implements ITypedDataProvider {
 
-	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc, DetailCodeTranslator dct) {
-		TransitionChainVisitor tcv = new TransitionChainVisitor(ac, this, dct);
+	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
+		TransitionChainVisitor tcv = new TransitionChainVisitor(ac, this);
 		AbstractGenerator.getInjector().injectMembers(tcv);
 		tcv.init(tc);
 		
