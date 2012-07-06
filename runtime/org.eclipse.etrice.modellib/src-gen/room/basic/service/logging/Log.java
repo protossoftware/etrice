@@ -40,7 +40,7 @@ public class Log {
 	static public class LogPort extends PortBase {
 		// constructors
 		public LogPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public LogPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -109,11 +109,12 @@ public class Log {
 		/*--------------------- end user code ---------------------*/
 		// constructors
 		public LogConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public LogConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
+			// initialize attributes
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -136,6 +137,8 @@ public class Log {
 		}
 	
 		/*--------------------- attributes ---------------------*/
+		// TODO JH: Avoid collision attr getters/setter <-> user operations
+		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		public void setLogLevel(int l) {
 			logLevel=l;

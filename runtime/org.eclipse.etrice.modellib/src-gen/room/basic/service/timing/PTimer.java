@@ -72,11 +72,12 @@ public class PTimer {
 		/*--------------------- end user code ---------------------*/
 		// constructors
 		public PTimerPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTimerPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
+			// initialize attributes
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -121,6 +122,8 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
+		// TODO JH: Avoid collision attr getters/setter <-> user operations
+		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		
 		// sent messages
@@ -192,11 +195,12 @@ public class PTimer {
 		/*--------------------- end user code ---------------------*/
 		// constructors
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
+			// initialize attributes
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -232,6 +236,8 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
+		// TODO JH: Avoid collision attr getters/setter <-> user operations
+		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		public void Start(int time_ms) {
 			

@@ -34,7 +34,7 @@ public class PTcpPayload {
 	static public class PTcpPayloadPort extends PortBase {
 		// constructors
 		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -114,7 +114,7 @@ public class PTcpPayload {
 	static public class PTcpPayloadConjPort extends PortBase {
 		// constructors
 		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
