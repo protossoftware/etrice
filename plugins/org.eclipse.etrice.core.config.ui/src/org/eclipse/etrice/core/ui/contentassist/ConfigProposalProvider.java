@@ -23,9 +23,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
+import org.eclipse.etrice.core.config.LiteralArray;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -142,9 +142,9 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	@Override
 	public void complete_STRING(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (model instanceof AttrConfig) {
-			LiteralType type = ConfigUtil.getLiteralType(((AttrConfig) model)
-					.getAttribute());
+		Attribute attr = getAttribute(model);
+		if (attr != null) {
+			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.CHAR)
 				return;
 		}
@@ -156,8 +156,8 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	public void complete_BooleanLiteral(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		String mult = "";
-		if (model instanceof AttrConfig) {
-			Attribute attr = ((AttrConfig) model).getAttribute();
+		Attribute attr = getAttribute(model);
+		if (attr != null) {
 			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
 			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.BOOL)
@@ -166,15 +166,19 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 
 		acceptor.accept(createCompletionProposal("", "Boolean" + mult, null,
 				context));
+		acceptor.accept(createCompletionProposal("true", "true", null,
+				context));
+		acceptor.accept(createCompletionProposal("false", "false", null,
+				context));
 	}
 
 	@Override
 	public void complete_IntLiteral(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		String mult = "";
-		if (model instanceof AttrConfig) {
-			Attribute attr = ((AttrConfig) model).getAttribute();
-			mult = (attr.getSize() > 0) ? "[" + (attr.getSize() + 1) + "]" : "";
+		Attribute attr = getAttribute(model);
+		if (attr != null) {
+			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
 			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.INT && type != LiteralType.REAL)
 				return;
@@ -190,9 +194,9 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	public void complete_RealLiteral(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		String mult = "";
-		if (model instanceof AttrConfig) {
-			Attribute attr = ((AttrConfig) model).getAttribute();
-			mult = (attr.getSize() > 0) ? "[" + (attr.getSize() + 1) + "]" : "";
+		Attribute attr = getAttribute(model);
+		if (attr != null) {
+			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
 			LiteralType type = ConfigUtil.getLiteralType(attr);
 			if (type != LiteralType.REAL)
 				return;
@@ -202,46 +206,68 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				context));
 	}
 
-	private static final String[] noneClassAttributes = new String[] {};
-	private static final String[] noneInstanceAttributes = new String[] {
-			"min", "max" };
-
 	@Override
 	public void completeKeyword(Keyword keyword,
 			ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 
-		if (contentAssistContext.getCurrentModel() instanceof AttrConfig) {
-			AttrConfig config = (AttrConfig) contentAssistContext
-					.getCurrentModel();
-			if (hideAttributeKeyword(config, keyword))
+		EObject model = contentAssistContext.getCurrentModel();
+		if (model instanceof AttrConfig)
+			if (hideKeyword((AttrConfig) model, keyword))
 				return;
-			if (hideBooleanLiteralKeyword(config, keyword))
+		if (model instanceof LiteralArray)
+			if (hideKeyword((LiteralArray) model, keyword))
 				return;
+		if (keyword.getValue().equals("true")
+				|| keyword.getValue().equals("false")) {
+			return;
 		}
 
 		super.completeKeyword(keyword, contentAssistContext, acceptor);
 	}
 
-	private boolean hideBooleanLiteralKeyword(AttrConfig config, Keyword keyword) {
+	private boolean hideKeyword(AttrConfig config, Keyword keyword) {
 		LiteralType type = ConfigUtil.getLiteralType(config.getAttribute());
-		if (type != LiteralType.BOOL)
-			return true;
-
-		return false;
-	}
-
-	private boolean hideAttributeKeyword(AttrConfig config, Keyword keyword) {
-		String[] hideKeywords = new String[0];
-		if (config.eContainer() instanceof ActorClassConfig)
-			hideKeywords = noneClassAttributes;
-		else if (config.eContainer() instanceof ActorInstanceConfig)
-			hideKeywords = noneInstanceAttributes;
-
-		for (String s : hideKeywords)
-			if (s.equalsIgnoreCase(keyword.getValue()))
+		if (keyword.getValue().equals("min")
+				|| keyword.getValue().equals("max")) {
+			if (type != LiteralType.INT && type != LiteralType.REAL)
 				return true;
+		}
+		if(keyword.getValue().equals("Attr")){
+			if(type != null)
+				return true;
+		}
+		if(keyword.getValue().equals("dynamic configuration")){
+			if(config.eContainer() instanceof AttrConfig)
+				return true;
+		}
 
 		return false;
 	}
+
+	private boolean hideKeyword(LiteralArray array, Keyword keyword) {
+		if (keyword.getValue().equals(",")) {
+			if (array.eContainer() instanceof AttrConfig) {
+				Attribute attr = ((AttrConfig) array.eContainer())
+						.getAttribute();
+				if (attr.getSize() <= array.getLiterals().size())
+					return true;
+			}
+		}
+
+		return false;
+	}
+
+	private Attribute getAttribute(EObject o) {
+		if (o == null)
+			return null;
+		if (o instanceof Attribute)
+			return (Attribute) o;
+		if (o instanceof AttrConfig)
+			return ((AttrConfig) o).getAttribute();
+		else
+			return getAttribute(o.eContainer());
+
+	}
+
 }

@@ -51,25 +51,149 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	public class ConfigElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConfigElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cActorClassConfigParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cActorInstanceConfigParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cProtocolClassConfigParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cSubSystemConfigParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cActorClassConfigParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cActorInstanceConfigParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cProtocolClassConfigParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//ConfigElement:
-		//	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+		//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 		public ParserRule getRule() { return rule; }
 
-		//ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig
+		//SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//SubSystemConfig
+		public RuleCall getSubSystemConfigParserRuleCall_0() { return cSubSystemConfigParserRuleCall_0; }
+
 		//ActorClassConfig
-		public RuleCall getActorClassConfigParserRuleCall_0() { return cActorClassConfigParserRuleCall_0; }
+		public RuleCall getActorClassConfigParserRuleCall_1() { return cActorClassConfigParserRuleCall_1; }
 
 		//ActorInstanceConfig
-		public RuleCall getActorInstanceConfigParserRuleCall_1() { return cActorInstanceConfigParserRuleCall_1; }
+		public RuleCall getActorInstanceConfigParserRuleCall_2() { return cActorInstanceConfigParserRuleCall_2; }
 
 		//ProtocolClassConfig
-		public RuleCall getProtocolClassConfigParserRuleCall_2() { return cProtocolClassConfigParserRuleCall_2; }
+		public RuleCall getProtocolClassConfigParserRuleCall_3() { return cProtocolClassConfigParserRuleCall_3; }
+	}
+
+	public class SubSystemConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubSystemConfig");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSubSystemConfigKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSubSystemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cSubSystemSubSystemClassCrossReference_1_0 = (CrossReference)cSubSystemAssignment_1.eContents().get(0);
+		private final RuleCall cSubSystemSubSystemClassIDTerminalRuleCall_1_0_1 = (RuleCall)cSubSystemSubSystemClassCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cDynConfigAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDynConfigDynamicConfigParserRuleCall_3_0 = (RuleCall)cDynConfigAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//SubSystemConfig:
+		//	"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}";
+		public ParserRule getRule() { return rule; }
+
+		//"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}"
+		public Group getGroup() { return cGroup; }
+
+		//"SubSystemConfig"
+		public Keyword getSubSystemConfigKeyword_0() { return cSubSystemConfigKeyword_0; }
+
+		//subSystem=[room::SubSystemClass]
+		public Assignment getSubSystemAssignment_1() { return cSubSystemAssignment_1; }
+
+		//[room::SubSystemClass]
+		public CrossReference getSubSystemSubSystemClassCrossReference_1_0() { return cSubSystemSubSystemClassCrossReference_1_0; }
+
+		//ID
+		public RuleCall getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1() { return cSubSystemSubSystemClassIDTerminalRuleCall_1_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//dynConfig=DynamicConfig
+		public Assignment getDynConfigAssignment_3() { return cDynConfigAssignment_3; }
+
+		//DynamicConfig
+		public RuleCall getDynConfigDynamicConfigParserRuleCall_3_0() { return cDynConfigDynamicConfigParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+
+	public class DynamicConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DynamicConfig");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDynamicConfigurationKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
+		private final Keyword cSourceKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cSourceAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cSourceSTRINGTerminalRuleCall_2_0_1_0 = (RuleCall)cSourceAssignment_2_0_1.eContents().get(0);
+		private final Group cGroup_2_0_2 = (Group)cGroup_2_0.eContents().get(2);
+		private final Keyword cFilePathKeyword_2_0_2_0 = (Keyword)cGroup_2_0_2.eContents().get(0);
+		private final Assignment cFilePathAssignment_2_0_2_1 = (Assignment)cGroup_2_0_2.eContents().get(1);
+		private final RuleCall cFilePathSTRINGTerminalRuleCall_2_0_2_1_0 = (RuleCall)cFilePathAssignment_2_0_2_1.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
+		private final Keyword cPollingRateKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cPollingAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cPollingINTTerminalRuleCall_2_1_1_0 = (RuleCall)cPollingAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//DynamicConfig:
+		//	"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}";
+		public ParserRule getRule() { return rule; }
+
+		//"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}"
+		public Group getGroup() { return cGroup; }
+
+		//"dynamic configuration"
+		public Keyword getDynamicConfigurationKeyword_0() { return cDynamicConfigurationKeyword_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+
+		//"source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT
+		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
+
+		//"source" source=STRING ("file path" filePath=STRING)?
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
+		//"source"
+		public Keyword getSourceKeyword_2_0_0() { return cSourceKeyword_2_0_0; }
+
+		//source=STRING
+		public Assignment getSourceAssignment_2_0_1() { return cSourceAssignment_2_0_1; }
+
+		//STRING
+		public RuleCall getSourceSTRINGTerminalRuleCall_2_0_1_0() { return cSourceSTRINGTerminalRuleCall_2_0_1_0; }
+
+		//("file path" filePath=STRING)?
+		public Group getGroup_2_0_2() { return cGroup_2_0_2; }
+
+		//"file path"
+		public Keyword getFilePathKeyword_2_0_2_0() { return cFilePathKeyword_2_0_2_0; }
+
+		//filePath=STRING
+		public Assignment getFilePathAssignment_2_0_2_1() { return cFilePathAssignment_2_0_2_1; }
+
+		//STRING
+		public RuleCall getFilePathSTRINGTerminalRuleCall_2_0_2_1_0() { return cFilePathSTRINGTerminalRuleCall_2_0_2_1_0; }
+
+		//"polling rate" polling=INT
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//"polling rate"
+		public Keyword getPollingRateKeyword_2_1_0() { return cPollingRateKeyword_2_1_0; }
+
+		//polling=INT
+		public Assignment getPollingAssignment_2_1_1() { return cPollingAssignment_2_1_1; }
+
+		//INT
+		public RuleCall getPollingINTTerminalRuleCall_2_1_1_0() { return cPollingINTTerminalRuleCall_2_1_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class ActorClassConfigElements extends AbstractParserRuleElementFinder {
@@ -121,20 +245,22 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ActorInstanceConfigElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActorInstanceConfig");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cActorInstanceConfigKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cRootAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRootSubSystemClassCrossReference_1_0 = (CrossReference)cRootAssignment_1.eContents().get(0);
-		private final RuleCall cRootSubSystemClassFQNParserRuleCall_1_0_1 = (RuleCall)cRootSubSystemClassCrossReference_1_0.eContents().get(1);
-		private final Keyword cSolidusKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPathAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPathRefPathParserRuleCall_3_0 = (RuleCall)cPathAssignment_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cAttributesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_5_0 = (RuleCall)cAttributesAssignment_5.eContents().get(0);
-		private final Assignment cPortsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cPortsPortInstanceConfigParserRuleCall_6_0 = (RuleCall)cPortsAssignment_6.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
+		private final Keyword cActorInstanceConfigKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cRootAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final CrossReference cRootSubSystemClassCrossReference_0_1_0 = (CrossReference)cRootAssignment_0_1.eContents().get(0);
+		private final RuleCall cRootSubSystemClassFQNParserRuleCall_0_1_0_1 = (RuleCall)cRootSubSystemClassCrossReference_0_1_0.eContents().get(1);
+		private final Keyword cSolidusKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final Assignment cPathAssignment_0_3 = (Assignment)cGroup_0.eContents().get(3);
+		private final RuleCall cPathRefPathParserRuleCall_0_3_0 = (RuleCall)cPathAssignment_0_3.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
+		private final Assignment cAttributesAssignment_0_5 = (Assignment)cGroup_0.eContents().get(5);
+		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_0_5_0 = (RuleCall)cAttributesAssignment_0_5.eContents().get(0);
+		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
+		private final Assignment cPortsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cPortsPortInstanceConfigParserRuleCall_1_0_0 = (RuleCall)cPortsAssignment_1_0.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		/// *
 		//	 * Validation: 
@@ -143,52 +269,58 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * Proposal:
 		//	 * attributes
 		//	 * / ActorInstanceConfig:
-		//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+		//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* &
 		//	ports+=PortInstanceConfig* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+		//"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* &
 		//ports+=PortInstanceConfig* "}"
-		public Group getGroup() { return cGroup; }
+		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+
+		//"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+		public Group getGroup_0() { return cGroup_0; }
 
 		//"ActorInstanceConfig"
-		public Keyword getActorInstanceConfigKeyword_0() { return cActorInstanceConfigKeyword_0; }
+		public Keyword getActorInstanceConfigKeyword_0_0() { return cActorInstanceConfigKeyword_0_0; }
 
 		//root=[room::SubSystemClass|FQN]
-		public Assignment getRootAssignment_1() { return cRootAssignment_1; }
+		public Assignment getRootAssignment_0_1() { return cRootAssignment_0_1; }
 
 		//[room::SubSystemClass|FQN]
-		public CrossReference getRootSubSystemClassCrossReference_1_0() { return cRootSubSystemClassCrossReference_1_0; }
+		public CrossReference getRootSubSystemClassCrossReference_0_1_0() { return cRootSubSystemClassCrossReference_0_1_0; }
 
 		//FQN
-		public RuleCall getRootSubSystemClassFQNParserRuleCall_1_0_1() { return cRootSubSystemClassFQNParserRuleCall_1_0_1; }
+		public RuleCall getRootSubSystemClassFQNParserRuleCall_0_1_0_1() { return cRootSubSystemClassFQNParserRuleCall_0_1_0_1; }
 
 		//"/"
-		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
+		public Keyword getSolidusKeyword_0_2() { return cSolidusKeyword_0_2; }
 
 		//path=RefPath
-		public Assignment getPathAssignment_3() { return cPathAssignment_3; }
+		public Assignment getPathAssignment_0_3() { return cPathAssignment_0_3; }
 
 		//RefPath
-		public RuleCall getPathRefPathParserRuleCall_3_0() { return cPathRefPathParserRuleCall_3_0; }
+		public RuleCall getPathRefPathParserRuleCall_0_3_0() { return cPathRefPathParserRuleCall_0_3_0; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_0_4() { return cLeftCurlyBracketKeyword_0_4; }
 
 		//attributes+=AttrInstanceConfig*
-		public Assignment getAttributesAssignment_5() { return cAttributesAssignment_5; }
+		public Assignment getAttributesAssignment_0_5() { return cAttributesAssignment_0_5; }
 
 		//AttrInstanceConfig
-		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_5_0() { return cAttributesAttrInstanceConfigParserRuleCall_5_0; }
+		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_0_5_0() { return cAttributesAttrInstanceConfigParserRuleCall_0_5_0; }
+
+		//ports+=PortInstanceConfig* "}"
+		public Group getGroup_1() { return cGroup_1; }
 
 		//ports+=PortInstanceConfig*
-		public Assignment getPortsAssignment_6() { return cPortsAssignment_6; }
+		public Assignment getPortsAssignment_1_0() { return cPortsAssignment_1_0; }
 
 		//PortInstanceConfig
-		public RuleCall getPortsPortInstanceConfigParserRuleCall_6_0() { return cPortsPortInstanceConfigParserRuleCall_6_0; }
+		public RuleCall getPortsPortInstanceConfigParserRuleCall_1_0_0() { return cPortsPortInstanceConfigParserRuleCall_1_0_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_1_1() { return cRightCurlyBracketKeyword_1_1; }
 	}
 
 	public class ProtocolClassConfigElements extends AbstractParserRuleElementFinder {
@@ -394,7 +526,9 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_3_1_1_1 = (Keyword)cGroup_3_1_1.eContents().get(1);
 		private final Assignment cMaxAssignment_3_1_1_2 = (Assignment)cGroup_3_1_1.eContents().get(2);
 		private final RuleCall cMaxNumberLiteralParserRuleCall_3_1_1_2_0 = (RuleCall)cMaxAssignment_3_1_1_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cAttributesAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cAttributesAttrClassConfigParserRuleCall_3_2_0 = (RuleCall)cAttributesAssignment_3_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		/// *
 		//	 * Validation:
@@ -405,11 +539,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//	 * 
 		//	 * / AttrClassConfig:
 		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
-		//	max=NumberLiteral)?) "}")?;
+		//	max=NumberLiteral)?) attributes+=AttrClassConfig* "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
-		//max=NumberLiteral)?) "}")?
+		//max=NumberLiteral)?) attributes+=AttrClassConfig* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Attr"
@@ -436,7 +570,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//LiteralArray
 		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
 
-		//("{" (("min" "=" min=NumberLiteral)? & ("max" "=" max=NumberLiteral)?) "}")?
+		//("{" (("min" "=" min=NumberLiteral)? & ("max" "=" max=NumberLiteral)?) attributes+=AttrClassConfig* "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"{"
@@ -475,8 +609,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//NumberLiteral
 		public RuleCall getMaxNumberLiteralParserRuleCall_3_1_1_2_0() { return cMaxNumberLiteralParserRuleCall_3_1_1_2_0; }
 
+		//attributes+=AttrClassConfig*
+		public Assignment getAttributesAssignment_3_2() { return cAttributesAssignment_3_2; }
+
+		//AttrClassConfig
+		public RuleCall getAttributesAttrClassConfigParserRuleCall_3_2_0() { return cAttributesAttrClassConfigParserRuleCall_3_2_0; }
+
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
+		public Keyword getRightCurlyBracketKeyword_3_3() { return cRightCurlyBracketKeyword_3_3; }
 	}
 
 	public class AttrInstanceConfigElements extends AbstractParserRuleElementFinder {
@@ -490,12 +630,27 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final UnorderedGroup cUnorderedGroup_3_1 = (UnorderedGroup)cGroup_3.eContents().get(1);
+		private final Group cGroup_3_1_0 = (Group)cUnorderedGroup_3_1.eContents().get(0);
+		private final Assignment cDynConfigAssignment_3_1_0_0 = (Assignment)cGroup_3_1_0.eContents().get(0);
+		private final Keyword cDynConfigDynamicConfigurationKeyword_3_1_0_0_0 = (Keyword)cDynConfigAssignment_3_1_0_0.eContents().get(0);
+		private final Alternatives cAlternatives_3_1_0_1 = (Alternatives)cGroup_3_1_0.eContents().get(1);
+		private final Assignment cReadOnlyAssignment_3_1_0_1_0 = (Assignment)cAlternatives_3_1_0_1.eContents().get(0);
+		private final Keyword cReadOnlyReadOnlyKeyword_3_1_0_1_0_0 = (Keyword)cReadOnlyAssignment_3_1_0_1_0.eContents().get(0);
+		private final Keyword cReadWriteKeyword_3_1_0_1_1 = (Keyword)cAlternatives_3_1_0_1.eContents().get(1);
+		private final Assignment cAttributesAssignment_3_1_1 = (Assignment)cUnorderedGroup_3_1.eContents().get(1);
+		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_3_1_1_0 = (RuleCall)cAttributesAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrInstanceConfig:
-		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?;
+		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
+		//	(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?
+		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
+		//(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Attr"
@@ -521,6 +676,46 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 		//LiteralArray
 		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
+
+		//("{" ((dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*)
+		//"}")?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
+
+		//(dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*
+		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
+
+		//(dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))?
+		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
+
+		//dynConfig?="dynamic configuration"
+		public Assignment getDynConfigAssignment_3_1_0_0() { return cDynConfigAssignment_3_1_0_0; }
+
+		//"dynamic configuration"
+		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0_0; }
+
+		//readOnly?="read-only" | "read-write"
+		public Alternatives getAlternatives_3_1_0_1() { return cAlternatives_3_1_0_1; }
+
+		//readOnly?="read-only"
+		public Assignment getReadOnlyAssignment_3_1_0_1_0() { return cReadOnlyAssignment_3_1_0_1_0; }
+
+		//"read-only"
+		public Keyword getReadOnlyReadOnlyKeyword_3_1_0_1_0_0() { return cReadOnlyReadOnlyKeyword_3_1_0_1_0_0; }
+
+		//"read-write"
+		public Keyword getReadWriteKeyword_3_1_0_1_1() { return cReadWriteKeyword_3_1_0_1_1; }
+
+		//attributes+=AttrInstanceConfig*
+		public Assignment getAttributesAssignment_3_1_1() { return cAttributesAssignment_3_1_1; }
+
+		//AttrInstanceConfig
+		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_1_1_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_1_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class RefPathElements extends AbstractParserRuleElementFinder {
@@ -684,6 +879,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		////	HZ = 'Hz'|
 		////	KW
 		////;
+		//// LiteralArray = BooleanLiteral+|NumberLiteral+
+		//// LiteralArray = StringLiteral
 		//LiteralArray:
 		//	literals+=Literal ("," literals+=Literal)*;
 		public ParserRule getRule() { return rule; }
@@ -1106,6 +1303,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private ConfigModelElements pConfigModel;
 	private ConfigElementElements pConfigElement;
+	private SubSystemConfigElements pSubSystemConfig;
+	private DynamicConfigElements pDynamicConfig;
 	private ActorClassConfigElements pActorClassConfig;
 	private ActorInstanceConfigElements pActorInstanceConfig;
 	private ProtocolClassConfigElements pProtocolClassConfig;
@@ -1170,13 +1369,33 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConfigElement:
-	//	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+	//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
 		return (pConfigElement != null) ? pConfigElement : (pConfigElement = new ConfigElementElements());
 	}
 	
 	public ParserRule getConfigElementRule() {
 		return getConfigElementAccess().getRule();
+	}
+
+	//SubSystemConfig:
+	//	"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}";
+	public SubSystemConfigElements getSubSystemConfigAccess() {
+		return (pSubSystemConfig != null) ? pSubSystemConfig : (pSubSystemConfig = new SubSystemConfigElements());
+	}
+	
+	public ParserRule getSubSystemConfigRule() {
+		return getSubSystemConfigAccess().getRule();
+	}
+
+	//DynamicConfig:
+	//	"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}";
+	public DynamicConfigElements getDynamicConfigAccess() {
+		return (pDynamicConfig != null) ? pDynamicConfig : (pDynamicConfig = new DynamicConfigElements());
+	}
+	
+	public ParserRule getDynamicConfigRule() {
+		return getDynamicConfigAccess().getRule();
 	}
 
 	/// *
@@ -1199,7 +1418,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	 * Proposal:
 	//	 * attributes
 	//	 * / ActorInstanceConfig:
-	//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig*
+	//	"ActorInstanceConfig" root=[room::SubSystemClass|FQN] "/" path=RefPath "{" attributes+=AttrInstanceConfig* &
 	//	ports+=PortInstanceConfig* "}";
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {
 		return (pActorInstanceConfig != null) ? pActorInstanceConfig : (pActorInstanceConfig = new ActorInstanceConfigElements());
@@ -1264,7 +1483,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	 * 
 	//	 * / AttrClassConfig:
 	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? & ("max" "="
-	//	max=NumberLiteral)?) "}")?;
+	//	max=NumberLiteral)?) attributes+=AttrClassConfig* "}")?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
 		return (pAttrClassConfig != null) ? pAttrClassConfig : (pAttrClassConfig = new AttrClassConfigElements());
 	}
@@ -1274,7 +1493,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrInstanceConfig:
-	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)?;
+	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
+	//	(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
 	}
@@ -1342,6 +1562,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	////	HZ = 'Hz'|
 	////	KW
 	////;
+	//// LiteralArray = BooleanLiteral+|NumberLiteral+
+	//// LiteralArray = StringLiteral
 	//LiteralArray:
 	//	literals+=Literal ("," literals+=Literal)*;
 	public LiteralArrayElements getLiteralArrayAccess() {

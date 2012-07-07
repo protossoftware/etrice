@@ -155,8 +155,11 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		DataType type = attr.getRefType().getType();
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
-
 			checkAttrConfigValue(primitive, config);
+		} else if (type instanceof DataType) {
+			if (config.getValue() != null)
+				error("not allowed",
+						ConfigPackage.eINSTANCE.getAttrConfig_Value());
 		}
 	}
 
@@ -177,7 +180,14 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	@Check
 	public void checkAttrInstanceConfig(AttrInstanceConfig config) {
+		Attribute attr = config.getAttribute();
+		if (attr == null)
+			return;
 
+		if(config.eContainer() instanceof AttrConfig){
+			if(config.isDynConfig())
+				error("only allowed for parent attribute", ConfigPackage.eINSTANCE.getAttrInstanceConfig_DynConfig());
+		}
 	}
 
 	private void checkAttrConfigValue(PrimitiveType primitive, AttrConfig config) {
@@ -265,13 +275,15 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 					if (min != null) {
 						double dMin = ConfigUtil.literalToDouble(min);
 						if (dMin > dValue)
-							error("value is less than minimum", arrayRef,
+							error("value is less than minimum",
+									attrClassConfig.getValue(), arrayRef,
 									values.indexOf(value));
 					}
 					if (max != null) {
 						double dMax = ConfigUtil.literalToDouble(max);
 						if (dMax < dValue)
-							error("value exceeds maximum", arrayRef,
+							error("value exceeds maximum",
+									attrClassConfig.getValue(), arrayRef,
 									values.indexOf(value));
 					}
 				}
@@ -317,7 +329,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	private void checkAttrConfigMax(PrimitiveType primitive,
 			AttrClassConfig config) {
-		NumberLiteral max = config.getMin();
+		NumberLiteral max = config.getMax();
 		if (max == null)
 			return;
 

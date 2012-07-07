@@ -10,6 +10,7 @@ import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.BooleanLiteral;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.LiteralArray;
@@ -19,6 +20,7 @@ import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.services.ConfigGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
@@ -100,6 +102,12 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case ConfigPackage.DYNAMIC_CONFIG:
+				if(context == grammarAccess.getDynamicConfigRule()) {
+					sequence_DynamicConfig(context, (DynamicConfig) semanticObject); 
+					return; 
+				}
+				else break;
 			case ConfigPackage.IMPORT:
 				if(context == grammarAccess.getImportRule()) {
 					sequence_Import(context, (Import) semanticObject); 
@@ -160,6 +168,13 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case ConfigPackage.SUB_SYSTEM_CONFIG:
+				if(context == grammarAccess.getConfigElementRule() ||
+				   context == grammarAccess.getSubSystemConfigRule()) {
+					sequence_SubSystemConfig(context, (SubSystemConfig) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -184,7 +199,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=LiteralArray? (min=NumberLiteral? max=NumberLiteral?)?)
+	 *     (attribute=[Attribute|ID] value=LiteralArray? (min=NumberLiteral? max=NumberLiteral? attributes+=AttrClassConfig*)?)
 	 */
 	protected void sequence_AttrClassConfig(EObject context, AttrClassConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -193,7 +208,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=LiteralArray?)
+	 *     (attribute=[Attribute|ID] value=LiteralArray? ((dynConfig?='dynamic configuration' readOnly?='read-only'?)? attributes+=AttrInstanceConfig*)?)
 	 */
 	protected void sequence_AttrInstanceConfig(EObject context, AttrInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -214,6 +229,15 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	 *     (imports+=Import* configElements+=ConfigElement*)
 	 */
 	protected void sequence_ConfigModel(EObject context, ConfigModel semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (source=STRING filePath=STRING? polling=INT)
+	 */
+	protected void sequence_DynamicConfig(EObject context, DynamicConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -316,6 +340,25 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (subSystem=[SubSystemClass|ID] dynConfig=DynamicConfig)
+	 */
+	protected void sequence_SubSystemConfig(EObject context, SubSystemConfig semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__SUB_SYSTEM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__SUB_SYSTEM));
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__DYN_CONFIG) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__DYN_CONFIG));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1(), semanticObject.getSubSystem());
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_3_0(), semanticObject.getDynConfig());
 		feeder.finish();
 	}
 }

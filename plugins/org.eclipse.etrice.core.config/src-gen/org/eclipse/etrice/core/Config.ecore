@@ -25,6 +25,16 @@
         eType="#//ConfigElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemConfig" eSuperTypes="#//ConfigElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynConfig" eType="#//DynamicConfig"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicConfig">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="polling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorClassConfig" eSuperTypes="#//ConfigElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actor" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
@@ -65,8 +75,15 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="max" eType="#//NumberLiteral"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttrClassConfig" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AttrInstanceConfig" eSuperTypes="#//AttrConfig"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttrInstanceConfig" eSuperTypes="#//AttrConfig">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynConfig" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttrInstanceConfig" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefPath">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refs" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

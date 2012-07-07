@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -65,7 +66,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_AttrConfig_attribute(AttrConfig ctx, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
-		if (ctx.eContainer() instanceof ActorClassConfig)
+		if (ctx.eContainer() instanceof AttrConfig)
+			collectAttributes((AttrConfig) ctx.eContainer(), scopes);
+		else if (ctx.eContainer() instanceof ActorClassConfig)
 			collectAttributes((ActorClassConfig) ctx.eContainer(), scopes);
 		else if (ctx.eContainer() instanceof ActorInstanceConfig)
 			collectAttributes((ActorInstanceConfig) ctx.eContainer(), scopes);
@@ -74,6 +77,17 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 		else if (ctx.eContainer() instanceof PortInstanceConfig)
 			collectAttributes((PortInstanceConfig) ctx.eContainer(), scopes);
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
+	private void collectAttributes(AttrConfig config,
+			List<IEObjectDescription> scopes) {
+		if (config.getAttribute().getRefType().getType() instanceof DataClass) {
+			DataClass dc = (DataClass) config.getAttribute().getRefType()
+					.getType();
+			for (Attribute att : RoomHelpers.getAllAttributes(dc)) {
+				scopes.add(EObjectDescription.create(att.getName(), att));
+			}
+		}
 	}
 
 	private void collectAttributes(ActorClassConfig config,

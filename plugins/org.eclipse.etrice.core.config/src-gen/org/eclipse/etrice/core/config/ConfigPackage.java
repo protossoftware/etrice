@@ -117,6 +117,89 @@ public interface ConfigPackage extends EPackage
   int CONFIG_ELEMENT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl <em>Sub System Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.SubSystemConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getSubSystemConfig()
+   * @generated
+   */
+  int SUB_SYSTEM_CONFIG = 2;
+
+  /**
+   * The feature id for the '<em><b>Sub System</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CONFIG__SUB_SYSTEM = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Dyn Config</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CONFIG__DYN_CONFIG = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Sub System Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl <em>Dynamic Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.DynamicConfigImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getDynamicConfig()
+   * @generated
+   */
+  int DYNAMIC_CONFIG = 3;
+
+  /**
+   * The feature id for the '<em><b>Source</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG__SOURCE = 0;
+
+  /**
+   * The feature id for the '<em><b>File Path</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG__FILE_PATH = 1;
+
+  /**
+   * The feature id for the '<em><b>Polling</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG__POLLING = 2;
+
+  /**
+   * The number of structural features of the '<em>Dynamic Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl <em>Actor Class Config</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -124,7 +207,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getActorClassConfig()
    * @generated
    */
-  int ACTOR_CLASS_CONFIG = 2;
+  int ACTOR_CLASS_CONFIG = 4;
 
   /**
    * The feature id for the '<em><b>Actor</b></em>' reference.
@@ -161,7 +244,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getActorInstanceConfig()
    * @generated
    */
-  int ACTOR_INSTANCE_CONFIG = 3;
+  int ACTOR_INSTANCE_CONFIG = 5;
 
   /**
    * The feature id for the '<em><b>Root</b></em>' reference.
@@ -216,7 +299,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getProtocolClassConfig()
    * @generated
    */
-  int PROTOCOL_CLASS_CONFIG = 4;
+  int PROTOCOL_CLASS_CONFIG = 6;
 
   /**
    * The feature id for the '<em><b>Protocol</b></em>' reference.
@@ -262,7 +345,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortClassConfig()
    * @generated
    */
-  int PORT_CLASS_CONFIG = 5;
+  int PORT_CLASS_CONFIG = 7;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -290,7 +373,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getPortInstanceConfig()
    * @generated
    */
-  int PORT_INSTANCE_CONFIG = 6;
+  int PORT_INSTANCE_CONFIG = 8;
 
   /**
    * The feature id for the '<em><b>Item</b></em>' reference.
@@ -327,7 +410,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrConfig()
    * @generated
    */
-  int ATTR_CONFIG = 7;
+  int ATTR_CONFIG = 9;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -364,7 +447,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrClassConfig()
    * @generated
    */
-  int ATTR_CLASS_CONFIG = 8;
+  int ATTR_CLASS_CONFIG = 10;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -403,13 +486,22 @@ public interface ConfigPackage extends EPackage
   int ATTR_CLASS_CONFIG__MAX = ATTR_CONFIG_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_CLASS_CONFIG__ATTRIBUTES = ATTR_CONFIG_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Attr Class Config</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTR_CLASS_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 2;
+  int ATTR_CLASS_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl <em>Attr Instance Config</em>}' class.
@@ -419,7 +511,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getAttrInstanceConfig()
    * @generated
    */
-  int ATTR_INSTANCE_CONFIG = 9;
+  int ATTR_INSTANCE_CONFIG = 11;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -440,13 +532,40 @@ public interface ConfigPackage extends EPackage
   int ATTR_INSTANCE_CONFIG__VALUE = ATTR_CONFIG__VALUE;
 
   /**
+   * The feature id for the '<em><b>Dyn Config</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG__DYN_CONFIG = ATTR_CONFIG_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Read Only</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG__READ_ONLY = ATTR_CONFIG_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTR_INSTANCE_CONFIG__ATTRIBUTES = ATTR_CONFIG_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Attr Instance Config</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTR_INSTANCE_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 0;
+  int ATTR_INSTANCE_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.
@@ -456,7 +575,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefPath()
    * @generated
    */
-  int REF_PATH = 10;
+  int REF_PATH = 12;
 
   /**
    * The feature id for the '<em><b>Refs</b></em>' attribute list.
@@ -484,7 +603,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 11;
+  int IMPORT = 13;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -521,7 +640,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteralArray()
    * @generated
    */
-  int LITERAL_ARRAY = 12;
+  int LITERAL_ARRAY = 14;
 
   /**
    * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -549,7 +668,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 13;
+  int LITERAL = 15;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -568,7 +687,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 14;
+  int BOOLEAN_LITERAL = 16;
 
   /**
    * The feature id for the '<em><b>Is True</b></em>' attribute.
@@ -596,7 +715,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 15;
+  int NUMBER_LITERAL = 17;
 
   /**
    * The number of structural features of the '<em>Number Literal</em>' class.
@@ -615,7 +734,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRealLiteral()
    * @generated
    */
-  int REAL_LITERAL = 16;
+  int REAL_LITERAL = 18;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -643,7 +762,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 17;
+  int INT_LITERAL = 19;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -671,7 +790,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 18;
+  int STRING_LITERAL = 20;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -733,6 +852,81 @@ public interface ConfigPackage extends EPackage
    * @generated
    */
   EClass getConfigElement();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.SubSystemConfig <em>Sub System Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Sub System Config</em>'.
+   * @see org.eclipse.etrice.core.config.SubSystemConfig
+   * @generated
+   */
+  EClass getSubSystemConfig();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.SubSystemConfig#getSubSystem <em>Sub System</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Sub System</em>'.
+   * @see org.eclipse.etrice.core.config.SubSystemConfig#getSubSystem()
+   * @see #getSubSystemConfig()
+   * @generated
+   */
+  EReference getSubSystemConfig_SubSystem();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.SubSystemConfig#getDynConfig <em>Dyn Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Dyn Config</em>'.
+   * @see org.eclipse.etrice.core.config.SubSystemConfig#getDynConfig()
+   * @see #getSubSystemConfig()
+   * @generated
+   */
+  EReference getSubSystemConfig_DynConfig();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.DynamicConfig <em>Dynamic Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dynamic Config</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig
+   * @generated
+   */
+  EClass getDynamicConfig();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getSource <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Source</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig#getSource()
+   * @see #getDynamicConfig()
+   * @generated
+   */
+  EAttribute getDynamicConfig_Source();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getFilePath <em>File Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>File Path</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig#getFilePath()
+   * @see #getDynamicConfig()
+   * @generated
+   */
+  EAttribute getDynamicConfig_FilePath();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getPolling <em>Polling</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Polling</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig#getPolling()
+   * @see #getDynamicConfig()
+   * @generated
+   */
+  EAttribute getDynamicConfig_Polling();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ActorClassConfig <em>Actor Class Config</em>}'.
@@ -981,6 +1175,17 @@ public interface ConfigPackage extends EPackage
   EReference getAttrClassConfig_Max();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.AttrClassConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.AttrClassConfig#getAttributes()
+   * @see #getAttrClassConfig()
+   * @generated
+   */
+  EReference getAttrClassConfig_Attributes();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.AttrInstanceConfig <em>Attr Instance Config</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -989,6 +1194,39 @@ public interface ConfigPackage extends EPackage
    * @generated
    */
   EClass getAttrInstanceConfig();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.AttrInstanceConfig#isDynConfig <em>Dyn Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Dyn Config</em>'.
+   * @see org.eclipse.etrice.core.config.AttrInstanceConfig#isDynConfig()
+   * @see #getAttrInstanceConfig()
+   * @generated
+   */
+  EAttribute getAttrInstanceConfig_DynConfig();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.AttrInstanceConfig#isReadOnly <em>Read Only</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Read Only</em>'.
+   * @see org.eclipse.etrice.core.config.AttrInstanceConfig#isReadOnly()
+   * @see #getAttrInstanceConfig()
+   * @generated
+   */
+  EAttribute getAttrInstanceConfig_ReadOnly();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.AttrInstanceConfig#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.config.AttrInstanceConfig#getAttributes()
+   * @see #getAttrInstanceConfig()
+   * @generated
+   */
+  EReference getAttrInstanceConfig_Attributes();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.RefPath <em>Ref Path</em>}'.
@@ -1228,6 +1466,66 @@ public interface ConfigPackage extends EPackage
     EClass CONFIG_ELEMENT = eINSTANCE.getConfigElement();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl <em>Sub System Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.SubSystemConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getSubSystemConfig()
+     * @generated
+     */
+    EClass SUB_SYSTEM_CONFIG = eINSTANCE.getSubSystemConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Sub System</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SUB_SYSTEM_CONFIG__SUB_SYSTEM = eINSTANCE.getSubSystemConfig_SubSystem();
+
+    /**
+     * The meta object literal for the '<em><b>Dyn Config</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SUB_SYSTEM_CONFIG__DYN_CONFIG = eINSTANCE.getSubSystemConfig_DynConfig();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl <em>Dynamic Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.DynamicConfigImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getDynamicConfig()
+     * @generated
+     */
+    EClass DYNAMIC_CONFIG = eINSTANCE.getDynamicConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DYNAMIC_CONFIG__SOURCE = eINSTANCE.getDynamicConfig_Source();
+
+    /**
+     * The meta object literal for the '<em><b>File Path</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DYNAMIC_CONFIG__FILE_PATH = eINSTANCE.getDynamicConfig_FilePath();
+
+    /**
+     * The meta object literal for the '<em><b>Polling</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DYNAMIC_CONFIG__POLLING = eINSTANCE.getDynamicConfig_Polling();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl <em>Actor Class Config</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1426,6 +1724,14 @@ public interface ConfigPackage extends EPackage
     EReference ATTR_CLASS_CONFIG__MAX = eINSTANCE.getAttrClassConfig_Max();
 
     /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_CLASS_CONFIG__ATTRIBUTES = eINSTANCE.getAttrClassConfig_Attributes();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl <em>Attr Instance Config</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1434,6 +1740,30 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EClass ATTR_INSTANCE_CONFIG = eINSTANCE.getAttrInstanceConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Dyn Config</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTR_INSTANCE_CONFIG__DYN_CONFIG = eINSTANCE.getAttrInstanceConfig_DynConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Read Only</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTR_INSTANCE_CONFIG__READ_ONLY = eINSTANCE.getAttrInstanceConfig_ReadOnly();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTR_INSTANCE_CONFIG__ATTRIBUTES = eINSTANCE.getAttrInstanceConfig_Attributes();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.

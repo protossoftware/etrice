@@ -90,6 +90,21 @@ public class ConfigSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ConfigPackage.SUB_SYSTEM_CONFIG:
+      {
+        SubSystemConfig subSystemConfig = (SubSystemConfig)theEObject;
+        T result = caseSubSystemConfig(subSystemConfig);
+        if (result == null) result = caseConfigElement(subSystemConfig);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.DYNAMIC_CONFIG:
+      {
+        DynamicConfig dynamicConfig = (DynamicConfig)theEObject;
+        T result = caseDynamicConfig(dynamicConfig);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ConfigPackage.ACTOR_CLASS_CONFIG:
       {
         ActorClassConfig actorClassConfig = (ActorClassConfig)theEObject;
@@ -253,6 +268,38 @@ public class ConfigSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseConfigElement(ConfigElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Sub System Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Sub System Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSubSystemConfig(SubSystemConfig object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dynamic Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dynamic Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDynamicConfig(DynamicConfig object)
   {
     return null;
   }

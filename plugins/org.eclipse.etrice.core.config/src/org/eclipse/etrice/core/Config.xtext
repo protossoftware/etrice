@@ -24,7 +24,19 @@ ConfigModel:
 	configElements+=ConfigElement*;
 
 ConfigElement:
-	ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
+
+SubSystemConfig:
+	'SubSystemConfig' subSystem=[room::SubSystemClass] '{'
+	dynConfig=DynamicConfig
+	'}';
+
+DynamicConfig:
+	'dynamic configuration' '{'
+	(('source' source=STRING
+	('file path' filePath=STRING)?) &
+	('polling rate' polling=INT))
+	'}';
 
 	/*
 	 * Validation:
@@ -44,7 +56,7 @@ ActorClassConfig:
 	 */
 ActorInstanceConfig:
 	'ActorInstanceConfig' root=[room::SubSystemClass|FQN] '/' path=RefPath '{'
-	attributes+=AttrInstanceConfig*
+	attributes+=AttrInstanceConfig* &
 	ports+=PortInstanceConfig*
 	'}';
 
@@ -85,10 +97,14 @@ AttrClassConfig:
 	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
 	(('min' '=' min=NumberLiteral)? &
 	('max' '=' max=NumberLiteral)?)
+	attributes+=AttrClassConfig*
 	'}')?;
 
 AttrInstanceConfig:
-	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)?;
+	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
+	((dynConfig?='dynamic configuration' (readOnly?='read-only' | 'read-write'))? &
+	(attributes+=AttrInstanceConfig*))
+	'}')?;
 
 	/*
 	 * Proposal:
@@ -127,10 +143,9 @@ FQN:
 // LiteralArray = BooleanLiteral+|NumberLiteral+
 // LiteralArray = StringLiteral
 LiteralArray:
-	literals+=Literal (',' literals+=Literal)*
-;
+	literals+=Literal (',' literals+=Literal)*;
 
-// Value Types for Attributes
+	// Value Types for Attributes
 Literal:
 	BooleanLiteral |
 	NumberLiteral |

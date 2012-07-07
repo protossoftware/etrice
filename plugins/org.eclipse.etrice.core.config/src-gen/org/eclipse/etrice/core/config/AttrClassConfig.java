@@ -6,6 +6,7 @@
  */
 package org.eclipse.etrice.core.config;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ package org.eclipse.etrice.core.config;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getMin <em>Min</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getMax <em>Max</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +79,21 @@ public interface AttrClassConfig extends AttrConfig
    * @generated
    */
   void setMax(NumberLiteral value);
+
+  /**
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.AttrClassConfig}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrClassConfig_Attributes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AttrClassConfig> getAttributes();
 
 } // AttrClassConfig
