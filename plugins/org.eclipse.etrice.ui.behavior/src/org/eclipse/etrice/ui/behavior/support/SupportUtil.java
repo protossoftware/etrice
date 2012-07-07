@@ -100,18 +100,19 @@ public class SupportUtil {
 	}
 	
 	public static boolean isInherited(Diagram diag, EObject obj) {
+	
 		if (obj instanceof RefinedState)
 			return true;
 
-		ActorClass parent = getActorClass(diag);
-		while (obj!=null) {
-			if (obj instanceof ActorClass)
-				return obj!=parent;
-			
-			obj = obj.eContainer();
-		}
-		assert(false): "no parent actor class found";
-		return false;
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
+	}
+	
+	public static boolean showAsInherited(Diagram diag, State obj) {
+	
+		if (obj instanceof RefinedState)
+			return true;
+
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
 	}
 
 	public static Diagram getDiagram(GraphicsAlgorithm ga) {

@@ -36,7 +36,7 @@ public class PTcpControl {
 	static public class PTcpControlPort extends PortBase {
 		// constructors
 		public PTcpControlPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpControlPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -125,7 +125,7 @@ public class PTcpControl {
 	static public class PTcpControlConjPort extends PortBase {
 		// constructors
 		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {

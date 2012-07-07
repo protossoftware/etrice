@@ -126,7 +126,27 @@ public class ATcpServer extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	public void setLastError (int lastError) {
+		 this.lastError = lastError;
+	}
+	public int getLastError () {
+		return this.lastError;
+	}
+	public void setPayloadPortReplocation (int payloadPortReplocation) {
+		 this.payloadPortReplocation = payloadPortReplocation;
+	}
+	public int getPayloadPortReplocation () {
+		return this.payloadPortReplocation;
+	}
+	//--------------------- port getters
+	public PTcpControlPort getControlPort (){
+		return this.ControlPort;
+	}
+	public PTcpPayloadPort getPayloadPort (){
+		return this.PayloadPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.util.Pair;
@@ -18,7 +19,8 @@ public class JavaExtensions implements ILanguageExtension {
   private AbstractTransitionChainGenerator chainGenerator;
   
   public String getTypedDataDefinition(final Message m) {
-    String _generateTypedData = this.chainGenerator.generateTypedData(m);
+    VarDecl _data = m.getData();
+    String _generateTypedData = this.chainGenerator.generateTypedData(_data);
     return _generateTypedData;
   }
   
@@ -133,5 +135,13 @@ public class JavaExtensions implements ILanguageExtension {
     String _operator_plus = StringExtensions.operator_plus("\"", s);
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\".toCharArray()");
     return _operator_plus_1;
+  }
+  
+  public String superCall(final String baseClassName, final String method, final String args) {
+    String _operator_plus = StringExtensions.operator_plus("super.", method);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "(");
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, args);
+    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ");");
+    return _operator_plus_3;
   }
 }

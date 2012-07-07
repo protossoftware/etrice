@@ -40,7 +40,7 @@ public class PSocket {
 	static public class PSocketPort extends PortBase {
 		// constructors
 		public PSocketPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PSocketPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -165,7 +165,7 @@ public class PSocket {
 	static public class PSocketConjPort extends PortBase {
 		// constructors
 		public PSocketConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PSocketConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {

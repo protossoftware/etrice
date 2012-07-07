@@ -146,6 +146,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipEntry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ITransitionChainVisitor" instanceTypeName="ITransitionChainVisitor"
       abstract="true" interface="true"/>
@@ -166,9 +167,6 @@
       <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
     </eOperations>
     <eOperations name="hasStateMachine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eParameters name="code" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"/>
-    </eOperations>
     <eOperations name="getTriggerCodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="mif" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf"/>
     </eOperations>
@@ -207,8 +205,19 @@
     <eOperations name="getOrig" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
       <eParameters name="copy" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
+    <eOperations name="getData" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl">
+      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedRefinedState" eSuperTypes="../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SimpleState">
+    <eOperations name="init">
+      <eParameters name="rs" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RefinedState"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inheritedEntry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inheritedExit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inheritedDo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -16,12 +16,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -34,22 +38,35 @@ public class DetailCodeTranslator {
 		int pos = 0;
 	}
 	
-	private ActorClass ac;
 	private ITranslationProvider provider;
-	private HashMap<String, InterfaceItem> name2item;
-	private HashMap<String, Attribute> name2attr;
-	private HashMap<String, Operation> name2op;
+	private HashMap<String, InterfaceItem> name2item = new HashMap<String, InterfaceItem>();
+	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
+	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
 	
 	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider) {
-		this.ac = ac;
+		this((EObject) ac, provider);
+	}
+	
+	public DetailCodeTranslator(ProtocolClass pc, ITranslationProvider provider) {
+		this((EObject) pc, provider);
+	}
+	
+	public DetailCodeTranslator(PortClass pc, ITranslationProvider provider) {
+		this((EObject) pc, provider);
+	}
+	
+	public DetailCodeTranslator(DataClass dc, ITranslationProvider provider) {
+		this((EObject) dc, provider);
+	}
+	
+	private DetailCodeTranslator(EObject container, ITranslationProvider provider) {
 		this.provider = provider;
-		
-		prepare();
+		prepare(container);
 	}
 	
 	public String translateDetailCode(DetailCode code) {
 		if (code==null)
-			return null;
+			return "";
 		
 		// concatenate lines
 		StringBuilder text = new StringBuilder();
@@ -357,24 +374,39 @@ public class DetailCodeTranslator {
 		return Character.isDigit(c) || Character.isLetter(c) || c=='_';
 	}
 
-	private void prepare() {
-		name2item = new HashMap<String, InterfaceItem>();
-		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
-		for (InterfaceItem item : items) {
-			name2item.put(item.getName(), item);
+	private void prepare(EObject container) {
+		if (container instanceof ActorClass) {
+			ActorClass ac = (ActorClass) container;
+
+			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
+			for (InterfaceItem item : items) {
+				name2item.put(item.getName(), item);
+			}
 		}
 
-		name2attr = new HashMap<String, Attribute>();
-		List<Attribute> attributes = RoomHelpers.getAllAttributes(ac);
-		for (Attribute attribute : attributes) {
-			name2attr.put(attribute.getName(), attribute);
-		}
+		List<Attribute> attributes = null;
+		if (container instanceof ActorClass)
+			attributes = RoomHelpers.getAllAttributes((ActorClass) container);
+		else if (container instanceof DataClass)
+			attributes = RoomHelpers.getAllAttributes((DataClass) container);
+		else if (container instanceof PortClass)
+			attributes = ((PortClass) container).getAttributes();
+		if (attributes!=null)
+			for (Attribute attribute : attributes) {
+				name2attr.put(attribute.getName(), attribute);
+			}
 		
-		name2op = new HashMap<String, Operation>();
-		List<Operation> operations = RoomHelpers.getAllOperations(ac);
-		for (Operation operation : operations) {
-			name2op.put(operation.getName(), operation);
-		}
+		List<? extends Operation> operations = null;
+		if (container instanceof ActorClass)
+			operations = RoomHelpers.getAllOperations((ActorClass) container);
+		else if (container instanceof DataClass)
+			operations = RoomHelpers.getAllOperations((DataClass) container);
+		else if (container instanceof PortClass)
+			operations = ((PortClass) container).getOperations();
+		if (operations!=null)
+			for (Operation operation : operations) {
+				name2op.put(operation.getName(), operation);
+			}
 	}
 
 	private String translateTags(String text, DetailCode code) {

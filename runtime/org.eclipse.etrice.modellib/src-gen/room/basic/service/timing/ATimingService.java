@@ -60,7 +60,15 @@ public class ATimingService extends ActorClassBase {
 		timeout = new PTimeoutReplPort(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
 		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PTimeoutReplPort getTimeout (){
+		return this.timeout;
+	}
+	public PTimerReplPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

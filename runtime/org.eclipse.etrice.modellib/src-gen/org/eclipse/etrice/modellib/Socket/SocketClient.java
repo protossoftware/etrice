@@ -43,7 +43,12 @@ public class SocketClient extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PSocketPort getFct (){
+		return this.fct;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
