@@ -11,10 +11,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
@@ -25,16 +23,15 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
-import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
+import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -292,11 +289,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		else {
 			if (node instanceof TrPoint) {
 				if (node instanceof TransitionPoint) {
-					if (node==ac.getNode(((NonInitialTransition)tr).getFrom())) {
-						// self transition
-						result.append(tcv.genReturnState(getStateContext()));
-						return;
-					}
+					// TransitionPoint is final destination of the chain
+					result.append(tcv.genReturnState(getStateContext()));
+					return;
 				}
 				else {
 					assert(out.size()<=1): "TrPoint "+RoomNameProvider.getFullPath(node)
