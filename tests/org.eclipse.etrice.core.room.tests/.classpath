@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.modellib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.modellib.java"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -19,6 +19,23 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.modellib.c ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" 
+			name="eTrice C ModelLib" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>A ROOM Model Library for C with useful services</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.modellib.c" contentURI="contents/org.eclipse.etrice.modellib.c.zip" description="eTrice ModelLib for C"/>
+	  </example>
+	</extension>   
+
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" 
@@ -36,9 +53,9 @@
 	  </example>
 	</extension>   
 
-	<!-- ========= org.eclipse.etrice.modellib ========= -->
+	<!-- ========= org.eclipse.etrice.modellib.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewModelLibWizard" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" 
 			name="eTrice Java ModelLib" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.etrice.core.ui.wizardCategory"
@@ -48,8 +65,8 @@
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.NewModelLibWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.modellib" contentURI="contents/org.eclipse.etrice.modellib.zip" description="eTrice ModelLib for Java"/>
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.modellib.java" contentURI="contents/org.eclipse.etrice.modellib.java.zip" description="eTrice ModelLib for Java"/>
 	  </example>
 	</extension>   
 
