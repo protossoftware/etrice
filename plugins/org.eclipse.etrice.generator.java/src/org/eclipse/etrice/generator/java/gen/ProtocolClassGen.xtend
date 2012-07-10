@@ -36,6 +36,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
+	@Inject extension DataClassGen
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -229,7 +230,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def messageSignatureExplicit(Message m) {
 		var dc = (m.data.refType.type as DataClass)
-		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
+		'''public void «m.name»(«dc.argList»)'''
 	}
 
 	def messageCall(Message m) {
@@ -257,7 +258,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 			«IF m.data!=null && m.data.refType.type instanceof DataClass»
 				«messageSignatureExplicit(m)» {
-					«m.name»(new «m.data.refType.type.name»(«IF (m.data.refType.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.refType.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
+					«m.name»(new «m.data.refType.type.name»(«(m.data.refType.type as DataClass).paramList»));
 				}
 			«ENDIF»
 		'''

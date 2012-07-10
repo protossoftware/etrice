@@ -23,10 +23,10 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.etrice.generator.java.gen.DataClassGen;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -48,6 +48,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private DataClassGen _dataClassGen;
   
   @Inject
   private ILogger logger;
@@ -621,41 +624,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String _name = m.getName();
       _builder.append(_name, "");
       _builder.append("(");
-      {
-        DataClass _base = dc.getBase();
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);
-        if (_operator_notEquals) {
-          DataClass _base_1 = dc.getBase();
-          String _typeName = this._typeHelpers.typeName(_base_1);
-          _builder.append(_typeName, "");
-          _builder.append(" _super, ");
-        }
-      }
-      {
-        EList<Attribute> _attributes = dc.getAttributes();
-        boolean hasAnyElements = false;
-        for(final Attribute a : _attributes) {
-          if (!hasAnyElements) {
-            hasAnyElements = true;
-          } else {
-            _builder.appendImmediate(", ", "");
-          }
-          RefableType _refType_1 = a.getRefType();
-          DataType _type_1 = _refType_1.getType();
-          String _typeName_1 = this._typeHelpers.typeName(_type_1);
-          _builder.append(_typeName_1, "");
-          {
-            int _size = a.getSize();
-            boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
-            if (_operator_greaterThan) {
-              _builder.append("[]");
-            }
-          }
-          _builder.append(" ");
-          String _name_1 = a.getName();
-          _builder.append(_name_1, "");
-        }
-      }
+      String _argList = this._dataClassGen.argList(dc);
+      _builder.append(_argList, "");
       _builder.append(")");
       _xblockexpression = (_builder);
     }
@@ -813,32 +783,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String _name_6 = _type_2.getName();
           _builder.append(_name_6, "	");
           _builder.append("(");
-          {
-            VarDecl _data_7 = m.getData();
-            RefableType _refType_4 = _data_7.getRefType();
-            DataType _type_3 = _refType_4.getType();
-            DataClass _base = ((DataClass) _type_3).getBase();
-            boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_base, null);
-            if (_operator_notEquals_2) {
-              _builder.append("_super, ");
-            }
-          }
-          {
-            VarDecl _data_8 = m.getData();
-            RefableType _refType_5 = _data_8.getRefType();
-            DataType _type_4 = _refType_5.getType();
-            EList<Attribute> _attributes = ((DataClass) _type_4).getAttributes();
-            boolean hasAnyElements = false;
-            for(final Attribute a : _attributes) {
-              if (!hasAnyElements) {
-                hasAnyElements = true;
-              } else {
-                _builder.appendImmediate(", ", "	");
-              }
-              String _name_7 = a.getName();
-              _builder.append(_name_7, "	");
-            }
-          }
+          VarDecl _data_7 = m.getData();
+          RefableType _refType_4 = _data_7.getRefType();
+          DataType _type_3 = _refType_4.getType();
+          String _paramList = this._dataClassGen.paramList(((DataClass) _type_3));
+          _builder.append(_paramList, "	");
           _builder.append("));");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
