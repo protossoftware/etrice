@@ -150,6 +150,25 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			}
 			tcb.chains.add(tc);
 		}
+		
+		/* (non-Javadoc)
+		 * @see java.util.AbstractMap#toString()
+		 */
+		@Override
+		public String toString() {
+			StringBuffer result = new StringBuffer();
+			for (java.util.Map.Entry<Transition, TransitionChainBundle> entry : entrySet()) {
+				result.append("transition "+RoomNameProvider.getFullPath(entry.getKey())+":\n");
+				TransitionChainBundle bundle = entry.getValue();
+				for (TransitionChain tc : bundle.chains) {
+					String data = tc.getData()!=null? " with data "+tc.getData().getRefType().getType().getName() : "";
+					result.append("  chain starting at "+RoomNameProvider.getFullPath(tc.getTransition())+data+"\n");
+				}
+				String data = bundle.commonData!=null? bundle.commonData.getRefType().getType().getName() : "-";
+				result.append("  bundle data "+data+"\n");
+			}
+			return result.toString();
+		}
 	}
 	
 	/**
