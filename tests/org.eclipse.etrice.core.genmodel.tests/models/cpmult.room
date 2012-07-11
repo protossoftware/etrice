@@ -1,0 +1,122 @@
+RoomModel cpmult {
+	import room.basic.types.java.* from "../../org.eclipse.etrice.modellib.java/models/JavaTypes.room"
+
+	SubSystemClass Main {
+		ActorRef appl: CPMult
+	}
+	
+	ActorClass CPMult {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> cp cp0 {
+					triggers {
+						<m1: p0>
+					}
+					action {
+						"// left"
+					}
+				}
+				Transition tr1: state0 -> tp0 of state1 {
+					triggers {
+						<m2: p0>
+					}
+				}
+				Transition tr3: cp cp0 -> state2 {
+					action {
+						"// dflt branch"
+					}
+				}
+				Transition tr4: cp cp0 -> state3 {
+					cond {
+						"data.x>0"
+					}
+					action {
+						"// false branch"
+					}
+				}
+				Transition tr2: tp1 of state1 -> cp cp0 {
+					action {
+						"// right"
+					}
+				}
+				ChoicePoint cp0
+				State state0
+				State state1 {
+					subgraph {
+						Transition tr0: my tp0 -> state0
+						Transition tr1: state0 -> state1 {
+							triggers {
+								<m0: p0>
+							}
+						}
+						Transition tr2: state0 -> my tp1 {
+							triggers {
+								<m1: p0>
+							}
+							action {
+								"//state1/tr2"
+							}
+						}
+						Transition tr3: state1 -> my tp1 {
+							triggers {
+								<m3: p0>
+							}
+							action {
+								"//state1/tr3"
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						State state0
+						State state1
+					}
+				}
+				State state2
+				State state3
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message m0()
+			Message m1(data: DC2)
+			Message m2(data: DC3)
+			Message m3(data: DC4)
+		}
+		outgoing {
+			Message m1()
+		}
+	}
+
+	DataClass DC {
+		Attribute x: int32
+	}
+
+	DataClass DC1 {
+		Attribute a: int32
+		Attribute b: int32
+		Attribute c: int32
+	}
+
+	DataClass DC2 extends DC {
+		Attribute y: int32
+		Attribute r: DC1
+	}
+
+	DataClass DC3 extends DC {
+		Attribute z: int32
+	}
+
+	DataClass DC4 extends DC3 {
+		Attribute w: int32
+	}
+
+}
