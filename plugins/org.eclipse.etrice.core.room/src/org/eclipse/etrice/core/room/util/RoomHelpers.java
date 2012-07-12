@@ -732,7 +732,7 @@ public class RoomHelpers {
 	}
 	
 	public static boolean hasFlatStateMachine(ActorClass ac) {
-		if (ac.getStateMachine()==null)
+		if (isEmpty(ac.getStateMachine()))
 			return false;
 
 		if (!ac.getStateMachine().getTrPoints().isEmpty())
