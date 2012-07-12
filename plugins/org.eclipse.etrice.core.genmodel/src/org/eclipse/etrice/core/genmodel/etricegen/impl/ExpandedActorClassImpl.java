@@ -1136,8 +1136,11 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * @generated NOT
 	 */
 	public TransitionChain getChain(Transition trans) {
+		if (trans==null)
+			return null;
+		
 		TransitionChainBundle tcb = trans2chainBundle.get(trans);
-		if (tcb.chains.isEmpty())
+		if (tcb==null || tcb.chains.isEmpty())
 			return null;
 		
 		return tcb.chains.get(0);
@@ -1149,8 +1152,11 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * @generated NOT
 	 */
 	public VarDecl getData(Transition trans) {
+		if (trans==null)
+			return null;
+		
 		TransitionChainBundle tcb = trans2chainBundle.get(trans);
-		if (tcb.chains.isEmpty())
+		if (tcb==null || tcb.chains.isEmpty())
 			return null;
 		
 		if (tcb.chains.size()==1)
