@@ -31,7 +31,7 @@
 			</fileset>
 		</path>
 
-		<java classname="org.eclipse.etrice.generator.java.Main">
+		<java output="generator_output.txt" classname="org.eclipse.etrice.generator.java.Main">
 			<arg value="./model/org.eclipse.etrice.integration.ChoicePointTest.room"/>
 			<arg value="./model/org.eclipse.etrice.integration.HandlerTest.room"/>
 			<arg value="./model/org.eclipse.etrice.integration.PingPongThreadTest.room"/>
