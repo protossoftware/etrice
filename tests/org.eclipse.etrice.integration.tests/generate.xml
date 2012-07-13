@@ -17,13 +17,13 @@
 			<fileset dir="${target.platform}/plugins/">
 				<include name="org.eclipse.emf.ecore_2.7.0*.jar" />
 				<include name="org.eclipse.emf.common_2.7.0*.jar" />
-				<include name="org.eclipse.xtext_2.1.1*.jar" />
+				<include name="org.eclipse.xtext_2.*.jar" />
 				<include name="com.google.inject_*.jar" />
 				<include name="com.google.guava_9.0.0*.jar" />
 				<include name="org.eclipse.equinox.common_3.6.0*.jar" />
-				<include name="org.eclipse.xtext.util_2.1.1*.jar" />
-				<include name="org.eclipse.xtext.xtend2.lib_2.1.1*.jar" />
-				<include name="org.eclipse.xtext.xbase.lib_2.1.1*.jar" />
+				<include name="org.eclipse.xtext.util_2.*.jar" />
+				<include name="org.eclipse.xtext.xtend2.lib_2.*.jar" />
+				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
 				<include name="org.eclipse.emf.ecore.xmi_2.7.0*.jar" />
 				<include name="org.apache.log4j_1.2.15*.jar" />
 				<include name="org.antlr.runtime_3.2.0*.jar" />
