@@ -40,6 +40,7 @@
 			<arg value="./model/org.eclipse.etrice.integration.ConfigTest.room"/>
 			<arg value="./model/org.eclipse.etrice.integration.ConfigTest.config"/>
 			<arg value="./model/org.eclipse.etrice.integration.tests.room"/>
+			<arg value="-noexit"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
