@@ -45,53 +45,37 @@ public class AbstractExecutionValidator implements IRoomValidator {
 			return;
 
 		ActorClass ac = (ActorClass) object;
-
+		System.out.println("Checking class " + ac.getName());
 		boolean allProtocolsWithSemantics = true;
 		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
 		for (InterfaceItem item : ifItems) {
 			GeneralProtocolClass pc = item.getGeneralProtocol();
 			if (!(pc instanceof ProtocolClass))
 				continue;
-
+			System.out.println("Checking protocolClass " + pc.getName() + " for semantics");
 			if (((ProtocolClass) pc).getSemantics() == null) {
 				allProtocolsWithSemantics = false;
+				System.out.println("Wont execute coz semantics missing for "+ pc.getName());
 				break;
 			}
 		}
 
 		if (allProtocolsWithSemantics) {
 			// begin abstract execution on state machine of expanded actor class
-
+			System.out.println("Reached where all ports have protocols");
 			NullDiagnostician diagnostician = new NullDiagnostician();
 			GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
 			ExpandedActorClass xpac = builder.createExpandedActorClass(ac);
 			
-			if (xpac != null && !diagnostician.isFailed()) {
-				// ActionCodeAnalyzer analyzer = new ActionCodeAnalyzer(ac);
-//				ReachabilityCheck checker = new ReachabilityCheck(xpac);
-//				checker.computeReachability();
-
-				TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
-				while (it.hasNext()) {
-					EObject item = it.next();
-					if (item instanceof StateGraphItem)
-					{
-						StateGraphItem toCheck = (StateGraphItem) item;
-						if (false/*!checker.isReachable(toCheck)*/) {
-							System.out.println("Unreachable "+ toCheck.getName());
-							
-							EObject orig = xpac.getOrig(toCheck);
-							EObject container = orig.eContainer();
-							@SuppressWarnings("unchecked")
-							int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
-							
-							messageAcceptor.acceptWarning(
-									"Unreachable state/point of graph",
-									container, toCheck.eContainingFeature(), idx,
-									"UNREACHABLE", toCheck.getName());
-						}
-					}
-				}
+			if (xpac != null && !diagnostician.isFailed() ) {
+				SemanticsCheck checker  = new SemanticsCheck(xpac);
+				checker.checkSemantics();
+				System.out.println("Final printing of rules : ");
+				checker.printRules();
+				System.out.println("Rule checking for " + xpac.getActorClass().getName() + " is over");
+				
+				//TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
+				
 			}
 		}
 	}
