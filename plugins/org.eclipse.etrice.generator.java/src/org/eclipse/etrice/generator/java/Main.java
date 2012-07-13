@@ -44,9 +44,12 @@ public class Main extends AbstractGenerator {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("This is the eTrice Java generator");
+		/*
 		int ret = createAndRunGenerator(new GeneratorModule(), args);
 		if (isTerminateOnError() && ret!=GENERATOR_OK)
 			System.exit(ret);
+		*/
 	}
 
 	@Inject
