@@ -122,15 +122,20 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule RoomModel ****************
  *
  * RoomModel:
+ * 
  * 	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
+ * 
  * 	externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
+ * 
  * 	actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}";
  *
  **/
 
 // "RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
-// externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass
-// | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}"
+// 
+// externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
+// 
+// actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}"
 protected class RoomModel_Group extends GroupToken {
 	
 	public RoomModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -331,7 +336,9 @@ protected class RoomModel_ImportsAssignment_4 extends AssignmentToken  {
 }
 
 // (primitiveTypes+=PrimitiveType | externalTypes+=ExternalType | dataClasses+=DataClass |
+// 
 // protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
+// 
 // systems+=LogicalSystem)*
 protected class RoomModel_Alternatives_5 extends AlternativesToken {
 
@@ -728,6 +735,7 @@ protected class RoomModel_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule RoomClass ****************
  *
  * RoomClass:
+ * 
  * 	DataType | GeneralProtocolClass | StructureClass;
  *
  **/
@@ -890,6 +898,7 @@ protected class RoomClass_StructureClassParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule StructureClass ****************
  *
  * StructureClass:
+ * 
  * 	ActorContainerClass | LogicalSystem;
  *
  **/
@@ -1006,6 +1015,7 @@ protected class StructureClass_LogicalSystemParserRuleCall_1 extends RuleCallTok
 /************ begin Rule ActorContainerClass ****************
  *
  * ActorContainerClass:
+ * 
  * 	ActorClass | SubSystemClass;
  *
  **/
@@ -1124,6 +1134,7 @@ protected class ActorContainerClass_SubSystemClassParserRuleCall_1 extends RuleC
  * // data class
  * 
  * VarDecl:
+ * 
  * 	name=ID ":" refType=RefableType;
  *
  **/
@@ -1265,6 +1276,7 @@ protected class VarDecl_RefTypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule RefableType ****************
  *
  * RefableType:
+ * 
  * 	type=[DataType|FQN] ref?="ref"?;
  *
  **/
@@ -1376,6 +1388,7 @@ protected class RefableType_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule DataType ****************
  *
  * DataType:
+ * 
  * 	PrimitiveType | ComplexType;
  *
  **/
@@ -1492,6 +1505,7 @@ protected class DataType_ComplexTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule ComplexType ****************
  *
  * ComplexType:
+ * 
  * 	DataClass | ExternalType;
  *
  **/
@@ -1606,12 +1620,15 @@ protected class ComplexType_ExternalTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule PrimitiveType ****************
  *
  * PrimitiveType:
+ * 
  * 	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+ * 
  * 	defaultValueLiteral=STRING docu=Documentation?;
  *
  **/
 
 // "PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+// 
 // defaultValueLiteral=STRING docu=Documentation?
 protected class PrimitiveType_Group extends GroupToken {
 	
@@ -2020,6 +2037,7 @@ protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
 /************ begin Rule ExternalType ****************
  *
  * ExternalType:
+ * 
  * 	"ExternalType" name=ID "->" targetName=FQN docu=Documentation?;
  *
  **/
@@ -2220,14 +2238,19 @@ protected class ExternalType_DocuAssignment_4 extends AssignmentToken  {
  * // TODOHRR: define detail level language?
  * 
  * DataClass:
+ * 
  * 	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+ * 
  * 	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+ * 
  * 	operations+=StandardOperation* "}";
  *
  **/
 
 // "DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+// 
 // userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+// 
 // operations+=StandardOperation* "}"
 protected class DataClass_Group extends GroupToken {
 	
@@ -2919,7 +2942,10 @@ protected class DataClass_RightCurlyBracketKeyword_11 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
+ * 
+ * 	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)?
+ * 
+ * 	docu=Documentation?;
  *
  **/
 
@@ -3312,6 +3338,7 @@ protected class Attribute_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
+ * 
  * 	StandardOperation | PortOperation;
  *
  **/
@@ -3426,12 +3453,15 @@ protected class Operation_PortOperationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StandardOperation ****************
  *
  * StandardOperation:
+ * 
  * 	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+ * 
  * 	returntype=RefableType))? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
 // "Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+// 
 // returntype=RefableType))? docu=Documentation? detailCode=DetailCode
 protected class StandardOperation_Group extends GroupToken {
 	
@@ -3974,12 +4004,15 @@ protected class StandardOperation_DetailCodeAssignment_8 extends AssignmentToken
 /************ begin Rule PortOperation ****************
  *
  * PortOperation:
+ * 
  * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+ * 
  * 	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
 // "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+// 
 // "sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
 protected class PortOperation_Group extends GroupToken {
 	
@@ -4593,6 +4626,7 @@ protected class PortOperation_DetailCodeAssignment_7 extends AssignmentToken  {
 /************ begin Rule GeneralProtocolClass ****************
  *
  * GeneralProtocolClass:
+ * 
  * 	ProtocolClass | CompoundProtocolClass;
  *
  **/
@@ -4707,18 +4741,27 @@ protected class GeneralProtocolClass_CompoundProtocolClassParserRuleCall_1 exten
 /************ begin Rule ProtocolClass ****************
  *
  * ProtocolClass:
+ * 
  * 	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+ * 
  * 	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+ * 
  * 	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+ * 
  * 	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugate" "PortClass" conjugate=PortClass)?
+ * 
  * 	semantics=ProtocolSemantics? "}";
  *
  **/
 
 // commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+// 
 // annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+// 
 // userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+// 
 // "}")? ("regular" "PortClass" regular=PortClass)? ("conjugate" "PortClass" conjugate=PortClass)?
+// 
 // semantics=ProtocolSemantics? "}"
 protected class ProtocolClass_Group extends GroupToken {
 	
@@ -5928,6 +5971,7 @@ protected class ProtocolClass_RightCurlyBracketKeyword_15 extends KeywordToken  
 /************ begin Rule CompoundProtocolClass ****************
  *
  * CompoundProtocolClass:
+ * 
  * 	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol+ "}";
  *
  **/
@@ -6209,6 +6253,7 @@ protected class CompoundProtocolClass_RightCurlyBracketKeyword_6 extends Keyword
 /************ begin Rule SubProtocol ****************
  *
  * SubProtocol:
+ * 
  * 	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
  *
  **/
@@ -6363,6 +6408,7 @@ protected class SubProtocol_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule Message ****************
  *
  * Message:
+ * 
  * 	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
  *
  **/
@@ -6630,12 +6676,15 @@ protected class Message_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule PortClass ****************
  *
  * PortClass:
+ * 
  * 	"{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
+ * 
  * 	msgHandlers+=MessageHandler)+ "}";
  *
  **/
 
 // "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation | msgHandlers+=MessageHandler)+
+// 
 // "}"
 protected class PortClass_Group extends GroupToken {
 	
@@ -6975,6 +7024,7 @@ protected class PortClass_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule MessageHandler ****************
  *
  * MessageHandler:
+ * 
  * 	InMessageHandler | OutMessageHandler;
  *
  **/
@@ -7089,6 +7139,7 @@ protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCal
 /************ begin Rule InMessageHandler ****************
  *
  * InMessageHandler:
+ * 
  * 	"handle" "incoming" msg=[Message] detailCode=DetailCode;
  *
  **/
@@ -7255,6 +7306,7 @@ protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken 
 /************ begin Rule OutMessageHandler ****************
  *
  * OutMessageHandler:
+ * 
  * 	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
  *
  **/
@@ -7421,6 +7473,7 @@ protected class OutMessageHandler_DetailCodeAssignment_3 extends AssignmentToken
 /************ begin Rule ProtocolSemantics ****************
  *
  * ProtocolSemantics:
+ * 
  * 	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
  *
  **/
@@ -7601,6 +7654,7 @@ protected class ProtocolSemantics_RightCurlyBracketKeyword_4 extends KeywordToke
 /************ begin Rule SemanticsRule ****************
  *
  * SemanticsRule:
+ * 
  * 	InSemanticsRule | OutSemanticsRule;
  *
  **/
@@ -7715,12 +7769,15 @@ protected class SemanticsRule_OutSemanticsRuleParserRuleCall_1 extends RuleCallT
 /************ begin Rule InSemanticsRule ****************
  *
  * InSemanticsRule:
+ * 
  * 	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+ * 
  * 	")"))?;
  *
  **/
 
 // "in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+// 
 // ")"))?
 protected class InSemanticsRule_Group extends GroupToken {
 	
@@ -8158,12 +8215,15 @@ protected class InSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends KeywordT
 /************ begin Rule OutSemanticsRule ****************
  *
  * OutSemanticsRule:
- * 	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
- * 	")"))?;
+ * 
+ * 	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+ * 
+ * 	followUps+=SemanticsRule)+ ")"))?;
  *
  **/
 
 // "out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+// 
 // ")"))?
 protected class OutSemanticsRule_Group extends GroupToken {
 	
@@ -8615,23 +8675,36 @@ protected class OutSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends Keyword
  * // since double containment is not supported we decided to define external ports as reference to interface ports
  * 
  * ActorClass:
+ * 
  * 	(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+ * 
  * 	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
+ * 
  * 	("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+ * 
  * 	("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+ * 
  * 	serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+ * 
  * 	bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
+ * 
  * 	behaviorAnnotations+=Annotation* operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
  *
  **/
 
 // (abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-// base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")? ("Structure"
-// structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
-// userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)* serviceImplementations+=ServiceImplementation*
-// strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* "}")?
-// ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-// stateMachine=StateMachine? "}")? "}"
+// 
+// base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
+// 
+// ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+// 
+// ("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+// 
+// serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+// 
+// bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
+// 
+// behaviorAnnotations+=Annotation* operations+=StandardOperation* stateMachine=StateMachine? "}")? "}"
 protected class ActorClass_Group extends GroupToken {
 	
 	public ActorClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9194,8 +9267,11 @@ protected class ActorClass_RightCurlyBracketKeyword_7_4 extends KeywordToken  {
 
 
 // ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+// 
 // ("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+// 
 // serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+// 
 // bindings+=Binding* connections+=LayerConnection* "}")?
 protected class ActorClass_Group_8 extends GroupToken {
 	
@@ -10066,6 +10142,7 @@ protected class ActorClass_RightCurlyBracketKeyword_8_13 extends KeywordToken  {
 
 
 // ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
+// 
 // stateMachine=StateMachine? "}")?
 protected class ActorClass_Group_9 extends GroupToken {
 	
@@ -10384,6 +10461,7 @@ protected class ActorClass_RightCurlyBracketKeyword_10 extends KeywordToken  {
 /************ begin Rule InterfaceItem ****************
  *
  * InterfaceItem:
+ * 
  * 	Port | SAPRef | SPPRef;
  *
  **/
@@ -10536,12 +10614,15 @@ protected class InterfaceItem_SPPRefParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Port ****************
  *
  * Port:
+ * 
  * 	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+ * 
  * 	docu=Documentation?;
  *
  **/
 
 // conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+// 
 // docu=Documentation?
 protected class Port_Group extends GroupToken {
 	
@@ -10808,6 +10889,7 @@ protected class Port_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule ExternalPort ****************
  *
  * ExternalPort:
+ * 
  * 	"external" "Port" ifport=[Port];
  *
  **/
@@ -10928,6 +11010,7 @@ protected class ExternalPort_IfportAssignment_2 extends AssignmentToken  {
 /************ begin Rule SAPRef ****************
  *
  * SAPRef:
+ * 
  * 	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
  *
  **/
@@ -11082,6 +11165,7 @@ protected class SAPRef_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule SPPRef ****************
  *
  * SPPRef:
+ * 
  * 	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
  *
  **/
@@ -11236,6 +11320,7 @@ protected class SPPRef_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule ServiceImplementation ****************
  *
  * ServiceImplementation:
+ * 
  * 	"ServiceImplementation" "of" spp=[SPPRef];
  *
  **/
@@ -11356,12 +11441,15 @@ protected class ServiceImplementation_SppAssignment_2 extends AssignmentToken  {
 /************ begin Rule LogicalSystem ****************
  *
  * LogicalSystem:
+ * 
  * 	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* subSystems+=SubSystemRef* bindings+=Binding*
+ * 
  * 	connections+=LayerConnection* "}";
  *
  **/
 
 // "LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* subSystems+=SubSystemRef* bindings+=Binding*
+// 
 // connections+=LayerConnection* "}"
 protected class LogicalSystem_Group extends GroupToken {
 	
@@ -11742,6 +11830,7 @@ protected class LogicalSystem_RightCurlyBracketKeyword_8 extends KeywordToken  {
 /************ begin Rule ActorContainerRef ****************
  *
  * ActorContainerRef:
+ * 
  * 	SubSystemRef | ActorRef;
  *
  **/
@@ -11856,6 +11945,7 @@ protected class ActorContainerRef_ActorRefParserRuleCall_1 extends RuleCallToken
 /************ begin Rule SubSystemRef ****************
  *
  * SubSystemRef:
+ * 
  * 	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
  *
  **/
@@ -12057,14 +12147,19 @@ protected class SubSystemRef_DocuAssignment_4 extends AssignmentToken  {
 /************ begin Rule SubSystemClass ****************
  *
  * SubSystemClass:
+ * 
  * 	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+ * 
  * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef*
+ * 
  * 	actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* threads+=LogicalThread* "}";
  *
  **/
 
 // "SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+// 
 // ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef*
+// 
 // actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* threads+=LogicalThread* "}"
 protected class SubSystemClass_Group extends GroupToken {
 	
@@ -12904,6 +12999,7 @@ protected class SubSystemClass_RightCurlyBracketKeyword_14 extends KeywordToken 
 /************ begin Rule LogicalThread ****************
  *
  * LogicalThread:
+ * 
  * 	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
  *
  **/
@@ -13260,6 +13356,7 @@ protected class LogicalThread_RightCurlyBracketKeyword_8 extends KeywordToken  {
 /************ begin Rule ActorInstancePath ****************
  *
  * ActorInstancePath:
+ * 
  * 	segments+=ID ("." segments+=ID)*;
  *
  **/
@@ -13420,6 +13517,7 @@ protected class ActorInstancePath_SegmentsAssignment_1_1 extends AssignmentToken
  * // (2) use a notation with 1 to n bindings
  * 
  * Binding:
+ * 
  * 	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
  *
  **/
@@ -13595,6 +13693,7 @@ protected class Binding_Endpoint2Assignment_3 extends AssignmentToken  {
 /************ begin Rule BindingEndPoint ****************
  *
  * BindingEndPoint:
+ * 
  * 	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
  *
  **/
@@ -13836,6 +13935,7 @@ protected class BindingEndPoint_SubAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule LayerConnection ****************
  *
  * LayerConnection:
+ * 
  * 	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
  *
  **/
@@ -14011,6 +14111,7 @@ protected class LayerConnection_ToAssignment_3 extends AssignmentToken  {
 /************ begin Rule SAPoint ****************
  *
  * SAPoint:
+ * 
  * 	RefSAPoint | RelaySAPoint;
  *
  **/
@@ -14331,6 +14432,7 @@ protected class RelaySAPoint_RelayAssignment_1 extends AssignmentToken  {
 /************ begin Rule SPPoint ****************
  *
  * SPPoint:
+ * 
  * 	ref=[ActorContainerRef] "." service=[SPPRef];
  *
  **/
@@ -14466,6 +14568,7 @@ protected class SPPoint_ServiceAssignment_2 extends AssignmentToken  {
 /************ begin Rule ActorRef ****************
  *
  * ActorRef:
+ * 
  * 	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
  *
  **/
@@ -14773,6 +14876,7 @@ protected class ActorRef_DocuAssignment_5 extends AssignmentToken  {
  * // state machine
  * 
  * StateGraphNode:
+ * 
  * 	State | ChoicePoint | TrPoint;
  *
  **/
@@ -14931,6 +15035,7 @@ protected class StateGraphNode_TrPointParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule StateGraphItem ****************
  *
  * StateGraphItem:
+ * 
  * 	StateGraphNode | Transition;
  *
  **/
@@ -15063,6 +15168,7 @@ protected class StateGraphItem_TransitionParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule State ****************
  *
  * State:
+ * 
  * 	SimpleState | RefinedState;
  *
  **/
@@ -15177,6 +15283,7 @@ protected class State_RefinedStateParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StateGraph ****************
  *
  * StateGraph:
+ * 
  * 	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
  *
  **/
@@ -15502,12 +15609,15 @@ protected class StateGraph_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule StateMachine ****************
  *
  * StateMachine returns StateGraph:
- * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
- * 	"}";
+ * 
+ * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint |
+ * 
+ * 	transitions+=Transition)* "}";
  *
  **/
 
 // {StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+// 
 // "}"
 protected class StateMachine_Group extends GroupToken {
 	
@@ -15851,12 +15961,15 @@ protected class StateMachine_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule SimpleState ****************
  *
  * SimpleState:
+ * 
  * 	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+ * 
  * 	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
  *
  **/
 
 // "State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+// 
 // doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?
 protected class SimpleState_Group extends GroupToken {
 	
@@ -15990,6 +16103,7 @@ protected class SimpleState_DocuAssignment_2 extends AssignmentToken  {
 }
 
 // ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph"
+// 
 // subgraph=StateGraph)? "}")?
 protected class SimpleState_Group_3 extends GroupToken {
 	
@@ -16438,12 +16552,15 @@ protected class SimpleState_RightCurlyBracketKeyword_3_5 extends KeywordToken  {
 /************ begin Rule RefinedState ****************
  *
  * RefinedState:
+ * 
  * 	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+ * 
  * 	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
  *
  **/
 
 // "RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)?
+// 
 // ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 protected class RefinedState_Group extends GroupToken {
 	
@@ -17007,6 +17124,7 @@ protected class RefinedState_RightCurlyBracketKeyword_8 extends KeywordToken  {
  * // super() keyword or flag like in Trice
  * 
  * DetailCode:
+ * 
  * 	"{" commands+=STRING+ "}";
  *
  **/
@@ -17125,6 +17243,7 @@ protected class DetailCode_RightCurlyBracketKeyword_2 extends KeywordToken  {
 /************ begin Rule TrPoint ****************
  *
  * TrPoint:
+ * 
  * 	TransitionPoint | EntryPoint | ExitPoint;
  *
  **/
@@ -17277,6 +17396,7 @@ protected class TrPoint_ExitPointParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule TransitionPoint ****************
  *
  * TransitionPoint:
+ * 
  * 	handler?="handler"? "TransitionPoint" name=ID;
  *
  **/
@@ -17406,6 +17526,7 @@ protected class TransitionPoint_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule EntryPoint ****************
  *
  * EntryPoint:
+ * 
  * 	"EntryPoint" name=ID;
  *
  **/
@@ -17501,6 +17622,7 @@ protected class EntryPoint_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExitPoint ****************
  *
  * ExitPoint:
+ * 
  * 	"ExitPoint" name=ID;
  *
  **/
@@ -17596,6 +17718,7 @@ protected class ExitPoint_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ChoicePoint ****************
  *
  * ChoicePoint:
+ * 
  * 	"ChoicePoint" name=ID docu=Documentation?;
  *
  **/
@@ -17738,6 +17861,7 @@ protected class ChoicePoint_DocuAssignment_2 extends AssignmentToken  {
 /************ begin Rule Transition ****************
  *
  * Transition:
+ * 
  * 	InitialTransition | NonInitialTransition;
  *
  **/
@@ -17858,6 +17982,7 @@ protected class Transition_NonInitialTransitionParserRuleCall_1 extends RuleCall
 /************ begin Rule NonInitialTransition ****************
  *
  * NonInitialTransition:
+ * 
  * 	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
  *
  **/
@@ -18012,6 +18137,7 @@ protected class NonInitialTransition_CPBranchTransitionParserRuleCall_2 extends 
 /************ begin Rule TransitionChainStartTransition ****************
  *
  * TransitionChainStartTransition:
+ * 
  * 	TriggeredTransition | GuardedTransition;
  *
  **/
@@ -18126,7 +18252,9 @@ protected class TransitionChainStartTransition_GuardedTransitionParserRuleCall_1
 /************ begin Rule InitialTransition ****************
  *
  * InitialTransition:
+ * 
  * 	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
+ * 
  * 	"}";
  *
  **/
@@ -18518,12 +18646,15 @@ protected class InitialTransition_RightCurlyBracketKeyword_9 extends KeywordToke
 /************ begin Rule ContinuationTransition ****************
  *
  * ContinuationTransition:
+ * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
+ * 
  * 	action=DetailCode)? "}")?;
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
+// 
 // action=DetailCode)? "}")?
 protected class ContinuationTransition_Group extends GroupToken {
 	
@@ -18959,12 +19090,15 @@ protected class ContinuationTransition_RightCurlyBracketKeyword_7_2 extends Keyw
 /************ begin Rule TriggeredTransition ****************
  *
  * TriggeredTransition:
+ * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
+ * 
  * 	triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
+// 
 // triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}"
 protected class TriggeredTransition_Group extends GroupToken {
 	
@@ -19581,12 +19715,15 @@ protected class TriggeredTransition_RightCurlyBracketKeyword_14 extends KeywordT
 /************ begin Rule GuardedTransition ****************
  *
  * GuardedTransition:
+ * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
+ * 
  * 	guard=DetailCode ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
+// 
 // guard=DetailCode ("action" action=DetailCode)? "}"
 protected class GuardedTransition_Group extends GroupToken {
 	
@@ -20066,12 +20203,15 @@ protected class GuardedTransition_RightCurlyBracketKeyword_11 extends KeywordTok
 /************ begin Rule CPBranchTransition ****************
  *
  * CPBranchTransition:
+ * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
+ * 
  * 	condition=DetailCode ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
+// 
 // condition=DetailCode ("action" action=DetailCode)? "}"
 protected class CPBranchTransition_Group extends GroupToken {
 	
@@ -20551,6 +20691,7 @@ protected class CPBranchTransition_RightCurlyBracketKeyword_11 extends KeywordTo
 /************ begin Rule TransitionTerminal ****************
  *
  * TransitionTerminal:
+ * 
  * 	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
  *
  **/
@@ -20741,6 +20882,7 @@ protected class TransitionTerminal_ChoicepointTerminalParserRuleCall_3 extends R
 /************ begin Rule StateTerminal ****************
  *
  * StateTerminal:
+ * 
  * 	state=[State];
  *
  **/
@@ -20789,6 +20931,7 @@ protected class StateTerminal_StateAssignment extends AssignmentToken  {
 /************ begin Rule TrPointTerminal ****************
  *
  * TrPointTerminal:
+ * 
  * 	"my" trPoint=[TrPoint];
  *
  **/
@@ -20887,6 +21030,7 @@ protected class TrPointTerminal_TrPointAssignment_1 extends AssignmentToken  {
 /************ begin Rule SubStateTrPointTerminal ****************
  *
  * SubStateTrPointTerminal:
+ * 
  * 	trPoint=[TrPoint] "of" state=[State];
  *
  **/
@@ -21022,6 +21166,7 @@ protected class SubStateTrPointTerminal_StateAssignment_2 extends AssignmentToke
 /************ begin Rule ChoicepointTerminal ****************
  *
  * ChoicepointTerminal:
+ * 
  * 	"cp" cp=[ChoicePoint];
  *
  **/
@@ -21120,6 +21265,7 @@ protected class ChoicepointTerminal_CpAssignment_1 extends AssignmentToken  {
 /************ begin Rule Trigger ****************
  *
  * Trigger:
+ * 
  * 	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
  *
  **/
@@ -21390,6 +21536,7 @@ protected class Trigger_GreaterThanSignKeyword_4 extends KeywordToken  {
 /************ begin Rule MessageFromIf ****************
  *
  * MessageFromIf:
+ * 
  * 	message=[Message] ":" from=[InterfaceItem];
  *
  **/
@@ -21525,6 +21672,7 @@ protected class MessageFromIf_FromAssignment_2 extends AssignmentToken  {
 /************ begin Rule Guard ****************
  *
  * Guard:
+ * 
  * 	"guard" guard=DetailCode;
  *
  **/
@@ -21636,6 +21784,7 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
  * // general
  * 
  * Documentation:
+ * 
  * 	"[" text+=STRING+ "]";
  *
  **/
@@ -21754,6 +21903,7 @@ protected class Documentation_RightSquareBracketKeyword_2 extends KeywordToken  
 /************ begin Rule Annotation ****************
  *
  * Annotation:
+ * 
  * 	"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
  *
  **/
@@ -22056,6 +22206,7 @@ protected class Annotation_RightParenthesisKeyword_2_3 extends KeywordToken  {
 /************ begin Rule KeyValue ****************
  *
  * KeyValue:
+ * 
  * 	key=ID "=" value=STRING;
  *
  **/
@@ -22221,6 +22372,7 @@ protected class KeyValue_ValueAssignment_2 extends AssignmentToken  {
  * // the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
  * 
  * Import:
+ * 
  * 	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
  *
  **/
