@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.etrice.core.ui.internal.ConfigActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class ConfigExecutableExtensionFactory extends AbstractGuiceAwareExecutab
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.etrice.core.ui.internal.ConfigActivator.getInstance().getBundle();
+		return ConfigActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.etrice.core.ui.internal.ConfigActivator.getInstance().getInjector("org.eclipse.etrice.core.Config");
+		return ConfigActivator.getInstance().getInjector(ConfigActivator.ORG_ECLIPSE_ETRICE_CORE_CONFIG);
 	}
 	
 }
