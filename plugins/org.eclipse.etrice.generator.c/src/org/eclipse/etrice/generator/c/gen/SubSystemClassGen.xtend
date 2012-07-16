@@ -337,7 +337,6 @@ class SubSystemClassGen {
 
 		var dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
 		var recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
-		var sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
 		
 		// compute replicated port offsets		
 		var offsets = new HashMap<InterfaceItemInstance, Integer>()
@@ -380,7 +379,6 @@ class SubSystemClassGen {
 	'''}
 		
 	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
-		var recvMsg = if (pi.peers.empty) "NULL" else ai.actorClass.name+"_receiveMessage"
 		var objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		var idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		

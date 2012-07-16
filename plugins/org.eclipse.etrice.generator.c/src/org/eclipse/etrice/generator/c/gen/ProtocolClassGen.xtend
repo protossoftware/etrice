@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.PrimitiveType
@@ -217,7 +216,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 			«FOR message : messages»
 				«var typeName =message.data.refType.type.typeName»
 				«var refp = if (!(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
-				«var refa = if ((message.data.refType.type instanceof PrimitiveType)) "&" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
 					self->«message.name» = data;
@@ -322,10 +320,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 	def private messageGetterSignature(String className, String messageName, String type) {
 		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
 	}
-
-	def private messageCall(Message m) {'''
-	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
-	'''}
 	
 //	def sendMessage(Message m, boolean conj) {'''
 //	«var dir = if (conj) "IN" else "OUT"»
@@ -341,7 +335,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 	
 	def private genReceiveHandlers(ProtocolClass pc, Boolean conj){
 	var portClassName = pc.getPortClassName(conj)
-	var replPortClassName = pc.getPortClassName(conj, true)
 	
 	'''
 	/* receiver handlers */

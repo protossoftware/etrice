@@ -193,7 +193,7 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 							«FOR portConfig : portConfigs»
-								«var portName = "port"»«var item = portConfig.item»
+								«var item = portConfig.item»
 								«FOR attrConfig : portConfig.attributes»
 									«var a = attrConfig.attribute»
 									«var value = attrConfig.value.stringValue(a)»

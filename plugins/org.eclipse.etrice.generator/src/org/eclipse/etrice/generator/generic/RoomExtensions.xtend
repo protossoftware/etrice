@@ -225,11 +225,11 @@ class RoomExtensions {
 		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
 	}
 
-	def String getPortClassName(ExternalPort p){
+	def dispatch String getPortClassName(ExternalPort p){
 		return p.ifport.getPortClassName()
 	}
 
-	def String getPortClassName(ServiceImplementation svc) {
+	def dispatch String getPortClassName(ServiceImplementation svc) {
 		return svc.spp.protocol.getPortClassName(false, true)
 	}
 

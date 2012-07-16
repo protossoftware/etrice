@@ -14,12 +14,12 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class InstanceDiagramGen implements IRoomGenerator {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -35,34 +35,32 @@ public class InstanceDiagramGen implements IRoomGenerator {
     for (final RoomModel model : _models) {
       {
         String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-        String _operator_plus = StringExtensions.operator_plus(_docGenerationTargetPath, "/images");
-        String path = _operator_plus;
+        String path = (_docGenerationTargetPath + "/images");
         this.fileAccess.setOutputPath(path);
         String file2 = "dot2jpg.bat";
         EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
         for (final SubSystemInstance sc : _subSystemInstances) {
           {
             String _name = sc.getName();
-            String _operator_plus_1 = StringExtensions.operator_plus(_name, "_instanceTree.dot");
-            String file = _operator_plus_1;
-            String _operator_plus_2 = StringExtensions.operator_plus("generating LaTeX documentation: \'", file);
-            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "\' in \'");
-            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, path);
-            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "\'");
-            this.logger.logInfo(_operator_plus_5);
+            String file = (_name + "_instanceTree.dot");
+            String _plus = ("generating LaTeX documentation: \'" + file);
+            String _plus_1 = (_plus + "\' in \'");
+            String _plus_2 = (_plus_1 + path);
+            String _plus_3 = (_plus_2 + "\'");
+            this.logger.logInfo(_plus_3);
             SubSystemClass _subSystemClass = sc.getSubSystemClass();
-            StringConcatenation _generate = this.generate(root, sc, _subSystemClass);
+            CharSequence _generate = this.generate(root, sc, _subSystemClass);
             this.fileAccess.generateFile(file, _generate);
           }
         }
-        StringConcatenation _generate2jpg = this.generate2jpg(root);
+        CharSequence _generate2jpg = this.generate2jpg(root);
         this.fileAccess.generateFile(file2, _generate2jpg);
         this.runDot2Jpg();
       }
     }
   }
   
-  public StringConcatenation generate2jpg(final Root root) {
+  public CharSequence generate2jpg(final Root root) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
@@ -80,7 +78,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public StringConcatenation generate(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  public CharSequence generate(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("digraph ");
     String _name = ssi.getName();
@@ -109,7 +107,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
       EList<ActorInstance> _instances = ssi.getInstances();
       for(final ActorInstance ai : _instances) {
         _builder.append("\t");
-        StringConcatenation _instance = this.instance(ai);
+        CharSequence _instance = this.instance(ai);
         _builder.append(_instance, "	");
         _builder.newLineIfNotEmpty();
       }
@@ -119,7 +117,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public StringConcatenation instance(final ActorInstance ai) {
+  public CharSequence instance(final ActorInstance ai) {
     StringConcatenation _builder = new StringConcatenation();
     EObject _eContainer = ai.eContainer();
     StructureInstance parent = ((StructureInstance) _eContainer);
@@ -148,7 +146,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     {
       EList<ActorInstance> _instances = ai.getInstances();
       for(final ActorInstance sub_ai : _instances) {
-        StringConcatenation _instance = this.instance(sub_ai);
+        CharSequence _instance = this.instance(sub_ai);
         _builder.append(_instance, "");
         _builder.newLineIfNotEmpty();
       }
@@ -162,8 +160,13 @@ public class InstanceDiagramGen implements IRoomGenerator {
       Runtime _runtime = Runtime.getRuntime();
       Process _exec = _runtime.exec("dot2jpg.bat");
       _xtrycatchfinallyexpression = _exec;
-    } catch (final Exception e) {
-      e.printStackTrace();
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        e.printStackTrace();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
     return _xtrycatchfinallyexpression;
   }

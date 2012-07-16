@@ -27,7 +27,6 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 
 
@@ -39,7 +38,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension RoomExtensions roomExt
 	
 	@Inject extension ProcedureHelpers helpers
-	@Inject extension TypeHelpers
 	@Inject extension StateMachineGen stateMachineGen
 	@Inject ILogger logger
 	

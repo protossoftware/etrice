@@ -7,25 +7,23 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class JavaExtensions implements ILanguageExtension {
   @Inject
   private AbstractTransitionChainGenerator chainGenerator;
   
   public String getTypedDataDefinition(final Message m) {
-    String _generateTypedData = this.chainGenerator.generateTypedData(m);
-    return _generateTypedData;
+    return this.chainGenerator.generateTypedData(m);
   }
   
   public String getJavaFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, ".java");
-    return _operator_plus;
+    String _plus = (_name + ".java");
+    return _plus;
   }
   
   public String accessLevelPrivate() {
@@ -61,9 +59,8 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String memberInUse(final String namespace, final String member) {
-    String _operator_plus = StringExtensions.operator_plus(namespace, ".");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, member);
-    return _operator_plus_1;
+    String _plus = (namespace + ".");
+    return (_plus + member);
   }
   
   public boolean usesInheritance() {
@@ -89,7 +86,7 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String booleanConstant(final boolean b) {
-    String _string = ((Boolean)b).toString();
+    String _string = Boolean.valueOf(b).toString();
     return _string;
   }
   
@@ -106,10 +103,10 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
-    String _operator_plus = StringExtensions.operator_plus(type, " ");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "[]");
-    return _operator_plus_2;
+    String _plus = (type + " ");
+    String _plus_1 = (_plus + name);
+    String _plus_2 = (_plus_1 + "[]");
+    return _plus_2;
   }
   
   public String constructorName(final String cls) {
@@ -117,8 +114,8 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String destructorName(final String cls) {
-    String _operator_plus = StringExtensions.operator_plus(cls, "_dtor");
-    return _operator_plus;
+    String _plus = (cls + "_dtor");
+    return _plus;
   }
   
   public String constructorReturnType() {
@@ -130,8 +127,8 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String toCharArrayExpr(final String s) {
-    String _operator_plus = StringExtensions.operator_plus("\"", s);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\".toCharArray()");
-    return _operator_plus_1;
+    String _plus = ("\"" + s);
+    String _plus_1 = (_plus + "\".toCharArray()");
+    return _plus_1;
   }
 }
