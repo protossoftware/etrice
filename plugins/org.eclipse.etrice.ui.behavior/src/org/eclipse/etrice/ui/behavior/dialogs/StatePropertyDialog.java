@@ -7,14 +7,14 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -40,10 +40,13 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 	}
 
 	private State state;
+	private boolean inherited;
 
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s) {
 		super(shell, "Edit State", ac);
 		this.state = s;
+		
+		inherited = RoomHelpers.getActorClass(s)!=ac;
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 	protected void createContent(IManagedForm mform, Composite body,
 			DataBindingContext bindingContext) {
 
-		if (state instanceof SimpleState) {
+		if (state instanceof SimpleState && !inherited) {
 			NameValidator nv = new NameValidator();
 			
 			Text name = createText(body, "&Name:", state, RoomPackage.eINSTANCE.getSimpleState_Name(), nv);
@@ -67,13 +70,20 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			name.selectAll();
 		}
 		else {
-			Text name = mform.getToolkit().createText(body, "Name:", SWT.BORDER);
-			name.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-			name.setEnabled(false);
+			createFixedText(body, "Name:", state.getName(), false);
 		}
 
 		DetailCodeToString m2s = new DetailCodeToString();
 		StringToDetailCode s2m = new StringToDetailCode();
+		
+		if (state instanceof RefinedState)
+		{
+			String code = RoomHelpers.getBaseEntryCode((RefinedState)state);
+			Text entry = createFixedText(body, "Base Entry Code:", code, true);
+			GridData gd = new GridData(GridData.FILL_BOTH);
+			gd.heightHint = 100;
+			entry.setLayoutData(gd);
+		}
 		
 		{
 			Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
@@ -81,6 +91,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
+			entry.setEnabled(!inherited);
 		}
 		
 		{
@@ -89,6 +100,16 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			exit.setLayoutData(gd);
+			exit.setEnabled(!inherited);
+		}
+		
+		if (state instanceof RefinedState)
+		{
+			String code = RoomHelpers.getBaseExitCode((RefinedState)state);
+			Text entry = createFixedText(body, "Base Exit Code:", code, true);
+			GridData gd = new GridData(GridData.FILL_BOTH);
+			gd.heightHint = 100;
+			entry.setLayoutData(gd);
 		}
 		
 		ActorClass ac = RoomHelpers.getActorClass(state);

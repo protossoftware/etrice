@@ -199,7 +199,7 @@ RoomModel room.basic.service.timingC {
 						"getTimeFromTarget(&t);"
 						"while (usedTcbsRoot !=0 ){"
 						"\tif (isTimeGreater(&t,&(usedTcbsRoot->expTime))){"
-						"\t\ttimer[self->usedTcbsRoot->portIdx].timeout();"
+						"\t\ttimer[usedTcbsRoot->portIdx].timeout();"
 						"\t\ttemp=usedTcbsRoot;"
 						"\t\tusedTcbsRoot=usedTcbsRoot->next;"
 						"\t\tif((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){"

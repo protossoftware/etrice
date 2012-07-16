@@ -51,6 +51,7 @@ public class TypeHelpers {
   }
   
   public String getTypedDataDefinition(final Message m) {
-    return this.chainGenerator.generateTypedData(m);
+    VarDecl _data = m.getData();
+    return this.chainGenerator.generateTypedData(_data);
   }
 }

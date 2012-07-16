@@ -21,6 +21,14 @@ import java.io.File
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
+import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
@@ -32,28 +40,21 @@ import org.eclipse.etrice.core.room.MessageHandler
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.RefinedState
-import org.eclipse.etrice.core.room.SimpleState
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.ServiceImplementation
+import org.eclipse.etrice.core.room.SimpleState
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
 import org.eclipse.etrice.core.room.Trigger
-import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
-import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
-import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
-import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
-import org.eclipse.etrice.generator.base.DetailCodeTranslator
 
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import static org.eclipse.etrice.generator.base.CodegenHelpers.*
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class RoomExtensions {
@@ -481,47 +482,41 @@ class RoomExtensions {
 	// TODO. in the following methods handle inheritance language independent and proper
 	
 	def boolean empty(DetailCode dc) {
-		dc==null || dc.commands.empty
+		dc.detailCode==""
 	}
-	
+
 	def boolean hasEntryCode(State s) {
-		!s.entryCode.empty
+		if (!s.entryCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedEntry.empty
+			
+		return false
 	}
 
 	def boolean hasExitCode(State s) {
-		!s.exitCode.empty
+		if (!s.exitCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedExit.empty
+			
+		return false
 	}
 
 	def boolean hasDoCode(State s) {
-		!s.doCode.empty
-	}
-
-	def String getEntryCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			"super."+s.getEntryCodeOperationName()+"();\n"+ac.getCode(s.entryCode)
-		else
-			dct.translateDetailCode(s.entryCode)
-	}
-
-	def String getExitCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			ac.getCode(s.exitCode)+"super."+s.getExitCodeOperationName()+"();\n"
-		else
-			dct.translateDetailCode(s.exitCode)
-	}
-
-	def String getDoCode(ExpandedActorClass ac, State s, DetailCodeTranslator dct) {
-		if (s instanceof RefinedState)
-			ac.getCode(s.doCode)+"super."+s.getDoCodeOperationName()+"();\n"
-		else
-			dct.translateDetailCode(s.doCode)
+		if (!s.doCode.empty)
+			return true
+			
+		if (s instanceof ExpandedRefinedState)
+			return !(s as ExpandedRefinedState).inheritedDo.empty
+			
+		return false
 	}
 	
 	def boolean hasActionCode(Transition t) {
 		t.action!=null && t.action.commands.size>0
-	}
-	def String getActionCode(ExpandedActorClass ac, Transition t, DetailCodeTranslator dct) {
-		dct.translateDetailCode(t.action)
 	}
 	
 	def String getContextId(TransitionChain tc) {

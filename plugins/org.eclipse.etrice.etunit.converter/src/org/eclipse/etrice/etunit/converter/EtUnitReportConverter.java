@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,9 +44,22 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
-	public static final String OPTION_COMBINE = "-combined";
-	public static final String OPTION_ONLY_COMBINE = "-only_combined";
+	private static final String TC_END = "tc end";
+	private static final String TC_FAIL = "tc fail";
+	private static final String TC_START = "tc start";
+	private static final String TS_START = "ts start: ";
+	public static final String ETU_EXTENSION = ".etu";
+	public static final String OPTION_COMBINED = "-combined";
+	public static final String OPTION_ONLY_COMBINED = "-only_combined";
+	public static final String OPTION_TEX_OUTPUT = "-tex";
 
+	private static void printUsage() {
+		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_TEX_OUTPUT+" <tex file>] <*"+ETU_EXTENSION+" files>\n"
+				+"    "+OPTION_COMBINED+" <combined file>: also save a combined result for all tests to the specified file\n"
+				+"    "+OPTION_ONLY_COMBINED+" <combined file>: don't create reports for every single test, only combined one to the specified file\n"
+				+"    "+OPTION_TEX_OUTPUT+" <tex file>: produce tex output to specified file\n"
+			);
+	}
 	/**
 	 * @param args
 	 */
@@ -55,33 +69,62 @@ public class EtUnitReportConverter {
 		boolean combinedResults = false;
 		boolean onlyCombinedResults = false;
 		String combinedFile = null;
+		boolean texOutput = false;
+		String texFile = null;
 		ArrayList<String> files = new ArrayList<String>();
 		for (int i=0; i<args.length; ++i) {
-			if (args[i].equals(OPTION_COMBINE)) {
+			if (args[i].equals(OPTION_COMBINED)) {
 				combinedResults = true;
 				if (++i<args.length) {
 					combinedFile = args[i];
 				}
 				else {
-					System.err.println("Error: "+OPTION_COMBINE+" must be followed by filename");
+					System.err.println("Error: "+OPTION_COMBINED+" must be followed by filename");
+					printUsage();
+					return;
 				}
 			}
-			else if (args[i].equals(OPTION_ONLY_COMBINE)) {
+			else if (args[i].equals(OPTION_ONLY_COMBINED)) {
 				combinedResults = true;
 				onlyCombinedResults = true;
 				if (++i<args.length) {
 					combinedFile = args[i];
 				}
 				else {
-					System.err.println("Error: "+OPTION_ONLY_COMBINE+" must be followed by filename");
+					System.err.println("Error: "+OPTION_ONLY_COMBINED+" must be followed by filename");
+					printUsage();
+					return;
 				}
 			}
+			else if (args[i].equals(OPTION_TEX_OUTPUT)) {
+				texOutput = true;
+				if (++i<args.length) {
+					texFile = args[i];
+				}
+				else {
+					System.err.println("Error: "+OPTION_TEX_OUTPUT+" must be followed by filename");
+					printUsage();
+					return;
+				}
+			}
+			else if (args[i].startsWith("-")) {
+				System.err.println("Error: unknown option "+args[i]);
+				printUsage();
+				return;
+			}
 			else {
-				files.add(args[i]);
+				if (args[i].endsWith(ETU_EXTENSION))
+					files.add(args[i]);
+				else {
+					System.err.println("Error: invalid file name '"+args[i]+"' (only *"+ETU_EXTENSION+" files allowed)");
+					printUsage();
+					return;
+				}
 			}
 		}
 		if (files.isEmpty()) {
 			System.err.println("Error: no reports specified");
+			printUsage();
 			return;
 		}
 		
@@ -102,7 +145,7 @@ public class EtUnitReportConverter {
 			}
 		}
 		
-		if (combinedResults) {
+		if (combinedResults || texOutput) {
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
 			root.setTestsuites(testsuites);
@@ -114,8 +157,14 @@ public class EtUnitReportConverter {
 			
 			computeAndSetInfo(testsuites);
 			
-			File report = new File(combinedFile);
-			saveJUnitReport(root, report, rs);
+			if (combinedResults) {
+				File report = new File(combinedFile);
+				saveJUnitReport(root, report, rs);
+			}
+			if (texOutput) {
+				File report = new File(texFile);
+				saveTexReport(root, report);
+			}
 		}
 	}
 
@@ -135,8 +184,7 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	private static void saveJUnitReport(DocumentRoot root, File report,
-			ResourceSet rs) {
+	private static void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs) {
 		URI uri = URI.createFileURI(report.toString());
 		uri = uri.trimFileExtension();
 		uri = uri.appendFileExtension("xml");
@@ -148,6 +196,54 @@ public class EtUnitReportConverter {
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
+		}
+	}
+
+	private static void saveTexReport(DocumentRoot root, File report) {
+		StringBuilder contents = new StringBuilder();
+
+		contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
+		contents.append("\\newcommand{\\ForAllSuites}{%\n");
+		contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
+		for (TestsuiteType ts : root.getTestsuites().getTestsuite()) {
+			contents.append("    \\setcounter{FailCount}{"+ts.getFailures()+"}%\n");
+			contents.append("    \\renewcommand{\\ForAllTestCases}{%\n");
+			contents.append("        %\\DoCase{name}{time}{status}{msg}{short}{long}%\n");
+			for (TestcaseType tc : ts.getTestcase()) {
+				String status = tc.getFailure()!=null?"fail":"pass";
+				String msg = tc.getFailure()!=null?
+						"expected "+tc.getFailure().getExpected()+" but was "+tc.getFailure().getActual()
+						:
+						"";
+				String combinedName = ts.getName()+tc.getName();
+				contents.append("        \\DoCase{" + tc.getName() + "}{" + tc.getTime() + "}{" + status + "}{" + msg
+						+ "}{\\" + combinedName + "shortdesc}{\\" + combinedName + "longdesc}%\n");
+			}
+			contents.append("    }%\n");
+			int nPassed = ts.getTests()-ts.getFailures();
+			contents.append("    \\DoSuite{"+ts.getName()+"}{"+ts.getTests()+"}{"+nPassed+"}{"+ts.getFailures()+"}{"+ts.getTime()+"}%\n");
+		}
+		contents.append("}%\n");
+		
+		FileWriter fos = null;
+		try {
+			fos = new FileWriter(report);
+			fos.append(contents.toString());
+		} catch (FileNotFoundException e) {
+			System.err.println("Error: file "+report.toString()+" could not be saved ("+e.getMessage()+")");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("Error: file "+report.toString()+" could not be written ("+e.getMessage()+")");
+			e.printStackTrace();
+		}
+		finally {
+			if (fos!=null)
+				try {
+					fos.close();
+				} catch (IOException e) {
+					System.err.println("Error: file "+report.toString()+" could not be closed ("+e.getMessage()+")");
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -180,12 +276,12 @@ public class EtUnitReportConverter {
 			line = bufRead.readLine();
 			++count;
 			while (line!=null) {
-				if (line.startsWith("ts start")) {
+				if (line.startsWith(TS_START)) {
 					currentSuite = EtunitFactory.eINSTANCE.createTestsuiteType();
-					currentSuite.setName(line.substring(9, line.length()));
+					currentSuite.setName(line.substring(TS_START.length(), line.length()));
 					testsuites.getTestsuite().add(currentSuite);
 				}
-				else if (line.startsWith("tc start")) {
+				else if (line.startsWith(TC_START)) {
 					int pos = line.indexOf(':');
 					int id = Integer.parseInt(line.substring(9, pos));
 					TestcaseType tc = EtunitFactory.eINSTANCE.createTestcaseType();
@@ -193,7 +289,7 @@ public class EtUnitReportConverter {
 					id2case.put(id, tc);
 					currentSuite.getTestcase().add(tc);
 				}
-				else if (line.startsWith("tc fail")) {
+				else if (line.startsWith(TC_FAIL)) {
 					int pos = line.indexOf(':');
 					int id = Integer.parseInt(line.substring(8, pos));
 					TestcaseType tc = id2case.get(id);
@@ -222,7 +318,7 @@ public class EtUnitReportConverter {
 					FeatureMapUtil.addText(fail.getMixed(), trace);
 					tc.setFailure(fail);
 				}
-				else if (line.startsWith("tc end")) {
+				else if (line.startsWith(TC_END)) {
 					int pos = line.indexOf(':');
 					int id = Integer.parseInt(line.substring(7, pos));
 					int time = Integer.parseInt(line.substring(pos+2));

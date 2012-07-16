@@ -16,8 +16,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
-import org.eclipse.etrice.generator.base.ITranslationProvider;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
@@ -30,9 +29,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class ProcedureHelpers {
   @Inject
   private ILanguageExtension languageExt;
-  
-  @Inject
-  public ITranslationProvider translator;
   
   @Inject
   private ConfigExtension _configExtension;
@@ -598,47 +594,41 @@ public class ProcedureHelpers {
   }
   
   public CharSequence operationsImplementation(final ActorClass ac) {
-    CharSequence _xblockexpression = null;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*--------------------- operations ---------------------*/");
+    _builder.newLine();
     {
-      this.translator.setActorClass(ac);
-      DetailCodeTranslator _detailCodeTranslator = new DetailCodeTranslator(ac, this.translator);
-      DetailCodeTranslator dct = _detailCodeTranslator;
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/*--------------------- operations ---------------------*/");
-      _builder.newLine();
-      {
-        EList<StandardOperation> _operations = ac.getOperations();
-        for(final StandardOperation operation : _operations) {
-          {
-            boolean _and = false;
-            boolean _usesInheritance = this.languageExt.usesInheritance();
-            if (!_usesInheritance) {
-              _and = false;
-            } else {
-              boolean _isConstructor = RoomHelpers.isConstructor(operation);
-              _and = (_usesInheritance && _isConstructor);
-            }
-            boolean _not = (!_and);
-            if (_not) {
-              String _name = ac.getName();
-              CharSequence _operationSignature = this.operationSignature(operation, _name, false);
-              _builder.append(_operationSignature, "");
-              _builder.append(" {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              DetailCode _detailCode = operation.getDetailCode();
-              String _translateDetailCode = dct.translateDetailCode(_detailCode);
-              _builder.append(_translateDetailCode, "	");
-              _builder.newLineIfNotEmpty();
-              _builder.append("}");
-              _builder.newLine();
-            }
+      EList<StandardOperation> _operations = ac.getOperations();
+      for(final StandardOperation operation : _operations) {
+        {
+          boolean _and = false;
+          boolean _usesInheritance = this.languageExt.usesInheritance();
+          if (!_usesInheritance) {
+            _and = false;
+          } else {
+            boolean _isConstructor = RoomHelpers.isConstructor(operation);
+            _and = (_usesInheritance && _isConstructor);
+          }
+          boolean _not = (!_and);
+          if (_not) {
+            String _name = ac.getName();
+            CharSequence _operationSignature = this.operationSignature(operation, _name, false);
+            _builder.append(_operationSignature, "");
+            _builder.append(" {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            AbstractGenerator _instance = AbstractGenerator.getInstance();
+            DetailCode _detailCode = operation.getDetailCode();
+            String _translatedCode = _instance.getTranslatedCode(_detailCode);
+            _builder.append(_translatedCode, "	");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
           }
         }
       }
-      _xblockexpression = (_builder);
     }
-    return _xblockexpression;
+    return _builder;
   }
   
   private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {

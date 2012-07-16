@@ -24,9 +24,8 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.ComplexType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
-import org.eclipse.etrice.generator.base.DetailCodeTranslator
+import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.etrice.generator.base.ITranslationProvider
 import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.room.RefableType
 
@@ -35,7 +34,6 @@ import org.eclipse.etrice.core.room.RefableType
 class ProcedureHelpers {
 
 	@Inject extension ILanguageExtension languageExt
-	@Inject public ITranslationProvider translator
 	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
@@ -197,15 +195,12 @@ class ProcedureHelpers {
 	}
 
 	def operationsImplementation(ActorClass ac) {
-		translator.setActorClass(ac)
-		var dct = new DetailCodeTranslator(ac, translator)
-		
 	'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : ac.operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
 				«operationSignature(operation, ac.name, false)» {
-					«dct.translateDetailCode(operation.detailCode)»
+					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 				}
 			«ENDIF»
 		«ENDFOR»

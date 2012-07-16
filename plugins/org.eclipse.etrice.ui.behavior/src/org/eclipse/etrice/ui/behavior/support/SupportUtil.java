@@ -100,18 +100,19 @@ public class SupportUtil {
 	}
 	
 	public static boolean isInherited(Diagram diag, EObject obj) {
+	
 		if (obj instanceof RefinedState)
 			return true;
 
-		ActorClass parent = getActorClass(diag);
-		while (obj!=null) {
-			if (obj instanceof ActorClass)
-				return obj!=parent;
-			
-			obj = obj.eContainer();
-		}
-		assert(false): "no parent actor class found";
-		return false;
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
+	}
+	
+	public static boolean showAsInherited(Diagram diag, State obj) {
+	
+		if (obj instanceof RefinedState)
+			return true;
+
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
 	}
 
 	public static Diagram getDiagram(GraphicsAlgorithm ga) {
@@ -148,7 +149,7 @@ public class SupportUtil {
 	 * @return
 	 */
 	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac, ContainerShape targetContainer, IFeatureProvider fp) {
-		sg = getRefinedStateSubGraph((State) sg.eContainer(), ac);
+		sg = getSubGraphOfRefinedStateFor((State) sg.eContainer(), ac);
 		fp.link(targetContainer, sg);
 		return sg;
 	}
@@ -173,7 +174,16 @@ public class SupportUtil {
 	 * @param ac
 	 * @return
 	 */
-	public static StateGraph getRefinedStateSubGraph(State s, ActorClass ac) {
+	public static StateGraph getSubGraphOfRefinedStateFor(State s, ActorClass ac) {
+		RefinedState rs = getRefinedStateFor(s, ac);
+		
+		if (rs.getSubgraph()==null)
+			rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+	
+		return rs.getSubgraph();
+	}
+
+	public static RefinedState getRefinedStateFor(State s, ActorClass ac) {
 		HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
 		for (State st : ac.getStateMachine().getStates()) {
 			if (st instanceof RefinedState)
@@ -208,9 +218,7 @@ public class SupportUtil {
 			rs.setTarget(s);
 			sg.getStates().add(rs);
 		}
-		rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-		
-		return rs.getSubgraph();
+		return rs;
 	}
 
 	/**

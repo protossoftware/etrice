@@ -1,0 +1,446 @@
+RoomModel replact {
+
+	SubSystemClass Main {
+		ActorRef appl1: AC1_Appl 
+		ActorRef appl2: AC2_Appl 
+		ActorRef appl3: AC3_Appl
+		ActorRef appl4: AC4_Appl
+		ActorRef appl5: ApplicationTop
+	}
+
+	// example 1: regular port of replicated actor connected to regular ports
+	ActorClass AC1_Appl {
+		Structure {
+			conjugated Port intp1: PC
+			conjugated Port intp2: PC
+			conjugated Port intp3: PC
+			ActorRef ac1repl [ 3 ]: AC1_1
+			Binding ac1repl.ac1p and intp1
+			Binding intp2 and ac1repl.ac1p
+			Binding intp3 and ac1repl.ac1p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitAnswer {
+					action {
+						"intp1.ping(\"ping from \"+getInstancePath()+\"/intp1\");"
+						"intp2.ping(\"ping from \"+getInstancePath()+\"/intp2\");"
+						"intp3.ping(\"ping from \"+getInstancePath()+\"/intp3\");"
+					}
+				}
+				Transition tr0: WaitAnswer -> WaitAnswer {
+					triggers {
+						<reply: intp1|reply: intp2|reply: intp3>
+					}
+					action {
+						"System.out.println(\"received \"+msg);"
+					}
+				}
+				State WaitAnswer
+			}
+		}
+	}
+		
+	ActorClass AC1_1 {
+		Interface {
+			Port ac1p: PC
+		}
+		Structure {
+			external Port ac1p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitForPing { }
+				Transition tr0: WaitForPing -> WaitForPing {
+					triggers {
+						<ping: ac1p>
+					}
+					action {
+						"ac1p.reply(\"answer from \"+getInstancePath()+\" to \"+msg);"
+					}
+				}
+				State WaitForPing
+			}
+		}
+	}
+	
+	// example 2: regular port of replicated actor connected to regular port of replicated actor
+	ActorClass AC2_Appl {
+		Structure {
+			ActorRef ac1repl [ 3 ]: AC2_1
+			ActorRef ac2repl [ 3 ]: AC2_2
+			Binding ac2repl.ac2p and ac1repl.ac1p
+		}
+	}
+		
+	ActorClass AC2_1 {
+		Interface {
+			Port ac1p: PC
+		}
+		Structure {
+			external Port ac1p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitForPing { }
+				Transition tr0: WaitForPing -> WaitForPing {
+					triggers {
+						<ping: ac1p>
+					}
+					action {
+						"ac1p.reply(\"answer from \"+getInstancePath()+\" to \"+msg);"
+					}
+				}
+				State WaitForPing
+			}
+		}
+	}
+	ActorClass AC2_2 {
+		Interface {
+			conjugated Port ac2p: PC
+		}
+		Structure {
+			external Port ac2p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitAnswer {
+					action {
+						"ac2p.ping(\"ping from \"+getInstancePath());"
+					}
+				}
+				Transition tr0: WaitAnswer -> WaitAnswer {
+					triggers {
+						<reply: ac2p>
+					}
+					action {
+						"System.out.println(\"received \"+msg);"
+					}
+				}
+				State WaitAnswer
+			}
+		}
+	}
+	
+	// example 3: regular port of replicated actor connected to replicated port
+	ActorClass AC3_Appl {
+		Structure {
+			conjugated Port intrep [3]: PC
+			ActorRef ac1repl [ 3 ]: AC3_1
+			Binding ac1repl.ac1p and intrep
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitAnswer {
+					action {
+						"intrep.ping(\"ping from \"+getInstancePath());"
+					}
+				}
+				Transition tr0: WaitAnswer -> WaitAnswer {
+					triggers {
+						<reply: intrep>
+					}
+					action {
+						"System.out.println(\"received \"+msg);"
+					}
+				}
+				State WaitAnswer
+			}
+		}
+	}
+		
+	ActorClass AC3_1 {
+		Interface {
+			Port ac1p: PC
+		}
+		Structure {
+			external Port ac1p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitForPing { }
+				Transition tr0: WaitForPing -> WaitForPing {
+					triggers {
+						<ping: ac1p>
+					}
+					action {
+						"ac1p.reply(\"answer from \"+getInstancePath()+\" to \"+msg);"
+					}
+				}
+				State WaitForPing
+			}
+		}
+	}
+	
+	// example 4: regular port of replicated actor connected to replicated port of replicated actor
+	ActorClass AC4_Appl {
+		Structure {
+			ActorRef ac1repl [ 2 ]: AC4_1
+			ActorRef ac2repl [ 4 ]: AC4_2
+			Binding ac2repl.ac2p and ac1repl.ac1p
+		}
+	}
+		
+	ActorClass AC4_1 {
+		Interface {
+			Port ac1p[2]: PC
+		}
+		Structure {
+			external Port ac1p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitForPing { }
+				Transition tr0: WaitForPing -> WaitForPing {
+					triggers {
+						<ping: ac1p>
+					}
+					action {
+						"ac1p.reply(\"answer from \"+getInstancePath()+\" to \"+msg);"
+					}
+				}
+				State WaitForPing
+			}
+		}
+	}
+	ActorClass AC4_2 {
+		Interface {
+			conjugated Port ac2p: PC
+		}
+		Structure {
+			external Port ac2p
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitAnswer {
+					action {
+						"ac2p.ping(\"ping from \"+getInstancePath());"
+					}
+				}
+				Transition tr0: WaitAnswer -> WaitAnswer {
+					triggers {
+						<reply: ac2p>
+					}
+					action {
+						"System.out.println(\"received \"+msg);"
+					}
+				}
+				State WaitAnswer
+			}
+		}
+	}
+
+	// example 5: regular port of replicated actor connected to replicated port of sub actor
+	ActorClass ApplicationTop {
+		Structure {
+			ActorRef testDriver: TestDriver
+			ActorRef ref0 [ 8 ]: Channel
+			Binding testDriver.testee and ref0.test
+		}
+		Behavior { }
+	}
+
+	ActorClass TestDriver  {
+		Interface {
+			conjugated Port testee [8]: PTestDriver
+		}
+		Structure {
+			external Port testee
+			Attribute counter : int32 = "0"
+			Attribute startTime : int64 
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> TestRunning {
+					action {
+						"testee.start();"
+						"System.out.println(\"Repl=\"+testee.getReplication());"
+						"startTime = System.currentTimeMillis();"
+					}
+				}
+				Transition tr0: TestRunning -> cp cp0 {
+					triggers {
+						<done: testee>
+					}
+					action {
+						"counter++;"
+					}
+				}
+				Transition tr1: cp cp0 -> TestRunning
+				Transition tr2: cp cp0 -> TestDone {
+					cond {
+						"counter>=testee.getReplication()"
+					}
+					action {
+						"long endTime = System.currentTimeMillis();"
+						"//System.out.println(\"time in ms: \"+ (endTime-startTime));"
+					}
+				}
+				ChoicePoint cp0
+				State TestRunning
+				State TestDone {
+					entry {
+						"System.out.println(\"Test Done\");"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Channel {
+		Interface {
+			Port test: PTestDriver
+		}
+		Structure {
+			ActorRef stack : ProtocolStack
+			ActorRef tester : TestSender
+			ActorRef mirror : Mirror
+			Binding tester.stack and stack.sender
+			Binding stack.receiver and mirror.stack
+			Binding test and tester.test
+		}
+		Behavior { }
+	}
+
+	ActorClass TestSender {
+		Interface {
+			conjugated Port stack: CommunicationProtocol
+			Port test: PTestDriver
+		}
+		Structure {
+			external Port stack
+			external Port test
+			Attribute counter : int32 = "0"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> idle { }
+				Transition tr0: SendData -> cp cp0 {
+					triggers {
+						<receivedData: stack>
+					}
+					action {
+						"counter++;"
+					}
+				}
+				Transition tr1: cp cp0 -> SendData
+				Transition tr2: cp cp0 -> TheEnd {
+					cond {
+						"counter>=1"
+					}
+					action {
+						"test.done();"
+					}
+				}
+				Transition tr3: idle -> SendData {
+					triggers {
+						<start: test>
+					}
+					action {
+						"System.out.println(\"Channel Test Start\");"
+					}
+				}
+				ChoicePoint cp0
+				State SendData {
+					entry {
+						"stack.sendData(counter);"
+					}
+				}
+				State TheEnd {
+					entry {
+						"System.out.println(\"Channel Test End\");"
+					}
+				}
+				State idle
+			}
+		}
+	}
+
+	ActorClass Mirror {
+		Interface {
+			Port stack: CommunicationProtocol
+		}
+		Structure {
+			external Port stack
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> mirror { }
+				Transition tr0: mirror -> mirror {
+					triggers {
+						<sendData: stack>
+					}
+					action {
+						"stack.receivedData();"
+					}
+				}
+				State mirror
+			}
+		}
+	}
+
+	ActorClass ProtocolStack{
+		Interface {
+			Port sender: CommunicationProtocol
+			conjugated Port receiver: CommunicationProtocol
+		}
+		Structure {
+			external Port sender
+			external Port receiver
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> idle { }
+				Transition tr0: idle -> WaitingForReceive {
+					triggers {
+						<sendData: sender>
+					}
+					action {
+						"receiver.sendData(data);"
+					}
+				}
+				Transition tr1: WaitingForReceive -> idle {
+					triggers {
+						<receivedData: receiver>
+					}
+					action {
+						"sender.receivedData();"
+					}
+				}
+				State idle
+				State WaitingForReceive
+			}
+		}
+	}
+
+	ProtocolClass PTestDriver {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	ProtocolClass CommunicationProtocol {
+		incoming {
+			Message sendData(data: int32)
+		}
+		outgoing {
+			Message receivedData()
+		}
+	}
+	
+	ProtocolClass PC {
+		incoming {
+			Message ping(msg: string)
+		}
+		outgoing {
+			Message reply(msg: string)
+		}
+	}
+
+	PrimitiveType string: ptCharacter -> String (String) default "\"\""
+	PrimitiveType int32: ptCharacter -> int (Integer) default "0"
+	PrimitiveType int64: ptCharacter -> long (Long) default "0"
+}

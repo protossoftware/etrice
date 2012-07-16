@@ -20,7 +20,9 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
@@ -29,6 +31,7 @@ import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.graphiti.ui.internal.fixed.FixedScaledGraphics;
 import org.eclipse.graphiti.ui.internal.services.GraphitiUiInternal;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -58,18 +61,29 @@ public class DiagramExporter {
 	// code copied from org.eclipse.graphiti.ui.internal.action.SaveImageAction
 	// and org.eclipse.graphiti.ui.internal.util.ui.print.ExportDiagramDialog
 	public static void export(RoomDiagramEditor editor, final String filename) {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String format = store.getString(PreferenceConstants.EXPORT_DIAGRAM_FORMAT);
+		int fmt = SWT.IMAGE_JPEG;
+		if (format.equals(PreferenceConstants.FORMAT_BMP))
+			fmt = SWT.IMAGE_BMP;
+		else if (format.equals(PreferenceConstants.FORMAT_PNG))
+			fmt = SWT.IMAGE_PNG;
+		else if (format.equals(PreferenceConstants.FORMAT_GIF))
+			fmt = SWT.IMAGE_GIF;
+		
+		final String fname = filename+"."+format;
 		GraphicalViewer viewer = (GraphicalViewer) editor.getAdapter(GraphicalViewer.class);
 		Image image = createImage(viewer, 1.0d, 3000.0d);
 		if (image!=null) {
 			try {
-				final byte[] imgData = GraphitiUiInternal.getUiService().createImage(image, SWT.IMAGE_JPEG);
+				final byte[] imgData = GraphitiUiInternal.getUiService().createImage(image, fmt);
 				
 				WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
 					@Override
 					protected void execute(IProgressMonitor monitor) throws CoreException {
 						FileOutputStream outputStream = null;
 						try {
-							outputStream = new FileOutputStream(filename);
+							outputStream = new FileOutputStream(fname);
 							outputStream.write(imgData);
 						} catch (Exception e) {
 							e.printStackTrace();

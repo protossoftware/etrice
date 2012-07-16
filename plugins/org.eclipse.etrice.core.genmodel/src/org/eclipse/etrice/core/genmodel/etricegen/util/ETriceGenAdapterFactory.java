@@ -16,6 +16,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
@@ -28,6 +29,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.StateGraphNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,6 +157,26 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExpandedActorClass(ExpandedActorClass object) {
 				return createExpandedActorClassAdapter();
+			}
+			@Override
+			public Adapter caseExpandedRefinedState(ExpandedRefinedState object) {
+				return createExpandedRefinedStateAdapter();
+			}
+			@Override
+			public Adapter caseStateGraphItem(StateGraphItem object) {
+				return createStateGraphItemAdapter();
+			}
+			@Override
+			public Adapter caseStateGraphNode(StateGraphNode object) {
+				return createStateGraphNodeAdapter();
+			}
+			@Override
+			public Adapter caseState(State object) {
+				return createStateAdapter();
+			}
+			@Override
+			public Adapter caseSimpleState(SimpleState object) {
+				return createSimpleStateAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -408,6 +433,76 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpandedActorClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState <em>Expanded Refined State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
+	 * @generated
+	 */
+	public Adapter createExpandedRefinedStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StateGraphItem <em>State Graph Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.StateGraphItem
+	 * @generated
+	 */
+	public Adapter createStateGraphItemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.StateGraphNode <em>State Graph Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.StateGraphNode
+	 * @generated
+	 */
+	public Adapter createStateGraphNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.State <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.State
+	 * @generated
+	 */
+	public Adapter createStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.room.SimpleState
+	 * @generated
+	 */
+	public Adapter createSimpleStateAdapter() {
 		return null;
 	}
 

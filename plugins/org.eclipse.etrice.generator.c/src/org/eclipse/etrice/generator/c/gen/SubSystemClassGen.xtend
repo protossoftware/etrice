@@ -352,7 +352,7 @@ class SubSystemClassGen {
 		«IF haveReplSubPorts»
 			static const etReplSubPort «replSubPortsArray»[«offset»] = {
 				/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-				«FOR pi : replPorts SEPARATOR ","»
+				«FOR pi : replPorts.filter(e|!e.peers.empty) SEPARATOR ","»
 					«genReplSubPortInitializers(root, ai, pi)»
 				«ENDFOR»
 			};

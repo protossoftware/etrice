@@ -187,6 +187,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="followUps" upperBound="-1"
         eType="#//SemanticsRule" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InSemanticsRule" eSuperTypes="#//SemanticsRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutSemanticsRule" eSuperTypes="#//SemanticsRule"/>
   <eClassifiers xsi:type="ecore:EEnum" name="ActorCommunicationType">
     <eLiterals name="EVENT_DRIVEN" literal="eventdriven"/>
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>

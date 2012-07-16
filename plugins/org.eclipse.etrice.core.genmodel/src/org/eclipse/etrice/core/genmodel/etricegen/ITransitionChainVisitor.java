@@ -12,7 +12,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
 
 public interface ITransitionChainVisitor {
-	String genTypedData();
+	String genTypedData(TransitionChain tc);
 	String genActionOperationCall(Transition tr);
 	String genEntryOperationCall(State state);
 	String genExitOperationCall(State state);

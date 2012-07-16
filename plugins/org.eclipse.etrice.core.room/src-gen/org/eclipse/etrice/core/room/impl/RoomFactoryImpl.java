@@ -95,6 +95,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.OUT_MESSAGE_HANDLER: return createOutMessageHandler();
       case RoomPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
       case RoomPackage.SEMANTICS_RULE: return createSemanticsRule();
+      case RoomPackage.IN_SEMANTICS_RULE: return createInSemanticsRule();
+      case RoomPackage.OUT_SEMANTICS_RULE: return createOutSemanticsRule();
       case RoomPackage.ACTOR_CLASS: return createActorClass();
       case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
       case RoomPackage.PORT: return createPort();
@@ -479,6 +481,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     SemanticsRuleImpl semanticsRule = new SemanticsRuleImpl();
     return semanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InSemanticsRule createInSemanticsRule()
+  {
+    InSemanticsRuleImpl inSemanticsRule = new InSemanticsRuleImpl();
+    return inSemanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutSemanticsRule createOutSemanticsRule()
+  {
+    OutSemanticsRuleImpl outSemanticsRule = new OutSemanticsRuleImpl();
+    return outSemanticsRule;
   }
 
   /**

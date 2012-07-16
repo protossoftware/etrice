@@ -23,4 +23,17 @@ public class PreferenceConstants extends org.eclipse.etrice.core.ui.editor.Prefe
 	public static final String VER_GRID_UNIT = "VerGridUnit";
 	public static final String CONFIRM_DELETE = "ConfirmDelete";
 	public static final String SAVE_DIAG_ON_FOCUS_LOST = "SaveDiagOnFocusLost";
+	public static final String EXPORT_DIAGRAM_PATH = "ExportDiagramPath";
+	public static final String EXPORT_DIAGRAM_FORMAT = "ExportDiagramFormat";
+	public static final String EXPORT_DIAGRAM_PATH_RELATIVE_TO = "ExportDiagramPathRelativeTo";
+	
+	// possible values for EXPORT_DIAGRAM_PATH_RELATIVE_TO
+	public static final String PATH_REL_TO_PROJECT = "project";
+	public static final String PATH_REL_TO_MODEL = "model";
+	
+	// possible values for EXPORT_DIAGRAM_FORMAT
+	public static final String FORMAT_BMP = "bmp";
+	public static final String FORMAT_JPG = "jpg";
+	public static final String FORMAT_PNG = "png";
+	public static final String FORMAT_GIF = "gif";
 }

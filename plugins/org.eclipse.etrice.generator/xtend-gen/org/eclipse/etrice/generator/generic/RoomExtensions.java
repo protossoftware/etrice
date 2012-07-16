@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
@@ -32,7 +33,6 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -48,8 +48,8 @@ import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -799,91 +799,54 @@ public class RoomExtensions {
   }
   
   public boolean empty(final DetailCode dc) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(dc, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      EList<String> _commands = dc.getCommands();
-      boolean _isEmpty = _commands.isEmpty();
-      _or = (_equals || _isEmpty);
-    }
-    return _or;
+    String _detailCode = RoomHelpers.getDetailCode(dc);
+    boolean _equals = Objects.equal(_detailCode, "");
+    return _equals;
   }
   
   public boolean hasEntryCode(final State s) {
     DetailCode _entryCode = s.getEntryCode();
     boolean _empty = this.empty(_entryCode);
     boolean _not = (!_empty);
-    return _not;
+    if (_not) {
+      return true;
+    }
+    if ((s instanceof ExpandedRefinedState)) {
+      String _inheritedEntry = ((ExpandedRefinedState) s).getInheritedEntry();
+      boolean _isEmpty = _inheritedEntry.isEmpty();
+      return (!_isEmpty);
+    }
+    return false;
   }
   
   public boolean hasExitCode(final State s) {
     DetailCode _exitCode = s.getExitCode();
     boolean _empty = this.empty(_exitCode);
     boolean _not = (!_empty);
-    return _not;
+    if (_not) {
+      return true;
+    }
+    if ((s instanceof ExpandedRefinedState)) {
+      String _inheritedExit = ((ExpandedRefinedState) s).getInheritedExit();
+      boolean _isEmpty = _inheritedExit.isEmpty();
+      return (!_isEmpty);
+    }
+    return false;
   }
   
   public boolean hasDoCode(final State s) {
     DetailCode _doCode = s.getDoCode();
     boolean _empty = this.empty(_doCode);
     boolean _not = (!_empty);
-    return _not;
-  }
-  
-  public String getEntryCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
-      String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(s);
-      String _plus = ("super." + _entryCodeOperationName);
-      String _plus_1 = (_plus + "();\n");
-      DetailCode _entryCode = s.getEntryCode();
-      String _code = ac.getCode(_entryCode);
-      String _plus_2 = (_plus_1 + _code);
-      _xifexpression = _plus_2;
-    } else {
-      DetailCode _entryCode_1 = s.getEntryCode();
-      String _translateDetailCode = dct.translateDetailCode(_entryCode_1);
-      _xifexpression = _translateDetailCode;
+    if (_not) {
+      return true;
     }
-    return _xifexpression;
-  }
-  
-  public String getExitCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
-      DetailCode _exitCode = s.getExitCode();
-      String _code = ac.getCode(_exitCode);
-      String _plus = (_code + "super.");
-      String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(s);
-      String _plus_1 = (_plus + _exitCodeOperationName);
-      String _plus_2 = (_plus_1 + "();\n");
-      _xifexpression = _plus_2;
-    } else {
-      DetailCode _exitCode_1 = s.getExitCode();
-      String _translateDetailCode = dct.translateDetailCode(_exitCode_1);
-      _xifexpression = _translateDetailCode;
+    if ((s instanceof ExpandedRefinedState)) {
+      String _inheritedDo = ((ExpandedRefinedState) s).getInheritedDo();
+      boolean _isEmpty = _inheritedDo.isEmpty();
+      return (!_isEmpty);
     }
-    return _xifexpression;
-  }
-  
-  public String getDoCode(final ExpandedActorClass ac, final State s, final DetailCodeTranslator dct) {
-    String _xifexpression = null;
-    if ((s instanceof RefinedState)) {
-      DetailCode _doCode = s.getDoCode();
-      String _code = ac.getCode(_doCode);
-      String _plus = (_code + "super.");
-      String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(s);
-      String _plus_1 = (_plus + _doCodeOperationName);
-      String _plus_2 = (_plus_1 + "();\n");
-      _xifexpression = _plus_2;
-    } else {
-      DetailCode _doCode_1 = s.getDoCode();
-      String _translateDetailCode = dct.translateDetailCode(_doCode_1);
-      _xifexpression = _translateDetailCode;
-    }
-    return _xifexpression;
+    return false;
   }
   
   public boolean hasActionCode(final Transition t) {
@@ -900,12 +863,6 @@ public class RoomExtensions {
       _and = (_notEquals && _greaterThan);
     }
     return _and;
-  }
-  
-  public String getActionCode(final ExpandedActorClass ac, final Transition t, final DetailCodeTranslator dct) {
-    DetailCode _action = t.getAction();
-    String _translateDetailCode = dct.translateDetailCode(_action);
-    return _translateDetailCode;
   }
   
   public String getContextId(final TransitionChain tc) {

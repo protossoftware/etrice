@@ -1009,8 +1009,17 @@ public class SubSystemClassGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
+            final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+                public Boolean apply(final InterfaceItemInstance e) {
+                  EList<InterfaceItemInstance> _peers = e.getPeers();
+                  boolean _isEmpty = _peers.isEmpty();
+                  boolean _not = (!_isEmpty);
+                  return Boolean.valueOf(_not);
+                }
+              };
+            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_6);
             boolean _hasElements = false;
-            for(final InterfaceItemInstance pi : replPorts) {
+            for(final InterfaceItemInstance pi : _filter_2) {
               if (!_hasElements) {
                 _hasElements = true;
               } else {

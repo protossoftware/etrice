@@ -12,26 +12,34 @@
 
 package org.eclipse.etrice.ui.commands.handlers;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorExporter;
+import org.eclipse.etrice.ui.common.Activator;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.structure.editor.StructureExporter;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
@@ -63,12 +71,15 @@ public class ExportDiagramsHandler extends AbstractHandler {
 
 	@Inject
 	protected IResourceValidator resourceValidator;
+	private IPreferenceStore store;
 
 	public ExportDiagramsHandler() {
 		super();
 		
 		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
+		
+		this.store = Activator.getDefault().getPreferenceStore();
 	}
 
 	// TODO: code copied from org.eclipse.etrice.ui.commands.handlers.AbstractEditHandler - refactor
@@ -108,26 +119,68 @@ public class ExportDiagramsHandler extends AbstractHandler {
 	}
 
 	protected void exportDiagrams(RoomModel model, IPath modelPath, Shell shell) {
-//		IProject project = ResourcesPlugin.getWorkspace().getRoot().getFile(modelPath).getProject();
 		IContainer container = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(modelPath.removeLastSegments(1));
-		IProject project = container.getProject();
-		IFolder file = project.getFolder("doc-gen/images");
-		if (file!=null) {
-			String folder = file.getLocation().toOSString();
+		String relPath = store.getString(PreferenceConstants.EXPORT_DIAGRAM_PATH);
+		boolean projectRelative = PreferenceConstants.PATH_REL_TO_PROJECT.equals(
+				store.getString(PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO));
 		
-			for (ActorClass ac : model.getActorClasses()) {
-				if (ac.getStateMachine()!=null)
-					BehaviorExporter.export(ac, folder);
-				
-				StructureExporter.export(ac, folder);
-			}
+		IFolder folder;
+		if (projectRelative) {
+			IProject project = container.getProject();
+			folder = project.getFolder(relPath);
+		}
+		else {
+			folder = container.getFolder(new Path(relPath));
+		}
+		if (folder!=null) {
+			if (!folder.exists())
+				try {
+					create(folder);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			
-			for (SubSystemClass ssc : model.getSubSystemClasses()) {
-				StructureExporter.export(ssc, folder);
+			if (folder.exists()) {
+				String folderPath = folder.getLocation().toOSString();
+				
+				for (ActorClass ac : model.getActorClasses()) {
+					if (ac.getStateMachine()!=null)
+						BehaviorExporter.export(ac, folderPath);
+					
+					StructureExporter.export(ac, folderPath);
+				}
+				
+				for (SubSystemClass ssc : model.getSubSystemClasses()) {
+					StructureExporter.export(ssc, folderPath);
+				}
+				
+				try {
+					folder.refreshLocal(IResource.DEPTH_ONE, null);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
+	protected void create(final IResource resource) throws CoreException {
+		if (resource == null || resource.exists())
+			return;
+		if (!resource.getParent().exists())
+			create(resource.getParent());
+		switch (resource.getType()) {
+		case IResource.FILE:
+			((IFile) resource).create(new ByteArrayInputStream(new byte[0]), true, null);
+			break;
+		case IResource.FOLDER:
+			((IFolder) resource).create(IResource.NONE, true, null);
+			break;
+		case IResource.PROJECT:
+			((IProject) resource).create(null);
+			((IProject) resource).open(null);
+			break;
+		}
+	}
 	// TODO: code copied from org.eclipse.etrice.ui.commands.handlers.AbstractEditHandler - refactor
 	protected boolean checkPrerequisites(XtextEditor xtextEditor,
 			IXtextDocument document, final String fragment) {

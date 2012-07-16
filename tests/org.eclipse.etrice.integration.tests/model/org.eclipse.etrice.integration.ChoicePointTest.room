@@ -1,6 +1,6 @@
 RoomModel org.eclipse.etrice.integration.ChoicePointTest {
 	
-	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib/models/JavaTypes.room"
+	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/JavaTypes.room"
 	
 	LogicalSystem System_HandlerTest {
 		SubSystemRef SubSystem_CPTest: SubSystem_CPTest

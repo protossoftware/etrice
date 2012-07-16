@@ -152,6 +152,15 @@ public interface ETriceGenFactory extends EFactory {
 	ExpandedActorClass createExpandedActorClass();
 
 	/**
+	 * Returns a new object of class '<em>Expanded Refined State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expanded Refined State</em>'.
+	 * @generated
+	 */
+	ExpandedRefinedState createExpandedRefinedState();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

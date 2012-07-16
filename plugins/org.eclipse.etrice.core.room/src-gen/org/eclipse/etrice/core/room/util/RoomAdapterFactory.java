@@ -209,6 +209,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createSemanticsRuleAdapter();
       }
       @Override
+      public Adapter caseInSemanticsRule(InSemanticsRule object)
+      {
+        return createInSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseOutSemanticsRule(OutSemanticsRule object)
+      {
+        return createOutSemanticsRuleAdapter();
+      }
+      @Override
       public Adapter caseActorClass(ActorClass object)
       {
         return createActorClassAdapter();
@@ -881,6 +891,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InSemanticsRule <em>In Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.InSemanticsRule
+   * @generated
+   */
+  public Adapter createInSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutSemanticsRule <em>Out Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.OutSemanticsRule
+   * @generated
+   */
+  public Adapter createOutSemanticsRuleAdapter()
   {
     return null;
   }

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -17,7 +18,8 @@ public class JavaExtensions implements ILanguageExtension {
   private AbstractTransitionChainGenerator chainGenerator;
   
   public String getTypedDataDefinition(final Message m) {
-    return this.chainGenerator.generateTypedData(m);
+    VarDecl _data = m.getData();
+    return this.chainGenerator.generateTypedData(_data);
   }
   
   public String getJavaFileName(final RoomClass rc) {
@@ -130,5 +132,13 @@ public class JavaExtensions implements ILanguageExtension {
     String _plus = ("\"" + s);
     String _plus_1 = (_plus + "\".toCharArray()");
     return _plus_1;
+  }
+  
+  public String superCall(final String baseClassName, final String method, final String args) {
+    String _plus = ("super." + method);
+    String _plus_1 = (_plus + "(");
+    String _plus_2 = (_plus_1 + args);
+    String _plus_3 = (_plus_2 + ");");
+    return _plus_3;
   }
 }

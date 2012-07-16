@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -155,7 +156,7 @@ public class RoomDiagramEditor extends DiagramEditor {
 		 * did not work correctly
 		 */
 //		if (AutoUpdateFeature.isLastDoneChanges())
-			doSave(null);
+			doSave(new NullProgressMonitor());
 	}
 	
 	/* (non-Javadoc)
