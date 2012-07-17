@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.behavior.support;
 import java.util.List;
 
 import org.eclipse.etrice.core.room.StateGraphNode;
+import org.eclipse.etrice.core.room.Transition;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -22,23 +23,16 @@ import org.eclipse.etrice.core.room.StateGraphNode;
  */
 public interface IPositionProvider {
 
-	public static class PosAndSize {
+	public static class Pos {
 		private int x;
 		private int y;
-		private int width;
-		private int height;
 		
-		/**
-		 * @param x
-		 * @param y
-		 * @param width
-		 * @param height
-		 */
-		public PosAndSize(int x, int y, int width, int height) {
+		
+
+		public Pos(int x, int y) {
+			super();
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
 		}
 
 		/**
@@ -53,6 +47,23 @@ public interface IPositionProvider {
 		 */
 		public int getY() {
 			return y;
+		}
+	}
+	
+	public static class PosAndSize extends Pos {
+		private int width;
+		private int height;
+		
+		/**
+		 * @param x
+		 * @param y
+		 * @param width
+		 * @param height
+		 */
+		public PosAndSize(int x, int y, int width, int height) {
+			super(x,y);
+			this.width = width;
+			this.height = height;
 		}
 
 		/**
@@ -74,4 +85,5 @@ public interface IPositionProvider {
 
 	public PosAndSize getPosition(StateGraphNode node);
 	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
+	public List<Pos> getPoints(Transition trans);
 }
