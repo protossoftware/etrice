@@ -14,13 +14,18 @@ package org.eclipse.etrice.abstractexec.behavior;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.room.*;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.SemanticsRule;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ActiveRules {
 	private HashMap<InterfaceItem, EList<SemanticsRule>> rules ;
@@ -29,7 +34,7 @@ public class ActiveRules {
 	{
 		rules=  new HashMap<InterfaceItem, EList<SemanticsRule>>();
 	}
-	public ActiveRules(HashMap<InterfaceItem,EList<SemanticsRule>> r)
+	private ActiveRules(HashMap<InterfaceItem,EList<SemanticsRule>> r)
 	{
 		rules = r;
 	}
@@ -37,15 +42,9 @@ public class ActiveRules {
 	//rules which can be merged with the destination node
 	//also returns a boolean to determine if anything was changed so as to determine the 
 	//condition for adding to the queue
-	public boolean checkRules(List<MessageFromIf> msgList )
+	public void consumeMessages(List<MessageFromIf> msgList )
 	{
-		System.out.println("Entering checkRules");
-		System.out.println("Msgs contained in list : ");
-		for(MessageFromIf msg : msgList)
-		{
-			System.out.println("Msgs : " + msg.getMessage().getName());
-		}
-		boolean changed = false; //to determine if there was any change in rule 
+		//boolean changed = false; //to determine if there was any change in rule 
 		//keeps a record of the ports contained in the msgList
 		Set<InterfaceItem> portList = new HashSet<InterfaceItem>();
 		HashMap<InterfaceItem, EList<SemanticsRule>> ruleChange  = new HashMap<InterfaceItem, EList<SemanticsRule>>();
@@ -57,15 +56,9 @@ public class ActiveRules {
 			
 			if(followUps.size()>0)
 			{
-				System.out.println("Founded follow up rules for msg : " + msg.getMessage().getName());
-				changed = true;
+			//	changed = true;
 				ruleChange.put(port, followUps);
 			}
-			else
-			{
-				System.out.println("Didn't find any follow up for : " + msg.getMessage().getName());
-			}
-			
 		}
 		//check also if there is a port in the ActiveRules port set which doesn't send any message 
 		//in the action code
@@ -74,24 +67,36 @@ public class ActiveRules {
 		{
 			if(!portList.contains(ports))
 			{
-				changed = true;
+				//changed = true;
 				ruleChange.put(ports, this.rules.get(ports));
 			}
 		}
-		
 		this.rules = ruleChange;
-		System.out.println("Exiting checkRules");
-		return changed;
-	
+		//return changed;
 	}
 	
 	//merges the rules with the destination active rules
-	public void merge(ActiveRules ar)
+	public boolean merge(ActiveRules ar)
 	{
-		for(InterfaceItem port : this.rules.keySet())
+	 /*	for(InterfaceItem port : this.rules.keySet())
 		{
-			this.rules.get(port).addAll(ar.rules.get(port));
+			//this.rules.get(port).addAll(ar.rules.get(port));
+			
 		}
+	*/
+		boolean added_at_least_one= false;
+		for(InterfaceItem port : ar.rules.keySet())
+		{
+			for(SemanticsRule rule : ar.rules.get(port))
+			{
+				if(!this.rules.get(port).contains(rule))
+					{
+					this.rules.get(port).add(rule);
+					added_at_least_one = true;
+					}
+			}
+		}
+		return added_at_least_one;
 	}
 	public ActiveRules createCopy()
 	{
@@ -106,11 +111,8 @@ public class ActiveRules {
 	//advances the pointer to the follow up messages if a message is found matching the rule
 	private EList<SemanticsRule> getFollowingRules(MessageFromIf msg)
 	{
-		System.out.println("Entering getFollowingRules");
-		
 		EList<SemanticsRule> follow = new BasicEList<SemanticsRule>();
 		List<SemanticsRule> toRemove = new ArrayList<SemanticsRule>();
-	
 		if(this.rules.containsKey(msg.getFrom()))
 		{
 			for(SemanticsRule rule : this.rules.get(msg.getFrom()))
@@ -135,15 +137,26 @@ public class ActiveRules {
 		}
 		//this basically just adds the advanced rules back to the ruleSet
 		this.rules.get(msg.getFrom()).addAll(follow);
-		System.out.println("Exiting getFollowingRules");
 		return follow;
+	}
+	public void buildInitLocalRules(ExpandedActorClass xpAct)
+	{
+		//HashMap<InterfaceItem, EList<SemanticsRule>> locals = new HashMap<InterfaceItem, EList<SemanticsRule>>();
+		List<InterfaceItem> portList = RoomHelpers.getAllInterfaceItems(xpAct.getActorClass());
+		for(InterfaceItem port : portList)
+		{
+			GeneralProtocolClass gpc = port.getGeneralProtocol();
+			this.rules.put(port, ((ProtocolClass) gpc).getSemantics().getRules());
+		}
+		
+		
 	}
 	public void print()
 	{
-		for(InterfaceItem port : rules.keySet())
+		for(InterfaceItem port : this.rules.keySet())
 		{
-			System.out.print("Port : " + port.getName() + "  : rules : " );
-			for(SemanticsRule rule : rules.get(port))
+			System.out.println("Port : " + port.getName() + "  : rules : " );
+			for(SemanticsRule rule : this.rules.get(port))
 			{
 				System.out.println(rule.getMsg().getName());
 			}
