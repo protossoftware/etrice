@@ -50,6 +50,9 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 		for (String arg : args) {
 			argtext.append(", "+arg);
 		}
+		
+		// remove leading ", "
+		argtext.delete(0, 2);
 
 		return item.getName()+".get("+index+")."+msg.getName()+"("+argtext.toString()+")";
 	}
