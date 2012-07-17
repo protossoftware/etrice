@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.kiml.ui.layoutManagers">
+      <manager
+            class="org.eclipse.etrice.ui.layout.BehaviorDiagramLayoutManager"
+            priority="1">
+      </manager>
+      <manager
+            class="org.eclipse.etrice.ui.layout.StructureDiagramLayoutmanager"
+            priority="1">
+      </manager>
+   </extension>
+
+</plugin>
