@@ -663,7 +663,7 @@ public class TrPointSupport {
 
 				ContainerShape containerShape = (ContainerShape) context.getPictogramElement();
 				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(containerShape);
-				if (SupportUtil.isInherited(tp, containerShape))
+				if (SupportUtil.isInherited(getDiagram(), tp))
 					return false;
 				
 				if (ValidationUtil.isConnectedOutside(tp))

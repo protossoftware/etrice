@@ -631,9 +631,7 @@ public class TransitionSupport {
 				
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof Transition) {
-					Connection conn = (Connection) context.getPictogramElement();
-					StateGraph sg = SupportUtil.getStateGraph((ContainerShape) conn.getStart().eContainer(), getFeatureProvider());
-					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+					boolean inherited = SupportUtil.isInherited(getDiagram(), (Transition) bo);
 					if (inherited)
 						return false;
 

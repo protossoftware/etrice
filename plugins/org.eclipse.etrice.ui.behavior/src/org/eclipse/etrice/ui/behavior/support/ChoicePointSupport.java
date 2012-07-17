@@ -412,8 +412,7 @@ public class ChoicePointSupport {
 				if (bo instanceof ChoicePoint) {
 					ChoicePoint cp = (ChoicePoint) bo;
 					
-					ContainerShape containerShape = (ContainerShape) context.getPictogramElement().eContainer();
-					return !SupportUtil.isInherited(cp, containerShape);
+					return !SupportUtil.isInherited(getDiagram(), cp);
 				}
 				return false;
 			}
