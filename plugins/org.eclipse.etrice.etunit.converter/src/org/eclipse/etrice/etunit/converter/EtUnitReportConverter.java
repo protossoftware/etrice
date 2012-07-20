@@ -202,9 +202,10 @@ public class EtUnitReportConverter {
 	private static void saveTexReport(DocumentRoot root, File report) {
 		StringBuilder contents = new StringBuilder();
 
-		contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
-		contents.append("\\newcommand{\\ForAllSuites}{%\n");
-		contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
+        contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
+        contents.append("\\newcounter{FailCount}%\n");
+        contents.append("\\newcommand{\\ForAllSuites}{%\n");
+        contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
 		for (TestsuiteType ts : root.getTestsuites().getTestsuite()) {
 			contents.append("    \\setcounter{FailCount}{"+ts.getFailures()+"}%\n");
 			contents.append("    \\renewcommand{\\ForAllTestCases}{%\n");
