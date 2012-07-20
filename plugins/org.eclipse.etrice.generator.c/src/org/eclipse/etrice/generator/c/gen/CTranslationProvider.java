@@ -50,8 +50,19 @@ public class CTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public String getAttributeText(Attribute att, String orig) {
-		return "self->"+att.getName();
+	public String getAttributeGetter(Attribute att, String index, String orig) {
+		if (index==null)
+			return "self->"+att.getName();
+		else
+			return "self->"+att.getName()+"["+index+"]";
+	}
+
+	@Override
+	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
+		if (index==null)
+			return "self->"+att.getName()+" = "+value;
+		else
+			return "self->"+att.getName()+"["+index+"] = "+value;
 	}
 
 	@Override
