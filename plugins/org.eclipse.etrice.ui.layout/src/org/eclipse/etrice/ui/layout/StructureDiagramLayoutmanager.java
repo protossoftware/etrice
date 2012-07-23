@@ -12,21 +12,22 @@ package org.eclipse.etrice.ui.layout;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SAPoint;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.ui.internal.parts.IPictogramElementEditPart;
 
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.LayoutContext;
-import de.cau.cs.kieler.kiml.config.VolatileLayoutConfig;
 import de.cau.cs.kieler.kiml.graphiti.KimlGraphitiUtil;
-import de.cau.cs.kieler.kiml.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.ui.diagram.LayoutMapping;
 import de.cau.cs.kieler.kiml.util.KimlUtil;
 
@@ -70,16 +71,43 @@ public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
 		}
 	}
 
-	/** the fixed minimal height of nodes. */
-	public static final float MIN_HEIGHT = ActorContainerRefSupport.DEFAULT_SIZE_Y;
-	/** the fixed minimal width of shapes. */
-	public static final float MIN_WIDHT = ActorContainerRefSupport.DEFAULT_SIZE_X;
+	@Override
+	protected Size getDefaultSize(Shape shape) {
+		Size defaultSize = new Size();
+
+		// This code sets same minimal default size for both Actor Class and
+		// Actor Container Ref
+		defaultSize.setHeight(ActorContainerRefSupport.MIN_SIZE_Y);
+		defaultSize.setWidth(ActorContainerRefSupport.MIN_SIZE_X);
+
+
+		/*
+		 * This code sets default size differently for Actor Class and Actor Container
+		 * Refs. This keeps the top-level container quite large on layout, which
+		 * might not seem so pleasant, but is more closer to the model.
+		 */
+		/*
+		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
+		if (modelObject instanceof ActorClass) {
+			defaultSize.setHeight(StructureClassSupport.DEFAULT_SIZE_Y);
+			defaultSize.setWidth(StructureClassSupport.DEFAULT_SIZE_X);
+		} else if (modelObject instanceof ActorContainerRef) {
+			defaultSize.setHeight(ActorContainerRefSupport.MIN_SIZE_Y);
+			defaultSize.setWidth(ActorContainerRefSupport.MIN_SIZE_X);
+		} else {
+			defaultSize.setHeight(MIN_HEIGHT);
+			defaultSize.setWidth(MIN_WIDHT);
+		}*/
+		
+		return defaultSize;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
 	 * @author jayant
 	 */
+	@Override
 	protected KNode createNode(final LayoutMapping<PictogramElement> mapping,
 			final KNode parentNode, final Shape shape) {
 		KNode node = KimlUtil.createInitializedNode();
@@ -87,16 +115,15 @@ public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
 
 		setCurrentPositionAndSize(mapping, parentNode, node, shape);
 
-		VolatileLayoutConfig staticConfig = mapping
-				.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
-		// FIXME find a way to specify the minimal size dynamically
-
-		staticConfig.setValue(LayoutOptions.MIN_WIDTH, node,
-				LayoutContext.GRAPH_ELEM, MIN_WIDHT);
-		staticConfig.setValue(LayoutOptions.MIN_HEIGHT, node,
-				LayoutContext.GRAPH_ELEM, MIN_HEIGHT);
-
 		mapping.getGraphMap().put(node, shape);
+
+		// gather all connections connected to Internal ports in the diagram.
+		// It is of no use to ActorRefs as they do-not possess direct
+		// connection(They have all connections via port).
+		for (Anchor anchor : shape.getAnchors()) {
+			mapping.getProperty(KimlGraphitiUtil.CONNECTIONS).addAll(
+					anchor.getOutgoingConnections());
+		}
 
 		return node;
 	}
@@ -107,11 +134,11 @@ public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
 	 * @author jayant
 	 */
 	@Override
-	protected boolean isPort(Shape shape) {
+	public boolean isBoundaryPort(Shape shape) {
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
-		if (modelObject instanceof InterfaceItem
+		if ((modelObject instanceof InterfaceItem && !isInternal((InterfaceItem) modelObject))
 				|| modelObject instanceof SPPoint
-				|| modelObject instanceof SAPoint) 
+				|| modelObject instanceof SAPoint)
 			return true;
 
 		return false;
@@ -123,7 +150,47 @@ public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
 	 * @author jayant
 	 */
 	@Override
-	protected boolean isTopLevelBoundingBox(Shape shape) {
+	public boolean isInternalPort(Shape shape) {
+		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
+
+		if ((modelObject instanceof InterfaceItem && isInternal((InterfaceItem) modelObject)))
+			return true;
+
+		return false;
+	}
+
+	/*
+	 * This method has been derived from
+	 * org.eclipse.eTrice.ui.structure.InterfaceItem.FeatureProvider
+	 */
+	private static boolean isInternal(InterfaceItem item) {
+		if (item instanceof Port) {
+			Port port = (Port) item;
+
+			// NB: the port's container might be a base class of the depicted
+			// actor class
+			ActorContainerClass acc = (ActorContainerClass) port.eContainer();
+			if (acc instanceof ActorClass) {
+				ActorClass ac = (ActorClass) acc;
+				if (ac.getIntPorts().contains(port))
+					return true;
+			}
+		} else if (item instanceof SPPRef) {
+			return false;
+		} else {
+			assert (false) : "unexpected sub type";
+		}
+
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @author jayant
+	 */
+	@Override
+	public boolean isTopLevelBoundingBox(Shape shape) {
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
 		if (modelObject instanceof ActorClass)
 			return true;

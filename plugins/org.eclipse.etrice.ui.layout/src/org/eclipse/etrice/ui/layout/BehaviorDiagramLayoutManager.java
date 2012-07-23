@@ -23,10 +23,7 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.ui.internal.parts.IPictogramElementEditPart;
 
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.LayoutContext;
-import de.cau.cs.kieler.kiml.config.VolatileLayoutConfig;
 import de.cau.cs.kieler.kiml.graphiti.KimlGraphitiUtil;
-import de.cau.cs.kieler.kiml.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.ui.diagram.LayoutMapping;
 import de.cau.cs.kieler.kiml.util.KimlUtil;
 
@@ -79,31 +76,48 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 
 	}
 
-	/** the fixed minimal height of nodes. */
-	public static final float MIN_HEIGHT = StateSupport.DEFAULT_SIZE_Y;
-	/** the fixed minimal width of shapes. */
-	public static final float MIN_WIDHT = StateSupport.DEFAULT_SIZE_X;
+	@Override
+	protected Size getDefaultSize(Shape shape) {
+		Size defaultSize = new Size();
+		
+		// This code sets same minimal default size for both State Graph and
+		// State
+		defaultSize.setHeight(StateSupport.MIN_SIZE_Y);
+		defaultSize.setWidth(StateSupport.MIN_SIZE_X);
+				
+		/*
+		 * This code sets default size differently for Actor Class and Actor Container
+		 * Refs. This keeps the top-level container quite large on layout, which
+		 * might not seem so pleasant, but is more closer to the model.
+		 */
+		/*		
+		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
+		if (modelObject instanceof StateGraph) {
+			defaultSize.setHeight(StateGraphSupport.DEFAULT_SIZE_Y);
+			defaultSize.setWidth(StateGraphSupport.DEFAULT_SIZE_X);
+		} else if (modelObject instanceof State) {
+			defaultSize.setHeight(StateSupport.MIN_SIZE_Y);
+			defaultSize.setWidth(StateSupport.MIN_SIZE_X);
+		} else {
+			defaultSize.setHeight(MIN_HEIGHT);
+			defaultSize.setWidth(MIN_WIDHT);
+		}*/
+		
+		return defaultSize;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
 	 * @author jayant
 	 */
+	@Override
 	protected KNode createNode(final LayoutMapping<PictogramElement> mapping,
 			final KNode parentNode, final Shape shape) {
 		KNode node = KimlUtil.createInitializedNode();
 		node.setParent(parentNode);
 
 		setCurrentPositionAndSize(mapping, parentNode, node, shape);
-
-		VolatileLayoutConfig staticConfig = mapping
-				.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
-		// FIXME find a way to specify the minimal size dynamically
-
-		staticConfig.setValue(LayoutOptions.MIN_WIDTH, node,
-				LayoutContext.GRAPH_ELEM, MIN_WIDHT);
-		staticConfig.setValue(LayoutOptions.MIN_HEIGHT, node,
-				LayoutContext.GRAPH_ELEM, MIN_HEIGHT);
 
 		mapping.getGraphMap().put(node, shape);
 
@@ -118,33 +132,45 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		return node;
 	}
 
-	
-
 	/**
 	 * {@inheritDoc}
 	 * 
 	 * @author jayant
 	 */
 	@Override
-	protected boolean isPort(Shape shape) {
+	public boolean isBoundaryPort(Shape shape) {
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
 		if (modelObject instanceof TrPoint)
 			return true;
-		
+
 		return false;
 	}
 
+	
 	/**
 	 * {@inheritDoc}
 	 * 
 	 * @author jayant
 	 */
 	@Override
-	protected boolean isTopLevelBoundingBox(Shape shape) {
+	public boolean isInternalPort(Shape shape) {
+		//No shape is an internal port (i.e. All ports are external only)
+		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @author jayant
+	 */
+	@Override
+	public boolean isTopLevelBoundingBox(Shape shape) {
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
 		if (modelObject instanceof StateGraph)
 			return true;
-		
+
 		return false;
 	}
+
+	
 }

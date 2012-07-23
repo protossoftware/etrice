@@ -15,14 +15,13 @@ import java.util.List;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
-import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.services.IGaService;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
@@ -40,7 +39,7 @@ import de.cau.cs.kieler.kiml.klayoutdata.KShapeLayout;
  * 
  * @author jayant
  */
-public class ETriceLayoutCommand extends GraphitiLayoutCommand {
+public abstract class ETriceLayoutCommand extends GraphitiLayoutCommand {
 
 	public ETriceLayoutCommand(TransactionalEditingDomain domain,
 			IFeatureProvider thefeatureProvider) {
@@ -48,30 +47,21 @@ public class ETriceLayoutCommand extends GraphitiLayoutCommand {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritDoc} Also responsible for the layout of internal ports in eTrice
+	 * (which are considered as KNodes)
 	 * 
 	 * @author jayant
 	 */
 	@Override
-	protected void applyPortLayout(KPort kport, PictogramElement pelem) {
-
-		ContainerShape shape = (ContainerShape) ((Anchor) pelem).getParent();
-
-		setCalculatedPositionAndSize(kport, kport.getNode(), shape);
-	};
+	protected abstract void applyNodeLayout(KNode knode, PictogramElement pelem);
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritDoc} Only Boundary Ports are lay-outed by this method
 	 * 
 	 * @author jayant
 	 */
 	@Override
-	protected void applyNodeLayout(KNode knode, PictogramElement pelem) {
-
-		setCalculatedPositionAndSize(knode, knode.getParent(),
-				(ContainerShape) pelem);
-
-	};
+	protected abstract void applyPortLayout(KPort kport, PictogramElement pelem);
 
 	/**
 	 * {@inheritDoc}
@@ -112,8 +102,8 @@ public class ETriceLayoutCommand extends GraphitiLayoutCommand {
 	}
 
 	/**
-	 * Sets the calculated position and size from a KGraph Model-Element (Node or
-	 * Port) back to the corresponding diagram shape.
+	 * Sets the calculated position and size from a KGraph Model-Element (Node
+	 * or Port) back to the corresponding diagram shape.
 	 * 
 	 * @param kelem
 	 *            the KGraph Model Element (Node/Port)
@@ -124,11 +114,7 @@ public class ETriceLayoutCommand extends GraphitiLayoutCommand {
 	 * 
 	 * @author jayant
 	 */
-	/*
-	 * This function derives its code majorly from
-	 * GraphitilayoutCommand.applyNodeLayout() method
-	 */
-	private void setCalculatedPositionAndSize(final KGraphElement kelem,
+	public static void setCalculatedPositionAndSize(final KGraphElement kelem,
 			KNode parentNode, final ContainerShape shape) {
 
 		KShapeLayout shapeLayout = kelem.getData(KShapeLayout.class);
@@ -147,21 +133,20 @@ public class ETriceLayoutCommand extends GraphitiLayoutCommand {
 		float width = shapeLayout.getWidth();
 		float height = shapeLayout.getHeight();
 
-		KInsets nodeInsets = shapeLayout.getProperty(INVIS_INSETS);
-		if (nodeInsets != null) {
-			xpos -= nodeInsets.getLeft();
-			ypos -= nodeInsets.getTop();
-			width += nodeInsets.getLeft() + nodeInsets.getRight();
-			height += nodeInsets.getTop() + nodeInsets.getBottom();
+		KInsets shapeInsets = shapeLayout.getProperty(INVIS_INSETS);
+		if (shapeInsets != null) {
+			xpos -= shapeInsets.getLeft();
+			ypos -= shapeInsets.getTop();
+			width += shapeInsets.getLeft() + shapeInsets.getRight();
+			height += shapeInsets.getTop() + shapeInsets.getBottom();
 		}
 
 		GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
 
-		ga.setX(Math.round(xpos));
-		ga.setY(Math.round(ypos));
-		ga.setWidth(Math.round(width));
-		ga.setHeight(Math.round(height));
+		IGaService gaService = Graphiti.getGaService();
+		gaService.setLocationAndSize(ga, Math.round(xpos), Math.round(ypos),
+				Math.round(width), Math.round(height));
 
-		featureProvider.layoutIfPossible(new LayoutContext(shape));
 	}
+
 }

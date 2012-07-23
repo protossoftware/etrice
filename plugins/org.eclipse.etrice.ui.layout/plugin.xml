@@ -12,5 +12,28 @@
             priority="1">
       </manager>
    </extension>
+   <extension
+         point="de.cau.cs.kieler.kiml.layoutInfo">
+      <option
+            class="org.eclipse.etrice.core.room.ActorClass"
+            option="de.cau.cs.kieler.borderSpacing"
+            value="50">
+      </option>
+      <option
+            class="org.eclipse.etrice.core.room.ActorClass"
+            option="de.cau.cs.kieler.spacing"
+            value="50">
+      </option>
+      <option
+            class="org.eclipse.etrice.core.room.StateGraph"
+            option="de.cau.cs.kieler.borderSpacing"
+            value="30">
+      </option>
+      <option
+            class="org.eclipse.etrice.core.room.StateGraph"
+            option="de.cau.cs.kieler.spacing"
+            value="50">
+      </option>
+   </extension>
 
 </plugin>

@@ -18,6 +18,7 @@ import java.util.Map.Entry;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.gef.EditPart;
 import org.eclipse.graphiti.mm.algorithms.AbstractText;
@@ -50,6 +51,7 @@ import de.cau.cs.kieler.kiml.graphiti.KimlGraphitiUtil;
 import de.cau.cs.kieler.kiml.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.klayoutdata.impl.KShapeLayoutImpl;
+import de.cau.cs.kieler.kiml.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.ui.diagram.LayoutMapping;
 import de.cau.cs.kieler.kiml.util.KimlUtil;
 
@@ -153,9 +155,19 @@ public abstract class ETriceDiagramLayoutManager extends
 	protected void transferLayout(final LayoutMapping<PictogramElement> mapping) {
 		DiagramEditor diagramEditor = mapping
 				.getProperty(KimlGraphitiUtil.DIAGRAM_EDITOR);
-		ETriceLayoutCommand command = new ETriceLayoutCommand(
-				diagramEditor.getEditingDomain(), diagramEditor
-						.getDiagramTypeProvider().getFeatureProvider());
+
+		ETriceLayoutCommand command = null;
+
+		if (diagramEditor instanceof BehaviorEditor) {
+			command = new BehaviorLayoutCommand(
+					diagramEditor.getEditingDomain(), diagramEditor
+							.getDiagramTypeProvider().getFeatureProvider());
+		} else {
+			command = new StructureLayoutCommand(
+					diagramEditor.getEditingDomain(), diagramEditor
+							.getDiagramTypeProvider().getFeatureProvider());
+		}
+
 		for (Entry<KGraphElement, PictogramElement> entry : mapping
 				.getGraphMap().entrySet()) {
 			command.add(entry.getKey(), entry.getValue());
@@ -231,15 +243,17 @@ public abstract class ETriceDiagramLayoutManager extends
 
 		} else if (element instanceof Shape) {
 
-			if ( isTopLevelBoundingBox( (Shape)element) ) {
+			if (isTopLevelBoundingBox((Shape) element)) {
 				// The selected Element is the Top Level Top Level Bounding Box
 				mapping.setLayoutGraph((KNode) buildAllLevels(mapping,
 						(Shape) element, null));
 			} else {
+
 				KGraphElement internalKGraphElement = createKGaphElementFromShape(
 						mapping, null, (Shape) element);
 
-				if (internalKGraphElement instanceof KNode) {
+				if (internalKGraphElement instanceof KNode
+						&& !isInternalPort((Shape) element)) {
 					// The selected Element is a Node.
 					for (Shape childShape : ((ContainerShape) element)
 							.getChildren()) {
@@ -247,15 +261,16 @@ public abstract class ETriceDiagramLayoutManager extends
 						createKGaphElementFromShape(mapping,
 								internalKGraphElement, childShape);
 					}
-					
+
 					mapping.setLayoutGraph((KNode) internalKGraphElement);
-	
+
 				} else {
-					// The selected Element is a Port or an Edge Label.
+					// The selected Element is a Port(Boundary or Internal) or an Edge Label.
 
 					// Giving the user a SWT dialog indicating that this Shape
 					// cannot be lay-outed.
-					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					Shell shell = PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getShell();
 					MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR
 							| SWT.OK | SWT.CANCEL);
 					dialog.setText("Invalid Layout Call");
@@ -266,7 +281,8 @@ public abstract class ETriceDiagramLayoutManager extends
 
 			}
 		} else if (element instanceof FreeFormConnection) {
-			// This gives the user a SWT dialog indicating this is a connection and
+			// This gives the user a SWT dialog indicating this is a connection
+			// and
 			// cannot be lay-outed.
 			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 					.getShell();
@@ -340,8 +356,18 @@ public abstract class ETriceDiagramLayoutManager extends
 					createKGaphElementFromShape(mapping,
 							secondLevelKGraphElement, thirdLevelShape);
 				}
+
+				if (!isInternalPort(secondtLevelShape)) {
+					// For KNodes which are not internal ports.
+					setNodeLayoutOptions(mapping,
+							(KNode) secondLevelKGraphElement, secondtLevelShape);
+				}
+
 			}
 		}
+
+		setNodeLayoutOptions(mapping, topLevelBoundingBoxNode,
+				topLevelBoundingBox);
 
 		return topLevelBoundingBoxNode;
 	}
@@ -382,12 +408,13 @@ public abstract class ETriceDiagramLayoutManager extends
 
 		else if (shape instanceof ContainerShape) {
 
-			// Checking whether this shape is a Port
-			if (isPort(shape))
+			// Checking whether this shape is a boundary port
+			if (isBoundaryPort(shape))
 				return createPort(mapping, (KNode) parent, shape);
 
 			else
-				// This shape is a node
+				// This shape is considered to be a node (includes internal
+				// Ports)
 				return createNode(mapping, (KNode) parent, shape);
 
 		} else
@@ -395,9 +422,15 @@ public abstract class ETriceDiagramLayoutManager extends
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Create a node for the layout graph.
 	 * 
-	 * @author jayant
+	 * @param mapping
+	 *            the mapping of pictogram elements to graph elements
+	 * @param parentNode
+	 *            the parent node
+	 * @param shape
+	 *            the shape for a new node
+	 * @return a new layout node
 	 */
 	protected abstract KNode createNode(
 			final LayoutMapping<PictogramElement> mapping,
@@ -504,23 +537,131 @@ public abstract class ETriceDiagramLayoutManager extends
 	}
 
 	/**
-	 * Determines whether the given shape is a port.
+	 * Sets the heuristic layout options for nodes (like minimal width and
+	 * minimal height)
 	 * 
-	 * @param shape the shape to be investigated
+	 * @param mapping
+	 *            the mapping of pictogram elements to graph elements
+	 * @param node
+	 *            the node for which layout options need to be set
+	 * @param shape
+	 *            TODO
+	 * @author jayant
+	 */
+	/* This is fairly general for both the eTrice editors */
+	protected void setNodeLayoutOptions(
+			final LayoutMapping<PictogramElement> mapping, final KNode node,
+			Shape shape) {
+
+		// get label width and height for the node
+		float labelWidth = 0.0f;
+		float labelHeight = 0.0f;
+
+		if (!node.getLabels().isEmpty()) {
+			KShapeLayout labelLayout = node.getLabels().get(0)
+					.getData(KShapeLayout.class);
+			labelWidth = labelLayout.getWidth();
+			labelHeight = labelLayout.getHeight();
+		}
+
+		VolatileLayoutConfig staticConfig = mapping
+				.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
+
+		Size defaultSize = getDefaultSize(shape);
+		staticConfig.setValue(LayoutOptions.MIN_WIDTH, node,
+				LayoutContext.GRAPH_ELEM, defaultSize.getWidth() + labelWidth);
+		staticConfig
+				.setValue(LayoutOptions.MIN_HEIGHT, node,
+						LayoutContext.GRAPH_ELEM, defaultSize.getHeight()
+								+ labelHeight);
+	}
+
+	public static class Size {
+		private float width = 0;
+		private float height = 0;
+
+		/**
+		 * Getter for width
+		 * 
+		 * @return the width
+		 */
+		public float getWidth() {
+			return width;
+		}
+
+		/**
+		 * Setter for width
+		 * 
+		 * @param width
+		 *            the width to set
+		 */
+		public void setWidth(float width) {
+			this.width = width;
+		}
+
+		/**
+		 * Getter for height
+		 * 
+		 * @return the height
+		 */
+		public float getHeight() {
+			return height;
+		}
+
+		/**
+		 * Setter for height
+		 * 
+		 * @param height
+		 *            the height to set
+		 */
+		public void setHeight(float height) {
+			this.height = height;
+		}
+	}
+
+	/**
+	 * Determines whether the given shape is a boundary port or not.
+	 * 
+	 * @param shape
+	 *            the shape to be investigated
 	 * @return true if the {@code shape} is a port else false
 	 * 
 	 * @author jayant
 	 */
-	protected abstract boolean isPort(Shape shape);
+	public abstract boolean isBoundaryPort(Shape shape);
+
+	/**
+	 * Determines whether the given shape is an internal port or not.
+	 * 
+	 * @param shape
+	 *            the shape to be investigated
+	 * @return true if the {@code shape} is a port else false
+	 * 
+	 * @author jayant
+	 */
+	public abstract boolean isInternalPort(Shape shape);
 
 	/**
 	 * Determines whether the given shape is a Top Level Bounding Box or not.
 	 * 
-	 * @param shape the shape to be investigated
+	 * @param shape
+	 *            the shape to be investigated
 	 * @return true if the {@code shape} is the Top Level Bounding Box
 	 * 
 	 * @author jayant
 	 */
-	protected abstract boolean isTopLevelBoundingBox(Shape shape);
+	public abstract boolean isTopLevelBoundingBox(Shape shape);
+
+	/**
+	 * Gets the Default Minimal Width for a node
+	 * 
+	 * @param shape
+	 *            TODO
+	 * 
+	 * @return the defaults minimal width a node
+	 * 
+	 * @author jayant
+	 */
+	protected abstract Size getDefaultSize(Shape shape);
 
 }
