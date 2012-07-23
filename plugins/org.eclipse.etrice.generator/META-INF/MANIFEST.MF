@@ -14,9 +14,9 @@ Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.1.0",
  org.eclipse.emf.ecore;bundle-version="2.6.0";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
  org.eclipse.core.resources;bundle-version="3.7.100",
- org.eclipse.xtext.generator;bundle-version="2.1.1",
- org.eclipse.xtext;bundle-version="2.1.1",
- org.eclipse.xtext.xtend2.lib;bundle-version="2.1.1",
+ org.eclipse.xtext.generator;bundle-version="[2.1.1,2.2.0)",
+ org.eclipse.xtext;bundle-version="[2.1.1,2.2.0)",
+ org.eclipse.xtext.xtend2.lib;bundle-version="[2.1.1,2.2.0)",
  org.eclipse.etrice.core.config;bundle-version="0.2.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.etrice.generator.generic
