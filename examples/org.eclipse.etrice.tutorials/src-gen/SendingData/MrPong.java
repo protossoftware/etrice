@@ -18,14 +18,16 @@ public class MrPong extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PingPongProtocolPort PingPongPort = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public MrPong(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -36,10 +38,17 @@ public class MrPong extends ActorClassBase {
 
 		// own ports
 		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PingPongProtocolPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -55,8 +64,7 @@ public class MrPong extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -64,10 +72,11 @@ public class MrPong extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__looping = 1;
-	public static final int CHAIN_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0 = 2;
-	public static final int CHAIN_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1 = 3;
+	public static final int CHAIN_TRANS_tr0_FROM_looping_TO_looping_BY_pingPingPongPort_tr0 = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_looping_TO_looping_BY_pingSimplePingPongPort_tr1 = 3;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__ping = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_ping;
 	public static final int TRIG_PingPongPort__pingSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_pingSimple;
 	
@@ -86,13 +95,13 @@ public class MrPong extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
-	protected void action_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, DemoData data) {
+	/* Action Codes */
+	protected void action_TRANS_tr0_FROM_looping_TO_looping_BY_pingPingPongPort_tr0(InterfaceItemBase ifitem, DemoData data) {
 		PingPongPort.pong(data);
 	}
-	protected void action_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int data) {
+	protected void action_TRANS_tr1_FROM_looping_TO_looping_BY_pingSimplePingPongPort_tr1(InterfaceItemBase ifitem, int data) {
 		PingPongPort.pongSimple(data+1);
 	}
 	
@@ -127,16 +136,16 @@ public class MrPong extends ActorClassBase {
 			{
 				return STATE_looping;
 			}
-			case CHAIN_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0:
+			case CHAIN_TRANS_tr0_FROM_looping_TO_looping_BY_pingPingPongPort_tr0:
 			{
 				DemoData data = (DemoData) generic_data;
-				action_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0(ifitem, data);
+				action_TRANS_tr0_FROM_looping_TO_looping_BY_pingPingPongPort_tr0(ifitem, data);
 				return STATE_looping;
 			}
-			case CHAIN_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1:
+			case CHAIN_TRANS_tr1_FROM_looping_TO_looping_BY_pingSimplePingPongPort_tr1:
 			{
 				int data = (Integer) generic_data;
-				action_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1(ifitem, data);
+				action_TRANS_tr1_FROM_looping_TO_looping_BY_pingSimplePingPongPort_tr1(ifitem, data);
 				return STATE_looping;
 			}
 		}
@@ -183,18 +192,18 @@ public class MrPong extends ActorClassBase {
 			switch (this.state) {
 				case STATE_looping:
 					switch(trigger) {
-					case TRIG_PingPongPort__ping:
-						{
-							chain = CHAIN_TRANS_looping_TO_looping_BY_pingPingPongPort_tr0;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_PingPongPort__pingSimple:
-						{
-							chain = CHAIN_TRANS_looping_TO_looping_BY_pingSimplePingPongPort_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_PingPongPort__ping:
+							{
+								chain = CHAIN_TRANS_tr0_FROM_looping_TO_looping_BY_pingPingPongPort_tr0;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_PingPongPort__pingSimple:
+							{
+								chain = CHAIN_TRANS_tr1_FROM_looping_TO_looping_BY_pingSimplePingPongPort_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

@@ -1,4 +1,4 @@
-package PedLightsController;
+package PingPong;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -12,7 +12,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
 
-public class PedLightsTop extends ActorClassBase {
+public class PingPongTop extends ActorClassBase {
 
 	
 	//--------------------- ports
@@ -27,9 +27,9 @@ public class PedLightsTop extends ActorClassBase {
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public PedLightsTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public PingPongTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("PedLightsTop");
+		setClassName("PingPongTop");
 		
 		// initialize attributes
 

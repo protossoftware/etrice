@@ -16,13 +16,15 @@ public class SendingDataTop extends ActorClassBase {
 
 	
 	//--------------------- ports
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public SendingDataTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -32,10 +34,14 @@ public class SendingDataTop extends ActorClassBase {
 		// initialize attributes
 
 		// own ports
+		
 		// own saps
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -51,8 +57,7 @@ public class SendingDataTop extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	//--------------------- no state machine
 	@Override

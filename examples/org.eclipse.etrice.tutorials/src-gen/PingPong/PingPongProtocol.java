@@ -1,4 +1,4 @@
-package SendingData;
+package PingPong;
 
 import java.util.ArrayList;
 
@@ -13,13 +13,11 @@ public class PingPongProtocol {
 	// message IDs
 	public static final int MSG_MIN = 0;
 	public static final int OUT_pong = 1;
-	public static final int OUT_pongSimple = 2;
-	public static final int IN_ping = 3;
-	public static final int IN_pingSimple = 4;
-	public static final int MSG_MAX = 5;
+	public static final int IN_ping = 2;
+	public static final int MSG_MAX = 3;
 
 
-	private static String messageStrings[] = {"MIN", "pong","pongSimple", "ping","pingSimple","MAX"};
+	private static String messageStrings[] = {"MIN", "pong", "ping","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -64,23 +62,13 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void pong(DemoData data) {
+		public void pong() {
 			if (messageStrings[ OUT_pong] != "timerTick"){
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pong, data.deepCopy()));
-		}
-		public void pong(int int32Val, byte[] int8Array, double float64Val, String stringVal) {
-			pong(new DemoData(int32Val, int8Array, float64Val, stringVal));
-		}
-		public void pongSimple(int data) {
-			if (messageStrings[ OUT_pongSimple] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
-			}
-			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pongSimple, data));
-		}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_pong));
+				}
 	}
 	
 	// replicated port class
@@ -111,14 +99,9 @@ public class PingPongProtocol {
 		}
 		
 		// outgoing messages
-		public void pong(DemoData data){
+		public void pong(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).pong( data);
-			}
-		}
-		public void pongSimple(int data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).pongSimple( data);
+				ports.get(i).pong();
 			}
 		}
 	}
@@ -156,23 +139,13 @@ public class PingPongProtocol {
 	
 		
 		// sent messages
-		public void ping(DemoData data) {
+		public void ping() {
 			if (messageStrings[ IN_ping] != "timerTick"){
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_ping, data.deepCopy()));
-		}
-		public void ping(int int32Val, byte[] int8Array, double float64Val, String stringVal) {
-			ping(new DemoData(int32Val, int8Array, float64Val, stringVal));
-		}
-		public void pingSimple(int data) {
-			if (messageStrings[ IN_pingSimple] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
-			}
-			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_pingSimple, data));
-		}
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_ping));
+				}
 	}
 	
 	// replicated port class
@@ -203,14 +176,9 @@ public class PingPongProtocol {
 		}
 		
 		// incoming messages
-		public void ping(DemoData data){
+		public void ping(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).ping( data);
-			}
-		}
-		public void pingSimple(int data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).pingSimple( data);
+				ports.get(i).ping();
 			}
 		}
 	}

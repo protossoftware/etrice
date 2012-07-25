@@ -1,4 +1,4 @@
-package Blinky;
+package PingPong;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -8,54 +8,46 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
-import room.basic.service.timing.*;
 
-import Blinky.BlinkyControlProtocoll.*;
-import room.basic.service.timing.PTimeout.*;
+import PingPong.PingPongProtocol.*;
 
 
 
-public class BlinkyController extends ActorClassBase {
+public class MrPongActor1 extends ActorClassBase {
 
 	
 	//--------------------- ports
-	protected BlinkyControlProtocollConjPort ControlPort = null;
+	protected PingPongProtocolPort PingPongPort = null;
 	
 	//--------------------- saps
-	protected PTimeoutConjPort timer = null;
 	
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_ControlPort = 1;
-	public static final int IFITEM_timer = 2;
+	public static final int IFITEM_PingPongPort = 1;
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public BlinkyController(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public MrPongActor1(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("BlinkyController");
+		setClassName("MrPongActor1");
 		
 		// initialize attributes
 
 		// own ports
-		ControlPort = new BlinkyControlProtocollConjPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
 		
 		// own saps
-		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		
 		// own service implementations
 	}
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
-	public BlinkyControlProtocollConjPort getControlPort (){
-		return this.ControlPort;
-	}
-	public PTimeoutConjPort getTimer (){
-		return this.timer;
+	public PingPongProtocolPort getPingPongPort (){
+		return this.PingPongPort;
 	}
 
 	//--------------------- lifecycle functions
@@ -76,25 +68,22 @@ public class BlinkyController extends ActorClassBase {
 
 	
 	/* state IDs */
-	public static final int STATE_on = 2;
-	public static final int STATE_off = 3;
+	public static final int STATE_waitForPing = 2;
 	
 	/* transition chains */
-	public static final int CHAIN_TRANS_INITIAL_TO__on = 1;
-	public static final int CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer = 2;
-	public static final int CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer = 3;
+	public static final int CHAIN_TRANS_INITIAL_TO__waitForPing = 1;
+	public static final int CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger = 2;
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
+	public static final int TRIG_PingPongPort__ping = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.IN_ping;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","on",
-	"off"
+	protected static final String stateStrings[] = {"<no state>","<top>","waitForPing"
 	};
 	
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
@@ -107,17 +96,8 @@ public class BlinkyController extends ActorClassBase {
 	/* Entry and Exit Codes */
 	
 	/* Action Codes */
-	protected void action_TRANS_INITIAL_TO__on() {
-		timer.Start(5000);
-		ControlPort.start();
-	}
-	protected void action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		ControlPort.stop();
-		timer.Start(5000);
-	}
-	protected void action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		ControlPort.start();
-		timer.Start(5000);
+	protected void action_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(InterfaceItemBase ifitem) {
+		PingPongPort.pong();
 	}
 	
 	/**
@@ -130,12 +110,8 @@ public class BlinkyController extends ActorClassBase {
 	private void exitTo(int current, int to, boolean handler) {
 		while (current!=to) {
 			switch (current) {
-				case STATE_on:
-					this.history[STATE_TOP] = STATE_on;
-					current = STATE_TOP;
-					break;
-				case STATE_off:
-					this.history[STATE_TOP] = STATE_off;
+				case STATE_waitForPing:
+					this.history[STATE_TOP] = STATE_waitForPing;
 					current = STATE_TOP;
 					break;
 			}
@@ -151,20 +127,14 @@ public class BlinkyController extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_INITIAL_TO__on:
+			case CHAIN_TRANS_INITIAL_TO__waitForPing:
 			{
-				action_TRANS_INITIAL_TO__on();
-				return STATE_on;
+				return STATE_waitForPing;
 			}
-			case CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer:
+			case CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger:
 			{
-				action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(ifitem);
-				return STATE_off;
-			}
-			case CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer:
-			{
-				action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(ifitem);
-				return STATE_on;
+				action_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger(ifitem);
+				return STATE_waitForPing;
 			}
 		}
 		return NO_STATE;
@@ -179,12 +149,9 @@ public class BlinkyController extends ActorClassBase {
 	private int enterHistory(int state, boolean handler, boolean skip_entry) {
 		while (true) {
 			switch (state) {
-				case STATE_on:
+				case STATE_waitForPing:
 					// in leaf state: return state id
-					return STATE_on;
-				case STATE_off:
-					// in leaf state: return state id
-					return STATE_off;
+					return STATE_waitForPing;
 				case STATE_TOP:
 					state = this.history[STATE_TOP];
 					break;
@@ -195,7 +162,7 @@ public class BlinkyController extends ActorClassBase {
 	}
 	
 	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__on;
+		int chain = CHAIN_TRANS_INITIAL_TO__waitForPing;
 		int next = executeTransitionChain(chain, null, null);
 		next = enterHistory(next, false, false);
 		setState(next);
@@ -211,21 +178,11 @@ public class BlinkyController extends ActorClassBase {
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
 			switch (this.state) {
-				case STATE_on:
+				case STATE_waitForPing:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_PingPongPort__ping:
 							{
-								chain = CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer;
-								catching_state = STATE_TOP;
-							}
-						break;
-					}
-					break;
-				case STATE_off:
-					switch(trigger) {
-						case TRIG_timer__timeoutTick:
-							{
-								chain = CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_myTrigger_FROM_waitForPing_TO_waitForPing_BY_pingPingPongPort_myTrigger;
 								catching_state = STATE_TOP;
 							}
 						break;
