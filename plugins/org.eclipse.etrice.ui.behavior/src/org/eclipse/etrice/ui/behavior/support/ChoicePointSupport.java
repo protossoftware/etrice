@@ -294,7 +294,7 @@ public class ChoicePointSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ChoicePoint) {
-						return true;
+						return !SupportUtil.isInherited(getDiagram(), (ChoicePoint)bo);
 					}
 				}
 				return false;
