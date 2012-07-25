@@ -12,17 +12,17 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import room.basic.service.logging.Log.*;
 
 /*--------------------- begin user code ---------------------*/
-	import java.io.*;
-	import java.util.*;
+import java.io.*;
+import java.util.*;
 /*--------------------- end user code ---------------------*/
 
 
 public class ALogService extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		FileOutputStream file = null;
-		PrintStream p = null;
-		static long tStart = System.currentTimeMillis();
+	FileOutputStream file = null;
+	PrintStream p = null;
+	static long tStart = System.currentTimeMillis();
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports

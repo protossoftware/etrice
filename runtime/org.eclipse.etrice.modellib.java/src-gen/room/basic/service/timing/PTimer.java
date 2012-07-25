@@ -8,7 +8,7 @@ import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 /*--------------------- begin user code ---------------------*/
-	import java.util.TimerTask;
+import java.util.TimerTask;
 /*--------------------- end user code ---------------------*/
 
 
@@ -22,7 +22,7 @@ public class PTimer {
 	public static final int MSG_MAX = 5;
 
 	/*--------------------- begin user code ---------------------*/
-		static protected class FireTimeoutTask extends TimerTask {
+	static protected class FireTimeoutTask extends TimerTask {
 		
 					private int time;
 					private int id;
@@ -48,6 +48,7 @@ public class PTimer {
 						return id;
 					}
 				}
+				
 	/*--------------------- end user code ---------------------*/
 
 	private static String messageStrings[] = {"MIN", "timerTick","internalTimeout", "Kill","internalStart","MAX"};
@@ -66,7 +67,7 @@ public class PTimer {
 	// port class
 	static public class PTimerPort extends PortBase {
 		/*--------------------- begin user code ---------------------*/
-			private FireTimeoutTask task = null;
+		private FireTimeoutTask task = null;
 						
 						public TimerTask getTask() { return task; }
 		/*--------------------- end user code ---------------------*/
@@ -190,7 +191,7 @@ public class PTimer {
 	// port class
 	static public class PTimerConjPort extends PortBase {
 		/*--------------------- begin user code ---------------------*/
-			private int currentId = 0;
+		private int currentId = 0;
 					private boolean active = false;
 		/*--------------------- end user code ---------------------*/
 		// constructors

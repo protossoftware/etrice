@@ -12,15 +12,15 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.integration.ChoicePointTest.TestProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.integration.tests.helpers.*;
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.integration.tests.helpers.*;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 
 public class CPUser extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		private CRC16Generator crcGen = new CRC16Generator();
+	private CRC16Generator crcGen = new CRC16Generator();
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports

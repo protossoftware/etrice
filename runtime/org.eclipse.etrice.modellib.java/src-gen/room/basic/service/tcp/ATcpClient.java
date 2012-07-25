@@ -13,9 +13,9 @@ import room.basic.service.tcp.PTcpControl.*;
 import room.basic.service.tcp.PTcpPayload.*;
 
 /*--------------------- begin user code ---------------------*/
-	import java.net.Socket;
-	import java.io.*;
-		
+import java.net.Socket;
+import java.io.*;
+	
 			class ClientRxThread extends Thread{
 				private Socket sock;
 				PTcpPayloadPort port;
@@ -45,9 +45,9 @@ import room.basic.service.tcp.PTcpPayload.*;
 public class ATcpClient extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		Socket socket;
-		InputStream in;
-		OutputStream out;
+	Socket socket;
+	InputStream in;
+	OutputStream out;
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports

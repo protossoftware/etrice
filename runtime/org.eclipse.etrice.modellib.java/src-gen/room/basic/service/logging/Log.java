@@ -18,9 +18,9 @@ public class Log {
 	public static final int MSG_MAX = 4;
 
 	/*--------------------- begin user code ---------------------*/
-		public static final int LOG_LEVEL_LOW = 1;
-		public static final int LOG_LEVEL_MEDIUM = 2;
-		public static final int LOG_LEVEL_HIGH = 3;
+	public static final int LOG_LEVEL_LOW = 1;
+	public static final int LOG_LEVEL_MEDIUM = 2;
+	public static final int LOG_LEVEL_HIGH = 3;
 	/*--------------------- end user code ---------------------*/
 
 	private static String messageStrings[] = {"MIN",  "open","close","internalLog","MAX"};
@@ -104,8 +104,8 @@ public class Log {
 	// port class
 	static public class LogConjPort extends PortBase {
 		/*--------------------- begin user code ---------------------*/
-			static int logLevel=0;
-			InternalLogData d = new InternalLogData();
+		static int logLevel=0;
+		InternalLogData d = new InternalLogData();
 		/*--------------------- end user code ---------------------*/
 		// constructors
 		public LogConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
