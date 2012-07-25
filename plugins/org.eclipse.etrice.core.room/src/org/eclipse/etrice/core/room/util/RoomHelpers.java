@@ -592,6 +592,21 @@ public class RoomHelpers {
 		return names;
 	}
 	
+	public static List<Message> getAllMessages(ProtocolClass pc, boolean incoming) {
+		ArrayList<Message> result = new ArrayList<Message>();
+		
+		while (pc!=null) {
+			if (incoming)
+				result.addAll(0, pc.getIncomingMessages());
+			else
+				result.addAll(0, pc.getOutgoingMessages());
+			
+			pc = pc.getBase();
+		}
+		
+		return result;
+	}
+
 	public static List<Attribute> getAllAttributes(ActorClass ac) {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
