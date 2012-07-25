@@ -76,7 +76,7 @@ public class DetailCodeTranslator {
 			text.append(line+"\n");
 		}
 
-		String result = text.substring(0, text.length()-1);
+		String result = text.substring(0, Math.max(0, text.length()-1));
 		
 		if (provider.translateMembers())
 			result = translateText(result);

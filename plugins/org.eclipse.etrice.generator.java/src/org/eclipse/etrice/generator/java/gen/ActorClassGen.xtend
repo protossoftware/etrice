@@ -134,7 +134,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 					}
 				«ENDIF»
 			}
-			//--------------------- attributes getter and setter
 			«attributeSettersGettersImplementation(ac.attributes, ac.name)»
 			//--------------------- port getters
 			«FOR ep : ac.getEndPorts()»

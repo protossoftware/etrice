@@ -448,9 +448,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("//--------------------- attributes getter and setter");
-      _builder.newLine();
-      _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
       String _name_24 = ac.getName();
       StringConcatenation _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_3, _name_24);
