@@ -885,8 +885,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExpandedRefinedState_InheritedEntry() {
-		return (EAttribute)expandedRefinedStateEClass.getEStructuralFeatures().get(0);
+	public EReference getExpandedRefinedState_InheritedEntry() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -894,8 +894,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExpandedRefinedState_InheritedExit() {
-		return (EAttribute)expandedRefinedStateEClass.getEStructuralFeatures().get(1);
+	public EReference getExpandedRefinedState_InheritedExit() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -903,8 +903,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExpandedRefinedState_InheritedDo() {
-		return (EAttribute)expandedRefinedStateEClass.getEStructuralFeatures().get(2);
+	public EReference getExpandedRefinedState_InheritedDo() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1032,9 +1032,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__STATE_MACHINE);
 
 		expandedRefinedStateEClass = createEClass(EXPANDED_REFINED_STATE);
-		createEAttribute(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_ENTRY);
-		createEAttribute(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_EXIT);
-		createEAttribute(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_DO);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_ENTRY);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_EXIT);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_DO);
 
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
@@ -1258,9 +1258,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEParameter(op, theRoomPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(expandedRefinedStateEClass, ExpandedRefinedState.class, "ExpandedRefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getExpandedRefinedState_InheritedEntry(), ecorePackage.getEString(), "inheritedEntry", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExpandedRefinedState_InheritedExit(), ecorePackage.getEString(), "inheritedExit", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExpandedRefinedState_InheritedDo(), ecorePackage.getEString(), "inheritedDo", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedRefinedState_InheritedEntry(), theRoomPackage.getDetailCode(), null, "inheritedEntry", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedRefinedState_InheritedExit(), theRoomPackage.getDetailCode(), null, "inheritedExit", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedRefinedState_InheritedDo(), theRoomPackage.getDetailCode(), null, "inheritedDo", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(expandedRefinedStateEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getRefinedState(), "rs", 0, 1, IS_UNIQUE, IS_ORDERED);

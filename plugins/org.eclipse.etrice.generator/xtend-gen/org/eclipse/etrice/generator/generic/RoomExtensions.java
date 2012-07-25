@@ -866,9 +866,9 @@ public class RoomExtensions {
         return true;
       }
       if ((s instanceof ExpandedRefinedState)) {
-        String _inheritedEntry = ((ExpandedRefinedState) s).getInheritedEntry();
-        boolean _isEmpty = _inheritedEntry.isEmpty();
-        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        DetailCode _inheritedEntry = ((ExpandedRefinedState) s).getInheritedEntry();
+        boolean _empty_1 = this.empty(_inheritedEntry);
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_empty_1);
         return _operator_not_1;
       }
       return false;
@@ -882,9 +882,9 @@ public class RoomExtensions {
         return true;
       }
       if ((s instanceof ExpandedRefinedState)) {
-        String _inheritedExit = ((ExpandedRefinedState) s).getInheritedExit();
-        boolean _isEmpty = _inheritedExit.isEmpty();
-        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        DetailCode _inheritedExit = ((ExpandedRefinedState) s).getInheritedExit();
+        boolean _empty_1 = this.empty(_inheritedExit);
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_empty_1);
         return _operator_not_1;
       }
       return false;
@@ -898,9 +898,9 @@ public class RoomExtensions {
         return true;
       }
       if ((s instanceof ExpandedRefinedState)) {
-        String _inheritedDo = ((ExpandedRefinedState) s).getInheritedDo();
-        boolean _isEmpty = _inheritedDo.isEmpty();
-        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty);
+        DetailCode _inheritedDo = ((ExpandedRefinedState) s).getInheritedDo();
+        boolean _empty_1 = this.empty(_inheritedDo);
+        boolean _operator_not_1 = BooleanExtensions.operator_not(_empty_1);
         return _operator_not_1;
       }
       return false;

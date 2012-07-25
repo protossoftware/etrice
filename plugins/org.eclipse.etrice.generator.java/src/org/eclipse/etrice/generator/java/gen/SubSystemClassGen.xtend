@@ -31,11 +31,11 @@ import static extension org.eclipse.etrice.generator.base.Indexed.*
 @Singleton
 class SubSystemClassGen {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ConfigExtension configExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ConfigExtension
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
@@ -65,11 +65,11 @@ class SubSystemClassGen {
 		«FOR model : models»import «model.name».*;«ENDFOR»
 		
 		
-		«helpers.userCode(cc.userCode1)»
+		«cc.userCode(1)»
 		
 		public class «comp.name» extends SubSystemClassBase{
 		
-			«helpers.userCode(cc.userCode2)»
+			«cc.userCode(2)»
 			
 			public «comp.name»(IRTObject parent, String name) {
 				super(parent, name);

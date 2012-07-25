@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
@@ -24,22 +23,27 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	
 	@Inject extension RoomExtensions
 	
-	def genHeaderConstants(ExpandedActorClass xpac, ActorClass ac) {
+	def genHeaderConstants(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
 		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
-		var historySize = ac.allBaseStates.size - ac.allLeafStates.size + 2
+		val historySize = ac.allBaseStates.size - ac.allLeafStates.size + 2
 	'''
 	/* constant for state machine data */
 	#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
 	'''
 	}
 	
-	def genDataMembers(ExpandedActorClass xpac, ActorClass ac) {'''
+	def genDataMembers(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+	'''
 		/* state machine variables */
 		etInt16 state;
 		etInt16 history[«ac.name.toUpperCase»_HISTORY_SIZE];
 	'''}
 	
-	def genInitialization(ExpandedActorClass xpac, ActorClass ac) {'''
+	def genInitialization(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+	'''
 		self->state = STATE_TOP;
 		{
 			int i;
@@ -49,7 +53,9 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		executeInitTransition(self);
 	'''}
 	
-	override genExtra(ExpandedActorClass xpac, ActorClass ac) {'''
+	override genExtra(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+	'''
 
 		«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
 			self->state = new_state;

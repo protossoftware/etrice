@@ -16,7 +16,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RefableType;
@@ -41,16 +40,16 @@ public class SubSystemClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private JavaExtensions _javaExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ConfigExtension configExt;
+  private ConfigExtension _configExtension;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -63,13 +62,13 @@ public class SubSystemClassGen {
     for (final SubSystemInstance ssi : _subSystemInstances) {
       {
         SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
+        String _path = this._roomExtensions.getPath(_subSystemClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String _javaFileName = this.stdExt.getJavaFileName(_subSystemClass_2);
+        String _javaFileName = this._javaExtensions.getJavaFileName(_subSystemClass_2);
         String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating SubSystemClass implementation: \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
@@ -87,7 +86,7 @@ public class SubSystemClassGen {
   public StringConcatenation generate(final Root root, final SubSystemInstance comp, final SubSystemClass cc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.roomExt.getPackage(cc);
+    String _package = this._roomExtensions.getPackage(cc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -123,8 +122,7 @@ public class SubSystemClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
-    DetailCode _userCode1 = cc.getUserCode1();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    StringConcatenation _userCode = this._procedureHelpers.userCode(cc, 1);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -135,8 +133,7 @@ public class SubSystemClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    DetailCode _userCode2 = cc.getUserCode2();
-    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    StringConcatenation _userCode_1 = this._procedureHelpers.userCode(cc, 2);
     _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -247,7 +244,7 @@ public class SubSystemClassGen {
         _builder.append("\t\t");
         _builder.append("Address addr_item_");
         String _path_1 = ai_1.getPath();
-        String _pathName = this.roomExt.getPathName(_path_1);
+        String _pathName = this._roomExtensions.getPathName(_path_1);
         _builder.append(_pathName, "		");
         _builder.append(" = new Address(0,");
         int _threadId = ai_1.getThreadId();
@@ -279,7 +276,7 @@ public class SubSystemClassGen {
                     _builder.append("\t\t");
                     _builder.append("Address addr_item_");
                     String _path_3 = pi.getPath();
-                    String _pathName_1 = this.roomExt.getPathName(_path_3);
+                    String _pathName_1 = this._roomExtensions.getPathName(_path_3);
                     _builder.append(_pathName_1, "		");
                     _builder.append("_");
                     _builder.append(i, "		");
@@ -298,7 +295,7 @@ public class SubSystemClassGen {
                 _builder.append("\t\t");
                 _builder.append("Address addr_item_");
                 String _path_4 = pi.getPath();
-                String _pathName_2 = this.roomExt.getPathName(_path_4);
+                String _pathName_2 = this._roomExtensions.getPathName(_path_4);
                 _builder.append(_pathName_2, "		");
                 _builder.append(" = new Address(0,");
                 int _threadId_2 = ai_1.getThreadId();
@@ -373,7 +370,7 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("new Address[][] {{addr_item_");
         String _path_5 = ai_2.getPath();
-        String _pathName_3 = this.roomExt.getPathName(_path_5);
+        String _pathName_3 = this._roomExtensions.getPathName(_path_5);
         _builder.append(_pathName_3, "			");
         _builder.append("}");
         {
@@ -424,7 +421,7 @@ public class SubSystemClassGen {
                         _builder.append("\t");
                         _builder.append("addr_item_");
                         String _path_6 = pi_1.getPath();
-                        String _pathName_4 = this.roomExt.getPathName(_path_6);
+                        String _pathName_4 = this._roomExtensions.getPathName(_path_6);
                         _builder.append(_pathName_4, "					");
                         _builder.append("_");
                         EList<InterfaceItemInstance> _peers_4 = pi_1.getPeers();
@@ -449,7 +446,7 @@ public class SubSystemClassGen {
                 _builder.append("\t");
                 _builder.append("addr_item_");
                 String _path_7 = pi_1.getPath();
-                String _pathName_5 = this.roomExt.getPathName(_path_7);
+                String _pathName_5 = this._roomExtensions.getPathName(_path_7);
                 _builder.append(_pathName_5, "					");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -540,7 +537,7 @@ public class SubSystemClassGen {
                             _builder.append("\t");
                             _builder.append("addr_item_");
                             String _path_8 = pp.getPath();
-                            String _pathName_6 = this.roomExt.getPathName(_path_8);
+                            String _pathName_6 = this._roomExtensions.getPathName(_path_8);
                             _builder.append(_pathName_6, "					");
                             _builder.append("_");
                             EList<InterfaceItemInstance> _peers_8 = pp.getPeers();
@@ -553,7 +550,7 @@ public class SubSystemClassGen {
                             _builder.append("\t");
                             _builder.append("addr_item_");
                             String _path_9 = pp.getPath();
-                            String _pathName_7 = this.roomExt.getPathName(_path_9);
+                            String _pathName_7 = this._roomExtensions.getPathName(_path_9);
                             _builder.append(_pathName_7, "					");
                             _builder.newLineIfNotEmpty();
                           }
@@ -588,11 +585,11 @@ public class SubSystemClassGen {
       EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
       for(final ActorInstance ai_3 : _allContainedInstances_8) {
         _builder.append("\t\t");
-        List<AttrInstanceConfig> _configAttributes = this.configExt.getConfigAttributes(ai_3);
+        List<AttrInstanceConfig> _configAttributes = this._configExtension.getConfigAttributes(ai_3);
         List<AttrInstanceConfig> attrConfigs = _configAttributes;
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        List<PortInstanceConfig> _configPorts = this.configExt.getConfigPorts(ai_3);
+        List<PortInstanceConfig> _configPorts = this._configExtension.getConfigPorts(ai_3);
         List<PortInstanceConfig> portConfigs = _configPorts;
         _builder.newLineIfNotEmpty();
         {
@@ -641,11 +638,11 @@ public class SubSystemClassGen {
                 _builder.append("\t\t");
                 _builder.append("\t");
                 LiteralArray _value_1 = attrConfig.getValue();
-                String _stringValue = this.configExt.stringValue(_value_1, a);
+                String _stringValue = this._configExtension.stringValue(_value_1, a);
                 String value = _stringValue;
                 _builder.newLineIfNotEmpty();
                 {
-                  boolean _isArray = this.configExt.isArray(a);
+                  boolean _isArray = this._configExtension.isArray(a);
                   boolean _operator_not_4 = BooleanExtensions.operator_not(_isArray);
                   if (_operator_not_4) {
                     _builder.append("\t\t");
@@ -655,7 +652,7 @@ public class SubSystemClassGen {
                     String _name_8 = a.getName();
                     ActorClass _actorClass_3 = ai_3.getActorClass();
                     String _name_9 = _actorClass_3.getName();
-                    StringConcatenation _invokeSetter = this.helpers.invokeSetter(_name_8, _name_9, value);
+                    StringConcatenation _invokeSetter = this._procedureHelpers.invokeSetter(_name_8, _name_9, value);
                     _builder.append(_invokeSetter, "			");
                     _builder.append(";");
                     _builder.newLineIfNotEmpty();
@@ -675,7 +672,7 @@ public class SubSystemClassGen {
                       String _operator_plus_2 = StringExtensions.operator_plus("new ", _typeName);
                       String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "[]");
                       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, value);
-                      StringConcatenation _invokeSetter_1 = this.helpers.invokeSetter(_name_10, _name_11, _operator_plus_4);
+                      StringConcatenation _invokeSetter_1 = this._procedureHelpers.invokeSetter(_name_10, _name_11, _operator_plus_4);
                       _builder.append(_invokeSetter_1, "			");
                       _builder.append(";");
                       _builder.newLineIfNotEmpty();
@@ -697,7 +694,7 @@ public class SubSystemClassGen {
                       String _name_12 = a.getName();
                       ActorClass _actorClass_5 = ai_3.getActorClass();
                       String _name_13 = _actorClass_5.getName();
-                      StringConcatenation _invokeGetter = this.helpers.invokeGetter(_name_12, _name_13);
+                      StringConcatenation _invokeGetter = this._procedureHelpers.invokeGetter(_name_12, _name_13);
                       _builder.append(_invokeGetter, "				");
                       _builder.append(";");
                       _builder.newLineIfNotEmpty();
@@ -749,20 +746,20 @@ public class SubSystemClassGen {
                     _builder.append("\t\t");
                     _builder.append("\t");
                     LiteralArray _value_2 = attrConfig_1.getValue();
-                    String _stringValue_1 = this.configExt.stringValue(_value_2, a_1);
+                    String _stringValue_1 = this._configExtension.stringValue(_value_2, a_1);
                     String value_1 = _stringValue_1;
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t\t");
                     _builder.append("\t");
                     String _operator_plus_5 = StringExtensions.operator_plus(aiName, ".");
                     String _name_14 = item.getName();
-                    String _portClassName = this.roomExt.getPortClassName(item);
-                    StringConcatenation _invokeGetter_1 = this.helpers.invokeGetter(_name_14, _portClassName);
+                    String _portClassName = this._roomExtensions.getPortClassName(item);
+                    StringConcatenation _invokeGetter_1 = this._procedureHelpers.invokeGetter(_name_14, _portClassName);
                     String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _invokeGetter_1);
                     String refToItem = _operator_plus_6;
                     _builder.newLineIfNotEmpty();
                     {
-                      boolean _isArray_1 = this.configExt.isArray(a_1);
+                      boolean _isArray_1 = this._configExtension.isArray(a_1);
                       boolean _operator_not_5 = BooleanExtensions.operator_not(_isArray_1);
                       if (_operator_not_5) {
                         _builder.append("\t\t");
@@ -770,8 +767,8 @@ public class SubSystemClassGen {
                         _builder.append(refToItem, "			");
                         _builder.append(".");
                         String _name_15 = a_1.getName();
-                        String _portClassName_1 = this.roomExt.getPortClassName(item);
-                        StringConcatenation _invokeSetter_2 = this.helpers.invokeSetter(_name_15, _portClassName_1, value_1);
+                        String _portClassName_1 = this._roomExtensions.getPortClassName(item);
+                        StringConcatenation _invokeSetter_2 = this._procedureHelpers.invokeSetter(_name_15, _portClassName_1, value_1);
                         _builder.append(_invokeSetter_2, "			");
                         _builder.append(";");
                         _builder.newLineIfNotEmpty();
@@ -791,7 +788,7 @@ public class SubSystemClassGen {
                           String _operator_plus_7 = StringExtensions.operator_plus("new ", _typeName_2);
                           String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "[]");
                           String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, value_1);
-                          StringConcatenation _invokeSetter_3 = this.helpers.invokeSetter(_name_16, _name_17, _operator_plus_9);
+                          StringConcatenation _invokeSetter_3 = this._procedureHelpers.invokeSetter(_name_16, _name_17, _operator_plus_9);
                           _builder.append(_invokeSetter_3, "			");
                           _builder.append(";");
                           _builder.newLineIfNotEmpty();
@@ -813,7 +810,7 @@ public class SubSystemClassGen {
                           String _name_18 = a_1.getName();
                           ActorClass _actorClass_7 = ai_3.getActorClass();
                           String _name_19 = _actorClass_7.getName();
-                          StringConcatenation _invokeGetter_2 = this.helpers.invokeGetter(_name_18, _name_19);
+                          StringConcatenation _invokeGetter_2 = this._procedureHelpers.invokeGetter(_name_18, _name_19);
                           _builder.append(_invokeGetter_2, "				");
                           _builder.append(";");
                           _builder.newLineIfNotEmpty();
@@ -909,7 +906,7 @@ public class SubSystemClassGen {
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_");
         String _path_10 = ai_5.getPath();
-        String _pathName_8 = this.roomExt.getPathName(_path_10);
+        String _pathName_8 = this._roomExtensions.getPathName(_path_10);
         _builder.append(_pathName_8, "					");
         _builder.newLineIfNotEmpty();
       }

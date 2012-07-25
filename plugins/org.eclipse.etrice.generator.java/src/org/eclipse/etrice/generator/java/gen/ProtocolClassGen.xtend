@@ -31,10 +31,10 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
 	@Inject extension DataClassGen
 	@Inject ILogger logger
@@ -59,7 +59,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.modelbase.*;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
-		«helpers.userCode(pc.userCode1)»
+		«pc.userCode(1)»
 		
 		«var models = root.getReferencedModels(pc)»
 		«FOR model : models»import «model.name».*;
@@ -69,7 +69,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// message IDs
 			«genMessageIDs(pc)»
 		
-			«helpers.userCode(pc.userCode2)»
+			«pc.userCode(2)»
 		
 			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 		
@@ -98,7 +98,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// port class
 		static public class «portClassName» extends PortBase {
 			«IF pclass!=null»
-				«helpers.userCode(pclass.userCode)»
+				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
 			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
@@ -108,7 +108,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
 				«IF pclass!=null»
-					«helpers.attributeInitialization(pclass.attributes, true)»
+					«pclass.attributes.attributeInitialization(true)»
 				«ENDIF»
 				DebuggingService.getInstance().addPortInstance(this);
 			}
@@ -149,10 +149,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 		
 			«IF pclass!=null»
-				«helpers.attributes(pclass.attributes)»
+				«pclass.attributes.attributes»
 				// TODO JH: Avoid collision attr getters/setter <-> user operations
 				«attributeSettersGettersImplementation(pclass.attributes, null)»
-				«helpers.operationsImplementation(pclass.operations, portClassName)»
+				«pclass.operations.operationsImplementation(portClassName)»
 			«ENDIF»
 			
 			// sent messages

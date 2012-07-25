@@ -38,13 +38,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private JavaExtensions _javaExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -59,11 +59,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
     for (final ProtocolClass pc : _usedProtocolClasses) {
       {
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(pc);
-        String _path = this.roomExt.getPath(pc);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(pc);
+        String _path = this._roomExtensions.getPath(pc);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
-        String _javaFileName = this.stdExt.getJavaFileName(pc);
+        String _javaFileName = this._javaExtensions.getJavaFileName(pc);
         String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating ProtocolClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
@@ -80,7 +80,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public StringConcatenation generate(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _package = this.roomExt.getPackage(pc);
+    String _package = this._roomExtensions.getPackage(pc);
     _builder.append(_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -97,8 +97,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
     _builder.newLine();
     _builder.newLine();
-    DetailCode _userCode1 = pc.getUserCode1();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    StringConcatenation _userCode = this._procedureHelpers.userCode(pc, 1);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -129,15 +128,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    DetailCode _userCode2 = pc.getUserCode2();
-    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    StringConcatenation _userCode_1 = this._procedureHelpers.userCode(pc, 2);
     _builder.append(_userCode_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_2 = m.getName();
@@ -147,7 +145,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
     _builder.append(" ");
     {
-      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_3 = m_1.getName();
@@ -202,11 +200,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public StringConcatenation portClass(final ProtocolClass pc, final Boolean conj) {
     StringConcatenation _xblockexpression = null;
     {
-      PortClass _portClass = this.roomExt.getPortClass(pc, conj);
+      PortClass _portClass = this._roomExtensions.getPortClass(pc, conj);
       PortClass pclass = _portClass;
-      String _portClassName = this.roomExt.getPortClassName(pc, conj);
+      String _portClassName = this._roomExtensions.getPortClassName(pc, conj);
       String portClassName = _portClassName;
-      String _portClassName_1 = this.roomExt.getPortClassName(pc, conj, true);
+      String _portClassName_1 = this._roomExtensions.getPortClassName(pc, conj, true);
       String replPortClassName = _portClassName_1;
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
@@ -221,7 +219,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         if (_operator_notEquals) {
           _builder.append("\t");
           DetailCode _userCode = pclass.getUserCode();
-          StringConcatenation _userCode_1 = this.helpers.userCode(_userCode);
+          StringConcatenation _userCode_1 = this._procedureHelpers.userCode(_userCode);
           _builder.append(_userCode_1, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -256,7 +254,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         if (_operator_notEquals_1) {
           _builder.append("\t\t");
           EList<Attribute> _attributes = pclass.getAttributes();
-          StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes, true);
+          StringConcatenation _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes, true);
           _builder.append(_attributeInitialization, "		");
           _builder.newLineIfNotEmpty();
         }
@@ -302,19 +300,19 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _handlesReceive = this.roomExt.handlesReceive(pc, conj);
+        boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, conj);
         if (_handlesReceive) {
           _builder.append("\t\t\t\t");
           _builder.append("switch (msg.getEvtId()) {");
           _builder.newLine();
           {
-            List<MessageHandler> _receiveHandlers = this.roomExt.getReceiveHandlers(pc, conj);
+            List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(pc, conj);
             for(final MessageHandler hdlr : _receiveHandlers) {
               _builder.append("\t\t\t\t");
               _builder.append("\t");
               _builder.append("case ");
               Message _msg = hdlr.getMsg();
-              String _codeName = this.roomExt.getCodeName(_msg);
+              String _codeName = this._roomExtensions.getCodeName(_msg);
               _builder.append(_codeName, "					");
               _builder.append(":");
               _builder.newLineIfNotEmpty();
@@ -362,7 +360,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
       _builder.newLine();
       {
-        boolean _handlesReceive_1 = this.roomExt.handlesReceive(pc, conj);
+        boolean _handlesReceive_1 = this._roomExtensions.handlesReceive(pc, conj);
         if (_handlesReceive_1) {
           _builder.append("\t\t\t\t");
           _builder.append("}");
@@ -381,7 +379,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         if (_operator_notEquals_2) {
           _builder.append("\t");
           EList<Attribute> _attributes_1 = pclass.getAttributes();
-          StringConcatenation _attributes_2 = this.helpers.attributes(_attributes_1);
+          StringConcatenation _attributes_2 = this._procedureHelpers.attributes(_attributes_1);
           _builder.append(_attributes_2, "	");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -389,12 +387,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
           _builder.append("\t");
           EList<Attribute> _attributes_3 = pclass.getAttributes();
-          StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_3, null);
+          StringConcatenation _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_3, null);
           _builder.append(_attributeSettersGettersImplementation, "	");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           EList<PortOperation> _operations = pclass.getOperations();
-          StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, portClassName);
+          StringConcatenation _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, portClassName);
           _builder.append(_operationsImplementation, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -405,7 +403,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _outgoing = this.roomExt.getOutgoing(pc, conj);
+        List<Message> _outgoing = this._roomExtensions.getOutgoing(pc, conj);
         for(final Message m : _outgoing) {
           _builder.append("\t");
           StringConcatenation _sendMessage = this.sendMessage(m, conj);
@@ -510,7 +508,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// incoming messages");
           _builder.newLine();
           {
-            List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+            List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
             for(final Message m_1 : _allIncomingMessages) {
               _builder.append("\t");
               StringConcatenation _messageSignature = this.messageSignature(m_1);
@@ -542,7 +540,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// outgoing messages");
           _builder.newLine();
           {
-            List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+            List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
             for(final Message m_2 : _allOutgoingMessages) {
               _builder.append("\t");
               StringConcatenation _messageSignature_1 = this.messageSignature(m_2);
@@ -661,7 +659,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _xifexpression = "OUT";
       }
       String dir = _xifexpression;
-      MessageHandler _sendHandler = this.roomExt.getSendHandler(m, conj);
+      MessageHandler _sendHandler = this._roomExtensions.getSendHandler(m, conj);
       MessageHandler hdlr = _sendHandler;
       StringConcatenation _builder = new StringConcatenation();
       StringConcatenation _messageSignature = this.messageSignature(m);

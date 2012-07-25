@@ -29,13 +29,13 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
 	
 	@Inject extension TypeHelpers
-	@Inject extension ProcedureHelpers helpers
-	@Inject extension StateMachineGen stateMachineGen
+	@Inject extension ProcedureHelpers
+	@Inject extension StateMachineGen
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -71,12 +71,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 			import «pc.^package».«pc.name».*;
 		«ENDFOR»
 		
-		«helpers.userCode(ac.userCode1)»
+		«ac.userCode(1)»
 		
 		
 		public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
 		
-			«helpers.userCode(ac.userCode2)»
+			«ac.userCode(2)»
 			
 			//--------------------- ports
 			«FOR ep : ac.getEndPorts()»
@@ -96,8 +96,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			//--------------------- interface item IDs
 			«genInterfaceItemConstants(xpac, ac)»
 				
-			«helpers.attributes(ac.attributes)»
-			«helpers.operationsImplementation(ac)»
+			«ac.attributes.attributes»
+			«ac.operationsImplementation»
 		
 			//--------------------- construction
 			public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -172,7 +172,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 		
 			«IF ac.hasNonEmptyStateMachine»
-				«stateMachineGen.genStateMachine(xpac, ac)»
+				«xpac.genStateMachine()»
 			«ELSEIF !xpac.hasStateMachine()»
 				//--------------------- no state machine
 				@Override

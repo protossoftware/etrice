@@ -6,11 +6,14 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -42,21 +45,122 @@ public class ProcedureHelpers {
   @Inject
   private ILogger logger;
   
+  public StringConcatenation userCode(final DataClass dc, final int id) {
+    StringConcatenation _switchResult = null;
+    final int id_1 = id;
+    boolean matched = false;
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,1)) {
+        matched=true;
+        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(dc);
+        StringConcatenation _userCode = this.userCode(_deepUserCode1);
+        _switchResult = _userCode;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,2)) {
+        matched=true;
+        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(dc);
+        StringConcatenation _userCode_1 = this.userCode(_deepUserCode2);
+        _switchResult = _userCode_1;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,3)) {
+        matched=true;
+        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(dc);
+        StringConcatenation _userCode_2 = this.userCode(_deepUserCode3);
+        _switchResult = _userCode_2;
+      }
+    }
+    return _switchResult;
+  }
+  
+  public StringConcatenation userCode(final ProtocolClass pc, final int id) {
+    StringConcatenation _switchResult = null;
+    final int id_1 = id;
+    boolean matched = false;
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,1)) {
+        matched=true;
+        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(pc);
+        StringConcatenation _userCode = this.userCode(_deepUserCode1);
+        _switchResult = _userCode;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,2)) {
+        matched=true;
+        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(pc);
+        StringConcatenation _userCode_1 = this.userCode(_deepUserCode2);
+        _switchResult = _userCode_1;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,3)) {
+        matched=true;
+        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(pc);
+        StringConcatenation _userCode_2 = this.userCode(_deepUserCode3);
+        _switchResult = _userCode_2;
+      }
+    }
+    return _switchResult;
+  }
+  
+  public StringConcatenation userCode(final ActorContainerClass ac, final int id) {
+    StringConcatenation _switchResult = null;
+    final int id_1 = id;
+    boolean matched = false;
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,1)) {
+        matched=true;
+        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(ac);
+        StringConcatenation _userCode = this.userCode(_deepUserCode1);
+        _switchResult = _userCode;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,2)) {
+        matched=true;
+        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(ac);
+        StringConcatenation _userCode_1 = this.userCode(_deepUserCode2);
+        _switchResult = _userCode_1;
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(id_1,3)) {
+        matched=true;
+        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(ac);
+        StringConcatenation _userCode_2 = this.userCode(_deepUserCode3);
+        _switchResult = _userCode_2;
+      }
+    }
+    return _switchResult;
+  }
+  
   public StringConcatenation userCode(final DetailCode dc) {
+    String _detailCode = RoomHelpers.getDetailCode(dc);
+    StringConcatenation _userCode = this.userCode(_detailCode);
+    return _userCode;
+  }
+  
+  private StringConcatenation userCode(final String code) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
-      if (_operator_notEquals) {
+      boolean _operator_and = false;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(code, null);
+      if (!_operator_notEquals) {
+        _operator_and = false;
+      } else {
+        boolean _isEmpty = code.isEmpty();
+        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_not);
+      }
+      if (_operator_and) {
         _builder.append("/*--------------------- begin user code ---------------------*/");
         _builder.newLine();
-        {
-          EList<String> _commands = dc.getCommands();
-          for(final String command : _commands) {
-            _builder.append("\t");
-            _builder.append(command, "");
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        _builder.append(code, "");
+        _builder.newLineIfNotEmpty();
         _builder.append("/*--------------------- end user code ---------------------*/");
         _builder.newLine();
       }

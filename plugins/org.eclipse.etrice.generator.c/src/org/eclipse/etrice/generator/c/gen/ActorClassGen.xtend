@@ -34,13 +34,13 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension CExtensions stdExt
-	@Inject extension RoomExtensions roomExt
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension CExtensions
+	@Inject extension RoomExtensions
 	
-	@Inject extension ProcedureHelpers helpers
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
-	@Inject extension StateMachineGen stateMachineGen
+	@Inject extension StateMachineGen
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -100,7 +100,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include "«pc.name».h"
 		«ENDFOR»
 		
-		«helpers.userCode(ac.userCode1)»
+		«ac.userCode(1)»
 		
 		typedef struct «ac.name» «ac.name»;
 		
@@ -144,7 +144,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		«IF !xpac.stateMachine.empty»
 			
-			«stateMachineGen.genHeaderConstants(xpac, ac)»
+			«xpac.genHeaderConstants»
 		«ENDIF»
 		
 		/* variable part of ActorClass (RAM) */
@@ -160,7 +160,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			«ENDFOR»
 
-			«helpers.attributes(ac.allAttributes)»
+			«ac.allAttributes.attributes»
 
 		«FOR a:ac.allAttributes»
 			«IF a.defaultValueLiteral!=null»
@@ -170,7 +170,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			«IF !xpac.stateMachine.empty»
 			
-				«stateMachineGen.genDataMembers(xpac, ac)»
+				«xpac.genDataMembers»
 			«ENDIF»
 		};
 
@@ -182,9 +182,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 			void «ac.name»_execute(«ac.name»* self);
 		«ENDIF»
 		
-		«helpers.operationsDeclaration(ac.operations, ac.name)»
+		«ac.operations.operationsDeclaration(ac.name)»
 		
-		«helpers.userCode(ac.userCode2)»
+		«ac.userCode(2)»
 		
 		«generateIncludeGuardEnd(ac.name)»
 		
@@ -216,19 +216,19 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include "«pc.getCHeaderFileName»"
 		«ENDFOR»
 		
-		«helpers.userCode(ac.userCode3)»
+		«ac.userCode(3)»
 
 		/* interface item IDs */
 		«genInterfaceItemConstants(xpac, ac)»
 
 		«IF !xpac.stateMachine.empty»
-			«stateMachineGen.genStateMachine(xpac, ac)»
+			«xpac.genStateMachine()»
 		«ENDIF»
 		
 		void «ac.name»_init(«ac.name»* self){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "init")
 			«IF !xpac.stateMachine.empty»
-				«stateMachineGen.genInitialization(xpac, ac)»
+				«xpac.genInitialization»
 			«ENDIF»
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
@@ -256,7 +256,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 		«ENDIF»
 		
-		«helpers.operationsImplementation(ac)»
+		«ac.operationsImplementation»
 		
 		'''
 	}

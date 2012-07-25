@@ -33,9 +33,9 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension CExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject extension CExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
@@ -67,7 +67,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "etDatatypes.h"
 		#include "modelbase/etPort.h"
 		
-		«helpers.userCode(pc.userCode1)»
+		«pc.userCode(1)»
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include "«dataClass.name».h"
@@ -95,7 +95,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		/* get message string for message id */
 		const char* «pc.name»_getMessageString(int msg_id);
 
-		«helpers.userCode(pc.userCode2)»
+		«pc.userCode(2)»
 		
 		«generateIncludeGuardEnd(pc.name)»
 		
@@ -113,7 +113,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCHeaderFileName»"
 		#include "debugging/etMSCLogger.h"
 
-		«helpers.userCode(pc.userCode3)»
+		«pc.userCode(3)»
 		
 		/*--------------------- port methods */
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»
@@ -144,7 +144,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 /* variable part of PortClass (RAM) */
 typedef struct «portClassName»_var «portClassName»_var; 
 struct «portClassName»_var {
-	«helpers.attributes(pc.getPortClass(conj).attributes)»
+	«pc.getPortClass(conj).attributes.attributes»
 	};
 				«FOR a:pc.getPortClass(conj).attributes»
 					«IF a.defaultValueLiteral!=null»
@@ -165,8 +165,8 @@ struct «portClassName»_var {
 		«ENDFOR»
 			
 		«IF (pc.getPortClass(conj) != null)»	
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, portClassName)»
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, replPortClassName)»
+			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
+			«pc.getPortClass(conj).operations.operationsDeclaration(replPortClassName)»
 		«ENDIF»
 		
  		«IF pc.handlesReceive(conj)»
@@ -288,8 +288,8 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 			«ENDFOR»
 			
 			«IF (pc.getPortClass(conj) != null)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, portClassName)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, replPortClassName)»
+				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
+				«pc.getPortClass(conj).operations.operationsImplementation(replPortClassName)»
 			«ENDIF»
 
 			// getReplication

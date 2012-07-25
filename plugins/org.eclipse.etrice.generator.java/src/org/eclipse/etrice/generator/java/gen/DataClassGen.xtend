@@ -31,11 +31,11 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 @Singleton
 class DataClassGen {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
-	@Inject extension TypeHelpers typeHelpers
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
+	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -59,18 +59,18 @@ class DataClassGen {
 		«FOR model : models»import «model.name».*;
 		«ENDFOR»
 		
-		«helpers.userCode(dc.userCode1)»
+		«dc.userCode(1)»
 		
 		
 		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
 			
-			«helpers.userCode(dc.userCode2)»
+			«dc.userCode(2)»
 			
-			«helpers.attributes(dc.attributes)»
+			«dc.attributes.attributes»
 			
-			«helpers.attributeSettersGettersImplementation(dc.attributes, dc.name)»
+			«dc.attributes.attributeSettersGettersImplementation(dc.name)»
 			
-			«helpers.operationsImplementation(dc.operations, dc.name)»
+			«dc.operations.operationsImplementation(dc.name)»
 			
 			// default constructor
 			public «dc.name»() {

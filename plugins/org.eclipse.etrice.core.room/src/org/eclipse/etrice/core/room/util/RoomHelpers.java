@@ -181,6 +181,62 @@ public class RoomHelpers {
 		return result;
 	}
 
+	public static String getDeepUserCode1(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE3);
+	}
+
+	public static String getDeepUserCode1(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE3);
+	}
+
+	public static String getDeepUserCode1(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE3);
+	}
+	
+	private static String getDeepUserCode(EObject obj, EStructuralFeature code) {
+		StringBuffer result = new StringBuffer();
+		
+		while (obj!=null) {
+			DetailCode dc = (DetailCode) obj.eGet(code);
+			result.insert(0, getDetailCode(dc));
+			
+			if (obj instanceof ActorClass)
+				obj = ((ActorClass) obj).getBase();
+			else if (obj instanceof ProtocolClass)
+				obj = ((ProtocolClass) obj).getBase();
+			else if (obj instanceof DataClass)
+				obj = ((DataClass) obj).getBase();
+			else
+				break;
+		}
+
+		return result.toString();
+	}
+	
 	public static boolean hasSubStructure(State state, ActorClass ac) {
 		if (hasDirectSubStructure(state))
 			return true;
@@ -290,7 +346,7 @@ public class RoomHelpers {
 			return true;
 		
 		if (includeInherited && s instanceof RefinedState)
-			return !getInheritedCode((RefinedState) s, feature).isEmpty();
+			return !getInheritedCode((RefinedState) s, feature, true /* order doesn't matter here */).getCommands().isEmpty();
 		
 		return false;
 	}
@@ -310,16 +366,16 @@ public class RoomHelpers {
 		return result.toString();
 	}
 
-	public static String getInheritedEntryCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE);
+	public static DetailCode getInheritedEntryCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE, true);
 	}
 
-	public static String getInheritedExitCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE);
+	public static DetailCode getInheritedExitCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE, false);
 	}
 
-	public static String getInheritedDoCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE);
+	public static DetailCode getInheritedDoCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE, true);
 	}
 	
 	/**
@@ -327,17 +383,24 @@ public class RoomHelpers {
 	 * @param code
 	 * @return
 	 */
-	private static String getInheritedCode(RefinedState rs, EReference code) {
-		StringBuffer result = new StringBuffer();
+	private static DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
+		DetailCode result = RoomFactory.eINSTANCE.createDetailCode();
 		State s = rs.getTarget();
 		while (s!=null) {
-			result.append(RoomHelpers.getDetailCode((DetailCode) s.eGet(code)));
+			DetailCode dc = (DetailCode) s.eGet(code);
+			if (dc!=null) {
+				if (addFront)
+					result.getCommands().addAll(0, dc.getCommands());
+				else
+					result.getCommands().addAll(dc.getCommands());
+				
+			}
 			if (s instanceof RefinedState)
 				s = ((RefinedState) s).getTarget();
 			else
 				break;
 		}
-		return result.toString();
+		return result;
 	}
 
 	/**

@@ -14,7 +14,6 @@ import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -45,19 +44,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private CExtensions stdExt;
+  private CExtensions _cExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private TypeHelpers _typeHelpers;
   
   @Inject
-  private StateMachineGen stateMachineGen;
+  private StateMachineGen _stateMachineGen;
   
   @Inject
   private ILogger logger;
@@ -67,13 +66,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_actorClass);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _path = this.roomExt.getPath(_actorClass_1);
+        String _path = this._roomExtensions.getPath(_actorClass_1);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _cHeaderFileName = this.stdExt.getCHeaderFileName(_actorClass_2);
+        String _cHeaderFileName = this._cExtensions.getCHeaderFileName(_actorClass_2);
         String _operator_plus_1 = StringExtensions.operator_plus("generating ActorClass header \'", _cHeaderFileName);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
         String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
@@ -81,7 +80,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         this.logger.logInfo(_operator_plus_4);
         this.fileAccess.setOutputPath(path);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(_actorClass_3);
+        String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(_actorClass_3);
         ActorClass _actorClass_4 = xpac.getActorClass();
         StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, xpac, _actorClass_4);
         this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
@@ -95,7 +94,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         } else {
           {
             ActorClass _actorClass_6 = xpac.getActorClass();
-            String _cSourceFileName = this.stdExt.getCSourceFileName(_actorClass_6);
+            String _cSourceFileName = this._cExtensions.getCSourceFileName(_actorClass_6);
             String _operator_plus_7 = StringExtensions.operator_plus("generating ActorClass source \'", _cSourceFileName);
             String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\' in \'");
             String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, path);
@@ -103,7 +102,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             this.logger.logInfo(_operator_plus_10);
             this.fileAccess.setOutputPath(path);
             ActorClass _actorClass_7 = xpac.getActorClass();
-            String _cSourceFileName_1 = this.stdExt.getCSourceFileName(_actorClass_7);
+            String _cSourceFileName_1 = this._cExtensions.getCSourceFileName(_actorClass_7);
             ActorClass _actorClass_8 = xpac.getActorClass();
             StringConcatenation _generateSourceFile = this.generateSourceFile(root, xpac, _actorClass_8);
             this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
@@ -139,7 +138,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private StringConcatenation generateHeaderFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
     StringConcatenation _xblockexpression = null;
     {
-      List<Port> _allEndPorts = this.roomExt.getAllEndPorts(ac);
+      List<Port> _allEndPorts = this._roomExtensions.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             GeneralProtocolClass _protocol = p.getProtocol();
@@ -150,7 +149,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<Port> _filter = IterableExtensions.<Port>filter(_allEndPorts, _function);
       Iterable<Port> eventPorts = _filter;
-      List<Port> _allEndPorts_1 = this.roomExt.getAllEndPorts(ac);
+      List<Port> _allEndPorts_1 = this._roomExtensions.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _operator_and = false;
@@ -168,7 +167,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<Port> _filter_1 = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       Iterable<Port> sendPorts = _filter_1;
-      List<Port> _allEndPorts_2 = this.roomExt.getAllEndPorts(ac);
+      List<Port> _allEndPorts_2 = this._roomExtensions.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _operator_and = false;
@@ -215,7 +214,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       String _name_1 = ac.getName();
-      StringConcatenation _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(_name_1);
+      StringConcatenation _generateIncludeGuardBegin = this._cExtensions.generateIncludeGuardBegin(_name_1);
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -245,8 +244,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      DetailCode _userCode1 = ac.getUserCode1();
-      StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+      StringConcatenation _userCode = this._procedureHelpers.userCode(ac, 1);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -275,14 +273,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (!_operator_and_2) {
           _operator_and_1 = false;
         } else {
-          List<SAPRef> _allSAPs = this.roomExt.getAllSAPs(ac);
+          List<SAPRef> _allSAPs = this._roomExtensions.getAllSAPs(ac);
           boolean _isEmpty_2 = _allSAPs.isEmpty();
           _operator_and_1 = BooleanExtensions.operator_and(_operator_and_2, _isEmpty_2);
         }
         if (!_operator_and_1) {
           _operator_and = false;
         } else {
-          List<ServiceImplementation> _allServiceImplementations = this.roomExt.getAllServiceImplementations(ac);
+          List<ServiceImplementation> _allServiceImplementations = this._roomExtensions.getAllServiceImplementations(ac);
           boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
           _operator_and = BooleanExtensions.operator_and(_operator_and_1, _isEmpty_3);
         }
@@ -306,7 +304,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 if (_operator_equals_2) {
                   _builder.append("\t");
                   _builder.append("const ");
-                  String _portClassName = this.roomExt.getPortClassName(ep);
+                  String _portClassName = this._roomExtensions.getPortClassName(ep);
                   _builder.append(_portClassName, "	");
                   _builder.append(" ");
                   String _name_7 = ep.getName();
@@ -330,7 +328,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 if (_operator_equals_3) {
                   _builder.append("\t");
                   _builder.append("const ");
-                  String _portClassName_1 = this.roomExt.getPortClassName(ep_1);
+                  String _portClassName_1 = this._roomExtensions.getPortClassName(ep_1);
                   _builder.append(_portClassName_1, "	");
                   _builder.append(" ");
                   String _name_8 = ep_1.getName();
@@ -346,11 +344,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* saps */");
           _builder.newLine();
           {
-            List<SAPRef> _allSAPs_1 = this.roomExt.getAllSAPs(ac);
+            List<SAPRef> _allSAPs_1 = this._roomExtensions.getAllSAPs(ac);
             for(final SAPRef sap : _allSAPs_1) {
               _builder.append("\t");
               _builder.append("const ");
-              String _portClassName_2 = this.roomExt.getPortClassName(sap);
+              String _portClassName_2 = this._roomExtensions.getPortClassName(sap);
               _builder.append(_portClassName_2, "	");
               _builder.append(" ");
               String _name_9 = sap.getName();
@@ -365,7 +363,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* replicated ports */");
           _builder.newLine();
           {
-            List<Port> _allEndPorts_3 = this.roomExt.getAllEndPorts(ac);
+            List<Port> _allEndPorts_3 = this._roomExtensions.getAllEndPorts(ac);
             for(final Port ep_2 : _allEndPorts_3) {
               {
                 int _multiplicity_2 = ep_2.getMultiplicity();
@@ -387,7 +385,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* services */");
           _builder.newLine();
           {
-            List<ServiceImplementation> _allServiceImplementations_1 = this.roomExt.getAllServiceImplementations(ac);
+            List<ServiceImplementation> _allServiceImplementations_1 = this._roomExtensions.getAllServiceImplementations(ac);
             for(final ServiceImplementation svc : _allServiceImplementations_1) {
               _builder.append("\t");
               _builder.append("const etReplPort ");
@@ -412,7 +410,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_4);
         if (_operator_not) {
           _builder.newLine();
-          StringConcatenation _genHeaderConstants = this.stateMachineGen.genHeaderConstants(xpac, ac);
+          StringConcatenation _genHeaderConstants = this._stateMachineGen.genHeaderConstants(xpac);
           _builder.append(_genHeaderConstants, "");
           _builder.newLineIfNotEmpty();
         }
@@ -439,14 +437,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (!_operator_and_5) {
           _operator_and_4 = false;
         } else {
-          List<SAPRef> _allSAPs_2 = this.roomExt.getAllSAPs(ac);
+          List<SAPRef> _allSAPs_2 = this._roomExtensions.getAllSAPs(ac);
           boolean _isEmpty_7 = _allSAPs_2.isEmpty();
           _operator_and_4 = BooleanExtensions.operator_and(_operator_and_5, _isEmpty_7);
         }
         if (!_operator_and_4) {
           _operator_and_3 = false;
         } else {
-          List<ServiceImplementation> _allServiceImplementations_2 = this.roomExt.getAllServiceImplementations(ac);
+          List<ServiceImplementation> _allServiceImplementations_2 = this._roomExtensions.getAllServiceImplementations(ac);
           boolean _isEmpty_8 = _allServiceImplementations_2.isEmpty();
           _operator_and_3 = BooleanExtensions.operator_and(_operator_and_4, _isEmpty_8);
         }
@@ -472,7 +470,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _operator_equals_4 = ObjectExtensions.operator_equals(((Integer)_multiplicity_3), ((Integer)1));
             if (_operator_equals_4) {
               _builder.append("\t");
-              String _portClassName_3 = this.roomExt.getPortClassName(ep_3);
+              String _portClassName_3 = this._roomExtensions.getPortClassName(ep_3);
               _builder.append(_portClassName_3, "	");
               _builder.append(" ");
               String _name_15 = ep_3.getName();
@@ -485,13 +483,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       _builder.append("\t");
-      List<Attribute> _allAttributes = this.roomExt.getAllAttributes(ac);
-      StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
+      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(ac);
+      StringConcatenation _attributes = this._procedureHelpers.attributes(_allAttributes);
       _builder.append(_attributes, "	");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        List<Attribute> _allAttributes_1 = this.roomExt.getAllAttributes(ac);
+        List<Attribute> _allAttributes_1 = this._roomExtensions.getAllAttributes(ac);
         for(final Attribute a : _allAttributes_1) {
           {
             String _defaultValueLiteral = a.getDefaultValueLiteral();
@@ -519,7 +517,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          StringConcatenation _genDataMembers = this.stateMachineGen.genDataMembers(xpac, ac);
+          StringConcatenation _genDataMembers = this._stateMachineGen.genDataMembers(xpac);
           _builder.append(_genDataMembers, "		");
           _builder.newLineIfNotEmpty();
         }
@@ -563,17 +561,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       EList<StandardOperation> _operations = ac.getOperations();
       String _name_23 = ac.getName();
-      StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_23);
+      StringConcatenation _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_23);
       _builder.append(_operationsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      DetailCode _userCode2 = ac.getUserCode2();
-      StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+      StringConcatenation _userCode_1 = this._procedureHelpers.userCode(ac, 2);
       _builder.append(_userCode_1, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       String _name_24 = ac.getName();
-      StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_24);
+      StringConcatenation _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_24);
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -623,7 +620,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       _builder.append("#include \"");
-      String _cHeaderFileName = this.stdExt.getCHeaderFileName(ac);
+      String _cHeaderFileName = this._cExtensions.getCHeaderFileName(ac);
       _builder.append(_cHeaderFileName, "");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
@@ -641,15 +638,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
           _builder.append("#include \"");
-          String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(pc);
+          String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(pc);
           _builder.append(_cHeaderFileName_1, "");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
-      DetailCode _userCode3 = ac.getUserCode3();
-      StringConcatenation _userCode = this.helpers.userCode(_userCode3);
+      StringConcatenation _userCode = this._procedureHelpers.userCode(ac, 3);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -664,7 +660,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _isEmpty = RoomHelpers.isEmpty(_stateMachine);
         boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
         if (_operator_not) {
-          StringConcatenation _genStateMachine = this.stateMachineGen.genStateMachine(xpac, ac);
+          StringConcatenation _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
           _builder.append(_genStateMachine, "");
           _builder.newLineIfNotEmpty();
         }
@@ -690,7 +686,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
         if (_operator_not_1) {
           _builder.append("\t");
-          StringConcatenation _genInitialization = this.stateMachineGen.genInitialization(xpac, ac);
+          StringConcatenation _genInitialization = this._stateMachineGen.genInitialization(xpac);
           _builder.append(_genInitialization, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -789,7 +785,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(ac);
+      StringConcatenation _operationsImplementation = this._procedureHelpers.operationsImplementation(ac);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

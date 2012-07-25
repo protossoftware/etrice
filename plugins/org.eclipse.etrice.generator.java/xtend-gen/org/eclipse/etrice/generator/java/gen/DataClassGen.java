@@ -33,16 +33,16 @@ public class DataClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private JavaExtensions _javaExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
-  private TypeHelpers typeHelpers;
+  private TypeHelpers _typeHelpers;
   
   @Inject
   private ILogger logger;
@@ -51,11 +51,11 @@ public class DataClassGen {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
       {
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(dc);
-        String _path = this.roomExt.getPath(dc);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
+        String _path = this._roomExtensions.getPath(dc);
         String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
         String path = _operator_plus;
-        String _javaFileName = this.stdExt.getJavaFileName(dc);
+        String _javaFileName = this._javaExtensions.getJavaFileName(dc);
         String file = _javaFileName;
         String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass implementation \'", file);
         String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
@@ -94,7 +94,7 @@ public class DataClassGen {
       final StandardOperation dtor = _head_1;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
-      String _package = this.roomExt.getPackage(dc);
+      String _package = this._roomExtensions.getPackage(dc);
       _builder.append(_package, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
@@ -112,8 +112,7 @@ public class DataClassGen {
         }
       }
       _builder.newLine();
-      DetailCode _userCode1 = dc.getUserCode1();
-      StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+      StringConcatenation _userCode = this._procedureHelpers.userCode(dc, 1);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -136,15 +135,14 @@ public class DataClassGen {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      DetailCode _userCode2 = dc.getUserCode2();
-      StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+      StringConcatenation _userCode_1 = this._procedureHelpers.userCode(dc, 2);
       _builder.append(_userCode_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes = dc.getAttributes();
-      StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+      StringConcatenation _attributes_1 = this._procedureHelpers.attributes(_attributes);
       _builder.append(_attributes_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -152,7 +150,7 @@ public class DataClassGen {
       _builder.append("\t");
       EList<Attribute> _attributes_2 = dc.getAttributes();
       String _name_3 = dc.getName();
-      StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
+      StringConcatenation _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
       _builder.append(_attributeSettersGettersImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -160,7 +158,7 @@ public class DataClassGen {
       _builder.append("\t");
       EList<StandardOperation> _operations_2 = dc.getOperations();
       String _name_4 = dc.getName();
-      StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations_2, _name_4);
+      StringConcatenation _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations_2, _name_4);
       _builder.append(_operationsImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -181,7 +179,7 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_3 = dc.getAttributes();
-      StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_3, true);
+      StringConcatenation _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes_3, true);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       {
@@ -351,7 +349,7 @@ public class DataClassGen {
       while (_xwhileexpression) {
         {
           EList<Attribute> _attributes = dc.getAttributes();
-          StringConcatenation _argList = this.helpers.argList(_attributes);
+          StringConcatenation _argList = this._procedureHelpers.argList(_attributes);
           String _string = _argList.toString();
           String _operator_plus = StringExtensions.operator_plus(_string, result);
           result = _operator_plus;
