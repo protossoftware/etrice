@@ -564,21 +564,6 @@ public class RoomHelpers {
 	public static Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 	}
-
-	/*
-	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
-		if (skip instanceof Transition)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
-		else if (skip instanceof State)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
-		else if (skip instanceof ChoicePoint)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
-		else if (skip instanceof TrPoint)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
-		
-		return Collections.emptySet();
-	}
-	*/
 	
 	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
 		List<T> items = RoomHelpers.getAllStateGraphItems(sg, feature, false);
@@ -611,7 +596,7 @@ public class RoomHelpers {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (ac!=null) {
-			result.addAll(ac.getAttributes());
+			result.addAll(0, ac.getAttributes());
 			
 			ac = ac.getBase();
 		}
@@ -623,7 +608,7 @@ public class RoomHelpers {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (dc!=null) {
-			result.addAll(dc.getAttributes());
+			result.addAll(0, dc.getAttributes());
 			
 			dc = dc.getBase();
 		}
@@ -635,7 +620,7 @@ public class RoomHelpers {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (ac!=null) {
-			result.addAll(ac.getOperations());
+			result.addAll(0, ac.getOperations());
 			
 			ac = ac.getBase();
 		}
@@ -647,7 +632,7 @@ public class RoomHelpers {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (dc!=null) {
-			result.addAll(dc.getOperations());
+			result.addAll(0, dc.getOperations());
 			
 			dc = dc.getBase();
 		}
