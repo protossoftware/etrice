@@ -125,7 +125,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
 			«pc.genDataDrivenPortSources»
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
-			#error "synchronoue protocols not implemented yet"
+			#error "synchronous protocols not implemented yet"
 		«ENDIF»
 	'''
 	}
@@ -141,11 +141,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«IF pc.getPortClass(conj)!=null»	
 			«IF !(pc.getPortClass(conj).attributes.empty)»
-/* variable part of PortClass (RAM) */
-typedef struct «portClassName»_var «portClassName»_var; 
-struct «portClassName»_var {
-	«pc.getPortClass(conj).attributes.attributes»
-	};
+				/* variable part of PortClass (RAM) */
+				typedef struct «portClassName»_var «portClassName»_var; 
+				struct «portClassName»_var {
+					«pc.getPortClass(conj).attributes.attributes»
+					};
 				«FOR a:pc.getPortClass(conj).attributes»
 					«IF a.defaultValueLiteral!=null»
 						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
@@ -153,7 +153,7 @@ struct «portClassName»_var {
 				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
-			
+		
 		«FOR message : messages»
 			«var hasData = message.data!=null»
 			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
@@ -163,18 +163,18 @@ struct «portClassName»_var {
 			«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
 			«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
 		«ENDFOR»
-			
+		
 		«IF (pc.getPortClass(conj) != null)»	
 			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
 			«pc.getPortClass(conj).operations.operationsDeclaration(replPortClassName)»
 		«ENDIF»
 		
- 		«IF pc.handlesReceive(conj)»
+		«IF pc.handlesReceive(conj)»
 			«FOR h:getReceiveHandlers(pc,conj)»
-void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
+				void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
 			«ENDFOR»
 		«ENDIF»
-etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
+		etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 		'''
 	}
 
@@ -360,7 +360,7 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 		
 «««		TODO: make this optional or different for smaller footprint
 		/* message names as strings for debugging (generate MSC) */
-		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
+		static const char* const «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
 
 		const char* «pc.name»_getMessageString(int msg_id) {
 			if (msg_id<«pc.name»_MSG_MIN || msg_id>«pc.name»_MSG_MAX+1){
