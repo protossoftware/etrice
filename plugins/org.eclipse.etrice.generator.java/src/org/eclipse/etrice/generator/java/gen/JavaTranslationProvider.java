@@ -15,6 +15,7 @@ package org.eclipse.etrice.generator.java.gen;
 import java.util.ArrayList;
 
 import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -39,6 +40,14 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 	@Override
 	public boolean translateTags() {
 		return true;
+	}
+	
+	@Override
+	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
+		if (index!=null)
+			return att.getName()+"["+index+"] = "+value;
+		else
+			return att.getName()+" = "+value;
 	}
 	
 	@Override
