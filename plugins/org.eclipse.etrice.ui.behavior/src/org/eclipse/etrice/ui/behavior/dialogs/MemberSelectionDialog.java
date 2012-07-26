@@ -99,8 +99,13 @@ public class MemberSelectionDialog extends FormDialog {
 					return ((Operation) element).getReturntype()==null ? "void":((Operation) element).getReturntype().getType().getName();
 				break;
 			case 1:
-				if (element instanceof Attribute)
-					return ((Attribute) element).getName();
+				if (element instanceof Attribute) {
+					int sz = ((Attribute) element).getSize();
+					if (sz>1)
+						return ((Attribute) element).getName()+"["+sz+"]";
+					else
+						return ((Attribute) element).getName();
+				}
 				else if (element instanceof Operation)
 					return ((Operation) element).getName();
 				break;
