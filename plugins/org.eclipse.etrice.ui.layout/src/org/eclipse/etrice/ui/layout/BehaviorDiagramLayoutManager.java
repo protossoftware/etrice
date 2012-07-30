@@ -11,6 +11,7 @@
 
 package org.eclipse.etrice.ui.layout;
 
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -77,32 +78,32 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 	}
 
 	@Override
-	protected Size getDefaultSize(Shape shape) {
-		Size defaultSize = new Size();
-		
-		// This code sets same minimal default size for both State Graph and
+	protected Dimension getDefaultSize(Shape shape) {
+		Dimension defaultSize = new Dimension();
+
+		// This code sets the same minimal default size for both State Graph and
 		// State
-		defaultSize.setHeight(StateSupport.MIN_SIZE_Y);
-		defaultSize.setWidth(StateSupport.MIN_SIZE_X);
-				
+		defaultSize.setSize(StateSupport.MIN_SIZE_X, StateSupport.MIN_SIZE_Y);
+
 		/*
-		 * This code sets default size differently for Actor Class and Actor Container
-		 * Refs. This keeps the top-level container quite large on layout, which
-		 * might not seem so pleasant, but is more closer to the model.
+		 * This code sets default size differently for State Graphs and States.
+		 * This keeps the top-level container quite large on layout (according
+		 * to the default size in StateGraphSupport), which might not seem so
+		 * pleasant.
 		 */
-		/*		
+		/*
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
 		if (modelObject instanceof StateGraph) {
-			defaultSize.setHeight(StateGraphSupport.DEFAULT_SIZE_Y);
-			defaultSize.setWidth(StateGraphSupport.DEFAULT_SIZE_X);
+			defaultSize.setSize(StateGraphSupport.DEFAULT_SIZE_X,
+					StateGraphSupport.DEFAULT_SIZE_Y);
 		} else if (modelObject instanceof State) {
-			defaultSize.setHeight(StateSupport.MIN_SIZE_Y);
-			defaultSize.setWidth(StateSupport.MIN_SIZE_X);
+			defaultSize.setSize(StateSupport.MIN_SIZE_X,
+					StateSupport.MIN_SIZE_Y);
+
 		} else {
-			defaultSize.setHeight(MIN_HEIGHT);
-			defaultSize.setWidth(MIN_WIDHT);
+			defaultSize.setSize(20, 20);
 		}*/
-		
+
 		return defaultSize;
 	}
 
@@ -146,7 +147,6 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		return false;
 	}
 
-	
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -154,10 +154,10 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 	 */
 	@Override
 	public boolean isInternalPort(Shape shape) {
-		//No shape is an internal port (i.e. All ports are external only)
+		// No shape is an internal port (i.e. All ports are external only)
 		return false;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -172,5 +172,4 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		return false;
 	}
 
-	
 }

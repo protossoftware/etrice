@@ -8,29 +8,55 @@
             priority="1">
       </manager>
       <manager
-            class="org.eclipse.etrice.ui.layout.StructureDiagramLayoutmanager"
+            class="org.eclipse.etrice.ui.layout.StructureDiagramLayoutManager"
             priority="1">
       </manager>
    </extension>
    <extension
          point="de.cau.cs.kieler.kiml.layoutInfo">
+      <diagramType
+            id="org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram"
+            name="eTrice Behavior Diagram">
+      </diagramType>
       <option
-            class="org.eclipse.etrice.core.room.ActorClass"
-            option="de.cau.cs.kieler.borderSpacing"
-            value="50">
+            class="org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram"
+            option="de.cau.cs.kieler.algorithm"
+            value="de.cau.cs.kieler.graphviz.dot">
       </option>
       <option
-            class="org.eclipse.etrice.core.room.ActorClass"
+            class="org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram"
+            option="de.cau.cs.kieler.borderSpacing"
+            value="30">
+      </option>
+      <diagramType
+            id="org.eclipse.etrice.ui.layout.eTriceStructureDiagram"
+            name="eTrice Structure Diagram">
+      </diagramType>
+      <option
+            class="org.eclipse.etrice.ui.layout.eTriceStructureDiagram"
+            option="de.cau.cs.kieler.algorithm"
+            value="de.cau.cs.kieler.klay.layered">
+      </option>
+      <option
+            class="org.eclipse.etrice.ui.layout.eTriceStructureDiagram"
             option="de.cau.cs.kieler.spacing"
             value="50">
       </option>
       <option
-            class="org.eclipse.etrice.core.room.StateGraph"
+            class="org.eclipse.etrice.ui.layout.eTriceStructureDiagram"
             option="de.cau.cs.kieler.borderSpacing"
-            value="30">
+            value="50">
       </option>
-      <option
+      <semanticOption
+            class="org.eclipse.etrice.core.room.ActorContainerClass"
+            config="org.eclipse.etrice.ui.layout.ETriceSemanticLayoutConfig">
+      </semanticOption>
+      <semanticOption
             class="org.eclipse.etrice.core.room.StateGraph"
+            config="org.eclipse.etrice.ui.layout.ETriceSemanticLayoutConfig">
+      </semanticOption>
+      <option
+            class="org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram"
             option="de.cau.cs.kieler.spacing"
             value="50">
       </option>

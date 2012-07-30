@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Jayant Gupta (initial contribution)
+ * 
+ *******************************************************************************/
 package org.eclipse.etrice.ui.layout;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +29,12 @@ import org.eclipse.graphiti.services.IGaService;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
 
+/**
+ * A command for applying the result of automatic layout to diagram elements in
+ * eTrice Structure Editor.
+ * 
+ * @author jayant
+ */
 public class StructureLayoutCommand extends ETriceLayoutCommand {
 
 	public StructureLayoutCommand(TransactionalEditingDomain domain,
@@ -79,11 +95,12 @@ public class StructureLayoutCommand extends ETriceLayoutCommand {
 	 */
 	private static void adjustLabelForPort(ContainerShape shape) {
 		GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
-		EObject boContainer = shape.getContainer().getLink().getBusinessObjects().get(0);
+		EObject boContainer = shape.getContainer().getLink()
+				.getBusinessObjects().get(0);
 
 		// First make sure that the shape corresponds to a Port
 		EObject bo = shape.getLink().getBusinessObjects().get(0);
-		if ( bo instanceof InterfaceItem) {
+		if (bo instanceof InterfaceItem) {
 			// margin and size for bounding box (ActorClass )
 			int margin = InterfaceItemSupport.MARGIN;
 			int size = InterfaceItemSupport.ITEM_SIZE;

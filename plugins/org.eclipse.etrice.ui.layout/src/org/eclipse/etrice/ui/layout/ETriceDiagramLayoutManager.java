@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -32,11 +33,7 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.graphiti.ui.internal.parts.IPictogramElementEditPart;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.kgraph.KLabeledGraphElement;
@@ -58,7 +55,7 @@ import de.cau.cs.kieler.kiml.util.KimlUtil;
 /**
  * The abstract class to support the creation of eTrice
  * {@link BehaviorDiagramLayoutManager } and
- * {@link StructureDiagramLayoutmanager}
+ * {@link StructureDiagramLayoutManager}
  * 
  * @author jayant
  */
@@ -233,6 +230,14 @@ public abstract class ETriceDiagramLayoutManager extends
 			shapeLayout.setSize(ga.getWidth(), ga.getHeight());
 			mapping.getGraphMap().put(diagramNode, element);
 
+			VolatileLayoutConfig staticConfig = mapping
+					.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
+
+			if (workbenchPart instanceof BehaviorEditor)
+				staticConfig.setValue(LayoutOptions.DIAGRAM_TYPE, diagramNode,
+						LayoutContext.GRAPH_ELEM,
+						ETriceSemanticLayoutConfig.BEHAVIOR_DAGRAM_TYPE);
+
 			// Node creation for currently visible top-level Container
 			// Shape(Bounding Box) in
 			// eTrice Diagrams
@@ -265,32 +270,20 @@ public abstract class ETriceDiagramLayoutManager extends
 					mapping.setLayoutGraph((KNode) internalKGraphElement);
 
 				} else {
-					// The selected Element is a Port(Boundary or Internal) or an Edge Label.
-
-					// Giving the user a SWT dialog indicating that this Shape
-					// cannot be lay-outed.
-					Shell shell = PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getShell();
-					MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR
-							| SWT.OK | SWT.CANCEL);
-					dialog.setText("Invalid Layout Call");
-					dialog.setMessage("This shape connot be layouted saparately.");
-					System.out.println(dialog.open());
+					// The selected Element is a Port(Boundary or Internal) or
+					// an Edge Label.
+					// It is an illegal argument for layout
+					throw new IllegalArgumentException(
+							"The seleted element cannot be lay-outed separately");
 
 				}
 
 			}
 		} else if (element instanceof FreeFormConnection) {
-			// This gives the user a SWT dialog indicating this is a connection
-			// and
-			// cannot be lay-outed.
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-					.getShell();
-			MessageBox dialog = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK
-					| SWT.CANCEL);
-			dialog.setText("Invalid Layout Call");
-			dialog.setMessage("A connection connot be layouted saparately");
-			System.out.println(dialog.open());
+			// The selected element is an edge.
+			// It is an illegal argument for layout
+			throw new IllegalArgumentException(
+					"A connection cannot be layouted separately");
 		}
 
 		for (Connection entry : mapping
@@ -313,8 +306,13 @@ public abstract class ETriceDiagramLayoutManager extends
 	 * @param mapping
 	 *            the mapping of pictogram elements to graph elements
 	 * @param diagram
+	 *            The Diagram Containing the Bounding Box
 	 * @param diagramNode
+	 *            The Node for the diagram
 	 * @param onlyVisible
+	 *            If true, only the visible bounding box will be lay-outed.
+	 *            Otherwise, all bounding boxes in current Diagram are
+	 *            lay-outed.
 	 * 
 	 * @author jayant
 	 */
@@ -491,7 +489,7 @@ public abstract class ETriceDiagramLayoutManager extends
 	 * This is fairly general for both the eTrice editors and same for Nodes and
 	 * Ports
 	 */
-	public static void setCurrentPositionAndSize(
+	protected void setCurrentPositionAndSize(
 			final LayoutMapping<PictogramElement> mapping,
 			final KNode parentNode, final KGraphElement kelem, final Shape shape) {
 
@@ -545,7 +543,7 @@ public abstract class ETriceDiagramLayoutManager extends
 	 * @param node
 	 *            the node for which layout options need to be set
 	 * @param shape
-	 *            TODO
+	 *            the corresponding shape
 	 * @author jayant
 	 */
 	/* This is fairly general for both the eTrice editors */
@@ -567,56 +565,11 @@ public abstract class ETriceDiagramLayoutManager extends
 		VolatileLayoutConfig staticConfig = mapping
 				.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
 
-		Size defaultSize = getDefaultSize(shape);
+		Dimension defaultSize = getDefaultSize(shape);
 		staticConfig.setValue(LayoutOptions.MIN_WIDTH, node,
-				LayoutContext.GRAPH_ELEM, defaultSize.getWidth() + labelWidth);
-		staticConfig
-				.setValue(LayoutOptions.MIN_HEIGHT, node,
-						LayoutContext.GRAPH_ELEM, defaultSize.getHeight()
-								+ labelHeight);
-	}
-
-	public static class Size {
-		private float width = 0;
-		private float height = 0;
-
-		/**
-		 * Getter for width
-		 * 
-		 * @return the width
-		 */
-		public float getWidth() {
-			return width;
-		}
-
-		/**
-		 * Setter for width
-		 * 
-		 * @param width
-		 *            the width to set
-		 */
-		public void setWidth(float width) {
-			this.width = width;
-		}
-
-		/**
-		 * Getter for height
-		 * 
-		 * @return the height
-		 */
-		public float getHeight() {
-			return height;
-		}
-
-		/**
-		 * Setter for height
-		 * 
-		 * @param height
-		 *            the height to set
-		 */
-		public void setHeight(float height) {
-			this.height = height;
-		}
+				LayoutContext.GRAPH_ELEM, defaultSize.width() + labelWidth);
+		staticConfig.setValue(LayoutOptions.MIN_HEIGHT, node,
+				LayoutContext.GRAPH_ELEM, defaultSize.height() + labelHeight);
 	}
 
 	/**
@@ -646,6 +599,7 @@ public abstract class ETriceDiagramLayoutManager extends
 	 * 
 	 * @param shape
 	 *            the shape to be investigated
+	 * 
 	 * @return true if the {@code shape} is the Top Level Bounding Box
 	 * 
 	 * @author jayant
@@ -653,15 +607,15 @@ public abstract class ETriceDiagramLayoutManager extends
 	public abstract boolean isTopLevelBoundingBox(Shape shape);
 
 	/**
-	 * Gets the Default Minimal Width for a node
+	 * Gets the Default Minimal Size for a node
 	 * 
 	 * @param shape
-	 *            TODO
+	 *            The shape attached to the node
 	 * 
-	 * @return the defaults minimal width a node
+	 * @return the defaults minimal size for a node
 	 * 
 	 * @author jayant
 	 */
-	protected abstract Size getDefaultSize(Shape shape);
+	protected abstract Dimension getDefaultSize(Shape shape);
 
 }

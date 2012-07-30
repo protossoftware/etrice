@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Jayant Gupta (initial contribution)
+ * 
+ *******************************************************************************/
 package org.eclipse.etrice.ui.layout;
 
 import org.eclipse.emf.ecore.EObject;
@@ -18,6 +28,12 @@ import org.eclipse.graphiti.services.IGaService;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
 
+/**
+ * A command for applying the result of automatic layout to diagram elements in
+ * eTrice Behavior Editor.
+ * 
+ * @author jayant
+ */
 public class BehaviorLayoutCommand extends ETriceLayoutCommand {
 
 	public BehaviorLayoutCommand(TransactionalEditingDomain domain,

@@ -34,8 +34,9 @@ import de.cau.cs.kieler.kiml.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.klayoutdata.KShapeLayout;
 
 /**
- * A command for applying the result of automatic layout to an eTrice
- * editor(Graphiti) diagram.
+ * An abstract class to support creation of commands for applying the result of
+ * automatic layout to eTrice diagrams. Help create the
+ * {@link BehaviorLayoutCommand} and the {@link StructureLayoutCommand}.
  * 
  * @author jayant
  */
@@ -114,7 +115,7 @@ public abstract class ETriceLayoutCommand extends GraphitiLayoutCommand {
 	 * 
 	 * @author jayant
 	 */
-	public static void setCalculatedPositionAndSize(final KGraphElement kelem,
+	protected void setCalculatedPositionAndSize(final KGraphElement kelem,
 			KNode parentNode, final ContainerShape shape) {
 
 		KShapeLayout shapeLayout = kelem.getData(KShapeLayout.class);

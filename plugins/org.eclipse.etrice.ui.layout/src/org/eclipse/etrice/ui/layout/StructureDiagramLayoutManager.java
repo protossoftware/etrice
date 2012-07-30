@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.etrice.ui.layout;
 
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -37,7 +38,7 @@ import de.cau.cs.kieler.kiml.util.KimlUtil;
  * @author jayant
  */
 @SuppressWarnings("restriction")
-public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
+public class StructureDiagramLayoutManager extends ETriceDiagramLayoutManager {
 
 	/**
 	 * {@inheritDoc}
@@ -72,33 +73,33 @@ public class StructureDiagramLayoutmanager extends ETriceDiagramLayoutManager {
 	}
 
 	@Override
-	protected Size getDefaultSize(Shape shape) {
-		Size defaultSize = new Size();
+	protected Dimension getDefaultSize(Shape shape) {
 
-		// This code sets same minimal default size for both Actor Class and
-		// Actor Container Ref
-		defaultSize.setHeight(ActorContainerRefSupport.MIN_SIZE_Y);
-		defaultSize.setWidth(ActorContainerRefSupport.MIN_SIZE_X);
+		Dimension defaultSize = new Dimension();
 
+		// This code sets the same minimal default size for both Actor Class and
+		// Actor Container Refs
+		defaultSize.setSize(ActorContainerRefSupport.MIN_SIZE_X,
+				ActorContainerRefSupport.MIN_SIZE_Y);
 
 		/*
-		 * This code sets default size differently for Actor Class and Actor Container
-		 * Refs. This keeps the top-level container quite large on layout, which
-		 * might not seem so pleasant, but is more closer to the model.
+		 * This code sets default size differently for Actor Class and Actor
+		 * Container Refs. This keeps the top-level container quite large on
+		 * layout(according to the default size in StructureSupport), which
+		 * might not seem so pleasant.
 		 */
 		/*
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
 		if (modelObject instanceof ActorClass) {
-			defaultSize.setHeight(StructureClassSupport.DEFAULT_SIZE_Y);
-			defaultSize.setWidth(StructureClassSupport.DEFAULT_SIZE_X);
+			defaultSize.setSize(StructureClassSupport.DEFAULT_SIZE_X,
+					StructureClassSupport.DEFAULT_SIZE_Y);
 		} else if (modelObject instanceof ActorContainerRef) {
-			defaultSize.setHeight(ActorContainerRefSupport.MIN_SIZE_Y);
-			defaultSize.setWidth(ActorContainerRefSupport.MIN_SIZE_X);
+			defaultSize.setSize(ActorContainerRefSupport.MIN_SIZE_X,
+					ActorContainerRefSupport.MIN_SIZE_Y);
 		} else {
-			defaultSize.setHeight(MIN_HEIGHT);
-			defaultSize.setWidth(MIN_WIDHT);
+			defaultSize.setSize(20, 20);
 		}*/
-		
+
 		return defaultSize;
 	}
 
