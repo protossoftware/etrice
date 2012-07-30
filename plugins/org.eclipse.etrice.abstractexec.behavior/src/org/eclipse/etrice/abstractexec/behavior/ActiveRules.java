@@ -38,6 +38,17 @@ public class ActiveRules {
 	{
 		rules = r;
 	}
+	public Set<InterfaceItem> getPortList()
+	{
+		return rules.keySet();
+	}
+	public EList<SemanticsRule> getRulesForPort(InterfaceItem port)
+	{
+		if(rules.containsKey(port))
+			return rules.get(port);
+		else
+			return null;
+	}
 	//checks for currently active rules against a message list and modifies the
 	//rules which can be merged with the destination node
 	//also returns a boolean to determine if anything was changed so as to determine the 
@@ -56,7 +67,6 @@ public class ActiveRules {
 			
 			if(followUps.size()>0)
 			{
-			//	changed = true;
 				ruleChange.put(port, followUps);
 			}
 		}
@@ -67,24 +77,16 @@ public class ActiveRules {
 		{
 			if(!portList.contains(ports))
 			{
-				//changed = true;
 				ruleChange.put(ports, this.rules.get(ports));
 			}
 		}
 		this.rules = ruleChange;
-		//return changed;
 	}
 	
 	//merges the rules with the destination active rules
 	public boolean merge(ActiveRules ar)
 	{
-	 /*	for(InterfaceItem port : this.rules.keySet())
-		{
-			//this.rules.get(port).addAll(ar.rules.get(port));
-			
-		}
-	*/
-		boolean added_at_least_one= false;
+	 	boolean added_at_least_one= false;
 		for(InterfaceItem port : ar.rules.keySet())
 		{
 			for(SemanticsRule rule : ar.rules.get(port))

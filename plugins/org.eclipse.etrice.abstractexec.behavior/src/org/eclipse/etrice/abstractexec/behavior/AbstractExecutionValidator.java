@@ -14,6 +14,7 @@ package org.eclipse.etrice.abstractexec.behavior;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.base.NullLogger;
@@ -23,6 +24,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.IRoomValidator;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -71,8 +73,17 @@ public class AbstractExecutionValidator implements IRoomValidator {
 				System.out.println("Final printing of rules : ");
 				checker.printRules();
 				System.out.println("Rule checking for " + xpac.getActorClass().getName() + " is over");
-				
-				//TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
+				ProposalGenerator propGen = new ProposalGenerator(xpac,checker);
+				TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
+				while(it.hasNext())
+				{
+					EObject obj = it.next();
+					if(obj instanceof State)
+					{
+						State st = (State) obj;
+						propGen.getProposals(st);
+					}
+				}
 				
 			}
 		}

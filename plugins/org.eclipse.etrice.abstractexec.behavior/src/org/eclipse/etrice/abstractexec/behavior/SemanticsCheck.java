@@ -32,8 +32,8 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class SemanticsCheck {
-	Queue<StateGraphNode> queue;
-	public Set<StateGraphNode> visited;
+	private Queue<StateGraphNode> queue;
+	private Set<StateGraphNode> visited;
 	private ExpandedActorClass xpAct;
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>(); 
 	private ActionCodeAnalyzer codeAnalyzer;
@@ -47,11 +47,8 @@ public class SemanticsCheck {
 	public void checkSemantics()
 	{
 		StateGraph graph  = xpAct.getStateMachine();
-		// buildLocalRules();
 		ActiveRules localRules = new ActiveRules();
 		localRules.buildInitLocalRules(xpAct);
-	//	System.out.println("Printing init rules : ");
-	//	localRules.print();
 		addStartingPoints(graph, localRules);
 		doTraversal();
 	}
@@ -59,7 +56,6 @@ public class SemanticsCheck {
 	private void addStartingPoints(StateGraph graph,  ActiveRules localRules)
 	{
 		EList<Transition> transitions = graph.getTransitions();
-	//	EList<TrPoint> trPoint = graph.getTrPoints();
 		for(Transition trans  : transitions)
 			if(trans instanceof InitialTransition) 
 			{ 
@@ -73,7 +69,7 @@ public class SemanticsCheck {
 				boolean rulesChanged = false;
 				 if(mapToRules.containsKey(cur))
 		     		{
-					 rulesChanged =		mapToRules.get(cur).merge(localRules);
+					 rulesChanged =	mapToRules.get(cur).merge(localRules);
 		     		}
 				 else {
 						mapToRules.put(cur,localRules);
@@ -83,16 +79,7 @@ public class SemanticsCheck {
 				
 				break;
 			}
-		//add transition points
-		/*for(TrPoint tp : trPoint)
-		{
-			// CANT DETERMINE HOW TO MERGE RULES HERE
-			if(tp instanceof TransitionPoint && !visited.contains(tp) ) {
-				queue.add(tp);
-				mapToRules.put(tp, new ActiveRules());
-			}
-		} */
-	}
+		}
 	private void doTraversal()
 	{
 		while(!queue.isEmpty())
@@ -105,9 +92,7 @@ public class SemanticsCheck {
 		visited.add(node);
 		if(node instanceof State)
 		{
-			//List<MessageFromIf> completeList = new LinkedList<MessageFromIf>();
 			State st = (State) node;
-			//mapToRules.get(st).checkRules(codeAnalyzer.analyze(st.getEntryCode()));
 			if(RoomHelpers.hasDirectSubStructure(st))
 			{
 				addStartingPoints(st.getSubgraph(), mapToRules.get(st));
@@ -124,8 +109,7 @@ public class SemanticsCheck {
 						StateGraphNode target = xpAct.getNode(trans.getTo());
 						List<MessageFromIf> msgList = new LinkedList<MessageFromIf>();
 						//create a list of codes here in the order
-						// trigger, action , exit
-						//entry code has already been added and merged
+						// trigger,  exit, action,  entry
 						msgList.add(mifTrig);
 						StateGraph triggerContext = (StateGraph) trans.eContainer();
 						State exitCalled = st;
@@ -157,22 +141,17 @@ public class SemanticsCheck {
 			 * then the destination rules are merged with the current rules and destination 
 			 * node is added to the current queue.
 			 */			
-		//	if(node instanceof EntryPoint){
-		//	State container = (State) node.eContainer().eContainer();
-		//	visited.add(container);
-		//	} 
 			for(Transition trans : xpAct.getOutgoingTransitions(node))
 			{
-			ActiveRules tempRule = mapToRules.get(node).createCopy();
-			List<MessageFromIf> msgList = codeAnalyzer.analyze(trans.getAction());
-			StateGraphNode target = xpAct.getNode(trans.getTo());
-			if(target instanceof State)
-			{
-				msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
-			}
-			tempRule.consumeMessages(msgList);
-			addAndMergeRules(target,  tempRule);
-			
+				ActiveRules tempRule = mapToRules.get(node).createCopy();
+				List<MessageFromIf> msgList = codeAnalyzer.analyze(trans.getAction());
+				StateGraphNode target = xpAct.getNode(trans.getTo());
+				if(target instanceof State)
+					{
+						msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
+					}
+				tempRule.consumeMessages(msgList);
+				addAndMergeRules(target,  tempRule);
 			}
 		}
 	}
@@ -202,4 +181,12 @@ public class SemanticsCheck {
 		   mapToRules.get(item).print();
 		}
 	}
+	public ActiveRules getActiveRules(StateGraphItem item)
+	{
+		if(mapToRules.containsKey(item))
+			return mapToRules.get(item);
+		else
+			return null;
+	}
+	
 }
