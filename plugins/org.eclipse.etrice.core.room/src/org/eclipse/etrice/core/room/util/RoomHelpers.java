@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -1160,6 +1161,53 @@ public class RoomHelpers {
 			rt.setRef(nref>0);
 			rt.setType(common);
 			return rt;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * @param trans
+	 * @param actorClass
+	 * @return
+	 */
+	public static String getInheritedActionCode(Transition trans, ActorClass ac) {
+		return getActionCode(trans, ac, false);
+	}
+
+	/**
+	 * @param trans
+	 * @param actorClass
+	 * @return
+	 */
+	public static String getAllActionCode(Transition trans, ActorClass ac) {
+		return getActionCode(trans, ac, true);
+	}
+	
+	private static String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
+		StringBuffer result = new StringBuffer();
+		
+		ActorClass baseAC = getActorClass(trans);
+		
+		if (!includeOwn) {
+			if (ac==baseAC)
+				return null;
+			ac = ac.getBase();
+		}
+		
+		while (ac!=null) {
+			if (ac==baseAC) {
+				result.insert(0, getDetailCode(trans.getAction()));
+				return result.toString();
+			}
+			
+			if (ac.getStateMachine()!=null)
+				for (RefinedTransition rt : ac.getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans)
+						result.insert(0, getDetailCode(rt.getAction()));
+				}
+			
+			ac = ac.getBase();
 		}
 		
 		return null;

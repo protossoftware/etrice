@@ -257,6 +257,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/trPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/chPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/transitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StateGraph/refinedTransitions"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//SimpleState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//SimpleState/name"/>
@@ -299,6 +300,11 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//CPBranchTransition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//CPBranchTransition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefinedTransition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedTransition/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedTransition/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedTransition/action"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//TransitionTerminal"/>
     <genClasses ecoreClass="Room.ecore#//StateTerminal">

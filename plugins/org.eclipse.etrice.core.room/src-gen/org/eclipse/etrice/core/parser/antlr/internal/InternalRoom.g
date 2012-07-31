@@ -4893,9 +4893,28 @@ ruleStateGraph returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_6='}' 
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getStateGraphAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0()); 
+	    }
+		lv_refinedTransitions_6_0=ruleRefinedTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStateGraphRule());
+	        }
+       		add(
+       			$current, 
+       			"refinedTransitions",
+        		lv_refinedTransitions_6_0, 
+        		"RefinedTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_7='}' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_7, grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
@@ -5007,9 +5026,28 @@ ruleStateMachine returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_7='}' 
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getStateMachineAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0()); 
+	    }
+		lv_refinedTransitions_7_0=ruleRefinedTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getStateMachineRule());
+	        }
+       		add(
+       			$current, 
+       			"refinedTransitions",
+        		lv_refinedTransitions_7_0, 
+        		"RefinedTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_8='}' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_8, grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;
@@ -6510,6 +6548,94 @@ ruleCPBranchTransition returns [EObject current=null]
 ))?	otherlv_12='}' 
     {
     	newLeafNode(otherlv_12, grammarAccess.getCPBranchTransitionAccess().getRightCurlyBracketKeyword_11());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleRefinedTransition
+entryRuleRefinedTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRefinedTransitionRule()); }
+	 iv_ruleRefinedTransition=ruleRefinedTransition 
+	 { $current=$iv_ruleRefinedTransition.current; } 
+	 EOF 
+;
+
+// Rule RefinedTransition
+ruleRefinedTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='RefinedTransition' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getRefinedTransitionAccess().getRefinedTransitionKeyword_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRefinedTransitionRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getTargetTransitionCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getDocuDocumentationParserRuleCall_2_0()); 
+	    }
+		lv_docu_2_0=ruleDocumentation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRefinedTransitionRule());
+	        }
+       		set(
+       			$current, 
+       			"docu",
+        		lv_docu_2_0, 
+        		"Documentation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?	otherlv_3='{' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getRefinedTransitionAccess().getLeftCurlyBracketKeyword_3());
+    }
+	otherlv_4='action' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getRefinedTransitionAccess().getActionKeyword_4());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getActionDetailCodeParserRuleCall_5_0()); 
+	    }
+		lv_action_5_0=ruleDetailCode		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRefinedTransitionRule());
+	        }
+       		set(
+       			$current, 
+       			"action",
+        		lv_action_5_0, 
+        		"DetailCode");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_6='}' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getRefinedTransitionAccess().getRightCurlyBracketKeyword_6());
     }
 )
 ;

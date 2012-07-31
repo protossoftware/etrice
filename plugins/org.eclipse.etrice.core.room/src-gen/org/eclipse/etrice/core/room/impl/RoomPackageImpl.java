@@ -68,6 +68,7 @@ import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -591,6 +592,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass cpBranchTransitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refinedTransitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2595,6 +2603,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getStateGraph_RefinedTransitions()
+  {
+    return (EReference)stateGraphEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getSimpleState()
   {
     return simpleStateEClass;
@@ -2898,6 +2916,46 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EReference getCPBranchTransition_Condition()
   {
     return (EReference)cpBranchTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRefinedTransition()
+  {
+    return refinedTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRefinedTransition_Target()
+  {
+    return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRefinedTransition_Docu()
+  {
+    return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRefinedTransition_Action()
+  {
+    return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3485,6 +3543,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(stateGraphEClass, STATE_GRAPH__TR_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__CH_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__TRANSITIONS);
+    createEReference(stateGraphEClass, STATE_GRAPH__REFINED_TRANSITIONS);
 
     simpleStateEClass = createEClass(SIMPLE_STATE);
     createEAttribute(simpleStateEClass, SIMPLE_STATE__NAME);
@@ -3532,6 +3591,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     cpBranchTransitionEClass = createEClass(CP_BRANCH_TRANSITION);
     createEReference(cpBranchTransitionEClass, CP_BRANCH_TRANSITION__CONDITION);
+
+    refinedTransitionEClass = createEClass(REFINED_TRANSITION);
+    createEReference(refinedTransitionEClass, REFINED_TRANSITION__TARGET);
+    createEReference(refinedTransitionEClass, REFINED_TRANSITION__DOCU);
+    createEReference(refinedTransitionEClass, REFINED_TRANSITION__ACTION);
 
     transitionTerminalEClass = createEClass(TRANSITION_TERMINAL);
 
@@ -3901,6 +3965,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getStateGraph_TrPoints(), this.getTrPoint(), null, "trPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStateGraph_ChPoints(), this.getChoicePoint(), null, "chPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStateGraph_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateGraph_RefinedTransitions(), this.getRefinedTransition(), null, "refinedTransitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleStateEClass, SimpleState.class, "SimpleState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleState_Name(), ecorePackage.getEString(), "name", null, 0, 1, SimpleState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3948,6 +4013,11 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(cpBranchTransitionEClass, CPBranchTransition.class, "CPBranchTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCPBranchTransition_Condition(), this.getDetailCode(), null, "condition", null, 0, 1, CPBranchTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(refinedTransitionEClass, RefinedTransition.class, "RefinedTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRefinedTransition_Target(), this.getTransition(), null, "target", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRefinedTransition_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRefinedTransition_Action(), this.getDetailCode(), null, "action", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionTerminalEClass, TransitionTerminal.class, "TransitionTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -24,6 +26,7 @@ import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.GuardedTransition;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
@@ -477,12 +480,23 @@ public class TransitionSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
 					return Reason.createTrueReason("Transition deleted from model");
 				}
-				
+
 				if (bo instanceof Transition) {
 					Transition t = (Transition) bo;
 					Connection conn = (Connection)context.getPictogramElement();
 					if (conn.getConnectionDecorators().size()>=2) {
-						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+						ConnectionDecorator cd = conn.getConnectionDecorators().get(0);
+						if (cd.getGraphicsAlgorithm() instanceof Polygon) {
+							ActorClass ac = SupportUtil.getActorClass(getDiagram());
+							boolean inherited = SupportUtil.isInherited(getDiagram(), t);
+							Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
+							String code = RoomHelpers.getAllActionCode(t, ac);
+							boolean hasActionCode = code!=null && !code.isEmpty();
+							Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
+							if (!equal(cd.getGraphicsAlgorithm().getBackground(), fillColor))
+								return Reason.createTrueReason("Arrow head needs update");
+						}
+						cd = conn.getConnectionDecorators().get(1);
 						if (cd.getGraphicsAlgorithm() instanceof Text) {
 							Text label = (Text) cd.getGraphicsAlgorithm();
 							if (!label.getValue().equals(getLabel(t)))
@@ -490,8 +504,12 @@ public class TransitionSupport {
 						}
 					}
 				}
-				
+
 				return Reason.createFalseReason();
+			}
+			
+			private boolean equal(Color c1, Color c2) {
+				return c1.getRed()==c2.getRed() && c1.getGreen()==c2.getGreen() && c1.getBlue()==c2.getBlue();
 			}
 
 			@Override
@@ -512,19 +530,18 @@ public class TransitionSupport {
 				boolean updated = false;
 				
 				if (bo instanceof Transition) {
-					Transition t = (Transition) bo;
+					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					Transition trans = (Transition) bo;
 					Connection conn = (Connection)context.getPictogramElement();
-					if (conn.getConnectionDecorators().size()>=2) {
-						ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
-						if (cd.getGraphicsAlgorithm() instanceof Text) {
-							Text label = (Text) cd.getGraphicsAlgorithm();
-							String transitionLabelName = getLabel(t);
-							if (!label.getValue().equals(transitionLabelName)) {
-								label.setValue(transitionLabelName);
-								updated = true;
-							}
-						}
-					}
+					boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
+					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
+			        String code = RoomHelpers.getAllActionCode(trans, ac);
+					boolean hasActionCode = code!=null && !code.isEmpty();
+			        Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
+					updateLabel(trans, conn, fillColor);
+					updated = true;
+					if (updateNeeded(context).toBoolean())
+						updated = false;
 				}
 
 				return updated;
@@ -533,24 +550,23 @@ public class TransitionSupport {
 		
 		private static class PropertyFeature extends AbstractCustomFeature {
 
-			private String name;
-			private String description;
 			private boolean doneChanges = false;
+			private boolean editable;
 
-			public PropertyFeature(IFeatureProvider fp) {
+			public PropertyFeature(IFeatureProvider fp, boolean editable) {
 				super(fp);
-				this.name = "Edit Transition";
-				this.description = "Edit Transition";
+				
+				this.editable = editable;
 			}
 
 			@Override
 			public String getName() {
-				return name;
+				return editable? "Edit Transition..." : "View Transition";
 			}
 			
 			@Override
 			public String getDescription() {
-				return description;
+				return editable? "Edit Transition Properties" : "View Transition Properties";
 			}
 			
 			@Override
@@ -602,6 +618,68 @@ public class TransitionSupport {
 			public boolean hasDoneChanges() {
 				return doneChanges;
 			}
+		}
+		
+		private static class RefineTransitionFeature extends AbstractCustomFeature {
+
+			/**
+			 * @param fp
+			 */
+			public RefineTransitionFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Refine Transition";
+			}
+			
+			@Override
+			public String getDescription() {
+				return "Refine transition to add action code";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					PictogramElement pe = pes[0];
+					if (pe instanceof ConnectionDecorator)
+						pe = (PictogramElement) pe.eContainer();
+					if (!(pe instanceof Connection))
+						return false;
+					
+					Object bo = getBusinessObjectForPictogramElement(pe);
+					if (bo instanceof Transition) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement pe = context.getPictogramElements()[0];
+				if (pe instanceof ConnectionDecorator)
+					pe = (PictogramElement) pe.eContainer();
+				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
+				ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				if (ac.getStateMachine()==null)
+					ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
+				
+				RefinedTransition rt = RoomFactory.eINSTANCE.createRefinedTransition();
+				rt.setTarget(trans);
+				ac.getStateMachine().getRefinedTransitions().add(rt);
+
+				ICustomFeature[] features = getFeatureProvider().getCustomFeatures(context);
+				for (ICustomFeature cf : features) {
+					if (cf instanceof PropertyFeature) {
+						cf.execute(context);
+						break;
+					}
+				}
+			}
+			
 		}
 		
 		protected static class RemoveFeature extends DefaultRemoveFeature {
@@ -680,7 +758,34 @@ public class TransitionSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
+			PictogramElement pe = context.getPictogramElements()[0];
+			Object bo = getBusinessObjectForPictogramElement(pe);
+			
+			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
+
+			if (bo instanceof Transition) {
+				Transition trans = (Transition) bo;
+				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
+				boolean editable = RoomHelpers.getActorClass(trans)==ac;
+				
+				// let's check whether we already refined this transition
+				if (!editable)
+					if (ac.getStateMachine()!=null)
+						for (RefinedTransition rt : ac.getStateMachine().getRefinedTransitions()) {
+							if (rt.getTarget()==trans) {
+								editable = true;
+								break;
+							}
+						}
+				
+				result.add(new PropertyFeature(fp, editable));
+				
+				if (!editable)
+					result.add(new RefineTransitionFeature(fp));
+			}
+			
+			ICustomFeature features[] = new ICustomFeature[result.size()];
+			return result.toArray(features);
 		}
 		
 		protected static void updateLabel(Transition trans, Connection conn, Color fillColor) {
@@ -716,7 +821,16 @@ public class TransitionSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
+			PictogramElement pe = context.getPictogramElements()[0];
+			Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof Transition) {
+				Transition trans = (Transition) bo;
+				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
+				boolean editable = RoomHelpers.getActorClass(trans)==ac;
+				return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
+			}
+			
+			return null;
 		}
 		
 		@Override
@@ -730,10 +844,12 @@ public class TransitionSupport {
 			if (bo instanceof Transition) {
 				Transition tr = (Transition) bo;
 				String label = RoomNameProvider.getTransitionLabelName(tr);
-				if (RoomHelpers.hasDetailCode(tr.getAction())) {
+				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
+				String code = RoomHelpers.getAllActionCode(tr, ac);
+				if (code!=null && !code.isEmpty()) {
 					if (label.length()>0)
 						label += "\n";
-					label += "action:\n"+RoomHelpers.getDetailCode(tr.getAction());
+					label += "action:\n"+code;
 				}
 				return label;
 			}

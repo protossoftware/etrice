@@ -3101,13 +3101,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChPointsChoicePointParserRuleCall_2_2_0 = (RuleCall)cChPointsAssignment_2_2.eContents().get(0);
 		private final Assignment cTransitionsAssignment_2_3 = (Assignment)cAlternatives_2.eContents().get(3);
 		private final RuleCall cTransitionsTransitionParserRuleCall_2_3_0 = (RuleCall)cTransitionsAssignment_2_3.eContents().get(0);
+		private final Assignment cRefinedTransitionsAssignment_2_4 = (Assignment)cAlternatives_2.eContents().get(4);
+		private final RuleCall cRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0 = (RuleCall)cRefinedTransitionsAssignment_2_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//StateGraph:
-		//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
+		//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//	refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}"
+		//{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//refinedTransitions+=RefinedTransition)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{StateGraph}
@@ -3116,7 +3120,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//states+=State
@@ -3143,6 +3148,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_2_3_0() { return cTransitionsTransitionParserRuleCall_2_3_0; }
 
+		//refinedTransitions+=RefinedTransition
+		public Assignment getRefinedTransitionsAssignment_2_4() { return cRefinedTransitionsAssignment_2_4; }
+
+		//RefinedTransition
+		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0; }
+
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
@@ -3162,15 +3173,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChPointsChoicePointParserRuleCall_3_2_0 = (RuleCall)cChPointsAssignment_3_2.eContents().get(0);
 		private final Assignment cTransitionsAssignment_3_3 = (Assignment)cAlternatives_3.eContents().get(3);
 		private final RuleCall cTransitionsTransitionParserRuleCall_3_3_0 = (RuleCall)cTransitionsAssignment_3_3.eContents().get(0);
+		private final Assignment cRefinedTransitionsAssignment_3_4 = (Assignment)cAlternatives_3.eContents().get(4);
+		private final RuleCall cRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0 = (RuleCall)cRefinedTransitionsAssignment_3_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//StateMachine returns StateGraph:
-		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-		//	"}";
+		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//	refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-		//"}"
+		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//refinedTransitions+=RefinedTransition)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{StateGraph}
@@ -3182,7 +3195,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//states+=State
@@ -3208,6 +3222,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_3_0() { return cTransitionsTransitionParserRuleCall_3_3_0; }
+
+		//refinedTransitions+=RefinedTransition
+		public Assignment getRefinedTransitionsAssignment_3_4() { return cRefinedTransitionsAssignment_3_4; }
+
+		//RefinedTransition
+		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -4135,6 +4155,62 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
 	}
 
+	public class RefinedTransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefinedTransition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRefinedTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetTransitionCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetTransitionFQNParserRuleCall_1_0_1 = (RuleCall)cTargetTransitionCrossReference_1_0.eContents().get(1);
+		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cActionKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cActionDetailCodeParserRuleCall_5_0 = (RuleCall)cActionAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//RefinedTransition:
+		//	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
+		public ParserRule getRule() { return rule; }
+
+		//"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}"
+		public Group getGroup() { return cGroup; }
+
+		//"RefinedTransition"
+		public Keyword getRefinedTransitionKeyword_0() { return cRefinedTransitionKeyword_0; }
+
+		//target=[Transition|FQN]
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
+
+		//[Transition|FQN]
+		public CrossReference getTargetTransitionCrossReference_1_0() { return cTargetTransitionCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getTargetTransitionFQNParserRuleCall_1_0_1() { return cTargetTransitionFQNParserRuleCall_1_0_1; }
+
+		//docu=Documentation?
+		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
+
+		//Documentation
+		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+
+		//"action"
+		public Keyword getActionKeyword_4() { return cActionKeyword_4; }
+
+		//action=DetailCode
+		public Assignment getActionAssignment_5() { return cActionAssignment_5; }
+
+		//DetailCode
+		public RuleCall getActionDetailCodeParserRuleCall_5_0() { return cActionDetailCodeParserRuleCall_5_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+
 	public class TransitionTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionTerminal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -4893,6 +4969,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private TriggeredTransitionElements pTriggeredTransition;
 	private GuardedTransitionElements pGuardedTransition;
 	private CPBranchTransitionElements pCPBranchTransition;
+	private RefinedTransitionElements pRefinedTransition;
 	private TransitionTerminalElements pTransitionTerminal;
 	private StateTerminalElements pStateTerminal;
 	private TrPointTerminalElements pTrPointTerminal;
@@ -5545,7 +5622,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateGraph:
-	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
+	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+	//	refinedTransitions+=RefinedTransition)* "}";
 	public StateGraphElements getStateGraphAccess() {
 		return (pStateGraph != null) ? pStateGraph : (pStateGraph = new StateGraphElements());
 	}
@@ -5555,8 +5633,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-	//	"}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+	//	refinedTransitions+=RefinedTransition)* "}";
 	public StateMachineElements getStateMachineAccess() {
 		return (pStateMachine != null) ? pStateMachine : (pStateMachine = new StateMachineElements());
 	}
@@ -5734,6 +5812,16 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getCPBranchTransitionRule() {
 		return getCPBranchTransitionAccess().getRule();
+	}
+
+	//RefinedTransition:
+	//	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
+	public RefinedTransitionElements getRefinedTransitionAccess() {
+		return (pRefinedTransition != null) ? pRefinedTransition : (pRefinedTransition = new RefinedTransitionElements());
+	}
+	
+	public ParserRule getRefinedTransitionRule() {
+		return getRefinedTransitionAccess().getRule();
 	}
 
 	//TransitionTerminal:

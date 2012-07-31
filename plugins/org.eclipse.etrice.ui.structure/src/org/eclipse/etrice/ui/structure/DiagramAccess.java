@@ -17,9 +17,13 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
 import org.eclipse.etrice.ui.common.commands.UpdateCommand;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.structure.commands.PopulateDiagramCommand;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
+import org.eclipse.graphiti.dt.IDiagramTypeProvider;
+import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 import org.eclipse.etrice.core.room.StructureClass;
 
@@ -50,7 +54,9 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
-		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, DiagramTypeProvider.PROVIDER_ID);
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
+		IFeatureProvider featureProvider = dtp.getFeatureProvider();
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new AutoUpdateFeature(featureProvider));
 		if (cmd.updateNeeded())
 			return cmd;
 		

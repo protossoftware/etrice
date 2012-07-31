@@ -237,6 +237,18 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return bar;
 	}
 
+	protected void setValidationFeedbackOff() {
+		if (validationLabel.isDisposed())
+			return;
+		
+		validationLabel.setVisible(false);
+		validationText.setVisible(false);
+		
+		Button okButton = getButton(IDialogConstants.OK_ID);
+		if (okButton!=null)
+			okButton.setEnabled(false);
+	}
+
 	protected void updateValidationFeedback(boolean ok) {
 		if (validationLabel.isDisposed())
 			return;
@@ -437,5 +449,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	 */
 	public FormToolkit getToolkit() {
 		return toolkit;
+	}
+
+	protected void setTitle(String title) {
+		this.title = title;
 	}
 }

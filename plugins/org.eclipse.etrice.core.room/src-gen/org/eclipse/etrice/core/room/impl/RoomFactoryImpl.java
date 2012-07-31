@@ -138,6 +138,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.TRIGGERED_TRANSITION: return createTriggeredTransition();
       case RoomPackage.GUARDED_TRANSITION: return createGuardedTransition();
       case RoomPackage.CP_BRANCH_TRANSITION: return createCPBranchTransition();
+      case RoomPackage.REFINED_TRANSITION: return createRefinedTransition();
       case RoomPackage.TRANSITION_TERMINAL: return createTransitionTerminal();
       case RoomPackage.STATE_TERMINAL: return createStateTerminal();
       case RoomPackage.TR_POINT_TERMINAL: return createTrPointTerminal();
@@ -954,6 +955,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     CPBranchTransitionImpl cpBranchTransition = new CPBranchTransitionImpl();
     return cpBranchTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefinedTransition createRefinedTransition()
+  {
+    RefinedTransitionImpl refinedTransition = new RefinedTransitionImpl();
+    return refinedTransition;
   }
 
   /**

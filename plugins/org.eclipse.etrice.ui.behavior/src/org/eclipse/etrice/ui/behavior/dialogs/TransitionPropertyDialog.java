@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.Transition;
@@ -174,6 +175,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private Button removeMifButton;
 	private boolean triggerError = false;
 	private boolean inherited;
+	private RefinedTransition refined;
 
 	public TransitionPropertyDialog(Shell shell, ActorClass ac, Transition trans) {
 		super(shell, "Edit Transition", ac);
@@ -186,6 +188,20 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
 		inherited = RoomHelpers.getActorClass(trans)!=ac;
+		
+		refined = null;
+		if (inherited) {
+			if (getActorClass().getStateMachine()!=null)
+				for (RefinedTransition rt : getActorClass().getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans) {
+						refined = rt;
+						break;
+					}
+				}
+		}
+		
+		if (inherited && refined==null)
+			setTitle("View Transition");
 	}
 
 	@Override
@@ -199,13 +215,18 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		if (!(trans instanceof InitialTransition)) {
 			NameValidator nv = new NameValidator();
 			
-			Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
-			configureMemberAware(name);
-			
-			createDecorator(name, "invalid name");
-			
-			name.selectAll();
-			name.setFocus();
+			if (inherited) {
+				createFixedText(body, "&Name:", trans.getName(), false);
+			}
+			else {
+				Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
+				configureMemberAware(name);
+				
+				createDecorator(name, "invalid name");
+				
+				name.selectAll();
+				name.setFocus();
+			}
 		}
 		
 		if (trans instanceof TriggeredTransition) {
@@ -231,25 +252,53 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		if (trans instanceof GuardedTransition) {
-			GuardValidator gv = new GuardValidator();
-			
-			Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
-			configureMemberAware(cond, true, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			cond.setLayoutData(gd);
-			
-			createDecorator(cond, "empty guard");
+			if (inherited) {
+				String code = RoomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				createFixedText(body, "&Guard:", code, true);
+			}
+			else {
+				GuardValidator gv = new GuardValidator();
+				
+				Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
+				configureMemberAware(cond, true, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				cond.setLayoutData(gd);
+				
+				createDecorator(cond, "empty guard");
+			}
 		}
 		
 		if (trans instanceof CPBranchTransition) {
-			Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
-			configureMemberAware(cond, true, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			cond.setLayoutData(gd);
+			if (inherited) {
+				String code = RoomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
+				createFixedText(body, "&Condition", code, true);
+			}
+			else {
+				Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+				configureMemberAware(cond, true, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				cond.setLayoutData(gd);
+			}
+		}
+
+		{
+			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
+			if (code!=null)
+				createFixedText(body, "Base Action Code:", code, true);
 		}
 		
+		if (inherited) {
+			if (refined!=null) {
+				Text action = createText(body, "&Action Code:", refined, RoomPackage.eINSTANCE.getRefinedTransition_Action(), null, s2m, m2s, true);
+				configureMemberAware(action, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				action.setLayoutData(gd);
+			}
+		}
+		else
 		{
 			Text action = createText(body, "&Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
 			configureMemberAware(action, true, true);
@@ -259,9 +308,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		
 		createMembersAndMessagesButtons(body);
-		
-		if (inherited)
-			disableAll(body);
 	}
 
 	private void disableAll(Composite parent) {
@@ -292,9 +338,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			ok = false;
 			setValidationText("no triggers available");
 		}
-		if (ok && inherited) {
-			ok = false;
-			setValidationText("inherited transition not editable");
+		if (ok && inherited && refined==null) {
+			setValidationFeedbackOff();
+			return;
 		}
 		super.updateValidationFeedback(ok);
 	}
@@ -310,6 +356,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		createMifTable(triggerCompartment, toolkit);
 		
 		createMifCompartment(triggerCompartment, toolkit);
+		
+		if (inherited)
+			disableAll(triggerCompartment);
 	}
 
 	private void createTriggerTable(Composite triggerCompartment, FormToolkit toolkit) {

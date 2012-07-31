@@ -44,6 +44,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -411,6 +412,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
 			if (op.getReturntype()!=null)
 				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+		}
+	}
+	
+	@Check
+	public void checkRefinedTransition(RefinedTransition rt) {
+		if (!(rt.eContainer().eContainer() instanceof ActorClass)) {
+			StateGraph sg = (StateGraph) rt.eContainer();
+			int idx = sg.getRefinedTransitions().indexOf(rt);
+			error("RefinedTransition only allowed in top level state graph of an actor", sg, RoomPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
 		}
 	}
 	

@@ -643,6 +643,13 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.REFINED_TRANSITION:
+      {
+        RefinedTransition refinedTransition = (RefinedTransition)theEObject;
+        T result = caseRefinedTransition(refinedTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.TRANSITION_TERMINAL:
       {
         TransitionTerminal transitionTerminal = (TransitionTerminal)theEObject;
@@ -1835,6 +1842,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCPBranchTransition(CPBranchTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Refined Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Refined Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRefinedTransition(RefinedTransition object)
   {
     return null;
   }

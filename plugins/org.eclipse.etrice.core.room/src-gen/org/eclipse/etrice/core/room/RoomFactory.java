@@ -648,6 +648,15 @@ public interface RoomFactory extends EFactory
   CPBranchTransition createCPBranchTransition();
 
   /**
+   * Returns a new object of class '<em>Refined Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Refined Transition</em>'.
+   * @generated
+   */
+  RefinedTransition createRefinedTransition();
+
+  /**
    * Returns a new object of class '<em>Transition Terminal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

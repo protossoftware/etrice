@@ -424,6 +424,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createCPBranchTransitionAdapter();
       }
       @Override
+      public Adapter caseRefinedTransition(RefinedTransition object)
+      {
+        return createRefinedTransitionAdapter();
+      }
+      @Override
       public Adapter caseTransitionTerminal(TransitionTerminal object)
       {
         return createTransitionTerminalAdapter();
@@ -1536,6 +1541,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCPBranchTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefinedTransition <em>Refined Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefinedTransition
+   * @generated
+   */
+  public Adapter createRefinedTransitionAdapter()
   {
     return null;
   }
