@@ -12,9 +12,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -54,6 +55,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -314,23 +316,68 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private void buildStateGraph() {
-		// create a list of super classes, super first, sub-classes last
-		ArrayList<StateGraph> sms = new ArrayList<StateGraph>();
+		// create a list of state machines, derived first, base last
+		ArrayList<StateGraph> stateMachines = new ArrayList<StateGraph>();
 		ActorClass orig = getActorClass();
 		if (orig.getStateMachine()!=null)
-			sms.add(0, orig.getStateMachine());
+			stateMachines.add(orig.getStateMachine());
 		while (orig.getBase()!=null) {
 			orig = orig.getBase();
 			if (orig.getStateMachine()!=null)
-				sms.add(0, orig.getStateMachine());
+				stateMachines.add(orig.getStateMachine());
 		}
 		
+		Collection<StateGraph> copiedStateMachines = createCopyOfStateMachines(stateMachines);
+		
+		collectContentsInNewStateMachine(copiedStateMachines);
+		
+		introduceExpandedRefinedStates(getStateMachine());
+	}
+
+	private void collectContentsInNewStateMachine(Collection<StateGraph> copiedStateMachines) {
+		// move all state machine contents to our state machine (which we create newly)
+		StateGraph myStateMachine = RoomFactory.eINSTANCE.createStateGraph();
+		setStateMachine(myStateMachine);
+
+		HashMap<Transition, DetailCode> trans2refinedAction = new HashMap<Transition, DetailCode>();
+		for (StateGraph copiedStateMachine : copiedStateMachines) {
+			myStateMachine.getChPoints().addAll(copiedStateMachine.getChPoints());
+			myStateMachine.getStates().addAll(copiedStateMachine.getStates());
+			myStateMachine.getTrPoints().addAll(copiedStateMachine.getTrPoints());
+			myStateMachine.getTransitions().addAll(copiedStateMachine.getTransitions());
+			
+			// collect the refined action code in a hash map
+			for (RefinedTransition rt : copiedStateMachine.getRefinedTransitions()) {
+				if (rt.getAction()==null || rt.getAction().getCommands().isEmpty())
+					continue;
+				
+				DetailCode code = trans2refinedAction.get(rt.getTarget());
+				if (code==null) {
+					code = RoomFactory.eINSTANCE.createDetailCode();
+					trans2refinedAction.put(rt.getTarget(), code);
+				}
+				
+				code.getCommands().addAll(0, rt.getAction().getCommands());
+			}
+		}
+		
+		// for refined transitions we just append the action code to the target
+		// we can do this since the target is a copy just for this class
+		for (Entry<Transition, DetailCode> entry : trans2refinedAction.entrySet()) {
+			if (entry.getKey().getAction()==null)
+				entry.getKey().setAction(entry.getValue());
+			else
+				entry.getKey().getAction().getCommands().addAll(entry.getValue().getCommands());
+		}
+	}
+
+	private Collection<StateGraph> createCopyOfStateMachines(List<StateGraph> origStateMachines) {
 		// create a self contained copy of all actor classes
 		// references to interface items (ports, saps and spps) point to contents of the original actor class
 		// Collection<StateGraph> all = EcoreUtil.copyAll(sms);
 		// we use the copier directly since we need access to the map
 		Copier copier = new Copier();
-	    Collection<StateGraph> all = copier.copyAll(sms);
+	    Collection<StateGraph> copiedStateMachines = copier.copyAll(origStateMachines);
 	    copier.copyReferences();
 	    for (EObject o : copier.keySet()) {
 			EObject c = copier.get(o);
@@ -338,11 +385,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		}
 		
 	    if (getActorClass().getStateMachine()!=null) {
-	    	// last state machine is ours
-	    	StateGraph self = null;
-	    	for (Iterator<StateGraph> it = all.iterator(); it.hasNext();) {
-	    		self = it.next();
-	    	}
+	    	// first state machine is ours
+	    	StateGraph self = copiedStateMachines.iterator().next();
 	    	
 	    	// flag own objects
 			TreeIterator<EObject> it = self.eAllContents();
@@ -352,18 +396,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 					addOwnObject((StateGraphItem)obj);
 			}
 	    }
-		
-		// now we move all state machine contents to our state machine
-		StateGraph sm = RoomFactory.eINSTANCE.createStateGraph();
-		setStateMachine(sm);
-		for (StateGraph sml : all) {
-			sm.getChPoints().addAll(sml.getChPoints());
-			sm.getStates().addAll(sml.getStates());
-			sm.getTrPoints().addAll(sml.getTrPoints());
-			sm.getTransitions().addAll(sml.getTransitions());
-		}
-		
-		introduceExpandedRefinedStates(sm);
+		return copiedStateMachines;
 	}
 
 	/**
