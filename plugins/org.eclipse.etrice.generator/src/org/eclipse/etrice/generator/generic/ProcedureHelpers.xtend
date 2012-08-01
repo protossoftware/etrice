@@ -217,9 +217,7 @@ class ProcedureHelpers {
 		«FOR operation : operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
 				«operationSignature(operation, classname, false)» {
-					«FOR command : operation.detailCode.commands»
-						«command»
-					«ENDFOR»
+					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 				}
 			«ENDIF»
 		«ENDFOR»

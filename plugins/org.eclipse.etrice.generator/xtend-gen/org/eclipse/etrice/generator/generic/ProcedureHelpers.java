@@ -686,15 +686,12 @@ public class ProcedureHelpers {
             _builder.append(_operationSignature, "");
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
-            {
-              DetailCode _detailCode = operation.getDetailCode();
-              EList<String> _commands = _detailCode.getCommands();
-              for(final String command : _commands) {
-                _builder.append("\t");
-                _builder.append(command, "	");
-                _builder.newLineIfNotEmpty();
-              }
-            }
+            _builder.append("\t");
+            AbstractGenerator _instance = AbstractGenerator.getInstance();
+            DetailCode _detailCode = operation.getDetailCode();
+            String _translatedCode = _instance.getTranslatedCode(_detailCode);
+            _builder.append(_translatedCode, "	");
+            _builder.newLineIfNotEmpty();
             _builder.append("}");
             _builder.newLine();
           }
