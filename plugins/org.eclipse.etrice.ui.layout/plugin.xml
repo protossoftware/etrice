@@ -61,5 +61,32 @@
             value="50">
       </option>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.etrice.ui.layout.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
+            class="org.eclipse.etrice.ui.layout.preferences.ETriceLayoutPreferencePage"
+            id="org.eclipse.etrice.ui.layout.preferences.ETriceLayoutPreferencePage"
+            name="Layout">
+      </page>
+      <page
+            category="org.eclipse.etrice.ui.layout.preferences.ETriceLayoutPreferencePage"
+            class="org.eclipse.etrice.ui.layout.preferences.ETriceBehaviorPreferencePage"
+            id="org.eclipse.etrice.ui.layout.ETriceBehaviorPreferencePage"
+            name="Behavior">
+      </page>
+      <page
+            category="org.eclipse.etrice.ui.layout.preferences.ETriceLayoutPreferencePage"
+            class="org.eclipse.etrice.ui.layout.preferences.EtriceStructurePreferencePage"
+            id="org.eclipse.etrice.ui.layout.ETriceStructurePreferencePage"
+            name="Structure">
+      </page>
+   </extension>
 
 </plugin>

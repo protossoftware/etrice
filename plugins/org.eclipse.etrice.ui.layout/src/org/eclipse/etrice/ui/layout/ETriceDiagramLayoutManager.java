@@ -236,7 +236,7 @@ public abstract class ETriceDiagramLayoutManager extends
 			if (workbenchPart instanceof BehaviorEditor)
 				staticConfig.setValue(LayoutOptions.DIAGRAM_TYPE, diagramNode,
 						LayoutContext.GRAPH_ELEM,
-						ETriceSemanticLayoutConfig.BEHAVIOR_DAGRAM_TYPE);
+						ETriceSemanticLayoutConfig.BEHAVIOR_DIAGRAM_TYPE);
 
 			// Node creation for currently visible top-level Container
 			// Shape(Bounding Box) in

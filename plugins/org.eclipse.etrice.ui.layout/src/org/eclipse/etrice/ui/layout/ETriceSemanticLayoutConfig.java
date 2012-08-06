@@ -29,13 +29,13 @@ public class ETriceSemanticLayoutConfig extends SemanticLayoutConfig {
 	 * The diagram type for the top-level bounding box containers in eTrice
 	 * Behavior Diagram.
 	 */
-	public static final String BEHAVIOR_DAGRAM_TYPE = "org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram";
+	public static final String BEHAVIOR_DIAGRAM_TYPE = "org.eclipse.etrice.ui.layout.eTriceBehaviorDiagram";
 
 	/**
 	 * The diagram type for the top-level bounding box containers in eTrice
 	 * Structure Diagram.
 	 */
-	public static final String STRUCTURE_DAGRAM_TYPE = "org.eclipse.etrice.ui.layout.eTriceStructureDiagram";
+	public static final String STRUCTURE_DIAGRAM_TYPE = "org.eclipse.etrice.ui.layout.eTriceStructureDiagram";
 
 	/** the priority for eTrice Semantic layout configurations. */
 	public static final int PRIORITY = 20;
@@ -72,9 +72,9 @@ public class ETriceSemanticLayoutConfig extends SemanticLayoutConfig {
 			LayoutOptionData<?> layoutOption) {
 		if (layoutOption.getId().equals(LayoutOptions.DIAGRAM_TYPE.getId())) {
 			if (semanticElem instanceof ActorContainerClass)
-				return STRUCTURE_DAGRAM_TYPE;
+				return STRUCTURE_DIAGRAM_TYPE;
 			else if (semanticElem instanceof StateGraph)
-				return BEHAVIOR_DAGRAM_TYPE;
+				return BEHAVIOR_DIAGRAM_TYPE;
 			else
 				return "de.cau.cs.kieler.layout.diagrams.general";
 		}
