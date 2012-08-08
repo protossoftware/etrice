@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
@@ -63,6 +64,9 @@ public class SubSystemClassGen {
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private ILanguageExtension languageExt;
   
   @Inject
   private ILogger logger;
@@ -530,8 +534,9 @@ public class SubSystemClassGen {
             _builder.append("\t");
             ActorClass _actorClass_1 = ai.getActorClass();
             String _name_22 = _actorClass_1.getName();
-            _builder.append(_name_22, "	");
-            _builder.append("_dtor(&");
+            String _destructorName = this.languageExt.destructorName(_name_22);
+            _builder.append(_destructorName, "	");
+            _builder.append("(&");
             String _path = ai.getPath();
             String _pathName = this.roomExt.getPathName(_path);
             _builder.append(_pathName, "	");
@@ -603,8 +608,9 @@ public class SubSystemClassGen {
             _builder.append("\t");
             ActorClass _actorClass_3 = ai_1.getActorClass();
             String _name_28 = _actorClass_3.getName();
-            _builder.append(_name_28, "	");
-            _builder.append("_ctor(&");
+            String _constructorName = this.languageExt.constructorName(_name_28);
+            _builder.append(_constructorName, "	");
+            _builder.append("(&");
             String _path_1 = ai_1.getPath();
             String _pathName_1 = this.roomExt.getPathName(_path_1);
             _builder.append(_pathName_1, "	");

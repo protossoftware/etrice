@@ -32,7 +32,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.generator.generic.TypeHelpers
-
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
 @Singleton
@@ -43,6 +43,7 @@ class SubSystemClassGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
+	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -198,7 +199,7 @@ class SubSystemClassGen {
 			etLogger_logInfoF("%s_destroy", «ssc.name»Inst.name);
 			«FOR ai : ssi.allContainedInstances.reverseView»
 				«IF !ai.actorClass.operations.filter(op|op.destructor).empty»
-					«ai.actorClass.name»_dtor(&«ai.path.getPathName()»);
+					«languageExt.destructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -216,7 +217,7 @@ class SubSystemClassGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "constructActorInstances")
 			«FOR ai : ssi.allContainedInstances»
 				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
-					«ai.actorClass.name»_ctor(&«ai.path.getPathName()»);
+					«languageExt.constructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
