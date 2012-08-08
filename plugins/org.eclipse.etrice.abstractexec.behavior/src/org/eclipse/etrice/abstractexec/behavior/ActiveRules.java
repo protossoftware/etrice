@@ -44,10 +44,7 @@ public class ActiveRules {
 	}
 	public EList<SemanticsRule> getRulesForPort(InterfaceItem port)
 	{
-		if(rules.containsKey(port))
-			return rules.get(port);
-		else
-			return null;
+		return rules.get(port);
 	}
 	//checks for currently active rules against a message list and modifies the
 	//rules which can be merged with the destination node
