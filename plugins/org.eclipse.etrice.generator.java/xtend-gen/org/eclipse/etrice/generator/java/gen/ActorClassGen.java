@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -429,16 +430,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("// user defined constructor body");
           _builder.newLine();
-          {
-            DetailCode _detailCode = ctor.getDetailCode();
-            EList<String> _commands = _detailCode.getCommands();
-            for(final String l : _commands) {
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append(l, "			");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t\t");
+          _builder.append("\t");
+          AbstractGenerator _instance = AbstractGenerator.getInstance();
+          DetailCode _detailCode = ctor.getDetailCode();
+          String _translatedCode = _instance.getTranslatedCode(_detailCode);
+          _builder.append(_translatedCode, "			");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("}");
           _builder.newLine();
@@ -543,15 +541,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (_operator_notEquals_2) {
           _builder.append("\t\t");
           _builder.newLine();
-          {
-            DetailCode _detailCode_1 = dtor.getDetailCode();
-            EList<String> _commands_1 = _detailCode_1.getCommands();
-            for(final String l_1 : _commands_1) {
-              _builder.append("\t\t");
-              _builder.append(l_1, "		");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("// user defined destructor body");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
+          DetailCode _detailCode_1 = dtor.getDetailCode();
+          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
+          _builder.append(_translatedCode_1, "			");
+          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t");

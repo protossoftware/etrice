@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
+import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
@@ -128,9 +129,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					
 					{
 						// user defined constructor body
-						«FOR l : ctor.detailCode.commands»
-							«l»
-						«ENDFOR»
+						«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
 					}
 				«ENDIF»
 			}
@@ -164,9 +163,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			public void destroy(){
 				«IF dtor!=null»
 					
-					«FOR l : dtor.detailCode.commands»
-						«l»
-					«ENDFOR»
+						// user defined destructor body
+						«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»
 				«ENDIF»
 			}
 		
