@@ -840,6 +840,9 @@ public class ValidationUtil {
 		if (name.isEmpty())
 			return Result.error("name must not be empty");
 		
+		if (!isValidID(name))
+			return Result.error("name is no valid ID");
+		
 		if (item.eContainer() instanceof ActorClass) {
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
 			ActorClass ac = (ActorClass) item.eContainer();
@@ -882,8 +885,11 @@ public class ValidationUtil {
 	}
 	
 	public static Result isUniqueName(StateGraphItem s, String name) {
-		if (name.isEmpty())
+		if (name.trim().isEmpty())
 			return Result.error("name must not be empty");
+		
+		if (!isValidID(name))
+			return Result.error("name is no valid ID");
 		
 		StateGraph sg = (StateGraph) s.eContainer();
 		Set<String> names = RoomHelpers.getAllNames(sg, s);
@@ -979,5 +985,9 @@ public class ValidationUtil {
 		}
 		
 		return errors;
+	}
+	
+	public static boolean isValidID(String name) {
+		return !name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}
 }
