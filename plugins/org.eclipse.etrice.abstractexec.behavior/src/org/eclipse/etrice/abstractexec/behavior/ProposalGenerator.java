@@ -66,6 +66,9 @@ public class ProposalGenerator {
 	{
 		boolean issueWarning = false;
 		ActiveRules rules = checker.getActiveRules(st);
+		//in case the state is disconnected component of the graph
+		if(rules==null)
+			return false;
 		xpac.getActiveTriggers(st);
 		
 		Set<SemanticsRule> rulesToIgnore = new HashSet<SemanticsRule>();

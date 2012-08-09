@@ -73,15 +73,25 @@ public class AbstractExecutionValidator implements IRoomValidator {
 				System.out.println("Final printing of rules : ");
 				checker.printRules();
 				System.out.println("Rule checking for " + xpac.getActorClass().getName() + " is over");
-				ProposalGenerator propGen = new ProposalGenerator(xpac,checker);
+				
 				TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
 				while(it.hasNext())
 				{
 					EObject obj = it.next();
 					if(obj instanceof State)
 					{
+						ProposalGenerator propGen = new ProposalGenerator(xpac,checker);
 						State st = (State) obj;
-						propGen.getProposals(st);
+						boolean issueWarning = propGen.getProposals(st);
+						if(issueWarning)
+						{
+							//handle the cases accordingly by retrieving the
+							//warning list once clear what exactly is to be included in warnings
+						}
+						else
+						{
+							//if there are no warnings, then proposals should be generated
+						}
 					}
 				}
 				

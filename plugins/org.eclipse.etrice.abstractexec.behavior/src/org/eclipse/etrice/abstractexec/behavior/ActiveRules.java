@@ -132,10 +132,16 @@ public class ActiveRules {
 		//remove the discarded rules now
 		for(SemanticsRule rule : toRemove) 
 		{
-			this.rules.get(msg.getFrom()).remove(rule);
+			if(rules.containsKey(msg.getFrom())) 
+			{
+				this.rules.get(msg.getFrom()).remove(rule);
+			}
 		}
 		//this basically just adds the advanced rules back to the ruleSet
-		this.rules.get(msg.getFrom()).addAll(follow);
+		if(rules.containsKey(msg.getFrom())) 
+		{
+			this.rules.get(msg.getFrom()).addAll(follow);
+		}
 		return follow;
 	}
 	public void buildInitLocalRules(ExpandedActorClass xpAct)
