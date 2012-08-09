@@ -255,7 +255,6 @@ class GenericStateMachineGenerator {
 		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
 		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
-		var handleEvents = async || eventDriven
 		'''
 			switch («langExt.memberAccess»state) {
 				«FOR state : xpac.stateMachine.getLeafStateList()»

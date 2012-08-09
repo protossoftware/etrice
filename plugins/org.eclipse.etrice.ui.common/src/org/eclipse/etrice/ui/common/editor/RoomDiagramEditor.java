@@ -62,7 +62,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 		injector.injectMembers(this);
 	}
 	
-	@SuppressWarnings("restriction")
 	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
@@ -77,7 +76,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#dispose()
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void dispose() {
 		mte.unsetTarget(getEditingDomain());
@@ -90,7 +88,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#doSave(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
 		ResourceSet rs = getEditingDomain().getResourceSet();
@@ -145,7 +142,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 		super.doSave(monitor);
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
@@ -167,7 +163,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#setFocus()
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void setFocus() {
 		boolean dirtyAlready = isDirty();

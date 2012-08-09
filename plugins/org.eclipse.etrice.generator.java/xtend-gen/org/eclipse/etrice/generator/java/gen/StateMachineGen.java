@@ -8,29 +8,28 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
   @Inject
   private RoomExtensions _roomExtensions;
   
-  public StringConcatenation genExtra(final ExpandedActorClass xpac) {
-    StringConcatenation _xblockexpression = null;
+  public CharSequence genExtra(final ExpandedActorClass xpac) {
+    CharSequence _xblockexpression = null;
     {
-      ActorClass _actorClass = xpac.getActorClass();
-      final ActorClass ac = _actorClass;
+      final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// state names");
       _builder.newLine();
       _builder.append("protected static final String stateStrings[] = {\"<no state>\",\"<top>\",");
       {
         List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
-        boolean hasAnyElements = false;
+        boolean _hasElements = false;
         for(final State state : _allBaseStatesLeavesLast) {
-          if (!hasAnyElements) {
-            hasAnyElements = true;
+          if (!_hasElements) {
+            _hasElements = true;
           } else {
             _builder.appendImmediate(",", "");
           }

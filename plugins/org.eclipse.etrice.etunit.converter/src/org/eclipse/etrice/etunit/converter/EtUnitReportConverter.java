@@ -265,6 +265,8 @@ public class EtUnitReportConverter {
 			++count;
 			if (!line.equals("etUnit report")) {
 				System.err.println("Error: file "+report+", line "+line+" is missing header line - no etunit file");
+				bufRead.close();
+				input.close();
 				return null;
 			}
 
@@ -294,6 +296,8 @@ public class EtUnitReportConverter {
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
 						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
+						bufRead.close();
+						input.close();
 						return null;
 					}
 					FailureType fail = EtunitFactory.eINSTANCE.createFailureType();
@@ -322,6 +326,8 @@ public class EtUnitReportConverter {
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
 						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
+						bufRead.close();
+						input.close();
 						return null;
 					}
 					tc.setTime(BigDecimal.valueOf(time));

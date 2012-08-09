@@ -607,11 +607,6 @@ public class TransitionSupport {
 		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
 		        		lineColor:manageColor(FILL_COLOR);
 				updateLabel(trans, conn, fillColor);
-
-				if (conn.getConnectionDecorators().size()>=2) {
-					ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
-					getDiagramEditor().refresh(cd);
-				}
 			}
 			
 			@Override

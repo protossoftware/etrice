@@ -988,6 +988,6 @@ public class ValidationUtil {
 	}
 	
 	public static boolean isValidID(String name) {
-		return !name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
+		return name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}
 }

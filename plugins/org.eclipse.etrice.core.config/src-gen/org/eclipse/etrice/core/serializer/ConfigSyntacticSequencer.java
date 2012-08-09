@@ -14,8 +14,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
-public class AbstractConfigSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public class ConfigSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ConfigGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AttrClassConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;

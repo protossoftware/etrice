@@ -14,15 +14,16 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.1";visibility:=reexport,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.xtext.util;bundle-version="2.1.1",
- org.eclipse.xtext.xtend2.lib;bundle-version="2.1.1",
  org.eclipse.xtext.xbase.lib;bundle-version="2.1.1",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types;bundle-version="2.1.1",
  org.eclipse.etrice.core.room;bundle-version="0.2.0"
-Import-Package: org.apache.commons.logging,
- org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.services,

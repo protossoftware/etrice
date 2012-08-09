@@ -25,7 +25,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
 
 
 @Singleton
@@ -35,7 +34,6 @@ class DataClassGen {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
-	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -50,7 +48,6 @@ class DataClassGen {
 	
 	def generate(Root root, DataClass dc) {
 		val ctor = dc.operations.filter(op|op.constructor).head
-		val dtor = dc.operations.filter(op|op.destructor).head
 		
 	'''
 		package «dc.getPackage()»;

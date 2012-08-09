@@ -1,5 +1,7 @@
 package org.eclipse.etrice.generator.c.gen;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
@@ -35,20 +37,14 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class SubSystemClassGen {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -79,61 +75,59 @@ public class SubSystemClassGen {
         String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
         String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
-        String path = _operator_plus;
+        String path = (_generationTargetPath + _path);
         SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String _cHeaderFileName = this.stdExt.getCHeaderFileName(_subSystemClass_2);
-        String file = _cHeaderFileName;
-        String _operator_plus_1 = StringExtensions.operator_plus("generating SubSystemClass declaration: \'", file);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
-        this.logger.logInfo(_operator_plus_4);
+        String file = this.stdExt.getCHeaderFileName(_subSystemClass_2);
+        String _plus = ("generating SubSystemClass declaration: \'" + file);
+        String _plus_1 = (_plus + "\' in \'");
+        String _plus_2 = (_plus_1 + path);
+        String _plus_3 = (_plus_2 + "\'");
+        this.logger.logInfo(_plus_3);
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-        StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, ssi, _subSystemClass_3);
+        CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi, _subSystemClass_3);
         this.fileAccess.generateFile(file, _generateHeaderFile);
         SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
         String _cSourceFileName = this.stdExt.getCSourceFileName(_subSystemClass_4);
         file = _cSourceFileName;
-        String _operator_plus_5 = StringExtensions.operator_plus("generating SubSystemClass implementation: \'", file);
-        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
-        String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
-        String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
-        this.logger.logInfo(_operator_plus_8);
+        String _plus_4 = ("generating SubSystemClass implementation: \'" + file);
+        String _plus_5 = (_plus_4 + "\' in \'");
+        String _plus_6 = (_plus_5 + path);
+        String _plus_7 = (_plus_6 + "\'");
+        this.logger.logInfo(_plus_7);
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_5 = ssi.getSubSystemClass();
-        StringConcatenation _generateSourceFile = this.generateSourceFile(root, ssi, _subSystemClass_5);
+        CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, _subSystemClass_5);
         this.fileAccess.generateFile(file, _generateSourceFile);
         SubSystemClass _subSystemClass_6 = ssi.getSubSystemClass();
         String _instSourceFileName = this.stdExt.getInstSourceFileName(_subSystemClass_6);
         file = _instSourceFileName;
-        String _operator_plus_9 = StringExtensions.operator_plus("generating SubSystemClass instance file: \'", file);
-        String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "\' in \'");
-        String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, path);
-        String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, "\'");
-        this.logger.logInfo(_operator_plus_12);
+        String _plus_8 = ("generating SubSystemClass instance file: \'" + file);
+        String _plus_9 = (_plus_8 + "\' in \'");
+        String _plus_10 = (_plus_9 + path);
+        String _plus_11 = (_plus_10 + "\'");
+        this.logger.logInfo(_plus_11);
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_7 = ssi.getSubSystemClass();
-        StringConcatenation _generateInstanceFile = this.generateInstanceFile(root, ssi, _subSystemClass_7);
+        CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi, _subSystemClass_7);
         this.fileAccess.generateFile(file, _generateInstanceFile);
         SubSystemClass _subSystemClass_8 = ssi.getSubSystemClass();
         String _dispSourceFileName = this.stdExt.getDispSourceFileName(_subSystemClass_8);
         file = _dispSourceFileName;
-        String _operator_plus_13 = StringExtensions.operator_plus("generating SubSystemClass dispatcher file: \'", file);
-        String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, "\' in \'");
-        String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, path);
-        String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, "\'");
-        this.logger.logInfo(_operator_plus_16);
+        String _plus_12 = ("generating SubSystemClass dispatcher file: \'" + file);
+        String _plus_13 = (_plus_12 + "\' in \'");
+        String _plus_14 = (_plus_13 + path);
+        String _plus_15 = (_plus_14 + "\'");
+        this.logger.logInfo(_plus_15);
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_9 = ssi.getSubSystemClass();
-        StringConcatenation _generateDispatcherFile = this.generateDispatcherFile(root, ssi, _subSystemClass_9);
+        CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi, _subSystemClass_9);
         this.fileAccess.generateFile(file, _generateDispatcherFile);
       }
     }
   }
   
-  private StringConcatenation generateHeaderFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private CharSequence generateHeaderFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -156,12 +150,12 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     String _name_1 = ssc.getName();
-    StringConcatenation _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(_name_1);
+    CharSequence _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(_name_1);
     _builder.append(_generateIncludeGuardBegin, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     DetailCode _userCode1 = ssc.getUserCode1();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    CharSequence _userCode = this.helpers.userCode(_userCode1);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -210,12 +204,12 @@ public class SubSystemClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     DetailCode _userCode2 = ssc.getUserCode2();
-    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    CharSequence _userCode_1 = this.helpers.userCode(_userCode2);
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     String _name_8 = ssc.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_8);
+    CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_8);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -223,7 +217,7 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  private StringConcatenation generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -275,7 +269,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = ssc.getUserCode3();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode3);
+    CharSequence _userCode = this.helpers.userCode(_userCode3);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -420,7 +414,7 @@ public class SubSystemClassGen {
     _builder.append("etMessageService_execute(&msgService_Thread1);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    StringConcatenation _generateDatadrivenExecutes = this.generateDatadrivenExecutes(root, ssi);
+    CharSequence _generateDatadrivenExecutes = this.generateDatadrivenExecutes(root, ssi);
     _builder.append(_generateDatadrivenExecutes, "				");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -448,7 +442,7 @@ public class SubSystemClassGen {
     _builder.append("etMessageService_execute(&msgService_Thread1);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    StringConcatenation _generateDatadrivenExecutes_1 = this.generateDatadrivenExecutes(root, ssi);
+    CharSequence _generateDatadrivenExecutes_1 = this.generateDatadrivenExecutes(root, ssi);
     _builder.append(_generateDatadrivenExecutes_1, "				");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
@@ -516,7 +510,7 @@ public class SubSystemClassGen {
     _builder.newLineIfNotEmpty();
     {
       EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-      Iterable<ActorInstance> _reverseView = ListExtensions.<ActorInstance>reverseView(_allContainedInstances);
+      List<ActorInstance> _reverseView = ListExtensions.<ActorInstance>reverseView(_allContainedInstances);
       for(final ActorInstance ai : _reverseView) {
         {
           ActorClass _actorClass = ai.getActorClass();
@@ -524,13 +518,13 @@ public class SubSystemClassGen {
           final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
               public Boolean apply(final StandardOperation op) {
                 boolean _isDestructor = op.isDestructor();
-                return ((Boolean)_isDestructor);
+                return Boolean.valueOf(_isDestructor);
               }
             };
           Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
           boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-          boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-          if (_operator_not) {
+          boolean _not = (!_isEmpty);
+          if (_not) {
             _builder.append("\t");
             ActorClass _actorClass_1 = ai.getActorClass();
             String _name_22 = _actorClass_1.getName();
@@ -598,13 +592,13 @@ public class SubSystemClassGen {
           final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
               public Boolean apply(final StandardOperation op) {
                 boolean _isConstructor = RoomHelpers.isConstructor(op);
-                return ((Boolean)_isConstructor);
+                return Boolean.valueOf(_isConstructor);
               }
             };
           Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
           boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
-          boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
-          if (_operator_not_1) {
+          boolean _not_1 = (!_isEmpty_1);
+          if (_not_1) {
             _builder.append("\t");
             ActorClass _actorClass_3 = ai_1.getActorClass();
             String _name_28 = _actorClass_3.getName();
@@ -661,7 +655,7 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  private StringConcatenation generateInstanceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private CharSequence generateInstanceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -769,16 +763,16 @@ public class SubSystemClassGen {
                   ProtocolClass _protocol = pi.getProtocol();
                   boolean _isConjugated = this.roomExt.isConjugated(pi);
                   PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
-                  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_portClass, null);
-                  if (_operator_notEquals) {
+                  boolean _notEquals = (!Objects.equal(_portClass, null));
+                  if (_notEquals) {
                     {
                       ProtocolClass _protocol_1 = pi.getProtocol();
                       boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
                       PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
                       EList<Attribute> _attributes = _portClass_1.getAttributes();
                       boolean _isEmpty_1 = _attributes.isEmpty();
-                      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
-                      if (_operator_not) {
+                      boolean _not = (!_isEmpty_1);
+                      if (_not) {
                         {
                           boolean _isReplicated = pi.isReplicated();
                           if (_isReplicated) {
@@ -811,7 +805,7 @@ public class SubSystemClassGen {
                             String _pathName_2 = this.roomExt.getPathName(_path_2);
                             _builder.append(_pathName_2, "");
                             _builder.append("_var={");
-                            StringConcatenation _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
+                            CharSequence _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
                             _builder.append(_genPortAttributeInitializer, "");
                             _builder.append("};");
                             _builder.newLineIfNotEmpty();
@@ -845,7 +839,7 @@ public class SubSystemClassGen {
             _builder.append("/* no ports/saps/services - nothing to initialize statically */");
             _builder.newLine();
           } else {
-            StringConcatenation _genActorInstanceInitializer = this.genActorInstanceInitializer(root, ai_2);
+            CharSequence _genActorInstanceInitializer = this.genActorInstanceInitializer(root, ai_2);
             _builder.append(_genActorInstanceInitializer, "");
             _builder.newLineIfNotEmpty();
           }
@@ -857,52 +851,52 @@ public class SubSystemClassGen {
   }
   
   private String genReplPortAttributeInitializer(final InterfaceItemInstance pi) {
-      int i = 0;
-      String retval = "";
-      EList<InterfaceItemInstance> _peers = pi.getPeers();
-      int _size = _peers.size();
-      i = _size;
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
-      Boolean _xwhileexpression = _operator_greaterThan;
-      while (_xwhileexpression) {
-        {
-          String _operator_plus = StringExtensions.operator_plus(retval, "\r\n\t\t\t{");
-          StringConcatenation _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
-          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _genPortAttributeInitializer);
-          String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "}");
-          retval = _operator_plus_2;
-          int _operator_minus = IntegerExtensions.operator_minus(((Integer)i), ((Integer)1));
-          i = _operator_minus;
-          boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
-          if (_operator_greaterThan_1) {
-            String _operator_plus_3 = StringExtensions.operator_plus(retval, ",");
-            retval = _operator_plus_3;
-          }
+    int i = 0;
+    String retval = "";
+    EList<InterfaceItemInstance> _peers = pi.getPeers();
+    int _size = _peers.size();
+    i = _size;
+    boolean _greaterThan = (i > 0);
+    boolean _while = _greaterThan;
+    while (_while) {
+      {
+        String _plus = (retval + "\r\n\t\t\t{");
+        CharSequence _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
+        String _plus_1 = (_plus + _genPortAttributeInitializer);
+        String _plus_2 = (_plus_1 + "}");
+        retval = _plus_2;
+        int _minus = (i - 1);
+        i = _minus;
+        boolean _greaterThan_1 = (i > 0);
+        if (_greaterThan_1) {
+          String _plus_3 = (retval + ",");
+          retval = _plus_3;
         }
-        boolean _operator_greaterThan_2 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)i), ((Integer)0));
-        _xwhileexpression = _operator_greaterThan_2;
       }
-      return retval;
+      boolean _greaterThan_1 = (i > 0);
+      _while = _greaterThan_1;
+    }
+    return retval;
   }
   
-  private StringConcatenation genPortAttributeInitializer(final InterfaceItemInstance pi) {
+  private CharSequence genPortAttributeInitializer(final InterfaceItemInstance pi) {
     StringConcatenation _builder = new StringConcatenation();
     {
       ProtocolClass _protocol = pi.getProtocol();
       boolean _isConjugated = this.roomExt.isConjugated(pi);
       PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
       EList<Attribute> _attributes = _portClass.getAttributes();
-      boolean hasAnyElements = false;
+      boolean _hasElements = false;
       for(final Attribute attr : _attributes) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
+        if (!_hasElements) {
+          _hasElements = true;
         } else {
           _builder.appendImmediate(",", "");
         }
         {
           String _defaultValueLiteral = attr.getDefaultValueLiteral();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
-          if (_operator_notEquals) {
+          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+          if (_notEquals) {
             String _defaultValueLiteral_1 = attr.getDefaultValueLiteral();
             _builder.append(_defaultValueLiteral_1, "");
           } else {
@@ -917,113 +911,93 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  private StringConcatenation genActorInstanceInitializer(final Root root, final ActorInstance ai) {
-    StringConcatenation _xblockexpression = null;
+  private CharSequence genActorInstanceInitializer(final Root root, final ActorInstance ai) {
+    CharSequence _xblockexpression = null;
     {
       String _path = ai.getPath();
-      String _pathName = this.roomExt.getPathName(_path);
-      String instName = _pathName;
+      String instName = this.roomExt.getPathName(_path);
       ArrayList<InterfaceItemInstance> _arrayList = new ArrayList<InterfaceItemInstance>();
       ArrayList<InterfaceItemInstance> replPorts = _arrayList;
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
             boolean _isReplicated = e.isReplicated();
-            return ((Boolean)_isReplicated);
+            return Boolean.valueOf(_isReplicated);
           }
         };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
-      CollectionExtensions.<InterfaceItemInstance>addAll(replPorts, _filter);
+      Iterables.<InterfaceItemInstance>addAll(replPorts, _filter);
       final Function1<InterfaceItemInstance,Boolean> _function_1 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
             EList<InterfaceItemInstance> _peers = e.getPeers();
             boolean _isEmpty = _peers.isEmpty();
-            boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-            return ((Boolean)_operator_not);
+            boolean _not = (!_isEmpty);
+            return Boolean.valueOf(_not);
           }
         };
       InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replPorts, _function_1);
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_findFirst, null);
-      boolean haveReplSubPorts = _operator_notEquals;
+      boolean haveReplSubPorts = (!Objects.equal(_findFirst, null));
       EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance,Boolean> _function_2 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
             boolean _isSimple = e.isSimple();
-            return ((Boolean)_isSimple);
+            return Boolean.valueOf(_isSimple);
           }
         };
-      Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_2);
-      Iterable<InterfaceItemInstance> simplePorts = _filter_1;
+      Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_2);
       ArrayList<InterfaceItemInstance> _arrayList_1 = new ArrayList<InterfaceItemInstance>();
       ArrayList<InterfaceItemInstance> eventPorts = _arrayList_1;
       final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
-            return ((Boolean)_operator_equals);
+            boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+            return Boolean.valueOf(_equals);
           }
         };
-      Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_3);
-      Iterable<InterfaceItemInstance> _union = this.roomExt.<InterfaceItemInstance>union(_filter_2, replPorts);
-      CollectionExtensions.<InterfaceItemInstance>addAll(eventPorts, _union);
+      Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_3);
+      Iterable<InterfaceItemInstance> _union = this.roomExt.<InterfaceItemInstance>union(_filter_1, replPorts);
+      Iterables.<InterfaceItemInstance>addAll(eventPorts, _union);
       final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.DATA_DRIVEN);
-            return ((Boolean)_operator_equals);
+            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+            return Boolean.valueOf(_equals);
           }
         };
-      Iterable<InterfaceItemInstance> _filter_3 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_4);
-      Iterable<InterfaceItemInstance> dataPorts = _filter_3;
+      Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_4);
       final Function1<InterfaceItemInstance,Boolean> _function_5 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
-            boolean _operator_and = false;
+            boolean _and = false;
             if (!(p instanceof PortInstance)) {
-              _operator_and = false;
+              _and = false;
             } else {
               Port _port = ((PortInstance) p).getPort();
               boolean _isConjugated = _port.isConjugated();
-              boolean _operator_not = BooleanExtensions.operator_not(_isConjugated);
-              _operator_and = BooleanExtensions.operator_and((p instanceof PortInstance), _operator_not);
+              boolean _not = (!_isConjugated);
+              _and = ((p instanceof PortInstance) && _not);
             }
-            return ((Boolean)_operator_and);
+            return Boolean.valueOf(_and);
           }
         };
-      Iterable<InterfaceItemInstance> _filter_4 = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_5);
-      Iterable<InterfaceItemInstance> recvPorts = _filter_4;
-      final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
-          public Boolean apply(final InterfaceItemInstance p) {
-            boolean _operator_and = false;
-            if (!(p instanceof PortInstance)) {
-              _operator_and = false;
-            } else {
-              Port _port = ((PortInstance) p).getPort();
-              boolean _isConjugated = _port.isConjugated();
-              _operator_and = BooleanExtensions.operator_and((p instanceof PortInstance), _isConjugated);
-            }
-            return ((Boolean)_operator_and);
-          }
-        };
-      Iterable<InterfaceItemInstance> _filter_5 = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_6);
-      Iterable<InterfaceItemInstance> sendPorts = _filter_5;
+      Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_5);
       HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
       HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
       for (final InterfaceItemInstance p : replPorts) {
         {
-          offsets.put(p, ((Integer)offset));
+          offsets.put(p, Integer.valueOf(offset));
           EList<InterfaceItemInstance> _peers = p.getPeers();
           int _size = _peers.size();
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)offset), ((Integer)_size));
-          offset = _operator_plus;
+          int _plus = (offset + _size);
+          offset = _plus;
         }
       }
       String _xifexpression = null;
       if (haveReplSubPorts) {
-        String _operator_plus_1 = StringExtensions.operator_plus(instName, "_repl_sub_ports");
-        _xifexpression = _operator_plus_1;
+        String _plus = (instName + "_repl_sub_ports");
+        _xifexpression = _plus;
       } else {
         _xifexpression = "NULL";
       }
@@ -1041,19 +1015,19 @@ public class SubSystemClassGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
-            final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
+            final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
                 public Boolean apply(final InterfaceItemInstance e) {
                   EList<InterfaceItemInstance> _peers = e.getPeers();
                   boolean _isEmpty = _peers.isEmpty();
-                  boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-                  return ((Boolean)_operator_not);
+                  boolean _not = (!_isEmpty);
+                  return Boolean.valueOf(_not);
                 }
               };
-            Iterable<InterfaceItemInstance> _filter_6 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_7);
-            boolean hasAnyElements = false;
-            for(final InterfaceItemInstance pi : _filter_6) {
-              if (!hasAnyElements) {
-                hasAnyElements = true;
+            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_6);
+            boolean _hasElements = false;
+            for(final InterfaceItemInstance pi : _filter_2) {
+              if (!_hasElements) {
+                _hasElements = true;
               } else {
                 _builder.appendImmediate(",", "	");
               }
@@ -1068,16 +1042,16 @@ public class SubSystemClassGen {
         }
       }
       {
-        boolean _operator_and = false;
+        boolean _and = false;
         boolean _isEmpty = eventPorts.isEmpty();
         if (!_isEmpty) {
-          _operator_and = false;
+          _and = false;
         } else {
           boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
-          _operator_and = BooleanExtensions.operator_and(_isEmpty, _isEmpty_1);
+          _and = (_isEmpty && _isEmpty_1);
         }
-        boolean _operator_not = BooleanExtensions.operator_not(_operator_and);
-        if (_operator_not) {
+        boolean _not = (!_and);
+        if (_not) {
           _builder.append("static const ");
           ActorClass _actorClass = ai.getActorClass();
           String _name = _actorClass.getName();
@@ -1090,10 +1064,10 @@ public class SubSystemClassGen {
           _builder.append("/* Ports: {varData, msgService, peerAddress, localId} */");
           _builder.newLine();
           {
-            boolean hasAnyElements_1 = false;
+            boolean _hasElements_1 = false;
             for(final InterfaceItemInstance pi_1 : eventPorts) {
-              if (!hasAnyElements_1) {
-                hasAnyElements_1 = true;
+              if (!_hasElements_1) {
+                _hasElements_1 = true;
               } else {
                 _builder.appendImmediate(",", "	");
               }
@@ -1107,9 +1081,9 @@ public class SubSystemClassGen {
                 } else {
                   _builder.append("\t");
                   _builder.append("{");
-                  EList<InterfaceItemInstance> _peers_1 = pi_1.getPeers();
-                  int _size_1 = _peers_1.size();
-                  _builder.append(_size_1, "	");
+                  EList<InterfaceItemInstance> _peers = pi_1.getPeers();
+                  int _size = _peers.size();
+                  _builder.append(_size, "	");
                   _builder.append(", ");
                   _builder.append(replSubPortsArray, "	");
                   _builder.append("+");
@@ -1123,17 +1097,17 @@ public class SubSystemClassGen {
           }
           _builder.append("\t");
           {
-            boolean _operator_and_1 = false;
+            boolean _and_1 = false;
             boolean _isEmpty_2 = eventPorts.isEmpty();
-            boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_2);
-            if (!_operator_not_1) {
-              _operator_and_1 = false;
+            boolean _not_1 = (!_isEmpty_2);
+            if (!_not_1) {
+              _and_1 = false;
             } else {
               boolean _isEmpty_3 = IterableExtensions.isEmpty(recvPorts);
-              boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_3);
-              _operator_and_1 = BooleanExtensions.operator_and(_operator_not_1, _operator_not_2);
+              boolean _not_2 = (!_isEmpty_3);
+              _and_1 = (_not_1 && _not_2);
             }
-            if (_operator_and_1) {
+            if (_and_1) {
               _builder.append(",");
             }
           }
@@ -1144,10 +1118,10 @@ public class SubSystemClassGen {
           _builder.append("/* data receive ports */");
           _builder.newLine();
           {
-            boolean hasAnyElements_2 = false;
+            boolean _hasElements_2 = false;
             for(final InterfaceItemInstance pi_2 : recvPorts) {
-              if (!hasAnyElements_2) {
-                hasAnyElements_2 = true;
+              if (!_hasElements_2) {
+                _hasElements_2 = true;
               } else {
                 _builder.appendImmediate(",", "	");
               }
@@ -1179,86 +1153,73 @@ public class SubSystemClassGen {
   private String genPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String _xblockexpression = null;
     {
-      String _xifexpression = null;
+      int _xifexpression = (int) 0;
       EList<InterfaceItemInstance> _peers = pi.getPeers();
       boolean _isEmpty = _peers.isEmpty();
       if (_isEmpty) {
-        _xifexpression = "NULL";
+        _xifexpression = 0;
       } else {
-        ActorClass _actorClass = ai.getActorClass();
-        String _name = _actorClass.getName();
-        String _operator_plus = StringExtensions.operator_plus(_name, "_receiveMessage");
-        _xifexpression = _operator_plus;
+        EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+        InterfaceItemInstance _get = _peers_1.get(0);
+        int _objId = _get.getObjId();
+        _xifexpression = _objId;
       }
-      String recvMsg = _xifexpression;
+      int objId = _xifexpression;
       int _xifexpression_1 = (int) 0;
-      EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-      boolean _isEmpty_1 = _peers_1.isEmpty();
+      EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+      boolean _isEmpty_1 = _peers_2.isEmpty();
       if (_isEmpty_1) {
         _xifexpression_1 = 0;
       } else {
-        EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-        InterfaceItemInstance _get = _peers_2.get(0);
-        int _objId = _get.getObjId();
-        _xifexpression_1 = _objId;
+        EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
+        InterfaceItemInstance _get_1 = _peers_3.get(0);
+        EList<InterfaceItemInstance> _peers_4 = _get_1.getPeers();
+        int _indexOf = _peers_4.indexOf(pi);
+        _xifexpression_1 = _indexOf;
       }
-      int objId = _xifexpression_1;
-      int _xifexpression_2 = (int) 0;
-      EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
-      boolean _isEmpty_2 = _peers_3.isEmpty();
-      if (_isEmpty_2) {
-        _xifexpression_2 = 0;
-      } else {
-        EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
-        InterfaceItemInstance _get_1 = _peers_4.get(0);
-        EList<InterfaceItemInstance> _peers_5 = _get_1.getPeers();
-        int _indexOf = _peers_5.indexOf(pi);
-        _xifexpression_2 = _indexOf;
-      }
-      int idx = _xifexpression_2;
+      int idx = _xifexpression_1;
       String _interfaceItemInstanceData = this.getInterfaceItemInstanceData(pi);
-      String _operator_plus_1 = StringExtensions.operator_plus("{", _interfaceItemInstanceData);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ",");
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "&msgService_Thread1, ");
-      int _operator_plus_4 = IntegerExtensions.operator_plus(((Integer)objId), ((Integer)idx));
-      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_3, ((Integer)_operator_plus_4));
-      String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ", ");
+      String _plus = ("{" + _interfaceItemInstanceData);
+      String _plus_1 = (_plus + ",");
+      String _plus_2 = (_plus_1 + "&msgService_Thread1, ");
+      int _plus_3 = (objId + idx);
+      String _plus_4 = (_plus_2 + Integer.valueOf(_plus_3));
+      String _plus_5 = (_plus_4 + ", ");
       ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
       int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-      int _operator_plus_7 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_6, ((Integer)_operator_plus_7));
-      String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, "} /* Port ");
-      String _name_1 = pi.getName();
-      String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _name_1);
-      String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, " */");
-      _xblockexpression = (_operator_plus_11);
+      int _plus_6 = (_interfaceItemLocalId + 1);
+      String _plus_7 = (_plus_5 + Integer.valueOf(_plus_6));
+      String _plus_8 = (_plus_7 + "} /* Port ");
+      String _name = pi.getName();
+      String _plus_9 = (_plus_8 + _name);
+      String _plus_10 = (_plus_9 + " */");
+      _xblockexpression = (_plus_10);
     }
     return _xblockexpression;
   }
   
   private String getInterfaceItemInstanceData(final InterfaceItemInstance pi) {
-      ProtocolClass _protocol = pi.getProtocol();
-      boolean _isConjugated = this.roomExt.isConjugated(pi);
-      PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
-      boolean _operator_equals = ObjectExtensions.operator_equals(_portClass, null);
-      if (_operator_equals) {
-        return "0";
-      }
-      ProtocolClass _protocol_1 = pi.getProtocol();
-      boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
-      PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
-      EList<Attribute> _attributes = _portClass_1.getAttributes();
-      boolean _isEmpty = _attributes.isEmpty();
-      if (_isEmpty) {
-        return "0";
-      } else {
-        String _path = pi.getPath();
-        String _pathName = this.roomExt.getPathName(_path);
-        String _operator_plus = StringExtensions.operator_plus("&", _pathName);
-        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_var");
-        return _operator_plus_1;
-      }
+    ProtocolClass _protocol = pi.getProtocol();
+    boolean _isConjugated = this.roomExt.isConjugated(pi);
+    PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
+    boolean _equals = Objects.equal(_portClass, null);
+    if (_equals) {
+      return "0";
+    }
+    ProtocolClass _protocol_1 = pi.getProtocol();
+    boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
+    PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
+    EList<Attribute> _attributes = _portClass_1.getAttributes();
+    boolean _isEmpty = _attributes.isEmpty();
+    if (_isEmpty) {
+      return "0";
+    } else {
+      String _path = pi.getPath();
+      String _pathName = this.roomExt.getPathName(_path);
+      String _plus = ("&" + _pathName);
+      return (_plus + "_var");
+    }
   }
   
   private String genRecvPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
@@ -1270,86 +1231,83 @@ public class SubSystemClassGen {
         return "{NULL}";
       }
       EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-      InterfaceItemInstance _get = _peers_1.get(0);
-      InterfaceItemInstance peer = _get;
+      InterfaceItemInstance peer = _peers_1.get(0);
       EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-      InterfaceItemInstance _get_1 = _peers_2.get(0);
-      EObject _eContainer = _get_1.eContainer();
+      InterfaceItemInstance _get = _peers_2.get(0);
+      EObject _eContainer = _get.eContainer();
       ActorInstance peerInst = ((ActorInstance) _eContainer);
       String _path = peerInst.getPath();
-      String _pathName = this.roomExt.getPathName(_path);
-      String instName = _pathName;
-      String _operator_plus = StringExtensions.operator_plus("{&", instName);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".");
+      String instName = this.roomExt.getPathName(_path);
+      String _plus = ("{&" + instName);
+      String _plus_1 = (_plus + ".");
       String _name = peer.getName();
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name);
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "}");
-      _xblockexpression = (_operator_plus_3);
+      String _plus_2 = (_plus_1 + _name);
+      String _plus_3 = (_plus_2 + "}");
+      _xblockexpression = (_plus_3);
     }
     return _xblockexpression;
   }
   
   private String genReplSubPortInitializers(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
-      String result = "";
-      EList<InterfaceItemInstance> _peers = pi.getPeers();
-      for (final InterfaceItemInstance p : _peers) {
-        {
-          EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-          int _indexOf = _peers_1.indexOf(p);
-          int idx = _indexOf;
-          String _xifexpression = null;
-          EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-          int _size = _peers_2.size();
-          int _operator_minus = IntegerExtensions.operator_minus(((Integer)_size), ((Integer)1));
-          boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)idx), ((Integer)_operator_minus));
-          if (_operator_lessThan) {
-            _xifexpression = ",";
-          } else {
-            _xifexpression = "";
-          }
-          String comma = _xifexpression;
-          String _interfaceItemInstanceData = this.getInterfaceItemInstanceData(pi);
-          String iiiD = _interfaceItemInstanceData;
-          String _xifexpression_1 = null;
-          boolean _equals = iiiD.equals("0");
-          if (_equals) {
-            String _operator_plus = StringExtensions.operator_plus(iiiD, ",");
-            _xifexpression_1 = _operator_plus;
-          } else {
-            String _operator_plus_1 = StringExtensions.operator_plus(iiiD, "[");
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ((Integer)idx));
-            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "],");
-            _xifexpression_1 = _operator_plus_3;
-          }
-          iiiD = _xifexpression_1;
-          String _operator_plus_4 = StringExtensions.operator_plus(result, "{");
-          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, iiiD);
-          String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "&msgService_Thread1, ");
-          int _objId = p.getObjId();
-          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, ((Integer)_objId));
-          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ", ");
-          ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
-          InterfaceItem _interfaceItem = pi.getInterfaceItem();
-          int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-          int _operator_plus_9 = IntegerExtensions.operator_plus(((Integer)_interfaceItemLocalId), ((Integer)1));
-          String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_8, ((Integer)_operator_plus_9));
-          String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, ", ");
-          String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, ((Integer)idx));
-          String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, "}");
-          String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, comma);
-          String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, " /* Repl Sub Port ");
-          String _name = pi.getName();
-          String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, _name);
-          String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, " idx +");
-          String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, ((Integer)idx));
-          String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, "*/\n");
-          result = _operator_plus_19;
+    String result = "";
+    EList<InterfaceItemInstance> _peers = pi.getPeers();
+    for (final InterfaceItemInstance p : _peers) {
+      {
+        EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+        int idx = _peers_1.indexOf(p);
+        String _xifexpression = null;
+        EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+        int _size = _peers_2.size();
+        int _minus = (_size - 1);
+        boolean _lessThan = (idx < _minus);
+        if (_lessThan) {
+          _xifexpression = ",";
+        } else {
+          _xifexpression = "";
         }
+        String comma = _xifexpression;
+        String iiiD = this.getInterfaceItemInstanceData(pi);
+        String _xifexpression_1 = null;
+        boolean _equals = iiiD.equals("0");
+        if (_equals) {
+          String _plus = (iiiD + ",");
+          _xifexpression_1 = _plus;
+        } else {
+          String _plus_1 = (iiiD + "[");
+          String _plus_2 = (_plus_1 + Integer.valueOf(idx));
+          String _plus_3 = (_plus_2 + "],");
+          _xifexpression_1 = _plus_3;
+        }
+        iiiD = _xifexpression_1;
+        String _plus_4 = (result + 
+          "{");
+        String _plus_5 = (_plus_4 + iiiD);
+        String _plus_6 = (_plus_5 + "&msgService_Thread1, ");
+        int _objId = p.getObjId();
+        String _plus_7 = (_plus_6 + Integer.valueOf(_objId));
+        String _plus_8 = (_plus_7 + ", ");
+        ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
+        InterfaceItem _interfaceItem = pi.getInterfaceItem();
+        int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
+        int _plus_9 = (_interfaceItemLocalId + 1);
+        String _plus_10 = (_plus_8 + Integer.valueOf(_plus_9));
+        String _plus_11 = (_plus_10 + ", ");
+        String _plus_12 = (_plus_11 + Integer.valueOf(idx));
+        String _plus_13 = (_plus_12 + "}");
+        String _plus_14 = (_plus_13 + comma);
+        String _plus_15 = (_plus_14 + " /* Repl Sub Port ");
+        String _name = pi.getName();
+        String _plus_16 = (_plus_15 + _name);
+        String _plus_17 = (_plus_16 + " idx +");
+        String _plus_18 = (_plus_17 + Integer.valueOf(idx));
+        String _plus_19 = (_plus_18 + "*/\n");
+        result = _plus_19;
       }
-      return result;
+    }
+    return result;
   }
   
-  private StringConcatenation generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  private CharSequence generateDispatcherFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1403,8 +1361,8 @@ public class SubSystemClassGen {
               public Boolean apply(final InterfaceItemInstance p) {
                 ProtocolClass _protocol = p.getProtocol();
                 CommunicationType _commType = _protocol.getCommType();
-                boolean _operator_equals = ObjectExtensions.operator_equals(_commType, CommunicationType.EVENT_DRIVEN);
-                return ((Boolean)_operator_equals);
+                boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+                return Boolean.valueOf(_equals);
               }
             };
           Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
@@ -1420,8 +1378,8 @@ public class SubSystemClassGen {
                     int _objId = pi.getObjId();
                     EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
                     int _indexOf = _peers_1.indexOf(peer);
-                    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_objId), ((Integer)_indexOf));
-                    _builder.append(_operator_plus, "		");
+                    int _plus = (_objId + _indexOf);
+                    _builder.append(_plus, "		");
                     _builder.append(":");
                     _builder.newLineIfNotEmpty();
                     {
@@ -1684,25 +1642,25 @@ public class SubSystemClassGen {
     return _builder;
   }
   
-  private StringConcatenation generateDatadrivenExecutes(final Root root, final SubSystemInstance ssi) {
+  private CharSequence generateDatadrivenExecutes(final Root root, final SubSystemInstance ssi) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
       for(final ActorInstance ai : _allContainedInstances) {
         {
-          boolean _operator_or = false;
+          boolean _or = false;
           ActorClass _actorClass = ai.getActorClass();
           ActorCommunicationType _commType = _actorClass.getCommType();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_commType, ActorCommunicationType.ASYNCHRONOUS);
-          if (_operator_equals) {
-            _operator_or = true;
+          boolean _equals = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+          if (_equals) {
+            _or = true;
           } else {
             ActorClass _actorClass_1 = ai.getActorClass();
             ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-            boolean _operator_equals_1 = ObjectExtensions.operator_equals(_commType_1, ActorCommunicationType.DATA_DRIVEN);
-            _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+            boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.DATA_DRIVEN);
+            _or = (_equals || _equals_1);
           }
-          if (_operator_or) {
+          if (_or) {
             ActorClass _actorClass_2 = ai.getActorClass();
             String _name = _actorClass_2.getName();
             _builder.append(_name, "");

@@ -24,7 +24,6 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 
 @Singleton
@@ -34,7 +33,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	
-	@Inject extension TypeHelpers
 	@Inject extension ProcedureHelpers
 	@Inject extension StateMachineGen
 	@Inject ILogger logger
@@ -75,7 +73,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(1)»
 		
 		
-		public «IF ac.abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
+		public «IF ac.^abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
 		
 			«ac.userCode(2)»
 			
