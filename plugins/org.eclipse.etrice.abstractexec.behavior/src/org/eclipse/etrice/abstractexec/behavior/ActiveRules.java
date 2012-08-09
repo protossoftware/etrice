@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
@@ -29,7 +30,18 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ActiveRules {
 	private HashMap<InterfaceItem, EList<SemanticsRule>> rules ;
-	
+	private static boolean traceProposals = false;
+    static 
+    {
+  	  if (Activator.getDefault().isDebugging()) 
+  	  {
+  		  String value = Platform.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/proposals");
+  		  if (value!=null && value.equalsIgnoreCase(Boolean.toString(true)))
+  		  {
+  			  traceProposals = true;
+  		  }
+     		}		
+}
 	public ActiveRules()
 	{
 		rules=  new HashMap<InterfaceItem, EList<SemanticsRule>>();
@@ -88,11 +100,21 @@ public class ActiveRules {
 		{
 			for(SemanticsRule rule : ar.rules.get(port))
 			{
+				if(this.rules.containsKey(port)) 
+				{
 				if(!this.rules.get(port).contains(rule))
 					{
 					this.rules.get(port).add(rule);
 					added_at_least_one = true;
 					}
+				}
+				else
+				{
+				EList<SemanticsRule> tempList = new BasicEList<SemanticsRule>();
+				tempList.add(rule);
+				this.rules.put(port, tempList);
+				added_at_least_one = true;
+				}
 			}
 		}
 		return added_at_least_one;
@@ -121,10 +143,20 @@ public class ActiveRules {
 					follow.addAll(rule.getFollowUps());
 					//added for removal so it can be replaced the followUp rules
 					toRemove.add(rule);
+					if(traceProposals)
+					{
+						System.out.println("Rule fulfilled by msg : " + msg.getMessage().getName());
+						System.out.println("Rule being removed : " + rule.getMsg().getName());
+					}
 			}
 				else
 				{
 					//add the rule for removing since it is violated by the current msg
+					if(traceProposals)
+					{
+						System.out.println("Rule violated by msg : " + msg.getMessage().getName());
+						System.out.println("Rule being removed : " + rule.getMsg().getName());
+					}
 					toRemove.add(rule);
 				}
 			}

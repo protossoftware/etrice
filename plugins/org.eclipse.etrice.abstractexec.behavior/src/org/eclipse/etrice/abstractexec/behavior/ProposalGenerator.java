@@ -82,10 +82,17 @@ public class ProposalGenerator {
 				{
 					//mark this rule for ignoring while generating proposals
 					//as they have already been taken care of
-					rulesToIgnore.add(curRule);
-					if(!(curRule.getMsg()==trigger.getMsg()))
+					if(curRule.getMsg()==trigger.getMsg())
+					{
+						rulesToIgnore.add(curRule);
+					}
+					else
 					{
 						// issue a warning 
+						if(traceProposals)
+						{
+							System.out.println("Violation of rules with trigger msg : " + trigger.getMsg().getName());
+						}
 						issueWarning= true;
 						warningTrigger.add(trigger);
 					}

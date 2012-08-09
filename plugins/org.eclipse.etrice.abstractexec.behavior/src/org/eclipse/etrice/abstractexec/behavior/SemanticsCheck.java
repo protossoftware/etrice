@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
@@ -37,6 +38,18 @@ public class SemanticsCheck {
 	private ExpandedActorClass xpAct;
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>(); 
 	private ActionCodeAnalyzer codeAnalyzer;
+	private static boolean traceProposals = false;
+    static 
+    {
+  	  if (Activator.getDefault().isDebugging()) 
+  	  {
+  		  String value = Platform.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/proposals");
+  		  if (value!=null && value.equalsIgnoreCase(Boolean.toString(true)))
+  		  {
+  			  traceProposals = true;
+  		  }
+     		}		
+}
 	public SemanticsCheck (ExpandedActorClass xpac) {
 		queue= new LinkedList<StateGraphNode>();
 		xpAct = xpac;
@@ -101,6 +114,11 @@ public class SemanticsCheck {
 			{
 				for(ActiveTrigger trigger : xpAct.getActiveTriggers(st))
 				{
+					if(traceProposals)
+					{
+						System.out.println("Currently visiting : " + st.getName());
+						System.out.println("Trigger : " + trigger.getMsg().getName());
+					}
 					MessageFromIf mifTrig = RoomFactory.eINSTANCE.createMessageFromIf();
 					mifTrig.setFrom(trigger.getIfitem());
 					mifTrig.setMessage(trigger.getMsg());
@@ -126,8 +144,29 @@ public class SemanticsCheck {
 							msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 						}
 						ActiveRules tempRule = mapToRules.get(node).createCopy();
+						if(traceProposals)
+						{
+							System.out.println("Messages in msglist before consuming: ");
+							for(MessageFromIf msg : msgList)
+							{
+								System.out.println("Msg : " + msg.getMessage().getName());
+							}
+						}
+						if(traceProposals)
+						{
+							System.out.println("rules before consuming message list : ");
+							printRules();
+						}
 						tempRule.consumeMessages(msgList);
+						if(traceProposals)
+							System.out.println("Messages consumed");
 						addAndMergeRules( target,  tempRule);
+						if(traceProposals)
+						{
+							System.out.println("rules after consuming and merging message list : ");
+							printRules();
+						}
+						
 					}
 				}
 			}
