@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
@@ -167,6 +168,8 @@ public class DefaultPositionProvider implements IPositionProvider {
 		if (diagram==null)
 			return;
 		
+		StateGraphContext tree = StateGraphContext.createContextTree(SupportUtil.getActorClass(diagram));
+		
 		HashMap<StateGraph, Position> sg2sz = new HashMap<StateGraph, Position>();
 		
 		ILinkService linkService = Graphiti.getLinkService();
@@ -206,8 +209,10 @@ public class DefaultPositionProvider implements IPositionProvider {
 			if (obj instanceof Transition) {
 				ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
 				if (cd.getGraphicsAlgorithm() instanceof Text) {
+					Transition trans = (Transition) obj;
+					StateGraph sg = tree.getContext(trans).getStateGraph();
+					
 					// graph size
-					StateGraph sg = (StateGraph) obj.eContainer();
 					Position sz = sg2sz.get(sg);
 					ArrayList<Position> points = new  ArrayList<Position>();
 					trans2points.put(RoomNameProvider.getFullPath((Transition) obj), points);
