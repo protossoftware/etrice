@@ -90,7 +90,6 @@ public class ATcpClient extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setLastError (int lastError) {
 		 this.lastError = lastError;

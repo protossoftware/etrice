@@ -39,7 +39,6 @@ public class a_HFSM_Tests extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 

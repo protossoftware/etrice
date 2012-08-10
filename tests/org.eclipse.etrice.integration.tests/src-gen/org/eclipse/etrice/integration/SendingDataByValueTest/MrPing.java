@@ -69,7 +69,6 @@ public class MrPing extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setI32Array (int[] i32Array) {
 		 this.i32Array = i32Array;

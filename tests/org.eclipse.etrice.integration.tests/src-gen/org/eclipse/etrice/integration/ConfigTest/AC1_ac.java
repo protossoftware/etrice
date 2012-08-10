@@ -43,7 +43,6 @@ public class AC1_ac extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public PortProtocolConjPort getConj_port (){

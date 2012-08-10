@@ -59,7 +59,6 @@ public class ALogService extends ActorClassBase {
 		// own service implementations
 		log = new LogReplPort(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public LogReplPort getLog (){

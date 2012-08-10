@@ -93,7 +93,6 @@ public class Testee_ac extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setBool_r (boolean bool_r) {
 		 this.bool_r = bool_r;
