@@ -19,4 +19,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: eTrice (Incubation)
 Export-Package: org.eclipse.etrice.ui.behavior,
  org.eclipse.etrice.ui.behavior.editor,
- org.eclipse.etrice.ui.behavior.support;x-friends:="org.eclipse.etrice.ui.behavior.tests"
+ org.eclipse.etrice.ui.behavior.support
