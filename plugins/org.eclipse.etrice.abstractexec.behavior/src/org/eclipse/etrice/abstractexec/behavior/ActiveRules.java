@@ -32,18 +32,20 @@ public class ActiveRules {
 	private static int traceLevel = 0;
 	static {
 		if (Activator.getDefault().isDebugging()) {
-			String value = Platform.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/rules");
+			String value = Platform
+					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/rules");
 			if (value != null && value.equalsIgnoreCase(Boolean.toString(true))) {
 				traceRules = true;
 			}
-			value = Platform.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/rules/level");
+			value = Platform
+					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/rules/level");
 			if (value != null) {
 				traceLevel = Integer.parseInt(value);
 			}
 		}
 	}
 
-	//private static final int TRACE_RESULT = 1;
+	// private static final int TRACE_RESULT = 1;
 	private static final int TRACE_DETAILS = 2;
 
 	public ActiveRules() {
@@ -64,10 +66,11 @@ public class ActiveRules {
 
 	// checks for currently active rules against a message list and modifies the
 	// rules which can be merged with the destination node
-	public void consumeMessages(List<HandledMessage> msgList) {
+	public List<HandledMessage> consumeMessages(List<HandledMessage> msgList) {
+		List<HandledMessage> wrongMsgList = new ArrayList<HandledMessage>();
 		for (HandledMessage msg : msgList) {
 			List<SemanticsRule> localRules = rules.get(msg.getIfitem());
-			if (localRules!=null) {
+			if (localRules != null) {
 				SemanticsRule match = null;
 				for (SemanticsRule rule : localRules) {
 					if (rule.getMsg() == msg.getMsg()) {
@@ -75,28 +78,31 @@ public class ActiveRules {
 						break;
 					}
 				}
-				
-				if (match!=null) {
-					if (traceRules && traceLevel>=TRACE_DETAILS)
-						System.out.println("  found match for "+msg.getMsg().getName());
+
+				if (match != null) {
+					if (traceRules && traceLevel >= TRACE_DETAILS)
+						System.out.println("  found match for "
+								+ msg.getMsg().getName());
 
 					// discard all alternatives
 					localRules.clear();
-					
+
 					// and add all follow ups
 					localRules.addAll(match.getFollowUps());
-				}
-				else {
+				} else {
 					// TODO: issue a warning?
+					wrongMsgList.add(msg);
 				}
 			}
 		}
+		return wrongMsgList;
 	}
 
 	// merges the rules with the destination active rules
 	public boolean merge(ActiveRules ar) {
 		boolean added_at_least_one = false;
-		for (Entry<InterfaceItem, List<SemanticsRule>> entry : ar.rules.entrySet()) {
+		for (Entry<InterfaceItem, List<SemanticsRule>> entry : ar.rules
+				.entrySet()) {
 			for (SemanticsRule rule : entry.getValue()) {
 				InterfaceItem ifitem = entry.getKey();
 				if (rules.containsKey(ifitem)) {
@@ -104,8 +110,7 @@ public class ActiveRules {
 						rules.get(ifitem).add(rule);
 						added_at_least_one = true;
 					}
-				}
-				else {
+				} else {
 					List<SemanticsRule> tempList = new ArrayList<SemanticsRule>();
 					tempList.add(rule);
 					rules.put(ifitem, tempList);
@@ -113,8 +118,8 @@ public class ActiveRules {
 				}
 			}
 		}
-		
-		if (traceRules && traceLevel>=TRACE_DETAILS)
+
+		if (traceRules && traceLevel >= TRACE_DETAILS)
 			System.out.println("  merge changed rules");
 
 		return added_at_least_one;
@@ -123,7 +128,8 @@ public class ActiveRules {
 	public ActiveRules createCopy() {
 		HashMap<InterfaceItem, List<SemanticsRule>> newRules = new HashMap<InterfaceItem, List<SemanticsRule>>();
 		for (InterfaceItem ifitem : rules.keySet()) {
-			newRules.put(ifitem, new ArrayList<SemanticsRule>(rules.get(ifitem)));
+			newRules.put(ifitem,
+					new ArrayList<SemanticsRule>(rules.get(ifitem)));
 		}
 		return new ActiveRules(newRules);
 	}
@@ -131,11 +137,14 @@ public class ActiveRules {
 	public void buildInitLocalRules(ExpandedActorClass xpAct) {
 		// HashMap<InterfaceItem, EList<SemanticsRule>> locals = new
 		// HashMap<InterfaceItem, EList<SemanticsRule>>();
-		List<InterfaceItem> portList = RoomHelpers.getAllInterfaceItems(xpAct.getActorClass());
+		List<InterfaceItem> portList = RoomHelpers.getAllInterfaceItems(xpAct
+				.getActorClass());
 		for (InterfaceItem ifitem : portList) {
 			GeneralProtocolClass gpc = ifitem.getGeneralProtocol();
-			if (gpc instanceof ProtocolClass && ((ProtocolClass) gpc).getSemantics()!=null)
-				rules.put(ifitem, ((ProtocolClass) gpc).getSemantics().getRules());
+			if (gpc instanceof ProtocolClass
+					&& ((ProtocolClass) gpc).getSemantics() != null)
+				rules.put(ifitem, ((ProtocolClass) gpc).getSemantics()
+						.getRules());
 		}
 
 	}
@@ -148,16 +157,15 @@ public class ActiveRules {
 			}
 		}
 	}
-	
+
 	public void printRule(SemanticsRule rule, String indent) {
 		if (rule instanceof InSemanticsRule)
-			System.out.println(indent+"in: "+rule.getMsg().getName());
+			System.out.println(indent + "in: " + rule.getMsg().getName());
 		else
-			System.out.println(indent+"out: "+rule.getMsg().getName());
-		
+			System.out.println(indent + "out: " + rule.getMsg().getName());
 		// recursion
 		for (SemanticsRule sr : rule.getFollowUps()) {
-			printRule(sr, indent+"  ");
+			printRule(sr, indent + "  ");
 		}
 	}
 }

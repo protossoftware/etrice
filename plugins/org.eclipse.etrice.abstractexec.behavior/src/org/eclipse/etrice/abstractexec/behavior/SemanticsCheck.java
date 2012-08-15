@@ -36,7 +36,7 @@ public class SemanticsCheck {
 	private ExpandedActorClass xpAct;
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>();
 	private ActionCodeAnalyzer codeAnalyzer;
-
+	private HashMap<StateGraphItem, List<HandledMessage>> mapToWarnings = new HashMap<StateGraphItem, List<HandledMessage>>();
 	private static boolean traceChecks = false;
 	private static int traceLevel = 0;
 	static {
@@ -89,7 +89,15 @@ public class SemanticsCheck {
 				if (cur instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
 				}
-				localRules.consumeMessages(msgList);
+				List<HandledMessage> wrongMsgList = localRules.consumeMessages(msgList);
+				if(mapToWarnings.containsKey(trans))
+				{
+					mapToWarnings.get(trans).addAll(wrongMsgList);
+				}
+				else
+				{
+					mapToWarnings.put(trans, wrongMsgList);
+				}
 				boolean rulesChanged = false;
 				if (mapToRules.containsKey(cur)) {
 					rulesChanged = mapToRules.get(cur).merge(localRules);
@@ -155,7 +163,15 @@ public class SemanticsCheck {
 							System.out.println("  rules before consuming message list : ");
 							printRules();
 						}
-						tempRule.consumeMessages(msgList);
+						List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
+						if(mapToWarnings.containsKey(node))
+						{
+							mapToWarnings.get(node).addAll(wrongMsgList);
+						}
+						else
+						{
+							mapToWarnings.put(node, wrongMsgList);
+						}
 						
 						if (traceChecks && traceLevel>=TRACE_DETAILS)
 							System.out.println("  Messages consumed");
@@ -188,7 +204,15 @@ public class SemanticsCheck {
 				if (target instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}
-				tempRule.consumeMessages(msgList);
+				List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
+				if(mapToWarnings.containsKey(node))
+				{
+					mapToWarnings.get(node).addAll(wrongMsgList);
+				}
+				else
+				{
+					mapToWarnings.put(node, wrongMsgList);
+				}
 				addAndMergeRules(target, tempRule);
 			}
 		}
@@ -220,5 +244,8 @@ public class SemanticsCheck {
 	public ActiveRules getActiveRules(StateGraphItem item) {
 		return mapToRules.get(item);
 	}
-
+	public List<HandledMessage> getWarningMsg (StateGraphItem item)
+	{
+		return mapToWarnings.get(item);
+	}
 }

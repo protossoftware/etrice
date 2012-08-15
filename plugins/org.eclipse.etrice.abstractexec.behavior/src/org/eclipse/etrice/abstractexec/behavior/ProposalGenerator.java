@@ -25,7 +25,6 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 public class ProposalGenerator {
 	private ExpandedActorClass xpac;
@@ -36,7 +35,8 @@ public class ProposalGenerator {
 	private static boolean traceProposals = false;
 	static {
 		if (Activator.getDefault().isDebugging()) {
-			String value = Platform.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/proposals");
+			String value = Platform
+					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/proposals");
 			if (value != null && value.equalsIgnoreCase(Boolean.toString(true))) {
 				traceProposals = true;
 			}
@@ -60,70 +60,74 @@ public class ProposalGenerator {
 		return warningTrigger;
 	}
 
-	public void createProposals(State st, ValidationMessageAcceptor messageAcceptor) {
+	public void createProposals(State st) {
 		ActiveRules rules = checker.getActiveRules(st);
-		
+
 		// in case the state is disconnected component of the graph
 		if (rules == null)
 			return;
-		
+
 		outgoingProposal.clear();
 		incomingProposal.clear();
-		
-		xpac.getActiveTriggers(st);
+
 		Set<SemanticsRule> rulesToIgnore = new HashSet<SemanticsRule>();
-		for (ActiveTrigger trigger : xpac.getActiveTriggers(st)) {
-			SemanticsRule match = null;
-			Port port = (Port) trigger.getIfitem();
-			if (rules.getPortList().contains(port)) {
-				List<SemanticsRule> ruleList = rules.getRulesForPort(port);
-				for (SemanticsRule curRule : ruleList) {
-					if (curRule.getMsg() == trigger.getMsg()) {
-						match = curRule;
-						break;
+		if (xpac.getActiveTriggers(st) != null)
+			for (ActiveTrigger trigger : xpac.getActiveTriggers(st)) {
+				SemanticsRule match = null;
+				Port port = (Port) trigger.getIfitem();
+				if (rules.getPortList().contains(port)) {
+					List<SemanticsRule> ruleList = rules.getRulesForPort(port);
+					for (SemanticsRule curRule : ruleList) {
+						if (curRule.getMsg() == trigger.getMsg()) {
+							match = curRule;
+							break;
+						}
 					}
 				}
+				if (match != null) {
+					// mark this rule for ignoring while generating proposals
+					// as they have already been taken care of
+					rulesToIgnore.add(match);
+				} else {
+					// according to the rules this trigger isn't necessary
+					warningTrigger.add(trigger);
+				}
 			}
-			if (match!=null) {
-				// mark this rule for ignoring while generating proposals
-				// as they have already been taken care of
-				rulesToIgnore.add(match);
-			}
-			else {
-				// according to the rules this trigger isn't necessary
-				warningTrigger.add(trigger);
-			}
-		}
-		
+
 		// now start generating proposals by listing all the rules and ignoring
 		// the ones
 		// marked above
 		for (InterfaceItem item : rules.getPortList()) {
 			for (SemanticsRule ruleToCheck : rules.getRulesForPort(item)) {
 				if (!rulesToIgnore.contains(ruleToCheck)) {
-					MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+					MessageFromIf mif = RoomFactory.eINSTANCE
+							.createMessageFromIf();
 					mif.setFrom(item);
 					mif.setMessage(ruleToCheck.getMsg());
-					boolean isOutgoing = RoomHelpers.getMessageList(item, true).contains(ruleToCheck.getMsg());
+					boolean isOutgoing = RoomHelpers.getMessageList(item, true)
+							.contains(ruleToCheck.getMsg());
 					if (isOutgoing) {
 						outgoingProposal.add(mif);
-					}
-					else {
+					} else {
 						incomingProposal.add(mif);
 					}
 
 				}
 			}
 		}
-		
+
 		if (traceProposals) {
 			System.out.println("  Proposals for : " + st.getName());
 
 			for (MessageFromIf msg : outgoingProposal) {
-				System.out.println("    Outgoing msg proposal : " + msg.getFrom().getName()+"."+msg.getMessage().getName()+"()");
+				System.out.println("    Outgoing msg proposal : "
+						+ msg.getFrom().getName() + "."
+						+ msg.getMessage().getName() + "()");
 			}
 			for (MessageFromIf msg : incomingProposal) {
-				System.out.println("    Incoming msg proposal : " + msg.getMessage().getName() + " from " + msg.getFrom().getName());
+				System.out.println("    Incoming msg proposal : "
+						+ msg.getMessage().getName() + " from "
+						+ msg.getFrom().getName());
 			}
 		}
 	}
