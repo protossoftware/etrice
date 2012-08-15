@@ -14,12 +14,12 @@ package org.eclipse.etrice.generator.cpp.gen;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
-import org.eclipse.etrice.generator.base.ILogger;
 
 import com.google.inject.Inject;
 

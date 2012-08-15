@@ -16,7 +16,8 @@ class IEventReceiver;
 
 class PortBase : public InterfaceItemBase{
 public:
-	PortBase (const IEventReceiver& actor, const char * name, int localId, int idx, Address address, Address peerAddress);
+	PortBase (const IEventReceiver& actor, const char * name, int localId, int idx, Address address, Address peerAddress)
+		: InterfaceItemBase(actor, name, localId, idx, address, peerAddress){};
 	virtual ~PortBase();
 
 private:

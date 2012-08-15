@@ -9,10 +9,6 @@
 
 namespace etRuntime {
 
-Message::Message() {
-	// TODO Auto-generated constructor stub
-
-}
 
 Message::~Message() {
 	// TODO Auto-generated destructor stub

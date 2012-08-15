@@ -9,10 +9,6 @@
 
 namespace etRuntime {
 
-PortBase::PortBase() {
-	// TODO Auto-generated constructor stub
-
-}
 
 PortBase::~PortBase() {
 	// TODO Auto-generated destructor stub

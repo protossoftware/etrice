@@ -16,17 +16,17 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.ComplexType
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
-import org.eclipse.etrice.generator.base.ILogger
-import org.eclipse.etrice.generator.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.Root
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 
 @Singleton

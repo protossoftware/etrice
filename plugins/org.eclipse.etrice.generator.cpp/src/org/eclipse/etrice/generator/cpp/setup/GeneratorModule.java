@@ -16,15 +16,13 @@ import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GeneratorBaseModule;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.cpp.Main;
+import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.CppLanguageGenerator;
 import org.eclipse.etrice.generator.cpp.gen.CppTranslationProvider;
 import org.eclipse.etrice.generator.cpp.gen.MainGen;
-import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
-import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
-
-
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Binder;
 

@@ -15,19 +15,21 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.generator.base.ILogger
-import org.eclipse.etrice.generator.etricegen.Root
+import org.eclipse.etrice.core.room.ProtocolClass
+
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
+
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
-import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 
 
 @Singleton
@@ -40,7 +42,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
-	def doGenerate(Root root) {
+	def doGenerate(Root root) { 
 		for (pc: root.usedProtocolClasses) {
 			var path = pc.generationTargetPath+pc.getPath
 
@@ -70,7 +72,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "common/modelbase/InterfaceItemBase.h"
 		#include "common/messaging/Address.h"
 		#include "common/messaging/Message.h"
-		#include <list>
+		#include <vector>
 		
 		namespace etRuntime {
 			class IEventReceiver;
@@ -93,7 +95,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«helpers.userCode(pc.userCode2)»
 		
 		   private:
-				static char messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
+				static char* messageStrings[];
 		
 		   public:
 				char* getMessageString(int msg_id);
@@ -139,12 +141,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		//------------------------------------------------------------------------------------------------------------
 		class «replPortClassName» {
 			private:
-			 std::list<«portClassName»> ports;
+			 std::vector<«portClassName»> ports;
 			 int replication;
 		
 			public:
 			// constructor
-			«replPortClassName»(etRuntime::IEventReceiver actor, char* name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress);
+			«replPortClassName»(etRuntime::IEventReceiver actor, char* name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
 			
 			int getReplication() {	return replication; }
 			int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
@@ -189,11 +191,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		DebuggingService::getInstance().addPortInstance(*this);
 	}
 		
-	void «pc.name»::«portClassName»::receive(Message m) {
-		if (!(m instanceof EventMessage)) return;
-		EventMessage msg = (EventMessage) m;
+	void «pc.name»::«portClassName»::receive(Message msg) {
+		//if (!(m instanceof EventMessage)) return;
+		//EventMessage msg = (EventMessage) m;
 		if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-			System.out.println("unknown");
+			printf("unknown");
 		else {
 			if (messageStrings[msg.getEvtId()] != "timerTick"){
 «««							TODOTS: model switch for activation
@@ -212,11 +214,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				break;
 			«ENDFOR»
 			default:
-		«ENDIF»
-			if (msg instanceof EventWithDataMessage)
-				getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-			else
-				getActor().receiveEvent(this, msg.getEvtId(), null);
+		«ENDIF»	getActor().receiveEvent(*this, msg.getEvtId(), msg.getData());
 		«IF pc.handlesReceive(conj)»
 		}
 		«ENDIF»
@@ -233,12 +231,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	//-------------------------------------------------------------------------------
 	// replicated port class
 	//-------------------------------------------------------------------------------
-	«pc.name»::«replPortClassName»::«replPortClassName»(IEventReceiver actor, char* name, int localId, Address addr, Address peerAddress) {
-		replication = addr==null? 0:addr.length;
-		ports = new ArrayList<«pc.name».«portClassName»>(replication);
+	«pc.name»::«replPortClassName»::«replPortClassName»(IEventReceiver actor, char* name, int localId, std::vector<Address> addr, std::vector<Address> peerAddress) {
+		int replication = addr.size();
+		ports = new std::vector<«pc.name»::«portClassName»>(replication);
 		for (int i=0; i<replication; ++i) {
-			ports.add(new «portClassName»(
-					actor, name+i, localId, i, addr[i], peerAddress[i]));
+			ports[i] = new «pc.name»::«portClassName»(actor, name+i, localId, i, addr[i], peerAddress[i]);
 		}
 	}
 		
@@ -274,6 +271,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		#include "«pc.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
+		#include <stdio.h>
 
 		using namespace etRuntime;
 		
@@ -287,7 +285,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«helpers.userCode(pc.userCode2)»
 	
-		//private static char* messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
+		char* «pc.name»::messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 	
 		char* «pc.name»::getMessageString(int msg_id) {
 			if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -411,7 +409,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				
 			«ENDFOR»
 	'''
-	}
+	} 
 	
 	def private portClassSource(ProtocolClass pc, Boolean conj){
 		var portClassName = pc.getPortClassName(conj)
@@ -514,7 +512,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 //	«var dir = if (conj) "IN" else "OUT"»
 //	«var hdlr = m.getSendHandler(conj)»
 //	«messageSignature(m)»{
-//		if (getPeerAddress()!=null)
+//		if (getPeerAddress()!= 0)
 //				«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
 //				«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
 //			«ENDIF»
@@ -546,7 +544,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
 
 		const char* «pc.name»_getMessageString(int msg_id) {
-			if (msg_id<«pc.name»_MSG_MIN || msg_id>«pc.name»_MSG_MAX+1){
+			if (msg_id < «pc.name»::MSG_MIN || msg_id > «pc.name»::MSG_MAX+1){
 				/* id out of range */
 				return "Message ID out of range";
 			}
@@ -601,12 +599,13 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 				«ELSE»
 					if (messageStrings[ «dir»_«m.name»] != "timerTick"){
 «««						TODOTS: model switch for activation
-					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
+						DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
 					}
-					if (getPeerAddress()!=null)
-						«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+					if (getPeerAddress().isValid()){
+						«IF m.data==null»getPeerMsgReceiver().receive(new Message(getPeerAddress(), «dir»_«m.name»));
+						«ELSE»getPeerMsgReceiver().receive(new Message(getPeerAddress(), «dir»_«m.name», reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»)));
 					«ENDIF»
+					}
 				«ENDIF»
 			}
 			«IF m.data!=null && m.data.refType.type instanceof DataClass»

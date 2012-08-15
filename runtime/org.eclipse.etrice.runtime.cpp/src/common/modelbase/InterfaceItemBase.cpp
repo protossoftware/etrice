@@ -9,11 +9,6 @@
 
 namespace etRuntime {
 
-InterfaceItemBase::InterfaceItemBase() {
-	// TODO Auto-generated constructor stub
-
-}
-
 InterfaceItemBase::~InterfaceItemBase() {
 	// TODO Auto-generated destructor stub
 }

@@ -17,9 +17,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.etricegen.Root;
 import org.eclipse.etrice.generator.cpp.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 
 import com.google.inject.Inject;
 
@@ -50,8 +50,8 @@ public class Main extends AbstractGenerator {
 	@Inject
 	private IGenerator mainGenerator;
 
-	@Inject
-	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
+//	@Inject
+//	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
 	public int runGenerator(String[] args) {
 		if (args.length == 0) {
@@ -107,7 +107,7 @@ public class Main extends AbstractGenerator {
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
 		if (genInstDiag) {
-			mainDocGenerator.doGenerate(genModel);
+	//		mainDocGenerator.doGenerate(genModel);
 		}
 		logger.logInfo("-- finished code generation");
 		

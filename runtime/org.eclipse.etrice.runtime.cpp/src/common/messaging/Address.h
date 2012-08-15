@@ -14,8 +14,11 @@ class Address {
 public:
 	Address(int nodeID,int threadID, int objectID)
 	: m_nodeID(nodeID), m_threadID(threadID), m_objectID(objectID) {};
+	Address(const Address & right)
+	: m_nodeID(right.m_nodeID), m_threadID(right.m_threadID), m_objectID(right.m_objectID){};
 	~Address();
 
+	bool isValid() const { return (m_nodeID != 0) && (m_threadID != 0) && (m_objectID != 0);};
 	int m_nodeID;
 	int m_threadID;
 	int m_objectID;
