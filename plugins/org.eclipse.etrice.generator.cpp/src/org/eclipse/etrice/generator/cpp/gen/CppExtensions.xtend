@@ -34,7 +34,7 @@ class CppExtensions implements ILanguageExtension {
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m)
+		return chainGenerator.generateTypedData(m.data)
 	}
 
 
@@ -112,5 +112,14 @@ class CppExtensions implements ILanguageExtension {
 		'''
 	}
 	
+	
+
+	override superCall(String baseClassName, String method, String arguments) {
+		baseClassName+"::"+method+"("+arguments+");"
+	}
+	
+	override toCharArrayExpr(String s) {
+		"\"" + s + "\"";
+	}
 	
 }
