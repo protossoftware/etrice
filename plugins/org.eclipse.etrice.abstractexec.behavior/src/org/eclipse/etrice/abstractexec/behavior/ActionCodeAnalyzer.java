@@ -19,8 +19,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
 import org.eclipse.etrice.generator.base.DetailCodeTranslator;
 
@@ -32,9 +30,9 @@ public class ActionCodeAnalyzer {
 
 	private class Collector extends DefaultTranslationProvider {
 		
-		private ArrayList<MessageFromIf> mifs = new ArrayList<MessageFromIf>();
+		private ArrayList<HandledMessage> mifs = new ArrayList<HandledMessage>();
 		
-		public ArrayList<MessageFromIf> getMifs() {
+		public ArrayList<HandledMessage> getMifs() {
 			return mifs;
 		}
 
@@ -45,10 +43,8 @@ public class ActionCodeAnalyzer {
 		public String getInterfaceItemMessageText(InterfaceItem item,
 				Message msg, ArrayList<String> args, String index, String orig) {
 			
-			MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
-			mif.setFrom(item);
-			mif.setMessage(msg);
-			mifs.add(mif);
+			HandledMessage sm = new HandledMessage(item, msg, origin);
+			mifs.add(sm);
 			
 			return orig;
 		}
@@ -63,19 +59,21 @@ public class ActionCodeAnalyzer {
 
 		// create a new list and leave previous unchanged
 		public void begin() {
-			mifs = new ArrayList<MessageFromIf>();
+			mifs = new ArrayList<HandledMessage>();
 		}
 	}
 	
 	private Collector collector;
 	private DetailCodeTranslator translator;
+	private DetailCode origin;
 
 	public ActionCodeAnalyzer(ActorClass ac) {
 		collector = new Collector();
 		translator = new DetailCodeTranslator(ac, collector);
 	}
 	
-	public List<MessageFromIf> analyze(DetailCode dc) {
+	public List<HandledMessage> analyze(DetailCode dc) {
+		origin = dc;
 		collector.begin();
 		translator.translateDetailCode(dc);
 		return collector.getMifs();

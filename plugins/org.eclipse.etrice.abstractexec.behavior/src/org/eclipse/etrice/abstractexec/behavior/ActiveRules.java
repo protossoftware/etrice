@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -44,7 +43,7 @@ public class ActiveRules {
 		}
 	}
 
-	private static final int TRACE_RESULT = 1;
+	//private static final int TRACE_RESULT = 1;
 	private static final int TRACE_DETAILS = 2;
 
 	public ActiveRules() {
@@ -65,13 +64,13 @@ public class ActiveRules {
 
 	// checks for currently active rules against a message list and modifies the
 	// rules which can be merged with the destination node
-	public void consumeMessages(List<MessageFromIf> msgList) {
-		for (MessageFromIf msg : msgList) {
-			List<SemanticsRule> localRules = rules.get(msg.getFrom());
+	public void consumeMessages(List<HandledMessage> msgList) {
+		for (HandledMessage msg : msgList) {
+			List<SemanticsRule> localRules = rules.get(msg.getIfitem());
 			if (localRules!=null) {
 				SemanticsRule match = null;
 				for (SemanticsRule rule : localRules) {
-					if (rule.getMsg() == msg.getMessage()) {
+					if (rule.getMsg() == msg.getMsg()) {
 						match = rule;
 						break;
 					}
@@ -79,7 +78,7 @@ public class ActiveRules {
 				
 				if (match!=null) {
 					if (traceRules && traceLevel>=TRACE_DETAILS)
-						System.out.println("  found match for "+msg.getMessage().getName());
+						System.out.println("  found match for "+msg.getMsg().getName());
 
 					// discard all alternatives
 					localRules.clear();

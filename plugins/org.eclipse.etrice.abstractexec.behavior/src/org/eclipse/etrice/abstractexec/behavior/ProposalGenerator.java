@@ -25,13 +25,14 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 public class ProposalGenerator {
 	private ExpandedActorClass xpac;
 	private SemanticsCheck checker;
 	private List<MessageFromIf> outgoingProposal = new LinkedList<MessageFromIf>();
 	private List<MessageFromIf> incomingProposal = new LinkedList<MessageFromIf>();
-	//private List<ActiveTrigger> warningTrigger = new LinkedList<ActiveTrigger>();
+	private List<ActiveTrigger> warningTrigger = new LinkedList<ActiveTrigger>();
 	private static boolean traceProposals = false;
 	static {
 		if (Activator.getDefault().isDebugging()) {
@@ -55,43 +56,42 @@ public class ProposalGenerator {
 		return outgoingProposal;
 	}
 
-//	public List<ActiveTrigger> getWarningTriggers() {
-//		return warningTrigger;
-//	}
+	public List<ActiveTrigger> getWarningTriggers() {
+		return warningTrigger;
+	}
 
-	public boolean getProposals(State st) {
+	public void createProposals(State st, ValidationMessageAcceptor messageAcceptor) {
 		ActiveRules rules = checker.getActiveRules(st);
 		
 		// in case the state is disconnected component of the graph
 		if (rules == null)
-			return false;
+			return;
 		
-		boolean issueWarning = false;
 		outgoingProposal.clear();
 		incomingProposal.clear();
 		
 		xpac.getActiveTriggers(st);
 		Set<SemanticsRule> rulesToIgnore = new HashSet<SemanticsRule>();
 		for (ActiveTrigger trigger : xpac.getActiveTriggers(st)) {
+			SemanticsRule match = null;
 			Port port = (Port) trigger.getIfitem();
 			if (rules.getPortList().contains(port)) {
 				List<SemanticsRule> ruleList = rules.getRulesForPort(port);
 				for (SemanticsRule curRule : ruleList) {
-					// mark this rule for ignoring while generating proposals
-					// as they have already been taken care of
 					if (curRule.getMsg() == trigger.getMsg()) {
-						rulesToIgnore.add(curRule);
+						match = curRule;
+						break;
 					}
-					/*else {
-						// issue a warning
-						if (traceProposals) {
-							System.out.println("Violation of rules with trigger msg : "
-											+ trigger.getMsg().getName());
-						}
-						issueWarning = true;
-						warningTrigger.add(trigger);
-					}*/
 				}
+			}
+			if (match!=null) {
+				// mark this rule for ignoring while generating proposals
+				// as they have already been taken care of
+				rulesToIgnore.add(match);
+			}
+			else {
+				// according to the rules this trigger isn't necessary
+				warningTrigger.add(trigger);
 			}
 		}
 		
@@ -126,8 +126,6 @@ public class ProposalGenerator {
 				System.out.println("    Incoming msg proposal : " + msg.getMessage().getName() + " from " + msg.getFrom().getName());
 			}
 		}
-		
-		return issueWarning;
 	}
 
 }

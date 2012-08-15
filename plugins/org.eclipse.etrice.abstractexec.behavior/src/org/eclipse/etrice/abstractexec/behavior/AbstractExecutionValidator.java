@@ -106,16 +106,7 @@ public class AbstractExecutionValidator implements IRoomValidator {
 					{
 						ProposalGenerator propGen = new ProposalGenerator(xpac,checker);
 						State st = (State) obj;
-						boolean issueWarning = propGen.getProposals(st);
-						if(issueWarning)
-						{
-							//handle the cases accordingly by retrieving the
-							//warning list once clear what exactly is to be included in warnings
-						}
-						else
-						{
-							//if there are no warnings, then proposals should be generated
-						}
+						propGen.createProposals(st, messageAcceptor);
 					}
 				}
 				if (traceExec)

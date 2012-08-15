@@ -23,8 +23,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -87,11 +85,9 @@ public class SemanticsCheck {
 		for (Transition trans : transitions)
 			if (trans instanceof InitialTransition) {
 				StateGraphNode cur = xpAct.getNode(trans.getTo());
-				List<MessageFromIf> msgList = codeAnalyzer.analyze(trans
-						.getAction());
+				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
 				if (cur instanceof State) {
-					msgList.addAll(codeAnalyzer.analyze(((State) cur)
-							.getEntryCode()));
+					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
 				}
 				localRules.consumeMessages(msgList);
 				boolean rulesChanged = false;
@@ -128,15 +124,12 @@ public class SemanticsCheck {
 						System.out.println("  Trigger: " + trigger.getMsg().getName());
 					}
 					
-					MessageFromIf mifTrig = RoomFactory.eINSTANCE.createMessageFromIf();
-					mifTrig.setFrom(trigger.getIfitem());
-					mifTrig.setMessage(trigger.getMsg());
 					for (Transition trans : trigger.getTransitions()) {
 						StateGraphNode target = xpAct.getNode(trans.getTo());
-						List<MessageFromIf> msgList = new LinkedList<MessageFromIf>();
+						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
-						msgList.add(mifTrig);
+						msgList.add(new HandledMessage(trigger.getIfitem(), trigger.getMsg(), trigger));
 						StateGraph triggerContext = (StateGraph) trans.eContainer();
 						State exitCalled = st;
 						while (true) {
@@ -154,8 +147,8 @@ public class SemanticsCheck {
 						
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {
 							System.out.println("  Messages in msglist before consuming: ");
-							for (MessageFromIf msg : msgList) {
-								System.out.println("  Msg: "+ msg.getMessage().getName());
+							for (HandledMessage msg : msgList) {
+								System.out.println("  Msg: "+ msg.getMsg().getName());
 							}
 						}
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {
@@ -190,12 +183,10 @@ public class SemanticsCheck {
 			 */
 			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
 				ActiveRules tempRule = mapToRules.get(node).createCopy();
-				List<MessageFromIf> msgList = codeAnalyzer.analyze(trans
-						.getAction());
+				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
 				StateGraphNode target = xpAct.getNode(trans.getTo());
 				if (target instanceof State) {
-					msgList.addAll(codeAnalyzer.analyze(((State) target)
-							.getEntryCode()));
+					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}
 				tempRule.consumeMessages(msgList);
 				addAndMergeRules(target, tempRule);
