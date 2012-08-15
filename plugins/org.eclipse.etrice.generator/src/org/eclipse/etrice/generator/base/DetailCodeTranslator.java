@@ -16,12 +16,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -29,27 +33,42 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *
  */
 public class DetailCodeTranslator {
+
+	private static final String ATTR_SET = ".set";
 	
 	private static class Position {
 		int pos = 0;
 	}
 	
-	private ActorClass ac;
 	private ITranslationProvider provider;
-	private HashMap<String, InterfaceItem> name2item;
-	private HashMap<String, Attribute> name2attr;
-	private HashMap<String, Operation> name2op;
+	private HashMap<String, InterfaceItem> name2item = new HashMap<String, InterfaceItem>();
+	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
+	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
 	
 	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider) {
-		this.ac = ac;
+		this((EObject) ac, provider);
+	}
+	
+	public DetailCodeTranslator(ProtocolClass pc, ITranslationProvider provider) {
+		this((EObject) pc, provider);
+	}
+	
+	public DetailCodeTranslator(PortClass pc, ITranslationProvider provider) {
+		this((EObject) pc, provider);
+	}
+	
+	public DetailCodeTranslator(DataClass dc, ITranslationProvider provider) {
+		this((EObject) dc, provider);
+	}
+	
+	private DetailCodeTranslator(EObject container, ITranslationProvider provider) {
 		this.provider = provider;
-		
-		prepare();
+		prepare(container);
 	}
 	
 	public String translateDetailCode(DetailCode code) {
 		if (code==null)
-			return null;
+			return "";
 		
 		// concatenate lines
 		StringBuilder text = new StringBuilder();
@@ -57,7 +76,7 @@ public class DetailCodeTranslator {
 			text.append(line+"\n");
 		}
 
-		String result = text.substring(0, text.length()-1);
+		String result = text.substring(0, Math.max(0, text.length()-1));
 		
 		if (provider.translateMembers())
 			result = translateText(result);
@@ -89,8 +108,24 @@ public class DetailCodeTranslator {
 				String translated = null;
 				Attribute attribute = name2attr.get(token);
 				if (attribute!=null) {
-					String orig = text.substring(last, curr.pos);
-					translated = provider.getAttributeText(attribute, orig);
+					int start = curr.pos;
+					String index = getArrayIndex(text, curr);
+					if (index==null)
+						curr.pos = start;
+					int endSet = curr.pos+ATTR_SET.length();
+					if (text.length()>=endSet && text.substring(curr.pos, endSet).equals(ATTR_SET)) {
+						curr.pos = endSet;
+						ArrayList<String> args = getArgs(text, curr);
+						if (args!=null && args.size()==1) {
+							String orig = text.substring(last, curr.pos);
+							String transArg = translateText(args.get(0));
+							translated = provider.getAttributeSetter(attribute, index, transArg, orig);
+						}
+					}
+					else {
+						String orig = text.substring(last, curr.pos);
+						translated = provider.getAttributeGetter(attribute, index, orig);
+					}
 				}
 				else {
 					Operation operation = name2op.get(token);
@@ -110,7 +145,7 @@ public class DetailCodeTranslator {
 						InterfaceItem item = name2item.get(token);
 						if (item!=null) {
 							int start = curr.pos;
-							String index = getPortIndex(text, curr, item);
+							String index = getArrayIndex(text, curr);
 							if (index==null)
 								curr.pos = start;
 							Message msg = getMessage(text, curr, item, true);
@@ -153,7 +188,7 @@ public class DetailCodeTranslator {
 		return result.toString();
 	}
 
-	private String getPortIndex(String text, Position curr, InterfaceItem item) {
+	private String getArrayIndex(String text, Position curr) {
 		proceedToToken(text, curr);
 
 		if (curr.pos>=text.length() || text.charAt(curr.pos)!='[')
@@ -166,7 +201,7 @@ public class DetailCodeTranslator {
 			return null;
 		++curr.pos;
 		
-		return token;
+		return translateText(token);
 	}
 
 	/**
@@ -357,24 +392,39 @@ public class DetailCodeTranslator {
 		return Character.isDigit(c) || Character.isLetter(c) || c=='_';
 	}
 
-	private void prepare() {
-		name2item = new HashMap<String, InterfaceItem>();
-		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
-		for (InterfaceItem item : items) {
-			name2item.put(item.getName(), item);
+	private void prepare(EObject container) {
+		if (container instanceof ActorClass) {
+			ActorClass ac = (ActorClass) container;
+
+			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
+			for (InterfaceItem item : items) {
+				name2item.put(item.getName(), item);
+			}
 		}
 
-		name2attr = new HashMap<String, Attribute>();
-		List<Attribute> attributes = RoomHelpers.getAllAttributes(ac);
-		for (Attribute attribute : attributes) {
-			name2attr.put(attribute.getName(), attribute);
-		}
+		List<Attribute> attributes = null;
+		if (container instanceof ActorClass)
+			attributes = RoomHelpers.getAllAttributes((ActorClass) container);
+		else if (container instanceof DataClass)
+			attributes = RoomHelpers.getAllAttributes((DataClass) container);
+		else if (container instanceof PortClass)
+			attributes = ((PortClass) container).getAttributes();
+		if (attributes!=null)
+			for (Attribute attribute : attributes) {
+				name2attr.put(attribute.getName(), attribute);
+			}
 		
-		name2op = new HashMap<String, Operation>();
-		List<Operation> operations = RoomHelpers.getAllOperations(ac);
-		for (Operation operation : operations) {
-			name2op.put(operation.getName(), operation);
-		}
+		List<? extends Operation> operations = null;
+		if (container instanceof ActorClass)
+			operations = RoomHelpers.getAllOperations((ActorClass) container);
+		else if (container instanceof DataClass)
+			operations = RoomHelpers.getAllOperations((DataClass) container);
+		else if (container instanceof PortClass)
+			operations = ((PortClass) container).getOperations();
+		if (operations!=null)
+			for (Operation operation : operations) {
+				name2op.put(operation.getName(), operation);
+			}
 	}
 
 	private String translateTags(String text, DetailCode code) {

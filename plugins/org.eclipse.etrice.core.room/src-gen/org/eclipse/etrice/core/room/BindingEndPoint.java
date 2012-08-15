@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -18,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getActorRef <em>Actor Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getPort <em>Port</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getSub <em>Sub</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +75,31 @@ public interface BindingEndPoint extends EObject
    * @generated
    */
   void setPort(Port value);
+
+  /**
+   * Returns the value of the '<em><b>Sub</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Sub</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Sub</em>' reference.
+   * @see #setSub(SubProtocol)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_Sub()
+   * @model
+   * @generated
+   */
+  SubProtocol getSub();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.BindingEndPoint#getSub <em>Sub</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Sub</em>' reference.
+   * @see #getSub()
+   * @generated
+   */
+  void setSub(SubProtocol value);
 
 } // BindingEndPoint

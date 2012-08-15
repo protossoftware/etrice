@@ -1,6 +1,6 @@
 RoomModel states_trigers {
 
-	PrimitiveType int32 -> int32 (Integer) default "0"
+	PrimitiveType int32: ptInteger -> int32 (Integer) default "0"
 
 	ProtocolClass PTimer {
 		incoming {
@@ -76,7 +76,7 @@ RoomModel states_trigers {
 		}
 		Structure {
 			external Port fct
-			Port sub : PTest2
+			Port subp : PTest2
 			SAP timer: PTimer
 			SAP timeout: PTimeout
 		}
@@ -102,7 +102,7 @@ RoomModel states_trigers {
 						}
 						Transition tr3: State2 -> State3 {
 							triggers {
-								<x:sub>
+								<x:subp>
 							}
 						}
 						Transition tr4: State3 -> State1 {
@@ -117,7 +117,7 @@ RoomModel states_trigers {
 						}
 						Transition tr6: State3 -> my tp3 {
 							triggers {
-								<y:sub>
+								<y:subp>
 							}
 						}
 						Transition tr7: my tp5 -> my tp5 {

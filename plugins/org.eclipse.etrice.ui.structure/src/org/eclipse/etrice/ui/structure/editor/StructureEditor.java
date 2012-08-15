@@ -18,7 +18,6 @@ import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -39,7 +38,7 @@ public class StructureEditor extends RoomDiagramEditor {
 	 * @return the actor class of this editor
 	 */
 	public StructureClass getStructureClass() {
-		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
 		if (bo instanceof StructureClass)
 			return (StructureClass) bo;

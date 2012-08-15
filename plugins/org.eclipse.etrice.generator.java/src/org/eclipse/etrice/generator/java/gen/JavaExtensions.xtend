@@ -34,7 +34,7 @@ class JavaExtensions implements ILanguageExtension {
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m)
+		return chainGenerator.generateTypedData(m.data)
 	}
 
 
@@ -95,5 +95,10 @@ class JavaExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
-	
+	override String toCharArrayExpr(String s){
+		"\"" + s + "\".toCharArray()"
+	}
+	override String superCall(String baseClassName, String method, String args) {
+		"super."+method+"("+args+");"
+	}
 }

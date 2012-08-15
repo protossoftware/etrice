@@ -7,11 +7,9 @@
 package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.State;
@@ -21,6 +19,7 @@ import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -146,14 +145,6 @@ public interface ExpandedActorClass extends EObject {
 	 * @model
 	 * @generated
 	 */
-	String getCode(DetailCode code);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
 	String getTriggerCodeName(MessageFromIf mif);
 
 	/**
@@ -259,5 +250,21 @@ public interface ExpandedActorClass extends EObject {
 	 * @generated
 	 */
 	ContinuationTransition getDefaultBranch(EList<Transition> out);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EObject getOrig(EObject copy);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	VarDecl getData(Transition trans);
 
 } // ExpandedActorClass

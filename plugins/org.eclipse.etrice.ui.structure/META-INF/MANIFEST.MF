@@ -15,9 +15,11 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.1.0",
  org.eclipse.gef;bundle-version="3.6.1",
  org.eclipse.emf.transaction;bundle-version="1.4.0",
  org.eclipse.xtext.ui;bundle-version="2.1.1",
- org.eclipse.xtext.ui.shared;bundle-version="2.1.1"
+ org.eclipse.xtext.ui.shared;bundle-version="2.1.1",
+ org.eclipse.jface.databinding;bundle-version="1.5.0",
+ org.eclipse.core.databinding.beans;bundle-version="1.2.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.structure,
  org.eclipse.etrice.ui.structure.editor,
- org.eclipse.etrice.ui.structure.support;x-friends:="org.eclipse.etrice.ui.structure.tests"
+ org.eclipse.etrice.ui.structure.support

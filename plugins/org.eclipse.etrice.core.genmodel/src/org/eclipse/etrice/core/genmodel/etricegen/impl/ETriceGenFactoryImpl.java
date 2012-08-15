@@ -75,6 +75,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 			case ETriceGenPackage.ACTIVE_TRIGGER: return createActiveTrigger();
 			case ETriceGenPackage.TRANSITION_CHAIN: return createTransitionChain();
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: return createExpandedActorClass();
+			case ETriceGenPackage.EXPANDED_REFINED_STATE: return createExpandedRefinedState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -248,6 +249,16 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public ExpandedActorClass createExpandedActorClass() {
 		ExpandedActorClassImpl expandedActorClass = new ExpandedActorClassImpl();
 		return expandedActorClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpandedRefinedState createExpandedRefinedState() {
+		ExpandedRefinedStateImpl expandedRefinedState = new ExpandedRefinedStateImpl();
+		return expandedRefinedState;
 	}
 
 	/**

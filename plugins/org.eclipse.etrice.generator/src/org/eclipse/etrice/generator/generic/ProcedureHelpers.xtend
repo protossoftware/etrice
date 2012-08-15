@@ -17,16 +17,18 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.ActorContainerClass
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DetailCode
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.ComplexType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
-import org.eclipse.etrice.generator.base.DetailCodeTranslator
+import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.etrice.generator.base.ITranslationProvider
 import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.room.RefableType
 
@@ -34,16 +36,45 @@ import org.eclipse.etrice.core.room.RefableType
 @Singleton
 class ProcedureHelpers {
 
-	@Inject extension ILanguageExtension languageExt
-	@Inject public ITranslationProvider translator
+	@Inject ILanguageExtension languageExt
+	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 
-	def userCode(DetailCode dc) {'''
-		«IF dc!=null»
+	def userCode(DataClass dc, int id) {
+		switch (id) {
+			case 1: userCode(getDeepUserCode1(dc))
+			case 2: userCode(getDeepUserCode2(dc))
+			case 3: userCode(getDeepUserCode3(dc))
+		}
+	}
+
+	def userCode(ProtocolClass pc, int id) {
+		switch (id) {
+			case 1: userCode(getDeepUserCode1(pc))
+			case 2: userCode(getDeepUserCode2(pc))
+			case 3: userCode(getDeepUserCode3(pc))
+		}
+	}
+
+	def userCode(ActorContainerClass ac, int id) {
+		switch (id) {
+			case 1: userCode(getDeepUserCode1(ac))
+			case 2: userCode(getDeepUserCode2(ac))
+			case 3: userCode(getDeepUserCode3(ac))
+		}
+	}
+	
+	def userCode(DetailCode dc) {
+		userCode(getDetailCode(dc))
+	}
+	
+	def private userCode(String code) {
+		
+	'''
+		«IF code!=null && !code.empty»
 			/*--------------------- begin user code ---------------------*/
-			«FOR command : dc.commands»	«command»
-			«ENDFOR»
+			«code»
 			/*--------------------- end user code ---------------------*/
 		«ENDIF»
 	'''
@@ -88,15 +119,16 @@ class ProcedureHelpers {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«IF a.defaultValueLiteral!=null»
-					«IF a.size==0»
-						«a.name» = «a.defaultValueLiteral»;
-					«ELSEIF a.defaultValueLiteral.startsWith("{")»
-							«a.name» = new «a.refType.type.typeName»[] «a.defaultValueLiteral»;
+				«var value = a.initValue»
+				«IF value!=null»
+					«IF !a.isArray»
+						«a.name» = «value»;
+					«ELSEIF value.startsWith("{")»
+						«a.name» = new «a.refType.type.typeName»[] «value»;
 					«ELSE»
 						«a.name» = new «a.refType.type.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «a.defaultValueLiteral»;
+							«a.name»[i] = «value»;
 						}
 					«ENDIF»
 				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
@@ -152,6 +184,21 @@ class ProcedureHelpers {
 		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
+	// generic setters & getters
+	
+	def getterImplementation(String typeName, String name, String classname){'''
+		«languageExt.accessLevelPublic()»«typeName» get«name.toFirstUpper()» («languageExt.selfPointer(classname, false)»){
+			return «languageExt.memberAccess()»«name»;
+		}'''
+	}
+	
+	def invokeGetter(String name, String classname){
+		'''get«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»)'''
+	}
+	
+	def invokeSetter(String name, String classname, String value){
+		'''set«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
+	}
 	
 	// Operations
 	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
@@ -170,9 +217,7 @@ class ProcedureHelpers {
 		«FOR operation : operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
 				«operationSignature(operation, classname, false)» {
-					«FOR command : operation.detailCode.commands»
-						«command»
-					«ENDFOR»
+					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 				}
 			«ENDIF»
 		«ENDFOR»
@@ -180,15 +225,12 @@ class ProcedureHelpers {
 	}
 
 	def operationsImplementation(ActorClass ac) {
-		translator.setActorClass(ac)
-		var dct = new DetailCodeTranslator(ac, translator)
-		
 	'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : ac.operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
 				«operationSignature(operation, ac.name, false)» {
-					«dct.translateDetailCode(operation.detailCode)»
+					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 				}
 			«ENDIF»
 		«ENDFOR»
@@ -224,7 +266,7 @@ class ProcedureHelpers {
 	}
 	
 	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){
-		'''«languageExt.accessLevelPublic()»«returnType» «memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
+		'''«languageExt.accessLevelPublic()»«returnType» «languageExt.memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
 	}
 	
 }

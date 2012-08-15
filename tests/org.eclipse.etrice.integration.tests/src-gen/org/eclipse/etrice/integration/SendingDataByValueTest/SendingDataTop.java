@@ -39,7 +39,8 @@ public class SendingDataTop extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){

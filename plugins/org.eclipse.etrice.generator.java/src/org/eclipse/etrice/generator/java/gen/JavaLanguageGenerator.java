@@ -7,7 +7,7 @@ import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 public class JavaLanguageGenerator extends AbstractTransitionChainGenerator {
 
 	@Override
-	protected String[] generateArglistAndTypedData(VarDecl data) {
+	public String[] generateArglistAndTypedData(VarDecl data) {
 		if (data==null)
 			return new String[] {"", "", ""};
 		

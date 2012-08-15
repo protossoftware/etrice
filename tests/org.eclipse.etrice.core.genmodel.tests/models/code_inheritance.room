@@ -1,0 +1,108 @@
+RoomModel code_inheritance {
+	
+	SubSystemClass Main {
+		ActorRef appl: Deriv
+	}
+	
+	ActorClass Deriv extends Base {
+		Structure { }
+		Behavior {
+			StateMachine {
+				RefinedState BaseEntryExit {
+					entry {
+						"// derived entry"
+					}
+				}
+				RefinedState Base {
+					exit {
+						"// derived exit"
+					}
+					subgraph {
+						Transition init: initial -> state0 { }
+						State state0
+					}
+				}
+				RefinedState BaseSub {
+					entry {
+						"// derived entry"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass Base {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> BaseEntryExit {
+					action {
+						"// base init"
+					}
+				}
+				Transition tr0: BaseEntryExit -> Base {
+					triggers {
+						<m1: p0>
+					}
+					action {
+						"// base"
+					}
+				}
+				Transition tr1: Base -> BaseSub {
+					triggers {
+						<m1: p0>
+					}
+					action {
+						"// base"
+					}
+				}
+				Transition tr2: BaseSub -> BaseEntryExitSub {
+					triggers {
+						<m1: p0>
+					}
+					action {
+						"// base"
+					}
+				}
+				State BaseEntryExit {
+					entry {
+						"// base entry"
+					}
+					exit {
+						"// base exit"
+					}
+				}
+				State Base
+				State BaseSub {
+					subgraph {
+						Transition init: initial -> state0 { }
+						State state0
+					}
+				}
+				State BaseEntryExitSub {
+					entry {
+						"// base entry"
+					}
+					exit {
+						"// base exit"
+					}
+					subgraph {
+						Transition init: initial -> state0 { }
+						State state0
+					}
+				}
+			}
+		}
+	}
+	
+	ProtocolClass PC {
+		incoming {
+			Message m1()
+		}
+	}
+}

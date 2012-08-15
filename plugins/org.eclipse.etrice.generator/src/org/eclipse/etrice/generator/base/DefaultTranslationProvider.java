@@ -29,7 +29,12 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public String getAttributeText(Attribute att, String orig) {
+	public String getAttributeGetter(Attribute att, String index, String orig) {
+		return orig;
+	}
+
+	@Override
+	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
 		return orig;
 	}
 

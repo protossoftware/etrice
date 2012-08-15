@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.impl;
 
@@ -51,7 +47,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *
  * @generated
  */
-public class ProtocolClassImpl extends RoomClassImpl implements ProtocolClass
+public class ProtocolClassImpl extends GeneralProtocolClassImpl implements ProtocolClass
 {
   /**
    * The default value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.

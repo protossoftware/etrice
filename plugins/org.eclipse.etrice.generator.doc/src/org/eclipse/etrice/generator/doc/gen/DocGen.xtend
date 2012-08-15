@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.Documentation
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.Attribute
@@ -184,7 +185,7 @@ class DocGen implements IRoomGenerator {
 	'''	
 	}
 	
-	def generateProtocolClassDoc(Root root, ProtocolClass pc) {'''
+	def dispatch generateProtocolClassDoc(Root root, ProtocolClass pc) {'''
 		\level{2} {«pc.name»}
 		«pc.docu.generateDocText»
 		\level{3}{Incoming Messages}
@@ -210,6 +211,23 @@ class DocGen implements IRoomGenerator {
 		\hline
 		\end{tabular}			
 	'''	
+	}
+	
+	def dispatch generateProtocolClassDoc(Root root, CompoundProtocolClass pc) {'''
+		\level{2} {«pc.name»}
+		«pc.docu.generateDocText»
+		\level{3}{Sub Protocols}
+		
+		\begin{tabular}[ht]{|l|l|}
+		\hline
+		Name & Protocol\\
+		«FOR sub : pc.subProtocols»
+			\hline
+			«sub.name» & «sub.protocol.name»\\
+		«ENDFOR»
+		\hline
+		\end{tabular}
+	'''
 	}
 	
 	def generateAllActorClassDocs(Root root, RoomModel model) {'''

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.xtext.parser.IEncodingProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -40,6 +41,8 @@ public class GeneratorBaseModule implements Module {
 		
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
+		
+		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
 	}
 
 }

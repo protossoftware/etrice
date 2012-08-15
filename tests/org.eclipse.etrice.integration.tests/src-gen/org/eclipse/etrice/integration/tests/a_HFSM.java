@@ -43,7 +43,11 @@ public class a_HFSM extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public p_HFSMPort getFct (){
+		return this.fct;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

@@ -38,7 +38,7 @@ public class TestProtocol {
 	static public class TestProtocolPort extends PortBase {
 		// constructors
 		public TestProtocolPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public TestProtocolPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -103,7 +103,7 @@ public class TestProtocol {
 	static public class TestProtocolConjPort extends PortBase {
 		// constructors
 		public TestProtocolConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public TestProtocolConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {

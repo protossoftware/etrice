@@ -34,10 +34,10 @@ public class SubSys_PedLights extends SubSystemClassBase{
 	public void instantiateActors(){
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,109);
-		Address addr_item_SystemPort_1 = new Address(0,0,110);
-		Address addr_item_SystemPort_2 = new Address(0,0,111);
-		Address addr_item_SystemPort_3 = new Address(0,0,112);
+		Address addr_item_SystemPort_0 = new Address(0,0,110);
+		Address addr_item_SystemPort_1 = new Address(0,0,111);
+		Address addr_item_SystemPort_2 = new Address(0,0,112);
+		Address addr_item_SystemPort_3 = new Address(0,0,113);
 		
 		// actor instance /SubSys_PedLights/PedLightsTopRef itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -77,9 +77,9 @@ public class SubSys_PedLights extends SubSystemClassBase{
 			"adapter",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_PedLights_PedLightsTopRef_adapter},
-			{
-				addr_item__SubSys_PedLights_PedLightsTopRef_adapter_ControlPort
-			}
+				{
+					addr_item__SubSys_PedLights_PedLightsTopRef_adapter_ControlPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -93,12 +93,12 @@ public class SubSys_PedLights extends SubSystemClassBase{
 			"controller",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_PedLights_PedLightsTopRef_controller},
-			{
-				addr_item__SubSys_PedLights_PedLightsTopRef_controller_ControlPort
-			},
-			{
-				addr_item__SubSys_PedLights_PedLightsTopRef_controller_timer
-			}
+				{
+					addr_item__SubSys_PedLights_PedLightsTopRef_controller_ControlPort
+				},
+				{
+					addr_item__SubSys_PedLights_PedLightsTopRef_controller_timer
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -115,21 +115,21 @@ public class SubSys_PedLights extends SubSystemClassBase{
 			"timingService",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_PedLights_timingService},
-			{
-			},
-			{
-				addr_item__SubSys_PedLights_timingService_timeout_0
-			}
+				{
+					addr_item__SubSys_PedLights_timingService_timeout_0
+				},
+				null
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
 				{
-				},
-				{
 					addr_item__SubSys_PedLights_PedLightsTopRef_controller_timer
-				}
+				},
+				null
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

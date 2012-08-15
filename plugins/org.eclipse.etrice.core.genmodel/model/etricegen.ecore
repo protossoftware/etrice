@@ -88,6 +88,8 @@
     <eOperations name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isRelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="getInterfaceItem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="peers" upperBound="-1"
         eType="#//InterfaceItemInstance"/>
   </eClassifiers>
@@ -105,6 +107,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BindingInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="2" eType="#//PortInstance"
         eOpposite="#//PortInstance/bindings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAPInstance" eSuperTypes="#//InterfaceItemInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPRef"/>
@@ -143,6 +146,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipEntry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ITransitionChainVisitor" instanceTypeName="ITransitionChainVisitor"
       abstract="true" interface="true"/>
@@ -163,9 +167,6 @@
       <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem"/>
     </eOperations>
     <eOperations name="hasStateMachine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eParameters name="code" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"/>
-    </eOperations>
     <eOperations name="getTriggerCodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="mif" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf"/>
     </eOperations>
@@ -201,8 +202,25 @@
     <eOperations name="getDefaultBranch" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ContinuationTransition">
       <eParameters name="out" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
     </eOperations>
+    <eOperations name="getOrig" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="copy" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="getData" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl">
+      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraph"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedRefinedState" eSuperTypes="../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SimpleState">
+    <eOperations name="init">
+      <eParameters name="rs" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RefinedState"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedEntry" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedExit" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedDo" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

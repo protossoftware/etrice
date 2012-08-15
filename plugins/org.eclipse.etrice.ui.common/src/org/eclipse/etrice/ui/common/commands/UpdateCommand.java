@@ -10,12 +10,9 @@ package org.eclipse.etrice.ui.common.commands;
 
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
-import org.eclipse.graphiti.dt.IDiagramTypeProvider;
-import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
+import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
-import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 /**
  * @author Henrik Rentz-Reichert - initial contribution and API
@@ -24,16 +21,11 @@ import org.eclipse.graphiti.ui.services.GraphitiUi;
 public class UpdateCommand extends RecordingCommand {
 
 	private Diagram diagram;
-	private AutoUpdateFeature feature;
+	private AbstractUpdateFeature feature;
 
-	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain, String providerID) {
+	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain, AbstractUpdateFeature feature) {
 		super(domain);
-		this.diagram = diag;
-
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerID); //$NON-NLS-1$
-		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		
-		feature = new AutoUpdateFeature(featureProvider);
+		this.feature = feature;
 	}
 
 	public boolean updateNeeded() {

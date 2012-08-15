@@ -1,6 +1,6 @@
 RoomModel PingPong {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib/models/TimingService.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/models/TimingService.room"
 
 	LogicalSystem System_PingPong {
 		SubSystemRef subsystem: SubSystem_PingPong

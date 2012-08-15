@@ -33,11 +33,12 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
+	@Inject extension DataClassGen
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -60,7 +61,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.modelbase.*;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		
-		«helpers.userCode(pc.userCode1)»
+		«pc.userCode(1)»
 		
 		«var models = root.getReferencedModels(pc)»
 		«FOR model : models»import «model.name».*;
@@ -70,7 +71,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// message IDs
 			«genMessageIDs(pc)»
 		
-			«helpers.userCode(pc.userCode2)»
+			«pc.userCode(2)»
 		
 			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 		
@@ -99,15 +100,18 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// port class
 		static public class «portClassName» extends PortBase {
 			«IF pclass!=null»
-				«helpers.userCode(pclass.userCode)»
+				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
 			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-				super(actor, name, localId, 0, addr, peerAddress);
+				this(actor, name, localId, 0, addr, peerAddress);
 				DebuggingService.getInstance().addPortInstance(this);
 			}
 			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
+				«IF pclass!=null»
+					«pclass.attributes.attributeInitialization(true)»
+				«ENDIF»
 				DebuggingService.getInstance().addPortInstance(this);
 			}
 		
@@ -147,8 +151,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 		
 			«IF pclass!=null»
-				«helpers.attributes(pclass.attributes)»
-				«helpers.operationsImplementation(pclass.operations, portClassName)»
+				«pclass.attributes.attributes»
+				// TODO JH: Avoid collision attr getters/setter <-> user operations
+				«attributeSettersGettersImplementation(pclass.attributes, null)»
+				«pclass.operations.operationsImplementation(portClassName)»
 			«ENDIF»
 			
 			// sent messages
@@ -226,7 +232,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def messageSignatureExplicit(Message m) {
 		var dc = (m.data.refType.type as DataClass)
-		'''public void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
+		'''public void «m.name»(«dc.argList»)'''
 	}
 
 	def messageCall(Message m) {
@@ -254,7 +260,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 			«IF m.data!=null && m.data.refType.type instanceof DataClass»
 				«messageSignatureExplicit(m)» {
-					«m.name»(new «m.data.refType.type.name»(«IF (m.data.refType.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.refType.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
+					«m.name»(new «m.data.refType.type.name»(«(m.data.refType.type as DataClass).paramList»));
 				}
 			«ENDIF»
 		'''

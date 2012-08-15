@@ -10,6 +10,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
+import org.eclipse.etrice.ui.behavior.support.IPositionProvider.Pos;
 import org.eclipse.etrice.ui.behavior.support.IPositionProvider.PosAndSize;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.ILocation;
@@ -51,6 +53,7 @@ import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
@@ -100,18 +103,15 @@ public class SupportUtil {
 	}
 	
 	public static boolean isInherited(Diagram diag, EObject obj) {
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
+	}
+	
+	public static boolean showAsInherited(Diagram diag, State obj) {
+	
 		if (obj instanceof RefinedState)
 			return true;
 
-		ActorClass parent = getActorClass(diag);
-		while (obj!=null) {
-			if (obj instanceof ActorClass)
-				return obj!=parent;
-			
-			obj = obj.eContainer();
-		}
-		assert(false): "no parent actor class found";
-		return false;
+		return RoomHelpers.getActorClass(obj)!=getActorClass(diag);
 	}
 
 	public static Diagram getDiagram(GraphicsAlgorithm ga) {
@@ -148,7 +148,7 @@ public class SupportUtil {
 	 * @return
 	 */
 	public static StateGraph insertRefinedState(StateGraph sg, ActorClass ac, ContainerShape targetContainer, IFeatureProvider fp) {
-		sg = getRefinedStateSubGraph((State) sg.eContainer(), ac);
+		sg = getSubGraphOfRefinedStateFor((State) sg.eContainer(), ac);
 		fp.link(targetContainer, sg);
 		return sg;
 	}
@@ -173,7 +173,16 @@ public class SupportUtil {
 	 * @param ac
 	 * @return
 	 */
-	public static StateGraph getRefinedStateSubGraph(State s, ActorClass ac) {
+	public static StateGraph getSubGraphOfRefinedStateFor(State s, ActorClass ac) {
+		RefinedState rs = getRefinedStateFor(s, ac);
+		
+		if (rs.getSubgraph()==null)
+			rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+	
+		return rs.getSubgraph();
+	}
+
+	public static RefinedState getRefinedStateFor(State s, ActorClass ac) {
 		HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
 		for (State st : ac.getStateMachine().getStates()) {
 			if (st instanceof RefinedState)
@@ -208,9 +217,7 @@ public class SupportUtil {
 			rs.setTarget(s);
 			sg.getStates().add(rs);
 		}
-		rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
-		
-		return rs.getSubgraph();
+		return rs;
 	}
 
 	/**
@@ -448,7 +455,7 @@ public class SupportUtil {
 		
 		getSubTpAnchors(sgShape, node2anchor);
 		
-		addTransitions(ctx.getTransitions(), sgShape, fp, node2anchor);
+		addTransitions(ctx.getTransitions(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		
 		return sgShape;
 	}
@@ -525,7 +532,7 @@ public class SupportUtil {
 				if (!present.contains(trans))
 					items.add(trans);
 			}
-			SupportUtil.addTransitions(items, sgShape, fp, node2anchor);
+			SupportUtil.addTransitions(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 	}
 
@@ -542,7 +549,7 @@ public class SupportUtil {
 		}
 	}
 
-	private static void addTransitions(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
+	private static void addTransitions(List<Transition> transitions, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
 			HashMap<String, Anchor> node2anchor) {
 
 		for (Transition trans : transitions) {
@@ -556,11 +563,30 @@ public class SupportUtil {
 			AddConnectionContext context = new AddConnectionContext(src, dst);
 			context.setNewObject(trans);
 			PictogramElement pe = fp.addIfPossible(context);
-			if (src==dst && pe instanceof FreeFormConnection) {
+			if (pe instanceof FreeFormConnection) {
 				FreeFormConnection conn = (FreeFormConnection) pe;
-				ILocation begin = Graphiti.getPeService().getLocationRelativeToDiagram(conn.getStart());
-				Point pt = Graphiti.getGaService().createPoint(begin.getX(), begin.getY()+StateGraphSupport.MARGIN*3);
-				conn.getBendpoints().add(pt);
+				
+				List<Pos> points = positionProvider.getPoints(trans);
+				if (points!=null && !points.isEmpty()) {
+					Iterator<Pos> it = points.iterator();
+					
+					// first is label position
+					Pos pos = it.next();
+					ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+					Graphiti.getGaService().setLocation(cd.getGraphicsAlgorithm(), pos.getX(), pos.getY());
+					
+					// remaining are bend points
+					while (it.hasNext()) {
+						pos = it.next();
+						Point pt = Graphiti.getGaService().createPoint(pos.getX(), pos.getY());
+						conn.getBendpoints().add(pt);
+					}
+				}
+				else if (src==dst) {
+					ILocation begin = Graphiti.getPeService().getLocationRelativeToDiagram(conn.getStart());
+					Point pt = Graphiti.getGaService().createPoint(begin.getX(), begin.getY()+StateGraphSupport.MARGIN*3);
+					conn.getBendpoints().add(pt);
+				}
 			}
 		}
 	}

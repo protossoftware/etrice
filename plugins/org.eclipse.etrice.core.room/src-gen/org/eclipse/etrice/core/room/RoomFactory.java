@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -162,6 +158,15 @@ public interface RoomFactory extends EFactory
   PortOperation createPortOperation();
 
   /**
+   * Returns a new object of class '<em>General Protocol Class</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>General Protocol Class</em>'.
+   * @generated
+   */
+  GeneralProtocolClass createGeneralProtocolClass();
+
+  /**
    * Returns a new object of class '<em>Protocol Class</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -169,6 +174,24 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   ProtocolClass createProtocolClass();
+
+  /**
+   * Returns a new object of class '<em>Compound Protocol Class</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compound Protocol Class</em>'.
+   * @generated
+   */
+  CompoundProtocolClass createCompoundProtocolClass();
+
+  /**
+   * Returns a new object of class '<em>Sub Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Sub Protocol</em>'.
+   * @generated
+   */
+  SubProtocol createSubProtocol();
 
   /**
    * Returns a new object of class '<em>Message</em>'.
@@ -232,6 +255,24 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   SemanticsRule createSemanticsRule();
+
+  /**
+   * Returns a new object of class '<em>In Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>In Semantics Rule</em>'.
+   * @generated
+   */
+  InSemanticsRule createInSemanticsRule();
+
+  /**
+   * Returns a new object of class '<em>Out Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Out Semantics Rule</em>'.
+   * @generated
+   */
+  OutSemanticsRule createOutSemanticsRule();
 
   /**
    * Returns a new object of class '<em>Actor Class</em>'.
@@ -601,6 +642,15 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   CPBranchTransition createCPBranchTransition();
+
+  /**
+   * Returns a new object of class '<em>Refined Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Refined Transition</em>'.
+   * @generated
+   */
+  RefinedTransition createRefinedTransition();
 
   /**
    * Returns a new object of class '<em>Transition Terminal</em>'.

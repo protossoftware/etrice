@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -33,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ProtocolClass extends RoomClass
+public interface ProtocolClass extends GeneralProtocolClass
 {
   /**
    * Returns the value of the '<em><b>Comm Type</b></em>' attribute.

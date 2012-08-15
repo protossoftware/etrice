@@ -1,0 +1,36 @@
+setpref complianceLevel=1.6
+
+setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+
+# Define an API baseline by adding a target definition
+#hrr-importtargetdefinition "file://${checkout.location}/org.eclipse.graphiti.releng/APIBaseLine.target"
+#hrr-addbaseline -A "Graphiti API Base Line"
+
+import -P "${WORKSPACE}/buildroot/build.properties" "${checkout.location}/org.eclipse.etrice.releng/build.mspec"
+
+# clean build
+build -c
+
+# generate integration tests
+perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.integration.tests#generate
+
+# build again (because generated code may have changed)
+build
+
+#perform -D WORKSPACE=${WORKSPACE} org.eclipse.etrice.releng#create.javadoc
+#perform org.eclipse.etrice.releng#create.doc
+
+perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.site#site.p2.zip
+
+perform -D WORKSPACE=${WORKSPACE} org.eclipse.etrice.releng#create.site.index
+
+junit -l org.eclipse.etrice.core.room.tests/org.eclipse.etrice.core.room.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.launch-out.log
+junit -l org.eclipse.etrice.core.genmodel.tests/org.eclipse.etrice.core.genmodel.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.launch-out.log
+junit -l org.eclipse.etrice.generator.tests/org.eclipse.etrice.generator.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.launch-out.log
+junit -l org.eclipse.etrice.runtime.java.tests/org.eclipse.etrice.runtime.java.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.runtime.java.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.runtime.java.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.runtime.java.tests.launch-out.log
+junit -l org.eclipse.etrice.integration.tests/org.eclipse.etrice.integration.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.integration.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.integration.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.integration.tests.launch-out.log
+
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#copy.sites
+
+# Not called from here because this is started via a cron job each evening
+#perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.graphiti.releng#promote.sites

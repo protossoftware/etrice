@@ -11,29 +11,31 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 import PedLightsController.PedControlProtocol.*;
 
-//--------------------- begin user code
-	import org.eclipse.etrice.tutorials.PedLightGUI.*;
-//--------------------- end user code
+/*--------------------- begin user code ---------------------*/
+import org.eclipse.etrice.tutorials.PedLightGUI.*;
+/*--------------------- end user code ---------------------*/
 
 
 public class GuiAdapter extends ActorClassBase {
 
-	//--------------------- begin user code
-		private PedestrianLightWndNoTcp lights = new PedestrianLightWndNoTcp("Pedestrian Lights","  external port connection ");
-		private TrafficLight3 carLights;
-		private TrafficLight2 pedLights;
-	//--------------------- end user code
+	/*--------------------- begin user code ---------------------*/
+	private PedestrianLightWndNoTcp lights = new PedestrianLightWndNoTcp("Pedestrian Lights","  external port connection ");
+	private TrafficLight3 carLights;
+	private TrafficLight2 pedLights;
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	protected PedControlProtocolConjPort ControlPort = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void destroyUser() {
 		lights.closeWindow();
 	}
@@ -47,10 +49,17 @@ public class GuiAdapter extends ActorClassBase {
 
 		// own ports
 		ControlPort = new PedControlProtocolConjPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PedControlProtocolConjPort getControlPort (){
+		return this.ControlPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -66,8 +75,7 @@ public class GuiAdapter extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -75,10 +83,11 @@ public class GuiAdapter extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__running = 1;
-	public static final int CHAIN_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0 = 2;
-	public static final int CHAIN_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1 = 3;
+	public static final int CHAIN_TRANS_tr0_FROM_running_TO_running_BY_setCarLightsControlPort_tr0 = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_running_TO_running_BY_setPedLightsControlPort_tr1 = 3;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_ControlPort__setCarLights = IFITEM_ControlPort + EVT_SHIFT*PedControlProtocol.OUT_setCarLights;
 	public static final int TRIG_ControlPort__setPedLights = IFITEM_ControlPort + EVT_SHIFT*PedControlProtocol.OUT_setPedLights;
 	
@@ -97,9 +106,9 @@ public class GuiAdapter extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__running() {
 		carLights=lights.getCarLights();
 		pedLights=lights.getPedLights();
@@ -107,10 +116,10 @@ public class GuiAdapter extends ActorClassBase {
 		pedLights.setState(TrafficLight2.OFF);
 		lights.setPort(ControlPort);
 	}
-	protected void action_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0(InterfaceItemBase ifitem, int state) {
+	protected void action_TRANS_tr0_FROM_running_TO_running_BY_setCarLightsControlPort_tr0(InterfaceItemBase ifitem, int state) {
 		carLights.setState(state);
 	}
-	protected void action_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1(InterfaceItemBase ifitem, int state) {
+	protected void action_TRANS_tr1_FROM_running_TO_running_BY_setPedLightsControlPort_tr1(InterfaceItemBase ifitem, int state) {
 		pedLights.setState(state);
 	}
 	
@@ -146,16 +155,16 @@ public class GuiAdapter extends ActorClassBase {
 				action_TRANS_INITIAL_TO__running();
 				return STATE_running;
 			}
-			case CHAIN_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0:
+			case CHAIN_TRANS_tr0_FROM_running_TO_running_BY_setCarLightsControlPort_tr0:
 			{
 				int state = (Integer) generic_data;
-				action_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0(ifitem, state);
+				action_TRANS_tr0_FROM_running_TO_running_BY_setCarLightsControlPort_tr0(ifitem, state);
 				return STATE_running;
 			}
-			case CHAIN_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1:
+			case CHAIN_TRANS_tr1_FROM_running_TO_running_BY_setPedLightsControlPort_tr1:
 			{
 				int state = (Integer) generic_data;
-				action_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1(ifitem, state);
+				action_TRANS_tr1_FROM_running_TO_running_BY_setPedLightsControlPort_tr1(ifitem, state);
 				return STATE_running;
 			}
 		}
@@ -202,18 +211,18 @@ public class GuiAdapter extends ActorClassBase {
 			switch (this.state) {
 				case STATE_running:
 					switch(trigger) {
-					case TRIG_ControlPort__setCarLights:
-						{
-							chain = CHAIN_TRANS_running_TO_running_BY_setCarLightsControlPort_tr0;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_ControlPort__setPedLights:
-						{
-							chain = CHAIN_TRANS_running_TO_running_BY_setPedLightsControlPort_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_ControlPort__setCarLights:
+							{
+								chain = CHAIN_TRANS_tr0_FROM_running_TO_running_BY_setCarLightsControlPort_tr0;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_ControlPort__setPedLights:
+							{
+								chain = CHAIN_TRANS_tr1_FROM_running_TO_running_BY_setPedLightsControlPort_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

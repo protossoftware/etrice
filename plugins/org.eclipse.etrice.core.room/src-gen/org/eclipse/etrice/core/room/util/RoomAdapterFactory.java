@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.util;
 
@@ -154,9 +150,24 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createPortOperationAdapter();
       }
       @Override
+      public Adapter caseGeneralProtocolClass(GeneralProtocolClass object)
+      {
+        return createGeneralProtocolClassAdapter();
+      }
+      @Override
       public Adapter caseProtocolClass(ProtocolClass object)
       {
         return createProtocolClassAdapter();
+      }
+      @Override
+      public Adapter caseCompoundProtocolClass(CompoundProtocolClass object)
+      {
+        return createCompoundProtocolClassAdapter();
+      }
+      @Override
+      public Adapter caseSubProtocol(SubProtocol object)
+      {
+        return createSubProtocolAdapter();
       }
       @Override
       public Adapter caseMessage(Message object)
@@ -192,6 +203,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseSemanticsRule(SemanticsRule object)
       {
         return createSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseInSemanticsRule(InSemanticsRule object)
+      {
+        return createInSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseOutSemanticsRule(OutSemanticsRule object)
+      {
+        return createOutSemanticsRuleAdapter();
       }
       @Override
       public Adapter caseActorClass(ActorClass object)
@@ -397,6 +418,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseCPBranchTransition(CPBranchTransition object)
       {
         return createCPBranchTransitionAdapter();
+      }
+      @Override
+      public Adapter caseRefinedTransition(RefinedTransition object)
+      {
+        return createRefinedTransitionAdapter();
       }
       @Override
       public Adapter caseTransitionTerminal(TransitionTerminal object)
@@ -706,6 +732,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.GeneralProtocolClass <em>General Protocol Class</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.GeneralProtocolClass
+   * @generated
+   */
+  public Adapter createGeneralProtocolClassAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ProtocolClass <em>Protocol Class</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -716,6 +757,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createProtocolClassAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.CompoundProtocolClass <em>Compound Protocol Class</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.CompoundProtocolClass
+   * @generated
+   */
+  public Adapter createCompoundProtocolClassAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SubProtocol <em>Sub Protocol</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.SubProtocol
+   * @generated
+   */
+  public Adapter createSubProtocolAdapter()
   {
     return null;
   }
@@ -821,6 +892,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InSemanticsRule <em>In Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.InSemanticsRule
+   * @generated
+   */
+  public Adapter createInSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutSemanticsRule <em>Out Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.OutSemanticsRule
+   * @generated
+   */
+  public Adapter createOutSemanticsRuleAdapter()
   {
     return null;
   }
@@ -1436,6 +1537,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCPBranchTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefinedTransition <em>Refined Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefinedTransition
+   * @generated
+   */
+  public Adapter createRefinedTransitionAdapter()
   {
     return null;
   }

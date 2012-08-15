@@ -99,8 +99,13 @@ public class MemberSelectionDialog extends FormDialog {
 					return ((Operation) element).getReturntype()==null ? "void":((Operation) element).getReturntype().getType().getName();
 				break;
 			case 1:
-				if (element instanceof Attribute)
-					return ((Attribute) element).getName();
+				if (element instanceof Attribute) {
+					int sz = ((Attribute) element).getSize();
+					if (sz>1)
+						return ((Attribute) element).getName()+"["+sz+"]";
+					else
+						return ((Attribute) element).getName();
+				}
 				else if (element instanceof Operation)
 					return ((Operation) element).getName();
 				break;
@@ -145,6 +150,7 @@ public class MemberSelectionDialog extends FormDialog {
 		
 		viewer = new TableViewer(body, SWT.FULL_SELECTION | SWT.BORDER | SWT.H_SCROLL);
 		
+		// HOWTO: add table columns
 		TableColumn col0 = new TableColumn(viewer.getTable(), SWT.NONE);
 		col0.setText("type");
 		TableColumn col1 = new TableColumn(viewer.getTable(), SWT.NONE);
@@ -178,7 +184,7 @@ public class MemberSelectionDialog extends FormDialog {
 			}
 		});
 
-		// the tree layout is crucial!
+		// the table layout is crucial!
 		TableColumnLayout layout = new TableColumnLayout();
 		body.setLayout(layout);
 

@@ -35,7 +35,7 @@ public class PedControlProtocol {
 	static public class PedControlProtocolPort extends PortBase {
 		// constructors
 		public PedControlProtocolPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PedControlProtocolPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -80,13 +80,13 @@ public class PedControlProtocol {
 	}
 	
 	// replicated port class
-	static public class PedControlProtocolPortRepl {
+	static public class PedControlProtocolReplPort {
 		private ArrayList<PedControlProtocolPort> ports;
 		private int replication;
 	
-		public PedControlProtocolPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PedControlProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PedControlProtocol.PedControlProtocolPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PedControlProtocolPort(
@@ -124,7 +124,7 @@ public class PedControlProtocol {
 	static public class PedControlProtocolConjPort extends PortBase {
 		// constructors
 		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -162,13 +162,13 @@ public class PedControlProtocol {
 	}
 	
 	// replicated port class
-	static public class PedControlProtocolConjPortRepl {
+	static public class PedControlProtocolConjReplPort {
 		private ArrayList<PedControlProtocolConjPort> ports;
 		private int replication;
 	
-		public PedControlProtocolConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PedControlProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PedControlProtocol.PedControlProtocolConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PedControlProtocolConjPort(

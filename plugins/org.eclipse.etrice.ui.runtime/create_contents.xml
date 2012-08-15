@@ -21,9 +21,10 @@
 
 	<target name="zip_all_projects">
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.java" />
-		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials" />
+		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.java" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.c" />
+		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.c" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials" />
 	</target>
 
 </project>

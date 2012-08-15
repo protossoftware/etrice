@@ -110,7 +110,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
-				if (item.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
 					List<Message> in = RoomHelpers.getMessageList(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())
@@ -161,7 +161,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 				if (!RoomHelpers.getMessageList(item, true).isEmpty())
 					return true;
 				
-				if (item.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN)
+				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN)
 					if (!RoomHelpers.getMessageList(item, false).isEmpty())
 						return true;
 			}

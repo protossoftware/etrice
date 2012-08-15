@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="room"
-    nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="room" nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
   <eClassifiers xsi:type="ecore:EClass" name="RoomModel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
@@ -16,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
         eType="#//DataClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
-        eType="#//ProtocolClass" containment="true"/>
+        eType="#//GeneralProtocolClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
         eType="#//ActorClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
@@ -30,6 +28,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructureClass" eSuperTypes="#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//Binding" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
@@ -75,6 +75,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//ComplexType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode2" eType="#//DetailCode"
@@ -117,7 +119,11 @@
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
     <eLiterals name="SYNCHRONOUS" value="2" literal="sync"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//RoomClass">
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralProtocolClass" eSuperTypes="#//RoomClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolClass" eSuperTypes="#//GeneralProtocolClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//CommunicationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ProtocolClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
@@ -136,6 +142,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="semantics" eType="#//ProtocolSemantics"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundProtocolClass" eSuperTypes="#//GeneralProtocolClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subProtocols" upperBound="-1"
+        eType="#//SubProtocol" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubProtocol">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priv" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -171,6 +185,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="followUps" upperBound="-1"
         eType="#//SemanticsRule" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InSemanticsRule" eSuperTypes="#//SemanticsRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutSemanticsRule" eSuperTypes="#//SemanticsRule"/>
   <eClassifiers xsi:type="ecore:EEnum" name="ActorCommunicationType">
     <eLiterals name="EVENT_DRIVEN" literal="eventdriven"/>
     <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
@@ -197,7 +213,7 @@
         eType="#//Attribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="#//Documentation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorAnnotations" upperBound="-1"
         eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//StandardOperation" containment="true"/>
@@ -205,8 +221,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
+    <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xA;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAPRef)&#xA;return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPPRef)&#xA;return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//InterfaceItem">
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -217,14 +237,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="conjugated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifport" eType="#//Port"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPPRef"/>
   </eClassifiers>
@@ -265,6 +290,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BindingEndPoint">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorRef" eType="#//ActorContainerRef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//SubProtocol"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LayerConnection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//SAPoint"
@@ -322,6 +348,8 @@
         eType="#//ChoicePoint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
         eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refinedTransitions" upperBound="-1"
+        eType="#//RefinedTransition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -372,6 +400,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CPBranchTransition" eSuperTypes="#//NonInitialTransition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//DetailCode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedTransition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//DetailCode"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTerminal"/>

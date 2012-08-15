@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -17,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.InterfaceItem#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.InterfaceItem#getProtocol <em>Protocol</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,29 +49,12 @@ public interface InterfaceItem extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Protocol</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Protocol</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Protocol</em>' reference.
-   * @see #setProtocol(ProtocolClass)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getInterfaceItem_Protocol()
-   * @model
-   * @generated
-   */
-  ProtocolClass getProtocol();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.InterfaceItem#getProtocol <em>Protocol</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Protocol</em>' reference.
-   * @see #getProtocol()
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof org.eclipse.etrice.core.room.Port)\nreturn ((org.eclipse.etrice.core.room.Port) this).getProtocol();\nelse if (this instanceof org.eclipse.etrice.core.room.SAPRef)\nreturn ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();\nelse if (this instanceof org.eclipse.etrice.core.room.SPPRef)\nreturn ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;'"
    * @generated
    */
-  void setProtocol(ProtocolClass value);
+  GeneralProtocolClass getGeneralProtocol();
 
 } // InterfaceItem

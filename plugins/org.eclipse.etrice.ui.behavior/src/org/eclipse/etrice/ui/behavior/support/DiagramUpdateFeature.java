@@ -82,10 +82,18 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 			}
 		}
 		
-		// check for dangling connections
+		// check for dangling connections or connections to update
 		for (Connection conn : getDiagram().getConnections()) {
 			if (conn.getStart()==null || conn.getEnd()==null)
 				return Reason.createTrueReason();
+
+			UpdateContext uf = new UpdateContext(conn);
+			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(uf);
+			if (updateFeature!=null && updateFeature.canUpdate(uf)) {
+				IReason needUpdate = updateFeature.updateNeeded(uf);
+				if (needUpdate.toBoolean())
+					return needUpdate;
+			}
 		}
 		
 		return Reason.createFalseReason();
@@ -117,7 +125,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 			}
 		}
 		
-		// remove dangling connections
+		// remove dangling connections and update other ones
 		ArrayList<Connection> connections = new ArrayList<Connection>(getDiagram().getConnections());
 		for (Connection conn : connections) {
 			if (conn.getStart()==null || conn.getEnd()==null) {
@@ -126,6 +134,14 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 				if (removeFeature != null) {
 					removeFeature.remove(rc);
 					if (removeFeature.hasDoneChanges())
+						changed = true;
+				}
+			}
+			else {
+				UpdateContext uf = new UpdateContext(conn);
+				IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(uf);
+				if (updateFeature!=null && updateFeature.canUpdate(uf)) {
+					if (updateFeature.update(uf))
 						changed = true;
 				}
 			}

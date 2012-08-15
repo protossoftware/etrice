@@ -23,16 +23,18 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ExternalType;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -44,6 +46,7 @@ import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -85,7 +88,10 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		private String caseBindingEndPointShort(BindingEndPoint ep) {
 			String loc = ep.getActorRef()==null? LOCAL:ep.getActorRef().getName();
-			return ep.getPort().getName()+EP_SEP+loc;
+			if (ep.getSub()!=null)
+				return ep.getPort().getName()+EP_SEP+loc+SUB_SEP+ep.getSub().getName();
+			else
+				return ep.getPort().getName()+EP_SEP+loc;
 		}
 		
 		@Override
@@ -145,6 +151,15 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		}
 		
 		@Override
+		public String caseRefinedTransition(RefinedTransition t) {
+			// the transition name is optional in the ROOM DSL but will be automatically assigned
+			// by the Behavior Editor
+			
+			// going up two steps in the containment hierarchy either hits a state or a RoomClass
+			return doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
+		}
+		
+		@Override
 		public String caseStateGraph(StateGraph sg) {
 			// going up one step in the containment hierarchy either hits a state or a RoomClass
 			return doSwitch(sg.eContainer())+SEP+STATE_GRAPH;
@@ -153,6 +168,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	
 	private static final char SEP = '$';
 	private static final char BIND_SEP = '-';
+	private static final char SUB_SEP = '/';
 	private static final char CONN_SEP = '-';
 	private static final String INIT_TRANS = "initial";
 	private static final String STATE_GRAPH = "sg";
@@ -319,6 +335,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		else if (type.equals(RoomPackage.eINSTANCE.getProtocolClass().getName())) {
 			return rc;
 		}
+		else if (type.equals(RoomPackage.eINSTANCE.getCompoundProtocolClass().getName())) {
+			return rc;
+		}
 		else if (type.equals(RoomPackage.eINSTANCE.getActorClass().getName())) {
 			return rc;
 		}
@@ -363,6 +382,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getInitialTransition().getName())) {
 				return getInitialTransition(rc, remainder);
+			}
+			else if (type.equals(RoomPackage.eINSTANCE.getRefinedTransition().getName())) {
+				return getRefinedTransition(rc, remainder);
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getContinuationTransition().getName())
 					|| type.equals(RoomPackage.eINSTANCE.getCPBranchTransition().getName())
@@ -413,6 +435,24 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				if (t instanceof InitialTransition)
 					return (InitialTransition) t;
 			}
+		}
+		
+		return null;
+	}
+
+	private RefinedTransition getRefinedTransition(RoomClass rc, String remainder) {
+		StateGraph sg = getStateGraph(rc, remainder);
+		
+		int begin = remainder.lastIndexOf(SEP);
+		if (begin<0)
+			begin = 0;
+		else
+			++begin;
+		
+		String name = remainder.substring(begin, remainder.length());
+		for (RefinedTransition t : sg.getRefinedTransitions()) {
+			if (t.getTarget().getName().equals(name))
+				return t;
 		}
 		
 		return null;
@@ -530,6 +570,13 @@ public class RoomFragmentProvider implements IFragmentProvider {
 
 	private boolean isEP(BindingEndPoint a, BindingEndPoint b) {
 		if (a.getPort().getName().equals(b.getPort().getName())) {
+			if (a.getSub()==null && b.getSub()!=null)
+				return false;
+			if (a.getSub()!=null && b.getSub()==null)
+				return false;
+			if (a.getSub()!=null && b.getSub()!=null)
+				if (!a.getSub().getName().equals(b.getSub().getName()))
+					return false;
 			if (a.getActorRef()==null && b.getActorRef()==null)
 				return true;
 			if (a.getActorRef()!=null && b.getActorRef()!=null)
@@ -543,8 +590,15 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		int pos = name.indexOf(EP_SEP);
 		if (pos<0)
 			return null;
+		
 		String portName = name.substring(0, pos);
-		String refName = name.substring(pos+1, name.length());
+		String refName = name.substring(pos+1);
+		String sub = null;
+		int subIdx = refName.indexOf(SUB_SEP);
+		if (subIdx>=0) {
+			sub = refName.substring(subIdx+1);
+			refName = refName.substring(0, subIdx);
+		}
 		ActorContainerRef ar = null;
 		if (!refName.equals(LOCAL))
 			ar = getActorContainerRef(sc, refName);
@@ -558,7 +612,24 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		BindingEndPoint ep = RoomFactory.eINSTANCE.createBindingEndPoint();
 		ep.setPort(port);
 		ep.setActorRef(ar);
+		if (subIdx>=0)
+			ep.setSub(getSubProtocol(sub, port));
 		return ep;
+	}
+
+	private SubProtocol getSubProtocol(String sub, Port port) {
+		if (port==null)
+			return null;
+		
+		if (port.getProtocol() instanceof CompoundProtocolClass) {
+			CompoundProtocolClass cpc = (CompoundProtocolClass) port.getProtocol();
+			for (SubProtocol sp : cpc.getSubProtocols()) {
+				if (sp.getName().equals(sub))
+					return sp;
+			}
+		}
+		
+		return null;
 	}
 
 	private EObject getLayerConnection(RoomClass rc, String name) {
@@ -746,7 +817,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			if (pt.getName().equals(className))
 				return pt;
 		}
-		for (ProtocolClass pc : model.getProtocolClasses()) {
+		for (GeneralProtocolClass pc : model.getProtocolClasses()) {
 			if (pc.getName().equals(className))
 				return pc;
 		}

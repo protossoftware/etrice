@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.impl;
 
@@ -15,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.Documentation;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -27,6 +24,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getMultiplicity <em>Multiplicity</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  * </p>
@@ -74,6 +72,16 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * @ordered
    */
   protected int multiplicity = MULTIPLICITY_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProtocol()
+   * @generated
+   * @ordered
+   */
+  protected GeneralProtocolClass protocol;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -150,6 +158,49 @@ public class PortImpl extends InterfaceItemImpl implements Port
     multiplicity = newMultiplicity;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__MULTIPLICITY, oldMultiplicity, multiplicity));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GeneralProtocolClass getProtocol()
+  {
+    if (protocol != null && protocol.eIsProxy())
+    {
+      InternalEObject oldProtocol = (InternalEObject)protocol;
+      protocol = (GeneralProtocolClass)eResolveProxy(oldProtocol);
+      if (protocol != oldProtocol)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.PORT__PROTOCOL, oldProtocol, protocol));
+      }
+    }
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GeneralProtocolClass basicGetProtocol()
+  {
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setProtocol(GeneralProtocolClass newProtocol)
+  {
+    GeneralProtocolClass oldProtocol = protocol;
+    protocol = newProtocol;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PORT__PROTOCOL, oldProtocol, protocol));
   }
 
   /**
@@ -240,6 +291,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return isConjugated();
       case RoomPackage.PORT__MULTIPLICITY:
         return getMultiplicity();
+      case RoomPackage.PORT__PROTOCOL:
+        if (resolve) return getProtocol();
+        return basicGetProtocol();
       case RoomPackage.PORT__DOCU:
         return getDocu();
     }
@@ -261,6 +315,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return;
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity((Integer)newValue);
+        return;
+      case RoomPackage.PORT__PROTOCOL:
+        setProtocol((GeneralProtocolClass)newValue);
         return;
       case RoomPackage.PORT__DOCU:
         setDocu((Documentation)newValue);
@@ -285,6 +342,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
       case RoomPackage.PORT__MULTIPLICITY:
         setMultiplicity(MULTIPLICITY_EDEFAULT);
         return;
+      case RoomPackage.PORT__PROTOCOL:
+        setProtocol((GeneralProtocolClass)null);
+        return;
       case RoomPackage.PORT__DOCU:
         setDocu((Documentation)null);
         return;
@@ -306,6 +366,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return conjugated != CONJUGATED_EDEFAULT;
       case RoomPackage.PORT__MULTIPLICITY:
         return multiplicity != MULTIPLICITY_EDEFAULT;
+      case RoomPackage.PORT__PROTOCOL:
+        return protocol != null;
       case RoomPackage.PORT__DOCU:
         return docu != null;
     }

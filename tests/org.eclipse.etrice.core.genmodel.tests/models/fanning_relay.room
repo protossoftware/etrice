@@ -1,0 +1,67 @@
+RoomModel relay {
+	SubSystemClass Main {
+		ActorRef c1: Comp
+		ActorRef c2: Comp
+		ActorRef cont: Cont
+		ActorRef c3: Comp
+		ActorRef c4: Comp
+		Binding c1.port and cont.port
+		Binding c2.port and cont.port
+		Binding cont.port and c3.port
+		Binding c4.port and cont.port
+	}
+	
+	ActorClass Comp {
+		Interface {
+			conjugated Port port: PC
+		}
+		Structure {
+			external Port port
+		}
+		Behavior { }
+	}
+	
+	ActorClass Cont {
+		Interface {
+			Port port [4]: PC
+		}
+		Structure {
+			ActorRef s1: Sub
+			ActorRef s2: Sub
+			ActorRef c1: Cont2
+			Binding port and s2.port
+			Binding port and s1.port
+			Binding port and c1.fct
+		}
+		Behavior { }
+	}
+	
+	ActorClass Cont2 {
+		Interface {
+			Port fct [*]: PC
+		}
+		Structure {
+			ActorRef ss1: Sub
+			ActorRef ss2: Sub
+			Binding fct and ss1.port
+			Binding fct and ss2.port
+		}
+		Behavior { }
+	}
+	
+	ActorClass Sub {
+		Interface {
+			Port port: PC
+		}
+		Structure {
+			external Port port
+		}
+		Behavior { }
+	}
+	
+	ProtocolClass PC {
+		incoming {
+			Message in1()
+		}
+	}
+}

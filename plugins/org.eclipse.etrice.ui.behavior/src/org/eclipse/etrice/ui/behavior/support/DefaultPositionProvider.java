@@ -21,13 +21,21 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.Text;
+import org.eclipse.graphiti.mm.algorithms.styles.Point;
+import org.eclipse.graphiti.mm.pictograms.Connection;
+import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.ILinkService;
@@ -45,6 +53,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	}
 	
 	private HashMap<String, Position> obj2pos = new HashMap<String, Position>();
+	private HashMap<String, ArrayList<Position>> trans2points = new HashMap<String, ArrayList<Position>>();
 	private double scaleX;
 	private double scaleY;
 	
@@ -74,6 +83,24 @@ public class DefaultPositionProvider implements IPositionProvider {
 				(int) (pos.sy * scaleY)
 			);
 		return pt;
+	}
+	
+	public List<Pos> getPoints(Transition trans) {
+		ArrayList<Pos> result = new ArrayList<Pos>();
+		
+		ArrayList<Position> list = trans2points.get(RoomNameProvider.getFullPath(trans));
+		if (list!=null) {
+			for (Position p : list) {
+				Pos pos = 
+					new Pos(
+						(int) (p.x * scaleX),
+						(int) (p.y * scaleY)
+					);
+				result.add(pos);
+			}
+		}
+		
+		return result;
 	}
 	
 	/* (non-Javadoc)
@@ -141,16 +168,25 @@ public class DefaultPositionProvider implements IPositionProvider {
 		if (diagram==null)
 			return;
 		
+		StateGraphContext tree = StateGraphContext.createContextTree(SupportUtil.getActorClass(diagram));
+		
+		HashMap<StateGraph, Position> sg2sz = new HashMap<StateGraph, Position>();
+		
 		ILinkService linkService = Graphiti.getLinkService();
 		for (Shape sgShape : diagram.getChildren()) {
 			// this is the level of StateGraphs
 			if (sgShape instanceof ContainerShape) {
+				EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(sgShape);
 				GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 				double width = borderRect.getWidth();
 				double height = borderRect.getHeight();
+				Position sz = new Position();
+				sz.sx = width;
+				sz.sy = height;
+				sg2sz.put((StateGraph) obj, sz);
 				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
 					// this is the level of States, TrPoints and ChoicePoints
-					EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
+					obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
 					if (obj instanceof StateGraphNode) {
 						GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
 						if (ga!=null) {
@@ -165,6 +201,38 @@ public class DefaultPositionProvider implements IPositionProvider {
 						// Entry and Exit Points on State borders are treated by the insertion of the State
 					}
 				}
+			}
+		}
+		
+		for (Connection conn : diagram.getConnections()) {
+			EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(conn);
+			if (obj instanceof Transition) {
+				ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+				if (cd.getGraphicsAlgorithm() instanceof Text) {
+					Transition trans = (Transition) obj;
+					StateGraph sg = tree.getContext(trans).getStateGraph();
+					
+					// graph size
+					Position sz = sg2sz.get(sg);
+					ArrayList<Position> points = new  ArrayList<Position>();
+					trans2points.put(RoomNameProvider.getFullPath((Transition) obj), points);
+					
+					// label position
+					Position pos = new Position();
+					pos.x = cd.getGraphicsAlgorithm().getX() / sz.sx;
+					pos.y = cd.getGraphicsAlgorithm().getY() / sz.sy;
+					points.add(pos);
+					
+					if (conn instanceof FreeFormConnection) {
+						for (Point bp : ((FreeFormConnection) conn).getBendpoints()) {
+							pos = new Position();
+							pos.x = bp.getX() / sz.sx;
+							pos.y = bp.getY() / sz.sy;
+							points.add(pos);
+						}
+					}
+				}
+
 			}
 		}
 		

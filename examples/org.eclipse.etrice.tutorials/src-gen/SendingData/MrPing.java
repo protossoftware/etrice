@@ -18,14 +18,16 @@ public class MrPing extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PingPongProtocolConjPort PingPongPort = null;
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void printData(DemoData d) {
 		System.out.printf("d.int32Val: %d\n",d.int32Val);
 		System.out.printf("d.float64Val: %f\n",d.float64Val);
@@ -44,10 +46,17 @@ public class MrPing extends ActorClassBase {
 
 		// own ports
 		PingPongPort = new PingPongProtocolConjPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
+		
 		// own saps
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public PingPongProtocolConjPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -63,8 +72,7 @@ public class MrPing extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -73,11 +81,12 @@ public class MrPing extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__waitForPongSimple = 1;
-	public static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1 = 2;
-	public static final int CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort = 3;
-	public static final int CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2 = 4;
+	public static final int CHAIN_TRANS_next_FROM_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort = 2;
+	public static final int CHAIN_TRANS_wait1_FROM_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1 = 3;
+	public static final int CHAIN_TRANS_wait2_FROM_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2 = 4;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
 	public static final int TRIG_PingPongPort__pongSimple = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pongSimple;
 	
@@ -97,18 +106,18 @@ public class MrPing extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
-	protected void action_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(InterfaceItemBase ifitem, DemoData data) {
+	/* Action Codes */
+	protected void action_TRANS_wait2_FROM_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(InterfaceItemBase ifitem, DemoData data) {
 		printData(data);
 	}
-	protected void action_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(InterfaceItemBase ifitem, int data) {
+	protected void action_TRANS_wait1_FROM_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(InterfaceItemBase ifitem, int data) {
 		// keep in mind that MrPong increments
 		PingPongPort.pingSimple(data);
 		System.out.printf("data: %d\n",data);
 	}
-	protected void action_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int data) {
+	protected void action_TRANS_next_FROM_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(InterfaceItemBase ifitem, int data) {
 		System.out.printf("data: %d\n",data);
 		
 		DemoData d = new DemoData();
@@ -157,22 +166,22 @@ public class MrPing extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2:
+			case CHAIN_TRANS_wait2_FROM_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2:
 			{
 				DemoData data = (DemoData) generic_data;
-				action_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(ifitem, data);
+				action_TRANS_wait2_FROM_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2(ifitem, data);
 				return STATE_waitForPong;
 			}
-			case CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1:
+			case CHAIN_TRANS_wait1_FROM_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1:
 			{
 				int data = (Integer) generic_data;
-				action_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(ifitem, data);
+				action_TRANS_wait1_FROM_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1(ifitem, data);
 				return STATE_waitForPongSimple;
 			}
-			case CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort:
+			case CHAIN_TRANS_next_FROM_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort:
 			{
 				int data = (Integer) generic_data;
-				action_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(ifitem, data);
+				action_TRANS_next_FROM_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort(ifitem, data);
 				return STATE_waitForPong;
 			}
 			case CHAIN_TRANS_INITIAL_TO__waitForPongSimple:
@@ -227,30 +236,29 @@ public class MrPing extends ActorClassBase {
 			switch (this.state) {
 				case STATE_waitForPong:
 					switch(trigger) {
-					case TRIG_PingPongPort__pong:
-						{
-							chain = CHAIN_TRANS_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_PingPongPort__pong:
+							{
+								chain = CHAIN_TRANS_wait2_FROM_waitForPong_TO_waitForPong_BY_pongPingPongPort_wait2;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_waitForPongSimple:
 					switch(trigger) {
-					case TRIG_PingPongPort__pongSimple:
-						{ int data = (Integer) generic_data;
-						if (data < 10
-						)
-						{
-							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1;
-							catching_state = STATE_TOP;
-						} else 
-						{
-							chain = CHAIN_TRANS_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort;
-							catching_state = STATE_TOP;
-						}
-						}
-					break;
+						case TRIG_PingPongPort__pongSimple:
+							{ int data = (Integer) generic_data;
+							if (data < 10)
+							{
+								chain = CHAIN_TRANS_wait1_FROM_waitForPongSimple_TO_waitForPongSimple_BY_pongSimplePingPongPort_wait1;
+								catching_state = STATE_TOP;
+							} else 
+							{
+								chain = CHAIN_TRANS_next_FROM_waitForPongSimple_TO_waitForPong_BY_pongSimplePingPongPort;
+								catching_state = STATE_TOP;
+							}
+							}
+						break;
 					}
 					break;
 			}

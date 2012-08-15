@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.impl;
 
@@ -84,7 +80,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.OPERATION: return createOperation();
       case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
       case RoomPackage.PORT_OPERATION: return createPortOperation();
+      case RoomPackage.GENERAL_PROTOCOL_CLASS: return createGeneralProtocolClass();
       case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
+      case RoomPackage.COMPOUND_PROTOCOL_CLASS: return createCompoundProtocolClass();
+      case RoomPackage.SUB_PROTOCOL: return createSubProtocol();
       case RoomPackage.MESSAGE: return createMessage();
       case RoomPackage.PORT_CLASS: return createPortClass();
       case RoomPackage.MESSAGE_HANDLER: return createMessageHandler();
@@ -92,6 +91,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.OUT_MESSAGE_HANDLER: return createOutMessageHandler();
       case RoomPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
       case RoomPackage.SEMANTICS_RULE: return createSemanticsRule();
+      case RoomPackage.IN_SEMANTICS_RULE: return createInSemanticsRule();
+      case RoomPackage.OUT_SEMANTICS_RULE: return createOutSemanticsRule();
       case RoomPackage.ACTOR_CLASS: return createActorClass();
       case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
       case RoomPackage.PORT: return createPort();
@@ -133,6 +134,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.TRIGGERED_TRANSITION: return createTriggeredTransition();
       case RoomPackage.GUARDED_TRANSITION: return createGuardedTransition();
       case RoomPackage.CP_BRANCH_TRANSITION: return createCPBranchTransition();
+      case RoomPackage.REFINED_TRANSITION: return createRefinedTransition();
       case RoomPackage.TRANSITION_TERMINAL: return createTransitionTerminal();
       case RoomPackage.STATE_TERMINAL: return createStateTerminal();
       case RoomPackage.TR_POINT_TERMINAL: return createTrPointTerminal();
@@ -362,10 +364,43 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public GeneralProtocolClass createGeneralProtocolClass()
+  {
+    GeneralProtocolClassImpl generalProtocolClass = new GeneralProtocolClassImpl();
+    return generalProtocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ProtocolClass createProtocolClass()
   {
     ProtocolClassImpl protocolClass = new ProtocolClassImpl();
     return protocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundProtocolClass createCompoundProtocolClass()
+  {
+    CompoundProtocolClassImpl compoundProtocolClass = new CompoundProtocolClassImpl();
+    return compoundProtocolClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubProtocol createSubProtocol()
+  {
+    SubProtocolImpl subProtocol = new SubProtocolImpl();
+    return subProtocol;
   }
 
   /**
@@ -443,6 +478,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     SemanticsRuleImpl semanticsRule = new SemanticsRuleImpl();
     return semanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InSemanticsRule createInSemanticsRule()
+  {
+    InSemanticsRuleImpl inSemanticsRule = new InSemanticsRuleImpl();
+    return inSemanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutSemanticsRule createOutSemanticsRule()
+  {
+    OutSemanticsRuleImpl outSemanticsRule = new OutSemanticsRuleImpl();
+    return outSemanticsRule;
   }
 
   /**
@@ -894,6 +951,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     CPBranchTransitionImpl cpBranchTransition = new CPBranchTransitionImpl();
     return cpBranchTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefinedTransition createRefinedTransition()
+  {
+    RefinedTransitionImpl refinedTransition = new RefinedTransitionImpl();
+    return refinedTransition;
   }
 
   /**

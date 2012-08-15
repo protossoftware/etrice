@@ -9,7 +9,6 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -20,11 +19,9 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
@@ -53,6 +50,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
@@ -168,7 +166,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private TableViewer mifViewer;
 	private List<InterfaceItem> interfaceItems = new ArrayList<InterfaceItem>();
 	private TableViewer triggerViewer;
-	private EList<Message> currentMsgs;
+	private List<Message> currentMsgs;
 	private DetailCodeToString m2s;
 	private StringToDetailCode s2m;
 	private StringToDetailCode s2m_not_null;
@@ -176,9 +174,11 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private Text guardText;
 	private Button removeMifButton;
 	private boolean triggerError = false;
+	private boolean inherited;
+	private RefinedTransition refined;
 
-	public TransitionPropertyDialog(Shell shell, StateGraph sg, Transition trans) {
-		super(shell, "Edit Transition", getActorClass(sg));
+	public TransitionPropertyDialog(Shell shell, ActorClass ac, Transition trans) {
+		super(shell, "Edit Transition", ac);
 		this.trans = trans;
 
 		m2s = new DetailCodeToString();
@@ -186,19 +186,22 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		s2m = new StringToDetailCode();
 		s2m_not_null = new StringToDetailCode(false);
 		
-		interfaceItems = RoomHelpers.getAllInterfaceItems(getActorClass());
-	}
-
-	private static ActorClass getActorClass(StateGraph sg) {
-		EObject obj = sg;
-		while (obj!=null) {
-			if (obj instanceof ActorClass) {
-				return (ActorClass) obj;
-				
-			}
-			obj = obj.eContainer();
+		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+		inherited = RoomHelpers.getActorClass(trans)!=ac;
+		
+		refined = null;
+		if (inherited) {
+			if (getActorClass().getStateMachine()!=null)
+				for (RefinedTransition rt : getActorClass().getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans) {
+						refined = rt;
+						break;
+					}
+				}
 		}
-		return null;
+		
+		if (inherited && refined==null)
+			setTitle("View Transition");
 	}
 
 	@Override
@@ -207,19 +210,23 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	}
 
 	@Override
-	protected void createContent(IManagedForm mform, Composite body,
-			DataBindingContext bindingContext) {
+	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
 		
 		if (!(trans instanceof InitialTransition)) {
 			NameValidator nv = new NameValidator();
 			
-			Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
-			configureMemberAware(name);
-			
-			createDecorator(name, "invalid name");
-			
-			name.selectAll();
-			name.setFocus();
+			if (inherited) {
+				createFixedText(body, "&Name:", trans.getName(), false);
+			}
+			else {
+				Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
+				configureMemberAware(name);
+				
+				createDecorator(name, "invalid name");
+				
+				name.selectAll();
+				name.setFocus();
+			}
 		}
 		
 		if (trans instanceof TriggeredTransition) {
@@ -245,25 +252,53 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		if (trans instanceof GuardedTransition) {
-			GuardValidator gv = new GuardValidator();
-			
-			Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
-			configureMemberAware(cond, true, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			cond.setLayoutData(gd);
-			
-			createDecorator(cond, "empty guard");
+			if (inherited) {
+				String code = RoomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				createFixedText(body, "&Guard:", code, true);
+			}
+			else {
+				GuardValidator gv = new GuardValidator();
+				
+				Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
+				configureMemberAware(cond, true, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				cond.setLayoutData(gd);
+				
+				createDecorator(cond, "empty guard");
+			}
 		}
 		
 		if (trans instanceof CPBranchTransition) {
-			Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
-			configureMemberAware(cond, true, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			cond.setLayoutData(gd);
+			if (inherited) {
+				String code = RoomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
+				createFixedText(body, "&Condition", code, true);
+			}
+			else {
+				Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+				configureMemberAware(cond, true, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				cond.setLayoutData(gd);
+			}
+		}
+
+		{
+			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
+			if (code!=null)
+				createFixedText(body, "Base Action Code:", code, true);
 		}
 		
+		if (inherited) {
+			if (refined!=null) {
+				Text action = createText(body, "&Action Code:", refined, RoomPackage.eINSTANCE.getRefinedTransition_Action(), null, s2m, m2s, true);
+				configureMemberAware(action, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				action.setLayoutData(gd);
+			}
+		}
+		else
 		{
 			Text action = createText(body, "&Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
 			configureMemberAware(action, true, true);
@@ -273,6 +308,17 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		
 		createMembersAndMessagesButtons(body);
+		
+		if (inherited)
+			disableAll(body);
+	}
+
+	private void disableAll(Composite parent) {
+		for (Control child : parent.getChildren()) {
+			child.setEnabled(false);
+			if (child instanceof Composite)
+				disableAll((Composite) child);
+		}
 	}
 
 	private boolean triggersAvailable() {
@@ -280,7 +326,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			return false;
 		
 		for (InterfaceItem item : interfaceItems) {
-			if (!getMessages(item).isEmpty())
+			if (!RoomHelpers.getMessageList(item, false).isEmpty())
 				return true;
 		}
 		return false;
@@ -294,6 +340,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		if (ok && triggerError) {
 			ok = false;
 			setValidationText("no triggers available");
+		}
+		if (ok && inherited && refined==null) {
+			setValidationFeedbackOff();
+			return;
 		}
 		super.updateValidationFeedback(ok);
 	}
@@ -309,6 +359,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		createMifTable(triggerCompartment, toolkit);
 		
 		createMifCompartment(triggerCompartment, toolkit);
+		
+		if (inherited)
+			disableAll(triggerCompartment);
 	}
 
 	private void createTriggerTable(Composite triggerCompartment, FormToolkit toolkit) {
@@ -317,7 +370,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		tableCompartment.setLayoutData(gd);
 
-		Table triggerTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		Table triggerTable = toolkit.createTable(tableCompartment, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 50;
 		gd.widthHint = 100;
@@ -378,7 +431,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		tableCompartment.setLayoutData(gd);
 
-		Table mifTable = toolkit.createTable(tableCompartment, SWT.NONE | SWT.SINGLE);
+		Table mifTable = toolkit.createTable(tableCompartment, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 50;
 		gd.widthHint = 100;
@@ -569,7 +622,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						currentMsgs = getMessages(mif.getFrom());
+						currentMsgs = RoomHelpers.getMessageList(mif.getFrom(), false);
 						int pos = 0;
 						int idx = -1;
 						for (Message message : currentMsgs) {
@@ -592,19 +645,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 
-	private EList<Message> getMessages(InterfaceItem item) {
-		boolean regular = true;
-		if (item instanceof Port) {
-			if (((Port)item).isConjugated())
-				regular = false;
-		}
-		else if (item instanceof SAPRef)
-			regular = false;
-		
-		return regular? item.getProtocol().getIncomingMessages()
-				: item.getProtocol().getOutgoingMessages();
-	}
-
 	private void addNewTrigger() {
 		Trigger tri = RoomFactory.eINSTANCE.createTrigger();
 		EList<Trigger> triggers = ((TriggeredTransition) trans).getTriggers();
@@ -622,9 +662,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private MessageFromIf createDefaultMif() {
 		MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
 		for (InterfaceItem item : interfaceItems) {
-			if (!getMessages(item).isEmpty()) {
+			List<Message> msgs = RoomHelpers.getMessageList(item, false);
+			if (!msgs.isEmpty()) {
 				mif.setFrom(item);
-				mif.setMessage(getMessages(item).get(0));
+				mif.setMessage(msgs.get(0));
 				return mif;
 			}
 		}
@@ -679,7 +720,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		super.createButtonsForButtonBar(parent);
-		if (!triggersAvailable())
+		if (inherited || !triggersAvailable())
 			getButton(IDialogConstants.OK_ID).setEnabled(false);
 	}
 	

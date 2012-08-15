@@ -12,15 +12,15 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.integration.SendingDataByValueTest.PingPongProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.integration.tests.helpers.*;
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.integration.tests.helpers.*;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 
 public class MrPing extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		private CRC16Generator crcGen = new CRC16Generator();
+	private CRC16Generator crcGen = new CRC16Generator();
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
@@ -69,7 +69,23 @@ public class MrPing extends ActorClassBase {
 		
 		// own service implementations
 	}
-	
+	//--------------------- attribute setters and getters
+	public void setI32Array (int[] i32Array) {
+		 this.i32Array = i32Array;
+	}
+	public int[] getI32Array () {
+		return this.i32Array;
+	}
+	public void setData (PingPongData data) {
+		 this.data = data;
+	}
+	public PingPongData getData () {
+		return this.data;
+	}
+	//--------------------- port getters
+	public PingPongProtocolConjPort getPingPongPort (){
+		return this.PingPongPort;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){

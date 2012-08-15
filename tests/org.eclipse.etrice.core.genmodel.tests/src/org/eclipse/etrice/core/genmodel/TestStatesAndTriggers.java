@@ -132,7 +132,7 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 		SAPRef timeout = xpac.getActorClass().getStrSAPs().get(1);
 		
 		assertEquals("port name", "fct", fct.getName());
-		assertEquals("port name", "sub", sub.getName());
+		assertEquals("port name", "subp", sub.getName());
 		assertEquals("sap name", "timer", timer.getName());
 		assertEquals("sap name", "timeout", timeout.getName());
 		

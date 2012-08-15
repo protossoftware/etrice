@@ -1,0 +1,72 @@
+/**
+ */
+package org.eclipse.etrice.core.config;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.etrice.core.room.InterfaceItem;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Port Instance Config</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.eclipse.etrice.core.config.PortInstanceConfig#getItem <em>Item</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.PortInstanceConfig#getAttributes <em>Attributes</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.eclipse.etrice.core.config.ConfigPackage#getPortInstanceConfig()
+ * @model
+ * @generated
+ */
+public interface PortInstanceConfig extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Item</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Item</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Item</em>' reference.
+   * @see #setItem(InterfaceItem)
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getPortInstanceConfig_Item()
+   * @model
+   * @generated
+   */
+  InterfaceItem getItem();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.config.PortInstanceConfig#getItem <em>Item</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Item</em>' reference.
+   * @see #getItem()
+   * @generated
+   */
+  void setItem(InterfaceItem value);
+
+  /**
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.AttrInstanceConfig}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getPortInstanceConfig_Attributes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AttrInstanceConfig> getAttributes();
+
+} // PortInstanceConfig

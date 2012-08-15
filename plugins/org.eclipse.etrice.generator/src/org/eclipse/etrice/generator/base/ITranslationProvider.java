@@ -23,17 +23,101 @@ import org.eclipse.etrice.core.room.Operation;
 
 public interface ITranslationProvider {
 
+	/**
+	 * start sequence for tags to be translated
+	 */
 	public static final String TAG_START = "<|";
+	/**
+	 * end sequence for tags to be translated
+	 */
 	public static final String TAG_END = "|>";
 
+	/**
+	 * the actor class for which translations have to be provided
+	 * @param ac
+	 */
 	void setActorClass(ActorClass ac);
 	
+	/**
+	 * @return true if translation should be applied to members (attributes, operations and port.msg
+	 */
 	boolean translateMembers();
-	String getAttributeText(Attribute att, String orig);
+	
+	/**
+	 * yield text to read an attribute (array index may be null). Is called whenever <i>attribute</i> 
+	 * or <i>attribute</i>[<i>index</i>] or is
+	 * found in the detail code
+	 * 
+	 * @param att the actor class attribute
+	 * @param index the index (should be null for scalars, !=null for arrays)
+	 * @param orig the original text
+	 * @return the translation
+	 */
+	String getAttributeGetter(Attribute att, String index, String orig);
+	
+	/**
+	 * yield text to write an attribute (array index may be null). Is called whenever <i>attribute</i>.set(<i>value</i>)
+	 * or <i>attribute</i>[<i>index</i>].set(<i>value</i>) is
+	 * found in the detail code
+	 * 
+	 * @param att the actor class attribute
+	 * @param index the index (should be null for scalars, !=null for arrays)
+	 * @param value to assign to the attribute
+	 * @param orig the original text
+	 * @return the translation
+	 */
+	String getAttributeSetter(Attribute att, String index, String value, String orig);
+	
+	/**
+	 * yield text for operation call. Is called whenever <i>operation</i>(<i>args</i>)
+	 * is found in the detail code
+	 * 
+	 * @param op operation to call
+	 * @param args the arguments to pass
+	 * @param orig the original text
+	 * @return the translation
+	 */
 	String getOperationText(Operation op, ArrayList<String> args, String orig);
+	
+	/**
+	 * yield a sequence that sends a message through an interface item (port or SAP).
+	 * Is called whenever <i>port</i>.<i>msg</i>(<i>args</i>)
+	 * or <i>port</i>[<i>index</i>].<i>msg</i>(<i>args</i>) is found in the detail code
+	 * 
+	 * @param item the interface item
+	 * @param msg the message to send
+	 * @param args the message data
+	 * @param index array index for replicated ports, should be null for simple ports
+	 * 				and may be null for broadcast through replicated port
+	 * @param orig the original text
+	 * @return the translation
+	 */
 	String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig);
+	
+	/**
+	 * yields a sequence that reads data from a <b>data driven</b> port.
+	 * Is called whenever <i>port</i>.<i>msg</i> or <i>port</i>[<i>index</i>].<i>msg</i>
+	 * is found in the detail code
+	 * 
+	 * @param item the interface item
+	 * @param msg the message to read
+	 * @param orig the original text
+	 * @return the translation
+	 */
 	String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig);
 
+	/**
+	 * @return true if translations are provided for tags
+	 */
 	boolean translateTags();
+	
+	/**
+	 * yield a replacement for a tag. Is called whenever &lt;|<i>tag</i>|>
+	 * is found in the detail code
+	 * 
+	 * @param tag the tag name
+	 * @param code the detail code containing the tag
+	 * @return the translated tag
+	 */
 	String translateTag(String tag, DetailCode code);
 }

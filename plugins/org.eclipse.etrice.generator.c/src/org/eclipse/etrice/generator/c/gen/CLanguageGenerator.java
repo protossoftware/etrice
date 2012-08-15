@@ -6,43 +6,43 @@ import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 
 public class CLanguageGenerator extends AbstractTransitionChainGenerator {
 	
-	protected String[] generateArglistAndTypedData(VarDecl data) {
+	public String[] generateArglistAndTypedData(VarDecl data) {
 		if (data==null)
 			return new String[] {"", "", ""};
 		
 		String typeName = data.getRefType().getType().getName();
 		String castTypeName = typeName+"*";
 		String typedData;
-		//boolean byVal = false;
+		String ref = "";
 		if (data.getRefType().getType() instanceof PrimitiveType) {
 			typeName = ((PrimitiveType)data.getRefType().getType()).getTargetName();
 			castTypeName = typeName+"*";
 			String ct = ((PrimitiveType)data.getRefType().getType()).getCastName();
-			//byVal = true;
 			if (ct!=null && !ct.isEmpty()){
 				castTypeName = ct;
 			}
 			if (data.getRefType().isRef()) {
-				//byVal = false;
+				ref = "*";
 				typedData = typeName+" "+data.getName() + " = **(("+castTypeName+"*) generic_data);\n";
-			} else {
-				//byVal = true;
+			}
+			else {
 				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n";
 			}
 		}
 		else {
 			if (data.getRefType().isRef()) {
+				ref = "*";
 				typeName = typeName+"*";
 				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+"*) generic_data);\n";
-			}else{
+			}
+			else{
 				typeName = typeName+"*";
 				typedData = typeName+" "+data.getName() + " = (("+castTypeName+") generic_data);\n";
 			}
 		}
 
-		//typedData = typeName+" "+data.getName() + " = "+(byVal? "*":"")+"(("+castTypeName+") generic_data);\n";
 		String dataArg = ", "+data.getName();
-		String typedArgList = ", "+typeName+" "+data.getName();
+		String typedArgList = ", "+typeName+" "+ref+data.getName();
 		
 		return new String[]{dataArg, typedData, typedArgList};
 	}

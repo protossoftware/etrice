@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.impl;
 
@@ -21,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -35,6 +32,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode3 <em>User Code3</em>}</li>
@@ -56,6 +54,16 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * @ordered
    */
   protected DataClass base;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
@@ -169,6 +177,20 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
     base = newBase;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.DATA_CLASS__BASE, oldBase, base));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.DATA_CLASS__ANNOTATIONS);
+    }
+    return annotations;
   }
 
   /**
@@ -353,6 +375,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
   {
     switch (featureID)
     {
+      case RoomPackage.DATA_CLASS__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.DATA_CLASS__USER_CODE1:
         return basicSetUserCode1(null, msgs);
       case RoomPackage.DATA_CLASS__USER_CODE2:
@@ -380,6 +404,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
       case RoomPackage.DATA_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
+      case RoomPackage.DATA_CLASS__ANNOTATIONS:
+        return getAnnotations();
       case RoomPackage.DATA_CLASS__USER_CODE1:
         return getUserCode1();
       case RoomPackage.DATA_CLASS__USER_CODE2:
@@ -407,6 +433,10 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
     {
       case RoomPackage.DATA_CLASS__BASE:
         setBase((DataClass)newValue);
+        return;
+      case RoomPackage.DATA_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case RoomPackage.DATA_CLASS__USER_CODE1:
         setUserCode1((DetailCode)newValue);
@@ -442,6 +472,9 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
       case RoomPackage.DATA_CLASS__BASE:
         setBase((DataClass)null);
         return;
+      case RoomPackage.DATA_CLASS__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case RoomPackage.DATA_CLASS__USER_CODE1:
         setUserCode1((DetailCode)null);
         return;
@@ -473,6 +506,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
     {
       case RoomPackage.DATA_CLASS__BASE:
         return base != null;
+      case RoomPackage.DATA_CLASS__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case RoomPackage.DATA_CLASS__USER_CODE1:
         return userCode1 != null;
       case RoomPackage.DATA_CLASS__USER_CODE2:

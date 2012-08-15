@@ -237,6 +237,18 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return bar;
 	}
 
+	protected void setValidationFeedbackOff() {
+		if (validationLabel.isDisposed())
+			return;
+		
+		validationLabel.setVisible(false);
+		validationText.setVisible(false);
+		
+		Button okButton = getButton(IDialogConstants.OK_ID);
+		if (okButton!=null)
+			okButton.setEnabled(false);
+	}
+
 	protected void updateValidationFeedback(boolean ok) {
 		if (validationLabel.isDisposed())
 			return;
@@ -299,6 +311,21 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		}
 		bindingContext.bindValue(SWTObservables.observeText(text, SWT.Modify), PojoObservables.observeValue(
 				obj, feat.getName()), t2m, m2t);
+		
+		return text;
+	}
+	
+	protected Text createFixedText(Composite parent, String label, String txt, boolean multiline) {
+		Label l = toolkit.createLabel(parent, label, SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
+		
+		int style = SWT.BORDER;
+		if (multiline)
+			style |= SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL;
+		Text text = toolkit.createText(parent, txt, style);
+		GridData gd = new GridData(multiline?GridData.FILL_BOTH:GridData.FILL_HORIZONTAL);
+		text.setLayoutData(gd);
+		text.setEnabled(false);
 		
 		return text;
 	}
@@ -422,5 +449,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	 */
 	public FormToolkit getToolkit() {
 		return toolkit;
+	}
+
+	protected void setTitle(String title) {
+		this.title = title;
 	}
 }

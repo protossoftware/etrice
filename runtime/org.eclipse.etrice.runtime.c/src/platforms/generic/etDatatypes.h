@@ -38,9 +38,13 @@ typedef long long int64;
 typedef float float32;
 typedef double float64;
 
+/* string datatypes */
+typedef char* charPtr;
+
 /* boolean datatypes and values */
 typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-typedef bool boolean;
+//typedef bool boolean;
+
 #ifndef TRUE
 	#define TRUE 1
 #endif

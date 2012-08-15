@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.common.preferences;
 import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -63,6 +64,35 @@ public class ETricePreferencePage
 				getFieldEditorParent());
 		addField(autoSave);
 
+		StringFieldEditor exportPath = new StringFieldEditor(PreferenceConstants.EXPORT_DIAGRAM_PATH, "&Export Diagram Path:", getFieldEditorParent());
+		addField(exportPath);
+
+		RadioGroupFieldEditor exportRelTo = new RadioGroupFieldEditor(
+				PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO,
+				"Export Path Relative to",
+				2,
+				new String[][] {
+					{"Project", PreferenceConstants.PATH_REL_TO_PROJECT},
+					{"Model", PreferenceConstants.PATH_REL_TO_MODEL}
+				},
+				getFieldEditorParent(),
+				true);
+		addField(exportRelTo);
+
+		RadioGroupFieldEditor imgFormat = new RadioGroupFieldEditor(
+				PreferenceConstants.EXPORT_DIAGRAM_FORMAT,
+				"Image Format for Export:",
+				4,
+				new String[][] {
+					{"BMP", PreferenceConstants.FORMAT_BMP},
+					{"GIF", PreferenceConstants.FORMAT_GIF},
+					{"JPG", PreferenceConstants.FORMAT_JPG},
+					{"PNG", PreferenceConstants.FORMAT_PNG}
+				},
+				getFieldEditorParent(),
+				true);
+		addField(imgFormat);
+		
 		BooleanFieldEditor useGrid = new BooleanFieldEditor(
 			PreferenceConstants.USE_GRID,
 			"Use &Grid (grid settings apply to new diagrams only)",

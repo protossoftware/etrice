@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -61,7 +62,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 		injector.injectMembers(this);
 	}
 	
-	@SuppressWarnings("restriction")
 	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
@@ -76,7 +76,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#dispose()
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void dispose() {
 		mte.unsetTarget(getEditingDomain());
@@ -89,20 +88,20 @@ public class RoomDiagramEditor extends DiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#doSave(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
 		ResourceSet rs = getEditingDomain().getResourceSet();
 		for (Resource res : rs.getResources()) {
 			if (res instanceof XtextResource) {
+				if (!res.isLoaded()) {
+					try {
+						res.load(Collections.EMPTY_MAP);
+					} catch (IOException e) {
+						MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: couldn't load referenced resource "+res.getURI());
+						return;
+					}
+				}
 				if (res.isModified()) {
-					if (!res.isLoaded())
-						try {
-							res.load(Collections.EMPTY_MAP);
-						} catch (IOException e) {
-							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: couldn't load referenced resource "+res.getURI());
-							return;
-						}
 
 					XtextResource xres = (XtextResource) res;
 					ISerializer serializer = xres.getSerializer();
@@ -143,7 +142,6 @@ public class RoomDiagramEditor extends DiagramEditor {
 		super.doSave(monitor);
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
@@ -159,13 +157,12 @@ public class RoomDiagramEditor extends DiagramEditor {
 		 * did not work correctly
 		 */
 //		if (AutoUpdateFeature.isLastDoneChanges())
-			doSave(null);
+			doSave(new NullProgressMonitor());
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#setFocus()
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void setFocus() {
 		boolean dirtyAlready = isDirty();

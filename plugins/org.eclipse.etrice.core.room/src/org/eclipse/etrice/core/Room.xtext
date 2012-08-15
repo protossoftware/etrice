@@ -31,7 +31,7 @@ RoomModel :
 		primitiveTypes+=PrimitiveType	|
 		externalTypes+=ExternalType	|
 		dataClasses+=DataClass	|
-		protocolClasses+=ProtocolClass |
+		protocolClasses+=GeneralProtocolClass |
 		actorClasses+=ActorClass  |
 		subSystemClasses+=SubSystemClass |
 		systems+=LogicalSystem
@@ -39,7 +39,7 @@ RoomModel :
 	'}'
 ;
 
-RoomClass: DataType | ProtocolClass | StructureClass;
+RoomClass: DataType | GeneralProtocolClass | StructureClass;
 StructureClass: ActorContainerClass | LogicalSystem;
 ActorContainerClass: ActorClass | SubSystemClass;
 
@@ -68,6 +68,7 @@ ExternalType: 'ExternalType' name=ID '->' targetName=FQN (docu=Documentation)?;
 // TODOHRR: define detail level language?
 DataClass:
 	'DataClass' name=ID (docu=Documentation)? ('extends' base=[DataClass|FQN])? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
@@ -102,9 +103,12 @@ enum CommunicationType:
 	SYNCHRONOUS='sync'
 ;
 
+GeneralProtocolClass: ProtocolClass | CompoundProtocolClass;
+
 ProtocolClass:
 	(commType=CommunicationType)?
 	'ProtocolClass' name=ID (docu=Documentation)? ('extends' base=[ProtocolClass|FQN])? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
@@ -115,6 +119,15 @@ ProtocolClass:
 		(semantics=ProtocolSemantics)?
 	'}';
 	
+CompoundProtocolClass:
+	'CompoundProtocolClass' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
+		subProtocols+=SubProtocol+
+	'}'
+;
+
+SubProtocol: 'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
+
 Message:
 	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')'
 	(docu=Documentation)?;
@@ -145,7 +158,19 @@ ProtocolSemantics:
 		rules+=SemanticsRule*
 	'}';
 
-SemanticsRule: msg=[Message|ID]
+SemanticsRule: InSemanticsRule | OutSemanticsRule;
+
+InSemanticsRule: 'in' ':' msg=[Message|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;
+
+OutSemanticsRule: 'out' ':' msg=[Message|ID]
 	('->'
 		(
 			followUps+=SemanticsRule
@@ -175,6 +200,7 @@ enum ActorCommunicationType:
 ActorClass:
 	(abstract?='abstract'? & commType=ActorCommunicationType?)
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
+		annotations+=Annotation*
 		('Interface' '{'
 			ifPorts+=Port*
 			ifSPPs+=SPPRef*
@@ -193,7 +219,7 @@ ActorClass:
 			connections+=LayerConnection*
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
-			annotations+=Annotation*
+			behaviorAnnotations+=Annotation*
 			operations+=StandardOperation*
 			(stateMachine=StateMachine)?
 		'}')?
@@ -202,7 +228,7 @@ ActorClass:
 InterfaceItem: Port | SAPRef | SPPRef;
 
 Port:
-	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[ProtocolClass|FQN] (docu=Documentation)?;
+	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[GeneralProtocolClass|FQN] (docu=Documentation)?;
 ExternalPort:
 	'external' 'Port' ifport=[Port|ID] ;
 
@@ -216,6 +242,7 @@ ServiceImplementation:
 
 LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
 		subSystems+=SubSystemRef*
 		bindings+=Binding*
 		connections+=LayerConnection*
@@ -228,6 +255,7 @@ SubSystemRef:
 
 SubSystemClass:
 	'SubSystemClass' name=ID (docu=Documentation)? '{'
+		annotations+=Annotation*
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
@@ -255,7 +283,7 @@ Binding:
 	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
 	
 BindingEndPoint:
-	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID];
+	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID] ('sub' sub=[SubProtocol|ID])?;
 
 LayerConnection:
 	'LayerConnection' from=SAPoint 'satisfied_by' to=SPPoint 
@@ -293,7 +321,8 @@ StateGraph:
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
-			transitions+=Transition
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
 		)*
 	'}';
 
@@ -304,7 +333,8 @@ StateMachine returns StateGraph:
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
-			transitions+=Transition
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
 		)*
 	'}';
 
@@ -388,6 +418,15 @@ CPBranchTransition:
 		'cond' condition=DetailCode
 		('action' action=DetailCode)? 
 	'}';
+
+// by validation RefinedTransition can only be contained in the top level state graph
+RefinedTransition:
+	'RefinedTransition' target=[Transition|FQN]
+	(docu=Documentation)?
+	'{'
+		'action' action=DetailCode
+	'}'
+;
 
 TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 

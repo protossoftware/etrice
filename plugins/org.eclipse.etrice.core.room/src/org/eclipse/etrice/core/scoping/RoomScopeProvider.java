@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -28,19 +29,23 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InMessageHandler;
+import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.OutMessageHandler;
+import org.eclipse.etrice.core.room.OutSemanticsRule;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -50,11 +55,13 @@ import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
+import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -314,15 +321,25 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		InterfaceItem item = mfi.getFrom();
 		if (item!=null) {
-			ProtocolClass protocol = item.getProtocol();
+			ProtocolClass protocol = null;
 			boolean conjugated = false;
-			if (item instanceof Port)
+			if (item instanceof Port && ((Port)item).getProtocol() instanceof ProtocolClass) {
+				protocol = (ProtocolClass) ((Port)item).getProtocol();
 				conjugated = ((Port)item).isConjugated();
-			else if (item instanceof SAPRef)
-				conjugated = true;
-			for (Message msg : conjugated?protocol.getOutgoingMessages():protocol.getIncomingMessages()) {
-				scopes.add(EObjectDescription.create(msg.getName(), msg));
 			}
+			else if (item instanceof SAPRef) {
+				protocol = ((SAPRef)item).getProtocol();
+				conjugated = true;
+			}
+			else if (item instanceof SPPRef) {
+				protocol = ((SPPRef)item).getProtocol();
+				conjugated = false;
+			}
+			
+			if (protocol!=null)
+				for (Message msg : conjugated?protocol.getOutgoingMessages():protocol.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(msg.getName(), msg));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
@@ -447,6 +464,28 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
+
+	/**
+	 * returns a flat list of SubProtocol scopes for a {@link BindingEndPoint}
+	 * @param ep - the endpoint
+	 * @param ref - not used
+	 * @return a list of scopes
+	 */
+	public IScope scope_BindingEndPoint_sub(BindingEndPoint ep, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		if (ep.getPort()!=null) {
+			if (ep.getPort().getProtocol() instanceof CompoundProtocolClass) {
+				CompoundProtocolClass pc = (CompoundProtocolClass) ep.getPort().getProtocol();
+
+				for (SubProtocol sub : pc.getSubProtocols()) {
+					scopes.add(EObjectDescription.create(sub.getName(), sub));
+				}
+			}
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
 	
 	/**
 	 * returns a flat list of BaseState scopes for a {@link RefinedState}
@@ -483,7 +522,33 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
-
+	
+	/**
+	 * returns a flat list of Transition scopes for a {@link RefinedTransition}
+	 * @param rs - the refined state
+	 * @param ref - not used
+	 * @return a list of scopes
+	 */
+	public IScope scope_RefinedTransition_target(RefinedTransition trans, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		ActorClass ac = getActorClass(trans);
+		ac = ac.getBase();
+		while (ac!=null) {
+			if (ac.getStateMachine()!=null) {
+				TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
+				while (it.hasNext()) {
+					EObject obj = it.next();
+					if (obj instanceof Transition) {
+						scopes.add(EObjectDescription.create(((Transition)obj).getName(), obj));
+					}
+				}
+			}
+			ac = ac.getBase();
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
 	/**
 	 * @param sg
 	 * @param covered
@@ -519,12 +584,14 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		ProtocolClass pc = RoomHelpers.getProtocolClass(sr);
 		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
 		for (ProtocolClass bpc : classes) {
-			for (Message m : bpc.getIncomingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
-			for (Message m : bpc.getOutgoingMessages()) {
-				scopes.add(EObjectDescription.create(m.getName(), m));
-			}
+			if (sr instanceof InSemanticsRule)
+				for (Message m : bpc.getIncomingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
+			if (sr instanceof OutSemanticsRule)
+				for (Message m : bpc.getOutgoingMessages()) {
+					scopes.add(EObjectDescription.create(m.getName(), m));
+				}
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);

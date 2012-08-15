@@ -12,7 +12,7 @@
 
 #include "modelbase/etActor.h"
 
-boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data) {
+etBool handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data) {
 	/* TODO */
 	return FALSE;
 }

@@ -34,11 +34,13 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -59,6 +61,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -67,6 +70,8 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers;
+import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers.Match;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ValidationUtil {
@@ -203,28 +208,6 @@ public class ValidationUtil {
 	}
 	
 	/**
-	 * returns true if this is a relay port
-	 * 
-	 * @param port
-	 * @return true if relay port
-	 */
-	public static boolean isRelay(Port port) {
-		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
-		if (acc instanceof ActorClass) {
-			if (((ActorClass)acc).getIfPorts().contains(port)) {
-				for (ExternalPort xp : ((ActorClass)acc).getExtPorts()) {
-					if (xp.getIfport()==port)
-						return false;
-				}
-				return true;
-			}
-			return false;
-		}
-		else
-			return true;
-	}
-	
-	/**
 	 * returns true if this port is connectable inside its parent, i.e. an internal end port or a relay port
 	 * 
 	 * @param port
@@ -255,10 +238,13 @@ public class ValidationUtil {
 		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getSize()>1)
 			return true;
 		
-		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN) {
+		if (RoomHelpers.isRelay(port) && port.getProtocol() instanceof CompoundProtocolClass)
+			return true;
+		
+		if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType() == CommunicationType.DATA_DRIVEN) {
 			if (ref == null) {
 				// this port is local in the structure class
-				if (isRelay(port))
+				if (RoomHelpers.isRelay(port))
 					return !port.isConjugated();
 				else
 					return port.isConjugated();
@@ -271,26 +257,96 @@ public class ValidationUtil {
 	}
 
 	public static Result isValid(Binding bind) {
-		return isConnectable(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(), bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(), (StructureClass)bind.eContainer(), bind);
+		return isConnectable(
+				bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),  bind.getEndpoint1().getSub(),
+				bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),  bind.getEndpoint2().getSub(),
+				(StructureClass)bind.eContainer(), bind, true);
 	}
 
 	public static Result isConnectable(BindingEndPoint ep1, BindingEndPoint ep2, StructureClass sc) {
-		return isConnectable(ep1.getPort(), ep1.getActorRef(), ep2.getPort(), ep2.getActorRef(), sc);
+		return isConnectable(ep1.getPort(), ep1.getActorRef(), ep1.getSub(), ep2.getPort(), ep2.getActorRef(), ep2.getSub(), sc);
 	}
 	
-	public static Result isConnectable(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2, StructureClass sc) {
-		return isConnectable(p1, ref1, p2, ref2, sc, null);
+	public static Result isConnectable(
+			Port p1, ActorContainerRef ref1, SubProtocol sub1,
+			Port p2, ActorContainerRef ref2, SubProtocol sub2, StructureClass sc) {
+		return isConnectable(p1, ref1, sub1, p2, ref2, sub2, sc, null, true);
 	}
 	
-	public static Result isConnectable(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2, StructureClass sc, Binding exclude) {
+	public static Result isConnectable(
+			Port p1, ActorContainerRef ref1, SubProtocol sub1,
+			Port p2, ActorContainerRef ref2, SubProtocol sub2,
+			StructureClass sc, Binding exclude,
+			boolean checkCompound) {
+		
 		if (p1==p2)
 			return Result.error("no self connection allowed, ports are indentical");
+
+		if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
+			return Result.error("ports are already bound");
 		
-		if (p1.getProtocol()!=p2.getProtocol())
-			return Result.error("protocols don't match");
+		// check protocol compatibility
+		{
+			GeneralProtocolClass pc1 = p1.getProtocol();
+			GeneralProtocolClass pc2 = p2.getProtocol();
+			boolean compoundInvolved = pc1 instanceof CompoundProtocolClass || pc2 instanceof CompoundProtocolClass;
+			if (pc1 instanceof CompoundProtocolClass && pc2 instanceof CompoundProtocolClass) {
+				if (sub1!=null)
+					pc1 = sub1.getProtocol();
+				if (sub2!=null)
+					pc2 = sub2.getProtocol();
+				if (checkCompound && pc1!=pc2)
+					return Result.error("(sub) protocols don't match");
+			}
+			else if (pc1 instanceof ProtocolClass && pc2 instanceof CompoundProtocolClass) {
+				if (checkCompound) {
+					if (sub2==null)
+						return Result.error("specify a sub protocol at "+p2.getName());
+					if (pc1!=sub2.getProtocol())
+						return Result.error("sub protocol doesn't match");
+				}
+			}
+			else if (pc1 instanceof CompoundProtocolClass && pc2 instanceof ProtocolClass) {
+				if (checkCompound) {
+					if (sub1==null)
+						return Result.error("specify a sub protocol at "+p1.getName());
+					if (pc2!=sub1.getProtocol())
+						return Result.error("sub protocol doesn't match");
+				}
+			}
+			else {
+				if (pc1!=pc2)
+					return Result.error("protocols don't match");
+			}
+
+			if (checkCompound || !compoundInvolved) {
+				ProtocolClass spc1 = null;
+				if (pc1 instanceof ProtocolClass)
+					spc1 = (ProtocolClass) pc1;
+				else if (sub1.getProtocol() instanceof ProtocolClass)
+					spc1 = (ProtocolClass) sub1.getProtocol();
+				ProtocolClass spc2 = null;
+				if (pc2 instanceof ProtocolClass)
+					spc2 = (ProtocolClass) pc2;
+				else if (sub2.getProtocol() instanceof ProtocolClass)
+					spc2 = (ProtocolClass) sub2.getProtocol();
+				if (spc1.getCommType()!=spc2.getCommType())
+					return Result.error("protocol communication types don't match");
+			}
+			if (compoundInvolved) {
+				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, ref1, p2, ref2, sc, exclude);
+				if (matches.isEmpty())
+					return Result.error("no matching sub protocol(s) found");
+				if (matches.size()==1)
+					if (exclude!=null) {
+						if (matches.get(0).getLeft()!=exclude.getEndpoint1().getSub())
+							return Result.error("sub protocol already connected");
+						if (matches.get(0).getRight()!=exclude.getEndpoint2().getSub())
+							return Result.error("sub protocol already connected");
+					}
+			}
+		}
 		
-		if (p1.getProtocol().getCommType()!=p2.getProtocol().getCommType())
-			return Result.error("protocol communication types don't match");
 		
 		if (ref1==null && ref2==null)
 			return Result.error("cannot connect two local ports");
@@ -317,9 +373,9 @@ public class ValidationUtil {
 			ActorContainerRef ref = ref1!=null? ref1:ref2;
 			ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
 			
-			if (isRelay(local)) {
+			if (RoomHelpers.isRelay(local)) {
 				if (local.isConjugated()!=sub.isConjugated())
-					return Result.error("connected relay port must have same direction");
+					return Result.error("relay port must have same direction as local port");
 
 				Result result = isConnectable(local, null, acc, exclude);
 				if (!result.isOk())
@@ -345,6 +401,58 @@ public class ValidationUtil {
 		}
 		
 		return Result.ok();
+	}
+
+	/**
+	 * @param p1
+	 * @param ref1
+	 * @param p2
+	 * @param ref2
+	 * @param sc
+	 * @param exclude
+	 * @return
+	 */
+	private static boolean alreadyConnected(Port p1, ActorContainerRef ref1,
+			Port p2, ActorContainerRef ref2, StructureClass sc, Binding exclude) {
+		
+		HashSet<String> bindings = new HashSet<String>();
+		String key = getKey(p1, ref1, p2, ref2);
+		bindings.add(key);
+		for (Binding bind : sc.getBindings()) {
+			if (bind==exclude)
+				continue;
+			
+			if (!(bind.getEndpoint1().getPort()==p1 && bind.getEndpoint1().getActorRef()==ref1
+					&& bind.getEndpoint2().getPort()==p2 && bind.getEndpoint2().getActorRef()==ref2))
+				continue;
+			if (!(bind.getEndpoint2().getPort()==p1 && bind.getEndpoint2().getActorRef()==ref1
+					&& bind.getEndpoint1().getPort()==p2 && bind.getEndpoint1().getActorRef()==ref2))
+				continue;
+
+			key = getKey(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),
+					bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef());
+			if (!bindings.add(key))
+				return true;
+		}
+		return false;
+	}
+
+	private static String getKey(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2) {
+		String ep1 = getEndpointName(p1, ref1);
+		String ep2 = getEndpointName(p2, ref2);
+		// we order endpoint names to be able to identify bindings with exchanged endpoints
+		return (ep1.compareTo(ep2)>0)? ep1+ep2:ep2+ep1;
+	}
+	/**
+	 * @param p1
+	 * @param ref1
+	 * @return
+	 */
+	private static String getEndpointName(Port p1, ActorContainerRef ref1) {
+		if (ref1==null)
+			return p1.getName()+"#.";
+		else
+			return p1.getName()+"#"+ref1.getName();
 	}
 
 	public static Result isFreeOfReferences(Port port) {
@@ -625,16 +733,6 @@ public class ValidationUtil {
 			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof ExitPoint)
 				return Result.error("sub state exit point can not be transition target", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// sub state EntryPoint is valid as destination
-			for (Transition t : sg.getTransitions()) {
-				if (t==trans)
-					continue;
-
-				if (t.getTo() instanceof SubStateTrPointTerminal) {
-					SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)t.getTo();
-					if (tpt.getTrPoint()==((SubStateTrPointTerminal) tgt).getTrPoint())
-						return Result.error("target transition point already is connected", tgt, RoomPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
-				}
-			}
 		}
 
 		return Result.ok();
@@ -742,6 +840,9 @@ public class ValidationUtil {
 		if (name.isEmpty())
 			return Result.error("name must not be empty");
 		
+		if (!isValidID(name))
+			return Result.error("name is no valid ID");
+		
 		if (item.eContainer() instanceof ActorClass) {
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
 			ActorClass ac = (ActorClass) item.eContainer();
@@ -784,8 +885,11 @@ public class ValidationUtil {
 	}
 	
 	public static Result isUniqueName(StateGraphItem s, String name) {
-		if (name.isEmpty())
+		if (name.trim().isEmpty())
 			return Result.error("name must not be empty");
+		
+		if (!isValidID(name))
+			return Result.error("name is no valid ID");
 		
 		StateGraph sg = (StateGraph) s.eContainer();
 		Set<String> names = RoomHelpers.getAllNames(sg, s);
@@ -821,12 +925,13 @@ public class ValidationUtil {
 				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
-		else {
-			if (tr instanceof GuardedTransition)
+		else if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
+			if (tr instanceof GuardedTransition) {
 				return Result.error("event driven state machine must not contain guarded transition",
 						tr.eContainer(),
 						RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 						((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}
 			else if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a triggered transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
@@ -837,6 +942,16 @@ public class ValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 		}
+		else if (ac.getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+			if (tr instanceof ContinuationTransition) {
+				// if at this point no continuation transition is allowed it probably should be a triggered or guarded transition
+				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
+				if (term instanceof StateTerminal || (term instanceof TrPointTerminal && ((TrPointTerminal)term).getTrPoint() instanceof TransitionPoint))
+					return Result.error("trigger/guard must not be empty",
+							tr.eContainer(),
+							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
+							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
+			}		}
 		return Result.ok();
 	}
 	
@@ -870,5 +985,9 @@ public class ValidationUtil {
 		}
 		
 		return errors;
+	}
+	
+	public static boolean isValidID(String name) {
+		return name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}
 }

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -155,7 +151,7 @@ public interface RoomModel extends EObject
 
   /**
    * Returns the value of the '<em><b>Protocol Classes</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.ProtocolClass}.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.GeneralProtocolClass}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Protocol Classes</em>' containment reference list isn't clear,
@@ -167,7 +163,7 @@ public interface RoomModel extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ProtocolClass> getProtocolClasses();
+  EList<GeneralProtocolClass> getProtocolClasses();
 
   /**
    * Returns the value of the '<em><b>Actor Classes</b></em>' containment reference list.

@@ -6,11 +6,11 @@ package SendingData;
 public class DemoData {
 	
 	
-	//--------------------- attributes
-	protected int int32Val;
-	protected byte[] int8Array;
-	protected double float64Val;
-	protected String stringVal;
+	/*--------------------- attributes ---------------------*/
+	int int32Val;
+	byte int8Array[];
+	double float64Val;
+	String stringVal;
 	
 	//--------------------- attribute setters and getters
 	public void setInt32Val (int int32Val) {
@@ -38,7 +38,7 @@ public class DemoData {
 		return this.stringVal;
 	}
 	
-	//--------------------- operations
+	/*--------------------- operations ---------------------*/
 	
 	// default constructor
 	public DemoData() {
@@ -65,7 +65,7 @@ public class DemoData {
 	public DemoData deepCopy() {
 		DemoData copy = new DemoData();
 		copy.int32Val = int32Val;
-		for (int i=0;i<10;i++){
+		for (int i=0;i<int8Array.length;i++){
 			copy.int8Array[i] = int8Array[i];
 		}
 		copy.float64Val = float64Val;

@@ -1,5 +1,6 @@
 package org.eclipse.etrice.generator.c.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.HashSet;
@@ -9,30 +10,27 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class DataClassGen {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private CExtensions stdExt;
+  private CExtensions _cExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ProcedureHelpers helpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private ILogger logger;
@@ -41,35 +39,34 @@ public class DataClassGen {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
       {
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(dc);
-        String _path = this.roomExt.getPath(dc);
-        String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
-        String path = _operator_plus;
-        String _cHeaderFileName = this.stdExt.getCHeaderFileName(dc);
-        String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass header \'", _cHeaderFileName);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
-        this.logger.logInfo(_operator_plus_4);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
+        String _path = this._roomExtensions.getPath(dc);
+        String path = (_generationTargetPath + _path);
+        String _cHeaderFileName = this._cExtensions.getCHeaderFileName(dc);
+        String _plus = ("generating DataClass header \'" + _cHeaderFileName);
+        String _plus_1 = (_plus + "\' in \'");
+        String _plus_2 = (_plus_1 + path);
+        String _plus_3 = (_plus_2 + "\'");
+        this.logger.logInfo(_plus_3);
         this.fileAccess.setOutputPath(path);
-        String _cHeaderFileName_1 = this.stdExt.getCHeaderFileName(dc);
-        StringConcatenation _generateHeaderFile = this.generateHeaderFile(root, dc);
+        String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(dc);
+        CharSequence _generateHeaderFile = this.generateHeaderFile(root, dc);
         this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
-        String _cSourceFileName = this.stdExt.getCSourceFileName(dc);
-        String _operator_plus_5 = StringExtensions.operator_plus("generating DataClass source \'", _cSourceFileName);
-        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\' in \'");
-        String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, path);
-        String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\'");
-        this.logger.logInfo(_operator_plus_8);
+        String _cSourceFileName = this._cExtensions.getCSourceFileName(dc);
+        String _plus_4 = ("generating DataClass source \'" + _cSourceFileName);
+        String _plus_5 = (_plus_4 + "\' in \'");
+        String _plus_6 = (_plus_5 + path);
+        String _plus_7 = (_plus_6 + "\'");
+        this.logger.logInfo(_plus_7);
         this.fileAccess.setOutputPath(path);
-        String _cSourceFileName_1 = this.stdExt.getCSourceFileName(dc);
-        StringConcatenation _generateSourceFile = this.generateSourceFile(root, dc);
+        String _cSourceFileName_1 = this._cExtensions.getCSourceFileName(dc);
+        CharSequence _generateSourceFile = this.generateSourceFile(root, dc);
         this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
       }
     }
   }
   
-  public StringConcatenation generateHeaderFile(final Root root, final DataClass dc) {
+  public CharSequence generateHeaderFile(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -92,7 +89,7 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     String _name_1 = dc.getName();
-    StringConcatenation _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(_name_1);
+    CharSequence _generateIncludeGuardBegin = this._cExtensions.generateIncludeGuardBegin(_name_1);
     _builder.append(_generateIncludeGuardBegin, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -110,8 +107,7 @@ public class DataClassGen {
       }
     }
     _builder.newLine();
-    DetailCode _userCode1 = dc.getUserCode1();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+    CharSequence _userCode = this._procedureHelpers.userCode(dc, 1);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -119,8 +115,8 @@ public class DataClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.append("\t");
-    List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dc);
-    StringConcatenation _attributes = this.helpers.attributes(_allAttributes);
+    List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(dc);
+    CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
     _builder.append(_attributes, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("} ");
@@ -130,18 +126,18 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<Attribute> _allAttributes_1 = this.roomExt.getAllAttributes(dc);
+      List<Attribute> _allAttributes_1 = this._roomExtensions.getAllAttributes(dc);
       for(final Attribute a : _allAttributes_1) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, null);
-          if (_operator_notEquals) {
+          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+          if (_notEquals) {
             String _name_4 = dc.getName();
-            String _operator_plus = StringExtensions.operator_plus(_name_4, " ");
+            String _plus = (_name_4 + " ");
             String _name_5 = a.getName();
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_5);
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ": Attribute initialization not supported in C");
-            this.logger.logInfo(_operator_plus_2);
+            String _plus_1 = (_plus + _name_5);
+            String _plus_2 = (_plus_1 + ": Attribute initialization not supported in C");
+            this.logger.logInfo(_plus_2);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -151,7 +147,7 @@ public class DataClassGen {
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
     String _name_6 = dc.getName();
-    StringConcatenation _operationsDeclaration = this.helpers.operationsDeclaration(_operations, _name_6);
+    CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_6);
     _builder.append(_operationsDeclaration, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -169,20 +165,19 @@ public class DataClassGen {
     _builder.append("* target);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    DetailCode _userCode2 = dc.getUserCode2();
-    StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+    CharSequence _userCode_1 = this._procedureHelpers.userCode(dc, 2);
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     String _name_10 = dc.getName();
-    StringConcatenation _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_10);
+    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_10);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder;
   }
   
-  public StringConcatenation generateSourceFile(final Root root, final DataClass dc) {
+  public CharSequence generateSourceFile(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -205,7 +200,7 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("#include \"");
-    String _cHeaderFileName = this.stdExt.getCHeaderFileName(dc);
+    String _cHeaderFileName = this._cExtensions.getCHeaderFileName(dc);
     _builder.append(_cHeaderFileName, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -213,15 +208,14 @@ public class DataClassGen {
     _builder.append("#include <string.h>");
     _builder.newLine();
     _builder.newLine();
-    DetailCode _userCode3 = dc.getUserCode3();
-    StringConcatenation _userCode = this.helpers.userCode(_userCode3);
+    CharSequence _userCode = this._procedureHelpers.userCode(dc, 3);
     _builder.append(_userCode, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
     String _name_1 = dc.getName();
-    StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_1);
+    CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_1);
     _builder.append(_operationsImplementation, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

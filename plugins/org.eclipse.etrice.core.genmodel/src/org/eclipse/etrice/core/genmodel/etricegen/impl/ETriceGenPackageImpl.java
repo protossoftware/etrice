@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -161,6 +162,13 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	private EClass expandedActorClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expandedRefinedStateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -544,8 +552,17 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInterfaceItemInstance_Peers() {
+	public EReference getInterfaceItemInstance_Protocol() {
 		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInterfaceItemInstance_Peers() {
+		return (EReference)interfaceItemInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -600,6 +617,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getBindingInstance_Ports() {
 		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingInstance_Binding() {
+		return (EReference)bindingInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -796,6 +822,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTransitionChain_Data() {
+		return (EReference)transitionChainEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getITransitionChainVisitor() {
 		return iTransitionChainVisitorEClass;
 	}
@@ -834,6 +869,42 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getExpandedActorClass_StateMachine() {
 		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExpandedRefinedState() {
+		return expandedRefinedStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpandedRefinedState_InheritedEntry() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpandedRefinedState_InheritedExit() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExpandedRefinedState_InheritedDo() {
+		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -912,6 +983,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEAttribute(actorInstanceEClass, ACTOR_INSTANCE__UNINDEXED_NAME);
 
 		interfaceItemInstanceEClass = createEClass(INTERFACE_ITEM_INSTANCE);
+		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PROTOCOL);
 		createEReference(interfaceItemInstanceEClass, INTERFACE_ITEM_INSTANCE__PEERS);
 
 		portInstanceEClass = createEClass(PORT_INSTANCE);
@@ -921,6 +993,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		bindingInstanceEClass = createEClass(BINDING_INSTANCE);
 		createEReference(bindingInstanceEClass, BINDING_INSTANCE__PORTS);
+		createEReference(bindingInstanceEClass, BINDING_INSTANCE__BINDING);
 
 		sapInstanceEClass = createEClass(SAP_INSTANCE);
 		createEReference(sapInstanceEClass, SAP_INSTANCE__SAP);
@@ -948,6 +1021,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		transitionChainEClass = createEClass(TRANSITION_CHAIN);
 		createEReference(transitionChainEClass, TRANSITION_CHAIN__TRANSITION);
 		createEAttribute(transitionChainEClass, TRANSITION_CHAIN__SKIP_ENTRY);
+		createEReference(transitionChainEClass, TRANSITION_CHAIN__DATA);
 
 		iTransitionChainVisitorEClass = createEClass(ITRANSITION_CHAIN_VISITOR);
 
@@ -956,6 +1030,11 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		expandedActorClassEClass = createEClass(EXPANDED_ACTOR_CLASS);
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__ACTOR_CLASS);
 		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__STATE_MACHINE);
+
+		expandedRefinedStateEClass = createEClass(EXPANDED_REFINED_STATE);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_ENTRY);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_EXIT);
+		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_DO);
 
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
@@ -1000,6 +1079,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		sapInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
 		sppInstanceEClass.getESuperTypes().add(this.getInstanceBase());
 		serviceImplInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
+		expandedRefinedStateEClass.getESuperTypes().add(theRoomPackage.getSimpleState());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1053,6 +1133,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEAttribute(getActorInstance_UnindexedName(), ecorePackage.getEString(), "unindexedName", null, 0, 1, ActorInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(interfaceItemInstanceEClass, InterfaceItemInstance.class, "InterfaceItemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInterfaceItemInstance_Protocol(), theRoomPackage.getProtocolClass(), null, "protocol", null, 0, 1, InterfaceItemInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getInterfaceItemInstance_Peers(), this.getInterfaceItemInstance(), null, "peers", null, 0, -1, InterfaceItemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(interfaceItemInstanceEClass, ecorePackage.getEBoolean(), "isReplicated", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1070,6 +1151,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(bindingInstanceEClass, BindingInstance.class, "BindingInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBindingInstance_Ports(), this.getPortInstance(), this.getPortInstance_Bindings(), "ports", null, 0, 2, BindingInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingInstance_Binding(), theRoomPackage.getBinding(), null, "binding", null, 0, 1, BindingInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sapInstanceEClass, SAPInstance.class, "SAPInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAPInstance_Sap(), theRoomPackage.getSAPRef(), null, "sap", null, 0, 1, SAPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1097,6 +1179,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(transitionChainEClass, TransitionChain.class, "TransitionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionChain_Transition(), theRoomPackage.getTransition(), null, "transition", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransitionChain_SkipEntry(), ecorePackage.getEBoolean(), "skipEntry", "false", 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransitionChain_Data(), theRoomPackage.getVarDecl(), null, "data", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(transitionChainEClass, theRoomPackage.getState(), "getStateContext", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1128,9 +1211,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEParameter(op, theRoomPackage.getInterfaceItem(), "ifitem", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "hasStateMachine", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getCode", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theRoomPackage.getDetailCode(), "code", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getMessageFromIf(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1170,6 +1250,20 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		op = addEOperation(expandedActorClassEClass, theRoomPackage.getContinuationTransition(), "getDefaultBranch", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getTransition(), "out", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(expandedActorClassEClass, ecorePackage.getEObject(), "getOrig", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(expandedActorClassEClass, theRoomPackage.getVarDecl(), "getData", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theRoomPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(expandedRefinedStateEClass, ExpandedRefinedState.class, "ExpandedRefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpandedRefinedState_InheritedEntry(), theRoomPackage.getDetailCode(), null, "inheritedEntry", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedRefinedState_InheritedExit(), theRoomPackage.getDetailCode(), null, "inheritedExit", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpandedRefinedState_InheritedDo(), theRoomPackage.getDetailCode(), null, "inheritedDo", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(expandedRefinedStateEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theRoomPackage.getRefinedState(), "rs", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");

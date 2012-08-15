@@ -5,21 +5,21 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class CExtensions implements ILanguageExtension {
   @Inject
   private AbstractTransitionChainGenerator chainGenerator;
   
   public String getTypedDataDefinition(final Message m) {
-    String _generateTypedData = this.chainGenerator.generateTypedData(m);
-    return _generateTypedData;
+    VarDecl _data = m.getData();
+    return this.chainGenerator.generateTypedData(_data);
   }
   
   public String accessLevelPrivate() {
@@ -45,8 +45,8 @@ public class CExtensions implements ILanguageExtension {
     } else {
       _xifexpression = "* self";
     }
-    String _operator_plus = StringExtensions.operator_plus(classname, _xifexpression);
-    return _operator_plus;
+    String _plus = (classname + _xifexpression);
+    return _plus;
   }
   
   public String selfPointer(final boolean hasArgs) {
@@ -60,20 +60,18 @@ public class CExtensions implements ILanguageExtension {
   }
   
   public String operationScope(final String classname, final boolean isDeclaration) {
-    String _operator_plus = StringExtensions.operator_plus(classname, "_");
-    return _operator_plus;
+    String _plus = (classname + "_");
+    return _plus;
   }
   
   public String memberInDeclaration(final String namespace, final String member) {
-    String _operator_plus = StringExtensions.operator_plus(namespace, "_");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, member);
-    return _operator_plus_1;
+    String _plus = (namespace + "_");
+    return (_plus + member);
   }
   
   public String memberInUse(final String namespace, final String member) {
-    String _operator_plus = StringExtensions.operator_plus(namespace, "_");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, member);
-    return _operator_plus_1;
+    String _plus = (namespace + "_");
+    return (_plus + member);
   }
   
   /**
@@ -81,29 +79,25 @@ public class CExtensions implements ILanguageExtension {
    */
   public String getCHeaderFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, ".h");
-    return _operator_plus;
+    return (_name + ".h");
   }
   
   public String getCSourceFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, ".c");
-    return _operator_plus;
+    return (_name + ".c");
   }
   
   public String getInstSourceFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, "_Inst.h");
-    return _operator_plus;
+    return (_name + "_Inst.h");
   }
   
   public String getDispSourceFileName(final RoomClass rc) {
     String _name = rc.getName();
-    String _operator_plus = StringExtensions.operator_plus(_name, "_Disp.h");
-    return _operator_plus;
+    return (_name + "_Disp.h");
   }
   
-  public StringConcatenation getIncludeGuardString(final String filename) {
+  public CharSequence getIncludeGuardString(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("_");
     String _upperCase = filename.toUpperCase();
@@ -112,23 +106,23 @@ public class CExtensions implements ILanguageExtension {
     return _builder;
   }
   
-  public StringConcatenation generateIncludeGuardBegin(final String filename) {
+  public CharSequence generateIncludeGuardBegin(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#ifndef ");
-    StringConcatenation _includeGuardString = this.getIncludeGuardString(filename);
+    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
     _builder.append(_includeGuardString, "");
     _builder.newLineIfNotEmpty();
     _builder.append("#define ");
-    StringConcatenation _includeGuardString_1 = this.getIncludeGuardString(filename);
+    CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
     _builder.append(_includeGuardString_1, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  public StringConcatenation generateIncludeGuardEnd(final String filename) {
+  public CharSequence generateIncludeGuardEnd(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#endif /* ");
-    StringConcatenation _includeGuardString = this.getIncludeGuardString(filename);
+    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
     _builder.append(_includeGuardString, "");
     _builder.append(" */");
     _builder.newLineIfNotEmpty();
@@ -152,10 +146,10 @@ public class CExtensions implements ILanguageExtension {
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {
-        boolean hasAnyElements = false;
+        boolean _hasElements = false;
         for(final Pair<String,String> entry : entries) {
-          if (!hasAnyElements) {
-            hasAnyElements = true;
+          if (!_hasElements) {
+            _hasElements = true;
           } else {
             _builder.appendImmediate(",", "	");
           }
@@ -201,19 +195,19 @@ public class CExtensions implements ILanguageExtension {
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
     String _xifexpression = null;
     if (isRef) {
-      String _operator_plus = StringExtensions.operator_plus(type, "* ");
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "[");
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ((Integer)size));
-      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "]");
-      _xifexpression = _operator_plus_4;
+      String _plus = (type + "* ");
+      String _plus_1 = (_plus + name);
+      String _plus_2 = (_plus_1 + "[");
+      String _plus_3 = (_plus_2 + Integer.valueOf(size));
+      String _plus_4 = (_plus_3 + "]");
+      _xifexpression = _plus_4;
     } else {
-      String _operator_plus_5 = StringExtensions.operator_plus(type, " ");
-      String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, name);
-      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, "[");
-      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ((Integer)size));
-      String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, "]");
-      _xifexpression = _operator_plus_9;
+      String _plus_5 = (type + " ");
+      String _plus_6 = (_plus_5 + name);
+      String _plus_7 = (_plus_6 + "[");
+      String _plus_8 = (_plus_7 + Integer.valueOf(size));
+      String _plus_9 = (_plus_8 + "]");
+      _xifexpression = _plus_9;
     }
     return _xifexpression;
   }
@@ -232,5 +226,15 @@ public class CExtensions implements ILanguageExtension {
   
   public String destructorReturnType() {
     return "void";
+  }
+  
+  public String toCharArrayExpr(final String s) {
+    String _plus = ("\"" + s);
+    String _plus_1 = (_plus + "\"");
+    return _plus_1;
+  }
+  
+  public String superCall(final String baseClassName, final String method, final String args) {
+    return "";
   }
 }

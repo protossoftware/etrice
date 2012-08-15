@@ -31,7 +31,6 @@ import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.ui.editor.DiagramEditorInput;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -48,7 +47,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		return Activator.getImage("icons/Behavior.gif");
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
@@ -63,7 +61,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		getEditingDomain().getCommandStack().flush();
 	}
 	
-	@SuppressWarnings("restriction")
 	public boolean showStateGraph(StateGraph sg) {
 		URI boUri = EcoreUtil.getURI(sg);
 		final StateGraph mySG = (StateGraph) getEditingDomain().getResourceSet().getEObject(boUri, true);
@@ -86,7 +83,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 * @return the actor class of this editor
 	 */
 	public ActorClass getActorClass() {
-		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
 		if (bo instanceof ActorClass)
 			return (ActorClass) bo;
@@ -97,7 +94,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.internal.editor.DiagramEditorInternal#doSave(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		getEditingDomain().getCommandStack().execute(new RecordingCommand(getEditingDomain()) {
@@ -115,7 +111,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 * 
 	 */
 	protected void removeUnusedRefinedStates() {
-		Diagram diagram = ((DiagramEditorInput)getEditorInput()).getDiagram();
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		ActorClass ac = SupportUtil.getActorClass(diagram);
 		
 		if (ac.getStateMachine()!=null) {
@@ -147,7 +143,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	}
 
 	protected void removeEmptySubgraphs() {
-		@SuppressWarnings("restriction")
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 
 		// if our current context is an empty state graph we go one level up

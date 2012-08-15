@@ -64,7 +64,7 @@ public class ConverterTest {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report1.etu");
 		args.add(basePath+"report2.etu");
-		args.add(EtUnitReportConverter.OPTION_COMBINE);
+		args.add(EtUnitReportConverter.OPTION_COMBINED);
 		args.add(basePath+"combined.xml");
 		
 		String[] arguments = new String[args.size()];
@@ -76,8 +76,20 @@ public class ConverterTest {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report3.etu");
 		args.add(basePath+"report4.etu");
-		args.add(EtUnitReportConverter.OPTION_ONLY_COMBINE);
+		args.add(EtUnitReportConverter.OPTION_ONLY_COMBINED);
 		args.add(basePath+"only_combined.xml");
+		
+		String[] arguments = new String[args.size()];
+		EtUnitReportConverter.main(args.toArray(arguments));
+	}
+
+	@Test
+	public void testTex() {
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(basePath+"report3.etu");
+		args.add(basePath+"report4.etu");
+		args.add(EtUnitReportConverter.OPTION_TEX_OUTPUT);
+		args.add(basePath+"out.tex");
 		
 		String[] arguments = new String[args.size()];
 		EtUnitReportConverter.main(args.toArray(arguments));

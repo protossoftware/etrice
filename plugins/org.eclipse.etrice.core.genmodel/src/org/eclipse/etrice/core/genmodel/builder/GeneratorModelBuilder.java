@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -350,7 +351,7 @@ public class GeneratorModelBuilder {
 					if (!external) {
 						relayPorts.add(port);
 						
-						if (port.getProtocol().getCommType()==CommunicationType.DATA_DRIVEN) {
+						if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
 							if (port.isConjugated()) {
 								// check whether relay port is multiply connected
 								int count = 0;
@@ -618,7 +619,7 @@ public class GeneratorModelBuilder {
 				ArrayList<PortInstance> ep2Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint2()));
 				int nBind = ep1Ports.size()>ep2Ports.size()? ep2Ports.size():ep1Ports.size();
 				for (int i=0; i<nBind; ++i) {
-					createBindingInstance(si, ep1Ports.get(0), ep2Ports.get(0));
+					createBindingInstance(si, ep1Ports.get(0), ep2Ports.get(0), bind);
 					ep1Ports.remove(0);
 					ep2Ports.remove(0);
 				}
@@ -626,11 +627,12 @@ public class GeneratorModelBuilder {
 		}
 	}
 
-	private void createBindingInstance(StructureInstance si, PortInstance pi1, PortInstance pi2) {
+	private void createBindingInstance(StructureInstance si, PortInstance pi1, PortInstance pi2, Binding bind) {
 		BindingInstance bi = ETriceGenFactory.eINSTANCE.createBindingInstance();
 		
 		bi.getPorts().add(pi1);
 		bi.getPorts().add(pi2);
+		bi.setBinding(bind);
 		
 		si.getBindings().add(bi);
 	}
@@ -666,14 +668,16 @@ public class GeneratorModelBuilder {
 	private void addNeededInstance(String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
 		ArrayList<PortInstance> ports = ep2portInstances.get(key);
 
-		Port port = ports.get(0).getPort();
-		if (port.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN || port.getMultiplicity() < 0) {
+		PortInstance pi = ports.get(0);
+		Port port = pi.getPort();
+		boolean implicitMany = pi.getProtocol()==null || pi.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN; 
+		if (implicitMany || port.getMultiplicity() < 0) {
 			if (!multAny.contains(key)) {
 				// we just register
 				multAny.add(key);
 			} else {
 				// we add another copy of this instance
-				ports.add(ports.get(0));
+				ports.add(pi);
 			}
 		}
 	}
@@ -813,7 +817,7 @@ public class GeneratorModelBuilder {
 			if (obj instanceof ActorInstance) {
 				for (PortInstance pi : ((ActorInstance) obj).getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY) {
-						List<PortInstance> peers = getFinalPeers(pi, null);
+						List<PortInstance> peers = getFinalPeers(pi, null, null);
 						pi.getPeers().addAll(peers);
 						// we don't have to add pi to its peer.peers since we do that once we reach there
 					}
@@ -842,7 +846,7 @@ public class GeneratorModelBuilder {
 	 * @param from - the binding from which we reached pi or null if start
 	 * @return a list of final peer port instances (end ports themselves)
 	 */
-	private List<PortInstance> getFinalPeers(PortInstance pi, BindingInstance from) {
+	private List<PortInstance> getFinalPeers(PortInstance pi, BindingInstance from, SubProtocol fromSub) {
 		List<PortInstance> peers = new LinkedList<PortInstance>();
 		
 		for (BindingInstance bi : pi.getBindings()) {
@@ -855,15 +859,35 @@ public class GeneratorModelBuilder {
 				// by this we make sure that we go from inside to outside or vice versa
 				continue;
 			
+			SubProtocol mySub = getMySubProtocol(pi, bi);
+			if (mySub!=null && fromSub!=null && fromSub!=mySub)
+				// we follow only same sub protocols
+				continue;
+			
 			PortInstance end = (bi.getPorts().get(0)!=pi)? bi.getPorts().get(0) : bi.getPorts().get(1);
-			if (end.getKind()==PortKind.RELAY)
+			if (end.getKind()==PortKind.RELAY) {
+				SubProtocol peerSub = getPeerSubProtocol(pi, bi);
+				if (peerSub!=null)
+					fromSub = peerSub;
+				
 				// continue recursion
-				peers.addAll(getFinalPeers(end, bi));
-			else
+				peers.addAll(getFinalPeers(end, bi, fromSub));
+			}
+			else {
+				
 				// this is a final peer
 				peers.add(end);
+			}
 		}
 		return peers;
+	}
+
+	private SubProtocol getMySubProtocol(PortInstance pi, BindingInstance bi) {
+		return (bi.getPorts().get(0)==pi)? bi.getBinding().getEndpoint1().getSub() : bi.getBinding().getEndpoint2().getSub();
+	}
+
+	private SubProtocol getPeerSubProtocol(PortInstance pi, BindingInstance bi) {
+		return (bi.getPorts().get(0)!=pi)? bi.getBinding().getEndpoint1().getSub() : bi.getBinding().getEndpoint2().getSub();
 	}
 	
 	private void connectPeersOneToOne(PortInstance pi) {
@@ -962,8 +986,8 @@ public class GeneratorModelBuilder {
 				ActorInstance ai = (ActorInstance) obj;
 				ActorClass ac = ai.getActorClass();
 				for (PortInstance pi : ai.getPorts()) {
-					if (pi.getPort().getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
-						if (pi.getKind()!=PortKind.RELAY) {
+					if (pi.getKind()!=PortKind.RELAY) {
+						if (pi.getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
 							if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
 								EStructuralFeature feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();
 								int idx = ac.getIfPorts().indexOf(pi.getPort());

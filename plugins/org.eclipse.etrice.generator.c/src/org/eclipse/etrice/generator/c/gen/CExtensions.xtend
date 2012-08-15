@@ -36,7 +36,7 @@ class CExtensions implements ILanguageExtension {
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m)
+		return chainGenerator.generateTypedData(m.data)
 	}
 
 	// in C no access levels can be defined
@@ -146,5 +146,11 @@ class CExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
+	override String toCharArrayExpr(String s){
+		"\"" + s + "\"";
+	}
 	
+	override String superCall(String baseClassName, String method, String args) {
+		""
+	}
 }

@@ -8,6 +8,7 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
+import org.eclipse.etrice.core.room.Binding;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +35,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.BindingInstanceImpl#getPorts <em>Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.BindingInstanceImpl#getBinding <em>Binding</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +51,16 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 	 * @ordered
 	 */
 	protected EList<PortInstance> ports;
+
+	/**
+	 * The cached value of the '{@link #getBinding() <em>Binding</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected Binding binding;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,6 +91,44 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 			ports = new EObjectWithInverseResolvingEList.ManyInverse<PortInstance>(PortInstance.class, this, ETriceGenPackage.BINDING_INSTANCE__PORTS, ETriceGenPackage.PORT_INSTANCE__BINDINGS);
 		}
 		return ports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Binding getBinding() {
+		if (binding != null && binding.eIsProxy()) {
+			InternalEObject oldBinding = (InternalEObject)binding;
+			binding = (Binding)eResolveProxy(oldBinding);
+			if (binding != oldBinding) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.BINDING_INSTANCE__BINDING, oldBinding, binding));
+			}
+		}
+		return binding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Binding basicGetBinding() {
+		return binding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBinding(Binding newBinding) {
+		Binding oldBinding = binding;
+		binding = newBinding;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.BINDING_INSTANCE__BINDING, oldBinding, binding));
 	}
 
 	/**
@@ -118,6 +170,9 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 		switch (featureID) {
 			case ETriceGenPackage.BINDING_INSTANCE__PORTS:
 				return getPorts();
+			case ETriceGenPackage.BINDING_INSTANCE__BINDING:
+				if (resolve) return getBinding();
+				return basicGetBinding();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,6 +190,9 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 				getPorts().clear();
 				getPorts().addAll((Collection<? extends PortInstance>)newValue);
 				return;
+			case ETriceGenPackage.BINDING_INSTANCE__BINDING:
+				setBinding((Binding)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -150,6 +208,9 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 			case ETriceGenPackage.BINDING_INSTANCE__PORTS:
 				getPorts().clear();
 				return;
+			case ETriceGenPackage.BINDING_INSTANCE__BINDING:
+				setBinding((Binding)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -164,6 +225,8 @@ public class BindingInstanceImpl extends EObjectImpl implements BindingInstance 
 		switch (featureID) {
 			case ETriceGenPackage.BINDING_INSTANCE__PORTS:
 				return ports != null && !ports.isEmpty();
+			case ETriceGenPackage.BINDING_INSTANCE__BINDING:
+				return binding != null;
 		}
 		return super.eIsSet(featureID);
 	}

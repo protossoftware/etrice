@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.ConfigHelper;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -27,6 +28,7 @@ import com.google.inject.Inject;
 public class Main extends AbstractGenerator {
 	
 	public static final String OPTION_LIB = "-lib";
+	public static final String OPTION_NOEXIT = "-noexit";
 	public static final String OPTION_GEN_INST_DIAG = "-genInstDiag";
 	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
 	
@@ -40,6 +42,7 @@ public class Main extends AbstractGenerator {
 		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
 		output.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
 		output.println("      -lib                              # if specified all classes are generated and no instances");
+		output.println("      -noexit                           # if specified the JVM is not exited");
 	}
 
 	public static void main(String[] args) {
@@ -82,12 +85,16 @@ public class Main extends AbstractGenerator {
 			else if (args[i].equals(OPTION_LIB)) {
 				asLibrary = true;
 			}
+			else if (args[i].equals(OPTION_NOEXIT)) {
+				setTerminateOnError(false);
+			}
 			else {
 				uriList.add(args[i]);
 			}
 		}
 
 		setupRoomModel();
+		setupConfigModel();
 
 		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary))
 			return GENERATOR_ERROR;
@@ -101,6 +108,9 @@ public class Main extends AbstractGenerator {
 		loadModels(uriList, rs);
 
 		if (!validateModels(rs))
+			return false;
+			
+		if(!ConfigHelper.setConfigModels(rs, logger))
 			return false;
 
 		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);

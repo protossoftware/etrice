@@ -4,6 +4,7 @@
         <cs:public name="generate" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="generate.xml"/>
+                <cs:property key="target.platform" value="${WORKSPACE}/buildroot/target.platform"/>
                 <cs:property key="targets" value="generate"/>
             </cs:actorProperties>
         </cs:public>
