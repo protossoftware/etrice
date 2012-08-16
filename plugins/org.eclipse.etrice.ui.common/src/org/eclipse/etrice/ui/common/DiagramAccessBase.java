@@ -19,7 +19,6 @@ import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.URI;
@@ -31,6 +30,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -197,12 +197,8 @@ public abstract class DiagramAccessBase {
 			platformString = uri.toPlatformString(true);
 		}
 		else {
-			Path path = new Path(uri.toFileString());
-			IPath base = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-			if (base.isPrefixOf(path)) {
-				IPath relative = path.makeRelativeTo(base);
-				platformString = relative.toString();
-			}
+			uri = GlobalNonPlatformURIEditorOpener.getPlatformURI(uri);
+			platformString = uri.toPlatformString(true);
 		}
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
 		IFileEditorInput input = new FileEditorInput(file);
