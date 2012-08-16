@@ -90,14 +90,7 @@ public class SemanticsCheck {
 					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
 				}
 				List<HandledMessage> wrongMsgList = localRules.consumeMessages(msgList);
-				if(mapToWarnings.containsKey(trans))
-				{
-					mapToWarnings.get(trans).addAll(wrongMsgList);
-				}
-				else
-				{
-					mapToWarnings.put(trans, wrongMsgList);
-				}
+				addToWarning(trans, wrongMsgList);
 				boolean rulesChanged = false;
 				if (mapToRules.containsKey(cur)) {
 					rulesChanged = mapToRules.get(cur).merge(localRules);
@@ -164,15 +157,9 @@ public class SemanticsCheck {
 							printRules();
 						}
 						List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
+						addToWarning(node, wrongMsgList);
 						if(mapToWarnings.containsKey(node))
-						{
-							mapToWarnings.get(node).addAll(wrongMsgList);
-						}
-						else
-						{
-							mapToWarnings.put(node, wrongMsgList);
-						}
-						
+									
 						if (traceChecks && traceLevel>=TRACE_DETAILS)
 							System.out.println("  Messages consumed");
 						
@@ -205,19 +192,20 @@ public class SemanticsCheck {
 					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}
 				List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
-				if(mapToWarnings.containsKey(node))
-				{
-					mapToWarnings.get(node).addAll(wrongMsgList);
-				}
-				else
-				{
-					mapToWarnings.put(node, wrongMsgList);
-				}
+				addToWarning(node, wrongMsgList);
 				addAndMergeRules(target, tempRule);
 			}
 		}
 	}
 
+	private void addToWarning(StateGraphItem item,
+			List<HandledMessage> wrongMsgList) {
+		if (mapToWarnings.containsKey(item)) {
+			mapToWarnings.get(item).addAll(wrongMsgList);
+		} else {
+			mapToWarnings.put(item, wrongMsgList);
+		}
+	}
 	private void addAndMergeRules(StateGraphNode target, ActiveRules tempRule) {
 		boolean rulesChanged = false;
 		if (mapToRules.containsKey(target)) {

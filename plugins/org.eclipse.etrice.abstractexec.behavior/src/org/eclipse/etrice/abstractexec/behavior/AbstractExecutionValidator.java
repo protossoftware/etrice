@@ -26,9 +26,12 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.IRoomValidator;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -132,43 +135,46 @@ public class AbstractExecutionValidator implements IRoomValidator {
 						StateGraphItem item = (StateGraphItem) obj;
 						List<HandledMessage> warningList = checker
 								.getWarningMsg(item);
-						if (traceExec) {
-							System.out
-									.println("Messages in the warning list for item "
-											+ item.getName() );
-							if(warningList != null)
-								for (HandledMessage msg : warningList) {
-									System.out.println(msg.getMsg().getName());
-								}
+						if (traceExec && warningList != null) {
+							System.out.println("Messages in the warning list for item "+ item.getName() );
 						}
-						/*
-						 * for(HandledMessage msg : warningList) { EObject
-						 * origin = msg.getOrigin(); if(origin instanceof
-						 * ActiveTrigger) { ActiveTrigger trigger =
-						 * (ActiveTrigger) origin; //TODO : issue a warning
-						 * marker EObject orig = xpac.getOrig(trigger); EObject
-						 * container = orig.eContainer();
-						 * 
-						 * @SuppressWarnings("unchecked") int idx = ((List<?
-						 * extends
-						 * EObject>)container.eGet(orig.eContainingFeature
-						 * ())).indexOf(orig); messageAcceptor.acceptWarning(
-						 * "The message violates the semantic rule", container,
-						 * orig.eContainingFeature(), idx, "VIOLATION",
-						 * trigger.getMsg().getName()); } else if (origin
-						 * instanceof DetailCode) { DetailCode dc = (DetailCode)
-						 * origin; EObject orig = xpac.getOrig(dc); EObject
-						 * container = orig.eContainer();
-						 * 
-						 * @SuppressWarnings("unchecked") int idx = ((List<?
-						 * extends
-						 * EObject>)container.eGet(orig.eContainingFeature
-						 * ())).indexOf(orig); messageAcceptor.acceptWarning(
-						 * "The message violates the semantic rule", container,
-						 * orig.eContainingFeature(), idx, "VIOLATION" );
-						 * 
-						 * } }
-						 */
+						if (warningList!=null)
+							for (HandledMessage msg : warningList) {
+								EObject origin = msg.getOrigin();
+								if (origin instanceof ActiveTrigger) {
+									ActiveTrigger trigger = (ActiveTrigger) origin;
+									for (TriggeredTransition trans : trigger.getTransitions()) {
+										// have to translate back the transition to our original model
+										TriggeredTransition orig = (TriggeredTransition) xpac.getOrig(trans);
+										for (Trigger trig : orig.getTriggers()) {
+											for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
+												// messages haven't been copied, so all point to the same objects and we can just compare pointers
+												if (mif.getMessage()==msg.getMsg() && mif.getFrom()==msg.getIfitem()) {
+													messageAcceptor
+													.acceptWarning(
+															"The message violates the semantic rule",
+															trig, mif.eContainingFeature(),
+															trig.getMsgFromIfPairs().indexOf(trig), "VIOLATION", trigger.getMsg().getName());
+												}
+											}
+										}
+									}
+								} else if (origin instanceof DetailCode) {
+									DetailCode dc = (DetailCode) origin;
+									EObject orig = xpac.getOrig(dc);
+									messageAcceptor
+											.acceptWarning(
+													"The message violates the semantic rule",
+													orig.eContainer(),
+													orig.eContainingFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+													"VIOLATION");
+
+								}
+							}
+
+						
+						 
+						 
 					}
 				}
 				if (traceExec)

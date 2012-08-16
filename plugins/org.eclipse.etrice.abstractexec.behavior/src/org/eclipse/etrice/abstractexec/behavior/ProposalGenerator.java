@@ -71,7 +71,7 @@ public class ProposalGenerator {
 		incomingProposal.clear();
 
 		Set<SemanticsRule> rulesToIgnore = new HashSet<SemanticsRule>();
-		if (xpac.getActiveTriggers(st) != null)
+		
 			for (ActiveTrigger trigger : xpac.getActiveTriggers(st)) {
 				SemanticsRule match = null;
 				Port port = (Port) trigger.getIfitem();
@@ -88,10 +88,7 @@ public class ProposalGenerator {
 					// mark this rule for ignoring while generating proposals
 					// as they have already been taken care of
 					rulesToIgnore.add(match);
-				} else {
-					// according to the rules this trigger isn't necessary
-					warningTrigger.add(trigger);
-				}
+				} 
 			}
 
 		// now start generating proposals by listing all the rules and ignoring
