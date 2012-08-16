@@ -16,9 +16,17 @@ import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
+import org.eclipse.etrice.ui.structure.support.DecorationProvider;
 import org.eclipse.etrice.ui.structure.support.LayerConnectionSupport;
 import org.eclipse.etrice.ui.structure.support.PortSupport;
 import org.eclipse.etrice.ui.structure.support.SPPSupport;
@@ -54,19 +62,12 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.ISelectionInfo;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.SelectionInfoImpl;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.util.RoomSwitch;
 
 public class ProviderDispatcher {
 
@@ -331,6 +332,11 @@ public class ProviderDispatcher {
 
 		public DispatchingToolBehaviorProvider(IDiagramTypeProvider diagramTypeProvider) {
 			super(diagramTypeProvider);
+		}
+
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			return DecorationProvider.getDecorators(pe);
 		}
 
 		@Override
