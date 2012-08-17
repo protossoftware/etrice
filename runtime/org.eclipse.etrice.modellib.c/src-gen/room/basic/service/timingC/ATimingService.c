@@ -15,7 +15,7 @@
 #include "PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
-	//etTimerControlBlock tcbs[ET_NB_OF_TCBS];
+//etTimerControlBlock tcbs[ET_NB_OF_TCBS];
 /*--------------------- end user code ---------------------*/
 
 /* interface item IDs */
@@ -62,11 +62,11 @@ static  void do_Operational(ATimingService* self) {
 	etTargetTime_t t;
 	
 	getTimeFromTarget(&t);
-	while (self->usedTcbsRoot !=0 ){
-		if (ATimingService_isTimeGreater(self, &t, &(self->usedTcbsRoot->expTime)) /* ORIG: isTimeGreater(&t,&(usedTcbsRoot->expTime)) */){
-			PTimerReplPort_timeout(&self->constData->timer, self->usedTcbsRoot->portIdx);
-			temp=self->usedTcbsRoot;
-			self->usedTcbsRoot=self->usedTcbsRoot->next;
+	while (self->usedTcbsRoot /* ORIG: usedTcbsRoot */ !=0 ){
+		if (ATimingService_isTimeGreater(self, &t, &(self->usedTcbsRoot /* ORIG: usedTcbsRoot */->expTime)) /* ORIG: isTimeGreater(&t,&(usedTcbsRoot->expTime)) */){
+			PTimerReplPort_timeout(&self->constData->timer, self->usedTcbsRoot /* ORIG: usedTcbsRoot */->portIdx) /* ORIG: timer[usedTcbsRoot->portIdx].timeout() */;
+			temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+			self->usedTcbsRoot /* ORIG: usedTcbsRoot */=self->usedTcbsRoot /* ORIG: usedTcbsRoot */->next;
 			if((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){
 				// single shot timer
 				ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
@@ -84,11 +84,11 @@ static  void do_Operational(ATimingService* self) {
 /* Action Codes */
 static void action_TRANS_INITIAL_TO__Operational(ATimingService* self) {
 	int i;
-	self->usedTcbsRoot=0;
-	self->freeTcbsRoot=&self->tcbs[0];
-	self->tcbs[ET_NB_OF_TCBS-1].next=0;
+	self->usedTcbsRoot /* ORIG: usedTcbsRoot */=0;
+	self->freeTcbsRoot /* ORIG: freeTcbsRoot */=&self->tcbs[0] /* ORIG: tcbs[0] */;
+	self->tcbs[ET_NB_OF_TCBS-1] /* ORIG: tcbs[ET_NB_OF_TCBS-1] */.next=0;
 	for (i=0;i<ET_NB_OF_TCBS-1;i++){
-		self->tcbs[i].next=&self->tcbs[i+1];
+		self->tcbs[i] /* ORIG: tcbs[i] */.next=&self->tcbs[i+1] /* ORIG: tcbs[i+1] */;
 		}
 }
 static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ATimingService* self, InterfaceItemBase ifitem, uint32 time) {
@@ -285,29 +285,29 @@ void ATimingService_execute(ATimingService* self) {
 /*--------------------- operations ---------------------*/
 etTimerControlBlock* ATimingService_getTcb(ATimingService* self) {
 	
-				etTimerControlBlock* temp = self->freeTcbsRoot;
+				etTimerControlBlock* temp = self->freeTcbsRoot /* ORIG: freeTcbsRoot */;
 				
-				if(self->freeTcbsRoot!=0) {
-					self->freeTcbsRoot=self->freeTcbsRoot->next;
+				if(self->freeTcbsRoot /* ORIG: freeTcbsRoot */!=0) {
+					self->freeTcbsRoot /* ORIG: freeTcbsRoot */=self->freeTcbsRoot /* ORIG: freeTcbsRoot */->next;
 					temp->next=0;
 					}
 				return temp;
 }
 void ATimingService_returnTcb(ATimingService* self, etTimerControlBlock* block) {
 	
-				block->next=self->freeTcbsRoot;
-				self->freeTcbsRoot=block;
+				block->next=self->freeTcbsRoot /* ORIG: freeTcbsRoot */;
+				self->freeTcbsRoot /* ORIG: freeTcbsRoot */=block;
 }
 void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot;
-				etTimerControlBlock* temp2=self->usedTcbsRoot;
+				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+				etTimerControlBlock* temp2=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
 				
 				if (temp==0) return;
 	
-				if (self->usedTcbsRoot->portIdx == idx){
+				if (self->usedTcbsRoot /* ORIG: usedTcbsRoot */->portIdx == idx){
 					// element found, the first one
-					self->usedTcbsRoot = self->usedTcbsRoot->next;
+					self->usedTcbsRoot /* ORIG: usedTcbsRoot */ = self->usedTcbsRoot /* ORIG: usedTcbsRoot */->next;
 					ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
 					return;
 					}
@@ -327,13 +327,13 @@ void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 }
 void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* block) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot;
-				etTimerControlBlock* temp2=self->usedTcbsRoot;
+				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+				etTimerControlBlock* temp2=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
 	
 				if (temp==0){
 					// list empty put new block to root
 					block->next=0;
-					self->usedTcbsRoot=block;
+					self->usedTcbsRoot /* ORIG: usedTcbsRoot */=block;
 					return;
 					}
 				
@@ -346,8 +346,8 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 							}else{
 							// right position found
 							block->next=temp;
-							if(temp==self->usedTcbsRoot){
-								self->usedTcbsRoot=block;
+							if(temp==self->usedTcbsRoot /* ORIG: usedTcbsRoot */){
+								self->usedTcbsRoot /* ORIG: usedTcbsRoot */=block;
 								}else{
 								temp2->next=block;
 								}
@@ -379,7 +379,7 @@ void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTi
 }
 void ATimingService_printList(ATimingService* self) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot;
+				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
 					printf("list: ");
 					while (temp!=0){
 						printf("(%d,%d),",temp->expTime.sec,temp->expTime.nSec);

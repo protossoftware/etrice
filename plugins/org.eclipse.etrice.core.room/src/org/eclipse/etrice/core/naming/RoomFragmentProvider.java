@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -147,6 +148,15 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			
 			// going up two steps in the containment hierarchy either hits a state or a RoomClass
 			return doSwitch(t.eContainer().eContainer())+SEP+t.getName();
+		}
+		
+		@Override
+		public String caseRefinedTransition(RefinedTransition t) {
+			// the transition name is optional in the ROOM DSL but will be automatically assigned
+			// by the Behavior Editor
+			
+			// going up two steps in the containment hierarchy either hits a state or a RoomClass
+			return doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
 		}
 		
 		@Override
@@ -373,6 +383,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			else if (type.equals(RoomPackage.eINSTANCE.getInitialTransition().getName())) {
 				return getInitialTransition(rc, remainder);
 			}
+			else if (type.equals(RoomPackage.eINSTANCE.getRefinedTransition().getName())) {
+				return getRefinedTransition(rc, remainder);
+			}
 			else if (type.equals(RoomPackage.eINSTANCE.getContinuationTransition().getName())
 					|| type.equals(RoomPackage.eINSTANCE.getCPBranchTransition().getName())
 					|| type.equals(RoomPackage.eINSTANCE.getTriggeredTransition().getName())
@@ -422,6 +435,24 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				if (t instanceof InitialTransition)
 					return (InitialTransition) t;
 			}
+		}
+		
+		return null;
+	}
+
+	private RefinedTransition getRefinedTransition(RoomClass rc, String remainder) {
+		StateGraph sg = getStateGraph(rc, remainder);
+		
+		int begin = remainder.lastIndexOf(SEP);
+		if (begin<0)
+			begin = 0;
+		else
+			++begin;
+		
+		String name = remainder.substring(begin, remainder.length());
+		for (RefinedTransition t : sg.getRefinedTransitions()) {
+			if (t.getTarget().getName().equals(name))
+				return t;
 		}
 		
 		return null;

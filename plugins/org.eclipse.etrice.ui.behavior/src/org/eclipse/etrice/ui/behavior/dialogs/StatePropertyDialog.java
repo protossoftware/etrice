@@ -42,8 +42,8 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 	private State state;
 	private boolean inherited;
 
-	public StatePropertyDialog(Shell shell, ActorClass ac, State s) {
-		super(shell, "Edit State", ac);
+	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
+		super(shell, edit?"Edit State":"View State", ac);
 		this.state = s;
 		
 		inherited = RoomHelpers.getActorClass(s)!=ac;

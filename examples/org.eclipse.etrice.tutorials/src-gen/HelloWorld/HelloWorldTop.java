@@ -16,13 +16,15 @@ public class HelloWorldTop extends ActorClassBase {
 
 	
 	//--------------------- ports
+	
 	//--------------------- saps
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public HelloWorldTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -32,10 +34,14 @@ public class HelloWorldTop extends ActorClassBase {
 		// initialize attributes
 
 		// own ports
+		
 		// own saps
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -51,8 +57,7 @@ public class HelloWorldTop extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -62,6 +67,7 @@ public class HelloWorldTop extends ActorClassBase {
 	public static final int CHAIN_TRANS_INITIAL_TO__state0 = 1;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","state0"
@@ -78,9 +84,9 @@ public class HelloWorldTop extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__state0() {
 		System.out.println("HelloWorld !");
 	}

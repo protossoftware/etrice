@@ -20,16 +20,18 @@ public class BlinkyController extends ActorClassBase {
 	
 	//--------------------- ports
 	protected BlinkyControlProtocollConjPort ControlPort = null;
+	
 	//--------------------- saps
 	protected PTimeoutConjPort timer = null;
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_timer = 2;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
 	public BlinkyController(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -40,11 +42,21 @@ public class BlinkyController extends ActorClassBase {
 
 		// own ports
 		ControlPort = new BlinkyControlProtocollConjPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		
 		// own saps
 		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public BlinkyControlProtocollConjPort getControlPort (){
+		return this.ControlPort;
+	}
+	public PTimeoutConjPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -60,8 +72,7 @@ public class BlinkyController extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
@@ -70,10 +81,11 @@ public class BlinkyController extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__on = 1;
-	public static final int CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer = 2;
-	public static final int CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer = 3;
+	public static final int CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer = 2;
+	public static final int CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer = 3;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
 	
 	// state names
@@ -92,18 +104,18 @@ public class BlinkyController extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__on() {
 		timer.Start(5000);
 		ControlPort.start();
 	}
-	protected void action_TRANS_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		ControlPort.stop();
 		timer.Start(5000);
 	}
-	protected void action_TRANS_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
 		ControlPort.start();
 		timer.Start(5000);
 	}
@@ -144,14 +156,14 @@ public class BlinkyController extends ActorClassBase {
 				action_TRANS_INITIAL_TO__on();
 				return STATE_on;
 			}
-			case CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer:
+			case CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer:
 			{
-				action_TRANS_on_TO_off_BY_timeoutTicktimer(ifitem);
+				action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(ifitem);
 				return STATE_off;
 			}
-			case CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer:
+			case CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer:
 			{
-				action_TRANS_off_TO_on_BY_timeoutTicktimer(ifitem);
+				action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(ifitem);
 				return STATE_on;
 			}
 		}
@@ -201,22 +213,22 @@ public class BlinkyController extends ActorClassBase {
 			switch (this.state) {
 				case STATE_on:
 					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_TRANS_on_TO_off_BY_timeoutTicktimer;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__timeoutTick:
+							{
+								chain = CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_off:
 					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_TRANS_off_TO_on_BY_timeoutTicktimer;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__timeoutTick:
+							{
+								chain = CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

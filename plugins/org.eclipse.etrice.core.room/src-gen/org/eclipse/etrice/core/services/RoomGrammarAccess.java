@@ -7,6 +7,8 @@ package org.eclipse.etrice.core.services;
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
@@ -46,14 +48,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//RoomModel:
+		//
 		//	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
+		//
 		//	externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
+		//
 		//	actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
-		//externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass
-		//| subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}"
+		//
+		//externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
+		//
+		//actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"RoomModel"
@@ -81,7 +88,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getImportsImportParserRuleCall_4_0() { return cImportsImportParserRuleCall_4_0; }
 
 		//(primitiveTypes+=PrimitiveType | externalTypes+=ExternalType | dataClasses+=DataClass |
+		//
 		//protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
+		//
 		//systems+=LogicalSystem)*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
@@ -139,6 +148,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStructureClassParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//RoomClass:
+		//
 		//	DataType | GeneralProtocolClass | StructureClass;
 		public ParserRule getRule() { return rule; }
 
@@ -162,6 +172,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLogicalSystemParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//StructureClass:
+		//
 		//	ActorContainerClass | LogicalSystem;
 		public ParserRule getRule() { return rule; }
 
@@ -182,6 +193,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubSystemClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ActorContainerClass:
+		//
 		//	ActorClass | SubSystemClass;
 		public ParserRule getRule() { return rule; }
 
@@ -209,6 +221,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// data class
 		//
 		//VarDecl:
+		//
 		//	name=ID ":" refType=RefableType;
 		public ParserRule getRule() { return rule; }
 
@@ -241,6 +254,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRefRefKeyword_1_0 = (Keyword)cRefAssignment_1.eContents().get(0);
 		
 		//RefableType:
+		//
 		//	type=[DataType|FQN] ref?="ref"?;
 		public ParserRule getRule() { return rule; }
 
@@ -270,6 +284,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cComplexTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//DataType:
+		//
 		//	PrimitiveType | ComplexType;
 		public ParserRule getRule() { return rule; }
 
@@ -290,6 +305,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExternalTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ComplexType:
+		//
 		//	DataClass | ExternalType;
 		public ParserRule getRule() { return rule; }
 
@@ -327,11 +343,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_9_0 = (RuleCall)cDocuAssignment_9.eContents().get(0);
 		
 		//PrimitiveType:
+		//
 		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//
 		//	defaultValueLiteral=STRING docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
 		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//
 		//defaultValueLiteral=STRING docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
@@ -406,6 +425,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//ExternalType:
+		//
 		//	"ExternalType" name=ID "->" targetName=FQN docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -474,13 +494,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// TODOHRR: define detail level language?
 		//
 		//DataClass:
+		//
 		//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+		//
 		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+		//
 		//	operations+=StandardOperation* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+		//
 		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+		//
 		//operations+=StandardOperation* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -597,7 +622,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Attribute:
-		//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
+		//
+		//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)?
+		//
+		//	docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
 		//"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?
@@ -662,6 +690,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPortOperationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Operation:
+		//
 		//	StandardOperation | PortOperation;
 		public ParserRule getRule() { return rule; }
 
@@ -704,11 +733,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_8_0 = (RuleCall)cDetailCodeAssignment_8.eContents().get(0);
 		
 		//StandardOperation:
+		//
 		//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//
 		//	returntype=RefableType))? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
 		//"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//
 		//returntype=RefableType))? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
@@ -818,11 +850,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_7_0 = (RuleCall)cDetailCodeAssignment_7.eContents().get(0);
 		
 		//PortOperation:
+		//
 		//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+		//
 		//	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
 		//"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+		//
 		//"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
@@ -918,6 +953,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCompoundProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//GeneralProtocolClass:
+		//
 		//	ProtocolClass | CompoundProtocolClass;
 		public ParserRule getRule() { return rule; }
 
@@ -988,17 +1024,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
 		
 		//ProtocolClass:
+		//
 		//	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+		//
 		//	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+		//
 		//	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+		//
 		//	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugate" "PortClass" conjugate=PortClass)?
+		//
 		//	semantics=ProtocolSemantics? "}";
 		public ParserRule getRule() { return rule; }
 
 		//commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+		//
 		//annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+		//
 		//userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+		//
 		//"}")? ("regular" "PortClass" regular=PortClass)? ("conjugate" "PortClass" conjugate=PortClass)?
+		//
 		//semantics=ProtocolSemantics? "}"
 		public Group getGroup() { return cGroup; }
 
@@ -1175,6 +1220,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//CompoundProtocolClass:
+		//
 		//	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol+ "}";
 		public ParserRule getRule() { return rule; }
 
@@ -1227,6 +1273,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolGeneralProtocolClassCrossReference_3_0.eContents().get(1);
 		
 		//SubProtocol:
+		//
 		//	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
@@ -1271,6 +1318,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Message:
+		//
 		//	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -1329,11 +1377,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//PortClass:
+		//
 		//	"{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
+		//
 		//	msgHandlers+=MessageHandler)+ "}";
 		public ParserRule getRule() { return rule; }
 
 		//"{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation | msgHandlers+=MessageHandler)+
+		//
 		//"}"
 		public Group getGroup() { return cGroup; }
 
@@ -1384,6 +1435,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOutMessageHandlerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//MessageHandler:
+		//
 		//	InMessageHandler | OutMessageHandler;
 		public ParserRule getRule() { return rule; }
 
@@ -1409,6 +1461,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
 		
 		//InMessageHandler:
+		//
 		//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
@@ -1449,6 +1502,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
 		
 		//OutMessageHandler:
+		//
 		//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
@@ -1488,6 +1542,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ProtocolSemantics:
+		//
 		//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -1520,6 +1575,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOutSemanticsRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SemanticsRule:
+		//
 		//	InSemanticsRule | OutSemanticsRule;
 		public ParserRule getRule() { return rule; }
 
@@ -1557,11 +1613,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
 		
 		//InSemanticsRule:
+		//
 		//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//
 		//	")"))?;
 		public ParserRule getRule() { return rule; }
 
 		//"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//
 		//")"))?
 		public Group getGroup() { return cGroup; }
 
@@ -1647,11 +1706,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
 		
 		//OutSemanticsRule:
-		//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-		//	")"))?;
+		//
+		//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+		//
+		//	followUps+=SemanticsRule)+ ")"))?;
 		public ParserRule getRule() { return rule; }
 
 		//"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+		//
 		//")"))?
 		public Group getGroup() { return cGroup; }
 
@@ -1806,22 +1868,35 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// since double containment is not supported we decided to define external ports as reference to interface ports
 		//
 		//ActorClass:
+		//
 		//	(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+		//
 		//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
+		//
 		//	("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+		//
 		//	("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+		//
 		//	serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+		//
 		//	bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
+		//
 		//	behaviorAnnotations+=Annotation* operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
 		public ParserRule getRule() { return rule; }
 
 		//(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-		//base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")? ("Structure"
-		//structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
-		//userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)* serviceImplementations+=ServiceImplementation*
-		//strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* "}")?
-		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-		//stateMachine=StateMachine? "}")? "}"
+		//
+		//base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
+		//
+		//("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+		//
+		//("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+		//
+		//serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+		//
+		//bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
+		//
+		//behaviorAnnotations+=Annotation* operations+=StandardOperation* stateMachine=StateMachine? "}")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"? & commType=ActorCommunicationType?
@@ -1903,8 +1978,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_7_4() { return cRightCurlyBracketKeyword_7_4; }
 
 		//("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+		//
 		//("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+		//
 		//serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+		//
 		//bindings+=Binding* connections+=LayerConnection* "}")?
 		public Group getGroup_8() { return cGroup_8; }
 
@@ -2011,6 +2089,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_8_13() { return cRightCurlyBracketKeyword_8_13; }
 
 		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
+		//
 		//stateMachine=StateMachine? "}")?
 		public Group getGroup_9() { return cGroup_9; }
 
@@ -2059,6 +2138,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSPPRefParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//InterfaceItem:
+		//
 		//	Port | SAPRef | SPPRef;
 		public ParserRule getRule() { return rule; }
 
@@ -2093,11 +2173,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//Port:
+		//
 		//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+		//
 		//	docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
 		//conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+		//
 		//docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
@@ -2151,6 +2234,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIfportPortIDTerminalRuleCall_2_0_1 = (RuleCall)cIfportPortCrossReference_2_0.eContents().get(1);
 		
 		//ExternalPort:
+		//
 		//	"external" "Port" ifport=[Port];
 		public ParserRule getRule() { return rule; }
 
@@ -2185,6 +2269,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
 		
 		//SAPRef:
+		//
 		//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
@@ -2225,6 +2310,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
 		
 		//SPPRef:
+		//
 		//	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
@@ -2263,6 +2349,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSppSPPRefIDTerminalRuleCall_2_0_1 = (RuleCall)cSppSPPRefCrossReference_2_0.eContents().get(1);
 		
 		//ServiceImplementation:
+		//
 		//	"ServiceImplementation" "of" spp=[SPPRef];
 		public ParserRule getRule() { return rule; }
 
@@ -2305,11 +2392,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//LogicalSystem:
+		//
 		//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* subSystems+=SubSystemRef* bindings+=Binding*
+		//
 		//	connections+=LayerConnection* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* subSystems+=SubSystemRef* bindings+=Binding*
+		//
 		//connections+=LayerConnection* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -2366,6 +2456,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActorRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ActorContainerRef:
+		//
 		//	SubSystemRef | ActorRef;
 		public ParserRule getRule() { return rule; }
 
@@ -2393,6 +2484,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//SubSystemRef:
+		//
 		//	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -2465,13 +2557,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
 		
 		//SubSystemClass:
+		//
 		//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+		//
 		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef*
+		//
 		//	actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* threads+=LogicalThread* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+		//
 		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef*
+		//
 		//actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* threads+=LogicalThread* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -2595,6 +2692,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//LogicalThread:
+		//
 		//	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -2658,6 +2756,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSegmentsIDTerminalRuleCall_1_1_0 = (RuleCall)cSegmentsAssignment_1_1.eContents().get(0);
 		
 		//ActorInstancePath:
+		//
 		//	segments+=ID ("." segments+=ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -2700,6 +2799,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// (2) use a notation with 1 to n bindings
 		//
 		//Binding:
+		//
 		//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 		public ParserRule getRule() { return rule; }
 
@@ -2743,6 +2843,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubSubProtocolIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSubSubProtocolCrossReference_2_1_0.eContents().get(1);
 		
 		//BindingEndPoint:
+		//
 		//	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
 		public ParserRule getRule() { return rule; }
 
@@ -2800,6 +2901,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cToSPPointParserRuleCall_3_0 = (RuleCall)cToAssignment_3.eContents().get(0);
 		
 		//LayerConnection:
+		//
 		//	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
 		public ParserRule getRule() { return rule; }
 
@@ -2832,6 +2934,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRelaySAPointParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SAPoint:
+		//
 		//	RefSAPoint | RelaySAPoint;
 		public ParserRule getRule() { return rule; }
 
@@ -2923,6 +3026,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cServiceSPPRefIDTerminalRuleCall_2_0_1 = (RuleCall)cServiceSPPRefCrossReference_2_0.eContents().get(1);
 		
 		//SPPoint:
+		//
 		//	ref=[ActorContainerRef] "." service=[SPPRef];
 		public ParserRule getRule() { return rule; }
 
@@ -2970,6 +3074,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
 		//ActorRef:
+		//
 		//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -3031,6 +3136,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// state machine
 		//
 		//StateGraphNode:
+		//
 		//	State | ChoicePoint | TrPoint;
 		public ParserRule getRule() { return rule; }
 
@@ -3054,6 +3160,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//StateGraphItem:
+		//
 		//	StateGraphNode | Transition;
 		public ParserRule getRule() { return rule; }
 
@@ -3074,6 +3181,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefinedStateParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//State:
+		//
 		//	SimpleState | RefinedState;
 		public ParserRule getRule() { return rule; }
 
@@ -3101,13 +3209,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChPointsChoicePointParserRuleCall_2_2_0 = (RuleCall)cChPointsAssignment_2_2.eContents().get(0);
 		private final Assignment cTransitionsAssignment_2_3 = (Assignment)cAlternatives_2.eContents().get(3);
 		private final RuleCall cTransitionsTransitionParserRuleCall_2_3_0 = (RuleCall)cTransitionsAssignment_2_3.eContents().get(0);
+		private final Assignment cRefinedTransitionsAssignment_2_4 = (Assignment)cAlternatives_2.eContents().get(4);
+		private final RuleCall cRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0 = (RuleCall)cRefinedTransitionsAssignment_2_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//StateGraph:
-		//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
+		//
+		//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//
+		//	refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}"
+		//{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//
+		//refinedTransitions+=RefinedTransition)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{StateGraph}
@@ -3116,7 +3231,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//
+		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//states+=State
@@ -3143,6 +3260,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_2_3_0() { return cTransitionsTransitionParserRuleCall_2_3_0; }
 
+		//refinedTransitions+=RefinedTransition
+		public Assignment getRefinedTransitionsAssignment_2_4() { return cRefinedTransitionsAssignment_2_4; }
+
+		//RefinedTransition
+		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0; }
+
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
@@ -3162,15 +3285,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChPointsChoicePointParserRuleCall_3_2_0 = (RuleCall)cChPointsAssignment_3_2.eContents().get(0);
 		private final Assignment cTransitionsAssignment_3_3 = (Assignment)cAlternatives_3.eContents().get(3);
 		private final RuleCall cTransitionsTransitionParserRuleCall_3_3_0 = (RuleCall)cTransitionsAssignment_3_3.eContents().get(0);
+		private final Assignment cRefinedTransitionsAssignment_3_4 = (Assignment)cAlternatives_3.eContents().get(4);
+		private final RuleCall cRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0 = (RuleCall)cRefinedTransitionsAssignment_3_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//StateMachine returns StateGraph:
-		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-		//	"}";
+		//
+		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
+		//
+		//	| refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-		//"}"
+		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//
+		//refinedTransitions+=RefinedTransition)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{StateGraph}
@@ -3182,7 +3310,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
+		//(states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//
+		//refinedTransitions+=RefinedTransition)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//states+=State
@@ -3208,6 +3338,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_3_0() { return cTransitionsTransitionParserRuleCall_3_3_0; }
+
+		//refinedTransitions+=RefinedTransition
+		public Assignment getRefinedTransitionsAssignment_3_4() { return cRefinedTransitionsAssignment_3_4; }
+
+		//RefinedTransition
+		public RuleCall getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0() { return cRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -3242,11 +3378,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_5 = (Keyword)cGroup_3.eContents().get(5);
 		
 		//SimpleState:
+		//
 		//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+		//
 		//	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+		//
 		//doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?
 		public Group getGroup() { return cGroup; }
 
@@ -3266,6 +3405,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
 		//("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph"
+		//
 		//subgraph=StateGraph)? "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
@@ -3353,11 +3493,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//RefinedState:
+		//
 		//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+		//
 		//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)?
+		//
 		//("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 		public Group getGroup() { return cGroup; }
 
@@ -3447,6 +3590,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// super() keyword or flag like in Trice
 		//
 		//DetailCode:
+		//
 		//	"{" commands+=STRING+ "}";
 		public ParserRule getRule() { return rule; }
 
@@ -3474,6 +3618,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExitPointParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//TrPoint:
+		//
 		//	TransitionPoint | EntryPoint | ExitPoint;
 		public ParserRule getRule() { return rule; }
 
@@ -3500,6 +3645,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//TransitionPoint:
+		//
 		//	handler?="handler"? "TransitionPoint" name=ID;
 		public ParserRule getRule() { return rule; }
 
@@ -3530,6 +3676,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//EntryPoint:
+		//
 		//	"EntryPoint" name=ID;
 		public ParserRule getRule() { return rule; }
 
@@ -3554,6 +3701,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//ExitPoint:
+		//
 		//	"ExitPoint" name=ID;
 		public ParserRule getRule() { return rule; }
 
@@ -3580,6 +3728,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
 		
 		//ChoicePoint:
+		//
 		//	"ChoicePoint" name=ID docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -3609,6 +3758,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNonInitialTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Transition:
+		//
 		//	InitialTransition | NonInitialTransition;
 		public ParserRule getRule() { return rule; }
 
@@ -3630,6 +3780,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCPBranchTransitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//NonInitialTransition:
+		//
 		//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 		public ParserRule getRule() { return rule; }
 
@@ -3653,6 +3804,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cGuardedTransitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//TransitionChainStartTransition:
+		//
 		//	TriggeredTransition | GuardedTransition;
 		public ParserRule getRule() { return rule; }
 
@@ -3687,7 +3839,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//InitialTransition:
+		//
 		//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
+		//
 		//	"}";
 		public ParserRule getRule() { return rule; }
 
@@ -3766,11 +3920,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7_2 = (Keyword)cGroup_7.eContents().get(2);
 		
 		//ContinuationTransition:
+		//
 		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
+		//
 		//	action=DetailCode)? "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
+		//
 		//action=DetailCode)? "}")?
 		public Group getGroup() { return cGroup; }
 
@@ -3860,11 +4017,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
 		
 		//TriggeredTransition:
+		//
 		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
+		//
 		//	triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
+		//
 		//triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}"
 		public Group getGroup() { return cGroup; }
 
@@ -3972,11 +4132,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//GuardedTransition:
+		//
 		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
+		//
 		//	guard=DetailCode ("action" action=DetailCode)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
+		//
 		//guard=DetailCode ("action" action=DetailCode)? "}"
 		public Group getGroup() { return cGroup; }
 
@@ -4066,11 +4229,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//CPBranchTransition:
+		//
 		//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
+		//
 		//	condition=DetailCode ("action" action=DetailCode)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
+		//
 		//condition=DetailCode ("action" action=DetailCode)? "}"
 		public Group getGroup() { return cGroup; }
 
@@ -4135,6 +4301,65 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
 	}
 
+	public class RefinedTransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefinedTransition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRefinedTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetTransitionCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetTransitionFQNParserRuleCall_1_0_1 = (RuleCall)cTargetTransitionCrossReference_1_0.eContents().get(1);
+		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cActionKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cActionDetailCodeParserRuleCall_5_0 = (RuleCall)cActionAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//// by validation RefinedTransition can only be contained in the top level state graph
+		//
+		//RefinedTransition:
+		//
+		//	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
+		public ParserRule getRule() { return rule; }
+
+		//"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}"
+		public Group getGroup() { return cGroup; }
+
+		//"RefinedTransition"
+		public Keyword getRefinedTransitionKeyword_0() { return cRefinedTransitionKeyword_0; }
+
+		//target=[Transition|FQN]
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
+
+		//[Transition|FQN]
+		public CrossReference getTargetTransitionCrossReference_1_0() { return cTargetTransitionCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getTargetTransitionFQNParserRuleCall_1_0_1() { return cTargetTransitionFQNParserRuleCall_1_0_1; }
+
+		//docu=Documentation?
+		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
+
+		//Documentation
+		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+
+		//"action"
+		public Keyword getActionKeyword_4() { return cActionKeyword_4; }
+
+		//action=DetailCode
+		public Assignment getActionAssignment_5() { return cActionAssignment_5; }
+
+		//DetailCode
+		public RuleCall getActionDetailCodeParserRuleCall_5_0() { return cActionDetailCodeParserRuleCall_5_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+
 	public class TransitionTerminalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionTerminal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -4144,6 +4369,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChoicepointTerminalParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//TransitionTerminal:
+		//
 		//	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 		public ParserRule getRule() { return rule; }
 
@@ -4170,6 +4396,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStateStateIDTerminalRuleCall_0_1 = (RuleCall)cStateStateCrossReference_0.eContents().get(1);
 		
 		//StateTerminal:
+		//
 		//	state=[State];
 		public ParserRule getRule() { return rule; }
 
@@ -4192,6 +4419,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTrPointTrPointIDTerminalRuleCall_1_0_1 = (RuleCall)cTrPointTrPointCrossReference_1_0.eContents().get(1);
 		
 		//TrPointTerminal:
+		//
 		//	"my" trPoint=[TrPoint];
 		public ParserRule getRule() { return rule; }
 
@@ -4223,6 +4451,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//SubStateTrPointTerminal:
+		//
 		//	trPoint=[TrPoint] "of" state=[State];
 		public ParserRule getRule() { return rule; }
 
@@ -4260,6 +4489,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCpChoicePointIDTerminalRuleCall_1_0_1 = (RuleCall)cCpChoicePointCrossReference_1_0.eContents().get(1);
 		
 		//ChoicepointTerminal:
+		//
 		//	"cp" cp=[ChoicePoint];
 		public ParserRule getRule() { return rule; }
 
@@ -4294,6 +4524,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Trigger:
+		//
 		//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 		public ParserRule getRule() { return rule; }
 
@@ -4343,6 +4574,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFromInterfaceItemIDTerminalRuleCall_2_0_1 = (RuleCall)cFromInterfaceItemCrossReference_2_0.eContents().get(1);
 		
 		//MessageFromIf:
+		//
 		//	message=[Message] ":" from=[InterfaceItem];
 		public ParserRule getRule() { return rule; }
 
@@ -4379,6 +4611,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cGuardDetailCodeParserRuleCall_1_0 = (RuleCall)cGuardAssignment_1.eContents().get(0);
 		
 		//Guard:
+		//
 		//	"guard" guard=DetailCode;
 		public ParserRule getRule() { return rule; }
 
@@ -4408,6 +4641,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// general
 		//
 		//Documentation:
+		//
 		//	"[" text+=STRING+ "]";
 		public ParserRule getRule() { return rule; }
 
@@ -4444,6 +4678,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//Annotation:
+		//
 		//	"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 		public ParserRule getRule() { return rule; }
 
@@ -4497,6 +4732,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//KeyValue:
+		//
 		//	key=ID "=" value=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -4569,6 +4805,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 		//
 		//Import:
+		//
 		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -4610,6 +4847,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ImportedFQN:
+		//
 		//	FQN ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -4632,6 +4870,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
+		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -4665,6 +4904,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
 		//
 		//MULTIPLICITY returns ecore::EInt:
+		//
 		//	"[" ("*" | INT) "]";
 		public ParserRule getRule() { return rule; }
 
@@ -4701,6 +4941,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCHARPtCharacterKeyword_3_0 = (Keyword)cCHAREnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum LiteralType:
+		//
 		//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 		public EnumRule getRule() { return rule; }
 
@@ -4747,6 +4988,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// protocol class
 		//
 		//enum CommunicationType:
+		//
 		//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync";
 		public EnumRule getRule() { return rule; }
 
@@ -4789,6 +5031,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// actor class
 		//
 		//enum ActorCommunicationType:
+		//
 		//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | ASYNCHRONOUS="async" | SYNCHRONOUS="sync";
 		public EnumRule getRule() { return rule; }
 
@@ -4893,6 +5136,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private TriggeredTransitionElements pTriggeredTransition;
 	private GuardedTransitionElements pGuardedTransition;
 	private CPBranchTransitionElements pCPBranchTransition;
+	private RefinedTransitionElements pRefinedTransition;
 	private TransitionTerminalElements pTransitionTerminal;
 	private StateTerminalElements pStateTerminal;
 	private TrPointTerminalElements pTrPointTerminal;
@@ -4909,19 +5153,36 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private FQNElements pFQN;
 	private MULTIPLICITYElements pMULTIPLICITY;
 	
-	private final GrammarProvider grammarProvider;
+	private final Grammar grammar;
 
 	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public RoomGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
-		this.grammarProvider = grammarProvider;
+		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 	}
 	
-	public Grammar getGrammar() {	
-		return grammarProvider.getGrammar(this);
+	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
+		Grammar grammar = grammarProvider.getGrammar(this);
+		while (grammar != null) {
+			if ("org.eclipse.etrice.core.Room".equals(grammar.getName())) {
+				return grammar;
+			}
+			List<Grammar> grammars = grammar.getUsedGrammars();
+			if (!grammars.isEmpty()) {
+				grammar = grammars.iterator().next();
+			} else {
+				return null;
+			}
+		}
+		return grammar;
+	}
+	
+	
+	public Grammar getGrammar() {
+		return grammar;
 	}
 	
 
@@ -4931,8 +5192,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//RoomModel:
+	//
 	//	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
+	//
 	//	externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
+	//
 	//	actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem)* "}";
 	public RoomModelElements getRoomModelAccess() {
 		return (pRoomModel != null) ? pRoomModel : (pRoomModel = new RoomModelElements());
@@ -4943,6 +5207,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RoomClass:
+	//
 	//	DataType | GeneralProtocolClass | StructureClass;
 	public RoomClassElements getRoomClassAccess() {
 		return (pRoomClass != null) ? pRoomClass : (pRoomClass = new RoomClassElements());
@@ -4953,6 +5218,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StructureClass:
+	//
 	//	ActorContainerClass | LogicalSystem;
 	public StructureClassElements getStructureClassAccess() {
 		return (pStructureClass != null) ? pStructureClass : (pStructureClass = new StructureClassElements());
@@ -4963,6 +5229,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorContainerClass:
+	//
 	//	ActorClass | SubSystemClass;
 	public ActorContainerClassElements getActorContainerClassAccess() {
 		return (pActorContainerClass != null) ? pActorContainerClass : (pActorContainerClass = new ActorContainerClassElements());
@@ -4977,6 +5244,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// data class
 	//
 	//VarDecl:
+	//
 	//	name=ID ":" refType=RefableType;
 	public VarDeclElements getVarDeclAccess() {
 		return (pVarDecl != null) ? pVarDecl : (pVarDecl = new VarDeclElements());
@@ -4987,6 +5255,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefableType:
+	//
 	//	type=[DataType|FQN] ref?="ref"?;
 	public RefableTypeElements getRefableTypeAccess() {
 		return (pRefableType != null) ? pRefableType : (pRefableType = new RefableTypeElements());
@@ -4997,6 +5266,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum LiteralType:
+	//
 	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 	public LiteralTypeElements getLiteralTypeAccess() {
 		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
@@ -5007,6 +5277,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DataType:
+	//
 	//	PrimitiveType | ComplexType;
 	public DataTypeElements getDataTypeAccess() {
 		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
@@ -5017,6 +5288,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ComplexType:
+	//
 	//	DataClass | ExternalType;
 	public ComplexTypeElements getComplexTypeAccess() {
 		return (pComplexType != null) ? pComplexType : (pComplexType = new ComplexTypeElements());
@@ -5027,7 +5299,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveType:
+	//
 	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+	//
 	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
@@ -5038,6 +5312,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ExternalType:
+	//
 	//	"ExternalType" name=ID "->" targetName=FQN docu=Documentation?;
 	public ExternalTypeElements getExternalTypeAccess() {
 		return (pExternalType != null) ? pExternalType : (pExternalType = new ExternalTypeElements());
@@ -5050,8 +5325,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// TODOHRR: define detail level language?
 	//
 	//DataClass:
+	//
 	//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+	//
 	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+	//
 	//	operations+=StandardOperation* "}";
 	public DataClassElements getDataClassAccess() {
 		return (pDataClass != null) ? pDataClass : (pDataClass = new DataClassElements());
@@ -5062,7 +5340,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Attribute:
-	//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
+	//
+	//	"Attribute" name=ID ("[" size=INT "]")? ":" refType=RefableType ("=" defaultValueLiteral=STRING)?
+	//
+	//	docu=Documentation?;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -5072,6 +5353,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Operation:
+	//
 	//	StandardOperation | PortOperation;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
@@ -5082,7 +5364,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StandardOperation:
+	//
 	//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+	//
 	//	returntype=RefableType))? docu=Documentation? detailCode=DetailCode;
 	public StandardOperationElements getStandardOperationAccess() {
 		return (pStandardOperation != null) ? pStandardOperation : (pStandardOperation = new StandardOperationElements());
@@ -5093,7 +5377,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PortOperation:
+	//
 	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returntype=RefableType) |
+	//
 	//	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
 	public PortOperationElements getPortOperationAccess() {
 		return (pPortOperation != null) ? pPortOperation : (pPortOperation = new PortOperationElements());
@@ -5108,6 +5394,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// protocol class
 	//
 	//enum CommunicationType:
+	//
 	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync";
 	public CommunicationTypeElements getCommunicationTypeAccess() {
 		return (unknownRuleCommunicationType != null) ? unknownRuleCommunicationType : (unknownRuleCommunicationType = new CommunicationTypeElements());
@@ -5118,6 +5405,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GeneralProtocolClass:
+	//
 	//	ProtocolClass | CompoundProtocolClass;
 	public GeneralProtocolClassElements getGeneralProtocolClassAccess() {
 		return (pGeneralProtocolClass != null) ? pGeneralProtocolClass : (pGeneralProtocolClass = new GeneralProtocolClassElements());
@@ -5128,10 +5416,15 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ProtocolClass:
+	//
 	//	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+	//
 	//	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+	//
 	//	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+	//
 	//	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugate" "PortClass" conjugate=PortClass)?
+	//
 	//	semantics=ProtocolSemantics? "}";
 	public ProtocolClassElements getProtocolClassAccess() {
 		return (pProtocolClass != null) ? pProtocolClass : (pProtocolClass = new ProtocolClassElements());
@@ -5142,6 +5435,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CompoundProtocolClass:
+	//
 	//	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol+ "}";
 	public CompoundProtocolClassElements getCompoundProtocolClassAccess() {
 		return (pCompoundProtocolClass != null) ? pCompoundProtocolClass : (pCompoundProtocolClass = new CompoundProtocolClassElements());
@@ -5152,6 +5446,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubProtocol:
+	//
 	//	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
 	public SubProtocolElements getSubProtocolAccess() {
 		return (pSubProtocol != null) ? pSubProtocol : (pSubProtocol = new SubProtocolElements());
@@ -5162,6 +5457,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Message:
+	//
 	//	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
 	public MessageElements getMessageAccess() {
 		return (pMessage != null) ? pMessage : (pMessage = new MessageElements());
@@ -5172,7 +5468,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PortClass:
+	//
 	//	"{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
+	//
 	//	msgHandlers+=MessageHandler)+ "}";
 	public PortClassElements getPortClassAccess() {
 		return (pPortClass != null) ? pPortClass : (pPortClass = new PortClassElements());
@@ -5183,6 +5481,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MessageHandler:
+	//
 	//	InMessageHandler | OutMessageHandler;
 	public MessageHandlerElements getMessageHandlerAccess() {
 		return (pMessageHandler != null) ? pMessageHandler : (pMessageHandler = new MessageHandlerElements());
@@ -5193,6 +5492,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InMessageHandler:
+	//
 	//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
 	public InMessageHandlerElements getInMessageHandlerAccess() {
 		return (pInMessageHandler != null) ? pInMessageHandler : (pInMessageHandler = new InMessageHandlerElements());
@@ -5203,6 +5503,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OutMessageHandler:
+	//
 	//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
 	public OutMessageHandlerElements getOutMessageHandlerAccess() {
 		return (pOutMessageHandler != null) ? pOutMessageHandler : (pOutMessageHandler = new OutMessageHandlerElements());
@@ -5213,6 +5514,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ProtocolSemantics:
+	//
 	//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
 	public ProtocolSemanticsElements getProtocolSemanticsAccess() {
 		return (pProtocolSemantics != null) ? pProtocolSemantics : (pProtocolSemantics = new ProtocolSemanticsElements());
@@ -5223,6 +5525,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SemanticsRule:
+	//
 	//	InSemanticsRule | OutSemanticsRule;
 	public SemanticsRuleElements getSemanticsRuleAccess() {
 		return (pSemanticsRule != null) ? pSemanticsRule : (pSemanticsRule = new SemanticsRuleElements());
@@ -5233,7 +5536,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InSemanticsRule:
+	//
 	//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
+	//
 	//	")"))?;
 	public InSemanticsRuleElements getInSemanticsRuleAccess() {
 		return (pInSemanticsRule != null) ? pInSemanticsRule : (pInSemanticsRule = new InSemanticsRuleElements());
@@ -5244,8 +5549,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OutSemanticsRule:
-	//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-	//	")"))?;
+	//
+	//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//
+	//	followUps+=SemanticsRule)+ ")"))?;
 	public OutSemanticsRuleElements getOutSemanticsRuleAccess() {
 		return (pOutSemanticsRule != null) ? pOutSemanticsRule : (pOutSemanticsRule = new OutSemanticsRuleElements());
 	}
@@ -5259,6 +5566,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// actor class
 	//
 	//enum ActorCommunicationType:
+	//
 	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | ASYNCHRONOUS="async" | SYNCHRONOUS="sync";
 	public ActorCommunicationTypeElements getActorCommunicationTypeAccess() {
 		return (unknownRuleActorCommunicationType != null) ? unknownRuleActorCommunicationType : (unknownRuleActorCommunicationType = new ActorCommunicationTypeElements());
@@ -5283,12 +5591,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// since double containment is not supported we decided to define external ports as reference to interface ports
 	//
 	//ActorClass:
+	//
 	//	(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+	//
 	//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
+	//
 	//	("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+	//
 	//	("usercode3" userCode3=DetailCode)? (intPorts+=Port | extPorts+=ExternalPort)*
+	//
 	//	serviceImplementations+=ServiceImplementation* strSAPs+=SAPRef* attributes+=Attribute* actorRefs+=ActorRef*
+	//
 	//	bindings+=Binding* connections+=LayerConnection* "}")? ("Behavior" behaviorDocu=Documentation? "{"
+	//
 	//	behaviorAnnotations+=Annotation* operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
 	public ActorClassElements getActorClassAccess() {
 		return (pActorClass != null) ? pActorClass : (pActorClass = new ActorClassElements());
@@ -5299,6 +5614,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InterfaceItem:
+	//
 	//	Port | SAPRef | SPPRef;
 	public InterfaceItemElements getInterfaceItemAccess() {
 		return (pInterfaceItem != null) ? pInterfaceItem : (pInterfaceItem = new InterfaceItemElements());
@@ -5309,7 +5625,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Port:
+	//
 	//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+	//
 	//	docu=Documentation?;
 	public PortElements getPortAccess() {
 		return (pPort != null) ? pPort : (pPort = new PortElements());
@@ -5320,6 +5638,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ExternalPort:
+	//
 	//	"external" "Port" ifport=[Port];
 	public ExternalPortElements getExternalPortAccess() {
 		return (pExternalPort != null) ? pExternalPort : (pExternalPort = new ExternalPortElements());
@@ -5330,6 +5649,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SAPRef:
+	//
 	//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SAPRefElements getSAPRefAccess() {
 		return (pSAPRef != null) ? pSAPRef : (pSAPRef = new SAPRefElements());
@@ -5340,6 +5660,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SPPRef:
+	//
 	//	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SPPRefElements getSPPRefAccess() {
 		return (pSPPRef != null) ? pSPPRef : (pSPPRef = new SPPRefElements());
@@ -5350,6 +5671,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ServiceImplementation:
+	//
 	//	"ServiceImplementation" "of" spp=[SPPRef];
 	public ServiceImplementationElements getServiceImplementationAccess() {
 		return (pServiceImplementation != null) ? pServiceImplementation : (pServiceImplementation = new ServiceImplementationElements());
@@ -5360,7 +5682,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalSystem:
+	//
 	//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* subSystems+=SubSystemRef* bindings+=Binding*
+	//
 	//	connections+=LayerConnection* "}";
 	public LogicalSystemElements getLogicalSystemAccess() {
 		return (pLogicalSystem != null) ? pLogicalSystem : (pLogicalSystem = new LogicalSystemElements());
@@ -5371,6 +5695,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorContainerRef:
+	//
 	//	SubSystemRef | ActorRef;
 	public ActorContainerRefElements getActorContainerRefAccess() {
 		return (pActorContainerRef != null) ? pActorContainerRef : (pActorContainerRef = new ActorContainerRefElements());
@@ -5381,6 +5706,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubSystemRef:
+	//
 	//	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
 	public SubSystemRefElements getSubSystemRefAccess() {
 		return (pSubSystemRef != null) ? pSubSystemRef : (pSubSystemRef = new SubSystemRefElements());
@@ -5391,8 +5717,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubSystemClass:
+	//
 	//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+	//
 	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? relayPorts+=Port* ifSPPs+=SPPRef*
+	//
 	//	actorRefs+=ActorRef* bindings+=Binding* connections+=LayerConnection* threads+=LogicalThread* "}";
 	public SubSystemClassElements getSubSystemClassAccess() {
 		return (pSubSystemClass != null) ? pSubSystemClass : (pSubSystemClass = new SubSystemClassElements());
@@ -5403,6 +5732,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalThread:
+	//
 	//	"LogicalThread" name=ID "prio" "=" prio=INT "{" instances+=ActorInstancePath ("," instances+=ActorInstancePath)* "}";
 	public LogicalThreadElements getLogicalThreadAccess() {
 		return (pLogicalThread != null) ? pLogicalThread : (pLogicalThread = new LogicalThreadElements());
@@ -5413,6 +5743,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorInstancePath:
+	//
 	//	segments+=ID ("." segments+=ID)*;
 	public ActorInstancePathElements getActorInstancePathAccess() {
 		return (pActorInstancePath != null) ? pActorInstancePath : (pActorInstancePath = new ActorInstancePathElements());
@@ -5429,6 +5760,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// (2) use a notation with 1 to n bindings
 	//
 	//Binding:
+	//
 	//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 	public BindingElements getBindingAccess() {
 		return (pBinding != null) ? pBinding : (pBinding = new BindingElements());
@@ -5439,6 +5771,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BindingEndPoint:
+	//
 	//	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
 	public BindingEndPointElements getBindingEndPointAccess() {
 		return (pBindingEndPoint != null) ? pBindingEndPoint : (pBindingEndPoint = new BindingEndPointElements());
@@ -5449,6 +5782,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LayerConnection:
+	//
 	//	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
 	public LayerConnectionElements getLayerConnectionAccess() {
 		return (pLayerConnection != null) ? pLayerConnection : (pLayerConnection = new LayerConnectionElements());
@@ -5459,6 +5793,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SAPoint:
+	//
 	//	RefSAPoint | RelaySAPoint;
 	public SAPointElements getSAPointAccess() {
 		return (pSAPoint != null) ? pSAPoint : (pSAPoint = new SAPointElements());
@@ -5491,6 +5826,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SPPoint:
+	//
 	//	ref=[ActorContainerRef] "." service=[SPPRef];
 	public SPPointElements getSPPointAccess() {
 		return (pSPPoint != null) ? pSPPoint : (pSPPoint = new SPPointElements());
@@ -5501,6 +5837,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorRef:
+	//
 	//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {
 		return (pActorRef != null) ? pActorRef : (pActorRef = new ActorRefElements());
@@ -5515,6 +5852,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// state machine
 	//
 	//StateGraphNode:
+	//
 	//	State | ChoicePoint | TrPoint;
 	public StateGraphNodeElements getStateGraphNodeAccess() {
 		return (pStateGraphNode != null) ? pStateGraphNode : (pStateGraphNode = new StateGraphNodeElements());
@@ -5525,6 +5863,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateGraphItem:
+	//
 	//	StateGraphNode | Transition;
 	public StateGraphItemElements getStateGraphItemAccess() {
 		return (pStateGraphItem != null) ? pStateGraphItem : (pStateGraphItem = new StateGraphItemElements());
@@ -5535,6 +5874,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//State:
+	//
 	//	SimpleState | RefinedState;
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
@@ -5545,7 +5885,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateGraph:
-	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)* "}";
+	//
+	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+	//
+	//	refinedTransitions+=RefinedTransition)* "}";
 	public StateGraphElements getStateGraphAccess() {
 		return (pStateGraph != null) ? pStateGraph : (pStateGraph = new StateGraphElements());
 	}
@@ -5555,8 +5898,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition)*
-	//	"}";
+	//
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
+	//
+	//	| refinedTransitions+=RefinedTransition)* "}";
 	public StateMachineElements getStateMachineAccess() {
 		return (pStateMachine != null) ? pStateMachine : (pStateMachine = new StateMachineElements());
 	}
@@ -5566,7 +5911,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleState:
+	//
 	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
+	//
 	//	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
 	public SimpleStateElements getSimpleStateAccess() {
 		return (pSimpleState != null) ? pSimpleState : (pSimpleState = new SimpleStateElements());
@@ -5577,7 +5924,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefinedState:
+	//
 	//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
+	//
 	//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 	public RefinedStateElements getRefinedStateAccess() {
 		return (pRefinedState != null) ? pRefinedState : (pRefinedState = new RefinedStateElements());
@@ -5592,6 +5941,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// super() keyword or flag like in Trice
 	//
 	//DetailCode:
+	//
 	//	"{" commands+=STRING+ "}";
 	public DetailCodeElements getDetailCodeAccess() {
 		return (pDetailCode != null) ? pDetailCode : (pDetailCode = new DetailCodeElements());
@@ -5602,6 +5952,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TrPoint:
+	//
 	//	TransitionPoint | EntryPoint | ExitPoint;
 	public TrPointElements getTrPointAccess() {
 		return (pTrPoint != null) ? pTrPoint : (pTrPoint = new TrPointElements());
@@ -5612,6 +5963,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TransitionPoint:
+	//
 	//	handler?="handler"? "TransitionPoint" name=ID;
 	public TransitionPointElements getTransitionPointAccess() {
 		return (pTransitionPoint != null) ? pTransitionPoint : (pTransitionPoint = new TransitionPointElements());
@@ -5622,6 +5974,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EntryPoint:
+	//
 	//	"EntryPoint" name=ID;
 	public EntryPointElements getEntryPointAccess() {
 		return (pEntryPoint != null) ? pEntryPoint : (pEntryPoint = new EntryPointElements());
@@ -5632,6 +5985,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ExitPoint:
+	//
 	//	"ExitPoint" name=ID;
 	public ExitPointElements getExitPointAccess() {
 		return (pExitPoint != null) ? pExitPoint : (pExitPoint = new ExitPointElements());
@@ -5642,6 +5996,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ChoicePoint:
+	//
 	//	"ChoicePoint" name=ID docu=Documentation?;
 	public ChoicePointElements getChoicePointAccess() {
 		return (pChoicePoint != null) ? pChoicePoint : (pChoicePoint = new ChoicePointElements());
@@ -5652,6 +6007,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Transition:
+	//
 	//	InitialTransition | NonInitialTransition;
 	public TransitionElements getTransitionAccess() {
 		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
@@ -5662,6 +6018,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NonInitialTransition:
+	//
 	//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 	public NonInitialTransitionElements getNonInitialTransitionAccess() {
 		return (pNonInitialTransition != null) ? pNonInitialTransition : (pNonInitialTransition = new NonInitialTransitionElements());
@@ -5672,6 +6029,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TransitionChainStartTransition:
+	//
 	//	TriggeredTransition | GuardedTransition;
 	public TransitionChainStartTransitionElements getTransitionChainStartTransitionAccess() {
 		return (pTransitionChainStartTransition != null) ? pTransitionChainStartTransition : (pTransitionChainStartTransition = new TransitionChainStartTransitionElements());
@@ -5682,7 +6040,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InitialTransition:
+	//
 	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
+	//
 	//	"}";
 	public InitialTransitionElements getInitialTransitionAccess() {
 		return (pInitialTransition != null) ? pInitialTransition : (pInitialTransition = new InitialTransitionElements());
@@ -5693,7 +6053,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ContinuationTransition:
+	//
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
+	//
 	//	action=DetailCode)? "}")?;
 	public ContinuationTransitionElements getContinuationTransitionAccess() {
 		return (pContinuationTransition != null) ? pContinuationTransition : (pContinuationTransition = new ContinuationTransitionElements());
@@ -5704,7 +6066,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TriggeredTransition:
+	//
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
+	//
 	//	triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}";
 	public TriggeredTransitionElements getTriggeredTransitionAccess() {
 		return (pTriggeredTransition != null) ? pTriggeredTransition : (pTriggeredTransition = new TriggeredTransitionElements());
@@ -5715,7 +6079,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GuardedTransition:
+	//
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
+	//
 	//	guard=DetailCode ("action" action=DetailCode)? "}";
 	public GuardedTransitionElements getGuardedTransitionAccess() {
 		return (pGuardedTransition != null) ? pGuardedTransition : (pGuardedTransition = new GuardedTransitionElements());
@@ -5726,7 +6092,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CPBranchTransition:
+	//
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
+	//
 	//	condition=DetailCode ("action" action=DetailCode)? "}";
 	public CPBranchTransitionElements getCPBranchTransitionAccess() {
 		return (pCPBranchTransition != null) ? pCPBranchTransition : (pCPBranchTransition = new CPBranchTransitionElements());
@@ -5736,7 +6104,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getCPBranchTransitionAccess().getRule();
 	}
 
+	//// by validation RefinedTransition can only be contained in the top level state graph
+	//
+	//RefinedTransition:
+	//
+	//	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
+	public RefinedTransitionElements getRefinedTransitionAccess() {
+		return (pRefinedTransition != null) ? pRefinedTransition : (pRefinedTransition = new RefinedTransitionElements());
+	}
+	
+	public ParserRule getRefinedTransitionRule() {
+		return getRefinedTransitionAccess().getRule();
+	}
+
 	//TransitionTerminal:
+	//
 	//	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 	public TransitionTerminalElements getTransitionTerminalAccess() {
 		return (pTransitionTerminal != null) ? pTransitionTerminal : (pTransitionTerminal = new TransitionTerminalElements());
@@ -5747,6 +6129,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateTerminal:
+	//
 	//	state=[State];
 	public StateTerminalElements getStateTerminalAccess() {
 		return (pStateTerminal != null) ? pStateTerminal : (pStateTerminal = new StateTerminalElements());
@@ -5757,6 +6140,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TrPointTerminal:
+	//
 	//	"my" trPoint=[TrPoint];
 	public TrPointTerminalElements getTrPointTerminalAccess() {
 		return (pTrPointTerminal != null) ? pTrPointTerminal : (pTrPointTerminal = new TrPointTerminalElements());
@@ -5767,6 +6151,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubStateTrPointTerminal:
+	//
 	//	trPoint=[TrPoint] "of" state=[State];
 	public SubStateTrPointTerminalElements getSubStateTrPointTerminalAccess() {
 		return (pSubStateTrPointTerminal != null) ? pSubStateTrPointTerminal : (pSubStateTrPointTerminal = new SubStateTrPointTerminalElements());
@@ -5777,6 +6162,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ChoicepointTerminal:
+	//
 	//	"cp" cp=[ChoicePoint];
 	public ChoicepointTerminalElements getChoicepointTerminalAccess() {
 		return (pChoicepointTerminal != null) ? pChoicepointTerminal : (pChoicepointTerminal = new ChoicepointTerminalElements());
@@ -5787,6 +6173,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Trigger:
+	//
 	//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 	public TriggerElements getTriggerAccess() {
 		return (pTrigger != null) ? pTrigger : (pTrigger = new TriggerElements());
@@ -5797,6 +6184,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MessageFromIf:
+	//
 	//	message=[Message] ":" from=[InterfaceItem];
 	public MessageFromIfElements getMessageFromIfAccess() {
 		return (pMessageFromIf != null) ? pMessageFromIf : (pMessageFromIf = new MessageFromIfElements());
@@ -5807,6 +6195,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Guard:
+	//
 	//	"guard" guard=DetailCode;
 	public GuardElements getGuardAccess() {
 		return (pGuard != null) ? pGuard : (pGuard = new GuardElements());
@@ -5821,6 +6210,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// general
 	//
 	//Documentation:
+	//
 	//	"[" text+=STRING+ "]";
 	public DocumentationElements getDocumentationAccess() {
 		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
@@ -5831,6 +6221,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Annotation:
+	//
 	//	"@" name=ID ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 	public AnnotationElements getAnnotationAccess() {
 		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
@@ -5841,6 +6232,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KeyValue:
+	//
 	//	key=ID "=" value=STRING;
 	public KeyValueElements getKeyValueAccess() {
 		return (pKeyValue != null) ? pKeyValue : (pKeyValue = new KeyValueElements());
@@ -5887,6 +6279,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//
 	//Import:
+	//
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
@@ -5897,6 +6290,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportedFQN:
+	//
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
 		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
@@ -5907,6 +6301,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FQN:
+	//
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -5921,6 +6316,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
 	//
 	//MULTIPLICITY returns ecore::EInt:
+	//
 	//	"[" ("*" | INT) "]";
 	public MULTIPLICITYElements getMULTIPLICITYAccess() {
 		return (pMULTIPLICITY != null) ? pMULTIPLICITY : (pMULTIPLICITY = new MULTIPLICITYElements());
@@ -5931,43 +6327,51 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
+	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
+	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
+	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
+	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
+	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
+	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
+	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

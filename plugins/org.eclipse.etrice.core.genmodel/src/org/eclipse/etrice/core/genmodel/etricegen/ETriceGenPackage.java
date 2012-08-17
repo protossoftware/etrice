@@ -1502,7 +1502,7 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_REFINED_STATE__NAME = RoomPackage.SIMPLE_STATE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Inherited Entry</b></em>' attribute.
+	 * The feature id for the '<em><b>Inherited Entry</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1511,7 +1511,7 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_REFINED_STATE__INHERITED_ENTRY = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Inherited Exit</b></em>' attribute.
+	 * The feature id for the '<em><b>Inherited Exit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1520,7 +1520,7 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_REFINED_STATE__INHERITED_EXIT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Inherited Do</b></em>' attribute.
+	 * The feature id for the '<em><b>Inherited Do</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2314,37 +2314,37 @@ public interface ETriceGenPackage extends EPackage {
 	EClass getExpandedRefinedState();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Inherited Entry</em>'.
+	 * @return the meta object for the containment reference '<em>Inherited Entry</em>'.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry()
 	 * @see #getExpandedRefinedState()
 	 * @generated
 	 */
-	EAttribute getExpandedRefinedState_InheritedEntry();
+	EReference getExpandedRefinedState_InheritedEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Inherited Exit</em>'.
+	 * @return the meta object for the containment reference '<em>Inherited Exit</em>'.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit()
 	 * @see #getExpandedRefinedState()
 	 * @generated
 	 */
-	EAttribute getExpandedRefinedState_InheritedExit();
+	EReference getExpandedRefinedState_InheritedExit();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Inherited Do</em>'.
+	 * @return the meta object for the containment reference '<em>Inherited Do</em>'.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo()
 	 * @see #getExpandedRefinedState()
 	 * @generated
 	 */
-	EAttribute getExpandedRefinedState_InheritedDo();
+	EReference getExpandedRefinedState_InheritedDo();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}'.
@@ -2983,28 +2983,28 @@ public interface ETriceGenPackage extends EPackage {
 		EClass EXPANDED_REFINED_STATE = eINSTANCE.getExpandedRefinedState();
 
 		/**
-		 * The meta object literal for the '<em><b>Inherited Entry</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Inherited Entry</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXPANDED_REFINED_STATE__INHERITED_ENTRY = eINSTANCE.getExpandedRefinedState_InheritedEntry();
+		EReference EXPANDED_REFINED_STATE__INHERITED_ENTRY = eINSTANCE.getExpandedRefinedState_InheritedEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>Inherited Exit</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Inherited Exit</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXPANDED_REFINED_STATE__INHERITED_EXIT = eINSTANCE.getExpandedRefinedState_InheritedExit();
+		EReference EXPANDED_REFINED_STATE__INHERITED_EXIT = eINSTANCE.getExpandedRefinedState_InheritedExit();
 
 		/**
-		 * The meta object literal for the '<em><b>Inherited Do</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Inherited Do</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXPANDED_REFINED_STATE__INHERITED_DO = eINSTANCE.getExpandedRefinedState_InheritedDo();
+		EReference EXPANDED_REFINED_STATE__INHERITED_DO = eINSTANCE.getExpandedRefinedState_InheritedDo();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.

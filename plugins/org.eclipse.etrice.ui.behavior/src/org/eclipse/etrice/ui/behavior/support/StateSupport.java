@@ -27,7 +27,6 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
-import org.eclipse.etrice.ui.behavior.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
@@ -160,7 +159,7 @@ public class StateSupport {
 				sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				AbstractMemberAwarePropertyDialog dlg = new StatePropertyDialog(shell, ac, s);
+	        	StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, true);
 				if (dlg.open()!=Window.OK) {
 					if (inherited) {
 						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
@@ -375,7 +374,7 @@ public class StateSupport {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				AbstractMemberAwarePropertyDialog dlg = new StatePropertyDialog(shell, ac, s);
+				StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, editable);
 				if (dlg.open()!=Window.OK)
 					throw new OperationCanceledException();
 

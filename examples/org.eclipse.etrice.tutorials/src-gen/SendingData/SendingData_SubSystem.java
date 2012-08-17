@@ -69,9 +69,9 @@ public class SendingData_SubSystem extends SubSystemClassBase{
 			"ref0",
 			// own interface item addresses
 			new Address[][] {{addr_item__SendingData_SubSystem_SendigDataTopRef_ref0},
-			{
-				addr_item__SendingData_SubSystem_SendigDataTopRef_ref0_PingPongPort
-			}
+				{
+					addr_item__SendingData_SubSystem_SendigDataTopRef_ref0_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -85,9 +85,9 @@ public class SendingData_SubSystem extends SubSystemClassBase{
 			"ref1",
 			// own interface item addresses
 			new Address[][] {{addr_item__SendingData_SubSystem_SendigDataTopRef_ref1},
-			{
-				addr_item__SendingData_SubSystem_SendigDataTopRef_ref1_PingPongPort
-			}
+				{
+					addr_item__SendingData_SubSystem_SendigDataTopRef_ref1_PingPongPort
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -96,6 +96,8 @@ public class SendingData_SubSystem extends SubSystemClassBase{
 				}
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

@@ -7,10 +7,13 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -39,64 +42,34 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class ExpandedRefinedStateImpl extends SimpleStateImpl implements ExpandedRefinedState {
 	/**
-	 * The default value of the '{@link #getInheritedEntry() <em>Inherited Entry</em>}' attribute.
+	 * The cached value of the '{@link #getInheritedEntry() <em>Inherited Entry</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInheritedEntry()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INHERITED_ENTRY_EDEFAULT = null;
+	protected DetailCode inheritedEntry;
 
 	/**
-	 * The cached value of the '{@link #getInheritedEntry() <em>Inherited Entry</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInheritedEntry()
-	 * @generated
-	 * @ordered
-	 */
-	protected String inheritedEntry = INHERITED_ENTRY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getInheritedExit() <em>Inherited Exit</em>}' attribute.
+	 * The cached value of the '{@link #getInheritedExit() <em>Inherited Exit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInheritedExit()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INHERITED_EXIT_EDEFAULT = null;
+	protected DetailCode inheritedExit;
 
 	/**
-	 * The cached value of the '{@link #getInheritedExit() <em>Inherited Exit</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInheritedExit()
-	 * @generated
-	 * @ordered
-	 */
-	protected String inheritedExit = INHERITED_EXIT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getInheritedDo() <em>Inherited Do</em>}' attribute.
+	 * The cached value of the '{@link #getInheritedDo() <em>Inherited Do</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInheritedDo()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INHERITED_DO_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getInheritedDo() <em>Inherited Do</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInheritedDo()
-	 * @generated
-	 * @ordered
-	 */
-	protected String inheritedDo = INHERITED_DO_EDEFAULT;
+	protected DetailCode inheritedDo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,7 +95,7 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInheritedEntry() {
+	public DetailCode getInheritedEntry() {
 		return inheritedEntry;
 	}
 
@@ -131,11 +104,14 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInheritedEntry(String newInheritedEntry) {
-		String oldInheritedEntry = inheritedEntry;
+	public NotificationChain basicSetInheritedEntry(DetailCode newInheritedEntry, NotificationChain msgs) {
+		DetailCode oldInheritedEntry = inheritedEntry;
 		inheritedEntry = newInheritedEntry;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY, oldInheritedEntry, inheritedEntry));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY, oldInheritedEntry, newInheritedEntry);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -143,7 +119,26 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInheritedExit() {
+	public void setInheritedEntry(DetailCode newInheritedEntry) {
+		if (newInheritedEntry != inheritedEntry) {
+			NotificationChain msgs = null;
+			if (inheritedEntry != null)
+				msgs = ((InternalEObject)inheritedEntry).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY, null, msgs);
+			if (newInheritedEntry != null)
+				msgs = ((InternalEObject)newInheritedEntry).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY, null, msgs);
+			msgs = basicSetInheritedEntry(newInheritedEntry, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY, newInheritedEntry, newInheritedEntry));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DetailCode getInheritedExit() {
 		return inheritedExit;
 	}
 
@@ -152,11 +147,14 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInheritedExit(String newInheritedExit) {
-		String oldInheritedExit = inheritedExit;
+	public NotificationChain basicSetInheritedExit(DetailCode newInheritedExit, NotificationChain msgs) {
+		DetailCode oldInheritedExit = inheritedExit;
 		inheritedExit = newInheritedExit;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT, oldInheritedExit, inheritedExit));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT, oldInheritedExit, newInheritedExit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -164,7 +162,26 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInheritedDo() {
+	public void setInheritedExit(DetailCode newInheritedExit) {
+		if (newInheritedExit != inheritedExit) {
+			NotificationChain msgs = null;
+			if (inheritedExit != null)
+				msgs = ((InternalEObject)inheritedExit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT, null, msgs);
+			if (newInheritedExit != null)
+				msgs = ((InternalEObject)newInheritedExit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT, null, msgs);
+			msgs = basicSetInheritedExit(newInheritedExit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT, newInheritedExit, newInheritedExit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DetailCode getInheritedDo() {
 		return inheritedDo;
 	}
 
@@ -173,11 +190,33 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInheritedDo(String newInheritedDo) {
-		String oldInheritedDo = inheritedDo;
+	public NotificationChain basicSetInheritedDo(DetailCode newInheritedDo, NotificationChain msgs) {
+		DetailCode oldInheritedDo = inheritedDo;
 		inheritedDo = newInheritedDo;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO, oldInheritedDo, inheritedDo));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO, oldInheritedDo, newInheritedDo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInheritedDo(DetailCode newInheritedDo) {
+		if (newInheritedDo != inheritedDo) {
+			NotificationChain msgs = null;
+			if (inheritedDo != null)
+				msgs = ((InternalEObject)inheritedDo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO, null, msgs);
+			if (newInheritedDo != null)
+				msgs = ((InternalEObject)newInheritedDo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO, null, msgs);
+			msgs = basicSetInheritedDo(newInheritedDo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO, newInheritedDo, newInheritedDo));
 	}
 
 	/**
@@ -251,6 +290,24 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY:
+				return basicSetInheritedEntry(null, msgs);
+			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT:
+				return basicSetInheritedExit(null, msgs);
+			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO:
+				return basicSetInheritedDo(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY:
@@ -272,13 +329,13 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY:
-				setInheritedEntry((String)newValue);
+				setInheritedEntry((DetailCode)newValue);
 				return;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT:
-				setInheritedExit((String)newValue);
+				setInheritedExit((DetailCode)newValue);
 				return;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO:
-				setInheritedDo((String)newValue);
+				setInheritedDo((DetailCode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -293,13 +350,13 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY:
-				setInheritedEntry(INHERITED_ENTRY_EDEFAULT);
+				setInheritedEntry((DetailCode)null);
 				return;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT:
-				setInheritedExit(INHERITED_EXIT_EDEFAULT);
+				setInheritedExit((DetailCode)null);
 				return;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO:
-				setInheritedDo(INHERITED_DO_EDEFAULT);
+				setInheritedDo((DetailCode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -314,33 +371,13 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_ENTRY:
-				return INHERITED_ENTRY_EDEFAULT == null ? inheritedEntry != null : !INHERITED_ENTRY_EDEFAULT.equals(inheritedEntry);
+				return inheritedEntry != null;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_EXIT:
-				return INHERITED_EXIT_EDEFAULT == null ? inheritedExit != null : !INHERITED_EXIT_EDEFAULT.equals(inheritedExit);
+				return inheritedExit != null;
 			case ETriceGenPackage.EXPANDED_REFINED_STATE__INHERITED_DO:
-				return INHERITED_DO_EDEFAULT == null ? inheritedDo != null : !INHERITED_DO_EDEFAULT.equals(inheritedDo);
+				return inheritedDo != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (inheritedEntry: ");
-		result.append(inheritedEntry);
-		result.append(", inheritedExit: ");
-		result.append(inheritedExit);
-		result.append(", inheritedDo: ");
-		result.append(inheritedDo);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ExpandedRefinedStateImpl

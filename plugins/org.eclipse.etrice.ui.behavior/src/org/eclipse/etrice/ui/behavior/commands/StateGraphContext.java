@@ -27,7 +27,7 @@ public class StateGraphContext {
 	private ArrayList<TrPoint> trPoints = new ArrayList<TrPoint>();
 	private ArrayList<Transition> transitions = new ArrayList<Transition>();
 	private IPositionProvider positionProvider;
-	private static HashMap<EObject, StateGraphContext> obj2ctx = new HashMap<EObject, StateGraphContext>();
+	private HashMap<StateGraphItem, StateGraphContext> obj2ctx;
 	
 	public static StateGraphContext createContextTree(ActorClass ac) {
 		
@@ -47,12 +47,11 @@ public class StateGraphContext {
 		}
 		
 		// build and merge contexts from base classes to derived classes
-		obj2ctx.clear();
 		StateGraphContext tree = null;
 		for (ActorClass cls : classes) {
 			if (cls.getStateMachine()!=null) {
 				if (tree==null)
-					tree = new StateGraphContext(cls.getStateMachine());
+					tree = new StateGraphContext(cls.getStateMachine(), new HashMap<StateGraphItem, StateGraphContext>());
 				else
 					tree.merge(cls.getStateMachine());
 			}
@@ -64,8 +63,9 @@ public class StateGraphContext {
 		return tree;
 	}
 
-	private StateGraphContext(StateGraph sg) {
+	private StateGraphContext(StateGraph sg, HashMap<StateGraphItem, StateGraphContext> obj2ctx) {
 		this.stateGraph = sg;
+		this.obj2ctx = obj2ctx;
 		
 		init(sg);
 	}
@@ -91,7 +91,7 @@ public class StateGraphContext {
 		// recurse
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				children.add(new StateGraphContext(s.getSubgraph()));
+				children.add(new StateGraphContext(s.getSubgraph(), obj2ctx));
 		}
 	}
 
@@ -122,7 +122,7 @@ public class StateGraphContext {
 		for (State s : derived.getStates()) {
 			if (s instanceof SimpleState)
 				if (s.getSubgraph()!=null)
-					children.add(new StateGraphContext(s.getSubgraph()));
+					children.add(new StateGraphContext(s.getSubgraph(), obj2ctx));
 		}
 		
 		// refined states
@@ -156,7 +156,7 @@ public class StateGraphContext {
 					}
 				}
 				else if (RoomHelpers.hasDirectSubStructure(refined)) {
-					StateGraphContext sub = new StateGraphContext(refined.getSubgraph());
+					StateGraphContext sub = new StateGraphContext(refined.getSubgraph(), obj2ctx);
 					ctx.getChildren().add(sub);
 				}
 			}
@@ -256,5 +256,9 @@ public class StateGraphContext {
 			parent = parent.eContainer();
 		}
 		return null;
+	}
+	
+	public StateGraphContext getContext(StateGraphItem item) {
+		return obj2ctx.get(item);
 	}
 }

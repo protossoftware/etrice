@@ -50,8 +50,19 @@ public class CTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public String getAttributeText(Attribute att, String orig) {
-		return "self->"+att.getName();
+	public String getAttributeGetter(Attribute att, String index, String orig) {
+		if (index==null)
+			return "self->"+att.getName() + getOrigComment(orig);
+		else
+			return "self->"+att.getName()+"["+index+"]"+getOrigComment(orig);
+	}
+
+	@Override
+	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
+		if (index==null)
+			return "self->"+att.getName()+" = "+value + getOrigComment(orig);
+		else
+			return "self->"+att.getName()+"["+index+"] = "+value + getOrigComment(orig);
 	}
 
 	@Override
@@ -61,7 +72,7 @@ public class CTranslationProvider implements ITranslationProvider {
 		for (String arg : args) {
 			result.append(", "+arg);
 		}
-		result.append(") /* ORIG: "+orig+" */");
+		result.append(")"+getOrigComment(orig));
 		return result.toString();
 	}
 
@@ -87,26 +98,29 @@ public class CTranslationProvider implements ITranslationProvider {
 						else
 							result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 					}
+					result += getOrigComment(orig);
 				}
 				else if (pc.getCommType()==CommunicationType.DATA_DRIVEN) {
 					if (p.isConjugated())
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_set(&(self->"+item.getName()+")"+argtext+")";
 					else
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
+					result += getOrigComment(orig);
 				}
-				
-				result += " /* "+orig+" */";
 			}
 		}
 		else if (item instanceof SAPRef) {
 			result = roomExt.getPortClassName(((SAPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+			result += getOrigComment(orig);
 		}
 		else if (item instanceof SPPRef) {
 			if (index==null)
 				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			else
 				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
+			result += getOrigComment(orig);
 		}
+		
 		return result;
 	}
 
@@ -116,7 +130,7 @@ public class CTranslationProvider implements ITranslationProvider {
 		if (item instanceof Port) {
 			Port p = (Port) item;
 			result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
-			result += " /* "+orig+" */";
+			result += getOrigComment(orig);
 		}
 		return result;
 	}
@@ -139,6 +153,10 @@ public class CTranslationProvider implements ITranslationProvider {
 				+RoomNameProvider.getDetailCodeLocation(code)+" of "
 				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));
 		return TAG_START+"?"+tag+"?"+TAG_END;
+	}
+	
+	private String getOrigComment(String orig) {
+		return " /* ORIG: "+orig +" */";
 	}
 
 }

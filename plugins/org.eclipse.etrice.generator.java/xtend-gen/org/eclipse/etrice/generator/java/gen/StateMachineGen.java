@@ -8,69 +8,74 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
   @Inject
   private RoomExtensions _roomExtensions;
   
-  public StringConcatenation genExtra(final ExpandedActorClass xpac, final ActorClass ac) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("// state names");
-    _builder.newLine();
-    _builder.append("protected static final String stateStrings[] = {\"<no state>\",\"<top>\",");
+  public CharSequence genExtra(final ExpandedActorClass xpac) {
+    CharSequence _xblockexpression = null;
     {
-      List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
-      boolean hasAnyElements = false;
-      for(final State state : _allBaseStatesLeavesLast) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate(",", "");
+      final ActorClass ac = xpac.getActorClass();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("// state names");
+      _builder.newLine();
+      _builder.append("protected static final String stateStrings[] = {\"<no state>\",\"<top>\",");
+      {
+        List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
+        boolean _hasElements = false;
+        for(final State state : _allBaseStatesLeavesLast) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate(",", "");
+          }
+          _builder.append("\"");
+          String _statePathName = this._roomExtensions.getStatePathName(state);
+          _builder.append(_statePathName, "");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
         }
-        _builder.append("\"");
-        String _statePathName = this._roomExtensions.getStatePathName(state);
-        _builder.append(_statePathName, "");
-        _builder.append("\"");
-        _builder.newLineIfNotEmpty();
       }
-    }
-    _builder.append("};");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("// history");
-    _builder.newLine();
-    _builder.append("protected int history[] = {NO_STATE,NO_STATE");
-    {
-      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
-      for(final State state_1 : _allBaseStates) {
-        _builder.append(",NO_STATE");
+      _builder.append("};");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("// history");
+      _builder.newLine();
+      _builder.append("protected int history[] = {NO_STATE,NO_STATE");
+      {
+        List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
+        for(final State state_1 : _allBaseStates) {
+          _builder.append(",NO_STATE");
+        }
       }
+      _builder.append("};");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("private void setState(int new_state) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("System.out.println(getInstancePath() + \" -> \" + stateStrings[new_state]);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("this.state = new_state;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = (_builder);
     }
-    _builder.append("};");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("private void setState(int new_state) {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(getInstancePath() + \" -> \" + stateStrings[new_state]);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("this.state = new_state;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
 }

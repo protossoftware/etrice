@@ -22,4 +22,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.structure,
  org.eclipse.etrice.ui.structure.editor,
- org.eclipse.etrice.ui.structure.support;x-friends:="org.eclipse.etrice.ui.structure.tests"
+ org.eclipse.etrice.ui.structure.support

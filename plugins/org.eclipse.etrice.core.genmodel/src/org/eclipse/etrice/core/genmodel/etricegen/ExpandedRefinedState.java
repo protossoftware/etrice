@@ -6,6 +6,7 @@
  */
 package org.eclipse.etrice.core.genmodel.etricegen;
 
+import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.RefinedState;
 
@@ -29,82 +30,82 @@ import org.eclipse.etrice.core.room.RefinedState;
  */
 public interface ExpandedRefinedState extends SimpleState {
 	/**
-	 * Returns the value of the '<em><b>Inherited Entry</b></em>' attribute.
+	 * Returns the value of the '<em><b>Inherited Entry</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inherited Entry</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inherited Entry</em>' attribute.
-	 * @see #setInheritedEntry(String)
+	 * @return the value of the '<em>Inherited Entry</em>' containment reference.
+	 * @see #setInheritedEntry(DetailCode)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedEntry()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getInheritedEntry();
+	DetailCode getInheritedEntry();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inherited Entry</em>' attribute.
+	 * @param value the new value of the '<em>Inherited Entry</em>' containment reference.
 	 * @see #getInheritedEntry()
 	 * @generated
 	 */
-	void setInheritedEntry(String value);
+	void setInheritedEntry(DetailCode value);
 
 	/**
-	 * Returns the value of the '<em><b>Inherited Exit</b></em>' attribute.
+	 * Returns the value of the '<em><b>Inherited Exit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inherited Exit</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inherited Exit</em>' attribute.
-	 * @see #setInheritedExit(String)
+	 * @return the value of the '<em>Inherited Exit</em>' containment reference.
+	 * @see #setInheritedExit(DetailCode)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedExit()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getInheritedExit();
+	DetailCode getInheritedExit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inherited Exit</em>' attribute.
+	 * @param value the new value of the '<em>Inherited Exit</em>' containment reference.
 	 * @see #getInheritedExit()
 	 * @generated
 	 */
-	void setInheritedExit(String value);
+	void setInheritedExit(DetailCode value);
 
 	/**
-	 * Returns the value of the '<em><b>Inherited Do</b></em>' attribute.
+	 * Returns the value of the '<em><b>Inherited Do</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inherited Do</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inherited Do</em>' attribute.
-	 * @see #setInheritedDo(String)
+	 * @return the value of the '<em>Inherited Do</em>' containment reference.
+	 * @see #setInheritedDo(DetailCode)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedDo()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getInheritedDo();
+	DetailCode getInheritedDo();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inherited Do</em>' attribute.
+	 * @param value the new value of the '<em>Inherited Do</em>' containment reference.
 	 * @see #getInheritedDo()
 	 * @generated
 	 */
-	void setInheritedDo(String value);
+	void setInheritedDo(DetailCode value);
 
 	/**
 	 * <!-- begin-user-doc -->

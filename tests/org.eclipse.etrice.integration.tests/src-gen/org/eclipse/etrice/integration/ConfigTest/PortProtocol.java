@@ -8,7 +8,7 @@ import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 /*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 

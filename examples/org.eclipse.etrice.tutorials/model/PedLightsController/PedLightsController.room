@@ -1,7 +1,7 @@
 RoomModel PedLightsController {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib/models/TimingService.room"
-	import room.basic.types.java.* from "../../../org.eclipse.etrice.modellib/models/JavaTypes.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/models/TimingService.room"
+	import room.basic.types.java.* from "../../../org.eclipse.etrice.modellib.java/models/JavaTypes.room"
 
 	LogicalSystem LogSys_PedLights {
 		SubSystemRef application: SubSys_PedLights

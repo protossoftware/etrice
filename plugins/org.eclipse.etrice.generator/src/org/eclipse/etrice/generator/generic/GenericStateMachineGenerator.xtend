@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.Transition
@@ -33,12 +32,13 @@ import static org.eclipse.xtext.util.Tuples.*
 
 class GenericStateMachineGenerator {
 
-	@Inject protected extension ILanguageExtension langExt
-	@Inject protected extension RoomExtensions roomExt
-	@Inject protected extension GenericProtocolClassGenerator pcGen
-	@Inject protected extension org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator languageGen
+	@Inject protected ILanguageExtension langExt
+	@Inject protected extension RoomExtensions
+	@Inject protected GenericProtocolClassGenerator pcGen
+	@Inject protected org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator languageGen
 
-	def private genStateIdConstants(ExpandedActorClass xpac, ActorClass ac) {
+	def private genStateIdConstants(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
 		// with inheritance we exclude inherited base states
 		var offset = 2 + if (langExt.usesInheritance)
 			ac.getNumberOfInheritedBaseStates() else 0
@@ -60,7 +60,8 @@ class GenericStateMachineGenerator {
 		return langExt.genEnumeration("state_ids", list)
 	}
 	
-	def private genTransitionChainConstants(ExpandedActorClass xpac, ActorClass ac) {
+	def private genTransitionChainConstants(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
 		var chains = if (langExt.usesInheritance)
 			xpac.getOwnTransitionChains() else xpac.transitionChains
 		var offset = if (langExt.usesInheritance)
@@ -75,11 +76,12 @@ class GenericStateMachineGenerator {
 		return langExt.genEnumeration("chain_ids", list)
 	}
 	
-	def private genTriggerConstants(ExpandedActorClass xpac, ActorClass ac) {
-		var triggers = if (langExt.usesInheritance)
+	def private genTriggerConstants(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		val triggers = if (langExt.usesInheritance)
 			xpac.getOwnTriggers() else xpac.triggers
 
-		var list = new ArrayList<Pair<String, String>>()
+		val list = new ArrayList<Pair<String, String>>()
 		list.add(pair("POLLING", "0"));
 		for (mif : triggers) {
 			list.add(pair(xpac.getTriggerCodeName(mif), "IFITEM_"+mif.from.name+" + EVT_SHIFT*"+pcGen.getMessageID(mif)))
@@ -88,24 +90,25 @@ class GenericStateMachineGenerator {
 		return langExt.genEnumeration("triggers", list)
 	}
 	
-	def genStateMachine(ExpandedActorClass xpac, ActorClass ac) {
-		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
-		var eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
-		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
-		var handleEvents = async || eventDriven
+	def genStateMachine(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
+		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
+		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
+		val handleEvents = async || eventDriven
 		
 	'''
 		
 		/* state IDs */
-		«genStateIdConstants(xpac, ac)»
+		«xpac.genStateIdConstants»
 		
 		/* transition chains */
-		«genTransitionChainConstants(xpac, ac)»
+		«xpac.genTransitionChainConstants»
 		
 		/* triggers */
-		«genTriggerConstants(xpac, ac)»
+		«xpac.genTriggerConstants»
 
-		«genExtra(xpac, ac)»
+		«genExtra(xpac)»
 		
 		/* Entry and Exit Codes */
 		«FOR state : xpac.stateMachine.getStateList()»
@@ -159,7 +162,7 @@ class GenericStateMachineGenerator {
 				«FOR tc : allchains»
 					case «tc.getChainId()»:
 					{
-						«xpac.generateExecuteChain(tc)»
+						«languageGen.generateExecuteChain(xpac, tc)»
 					}
 				«ENDFOR»
 			}
@@ -252,7 +255,6 @@ class GenericStateMachineGenerator {
 		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
 		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
-		var handleEvents = async || eventDriven
 		'''
 			switch («langExt.memberAccess»state) {
 				«FOR state : xpac.stateMachine.getLeafStateList()»
@@ -310,7 +312,7 @@ class GenericStateMachineGenerator {
 			«FOR at : atlist»
 				case «xpac.getTriggerCodeName(at.trigger)»:
 					«var needData = xpac.hasGuard(at)»
-					«IF needData»{ «at.msg.getTypedDataDefinition()»«ENDIF»
+					«IF needData»{ «langExt.getTypedDataDefinition(at.msg)»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»
 						«var chain = xpac.getChain(tt)»
 						«guard(chain.transition, at.trigger, xpac)»
@@ -326,7 +328,7 @@ class GenericStateMachineGenerator {
 			«ENDFOR»
 		'''
 	}
-	def genExtra(ExpandedActorClass xpac, ActorClass ac) {''''''}
+	def genExtra(ExpandedActorClass xpac) {''''''}
 	
 	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {
 		var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
@@ -362,6 +364,9 @@ class GenericStateMachineGenerator {
 		var docode = AbstractGenerator::getInstance().getTranslatedCode(state.doCode)
 		if (state instanceof ExpandedRefinedState) {
 			val rs = state as ExpandedRefinedState
+			val inhEntry = AbstractGenerator::getInstance().getTranslatedCode(rs.inheritedEntry)
+			val inhExit = AbstractGenerator::getInstance().getTranslatedCode(rs.inheritedExit)
+			val inhDo = AbstractGenerator::getInstance().getTranslatedCode(rs.inheritedDo)
 			if (langExt.usesInheritance) {
 				// we call the super method in the generated code
 				val baseName = xpac.actorClass.base.name
@@ -374,9 +379,9 @@ class GenericStateMachineGenerator {
 			}
 			else {
 				// the inherited code is added directly
-				entry = rs.inheritedEntry + entry
-				exit = exit + rs.inheritedExit
-				docode = rs.inheritedDo + docode
+				entry = inhEntry + entry
+				exit = exit + inhExit
+				docode = inhDo + docode
 			}
 		}
 		'''

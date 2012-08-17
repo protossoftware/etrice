@@ -36,7 +36,7 @@ public class PingPongProtocol {
 	static public class PingPongProtocolPort extends PortBase {
 		// constructors
 		public PingPongProtocolPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PingPongProtocolPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -84,13 +84,13 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolPortRepl {
+	static public class PingPongProtocolReplPort {
 		private ArrayList<PingPongProtocolPort> ports;
 		private int replication;
 	
-		public PingPongProtocolPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PingPongProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PingPongProtocolPort(
@@ -128,7 +128,7 @@ public class PingPongProtocol {
 	static public class PingPongProtocolConjPort extends PortBase {
 		// constructors
 		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -176,13 +176,13 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolConjPortRepl {
+	static public class PingPongProtocolConjReplPort {
 		private ArrayList<PingPongProtocolConjPort> ports;
 		private int replication;
 	
-		public PingPongProtocolConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public PingPongProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<PingPongProtocol.PingPongProtocolConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new PingPongProtocolConjPort(

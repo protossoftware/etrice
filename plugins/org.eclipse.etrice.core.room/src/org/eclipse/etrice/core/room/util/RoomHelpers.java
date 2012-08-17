@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -181,6 +182,62 @@ public class RoomHelpers {
 		return result;
 	}
 
+	public static String getDeepUserCode1(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(DataClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE3);
+	}
+
+	public static String getDeepUserCode1(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(ProtocolClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE3);
+	}
+
+	public static String getDeepUserCode1(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE1);
+	}
+
+	public static String getDeepUserCode2(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE2);
+	}
+
+	public static String getDeepUserCode3(ActorContainerClass ac) {
+		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE3);
+	}
+	
+	private static String getDeepUserCode(EObject obj, EStructuralFeature code) {
+		StringBuffer result = new StringBuffer();
+		
+		while (obj!=null) {
+			DetailCode dc = (DetailCode) obj.eGet(code);
+			result.insert(0, getDetailCode(dc));
+			
+			if (obj instanceof ActorClass)
+				obj = ((ActorClass) obj).getBase();
+			else if (obj instanceof ProtocolClass)
+				obj = ((ProtocolClass) obj).getBase();
+			else if (obj instanceof DataClass)
+				obj = ((DataClass) obj).getBase();
+			else
+				break;
+		}
+
+		return result.toString();
+	}
+	
 	public static boolean hasSubStructure(State state, ActorClass ac) {
 		if (hasDirectSubStructure(state))
 			return true;
@@ -290,7 +347,7 @@ public class RoomHelpers {
 			return true;
 		
 		if (includeInherited && s instanceof RefinedState)
-			return !getInheritedCode((RefinedState) s, feature).isEmpty();
+			return !getInheritedCode((RefinedState) s, feature, true /* order doesn't matter here */).getCommands().isEmpty();
 		
 		return false;
 	}
@@ -310,16 +367,16 @@ public class RoomHelpers {
 		return result.toString();
 	}
 
-	public static String getInheritedEntryCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE);
+	public static DetailCode getInheritedEntryCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE, true);
 	}
 
-	public static String getInheritedExitCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE);
+	public static DetailCode getInheritedExitCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE, false);
 	}
 
-	public static String getInheritedDoCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE);
+	public static DetailCode getInheritedDoCode(RefinedState rs) {
+		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE, true);
 	}
 	
 	/**
@@ -327,17 +384,24 @@ public class RoomHelpers {
 	 * @param code
 	 * @return
 	 */
-	private static String getInheritedCode(RefinedState rs, EReference code) {
-		StringBuffer result = new StringBuffer();
+	private static DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
+		DetailCode result = RoomFactory.eINSTANCE.createDetailCode();
 		State s = rs.getTarget();
 		while (s!=null) {
-			result.append(RoomHelpers.getDetailCode((DetailCode) s.eGet(code)));
+			DetailCode dc = (DetailCode) s.eGet(code);
+			if (dc!=null) {
+				if (addFront)
+					result.getCommands().addAll(0, dc.getCommands());
+				else
+					result.getCommands().addAll(dc.getCommands());
+				
+			}
 			if (s instanceof RefinedState)
 				s = ((RefinedState) s).getTarget();
 			else
 				break;
 		}
-		return result.toString();
+		return result;
 	}
 
 	/**
@@ -501,21 +565,6 @@ public class RoomHelpers {
 	public static Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 	}
-
-	/*
-	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
-		if (skip instanceof Transition)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
-		else if (skip instanceof State)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
-		else if (skip instanceof ChoicePoint)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
-		else if (skip instanceof TrPoint)
-			return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
-		
-		return Collections.emptySet();
-	}
-	*/
 	
 	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
 		List<T> items = RoomHelpers.getAllStateGraphItems(sg, feature, false);
@@ -529,11 +578,26 @@ public class RoomHelpers {
 		return names;
 	}
 	
+	public static List<Message> getAllMessages(ProtocolClass pc, boolean incoming) {
+		ArrayList<Message> result = new ArrayList<Message>();
+		
+		while (pc!=null) {
+			if (incoming)
+				result.addAll(0, pc.getIncomingMessages());
+			else
+				result.addAll(0, pc.getOutgoingMessages());
+			
+			pc = pc.getBase();
+		}
+		
+		return result;
+	}
+
 	public static List<Attribute> getAllAttributes(ActorClass ac) {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (ac!=null) {
-			result.addAll(ac.getAttributes());
+			result.addAll(0, ac.getAttributes());
 			
 			ac = ac.getBase();
 		}
@@ -545,7 +609,7 @@ public class RoomHelpers {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (dc!=null) {
-			result.addAll(dc.getAttributes());
+			result.addAll(0, dc.getAttributes());
 			
 			dc = dc.getBase();
 		}
@@ -557,7 +621,7 @@ public class RoomHelpers {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (ac!=null) {
-			result.addAll(ac.getOperations());
+			result.addAll(0, ac.getOperations());
 			
 			ac = ac.getBase();
 		}
@@ -569,7 +633,7 @@ public class RoomHelpers {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (dc!=null) {
-			result.addAll(dc.getOperations());
+			result.addAll(0, dc.getOperations());
 			
 			dc = dc.getBase();
 		}
@@ -1097,6 +1161,53 @@ public class RoomHelpers {
 			rt.setRef(nref>0);
 			rt.setType(common);
 			return rt;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * @param trans
+	 * @param actorClass
+	 * @return
+	 */
+	public static String getInheritedActionCode(Transition trans, ActorClass ac) {
+		return getActionCode(trans, ac, false);
+	}
+
+	/**
+	 * @param trans
+	 * @param actorClass
+	 * @return
+	 */
+	public static String getAllActionCode(Transition trans, ActorClass ac) {
+		return getActionCode(trans, ac, true);
+	}
+	
+	private static String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
+		StringBuffer result = new StringBuffer();
+		
+		ActorClass baseAC = getActorClass(trans);
+		
+		if (!includeOwn) {
+			if (ac==baseAC)
+				return null;
+			ac = ac.getBase();
+		}
+		
+		while (ac!=null) {
+			if (ac==baseAC) {
+				result.insert(0, getDetailCode(trans.getAction()));
+				return result.toString();
+			}
+			
+			if (ac.getStateMachine()!=null)
+				for (RefinedTransition rt : ac.getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans)
+						result.insert(0, getDetailCode(rt.getAction()));
+				}
+			
+			ac = ac.getBase();
 		}
 		
 		return null;

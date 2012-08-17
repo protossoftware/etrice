@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -2905,13 +2901,22 @@ public interface RoomPackage extends EPackage
   int STATE_GRAPH__TRANSITIONS = 3;
 
   /**
+   * The feature id for the '<em><b>Refined Transitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_GRAPH__REFINED_TRANSITIONS = 4;
+
+  /**
    * The number of structural features of the '<em>State Graph</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_GRAPH_FEATURE_COUNT = 4;
+  int STATE_GRAPH_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
@@ -3767,6 +3772,52 @@ public interface RoomPackage extends EPackage
   int CP_BRANCH_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefinedTransitionImpl <em>Refined Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.impl.RefinedTransitionImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedTransition()
+   * @generated
+   */
+  int REFINED_TRANSITION = 69;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION__TARGET = 0;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION__DOCU = 1;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION__ACTION = 2;
+
+  /**
+   * The number of structural features of the '<em>Refined Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3774,7 +3825,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionTerminal()
    * @generated
    */
-  int TRANSITION_TERMINAL = 69;
+  int TRANSITION_TERMINAL = 70;
 
   /**
    * The number of structural features of the '<em>Transition Terminal</em>' class.
@@ -3793,7 +3844,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateTerminal()
    * @generated
    */
-  int STATE_TERMINAL = 70;
+  int STATE_TERMINAL = 71;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -3821,7 +3872,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPointTerminal()
    * @generated
    */
-  int TR_POINT_TERMINAL = 71;
+  int TR_POINT_TERMINAL = 72;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3849,7 +3900,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubStateTrPointTerminal()
    * @generated
    */
-  int SUB_STATE_TR_POINT_TERMINAL = 72;
+  int SUB_STATE_TR_POINT_TERMINAL = 73;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3886,7 +3937,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicepointTerminal()
    * @generated
    */
-  int CHOICEPOINT_TERMINAL = 73;
+  int CHOICEPOINT_TERMINAL = 74;
 
   /**
    * The feature id for the '<em><b>Cp</b></em>' reference.
@@ -3914,7 +3965,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrigger()
    * @generated
    */
-  int TRIGGER = 74;
+  int TRIGGER = 75;
 
   /**
    * The feature id for the '<em><b>Msg From If Pairs</b></em>' containment reference list.
@@ -3951,7 +4002,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getMessageFromIf()
    * @generated
    */
-  int MESSAGE_FROM_IF = 75;
+  int MESSAGE_FROM_IF = 76;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' reference.
@@ -3988,7 +4039,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuard()
    * @generated
    */
-  int GUARD = 76;
+  int GUARD = 77;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -4016,7 +4067,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDocumentation()
    * @generated
    */
-  int DOCUMENTATION = 77;
+  int DOCUMENTATION = 78;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' attribute list.
@@ -4044,7 +4095,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
    * @generated
    */
-  int ANNOTATION = 78;
+  int ANNOTATION = 79;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4081,7 +4132,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
    * @generated
    */
-  int KEY_VALUE = 79;
+  int KEY_VALUE = 80;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4118,7 +4169,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 80;
+  int IMPORT = 81;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -4155,7 +4206,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
    * @generated
    */
-  int LITERAL_TYPE = 81;
+  int LITERAL_TYPE = 82;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
@@ -4165,7 +4216,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 82;
+  int COMMUNICATION_TYPE = 83;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -4175,7 +4226,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 83;
+  int ACTOR_COMMUNICATION_TYPE = 84;
 
 
   /**
@@ -6139,6 +6190,17 @@ public interface RoomPackage extends EPackage
   EReference getStateGraph_Transitions();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getRefinedTransitions <em>Refined Transitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Refined Transitions</em>'.
+   * @see org.eclipse.etrice.core.room.StateGraph#getRefinedTransitions()
+   * @see #getStateGraph()
+   * @generated
+   */
+  EReference getStateGraph_RefinedTransitions();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6462,6 +6524,49 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getCPBranchTransition_Condition();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefinedTransition <em>Refined Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Refined Transition</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedTransition
+   * @generated
+   */
+  EClass getRefinedTransition();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getTarget <em>Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Target</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedTransition#getTarget()
+   * @see #getRefinedTransition()
+   * @generated
+   */
+  EReference getRefinedTransition_Target();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getDocu <em>Docu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Docu</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedTransition#getDocu()
+   * @see #getRefinedTransition()
+   * @generated
+   */
+  EReference getRefinedTransition_Docu();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getAction <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @see org.eclipse.etrice.core.room.RefinedTransition#getAction()
+   * @see #getRefinedTransition()
+   * @generated
+   */
+  EReference getRefinedTransition_Action();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TransitionTerminal <em>Transition Terminal</em>}'.
@@ -8394,6 +8499,14 @@ public interface RoomPackage extends EPackage
     EReference STATE_GRAPH__TRANSITIONS = eINSTANCE.getStateGraph_Transitions();
 
     /**
+     * The meta object literal for the '<em><b>Refined Transitions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE_GRAPH__REFINED_TRANSITIONS = eINSTANCE.getStateGraph_RefinedTransitions();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -8672,6 +8785,40 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference CP_BRANCH_TRANSITION__CONDITION = eINSTANCE.getCPBranchTransition_Condition();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefinedTransitionImpl <em>Refined Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.RefinedTransitionImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedTransition()
+     * @generated
+     */
+    EClass REFINED_TRANSITION = eINSTANCE.getRefinedTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFINED_TRANSITION__TARGET = eINSTANCE.getRefinedTransition_Target();
+
+    /**
+     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFINED_TRANSITION__DOCU = eINSTANCE.getRefinedTransition_Docu();
+
+    /**
+     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFINED_TRANSITION__ACTION = eINSTANCE.getRefinedTransition_Action();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.

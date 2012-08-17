@@ -13,11 +13,11 @@ import room.basic.service.tcp.PTcpControl.*;
 import room.basic.service.tcp.PTcpPayload.*;
 
 /*--------------------- begin user code ---------------------*/
-	import java.net.ServerSocket;
-	import java.net.Socket;
-	import java.io.*;
-	import java.util.*;
-	
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.*;
+import java.util.*;
+
 				class ServerRxThread extends Thread{
 					private int connectionId;
 					private Socket sock;
@@ -68,20 +68,22 @@ import room.basic.service.tcp.PTcpPayload.*;
 					}
 				}
 			}
+		
 /*--------------------- end user code ---------------------*/
 
 
 public class ATcpServer extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		ServerSocket socket = null;
-		InputStream in = null;
-		OutputStream out = null;
-		Hashtable<Integer,OutputStream> outStreams = new Hashtable<Integer,OutputStream>();
-		
+	ServerSocket socket = null;
+	InputStream in = null;
+	OutputStream out = null;
+	Hashtable<Integer,OutputStream> outStreams = new Hashtable<Integer,OutputStream>();
+	
 					synchronized protected void addOutStreamToHashmap(int cnt, OutputStream out){
 						outStreams.put(cnt,out);
 					}
+					
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
@@ -126,7 +128,6 @@ public class ATcpServer extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setLastError (int lastError) {
 		 this.lastError = lastError;

@@ -202,9 +202,10 @@ public class EtUnitReportConverter {
 	private static void saveTexReport(DocumentRoot root, File report) {
 		StringBuilder contents = new StringBuilder();
 
-		contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
-		contents.append("\\newcommand{\\ForAllSuites}{%\n");
-		contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
+        contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
+        contents.append("\\newcounter{FailCount}%\n");
+        contents.append("\\newcommand{\\ForAllSuites}{%\n");
+        contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
 		for (TestsuiteType ts : root.getTestsuites().getTestsuite()) {
 			contents.append("    \\setcounter{FailCount}{"+ts.getFailures()+"}%\n");
 			contents.append("    \\renewcommand{\\ForAllTestCases}{%\n");
@@ -264,6 +265,8 @@ public class EtUnitReportConverter {
 			++count;
 			if (!line.equals("etUnit report")) {
 				System.err.println("Error: file "+report+", line "+line+" is missing header line - no etunit file");
+				bufRead.close();
+				input.close();
 				return null;
 			}
 
@@ -293,6 +296,8 @@ public class EtUnitReportConverter {
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
 						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
+						bufRead.close();
+						input.close();
 						return null;
 					}
 					FailureType fail = EtunitFactory.eINSTANCE.createFailureType();
@@ -321,6 +326,8 @@ public class EtUnitReportConverter {
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
 						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
+						bufRead.close();
+						input.close();
 						return null;
 					}
 					tc.setTime(BigDecimal.valueOf(time));

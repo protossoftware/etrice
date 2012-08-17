@@ -13,9 +13,9 @@ import room.basic.service.tcp.PTcpControl.*;
 import room.basic.service.tcp.PTcpPayload.*;
 
 /*--------------------- begin user code ---------------------*/
-	import java.net.Socket;
-	import java.io.*;
-		
+import java.net.Socket;
+import java.io.*;
+	
 			class ClientRxThread extends Thread{
 				private Socket sock;
 				PTcpPayloadPort port;
@@ -45,9 +45,9 @@ import room.basic.service.tcp.PTcpPayload.*;
 public class ATcpClient extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-		Socket socket;
-		InputStream in;
-		OutputStream out;
+	Socket socket;
+	InputStream in;
+	OutputStream out;
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
@@ -90,7 +90,6 @@ public class ATcpClient extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setLastError (int lastError) {
 		 this.lastError = lastError;

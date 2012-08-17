@@ -238,7 +238,7 @@ public class InitialPointSupport {
 			public boolean canRemove(IRemoveContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof StateGraph) {
-					return true;
+					return !SupportUtil.isInherited(getDiagram(), (StateGraph) bo);
 				}
 				return false;
 			}

@@ -108,7 +108,7 @@ etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 /* receiver handlers */
 void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
 	/*--------------------- begin user code ---------------------*/
-		//TODO: clear active bit in case of single shot timer
+	//TODO: clear active bit in case of single shot timer
 				if (((PTimerConjPort_var*)(self->varData))->status!=0){
 					if (((PTimerConjPort_var*)(self->varData))->status==ET_TIMER_RUNNING){
 						// single shot timer
@@ -117,6 +117,7 @@ void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage
 					// msg to fsm
 					(*receiveMessageFunc)(actor, self, msg);
 					}
+				
 	/*--------------------- end user code ---------------------*/
 	/* hand over the message to the actor:      */
 	/* (*receiveMessageFunc)(actor, self, msg); */
@@ -126,7 +127,7 @@ void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage
 /*--------------------- debug helpers */
 
 /* message names as strings for debugging (generate MSC) */
-static const char* PTimer_messageStrings[] = {"MIN", "timeout","startTimer", "startTimeout", "kill", "MAX"};
+static const char* const PTimer_messageStrings[] = {"MIN", "timeout","startTimer", "startTimeout", "kill", "MAX"};
 
 const char* PTimer_getMessageString(int msg_id) {
 	if (msg_id<PTimer_MSG_MIN || msg_id>PTimer_MSG_MAX+1){

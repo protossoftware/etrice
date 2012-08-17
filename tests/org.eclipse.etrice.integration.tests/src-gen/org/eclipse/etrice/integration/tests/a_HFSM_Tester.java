@@ -12,7 +12,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.integration.tests.p_HFSM.*;
 
 /*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 
@@ -46,7 +46,6 @@ public class a_HFSM_Tester extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public p_HFSMConjPort getTestee (){

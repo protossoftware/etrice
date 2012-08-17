@@ -32,7 +32,7 @@
             extensions="structure"
             icon="icons/Structure.gif"
             id="org.eclipse.etrice.ui.structure.editor.StructureEditor"
-            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorFactory$DiagramEditorMatchingStrategy"
+            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
             name="ROOM Structure Editor">
          <contentTypeBinding
                contentTypeId="org.eclipse.graphiti.content.diagram">

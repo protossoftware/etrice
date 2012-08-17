@@ -44,6 +44,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -370,16 +371,21 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkProtocol(ProtocolClass pc) {
 		switch (pc.getCommType()) {
 		case DATA_DRIVEN:
-			if (pc.getIncomingMessages().isEmpty())
+			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.DATA_DRIVEN)
+				error("super protocol has to have same communication type", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
+			if (RoomHelpers.getAllMessages(pc, true).isEmpty())
 				error("at least one incoming message must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
-			if (!pc.getOutgoingMessages().isEmpty())
+			if (!RoomHelpers.getAllMessages(pc, false).isEmpty())
 				error("data driven protocols must have no outgoing messages", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
 			break;
 		case EVENT_DRIVEN:
-			if (pc.getIncomingMessages().isEmpty() && pc.getOutgoingMessages().isEmpty())
+			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.EVENT_DRIVEN)
+				error("super protocol has to have same communication type", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
+			if (RoomHelpers.getAllMessages(pc, true).isEmpty() && RoomHelpers.getAllMessages(pc, false).isEmpty())
 				error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
 			break;
 		case SYNCHRONOUS:
+			error("synchronous communication type not supported yet", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
 			break;
 		default:
 		}
@@ -406,6 +412,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
 			if (op.getReturntype()!=null)
 				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+		}
+	}
+	
+	@Check
+	public void checkRefinedTransition(RefinedTransition rt) {
+		if (!(rt.eContainer().eContainer() instanceof ActorClass)) {
+			StateGraph sg = (StateGraph) rt.eContainer();
+			int idx = sg.getRefinedTransitions().indexOf(rt);
+			error("RefinedTransition only allowed in top level state graph of an actor", sg, RoomPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
 		}
 	}
 	

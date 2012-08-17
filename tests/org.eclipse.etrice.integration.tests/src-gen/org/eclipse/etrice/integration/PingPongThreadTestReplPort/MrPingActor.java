@@ -14,7 +14,7 @@ import room.basic.service.timing.PTimeout.*;
 import org.eclipse.etrice.integration.PingPongThreadTestReplPort.PingPongProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
-	import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 
@@ -55,7 +55,6 @@ public class MrPingActor extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setCount (int count) {
 		 this.count = count;

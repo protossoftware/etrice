@@ -52,6 +52,8 @@ public class SubSystem_HelloWorld extends SubSystemClassBase{
 			new Address[][] {{addr_item_SystemPort_0}
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

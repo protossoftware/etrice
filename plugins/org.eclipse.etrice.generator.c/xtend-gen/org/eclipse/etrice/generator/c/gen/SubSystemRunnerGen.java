@@ -7,12 +7,11 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class SubSystemRunnerGen {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -28,18 +27,18 @@ public class SubSystemRunnerGen {
         String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
         String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
-        this.fileAccess.setOutputPath(_operator_plus);
+        String _plus = (_generationTargetPath + _path);
+        this.fileAccess.setOutputPath(_plus);
         String _name = sc.getName();
-        String _operator_plus_1 = StringExtensions.operator_plus(_name, "_Runner.c");
+        String _plus_1 = (_name + "_Runner.c");
         SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        StringConcatenation _generateSourceFile = this.generateSourceFile(root, sc, _subSystemClass_2);
-        this.fileAccess.generateFile(_operator_plus_1, _generateSourceFile);
+        CharSequence _generateSourceFile = this.generateSourceFile(root, sc, _subSystemClass_2);
+        this.fileAccess.generateFile(_plus_1, _generateSourceFile);
       }
     }
   }
   
-  public StringConcatenation generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
+  public CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final SubSystemClass ssc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();

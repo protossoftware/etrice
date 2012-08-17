@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room.impl;
 
@@ -21,6 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -38,6 +35,7 @@ import org.eclipse.etrice.core.room.Transition;
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateGraphImpl#getTrPoints <em>Tr Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateGraphImpl#getChPoints <em>Ch Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StateGraphImpl#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.StateGraphImpl#getRefinedTransitions <em>Refined Transitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +82,16 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * @ordered
    */
   protected EList<Transition> transitions;
+
+  /**
+   * The cached value of the '{@link #getRefinedTransitions() <em>Refined Transitions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefinedTransitions()
+   * @generated
+   * @ordered
+   */
+  protected EList<RefinedTransition> refinedTransitions;
 
   /**
    * <!-- begin-user-doc -->
@@ -167,6 +175,20 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<RefinedTransition> getRefinedTransitions()
+  {
+    if (refinedTransitions == null)
+    {
+      refinedTransitions = new EObjectContainmentEList<RefinedTransition>(RefinedTransition.class, this, RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS);
+    }
+    return refinedTransitions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -180,6 +202,8 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
         return ((InternalEList<?>)getChPoints()).basicRemove(otherEnd, msgs);
       case RoomPackage.STATE_GRAPH__TRANSITIONS:
         return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
+      case RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS:
+        return ((InternalEList<?>)getRefinedTransitions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -202,6 +226,8 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
         return getChPoints();
       case RoomPackage.STATE_GRAPH__TRANSITIONS:
         return getTransitions();
+      case RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS:
+        return getRefinedTransitions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -233,6 +259,10 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
         getTransitions().clear();
         getTransitions().addAll((Collection<? extends Transition>)newValue);
         return;
+      case RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS:
+        getRefinedTransitions().clear();
+        getRefinedTransitions().addAll((Collection<? extends RefinedTransition>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -259,6 +289,9 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
       case RoomPackage.STATE_GRAPH__TRANSITIONS:
         getTransitions().clear();
         return;
+      case RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS:
+        getRefinedTransitions().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -281,6 +314,8 @@ public class StateGraphImpl extends MinimalEObjectImpl.Container implements Stat
         return chPoints != null && !chPoints.isEmpty();
       case RoomPackage.STATE_GRAPH__TRANSITIONS:
         return transitions != null && !transitions.isEmpty();
+      case RoomPackage.STATE_GRAPH__REFINED_TRANSITIONS:
+        return refinedTransitions != null && !refinedTransitions.isEmpty();
     }
     return super.eIsSet(featureID);
   }

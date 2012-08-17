@@ -1,5 +1,6 @@
 package org.eclipse.etrice.generator.java.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -17,32 +18,26 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class DataClassGen {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private JavaExtensions _javaExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ProcedureHelpers helpers;
-  
-  @Inject
-  private TypeHelpers typeHelpers;
+  private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private ILogger logger;
@@ -51,56 +46,42 @@ public class DataClassGen {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
       {
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(dc);
-        String _path = this.roomExt.getPath(dc);
-        String _operator_plus = StringExtensions.operator_plus(_generationTargetPath, _path);
-        String path = _operator_plus;
-        String _javaFileName = this.stdExt.getJavaFileName(dc);
-        String file = _javaFileName;
-        String _operator_plus_1 = StringExtensions.operator_plus("generating DataClass implementation \'", file);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "\' in \'");
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, path);
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "\'");
-        this.logger.logInfo(_operator_plus_4);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
+        String _path = this._roomExtensions.getPath(dc);
+        String path = (_generationTargetPath + _path);
+        String file = this._javaExtensions.getJavaFileName(dc);
+        String _plus = ("generating DataClass implementation \'" + file);
+        String _plus_1 = (_plus + "\' in \'");
+        String _plus_2 = (_plus_1 + path);
+        String _plus_3 = (_plus_2 + "\'");
+        this.logger.logInfo(_plus_3);
         this.fileAccess.setOutputPath(path);
-        StringConcatenation _generate = this.generate(root, dc);
+        CharSequence _generate = this.generate(root, dc);
         this.fileAccess.generateFile(file, _generate);
       }
     }
   }
   
-  public StringConcatenation generate(final Root root, final DataClass dc) {
-    StringConcatenation _xblockexpression = null;
+  public CharSequence generate(final Root root, final DataClass dc) {
+    CharSequence _xblockexpression = null;
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
           public Boolean apply(final StandardOperation op) {
             boolean _isConstructor = RoomHelpers.isConstructor(op);
-            return ((Boolean)_isConstructor);
+            return Boolean.valueOf(_isConstructor);
           }
         };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
-      StandardOperation _head = IterableExtensions.<StandardOperation>head(_filter);
-      final StandardOperation ctor = _head;
-      EList<StandardOperation> _operations_1 = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isDestructor = op.isDestructor();
-            return ((Boolean)_isDestructor);
-          }
-        };
-      Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
-      StandardOperation _head_1 = IterableExtensions.<StandardOperation>head(_filter_1);
-      final StandardOperation dtor = _head_1;
+      final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
-      String _package = this.roomExt.getPackage(dc);
+      String _package = this._roomExtensions.getPackage(dc);
       _builder.append(_package, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      EList<RoomModel> _referencedModels = root.getReferencedModels(dc);
-      EList<RoomModel> models = _referencedModels;
+      EList<RoomModel> models = root.getReferencedModels(dc);
       _builder.newLineIfNotEmpty();
       {
         for(final RoomModel model : models) {
@@ -112,8 +93,7 @@ public class DataClassGen {
         }
       }
       _builder.newLine();
-      DetailCode _userCode1 = dc.getUserCode1();
-      StringConcatenation _userCode = this.helpers.userCode(_userCode1);
+      CharSequence _userCode = this._procedureHelpers.userCode(dc, 1);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -123,8 +103,8 @@ public class DataClassGen {
       _builder.append(_name_1, "");
       {
         DataClass _base = dc.getBase();
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_base, null);
-        if (_operator_notEquals) {
+        boolean _notEquals = (!Objects.equal(_base, null));
+        if (_notEquals) {
           _builder.append(" extends ");
           DataClass _base_1 = dc.getBase();
           String _name_2 = _base_1.getName();
@@ -136,15 +116,14 @@ public class DataClassGen {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      DetailCode _userCode2 = dc.getUserCode2();
-      StringConcatenation _userCode_1 = this.helpers.userCode(_userCode2);
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(dc, 2);
       _builder.append(_userCode_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes = dc.getAttributes();
-      StringConcatenation _attributes_1 = this.helpers.attributes(_attributes);
+      CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
       _builder.append(_attributes_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -152,15 +131,15 @@ public class DataClassGen {
       _builder.append("\t");
       EList<Attribute> _attributes_2 = dc.getAttributes();
       String _name_3 = dc.getName();
-      StringConcatenation _attributeSettersGettersImplementation = this.helpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
       _builder.append(_attributeSettersGettersImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      EList<StandardOperation> _operations_2 = dc.getOperations();
+      EList<StandardOperation> _operations_1 = dc.getOperations();
       String _name_4 = dc.getName();
-      StringConcatenation _operationsImplementation = this.helpers.operationsImplementation(_operations_2, _name_4);
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations_1, _name_4);
       _builder.append(_operationsImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -181,12 +160,12 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_3 = dc.getAttributes();
-      StringConcatenation _attributeInitialization = this.helpers.attributeInitialization(_attributes_3, true);
+      CharSequence _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes_3, true);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       {
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(ctor, null);
-        if (_operator_notEquals_1) {
+        boolean _notEquals_1 = (!Objects.equal(ctor, null));
+        if (_notEquals_1) {
           _builder.append("\t\t");
           _builder.newLine();
           _builder.append("\t\t");
@@ -230,8 +209,8 @@ public class DataClassGen {
       _builder.newLineIfNotEmpty();
       {
         DataClass _base_2 = dc.getBase();
-        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_base_2, null);
-        if (_operator_notEquals_2) {
+        boolean _notEquals_2 = (!Objects.equal(_base_2, null));
+        if (_notEquals_2) {
           _builder.append("\t\t");
           _builder.append("super(");
           DataClass _base_3 = dc.getBase();
@@ -301,38 +280,38 @@ public class DataClassGen {
   }
   
   public String paramList(final DataClass _dc) {
-      String result = "";
-      DataClass dc = _dc;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
-      Boolean _xwhileexpression = _operator_notEquals;
-      while (_xwhileexpression) {
-        {
-          EList<Attribute> _attributes = dc.getAttributes();
-          StringConcatenation _paramList = this.paramList(_attributes);
-          String _string = _paramList.toString();
-          String _operator_plus = StringExtensions.operator_plus(_string, result);
-          result = _operator_plus;
-          DataClass _base = dc.getBase();
-          dc = _base;
-          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
-          if (_operator_notEquals_1) {
-            String _operator_plus_1 = StringExtensions.operator_plus(", ", result);
-            result = _operator_plus_1;
-          }
+    String result = "";
+    DataClass dc = _dc;
+    boolean _notEquals = (!Objects.equal(dc, null));
+    boolean _while = _notEquals;
+    while (_while) {
+      {
+        EList<Attribute> _attributes = dc.getAttributes();
+        CharSequence _paramList = this.paramList(_attributes);
+        String _string = _paramList.toString();
+        String _plus = (_string + result);
+        result = _plus;
+        DataClass _base = dc.getBase();
+        dc = _base;
+        boolean _notEquals_1 = (!Objects.equal(dc, null));
+        if (_notEquals_1) {
+          String _plus_1 = (", " + result);
+          result = _plus_1;
         }
-        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(dc, null);
-        _xwhileexpression = _operator_notEquals_2;
       }
-      return result;
+      boolean _notEquals_1 = (!Objects.equal(dc, null));
+      _while = _notEquals_1;
+    }
+    return result;
   }
   
-  public StringConcatenation paramList(final List<Attribute> attributes) {
+  public CharSequence paramList(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean hasAnyElements = false;
+      boolean _hasElements = false;
       for(final Attribute a : attributes) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
+        if (!_hasElements) {
+          _hasElements = true;
         } else {
           _builder.appendImmediate(", ", "");
         }
@@ -344,53 +323,53 @@ public class DataClassGen {
   }
   
   public String argList(final DataClass _dc) {
-      String result = "";
-      DataClass dc = _dc;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
-      Boolean _xwhileexpression = _operator_notEquals;
-      while (_xwhileexpression) {
-        {
-          EList<Attribute> _attributes = dc.getAttributes();
-          StringConcatenation _argList = this.helpers.argList(_attributes);
-          String _string = _argList.toString();
-          String _operator_plus = StringExtensions.operator_plus(_string, result);
-          result = _operator_plus;
-          DataClass _base = dc.getBase();
-          dc = _base;
-          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
-          if (_operator_notEquals_1) {
-            String _operator_plus_1 = StringExtensions.operator_plus(", ", result);
-            result = _operator_plus_1;
-          }
+    String result = "";
+    DataClass dc = _dc;
+    boolean _notEquals = (!Objects.equal(dc, null));
+    boolean _while = _notEquals;
+    while (_while) {
+      {
+        EList<Attribute> _attributes = dc.getAttributes();
+        CharSequence _argList = this._procedureHelpers.argList(_attributes);
+        String _string = _argList.toString();
+        String _plus = (_string + result);
+        result = _plus;
+        DataClass _base = dc.getBase();
+        dc = _base;
+        boolean _notEquals_1 = (!Objects.equal(dc, null));
+        if (_notEquals_1) {
+          String _plus_1 = (", " + result);
+          result = _plus_1;
         }
-        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(dc, null);
-        _xwhileexpression = _operator_notEquals_2;
       }
-      return result;
+      boolean _notEquals_1 = (!Objects.equal(dc, null));
+      _while = _notEquals_1;
+    }
+    return result;
   }
   
   public String deepCopy(final DataClass _dc) {
-      String result = "";
-      DataClass dc = _dc;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(dc, null);
-      Boolean _xwhileexpression = _operator_notEquals;
-      while (_xwhileexpression) {
-        {
-          EList<Attribute> _attributes = dc.getAttributes();
-          StringConcatenation _deepCopy = this.deepCopy(_attributes);
-          String _string = _deepCopy.toString();
-          String _operator_plus = StringExtensions.operator_plus(_string, result);
-          result = _operator_plus;
-          DataClass _base = dc.getBase();
-          dc = _base;
-        }
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(dc, null);
-        _xwhileexpression = _operator_notEquals_1;
+    String result = "";
+    DataClass dc = _dc;
+    boolean _notEquals = (!Objects.equal(dc, null));
+    boolean _while = _notEquals;
+    while (_while) {
+      {
+        EList<Attribute> _attributes = dc.getAttributes();
+        CharSequence _deepCopy = this.deepCopy(_attributes);
+        String _string = _deepCopy.toString();
+        String _plus = (_string + result);
+        result = _plus;
+        DataClass _base = dc.getBase();
+        dc = _base;
       }
-      return result;
+      boolean _notEquals_1 = (!Objects.equal(dc, null));
+      _while = _notEquals_1;
+    }
+    return result;
   }
   
-  public StringConcatenation deepCopy(final List<Attribute> attributes) {
+  public CharSequence deepCopy(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final Attribute a : attributes) {
@@ -405,8 +384,8 @@ public class DataClassGen {
             _builder.newLineIfNotEmpty();
             {
               int _size = a.getSize();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
-              if (_operator_equals) {
+              boolean _equals = (_size == 0);
+              if (_equals) {
                 _builder.append("\t");
                 _builder.append("copy.");
                 String _name_1 = a.getName();
@@ -443,8 +422,8 @@ public class DataClassGen {
           } else {
             {
               int _size_1 = a.getSize();
-              boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_1), ((Integer)0));
-              if (_operator_equals_1) {
+              boolean _equals_1 = (_size_1 == 0);
+              if (_equals_1) {
                 _builder.append("copy.");
                 String _name_6 = a.getName();
                 _builder.append(_name_6, "");

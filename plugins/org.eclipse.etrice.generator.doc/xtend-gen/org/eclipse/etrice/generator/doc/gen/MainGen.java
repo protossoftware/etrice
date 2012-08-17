@@ -12,8 +12,8 @@ import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class MainGen implements IGenerator {
   @Inject
   private InstanceDiagramGen instanceDiagramGen;
@@ -25,17 +25,17 @@ public class MainGen implements IGenerator {
   private DocGen docGen;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-      this.prepFS.prepare(resource);
-      EList<EObject> _contents = resource.getContents();
-      for (final EObject e : _contents) {
-        if ((e instanceof Root)) {
-          this.doGenerate(((Root) e));
-        }
+    this.prepFS.prepare(resource);
+    EList<EObject> _contents = resource.getContents();
+    for (final EObject e : _contents) {
+      if ((e instanceof Root)) {
+        this.doGenerate(((Root) e));
       }
+    }
   }
   
   public void doGenerate(final Root e) {
-      this.instanceDiagramGen.doGenerate(e);
-      this.docGen.doGenerate(e);
+    this.instanceDiagramGen.doGenerate(e);
+    this.docGen.doGenerate(e);
   }
 }

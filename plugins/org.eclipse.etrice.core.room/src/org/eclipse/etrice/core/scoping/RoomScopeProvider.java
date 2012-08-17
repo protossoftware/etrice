@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -44,6 +45,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
@@ -59,6 +61,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
+import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -519,7 +522,33 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
-
+	
+	/**
+	 * returns a flat list of Transition scopes for a {@link RefinedTransition}
+	 * @param rs - the refined state
+	 * @param ref - not used
+	 * @return a list of scopes
+	 */
+	public IScope scope_RefinedTransition_target(RefinedTransition trans, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		ActorClass ac = getActorClass(trans);
+		ac = ac.getBase();
+		while (ac!=null) {
+			if (ac.getStateMachine()!=null) {
+				TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
+				while (it.hasNext()) {
+					EObject obj = it.next();
+					if (obj instanceof Transition) {
+						scopes.add(EObjectDescription.create(((Transition)obj).getName(), obj));
+					}
+				}
+			}
+			ac = ac.getBase();
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
 	/**
 	 * @param sg
 	 * @param covered

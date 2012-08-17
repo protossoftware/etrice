@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
-
  */
 package org.eclipse.etrice.core.room;
 
@@ -22,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.room.StateGraph#getTrPoints <em>Tr Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.StateGraph#getChPoints <em>Ch Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.StateGraph#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.StateGraph#getRefinedTransitions <em>Refined Transitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,5 +91,21 @@ public interface StateGraph extends EObject
    * @generated
    */
   EList<Transition> getTransitions();
+
+  /**
+   * Returns the value of the '<em><b>Refined Transitions</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.RefinedTransition}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Refined Transitions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Refined Transitions</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_RefinedTransitions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<RefinedTransition> getRefinedTransitions();
 
 } // StateGraph

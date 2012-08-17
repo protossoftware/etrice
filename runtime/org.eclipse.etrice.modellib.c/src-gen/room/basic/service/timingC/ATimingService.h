@@ -14,7 +14,7 @@
 #include "PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
-	
+
 			#include "platform/etTimer.h" 
 			#define ET_NB_OF_TCBS 10
 			typedef struct etTCB etTimerControlBlock; 
@@ -24,6 +24,7 @@
 				int32 portIdx;
 				etTimerControlBlock* next;
 				};
+			
 /*--------------------- end user code ---------------------*/
 
 typedef struct ATimingService ATimingService;
@@ -80,7 +81,7 @@ void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTi
 void ATimingService_printList(ATimingService* self);
 
 /*--------------------- begin user code ---------------------*/
-	//uc2
+//uc2
 /*--------------------- end user code ---------------------*/
 
 #endif /* _ATIMINGSERVICE_H_ */

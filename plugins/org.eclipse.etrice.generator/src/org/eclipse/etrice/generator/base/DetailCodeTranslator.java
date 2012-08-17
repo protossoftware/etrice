@@ -33,6 +33,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *
  */
 public class DetailCodeTranslator {
+
+	private static final String ATTR_SET = ".set";
 	
 	private static class Position {
 		int pos = 0;
@@ -74,7 +76,7 @@ public class DetailCodeTranslator {
 			text.append(line+"\n");
 		}
 
-		String result = text.substring(0, text.length()-1);
+		String result = text.substring(0, Math.max(0, text.length()-1));
 		
 		if (provider.translateMembers())
 			result = translateText(result);
@@ -106,8 +108,24 @@ public class DetailCodeTranslator {
 				String translated = null;
 				Attribute attribute = name2attr.get(token);
 				if (attribute!=null) {
-					String orig = text.substring(last, curr.pos);
-					translated = provider.getAttributeText(attribute, orig);
+					int start = curr.pos;
+					String index = getArrayIndex(text, curr);
+					if (index==null)
+						curr.pos = start;
+					int endSet = curr.pos+ATTR_SET.length();
+					if (text.length()>=endSet && text.substring(curr.pos, endSet).equals(ATTR_SET)) {
+						curr.pos = endSet;
+						ArrayList<String> args = getArgs(text, curr);
+						if (args!=null && args.size()==1) {
+							String orig = text.substring(last, curr.pos);
+							String transArg = translateText(args.get(0));
+							translated = provider.getAttributeSetter(attribute, index, transArg, orig);
+						}
+					}
+					else {
+						String orig = text.substring(last, curr.pos);
+						translated = provider.getAttributeGetter(attribute, index, orig);
+					}
 				}
 				else {
 					Operation operation = name2op.get(token);
@@ -127,7 +145,7 @@ public class DetailCodeTranslator {
 						InterfaceItem item = name2item.get(token);
 						if (item!=null) {
 							int start = curr.pos;
-							String index = getPortIndex(text, curr, item);
+							String index = getArrayIndex(text, curr);
 							if (index==null)
 								curr.pos = start;
 							Message msg = getMessage(text, curr, item, true);
@@ -170,7 +188,7 @@ public class DetailCodeTranslator {
 		return result.toString();
 	}
 
-	private String getPortIndex(String text, Position curr, InterfaceItem item) {
+	private String getArrayIndex(String text, Position curr) {
 		proceedToToken(text, curr);
 
 		if (curr.pos>=text.length() || text.charAt(curr.pos)!='[')

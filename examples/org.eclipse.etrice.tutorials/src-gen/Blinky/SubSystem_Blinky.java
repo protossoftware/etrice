@@ -34,10 +34,10 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 	public void instantiateActors(){
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,111);
-		Address addr_item_SystemPort_1 = new Address(0,0,112);
-		Address addr_item_SystemPort_2 = new Address(0,0,113);
-		Address addr_item_SystemPort_3 = new Address(0,0,114);
+		Address addr_item_SystemPort_0 = new Address(0,0,112);
+		Address addr_item_SystemPort_1 = new Address(0,0,113);
+		Address addr_item_SystemPort_2 = new Address(0,0,114);
+		Address addr_item_SystemPort_3 = new Address(0,0,115);
 		
 		// actor instance /SubSystem_Blinky/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -79,12 +79,12 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 			"blinky",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_Blinky_application_blinky},
-			{
-				addr_item__SubSystem_Blinky_application_blinky_ControlPort
-			},
-			{
-				addr_item__SubSystem_Blinky_application_blinky_timer
-			}
+				{
+					addr_item__SubSystem_Blinky_application_blinky_ControlPort
+				},
+				{
+					addr_item__SubSystem_Blinky_application_blinky_timer
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
@@ -101,12 +101,12 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 			"controller",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_Blinky_application_controller},
-			{
-				addr_item__SubSystem_Blinky_application_controller_ControlPort
-			},
-			{
-				addr_item__SubSystem_Blinky_application_controller_timer
-			}
+				{
+					addr_item__SubSystem_Blinky_application_controller_ControlPort
+				},
+				{
+					addr_item__SubSystem_Blinky_application_controller_timer
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_2},
@@ -123,23 +123,23 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 			"timingService",
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_Blinky_timingService},
-			{
-			},
-			{
-				addr_item__SubSystem_Blinky_timingService_timeout_0,
-				addr_item__SubSystem_Blinky_timingService_timeout_1
-			}
+				{
+					addr_item__SubSystem_Blinky_timingService_timeout_0,
+					addr_item__SubSystem_Blinky_timingService_timeout_1
+				},
+				null
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
 				{
-				},
-				{
 					addr_item__SubSystem_Blinky_application_blinky_timer,
 					addr_item__SubSystem_Blinky_application_controller_timer
-				}
+				},
+				null
 			}
 		); 
+		
+		// apply instance attribute configurations
 
 		// create the subsystem system port	
 		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

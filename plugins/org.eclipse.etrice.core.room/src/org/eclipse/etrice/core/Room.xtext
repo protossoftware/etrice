@@ -321,7 +321,8 @@ StateGraph:
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
-			transitions+=Transition
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
 		)*
 	'}';
 
@@ -332,7 +333,8 @@ StateMachine returns StateGraph:
 			states+=State |
 			trPoints+=TrPoint |
 			chPoints+=ChoicePoint |
-			transitions+=Transition
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
 		)*
 	'}';
 
@@ -416,6 +418,15 @@ CPBranchTransition:
 		'cond' condition=DetailCode
 		('action' action=DetailCode)? 
 	'}';
+
+// by validation RefinedTransition can only be contained in the top level state graph
+RefinedTransition:
+	'RefinedTransition' target=[Transition|FQN]
+	(docu=Documentation)?
+	'{'
+		'action' action=DetailCode
+	'}'
+;
 
 TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 

@@ -58,7 +58,6 @@ public class SaveOnFocusLostListener implements IPartListener {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IPartListener#partDeactivated(org.eclipse.ui.IWorkbenchPart)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
 		boolean save = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);

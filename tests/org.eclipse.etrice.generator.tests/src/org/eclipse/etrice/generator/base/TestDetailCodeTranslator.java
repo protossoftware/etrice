@@ -62,8 +62,19 @@ public class TestDetailCodeTranslator {
 		}
 		
 		@Override
-		public String getAttributeText(Attribute att, String orig) {
-			return ">"+att.getName()+"<";
+		public String getAttributeGetter(Attribute att, String index, String orig) {
+			if (index==null)
+				return ">"+att.getName()+"<";
+			else
+				return ">"+att.getName()+"["+index+"]<";
+		}
+		
+		@Override
+		public String getAttributeSetter(Attribute att, String index, String value, String orig) {
+			if (index==null)
+				return ">"+att.getName()+" = "+value+"<";
+			else
+				return ">"+att.getName()+"["+index+"] = "+value+"<";
 		}
 
 		@Override
@@ -152,6 +163,12 @@ public class TestDetailCodeTranslator {
 		Attribute attr = RoomFactory.eINSTANCE.createAttribute();
 		attr.setName("value");
 		attr.setRefType(EcoreUtil.copy(refType));
+		ac.getAttributes().add(attr);
+		
+		attr = RoomFactory.eINSTANCE.createAttribute();
+		attr.setName("array");
+		attr.setRefType(EcoreUtil.copy(refType));
+		attr.setSize(8);
 		ac.getAttributes().add(attr);
 
 		StandardOperation op0 = RoomFactory.eINSTANCE.createStandardOperation();
@@ -342,13 +359,53 @@ public class TestDetailCodeTranslator {
 	}
 	
 	@Test
-	public void testAttribute() {
+	public void testAttributeGetter() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("value = 1;");
+		dc.getCommands().add("int x = value*2;");
 		
 		String result = translator.translateDetailCode(dc);
 		
-		assertEquals("attribute replacement", ">value< = 1;", result);
+		assertEquals("read attribute", "int x = >value<*2;", result);
+	}
+	
+	@Test
+	public void testAttributeIndexedGetter() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("int x = array[2]*2;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("read indexed attribute", "int x = >array[2]<*2;", result);
+	}
+	
+	@Test
+	public void testAttributeSetter() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("value.set(2);");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("write attribute", ">value = 2<;", result);
+	}
+	
+	@Test
+	public void testAttributeIndexedSetter() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("array[3].set(2);");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("write indexed attribute", ">array[3] = 2<;", result);
+	}
+	
+	@Test
+	public void testAttributeIndexedSetterRecursive() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getCommands().add("array[value].set(value);");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("write indexed attribute", ">array[>value<] = >value<<;", result);
 	}
 	
 	@Test

@@ -101,24 +101,24 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 		ExpandedRefinedState rs = (ExpandedRefinedState) s;
 		assertEquals("entry code", "// derived entry\n", RoomHelpers.getDetailCode(rs.getEntryCode()));
 		assertNull("exit code", rs.getExitCode());
-		assertEquals("inherited entry", "// base entry\n", rs.getInheritedEntry());
-		assertEquals("inherited exit", "// base exit\n", rs.getInheritedExit());
+		assertEquals("inherited entry", "// base entry\n", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "// base exit\n", RoomHelpers.getDetailCode(rs.getInheritedExit()));
 		
 		s = getState(derived, "Base");
 		assertTrue("is ExpandedRefinedState", s instanceof ExpandedRefinedState);
 		rs = (ExpandedRefinedState) s;
 		assertNull("entry code", rs.getEntryCode());
 		assertEquals("exit code", "// derived exit\n", RoomHelpers.getDetailCode(rs.getExitCode()));
-		assertEquals("inherited entry", "", rs.getInheritedEntry());
-		assertEquals("inherited exit", "", rs.getInheritedExit());
+		assertEquals("inherited entry", "", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "", RoomHelpers.getDetailCode(rs.getInheritedExit()));
 		
 		s = getState(derived, "BaseSub");
 		assertTrue("is ExpandedRefinedState", s instanceof ExpandedRefinedState);
 		rs = (ExpandedRefinedState) s;
 		assertEquals("entry code", "// derived entry\n", RoomHelpers.getDetailCode(rs.getEntryCode()));
 		assertNull("exit code", rs.getExitCode());
-		assertEquals("inherited entry", "", rs.getInheritedEntry());
-		assertEquals("inherited exit", "", rs.getInheritedExit());
+		assertEquals("inherited entry", "", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "", RoomHelpers.getDetailCode(rs.getInheritedExit()));
 	}
 
 }

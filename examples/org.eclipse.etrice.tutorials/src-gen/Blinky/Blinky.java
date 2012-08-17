@@ -13,31 +13,33 @@ import room.basic.service.timing.*;
 import Blinky.BlinkyControlProtocoll.*;
 import room.basic.service.timing.PTimeout.*;
 
-//--------------------- begin user code
-	import org.eclipse.etrice.tutorials.PedLightGUI.*;
-//--------------------- end user code
+/*--------------------- begin user code ---------------------*/
+import org.eclipse.etrice.tutorials.PedLightGUI.*;
+/*--------------------- end user code ---------------------*/
 
 
 public class Blinky extends ActorClassBase {
 
-	//--------------------- begin user code
-		private PedestrianLightWndNoTcp light = new PedestrianLightWndNoTcp();
-		private TrafficLight3 carLights;
-		private TrafficLight2 pedLights;
-	//--------------------- end user code
+	/*--------------------- begin user code ---------------------*/
+	private PedestrianLightWndNoTcp light = new PedestrianLightWndNoTcp();
+	private TrafficLight3 carLights;
+	private TrafficLight2 pedLights;
+	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
 	protected BlinkyControlProtocollPort ControlPort = null;
+	
 	//--------------------- saps
 	protected PTimeoutConjPort timer = null;
+	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_timer = 2;
 		
-	//--------------------- attributes
-	//--------------------- operations
+	/*--------------------- attributes ---------------------*/
+	/*--------------------- operations ---------------------*/
 	public void destroyUser() {
 		light.closeWindow();
 	}
@@ -51,11 +53,21 @@ public class Blinky extends ActorClassBase {
 
 		// own ports
 		ControlPort = new BlinkyControlProtocollPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		
 		// own saps
 		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		
 		// own service implementations
 	}
-	
+	//--------------------- attributes getter and setter
+	//--------------------- attribute setters and getters
+	//--------------------- port getters
+	public BlinkyControlProtocollPort getControlPort (){
+		return this.ControlPort;
+	}
+	public PTimeoutConjPort getTimer (){
+		return this.timer;
+	}
 
 	//--------------------- lifecycle functions
 	public void init(){
@@ -71,34 +83,34 @@ public class Blinky extends ActorClassBase {
 	}
 	
 	public void destroy(){
-		destroyUser();
-	}	
+	}
 
 	
 	/* state IDs */
-	public static final int STATE_off = 2;
-	public static final int STATE_blinking_on = 3;
-	public static final int STATE_blinking_off = 4;
-	public static final int STATE_blinking = 5;
+	public static final int STATE_blinking = 2;
+	public static final int STATE_off = 3;
+	public static final int STATE_blinking_on = 4;
+	public static final int STATE_blinking_off = 5;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__off = 1;
-	public static final int CHAIN_TRANS_blinking_TO_off_BY_stopControlPort = 2;
-	public static final int CHAIN_TRANS_off_TO_blinking_tp0_BY_startControlPort = 3;
+	public static final int CHAIN_TRANS_tr0_FROM_off_TO_blinking_tp0_BY_startControlPort = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort = 3;
 	public static final int CHAIN_blinking_TRANS_INITIAL_TO__on = 4;
-	public static final int CHAIN_blinking_TRANS_off_TO_on_BY_timeoutTicktimer = 5;
-	public static final int CHAIN_blinking_TRANS_on_TO_off_BY_timeoutTicktimer = 6;
+	public static final int CHAIN_blinking_TRANS_tr1_FROM_on_TO_off_BY_timeoutTicktimer = 5;
+	public static final int CHAIN_blinking_TRANS_tr2_FROM_off_TO_on_BY_timeoutTicktimer = 6;
 	
 	/* triggers */
+	public static final int POLLING = 0;
 	public static final int TRIG_ControlPort__start = IFITEM_ControlPort + EVT_SHIFT*BlinkyControlProtocoll.IN_start;
 	public static final int TRIG_ControlPort__stop = IFITEM_ControlPort + EVT_SHIFT*BlinkyControlProtocoll.IN_stop;
 	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","off",
+	protected static final String stateStrings[] = {"<no state>","<top>","blinking",
+	"off",
 	"blinking_on",
-	"blinking_off",
-	"blinking"
+	"blinking_off"
 	};
 	
 	// history
@@ -112,7 +124,7 @@ public class Blinky extends ActorClassBase {
 		this.state = new_state;
 	}
 	
-	//*** Entry and Exit Codes
+	/* Entry and Exit Codes */
 	protected void entry_blinking_on() {
 		timer.Start(1000);
 		carLights.setState(TrafficLight3.YELLOW);
@@ -122,14 +134,14 @@ public class Blinky extends ActorClassBase {
 		carLights.setState(TrafficLight3.OFF);
 	}
 	
-	//*** Action Codes
+	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__off() {
 		carLights = light.getCarLights();
 		pedLights = light.getPedLights();
 		carLights.setState(TrafficLight3.OFF);
 		pedLights.setState(TrafficLight2.OFF);
 	}
-	protected void action_TRANS_blinking_TO_off_BY_stopControlPort(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort(InterfaceItemBase ifitem) {
 		timer.Kill();
 		carLights.setState(TrafficLight3.OFF);
 	}
@@ -178,20 +190,20 @@ public class Blinky extends ActorClassBase {
 				action_TRANS_INITIAL_TO__off();
 				return STATE_off;
 			}
-			case CHAIN_TRANS_off_TO_blinking_tp0_BY_startControlPort:
+			case CHAIN_TRANS_tr0_FROM_off_TO_blinking_tp0_BY_startControlPort:
 			{
 				return STATE_blinking_on;
 			}
-			case CHAIN_TRANS_blinking_TO_off_BY_stopControlPort:
+			case CHAIN_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort:
 			{
-				action_TRANS_blinking_TO_off_BY_stopControlPort(ifitem);
+				action_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort(ifitem);
 				return STATE_off;
 			}
-			case CHAIN_blinking_TRANS_on_TO_off_BY_timeoutTicktimer:
+			case CHAIN_blinking_TRANS_tr1_FROM_on_TO_off_BY_timeoutTicktimer:
 			{
 				return STATE_blinking_off;
 			}
-			case CHAIN_blinking_TRANS_off_TO_on_BY_timeoutTicktimer:
+			case CHAIN_blinking_TRANS_tr2_FROM_off_TO_on_BY_timeoutTicktimer:
 			{
 				return STATE_blinking_on;
 			}
@@ -261,44 +273,44 @@ public class Blinky extends ActorClassBase {
 			switch (this.state) {
 				case STATE_off:
 					switch(trigger) {
-					case TRIG_ControlPort__start:
-						{
-							chain = CHAIN_TRANS_off_TO_blinking_tp0_BY_startControlPort;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_ControlPort__start:
+							{
+								chain = CHAIN_TRANS_tr0_FROM_off_TO_blinking_tp0_BY_startControlPort;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_blinking_on:
 					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_blinking_TRANS_on_TO_off_BY_timeoutTicktimer;
-							catching_state = STATE_blinking;
-						}
-					break;
-					case TRIG_ControlPort__stop:
-						{
-							chain = CHAIN_TRANS_blinking_TO_off_BY_stopControlPort;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__timeoutTick:
+							{
+								chain = CHAIN_blinking_TRANS_tr1_FROM_on_TO_off_BY_timeoutTicktimer;
+								catching_state = STATE_blinking;
+							}
+						break;
+						case TRIG_ControlPort__stop:
+							{
+								chain = CHAIN_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 				case STATE_blinking_off:
 					switch(trigger) {
-					case TRIG_timer__timeoutTick:
-						{
-							chain = CHAIN_blinking_TRANS_off_TO_on_BY_timeoutTicktimer;
-							catching_state = STATE_blinking;
-						}
-					break;
-					case TRIG_ControlPort__stop:
-						{
-							chain = CHAIN_TRANS_blinking_TO_off_BY_stopControlPort;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__timeoutTick:
+							{
+								chain = CHAIN_blinking_TRANS_tr2_FROM_off_TO_on_BY_timeoutTicktimer;
+								catching_state = STATE_blinking;
+							}
+						break;
+						case TRIG_ControlPort__stop:
+							{
+								chain = CHAIN_TRANS_tr1_FROM_blinking_TO_off_BY_stopControlPort;
+								catching_state = STATE_TOP;
+							}
+						break;
 					}
 					break;
 			}

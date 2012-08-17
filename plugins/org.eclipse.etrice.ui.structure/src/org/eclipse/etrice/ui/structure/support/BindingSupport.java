@@ -16,18 +16,15 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -66,8 +63,10 @@ import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
+import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
@@ -89,8 +88,6 @@ public class BindingSupport {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
-			private boolean justStarted = false;
-
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Binding", "create Binding");
 			}
@@ -106,11 +103,6 @@ public class BindingSupport {
 				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
 				Port tgt = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
 				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
-				
-				if (justStarted) {
-					justStarted = false;
-					beginHighLightMatches(src, srcRef);
-				}
 				
 				if (src==null || tgt==null) {
 					return false;
@@ -143,8 +135,7 @@ public class BindingSupport {
 							canStart = false;
 					}
 				}
-				if (canStart)
-					justStarted = true;
+
 				return canStart;
 			}
 			
@@ -193,26 +184,57 @@ public class BindingSupport {
 				return newConnection;
 			}
 			
-			private void beginHighLightMatches(Port port, ActorContainerRef ref) {
-				if (port==null)
+			@Override
+			public void attachedToSource(ICreateConnectionContext context) {
+				Port src = SupportUtil.getPort(context.getSourceAnchor(), getFeatureProvider());
+				ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), getFeatureProvider());
+				StructureClass sc = SupportUtil.getParent(context, getFeatureProvider());
+				
+				beginHighLightMatches(sc, src, ref);
+			}
+			
+			@Override
+			public void canceledAttaching(ICreateConnectionContext context) {
+				endHighLightMatches();
+			}
+			
+			@Override
+			public void endConnecting() {
+				endHighLightMatches();
+			}
+			
+			private void beginHighLightMatches(StructureClass sc, Port src, ActorContainerRef srcRef) {
+				if (src==null)
 					return;
 				
-				StructureClass acc = (ActorContainerClass) ((ref!=null)? ref.eContainer():port.eContainer());
-				if (acc instanceof ActorClass) {
+				ContainerShape scContainer = (ContainerShape) getDiagram().getChildren().get(0);
+				for (Shape subShape : scContainer.getChildren()) {
+					Object bo = getBusinessObjectForPictogramElement(subShape);
+					if (bo instanceof Port) {
+						if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, null, null, sc, null, false).isOk()) {
+							DecorationProvider.addAllowedPortShape(subShape);
+							getDiagramEditor().refreshRenderingDecorators(subShape);
+						}
+					}
+					else if (bo instanceof ActorContainerRef) {
+						ActorContainerRef tgtRef = (ActorContainerRef) bo;
+						for (Shape subSubShape : ((ContainerShape)subShape).getChildren()) {
+							bo = getBusinessObjectForPictogramElement(subSubShape);
+							if (bo instanceof Port) {
+								if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, tgtRef, null, sc, null, false).isOk()) {
+									DecorationProvider.addAllowedPortShape(subSubShape);
+									getDiagramEditor().refreshRenderingDecorators(subSubShape);
+								}
+							}
+						}
+					}
 					
-				}
-				else if (acc instanceof SubSystemClass) {
-					
-				}
-				else if (acc instanceof LogicalSystem) {
-					
-				}
-				else {
-					assert(false): "unknown kind of StructureClass";
 				}
 			}
 
 			private void endHighLightMatches() {
+				DecorationProvider.clearAllowedPortShapes();
+				getDiagramEditor().refresh();
 			}
 		}
 		
@@ -537,7 +559,7 @@ public class BindingSupport {
 			
 			return super.getToolTip(ga);
 		}
-	
+
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());

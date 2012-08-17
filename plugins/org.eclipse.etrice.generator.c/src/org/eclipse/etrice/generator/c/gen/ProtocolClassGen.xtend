@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.PrimitiveType
@@ -33,9 +32,9 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension CExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject extension CExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 	
@@ -67,7 +66,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "etDatatypes.h"
 		#include "modelbase/etPort.h"
 		
-		«helpers.userCode(pc.userCode1)»
+		«pc.userCode(1)»
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include "«dataClass.name».h"
@@ -95,7 +94,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		/* get message string for message id */
 		const char* «pc.name»_getMessageString(int msg_id);
 
-		«helpers.userCode(pc.userCode2)»
+		«pc.userCode(2)»
 		
 		«generateIncludeGuardEnd(pc.name)»
 		
@@ -113,7 +112,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCHeaderFileName»"
 		#include "debugging/etMSCLogger.h"
 
-		«helpers.userCode(pc.userCode3)»
+		«pc.userCode(3)»
 		
 		/*--------------------- port methods */
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»
@@ -125,7 +124,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
 			«pc.genDataDrivenPortSources»
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
-			#error "synchronoue protocols not implemented yet"
+			#error "synchronous protocols not implemented yet"
 		«ENDIF»
 	'''
 	}
@@ -141,11 +140,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«IF pc.getPortClass(conj)!=null»	
 			«IF !(pc.getPortClass(conj).attributes.empty)»
-/* variable part of PortClass (RAM) */
-typedef struct «portClassName»_var «portClassName»_var; 
-struct «portClassName»_var {
-	«helpers.attributes(pc.getPortClass(conj).attributes)»
-	};
+				/* variable part of PortClass (RAM) */
+				typedef struct «portClassName»_var «portClassName»_var; 
+				struct «portClassName»_var {
+					«pc.getPortClass(conj).attributes.attributes»
+					};
 				«FOR a:pc.getPortClass(conj).attributes»
 					«IF a.defaultValueLiteral!=null»
 						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
@@ -153,7 +152,7 @@ struct «portClassName»_var {
 				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
-			
+		
 		«FOR message : messages»
 			«var hasData = message.data!=null»
 			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
@@ -163,18 +162,18 @@ struct «portClassName»_var {
 			«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
 			«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
 		«ENDFOR»
-			
+		
 		«IF (pc.getPortClass(conj) != null)»	
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, portClassName)»
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, replPortClassName)»
+			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
+			«pc.getPortClass(conj).operations.operationsDeclaration(replPortClassName)»
 		«ENDIF»
 		
- 		«IF pc.handlesReceive(conj)»
+		«IF pc.handlesReceive(conj)»
 			«FOR h:getReceiveHandlers(pc,conj)»
-void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
+				void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
 			«ENDFOR»
 		«ENDIF»
-etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
+		etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 		'''
 	}
 
@@ -217,7 +216,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 			«FOR message : messages»
 				«var typeName =message.data.refType.type.typeName»
 				«var refp = if (!(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
-				«var refa = if ((message.data.refType.type instanceof PrimitiveType)) "&" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
 					self->«message.name» = data;
@@ -288,8 +286,8 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 			«ENDFOR»
 			
 			«IF (pc.getPortClass(conj) != null)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, portClassName)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, replPortClassName)»
+				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
+				«pc.getPortClass(conj).operations.operationsImplementation(replPortClassName)»
 			«ENDIF»
 
 			// getReplication
@@ -322,10 +320,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 	def private messageGetterSignature(String className, String messageName, String type) {
 		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
 	}
-
-	def private messageCall(Message m) {'''
-	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
-	'''}
 	
 //	def sendMessage(Message m, boolean conj) {'''
 //	«var dir = if (conj) "IN" else "OUT"»
@@ -341,7 +335,6 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 	
 	def private genReceiveHandlers(ProtocolClass pc, Boolean conj){
 	var portClassName = pc.getPortClassName(conj)
-	var replPortClassName = pc.getPortClassName(conj, true)
 	
 	'''
 	/* receiver handlers */
@@ -360,7 +353,7 @@ etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self);
 		
 «««		TODO: make this optional or different for smaller footprint
 		/* message names as strings for debugging (generate MSC) */
-		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
+		static const char* const «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
 
 		const char* «pc.name»_getMessageString(int msg_id) {
 			if (msg_id<«pc.name»_MSG_MIN || msg_id>«pc.name»_MSG_MAX+1){

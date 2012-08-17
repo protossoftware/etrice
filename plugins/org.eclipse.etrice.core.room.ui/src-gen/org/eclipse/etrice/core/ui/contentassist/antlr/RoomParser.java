@@ -183,6 +183,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGuardedTransitionAccess().getGroup_10(), "rule__GuardedTransition__Group_10__0");
 					put(grammarAccess.getCPBranchTransitionAccess().getGroup(), "rule__CPBranchTransition__Group__0");
 					put(grammarAccess.getCPBranchTransitionAccess().getGroup_10(), "rule__CPBranchTransition__Group_10__0");
+					put(grammarAccess.getRefinedTransitionAccess().getGroup(), "rule__RefinedTransition__Group__0");
 					put(grammarAccess.getTrPointTerminalAccess().getGroup(), "rule__TrPointTerminal__Group__0");
 					put(grammarAccess.getSubStateTrPointTerminalAccess().getGroup(), "rule__SubStateTrPointTerminal__Group__0");
 					put(grammarAccess.getChoicepointTerminalAccess().getGroup(), "rule__ChoicepointTerminal__Group__0");
@@ -373,10 +374,12 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateGraphAccess().getTrPointsAssignment_2_1(), "rule__StateGraph__TrPointsAssignment_2_1");
 					put(grammarAccess.getStateGraphAccess().getChPointsAssignment_2_2(), "rule__StateGraph__ChPointsAssignment_2_2");
 					put(grammarAccess.getStateGraphAccess().getTransitionsAssignment_2_3(), "rule__StateGraph__TransitionsAssignment_2_3");
+					put(grammarAccess.getStateGraphAccess().getRefinedTransitionsAssignment_2_4(), "rule__StateGraph__RefinedTransitionsAssignment_2_4");
 					put(grammarAccess.getStateMachineAccess().getStatesAssignment_3_0(), "rule__StateMachine__StatesAssignment_3_0");
 					put(grammarAccess.getStateMachineAccess().getTrPointsAssignment_3_1(), "rule__StateMachine__TrPointsAssignment_3_1");
 					put(grammarAccess.getStateMachineAccess().getChPointsAssignment_3_2(), "rule__StateMachine__ChPointsAssignment_3_2");
 					put(grammarAccess.getStateMachineAccess().getTransitionsAssignment_3_3(), "rule__StateMachine__TransitionsAssignment_3_3");
+					put(grammarAccess.getStateMachineAccess().getRefinedTransitionsAssignment_3_4(), "rule__StateMachine__RefinedTransitionsAssignment_3_4");
 					put(grammarAccess.getSimpleStateAccess().getNameAssignment_1(), "rule__SimpleState__NameAssignment_1");
 					put(grammarAccess.getSimpleStateAccess().getDocuAssignment_2(), "rule__SimpleState__DocuAssignment_2");
 					put(grammarAccess.getSimpleStateAccess().getEntryCodeAssignment_3_1_1(), "rule__SimpleState__EntryCodeAssignment_3_1_1");
@@ -424,6 +427,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCPBranchTransitionAccess().getDocuAssignment_6(), "rule__CPBranchTransition__DocuAssignment_6");
 					put(grammarAccess.getCPBranchTransitionAccess().getConditionAssignment_9(), "rule__CPBranchTransition__ConditionAssignment_9");
 					put(grammarAccess.getCPBranchTransitionAccess().getActionAssignment_10_1(), "rule__CPBranchTransition__ActionAssignment_10_1");
+					put(grammarAccess.getRefinedTransitionAccess().getTargetAssignment_1(), "rule__RefinedTransition__TargetAssignment_1");
+					put(grammarAccess.getRefinedTransitionAccess().getDocuAssignment_2(), "rule__RefinedTransition__DocuAssignment_2");
+					put(grammarAccess.getRefinedTransitionAccess().getActionAssignment_5(), "rule__RefinedTransition__ActionAssignment_5");
 					put(grammarAccess.getStateTerminalAccess().getStateAssignment(), "rule__StateTerminal__StateAssignment");
 					put(grammarAccess.getTrPointTerminalAccess().getTrPointAssignment_1(), "rule__TrPointTerminal__TrPointAssignment_1");
 					put(grammarAccess.getSubStateTrPointTerminalAccess().getTrPointAssignment_0(), "rule__SubStateTrPointTerminal__TrPointAssignment_0");

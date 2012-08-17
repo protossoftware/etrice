@@ -34,7 +34,7 @@ public class BlinkyControlProtocoll {
 	static public class BlinkyControlProtocollPort extends PortBase {
 		// constructors
 		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -65,13 +65,13 @@ public class BlinkyControlProtocoll {
 	}
 	
 	// replicated port class
-	static public class BlinkyControlProtocollPortRepl {
+	static public class BlinkyControlProtocollReplPort {
 		private ArrayList<BlinkyControlProtocollPort> ports;
 		private int replication;
 	
-		public BlinkyControlProtocollPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public BlinkyControlProtocollReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<BlinkyControlProtocoll.BlinkyControlProtocollPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new BlinkyControlProtocollPort(
@@ -99,7 +99,7 @@ public class BlinkyControlProtocoll {
 	static public class BlinkyControlProtocollConjPort extends PortBase {
 		// constructors
 		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			super(actor, name, localId, 0, addr, peerAddress);
+			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
@@ -144,13 +144,13 @@ public class BlinkyControlProtocoll {
 	}
 	
 	// replicated port class
-	static public class BlinkyControlProtocollConjPortRepl {
+	static public class BlinkyControlProtocollConjReplPort {
 		private ArrayList<BlinkyControlProtocollConjPort> ports;
 		private int replication;
 	
-		public BlinkyControlProtocollConjPortRepl(IEventReceiver actor, String name, int localId, Address[] addr,
+		public BlinkyControlProtocollConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
-			replication = addr.length;
+			replication = addr==null? 0:addr.length;
 			ports = new ArrayList<BlinkyControlProtocoll.BlinkyControlProtocollConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
 				ports.add(new BlinkyControlProtocollConjPort(

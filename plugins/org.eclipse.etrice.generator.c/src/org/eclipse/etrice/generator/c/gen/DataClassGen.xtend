@@ -26,10 +26,10 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 @Singleton
 class DataClassGen {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension CExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension CExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ProcedureHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -66,10 +66,10 @@ class DataClassGen {
 			#include "«dataClass.name».h"
 		«ENDFOR»
 		
-		«helpers.userCode(dc.userCode1)»
+		«dc.userCode(1)»
 				
 		typedef struct {
-			«helpers.attributes(dc.allAttributes)»
+			«dc.allAttributes.attributes»
 		} «dc.name»;
 		
 		«FOR a:dc.allAttributes»
@@ -80,12 +80,12 @@ class DataClassGen {
 		
 «««		TODO: do we need setters and getters for C and C++ ?
 		
-		«helpers.operationsDeclaration(dc.operations, dc.name)»
+		«dc.operations.operationsDeclaration(dc.name)»
 		
 		/* deep copy */
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target);
 		
-		«helpers.userCode(dc.userCode2)»
+		«dc.userCode(2)»
 		
 		«generateIncludeGuardEnd(dc.name)»
 		
@@ -104,11 +104,11 @@ class DataClassGen {
 		
 		#include <string.h>
 		
-		«helpers.userCode(dc.userCode3)»
+		«dc.userCode(3)»
 		
 «««		TODO: do we need setters and getters for C and C++ ?
 		
-		«helpers.operationsImplementation(dc.operations, dc.name)»
+		«dc.operations.operationsImplementation(dc.name)»
 		
 		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {

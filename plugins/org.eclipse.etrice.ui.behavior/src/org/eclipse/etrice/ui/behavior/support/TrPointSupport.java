@@ -384,8 +384,7 @@ public class TrPointSupport {
 					if (bo instanceof TrPoint) {
 						TrPoint tp = (TrPoint) bo;
 						
-						ContainerShape containerShape = context.getTargetContainer();
-						if (SupportUtil.isInherited(tp, containerShape))
+						if (SupportUtil.isInherited(getDiagram(), tp))
 							return false;
 						
 						if (isSubTP(context.getPictogramElement()))
@@ -530,7 +529,7 @@ public class TrPointSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof TrPoint) {
-						return true;
+						return !SupportUtil.isInherited(getDiagram(), (TrPoint) bo);
 					}
 				}
 				return false;
@@ -628,7 +627,7 @@ public class TrPointSupport {
 				}
 				TrPoint tp = (TrPoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(tp, (ContainerShape)containerShape.eContainer());
+				boolean inherited = SupportUtil.isInherited(getDiagram(), tp);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -663,7 +662,7 @@ public class TrPointSupport {
 
 				ContainerShape containerShape = (ContainerShape) context.getPictogramElement();
 				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(containerShape);
-				if (SupportUtil.isInherited(tp, containerShape))
+				if (SupportUtil.isInherited(getDiagram(), tp))
 					return false;
 				
 				if (ValidationUtil.isConnectedOutside(tp))
