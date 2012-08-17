@@ -129,6 +129,31 @@ public class AbstractExecutionValidator implements IRoomValidator {
 						State st = (State) obj;
 						propGen.createProposals(st);
 						// TODO : create markers for the proposals
+						List<MessageFromIf> incoming = propGen.getIncomingProposals();
+						EObject orig = xpac.getOrig(st);
+						EObject container = orig.eContainer();
+						@SuppressWarnings("unchecked")
+						int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
+						if(incoming != null)
+						for(MessageFromIf msg : incoming)
+						{
+							messageAcceptor.acceptWarning(
+									"State should be receiving the message " + msg.getMessage().getName() + " from port " + msg.getFrom().getName() + " ",
+									container, orig.eContainingFeature(), idx,
+									"Receive message", st.getName());
+						}
+						List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
+						if(outgoing != null)
+						{
+							for(MessageFromIf msg : outgoing)
+							{
+								messageAcceptor.acceptInfo(
+										"State should be sending the message " + msg.getMessage().getName() + " from port " + msg.getFrom().getName() + " ",
+										container, orig.eContainingFeature(), idx,
+										"Send message", st.getName());
+								
+							}
+						}
 					}
 					// the following part takes care of all the warnings
 					if (obj instanceof StateGraphItem) {

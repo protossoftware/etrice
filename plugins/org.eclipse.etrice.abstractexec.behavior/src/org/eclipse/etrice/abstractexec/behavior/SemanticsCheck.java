@@ -158,8 +158,7 @@ public class SemanticsCheck {
 						}
 						List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
 						addToWarning(node, wrongMsgList);
-						if(mapToWarnings.containsKey(node))
-									
+															
 						if (traceChecks && traceLevel>=TRACE_DETAILS)
 							System.out.println("  Messages consumed");
 						

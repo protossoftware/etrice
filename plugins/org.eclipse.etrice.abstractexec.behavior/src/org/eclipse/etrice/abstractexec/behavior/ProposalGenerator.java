@@ -31,7 +31,6 @@ public class ProposalGenerator {
 	private SemanticsCheck checker;
 	private List<MessageFromIf> outgoingProposal = new LinkedList<MessageFromIf>();
 	private List<MessageFromIf> incomingProposal = new LinkedList<MessageFromIf>();
-	private List<ActiveTrigger> warningTrigger = new LinkedList<ActiveTrigger>();
 	private static boolean traceProposals = false;
 	static {
 		if (Activator.getDefault().isDebugging()) {
@@ -56,10 +55,7 @@ public class ProposalGenerator {
 		return outgoingProposal;
 	}
 
-	public List<ActiveTrigger> getWarningTriggers() {
-		return warningTrigger;
-	}
-
+	
 	public void createProposals(State st) {
 		ActiveRules rules = checker.getActiveRules(st);
 
