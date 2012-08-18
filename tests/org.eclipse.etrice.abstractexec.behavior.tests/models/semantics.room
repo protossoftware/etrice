@@ -1,0 +1,279 @@
+RoomModel semantics {
+
+	// simple cascade
+	ActorClass AETest1  {
+		Interface {
+			Port p0: PC1
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+					action {
+						"p0.out1();"
+					}
+				}
+				Transition tr1: state1 -> state2 {
+					triggers {
+						<in2: p0>
+					}
+					action {
+						"p0.out2();"
+					}
+				}
+				Transition tr2: state2 -> state3 {
+					triggers {
+						<in3: p0>
+					}
+					action {
+						"p0.out3();"
+					}
+				}
+				Transition tr3: state3 -> state4 {
+					triggers {
+						<in4: p0>
+					}
+					action {
+						"p0.out4();"
+					}
+				}
+				Transition tr4: state1 -> wrong {
+					triggers {
+						// this trigger receives a warning
+						<in1: p0>
+					}
+				}
+				State state0
+				State state1
+				State state2
+				State state3
+				State state4
+				State wrong
+			}
+		}
+	}
+
+
+	/*
+	 * examples from Thomas
+	 */
+	
+	// correct client for one motor
+	ActorClass AETest2  {
+		Interface {
+			Port dummy: Dummy
+			conjugated Port motor1: PMotor
+		}
+		Structure {
+			external Port dummy
+			external Port motor1
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle { }
+				Transition tr0: Idle -> MotorStarted {
+					triggers {
+						<someEvent1: dummy>
+					}
+					action {
+						"motor1.start();"
+					}
+				}
+				Transition tr1: MotorStarted -> Idle {
+					triggers {
+						<done: motor1>
+					}
+					action {
+						// this action code receives a warning
+						"motor1.start();"
+					}
+				}
+				Transition tr2: MotorStarted -> Idle {
+					triggers {
+						<error: motor1>
+					}
+				}
+				State Idle
+				State MotorStarted
+			}
+		}
+	}
+
+	// client missing 'done'
+	ActorClass AETest3 {
+		Interface {
+			Port dummy: Dummy
+			conjugated Port motor1: PMotor
+		}
+		Structure {
+			external Port dummy
+			external Port motor1
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle { }
+				Transition tr0: Idle -> MotorStarted {
+					triggers {
+						<someEvent1: dummy>
+					}
+					action {
+						"motor1.start();"
+					}
+				}
+				Transition tr2: MotorStarted -> Idle {
+					triggers {
+						<error: motor1>
+					}
+				}
+				State Idle
+				State MotorStarted
+			}
+		}
+	}
+
+	// correct client for two motors
+	ActorClass AETest4 {
+		Interface {
+			Port dummy: Dummy
+			conjugated Port motor1: PMotor
+			conjugated Port motor2: PMotor
+		}
+		Structure {
+			external Port dummy
+			external Port motor1
+			external Port motor2
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle { }
+				Transition tr0: Idle -> MotorStarted {
+					triggers {
+						<someEvent1: dummy>
+					}
+					action {
+						"motor1.start();"
+						"motor2.start();"
+					}
+				}
+				Transition tr1: MotorStarted -> Motor1done {
+					triggers {
+						<done: motor1>
+					}
+				}
+				Transition tr2: MotorStarted -> SomeMotorError {
+					triggers {
+						<error: motor1>
+					}
+				}
+				Transition tr3: Motor1done -> Idle {
+					triggers {
+						<done: motor2>
+					}
+				}
+				Transition tr4: MotorStarted -> Motor2done {
+					triggers {
+						<done: motor2>
+					}
+				}
+				Transition tr5: Motor2done -> Idle {
+					triggers {
+						<done: motor1>
+					}
+				}
+				Transition tr6: Motor1done -> SomeMotorError {
+					triggers {
+						<error: motor2>
+					}
+				}
+				Transition tr7: Motor2done -> SomeMotorError {
+					triggers {
+						<error: motor1>
+					}
+				}
+				Transition tr8: MotorStarted -> SomeMotorError {
+					triggers {
+						<error: motor2>
+					}
+				}
+				Transition tr9: SomeMotorError -> SomeMotorError {
+					triggers {
+						<done: motor1>
+					}
+				}
+				Transition tr10: SomeMotorError -> SomeMotorError {
+					triggers {
+						<error: motor1>
+					}
+				}
+				Transition tr11: SomeMotorError -> SomeMotorError {
+					triggers {
+						<done: motor2>
+					}
+				}
+				Transition tr12: SomeMotorError -> SomeMotorError {
+					triggers {
+						<error: motor2>
+					}
+				}
+				State Idle
+				State MotorStarted
+				State Motor1done
+				State Motor2done
+				State SomeMotorError
+			}
+		}
+	}
+
+	ProtocolClass PC1 {
+		incoming {
+			Message in1()
+			Message in2()
+			Message in3()
+			Message in4()
+		}
+		outgoing {
+			Message out1()
+			Message out2()
+			Message out3()
+			Message out4()
+		}
+		
+		semantics {
+			in: in1 -> out: out1 -> in: in2 -> out: out2 -> in: in3 -> out: out3 -> in: in4 -> out: out4
+		}
+	}
+
+	ProtocolClass PMotor {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message done()
+			Message error()
+		}
+		
+		semantics {
+			in: start -> (out: done, out: error)
+		}
+	}
+
+	ProtocolClass Dummy {
+		incoming {
+			Message someEvent1()
+			Message someEvent2()
+			Message someEvent3()
+		}
+		outgoing {
+			Message someEvent1()
+			Message someEvent2()
+			Message someEvent3()
+		}
+	}
+
+}
