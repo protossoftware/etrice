@@ -6,6 +6,11 @@ import org.osgi.framework.BundleContext;
 
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
+/**
+ * The activator class which controls the plug-in life cycle.
+ * 
+ * @author jayant
+ */
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID

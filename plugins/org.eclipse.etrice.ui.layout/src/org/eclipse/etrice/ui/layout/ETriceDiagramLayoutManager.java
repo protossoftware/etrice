@@ -188,6 +188,8 @@ public abstract class ETriceDiagramLayoutManager extends
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @author jayant
 	 */
 	@Override
 	public LayoutMapping<PictogramElement> buildLayoutGraph(
@@ -229,14 +231,6 @@ public abstract class ETriceDiagramLayoutManager extends
 			shapeLayout.setPos(ga.getX(), ga.getY());
 			shapeLayout.setSize(ga.getWidth(), ga.getHeight());
 			mapping.getGraphMap().put(diagramNode, element);
-
-			VolatileLayoutConfig staticConfig = mapping
-					.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
-
-			if (workbenchPart instanceof BehaviorEditor)
-				staticConfig.setValue(LayoutOptions.DIAGRAM_TYPE, diagramNode,
-						LayoutContext.GRAPH_ELEM,
-						ETriceSemanticLayoutConfig.BEHAVIOR_DIAGRAM_TYPE);
 
 			// Node creation for currently visible top-level Container
 			// Shape(Bounding Box) in

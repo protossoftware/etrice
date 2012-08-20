@@ -77,6 +77,11 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @author jayant
+	 */
 	@Override
 	protected Dimension getDefaultSize(Shape shape) {
 		Dimension defaultSize = new Dimension();
@@ -86,10 +91,10 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		defaultSize.setSize(StateSupport.MIN_SIZE_X, StateSupport.MIN_SIZE_Y);
 
 		/*
-		 * This code sets default size differently for State Graphs and States.
-		 * This keeps the top-level container quite large on layout (according
-		 * to the default size in StateGraphSupport), which might not seem so
-		 * pleasant.
+		 * This code snippet sets default the size for State Graphs and States
+		 * differently. With this the top-level container remains large after
+		 * layout (according to the default size in StateGraphSupport), which
+		 * might not look proper.
 		 */
 		/*
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
@@ -103,7 +108,7 @@ public class BehaviorDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		} else {
 			defaultSize.setSize(20, 20);
 		}*/
-
+		
 		return defaultSize;
 	}
 

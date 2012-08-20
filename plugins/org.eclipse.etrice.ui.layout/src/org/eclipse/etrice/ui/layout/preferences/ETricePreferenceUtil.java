@@ -511,6 +511,8 @@ public final class ETricePreferenceUtil {
 							return images.getPropInt();
 						case FLOAT:
 							return images.getPropFloat();
+						default:
+							break;
 						}
 					}
 					return null;
@@ -734,6 +736,8 @@ public final class ETricePreferenceUtil {
 					return images.getPropInt();
 				case FLOAT:
 					return images.getPropFloat();
+				default:
+					break;
 				}
 			}
 			return null;

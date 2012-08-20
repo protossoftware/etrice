@@ -72,6 +72,11 @@ public class StructureDiagramLayoutManager extends ETriceDiagramLayoutManager {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @author jayant
+	 */
 	@Override
 	protected Dimension getDefaultSize(Shape shape) {
 
@@ -83,10 +88,10 @@ public class StructureDiagramLayoutManager extends ETriceDiagramLayoutManager {
 				ActorContainerRefSupport.MIN_SIZE_Y);
 
 		/*
-		 * This code sets default size differently for Actor Class and Actor
-		 * Container Refs. This keeps the top-level container quite large on
-		 * layout(according to the default size in StructureSupport), which
-		 * might not seem so pleasant.
+		 * This code snippet sets default the size for Actor Class and Actor
+		 * Container Refs differently. With this the top-level container remains
+		 * large after layout (according to the default size in
+		 * StructureSupport), which might not look proper.
 		 */
 		/*
 		EObject modelObject = shape.getLink().getBusinessObjects().get(0);
