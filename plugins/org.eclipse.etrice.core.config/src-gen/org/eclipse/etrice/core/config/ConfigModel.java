@@ -88,4 +88,13 @@ public interface ConfigModel extends EObject
    */
   EList<ProtocolClassConfig> getProtocolClassConfigs();
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof SubSystemConfig)\r\n\t\t\t\t\t\tlist.add((SubSystemConfig) element);\r\n\t\t\t\treturn list;'"
+   * @generated
+   */
+  EList<SubSystemConfig> getSubSystemConfigs();
+
 } // ConfigModel

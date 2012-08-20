@@ -21,6 +21,7 @@ import org.eclipse.etrice.integration.PingPongThreadTestReplPort.PingPongProtoco
 public class MrPingActor extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PingPongProtocolConjReplPort PingPongPort = null;
 	
@@ -32,6 +33,7 @@ public class MrPingActor extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 	public static final int IFITEM_timer = 2;
+	
 		
 	/*--------------------- attributes ---------------------*/
 	int count;
@@ -55,6 +57,8 @@ public class MrPingActor extends ActorClassBase {
 		
 		// own service implementations
 	}
+	
+	
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setCount (int count) {
@@ -69,6 +73,8 @@ public class MrPingActor extends ActorClassBase {
 	public int getPongCount () {
 		return this.pongCount;
 	}
+	
+	
 	//--------------------- port getters
 	public PingPongProtocolConjReplPort getPingPongPort (){
 		return this.PingPongPort;

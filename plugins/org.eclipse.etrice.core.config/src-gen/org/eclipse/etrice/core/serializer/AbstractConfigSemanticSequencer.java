@@ -208,7 +208,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=LiteralArray? ((dynConfig?='dynamic configuration' readOnly?='read-only'?)? attributes+=AttrInstanceConfig*)?)
+	 *     (attribute=[Attribute|ID] value=LiteralArray? ((dynConfig?='dynamic configuration' readOnly?='read'?)? attributes+=AttrInstanceConfig*)?)
 	 */
 	protected void sequence_AttrInstanceConfig(EObject context, AttrInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -235,7 +235,7 @@ public class AbstractConfigSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (source=STRING filePath=STRING? polling=INT)
+	 *     ((filePath=STRING | (userCode1=STRING userCode2=STRING)) polling=INT?)
 	 */
 	protected void sequence_DynamicConfig(EObject context, DynamicConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -34,12 +34,12 @@ public interface IntLiteral extends NumberLiteral
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(int)
+   * @see #setValue(long)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getIntLiteral_Value()
    * @model
    * @generated
    */
-  int getValue();
+  long getValue();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.config.IntLiteral#getValue <em>Value</em>}' attribute.
@@ -49,6 +49,6 @@ public interface IntLiteral extends NumberLiteral
    * @see #getValue()
    * @generated
    */
-  void setValue(int value);
+  void setValue(long value);
 
 } // IntLiteral

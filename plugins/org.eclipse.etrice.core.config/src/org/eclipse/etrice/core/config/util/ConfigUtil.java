@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.etrice.core.config.IntLiteral;
-import org.eclipse.etrice.core.config.NumberLiteral;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
-import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -54,11 +51,11 @@ public class ConfigUtil {
 		return null;
 	}
 
-	public static ActorContainerClass resolve(ActorContainerClass root,
+	public static ActorClass resolve(ActorContainerClass root,
 			RefPath path) {
-		if (path == null)
-			return root;
-
+		if(path.getRefs().isEmpty())
+			return null;
+		
 		ActorContainerClass result = root;
 		for (String ref : path.getRefs()) {
 			ActorRef match = null;
@@ -74,7 +71,7 @@ public class ConfigUtil {
 			result = match.getType();
 		}
 
-		return result;
+		return (ActorClass) result;
 	}
 
 	/**
@@ -122,18 +119,6 @@ public class ConfigUtil {
 		}
 
 		return null;
-	}
-
-	public static double literalToDouble(NumberLiteral number) {
-		double dValue = 0;
-		if (number instanceof IntLiteral)
-			dValue = ((IntLiteral) number).getValue();
-		else if (number instanceof RealLiteral)
-			dValue = ((RealLiteral) number).getValue();
-		else
-			assert (false) : "unexpected type";
-
-		return dValue;
 	}
 
 	public static PortClass getPortClass(PortInstanceConfig config) {

@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getFilePath <em>File Path</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode1 <em>User Code1</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getPolling <em>Polling</em>}</li>
  * </ul>
  * </p>
@@ -28,32 +29,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DynamicConfig extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Source</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Source</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Source</em>' attribute.
-   * @see #setSource(String)
-   * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_Source()
-   * @model
-   * @generated
-   */
-  String getSource();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.config.DynamicConfig#getSource <em>Source</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Source</em>' attribute.
-   * @see #getSource()
-   * @generated
-   */
-  void setSource(String value);
-
   /**
    * Returns the value of the '<em><b>File Path</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -79,6 +54,58 @@ public interface DynamicConfig extends EObject
    * @generated
    */
   void setFilePath(String value);
+
+  /**
+   * Returns the value of the '<em><b>User Code1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>User Code1</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>User Code1</em>' attribute.
+   * @see #setUserCode1(String)
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_UserCode1()
+   * @model
+   * @generated
+   */
+  String getUserCode1();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode1 <em>User Code1</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>User Code1</em>' attribute.
+   * @see #getUserCode1()
+   * @generated
+   */
+  void setUserCode1(String value);
+
+  /**
+   * Returns the value of the '<em><b>User Code2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>User Code2</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>User Code2</em>' attribute.
+   * @see #setUserCode2(String)
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_UserCode2()
+   * @model
+   * @generated
+   */
+  String getUserCode2();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode2 <em>User Code2</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>User Code2</em>' attribute.
+   * @see #getUserCode2()
+   * @generated
+   */
+  void setUserCode2(String value);
 
   /**
    * Returns the value of the '<em><b>Polling</b></em>' attribute.

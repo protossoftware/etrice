@@ -25,10 +25,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cConfigElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cConfigElementsConfigElementParserRuleCall_1_0 = (RuleCall)cConfigElementsAssignment_1.eContents().get(0);
 		
-		/// *
-		// * Postprocessor:
-		// * getActor(Class|Instance)Config()
-		// * / ConfigModel:
+		//ConfigModel:
 		//	imports+=Import* configElements+=ConfigElement*;
 		public ParserRule getRule() { return rule; }
 
@@ -126,25 +123,33 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDynamicConfigurationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
-		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
-		private final Keyword cSourceKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final Assignment cSourceAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cSourceSTRINGTerminalRuleCall_2_0_1_0 = (RuleCall)cSourceAssignment_2_0_1.eContents().get(0);
-		private final Group cGroup_2_0_2 = (Group)cGroup_2_0.eContents().get(2);
-		private final Keyword cFilePathKeyword_2_0_2_0 = (Keyword)cGroup_2_0_2.eContents().get(0);
-		private final Assignment cFilePathAssignment_2_0_2_1 = (Assignment)cGroup_2_0_2.eContents().get(1);
-		private final RuleCall cFilePathSTRINGTerminalRuleCall_2_0_2_1_0 = (RuleCall)cFilePathAssignment_2_0_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_2_0 = (Alternatives)cUnorderedGroup_2.eContents().get(0);
+		private final Group cGroup_2_0_0 = (Group)cAlternatives_2_0.eContents().get(0);
+		private final Keyword cFilePathKeyword_2_0_0_0 = (Keyword)cGroup_2_0_0.eContents().get(0);
+		private final Assignment cFilePathAssignment_2_0_0_1 = (Assignment)cGroup_2_0_0.eContents().get(1);
+		private final RuleCall cFilePathSTRINGTerminalRuleCall_2_0_0_1_0 = (RuleCall)cFilePathAssignment_2_0_0_1.eContents().get(0);
+		private final Group cGroup_2_0_1 = (Group)cAlternatives_2_0.eContents().get(1);
+		private final Group cGroup_2_0_1_0 = (Group)cGroup_2_0_1.eContents().get(0);
+		private final Keyword cUserImportKeyword_2_0_1_0_0 = (Keyword)cGroup_2_0_1_0.eContents().get(0);
+		private final Assignment cUserCode1Assignment_2_0_1_0_1 = (Assignment)cGroup_2_0_1_0.eContents().get(1);
+		private final RuleCall cUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0 = (RuleCall)cUserCode1Assignment_2_0_1_0_1.eContents().get(0);
+		private final Group cGroup_2_0_1_1 = (Group)cGroup_2_0_1.eContents().get(1);
+		private final Keyword cUserConstructorKeyword_2_0_1_1_0 = (Keyword)cGroup_2_0_1_1.eContents().get(0);
+		private final Assignment cUserCode2Assignment_2_0_1_1_1 = (Assignment)cGroup_2_0_1_1.eContents().get(1);
+		private final RuleCall cUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0 = (RuleCall)cUserCode2Assignment_2_0_1_1_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cPollingRateKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cPollingTimerMsKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cPollingAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
 		private final RuleCall cPollingINTTerminalRuleCall_2_1_1_0 = (RuleCall)cPollingAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DynamicConfig:
-		//	"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}";
+		//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
+		//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
 		public ParserRule getRule() { return rule; }
 
-		//"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}"
+		//"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
+		//userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}"
 		public Group getGroup() { return cGroup; }
 
 		//"dynamic configuration"
@@ -153,38 +158,57 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//"source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT
+		//("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor" userCode2=STRING)) &
+		//("polling timer [ms]" polling=INT)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//"source" source=STRING ("file path" filePath=STRING)?
-		public Group getGroup_2_0() { return cGroup_2_0; }
+		//"file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor" userCode2=STRING)
+		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 
-		//"source"
-		public Keyword getSourceKeyword_2_0_0() { return cSourceKeyword_2_0_0; }
-
-		//source=STRING
-		public Assignment getSourceAssignment_2_0_1() { return cSourceAssignment_2_0_1; }
-
-		//STRING
-		public RuleCall getSourceSTRINGTerminalRuleCall_2_0_1_0() { return cSourceSTRINGTerminalRuleCall_2_0_1_0; }
-
-		//("file path" filePath=STRING)?
-		public Group getGroup_2_0_2() { return cGroup_2_0_2; }
+		//"file path" filePath=STRING
+		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 
 		//"file path"
-		public Keyword getFilePathKeyword_2_0_2_0() { return cFilePathKeyword_2_0_2_0; }
+		public Keyword getFilePathKeyword_2_0_0_0() { return cFilePathKeyword_2_0_0_0; }
 
 		//filePath=STRING
-		public Assignment getFilePathAssignment_2_0_2_1() { return cFilePathAssignment_2_0_2_1; }
+		public Assignment getFilePathAssignment_2_0_0_1() { return cFilePathAssignment_2_0_0_1; }
 
 		//STRING
-		public RuleCall getFilePathSTRINGTerminalRuleCall_2_0_2_1_0() { return cFilePathSTRINGTerminalRuleCall_2_0_2_1_0; }
+		public RuleCall getFilePathSTRINGTerminalRuleCall_2_0_0_1_0() { return cFilePathSTRINGTerminalRuleCall_2_0_0_1_0; }
 
-		//"polling rate" polling=INT
+		//("user import" userCode1=STRING) ("user constructor" userCode2=STRING)
+		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
+
+		//"user import" userCode1=STRING
+		public Group getGroup_2_0_1_0() { return cGroup_2_0_1_0; }
+
+		//"user import"
+		public Keyword getUserImportKeyword_2_0_1_0_0() { return cUserImportKeyword_2_0_1_0_0; }
+
+		//userCode1=STRING
+		public Assignment getUserCode1Assignment_2_0_1_0_1() { return cUserCode1Assignment_2_0_1_0_1; }
+
+		//STRING
+		public RuleCall getUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0() { return cUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0; }
+
+		//"user constructor" userCode2=STRING
+		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
+
+		//"user constructor"
+		public Keyword getUserConstructorKeyword_2_0_1_1_0() { return cUserConstructorKeyword_2_0_1_1_0; }
+
+		//userCode2=STRING
+		public Assignment getUserCode2Assignment_2_0_1_1_1() { return cUserCode2Assignment_2_0_1_1_1; }
+
+		//STRING
+		public RuleCall getUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0() { return cUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0; }
+
+		//("polling timer [ms]" polling=INT)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"polling rate"
-		public Keyword getPollingRateKeyword_2_1_0() { return cPollingRateKeyword_2_1_0; }
+		//"polling timer [ms]"
+		public Keyword getPollingTimerMsKeyword_2_1_0() { return cPollingTimerMsKeyword_2_1_0; }
 
 		//polling=INT
 		public Assignment getPollingAssignment_2_1_1() { return cPollingAssignment_2_1_1; }
@@ -632,25 +656,24 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_3_1 = (UnorderedGroup)cGroup_3.eContents().get(1);
-		private final Group cGroup_3_1_0 = (Group)cUnorderedGroup_3_1.eContents().get(0);
-		private final Assignment cDynConfigAssignment_3_1_0_0 = (Assignment)cGroup_3_1_0.eContents().get(0);
-		private final Keyword cDynConfigDynamicConfigurationKeyword_3_1_0_0_0 = (Keyword)cDynConfigAssignment_3_1_0_0.eContents().get(0);
-		private final Alternatives cAlternatives_3_1_0_1 = (Alternatives)cGroup_3_1_0.eContents().get(1);
-		private final Assignment cReadOnlyAssignment_3_1_0_1_0 = (Assignment)cAlternatives_3_1_0_1.eContents().get(0);
-		private final Keyword cReadOnlyReadOnlyKeyword_3_1_0_1_0_0 = (Keyword)cReadOnlyAssignment_3_1_0_1_0.eContents().get(0);
-		private final Keyword cReadWriteKeyword_3_1_0_1_1 = (Keyword)cAlternatives_3_1_0_1.eContents().get(1);
-		private final Assignment cAttributesAssignment_3_1_1 = (Assignment)cUnorderedGroup_3_1.eContents().get(1);
-		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_3_1_1_0 = (RuleCall)cAttributesAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Assignment cDynConfigAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
+		private final Keyword cDynConfigDynamicConfigurationKeyword_3_1_0_0 = (Keyword)cDynConfigAssignment_3_1_0.eContents().get(0);
+		private final Alternatives cAlternatives_3_1_1 = (Alternatives)cGroup_3_1.eContents().get(1);
+		private final Assignment cReadOnlyAssignment_3_1_1_0 = (Assignment)cAlternatives_3_1_1.eContents().get(0);
+		private final Keyword cReadOnlyReadKeyword_3_1_1_0_0 = (Keyword)cReadOnlyAssignment_3_1_1_0.eContents().get(0);
+		private final Keyword cWriteKeyword_3_1_1_1 = (Keyword)cAlternatives_3_1_1.eContents().get(1);
+		private final Assignment cAttributesAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cAttributesAttrInstanceConfigParserRuleCall_3_2_0 = (RuleCall)cAttributesAssignment_3_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//AttrInstanceConfig:
-		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
-		//	(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?;
+		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (dynConfig?="dynamic configuration"
+		//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig* "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
-		//(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?
+		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (dynConfig?="dynamic configuration" (readOnly?="read"
+		//| "write"))? attributes+=AttrInstanceConfig* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Attr"
@@ -677,45 +700,41 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//LiteralArray
 		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
 
-		//("{" ((dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*)
-		//"}")?
+		//("{" (dynConfig?="dynamic configuration" (readOnly?="read" | "write"))? attributes+=AttrInstanceConfig* "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//(dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*
-		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
-
-		//(dynConfig?="dynamic configuration" (readOnly?="read-only" | "read-write"))?
-		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
+		//(dynConfig?="dynamic configuration" (readOnly?="read" | "write"))?
+		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//dynConfig?="dynamic configuration"
-		public Assignment getDynConfigAssignment_3_1_0_0() { return cDynConfigAssignment_3_1_0_0; }
+		public Assignment getDynConfigAssignment_3_1_0() { return cDynConfigAssignment_3_1_0; }
 
 		//"dynamic configuration"
-		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0_0; }
+		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0; }
 
-		//readOnly?="read-only" | "read-write"
-		public Alternatives getAlternatives_3_1_0_1() { return cAlternatives_3_1_0_1; }
+		//readOnly?="read" | "write"
+		public Alternatives getAlternatives_3_1_1() { return cAlternatives_3_1_1; }
 
-		//readOnly?="read-only"
-		public Assignment getReadOnlyAssignment_3_1_0_1_0() { return cReadOnlyAssignment_3_1_0_1_0; }
+		//readOnly?="read"
+		public Assignment getReadOnlyAssignment_3_1_1_0() { return cReadOnlyAssignment_3_1_1_0; }
 
-		//"read-only"
-		public Keyword getReadOnlyReadOnlyKeyword_3_1_0_1_0_0() { return cReadOnlyReadOnlyKeyword_3_1_0_1_0_0; }
+		//"read"
+		public Keyword getReadOnlyReadKeyword_3_1_1_0_0() { return cReadOnlyReadKeyword_3_1_1_0_0; }
 
-		//"read-write"
-		public Keyword getReadWriteKeyword_3_1_0_1_1() { return cReadWriteKeyword_3_1_0_1_1; }
+		//"write"
+		public Keyword getWriteKeyword_3_1_1_1() { return cWriteKeyword_3_1_1_1; }
 
 		//attributes+=AttrInstanceConfig*
-		public Assignment getAttributesAssignment_3_1_1() { return cAttributesAssignment_3_1_1; }
+		public Assignment getAttributesAssignment_3_2() { return cAttributesAssignment_3_2; }
 
 		//AttrInstanceConfig
-		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_1_1_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_1_1_0; }
+		public RuleCall getAttributesAttrInstanceConfigParserRuleCall_3_2_0() { return cAttributesAttrInstanceConfigParserRuleCall_3_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
+		public Keyword getRightCurlyBracketKeyword_3_3() { return cRightCurlyBracketKeyword_3_3; }
 	}
 
 	public class RefPathElements extends AbstractParserRuleElementFinder {
@@ -1062,7 +1081,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSignedIntegerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cHexadecimalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Integer returns ecore::EInt:
+		//Integer returns ecore::ELong:
 		//	SignedInteger | Hexadecimal;
 		public ParserRule getRule() { return rule; }
 
@@ -1253,17 +1272,13 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
-		private final RuleCall cIDTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Keyword cPlusSignKeyword_5_0 = (Keyword)cAlternatives_5.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_5_1 = (Keyword)cAlternatives_5.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_6 = (RuleCall)cGroup.eContents().get(6);
+		private final RuleCall cEXPTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//DecimalExp hidden():
-		//	("+" | "-")? INT "." INT ID ("+" | "-")? INT;
+		//	("+" | "-")? INT "." INT EXP;
 		public ParserRule getRule() { return rule; }
 
-		//("+" | "-")? INT "." INT ID ("+" | "-")? INT
+		//("+" | "-")? INT "." INT EXP
 		public Group getGroup() { return cGroup; }
 
 		//("+" | "-")?
@@ -1284,20 +1299,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
 
-		//ID
-		public RuleCall getIDTerminalRuleCall_4() { return cIDTerminalRuleCall_4; }
-
-		//("+" | "-")?
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
-
-		//"+"
-		public Keyword getPlusSignKeyword_5_0() { return cPlusSignKeyword_5_0; }
-
-		//"-"
-		public Keyword getHyphenMinusKeyword_5_1() { return cHyphenMinusKeyword_5_1; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_6() { return cINTTerminalRuleCall_6; }
+		//EXP
+		public RuleCall getEXPTerminalRuleCall_4() { return cEXPTerminalRuleCall_4; }
 	}
 	
 	
@@ -1332,6 +1335,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	private DotDecimalElements pDotDecimal;
 	private DecimalDotElements pDecimalDot;
 	private DecimalExpElements pDecimalExp;
+	private TerminalRule tEXP;
 	private TerminalRule tHEX;
 	
 	private final GrammarProvider grammarProvider;
@@ -1355,10 +1359,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	/// *
-	// * Postprocessor:
-	// * getActor(Class|Instance)Config()
-	// * / ConfigModel:
+	//ConfigModel:
 	//	imports+=Import* configElements+=ConfigElement*;
 	public ConfigModelElements getConfigModelAccess() {
 		return (pConfigModel != null) ? pConfigModel : (pConfigModel = new ConfigModelElements());
@@ -1389,7 +1390,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DynamicConfig:
-	//	"dynamic configuration" "{" ("source" source=STRING ("file path" filePath=STRING)? & "polling rate" polling=INT) "}";
+	//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
+	//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
 	public DynamicConfigElements getDynamicConfigAccess() {
 		return (pDynamicConfig != null) ? pDynamicConfig : (pDynamicConfig = new DynamicConfigElements());
 	}
@@ -1493,8 +1495,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrInstanceConfig:
-	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
-	//	(readOnly?="read-only" | "read-write"))? & attributes+=AttrInstanceConfig*) "}")?;
+	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (dynConfig?="dynamic configuration"
+	//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig* "}")?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
 	}
@@ -1635,7 +1637,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 
-	//Integer returns ecore::EInt:
+	//Integer returns ecore::ELong:
 	//	SignedInteger | Hexadecimal;
 	public IntegerElements getIntegerAccess() {
 		return (pInteger != null) ? pInteger : (pInteger = new IntegerElements());
@@ -1706,7 +1708,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT ID ("+" | "-")? INT;
+	//	("+" | "-")? INT "." INT EXP;
 	public DecimalExpElements getDecimalExpAccess() {
 		return (pDecimalExp != null) ? pDecimalExp : (pDecimalExp = new DecimalExpElements());
 	}
@@ -1715,8 +1717,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getDecimalExpAccess().getRule();
 	}
 
-	////DecimalPosExp hidden():
-	////	('+' | '-')? INT '.' INT ID; 
+	//terminal EXP:
+	//	("e" | "E") ("+" | "-")? "0".."9"+;
+	public TerminalRule getEXPRule() {
+		return (tEXP != null) ? tEXP : (tEXP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXP"));
+	} 
+
 	//terminal HEX:
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
 	public TerminalRule getHEXRule() {

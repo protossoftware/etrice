@@ -4,11 +4,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -28,6 +30,29 @@ public class JavaExtensions implements ILanguageExtension {
     String _name = rc.getName();
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");
     return _operator_plus;
+  }
+  
+  public String toWrapper(final String type) {
+    String _switchResult = null;
+    final String type_1 = type;
+    boolean matched = false;
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(type_1,"int")) {
+        matched=true;
+        _switchResult = "Integer";
+      }
+    }
+    if (!matched) {
+      if (ObjectExtensions.operator_equals(type_1,"char")) {
+        matched=true;
+        _switchResult = "Character";
+      }
+    }
+    if (!matched) {
+      String _firstUpper = StringExtensions.toFirstUpper(type);
+      _switchResult = _firstUpper;
+    }
+    return _switchResult;
   }
   
   public String accessLevelPrivate() {
@@ -143,5 +168,88 @@ public class JavaExtensions implements ILanguageExtension {
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, args);
     String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ");");
     return _operator_plus_3;
+  }
+  
+  public String toValueLiteral(final PrimitiveType type, final String value) {
+      String _targetName = type.getTargetName();
+      final String __valOfSwitchOver = _targetName;
+      boolean matched = false;
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"boolean")) {
+          matched=true;
+          return value;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"byte")) {
+          matched=true;
+          String _operator_plus = StringExtensions.operator_plus("(byte)", value);
+          return _operator_plus;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"short")) {
+          matched=true;
+          String _operator_plus_1 = StringExtensions.operator_plus("(short)", value);
+          return _operator_plus_1;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"int")) {
+          matched=true;
+          return value;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"long")) {
+          matched=true;
+          String _operator_plus_2 = StringExtensions.operator_plus(value, "L");
+          return _operator_plus_2;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"float")) {
+          matched=true;
+          String _operator_plus_3 = StringExtensions.operator_plus(value, "f");
+          return _operator_plus_3;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"double")) {
+          matched=true;
+          String _operator_plus_4 = StringExtensions.operator_plus(value, "d");
+          return _operator_plus_4;
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"char")) {
+          matched=true;
+          {
+            String _valueOf = String.valueOf(value);
+            String string = _valueOf;
+            int _length = string.length();
+            boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_length), ((Integer)1));
+            if (_operator_equals) {
+              String _operator_plus_5 = StringExtensions.operator_plus("\'", value);
+              String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "\'");
+              return _operator_plus_6;
+            } else {
+              String _charArrayExpr = this.toCharArrayExpr(value);
+              return _charArrayExpr;
+            }
+          }
+        }
+      }
+      if (!matched) {
+        if (ObjectExtensions.operator_equals(__valOfSwitchOver,"String")) {
+          matched=true;
+          String _operator_plus_7 = StringExtensions.operator_plus("\"", value);
+          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "\"");
+          return _operator_plus_8;
+        }
+      }
+      String _targetName_1 = type.getTargetName();
+      UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_targetName_1);
+      throw _unsupportedOperationException;
   }
 }

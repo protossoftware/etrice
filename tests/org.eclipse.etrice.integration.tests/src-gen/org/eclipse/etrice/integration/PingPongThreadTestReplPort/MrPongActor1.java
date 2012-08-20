@@ -16,6 +16,7 @@ import org.eclipse.etrice.integration.PingPongThreadTestReplPort.PingPongProtoco
 public class MrPongActor1 extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PingPongProtocolPort PingPongPort = null;
 	
@@ -25,6 +26,7 @@ public class MrPongActor1 extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
+	
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -43,8 +45,12 @@ public class MrPongActor1 extends ActorClassBase {
 		
 		// own service implementations
 	}
+	
+	
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PingPongProtocolPort getPingPongPort (){
 		return this.PingPongPort;

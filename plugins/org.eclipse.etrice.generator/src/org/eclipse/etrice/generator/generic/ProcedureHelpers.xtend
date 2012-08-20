@@ -16,18 +16,18 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.common.util.EList
+import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
-import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.core.room.ComplexType
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
-import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.room.RefableType
+import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.generator.base.AbstractGenerator
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 
 @Singleton
@@ -53,13 +53,18 @@ class ProcedureHelpers {
 	def attributes(List<Attribute> attribs) {'''
 		/*--------------------- attributes ---------------------*/
 		«FOR attribute : attribs»
-			«IF attribute.size==0»
-				«attribute.refType.type.typeName»«IF attribute.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
-			«ELSE»
-				«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name, attribute.refType.ref)»;
-			«ENDIF» 
+			«attributeDeclaration(attribute)»
 		«ENDFOR»
 	'''
+	}
+	
+	def attributeDeclaration(Attribute attribute){'''
+		«IF attribute.size==0»
+			«attribute.refType.type.typeName»«IF attribute.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
+		«ELSE»
+			«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name, attribute.refType.ref)»;
+		«ENDIF» 	
+	'''	
 	}
 
 	def arrayInitializer(Attribute att) {
@@ -87,30 +92,31 @@ class ProcedureHelpers {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«var value = a.initValue»
+				«var aType = a.refType.type»
+				«var value = a.initValueLiteral»
 				«IF value!=null»
-					«IF !a.isArray»
+					«IF a.size == 0 || aType.characterType»
 						«a.name» = «value»;
 					«ELSEIF value.startsWith("{")»
-						«a.name» = new «a.refType.type.typeName»[] «value»;
+						«a.name» = new «aType.typeName»[] «value»;
 					«ELSE»
-						«a.name» = new «a.refType.type.typeName»[«a.size»];
+						«a.name» = new «aType.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «value»;
 						}
 					«ENDIF»
-				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
+				«ELSEIF aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
 					«IF a.size==0»
 						«IF a.refType.isRef»
 							«a.name» = «languageExt.nullPointer()»;
 						«ELSE»
-							«a.name» = «a.refType.type.defaultValue»;
+							«a.name» = «aType.defaultValue»;
 						«ENDIF»
 					«ELSE»
-						«a.name» = new «a.refType.type.typeName»[«a.size»];
+						«a.name» = new «aType.typeName»[«a.size»];
 						«IF !useClassDefaultsOnly»
 							for (int i=0;i<«a.size»;i++){
-								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«a.refType.type.defaultValue»«ENDIF»;
+								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«aType.defaultValue»«ENDIF»;
 							}
 						«ENDIF»
 					«ENDIF»
@@ -149,7 +155,7 @@ class ProcedureHelpers {
 	}
 	
 	def argList(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»'''
+		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 
 	// generic setters & getters

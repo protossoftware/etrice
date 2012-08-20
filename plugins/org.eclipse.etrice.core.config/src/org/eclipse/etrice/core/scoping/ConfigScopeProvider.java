@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -53,10 +52,10 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 				.eContainer();
 		SubSystemClass subsystem = actorConfig.getRoot();
 		if (subsystem != null) {
-			ActorContainerClass acc = ConfigUtil.resolve(subsystem,
-					actorConfig.getPath());
+			ActorClass ac = ConfigUtil
+					.resolve(subsystem, actorConfig.getPath());
 			for (InterfaceItem item : ConfigUtil.getConfigurableInterfaceItems(
-					acc, true))
+					ac, true))
 				scopes.add(EObjectDescription.create(item.getName(), item));
 		}
 
@@ -104,13 +103,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			List<IEObjectDescription> scopes) {
 		SubSystemClass subsystem = config.getRoot();
 		if (subsystem != null) {
-			ActorContainerClass actor = ConfigUtil.resolve(subsystem,
-					config.getPath());
-			if (actor instanceof ActorClass) {
-				for (Attribute att : RoomHelpers
-						.getAllAttributes((ActorClass) actor)) {
-					scopes.add(EObjectDescription.create(att.getName(), att));
-				}
+			ActorClass actor = ConfigUtil.resolve(subsystem, config.getPath());
+			for (Attribute att : RoomHelpers.getAllAttributes(actor)) {
+				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
 		}
 	}

@@ -73,41 +73,49 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Attribute attribute : attribs) {
+        StringConcatenation _attributeDeclaration = this.attributeDeclaration(attribute);
+        _builder.append(_attributeDeclaration, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public StringConcatenation attributeDeclaration(final Attribute attribute) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      int _size = attribute.getSize();
+      boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
+      if (_operator_equals) {
+        RefableType _refType = attribute.getRefType();
+        DataType _type = _refType.getType();
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
         {
-          int _size = attribute.getSize();
-          boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
-          if (_operator_equals) {
-            RefableType _refType = attribute.getRefType();
-            DataType _type = _refType.getType();
-            String _typeName = this._typeHelpers.typeName(_type);
-            _builder.append(_typeName, "");
-            {
-              RefableType _refType_1 = attribute.getRefType();
-              boolean _isRef = _refType_1.isRef();
-              if (_isRef) {
-                String _pointerLiteral = this.languageExt.pointerLiteral();
-                _builder.append(_pointerLiteral, "");
-              }
-            }
-            _builder.append(" ");
-            String _name = attribute.getName();
-            _builder.append(_name, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          } else {
-            RefableType _refType_2 = attribute.getRefType();
-            DataType _type_1 = _refType_2.getType();
-            String _typeName_1 = this._typeHelpers.typeName(_type_1);
-            int _size_1 = attribute.getSize();
-            String _name_1 = attribute.getName();
-            RefableType _refType_3 = attribute.getRefType();
-            boolean _isRef_1 = _refType_3.isRef();
-            String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
-            _builder.append(_arrayDeclaration, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
+          RefableType _refType_1 = attribute.getRefType();
+          boolean _isRef = _refType_1.isRef();
+          if (_isRef) {
+            String _pointerLiteral = this.languageExt.pointerLiteral();
+            _builder.append(_pointerLiteral, "");
           }
         }
+        _builder.append(" ");
+        String _name = attribute.getName();
+        _builder.append(_name, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      } else {
+        RefableType _refType_2 = attribute.getRefType();
+        DataType _type_1 = _refType_2.getType();
+        String _typeName_1 = this._typeHelpers.typeName(_type_1);
+        int _size_1 = attribute.getSize();
+        String _name_1 = attribute.getName();
+        RefableType _refType_3 = attribute.getRefType();
+        boolean _isRef_1 = _refType_3.isRef();
+        String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
+        _builder.append(_arrayDeclaration, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
@@ -180,16 +188,27 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Attribute a : attribs) {
-        String _initValue = this._configExtension.getInitValue(a);
-        String value = _initValue;
+        RefableType _refType = a.getRefType();
+        DataType _type = _refType.getType();
+        DataType aType = _type;
+        _builder.newLineIfNotEmpty();
+        String _initValueLiteral = this._configExtension.getInitValueLiteral(a);
+        String value = _initValueLiteral;
         _builder.newLineIfNotEmpty();
         {
           boolean _operator_notEquals = ObjectExtensions.operator_notEquals(value, null);
           if (_operator_notEquals) {
             {
-              boolean _isArray = this._configExtension.isArray(a);
-              boolean _operator_not = BooleanExtensions.operator_not(_isArray);
-              if (_operator_not) {
+              boolean _operator_or = false;
+              int _size = a.getSize();
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
+              if (_operator_equals) {
+                _operator_or = true;
+              } else {
+                boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
+                _operator_or = BooleanExtensions.operator_or(_operator_equals, _isCharacterType);
+              }
+              if (_operator_or) {
                 String _name = a.getName();
                 _builder.append(_name, "");
                 _builder.append(" = ");
@@ -202,9 +221,7 @@ public class ProcedureHelpers {
                   String _name_1 = a.getName();
                   _builder.append(_name_1, "");
                   _builder.append(" = new ");
-                  RefableType _refType = a.getRefType();
-                  DataType _type = _refType.getType();
-                  String _typeName = this._typeHelpers.typeName(_type);
+                  String _typeName = this._typeHelpers.typeName(aType);
                   _builder.append(_typeName, "");
                   _builder.append("[] ");
                   _builder.append(value, "");
@@ -214,18 +231,16 @@ public class ProcedureHelpers {
                   String _name_2 = a.getName();
                   _builder.append(_name_2, "");
                   _builder.append(" = new ");
-                  RefableType _refType_1 = a.getRefType();
-                  DataType _type_1 = _refType_1.getType();
-                  String _typeName_1 = this._typeHelpers.typeName(_type_1);
+                  String _typeName_1 = this._typeHelpers.typeName(aType);
                   _builder.append(_typeName_1, "");
                   _builder.append("[");
-                  int _size = a.getSize();
-                  _builder.append(_size, "");
+                  int _size_1 = a.getSize();
+                  _builder.append(_size_1, "");
                   _builder.append("];");
                   _builder.newLineIfNotEmpty();
                   _builder.append("for (int i=0;i<");
-                  int _size_1 = a.getSize();
-                  _builder.append(_size_1, "");
+                  int _size_2 = a.getSize();
+                  _builder.append(_size_2, "");
                   _builder.append(";i++){");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -241,31 +256,29 @@ public class ProcedureHelpers {
               }
             }
           } else {
-            boolean _operator_or = false;
             boolean _operator_or_1 = false;
-            RefableType _refType_2 = a.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            if ((_type_2 instanceof ComplexType)) {
+            boolean _operator_or_2 = false;
+            if ((aType instanceof ComplexType)) {
+              _operator_or_2 = true;
+            } else {
+              int _size_3 = a.getSize();
+              boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_3), ((Integer)1));
+              _operator_or_2 = BooleanExtensions.operator_or((aType instanceof ComplexType), _operator_greaterThan);
+            }
+            if (_operator_or_2) {
               _operator_or_1 = true;
             } else {
-              int _size_2 = a.getSize();
-              boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size_2), ((Integer)1));
-              _operator_or_1 = BooleanExtensions.operator_or((_type_2 instanceof ComplexType), _operator_greaterThan);
+              boolean _operator_not = BooleanExtensions.operator_not(useClassDefaultsOnly);
+              _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, _operator_not);
             }
             if (_operator_or_1) {
-              _operator_or = true;
-            } else {
-              boolean _operator_not_1 = BooleanExtensions.operator_not(useClassDefaultsOnly);
-              _operator_or = BooleanExtensions.operator_or(_operator_or_1, _operator_not_1);
-            }
-            if (_operator_or) {
               {
-                int _size_3 = a.getSize();
-                boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size_3), ((Integer)0));
-                if (_operator_equals) {
+                int _size_4 = a.getSize();
+                boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_size_4), ((Integer)0));
+                if (_operator_equals_1) {
                   {
-                    RefableType _refType_3 = a.getRefType();
-                    boolean _isRef = _refType_3.isRef();
+                    RefableType _refType_1 = a.getRefType();
+                    boolean _isRef = _refType_1.isRef();
                     if (_isRef) {
                       String _name_4 = a.getName();
                       _builder.append(_name_4, "");
@@ -278,9 +291,7 @@ public class ProcedureHelpers {
                       String _name_5 = a.getName();
                       _builder.append(_name_5, "");
                       _builder.append(" = ");
-                      RefableType _refType_4 = a.getRefType();
-                      DataType _type_3 = _refType_4.getType();
-                      String _defaultValue = this._typeHelpers.defaultValue(_type_3);
+                      String _defaultValue = this._typeHelpers.defaultValue(aType);
                       _builder.append(_defaultValue, "");
                       _builder.append(";");
                       _builder.newLineIfNotEmpty();
@@ -290,21 +301,19 @@ public class ProcedureHelpers {
                   String _name_6 = a.getName();
                   _builder.append(_name_6, "");
                   _builder.append(" = new ");
-                  RefableType _refType_5 = a.getRefType();
-                  DataType _type_4 = _refType_5.getType();
-                  String _typeName_2 = this._typeHelpers.typeName(_type_4);
+                  String _typeName_2 = this._typeHelpers.typeName(aType);
                   _builder.append(_typeName_2, "");
                   _builder.append("[");
-                  int _size_4 = a.getSize();
-                  _builder.append(_size_4, "");
+                  int _size_5 = a.getSize();
+                  _builder.append(_size_5, "");
                   _builder.append("];");
                   _builder.newLineIfNotEmpty();
                   {
-                    boolean _operator_not_2 = BooleanExtensions.operator_not(useClassDefaultsOnly);
-                    if (_operator_not_2) {
+                    boolean _operator_not_1 = BooleanExtensions.operator_not(useClassDefaultsOnly);
+                    if (_operator_not_1) {
                       _builder.append("for (int i=0;i<");
-                      int _size_5 = a.getSize();
-                      _builder.append(_size_5, "");
+                      int _size_6 = a.getSize();
+                      _builder.append(_size_6, "");
                       _builder.append(";i++){");
                       _builder.newLineIfNotEmpty();
                       _builder.append("\t");
@@ -312,15 +321,13 @@ public class ProcedureHelpers {
                       _builder.append(_name_7, "	");
                       _builder.append("[i] = ");
                       {
-                        RefableType _refType_6 = a.getRefType();
-                        boolean _isRef_1 = _refType_6.isRef();
+                        RefableType _refType_2 = a.getRefType();
+                        boolean _isRef_1 = _refType_2.isRef();
                         if (_isRef_1) {
                           String _nullPointer_1 = this.languageExt.nullPointer();
                           _builder.append(_nullPointer_1, "	");
                         } else {
-                          RefableType _refType_7 = a.getRefType();
-                          DataType _type_5 = _refType_7.getType();
-                          String _defaultValue_1 = this._typeHelpers.defaultValue(_type_5);
+                          String _defaultValue_1 = this._typeHelpers.defaultValue(aType);
                           _builder.append(_defaultValue_1, "	");
                         }
                       }
@@ -471,7 +478,7 @@ public class ProcedureHelpers {
         _builder.append(_typeName, "");
         {
           int _size = a.getSize();
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
           if (_operator_greaterThan) {
             _builder.append("[]");
           }

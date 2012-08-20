@@ -280,37 +280,15 @@ ruleDynamicConfig returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2(), 0);
 	 				}
-					({true}?=>(	otherlv_3='source' 
+					({true}?=>((	otherlv_3='file path' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getDynamicConfigAccess().getSourceKeyword_2_0_0());
+    	newLeafNode(otherlv_3, grammarAccess.getDynamicConfigAccess().getFilePathKeyword_2_0_0_0());
     }
 (
 (
-		lv_source_4_0=RULE_STRING
+		lv_filePath_4_0=RULE_STRING
 		{
-			newLeafNode(lv_source_4_0, grammarAccess.getDynamicConfigAccess().getSourceSTRINGTerminalRuleCall_2_0_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDynamicConfigRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"source",
-        		lv_source_4_0, 
-        		"STRING");
-	    }
-
-)
-)(	otherlv_5='file path' 
-    {
-    	newLeafNode(otherlv_5, grammarAccess.getDynamicConfigAccess().getFilePathKeyword_2_0_2_0());
-    }
-(
-(
-		lv_filePath_6_0=RULE_STRING
-		{
-			newLeafNode(lv_filePath_6_0, grammarAccess.getDynamicConfigAccess().getFilePathSTRINGTerminalRuleCall_2_0_2_1_0()); 
+			newLeafNode(lv_filePath_4_0, grammarAccess.getDynamicConfigAccess().getFilePathSTRINGTerminalRuleCall_2_0_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -319,12 +297,57 @@ ruleDynamicConfig returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"filePath",
-        		lv_filePath_6_0, 
+        		lv_filePath_4_0, 
         		"STRING");
 	    }
 
 )
-))?))
+))
+    |((	otherlv_5='user import' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getDynamicConfigAccess().getUserImportKeyword_2_0_1_0_0());
+    }
+(
+(
+		lv_userCode1_6_0=RULE_STRING
+		{
+			newLeafNode(lv_userCode1_6_0, grammarAccess.getDynamicConfigAccess().getUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDynamicConfigRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"userCode1",
+        		lv_userCode1_6_0, 
+        		"STRING");
+	    }
+
+)
+))(	otherlv_7='user constructor' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getDynamicConfigAccess().getUserConstructorKeyword_2_0_1_1_0());
+    }
+(
+(
+		lv_userCode2_8_0=RULE_STRING
+		{
+			newLeafNode(lv_userCode2_8_0, grammarAccess.getDynamicConfigAccess().getUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDynamicConfigRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"userCode2",
+        		lv_userCode2_8_0, 
+        		"STRING");
+	    }
+
+)
+)))))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2());
 	 				}
@@ -336,15 +359,15 @@ ruleDynamicConfig returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2(), 1);
 	 				}
-					({true}?=>(	otherlv_7='polling rate' 
+					({true}?=>(	otherlv_9='polling timer [ms]' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getDynamicConfigAccess().getPollingRateKeyword_2_1_0());
+    	newLeafNode(otherlv_9, grammarAccess.getDynamicConfigAccess().getPollingTimerMsKeyword_2_1_0());
     }
 (
 (
-		lv_polling_8_0=RULE_INT
+		lv_polling_10_0=RULE_INT
 		{
-			newLeafNode(lv_polling_8_0, grammarAccess.getDynamicConfigAccess().getPollingINTTerminalRuleCall_2_1_1_0()); 
+			newLeafNode(lv_polling_10_0, grammarAccess.getDynamicConfigAccess().getPollingINTTerminalRuleCall_2_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -353,7 +376,7 @@ ruleDynamicConfig returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"polling",
-        		lv_polling_8_0, 
+        		lv_polling_10_0, 
         		"INT");
 	    }
 
@@ -373,9 +396,9 @@ ruleDynamicConfig returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2());
 	}
 
-)	otherlv_9='}' 
+)	otherlv_11='}' 
     {
-    	newLeafNode(otherlv_9, grammarAccess.getDynamicConfigAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_11, grammarAccess.getDynamicConfigAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
@@ -1087,25 +1110,11 @@ ruleAttrInstanceConfig returns [EObject current=null]
     {
     	newLeafNode(otherlv_4, grammarAccess.getAttrInstanceConfigAccess().getLeftCurlyBracketKeyword_3_0());
     }
+((
 (
-
-(
-	{ 
-	  getUnorderedGroupHelper().enter(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1());
-	}
-	(
-		(
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1(), 0)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1(), 0);
-	 				}
-					({true}?=>((
-(
-		lv_dynConfig_6_0=	'dynamic configuration' 
+		lv_dynConfig_5_0=	'dynamic configuration' 
     {
-        newLeafNode(lv_dynConfig_6_0, grammarAccess.getAttrInstanceConfigAccess().getDynConfigDynamicConfigurationKeyword_3_1_0_0_0());
+        newLeafNode(lv_dynConfig_5_0, grammarAccess.getAttrInstanceConfigAccess().getDynConfigDynamicConfigurationKeyword_3_1_0_0());
     }
  
 	    {
@@ -1118,71 +1127,45 @@ ruleAttrInstanceConfig returns [EObject current=null]
 )
 )((
 (
-		lv_readOnly_7_0=	'read-only' 
+		lv_readOnly_6_0=	'read' 
     {
-        newLeafNode(lv_readOnly_7_0, grammarAccess.getAttrInstanceConfigAccess().getReadOnlyReadOnlyKeyword_3_1_0_1_0_0());
+        newLeafNode(lv_readOnly_6_0, grammarAccess.getAttrInstanceConfigAccess().getReadOnlyReadKeyword_3_1_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getAttrInstanceConfigRule());
 	        }
-       		setWithLastConsumed($current, "readOnly", true, "read-only");
+       		setWithLastConsumed($current, "readOnly", true, "read");
 	    }
 
 )
 )
-    |	otherlv_8='read-write' 
+    |	otherlv_7='write' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getAttrInstanceConfigAccess().getReadWriteKeyword_3_1_0_1_1());
+    	newLeafNode(otherlv_7, grammarAccess.getAttrInstanceConfigAccess().getWriteKeyword_3_1_1_1());
     }
-)))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1());
-	 				}
- 				)
-			)  |
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1(), 1)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1(), 1);
-	 				}
-					({true}?=>(
+))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAttrInstanceConfigAccess().getAttributesAttrInstanceConfigParserRuleCall_3_1_1_0()); 
+	        newCompositeNode(grammarAccess.getAttrInstanceConfigAccess().getAttributesAttrInstanceConfigParserRuleCall_3_2_0()); 
 	    }
-		lv_attributes_9_0=ruleAttrInstanceConfig		{
+		lv_attributes_8_0=ruleAttrInstanceConfig		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAttrInstanceConfigRule());
 	        }
        		add(
        			$current, 
        			"attributes",
-        		lv_attributes_9_0, 
+        		lv_attributes_8_0, 
         		"AttrInstanceConfig");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))+
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1());
-	 				}
- 				)
-			)  
-
-		)*	
-	)
-)
-	{ 
-	  getUnorderedGroupHelper().leave(grammarAccess.getAttrInstanceConfigAccess().getUnorderedGroup_3_1());
-	}
-
-)	otherlv_10='}' 
+)*	otherlv_9='}' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getAttrInstanceConfigAccess().getRightCurlyBracketKeyword_3_2());
+    	newLeafNode(otherlv_9, grammarAccess.getAttrInstanceConfigAccess().getRightCurlyBracketKeyword_3_3());
     }
 )?)
 ;
@@ -2167,32 +2150,12 @@ ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
     { 
     newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
     }
-    this_ID_5=RULE_ID    {
-		$current.merge(this_ID_5);
+    this_EXP_5=RULE_EXP    {
+		$current.merge(this_EXP_5);
     }
 
     { 
-    newLeafNode(this_ID_5, grammarAccess.getDecimalExpAccess().getIDTerminalRuleCall_4()); 
-    }
-(
-	kw='+' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
-    }
-
-    |
-	kw='-' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
-    }
-)?    this_INT_8=RULE_INT    {
-		$current.merge(this_INT_8);
-    }
-
-    { 
-    newLeafNode(this_INT_8, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_6()); 
+    newLeafNode(this_EXP_5, grammarAccess.getDecimalExpAccess().getEXPTerminalRuleCall_4()); 
     }
 )
     ;
@@ -2203,6 +2166,8 @@ finally {
 
 
 
+
+RULE_EXP : ('e'|'E') ('+'|'-')? ('0'..'9')+;
 
 RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 

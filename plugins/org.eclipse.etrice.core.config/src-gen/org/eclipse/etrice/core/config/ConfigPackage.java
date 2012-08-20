@@ -164,22 +164,31 @@ public interface ConfigPackage extends EPackage
   int DYNAMIC_CONFIG = 3;
 
   /**
-   * The feature id for the '<em><b>Source</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DYNAMIC_CONFIG__SOURCE = 0;
-
-  /**
    * The feature id for the '<em><b>File Path</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DYNAMIC_CONFIG__FILE_PATH = 1;
+  int DYNAMIC_CONFIG__FILE_PATH = 0;
+
+  /**
+   * The feature id for the '<em><b>User Code1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG__USER_CODE1 = 1;
+
+  /**
+   * The feature id for the '<em><b>User Code2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DYNAMIC_CONFIG__USER_CODE2 = 2;
 
   /**
    * The feature id for the '<em><b>Polling</b></em>' attribute.
@@ -188,7 +197,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DYNAMIC_CONFIG__POLLING = 2;
+  int DYNAMIC_CONFIG__POLLING = 3;
 
   /**
    * The number of structural features of the '<em>Dynamic Config</em>' class.
@@ -197,7 +206,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DYNAMIC_CONFIG_FEATURE_COUNT = 3;
+  int DYNAMIC_CONFIG_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl <em>Actor Class Config</em>}' class.
@@ -896,17 +905,6 @@ public interface ConfigPackage extends EPackage
   EClass getDynamicConfig();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getSource <em>Source</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Source</em>'.
-   * @see org.eclipse.etrice.core.config.DynamicConfig#getSource()
-   * @see #getDynamicConfig()
-   * @generated
-   */
-  EAttribute getDynamicConfig_Source();
-
-  /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getFilePath <em>File Path</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -916,6 +914,28 @@ public interface ConfigPackage extends EPackage
    * @generated
    */
   EAttribute getDynamicConfig_FilePath();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode1 <em>User Code1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>User Code1</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig#getUserCode1()
+   * @see #getDynamicConfig()
+   * @generated
+   */
+  EAttribute getDynamicConfig_UserCode1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode2 <em>User Code2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>User Code2</em>'.
+   * @see org.eclipse.etrice.core.config.DynamicConfig#getUserCode2()
+   * @see #getDynamicConfig()
+   * @generated
+   */
+  EAttribute getDynamicConfig_UserCode2();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.DynamicConfig#getPolling <em>Polling</em>}'.
@@ -1502,20 +1522,28 @@ public interface ConfigPackage extends EPackage
     EClass DYNAMIC_CONFIG = eINSTANCE.getDynamicConfig();
 
     /**
-     * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DYNAMIC_CONFIG__SOURCE = eINSTANCE.getDynamicConfig_Source();
-
-    /**
      * The meta object literal for the '<em><b>File Path</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute DYNAMIC_CONFIG__FILE_PATH = eINSTANCE.getDynamicConfig_FilePath();
+
+    /**
+     * The meta object literal for the '<em><b>User Code1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DYNAMIC_CONFIG__USER_CODE1 = eINSTANCE.getDynamicConfig_UserCode1();
+
+    /**
+     * The meta object literal for the '<em><b>User Code2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DYNAMIC_CONFIG__USER_CODE2 = eINSTANCE.getDynamicConfig_UserCode2();
 
     /**
      * The meta object literal for the '<em><b>Polling</b></em>' attribute feature.

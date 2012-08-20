@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
+import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.LiteralArray;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
@@ -32,7 +33,10 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.LiteralType;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.contentassist.AbstractConfigProposalProvider;
 import org.eclipse.jface.viewers.StyledString;
@@ -126,13 +130,15 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		List<ActorRef> refs = new ArrayList<ActorRef>();
 
 		ActorContainerClass root = config.getRoot();
-		RefPath path = config.getPath();
-		if (path != null)
-			root = ConfigUtil.resolve(root, path);
 		if (root != null) {
-			for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
-				if (ref instanceof ActorRef)
-					refs.add((ActorRef) ref);
+			RefPath path = config.getPath();
+			if (path != null && !path.getRefs().isEmpty())
+				root = ConfigUtil.resolve(root, path);
+			if (root != null) {
+				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
+					if (ref instanceof ActorRef)
+						refs.add((ActorRef) ref);
+				}
 			}
 		}
 
@@ -166,8 +172,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 
 		acceptor.accept(createCompletionProposal("", "Boolean" + mult, null,
 				context));
-		acceptor.accept(createCompletionProposal("true", "true", null,
-				context));
+		acceptor.accept(createCompletionProposal("true", "true", null, context));
 		acceptor.accept(createCompletionProposal("false", "false", null,
 				context));
 	}
@@ -222,23 +227,38 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				|| keyword.getValue().equals("false")) {
 			return;
 		}
+		if (model instanceof AttrInstanceConfig) {
+			if (hideKeyword((AttrInstanceConfig) model, keyword))
+				return;
+		}
 
 		super.completeKeyword(keyword, contentAssistContext, acceptor);
 	}
 
 	private boolean hideKeyword(AttrConfig config, Keyword keyword) {
 		LiteralType type = ConfigUtil.getLiteralType(config.getAttribute());
+		DataType dataType = config.getAttribute().getRefType().getType();
 		if (keyword.getValue().equals("min")
 				|| keyword.getValue().equals("max")) {
 			if (type != LiteralType.INT && type != LiteralType.REAL)
 				return true;
 		}
-		if(keyword.getValue().equals("Attr")){
-			if(type != null)
+		if (keyword.getValue().equals("Attr")) {
+			if (!(dataType instanceof PrimitiveType || dataType instanceof DataClass))
 				return true;
 		}
-		if(keyword.getValue().equals("dynamic configuration")){
-			if(config.eContainer() instanceof AttrConfig)
+		if (keyword.getValue().equals("=")) {
+			if (!config.getAttribute().eIsProxy())
+				if (!(dataType instanceof PrimitiveType))
+					return true;
+		}
+
+		return false;
+	}
+
+	private boolean hideKeyword(AttrInstanceConfig config, Keyword keyword) {
+		if (keyword.getValue().equals("dynamic configuration")) {
+			if (!(config.eContainer() instanceof ActorInstanceConfig))
 				return true;
 		}
 
@@ -251,6 +271,8 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				Attribute attr = ((AttrConfig) array.eContainer())
 						.getAttribute();
 				if (attr.getSize() <= array.getLiterals().size())
+					return true;
+				if (((PrimitiveType) attr.getRefType().getType()).getType() == LiteralType.CHAR)
 					return true;
 			}
 		}

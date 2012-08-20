@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
@@ -244,5 +245,10 @@ public class CExtensions implements ILanguageExtension {
   
   public String superCall(final String baseClassName, final String method, final String args) {
     return "";
+  }
+  
+  public String toValueLiteral(final PrimitiveType type, final String value) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO Config for C");
+    throw _unsupportedOperationException;
   }
 }

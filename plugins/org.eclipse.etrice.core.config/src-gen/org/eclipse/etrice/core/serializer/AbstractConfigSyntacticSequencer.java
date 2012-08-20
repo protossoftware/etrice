@@ -21,7 +21,7 @@ public class AbstractConfigSyntacticSequencer extends AbstractSyntacticSequencer
 	protected AbstractElementAlias match_ActorInstanceConfig_RightCurlyBracketKeyword_1_1_a;
 	protected AbstractElementAlias match_ActorInstanceConfig_RightCurlyBracketKeyword_1_1_p;
 	protected AbstractElementAlias match_AttrClassConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q;
-	protected AbstractElementAlias match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
+	protected AbstractElementAlias match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -29,7 +29,7 @@ public class AbstractConfigSyntacticSequencer extends AbstractSyntacticSequencer
 		match_ActorInstanceConfig_RightCurlyBracketKeyword_1_1_a = new TokenAlias(true, true, grammarAccess.getActorInstanceConfigAccess().getRightCurlyBracketKeyword_1_1());
 		match_ActorInstanceConfig_RightCurlyBracketKeyword_1_1_p = new TokenAlias(true, false, grammarAccess.getActorInstanceConfigAccess().getRightCurlyBracketKeyword_1_1());
 		match_AttrClassConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAttrClassConfigAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getAttrClassConfigAccess().getRightCurlyBracketKeyword_3_3()));
-		match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAttrInstanceConfigAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getAttrInstanceConfigAccess().getRightCurlyBracketKeyword_3_2()));
+		match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAttrInstanceConfigAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getAttrInstanceConfigAccess().getRightCurlyBracketKeyword_3_3()));
 	}
 	
 	@Override
@@ -50,8 +50,8 @@ public class AbstractConfigSyntacticSequencer extends AbstractSyntacticSequencer
 				emit_ActorInstanceConfig_RightCurlyBracketKeyword_1_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_AttrClassConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q.equals(syntax))
 				emit_AttrClassConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
-				emit_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q.equals(syntax))
+				emit_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -84,7 +84,7 @@ public class AbstractConfigSyntacticSequencer extends AbstractSyntacticSequencer
 	 * Syntax:
 	 *     ('{' '}')?
 	 */
-	protected void emit_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AttrInstanceConfig___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

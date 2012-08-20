@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,6 +153,20 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
             for(ConfigElement element : this.getConfigElements())
            		if(element instanceof ProtocolClassConfig)
                 list.add((ProtocolClassConfig) element);
+            return list;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<SubSystemConfig> getSubSystemConfigs()
+  {
+    EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
+            for(ConfigElement element : this.getConfigElements())
+           		if(element instanceof SubSystemConfig)
+                list.add((SubSystemConfig) element);
             return list;
   }
 

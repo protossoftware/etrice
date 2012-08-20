@@ -85,6 +85,12 @@ class RoomExtensions {
 		return ret
 	}
 	
+	def <T> List<T> minus(List<T> l1, List<T> l2){
+		var ret = new ArrayList<T>(l1)
+		ret.removeAll(l2)
+		return ret;
+	}
+	
 	//-------------------------------------------------------
 	// path related methods
 	
@@ -198,6 +204,10 @@ class RoomExtensions {
 			return ac.attributes
 		else
 			ac.base.allAttributes.union(ac.attributes)
+	}
+	
+	def ActorClass getContainingActorClass(EObject o){
+		o.actorClass;
 	}
 
 	//-------------------------------------------------------
@@ -575,5 +585,4 @@ class RoomExtensions {
 		
 		return result;
 	}
-	
 }

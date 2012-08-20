@@ -10,6 +10,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
 import org.eclipse.etrice.integration.ConfigTest.PortProtocol.*;
+import org.eclipse.etrice.integration.ConfigTest.TestCommProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
 	import org.eclipse.etrice.runtime.java.messaging.RTServices;
@@ -19,7 +20,9 @@ import org.eclipse.etrice.integration.ConfigTest.PortProtocol.*;
 public class Testee_ac extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
+	protected TestCommProtocolPort Reg_dynConfigPort = null;
 	protected PortProtocolPort Reg_port = null;
 	
 	//--------------------- saps
@@ -27,7 +30,9 @@ public class Testee_ac extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_Reg_port = 1;
+	public static final int IFITEM_Reg_dynConfigPort = 1;
+	public static final int IFITEM_Reg_port = 2;
+	
 		
 	/*--------------------- attributes ---------------------*/
 	boolean bool_r;
@@ -39,10 +44,15 @@ public class Testee_ac extends ActorClassBase {
 	double float_r;
 	double float_c;
 	double float_i;
+	char char_r;
 	char char_c;
 	char char_i;
-	char string_c[];
-	char string_i[];
+	char charArray_r[];
+	char charArray_c[];
+	char charArray_i[];
+	String string_r;
+	String string_c;
+	String string_i;
 	int array1_r[];
 	int array1_c[];
 	int array1_i[];
@@ -64,35 +74,37 @@ public class Testee_ac extends ActorClassBase {
 		int_c = 210;
 		int_i = 310;
 		float_r = 11.11;
-		float_c = 16777215;
-		float_i = 0.0;
+		float_c = 16777215d;
+		float_i = 0.0d;
+		char_r = 'R';
 		char_c = 'A';
 		char_i = 'B';
-		string_c = "ROOM-Coon".toCharArray();
-		string_i = "ROOM Gloom".toCharArray();
+		charArray_r = "ROOM will bloom".toCharArray();
+		charArray_c = "ROOM-Coon".toCharArray();
+		charArray_i = "ROOM Gloom".toCharArray();
+		string_r = ":/";
+		string_c = ":-)";
+		string_i = ":-]";
 		array1_r = new int[1];
 		for (int i=0;i<1;i++){
 			array1_r[i] = 0;
 		}
-		array1_c = new int[1];
-		for (int i=0;i<1;i++){
-			array1_c[i] = 99;
-		}
-		array1_i = new int[1];
-		for (int i=0;i<1;i++){
-			array1_i[i] = 99;
-		}
+		array1_c = new int[] {99};
+		array1_i = new int[] {99};
 		array2_r = new boolean[] {true, true};
-		array2_c = new boolean[] { false, false };
-		array2_i = new boolean[] { false, false };
+		array2_c = new boolean[] {false, false};
+		array2_i = new boolean[] {false, false};
 
 		// own ports
+		Reg_dynConfigPort = new TestCommProtocolPort(this, "Reg_dynConfigPort", IFITEM_Reg_dynConfigPort, 0, port_addr[IFITEM_Reg_dynConfigPort][0], peer_addr[IFITEM_Reg_dynConfigPort][0]); 
 		Reg_port = new PortProtocolPort(this, "Reg_port", IFITEM_Reg_port, 0, port_addr[IFITEM_Reg_port][0], peer_addr[IFITEM_Reg_port][0]); 
 		
 		// own saps
 		
 		// own service implementations
 	}
+	
+	
 	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setBool_r (boolean bool_r) {
@@ -149,6 +161,12 @@ public class Testee_ac extends ActorClassBase {
 	public double getFloat_i () {
 		return this.float_i;
 	}
+	public void setChar_r (char char_r) {
+		 this.char_r = char_r;
+	}
+	public char getChar_r () {
+		return this.char_r;
+	}
 	public void setChar_c (char char_c) {
 		 this.char_c = char_c;
 	}
@@ -161,16 +179,40 @@ public class Testee_ac extends ActorClassBase {
 	public char getChar_i () {
 		return this.char_i;
 	}
-	public void setString_c (char[] string_c) {
+	public void setCharArray_r (char[] charArray_r) {
+		 this.charArray_r = charArray_r;
+	}
+	public char[] getCharArray_r () {
+		return this.charArray_r;
+	}
+	public void setCharArray_c (char[] charArray_c) {
+		 this.charArray_c = charArray_c;
+	}
+	public char[] getCharArray_c () {
+		return this.charArray_c;
+	}
+	public void setCharArray_i (char[] charArray_i) {
+		 this.charArray_i = charArray_i;
+	}
+	public char[] getCharArray_i () {
+		return this.charArray_i;
+	}
+	public void setString_r (String string_r) {
+		 this.string_r = string_r;
+	}
+	public String getString_r () {
+		return this.string_r;
+	}
+	public void setString_c (String string_c) {
 		 this.string_c = string_c;
 	}
-	public char[] getString_c () {
+	public String getString_c () {
 		return this.string_c;
 	}
-	public void setString_i (char[] string_i) {
+	public void setString_i (String string_i) {
 		 this.string_i = string_i;
 	}
-	public char[] getString_i () {
+	public String getString_i () {
 		return this.string_i;
 	}
 	public void setArray1_r (int[] array1_r) {
@@ -209,7 +251,12 @@ public class Testee_ac extends ActorClassBase {
 	public boolean[] getArray2_i () {
 		return this.array2_i;
 	}
+	
+	
 	//--------------------- port getters
+	public TestCommProtocolPort getReg_dynConfigPort (){
+		return this.Reg_dynConfigPort;
+	}
 	public PortProtocolPort getReg_port (){
 		return this.Reg_port;
 	}
@@ -232,24 +279,28 @@ public class Testee_ac extends ActorClassBase {
 
 	
 	/* state IDs */
-	public static final int STATE_Testing = 2;
-	public static final int STATE_Done = 3;
+	public static final int STATE_Testing1 = 2;
+	public static final int STATE_Testing2 = 3;
+	public static final int STATE_Done = 4;
 	
 	/* transition chains */
-	public static final int CHAIN_TRANS_INITIAL_TO__Testing = 1;
-	public static final int CHAIN_TRANS_tr1_FROM_Testing_TO_Done_BY_portTestSuccReg_port = 2;
+	public static final int CHAIN_TRANS_INITIAL_TO__Testing1 = 1;
+	public static final int CHAIN_TRANS_tr1_FROM_Testing1_TO_Testing2_BY_portTestSuccReg_port = 2;
+	public static final int CHAIN_TRANS_tr2_FROM_Testing2_TO_Done_BY_okReg_dynConfigPort = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
+	public static final int TRIG_Reg_dynConfigPort__ok = IFITEM_Reg_dynConfigPort + EVT_SHIFT*TestCommProtocol.IN_ok;
 	public static final int TRIG_Reg_port__portTestSucc = IFITEM_Reg_port + EVT_SHIFT*PortProtocol.IN_portTestSucc;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","Testing",
+	protected static final String stateStrings[] = {"<no state>","<top>","Testing1",
+	"Testing2",
 	"Done"
 	};
 	
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
@@ -260,9 +311,12 @@ public class Testee_ac extends ActorClassBase {
 	}
 	
 	/* Entry and Exit Codes */
-	protected void entry_Testing() {
+	protected void entry_Testing1() {
 		if(Reg_port.varCheck())
 			Reg_port.conjCheck();
+	}
+	protected void entry_Testing2() {
+		Reg_dynConfigPort.test();
 	}
 	protected void entry_Done() {
 		if (bool_r != true || bool_c != false || bool_i != true )
@@ -271,11 +325,12 @@ public class Testee_ac extends ActorClassBase {
 			RTServices.getInstance().getSubSystem().testFinished(2);
 		else if (float_r != 11.11 || float_c !=0xFFFFFF || float_i != 0.00001)
 			RTServices.getInstance().getSubSystem().testFinished(3);
-		//char_r != 'R'
-		else if (char_c != 'A' || char_i != 'C')
+		else if (char_r != 'R' || char_c != 'A' || char_i != 'C')
 			RTServices.getInstance().getSubSystem().testFinished(4);
 		// string_r.equals("ROOM will bloom")
-		else if (string_c.equals("ROOM-Coon") || string_i.equals("ROOM 2 Moon"))
+		else if (charArray_r.equals("ROOM will bloom") || charArray_c.equals("ROOM-Coon") || charArray_i.equals("ROOM 2 Moon"))
+			RTServices.getInstance().getSubSystem().testFinished(5);
+		else if (!string_r.equals(":/") || !string_c.equals(":-)") || !string_i.equals(":^]"))
 			RTServices.getInstance().getSubSystem().testFinished(5);
 		if(array1_r[0] != 0 || array1_c[0] != 99 || array1_i[0] != 4)
 			RTServices.getInstance().getSubSystem().testFinished(6);
@@ -301,8 +356,12 @@ public class Testee_ac extends ActorClassBase {
 	private void exitTo(int current, int to, boolean handler) {
 		while (current!=to) {
 			switch (current) {
-				case STATE_Testing:
-					this.history[STATE_TOP] = STATE_Testing;
+				case STATE_Testing1:
+					this.history[STATE_TOP] = STATE_Testing1;
+					current = STATE_TOP;
+					break;
+				case STATE_Testing2:
+					this.history[STATE_TOP] = STATE_Testing2;
 					current = STATE_TOP;
 					break;
 				case STATE_Done:
@@ -322,11 +381,15 @@ public class Testee_ac extends ActorClassBase {
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
-			case CHAIN_TRANS_INITIAL_TO__Testing:
+			case CHAIN_TRANS_INITIAL_TO__Testing1:
 			{
-				return STATE_Testing;
+				return STATE_Testing1;
 			}
-			case CHAIN_TRANS_tr1_FROM_Testing_TO_Done_BY_portTestSuccReg_port:
+			case CHAIN_TRANS_tr1_FROM_Testing1_TO_Testing2_BY_portTestSuccReg_port:
+			{
+				return STATE_Testing2;
+			}
+			case CHAIN_TRANS_tr2_FROM_Testing2_TO_Done_BY_okReg_dynConfigPort:
 			{
 				return STATE_Done;
 			}
@@ -343,10 +406,14 @@ public class Testee_ac extends ActorClassBase {
 	private int enterHistory(int state, boolean handler, boolean skip_entry) {
 		while (true) {
 			switch (state) {
-				case STATE_Testing:
-					if (!(skip_entry || handler)) entry_Testing();
+				case STATE_Testing1:
+					if (!(skip_entry || handler)) entry_Testing1();
 					// in leaf state: return state id
-					return STATE_Testing;
+					return STATE_Testing1;
+				case STATE_Testing2:
+					if (!(skip_entry || handler)) entry_Testing2();
+					// in leaf state: return state id
+					return STATE_Testing2;
 				case STATE_Done:
 					if (!(skip_entry || handler)) entry_Done();
 					// in leaf state: return state id
@@ -361,7 +428,7 @@ public class Testee_ac extends ActorClassBase {
 	}
 	
 	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__Testing;
+		int chain = CHAIN_TRANS_INITIAL_TO__Testing1;
 		int next = executeTransitionChain(chain, null, null);
 		next = enterHistory(next, false, false);
 		setState(next);
@@ -377,11 +444,21 @@ public class Testee_ac extends ActorClassBase {
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
 			switch (this.state) {
-				case STATE_Testing:
+				case STATE_Testing1:
 					switch(trigger) {
 						case TRIG_Reg_port__portTestSucc:
 							{
-								chain = CHAIN_TRANS_tr1_FROM_Testing_TO_Done_BY_portTestSuccReg_port;
+								chain = CHAIN_TRANS_tr1_FROM_Testing1_TO_Testing2_BY_portTestSuccReg_port;
+								catching_state = STATE_TOP;
+							}
+						break;
+					}
+					break;
+				case STATE_Testing2:
+					switch(trigger) {
+						case TRIG_Reg_dynConfigPort__ok:
+							{
+								chain = CHAIN_TRANS_tr2_FROM_Testing2_TO_Done_BY_okReg_dynConfigPort;
 								catching_state = STATE_TOP;
 							}
 						break;

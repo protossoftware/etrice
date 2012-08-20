@@ -44,8 +44,8 @@ public class PortProtocol {
 			super(actor, name, localId, idx, addr, peerAddress);
 			// initialize attributes
 			float_r = 4;
-			float_c = 3;
-			float_i = 9;
+			float_c = 3f;
+			float_i = 9f;
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -161,17 +161,11 @@ public class PortProtocol {
 			for (int i=0;i<1;i++){
 				array1_r[i] = 1000;
 			}
-			array1_c = new float[1];
-			for (int i=0;i<1;i++){
-				array1_c[i] = 1;
-			}
-			array1_i = new float[1];
-			for (int i=0;i<1;i++){
-				array1_i[i] = 2;
-			}
+			array1_c = new float[] {1f};
+			array1_i = new float[] {2f};
 			array2_r = new long[] {11,22};
-			array2_c = new long[] { 16, 32 };
-			array2_i = new long[] { 16, 32 };
+			array2_c = new long[] {16L, 32L};
+			array2_i = new long[] {16L, 32L};
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	

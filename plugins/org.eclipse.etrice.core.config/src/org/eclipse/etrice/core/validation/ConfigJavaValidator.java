@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrClassConfig;
@@ -35,7 +36,9 @@ import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
+import org.eclipse.etrice.core.converter.ConfigValueConverterService;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
@@ -44,9 +47,13 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.validation.Check;
 
 public class ConfigJavaValidator extends AbstractConfigJavaValidator {
+
+	private ConfigValueConverterService converter = new ConfigValueConverterService();
 
 	@Check
 	public void checkConfigModel(ConfigModel model) {
@@ -184,10 +191,27 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (attr == null)
 			return;
 
-		if(config.eContainer() instanceof AttrConfig){
-			if(config.isDynConfig())
-				error("only allowed for parent attribute", ConfigPackage.eINSTANCE.getAttrInstanceConfig_DynConfig());
+		EStructuralFeature feature = ConfigPackage.eINSTANCE
+				.getAttrInstanceConfig_DynConfig();
+		if (config.isDynConfig()) {
+			if (!(config.eContainer() instanceof ActorInstanceConfig))
+				error("dynamic configuration only at root attributes", feature);
+			if(config.eContainer() instanceof ActorInstanceConfig){
+				SubSystemClass ssc = ((ActorInstanceConfig)config.eContainer()).getRoot();
+				ConfigModel model = getConfigModel(config);
+				boolean found = false;
+				for(SubSystemConfig c : model.getSubSystemConfigs())
+					if(c.getSubSystem().equals(ssc)){
+						if(c.getDynConfig() == null)
+							error("no source for dynamic config in SubSystemConfig", feature);
+							found = true;
+					}
+				if(!found)
+					error("no SubSystemConfig found", feature);
+				
+			}
 		}
+
 	}
 
 	private void checkAttrConfigValue(PrimitiveType primitive, AttrConfig config) {
@@ -201,10 +225,13 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		LiteralType type = primitive.getType();
 		Attribute attribute = config.getAttribute();
 		int attrMult = (attribute.getSize() > 0) ? attribute.getSize() : 1;
-		if (values.size() > attrMult)
-			error("too many values, multiplicity is " + attrMult, valueRef);
-		if (values.size() > 1 && values.size() < attrMult)
-			error("not enough values, multiplicity is " + attrMult, valueRef);
+		if (type != LiteralType.CHAR) {
+			if (values.size() > attrMult)
+				error("too many values, multiplicity is " + attrMult, valueRef);
+			if (values.size() > 1 && values.size() < attrMult)
+				error("not enough values, multiplicity is " + attrMult,
+						valueRef);
+		}
 		// type check
 		for (Literal value : values) {
 			switch (type) {
@@ -227,7 +254,8 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 					if (values.size() > 1)
 						error("multiplicity must be one", valueRef);
 					StringLiteral strValue = (StringLiteral) value;
-					if (attrMult < strValue.getValue().length())
+					if (attribute.getSize() > 0
+							&& attrMult < strValue.getValue().length())
 						error("too many characters - maximal length is "
 								+ attrMult, valueRef);
 				}
@@ -270,21 +298,38 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 					if (!(value instanceof NumberLiteral))
 						continue;
 
-					double dValue = ConfigUtil
-							.literalToDouble((NumberLiteral) value);
-					if (min != null) {
-						double dMin = ConfigUtil.literalToDouble(min);
-						if (dMin > dValue)
-							error("value is less than minimum",
-									attrClassConfig.getValue(), arrayRef,
-									values.indexOf(value));
-					}
-					if (max != null) {
-						double dMax = ConfigUtil.literalToDouble(max);
-						if (dMax < dValue)
-							error("value exceeds maximum",
-									attrClassConfig.getValue(), arrayRef,
-									values.indexOf(value));
+					if (value instanceof RealLiteral) {
+						double dbValue = ((RealLiteral) value).getValue();
+						if (min instanceof RealLiteral) {
+							double dbMin = ((RealLiteral) min).getValue();
+							if (dbMin > dbValue)
+								error("value is less than minimum",
+										config.getValue(), arrayRef,
+										values.indexOf(value));
+						}
+						if (max instanceof RealLiteral) {
+							double dbMax = ((RealLiteral) max).getValue();
+							if (dbMax < dbValue)
+								error("value exceeds maximum",
+										config.getValue(), arrayRef,
+										values.indexOf(value));
+						}
+					} else if (value instanceof IntLiteral) {
+						long lValue = ((IntLiteral) value).getValue();
+						if (min instanceof IntLiteral) {
+							long lMin = ((IntLiteral) min).getValue();
+							if (lMin > lValue)
+								error("value is less than minimum",
+										config.getValue(), arrayRef,
+										values.indexOf(value));
+						}
+						if (max instanceof IntLiteral) {
+							long lMax = ((IntLiteral) max).getValue();
+							if (lMax < lValue)
+								error("value exceeds maximum",
+										config.getValue(), arrayRef,
+										values.indexOf(value));
+						}
 					}
 				}
 			}
@@ -299,29 +344,58 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 		EReference minRef = ConfigPackage.eINSTANCE.getAttrClassConfig_Min();
 		LiteralType type = primitive.getType();
-		switch (type) {
-		case INT:
-			if (config instanceof RealLiteral)
-				error("must be an integer", minRef);
-			break;
-		default:
-			if (config != null)
-				error("no minimum allowed", minRef);
-		}
 
 		if (type == LiteralType.INT || type == LiteralType.REAL) {
-			// check room default if config default is not set
-			if (config.getValue() == null) {
-				double dMin = ConfigUtil.literalToDouble(min);
-				String defaultValue = config.getAttribute()
-						.getDefaultValueLiteral();
-				try {
-					double dDefaulValue = Double.parseDouble(defaultValue);
-					if (dMin > dDefaulValue)
-						error("default value in ROOM model is less than this minimun",
+			if (config.getValue() != null) {
+				if (config.getValue().getLiterals().get(0) instanceof IntLiteral) {
+					if (!(min instanceof IntLiteral))
+						error("incompatible datatype: maximum is not int",
 								minRef);
-				} catch (NumberFormatException e) {
+				} else if (config.getValue().getLiterals().get(0) instanceof RealLiteral) {
+					if (!(min instanceof RealLiteral))
+						error("incompatible datatype: maximum is not real",
+								minRef);
 				}
+			}
+			// check room default if config default is not set
+			String defaultValue = config.getAttribute()
+					.getDefaultValueLiteral();
+			if (config.getValue() == null && defaultValue != null) {
+				if (type == LiteralType.INT) {
+					if (min instanceof IntLiteral) {
+						try {
+							long lDefaultValue = converter.getLongConverter()
+									.toValue(defaultValue, null);
+							long lMax = ((IntLiteral) min).getValue();
+							if (lMax < lDefaultValue)
+								error("default value in ROOM model is less than this maximum",
+										minRef);
+						} catch (ValueConverterException e) {
+							warning("could not compare with int value in ROOM model (parse error)",
+									minRef);
+						}
+					} else
+						warning("could not compare with int value in ROOM model (incompatible datatypes)",
+								minRef);
+				} else if (type == LiteralType.REAL) {
+					if (min instanceof RealLiteral) {
+						try {
+							double dbDefaultValue = converter
+									.getRealConverter().toValue(defaultValue,
+											null);
+							double dbMax = ((RealLiteral) min).getValue();
+							if (dbMax < dbDefaultValue)
+								error("default value in ROOM model is less than this maximum",
+										minRef);
+						} catch (ValueConverterException e1) {
+							warning("could not compare with real value in ROOM model (parse error)",
+									minRef);
+						}
+					} else
+						warning("could not compare with real value in ROOM model (incompatible datatypes)",
+								minRef);
+				}
+
 			}
 		}
 
@@ -335,29 +409,58 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 		EReference maxRef = ConfigPackage.eINSTANCE.getAttrClassConfig_Max();
 		LiteralType type = primitive.getType();
-		switch (type) {
-		case INT:
-			if (max instanceof RealLiteral)
-				error("must be an integer", maxRef);
-			break;
-		default:
-			if (max != null)
-				error("no maximum allowed", maxRef);
-		}
 
 		if (type == LiteralType.INT || type == LiteralType.REAL) {
-			// check room default if config default is not set
-			if (config.getValue() == null) {
-				double dMax = ConfigUtil.literalToDouble(max);
-				String defaultValue = config.getAttribute()
-						.getDefaultValueLiteral();
-				try {
-					double dDefaulValue = Double.parseDouble(defaultValue);
-					if (dMax < dDefaulValue)
-						error("default value in ROOM model exceeds this maximum",
+			if (config.getValue() != null) {
+				if (config.getValue().getLiterals().get(0) instanceof IntLiteral) {
+					if (!(max instanceof IntLiteral))
+						error("incompatible datatype: maximum is not int",
 								maxRef);
-				} catch (NumberFormatException e) {
+				} else if (config.getValue().getLiterals().get(0) instanceof RealLiteral) {
+					if (!(max instanceof RealLiteral))
+						error("incompatible datatype: maximum is not real",
+								maxRef);
 				}
+			}
+			// check room default if config default is not set
+			String defaultValue = config.getAttribute()
+					.getDefaultValueLiteral();
+			if (config.getValue() == null && defaultValue != null) {
+				if (type == LiteralType.INT) {
+					if (max instanceof IntLiteral) {
+						try {
+							long lDefaultValue = converter.getLongConverter()
+									.toValue(defaultValue, null);
+							long lMax = ((IntLiteral) max).getValue();
+							if (lMax < lDefaultValue)
+								error("default value in ROOM model exceeds this maximum",
+										maxRef);
+						} catch (ValueConverterException e) {
+							warning("could not compare with int value in ROOM model (parse error)",
+									maxRef);
+						}
+					} else
+						warning("could not compare with int value in ROOM model (incompatible datatypes)",
+								maxRef);
+				} else if (type == LiteralType.REAL) {
+					if (max instanceof RealLiteral) {
+						try {
+							double dbDefaultValue = converter
+									.getRealConverter().toValue(defaultValue,
+											null);
+							double dbMax = ((RealLiteral) max).getValue();
+							if (dbMax < dbDefaultValue)
+								error("default value in ROOM model exceeds this maximum",
+										maxRef);
+						} catch (ValueConverterException e1) {
+							warning("could not compare with real value in ROOM model (parse error)",
+									maxRef);
+						}
+					} else
+						warning("could not compare with real value in ROOM model (incompatible datatypes)",
+								maxRef);
+				}
+
 			}
 		}
 	}

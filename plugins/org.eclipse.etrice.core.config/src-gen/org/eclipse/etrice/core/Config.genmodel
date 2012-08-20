@@ -15,6 +15,7 @@
       <genOperations ecoreOperation="Config.ecore#//ConfigModel/getActorClassConfigs"/>
       <genOperations ecoreOperation="Config.ecore#//ConfigModel/getActorInstanceConfigs"/>
       <genOperations ecoreOperation="Config.ecore#//ConfigModel/getProtocolClassConfigs"/>
+      <genOperations ecoreOperation="Config.ecore#//ConfigModel/getSubSystemConfigs"/>
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//ConfigElement"/>
     <genClasses ecoreClass="Config.ecore#//SubSystemConfig">
@@ -22,8 +23,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//SubSystemConfig/dynConfig"/>
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//DynamicConfig">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//DynamicConfig/source"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//DynamicConfig/filePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//DynamicConfig/userCode1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//DynamicConfig/userCode2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//DynamicConfig/polling"/>
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//ActorClassConfig">

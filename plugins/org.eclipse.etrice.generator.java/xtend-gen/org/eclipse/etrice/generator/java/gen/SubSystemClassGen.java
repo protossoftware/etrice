@@ -6,7 +6,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
-import org.eclipse.etrice.core.config.LiteralArray;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -14,12 +13,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalThread;
-import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.Indexed;
@@ -27,10 +23,14 @@ import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
+import org.eclipse.etrice.generator.java.gen.VariableServiceGen;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -50,10 +50,16 @@ public class SubSystemClassGen {
   private ConfigExtension configExt;
   
   @Inject
+  private ConfigGenAddon configAddon;
+  
+  @Inject
   private ProcedureHelpers helpers;
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private VariableServiceGen varService;
   
   @Inject
   private ILogger logger;
@@ -80,6 +86,11 @@ public class SubSystemClassGen {
         SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
         StringConcatenation _generate = this.generate(root, ssi, _subSystemClass_3);
         this.fileAccess.generateFile(file, _generate);
+        SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+        boolean _hasVariableService = this.configExt.hasVariableService(_subSystemClass_4);
+        if (_hasVariableService) {
+          this.varService.doGenerate(root, ssi);
+        }
       }
     }
   }
@@ -92,6 +103,13 @@ public class SubSystemClassGen {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    {
+      boolean _hasVariableService = this.configExt.hasVariableService(cc);
+      if (_hasVariableService) {
+        _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
+      }
+    }
+    _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.etrice.runtime.java.messaging.MessageService;");
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTServices;");
@@ -205,6 +223,8 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public void instantiateActors(){");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("// all addresses");
@@ -574,6 +594,22 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        {
+          List<AttrInstanceConfig> _configAttributes = this.configExt.getConfigAttributes(ai_2);
+          final Function1<AttrInstanceConfig,Boolean> _function = new Function1<AttrInstanceConfig,Boolean>() {
+              public Boolean apply(final AttrInstanceConfig c) {
+                boolean _isDynConfig = c.isDynConfig();
+                return ((Boolean)_isDynConfig);
+              }
+            };
+          boolean _exists = IterableExtensions.<AttrInstanceConfig>exists(_configAttributes, _function);
+          if (_exists) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(", variableService");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t\t");
         _builder.append("); ");
         _builder.newLine();
@@ -587,41 +623,28 @@ public class SubSystemClassGen {
     {
       EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
       for(final ActorInstance ai_3 : _allContainedInstances_8) {
-        _builder.append("\t\t");
-        List<AttrInstanceConfig> _configAttributes = this.configExt.getConfigAttributes(ai_3);
-        List<AttrInstanceConfig> attrConfigs = _configAttributes;
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        List<PortInstanceConfig> _configPorts = this.configExt.getConfigPorts(ai_3);
-        List<PortInstanceConfig> portConfigs = _configPorts;
-        _builder.newLineIfNotEmpty();
         {
-          boolean _operator_or = false;
-          boolean _isEmpty_5 = attrConfigs.isEmpty();
-          boolean _operator_not_2 = BooleanExtensions.operator_not(_isEmpty_5);
-          if (_operator_not_2) {
-            _operator_or = true;
+          boolean _operator_and_1 = false;
+          List<AttrInstanceConfig> _configAttributes_1 = this.configExt.getConfigAttributes(ai_3);
+          boolean _isEmpty_5 = _configAttributes_1.isEmpty();
+          if (!_isEmpty_5) {
+            _operator_and_1 = false;
           } else {
-            boolean _isEmpty_6 = portConfigs.isEmpty();
-            boolean _operator_not_3 = BooleanExtensions.operator_not(_isEmpty_6);
-            _operator_or = BooleanExtensions.operator_or(_operator_not_2, _operator_not_3);
+            List<PortInstanceConfig> _configPorts = this.configExt.getConfigPorts(ai_3);
+            boolean _isEmpty_6 = _configPorts.isEmpty();
+            _operator_and_1 = BooleanExtensions.operator_and(_isEmpty_5, _isEmpty_6);
           }
-          if (_operator_or) {
+          boolean _operator_not_2 = BooleanExtensions.operator_not(_operator_and_1);
+          if (_operator_not_2) {
             _builder.append("\t\t");
             _builder.append("{");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
-            String aiName = "inst";
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("\t");
             ActorClass _actorClass_1 = ai_3.getActorClass();
             String _name_6 = _actorClass_1.getName();
             _builder.append(_name_6, "			");
-            _builder.append(" ");
-            _builder.append(aiName, "			");
-            _builder.append(" = (");
+            _builder.append(" inst = (");
             ActorClass _actorClass_2 = ai_3.getActorClass();
             String _name_7 = _actorClass_2.getName();
             _builder.append(_name_7, "			");
@@ -631,221 +654,31 @@ public class SubSystemClassGen {
             _builder.append(_indexOf_8, "			");
             _builder.append("];");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            ActorClass _actorClass_3 = ai_3.getActorClass();
+            String _name_8 = _actorClass_3.getName();
+            List<AttrInstanceConfig> _configAttributes_2 = this.configExt.getConfigAttributes(ai_3);
+            StringConcatenation _applyInstanceConfig = this.configAddon.applyInstanceConfig("inst", _name_8, _configAttributes_2);
+            _builder.append(_applyInstanceConfig, "			");
+            _builder.newLineIfNotEmpty();
             {
-              for(final AttrInstanceConfig attrConfig : attrConfigs) {
+              List<PortInstanceConfig> _configPorts_1 = this.configExt.getConfigPorts(ai_3);
+              for(final PortInstanceConfig portConfig : _configPorts_1) {
                 _builder.append("\t\t");
                 _builder.append("\t");
-                Attribute _attribute = attrConfig.getAttribute();
-                Attribute a = _attribute;
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("\t");
-                LiteralArray _value_1 = attrConfig.getValue();
-                String _stringValue = this.configExt.stringValue(_value_1, a);
-                String value = _stringValue;
-                _builder.newLineIfNotEmpty();
-                {
-                  boolean _isArray = this.configExt.isArray(a);
-                  boolean _operator_not_4 = BooleanExtensions.operator_not(_isArray);
-                  if (_operator_not_4) {
-                    _builder.append("\t\t");
-                    _builder.append("\t");
-                    _builder.append(aiName, "			");
-                    _builder.append(".");
-                    String _name_8 = a.getName();
-                    ActorClass _actorClass_3 = ai_3.getActorClass();
-                    String _name_9 = _actorClass_3.getName();
-                    StringConcatenation _invokeSetter = this.helpers.invokeSetter(_name_8, _name_9, value);
-                    _builder.append(_invokeSetter, "			");
-                    _builder.append(";");
-                    _builder.newLineIfNotEmpty();
-                  } else {
-                    boolean _startsWith = value.startsWith("{");
-                    if (_startsWith) {
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append(aiName, "			");
-                      _builder.append(".");
-                      String _name_10 = a.getName();
-                      ActorClass _actorClass_4 = ai_3.getActorClass();
-                      String _name_11 = _actorClass_4.getName();
-                      RefableType _refType = a.getRefType();
-                      DataType _type = _refType.getType();
-                      String _typeName = this._typeHelpers.typeName(_type);
-                      String _operator_plus_2 = StringExtensions.operator_plus("new ", _typeName);
-                      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "[]");
-                      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, value);
-                      StringConcatenation _invokeSetter_1 = this.helpers.invokeSetter(_name_10, _name_11, _operator_plus_4);
-                      _builder.append(_invokeSetter_1, "			");
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("{");
-                      _builder.newLine();
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("\t");
-                      RefableType _refType_1 = a.getRefType();
-                      DataType _type_1 = _refType_1.getType();
-                      String _typeName_1 = this._typeHelpers.typeName(_type_1);
-                      _builder.append(_typeName_1, "				");
-                      _builder.append("[] array = ");
-                      _builder.append(aiName, "				");
-                      _builder.append(".");
-                      String _name_12 = a.getName();
-                      ActorClass _actorClass_5 = ai_3.getActorClass();
-                      String _name_13 = _actorClass_5.getName();
-                      StringConcatenation _invokeGetter = this.helpers.invokeGetter(_name_12, _name_13);
-                      _builder.append(_invokeGetter, "				");
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("\t");
-                      _builder.append("for (int i=0;i<");
-                      int _size_1 = a.getSize();
-                      _builder.append(_size_1, "				");
-                      _builder.append(";i++){");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("\t\t");
-                      _builder.append("array[i] = ");
-                      _builder.append(value, "					");
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("\t");
-                      _builder.append("}");
-                      _builder.newLine();
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("}");
-                      _builder.newLine();
-                    }
-                  }
-                }
-              }
-            }
-            {
-              for(final PortInstanceConfig portConfig : portConfigs) {
-                _builder.append("\t\t");
-                _builder.append("\t");
-                String portName = "port";
                 InterfaceItem _item = portConfig.getItem();
-                InterfaceItem item = _item;
+                String _name_9 = _item.getName();
+                ActorClass _actorClass_4 = ai_3.getActorClass();
+                String _name_10 = _actorClass_4.getName();
+                StringConcatenation _invokeGetter = this.helpers.invokeGetter(_name_9, _name_10);
+                String _operator_plus_2 = StringExtensions.operator_plus("inst.", _invokeGetter);
+                InterfaceItem _item_1 = portConfig.getItem();
+                String _portClassName = this.roomExt.getPortClassName(_item_1);
+                EList<AttrInstanceConfig> _attributes = portConfig.getAttributes();
+                StringConcatenation _applyInstanceConfig_1 = this.configAddon.applyInstanceConfig(_operator_plus_2, _portClassName, _attributes);
+                _builder.append(_applyInstanceConfig_1, "			");
                 _builder.newLineIfNotEmpty();
-                {
-                  EList<AttrInstanceConfig> _attributes = portConfig.getAttributes();
-                  for(final AttrInstanceConfig attrConfig_1 : _attributes) {
-                    _builder.append("\t\t");
-                    _builder.append("\t");
-                    Attribute _attribute_1 = attrConfig_1.getAttribute();
-                    Attribute a_1 = _attribute_1;
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t");
-                    _builder.append("\t");
-                    LiteralArray _value_2 = attrConfig_1.getValue();
-                    String _stringValue_1 = this.configExt.stringValue(_value_2, a_1);
-                    String value_1 = _stringValue_1;
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t");
-                    _builder.append("\t");
-                    String _operator_plus_5 = StringExtensions.operator_plus(aiName, ".");
-                    String _name_14 = item.getName();
-                    String _portClassName = this.roomExt.getPortClassName(item);
-                    StringConcatenation _invokeGetter_1 = this.helpers.invokeGetter(_name_14, _portClassName);
-                    String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _invokeGetter_1);
-                    String refToItem = _operator_plus_6;
-                    _builder.newLineIfNotEmpty();
-                    {
-                      boolean _isArray_1 = this.configExt.isArray(a_1);
-                      boolean _operator_not_5 = BooleanExtensions.operator_not(_isArray_1);
-                      if (_operator_not_5) {
-                        _builder.append("\t\t");
-                        _builder.append("\t");
-                        _builder.append(refToItem, "			");
-                        _builder.append(".");
-                        String _name_15 = a_1.getName();
-                        String _portClassName_1 = this.roomExt.getPortClassName(item);
-                        StringConcatenation _invokeSetter_2 = this.helpers.invokeSetter(_name_15, _portClassName_1, value_1);
-                        _builder.append(_invokeSetter_2, "			");
-                        _builder.append(";");
-                        _builder.newLineIfNotEmpty();
-                      } else {
-                        boolean _startsWith_1 = value_1.startsWith("{");
-                        if (_startsWith_1) {
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append(refToItem, "			");
-                          _builder.append(".");
-                          String _name_16 = a_1.getName();
-                          ActorClass _actorClass_6 = ai_3.getActorClass();
-                          String _name_17 = _actorClass_6.getName();
-                          RefableType _refType_2 = a_1.getRefType();
-                          DataType _type_2 = _refType_2.getType();
-                          String _typeName_2 = this._typeHelpers.typeName(_type_2);
-                          String _operator_plus_7 = StringExtensions.operator_plus("new ", _typeName_2);
-                          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "[]");
-                          String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, value_1);
-                          StringConcatenation _invokeSetter_3 = this.helpers.invokeSetter(_name_16, _name_17, _operator_plus_9);
-                          _builder.append(_invokeSetter_3, "			");
-                          _builder.append(";");
-                          _builder.newLineIfNotEmpty();
-                        } else {
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("{");
-                          _builder.newLine();
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("\t");
-                          RefableType _refType_3 = a_1.getRefType();
-                          DataType _type_3 = _refType_3.getType();
-                          String _typeName_3 = this._typeHelpers.typeName(_type_3);
-                          _builder.append(_typeName_3, "				");
-                          _builder.append("[] array = ");
-                          _builder.append(refToItem, "				");
-                          _builder.append(".");
-                          String _name_18 = a_1.getName();
-                          ActorClass _actorClass_7 = ai_3.getActorClass();
-                          String _name_19 = _actorClass_7.getName();
-                          StringConcatenation _invokeGetter_2 = this.helpers.invokeGetter(_name_18, _name_19);
-                          _builder.append(_invokeGetter_2, "				");
-                          _builder.append(";");
-                          _builder.newLineIfNotEmpty();
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("\t");
-                          _builder.append("for (int i=0;i<");
-                          int _size_2 = a_1.getSize();
-                          _builder.append(_size_2, "				");
-                          _builder.append(";i++){");
-                          _builder.newLineIfNotEmpty();
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("\t\t");
-                          _builder.append("array[i] = ");
-                          _builder.append(value_1, "					");
-                          _builder.append(";");
-                          _builder.newLineIfNotEmpty();
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("\t");
-                          _builder.append("}");
-                          _builder.newLine();
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("}");
-                          _builder.newLine();
-                        }
-                      }
-                    }
-                  }
-                }
               }
             }
             _builder.append("\t\t");
@@ -917,10 +750,75 @@ public class SubSystemClassGen {
     _builder.append("\t\t\t\t");
     _builder.append("});");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
+    _builder.append("\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
+    _builder.newLine();
+    {
+      boolean _hasVariableService_1 = this.configExt.hasVariableService(cc);
+      if (_hasVariableService_1) {
+        _builder.append("\t\t");
+        _builder.append("private VariableService variableService;");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("public void init(){");
+    _builder.newLine();
+    {
+      boolean _hasVariableService_2 = this.configExt.hasVariableService(cc);
+      if (_hasVariableService_2) {
+        _builder.append("\t\t\t");
+        _builder.append("variableService = new ");
+        String _name_11 = comp.getName();
+        _builder.append(_name_11, "			");
+        _builder.append("VariableService(this);");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.append("super.init();");
+    _builder.newLine();
+    {
+      boolean _hasVariableService_3 = this.configExt.hasVariableService(cc);
+      if (_hasVariableService_3) {
+        _builder.append("\t\t\t");
+        _builder.append("variableService.init();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("public void stop(){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("super.stop();");
+    _builder.newLine();
+    {
+      boolean _hasVariableService_4 = this.configExt.hasVariableService(cc);
+      if (_hasVariableService_4) {
+        _builder.append("\t\t\t");
+        _builder.append("variableService.stop();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.newLine();
     _builder.append("};");
     _builder.newLine();
