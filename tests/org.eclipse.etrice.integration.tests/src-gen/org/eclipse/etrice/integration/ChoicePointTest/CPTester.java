@@ -16,6 +16,7 @@ import org.eclipse.etrice.integration.ChoicePointTest.TestProtocol.*;
 public class CPTester extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected TestProtocolConjPort TestPort1 = null;
 	
@@ -25,6 +26,7 @@ public class CPTester extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -43,7 +45,12 @@ public class CPTester extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public TestProtocolConjPort getTestPort1 (){
 		return this.TestPort1;

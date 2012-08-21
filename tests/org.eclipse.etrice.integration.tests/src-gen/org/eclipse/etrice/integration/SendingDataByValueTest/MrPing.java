@@ -23,6 +23,7 @@ public class MrPing extends ActorClassBase {
 	private CRC16Generator crcGen = new CRC16Generator();
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	protected PingPongProtocolConjPort PingPongPort = null;
 	
@@ -32,6 +33,7 @@ public class MrPing extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int i32Array[];
@@ -69,6 +71,9 @@ public class MrPing extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setI32Array (int[] i32Array) {
 		 this.i32Array = i32Array;
@@ -82,6 +87,8 @@ public class MrPing extends ActorClassBase {
 	public PingPongData getData () {
 		return this.data;
 	}
+	
+	
 	//--------------------- port getters
 	public PingPongProtocolConjPort getPingPongPort (){
 		return this.PingPongPort;

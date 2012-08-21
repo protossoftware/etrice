@@ -83,6 +83,13 @@ public class RoomExtensions {
     return ret;
   }
   
+  public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
+    ArrayList<T> _arrayList = new ArrayList<T>(l1);
+    ArrayList<T> ret = _arrayList;
+    ret.removeAll(l2);
+    return ret;
+  }
+  
   public String getGenerationPathSegment() {
     return "/src-gen/";
   }
@@ -266,6 +273,11 @@ public class RoomExtensions {
       _xifexpression = _union;
     }
     return _xifexpression;
+  }
+  
+  public ActorClass getContainingActorClass(final EObject o) {
+    ActorClass _actorClass = RoomHelpers.getActorClass(o);
+    return _actorClass;
   }
   
   protected String _getPortClassName(final Port p) {

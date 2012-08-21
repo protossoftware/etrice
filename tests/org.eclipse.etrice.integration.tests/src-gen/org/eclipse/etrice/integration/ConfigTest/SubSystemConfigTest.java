@@ -1,5 +1,6 @@
 package org.eclipse.etrice.integration.ConfigTest;
 
+import org.eclipse.etrice.runtime.java.config.VariableService;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -31,11 +32,13 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,106);
-		Address addr_item_SystemPort_1 = new Address(0,0,107);
-		Address addr_item_SystemPort_2 = new Address(0,0,108);
+		Address addr_item_SystemPort_0 = new Address(0,0,109);
+		Address addr_item_SystemPort_1 = new Address(0,0,110);
+		Address addr_item_SystemPort_2 = new Address(0,0,111);
+		Address addr_item_SystemPort_3 = new Address(0,0,112);
 		
 		// actor instance /SubSystemConfigTest/top itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -45,15 +48,21 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystemConfigTest_top_testee = new Address(0,0,102);
 		// interface items of /SubSystemConfigTest/top/testee
-		Address addr_item__SubSystemConfigTest_top_testee_Reg_port = new Address(0,0,103);
+		Address addr_item__SubSystemConfigTest_top_testee_Reg_dynConfigPort = new Address(0,0,103);
+		Address addr_item__SubSystemConfigTest_top_testee_Reg_port = new Address(0,0,104);
 		// actor instance /SubSystemConfigTest/top/testee/AR1 itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystemConfigTest_top_testee_AR1 = new Address(0,0,104);
+		Address addr_item__SubSystemConfigTest_top_testee_AR1 = new Address(0,0,105);
 		// interface items of /SubSystemConfigTest/top/testee/AR1
-		Address addr_item__SubSystemConfigTest_top_testee_AR1_Conj_port = new Address(0,0,105);
+		Address addr_item__SubSystemConfigTest_top_testee_AR1_Conj_port = new Address(0,0,106);
+		// actor instance /SubSystemConfigTest/top/testee2 itself => Systemport Address
+		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
+		Address addr_item__SubSystemConfigTest_top_testee2 = new Address(0,0,107);
+		// interface items of /SubSystemConfigTest/top/testee2
+		Address addr_item__SubSystemConfigTest_top_testee2_Conj_DynConfigPort = new Address(0,0,108);
 
 		// instantiate all actor instances
-		instances = new ActorClassBase[3];
+		instances = new ActorClassBase[4];
 		instances[0] = new ConfigText_Top_ac(
 			this,
 			"top",
@@ -70,11 +79,17 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystemConfigTest_top_testee},
 				{
+					addr_item__SubSystemConfigTest_top_testee_Reg_dynConfigPort
+				},
+				{
 					addr_item__SubSystemConfigTest_top_testee_Reg_port
 				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_1},
+				{
+					addr_item__SubSystemConfigTest_top_testee2_Conj_DynConfigPort
+				},
 				{
 					addr_item__SubSystemConfigTest_top_testee_AR1_Conj_port
 				}
@@ -96,33 +111,51 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 				}
 			}
 		); 
+		instances[3] = new DynTestee_ac(
+			instances[0],
+			"testee2",
+			// own interface item addresses
+			new Address[][] {{addr_item__SubSystemConfigTest_top_testee2},
+				{
+					addr_item__SubSystemConfigTest_top_testee2_Conj_DynConfigPort
+				}
+			},
+			// peer interface item addresses
+			new Address[][] {{addr_item_SystemPort_3},
+				{
+					addr_item__SubSystemConfigTest_top_testee_Reg_dynConfigPort
+				}
+			}
+			, variableService
+		); 
 		
 		// apply instance attribute configurations
 		{
 			Testee_ac inst = (Testee_ac) instances[1];
 			inst.setBool_i(true);
 			inst.setInt_i(301);
-			inst.setFloat_i(1.0E-5);
+			inst.setFloat_i(1.0E-5d);
 			inst.setChar_i('C');
-			inst.setString_i("ROOM 2 Moon".toCharArray());
-			{
-				int[] array = inst.getArray1_i();
-				for (int i=0;i<1;i++){
-					array[i] = 4;
-				}
-			}
-			inst.setArray2_i(new boolean[]{ false, true });
-			inst.getReg_port().setFloat_i(25);
+			inst.setCharArray_i("ROOM 2 Moon".toCharArray());
+			inst.setString_i(":^]");
+			inst.setArray1_i(new int[]{4});
+			inst.setArray2_i(new boolean[]{false, true});
+			inst.getReg_port().setFloat_i(25f);
 		}
 		{
 			AC1_ac inst = (AC1_ac) instances[2];
-			{
-				float[] array = inst.getConj_port().getArray1_i();
-				for (int i=0;i<1;i++){
-					array[i] = 256;
-				}
-			}
-			inst.getConj_port().setArray2_i(new long[]{ 1, 2 });
+			inst.getConj_port().setArray1_i(new float[]{256f});
+			inst.getConj_port().setArray2_i(new long[]{1L, 2L});
+		}
+		{
+			DynTestee_ac inst = (DynTestee_ac) instances[3];
+			inst.setInt_i(301);
+			inst.getDc_i().setInt_i(302);
+			inst.getDc_i().setLong_array_i(new long[]{303L});
+			inst.getDc_i().getDc_i().setChar_i("instance3".toCharArray());
+			inst.getDc_i().getDc_i().setDouble_i(0.304d);
+			inst.setBlockMe(0);
+			inst.setBlocker(false);
 		}
 
 		// create the subsystem system port	
@@ -132,14 +165,31 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 				new Address[]{
 					addr_item_SystemPort_0,
 					addr_item_SystemPort_1,
-					addr_item_SystemPort_2
+					addr_item_SystemPort_2,
+					addr_item_SystemPort_3
 				},
 				// peer addresses
 				new Address[]{
 					addr_item__SubSystemConfigTest_top,
 					addr_item__SubSystemConfigTest_top_testee,
-					addr_item__SubSystemConfigTest_top_testee_AR1
+					addr_item__SubSystemConfigTest_top_testee_AR1,
+					addr_item__SubSystemConfigTest_top_testee2
 				});
-				
-	}
+		}
+	
+		private VariableService variableService;
+		
+		@Override
+		public void init(){
+			variableService = new SubSystemConfigTestVariableService(this);
+			super.init();
+			variableService.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+			variableService.stop();
+		}
+		
 };

@@ -16,14 +16,14 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
-import org.eclipse.xtext.conversion.impl.INTValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Strings;
 
 public class ConfigValueConverterService extends DefaultTerminalConverters {
 
 	@ValueConverter(rule = "Integer")
-	public IValueConverter<Integer> getIntegerConverter() {
-		return new IntegerConverter();
+	public IValueConverter<Long> getLongConverter() {
+		return new LongConverter();
 	}
 
 	@ValueConverter(rule = "Real")
@@ -31,23 +31,31 @@ public class ConfigValueConverterService extends DefaultTerminalConverters {
 		return new DoubleConverter();
 	}
 
-	public class IntegerConverter extends INTValueConverter {
+	public class LongConverter extends AbstractLexerBasedConverter<Long> {
 
 		@Override
-		public Integer toValue(String string, INode node)
+		public Long toValue(String string, INode node)
 				throws ValueConverterException {
+			if (Strings.isEmpty(string))
+				throw new ValueConverterException(
+						"Couldn't convert empty string to integer.", node, null);
 			if (string.startsWith("0x") || string.startsWith("0X")) {
 				try {
-					int value = Integer.parseInt(string.substring(2), 16);
+					long value = Long.parseLong(string.substring(2), 16);
 					return value;
 				} catch (NumberFormatException e) {
 					throw new ValueConverterException("Couldn't convert '"
 							+ string + "' to hex.", node, e);
 				}
-			} else if (string.startsWith("+"))
-				return toValue(string.substring(1), node);
-			else
-				return super.toValue(string, node);
+			} else {
+				try {
+					long value = Long.parseLong(string);
+					return value;
+				} catch (NumberFormatException e) {
+					throw new ValueConverterException("Couldn't convert '"
+							+ string + "' to integer.", node, e);
+				}
+			}
 		}
 	}
 
@@ -56,12 +64,15 @@ public class ConfigValueConverterService extends DefaultTerminalConverters {
 		@Override
 		public Double toValue(String string, INode node)
 				throws ValueConverterException {
+			if (Strings.isEmpty(string))
+				throw new ValueConverterException(
+						"Couldn't convert empty string to double.", node, null);
 			try {
 				double value = Double.parseDouble(string);
 				return value;
 			} catch (NumberFormatException e) {
 				throw new ValueConverterException("Couldn't convert '" + string
-						+ "' to double.", node, null);
+						+ "' to double.", node, e);
 			}
 		}
 

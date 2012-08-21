@@ -1,15 +1,18 @@
 package org.eclipse.etrice.generator.java.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -26,6 +29,28 @@ public class JavaExtensions implements ILanguageExtension {
     String _name = rc.getName();
     String _plus = (_name + ".java");
     return _plus;
+  }
+  
+  public String toWrapper(final String type) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(type,"int")) {
+        _matched=true;
+        _switchResult = "Integer";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"char")) {
+        _matched=true;
+        _switchResult = "Character";
+      }
+    }
+    if (!_matched) {
+      String _firstUpper = StringExtensions.toFirstUpper(type);
+      _switchResult = _firstUpper;
+    }
+    return _switchResult;
   }
   
   public String accessLevelPrivate() {
@@ -140,5 +165,77 @@ public class JavaExtensions implements ILanguageExtension {
     String _plus_2 = (_plus_1 + args);
     String _plus_3 = (_plus_2 + ");");
     return _plus_3;
+  }
+  
+  public String toValueLiteral(final PrimitiveType type, final String value) {
+    String _targetName = type.getTargetName();
+    final String _switchValue = _targetName;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"boolean")) {
+        _matched=true;
+        return value;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"byte")) {
+        _matched=true;
+        return ("(byte)" + value);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"short")) {
+        _matched=true;
+        return ("(short)" + value);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"int")) {
+        _matched=true;
+        return value;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"long")) {
+        _matched=true;
+        return (value + "L");
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"float")) {
+        _matched=true;
+        return (value + "f");
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"double")) {
+        _matched=true;
+        return (value + "d");
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"char")) {
+        _matched=true;
+        String string = String.valueOf(value);
+        int _length = string.length();
+        boolean _equals = (_length == 1);
+        if (_equals) {
+          String _plus = ("\'" + value);
+          return (_plus + "\'");
+        } else {
+          return this.toCharArrayExpr(value);
+        }
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"String")) {
+        _matched=true;
+        String _plus_1 = ("\"" + value);
+        return (_plus_1 + "\"");
+      }
+    }
+    String _targetName_1 = type.getTargetName();
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_targetName_1);
+    throw _unsupportedOperationException;
   }
 }

@@ -23,6 +23,7 @@ public class HandlerUser extends ActorClassBase {
 	private CRC16Generator crcGen = new CRC16Generator();
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
 	
@@ -32,6 +33,7 @@ public class HandlerUser extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int counter;
@@ -52,6 +54,9 @@ public class HandlerUser extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setCounter (int counter) {
 		 this.counter = counter;
@@ -59,6 +64,8 @@ public class HandlerUser extends ActorClassBase {
 	public int getCounter () {
 		return this.counter;
 	}
+	
+	
 	//--------------------- port getters
 	public TestProtocolPort getTestPort1 (){
 		return this.TestPort1;

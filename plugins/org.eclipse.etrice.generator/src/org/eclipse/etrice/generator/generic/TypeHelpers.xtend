@@ -19,6 +19,8 @@ package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.eclipse.etrice.core.room.LiteralType
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.PrimitiveType
@@ -57,5 +59,21 @@ class TypeHelpers {
 
 	def String getTypedDataDefinition(Message m) {
 		return chainGenerator.generateTypedData(m.data)
+	}
+	
+	def isPrimitive(DataType type){
+		return type instanceof PrimitiveType
+	}
+	
+	def isDataClass(DataType type){
+		return type instanceof DataClass
+	}
+	
+	def isCharacterType(PrimitiveType type){
+		type.type == LiteralType::CHAR
+	}
+	
+	def isCharacterType(DataType type){
+		return type.primitive && (type as PrimitiveType).characterType
 	}
 }

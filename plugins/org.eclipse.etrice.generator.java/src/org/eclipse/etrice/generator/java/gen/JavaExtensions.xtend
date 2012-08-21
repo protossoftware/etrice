@@ -21,6 +21,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
@@ -39,6 +40,14 @@ class JavaExtensions implements ILanguageExtension {
 
 
 	def String getJavaFileName(RoomClass rc) {rc.name+".java"}
+	
+	def String toWrapper(String type){
+		switch(type){
+			case "int": "Integer"
+			case "char" : "Character"
+			default: type.toFirstUpper
+		}
+	}
 	
 	override String accessLevelPrivate() {"private "}
 	override String accessLevelProtected() {"protected "}
@@ -80,7 +89,7 @@ class JavaExtensions implements ILanguageExtension {
 	override String voidPointer() { "Object" }
 
 	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
-		type+" "+name+"[]";
+		type+" "+name+"[]"
 	}
 	
 	override String constructorName(String cls) {
@@ -101,4 +110,34 @@ class JavaExtensions implements ILanguageExtension {
 	override String superCall(String baseClassName, String method, String args) {
 		"super."+method+"("+args+");"
 	}
+	override String toValueLiteral(PrimitiveType type, String value){
+		switch(type.targetName){
+			case "boolean":
+				return value
+			case "byte":
+				return "(byte)"+value
+			case "short":
+				return "(short)"+value
+			case "int":
+				return value
+			case "long":
+				return value+"L"
+			case "float":
+				return value+"f"
+			case "double":
+				return value+"d"
+			case "char":{
+				var string = String::valueOf(value)
+				if(string.length == 1)
+					return "'"+value+"'"
+				else
+					return value.toCharArrayExpr
+			}
+			case "String":
+				return "\""+value+"\""
+		}
+		
+		throw new UnsupportedOperationException(type.targetName)
+	}
+	
 }

@@ -25,6 +25,7 @@ public class ATimingService extends ActorClassBase {
 	private static final int PURGE_LIMIT = 1000;
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -36,6 +37,7 @@ public class ATimingService extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_timeout = 1;
 	public static final int IFITEM_timer = 2;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -60,7 +62,12 @@ public class ATimingService extends ActorClassBase {
 		timeout = new PTimeoutReplPort(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
 		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PTimeoutReplPort getTimeout (){
 		return this.timeout;

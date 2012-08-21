@@ -16,6 +16,7 @@ import org.eclipse.etrice.integration.ConfigTest.PortProtocol.*;
 public class AC1_ac extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PortProtocolConjPort Conj_port = null;
 	
@@ -25,6 +26,7 @@ public class AC1_ac extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_Conj_port = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -43,7 +45,12 @@ public class AC1_ac extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PortProtocolConjPort getConj_port (){
 		return this.Conj_port;

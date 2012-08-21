@@ -15,6 +15,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 public class CPTest_Top extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -22,6 +23,7 @@ public class CPTest_Top extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -39,7 +41,12 @@ public class CPTest_Top extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
+	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
