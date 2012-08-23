@@ -70,16 +70,12 @@ public class AbstractExecutionValidator implements IRoomValidator {
 
 		if (!(object instanceof ActorClass))
 			return;
-
 		ActorClass ac = (ActorClass) object;
-
 		if (traceExec && !ac.getName().equals(traceName))
 			return;
-
 		if (traceExec)
 			System.out.println("AbstractExecutionValidator checking class "
 					+ ac.getName());
-
 		boolean oneProtocolsWithSemantics = false;
 		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
 		for (InterfaceItem item : ifItems) {
@@ -90,7 +86,6 @@ public class AbstractExecutionValidator implements IRoomValidator {
 			if (traceExec)
 				System.out.println("  Checking protocolClass " + pc.getName()
 						+ " for semantics");
-
 			if (((ProtocolClass) pc).getSemantics() != null) {
 				oneProtocolsWithSemantics = true;
 				if (traceExec)
@@ -100,7 +95,6 @@ public class AbstractExecutionValidator implements IRoomValidator {
 				break;
 			}
 		}
-
 		if (oneProtocolsWithSemantics) {
 			// begin abstract execution on state machine of expanded actor class
 			System.out
@@ -113,8 +107,7 @@ public class AbstractExecutionValidator implements IRoomValidator {
 			if (xpac != null && !diagnostician.isFailed()) {
 				SemanticsCheck checker = new SemanticsCheck(xpac);
 				checker.checkSemantics();
-				// System.out.println("Final printing of rules : ");
-				// checker.printRules();
+
 				if (traceExec)
 					System.out.println("  Rule checking for "
 							+ xpac.getActorClass().getName() + " is over");
@@ -128,78 +121,14 @@ public class AbstractExecutionValidator implements IRoomValidator {
 								checker);
 						State st = (State) obj;
 						propGen.createProposals(st);
-						// TODO : create markers for the proposals
-						List<MessageFromIf> incoming = propGen.getIncomingProposals();
-						EObject orig = xpac.getOrig(st);
-						EObject container = orig.eContainer();
-						@SuppressWarnings("unchecked")
-						int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
-						if(incoming != null)
-						for(MessageFromIf msg : incoming)
-						{
-							messageAcceptor.acceptWarning(
-									"State should be receiving the message " + msg.getMessage().getName() + " from port " + msg.getFrom().getName() + " ",
-									container, orig.eContainingFeature(), idx,
-									"Receive message", st.getName());
-						}
-						List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
-						if(outgoing != null)
-						{
-							for(MessageFromIf msg : outgoing)
-							{
-								messageAcceptor.acceptInfo(
-										"State should be sending the message " + msg.getMessage().getName() + " from port " + msg.getFrom().getName() + " ",
-										container, orig.eContainingFeature(), idx,
-										"Send message", st.getName());
-								
-							}
-						}
+						createMarkersForProposals(propGen, messageAcceptor, st,
+								xpac);
 					}
 					// the following part takes care of all the warnings
 					if (obj instanceof StateGraphItem) {
 						StateGraphItem item = (StateGraphItem) obj;
-						List<HandledMessage> warningList = checker
-								.getWarningMsg(item);
-						if (traceExec && warningList != null) {
-							System.out.println("Messages in the warning list for item "+ item.getName() );
-						}
-						if (warningList!=null)
-							for (HandledMessage msg : warningList) {
-								EObject origin = msg.getOrigin();
-								if (origin instanceof ActiveTrigger) {
-									ActiveTrigger trigger = (ActiveTrigger) origin;
-									for (TriggeredTransition trans : trigger.getTransitions()) {
-										// have to translate back the transition to our original model
-										TriggeredTransition orig = (TriggeredTransition) xpac.getOrig(trans);
-										for (Trigger trig : orig.getTriggers()) {
-											for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
-												// messages haven't been copied, so all point to the same objects and we can just compare pointers
-												if (mif.getMessage()==msg.getMsg() && mif.getFrom()==msg.getIfitem()) {
-													messageAcceptor
-													.acceptWarning(
-															"The message violates the semantic rule",
-															trig, mif.eContainingFeature(),
-															trig.getMsgFromIfPairs().indexOf(trig), "VIOLATION", trigger.getMsg().getName());
-												}
-											}
-										}
-									}
-								} else if (origin instanceof DetailCode) {
-									DetailCode dc = (DetailCode) origin;
-									EObject orig = xpac.getOrig(dc);
-									messageAcceptor
-											.acceptWarning(
-													"The message violates the semantic rule",
-													orig.eContainer(),
-													orig.eContainingFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-													"VIOLATION");
-
-								}
-							}
-
-						
-						 
-						 
+						createMarkersForWarnings(checker, messageAcceptor,
+								item, xpac);
 					}
 				}
 				if (traceExec)
@@ -210,4 +139,84 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		}
 	}
 
+	private void createMarkersForProposals(ProposalGenerator propGen,
+			ValidationMessageAcceptor messageAcceptor, State st,
+			ExpandedActorClass xpac) {
+		List<MessageFromIf> incoming = propGen.getIncomingProposals();
+		EObject orig = xpac.getOrig(st);
+		EObject container = orig.eContainer();
+		@SuppressWarnings("unchecked")
+		int idx = ((List<? extends EObject>) container.eGet(orig
+				.eContainingFeature())).indexOf(orig);
+
+		for (MessageFromIf msg : incoming) {
+			messageAcceptor.acceptWarning("State should handle the message "
+					+ msg.getMessage().getName() + " from port "
+					+ msg.getFrom().getName() + " ", container,
+					orig.eContainingFeature(), idx, "Receive message",
+					st.getName());
+		}
+		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
+
+		for (MessageFromIf msg : outgoing) {
+			messageAcceptor.acceptInfo("State could send the message "
+					+ msg.getMessage().getName() + " to port "
+					+ msg.getFrom().getName() + " ", container,
+					orig.eContainingFeature(), idx, "Send message",
+					st.getName());
+
+		}
+
+	}
+
+	private void createMarkersForWarnings(SemanticsCheck checker,
+			ValidationMessageAcceptor messageAcceptor, StateGraphItem item,
+			ExpandedActorClass xpac) {
+		List<HandledMessage> warningList = checker.getWarningMsg(item);
+		if (traceExec && warningList != null) {
+			System.out.println("Messages in the warning list for item "
+					+ item.getName());
+		}
+		if (warningList != null)
+			for (HandledMessage msg : warningList) {
+				EObject origin = msg.getOrigin();
+				if (origin instanceof ActiveTrigger) {
+					ActiveTrigger trigger = (ActiveTrigger) origin;
+					for (TriggeredTransition trans : trigger.getTransitions()) {
+						// have to translate back the transition to our original
+						// model
+						TriggeredTransition orig = (TriggeredTransition) xpac
+								.getOrig(trans);
+						for (Trigger trig : orig.getTriggers()) {
+							for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
+								// messages haven't been copied, so all point to
+								// the same objects and we can just compare
+								// pointers
+								if (mif.getMessage() == msg.getMsg()
+										&& mif.getFrom() == msg.getIfitem()) {
+									messageAcceptor
+											.acceptWarning(
+													"The message violates the semantic rule",
+													trig,
+													mif.eContainingFeature(),
+													trig.getMsgFromIfPairs()
+															.indexOf(trig),
+													"VIOLATION", trigger
+															.getMsg().getName());
+								}
+							}
+						}
+					}
+				} else if (origin instanceof DetailCode) {
+					DetailCode dc = (DetailCode) origin;
+					EObject orig = xpac.getOrig(dc);
+					messageAcceptor.acceptWarning(
+							"The message violates the semantic rule",
+							orig.eContainer(), orig.eContainingFeature(),
+							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							"VIOLATION");
+
+				}
+			}
+	}
 }
