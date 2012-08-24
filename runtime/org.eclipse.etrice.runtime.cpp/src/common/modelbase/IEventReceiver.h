@@ -9,11 +9,12 @@
 #define IEVENTRECEIVER_H_
 
 #include "platforms/generic/etDatatypes.h"
+#include "common/messaging/IRTObject.h"
 
 namespace etRuntime {
 class InterfaceItemBase;
 
-class IEventReceiver {
+class IEventReceiver : public IRTObject{
 public:
 	IEventReceiver();
 	virtual ~IEventReceiver();

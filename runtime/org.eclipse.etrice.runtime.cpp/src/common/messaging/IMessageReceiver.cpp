@@ -10,12 +10,9 @@
 namespace etRuntime {
 
 IMessageReceiver::IMessageReceiver() {
-	// TODO Auto-generated constructor stub
-
 }
 
 IMessageReceiver::~IMessageReceiver() {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace etRuntime */

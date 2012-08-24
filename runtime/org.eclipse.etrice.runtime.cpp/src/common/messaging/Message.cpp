@@ -7,11 +7,19 @@
 
 #include "Message.h"
 
+#include <sstream>
+
 namespace etRuntime {
 
 
 Message::~Message() {
-	// TODO Auto-generated destructor stub
+	m_next = 0;
+}
+
+std::string Message::toString(){
+   std::stringstream strm;
+   strm << "Message(" << m_address.toString() << ")";
+   return strm.str();
 }
 
 } /* namespace etRuntime */

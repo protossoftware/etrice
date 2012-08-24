@@ -11,48 +11,28 @@
 #include "common/messaging/Address.h"
 #include "common/messaging/IMessageReceiver.h"
 #include "common/modelbase/IEventReceiver.h"
+#include "common/messaging/AbstractMessageReceiver.h"
+#include <string>
 
 namespace etRuntime {
 class IEventReceiver;
 
 
-class InterfaceItemBase {
+class InterfaceItemBase : public AbstractMessageReceiver{
 public:
-	InterfaceItemBase (const IEventReceiver& actor, const char* name, int localId, int idx, Address ownAddress, Address peerAddress)
-	: m_idx(idx),
-	  m_localId(localId),
-	  m_peerAddress(peerAddress),
-	  m_ownAddress(ownAddress),
-	  m_ownMsgReceiver(),
-	  m_peerMsgReceiver(),
-	  m_parent(actor)
-	  {};
-
+	InterfaceItemBase (const IEventReceiver& actor, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
 	virtual ~InterfaceItemBase();
-	int getIdx() const  { return m_idx; } ;
-	void setMsgReceiver(IMessageReceiver msgReceiver) {
-		m_ownMsgReceiver = msgReceiver;
-	};
-	IEventReceiver getActor() {
-		return m_parent;
-	};
 
+	int getIdx() const  { return m_idx; } ;
+	IEventReceiver* getActor() {	return static_cast<IEventReceiver*>(getParent()); };
 	int getLocalId() {return m_localId; };
 
-protected:
-	IMessageReceiver getMsgReceiver() const{
-		return m_ownMsgReceiver;
-	};
+	void setMsgReceiver(IMessageReceiver& msgReceiver) {	m_ownMsgReceiver = &msgReceiver; };
 
-	IMessageReceiver getPeerMsgReceiver() const {
-		return m_peerMsgReceiver;
-	};
-	Address getPeerAddress() const {
-		return m_peerAddress;
-	};
-	Address getAddress() const {
-		return m_ownAddress;
-	};
+protected:
+	IMessageReceiver* getMsgReceiver() const{ return m_ownMsgReceiver; };
+	IMessageReceiver* getPeerMsgReceiver() const { return m_peerMsgReceiver;	};
+	Address getPeerAddress() const { return m_peerAddress; };
 
 private:
 	InterfaceItemBase();
@@ -61,11 +41,8 @@ private:
 	int m_localId;
 
 	Address m_peerAddress;
-	Address m_ownAddress;
-	IMessageReceiver m_ownMsgReceiver;
-	IMessageReceiver m_peerMsgReceiver;
-
-	IEventReceiver m_parent; //TODO: move to superclass
+	IMessageReceiver* m_ownMsgReceiver;
+	IMessageReceiver* m_peerMsgReceiver;
 };
 
 } /* namespace etRuntime */

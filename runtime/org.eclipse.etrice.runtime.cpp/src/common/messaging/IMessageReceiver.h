@@ -10,10 +10,11 @@
 
 #include "common/messaging/Address.h"
 #include "common/messaging/Message.h"
+#include "common/messaging/IRTObject.h"
 
 namespace etRuntime {
 
-class IMessageReceiver {
+class IMessageReceiver : public IRTObject{
 public:
 	IMessageReceiver();
 	virtual ~IMessageReceiver();

@@ -9,12 +9,14 @@
 #define DEBUGGINGSERVICE_H_
 
 #include "common/messaging/Address.h"
+#include "common/debugging/MSCLogger.h"
+#include "common/modelbase/PortBase.h"
+#include <string>
+#include <map>
 
 namespace etRuntime {
 
-class MSCLogger;
 class ActorClassBase;
-class PortBase;
 
 class DebuggingService {
 private:
@@ -30,16 +32,21 @@ public:
 		return *s_instance;
 	}
 
-	void addMessageAsyncOut(Address source, Address target, const char * msg);
-	void addMessageAsyncIn(Address source, Address target, const char * msg);
-	void addMessageSyncCall(Address source, Address target, const char * msg);
-	void addMessageSyncReturn(Address source, Address target, const char * msg);
-	void addActorState(const ActorClassBase& actor, const char * state);
+	void addMessageAsyncOut(Address source, Address target, std::string msg);
+	void addMessageAsyncIn(Address source, Address target, std::string msg);
+	void addMessageSyncCall(Address source, Address target, std::string msg);
+	void addMessageSyncReturn(Address source, Address target, std::string msg);
+	void addActorState(const ActorClassBase& actor, std::string state);
 	void addPortInstance(const PortBase& port);
-	MSCLogger getSyncLogger();
-	MSCLogger getAsyncLogger();
+	const MSCLogger& getSyncLogger();
+	const MSCLogger& getAsyncLogger();
 
 private:
+
+	MSCLogger asyncLogger;
+	MSCLogger syncLogger;
+	std::map<Address, PortBase> portInstances;
+
 	DebuggingService();
 	DebuggingService(const DebuggingService& right);
 	DebuggingService& operator=(const DebuggingService& right);
