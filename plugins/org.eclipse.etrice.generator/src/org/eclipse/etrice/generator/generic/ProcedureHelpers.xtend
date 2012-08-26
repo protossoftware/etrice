@@ -237,6 +237,9 @@ class ProcedureHelpers {
 		'''
 	}
 	
+	def destructorCall(String classname) {
+		languageExt.destructorName(classname)+"()"
+	}
 	
 	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
 		if (operation.constructor)

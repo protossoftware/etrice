@@ -530,17 +530,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _notEquals_2 = (!Objects.equal(dtor, null));
         if (_notEquals_2) {
           _builder.append("\t\t");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// user defined destructor body");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
-          DetailCode _detailCode_1 = dtor.getDetailCode();
-          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
-          _builder.append(_translatedCode_1, "			");
+          String _name_31 = ac.getName();
+          String _destructorCall = this._procedureHelpers.destructorCall(_name_31);
+          _builder.append(_destructorCall, "		");
+          _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
       }

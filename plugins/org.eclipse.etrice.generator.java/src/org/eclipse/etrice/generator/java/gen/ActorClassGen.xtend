@@ -160,9 +160,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			public void destroy(){
 				«IF dtor!=null»
-					
-						// user defined destructor body
-						«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»
+					«ac.name.destructorCall»;
 				«ENDIF»
 			}
 		
