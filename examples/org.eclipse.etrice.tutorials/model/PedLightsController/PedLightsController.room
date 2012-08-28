@@ -39,7 +39,7 @@ RoomModel PedLightsController {
 			external Port ControlPort
 		}
 		Behavior {
-			Operation destroyUser() {
+			Operation ~GuiAdapter() {
 				"lights.closeWindow();"
 			}
 			StateMachine {
