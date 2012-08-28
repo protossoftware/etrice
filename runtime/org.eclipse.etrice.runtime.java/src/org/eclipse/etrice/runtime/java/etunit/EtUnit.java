@@ -44,7 +44,7 @@ public class EtUnit {
 	public static void etUnit_open(String testResultPath, String testFileName) {
 		System.out.println("************* TEST START ("+testFileName+") **************");
 		
-		String path = testResultPath!=null? testResultPath+testFileName : testFileName;
+		String path = testResultPath!=null? testResultPath+"/"+testFileName : testFileName;
 		try {
 			FileWriter fstream = new FileWriter(path);
 			
@@ -262,7 +262,17 @@ public class EtUnit {
 		}
 	}
 	public static void EXPECT_ORDER_END(int id, String msg, int val) {
-		
+		EXPECT_ORDER(id, msg, val);
+
+		OrderInfo info = orderInfo.get(id);
+		if (info!=null) {
+			if (info.current != info.list.length) {
+				String testresult = String.format("EXPECT_ORDER %s: wrong index at end: expected=%d, actual=%d", msg, info.list.length, info.current);
+				Integer exp = info.list.length;
+				Integer act = info.current;
+				etUnit_handleExpect(id, false, testresult, exp.toString(), act.toString());
+			}
+		}
 	}
 
 	private static void etUnit_handleExpect(int id, boolean result, String resulttext, String exp, String act) {
@@ -270,7 +280,7 @@ public class EtUnit {
 			/* nothing to do because no failure */
 		}
 		else {
-			if (!failed.contains(id)){
+			if (!failed.contains(id)) {
 				/* first failure will be remembered */
 				failed.add(id);
 				

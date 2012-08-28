@@ -12,15 +12,32 @@
 
 package org.eclipse.etrice.runtime.java.etunit;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_FLOAT32;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_INT16;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_INT32;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_INT8;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_PTR;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_UINT16;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_UINT32;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_EQUAL_UINT8;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_FALSE;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_ORDER;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_ORDER_END;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_ORDER_START;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.EXPECT_TRUE;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_close;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_closeTestCase;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_closeTestSuite;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_open;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_openTestCase;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.etUnit_openTestSuite;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
-
-import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -55,7 +72,7 @@ public class EtUnitTest extends TestCase {
 	
 	public void doTestOrder(int id) {
 		int list[] = {1,2,3,4};
-		EXPECT_ORDER_START(id, list, 4);
+		EXPECT_ORDER_START(id, list, list.length);
 		EXPECT_ORDER(id, "id=1", 1);
 		EXPECT_ORDER(id, "id=2", 2);
 		EXPECT_ORDER(id, "id=3", 3);
@@ -77,15 +94,17 @@ public class EtUnitTest extends TestCase {
 		etUnit_closeTestSuite();
 		etUnit_close();
 		
-		FileReader fr = new FileReader("test.etu");
-		BufferedReader br = new BufferedReader(fr);
-		
 		ArrayList<String> lines = new ArrayList<String>();
-		String line;
-		while ((line=br.readLine())!=null)
-			lines.add(line);
+		{
+			FileReader fr = new FileReader("test.etu");
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			while ((line=br.readLine())!=null)
+				lines.add(line);
+			br.close();
+		}
 		
 		assertEquals("#lines in test output", 6, lines.size());
-		assertEquals("contents of line 3", "tc fail 1: #-122#-123#org.eclipse.etrice.runtime.java.etunit.EtUnitTest:36#EXPECT_EQUAL_INT8: expected=-122, actual=-123", lines.get(2));
+		assertEquals("contents of line 3", "tc fail 1: #-122#-123#org.eclipse.etrice.runtime.java.etunit.EtUnitTest:53#EXPECT_EQUAL_INT8: expected=-122, actual=-123", lines.get(2));
 	}
 }
