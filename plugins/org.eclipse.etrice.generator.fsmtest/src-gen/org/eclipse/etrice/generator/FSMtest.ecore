@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsmtest" nsURI="http://www.eclipse.org/etrice/generator/FSMtest"
+    nsPrefix="fsmtest">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Testscripts" upperBound="-1"
+        eType="#//Testscript" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Testscript">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateDeclaration" eType="#//StateDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialDeclaration" eType="#//InitialDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loopsDeclaration" eType="#//LoopsDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seedDeclaration" eType="#//SeedDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionDeclarations"
+        upperBound="-1" eType="#//TransitionDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopsDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SeedDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SignalDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="signame" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intVal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strVal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DestinationDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//SourceDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" upperBound="-1" eType="#//SignalDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out" upperBound="-1" eType="#//SignalDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" eType="#//DestinationDeclaration"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

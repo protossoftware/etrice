@@ -117,6 +117,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
       _builder.newLine();
+      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+      _builder.newLine();
       _builder.newLine();
       {
         EList<RoomModel> _referencedModels = root.getReferencedModels(ac);
