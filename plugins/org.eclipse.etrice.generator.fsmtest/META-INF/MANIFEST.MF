@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.etrice.generator.fsmtest
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.eclipse.etrice.generator.fsmtest; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.etrice.generator,
+ org.eclipse.etrice.generator.services,
+ org.eclipse.etrice.generator.fsmtest,
+ org.eclipse.etrice.generator.fsmtest.impl,
+ org.eclipse.etrice.generator.fsmtest.util,
+ org.eclipse.etrice.generator.serializer,
+ org.eclipse.etrice.generator.parser.antlr,
+ org.eclipse.etrice.generator.parser.antlr.internal,
+ org.eclipse.etrice.generator.validation,
+ org.eclipse.etrice.generator.scoping,
+ org.eclipse.etrice.generator.generator,
+ org.eclipse.etrice.generator.formatting
+
