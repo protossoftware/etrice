@@ -1,4 +1,4 @@
-h1. Setting up the Workspace
+h1. Setting up the Workspace (Java)
 
 ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
 

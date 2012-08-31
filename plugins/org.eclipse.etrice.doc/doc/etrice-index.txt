@@ -1,6 +1,7 @@
 000-etrice-introduction.textile
 010-room-introduction.textile
 
+012-Working-with-Tutorials.textile
 013-Setting-up-the-Workspace.textile
 015-getting-started.textile
 020-tutorial-blinky.textile

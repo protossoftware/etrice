@@ -27,17 +27,18 @@
 </topic>
 </topic>
 </topic>
-<topic href="help/SettinguptheWorkspace.html" label="Setting up the Workspace"></topic>
-<topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
-<topic href="help/TutorialHelloWorld.html#Scope" label="Scope"></topic>
+<topic href="help/WorkingwiththeeTriceTutorials.html" label="Working with the eTrice Tutorials"></topic>
+<topic href="help/SettinguptheWorkspaceJava.html" label="Setting up the Workspace (Java)"></topic>
+<topic href="help/TutorialHelloWorldJava.html" label="Tutorial HelloWorld (Java)">
+<topic href="help/TutorialHelloWorldJava.html#Scope" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch"></topic>
 <topic href="help/Createastatemachine.html" label="Create a state machine"></topic>
 <topic href="help/Buildandrunthemodel.html" label="Build and run the model"></topic>
 <topic href="help/OpentheMessageSequenceChart.html" label="Open the Message Sequence Chart"></topic>
 <topic href="help/Summary.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialBlinky.html" label="Tutorial Blinky">
-<topic href="help/TutorialBlinky.html#Scope2" label="Scope"></topic>
+<topic href="help/TutorialBlinkyJava.html" label="Tutorial Blinky (Java)">
+<topic href="help/TutorialBlinkyJava.html#Scope2" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch2.html" label="Create a new model from scratch"></topic>
 <topic href="help/Addtwoadditionalactorclasses.html" label="Add two additional actor classes"></topic>
 <topic href="help/Createanewprotocol.html" label="Create a new protocol"></topic>
@@ -46,8 +47,8 @@
 <topic href="help/ImplementtheBehavior.html" label="Implement the Behavior"></topic>
 <topic href="help/Summary2.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialSendingData.html" label="Tutorial Sending Data">
-<topic href="help/TutorialSendingData.html#Scope3" label="Scope"></topic>
+<topic href="help/TutorialSendingDataJava.html" label="Tutorial Sending Data (Java)">
+<topic href="help/TutorialSendingDataJava.html#Scope3" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch3.html" label="Create a new model from scratch"></topic>
 <topic href="help/Addadataclass.html" label="Add a data class"></topic>
 <topic href="help/Createanewprotocol2.html" label="Create a new protocol"></topic>
@@ -60,8 +61,8 @@
 <topic href="help/Generateandrunthemodel.html" label="Generate and run the model"></topic>
 <topic href="help/Summary3.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialPedestrianLights.html" label="Tutorial Pedestrian Lights">
-<topic href="help/TutorialPedestrianLights.html#Scope4" label="Scope"></topic>
+<topic href="help/TutorialPedestrianLightsJava.html" label="Tutorial Pedestrian Lights (Java)">
+<topic href="help/TutorialPedestrianLightsJava.html#Scope4" label="Scope"></topic>
 <topic href="help/Setupthemodel.html" label="Setup the model"></topic>
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>

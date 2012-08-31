@@ -387,8 +387,14 @@
 			</section>
 		</section>
 	</chapter>
-	<chapter id="SettinguptheWorkspace">
-		<title>Setting up the Workspace</title>
+	<chapter id="WorkingwiththeeTriceTutorials">
+		<title>Working with the eTrice Tutorials</title>
+		<para>The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. </para>
+		<para>Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.</para>
+		<para>Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  </para>
+	</chapter>
+	<chapter id="SettinguptheWorkspaceJava">
+		<title>Setting up the Workspace (Java)</title>
 		<para>ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:</para>
 		<itemizedlist>
 			<listitem>
@@ -401,7 +407,7 @@
 				<para>timing</para>
 			</listitem>
 		</itemizedlist>
-		<para>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  </para>
+		<para>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug in, your workspace should look like this:  </para>
 		<para>
 			<mediaobject>
 				<imageobject>
@@ -483,8 +489,8 @@
 		</para>
 		<para>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</para>
 	</chapter>
-	<chapter id="TutorialHelloWorld">
-		<title>Tutorial HelloWorld</title>
+	<chapter id="TutorialHelloWorldJava">
+		<title>Tutorial HelloWorld (Java)</title>
 		<section id="Scope">
 			<title>Scope</title>
 			<para>In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:</para>
@@ -564,21 +570,21 @@
 			<blockquote>
 				<para></para>
 			</blockquote>
-			<para>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:</para>
+			<para>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be used. But as prerequisite for further versions the following elements can be defined:</para>
 			<itemizedlist>
 				<listitem>
 					<para>the 
-						<emphasis>LogicalSystem</emphasis> 
+						<emphasis>LogicalSystem</emphasis> (currently optional)
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<emphasis>SubSystemClass</emphasis>
+						<emphasis>SubSystemClass</emphasis> (mandatory)
 					</para>
 				</listitem>
 				<listitem>
 					<para>at least one 
-						<emphasis>ActorClass</emphasis>
+						<emphasis>ActorClass</emphasis> (mandatory)
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -617,7 +623,7 @@
 				<emphasis>State</emphasis> from the tool box to the diagram. Confirm the dialogue with 
 				<emphasis>ok</emphasis>. Select the 
 				<emphasis>Transition</emphasis> in the tool box and draw the transition from the 
-				<emphasis>Initial Point</emphasis> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+				<emphasis>Initial Point</emphasis> to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
 			</para>
 			<literallayout><code>System.out.println("Hello World !");
 </code></literallayout>
@@ -689,8 +695,8 @@
 				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.</para>
 		</section>
 	</chapter>
-	<chapter id="TutorialBlinky">
-		<title>Tutorial Blinky</title>
+	<chapter id="TutorialBlinkyJava">
+		<title>Tutorial Blinky (Java)</title>
 		<section id="Scope2">
 			<title>Scope</title>
 			<para>This tutorial describes how to use the 
@@ -1136,8 +1142,8 @@ carLights.setState(TrafficLight3.OFF);
 			<para>Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</para>
 		</section>
 	</chapter>
-	<chapter id="TutorialSendingData">
-		<title>Tutorial Sending Data</title>
+	<chapter id="TutorialSendingDataJava">
+		<title>Tutorial Sending Data (Java)</title>
 		<section id="Scope3">
 			<title>Scope</title>
 			<para>This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
@@ -1530,8 +1536,8 @@ carLights.setState(TrafficLight3.OFF);
 			<para>Make the test and inspect the console output.</para>
 		</section>
 	</chapter>
-	<chapter id="TutorialPedestrianLights">
-		<title>Tutorial Pedestrian Lights</title>
+	<chapter id="TutorialPedestrianLightsJava">
+		<title>Tutorial Pedestrian Lights (Java)</title>
 		<section id="Scope4">
 			<title>Scope</title>
 			<para>The scope of this tutorial is to demonstrate how to receive model messages from outside the model. Calling methods which are not part of the model is simple and you have already done this within the blinky tutorial (this is the other way round: model =&gt; external code). Receiving events from outside the model is a very common problem and a very frequently asked question. Therefore this tutorial shows how an external event (outside the model) can be received by the model.</para>

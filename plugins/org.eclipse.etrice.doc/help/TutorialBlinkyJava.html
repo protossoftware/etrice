@@ -1,0 +1,111 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Tutorial Blinky (Java)</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="index.html" title="eTrice User Guide">
+<link rel="prev" href="Summary.html" title="Summary">
+<link rel="next" href="Createanewmodelfromscratch2.html" title="Create a new model from scratch">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Tutorial Blinky (Java)</h1>
+<div class="chapter" title="Tutorial Blinky (Java)">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="TutorialBlinkyJava"></a>Tutorial Blinky (Java)</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="TutorialBlinkyJava.html#Scope2">Scope</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Createanewmodelfromscratch2.html">Create a new model from scratch</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Addtwoadditionalactorclasses.html">Add two additional actor classes</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Createanewprotocol.html">Create a new protocol</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ImporttheTimingService.html">Import the Timing Service</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Finishthemodelstructure.html">Finish the model structure</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ImplementtheBehavior.html">Implement the Behavior</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Summary2.html">Summary</a></span>
+</dt>
+</dl>
+</div>
+<div class="section" title="Scope">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Scope2"></a>Scope</h2>
+</div>
+</div>
+</div>
+<p>This tutorial describes how to use the 
+				<span class="emphasis"><em>TimingService</em></span>, how to combine a generated model with manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds, blinking, stop,...  
+				For this exercise we will use a little GUI class that will be used in more sophisticated tutorials too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the GUI. 
+			</p>
+<p>After the exercise is created you must copy the GUI to your src directory (see below).</p>
+<p>The package contains four java classes which implements a small window with a 3-light traffic light which simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian signals.</p>
+<p>The GUI looks like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/020-Blinky08.png"></div>
+<p>
+			
+</p>
+<p>Within this tutorial we will just toggle the yellow light.</p>
+<p>You will perform the following steps:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>create a new model from scratch</p>
+</li>
+<li class="listitem">
+<p>define a protocol</p>
+</li>
+<li class="listitem">
+<p>create an actor structure</p>
+</li>
+<li class="listitem">
+<p>create a hierarchical state machine</p>
+</li>
+<li class="listitem">
+<p>use the predefined 
+						<span class="emphasis"><em>TimingService</em></span>
+					
+</p>
+</li>
+<li class="listitem">
+<p>combine manual code with generated code</p>
+</li>
+<li class="listitem">
+<p>build and run the model</p>
+</li>
+<li class="listitem">
+<p>open the message sequence chart</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

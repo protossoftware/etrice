@@ -51,10 +51,13 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#SettinguptheWorkspace">3. Setting up the Workspace</a></span>
+<span class="chapter"><a href="#WorkingwiththeeTriceTutorials">3. Working with the eTrice Tutorials</a></span>
 </dt>
 <dt>
-<span class="chapter"><a href="#TutorialHelloWorld">4. Tutorial HelloWorld</a></span>
+<span class="chapter"><a href="#SettinguptheWorkspaceJava">4. Setting up the Workspace (Java)</a></span>
+</dt>
+<dt>
+<span class="chapter"><a href="#TutorialHelloWorldJava">5. Tutorial HelloWorld (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -79,7 +82,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialBlinky">5. Tutorial Blinky</a></span>
+<span class="chapter"><a href="#TutorialBlinkyJava">6. Tutorial Blinky (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -110,7 +113,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialSendingData">6. Tutorial Sending Data</a></span>
+<span class="chapter"><a href="#TutorialSendingDataJava">7. Tutorial Sending Data (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -144,7 +147,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialPedestrianLights">7. Tutorial Pedestrian Lights</a></span>
+<span class="chapter"><a href="#TutorialPedestrianLightsJava">8. Tutorial Pedestrian Lights (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -160,7 +163,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#ROOMConcepts">8. ROOM Concepts</a></span>
+<span class="chapter"><a href="#ROOMConcepts">9. ROOM Concepts</a></span>
 </dt>
 <dd>
 <dl>
@@ -769,12 +772,25 @@
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;3.&nbsp;Setting up the Workspace">
+<div class="chapter" title="Chapter&nbsp;3.&nbsp;Working with the eTrice Tutorials">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="SettinguptheWorkspace"></a>Chapter&nbsp;3.&nbsp;Setting up the Workspace</h2>
+<a name="WorkingwiththeeTriceTutorials"></a>Chapter&nbsp;3.&nbsp;Working with the eTrice Tutorials</h2>
+</div>
+</div>
+</div>
+<p>The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. </p>
+<p>Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.</p>
+<p>Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  </p>
+</div>
+<div class="chapter" title="Chapter&nbsp;4.&nbsp;Setting up the Workspace (Java)">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="SettinguptheWorkspaceJava"></a>Chapter&nbsp;4.&nbsp;Setting up the Workspace (Java)</h2>
 </div>
 </div>
 </div>
@@ -792,7 +808,7 @@
 </li>
 </ul>
 </div>
-<p>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  </p>
+<p>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug in, your workspace should look like this:  </p>
 <p>
 			
 </p>
@@ -883,12 +899,12 @@
 </p>
 <p>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</p>
 </div>
-<div class="chapter" title="Chapter&nbsp;4.&nbsp;Tutorial HelloWorld">
+<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial HelloWorld (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialHelloWorld"></a>Chapter&nbsp;4.&nbsp;Tutorial HelloWorld</h2>
+<a name="TutorialHelloWorldJava"></a>Chapter&nbsp;5.&nbsp;Tutorial HelloWorld (Java)</h2>
 </div>
 </div>
 </div>
@@ -1003,26 +1019,23 @@
 <p></p>
 </blockquote>
 </div>
-<p>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:</p>
+<p>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be used. But as prerequisite for further versions the following elements can be defined:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>the 
-						<span class="emphasis"><em>LogicalSystem</em></span> 
-					
-</p>
+						<span class="emphasis"><em>LogicalSystem</em></span> (currently optional)
+					</p>
 </li>
 <li class="listitem">
 <p>at least one 
-						<span class="emphasis"><em>SubSystemClass</em></span>
-					
-</p>
+						<span class="emphasis"><em>SubSystemClass</em></span> (mandatory)
+					</p>
 </li>
 <li class="listitem">
 <p>at least one 
-						<span class="emphasis"><em>ActorClass</em></span>
-					
-</p>
+						<span class="emphasis"><em>ActorClass</em></span> (mandatory)
+					</p>
 </li>
 </ul>
 </div>
@@ -1070,7 +1083,7 @@
 				<span class="emphasis"><em>State</em></span> from the tool box to the diagram. Confirm the dialogue with 
 				<span class="emphasis"><em>ok</em></span>. Select the 
 				<span class="emphasis"><em>Transition</em></span> in the tool box and draw the transition from the 
-				<span class="emphasis"><em>Initial Point</em></span> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+				<span class="emphasis"><em>Initial Point</em></span> to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
 			</p>
 <div class="literallayout">
 <p>
@@ -1174,12 +1187,12 @@
 				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial Blinky">
+<div class="chapter" title="Chapter&nbsp;6.&nbsp;Tutorial Blinky (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialBlinky"></a>Chapter&nbsp;5.&nbsp;Tutorial Blinky</h2>
+<a name="TutorialBlinkyJava"></a>Chapter&nbsp;6.&nbsp;Tutorial Blinky (Java)</h2>
 </div>
 </div>
 </div>
@@ -1758,12 +1771,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;6.&nbsp;Tutorial Sending Data">
+<div class="chapter" title="Chapter&nbsp;7.&nbsp;Tutorial Sending Data (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialSendingData"></a>Chapter&nbsp;6.&nbsp;Tutorial Sending Data</h2>
+<a name="TutorialSendingDataJava"></a>Chapter&nbsp;7.&nbsp;Tutorial Sending Data (Java)</h2>
 </div>
 </div>
 </div>
@@ -2305,12 +2318,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>Make the test and inspect the console output.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;7.&nbsp;Tutorial Pedestrian Lights">
+<div class="chapter" title="Chapter&nbsp;8.&nbsp;Tutorial Pedestrian Lights (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialPedestrianLights"></a>Chapter&nbsp;7.&nbsp;Tutorial Pedestrian Lights</h2>
+<a name="TutorialPedestrianLightsJava"></a>Chapter&nbsp;8.&nbsp;Tutorial Pedestrian Lights (Java)</h2>
 </div>
 </div>
 </div>
@@ -2538,12 +2551,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;8.&nbsp;ROOM Concepts">
+<div class="chapter" title="Chapter&nbsp;9.&nbsp;ROOM Concepts">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="ROOMConcepts"></a>Chapter&nbsp;8.&nbsp;ROOM Concepts</h2>
+<a name="ROOMConcepts"></a>Chapter&nbsp;9.&nbsp;ROOM Concepts</h2>
 </div>
 </div>
 </div>
@@ -2607,7 +2620,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N108D7">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N108E1">
 <tr>
 							
 <td align="center">
@@ -2690,7 +2703,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N1095C">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10966">
 <tr>
 								
 <td align="center">
@@ -2972,7 +2985,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10A63">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10A6D">
 <tr>
 								
 <td align="center">
@@ -3170,7 +3183,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10B9B">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BA5">
 <tr>
 								
 <td align="center">
@@ -3327,7 +3340,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C5E">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C68">
 <tr>
 							
 <td align="center">
@@ -3458,7 +3471,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The simpler flat finite state machines are composed of the following elements:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D0E">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D18">
 <tr>
 								
 <td align="center">
@@ -3572,7 +3585,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 						A few modeling elements are added to the set listed above:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10DCD">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10DD7">
 <tr>
 								
 <td align="center">
