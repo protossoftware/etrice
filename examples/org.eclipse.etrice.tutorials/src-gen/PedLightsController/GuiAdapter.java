@@ -36,7 +36,7 @@ public class GuiAdapter extends ActorClassBase {
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
-	public void destroyUser() {
+	public void GuiAdapter_dtor() {
 		lights.closeWindow();
 	}
 
@@ -54,7 +54,6 @@ public class GuiAdapter extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public PedControlProtocolConjPort getControlPort (){
@@ -75,6 +74,7 @@ public class GuiAdapter extends ActorClassBase {
 	}
 	
 	public void destroy(){
+		GuiAdapter_dtor();
 	}
 
 	

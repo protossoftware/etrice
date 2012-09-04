@@ -1,4 +1,4 @@
-h1. Tutorial Blinky
+h1. Tutorial Blinky (Java)
 
 h2. Scope
 

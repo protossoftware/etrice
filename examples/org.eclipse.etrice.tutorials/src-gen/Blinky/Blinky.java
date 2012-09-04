@@ -40,7 +40,7 @@ public class Blinky extends ActorClassBase {
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
-	public void destroyUser() {
+	public void Blinky_dtor() {
 		light.closeWindow();
 	}
 
@@ -59,7 +59,6 @@ public class Blinky extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public BlinkyControlProtocollPort getControlPort (){
@@ -83,6 +82,7 @@ public class Blinky extends ActorClassBase {
 	}
 	
 	public void destroy(){
+		Blinky_dtor();
 	}
 
 	

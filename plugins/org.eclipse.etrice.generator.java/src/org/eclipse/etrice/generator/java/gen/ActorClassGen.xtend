@@ -67,6 +67,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
 		«FOR model : root.getReferencedModels(ac)»
 			import «model.name».*;
@@ -191,9 +192,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			public void destroy(){
 				«IF dtor!=null»
-					
-						// user defined destructor body
-						«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»
+					«ac.name.destructorCall»;
 				«ENDIF»
 			}
 		

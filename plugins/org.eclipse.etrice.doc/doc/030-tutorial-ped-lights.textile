@@ -1,4 +1,4 @@
-h1. Tutorial Pedestrian Lights
+h1. Tutorial Pedestrian Lights (Java)
 
 h2. Scope
 

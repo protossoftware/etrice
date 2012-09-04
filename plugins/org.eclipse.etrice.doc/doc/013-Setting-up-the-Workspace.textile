@@ -1,4 +1,4 @@
-h1. Setting up the Workspace
+h1. Setting up the Workspace (Java)
 
 ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
 
@@ -6,7 +6,7 @@ ETrice generates code out of ROOM models. The code generator and the generated c
 * logging
 * timing
 
-Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  
+Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug in, your workspace should look like this:  
 
 !images/013-SetupWorkspace01.png!
 

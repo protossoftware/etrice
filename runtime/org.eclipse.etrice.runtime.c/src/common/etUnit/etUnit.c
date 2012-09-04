@@ -214,6 +214,7 @@ void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file,
 			etUnit_orderInfo[i].currentIndex = 0;
 			etUnit_orderInfo[i].size = size;
 			etUnit_orderInfo[i].list = list;
+			break;
 		}
 }
 

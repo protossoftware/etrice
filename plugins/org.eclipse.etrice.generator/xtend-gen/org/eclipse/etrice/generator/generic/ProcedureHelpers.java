@@ -735,6 +735,12 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  public String destructorCall(final String classname) {
+    String _destructorName = this.languageExt.destructorName(classname);
+    String _plus = (_destructorName + "()");
+    return _plus;
+  }
+  
   private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
     CharSequence _xifexpression = null;
     boolean _isConstructor = RoomHelpers.isConstructor(operation);

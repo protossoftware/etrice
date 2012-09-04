@@ -71,6 +71,10 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 		if (tag.equals("ifitem.index"))
 			return "ifitem.getIdx()";
 		
+		if (tag.equals("MODEL_LOCATION")) {
+			return RoomNameProvider.getDetailCodeLocation(code);
+		}
+		
 		logger.logInfo("unrecognized tag '"+tag+"' in "
 				+RoomNameProvider.getDetailCodeLocation(code)+" of "
 				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));

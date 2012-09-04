@@ -211,7 +211,15 @@ With this execution model also lower levels of a software system, such as device
 
 
 
-h1. Setting up the Workspace
+h1. Working with the eTrice Tutorials
+
+The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. 
+
+Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.
+
+Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  
+
+h1. Setting up the Workspace (Java)
 
 ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
 
@@ -219,7 +227,7 @@ ETrice generates code out of ROOM models. The code generator and the generated c
 * logging
 * timing
 
-Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  
+Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug in, your workspace should look like this:  
 
 !images/013-SetupWorkspace01.png!
 
@@ -254,7 +262,7 @@ To stop the application type _quit_ in the console window.
 
 Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.
 
-h1. Tutorial HelloWorld
+h1. Tutorial HelloWorld (Java)
 
 h2. Scope
 
@@ -304,10 +312,10 @@ RoomModel HelloWorld {
 } 
 bq. 
 
-The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:
-* the _LogicalSystem_ 
-* at least one _SubSystemClass_
-* at least one _ActorClass_
+The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be used. But as prerequisite for further versions the following elements can be defined:
+* the _LogicalSystem_ (currently optional)
+* at least one _SubSystemClass_ (mandatory)
+* at least one _ActorClass_ (mandatory)
 
 The _LogicalSystem_ represents the complete distributed system and contains at least one _SubSystemRef_. The _SubSystemClass_ represents an address space and contains at least one _ActorRef_. The _ActorClass_ is the building block of which an application will be built of. It is in general a good idea to define a top level actor that can be used as reference within the subsystem.
 
@@ -323,7 +331,7 @@ We will implement the Hello World code on the initial transition of the _HelloWo
 
 !images/015-HelloWorld03.png!
 
-The state machine editor will be opened. Drag and drop an _Initial Point_ from the tool box to the diagram into the top level state. Drag and drop a _State_ from the tool box to the diagram. Confirm the dialogue with _ok_. Select the _Transition_ in the tool box and draw the transition from the _Initial Point_ to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+The state machine editor will be opened. Drag and drop an _Initial Point_ from the tool box to the diagram into the top level state. Drag and drop a _State_ from the tool box to the diagram. Confirm the dialogue with _ok_. Select the _Transition_ in the tool box and draw the transition from the _Initial Point_ to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
 
 bc. System.out.println("Hello World !");
  
@@ -364,7 +372,7 @@ Now you have generated your first eTrice model from scratch. You can switch betw
 You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.
  
 
-h1. Tutorial Blinky
+h1. Tutorial Blinky (Java)
 
 h2. Scope
 
@@ -599,7 +607,7 @@ h2. Summary
 Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.
 
 
-h1. Tutorial Sending Data
+h1. Tutorial Sending Data (Java)
 
 h2. Scope
 
@@ -871,7 +879,7 @@ bc. Message ping(data: DemoData ref)
 
 Make the test and inspect the console output.
 
-h1. Tutorial Pedestrian Lights
+h1. Tutorial Pedestrian Lights (Java)
 
 h2. Scope
 

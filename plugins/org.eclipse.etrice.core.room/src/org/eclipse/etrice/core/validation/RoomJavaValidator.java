@@ -413,6 +413,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (op.getReturntype()!=null)
 				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
 		}
+		else if (op.isDestructor())
+			error("Destructor must have class name", RoomPackage.Literals.OPERATION__RETURNTYPE);
 	}
 	
 	@Check

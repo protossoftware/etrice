@@ -39,7 +39,7 @@ RoomModel Blinky {
 			SAP timer: PTimeout
 		}
 		Behavior {
-			Operation destroyUser() {
+			Operation ~Blinky() {
 				"light.closeWindow();"
 			}
 			StateMachine {

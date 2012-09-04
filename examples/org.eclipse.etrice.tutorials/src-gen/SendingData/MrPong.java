@@ -43,7 +43,6 @@ public class MrPong extends ActorClassBase {
 		
 		// own service implementations
 	}
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	//--------------------- port getters
 	public PingPongProtocolPort getPingPongPort (){

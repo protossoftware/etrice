@@ -152,6 +152,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
       _builder.newLine();
+      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+      _builder.newLine();
       _builder.newLine();
       {
         EList<RoomModel> _referencedModels = root.getReferencedModels(ac);
@@ -653,17 +655,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _notEquals_2 = (!Objects.equal(dtor, null));
         if (_notEquals_2) {
           _builder.append("\t\t");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// user defined destructor body");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
-          DetailCode _detailCode_1 = dtor.getDetailCode();
-          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
-          _builder.append(_translatedCode_1, "			");
+          String _name_34 = ac.getName();
+          String _destructorCall = this._procedureHelpers.destructorCall(_name_34);
+          _builder.append(_destructorCall, "		");
+          _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
       }
