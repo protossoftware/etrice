@@ -136,8 +136,11 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				root = ConfigUtil.resolve(root, path);
 			if (root != null) {
 				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
-					if (ref instanceof ActorRef)
-						refs.add((ActorRef) ref);
+					if (ref instanceof ActorRef) {
+						ActorRef aRef = (ActorRef) ref;
+						if (aRef.getSize() == 1)
+							refs.add((ActorRef) ref);
+					}
 				}
 			}
 		}

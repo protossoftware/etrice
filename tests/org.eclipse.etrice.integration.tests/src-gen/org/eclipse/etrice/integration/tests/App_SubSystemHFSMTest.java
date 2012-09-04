@@ -43,7 +43,6 @@ public class App_SubSystemHFSMTest extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

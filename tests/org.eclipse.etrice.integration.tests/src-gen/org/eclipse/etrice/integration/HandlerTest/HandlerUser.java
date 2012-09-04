@@ -56,7 +56,6 @@ public class HandlerUser extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setCounter (int counter) {
 		 this.counter = counter;

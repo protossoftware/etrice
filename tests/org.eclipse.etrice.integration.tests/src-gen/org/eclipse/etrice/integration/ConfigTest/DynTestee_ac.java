@@ -21,6 +21,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 public class DynTestee_ac extends ActorClassBase {
 
 	
+	private VariableService variableService;
 	
 	//--------------------- ports
 	protected TestCommProtocolConjPort Conj_DynConfigPort = null;
@@ -38,10 +39,12 @@ public class DynTestee_ac extends ActorClassBase {
 	Dyn_DC1 dc_i;
 	int blockMe;
 	boolean blocker;
-	private DynConfigLock lock_int_i;
-	private DynConfigLock lock_dc_i;
-	private DynConfigLock lock_blockMe;
+	Dyn_DC1 dc_dump;
+	int int_dump;
 	private DynConfigLock lock_blocker;
+	private DynConfigLock lock_dc_i;
+	private DynConfigLock lock_int_i;
+	private DynConfigLock lock_blockMe;
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
@@ -54,6 +57,8 @@ public class DynTestee_ac extends ActorClassBase {
 		dc_i = new Dyn_DC1();
 		blockMe = 0;
 		blocker = false;
+		dc_dump = new Dyn_DC1();
+		int_dump = 0;
 
 		// own ports
 		Conj_DynConfigPort = new TestCommProtocolConjPort(this, "Conj_DynConfigPort", IFITEM_Conj_DynConfigPort, 0, port_addr[IFITEM_Conj_DynConfigPort][0], peer_addr[IFITEM_Conj_DynConfigPort][0]); 
@@ -66,33 +71,45 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynTestee_ac(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){
 		this(parent, name, port_addr, peer_addr);
 		
-		lock_int_i = new DynConfigLock();
-		lock_dc_i = new DynConfigLock();
-		lock_blockMe = new DynConfigLock();
+		this.variableService = variableService;
 		lock_blocker = new DynConfigLock();
+		lock_dc_i = new DynConfigLock();
+		lock_int_i = new DynConfigLock();
+		lock_blockMe = new DynConfigLock();
 	}
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
+	public void setDc_dump (Dyn_DC1 dc_dump) {
+		 this.dc_dump = dc_dump;
+	}
+	public Dyn_DC1 getDc_dump () {
+		return this.dc_dump;
+	}
+	public void setInt_dump (int int_dump) {
+		 this.int_dump = int_dump;
+	}
+	public int getInt_dump () {
+		return this.int_dump;
+	}
 	
-	public int getInt_i(){
-		if(lock_int_i == null)
-			return int_i;
+	public boolean getBlocker(){
+		if(lock_blocker == null)
+			return blocker;
 		else
-			synchronized(lock_int_i){
-				return int_i;
+			synchronized(lock_blocker){
+				return blocker;
 			}
 	}
-	public void setInt_i(int int_i){
-		if(lock_int_i == null)
-			this.int_i = int_i;
+	public void setBlocker(boolean blocker){
+		if(lock_blocker == null)
+			this.blocker = blocker;
 		else
-			synchronized(lock_int_i){
-				this.int_i = int_i;
+			synchronized(lock_blocker){
+				this.blocker = blocker;
 			}
 	}
-	public DynConfigLock getInt_iLock(){
-		return lock_int_i;
+	public DynConfigLock getBlockerLock(){
+		return lock_blocker;
 	}	
 	public Dyn_DC1 getDc_i(){
 		if(lock_dc_i == null)
@@ -113,6 +130,25 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynConfigLock getDc_iLock(){
 		return lock_dc_i;
 	}	
+	public int getInt_i(){
+		if(lock_int_i == null)
+			return int_i;
+		else
+			synchronized(lock_int_i){
+				return int_i;
+			}
+	}
+	public void setInt_i(int int_i){
+		if(lock_int_i == null)
+			this.int_i = int_i;
+		else
+			synchronized(lock_int_i){
+				this.int_i = int_i;
+			}
+	}
+	public DynConfigLock getInt_iLock(){
+		return lock_int_i;
+	}	
 	public int getBlockMe(){
 		if(lock_blockMe == null)
 			return blockMe;
@@ -132,25 +168,14 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynConfigLock getBlockMeLock(){
 		return lock_blockMe;
 	}	
-	public boolean getBlocker(){
-		if(lock_blocker == null)
-			return blocker;
-		else
-			synchronized(lock_blocker){
-				return blocker;
-			}
+	public void setAndWriteDc_dump(Dyn_DC1 dc_dump){
+			setDc_dump(dc_dump);
+			variableService.write(this.getInstancePath()+"/dc_dump", dc_dump);
 	}
-	public void setBlocker(boolean blocker){
-		if(lock_blocker == null)
-			this.blocker = blocker;
-		else
-			synchronized(lock_blocker){
-				this.blocker = blocker;
-			}
+	public void setAndWriteInt_dump(int int_dump){
+			setInt_dump(int_dump);
+			variableService.write(this.getInstancePath()+"/int_dump", int_dump);
 	}
-	public DynConfigLock getBlockerLock(){
-		return lock_blocker;
-	}	
 	
 	//--------------------- port getters
 	public TestCommProtocolConjPort getConj_DynConfigPort (){
@@ -206,6 +231,9 @@ public class DynTestee_ac extends ActorClassBase {
 	
 	/* Action Codes */
 	protected void action_TRANS_tr0_FROM_First_TO_Done_BY_testConj_DynConfigPort(InterfaceItemBase ifitem) {
+		Dyn_DC1 tmp = new Dyn_DC1(123, new long[]{1000}, new Dyn_DC2(0.0e-100, "dummy out".toCharArray()));
+		setAndWriteDc_dump(tmp);
+		setAndWriteInt_dump(888);
 		if(blocker)getBlockMeLock().forbidUpdate(); else getBlockMeLock().allowUpdate();
 		int testValue = 0;
 		if(int_i != 401 || getDc_i().getLong_array_i()[0] != 403)

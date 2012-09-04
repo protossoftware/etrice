@@ -20,7 +20,7 @@ public interface IConfigSource {
 	 * Polling interval [ms] <br>
 	 * default case use <= 0
 	 */
-	public int getPolling();
+	public int getPollingTimer();
 	
 	Map<String, Object> readValues();
 	

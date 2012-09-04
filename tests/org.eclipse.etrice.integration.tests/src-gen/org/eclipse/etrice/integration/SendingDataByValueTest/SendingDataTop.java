@@ -43,7 +43,6 @@ public class SendingDataTop extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

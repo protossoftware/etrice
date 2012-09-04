@@ -129,7 +129,7 @@ public class ConfigHelper {
 		return !error;
 	}
 
-	public static String toPath(List<String> path, String pathDelim) {
+	public static String toPath(Iterable<String> path, String pathDelim) {
 		StringBuilder b = new StringBuilder();
 		for (String p : path)
 			b.append(pathDelim + p);

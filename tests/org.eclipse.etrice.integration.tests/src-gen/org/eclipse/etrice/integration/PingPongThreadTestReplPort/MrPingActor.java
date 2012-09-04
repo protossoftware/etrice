@@ -59,7 +59,6 @@ public class MrPingActor extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	public void setCount (int count) {
 		 this.count = count;

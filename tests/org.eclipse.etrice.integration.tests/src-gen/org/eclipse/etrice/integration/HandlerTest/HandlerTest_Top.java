@@ -43,7 +43,6 @@ public class HandlerTest_Top extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

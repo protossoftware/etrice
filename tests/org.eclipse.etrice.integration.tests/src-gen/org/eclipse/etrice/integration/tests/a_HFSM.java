@@ -47,7 +47,6 @@ public class a_HFSM extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

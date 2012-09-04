@@ -146,7 +146,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			}
 
-			«IF !dynConfigReadAttributes.empty»
+			«IF !dynConfigReadAttributes.empty || !dynConfigWriteAttributes.empty»
 				public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){
 					this(parent, name, port_addr, peer_addr);
 					
@@ -159,8 +159,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				}
 			«ENDIF»
 			
-			//--------------------- attributes getter and setter
-			«attributeSettersGettersImplementation(ac.attributes.minus(dynConfigReadAttributes), ac.name)»
+			«attributeSettersGettersImplementation(ac.attributes.minus(dynConfigReadAttributes.toList), ac.name)»
 			
 			«configAddon.genDynConfigGetterSetter(ac)»
 			

@@ -73,6 +73,31 @@ public class ConfigUtil {
 
 		return (ActorClass) result;
 	}
+	
+	public static ActorRef getLastActorRef(ActorContainerClass root,
+			RefPath path) {
+		if(path.getRefs().isEmpty())
+			return null;
+		
+		ActorRef lastMatch = null;
+		ActorContainerClass result = root;
+		for (String ref : path.getRefs()) {
+			ActorRef match = null;
+			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+					match = (ActorRef) actor;
+					break;
+				}
+			}
+
+			if (match == null)
+				return null;
+			result = match.getType();
+			lastMatch = match;
+		}
+
+		return lastMatch;
+	}
 
 	/**
 	 * returns first invalid path segment else null

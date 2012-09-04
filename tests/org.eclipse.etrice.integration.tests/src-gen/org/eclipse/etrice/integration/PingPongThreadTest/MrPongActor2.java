@@ -47,7 +47,6 @@ public class MrPongActor2 extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

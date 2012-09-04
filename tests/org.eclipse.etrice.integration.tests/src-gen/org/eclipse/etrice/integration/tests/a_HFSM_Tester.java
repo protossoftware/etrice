@@ -50,7 +50,6 @@ public class a_HFSM_Tester extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

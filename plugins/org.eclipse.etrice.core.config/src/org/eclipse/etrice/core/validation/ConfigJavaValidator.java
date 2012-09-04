@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -95,6 +96,9 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	@Check
 	public void checkActorClassConfig(ActorClassConfig config) {
+		if (config.getActor().isAbstract())
+			error("abstract actor classes not supported",
+					ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ACTOR);
 		checkDuplicateAttributes(config.getAttributes(),
 				ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ATTRIBUTES);
 
@@ -109,8 +113,17 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				String invalidSegment = ConfigUtil.checkPath(root, path);
 				if (invalidSegment != null)
 					error("no match for segment '" + invalidSegment + "'",
-							ConfigPackage.eINSTANCE
-									.getActorInstanceConfig_Path());
+							ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
+				else {
+					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
+					if (aRef != null) {
+						if (aRef.getSize() > 1)
+							error("no arrays of actor references supported",
+									ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
+					} else
+						error("invalid actor reference",
+								ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
+				}
 			}
 		}
 		// duplicate port instance config check
@@ -155,18 +168,21 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	@Check
 	public void checkAttrConfig(AttrConfig config) {
-		Attribute attr = config.getAttribute();
-		if (attr == null)
+		Attribute a = config.getAttribute();
+		if (a == null)
 			return;
 
-		DataType type = attr.getRefType().getType();
+		DataType type = a.getRefType().getType();
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 			checkAttrConfigValue(primitive, config);
 		} else if (type instanceof DataType) {
 			if (config.getValue() != null)
-				error("not allowed",
-						ConfigPackage.eINSTANCE.getAttrConfig_Value());
+				error("not available",
+						ConfigPackage.Literals.ATTR_CONFIG__VALUE);
+			if (a.getSize() > 0)
+				error("DataClass arrays not supported",
+						ConfigPackage.Literals.ATTR_CLASS_CONFIG__ATTRIBUTES);
 		}
 	}
 
@@ -196,19 +212,21 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (config.isDynConfig()) {
 			if (!(config.eContainer() instanceof ActorInstanceConfig))
 				error("dynamic configuration only at root attributes", feature);
-			if(config.eContainer() instanceof ActorInstanceConfig){
-				SubSystemClass ssc = ((ActorInstanceConfig)config.eContainer()).getRoot();
+			if (config.eContainer() instanceof ActorInstanceConfig) {
+				SubSystemClass ssc = ((ActorInstanceConfig) config.eContainer())
+						.getRoot();
 				ConfigModel model = getConfigModel(config);
 				boolean found = false;
-				for(SubSystemConfig c : model.getSubSystemConfigs())
-					if(c.getSubSystem().equals(ssc)){
-						if(c.getDynConfig() == null)
-							error("no source for dynamic config in SubSystemConfig", feature);
-							found = true;
+				for (SubSystemConfig c : model.getSubSystemConfigs())
+					if (c.getSubSystem().equals(ssc)) {
+						if (c.getDynConfig() == null)
+							error("no source for dynamic config in SubSystemConfig",
+									feature);
+						found = true;
 					}
-				if(!found)
+				if (!found)
 					error("no SubSystemConfig found", feature);
-				
+
 			}
 		}
 
@@ -346,16 +364,12 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		LiteralType type = primitive.getType();
 
 		if (type == LiteralType.INT || type == LiteralType.REAL) {
-			if (config.getValue() != null) {
-				if (config.getValue().getLiterals().get(0) instanceof IntLiteral) {
-					if (!(min instanceof IntLiteral))
-						error("incompatible datatype: maximum is not int",
-								minRef);
-				} else if (config.getValue().getLiterals().get(0) instanceof RealLiteral) {
-					if (!(min instanceof RealLiteral))
-						error("incompatible datatype: maximum is not real",
-								minRef);
-				}
+			if (primitive.getType() == LiteralType.INT) {
+				if (!(min instanceof IntLiteral))
+					error("incompatible datatype: maximum is not int", minRef);
+			} else if (primitive.getType() == LiteralType.REAL) {
+				if (!(min instanceof RealLiteral))
+					error("incompatible datatype: maximum is not real", minRef);
 			}
 			// check room default if config default is not set
 			String defaultValue = config.getAttribute()
@@ -411,16 +425,12 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		LiteralType type = primitive.getType();
 
 		if (type == LiteralType.INT || type == LiteralType.REAL) {
-			if (config.getValue() != null) {
-				if (config.getValue().getLiterals().get(0) instanceof IntLiteral) {
-					if (!(max instanceof IntLiteral))
-						error("incompatible datatype: maximum is not int",
-								maxRef);
-				} else if (config.getValue().getLiterals().get(0) instanceof RealLiteral) {
-					if (!(max instanceof RealLiteral))
-						error("incompatible datatype: maximum is not real",
-								maxRef);
-				}
+			if (primitive.getType() == LiteralType.INT) {
+				if (!(max instanceof IntLiteral))
+					error("incompatible datatype: maximum is not int", maxRef);
+			} else if (primitive.getType() == LiteralType.REAL) {
+				if (!(max instanceof RealLiteral))
+					error("incompatible datatype: maximum is not real", maxRef);
 			}
 			// check room default if config default is not set
 			String defaultValue = config.getAttribute()

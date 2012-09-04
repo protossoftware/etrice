@@ -29,6 +29,9 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			// manual test
 			Attribute blockMe : int32
 			Attribute blocker : boolean
+			// not explicit test
+			Attribute dc_dump : Dyn_DC1
+			Attribute int_dump : int32
 		}
 		Behavior {
 			StateMachine {
@@ -38,6 +41,11 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 						<test : Conj_DynConfigPort>
 					}
 					action {
+						// write without test
+						"Dyn_DC1 tmp = new Dyn_DC1(123, new long[]{1000}, new Dyn_DC2(0.0e-100, \"dummy out\".toCharArray()));"
+						"setAndWriteDc_dump(tmp);"
+						"setAndWriteInt_dump(888);"
+						// read test
 						"if(blocker)getBlockMeLock().forbidUpdate(); else getBlockMeLock().allowUpdate();"
 						"int testValue = 0;"
 						"if(int_i != 401 || getDc_i().getLong_array_i()[0] != 403)"

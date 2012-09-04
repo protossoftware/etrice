@@ -127,8 +127,7 @@ class JavaExtensions implements ILanguageExtension {
 			case "double":
 				return value+"d"
 			case "char":{
-				var string = String::valueOf(value)
-				if(string.length == 1)
+				if(value.length == 1)
 					return "'"+value+"'"
 				else
 					return value.toCharArrayExpr

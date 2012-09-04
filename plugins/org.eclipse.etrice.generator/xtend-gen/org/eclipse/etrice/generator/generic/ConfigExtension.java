@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -96,40 +97,57 @@ public class ConfigExtension {
   
   public ActorClassConfig getActorClassConfig(final ActorInstanceConfig ai) {
     ActorClass _get = ConfigHelper.aiConf2acMap.get(ai);
-    return ConfigHelper.ac2acConfMap.get(_get);
+    ActorClassConfig _get_1 = ConfigHelper.ac2acConfMap.get(_get);
+    return _get_1;
   }
   
   public String getInitValueLiteral(final Attribute a) {
-    String result = a.getDefaultValueLiteral();
     String[] configValues = this.getConfigClassValues(a);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(configValues, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      RefableType _refType = a.getRefType();
-      DataType _type = _refType.getType();
-      _and = (_notEquals && (_type instanceof PrimitiveType));
-    }
-    if (_and) {
-      RefableType _refType_1 = a.getRefType();
-      DataType _type_1 = _refType_1.getType();
-      PrimitiveType type = ((PrimitiveType) _type_1);
-      int _size = a.getSize();
-      final String[] _converted_configValues = (String[])configValues;
-      int _size_1 = ((List<String>)Conversions.doWrapArray(_converted_configValues)).size();
-      boolean _notEquals_1 = (_size != _size_1);
-      if (_notEquals_1) {
-        final String[] _converted_configValues_1 = (String[])configValues;
-        String _get = ((List<String>)Conversions.doWrapArray(_converted_configValues_1)).get(0);
-        String _valueLiteral = this.languageExt.toValueLiteral(type, _get);
-        result = _valueLiteral;
-      } else {
-        String _arrayValueLiteral = this.toArrayValueLiteral(type, configValues);
-        result = _arrayValueLiteral;
+    RefableType _refType = a.getRefType();
+    DataType type = _refType.getType();
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      boolean _equals = Objects.equal(configValues, null);
+      if (_equals) {
+        _matched=true;
+        _switchResult = null;
       }
     }
-    return result;
+    if (!_matched) {
+      if (type instanceof PrimitiveType) {
+        final PrimitiveType _primitiveType = (PrimitiveType)type;
+        int _size = a.getSize();
+        final String[] _converted_configValues = (String[])configValues;
+        int _size_1 = ((List<String>)Conversions.doWrapArray(_converted_configValues)).size();
+        boolean _notEquals = (_size != _size_1);
+        if (_notEquals) {
+          _matched=true;
+          final String[] _converted_configValues_1 = (String[])configValues;
+          String _get = ((List<String>)Conversions.doWrapArray(_converted_configValues_1)).get(0);
+          String _valueLiteral = this.languageExt.toValueLiteral(_primitiveType, _get);
+          _switchResult = _valueLiteral;
+        }
+      }
+    }
+    if (!_matched) {
+      if (type instanceof PrimitiveType) {
+        final PrimitiveType _primitiveType = (PrimitiveType)type;
+        _matched=true;
+        String _arrayValueLiteral = this.toArrayValueLiteral(_primitiveType, configValues);
+        _switchResult = _arrayValueLiteral;
+      }
+    }
+    String configValue = _switchResult;
+    String _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(configValue, null));
+    if (_notEquals) {
+      _xifexpression = configValue;
+    } else {
+      String _defaultValueLiteral = a.getDefaultValueLiteral();
+      _xifexpression = _defaultValueLiteral;
+    }
+    return _xifexpression;
   }
   
   public String[] getConfigClassValues(final Attribute attr) {
@@ -184,35 +202,36 @@ public class ConfigExtension {
   
   public String[] getValues(final LiteralArray literalArray) {
     ArrayList<String> _arrayList = new ArrayList<String>();
-    ArrayList<String> values = _arrayList;
-    EList<Literal> literals = literalArray.getLiterals();
-    Literal _get = literals.get(0);
-    if ((_get instanceof StringLiteral)) {
-      Literal _get_1 = literals.get(0);
-      String _value = this.getValue(_get_1);
-      values.add(_value);
+    final ArrayList<String> result = _arrayList;
+    EList<Literal> _literals = literalArray.getLiterals();
+    final Procedure1<Literal> _function = new Procedure1<Literal>() {
+        public void apply(final Literal l) {
+          String _value = ConfigExtension.this.getValue(l);
+          result.add(_value);
+        }
+      };
+    IterableExtensions.<Literal>forEach(_literals, _function);
+    ArrayList<String> _xifexpression = null;
+    boolean _isEmpty = result.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      _xifexpression = result;
     } else {
-      EList<Literal> _literals = literalArray.getLiterals();
-      for (final Literal l : _literals) {
-        String _value_1 = this.getValue(l);
-        values.add(_value_1);
-      }
+      _xifexpression = null;
     }
-    boolean _isEmpty = values.isEmpty();
-    if (_isEmpty) {
-      return null;
-    }
-    return ((String[])Conversions.unwrapArray(values, String.class));
+    return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
   
   public String getValue(final Literal literal) {
+    String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (literal instanceof BooleanLiteral) {
         final BooleanLiteral _booleanLiteral = (BooleanLiteral)literal;
         _matched=true;
         boolean _isIsTrue = _booleanLiteral.isIsTrue();
-        return String.valueOf(_isIsTrue);
+        String _valueOf = String.valueOf(_isIsTrue);
+        _switchResult = _valueOf;
       }
     }
     if (!_matched) {
@@ -220,7 +239,8 @@ public class ConfigExtension {
         final IntLiteral _intLiteral = (IntLiteral)literal;
         _matched=true;
         long _value = _intLiteral.getValue();
-        return String.valueOf(_value);
+        String _valueOf = String.valueOf(_value);
+        _switchResult = _valueOf;
       }
     }
     if (!_matched) {
@@ -228,7 +248,8 @@ public class ConfigExtension {
         final RealLiteral _realLiteral = (RealLiteral)literal;
         _matched=true;
         double _value = _realLiteral.getValue();
-        return String.valueOf(_value);
+        String _valueOf = String.valueOf(_value);
+        _switchResult = _valueOf;
       }
     }
     if (!_matched) {
@@ -236,37 +257,41 @@ public class ConfigExtension {
         final StringLiteral _stringLiteral = (StringLiteral)literal;
         _matched=true;
         String _value = _stringLiteral.getValue();
-        return String.valueOf(_value);
+        String _valueOf = String.valueOf(_value);
+        _switchResult = _valueOf;
       }
     }
-    return null;
+    return _switchResult;
   }
   
   public List<AttrInstanceConfig> getConfigAttributes(final ActorInstance ai) {
-    ArrayList<AttrInstanceConfig> _arrayList = new ArrayList<AttrInstanceConfig>();
-    ArrayList<AttrInstanceConfig> attrConfigs = _arrayList;
     String _path = ai.getPath();
     ActorInstanceConfig config = ConfigHelper.path2aiConfMap.get(_path);
+    List<AttrInstanceConfig> _xifexpression = null;
     boolean _notEquals = (!Objects.equal(config, null));
     if (_notEquals) {
-      return config.getAttributes();
+      EList<AttrInstanceConfig> _attributes = config.getAttributes();
+      _xifexpression = _attributes;
+    } else {
+      ArrayList<AttrInstanceConfig> _arrayList = new ArrayList<AttrInstanceConfig>();
+      _xifexpression = _arrayList;
     }
-    return attrConfigs;
+    return _xifexpression;
   }
   
   public List<PortInstanceConfig> getConfigPorts(final ActorInstance ai) {
     ArrayList<PortInstanceConfig> _arrayList = new ArrayList<PortInstanceConfig>();
-    ArrayList<PortInstanceConfig> portConfigs = _arrayList;
+    final ArrayList<PortInstanceConfig> result = _arrayList;
     String _path = ai.getPath();
     ActorInstanceConfig config = ConfigHelper.path2aiConfMap.get(_path);
-    boolean _notEquals = (!Objects.equal(config, null));
-    if (_notEquals) {
-      EList<PortInstanceConfig> _ports = config.getPorts();
-      for (final PortInstanceConfig portConfig : _ports) {
-        portConfigs.add(portConfig);
-      }
-    }
-    return portConfigs;
+    EList<PortInstanceConfig> _ports = config==null?(EList<PortInstanceConfig>)null:config.getPorts();
+    final Procedure1<PortInstanceConfig> _function = new Procedure1<PortInstanceConfig>() {
+        public void apply(final PortInstanceConfig portConf) {
+          result.add(portConf);
+        }
+      };
+    if (_ports!=null) IterableExtensions.<PortInstanceConfig>forEach(_ports, _function);
+    return result;
   }
   
   public boolean hasVariableService(final SubSystemClass ssc) {
@@ -305,44 +330,43 @@ public class ConfigExtension {
     return result;
   }
   
-  public List<AttrInstanceConfig> getAttrDynConfigs(final SubSystemClass ssc, final boolean read, final boolean write) {
-    List<AttrInstanceConfig> configs = ConfigHelper.ssc2attrInstConfMap.get(ssc);
-    int _size = configs.size();
-    ArrayList<AttrInstanceConfig> _arrayList = new ArrayList<AttrInstanceConfig>(_size);
-    final ArrayList<AttrInstanceConfig> result = _arrayList;
-    boolean _notEquals = (!Objects.equal(configs, null));
-    if (_notEquals) {
-      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
-          public void apply(final AttrInstanceConfig c) {
+  public Iterable<AttrInstanceConfig> getAttrDynConfigs(final SubSystemClass ssc, final boolean read, final boolean write) {
+    List<AttrInstanceConfig> _get = ConfigHelper.ssc2attrInstConfMap.get(ssc);
+    final Function1<AttrInstanceConfig,Boolean> _function = new Function1<AttrInstanceConfig,Boolean>() {
+        public Boolean apply(final AttrInstanceConfig c) {
+          boolean _and = false;
+          boolean _isDynConfig = c.isDynConfig();
+          if (!_isDynConfig) {
+            _and = false;
+          } else {
             boolean _or = false;
-            boolean _and = false;
+            boolean _and_1 = false;
             if (!read) {
-              _and = false;
+              _and_1 = false;
             } else {
               boolean _isReadOnly = c.isReadOnly();
-              _and = (read && _isReadOnly);
+              _and_1 = (read && _isReadOnly);
             }
-            if (_and) {
+            if (_and_1) {
               _or = true;
             } else {
-              boolean _and_1 = false;
+              boolean _and_2 = false;
               if (!write) {
-                _and_1 = false;
+                _and_2 = false;
               } else {
                 boolean _isReadOnly_1 = c.isReadOnly();
                 boolean _not = (!_isReadOnly_1);
-                _and_1 = (write && _not);
+                _and_2 = (write && _not);
               }
-              _or = (_and || _and_1);
+              _or = (_and_1 || _and_2);
             }
-            if (_or) {
-              result.add(c);
-            }
+            _and = (_isDynConfig && _or);
           }
-        };
-      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
-    }
-    return result;
+          return Boolean.valueOf(_and);
+        }
+      };
+    Iterable<AttrInstanceConfig> _filter = IterableExtensions.<AttrInstanceConfig>filter(_get, _function);
+    return _filter;
   }
   
   public List<String> getPath(final AttrConfig config, final boolean ss, final boolean actor, final boolean dc, final boolean attr) {
@@ -398,51 +422,62 @@ public class ConfigExtension {
     return result;
   }
   
-  public String toPath(final List<String> path, final String pathDelim) {
+  public String toPath(final Iterable<String> path, final String pathDelim) {
     String _path = ConfigHelper.toPath(path, pathDelim);
     return _path;
   }
   
-  public List<Attribute> getDynConfigAttributes(final ActorClass ac, final boolean read, final boolean write) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    ArrayList<Attribute> attributes = _arrayList;
-    List<ActorInstanceConfig> instanceConfigs = ConfigHelper.ac2aiConfMap.get(ac);
-    boolean _notEquals = (!Objects.equal(instanceConfigs, null));
-    if (_notEquals) {
-      for (final ActorInstanceConfig instanceConfig : instanceConfigs) {
-        EList<AttrInstanceConfig> _attributes = instanceConfig.getAttributes();
-        for (final AttrInstanceConfig attrConfig : _attributes) {
-          boolean _isDynConfig = attrConfig.isDynConfig();
-          if (_isDynConfig) {
-            boolean _or = false;
-            boolean _and = false;
-            if (!read) {
-              _and = false;
-            } else {
-              boolean _isReadOnly = attrConfig.isReadOnly();
-              _and = (read && _isReadOnly);
-            }
-            if (_and) {
-              _or = true;
-            } else {
-              boolean _and_1 = false;
-              if (!write) {
-                _and_1 = false;
-              } else {
-                boolean _isReadOnly_1 = attrConfig.isReadOnly();
-                boolean _not = (!_isReadOnly_1);
-                _and_1 = (write && _not);
+  public HashSet<Attribute> getDynConfigAttributes(final ActorClass ac, final boolean read, final boolean write) {
+    HashSet<Attribute> _hashSet = new HashSet<Attribute>();
+    final HashSet<Attribute> result = _hashSet;
+    List<ActorInstanceConfig> _get = ConfigHelper.ac2aiConfMap.get(ac);
+    final Procedure1<ActorInstanceConfig> _function = new Procedure1<ActorInstanceConfig>() {
+        public void apply(final ActorInstanceConfig aiConf) {
+          EList<AttrInstanceConfig> _attributes = aiConf.getAttributes();
+          final Function1<AttrInstanceConfig,Boolean> _function = new Function1<AttrInstanceConfig,Boolean>() {
+              public Boolean apply(final AttrInstanceConfig c) {
+                boolean _and = false;
+                boolean _isDynConfig = c.isDynConfig();
+                if (!_isDynConfig) {
+                  _and = false;
+                } else {
+                  boolean _or = false;
+                  boolean _and_1 = false;
+                  if (!read) {
+                    _and_1 = false;
+                  } else {
+                    boolean _isReadOnly = c.isReadOnly();
+                    _and_1 = (read && _isReadOnly);
+                  }
+                  if (_and_1) {
+                    _or = true;
+                  } else {
+                    boolean _and_2 = false;
+                    if (!write) {
+                      _and_2 = false;
+                    } else {
+                      boolean _isReadOnly_1 = c.isReadOnly();
+                      boolean _not = (!_isReadOnly_1);
+                      _and_2 = (write && _not);
+                    }
+                    _or = (_and_1 || _and_2);
+                  }
+                  _and = (_isDynConfig && _or);
+                }
+                return Boolean.valueOf(_and);
               }
-              _or = (_and || _and_1);
-            }
-            if (_or) {
-              Attribute _attribute = attrConfig.getAttribute();
-              attributes.add(_attribute);
-            }
-          }
+            };
+          Iterable<AttrInstanceConfig> _filter = IterableExtensions.<AttrInstanceConfig>filter(_attributes, _function);
+          final Procedure1<AttrInstanceConfig> _function_1 = new Procedure1<AttrInstanceConfig>() {
+              public void apply(final AttrInstanceConfig dynConf) {
+                Attribute _attribute = dynConf.getAttribute();
+                result.add(_attribute);
+              }
+            };
+          IterableExtensions.<AttrInstanceConfig>forEach(_filter, _function_1);
         }
-      }
-    }
-    return attributes;
+      };
+    if (_get!=null) IterableExtensions.<ActorInstanceConfig>forEach(_get, _function);
+    return result;
   }
 }

@@ -216,8 +216,7 @@ public class JavaExtensions implements ILanguageExtension {
     if (!_matched) {
       if (Objects.equal(_switchValue,"char")) {
         _matched=true;
-        String string = String.valueOf(value);
-        int _length = string.length();
+        int _length = value.length();
         boolean _equals = (_length == 1);
         if (_equals) {
           String _plus = ("\'" + value);

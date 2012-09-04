@@ -42,7 +42,7 @@ public class ConfigSourceFile implements IConfigSource {
 	}
 
 	@Override
-	public int getPolling() {
+	public int getPollingTimer() {
 		return 0;
 	}
 

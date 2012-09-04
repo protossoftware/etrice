@@ -60,7 +60,7 @@ class ConfigGenAddon {
 	
 	def public genDynConfigGetterSetter(ActorClass ac){'''
 		«FOR a : ac.getDynConfigAttributes(true, false)»
-			public «a.refType.type.typeName» get«a.name.toFirstUpper»(){
+			public «a.refType.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
 				if(lock_«a.name» == null)
 					return «a.name»;
 				else
@@ -68,7 +68,7 @@ class ConfigGenAddon {
 						return «a.name»;
 					}
 			}
-			public void set«a.name.toFirstUpper»(«a.refType.type.typeName» «a.name»){
+			public void set«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
 				if(lock_«a.name» == null)
 					this.«a.name» = «a.name»;
 				else
@@ -81,7 +81,7 @@ class ConfigGenAddon {
 			}	
 		«ENDFOR»
 		«FOR a : ac.getDynConfigAttributes(false, true)»
-			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName» «a.name»){
+			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
 					set«a.name.toFirstUpper»(«a.name»);
 					variableService.write(this.getInstancePath()+"/«a.name»", «a.name»);
 			}

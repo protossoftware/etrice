@@ -43,7 +43,6 @@ public class ConfigText_Top_ac extends ActorClassBase {
 	}
 
 	
-	//--------------------- attributes getter and setter
 	//--------------------- attribute setters and getters
 	
 	

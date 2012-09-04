@@ -12,46 +12,44 @@
 
 package org.eclipse.etrice.runtime.java.config;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 public abstract class VariableService {
 
-	private final static String POLLING_KEY = "polling_time";
-	private final static int defaultPolling = 5000;
+	private final static String POLLINGTIMER_KEY = "polling_timer[ms]";
+	private final static int defaultPollingTimer = 5000;
 	private final boolean logging = true;
 
-	private volatile int polling;
+	private volatile int pollingTimer;
 	private PollingThread thread;
+	protected Map<String, Object> writeTasks;
+	private Map<String, Object> diffMap;
 
-	protected ConcurrentHashMap<String, Object> writeTasks = new ConcurrentHashMap<String, Object>();
+	private IConfigSource source;
 
-	// ----------- generated -----------
-	protected IConfigSource source;
-
-	protected abstract void getInstances();
-
-	protected abstract void setAttributeValues(Map<String, Object> values);
-
-	public abstract void write(String id, Object object);
-
-	/**
-	 * called on init
-	 */
-	protected abstract Map<String, Object> getAttributeValues();
+	public VariableService(IConfigSource source) {
+		this.source = source;
+		diffMap = new HashMap<String, Object>();
+		writeTasks = new HashMap<String, Object>();
+	}
 
 	public void init() {
-		getInstances();
+		initInstances();
 		Map<String, Object> initalValues = source.readValues();
-		if (setPolling(initalValues.get(POLLING_KEY))) {
-		} else if (source.getPolling() > 0)
-			this.polling = source.getPolling();
+		if (setPolling(initalValues.get(POLLINGTIMER_KEY))) {
+		} else if (getPollingTimerUser() > 0)
+			this.pollingTimer = getPollingTimerUser();
+		else if (source.getPollingTimer() > 0)
+			this.pollingTimer = source.getPollingTimer();
 		else
-			this.polling = defaultPolling;
+			this.pollingTimer = defaultPollingTimer;
 		setAttributeValues(initalValues);
 		Map<String, Object> initValues = getAttributeValues();
-		initValues.put(POLLING_KEY, polling);
+		initValues.put(POLLINGTIMER_KEY, pollingTimer);
 		source.createConfig(initValues);
 
 		start();
@@ -73,6 +71,35 @@ public abstract class VariableService {
 		thread.interrupt();
 	}
 
+	public void write(String id, Object object) {
+		if (PRIMITIVE_TYPES.contains(object.getClass()))
+			addWriteTask(id, object);
+		else if (object.getClass().isArray()) {
+			if (object instanceof boolean[])
+				addWriteTask(id, toObjectArray((boolean[]) object));
+			else if (object instanceof byte[])
+				addWriteTask(id, toObjectArray((byte[]) object));
+			else if (object instanceof short[])
+				addWriteTask(id, toObjectArray((short[]) object));
+			else if (object instanceof int[])
+				addWriteTask(id, toObjectArray((int[]) object));
+			else if (object instanceof long[])
+				addWriteTask(id, toObjectArray((long[]) object));
+			else if (object instanceof float[])
+				addWriteTask(id, toObjectArray((float[]) object));
+			else if (object instanceof double[])
+				addWriteTask(id, toObjectArray((double[]) object));
+			else if (object instanceof char[])
+				addWriteTask(id, toObjectArray((char[]) object));
+			else if (object instanceof String[])
+				addWriteTask(id, object);
+		} else {
+			Map<String, Object> writeTasks = new HashMap<String, Object>();
+			writeDataClass(id, object, writeTasks);
+			addWriteTasks(writeTasks);
+		}
+	}
+
 	private class PollingThread extends Thread {
 
 		private boolean stop = false;
@@ -92,7 +119,7 @@ public abstract class VariableService {
 				diff = (int) (System.currentTimeMillis() - time);
 
 				try {
-					sleep(polling - ((diff > polling) ? 0 : diff));
+					sleep(pollingTimer - ((diff > pollingTimer) ? 0 : diff));
 				} catch (InterruptedException e) {
 				}
 			}
@@ -101,7 +128,7 @@ public abstract class VariableService {
 		}
 
 		private void apply(Map<String, Object> values) {
-			Object pollingValue = values.remove(POLLING_KEY);
+			Object pollingValue = values.remove(POLLINGTIMER_KEY);
 			setPolling(pollingValue);
 			if (values.isEmpty())
 				return;
@@ -109,12 +136,13 @@ public abstract class VariableService {
 		}
 
 		private void write() {
-			Map<String, Object> writeMap = new HashMap<String, Object>();
+			HashMap<String, Object> writeMap = new HashMap<String, Object>();
 			synchronized (writeTasks) {
-				for (String key : writeTasks.keySet())
-					writeMap.put(key, writeTasks.remove(key));
+				writeMap.putAll(writeTasks);
+				writeTasks.clear();
 			}
-			source.writeValues(writeMap);
+			if (!writeMap.isEmpty())
+				source.writeValues(writeMap);
 		}
 	}
 
@@ -123,7 +151,7 @@ public abstract class VariableService {
 			try {
 				int result = ensureInt(value);
 				if (result > 0) {
-					polling = result;
+					pollingTimer = result;
 					return true;
 				}
 			} catch (IllegalArgumentException e) {
@@ -133,6 +161,36 @@ public abstract class VariableService {
 
 		return false;
 	}
+
+	protected Map<String, Object> getDiffMap() {
+		return diffMap;
+	}
+
+	protected void addWriteTask(String id, Object value) {
+		synchronized (writeTasks) {
+			writeTasks.put(id, value);
+		}
+	}
+
+	protected void addWriteTasks(Map<String, Object> values) {
+		synchronized (writeTasks) {
+			writeTasks.putAll(values);
+		}
+	}
+
+	protected abstract void initInstances();
+
+	protected abstract void setAttributeValues(Map<String, Object> values);
+
+	protected abstract int getPollingTimerUser();
+
+	/**
+	 * called on init
+	 */
+	protected abstract Map<String, Object> getAttributeValues();
+
+	protected abstract void writeDataClass(String id, Object dcObject,
+			Map<String, Object> writeMap);
 
 	protected void checkMinMax(int value, Integer min, Integer max)
 			throws IllegalArgumentException {
@@ -499,5 +557,11 @@ public abstract class VariableService {
 					+ "] Warning: " + message
 					+ ((id != null) ? "   (" + id + ")" : ""));
 	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static final Set<Class> PRIMITIVE_TYPES = new HashSet<Class>(
+			Arrays.asList(Boolean.class, Character.class, String.class,
+					Byte.class, Short.class, Integer.class, Long.class,
+					Float.class, Double.class));
 
 }

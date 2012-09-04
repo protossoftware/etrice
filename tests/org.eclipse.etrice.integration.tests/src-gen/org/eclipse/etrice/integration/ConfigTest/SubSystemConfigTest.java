@@ -156,6 +156,11 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 			inst.getDc_i().getDc_i().setDouble_i(0.304d);
 			inst.setBlockMe(0);
 			inst.setBlocker(false);
+			inst.getDc_dump().getDc_i().setChar_i("dummy".toCharArray());
+			inst.getDc_dump().getDc_i().setDouble_i(0.0d);
+			inst.getDc_dump().setLong_array_i(new long[]{1000L});
+			inst.getDc_dump().setInt_i(123);
+			inst.setInt_dump(3);
 		}
 
 		// create the subsystem system port	

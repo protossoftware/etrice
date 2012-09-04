@@ -1,8 +1,13 @@
 /SubSystemConfigTest/top/testee2/blockMe=0
 /SubSystemConfigTest/top/testee2/blocker=false
+/SubSystemConfigTest/top/testee2/dc_dump/dc_i/char_i="dummy out"
+/SubSystemConfigTest/top/testee2/dc_dump/dc_i/double_i=0.0
+/SubSystemConfigTest/top/testee2/dc_dump/int_i=123
+/SubSystemConfigTest/top/testee2/dc_dump/long_array_i={ 1000 }
 /SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i="instance4"
 /SubSystemConfigTest/top/testee2/dc_i/dc_i/double_i=0.404
 /SubSystemConfigTest/top/testee2/dc_i/int_i=402
 /SubSystemConfigTest/top/testee2/dc_i/long_array_i={ 403 }
+/SubSystemConfigTest/top/testee2/int_dump=888
 /SubSystemConfigTest/top/testee2/int_i=401
-polling_time=5000
+polling_timer[ms]=4000
