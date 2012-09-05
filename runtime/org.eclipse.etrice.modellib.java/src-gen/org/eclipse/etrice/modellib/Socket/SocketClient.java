@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 import org.eclipse.etrice.modellib.Socket.PSocket.*;
