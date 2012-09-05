@@ -254,6 +254,10 @@ void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const c
 	}
 }
 
+etBool etUnit_isSuccess(etInt16 id) {
+	return etUnit_testcaseSuccess[id];
+}
+
 /* private functions */
 
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line) {
