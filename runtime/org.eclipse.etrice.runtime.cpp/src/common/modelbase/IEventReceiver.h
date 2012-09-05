@@ -14,7 +14,7 @@
 namespace etRuntime {
 class InterfaceItemBase;
 
-class IEventReceiver : public IRTObject{
+class IEventReceiver {
 public:
 	IEventReceiver();
 	virtual ~IEventReceiver();

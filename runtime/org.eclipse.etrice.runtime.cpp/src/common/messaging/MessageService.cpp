@@ -12,6 +12,7 @@ namespace etRuntime {
 MessageService::MessageService(IRTObject* parent, Address addr, std::string name, int priority)
 	:	// super("MessageService "+name),
 		IMessageReceiver(),
+		IRTObject(),
 		m_parent(parent),
 		m_name(name),
 		m_running(false),
@@ -49,7 +50,7 @@ void MessageService::receive(Message* msg) {
 	}
 }
 
-std::string MessageService::getInstancePath() {
+std::string MessageService::getInstancePath() const {
 	std::string path = PATH_DELIM + m_name;
 
 	if (m_parent != 0)
@@ -58,7 +59,7 @@ std::string MessageService::getInstancePath() {
 	return path;
 }
 
-std::string MessageService::getInstancePathName() {
+std::string MessageService::getInstancePathName() const {
 	std::string path = PATHNAME_DELIM + m_name;
 
 	if (m_parent != 0)

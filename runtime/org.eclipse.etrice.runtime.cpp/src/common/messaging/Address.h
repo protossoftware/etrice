@@ -17,6 +17,7 @@ public:
 	Address(int nodeID, int threadID, int objectID);
 	Address(const Address & right);
 	Address & operator = (Address s);
+	bool operator< (const Address& right) const;
 	~Address();
 
 	std::string toString();

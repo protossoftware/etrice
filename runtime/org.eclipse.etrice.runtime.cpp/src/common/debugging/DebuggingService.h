@@ -37,15 +37,15 @@ public:
 	void addMessageSyncCall(Address source, Address target, std::string msg);
 	void addMessageSyncReturn(Address source, Address target, std::string msg);
 	void addActorState(const ActorClassBase& actor, std::string state);
-	void addPortInstance(const PortBase& port);
-	const MSCLogger& getSyncLogger();
-	const MSCLogger& getAsyncLogger();
+	void addPortInstance(PortBase& port);
+	MSCLogger& getSyncLogger();
+	MSCLogger& getAsyncLogger();
 
 private:
 
 	MSCLogger asyncLogger;
 	MSCLogger syncLogger;
-	std::map<Address, PortBase> portInstances;
+	std::map<Address, PortBase*> portInstances;
 
 	DebuggingService();
 	DebuggingService(const DebuggingService& right);

@@ -15,12 +15,14 @@ namespace etRuntime {
 class IRTObject {
 
 public:
+	virtual ~IRTObject() {};
+
 	static const char PATH_DELIM = '/';
 	static const char PATHNAME_DELIM = '_';
 	static const std::string NO_NAME;
 
-	std::string getInstancePath();
-	std::string getInstancePathName();
+	virtual std::string getInstancePath() const = 0;
+	virtual std::string getInstancePathName() const = 0;
 };
 
 }

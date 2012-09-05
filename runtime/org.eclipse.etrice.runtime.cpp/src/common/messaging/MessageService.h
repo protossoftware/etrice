@@ -17,31 +17,30 @@ namespace etRuntime {
 
 //TODO: implementation missing yet for threads
 
-class MessageService: public IMessageReceiver {
+class MessageService: public IMessageReceiver, public IRTObject {
 public:
+	MessageService(IRTObject* parent, Address addr, std::string name, int priority = 0);
 	virtual ~MessageService();
 
-	MessageService(IRTObject* parent, Address addr, std::string name, int priority = 0);
-
-	Address getAddress() {	return m_address; }	;
+	Address getAddress() const {	return m_address; }	;
 
 	void run();
 
 	//TODO: synchronized
+	void terminate();
+	//TODO: synchronized
 	void receive(Message* msg);
 	//TODO: synchronized
-	MessageDispatcher& getMessageDispatcher() {	return m_messageDispatcher; }
-	std::string getInstancePath();
-	std::string getInstancePathName();
-
-	//TODO: synchronized
-	void terminate();
+	virtual MessageDispatcher& getMessageDispatcher() {	return m_messageDispatcher; }
+	virtual std::string getInstancePath() const ;
+	virtual std::string getInstancePathName() const ;
+	virtual bool isMsgService() const { return true;};
 
 	// protected methods for sole use by test cases
 protected:
 	MessageSeQueue& getMessageQueue() {	return m_messageQueue;	}
 	//TODO: synchronized
-	long getLastMessageTimestamp() { return m_lastMessageTimestamp;	}
+	long getLastMessageTimestamp() const { return m_lastMessageTimestamp;	}
 
 private:
 	//TODO: synchronized

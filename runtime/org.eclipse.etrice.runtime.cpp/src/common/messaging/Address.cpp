@@ -27,6 +27,20 @@ Address & Address::operator = (Address s) 	{
    return *this;
 }
 
+bool Address::operator< (const Address& right) const {
+	if (m_nodeID == right.m_nodeID) {
+		if (m_threadID == right.m_threadID) {
+			return (m_objectID < right.m_objectID);
+		}
+		else {
+			return (m_threadID < right.m_threadID);
+		}
+	}
+	else {
+		return (m_nodeID < right.m_nodeID);
+	}
+}
+
 Address::~Address() {
 }
 

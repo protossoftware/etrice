@@ -22,7 +22,7 @@ public:
 	MessageDispatcher(IRTObject* parent, Address addr, std::string name);
 	void addMessageReceiver(IMessageReceiver& receiver);
 	void receive(Message* msg);
-	Address getAddress() { return m_address; };
+	Address getAddress() const { return m_address; };
 
 private:
 	std::map<int, IMessageReceiver*> m_local_map;

@@ -12,6 +12,7 @@
 namespace etRuntime {
 
 class SubSystemClassBase;
+class MessageServiceController;
 
 
 class RTServices {

@@ -20,12 +20,13 @@ class IEventReceiver;
 
 class InterfaceItemBase : public AbstractMessageReceiver{
 public:
-	InterfaceItemBase (const IEventReceiver& actor, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
+	InterfaceItemBase (IEventReceiver& actor, IRTObject* parent, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
 	virtual ~InterfaceItemBase();
 
 	int getIdx() const  { return m_idx; } ;
-	IEventReceiver* getActor() {	return static_cast<IEventReceiver*>(getParent()); };
-	int getLocalId() {return m_localId; };
+	IEventReceiver& getActor() {	return *m_actor; };
+	IRTObject& getActorRTObject() {	return *this; };
+	int getLocalId() const {return m_localId; };
 
 	void setMsgReceiver(IMessageReceiver& msgReceiver) {	m_ownMsgReceiver = &msgReceiver; };
 
@@ -35,7 +36,6 @@ protected:
 	Address getPeerAddress() const { return m_peerAddress; };
 
 private:
-	InterfaceItemBase();
 
 	int m_idx;
 	int m_localId;
@@ -43,6 +43,10 @@ private:
 	Address m_peerAddress;
 	IMessageReceiver* m_ownMsgReceiver;
 	IMessageReceiver* m_peerMsgReceiver;
+	IEventReceiver* m_actor;
+
+	InterfaceItemBase();
+
 };
 
 } /* namespace etRuntime */

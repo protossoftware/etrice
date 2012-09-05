@@ -6,6 +6,7 @@
  */
 
 #include "DebuggingService.h"
+#include "common/modelbase/ActorClassBase.h"
 
 namespace etRuntime {
 
@@ -24,22 +25,26 @@ DebuggingService::~DebuggingService() {
 
 void DebuggingService::addMessageAsyncOut(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageAsyncOut(portInstances[source].getActor().getInstancePath(), portInstances[target].getActor().getInstancePath(), msg);
+	asyncLogger.addMessageAsyncOut(portInstances.at(source)->getActorRTObject().getInstancePath(),
+								   portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
 }
 
 void DebuggingService::addMessageAsyncIn(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageAsyncIn(portInstances[source].getActor().getInstancePath(), portInstances[target].getActor().getInstancePath(), msg);
+	asyncLogger.addMessageAsyncIn(portInstances.at(source)->getActorRTObject().getInstancePath(),
+								  portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
 }
 
 void DebuggingService::addMessageSyncCall(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageSyncCall(portInstances[source].getActor().getInstancePath(), portInstances[target].getActor().getInstancePath(), msg);
+	asyncLogger.addMessageSyncCall(portInstances.at(source)->getActorRTObject().getInstancePath(),
+								   portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
 }
 
 void DebuggingService::addMessageSyncReturn(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageSyncReturn(portInstances[source].getActor().getInstancePath(), portInstances[target].getActor().getInstancePath(), msg);
+	asyncLogger.addMessageSyncReturn(portInstances.at(source)->getActorRTObject().getInstancePath(),
+		                             portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
 }
 
 void DebuggingService::addActorState(const ActorClassBase& actor,
@@ -47,15 +52,15 @@ void DebuggingService::addActorState(const ActorClassBase& actor,
 	asyncLogger.addActorState(actor.getInstancePath(), state);
 }
 
-void DebuggingService::addPortInstance(const PortBase& port) {
-	portInstances[port.getAddress()] = port;
+void DebuggingService::addPortInstance(PortBase& port) {
+	portInstances.at(port.getAddress()) = &port;
 }
 
-const MSCLogger& DebuggingService::getSyncLogger() {
+MSCLogger& DebuggingService::getSyncLogger() {
 	return syncLogger;
 }
 
-const MSCLogger& DebuggingService::getAsyncLogger() {
+MSCLogger& DebuggingService::getAsyncLogger() {
 	return asyncLogger;
 }
 

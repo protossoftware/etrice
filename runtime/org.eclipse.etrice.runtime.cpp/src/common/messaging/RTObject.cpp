@@ -33,7 +33,7 @@ RTObject::~RTObject() {
 	m_parent = 0;
 }
 
-std::string RTObject::getInstancePath() {
+std::string RTObject::getInstancePath() const{
 	std::string path = PATH_DELIM + m_name;
 
 	if (m_parent != 0)
@@ -42,7 +42,7 @@ std::string RTObject::getInstancePath() {
 	return path;
 }
 
-std::string RTObject::getInstancePathName() {
+std::string RTObject::getInstancePathName() const{
 	std::string path = PATHNAME_DELIM + m_name;
 
 	if (m_parent != 0)
