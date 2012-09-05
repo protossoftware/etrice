@@ -10,6 +10,7 @@
 #include "modelbase/etActor.h"
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
+#include "etUnit/etUnit.h"
 #include "platform/etMemory.h"
 
 #include "PTimer.h"

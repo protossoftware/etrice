@@ -275,6 +275,10 @@ public class EtUnit {
 		}
 	}
 
+	public static boolean etUnit_isSuccess(int id) {
+		return !failed.contains(id);
+	}
+	
 	private static void etUnit_handleExpect(int id, boolean result, String resulttext, String exp, String act) {
 		if (result) {
 			/* nothing to do because no failure */

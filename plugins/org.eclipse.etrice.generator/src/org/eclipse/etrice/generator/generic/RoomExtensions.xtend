@@ -359,9 +359,10 @@ class RoomExtensions {
 
 	def List<State> getLeafStateList(StateGraph sg) {
 		var ArrayList<State> res = new ArrayList<State>()
-		for (s : sg.states) {
-			res.addAll(s.leafStateList)
-		}
+		if (sg!=null)
+			for (s : sg.states) {
+				res.addAll(s.leafStateList)
+			}
 		return res
 	}
 	
