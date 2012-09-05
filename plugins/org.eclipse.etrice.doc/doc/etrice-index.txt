@@ -7,5 +7,6 @@
 020-tutorial-blinky.textile
 025-tutorial-sending-data.textile
 030-tutorial-ped-lights.textile
+032-Setting-up-the-Workspace_C.textile
 
 040-room-concepts.textile

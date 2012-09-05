@@ -1,0 +1,42 @@
+h1. Setting up the Workspace ( C )
+ 
+Before you can start with C, some preconditions must be fulfilled:
+
+- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
+- The CDT-Eclipse plug in must be installed as the C development environment.
+
+Once the CDT is installed, the C runtime and model library must be imported.
+
+The resulting workspace should look like this:
+
+
+!images/032-SetupWorkspaceC01.png!
+
+h2. Testing the environment
+
+To verify the C tool chain you should generate and run the Hello World example program of the CDT.
+ Activate the _C/C++_ perspective. 
+ 
+!images/032-SetupWorkspaceC03.png!
+ 
+From the main menu select _File->New->C Project_.
+ 
+!images/032-SetupWorkspaceC02.png!
+
+Name the Project. Select an _Executable->Hello World ANSI C_ as Project type, _MinGW GCC_ as Tool chain and click _Finish_. 
+ 
+!images/032-SetupWorkspaceC04.png! 
+
+Select the new project and click the build button (or right click the project and select _Build Project_)
+
+!images/032-SetupWorkspaceC05.png!
+
+The binary should be generated. Run the binary as _Local C/C++ Application_
+
+!images/032-SetupWorkspaceC06.png!
+
+Verify the output.
+
+!images/032-SetupWorkspaceC07.png!
+
+Remember these steps. In the following Tutorials these steps will be referenced as _build and run_. 

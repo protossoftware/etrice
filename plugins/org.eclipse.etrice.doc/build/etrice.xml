@@ -746,7 +746,7 @@
 		</section>
 		<section id="Createanewmodelfromscratch2">
 			<title>Create a new model from scratch</title>
-			<para>Remember exercise 
+			<para>Remember the exercise 
 				<emphasis>HelloWorld</emphasis>.
 				Create a new eTrice project and name it 
 				<emphasis>Blinky</emphasis>
@@ -756,7 +756,7 @@
 				<emphasis>org.eclipse.etrice.tutorials/src</emphasis> to your 
 				<emphasis role="bold">src</emphasis> directory 
 				<emphasis>Blinky/src</emphasis>. For this tutorial you must remove the error markers by editing the file 
-				<emphasis>PedestrianLightWndNoTcp.java</emphasis>. Appropriate comments are provided to remove the error marker for this turorial.
+				<emphasis>PedestrianLightWndNoTcp.java</emphasis>. Appropriate comments are provided to remove the error markers for this turorial.
 			</para>
 			<para>Open the 
 				<emphasis>Blinky.room</emphasis> file and copy the following code into the file or use content assist to create the model.
@@ -860,7 +860,7 @@
 			<blockquote>
 				<para></para>
 			</blockquote>
-			<para>Make sure that the path fits to your folder structure.  </para>
+			<para>Make sure that the path fits to your folder structure. The original tutorial code is different due to the folder structure.  </para>
 			<para>Now it can be used within the model. Right click to 
 				<emphasis role="bold">SubSystem_Blinky</emphasis> within the outline view. Select 
 				<emphasis>Edit Structure</emphasis>. The 
@@ -1711,6 +1711,88 @@ carLights.setState(TrafficLight3.OFF);
 				<para></para>
 			</blockquote>
 			<para>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</para>
+		</section>
+	</chapter>
+	<chapter id="SettinguptheWorkspaceC">
+		<title>Setting up the Workspace ( C )</title>
+		<para>Before you can start with C, some preconditions must be fulfilled:</para>
+		<para>- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
+			- The CDT-Eclipse plug in must be installed as the C development environment.</para>
+		<para>Once the CDT is installed, the C runtime and model library must be imported.</para>
+		<para>The resulting workspace should look like this:</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/032-SetupWorkspaceC01.png"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<section id="Testingtheenvironment">
+			<title>Testing the environment</title>
+			<para>To verify the C tool chain you should generate and run the Hello World example program of the CDT.
+				 Activate the 
+				<emphasis>C/C++</emphasis> perspective. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC03.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>From the main menu select 
+				<emphasis>File-&gt;New-&gt;C Project</emphasis>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC02.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Name the Project. Select an 
+				<emphasis>Executable-&gt;Hello World ANSI C</emphasis> as Project type, 
+				<emphasis>MinGW GCC</emphasis> as Tool chain and click 
+				<emphasis>Finish</emphasis>. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC04.png"/>
+					</imageobject>
+				</mediaobject> 
+			</para>
+			<para>Select the new project and click the build button (or right click the project and select 
+				<emphasis>Build Project</emphasis>)
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC05.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The binary should be generated. Run the binary as 
+				<emphasis>Local C/C++ Application</emphasis>
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC06.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Verify the output.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC07.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Remember these steps. In the following Tutorials these steps will be referenced as 
+				<emphasis>build and run</emphasis>. 
+			</para>
 		</section>
 	</chapter>
 	<chapter id="ROOMConcepts">

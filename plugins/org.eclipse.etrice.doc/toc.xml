@@ -66,6 +66,9 @@
 <topic href="help/Setupthemodel.html" label="Setup the model"></topic>
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>
+<topic href="help/SettinguptheWorkspaceC.html" label="Setting up the Workspace ( C )">
+<topic href="help/SettinguptheWorkspaceC.html#Testingtheenvironment" label="Testing the environment"></topic>
+</topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#Actors" label="Actors">
 <topic href="help/ROOMConcepts.html#Description" label="Description"></topic>
