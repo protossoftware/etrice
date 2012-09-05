@@ -524,10 +524,13 @@ public class RoomExtensions {
   public List<State> getLeafStateList(final StateGraph sg) {
     ArrayList<State> _arrayList = new ArrayList<State>();
     ArrayList<State> res = _arrayList;
-    EList<State> _states = sg.getStates();
-    for (final State s : _states) {
-      List<State> _leafStateList = this.getLeafStateList(s);
-      res.addAll(_leafStateList);
+    boolean _notEquals = (!Objects.equal(sg, null));
+    if (_notEquals) {
+      EList<State> _states = sg.getStates();
+      for (final State s : _states) {
+        List<State> _leafStateList = this.getLeafStateList(s);
+        res.addAll(_leafStateList);
+      }
     }
     return res;
   }
