@@ -124,7 +124,7 @@ class SubSystemClassGen {
 		#include "debugging/etMSCLogger.h"
 		
 		#include "platform/etTimer.h"
-		#include "etGlobalFlags.h"
+		#include "etRuntimeConfig.h"
 
 		«helpers.userCode(ssc.userCode3)»
 		

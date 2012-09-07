@@ -2,7 +2,7 @@
 
 #include <sys/time.h>
 
-#include "etGlobalFlags.h"
+#include "etRuntimeConfig.h"
 
 void etTimer_init(void){
 }

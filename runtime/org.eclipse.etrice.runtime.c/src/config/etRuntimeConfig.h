@@ -14,15 +14,20 @@
 #define ETGLOBALFLAGS_H_
 
 /* flags for debugging */
-//#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
-//#define ET_LOGGER_ACTIVATE
+#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
+#define ET_LOGGER_ACTIVATE
 
-#define STRUCT_ALIGN		2
+
+#define STRUCT_ALIGN		8
 
 /* timing and scheduling */
-//#define FREQUENCY 100L
-//#define ET_RUNTIME_MAXLOOP 100000
-#define ET_RUNTIME_ENDLESS
+#define FREQUENCY 10L
+#define ET_RUNTIME_MAXLOOP 100
+//#define ET_RUNTIME_ENDLESS
+
+/* pool and block size */
+#define MESSAGE_POOL_MAX 50
+#define MESSAGE_BLOCK_SIZE 64
 
 
 #endif /* ETGLOBALFLAGS_H_ */
