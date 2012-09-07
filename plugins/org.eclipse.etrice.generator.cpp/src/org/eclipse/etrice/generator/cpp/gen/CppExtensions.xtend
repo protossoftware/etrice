@@ -66,10 +66,11 @@ class CppExtensions implements ILanguageExtension {
 	
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		'''
+		enum «name» {
 		«FOR entry: entries»
-			static const int «entry.first» = «entry.second»;
-		«ENDFOR»
-		'''.toString
+			«entry.first» = «entry.second»,
+		«ENDFOR» 
+		};'''.toString
 	}
 
 	override String booleanConstant(boolean b) {

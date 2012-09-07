@@ -6,6 +6,7 @@
  */
 
 #include "RTSystemServicesProtocol.h"
+#include "common/debugging/DebuggingService.h"
 
 namespace etRuntime {
 
@@ -56,15 +57,15 @@ RTSystemServicesProtocol::RTSystemServicesProtocolPort::RTSystemServicesProtocol
 	DebuggingService::getInstance().addPortInstance(*this);
 };
 
-void RTSystemServicesProtocol::RTSystemServicesProtocolPort::receive(Message msg) {
-	if (! Events::isValidIncomingEvtID(msg.getEvtId())) {
+void RTSystemServicesProtocol::RTSystemServicesProtocolPort::receive(Message* msg) {
+	if (! Events::isValidIncomingEvtID(msg->getEvtId())) {
 		std::cout << "unknown" << std::endl;
 	}
 	else {
-		if (msg.hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
-			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg.getEvtId()));
+		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
+			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(*this, msg.getEvtId(),	msg.getData());
+		getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
 	}
 };
 
@@ -121,15 +122,15 @@ RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::RTSystemServicesProt
 	DebuggingService::getInstance().addPortInstance(*this);
 }
 
-void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::receive(Message msg) {
-	if (! Events::isValidOutgoingEvtID(msg.getEvtId())) {  //conjugated port receives out-messages
+void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::receive(Message* msg) {
+	if (! Events::isValidOutgoingEvtID(msg->getEvtId())) {  //conjugated port receives out-messages
 		std::cout << "unknown" << std::endl;
 	}
 	else {
-		if (msg.hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
-			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg.getEvtId()));
+		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
+			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(*this, msg.getEvtId(),	msg.getData());
+		getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
 	}
 }
 

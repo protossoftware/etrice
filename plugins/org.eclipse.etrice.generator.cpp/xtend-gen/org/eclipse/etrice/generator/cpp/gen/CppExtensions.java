@@ -77,18 +77,22 @@ public class CppExtensions implements ILanguageExtension {
   
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum ");
+    _builder.append(name, "");
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
     {
       for(final Pair<String,String> entry : entries) {
-        _builder.append("static const int ");
         String _first = entry.getFirst();
         _builder.append(_first, "");
         _builder.append(" = ");
         String _second = entry.getSecond();
         _builder.append(_second, "");
-        _builder.append(";");
+        _builder.append(",");
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("};");
     String _string = _builder.toString();
     return _string;
   }

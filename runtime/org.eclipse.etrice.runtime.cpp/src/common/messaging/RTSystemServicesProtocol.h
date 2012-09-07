@@ -7,11 +7,12 @@
 
 #ifndef RTSYSTEMSERVICESPROTOCOL_H_
 #define RTSYSTEMSERVICESPROTOCOL_H_
-#include "common/debugging/DebuggingService.h"
+
 #include "common/modelbase/PortBase.h"
 #include "common/modelbase/IEventReceiver.h"
 #include "common/messaging/Address.h"
 #include <vector>
+#include <string>
 
 namespace etRuntime {
 
@@ -77,7 +78,7 @@ public:
 		RTSystemServicesProtocolPort(IEventReceiver& actor, IRTObject* parent, std::string name,
 				int localId, int idx, Address addr, Address peerAddress);
 
-		void receive(Message m);
+		virtual void receive(Message* m);
 		// sent messages
 		void dummy();
 	};
@@ -113,7 +114,7 @@ public:
 				std::string name, int localId, int idx, Address addr,
 				Address peerAddress);
 
-		void receive(Message m);
+		virtual void receive(Message* m);
 		void executeInitialTransition();
 		void startDebugging();
 		void stopDebugging();

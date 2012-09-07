@@ -68,14 +68,17 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«generateIncludeGuardBegin(pc.name)»
 		
 		#include "platforms/generic/etDatatypes.h"
+		#include "common/messaging/IRTObject.h"
 		#include "common/modelbase/PortBase.h"
 		#include "common/modelbase/InterfaceItemBase.h"
 		#include "common/messaging/Address.h"
 		#include "common/messaging/Message.h"
 		#include <vector>
-		
+		#include <string>
+				
 		namespace etRuntime {
 			class IEventReceiver;
+			
 		}
 		
 		«helpers.userCode(pc.userCode1)»
@@ -87,18 +90,26 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		class «pc.name» {
 		   public:
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»	   /* message IDs */
-			  «genMessageIDs(pc)»
-		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
-		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
-			#error "synchronous protocols not implemented yet"
+			class Events {
+				public:
+					«genMessageIDs(pc)»
+					static bool isValidEvtID(int evtId) {
+						return ((MSG_MIN < evtId) && (evtId < MSG_MAX));
+					};
+					static bool isValidOutgoingEvtID(int evtId) {
+						return ((Events::MSG_MIN < evtId) && (evtId < Events::«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF»));
+					};
+					static bool isValidIncomingEvtID(int evtId) {
+						return ((Events::«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF» <= evtId) && (evtId < Events::MSG_MAX));
+					};
+					static std::string getMessageString(int msg_id);
+				
+				private:
+					static std::string s_messageStrings[];
+			};
 		«ENDIF»
 				«helpers.userCode(pc.userCode2)»
 		
-		   private:
-				static char* messageStrings[];
-		
-		   public:
-				char* getMessageString(int msg_id);
 			 		
 				«portClassDeclaration(pc, false)»
 				«portClassDeclaration(pc, true)»
@@ -121,16 +132,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDIF»
 		   public:
 			// constructors
-			 «portClassName»(etRuntime::IEventReceiver actor, char* name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
-			 «portClassName»(etRuntime::IEventReceiver actor, char* name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+			 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
+			 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
 		
-			 virtual void receive(etRuntime::Message m);
+			 virtual void receive(etRuntime::Message* m);
 			«IF pclass!=null»
 				«helpers.attributes(pclass.attributes)»
 				«helpers.operationsDeclaration(pclass.operations, portClassName)»
 			«ENDIF»
 			
-			  // sent messages
+			  // outgoing messages
 			«FOR m : pc.getOutgoing(conj)»
 			  	«sendMessageDeclaration(m,conj)»
 			«ENDFOR»
@@ -141,35 +152,25 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		//------------------------------------------------------------------------------------------------------------
 		class «replPortClassName» {
 			private:
-			 std::vector<«portClassName»> ports;
-			 int replication;
+			    int m_replication;
+			    std::vector<«portClassName»> m_ports;
 		
 			public:
-			// constructor
-			«replPortClassName»(etRuntime::IEventReceiver actor, char* name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
-			
-			int getReplication() {	return replication; }
-			int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
-			«portClassName» get(int i) {return ports[i];}
-			
-		«IF pc.commType==CommunicationType::EVENT_DRIVEN»
-			«IF conj»
-				// incoming messages
+				«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
+				virtual ~«replPortClassName»() {};
 				
-			«FOR m : pc.getAllIncomingMessages()»	«messageSignature(m)»;
-			«ENDFOR»
-			«ELSE»
-				// outgoing messages
-			«FOR m : pc.getAllOutgoingMessages()»	«messageSignature(m)»;
-			«ENDFOR»
-			«ENDIF»
-		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
-			    /*--------------------- port structs and methods */
-			«pc.genDataDrivenPortHeaders»
-		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
-			#error "synchronous protocols not implemented yet"
-		«ENDIF»
-			
+				int getReplication() {	return m_replication; }
+				int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
+				«portClassName» get(int i) {return m_ports.at(i);}
+				
+				 virtual void receive(etRuntime::Message* m);
+				«IF pc.commType==CommunicationType::EVENT_DRIVEN»
+					 // outgoing messages
+					«FOR m : pc.getOutgoing(conj)»
+					  	«sendMessageDeclaration(m,conj)»
+					«ENDFOR»
+				«ENDIF»
+				
 		};
 	'''
 	}
@@ -179,46 +180,50 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
 	'''
-	«pc.name»::«portClassName»::«portClassName»(IEventReceiver actor, char* name, int localId, Address addr, Address peerAddress)
-		: PortBase(actor, name, localId, 0, addr, peerAddress)
+	//------------------------------------------------------------------------------------------------------------
+	// «IF conj»conjugated «ENDIF»port class
+	//------------------------------------------------------------------------------------------------------------
+	
+	«pc.name»::«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
+		: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
 	{
 		DebuggingService::getInstance().addPortInstance(*this);
 	}
 
-	«pc.name»::«portClassName»::«portClassName»(IEventReceiver actor, char* name, int localId, int idx, Address addr, Address peerAddress)
-		: PortBase(actor, name, localId, idx, addr, peerAddress)
+	«pc.name»::«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
+		: PortBase(actor, parent, name, localId, idx, addr, peerAddress)
 	{
 		DebuggingService::getInstance().addPortInstance(*this);
 	}
 		
-	void «pc.name»::«portClassName»::receive(Message msg) {
-		//if (!(m instanceof EventMessage)) return;
-		//EventMessage msg = (EventMessage) m;
-		if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-			printf("unknown");
+	void «pc.name»::«portClassName»::receive(Message* msg) {
+		if (! Events::isValidIncomingEvtID(msg->getEvtId())) {
+			std::cout << "unknown" << std::endl;
+		}
 		else {
-			if (messageStrings[msg.getEvtId()] != "timerTick"){
-«««							TODOTS: model switch for activation
-				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
+			if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
+				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg->getEvtId()));
 			}
+			
+			«IF pc.handlesReceive(conj)»
+			switch (msg.getEvtId()) {
+				«FOR hdlr : pc.getReceiveHandlers(conj)»
+					case «hdlr.msg.getCodeName()»:
+					{
+						«FOR command : hdlr.detailCode.commands»
+							«command»
+						«ENDFOR»
+					}
+					break;
+				«ENDFOR»
+				default:
+			«ENDIF»	getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+			«IF pc.handlesReceive(conj)»
+			}
+			«ENDIF»
 		}
-		«IF pc.handlesReceive(conj)»
-		switch (msg.getEvtId()) {
-			«FOR hdlr : pc.getReceiveHandlers(conj)»
-				case «hdlr.msg.getCodeName()»:
-				{
-					«FOR command : hdlr.detailCode.commands»
-						«command»
-					«ENDFOR»
-				}
-				break;
-			«ENDFOR»
-			default:
-		«ENDIF»	getActor().receiveEvent(*this, msg.getEvtId(), msg.getData());
-		«IF pc.handlesReceive(conj)»
-		}
-		«ENDIF»
-	}
+	};
+
 	«IF pclass!=null»
 		«helpers.operationsImplementation(pclass.operations, portClassName)»
 	«ENDIF»
@@ -228,36 +233,31 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«sendMessage(m, pc.name + "::" + portClassName, conj)»
 	«ENDFOR»
 		
-	//-------------------------------------------------------------------------------
-	// replicated port class
-	//-------------------------------------------------------------------------------
-	«pc.name»::«replPortClassName»::«replPortClassName»(IEventReceiver actor, char* name, int localId, std::vector<Address> addr, std::vector<Address> peerAddress) {
-		int replication = addr.size();
-		ports = new std::vector<«pc.name»::«portClassName»>(replication);
-		for (int i=0; i<replication; ++i) {
-			ports[i] = new «pc.name»::«portClassName»(actor, name+i, localId, i, addr[i], peerAddress[i]);
+	//------------------------------------------------------------------------------------------------------------
+	// «IF conj»conjugated «ENDIF»replicated port class
+	//------------------------------------------------------------------------------------------------------------
+	«pc.name»::«replPortClassName»::«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<Address> addr, std::vector<Address> peerAddress) 
+		: m_replication(addr.size()),
+	  	  m_ports()
+	{
+		char numstr[10]; // enough to hold all numbers up to 32-bits
+	
+		m_ports.reserve(m_replication);
+		for (int i = 0; i < m_replication; ++i) {
+			snprintf(numstr, sizeof(numstr), "%d", i);
+			m_ports.push_back(«portClassName»(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
 		}
-	}
+	};
+	
 		
-	«IF conj»
-	// incoming messages
-	«FOR m : pc.getAllIncomingMessages()»
-	«messageSignatureDefinition(m, pc.name + "::" + replPortClassName)»{
-		for (int i=0; i<replication; ++i) {
-			ports[i].«messageCall(m)»;
-		}
-	}
-	«ENDFOR»
-	«ELSE»
 	// outgoing messages
-	«FOR m : pc.getAllOutgoingMessages()»
+	«FOR m : pc.getOutgoing(conj)»
 	«messageSignatureDefinition(m, pc.name + "::" + replPortClassName)»{
-		for (int i=0; i<replication; ++i) {
-			ports[i].«messageCall(m)»;
+		for (int i=0; i<m_replication; ++i) {
+			m_ports.at(i).«messageCall(m)»;
 		}
 	}
 	«ENDFOR»
-	«ENDIF»
 	'''
 	}
 	
@@ -271,94 +271,26 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		#include "«pc.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
-		#include <stdio.h>
+		#include <iostream>
 
 		using namespace etRuntime;
 		
 		«helpers.userCode(pc.userCode3)»
 		
 	«IF pc.commType==CommunicationType::EVENT_DRIVEN»
-		
-		//----------------------------------------------
-		// java code
-		//----------------------------------------------
-		
 		«helpers.userCode(pc.userCode2)»
-	
-		char* «pc.name»::messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
-	
-		char* «pc.name»::getMessageString(int msg_id) {
-			if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
-				// id out of range
-				return "Message ID out of range";
-			}
-			else{
-				return messageStrings[msg_id];
-			}
-		}
 	
 		«portClassImplementation(pc, false)»
 		«portClassImplementation(pc, true)»
 		
 		/*--------------------- debug helpers */
 		«generateDebugHelpersImplementation(root, pc)»
-	«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
-		«pc.genDataDrivenPortSources»
-	«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
-		#error "synchronoue protocols not implemented yet"
 	«ENDIF»
 		
 		
 	'''
 	}
 	
-	def private portClassHeader(ProtocolClass pc, Boolean conj){
-		var portClassName = pc.getPortClassName(conj)
-		var replPortClassName = pc.getPortClassName(conj, true)
-		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
-		
-		'''
-		typedef etPort «portClassName»;
-		typedef etReplPort «replPortClassName»;
-		
-		«IF pc.getPortClass(conj)!=null»	
-			«IF !(pc.getPortClass(conj).attributes.empty)»
-/* variable part of PortClass (RAM) */
-typedef struct «portClassName»_var «portClassName»_var; 
-struct «portClassName»_var {
-	«helpers.attributes(pc.getPortClass(conj).attributes)»
-	};
-				«FOR a:pc.getPortClass(conj).attributes»
-					«IF a.defaultValueLiteral!=null»
-						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
-					«ENDIF»
-				«ENDFOR»
-			«ENDIF»
-		«ENDIF»
-			
-		«FOR message : messages»
-			«var hasData = message.data!=null»
-			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-			«var refp = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
-			«var data = if (hasData) ", "+typeName+refp+" data" else ""»
-			«messageSignature(portClassName, message.name, "", data)»;
-			«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
-			«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
-		«ENDFOR»
-			
-		«IF (pc.getPortClass(conj) != null)»	
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, portClassName)»
-			«helpers.operationsDeclaration(pc.getPortClass(conj).operations, replPortClassName)»
-		«ENDIF»
-		
- 		«IF pc.handlesReceive(conj)»
-			«FOR h:getReceiveHandlers(pc,conj)»
-void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
-			«ENDFOR»
-		«ENDIF»
-		'''
-	}
-
 
 	
 	def private genDataDrivenPortHeaders(ProtocolClass pc) {
@@ -411,90 +343,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 	'''
 	} 
 	
-	def private portClassSource(ProtocolClass pc, Boolean conj){
-		var portClassName = pc.getPortClassName(conj)
-		var replPortClassName = pc.getPortClassName(conj, true)
-		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
-		var dir = if (conj) "IN_" else "OUT_"
-
-		'''
-			«FOR message : messages»
-				«var hasData = message.data!=null»
-				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && ((message.data.refType.ref))) "*" else ""»
-				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
-				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
-				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
-				«var dataCall = if (hasData) ", data" else ""»
-				«var hdlr = message.getSendHandler(conj)»
-				
-				«messageSignature(portClassName, message.name, "", data)» {
-					«IF hdlr != null»
-						«FOR command : hdlr.detailCode.commands»	«command»
-						«ENDFOR»									
-					«ELSE»
-						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-						ET_MSC_LOGGER_SYNC_EXIT
-					«ENDIF»
-				}
-				
-				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
-					«IF hdlr != null»
-						int i;
-						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«dataCall»);
-						}					
-					«ELSE»
-						int i;
-						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-						}
-						ET_MSC_LOGGER_SYNC_EXIT
-					«ENDIF»
-				}
-				
-				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
-					«IF hdlr != null»
-						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«dataCall»);
-					«ELSE»					
-						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						if (0<=idx && idx<((etReplPort*)self)->size) {
-							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-						}
-						ET_MSC_LOGGER_SYNC_EXIT
-					«ENDIF»
-				}
-			«ENDFOR»
-			
-			«IF (pc.getPortClass(conj) != null)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, portClassName)»
-				«helpers.operationsImplementation(pc.getPortClass(conj).operations, replPortClassName)»
-			«ENDIF»
-
-			// getReplication
-			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
-				return ((etReplPort*)self)->size;
-			}
-			
-			«IF pc.handlesReceive(conj)»
-				«genReceiveHandlers(pc,conj)»
-			«ENDIF»
-			
-		'''
-	}
-
-	def private sendMessageCall(boolean hasData, String self, String msg, String typeName, String data) {
-		if (hasData)
-			"etPort_sendMessage("+self+", "+msg+", sizeof("+typeName+"), "+data+");"
-		else
-			"etPort_sendMessage("+self+", "+msg+", 0, NULL);"
-	}
 	
-	def private messageSignature(String className, String messageName, String methodSuffix, String data) {
-		"void "+className+"_"+messageName+methodSuffix+"(const "+className+"* self"+data+")"
-	}
 	
 	def private messageSetterSignature(String className, String messageName, String data) {
 		"void "+className+"_"+messageName+"_set("+className+"* self"+data+")"
@@ -504,22 +353,11 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
 	}
 
-	def private messageCall(Message m) {'''
-	«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)
-	'''}
+	def private messageCall(Message m) {
+	'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
+	}
 	
-//	def sendMessage(Message m, boolean conj) {'''
-//	«var dir = if (conj) "IN" else "OUT"»
-//	«var hdlr = m.getSendHandler(conj)»
-//	«messageSignature(m)»{
-//		if (getPeerAddress()!= 0)
-//				«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-//				«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.ref)».deepCopy()«ENDIF»));
-//			«ENDIF»
-//	}
-//	'''
-//	}
-	
+
 	def private genReceiveHandlers(ProtocolClass pc, Boolean conj){
 	var portClassName = pc.getPortClassName(conj)
 	var replPortClassName = pc.getPortClassName(conj, true)
@@ -541,17 +379,25 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 		
 «««		TODO: make this optional or different for smaller footprint
 		/* message names as strings for debugging (generate MSC) */
-		static const char* «pc.name»_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR»«FOR m : pc.getAllIncomingMessages()»"«m.name»", «ENDFOR»"MAX"};
-
-		const char* «pc.name»_getMessageString(int msg_id) {
-			if (msg_id < «pc.name»::MSG_MIN || msg_id > «pc.name»::MSG_MAX+1){
-				/* id out of range */
+		std::string «pc.name»::Events::s_messageStrings[] 
+				= {"MIN", 
+				   «FOR m : pc.getAllOutgoingMessages()»
+				   "«m.name»",
+				   «ENDFOR» 
+				   «FOR m : pc.getAllIncomingMessages()»
+				   "«m.name»",
+				   «ENDFOR»
+				   "MAX"};
+		
+		std::string «pc.name»::Events::getMessageString(int msg_id) {
+			if ((MSG_MIN < msg_id ) && ( msg_id < MSG_MAX )) {
+				return s_messageStrings[msg_id];
+			} else {
+				// id out of range
 				return "Message ID out of range";
 			}
-			else{
-				return «pc.name»_messageStrings[msg_id];
-			}
 		}
+		
 		'''
 	}
 	 
@@ -588,6 +434,7 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 			«ENDIF»
 		'''
 	}
+	
 	def sendMessage(Message m, String classPrefix, boolean conj) {
 		var dir = if (conj) "IN" else "OUT"
 		var hdlr = m.getSendHandler(conj)
@@ -597,14 +444,12 @@ void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const et
 					«FOR command : hdlr.detailCode.commands»	«command»
 					«ENDFOR»
 				«ELSE»
-					if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-«««						TODOTS: model switch for activation
-						DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-					}
+					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+																	   Events::getMessageString(Events::«dir»_«m.name»));
 					if (getPeerAddress().isValid()){
-						«IF m.data==null»getPeerMsgReceiver().receive(new Message(getPeerAddress(), «dir»_«m.name»));
-						«ELSE»getPeerMsgReceiver().receive(new Message(getPeerAddress(), «dir»_«m.name», reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»)));
-					«ENDIF»
+						«IF m.data==null»getPeerMsgReceiver()->receive(new Message(getPeerAddress(), Events::«dir»_«m.name»));
+						«ELSE»getPeerMsgReceiver()->receive(new Message(getPeerAddress(),Events::«dir»_«m.name», reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»), sizeof()));
+						«ENDIF»
 					}
 				«ENDIF»
 			}
