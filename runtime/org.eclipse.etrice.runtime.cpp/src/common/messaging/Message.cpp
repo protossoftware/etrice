@@ -18,7 +18,10 @@ Message::~Message() {
 
 std::string Message::toString(){
    std::stringstream strm;
-   strm << "Message(" << m_address.toString() << ")";
+   strm << "EventMessage(" << m_address.toString() << ", evt=" << m_evtId << ")";
+   if (m_data) {
+	   strm << std::showbase << std::hex << m_data;
+   }
    return strm.str();
 }
 

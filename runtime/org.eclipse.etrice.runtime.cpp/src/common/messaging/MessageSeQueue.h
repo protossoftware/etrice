@@ -25,7 +25,7 @@ public:
 	long getSize() const {return m_size;	}
 	Message* getFirst() const {return m_first;	}
 	Message* getLast() const { return m_last;	}
-	boolean isNotEmpty() const { return m_last != 0;	}
+	bool isNotEmpty() const { return m_last != 0;	}
 	long getHightWaterMark() const { return m_highWaterMark;	}
 
 private:

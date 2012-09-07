@@ -34,12 +34,12 @@ bool ActorClassBase::handleSystemEvent(InterfaceItemBase ifitem, int evt, void* 
 	}
 
 	switch (evt) {
-	case RTSystemServicesProtocol::IN_executeInitialTransition:
+	case RTSystemServicesProtocol::Events::IN_executeInitialTransition:
 		executeInitTransition();
 		break;
-	case RTSystemServicesProtocol::IN_startDebugging:
+	case RTSystemServicesProtocol::Events::IN_startDebugging:
 		break;
-	case RTSystemServicesProtocol::IN_stopDebugging:
+	case RTSystemServicesProtocol::Events::IN_stopDebugging:
 		break;
 	}
 	return true;

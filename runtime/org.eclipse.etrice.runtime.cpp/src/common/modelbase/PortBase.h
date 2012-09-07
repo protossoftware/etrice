@@ -21,6 +21,9 @@ public:
 		: InterfaceItemBase(actor, parent, name, localId, idx, address, peerAddress){};
 	virtual ~PortBase();
 
+	virtual void send(int evtID);
+
+
 private:
 	PortBase();
 

@@ -19,7 +19,7 @@ public:
 	IEventReceiver();
 	virtual ~IEventReceiver();
 
-	virtual void receiveEvent(const InterfaceItemBase& ifitem, etInt16 evt, void* data); //TODO: void* or object??
+	virtual void receiveEvent(const InterfaceItemBase& ifitem, etInt16 evt, void* data) = 0;
 
 };
 

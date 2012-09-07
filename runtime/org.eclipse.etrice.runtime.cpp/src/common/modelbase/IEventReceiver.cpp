@@ -10,12 +10,9 @@
 namespace etRuntime {
 
 IEventReceiver::IEventReceiver() {
-	// TODO Auto-generated constructor stub
-
 }
 
 IEventReceiver::~IEventReceiver() {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace etRuntime */

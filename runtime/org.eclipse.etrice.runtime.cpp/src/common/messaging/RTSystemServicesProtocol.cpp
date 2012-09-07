@@ -6,12 +6,10 @@
  */
 
 #include "RTSystemServicesProtocol.h"
-#include "common/modelbase/EventMessage.h"
-#include "common/modelbase/EventWithDataMessage.h"
 
 namespace etRuntime {
 
-std::string RTSystemServicesProtocol::s_messageStrings[] =
+std::string RTSystemServicesProtocol::Events::s_messageStrings[] =
 	{	"MIN",
 		"dummy",
 		"executeInitialTransition",
@@ -19,20 +17,26 @@ std::string RTSystemServicesProtocol::s_messageStrings[] =
 		"stopDebugging",
 		"MAX"};
 
+std::string RTSystemServicesProtocol::Events::getMessageString(int msg_id) {
+	if ((MSG_MIN < msg_id ) && ( msg_id < MSG_MAX )) {
+		return s_messageStrings[msg_id];
+	} else {
+		// id out of range
+		return "Message ID out of range";
+	}
+}
+
+//------------------------------------------------------------------
+// RTSystemServicesProtocol: surrounding class
+//------------------------------------------------------------------
+
+
 RTSystemServicesProtocol::RTSystemServicesProtocol() {
 }
 
 RTSystemServicesProtocol::~RTSystemServicesProtocol() {
 }
 
-std::string RTSystemServicesProtocol::getMessageString(int msg_id) {
-	if (msg_id < MSG_MIN || msg_id > MSG_MAX + 1) {
-		// id out of range
-		return "Message ID out of range";
-	} else {
-		return s_messageStrings[msg_id];
-	}
-}
 
 //------------------------------------------------------------------
 // RTSystemServicesProtocolPort
@@ -52,42 +56,24 @@ RTSystemServicesProtocol::RTSystemServicesProtocolPort::RTSystemServicesProtocol
 	DebuggingService::getInstance().addPortInstance(*this);
 };
 
-void RTSystemServicesProtocol::RTSystemServicesProtocolPort::receive(Message m) {
-	if (!(m.isEvtMessage()))
-		return;
-	EventMessage& msg(static_cast<EventMessage&>(m));
-	if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
+void RTSystemServicesProtocol::RTSystemServicesProtocolPort::receive(Message msg) {
+	if (! Events::isValidIncomingEvtID(msg.getEvtId())) {
 		std::cout << "unknown" << std::endl;
+	}
 	else {
-		if (s_messageStrings[msg.getEvtId()] != "timerTick") {
-			// TODOTS: model switch for activation
-			DebuggingService::getInstance().addMessageAsyncIn(
-					getPeerAddress(), getAddress(),
-					s_messageStrings[msg.getEvtId()]);
+		if (msg.hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
+			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg.getEvtId()));
 		}
-
-		if (msg.isEvtMessageWithData())
-			getActor().receiveEvent(*this, msg.getEvtId(),
-				(static_cast<EventWithDataMessage&>(msg)).getData());
-		else
-			getActor().receiveEvent(*this, msg.getEvtId(), 0);
-
+		getActor().receiveEvent(*this, msg.getEvtId(),	msg.getData());
 	}
 };
 
 // sent messages
 
 void RTSystemServicesProtocol::RTSystemServicesProtocolPort::dummy() {
-
-	if (s_messageStrings[OUT_dummy] != "timerTick") {
-		// TODOTS: model switch for activation
-		DebuggingService::getInstance().addMessageAsyncOut(getAddress(),
-				getPeerAddress(), s_messageStrings[OUT_dummy]);
-	}
-	if (getPeerAddress().isValid())
-		getPeerMsgReceiver()->receive(
-				new EventMessage(getPeerAddress(), OUT_dummy));
-
+	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+		Events::getMessageString(Events::OUT_dummy));
+	PortBase::send(Events::OUT_dummy);
 };
 
 //------------------------------------------------------------------
@@ -107,14 +93,6 @@ RTSystemServicesProtocolPortRepl(IEventReceiver& actor, IRTObject* parent, std::
 		snprintf(numstr, sizeof(numstr), "%d", i);
 		m_ports.push_back(RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
 	}
-};
-
-int RTSystemServicesProtocol::RTSystemServicesProtocolPortRepl::getReplication() {
-	return m_replication;
-};
-
-RTSystemServicesProtocol::RTSystemServicesProtocolPort& RTSystemServicesProtocol::RTSystemServicesProtocolPortRepl::get(int i) {
-	return m_ports.at(i);
 };
 
 // outgoing messages
@@ -143,71 +121,36 @@ RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::RTSystemServicesProt
 	DebuggingService::getInstance().addPortInstance(*this);
 }
 
-void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::receive(Message m) {
-	if (!(m.isEvtMessage()))
-		return;
-	EventMessage& msg(static_cast<EventMessage&>(m));
-	if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
+void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::receive(Message msg) {
+	if (! Events::isValidOutgoingEvtID(msg.getEvtId())) {  //conjugated port receives out-messages
 		std::cout << "unknown" << std::endl;
+	}
 	else {
-		if (s_messageStrings[msg.getEvtId()] != "timerTick") {
-			// TODOTS: model switch for activation
-			DebuggingService::getInstance().addMessageAsyncIn(
-					getPeerAddress(), getAddress(),
-					s_messageStrings[msg.getEvtId()]);
+		if (msg.hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
+			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg.getEvtId()));
 		}
-
-		if (msg.isEvtMessageWithData())
-			getActor().receiveEvent(*this, msg.getEvtId(),
-				(static_cast<EventWithDataMessage&>(msg)).getData());
-		else
-			getActor().receiveEvent(*this, msg.getEvtId(), 0);
-
-
+		getActor().receiveEvent(*this, msg.getEvtId(),	msg.getData());
 	}
 }
 
 // sent messages
 
 void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::executeInitialTransition() {
-
-	if (s_messageStrings[IN_executeInitialTransition] != "timerTick") {
-		// TODOTS: model switch for activation
-		DebuggingService::getInstance().addMessageAsyncOut(getAddress(),
-				getPeerAddress(),
-				s_messageStrings[IN_executeInitialTransition]);
-	}
-	if (getPeerAddress().isValid())
-		getPeerMsgReceiver()->receive(
-				new EventMessage(getPeerAddress(),
-						IN_executeInitialTransition));
-
+	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+		Events::getMessageString(Events::IN_executeInitialTransition));
+	PortBase::send(Events::IN_executeInitialTransition);
 }
 
 void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::startDebugging() {
-
-	if (s_messageStrings[IN_startDebugging] != "timerTick") {
-		// TODOTS: model switch for activation
-		DebuggingService::getInstance().addMessageAsyncOut(getAddress(),
-				getPeerAddress(), s_messageStrings[IN_startDebugging]);
-	}
-	if (getPeerAddress().isValid())
-		getPeerMsgReceiver()->receive(
-				new EventMessage(getPeerAddress(), IN_startDebugging));
-
+	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+		Events::getMessageString(Events::IN_startDebugging));
+	PortBase::send(Events::IN_startDebugging);
 }
 
 void RTSystemServicesProtocol::RTSystemServicesProtocolConjPort::stopDebugging() {
-
-	if (s_messageStrings[IN_stopDebugging] != "timerTick") {
-		// TODOTS: model switch for activation
-		DebuggingService::getInstance().addMessageAsyncOut(getAddress(),
-				getPeerAddress(), s_messageStrings[IN_stopDebugging]);
-	}
-	if (getPeerAddress().isValid())
-		getPeerMsgReceiver()->receive(
-				new EventMessage(getPeerAddress(), IN_stopDebugging));
-
+	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+		Events::getMessageString(Events::IN_stopDebugging));
+	PortBase::send(Events::IN_stopDebugging);
 }
 
 //------------------------------------------------------------------
@@ -229,15 +172,7 @@ RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, s
 	}
 };
 
-int RTSystemServicesProtocol::RTSystemServicesProtocolConjPortRepl::getReplication() {
-	return m_replication;
-}
-
-RTSystemServicesProtocol::RTSystemServicesProtocolConjPort& RTSystemServicesProtocol::RTSystemServicesProtocolConjPortRepl::get(int i) {
-	return m_ports.at(i);
-}
-
-// incoming messages
+// sent messages
 
 void RTSystemServicesProtocol::RTSystemServicesProtocolConjPortRepl::executeInitialTransition() {
 	for (int i = 0; i < m_replication; ++i) {

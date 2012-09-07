@@ -16,9 +16,13 @@ namespace etRuntime {
 
 class Message {
 public:
-	// Message(Address addr) : m_address(addr), m_evtID(0), m_next(0) {};
-	Message(Address addr) :
-			m_address(addr), m_next(0)
+	Message(Address addr, int evtId, void* data, size_t dataSize) :
+			m_address(addr), m_evtId(evtId), m_next(0),
+			m_dataSize(dataSize), m_data(data), m_logFlag(true)
+	{}
+	Message(Address addr, int evtId) :
+			m_address(addr), m_evtId(evtId), m_next(0),
+			m_dataSize(0), m_data(0), m_logFlag(true)
 	{}
 	virtual ~Message();
 
@@ -28,13 +32,20 @@ public:
 	void setAddress(Address address){m_address = address;	}
 	Address getAddress() const { return m_address; };
 
-	virtual bool isEvtMessage() {return false;};
-	virtual bool isEvtMessageWithData() {return false;};
+	int getEvtId() const {	return m_evtId; 	}
+	void* getData() const {	return m_data;	}
+	bool hasDebugFlagSet() const { return m_logFlag; };
+
 	std::string toString();
 
 private:
 	Address m_address;
+	int m_evtId;
+
 	Message* m_next;
+	size_t m_dataSize;
+	void* m_data;
+	bool m_logFlag;
 
 	Message();
 };
