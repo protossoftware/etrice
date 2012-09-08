@@ -1,0 +1,138 @@
+h1. Tutorial HelloWorld ( C )
+
+h2. Scope
+
+In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C as in Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+You will perform the following steps:
+
+# create a new model from scratch for C
+# create structure and behavior similar to Java
+# create a launch configuration for the C code generator
+# generate the source code
+# run the model
+
+Make sure that you have set up the workspace as described in _Setting up the workspace ( C )_.
+
+
+h2. Create a new model from scratch
+
+Before you can create a new C-model, you have to create a new C project as described in _Setting up the workspace ( C )_.
+Remember:
+- select the _C/C++_ perspective
+- From the main menue select _File->New->C Project_
+- Name the project _HelloWorldC_
+- Project type is _Executable / Empty C Project_
+- Toolchain is _MinGW_
+
+The workspace should look like this:
+
+!images/034-HelloWorldC01.png!
+
+The next step is to add the model folder:
+Right click on the new project. Select _New->Folder_ and name it _model_.
+
+!images/034-HelloWorldC02.png!
+
+Add the model file to the folder. Right click on the new folder. Select _New->file_ and name it _HelloWorldC.room_.
+
+!images/034-HelloWorldC03.png!
+
+Due to the file ending _.room_ the tool will ask you to add the Xtext nature. Answer with _Yes_. 
+
+!images/034-HelloWorldC04.png!
+
+The workspace should look like this:
+
+!images/034-HelloWorldC05.png!
+
+
+
+h2. Create the HelloWorld model
+
+Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
+Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
+Recognize the C specific parts:
+- Import CTypes instead of JavaTypes
+- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
+
+ToDo: shutdown must be not depend on the subsystem.
+
+bc.. 
+RoomModel HelloWorldCModel {
+	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
+	SubSystemClass HelloWorldCSubSysClass {
+		ActorRef HelloETriceTopRef:AHelloWorldCTop 
+	}
+	ActorClass AHelloWorldCTop {
+		Structure { }
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 { }
+				State state0 {
+					entry {
+						"printf(\"HelloETrice !\\n\");"
+						"HelloETriceSubSysClass_shutdown();//exit(0);"
+						"\t\t\t\t\t\t"
+					}
+				}
+			}
+		}
+	}	
+}
+bq. 
+
+h2. Create a launch configuration to start the C codegenerator
+
+h2. Generate the code
+
+h2. Setup the include path
+
+h2. Run the model
+
+h2. Summary
+
+
+We will implement the Hello World code on the initial transition of the _HelloWorldTop_ actor. Therefore open the state machine editor by right clicking the _HelloWorldTop_ actor in the outline view and select _Edit Behavior_.
+
+!images/015-HelloWorld03.png!
+
+The state machine editor will be opened. Drag and drop an _Initial Point_ from the tool box to the diagram into the top level state. Drag and drop a _State_ from the tool box to the diagram. Confirm the dialogue with _ok_. Select the _Transition_ in the tool box and draw the transition from the _Initial Point_ to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
+
+bc. System.out.println("Hello World !");
+ 
+The result should look like this:
+
+!images/015-HelloWorld04.png!
+
+Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.
+
+!images/015-HelloWorld05.png!
+
+
+h2. Build and run the model
+
+Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From _HelloWorld/_ right click *gen_HelloWorld.launch* and run it as gen_HelloWorld. All model files in the model directory will be generated.
+
+!images/015-HelloWorld06.png!
+
+The code will be generated to the src-gen directory. The main function will be contained in *SubSystem_HelloWorldRunner.java*. Select this file and run it as Java application.
+
+!images/015-HelloWorld07.png!
+
+
+The Hello World application starts and the string will be printed on the console window. To stop the application the user must type _quit_ in the console window.
+
+!images/015-HelloWorld08.png!
+
+h2. Open the Message Sequence Chart
+
+During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
+
+!images/015-HelloWorld09.png!
+
+
+h2. Summary
+
+Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
+You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.
+ 

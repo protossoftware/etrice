@@ -8,5 +8,6 @@
 025-tutorial-sending-data.textile
 030-tutorial-ped-lights.textile
 032-Setting-up-the-Workspace_C.textile
+034-getting-started_C.textile
 
 040-room-concepts.textile
