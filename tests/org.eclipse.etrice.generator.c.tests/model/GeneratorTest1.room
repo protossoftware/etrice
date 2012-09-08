@@ -42,25 +42,26 @@ RoomModel GeneratorTest1 {
 				"#include \"etUnit/etUnit.h\""
 			}
 			external Port tester
+			Attribute testcaseID : int16
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> tp0 of State1 {
 					action {
-						"etUnit_openAll(\"tmp/testlog\",\"GeneratorTest1\", \"GeneratorTest1\", \"GeneratorTest1\");"
+						"testcaseID = etUnit_openAll(\"tmp/testlog\",\"GeneratorTest1\", \"GeneratorTest1\", \"GeneratorTest1\");"
 						"static etInt16 resultlist[] = {1,2,3,4,5,6,7};"
-						"EXPECT_ORDER_START(resultlist, 7);"
-						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 1);"
+						"EXPECT_ORDER_START(testcaseID, resultlist, 7);"
+						"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 1);"
 					}
 				}
 				State State1 {
 					entry {
-						"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 2);"
+						"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 2);"
 					}
 					subgraph {
 						Transition tr0: my tp0 -> State1 {
 							action {
-								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 3);"
+								"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 3);"
 							}
 						}
 						Transition tr1: State1 -> Done {
@@ -68,23 +69,23 @@ RoomModel GeneratorTest1 {
 								<trigger: tester>
 							}
 							action {
-								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 6);"
+								"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 6);"
 								"tester.done();"
 							}
 						}
 						EntryPoint tp0
 						State State1 {
 							entry {
-								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 4);"
+								"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 4);"
 							}
 							exit {
-								"EXPECT_ORDER(\"<|MODEL_LOCATION|>\\\\n\", 5);"
+								"EXPECT_ORDER(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 5);"
 							}
 						}
 						State Done {
 							entry {
-								"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 7);"
-								"etUnit_closeAll();"
+								"EXPECT_ORDER_END(testcaseID, \"<|MODEL_LOCATION|>\\\\n\", 7);"
+								"etUnit_closeAll(testcaseID);"
 							}
 						}
 					}

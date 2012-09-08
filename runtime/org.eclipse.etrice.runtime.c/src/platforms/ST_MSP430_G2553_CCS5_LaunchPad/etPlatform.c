@@ -10,19 +10,43 @@
  *
  *******************************************************************************/
 
-#ifndef ETGLOBALFLAGS_H_
-#define ETGLOBALFLAGS_H_
-
-/* flags for debugging */
-//#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
-//#define ET_LOGGER_ACTIVATE
-
-#define STRUCT_ALIGN		2
-
-/* timing and scheduling */
-//#define FREQUENCY 100L
-//#define ET_RUNTIME_MAXLOOP 100000
-#define ET_RUNTIME_ENDLESS
+#include "msp430g2553.h"
+#include "platform/etTimer.h"
 
 
-#endif /* ETGLOBALFLAGS_H_ */
+/* forward declarations */
+
+
+/* implemenatation for eTrice interfaces*/
+
+void etUserEntry(void){
+	  //Use WDT as interrupt timer
+	  WDTCTL = WDTPW + 0x16;
+
+	  DCOCTL =  CALDCO_16MHZ;
+	  BCSCTL1 = CALBC1_16MHZ;
+	  BCSCTL2 = 0x00;
+	  BCSCTL3 = 0x0C;
+
+	  P1DIR = 0x01;
+
+	  IE1 |= 1;
+
+	  etTimer_init();
+
+	  _enable_interrupt();
+
+
+}
+
+void etUserPreRun(void){
+	_enable_interrupt();
+}
+
+void etUserPostRun(void){ }
+void etUserExit(void){ }
+
+
+/* platform specific functions */
+
+

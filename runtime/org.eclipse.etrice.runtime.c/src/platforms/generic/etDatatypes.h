@@ -43,7 +43,7 @@ typedef char* charPtr;
 
 /* boolean datatypes and values */
 typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-//typedef bool boolean;
+typedef bool boolean;
 
 #ifndef TRUE
 	#define TRUE 1

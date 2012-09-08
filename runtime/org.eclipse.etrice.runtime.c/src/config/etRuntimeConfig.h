@@ -25,5 +25,9 @@
 #define ET_RUNTIME_MAXLOOP 100
 //#define ET_RUNTIME_ENDLESS
 
+/* pool and block size */
+#define MESSAGE_POOL_MAX 50
+#define MESSAGE_BLOCK_SIZE 64
+
 
 #endif /* ETGLOBALFLAGS_H_ */
