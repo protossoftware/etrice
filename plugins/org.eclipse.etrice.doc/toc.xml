@@ -69,6 +69,19 @@
 <topic href="help/SettinguptheWorkspaceC.html" label="Setting up the Workspace ( C )">
 <topic href="help/SettinguptheWorkspaceC.html#Testingtheenvironment" label="Testing the environment"></topic>
 </topic>
+<topic href="help/TutorialHelloWorldC.html" label="Tutorial HelloWorld ( C )">
+<topic href="help/TutorialHelloWorldC.html#Scope5" label="Scope"></topic>
+<topic href="help/Createanewmodelfromscratch4.html" label="Create a new model from scratch"></topic>
+<topic href="help/CreatetheHelloWorldmodel.html" label="Create the HelloWorld model"></topic>
+<topic href="help/CreatealaunchconfigurationtostarttheCcodegenerator.html" label="Create a launch configuration to start the C codegenerator"></topic>
+<topic href="help/Generatethecode.html" label="Generate the code"></topic>
+<topic href="help/Setuptheincludepath.html" label="Setup the include path"></topic>
+<topic href="help/Runthemodel.html" label="Run the model"></topic>
+<topic href="help/Summary4.html" label="Summary"></topic>
+<topic href="help/Buildandrunthemodel2.html" label="Build and run the model"></topic>
+<topic href="help/OpentheMessageSequenceChart2.html" label="Open the Message Sequence Chart"></topic>
+<topic href="help/Summary5.html" label="Summary"></topic>
+</topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#Actors" label="Actors">
 <topic href="help/ROOMConcepts.html#Description" label="Description"></topic>
