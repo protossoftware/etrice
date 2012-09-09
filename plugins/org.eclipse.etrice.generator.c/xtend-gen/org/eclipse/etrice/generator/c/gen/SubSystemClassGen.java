@@ -265,7 +265,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("#include \"platform/etTimer.h\"");
     _builder.newLine();
-    _builder.append("#include \"etGlobalFlags.h\"");
+    _builder.append("#include \"etRuntimeConfig.h\"");
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = ssc.getUserCode3();
