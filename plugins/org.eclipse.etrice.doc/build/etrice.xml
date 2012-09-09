@@ -1718,7 +1718,12 @@ carLights.setState(TrafficLight3.OFF);
 		<para>Before you can start with C, some preconditions must be fulfilled:</para>
 		<para>- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
 			- The CDT-Eclipse plug in must be installed as the C development environment.</para>
-		<para>Once the CDT is installed, the C runtime and model library must be imported.</para>
+		<para>Once the CDT is installed, the C runtime and model library must be imported. 
+			(
+			<emphasis>File-&gt;New-&gt;Project-&gt;eTrice</emphasis> select 
+			<emphasis>eTrice C runtime</emphasis> / 
+			<emphasis>eTrice C modellib</emphasis>)
+		</para>
 		<para>The resulting workspace should look like this:</para>
 		<para>
 			<mediaobject>
@@ -1791,8 +1796,64 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>Remember these steps. In the following Tutorials these steps will be referenced as 
-				<emphasis>build and run</emphasis>. 
+				<emphasis>build and run</emphasis>.
 			</para>
+		</section>
+		<section id="BuildingtheCruntimesystem">
+			<title>Building the C runtime system</title>
+			<para>The C runtime system contains some basic functionalities to run the generated models. The so called runtime is common for all C projects. The requirements for several projects may differ depending on the functionality of the model or the resources of the different platforms. Therefore the runtime is configurable in terms of message queue size, frequency and memory alignment. The configuration file 
+				<emphasis>etRuntimeConfig.h</emphasis> is located in 
+				<emphasis>src/config</emphasis>.
+			</para>
+			<para>After changing the configuration, the runtime must be built.</para>
+			<para>Open the properties of the 
+				<emphasis>org.eclipse.runtime.c</emphasis> project and select 
+				<emphasis>C/C++ Build-&gt;Settins-&gt;Tool Settings</emphasis> and select 
+				<emphasis>Includes</emphasis>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC08.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Verify the include paths</para>
+			<para>
+				<emphasis>src/config</emphasis>
+
+				<emphasis>src/common</emphasis>
+
+				<emphasis>src/platforms/generic</emphasis>
+			</para>
+			<para>Within the Setting dialog select the tab 
+				<emphasis>Build Artefact</emphasis> and select 
+				<emphasis>Static Library</emphasis>
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC09.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Build the runtime by clicking</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC10.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The runtime library should be created.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/032-SetupWorkspaceC11.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A specific library file must exist within the project. Such specific runtime libraries might be referenced from several applications.     </para>
 		</section>
 	</chapter>
 	<chapter id="TutorialHelloWorldC">
@@ -1810,6 +1871,9 @@ carLights.setState(TrafficLight3.OFF);
 				</listitem>
 				<listitem>
 					<para>create a launch configuration for the C code generator</para>
+				</listitem>
+				<listitem>
+					<para>setup the C environment</para>
 				</listitem>
 				<listitem>
 					<para>generate the source code</para>
@@ -1870,7 +1934,7 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>Due to the file ending 
-				<emphasis>.room</emphasis> the tool will ask you to add the Xtext nature. Answer with 
+				<emphasis>.room</emphasis>, the tool will ask you to add the Xtext nature. Answer with 
 				<emphasis>Yes</emphasis>. 
 			</para>
 			<para>
@@ -1895,8 +1959,11 @@ carLights.setState(TrafficLight3.OFF);
 				Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
 				Recognize the C specific parts:
 				- Import CTypes instead of JavaTypes
-				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.</para>
-			<para>ToDo: shutdown must be not depend on the subsystem.</para>
+				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
+				- The application must be shutdown on model level (see also 
+				<emphasis>etRuntimeConfig.h</emphasis>) 
+			</para>
+			<para>ToDo: shutdown must not depend on the subsystem.</para>
 			<literallayout><code>RoomModel HelloWorldCModel {
 	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
 	SubSystemClass HelloWorldCSubSysClass {
@@ -1909,8 +1976,8 @@ carLights.setState(TrafficLight3.OFF);
 				Transition init: initial -&gt; state0 { }
 				State state0 {
 					entry {
-						"printf(\"HelloETrice !\\n\");"
-						"HelloETriceSubSysClass_shutdown();//exit(0);"
+						"printf(\"HelloWorldC !\\n\");"
+						"HelloWorldCSubSysClass_shutdown();//exit(0);"
 						"\t\t\t\t\t\t"
 					}
 				}
@@ -1924,114 +1991,140 @@ carLights.setState(TrafficLight3.OFF);
 			</blockquote>
 		</section>
 		<section id="CreatealaunchconfigurationtostarttheCcodegenerator">
-			<title>Create a launch configuration to start the C codegenerator</title>
+			<title>Create a launch configuration to start the C code generator</title>
+			<para>Other than in Java a launch configuration for the C code generator must be created.</para>
+			<para>From the 
+				<emphasis>Run</emphasis> menu select 
+				<emphasis>Run Configurations</emphasis>
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC06.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Within the dialog select 
+				<emphasis>eTrice C Generator</emphasis> and click the 
+				<emphasis>New</emphasis> button to create a new launch configuration.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC07.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>A new configuration should be created. Name it _gen_HelloWorldC_ and add the model via one of the 
+				<emphasis>add</emphasis> buttons.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC08.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>In the 
+				<emphasis>Refresh</emphasis> tab select 
+				<emphasis>The entire workspace</emphasis> 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC09.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>In the 
+				<emphasis>Common</emphasis> tab select 
+				<emphasis>Shared file</emphasis> and add the 
+				<emphasis>HelloWorldC</emphasis> project via the 
+				<emphasis>Browse</emphasis> button.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC10.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Apply your changes. The new configuration should now exist in your workspace.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC11.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
 		</section>
 		<section id="Generatethecode">
 			<title>Generate the code</title>
+			<para>Now you can generate the code as you know it from Java. Right click to the launch configuration and run it as _gen_HelloWorldC_.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC12.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The code should be generated.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/034-HelloWorldC13.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
 		</section>
 		<section id="Setuptheincludepath">
 			<title>Setup the include path</title>
-		</section>
-		<section id="Runthemodel">
-			<title>Run the model</title>
-		</section>
-		<section id="Summary4">
-			<title>Summary</title>
-			<para>We will implement the Hello World code on the initial transition of the 
-				<emphasis>HelloWorldTop</emphasis> actor. Therefore open the state machine editor by right clicking the 
-				<emphasis>HelloWorldTop</emphasis> actor in the outline view and select 
-				<emphasis>Edit Behavior</emphasis>.
+			<para>Before you can build the application you must setup the include path for the runtime system. Right click the project and select 
+				<emphasis>Properties</emphasis>. Add the include path as described in 
+				<emphasis>setting up the workspace</emphasis>.
 			</para>
 			<para>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/015-HelloWorld03.png"/>
+						<imagedata fileref="images/034-HelloWorldC14.png"/>
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>The state machine editor will be opened. Drag and drop an 
-				<emphasis>Initial Point</emphasis> from the tool box to the diagram into the top level state. Drag and drop a 
-				<emphasis>State</emphasis> from the tool box to the diagram. Confirm the dialogue with 
-				<emphasis>ok</emphasis>. Select the 
-				<emphasis>Transition</emphasis> in the tool box and draw the transition from the 
-				<emphasis>Initial Point</emphasis> to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
-			</para>
-			<literallayout><code>System.out.println("Hello World !");
-</code></literallayout>
-			<para>The result should look like this:</para>
+			<para>Add the runtime library.</para>
 			<para>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/015-HelloWorld04.png"/>
+						<imagedata fileref="images/034-HelloWorldC15.png"/>
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/015-HelloWorld05.png"/>
-					</imageobject>
-				</mediaobject>
-			</para>
+			<para>Recognize the name of the library (&#8222;org.eclipse.etrice.runtime.c”). The library file on your disk is &#8222;liborg.eclipse.etrice.runtime.c.a”. </para>
 		</section>
 		<section id="Buildandrunthemodel2">
 			<title>Build and run the model</title>
-			<para>Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From 
-				<emphasis>HelloWorld/</emphasis> right click 
-				<emphasis role="bold">gen_HelloWorld.launch</emphasis> and run it as gen_HelloWorld. All model files in the model directory will be generated.
+			<para>Now you can build the application. Click the build button to build the application.
+				Run the application as 
+				<emphasis>Local C/C++ Application</emphasis>.
+				Verify the output.
 			</para>
 			<para>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/015-HelloWorld06.png"/>
-					</imageobject>
-				</mediaobject>
-			</para>
-			<para>The code will be generated to the src-gen directory. The main function will be contained in 
-				<emphasis role="bold">SubSystem_HelloWorldRunner.java</emphasis>. Select this file and run it as Java application.
-			</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/015-HelloWorld07.png"/>
-					</imageobject>
-				</mediaobject>
-			</para>
-			<para>The Hello World application starts and the string will be printed on the console window. To stop the application the user must type 
-				<emphasis>quit</emphasis> in the console window.
-			</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/015-HelloWorld08.png"/>
+						<imagedata fileref="images/034-HelloWorldC16.png"/>
 					</imageobject>
 				</mediaobject>
 			</para>
 		</section>
-		<section id="OpentheMessageSequenceChart2">
-			<title>Open the Message Sequence Chart</title>
-			<para>During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/015-HelloWorld09.png"/>
-					</imageobject>
-				</mediaobject>
-			</para>
-		</section>
-		<section id="Summary5">
+		<section id="Summary4">
 			<title>Summary</title>
-			<para>Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
-				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.</para>
+			<para>You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  </para>
+			<para>The next tutorial provides an exercise to get more familiar with these working steps. 
+				h1. ROOM Concepts</para>
+			<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+				The formal ROOM grammar based on Xtext (EBNF) you can find here: 
+				<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
+			</para>
 		</section>
-	</chapter>
-	<chapter id="ROOMConcepts">
-		<title>ROOM Concepts</title>
-		<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-			The formal ROOM grammar based on Xtext (EBNF) you can find here: 
-			<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
-		</para>
 		<section id="Actors">
 			<title>Actors</title>
 			<section id="Description">

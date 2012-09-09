@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="eTrice User Guide">
 <link rel="up" href="index.html" title="eTrice User Guide">
 <link rel="prev" href="Whydoesitworkandwhyisitsafe.html" title="Why does it work and why is it safe?">
-<link rel="next" href="TutorialHelloWorldC.html" title="Tutorial HelloWorld ( C )">
+<link rel="next" href="BuildingtheCruntimesystem.html" title="Building the C runtime system">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Setting up the Workspace ( C )</h1>
@@ -25,12 +25,20 @@
 <dt>
 <span class="section"><a href="SettinguptheWorkspaceC.html#Testingtheenvironment">Testing the environment</a></span>
 </dt>
+<dt>
+<span class="section"><a href="BuildingtheCruntimesystem.html">Building the C runtime system</a></span>
+</dt>
 </dl>
 </div>
 <p>Before you can start with C, some preconditions must be fulfilled:</p>
 <p>- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
 			- The CDT-Eclipse plug in must be installed as the C development environment.</p>
-<p>Once the CDT is installed, the C runtime and model library must be imported.</p>
+<p>Once the CDT is installed, the C runtime and model library must be imported. 
+			(
+			<span class="emphasis"><em>File-&gt;New-&gt;Project-&gt;eTrice</em></span> select 
+			<span class="emphasis"><em>eTrice C runtime</em></span> / 
+			<span class="emphasis"><em>eTrice C modellib</em></span>)
+		</p>
 <p>The resulting workspace should look like this:</p>
 <p>
 			
@@ -118,7 +126,7 @@
 			
 </p>
 <p>Remember these steps. In the following Tutorials these steps will be referenced as 
-				<span class="emphasis"><em>build and run</em></span>. 
+				<span class="emphasis"><em>build and run</em></span>.
 			</p>
 </div>
 </div>

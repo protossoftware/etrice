@@ -6,8 +6,8 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="eTrice User Guide">
 <link rel="up" href="TutorialHelloWorldC.html" title="Tutorial HelloWorld ( C )">
-<link rel="prev" href="Runthemodel.html" title="Run the model">
-<link rel="next" href="Buildandrunthemodel2.html" title="Build and run the model">
+<link rel="prev" href="Buildandrunthemodel2.html" title="Build and run the model">
+<link rel="next" href="Actors.html" title="Actors">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Summary</h1>
@@ -20,49 +20,12 @@
 </div>
 </div>
 </div>
-<p>We will implement the Hello World code on the initial transition of the 
-				<span class="emphasis"><em>HelloWorldTop</em></span> actor. Therefore open the state machine editor by right clicking the 
-				<span class="emphasis"><em>HelloWorldTop</em></span> actor in the outline view and select 
-				<span class="emphasis"><em>Edit Behavior</em></span>.
-			</p>
-<p>
-				
-</p>
-<div class="mediaobject">
-<img src="images/015-HelloWorld03.png"></div>
-<p>
-			
-</p>
-<p>The state machine editor will be opened. Drag and drop an 
-				<span class="emphasis"><em>Initial Point</em></span> from the tool box to the diagram into the top level state. Drag and drop a 
-				<span class="emphasis"><em>State</em></span> from the tool box to the diagram. Confirm the dialogue with 
-				<span class="emphasis"><em>ok</em></span>. Select the 
-				<span class="emphasis"><em>Transition</em></span> in the tool box and draw the transition from the 
-				<span class="emphasis"><em>Initial Point</em></span> to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
-			</p>
-<div class="literallayout">
-<p>
-<code class="code">System.out.println("Hello&nbsp;World&nbsp;!");<br>
-
-</code>
-</p>
-</div>
-<p>The result should look like this:</p>
-<p>
-				
-</p>
-<div class="mediaobject">
-<img src="images/015-HelloWorld04.png"></div>
-<p>
-			
-</p>
-<p>Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.</p>
-<p>
-				
-</p>
-<div class="mediaobject">
-<img src="images/015-HelloWorld05.png"></div>
-<p>
+<p>You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  </p>
+<p>The next tutorial provides an exercise to get more familiar with these working steps. 
+				h1. ROOM Concepts</p>
+<p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+				The formal ROOM grammar based on Xtext (EBNF) you can find here: 
+				<a class="ulink" href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext" target="_new">ROOM Grammar</a>
 			
 </p>
 </div>
