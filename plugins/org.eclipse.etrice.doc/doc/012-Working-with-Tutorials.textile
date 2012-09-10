@@ -1,7 +1,7 @@
 h1. Working with the eTrice Tutorials
 
-The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. 
+The eTrice Tutorials will help you to learn and understand the eTrice tool and concepts. ETrice supports several target languages. The concepts will not be explained for each language. 
 
 Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.
 
-Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  
+Therefore the best way to start with eTrice is to follow the Java Tutorials and after that switch to your target language.  

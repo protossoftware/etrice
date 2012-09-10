@@ -1,8 +1,8 @@
-h1. Tutorial HelloWorld ( C )
+h1. Tutorial HelloWorld for C
 
 h2. Scope
 
-In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C as in Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
 You will perform the following steps:
 
 # create a new model from scratch for C
@@ -12,12 +12,12 @@ You will perform the following steps:
 # generate the source code
 # run the model
 
-Make sure that you have set up the workspace as described in _Setting up the workspace ( C )_.
+Make sure that you have set up the workspace as described in _Setting up the Workspace for C Projects_.
 
 
 h2. Create a new model from scratch
 
-Before you can create a new C-model, you have to create a new C project as described in _Setting up the workspace ( C )_.
+Before you can create a new C-model, you have to create a new C project as described in _Setting up the Workspace for C Projects_.
 Remember:
 - select the _C/C++_ perspective
 - From the main menue select _File->New->C Project_
@@ -114,7 +114,7 @@ Apply your changes. The new configuration should now exist in your workspace.
 
 h2. Generate the code
 
-Now you can generate the code as you know it from Java. Right click to the launch configuration and run it as _gen_HelloWorldC_.
+Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.
 
 !images/034-HelloWorldC12.png!
 

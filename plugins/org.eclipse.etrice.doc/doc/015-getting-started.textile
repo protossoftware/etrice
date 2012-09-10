@@ -1,4 +1,4 @@
-h1. Tutorial HelloWorld (Java)
+h1. Tutorial HelloWorld for Java
 
 h2. Scope
 
