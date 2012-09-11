@@ -36,10 +36,10 @@ import com.google.inject.Provider;
 public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 
 	@Inject
-	private Provider<XtextHyperlink> hyperlinkProvider;
+	protected Provider<XtextHyperlink> hyperlinkProvider;
 
 	@Inject
-	private PlatformRelativeUriResolver uriResolver;
+	protected PlatformRelativeUriResolver uriResolver;
 	
 	public ImportAwareHyperlinkHelper() {
 		super();

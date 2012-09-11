@@ -19,6 +19,7 @@ import org.eclipse.etrice.integration.HandlerTest.TestProtocol.*;
 public class Tester extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected TestProtocolConjPort TestPort1 = null;
 	
@@ -30,6 +31,7 @@ public class Tester extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
 	public static final int IFITEM_timer = 2;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -49,7 +51,11 @@ public class Tester extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public TestProtocolConjPort getTestPort1 (){
 		return this.TestPort1;

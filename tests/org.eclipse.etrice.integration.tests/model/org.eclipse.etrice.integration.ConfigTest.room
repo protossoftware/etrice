@@ -9,9 +9,74 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 	ActorClass ConfigText_Top_ac {
 		Structure {
 			ActorRef testee: Testee_ac
+			ActorRef testee2: DynTestee_ac
+			Binding testee2.Conj_DynConfigPort and testee.Reg_dynConfigPort
 		}
 		Behavior { }
 	}
+	
+	ActorClass DynTestee_ac {
+		Interface {
+			conjugated Port Conj_DynConfigPort: TestCommProtocol
+		}
+		Structure {
+			usercode1 {
+				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
+			}
+			external Port Conj_DynConfigPort
+			Attribute int_i : int32
+			Attribute dc_i : Dyn_DC1
+			// manual test
+			Attribute blockMe : int32
+			Attribute blocker : boolean
+			// not explicit test
+			Attribute dc_dump : Dyn_DC1
+			Attribute int_dump : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> First {	}
+				Transition tr0: First -> Done {
+					triggers {
+						<test : Conj_DynConfigPort>
+					}
+					action {
+						// write without test
+						"Dyn_DC1 tmp = new Dyn_DC1(123, new long[]{1000}, new Dyn_DC2(0.0e-100, \"dummy out\".toCharArray()));"
+						"setAndWriteDc_dump(tmp);"
+						"setAndWriteInt_dump(888);"
+						// read test
+						"if(blocker)getBlockMeLock().forbidUpdate(); else getBlockMeLock().allowUpdate();"
+						"int testValue = 0;"
+						"if(int_i != 401 || getDc_i().getLong_array_i()[0] != 403)"
+						"\ttestValue = 30;"
+						"if(getDc_i().getDc_i().getDouble_i() != 0.404)"
+						"\ttestValue = 31;"
+						"if(!String.valueOf(getDc_i().getDc_i().getChar_i()).equals(\"instance4\"))"
+						"\ttestValue = 32;"
+						"System.out.println(\"blockMe: \"+getBlockMe()+\", blocker: \"+getBlocker());"
+						"if(testValue != 0)"
+						"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
+						"else"
+						"\tConj_DynConfigPort.ok();"
+					}
+				}
+				State First {}
+				State Done{}
+			}
+		}
+	}
+	
+	DataClass Dyn_DC1 {
+		Attribute int_i: int32
+		Attribute long_array_i[1]: int64 = "0"
+		Attribute dc_i : Dyn_DC2
+	}
+	
+	DataClass Dyn_DC2 {
+		Attribute double_i: float64
+		Attribute char_i[10] : char
+	}	
 
 	ActorClass AC1_ac {
 		Interface {
@@ -34,10 +99,14 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 	}
 
 	ActorClass Testee_ac {
+		Interface{
+			Port Reg_dynConfigPort: TestCommProtocol
+		}
 		Structure {
 			usercode1 {
 				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
 			}
+			external Port Reg_dynConfigPort
 			Port Reg_port: PortProtocol
 			Attribute bool_r: boolean = "true"
 			Attribute bool_c: boolean = "true"
@@ -49,34 +118,49 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			Attribute float_c: float64 = "22.22"
 			Attribute float_i: float64 = "33.33"
 
-			// Attribute char_r: char = "R"
-			Attribute char_c: char = "C"
-			Attribute char_i: char = "I"
+			Attribute char_r: char = "'R'"
+			Attribute char_c: char = "'C'"
+			Attribute char_i: char = "'I'"
 
-			// Attribute string_r[20] : string = "ROOM will bloom"
-			Attribute string_c [ 20 ]: char = "ROOM Zoom"
-			Attribute string_i [ 20 ]: char = "ROOM Boom"
+			Attribute charArray_r[20] : char = "\"ROOM will bloom\".toCharArray()"
+			Attribute charArray_c [ 20 ]: char = "ROOM Zoom"
+			Attribute charArray_i [ 20 ]: char = "ROOM Boom"
+			Attribute string_r : string = "\":/\""
+			Attribute string_c : string = "\":)\""
+			Attribute string_i : string = "\":]\""
 			Attribute array1_r [ 1 ]: int32 = "0"
 			Attribute array1_c [ 1 ]: int32 = "0"
 			Attribute array1_i [ 1 ]: int32 = "0"
 			Attribute array2_r [ 2 ]: boolean = "{true, true}"
 			Attribute array2_c [ 2 ]: boolean = "{true, false}"
 			Attribute array2_i [ 2 ]: boolean = "{true, false}"
+			
 			ActorRef AR1: AC1_ac
 			Binding Reg_port and AR1.Conj_port
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> Testing { }
-				Transition tr1: Testing -> Done{
+				Transition init: initial -> Testing1 { }
+				Transition tr1: Testing1 -> Testing2{
 					triggers{
 						<portTestSucc : Reg_port>
 					}
 				}
-				State Testing {
+				Transition tr2: Testing2 -> Done{
+					triggers{
+						<ok : Reg_dynConfigPort>
+					}
+				}
+				
+				State Testing1 {
 					entry {
 						"if(Reg_port.varCheck())"
 						"\tReg_port.conjCheck();"
+					}
+				}
+				State Testing2{
+					entry{
+						"Reg_dynConfigPort.test();"
 					}
 				}
 				State Done {
@@ -87,11 +171,12 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 						"\tRTServices.getInstance().getSubSystem().testFinished(2);"
 						"else if (float_r != 11.11 || float_c !=0xFFFFFF || float_i != 0.00001)"
 						"\tRTServices.getInstance().getSubSystem().testFinished(3);"
-						"//char_r != \'R\'"
-						"else if (char_c != \'A\' || char_i != \'C\')"
+						"else if (char_r != \'R\' || char_c != \'A\' || char_i != \'C\')"
 						"\tRTServices.getInstance().getSubSystem().testFinished(4);"
 						"// string_r.equals(\"ROOM will bloom\")"
-						"else if (string_c.equals(\"ROOM-Coon\") || string_i.equals(\"ROOM 2 Moon\"))"
+						"else if (charArray_r.equals(\"ROOM will bloom\") || charArray_c.equals(\"ROOM-Coon\") || charArray_i.equals(\"ROOM 2 Moon\"))"
+						"\tRTServices.getInstance().getSubSystem().testFinished(5);"
+						"else if (!string_r.equals(\":/\") || !string_c.equals(\":-)\") || !string_i.equals(\":^]\"))"
 						"\tRTServices.getInstance().getSubSystem().testFinished(5);"
 						"if(array1_r[0] != 0 || array1_c[0] != 99 || array1_i[0] != 4)"
 						"\tRTServices.getInstance().getSubSystem().testFinished(6);"
@@ -157,5 +242,18 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			}
 		}
 	}
+	
+	
+	
+	ProtocolClass TestCommProtocol {
+		incoming {
+			Message ok()
+			
+		}
+		outgoing {
+			Message test()
+		}
+	}
+	
 
 }

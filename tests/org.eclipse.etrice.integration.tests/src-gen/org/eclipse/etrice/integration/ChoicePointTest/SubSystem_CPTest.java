@@ -31,6 +31,7 @@ public class SubSystem_CPTest extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,106);
@@ -114,6 +115,17 @@ public class SubSystem_CPTest extends SubSystemClassBase{
 					addr_item__SubSystem_CPTest_HandlerTest_Top_cp_tester,
 					addr_item__SubSystem_CPTest_HandlerTest_Top_cp_user
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

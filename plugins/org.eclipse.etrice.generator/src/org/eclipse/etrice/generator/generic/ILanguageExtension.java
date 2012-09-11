@@ -2,6 +2,7 @@
 package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import java.util.List;
 import org.eclipse.xtext.util.Pair;
 
@@ -178,4 +179,14 @@ public interface ILanguageExtension {
 	 * @return super.method for Java, baseClassName::method for C++, empty for C
 	 */
 	String superCall(String baseClassName, String method, String arguments);
+	
+	/**
+	 * Produces necessary casts or data type keys for primitive values
+	 * @param type ROOM PrimitiveType
+	 * @param value Java Primitive e.g. Long, Byte, String
+	 * @return for Java: <br>
+	 * toPrimitve("PrimitiveType int64: ptInteger -> long (Long)", Long value = 99) -> 99L<br>
+	 * toPrimitve("PrimitiveType int8: ptInteger -> byte (Byte)", Byte value = 12) -> (byte)12
+	 */
+	String toValueLiteral(PrimitiveType type, String value);
 }

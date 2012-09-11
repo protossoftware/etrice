@@ -26,6 +26,7 @@ public class ALogService extends ActorClassBase {
 	static long tStart = System.currentTimeMillis();
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -35,6 +36,7 @@ public class ALogService extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_log = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -60,7 +62,11 @@ public class ALogService extends ActorClassBase {
 		// own service implementations
 		log = new LogReplPort(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public LogReplPort getLog (){
 		return this.log;

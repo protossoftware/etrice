@@ -85,6 +85,16 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
         return createConfigElementAdapter();
       }
       @Override
+      public Adapter caseSubSystemConfig(SubSystemConfig object)
+      {
+        return createSubSystemConfigAdapter();
+      }
+      @Override
+      public Adapter caseDynamicConfig(DynamicConfig object)
+      {
+        return createDynamicConfigAdapter();
+      }
+      @Override
       public Adapter caseActorClassConfig(ActorClassConfig object)
       {
         return createActorClassConfigAdapter();
@@ -217,6 +227,36 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConfigElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.SubSystemConfig <em>Sub System Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.SubSystemConfig
+   * @generated
+   */
+  public Adapter createSubSystemConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.DynamicConfig <em>Dynamic Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.DynamicConfig
+   * @generated
+   */
+  public Adapter createDynamicConfigAdapter()
   {
     return null;
   }

@@ -17,6 +17,7 @@ import org.eclipse.etrice.integration.tests.p_HFSM.*;
 public class a_HFSM extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected p_HFSMPort fct = null;
 	
@@ -26,6 +27,7 @@ public class a_HFSM extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_fct = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -44,7 +46,11 @@ public class a_HFSM extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public p_HFSMPort getFct (){
 		return this.fct;

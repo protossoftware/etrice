@@ -52,6 +52,15 @@ process(EClass this) :
 			 		if(element instanceof ProtocolClassConfig)
 						list.add((ProtocolClassConfig) element);
 				return list;'
+			)->addOperation(
+		   		"getSubSystemConfigs",
+	       		ePackage.getEClassifier("SubSystemConfig"),
+	       		-1,
+	       		'EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
+				for(ConfigElement element : this.getConfigElements())
+			 		if(element instanceof SubSystemConfig)
+						list.add((SubSystemConfig) element);
+				return list;'
 			))
 		default: null
 	}

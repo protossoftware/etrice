@@ -22,6 +22,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 public class MrPingActor extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PingPongProtocolConjPort PingPongPort = null;
 	protected PingPongProtocolConjPort PingPongPort2 = null;
@@ -37,6 +38,7 @@ public class MrPingActor extends ActorClassBase {
 	public static final int IFITEM_PingPongPort2 = 2;
 	public static final int IFITEM_PingPongPort3 = 3;
 	public static final int IFITEM_timer = 4;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int count;
@@ -62,6 +64,8 @@ public class MrPingActor extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
 	public void setCount (int count) {
 		 this.count = count;
@@ -75,6 +79,8 @@ public class MrPingActor extends ActorClassBase {
 	public int getPongCount () {
 		return this.pongCount;
 	}
+	
+	
 	//--------------------- port getters
 	public PingPongProtocolConjPort getPingPongPort (){
 		return this.PingPongPort;

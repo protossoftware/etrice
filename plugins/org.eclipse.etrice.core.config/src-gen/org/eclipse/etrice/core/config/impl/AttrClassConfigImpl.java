@@ -2,13 +2,20 @@
  */
 package org.eclipse.etrice.core.config.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
@@ -23,6 +30,7 @@ import org.eclipse.etrice.core.config.NumberLiteral;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getMin <em>Min</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getMax <em>Max</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +57,16 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * @ordered
    */
   protected NumberLiteral max;
+
+  /**
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttributes()
+   * @generated
+   * @ordered
+   */
+  protected EList<AttrClassConfig> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -172,6 +190,20 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<AttrClassConfig> getAttributes()
+  {
+    if (attributes == null)
+    {
+      attributes = new EObjectContainmentEList<AttrClassConfig>(AttrClassConfig.class, this, ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES);
+    }
+    return attributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -181,6 +213,8 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
         return basicSetMin(null, msgs);
       case ConfigPackage.ATTR_CLASS_CONFIG__MAX:
         return basicSetMax(null, msgs);
+      case ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -199,6 +233,8 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
         return getMin();
       case ConfigPackage.ATTR_CLASS_CONFIG__MAX:
         return getMax();
+      case ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -208,6 +244,7 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -218,6 +255,10 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
         return;
       case ConfigPackage.ATTR_CLASS_CONFIG__MAX:
         setMax((NumberLiteral)newValue);
+        return;
+      case ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends AttrClassConfig>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -239,6 +280,9 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
       case ConfigPackage.ATTR_CLASS_CONFIG__MAX:
         setMax((NumberLiteral)null);
         return;
+      case ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES:
+        getAttributes().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -257,6 +301,8 @@ public class AttrClassConfigImpl extends AttrConfigImpl implements AttrClassConf
         return min != null;
       case ConfigPackage.ATTR_CLASS_CONFIG__MAX:
         return max != null;
+      case ConfigPackage.ATTR_CLASS_CONFIG__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -20,6 +20,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 public class a_HFSM_Tester extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected p_HFSMConjPort testee = null;
 	
@@ -29,6 +30,7 @@ public class a_HFSM_Tester extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_testee = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -47,7 +49,11 @@ public class a_HFSM_Tester extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public p_HFSMConjPort getTestee (){
 		return this.testee;

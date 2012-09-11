@@ -41,6 +41,24 @@ public interface ConfigFactory extends EFactory
   ConfigElement createConfigElement();
 
   /**
+   * Returns a new object of class '<em>Sub System Config</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Sub System Config</em>'.
+   * @generated
+   */
+  SubSystemConfig createSubSystemConfig();
+
+  /**
+   * Returns a new object of class '<em>Dynamic Config</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dynamic Config</em>'.
+   * @generated
+   */
+  DynamicConfig createDynamicConfig();
+
+  /**
    * Returns a new object of class '<em>Actor Class Config</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -87,6 +87,7 @@ public class ATcpServer extends ActorClassBase {
 					
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	protected PTcpControlPort ControlPort = null;
 	protected PTcpPayloadPort PayloadPort = null;
@@ -98,6 +99,7 @@ public class ATcpServer extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_PayloadPort = 2;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int lastError;
@@ -129,6 +131,8 @@ public class ATcpServer extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
 	public void setLastError (int lastError) {
 		 this.lastError = lastError;
@@ -142,6 +146,8 @@ public class ATcpServer extends ActorClassBase {
 	public int getPayloadPortReplocation () {
 		return this.payloadPortReplocation;
 	}
+	
+	
 	//--------------------- port getters
 	public PTcpControlPort getControlPort (){
 		return this.ControlPort;
