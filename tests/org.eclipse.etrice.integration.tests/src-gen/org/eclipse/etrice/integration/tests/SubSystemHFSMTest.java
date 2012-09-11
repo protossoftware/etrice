@@ -32,6 +32,7 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,109);
@@ -153,6 +154,17 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 					addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester,
 					addr_item__SubSystemHFSMTest_services
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

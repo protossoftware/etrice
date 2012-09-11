@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.etrice.core.config.IntLiteral;
-import org.eclipse.etrice.core.config.NumberLiteral;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
-import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -35,7 +32,6 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -55,11 +51,11 @@ public class ConfigUtil {
 		return null;
 	}
 
-	public static ActorContainerClass resolve(ActorContainerClass root,
+	public static ActorClass resolve(ActorContainerClass root,
 			RefPath path) {
-		if (path == null)
-			return root;
-
+		if(path.getRefs().isEmpty())
+			return null;
+		
 		ActorContainerClass result = root;
 		for (String ref : path.getRefs()) {
 			ActorRef match = null;
@@ -75,7 +71,32 @@ public class ConfigUtil {
 			result = match.getType();
 		}
 
-		return result;
+		return (ActorClass) result;
+	}
+	
+	public static ActorRef getLastActorRef(ActorContainerClass root,
+			RefPath path) {
+		if(path.getRefs().isEmpty())
+			return null;
+		
+		ActorRef lastMatch = null;
+		ActorContainerClass result = root;
+		for (String ref : path.getRefs()) {
+			ActorRef match = null;
+			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+					match = (ActorRef) actor;
+					break;
+				}
+			}
+
+			if (match == null)
+				return null;
+			result = match.getType();
+			lastMatch = match;
+		}
+
+		return lastMatch;
 	}
 
 	/**
@@ -123,18 +144,6 @@ public class ConfigUtil {
 		}
 
 		return null;
-	}
-
-	public static double literalToDouble(NumberLiteral number) {
-		double dValue = 0;
-		if (number instanceof IntLiteral)
-			dValue = ((IntLiteral) number).getValue();
-		else if (number instanceof RealLiteral)
-			dValue = ((RealLiteral) number).getValue();
-		else
-			assert (false) : "unexpected type";
-
-		return dValue;
 	}
 
 	public static PortClass getPortClass(PortInstanceConfig config) {

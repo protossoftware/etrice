@@ -34,7 +34,7 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
    * @generated
    * @ordered
    */
-  protected static final int VALUE_EDEFAULT = 0;
+  protected static final long VALUE_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -44,7 +44,7 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
    * @generated
    * @ordered
    */
-  protected int value = VALUE_EDEFAULT;
+  protected long value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,7 +72,7 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getValue()
+  public long getValue()
   {
     return value;
   }
@@ -82,9 +82,9 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(int newValue)
+  public void setValue(long newValue)
   {
-    int oldValue = value;
+    long oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.INT_LITERAL__VALUE, oldValue, value));
@@ -117,7 +117,7 @@ public class IntLiteralImpl extends NumberLiteralImpl implements IntLiteral
     switch (featureID)
     {
       case ConfigPackage.INT_LITERAL__VALUE:
-        setValue((Integer)newValue);
+        setValue((Long)newValue);
         return;
     }
     super.eSet(featureID, newValue);

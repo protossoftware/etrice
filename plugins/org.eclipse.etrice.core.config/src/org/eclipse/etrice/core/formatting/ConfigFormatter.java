@@ -26,7 +26,7 @@ public class ConfigFormatter extends AbstractDeclarativeFormatter {
 		// general
 		
 		c.setAutoLinewrap(120);
-		c.setLinewrap(2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(1).before(f.getSL_COMMENTRule());
 		c.setLinewrap(2).before(f.getML_COMMENTRule());
 		
 		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}")) {

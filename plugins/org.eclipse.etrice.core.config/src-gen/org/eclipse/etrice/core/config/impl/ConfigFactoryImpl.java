@@ -66,6 +66,8 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
     {
       case ConfigPackage.CONFIG_MODEL: return createConfigModel();
       case ConfigPackage.CONFIG_ELEMENT: return createConfigElement();
+      case ConfigPackage.SUB_SYSTEM_CONFIG: return createSubSystemConfig();
+      case ConfigPackage.DYNAMIC_CONFIG: return createDynamicConfig();
       case ConfigPackage.ACTOR_CLASS_CONFIG: return createActorClassConfig();
       case ConfigPackage.ACTOR_INSTANCE_CONFIG: return createActorInstanceConfig();
       case ConfigPackage.PROTOCOL_CLASS_CONFIG: return createProtocolClassConfig();
@@ -108,6 +110,28 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     ConfigElementImpl configElement = new ConfigElementImpl();
     return configElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubSystemConfig createSubSystemConfig()
+  {
+    SubSystemConfigImpl subSystemConfig = new SubSystemConfigImpl();
+    return subSystemConfig;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DynamicConfig createDynamicConfig()
+  {
+    DynamicConfigImpl dynamicConfig = new DynamicConfigImpl();
+    return dynamicConfig;
   }
 
   /**

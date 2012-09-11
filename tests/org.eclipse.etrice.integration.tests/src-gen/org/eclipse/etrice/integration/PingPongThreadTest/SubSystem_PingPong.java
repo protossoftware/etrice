@@ -36,6 +36,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,116);
@@ -214,6 +215,17 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 					addr_item__SubSystem_PingPong_application_MrPong3,
 					addr_item__SubSystem_PingPong_services
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

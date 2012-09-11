@@ -20,6 +20,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 public class HandlerUser extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
 	
@@ -29,6 +30,7 @@ public class HandlerUser extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int counter;
@@ -59,6 +61,8 @@ public class HandlerUser extends ActorClassBase {
 			caseId = etUnit_openAll("tmp", "HandlerTest.etu", "HandlerTest_suite", "HandlerTest_case");
 		}
 	}
+
+	
 	//--------------------- attribute setters and getters
 	public void setCounter (int counter) {
 		 this.counter = counter;
@@ -72,6 +76,8 @@ public class HandlerUser extends ActorClassBase {
 	public int getCaseId () {
 		return this.caseId;
 	}
+	
+	
 	//--------------------- port getters
 	public TestProtocolPort getTestPort1 (){
 		return this.TestPort1;

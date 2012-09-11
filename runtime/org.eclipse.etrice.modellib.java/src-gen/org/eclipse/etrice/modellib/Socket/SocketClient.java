@@ -17,6 +17,7 @@ import org.eclipse.etrice.modellib.Socket.PSocket.*;
 public class SocketClient extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PSocketPort fct = null;
 	
@@ -26,6 +27,7 @@ public class SocketClient extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_fct = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -44,7 +46,11 @@ public class SocketClient extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PSocketPort getFct (){
 		return this.fct;

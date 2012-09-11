@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.config.ConfigElement;
 import org.eclipse.etrice.core.config.ConfigFactory;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.StringLiteral;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -54,6 +56,20 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * @generated
    */
   private EClass configElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass subSystemConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dynamicConfigEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -278,6 +294,86 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
   public EClass getConfigElement()
   {
     return configElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSubSystemConfig()
+  {
+    return subSystemConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSubSystemConfig_SubSystem()
+  {
+    return (EReference)subSystemConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSubSystemConfig_DynConfig()
+  {
+    return (EReference)subSystemConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDynamicConfig()
+  {
+    return dynamicConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDynamicConfig_FilePath()
+  {
+    return (EAttribute)dynamicConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDynamicConfig_UserCode1()
+  {
+    return (EAttribute)dynamicConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDynamicConfig_UserCode2()
+  {
+    return (EAttribute)dynamicConfigEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDynamicConfig_Polling()
+  {
+    return (EAttribute)dynamicConfigEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -515,9 +611,49 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getAttrClassConfig_Attributes()
+  {
+    return (EReference)attrClassConfigEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAttrInstanceConfig()
   {
     return attrInstanceConfigEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttrInstanceConfig_DynConfig()
+  {
+    return (EAttribute)attrInstanceConfigEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttrInstanceConfig_ReadOnly()
+  {
+    return (EAttribute)attrInstanceConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAttrInstanceConfig_Attributes()
+  {
+    return (EReference)attrInstanceConfigEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -726,6 +862,16 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     configElementEClass = createEClass(CONFIG_ELEMENT);
 
+    subSystemConfigEClass = createEClass(SUB_SYSTEM_CONFIG);
+    createEReference(subSystemConfigEClass, SUB_SYSTEM_CONFIG__SUB_SYSTEM);
+    createEReference(subSystemConfigEClass, SUB_SYSTEM_CONFIG__DYN_CONFIG);
+
+    dynamicConfigEClass = createEClass(DYNAMIC_CONFIG);
+    createEAttribute(dynamicConfigEClass, DYNAMIC_CONFIG__FILE_PATH);
+    createEAttribute(dynamicConfigEClass, DYNAMIC_CONFIG__USER_CODE1);
+    createEAttribute(dynamicConfigEClass, DYNAMIC_CONFIG__USER_CODE2);
+    createEAttribute(dynamicConfigEClass, DYNAMIC_CONFIG__POLLING);
+
     actorClassConfigEClass = createEClass(ACTOR_CLASS_CONFIG);
     createEReference(actorClassConfigEClass, ACTOR_CLASS_CONFIG__ACTOR);
     createEReference(actorClassConfigEClass, ACTOR_CLASS_CONFIG__ATTRIBUTES);
@@ -755,8 +901,12 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     attrClassConfigEClass = createEClass(ATTR_CLASS_CONFIG);
     createEReference(attrClassConfigEClass, ATTR_CLASS_CONFIG__MIN);
     createEReference(attrClassConfigEClass, ATTR_CLASS_CONFIG__MAX);
+    createEReference(attrClassConfigEClass, ATTR_CLASS_CONFIG__ATTRIBUTES);
 
     attrInstanceConfigEClass = createEClass(ATTR_INSTANCE_CONFIG);
+    createEAttribute(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__DYN_CONFIG);
+    createEAttribute(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__READ_ONLY);
+    createEReference(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__ATTRIBUTES);
 
     refPathEClass = createEClass(REF_PATH);
     createEAttribute(refPathEClass, REF_PATH__REFS);
@@ -817,6 +967,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    subSystemConfigEClass.getESuperTypes().add(this.getConfigElement());
     actorClassConfigEClass.getESuperTypes().add(this.getConfigElement());
     actorInstanceConfigEClass.getESuperTypes().add(this.getConfigElement());
     protocolClassConfigEClass.getESuperTypes().add(this.getConfigElement());
@@ -839,7 +990,19 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     addEOperation(configModelEClass, this.getProtocolClassConfig(), "getProtocolClassConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+    addEOperation(configModelEClass, this.getSubSystemConfig(), "getSubSystemConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
     initEClass(configElementEClass, ConfigElement.class, "ConfigElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(subSystemConfigEClass, SubSystemConfig.class, "SubSystemConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSubSystemConfig_SubSystem(), theRoomPackage.getSubSystemClass(), null, "subSystem", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubSystemConfig_DynConfig(), this.getDynamicConfig(), null, "dynConfig", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dynamicConfigEClass, DynamicConfig.class, "DynamicConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDynamicConfig_FilePath(), ecorePackage.getEString(), "filePath", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDynamicConfig_UserCode1(), ecorePackage.getEString(), "userCode1", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDynamicConfig_UserCode2(), ecorePackage.getEString(), "userCode2", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDynamicConfig_Polling(), ecorePackage.getEInt(), "polling", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorClassConfigEClass, ActorClassConfig.class, "ActorClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActorClassConfig_Actor(), theRoomPackage.getActorClass(), null, "actor", null, 0, 1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -870,8 +1033,12 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEClass(attrClassConfigEClass, AttrClassConfig.class, "AttrClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttrClassConfig_Min(), this.getNumberLiteral(), null, "min", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttrClassConfig_Max(), this.getNumberLiteral(), null, "max", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrClassConfig_Attributes(), this.getAttrClassConfig(), null, "attributes", null, 0, -1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attrInstanceConfigEClass, AttrInstanceConfig.class, "AttrInstanceConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAttrInstanceConfig_DynConfig(), ecorePackage.getEBoolean(), "dynConfig", null, 0, 1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttrInstanceConfig_ReadOnly(), ecorePackage.getEBoolean(), "readOnly", null, 0, 1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRefPath_Refs(), ecorePackage.getEString(), "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -894,7 +1061,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getIntLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIntLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -16,6 +16,7 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 public class SendingDataTop extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -23,6 +24,7 @@ public class SendingDataTop extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -40,7 +42,11 @@ public class SendingDataTop extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
