@@ -174,7 +174,7 @@ RoomModel ChoicePointTest {
 					entry {
 						"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\\\n\", 20);"
 						"etUnit_closeAll();"
-						"SubSystem_CPTest_shutdown();"
+						" SubSysClass_shutdown();"
 					}
 				}
 			}

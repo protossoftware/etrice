@@ -96,7 +96,7 @@ class SubSystemClassGen {
 		void «ssc.name»_stop(void); 	/* lifecycle stop	 */
 		void «ssc.name»_destroy(void); 	/* lifecycle destroy */
 		
-		void «ssc.name»_shutdown(void);  /* shutdown the dispatcher loop */
+		void SubSysClass_shutdown(void);  /* shutdown the dispatcher loop */
 		
 		«helpers.userCode(ssc.userCode2)»
 		
@@ -205,7 +205,7 @@ class SubSystemClassGen {
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 
-		void «ssc.name»_shutdown(void){
+		void SubSysClass_shutdown(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "shutdown")
 			etLogger_logInfoF("%s_shutdown", «ssc.name»Inst.name);
 			«ssc.name»Inst.shutdownRequest = 1;

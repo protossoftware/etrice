@@ -260,7 +260,7 @@ RoomModel SendingDataTest {
 					entry {
 						"EXPECT_ORDER_END(\"<|MODEL_LOCATION|>\\n\", 50);"
 						"etUnit_closeAll();"
-						"SubSys_SendingData_shutdown();"
+						" SubSysClass_shutdown();"
 					}
 				}
 				State waitForPongFloat {
