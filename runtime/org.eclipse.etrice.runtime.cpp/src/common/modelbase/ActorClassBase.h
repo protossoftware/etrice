@@ -59,7 +59,7 @@ protected:
 	 * the current state
 	 */
 	int m_state;
-	RTSystemServicesProtocol::RTSystemServicesProtocolPort* m_RTSystemPort;
+	RTSystemServicesProtocolPort* m_RTSystemPort;
 
 	bool handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data);
 private:

@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.generator.cpp.gen.ActorClassGen;
 import org.eclipse.etrice.generator.cpp.gen.DataClassGen;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
@@ -20,6 +21,9 @@ public class MainGen implements IGenerator {
   
   @Inject
   private ProtocolClassGen protocolClassGen;
+  
+  @Inject
+  private ActorClassGen actorClassGen;
   
   @Inject
   private PrepareFileSystem prepFS;
@@ -37,6 +41,7 @@ public class MainGen implements IGenerator {
   public void doGenerate(final Root e) {
     this.dataClassGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
+    this.actorClassGen.doGenerate(e);
     boolean _isLibrary = e.isLibrary();
     boolean _not = (!_isLibrary);
     if (_not) {

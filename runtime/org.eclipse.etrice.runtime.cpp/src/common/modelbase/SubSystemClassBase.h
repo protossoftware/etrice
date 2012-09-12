@@ -53,7 +53,7 @@ public:
 	void testFinished(int errorCode);
 
 protected:
-	RTSystemServicesProtocol::RTSystemServicesProtocolConjPortRepl* m_RTSystemPort;
+	RTSystemServicesProtocolConjPortRepl* m_RTSystemPort;
 	//--------------------- interface item IDs
 	static const int IFITEM_RTSystemPort = 0;
 	std::vector<ActorClassBase*> m_instances;

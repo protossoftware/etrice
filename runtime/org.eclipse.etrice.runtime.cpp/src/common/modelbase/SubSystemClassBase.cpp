@@ -9,6 +9,7 @@
 #include "common/messaging/MessageService.h"
 #include "common/messaging/RTServices.h"
 #include "ActorClassBase.h"
+#include "common/debugging/DebuggingService.h"
 
 namespace etRuntime {
 

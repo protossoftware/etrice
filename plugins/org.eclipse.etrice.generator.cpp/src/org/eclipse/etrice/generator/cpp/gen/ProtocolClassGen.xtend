@@ -84,36 +84,32 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«helpers.userCode(pc.userCode1)»
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
-			#include "«dataClass.name».h"
+		#include "«dataClass.path»«dataClass.name».h"
 		«ENDFOR»
 
 		class «pc.name» {
 		   public:
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»	   /* message IDs */
-			class Events {
-				public:
-					«genMessageIDs(pc)»
-					static bool isValidEvtID(int evtId) {
-						return ((MSG_MIN < evtId) && (evtId < MSG_MAX));
-					};
-					static bool isValidOutgoingEvtID(int evtId) {
-						return ((Events::MSG_MIN < evtId) && (evtId < Events::«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF»));
-					};
-					static bool isValidIncomingEvtID(int evtId) {
-						return ((Events::«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF» <= evtId) && (evtId < Events::MSG_MAX));
-					};
-					static std::string getMessageString(int msg_id);
-				
-				private:
-					static std::string s_messageStrings[];
-			};
+				«genMessageIDs(pc)»
+				static bool isValidEvtID(int evtId) {
+					return ((MSG_MIN < evtId) && (evtId < MSG_MAX));
+				};
+				static bool isValidOutgoingEvtID(int evtId) {
+					return ((MSG_MIN < evtId) && (evtId < «IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF»));
+				};
+				static bool isValidIncomingEvtID(int evtId) {
+					return ((«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF» <= evtId) && (evtId < MSG_MAX));
+				};
+				static std::string getMessageString(int msg_id);
+			
+			private:
+				static std::string s_messageStrings[];
 		«ENDIF»
 				«helpers.userCode(pc.userCode2)»
-		
-			 		
-				«portClassDeclaration(pc, false)»
-				«portClassDeclaration(pc, true)»
 		};
+		
+		«portClassDeclaration(pc, false)»
+		«portClassDeclaration(pc, true)»
 		«generateIncludeGuardEnd(pc.name)»
 	'''
 	}
@@ -123,55 +119,55 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
 	'''
-		//------------------------------------------------------------------------------------------------------------
-		// «IF conj»conjugated «ENDIF»port class
-		//------------------------------------------------------------------------------------------------------------
-		class «portClassName» : public etRuntime::PortBase {
-			«IF pclass!=null»
-				«helpers.userCode(pclass.userCode)»
-			«ENDIF»
-		   public:
-			// constructors
-			 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
-			 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+	//------------------------------------------------------------------------------------------------------------
+	// «IF conj»conjugated «ENDIF»port class
+	//------------------------------------------------------------------------------------------------------------
+	class «portClassName» : public etRuntime::PortBase {
+		«IF pclass!=null»
+			«helpers.userCode(pclass.userCode)»
+		«ENDIF»
+	   public:
+		// constructors
+		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
+		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+	
+		 virtual void receive(etRuntime::Message* m);
+		«IF pclass!=null»
+			«helpers.attributes(pclass.attributes)»
+			«helpers.operationsDeclaration(pclass.operations, portClassName)»
+		«ENDIF»
 		
+		  // outgoing messages
+		«FOR m : pc.getOutgoing(conj)»
+		  	«sendMessageDeclaration(m,conj)»
+		«ENDFOR»
+	};
+	
+	//------------------------------------------------------------------------------------------------------------
+	// «IF conj»conjugated «ENDIF»replicated port class
+	//------------------------------------------------------------------------------------------------------------
+	class «replPortClassName» {
+		private:
+		    int m_replication;
+		    std::vector<«portClassName»> m_ports;
+	
+		public:
+			«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
+			virtual ~«replPortClassName»() {};
+			
+			int getReplication() {	return m_replication; }
+			int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
+			«portClassName» get(int i) {return m_ports.at(i);}
+			
 			 virtual void receive(etRuntime::Message* m);
-			«IF pclass!=null»
-				«helpers.attributes(pclass.attributes)»
-				«helpers.operationsDeclaration(pclass.operations, portClassName)»
+			«IF pc.commType==CommunicationType::EVENT_DRIVEN»
+				 // outgoing messages
+				«FOR m : pc.getOutgoing(conj)»
+				  	«sendMessageDeclaration(m,conj)»
+				«ENDFOR»
 			«ENDIF»
 			
-			  // outgoing messages
-			«FOR m : pc.getOutgoing(conj)»
-			  	«sendMessageDeclaration(m,conj)»
-			«ENDFOR»
-		};
-		
-		//------------------------------------------------------------------------------------------------------------
-		// «IF conj»conjugated «ENDIF»replicated port class
-		//------------------------------------------------------------------------------------------------------------
-		class «replPortClassName» {
-			private:
-			    int m_replication;
-			    std::vector<«portClassName»> m_ports;
-		
-			public:
-				«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
-				virtual ~«replPortClassName»() {};
-				
-				int getReplication() {	return m_replication; }
-				int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
-				«portClassName» get(int i) {return m_ports.at(i);}
-				
-				 virtual void receive(etRuntime::Message* m);
-				«IF pc.commType==CommunicationType::EVENT_DRIVEN»
-					 // outgoing messages
-					«FOR m : pc.getOutgoing(conj)»
-					  	«sendMessageDeclaration(m,conj)»
-					«ENDFOR»
-				«ENDIF»
-				
-		};
+	};
 	'''
 	}
 
@@ -184,25 +180,25 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	// «IF conj»conjugated «ENDIF»port class
 	//------------------------------------------------------------------------------------------------------------
 	
-	«pc.name»::«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
+	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
 		: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
 	{
 		DebuggingService::getInstance().addPortInstance(*this);
 	}
 
-	«pc.name»::«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
+	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
 		: PortBase(actor, parent, name, localId, idx, addr, peerAddress)
 	{
 		DebuggingService::getInstance().addPortInstance(*this);
 	}
 		
-	void «pc.name»::«portClassName»::receive(Message* msg) {
-		if (! Events::isValidIncomingEvtID(msg->getEvtId())) {
+	void «portClassName»::receive(Message* msg) {
+		if (! «pc.name»::isValidIncomingEvtID(msg->getEvtId())) {
 			std::cout << "unknown" << std::endl;
 		}
 		else {
 			if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
-				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), Events::getMessageString(msg->getEvtId()));
+				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), «pc.name»::getMessageString(msg->getEvtId()));
 			}
 			
 			«IF pc.handlesReceive(conj)»
@@ -230,13 +226,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			
 	// sent messages
 	«FOR m : pc.getOutgoing(conj)»
-		«sendMessage(m, pc.name + "::" + portClassName, conj)»
+		«sendMessage(m, pc.name, portClassName, conj)»
 	«ENDFOR»
 		
 	//------------------------------------------------------------------------------------------------------------
 	// «IF conj»conjugated «ENDIF»replicated port class
 	//------------------------------------------------------------------------------------------------------------
-	«pc.name»::«replPortClassName»::«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<Address> addr, std::vector<Address> peerAddress) 
+	«replPortClassName»::«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<Address> addr, std::vector<Address> peerAddress) 
 		: m_replication(addr.size()),
 	  	  m_ports()
 	{
@@ -252,7 +248,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 	// outgoing messages
 	«FOR m : pc.getOutgoing(conj)»
-	«messageSignatureDefinition(m, pc.name + "::" + replPortClassName)»{
+	«messageSignatureDefinition(m, replPortClassName)»{
 		for (int i=0; i<m_replication; ++i) {
 			m_ports.at(i).«messageCall(m)»;
 		}
@@ -272,6 +268,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
 		#include <iostream>
+		«FOR classes : root.getReferencedDataClasses(pc)»
+		#include "«classes.name».h"
+		«ENDFOR»
 
 		using namespace etRuntime;
 		
@@ -293,93 +292,19 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 
 	
-	def private genDataDrivenPortHeaders(ProtocolClass pc) {
-		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
-		
-		'''
-			/* data driven send port (conjugated) */
-			typedef struct {
-				«FOR msg : sentMsgs»
-					«var typeName = msg.data.refType.type.typeName»
-					«var refp = if (msg.data.refType.ref) "*" else ""»
-					«typeName»«refp» «msg.name»;
-				«ENDFOR»
-			}
-			«pc.getPortClassName(true)»;
-			
-			/* data driven receive port (regular) */
-			typedef struct {
-				const «pc.getPortClassName(true)»* peer;
-			}
-			«pc.getPortClassName(false)»;
-			
-			«FOR message : sentMsgs»
-				«var hasData = message.data!=null»
-				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
-				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
-				«messageSetterSignature(pc.getPortClassName(true), message.name, data)»;
-				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)»;
-				
-			«ENDFOR»
-		'''
-	}
-	def private genDataDrivenPortSources(ProtocolClass pc) {
-		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
-	'''
-			«FOR message : messages»
-				«var typeName =message.data.refType.type.typeName»
-				«var refp = if (!(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
-				«var refa = if ((message.data.refType.type instanceof PrimitiveType)) "&" else ""»
-				«var data = ", "+typeName+refp+" data"»
-				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
-					self->«message.name» = data;
-				}
-				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)» {
-					return self->peer->«message.name»;
-				}
-				
-			«ENDFOR»
-	'''
-	} 
 	
-	
-	
-	def private messageSetterSignature(String className, String messageName, String data) {
-		"void "+className+"_"+messageName+"_set("+className+"* self"+data+")"
-	}
-	
-	def private messageGetterSignature(String className, String messageName, String type) {
-		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
-	}
 
 	def private messageCall(Message m) {
 	'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
 	}
 	
 
-	def private genReceiveHandlers(ProtocolClass pc, Boolean conj){
-	var portClassName = pc.getPortClassName(conj)
-	var replPortClassName = pc.getPortClassName(conj, true)
-	
-	'''
-	/* receiver handlers */
-	«FOR h:getReceiveHandlers(pc,conj)»
-		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-			«userCode(h.detailCode)»
-			/* hand over the message to the actor:      */
-			/* (*receiveMessageFunc)(actor, self, msg); */
-		}
-	«ENDFOR»
-	'''}	
-
-	
 	
 	def private generateDebugHelpersImplementation(Root root, ProtocolClass pc){'''
 		
 «««		TODO: make this optional or different for smaller footprint
 		/* message names as strings for debugging (generate MSC) */
-		std::string «pc.name»::Events::s_messageStrings[] 
+		std::string «pc.name»::s_messageStrings[] 
 				= {"MIN", 
 				   «FOR m : pc.getAllOutgoingMessages()»
 				   "«m.name»",
@@ -389,7 +314,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				   «ENDFOR»
 				   "MAX"};
 		
-		std::string «pc.name»::Events::getMessageString(int msg_id) {
+		std::string «pc.name»::getMessageString(int msg_id) {
 			if ((MSG_MIN < msg_id ) && ( msg_id < MSG_MAX )) {
 				return s_messageStrings[msg_id];
 			} else {
@@ -401,9 +326,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 	}
 	 
-	//----------------------------------------------------
-	// from java generator
-	//---------------------------------------------------
+
 	def messageSignature(Message m) {
 		'''«IF m.priv»private:«ELSE»public:«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.type.typeName» «m.data.name»«ENDIF»)'''
 	}
@@ -435,7 +358,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 	}
 	
-	def sendMessage(Message m, String classPrefix, boolean conj) {
+	def sendMessage(Message m, String portClassName, String classPrefix, boolean conj) {
 		var dir = if (conj) "IN" else "OUT"
 		var hdlr = m.getSendHandler(conj)
 		'''
@@ -445,19 +368,23 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ENDFOR»
 				«ELSE»
 					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-																	   Events::getMessageString(Events::«dir»_«m.name»));
+																	   «portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
 					if (getPeerAddress().isValid()){
-						«IF m.data==null»getPeerMsgReceiver()->receive(new Message(getPeerAddress(), Events::«dir»_«m.name»));
-						«ELSE»getPeerMsgReceiver()->receive(new Message(getPeerAddress(),Events::«dir»_«m.name», reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»), sizeof()));
+						«IF m.data==null»getPeerMsgReceiver()->receive(new Message(getPeerAddress(), «portClassName»::«dir»_«m.name»));
+						«ELSE»getPeerMsgReceiver()->receive(new Message(getPeerAddress(),«portClassName»::«dir»_«m.name», 
+						                                                reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»),
+						                                                sizeof(«m.data.refType.type.typeName»)));
 						«ENDIF»
 					}
 				«ENDIF»
 			}
+			
 			«IF m.data!=null && m.data.refType.type instanceof DataClass»
 				«messageSignatureExplicitDefinition(m, classPrefix)» {
-					«m.name»(new «m.data.refType.type.name»(«IF (m.data.refType.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.refType.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
+					«m.name»(«m.data.refType.type.name»(«IF (m.data.refType.type as DataClass).base!=null»_super, «ENDIF»«FOR a : (m.data.refType.type as DataClass).attributes SEPARATOR ", "»«a.name»«ENDFOR»));
 				}
 			«ENDIF»
 		'''
+		//TODO derived data classes are not yet handled correctly
 	}
 }

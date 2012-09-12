@@ -25,6 +25,7 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.Port
 
 
 @Singleton
@@ -123,4 +124,5 @@ class CppExtensions implements ILanguageExtension {
 		"\"" + s + "\"";
 	}
 	
+		 
 }

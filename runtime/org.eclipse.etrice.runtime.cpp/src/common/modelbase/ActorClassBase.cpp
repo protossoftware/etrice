@@ -19,7 +19,7 @@ ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownA
 		m_ownMsgsvc(RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(ownAddr.m_threadID)) {
 
 	// own ports
-	m_RTSystemPort = new RTSystemServicesProtocol::RTSystemServicesProtocolPort(*this, this, "RTSystemPort", 0, 0, ownAddr,
+	m_RTSystemPort = new RTSystemServicesProtocolPort(*this, this, "RTSystemPort", 0, 0, ownAddr,
 		systemPortPeerAddr);
 }
 
@@ -34,12 +34,12 @@ bool ActorClassBase::handleSystemEvent(InterfaceItemBase ifitem, int evt, void* 
 	}
 
 	switch (evt) {
-	case RTSystemServicesProtocol::Events::IN_executeInitialTransition:
+	case RTSystemServicesProtocol::IN_executeInitialTransition:
 		executeInitTransition();
 		break;
-	case RTSystemServicesProtocol::Events::IN_startDebugging:
+	case RTSystemServicesProtocol::IN_startDebugging:
 		break;
-	case RTSystemServicesProtocol::Events::IN_stopDebugging:
+	case RTSystemServicesProtocol::IN_stopDebugging:
 		break;
 	}
 	return true;

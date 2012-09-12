@@ -114,7 +114,10 @@ public class DataClassGen {
         if (_notEquals) {
           _builder.append("#include \"");
           DataClass _base_1 = dc.getBase();
-          String _name_1 = _base_1.getName();
+          String _path_1 = this.roomExt.getPath(_base_1);
+          _builder.append(_path_1, "");
+          DataClass _base_2 = dc.getBase();
+          String _name_1 = _base_2.getName();
           _builder.append(_name_1, "");
           _builder.append(".h\"");
           _builder.newLineIfNotEmpty();
@@ -124,6 +127,8 @@ public class DataClassGen {
         HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
         for(final DataClass classes : _referencedDataClasses) {
           _builder.append("#include \"");
+          String _path_2 = this.roomExt.getPath(classes);
+          _builder.append(_path_2, "");
           String _name_2 = classes.getName();
           _builder.append(_name_2, "");
           _builder.append(".h\"");
@@ -138,8 +143,8 @@ public class DataClassGen {
             EList<DataClass> _dataClasses = model.getDataClasses();
             for(final DataClass classes_1 : _dataClasses) {
               _builder.append("#include \"");
-              String _path_1 = this.roomExt.getPath(classes_1);
-              _builder.append(_path_1, "");
+              String _path_3 = this.roomExt.getPath(classes_1);
+              _builder.append(_path_3, "");
               String _name_3 = classes_1.getName();
               _builder.append(_name_3, "");
               _builder.append(".h\"");
@@ -159,12 +164,12 @@ public class DataClassGen {
       String _name_4 = dc.getName();
       _builder.append(_name_4, "");
       {
-        DataClass _base_2 = dc.getBase();
-        boolean _notEquals_1 = (!Objects.equal(_base_2, null));
+        DataClass _base_3 = dc.getBase();
+        boolean _notEquals_1 = (!Objects.equal(_base_3, null));
         if (_notEquals_1) {
           _builder.append(" : public ");
-          DataClass _base_3 = dc.getBase();
-          String _name_5 = _base_3.getName();
+          DataClass _base_4 = dc.getBase();
+          String _name_5 = _base_4.getName();
           _builder.append(_name_5, "");
         }
       }

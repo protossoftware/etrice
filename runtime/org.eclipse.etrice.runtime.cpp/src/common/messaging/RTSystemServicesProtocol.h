@@ -16,10 +16,29 @@
 
 namespace etRuntime {
 
+//---------------------------------------------------
+// interface for port class
+//---------------------------------------------------
+class IRTSystemServicesProtocolPort {
+public:
+	virtual ~IRTSystemServicesProtocolPort() {};
+	virtual void dummy() = 0;
+};
+
+//---------------------------------------------------
+// interface for conjugated port class
+//---------------------------------------------------
+class IRTSystemServicesProtocolConjPort {
+public:
+	virtual ~IRTSystemServicesProtocolConjPort() {};
+	virtual void executeInitialTransition() = 0;
+	virtual void startDebugging() = 0;
+	virtual void stopDebugging() = 0;
+};
+
+
 class RTSystemServicesProtocol {
 public:
-	class Events {
-	public:
 		enum eventIDs {
 			MSG_MIN = 0,
 			OUT_dummy = 1,
@@ -33,39 +52,19 @@ public:
 			return ((MSG_MIN < evtId) && (evtId < MSG_MAX));
 		};
 		static bool isValidOutgoingEvtID(int evtId) {
-			return ((Events::MSG_MIN < evtId) && (evtId < Events::MSG_SEP));
+			return ((MSG_MIN < evtId) && (evtId < MSG_SEP));
 		};
 		static bool isValidIncomingEvtID(int evtId) {
-			return ((Events::MSG_SEP <= evtId) && (evtId < Events::MSG_MAX));
+			return ((MSG_SEP <= evtId) && (evtId < MSG_MAX));
 		};
 		static std::string getMessageString(int msg_id);
 
 	private:
-			static std::string s_messageStrings[];
-	};
+		static std::string s_messageStrings[];
 
-	//---------------------------------------------------
-	// interface for port class
-	//---------------------------------------------------
-	class IRTSystemServicesProtocolPort {
-	public:
-		virtual void dummy() = 0;
-	};
-
-	//---------------------------------------------------
-	// interface for conjugated port class
-	//---------------------------------------------------
-	class IRTSystemServicesProtocolConjPort {
-	public:
-		virtual void executeInitialTransition() = 0;
-		virtual void startDebugging() = 0;
-		virtual void stopDebugging() = 0;
-	};
-
-public:
-
-	RTSystemServicesProtocol();
-	virtual ~RTSystemServicesProtocol();
+		RTSystemServicesProtocol();
+		virtual ~RTSystemServicesProtocol();
+};
 
 	//---------------------------------------------------
 	// port class
@@ -140,7 +139,6 @@ public:
 		void startDebugging();
 		void stopDebugging();
 	};
-};
 
 } /* namespace etRuntime */
 #endif /* RTSYSTEMSERVICESPROTOCOL_H_ */

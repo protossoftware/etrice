@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
@@ -66,10 +67,10 @@ class DataClassGen {
 		«generateIncludeGuardBegin(dc.path + dc.name)»
 		
 		«IF dc.base!=null»
-		#include "«dc.base.name».h"
+		#include "«dc.base.path»«dc.base.name».h"
 		«ENDIF»
 		«FOR classes : root.getReferencedDataClasses(dc)»
-		#include "«classes.name».h"
+		#include "«classes.path»«classes.name».h"
 		«ENDFOR»
 		«var models = root.getReferencedModels(dc)»
 		«FOR model : models»

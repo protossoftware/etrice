@@ -1,0 +1,19 @@
+SMAP
+MainGen.java
+Xtend
+*S Xtend
+*F
++ 0 MainGen.xtend
+src/org/eclipse/etrice/generator/cpp/gen/MainGen.xtend
+*L
+34:32
+35:33,2
+36:35
+37:36
+36:37
+35:38
+43:42
+44:43
+45:44
+48:45,4
+*E
