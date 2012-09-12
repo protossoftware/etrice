@@ -197,29 +197,16 @@ public class SubSystemClassGen {
     _builder.append("_destroy(void); \t/* lifecycle destroy */");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-<<<<<<< HEAD
     _builder.append("void SubSysClass_shutdown(void);  /* shutdown the dispatcher loop */");
     _builder.newLine();
-=======
-    _builder.append("void ");
-    String _name_7 = ssc.getName();
-    _builder.append(_name_7, "");
-    _builder.append("_shutdown(void);  /* shutdown the dispatcher loop */");
-    _builder.newLineIfNotEmpty();
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.newLine();
     DetailCode _userCode2 = ssc.getUserCode2();
     CharSequence _userCode_1 = this.helpers.userCode(_userCode2);
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-<<<<<<< HEAD
     String _name_7 = ssc.getName();
     CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_7);
-=======
-    String _name_8 = ssc.getName();
-    CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_8);
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -556,22 +543,13 @@ public class SubSystemClassGen {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-<<<<<<< HEAD
     _builder.append("void SubSysClass_shutdown(void){");
     _builder.newLine();
-=======
-    _builder.append("void ");
-    String _name_23 = ssc.getName();
-    _builder.append(_name_23, "");
-    _builder.append("_shutdown(void){");
-    _builder.newLineIfNotEmpty();
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"SubSys\", \"shutdown\")");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("etLogger_logInfoF(\"%s_shutdown\", ");
-<<<<<<< HEAD
     String _name_23 = ssc.getName();
     _builder.append(_name_23, "	");
     _builder.append("Inst.name);");
@@ -579,15 +557,6 @@ public class SubSystemClassGen {
     _builder.append("\t");
     String _name_24 = ssc.getName();
     _builder.append(_name_24, "	");
-=======
-    String _name_24 = ssc.getName();
-    _builder.append(_name_24, "	");
-    _builder.append("Inst.name);");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    String _name_25 = ssc.getName();
-    _builder.append(_name_25, "	");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("Inst.shutdownRequest = 1;");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -598,24 +567,14 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-<<<<<<< HEAD
     String _name_25 = ssc.getName();
     _builder.append(_name_25, "");
-=======
-    String _name_26 = ssc.getName();
-    _builder.append(_name_26, "");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("_constructActorInstances(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-<<<<<<< HEAD
     String _name_26 = ssc.getName();
     _builder.append(_name_26, "	");
-=======
-    String _name_27 = ssc.getName();
-    _builder.append(_name_27, "	");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("\", \"constructActorInstances\")");
     _builder.newLineIfNotEmpty();
     {
@@ -636,13 +595,8 @@ public class SubSystemClassGen {
           if (_not_1) {
             _builder.append("\t");
             ActorClass _actorClass_3 = ai_1.getActorClass();
-<<<<<<< HEAD
             String _name_27 = _actorClass_3.getName();
             String _constructorName = this.languageExt.constructorName(_name_27);
-=======
-            String _name_28 = _actorClass_3.getName();
-            String _constructorName = this.languageExt.constructorName(_name_28);
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
             _builder.append(_constructorName, "	");
             _builder.append("(&");
             String _path_1 = ai_1.getPath();
@@ -661,24 +615,14 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-<<<<<<< HEAD
     String _name_28 = ssc.getName();
     _builder.append(_name_28, "");
-=======
-    String _name_29 = ssc.getName();
-    _builder.append(_name_29, "");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("_initActorInstances(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-<<<<<<< HEAD
     String _name_29 = ssc.getName();
     _builder.append(_name_29, "	");
-=======
-    String _name_30 = ssc.getName();
-    _builder.append(_name_30, "	");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
     _builder.append("\", \"initActorInstances\")");
     _builder.newLineIfNotEmpty();
     {
@@ -686,13 +630,8 @@ public class SubSystemClassGen {
       for(final ActorInstance ai_2 : _allContainedInstances_2) {
         _builder.append("\t");
         ActorClass _actorClass_4 = ai_2.getActorClass();
-<<<<<<< HEAD
         String _name_30 = _actorClass_4.getName();
         _builder.append(_name_30, "	");
-=======
-        String _name_31 = _actorClass_4.getName();
-        _builder.append(_name_31, "	");
->>>>>>> 84d7579c94b310ce805810c3c8b90e6a69b3282f
         _builder.append("_init(&");
         String _path_2 = ai_2.getPath();
         String _pathName_2 = this.roomExt.getPathName(_path_2);
