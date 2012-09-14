@@ -3,13 +3,16 @@
     <cs:dependencies>
         <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.integration.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.runtime.c" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.generator.common.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.generator.java.tests" componentType="buckminster"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
