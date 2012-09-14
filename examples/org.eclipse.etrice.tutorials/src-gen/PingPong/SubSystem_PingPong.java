@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystem_PingPong extends SubSystemClassBase{
 
 	
-	public SubSystem_PingPong(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_PingPong(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -34,6 +34,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,111);
@@ -150,6 +151,17 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 					addr_item__SubSystem_PingPong_application_MrPong1,
 					addr_item__SubSystem_PingPong_services
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

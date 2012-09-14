@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystem_Blinky extends SubSystemClassBase{
 
 	
-	public SubSystem_Blinky(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_Blinky(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -32,6 +32,7 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,112);
@@ -158,6 +159,17 @@ public class SubSystem_Blinky extends SubSystemClassBase{
 					addr_item__SubSystem_Blinky_application_controller,
 					addr_item__SubSystem_Blinky_timingService
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

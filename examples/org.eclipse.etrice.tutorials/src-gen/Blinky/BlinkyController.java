@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 import room.basic.service.timing.*;
 
@@ -17,6 +18,7 @@ import room.basic.service.timing.PTimeout.*;
 
 public class BlinkyController extends ActorClassBase {
 
+	
 	
 	//--------------------- ports
 	protected BlinkyControlProtocollConjPort ControlPort = null;
@@ -29,6 +31,7 @@ public class BlinkyController extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_timer = 2;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -48,7 +51,11 @@ public class BlinkyController extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public BlinkyControlProtocollConjPort getControlPort (){
 		return this.ControlPort;

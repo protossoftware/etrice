@@ -15,8 +15,8 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 public class SubSystem_HelloWorld extends SubSystemClassBase{
 
 	
-	public SubSystem_HelloWorld(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_HelloWorld(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -31,6 +31,7 @@ public class SubSystem_HelloWorld extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,102);
@@ -66,6 +67,17 @@ public class SubSystem_HelloWorld extends SubSystemClassBase{
 				new Address[]{
 					addr_item__SubSystem_HelloWorld_application
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

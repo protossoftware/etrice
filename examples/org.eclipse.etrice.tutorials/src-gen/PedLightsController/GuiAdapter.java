@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 import PedLightsController.PedControlProtocol.*;
@@ -24,6 +25,7 @@ public class GuiAdapter extends ActorClassBase {
 	private TrafficLight2 pedLights;
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	protected PedControlProtocolConjPort ControlPort = null;
 	
@@ -33,6 +35,7 @@ public class GuiAdapter extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -54,7 +57,11 @@ public class GuiAdapter extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PedControlProtocolConjPort getControlPort (){
 		return this.ControlPort;

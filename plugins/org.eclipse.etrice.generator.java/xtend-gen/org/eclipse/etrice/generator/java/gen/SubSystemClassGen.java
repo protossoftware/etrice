@@ -154,10 +154,10 @@ public class SubSystemClassGen {
     _builder.append("public ");
     String _name_2 = comp.getName();
     _builder.append(_name_2, "	");
-    _builder.append("(IRTObject parent, String name) {");
+    _builder.append("(String name) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("super(parent, name);");
+    _builder.append("super(name);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

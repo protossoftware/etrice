@@ -76,8 +76,8 @@ class SubSystemClassGen {
 		
 			«cc.userCode(2)»
 			
-			public «comp.name»(IRTObject parent, String name) {
-				super(parent, name);
+			public «comp.name»(String name) {
+				super(name);
 			}
 			
 			@Override

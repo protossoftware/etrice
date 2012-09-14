@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystem_PingPongReplPort extends SubSystemClassBase{
 
 	
-	public SubSystem_PingPongReplPort(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_PingPongReplPort(String name) {
+		super(name);
 	}
 	
 	@Override

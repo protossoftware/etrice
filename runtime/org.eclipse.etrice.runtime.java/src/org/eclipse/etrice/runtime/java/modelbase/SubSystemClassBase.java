@@ -32,8 +32,8 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	private TestSemaphore testSem=null;
 	private int testErrorCode;
 	
-	public SubSystemClassBase(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystemClassBase(String name) {
+		super(null, name);
 
 		DebuggingService.getInstance().getAsyncLogger()
 				.setMSC(name + "_Async", "");

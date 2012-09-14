@@ -11,26 +11,14 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemRunnerBase;
 
 class SubSystem_PingPongReplPortRunner extends SubSystemRunnerBase {
 
-	static SubSystem_PingPongReplPort main_component = new SubSystem_PingPongReplPort(null, "SubSystem_PingPongReplPort");
-
 	/**
      * main function
-     * creates component and starts and stops the lifecycle
+     * creates the main component and starts and stops the lifecycle
      */
 	public static void main(String[] args) {
-
-		System.out.println("***   T H E   B E G I N   ***");
+		// instantiate the main component
+		SubSystem_PingPongReplPort main_component = new SubSystem_PingPongReplPort("SubSystem_PingPongReplPort");
 		
-		main_component.init(); // lifecycle init
-		main_component.start(); // lifecycle start
-
-		// application runs until quit 
-		waitForQuit();
-		
-		// end the lifecycle
-		main_component.stop(); // lifecycle stop
-		main_component.destroy(); // lifecycle destroy
-
-		System.out.println("***   T H E   E N D   ***");
+		run(main_component, args);
 	}
 };

@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystem_HandlerTest extends SubSystemClassBase{
 
 	
-	public SubSystem_HandlerTest(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_HandlerTest(String name) {
+		super(name);
 	}
 	
 	@Override

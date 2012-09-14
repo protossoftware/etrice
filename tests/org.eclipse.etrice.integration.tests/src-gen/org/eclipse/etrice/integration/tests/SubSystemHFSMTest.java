@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystemHFSMTest extends SubSystemClassBase{
 
 	
-	public SubSystemHFSMTest(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystemHFSMTest(String name) {
+		super(name);
 	}
 	
 	@Override

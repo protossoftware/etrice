@@ -15,8 +15,8 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 public class SubSystem_CPTest extends SubSystemClassBase{
 
 	
-	public SubSystem_CPTest(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_CPTest(String name) {
+		super(name);
 	}
 	
 	@Override
