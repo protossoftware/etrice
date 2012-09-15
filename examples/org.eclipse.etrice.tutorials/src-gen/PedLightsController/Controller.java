@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 import room.basic.service.timing.*;
 
@@ -21,6 +22,7 @@ import org.eclipse.etrice.tutorials.PedLightGUI.*;
 public class Controller extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	protected PedControlProtocolPort ControlPort = null;
 	
@@ -32,6 +34,7 @@ public class Controller extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_timer = 2;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -51,7 +54,11 @@ public class Controller extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 	public PedControlProtocolPort getControlPort (){
 		return this.ControlPort;

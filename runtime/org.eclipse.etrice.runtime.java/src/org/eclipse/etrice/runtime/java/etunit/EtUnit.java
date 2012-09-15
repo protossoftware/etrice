@@ -52,6 +52,7 @@ public class EtUnit {
 				out.close();
 			
 			out = new BufferedWriter(fstream);
+			out.write("etUnit report\n");
 		}
 		catch (IOException e) {
 			System.err.println("unable to open "+path);

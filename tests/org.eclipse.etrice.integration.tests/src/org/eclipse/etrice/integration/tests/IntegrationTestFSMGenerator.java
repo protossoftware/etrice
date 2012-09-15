@@ -26,7 +26,7 @@ public class IntegrationTestFSMGenerator extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		main_component  = new SubSystemHFSMTest(null,"MainComponent");
+		main_component  = new SubSystemHFSMTest("MainComponent");
 		
 		// hand over the semaphore to the subsystem
 		main_component.setTestSemaphore(this.testSem);

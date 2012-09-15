@@ -16,8 +16,8 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 public class SubSystemConfigTest extends SubSystemClassBase{
 
 	
-	public SubSystemConfigTest(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystemConfigTest(String name) {
+		super(name);
 	}
 	
 	@Override

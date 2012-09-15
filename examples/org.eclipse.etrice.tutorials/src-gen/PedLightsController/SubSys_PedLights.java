@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSys_PedLights extends SubSystemClassBase{
 
 	
-	public SubSys_PedLights(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSys_PedLights(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -32,6 +32,7 @@ public class SubSys_PedLights extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,110);
@@ -148,6 +149,17 @@ public class SubSys_PedLights extends SubSystemClassBase{
 					addr_item__SubSys_PedLights_PedLightsTopRef_controller,
 					addr_item__SubSys_PedLights_timingService
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

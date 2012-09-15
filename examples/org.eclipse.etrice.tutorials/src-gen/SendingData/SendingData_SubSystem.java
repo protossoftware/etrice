@@ -15,8 +15,8 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 public class SendingData_SubSystem extends SubSystemClassBase{
 
 	
-	public SendingData_SubSystem(IRTObject parent, String name) {
-		super(parent, name);
+	public SendingData_SubSystem(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -31,6 +31,7 @@ public class SendingData_SubSystem extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
 		Address addr_item_SystemPort_0 = new Address(0,0,106);
@@ -114,6 +115,17 @@ public class SendingData_SubSystem extends SubSystemClassBase{
 					addr_item__SendingData_SubSystem_SendigDataTopRef_ref0,
 					addr_item__SendingData_SubSystem_SendigDataTopRef_ref1
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

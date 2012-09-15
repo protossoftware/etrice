@@ -28,7 +28,7 @@ public class IntegrationTestChoicePoint extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		main_component  = new SubSystem_CPTest(null,"MainComponent");
+		main_component  = new SubSystem_CPTest("MainComponent");
 		
 		// hand over the semaphore to the subsystem
 		main_component.setTestSemaphore(this.testSem);

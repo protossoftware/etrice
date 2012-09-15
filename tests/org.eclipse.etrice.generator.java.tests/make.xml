@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<project name="project">
+	
+	<property name="model.path" value="./models"/>
+	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java"/>
+	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.java"/>
+	<property name="bin.path" value="./bin"/>
+	<property name="xml.output" value="./tmp"/>
+	<property name="output" value="./output"/>
+	
+	<target name="all" depends="convert,copy_results">
+		<echo>done with org.eclipse.etrice.generator.java.tests</echo>
+	</target>
+
+	<target name="set_tp" unless="target.platform">
+		<echo>using local target platform</echo>
+		<property name="target.platform" value="C:\Users\hrentz\Downloads\eclipse\Juno\eclipse-modeling-juno-win32\eclipse"/>
+	</target>
+
+	<target name="set_tr" unless="test.results">
+		<echo>using local test result folder</echo>
+		<property name="test.results" value="./results"/>
+	</target>
+	
+	<target name="clean" depends="set_tr">
+		<delete dir="${bin.path}"/>
+		<delete dir="models"/>
+		<delete dir="${output}"/>
+		<delete dir="${test.results}"/>
+		<delete dir="src-gen"/>
+		<delete dir="tmp"/>
+	</target>
+	
+	<target name="copy_models">
+		<copy todir="models" >
+			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
+				<include name="*.room"/>
+			</fileset>
+			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/models">
+				<include name="TimingService.room"/>
+				<include name="JavaTypes.room"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="generate" depends="set_tp,copy_models">
+		<mkdir dir="${output}"/>
+		<path id="clspath">
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
+			<fileset dir="${target.platform}/plugins/">
+				<include name="org.eclipse.emf.ecore_2.8.0*.jar" />
+				<include name="org.eclipse.emf.common_2.8.0*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8.0*.jar" />
+				<include name="org.eclipse.xtext_2.*.jar" />
+				<include name="com.google.inject_*.jar" />
+				<include name="com.google.guava_10.*.jar" />
+				<include name="org.eclipse.equinox.common_3.6.*.jar" />
+				<include name="org.eclipse.xtext.util_2.*.jar" />
+				<include name="org.eclipse.xtext.xtend2.lib_2.*.jar" />
+				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
+				<include name="org.apache.log4j_1.2.15*.jar" />
+				<include name="org.antlr.runtime_3.2.0*.jar" />
+				<include name="javax.inject_1.0.0*.jar" />
+			</fileset>
+		</path>
+
+		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
+			<arg value="${model.path}/HandlerTest.room"/>
+			<arg value="${modellib.path}/models/TimingService.room"/>
+			<arg value="${modellib.path}/models/JavaTypes.room"/>
+			<classpath refid="clspath"/>
+		</java>
+	</target>
+	
+	<target name="compile" depends="generate">
+		<mkdir dir="${bin.path}"/>
+		<javac srcdir="src-gen"
+			 destdir="${bin.path}"
+			 classpath="${runtime.path}/bin;${modellib.path}/bin"
+			 debug="on"
+			/>
+	</target>
+
+	<target name="run" depends="compile">
+		<mkdir dir="tmp/log"/>
+		<java output="${output}/run.txt" classname="org.eclipse.etrice.generator.common.tests.HandlerTest.SubSystem_HandlerTestRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+	</target>
+	
+	<target name="convert" depends="run,set_tp">
+		<path id="clspath">
+			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
+			<fileset dir="${target.platform}/plugins/">
+				<include name="org.eclipse.core.runtime_3.8.0*.jar" />
+				<include name="org.eclipse.emf.ecore_2.8.0*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8.0*.jar" />
+				<include name="org.eclipse.emf.common_2.8.0*.jar" />
+			</fileset>
+		</path>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="./tmp/HandlerTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+	</target>
+	
+	<target name="copy_results" depends="set_tr">
+		<copy todir="${test.results}" >
+			<fileset dir="./tmp">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	
+</project>

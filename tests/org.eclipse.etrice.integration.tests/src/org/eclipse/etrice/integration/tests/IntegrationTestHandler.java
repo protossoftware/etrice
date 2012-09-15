@@ -28,7 +28,7 @@ public class IntegrationTestHandler extends IntegrationTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		main_component = new SubSystem_HandlerTest(null,"MainComponent");
+		main_component = new SubSystem_HandlerTest("MainComponent");
 		
 		// hand over the semaphore to the subsystem
 		main_component.setTestSemaphore(this.testSem);

@@ -15,8 +15,8 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 public class SubSys_SendingData extends SubSystemClassBase{
 
 	
-	public SubSys_SendingData(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSys_SendingData(String name) {
+		super(name);
 	}
 	
 	@Override
