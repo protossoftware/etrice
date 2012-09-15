@@ -389,12 +389,12 @@
 	</chapter>
 	<chapter id="WorkingwiththeeTriceTutorials">
 		<title>Working with the eTrice Tutorials</title>
-		<para>The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. </para>
+		<para>The eTrice Tutorials will help you to learn and understand the eTrice tool and concepts. ETrice supports several target languages. The concepts will not be explained for each language. </para>
 		<para>Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.</para>
-		<para>Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  </para>
+		<para>Therefore the best way to start with eTrice is to follow the Java Tutorials and after that switch to your target language.  </para>
 	</chapter>
-	<chapter id="SettinguptheWorkspaceJava">
-		<title>Setting up the Workspace (Java)</title>
+	<chapter id="SettinguptheWorkspaceforJavaProjects">
+		<title>Setting up the Workspace for Java Projects</title>
 		<para>ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:</para>
 		<itemizedlist>
 			<listitem>
@@ -489,8 +489,8 @@
 		</para>
 		<para>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</para>
 	</chapter>
-	<chapter id="TutorialHelloWorldJava">
-		<title>Tutorial HelloWorld (Java)</title>
+	<chapter id="TutorialHelloWorldforJava">
+		<title>Tutorial HelloWorld for Java</title>
 		<section id="Scope">
 			<title>Scope</title>
 			<para>In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM. You will perform the following steps:</para>
@@ -1713,8 +1713,8 @@ carLights.setState(TrafficLight3.OFF);
 			<para>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</para>
 		</section>
 	</chapter>
-	<chapter id="SettinguptheWorkspaceC">
-		<title>Setting up the Workspace ( C )</title>
+	<chapter id="SettinguptheWorkspaceforCProjects">
+		<title>Setting up the Workspace for C Projects</title>
 		<para>Before you can start with C, some preconditions must be fulfilled:</para>
 		<para>- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
 			- The CDT-Eclipse plug in must be installed as the C development environment.</para>
@@ -1755,9 +1755,9 @@ carLights.setState(TrafficLight3.OFF);
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>Name the Project. Select an 
-				<emphasis>Executable-&gt;Hello World ANSI C</emphasis> as Project type, 
-				<emphasis>MinGW GCC</emphasis> as Tool chain and click 
+			<para>Name the project. Select an 
+				<emphasis>Executable-&gt;Hello World ANSI C</emphasis> as project type, 
+				<emphasis>MinGW GCC</emphasis> as tool chain and click 
 				<emphasis>Finish</emphasis>. 
 			</para>
 			<para>
@@ -1808,7 +1808,7 @@ carLights.setState(TrafficLight3.OFF);
 			<para>After changing the configuration, the runtime must be built.</para>
 			<para>Open the properties of the 
 				<emphasis>org.eclipse.runtime.c</emphasis> project and select 
-				<emphasis>C/C++ Build-&gt;Settins-&gt;Tool Settings</emphasis> and select 
+				<emphasis>C/C++ Build-&gt;Settings-&gt;Tool Settings</emphasis> and select 
 				<emphasis>Includes</emphasis>.
 			</para>
 			<para>
@@ -1856,11 +1856,11 @@ carLights.setState(TrafficLight3.OFF);
 			<para>For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A specific library file must exist within the project. Such specific runtime libraries might be referenced from several applications.     </para>
 		</section>
 	</chapter>
-	<chapter id="TutorialHelloWorldC">
-		<title>Tutorial HelloWorld ( C )</title>
+	<chapter id="TutorialHelloWorldforC">
+		<title>Tutorial HelloWorld for C</title>
 		<section id="Scope5">
 			<title>Scope</title>
-			<para>In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C as in Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+			<para>In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
 				You will perform the following steps:</para>
 			<orderedlist>
 				<listitem>
@@ -1883,13 +1883,13 @@ carLights.setState(TrafficLight3.OFF);
 				</listitem>
 			</orderedlist>
 			<para>Make sure that you have set up the workspace as described in 
-				<emphasis>Setting up the workspace ( C )</emphasis>.
+				<emphasis>Setting up the Workspace for C Projects</emphasis>.
 			</para>
 		</section>
 		<section id="Createanewmodelfromscratch4">
 			<title>Create a new model from scratch</title>
 			<para>Before you can create a new C-model, you have to create a new C project as described in 
-				<emphasis>Setting up the workspace ( C )</emphasis>.
+				<emphasis>Setting up the Workspace for C Projects</emphasis>.
 				Remember:
 				- select the 
 				<emphasis>C/C++</emphasis> perspective
@@ -1961,9 +1961,8 @@ carLights.setState(TrafficLight3.OFF);
 				- Import CTypes instead of JavaTypes
 				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 				- The application must be shutdown on model level (see also 
-				<emphasis>etRuntimeConfig.h</emphasis>) 
+				<emphasis>etRuntimeConfig.h</emphasis>).  
 			</para>
-			<para>ToDo: shutdown must not depend on the subsystem.</para>
 			<literallayout><code>RoomModel HelloWorldCModel {
 	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
 	SubSystemClass HelloWorldCSubSysClass {
@@ -1977,7 +1976,7 @@ carLights.setState(TrafficLight3.OFF);
 				State state0 {
 					entry {
 						"printf(\"HelloWorldC !\\n\");"
-						"HelloWorldCSubSysClass_shutdown();//exit(0);"
+						"SubSysClass_shutdown();"
 						"\t\t\t\t\t\t"
 					}
 				}
@@ -2060,7 +2059,7 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Generatethecode">
 			<title>Generate the code</title>
-			<para>Now you can generate the code as you know it from Java. Right click to the launch configuration and run it as _gen_HelloWorldC_.</para>
+			<para>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -2118,13 +2117,383 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Summary4">
 			<title>Summary</title>
 			<para>You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  </para>
-			<para>The next tutorial provides an exercise to get more familiar with these working steps. 
-				h1. ROOM Concepts</para>
-			<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-				The formal ROOM grammar based on Xtext (EBNF) you can find here: 
-				<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
+			<para>The next tutorial provides an exercise to get more familiar with these working steps.</para>
+		</section>
+	</chapter>
+	<chapter id="TutorialRemoveCCommentC">
+		<title>Tutorial Remove C-Comment ( C )</title>
+		<section id="Scope6">
+			<title>Scope</title>
+			<para>In this tutorial you will create a more complex model. The model implements a simple parser that removes comments (block comments and line comments) from a C source file. Therefore we will create two actors. One actor is responsible to perform the file operations, whether the second actor implements the parser.</para>
+			<para>You will perform the following steps:</para>
+			<orderedlist>
+				<listitem>
+					<para>create a new model from scratch for C</para>
+				</listitem>
+				<listitem>
+					<para>define a protocol</para>
+				</listitem>
+				<listitem>
+					<para>define your own data type</para>
+				</listitem>
+				<listitem>
+					<para>create the structure and the behavior by yourself</para>
+				</listitem>
+				<listitem>
+					<para>generate, build and run the model</para>
+				</listitem>
+			</orderedlist>
+			<para>Make sure that you have set up the workspace as described in 
+				<emphasis>Setting up the Workspace for C Projects</emphasis>.
 			</para>
 		</section>
+		<section id="Createanewmodelfromscratch5">
+			<title>Create a new model from scratch</title>
+			<para>Remember the following steps from the previous tutorials:
+				- select the 
+				<emphasis>C/C++</emphasis> perspective
+				- From the main menue select 
+				<emphasis>File-&gt;New-&gt;C Project</emphasis>
+				- Name the project 
+				<emphasis>RemoveComment</emphasis>
+				- Project type is 
+				<emphasis>Executable / Empty C Project</emphasis>
+				- Toolchain is 
+				<emphasis>MinGW</emphasis>
+				- Add the folder 
+				<emphasis>model</emphasis>
+				- Add the model file and name it 
+				<emphasis>RemoveComment.room</emphasis>
+				- Add the Xtext nature.
+			</para>
+			<para>The workspace should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC01.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Create a launch configuration for the C generator and add the include path and library as described in 
+				<emphasis>HelloWorldC</emphasis>.
+			</para>
+			<para>The workspace should look like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC02.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Now the model is created and all settings for the code generator, compiler and linker are done.</para>
+		</section>
+		<section id="Createyourowndatatype">
+			<title>Create your own data type</title>
+			<para>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
+				<emphasis>FILE</emphasis>. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of 
+				<emphasis>CTypes.room</emphasis> from 
+				<emphasis>org.eclipse.modellib.c</emphasis> to your model folder.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC03.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Open 
+				<emphasis>Ctypes.room</emphasis> and take a look at the declaration of 
+				<emphasis>string</emphasis> (last line) which is not a basic C type.
+			</para>
+			<para>
+				<emphasis>PrimitiveType string:ptCharacter -&gt; charPtr default "0"</emphasis>
+			</para>
+			<para>With this declaration, you make the 
+				<emphasis>string</emphasis> keyword available on model level as a primitive type. This type will be translated to 
+				<emphasis>charPtr</emphasis> in your C sources. 
+				<emphasis>charPtr</emphasis> is defined in 
+				<emphasis>etDatatypes.h</emphasis>. This header file is platform specific (
+				<emphasis>generic</emphasis>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
+			</para>
+			<para>Add the following line in 
+				<emphasis>CTypes.room</emphasis>:
+			</para>
+			<literallayout><code>PrimitiveType file:ptInteger -&gt; FILE default "0"
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>
+				<emphasis>FILE</emphasis> is the native type for MinGW. Therefore you don´t need a mapping within 
+				<emphasis>etDatatypes.h</emphasis>. If your model should be portable across different platforms you should not take this shortcut.
+			</para>
+		</section>
+		<section id="Createthemodel">
+			<title>Create the model</title>
+			<para>Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.</para>
+			<para>The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. </para>
+			<para>Remember the logical steps: 
+				- create the model by the help of content assist (CTRL Space)
+				- name the model, subsystem and top level actor
+				- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+				- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+				- create the state machines</para>
+			<para>Try to create the model by yourself and take the following solution as an example.</para>
+			<para>Structure:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC04.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>File reader FSM:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC05.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Parser FSM:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC06.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Complete model:</para>
+			<literallayout><code>RoomModel RemoveComment {
+	import room.basic.types.c.* from "CTypes.room"
+	SubSystemClass RemoveCommentSubSys {
+		ActorRef Topref:ATop 
+	}
+	ActorClass ATop {
+		Structure {
+			ActorRef reader: AFileReader
+			ActorRef cParser: ACParser
+			Binding reader.outPort and cParser.readerPort
+		}
+		Behavior { }
+	}
+	ActorClass AFileReader{
+		Interface {
+			Port outPort: FileReaderProtocol
+		}
+		Structure {
+			usercode3{"#include &lt;stdio.h&gt;"
+			}
+			external Port outPort
+			Attribute f:file ref
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; reading {
+					action {
+						"if ((f = fopen(\"test.txt\",\"r\")) != 0) {"
+						"\tprintf(\"file open ok !\\r\\n\");"
+						"\t}"
+						"\telse {"
+						"\tprintf(\"file not found !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				Transition tr0: reading -&gt; reading {
+					triggers {
+						&lt;getNextChar: outPort&gt;
+					}
+					action {
+						"int8 c;"
+						"if ((c=fgetc(f)) != EOF) {"
+						"\toutPort.nextChar(c);"
+						"\t}"
+						"\telse {"
+						"\tfclose(f);"
+						"\tprintf(\"file closed !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				State reading
+			}
+		}
+	}
+	ActorClass ACParser{
+		Interface {
+			conjugated Port readerPort: FileReaderProtocol
+		}
+		Structure {
+			external Port readerPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -&gt; code {
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr0: code -&gt; cp cp0 {
+					triggers {
+						&lt;nextChar: readerPort&gt;
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr1: cp cp0 -&gt; code {
+					action {
+						"printf(\"%c\",c);"
+					}
+				}
+				Transition tr2: cp cp0 -&gt; firstSlash {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr3: firstSlash -&gt; cp cp1 {
+					triggers {
+						&lt;nextChar: readerPort&gt;
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr4: cp cp1 -&gt; cp cp4
+				Transition tr5: cp cp1 -&gt; blockComment {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr6: blockComment -&gt; cp cp2 {
+					triggers {
+						&lt;nextChar: readerPort&gt;
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr7: cp cp2 -&gt; blockComment
+				Transition tr8: cp cp2 -&gt; firstStar {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr9: firstStar -&gt; cp cp3 {
+					triggers {
+						&lt;nextChar: readerPort&gt;
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr10: cp cp3 -&gt; blockComment
+				Transition tr11: cp cp3 -&gt; code {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr12: cp cp4 -&gt; code {
+					action {
+						"printf(\"%c%c\",\'/\',c);"
+					}
+				}
+				Transition tr13: cp cp4 -&gt; lineComment {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr14: cp cp5 -&gt; lineComment
+				Transition tr15: lineComment -&gt; cp cp5 {
+					triggers {
+						&lt;nextChar: readerPort&gt;
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr16: cp cp5 -&gt; code {
+					cond {
+						"c==\'\\n\'"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				ChoicePoint cp2
+				ChoicePoint cp3
+				ChoicePoint cp4
+				ChoicePoint cp5
+				State code
+				State firstSlash
+				State blockComment
+				State firstStar
+				State lineComment
+			}
+		}
+	}
+
+	ProtocolClass FileReaderProtocol {
+		incoming {
+			Message getNextChar()
+		}
+		outgoing {
+			Message nextChar(c:char)
+		}
+	}
+}
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>Take a look at the file attribute of the file reader. </para>
+			<literallayout><code>Attribute f:file ref
+</code></literallayout>
+			<blockquote>
+				<para></para>
+			</blockquote>
+			<para>
+				<emphasis>fopen</emphasis> expects a 
+				<emphasis>FILE *</emphasis>. 
+				<emphasis>f:file ref</emphasis> declares a variable 
+				<emphasis>f</emphasis> from type reference to 
+				<emphasis>file</emphasis>, which is a pointer to 
+				<emphasis>FILE</emphasis>.
+			</para>
+		</section>
+		<section id="Generatebuildandrunthemodel">
+			<title>Generate, build and run the model</title>
+			<para>Before you can run the model you should copy one of the generated C source files into the project folder and name it 
+				<emphasis>test.txt</emphasis>. 
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC07.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Generate, build and run the model.</para>
+			<para>Your output should start like this:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/036-RemoveCommentC08.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="Summary5">
+			<title>Summary</title>
+			<para>This tutorial should help you to train the necessary steps to create a C model. By the way you have seen how to create your own type system for a real embedded project. An additional aspect was to show how simple it is to separate different aspects of the required functionality by the use of actors and protocols and make them reusable.</para>
+		</section>
+	</chapter>
+	<chapter id="ROOMConcepts">
+		<title>ROOM Concepts</title>
+		<para>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+			The formal ROOM grammar based on Xtext (EBNF) you can find here: 
+			<ulink url="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">ROOM Grammar</ulink>
+		</para>
 		<section id="Actors">
 			<title>Actors</title>
 			<section id="Description">

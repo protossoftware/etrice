@@ -55,9 +55,7 @@ Creating the model is not the focus of this tutorial. Therefore copy and paste t
 Recognize the C specific parts:
 - Import CTypes instead of JavaTypes
 - The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
-- The application must be shutdown on model level (see also _etRuntimeConfig.h_) 
-
-ToDo: shutdown must not depend on the subsystem.
+- The application must be shutdown on model level (see also _etRuntimeConfig.h_).  
 
 bc.. 
 RoomModel HelloWorldCModel {
@@ -73,7 +71,7 @@ RoomModel HelloWorldCModel {
 				State state0 {
 					entry {
 						"printf(\"HelloWorldC !\\n\");"
-						"HelloWorldCSubSysClass_shutdown();//exit(0);"
+						"SubSysClass_shutdown();"
 						"\t\t\t\t\t\t"
 					}
 				}
@@ -146,4 +144,5 @@ h2. Summary
 
 You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  
 
-The next tutorial provides an exercise to get more familiar with these working steps. 
+The next tutorial provides an exercise to get more familiar with these working steps.
+ 

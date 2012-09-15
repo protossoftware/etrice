@@ -28,9 +28,9 @@
 </topic>
 </topic>
 <topic href="help/WorkingwiththeeTriceTutorials.html" label="Working with the eTrice Tutorials"></topic>
-<topic href="help/SettinguptheWorkspaceJava.html" label="Setting up the Workspace (Java)"></topic>
-<topic href="help/TutorialHelloWorldJava.html" label="Tutorial HelloWorld (Java)">
-<topic href="help/TutorialHelloWorldJava.html#Scope" label="Scope"></topic>
+<topic href="help/SettinguptheWorkspaceforJavaProjects.html" label="Setting up the Workspace for Java Projects"></topic>
+<topic href="help/TutorialHelloWorldforJava.html" label="Tutorial HelloWorld for Java">
+<topic href="help/TutorialHelloWorldforJava.html#Scope" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch"></topic>
 <topic href="help/Createastatemachine.html" label="Create a state machine"></topic>
 <topic href="help/Buildandrunthemodel.html" label="Build and run the model"></topic>
@@ -66,12 +66,12 @@
 <topic href="help/Setupthemodel.html" label="Setup the model"></topic>
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
 </topic>
-<topic href="help/SettinguptheWorkspaceC.html" label="Setting up the Workspace ( C )">
-<topic href="help/SettinguptheWorkspaceC.html#Testingtheenvironment" label="Testing the environment"></topic>
+<topic href="help/SettinguptheWorkspaceforCProjects.html" label="Setting up the Workspace for C Projects">
+<topic href="help/SettinguptheWorkspaceforCProjects.html#Testingtheenvironment" label="Testing the environment"></topic>
 <topic href="help/BuildingtheCruntimesystem.html" label="Building the C runtime system"></topic>
 </topic>
-<topic href="help/TutorialHelloWorldC.html" label="Tutorial HelloWorld ( C )">
-<topic href="help/TutorialHelloWorldC.html#Scope5" label="Scope"></topic>
+<topic href="help/TutorialHelloWorldforC.html" label="Tutorial HelloWorld for C">
+<topic href="help/TutorialHelloWorldforC.html#Scope5" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch4.html" label="Create a new model from scratch"></topic>
 <topic href="help/CreatetheHelloWorldmodel.html" label="Create the HelloWorld model"></topic>
 <topic href="help/CreatealaunchconfigurationtostarttheCcodegenerator.html" label="Create a launch configuration to start the C code generator"></topic>
@@ -79,14 +79,24 @@
 <topic href="help/Setuptheincludepath.html" label="Setup the include path"></topic>
 <topic href="help/Buildandrunthemodel2.html" label="Build and run the model"></topic>
 <topic href="help/Summary4.html" label="Summary"></topic>
-<topic href="help/Actors.html" label="Actors">
-<topic href="help/Actors.html#Description" label="Description"></topic>
-<topic href="help/Actors.html#Motivation" label="Motivation"></topic>
-<topic href="help/Actors.html#Notation" label="Notation"></topic>
-<topic href="help/Actors.html#Details" label="Details">
-<topic href="help/Actors.html#ActorClassesActorReferencesPortsandBindings" label="Actor Classes, Actor References, Ports and Bindings"></topic>
-<topic href="help/Actors.html#Attributes" label="Attributes"></topic>
-<topic href="help/Actors.html#Operations" label="Operations"></topic>
+</topic>
+<topic href="help/TutorialRemoveCCommentC.html" label="Tutorial Remove C-Comment ( C )">
+<topic href="help/TutorialRemoveCCommentC.html#Scope6" label="Scope"></topic>
+<topic href="help/Createanewmodelfromscratch5.html" label="Create a new model from scratch"></topic>
+<topic href="help/Createyourowndatatype.html" label="Create your own data type"></topic>
+<topic href="help/Createthemodel.html" label="Create the model"></topic>
+<topic href="help/Generatebuildandrunthemodel.html" label="Generate, build and run the model"></topic>
+<topic href="help/Summary5.html" label="Summary"></topic>
+</topic>
+<topic href="help/ROOMConcepts.html" label="ROOM Concepts">
+<topic href="help/ROOMConcepts.html#Actors" label="Actors">
+<topic href="help/ROOMConcepts.html#Description" label="Description"></topic>
+<topic href="help/ROOMConcepts.html#Motivation" label="Motivation"></topic>
+<topic href="help/ROOMConcepts.html#Notation" label="Notation"></topic>
+<topic href="help/ROOMConcepts.html#Details" label="Details">
+<topic href="help/ROOMConcepts.html#ActorClassesActorReferencesPortsandBindings" label="Actor Classes, Actor References, Ports and Bindings"></topic>
+<topic href="help/ROOMConcepts.html#Attributes" label="Attributes"></topic>
+<topic href="help/ROOMConcepts.html#Operations" label="Operations"></topic>
 </topic>
 </topic>
 <topic href="help/Protocols.html" label="Protocols">

@@ -213,13 +213,13 @@ With this execution model also lower levels of a software system, such as device
 
 h1. Working with the eTrice Tutorials
 
-The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. 
+The eTrice Tutorials will help you to learn and understand the eTrice tool and concepts. ETrice supports several target languages. The concepts will not be explained for each language. 
 
 Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.
 
-Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  
+Therefore the best way to start with eTrice is to follow the Java Tutorials and after that switch to your target language.  
 
-h1. Setting up the Workspace (Java)
+h1. Setting up the Workspace for Java Projects
 
 ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime framework and on some ready to use model parts. This parts provide services like:
 
@@ -262,7 +262,7 @@ To stop the application type _quit_ in the console window.
 
 Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.
 
-h1. Tutorial HelloWorld (Java)
+h1. Tutorial HelloWorld for Java
 
 h2. Scope
 
@@ -956,7 +956,7 @@ This method is synchronized. That means, regardless who sends the message, the q
 
 
 
-h1. Setting up the Workspace ( C )
+h1. Setting up the Workspace for C Projects
  
 Before you can start with C, some preconditions must be fulfilled:
 
@@ -983,7 +983,7 @@ From the main menu select _File->New->C Project_.
  
 !images/032-SetupWorkspaceC02.png!
 
-Name the Project. Select an _Executable->Hello World ANSI C_ as Project type, _MinGW GCC_ as Tool chain and click _Finish_. 
+Name the project. Select an _Executable->Hello World ANSI C_ as project type, _MinGW GCC_ as tool chain and click _Finish_. 
  
 !images/032-SetupWorkspaceC04.png! 
 
@@ -1008,7 +1008,7 @@ The C runtime system contains some basic functionalities to run the generated mo
 
 After changing the configuration, the runtime must be built.
 
-Open the properties of the _org.eclipse.runtime.c_ project and select _C/C++ Build->Settins->Tool Settings_ and select _Includes_.
+Open the properties of the _org.eclipse.runtime.c_ project and select _C/C++ Build->Settings->Tool Settings_ and select _Includes_.
 
 !images/032-SetupWorkspaceC08.png!
 
@@ -1032,11 +1032,11 @@ The runtime library should be created.
 
 For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A specific library file must exist within the project. Such specific runtime libraries might be referenced from several applications.     
 
-h1. Tutorial HelloWorld ( C )
+h1. Tutorial HelloWorld for C
 
 h2. Scope
 
-In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C as in Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
 You will perform the following steps:
 
 # create a new model from scratch for C
@@ -1046,12 +1046,12 @@ You will perform the following steps:
 # generate the source code
 # run the model
 
-Make sure that you have set up the workspace as described in _Setting up the workspace ( C )_.
+Make sure that you have set up the workspace as described in _Setting up the Workspace for C Projects_.
 
 
 h2. Create a new model from scratch
 
-Before you can create a new C-model, you have to create a new C project as described in _Setting up the workspace ( C )_.
+Before you can create a new C-model, you have to create a new C project as described in _Setting up the Workspace for C Projects_.
 Remember:
 - select the _C/C++_ perspective
 - From the main menue select _File->New->C Project_
@@ -1089,9 +1089,7 @@ Creating the model is not the focus of this tutorial. Therefore copy and paste t
 Recognize the C specific parts:
 - Import CTypes instead of JavaTypes
 - The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
-- The application must be shutdown on model level (see also _etRuntimeConfig.h_) 
-
-ToDo: shutdown must not depend on the subsystem.
+- The application must be shutdown on model level (see also _etRuntimeConfig.h_).  
 
 bc.. 
 RoomModel HelloWorldCModel {
@@ -1107,7 +1105,7 @@ RoomModel HelloWorldCModel {
 				State state0 {
 					entry {
 						"printf(\"HelloWorldC !\\n\");"
-						"HelloWorldCSubSysClass_shutdown();//exit(0);"
+						"SubSysClass_shutdown();"
 						"\t\t\t\t\t\t"
 					}
 				}
@@ -1148,7 +1146,7 @@ Apply your changes. The new configuration should now exist in your workspace.
 
 h2. Generate the code
 
-Now you can generate the code as you know it from Java. Right click to the launch configuration and run it as _gen_HelloWorldC_.
+Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.
 
 !images/034-HelloWorldC12.png!
 
@@ -1180,7 +1178,306 @@ h2. Summary
 
 You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  
 
-The next tutorial provides an exercise to get more familiar with these working steps. 
+The next tutorial provides an exercise to get more familiar with these working steps.
+ 
+h1. Tutorial Remove C-Comment ( C )
+
+h2. Scope
+
+In this tutorial you will create a more complex model. The model implements a simple parser that removes comments (block comments and line comments) from a C source file. Therefore we will create two actors. One actor is responsible to perform the file operations, whether the second actor implements the parser.
+
+You will perform the following steps:
+
+# create a new model from scratch for C
+# define a protocol
+# define your own data type
+# create the structure and the behavior by yourself
+# generate, build and run the model
+
+Make sure that you have set up the workspace as described in _Setting up the Workspace for C Projects_.
+
+h2. Create a new model from scratch
+
+Remember the following steps from the previous tutorials:
+- select the _C/C++_ perspective
+- From the main menue select _File->New->C Project_
+- Name the project _RemoveComment_
+- Project type is _Executable / Empty C Project_
+- Toolchain is _MinGW_
+- Add the folder _model_
+- Add the model file and name it _RemoveComment.room_
+- Add the Xtext nature.
+
+The workspace should look like this:
+
+!images/036-RemoveCommentC01.png!
+
+Create a launch configuration for the C generator and add the include path and library as described in _HelloWorldC_.
+
+The workspace should look like this:
+
+!images/036-RemoveCommentC02.png!
+
+Now the model is created and all settings for the code generator, compiler and linker are done.
+
+
+h2. Create your own data type
+
+The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is _FILE_. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of _CTypes.room_ from _org.eclipse.modellib.c_ to your model folder.
+
+!images/036-RemoveCommentC03.png!
+
+Open _Ctypes.room_ and take a look at the declaration of _string_ (last line) which is not a basic C type.
+
+_PrimitiveType string:ptCharacter -> charPtr default "0"_
+
+With this declaration, you make the _string_ keyword available on model level as a primitive type. This type will be translated to _charPtr_ in your C sources. _charPtr_ is defined in _etDatatypes.h_. This header file is platform specific (_generic_). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
+
+Add the following line in _CTypes.room_:
+
+bc.. 
+PrimitiveType file:ptInteger -> FILE default "0"
+bq. 
+
+_FILE_ is the native type for MinGW. Therefore you don´t need a mapping within _etDatatypes.h_. If your model should be portable across different platforms you should not take this shortcut.
+ 
+h2. Create the model
+
+Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.
+
+The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. 
+
+Remember the logical steps: 
+- create the model by the help of content assist (CTRL Space)
+- name the model, subsystem and top level actor
+- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+- create the state machines
+
+Try to create the model by yourself and take the following solution as an example.
+
+Structure:
+
+!images/036-RemoveCommentC04.png!
+
+File reader FSM:
+
+!images/036-RemoveCommentC05.png!
+
+Parser FSM:
+
+!images/036-RemoveCommentC06.png!
+
+Complete model:
+
+bc..  
+RoomModel RemoveComment {
+	import room.basic.types.c.* from "CTypes.room"
+	SubSystemClass RemoveCommentSubSys {
+		ActorRef Topref:ATop 
+	}
+	ActorClass ATop {
+		Structure {
+			ActorRef reader: AFileReader
+			ActorRef cParser: ACParser
+			Binding reader.outPort and cParser.readerPort
+		}
+		Behavior { }
+	}
+	ActorClass AFileReader{
+		Interface {
+			Port outPort: FileReaderProtocol
+		}
+		Structure {
+			usercode3{"#include <stdio.h>"
+			}
+			external Port outPort
+			Attribute f:file ref
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> reading {
+					action {
+						"if ((f = fopen(\"test.txt\",\"r\")) != 0) {"
+						"\tprintf(\"file open ok !\\r\\n\");"
+						"\t}"
+						"\telse {"
+						"\tprintf(\"file not found !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				Transition tr0: reading -> reading {
+					triggers {
+						<getNextChar: outPort>
+					}
+					action {
+						"int8 c;"
+						"if ((c=fgetc(f)) != EOF) {"
+						"\toutPort.nextChar(c);"
+						"\t}"
+						"\telse {"
+						"\tfclose(f);"
+						"\tprintf(\"file closed !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				State reading
+			}
+		}
+	}
+	ActorClass ACParser{
+		Interface {
+			conjugated Port readerPort: FileReaderProtocol
+		}
+		Structure {
+			external Port readerPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> code {
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr0: code -> cp cp0 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr1: cp cp0 -> code {
+					action {
+						"printf(\"%c\",c);"
+					}
+				}
+				Transition tr2: cp cp0 -> firstSlash {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr3: firstSlash -> cp cp1 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr4: cp cp1 -> cp cp4
+				Transition tr5: cp cp1 -> blockComment {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr6: blockComment -> cp cp2 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr7: cp cp2 -> blockComment
+				Transition tr8: cp cp2 -> firstStar {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr9: firstStar -> cp cp3 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr10: cp cp3 -> blockComment
+				Transition tr11: cp cp3 -> code {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr12: cp cp4 -> code {
+					action {
+						"printf(\"%c%c\",\'/\',c);"
+					}
+				}
+				Transition tr13: cp cp4 -> lineComment {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr14: cp cp5 -> lineComment
+				Transition tr15: lineComment -> cp cp5 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr16: cp cp5 -> code {
+					cond {
+						"c==\'\\n\'"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				ChoicePoint cp2
+				ChoicePoint cp3
+				ChoicePoint cp4
+				ChoicePoint cp5
+				State code
+				State firstSlash
+				State blockComment
+				State firstStar
+				State lineComment
+			}
+		}
+	}
+
+	ProtocolClass FileReaderProtocol {
+		incoming {
+			Message getNextChar()
+		}
+		outgoing {
+			Message nextChar(c:char)
+		}
+	}
+}
+bq. 
+
+Take a look at the file attribute of the file reader. 
+
+bc.. 
+Attribute f:file ref
+bq. 
+
+_fopen_ expects a _FILE *_. _f:file ref_ declares a variable _f_ from type reference to _file_, which is a pointer to _FILE_.
+
+
+h2. Generate, build and run the model
+
+Before you can run the model you should copy one of the generated C source files into the project folder and name it _test.txt_. 
+
+!images/036-RemoveCommentC07.png!
+
+Generate, build and run the model.
+
+Your output should start like this:
+
+!images/036-RemoveCommentC08.png!
+
+
+h2. Summary
+
+This tutorial should help you to train the necessary steps to create a C model. By the way you have seen how to create your own type system for a real embedded project. An additional aspect was to show how simple it is to separate different aspects of the required functionality by the use of actors and protocols and make them reusable.
+
+
 h1. ROOM Concepts
 
 This chapter gives an overview over the ROOM language elements and their textual and graphical notation.

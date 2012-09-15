@@ -54,10 +54,10 @@
 <span class="chapter"><a href="#WorkingwiththeeTriceTutorials">3. Working with the eTrice Tutorials</a></span>
 </dt>
 <dt>
-<span class="chapter"><a href="#SettinguptheWorkspaceJava">4. Setting up the Workspace (Java)</a></span>
+<span class="chapter"><a href="#SettinguptheWorkspaceforJavaProjects">4. Setting up the Workspace for Java Projects</a></span>
 </dt>
 <dt>
-<span class="chapter"><a href="#TutorialHelloWorldJava">5. Tutorial HelloWorld (Java)</a></span>
+<span class="chapter"><a href="#TutorialHelloWorldforJava">5. Tutorial HelloWorld for Java</a></span>
 </dt>
 <dd>
 <dl>
@@ -163,7 +163,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#SettinguptheWorkspaceC">9. Setting up the Workspace ( C )</a></span>
+<span class="chapter"><a href="#SettinguptheWorkspaceforCProjects">9. Setting up the Workspace for C Projects</a></span>
 </dt>
 <dd>
 <dl>
@@ -176,7 +176,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialHelloWorldC">10. Tutorial HelloWorld ( C )</a></span>
+<span class="chapter"><a href="#TutorialHelloWorldforC">10. Tutorial HelloWorld for C</a></span>
 </dt>
 <dd>
 <dl>
@@ -204,6 +204,38 @@
 <dt>
 <span class="section"><a href="#Summary4">Summary</a></span>
 </dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#TutorialRemoveCCommentC">11. Tutorial Remove C-Comment ( C )</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Scope6">Scope</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createanewmodelfromscratch5">Create a new model from scratch</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createyourowndatatype">Create your own data type</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createthemodel">Create the model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Generatebuildandrunthemodel">Generate, build and run the model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Summary5">Summary</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#ROOMConcepts">12. ROOM Concepts</a></span>
+</dt>
+<dd>
+<dl>
 <dt>
 <span class="section"><a href="#Actors">Actors</a></span>
 </dt>
@@ -818,16 +850,16 @@
 </div>
 </div>
 </div>
-<p>The eTrice Tutorials will help you to learn and understand the eTrice Tool and concepts. ETrice supports several target languages. The concepts will not be explained in each language. </p>
+<p>The eTrice Tutorials will help you to learn and understand the eTrice tool and concepts. ETrice supports several target languages. The concepts will not be explained for each language. </p>
 <p>Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.</p>
-<p>Therefore the best way to start with eTrice is to perform the Java Tutorials and after that switch to your target language.  </p>
+<p>Therefore the best way to start with eTrice is to follow the Java Tutorials and after that switch to your target language.  </p>
 </div>
-<div class="chapter" title="Chapter&nbsp;4.&nbsp;Setting up the Workspace (Java)">
+<div class="chapter" title="Chapter&nbsp;4.&nbsp;Setting up the Workspace for Java Projects">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="SettinguptheWorkspaceJava"></a>Chapter&nbsp;4.&nbsp;Setting up the Workspace (Java)</h2>
+<a name="SettinguptheWorkspaceforJavaProjects"></a>Chapter&nbsp;4.&nbsp;Setting up the Workspace for Java Projects</h2>
 </div>
 </div>
 </div>
@@ -936,12 +968,12 @@
 </p>
 <p>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</p>
 </div>
-<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial HelloWorld (Java)">
+<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial HelloWorld for Java">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialHelloWorldJava"></a>Chapter&nbsp;5.&nbsp;Tutorial HelloWorld (Java)</h2>
+<a name="TutorialHelloWorldforJava"></a>Chapter&nbsp;5.&nbsp;Tutorial HelloWorld for Java</h2>
 </div>
 </div>
 </div>
@@ -2588,12 +2620,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;9.&nbsp;Setting up the Workspace ( C )">
+<div class="chapter" title="Chapter&nbsp;9.&nbsp;Setting up the Workspace for C Projects">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="SettinguptheWorkspaceC"></a>Chapter&nbsp;9.&nbsp;Setting up the Workspace ( C )</h2>
+<a name="SettinguptheWorkspaceforCProjects"></a>Chapter&nbsp;9.&nbsp;Setting up the Workspace for C Projects</h2>
 </div>
 </div>
 </div>
@@ -2647,9 +2679,9 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 			
 </p>
-<p>Name the Project. Select an 
-				<span class="emphasis"><em>Executable-&gt;Hello World ANSI C</em></span> as Project type, 
-				<span class="emphasis"><em>MinGW GCC</em></span> as Tool chain and click 
+<p>Name the project. Select an 
+				<span class="emphasis"><em>Executable-&gt;Hello World ANSI C</em></span> as project type, 
+				<span class="emphasis"><em>MinGW GCC</em></span> as tool chain and click 
 				<span class="emphasis"><em>Finish</em></span>. 
 			</p>
 <p>
@@ -2712,7 +2744,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>After changing the configuration, the runtime must be built.</p>
 <p>Open the properties of the 
 				<span class="emphasis"><em>org.eclipse.runtime.c</em></span> project and select 
-				<span class="emphasis"><em>C/C++ Build-&gt;Settins-&gt;Tool Settings</em></span> and select 
+				<span class="emphasis"><em>C/C++ Build-&gt;Settings-&gt;Tool Settings</em></span> and select 
 				<span class="emphasis"><em>Includes</em></span>.
 			</p>
 <p>
@@ -2767,12 +2799,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A specific library file must exist within the project. Such specific runtime libraries might be referenced from several applications.     </p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;10.&nbsp;Tutorial HelloWorld ( C )">
+<div class="chapter" title="Chapter&nbsp;10.&nbsp;Tutorial HelloWorld for C">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialHelloWorldC"></a>Chapter&nbsp;10.&nbsp;Tutorial HelloWorld ( C )</h2>
+<a name="TutorialHelloWorldforC"></a>Chapter&nbsp;10.&nbsp;Tutorial HelloWorld for C</h2>
 </div>
 </div>
 </div>
@@ -2785,7 +2817,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C as in Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+<p>In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
 				You will perform the following steps:</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -2810,7 +2842,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </ol>
 </div>
 <p>Make sure that you have set up the workspace as described in 
-				<span class="emphasis"><em>Setting up the workspace ( C )</em></span>.
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
 			</p>
 </div>
 <div class="section" title="Create a new model from scratch">
@@ -2823,7 +2855,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>Before you can create a new C-model, you have to create a new C project as described in 
-				<span class="emphasis"><em>Setting up the workspace ( C )</em></span>.
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
 				Remember:
 				- select the 
 				<span class="emphasis"><em>C/C++</em></span> perspective
@@ -2908,9 +2940,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 				- Import CTypes instead of JavaTypes
 				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 				- The application must be shutdown on model level (see also 
-				<span class="emphasis"><em>etRuntimeConfig.h</em></span>) 
+				<span class="emphasis"><em>etRuntimeConfig.h</em></span>).  
 			</p>
-<p>ToDo: shutdown must not depend on the subsystem.</p>
 <div class="literallayout">
 <p>
 <code class="code">RoomModel&nbsp;HelloWorldCModel&nbsp;{<br>
@@ -2926,7 +2957,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 				State&nbsp;state0&nbsp;{<br>
 					entry&nbsp;{<br>
 						"printf(\"HelloWorldC&nbsp;!\\n\");"<br>
-						"HelloWorldCSubSysClass_shutdown();//exit(0);"<br>
+						"SubSysClass_shutdown();"<br>
 						"\t\t\t\t\t\t"<br>
 					}<br>
 				}<br>
@@ -3036,7 +3067,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>Now you can generate the code as you know it from Java. Right click to the launch configuration and run it as _gen_HelloWorldC_.</p>
+<p>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.</p>
 <p>
 				
 </p>
@@ -3120,14 +3151,476 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  </p>
-<p>The next tutorial provides an exercise to get more familiar with these working steps. 
-				h1. ROOM Concepts</p>
-<p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-				The formal ROOM grammar based on Xtext (EBNF) you can find here: 
-				<a class="ulink" href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext" target="_new">ROOM Grammar</a>
+<p>The next tutorial provides an exercise to get more familiar with these working steps.</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;11.&nbsp;Tutorial Remove C-Comment ( C )">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="TutorialRemoveCCommentC"></a>Chapter&nbsp;11.&nbsp;Tutorial Remove C-Comment ( C )</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Scope">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Scope6"></a>Scope</h2>
+</div>
+</div>
+</div>
+<p>In this tutorial you will create a more complex model. The model implements a simple parser that removes comments (block comments and line comments) from a C source file. Therefore we will create two actors. One actor is responsible to perform the file operations, whether the second actor implements the parser.</p>
+<p>You will perform the following steps:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>create a new model from scratch for C</p>
+</li>
+<li class="listitem">
+<p>define a protocol</p>
+</li>
+<li class="listitem">
+<p>define your own data type</p>
+</li>
+<li class="listitem">
+<p>create the structure and the behavior by yourself</p>
+</li>
+<li class="listitem">
+<p>generate, build and run the model</p>
+</li>
+</ol>
+</div>
+<p>Make sure that you have set up the workspace as described in 
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
+			</p>
+</div>
+<div class="section" title="Create a new model from scratch">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createanewmodelfromscratch5"></a>Create a new model from scratch</h2>
+</div>
+</div>
+</div>
+<p>Remember the following steps from the previous tutorials:
+				- select the 
+				<span class="emphasis"><em>C/C++</em></span> perspective
+				- From the main menue select 
+				<span class="emphasis"><em>File-&gt;New-&gt;C Project</em></span>
+				- Name the project 
+				<span class="emphasis"><em>RemoveComment</em></span>
+				- Project type is 
+				<span class="emphasis"><em>Executable / Empty C Project</em></span>
+				- Toolchain is 
+				<span class="emphasis"><em>MinGW</em></span>
+				- Add the folder 
+				<span class="emphasis"><em>model</em></span>
+				- Add the model file and name it 
+				<span class="emphasis"><em>RemoveComment.room</em></span>
+				- Add the Xtext nature.
+			</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC01.png"></div>
+<p>
+			
+</p>
+<p>Create a launch configuration for the C generator and add the include path and library as described in 
+				<span class="emphasis"><em>HelloWorldC</em></span>.
+			</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC02.png"></div>
+<p>
+			
+</p>
+<p>Now the model is created and all settings for the code generator, compiler and linker are done.</p>
+</div>
+<div class="section" title="Create your own data type">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createyourowndatatype"></a>Create your own data type</h2>
+</div>
+</div>
+</div>
+<p>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
+				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of 
+				<span class="emphasis"><em>CTypes.room</em></span> from 
+				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> to your model folder.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC03.png"></div>
+<p>
+			
+</p>
+<p>Open 
+				<span class="emphasis"><em>Ctypes.room</em></span> and take a look at the declaration of 
+				<span class="emphasis"><em>string</em></span> (last line) which is not a basic C type.
+			</p>
+<p>
+				
+<span class="emphasis"><em>PrimitiveType string:ptCharacter -&gt; charPtr default "0"</em></span>
+			
+</p>
+<p>With this declaration, you make the 
+				<span class="emphasis"><em>string</em></span> keyword available on model level as a primitive type. This type will be translated to 
+				<span class="emphasis"><em>charPtr</em></span> in your C sources. 
+				<span class="emphasis"><em>charPtr</em></span> is defined in 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. This header file is platform specific (
+				<span class="emphasis"><em>generic</em></span>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
+			</p>
+<p>Add the following line in 
+				<span class="emphasis"><em>CTypes.room</em></span>:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>FILE</em></span> is the native type for MinGW. Therefore you don&acute;t need a mapping within 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. If your model should be portable across different platforms you should not take this shortcut.
+			</p>
+</div>
+<div class="section" title="Create the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createthemodel"></a>Create the model</h2>
+</div>
+</div>
+</div>
+<p>Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.</p>
+<p>The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. </p>
+<p>Remember the logical steps: 
+				- create the model by the help of content assist (CTRL Space)
+				- name the model, subsystem and top level actor
+				- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+				- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+				- create the state machines</p>
+<p>Try to create the model by yourself and take the following solution as an example.</p>
+<p>Structure:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC04.png"></div>
+<p>
+			
+</p>
+<p>File reader FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC05.png"></div>
+<p>
+			
+</p>
+<p>Parser FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC06.png"></div>
+<p>
+			
+</p>
+<p>Complete model:</p>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;RemoveComment&nbsp;{<br>
+	import&nbsp;room.basic.types.c.*&nbsp;from&nbsp;"CTypes.room"<br>
+	SubSystemClass&nbsp;RemoveCommentSubSys&nbsp;{<br>
+		ActorRef&nbsp;Topref:ATop&nbsp;<br>
+	}<br>
+	ActorClass&nbsp;ATop&nbsp;{<br>
+		Structure&nbsp;{<br>
+			ActorRef&nbsp;reader:&nbsp;AFileReader<br>
+			ActorRef&nbsp;cParser:&nbsp;ACParser<br>
+			Binding&nbsp;reader.outPort&nbsp;and&nbsp;cParser.readerPort<br>
+		}<br>
+		Behavior&nbsp;{&nbsp;}<br>
+	}<br>
+	ActorClass&nbsp;AFileReader{<br>
+		Interface&nbsp;{<br>
+			Port&nbsp;outPort:&nbsp;FileReaderProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			usercode3{"#include&nbsp;&lt;stdio.h&gt;"<br>
+			}<br>
+			external&nbsp;Port&nbsp;outPort<br>
+			Attribute&nbsp;f:file&nbsp;ref<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;reading&nbsp;{<br>
+					action&nbsp;{<br>
+						"if&nbsp;((f&nbsp;=&nbsp;fopen(\"test.txt\",\"r\"))&nbsp;!=&nbsp;0)&nbsp;{"<br>
+						"\tprintf(\"file&nbsp;open&nbsp;ok&nbsp;!\\r\\n\");"<br>
+						"\t}"<br>
+						"\telse&nbsp;{"<br>
+						"\tprintf(\"file&nbsp;not&nbsp;found&nbsp;!\\r\\n\");"<br>
+						"\tSubSysClass_shutdown();"<br>
+						"\t}"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr0:&nbsp;reading&nbsp;-&gt;&nbsp;reading&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;getNextChar:&nbsp;outPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"int8&nbsp;c;"<br>
+						"if&nbsp;((c=fgetc(f))&nbsp;!=&nbsp;EOF)&nbsp;{"<br>
+						"\toutPort.nextChar(c);"<br>
+						"\t}"<br>
+						"\telse&nbsp;{"<br>
+						"\tfclose(f);"<br>
+						"\tprintf(\"file&nbsp;closed&nbsp;!\\r\\n\");"<br>
+						"\tSubSysClass_shutdown();"<br>
+						"\t}"<br>
+					}<br>
+				}<br>
+				State&nbsp;reading<br>
+			}<br>
+		}<br>
+	}<br>
+	ActorClass&nbsp;ACParser{<br>
+		Interface&nbsp;{<br>
+			conjugated&nbsp;Port&nbsp;readerPort:&nbsp;FileReaderProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			external&nbsp;Port&nbsp;readerPort<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr0:&nbsp;code&nbsp;-&gt;&nbsp;cp&nbsp;cp0&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr1:&nbsp;cp&nbsp;cp0&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"printf(\"%c\",c);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr2:&nbsp;cp&nbsp;cp0&nbsp;-&gt;&nbsp;firstSlash&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr3:&nbsp;firstSlash&nbsp;-&gt;&nbsp;cp&nbsp;cp1&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr4:&nbsp;cp&nbsp;cp1&nbsp;-&gt;&nbsp;cp&nbsp;cp4<br>
+				Transition&nbsp;tr5:&nbsp;cp&nbsp;cp1&nbsp;-&gt;&nbsp;blockComment&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'*\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr6:&nbsp;blockComment&nbsp;-&gt;&nbsp;cp&nbsp;cp2&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr7:&nbsp;cp&nbsp;cp2&nbsp;-&gt;&nbsp;blockComment<br>
+				Transition&nbsp;tr8:&nbsp;cp&nbsp;cp2&nbsp;-&gt;&nbsp;firstStar&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'*\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr9:&nbsp;firstStar&nbsp;-&gt;&nbsp;cp&nbsp;cp3&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr10:&nbsp;cp&nbsp;cp3&nbsp;-&gt;&nbsp;blockComment<br>
+				Transition&nbsp;tr11:&nbsp;cp&nbsp;cp3&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr12:&nbsp;cp&nbsp;cp4&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"printf(\"%c%c\",\'/\',c);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr13:&nbsp;cp&nbsp;cp4&nbsp;-&gt;&nbsp;lineComment&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr14:&nbsp;cp&nbsp;cp5&nbsp;-&gt;&nbsp;lineComment<br>
+				Transition&nbsp;tr15:&nbsp;lineComment&nbsp;-&gt;&nbsp;cp&nbsp;cp5&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr16:&nbsp;cp&nbsp;cp5&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'\\n\'"<br>
+					}<br>
+				}<br>
+				ChoicePoint&nbsp;cp0<br>
+				ChoicePoint&nbsp;cp1<br>
+				ChoicePoint&nbsp;cp2<br>
+				ChoicePoint&nbsp;cp3<br>
+				ChoicePoint&nbsp;cp4<br>
+				ChoicePoint&nbsp;cp5<br>
+				State&nbsp;code<br>
+				State&nbsp;firstSlash<br>
+				State&nbsp;blockComment<br>
+				State&nbsp;firstStar<br>
+				State&nbsp;lineComment<br>
+			}<br>
+		}<br>
+	}<br>
+
+<br>
+	ProtocolClass&nbsp;FileReaderProtocol&nbsp;{<br>
+		incoming&nbsp;{<br>
+			Message&nbsp;getNextChar()<br>
+		}<br>
+		outgoing&nbsp;{<br>
+			Message&nbsp;nextChar(c:char)<br>
+		}<br>
+	}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>Take a look at the file attribute of the file reader. </p>
+<div class="literallayout">
+<p>
+<code class="code">Attribute&nbsp;f:file&nbsp;ref<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>fopen</em></span> expects a 
+				<span class="emphasis"><em>FILE *</em></span>. 
+				<span class="emphasis"><em>f:file ref</em></span> declares a variable 
+				<span class="emphasis"><em>f</em></span> from type reference to 
+				<span class="emphasis"><em>file</em></span>, which is a pointer to 
+				<span class="emphasis"><em>FILE</em></span>.
+			</p>
+</div>
+<div class="section" title="Generate, build and run the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Generatebuildandrunthemodel"></a>Generate, build and run the model</h2>
+</div>
+</div>
+</div>
+<p>Before you can run the model you should copy one of the generated C source files into the project folder and name it 
+				<span class="emphasis"><em>test.txt</em></span>. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC07.png"></div>
+<p>
+			
+</p>
+<p>Generate, build and run the model.</p>
+<p>Your output should start like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC08.png"></div>
+<p>
 			
 </p>
 </div>
+<div class="section" title="Summary">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Summary5"></a>Summary</h2>
+</div>
+</div>
+</div>
+<p>This tutorial should help you to train the necessary steps to create a C model. By the way you have seen how to create your own type system for a real embedded project. An additional aspect was to show how simple it is to separate different aspects of the required functionality by the use of actors and protocols and make them reusable.</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;12.&nbsp;ROOM Concepts">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="ROOMConcepts"></a>Chapter&nbsp;12.&nbsp;ROOM Concepts</h2>
+</div>
+</div>
+</div>
+<p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
+			The formal ROOM grammar based on Xtext (EBNF) you can find here: 
+			<a class="ulink" href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext" target="_new">ROOM Grammar</a>
+		
+</p>
 <div class="section" title="Actors">
 <div class="titlepage">
 <div>
@@ -3183,7 +3676,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10AD3">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BE2">
 <tr>
 							
 <td align="center">
@@ -3266,7 +3759,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10B58">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C67">
 <tr>
 								
 <td align="center">
@@ -3548,7 +4041,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C5F">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D6E">
 <tr>
 								
 <td align="center">
@@ -3746,7 +4239,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D97">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10EA6">
 <tr>
 								
 <td align="center">
@@ -3903,7 +4396,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10E5A">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F69">
 <tr>
 							
 <td align="center">
@@ -4034,7 +4527,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The simpler flat finite state machines are composed of the following elements:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F0A">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N11019">
 <tr>
 								
 <td align="center">
@@ -4148,7 +4641,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 						A few modeling elements are added to the set listed above:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10FC9">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110D8">
 <tr>
 								
 <td align="center">

@@ -5,7 +5,7 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="eTrice User Guide">
-<link rel="up" href="TutorialHelloWorldC.html" title="Tutorial HelloWorld ( C )">
+<link rel="up" href="TutorialHelloWorldforC.html" title="Tutorial HelloWorld for C">
 <link rel="prev" href="Createanewmodelfromscratch4.html" title="Create a new model from scratch">
 <link rel="next" href="CreatealaunchconfigurationtostarttheCcodegenerator.html" title="Create a launch configuration to start the C code generator">
 </head>
@@ -26,9 +26,8 @@
 				- Import CTypes instead of JavaTypes
 				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 				- The application must be shutdown on model level (see also 
-				<span class="emphasis"><em>etRuntimeConfig.h</em></span>) 
+				<span class="emphasis"><em>etRuntimeConfig.h</em></span>).  
 			</p>
-<p>ToDo: shutdown must not depend on the subsystem.</p>
 <div class="literallayout">
 <p>
 <code class="code">RoomModel&nbsp;HelloWorldCModel&nbsp;{<br>
@@ -44,7 +43,7 @@
 				State&nbsp;state0&nbsp;{<br>
 					entry&nbsp;{<br>
 						"printf(\"HelloWorldC&nbsp;!\\n\");"<br>
-						"HelloWorldCSubSysClass_shutdown();//exit(0);"<br>
+						"SubSysClass_shutdown();"<br>
 						"\t\t\t\t\t\t"<br>
 					}<br>
 				}<br>
