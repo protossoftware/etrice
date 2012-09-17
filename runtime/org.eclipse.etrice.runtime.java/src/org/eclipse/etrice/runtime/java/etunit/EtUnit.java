@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
+
 /**
  * @author Henrik Rentz-Reichert
  *
@@ -278,6 +280,10 @@ public class EtUnit {
 
 	public static boolean etUnit_isSuccess(int id) {
 		return !failed.contains(id);
+	}
+	
+	public static void etUnit_testFinished(int id) {
+		RTServices.getInstance().getSubSystem().testFinished(etUnit_isSuccess(id)?0:1);
 	}
 	
 	private static void etUnit_handleExpect(int id, boolean result, String resulttext, String exp, String act) {

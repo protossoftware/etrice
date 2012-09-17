@@ -31,16 +31,13 @@ RoomModel org.eclipse.etrice.generator.common.tests.HandlerTest {
 			Port TestPort1: TestProtocol
 		}
 		Structure {	
-			usercode1{
-				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
-			}
 			external Port TestPort1
 			Attribute counter: int32
 			Attribute caseId: int32
 		}
 		Behavior {
 			Operation HandlerUser() {
-				"caseId = etUnit_openAll(\"tmp\", \"HandlerTest.etu\", \"HandlerTest_suite\", \"HandlerTest_case\");"
+				"caseId = etUnit_openAll(\"tmp\", \"HandlerTest.etu\", \"org.eclipse.etrice.generator.common.tests.HandlerTest\", \"HandlerTest_case\");"
 			}
 			Operation ~HandlerUser() {
 				"etUnit_closeAll(caseId);"
@@ -295,7 +292,7 @@ RoomModel org.eclipse.etrice.generator.common.tests.HandlerTest {
 				State testOk {
 					entry {
 						"System.out.println(\"Test ok\");"
-						"RTServices.getInstance().getSubSystem().testFinished(etUnit_isSuccess(caseId)?0:1);"
+						"etUnit_testFinished(caseId);"
 					}
 				}
 				State state1 {
