@@ -20,7 +20,7 @@ perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.site#sit
 
 perform -D WORKSPACE=${WORKSPACE} org.eclipse.etrice.releng#create.site.index
 
-perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.generator.java.tests#run_tests
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.java.tests#run_tests
 junit -l org.eclipse.etrice.core.room.tests/org.eclipse.etrice.core.room.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.room.tests.launch-out.log
 junit -l org.eclipse.etrice.core.genmodel.tests/org.eclipse.etrice.core.genmodel.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.core.genmodel.tests.launch-out.log
 junit -l org.eclipse.etrice.generator.tests/org.eclipse.etrice.generator.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.generator.tests.launch-out.log

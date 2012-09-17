@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="project">
 	
-	<property name="model.path" value="./models"/>
+	<property name="java.tests.model.path" value="./models"/>
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java"/>
 	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.java"/>
 	<property name="bin.path" value="./bin"/>
@@ -70,7 +70,7 @@
 		</path>
 
 		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
-			<arg value="${model.path}/HandlerTest.room"/>
+			<arg value="${java.tests.model.path}/HandlerTest.room"/>
 			<arg value="${modellib.path}/models/TimingService.room"/>
 			<arg value="${modellib.path}/models/JavaTypes.room"/>
 			<classpath refid="clspath"/>

@@ -4,7 +4,7 @@
 	<target name="set_tp" unless="target.platform">
 		<echo>using local target platform</echo>
 		<property name="target.platform" value="C:\Users\hrentz\Downloads\eclipse\Juno\eclipse-modeling-juno-win32\eclipse"/>
-		<property name="model.path" value="./model"/>
+		<property name="integration.model.path" value="./model"/>
 	</target>
 	
 	<target name="generate" depends="set_tp">
@@ -33,14 +33,14 @@
 		</path>
 
 		<java output="generator_output.txt" classname="org.eclipse.etrice.generator.java.Main">
-			<arg value="${model.path}/org.eclipse.etrice.integration.ChoicePointTest.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.HandlerTest.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.PingPongThreadTest.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.PingPongThreadTestReplPort.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.SendingDataByValueTest.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.ConfigTest.room"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.ConfigTest.config"/>
-			<arg value="${model.path}/org.eclipse.etrice.integration.tests.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.ChoicePointTest.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.HandlerTest.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.PingPongThreadTest.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.PingPongThreadTestReplPort.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.SendingDataByValueTest.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.ConfigTest.room"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.ConfigTest.config"/>
+			<arg value="${integration.model.path}/org.eclipse.etrice.integration.tests.room"/>
 			<arg value="-noexit"/>
 			<classpath refid="clspath"/>
 		</java>
