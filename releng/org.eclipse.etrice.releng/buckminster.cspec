@@ -2,6 +2,8 @@
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.releng" componentType="buckminster" version="0.2.0.qualifier">
     <cs:dependencies>
         <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.generator.java.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.integration.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
@@ -10,9 +12,7 @@
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials.java" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.generator.java.tests" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.runtime.c" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.c" componentType="buckminster"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
