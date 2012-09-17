@@ -1,4 +1,4 @@
-RoomModel room.basic.types.c {
+RoomModel room.basic.types {
 
 	PrimitiveType boolean: ptBoolean -> boolean default "FALSE"
 	PrimitiveType char: ptCharacter -> char default "0"

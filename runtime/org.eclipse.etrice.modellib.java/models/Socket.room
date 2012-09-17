@@ -1,6 +1,6 @@
 RoomModel org.eclipse.etrice.modellib.Socket {
 
-	import room.basic.types.java.* from "JavaTypes.room"
+	import room.basic.types.* from "Types.room"
 
 	ActorClass SocketClient {
 		Interface {

@@ -1087,13 +1087,12 @@ h2. Create the HelloWorld model
 Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
 Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
 Recognize the C specific parts:
-- Import CTypes instead of JavaTypes
 - The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 - The application must be shutdown on model level (see also _etRuntimeConfig.h_).  
 
 bc.. 
 RoomModel HelloWorldCModel {
-	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
+	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
 	SubSystemClass HelloWorldCSubSysClass {
 		ActorRef HelloETriceTopRef:AHelloWorldCTop 
 	}
@@ -1223,7 +1222,7 @@ Now the model is created and all settings for the code generator, compiler and l
 
 h2. Create your own data type
 
-The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is _FILE_. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of _CTypes.room_ from _org.eclipse.modellib.c_ to your model folder.
+The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is _FILE_. To make this type available on the model level, you have to declare the type in Types.room. To avoid interferance with other models, make a copy of _Types.room_ from _org.eclipse.modellib.c_ to your model folder.
 
 !images/036-RemoveCommentC03.png!
 
@@ -1233,7 +1232,7 @@ _PrimitiveType string:ptCharacter -> charPtr default "0"_
 
 With this declaration, you make the _string_ keyword available on model level as a primitive type. This type will be translated to _charPtr_ in your C sources. _charPtr_ is defined in _etDatatypes.h_. This header file is platform specific (_generic_). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 
-Add the following line in _CTypes.room_:
+Add the following line in _Types.room_:
 
 bc.. 
 PrimitiveType file:ptInteger -> FILE default "0"
@@ -1272,7 +1271,7 @@ Complete model:
 
 bc..  
 RoomModel RemoveComment {
-	import room.basic.types.c.* from "CTypes.room"
+	import room.basic.types.* from "Types.room"
 	SubSystemClass RemoveCommentSubSys {
 		ActorRef Topref:ATop 
 	}

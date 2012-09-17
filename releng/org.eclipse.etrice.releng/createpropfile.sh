@@ -36,7 +36,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "eclipse.staging.area=/shared/download-staging.priv/modeling/mdt/etrice"
 	echo "target.platform=${WORKSPACE}/buildroot/target.platform"
 	echo "integration.model.path=${WORKSPACE}/etrice_local_repo/tests/org.eclipse.etrice.integration.tests/model"
-	echo "java.tests.model.path=${WORKSPACE}/etrice_local_repo/tests/org.eclipse.etrice.generator.java.tests/model"
+	echo "java.tests.model.path=${WORKSPACE}/etrice_local_repo/tests/org.eclipse.etrice.generator.java.tests/models"
 	echo "test.results=${WORKSPACE}/buildroot/test.results"
 
 	echo

@@ -53,13 +53,12 @@ h2. Create the HelloWorld model
 Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
 Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
 Recognize the C specific parts:
-- Import CTypes instead of JavaTypes
 - The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 - The application must be shutdown on model level (see also _etRuntimeConfig.h_).  
 
 bc.. 
 RoomModel HelloWorldCModel {
-	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
 	SubSystemClass HelloWorldCSubSysClass {
 		ActorRef HelloETriceTopRef:AHelloWorldCTop 
 	}

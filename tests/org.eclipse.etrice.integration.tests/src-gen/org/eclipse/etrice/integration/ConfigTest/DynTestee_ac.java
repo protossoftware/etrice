@@ -42,10 +42,10 @@ public class DynTestee_ac extends ActorClassBase {
 	boolean blocker;
 	Dyn_DC1 dc_dump;
 	int int_dump;
-	private DynConfigLock lock_int_i;
-	private DynConfigLock lock_blockMe;
 	private DynConfigLock lock_dc_i;
+	private DynConfigLock lock_int_i;
 	private DynConfigLock lock_blocker;
+	private DynConfigLock lock_blockMe;
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
@@ -73,10 +73,10 @@ public class DynTestee_ac extends ActorClassBase {
 		this(parent, name, port_addr, peer_addr);
 		
 		this.variableService = variableService;
-		lock_int_i = new DynConfigLock();
-		lock_blockMe = new DynConfigLock();
 		lock_dc_i = new DynConfigLock();
+		lock_int_i = new DynConfigLock();
 		lock_blocker = new DynConfigLock();
+		lock_blockMe = new DynConfigLock();
 	}
 	
 	//--------------------- attribute setters and getters
@@ -93,44 +93,6 @@ public class DynTestee_ac extends ActorClassBase {
 		return this.int_dump;
 	}
 	
-	public int getInt_i(){
-		if(lock_int_i == null)
-			return int_i;
-		else
-			synchronized(lock_int_i){
-				return int_i;
-			}
-	}
-	public void setInt_i(int int_i){
-		if(lock_int_i == null)
-			this.int_i = int_i;
-		else
-			synchronized(lock_int_i){
-				this.int_i = int_i;
-			}
-	}
-	public DynConfigLock getInt_iLock(){
-		return lock_int_i;
-	}	
-	public int getBlockMe(){
-		if(lock_blockMe == null)
-			return blockMe;
-		else
-			synchronized(lock_blockMe){
-				return blockMe;
-			}
-	}
-	public void setBlockMe(int blockMe){
-		if(lock_blockMe == null)
-			this.blockMe = blockMe;
-		else
-			synchronized(lock_blockMe){
-				this.blockMe = blockMe;
-			}
-	}
-	public DynConfigLock getBlockMeLock(){
-		return lock_blockMe;
-	}	
 	public Dyn_DC1 getDc_i(){
 		if(lock_dc_i == null)
 			return dc_i;
@@ -150,6 +112,25 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynConfigLock getDc_iLock(){
 		return lock_dc_i;
 	}	
+	public int getInt_i(){
+		if(lock_int_i == null)
+			return int_i;
+		else
+			synchronized(lock_int_i){
+				return int_i;
+			}
+	}
+	public void setInt_i(int int_i){
+		if(lock_int_i == null)
+			this.int_i = int_i;
+		else
+			synchronized(lock_int_i){
+				this.int_i = int_i;
+			}
+	}
+	public DynConfigLock getInt_iLock(){
+		return lock_int_i;
+	}	
 	public boolean getBlocker(){
 		if(lock_blocker == null)
 			return blocker;
@@ -168,6 +149,25 @@ public class DynTestee_ac extends ActorClassBase {
 	}
 	public DynConfigLock getBlockerLock(){
 		return lock_blocker;
+	}	
+	public int getBlockMe(){
+		if(lock_blockMe == null)
+			return blockMe;
+		else
+			synchronized(lock_blockMe){
+				return blockMe;
+			}
+	}
+	public void setBlockMe(int blockMe){
+		if(lock_blockMe == null)
+			this.blockMe = blockMe;
+		else
+			synchronized(lock_blockMe){
+				this.blockMe = blockMe;
+			}
+	}
+	public DynConfigLock getBlockMeLock(){
+		return lock_blockMe;
 	}	
 	public void setAndWriteInt_dump(int int_dump){
 			setInt_dump(int_dump);

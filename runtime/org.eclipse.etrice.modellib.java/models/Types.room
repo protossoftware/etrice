@@ -1,4 +1,4 @@
-RoomModel room.basic.types.java {
+RoomModel room.basic.types {
 
 	PrimitiveType boolean: ptBoolean -> boolean (Boolean) default "false"
 	PrimitiveType char: ptCharacter -> char (Char) default "0"

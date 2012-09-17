@@ -1,7 +1,7 @@
 RoomModel org.eclipse.etrice.generator.common.tests.HandlerTest {
 
 	import room.basic.service.timing.* from "TimingService.room"
-	import room.basic.types.java.* from "JavaTypes.room"
+	import room.basic.types.* from "Types.room"
 	
 	LogicalSystem System_HandlerTest {
 		SubSystemRef SubSystem_HandlerTest: SubSystem_HandlerTest

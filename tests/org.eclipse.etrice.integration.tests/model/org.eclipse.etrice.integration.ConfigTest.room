@@ -1,6 +1,6 @@
 RoomModel org.eclipse.etrice.integration.ConfigTest {
 
-	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/JavaTypes.room"
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/Types.room"
 
 	SubSystemClass SubSystemConfigTest {
 		ActorRef top: ConfigText_Top_ac

@@ -41,17 +41,17 @@ Now the model is created and all settings for the code generator, compiler and l
 
 h2. Create your own data type
 
-The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is _FILE_. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of _CTypes.room_ from _org.eclipse.modellib.c_ to your model folder.
+The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is _FILE_. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of _Types.room_ from _org.eclipse.modellib.c_ to your model folder.
 
 !images/036-RemoveCommentC03.png!
 
-Open _Ctypes.room_ and take a look at the declaration of _string_ (last line) which is not a basic C type.
+Open _Types.room_ and take a look at the declaration of _string_ (last line) which is not a basic C type.
 
 _PrimitiveType string:ptCharacter -> charPtr default "0"_
 
 With this declaration, you make the _string_ keyword available on model level as a primitive type. This type will be translated to _charPtr_ in your C sources. _charPtr_ is defined in _etDatatypes.h_. This header file is platform specific (_generic_). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 
-Add the following line in _CTypes.room_:
+Add the following line in _Types.room_:
 
 bc.. 
 PrimitiveType file:ptInteger -> FILE default "0"
@@ -90,7 +90,7 @@ Complete model:
 
 bc..  
 RoomModel RemoveComment {
-	import room.basic.types.c.* from "CTypes.room"
+	import room.basic.types.* from "Types.room"
 	SubSystemClass RemoveCommentSubSys {
 		ActorRef Topref:ATop 
 	}

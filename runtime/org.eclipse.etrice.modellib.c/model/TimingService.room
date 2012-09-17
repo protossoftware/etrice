@@ -1,6 +1,6 @@
-RoomModel room.basic.service.timingC {
+RoomModel room.basic.service.timing {
 
-	import room.basic.types.c.* from "CTypes.room"
+	import room.basic.types.* from "Types.room"
 
 	async ActorClass ATimingService {
 		Interface {

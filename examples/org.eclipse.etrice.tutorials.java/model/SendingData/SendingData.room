@@ -1,6 +1,6 @@
 RoomModel SendingData {
 
-	import room.basic.types.java.* from "../../../org.eclipse.etrice.modellib.java/models/JavaTypes.room"
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/models/Types.room"
 
 	LogicalSystem SendingData_LogSystem {
 		SubSystemRef SendingDataAppl: SendingData_SubSystem

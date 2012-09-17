@@ -1,5 +1,5 @@
 RoomModel cpmult {
-	import room.basic.types.java.* from "../../org.eclipse.etrice.modellib.java/models/JavaTypes.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/models/Types.room"
 
 	SubSystemClass Main {
 		ActorRef appl: CPMult
