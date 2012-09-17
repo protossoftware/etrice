@@ -104,7 +104,7 @@ public class EtUnitTest extends TestCase {
 			br.close();
 		}
 		
-		assertEquals("#lines in test output", 6, lines.size());
-		assertEquals("contents of line 3", "tc fail 1: #-122#-123#org.eclipse.etrice.runtime.java.etunit.EtUnitTest:53#EXPECT_EQUAL_INT8: expected=-122, actual=-123", lines.get(2));
+		assertEquals("#lines in test output", 7, lines.size());
+		assertEquals("contents of line 4", "tc fail 1: #-122#-123#org.eclipse.etrice.runtime.java.etunit.EtUnitTest:53#EXPECT_EQUAL_INT8: expected=-122, actual=-123", lines.get(3));
 	}
 }
