@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.etrice.generator.c.tests</name>
+	<name>org.eclipse.etrice.generator.c.tests.old</name>
 	<comment></comment>
 	<projects>
 		<project>org.eclipse.etrice.runtime.c</project>
