@@ -1,4 +1,4 @@
-RoomModel ChoicePointTest {
+RoomModel org.eclipse.etrice.generator.common.tests.ChoicePointTest {
 
 	import room.basic.types.* from "Types.room"
 
@@ -30,11 +30,16 @@ RoomModel ChoicePointTest {
 			
 		}
 		Behavior {
+			Operation CPUser() {
+				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTest.etu\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
+			}
+			Operation ~CPUser() {
+				"etUnit_closeAll(caseId);"
+			}
 			StateMachine {
 				Transition init: initial -> cp cp0 {
 					action {
 						"counter = 0;"
-						"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTest.etu\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
 						"int list[] = {1,2,3,4,5,6,3,4,5,7,8,10,11,12,9,16,3,4,5,17,8,13,15,11,19,12,9,18,20};"
 						"EXPECT_ORDER_START(caseId,list,list.length);"
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
@@ -171,7 +176,7 @@ RoomModel ChoicePointTest {
 				State testOk {
 					entry {
 						"EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 20);"
-						"etUnit_closeAll(caseId);"
+						"etUnit_testFinished(caseId);"
 					}
 				}
 			}
