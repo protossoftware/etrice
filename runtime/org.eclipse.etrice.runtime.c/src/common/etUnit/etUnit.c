@@ -136,6 +136,9 @@ void etUnit_closeAll(etInt16 id){
 	etUnit_close();
 }
 
+void etUnit_testFinished(etInt16 id) {
+}
+
 void expectTrue(etInt16 id, const char* message, etBool condition, const char* file, int line) {
 	if (condition == FALSE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
