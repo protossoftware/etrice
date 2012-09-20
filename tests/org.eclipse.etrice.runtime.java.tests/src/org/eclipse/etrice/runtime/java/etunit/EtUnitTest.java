@@ -80,7 +80,7 @@ public class EtUnitTest extends TestCase {
 	}
 
 	public void testSuite() throws IOException {
-		etUnit_open(null, "test.etu");
+		etUnit_open(null, "test");
 		etUnit_openTestSuite("TestEtUnit");
 		
 		int id = etUnit_openTestCase("doTestExpect");

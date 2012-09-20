@@ -47,6 +47,8 @@ public class EtUnit {
 		System.out.println("************* TEST START ("+testFileName+") **************");
 		
 		String path = testResultPath!=null? testResultPath+"/"+testFileName : testFileName;
+		path += ".etu";
+		
 		try {
 			FileWriter fstream = new FileWriter(path);
 			
