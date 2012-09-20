@@ -10,7 +10,6 @@ RoomModel Blinky {
 		ActorRef application: BlinkyTop
 		ActorRef timingService: ATimingService
 		LayerConnection ref application satisfied_by timingService.timer
-		LayerConnection ref application satisfied_by timingService.timeout
 	}
 
 	ActorClass BlinkyTop {
@@ -36,7 +35,7 @@ RoomModel Blinky {
 				"private TrafficLight2 pedLights;"
 			}
 			external Port ControlPort
-			SAP timer: PTimeout
+			SAP timer: PTimer
 		}
 		Behavior {
 			Operation ~Blinky() {
@@ -61,7 +60,7 @@ RoomModel Blinky {
 						<stop: ControlPort>
 					}
 					action {
-						"timer.Kill();"
+						"timer.kill();"
 						"carLights.setState(TrafficLight3.OFF);"
 					}
 				}
@@ -71,25 +70,25 @@ RoomModel Blinky {
 						Transition tr0: my tp0 -> on
 						Transition tr1: on -> off {
 							triggers {
-								<timeoutTick: timer>
+								<timeout: timer>
 							}
 						}
 						Transition tr2: off -> on {
 							triggers {
-								<timeoutTick: timer>
+								<timeout: timer>
 							}
 						}
 						Transition init: initial -> on { }
 						EntryPoint tp0
 						State on {
 							entry {
-								"timer.Start(1000);"
+								"timer.startTimeout(1000);"
 								"carLights.setState(TrafficLight3.YELLOW);"
 							}
 						}
 						State off {
 							entry {
-								"timer.Start(1000);"
+								"timer.startTimeout(1000);"
 								"carLights.setState(TrafficLight3.OFF);"
 							}
 						}
@@ -105,32 +104,32 @@ RoomModel Blinky {
 		}
 		Structure {
 			external Port ControlPort
-			SAP timer: PTimeout
+			SAP timer: PTimer
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> on {
 					action {
-						"timer.Start(5000);"
+						"timer.startTimeout(5000);"
 						"ControlPort.start();"
 					}
 				}
 				Transition goOff: on -> off {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
 						"ControlPort.stop();"
-						"timer.Start(5000);"
+						"timer.startTimeout(5000);"
 					}
 				}
 				Transition goOn: off -> on {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
 						"ControlPort.start();"
-						"timer.Start(5000);"
+						"timer.startTimeout(5000);"
 					}
 				}
 				State on

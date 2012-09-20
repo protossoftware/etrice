@@ -35,10 +35,10 @@ public class SubSys_PedLights extends SubSystemClassBase{
 		
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,110);
-		Address addr_item_SystemPort_1 = new Address(0,0,111);
-		Address addr_item_SystemPort_2 = new Address(0,0,112);
-		Address addr_item_SystemPort_3 = new Address(0,0,113);
+		Address addr_item_SystemPort_0 = new Address(0,0,109);
+		Address addr_item_SystemPort_1 = new Address(0,0,110);
+		Address addr_item_SystemPort_2 = new Address(0,0,111);
+		Address addr_item_SystemPort_3 = new Address(0,0,112);
 		
 		// actor instance /SubSys_PedLights/PedLightsTopRef itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -59,7 +59,7 @@ public class SubSys_PedLights extends SubSystemClassBase{
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSys_PedLights_timingService = new Address(0,0,107);
 		// interface items of /SubSys_PedLights/timingService
-		Address addr_item__SubSys_PedLights_timingService_timeout_0 = new Address(0,0,108);
+		Address addr_item__SubSys_PedLights_timingService_timer_0 = new Address(0,0,108);
 
 		// instantiate all actor instances
 		instances = new ActorClassBase[4];
@@ -107,7 +107,7 @@ public class SubSys_PedLights extends SubSystemClassBase{
 					addr_item__SubSys_PedLights_PedLightsTopRef_adapter_ControlPort
 				},
 				{
-					addr_item__SubSys_PedLights_timingService_timeout_0
+					addr_item__SubSys_PedLights_timingService_timer_0
 				}
 			}
 		); 
@@ -117,16 +117,14 @@ public class SubSys_PedLights extends SubSystemClassBase{
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSys_PedLights_timingService},
 				{
-					addr_item__SubSys_PedLights_timingService_timeout_0
-				},
-				null
+					addr_item__SubSys_PedLights_timingService_timer_0
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
 				{
 					addr_item__SubSys_PedLights_PedLightsTopRef_controller_timer
-				},
-				null
+				}
 			}
 		); 
 		

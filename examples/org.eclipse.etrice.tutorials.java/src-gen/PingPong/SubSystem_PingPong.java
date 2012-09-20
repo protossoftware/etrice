@@ -37,10 +37,10 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 		
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,111);
-		Address addr_item_SystemPort_1 = new Address(0,0,112);
-		Address addr_item_SystemPort_2 = new Address(0,0,113);
-		Address addr_item_SystemPort_3 = new Address(0,0,114);
+		Address addr_item_SystemPort_0 = new Address(0,0,110);
+		Address addr_item_SystemPort_1 = new Address(0,0,111);
+		Address addr_item_SystemPort_2 = new Address(0,0,112);
+		Address addr_item_SystemPort_3 = new Address(0,0,113);
 		
 		// actor instance /SubSystem_PingPong/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -61,7 +61,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystem_PingPong_services = new Address(0,0,108);
 		// interface items of /SubSystem_PingPong/services
-		Address addr_item__SubSystem_PingPong_services_timeout_0 = new Address(0,0,109);
+		Address addr_item__SubSystem_PingPong_services_timer_0 = new Address(0,0,109);
 
 		// instantiate all actor instances
 		instances = new ActorClassBase[4];
@@ -93,7 +93,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 					addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort
 				},
 				{
-					addr_item__SubSystem_PingPong_services_timeout_0
+					addr_item__SubSystem_PingPong_services_timer_0
 				}
 			}
 		); 
@@ -119,16 +119,14 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_services},
 				{
-					addr_item__SubSystem_PingPong_services_timeout_0
-				},
-				null
+					addr_item__SubSystem_PingPong_services_timer_0
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_3},
 				{
 					addr_item__SubSystem_PingPong_application_MrPing_timer
-				},
-				null
+				}
 			}
 		); 
 		

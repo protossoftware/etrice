@@ -11,7 +11,6 @@ RoomModel PedLightsController {
 		ActorRef PedLightsTopRef: PedLightsTop
 		ActorRef timingService: ATimingService
 		LayerConnection ref PedLightsTopRef satisfied_by timingService.timer
-		LayerConnection ref PedLightsTopRef satisfied_by timingService.timeout
 	}
 
 	ActorClass PedLightsTop {
@@ -82,7 +81,7 @@ RoomModel PedLightsController {
 				"import org.eclipse.etrice.tutorials.PedLightGUI.*;"
 			}
 			external Port ControlPort
-			SAP timer: PTimeout
+			SAP timer: PTimer
 		}
 		Behavior {
 			StateMachine {
@@ -92,54 +91,54 @@ RoomModel PedLightsController {
 						<start: ControlPort>
 					}
 					action {
-						"timer.Start(700);"
+						"timer.startTimeout(700);"
 						"ControlPort.setCarLights(TrafficLight3.GREEN);"
 						"ControlPort.setPedLights(TrafficLight2.RED);"
 					}
 				}
 				Transition tr1: carsGreen -> carsYellow {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
-						"timer.Start(700);"
+						"timer.startTimeout(700);"
 						"ControlPort.setCarLights(TrafficLight3.YELLOW);"
 						"ControlPort.setPedLights(TrafficLight2.RED);"
 					}
 				}
 				Transition tr2: carsYellow -> carsRed {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
-						"timer.Start(1500);"
+						"timer.startTimeout(1500);"
 						"ControlPort.setCarLights(TrafficLight3.RED);"
 						"ControlPort.setPedLights(TrafficLight2.GREEN);"
 					}
 				}
 				Transition tr3: carsRed -> carsYellowRed {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
-						"timer.Start(700);"
+						"timer.startTimeout(700);"
 						"ControlPort.setCarLights(TrafficLight3.YELLOW_RED);"
 						"ControlPort.setPedLights(TrafficLight2.RED);"
 					}
 				}
 				Transition tr4: carsYellowRed -> carsGreen2 {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
-						"timer.Start(700);"
+						"timer.startTimeout(700);"
 						"ControlPort.setCarLights(TrafficLight3.GREEN);"
 						"ControlPort.setPedLights(TrafficLight2.RED);"
 					}
 				}
 				Transition tr5: carsGreen2 -> off {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
 						"ControlPort.setCarLights(TrafficLight3.OFF);"

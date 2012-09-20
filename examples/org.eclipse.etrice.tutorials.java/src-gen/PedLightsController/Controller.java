@@ -11,7 +11,7 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 import room.basic.service.timing.*;
 
-import room.basic.service.timing.PTimeout.*;
+import room.basic.service.timing.PTimer.*;
 import PedLightsController.PedControlProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
@@ -27,7 +27,7 @@ public class Controller extends ActorClassBase {
 	protected PedControlProtocolPort ControlPort = null;
 	
 	//--------------------- saps
-	protected PTimeoutConjPort timer = null;
+	protected PTimerConjPort timer = null;
 	
 	//--------------------- services
 
@@ -50,7 +50,7 @@ public class Controller extends ActorClassBase {
 		ControlPort = new PedControlProtocolPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
 		
 		// own saps
-		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		
 		// own service implementations
 	}
@@ -63,7 +63,7 @@ public class Controller extends ActorClassBase {
 	public PedControlProtocolPort getControlPort (){
 		return this.ControlPort;
 	}
-	public PTimeoutConjPort getTimer (){
+	public PTimerConjPort getTimer (){
 		return this.timer;
 	}
 
@@ -95,16 +95,16 @@ public class Controller extends ActorClassBase {
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__off = 1;
 	public static final int CHAIN_TRANS_tr0_FROM_off_TO_carsGreen_BY_startControlPort = 2;
-	public static final int CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeoutTicktimer = 3;
-	public static final int CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeoutTicktimer = 4;
-	public static final int CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeoutTicktimer = 5;
-	public static final int CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer = 6;
-	public static final int CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeoutTicktimer = 7;
+	public static final int CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeouttimer = 3;
+	public static final int CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeouttimer = 4;
+	public static final int CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeouttimer = 5;
+	public static final int CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeouttimer = 6;
+	public static final int CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeouttimer = 7;
 	
 	/* triggers */
 	public static final int POLLING = 0;
 	public static final int TRIG_ControlPort__start = IFITEM_ControlPort + EVT_SHIFT*PedControlProtocol.IN_start;
-	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
+	public static final int TRIG_timer__timeout = IFITEM_timer + EVT_SHIFT*PTimer.OUT_timeout;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","off",
@@ -130,31 +130,31 @@ public class Controller extends ActorClassBase {
 	
 	/* Action Codes */
 	protected void action_TRANS_tr0_FROM_off_TO_carsGreen_BY_startControlPort(InterfaceItemBase ifitem) {
-		timer.Start(700);
+		timer.startTimeout(700);
 		ControlPort.setCarLights(TrafficLight3.GREEN);
 		ControlPort.setPedLights(TrafficLight2.RED);
 	}
-	protected void action_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		timer.Start(700);
+	protected void action_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeouttimer(InterfaceItemBase ifitem) {
+		timer.startTimeout(700);
 		ControlPort.setCarLights(TrafficLight3.YELLOW);
 		ControlPort.setPedLights(TrafficLight2.RED);
 	}
-	protected void action_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		timer.Start(1500);
+	protected void action_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeouttimer(InterfaceItemBase ifitem) {
+		timer.startTimeout(1500);
 		ControlPort.setCarLights(TrafficLight3.RED);
 		ControlPort.setPedLights(TrafficLight2.GREEN);
 	}
-	protected void action_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		timer.Start(700);
+	protected void action_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeouttimer(InterfaceItemBase ifitem) {
+		timer.startTimeout(700);
 		ControlPort.setCarLights(TrafficLight3.YELLOW_RED);
 		ControlPort.setPedLights(TrafficLight2.RED);
 	}
-	protected void action_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
-		timer.Start(700);
+	protected void action_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeouttimer(InterfaceItemBase ifitem) {
+		timer.startTimeout(700);
 		ControlPort.setCarLights(TrafficLight3.GREEN);
 		ControlPort.setPedLights(TrafficLight2.RED);
 	}
-	protected void action_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeouttimer(InterfaceItemBase ifitem) {
 		ControlPort.setCarLights(TrafficLight3.OFF);
 		ControlPort.setPedLights(TrafficLight2.OFF);
 	}
@@ -215,29 +215,29 @@ public class Controller extends ActorClassBase {
 				action_TRANS_tr0_FROM_off_TO_carsGreen_BY_startControlPort(ifitem);
 				return STATE_carsGreen;
 			}
-			case CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeouttimer:
 			{
-				action_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeouttimer(ifitem);
 				return STATE_carsYellow;
 			}
-			case CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeouttimer:
 			{
-				action_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeouttimer(ifitem);
 				return STATE_carsRed;
 			}
-			case CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeouttimer:
 			{
-				action_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeouttimer(ifitem);
 				return STATE_carsYellowRed;
 			}
-			case CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeouttimer:
 			{
-				action_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeouttimer(ifitem);
 				return STATE_carsGreen2;
 			}
-			case CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeouttimer:
 			{
-				action_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeouttimer(ifitem);
 				return STATE_off;
 			}
 		}
@@ -309,9 +309,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_carsGreen:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr1_FROM_carsGreen_TO_carsYellow_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -319,9 +319,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_carsYellow:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr2_FROM_carsYellow_TO_carsRed_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -329,9 +329,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_carsRed:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr3_FROM_carsRed_TO_carsYellowRed_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -339,9 +339,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_carsYellowRed:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr4_FROM_carsYellowRed_TO_carsGreen2_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -349,9 +349,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_carsGreen2:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr5_FROM_carsGreen2_TO_off_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;

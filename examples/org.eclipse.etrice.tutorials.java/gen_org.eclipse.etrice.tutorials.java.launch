@@ -2,13 +2,14 @@
 <launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="Lib" value="false"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/scratch/PingPong.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/Blinky/Blinky.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/PedLightsController/PedLightsController.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/SendingData/SendingData.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials/model/HelloWorld/HelloWorld.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/scratch/PingPong.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/Blinky/Blinky.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/PedLightsController/PedLightsController.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/SendingData/SendingData.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/HelloWorld.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
-<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

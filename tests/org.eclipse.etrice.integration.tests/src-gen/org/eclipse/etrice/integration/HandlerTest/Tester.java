@@ -9,9 +9,7 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
-import room.basic.service.timing.*;
 
-import room.basic.service.timing.PTimeout.*;
 import org.eclipse.etrice.integration.HandlerTest.TestProtocol.*;
 
 
@@ -24,13 +22,11 @@ public class Tester extends ActorClassBase {
 	protected TestProtocolConjPort TestPort1 = null;
 	
 	//--------------------- saps
-	protected PTimeoutConjPort timer = null;
 	
 	//--------------------- services
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
-	public static final int IFITEM_timer = 2;
 
 		
 	/*--------------------- attributes ---------------------*/
@@ -47,7 +43,6 @@ public class Tester extends ActorClassBase {
 		TestPort1 = new TestProtocolConjPort(this, "TestPort1", IFITEM_TestPort1, 0, port_addr[IFITEM_TestPort1][0], peer_addr[IFITEM_TestPort1][0]); 
 		
 		// own saps
-		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		
 		// own service implementations
 	}
@@ -59,9 +54,6 @@ public class Tester extends ActorClassBase {
 	//--------------------- port getters
 	public TestProtocolConjPort getTestPort1 (){
 		return this.TestPort1;
-	}
-	public PTimeoutConjPort getTimer (){
-		return this.timer;
 	}
 
 	//--------------------- lifecycle functions

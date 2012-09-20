@@ -11,7 +11,7 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 import room.basic.service.timing.*;
 
-import room.basic.service.timing.PTimeout.*;
+import room.basic.service.timing.PTimer.*;
 import org.eclipse.etrice.integration.PingPongThreadTestReplPort.PingPongProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
@@ -27,7 +27,7 @@ public class MrPingActor extends ActorClassBase {
 	protected PingPongProtocolConjReplPort PingPongPort = null;
 	
 	//--------------------- saps
-	protected PTimeoutConjPort timer = null;
+	protected PTimerConjPort timer = null;
 	
 	//--------------------- services
 
@@ -54,7 +54,7 @@ public class MrPingActor extends ActorClassBase {
 		PingPongPort = new PingPongProtocolConjReplPort(this, "PingPongPort", IFITEM_PingPongPort, port_addr[IFITEM_PingPongPort], peer_addr[IFITEM_PingPongPort]); 
 		
 		// own saps
-		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		
 		// own service implementations
 	}
@@ -79,7 +79,7 @@ public class MrPingActor extends ActorClassBase {
 	public PingPongProtocolConjReplPort getPingPongPort (){
 		return this.PingPongPort;
 	}
-	public PTimeoutConjPort getTimer (){
+	public PTimerConjPort getTimer (){
 		return this.timer;
 	}
 
@@ -106,13 +106,13 @@ public class MrPingActor extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__waitForTimer = 1;
-	public static final int CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeouttimer = 2;
 	public static final int CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
 	public static final int TRIG_PingPongPort__pong = IFITEM_PingPongPort + EVT_SHIFT*PingPongProtocol.OUT_pong;
-	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
+	public static final int TRIG_timer__timeout = IFITEM_timer + EVT_SHIFT*PTimer.OUT_timeout;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","waitForTimer",
@@ -135,9 +135,9 @@ public class MrPingActor extends ActorClassBase {
 	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__waitForTimer() {
 		count = 0;
-		timer.Start(1000);
+		timer.startTimeout(1000);
 	}
-	protected void action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeouttimer(InterfaceItemBase ifitem) {
 		PingPongPort.get(0).ping();
 		PingPongPort.get(1).ping();
 		PingPongPort.get(2).ping();
@@ -156,7 +156,7 @@ public class MrPingActor extends ActorClassBase {
 		System.out.println(pongCount);
 		System.out.println(count);
 		pongCount = 0;
-		timer.Start(10);
+		timer.startTimeout(10);
 		}
 	}
 	
@@ -196,9 +196,9 @@ public class MrPingActor extends ActorClassBase {
 				action_TRANS_INITIAL_TO__waitForTimer();
 				return STATE_waitForTimer;
 			}
-			case CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer:
+			case CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeouttimer:
 			{
-				action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer(ifitem);
+				action_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeouttimer(ifitem);
 				return STATE_waitForPong;
 			}
 			case CHAIN_TRANS_tr3_FROM_waitForPong_TO_cp0_BY_pongPingPongPort:
@@ -257,9 +257,9 @@ public class MrPingActor extends ActorClassBase {
 			switch (this.state) {
 				case STATE_waitForTimer:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_tr1_FROM_waitForTimer_TO_waitForPong_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;

@@ -12,7 +12,7 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 import room.basic.service.timing.*;
 
 import Blinky.BlinkyControlProtocoll.*;
-import room.basic.service.timing.PTimeout.*;
+import room.basic.service.timing.PTimer.*;
 
 
 
@@ -24,7 +24,7 @@ public class BlinkyController extends ActorClassBase {
 	protected BlinkyControlProtocollConjPort ControlPort = null;
 	
 	//--------------------- saps
-	protected PTimeoutConjPort timer = null;
+	protected PTimerConjPort timer = null;
 	
 	//--------------------- services
 
@@ -47,7 +47,7 @@ public class BlinkyController extends ActorClassBase {
 		ControlPort = new BlinkyControlProtocollConjPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
 		
 		// own saps
-		timer = new PTimeoutConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
 		
 		// own service implementations
 	}
@@ -60,7 +60,7 @@ public class BlinkyController extends ActorClassBase {
 	public BlinkyControlProtocollConjPort getControlPort (){
 		return this.ControlPort;
 	}
-	public PTimeoutConjPort getTimer (){
+	public PTimerConjPort getTimer (){
 		return this.timer;
 	}
 
@@ -87,12 +87,12 @@ public class BlinkyController extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__on = 1;
-	public static final int CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer = 2;
-	public static final int CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer = 3;
+	public static final int CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeouttimer = 2;
+	public static final int CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeouttimer = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_timer__timeoutTick = IFITEM_timer + EVT_SHIFT*PTimeout.OUT_timeoutTick;
+	public static final int TRIG_timer__timeout = IFITEM_timer + EVT_SHIFT*PTimer.OUT_timeout;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","on",
@@ -114,16 +114,16 @@ public class BlinkyController extends ActorClassBase {
 	
 	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__on() {
-		timer.Start(5000);
+		timer.startTimeout(5000);
 		ControlPort.start();
 	}
-	protected void action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_goOff_FROM_on_TO_off_BY_timeouttimer(InterfaceItemBase ifitem) {
 		ControlPort.stop();
-		timer.Start(5000);
+		timer.startTimeout(5000);
 	}
-	protected void action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(InterfaceItemBase ifitem) {
+	protected void action_TRANS_goOn_FROM_off_TO_on_BY_timeouttimer(InterfaceItemBase ifitem) {
 		ControlPort.start();
-		timer.Start(5000);
+		timer.startTimeout(5000);
 	}
 	
 	/**
@@ -162,14 +162,14 @@ public class BlinkyController extends ActorClassBase {
 				action_TRANS_INITIAL_TO__on();
 				return STATE_on;
 			}
-			case CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer:
+			case CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeouttimer:
 			{
-				action_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer(ifitem);
+				action_TRANS_goOff_FROM_on_TO_off_BY_timeouttimer(ifitem);
 				return STATE_off;
 			}
-			case CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer:
+			case CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeouttimer:
 			{
-				action_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer(ifitem);
+				action_TRANS_goOn_FROM_off_TO_on_BY_timeouttimer(ifitem);
 				return STATE_on;
 			}
 		}
@@ -219,9 +219,9 @@ public class BlinkyController extends ActorClassBase {
 			switch (this.state) {
 				case STATE_on:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_goOff_FROM_on_TO_off_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -229,9 +229,9 @@ public class BlinkyController extends ActorClassBase {
 					break;
 				case STATE_off:
 					switch(trigger) {
-						case TRIG_timer__timeoutTick:
+						case TRIG_timer__timeout:
 							{
-								chain = CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeoutTicktimer;
+								chain = CHAIN_TRANS_goOn_FROM_off_TO_on_BY_timeouttimer;
 								catching_state = STATE_TOP;
 							}
 						break;

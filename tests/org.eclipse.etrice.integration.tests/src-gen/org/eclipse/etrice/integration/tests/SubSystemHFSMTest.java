@@ -9,7 +9,6 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 
-import room.basic.service.timing.*;
 
 
 
@@ -35,11 +34,10 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 		
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,109);
-		Address addr_item_SystemPort_1 = new Address(0,0,110);
-		Address addr_item_SystemPort_2 = new Address(0,0,111);
-		Address addr_item_SystemPort_3 = new Address(0,0,112);
-		Address addr_item_SystemPort_4 = new Address(0,0,113);
+		Address addr_item_SystemPort_0 = new Address(0,0,107);
+		Address addr_item_SystemPort_1 = new Address(0,0,108);
+		Address addr_item_SystemPort_2 = new Address(0,0,109);
+		Address addr_item_SystemPort_3 = new Address(0,0,110);
 		
 		// actor instance /SubSystemHFSMTest/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -59,13 +57,9 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 		Address addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester = new Address(0,0,105);
 		// interface items of /SubSystemHFSMTest/application/HFSM_Tests/Tester
 		Address addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester_testee = new Address(0,0,106);
-		// actor instance /SubSystemHFSMTest/services itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystemHFSMTest_services = new Address(0,0,107);
-		// interface items of /SubSystemHFSMTest/services
 
 		// instantiate all actor instances
-		instances = new ActorClassBase[5];
+		instances = new ActorClassBase[4];
 		instances[0] = new App_SubSystemHFSMTest(
 			this,
 			"application",
@@ -118,20 +112,6 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 				}
 			}
 		); 
-		instances[4] = new ATimingService(
-			this,
-			"services",
-			// own interface item addresses
-			new Address[][] {{addr_item__SubSystemHFSMTest_services},
-				null,
-				null
-			},
-			// peer interface item addresses
-			new Address[][] {{addr_item_SystemPort_4},
-				null,
-				null
-			}
-		); 
 		
 		// apply instance attribute configurations
 
@@ -143,16 +123,14 @@ public class SubSystemHFSMTest extends SubSystemClassBase{
 					addr_item_SystemPort_0,
 					addr_item_SystemPort_1,
 					addr_item_SystemPort_2,
-					addr_item_SystemPort_3,
-					addr_item_SystemPort_4
+					addr_item_SystemPort_3
 				},
 				// peer addresses
 				new Address[]{
 					addr_item__SubSystemHFSMTest_application,
 					addr_item__SubSystemHFSMTest_application_HFSM_Tests,
 					addr_item__SubSystemHFSMTest_application_HFSM_Tests_HFSM,
-					addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester,
-					addr_item__SubSystemHFSMTest_services
+					addr_item__SubSystemHFSMTest_application_HFSM_Tests_Tester
 				});
 		}
 	

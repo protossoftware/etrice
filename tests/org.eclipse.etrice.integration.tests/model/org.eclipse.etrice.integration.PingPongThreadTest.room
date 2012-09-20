@@ -11,7 +11,6 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 		ActorRef application: PingPongTop
 		ActorRef services: ATimingService
 		LayerConnection ref application satisfied_by services.timer
-		LayerConnection ref application satisfied_by services.timeout
 		LogicalThread mrPingThread prio=5 {application.MrPing}
 		LogicalThread mrPong1Thread prio=5 {application.MrPong1}
 		LogicalThread mrPong2Thread prio=5 {application.MrPong2}
@@ -44,7 +43,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 			external Port PingPongPort 
 			external Port PingPongPort2
 			external Port PingPongPort3
-			SAP timer: PTimeout
+			SAP timer: PTimer
 			Attribute count : int32
 			Attribute pongCount : int32
 		}
@@ -53,12 +52,12 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 				Transition tr0: initial -> waitForTimer {
 					action {
 						"count = 0;"
-						"timer.Start(10);"
+						"timer.startTimeout(10);"
 					}
 				}
 				Transition tr1: waitForTimer -> waitForPong {
 					triggers {
-						<timeoutTick: timer>
+						<timeout: timer>
 					}
 					action {
 						"PingPongPort.ping();"
@@ -82,7 +81,7 @@ RoomModel org.eclipse.etrice.integration.PingPongThreadTest {
 						"RTServices.getInstance().getSubSystem().testFinished(0);"
 						"} else {"
 						"System.out.println(count);"
-						"timer.Start(5);}"
+						"timer.startTimeout(5);}"
 					}
 				}
 				Transition tr6: cp cp0 -> waitForPong {

@@ -1,6 +1,5 @@
 RoomModel org.eclipse.etrice.integration.HandlerTest {
 
-	import room.basic.service.timing.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/TimingService.room"
 	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/Types.room"
 	
 	LogicalSystem System_HandlerTest {
@@ -9,9 +8,6 @@ RoomModel org.eclipse.etrice.integration.HandlerTest {
 
 	SubSystemClass SubSystem_HandlerTest {
 		ActorRef HandlerTest_Top: HandlerTest_Top
-		ActorRef timerService: room.basic.service.timing.ATimingService
-		LayerConnection ref HandlerTest_Top satisfied_by timerService.timer
-		LayerConnection ref HandlerTest_Top satisfied_by timerService.timeout
 //		LogicalThread t1 prio=5 {HandlerTest_Top.tester}
 //		LogicalThread t2 prio=5 {HandlerTest_Top.handlerUser}
 	}
@@ -318,7 +314,6 @@ RoomModel org.eclipse.etrice.integration.HandlerTest {
 		}
 		Structure {
 			external Port TestPort1
-			SAP timer: room.basic.service.timing.PTimeout
 		}
 		Behavior {
 			StateMachine {
