@@ -199,7 +199,7 @@ class SubSystemClassGen {
 			etLogger_logInfoF("%s_destroy", «ssc.name»Inst.name);
 			«FOR ai : ssi.allContainedInstances.reverseView»
 				«IF !ai.actorClass.operations.filter(op|op.destructor).empty»
-					«languageExt.destructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
+					«languageExt.memberInUse(ai.actorClass.name, languageExt.destructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -217,7 +217,7 @@ class SubSystemClassGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "constructActorInstances")
 			«FOR ai : ssi.allContainedInstances»
 				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
-					«languageExt.constructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
+					«languageExt.memberInUse(ai.actorClass.name, languageExt.constructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
