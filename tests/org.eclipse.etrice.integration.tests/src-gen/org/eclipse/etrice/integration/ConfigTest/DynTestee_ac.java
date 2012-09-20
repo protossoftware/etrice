@@ -43,9 +43,9 @@ public class DynTestee_ac extends ActorClassBase {
 	Dyn_DC1 dc_dump;
 	int int_dump;
 	private DynConfigLock lock_int_i;
-	private DynConfigLock lock_dc_i;
 	private DynConfigLock lock_blocker;
 	private DynConfigLock lock_blockMe;
+	private DynConfigLock lock_dc_i;
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
@@ -74,9 +74,9 @@ public class DynTestee_ac extends ActorClassBase {
 		
 		this.variableService = variableService;
 		lock_int_i = new DynConfigLock();
-		lock_dc_i = new DynConfigLock();
 		lock_blocker = new DynConfigLock();
 		lock_blockMe = new DynConfigLock();
+		lock_dc_i = new DynConfigLock();
 	}
 	
 	//--------------------- attribute setters and getters
@@ -111,25 +111,6 @@ public class DynTestee_ac extends ActorClassBase {
 	}
 	public DynConfigLock getInt_iLock(){
 		return lock_int_i;
-	}	
-	public Dyn_DC1 getDc_i(){
-		if(lock_dc_i == null)
-			return dc_i;
-		else
-			synchronized(lock_dc_i){
-				return dc_i;
-			}
-	}
-	public void setDc_i(Dyn_DC1 dc_i){
-		if(lock_dc_i == null)
-			this.dc_i = dc_i;
-		else
-			synchronized(lock_dc_i){
-				this.dc_i = dc_i;
-			}
-	}
-	public DynConfigLock getDc_iLock(){
-		return lock_dc_i;
 	}	
 	public boolean getBlocker(){
 		if(lock_blocker == null)
@@ -169,13 +150,32 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynConfigLock getBlockMeLock(){
 		return lock_blockMe;
 	}	
-	public void setAndWriteDc_dump(Dyn_DC1 dc_dump){
-			setDc_dump(dc_dump);
-			variableService.write(this.getInstancePath()+"/dc_dump", dc_dump);
+	public Dyn_DC1 getDc_i(){
+		if(lock_dc_i == null)
+			return dc_i;
+		else
+			synchronized(lock_dc_i){
+				return dc_i;
+			}
 	}
+	public void setDc_i(Dyn_DC1 dc_i){
+		if(lock_dc_i == null)
+			this.dc_i = dc_i;
+		else
+			synchronized(lock_dc_i){
+				this.dc_i = dc_i;
+			}
+	}
+	public DynConfigLock getDc_iLock(){
+		return lock_dc_i;
+	}	
 	public void setAndWriteInt_dump(int int_dump){
 			setInt_dump(int_dump);
 			variableService.write(this.getInstancePath()+"/int_dump", int_dump);
+	}
+	public void setAndWriteDc_dump(Dyn_DC1 dc_dump){
+			setDc_dump(dc_dump);
+			variableService.write(this.getInstancePath()+"/dc_dump", dc_dump);
 	}
 	
 	//--------------------- port getters

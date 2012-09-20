@@ -71,7 +71,7 @@ public class EtUnitTest extends TestCase {
 	}
 	
 	public void doTestOrder(int id) {
-		int list[] = {1,2,3,4};
+		short list[] = {1,2,3,4};
 		EXPECT_ORDER_START(id, list, list.length);
 		EXPECT_ORDER(id, "id=1", 1);
 		EXPECT_ORDER(id, "id=2", 2);

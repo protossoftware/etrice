@@ -215,7 +215,7 @@ public class HandlerUser extends ActorClassBase {
 	}
 	protected void action_TRANS_INITIAL_TO__state0_tp2() {
 		System.out.println("top level initial transition");
-		int list[] = {13,15,16,22,23,11,24,17,14,12,13,16,23,70,24,17,14,114,113,111,11,70,24,17,120,16,23,24,17,121,18,19,25,18,20,19,21,18,19,25,18,19,14,117};
+		short list[] = {13,15,16,22,23,11,24,17,14,12,13,16,23,70,24,17,14,114,113,111,11,70,24,17,120,16,23,24,17,121,18,19,25,18,20,19,21,18,19,25,18,19,14,117};
 		EXPECT_ORDER_START(caseId, list, list.length);
 	}
 	protected void action_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {

@@ -27,10 +27,10 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 public class EtUnit {
 	
 	private static class OrderInfo {
-		int[] list;
+		short[] list;
 		int current = 0;
 		
-		public OrderInfo(int[] list) {
+		public OrderInfo(short[] list) {
 			this.list = list;
 		}
 	}
@@ -238,7 +238,7 @@ public class EtUnit {
 	}
 
 	/* more specialized functions */
-	public static void EXPECT_ORDER_START(int id, int[] list, int size) {
+	public static void EXPECT_ORDER_START(int id, short[] list, int size) {
 		OrderInfo info = new OrderInfo(list);
 		orderInfo.put(id, info);
 	}
@@ -249,7 +249,7 @@ public class EtUnit {
 				if (info.list[info.current] != val){
 					String testresult = String.format("EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", msg, info.current, val, info.list[info.current]);
 					Integer exp = val;
-					Integer act = info.list[info.current];
+					Integer act = (int) info.list[info.current];
 					etUnit_handleExpect(id, false, testresult, exp.toString(), act.toString());
 				}
 				else {
