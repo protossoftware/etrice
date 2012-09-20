@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
@@ -31,8 +32,10 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -60,6 +63,9 @@ public class SubSystemClassGen {
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private ConfigExtension _configExtension;
   
   @Inject
   private ILanguageExtension languageExt;
@@ -982,6 +988,20 @@ public class SubSystemClassGen {
           }
         };
       Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_5);
+      final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance p) {
+            boolean _and = false;
+            if (!(p instanceof PortInstance)) {
+              _and = false;
+            } else {
+              Port _port = ((PortInstance) p).getPort();
+              boolean _isConjugated = _port.isConjugated();
+              _and = ((p instanceof PortInstance) && _isConjugated);
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+      Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_6);
       HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
       HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
@@ -1015,7 +1035,7 @@ public class SubSystemClassGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
-            final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+            final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
                 public Boolean apply(final InterfaceItemInstance e) {
                   EList<InterfaceItemInstance> _peers = e.getPeers();
                   boolean _isEmpty = _peers.isEmpty();
@@ -1023,7 +1043,7 @@ public class SubSystemClassGen {
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_6);
+            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_7);
             boolean _hasElements = false;
             for(final InterfaceItemInstance pi : _filter_2) {
               if (!_hasElements) {
@@ -1139,10 +1159,50 @@ public class SubSystemClassGen {
           _builder.append(_name_1, "");
           _builder.append(" ");
           _builder.append(instName, "");
-          _builder.append(" = {&");
-          _builder.append(instName, "");
-          _builder.append("_const};");
+          _builder.append(" = {");
           _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("&");
+          _builder.append(instName, "	");
+          _builder.append("_const,");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* data send ports */");
+          _builder.newLine();
+          {
+            for(final InterfaceItemInstance pi_3 : sendPorts) {
+              _builder.append("\t");
+              CharSequence _genSendPortInitializer = this.genSendPortInitializer(pi_3);
+              _builder.append(_genSendPortInitializer, "	");
+              _builder.append(",");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* attributes */");
+          _builder.newLine();
+          {
+            ActorClass _actorClass_2 = ai.getActorClass();
+            List<Attribute> _allAttributes = this.roomExt.getAllAttributes(_actorClass_2);
+            for(final Attribute att : _allAttributes) {
+              _builder.append("\t");
+              String _genAttributeInitializer = this.genAttributeInitializer(ai, att);
+              _builder.append(_genAttributeInitializer, "	");
+              _builder.append(",");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* state and history are initialized in init fuction */");
+          _builder.newLine();
+          _builder.append("};");
+          _builder.newLine();
         }
       }
       _xblockexpression = (_builder);
@@ -1195,6 +1255,60 @@ public class SubSystemClassGen {
       String _plus_9 = (_plus_8 + _name);
       String _plus_10 = (_plus_9 + " */");
       _xblockexpression = (_plus_10);
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence genSendPortInitializer(final InterfaceItemInstance pi) {
+    CharSequence _xblockexpression = null;
+    {
+      Port _port = ((PortInstance) pi).getPort();
+      GeneralProtocolClass _protocol = _port.getProtocol();
+      final ProtocolClass pc = ((ProtocolClass) _protocol);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      {
+        EList<Message> _incomingMessages = pc.getIncomingMessages();
+        boolean _hasElements = false;
+        for(final Message m : _incomingMessages) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate(",", "	");
+          }
+          _builder.append("\t");
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _defaultValue = this._typeHelpers.defaultValue(_type);
+          _builder.append(_defaultValue, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private String genAttributeInitializer(final ActorInstance ai, final Attribute att) {
+    String _xblockexpression = null;
+    {
+      final String value = this._configExtension.getInitValueLiteral(att);
+      String _xifexpression = null;
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        RefableType _refType = att.getRefType();
+        DataType _type = _refType.getType();
+        String _defaultValue = this._typeHelpers.defaultValue(_type);
+        _xifexpression = _defaultValue;
+      } else {
+        String _string = value.toString();
+        _xifexpression = _string;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

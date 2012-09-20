@@ -18,6 +18,7 @@ import java.util.ArrayList
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.CommunicationType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -34,6 +35,8 @@ import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import static extension org.eclipse.etrice.generator.base.Indexed.*
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.generator.generic.ConfigExtension
 
 @Singleton
 class SubSystemClassGen {
@@ -43,6 +46,7 @@ class SubSystemClassGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
+	@Inject extension ConfigExtension
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 	
@@ -274,7 +278,7 @@ class SubSystemClassGen {
 		/* forward declaration of variable port structs */		
 		«FOR ai: ssi.allContainedInstances»
 			«IF ai.orderedIfItemInstances.empty»
-/*nothing to do */
+				/*nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
 					«IF pi.protocol.getPortClass(pi.conjugated)!=null»
@@ -338,6 +342,7 @@ class SubSystemClassGen {
 
 		var dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
 		var recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
+		var sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
 		
 		// compute replicated port offsets		
 		var offsets = new HashMap<InterfaceItemInstance, Integer>()
@@ -375,7 +380,21 @@ class SubSystemClassGen {
 					«genRecvPortInitializer(root, ai, pi)»
 				«ENDFOR»
 			};
-			static «ai.actorClass.name» «instName» = {&«instName»_const};
+			static «ai.actorClass.name» «instName» = {
+				&«instName»_const,
+				
+				/* data send ports */
+				«FOR pi : sendPorts»
+					«pi.genSendPortInitializer»,
+				«ENDFOR»
+				
+				/* attributes */
+				«FOR att : ai.actorClass.allAttributes»
+					«ai.genAttributeInitializer(att)»,
+				«ENDFOR»
+				
+				/* state and history are initialized in init fuction */
+			};
 		«ENDIF»
 	'''}
 		
@@ -388,6 +407,26 @@ class SubSystemClassGen {
 		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 		+"} /* Port "+pi.name+" */"
+	}
+	
+	def private genSendPortInitializer(InterfaceItemInstance pi) {
+		val pc = (pi as PortInstance).port.protocol as ProtocolClass
+		
+		'''
+			{
+				«FOR m : pc.incomingMessages SEPARATOR ","»
+					«m.data.refType.type.defaultValue»
+				«ENDFOR»
+			}
+		'''
+	}
+	
+	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
+		val value = att.initValueLiteral
+		if (value==null)
+			att.refType.type.defaultValue
+		else
+			value.toString
 	}
 	
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){

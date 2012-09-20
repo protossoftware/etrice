@@ -473,25 +473,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
       _builder.append(_attributes, "	");
       _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      {
-        List<Attribute> _allAttributes_1 = this._roomExtensions.getAllAttributes(ac);
-        for(final Attribute a : _allAttributes_1) {
-          {
-            String _defaultValueLiteral = a.getDefaultValueLiteral();
-            boolean _notEquals_1 = (!Objects.equal(_defaultValueLiteral, null));
-            if (_notEquals_1) {
-              String _name_16 = ac.getName();
-              String _plus = (_name_16 + " ");
-              String _name_17 = a.getName();
-              String _plus_1 = (_plus + _name_17);
-              String _plus_2 = (_plus_1 + ": Attribute initialization not supported in C");
-              this.logger.logInfo(_plus_2);
-              _builder.newLineIfNotEmpty();
-            }
-          }
-        }
-      }
       _builder.append("\t");
       _builder.newLine();
       {
@@ -512,17 +493,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       _builder.append("void ");
-      String _name_18 = ac.getName();
-      _builder.append(_name_18, "");
+      String _name_16 = ac.getName();
+      _builder.append(_name_16, "");
       _builder.append("_init(");
-      String _name_19 = ac.getName();
-      _builder.append(_name_19, "");
+      String _name_17 = ac.getName();
+      _builder.append(_name_17, "");
       _builder.append("* self);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("void ");
-      String _name_20 = ac.getName();
-      _builder.append(_name_20, "");
+      String _name_18 = ac.getName();
+      _builder.append(_name_18, "");
       _builder.append("_receiveMessage(void* self, void* ifitem, const etMessage* msg);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -535,19 +516,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
         if (_or) {
           _builder.append("void ");
-          String _name_21 = ac.getName();
-          _builder.append(_name_21, "");
+          String _name_19 = ac.getName();
+          _builder.append(_name_19, "");
           _builder.append("_execute(");
-          String _name_22 = ac.getName();
-          _builder.append(_name_22, "");
+          String _name_20 = ac.getName();
+          _builder.append(_name_20, "");
           _builder.append("* self);");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
       EList<StandardOperation> _operations = ac.getOperations();
-      String _name_23 = ac.getName();
-      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_23);
+      String _name_21 = ac.getName();
+      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_21);
       _builder.append(_operationsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -555,8 +536,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_userCode_1, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      String _name_24 = ac.getName();
-      CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_24);
+      String _name_22 = ac.getName();
+      CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_22);
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
