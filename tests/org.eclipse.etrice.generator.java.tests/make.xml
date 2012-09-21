@@ -164,6 +164,8 @@
 		copy_results: copies the *.xml results to their final destination
 	-->
 	<target name="copy_results" depends="set_tr">
+		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
+		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>
