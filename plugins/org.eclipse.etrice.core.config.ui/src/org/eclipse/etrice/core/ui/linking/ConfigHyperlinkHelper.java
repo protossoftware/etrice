@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;

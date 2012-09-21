@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.etrice.core.config;visibility:=reexport,
  org.eclipse.etrice.core.room.ui;bundle-version="0.2.0"
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.ui.contentassist.antlr,
  org.eclipse.etrice.core.ui.internal,
  org.eclipse.etrice.core.ui.contentassist

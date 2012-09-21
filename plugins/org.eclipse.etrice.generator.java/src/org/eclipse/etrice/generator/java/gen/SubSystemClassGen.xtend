@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
@@ -37,7 +36,6 @@ class SubSystemClassGen {
 	@Inject ConfigGenAddon configAddon
 	@Inject extension ProcedureHelpers
 
-	@Inject extension TypeHelpers
 	@Inject VariableServiceGen varService
 	@Inject ILogger logger
 	

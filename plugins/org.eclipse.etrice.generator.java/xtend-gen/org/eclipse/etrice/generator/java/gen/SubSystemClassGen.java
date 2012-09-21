@@ -21,7 +21,6 @@ import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.VariableServiceGen;
@@ -50,9 +49,6 @@ public class SubSystemClassGen {
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
-  
-  @Inject
-  private TypeHelpers _typeHelpers;
   
   @Inject
   private VariableServiceGen varService;
