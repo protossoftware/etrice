@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
-<testsuites/>
+<testsuites>
+  <testsuite failures="0" name="TestMessage" tests="1" time="0">
+    <testcase name="TestEtMessage_testBasicMessage" time="0"/>
+  </testsuite>
+  <testsuite failures="1" name="TestEtMessageQueue" tests="2" time="187">
+    <testcase name="TestEtMessageQueue_testPushPop" time="0">
+      <failure><expected>334</expected><actual>333</actual>rcvMsg2->evtID: expected=334, actual=333
+ at ..\src\runtime\TestEtMessageQueue.c:42</failure>
+    </testcase>
+    <testcase name="TestEtMessageQueue_testMassiveMessaging" time="187"/>
+  </testsuite>
+  <testsuite failures="0" name="TestEtMessageService" tests="5" time="16">
+    <testcase name="TestEtMessageService_init" time="0"/>
+    <testcase name="TestEtMessageService_GetPushPopReturn" time="0"/>
+    <testcase name="TestEtMessageService_GetReturn" time="16"/>
+    <testcase name="TestEtMessageService_execute" time="0"/>
+    <testcase name="TestEtMessageService_getMessagePoolLowWaterMark" time="0"/>
+  </testsuite>
+  <testsuite failures="0" name="TestEtUnit" tests="2" time="0">
+    <testcase name="TestEtUnit_Expect_Order" time="0"/>
+    <testcase name="TestEtUnit_Expect" time="0"/>
+  </testsuite>
+  <testsuite failures="0" name="etUnit" tests="1" time="0">
+    <testcase name="openAll and closeAll" time="0"/>
+  </testsuite>
+</testsuites>

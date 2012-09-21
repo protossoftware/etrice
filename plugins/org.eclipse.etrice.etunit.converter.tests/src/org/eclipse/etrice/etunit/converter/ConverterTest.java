@@ -94,4 +94,15 @@ public class ConverterTest {
 		String[] arguments = new String[args.size()];
 		EtUnitReportConverter.main(args.toArray(arguments));
 	}
+
+	@Test
+	public void testChangeSuiteName() {
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(basePath+"report5.etu");
+		args.add(EtUnitReportConverter.OPTION_SUITE_NAME);
+		args.add("new.suite.name");
+		
+		String[] arguments = new String[args.size()];
+		EtUnitReportConverter.main(args.toArray(arguments));
+	}
 }
