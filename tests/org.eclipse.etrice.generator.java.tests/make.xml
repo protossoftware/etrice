@@ -146,7 +146,15 @@
 		</path>
 
 		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTest"/>
 			<arg value="./tmp/ChoicePointTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.HandlerTest"/>
 			<arg value="./tmp/HandlerTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
