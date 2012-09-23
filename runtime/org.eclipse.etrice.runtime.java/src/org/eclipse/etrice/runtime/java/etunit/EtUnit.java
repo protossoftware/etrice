@@ -57,6 +57,7 @@ public class EtUnit {
 			
 			out = new BufferedWriter(fstream);
 			out.write("etUnit report\n");
+			out.flush();
 		}
 		catch (IOException e) {
 			System.err.println("unable to open "+path);
@@ -86,6 +87,7 @@ public class EtUnit {
 		if (out!=null) {
 			try {
 				out.write("ts start: "+testSuiteName+"\n");
+				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -101,6 +103,7 @@ public class EtUnit {
 		if (out!=null) {
 			try {
 				out.write("tc start "+caseId+": "+testCaseName+"\n");
+				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -116,6 +119,7 @@ public class EtUnit {
 		if (out!=null) {
 			try {
 				out.write("tc end "+id+": "+time+"\n");
+				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -293,7 +297,7 @@ public class EtUnit {
 			/* nothing to do because no failure */
 		}
 		else {
-			if (!failed.contains(id)) {
+		//	if (!failed.contains(id)) {
 				/* first failure will be remembered */
 				failed.add(id);
 				
@@ -304,17 +308,19 @@ public class EtUnit {
 	            int line = stackTraceElement.getLineNumber();
 	
 				try {
-					if (act!=null && exp!=null)
+					if (act!=null && exp!=null){
 						out.write("tc fail "+id+": #"+exp+"#"+act+"#"+fullClassName+":"+line+"#"+resulttext+"\n");
-					else
+						out.flush();}
+					else{
 						out.write("tc fail "+id+": ###"+fullClassName+":"+line+"#"+resulttext+"\n");
+						out.flush();}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			else{
+			//}
+			//else{
 				/* more than one error will be ignored */
-			}
+			//}
 		}
 	}
 
