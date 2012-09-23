@@ -297,7 +297,7 @@ public class EtUnit {
 			/* nothing to do because no failure */
 		}
 		else {
-		//	if (!failed.contains(id)) {
+			if (!failed.contains(id)) {
 				/* first failure will be remembered */
 				failed.add(id);
 				
@@ -317,10 +317,10 @@ public class EtUnit {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			//}
-			//else{
+			}
+			else{
 				/* more than one error will be ignored */
-			//}
+			}
 		}
 	}
 
