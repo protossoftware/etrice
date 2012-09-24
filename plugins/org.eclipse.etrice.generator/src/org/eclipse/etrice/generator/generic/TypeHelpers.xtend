@@ -33,6 +33,7 @@ import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 class TypeHelpers {
 
 	@Inject AbstractTransitionChainGenerator chainGenerator
+	@Inject ILanguageExtension languageExt
 	
 	def String typeName(DataType type) {
 		if (type instanceof PrimitiveType)
@@ -42,19 +43,9 @@ class TypeHelpers {
 		else
 			return type.name
 	}
-	
-	def String defaultValue(DataType dt) {
-		if (dt instanceof PrimitiveType) {
-			return (dt as PrimitiveType).getDefaultValueLiteral
-		}
-		else if (dt instanceof ExternalType)
-			return "new "+(dt as ExternalType).targetName+"()"
-		else
-			return "new "+dt.name+"()"
-	}
 
 	def String defaultValue(VarDecl a) {
-		return defaultValue(a.refType.type)
+		return languageExt.defaultValue(a.refType.type)
 	}
 
 	def String getTypedDataDefinition(Message m) {

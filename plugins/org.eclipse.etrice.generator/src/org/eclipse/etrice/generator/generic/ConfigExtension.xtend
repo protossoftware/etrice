@@ -45,8 +45,6 @@ import org.eclipse.etrice.generator.base.ConfigHelper
 @Singleton
 class ConfigExtension {
 	@Inject ILanguageExtension languageExt
-	@Inject TypeHelpers typeHelpers
-	@Inject RoomExtensions roomExt
 
 	// language operations
 	

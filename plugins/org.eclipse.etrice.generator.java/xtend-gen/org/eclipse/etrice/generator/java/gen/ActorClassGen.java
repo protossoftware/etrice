@@ -26,6 +26,7 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
+import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -53,6 +54,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
+  
+  @Inject
+  private Initialization _initialization;
   
   @Inject
   private StateMachineGen _stateMachineGen;
@@ -348,7 +352,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_2 = ac.getAttributes();
-      CharSequence _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes_2, false);
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_2, false);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

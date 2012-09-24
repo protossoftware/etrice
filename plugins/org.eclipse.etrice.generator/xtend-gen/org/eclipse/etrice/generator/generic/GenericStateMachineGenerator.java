@@ -100,7 +100,6 @@ public class GenericStateMachineGenerator {
   }
   
   private String genTransitionChainConstants(final ExpandedActorClass xpac) {
-    final ActorClass ac = xpac.getActorClass();
     EList<TransitionChain> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
@@ -139,7 +138,6 @@ public class GenericStateMachineGenerator {
   }
   
   private String genTriggerConstants(final ExpandedActorClass xpac) {
-    final ActorClass ac = xpac.getActorClass();
     EList<MessageFromIf> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
@@ -176,8 +174,6 @@ public class GenericStateMachineGenerator {
       final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
       ActorCommunicationType _commType_1 = ac.getCommType();
       final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
-      ActorCommunicationType _commType_2 = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;

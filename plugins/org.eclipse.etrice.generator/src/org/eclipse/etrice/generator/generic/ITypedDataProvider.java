@@ -26,7 +26,7 @@ public interface ITypedDataProvider {
 	 * @param data the variable declaration
 	 * @return an array of three strings
 	 * <ol>
-	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variabley</li>
+	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variable</li>
 	 *  <li>the data as it appears in a method call</li>
 	 *  <li>the data as it is used in the method declaration</li>
 	 *  </ol>

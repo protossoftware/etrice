@@ -12,12 +12,16 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 
 @Singleton
 @SuppressWarnings("all")
 public class TypeHelpers {
   @Inject
   private AbstractTransitionChainGenerator chainGenerator;
+  
+  @Inject
+  private ILanguageExtension languageExt;
   
   public String typeName(final DataType type) {
     if ((type instanceof PrimitiveType)) {
@@ -31,26 +35,10 @@ public class TypeHelpers {
     }
   }
   
-  public String defaultValue(final DataType dt) {
-    if ((dt instanceof PrimitiveType)) {
-      return ((PrimitiveType) dt).getDefaultValueLiteral();
-    } else {
-      if ((dt instanceof ExternalType)) {
-        String _targetName = ((ExternalType) dt).getTargetName();
-        String _plus = ("new " + _targetName);
-        return (_plus + "()");
-      } else {
-        String _name = dt.getName();
-        String _plus_1 = ("new " + _name);
-        return (_plus_1 + "()");
-      }
-    }
-  }
-  
   public String defaultValue(final VarDecl a) {
     RefableType _refType = a.getRefType();
     DataType _type = _refType.getType();
-    return this.defaultValue(_type);
+    return this.languageExt.defaultValue(_type);
   }
   
   public String getTypedDataDefinition(final Message m) {

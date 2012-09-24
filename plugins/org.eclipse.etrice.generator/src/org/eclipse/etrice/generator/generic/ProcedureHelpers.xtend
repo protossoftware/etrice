@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerClass
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.Operation
@@ -37,7 +36,6 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 class ProcedureHelpers {
 
 	@Inject ILanguageExtension languageExt
-	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
 
@@ -100,7 +98,7 @@ class ProcedureHelpers {
 	}
 
 	def arrayInitializer(Attribute att) {
-		var dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else att.refType.type.defaultValue
+		var dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.refType.type)
 
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)
@@ -118,43 +116,6 @@ class ProcedureHelpers {
 				result = result + ", "
 		}
 		return result+"}"
-	}
-	
-	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
-		'''
-			// initialize attributes
-			«FOR a : attribs»
-				«var aType = a.refType.type»
-				«var value = a.initValueLiteral»
-				«IF value!=null»
-					«IF a.size == 0 || aType.characterType»
-						«a.name» = «value»;
-					«ELSEIF value.startsWith("{")»
-						«a.name» = new «aType.typeName»[] «value»;
-					«ELSE»
-						«a.name» = new «aType.typeName»[«a.size»];
-						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «value»;
-						}
-					«ENDIF»
-				«ELSEIF aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
-					«IF a.size==0»
-						«IF a.refType.isRef»
-							«a.name» = «languageExt.nullPointer()»;
-						«ELSE»
-							«a.name» = «aType.defaultValue»;
-						«ENDIF»
-					«ELSE»
-						«a.name» = new «aType.typeName»[«a.size»];
-						«IF !useClassDefaultsOnly»
-							for (int i=0;i<«a.size»;i++){
-								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«aType.defaultValue»«ENDIF»;
-							}
-						«ENDIF»
-					«ENDIF»
-				«ENDIF»
-			«ENDFOR»
-		'''
 	}
 	
 	// Attribute setters & getters

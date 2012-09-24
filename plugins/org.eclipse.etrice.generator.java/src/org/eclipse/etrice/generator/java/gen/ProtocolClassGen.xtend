@@ -35,6 +35,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
+	@Inject extension Initialization
 	@Inject extension TypeHelpers
 	@Inject extension DataClassGen
 	@Inject ILogger logger

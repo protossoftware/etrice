@@ -36,6 +36,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject ConfigGenAddon configAddon
 	
 	@Inject extension ProcedureHelpers
+	@Inject extension Initialization
 	@Inject extension StateMachineGen
 	@Inject ILogger logger
 	

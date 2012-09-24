@@ -39,7 +39,6 @@ import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -60,9 +59,6 @@ public class SubSystemClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
-  
-  @Inject
-  private TypeHelpers _typeHelpers;
   
   @Inject
   private ConfigExtension _configExtension;
@@ -908,7 +904,7 @@ public class SubSystemClassGen {
           } else {
             RefableType _refType = attr.getRefType();
             DataType _type = _refType.getType();
-            String _defaultValue = this._typeHelpers.defaultValue(_type);
+            String _defaultValue = this.stdExt.defaultValue(_type);
             _builder.append(_defaultValue, "");
           }
         }
@@ -1281,7 +1277,7 @@ public class SubSystemClassGen {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
           DataType _type = _refType.getType();
-          String _defaultValue = this._typeHelpers.defaultValue(_type);
+          String _defaultValue = this.stdExt.defaultValue(_type);
           _builder.append(_defaultValue, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -1302,8 +1298,9 @@ public class SubSystemClassGen {
       if (_equals) {
         RefableType _refType = att.getRefType();
         DataType _type = _refType.getType();
-        String _defaultValue = this._typeHelpers.defaultValue(_type);
-        _xifexpression = _defaultValue;
+        int _size = att.getSize();
+        String _initializationWithDefaultValues = this.stdExt.initializationWithDefaultValues(_type, _size);
+        _xifexpression = _initializationWithDefaultValues;
       } else {
         String _string = value.toString();
         _xifexpression = _string;

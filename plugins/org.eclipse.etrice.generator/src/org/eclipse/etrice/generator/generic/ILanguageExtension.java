@@ -1,6 +1,7 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import java.util.List;
@@ -189,4 +190,19 @@ public interface ILanguageExtension {
 	 * toPrimitve("PrimitiveType int8: ptInteger -> byte (Byte)", Byte value = 12) -> (byte)12
 	 */
 	String toValueLiteral(PrimitiveType type, String value);
+	
+	/**
+	 * returns a default value for a type
+	 * @param dt the data type
+	 * @return the default value string
+	 */
+	String defaultValue(DataType dt);
+	
+	/**
+	 * returns an initializer for an array with default values
+	 * @param dt the data type
+	 * @param size
+	 * @return the array initializer
+	 */
+	String initializationWithDefaultValues(DataType dt, int size);
 }

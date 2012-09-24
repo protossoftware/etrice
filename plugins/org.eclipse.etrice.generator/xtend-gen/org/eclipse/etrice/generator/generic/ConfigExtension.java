@@ -38,8 +38,6 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.ConfigHelper;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -51,12 +49,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ConfigExtension {
   @Inject
   private ILanguageExtension languageExt;
-  
-  @Inject
-  private TypeHelpers typeHelpers;
-  
-  @Inject
-  private RoomExtensions roomExt;
   
   public String toArrayValueLiteral(final PrimitiveType type, final String[] values) {
     StringConcatenation _builder = new StringConcatenation();

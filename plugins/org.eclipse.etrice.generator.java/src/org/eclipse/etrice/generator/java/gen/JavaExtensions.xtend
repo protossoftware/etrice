@@ -26,7 +26,8 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
 import org.eclipse.xtext.util.Pair
-
+import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.ExternalType
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -137,6 +138,34 @@ class JavaExtensions implements ILanguageExtension {
 		}
 		
 		throw new UnsupportedOperationException(type.targetName)
+	}
+
+	override defaultValue(DataType dt) {
+		if (dt instanceof PrimitiveType) {
+			return (dt as PrimitiveType).getDefaultValueLiteral
+		}
+		else if (dt instanceof ExternalType)
+			return "new "+(dt as ExternalType).targetName+"()"
+		else
+			return "new "+dt.name+"()"
+	}
+	
+
+	override initializationWithDefaultValues(DataType dt, int size) {
+		val dv = dt.defaultValue
+		if (size>1) {
+			var res = "{"
+			var i = 0
+			while (i<size) {
+				res = res + dv
+				i = i+1
+				if (i<size)
+					res = res + ","
+			}
+			res+"}"
+		}
+		else
+			dv
 	}
 	
 }

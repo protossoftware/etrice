@@ -4,6 +4,8 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -236,5 +238,61 @@ public class JavaExtensions implements ILanguageExtension {
     String _targetName_1 = type.getTargetName();
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_targetName_1);
     throw _unsupportedOperationException;
+  }
+  
+  public String defaultValue(final DataType dt) {
+    if ((dt instanceof PrimitiveType)) {
+      return ((PrimitiveType) dt).getDefaultValueLiteral();
+    } else {
+      if ((dt instanceof ExternalType)) {
+        String _targetName = ((ExternalType) dt).getTargetName();
+        String _plus = ("new " + _targetName);
+        return (_plus + "()");
+      } else {
+        String _name = dt.getName();
+        String _plus_1 = ("new " + _name);
+        return (_plus_1 + "()");
+      }
+    }
+  }
+  
+  public String initializationWithDefaultValues(final DataType dt, final int size) {
+    String _xblockexpression = null;
+    {
+      final String dv = this.defaultValue(dt);
+      String _xifexpression = null;
+      boolean _greaterThan = (size > 1);
+      if (_greaterThan) {
+        String _xblockexpression_1 = null;
+        {
+          String res = "{";
+          int i = 0;
+          boolean _lessThan = (i < size);
+          boolean _while = _lessThan;
+          while (_while) {
+            {
+              String _plus = (res + dv);
+              res = _plus;
+              int _plus_1 = (i + 1);
+              i = _plus_1;
+              boolean _lessThan_1 = (i < size);
+              if (_lessThan_1) {
+                String _plus_2 = (res + ",");
+                res = _plus_2;
+              }
+            }
+            boolean _lessThan_1 = (i < size);
+            _while = _lessThan_1;
+          }
+          String _plus = (res + "}");
+          _xblockexpression_1 = (_plus);
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        _xifexpression = dv;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
 }

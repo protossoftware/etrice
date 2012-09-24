@@ -32,7 +32,6 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.core.room.Attribute
@@ -45,7 +44,6 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
-	@Inject extension TypeHelpers
 	@Inject extension ConfigExtension
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
@@ -424,7 +422,7 @@ class SubSystemClassGen {
 	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
 		val value = att.initValueLiteral
 		if (value==null)
-			att.refType.type.defaultValue
+			att.refType.type.initializationWithDefaultValues(att.size)
 		else
 			value.toString
 	}

@@ -61,7 +61,6 @@ class GenericStateMachineGenerator {
 	}
 	
 	def private genTransitionChainConstants(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
 		var chains = if (langExt.usesInheritance)
 			xpac.getOwnTransitionChains() else xpac.transitionChains
 		var offset = if (langExt.usesInheritance)
@@ -77,7 +76,6 @@ class GenericStateMachineGenerator {
 	}
 	
 	def private genTriggerConstants(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
 		val triggers = if (langExt.usesInheritance)
 			xpac.getOwnTriggers() else xpac.triggers
 
@@ -94,7 +92,6 @@ class GenericStateMachineGenerator {
 		val ac = xpac.actorClass
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
-		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		val handleEvents = async || eventDriven
 		
 	'''
