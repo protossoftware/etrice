@@ -352,89 +352,83 @@ public class CExtensions implements ILanguageExtension {
     if (_equals) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
+    String _xifexpression = null;
     RefableType _refType = data.getRefType();
     DataType _type = _refType.getType();
-    String typeName = _type.getName();
-    String castTypeName = (typeName + "*");
-    String typedData = "";
-    String ref = "";
-    RefableType _refType_1 = data.getRefType();
-    DataType _type_1 = _refType_1.getType();
-    if ((_type_1 instanceof PrimitiveType)) {
+    if ((_type instanceof PrimitiveType)) {
+      RefableType _refType_1 = data.getRefType();
+      DataType _type_1 = _refType_1.getType();
+      String _targetName = ((PrimitiveType) _type_1).getTargetName();
+      _xifexpression = _targetName;
+    } else {
       RefableType _refType_2 = data.getRefType();
       DataType _type_2 = _refType_2.getType();
-      String _targetName = ((PrimitiveType) _type_2).getTargetName();
-      typeName = _targetName;
-      String _plus = (typeName + "*");
-      castTypeName = _plus;
-      RefableType _refType_3 = data.getRefType();
-      DataType _type_3 = _refType_3.getType();
-      String ct = ((PrimitiveType) _type_3).getCastName();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(ct, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isEmpty = ct.isEmpty();
-        boolean _not = (!_isEmpty);
-        _and = (_notEquals && _not);
-      }
-      if (_and) {
-        castTypeName = ct;
-      }
-      RefableType _refType_4 = data.getRefType();
-      boolean _isRef = _refType_4.isRef();
-      if (_isRef) {
-        ref = "*";
-        String _plus_1 = (typeName + " ");
-        String _name = data.getName();
-        String _plus_2 = (_plus_1 + _name);
-        String _plus_3 = (_plus_2 + " = **((");
-        String _plus_4 = (_plus_3 + castTypeName);
-        String _plus_5 = (_plus_4 + "*) generic_data);\n");
-        typedData = _plus_5;
-      } else {
-        String _plus_6 = (typeName + " ");
-        String _name_1 = data.getName();
-        String _plus_7 = (_plus_6 + _name_1);
-        String _plus_8 = (_plus_7 + " = *((");
-        String _plus_9 = (_plus_8 + castTypeName);
-        String _plus_10 = (_plus_9 + ") generic_data);\n");
-        typedData = _plus_10;
-      }
-    } else {
-      RefableType _refType_5 = data.getRefType();
-      boolean _isRef_1 = _refType_5.isRef();
-      if (_isRef_1) {
-        ref = "*";
-        String _plus_11 = (typeName + "*");
-        typeName = _plus_11;
-        String _plus_12 = (typeName + " ");
-        String _name_2 = data.getName();
-        String _plus_13 = (_plus_12 + _name_2);
-        String _plus_14 = (_plus_13 + " = *((");
-        String _plus_15 = (_plus_14 + castTypeName);
-        String _plus_16 = (_plus_15 + "*) generic_data);\n");
-        typedData = _plus_16;
-      } else {
-        String _plus_17 = (typeName + "*");
-        typeName = _plus_17;
-        String _plus_18 = (typeName + " ");
-        String _name_3 = data.getName();
-        String _plus_19 = (_plus_18 + _name_3);
-        String _plus_20 = (_plus_19 + " = ((");
-        String _plus_21 = (_plus_20 + castTypeName);
-        String _plus_22 = (_plus_21 + ") generic_data);\n");
-        typedData = _plus_22;
-      }
+      String _name = _type_2.getName();
+      _xifexpression = _name;
     }
-    String _name_4 = data.getName();
-    final String dataArg = (", " + _name_4);
-    String _plus_23 = (", " + typeName);
-    String _plus_24 = (_plus_23 + " ");
-    String _plus_25 = (_plus_24 + ref);
-    String _name_5 = data.getName();
-    final String typedArgList = (_plus_25 + _name_5);
+    String typeName = _xifexpression;
+    String _xifexpression_1 = null;
+    RefableType _refType_3 = data.getRefType();
+    DataType _type_3 = _refType_3.getType();
+    if ((_type_3 instanceof PrimitiveType)) {
+      String _xblockexpression = null;
+      {
+        RefableType _refType_4 = data.getRefType();
+        DataType _type_4 = _refType_4.getType();
+        final String ct = ((PrimitiveType) _type_4).getCastName();
+        String _xifexpression_2 = null;
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(ct, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          boolean _isEmpty = ct.isEmpty();
+          boolean _not = (!_isEmpty);
+          _and = (_notEquals && _not);
+        }
+        if (_and) {
+          _xifexpression_2 = ct;
+        } else {
+          _xifexpression_2 = typeName;
+        }
+        _xblockexpression = (_xifexpression_2);
+      }
+      _xifexpression_1 = _xblockexpression;
+    } else {
+      _xifexpression_1 = typeName;
+    }
+    String castTypeName = _xifexpression_1;
+    String _plus = (castTypeName + "*");
+    castTypeName = _plus;
+    RefableType _refType_4 = data.getRefType();
+    boolean _isRef = _refType_4.isRef();
+    if (_isRef) {
+      String _plus_1 = (typeName + "*");
+      typeName = _plus_1;
+      String _plus_2 = (castTypeName + "*");
+      castTypeName = _plus_2;
+    }
+    RefableType _refType_5 = data.getRefType();
+    DataType _type_4 = _refType_5.getType();
+    boolean _not = (!(_type_4 instanceof PrimitiveType));
+    if (_not) {
+      String _plus_3 = (typeName + "*");
+      typeName = _plus_3;
+      String _plus_4 = (castTypeName + "*");
+      castTypeName = _plus_4;
+    }
+    String _plus_5 = (typeName + " ");
+    String _name_1 = data.getName();
+    String _plus_6 = (_plus_5 + _name_1);
+    String _plus_7 = (_plus_6 + " = *((");
+    String _plus_8 = (_plus_7 + castTypeName);
+    final String typedData = (_plus_8 + ") generic_data);\n");
+    String _name_2 = data.getName();
+    final String dataArg = (", " + _name_2);
+    String _plus_9 = (", " + typeName);
+    String _plus_10 = (_plus_9 + " ");
+    String _name_3 = data.getName();
+    final String typedArgList = (_plus_10 + _name_3);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
 }

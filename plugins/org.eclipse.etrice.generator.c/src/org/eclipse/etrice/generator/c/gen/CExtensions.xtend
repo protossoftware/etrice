@@ -201,39 +201,35 @@ class CExtensions implements ILanguageExtension {
 		if (data==null)
 			return newArrayList("", "", "")
 			
-		var typeName = data.getRefType().getType().getName()
-		var castTypeName = typeName+"*"
-		var typedData = ""
-		var ref = ""
-		if (data.getRefType().getType() instanceof PrimitiveType) {
-			typeName = (data.getRefType().getType() as PrimitiveType).getTargetName()
-			castTypeName = typeName+"*"
-			var ct = (data.getRefType().getType() as PrimitiveType).getCastName()
-			if (ct!=null && !ct.isEmpty()){
-				castTypeName = ct
-			}
-			if (data.getRefType().isRef()) {
-				ref = "*"
-				typedData = typeName+" "+data.getName() + " = **(("+castTypeName+"*) generic_data);\n"
-			}
-			else {
-				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
-			}
+		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
+			(data.getRefType().getType() as PrimitiveType).getTargetName()
+		else
+			data.getRefType().getType().getName()
+			
+		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
+			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
+			if (ct!=null && !ct.isEmpty())
+				ct
+			else
+				typeName
 		}
-		else {
-			if (data.getRefType().isRef()) {
-				ref = "*"
-				typeName = typeName+"*"
-				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+"*) generic_data);\n"
-			}
-			else{
-				typeName = typeName+"*"
-				typedData = typeName+" "+data.getName() + " = (("+castTypeName+") generic_data);\n"
-			}
+		else
+			typeName
+		castTypeName = castTypeName+"*"
+		
+		if (data.getRefType().isRef()) {
+			typeName = typeName+"*"
+			castTypeName = castTypeName+"*"
 		}
+		if (!(data.getRefType().getType() instanceof PrimitiveType)) {
+			typeName = typeName+"*"
+			castTypeName = castTypeName+"*"
+		}
+			
+		val typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
 
 		val dataArg = ", "+data.getName()
-		val typedArgList = ", "+typeName+" "+ref+data.getName()
+		val typedArgList = ", "+typeName+" "+data.getName()
 		
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
