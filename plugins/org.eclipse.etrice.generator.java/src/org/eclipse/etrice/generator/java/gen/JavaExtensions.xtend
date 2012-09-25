@@ -17,28 +17,23 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
-import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.xtext.util.Pair
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
 
-	@Inject AbstractTransitionChainGenerator chainGenerator
-	
-
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m.data)
+		generateArglistAndTypedData(m.data).get(1)
 	}
-
 
 	def String getJavaFileName(RoomClass rc) {rc.name+".java"}
 	
@@ -166,6 +161,26 @@ class JavaExtensions implements ILanguageExtension {
 		}
 		else
 			dv
+	}
+
+	override generateArglistAndTypedData(VarDecl data) {
+		if (data==null)
+			return newArrayList("", "", "")
+		
+		var typeName = data.getRefType().getType().getName();
+		var castTypeName = typeName;
+		if (data.getRefType().getType() instanceof PrimitiveType) {
+			typeName = (data.getRefType().getType() as PrimitiveType).getTargetName();
+			val ct = (data.getRefType().getType() as PrimitiveType).getCastName();
+			if (ct!=null && !ct.isEmpty())
+				castTypeName = ct;
+		}
+
+		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data;\n";
+		val dataArg = ", "+data.getName();
+		val typedArgList = ", "+typeName+" "+data.getName();
+		
+		return newArrayList(dataArg, typedData, typedArgList);
 	}
 	
 }

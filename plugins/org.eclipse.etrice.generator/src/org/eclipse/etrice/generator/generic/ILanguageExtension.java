@@ -4,6 +4,8 @@ package org.eclipse.etrice.generator.generic;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.VarDecl;
+
 import java.util.List;
 import org.eclipse.xtext.util.Pair;
 
@@ -190,6 +192,19 @@ public interface ILanguageExtension {
 	 * toPrimitve("PrimitiveType int8: ptInteger -> byte (Byte)", Byte value = 12) -> (byte)12
 	 */
 	String toValueLiteral(PrimitiveType type, String value);
+	
+	/**
+	 * return three strings used by the generator
+	 * 
+	 * @param data the variable declaration
+	 * @return an array of three strings
+	 * <ol>
+	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variable</li>
+	 *  <li>the data as it appears in a method call</li>
+	 *  <li>the data as it is used in the method declaration</li>
+	 *  </ol>
+	 */
+	String[] generateArglistAndTypedData(VarDecl data);
 	
 	/**
 	 * returns a default value for a type

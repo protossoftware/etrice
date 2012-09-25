@@ -20,15 +20,19 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 
+import com.google.inject.Inject;
+
 /**
  * base class for 
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractTransitionChainGenerator implements ITypedDataProvider {
+public class TransitionChainGenerator {
+
+	@Inject ILanguageExtension languageExt;
 
 	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
-		TransitionChainVisitor tcv = new TransitionChainVisitor(ac, this);
+		TransitionChainVisitor tcv = new TransitionChainVisitor(ac);
 		AbstractGenerator.getInjector().injectMembers(tcv);
 		tcv.init(tc);
 		
@@ -47,15 +51,7 @@ public abstract class AbstractTransitionChainGenerator implements ITypedDataProv
 		return generateTypedArgumentList(xpac.getData(t));
 	}
 
-	public String generateArgumentList(VarDecl data) {
-		return generateArglistAndTypedData(data)[0];
-	}
-
-	public String generateTypedData(VarDecl data) {
-		return generateArglistAndTypedData(data)[1];
-	}
-
 	public String generateTypedArgumentList(VarDecl data) {
-		return generateArglistAndTypedData(data)[2];
+		return languageExt.generateArglistAndTypedData(data)[2];
 	}
 }

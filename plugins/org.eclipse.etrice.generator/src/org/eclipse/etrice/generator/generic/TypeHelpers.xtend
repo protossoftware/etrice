@@ -25,14 +25,11 @@ import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 
 
 @Singleton
 class TypeHelpers {
 
-	@Inject AbstractTransitionChainGenerator chainGenerator
 	@Inject ILanguageExtension languageExt
 	
 	def String typeName(DataType type) {
@@ -48,8 +45,16 @@ class TypeHelpers {
 		return languageExt.defaultValue(a.refType.type)
 	}
 
-	def String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m.data)
+	def String getArgumentList(VarDecl data) {
+		languageExt.generateArglistAndTypedData(data).get(0)
+	}
+
+	def String getTypedDataDefinition(VarDecl data) {
+		languageExt.generateArglistAndTypedData(data).get(1);
+	}
+
+	def String generateTypedArgumentList(VarDecl data) {
+		languageExt.generateArglistAndTypedData(data).get(2);
 	}
 	
 	def isPrimitive(DataType type){

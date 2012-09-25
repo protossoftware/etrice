@@ -1,5 +1,6 @@
 package org.eclipse.etrice.generator.c.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -16,23 +17,23 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 
 @Singleton
 @SuppressWarnings("all")
 public class CExtensions implements ILanguageExtension {
   @Inject
-  private AbstractTransitionChainGenerator chainGenerator;
-  
-  @Inject
   private IDiagnostician diagnostician;
   
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
-    return this.chainGenerator.generateTypedData(_data);
+    String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
+    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(1);
+    return _get;
   }
   
   public String accessLevelPrivate() {
@@ -344,5 +345,96 @@ public class CExtensions implements ILanguageExtension {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public String[] generateArglistAndTypedData(final VarDecl data) {
+    boolean _equals = Objects.equal(data, null);
+    if (_equals) {
+      return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
+    }
+    RefableType _refType = data.getRefType();
+    DataType _type = _refType.getType();
+    String typeName = _type.getName();
+    String castTypeName = (typeName + "*");
+    String typedData = "";
+    String ref = "";
+    RefableType _refType_1 = data.getRefType();
+    DataType _type_1 = _refType_1.getType();
+    if ((_type_1 instanceof PrimitiveType)) {
+      RefableType _refType_2 = data.getRefType();
+      DataType _type_2 = _refType_2.getType();
+      String _targetName = ((PrimitiveType) _type_2).getTargetName();
+      typeName = _targetName;
+      String _plus = (typeName + "*");
+      castTypeName = _plus;
+      RefableType _refType_3 = data.getRefType();
+      DataType _type_3 = _refType_3.getType();
+      String ct = ((PrimitiveType) _type_3).getCastName();
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(ct, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        boolean _isEmpty = ct.isEmpty();
+        boolean _not = (!_isEmpty);
+        _and = (_notEquals && _not);
+      }
+      if (_and) {
+        castTypeName = ct;
+      }
+      RefableType _refType_4 = data.getRefType();
+      boolean _isRef = _refType_4.isRef();
+      if (_isRef) {
+        ref = "*";
+        String _plus_1 = (typeName + " ");
+        String _name = data.getName();
+        String _plus_2 = (_plus_1 + _name);
+        String _plus_3 = (_plus_2 + " = **((");
+        String _plus_4 = (_plus_3 + castTypeName);
+        String _plus_5 = (_plus_4 + "*) generic_data);\n");
+        typedData = _plus_5;
+      } else {
+        String _plus_6 = (typeName + " ");
+        String _name_1 = data.getName();
+        String _plus_7 = (_plus_6 + _name_1);
+        String _plus_8 = (_plus_7 + " = *((");
+        String _plus_9 = (_plus_8 + castTypeName);
+        String _plus_10 = (_plus_9 + ") generic_data);\n");
+        typedData = _plus_10;
+      }
+    } else {
+      RefableType _refType_5 = data.getRefType();
+      boolean _isRef_1 = _refType_5.isRef();
+      if (_isRef_1) {
+        ref = "*";
+        String _plus_11 = (typeName + "*");
+        typeName = _plus_11;
+        String _plus_12 = (typeName + " ");
+        String _name_2 = data.getName();
+        String _plus_13 = (_plus_12 + _name_2);
+        String _plus_14 = (_plus_13 + " = *((");
+        String _plus_15 = (_plus_14 + castTypeName);
+        String _plus_16 = (_plus_15 + "*) generic_data);\n");
+        typedData = _plus_16;
+      } else {
+        String _plus_17 = (typeName + "*");
+        typeName = _plus_17;
+        String _plus_18 = (typeName + " ");
+        String _name_3 = data.getName();
+        String _plus_19 = (_plus_18 + _name_3);
+        String _plus_20 = (_plus_19 + " = ((");
+        String _plus_21 = (_plus_20 + castTypeName);
+        String _plus_22 = (_plus_21 + ") generic_data);\n");
+        typedData = _plus_22;
+      }
+    }
+    String _name_4 = data.getName();
+    final String dataArg = (", " + _name_4);
+    String _plus_23 = (", " + typeName);
+    String _plus_24 = (_plus_23 + " ");
+    String _plus_25 = (_plus_24 + ref);
+    String _name_5 = data.getName();
+    final String typedArgList = (_plus_25 + _name_5);
+    return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
 }

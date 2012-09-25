@@ -169,13 +169,13 @@ public class DynTestee_ac extends ActorClassBase {
 	public DynConfigLock getDc_iLock(){
 		return lock_dc_i;
 	}	
-	public void setAndWriteInt_dump(int int_dump){
-			setInt_dump(int_dump);
-			variableService.write(this.getInstancePath()+"/int_dump", int_dump);
-	}
 	public void setAndWriteDc_dump(Dyn_DC1 dc_dump){
 			setDc_dump(dc_dump);
 			variableService.write(this.getInstancePath()+"/dc_dump", dc_dump);
+	}
+	public void setAndWriteInt_dump(int int_dump){
+			setInt_dump(int_dump);
+			variableService.write(this.getInstancePath()+"/int_dump", int_dump);
 	}
 	
 	//--------------------- port getters

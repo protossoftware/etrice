@@ -37,12 +37,10 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	@Inject private ILanguageExtension langExt;
 	private ExpandedActorClass xpac;
-	private ITypedDataProvider dataProvider;
 	private boolean dataDriven;
 
-	protected TransitionChainVisitor(ExpandedActorClass xpac, ITypedDataProvider dataProvider) {
+	protected TransitionChainVisitor(ExpandedActorClass xpac) {
 		this.xpac = xpac;
-		this.dataProvider = dataProvider;
 	}
 	
 	protected void init(TransitionChain tc) {
@@ -66,7 +64,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 			else if (dataDriven)
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
-				String[] result = dataProvider.generateArglistAndTypedData(xpac.getData(tr));
+				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
 				String dataArg = result[0];
 				
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
@@ -108,7 +106,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genTypedData(TransitionChain tc) {
-		String[] result = dataProvider.generateArglistAndTypedData(tc.getData());
+		String[] result = langExt.generateArglistAndTypedData(tc.getData());
 		return result[1];
 	}
 

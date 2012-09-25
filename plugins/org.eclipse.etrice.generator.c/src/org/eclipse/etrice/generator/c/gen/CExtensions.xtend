@@ -24,22 +24,21 @@ import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.VarDecl
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
-	@Inject AbstractTransitionChainGenerator chainGenerator
 	@Inject IDiagnostician diagnostician
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m.data)
+		generateArglistAndTypedData(m.data).get(1)
 	}
 
 	// in C no access levels can be defined
@@ -196,6 +195,47 @@ class CExtensions implements ILanguageExtension {
 		}
 		else
 			dv
+	}
+	
+	override generateArglistAndTypedData(VarDecl data) {
+		if (data==null)
+			return newArrayList("", "", "")
+			
+		var typeName = data.getRefType().getType().getName()
+		var castTypeName = typeName+"*"
+		var typedData = ""
+		var ref = ""
+		if (data.getRefType().getType() instanceof PrimitiveType) {
+			typeName = (data.getRefType().getType() as PrimitiveType).getTargetName()
+			castTypeName = typeName+"*"
+			var ct = (data.getRefType().getType() as PrimitiveType).getCastName()
+			if (ct!=null && !ct.isEmpty()){
+				castTypeName = ct
+			}
+			if (data.getRefType().isRef()) {
+				ref = "*"
+				typedData = typeName+" "+data.getName() + " = **(("+castTypeName+"*) generic_data);\n"
+			}
+			else {
+				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
+			}
+		}
+		else {
+			if (data.getRefType().isRef()) {
+				ref = "*"
+				typeName = typeName+"*"
+				typedData = typeName+" "+data.getName() + " = *(("+castTypeName+"*) generic_data);\n"
+			}
+			else{
+				typeName = typeName+"*"
+				typedData = typeName+" "+data.getName() + " = (("+castTypeName+") generic_data);\n"
+			}
+		}
+
+		val dataArg = ", "+data.getName()
+		val typedArgList = ", "+typeName+" "+ref+data.getName()
+		
+		return newArrayList(dataArg, typedData, typedArgList);
 	}
 	
 }

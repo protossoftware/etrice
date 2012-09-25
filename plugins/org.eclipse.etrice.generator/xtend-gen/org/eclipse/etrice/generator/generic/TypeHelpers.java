@@ -3,23 +3,20 @@ package org.eclipse.etrice.generator.generic;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.List;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.LiteralType;
-import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtext.xbase.lib.Conversions;
 
 @Singleton
 @SuppressWarnings("all")
 public class TypeHelpers {
-  @Inject
-  private AbstractTransitionChainGenerator chainGenerator;
-  
   @Inject
   private ILanguageExtension languageExt;
   
@@ -41,9 +38,22 @@ public class TypeHelpers {
     return this.languageExt.defaultValue(_type);
   }
   
-  public String getTypedDataDefinition(final Message m) {
-    VarDecl _data = m.getData();
-    return this.chainGenerator.generateTypedData(_data);
+  public String getArgumentList(final VarDecl data) {
+    String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
+    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(0);
+    return _get;
+  }
+  
+  public String getTypedDataDefinition(final VarDecl data) {
+    String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
+    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(1);
+    return _get;
+  }
+  
+  public String generateTypedArgumentList(final VarDecl data) {
+    String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
+    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(2);
+    return _get;
   }
   
   public boolean isPrimitive(final DataType type) {

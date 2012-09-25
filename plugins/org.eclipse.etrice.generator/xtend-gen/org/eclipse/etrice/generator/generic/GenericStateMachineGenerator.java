@@ -27,10 +27,10 @@ import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TransitionChainGenerator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -49,7 +49,7 @@ public class GenericStateMachineGenerator {
   protected GenericProtocolClassGenerator pcGen;
   
   @Inject
-  protected AbstractTransitionChainGenerator languageGen;
+  protected TransitionChainGenerator transitionChainGenerator;
   
   private String genStateIdConstants(final ExpandedActorClass xpac) {
     final ActorClass ac = xpac.getActorClass();
@@ -278,7 +278,7 @@ public class GenericStateMachineGenerator {
               {
                 if (hasArgs) {
                   _builder.append("InterfaceItemBase ifitem");
-                  String _generateArgumentList = this.languageGen.generateArgumentList(xpac, tr);
+                  String _generateArgumentList = this.transitionChainGenerator.generateArgumentList(xpac, tr);
                   _builder.append(_generateArgumentList, "");
                 }
               }
@@ -446,7 +446,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          String _generateExecuteChain = this.languageGen.generateExecuteChain(xpac, tc);
+          String _generateExecuteChain = this.transitionChainGenerator.generateExecuteChain(xpac, tc);
           _builder.append(_generateExecuteChain, "			");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
