@@ -111,10 +111,13 @@ public class MessageServiceController {
 	 * ! not threadsafe !
 	 */
 	public void waitTerminate() {
-		for (MessageService msgSvc : messageServiceList){
+		for (MessageService msgSvc : messageServiceList) {
 			try {
-				msgSvc.join();
-				} 
+				msgSvc.join(1000);	// wait at most 1000ms
+				if (msgSvc.isAlive())
+					System.out.println("### Message Service "
+							+ msgSvc.getName() + " could not be stopped");
+			}
 			catch (InterruptedException e1) {
 			}
 		}
