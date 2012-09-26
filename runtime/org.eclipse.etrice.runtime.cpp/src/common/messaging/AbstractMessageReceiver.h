@@ -21,7 +21,7 @@ public:
 	Address getAddress() const {
 		return m_address;
 	}
-	virtual ~AbstractMessageReceiver();
+	virtual ~AbstractMessageReceiver() {};
 
 protected:
 	AbstractMessageReceiver(IRTObject* parent, Address address, std::string name)

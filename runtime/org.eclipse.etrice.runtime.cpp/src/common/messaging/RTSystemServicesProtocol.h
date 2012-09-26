@@ -130,7 +130,7 @@ public:
 	public:
 		//TODO: data type of addr and peerAddress
 		RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor, IRTObject* parent, std::string name, int localId,
-											 const std::vector<Address>& addr, const std::vector<Address> peerAddress);
+											 const std::vector<Address>& addr, const std::vector<Address>& peerAddress);
 
 		int getReplication() const { return m_replication; } ;
 		RTSystemServicesProtocolConjPort& get(int i) { return m_ports.at(i); };

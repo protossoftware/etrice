@@ -25,7 +25,7 @@ public:
 	std::string toString();
 	std::string getClassName() const {	return m_className;	}
 	void setClassName(std::string className) {		m_className = className;	}
-	Address getAddress() const {
+	virtual Address getAddress() const {
 		// TODO: Actor should have its own address for services and debugging
 		return Address(0,0,0);
 	}
@@ -44,7 +44,7 @@ public:
 	void startUser() {	}
 	void stopUser() {	}
 	void destroyUser() {	}
-	void receive(Message msg) {	}
+	virtual void receive(Message* msg) {	}
 
 	int getState() const {	return m_state; 	}
 	MessageService* getMsgsvc() const {	return m_ownMsgsvc; 	}
@@ -61,7 +61,7 @@ protected:
 	int m_state;
 	RTSystemServicesProtocolPort* m_RTSystemPort;
 
-	bool handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data);
+	virtual bool handleSystemEvent(const InterfaceItemBase& ifitem, int evt, void* generic_data);
 private:
 	std::string m_className;
 	Address m_ownAddr;

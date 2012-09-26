@@ -8,7 +8,6 @@
 #ifndef IEVENTRECEIVER_H_
 #define IEVENTRECEIVER_H_
 
-#include "platforms/generic/etDatatypes.h"
 #include "common/messaging/IRTObject.h"
 
 namespace etRuntime {
@@ -19,7 +18,7 @@ public:
 	IEventReceiver();
 	virtual ~IEventReceiver();
 
-	virtual void receiveEvent(const InterfaceItemBase& ifitem, etInt16 evt, void* data) = 0;
+	virtual void receiveEvent(const InterfaceItemBase& ifitem, int evt, void* data) = 0;
 
 };
 

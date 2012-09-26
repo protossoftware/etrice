@@ -28,7 +28,7 @@ ActorClassBase::~ActorClassBase() {
 	m_RTSystemPort = 0;
 }
 
-bool ActorClassBase::handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data) {
+bool ActorClassBase::handleSystemEvent(const InterfaceItemBase& ifitem, int evt, void* generic_data) {
 	if (ifitem.getLocalId() != 0) {
 		return false;
 	}

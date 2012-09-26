@@ -160,7 +160,7 @@ void RTSystemServicesProtocolConjPort::stopDebugging() {
 
 //TODO: data type of addr and peerAddress
 RTSystemServicesProtocolConjPortRepl::
-RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, std::string name, int localId, const std::vector<Address>& addr, const std::vector<Address> peerAddress)
+RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, std::string name, int localId, const std::vector<Address>& addr, const std::vector<Address>& peerAddress)
 : m_replication(addr.size()),
   m_ports()
 {

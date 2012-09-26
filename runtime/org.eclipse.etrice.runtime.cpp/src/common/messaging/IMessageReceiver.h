@@ -19,9 +19,9 @@ public:
 	IMessageReceiver();
 	virtual ~IMessageReceiver();
 
-	virtual void receive(Message* msg);
-	virtual Address getAddress();
-	virtual bool isMsgService() { return false;};
+	virtual void receive(Message* msg) = 0;
+	virtual Address getAddress() const = 0;
+	virtual bool isMsgService() const { return false;};
 
 };
 
