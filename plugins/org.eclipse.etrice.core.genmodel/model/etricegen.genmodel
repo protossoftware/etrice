@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=""
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2011 protos software gmbh (http://www.protos.de).&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; CONTRIBUTORS:&#xD;&#xA; &#x9;&#x9;Henrik Rentz-Reichert (initial contribution)&#xD;&#xA; "
     modelDirectory="/org.eclipse.etrice.core.genmodel/src" editDirectory="/org.eclipse.etrice.core.genmodel.edit/src"
     editorDirectory="/org.eclipse.etrice.core.genmodel.editor/src" modelPluginID="org.eclipse.etrice.core.genmodel"
     modelName="eTriceGen" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
@@ -66,6 +65,7 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ActorInstance/unindexedName"/>
     </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//InterfaceItemInstance">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference etricegen.ecore#//InterfaceItemInstance/protocol"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//InterfaceItemInstance/peers"/>
       <genOperations ecoreOperation="etricegen.ecore#//InterfaceItemInstance/isReplicated"/>
       <genOperations ecoreOperation="etricegen.ecore#//InterfaceItemInstance/isSimple"/>
@@ -79,6 +79,7 @@
     </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//BindingInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//BindingInstance/ports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//BindingInstance/binding"/>
     </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//SAPInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//SAPInstance/sap"/>
@@ -106,6 +107,7 @@
     <genClasses ecoreClass="etricegen.ecore#//TransitionChain">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/transition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//TransitionChain/skipEntry"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/data"/>
       <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/getStateContext"/>
       <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/isHandler"/>
       <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/genExecuteChain">
@@ -116,6 +118,7 @@
     <genClasses image="false" ecoreClass="etricegen.ecore#//IDiagnostician"/>
     <genClasses ecoreClass="etricegen.ecore#//ExpandedActorClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/actorClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/stateMachine"/>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/prepare">
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/prepare/validator"/>
       </genOperations>
@@ -130,9 +133,6 @@
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getInterfaceItemLocalId/ifitem"/>
       </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/hasStateMachine"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getCode">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getCode/code"/>
-      </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName">
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName/mif"/>
       </genOperations>
@@ -167,6 +167,20 @@
       </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getDefaultBranch">
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getDefaultBranch/out"/>
+      </genOperations>
+      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getOrig">
+        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getOrig/copy"/>
+      </genOperations>
+      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getData">
+        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getData/trans"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="etricegen.ecore#//ExpandedRefinedState">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedEntry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedExit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedDo"/>
+      <genOperations ecoreOperation="etricegen.ecore#//ExpandedRefinedState/init">
+        <genParameters ecoreParameter="etricegen.ecore#//ExpandedRefinedState/init/rs"/>
       </genOperations>
     </genClasses>
   </genPackages>
