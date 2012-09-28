@@ -3,6 +3,9 @@
 	Ant makefile for building and running of tests.
 	This includes invocation of the Java code generator and conversion of the etunit
 	results into xunit xml.
+
+	To work locally you should define in your environment
+	ETRICE_TARGET_PLATFORM=path to the eclipse folder of your Juno installation
 	
 	@author Henrik Rentz-Reichert
 -->
@@ -24,11 +27,11 @@
 	</target>
 
 	<!--
-		set_tp: get the target.platform property from the environment var TARGET_PLATFORM if not set already
+		set_tp: get the target.platform property from the environment var ETRICE_TARGET_PLATFORM if not set already
 	-->
 	<target name="set_tp" unless="target.platform">
 		<echo>using local target platform</echo>
-		<property name="target.platform" value="${env.TARGET_PLATFORM}"/>
+		<property name="target.platform" value="${env.ETRICE_TARGET_PLATFORM}"/>
 	</target>
 
 	<!--
@@ -79,9 +82,9 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
 			<fileset dir="${target.platform}/plugins/">
-				<include name="org.eclipse.emf.ecore_2.8.0*.jar" />
-				<include name="org.eclipse.emf.common_2.8.0*.jar" />
-				<include name="org.eclipse.emf.ecore.xmi_2.8.0*.jar" />
+				<include name="org.eclipse.emf.ecore_2.8*.jar" />
+				<include name="org.eclipse.emf.common_2.8*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8*.jar" />
 				<include name="org.eclipse.xtext_2.*.jar" />
 				<include name="com.google.inject_*.jar" />
 				<include name="com.google.guava_10.*.jar" />
@@ -89,9 +92,9 @@
 				<include name="org.eclipse.xtext.util_2.*.jar" />
 				<include name="org.eclipse.xtext.xtend2.lib_2.*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
-				<include name="org.apache.log4j_1.2.15*.jar" />
-				<include name="org.antlr.runtime_3.2.0*.jar" />
-				<include name="javax.inject_1.0.0*.jar" />
+				<include name="org.apache.log4j_1.2*.jar" />
+				<include name="org.antlr.runtime_3.2*.jar" />
+				<include name="javax.inject_1.0*.jar" />
 			</fileset>
 		</path>
 
