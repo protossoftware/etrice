@@ -172,7 +172,7 @@ class ProcedureHelpers {
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
-				«operationSignature(operation, classname, true)»;
+				«operationSignature(operation, classname)»;
 			«ENDIF»
 		«ENDFOR»
 		'''
@@ -183,7 +183,7 @@ class ProcedureHelpers {
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«IF !(languageExt.usesInheritance && operation.constructor)»
-				«operationSignature(operation, classname, false)» {
+				«operationSignature(operation, classname)» {
 					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 				}
 			«ENDIF»
@@ -199,13 +199,13 @@ class ProcedureHelpers {
 		languageExt.destructorName(classname)+"()"
 	}
 	
-	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
+	def private operationSignature(Operation operation, String classname) {
 		if (operation.constructor)
-			classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType, isDeclaration)
+			classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType)
 		else if (operation.destructor)
-			classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType, isDeclaration)
+			classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType)
 		else
-			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype), isDeclaration)
+			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype))
 	}
 
 	def private dataTypeToString(RefableType type) {
@@ -226,7 +226,7 @@ class ProcedureHelpers {
 		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName»«IF argument.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «argument.name»«ENDFOR»'''
 	}
 	
-	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType, boolean isDeclaration){
+	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType){
 		'''«languageExt.accessLevelPublic()»«returnType» «languageExt.memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
 	}
 	

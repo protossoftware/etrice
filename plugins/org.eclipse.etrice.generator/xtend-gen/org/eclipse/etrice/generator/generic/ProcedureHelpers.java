@@ -482,7 +482,7 @@ public class ProcedureHelpers {
           }
           boolean _not = (!_and);
           if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname, true);
+            CharSequence _operationSignature = this.operationSignature(operation, classname);
             _builder.append(_operationSignature, "");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
@@ -510,7 +510,7 @@ public class ProcedureHelpers {
           }
           boolean _not = (!_and);
           if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname, false);
+            CharSequence _operationSignature = this.operationSignature(operation, classname);
             _builder.append(_operationSignature, "");
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
@@ -530,41 +530,10 @@ public class ProcedureHelpers {
   }
   
   public CharSequence operationsImplementation(final ActorClass ac) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/*--------------------- operations ---------------------*/");
-    _builder.newLine();
-    {
-      EList<StandardOperation> _operations = ac.getOperations();
-      for(final StandardOperation operation : _operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            String _name = ac.getName();
-            CharSequence _operationSignature = this.operationSignature(operation, _name, false);
-            _builder.append(_operationSignature, "");
-            _builder.append(" {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            AbstractGenerator _instance = AbstractGenerator.getInstance();
-            DetailCode _detailCode = operation.getDetailCode();
-            String _translatedCode = _instance.getTranslatedCode(_detailCode);
-            _builder.append(_translatedCode, "	");
-            _builder.newLineIfNotEmpty();
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      }
-    }
-    return _builder;
+    EList<StandardOperation> _operations = ac.getOperations();
+    String _name = ac.getName();
+    CharSequence _operationsImplementation = this.operationsImplementation(_operations, _name);
+    return _operationsImplementation;
   }
   
   public String destructorCall(final String classname) {
@@ -573,13 +542,13 @@ public class ProcedureHelpers {
     return _plus;
   }
   
-  private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
+  private CharSequence operationSignature(final Operation operation, final String classname) {
     CharSequence _xifexpression = null;
     boolean _isConstructor = RoomHelpers.isConstructor(operation);
     if (_isConstructor) {
       String _constructorName = this.languageExt.constructorName(classname);
       String _constructorReturnType = this.languageExt.constructorReturnType();
-      CharSequence _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType, isDeclaration);
+      CharSequence _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
       _xifexpression = _classOperationSignature;
     } else {
       CharSequence _xifexpression_1 = null;
@@ -587,7 +556,7 @@ public class ProcedureHelpers {
       if (_isDestructor) {
         String _destructorName = this.languageExt.destructorName(classname);
         String _destructorReturnType = this.languageExt.destructorReturnType();
-        CharSequence _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType, isDeclaration);
+        CharSequence _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
         _xifexpression_1 = _classOperationSignature_1;
       } else {
         String _name = operation.getName();
@@ -596,7 +565,7 @@ public class ProcedureHelpers {
         String _string = _BuildArgumentList.toString();
         RefableType _returntype = operation.getReturntype();
         String _dataTypeToString = this.dataTypeToString(_returntype);
-        CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString, isDeclaration);
+        CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
         _xifexpression_1 = _classOperationSignature_2;
       }
       _xifexpression = _xifexpression_1;
@@ -661,7 +630,7 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType, final boolean isDeclaration) {
+  private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
