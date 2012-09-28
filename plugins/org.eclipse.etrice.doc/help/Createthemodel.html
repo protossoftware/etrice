@@ -1,0 +1,274 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create the model</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="TutorialRemoveCCommentC.html" title="Tutorial Remove C-Comment ( C )">
+<link rel="prev" href="Createyourowndatatype.html" title="Create your own data type">
+<link rel="next" href="Generatebuildandrunthemodel.html" title="Generate, build and run the model">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Create the model</h1>
+<div class="section" title="Create the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createthemodel"></a>Create the model</h2>
+</div>
+</div>
+</div>
+<p>Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.</p>
+<p>The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. </p>
+<p>Remember the logical steps: 
+				- create the model by the help of content assist (CTRL Space)
+				- name the model, subsystem and top level actor
+				- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+				- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+				- create the state machines</p>
+<p>Try to create the model by yourself and take the following solution as an example.</p>
+<p>Structure:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC04.png"></div>
+<p>
+			
+</p>
+<p>File reader FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC05.png"></div>
+<p>
+			
+</p>
+<p>Parser FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC06.png"></div>
+<p>
+			
+</p>
+<p>Complete model:</p>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;RemoveComment&nbsp;{<br>
+	import&nbsp;room.basic.types.*&nbsp;from&nbsp;"Types.room"<br>
+	SubSystemClass&nbsp;RemoveCommentSubSys&nbsp;{<br>
+		ActorRef&nbsp;Topref:ATop&nbsp;<br>
+	}<br>
+	ActorClass&nbsp;ATop&nbsp;{<br>
+		Structure&nbsp;{<br>
+			ActorRef&nbsp;reader:&nbsp;AFileReader<br>
+			ActorRef&nbsp;cParser:&nbsp;ACParser<br>
+			Binding&nbsp;reader.outPort&nbsp;and&nbsp;cParser.readerPort<br>
+		}<br>
+		Behavior&nbsp;{&nbsp;}<br>
+	}<br>
+	ActorClass&nbsp;AFileReader{<br>
+		Interface&nbsp;{<br>
+			Port&nbsp;outPort:&nbsp;FileReaderProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			usercode3{"#include&nbsp;&lt;stdio.h&gt;"<br>
+			}<br>
+			external&nbsp;Port&nbsp;outPort<br>
+			Attribute&nbsp;f:file&nbsp;ref<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;reading&nbsp;{<br>
+					action&nbsp;{<br>
+						"if&nbsp;((f&nbsp;=&nbsp;fopen(\"test.txt\",\"r\"))&nbsp;!=&nbsp;0)&nbsp;{"<br>
+						"\tprintf(\"file&nbsp;open&nbsp;ok&nbsp;!\\r\\n\");"<br>
+						"\t}"<br>
+						"\telse&nbsp;{"<br>
+						"\tprintf(\"file&nbsp;not&nbsp;found&nbsp;!\\r\\n\");"<br>
+						"\tSubSysClass_shutdown();"<br>
+						"\t}"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr0:&nbsp;reading&nbsp;-&gt;&nbsp;reading&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;getNextChar:&nbsp;outPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"int8&nbsp;c;"<br>
+						"if&nbsp;((c=fgetc(f))&nbsp;!=&nbsp;EOF)&nbsp;{"<br>
+						"\toutPort.nextChar(c);"<br>
+						"\t}"<br>
+						"\telse&nbsp;{"<br>
+						"\tfclose(f);"<br>
+						"\tprintf(\"file&nbsp;closed&nbsp;!\\r\\n\");"<br>
+						"\tSubSysClass_shutdown();"<br>
+						"\t}"<br>
+					}<br>
+				}<br>
+				State&nbsp;reading<br>
+			}<br>
+		}<br>
+	}<br>
+	ActorClass&nbsp;ACParser{<br>
+		Interface&nbsp;{<br>
+			conjugated&nbsp;Port&nbsp;readerPort:&nbsp;FileReaderProtocol<br>
+		}<br>
+		Structure&nbsp;{<br>
+			external&nbsp;Port&nbsp;readerPort<br>
+		}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr0:&nbsp;code&nbsp;-&gt;&nbsp;cp&nbsp;cp0&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr1:&nbsp;cp&nbsp;cp0&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"printf(\"%c\",c);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr2:&nbsp;cp&nbsp;cp0&nbsp;-&gt;&nbsp;firstSlash&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr3:&nbsp;firstSlash&nbsp;-&gt;&nbsp;cp&nbsp;cp1&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr4:&nbsp;cp&nbsp;cp1&nbsp;-&gt;&nbsp;cp&nbsp;cp4<br>
+				Transition&nbsp;tr5:&nbsp;cp&nbsp;cp1&nbsp;-&gt;&nbsp;blockComment&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'*\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr6:&nbsp;blockComment&nbsp;-&gt;&nbsp;cp&nbsp;cp2&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr7:&nbsp;cp&nbsp;cp2&nbsp;-&gt;&nbsp;blockComment<br>
+				Transition&nbsp;tr8:&nbsp;cp&nbsp;cp2&nbsp;-&gt;&nbsp;firstStar&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'*\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr9:&nbsp;firstStar&nbsp;-&gt;&nbsp;cp&nbsp;cp3&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr10:&nbsp;cp&nbsp;cp3&nbsp;-&gt;&nbsp;blockComment<br>
+				Transition&nbsp;tr11:&nbsp;cp&nbsp;cp3&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr12:&nbsp;cp&nbsp;cp4&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					action&nbsp;{<br>
+						"printf(\"%c%c\",\'/\',c);"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr13:&nbsp;cp&nbsp;cp4&nbsp;-&gt;&nbsp;lineComment&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'/\'"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr14:&nbsp;cp&nbsp;cp5&nbsp;-&gt;&nbsp;lineComment<br>
+				Transition&nbsp;tr15:&nbsp;lineComment&nbsp;-&gt;&nbsp;cp&nbsp;cp5&nbsp;{<br>
+					triggers&nbsp;{<br>
+						&lt;nextChar:&nbsp;readerPort&gt;<br>
+					}<br>
+					action&nbsp;{<br>
+						"readerPort.getNextChar();"<br>
+					}<br>
+				}<br>
+				Transition&nbsp;tr16:&nbsp;cp&nbsp;cp5&nbsp;-&gt;&nbsp;code&nbsp;{<br>
+					cond&nbsp;{<br>
+						"c==\'\\n\'"<br>
+					}<br>
+				}<br>
+				ChoicePoint&nbsp;cp0<br>
+				ChoicePoint&nbsp;cp1<br>
+				ChoicePoint&nbsp;cp2<br>
+				ChoicePoint&nbsp;cp3<br>
+				ChoicePoint&nbsp;cp4<br>
+				ChoicePoint&nbsp;cp5<br>
+				State&nbsp;code<br>
+				State&nbsp;firstSlash<br>
+				State&nbsp;blockComment<br>
+				State&nbsp;firstStar<br>
+				State&nbsp;lineComment<br>
+			}<br>
+		}<br>
+	}<br>
+
+<br>
+	ProtocolClass&nbsp;FileReaderProtocol&nbsp;{<br>
+		incoming&nbsp;{<br>
+			Message&nbsp;getNextChar()<br>
+		}<br>
+		outgoing&nbsp;{<br>
+			Message&nbsp;nextChar(c:char)<br>
+		}<br>
+	}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>Take a look at the file attribute of the file reader. </p>
+<div class="literallayout">
+<p>
+<code class="code">Attribute&nbsp;f:file&nbsp;ref<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>fopen</em></span> expects a 
+				<span class="emphasis"><em>FILE *</em></span>. 
+				<span class="emphasis"><em>f:file ref</em></span> declares a variable 
+				<span class="emphasis"><em>f</em></span> from type reference to 
+				<span class="emphasis"><em>file</em></span>, which is a pointer to 
+				<span class="emphasis"><em>FILE</em></span>.
+			</p>
+</div>
+</body>
+</html>

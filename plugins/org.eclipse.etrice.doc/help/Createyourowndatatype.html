@@ -1,0 +1,74 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create your own data type</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="TutorialRemoveCCommentC.html" title="Tutorial Remove C-Comment ( C )">
+<link rel="prev" href="Createanewmodelfromscratch5.html" title="Create a new model from scratch">
+<link rel="next" href="Createthemodel.html" title="Create the model">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Create your own data type</h1>
+<div class="section" title="Create your own data type">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createyourowndatatype"></a>Create your own data type</h2>
+</div>
+</div>
+</div>
+<p>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
+				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
+				<span class="emphasis"><em>Types.room</em></span> from 
+				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> to your model folder.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC03.png"></div>
+<p>
+			
+</p>
+<p>Open 
+				<span class="emphasis"><em>Types.room</em></span> and take a look at the declaration of 
+				<span class="emphasis"><em>string</em></span> (last line) which is not a basic C type.
+			</p>
+<p>
+				
+<span class="emphasis"><em>PrimitiveType string:ptCharacter -&gt; charPtr default "0"</em></span>
+			
+</p>
+<p>With this declaration, you make the 
+				<span class="emphasis"><em>string</em></span> keyword available on model level as a primitive type. This type will be translated to 
+				<span class="emphasis"><em>charPtr</em></span> in your C sources. 
+				<span class="emphasis"><em>charPtr</em></span> is defined in 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. This header file is platform specific (
+				<span class="emphasis"><em>generic</em></span>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
+			</p>
+<p>Add the following line in 
+				<span class="emphasis"><em>Types.room</em></span>:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>FILE</em></span> is the native type for MinGW. Therefore you don&acute;t need a mapping within 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. If your model should be portable across different platforms you should not take this shortcut.
+			</p>
+</div>
+</body>
+</html>

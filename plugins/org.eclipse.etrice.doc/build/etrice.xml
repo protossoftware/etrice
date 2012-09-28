@@ -1958,13 +1958,12 @@ carLights.setState(TrafficLight3.OFF);
 			<para>Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
 				Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
 				Recognize the C specific parts:
-				- Import CTypes instead of JavaTypes
 				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 				- The application must be shutdown on model level (see also 
 				<emphasis>etRuntimeConfig.h</emphasis>).  
 			</para>
 			<literallayout><code>RoomModel HelloWorldCModel {
-	import room.basic.types.c.* from "../../org.eclipse.etrice.modellib.c/model/CTypes.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
 	SubSystemClass HelloWorldCSubSysClass {
 		ActorRef HelloETriceTopRef:AHelloWorldCTop 
 	}
@@ -2190,8 +2189,8 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Createyourowndatatype">
 			<title>Create your own data type</title>
 			<para>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
-				<emphasis>FILE</emphasis>. To make this type available on the model level, you have to declare the type in CTypes.room. To not interfere with other models, make a copy of 
-				<emphasis>CTypes.room</emphasis> from 
+				<emphasis>FILE</emphasis>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
+				<emphasis>Types.room</emphasis> from 
 				<emphasis>org.eclipse.modellib.c</emphasis> to your model folder.
 			</para>
 			<para>
@@ -2202,7 +2201,7 @@ carLights.setState(TrafficLight3.OFF);
 				</mediaobject>
 			</para>
 			<para>Open 
-				<emphasis>Ctypes.room</emphasis> and take a look at the declaration of 
+				<emphasis>Types.room</emphasis> and take a look at the declaration of 
 				<emphasis>string</emphasis> (last line) which is not a basic C type.
 			</para>
 			<para>
@@ -2216,7 +2215,7 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis>generic</emphasis>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 			</para>
 			<para>Add the following line in 
-				<emphasis>CTypes.room</emphasis>:
+				<emphasis>Types.room</emphasis>:
 			</para>
 			<literallayout><code>PrimitiveType file:ptInteger -&gt; FILE default "0"
 </code></literallayout>
@@ -2265,7 +2264,7 @@ carLights.setState(TrafficLight3.OFF);
 			</para>
 			<para>Complete model:</para>
 			<literallayout><code>RoomModel RemoveComment {
-	import room.basic.types.c.* from "CTypes.room"
+	import room.basic.types.* from "Types.room"
 	SubSystemClass RemoveCommentSubSys {
 		ActorRef Topref:ATop 
 	}

@@ -23,7 +23,6 @@
 <p>Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
 				Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
 				Recognize the C specific parts:
-				- Import CTypes instead of JavaTypes
 				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
 				- The application must be shutdown on model level (see also 
 				<span class="emphasis"><em>etRuntimeConfig.h</em></span>).  
@@ -31,7 +30,7 @@
 <div class="literallayout">
 <p>
 <code class="code">RoomModel&nbsp;HelloWorldCModel&nbsp;{<br>
-	import&nbsp;room.basic.types.c.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib.c/model/CTypes.room"<br>
+	import&nbsp;room.basic.types.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib.c/model/Types.room"<br>
 	SubSystemClass&nbsp;HelloWorldCSubSysClass&nbsp;{<br>
 		ActorRef&nbsp;HelloETriceTopRef:AHelloWorldCTop&nbsp;<br>
 	}<br>
