@@ -16,9 +16,9 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
 			<fileset dir="${target.platform}/plugins/">
-				<include name="org.eclipse.emf.ecore_2.8.0*.jar" />
-				<include name="org.eclipse.emf.common_2.8.0*.jar" />
-				<include name="org.eclipse.emf.ecore.xmi_2.8.0*.jar" />
+				<include name="org.eclipse.emf.ecore_2.8*.jar" />
+				<include name="org.eclipse.emf.common_2.8*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8*.jar" />
 				<include name="org.eclipse.xtext_2.*.jar" />
 				<include name="com.google.inject_*.jar" />
 				<include name="com.google.guava_10.*.jar" />
@@ -26,9 +26,9 @@
 				<include name="org.eclipse.xtext.util_2.*.jar" />
 				<include name="org.eclipse.xtext.xtend2.lib_2.*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
-				<include name="org.apache.log4j_1.2.15*.jar" />
-				<include name="org.antlr.runtime_3.2.0*.jar" />
-				<include name="javax.inject_1.0.0*.jar" />
+				<include name="org.apache.log4j_1.2*.jar" />
+				<include name="org.antlr.runtime_3.2*.jar" />
+				<include name="javax.inject_1.0*.jar" />
 			</fileset>
 		</path>
 
