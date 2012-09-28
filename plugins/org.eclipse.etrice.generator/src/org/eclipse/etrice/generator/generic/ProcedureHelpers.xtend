@@ -192,16 +192,7 @@ class ProcedureHelpers {
 	}
 
 	def operationsImplementation(ActorClass ac) {
-	'''
-		/*--------------------- operations ---------------------*/
-		«FOR operation : ac.operations»
-			«IF !(languageExt.usesInheritance && operation.constructor)»
-				«operationSignature(operation, ac.name, false)» {
-					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
-				}
-			«ENDIF»
-		«ENDFOR»
-		'''
+		operationsImplementation(ac.operations, ac.name)
 	}
 	
 	def destructorCall(String classname) {
