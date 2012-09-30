@@ -1,0 +1,178 @@
+RoomModel RemoveComment {
+	import room.basic.types.* from "Types.room"
+	SubSystemClass RemoveCommentSubSys {
+		ActorRef Topref:ATop 
+	}
+	ActorClass ATop {
+		Structure {
+			ActorRef reader: AFileReader
+			ActorRef cParser: ACParser
+			Binding reader.outPort and cParser.readerPort
+		}
+		Behavior { }
+	}
+	ActorClass AFileReader{
+		Interface {
+			Port outPort: FileReaderProtocol
+		}
+		Structure {
+			usercode3{"#include <stdio.h>"
+			}
+			external Port outPort
+			Attribute f:file ref
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> reading {
+					action {
+						"if ((f = fopen(\"test.txt\",\"r\")) != 0) {"
+						"\tprintf(\"file open ok !\\r\\n\");"
+						"\t}"
+						"\telse {"
+						"\tprintf(\"file not found !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				Transition tr0: reading -> reading {
+					triggers {
+						<getNextChar: outPort>
+					}
+					action {
+						"int8 c;"
+						"if ((c=fgetc(f)) != EOF) {"
+						"\toutPort.nextChar(c);"
+						"\t}"
+						"\telse {"
+						"\tfclose(f);"
+						"\tprintf(\"file closed !\\r\\n\");"
+						"\tSubSysClass_shutdown();"
+						"\t}"
+					}
+				}
+				State reading
+			}
+		}
+	}
+	ActorClass ACParser{
+		Interface {
+			conjugated Port readerPort: FileReaderProtocol
+		}
+		Structure {
+			external Port readerPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> code {
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr0: code -> cp cp0 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr1: cp cp0 -> code {
+					action {
+						"printf(\"%c\",c);"
+					}
+				}
+				Transition tr2: cp cp0 -> firstSlash {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr3: firstSlash -> cp cp1 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr4: cp cp1 -> cp cp4
+				Transition tr5: cp cp1 -> blockComment {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr6: blockComment -> cp cp2 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr7: cp cp2 -> blockComment
+				Transition tr8: cp cp2 -> firstStar {
+					cond {
+						"c==\'*\'"
+					}
+				}
+				Transition tr9: firstStar -> cp cp3 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr10: cp cp3 -> blockComment
+				Transition tr11: cp cp3 -> code {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr12: cp cp4 -> code {
+					action {
+						"printf(\"%c%c\",\'/\',c);"
+					}
+				}
+				Transition tr13: cp cp4 -> lineComment {
+					cond {
+						"c==\'/\'"
+					}
+				}
+				Transition tr14: cp cp5 -> lineComment
+				Transition tr15: lineComment -> cp cp5 {
+					triggers {
+						<nextChar: readerPort>
+					}
+					action {
+						"readerPort.getNextChar();"
+					}
+				}
+				Transition tr16: cp cp5 -> code {
+					cond {
+						"c==\'\\n\'"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				ChoicePoint cp2
+				ChoicePoint cp3
+				ChoicePoint cp4
+				ChoicePoint cp5
+				State code
+				State firstSlash
+				State blockComment
+				State firstStar
+				State lineComment
+			}
+		}
+	}
+
+	ProtocolClass FileReaderProtocol {
+		incoming {
+			Message getNextChar()
+		}
+		outgoing {
+			Message nextChar(c:char)
+		}
+	}
+}
