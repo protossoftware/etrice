@@ -1,0 +1,218 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Introduction to the ROOM Language</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="index.html" title="eTrice User Guide">
+<link rel="prev" href="ReductionofComplexity.html" title="Reduction of Complexity">
+<link rel="next" href="BasicConcepts.html" title="Basic Concepts">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Introduction to the ROOM Language</h1>
+<div class="chapter" title="Introduction to the ROOM Language">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="IntroductiontotheROOMLanguage"></a>Introduction to the ROOM Language</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="IntroductiontotheROOMLanguage.html#ScopeofROOM">Scope of ROOM</a></span>
+</dt>
+<dt>
+<span class="section"><a href="BasicConcepts.html">Basic Concepts</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ExecutionModels.html">Execution Models</a></span>
+</dt>
+</dl>
+</div>
+<div class="section" title="Scope of ROOM">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="ScopeofROOM"></a>Scope of ROOM</h2>
+</div>
+</div>
+</div>
+<p>This chapter will give a rough overview of what ROOM (
+				<span class="bold"><strong>R</strong></span> eal time 
+				<span class="bold"><strong>O</strong></span> bject 
+				<span class="bold"><strong>O</strong></span> riented 
+				<span class="bold"><strong>M</strong></span> odeling) is and what it is good for. It will try to answer the following questions:
+			</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Where does it come from?</p>
+</li>
+<li class="listitem">
+<p>Which kind of SW-Systems will be addressed?</p>
+</li>
+<li class="listitem">
+<p>What is the relation between OOP and ROOM?</p>
+</li>
+<li class="listitem">
+<p>What are the benefits of ROOM?</p>
+</li>
+<li class="listitem">
+<p>Which consequences must be taken into account?</p>
+</li>
+</ul>
+</div>
+<div class="section" title="Where does it come from?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Wheredoesitcomefrom"></a>Where does it come from?</h3>
+</div>
+</div>
+</div>
+<p>Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. </p>
+<p>Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book 
+					<span class="bold"><strong>Real-Time Object-Oriented Modeling</strong></span>. The company 
+					<span class="emphasis"><em>object time</em></span> &trade; developed a ROOM tool which was taken over by 
+					<span class="emphasis"><em>Rational SW</em></span> &trade; and later on by 
+					<span class="emphasis"><em>IBM</em></span> &trade;. 
+					The company 
+					<span class="emphasis"><em>Protos Software Gmbh</em></span> &trade; also developed a ROOM tool called 
+					<span class="emphasis"><em>Trice</em></span> &trade; for control software for production machines and automotive systems. 
+					<span class="emphasis"><em>Trice</em></span> &trade; is the predecessor of eTrice (see Introduction to eTrice). 
+				</p>
+<p>From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.</p>
+</div>
+<div class="section" title="Which kind of SW-Systems will be addressed?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhichkindofSWSystemswillbeaddressed"></a>Which kind of SW-Systems will be addressed?</h3>
+</div>
+</div>
+</div>
+<p>As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a 
+					<span class="bold"><strong>real time system</strong></span>? ROOM defines a set of properties which are typical for a real time system. These properties are:
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Timeliness</p>
+</li>
+<li class="listitem">
+<p>Dynamic internal structure</p>
+</li>
+<li class="listitem">
+<p>Reactiveness</p>
+</li>
+<li class="listitem">
+<p>Concurrency</p>
+</li>
+<li class="listitem">
+<p>Distribution</p>
+</li>
+<li class="listitem">
+<p>Reliability</p>
+</li>
+</ul>
+</div>
+<p>Each of these properties has potential to make SW development complex. If a given system can be characterized with a combination of or all of these properties, ROOM might be applied to such a system.  </p>
+<p>As an example take a look at a washing machine. The system has to react on user interactions, has to handle some error conditions like a closed water tap or a defective lye pump. It has to react simultaneously to all these inputs. It has to close the water valve in a certain time to avoid flooding the basement. 
+					So, the system can be characterized as timely, concurrent and reactive. As long as the washing machine does not transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions are running on a single micro controller the (SW)-system is not distributed. 
+					ROOM fits perfect to such a system.</p>
+<p>A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID controller) cannot be characterized with any of the above mentioned properties. However, in the real world most of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for example an actor provides a 
+					<span class="bold"><strong>run to completion</strong></span> context for calculating an image processing algorithm or a PID controller.  
+				</p>
+</div>
+<div class="section" title="What is the relation between OOP and ROOM?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhatistherelationbetweenOOPandROOM"></a>What is the relation between OOP and ROOM?</h3>
+</div>
+</div>
+</div>
+<p>The relation between classical object oriented programming and ROOM is comparable to the relation between assembler programming and C programming. It provides a shift of the object paradigm. As the picture shows, the classic object paradigm provides some kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provide the requested behavior to the user.   </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction01.png"></div>
+<p>
+				
+</p>
+<p>As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided by the underlying operating system and the user is responsible to avoid access violations by using those operating system mechanisms directly (semaphore, mutex).</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction02.png"></div>
+<p>
+				
+</p>
+<p>ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with 
+					<span class="bold"><strong>run to completion</strong></span> semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter 
+					<span class="bold"><strong>Run to completion</strong></span>). 
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/010-RoomIntroduction03.png"></div>
+<p>
+				
+</p>
+<p>This thinking of an object is much more general than the classic one.  </p>
+</div>
+<div class="section" title="What are the benefits of ROOM?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WhatarethebenefitsofROOM"></a>What are the benefits of ROOM?</h3>
+</div>
+</div>
+</div>
+<p>ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime environment.  </p>
+<p>In detail:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>ROOM models contain well defined interfaces (protocols), which makes it easy to reuse components in different applications or e.g. in a test harness. </p>
+</li>
+<li class="listitem">
+<p>Graphical modeling makes it easy to understand, maintain and share code with other developers</p>
+</li>
+<li class="listitem">
+<p>Higher abstraction in combination with automated code generation provides very efficient mechanisms to the developer. </p>
+</li>
+<li class="listitem">
+<p>ROOM provides graphical model execution, which makes it easy to understand the application or find defects in a very early phase. </p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Which consequences must be taken into account?">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Whichconsequencesmustbetakenintoaccount"></a>Which consequences must be taken into account?</h3>
+</div>
+</div>
+</div>
+<p>Generating code from models will introduce some overhead in terms of memory footprint as well as performance. For most systems the overhead will be negligible. However, the decision for using ROOM should be made explicitly and it is always a trade off between development costs, time to market and costs in terms of a little bit more of memory and performance. Thanks to the powerful component model, ROOM is especially well suited for the development of software product lines with their need for reusable core assets.  </p>
+<p>Care must be taken during the introduction of the new methodology. Due to the fact that ROOM provides a shift of the object paradigm, developers and teams need a phase of adaption. Every benefit comes at a price.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
