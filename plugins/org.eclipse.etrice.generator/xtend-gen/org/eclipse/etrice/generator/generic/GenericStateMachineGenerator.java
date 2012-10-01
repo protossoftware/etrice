@@ -27,10 +27,10 @@ import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TransitionChainGenerator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -49,7 +49,7 @@ public class GenericStateMachineGenerator {
   protected GenericProtocolClassGenerator pcGen;
   
   @Inject
-  protected AbstractTransitionChainGenerator languageGen;
+  protected TransitionChainGenerator transitionChainGenerator;
   
   private String genStateIdConstants(final ExpandedActorClass xpac) {
     final ActorClass ac = xpac.getActorClass();
@@ -100,7 +100,6 @@ public class GenericStateMachineGenerator {
   }
   
   private String genTransitionChainConstants(final ExpandedActorClass xpac) {
-    final ActorClass ac = xpac.getActorClass();
     EList<TransitionChain> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
@@ -139,7 +138,6 @@ public class GenericStateMachineGenerator {
   }
   
   private String genTriggerConstants(final ExpandedActorClass xpac) {
-    final ActorClass ac = xpac.getActorClass();
     EList<MessageFromIf> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
@@ -176,8 +174,6 @@ public class GenericStateMachineGenerator {
       final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
       ActorCommunicationType _commType_1 = ac.getCommType();
       final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
-      ActorCommunicationType _commType_2 = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;
@@ -282,7 +278,7 @@ public class GenericStateMachineGenerator {
               {
                 if (hasArgs) {
                   _builder.append("InterfaceItemBase ifitem");
-                  String _generateArgumentList = this.languageGen.generateArgumentList(xpac, tr);
+                  String _generateArgumentList = this.transitionChainGenerator.generateArgumentList(xpac, tr);
                   _builder.append(_generateArgumentList, "");
                 }
               }
@@ -450,7 +446,7 @@ public class GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          String _generateExecuteChain = this.languageGen.generateExecuteChain(xpac, tc);
+          String _generateExecuteChain = this.transitionChainGenerator.generateExecuteChain(xpac, tc);
           _builder.append(_generateExecuteChain, "			");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");

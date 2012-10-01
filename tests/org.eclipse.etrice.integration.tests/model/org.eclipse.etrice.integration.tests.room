@@ -1,7 +1,6 @@
 RoomModel org.eclipse.etrice.integration.tests {
 
-	import room.basic.service.timing.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/TimingService.room"
-	import room.basic.types.java.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/JavaTypes.room"
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/Types.room"
 
 	LogicalSystem SystemHFSMTest {
 		SubSystemRef subsystem : SubSystemHFSMTest
@@ -9,10 +8,6 @@ RoomModel org.eclipse.etrice.integration.tests {
 
 	SubSystemClass SubSystemHFSMTest {
 		ActorRef application : App_SubSystemHFSMTest
-		ActorRef services : ATimingService
-
-		LayerConnection ref application satisfied_by services.timer
-		LayerConnection ref application satisfied_by services.timeout
 	}
 
 	ActorClass a_HFSM_Tests {

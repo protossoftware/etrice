@@ -52,14 +52,17 @@ public class EtUnitReportConverter {
 	public static final String OPTION_COMBINED = "-combined";
 	public static final String OPTION_ONLY_COMBINED = "-only_combined";
 	public static final String OPTION_TEX_OUTPUT = "-tex";
+	public static final String OPTION_SUITE_NAME = "-suite";
 
 	private static void printUsage() {
-		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_TEX_OUTPUT+" <tex file>] <*"+ETU_EXTENSION+" files>\n"
+		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_TEX_OUTPUT+" <tex file>] ["+OPTION_SUITE_NAME+" <name>] <*"+ETU_EXTENSION+" files>\n"
 				+"    "+OPTION_COMBINED+" <combined file>: also save a combined result for all tests to the specified file\n"
 				+"    "+OPTION_ONLY_COMBINED+" <combined file>: don't create reports for every single test, only combined one to the specified file\n"
 				+"    "+OPTION_TEX_OUTPUT+" <tex file>: produce tex output to specified file\n"
+				+"    "+OPTION_SUITE_NAME+" <name>: replace the suite name in the result\n"
 			);
 	}
+	
 	/**
 	 * @param args
 	 */
@@ -67,8 +70,10 @@ public class EtUnitReportConverter {
 		
 		// check options and create file list
 		boolean combinedResults = false;
+		boolean replaceSuiteName = false;
 		boolean onlyCombinedResults = false;
 		String combinedFile = null;
+		String suiteName = null;
 		boolean texOutput = false;
 		String texFile = null;
 		ArrayList<String> files = new ArrayList<String>();
@@ -80,6 +85,17 @@ public class EtUnitReportConverter {
 				}
 				else {
 					System.err.println("Error: "+OPTION_COMBINED+" must be followed by filename");
+					printUsage();
+					return;
+				}
+			}
+			else if (args[i].equals(OPTION_SUITE_NAME)) {
+				replaceSuiteName = true;
+				if (++i<args.length) {
+					suiteName = args[i];
+				}
+				else {
+					System.err.println("Error: "+OPTION_SUITE_NAME+" must be followed by a suite name");
 					printUsage();
 					return;
 				}
@@ -136,8 +152,22 @@ public class EtUnitReportConverter {
 			File report = new File(file);
 			if (report.exists()) {
 				DocumentRoot root = createParseTree(report);
-				if (root!=null && !onlyCombinedResults) {
-					saveJUnitReport(root, report, rs);
+				if (root!=null && replaceSuiteName) {
+					if (root.getTestsuites()!=null) {
+						if (root.getTestsuites().getTestsuite().size()==1) {
+							root.getTestsuites().getTestsuite().get(0).setName(suiteName);
+						}
+						else {
+							int i=0;
+							for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+								suite.setName(suiteName+i);
+								++i;
+							}
+						}
+					}
+				}
+				if (root!=null) {
+					saveJUnitReport(root, report, rs, !onlyCombinedResults);
 				}
 			}
 			else {
@@ -159,7 +189,7 @@ public class EtUnitReportConverter {
 			
 			if (combinedResults) {
 				File report = new File(combinedFile);
-				saveJUnitReport(root, report, rs);
+				saveJUnitReport(root, report, rs, true);
 			}
 			if (texOutput) {
 				File report = new File(texFile);
@@ -184,18 +214,20 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	private static void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs) {
+	private static void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
 		URI uri = URI.createFileURI(report.toString());
 		uri = uri.trimFileExtension();
 		uri = uri.appendFileExtension("xml");
 		Resource resource = rs.createResource(uri);
 		resource.getContents().add(root);
-		try {
-			resource.save(Collections.EMPTY_MAP);
-			System.out.println("saved "+uri);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
+		if (save) {
+			try {
+				resource.save(Collections.EMPTY_MAP);
+				System.out.println("saved "+uri);
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
+			}
 		}
 	}
 

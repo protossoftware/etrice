@@ -7,21 +7,19 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 import org.eclipse.etrice.integration.HandlerTest.TestProtocol.*;
 
 /*--------------------- begin user code ---------------------*/
-import org.eclipse.etrice.integration.tests.helpers.*;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /*--------------------- end user code ---------------------*/
 
 
 public class HandlerUser extends ActorClassBase {
 
-	/*--------------------- begin user code ---------------------*/
-	private CRC16Generator crcGen = new CRC16Generator();
-	/*--------------------- end user code ---------------------*/
+	
 	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
@@ -32,10 +30,15 @@ public class HandlerUser extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int counter;
+	int caseId;
 	/*--------------------- operations ---------------------*/
+	public void HandlerUser_dtor() {
+		etUnit_closeAll(caseId);
+	}
 
 	//--------------------- construction
 	public HandlerUser(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
@@ -44,6 +47,7 @@ public class HandlerUser extends ActorClassBase {
 		
 		// initialize attributes
 		counter = 0;
+		caseId = 0;
 
 		// own ports
 		TestPort1 = new TestProtocolPort(this, "TestPort1", IFITEM_TestPort1, 0, port_addr[IFITEM_TestPort1][0], peer_addr[IFITEM_TestPort1][0]); 
@@ -51,7 +55,14 @@ public class HandlerUser extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
+		
+		{
+			// user defined constructor body
+			caseId = etUnit_openAll("tmp", "HandlerTest.etu", "HandlerTest_suite", "HandlerTest_case");
+		}
 	}
+
+	
 	//--------------------- attribute setters and getters
 	public void setCounter (int counter) {
 		 this.counter = counter;
@@ -59,6 +70,14 @@ public class HandlerUser extends ActorClassBase {
 	public int getCounter () {
 		return this.counter;
 	}
+	public void setCaseId (int caseId) {
+		 this.caseId = caseId;
+	}
+	public int getCaseId () {
+		return this.caseId;
+	}
+	
+	
 	//--------------------- port getters
 	public TestProtocolPort getTestPort1 (){
 		return this.TestPort1;
@@ -78,6 +97,7 @@ public class HandlerUser extends ActorClassBase {
 	}
 	
 	public void destroy(){
+		HandlerUser_dtor();
 	}
 
 	
@@ -87,14 +107,13 @@ public class HandlerUser extends ActorClassBase {
 	public static final int STATE_state0_state1_state7 = 4;
 	public static final int STATE_state0_state2 = 5;
 	public static final int STATE_testOk = 6;
-	public static final int STATE_testFalse = 7;
-	public static final int STATE_state1 = 8;
+	public static final int STATE_state1 = 7;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__state0_tp2 = 1;
 	public static final int CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0 = 2;
 	public static final int CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1 = 3;
-	public static final int CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1 = 4;
+	public static final int CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1 = 4;
 	public static final int CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5 = 5;
 	public static final int CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6 = 6;
 	public static final int CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1 = 7;
@@ -125,12 +144,11 @@ public class HandlerUser extends ActorClassBase {
 	"state0_state1_state7",
 	"state0_state2",
 	"testOk",
-	"testFalse",
 	"state1"
 	};
 	
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
@@ -143,138 +161,134 @@ public class HandlerUser extends ActorClassBase {
 	/* Entry and Exit Codes */
 	protected void entry_state0() {
 		System.out.println("state 0 entry action");
-		crcGen.update(13);
+		EXPECT_ORDER(caseId, "state state0 entry code", 13);
 	}
 	protected void exit_state0() {
 		System.out.println("state 0 exit action");
-		crcGen.update(14);
+		EXPECT_ORDER(caseId, "state state0 exit code", 14);
 	}
 	protected void entry_state0_state1() {
 		System.out.println("state 0/1 entry action");
-		crcGen.update(16);
+		EXPECT_ORDER(caseId, "state state0_state1 entry code", 16);
 	}
 	protected void exit_state0_state1() {
 		System.out.println("state 0/1 exit action");
-		crcGen.update(17);
+		EXPECT_ORDER(caseId, "state state0_state1 exit code", 17);
 	}
 	protected void entry_state0_state1_state7() {
 		System.out.println("state 0/1/7 entry action");
-		crcGen.update(23);
+		EXPECT_ORDER(caseId, "state state0_state1_state7 entry code", 23);
 	}
 	protected void exit_state0_state1_state7() {
 		System.out.println("state 0/1/7 exit action");
-		crcGen.update(24);
+		EXPECT_ORDER(caseId, "state state0_state1_state7 exit code", 24);
 	}
 	protected void entry_state0_state2() {
 		System.out.println("state 0/2 entry action");
-		crcGen.update(18);
+		EXPECT_ORDER(caseId, "state state0_state2 entry code", 18);
 	}
 	protected void exit_state0_state2() {
 		System.out.println("state 0/2 exit action");
-		crcGen.update(19);
+		EXPECT_ORDER(caseId, "state state0_state2 exit code", 19);
+	}
+	protected void entry_testOk() {
+		System.out.println("Test ok");
+		RTServices.getInstance().getSubSystem().testFinished(etUnit_isSuccess(caseId)?0:1);
 	}
 	protected void entry_state1() {
 		System.out.println("state 1 entry action");
-		crcGen.update(111);
+		EXPECT_ORDER(caseId, "state state1 entry code", 111);
 	}
 	protected void exit_state1() {
 		System.out.println("state 1 exit action");
-		crcGen.update(112);
+		EXPECT_ORDER(caseId, "state state1 exit code", 112);
 	}
 	
 	/* Action Codes */
 	protected void action_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action no guard ");
-		crcGen.update(11);
+		EXPECT_ORDER(caseId, "transition tr0: TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0 action code", 11);
 	}
 	protected void action_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level self transition action P1=>3");
-		crcGen.update(12);
+		EXPECT_ORDER(caseId, "transition tr1: TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1 action code", 12);
 	}
 	protected void action_TRANS_INITIAL_TO__state0_tp2() {
 		System.out.println("top level initial transition");
-		crcGen.update(10);
-	}
-	protected void action_TRANS_tr2_FROM_cp0_TO_testFalse(InterfaceItemBase ifitem, int p1) {
-		System.out.println("Test false");
-		RTServices.getInstance().getSubSystem().testFinished(1);
-	}
-	protected void action_TRANS_tr3_FROM_cp0_TO_testOk_COND_tr3(InterfaceItemBase ifitem, int p1) {
-		System.out.println("Test ok");
-		RTServices.getInstance().getSubSystem().testFinished(0);
+		short list[] = {13,15,16,22,23,11,24,17,14,12,13,16,23,70,24,17,14,114,113,111,11,70,24,17,120,16,23,24,17,121,18,19,25,18,20,19,21,18,19,25,18,19,14,117};
+		EXPECT_ORDER_START(caseId, list, list.length);
 	}
 	protected void action_TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr9 transition action");
-		crcGen.update(114);
+		EXPECT_ORDER(caseId, "transition tr9: TRANS_tr9_FROM_state0_TO_cp1_BY_msg1TestPort1 action code", 114);
 	}
 	protected void action_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level self transition action P1=>4");
-		crcGen.update(50);
+		EXPECT_ORDER(caseId, "transition tr5: TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5 action code", 50);
 	}
 	protected void action_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action p1=>7 ");
-		crcGen.update(70);
+		EXPECT_ORDER(caseId, "transition tr7: TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1 action code", 70);
 	}
 	protected void action_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
 		System.out.println("top level handler action p1=>12 ");
-		crcGen.update(110);
+		EXPECT_ORDER(caseId, "transition tr6: TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6 action code", 110);
 	}
 	protected void action_TRANS_tr8_FROM_cp1_TO_state1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr8 transition action");
-		crcGen.update(113);
+		EXPECT_ORDER(caseId, "transition tr8: TRANS_tr8_FROM_cp1_TO_state1 action code", 113);
 	}
 	protected void action_TRANS_tr10_FROM_cp1_TO_state0_COND_tr10(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tr4 transition action");
-		crcGen.update(115);
+		EXPECT_ORDER(caseId, "transition tr10: TRANS_tr10_FROM_cp1_TO_state0_COND_tr10 action code", 115);
 	}
-	protected void action_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1(InterfaceItemBase ifitem, int p1) {
+	protected void action_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("tp1 transition to choice action");
-		crcGen.update(117);
-		System.out.printf("CRC: %d \n", crcGen.getCrc());
+		EXPECT_ORDER_END(caseId, "transition tr4: TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1 action code", 117);
 	}
 	protected void action_state0_TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1(InterfaceItemBase ifitem) {
 		System.out.println("state 0 handler action no guard");
-		crcGen.update(20);
+		EXPECT_ORDER(caseId, "transition tr1: TRANS_tr1_FROM_tp0_TO_tp0_BY_msg3TestPort1_tr1 action code", 20);
 	}
 	protected void action_state0_TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2(InterfaceItemBase ifitem) {
 		System.out.println("state 0 tp1 self transition action");
-		crcGen.update(21);
+		EXPECT_ORDER(caseId, "transition tr2: TRANS_tr2_FROM_tp1_TO_tp1_BY_msg4TestPort1_tr2 action code", 21);
 	}
 	protected void action_state0_TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0/2 self transition action");
-		crcGen.update(25);
+		EXPECT_ORDER(caseId, "transition tr3: TRANS_tr3_FROM_state2_TO_state2_BY_msg1TestPort1_tr3 action code", 25);
 	}
 	protected void action_state0_TRANS_tr4_FROM_tp2_TO_state0_state1_tp0() {
 		System.out.println("state 0 tp2 transition action");
-		crcGen.update(15);
+		EXPECT_ORDER(caseId, "transition tr4: TRANS_tr4_FROM_tp2_TO_state0_state1_tp0 action code", 15);
 	}
 	protected void action_state0_TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 handler action P1 => 5");
-		crcGen.update(52);
+		EXPECT_ORDER(caseId, "transition tr5: TRANS_tr5_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr5 action code", 52);
 	}
 	protected void action_state0_TRANS_INITIAL_TO__state2() {
 		System.out.println("state 0 initial transition");
-		crcGen.update(53);
+		EXPECT_ORDER(caseId, "transition init: TRANS_INITIAL_TO__state2 action code", 53);
 	}
 	protected void action_state0_TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0/1 self transition");
-		crcGen.update(54);
+		EXPECT_ORDER(caseId, "transition tr6: TRANS_tr6_FROM_state1_TO_state1_BY_msg1TestPort1_tr6 action code", 54);
 	}
 	protected void action_state0_TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 tp1 p1=>5");
-		crcGen.update(120);
+		EXPECT_ORDER(caseId, "transition tr7: TRANS_tr7_FROM_tp1_TO_state1_BY_msg2TestPort1 action code", 120);
 	}
 	protected void action_state0_TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1(InterfaceItemBase ifitem, int p1) {
 		System.out.println("state 0 tp1 action P1 => 6");
-		crcGen.update(121);
+		EXPECT_ORDER(caseId, "transition tr8: TRANS_tr8_FROM_tp1_TO_state2_BY_msg2TestPort1 action code", 121);
 	}
 	protected void action_state0_state1_TRANS_tr0_FROM_tp0_TO_state7() {
 		System.out.println("state 0/1 transition entry action");
-		crcGen.update(22);
+		EXPECT_ORDER(caseId, "transition tr0: TRANS_tr0_FROM_tp0_TO_state7 action code", 22);
 	}
 	protected void action_state0_state1_TRANS_INITIAL_TO__state7() {
 		System.out.println("state 0/1 initial transition");
-		crcGen.update(121);
+		EXPECT_ORDER(caseId, "transition init: TRANS_INITIAL_TO__state7 action code", 121);
 	}
 	
 	/**
@@ -309,10 +323,6 @@ public class HandlerUser extends ActorClassBase {
 					break;
 				case STATE_testOk:
 					this.history[STATE_TOP] = STATE_testOk;
-					current = STATE_TOP;
-					break;
-				case STATE_testFalse:
-					this.history[STATE_TOP] = STATE_testFalse;
 					current = STATE_TOP;
 					break;
 				case STATE_state1:
@@ -383,16 +393,11 @@ public class HandlerUser extends ActorClassBase {
 				action_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6(ifitem, p1);
 				return STATE_TOP;
 			}
-			case CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1:
+			case CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1:
 			{
 				int p1 = (Integer) generic_data;
-				action_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1(ifitem, p1);
-				if (crcGen.getCrc()==7268) {
-				action_TRANS_tr3_FROM_cp0_TO_testOk_COND_tr3(ifitem, p1);
-				return STATE_testOk;}
-				else {
-				action_TRANS_tr2_FROM_cp0_TO_testFalse(ifitem, p1);
-				return STATE_testFalse;}
+				action_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1(ifitem, p1);
+				return STATE_testOk;
 			}
 			case CHAIN_state0_TRANS_tr0_FROM_state1_TO_state2_BY_msg5TestPort1:
 			{
@@ -493,11 +498,9 @@ public class HandlerUser extends ActorClassBase {
 					// in leaf state: return state id
 					return STATE_state0_state2;
 				case STATE_testOk:
+					if (!(skip_entry || handler)) entry_testOk();
 					// in leaf state: return state id
 					return STATE_testOk;
-				case STATE_testFalse:
-					// in leaf state: return state id
-					return STATE_testFalse;
 				case STATE_state1:
 					if (!(skip_entry || handler)) entry_state1();
 					// in leaf state: return state id
@@ -619,7 +622,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -670,7 +673,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -719,56 +722,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
-								catching_state = STATE_TOP;
-							}
-						break;
-					}
-					break;
-				case STATE_testFalse:
-					switch(trigger) {
-						case TRIG_TestPort1__msg1:
-							{ int p1 = (Integer) generic_data;
-							if (p1==7)
-							{
-								chain = CHAIN_TRANS_tr7_FROM_tp0_TO_state0_BY_msg1TestPort1;
-								catching_state = STATE_TOP;
-								is_handler = true;
-							} else 
-							if (p1==12)
-							{
-								chain = CHAIN_TRANS_tr6_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr6;
-								catching_state = STATE_TOP;
-								is_handler = true;
-								skip_entry = true;
-							} else 
-							if (p1==3)
-							{
-								chain = CHAIN_TRANS_tr1_FROM_tp1_TO_tp1_BY_msg1TestPort1_tr1;
-								catching_state = STATE_TOP;
-								skip_entry = true;
-							} else 
-							{
-								chain = CHAIN_TRANS_tr0_FROM_tp0_TO_tp0_BY_msg1TestPort1_tr0;
-								catching_state = STATE_TOP;
-								is_handler = true;
-								skip_entry = true;
-							}
-							}
-						break;
-						case TRIG_TestPort1__msg2:
-							{ int p1 = (Integer) generic_data;
-							if (p1==4)
-							{
-								chain = CHAIN_TRANS_tr5_FROM_tp1_TO_tp1_BY_msg2TestPort1_tr5;
-								catching_state = STATE_TOP;
-								skip_entry = true;
-							}
-							}
-						break;
-						case TRIG_TestPort1__msg6:
-							{
-								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;
@@ -817,7 +771,7 @@ public class HandlerUser extends ActorClassBase {
 						break;
 						case TRIG_TestPort1__msg6:
 							{
-								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_cp0_BY_msg6TestPort1;
+								chain = CHAIN_TRANS_tr4_FROM_tp1_TO_testOk_BY_msg6TestPort1;
 								catching_state = STATE_TOP;
 							}
 						break;

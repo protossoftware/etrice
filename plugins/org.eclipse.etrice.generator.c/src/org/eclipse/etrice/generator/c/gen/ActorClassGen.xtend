@@ -159,12 +159,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDFOR»
 
 			«ac.allAttributes.attributes»
-
-		«FOR a:ac.allAttributes»
-			«IF a.defaultValueLiteral!=null»
-				«logger.logInfo(ac.name+" "+a.name+": Attribute initialization not supported in C")»
-			«ENDIF»
-		«ENDFOR»
 			
 			«IF !xpac.stateMachine.empty»
 			
@@ -208,6 +202,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "modelbase/etActor.h"
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
+		#include "etUnit/etUnit.h"
 		#include "platform/etMemory.h"
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»

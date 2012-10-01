@@ -18,6 +18,7 @@ import java.util.ArrayList
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.CommunicationType
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -31,9 +32,10 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import static extension org.eclipse.etrice.generator.base.Indexed.*
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.generator.generic.ConfigExtension
 
 @Singleton
 class SubSystemClassGen {
@@ -42,7 +44,7 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
-	@Inject extension TypeHelpers
+	@Inject extension ConfigExtension
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 	
@@ -96,7 +98,7 @@ class SubSystemClassGen {
 		void «ssc.name»_stop(void); 	/* lifecycle stop	 */
 		void «ssc.name»_destroy(void); 	/* lifecycle destroy */
 		
-		void «ssc.name»_shutdown(void);  /* shutdown the dispatcher loop */
+		void SubSysClass_shutdown(void);  /* shutdown the dispatcher loop */
 		
 		«helpers.userCode(ssc.userCode2)»
 		
@@ -124,7 +126,7 @@ class SubSystemClassGen {
 		#include "debugging/etMSCLogger.h"
 		
 		#include "platform/etTimer.h"
-		#include "etGlobalFlags.h"
+		#include "etRuntimeConfig.h"
 
 		«helpers.userCode(ssc.userCode3)»
 		
@@ -199,13 +201,13 @@ class SubSystemClassGen {
 			etLogger_logInfoF("%s_destroy", «ssc.name»Inst.name);
 			«FOR ai : ssi.allContainedInstances.reverseView»
 				«IF !ai.actorClass.operations.filter(op|op.destructor).empty»
-					«languageExt.destructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
+					«languageExt.memberInUse(ai.actorClass.name, languageExt.destructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 
-		void «ssc.name»_shutdown(void){
+		void SubSysClass_shutdown(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("SubSys", "shutdown")
 			etLogger_logInfoF("%s_shutdown", «ssc.name»Inst.name);
 			«ssc.name»Inst.shutdownRequest = 1;
@@ -217,7 +219,7 @@ class SubSystemClassGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ssc.name»", "constructActorInstances")
 			«FOR ai : ssi.allContainedInstances»
 				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
-					«languageExt.constructorName(ai.actorClass.name)»(&«ai.path.getPathName()»);
+					«languageExt.memberInUse(ai.actorClass.name, languageExt.constructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -274,7 +276,7 @@ class SubSystemClassGen {
 		/* forward declaration of variable port structs */		
 		«FOR ai: ssi.allContainedInstances»
 			«IF ai.orderedIfItemInstances.empty»
-/*nothing to do */
+				/*nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
 					«IF pi.protocol.getPortClass(pi.conjugated)!=null»
@@ -338,6 +340,7 @@ class SubSystemClassGen {
 
 		var dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
 		var recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
+		var sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
 		
 		// compute replicated port offsets		
 		var offsets = new HashMap<InterfaceItemInstance, Integer>()
@@ -375,7 +378,21 @@ class SubSystemClassGen {
 					«genRecvPortInitializer(root, ai, pi)»
 				«ENDFOR»
 			};
-			static «ai.actorClass.name» «instName» = {&«instName»_const};
+			static «ai.actorClass.name» «instName» = {
+				&«instName»_const,
+				
+				/* data send ports */
+				«FOR pi : sendPorts»
+					«pi.genSendPortInitializer»,
+				«ENDFOR»
+				
+				/* attributes */
+				«FOR att : ai.actorClass.allAttributes»
+					«ai.genAttributeInitializer(att)»,
+				«ENDFOR»
+				
+				/* state and history are initialized in init fuction */
+			};
 		«ENDIF»
 	'''}
 		
@@ -388,6 +405,26 @@ class SubSystemClassGen {
 		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 		+"} /* Port "+pi.name+" */"
+	}
+	
+	def private genSendPortInitializer(InterfaceItemInstance pi) {
+		val pc = (pi as PortInstance).port.protocol as ProtocolClass
+		
+		'''
+			{
+				«FOR m : pc.incomingMessages SEPARATOR ","»
+					«m.data.refType.type.defaultValue»
+				«ENDFOR»
+			}
+		'''
+	}
+	
+	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
+		val value = att.initValueLiteral
+		if (value==null)
+			att.refType.type.initializationWithDefaultValues(att.size)
+		else
+			value.toString
 	}
 	
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){

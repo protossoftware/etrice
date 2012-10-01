@@ -1,7 +1,11 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.VarDecl;
+
 import java.util.List;
 import org.eclipse.xtext.util.Pair;
 
@@ -178,4 +182,42 @@ public interface ILanguageExtension {
 	 * @return super.method for Java, baseClassName::method for C++, empty for C
 	 */
 	String superCall(String baseClassName, String method, String arguments);
+	
+	/**
+	 * Produces necessary casts or data type keys for primitive values
+	 * @param type ROOM PrimitiveType
+	 * @param value Java Primitive e.g. Long, Byte, String
+	 * @return for Java: <br>
+	 * toPrimitve("PrimitiveType int64: ptInteger -> long (Long)", Long value = 99) -> 99L<br>
+	 * toPrimitve("PrimitiveType int8: ptInteger -> byte (Byte)", Byte value = 12) -> (byte)12
+	 */
+	String toValueLiteral(PrimitiveType type, String value);
+	
+	/**
+	 * return three strings used by the generator
+	 * 
+	 * @param data the variable declaration
+	 * @return an array of three strings
+	 * <ol>
+	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variable</li>
+	 *  <li>the data as it appears in a method call</li>
+	 *  <li>the data as it is used in the method declaration</li>
+	 *  </ol>
+	 */
+	String[] generateArglistAndTypedData(VarDecl data);
+	
+	/**
+	 * returns a default value for a type
+	 * @param dt the data type
+	 * @return the default value string
+	 */
+	String defaultValue(DataType dt);
+	
+	/**
+	 * returns an initializer for an array with default values
+	 * @param dt the data type
+	 * @param size
+	 * @return the array initializer
+	 */
+	String initializationWithDefaultValues(DataType dt, int size);
 }

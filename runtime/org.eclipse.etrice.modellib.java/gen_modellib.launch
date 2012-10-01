@@ -4,10 +4,10 @@
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/Socket.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/TimingService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/ALogService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib/models/TcpService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/models/Socket.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/models/TimingService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/models/ALogService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/models/TcpService.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>

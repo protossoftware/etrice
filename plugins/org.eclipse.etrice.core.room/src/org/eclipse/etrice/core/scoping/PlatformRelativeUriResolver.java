@@ -54,6 +54,7 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 	public String resolve(String resolve, URI baseUri) {
 		resolve = substituteEnvVars(resolve);
 		resolve = resolve.replaceAll("\\\\", "/");
+		resolve = resolve.replaceAll("//", "/");
 		
 		if (baseUri!=null) {
 			resolve = resolveUriAgainstBase(resolve, baseUri);

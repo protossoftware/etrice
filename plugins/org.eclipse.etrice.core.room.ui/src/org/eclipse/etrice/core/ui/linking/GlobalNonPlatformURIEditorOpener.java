@@ -38,7 +38,7 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 		return super.open(getPlatformURI(uri), select);
 	}
 	
-	private URI getPlatformURI(URI uri) {
+	public static URI getPlatformURI(URI uri) {
 		if (uri.isPlatform())
 			return uri;
 		

@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -15,6 +16,7 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 public class ConfigText_Top_ac extends ActorClassBase {
 
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -22,6 +24,7 @@ public class ConfigText_Top_ac extends ActorClassBase {
 	//--------------------- services
 
 	//--------------------- interface item IDs
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -39,7 +42,11 @@ public class ConfigText_Top_ac extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions

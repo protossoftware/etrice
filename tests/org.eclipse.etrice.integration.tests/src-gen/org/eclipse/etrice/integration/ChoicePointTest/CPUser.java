@@ -7,6 +7,7 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 import org.eclipse.etrice.integration.ChoicePointTest.TestProtocol.*;
@@ -23,6 +24,7 @@ public class CPUser extends ActorClassBase {
 	private CRC16Generator crcGen = new CRC16Generator();
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	protected TestProtocolPort TestPort1 = null;
 	
@@ -32,6 +34,7 @@ public class CPUser extends ActorClassBase {
 
 	//--------------------- interface item IDs
 	public static final int IFITEM_TestPort1 = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	int counter;
@@ -52,6 +55,8 @@ public class CPUser extends ActorClassBase {
 		
 		// own service implementations
 	}
+
+	
 	//--------------------- attribute setters and getters
 	public void setCounter (int counter) {
 		 this.counter = counter;
@@ -59,6 +64,8 @@ public class CPUser extends ActorClassBase {
 	public int getCounter () {
 		return this.counter;
 	}
+	
+	
 	//--------------------- port getters
 	public TestProtocolPort getTestPort1 (){
 		return this.TestPort1;

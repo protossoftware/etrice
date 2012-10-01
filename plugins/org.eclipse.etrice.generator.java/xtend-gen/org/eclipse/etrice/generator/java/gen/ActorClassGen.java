@@ -3,6 +3,7 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -20,9 +21,12 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
+import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -37,13 +41,22 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions _javaExtensions;
+  private JavaExtensions stdExt;
   
   @Inject
-  private RoomExtensions _roomExtensions;
+  private RoomExtensions roomExt;
+  
+  @Inject
+  private ConfigExtension configExt;
+  
+  @Inject
+  private ConfigGenAddon configAddon;
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
+  
+  @Inject
+  private Initialization _initialization;
   
   @Inject
   private StateMachineGen _stateMachineGen;
@@ -56,12 +69,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);
+        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _path = this._roomExtensions.getPath(_actorClass_1);
+        String _path = this.roomExt.getPath(_actorClass_1);
         String path = (_generationTargetPath + _path);
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String file = this._javaExtensions.getJavaFileName(_actorClass_2);
+        String file = this.stdExt.getJavaFileName(_actorClass_2);
         String _plus = ("generating ActorClass implementation \'" + file);
         String _plus_1 = (_plus + "\' in \'");
         String _plus_2 = (_plus_1 + path);
@@ -96,13 +109,39 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
+      final HashSet<Attribute> dynConfigReadAttributes = this.configExt.getDynConfigAttributes(ac, true, false);
+      final HashSet<Attribute> dynConfigWriteAttributes = this.configExt.getDynConfigAttributes(ac, false, true);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
-      String _package = this._roomExtensions.getPackage(ac);
+      String _package = this.roomExt.getPackage(ac);
       _builder.append(_package, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      {
+        boolean _isEmpty = dynConfigReadAttributes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      {
+        boolean _or = false;
+        boolean _isEmpty_1 = dynConfigReadAttributes.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          _or = true;
+        } else {
+          boolean _isEmpty_2 = dynConfigWriteAttributes.isEmpty();
+          boolean _not_2 = (!_isEmpty_2);
+          _or = (_not_1 || _not_2);
+        }
+        if (_or) {
+          _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
+        }
+      }
+      _builder.newLineIfNotEmpty();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
@@ -116,6 +155,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
+      _builder.newLine();
+      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
       _builder.newLine();
       _builder.newLine();
       {
@@ -133,7 +174,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
           _builder.append("import ");
-          String _package_1 = this._roomExtensions.getPackage(pc);
+          String _package_1 = this.roomExt.getPackage(pc);
           _builder.append(_package_1, "");
           _builder.append(".");
           String _name_1 = pc.getName();
@@ -179,15 +220,26 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
+      {
+        boolean _isEmpty_3 = dynConfigWriteAttributes.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
+          _builder.append("\t");
+          _builder.append("private VariableService variableService;");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- ports");
       _builder.newLine();
       {
-        List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
+        List<Port> _endPorts = this.roomExt.getEndPorts(ac);
         for(final Port ep : _endPorts) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName = this._roomExtensions.getPortClassName(ep);
+          String _portClassName = this.roomExt.getPortClassName(ep);
           _builder.append(_portClassName, "	");
           _builder.append(" ");
           String _name_4 = ep.getName();
@@ -206,7 +258,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final SAPRef sap : _strSAPs) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
+          String _portClassName_1 = this.roomExt.getPortClassName(sap);
           _builder.append(_portClassName_1, "	");
           _builder.append(" ");
           String _name_5 = sap.getName();
@@ -225,7 +277,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc : _serviceImplementations) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName_2 = this._roomExtensions.getPortClassName(svc);
+          String _portClassName_2 = this.roomExt.getPortClassName(svc);
           _builder.append(_portClassName_2, "	");
           _builder.append(" ");
           SPPRef _spp = svc.getSpp();
@@ -243,13 +295,26 @@ public class ActorClassGen extends GenericActorClassGenerator {
       String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac, ac);
       _builder.append(_genInterfaceItemConstants, "	");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
       _builder.newLine();
+      _builder.append("\t");
+      CharSequence _genMinMaxConstants = this.configAddon.genMinMaxConstants(ac);
+      _builder.append(_genMinMaxConstants, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       EList<Attribute> _attributes = ac.getAttributes();
       CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
       _builder.append(_attributes_1, "	");
       _builder.newLineIfNotEmpty();
+      {
+        for(final Attribute a : dynConfigReadAttributes) {
+          _builder.append("\t");
+          _builder.append("private DynConfigLock lock_");
+          String _name_7 = a.getName();
+          _builder.append(_name_7, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(ac);
       _builder.append(_operationsImplementation, "	");
@@ -260,8 +325,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_7 = ac.getName();
-      _builder.append(_name_7, "	");
+      String _name_8 = ac.getName();
+      _builder.append(_name_8, "	");
       _builder.append("(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){");
       _builder.newLineIfNotEmpty();
       {
@@ -279,15 +344,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.append("\t\t");
       _builder.append("setClassName(\"");
-      String _name_8 = ac.getName();
-      _builder.append(_name_8, "		");
+      String _name_9 = ac.getName();
+      _builder.append(_name_9, "		");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_2 = ac.getAttributes();
-      CharSequence _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes_2, false);
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_2, false);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -295,20 +360,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("// own ports");
       _builder.newLine();
       {
-        List<Port> _endPorts_1 = this._roomExtensions.getEndPorts(ac);
+        List<Port> _endPorts_1 = this.roomExt.getEndPorts(ac);
         for(final Port ep_1 : _endPorts_1) {
           _builder.append("\t\t");
-          String _name_9 = ep_1.getName();
-          _builder.append(_name_9, "		");
-          _builder.append(" = new ");
-          String _portClassName_3 = this._roomExtensions.getPortClassName(ep_1);
-          _builder.append(_portClassName_3, "		");
-          _builder.append("(this, \"");
           String _name_10 = ep_1.getName();
           _builder.append(_name_10, "		");
-          _builder.append("\", IFITEM_");
+          _builder.append(" = new ");
+          String _portClassName_3 = this.roomExt.getPortClassName(ep_1);
+          _builder.append(_portClassName_3, "		");
+          _builder.append("(this, \"");
           String _name_11 = ep_1.getName();
           _builder.append(_name_11, "		");
+          _builder.append("\", IFITEM_");
+          String _name_12 = ep_1.getName();
+          _builder.append(_name_12, "		");
           _builder.append(", ");
           {
             int _multiplicity = ep_1.getMultiplicity();
@@ -318,8 +383,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           _builder.append("port_addr[IFITEM_");
-          String _name_12 = ep_1.getName();
-          _builder.append(_name_12, "		");
+          String _name_13 = ep_1.getName();
+          _builder.append(_name_13, "		");
           _builder.append("]");
           {
             int _multiplicity_1 = ep_1.getMultiplicity();
@@ -329,8 +394,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           _builder.append(", peer_addr[IFITEM_");
-          String _name_13 = ep_1.getName();
-          _builder.append(_name_13, "		");
+          String _name_14 = ep_1.getName();
+          _builder.append(_name_14, "		");
           _builder.append("]");
           {
             int _multiplicity_2 = ep_1.getMultiplicity();
@@ -352,23 +417,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
         for(final SAPRef sap_1 : _strSAPs_1) {
           _builder.append("\t\t");
-          String _name_14 = sap_1.getName();
-          _builder.append(_name_14, "		");
-          _builder.append(" = new ");
-          String _portClassName_4 = this._roomExtensions.getPortClassName(sap_1);
-          _builder.append(_portClassName_4, "		");
-          _builder.append("(this, \"");
           String _name_15 = sap_1.getName();
           _builder.append(_name_15, "		");
-          _builder.append("\", IFITEM_");
+          _builder.append(" = new ");
+          String _portClassName_4 = this.roomExt.getPortClassName(sap_1);
+          _builder.append(_portClassName_4, "		");
+          _builder.append("(this, \"");
           String _name_16 = sap_1.getName();
           _builder.append(_name_16, "		");
-          _builder.append(", 0, port_addr[IFITEM_");
+          _builder.append("\", IFITEM_");
           String _name_17 = sap_1.getName();
           _builder.append(_name_17, "		");
-          _builder.append("][0], peer_addr[IFITEM_");
+          _builder.append(", 0, port_addr[IFITEM_");
           String _name_18 = sap_1.getName();
           _builder.append(_name_18, "		");
+          _builder.append("][0], peer_addr[IFITEM_");
+          String _name_19 = sap_1.getName();
+          _builder.append(_name_19, "		");
           _builder.append("][0]); ");
           _builder.newLineIfNotEmpty();
         }
@@ -383,27 +448,27 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
           _builder.append("\t\t");
           SPPRef _spp_1 = svc_1.getSpp();
-          String _name_19 = _spp_1.getName();
-          _builder.append(_name_19, "		");
+          String _name_20 = _spp_1.getName();
+          _builder.append(_name_20, "		");
           _builder.append(" = new ");
-          String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
+          String _portClassName_5 = this.roomExt.getPortClassName(svc_1);
           _builder.append(_portClassName_5, "		");
           _builder.append("(this, \"");
           SPPRef _spp_2 = svc_1.getSpp();
-          String _name_20 = _spp_2.getName();
-          _builder.append(_name_20, "		");
+          String _name_21 = _spp_2.getName();
+          _builder.append(_name_21, "		");
           _builder.append("\", IFITEM_");
           SPPRef _spp_3 = svc_1.getSpp();
-          String _name_21 = _spp_3.getName();
-          _builder.append(_name_21, "		");
+          String _name_22 = _spp_3.getName();
+          _builder.append(_name_22, "		");
           _builder.append(", port_addr[IFITEM_");
           SPPRef _spp_4 = svc_1.getSpp();
-          String _name_22 = _spp_4.getName();
-          _builder.append(_name_22, "		");
+          String _name_23 = _spp_4.getName();
+          _builder.append(_name_23, "		");
           _builder.append("], peer_addr[IFITEM_");
           SPPRef _spp_5 = svc_1.getSpp();
-          String _name_23 = _spp_5.getName();
-          _builder.append(_name_23, "		");
+          String _name_24 = _spp_5.getName();
+          _builder.append(_name_24, "		");
           _builder.append("]); ");
           _builder.newLineIfNotEmpty();
         }
@@ -435,23 +500,87 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
+      _builder.newLine();
+      {
+        boolean _or_1 = false;
+        boolean _isEmpty_4 = dynConfigReadAttributes.isEmpty();
+        boolean _not_4 = (!_isEmpty_4);
+        if (_not_4) {
+          _or_1 = true;
+        } else {
+          boolean _isEmpty_5 = dynConfigWriteAttributes.isEmpty();
+          boolean _not_5 = (!_isEmpty_5);
+          _or_1 = (_not_4 || _not_5);
+        }
+        if (_or_1) {
+          _builder.append("\t");
+          _builder.append("public ");
+          String _name_25 = ac.getName();
+          _builder.append(_name_25, "	");
+          _builder.append("(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("this(parent, name, port_addr, peer_addr);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.newLine();
+          {
+            boolean _isEmpty_6 = dynConfigWriteAttributes.isEmpty();
+            boolean _not_6 = (!_isEmpty_6);
+            if (_not_6) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("this.variableService = variableService;");
+              _builder.newLine();
+            }
+          }
+          {
+            for(final Attribute a_1 : dynConfigReadAttributes) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("lock_");
+              String _name_26 = a_1.getName();
+              _builder.append(_name_26, "		");
+              _builder.append(" = new DynConfigLock();");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
-      String _name_24 = ac.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_3, _name_24);
+      List<Attribute> _list = IterableExtensions.<Attribute>toList(dynConfigReadAttributes);
+      List<Attribute> _minus = this.roomExt.<Attribute>minus(_attributes_3, _list);
+      String _name_27 = ac.getName();
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_27);
       _builder.append(_attributeSettersGettersImplementation, "	");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      CharSequence _genDynConfigGetterSetter = this.configAddon.genDynConfigGetterSetter(ac);
+      _builder.append(_genDynConfigGetterSetter, "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- port getters");
       _builder.newLine();
       {
-        List<Port> _endPorts_2 = this._roomExtensions.getEndPorts(ac);
+        List<Port> _endPorts_2 = this.roomExt.getEndPorts(ac);
         for(final Port ep_2 : _endPorts_2) {
           _builder.append("\t");
-          String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
-          String _name_25 = ep_2.getName();
-          String _name_26 = ac.getName();
-          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_25, _name_26);
+          String _portClassName_6 = this.roomExt.getPortClassName(ep_2);
+          String _name_28 = ep_2.getName();
+          String _name_29 = ac.getName();
+          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_28, _name_29);
           _builder.append(_terImplementation, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -460,10 +589,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
         for(final SAPRef sap_2 : _strSAPs_2) {
           _builder.append("\t");
-          String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
-          String _name_27 = sap_2.getName();
-          String _name_28 = ac.getName();
-          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_27, _name_28);
+          String _portClassName_7 = this.roomExt.getPortClassName(sap_2);
+          String _name_30 = sap_2.getName();
+          String _name_31 = ac.getName();
+          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_30, _name_31);
           _builder.append(_terImplementation_1, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -472,11 +601,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
         for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
           _builder.append("\t");
-          String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
+          String _portClassName_8 = this.roomExt.getPortClassName(svc_2);
           SPPRef _spp_6 = svc_2.getSpp();
-          String _name_29 = _spp_6.getName();
-          String _name_30 = ac.getName();
-          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_29, _name_30);
+          String _name_32 = _spp_6.getName();
+          String _name_33 = ac.getName();
+          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_32, _name_33);
           _builder.append(_terImplementation_2, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -506,9 +635,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _overridesStop = this._roomExtensions.overridesStop(ac);
-        boolean _not = (!_overridesStop);
-        if (_not) {
+        boolean _overridesStop = this.roomExt.overridesStop(ac);
+        boolean _not_7 = (!_overridesStop);
+        if (_not_7) {
           _builder.append("\t");
           _builder.append("public void stop(){");
           _builder.newLine();
@@ -530,17 +659,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _notEquals_2 = (!Objects.equal(dtor, null));
         if (_notEquals_2) {
           _builder.append("\t\t");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// user defined destructor body");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
-          DetailCode _detailCode_1 = dtor.getDetailCode();
-          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
-          _builder.append(_translatedCode_1, "			");
+          String _name_34 = ac.getName();
+          String _destructorCall = this._procedureHelpers.destructorCall(_name_34);
+          _builder.append(_destructorCall, "		");
+          _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -557,8 +679,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         } else {
           boolean _hasStateMachine = xpac.hasStateMachine();
-          boolean _not_1 = (!_hasStateMachine);
-          if (_not_1) {
+          boolean _not_8 = (!_hasStateMachine);
+          if (_not_8) {
             _builder.append("\t");
             _builder.append("//--------------------- no state machine");
             _builder.newLine();

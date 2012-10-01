@@ -14,16 +14,14 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
-
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
@@ -35,8 +33,10 @@ class SubSystemClassGen {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ConfigExtension
+	@Inject ConfigGenAddon configAddon
 	@Inject extension ProcedureHelpers
-	@Inject extension TypeHelpers
+
+	@Inject VariableServiceGen varService
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -46,12 +46,15 @@ class SubSystemClassGen {
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
+			if(ssi.subSystemClass.hasVariableService)
+				varService.doGenerate(root, ssi);
 		}
 	}
 
 	def generate(Root root, SubSystemInstance comp, SubSystemClass cc) {'''
 		package «cc.getPackage()»;
 		
+		«IF cc.hasVariableService»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -71,8 +74,8 @@ class SubSystemClassGen {
 		
 			«cc.userCode(2)»
 			
-			public «comp.name»(IRTObject parent, String name) {
-				super(parent, name);
+			public «comp.name»(String name) {
+				super(name);
 			}
 			
 			@Override
@@ -90,6 +93,7 @@ class SubSystemClassGen {
 		
 			@Override
 			public void instantiateActors(){
+				
 				// all addresses
 				// Addresses for the Subsystem Systemport
 				«FOR ai : comp.allContainedInstances.indexed(comp.maxObjId)»
@@ -165,52 +169,20 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 						}
+						«IF ai.configAttributes.exists(c | c.dynConfig)»
+							, variableService
+						«ENDIF»
 					); 
 				«ENDFOR»
 				
 				// apply instance attribute configurations
 				«FOR ai : comp.allContainedInstances»
-					«var attrConfigs = ai.configAttributes»
-					«var portConfigs = ai.getConfigPorts»
-					«IF !attrConfigs.empty || !portConfigs.empty»
+					«IF !(ai.configAttributes.empty && ai.getConfigPorts.empty)»
 						{
-							«var aiName = "inst"»
-							«ai.actorClass.name» «aiName» = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
-							«FOR attrConfig : attrConfigs»
-								«var a = attrConfig.attribute»
-								«var value = attrConfig.value.stringValue(a)»
-								«IF !a.isArray»
-									«aiName».«a.name.invokeSetter(ai.actorClass.name, value)»;
-								«ELSEIF value.startsWith("{")»
-									«aiName».«a.name.invokeSetter(ai.actorClass.name, "new "+a.refType.type.typeName+"[]"+value)»;
-								«ELSE»
-									{
-										«a.refType.type.typeName»[] array = «aiName».«a.name.invokeGetter(ai.actorClass.name)»;
-										for (int i=0;i<«a.size»;i++){
-											array[i] = «value»;
-										}
-									}
-								«ENDIF»
-							«ENDFOR»
-							«FOR portConfig : portConfigs»
-								«var item = portConfig.item»
-								«FOR attrConfig : portConfig.attributes»
-									«var a = attrConfig.attribute»
-									«var value = attrConfig.value.stringValue(a)»
-									«var refToItem = aiName+"."+item.name.invokeGetter(item.portClassName)»
-									«IF !a.isArray»
-										«refToItem».«a.name.invokeSetter(item.portClassName, value)»;
-									«ELSEIF value.startsWith("{")»
-										«refToItem».«a.name.invokeSetter(ai.actorClass.name, "new "+a.refType.type.typeName+"[]"+value)»;
-									«ELSE»
-										{
-											«a.refType.type.typeName»[] array = «refToItem».«a.name.invokeGetter(ai.actorClass.name)»;
-											for (int i=0;i<«a.size»;i++){
-												array[i] = «value»;
-											}
-										}
-									«ENDIF»
-								«ENDFOR»
+							«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
+							«configAddon.applyInstanceConfig("inst", ai.actorClass.name, ai.configAttributes)»
+							«FOR portConfig : ai.configPorts»
+								«configAddon.applyInstanceConfig(("inst."+portConfig.item.name.invokeGetter(ai.actorClass.name)), portConfig.item.portClassName, portConfig.attributes)»
 							«ENDFOR»
 						}
 					«ENDIF»
@@ -231,10 +203,33 @@ class SubSystemClassGen {
 								addr_item_«ai.path.getPathName()»
 							«ENDFOR»
 						});
-						
-			}
+				}
+			
+				«IF cc.hasVariableService»
+					private VariableService variableService;
+				«ENDIF»
+				
+				@Override
+				public void init(){
+					«IF cc.hasVariableService»
+						variableService = new «comp.name»VariableService(this);
+					«ENDIF»
+					super.init();
+					«IF cc.hasVariableService»
+						variableService.init();
+					«ENDIF»
+				}
+					
+				@Override
+				public void stop(){
+					super.stop();
+					«IF cc.hasVariableService»
+						variableService.stop();
+					«ENDIF»
+				}
+				
 		};
 	'''
 	}
-	
+
 }

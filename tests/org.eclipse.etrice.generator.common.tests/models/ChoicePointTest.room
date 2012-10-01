@@ -1,0 +1,220 @@
+RoomModel ChoicePointTest {
+
+	import room.basic.types.* from "Types.room"
+
+	LogicalSystem System_ChoicePointTest {
+		SubSystemRef SubSystem_CPTest: SubSystem_CPTest
+	}
+
+	SubSystemClass SubSystem_CPTest {
+		ActorRef ChoicePointTest_Top: CPTest_Top
+	}
+
+	ActorClass CPTest_Top {
+		Structure {
+			ActorRef cp_tester: CPTester
+			ActorRef cp_user: CPUser
+			Binding cp_tester.TestPort1 and cp_user.TestPort1
+		}
+		Behavior { }
+	}
+
+	ActorClass CPUser {
+		Interface {
+			Port TestPort1: TestProtocol
+		}
+		Structure {
+			external Port TestPort1
+			Attribute counter: int32
+			Attribute caseId: int32
+			Attribute resultlist[29]: int16 = "{1,2,3,4,5,6,3,4,5,7,8,10,11,12,9,16,3,4,5,17,8,13,15,11,19,12,9,18,20}"
+			
+		}
+		Behavior {
+			Operation CPUser() {
+				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTest\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
+			}
+			Operation ~CPUser() {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> cp cp0 {
+					action {
+						"counter = 0;"
+						"EXPECT_ORDER_START(caseId,resultlist,29);"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
+					}
+				}
+				Transition tr4: cp cp0 -> ENTRY3_EXIT4 {
+					action {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0);"
+					}
+				}
+				Transition EXPECT2: cp cp0 -> ENTRY3_EXIT4 {
+					cond {
+						"counter == 0"
+					}
+					action {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 2);"
+					}
+				}
+				Transition EXPECT5: ENTRY3_EXIT4 -> cp cp1 {
+					triggers {
+						<msg1: TestPort1>
+					}
+					action {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 5);"
+					}
+				}
+				Transition EXPECT6: cp cp1 -> ENTRY3_EXIT4 {
+					action {
+						"counter=3;"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 6);"
+					}
+				}
+				Transition EXPECT17: cp cp1 -> tp0 of ENTRY8_EXIT9 {
+					cond {
+						"counter == 4"
+					}
+					action {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 17);"
+					}
+				}
+				Transition EXPECT7: cp cp1 -> ENTRY8_EXIT9 {
+					cond {
+						"counter == 3"
+					}
+					action {
+						"counter = 1;"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 7);"
+					}
+				}
+				Transition EXPECT16: ENTRY8_EXIT9 -> ENTRY3_EXIT4 {
+					triggers {
+						<msg1: TestPort1 guard {
+							"counter==1"
+						}>
+					}
+					action {
+						"counter=4;"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 16);"
+					}
+				}
+				Transition EXPEXT19: my tp0 -> my tp0 {
+					triggers {
+						<msg1: TestPort1>
+					}
+					action {
+						"counter = 2;"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 19);"
+					}
+				}
+				Transition EXPECT18: ENTRY8_EXIT9 -> testOk {
+					triggers {
+						<msg1: TestPort1 guard {
+							"counter==2"
+						}>
+					}
+					action {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 18);"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				handler TransitionPoint tp0
+				State ENTRY3_EXIT4 {
+					entry {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 3);"
+					}
+					exit {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 4);"
+					}
+				}
+				State ENTRY8_EXIT9 {
+					entry {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
+					}
+					exit {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
+					}
+					subgraph {
+						Transition EXPECT13: my tp0 -> cp cp0 {
+							action {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 13);"
+							}
+						}
+						Transition EXPECT14: cp cp0 -> ENTRY11_EXIT12 {
+							action {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 14);"
+							}
+						}
+						Transition EXPECT15: cp cp0 -> ENTRY11_EXIT12 {
+							cond {
+								"counter == 4"
+							}
+							action {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 15);"
+							}
+						}
+						Transition init: initial -> ENTRY11_EXIT12 {
+							action {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 10);"
+							}
+						}
+						ChoicePoint cp0
+						EntryPoint tp0
+						State ENTRY11_EXIT12 {
+							entry {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 11);"
+							}
+							exit {
+								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 12);"
+							}
+						}
+					}
+				}
+				State testOk {
+					entry {
+						"EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 20);"
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass CPTester {
+		Interface {
+			conjugated Port TestPort1: TestProtocol
+		}
+		Structure {
+			external Port TestPort1
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"TestPort1.msg1();"
+						"TestPort1.msg1();"
+						"TestPort1.msg1();"
+						"TestPort1.msg1();"
+						"TestPort1.msg1();"
+						"TestPort1.msg1();"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass TestProtocol {
+		incoming {
+			Message msg1()
+			Message msg2()
+			Message msg3()
+			Message msg4()
+			Message msg5()
+		}
+	}
+
+}

@@ -34,6 +34,7 @@ class DataClassGen {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
+	@Inject extension Initialization
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {

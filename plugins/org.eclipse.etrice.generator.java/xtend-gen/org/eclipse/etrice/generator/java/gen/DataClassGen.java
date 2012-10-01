@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -38,6 +39,9 @@ public class DataClassGen {
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
+  
+  @Inject
+  private Initialization _initialization;
   
   @Inject
   private ILogger logger;
@@ -160,7 +164,7 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_3 = dc.getAttributes();
-      CharSequence _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes_3, true);
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, true);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       {

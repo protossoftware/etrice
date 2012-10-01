@@ -1,0 +1,55 @@
+grammar org.eclipse.etrice.generator.FSMtest with org.eclipse.xtext.common.Terminals
+
+generate fsmtest "http://www.eclipse.org/etrice/generator/FSMtest"
+
+Model:
+	Testscripts+=Testscript*;
+	
+Testscript:
+	'fsmtest' name=ID
+	stateDeclaration = StateDeclaration
+	initialDeclaration = InitialDeclaration
+	loopsDeclaration = LoopsDeclaration
+	(seedDeclaration = SeedDeclaration)?
+	(transitionDeclarations += TransitionDeclaration)*
+	';' 
+;
+
+State:
+	name=ID
+;
+
+StateDeclaration:
+	'states:' states+=State (',' states+=State)*
+;
+
+InitialDeclaration:
+	"initial:" initial=[State|ID]
+;
+
+LoopsDeclaration:
+	'loops:' val=INT
+;
+
+SeedDeclaration:
+	'randseed:' val=INT
+;
+
+SignalDeclaration:
+	(port=ID '.')? signame=ID (('=' intVal=INT) | ('=' strVal=STRING))?
+;
+
+SourceDeclaration:
+	ref=[State|ID] ':'
+;
+
+DestinationDeclaration:
+	'-> ' ref=[State|ID]
+;
+
+TransitionDeclaration:
+	source=SourceDeclaration
+	'in:' (in+=SignalDeclaration)*
+	'out:' (out+=SignalDeclaration)*
+	destination=DestinationDeclaration
+;

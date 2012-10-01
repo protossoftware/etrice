@@ -1,0 +1,9 @@
+SS/AC/boolean=true
+SS/AC/booleanA={ false }
+SS/AC/double=4.0E-6
+SS/AC/doubleA={ 0.0,1.1,2.2,4.0E-6 }
+SS/AC/int=999
+SS/AC/intA={ 1,2,3,4,5,6 }
+SS/AC/long=-9223372036854775808
+SS/AC/string="test"
+SS/AC/stringA={ "\"\"","","test1" }

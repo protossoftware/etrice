@@ -15,11 +15,12 @@ import java.util.TimerTask;
 public class PTimer {
 	// message IDs
 	public static final int MSG_MIN = 0;
-	public static final int OUT_timerTick = 1;
+	public static final int OUT_timeout = 1;
 	public static final int OUT_internalTimeout = 2;
-	public static final int IN_Kill = 3;
-	public static final int IN_internalStart = 4;
-	public static final int MSG_MAX = 5;
+	public static final int IN_kill = 3;
+	public static final int IN_internalStartTimer = 4;
+	public static final int IN_internalStartTimeout = 5;
+	public static final int MSG_MAX = 6;
 
 	/*--------------------- begin user code ---------------------*/
 	static protected class FireTimeoutTask extends TimerTask {
@@ -51,7 +52,7 @@ public class PTimer {
 				
 	/*--------------------- end user code ---------------------*/
 
-	private static String messageStrings[] = {"MIN", "timerTick","internalTimeout", "Kill","internalStart","MAX"};
+	private static String messageStrings[] = {"MIN", "timeout","internalTimeout", "kill","internalStartTimer","internalStartTimeout","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -94,16 +95,25 @@ public class PTimer {
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
 					switch (msg.getEvtId()) {
-						case IN_internalStart:
+						case IN_internalStartTimer:
 						{
 							
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 											TimerData td = (TimerData)dataMsg.getData();
 											task = new FireTimeoutTask(td.time, td.id, this);
-											getActor().receiveEvent(this, IN_internalStart, td);
+											getActor().receiveEvent(this, IN_internalStartTimer, td);
 						}
 						break;
-						case IN_Kill:
+						case IN_internalStartTimeout:
+						{
+							
+											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
+											TimerData td = (TimerData)dataMsg.getData();
+											task = new FireTimeoutTask(td.time, td.id, this);
+											getActor().receiveEvent(this, IN_internalStartTimeout, td);
+						}
+						break;
+						case IN_kill:
 						{
 							//regular PortClass handle kill
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
@@ -128,12 +138,12 @@ public class PTimer {
 		/*--------------------- operations ---------------------*/
 		
 		// sent messages
-		public void timerTick() {
-			if (messageStrings[ OUT_timerTick] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timerTick]);
+		public void timeout() {
+			if (messageStrings[ OUT_timeout] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timeout]);
 			}
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timerTick));
+				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeout));
 				}
 		private void internalTimeout(TimerData td) {
 			if (messageStrings[ OUT_internalTimeout] != "timerTick"){
@@ -175,9 +185,9 @@ public class PTimer {
 		}
 		
 		// outgoing messages
-		public void timerTick(){
+		public void timeout(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).timerTick();
+				ports.get(i).timeout();
 			}
 		}
 		private void internalTimeout(TimerData td){
@@ -223,7 +233,8 @@ public class PTimer {
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 											TimerData td = (TimerData) dataMsg.getData();
 											if (active && td.getId()==currentId) {
-												getActor().receiveEvent(this, OUT_timerTick, null);
+												active = false;
+												getActor().receiveEvent(this, OUT_timeout, null);
 											}
 						}
 						break;
@@ -240,38 +251,56 @@ public class PTimer {
 		// TODO JH: Avoid collision attr getters/setter <-> user operations
 		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
-		public void Start(int time_ms) {
+		public void startTimer(int time_ms) {
 			
 							if (active) return;
 							active = true;
 			
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
-							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, new TimerData(time_ms,++currentId)));
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, new TimerData(time_ms,++currentId)));
+		}
+		public void startTimeout(int time_ms) {
+			
+							if (active) return;
+							active = true;
+			
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, new TimerData(time_ms,++currentId)));
 		}
 		
 		// sent messages
-		public void Kill() {
+		public void kill() {
 				//conjugate PortClass kill
 							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[IN_Kill]);
+									getPeerAddress(), messageStrings[IN_kill]);
 				
 							if (active) {
 								active = false;
 								TimerData td = new TimerData();
 								td.setId(currentId);
 								getPeerMsgReceiver().receive(
-										new EventWithDataMessage(getPeerAddress(), IN_Kill, td));
+										new EventWithDataMessage(getPeerAddress(), IN_kill, td));
 							}
 		}
-		private void internalStart(TimerData td) {
-			if (messageStrings[ IN_internalStart] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStart]);
+		private void internalStartTimer(TimerData td) {
+			if (messageStrings[ IN_internalStartTimer] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
 			}
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStart, td.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, td.deepCopy()));
 		}
-		public void internalStart(int time, int id) {
-			internalStart(new TimerData(time, id));
+		public void internalStartTimer(int time, int id) {
+			internalStartTimer(new TimerData(time, id));
+		}
+		private void internalStartTimeout(TimerData td) {
+			if (messageStrings[ IN_internalStartTimeout] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
+			}
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, td.deepCopy()));
+		}
+		public void internalStartTimeout(int time, int id) {
+			internalStartTimeout(new TimerData(time, id));
 		}
 	}
 	
@@ -303,14 +332,19 @@ public class PTimer {
 		}
 		
 		// incoming messages
-		public void Kill(){
+		public void kill(){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).Kill();
+				ports.get(i).kill();
 			}
 		}
-		private void internalStart(TimerData td){
+		private void internalStartTimer(TimerData td){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalStart( td);
+				ports.get(i).internalStartTimer( td);
+			}
+		}
+		private void internalStartTimeout(TimerData td){
+			for (int i=0; i<replication; ++i) {
+				ports.get(i).internalStartTimeout( td);
 			}
 		}
 	}

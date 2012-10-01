@@ -23,6 +23,8 @@ void etUnit_openTestSuite(const char* testSuiteName);
 void etUnit_closeTestSuite(void);
 etInt16 etUnit_openTestCase(const char* testCaseName);
 void etUnit_closeTestCase(etInt16 id);
+etBool etUnit_isSuccess(etInt16 id);
+void etUnit_testFinished(etInt16 id);
 
 /* functions for more convenience for model and generator tests */
 

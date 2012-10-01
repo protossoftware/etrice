@@ -136,6 +136,9 @@ void etUnit_closeAll(etInt16 id){
 	etUnit_close();
 }
 
+void etUnit_testFinished(etInt16 id) {
+}
+
 void expectTrue(etInt16 id, const char* message, etBool condition, const char* file, int line) {
 	if (condition == FALSE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
@@ -214,6 +217,7 @@ void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file,
 			etUnit_orderInfo[i].currentIndex = 0;
 			etUnit_orderInfo[i].size = size;
 			etUnit_orderInfo[i].list = list;
+			break;
 		}
 }
 
@@ -251,6 +255,10 @@ void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const c
 		sprintf(testresult, "EXPECT_ORDER_END %s: wrong index at the end: expected=%d, actual=%d", message, info->size, info->currentIndex);
 		etUnit_handleExpect(id, FALSE, testresult, NULL, NULL, file, line);
 	}
+}
+
+etBool etUnit_isSuccess(etInt16 id) {
+	return etUnit_testcaseSuccess[id];
 }
 
 /* private functions */

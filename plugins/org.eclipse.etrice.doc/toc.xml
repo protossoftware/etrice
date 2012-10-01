@@ -27,17 +27,18 @@
 </topic>
 </topic>
 </topic>
-<topic href="help/SettinguptheWorkspace.html" label="Setting up the Workspace"></topic>
-<topic href="help/TutorialHelloWorld.html" label="Tutorial HelloWorld">
-<topic href="help/TutorialHelloWorld.html#Scope" label="Scope"></topic>
+<topic href="help/WorkingwiththeeTriceTutorials.html" label="Working with the eTrice Tutorials"></topic>
+<topic href="help/SettinguptheWorkspaceforJavaProjects.html" label="Setting up the Workspace for Java Projects"></topic>
+<topic href="help/TutorialHelloWorldforJava.html" label="Tutorial HelloWorld for Java">
+<topic href="help/TutorialHelloWorldforJava.html#Scope" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch.html" label="Create a new model from scratch"></topic>
 <topic href="help/Createastatemachine.html" label="Create a state machine"></topic>
 <topic href="help/Buildandrunthemodel.html" label="Build and run the model"></topic>
 <topic href="help/OpentheMessageSequenceChart.html" label="Open the Message Sequence Chart"></topic>
 <topic href="help/Summary.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialBlinky.html" label="Tutorial Blinky">
-<topic href="help/TutorialBlinky.html#Scope2" label="Scope"></topic>
+<topic href="help/TutorialBlinkyJava.html" label="Tutorial Blinky (Java)">
+<topic href="help/TutorialBlinkyJava.html#Scope2" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch2.html" label="Create a new model from scratch"></topic>
 <topic href="help/Addtwoadditionalactorclasses.html" label="Add two additional actor classes"></topic>
 <topic href="help/Createanewprotocol.html" label="Create a new protocol"></topic>
@@ -46,8 +47,8 @@
 <topic href="help/ImplementtheBehavior.html" label="Implement the Behavior"></topic>
 <topic href="help/Summary2.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialSendingData.html" label="Tutorial Sending Data">
-<topic href="help/TutorialSendingData.html#Scope3" label="Scope"></topic>
+<topic href="help/TutorialSendingDataJava.html" label="Tutorial Sending Data (Java)">
+<topic href="help/TutorialSendingDataJava.html#Scope3" label="Scope"></topic>
 <topic href="help/Createanewmodelfromscratch3.html" label="Create a new model from scratch"></topic>
 <topic href="help/Addadataclass.html" label="Add a data class"></topic>
 <topic href="help/Createanewprotocol2.html" label="Create a new protocol"></topic>
@@ -60,10 +61,32 @@
 <topic href="help/Generateandrunthemodel.html" label="Generate and run the model"></topic>
 <topic href="help/Summary3.html" label="Summary"></topic>
 </topic>
-<topic href="help/TutorialPedestrianLights.html" label="Tutorial Pedestrian Lights">
-<topic href="help/TutorialPedestrianLights.html#Scope4" label="Scope"></topic>
+<topic href="help/TutorialPedestrianLightsJava.html" label="Tutorial Pedestrian Lights (Java)">
+<topic href="help/TutorialPedestrianLightsJava.html#Scope4" label="Scope"></topic>
 <topic href="help/Setupthemodel.html" label="Setup the model"></topic>
 <topic href="help/Whydoesitworkandwhyisitsafe.html" label="Why does it work and why is it safe?"></topic>
+</topic>
+<topic href="help/SettinguptheWorkspaceforCProjects.html" label="Setting up the Workspace for C Projects">
+<topic href="help/SettinguptheWorkspaceforCProjects.html#Testingtheenvironment" label="Testing the environment"></topic>
+<topic href="help/BuildingtheCruntimesystem.html" label="Building the C runtime system"></topic>
+</topic>
+<topic href="help/TutorialHelloWorldforC.html" label="Tutorial HelloWorld for C">
+<topic href="help/TutorialHelloWorldforC.html#Scope5" label="Scope"></topic>
+<topic href="help/Createanewmodelfromscratch4.html" label="Create a new model from scratch"></topic>
+<topic href="help/CreatetheHelloWorldmodel.html" label="Create the HelloWorld model"></topic>
+<topic href="help/CreatealaunchconfigurationtostarttheCcodegenerator.html" label="Create a launch configuration to start the C code generator"></topic>
+<topic href="help/Generatethecode.html" label="Generate the code"></topic>
+<topic href="help/Setuptheincludepath.html" label="Setup the include path"></topic>
+<topic href="help/Buildandrunthemodel2.html" label="Build and run the model"></topic>
+<topic href="help/Summary4.html" label="Summary"></topic>
+</topic>
+<topic href="help/TutorialRemoveCCommentC.html" label="Tutorial Remove C-Comment ( C )">
+<topic href="help/TutorialRemoveCCommentC.html#Scope6" label="Scope"></topic>
+<topic href="help/Createanewmodelfromscratch5.html" label="Create a new model from scratch"></topic>
+<topic href="help/Createyourowndatatype.html" label="Create your own data type"></topic>
+<topic href="help/Createthemodel.html" label="Create the model"></topic>
+<topic href="help/Generatebuildandrunthemodel.html" label="Generate, build and run the model"></topic>
+<topic href="help/Summary5.html" label="Summary"></topic>
 </topic>
 <topic href="help/ROOMConcepts.html" label="ROOM Concepts">
 <topic href="help/ROOMConcepts.html#Actors" label="Actors">

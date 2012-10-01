@@ -83,6 +83,13 @@ public class RoomExtensions {
     return ret;
   }
   
+  public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
+    ArrayList<T> _arrayList = new ArrayList<T>(l1);
+    ArrayList<T> ret = _arrayList;
+    ret.removeAll(l2);
+    return ret;
+  }
+  
   public String getGenerationPathSegment() {
     return "/src-gen/";
   }
@@ -266,6 +273,11 @@ public class RoomExtensions {
       _xifexpression = _union;
     }
     return _xifexpression;
+  }
+  
+  public ActorClass getContainingActorClass(final EObject o) {
+    ActorClass _actorClass = RoomHelpers.getActorClass(o);
+    return _actorClass;
   }
   
   protected String _getPortClassName(final Port p) {
@@ -524,10 +536,13 @@ public class RoomExtensions {
   public List<State> getLeafStateList(final StateGraph sg) {
     ArrayList<State> _arrayList = new ArrayList<State>();
     ArrayList<State> res = _arrayList;
-    EList<State> _states = sg.getStates();
-    for (final State s : _states) {
-      List<State> _leafStateList = this.getLeafStateList(s);
-      res.addAll(_leafStateList);
+    boolean _notEquals = (!Objects.equal(sg, null));
+    if (_notEquals) {
+      EList<State> _states = sg.getStates();
+      for (final State s : _states) {
+        List<State> _leafStateList = this.getLeafStateList(s);
+        res.addAll(_leafStateList);
+      }
     }
     return res;
   }

@@ -1,0 +1,87 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create the model</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="TutorialRemoveCCommentC.html" title="Tutorial Remove C-Comment ( C )">
+<link rel="prev" href="Createyourowndatatype.html" title="Create your own data type">
+<link rel="next" href="Generatebuildandrunthemodel.html" title="Generate, build and run the model">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Create the model</h1>
+<div class="section" title="Create the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createthemodel"></a>Create the model</h2>
+</div>
+</div>
+</div>
+<p>Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.</p>
+<p>The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. </p>
+<p>Remember the logical steps: 
+				- create the model by the help of content assist (CTRL Space)
+				- name the model, subsystem and top level actor
+				- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+				- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+				- create the state machines</p>
+<p>Try to create the model by yourself and take the following solution as an example.</p>
+<p>Structure:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC04.png"></div>
+<p>
+			
+</p>
+<p>File reader FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC05.png"></div>
+<p>
+			
+</p>
+<p>Parser FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC06.png"></div>
+<p>
+			
+</p>
+<p>The complete model can be found in 
+				<span class="emphasis"><em>org.eclipse.etrice.tutorials.c</em></span>
+			
+</p>
+<p>Take a look at the file attribute of the file reader. </p>
+<div class="literallayout">
+<p>
+<code class="code">Attribute&nbsp;f:file&nbsp;ref<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>fopen</em></span> expects a 
+				<span class="emphasis"><em>FILE *</em></span>. 
+				<span class="emphasis"><em>f:file ref</em></span> declares a variable 
+				<span class="emphasis"><em>f</em></span> from type reference to 
+				<span class="emphasis"><em>file</em></span>, which is a pointer to 
+				<span class="emphasis"><em>FILE</em></span>.
+			</p>
+</div>
+</body>
+</html>

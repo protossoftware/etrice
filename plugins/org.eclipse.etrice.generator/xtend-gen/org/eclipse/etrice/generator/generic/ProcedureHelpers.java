@@ -9,7 +9,6 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -20,7 +19,6 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -32,9 +30,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class ProcedureHelpers {
   @Inject
   private ILanguageExtension languageExt;
-  
-  @Inject
-  private ConfigExtension _configExtension;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -171,41 +166,49 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Attribute attribute : attribs) {
+        CharSequence _attributeDeclaration = this.attributeDeclaration(attribute);
+        _builder.append(_attributeDeclaration, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence attributeDeclaration(final Attribute attribute) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      int _size = attribute.getSize();
+      boolean _equals = (_size == 0);
+      if (_equals) {
+        RefableType _refType = attribute.getRefType();
+        DataType _type = _refType.getType();
+        String _typeName = this._typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
         {
-          int _size = attribute.getSize();
-          boolean _equals = (_size == 0);
-          if (_equals) {
-            RefableType _refType = attribute.getRefType();
-            DataType _type = _refType.getType();
-            String _typeName = this._typeHelpers.typeName(_type);
-            _builder.append(_typeName, "");
-            {
-              RefableType _refType_1 = attribute.getRefType();
-              boolean _isRef = _refType_1.isRef();
-              if (_isRef) {
-                String _pointerLiteral = this.languageExt.pointerLiteral();
-                _builder.append(_pointerLiteral, "");
-              }
-            }
-            _builder.append(" ");
-            String _name = attribute.getName();
-            _builder.append(_name, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          } else {
-            RefableType _refType_2 = attribute.getRefType();
-            DataType _type_1 = _refType_2.getType();
-            String _typeName_1 = this._typeHelpers.typeName(_type_1);
-            int _size_1 = attribute.getSize();
-            String _name_1 = attribute.getName();
-            RefableType _refType_3 = attribute.getRefType();
-            boolean _isRef_1 = _refType_3.isRef();
-            String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
-            _builder.append(_arrayDeclaration, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
+          RefableType _refType_1 = attribute.getRefType();
+          boolean _isRef = _refType_1.isRef();
+          if (_isRef) {
+            String _pointerLiteral = this.languageExt.pointerLiteral();
+            _builder.append(_pointerLiteral, "");
           }
         }
+        _builder.append(" ");
+        String _name = attribute.getName();
+        _builder.append(_name, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      } else {
+        RefableType _refType_2 = attribute.getRefType();
+        DataType _type_1 = _refType_2.getType();
+        String _typeName_1 = this._typeHelpers.typeName(_type_1);
+        int _size_1 = attribute.getSize();
+        String _name_1 = attribute.getName();
+        RefableType _refType_3 = attribute.getRefType();
+        boolean _isRef_1 = _refType_3.isRef();
+        String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
+        _builder.append(_arrayDeclaration, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
@@ -221,7 +224,7 @@ public class ProcedureHelpers {
     } else {
       RefableType _refType = att.getRefType();
       DataType _type = _refType.getType();
-      String _defaultValue = this._typeHelpers.defaultValue(_type);
+      String _defaultValue = this.languageExt.defaultValue(_type);
       _xifexpression = _defaultValue;
     }
     String dflt = _xifexpression;
@@ -267,171 +270,6 @@ public class ProcedureHelpers {
       _while = _lessThan_1;
     }
     return (result + "}");
-  }
-  
-  public CharSequence attributeInitialization(final List<Attribute> attribs, final boolean useClassDefaultsOnly) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("// initialize attributes");
-    _builder.newLine();
-    {
-      for(final Attribute a : attribs) {
-        String value = this._configExtension.getInitValue(a);
-        _builder.newLineIfNotEmpty();
-        {
-          boolean _notEquals = (!Objects.equal(value, null));
-          if (_notEquals) {
-            {
-              boolean _isArray = this._configExtension.isArray(a);
-              boolean _not = (!_isArray);
-              if (_not) {
-                String _name = a.getName();
-                _builder.append(_name, "");
-                _builder.append(" = ");
-                _builder.append(value, "");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-              } else {
-                boolean _startsWith = value.startsWith("{");
-                if (_startsWith) {
-                  String _name_1 = a.getName();
-                  _builder.append(_name_1, "");
-                  _builder.append(" = new ");
-                  RefableType _refType = a.getRefType();
-                  DataType _type = _refType.getType();
-                  String _typeName = this._typeHelpers.typeName(_type);
-                  _builder.append(_typeName, "");
-                  _builder.append("[] ");
-                  _builder.append(value, "");
-                  _builder.append(";");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  String _name_2 = a.getName();
-                  _builder.append(_name_2, "");
-                  _builder.append(" = new ");
-                  RefableType _refType_1 = a.getRefType();
-                  DataType _type_1 = _refType_1.getType();
-                  String _typeName_1 = this._typeHelpers.typeName(_type_1);
-                  _builder.append(_typeName_1, "");
-                  _builder.append("[");
-                  int _size = a.getSize();
-                  _builder.append(_size, "");
-                  _builder.append("];");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("for (int i=0;i<");
-                  int _size_1 = a.getSize();
-                  _builder.append(_size_1, "");
-                  _builder.append(";i++){");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  String _name_3 = a.getName();
-                  _builder.append(_name_3, "	");
-                  _builder.append("[i] = ");
-                  _builder.append(value, "	");
-                  _builder.append(";");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-            }
-          } else {
-            boolean _or = false;
-            boolean _or_1 = false;
-            RefableType _refType_2 = a.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            if ((_type_2 instanceof ComplexType)) {
-              _or_1 = true;
-            } else {
-              int _size_2 = a.getSize();
-              boolean _greaterThan = (_size_2 > 1);
-              _or_1 = ((_type_2 instanceof ComplexType) || _greaterThan);
-            }
-            if (_or_1) {
-              _or = true;
-            } else {
-              boolean _not_1 = (!useClassDefaultsOnly);
-              _or = (_or_1 || _not_1);
-            }
-            if (_or) {
-              {
-                int _size_3 = a.getSize();
-                boolean _equals = (_size_3 == 0);
-                if (_equals) {
-                  {
-                    RefableType _refType_3 = a.getRefType();
-                    boolean _isRef = _refType_3.isRef();
-                    if (_isRef) {
-                      String _name_4 = a.getName();
-                      _builder.append(_name_4, "");
-                      _builder.append(" = ");
-                      String _nullPointer = this.languageExt.nullPointer();
-                      _builder.append(_nullPointer, "");
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      String _name_5 = a.getName();
-                      _builder.append(_name_5, "");
-                      _builder.append(" = ");
-                      RefableType _refType_4 = a.getRefType();
-                      DataType _type_3 = _refType_4.getType();
-                      String _defaultValue = this._typeHelpers.defaultValue(_type_3);
-                      _builder.append(_defaultValue, "");
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                } else {
-                  String _name_6 = a.getName();
-                  _builder.append(_name_6, "");
-                  _builder.append(" = new ");
-                  RefableType _refType_5 = a.getRefType();
-                  DataType _type_4 = _refType_5.getType();
-                  String _typeName_2 = this._typeHelpers.typeName(_type_4);
-                  _builder.append(_typeName_2, "");
-                  _builder.append("[");
-                  int _size_4 = a.getSize();
-                  _builder.append(_size_4, "");
-                  _builder.append("];");
-                  _builder.newLineIfNotEmpty();
-                  {
-                    boolean _not_2 = (!useClassDefaultsOnly);
-                    if (_not_2) {
-                      _builder.append("for (int i=0;i<");
-                      int _size_5 = a.getSize();
-                      _builder.append(_size_5, "");
-                      _builder.append(";i++){");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t");
-                      String _name_7 = a.getName();
-                      _builder.append(_name_7, "	");
-                      _builder.append("[i] = ");
-                      {
-                        RefableType _refType_6 = a.getRefType();
-                        boolean _isRef_1 = _refType_6.isRef();
-                        if (_isRef_1) {
-                          String _nullPointer_1 = this.languageExt.nullPointer();
-                          _builder.append(_nullPointer_1, "	");
-                        } else {
-                          RefableType _refType_7 = a.getRefType();
-                          DataType _type_5 = _refType_7.getType();
-                          String _defaultValue_1 = this._typeHelpers.defaultValue(_type_5);
-                          _builder.append(_defaultValue_1, "	");
-                        }
-                      }
-                      _builder.append(";");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("}");
-                      _builder.newLine();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return _builder;
   }
   
   public CharSequence attributeSettersGettersDeclaration(final List<Attribute> attribs, final String classname) {
@@ -565,7 +403,7 @@ public class ProcedureHelpers {
         _builder.append(_typeName, "");
         {
           int _size = a.getSize();
-          boolean _greaterThan = (_size > 1);
+          boolean _greaterThan = (_size > 0);
           if (_greaterThan) {
             _builder.append("[]");
           }
@@ -644,7 +482,7 @@ public class ProcedureHelpers {
           }
           boolean _not = (!_and);
           if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname, true);
+            CharSequence _operationSignature = this.operationSignature(operation, classname);
             _builder.append(_operationSignature, "");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
@@ -672,7 +510,7 @@ public class ProcedureHelpers {
           }
           boolean _not = (!_and);
           if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname, false);
+            CharSequence _operationSignature = this.operationSignature(operation, classname);
             _builder.append(_operationSignature, "");
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
@@ -692,50 +530,25 @@ public class ProcedureHelpers {
   }
   
   public CharSequence operationsImplementation(final ActorClass ac) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/*--------------------- operations ---------------------*/");
-    _builder.newLine();
-    {
-      EList<StandardOperation> _operations = ac.getOperations();
-      for(final StandardOperation operation : _operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            String _name = ac.getName();
-            CharSequence _operationSignature = this.operationSignature(operation, _name, false);
-            _builder.append(_operationSignature, "");
-            _builder.append(" {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            AbstractGenerator _instance = AbstractGenerator.getInstance();
-            DetailCode _detailCode = operation.getDetailCode();
-            String _translatedCode = _instance.getTranslatedCode(_detailCode);
-            _builder.append(_translatedCode, "	");
-            _builder.newLineIfNotEmpty();
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      }
-    }
-    return _builder;
+    EList<StandardOperation> _operations = ac.getOperations();
+    String _name = ac.getName();
+    CharSequence _operationsImplementation = this.operationsImplementation(_operations, _name);
+    return _operationsImplementation;
   }
   
-  private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
+  public String destructorCall(final String classname) {
+    String _destructorName = this.languageExt.destructorName(classname);
+    String _plus = (_destructorName + "()");
+    return _plus;
+  }
+  
+  private CharSequence operationSignature(final Operation operation, final String classname) {
     CharSequence _xifexpression = null;
     boolean _isConstructor = RoomHelpers.isConstructor(operation);
     if (_isConstructor) {
       String _constructorName = this.languageExt.constructorName(classname);
       String _constructorReturnType = this.languageExt.constructorReturnType();
-      CharSequence _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType, isDeclaration);
+      CharSequence _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
       _xifexpression = _classOperationSignature;
     } else {
       CharSequence _xifexpression_1 = null;
@@ -743,7 +556,7 @@ public class ProcedureHelpers {
       if (_isDestructor) {
         String _destructorName = this.languageExt.destructorName(classname);
         String _destructorReturnType = this.languageExt.destructorReturnType();
-        CharSequence _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType, isDeclaration);
+        CharSequence _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
         _xifexpression_1 = _classOperationSignature_1;
       } else {
         String _name = operation.getName();
@@ -752,7 +565,7 @@ public class ProcedureHelpers {
         String _string = _BuildArgumentList.toString();
         RefableType _returntype = operation.getReturntype();
         String _dataTypeToString = this.dataTypeToString(_returntype);
-        CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString, isDeclaration);
+        CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
         _xifexpression_1 = _classOperationSignature_2;
       }
       _xifexpression = _xifexpression_1;
@@ -817,7 +630,7 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType, final boolean isDeclaration) {
+  private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");

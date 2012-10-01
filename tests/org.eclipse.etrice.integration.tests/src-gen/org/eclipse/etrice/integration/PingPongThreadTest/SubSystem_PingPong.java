@@ -16,8 +16,8 @@ import room.basic.service.timing.*;
 public class SubSystem_PingPong extends SubSystemClassBase{
 
 	
-	public SubSystem_PingPong(IRTObject parent, String name) {
-		super(parent, name);
+	public SubSystem_PingPong(String name) {
+		super(name);
 	}
 	
 	@Override
@@ -36,14 +36,15 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 
 	@Override
 	public void instantiateActors(){
+		
 		// all addresses
 		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,116);
-		Address addr_item_SystemPort_1 = new Address(0,0,117);
-		Address addr_item_SystemPort_2 = new Address(0,0,118);
-		Address addr_item_SystemPort_3 = new Address(0,0,119);
-		Address addr_item_SystemPort_4 = new Address(0,0,120);
-		Address addr_item_SystemPort_5 = new Address(0,0,121);
+		Address addr_item_SystemPort_0 = new Address(0,0,115);
+		Address addr_item_SystemPort_1 = new Address(0,0,116);
+		Address addr_item_SystemPort_2 = new Address(0,0,117);
+		Address addr_item_SystemPort_3 = new Address(0,0,118);
+		Address addr_item_SystemPort_4 = new Address(0,0,119);
+		Address addr_item_SystemPort_5 = new Address(0,0,120);
 		
 		// actor instance /SubSystem_PingPong/application itself => Systemport Address
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
@@ -76,7 +77,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystem_PingPong_services = new Address(0,0,113);
 		// interface items of /SubSystem_PingPong/services
-		Address addr_item__SubSystem_PingPong_services_timeout_0 = new Address(0,0,114);
+		Address addr_item__SubSystem_PingPong_services_timer_0 = new Address(0,0,114);
 
 		// instantiate all actor instances
 		instances = new ActorClassBase[6];
@@ -120,7 +121,7 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 					addr_item__SubSystem_PingPong_application_MrPong3_PingPongPort
 				},
 				{
-					addr_item__SubSystem_PingPong_services_timeout_0
+					addr_item__SubSystem_PingPong_services_timer_0
 				}
 			}
 		); 
@@ -178,16 +179,14 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 			// own interface item addresses
 			new Address[][] {{addr_item__SubSystem_PingPong_services},
 				{
-					addr_item__SubSystem_PingPong_services_timeout_0
-				},
-				null
+					addr_item__SubSystem_PingPong_services_timer_0
+				}
 			},
 			// peer interface item addresses
 			new Address[][] {{addr_item_SystemPort_5},
 				{
 					addr_item__SubSystem_PingPong_application_MrPing_timer
-				},
-				null
+				}
 			}
 		); 
 		
@@ -214,6 +213,17 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 					addr_item__SubSystem_PingPong_application_MrPong3,
 					addr_item__SubSystem_PingPong_services
 				});
-				
-	}
+		}
+	
+		
+		@Override
+		public void init(){
+			super.init();
+		}
+			
+		@Override
+		public void stop(){
+			super.stop();
+		}
+		
 };

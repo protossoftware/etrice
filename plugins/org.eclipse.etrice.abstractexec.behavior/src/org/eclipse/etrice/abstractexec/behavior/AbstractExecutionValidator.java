@@ -76,20 +76,20 @@ public class AbstractExecutionValidator implements IRoomValidator {
 					EObject item = it.next();
 					if (item instanceof StateGraphItem)
 					{
-						StateGraphItem toCheck = (StateGraphItem) item;
-						if (false/*!checker.isReachable(toCheck)*/) {
-							System.out.println("Unreachable "+ toCheck.getName());
-							
-							EObject orig = xpac.getOrig(toCheck);
-							EObject container = orig.eContainer();
-							@SuppressWarnings("unchecked")
-							int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
-							
-							messageAcceptor.acceptWarning(
-									"Unreachable state/point of graph",
-									container, toCheck.eContainingFeature(), idx,
-									"UNREACHABLE", toCheck.getName());
-						}
+//						StateGraphItem toCheck = (StateGraphItem) item;
+//						if (false/*!checker.isReachable(toCheck)*/) {
+//							System.out.println("Unreachable "+ toCheck.getName());
+//							
+//							EObject orig = xpac.getOrig(toCheck);
+//							EObject container = orig.eContainer();
+//							@SuppressWarnings("unchecked")
+//							int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
+//							
+//							messageAcceptor.acceptWarning(
+//									"Unreachable state/point of graph",
+//									container, toCheck.eContainingFeature(), idx,
+//									"UNREACHABLE", toCheck.getName());
+//						}
 					}
 				}
 			}

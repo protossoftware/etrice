@@ -51,10 +51,13 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#SettinguptheWorkspace">3. Setting up the Workspace</a></span>
+<span class="chapter"><a href="#WorkingwiththeeTriceTutorials">3. Working with the eTrice Tutorials</a></span>
 </dt>
 <dt>
-<span class="chapter"><a href="#TutorialHelloWorld">4. Tutorial HelloWorld</a></span>
+<span class="chapter"><a href="#SettinguptheWorkspaceforJavaProjects">4. Setting up the Workspace for Java Projects</a></span>
+</dt>
+<dt>
+<span class="chapter"><a href="#TutorialHelloWorldforJava">5. Tutorial HelloWorld for Java</a></span>
 </dt>
 <dd>
 <dl>
@@ -79,7 +82,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialBlinky">5. Tutorial Blinky</a></span>
+<span class="chapter"><a href="#TutorialBlinkyJava">6. Tutorial Blinky (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -110,7 +113,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialSendingData">6. Tutorial Sending Data</a></span>
+<span class="chapter"><a href="#TutorialSendingDataJava">7. Tutorial Sending Data (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -144,7 +147,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#TutorialPedestrianLights">7. Tutorial Pedestrian Lights</a></span>
+<span class="chapter"><a href="#TutorialPedestrianLightsJava">8. Tutorial Pedestrian Lights (Java)</a></span>
 </dt>
 <dd>
 <dl>
@@ -160,7 +163,76 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#ROOMConcepts">8. ROOM Concepts</a></span>
+<span class="chapter"><a href="#SettinguptheWorkspaceforCProjects">9. Setting up the Workspace for C Projects</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Testingtheenvironment">Testing the environment</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#BuildingtheCruntimesystem">Building the C runtime system</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#TutorialHelloWorldforC">10. Tutorial HelloWorld for C</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Scope5">Scope</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createanewmodelfromscratch4">Create a new model from scratch</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#CreatetheHelloWorldmodel">Create the HelloWorld model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#CreatealaunchconfigurationtostarttheCcodegenerator">Create a launch configuration to start the C code generator</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Generatethecode">Generate the code</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Setuptheincludepath">Setup the include path</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Buildandrunthemodel2">Build and run the model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Summary4">Summary</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#TutorialRemoveCCommentC">11. Tutorial Remove C-Comment ( C )</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Scope6">Scope</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createanewmodelfromscratch5">Create a new model from scratch</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createyourowndatatype">Create your own data type</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Createthemodel">Create the model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Generatebuildandrunthemodel">Generate, build and run the model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#Summary5">Summary</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#ROOMConcepts">12. ROOM Concepts</a></span>
 </dt>
 <dd>
 <dl>
@@ -769,12 +841,25 @@
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;3.&nbsp;Setting up the Workspace">
+<div class="chapter" title="Chapter&nbsp;3.&nbsp;Working with the eTrice Tutorials">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="SettinguptheWorkspace"></a>Chapter&nbsp;3.&nbsp;Setting up the Workspace</h2>
+<a name="WorkingwiththeeTriceTutorials"></a>Chapter&nbsp;3.&nbsp;Working with the eTrice Tutorials</h2>
+</div>
+</div>
+</div>
+<p>The eTrice Tutorials will help you to learn and understand the eTrice tool and concepts. ETrice supports several target languages. The concepts will not be explained for each language. </p>
+<p>Most of the common concepts will be described for Java as target language. To start with a new language the first steps to setup the workspace and to generate and run the first model will be described also. Target language specific aspects will be described as well.</p>
+<p>Therefore the best way to start with eTrice is to follow the Java Tutorials and after that switch to your target language.  </p>
+</div>
+<div class="chapter" title="Chapter&nbsp;4.&nbsp;Setting up the Workspace for Java Projects">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="SettinguptheWorkspaceforJavaProjects"></a>Chapter&nbsp;4.&nbsp;Setting up the Workspace for Java Projects</h2>
 </div>
 </div>
 </div>
@@ -792,7 +877,7 @@
 </li>
 </ul>
 </div>
-<p>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (indigo) and the eTrice plug in your workspace should look like this:  </p>
+<p>Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug in, your workspace should look like this:  </p>
 <p>
 			
 </p>
@@ -883,12 +968,12 @@
 </p>
 <p>Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is described in the tutorials.</p>
 </div>
-<div class="chapter" title="Chapter&nbsp;4.&nbsp;Tutorial HelloWorld">
+<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial HelloWorld for Java">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialHelloWorld"></a>Chapter&nbsp;4.&nbsp;Tutorial HelloWorld</h2>
+<a name="TutorialHelloWorldforJava"></a>Chapter&nbsp;5.&nbsp;Tutorial HelloWorld for Java</h2>
 </div>
 </div>
 </div>
@@ -1003,26 +1088,23 @@
 <p></p>
 </blockquote>
 </div>
-<p>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be supported. But as prerequisite for further versions the following elements are mandatory for an eTrice model:</p>
+<p>The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be used. But as prerequisite for further versions the following elements can be defined:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>the 
-						<span class="emphasis"><em>LogicalSystem</em></span> 
-					
-</p>
+						<span class="emphasis"><em>LogicalSystem</em></span> (currently optional)
+					</p>
 </li>
 <li class="listitem">
 <p>at least one 
-						<span class="emphasis"><em>SubSystemClass</em></span>
-					
-</p>
+						<span class="emphasis"><em>SubSystemClass</em></span> (mandatory)
+					</p>
 </li>
 <li class="listitem">
 <p>at least one 
-						<span class="emphasis"><em>ActorClass</em></span>
-					
-</p>
+						<span class="emphasis"><em>ActorClass</em></span> (mandatory)
+					</p>
 </li>
 </ul>
 </div>
@@ -1070,7 +1152,7 @@
 				<span class="emphasis"><em>State</em></span> from the tool box to the diagram. Confirm the dialogue with 
 				<span class="emphasis"><em>ok</em></span>. Select the 
 				<span class="emphasis"><em>Transition</em></span> in the tool box and draw the transition from the 
-				<span class="emphasis"><em>Initial Point</em></span> to the State. Open the transition dialogue by double clicking the caption of the transition and fill in the action code.
+				<span class="emphasis"><em>Initial Point</em></span> to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
 			</p>
 <div class="literallayout">
 <p>
@@ -1174,12 +1256,12 @@
 				You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;5.&nbsp;Tutorial Blinky">
+<div class="chapter" title="Chapter&nbsp;6.&nbsp;Tutorial Blinky (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialBlinky"></a>Chapter&nbsp;5.&nbsp;Tutorial Blinky</h2>
+<a name="TutorialBlinkyJava"></a>Chapter&nbsp;6.&nbsp;Tutorial Blinky (Java)</h2>
 </div>
 </div>
 </div>
@@ -1250,7 +1332,7 @@
 </div>
 </div>
 </div>
-<p>Remember exercise 
+<p>Remember the exercise 
 				<span class="emphasis"><em>HelloWorld</em></span>.
 				Create a new eTrice project and name it 
 				<span class="emphasis"><em>Blinky</em></span>
@@ -1261,7 +1343,7 @@
 				<span class="emphasis"><em>org.eclipse.etrice.tutorials/src</em></span> to your 
 				<span class="bold"><strong>src</strong></span> directory 
 				<span class="emphasis"><em>Blinky/src</em></span>. For this tutorial you must remove the error markers by editing the file 
-				<span class="emphasis"><em>PedestrianLightWndNoTcp.java</em></span>. Appropriate comments are provided to remove the error marker for this turorial.
+				<span class="emphasis"><em>PedestrianLightWndNoTcp.java</em></span>. Appropriate comments are provided to remove the error markers for this turorial.
 			</p>
 <p>Open the 
 				<span class="emphasis"><em>Blinky.room</em></span> file and copy the following code into the file or use content assist to create the model.
@@ -1408,7 +1490,7 @@
 <p></p>
 </blockquote>
 </div>
-<p>Make sure that the path fits to your folder structure.  </p>
+<p>Make sure that the path fits to your folder structure. The original tutorial code is different due to the folder structure.  </p>
 <p>Now it can be used within the model. Right click to 
 				<span class="bold"><strong>SubSystem_Blinky</strong></span> within the outline view. Select 
 				<span class="emphasis"><em>Edit Structure</em></span>. The 
@@ -1758,12 +1840,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime model of eTrice. Within this tutorial you have learned how to create a hierarchical FSM with group transitions and history transitions and you have used entry code. You are now familiar with the basic features of eTrice. The further tutorials will take this knowledge as a precondition.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;6.&nbsp;Tutorial Sending Data">
+<div class="chapter" title="Chapter&nbsp;7.&nbsp;Tutorial Sending Data (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialSendingData"></a>Chapter&nbsp;6.&nbsp;Tutorial Sending Data</h2>
+<a name="TutorialSendingDataJava"></a>Chapter&nbsp;7.&nbsp;Tutorial Sending Data (Java)</h2>
 </div>
 </div>
 </div>
@@ -2305,12 +2387,12 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>Make the test and inspect the console output.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;7.&nbsp;Tutorial Pedestrian Lights">
+<div class="chapter" title="Chapter&nbsp;8.&nbsp;Tutorial Pedestrian Lights (Java)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="TutorialPedestrianLights"></a>Chapter&nbsp;7.&nbsp;Tutorial Pedestrian Lights</h2>
+<a name="TutorialPedestrianLightsJava"></a>Chapter&nbsp;8.&nbsp;Tutorial Pedestrian Lights (Java)</h2>
 </div>
 </div>
 </div>
@@ -2538,12 +2620,811 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or not), care must be taken to use the external (secure) queue.</p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;8.&nbsp;ROOM Concepts">
+<div class="chapter" title="Chapter&nbsp;9.&nbsp;Setting up the Workspace for C Projects">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="ROOMConcepts"></a>Chapter&nbsp;8.&nbsp;ROOM Concepts</h2>
+<a name="SettinguptheWorkspaceforCProjects"></a>Chapter&nbsp;9.&nbsp;Setting up the Workspace for C Projects</h2>
+</div>
+</div>
+</div>
+<p>Before you can start with C, some preconditions must be fulfilled:</p>
+<p>- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
+			- The CDT-Eclipse plug in must be installed as the C development environment.</p>
+<p>Once the CDT is installed, the C runtime and model library must be imported. 
+			(
+			<span class="emphasis"><em>File-&gt;New-&gt;Project-&gt;eTrice</em></span> select 
+			<span class="emphasis"><em>eTrice C runtime</em></span> / 
+			<span class="emphasis"><em>eTrice C modellib</em></span>)
+		</p>
+<p>The resulting workspace should look like this:</p>
+<p>
+			
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC01.png"></div>
+<p>
+		
+</p>
+<div class="section" title="Testing the environment">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Testingtheenvironment"></a>Testing the environment</h2>
+</div>
+</div>
+</div>
+<p>To verify the C tool chain you should generate and run the Hello World example program of the CDT.
+				 Activate the 
+				<span class="emphasis"><em>C/C++</em></span> perspective. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC03.png"></div>
+<p>
+			
+</p>
+<p>From the main menu select 
+				<span class="emphasis"><em>File-&gt;New-&gt;C Project</em></span>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC02.png"></div>
+<p>
+			
+</p>
+<p>Name the project. Select an 
+				<span class="emphasis"><em>Executable-&gt;Hello World ANSI C</em></span> as project type, 
+				<span class="emphasis"><em>MinGW GCC</em></span> as tool chain and click 
+				<span class="emphasis"><em>Finish</em></span>. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC04.png"></div>
+<p> 
+			
+</p>
+<p>Select the new project and click the build button (or right click the project and select 
+				<span class="emphasis"><em>Build Project</em></span>)
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC05.png"></div>
+<p>
+			
+</p>
+<p>The binary should be generated. Run the binary as 
+				<span class="emphasis"><em>Local C/C++ Application</em></span>
+			
+</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC06.png"></div>
+<p>
+			
+</p>
+<p>Verify the output.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC07.png"></div>
+<p>
+			
+</p>
+<p>Remember these steps. In the following Tutorials these steps will be referenced as 
+				<span class="emphasis"><em>build and run</em></span>.
+			</p>
+</div>
+<div class="section" title="Building the C runtime system">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="BuildingtheCruntimesystem"></a>Building the C runtime system</h2>
+</div>
+</div>
+</div>
+<p>The C runtime system contains some basic functionalities to run the generated models. The so called runtime is common for all C projects. The requirements for several projects may differ depending on the functionality of the model or the resources of the different platforms. Therefore the runtime is configurable in terms of message queue size, frequency and memory alignment. The configuration file 
+				<span class="emphasis"><em>etRuntimeConfig.h</em></span> is located in 
+				<span class="emphasis"><em>src/config</em></span>.
+			</p>
+<p>After changing the configuration, the runtime must be built.</p>
+<p>Open the properties of the 
+				<span class="emphasis"><em>org.eclipse.runtime.c</em></span> project and select 
+				<span class="emphasis"><em>C/C++ Build-&gt;Settings-&gt;Tool Settings</em></span> and select 
+				<span class="emphasis"><em>Includes</em></span>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC08.png"></div>
+<p>
+			
+</p>
+<p>Verify the include paths</p>
+<p>
+				
+<span class="emphasis"><em>src/config</em></span>
+
+				<span class="emphasis"><em>src/common</em></span>
+
+				<span class="emphasis"><em>src/platforms/generic</em></span>
+			
+</p>
+<p>Within the Setting dialog select the tab 
+				<span class="emphasis"><em>Build Artefact</em></span> and select 
+				<span class="emphasis"><em>Static Library</em></span>
+			
+</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC09.png"></div>
+<p>
+			
+</p>
+<p>Build the runtime by clicking</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC10.png"></div>
+<p>
+			
+</p>
+<p>The runtime library should be created.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/032-SetupWorkspaceC11.png"></div>
+<p>
+			
+</p>
+<p>For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A specific library file must exist within the project. Such specific runtime libraries might be referenced from several applications.     </p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;10.&nbsp;Tutorial HelloWorld for C">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="TutorialHelloWorldforC"></a>Chapter&nbsp;10.&nbsp;Tutorial HelloWorld for C</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Scope">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Scope5"></a>Scope</h2>
+</div>
+</div>
+</div>
+<p>In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for the following explanations. 
+				You will perform the following steps:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>create a new model from scratch for C</p>
+</li>
+<li class="listitem">
+<p>create structure and behavior similar to Java</p>
+</li>
+<li class="listitem">
+<p>create a launch configuration for the C code generator</p>
+</li>
+<li class="listitem">
+<p>setup the C environment</p>
+</li>
+<li class="listitem">
+<p>generate the source code</p>
+</li>
+<li class="listitem">
+<p>run the model</p>
+</li>
+</ol>
+</div>
+<p>Make sure that you have set up the workspace as described in 
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
+			</p>
+</div>
+<div class="section" title="Create a new model from scratch">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createanewmodelfromscratch4"></a>Create a new model from scratch</h2>
+</div>
+</div>
+</div>
+<p>Before you can create a new C-model, you have to create a new C project as described in 
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
+				Remember:
+				- select the 
+				<span class="emphasis"><em>C/C++</em></span> perspective
+				- From the main menue select 
+				<span class="emphasis"><em>File-&gt;New-&gt;C Project</em></span>
+				- Name the project 
+				<span class="emphasis"><em>HelloWorldC</em></span>
+				- Project type is 
+				<span class="emphasis"><em>Executable / Empty C Project</em></span>
+				- Toolchain is 
+				<span class="emphasis"><em>MinGW</em></span>
+			
+</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC01.png"></div>
+<p>
+			
+</p>
+<p>The next step is to add the model folder:
+				Right click on the new project. Select 
+				<span class="emphasis"><em>New-&gt;Folder</em></span> and name it 
+				<span class="emphasis"><em>model</em></span>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC02.png"></div>
+<p>
+			
+</p>
+<p>Add the model file to the folder. Right click on the new folder. Select 
+				<span class="emphasis"><em>New-&gt;file</em></span> and name it 
+				<span class="emphasis"><em>HelloWorldC.room</em></span>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC03.png"></div>
+<p>
+			
+</p>
+<p>Due to the file ending 
+				<span class="emphasis"><em>.room</em></span>, the tool will ask you to add the Xtext nature. Answer with 
+				<span class="emphasis"><em>Yes</em></span>. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC04.png"></div>
+<p>
+			
+</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC05.png"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="Create the HelloWorld model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="CreatetheHelloWorldmodel"></a>Create the HelloWorld model</h2>
+</div>
+</div>
+</div>
+<p>Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
+				Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your model file. Optionally you can open and layout the diagrams.  
+				Recognize the C specific parts:
+				- The action code contains C instead of Java. Later versions will contain a common action language, but for the moment the action language is target specific.
+				- The application must be shutdown on model level (see also 
+				<span class="emphasis"><em>etRuntimeConfig.h</em></span>).  
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">RoomModel&nbsp;HelloWorldCModel&nbsp;{<br>
+	import&nbsp;room.basic.types.*&nbsp;from&nbsp;"../../org.eclipse.etrice.modellib.c/model/Types.room"<br>
+	SubSystemClass&nbsp;HelloWorldCSubSysClass&nbsp;{<br>
+		ActorRef&nbsp;HelloETriceTopRef:AHelloWorldCTop&nbsp;<br>
+	}<br>
+	ActorClass&nbsp;AHelloWorldCTop&nbsp;{<br>
+		Structure&nbsp;{&nbsp;}<br>
+		Behavior&nbsp;{<br>
+			StateMachine&nbsp;{<br>
+				Transition&nbsp;init:&nbsp;initial&nbsp;-&gt;&nbsp;state0&nbsp;{&nbsp;}<br>
+				State&nbsp;state0&nbsp;{<br>
+					entry&nbsp;{<br>
+						"printf(\"HelloWorldC&nbsp;!\\n\");"<br>
+						"SubSysClass_shutdown();"<br>
+						"\t\t\t\t\t\t"<br>
+					}<br>
+				}<br>
+			}<br>
+		}<br>
+	}	<br>
+}<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+</div>
+<div class="section" title="Create a launch configuration to start the C code generator">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="CreatealaunchconfigurationtostarttheCcodegenerator"></a>Create a launch configuration to start the C code generator</h2>
+</div>
+</div>
+</div>
+<p>Other than in Java a launch configuration for the C code generator must be created.</p>
+<p>From the 
+				<span class="emphasis"><em>Run</em></span> menu select 
+				<span class="emphasis"><em>Run Configurations</em></span>
+			
+</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC06.png"></div>
+<p>
+			
+</p>
+<p>Within the dialog select 
+				<span class="emphasis"><em>eTrice C Generator</em></span> and click the 
+				<span class="emphasis"><em>New</em></span> button to create a new launch configuration.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC07.png"></div>
+<p>
+			
+</p>
+<p>A new configuration should be created. Name it _gen_HelloWorldC_ and add the model via one of the 
+				<span class="emphasis"><em>add</em></span> buttons.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC08.png"></div>
+<p>
+			
+</p>
+<p>In the 
+				<span class="emphasis"><em>Refresh</em></span> tab select 
+				<span class="emphasis"><em>The entire workspace</em></span> 
+			
+</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC09.png"></div>
+<p>
+			
+</p>
+<p>In the 
+				<span class="emphasis"><em>Common</em></span> tab select 
+				<span class="emphasis"><em>Shared file</em></span> and add the 
+				<span class="emphasis"><em>HelloWorldC</em></span> project via the 
+				<span class="emphasis"><em>Browse</em></span> button.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC10.png"></div>
+<p>
+			
+</p>
+<p>Apply your changes. The new configuration should now exist in your workspace.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC11.png"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="Generate the code">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Generatethecode"></a>Generate the code</h2>
+</div>
+</div>
+</div>
+<p>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC12.png"></div>
+<p>
+			
+</p>
+<p>The code should be generated.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC13.png"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="Setup the include path">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Setuptheincludepath"></a>Setup the include path</h2>
+</div>
+</div>
+</div>
+<p>Before you can build the application you must setup the include path for the runtime system. Right click the project and select 
+				<span class="emphasis"><em>Properties</em></span>. Add the include path as described in 
+				<span class="emphasis"><em>setting up the workspace</em></span>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC14.png"></div>
+<p>
+			
+</p>
+<p>Add the runtime library.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC15.png"></div>
+<p>
+			
+</p>
+<p>Recognize the name of the library (&bdquo;org.eclipse.etrice.runtime.c&rdquo;). The library file on your disk is &bdquo;liborg.eclipse.etrice.runtime.c.a&rdquo;. </p>
+</div>
+<div class="section" title="Build and run the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Buildandrunthemodel2"></a>Build and run the model</h2>
+</div>
+</div>
+</div>
+<p>Now you can build the application. Click the build button to build the application.
+				Run the application as 
+				<span class="emphasis"><em>Local C/C++ Application</em></span>.
+				Verify the output.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/034-HelloWorldC16.png"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="Summary">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Summary4"></a>Summary</h2>
+</div>
+</div>
+</div>
+<p>You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create a launch configuration to start the code generator and to perform all necessary settings to compile and link the application.  </p>
+<p>The next tutorial provides an exercise to get more familiar with these working steps.</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;11.&nbsp;Tutorial Remove C-Comment ( C )">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="TutorialRemoveCCommentC"></a>Chapter&nbsp;11.&nbsp;Tutorial Remove C-Comment ( C )</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Scope">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Scope6"></a>Scope</h2>
+</div>
+</div>
+</div>
+<p>In this tutorial you will create a more complex model. The model implements a simple parser that removes comments (block comments and line comments) from a C source file. Therefore we will create two actors. One actor is responsible to perform the file operations, whether the second actor implements the parser.</p>
+<p>You will perform the following steps:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>create a new model from scratch for C</p>
+</li>
+<li class="listitem">
+<p>define a protocol</p>
+</li>
+<li class="listitem">
+<p>define your own data type</p>
+</li>
+<li class="listitem">
+<p>create the structure and the behavior by yourself</p>
+</li>
+<li class="listitem">
+<p>generate, build and run the model</p>
+</li>
+</ol>
+</div>
+<p>Make sure that you have set up the workspace as described in 
+				<span class="emphasis"><em>Setting up the Workspace for C Projects</em></span>.
+			</p>
+</div>
+<div class="section" title="Create a new model from scratch">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createanewmodelfromscratch5"></a>Create a new model from scratch</h2>
+</div>
+</div>
+</div>
+<p>Remember the following steps from the previous tutorials:
+				- select the 
+				<span class="emphasis"><em>C/C++</em></span> perspective
+				- From the main menue select 
+				<span class="emphasis"><em>File-&gt;New-&gt;C Project</em></span>
+				- Name the project 
+				<span class="emphasis"><em>RemoveComment</em></span>
+				- Project type is 
+				<span class="emphasis"><em>Executable / Empty C Project</em></span>
+				- Toolchain is 
+				<span class="emphasis"><em>MinGW</em></span>
+				- Add the folder 
+				<span class="emphasis"><em>model</em></span>
+				- Add the model file and name it 
+				<span class="emphasis"><em>RemoveComment.room</em></span>
+				- Add the Xtext nature.
+			</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC01.png"></div>
+<p>
+			
+</p>
+<p>Create a launch configuration for the C generator and add the include path and library as described in 
+				<span class="emphasis"><em>HelloWorldC</em></span>.
+			</p>
+<p>The workspace should look like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC02.png"></div>
+<p>
+			
+</p>
+<p>Now the model is created and all settings for the code generator, compiler and linker are done.</p>
+</div>
+<div class="section" title="Create your own data type">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createyourowndatatype"></a>Create your own data type</h2>
+</div>
+</div>
+</div>
+<p>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
+				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
+				<span class="emphasis"><em>Types.room</em></span> from 
+				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> to your model folder.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC03.png"></div>
+<p>
+			
+</p>
+<p>Open 
+				<span class="emphasis"><em>Types.room</em></span> and take a look at the declaration of 
+				<span class="emphasis"><em>string</em></span> (last line) which is not a basic C type.
+			</p>
+<p>
+				
+<span class="emphasis"><em>PrimitiveType string:ptCharacter -&gt; charPtr default "0"</em></span>
+			
+</p>
+<p>With this declaration, you make the 
+				<span class="emphasis"><em>string</em></span> keyword available on model level as a primitive type. This type will be translated to 
+				<span class="emphasis"><em>charPtr</em></span> in your C sources. 
+				<span class="emphasis"><em>charPtr</em></span> is defined in 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. This header file is platform specific (
+				<span class="emphasis"><em>generic</em></span>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
+			</p>
+<p>Add the following line in 
+				<span class="emphasis"><em>Types.room</em></span>:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>FILE</em></span> is the native type for MinGW. Therefore you don&acute;t need a mapping within 
+				<span class="emphasis"><em>etDatatypes.h</em></span>. If your model should be portable across different platforms you should not take this shortcut.
+			</p>
+</div>
+<div class="section" title="Create the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Createthemodel"></a>Create the model</h2>
+</div>
+</div>
+</div>
+<p>Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors and state machines.</p>
+<p>The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read characters from the source file. Another actor receives the characters and filters the comments (parser). The remaining characters (pure source code) should be print out. </p>
+<p>Remember the logical steps: 
+				- create the model by the help of content assist (CTRL Space)
+				- name the model, subsystem and top level actor
+				- define the protocol (in this case it should be able to send a char, and to request the next char from the file reader)
+				- create the structure (file reader and parser with an appropriate port, create the references and connect the ports)
+				- create the state machines</p>
+<p>Try to create the model by yourself and take the following solution as an example.</p>
+<p>Structure:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC04.png"></div>
+<p>
+			
+</p>
+<p>File reader FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC05.png"></div>
+<p>
+			
+</p>
+<p>Parser FSM:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC06.png"></div>
+<p>
+			
+</p>
+<p>The complete model can be found in 
+				<span class="emphasis"><em>org.eclipse.etrice.tutorials.c</em></span>
+			
+</p>
+<p>Take a look at the file attribute of the file reader. </p>
+<div class="literallayout">
+<p>
+<code class="code">Attribute&nbsp;f:file&nbsp;ref<br>
+
+</code>
+</p>
+</div>
+<div class="blockquote">
+<blockquote class="blockquote">
+<p></p>
+</blockquote>
+</div>
+<p>
+				
+<span class="emphasis"><em>fopen</em></span> expects a 
+				<span class="emphasis"><em>FILE *</em></span>. 
+				<span class="emphasis"><em>f:file ref</em></span> declares a variable 
+				<span class="emphasis"><em>f</em></span> from type reference to 
+				<span class="emphasis"><em>file</em></span>, which is a pointer to 
+				<span class="emphasis"><em>FILE</em></span>.
+			</p>
+</div>
+<div class="section" title="Generate, build and run the model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Generatebuildandrunthemodel"></a>Generate, build and run the model</h2>
+</div>
+</div>
+</div>
+<p>Before you can run the model you should copy one of the generated C source files into the project folder and name it 
+				<span class="emphasis"><em>test.txt</em></span>. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC07.png"></div>
+<p>
+			
+</p>
+<p>Generate, build and run the model.</p>
+<p>Your output should start like this:</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/036-RemoveCommentC08.png"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="Summary">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Summary5"></a>Summary</h2>
+</div>
+</div>
+</div>
+<p>This tutorial should help you to train the necessary steps to create a C model. By the way you have seen how to create your own type system for a real embedded project. An additional aspect was to show how simple it is to separate different aspects of the required functionality by the use of actors and protocols and make them reusable.</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;12.&nbsp;ROOM Concepts">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="ROOMConcepts"></a>Chapter&nbsp;12.&nbsp;ROOM Concepts</h2>
 </div>
 </div>
 </div>
@@ -2607,7 +3488,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N108D7">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BDE">
 <tr>
 							
 <td align="center">
@@ -2690,7 +3571,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N1095C">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C63">
 <tr>
 								
 <td align="center">
@@ -2972,7 +3853,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10A63">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D6A">
 <tr>
 								
 <td align="center">
@@ -3170,7 +4051,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10B9B">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10EA2">
 <tr>
 								
 <td align="center">
@@ -3327,7 +4208,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C5E">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F65">
 <tr>
 							
 <td align="center">
@@ -3458,7 +4339,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The simpler flat finite state machines are composed of the following elements:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D0E">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N11015">
 <tr>
 								
 <td align="center">
@@ -3572,7 +4453,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 						A few modeling elements are added to the set listed above:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10DCD">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110D4">
 <tr>
 								
 <td align="center">

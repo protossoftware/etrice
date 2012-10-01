@@ -85,7 +85,6 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	public void initUser(){}
 	public void startUser(){}
 	public void stopUser(){}
-	public void destroyUser(){}
 
 	@Override
 	public void receive(Message msg) {

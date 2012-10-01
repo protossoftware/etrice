@@ -13,7 +13,7 @@
 #ifndef _ETMSCLOGGER_H_
 #define _ETMSCLOGGER_H_
 
-#include "etGlobalFlags.h"
+#include "etRuntimeConfig.h"
 
 void etMSCLogger_open(char* logPath, char* mscName);
 void etMSCLogger_close(void);

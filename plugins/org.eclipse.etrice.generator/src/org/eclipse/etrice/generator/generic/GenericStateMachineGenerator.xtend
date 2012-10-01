@@ -25,17 +25,20 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.generator.generic.TransitionChainGenerator
+
 import static org.eclipse.xtext.util.Tuples.*
+
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 
 class GenericStateMachineGenerator {
 
 	@Inject protected ILanguageExtension langExt
 	@Inject protected extension RoomExtensions
 	@Inject protected GenericProtocolClassGenerator pcGen
-	@Inject protected org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator languageGen
+	@Inject protected TransitionChainGenerator transitionChainGenerator
 
 	def private genStateIdConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
@@ -61,7 +64,6 @@ class GenericStateMachineGenerator {
 	}
 	
 	def private genTransitionChainConstants(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
 		var chains = if (langExt.usesInheritance)
 			xpac.getOwnTransitionChains() else xpac.transitionChains
 		var offset = if (langExt.usesInheritance)
@@ -77,7 +79,6 @@ class GenericStateMachineGenerator {
 	}
 	
 	def private genTriggerConstants(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
 		val triggers = if (langExt.usesInheritance)
 			xpac.getOwnTriggers() else xpac.triggers
 
@@ -94,7 +95,6 @@ class GenericStateMachineGenerator {
 		val ac = xpac.actorClass
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
-		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		val handleEvents = async || eventDriven
 		
 	'''
@@ -122,7 +122,7 @@ class GenericStateMachineGenerator {
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
-				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«languageGen.generateArgumentList(xpac, tr)»«ENDIF») {
+				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
 				}
 			«ENDIF»
@@ -162,7 +162,7 @@ class GenericStateMachineGenerator {
 				«FOR tc : allchains»
 					case «tc.getChainId()»:
 					{
-						«languageGen.generateExecuteChain(xpac, tc)»
+						«transitionChainGenerator.generateExecuteChain(xpac, tc)»
 					}
 				«ENDFOR»
 			}

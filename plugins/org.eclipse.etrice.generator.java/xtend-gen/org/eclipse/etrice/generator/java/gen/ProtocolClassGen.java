@@ -25,6 +25,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
+import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -43,6 +44,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
+  
+  @Inject
+  private Initialization _initialization;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -246,7 +250,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         if (_notEquals_1) {
           _builder.append("\t\t");
           EList<Attribute> _attributes = pclass.getAttributes();
-          CharSequence _attributeInitialization = this._procedureHelpers.attributeInitialization(_attributes, true);
+          CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes, true);
           _builder.append(_attributeInitialization, "		");
           _builder.newLineIfNotEmpty();
         }

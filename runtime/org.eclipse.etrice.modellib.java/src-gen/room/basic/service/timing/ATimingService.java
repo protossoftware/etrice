@@ -7,9 +7,9 @@ import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
-import room.basic.service.timing.PTimeout.*;
 import room.basic.service.timing.PTimer.*;
 
 /*--------------------- begin user code ---------------------*/
@@ -25,17 +25,17 @@ public class ATimingService extends ActorClassBase {
 	private static final int PURGE_LIMIT = 1000;
 	/*--------------------- end user code ---------------------*/
 	
+	
 	//--------------------- ports
 	
 	//--------------------- saps
 	
 	//--------------------- services
-	protected PTimeoutReplPort timeout = null;
 	protected PTimerReplPort timer = null;
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_timeout = 1;
-	public static final int IFITEM_timer = 2;
+	public static final int IFITEM_timer = 1;
+
 		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -57,14 +57,14 @@ public class ATimingService extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-		timeout = new PTimeoutReplPort(this, "timeout", IFITEM_timeout, port_addr[IFITEM_timeout], peer_addr[IFITEM_timeout]); 
 		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
 	}
+
+	
 	//--------------------- attribute setters and getters
+	
+	
 	//--------------------- port getters
-	public PTimeoutReplPort getTimeout (){
-		return this.timeout;
-	}
 	public PTimerReplPort getTimer (){
 		return this.timer;
 	}
@@ -88,17 +88,15 @@ public class ATimingService extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
-	public static final int CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStarttimeout_tr1 = 2;
-	public static final int CHAIN_TRANS_tr2_FROM_Operational_TO_Operational_BY_Killtimeout_tr2 = 3;
-	public static final int CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStarttimer_tr3 = 4;
-	public static final int CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_Killtimer_tr4 = 5;
+	public static final int CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1 = 2;
+	public static final int CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3 = 3;
+	public static final int CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4 = 4;
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_timeout__Kill = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_Kill;
-	public static final int TRIG_timeout__internalStart = IFITEM_timeout + EVT_SHIFT*PTimeout.IN_internalStart;
-	public static final int TRIG_timer__Kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_Kill;
-	public static final int TRIG_timer__internalStart = IFITEM_timer + EVT_SHIFT*PTimer.IN_internalStart;
+	public static final int TRIG_timer__internalStartTimeout = IFITEM_timer + EVT_SHIFT*PTimer.IN_internalStartTimeout;
+	public static final int TRIG_timer__internalStartTimer = IFITEM_timer + EVT_SHIFT*PTimer.IN_internalStartTimer;
+	public static final int TRIG_timer__kill = IFITEM_timer + EVT_SHIFT*PTimer.IN_kill;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","Operational"
@@ -124,23 +122,20 @@ public class ATimingService extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__Operational() {
 		timerService = new Timer();
 	}
-	protected void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStarttimeout_tr1(InterfaceItemBase ifitem, TimerData td) {
-		// start timeout
-		taskCount++;
-		if (taskCount>PURGE_LIMIT) timerService.purge();
-		timerService.schedule(((PTimeoutPort)ifitem).getTask(), ((TimerData)td).getTime());
-	}
-	protected void action_TRANS_tr2_FROM_Operational_TO_Operational_BY_Killtimeout_tr2(InterfaceItemBase ifitem) {
-		// nothing to do to kill timer (handled by timer)
-	}
-	protected void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStarttimer_tr3(InterfaceItemBase ifitem, TimerData td) {
+	protected void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(InterfaceItemBase ifitem, TimerData td) {
 		// start timer
 		taskCount++;
 		if (taskCount>PURGE_LIMIT) timerService.purge();
 		int t = td.getTime();
 		timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(),t,t);
 	}
-	protected void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_Killtimer_tr4(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(InterfaceItemBase ifitem, TimerData td) {
+		// start timeout
+		taskCount++;
+		if (taskCount>PURGE_LIMIT) timerService.purge();
+		timerService.schedule(((PTimerPort)ifitem).getTask(), ((TimerData)td).getTime());
+	}
+	protected void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(InterfaceItemBase ifitem) {
 		// nothing to do to kill timer (handled by timer)
 	}
 	
@@ -176,26 +171,21 @@ public class ATimingService extends ActorClassBase {
 				action_TRANS_INITIAL_TO__Operational();
 				return STATE_Operational;
 			}
-			case CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStarttimeout_tr1:
+			case CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1:
 			{
 				TimerData td = (TimerData) generic_data;
-				action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStarttimeout_tr1(ifitem, td);
+				action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(ifitem, td);
 				return STATE_Operational;
 			}
-			case CHAIN_TRANS_tr2_FROM_Operational_TO_Operational_BY_Killtimeout_tr2:
-			{
-				action_TRANS_tr2_FROM_Operational_TO_Operational_BY_Killtimeout_tr2(ifitem);
-				return STATE_Operational;
-			}
-			case CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStarttimer_tr3:
+			case CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3:
 			{
 				TimerData td = (TimerData) generic_data;
-				action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStarttimer_tr3(ifitem, td);
+				action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(ifitem, td);
 				return STATE_Operational;
 			}
-			case CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_Killtimer_tr4:
+			case CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4:
 			{
-				action_TRANS_tr4_FROM_Operational_TO_Operational_BY_Killtimer_tr4(ifitem);
+				action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(ifitem);
 				return STATE_Operational;
 			}
 		}
@@ -243,27 +233,21 @@ public class ATimingService extends ActorClassBase {
 			switch (this.state) {
 				case STATE_Operational:
 					switch(trigger) {
-						case TRIG_timeout__internalStart:
+						case TRIG_timer__internalStartTimer:
 							{
-								chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStarttimeout_tr1;
+								chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1;
 								catching_state = STATE_TOP;
 							}
 						break;
-						case TRIG_timeout__Kill:
+						case TRIG_timer__internalStartTimeout:
 							{
-								chain = CHAIN_TRANS_tr2_FROM_Operational_TO_Operational_BY_Killtimeout_tr2;
+								chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3;
 								catching_state = STATE_TOP;
 							}
 						break;
-						case TRIG_timer__internalStart:
+						case TRIG_timer__kill:
 							{
-								chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStarttimer_tr3;
-								catching_state = STATE_TOP;
-							}
-						break;
-						case TRIG_timer__Kill:
-							{
-								chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_Killtimer_tr4;
+								chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
 								catching_state = STATE_TOP;
 							}
 						break;

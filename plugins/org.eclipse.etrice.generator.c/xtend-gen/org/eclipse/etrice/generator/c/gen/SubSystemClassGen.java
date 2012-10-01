@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
@@ -31,12 +32,13 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -59,7 +61,7 @@ public class SubSystemClassGen {
   private ProcedureHelpers helpers;
   
   @Inject
-  private TypeHelpers _typeHelpers;
+  private ConfigExtension _configExtension;
   
   @Inject
   private ILanguageExtension languageExt;
@@ -197,19 +199,16 @@ public class SubSystemClassGen {
     _builder.append("_destroy(void); \t/* lifecycle destroy */");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("void ");
-    String _name_7 = ssc.getName();
-    _builder.append(_name_7, "");
-    _builder.append("_shutdown(void);  /* shutdown the dispatcher loop */");
-    _builder.newLineIfNotEmpty();
+    _builder.append("void SubSysClass_shutdown(void);  /* shutdown the dispatcher loop */");
+    _builder.newLine();
     _builder.newLine();
     DetailCode _userCode2 = ssc.getUserCode2();
     CharSequence _userCode_1 = this.helpers.userCode(_userCode2);
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_8 = ssc.getName();
-    CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_8);
+    String _name_7 = ssc.getName();
+    CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_7);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -265,7 +264,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("#include \"platform/etTimer.h\"");
     _builder.newLine();
-    _builder.append("#include \"etGlobalFlags.h\"");
+    _builder.append("#include \"etRuntimeConfig.h\"");
     _builder.newLine();
     _builder.newLine();
     DetailCode _userCode3 = ssc.getUserCode3();
@@ -528,8 +527,11 @@ public class SubSystemClassGen {
             _builder.append("\t");
             ActorClass _actorClass_1 = ai.getActorClass();
             String _name_22 = _actorClass_1.getName();
-            String _destructorName = this.languageExt.destructorName(_name_22);
-            _builder.append(_destructorName, "	");
+            ActorClass _actorClass_2 = ai.getActorClass();
+            String _name_23 = _actorClass_2.getName();
+            String _destructorName = this.languageExt.destructorName(_name_23);
+            String _memberInUse = this.languageExt.memberInUse(_name_22, _destructorName);
+            _builder.append(_memberInUse, "	");
             _builder.append("(&");
             String _path = ai.getPath();
             String _pathName = this.roomExt.getPathName(_path);
@@ -546,11 +548,8 @@ public class SubSystemClassGen {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("void ");
-    String _name_23 = ssc.getName();
-    _builder.append(_name_23, "");
-    _builder.append("_shutdown(void){");
-    _builder.newLineIfNotEmpty();
+    _builder.append("void SubSysClass_shutdown(void){");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"SubSys\", \"shutdown\")");
     _builder.newLine();
@@ -587,8 +586,8 @@ public class SubSystemClassGen {
       EList<ActorInstance> _allContainedInstances_1 = ssi.getAllContainedInstances();
       for(final ActorInstance ai_1 : _allContainedInstances_1) {
         {
-          ActorClass _actorClass_2 = ai_1.getActorClass();
-          EList<StandardOperation> _operations_1 = _actorClass_2.getOperations();
+          ActorClass _actorClass_3 = ai_1.getActorClass();
+          EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
           final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
               public Boolean apply(final StandardOperation op) {
                 boolean _isConstructor = RoomHelpers.isConstructor(op);
@@ -600,10 +599,13 @@ public class SubSystemClassGen {
           boolean _not_1 = (!_isEmpty_1);
           if (_not_1) {
             _builder.append("\t");
-            ActorClass _actorClass_3 = ai_1.getActorClass();
-            String _name_28 = _actorClass_3.getName();
-            String _constructorName = this.languageExt.constructorName(_name_28);
-            _builder.append(_constructorName, "	");
+            ActorClass _actorClass_4 = ai_1.getActorClass();
+            String _name_28 = _actorClass_4.getName();
+            ActorClass _actorClass_5 = ai_1.getActorClass();
+            String _name_29 = _actorClass_5.getName();
+            String _constructorName = this.languageExt.constructorName(_name_29);
+            String _memberInUse_1 = this.languageExt.memberInUse(_name_28, _constructorName);
+            _builder.append(_memberInUse_1, "	");
             _builder.append("(&");
             String _path_1 = ai_1.getPath();
             String _pathName_1 = this.roomExt.getPathName(_path_1);
@@ -621,23 +623,23 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.newLine();
     _builder.append("void ");
-    String _name_29 = ssc.getName();
-    _builder.append(_name_29, "");
+    String _name_30 = ssc.getName();
+    _builder.append(_name_30, "");
     _builder.append("_initActorInstances(void){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-    String _name_30 = ssc.getName();
-    _builder.append(_name_30, "	");
+    String _name_31 = ssc.getName();
+    _builder.append(_name_31, "	");
     _builder.append("\", \"initActorInstances\")");
     _builder.newLineIfNotEmpty();
     {
       EList<ActorInstance> _allContainedInstances_2 = ssi.getAllContainedInstances();
       for(final ActorInstance ai_2 : _allContainedInstances_2) {
         _builder.append("\t");
-        ActorClass _actorClass_4 = ai_2.getActorClass();
-        String _name_31 = _actorClass_4.getName();
-        _builder.append(_name_31, "	");
+        ActorClass _actorClass_6 = ai_2.getActorClass();
+        String _name_32 = _actorClass_6.getName();
+        _builder.append(_name_32, "	");
         _builder.append("_init(&");
         String _path_2 = ai_2.getPath();
         String _pathName_2 = this.roomExt.getPathName(_path_2);
@@ -902,7 +904,7 @@ public class SubSystemClassGen {
           } else {
             RefableType _refType = attr.getRefType();
             DataType _type = _refType.getType();
-            String _defaultValue = this._typeHelpers.defaultValue(_type);
+            String _defaultValue = this.stdExt.defaultValue(_type);
             _builder.append(_defaultValue, "");
           }
         }
@@ -982,6 +984,20 @@ public class SubSystemClassGen {
           }
         };
       Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_5);
+      final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance p) {
+            boolean _and = false;
+            if (!(p instanceof PortInstance)) {
+              _and = false;
+            } else {
+              Port _port = ((PortInstance) p).getPort();
+              boolean _isConjugated = _port.isConjugated();
+              _and = ((p instanceof PortInstance) && _isConjugated);
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+      Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_6);
       HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
       HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
@@ -1015,7 +1031,7 @@ public class SubSystemClassGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
-            final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+            final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
                 public Boolean apply(final InterfaceItemInstance e) {
                   EList<InterfaceItemInstance> _peers = e.getPeers();
                   boolean _isEmpty = _peers.isEmpty();
@@ -1023,7 +1039,7 @@ public class SubSystemClassGen {
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_6);
+            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_7);
             boolean _hasElements = false;
             for(final InterfaceItemInstance pi : _filter_2) {
               if (!_hasElements) {
@@ -1139,10 +1155,50 @@ public class SubSystemClassGen {
           _builder.append(_name_1, "");
           _builder.append(" ");
           _builder.append(instName, "");
-          _builder.append(" = {&");
-          _builder.append(instName, "");
-          _builder.append("_const};");
+          _builder.append(" = {");
           _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("&");
+          _builder.append(instName, "	");
+          _builder.append("_const,");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* data send ports */");
+          _builder.newLine();
+          {
+            for(final InterfaceItemInstance pi_3 : sendPorts) {
+              _builder.append("\t");
+              CharSequence _genSendPortInitializer = this.genSendPortInitializer(pi_3);
+              _builder.append(_genSendPortInitializer, "	");
+              _builder.append(",");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* attributes */");
+          _builder.newLine();
+          {
+            ActorClass _actorClass_2 = ai.getActorClass();
+            List<Attribute> _allAttributes = this.roomExt.getAllAttributes(_actorClass_2);
+            for(final Attribute att : _allAttributes) {
+              _builder.append("\t");
+              String _genAttributeInitializer = this.genAttributeInitializer(ai, att);
+              _builder.append(_genAttributeInitializer, "	");
+              _builder.append(",");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* state and history are initialized in init fuction */");
+          _builder.newLine();
+          _builder.append("};");
+          _builder.newLine();
         }
       }
       _xblockexpression = (_builder);
@@ -1195,6 +1251,61 @@ public class SubSystemClassGen {
       String _plus_9 = (_plus_8 + _name);
       String _plus_10 = (_plus_9 + " */");
       _xblockexpression = (_plus_10);
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence genSendPortInitializer(final InterfaceItemInstance pi) {
+    CharSequence _xblockexpression = null;
+    {
+      Port _port = ((PortInstance) pi).getPort();
+      GeneralProtocolClass _protocol = _port.getProtocol();
+      final ProtocolClass pc = ((ProtocolClass) _protocol);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      {
+        EList<Message> _incomingMessages = pc.getIncomingMessages();
+        boolean _hasElements = false;
+        for(final Message m : _incomingMessages) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate(",", "	");
+          }
+          _builder.append("\t");
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _defaultValue = this.stdExt.defaultValue(_type);
+          _builder.append(_defaultValue, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private String genAttributeInitializer(final ActorInstance ai, final Attribute att) {
+    String _xblockexpression = null;
+    {
+      final String value = this._configExtension.getInitValueLiteral(att);
+      String _xifexpression = null;
+      boolean _equals = Objects.equal(value, null);
+      if (_equals) {
+        RefableType _refType = att.getRefType();
+        DataType _type = _refType.getType();
+        int _size = att.getSize();
+        String _initializationWithDefaultValues = this.stdExt.initializationWithDefaultValues(_type, _size);
+        _xifexpression = _initializationWithDefaultValues;
+      } else {
+        String _string = value.toString();
+        _xifexpression = _string;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

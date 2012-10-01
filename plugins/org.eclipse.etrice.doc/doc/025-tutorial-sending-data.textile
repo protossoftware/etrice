@@ -1,4 +1,4 @@
-h1. Tutorial Sending Data
+h1. Tutorial Sending Data (Java)
 
 h2. Scope
 

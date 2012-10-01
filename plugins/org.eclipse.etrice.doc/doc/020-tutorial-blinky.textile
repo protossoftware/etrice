@@ -1,4 +1,4 @@
-h1. Tutorial Blinky
+h1. Tutorial Blinky (Java)
 
 h2. Scope
 
@@ -28,10 +28,10 @@ You will perform the following steps:
 
 h2. Create a new model from scratch
 
-Remember exercise _HelloWorld_.
+Remember the exercise _HelloWorld_.
 Create a new eTrice project and name it _Blinky_
 
-To use the GUI please copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ from _org.eclipse.etrice.tutorials/src_ to your *src* directory _Blinky/src_. For this tutorial you must remove the error markers by editing the file _PedestrianLightWndNoTcp.java_. Appropriate comments are provided to remove the error marker for this turorial.
+To use the GUI please copy the package _org.eclipse.etrice.tutorials.PedLightGUI_ from _org.eclipse.etrice.tutorials/src_ to your *src* directory _Blinky/src_. For this tutorial you must remove the error markers by editing the file _PedestrianLightWndNoTcp.java_. Appropriate comments are provided to remove the error markers for this turorial.
 
 Open the _Blinky.room_ file and copy the following code into the file or use content assist to create the model.
 
@@ -101,7 +101,7 @@ RoomModel Blinky {
 ...     
 bq. 
 
-Make sure that the path fits to your folder structure.  
+Make sure that the path fits to your folder structure. The original tutorial code is different due to the folder structure.  
 
 Now it can be used within the model. Right click to *SubSystem_Blinky* within the outline view. Select _Edit Structure_. The _application_ is already referenced in the subsystem. Drag and Drop an _ActorRef_ to the *SubSystem_Blinky* and name it _timingService_. From the actor class drop down list select _room.basic.service.timing.ATimingService_. Draw a _LayerConnection_ from _application_ to each service provision point (SPP) of the _timingService_. The resulting structure should look like this:
 
