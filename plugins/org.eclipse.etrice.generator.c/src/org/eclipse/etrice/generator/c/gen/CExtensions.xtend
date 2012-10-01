@@ -31,11 +31,14 @@ import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
+	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(Message m) {
 		generateArglistAndTypedData(m.data).get(1)
@@ -172,8 +175,8 @@ class CExtensions implements ILanguageExtension {
 			
 			'''
 				{
-					«FOR att : dc.attributes SEPARATOR ","»
-						«att.refType.type.initializationWithDefaultValues(att.size)»
+					«FOR att : dc.allAttributes SEPARATOR ","»
+						«att.initializationWithDefaultValues»
 					«ENDFOR»
 				}
 			'''
@@ -182,6 +185,10 @@ class CExtensions implements ILanguageExtension {
 	
 	override initializationWithDefaultValues(DataType dt, int size) {
 		val dv = dt.defaultValue
+		dv.initializer(size)
+	}
+
+	def private initializer(String dv, int size) {
 		if (size>1) {
 			var res = "{"
 			var i = 0
@@ -195,6 +202,18 @@ class CExtensions implements ILanguageExtension {
 		}
 		else
 			dv
+	}
+	
+	def initializationWithDefaultValues(Attribute att) {
+		val dv = att.defaultValueLiteral
+		if (dv!=null) {
+			if (dv.startsWith("{"))
+				dv
+			else
+				dv.initializer(att.size)
+		}
+		else
+			att.refType.type.initializationWithDefaultValues(att.size)
 	}
 	
 	override generateArglistAndTypedData(VarDecl data) {
@@ -216,17 +235,22 @@ class CExtensions implements ILanguageExtension {
 		else
 			typeName
 		castTypeName = castTypeName+"*"
+		var deRef = "*"
 		
-		if (data.getRefType().isRef()) {
-			typeName = typeName+"*"
-			castTypeName = castTypeName+"*"
+		val isRef = data.getRefType().isRef()
+		val isPrim = (data.getRefType().getType() instanceof PrimitiveType)
+		if (isRef) {
+				typeName = typeName+"*"
+				castTypeName = castTypeName+"*"
 		}
-		if (!(data.getRefType().getType() instanceof PrimitiveType)) {
-			typeName = typeName+"*"
-			castTypeName = castTypeName+"*"
+		else {
+			if (!isPrim) {
+				typeName = typeName+"*"
+				deRef = ""
+			}
 		}
 			
-		val typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
+		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data);\n"
 
 		val dataArg = ", "+data.getName()
 		val typedArgList = ", "+typeName+" "+data.getName()

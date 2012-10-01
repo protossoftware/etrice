@@ -388,7 +388,7 @@ class SubSystemClassGen {
 				
 				/* attributes */
 				«FOR att : ai.actorClass.allAttributes»
-					«ai.genAttributeInitializer(att)»,
+					«ai.genAttributeInitializer(att)»,	/* «att.name»«IF att.size>1»[«att.size»]«ENDIF» */
 				«ENDFOR»
 				
 				/* state and history are initialized in init fuction */
@@ -422,7 +422,7 @@ class SubSystemClassGen {
 	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
 		val value = att.initValueLiteral
 		if (value==null)
-			att.refType.type.initializationWithDefaultValues(att.size)
+			att.initializationWithDefaultValues
 		else
 			value.toString
 	}
