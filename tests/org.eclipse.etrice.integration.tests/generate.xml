@@ -24,7 +24,7 @@
 				<include name="com.google.guava_10.*.jar" />
 				<include name="org.eclipse.equinox.common_3.6.*.jar" />
 				<include name="org.eclipse.xtext.util_2.*.jar" />
-				<include name="org.eclipse.xtext.xtend2.lib_2.*.jar" />
+				<include name="org.eclipse.xtend.lib_2.*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
 				<include name="org.apache.log4j_1.2*.jar" />
 				<include name="org.antlr.runtime_3.2*.jar" />
