@@ -817,6 +817,8 @@ public class TransitionSupport {
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			PictogramElement pe = context.getPictogramElements()[0];
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe.eContainer();
 			Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof Transition) {
 				Transition trans = (Transition) bo;
