@@ -230,14 +230,33 @@ public class EtUnitReportConverter {
 			}
 		}
 	}
+	
+	private static String doEscape(String x){
+		int index = 0;
+		String c = "azAZ";
+		String ret = x;
+		while (index < x.length()-2)
+		{
+			if (ret.charAt(index) >= c.charAt(0) && 
+				ret.charAt(index) <= c.charAt(1) && 
+				ret.charAt(index+1) >= c.charAt(2) && 
+				ret.charAt(index+1) <= c.charAt(3)
+			)
+			{
+				ret = ret.substring(0,index+1) + "\\-" + ret.substring(index+1);
+			}
+			index = index + 1;
+		}
+		return ret.replaceAll("_","\\\\-\\\\_");
+	}
 
 	private static void saveTexReport(DocumentRoot root, File report) {
 		StringBuilder contents = new StringBuilder();
 
-        contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
-        contents.append("\\newcounter{FailCount}%\n");
-        contents.append("\\newcommand{\\ForAllSuites}{%\n");
-        contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
+		contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
+		contents.append("\\newcounter{FailCount}%\n");
+		contents.append("\\newcommand{\\ForAllSuites}{%\n");
+		contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
 		for (TestsuiteType ts : root.getTestsuites().getTestsuite()) {
 			contents.append("    \\setcounter{FailCount}{"+ts.getFailures()+"}%\n");
 			contents.append("    \\renewcommand{\\ForAllTestCases}{%\n");
@@ -249,12 +268,12 @@ public class EtUnitReportConverter {
 						:
 						"";
 				String combinedName = ts.getName()+tc.getName();
-				contents.append("        \\DoCase{" + tc.getName() + "}{" + tc.getTime() + "}{" + status + "}{" + msg
+				contents.append("        \\DoCase{" + tc.getName() + "}{" + doEscape(tc.getName()) + "}{" + tc.getTime() + "}{" + status + "}{" + msg
 						+ "}{\\" + combinedName + "shortdesc}{\\" + combinedName + "longdesc}%\n");
 			}
 			contents.append("    }%\n");
 			int nPassed = ts.getTests()-ts.getFailures();
-			contents.append("    \\DoSuite{"+ts.getName()+"}{"+ts.getTests()+"}{"+nPassed+"}{"+ts.getFailures()+"}{"+ts.getTime()+"}%\n");
+			contents.append("    \\DoSuite{"+ts.getName()+"}{" + doEscape(ts.getName()) + "}{"+ts.getTests()+"}{"+nPassed+"}{"+ts.getFailures()+"}{"+ts.getTime()+"}%\n");
 		}
 		contents.append("}%\n");
 		
