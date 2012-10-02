@@ -87,4 +87,21 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.tutorials.c ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" 
+			name="eTrice C Tutorials" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice C tutorials accompanying the online help</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.tutorials.c" contentURI="contents/org.eclipse.etrice.tutorials.c.zip" description="eTrice C Tutorials"/>
+	  </example>
+	</extension>   
+
 </plugin>
