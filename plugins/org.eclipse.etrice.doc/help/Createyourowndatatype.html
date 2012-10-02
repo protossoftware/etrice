@@ -21,20 +21,11 @@
 </div>
 </div>
 <p>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
-				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
-				<span class="emphasis"><em>Types.room</em></span> from 
-				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> to your model folder.
+				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type. 
 			</p>
-<p>
-				
-</p>
-<div class="mediaobject">
-<img src="images/036-RemoveCommentC03.png"></div>
-<p>
-			
-</p>
-<p>Open 
-				<span class="emphasis"><em>Types.room</em></span> and take a look at the declaration of 
+<p>Open the file 
+				<span class="emphasis"><em>Types.room</em></span> from 
+				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> and take a look at the declaration of 
 				<span class="emphasis"><em>string</em></span> (last line) which is not a basic C type.
 			</p>
 <p>
@@ -49,12 +40,15 @@
 				<span class="emphasis"><em>etDatatypes.h</em></span>. This header file is platform specific (
 				<span class="emphasis"><em>generic</em></span>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 			</p>
-<p>Add the following line in 
-				<span class="emphasis"><em>Types.room</em></span>:
-			</p>
+<p>To not interfere with other models, we will declare the type direct in the model.
+				Add the following line to your model:</p>
 <div class="literallayout">
 <p>
-<code class="code">PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
+<code class="code">RoomModel&nbsp;RemoveComment&nbsp;{<br>
+	import&nbsp;room.basic.types.*&nbsp;from&nbsp;"../../../org.eclipse.etrice.modellib.c/model/Types.room"<br>
+	
+<br>
+	PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
 
 </code>
 </p>

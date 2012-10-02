@@ -3255,20 +3255,11 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
-				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
-				<span class="emphasis"><em>Types.room</em></span> from 
-				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> to your model folder.
+				<span class="emphasis"><em>FILE</em></span>. To make this type available on the model level, you have to declare the type. 
 			</p>
-<p>
-				
-</p>
-<div class="mediaobject">
-<img src="images/036-RemoveCommentC03.png"></div>
-<p>
-			
-</p>
-<p>Open 
-				<span class="emphasis"><em>Types.room</em></span> and take a look at the declaration of 
+<p>Open the file 
+				<span class="emphasis"><em>Types.room</em></span> from 
+				<span class="emphasis"><em>org.eclipse.modellib.c</em></span> and take a look at the declaration of 
 				<span class="emphasis"><em>string</em></span> (last line) which is not a basic C type.
 			</p>
 <p>
@@ -3283,12 +3274,15 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 				<span class="emphasis"><em>etDatatypes.h</em></span>. This header file is platform specific (
 				<span class="emphasis"><em>generic</em></span>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 			</p>
-<p>Add the following line in 
-				<span class="emphasis"><em>Types.room</em></span>:
-			</p>
+<p>To not interfere with other models, we will declare the type direct in the model.
+				Add the following line to your model:</p>
 <div class="literallayout">
 <p>
-<code class="code">PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
+<code class="code">RoomModel&nbsp;RemoveComment&nbsp;{<br>
+	import&nbsp;room.basic.types.*&nbsp;from&nbsp;"../../../org.eclipse.etrice.modellib.c/model/Types.room"<br>
+	
+<br>
+	PrimitiveType&nbsp;file:ptInteger&nbsp;-&gt;&nbsp;FILE&nbsp;default&nbsp;"0"<br>
 
 </code>
 </p>
@@ -3488,7 +3482,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BDE">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BD1">
 <tr>
 							
 <td align="center">
@@ -3571,7 +3565,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C63">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C56">
 <tr>
 								
 <td align="center">
@@ -3853,7 +3847,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D6A">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D5D">
 <tr>
 								
 <td align="center">
@@ -4051,7 +4045,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10EA2">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10E95">
 <tr>
 								
 <td align="center">
@@ -4208,7 +4202,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F65">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F58">
 <tr>
 							
 <td align="center">
@@ -4339,7 +4333,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The simpler flat finite state machines are composed of the following elements:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N11015">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N11008">
 <tr>
 								
 <td align="center">
@@ -4453,7 +4447,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 						A few modeling elements are added to the set listed above:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110D4">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110C7">
 <tr>
 								
 <td align="center">

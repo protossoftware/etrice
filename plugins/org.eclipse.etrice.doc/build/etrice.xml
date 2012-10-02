@@ -2189,19 +2189,11 @@ carLights.setState(TrafficLight3.OFF);
 		<section id="Createyourowndatatype">
 			<title>Create your own data type</title>
 			<para>The planed application should read a C source file and remove the comments. Therefore we need a file descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is 
-				<emphasis>FILE</emphasis>. To make this type available on the model level, you have to declare the type in Types.room. To not interfere with other models, make a copy of 
+				<emphasis>FILE</emphasis>. To make this type available on the model level, you have to declare the type. 
+			</para>
+			<para>Open the file 
 				<emphasis>Types.room</emphasis> from 
-				<emphasis>org.eclipse.modellib.c</emphasis> to your model folder.
-			</para>
-			<para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/036-RemoveCommentC03.png"/>
-					</imageobject>
-				</mediaobject>
-			</para>
-			<para>Open 
-				<emphasis>Types.room</emphasis> and take a look at the declaration of 
+				<emphasis>org.eclipse.modellib.c</emphasis> and take a look at the declaration of 
 				<emphasis>string</emphasis> (last line) which is not a basic C type.
 			</para>
 			<para>
@@ -2214,10 +2206,12 @@ carLights.setState(TrafficLight3.OFF);
 				<emphasis>etDatatypes.h</emphasis>. This header file is platform specific (
 				<emphasis>generic</emphasis>). With this mechanism you can define your own type system on model level and map the model types to specific target/platform types. 
 			</para>
-			<para>Add the following line in 
-				<emphasis>Types.room</emphasis>:
-			</para>
-			<literallayout><code>PrimitiveType file:ptInteger -&gt; FILE default "0"
+			<para>To not interfere with other models, we will declare the type direct in the model.
+				Add the following line to your model:</para>
+			<literallayout><code>RoomModel RemoveComment {
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	
+	PrimitiveType file:ptInteger -&gt; FILE default "0"
 </code></literallayout>
 			<blockquote>
 				<para></para>
