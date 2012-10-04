@@ -1,0 +1,130 @@
+RoomModel trafficlight.example {
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/models/Types.room"
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/models/TimingService.room"
+	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
+	
+	SubSystemClass SSTraffic {
+		ActorRef application:Application
+		ActorRef TimingService: ATimingService
+		LayerConnection ref application satisfied_by TimingService.timer
+	}
+	
+	
+	ActorClass Application {
+		Structure {
+			ActorRef light1: TrafficLight
+			ActorRef light2: TrafficLight
+		}
+		Behavior { }
+	}
+	
+	ActorClass TrafficLight {
+		Structure {
+			conjugated Port tcpCtrl: PTcpControl
+			conjugated Port tcpPayload: PTcpPayload
+			SAP timeout: PTimer
+			SAP blinkerTimeout: PTimer
+			Attribute ipConfig : DTcpControl
+			ActorRef trafficLightSocket: ATcpClient
+			Binding trafficLightSocket.ControlPort and tcpCtrl
+			Binding trafficLightSocket.PayloadPort and tcpPayload
+			
+			
+		}
+		Behavior {
+			
+			Operation sendString (text: string){"
+				DTcpPayload pl = new DTcpPayload();
+				pl.setData(text.getBytes());
+				tcpPayload.send(new DTcpPayload(1, text.length(), text.getBytes()));
+			"}
+			StateMachine {
+				Transition init: initial -> OpenSocket { }
+				Transition tr0: OpenSocket -> tp0 of Off_Blinking {
+					triggers {
+						<established: tcpCtrl>
+					}
+				}
+				Transition tr2: Off_Blinking -> Red {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr3: Red -> Yellow {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr1: Yellow -> Green {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr4: Green -> tp0 of Off_Blinking {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				State OpenSocket {
+					entry {
+						"tcpCtrl.open(ipConfig);"
+					}
+				}
+				State Yellow {
+					entry {
+						"sendString(\"carLights=yellow\\n\");"
+						"timeout.startTimeout(1000);"
+					}
+				}
+				State Red {
+					entry {
+						"sendString(\"carLights=red\\n\");"
+						"timeout.startTimeout(1000);"
+					}
+				}
+				State Green {
+					entry {
+						"sendString(\"carLights=green\\n\");"
+						"timeout.startTimeout(1000);"
+					}
+				}
+				State Off_Blinking {
+					entry {
+						"timeout.startTimeout(6000);"
+					}
+					subgraph {
+						Transition tr0: my tp0 -> On
+						Transition tr1: On -> Off {
+							triggers {
+								<timeout: blinkerTimeout>
+							}
+						}
+						Transition tr2: Off -> On {
+							triggers {
+								<timeout: blinkerTimeout>
+							}
+						}
+						EntryPoint tp0
+						State On {
+							entry {
+								"sendString(\"carLights=red\\n\");"
+								"sendString(\"pedLights=red\\n\");"
+								"blinkerTimeout.startTimeout(1000);"
+							}
+							exit {
+								"sendString(\"carLights=off\\n\");"
+								"sendString(\"pedLights=off\\n\");"
+							}
+						}
+						State Off {
+							entry {
+								"blinkerTimeout.startTimeout(1000);"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

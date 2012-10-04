@@ -1,0 +1,22 @@
+#generated MSC for Trace2UML
+	/SSTraffic >-- /SSTraffic/application executeInitialTransition
+	/SSTraffic >-- /SSTraffic/application/light1 executeInitialTransition
+	/SSTraffic >-- /SSTraffic/application/light1/trafficLightSocket executeInitialTransition
+	/SSTraffic >-- /SSTraffic/application/light2 executeInitialTransition
+	/SSTraffic >-- /SSTraffic/application/light2/trafficLightSocket executeInitialTransition
+	/SSTraffic >-- /SSTraffic/TimingService executeInitialTransition
+	/SSTraffic --> /SSTraffic/application executeInitialTransition
+	/SSTraffic --> /SSTraffic/application/light1 executeInitialTransition
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket open
+	/SSTraffic/application/light1 >>> OpenSocket
+	/SSTraffic --> /SSTraffic/application/light1/trafficLightSocket executeInitialTransition
+	/SSTraffic/application/light1/trafficLightSocket >>> closed
+	/SSTraffic --> /SSTraffic/application/light2 executeInitialTransition
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket open
+	/SSTraffic/application/light2 >>> OpenSocket
+	/SSTraffic --> /SSTraffic/application/light2/trafficLightSocket executeInitialTransition
+	/SSTraffic/application/light2/trafficLightSocket >>> closed
+	/SSTraffic --> /SSTraffic/TimingService executeInitialTransition
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket open
+	/SSTraffic/application/light1/trafficLightSocket >-- /SSTraffic/application/light1 error
