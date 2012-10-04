@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ATimingService" snapToGrid="true" showGuides="true" pictogramLinks="//@children.0/@link //@link //@children.0/@children.0/@link //@children.0/@children.1/@link">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ATimingService" snapToGrid="true" showGuides="true" pictogramLinks="//@children.0/@link //@link //@children.0/@children.0/@link" version="0.9.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" width="1000" height="1000"/>
   <link>
     <businessObjects href="../TimingService.room#ActorClass:ATimingService"/>
@@ -15,7 +15,7 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="port"/>
       <properties key="item-kind" value=""/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" filled="false" lineVisible="false" width="80" height="80" x="266">
+      <graphicsAlgorithm xsi:type="al:Rectangle" filled="false" lineVisible="false" width="80" height="80" x="240">
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" width="40" height="40" x="20" y="20"/>
       </graphicsAlgorithm>
       <link>
@@ -23,21 +23,7 @@
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timer"/>
-      </children>
-    </children>
-    <children xsi:type="pi:ContainerShape" visible="true" active="true">
-      <properties key="obj-type" value="port"/>
-      <properties key="item-kind" value=""/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" filled="false" lineVisible="false" width="80" height="80" x="532">
-        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" width="40" height="40" x="20" y="20"/>
-      </graphicsAlgorithm>
-      <link>
-        <businessObjects href="../TimingService.room#SPPRef:ATimingService$timeout"/>
-      </link>
-      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timeout"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" filled="false" width="80" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="timer"/>
       </children>
     </children>
   </children>

@@ -4,6 +4,7 @@
 	/SSTraffic >-- /SSTraffic/application/light1/trafficLightSocket executeInitialTransition
 	/SSTraffic >-- /SSTraffic/application/light2 executeInitialTransition
 	/SSTraffic >-- /SSTraffic/application/light2/trafficLightSocket executeInitialTransition
+	/SSTraffic >-- /SSTraffic/application/controller executeInitialTransition
 	/SSTraffic >-- /SSTraffic/TimingService executeInitialTransition
 	/SSTraffic --> /SSTraffic/application executeInitialTransition
 	/SSTraffic --> /SSTraffic/application/light1 executeInitialTransition
@@ -16,7 +17,414 @@
 	/SSTraffic/application/light2 >>> OpenSocket
 	/SSTraffic --> /SSTraffic/application/light2/trafficLightSocket executeInitialTransition
 	/SSTraffic/application/light2/trafficLightSocket >>> closed
+	/SSTraffic --> /SSTraffic/application/controller executeInitialTransition
+	/SSTraffic/application/controller >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/controller >>> Idle
 	/SSTraffic --> /SSTraffic/TimingService executeInitialTransition
 	/SSTraffic/TimingService >>> Operational
 	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket open
-	/SSTraffic/application/light1/trafficLightSocket >-- /SSTraffic/application/light1 error
+	/SSTraffic/application/light1/trafficLightSocket >-- /SSTraffic/application/light1 established
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket open
+	/SSTraffic/application/light2/trafficLightSocket >-- /SSTraffic/application/light2 established
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/controller --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light1/trafficLightSocket --> /SSTraffic/application/light1 established
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_On
+	/SSTraffic/application/light2/trafficLightSocket --> /SSTraffic/application/light2 established
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_On
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_Off
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_Off
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_On
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_On
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_Off
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_Off
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_On
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_On
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> Off_Blinking_Off
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> Off_Blinking_Off
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/controller internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/controller internalTimeout
+	/SSTraffic/application/controller >-- /SSTraffic/application/light1 greenForCar
+	/SSTraffic/application/controller >-- /SSTraffic/application/light2 greenForPed
+	/SSTraffic/application/controller >>> SwitchToLight1GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/application/light1 greenForCar
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> PedRed
+	/SSTraffic/application/controller --> /SSTraffic/application/light2 greenForPed
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarYellow2
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarYellow
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarRed
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/light1 >>> CarGreen
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/controller >>> state0
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/light2 >>> PedGreen
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/controller >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/controller >>> Light1GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/controller internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/controller internalTimeout
+	/SSTraffic/application/controller >-- /SSTraffic/application/light1 greenForPed
+	/SSTraffic/application/controller >-- /SSTraffic/application/light2 greenForCar
+	/SSTraffic/application/controller >>> SwitchToLight2GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/application/light1 greenForPed
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarYellow2
+	/SSTraffic/application/controller --> /SSTraffic/application/light2 greenForCar
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> PedRed
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarRed
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarYellow
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/light1 >>> PedGreen
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/controller >>> state2
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/light2 >>> CarGreen
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/controller >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/controller >>> Light2GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/controller internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/controller internalTimeout
+	/SSTraffic/application/controller >-- /SSTraffic/application/light1 greenForCar
+	/SSTraffic/application/controller >-- /SSTraffic/application/light2 greenForPed
+	/SSTraffic/application/controller >>> SwitchToLight1GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/application/light1 greenForCar
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> PedRed
+	/SSTraffic/application/controller --> /SSTraffic/application/light2 greenForPed
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarYellow2
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarYellow
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarRed
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/light1 >>> CarGreen
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/controller >>> state0
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/light2 >>> PedGreen
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/controller >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/controller >>> Light1GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/controller internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/controller internalTimeout
+	/SSTraffic/application/controller >-- /SSTraffic/application/light1 greenForPed
+	/SSTraffic/application/controller >-- /SSTraffic/application/light2 greenForCar
+	/SSTraffic/application/controller >>> SwitchToLight2GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/application/light1 greenForPed
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarYellow2
+	/SSTraffic/application/controller --> /SSTraffic/application/light2 greenForCar
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> PedRed
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light1 >>> CarRed
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/light2 >>> CarYellow
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational
+	/SSTraffic/TimingService >-- /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light1 internalTimeout
+	/SSTraffic/application/light1 >-- /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1 >-- /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/light1 >>> PedGreen
+	/SSTraffic/application/light1 --> /SSTraffic/application/light1/trafficLightSocket send
+	/SSTraffic/application/light1/trafficLightSocket >>> opened
+	/SSTraffic/application/light1 --> /SSTraffic/application/controller greenForPedDone
+	/SSTraffic/application/controller >>> state2
+	/SSTraffic/TimingService >-- /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/TimingService --> /SSTraffic/application/light2 internalTimeout
+	/SSTraffic/application/light2 >-- /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2 >-- /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/light2 >>> CarGreen
+	/SSTraffic/application/light2 --> /SSTraffic/application/light2/trafficLightSocket send
+	/SSTraffic/application/light2/trafficLightSocket >>> opened
+	/SSTraffic/application/light2 --> /SSTraffic/application/controller greenForCarDone
+	/SSTraffic/application/controller >-- /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/application/controller >>> Light2GreenForCars
+	/SSTraffic/application/controller --> /SSTraffic/TimingService internalStartTimeout
+	/SSTraffic/TimingService >>> Operational

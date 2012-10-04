@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of TrafficLight" pictogramLinks="//@children.0/@link //@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.1/@link //@children.0/@children.2/@children.2/@link //@connections.0/@link //@connections.1/@link //@children.0/@children.3/@link" verticalGridUnit="10" version="0.9.0">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <link>
+    <businessObjects href="../trafficlight.example.room#ActorClass:TrafficLight"/>
+  </link>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="obj-type" value="cls"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40"/>
+      <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../trafficlight.example.room#ActorClass:TrafficLight"/>
+    </link>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="C"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="266" y="80">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#Port:TrafficLight$tcpCtrl"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="tcpCtrl"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value="C"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="532" y="80">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#Port:TrafficLight$tcpPayload"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="tcpPayload"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="ref"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="320" y="170">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="30" y="30">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="150" y="50"/>
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="145" y="65"/>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#ActorRef:TrafficLight$trafficLightSocket"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="180" height="80" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="trafficLightSocket&#xA;(ATcpClient)"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="59">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="file:/C:/entw/projekte/eTrice/eTriceDevelopment/repositories/eTriceGIT/FlatWorld/org.eclipse.etrice.modellib.java/models/TcpService.room#Port:ATcpClient$ControlPort"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ControlPort"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="119">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="file:/C:/entw/projekte/eTrice/eTriceDevelopment/repositories/eTriceGIT/FlatWorld/org.eclipse.etrice.modellib.java/models/TcpService.room#Port:ATcpClient$PayloadPort"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="PayloadPort"/>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="port"/>
+      <properties key="item-kind" value=""/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="398">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.1" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#Port:TrafficLight$controller"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="controller"/>
+      </children>
+    </children>
+  </children>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@children.1/@anchors.0" end="//@children.0/@children.0/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#Binding:TrafficLight$ControlPort!trafficLightSocket-tcpCtrl!."/>
+    </link>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@children.2/@anchors.0" end="//@children.0/@children.1/@anchors.0">
+    <properties key="obj-type" value="bind"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#Binding:TrafficLight$PayloadPort!trafficLightSocket-tcpPayload!."/>
+    </link>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors/>
+  <colors red="200" green="200" blue="200"/>
+  <fonts name="Arial" size="8"/>
+</pi:Diagram>

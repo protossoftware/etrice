@@ -1,43 +1,154 @@
 RoomModel trafficlight.example {
+
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/models/Types.room"
+
 	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/models/TimingService.room"
+
 	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
-	
+
 	SubSystemClass SSTraffic {
-		ActorRef application:Application
+		ActorRef application: Application
 		ActorRef TimingService: ATimingService
 		LayerConnection ref application satisfied_by TimingService.timer
 	}
-	
-	
+
 	ActorClass Application {
 		Structure {
 			ActorRef light1: TrafficLight
 			ActorRef light2: TrafficLight
+			ActorRef controller: TrafficController
+			Binding controller.light1 and light1.controller
+			Binding controller.light2 and light2.controller
 		}
 		Behavior { }
 	}
-	
-	ActorClass TrafficLight {
+
+	ActorClass TrafficController {
+		Interface {
+			conjugated Port light1: PTrafficLight
+			conjugated Port light2: PTrafficLight
+		}
 		Structure {
+			external Port light1
+			external Port light2
+			SAP timeout: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle { }
+				Transition tr0: Idle -> SwitchToLight1GreenForCars {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr1: SwitchToLight1GreenForCars -> state0 {
+					triggers {
+						<greenForCarDone: light1>
+					}
+				}
+				Transition tr2: SwitchToLight1GreenForCars -> state1 {
+					triggers {
+						<greenForPedDone: light2>
+					}
+				}
+				Transition tr3: state1 -> Light1GreenForCars {
+					triggers {
+						<greenForCarDone: light1>
+					}
+				}
+				Transition tr4: state0 -> Light1GreenForCars {
+					triggers {
+						<greenForPedDone: light2>
+					}
+				}
+				Transition tr5: Light1GreenForCars -> SwitchToLight2GreenForCars {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr6: SwitchToLight2GreenForCars -> state2 {
+					triggers {
+						<greenForPedDone: light1>
+					}
+				}
+				Transition tr7: SwitchToLight2GreenForCars -> state3 {
+					triggers {
+						<greenForCarDone: light2>
+					}
+				}
+				Transition tr8: state2 -> Light2GreenForCars {
+					triggers {
+						<greenForCarDone: light2>
+					}
+				}
+				Transition tr9: state3 -> Light2GreenForCars {
+					triggers {
+						<greenForPedDone: light1>
+					}
+				}
+				Transition tr10: Light2GreenForCars -> SwitchToLight1GreenForCars {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				State Idle {
+					entry {
+						"timeout.startTimeout(3000);"
+					}
+				}
+				State Light1GreenForCars {
+					entry {
+						"timeout.startTimeout(10000);"
+					}
+				}
+				State SwitchToLight1GreenForCars {
+					entry {
+						"light1.greenForCar();"
+						"light2.greenForPed();"
+					}
+				}
+				State state0
+				State state1
+				State SwitchToLight2GreenForCars {
+					entry {
+						"light1.greenForPed();"
+						"light2.greenForCar();"
+					}
+				}
+				State state2
+				State state3
+				State Light2GreenForCars {
+					entry {
+						"timeout.startTimeout(10000);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass TrafficLight {
+		Interface {
+			Port controller: PTrafficLight
+		}
+		Structure {
+			external Port controller
 			conjugated Port tcpCtrl: PTcpControl
 			conjugated Port tcpPayload: PTcpPayload
 			SAP timeout: PTimer
 			SAP blinkerTimeout: PTimer
-			Attribute ipConfig : DTcpControl
+			Attribute ipConfig: DTcpControl
 			ActorRef trafficLightSocket: ATcpClient
 			Binding trafficLightSocket.ControlPort and tcpCtrl
 			Binding trafficLightSocket.PayloadPort and tcpPayload
-			
-			
 		}
 		Behavior {
-			
-			Operation sendString (text: string){"
+			Operation sendString(text: string) {
+			"
 				DTcpPayload pl = new DTcpPayload();
 				pl.setData(text.getBytes());
 				tcpPayload.send(new DTcpPayload(1, text.length(), text.getBytes()));
-			"}
+			"
+			}
 			StateMachine {
 				Transition init: initial -> OpenSocket { }
 				Transition tr0: OpenSocket -> tp0 of Off_Blinking {
@@ -45,24 +156,44 @@ RoomModel trafficlight.example {
 						<established: tcpCtrl>
 					}
 				}
-				Transition tr2: Off_Blinking -> Red {
+				Transition tr2: Off_Blinking -> PedRed {
+					triggers {
+						<greenForCar: controller>
+					}
+				}
+				Transition tr3: PedRed -> CarYellow {
 					triggers {
 						<timeout: timeout>
 					}
 				}
-				Transition tr3: Red -> Yellow {
+				Transition tr1: CarYellow -> CarGreen {
 					triggers {
 						<timeout: timeout>
 					}
 				}
-				Transition tr1: Yellow -> Green {
+				Transition tr4: Off_Blinking -> CarYellow2 {
+					triggers {
+						<greenForPed: controller>
+					}
+				}
+				Transition tr5: CarYellow2 -> CarRed {
 					triggers {
 						<timeout: timeout>
 					}
 				}
-				Transition tr4: Green -> tp0 of Off_Blinking {
+				Transition tr6: CarRed -> PedGreen {
 					triggers {
 						<timeout: timeout>
+					}
+				}
+				Transition tr7: PedGreen -> PedRed {
+					triggers {
+						<greenForCar: controller>
+					}
+				}
+				Transition tr8: CarGreen -> CarYellow2 {
+					triggers {
+						<greenForPed: controller>
 					}
 				}
 				State OpenSocket {
@@ -70,28 +201,26 @@ RoomModel trafficlight.example {
 						"tcpCtrl.open(ipConfig);"
 					}
 				}
-				State Yellow {
+				State CarYellow {
 					entry {
 						"sendString(\"carLights=yellow\\n\");"
 						"timeout.startTimeout(1000);"
 					}
 				}
-				State Red {
+				State PedRed {
 					entry {
+						"sendString(\"pedLights=red\\n\");"
 						"sendString(\"carLights=red\\n\");"
 						"timeout.startTimeout(1000);"
 					}
 				}
-				State Green {
+				State CarGreen {
 					entry {
 						"sendString(\"carLights=green\\n\");"
-						"timeout.startTimeout(1000);"
+						"controller.greenForCarDone();"
 					}
 				}
 				State Off_Blinking {
-					entry {
-						"timeout.startTimeout(6000);"
-					}
 					subgraph {
 						Transition tr0: my tp0 -> On
 						Transition tr1: On -> Off {
@@ -109,7 +238,7 @@ RoomModel trafficlight.example {
 							entry {
 								"sendString(\"carLights=red\\n\");"
 								"sendString(\"pedLights=red\\n\");"
-								"blinkerTimeout.startTimeout(1000);"
+								"blinkerTimeout.startTimeout(500);"
 							}
 							exit {
 								"sendString(\"carLights=off\\n\");"
@@ -118,12 +247,41 @@ RoomModel trafficlight.example {
 						}
 						State Off {
 							entry {
-								"blinkerTimeout.startTimeout(1000);"
+								"blinkerTimeout.startTimeout(500);"
 							}
 						}
 					}
 				}
+				State CarYellow2 {
+					entry {
+						"sendString(\"carLights=yellow\\n\");"
+						"timeout.startTimeout(1000);"
+					}
+				}
+				State CarRed {
+					entry {
+						"sendString(\"carLights=red\\n\");"
+						"timeout.startTimeout(1000);"
+					}
+				}
+				State PedGreen {
+					entry {
+						"sendString(\"pedLights=green\\n\");"
+						"controller.greenForPedDone();"
+					}
+				}
 			}
+		}
+	}
+
+	ProtocolClass PTrafficLight {
+		incoming {
+			Message greenForCar()
+			Message greenForPed()
+		}
+		outgoing {
+			Message greenForCarDone()
+			Message greenForPedDone()
 		}
 	}
 
