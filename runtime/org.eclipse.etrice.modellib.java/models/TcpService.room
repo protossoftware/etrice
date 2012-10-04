@@ -275,7 +275,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"try{"
-						"\tout.write(data.getData());"
+						"\tout.write(data.getData(),0,data.length);"
 						"\t}catch(IOException e){"
 						"\t\tSystem.err.println(e.toString());"
 						"\t}"
