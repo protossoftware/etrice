@@ -148,7 +148,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"try{"
-						"outStreams.get(data.getConnectionId()).write(data.data);"
+						"outStreams.get(data.getConnectionId()).write(data.getData(),0,data.length);"
 						"}catch(IOException e){"
 						"System.err.println(e.toString());"
 						"}"
@@ -173,7 +173,7 @@ RoomModel room.basic.service.tcp {
 				"import java.io.*;"
 				
 				"	
-			class ClientRxThread extends Thread{
+			class ClientRxThread extends Thread{	
 				private Socket sock;
 				PTcpPayloadPort port;
 				public ClientRxThread (PTcpPayloadPort port, Socket sock){
