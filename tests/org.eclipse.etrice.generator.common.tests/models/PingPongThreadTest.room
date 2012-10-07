@@ -1,0 +1,155 @@
+RoomModel PingPongThreadTest {
+
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.types.* from "Types.room"
+
+	LogicalSystem System_PingPong {
+		SubSystemRef subsystem: SubSystem_PingPong
+	}
+
+	SubSystemClass SubSystem_PingPong {
+		ActorRef application: PingPongTop
+		ActorRef services: ATimingService
+		LayerConnection ref application satisfied_by services.timer
+		LogicalThread mrPingThread prio=5 {application.MrPing}
+		LogicalThread mrPong1Thread prio=5 {application.MrPong1}
+		LogicalThread mrPong2Thread prio=5 {application.MrPong2}
+		LogicalThread mrPong3Thread prio=5 {application.MrPong3}
+	}
+
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef MrPing: MrPingActor
+			ActorRef MrPong1: MrPongActor1
+			ActorRef MrPong2: MrPongActor1
+			ActorRef MrPong3: MrPongActor1
+			Binding MrPing.PingPongPort and MrPong1.PingPongPort
+			Binding MrPing.PingPongPort2 and MrPong2.PingPongPort
+			Binding MrPing.PingPongPort3 and MrPong3.PingPongPort
+		}
+		Behavior { }
+	}
+
+	ActorClass MrPingActor {
+		Interface {
+			conjugated Port PingPongPort  : PingPongProtocol
+			conjugated Port PingPongPort2 : PingPongProtocol
+			conjugated Port PingPongPort3 : PingPongProtocol 
+		}
+		Structure {
+			external Port PingPongPort 
+			external Port PingPongPort2
+			external Port PingPongPort3
+			SAP timer: PTimer
+			Attribute count : int32
+			Attribute pongCount : int32
+			Attribute caseId: int32
+			Attribute resultlist[23]: int16 = "{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}"
+			
+		}
+		Behavior {
+			Operation MrPingActor() {
+				"caseId = etUnit_openAll(\"tmp\", \"PingPongThreadTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTest\", \"PingPongThreadTest_case\");"
+			}
+			Operation ~MrPingActor() {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition tr0: initial -> waitForTimer {
+					action {
+						"count = 0;"
+						"timer.startTimeout(10);"
+						"EXPECT_ORDER_START(caseId,resultlist,23);"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
+						
+					}
+				}
+				Transition tr1: waitForTimer -> waitForPong {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"PingPongPort.ping();"
+						"PingPongPort2.ping();"
+						"pongCount = 0;"
+					}
+				}
+				Transition tr3: waitForPong -> cp cp0 {
+					triggers {
+						<pong: PingPongPort2>
+						or
+ 						<pong: PingPongPort>					
+					}
+					action {
+						"pongCount++;"
+					}
+				}
+				Transition tr5: cp cp0 -> cp cp1 {
+					action {
+						"System.out.println(count);"
+					}
+				}
+				Transition tr6: cp cp0 -> waitForPong {
+					cond {
+						"pongCount < 2"
+					}
+				}
+				Transition tr2: cp cp1 -> test_finished
+				Transition tr4: cp cp1 -> waitForTimer {
+					cond {
+						"count<20"
+					}
+					action {
+						"timer.startTimeout(5);"
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", count+2);"
+						"count++;"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				State waitForTimer
+				State waitForPong
+				State test_finished {
+					entry {
+						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 22);"
+						"EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 23);"
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass MrPongActor1 {
+		Interface {
+			Port PingPongPort: PingPongProtocol
+		}
+		Structure {
+			external Port PingPongPort
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> waitForPing { }
+				Transition myTrigger: waitForPing -> waitForPing {
+					triggers {
+						<ping: PingPongPort>
+					}
+					action {
+						"PingPongPort.pong();"
+					}
+				}
+				State waitForPing
+			}
+		}
+	}
+		
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}
