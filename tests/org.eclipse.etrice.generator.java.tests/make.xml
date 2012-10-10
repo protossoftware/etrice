@@ -106,7 +106,7 @@
 			<arg value="${java.tests.model.path}/PingPongThreadTest.room"/>
 			<arg value="${java.tests.model.path}/PingPongThreadReplPortTest.room"/>
 			<arg value="${java.tests.model.path}/SendingDataTestJava.room"/>
-			<arg value="${java.tests.model.path}/TcpTest.room"/>
+			<arg value="${java.tests.model.path}/TCPTest.room"/>
 			
 			<!-- copied modellib.java models -->
 			<arg value="${java.tests.model.path}/TimingService.room"/>
