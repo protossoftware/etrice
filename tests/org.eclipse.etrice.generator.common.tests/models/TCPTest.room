@@ -22,7 +22,7 @@ RoomModel TCPTest {
 		Interface {
 			conjugated Port p0: PTcpControl
 			conjugated Port p1: PTcpPayload
-			conjugated Port p2 [5]: PTcpControl
+			conjugated Port p2 [*]: PTcpControl
 			conjugated Port p3 [5]: PTcpPayload
 		}
 		Structure {
