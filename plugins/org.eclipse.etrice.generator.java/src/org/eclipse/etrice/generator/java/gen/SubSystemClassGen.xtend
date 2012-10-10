@@ -58,7 +58,6 @@ class SubSystemClassGen {
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -102,7 +101,7 @@ class SubSystemClassGen {
 				
 				«FOR ai : comp.allContainedInstances»
 					// actor instance «ai.path» itself => Systemport Address
-					// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
+«««					// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 					Address addr_item_«ai.path.getPathName()» = new Address(0,«ai.threadId»,«ai.objId»);
 					// interface items of «ai.path»
 					«FOR pi : ai.orderedIfItemInstances»
