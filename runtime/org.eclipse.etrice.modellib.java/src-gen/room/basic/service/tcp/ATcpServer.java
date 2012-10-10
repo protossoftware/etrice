@@ -14,41 +14,77 @@ import room.basic.service.tcp.PTcpControl.*;
 import room.basic.service.tcp.PTcpPayload.*;
 
 /*--------------------- begin user code ---------------------*/
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
-	
-			class ClientRxThread extends Thread{	
-				private Socket sock;
-				PTcpPayloadPort port;
-				public ClientRxThread (PTcpPayloadPort port, Socket sock){
+import java.util.*;
+
+				class ServerRxThread extends Thread{
+					private int connectionId;
+					private Socket sock;
+					PTcpPayloadPort port;
+
+					public ServerRxThread (int connectionId, PTcpPayloadPort port, Socket sock){
+						this.sock = sock;
+						this.connectionId = connectionId;
+						this.port = port;
+					}
+
+					public void run(){
+						try{
+							InputStream in = sock.getInputStream();
+							DTcpPayload d = new DTcpPayload();
+							d.setConnectionId(connectionId);
+							int c;
+							while ((c=in.read(d.getData()))!=-1){
+								d.setLength(c);
+								port.receive(d);	
+							}
+						}catch (IOException e){
+							System.err.println("ServerRx: " + e.toString());
+						}
+					}
+				}
+		
+			class ServerAcceptThread extends Thread{
+				private ServerSocket sock;
+				private PTcpPayloadPort port;
+				private ATcpServer parent;
+				public ServerAcceptThread (PTcpPayloadPort port, ServerSocket sock, ATcpServer parent){
 					this.sock = sock;
 					this.port = port;
+					this.parent = parent;
 				}
 				public void run(){
+					int cnt=0;
 					try{
-						InputStream in = sock.getInputStream();
-						DTcpPayload d = new DTcpPayload();
-						d.setConnectionId(0);
-						int c;
-						while ((c=in.read(d.getData()))!=-1){
-							d.setLength(c);
-							port.receive(d);
+						while (true){
+							Socket s = sock.accept();
+							parent.addOutStreamToHashmap(cnt, s.getOutputStream());
+							(new ServerRxThread(cnt, port, s)).start();
+							cnt++;
 						}
 					}catch (IOException e){
-						System.err.println("ClientRx: " + e.toString());
+						System.err.println("Server Accept: " + e.toString());
 					}
-				
 				}
 			}
+		
 /*--------------------- end user code ---------------------*/
 
 
-public class ATcpClient extends ActorClassBase {
+public class ATcpServer extends ActorClassBase {
 
 	/*--------------------- begin user code ---------------------*/
-	Socket socket;
-	InputStream in;
-	OutputStream out;
+	ServerSocket socket = null;
+	InputStream in = null;
+	OutputStream out = null;
+	Hashtable<Integer,OutputStream> outStreams = new Hashtable<Integer,OutputStream>();
+	
+					synchronized protected void addOutStreamToHashmap(int cnt, OutputStream out){
+						outStreams.put(cnt,out);
+					}
+					
 	/*--------------------- end user code ---------------------*/
 	
 	
@@ -67,6 +103,7 @@ public class ATcpClient extends ActorClassBase {
 		
 	/*--------------------- attributes ---------------------*/
 	int lastError;
+	int payloadPortReplocation;
 	/*--------------------- operations ---------------------*/
 	public void stopUser() {
 		try{
@@ -78,12 +115,13 @@ public class ATcpClient extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public ATcpClient(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public ATcpServer(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("ATcpClient");
+		setClassName("ATcpServer");
 		
 		// initialize attributes
 		lastError = 0;
+		payloadPortReplocation = 0;
 
 		// own ports
 		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
@@ -101,6 +139,12 @@ public class ATcpClient extends ActorClassBase {
 	}
 	public int getLastError () {
 		return this.lastError;
+	}
+	public void setPayloadPortReplocation (int payloadPortReplocation) {
+		 this.payloadPortReplocation = payloadPortReplocation;
+	}
+	public int getPayloadPortReplocation () {
+		return this.payloadPortReplocation;
 	}
 	
 	
@@ -166,15 +210,11 @@ public class ATcpClient extends ActorClassBase {
 	/* Entry and Exit Codes */
 	
 	/* Action Codes */
-	protected void action_TRANS_INITIAL_TO__closed() {
-		System.out.println("Client Init !");
-	}
 	protected void action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(InterfaceItemBase ifitem, DTcpControl data) {
 		lastError=0;
 		try{
-		socket = new Socket(data.IPAddr,data.TcpPort);
-		(new ClientRxThread(PayloadPort, socket)).start();
-		out = socket.getOutputStream();
+		socket = new ServerSocket(data.TcpPort);
+		(new ServerAcceptThread(PayloadPort, socket, this)).start();
 		}catch(IOException e){
 		System.err.println(e.toString());
 		lastError=1;
@@ -182,11 +222,11 @@ public class ATcpClient extends ActorClassBase {
 	}
 	protected void action_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort(InterfaceItemBase ifitem) {
 		try{
-			if (socket!=null){
+			if(socket!=null){
 				socket.close();
-			}
-		} catch (IOException e){
-		System.err.println(e.toString());
+				}
+			}catch(IOException e){
+			System.err.println(e.toString());
 		}
 	}
 	protected void action_TRANS_tr2_FROM_cp0_TO_opened(InterfaceItemBase ifitem, DTcpControl data) {
@@ -202,10 +242,10 @@ public class ATcpClient extends ActorClassBase {
 	}
 	protected void action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(InterfaceItemBase ifitem, DTcpPayload data) {
 		try{
-			out.write(data.getData(),0,data.length);
-			}catch(IOException e){
-				System.err.println(e.toString());
-			}
+		outStreams.get(data.getConnectionId()).write(data.getData(),0,data.length);
+		}catch(IOException e){
+		System.err.println(e.toString());
+		}
 	}
 	
 	/**
@@ -245,7 +285,6 @@ public class ATcpClient extends ActorClassBase {
 		switch (chain) {
 			case CHAIN_TRANS_INITIAL_TO__closed:
 			{
-				action_TRANS_INITIAL_TO__closed();
 				return STATE_closed;
 			}
 			case CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort:

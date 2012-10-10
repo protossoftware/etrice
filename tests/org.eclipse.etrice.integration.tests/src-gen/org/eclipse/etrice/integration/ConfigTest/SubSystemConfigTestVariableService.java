@@ -56,30 +56,21 @@ public class SubSystemConfigTestVariableService extends VariableService{
 		}
 		try{
 			boolean changed = false;
-			id = "/SubSystemConfigTest/top/testee2/dc_i/long_array_i";
-			long[] _long_array_i = null;
-			object = values.get(id);
-			if(object != null){
-				_long_array_i = ensureLongArray(object, 1);
-				if(!Arrays.equals(_long_array_i, (long[])getDiffMap().get(id)))
-					changed = true;
-			} else
-				warning(id, "is missing");
-			id = "/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i";
-			char[] _char_i = null;
-			object = values.get(id);
-			if(object != null){
-				_char_i = ensureCharArray(object, 10);
-				if(!Arrays.equals(_char_i, (char[])getDiffMap().get(id)))
-					changed = true;
-			} else
-				warning(id, "is missing");
 			id = "/SubSystemConfigTest/top/testee2/dc_i/dc_i/double_i";
 			Double _double_i = null;
 			object = values.get(id);
 			if(object != null){
 				_double_i = ensureDouble(object);
 				if(!_double_i.equals((Double)getDiffMap().get(id)))
+					changed = true;
+			} else
+				warning(id, "is missing");
+			id = "/SubSystemConfigTest/top/testee2/dc_i/long_array_i";
+			long[] _long_array_i = null;
+			object = values.get(id);
+			if(object != null){
+				_long_array_i = ensureLongArray(object, 1);
+				if(!Arrays.equals(_long_array_i, (long[])getDiffMap().get(id)))
 					changed = true;
 			} else
 				warning(id, "is missing");
@@ -92,24 +83,33 @@ public class SubSystemConfigTestVariableService extends VariableService{
 					changed = true;
 			} else
 				warning(id, "is missing");
+			id = "/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i";
+			char[] _char_i = null;
+			object = values.get(id);
+			if(object != null){
+				_char_i = ensureCharArray(object, 10);
+				if(!Arrays.equals(_char_i, (char[])getDiffMap().get(id)))
+					changed = true;
+			} else
+				warning(id, "is missing");
 			if(changed)
 				synchronized(_top_testee2.getDc_iLock()){
 					if(_top_testee2.getDc_iLock().isUpdate()){
-						if(_long_array_i != null){
-							_top_testee2.getDc_i().setLong_array_i(_long_array_i);
-							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/long_array_i", _long_array_i);
-						}
-						if(_char_i != null){
-							_top_testee2.getDc_i().getDc_i().setChar_i(_char_i);
-							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i", _char_i);
-						}
 						if(_double_i != null){
 							_top_testee2.getDc_i().getDc_i().setDouble_i(_double_i);
 							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/double_i", _double_i);
 						}
+						if(_long_array_i != null){
+							_top_testee2.getDc_i().setLong_array_i(_long_array_i);
+							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/long_array_i", _long_array_i);
+						}
 						if(_int_i != null){
 							_top_testee2.getDc_i().setInt_i(_int_i);
 							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/int_i", _int_i);
+						}
+						if(_char_i != null){
+							_top_testee2.getDc_i().getDc_i().setChar_i(_char_i);
+							getDiffMap().put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i", _char_i);
 						}
 					} 
 				}
@@ -168,10 +168,10 @@ public class SubSystemConfigTestVariableService extends VariableService{
 	protected Map<String, Object> getAttributeValues(){
 		Map<String, Object> values = new HashMap<String, Object>();
 		values.put("/SubSystemConfigTest/top/testee2/int_i", _top_testee2.getInt_i());
-		values.put("/SubSystemConfigTest/top/testee2/dc_i/long_array_i", toObjectArray(_top_testee2.getDc_i().getLong_array_i()));
-		values.put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i", toObjectArray(_top_testee2.getDc_i().getDc_i().getChar_i()));
 		values.put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/double_i", _top_testee2.getDc_i().getDc_i().getDouble_i());
+		values.put("/SubSystemConfigTest/top/testee2/dc_i/long_array_i", toObjectArray(_top_testee2.getDc_i().getLong_array_i()));
 		values.put("/SubSystemConfigTest/top/testee2/dc_i/int_i", _top_testee2.getDc_i().getInt_i());
+		values.put("/SubSystemConfigTest/top/testee2/dc_i/dc_i/char_i", toObjectArray(_top_testee2.getDc_i().getDc_i().getChar_i()));
 		values.put("/SubSystemConfigTest/top/testee2/blockMe", _top_testee2.getBlockMe());
 		values.put("/SubSystemConfigTest/top/testee2/blocker", _top_testee2.getBlocker());
 		

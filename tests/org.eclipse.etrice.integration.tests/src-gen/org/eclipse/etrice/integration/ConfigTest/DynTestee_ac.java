@@ -42,10 +42,10 @@ public class DynTestee_ac extends ActorClassBase {
 	boolean blocker;
 	Dyn_DC1 dc_dump;
 	int int_dump;
-	private DynConfigLock lock_int_i;
-	private DynConfigLock lock_blocker;
 	private DynConfigLock lock_blockMe;
 	private DynConfigLock lock_dc_i;
+	private DynConfigLock lock_int_i;
+	private DynConfigLock lock_blocker;
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
@@ -73,10 +73,10 @@ public class DynTestee_ac extends ActorClassBase {
 		this(parent, name, port_addr, peer_addr);
 		
 		this.variableService = variableService;
-		lock_int_i = new DynConfigLock();
-		lock_blocker = new DynConfigLock();
 		lock_blockMe = new DynConfigLock();
 		lock_dc_i = new DynConfigLock();
+		lock_int_i = new DynConfigLock();
+		lock_blocker = new DynConfigLock();
 	}
 	
 	//--------------------- attribute setters and getters
@@ -93,44 +93,6 @@ public class DynTestee_ac extends ActorClassBase {
 		return this.int_dump;
 	}
 	
-	public int getInt_i(){
-		if(lock_int_i == null)
-			return int_i;
-		else
-			synchronized(lock_int_i){
-				return int_i;
-			}
-	}
-	public void setInt_i(int int_i){
-		if(lock_int_i == null)
-			this.int_i = int_i;
-		else
-			synchronized(lock_int_i){
-				this.int_i = int_i;
-			}
-	}
-	public DynConfigLock getInt_iLock(){
-		return lock_int_i;
-	}	
-	public boolean getBlocker(){
-		if(lock_blocker == null)
-			return blocker;
-		else
-			synchronized(lock_blocker){
-				return blocker;
-			}
-	}
-	public void setBlocker(boolean blocker){
-		if(lock_blocker == null)
-			this.blocker = blocker;
-		else
-			synchronized(lock_blocker){
-				this.blocker = blocker;
-			}
-	}
-	public DynConfigLock getBlockerLock(){
-		return lock_blocker;
-	}	
 	public int getBlockMe(){
 		if(lock_blockMe == null)
 			return blockMe;
@@ -168,6 +130,44 @@ public class DynTestee_ac extends ActorClassBase {
 	}
 	public DynConfigLock getDc_iLock(){
 		return lock_dc_i;
+	}	
+	public int getInt_i(){
+		if(lock_int_i == null)
+			return int_i;
+		else
+			synchronized(lock_int_i){
+				return int_i;
+			}
+	}
+	public void setInt_i(int int_i){
+		if(lock_int_i == null)
+			this.int_i = int_i;
+		else
+			synchronized(lock_int_i){
+				this.int_i = int_i;
+			}
+	}
+	public DynConfigLock getInt_iLock(){
+		return lock_int_i;
+	}	
+	public boolean getBlocker(){
+		if(lock_blocker == null)
+			return blocker;
+		else
+			synchronized(lock_blocker){
+				return blocker;
+			}
+	}
+	public void setBlocker(boolean blocker){
+		if(lock_blocker == null)
+			this.blocker = blocker;
+		else
+			synchronized(lock_blocker){
+				this.blocker = blocker;
+			}
+	}
+	public DynConfigLock getBlockerLock(){
+		return lock_blocker;
 	}	
 	public void setAndWriteDc_dump(Dyn_DC1 dc_dump){
 			setDc_dump(dc_dump);

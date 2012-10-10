@@ -4,7 +4,6 @@ import org.eclipse.etrice.runtime.java.config.VariableService;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -41,22 +40,18 @@ public class SubSystemConfigTest extends SubSystemClassBase{
 		Address addr_item_SystemPort_3 = new Address(0,0,112);
 		
 		// actor instance /SubSystemConfigTest/top itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystemConfigTest_top = new Address(0,0,101);
 		// interface items of /SubSystemConfigTest/top
 		// actor instance /SubSystemConfigTest/top/testee itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystemConfigTest_top_testee = new Address(0,0,102);
 		// interface items of /SubSystemConfigTest/top/testee
 		Address addr_item__SubSystemConfigTest_top_testee_Reg_dynConfigPort = new Address(0,0,103);
 		Address addr_item__SubSystemConfigTest_top_testee_Reg_port = new Address(0,0,104);
 		// actor instance /SubSystemConfigTest/top/testee/AR1 itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystemConfigTest_top_testee_AR1 = new Address(0,0,105);
 		// interface items of /SubSystemConfigTest/top/testee/AR1
 		Address addr_item__SubSystemConfigTest_top_testee_AR1_Conj_port = new Address(0,0,106);
 		// actor instance /SubSystemConfigTest/top/testee2 itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystemConfigTest_top_testee2 = new Address(0,0,107);
 		// interface items of /SubSystemConfigTest/top/testee2
 		Address addr_item__SubSystemConfigTest_top_testee2_Conj_DynConfigPort = new Address(0,0,108);

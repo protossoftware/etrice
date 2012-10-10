@@ -3,7 +3,6 @@ package org.eclipse.etrice.integration.HandlerTest;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -39,16 +38,13 @@ public class SubSystem_HandlerTest extends SubSystemClassBase{
 		Address addr_item_SystemPort_2 = new Address(0,0,108);
 		
 		// actor instance /SubSystem_HandlerTest/HandlerTest_Top itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystem_HandlerTest_HandlerTest_Top = new Address(0,0,101);
 		// interface items of /SubSystem_HandlerTest/HandlerTest_Top
 		// actor instance /SubSystem_HandlerTest/HandlerTest_Top/tester itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester = new Address(0,0,102);
 		// interface items of /SubSystem_HandlerTest/HandlerTest_Top/tester
 		Address addr_item__SubSystem_HandlerTest_HandlerTest_Top_tester_TestPort1 = new Address(0,0,103);
 		// actor instance /SubSystem_HandlerTest/HandlerTest_Top/handlerUser itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSystem_HandlerTest_HandlerTest_Top_handlerUser = new Address(0,0,104);
 		// interface items of /SubSystem_HandlerTest/HandlerTest_Top/handlerUser
 		Address addr_item__SubSystem_HandlerTest_HandlerTest_Top_handlerUser_TestPort1 = new Address(0,0,105);

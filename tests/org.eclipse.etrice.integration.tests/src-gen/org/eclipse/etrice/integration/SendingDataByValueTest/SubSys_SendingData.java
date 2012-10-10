@@ -3,7 +3,6 @@ package org.eclipse.etrice.integration.SendingDataByValueTest;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -39,16 +38,13 @@ public class SubSys_SendingData extends SubSystemClassBase{
 		Address addr_item_SystemPort_2 = new Address(0,0,108);
 		
 		// actor instance /SubSys_SendingData/top itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSys_SendingData_top = new Address(0,0,101);
 		// interface items of /SubSys_SendingData/top
 		// actor instance /SubSys_SendingData/top/mrPing itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSys_SendingData_top_mrPing = new Address(0,0,102);
 		// interface items of /SubSys_SendingData/top/mrPing
 		Address addr_item__SubSys_SendingData_top_mrPing_PingPongPort = new Address(0,0,103);
 		// actor instance /SubSys_SendingData/top/mrPong itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SubSys_SendingData_top_mrPong = new Address(0,0,104);
 		// interface items of /SubSys_SendingData/top/mrPong
 		Address addr_item__SubSys_SendingData_top_mrPong_PingPongPort = new Address(0,0,105);

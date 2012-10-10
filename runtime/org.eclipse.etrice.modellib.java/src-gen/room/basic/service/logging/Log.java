@@ -1,4 +1,4 @@
-package room.basic.service.tcp;
+package room.basic.service.logging;
 
 import java.util.ArrayList;
 
@@ -9,17 +9,21 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 
 
 
-public class PTcpControl {
+public class Log {
 	// message IDs
 	public static final int MSG_MIN = 0;
-	public static final int OUT_established = 1;
-	public static final int OUT_error = 2;
-	public static final int IN_open = 3;
-	public static final int IN_close = 4;
-	public static final int MSG_MAX = 5;
+	public static final int IN_open = 1;
+	public static final int IN_close = 2;
+	public static final int IN_internalLog = 3;
+	public static final int MSG_MAX = 4;
 
+	/*--------------------- begin user code ---------------------*/
+	public static final int LOG_LEVEL_LOW = 1;
+	public static final int LOG_LEVEL_MEDIUM = 2;
+	public static final int LOG_LEVEL_HIGH = 3;
+	/*--------------------- end user code ---------------------*/
 
-	private static String messageStrings[] = {"MIN", "established","error", "open","close","MAX"};
+	private static String messageStrings[] = {"MIN",  "open","close","internalLog","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -33,13 +37,13 @@ public class PTcpControl {
 
 	
 	// port class
-	static public class PTcpControlPort extends PortBase {
+	static public class LogPort extends PortBase {
 		// constructors
-		public PTcpControlPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
+		public LogPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
-		public PTcpControlPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
+		public LogPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
@@ -64,33 +68,19 @@ public class PTcpControl {
 	
 		
 		// sent messages
-		public void established() {
-			if (messageStrings[ OUT_established] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_established]);
-			}
-			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_established));
-				}
-		public void error() {
-			if (messageStrings[ OUT_error] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_error]);
-			}
-			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_error));
-				}
 	}
 	
 	// replicated port class
-	static public class PTcpControlReplPort {
-		private ArrayList<PTcpControlPort> ports;
+	static public class LogReplPort {
+		private ArrayList<LogPort> ports;
 		private int replication;
 	
-		public PTcpControlReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
+		public LogReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpControl.PTcpControlPort>(replication);
+			ports = new ArrayList<Log.LogPort>(replication);
 			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpControlPort(
+				ports.add(new LogPort(
 						actor, name+i, localId, i, addr[i], peerAddress[i]));
 			}
 		}
@@ -103,33 +93,28 @@ public class PTcpControl {
 				return ifitem.getIdx();
 			}
 		
-		public PTcpControlPort get(int i) {
+		public LogPort get(int i) {
 			return ports.get(i);
 		}
 		
 		// outgoing messages
-		public void established(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).established();
-			}
-		}
-		public void error(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).error();
-			}
-		}
 	}
 	
 	
 	// port class
-	static public class PTcpControlConjPort extends PortBase {
+	static public class LogConjPort extends PortBase {
+		/*--------------------- begin user code ---------------------*/
+		static int logLevel=0;
+		InternalLogData d = new InternalLogData();
+		/*--------------------- end user code ---------------------*/
 		// constructors
-		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
+		public LogConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
-		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
+		public LogConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
+			// initialize attributes
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -151,17 +136,32 @@ public class PTcpControl {
 				}
 		}
 	
+		/*--------------------- attributes ---------------------*/
+		// TODO JH: Avoid collision attr getters/setter <-> user operations
+		//--------------------- attribute setters and getters
+		/*--------------------- operations ---------------------*/
+		public void setLogLevel(int l) {
+			logLevel=l;
+			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
+		}
+		public void log(int logLevel, String userString) {
+			long s;
+			if (logLevel>this.logLevel){
+			d.userString=userString;
+			d.timeStamp=System.currentTimeMillis();
+			d.sender=getInstancePath();
+			if (getPeerAddress()!=null)
+			getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, d.deepCopy()));
+			}
+		}
 		
 		// sent messages
-		public void open(DTcpControl data) {
+		public void open(String fileName) {
 			if (messageStrings[ IN_open] != "timerTick"){
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
 			}
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, data.deepCopy()));
-		}
-		public void open(String IPAddr, int TcpPort) {
-			open(new DTcpControl(IPAddr, TcpPort));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, fileName));
 		}
 		public void close() {
 			if (messageStrings[ IN_close] != "timerTick"){
@@ -170,19 +170,29 @@ public class PTcpControl {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_close));
 				}
+		private void internalLog(InternalLogData data) {
+			if (messageStrings[ IN_internalLog] != "timerTick"){
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalLog]);
+			}
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, data.deepCopy()));
+		}
+		public void internalLog(String userString, String sender, long timeStamp) {
+			internalLog(new InternalLogData(userString, sender, timeStamp));
+		}
 	}
 	
 	// replicated port class
-	static public class PTcpControlConjReplPort {
-		private ArrayList<PTcpControlConjPort> ports;
+	static public class LogConjReplPort {
+		private ArrayList<LogConjPort> ports;
 		private int replication;
 	
-		public PTcpControlConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
+		public LogConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
 				Address[] peerAddress) {
 			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpControl.PTcpControlConjPort>(replication);
+			ports = new ArrayList<Log.LogConjPort>(replication);
 			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpControlConjPort(
+				ports.add(new LogConjPort(
 						actor, name+i, localId, i, addr[i], peerAddress[i]));
 			}
 		}
@@ -195,19 +205,24 @@ public class PTcpControl {
 				return ifitem.getIdx();
 			}
 		
-		public PTcpControlConjPort get(int i) {
+		public LogConjPort get(int i) {
 			return ports.get(i);
 		}
 		
 		// incoming messages
-		public void open(DTcpControl data){
+		public void open(String fileName){
 			for (int i=0; i<replication; ++i) {
-				ports.get(i).open( data);
+				ports.get(i).open( fileName);
 			}
 		}
 		public void close(){
 			for (int i=0; i<replication; ++i) {
 				ports.get(i).close();
+			}
+		}
+		private void internalLog(InternalLogData data){
+			for (int i=0; i<replication; ++i) {
+				ports.get(i).internalLog( data);
 			}
 		}
 	}
