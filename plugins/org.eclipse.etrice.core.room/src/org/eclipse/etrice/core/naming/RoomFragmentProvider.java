@@ -305,6 +305,8 @@ public class RoomFragmentProvider implements IFragmentProvider {
 				return true;
 			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getTriggeredTransition().getName()))
 				return true;
+			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getRefinedTransition().getName()))
+				return true;
 		}
 		return false;
 	}
