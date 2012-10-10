@@ -146,12 +146,10 @@
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
-		<!--
 		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.SubSystem_PingPongRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
-		-->
 		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.SubSys_SendingDataRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
