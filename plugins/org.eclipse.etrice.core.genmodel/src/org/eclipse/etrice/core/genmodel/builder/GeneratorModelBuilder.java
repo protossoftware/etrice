@@ -658,26 +658,36 @@ public class GeneratorModelBuilder {
 		// in a second step the actually needed number of instances for multiplicity * is filled into the list
 		HashSet<String> multAny = new HashSet<String>();
 		for (Binding bind : bindings) {
-			addNeededInstance(getEndPointKey(bind.getEndpoint1()), ep2portInstances, multAny);
-			addNeededInstance(getEndPointKey(bind.getEndpoint2()), ep2portInstances, multAny);
+			addNeededInstance(bind.getEndpoint1(), bind.getEndpoint2(), ep2portInstances, multAny);
+			addNeededInstance(bind.getEndpoint2(), bind.getEndpoint1(), ep2portInstances, multAny);
 		}
 		
 		return ep2portInstances;
 	}
 
-	private void addNeededInstance(String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
-		ArrayList<PortInstance> ports = ep2portInstances.get(key);
-
+	private void addNeededInstance(BindingEndPoint ep, BindingEndPoint peer_ep, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
+		String endPointKey = getEndPointKey(ep);
+		ArrayList<PortInstance> ports = ep2portInstances.get(endPointKey);
 		PortInstance pi = ports.get(0);
-		Port port = pi.getPort();
 		boolean implicitMany = pi.getProtocol()==null || pi.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN; 
-		if (implicitMany || port.getMultiplicity() < 0) {
-			if (!multAny.contains(key)) {
-				// we just register
-				multAny.add(key);
-			} else {
-				// we add another copy of this instance
-				ports.add(pi);
+		if (implicitMany || pi.getPort().getMultiplicity() < 0) {
+			int size = 1;
+			if (peer_ep.getActorRef() instanceof ActorRef) {
+				int peerMult = peer_ep.getPort().getMultiplicity();
+				if (peerMult<=0)
+					peerMult = 1;
+				size = ((ActorRef)peer_ep.getActorRef()).getSize()*peerMult;
+			}
+			
+			for (int i=0; i<size; ++i) {
+				if (!multAny.contains(endPointKey)) {
+					// we just register
+					multAny.add(endPointKey);
+				}
+				else {
+					// we add another copy of this instance
+					ports.add(pi);
+				}
 			}
 		}
 	}
