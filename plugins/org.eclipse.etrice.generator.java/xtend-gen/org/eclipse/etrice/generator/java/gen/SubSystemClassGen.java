@@ -285,7 +285,7 @@ public class SubSystemClassGen {
                     _builder.append("_");
                     _builder.append(i, "		");
                     _builder.append(" = new Address(0,");
-                    int _threadId_1 = pi.getThreadId();
+                    int _threadId_1 = ai_1.getThreadId();
                     _builder.append(_threadId_1, "		");
                     _builder.append(",");
                     int _objId_1 = pi.getObjId();

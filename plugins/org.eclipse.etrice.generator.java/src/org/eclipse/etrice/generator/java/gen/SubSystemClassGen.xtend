@@ -108,7 +108,7 @@ class SubSystemClassGen {
 						«IF pi.replicated»
 							«FOR peer : pi.peers»
 								«var i = pi.peers.indexOf(peer)»
-								Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«pi.threadId»,«pi.objId+i»);
+								Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«ai.threadId»,«pi.objId+i»);
 							«ENDFOR»
 						«ELSE»
 							Address addr_item_«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
