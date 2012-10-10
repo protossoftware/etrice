@@ -76,40 +76,60 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		DetailCodeToString m2s = new DetailCodeToString();
 		StringToDetailCode s2m = new StringToDetailCode();
 		
-		if (state instanceof RefinedState)
-		{
-			String code = RoomHelpers.getBaseEntryCode((RefinedState)state);
-			Text entry = createFixedText(body, "Base Entry Code:", code, true);
+		if (inherited) {
+			String code = RoomHelpers.getDetailCode(state.getEntryCode());
+			if (state instanceof RefinedState)
+				code += RoomHelpers.getBaseEntryCode((RefinedState)state);
+			Text entry = createFixedText(body, "Entry Code:", code, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
 		}
+		else {
+			if (state instanceof RefinedState)
+			{
+				String code = RoomHelpers.getBaseEntryCode((RefinedState)state);
+				Text entry = createFixedText(body, "Base Entry Code:", code, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				entry.setLayoutData(gd);
+			}
+			
+			{
+				Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
+				configureMemberAware(entry, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				entry.setLayoutData(gd);
+			}
+		}
 		
-		{
-			Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
-			configureMemberAware(entry, true, true);
+		if (inherited) {
+			String code = RoomHelpers.getDetailCode(state.getExitCode());
+			if (state instanceof RefinedState)
+				code = RoomHelpers.getBaseExitCode((RefinedState)state) + code;
+			Text entry = createFixedText(body, "Exit Code:", code, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
-			entry.setEnabled(!inherited);
 		}
-		
-		{
-			Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
-			configureMemberAware(exit, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			exit.setLayoutData(gd);
-			exit.setEnabled(!inherited);
-		}
-		
-		if (state instanceof RefinedState)
-		{
-			String code = RoomHelpers.getBaseExitCode((RefinedState)state);
-			Text entry = createFixedText(body, "Base Exit Code:", code, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			entry.setLayoutData(gd);
+		else {
+			{
+				Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
+				configureMemberAware(exit, true, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				exit.setLayoutData(gd);
+			}
+			
+			if (state instanceof RefinedState)
+			{
+				String code = RoomHelpers.getBaseExitCode((RefinedState)state);
+				Text entry = createFixedText(body, "Base Exit Code:", code, true);
+				GridData gd = new GridData(GridData.FILL_BOTH);
+				gd.heightHint = 100;
+				entry.setLayoutData(gd);
+			}
 		}
 		
 		ActorClass ac = RoomHelpers.getActorClass(state);

@@ -14,7 +14,6 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -77,7 +76,6 @@ import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
-import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -376,7 +374,7 @@ public class StateSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, editable);
 				if (dlg.open()!=Window.OK)
-					throw new OperationCanceledException();
+					return;
 
 				doneChanges = true;
 				updateFigure(s, context);
@@ -593,7 +591,7 @@ public class StateSupport {
 
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
-				SimpleState s = (SimpleState) bo;
+				State s = (State) bo;
 				RefinedState rs = SupportUtil.getRefinedStateFor(s, SupportUtil.getActorClass(getDiagram()));
 				
 				// replace old business object with new refined state
@@ -973,26 +971,52 @@ public class StateSupport {
 		public String getToolTip(GraphicsAlgorithm ga) {
 			// if this is called we know there is a business object!=null
 			PictogramElement pe = ga.getPictogramElement();
-			if (pe instanceof ConnectionDecorator)
-				pe = (PictogramElement) pe.eContainer();
 			
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof State) {
 				String label = "";
 				State s = (State) bo;
-				if (RoomHelpers.hasDetailCode(s.getEntryCode()))
-					label = "entry:\n"+RoomHelpers.getDetailCode(s.getEntryCode());
-				if (RoomHelpers.hasDetailCode(s.getExitCode())) {
-					if (label.length()>0)
-						label += "\n";
-					label += "exit:\n"+RoomHelpers.getDetailCode(s.getExitCode());
+				
+				{
+					String entry = "";
+					if (s instanceof RefinedState)
+						entry += RoomHelpers.getBaseEntryCode((RefinedState) s);
+					if (RoomHelpers.hasDetailCode(s.getEntryCode()))
+						entry += RoomHelpers.getDetailCode(s.getEntryCode());
+					
+					if (!entry.isEmpty())
+						label += "entry:\n"+entry;
 				}
-				if (RoomHelpers.hasDetailCode(s.getDoCode())) {
-					if (label.length()>0)
-						label += "\n";
-					label += "do:\n"+RoomHelpers.getDetailCode(s.getDoCode());
+				
+				{
+					String exit = "";
+					if (RoomHelpers.hasDetailCode(s.getExitCode()))
+						exit += RoomHelpers.getDetailCode(s.getExitCode());
+					if (s instanceof RefinedState)
+						exit += RoomHelpers.getBaseExitCode((RefinedState) s);
+					
+					if (!exit.isEmpty()) {
+						if (!label.isEmpty())
+							label += "\n";
+						label += "exit:\n"+exit;
+					}
 				}
-				if (label.length()>0)
+				
+				{
+					String doCode = "";
+					if (RoomHelpers.hasDetailCode(s.getDoCode()))
+						doCode += "do:\n"+RoomHelpers.getDetailCode(s.getDoCode());
+					if (s instanceof RefinedState)
+						doCode += RoomHelpers.getBaseDoCode((RefinedState) s);
+
+					if (!doCode.isEmpty()) {
+						if (!label.isEmpty())
+							label += "\n";
+						label += "do:\n"+doCode;
+					}
+				}
+				
+				if (!label.isEmpty())
 					return label;
 			}
 			

@@ -17,6 +17,7 @@ import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -90,6 +91,8 @@ public class ProviderDispatcher {
         			return stateGraphSupport.getFeatureProvider();
         		if (RoomFragmentProvider.isTransition(theEObject))
         			return transitionSupport.getFeatureProvider();
+        		if (RoomFragmentProvider.isTransition(theEObject))
+        			return transitionSupport.getFeatureProvider();
         	}
 			return super.doSwitch(theEObject);
 		}
@@ -122,6 +125,11 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IFeatureProvider caseTransition(Transition object) {
+			return transitionSupport.getFeatureProvider();
+		}
+
+		@Override
+		public IFeatureProvider caseRefinedTransition(RefinedTransition object) {
 			return transitionSupport.getFeatureProvider();
 		}
 		
@@ -324,7 +332,11 @@ public class ProviderDispatcher {
 		private EObject getBusinessObject(ICustomContext context) {
 			PictogramElement[] pes = context.getPictogramElements();
 			if (pes.length>0) {
-				EObject bo = (EObject) getBusinessObjectForPictogramElement(pes[0]);
+				PictogramElement pe = pes[0];
+				if (pe instanceof ConnectionDecorator)
+					pe = (PictogramElement) pe .eContainer();
+				
+				EObject bo = (EObject) getBusinessObjectForPictogramElement(pe);
 				return bo;
 			}
 			return null;

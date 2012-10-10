@@ -14,7 +14,6 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -23,9 +22,9 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -598,7 +597,7 @@ public class TransitionSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
 				if (dlg.open()!=Window.OK)
-					throw new OperationCanceledException();
+					return;
 
 				doneChanges = true;
 				
@@ -665,6 +664,7 @@ public class TransitionSupport {
 				RefinedTransition rt = RoomFactory.eINSTANCE.createRefinedTransition();
 				rt.setTarget(trans);
 				ac.getStateMachine().getRefinedTransitions().add(rt);
+				// the connection pe is still linked to the former transition that was refined!
 
 				ICustomFeature[] features = getFeatureProvider().getCustomFeatures(context);
 				for (ICustomFeature cf : features) {
@@ -754,6 +754,8 @@ public class TransitionSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			PictogramElement pe = context.getPictogramElements()[0];
+			if (pe instanceof ConnectionDecorator)
+				pe = (PictogramElement) pe .eContainer();
 			Object bo = getBusinessObjectForPictogramElement(pe);
 			
 			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
