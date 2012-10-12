@@ -52,7 +52,7 @@
 // --- Configurable options --------------------------------------------
 
 // Add as many milestones as you like. First will be used for "Fixed (in <TM>)" link:
-var target_milestones= ["0.1", "0.2", "0.3M1", "0.3M2"];
+var target_milestones= ["0.1.0", "0.2.0", "0.3.0M1", "0.3.0M2"];
 
 // Add "<name>", "<email>" pairs for people you frequently CC:
 var ccs= [
@@ -74,26 +74,24 @@ var moveProducts= [ "Platform" ];
 var moveComponents= [ "Core", "Documentation", "Generators", "Runtime", "Test", "UserInterface" ];
 
 // Add quick version links on the search page (<version> for exact version, <version*> for prefix match):
-var queryVersions= [ "0.1", "0.2", "0.3"];
+var queryVersions= [ "0.1.0", "0.2.0", "0.3.0"];
 
 // Add quick classifications links on the search page (<name>", ["<classification1>", "<classification2>", ...] pairs):
 var queryClassifications= [
 "E", ["Eclipse"],
-" & ", ["Eclipse", "RT"],
-"RT", ["RT"],
+" & ", ["Eclipse", "Modeling"],
+"M", ["Modeling"],
 ];
 
 // Add quick product links on the search page ("<name>", "<Classification>", ["<product1>", "<product2>", ...] triplets):
 var queryProducts= [
-"EGit", "Technology", ["EGit"],
-" & ", "Technology", ["EGit", "JGit"],
-"JGit", "Technology", ["JGit"],
+"eT", "Modeling", ["MDT.ETrice"],
 ];
 
 // Add quick component links on the search page ("<name>", ["<component1>", "<component2>", ...] pairs):
 var queryComponents= [
-"UI", ["UI"],
-" & IDE", ["UI", "IDE"],
+"Core", ["Core"],
+"Gen", ["Generators"],
 ];
 
 // Add tags to categorize bugs within a component:
