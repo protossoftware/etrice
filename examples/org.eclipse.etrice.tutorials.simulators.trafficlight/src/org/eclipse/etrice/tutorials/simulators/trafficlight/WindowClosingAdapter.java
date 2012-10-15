@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Thomas Jung
+ *    Thomas Jung (initial contribution)
  *******************************************************************************/ 
 
 
@@ -15,8 +15,8 @@ package org.eclipse.etrice.tutorials.simulators.trafficlight;
 
 /* WindowClosingAdapter.java */
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class WindowClosingAdapter
 extends WindowAdapter

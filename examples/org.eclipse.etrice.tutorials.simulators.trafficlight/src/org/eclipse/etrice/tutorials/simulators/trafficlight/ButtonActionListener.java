@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Thomas Jung
+ *    Thomas Jung (initial contribution)
+ *    
  *******************************************************************************/ 
 
 
@@ -29,7 +30,6 @@ implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		String s = arg0.getActionCommand();
 		
 		if (s.equals("REQUEST")) {
