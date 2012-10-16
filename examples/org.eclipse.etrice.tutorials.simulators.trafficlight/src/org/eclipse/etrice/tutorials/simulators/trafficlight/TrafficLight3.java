@@ -21,11 +21,11 @@ import java.awt.Graphics;
 public class TrafficLight3 extends Canvas {
 	private static final long serialVersionUID = 1L;
 	// Traffic light has 4 states
-	final static int RED = 0;
-	final static int YELLOWRED = 1;
-	final static int GREEN = 2;
-	final static int YELLOW = 3;
-	final static int OFF = 4;
+	public final int RED = 0;
+	public final int YELLOWRED = 1;
+	public final int GREEN = 2;
+	public final int YELLOW = 3;
+	public final int OFF = 4;
 	
 	private int state;
 	

@@ -36,10 +36,6 @@ public class PedastrianLightWnd extends Frame {
 	Button requestButton = null;
 	TextField statusLine = null;
 
-	private void resetLights() {
-		carLights.setState(4);
-		pedLights.setState(2);
-	}
 
 	public PedastrianLightWnd(int ipPort) {
 		super("PedestrianLightsGUI");
@@ -85,21 +81,25 @@ public class PedastrianLightWnd extends Frame {
 		while (true) {
 			// open and close socket endlessly
 			try {
-				ServerSocket echod = new ServerSocket(ipPort);
+				// open Socket
+				ServerSocket socketServer = new ServerSocket(ipPort);
 
-				Socket socket = echod.accept();
+				// wait blocking for client to connect
+				Socket socket = socketServer.accept();
 				statusLine.setText("socket connected !");
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						socket.getInputStream()));
+				// prepare input and output streams
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				OutputStream out = socket.getOutputStream();
 
+				// add listener for outgoing command
 				buttonListener = new ButtonActionListener(out);
 				requestButton.addActionListener(buttonListener);
 				requestButton.setEnabled(true);
 
 				resetLights();
 
+				// read blocking until socket is disconnected 
 				String cmd;
 				while ((cmd = in.readLine()) != null) {
 					dispatchCommand(requestButton, cmd);
@@ -114,7 +114,8 @@ public class PedastrianLightWnd extends Frame {
 
 				// clean up socket
 				socket.close();
-				echod.close();
+				socketServer.close();
+				
 			} catch (IOException e) {
 				System.err.println(e.toString());
 				System.exit(1);
@@ -139,7 +140,7 @@ public class PedastrianLightWnd extends Frame {
 		if (cmd.equals("carLights=off")) {
 			carLights.setState(carLights.OFF);
 		}
-
+		
 		// check pedLights
 		if (cmd.equals("pedLights=red")) {
 			pedLights.setState(pedLights.RED);
@@ -158,6 +159,11 @@ public class PedastrianLightWnd extends Frame {
 		if (cmd.equals("button=off")) {
 			requestButton.setEnabled(false);
 		}
+	}
+
+	private void resetLights() {
+		carLights.setState(carLights.OFF);
+		pedLights.setState(pedLights.OFF);
 	}
 
 	private GridBagConstraints makeGbc(int x, int y, int width, int height) {
