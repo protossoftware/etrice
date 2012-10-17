@@ -41,6 +41,12 @@ void MessageService::run() {
 	}
 }
 
+void MessageService::runOnce() {
+	while (m_messageQueue.isNotEmpty()){
+		pollOneMessage();
+	}
+}
+
 //TODO: synchronized
 void MessageService::receive(Message* msg) {
 	if (msg != 0) {

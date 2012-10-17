@@ -53,7 +53,7 @@ void DebuggingService::addActorState(const ActorClassBase& actor,
 }
 
 void DebuggingService::addPortInstance(PortBase& port) {
-	portInstances.at(port.getAddress()) = &port;
+	portInstances[port.getAddress()] = &port;
 }
 
 MSCLogger& DebuggingService::getSyncLogger() {

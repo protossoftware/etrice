@@ -25,6 +25,8 @@ public:
 	Address getAddress() const {	return m_address; }	;
 
 	void run();
+	//TODO: for single threaded configuration only
+	void runOnce();
 
 	//TODO: synchronized
 	void terminate();

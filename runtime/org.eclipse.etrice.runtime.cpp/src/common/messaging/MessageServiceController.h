@@ -33,6 +33,9 @@ public:
 	void start();
 	void stop();
 
+	//TODO: this is only for single threaded configurations
+	void runOnce();
+
 	/**
 	 * waitTerminate waits blocking for all MessageServices to terminate
 	 * ! not threadsafe !

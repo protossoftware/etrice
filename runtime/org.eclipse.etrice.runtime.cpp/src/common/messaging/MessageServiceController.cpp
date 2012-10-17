@@ -104,4 +104,17 @@ void MessageServiceController::terminate() {
 	}
 }
 
+void MessageServiceController::runOnce() {
+	if (!m_running) {
+		return;
+	}
+	m_running = false;
+
+	// terminate all message services
+	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
+			it != m_messageServiceList.end(); ++it) {
+		(*it)->runOnce();
+	}
+}
+
 } /* namespace etRuntime */

@@ -236,11 +236,11 @@ class SubSystemClassGen {
 		// addresses for the subsystem system port
 		//----------------------------------------------------------------------------------------------
 
-		std::vector<Address> ownAddresses;
+		std::vector<Address> ownAddresses(«comp.allContainedInstances.size»);
 		«FOR ai : comp.allContainedInstances»
 			ownAddresses[«comp.allContainedInstances.indexOf(ai)»] = addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)»;
 		«ENDFOR»
-		std::vector<Address> peerAddresses;
+		std::vector<Address> peerAddresses(«comp.allContainedInstances.size»);
 		«FOR ai : comp.allContainedInstances»
 			peerAddresses[«comp.allContainedInstances.indexOf(ai)»] = addr_item_«ai.path.getPathName()»;
 		«ENDFOR»
@@ -260,20 +260,22 @@ class SubSystemClassGen {
 	def generateOwnInterfaceItemAddresses(ActorInstance ai) ''' 
 		std::vector<std::vector<Address> > «ai.name»_ownInterfaceItemAddresses;
 		
-		std::vector<Address> «ai.name»_actorInstanceAddresses;
+		std::vector<Address> «ai.name»_actorInstanceAddresses(1);
 		«ai.name»_actorInstanceAddresses[0] = addr_item_«ai.path.getPathName()»;
 		
 		«ai.name»_ownInterfaceItemAddresses.push_back(«ai.name»_actorInstanceAddresses);
 		«FOR pi : ai.orderedIfItemInstances»
-			std::vector<Address>  «ai.name»_«pi.name»Addresses;
 			«IF pi.replicated»
 				«IF pi.peers.empty»
+					std::vector<Address>  «ai.name»_«pi.name»Addresses;
 				«ELSE»
+					std::vector<Address>  «ai.name»_«pi.name»Addresses(«pi.peers.size»);
 					«FOR peer : pi.peers»
 						«ai.name»_«pi.name»Addresses[«pi.peers.indexOf(peer)»] = addr_item_«pi.path.getPathName()»_«pi.peers.indexOf(peer)»;
 					«ENDFOR»
 				«ENDIF»
 			«ELSE»
+				std::vector<Address>  «ai.name»_«pi.name»Addresses(1);
 				«ai.name»_«pi.name»Addresses[0] = addr_item_«pi.path.getPathName()»;
 			«ENDIF»
 			«ai.name»_ownInterfaceItemAddresses.push_back(«ai.name»_«pi.name»Addresses);
@@ -284,16 +286,17 @@ class SubSystemClassGen {
 	def generatePeerInterfaceItemAddresses(ActorInstance ai, SubSystemInstance comp) ''' 
 		std::vector<std::vector<Address> > «ai.name»_peerInterfaceItemAddresses;
 		
-		std::vector<Address> «ai.name»_systemPortAddresses;
+		std::vector<Address> «ai.name»_systemPortAddresses(1);
 		«ai.name»_systemPortAddresses[0] = addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)»;
 		
 		«ai.name»_peerInterfaceItemAddresses.push_back(«ai.name»_systemPortAddresses);
 		«FOR pi : ai.orderedIfItemInstances »
 			«IF pi.replicated && pi.peers.isEmpty»
 			«ELSE»
-				std::vector<Address>  «ai.name»_«pi.name»PeerAddresses;
 				«IF pi.peers.empty»
+					std::vector<Address>  «ai.name»_«pi.name»PeerAddresses;
 				«ELSE»
+					std::vector<Address>  «ai.name»_«pi.name»PeerAddresses(«pi.peers.size»);
 					«FOR pp : pi.peers»
 						«IF pp.replicated»
 							«ai.name»_«pi.name»PeerAddresses[«pi.peers.indexOf(pp)»] = addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»;

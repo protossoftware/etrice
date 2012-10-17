@@ -22,9 +22,13 @@ Address::Address(const Address & right) :
 		m_objectID(right.m_objectID) {
 };
 
-Address & Address::operator = (Address s) 	{
-   std::swap(s, *this);
-   return *this;
+Address & Address::operator = (const Address& right) 	{
+	if (this != &right) {
+		m_nodeID   = right.m_nodeID;
+		m_threadID = right.m_threadID;
+		m_objectID = right.m_objectID;
+	}
+    return *this;
 }
 
 bool Address::operator< (const Address& right) const {

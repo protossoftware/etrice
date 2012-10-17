@@ -94,6 +94,10 @@ RTSystemServicesProtocolPortRepl(IEventReceiver& actor, IRTObject* parent, std::
 		snprintf(numstr, sizeof(numstr), "%d", i);
 		m_ports.push_back(RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
 	}
+	for (int i = 0; i < m_replication; ++i) {
+		DebuggingService::getInstance().addPortInstance(m_ports.at(i));
+	}
+
 };
 
 // outgoing messages
@@ -171,6 +175,10 @@ RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, s
 		snprintf(numstr, sizeof(numstr), "%d", i);
 		m_ports.push_back(RTSystemServicesProtocolConjPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
 	}
+	for (int i = 0; i < m_replication; ++i) {
+		DebuggingService::getInstance().addPortInstance(m_ports.at(i));
+	}
+
 };
 
 // sent messages

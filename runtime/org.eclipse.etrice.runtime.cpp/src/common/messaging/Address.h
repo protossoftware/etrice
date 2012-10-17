@@ -14,9 +14,9 @@ namespace etRuntime {
 
 class Address {
 public:
-	Address(int nodeID, int threadID, int objectID);
+	explicit Address(int nodeID=0, int threadID=0, int objectID=0);
 	Address(const Address & right);
-	Address & operator = (Address s);
+	Address & operator = (const Address& right);
 	bool operator< (const Address& right) const;
 	~Address();
 
@@ -25,7 +25,7 @@ public:
 
 	Address createInc(int i);
 	bool isValid() const {
-		return (m_nodeID != 0) && (m_threadID != 0) && (m_objectID != 0);
+		return (m_nodeID != 0) || (m_threadID != 0) || (m_objectID != 0);
 	};
 
 	int m_nodeID;
@@ -33,7 +33,6 @@ public:
 	int m_objectID;
 
 private:
-	Address();
 };
 
 } /* namespace etRuntime */
