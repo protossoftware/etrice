@@ -59,6 +59,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.Message;
 		import org.eclipse.etrice.runtime.java.modelbase.*;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
 		«pc.userCode(1)»
 		
