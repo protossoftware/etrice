@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -487,6 +488,9 @@ public class RoomNameProvider {
 			else
 				where = "do";
 			return "state "+RoomNameProvider.getStatePathName(state)+" "+where+" code";
+		}
+		else if (code.eContainer() instanceof Operation) {
+			return "operation "+RoomHelpers.getSignature(((Operation)code.eContainer()));
 		}
 		else {
 			assert(false): "unexpected detaild code location";
