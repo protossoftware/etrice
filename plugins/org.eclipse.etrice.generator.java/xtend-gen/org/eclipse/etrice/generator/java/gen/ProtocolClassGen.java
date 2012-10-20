@@ -96,6 +96,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
     _builder.newLine();
+    _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+    _builder.newLine();
     _builder.newLine();
     CharSequence _userCode = this._procedureHelpers.userCode(pc, 1);
     _builder.append(_userCode, "");

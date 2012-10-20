@@ -1,18 +1,27 @@
-RoomModel org.eclipse.etrice.integration.ConfigTest {
+RoomModel ConfigTest {
 
-	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/models/Types.room"
+	import room.basic.types.* from "Types.room"
 
 	SubSystemClass SubSystemConfigTest {
-		ActorRef top: ConfigText_Top_ac
+		ActorRef top: ConfigTest_Top_ac
 	}
 
-	ActorClass ConfigText_Top_ac {
+	ActorClass ConfigTest_Top_ac {
 		Structure {
 			ActorRef testee: Testee_ac
 			ActorRef testee2: DynTestee_ac
 			Binding testee2.Conj_DynConfigPort and testee.Reg_dynConfigPort
 		}
-		Behavior { }
+		Behavior {
+			Operation ConfigTest_Top_ac() {
+				"etUnit_open(\"tmp\", \"ConfigTest\");"
+				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.ConfigTest\");"
+			}
+			Operation ~ConfigTest_Top_ac() {
+				"etUnit_closeTestSuite();"
+				"etUnit_close();"
+			}
+		}
 	}
 	
 	ActorClass DynTestee_ac {
@@ -20,10 +29,8 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			conjugated Port Conj_DynConfigPort: TestCommProtocol
 		}
 		Structure {
-			usercode1 {
-				"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
-			}
 			external Port Conj_DynConfigPort
+			Attribute caseId: int32
 			Attribute int_i : int32
 			Attribute dc_i : Dyn_DC1
 			// manual test
@@ -34,6 +41,12 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			Attribute int_dump : int32
 		}
 		Behavior {
+			Operation DynTestee_ac() {
+				"caseId = etUnit_openTestCase(\"ConfigTest_case_DynTestee_ac\");"
+			}
+			Operation ~DynTestee_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
 			StateMachine {
 				Transition init: initial -> First {	}
 				Transition tr0: First -> Done {
@@ -47,16 +60,12 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 						"setAndWriteInt_dump(888);"
 						// read test
 						"if(blocker)getBlockMeLock().forbidUpdate(); else getBlockMeLock().allowUpdate();"
-						"int testValue = 0;"
-						"if(int_i != 401 || getDc_i().getLong_array_i()[0] != 403)"
-						"\ttestValue = 30;"
-						"if(getDc_i().getDc_i().getDouble_i() != 0.404)"
-						"\ttestValue = 31;"
-						"if(!String.valueOf(getDc_i().getDc_i().getChar_i()).equals(\"instance4\"))"
-						"\ttestValue = 32;"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", int_i == 401 && getDc_i().getLong_array_i()[0] == 403);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", getDc_i().getDc_i().getDouble_i() == 0.404);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", String.valueOf(getDc_i().getDc_i().getChar_i()).equals(\"instance4\"));"
 						"System.out.println(\"blockMe: \"+getBlockMe()+\", blocker: \"+getBlocker());"
-						"if(testValue != 0)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
+						"if(!etUnit_isSuccess(caseId))"
+						"\tetUnit_testFinished(caseId);"
 						"else"
 						"\tConj_DynConfigPort.ok();"
 					}
@@ -108,6 +117,7 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			}
 			external Port Reg_dynConfigPort
 			Port Reg_port: PortProtocol
+			Attribute caseId: int32
 			Attribute bool_r: boolean = "true"
 			Attribute bool_c: boolean = "true"
 			Attribute bool_i: boolean = "true"
@@ -139,6 +149,12 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			Binding Reg_port and AR1.Conj_port
 		}
 		Behavior {
+			Operation Testee_ac() {
+				"caseId = etUnit_openTestCase(\"ConfigTest_case_Testee_ac\");"
+			}
+			Operation ~Testee_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
 			StateMachine {
 				Transition init: initial -> Testing1 { }
 				Transition tr1: Testing1 -> Testing2{
@@ -165,34 +181,24 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 				}
 				State Done {
 					entry {
-						"if (bool_r != true || bool_c != false || bool_i != true )"
-						"\tRTServices.getInstance().getSubSystem().testFinished(1);"
-						"else if (int_r != 100 || int_c != 210 || int_i != 301)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(2);"
-						"else if (float_r != 11.11 || float_c !=0xFFFFFF || float_i != 0.00001)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(3);"
-						"else if (char_r != \'R\' || char_c != \'A\' || char_i != \'C\')"
-						"\tRTServices.getInstance().getSubSystem().testFinished(4);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", bool_r == true && bool_c == false && bool_i == true);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", int_r == 100 && int_c == 210 && int_i == 301);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", float_r == 11.11 && float_c ==0xFFFFFF && float_i == 0.00001);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", char_r == \'R\' && char_c == \'A\' && char_i == \'C\');"
 						"// string_r.equals(\"ROOM will bloom\")"
-						"else if (charArray_r.equals(\"ROOM will bloom\") || charArray_c.equals(\"ROOM-Coon\") || charArray_i.equals(\"ROOM 2 Moon\"))"
-						"\tRTServices.getInstance().getSubSystem().testFinished(5);"
-						"else if (!string_r.equals(\":/\") || !string_c.equals(\":-)\") || !string_i.equals(\":^]\"))"
-						"\tRTServices.getInstance().getSubSystem().testFinished(5);"
-						"if(array1_r[0] != 0 || array1_c[0] != 99 || array1_i[0] != 4)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(6);"
-						"if(array2_r[0] != true || array2_r[1] != true)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(7);"
-						"if(array2_c[0] != false || array2_c[1] != false)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(8);"
-						"if(array2_i[0] != false || array2_i[1] != true)"
-						"\tRTServices.getInstance().getSubSystem().testFinished(9);"
-						"else"
-						"\tRTServices.getInstance().getSubSystem().testFinished(0);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", !charArray_r.equals(\"ROOM will bloom\") && !charArray_c.equals(\"ROOM-Coon\") && !charArray_i.equals(\"ROOM 2 Moon\"));"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", string_r.equals(\":/\") && string_c.equals(\":-)\") && string_i.equals(\":^]\"));"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array1_r[0] == 0 && array1_c[0] == 99 && array1_i[0] == 4);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_r[0] == true && array2_r[1] == true);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_c[0] == false && array2_c[1] == false);"
+						"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_i[0] == false && array2_i[1] == true);"
+						"etUnit_testFinished(caseId);"
 					}
 				}
 			}
 		}
 	}
+
 
 	ProtocolClass PortProtocol {
 		usercode1 {
@@ -210,12 +216,10 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			Attribute float_c: float32 = "16"
 			Attribute float_i: float32 = "256"
 			Operation varCheck():boolean {
-				"int testValue = 0;"
-				"if(float_r != 4 || float_c != 3 || float_i != 25)"
-				"\ttestValue = 20;"
-				"if(testValue != 0)"
-					"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
-				"return testValue == 0;"
+				"int caseId = etUnit_openTestCase(\"ConfigTest_case_PortProtocol_regular\");"
+				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", float_r == 4 && float_c == 3 && float_i == 25);"
+				"etUnit_testFinished(caseId);"
+				"return etUnit_isSuccess(caseId);"
 			}
 		}
 		conjugate PortClass
@@ -227,23 +231,16 @@ RoomModel org.eclipse.etrice.integration.ConfigTest {
 			Attribute array2_c [ 2 ]: int64 = "{0,0}"
 			Attribute array2_i [ 2 ]: int64 = "{0,0}"
 			Operation varCheck():boolean {
-				"int testValue = 0;"
-				"if(array1_r[0] != 1000 || array1_c[0] != 1 || array1_i[0] != 256)"
-				"\ttestValue = 10;"
-				"if(array2_r[0] != 11 || array2_r[1] != 22)"
-				"\ttestValue = 11;"
-				"if(array2_c[0] != 16 || array2_c[1] != 32)"
-				"\ttestValue = 12;"
-				"if(array2_i[0] != 1 || array2_i[1] != 2)"
-				"\ttestValue = 13;"
-				"if(testValue != 0)"
-					"\tRTServices.getInstance().getSubSystem().testFinished(testValue);"
-				"return testValue == 0;"
+				"int caseId = etUnit_openTestCase(\"ConfigTest_case_PortProtocol_conjugated\");"
+				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array1_r[0] == 1000 && array1_c[0] == 1 && array1_i[0] == 256);"
+				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_r[0] == 11 && array2_r[1] == 22);"
+				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_c[0] == 16 && array2_c[1] == 32);"
+				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_i[0] == 1 && array2_i[1] == 2);"
+				"etUnit_testFinished(caseId);"
+				"return etUnit_isSuccess(caseId);"
 			}
 		}
 	}
-	
-	
 	
 	ProtocolClass TestCommProtocol {
 		incoming {

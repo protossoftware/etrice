@@ -6,22 +6,26 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Thomas Jung
+ *    Thomas Jung (initial contribution)
+ *    Thomas Schuetz
  *******************************************************************************/ 
 
 
 package org.eclipse.etrice.tutorials.simulators.trafficlight;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 
 
 public class TrafficLight3 extends Canvas {
+	private static final long serialVersionUID = 1L;
 	// Traffic light has 4 states
-	// 0 = red
-	// 1 = yellowRed
-	// 2 = green
-	// 3 = yellow
-	// 4 = OFF
+	public final int RED = 0;
+	public final int YELLOWRED = 1;
+	public final int GREEN = 2;
+	public final int YELLOW = 3;
+	public final int OFF = 4;
 	
 	private int state;
 	

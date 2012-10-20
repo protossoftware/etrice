@@ -61,6 +61,8 @@
 		<copy todir="models" >
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
+				<include name="*.config"/>
+				<include name="*.rt-config"/>
 			</fileset>
 			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/models">
 				<include name="TimingService.room"/>
@@ -107,6 +109,8 @@
 			<arg value="${java.tests.model.path}/PingPongThreadReplPortTest.room"/>
 			<arg value="${java.tests.model.path}/SendingDataTestJava.room"/>
 			<arg value="${java.tests.model.path}/TCPTest.room"/>
+			<arg value="${java.tests.model.path}/ConfigTest.room"/>
+			<arg value="${java.tests.model.path}/ConfigTest.config"/>
 			
 			<!-- copied modellib.java models -->
 			<arg value="${java.tests.model.path}/TimingService.room"/>
@@ -134,6 +138,10 @@
 	-->
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
+		<java output="${output}/runConfigTest.txt" classname="ConfigTest.SubSystemConfigTestRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
 		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.SubSystem_HandlerTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
@@ -213,6 +221,13 @@
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.java.tests.TCPTest"/>
 			<arg value="./tmp/TCPTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.ConfigPTest"/>
+			<arg value="./tmp/ConfigTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>

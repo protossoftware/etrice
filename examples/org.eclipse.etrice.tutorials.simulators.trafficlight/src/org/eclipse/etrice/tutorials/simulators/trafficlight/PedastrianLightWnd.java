@@ -6,123 +6,167 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Thomas Jung
+ *    Thomas Jung (initial contribution)
  *    Thomas Schuetz
- *******************************************************************************/ 
-
+ *******************************************************************************/
 
 package org.eclipse.etrice.tutorials.simulators.trafficlight;
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.TextField;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.*;
-import java.awt.event.ActionEvent;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class PedastrianLightWnd extends Frame {
-	// Konstructor
-	public PedastrianLightWnd (int ipPort){
-		super("PedestrianLightsGUI");		
+	private static final long serialVersionUID = 1L;
+
+	private TrafficLight3 carLights = null;
+	private TrafficLight2 pedLights = null;
+
+	ButtonActionListener buttonListener = null;
+
+	Button requestButton = null;
+	TextField statusLine = null;
+
+
+	public PedastrianLightWnd(int ipPort) {
+		super("PedestrianLightsGUI");
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints gbc;
-		TrafficLight3 carLights = new TrafficLight3(4);
-		TrafficLight2 pedLights = new TrafficLight2(2);
-		TextField statusLine = new TextField();
-		Button requestButton = new Button("REQUEST");
+		carLights = new TrafficLight3(4);
+		pedLights = new TrafficLight2(2);
+		statusLine = new TextField();
+		requestButton = new Button("REQUEST");
 		requestButton.setEnabled(false);
 		addWindowListener(new WindowClosingAdapter(true));
-		char cmdString[]=new char[100];
-		int cmdCounter = 0, cmdState = 0;
-		
+
 		setLayout(layout);
-		
-		gbc=makeGbc(0,1,1,1);
-		layout.setConstraints(carLights,gbc);
+
+		gbc = makeGbc(0, 1, 1, 1);
+		layout.setConstraints(carLights, gbc);
 		add(carLights);
-		
-		gbc=makeGbc(1,1,1,1);
-		layout.setConstraints(pedLights,gbc);
+
+		gbc = makeGbc(1, 1, 1, 1);
+		layout.setConstraints(pedLights, gbc);
 		add(pedLights);
-		
+
 		statusLine.setText("listening on TCP Port " + ipPort);
 		statusLine.setEditable(false);
 		statusLine.setFocusable(false);
-		gbc = makeGbc(0,0,2,1);
+		gbc = makeGbc(0, 0, 2, 1);
 		gbc.fill = GridBagConstraints.BOTH;
-		layout.setConstraints(statusLine,gbc);
+		layout.setConstraints(statusLine, gbc);
 		add(statusLine);
 
-		gbc = makeGbc(0,2,2,1);
+		gbc = makeGbc(0, 2, 2, 1);
 		gbc.fill = GridBagConstraints.BOTH;
-		layout.setConstraints(requestButton,gbc);
+		layout.setConstraints(requestButton, gbc);
 		add(requestButton);
 
 		pack();
 		setVisible(true);
 
-		// open socket 
-		try {
-			ServerSocket echod = new ServerSocket(ipPort);
-			Socket socket = echod.accept();
-			statusLine.setText("connected !");
+		loopSocket(ipPort); // blocking loop
+	}
 
-		//	InputStream in = socket.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			OutputStream out = socket.getOutputStream();
+	private void loopSocket(int ipPort) {
+		while (true) {
+			// open and close socket endlessly
+			try {
+				// open Socket
+				ServerSocket socketServer = new ServerSocket(ipPort);
 
-			requestButton.addActionListener(new ButtonActionListener(out));
-			requestButton.setEnabled(true);
-			
-			carLights.setState(4);
-			pedLights.setState(2);
+				// wait blocking for client to connect
+				Socket socket = socketServer.accept();
+				statusLine.setText("socket connected !");
 
-			String cmd;
+				// prepare input and output streams
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				OutputStream out = socket.getOutputStream();
 
-			while ((cmd = in.readLine()) != null){
+				// add listener for outgoing command
+				buttonListener = new ButtonActionListener(out);
+				requestButton.addActionListener(buttonListener);
+				requestButton.setEnabled(true);
 
-				if (cmd.equals("carLights=red")){
-					carLights.setState(0);
-					}
-				if (cmd.equals("carLights=yellowRed")){
-					carLights.setState(1);
-					}
-				if (cmd.equals("carLights=green")){
-					carLights.setState(2);
-					}
-				if (cmd.equals("carLights=yellow")){
-					carLights.setState(3);
-					}
-				if (cmd.equals("pedLights=red")){
-					pedLights.setState(0);
-					}
-				if (cmd.equals("pedLights=green")){
-					pedLights.setState(1);
-					}
-				if (cmd.equals("pedLights=off")){
-					pedLights.setState(2);
-					}
-				if (cmd.equals("carLights=off")){
-					carLights.setState(4);
-					}
-				if (cmd.equals("button=on")){
-					requestButton.setEnabled(true);
-					}
-				if (cmd.equals("button=off")){
-					requestButton.setEnabled(false);
-					}
+				resetLights();
+
+				// read blocking until socket is disconnected 
+				String cmd;
+				while ((cmd = in.readLine()) != null) {
+					dispatchCommand(requestButton, cmd);
+				}
+				statusLine.setText("socket disconnected !");
+
+				// deactivate button
+				requestButton.removeActionListener(buttonListener);
+				requestButton.setEnabled(false);
+
+				resetLights();
+
+				// clean up socket
+				socket.close();
+				socketServer.close();
+				
+			} catch (IOException e) {
+				System.err.println(e.toString());
+				System.exit(1);
 			}
-			 // System.out.println("Verbindung beendet");
-			socket.close();
-			echod.close();
-		}catch (IOException e) {
-			System.err.println(e.toString());
-			System.exit(1);
 		}
 	}
-	
-	private GridBagConstraints makeGbc(int x, int y, int width, int height){
+
+	private void dispatchCommand(Button requestButton, String cmd) {
+		// check carLights
+		if (cmd.equals("carLights=red")) {
+			carLights.setState(carLights.RED);
+		}
+		if (cmd.equals("carLights=yellowRed")) {
+			carLights.setState(carLights.YELLOWRED);
+		}
+		if (cmd.equals("carLights=green")) {
+			carLights.setState(carLights.GREEN);
+		}
+		if (cmd.equals("carLights=yellow")) {
+			carLights.setState(carLights.YELLOW);
+		}
+		if (cmd.equals("carLights=off")) {
+			carLights.setState(carLights.OFF);
+		}
+		
+		// check pedLights
+		if (cmd.equals("pedLights=red")) {
+			pedLights.setState(pedLights.RED);
+		}
+		if (cmd.equals("pedLights=green")) {
+			pedLights.setState(pedLights.GREEN);
+		}
+		if (cmd.equals("pedLights=off")) {
+			pedLights.setState(pedLights.OFF);
+		}
+
+		// check button
+		if (cmd.equals("button=on")) {
+			requestButton.setEnabled(true);
+		}
+		if (cmd.equals("button=off")) {
+			requestButton.setEnabled(false);
+		}
+	}
+
+	private void resetLights() {
+		carLights.setState(carLights.OFF);
+		pedLights.setState(pedLights.OFF);
+	}
+
+	private GridBagConstraints makeGbc(int x, int y, int width, int height) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
@@ -132,7 +176,7 @@ public class PedastrianLightWnd extends Frame {
 		gbc.weighty = 1;
 		// gbc.fill = GridBagConstraints.BOTH;
 		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.insets = new Insets(1,1,1,1);
+		gbc.insets = new Insets(1, 1, 1, 1);
 		return gbc;
-		}	
+	}
 }

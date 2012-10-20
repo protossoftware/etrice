@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Thomas Jung
- *    Thomas Schuetz
+ *    Thomas Jung (initial contribution)
+ *    
  *******************************************************************************/ 
 
 
@@ -25,7 +25,7 @@ public class Main {
 			System.exit(0);
 		}
 
-		PedastrianLightWnd wnd = new PedastrianLightWnd(Integer.parseInt(args[0]));
+		new PedastrianLightWnd(Integer.parseInt(args[0]));
 	}
 
 	public static boolean checkArgs(String[] args) {
