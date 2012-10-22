@@ -30,9 +30,9 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 class ActorClassGen extends GenericActorClassGenerator {
 	
 	@Inject JavaIoFileSystemAccess fileAccess
-	@Inject extension JavaExtensions stdExt
-	@Inject extension RoomExtensions roomExt
-	@Inject extension ConfigExtension configExt
+	@Inject extension JavaExtensions
+	@Inject extension RoomExtensions
+	@Inject extension ConfigExtension
 	@Inject ConfigGenAddon configAddon
 	
 	@Inject extension ProcedureHelpers
