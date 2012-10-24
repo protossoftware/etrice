@@ -13,6 +13,8 @@ import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.cpp.gen.Initialization
+import org.eclipse.etrice.generator.cpp.gen.StateMachineGen
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
@@ -23,7 +25,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject extension CppExtensions
 	@Inject extension RoomExtensions
-	
+	@Inject extension Initialization
 	@Inject extension ProcedureHelpers
 	@Inject extension StateMachineGen
 	@Inject ILogger logger
@@ -126,10 +128,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 				virtual void destroy();			
 			«IF ac.hasNonEmptyStateMachine»
-«««				«xpac.genStateMachine()»
-				//--------------------- dummy instead of state machine gen
-				virtual void receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* data){};
-				virtual void executeInitTransition(){};
+				«xpac.genStateMachineMethodDeclarations()»
 			«ELSEIF !xpac.hasStateMachine()»
 			public: 
 				//--------------------- no state machine
@@ -230,7 +229,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 		
 		«IF ac.hasNonEmptyStateMachine»
-«««				«xpac.genStateMachine()»
+			«xpac.genStateMachine(false)»
 		«ELSEIF !xpac.hasStateMachine()»
 			//--------------------- no state machine
 			void «ac.name»::receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* data) {

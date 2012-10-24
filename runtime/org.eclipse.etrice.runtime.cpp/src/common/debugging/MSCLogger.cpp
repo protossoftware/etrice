@@ -52,12 +52,12 @@ void MSCLogger::addMessageSyncReturn(std::string source, std::string target,
 
 void MSCLogger::addActorState(std::string actor, std::string state) {
 	if (filter->applyTo(actor))
-		getCommandList().push_back("\t" + filter->reduceString(actor) + " >>> " + state);
+		commandList.push_back("\t" + filter->reduceString(actor) + " >>> " + state);
 }
 
 void MSCLogger::createLine(std::string source, std::string mid, std::string target, std::string message) {
 	if (filter->applyTo(source) && filter->applyTo(target)) {
-		getCommandList().push_back( "\t"+filter->reduceString(source)+mid+filter->reduceString(target)+ " " + message);
+		commandList.push_back( "\t"+filter->reduceString(source)+mid+filter->reduceString(target)+ " " + message);
 	}
 }
 
@@ -67,7 +67,10 @@ void MSCLogger::close() {
 		//TODO: error handling
 			// Create file
 			std::ofstream myfile;
-			myfile.open (std::string("tmp/log/" + path + msc_name + ".seq").c_str(), std::ios::out);
+			//TODO: where to create the file
+			// std::string dir = "tmp/log"; doesn't work on windows
+			std::string dir = "";
+			myfile.open (std::string(dir + path + msc_name + ".seq").c_str(), std::ios::out);
 			if (myfile.is_open()) { /* ok, proceed with output */
 				saveMSCforTrace2UML(myfile);
 				myfile.close();
@@ -82,9 +85,9 @@ void MSCLogger::saveMSCforTrace2UML(std::ofstream& out) {
 	//TODO: errorhandling
 		out << "#generated MSC for Trace2UML";
 		out << std::endl ;
-		std::list<std::string>::iterator it = getCommandList().begin();
-		for ( ; it != getCommandList().end(); ++it) {
-			out << *it << std::endl;
+		std::list<std::string>::iterator it = commandList.begin();
+		for ( ; it != commandList.end(); ++it) {
+			out << (*it) << std::endl;
 		}
 //	} catch (IOException e) {
 //		System.err.println("Error: " + e.getMessage());

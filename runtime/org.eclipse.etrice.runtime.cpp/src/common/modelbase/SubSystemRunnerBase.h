@@ -11,8 +11,13 @@
 #define SUBSYSTEMRUNNERBASE_H_
 
 #include <iostream>
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 namespace etRuntime {
+
+class SubSystemClassBase;
 
 class SubSystemRunnerBase {
 public:
@@ -23,16 +28,13 @@ public:
 	 * blocks until the String "quit" is entered on the console
 	 */
 protected:
-	static void waitForQuit() {
-		// waiting for command line input
-		std::string token = "";
-		std::cout << "type 'quit' to exit" << std::endl;
-		while (token != "quit") {
-			std::getline(std::cin, token);
-			std::cout << "echo: " << token << std::endl;
-		}
+	static void waitForQuit(SubSystemClassBase& mainComponent) {
+		waitAndPollSingleThreaded(mainComponent);
 	}
 
+private:
+	static void waitMultiThreaded();
+	static void waitAndPollSingleThreaded(SubSystemClassBase& mainComponent);
 };
 
 } /* namespace etRuntime */

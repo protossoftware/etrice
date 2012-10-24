@@ -19,29 +19,31 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.AbstractTransitionChainGenerator
 import java.util.List
-import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.ExternalType
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ConfigExtension
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.ComplexType
-
+import org.eclipse.xtext.util.Pair
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
 
-	@Inject AbstractTransitionChainGenerator chainGenerator
 	@Inject ILanguageExtension languageExt
+	@Inject IDiagnostician diagnostician
 	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	
 
 	override String getTypedDataDefinition(Message m) {
-		return chainGenerator.generateTypedData(m.data)
+		generateArglistAndTypedData(m.data).get(1)
 	}
 
 
@@ -133,39 +135,118 @@ class CppExtensions implements ILanguageExtension {
 	}
 	
 
-	def attributeConstructorInitList(List<Attribute> attribs, boolean useClassDefaultsOnly) {
-		'''
-			// initialize attributes
-			«FOR a : attribs»
-				«var value = a.initValue»
-				«IF value!=null»
-					«IF !a.isArray»
-						«a.name» ( «value» ),
-					«ELSE»
-						«a.name» ( {
-						«FOR i : 0 .. a.size»
-							value,
-						«ENDFOR»
-						} )
-					«ENDIF»
-				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
-					«IF a.size==0»
-						«IF a.refType.isRef»
-							«a.name» ( «languageExt.nullPointer()» ),
-						«ELSE»
-							«a.name» ( «a.refType.type.defaultValue» ),
-						«ENDIF»
-					«ELSE»
-						«a.name» ( new «a.refType.type.typeName»[«a.size»] ),
-						«IF !useClassDefaultsOnly»
-							for (int i=0;i<«a.size»;i++){
-								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«a.refType.type.defaultValue»«ENDIF»;
-							}
-						«ENDIF»
-					«ENDIF»
-				«ENDIF»
-			«ENDFOR»
-		'''
-	}
+//	def attributeConstructorInitList(List<Attribute> attribs, boolean useClassDefaultsOnly) {
+//		'''
+//			// initialize attributes
+//			«FOR a : attribs»
+//				«var value = a.initValue»
+//				«IF value!=null»
+//					«IF !a.isArray»
+//						«a.name» ( «value» ),
+//					«ELSE»
+//						«a.name» ( {
+//						«FOR i : 0 .. a.size»
+//							value,
+//						«ENDFOR»
+//						} )
+//					«ENDIF»
+//				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
+//					«IF a.size==0»
+//						«IF a.refType.isRef»
+//							«a.name» ( «languageExt.nullPointer()» ),
+//						«ELSE»
+//							«a.name» ( «a.refType.type.defaultValue» ),
+//						«ENDIF»
+//					«ELSE»
+//						«a.name» ( new «a.refType.type.typeName»[«a.size»] ),
+//						«IF !useClassDefaultsOnly»
+//							for (int i=0;i<«a.size»;i++){
+//								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«a.refType.type.defaultValue»«ENDIF»;
+//							}
+//						«ENDIF»
+//					«ENDIF»
+//				«ENDIF»
+//			«ENDFOR»
+//		'''
+//	}
 			 
+	override String toValueLiteral(PrimitiveType type, String value){
+		throw new UnsupportedOperationException("TODO Config for Cpp");
+	}
+
+	override String defaultValue(DataType dt) {
+		if (dt instanceof PrimitiveType) {
+			return (dt as PrimitiveType).getDefaultValueLiteral
+		}
+		else if (dt instanceof ExternalType) {
+			diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
+			return "cannot instantiate external data type "+dt.name
+		}
+		else {
+			val dc = dt as DataClass
+			
+			'''
+				{
+					«FOR att : dc.attributes SEPARATOR ","»
+						«att.refType.type.initializationWithDefaultValues(att.size)»
+					«ENDFOR»
+				}
+			'''
+		}
+	}
+	
+	override initializationWithDefaultValues(DataType dt, int size) {
+		val dv = dt.defaultValue
+		if (size>1) {
+			var res = "{"
+			var i = 0
+			while (i<size) {
+				res = res + dv
+				i = i+1
+				if (i<size)
+					res = res + ","
+			}
+			res+"}"
+		}
+		else
+			dv
+	}
+	
+	override generateArglistAndTypedData(VarDecl data) {
+		if (data==null)
+			return newArrayList("", "", "")
+			
+		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
+			(data.getRefType().getType() as PrimitiveType).getTargetName()
+		else
+			data.getRefType().getType().getName()
+			
+		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
+			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
+			if (ct!=null && !ct.isEmpty())
+				ct
+			else
+				typeName
+		}
+		else
+			typeName
+		castTypeName = castTypeName+"*"
+		
+		if (data.getRefType().isRef()) {
+			typeName = typeName+"*"
+			castTypeName = castTypeName+"*"
+		}
+		if (!(data.getRefType().getType() instanceof PrimitiveType)) {
+			typeName = typeName+"*"
+			castTypeName = castTypeName+"*"
+		}
+			
+		val typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
+
+		val dataArg = ", "+data.getName()
+		val typedArgList = ", "+typeName+" "+data.getName()
+		
+		return newArrayList(dataArg, typedData, typedArgList);
+	}
+	
 }

@@ -38,7 +38,7 @@ public:
 	//TODO synchronized
 	void close();
 
-	std::list<std::string> getCommandList() {	return commandList; };
+	const std::list<std::string>& getCommandList() {	return commandList; };
 	MSCFilter* getMSCFilter(){ return filter; };
 
 private:

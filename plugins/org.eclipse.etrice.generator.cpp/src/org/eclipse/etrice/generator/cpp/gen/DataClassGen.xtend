@@ -5,16 +5,16 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.cpp.gen.Initialization
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.etrice.core.genmodel.etricegen.Root
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -27,6 +27,7 @@ class DataClassGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers typeHelpers
+	@Inject extension Initialization
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {

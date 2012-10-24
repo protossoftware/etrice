@@ -76,6 +76,12 @@ void SubSystemClassBase::stop() {
 	std::cout << "=== done stop actor instances" << std::endl;
 }
 
+void SubSystemClassBase::runOnce() {
+	// run all message services one time
+	RTServices::getInstance().getMsgSvcCtrl().runOnce();
+
+}
+
 void SubSystemClassBase::destroy() {
 	std::cout << "*** MainComponent " << this->getInstancePath() << "::destroy ***" << std::endl;
 	for (unsigned int i = 0; i < m_instances.size(); i++) {

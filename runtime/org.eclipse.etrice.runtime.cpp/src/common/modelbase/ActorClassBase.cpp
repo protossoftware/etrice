@@ -12,7 +12,7 @@ namespace etRuntime {
 ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownAddr, Address systemPortPeerAddr)
 	: 	EventReceiver(parent, name),
 		IMessageReceiver(),
-		m_state(),
+		m_state(0),
 		m_RTSystemPort(0),
 		m_className("noname"),
 		m_ownAddr(ownAddr),

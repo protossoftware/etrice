@@ -50,7 +50,7 @@ private:
 
 	IRTObject* m_parent;
 	std::string m_name;
-	boolean m_running;
+	bool m_running;
 
 	// TODO: add internal message queue for less locks (faster thread internal
 	// messaging)

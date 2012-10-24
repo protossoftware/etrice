@@ -35,6 +35,7 @@ public:
 
 	void start();
 	void stop();
+	void runOnce();
 
 	void destroy();
 
