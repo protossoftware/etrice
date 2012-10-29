@@ -74,7 +74,7 @@ class DataClassGen {
 			public «dc.name»() {
 				super();
 				
-				«dc.attributes.attributeInitialization(true)»
+				«dc.attributes.attributeInitialization(dc, true)»
 				«IF ctor!=null»
 					
 					{

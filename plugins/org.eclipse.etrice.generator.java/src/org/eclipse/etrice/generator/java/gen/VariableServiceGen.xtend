@@ -31,11 +31,11 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.base.IDataConfiguration
 
 @Singleton
 class VariableServiceGen {
@@ -43,11 +43,11 @@ class VariableServiceGen {
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
-	@Inject extension ConfigExtension configExt
+	@Inject extension IDataConfiguration configExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
-		
+	/* 
 	def doGenerate(Root root, SubSystemInstance ssi) {
 		var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 		var file = ssi.subSystemClass.name+"VariableService.java"
@@ -102,7 +102,7 @@ class VariableServiceGen {
 			protected void setAttributeValues(Map<String, Object> values) {
 				Object object;
 				String id = null;
-				«FOR attrConfig : cc.getAttrDynConfigs(true, false)»
+				«FOR attrConfig : cc.dynConfigReadAttributes»
 					«var aiName = (attrConfig.eContainer as ActorInstanceConfig).path.refs.toPath("_")»
 					try{
 						boolean changed = false;
@@ -224,7 +224,7 @@ class VariableServiceGen {
 	
 	def private List<ActorInstance> dynConfigsAIs(SubSystemInstance comp){
 		val aiPaths = new HashSet<String>();
-		for(attrConfig : comp.subSystemClass.getAttrDynConfigs(true, false))
+		for(attrConfig : comp.subSystemClass.dynConfigReadAttributes)
 			aiPaths.add(attrConfig.getPath(true, true, false, false).toPath("/"))
 		
 		var ais = new ArrayList<ActorInstance>();
@@ -279,5 +279,5 @@ class VariableServiceGen {
 		return models
 	}
 	
-	
+	*/
 }

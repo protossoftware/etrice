@@ -69,6 +69,13 @@ class RoomExtensions {
 		return ret
 	}
 	
+	def <T> List<T> union(List<T> l, T e) {
+		var ret = new ArrayList<T>()
+		ret.addAll(l)
+		ret.add(e)
+		return ret
+	}
+	
 	def <T> Iterable<T> union(Iterable<T> l1, Iterable<T> l2) {
 		var ret = new ArrayList<T>()
 		ret.addAll(l1)

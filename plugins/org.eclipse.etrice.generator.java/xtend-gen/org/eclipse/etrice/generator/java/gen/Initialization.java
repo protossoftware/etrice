@@ -3,38 +3,95 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.generator.generic.ConfigExtension;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
 public class Initialization {
   @Inject
-  private ConfigExtension _configExtension;
+  private TypeHelpers _typeHelpers;
   
   @Inject
-  private TypeHelpers _typeHelpers;
+  private RoomExtensions _roomExtensions;
   
   @Inject
   private ILanguageExtension languageExt;
   
-  public CharSequence attributeInitialization(final List<Attribute> attribs, final boolean useClassDefaultsOnly) {
+  @Inject
+  private IDataConfiguration dataConfigExt;
+  
+  public CharSequence attributeInitialization(final List<Attribute> attribs, final EObject roomClass, final boolean useClassDefaultsOnly) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// initialize attributes");
     _builder.newLine();
     {
       for(final Attribute a : attribs) {
-        RefableType _refType = a.getRefType();
-        DataType aType = _refType.getType();
+        ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+        List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
+        CharSequence _attributeInit = this.attributeInit(roomClass, _union, useClassDefaultsOnly);
+        _builder.append(_attributeInit, "");
         _builder.newLineIfNotEmpty();
-        String value = this._configExtension.getInitValueLiteral(a);
+      }
+    }
+    return _builder;
+  }
+  
+  private CharSequence attributeInit(final EObject roomClass, final List<Attribute> path, final boolean useClassDefaultsOnly) {
+    CharSequence _xblockexpression = null;
+    {
+      Attribute a = IterableExtensions.<Attribute>last(path);
+      CharSequence _xifexpression = null;
+      RefableType _refType = a.getRefType();
+      DataType _type = _refType.getType();
+      boolean _isDataClass = this._typeHelpers.isDataClass(_type);
+      if (_isDataClass) {
+        CharSequence _xblockexpression_1 = null;
+        {
+          StringConcatenation _builder = new StringConcatenation();
+          RefableType _refType_1 = a.getRefType();
+          DataType _type_1 = _refType_1.getType();
+          EList<Attribute> _attributes = ((DataClass) _type_1).getAttributes();
+          final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
+              public void apply(final Attribute e) {
+                List<Attribute> _union = Initialization.this._roomExtensions.<Attribute>union(path, e);
+                Initialization.this.attributeInit(roomClass, _union, useClassDefaultsOnly);
+              }
+            };
+          IterableExtensions.<Attribute>forEach(_attributes, _function);
+          CharSequence result = _builder;
+          CharSequence _xifexpression_1 = null;
+          int _length = result.length();
+          boolean _greaterThan = (_length > 0);
+          if (_greaterThan) {
+            _xifexpression_1 = result;
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        StringConcatenation _builder = new StringConcatenation();
+        RefableType _refType_1 = a.getRefType();
+        DataType aType = _refType_1.getType();
+        _builder.newLineIfNotEmpty();
+        String value = this.getInitValueLiteral(a, roomClass);
         _builder.newLineIfNotEmpty();
         {
           boolean _notEquals = (!Objects.equal(value, null));
@@ -118,8 +175,8 @@ public class Initialization {
                 boolean _equals_1 = (_size_4 == 0);
                 if (_equals_1) {
                   {
-                    RefableType _refType_1 = a.getRefType();
-                    boolean _isRef = _refType_1.isRef();
+                    RefableType _refType_2 = a.getRefType();
+                    boolean _isRef = _refType_2.isRef();
                     if (_isRef) {
                       String _name_4 = a.getName();
                       _builder.append(_name_4, "");
@@ -162,8 +219,8 @@ public class Initialization {
                       _builder.append(_name_7, "	");
                       _builder.append("[i] = ");
                       {
-                        RefableType _refType_2 = a.getRefType();
-                        boolean _isRef_1 = _refType_2.isRef();
+                        RefableType _refType_3 = a.getRefType();
+                        boolean _isRef_1 = _refType_3.isRef();
                         if (_isRef_1) {
                           String _nullPointer_1 = this.languageExt.nullPointer();
                           _builder.append(_nullPointer_1, "	");
@@ -183,8 +240,88 @@ public class Initialization {
             }
           }
         }
+        _xifexpression = _builder;
       }
+      _xblockexpression = (_xifexpression);
     }
-    return _builder;
+    return _xblockexpression;
+  }
+  
+  private String getInitValueLiteral(final Attribute a, final EObject roomClass) {
+    String _xblockexpression = null;
+    {
+      RefableType _refType = a.getRefType();
+      DataType _type = _refType.getType();
+      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+      if (_isPrimitive) {
+        RefableType _refType_1 = a.getRefType();
+        DataType _type_1 = _refType_1.getType();
+        PrimitiveType aType = ((PrimitiveType) _type_1);
+        String _switchResult = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (roomClass instanceof ActorClass) {
+            final ActorClass _actorClass = (ActorClass)roomClass;
+            _matched=true;
+            ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
+            String _attrClassConfigValue = this.dataConfigExt.getAttrClassConfigValue(_actorClass, _union);
+            _switchResult = _attrClassConfigValue;
+          }
+        }
+        if (!_matched) {
+          if (roomClass instanceof PortClass) {
+            final PortClass _portClass = (PortClass)roomClass;
+            _matched=true;
+            ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
+            String _attrClassConfigValue = this.dataConfigExt.getAttrClassConfigValue(_portClass, _union);
+            _switchResult = _attrClassConfigValue;
+          }
+        }
+        String result = _switchResult;
+        boolean _notEquals = (!Objects.equal(result, null));
+        if (_notEquals) {
+          String _xifexpression = null;
+          boolean _or = false;
+          int _size = a.getSize();
+          boolean _equals = (_size == 0);
+          if (_equals) {
+            _or = true;
+          } else {
+            boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
+            _or = (_equals || _isCharacterType);
+          }
+          if (_or) {
+            String _valueLiteral = this.languageExt.toValueLiteral(aType, result);
+            _xifexpression = _valueLiteral;
+          } else {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("{ ");
+            {
+              String[] _split = result.split(",");
+              boolean _hasElements = false;
+              for(final String s : _split) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(" ,", "");
+                }
+                String _trim = s.trim();
+                String _valueLiteral_1 = this.languageExt.toValueLiteral(aType, _trim);
+                _builder.append(_valueLiteral_1, "");
+              }
+            }
+            _builder.append(" }");
+            String _string = _builder.toString();
+            _xifexpression = _string;
+          }
+          return _xifexpression;
+        }
+      }
+      String _defaultValueLiteral = a.getDefaultValueLiteral();
+      _xblockexpression = (_defaultValueLiteral);
+    }
+    return _xblockexpression;
   }
 }

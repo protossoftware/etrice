@@ -35,7 +35,6 @@ import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.generator.generic.ConfigExtension
 
 @Singleton
 class SubSystemClassGen {
@@ -44,7 +43,6 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
-	@Inject extension ConfigExtension
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 	
@@ -420,7 +418,7 @@ class SubSystemClassGen {
 	}
 	
 	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
-		val value = att.initValueLiteral
+		val value = null as String // att.initValueLiteral
 		if (value==null)
 			att.initializationWithDefaultValues
 		else

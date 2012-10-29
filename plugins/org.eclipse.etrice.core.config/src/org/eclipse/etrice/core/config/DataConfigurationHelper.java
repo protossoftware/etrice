@@ -9,12 +9,15 @@
  * 		Juergen Haug
  * 
  *******************************************************************************/
-package org.eclipse.etrice.generator.base;
+package org.eclipse.etrice.core.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -27,13 +30,14 @@ import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
-public class ConfigHelper {
+public class DataConfigurationHelper {
 
 	public static Map<ActorClass, ActorClassConfig> ac2acConfMap = new HashMap<ActorClass, ActorClassConfig>();
-	public static Map<ProtocolClass, ProtocolClassConfig> pc2pcConfMap = new HashMap<ProtocolClass, ProtocolClassConfig>();
+	public static Map<PortClass, PortClassConfig> pc2pcConfMap = new HashMap<PortClass, PortClassConfig>();
 	public static Map<String, ActorInstanceConfig> path2aiConfMap = new HashMap<String, ActorInstanceConfig>();
 	public static Map<SubSystemClass, SubSystemConfig> ssc2ssConfMap = new HashMap<SubSystemClass, SubSystemConfig>();
 	public static Map<SubSystemClass, List<AttrInstanceConfig>> ssc2attrInstConfMap = new HashMap<SubSystemClass, List<AttrInstanceConfig>>();
@@ -60,26 +64,34 @@ public class ConfigHelper {
 		if (!configs.isEmpty())
 			logger.logInfo("-- loading configurations");
 
+		Set<ActorClass> actorClasses = new HashSet<ActorClass>();
+		Set<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
 		for (ConfigModel config : configs) {
 			for (ActorClassConfig classConfig : config.getActorClassConfigs()) {
-				if (ac2acConfMap.containsKey(classConfig.getActor())) {
+				if (actorClasses.contains(classConfig.getActor())) {
 					logger.logError("Multiple configurations for actor class "
 							+ classConfig.getActor().getName() + " found", null);
 					error = true;
-				} else
+				} else {
+					actorClasses.add(classConfig.getActor());
 					ac2acConfMap.put(classConfig.getActor(), classConfig);
+				}
 			}
 			for (ProtocolClassConfig protocolConfig : config
 					.getProtocolClassConfigs()) {
-				if (pc2pcConfMap.containsKey(protocolConfig)) {
+				if (protocolClasses.contains(protocolConfig.getProtocol())) {
 					logger.logError(
 							"Multiple configurations for protocol class "
 									+ protocolConfig.getProtocol().getName()
 									+ " found", null);
 					error = true;
-				} else
-					pc2pcConfMap.put(protocolConfig.getProtocol(),
-							protocolConfig);
+				} else {
+					protocolClasses.add(protocolConfig.getProtocol());
+					pc2pcConfMap.put(protocolConfig.getProtocol().getRegular(),
+							protocolConfig.getRegular());
+					pc2pcConfMap.put(protocolConfig.getProtocol()
+							.getConjugate(), protocolConfig.getConjugated());
+				}
 			}
 			for (ActorInstanceConfig instanceConfig : config
 					.getActorInstanceConfigs()) {

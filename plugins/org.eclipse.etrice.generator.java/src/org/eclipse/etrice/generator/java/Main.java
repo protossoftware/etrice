@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.ConfigHelper;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -57,9 +57,11 @@ public class Main extends AbstractGenerator {
 	@Inject
 	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
-	
 	@Inject
 	private Validator validator;
+	
+	@Inject
+	protected IDataConfiguration dataConfig;
 	
 	public int runGenerator(String[] args) {
 		if (args.length == 0) {
@@ -94,7 +96,7 @@ public class Main extends AbstractGenerator {
 		}
 
 		setupRoomModel();
-		setupConfigModel();
+		dataConfig.doSetup();
 
 		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary))
 			return GENERATOR_ERROR;
@@ -110,7 +112,7 @@ public class Main extends AbstractGenerator {
 		if (!validateModels(rs))
 			return false;
 			
-		if(!ConfigHelper.setConfigModels(rs, logger))
+		if(!dataConfig.setResources(rs, logger))
 			return false;
 
 		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);

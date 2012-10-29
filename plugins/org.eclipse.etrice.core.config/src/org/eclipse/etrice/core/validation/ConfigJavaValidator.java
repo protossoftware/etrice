@@ -182,7 +182,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 						ConfigPackage.Literals.ATTR_CONFIG__VALUE);
 			if (a.getSize() > 0)
 				error("DataClass arrays not supported",
-						ConfigPackage.Literals.ATTR_CLASS_CONFIG__ATTRIBUTES);
+						ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 		}
 	}
 

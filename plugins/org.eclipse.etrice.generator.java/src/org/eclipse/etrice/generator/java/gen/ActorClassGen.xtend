@@ -21,10 +21,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
+import org.eclipse.etrice.generator.base.IDataConfiguration
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -32,8 +32,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
-	@Inject extension ConfigExtension
-	@Inject ConfigGenAddon configAddon
+	@Inject IDataConfiguration dataConfigExt
+	@Inject ConfigGenAddon configGenAddon
 	
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
@@ -53,14 +53,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
-		val dynConfigReadAttributes = ac.getDynConfigAttributes(true, false)
-		val dynConfigWriteAttributes = ac.getDynConfigAttributes(false, true)
 		
 	'''
 		package «ac.getPackage»;
 		
-		«IF !dynConfigReadAttributes.empty»import org.eclipse.etrice.runtime.java.config.DynConfigLock;«ENDIF»
-		«IF !dynConfigReadAttributes.empty || !dynConfigWriteAttributes.empty»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
+		«IF dataConfigExt.hasDynConfigReadAttributes(ac)»
+		import org.eclipse.etrice.runtime.java.config.DynConfigLock;«ENDIF»
+		«IF dataConfigExt.hasDynConfigReadAttributes(ac) || dataConfigExt.hasDynConfigWriteAttributes(ac)»
+		import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
@@ -85,7 +85,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 			«ac.userCode(2)»
 			
-			«IF !dynConfigWriteAttributes.empty»
+			«IF dataConfigExt.hasDynConfigWriteAttributes(ac)»
 				private VariableService variableService;
 			«ENDIF»
 			
@@ -107,9 +107,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 			//--------------------- interface item IDs
 			«genInterfaceItemConstants(xpac, ac)»
 
-			«configAddon.genMinMaxConstants(ac)»
+			«configGenAddon.genMinMaxConstants(ac)»
 			«ac.attributes.attributes»
-			«FOR a : dynConfigReadAttributes»
+			«FOR a : dataConfigExt.getAllDynConfigReadAttributes(ac)»
 				private DynConfigLock lock_«a.name»;
 			«ENDFOR»
 			«ac.operationsImplementation»
@@ -123,7 +123,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 				setClassName("«ac.name»");
 				
-				«ac.attributes.attributeInitialization(false)»
+				«ac.attributes.attributeInitialization(ac, false)»
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»
@@ -148,22 +148,22 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			}
 
-			«IF !dynConfigReadAttributes.empty || !dynConfigWriteAttributes.empty»
+			«IF dataConfigExt.hasDynConfigReadAttributes(ac) || dataConfigExt.hasDynConfigWriteAttributes(ac)»
 				public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){
 					this(parent, name, port_addr, peer_addr);
 					
-					«IF !dynConfigWriteAttributes.empty»
+					«IF dataConfigExt.hasDynConfigWriteAttributes(ac)»
 						this.variableService = variableService;
 					«ENDIF»
-					«FOR a : dynConfigReadAttributes»
+					«FOR a : dataConfigExt.getAllDynConfigReadAttributes(ac)»
 						lock_«a.name» = new DynConfigLock();
 					«ENDFOR»
 				}
 			«ENDIF»
 			
-			«attributeSettersGettersImplementation(ac.attributes.minus(dynConfigReadAttributes.toList), ac.name)»
+			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getAllDynConfigReadAttributes(ac).toList), ac.name)»
 			
-			«configAddon.genDynConfigGetterSetter(ac)»
+			«configGenAddon.genDynConfigGetterSetter(ac)»
 			
 			//--------------------- port getters
 			«FOR ep : ac.getEndPorts()»
@@ -213,4 +213,5 @@ class ActorClassGen extends GenericActorClassGenerator {
 		};
 	'''
 	}
+
 }
