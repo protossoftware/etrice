@@ -768,19 +768,41 @@ ruleExternalType returns [EObject current=null]
 	    }
 
 )
-)(
+)(	otherlv_4='default' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getExternalTypeAccess().getDefaultKeyword_4_0());
+    }
+(
+(
+		lv_defaultValueLiteral_5_0=RULE_STRING
+		{
+			newLeafNode(lv_defaultValueLiteral_5_0, grammarAccess.getExternalTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getExternalTypeRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"defaultValueLiteral",
+        		lv_defaultValueLiteral_5_0, 
+        		"STRING");
+	    }
+
+)
+))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getExternalTypeAccess().getDocuDocumentationParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getExternalTypeAccess().getDocuDocumentationParserRuleCall_5_0()); 
 	    }
-		lv_docu_4_0=ruleDocumentation		{
+		lv_docu_6_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getExternalTypeRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_4_0, 
+        		lv_docu_6_0, 
         		"Documentation");
 	        afterParserOrEnumRuleCall();
 	    }

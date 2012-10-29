@@ -635,13 +635,22 @@ public interface RoomPackage extends EPackage
   int EXTERNAL_TYPE__TARGET_NAME = COMPLEX_TYPE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL = COMPLEX_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>External Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXTERNAL_TYPE_FEATURE_COUNT = COMPLEX_TYPE_FEATURE_COUNT + 1;
+  int EXTERNAL_TYPE_FEATURE_COUNT = COMPLEX_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.DataClassImpl <em>Data Class</em>}' class.
@@ -4649,6 +4658,17 @@ public interface RoomPackage extends EPackage
   EAttribute getExternalType_TargetName();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ExternalType#getDefaultValueLiteral <em>Default Value Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Default Value Literal</em>'.
+   * @see org.eclipse.etrice.core.room.ExternalType#getDefaultValueLiteral()
+   * @see #getExternalType()
+   * @generated
+   */
+  EAttribute getExternalType_DefaultValueLiteral();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.DataClass <em>Data Class</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7259,6 +7279,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute EXTERNAL_TYPE__TARGET_NAME = eINSTANCE.getExternalType_TargetName();
+
+    /**
+     * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL = eINSTANCE.getExternalType_DefaultValueLiteral();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.DataClassImpl <em>Data Class</em>}' class.

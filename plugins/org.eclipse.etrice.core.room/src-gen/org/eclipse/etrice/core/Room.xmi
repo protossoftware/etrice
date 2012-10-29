@@ -196,6 +196,12 @@
         <elements xsi:type="xtext:Assignment" feature="targetName" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.87"/>
         </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="default"/>
+          <elements xsi:type="xtext:Assignment" feature="defaultValueLiteral" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+          </elements>
+        </elements>
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="docu" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.82"/>
         </elements>

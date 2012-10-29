@@ -1159,6 +1159,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getExternalType_DefaultValueLiteral()
+  {
+    return (EAttribute)externalTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDataClass()
   {
     return dataClassEClass;
@@ -3352,6 +3362,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     externalTypeEClass = createEClass(EXTERNAL_TYPE);
     createEAttribute(externalTypeEClass, EXTERNAL_TYPE__TARGET_NAME);
+    createEAttribute(externalTypeEClass, EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL);
 
     dataClassEClass = createEClass(DATA_CLASS);
     createEReference(dataClassEClass, DATA_CLASS__BASE);
@@ -3766,6 +3777,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(externalTypeEClass, ExternalType.class, "ExternalType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getExternalType_TargetName(), ecorePackage.getEString(), "targetName", null, 0, 1, ExternalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getExternalType_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, ExternalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataClassEClass, DataClass.class, "DataClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDataClass_Base(), this.getDataClass(), null, "base", null, 0, 1, DataClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

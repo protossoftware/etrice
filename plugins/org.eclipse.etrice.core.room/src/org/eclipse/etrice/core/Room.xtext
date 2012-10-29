@@ -63,7 +63,7 @@ ComplexType: DataClass | ExternalType;
 
 PrimitiveType: 'PrimitiveType' name=ID ':' type=LiteralType '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
 
-ExternalType: 'ExternalType' name=ID '->' targetName=FQN (docu=Documentation)?;
+ExternalType: 'ExternalType' name=ID '->' targetName=FQN ('default' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 // TODOHRR: define detail level language?
 DataClass:
