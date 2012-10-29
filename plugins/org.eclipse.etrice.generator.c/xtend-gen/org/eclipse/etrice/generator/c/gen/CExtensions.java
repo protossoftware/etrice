@@ -267,6 +267,11 @@ public class CExtensions implements ILanguageExtension {
     } else {
       String _xifexpression_1 = null;
       if ((dt instanceof ExternalType)) {
+        String _defaultValueLiteral = ((ExternalType) dt).getDefaultValueLiteral();
+        boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+        if (_notEquals) {
+          return ((ExternalType) dt).getDefaultValueLiteral();
+        }
         String _name = dt.getName();
         String _plus = ("cannot initialize external type " + _name);
         EObject _eContainer = dt.eContainer();
@@ -370,11 +375,19 @@ public class CExtensions implements ILanguageExtension {
         }
         _xifexpression = _xifexpression_1;
       } else {
+        String _xifexpression_2 = null;
         RefableType _refType = att.getRefType();
-        DataType _type = _refType.getType();
-        int _size_1 = att.getSize();
-        String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_1);
-        _xifexpression = _initializationWithDefaultValues;
+        boolean _isRef = _refType.isRef();
+        if (_isRef) {
+          _xifexpression_2 = "NULL";
+        } else {
+          RefableType _refType_1 = att.getRefType();
+          DataType _type = _refType_1.getType();
+          int _size_1 = att.getSize();
+          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_1);
+          _xifexpression_2 = _initializationWithDefaultValues;
+        }
+        _xifexpression = _xifexpression_2;
       }
       _xblockexpression = (_xifexpression);
     }

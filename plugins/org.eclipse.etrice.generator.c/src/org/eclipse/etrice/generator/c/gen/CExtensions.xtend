@@ -167,6 +167,9 @@ class CExtensions implements ILanguageExtension {
 			return (dt as PrimitiveType).getDefaultValueLiteral
 		}
 		else if (dt instanceof ExternalType) {
+			if ((dt as ExternalType).defaultValueLiteral != null ){
+				return (dt as ExternalType).getDefaultValueLiteral
+			}
 			diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
 			return "cannot instantiate external data type "+dt.name
 		}
@@ -211,6 +214,9 @@ class CExtensions implements ILanguageExtension {
 				dv
 			else
 				dv.initializer(att.size)
+		}
+		else if (att.refType.ref) {
+			"NULL"
 		}
 		else
 			att.refType.type.initializationWithDefaultValues(att.size)
