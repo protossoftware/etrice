@@ -3,7 +3,6 @@ package trafficlight.example;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -44,11 +43,9 @@ public class SSTraffic extends SubSystemClassBase{
 		Address addr_item_SystemPort_6 = new Address(0,0,136);
 		
 		// actor instance /SSTraffic/application itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application = new Address(0,0,101);
 		// interface items of /SSTraffic/application
 		// actor instance /SSTraffic/application/light1 itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application_light1 = new Address(0,0,102);
 		// interface items of /SSTraffic/application/light1
 		Address addr_item__SSTraffic_application_light1_controller = new Address(0,0,103);
@@ -57,13 +54,11 @@ public class SSTraffic extends SubSystemClassBase{
 		Address addr_item__SSTraffic_application_light1_timeout = new Address(0,0,106);
 		Address addr_item__SSTraffic_application_light1_blinkerTimeout = new Address(0,0,107);
 		// actor instance /SSTraffic/application/light1/trafficLightSocket itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application_light1_trafficLightSocket = new Address(0,0,108);
 		// interface items of /SSTraffic/application/light1/trafficLightSocket
 		Address addr_item__SSTraffic_application_light1_trafficLightSocket_ControlPort = new Address(0,0,109);
 		Address addr_item__SSTraffic_application_light1_trafficLightSocket_PayloadPort = new Address(0,0,110);
 		// actor instance /SSTraffic/application/light2 itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application_light2 = new Address(0,0,111);
 		// interface items of /SSTraffic/application/light2
 		Address addr_item__SSTraffic_application_light2_controller = new Address(0,0,112);
@@ -72,20 +67,17 @@ public class SSTraffic extends SubSystemClassBase{
 		Address addr_item__SSTraffic_application_light2_timeout = new Address(0,0,115);
 		Address addr_item__SSTraffic_application_light2_blinkerTimeout = new Address(0,0,116);
 		// actor instance /SSTraffic/application/light2/trafficLightSocket itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application_light2_trafficLightSocket = new Address(0,0,117);
 		// interface items of /SSTraffic/application/light2/trafficLightSocket
 		Address addr_item__SSTraffic_application_light2_trafficLightSocket_ControlPort = new Address(0,0,118);
 		Address addr_item__SSTraffic_application_light2_trafficLightSocket_PayloadPort = new Address(0,0,119);
 		// actor instance /SSTraffic/application/controller itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_application_controller = new Address(0,0,120);
 		// interface items of /SSTraffic/application/controller
 		Address addr_item__SSTraffic_application_controller_light1 = new Address(0,0,121);
 		Address addr_item__SSTraffic_application_controller_light2 = new Address(0,0,122);
 		Address addr_item__SSTraffic_application_controller_timeout = new Address(0,0,123);
 		// actor instance /SSTraffic/TimingService itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
 		Address addr_item__SSTraffic_TimingService = new Address(0,0,124);
 		// interface items of /SSTraffic/TimingService
 		Address addr_item__SSTraffic_TimingService_timer_0 = new Address(0,0,125);
