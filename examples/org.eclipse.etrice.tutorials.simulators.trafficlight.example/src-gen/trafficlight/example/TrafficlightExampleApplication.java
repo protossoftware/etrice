@@ -13,7 +13,7 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
-public class Application extends ActorClassBase {
+public class TrafficlightExampleApplication extends ActorClassBase {
 
 	
 	
@@ -30,9 +30,9 @@ public class Application extends ActorClassBase {
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public Application(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
+	public TrafficlightExampleApplication(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
 		super(parent, name, port_addr[0][0], peer_addr[0][0]);
-		setClassName("Application");
+		setClassName("TrafficlightExampleApplication");
 		
 		// initialize attributes
 

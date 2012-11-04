@@ -88,7 +88,7 @@ public class SSTraffic extends SubSystemClassBase{
 
 		// instantiate all actor instances
 		instances = new ActorClassBase[7];
-		instances[0] = new Application(
+		instances[0] = new TrafficlightExampleApplication(
 			this,
 			"application",
 			// own interface item addresses

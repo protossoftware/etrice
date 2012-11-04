@@ -19,31 +19,32 @@ RoomModel trafficlight.example {
 
 	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
 
-	SubSystemClass SSTraffic {
-		ActorRef application: Application
-		ActorRef TimingService: ATimingService
-		LayerConnection ref application satisfied_by TimingService.timer
+	SubSystemClass SSTraffic ["Subsystem of Trafficlight Example Application. The Subsystem contains all Actors of the application."] {
+		ActorRef application: TrafficlightExampleApplication ["reference to application"]
+		ActorRef TimingService: ATimingService ["reference to timing service"]
+		LayerConnection ref application satisfied_by TimingService.timer 
 	}
 
-	ActorClass Application {
+	ActorClass TrafficlightExampleApplication ["Toplevel Actor of the Trafficlight Example Application."]{
 		Structure {
-			ActorRef light1: TrafficLight
-			ActorRef light2: TrafficLight
-			ActorRef controller: TrafficController
-			Binding controller.light1 and light1.controller
+			
+			ActorRef light1: TrafficLight ["first traffic light"]
+			ActorRef light2: TrafficLight ["second traffic light"]
+			ActorRef controller: TrafficController ["controller for coordination of the traffic lights"]
+			Binding controller.light1 and light1.controller 
 			Binding controller.light2 and light2.controller
 		}
 		Behavior { }
 	}
 
-	ActorClass TrafficController {
+	ActorClass TrafficController ["The TrafficController coordinates two traffic lights (directions)."] {
 		Interface {
-			conjugated Port light1: PTrafficLight
-			conjugated Port light2: PTrafficLight
+			conjugated Port light1: PTrafficLight ["port to control traffic light 1"]
+			conjugated Port light2: PTrafficLight ["port to control traffic light 2"]
 		}
 		Structure {
-			external Port light1
-			external Port light2
+			external Port light1 
+			external Port light2 
 			SAP timeout: PTimer
 		}
 		Behavior {
@@ -139,7 +140,7 @@ RoomModel trafficlight.example {
 		}
 	}
 
-	ActorClass TrafficLight {
+	ActorClass TrafficLight ["This Actor is responsible for controlling a single traffic light via socket. It uses a socket client for communication."] {
 		Interface {
 			Port controller: PTrafficLight
 		}
@@ -148,21 +149,21 @@ RoomModel trafficlight.example {
 			conjugated Port tcpCtrl: PTcpControl
 			conjugated Port tcpPayload: PTcpPayload
 			SAP timeout: PTimer
-			SAP blinkerTimeout: PTimer
-			Attribute ipConfig: DTcpControl
+			SAP blinkerTimeout: PTimer 
+			Attribute ipConfig: DTcpControl ["configuration of the IP-port for the communication with the Traffic Light GUI"]
 			ActorRef trafficLightSocket: ATcpClient
 			Binding trafficLightSocket.ControlPort and tcpCtrl
 			Binding trafficLightSocket.PayloadPort and tcpPayload
 		}
 		Behavior {
-			Operation sendString(text: string) {
+			Operation sendString(text: string)["convenience function for sending a string over the socket"] {
 			"
 				DTcpPayload pl = new DTcpPayload();
 				pl.setData(text.getBytes());
 				tcpPayload.send(new DTcpPayload(1, text.length(), text.getBytes()));
 			"
 			}
-			StateMachine {
+			StateMachine  {
 				Transition init: initial -> OpenSocket { }
 				Transition tr0: OpenSocket -> tp0 of Off_Blinking {
 					triggers {
@@ -289,12 +290,12 @@ RoomModel trafficlight.example {
 
 	ProtocolClass PTrafficLight {
 		incoming {
-			Message greenForCar()
-			Message greenForPed()
+			Message greenForCar() ["trigger green for car"]
+			Message greenForPed() ["trigger green for pedestrians"]
 		}
 		outgoing {
-			Message greenForCarDone()
-			Message greenForPedDone()
+			Message greenForCarDone() ["positive response for greenForCar - is sent when switch is over"]
+			Message greenForPedDone() ["positive response for greenForPed - is sent when switch is over"]
 		}
 	}
 
