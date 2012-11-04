@@ -30,24 +30,30 @@ import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
 public class DataConfigurationHelper {
 
-	public static Map<ActorClass, ActorClassConfig> ac2acConfMap = new HashMap<ActorClass, ActorClassConfig>();
-	public static Map<PortClass, PortClassConfig> pc2pcConfMap = new HashMap<PortClass, PortClassConfig>();
-	public static Map<String, ActorInstanceConfig> path2aiConfMap = new HashMap<String, ActorInstanceConfig>();
+	// static
+	public static Map<String, AttrClassConfig> actorClassAttrMap = new HashMap<String, AttrClassConfig>();
+	public static Map<String, AttrClassConfig> protocolClassAttrMap = new HashMap<String, AttrClassConfig>();
+	public static Map<String, AttrInstanceConfig> actorInstanceAttrMap = new HashMap<String, AttrInstanceConfig>();
+
+	// dynamic
 	public static Map<SubSystemClass, SubSystemConfig> ssc2ssConfMap = new HashMap<SubSystemClass, SubSystemConfig>();
 	public static Map<SubSystemClass, List<AttrInstanceConfig>> ssc2attrInstConfMap = new HashMap<SubSystemClass, List<AttrInstanceConfig>>();
 	public static Map<ActorClass, List<ActorInstanceConfig>> ac2aiConfMap = new HashMap<ActorClass, List<ActorInstanceConfig>>();
 	public static Map<ActorInstanceConfig, ActorClass> aiConf2acMap = new HashMap<ActorInstanceConfig, ActorClass>();
 
 	public static boolean setConfigModels(ResourceSet rs, ILogger logger) {
-		ac2acConfMap.clear();
-		pc2pcConfMap.clear();
-		path2aiConfMap.clear();
+		actorClassAttrMap.clear();
+		protocolClassAttrMap.clear();
+		actorInstanceAttrMap.clear();
+		
 		ssc2ssConfMap.clear();
 		ssc2attrInstConfMap.clear();
 		ac2aiConfMap.clear();
@@ -66,6 +72,7 @@ public class DataConfigurationHelper {
 
 		Set<ActorClass> actorClasses = new HashSet<ActorClass>();
 		Set<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
+		Set<String> actorInstances = new HashSet<String>();
 		for (ConfigModel config : configs) {
 			for (ActorClassConfig classConfig : config.getActorClassConfigs()) {
 				if (actorClasses.contains(classConfig.getActor())) {
@@ -74,7 +81,7 @@ public class DataConfigurationHelper {
 					error = true;
 				} else {
 					actorClasses.add(classConfig.getActor());
-					ac2acConfMap.put(classConfig.getActor(), classConfig);
+					collectConfigs(classConfig, actorClassAttrMap);
 				}
 			}
 			for (ProtocolClassConfig protocolConfig : config
@@ -87,22 +94,21 @@ public class DataConfigurationHelper {
 					error = true;
 				} else {
 					protocolClasses.add(protocolConfig.getProtocol());
-					pc2pcConfMap.put(protocolConfig.getProtocol().getRegular(),
-							protocolConfig.getRegular());
-					pc2pcConfMap.put(protocolConfig.getProtocol()
-							.getConjugate(), protocolConfig.getConjugated());
+					collectConfigs(protocolConfig, protocolClassAttrMap);
 				}
 			}
 			for (ActorInstanceConfig instanceConfig : config
 					.getActorInstanceConfigs()) {
 				String path = "/" + instanceConfig.getRoot().getName()
 						+ toPath(instanceConfig.getPath().getRefs(), "/");
-				if (path2aiConfMap.containsKey(path)) {
+				if (actorInstances.contains(path)) {
 					logger.logError(
 							"Multiple configurations for actor instance "
 									+ path + " found", null);
-				} else
-					path2aiConfMap.put(path, instanceConfig);
+				} else {
+					actorInstances.add(path);
+					collectConfigs(instanceConfig, path, actorInstanceAttrMap);
+				}
 
 				ActorClass ac = ConfigUtil.resolve(instanceConfig.getRoot(),
 						instanceConfig.getPath());
@@ -128,17 +134,61 @@ public class DataConfigurationHelper {
 		}
 
 		// dynConfigSubsystemMap
-		for (ActorInstanceConfig instanceConfig : path2aiConfMap.values()) {
-			List<AttrInstanceConfig> dynConfigs = new ArrayList<AttrInstanceConfig>();
-			for (AttrInstanceConfig config : instanceConfig.getAttributes())
-				if (config.isDynConfig())
-					dynConfigs.add(config);
-			if (!dynConfigs.isEmpty())
-				ssc2attrInstConfMap.get(instanceConfig.getRoot()).addAll(
-						dynConfigs);
-		}
+		// for (ActorInstanceConfig instanceConfig : actorInstanceMap.values())
+		// {
+		// List<AttrInstanceConfig> dynConfigs = new
+		// ArrayList<AttrInstanceConfig>();
+		// for (AttrInstanceConfig config : instanceConfig.getAttributes())
+		// if (config.isDynConfig())
+		// dynConfigs.add(config);
+		// if (!dynConfigs.isEmpty())
+		// ssc2attrInstConfMap.get(instanceConfig.getRoot()).addAll(
+		// dynConfigs);
+		// }
 
 		return !error;
+	}
+
+	private static void collectConfigs(ActorInstanceConfig actorConfig,
+			String path, Map<String, AttrInstanceConfig> map) {
+		for (AttrInstanceConfig c : actorConfig.getAttributes())
+			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
+	}
+
+	private static void collectConfigs(ProtocolClassConfig protocolConfig,
+			Map<String, AttrClassConfig> map) {
+		String path = "/" + protocolConfig.getProtocol().getName();
+		for (AttrClassConfig c : protocolConfig.getRegular().getAttributes())
+			collectConfigs(c, path + "/regular/" + c.getAttribute().getName(),
+					map);
+		for (AttrClassConfig c : protocolConfig.getConjugated().getAttributes())
+			collectConfigs(c, path + "/conjugated/"
+					+ c.getAttribute().getName(), map);
+	}
+
+	private static void collectConfigs(ActorClassConfig actorConfig,
+			Map<String, AttrClassConfig> map) {
+		String path = "/" + actorConfig.getActor().getName();
+		for (AttrClassConfig c : actorConfig.getAttributes())
+			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
+	}
+
+	private static void collectConfigs(AttrClassConfig config, String path,
+			Map<String, AttrClassConfig> map) {
+		Attribute a = config.getAttribute();
+		if (a.getRefType().getType() instanceof DataClass)
+			for (AttrClassConfig c : config.getAttributes())
+				collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
+		map.put(path, config);
+	}
+
+	private static void collectConfigs(AttrInstanceConfig config, String path,
+			Map<String, AttrInstanceConfig> map) {
+		Attribute a = config.getAttribute();
+		if (a.getRefType().getType() instanceof DataClass)
+			for (AttrInstanceConfig c : config.getAttributes())
+				collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
+		map.put(path, config);
 	}
 
 	public static String toPath(Iterable<String> path, String pathDelim) {

@@ -174,7 +174,12 @@ class SubSystemClassGen {
 				«ENDFOR»
 				
 				// apply instance attribute configurations
-				«comp.allContainedInstances.forEach(ai | configGenAddon.genActorInstanceConfig(ai))»
+				«FOR ai: comp.allContainedInstances»
+					{
+						«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
+						«configGenAddon.genActorInstanceConfig(ai, "inst")»
+					}
+				«ENDFOR»
 		
 				// create the subsystem system port	
 				RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",

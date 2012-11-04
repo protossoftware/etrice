@@ -7,7 +7,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
 public interface IDataConfiguration {
@@ -21,11 +21,11 @@ public interface IDataConfiguration {
 	// static configuration
 	
 	public String getAttrClassConfigValue(ActorClass actor, List<Attribute> path);
-	public String getAttrClassConfigValue(PortClass port, List<Attribute> path);
+	public String getAttrClassConfigValue(ProtocolClass pc, boolean regular, List<Attribute> path);
 	public String getAttrClassConfigMinValue(ActorClass actor, List<Attribute> path);
 	public String getAttrClassConfigMaxValue(ActorClass actor, List<Attribute> path);
 	
-	public String getAttrInstanceConfigValue(ActorInstance ai, String path);
+	public String getAttrInstanceConfigValue(ActorInstance ai, List<Attribute> path);
 	
 	// dynamic configuration
 	

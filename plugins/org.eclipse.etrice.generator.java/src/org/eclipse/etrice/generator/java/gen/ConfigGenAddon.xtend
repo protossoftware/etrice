@@ -35,35 +35,37 @@ class ConfigGenAddon {
 	
 	// For SubSystemClassGen
 	
-	def public genActorInstanceConfig(ActorInstance ai){'''
-		«FOR a : ai.actorClass.attributes»
-			«applyInstanceConfig(ai, "inst", ai.path+"/"+a.name, a)»
-		«ENDFOR»
+	def public genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
+			«FOR a : ai.actorClass.attributes»
+				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
+			«ENDFOR»
 		'''
 	}
 	
-	def public applyInstanceConfig(ActorInstance ai, String invokes, String instancePath, Attribute a){
+	def private applyInstanceConfig(ActorInstance ai, String invokes, List<Attribute> path){
+		var a = path.last
 		var aType = a.refType.type
 		if(aType.primitive){
-			var value = dataConfigExt.getAttrInstanceConfigValue(ai, instancePath)
+			var value = dataConfigExt.getAttrInstanceConfigValue(ai, path)
 			if(value == null)
 				''''''
 			else if(a.size == 0 || aType.characterType)
 				'''«invokes».«a.name.invokeSetter(null, (aType as PrimitiveType).toValueLiteral(value))»;'''
 			else if(a.size == value.split(",").size){
-				var arrayExpr = '''«FOR s : value.split(",") SEPARATOR ','»«(aType as PrimitiveType).toValueLiteral(s.trim)»«ENDFOR»'''
-				'''«invokes».«a.name.invokeSetter(null, '''new «aType.typeName»[]«arrayExpr»'''.toString)»'''
-			} else
-				'''{
+				var arrayExpr = '''{ «FOR s : value.split(",") SEPARATOR ', '»«(aType as PrimitiveType).toValueLiteral(s.trim)»«ENDFOR» }'''
+				'''«invokes».«a.name.invokeSetter(null, '''new «aType.typeName»[] «arrayExpr»'''.toString)»;'''
+			} else '''
+					{
 						«aType.typeName»[] array = «invokes».«a.name.invokeGetter(null)»;
 						for (int i=0;i<«a.size»;i++){
 							array[i] = «(aType as PrimitiveType).toValueLiteral(value)»;
 					}'''
 		}
-		else if (aType.dataClass)
-			'''«FOR e : (aType as DataClass).attributes»
-					«applyInstanceConfig(ai, invokes+"."+a.name.invokeGetter(null), instancePath+"/"+e.name, e)»
-				«ENDFOR»'''
+		else if (aType.dataClass)'''
+				«FOR e : (aType as DataClass).attributes»
+					«applyInstanceConfig(ai, invokes+"."+a.name.invokeGetter(null), path.union(e))»
+				«ENDFOR»
+			'''
 	}
 	
 	// For ActorClassGen

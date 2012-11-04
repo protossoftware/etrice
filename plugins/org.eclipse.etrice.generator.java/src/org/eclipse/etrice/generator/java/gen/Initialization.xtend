@@ -12,21 +12,23 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.etrice.core.room.Attribute
-import java.util.List
 import com.google.inject.Inject
-import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.ComplexType
-import org.eclipse.etrice.generator.generic.ILanguageExtension
 import com.google.inject.Singleton
-import org.eclipse.etrice.generator.base.IDataConfiguration
 import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.PortClass
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
 
 @Singleton
 class Initialization {
@@ -35,6 +37,7 @@ class Initialization {
 	@Inject extension RoomExtensions
 	@Inject ILanguageExtension languageExt
 	@Inject IDataConfiguration dataConfigExt
+	@Inject ProcedureHelpers procedureHelpers
 	
 	def attributeInitialization(List<Attribute> attribs, EObject roomClass, boolean useClassDefaultsOnly) {
 		'''
@@ -48,23 +51,31 @@ class Initialization {
 	def private attributeInit(EObject roomClass, List<Attribute> path, boolean useClassDefaultsOnly) {
 		var a = path.last
 		if(a.refType.type.dataClass){
-			var result = '''«(a.refType.type as DataClass).attributes.forEach(e | attributeInit(roomClass, path.union(e), useClassDefaultsOnly))»'''
+			var result = 
+				'''
+					«FOR e : (a.refType.type as DataClass).attributes»
+						«attributeInit(roomClass, path.union(e), useClassDefaultsOnly)»
+					«ENDFOR»
+				'''
 			if(result.length > 0)
 				result
 		}
 		else {
 		'''
 			«var aType = a.refType.type»
-			«var value = a.getInitValueLiteral(roomClass)»
+			«var value = getInitValueLiteral(roomClass, path)»
 			«IF value!=null»
 				«IF a.size == 0 || aType.characterType»
-					«a.name» = «value»;
+					«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null,value)»;
 				«ELSEIF value.startsWith("{")»
-					«a.name» = new «aType.typeName»[] «value»;
+					«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
 				«ELSE»
-					«a.name» = new «aType.typeName»[«a.size»];
-					for (int i=0;i<«a.size»;i++){
-						«a.name»[i] = «value»;
+					{
+						«a.name» = new «aType.typeName»[«a.size»];
+						for (int i=0;i<«a.size»;i++){
+							«a.name»[i] = «value»;
+						}
+						«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null,a.name)»;
 					}
 				«ENDIF»
 			«ELSEIF aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
@@ -87,12 +98,17 @@ class Initialization {
 		}
 	}
 	
-	def private getInitValueLiteral(Attribute a, EObject roomClass){
+	def private getInitValueLiteral(EObject roomClass, List<Attribute> path){
+		var a = path.last
 		if(a.refType.type.primitive){
 			var aType = a.refType.type as PrimitiveType
 			var result = switch roomClass {
-				ActorClass: dataConfigExt.getAttrClassConfigValue(roomClass, new ArrayList<Attribute>.union(a))
-				PortClass: dataConfigExt.getAttrClassConfigValue(roomClass, new ArrayList<Attribute>.union(a))
+				ActorClass: dataConfigExt.getAttrClassConfigValue(roomClass, path)
+				PortClass: 
+					if(roomClass.eContainer instanceof ProtocolClass){
+						var pc = roomClass.eContainer as ProtocolClass
+						dataConfigExt.getAttrClassConfigValue(pc, pc.regular.equals(roomClass), path)
+					}
 			}
 			if(result != null)
 				return if(a.size == 0 || aType.characterType)
@@ -102,5 +118,9 @@ class Initialization {
 					'''{ «FOR s : result.split(",") SEPARATOR ' ,'»«languageExt.toValueLiteral(aType, s.trim)»«ENDFOR» }'''.toString
 		}
 		a.defaultValueLiteral
+	}
+	
+	def private invokeGetter(Iterable<Attribute> path){
+		'''«FOR a : path»«procedureHelpers.invokeGetter(a.name, null)».«ENDFOR»'''
 	}
 }
