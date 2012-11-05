@@ -24,6 +24,6 @@
  *
  * \return the pointer to the initialized etMemory struct
  */
-etMemory* etMemory_FreeList_init(void* heap, etUInt16 size, etUInt16 nslots);
+etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots);
 
 #endif /* _ETMEMORY_FREE_LIST_H_ */

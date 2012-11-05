@@ -134,7 +134,7 @@ void etMemory_FreeList_free(etMemory* heap, void* obj, etUInt16 size) {
 /*
  * the public interface
  */
-etMemory* etMemory_FreeList_init(void* heap, etUInt16 size, etUInt16 nslots) {
+etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	etFreeListMemory* self = (etFreeListMemory*) heap;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "init")
 

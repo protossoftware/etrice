@@ -30,13 +30,13 @@ typedef struct etQueue {
 
 void etQueue_init(etQueue* self);
 
-void etQueue_push(etQueue* self, void* obj);
+void etQueue_push(etQueue* self, etQueueObj* obj);
 
-void* etQueue_pop(etQueue* self);
+etQueueObj* etQueue_pop(etQueue* self);
 
-void* etQueue_getFirst(etQueue* self);
+etQueueObj* etQueue_getFirst(etQueue* self);
 
-void* etQueue_getLast(etQueue* self);
+etQueueObj* etQueue_getLast(etQueue* self);
 
 etBool etQueue_isNotEmpty(etQueue* self);
 

@@ -25,7 +25,7 @@ void etQueue_init(etQueue* self){
 }
 
 
-void etQueue_push(etQueue* self, void* obj){
+void etQueue_push(etQueue* self, etQueueObj* obj){
 	// TODO: optimize queue for concurrent push / pop
 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "push")
 
@@ -38,7 +38,7 @@ void etQueue_push(etQueue* self, void* obj){
 		self->last->next = obj;
 		self->last = obj;
 	}
-	((etQueueObj*)obj)->next = NULL; /*TODO: optimization: this line could be removed if we assume that all objects are initialized*/
+	obj->next = NULL; /*TODO: optimization: this line could be removed if we assume that all objects are initialized*/
 
 	if (++self->size > self->highWaterMark)
 		self->highWaterMark++;
@@ -46,7 +46,7 @@ void etQueue_push(etQueue* self, void* obj){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void* etQueue_pop(etQueue* self){
+etQueueObj* etQueue_pop(etQueue* self){
 	etQueueObj* pop_msg = self->first;
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "pop")
@@ -78,13 +78,13 @@ etInt16 etQueue_getSize(etQueue* self) {
 	return self->size;
 }
 
-void* etQueue_getFirst(etQueue* self){
+etQueueObj* etQueue_getFirst(etQueue* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getFirst")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->first;
 }
 
-void* etQueue_getLast(etQueue* self){
+etQueueObj* etQueue_getLast(etQueue* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getLast")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->last;

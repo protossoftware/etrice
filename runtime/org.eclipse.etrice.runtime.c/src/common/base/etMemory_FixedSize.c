@@ -56,7 +56,7 @@ void etMemory_FixedSize_free(etMemory* heap, void* obj, etUInt16 size) {
 /*
  * the public interface
  */
-etMemory* etMemory_FixedSize_init(void* heap, etUInt16 size, etUInt16 blockSize) {
+etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
 	size_t data_size = CEIL_ALIGN(sizeof(etFixedSizeMemory));
 	int i;

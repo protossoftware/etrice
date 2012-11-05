@@ -38,7 +38,7 @@ typedef void etMemory_free(struct etMemory* heap, void* obj, etUInt16 size);
 
 typedef struct etMemory {
 	/** size of the heap in bytes */
-	etUInt16 size;
+	etUInt32 size;
 
 	etMemory_alloc* alloc;
 	etMemory_free* free;

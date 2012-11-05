@@ -25,6 +25,6 @@
  *
  * \return the pointer to the initialized etMemory struct
  */
-etMemory* etMemory_FixedSize_init(void* heap, etUInt16 size, etUInt16 blockSize);
+etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize);
 
 #endif /* _ETMEMORY_FIXED_SIZE_H_ */
