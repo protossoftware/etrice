@@ -10,48 +10,23 @@
  *
  *******************************************************************************/
 
-#include "base/etMemory.h"
+#include "base/etMemory_FixedSize.h"
 #include "base/etQueue.h"
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
-#define BLOCK_SIZE	128
-
 
 typedef struct etFixedSizeMemory {
+	etMemory base;
+
 	etUInt8 *buffer;
 	etUInt16 maxBlocks;
 	etUInt16 blockSize;
 	etQueue blockPool;
 } etFixedSizeMemory;
 
-/*
- * the public interface
- */
-void etMemory_init(void* heap, etUInt16 size) {
-	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
-	size_t data_size = CEIL_ALIGN(sizeof(etFixedSizeMemory));
-	int i;
 
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")
-
-	if (size > data_size) {
-		self->buffer = ((etUInt8*) self) + data_size;
-		self->blockSize = BLOCK_SIZE;
-		self->maxBlocks = (size - data_size) / self->blockSize;
-		for (i=0; i<self->maxBlocks; i++){
-			void* block = &(self->buffer[i*self->blockSize]);
-			etQueue_push(&self->blockPool, block);
-		}
-	}
-	else {
-		self->blockSize = 0;
-	}
-
-	ET_MSC_LOGGER_SYNC_EXIT
-}
-
-void* etMemory_alloc(void* heap, etUInt16 size) {
+void* etMemory_FixedSize_alloc(etMemory* heap, etUInt16 size) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
 	void* mem = NULL;
 	size = CEIL_ALIGN(size);
@@ -68,7 +43,7 @@ void* etMemory_alloc(void* heap, etUInt16 size) {
 	return mem;
 }
 
-void etMemory_free(void* heap, void* obj, etUInt16 size) {
+void etMemory_FixedSize_free(etMemory* heap, void* obj, etUInt16 size) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "free")
@@ -76,4 +51,36 @@ void etMemory_free(void* heap, void* obj, etUInt16 size) {
 	etQueue_push(&self->blockPool, obj);
 
 	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+/*
+ * the public interface
+ */
+etMemory* etMemory_FixedSize_init(void* heap, etUInt16 size, etUInt16 blockSize) {
+	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
+	size_t data_size = CEIL_ALIGN(sizeof(etFixedSizeMemory));
+	int i;
+
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")
+
+	self->base.size = size;
+	self->base.alloc = etMemory_FixedSize_alloc;
+	self->base.free = etMemory_FixedSize_free;
+
+	if (size > data_size) {
+		self->buffer = ((etUInt8*) self) + data_size;
+		self->blockSize = blockSize;
+		self->maxBlocks = (size - data_size) / self->blockSize;
+		for (i=0; i<self->maxBlocks; i++){
+			void* block = &(self->buffer[i*self->blockSize]);
+			etQueue_push(&self->blockPool, block);
+		}
+	}
+	else {
+		self->blockSize = 0;
+	}
+
+	ET_MSC_LOGGER_SYNC_EXIT
+
+	return &self->base;
 }

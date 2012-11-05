@@ -17,13 +17,7 @@
 
 #define CEIL_ALIGN(n)          ((n)+((ALIGNMENT-((n)&(ALIGNMENT-1)))&(ALIGNMENT-1)))
 
-/**
- * initializes the heap
- *
- * \param heap pointer to the heap memory
- * \param size the size of the heap in bytes
- */
-void etMemory_init(void* heap, etUInt16 size);
+struct etMemory;
 
 /**
  * allocates memory from the heap
@@ -31,7 +25,7 @@ void etMemory_init(void* heap, etUInt16 size);
  * \param heap pointer to the heap memory
  * \param size the size of the requested memory in bytes
  */
-void* etMemory_alloc(void* heap, etUInt16 size);
+typedef void* etMemory_alloc(struct etMemory* heap, etUInt16 size);
 
 /**
  * frees memory previously allocated from the heap
@@ -40,6 +34,14 @@ void* etMemory_alloc(void* heap, etUInt16 size);
  * \param obj pointer to the memory returned
  * \param size the size in bytes of the memory returned
  */
-void etMemory_free(void* heap, void* obj, etUInt16 size);
+typedef void etMemory_free(struct etMemory* heap, void* obj, etUInt16 size);
+
+typedef struct etMemory {
+	/** size of the heap in bytes */
+	etUInt16 size;
+
+	etMemory_alloc* alloc;
+	etMemory_free* free;
+} etMemory;
 
 #endif /* _ETMEMORY_H_ */
