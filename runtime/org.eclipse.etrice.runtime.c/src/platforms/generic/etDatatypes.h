@@ -52,6 +52,8 @@ typedef bool boolean;
 	#define FALSE 0
 #endif
 
+#define ALIGNMENT		4
+
 /*
  * typedefs for eTrice Runtime and Testing
  *
