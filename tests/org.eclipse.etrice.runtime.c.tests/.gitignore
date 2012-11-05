@@ -2,5 +2,4 @@ Debug
 Release
 src-gen/*
 !src-gen/readme.txt
-
-
+tmp/testlog/*.seq

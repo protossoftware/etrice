@@ -26,14 +26,20 @@
 #include "TestEtMessageQueue.h"
 #include "TestEtMessageService.h"
 #include "TestEtUnit.h"
+#include "TestEtMemory.h"
+#include "TestEtQueue.h"
 
 #include "etUnit/etUnit.h"
+#include "debugging/etMSCLogger.h"
 
 
 void RunCRuntimeTestcases(void){
 	etInt16 id;
+	etMSCLogger_open("tmp/testlog", "test.log");
 	etUnit_open("tmp/testlog","TestCRuntime");
 
+	TestEtQueue_runSuite();
+	TestEtMemory_runSuite();
 	TestEtMessage_runSuite();
 	TestEtMessageQueue_runSuite();
 	TestEtMessageService_runSuite();
@@ -46,5 +52,7 @@ void RunCRuntimeTestcases(void){
 	id = etUnit_openAll("tmp/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
 	EXPECT_TRUE(id, "Open and Close", TRUE);
 	etUnit_closeAll(id);
+
+	etMSCLogger_close();
 }
 
