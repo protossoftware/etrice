@@ -116,20 +116,26 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _hasDynConfigReadAttributes = this.dataConfigExt.hasDynConfigReadAttributes(ac);
-        if (_hasDynConfigReadAttributes) {
+        List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
         }
       }
       _builder.newLineIfNotEmpty();
       {
         boolean _or = false;
-        boolean _hasDynConfigReadAttributes_1 = this.dataConfigExt.hasDynConfigReadAttributes(ac);
-        if (_hasDynConfigReadAttributes_1) {
+        List<Attribute> _dynConfigReadAttributes_1 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty_1 = _dynConfigReadAttributes_1.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
           _or = true;
         } else {
-          boolean _hasDynConfigWriteAttributes = this.dataConfigExt.hasDynConfigWriteAttributes(ac);
-          _or = (_hasDynConfigReadAttributes_1 || _hasDynConfigWriteAttributes);
+          List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+          boolean _isEmpty_2 = _dynConfigWriteAttributes.isEmpty();
+          boolean _not_2 = (!_isEmpty_2);
+          _or = (_not_1 || _not_2);
         }
         if (_or) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
@@ -215,8 +221,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _hasDynConfigWriteAttributes_1 = this.dataConfigExt.hasDynConfigWriteAttributes(ac);
-        if (_hasDynConfigWriteAttributes_1) {
+        List<Attribute> _dynConfigWriteAttributes_1 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+        boolean _isEmpty_3 = _dynConfigWriteAttributes_1.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
           _builder.append("\t");
           _builder.append("private VariableService variableService;");
           _builder.newLine();
@@ -299,8 +307,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_attributes_1, "	");
       _builder.newLineIfNotEmpty();
       {
-        List<Attribute> _allDynConfigReadAttributes = this.dataConfigExt.getAllDynConfigReadAttributes(ac);
-        for(final Attribute a : _allDynConfigReadAttributes) {
+        List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        for(final Attribute a : _dynConfigReadAttributes_2) {
           _builder.append("\t");
           _builder.append("private DynConfigLock lock_");
           String _name_7 = a.getName();
@@ -497,12 +505,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         boolean _or_1 = false;
-        boolean _hasDynConfigReadAttributes_2 = this.dataConfigExt.hasDynConfigReadAttributes(ac);
-        if (_hasDynConfigReadAttributes_2) {
+        List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty_4 = _dynConfigReadAttributes_3.isEmpty();
+        boolean _not_4 = (!_isEmpty_4);
+        if (_not_4) {
           _or_1 = true;
         } else {
-          boolean _hasDynConfigWriteAttributes_2 = this.dataConfigExt.hasDynConfigWriteAttributes(ac);
-          _or_1 = (_hasDynConfigReadAttributes_2 || _hasDynConfigWriteAttributes_2);
+          List<Attribute> _dynConfigWriteAttributes_2 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+          boolean _isEmpty_5 = _dynConfigWriteAttributes_2.isEmpty();
+          boolean _not_5 = (!_isEmpty_5);
+          _or_1 = (_not_4 || _not_5);
         }
         if (_or_1) {
           _builder.append("\t");
@@ -519,8 +531,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.newLine();
           {
-            boolean _hasDynConfigWriteAttributes_3 = this.dataConfigExt.hasDynConfigWriteAttributes(ac);
-            if (_hasDynConfigWriteAttributes_3) {
+            List<Attribute> _dynConfigWriteAttributes_3 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+            boolean _isEmpty_6 = _dynConfigWriteAttributes_3.isEmpty();
+            boolean _not_6 = (!_isEmpty_6);
+            if (_not_6) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("this.variableService = variableService;");
@@ -528,8 +542,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           {
-            List<Attribute> _allDynConfigReadAttributes_1 = this.dataConfigExt.getAllDynConfigReadAttributes(ac);
-            for(final Attribute a_1 : _allDynConfigReadAttributes_1) {
+            List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+            for(final Attribute a_1 : _dynConfigReadAttributes_4) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("lock_");
@@ -548,9 +562,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
-      List<Attribute> _allDynConfigReadAttributes_2 = this.dataConfigExt.getAllDynConfigReadAttributes(ac);
-      List<Attribute> _list = IterableExtensions.<Attribute>toList(_allDynConfigReadAttributes_2);
-      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _list);
+      List<Attribute> _dynConfigReadAttributes_5 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_5);
       String _name_27 = ac.getName();
       CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_27);
       _builder.append(_attributeSettersGettersImplementation, "	");
@@ -558,7 +571,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      Object _genDynConfigGetterSetter = this.configGenAddon.genDynConfigGetterSetter(ac);
+      CharSequence _genDynConfigGetterSetter = this.configGenAddon.genDynConfigGetterSetter(ac);
       _builder.append(_genDynConfigGetterSetter, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -629,8 +642,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         boolean _overridesStop = this._roomExtensions.overridesStop(ac);
-        boolean _not = (!_overridesStop);
-        if (_not) {
+        boolean _not_7 = (!_overridesStop);
+        if (_not_7) {
           _builder.append("\t");
           _builder.append("public void stop(){");
           _builder.newLine();
@@ -672,8 +685,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         } else {
           boolean _hasStateMachine = xpac.hasStateMachine();
-          boolean _not_1 = (!_hasStateMachine);
-          if (_not_1) {
+          boolean _not_8 = (!_hasStateMachine);
+          if (_not_8) {
             _builder.append("\t");
             _builder.append("//--------------------- no state machine");
             _builder.newLine();

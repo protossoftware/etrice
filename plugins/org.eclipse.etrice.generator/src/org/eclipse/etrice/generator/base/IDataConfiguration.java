@@ -1,7 +1,6 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.List;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -20,6 +19,9 @@ public interface IDataConfiguration {
 	
 	// static configuration
 	
+	/**
+	 * Array formatting: x,x,x,x,x
+	 */
 	public String getAttrClassConfigValue(ActorClass actor, List<Attribute> path);
 	public String getAttrClassConfigValue(ProtocolClass pc, boolean regular, List<Attribute> path);
 	public String getAttrClassConfigMinValue(ActorClass actor, List<Attribute> path);
@@ -29,15 +31,15 @@ public interface IDataConfiguration {
 	
 	// dynamic configuration
 	
+	public String getUserCode1(SubSystemClass subsystem);
+	public String getUserCode2(SubSystemClass subsystem);
+	public int getPollingTimerUser(SubSystemClass subsystem);
 	public boolean hasVariableService(SubSystemClass subsystem);
 	
-	public boolean hasDynConfigReadAttributes(ActorClass actor);
-	public boolean hasDynConfigWriteAttributes(ActorClass actor);
+	public List<Attribute> getDynConfigReadAttributes(String actorInstance);
+	public List<Attribute> getDynConfigWriteAttributes(String actorInstance);
 	
-	public List<Attribute> getAllDynConfigReadAttributes(ActorClass actor);
-	public List<Attribute> getAllDynConfigWriteAttributes(ActorClass actor);
-	
-	public List<Attribute> getDynConfigReadAttributes(SubSystemClass subsystem);
-	public List<Attribute> getDynConfigWriteAttributes(SubSystemClass subsystem);
+	public List<Attribute> getDynConfigReadAttributes(ActorClass actor);
+	public List<Attribute> getDynConfigWriteAttributes(ActorClass actor);
 	
 }

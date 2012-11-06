@@ -1,5 +1,6 @@
 package org.eclipse.etrice.core.config;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -9,12 +10,14 @@ import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.BooleanLiteral;
 import org.eclipse.etrice.core.config.DataConfigurationHelper;
+import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
 import org.eclipse.etrice.core.config.LiteralArray;
 import org.eclipse.etrice.core.config.NumberLiteral;
 import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.StringLiteral;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -23,6 +26,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class DataConfiguration implements IDataConfiguration {
@@ -133,36 +138,88 @@ public class DataConfiguration implements IDataConfiguration {
     return _xblockexpression;
   }
   
-  public List<Attribute> getAllDynConfigReadAttributes(final ActorClass actor) {
+  public int getPollingTimerUser(final SubSystemClass subsystem) {
+    SubSystemConfig _config = this.getConfig(subsystem);
+    DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    int _polling = _dynConfig==null?0:_dynConfig.getPolling();
+    return _polling;
+  }
+  
+  public String getUserCode1(final SubSystemClass subsystem) {
+    SubSystemConfig _config = this.getConfig(subsystem);
+    DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    String _xifexpression = null;
+    String _filePath = dynConfig==null?(String)null:dynConfig.getFilePath();
+    boolean _notEquals = (!Objects.equal(_filePath, null));
+    if (_notEquals) {
+      _xifexpression = "import org.eclipse.etrice.runtime.java.config.ConfigSourceFile; // TODO JH make lang independent";
+    } else {
+      String _userCode1 = dynConfig==null?(String)null:dynConfig.getUserCode1();
+      _xifexpression = _userCode1;
+    }
+    return _xifexpression;
+  }
+  
+  public String getUserCode2(final SubSystemClass subsystem) {
+    SubSystemConfig _config = this.getConfig(subsystem);
+    DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    String _xifexpression = null;
+    String _filePath = dynConfig==null?(String)null:dynConfig.getFilePath();
+    boolean _notEquals = (!Objects.equal(_filePath, null));
+    if (_notEquals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new ConfigSourceFile(\"");
+      String _filePath_1 = dynConfig.getFilePath();
+      _builder.append(_filePath_1, "");
+      _builder.append("\")");
+      _xifexpression = _builder.toString();
+    } else {
+      String _userCode2 = dynConfig==null?(String)null:dynConfig.getUserCode2();
+      _xifexpression = _userCode2;
+    }
+    return _xifexpression;
+  }
+  
+  public List<Attribute> getDynConfigReadAttributes(final String actorInstance) {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    return _arrayList;
+    final ArrayList<Attribute> result = _arrayList;
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(actorInstance);
+    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          if (_isReadOnly) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
+        }
+      };
+    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    return result;
   }
   
-  public List<Attribute> getAllDynConfigWriteAttributes(final ActorClass actor) {
+  public List<Attribute> getDynConfigWriteAttributes(final String actorInstance) {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    return _arrayList;
-  }
-  
-  public List<Attribute> getDynConfigReadAttributes(final SubSystemClass subsystem) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    return _arrayList;
-  }
-  
-  public List<Attribute> getDynConfigWriteAttributes(final SubSystemClass subsystem) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    return _arrayList;
-  }
-  
-  public boolean hasDynConfigReadAttributes(final ActorClass actor) {
-    return false;
-  }
-  
-  public boolean hasDynConfigWriteAttributes(final ActorClass actor) {
-    return false;
+    final ArrayList<Attribute> result = _arrayList;
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(actorInstance);
+    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          boolean _not = (!_isReadOnly);
+          if (_not) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
+        }
+      };
+    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    return result;
   }
   
   public boolean hasVariableService(final SubSystemClass subsystem) {
-    return false;
+    SubSystemConfig _config = this.getConfig(subsystem);
+    DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    boolean _notEquals = (!Objects.equal(_dynConfig, null));
+    return _notEquals;
   }
   
   private String toStringExpr(final LiteralArray literal) {
@@ -224,5 +281,45 @@ public class DataConfiguration implements IDataConfiguration {
       }
     }
     return _switchResult;
+  }
+  
+  private SubSystemConfig getConfig(final SubSystemClass cc) {
+    SubSystemConfig _get = DataConfigurationHelper.subSystemConfigMap.get(cc);
+    return _get;
+  }
+  
+  public List<Attribute> getDynConfigReadAttributes(final ActorClass actor) {
+    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+    final ArrayList<Attribute> result = _arrayList;
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
+    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          if (_isReadOnly) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
+        }
+      };
+    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    return result;
+  }
+  
+  public List<Attribute> getDynConfigWriteAttributes(final ActorClass actor) {
+    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+    final ArrayList<Attribute> result = _arrayList;
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
+    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          boolean _not = (!_isReadOnly);
+          if (_not) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
+        }
+      };
+    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    return result;
   }
 }

@@ -45,8 +45,8 @@ class SubSystemClassGen {
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
-			//if(dataConfigExt.hasVariableService(ssi.subSystemClass))
-			//	varService.doGenerate(root, ssi);
+			if(dataConfigExt.hasVariableService(ssi.subSystemClass))
+				varService.doGenerate(root, ssi);
 		}
 	}
 
@@ -167,7 +167,7 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 						}
-						«IF false»
+						«IF !dataConfigExt.getDynConfigWriteAttributes(ai.path).empty»
 							, variableService
 						«ENDIF»
 					); 

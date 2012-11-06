@@ -19,10 +19,6 @@ import java.util.HashMap
 import java.util.HashSet
 import java.util.LinkedList
 import java.util.List
-import java.util.Map
-import org.eclipse.etrice.core.config.ActorClassConfig
-import org.eclipse.etrice.core.config.ActorInstanceConfig
-import org.eclipse.etrice.core.config.AttrInstanceConfig
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
@@ -31,11 +27,13 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.core.room.ActorClass
+import java.util.Collection
 
 @Singleton
 class VariableServiceGen {
@@ -43,11 +41,11 @@ class VariableServiceGen {
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
-	@Inject extension IDataConfiguration configExt
+	@Inject IDataConfiguration configExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
 	@Inject ILogger logger
-	/* 
+	 
 	def doGenerate(Root root, SubSystemInstance ssi) {
 		var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 		var file = ssi.subSystemClass.name+"VariableService.java"
@@ -56,8 +54,10 @@ class VariableServiceGen {
 		fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
 	}
 	
-	def private generate(Root root, SubSystemInstance comp, SubSystemClass cc) {'''
-		«val dynConfig = cc.subSystemConfig.dynConfig»
+	def private generate(Root root, SubSystemInstance comp, SubSystemClass cc) {
+		val aisAttrMap = new HashMap<ActorInstance, List<Attribute>>
+		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai.path).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai.path)))
+	'''
 		
 		package «cc.getPackage()»;
 		
@@ -65,13 +65,8 @@ class VariableServiceGen {
 		import java.util.HashMap;
 		import java.util.Map;
 		import org.eclipse.etrice.runtime.java.config.VariableService;
-		«IF dynConfig.userCode1 != null»
-			«dynConfig.userCode1»;
-		«ELSE»
-			import org.eclipse.etrice.runtime.java.config.ConfigSourceFile;
-		«ENDIF»
-		«var ais = dynConfigsAIs(comp)»
-		«FOR model : ais.roomModels»
+		«configExt.getUserCode1(cc)»
+		«FOR model : aisAttrMap.keySet.roomModels»
 			import «model.name».*;
 		«ENDFOR»
 		
@@ -81,19 +76,19 @@ class VariableServiceGen {
 			private «cc.name» subSystem;
 			
 			// Actor instances
-			«FOR ai : ais»
-				private «ai.actorClass.name» «ai.path.split("/").drop(2).toPath("_")»;
+			«FOR ai : aisAttrMap.keySet»
+				private «ai.actorClass.name» «ai.varName»;
 			«ENDFOR»
 			
 			public «comp.name+"VariableService"»(«cc.name» subSystem) {
-				super(«IF dynConfig.filePath != null»new ConfigSourceFile("«dynConfig.filePath»")«ELSE»«dynConfig.userCode2»«ENDIF»);
+				super(«configExt.getUserCode2(cc)»);
 				this.subSystem = subSystem;
 			}
 			
 			@Override
 			protected void initInstances(){
-				«FOR ai : ais»
-					«ai.path.split("/").drop(2).toPath("_")» = («ai.actorClass.name»)subSystem.getInstance("«ai.path»");
+				«FOR ai : aisAttrMap.keySet»
+					«ai.varName» = («ai.actorClass.name»)subSystem.getInstance("«ai.path»");
 				«ENDFOR»
 			}
 			
@@ -102,50 +97,31 @@ class VariableServiceGen {
 			protected void setAttributeValues(Map<String, Object> values) {
 				Object object;
 				String id = null;
-				«FOR attrConfig : cc.dynConfigReadAttributes»
-					«var aiName = (attrConfig.eContainer as ActorInstanceConfig).path.refs.toPath("_")»
-					try{
-						boolean changed = false;
-						«FOR entry : attrConfig.allAttributes.entrySet»
-							«var a = entry.key»
-							«var aPath = attrConfig.getPath(true, true, true, false).toPath("/")+entry.value.toPath("/")+"/"+a.name»
-							id = "«aPath»";
-							«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF» _«a.name» = null;
-							object = values.get(id);
-							if(object != null){
-								_«a.name» = ensure«a.refType.type.typeName.toFirstUpper»«IF a.size>0»Array«ENDIF»(object«IF a.size>0», «a.size»«ENDIF»);
-								«genMinMaxCheck(attrConfig, (attrConfig.eContainer as ActorInstanceConfig).actorClassConfig)»
-								if(!«IF a.size==0»_«a.name».equals(«ELSE»Arrays.equals(_«a.name», «ENDIF»(«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF»)getDiffMap().get(id)))
-									changed = true;
-							} else
-								warning(id, "is missing");
-						«ENDFOR»
-						if(changed)
-							synchronized(«aiName».«invokeGetter(attrConfig.attribute.name+"Lock", null)»){
-								if(«aiName».«invokeGetter(attrConfig.attribute.name+"Lock", null)».isUpdate()){
-									«FOR entry : attrConfig.allAttributes.entrySet»
-										if(_«entry.key.name» != null){
-											«aiName»«entry.value.toInvoke».«invokeSetter(entry.key.name, null, "_"+entry.key.name)»;
-											getDiffMap().put("«attrConfig.getPath(true, true, true, false).toPath("/")+entry.value.toPath("/")+"/"+entry.key.name»", _«entry.key.name»);
-										}
-									«ENDFOR»
-								} 
-							}
-					}catch(IllegalArgumentException e){
-						error(id, e);
-					}
+				
+				«FOR ai : aisAttrMap.keySet»
+					«FOR a : aisAttrMap.get(ai)»
+						try{
+							boolean changed = false;
+							«genSetAttributeValues1(new ArrayList<Attribute>.union(a), ai)»
+							if(changed)
+								synchronized(«ai.varName».«invokeGetter(a.name+"Lock", null)»){
+									if(«ai.varName».«invokeGetter(a.name+"Lock", null)».isUpdate()){
+										«genSetAttributeValues2(new ArrayList<Attribute>.union(a), ai)»
+									}
+								}
+						}catch(IllegalArgumentException e){
+							error(id, e);
+						}
+					«ENDFOR»
 				«ENDFOR»
 			}
 			
 			@Override
 			protected Map<String, Object> getAttributeValues(){
 				Map<String, Object> values = new HashMap<String, Object>();
-				«FOR attrConfig : cc.getAttrDynConfigs(true, false)»
-					«var aiName = (attrConfig.eContainer as ActorInstanceConfig).path.refs.toPath("_")»
-					«FOR entry : attrConfig.allAttributes.entrySet»
-						«var array = entry.key.size>0»
-						«var aPath = attrConfig.getPath(true, true, true, false).toPath("/")+entry.value.toPath("/")+"/"+entry.key.name»
-						values.put("«aPath»", «IF array»toObjectArray(«ENDIF»«aiName»«entry.value.toInvoke».«invokeGetter(entry.key.name, null)»«IF array»)«ENDIF»);
+				«FOR ai : aisAttrMap.keySet»
+					«FOR a : aisAttrMap.get(ai)»
+						«genGetAttributeValues(new ArrayList<Attribute>.union(a), ai)»
 					«ENDFOR»
 				«ENDFOR»
 				
@@ -154,7 +130,8 @@ class VariableServiceGen {
 			
 			@Override
 			public void writeDataClass(String id, Object dcObject, Map<String, Object> writeMap) {
-				«FOR dc : comp.dynDataClasses»
+				«var dataClasses = aisAttrMap.keySet.dynConfigDataClasses»
+				«FOR dc : dataClasses»
 					if(dcObject.getClass().equals(«dc.typeName».class))
 						writeDataClass(id, («dc.typeName») dcObject, writeTasks);
 				«ENDFOR»
@@ -162,7 +139,7 @@ class VariableServiceGen {
 			
 			// DataClasses write operations
 			
-			«FOR dc : comp.allDynDataClasses»
+			«FOR dc : getAllDataClasses(dataClasses)»
 				private void writeDataClass(String id, «dc.typeName» object, Map<String, Object> map){
 					«FOR a : dc.attributes»
 						«IF a.refType.type.primitive»
@@ -176,108 +153,118 @@ class VariableServiceGen {
 			
 			@Override
 			protected int getPollingTimerUser(){
-				return «dynConfig.polling»;
+				return «configExt.getPollingTimerUser(cc)»;
 			}
 			
 		}
 	'''}
 	
-	def private genMinMaxCheck(AttrInstanceConfig instConf, ActorClassConfig acConf){
-		var config = acConf?.resolve(instConf.getPath(false, false, true, true))
-		if(config?.min == null && config?.max == null)
-			return ''''''
-		var path = config.getPath(false, false, true, true).toPath("_")
-		var acName = (config.eContainer as ActorClassConfig).actor.name
-		'''
-			checkMinMax(_«config.attribute.name», «IF config.min != null»«acName».MIN«path»«ELSE»null«ENDIF», «IF config.max != null»«acName».MAX«path»«ELSE»null«ENDIF»);
-		'''
-	}
-		
-	def private Map<Attribute, List<String>> getAllAttributes(AttrInstanceConfig config){
-		var map = new HashMap<Attribute, List<String>>()
-		if(config.attribute.refType.type.primitive)
-			map.put(config.attribute, new ArrayList<String>())
+	def private genMinMaxCheck(List<Attribute> path, ActorClass ac){
+		var aVarName = path.toAbsolutePath("_")
+		var min = configExt.getAttrClassConfigMinValue(ac, path) != null
+		var max = configExt.getAttrClassConfigMaxValue(ac, path) != null
+		if(min || max)
+			'''
+				checkMinMax(«aVarName», «IF min»«ac.name».MIN«aVarName»«ELSE»null«ENDIF», «IF max»«ac.name».MAX«aVarName»«ELSE»null«ENDIF»);
+			'''
 		else
-			config.attribute.getAllAttributes(new LinkedList<String>(), map)
-		
-		return map
+			''''''
 	}
-	
-	def private void getAllAttributes(Attribute attribute, List<String> path, Map<Attribute, List<String>> map){
-		if(attribute.refType.type.primitive)
-			map.put(attribute, path)
-		else if (attribute.refType.type.dataClass){
-			var new_path = new ArrayList<String>(path)
-			new_path.add(attribute.name)
-			for(dc : (attribute.refType.type as DataClass).allAttributes)
-				dc.getAllAttributes(new_path, map)
-		}
-	}
-	
-	def private String toInvoke(List<String> path){
-		var builder = new StringBuilder()
-		for(p : path)
-			builder.append("."+p.invokeGetter(null))
-			
-		return builder.toString
-	}
-	
-	def private List<ActorInstance> dynConfigsAIs(SubSystemInstance comp){
-		val aiPaths = new HashSet<String>();
-		for(attrConfig : comp.subSystemClass.dynConfigReadAttributes)
-			aiPaths.add(attrConfig.getPath(true, true, false, false).toPath("/"))
-		
-		var ais = new ArrayList<ActorInstance>();
-		for(ai : comp.allContainedInstances)
-			if(aiPaths.contains(ai.path))
-				ais.add(ai);
 
-		return ais
-	}
-	
-	
-	def private getDynDataClasses(SubSystemInstance comp){
-		var dcs = new HashSet<DataClass>()
-		for(config : comp.subSystemClass.getAttrDynConfigs(false, true))
-			if(config.attribute.refType.type.dataClass)
-				dcs.add(config.attribute.refType.type as DataClass)
-		
-		return dcs
-	}
-	
-	def private getAllDynDataClasses(SubSystemInstance comp){
-		var dcs = new HashSet<DataClass>()
-		var stack = new LinkedList<DataClass>()
-		stack.addAll(comp.dynDataClasses)
-		dcs.addAll(stack)
-		while(!stack.empty){
-			var dc = stack.pop
-			for(a : dc.allAttributes)
-				if(a.refType.type.dataClass){
-					dcs.add(a.refType.type as DataClass)
-					stack.push(a.refType.type as DataClass);
-				}
-		}		
-		
-		return dcs
-	}
-	
-	def private resolve(ActorClassConfig config, String[] path){
-		var result = config.attributes.findFirst(c | c.attribute.name.equals(path.head))
-		for (String ref : path.tail) {
-			result = result?.attributes.findFirst(c | c.attribute.name.equals(ref))
-			if (result == null)
-				return null
-		}
-
+	def private getDynConfigDataClasses(Iterable<ActorInstance> ais){
+		val result = new HashSet<DataClass>
+		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai.path).
+			forEach(a | if(a.refType.type.dataClass)result.add(a.refType.type as DataClass)
+			))
 		return result
 	}
 	
-	def private getRoomModels(List<ActorInstance> ais){
+	def private getAllDataClasses(Iterable<DataClass> dcs){
+		val result = new HashSet<DataClass>
+		result.addAll(dcs)
+		val visit = new LinkedList<DataClass>
+		visit.addAll(dcs)
+		while(!visit.empty){
+			var dc = visit.pop
+			dc.allAttributes.forEach(a | if(a.refType.type.dataClass)visit.add(a.refType.type as DataClass))
+		}
+		return result
+	}
+	
+	def private getRoomModels(Collection<ActorInstance> ais){
 		val models = new HashSet<RoomModel>
 		ais.forEach(ai | models.add(ai.actorClass.eContainer as RoomModel))
 		return models
 	}
 	
-	*/
+	def private toAbsolutePath(List<Attribute> path, String pathDelim){
+		'''«FOR p : path»«pathDelim»«p.name»«ENDFOR»'''.toString
+	}
+	
+	def private getVarName(ActorInstance ai){
+		'''«FOR p : ai.path.split('/').drop(2) SEPARATOR '_'»«p»«ENDFOR»'''
+	}
+	
+	def private genGetAttributeValues(List<Attribute> path, ActorInstance ai){
+		var a = path.last
+		if(a.refType.type.primitive){'''
+			values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
+		'''
+		} else if(a.refType.type.dataClass){
+			var dataClass = (a.refType.type as DataClass)
+			'''
+				«FOR at : dataClass.allAttributes»
+					«genGetAttributeValues(path.union(at), ai)»
+				«ENDFOR»
+			'''
+		}
+	}
+	
+	def private genSetAttributeValues1(List<Attribute> path, ActorInstance ai){
+		var a = path.last
+		var aVarName = path.toAbsolutePath("_")
+		if(a.refType.type.primitive){'''
+			id = "«ai.path»«path.toAbsolutePath("/")»";
+			«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF» «aVarName» = null;
+			object = values.get(id);
+			if(object != null){
+				«aVarName» = ensure«a.refType.type.typeName.toFirstUpper»«IF a.size>0»Array«ENDIF»(object«IF a.size>0», «a.size»«ENDIF»);
+				«genMinMaxCheck(path, ai.actorClass)»
+				if(!«IF a.size==0»«aVarName».equals(«ELSE»Arrays.equals(«aVarName», «ENDIF»(«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF»)getDiffMap().get(id)))
+					changed = true;
+			} else
+				warning(id, "is missing");
+		'''
+		} else if(a.refType.type.dataClass){
+			var dataClass = (a.refType.type as DataClass)
+			'''
+				«FOR at : dataClass.allAttributes»
+					«genSetAttributeValues1(path.union(at), ai)»
+				«ENDFOR»
+			'''
+		}
+	}
+	
+	def private genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
+		var a = path.last 
+		var aVarName = path.toAbsolutePath("_")
+		if(a.refType.type.primitive){
+			var getters = if(path.size>1)path.take(path.size-1).invokeGetters(null)+"." else ""
+		'''
+			if(«aVarName» != null){
+				«ai.varName».«getters»«invokeSetter(a.name, null, aVarName)»;
+				getDiffMap().put("«ai.path»«path.toAbsolutePath("/")»", «aVarName»);
+			}
+		'''
+		} else if(a.refType.type.dataClass){
+			var dataClass = (a.refType.type as DataClass)
+			'''
+				«FOR at : dataClass.allAttributes»
+					«genSetAttributeValues2(path.union(at), ai)»
+				«ENDFOR»
+			'''
+		}
+	}
+	
+	
 }

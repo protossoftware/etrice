@@ -50,35 +50,37 @@ class Initialization {
 	
 	def private attributeInit(EObject roomClass, List<Attribute> path, boolean useClassDefaultsOnly) {
 		var a = path.last
-		if(a.refType.type.dataClass){
+		var aType = a.refType.type
+		if(aType.dataClass){
 			var result = 
 				'''
-					«FOR e : (a.refType.type as DataClass).attributes»
+					«FOR e : (aType as DataClass).attributes»
 						«attributeInit(roomClass, path.union(e), useClassDefaultsOnly)»
 					«ENDFOR»
 				'''
 			if(result.length > 0)
-				result
+				return result
 		}
-		else {
+		
+		var value = getInitValueLiteral(roomClass, path)
+		var getter = if(path.size > 1)procedureHelpers.invokeGetters(path.take(path.size-1), null)+"." else ""
+		return 
 		'''
-			«var aType = a.refType.type»
-			«var value = getInitValueLiteral(roomClass, path)»
 			«IF value!=null»
 				«IF a.size == 0 || aType.characterType»
-					«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null,value)»;
+					«getter»«procedureHelpers.invokeSetter(a.name,null,value)»;
 				«ELSEIF value.startsWith("{")»
-					«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
+					«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
 				«ELSE»
 					{
-						«a.name» = new «aType.typeName»[«a.size»];
+						«aType.typeName»[] _«a.name» = new «aType.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «value»;
+							_«a.name»[i] = «value»;
 						}
-						«path.take(path.size-1).invokeGetter»«procedureHelpers.invokeSetter(a.name,null,a.name)»;
+						«getter»«procedureHelpers.invokeSetter(a.name,null,"_"+a.name)»;
 					}
 				«ENDIF»
-			«ELSEIF aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
+			«ELSEIF path.size == 1 && (aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly)»
 				«IF a.size==0»
 					«IF a.refType.isRef»
 						«a.name» = «languageExt.nullPointer()»;
@@ -95,7 +97,7 @@ class Initialization {
 				«ENDIF»
 			«ENDIF»
 		'''
-		}
+		
 	}
 	
 	def private getInitValueLiteral(EObject roomClass, List<Attribute> path){
@@ -117,10 +119,7 @@ class Initialization {
 					// array syntax ?
 					'''{ «FOR s : result.split(",") SEPARATOR ' ,'»«languageExt.toValueLiteral(aType, s.trim)»«ENDFOR» }'''.toString
 		}
-		a.defaultValueLiteral
-	}
-	
-	def private invokeGetter(Iterable<Attribute> path){
-		'''«FOR a : path»«procedureHelpers.invokeGetter(a.name, null)».«ENDFOR»'''
+		if(path.size == 1)
+			a.defaultValueLiteral
 	}
 }

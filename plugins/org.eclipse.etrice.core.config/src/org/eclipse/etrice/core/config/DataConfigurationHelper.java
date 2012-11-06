@@ -32,7 +32,6 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
@@ -44,20 +43,18 @@ public class DataConfigurationHelper {
 	public static Map<String, AttrInstanceConfig> actorInstanceAttrMap = new HashMap<String, AttrInstanceConfig>();
 
 	// dynamic
-	public static Map<SubSystemClass, SubSystemConfig> ssc2ssConfMap = new HashMap<SubSystemClass, SubSystemConfig>();
-	public static Map<SubSystemClass, List<AttrInstanceConfig>> ssc2attrInstConfMap = new HashMap<SubSystemClass, List<AttrInstanceConfig>>();
-	public static Map<ActorClass, List<ActorInstanceConfig>> ac2aiConfMap = new HashMap<ActorClass, List<ActorInstanceConfig>>();
-	public static Map<ActorInstanceConfig, ActorClass> aiConf2acMap = new HashMap<ActorInstanceConfig, ActorClass>();
+	public static Map<SubSystemClass, SubSystemConfig> subSystemConfigMap = new HashMap<SubSystemClass, SubSystemConfig>();
+	public static Map<String, List<AttrInstanceConfig>> dynActorInstanceAttrMap = new HashMap<String, List<AttrInstanceConfig>>();
+	public static Map<ActorClass, List<AttrInstanceConfig>> dynActorClassAttrMap = new HashMap<ActorClass, List<AttrInstanceConfig>>();
 
 	public static boolean setConfigModels(ResourceSet rs, ILogger logger) {
 		actorClassAttrMap.clear();
 		protocolClassAttrMap.clear();
 		actorInstanceAttrMap.clear();
-		
-		ssc2ssConfMap.clear();
-		ssc2attrInstConfMap.clear();
-		ac2aiConfMap.clear();
-		aiConf2acMap.clear();
+		subSystemConfigMap.clear();
+		dynActorInstanceAttrMap.clear();
+		dynActorClassAttrMap.clear();
+
 		boolean error = false;
 
 		List<ConfigModel> configs = new ArrayList<ConfigModel>();
@@ -100,7 +97,7 @@ public class DataConfigurationHelper {
 			for (ActorInstanceConfig instanceConfig : config
 					.getActorInstanceConfigs()) {
 				String path = "/" + instanceConfig.getRoot().getName()
-						+ toPath(instanceConfig.getPath().getRefs(), "/");
+						+ toStringPath(instanceConfig.getPath().getRefs(), "/");
 				if (actorInstances.contains(path)) {
 					logger.logError(
 							"Multiple configurations for actor instance "
@@ -109,50 +106,43 @@ public class DataConfigurationHelper {
 					actorInstances.add(path);
 					collectConfigs(instanceConfig, path, actorInstanceAttrMap);
 				}
-
-				ActorClass ac = ConfigUtil.resolve(instanceConfig.getRoot(),
-						instanceConfig.getPath());
-				if (ac2aiConfMap.get(ac) == null)
-					ac2aiConfMap.put(ac, new ArrayList<ActorInstanceConfig>());
-				ac2aiConfMap.get(ac).add(instanceConfig);
-
-				aiConf2acMap.put(instanceConfig, ac);
 			}
 			for (SubSystemConfig ssConfig : config.getSubSystemConfigs()) {
-				if (ssc2ssConfMap.containsKey(ssConfig)) {
+				if (subSystemConfigMap.containsKey(ssConfig.getSubSystem())) {
 					logger.logError(
 							"Multiple configurations for subSystem class "
 									+ ssConfig.getSubSystem().getName()
 									+ " found", null);
 					error = true;
-				} else {
-					ssc2ssConfMap.put(ssConfig.getSubSystem(), ssConfig);
-					ssc2attrInstConfMap.put(ssConfig.getSubSystem(),
-							new ArrayList<AttrInstanceConfig>());
-				}
+				} else
+					subSystemConfigMap.put(ssConfig.getSubSystem(), ssConfig);
 			}
 		}
-
-		// dynConfigSubsystemMap
-		// for (ActorInstanceConfig instanceConfig : actorInstanceMap.values())
-		// {
-		// List<AttrInstanceConfig> dynConfigs = new
-		// ArrayList<AttrInstanceConfig>();
-		// for (AttrInstanceConfig config : instanceConfig.getAttributes())
-		// if (config.isDynConfig())
-		// dynConfigs.add(config);
-		// if (!dynConfigs.isEmpty())
-		// ssc2attrInstConfMap.get(instanceConfig.getRoot()).addAll(
-		// dynConfigs);
-		// }
 
 		return !error;
 	}
 
 	private static void collectConfigs(ActorInstanceConfig actorConfig,
 			String path, Map<String, AttrInstanceConfig> map) {
-		for (AttrInstanceConfig c : actorConfig.getAttributes())
+		for (AttrInstanceConfig c : actorConfig.getAttributes()) {
 			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
+
+			if (c.isDynConfig()) {
+				List<AttrInstanceConfig> list = dynActorInstanceAttrMap
+						.get(path);
+				if (list == null)
+					list = new ArrayList<AttrInstanceConfig>();
+				list.add(c);
+				dynActorInstanceAttrMap.put(path, list);
+
+				ActorClass ac = ConfigUtil.getLastActorRef(
+						actorConfig.getRoot(), actorConfig.getPath()).getType();
+				if ((list = dynActorClassAttrMap.get(ac)) == null)
+					list = new ArrayList<AttrInstanceConfig>();
+				list.add(c);
+				dynActorClassAttrMap.put(ac, list);
+			}
+		}
 	}
 
 	private static void collectConfigs(ProtocolClassConfig protocolConfig,
@@ -191,7 +181,7 @@ public class DataConfigurationHelper {
 		map.put(path, config);
 	}
 
-	public static String toPath(Iterable<String> path, String pathDelim) {
+	public static String toStringPath(Iterable<String> path, String pathDelim) {
 		StringBuilder b = new StringBuilder();
 		for (String p : path)
 			b.append(pathDelim + p);

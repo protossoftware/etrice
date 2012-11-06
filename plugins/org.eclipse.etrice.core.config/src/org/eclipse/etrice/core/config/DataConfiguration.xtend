@@ -1,5 +1,6 @@
 package org.eclipse.etrice.core.config
 
+import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.etrice.core.ConfigStandaloneSetup
@@ -10,7 +11,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import java.util.ArrayList
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -58,32 +58,47 @@ class DataConfiguration implements IDataConfiguration {
 	
 	// dynamic
 	
-	override getAllDynConfigReadAttributes(ActorClass actor) {
-		return new ArrayList<Attribute>
+	override getPollingTimerUser(SubSystemClass subsystem) {
+		 subsystem.config?.dynConfig?.polling
 	}
 	
-	override getAllDynConfigWriteAttributes(ActorClass actor) {
-		return new ArrayList<Attribute>
-	}
-
-	override getDynConfigReadAttributes(SubSystemClass subsystem) {
-		return new ArrayList<Attribute>
-	}
-	
-	override getDynConfigWriteAttributes(SubSystemClass subsystem) {
-		return new ArrayList<Attribute>
+	override getUserCode1(SubSystemClass subsystem) {
+		var dynConfig = subsystem.config?.dynConfig
+		return 
+			if(dynConfig?.filePath != null)
+				"import org.eclipse.etrice.runtime.java.config.ConfigSourceFile; // TODO JH make lang independent"
+			else 
+				dynConfig?.userCode1
 	}
 	
-	override hasDynConfigReadAttributes(ActorClass actor) {
-		false
+	override getUserCode2(SubSystemClass subsystem) {
+		var dynConfig = subsystem.config?.dynConfig
+		return 
+			if(dynConfig?.filePath != null)
+				'''new ConfigSourceFile("«dynConfig.filePath»")'''
+			else 
+				dynConfig?.userCode2
 	}
 	
-	override hasDynConfigWriteAttributes(ActorClass actor) {
-		false
+	override getDynConfigReadAttributes(String actorInstance) {
+		val result = new ArrayList<Attribute>
+		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(actorInstance)
+		configs?.forEach(c | if(c.readOnly)result.add(c.attribute))
+		
+		return result
 	}
+	
+	override getDynConfigWriteAttributes(String actorInstance) {
+		val result = new ArrayList<Attribute>
+		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(actorInstance)
+		configs?.forEach(c | if(!c.readOnly)result.add(c.attribute))
+		
+		return result
+	}
+	
 	
 	override hasVariableService(SubSystemClass subsystem) {
-		false
+		subsystem.config?.dynConfig != null
 	}
 	
 	def private toStringExpr(LiteralArray literal){
@@ -97,6 +112,24 @@ class DataConfiguration implements IDataConfiguration {
 			RealLiteral: literal.value.toString
 			StringLiteral: literal.value.toString
 		}
+	}
+
+	def private getConfig(SubSystemClass cc){
+		DataConfigurationHelper::subSystemConfigMap.get(cc)
+	}	
+
+	override getDynConfigReadAttributes(ActorClass actor) {
+		val result = new ArrayList<Attribute>
+		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
+		configs?.forEach(c | if(c.readOnly)result.add(c.attribute))
+		return result
+	}
+	
+	override getDynConfigWriteAttributes(ActorClass actor) {
+		val result = new ArrayList<Attribute>
+		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
+		configs?.forEach(c | if(!c.readOnly)result.add(c.attribute))
+		return result
 	}
 	
 }

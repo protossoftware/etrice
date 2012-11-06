@@ -150,6 +150,10 @@ class ProcedureHelpers {
 	def argList(List<Attribute> attributes) {
 		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
+	
+	def invokeGetters(Iterable<Attribute> path, String classname){
+		'''«FOR a : path SEPARATOR '.'»«invokeGetter(a.name, classname)»«ENDFOR»'''
+	}
 
 	// generic setters & getters
 	

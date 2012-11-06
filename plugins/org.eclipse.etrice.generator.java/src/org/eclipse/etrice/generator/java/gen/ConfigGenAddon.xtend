@@ -70,39 +70,35 @@ class ConfigGenAddon {
 	
 	// For ActorClassGen
 	
-//	def public genDynConfigGetterSetter(ActorClass ac){'''
-//		«FOR a : dataConfigExt.getAllDynConfigReadAttributes(ac)»
-//			public «a.refType.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
-//				if(lock_«a.name» == null)
-//					return «a.name»;
-//				else
-//					synchronized(lock_«a.name»){
-//						return «a.name»;
-//					}
-//			}
-//			public void set«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
-//				if(lock_«a.name» == null)
-//					this.«a.name» = «a.name»;
-//				else
-//					synchronized(lock_«a.name»){
-//						this.«a.name» = «a.name»;
-//					}
-//			}
-//			public DynConfigLock get«a.name.toFirstUpper»Lock(){
-//				return lock_«a.name»;
-//			}	
-//		«ENDFOR»
-//		«FOR a : dataConfigExt.getAllDynConfigWriteAttributes(ac)»
-//			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
-//					set«a.name.toFirstUpper»(«a.name»);
-//					variableService.write(this.getInstancePath()+"/«a.name»", «a.name»);
-//			}
-//		«ENDFOR»
-//	'''}
-
-	def genDynConfigGetterSetter(ActorClass ac){
-		
-	}
+	def public genDynConfigGetterSetter(ActorClass ac){'''
+		«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
+			public «a.refType.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
+				if(lock_«a.name» == null)
+					return «a.name»;
+				else
+					synchronized(lock_«a.name»){
+						return «a.name»;
+					}
+			}
+			public void set«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
+				if(lock_«a.name» == null)
+					this.«a.name» = «a.name»;
+				else
+					synchronized(lock_«a.name»){
+						this.«a.name» = «a.name»;
+					}
+			}
+			public DynConfigLock get«a.name.toFirstUpper»Lock(){
+				return lock_«a.name»;
+			}	
+		«ENDFOR»
+		«FOR a : dataConfigExt.getDynConfigWriteAttributes(ac)»
+			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
+					set«a.name.toFirstUpper»(«a.name»);
+					variableService.write(this.getInstancePath()+"/«a.name»", «a.name»);
+			}
+		«ENDFOR»
+	'''}
 	
 	def public genMinMaxConstants(ActorClass ac){
 		var result = '''
@@ -148,4 +144,5 @@ class ConfigGenAddon {
 				type.typeName
 		}
 	}
+	
 }

@@ -20,6 +20,7 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class ConfigGenAddon {
@@ -38,17 +39,15 @@ public class ConfigGenAddon {
   @Inject
   private RoomExtensions _roomExtensions;
   
-  public CharSequence genActorInstanceConfig(final ActorInstance ai) {
+  public CharSequence genActorInstanceConfig(final ActorInstance ai, final String aiVariableName) {
     StringConcatenation _builder = new StringConcatenation();
     {
       ActorClass _actorClass = ai.getActorClass();
       EList<Attribute> _attributes = _actorClass.getAttributes();
       for(final Attribute a : _attributes) {
-        String _path = ai.getPath();
-        String _plus = (_path + "/");
-        String _name = a.getName();
-        String _plus_1 = (_plus + _name);
-        CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, "inst", _plus_1, a);
+        ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+        List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
+        CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, aiVariableName, _union);
         _builder.append(_applyInstanceConfig, "");
         _builder.newLineIfNotEmpty();
       }
@@ -56,9 +55,10 @@ public class ConfigGenAddon {
     return _builder;
   }
   
-  public CharSequence applyInstanceConfig(final ActorInstance ai, final String invokes, final String instancePath, final Attribute a) {
+  private CharSequence applyInstanceConfig(final ActorInstance ai, final String invokes, final List<Attribute> path) {
     CharSequence _xblockexpression = null;
     {
+      Attribute a = IterableExtensions.<Attribute>last(path);
       RefableType _refType = a.getRefType();
       DataType aType = _refType.getType();
       CharSequence _xifexpression = null;
@@ -66,7 +66,7 @@ public class ConfigGenAddon {
       if (_isPrimitive) {
         CharSequence _xblockexpression_1 = null;
         {
-          String value = this.dataConfigExt.getAttrInstanceConfigValue(ai, instancePath);
+          String value = this.dataConfigExt.getAttrInstanceConfigValue(ai, path);
           CharSequence _xifexpression_1 = null;
           boolean _equals = Objects.equal(value, null);
           if (_equals) {
@@ -103,6 +103,7 @@ public class ConfigGenAddon {
                 CharSequence _xblockexpression_2 = null;
                 {
                   StringConcatenation _builder_2 = new StringConcatenation();
+                  _builder_2.append("{ ");
                   {
                     String[] _split_1 = value.split(",");
                     boolean _hasElements = false;
@@ -110,13 +111,14 @@ public class ConfigGenAddon {
                       if (!_hasElements) {
                         _hasElements = true;
                       } else {
-                        _builder_2.appendImmediate(",", "");
+                        _builder_2.appendImmediate(", ", "");
                       }
                       String _trim = s.trim();
                       String _valueLiteral_1 = this.stdExt.toValueLiteral(((PrimitiveType) aType), _trim);
                       _builder_2.append(_valueLiteral_1, "");
                     }
                   }
+                  _builder_2.append(" }");
                   CharSequence arrayExpr = _builder_2;
                   StringConcatenation _builder_3 = new StringConcatenation();
                   _builder_3.append(invokes, "");
@@ -126,11 +128,12 @@ public class ConfigGenAddon {
                   _builder_4.append("new ");
                   String _typeName = this.typeHelpers.typeName(aType);
                   _builder_4.append(_typeName, "");
-                  _builder_4.append("[]");
+                  _builder_4.append("[] ");
                   _builder_4.append(arrayExpr, "");
                   String _string = _builder_4.toString();
                   CharSequence _invokeSetter_1 = this.helpers.invokeSetter(_name_1, null, _string);
                   _builder_3.append(_invokeSetter_1, "");
+                  _builder_3.append(";");
                   _xblockexpression_2 = (_builder_3);
                 }
                 _xifexpression_3 = _xblockexpression_2;
@@ -138,30 +141,29 @@ public class ConfigGenAddon {
                 StringConcatenation _builder_2 = new StringConcatenation();
                 _builder_2.append("{");
                 _builder_2.newLine();
-                _builder_2.append("\t\t\t\t\t\t");
+                _builder_2.append("\t");
                 String _typeName = this.typeHelpers.typeName(aType);
-                _builder_2.append(_typeName, "						");
+                _builder_2.append(_typeName, "	");
                 _builder_2.append("[] array = ");
-                _builder_2.append(invokes, "						");
+                _builder_2.append(invokes, "	");
                 _builder_2.append(".");
                 String _name_1 = a.getName();
                 CharSequence _invokeGetter = this.helpers.invokeGetter(_name_1, null);
-                _builder_2.append(_invokeGetter, "						");
+                _builder_2.append(_invokeGetter, "	");
                 _builder_2.append(";");
                 _builder_2.newLineIfNotEmpty();
-                _builder_2.append("\t\t\t\t\t\t");
+                _builder_2.append("\t");
                 _builder_2.append("for (int i=0;i<");
                 int _size_3 = a.getSize();
-                _builder_2.append(_size_3, "						");
+                _builder_2.append(_size_3, "	");
                 _builder_2.append(";i++){");
                 _builder_2.newLineIfNotEmpty();
-                _builder_2.append("\t\t\t\t\t\t\t");
+                _builder_2.append("\t\t");
                 _builder_2.append("array[i] = ");
                 String _valueLiteral_1 = this.stdExt.toValueLiteral(((PrimitiveType) aType), value);
-                _builder_2.append(_valueLiteral_1, "							");
+                _builder_2.append(_valueLiteral_1, "		");
                 _builder_2.append(";");
                 _builder_2.newLineIfNotEmpty();
-                _builder_2.append("\t\t\t\t\t");
                 _builder_2.append("}");
                 _xifexpression_3 = _builder_2;
               }
@@ -180,18 +182,14 @@ public class ConfigGenAddon {
           {
             EList<Attribute> _attributes = ((DataClass) aType).getAttributes();
             for(final Attribute e : _attributes) {
-              _builder.newLineIfNotEmpty();
               String _plus = (invokes + ".");
               String _name = a.getName();
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
               String _plus_1 = (_plus + _invokeGetter);
-              String _plus_2 = (instancePath + "/");
-              String _name_1 = e.getName();
-              String _plus_3 = (_plus_2 + _name_1);
-              CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, _plus_1, _plus_3, e);
+              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+              CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, _plus_1, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t\t\t\t");
             }
           }
           _xifexpression_1 = _builder;
@@ -203,8 +201,184 @@ public class ConfigGenAddon {
     return _xblockexpression;
   }
   
-  public Object genDynConfigGetterSetter(final ActorClass ac) {
-    return null;
+  public CharSequence genDynConfigGetterSetter(final ActorClass ac) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
+      for(final Attribute a : _dynConfigReadAttributes) {
+        _builder.append("public ");
+        RefableType _refType = a.getRefType();
+        DataType _type = _refType.getType();
+        String _typeName = this.typeHelpers.typeName(_type);
+        _builder.append(_typeName, "");
+        {
+          int _size = a.getSize();
+          boolean _greaterThan = (_size > 0);
+          if (_greaterThan) {
+            _builder.append("[]");
+          }
+        }
+        _builder.append(" get");
+        String _name = a.getName();
+        String _firstUpper = StringExtensions.toFirstUpper(_name);
+        _builder.append(_firstUpper, "");
+        _builder.append("(){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("if(lock_");
+        String _name_1 = a.getName();
+        _builder.append(_name_1, "	");
+        _builder.append(" == null)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return ");
+        String _name_2 = a.getName();
+        _builder.append(_name_2, "		");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("else");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("synchronized(lock_");
+        String _name_3 = a.getName();
+        _builder.append(_name_3, "		");
+        _builder.append("){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("return ");
+        String _name_4 = a.getName();
+        _builder.append(_name_4, "			");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("public void set");
+        String _name_5 = a.getName();
+        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_5);
+        _builder.append(_firstUpper_1, "");
+        _builder.append("(");
+        RefableType _refType_1 = a.getRefType();
+        DataType _type_1 = _refType_1.getType();
+        String _typeName_1 = this.typeHelpers.typeName(_type_1);
+        _builder.append(_typeName_1, "");
+        {
+          int _size_1 = a.getSize();
+          boolean _greaterThan_1 = (_size_1 > 0);
+          if (_greaterThan_1) {
+            _builder.append("[]");
+          }
+        }
+        _builder.append(" ");
+        String _name_6 = a.getName();
+        _builder.append(_name_6, "");
+        _builder.append("){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("if(lock_");
+        String _name_7 = a.getName();
+        _builder.append(_name_7, "	");
+        _builder.append(" == null)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("this.");
+        String _name_8 = a.getName();
+        _builder.append(_name_8, "		");
+        _builder.append(" = ");
+        String _name_9 = a.getName();
+        _builder.append(_name_9, "		");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("else");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("synchronized(lock_");
+        String _name_10 = a.getName();
+        _builder.append(_name_10, "		");
+        _builder.append("){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("this.");
+        String _name_11 = a.getName();
+        _builder.append(_name_11, "			");
+        _builder.append(" = ");
+        String _name_12 = a.getName();
+        _builder.append(_name_12, "			");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("public DynConfigLock get");
+        String _name_13 = a.getName();
+        String _firstUpper_2 = StringExtensions.toFirstUpper(_name_13);
+        _builder.append(_firstUpper_2, "");
+        _builder.append("Lock(){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("return lock_");
+        String _name_14 = a.getName();
+        _builder.append(_name_14, "	");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}\t");
+        _builder.newLine();
+      }
+    }
+    {
+      List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+      for(final Attribute a_1 : _dynConfigWriteAttributes) {
+        _builder.append("public void setAndWrite");
+        String _name_15 = a_1.getName();
+        String _firstUpper_3 = StringExtensions.toFirstUpper(_name_15);
+        _builder.append(_firstUpper_3, "");
+        _builder.append("(");
+        RefableType _refType_2 = a_1.getRefType();
+        DataType _type_2 = _refType_2.getType();
+        String _typeName_2 = this.typeHelpers.typeName(_type_2);
+        _builder.append(_typeName_2, "");
+        {
+          int _size_2 = a_1.getSize();
+          boolean _greaterThan_2 = (_size_2 > 0);
+          if (_greaterThan_2) {
+            _builder.append("[]");
+          }
+        }
+        _builder.append(" ");
+        String _name_16 = a_1.getName();
+        _builder.append(_name_16, "");
+        _builder.append("){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("set");
+        String _name_17 = a_1.getName();
+        String _firstUpper_4 = StringExtensions.toFirstUpper(_name_17);
+        _builder.append(_firstUpper_4, "		");
+        _builder.append("(");
+        String _name_18 = a_1.getName();
+        _builder.append(_name_18, "		");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("variableService.write(this.getInstancePath()+\"/");
+        String _name_19 = a_1.getName();
+        _builder.append(_name_19, "		");
+        _builder.append("\", ");
+        String _name_20 = a_1.getName();
+        _builder.append(_name_20, "		");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    return _builder;
   }
   
   public CharSequence genMinMaxConstants(final ActorClass ac) {

@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,16 +46,17 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.validation.Check;
 
 public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
+	@SuppressWarnings("unused")
 	private ConfigValueConverterService converter = new ConfigValueConverterService();
 
 	@Check
@@ -283,30 +286,11 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 		// numeric check
 		if ((type == LiteralType.INT || type == LiteralType.REAL)) {
-			ActorClassConfig classConfig = null;
-			if (config.eContainer() instanceof ActorInstanceConfig) {
-				ActorInstanceConfig actorConfig = (ActorInstanceConfig) config
-						.eContainer();
-				ActorContainerClass actorClass = ConfigUtil.resolve(
-						actorConfig.getRoot(), actorConfig.getPath());
-				// find ActorClassConfig
-				ConfigModel model = getConfigModel(actorConfig);
-				for (ActorClassConfig cf : model.getActorClassConfigs()) {
-					if (cf.getActor().equals(actorClass)) {
-						classConfig = cf;
-						break;
-					}
-				}
-			} else if (config.eContainer() instanceof ActorClassConfig)
-				classConfig = (ActorClassConfig) config.eContainer();
-
 			AttrClassConfig attrClassConfig = null;
-			if (classConfig != null) {
-				for (AttrClassConfig acf : classConfig.getAttributes())
-					if (config.getAttribute().equals(acf.getAttribute())) {
-						attrClassConfig = acf;
-						break;
-					}
+			if (config instanceof AttrInstanceConfig) {
+				attrClassConfig = resolveAttrClassConfig((AttrInstanceConfig) config);
+			} else if (config instanceof AttrClassConfig) {
+				attrClassConfig = (AttrClassConfig) config;
 			}
 
 			if (attrClassConfig != null) {
@@ -324,14 +308,20 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 								error("value is less than minimum",
 										config.getValue(), arrayRef,
 										values.indexOf(value));
-						}
+						} else if (min != null)
+							warning("could not compare with minimum (incompatible datatypes)",
+									config.getValue(), arrayRef,
+									values.indexOf(value));
 						if (max instanceof RealLiteral) {
 							double dbMax = ((RealLiteral) max).getValue();
 							if (dbMax < dbValue)
 								error("value exceeds maximum",
 										config.getValue(), arrayRef,
 										values.indexOf(value));
-						}
+						} else if (max != null)
+							warning("could not compare with maximum (incompatible datatypes)",
+									config.getValue(), arrayRef,
+									values.indexOf(value));
 					} else if (value instanceof IntLiteral) {
 						long lValue = ((IntLiteral) value).getValue();
 						if (min instanceof IntLiteral) {
@@ -340,14 +330,20 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 								error("value is less than minimum",
 										config.getValue(), arrayRef,
 										values.indexOf(value));
-						}
+						} else if (min != null)
+							warning("could not compare with minimum (incompatible datatypes)",
+									config.getValue(), arrayRef,
+									values.indexOf(value));
 						if (max instanceof IntLiteral) {
 							long lMax = ((IntLiteral) max).getValue();
 							if (lMax < lValue)
 								error("value exceeds maximum",
 										config.getValue(), arrayRef,
 										values.indexOf(value));
-						}
+						} else if (max != null)
+							warning("could not compare with maximum (incompatible datatypes)",
+									config.getValue(), arrayRef,
+									values.indexOf(value));
 					}
 				}
 			}
@@ -367,50 +363,47 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (primitive.getType() == LiteralType.INT) {
 				if (!(min instanceof IntLiteral))
 					error("incompatible datatype: maximum is not int", minRef);
-			} else if (primitive.getType() == LiteralType.REAL) {
-				if (!(min instanceof RealLiteral))
-					error("incompatible datatype: maximum is not real", minRef);
 			}
 			// check room default if config default is not set
-			String defaultValue = config.getAttribute()
-					.getDefaultValueLiteral();
-			if (config.getValue() == null && defaultValue != null) {
-				if (type == LiteralType.INT) {
-					if (min instanceof IntLiteral) {
-						try {
-							long lDefaultValue = converter.getLongConverter()
-									.toValue(defaultValue, null);
-							long lMax = ((IntLiteral) min).getValue();
-							if (lMax < lDefaultValue)
-								error("default value in ROOM model is less than this maximum",
-										minRef);
-						} catch (ValueConverterException e) {
-							warning("could not compare with int value in ROOM model (parse error)",
-									minRef);
-						}
-					} else
-						warning("could not compare with int value in ROOM model (incompatible datatypes)",
-								minRef);
-				} else if (type == LiteralType.REAL) {
-					if (min instanceof RealLiteral) {
-						try {
-							double dbDefaultValue = converter
-									.getRealConverter().toValue(defaultValue,
-											null);
-							double dbMax = ((RealLiteral) min).getValue();
-							if (dbMax < dbDefaultValue)
-								error("default value in ROOM model is less than this maximum",
-										minRef);
-						} catch (ValueConverterException e1) {
-							warning("could not compare with real value in ROOM model (parse error)",
-									minRef);
-						}
-					} else
-						warning("could not compare with real value in ROOM model (incompatible datatypes)",
-								minRef);
-				}
-
-			}
+//			String defaultValue = config.getAttribute()
+//					.getDefaultValueLiteral();
+//			if (config.getValue() == null && defaultValue != null) {
+//				if (type == LiteralType.INT) {
+//					if (min instanceof IntLiteral) {
+//						try {
+//							long lDefaultValue = converter.getLongConverter()
+//									.toValue(defaultValue, null);
+//							long lMax = ((IntLiteral) min).getValue();
+//							if (lMax < lDefaultValue)
+//								error("default value in ROOM model is less than this maximum",
+//										minRef);
+//						} catch (ValueConverterException e) {
+//							warning("could not compare with int value in ROOM model (parse error)",
+//									minRef);
+//						}
+//					} else
+//						warning("could not compare with int value in ROOM model (incompatible datatypes)",
+//								minRef);
+//				} else if (type == LiteralType.REAL) {
+//					if (min instanceof RealLiteral) {
+//						try {
+//							double dbDefaultValue = converter
+//									.getRealConverter().toValue(defaultValue,
+//											null);
+//							double dbMax = ((RealLiteral) min).getValue();
+//							if (dbMax < dbDefaultValue)
+//								error("default value in ROOM model is less than this maximum",
+//										minRef);
+//						} catch (ValueConverterException e1) {
+//							warning("could not compare with real value in ROOM model (parse error)",
+//									minRef);
+//						}
+//					} else
+//						warning("could not compare with real value in ROOM model (incompatible datatypes)",
+//								minRef);
+//				}
+//
+//			}
 		}
 
 	}
@@ -428,50 +421,47 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (primitive.getType() == LiteralType.INT) {
 				if (!(max instanceof IntLiteral))
 					error("incompatible datatype: maximum is not int", maxRef);
-			} else if (primitive.getType() == LiteralType.REAL) {
-				if (!(max instanceof RealLiteral))
-					error("incompatible datatype: maximum is not real", maxRef);
 			}
 			// check room default if config default is not set
-			String defaultValue = config.getAttribute()
-					.getDefaultValueLiteral();
-			if (config.getValue() == null && defaultValue != null) {
-				if (type == LiteralType.INT) {
-					if (max instanceof IntLiteral) {
-						try {
-							long lDefaultValue = converter.getLongConverter()
-									.toValue(defaultValue, null);
-							long lMax = ((IntLiteral) max).getValue();
-							if (lMax < lDefaultValue)
-								error("default value in ROOM model exceeds this maximum",
-										maxRef);
-						} catch (ValueConverterException e) {
-							warning("could not compare with int value in ROOM model (parse error)",
-									maxRef);
-						}
-					} else
-						warning("could not compare with int value in ROOM model (incompatible datatypes)",
-								maxRef);
-				} else if (type == LiteralType.REAL) {
-					if (max instanceof RealLiteral) {
-						try {
-							double dbDefaultValue = converter
-									.getRealConverter().toValue(defaultValue,
-											null);
-							double dbMax = ((RealLiteral) max).getValue();
-							if (dbMax < dbDefaultValue)
-								error("default value in ROOM model exceeds this maximum",
-										maxRef);
-						} catch (ValueConverterException e1) {
-							warning("could not compare with real value in ROOM model (parse error)",
-									maxRef);
-						}
-					} else
-						warning("could not compare with real value in ROOM model (incompatible datatypes)",
-								maxRef);
-				}
-
-			}
+//			String defaultValue = config.getAttribute()
+//					.getDefaultValueLiteral();
+//			if (config.getValue() == null && defaultValue != null) {
+//				if (type == LiteralType.INT) {
+//					if (max instanceof IntLiteral) {
+//						try {
+//							long lDefaultValue = converter.getLongConverter()
+//									.toValue(defaultValue, null);
+//							long lMax = ((IntLiteral) max).getValue();
+//							if (lMax < lDefaultValue)
+//								error("default value in ROOM model exceeds this maximum",
+//										maxRef);
+//						} catch (ValueConverterException e) {
+//							warning("could not compare with int value in ROOM model (parse error)",
+//									maxRef);
+//						}
+//					} else
+//						warning("could not compare with int value in ROOM model (incompatible datatypes)",
+//								maxRef);
+//				} else if (type == LiteralType.REAL) {
+//					if (max instanceof RealLiteral) {
+//						try {
+//							double dbDefaultValue = converter
+//									.getRealConverter().toValue(defaultValue,
+//											null);
+//							double dbMax = ((RealLiteral) max).getValue();
+//							if (dbMax < dbDefaultValue)
+//								error("default value in ROOM model exceeds this maximum",
+//										maxRef);
+//						} catch (ValueConverterException e1) {
+//							warning("could not compare with real value in ROOM model (parse error)",
+//									maxRef);
+//						}
+//					} else
+//						warning("could not compare with real value in ROOM model (incompatible datatypes)",
+//								maxRef);
+//				}
+//
+//			}
 		}
 	}
 
@@ -481,6 +471,77 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			root = root.eContainer();
 
 		return (ConfigModel) root;
+	}
+
+	private AttrClassConfig resolveAttrClassConfig(AttrInstanceConfig config) {
+		// AttrInstanceConfig -> root AttrInstanceConfig
+		List<Attribute> path = new ArrayList<Attribute>();
+		path.add(config.getAttribute());
+		AttrInstanceConfig source = config;
+		while (source.eContainer() instanceof AttrInstanceConfig) {
+			source = (AttrInstanceConfig) source.eContainer();
+			path.add(source.getAttribute());
+		}
+		Collections.reverse(path);
+		// ActorClassConfig or PortClassConfig
+		ConfigModel model = getConfigModel(source);
+		List<AttrClassConfig> rootClassAttrConfigs = new ArrayList<AttrClassConfig>();
+		if (source.eContainer() instanceof PortInstanceConfig) {
+			PortInstanceConfig portInstanceConfig = (PortInstanceConfig) source
+					.eContainer();
+			GeneralProtocolClass generalProtocol = portInstanceConfig.getItem()
+					.getGeneralProtocol();
+			PortClassConfig portClassConfig = null;
+			if (generalProtocol instanceof ProtocolClass) {
+				ProtocolClass protocol = (ProtocolClass) generalProtocol;
+				for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
+					if (cf.getProtocol().equals(protocol)) {
+						if (protocol.getRegular().equals(
+								ConfigUtil.getPortClass(portInstanceConfig)))
+							portClassConfig = cf.getRegular();
+						else
+							portClassConfig = cf.getConjugated();
+						break;
+					}
+				}
+			}
+			if (portClassConfig != null)
+				rootClassAttrConfigs = portClassConfig.getAttributes();
+		} else if (source.eContainer() instanceof ActorInstanceConfig) {
+			ActorInstanceConfig aiConfig = (ActorInstanceConfig) source
+					.eContainer();
+			ActorClass actor = ConfigUtil.getLastActorRef(aiConfig.getRoot(),
+					aiConfig.getPath()).getType();
+			// find ActorClassConfig
+			for (ActorClassConfig cf : model.getActorClassConfigs()) {
+				if (cf.getActor().equals(actor)) {
+					rootClassAttrConfigs = cf.getAttributes();
+					break;
+				}
+			}
+		}
+
+		// -> AttrClassConfig
+		AttrClassConfig target = null;
+		for (AttrClassConfig c : rootClassAttrConfigs)
+			if (c.getAttribute().equals(path.get(0)))
+				target = c;
+		if (target != null) {
+			path.remove(0);
+			for (Attribute a : path) {
+				AttrClassConfig match = null;
+				for (AttrClassConfig c : target.getAttributes())
+					if (c.getAttribute().equals(a)) {
+						match = c;
+						break;
+					}
+				if (match == null)
+					return null;
+				target = match;
+			}
+		}
+
+		return target;
 	}
 
 	private String refPathToString(RefPath path) {

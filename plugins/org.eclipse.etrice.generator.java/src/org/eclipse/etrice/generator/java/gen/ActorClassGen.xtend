@@ -57,9 +57,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 	'''
 		package «ac.getPackage»;
 		
-		«IF dataConfigExt.hasDynConfigReadAttributes(ac)»
+		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty»
 		import org.eclipse.etrice.runtime.java.config.DynConfigLock;«ENDIF»
-		«IF dataConfigExt.hasDynConfigReadAttributes(ac) || dataConfigExt.hasDynConfigWriteAttributes(ac)»
+		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 		import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -85,7 +85,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 			«ac.userCode(2)»
 			
-			«IF dataConfigExt.hasDynConfigWriteAttributes(ac)»
+			«IF !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 				private VariableService variableService;
 			«ENDIF»
 			
@@ -109,7 +109,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 			«configGenAddon.genMinMaxConstants(ac)»
 			«ac.attributes.attributes»
-			«FOR a : dataConfigExt.getAllDynConfigReadAttributes(ac)»
+			«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 				private DynConfigLock lock_«a.name»;
 			«ENDFOR»
 			«ac.operationsImplementation»
@@ -148,20 +148,20 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			}
 
-			«IF dataConfigExt.hasDynConfigReadAttributes(ac) || dataConfigExt.hasDynConfigWriteAttributes(ac)»
+			«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 				public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){
 					this(parent, name, port_addr, peer_addr);
 					
-					«IF dataConfigExt.hasDynConfigWriteAttributes(ac)»
+					«IF !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 						this.variableService = variableService;
 					«ENDIF»
-					«FOR a : dataConfigExt.getAllDynConfigReadAttributes(ac)»
+					«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 						lock_«a.name» = new DynConfigLock();
 					«ENDFOR»
 				}
 			«ENDIF»
 			
-			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getAllDynConfigReadAttributes(ac).toList), ac.name)»
+			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getDynConfigReadAttributes(ac)), ac.name)»
 			
 			«configGenAddon.genDynConfigGetterSetter(ac)»
 			

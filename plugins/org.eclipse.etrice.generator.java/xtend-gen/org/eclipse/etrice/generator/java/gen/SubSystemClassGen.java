@@ -2,6 +2,7 @@ package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -10,6 +11,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -22,8 +24,6 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.VariableServiceGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -72,6 +72,11 @@ public class SubSystemClassGen {
         SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
         CharSequence _generate = this.generate(root, ssi, _subSystemClass_3);
         this.fileAccess.generateFile(file, _generate);
+        SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+        boolean _hasVariableService = this.dataConfigExt.hasVariableService(_subSystemClass_4);
+        if (_hasVariableService) {
+          this.varService.doGenerate(root, ssi);
+        }
       }
     }
   }
@@ -567,7 +572,11 @@ public class SubSystemClassGen {
         _builder.append("}");
         _builder.newLine();
         {
-          if (false) {
+          String _path_10 = ai_2.getPath();
+          List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(_path_10);
+          boolean _isEmpty_5 = _dynConfigWriteAttributes.isEmpty();
+          boolean _not_2 = (!_isEmpty_5);
+          if (_not_2) {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append(", variableService");
@@ -584,15 +593,37 @@ public class SubSystemClassGen {
     _builder.append("\t\t");
     _builder.append("// apply instance attribute configurations");
     _builder.newLine();
-    _builder.append("\t\t");
-    EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
-    final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
-        public void apply(final ActorInstance ai) {
-          SubSystemClassGen.this.configGenAddon.genActorInstanceConfig(ai);
-        }
-      };
-    IterableExtensions.<ActorInstance>forEach(_allContainedInstances_8, _function);
-    _builder.newLineIfNotEmpty();
+    {
+      EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
+      for(final ActorInstance ai_3 : _allContainedInstances_8) {
+        _builder.append("\t\t");
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        ActorClass _actorClass_1 = ai_3.getActorClass();
+        String _name_6 = _actorClass_1.getName();
+        _builder.append(_name_6, "			");
+        _builder.append(" inst = (");
+        ActorClass _actorClass_2 = ai_3.getActorClass();
+        String _name_7 = _actorClass_2.getName();
+        _builder.append(_name_7, "			");
+        _builder.append(") instances[");
+        EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
+        int _indexOf_7 = _allContainedInstances_9.indexOf(ai_3);
+        _builder.append(_indexOf_7, "			");
+        _builder.append("];");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        CharSequence _genActorInstanceConfig = this.configGenAddon.genActorInstanceConfig(ai_3, "inst");
+        _builder.append(_genActorInstanceConfig, "			");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("// create the subsystem system port\t");
@@ -610,9 +641,9 @@ public class SubSystemClassGen {
     _builder.append("new Address[]{");
     _builder.newLine();
     {
-      EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
+      EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
       boolean _hasElements_4 = false;
-      for(final ActorInstance ai_3 : _allContainedInstances_9) {
+      for(final ActorInstance ai_4 : _allContainedInstances_10) {
         if (!_hasElements_4) {
           _hasElements_4 = true;
         } else {
@@ -620,9 +651,9 @@ public class SubSystemClassGen {
         }
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_SystemPort_");
-        EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
-        int _indexOf_7 = _allContainedInstances_10.indexOf(ai_3);
-        _builder.append(_indexOf_7, "					");
+        EList<ActorInstance> _allContainedInstances_11 = comp.getAllContainedInstances();
+        int _indexOf_8 = _allContainedInstances_11.indexOf(ai_4);
+        _builder.append(_indexOf_8, "					");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -636,9 +667,9 @@ public class SubSystemClassGen {
     _builder.append("new Address[]{");
     _builder.newLine();
     {
-      EList<ActorInstance> _allContainedInstances_11 = comp.getAllContainedInstances();
+      EList<ActorInstance> _allContainedInstances_12 = comp.getAllContainedInstances();
       boolean _hasElements_5 = false;
-      for(final ActorInstance ai_4 : _allContainedInstances_11) {
+      for(final ActorInstance ai_5 : _allContainedInstances_12) {
         if (!_hasElements_5) {
           _hasElements_5 = true;
         } else {
@@ -646,8 +677,8 @@ public class SubSystemClassGen {
         }
         _builder.append("\t\t\t\t\t");
         _builder.append("addr_item_");
-        String _path_10 = ai_4.getPath();
-        String _pathName_8 = this._roomExtensions.getPathName(_path_10);
+        String _path_11 = ai_5.getPath();
+        String _pathName_8 = this._roomExtensions.getPathName(_path_11);
         _builder.append(_pathName_8, "					");
         _builder.newLineIfNotEmpty();
       }
@@ -681,8 +712,8 @@ public class SubSystemClassGen {
       if (_hasVariableService_2) {
         _builder.append("\t\t\t");
         _builder.append("variableService = new ");
-        String _name_6 = comp.getName();
-        _builder.append(_name_6, "			");
+        String _name_8 = comp.getName();
+        _builder.append(_name_8, "			");
         _builder.append("VariableService(this);");
         _builder.newLineIfNotEmpty();
       }
