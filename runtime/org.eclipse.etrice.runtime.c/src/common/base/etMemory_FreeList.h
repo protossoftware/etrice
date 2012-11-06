@@ -26,4 +26,9 @@
  */
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots);
 
+etUInt32 etMemory_FreeList_freeHeapMem(void* heap);
+etUInt16 etMemory_FreeList_nObjects(void* heap, etUInt16 slot);
+etUInt16 etMemory_FreeList_sizeObjects(void* heap, etUInt16 slot);
+etUInt16 etMemory_FreeList_freeSlots(void* heap);
+
 #endif /* _ETMEMORY_FREE_LIST_H_ */

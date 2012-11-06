@@ -15,6 +15,7 @@
 #include "debugging/etMSCLogger.h"
 
 #define UNUSED_LIST		0
+#define DEBUG_FREE_LISTS	1
 
 typedef struct etFreeListObj {
 	struct etFreeListObj* next;
@@ -26,6 +27,11 @@ typedef struct etFreeListInfo {
 
 	/** the list head */
 	etFreeListObj* head;
+
+#if DEBUG_FREE_LISTS
+	etUInt16 nobjects;
+#endif
+
 } etFreeListInfo;
 
 typedef struct etFreeListMemory {
@@ -72,6 +78,9 @@ static void* etMemory_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
 				etFreeListObj* obj = self->freelists[slot].head;
 				self->freelists[slot].head = obj->next;
 				mem = (void *) obj;
+#if DEBUG_FREE_LISTS
+				--self->freelists[slot].nobjects;
+#endif
 			}
 			break;
 		}
@@ -95,6 +104,9 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 				/* we insert the object as new head */
 				((etFreeListObj*)obj)->next = self->freelists[slot].head;
 				self->freelists[slot].head = (etFreeListObj*)obj;
+#if DEBUG_FREE_LISTS
+				++self->freelists[slot].nobjects;
+#endif
 				break;
 			}
 			else if (slot_size == UNUSED_LIST) {
@@ -102,6 +114,9 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 				self->freelists[slot].objsize = size;
 				((etFreeListObj*)obj)->next = NULL;
 				self->freelists[slot].head = (etFreeListObj*)obj;
+#if DEBUG_FREE_LISTS
+				self->freelists[slot].nobjects = 1;
+#endif
 				break;
 			}
 		}
@@ -156,4 +171,37 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	ET_MSC_LOGGER_SYNC_EXIT
 
 	return &self->base;
+}
+
+etUInt32 etMemory_FreeList_freeHeapMem(void* heap) {
+	etFreeListMemory* self = (etFreeListMemory*) heap;
+	return ((etUInt8*)self)+self->base.size - self->current;
+}
+
+etUInt16 etMemory_FreeList_freeSlots(void* heap) {
+	etFreeListMemory* self = (etFreeListMemory*) heap;
+	etUInt16 free = 0;
+	int slot;
+
+	for (slot=0; slot<self->nslots; ++slot)
+		if (self->freelists[slot].objsize==UNUSED_LIST)
+			++free;
+
+	return free;
+}
+
+etUInt16 etMemory_FreeList_nObjects(void* heap, etUInt16 slot) {
+#if DEBUG_FREE_LISTS
+	etFreeListMemory* self = (etFreeListMemory*) heap;
+	if (slot<self->nslots)
+		return self->freelists[slot].nobjects;
+#endif
+	return 0;
+}
+
+etUInt16 etMemory_FreeList_sizeObjects(void* heap, etUInt16 slot) {
+	etFreeListMemory* self = (etFreeListMemory*) heap;
+	if (slot<self->nslots)
+		return self->freelists[slot].objsize;
+	return 0;
 }
