@@ -15,7 +15,6 @@ package org.eclipse.etrice.ui.structure.support;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -180,7 +179,7 @@ public class SPPSupport extends InterfaceItemSupport {
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, false, refport);
 				if (dlg.open()!=Window.OK)
-					throw new OperationCanceledException();
+					return;
 				
 				doneChanges = true;
 				updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));

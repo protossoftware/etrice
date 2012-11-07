@@ -757,6 +757,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	// TODO: is this the correct place?
 	public HashSet<DataClass> getReferencedDataClasses(DataClass cls){
 		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
+		if (cls.getBase()!=null)
+			dataClasses.add(cls.getBase());
 		getAttributeDataClasses(dataClasses, cls.getAttributes());
 		getOperationDataClasses(dataClasses, cls.getOperations());
 		return dataClasses;

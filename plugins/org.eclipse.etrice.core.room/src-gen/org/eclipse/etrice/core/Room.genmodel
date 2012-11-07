@@ -70,6 +70,7 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ExternalType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ExternalType/targetName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ExternalType/defaultValueLiteral"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DataClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/base"/>

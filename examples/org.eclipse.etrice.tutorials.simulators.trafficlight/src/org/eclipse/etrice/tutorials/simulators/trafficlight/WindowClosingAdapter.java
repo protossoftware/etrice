@@ -1,10 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2012 tieto deutschland gmbh (http://www.tieto.com)
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Thomas Jung (initial contribution)
+ *******************************************************************************/ 
+
+
 package org.eclipse.etrice.tutorials.simulators.trafficlight;
 
 
 /* WindowClosingAdapter.java */
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class WindowClosingAdapter
 extends WindowAdapter

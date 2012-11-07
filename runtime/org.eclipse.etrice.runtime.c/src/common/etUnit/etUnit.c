@@ -13,6 +13,7 @@
 #include "etUnit/etUnit.h"
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 #include "debugging/etLogger.h"
 
 
@@ -24,7 +25,7 @@ static FILE* etUnit_reportfile = NULL;
 /* counters */
 static etInt16 etUnit_nextCaseId = 1;
 
-#define ETUNIT_MAX_TEST_CASES		64
+#define ETUNIT_MAX_TEST_CASES		256
 static etBool etUnit_testcaseSuccess[ETUNIT_MAX_TEST_CASES];
 
 #define ETUNIT_FAILURE_TEXT_LEN 256
@@ -108,6 +109,11 @@ void etUnit_closeTestSuite(void) {
 etInt16 etUnit_openTestCase(const char* testCaseName) {
 	etInt16 caseId = etUnit_nextCaseId++;
 
+	if (caseId >= ETUNIT_MAX_TEST_CASES) {
+		etLogger_logErrorF("Too many test cases. Maximum number of test cases is %d\n", ETUNIT_MAX_TEST_CASES);
+		etLogger_logErrorF("ETUNIT_MAX_TEST_CASES (etUnit_openTestCase, %s: %d)", __FILE__, __LINE__);
+		exit(-1);
+	}
 	if (etUnit_reportfile != NULL) {
 		etLogger_fprintf(etUnit_reportfile, "tc start %d: %s\n", caseId, testCaseName);
 	}

@@ -15,7 +15,6 @@ package org.eclipse.etrice.ui.structure.support;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -216,7 +215,7 @@ public class PortSupport extends InterfaceItemSupport {
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
 					if (dlg.open()!=Window.OK)
-						throw new OperationCanceledException();
+						return;
 
 					doneChanges  = true;
 					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));

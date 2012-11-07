@@ -41,13 +41,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private JavaExtensions stdExt;
+  private JavaExtensions _javaExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
-  private ConfigExtension configExt;
+  private ConfigExtension _configExtension;
   
   @Inject
   private ConfigGenAddon configAddon;
@@ -69,12 +69,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_actorClass);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _path = this.roomExt.getPath(_actorClass_1);
+        String _path = this._roomExtensions.getPath(_actorClass_1);
         String path = (_generationTargetPath + _path);
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String file = this.stdExt.getJavaFileName(_actorClass_2);
+        String file = this._javaExtensions.getJavaFileName(_actorClass_2);
         String _plus = ("generating ActorClass implementation \'" + file);
         String _plus_1 = (_plus + "\' in \'");
         String _plus_2 = (_plus_1 + path);
@@ -109,11 +109,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
-      final HashSet<Attribute> dynConfigReadAttributes = this.configExt.getDynConfigAttributes(ac, true, false);
-      final HashSet<Attribute> dynConfigWriteAttributes = this.configExt.getDynConfigAttributes(ac, false, true);
+      final HashSet<Attribute> dynConfigReadAttributes = this._configExtension.getDynConfigAttributes(ac, true, false);
+      final HashSet<Attribute> dynConfigWriteAttributes = this._configExtension.getDynConfigAttributes(ac, false, true);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
-      String _package = this.roomExt.getPackage(ac);
+      String _package = this._roomExtensions.getPackage(ac);
       _builder.append(_package, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
@@ -174,7 +174,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
           _builder.append("import ");
-          String _package_1 = this.roomExt.getPackage(pc);
+          String _package_1 = this._roomExtensions.getPackage(pc);
           _builder.append(_package_1, "");
           _builder.append(".");
           String _name_1 = pc.getName();
@@ -235,11 +235,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- ports");
       _builder.newLine();
       {
-        List<Port> _endPorts = this.roomExt.getEndPorts(ac);
+        List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
         for(final Port ep : _endPorts) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName = this.roomExt.getPortClassName(ep);
+          String _portClassName = this._roomExtensions.getPortClassName(ep);
           _builder.append(_portClassName, "	");
           _builder.append(" ");
           String _name_4 = ep.getName();
@@ -258,7 +258,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final SAPRef sap : _strSAPs) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName_1 = this.roomExt.getPortClassName(sap);
+          String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName_1, "	");
           _builder.append(" ");
           String _name_5 = sap.getName();
@@ -277,7 +277,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc : _serviceImplementations) {
           _builder.append("\t");
           _builder.append("protected ");
-          String _portClassName_2 = this.roomExt.getPortClassName(svc);
+          String _portClassName_2 = this._roomExtensions.getPortClassName(svc);
           _builder.append(_portClassName_2, "	");
           _builder.append(" ");
           SPPRef _spp = svc.getSpp();
@@ -360,13 +360,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("// own ports");
       _builder.newLine();
       {
-        List<Port> _endPorts_1 = this.roomExt.getEndPorts(ac);
+        List<Port> _endPorts_1 = this._roomExtensions.getEndPorts(ac);
         for(final Port ep_1 : _endPorts_1) {
           _builder.append("\t\t");
           String _name_10 = ep_1.getName();
           _builder.append(_name_10, "		");
           _builder.append(" = new ");
-          String _portClassName_3 = this.roomExt.getPortClassName(ep_1);
+          String _portClassName_3 = this._roomExtensions.getPortClassName(ep_1);
           _builder.append(_portClassName_3, "		");
           _builder.append("(this, \"");
           String _name_11 = ep_1.getName();
@@ -420,7 +420,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _name_15 = sap_1.getName();
           _builder.append(_name_15, "		");
           _builder.append(" = new ");
-          String _portClassName_4 = this.roomExt.getPortClassName(sap_1);
+          String _portClassName_4 = this._roomExtensions.getPortClassName(sap_1);
           _builder.append(_portClassName_4, "		");
           _builder.append("(this, \"");
           String _name_16 = sap_1.getName();
@@ -451,7 +451,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _name_20 = _spp_1.getName();
           _builder.append(_name_20, "		");
           _builder.append(" = new ");
-          String _portClassName_5 = this.roomExt.getPortClassName(svc_1);
+          String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
           _builder.append(_portClassName_5, "		");
           _builder.append("(this, \"");
           SPPRef _spp_2 = svc_1.getSpp();
@@ -557,7 +557,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
       List<Attribute> _list = IterableExtensions.<Attribute>toList(dynConfigReadAttributes);
-      List<Attribute> _minus = this.roomExt.<Attribute>minus(_attributes_3, _list);
+      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _list);
       String _name_27 = ac.getName();
       CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_27);
       _builder.append(_attributeSettersGettersImplementation, "	");
@@ -574,10 +574,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- port getters");
       _builder.newLine();
       {
-        List<Port> _endPorts_2 = this.roomExt.getEndPorts(ac);
+        List<Port> _endPorts_2 = this._roomExtensions.getEndPorts(ac);
         for(final Port ep_2 : _endPorts_2) {
           _builder.append("\t");
-          String _portClassName_6 = this.roomExt.getPortClassName(ep_2);
+          String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
           String _name_28 = ep_2.getName();
           String _name_29 = ac.getName();
           CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_28, _name_29);
@@ -589,7 +589,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
         for(final SAPRef sap_2 : _strSAPs_2) {
           _builder.append("\t");
-          String _portClassName_7 = this.roomExt.getPortClassName(sap_2);
+          String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
           String _name_30 = sap_2.getName();
           String _name_31 = ac.getName();
           CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_30, _name_31);
@@ -601,7 +601,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
         for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
           _builder.append("\t");
-          String _portClassName_8 = this.roomExt.getPortClassName(svc_2);
+          String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
           SPPRef _spp_6 = svc_2.getSpp();
           String _name_32 = _spp_6.getName();
           String _name_33 = ac.getName();
@@ -635,7 +635,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _overridesStop = this.roomExt.overridesStop(ac);
+        boolean _overridesStop = this._roomExtensions.overridesStop(ac);
         boolean _not_7 = (!_overridesStop);
         if (_not_7) {
           _builder.append("\t");

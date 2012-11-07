@@ -219,7 +219,7 @@ public class RoomHelpers {
 	}
 	
 	private static String getDeepUserCode(EObject obj, EStructuralFeature code) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		
 		while (obj!=null) {
 			DetailCode dc = (DetailCode) obj.eGet(code);
@@ -1074,9 +1074,13 @@ public class RoomHelpers {
 	public static String getBaseExitCode(RefinedState state) {
 		return getBaseCode(state, RoomPackage.Literals.STATE__EXIT_CODE);
 	}
+
+	public static String getBaseDoCode(RefinedState state) {
+		return getBaseCode(state, RoomPackage.Literals.STATE__DO_CODE);
+	}
 	
 	private static String getBaseCode(RefinedState state, EStructuralFeature feat) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		
 		State base = state.getTarget();
 		while (base!=null) {
@@ -1185,7 +1189,7 @@ public class RoomHelpers {
 	}
 	
 	private static String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		
 		ActorClass baseAC = getActorClass(trans);
 		

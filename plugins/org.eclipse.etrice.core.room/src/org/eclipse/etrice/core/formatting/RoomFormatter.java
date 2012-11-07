@@ -96,6 +96,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getTrPointRule());
 		c.setLinewrap().around(f.getChoicePointRule());
 		c.setLinewrap().around(f.getTransitionRule());
+		c.setLinewrap().around(f.getRefinedTransitionRule());
 		c.setLinewrap().around(f.getTriggerRule());
 
 		// protocol

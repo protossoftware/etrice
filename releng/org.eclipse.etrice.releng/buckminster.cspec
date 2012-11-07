@@ -5,7 +5,6 @@
         <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.c.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.java.tests" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.integration.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.c" componentType="buckminster"/>

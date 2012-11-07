@@ -6,6 +6,7 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 /*--------------------- begin user code ---------------------*/
 import java.util.TimerTask;

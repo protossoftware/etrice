@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of TrafficLight" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.5/@link //@children.0/@children.6/@link //@children.1/@link //@children.1/@children.1/@link //@children.0/@children.6/@children.1/@link //@children.1/@children.2/@link //@children.1/@children.3/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@children.0/@children.7/@link //@connections.8/@link //@children.0/@children.8/@link //@connections.9/@link //@children.0/@children.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link" verticalGridUnit="10" version="0.9.0">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <link>
+    <businessObjects href="../trafficlight.example.room#ActorClass:TrafficLight"/>
+  </link>
+  <children xsi:type="pi:ContainerShape" active="true">
+    <properties key="obj-type" value="sg"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="597" height="533" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="517" height="453" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="517" height="453" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../trafficlight.example.room#StateGraph:TrafficLight$sg"/>
+    </link>
+    <children>
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="517" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="trp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="69" y="67">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="10" y="10"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#StateGraph:TrafficLight$sg"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="142" height="90" x="236" y="42">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="82" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="57" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="41" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="41" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="41" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$OpenSocket"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4" incomingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="82" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="OpenSocket"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="110" y="317">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$CarYellow"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.7" incomingConnections="//@connections.6"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="CarYellow"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="110" y="204">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$PedRed"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.6" incomingConnections="//@connections.5 //@connections.11"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="PedRed"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="110" y="396">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$CarGreen"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.12" incomingConnections="//@connections.7"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="CarGreen"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="139" height="90" x="239" y="122">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="79" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="15" height="8" x="54" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="39" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="39" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="39" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$Off_Blinking"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.5 //@connections.8"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="79" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="Off_Blinking"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" active="true">
+        <properties key="obj-type" value="trp"/>
+        <properties key="item-kind" value="entp"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="35">
+          <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="11" height="11" x="25" y="25"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0">
+            <points x="27" y="33"/>
+            <points x="33" y="27"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0">
+            <points x="27" y="27"/>
+            <points x="33" y="33"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../trafficlight.example.room#EntryPoint:TrafficLight$Off_Blinking$tp0"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.0/@children.6/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children>
+          <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="22" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp0"/>
+        </children>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="135" height="90" x="345" y="204">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="75" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="50" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="37" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="37" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="37" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$CarYellow2"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.9" incomingConnections="//@connections.8 //@connections.12"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="75" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="CarYellow2"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="353" y="317">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$CarRed"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.10" incomingConnections="//@connections.9"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="CarRed"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="128" height="90" x="349" y="396">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="68" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="43" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="34" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="34" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="34" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$PedGreen"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.11" incomingConnections="//@connections.10"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="68" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="PedGreen"/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="obj-type" value="sg"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../trafficlight.example.room#StateGraph:TrafficLight$Off_Blinking$sg"/>
+    </link>
+    <children visible="true">
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/Off_Blinking"/>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="trp"/>
+      <properties key="item-kind" value="entp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="360">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
+        <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points x="33" y="47"/>
+          <points x="47" y="33"/>
+        </graphicsAlgorithmChildren>
+        <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points x="33" y="33"/>
+          <points x="47" y="47"/>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#EntryPoint:TrafficLight$Off_Blinking$tp0"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp0"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="206" y="120">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$Off_Blinking$On"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" incomingConnections="//@connections.0 //@connections.2"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="On"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="120" height="90" x="472" y="120">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="35" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="30" y="24">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="30" y="24">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../trafficlight.example.room#SimpleState:TrafficLight$Off_Blinking$Off"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" incomingConnections="//@connections.1"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="Off"/>
+      </children>
+    </children>
+  </children>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.1/@anchors.0" end="//@children.1/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#ContinuationTransition:TrafficLight$Off_Blinking$tr0"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr0: "/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.2/@anchors.0" end="//@children.1/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$Off_Blinking$tr1"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr1: &lt;timeout:blinke..."/>
+    </connectionDecorators>
+    <bendpoints x="449" y="228"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.3/@anchors.0" end="//@children.1/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$Off_Blinking$tr2"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr2: &lt;timeout:blinke..."/>
+    </connectionDecorators>
+    <bendpoints x="444" y="181"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.1/@anchors.0" end="//@children.0/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#InitialTransition:TrafficLight$initial"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.2/@anchors.0" end="//@children.0/@children.6/@children.1/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr0"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-71" y="-16" font="//@fonts.0" value="tr0: &lt;established:tc..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.4/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr2"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-62" y="-14" font="//@fonts.0" value="tr2: &lt;greenForCar:co..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.4/@anchors.0" end="//@children.0/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr3"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-55" y="-2" font="//@fonts.0" value="tr3: &lt;timeout:timeou..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.5/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr1"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-55" y="-17" font="//@fonts.0" value="tr1: &lt;timeout:timeou..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.7/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr4"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-26" y="-10" font="//@fonts.0" value="tr4: &lt;greenForPed:co..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.7/@anchors.0" end="//@children.0/@children.8/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr5"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-29" y="2" font="//@fonts.0" value="tr5: &lt;timeout:timeou..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.8/@anchors.0" end="//@children.0/@children.9/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr6"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-30" y="-14" font="//@fonts.0" value="tr6: &lt;timeout:timeou..."/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.9/@anchors.0" end="//@children.0/@children.4/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr7"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-88" y="-55" font="//@fonts.0" value="tr7: &lt;greenForCar:co..."/>
+    </connectionDecorators>
+    <bendpoints x="314" y="316"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.5/@anchors.0" end="//@children.0/@children.7/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../trafficlight.example.room#TriggeredTransition:TrafficLight$tr8"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-87" y="38" font="//@fonts.0" value="tr8: &lt;greenForPed:co..."/>
+    </connectionDecorators>
+    <bendpoints x="312" y="458"/>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors/>
+  <colors red="200" green="200" blue="200"/>
+  <fonts name="Arial" size="8"/>
+  <fonts name="Arial" size="9" bold="true"/>
+</pi:Diagram>

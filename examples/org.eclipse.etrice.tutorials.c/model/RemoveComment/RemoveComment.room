@@ -1,5 +1,8 @@
 RoomModel RemoveComment {
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	
+	PrimitiveType file:ptInteger -> FILE default "0"
+
 	SubSystemClass RemoveCommentSubSys {
 		ActorRef Topref:ATop 
 	}

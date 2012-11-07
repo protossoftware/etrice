@@ -1188,7 +1188,20 @@ public class SubSystemClassGen {
               _builder.append("\t");
               String _genAttributeInitializer = this.genAttributeInitializer(ai, att);
               _builder.append(_genAttributeInitializer, "	");
-              _builder.append(",");
+              _builder.append(",\t/* ");
+              String _name_2 = att.getName();
+              _builder.append(_name_2, "	");
+              {
+                int _size_1 = att.getSize();
+                boolean _greaterThan = (_size_1 > 1);
+                if (_greaterThan) {
+                  _builder.append("[");
+                  int _size_2 = att.getSize();
+                  _builder.append(_size_2, "	");
+                  _builder.append("]");
+                }
+              }
+              _builder.append(" */");
               _builder.newLineIfNotEmpty();
             }
           }
@@ -1296,10 +1309,7 @@ public class SubSystemClassGen {
       String _xifexpression = null;
       boolean _equals = Objects.equal(value, null);
       if (_equals) {
-        RefableType _refType = att.getRefType();
-        DataType _type = _refType.getType();
-        int _size = att.getSize();
-        String _initializationWithDefaultValues = this.stdExt.initializationWithDefaultValues(_type, _size);
+        String _initializationWithDefaultValues = this.stdExt.initializationWithDefaultValues(att);
         _xifexpression = _initializationWithDefaultValues;
       } else {
         String _string = value.toString();

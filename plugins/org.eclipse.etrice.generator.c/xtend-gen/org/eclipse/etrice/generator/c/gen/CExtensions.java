@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -18,6 +17,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -28,6 +28,9 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 public class CExtensions implements ILanguageExtension {
   @Inject
   private IDiagnostician diagnostician;
+  
+  @Inject
+  private RoomExtensions _roomExtensions;
   
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
@@ -264,6 +267,11 @@ public class CExtensions implements ILanguageExtension {
     } else {
       String _xifexpression_1 = null;
       if ((dt instanceof ExternalType)) {
+        String _defaultValueLiteral = ((ExternalType) dt).getDefaultValueLiteral();
+        boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+        if (_notEquals) {
+          return ((ExternalType) dt).getDefaultValueLiteral();
+        }
         String _name = dt.getName();
         String _plus = ("cannot initialize external type " + _name);
         EObject _eContainer = dt.eContainer();
@@ -279,19 +287,16 @@ public class CExtensions implements ILanguageExtension {
           _builder.append("{");
           _builder.newLine();
           {
-            EList<Attribute> _attributes = dc.getAttributes();
+            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(dc);
             boolean _hasElements = false;
-            for(final Attribute att : _attributes) {
+            for(final Attribute att : _allAttributes) {
               if (!_hasElements) {
                 _hasElements = true;
               } else {
                 _builder.appendImmediate(",", "	");
               }
               _builder.append("\t");
-              RefableType _refType = att.getRefType();
-              DataType _type = _refType.getType();
-              int _size = att.getSize();
-              String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size);
+              String _initializationWithDefaultValues = this.initializationWithDefaultValues(att);
               _builder.append(_initializationWithDefaultValues, "	");
               _builder.newLineIfNotEmpty();
             }
@@ -311,36 +316,78 @@ public class CExtensions implements ILanguageExtension {
     String _xblockexpression = null;
     {
       final String dv = this.defaultValue(dt);
-      String _xifexpression = null;
-      boolean _greaterThan = (size > 1);
-      if (_greaterThan) {
-        String _xblockexpression_1 = null;
-        {
-          String res = "{";
-          int i = 0;
-          boolean _lessThan = (i < size);
-          boolean _while = _lessThan;
-          while (_while) {
-            {
-              String _plus = (res + dv);
-              res = _plus;
-              int _plus_1 = (i + 1);
-              i = _plus_1;
-              boolean _lessThan_1 = (i < size);
-              if (_lessThan_1) {
-                String _plus_2 = (res + ",");
-                res = _plus_2;
-              }
-            }
+      String _initializer = this.initializer(dv, size);
+      _xblockexpression = (_initializer);
+    }
+    return _xblockexpression;
+  }
+  
+  private String initializer(final String dv, final int size) {
+    String _xifexpression = null;
+    boolean _greaterThan = (size > 1);
+    if (_greaterThan) {
+      String _xblockexpression = null;
+      {
+        String res = "{";
+        int i = 0;
+        boolean _lessThan = (i < size);
+        boolean _while = _lessThan;
+        while (_while) {
+          {
+            String _plus = (res + dv);
+            res = _plus;
+            int _plus_1 = (i + 1);
+            i = _plus_1;
             boolean _lessThan_1 = (i < size);
-            _while = _lessThan_1;
+            if (_lessThan_1) {
+              String _plus_2 = (res + ",");
+              res = _plus_2;
+            }
           }
-          String _plus = (res + "}");
-          _xblockexpression_1 = (_plus);
+          boolean _lessThan_1 = (i < size);
+          _while = _lessThan_1;
         }
-        _xifexpression = _xblockexpression_1;
+        String _plus = (res + "}");
+        _xblockexpression = (_plus);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = dv;
+    }
+    return _xifexpression;
+  }
+  
+  public String initializationWithDefaultValues(final Attribute att) {
+    String _xblockexpression = null;
+    {
+      final String dv = att.getDefaultValueLiteral();
+      String _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(dv, null));
+      if (_notEquals) {
+        String _xifexpression_1 = null;
+        boolean _startsWith = dv.startsWith("{");
+        if (_startsWith) {
+          _xifexpression_1 = dv;
+        } else {
+          int _size = att.getSize();
+          String _initializer = this.initializer(dv, _size);
+          _xifexpression_1 = _initializer;
+        }
+        _xifexpression = _xifexpression_1;
       } else {
-        _xifexpression = dv;
+        String _xifexpression_2 = null;
+        RefableType _refType = att.getRefType();
+        boolean _isRef = _refType.isRef();
+        if (_isRef) {
+          _xifexpression_2 = "NULL";
+        } else {
+          RefableType _refType_1 = att.getRefType();
+          DataType _type = _refType_1.getType();
+          int _size_1 = att.getSize();
+          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_1);
+          _xifexpression_2 = _initializationWithDefaultValues;
+        }
+        _xifexpression = _xifexpression_2;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -400,35 +447,39 @@ public class CExtensions implements ILanguageExtension {
     String castTypeName = _xifexpression_1;
     String _plus = (castTypeName + "*");
     castTypeName = _plus;
+    String deRef = "*";
     RefableType _refType_4 = data.getRefType();
-    boolean _isRef = _refType_4.isRef();
-    if (_isRef) {
+    final boolean isRef = _refType_4.isRef();
+    RefableType _refType_5 = data.getRefType();
+    DataType _type_4 = _refType_5.getType();
+    final boolean isPrim = (_type_4 instanceof PrimitiveType);
+    if (isRef) {
       String _plus_1 = (typeName + "*");
       typeName = _plus_1;
       String _plus_2 = (castTypeName + "*");
       castTypeName = _plus_2;
+    } else {
+      boolean _not = (!isPrim);
+      if (_not) {
+        String _plus_3 = (typeName + "*");
+        typeName = _plus_3;
+        deRef = "";
+      }
     }
-    RefableType _refType_5 = data.getRefType();
-    DataType _type_4 = _refType_5.getType();
-    boolean _not = (!(_type_4 instanceof PrimitiveType));
-    if (_not) {
-      String _plus_3 = (typeName + "*");
-      typeName = _plus_3;
-      String _plus_4 = (castTypeName + "*");
-      castTypeName = _plus_4;
-    }
-    String _plus_5 = (typeName + " ");
+    String _plus_4 = (typeName + " ");
     String _name_1 = data.getName();
-    String _plus_6 = (_plus_5 + _name_1);
-    String _plus_7 = (_plus_6 + " = *((");
-    String _plus_8 = (_plus_7 + castTypeName);
-    final String typedData = (_plus_8 + ") generic_data);\n");
+    String _plus_5 = (_plus_4 + _name_1);
+    String _plus_6 = (_plus_5 + " = ");
+    String _plus_7 = (_plus_6 + deRef);
+    String _plus_8 = (_plus_7 + "((");
+    String _plus_9 = (_plus_8 + castTypeName);
+    final String typedData = (_plus_9 + ") generic_data);\n");
     String _name_2 = data.getName();
     final String dataArg = (", " + _name_2);
-    String _plus_9 = (", " + typeName);
-    String _plus_10 = (_plus_9 + " ");
+    String _plus_10 = (", " + typeName);
+    String _plus_11 = (_plus_10 + " ");
     String _name_3 = data.getName();
-    final String typedArgList = (_plus_10 + _name_3);
+    final String typedArgList = (_plus_11 + _name_3);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="GenInstanceDiagram" value="true"/>
+<stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="Lib" value="false"/>
+<listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.config}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.room}"/>
+</listAttribute>
+<booleanAttribute key="SaveGenModel" value="false"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+</launchConfiguration>

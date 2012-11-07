@@ -2039,11 +2039,11 @@ protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
  *
  * ExternalType:
  * 
- * 	"ExternalType" name=ID "->" targetName=FQN docu=Documentation?;
+ * 	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
 
-// "ExternalType" name=ID "->" targetName=FQN docu=Documentation?
+// "ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?
 protected class ExternalType_Group extends GroupToken {
 	
 	public ExternalType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2058,8 +2058,9 @@ protected class ExternalType_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ExternalType_DocuAssignment_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new ExternalType_TargetNameAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new ExternalType_DocuAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ExternalType_Group_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new ExternalType_TargetNameAssignment_3(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -2184,16 +2185,95 @@ protected class ExternalType_TargetNameAssignment_3 extends AssignmentToken  {
 
 }
 
-// docu=Documentation?
-protected class ExternalType_DocuAssignment_4 extends AssignmentToken  {
+// ("default" defaultValueLiteral=STRING)?
+protected class ExternalType_Group_4 extends GroupToken {
 	
-	public ExternalType_DocuAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ExternalType_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getExternalTypeAccess().getGroup_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExternalType_DefaultValueLiteralAssignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "default"
+protected class ExternalType_DefaultKeyword_4_0 extends KeywordToken  {
+	
+	public ExternalType_DefaultKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getExternalTypeAccess().getDefaultKeyword_4_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExternalType_TargetNameAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// defaultValueLiteral=STRING
+protected class ExternalType_DefaultValueLiteralAssignment_4_1 extends AssignmentToken  {
+	
+	public ExternalType_DefaultValueLiteralAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getExternalTypeAccess().getDocuAssignment_4();
+		return grammarAccess.getExternalTypeAccess().getDefaultValueLiteralAssignment_4_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExternalType_DefaultKeyword_4_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("defaultValueLiteral",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("defaultValueLiteral");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getExternalTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getExternalTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// docu=Documentation?
+protected class ExternalType_DocuAssignment_5 extends AssignmentToken  {
+	
+	public ExternalType_DocuAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getExternalTypeAccess().getDocuAssignment_5();
 	}
 
     @Override
@@ -2212,7 +2292,7 @@ protected class ExternalType_DocuAssignment_4 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDocumentationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getExternalTypeAccess().getDocuDocumentationParserRuleCall_4_0(); 
+				element = grammarAccess.getExternalTypeAccess().getDocuDocumentationParserRuleCall_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2224,7 +2304,8 @@ protected class ExternalType_DocuAssignment_4 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ExternalType_TargetNameAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new ExternalType_Group_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new ExternalType_TargetNameAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

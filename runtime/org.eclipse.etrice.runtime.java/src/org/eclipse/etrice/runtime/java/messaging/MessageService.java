@@ -61,7 +61,7 @@ public class MessageService extends Thread implements IMessageReceiver,
 		return address;
 	}
 
-	public void run() {
+	public synchronized void run() {
 		running = true;
 		while (running) {
 			pollOneMessage();

@@ -86,7 +86,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("rankdir=LR;");
+    _builder.append("rankdir=TD;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("node [shape=box];");

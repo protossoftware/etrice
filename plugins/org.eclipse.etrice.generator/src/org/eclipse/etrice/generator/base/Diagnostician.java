@@ -41,12 +41,12 @@ public class Diagnostician implements IDiagnostician {
 
 	public void error(String msg, EObject source, EStructuralFeature feature) {
 		validationFailed = true;
-		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
+		logger.logError("Validation error: "+ getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX), source);
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature, int idx) {
 		validationFailed = true;
-		logger.logInfo("Validation error: " + getMsgTxt(msg, source, feature, idx));
+		logger.logError("Validation error: " + getMsgTxt(msg, source, feature, idx), source);
 	}
 
 	public boolean isFailed() {

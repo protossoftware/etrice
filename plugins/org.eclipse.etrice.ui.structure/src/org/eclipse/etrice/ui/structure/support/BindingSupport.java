@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -87,6 +86,8 @@ public class BindingSupport {
 	static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
+			
+			private boolean doneChanges = false;
 			
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Binding", "create Binding");
@@ -168,7 +169,7 @@ public class BindingSupport {
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, null, sc);
 						if (dlg.open()!=Window.OK)
-							throw new OperationCanceledException();
+							return null;
 						
 						ep1.setSub(dlg.getSelected().getLeft());
 						ep2.setSub(dlg.getSelected().getRight());
@@ -179,6 +180,7 @@ public class BindingSupport {
 					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 					addContext.setNewObject(bind);
 					newConnection = (Connection) featureProvider.addIfPossible(addContext);
+					doneChanges = true;
 				}
 				
 				return newConnection;
@@ -235,6 +237,11 @@ public class BindingSupport {
 			private void endHighLightMatches() {
 				DecorationProvider.clearAllowedPortShapes();
 				getDiagramEditor().refresh();
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
 			}
 		}
 		

@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl#getTargetName <em>Target Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +46,26 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * @ordered
    */
   protected String targetName = TARGET_NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEFAULT_VALUE_LITERAL_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefaultValueLiteral()
+   * @generated
+   * @ordered
+   */
+  protected String defaultValueLiteral = DEFAULT_VALUE_LITERAL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -95,6 +116,29 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getDefaultValueLiteral()
+  {
+    return defaultValueLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDefaultValueLiteral(String newDefaultValueLiteral)
+  {
+    String oldDefaultValueLiteral = defaultValueLiteral;
+    defaultValueLiteral = newDefaultValueLiteral;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL, oldDefaultValueLiteral, defaultValueLiteral));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -102,6 +146,8 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
     {
       case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
         return getTargetName();
+      case RoomPackage.EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL:
+        return getDefaultValueLiteral();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,6 +164,9 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
     {
       case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
         setTargetName((String)newValue);
+        return;
+      case RoomPackage.EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,6 +185,9 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
       case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
         setTargetName(TARGET_NAME_EDEFAULT);
         return;
+      case RoomPackage.EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL:
+        setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -152,6 +204,8 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
     {
       case RoomPackage.EXTERNAL_TYPE__TARGET_NAME:
         return TARGET_NAME_EDEFAULT == null ? targetName != null : !TARGET_NAME_EDEFAULT.equals(targetName);
+      case RoomPackage.EXTERNAL_TYPE__DEFAULT_VALUE_LITERAL:
+        return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
     }
     return super.eIsSet(featureID);
   }
@@ -169,6 +223,8 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (targetName: ");
     result.append(targetName);
+    result.append(", defaultValueLiteral: ");
+    result.append(defaultValueLiteral);
     result.append(')');
     return result.toString();
   }

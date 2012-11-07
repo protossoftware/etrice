@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -308,7 +307,7 @@ public class ChoicePointSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ChoicePointPropertyDialog dlg = new ChoicePointPropertyDialog(shell, cp);
 				if (dlg.open()!=Window.OK)
-					throw new OperationCanceledException();
+					return;
 
 				doneChanges = true;
 				updateFigure(cp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));

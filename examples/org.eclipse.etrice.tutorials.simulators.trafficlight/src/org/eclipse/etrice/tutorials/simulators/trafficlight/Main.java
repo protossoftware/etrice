@@ -1,3 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2012 tieto deutschland gmbh (http://www.tieto.com)
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Thomas Jung (initial contribution)
+ *    
+ *******************************************************************************/ 
+
+
+
 package org.eclipse.etrice.tutorials.simulators.trafficlight;
 
 public class Main {
@@ -11,7 +25,7 @@ public class Main {
 			System.exit(0);
 		}
 
-		PedastrianLightWnd wnd = new PedastrianLightWnd(Integer.parseInt(args[0]));
+		new PedastrianLightWnd(Integer.parseInt(args[0]));
 	}
 
 	public static boolean checkArgs(String[] args) {

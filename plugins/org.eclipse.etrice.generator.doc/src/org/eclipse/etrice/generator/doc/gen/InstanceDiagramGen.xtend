@@ -58,7 +58,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 	
 	def generate(Root root, SubSystemInstance ssi, SubSystemClass ssc) {'''
 		digraph «ssi.name» {
-			rankdir=LR;
+			rankdir=TD;
 			node [shape=box];
 			«ssi.path.getPathName()» [label="«ssc.name»\n(«ssi.name»)" style=filled color=yellow];
 			«FOR ai : ssi.instances»

@@ -75,6 +75,7 @@
 			<fileset dir="${modellib.path}/model">
 				<include name="TimingService.room"/>
 				<include name="Types.room"/>
+				<include name="Language.room"/>
 			</fileset>
 		</copy>
 	</target>
@@ -111,6 +112,9 @@
 		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.c.Main" fork="true" failonerror="true">
 			<arg value="${c.tests.model.path}/ChoicePointTest.room"/>
 			<arg value="${c.tests.model.path}/HandlerTest.room"/>
+			<arg value="${c.tests.model.path}/SendingDataTestC.room"/>
+			
+			<!-- modelib.c -->
 			<!-- not needed yet
 				<arg value="${modellib.path}/model/TimingService.room"/>
 			-->
@@ -168,7 +172,8 @@
 		<mkdir dir="bin/HandlerTest"/>
 		<exec dir="bin/HandlerTest" executable="gcc">
 			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -202,6 +207,7 @@
 		<exec dir="bin/ChoicePointTest" executable="gcc">
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -229,6 +235,46 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 		</exec>
+		
+		<!-- compile and link SendingDataTestC -->
+		<mkdir dir="bin/SendingDataTestC"/>
+		<exec dir="bin/SendingDataTestC" executable="gcc">
+			<arg value="-I../../src-gen/ChoicePointTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../../src-gen/SendingDataTestC/MrPing.c"/>
+			<arg value="../../src-gen/SendingDataTestC/MrPong.c"/>
+			<arg value="../../src-gen/SendingDataTestC/PingPongData.c"/>
+			<arg value="../../src-gen/SendingDataTestC/PingPongDataDeep.c"/>
+			<arg value="../../src-gen/SendingDataTestC/PingPongDataDerived.c"/>
+			<arg value="../../src-gen/SendingDataTestC/PingPongProtocol.c"/>
+			<arg value="../../src-gen/SendingDataTestC/SendingDataTop.c"/>
+			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData.c"/>
+			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData_Runner.c"/>
+		</exec>
+		<exec dir="bin/SendingDataTestC" executable="gcc">
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-oSendingDataTestC.exe"/>
+			<arg value="MrPing.o"/>
+			<arg value="MrPong.o"/>
+			<arg value="PingPongData.o"/>
+			<arg value="PingPongDataDeep.o"/>
+			<arg value="PingPongDataDerived.o"/>
+			<arg value="PingPongProtocol.o"/>
+			<arg value="SendingDataTop.o"/>
+			<arg value="SubSys_SendingData.o"/>
+			<arg value="SubSys_SendingData_Runner.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+		</exec>
 	</target>
 
 	<!--
@@ -238,6 +284,7 @@
 		<mkdir dir="tmp/log"/>
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
 	</target>
 	
 	<!--
@@ -254,17 +301,24 @@
 			</fileset>
 		</path>
 
-		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.c.tests.ChoicePointTest"/>
 			<arg value="./tmp/ChoicePointTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 
-		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.c.tests.HandlerTest"/>
 			<arg value="./tmp/HandlerTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.SendingDataTestC"/>
+			<arg value="./tmp/SendingDataTestC.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -275,6 +329,7 @@
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CChoicePointTest.xml"/>
+		<move file="./tmp/SendingDataTestC.xml" tofile="./tmp/CSendingDataTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>

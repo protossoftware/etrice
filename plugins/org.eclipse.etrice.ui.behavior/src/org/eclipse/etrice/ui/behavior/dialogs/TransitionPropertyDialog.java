@@ -308,9 +308,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		
 		createMembersAndMessagesButtons(body);
-		
-		if (inherited)
-			disableAll(body);
 	}
 
 	private void disableAll(Composite parent) {

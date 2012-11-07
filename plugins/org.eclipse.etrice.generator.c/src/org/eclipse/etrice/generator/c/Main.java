@@ -121,6 +121,12 @@ public class Main extends AbstractGenerator {
 		if (genInstDiag) {
 			mainDocGenerator.doGenerate(genModel);
 		}
+		
+		if (diagnostician.isFailed()) {
+			logger.logInfo("validation failed during build of generator model");
+			logger.logError("-- terminating", null);
+			return false;
+		}
 		logger.logInfo("-- finished code generation");
 		
 		return true;

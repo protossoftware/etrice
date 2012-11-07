@@ -106,8 +106,6 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
-    _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;");
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
@@ -249,9 +247,6 @@ public class SubSystemClassGen {
         _builder.append(" itself => Systemport Address");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.append("Address addr_item_");
         String _path_1 = ai_1.getPath();
         String _pathName = this._roomExtensions.getPathName(_path_1);
@@ -290,7 +285,7 @@ public class SubSystemClassGen {
                     _builder.append("_");
                     _builder.append(i, "		");
                     _builder.append(" = new Address(0,");
-                    int _threadId_1 = pi.getThreadId();
+                    int _threadId_1 = ai_1.getThreadId();
                     _builder.append(_threadId_1, "		");
                     _builder.append(",");
                     int _objId_1 = pi.getObjId();
