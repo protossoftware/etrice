@@ -222,19 +222,21 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 			
 			«IF pc.handlesReceive(conj)»
-			switch (msg.getEvtId()) {
+			switch (msg->getEvtId()) {
 				«FOR hdlr : pc.getReceiveHandlers(conj)»
-					case «hdlr.msg.getCodeName()»:
+				case «pc.name»::«hdlr.msg.getCodeName()»:
 					{
 						«FOR command : hdlr.detailCode.commands»
-							«command»
+						«command»
 						«ENDFOR»
 					}
 					break;
 				«ENDFOR»
 				default:
-			«ENDIF»	getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+			«ENDIF»
+					getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
 			«IF pc.handlesReceive(conj)»
+					break;
 			}
 			«ENDIF»
 		}

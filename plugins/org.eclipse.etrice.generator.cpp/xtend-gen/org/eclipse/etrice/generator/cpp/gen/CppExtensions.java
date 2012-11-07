@@ -140,7 +140,7 @@ public class CppExtensions implements ILanguageExtension {
   }
   
   public String pointerLiteral() {
-    return "";
+    return "*";
   }
   
   public String nullPointer() {
@@ -236,12 +236,12 @@ public class CppExtensions implements ILanguageExtension {
       String _xifexpression_1 = null;
       if ((dt instanceof ExternalType)) {
         String _name = dt.getName();
-        String _plus = ("cannot initialize external type " + _name);
+        String _plus = ("initialize external type with default constructor" + _name);
         EObject _eContainer = dt.eContainer();
         EStructuralFeature _eContainingFeature = dt.eContainingFeature();
-        this.diagnostician.error(_plus, _eContainer, _eContainingFeature);
-        String _name_1 = dt.getName();
-        return ("cannot instantiate external data type " + _name_1);
+        this.diagnostician.warning(_plus, _eContainer, _eContainingFeature);
+        String _typeName = this._typeHelpers.typeName(dt);
+        return (_typeName + "()");
       } else {
         String _xblockexpression = null;
         {

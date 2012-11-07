@@ -607,7 +607,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         boolean _handlesReceive = this.roomExt.handlesReceive(pc, (conj).booleanValue());
         if (_handlesReceive) {
           _builder.append("\t\t");
-          _builder.append("switch (msg.getEvtId()) {");
+          _builder.append("switch (msg->getEvtId()) {");
           _builder.newLine();
           {
             List<MessageHandler> _receiveHandlers = this.roomExt.getReceiveHandlers(pc, (conj).booleanValue());
@@ -615,12 +615,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("case ");
+              String _name_2 = pc.getName();
+              _builder.append(_name_2, "			");
+              _builder.append("::");
               Message _msg = hdlr.getMsg();
               String _codeName = this.roomExt.getCodeName(_msg);
               _builder.append(_codeName, "			");
               _builder.append(":");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
+              _builder.append("\t");
               _builder.append("\t");
               _builder.append("{");
               _builder.newLine();
@@ -630,16 +634,18 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                 for(final String command : _commands) {
                   _builder.append("\t\t");
                   _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append(command, "				");
+                  _builder.append("\t\t");
+                  _builder.append(command, "					");
                   _builder.newLineIfNotEmpty();
                 }
               }
               _builder.append("\t\t");
               _builder.append("\t");
+              _builder.append("\t");
               _builder.append("}");
               _builder.newLine();
               _builder.append("\t\t");
+              _builder.append("\t");
               _builder.append("\t");
               _builder.append("break;");
               _builder.newLine();
@@ -649,14 +655,18 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t");
           _builder.append("default:");
           _builder.newLine();
-          _builder.append("\t\t");
         }
       }
-      _builder.append("\tgetActor().receiveEvent(*this, msg->getEvtId(),\tmsg->getData());");
-      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t\t");
+      _builder.append("getActor().receiveEvent(*this, msg->getEvtId(),\tmsg->getData());");
+      _builder.newLine();
       {
         boolean _handlesReceive_1 = this.roomExt.handlesReceive(pc, (conj).booleanValue());
         if (_handlesReceive_1) {
+          _builder.append("\t\t");
+          _builder.append("\t\t");
+          _builder.append("break;");
+          _builder.newLine();
           _builder.append("\t\t");
           _builder.append("}");
           _builder.newLine();
@@ -684,8 +694,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       {
         List<Message> _outgoing = this.roomExt.getOutgoing(pc, (conj).booleanValue());
         for(final Message m : _outgoing) {
-          String _name_2 = pc.getName();
-          CharSequence _sendMessage = this.sendMessage(m, _name_2, portClassName, (conj).booleanValue());
+          String _name_3 = pc.getName();
+          CharSequence _sendMessage = this.sendMessage(m, _name_3, portClassName, (conj).booleanValue());
           _builder.append(_sendMessage, "");
           _builder.newLineIfNotEmpty();
         }

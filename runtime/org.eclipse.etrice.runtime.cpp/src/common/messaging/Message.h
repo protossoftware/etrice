@@ -9,7 +9,7 @@
 #define MESSAGE_H_
 
 #include "common/messaging/Address.h"
-#include "platforms/generic/etDatatypes.h"
+#include "etDatatypes.h"
 #include <string>
 
 namespace etRuntime {

@@ -108,7 +108,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ac.name»(etRuntime::IRTObject* parent, std::string name, const std::vector<std::vector<etRuntime::Address> >& port_addr, 
 																		  const std::vector<std::vector<etRuntime::Address> >& peer_addr);
 
-				«attributeSettersGettersImplementation(ac.attributes, ac.name)»
+«««	TODO: check whether attribute setters/getters are necessary at all, if yes own cpp implementation is needed for *,[],& variables
+«««				«attributeSettersGettersImplementation(ac.attributes, ac.name)»
 				//--------------------- port getters
 			«FOR ep : ac.getEndPorts()»
 				«ep.portClassName.getterImplementation(ep.name, ac.name)»

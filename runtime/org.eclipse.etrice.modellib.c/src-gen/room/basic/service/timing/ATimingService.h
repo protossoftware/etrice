@@ -57,7 +57,6 @@ struct ATimingService {
 	etTimerControlBlock tcbs[10];
 	etTimerControlBlock* usedTcbsRoot;
 	etTimerControlBlock* freeTcbsRoot;
-
 	
 	
 		/* state machine variables */

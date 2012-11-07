@@ -88,7 +88,7 @@ class CppExtensions implements ILanguageExtension {
 		b.toString
 	}
 	
-	override String pointerLiteral() { "" }
+	override String pointerLiteral() { "*" }
 	override String nullPointer() { "0" }
 	override String voidPointer() { "void*" }
 
@@ -179,8 +179,8 @@ class CppExtensions implements ILanguageExtension {
 			return (dt as PrimitiveType).getDefaultValueLiteral
 		}
 		else if (dt instanceof ExternalType) {
-			diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
-			return "cannot instantiate external data type "+dt.name
+			diagnostician.warning("initialize external type with default constructor"+dt.name, dt.eContainer, dt.eContainingFeature)
+			return dt.typeName + "()"
 		}
 		else {
 			val dc = dt as DataClass

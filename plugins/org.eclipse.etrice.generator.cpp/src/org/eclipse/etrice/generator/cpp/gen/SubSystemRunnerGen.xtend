@@ -89,7 +89,7 @@ class SubSystemRunnerGen {
 			main_component.start(); // lifecycle start
 				
 			// application runs until quit 
-			waitForQuit();
+			waitForQuit(main_component);
 			
 			// end the lifecycle
 			main_component.stop(); // lifecycle stop
