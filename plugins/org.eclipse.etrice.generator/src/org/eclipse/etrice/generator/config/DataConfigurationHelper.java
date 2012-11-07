@@ -9,7 +9,7 @@
  * 		Juergen Haug
  * 
  *******************************************************************************/
-package org.eclipse.etrice.core.config;
+package org.eclipse.etrice.generator.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
+import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;

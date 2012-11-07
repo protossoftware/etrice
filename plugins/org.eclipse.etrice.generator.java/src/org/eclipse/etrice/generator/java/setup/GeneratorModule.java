@@ -41,7 +41,7 @@ public class GeneratorModule extends GeneratorBaseModule {
 
 		binder.bind(ITranslationProvider.class).to(JavaTranslationProvider.class);
 		
-		binder.bind(IDataConfiguration.class).to(org.eclipse.etrice.core.config.DataConfiguration.class);
+		binder.bind(IDataConfiguration.class).to(org.eclipse.etrice.generator.config.DataConfiguration.class);
 	}
 
 }

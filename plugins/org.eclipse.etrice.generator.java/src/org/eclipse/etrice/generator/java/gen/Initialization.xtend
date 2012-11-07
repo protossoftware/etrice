@@ -26,9 +26,9 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
 
 @Singleton
 class Initialization {
@@ -39,35 +39,40 @@ class Initialization {
 	@Inject IDataConfiguration dataConfigExt
 	@Inject ProcedureHelpers procedureHelpers
 	
-	def attributeInitialization(List<Attribute> attribs, EObject roomClass, boolean useClassDefaultsOnly) {
+	def attributeInitialization(List<Attribute> attribs, EObject roomClass, boolean useClassDefaultsOnly) {	
+		var tmp = ''''''
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«attributeInit(roomClass, new ArrayList<Attribute>.union(a), useClassDefaultsOnly)»
+				«tmp = dataConfigurationInit(roomClass, new ArrayList<Attribute>.union(a))»
+				«IF tmp.length==0»«(tmp = valueInit(new ArrayList<Attribute>.union(a), getRoomDefaulValue(a)))»«ENDIF»
+				«IF tmp.length==0»«defaultInit(a, useClassDefaultsOnly)»«ENDIF»
 			«ENDFOR»
 		'''
 	}
 	
-	def private attributeInit(EObject roomClass, List<Attribute> path, boolean useClassDefaultsOnly) {
+	def private dataConfigurationInit(EObject roomClass, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type
 		if(aType.dataClass){
-			var result = 
-				'''
-					«FOR e : (aType as DataClass).attributes»
-						«attributeInit(roomClass, path.union(e), useClassDefaultsOnly)»
-					«ENDFOR»
-				'''
-			if(result.length > 0)
-				return result
+			return '''
+				«FOR e : (aType as DataClass).attributes»
+					«dataConfigurationInit(roomClass, path.union(e))»
+				«ENDFOR»
+			'''
 		}
-		
-		var value = getInitValueLiteral(roomClass, path)
+		else if(aType.primitive)
+		 	return valueInit(path, getDataConfigValue(roomClass, path))
+		''''''
+	}
+	
+	def private valueInit(List<Attribute> path, String value){
+		if(value == null) return ''''''
+		var a = path.last
+		var aType = a.refType.type
 		var getter = if(path.size > 1)procedureHelpers.invokeGetters(path.take(path.size-1), null)+"." else ""
-		return 
 		'''
-			«IF value!=null»
-				«IF a.size == 0 || aType.characterType»
+			«IF a.size == 0 || aType.characterType»
 					«getter»«procedureHelpers.invokeSetter(a.name,null,value)»;
 				«ELSEIF value.startsWith("{")»
 					«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
@@ -79,28 +84,36 @@ class Initialization {
 						}
 						«getter»«procedureHelpers.invokeSetter(a.name,null,"_"+a.name)»;
 					}
-				«ENDIF»
-			«ELSEIF path.size == 1 && (aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly)»
+			«ENDIF»
+		'''
+	}
+	
+	def private defaultInit(Attribute a, boolean useClassDefaultsOnly){
+		'''
+			«IF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
 				«IF a.size==0»
 					«IF a.refType.isRef»
 						«a.name» = «languageExt.nullPointer()»;
 					«ELSE»
-						«a.name» = «languageExt.defaultValue(aType)»;
+						«a.name» = «languageExt.defaultValue(a.refType.type)»;
 					«ENDIF»
 				«ELSE»
-					«a.name» = new «aType.typeName»[«a.size»];
+					«a.name» = new «a.refType.type.typeName»[«a.size»];
 					«IF !useClassDefaultsOnly»
 						for (int i=0;i<«a.size»;i++){
-							«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«languageExt.defaultValue(aType)»«ENDIF»;
+							«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«languageExt.defaultValue(a.refType.type)»«ENDIF»;
 						}
 					«ENDIF»
 				«ENDIF»
 			«ENDIF»
 		'''
-		
 	}
 	
-	def private getInitValueLiteral(EObject roomClass, List<Attribute> path){
+	def private getRoomDefaulValue(Attribute a){
+		a.defaultValueLiteral
+	}
+	
+	def private String getDataConfigValue(EObject roomClass, List<Attribute> path){
 		var a = path.last
 		if(a.refType.type.primitive){
 			var aType = a.refType.type as PrimitiveType
@@ -112,14 +125,12 @@ class Initialization {
 						dataConfigExt.getAttrClassConfigValue(pc, pc.regular.equals(roomClass), path)
 					}
 			}
-			if(result != null)
-				return if(a.size == 0 || aType.characterType)
-					languageExt.toValueLiteral(aType, result)
-				else
-					// array syntax ?
-					'''{ «FOR s : result.split(",") SEPARATOR ' ,'»«languageExt.toValueLiteral(aType, s.trim)»«ENDFOR» }'''.toString
+			return if(result != null)
+					if(a.size > 0 && !aType.characterType)
+						'''{ «FOR e : result.split(',') SEPARATOR ", "»«languageExt.toValueLiteral(aType, e)»«ENDFOR»}'''
+					else 
+						languageExt.toValueLiteral(aType, result)
 		}
-		if(path.size == 1)
-			a.defaultValueLiteral
 	}
+	
 }

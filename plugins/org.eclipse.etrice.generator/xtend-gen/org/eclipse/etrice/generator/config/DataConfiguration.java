@@ -1,4 +1,4 @@
-package org.eclipse.etrice.core.config;
+package org.eclipse.etrice.generator.config;
 
 import com.google.common.base.Objects;
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.BooleanLiteral;
-import org.eclipse.etrice.core.config.DataConfigurationHelper;
 import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
@@ -25,6 +24,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.config.DataConfigurationHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

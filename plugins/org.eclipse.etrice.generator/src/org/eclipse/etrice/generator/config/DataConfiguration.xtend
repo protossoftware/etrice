@@ -1,4 +1,16 @@
-package org.eclipse.etrice.core.config
+/*******************************************************************************
+ * Copyright (c) 2012 Juergen Haug
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug
+ * 
+ *******************************************************************************/
+
+package org.eclipse.etrice.generator.config
 
 import java.util.ArrayList
 import java.util.List
@@ -11,6 +23,13 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.config.DataConfigurationHelper
+import org.eclipse.etrice.core.config.BooleanLiteral
+import org.eclipse.etrice.core.config.IntLiteral
+import org.eclipse.etrice.core.config.RealLiteral
+import org.eclipse.etrice.core.config.StringLiteral
+import org.eclipse.etrice.core.config.LiteralArray
+import org.eclipse.etrice.core.config.Literal
 
 class DataConfiguration implements IDataConfiguration {
 	
