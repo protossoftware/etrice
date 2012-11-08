@@ -39,7 +39,7 @@
                       <xsl:text>eTrice</xsl:text><xsl:value-of select="//releaseinfo"/>
               </xsl:when>
               <xsl:otherwise>
-                  eTrice 0.1
+                  eTrice 0.2
               </xsl:otherwise>
           </xsl:choose>
       </xsl:variable>

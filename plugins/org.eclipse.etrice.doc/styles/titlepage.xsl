@@ -79,7 +79,7 @@
                                 <xsl:text>Thomas Schuetz, Henrik Rentz-Reichert, Thomas Jung and contributors</xsl:text>
                             </fo:block>
                             <fo:block font-family="Helvetica" font-size="12pt" padding="10mm">
-                                <xsl:text>Copyright 2008 - 2010</xsl:text>
+                                <xsl:text>Copyright 2010 - 2012</xsl:text>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
