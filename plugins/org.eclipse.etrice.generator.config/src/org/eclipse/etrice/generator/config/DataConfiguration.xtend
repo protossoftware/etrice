@@ -23,7 +23,7 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.config.DataConfigurationHelper
+import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
 import org.eclipse.etrice.core.config.BooleanLiteral
 import org.eclipse.etrice.core.config.IntLiteral
 import org.eclipse.etrice.core.config.RealLiteral

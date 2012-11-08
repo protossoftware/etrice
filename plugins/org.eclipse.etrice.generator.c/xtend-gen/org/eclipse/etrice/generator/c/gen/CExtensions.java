@@ -245,12 +245,6 @@ public class CExtensions implements ILanguageExtension {
     return "void";
   }
   
-  public String toCharArrayExpr(final String s) {
-    String _plus = ("\"" + s);
-    String _plus_1 = (_plus + "\"");
-    return _plus_1;
-  }
-  
   public String superCall(final String baseClassName, final String method, final String args) {
     return "";
   }

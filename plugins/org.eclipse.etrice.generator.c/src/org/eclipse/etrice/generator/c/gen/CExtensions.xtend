@@ -151,9 +151,6 @@ class CExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
-	override String toCharArrayExpr(String s){
-		"\"" + s + "\"";
-	}
 	
 	override String superCall(String baseClassName, String method, String args) {
 		""

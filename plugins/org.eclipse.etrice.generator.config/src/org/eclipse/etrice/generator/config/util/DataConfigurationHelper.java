@@ -9,7 +9,7 @@
  * 		Juergen Haug
  * 
  *******************************************************************************/
-package org.eclipse.etrice.generator.config;
+package org.eclipse.etrice.generator.config.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

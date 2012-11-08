@@ -28,9 +28,6 @@ public interface IDataConfiguration {
 	
 	// static configuration
 	
-	/**
-	 * Array formatting: x,x,x,x,x
-	 */
 	public String getAttrClassConfigValue(ActorClass actor, List<Attribute> path);
 	public String getAttrClassConfigValue(ProtocolClass pc, boolean regular, List<Attribute> path);
 	public String getAttrClassConfigMinValue(ActorClass actor, List<Attribute> path);

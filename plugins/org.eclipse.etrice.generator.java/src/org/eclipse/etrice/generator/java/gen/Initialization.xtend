@@ -49,8 +49,7 @@ class Initialization {
 				«IF tmp.length==0»«defaultInit(a, useClassDefaultsOnly)»«ENDIF»
 			«ENDFOR»
 		'''
-	}
-	
+	}	
 	def private dataConfigurationInit(EObject roomClass, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type
@@ -66,21 +65,21 @@ class Initialization {
 		''''''
 	}
 	
-	def private valueInit(List<Attribute> path, String value){
-		if(value == null) return ''''''
+	def private valueInit(List<Attribute> path, String literalValue){
+		if(literalValue == null) return ''''''
 		var a = path.last
 		var aType = a.refType.type
 		var getter = if(path.size > 1)procedureHelpers.invokeGetters(path.take(path.size-1), null)+"." else ""
 		'''
 			«IF a.size == 0 || aType.characterType»
-					«getter»«procedureHelpers.invokeSetter(a.name,null,value)»;
-				«ELSEIF value.startsWith("{")»
-					«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
+					«getter»«procedureHelpers.invokeSetter(a.name,null,literalValue)»;
+				«ELSEIF literalValue.startsWith("{")»
+					«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «literalValue»''')»;
 				«ELSE»
 					{
 						«aType.typeName»[] _«a.name» = new «aType.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
-							_«a.name»[i] = «value»;
+							_«a.name»[i] = «literalValue»;
 						}
 						«getter»«procedureHelpers.invokeSetter(a.name,null,"_"+a.name)»;
 					}
@@ -109,8 +108,9 @@ class Initialization {
 		'''
 	}
 	
-	def private getRoomDefaulValue(Attribute a){
-		a.defaultValueLiteral
+	def String getRoomDefaulValue(Attribute a){ 
+		if(a.refType.type.primitive && a.defaultValueLiteral != null)
+			languageExt.toValueLiteral(a.refType.type as PrimitiveType, a.defaultValueLiteral)
 	}
 	
 	def private String getDataConfigValue(EObject roomClass, List<Attribute> path){
@@ -125,11 +125,8 @@ class Initialization {
 						dataConfigExt.getAttrClassConfigValue(pc, pc.regular.equals(roomClass), path)
 					}
 			}
-			return if(result != null)
-					if(a.size > 0 && !aType.characterType)
-						'''{ «FOR e : result.split(',') SEPARATOR ", "»«languageExt.toValueLiteral(aType, e)»«ENDFOR»}'''
-					else 
-						languageExt.toValueLiteral(aType, result)
+			if(result != null)
+				return languageExt.toValueLiteral(aType, result)
 		}
 	}
 	

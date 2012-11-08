@@ -119,10 +119,10 @@ public class Initialization {
     return _xblockexpression;
   }
   
-  private CharSequence valueInit(final List<Attribute> path, final String value) {
+  private CharSequence valueInit(final List<Attribute> path, final String literalValue) {
     CharSequence _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(value, null);
+      boolean _equals = Objects.equal(literalValue, null);
       if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         return _builder;
@@ -158,12 +158,12 @@ public class Initialization {
         if (_or) {
           _builder_1.append(getter, "");
           String _name = a.getName();
-          CharSequence _invokeSetter = this.procedureHelpers.invokeSetter(_name, null, value);
+          CharSequence _invokeSetter = this.procedureHelpers.invokeSetter(_name, null, literalValue);
           _builder_1.append(_invokeSetter, "");
           _builder_1.append(";");
           _builder_1.newLineIfNotEmpty();
         } else {
-          boolean _startsWith = value.startsWith("{");
+          boolean _startsWith = literalValue.startsWith("{");
           if (_startsWith) {
             _builder_1.append(getter, "");
             String _name_1 = a.getName();
@@ -172,7 +172,7 @@ public class Initialization {
             String _typeName = this._typeHelpers.typeName(aType);
             _builder_2.append(_typeName, "");
             _builder_2.append("[] ");
-            _builder_2.append(value, "");
+            _builder_2.append(literalValue, "");
             CharSequence _invokeSetter_1 = this.procedureHelpers.invokeSetter(_name_1, null, _builder_2.toString());
             _builder_1.append(_invokeSetter_1, "");
             _builder_1.append(";");
@@ -205,7 +205,7 @@ public class Initialization {
             String _name_3 = a.getName();
             _builder_1.append(_name_3, "		");
             _builder_1.append("[i] = ");
-            _builder_1.append(value, "		");
+            _builder_1.append(literalValue, "		");
             _builder_1.append(";");
             _builder_1.newLineIfNotEmpty();
             _builder_1.append("\t");
@@ -329,9 +329,27 @@ public class Initialization {
     return _builder;
   }
   
-  private String getRoomDefaulValue(final Attribute a) {
-    String _defaultValueLiteral = a.getDefaultValueLiteral();
-    return _defaultValueLiteral;
+  public String getRoomDefaulValue(final Attribute a) {
+    String _xifexpression = null;
+    boolean _and = false;
+    RefableType _refType = a.getRefType();
+    DataType _type = _refType.getType();
+    boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+    if (!_isPrimitive) {
+      _and = false;
+    } else {
+      String _defaultValueLiteral = a.getDefaultValueLiteral();
+      boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+      _and = (_isPrimitive && _notEquals);
+    }
+    if (_and) {
+      RefableType _refType_1 = a.getRefType();
+      DataType _type_1 = _refType_1.getType();
+      String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
+      String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) _type_1), _defaultValueLiteral_1);
+      _xifexpression = _valueLiteral;
+    }
+    return _xifexpression;
   }
   
   private String getDataConfigValue(final EObject roomClass, final List<Attribute> path) {
@@ -375,45 +393,10 @@ public class Initialization {
         }
       }
       String result = _switchResult;
-      String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(result, null));
       if (_notEquals) {
-        String _xifexpression_1 = null;
-        boolean _and = false;
-        int _size = a.getSize();
-        boolean _greaterThan = (_size > 0);
-        if (!_greaterThan) {
-          _and = false;
-        } else {
-          boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
-          boolean _not = (!_isCharacterType);
-          _and = (_greaterThan && _not);
-        }
-        if (_and) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{ ");
-          {
-            String[] _split = result.split(",");
-            boolean _hasElements = false;
-            for(final String e : _split) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(", ", "");
-              }
-              String _valueLiteral = this.languageExt.toValueLiteral(aType, e);
-              _builder.append(_valueLiteral, "");
-            }
-          }
-          _builder.append("}");
-          _xifexpression_1 = _builder.toString();
-        } else {
-          String _valueLiteral_1 = this.languageExt.toValueLiteral(aType, result);
-          _xifexpression_1 = _valueLiteral_1;
-        }
-        _xifexpression = _xifexpression_1;
+        return this.languageExt.toValueLiteral(aType, result);
       }
-      return _xifexpression;
     }
     return null;
   }

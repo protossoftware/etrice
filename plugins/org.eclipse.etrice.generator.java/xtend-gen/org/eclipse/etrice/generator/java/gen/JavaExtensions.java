@@ -155,12 +155,6 @@ public class JavaExtensions implements ILanguageExtension {
     return "void";
   }
   
-  public String toCharArrayExpr(final String s) {
-    String _plus = ("\"" + s);
-    String _plus_1 = (_plus + "\".toCharArray()");
-    return _plus_1;
-  }
-  
   public String superCall(final String baseClassName, final String method, final String args) {
     String _plus = ("super." + method);
     String _plus_1 = (_plus + "(");
@@ -170,6 +164,64 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String toValueLiteral(final PrimitiveType type, final String value) {
+    String _switchResult = null;
+    String _targetName = type.getTargetName();
+    final String _switchValue = _targetName;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"char")) {
+        _matched=true;
+        String _castValue = this.castValue(type, value);
+        _switchResult = _castValue;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"string")) {
+        _matched=true;
+        String _castValue_1 = this.castValue(type, value);
+        _switchResult = _castValue_1;
+      }
+    }
+    if (!_matched) {
+      boolean _contains = value.contains(",");
+      if (_contains) {
+        _matched=true;
+        String _xblockexpression = null;
+        {
+          String _replace = value.replace("{", "");
+          String _replace_1 = _replace.replace("}", "");
+          String _trim = _replace_1.trim();
+          String[] singleValues = _trim.split(",");
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("{ ");
+          {
+            boolean _hasElements = false;
+            for(final String v : singleValues) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(", ", "");
+              }
+              String _trim_1 = v.trim();
+              String _castValue_2 = this.castValue(type, _trim_1);
+              _builder.append(_castValue_2, "");
+            }
+          }
+          _builder.append(" }");
+          String _string = _builder.toString();
+          _xblockexpression = (_string);
+        }
+        _switchResult = _xblockexpression;
+      }
+    }
+    if (!_matched) {
+      String _castValue_2 = this.castValue(type, value);
+      _switchResult = _castValue_2;
+    }
+    return _switchResult;
+  }
+  
+  private String castValue(final PrimitiveType type, final String value) {
     String _targetName = type.getTargetName();
     final String _switchValue = _targetName;
     boolean _matched = false;
@@ -224,15 +276,20 @@ public class JavaExtensions implements ILanguageExtension {
           String _plus = ("\'" + value);
           return (_plus + "\'");
         } else {
-          return this.toCharArrayExpr(value);
+          String _replace = value.replace("\\", "\\\\");
+          String _replace_1 = _replace.replace("\"", "\\\"");
+          String _plus_1 = ("\"" + _replace_1);
+          return (_plus_1 + "\".toCharArray()");
         }
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"String")) {
         _matched=true;
-        String _plus_1 = ("\"" + value);
-        return (_plus_1 + "\"");
+        String _replace_2 = value.replace("\\", "\\\\");
+        String _replace_3 = _replace_2.replace("\"", "\\\"");
+        String _plus_2 = ("\"" + _replace_3);
+        return (_plus_2 + "\"");
       }
     }
     String _targetName_1 = type.getTargetName();

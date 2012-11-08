@@ -169,13 +169,6 @@ public interface ILanguageExtension {
 	String destructorReturnType();
 	
 	/**
-	 * 
-	 * @param s string text
-	 * @return expression assignable to char array
-	 */
-	String toCharArrayExpr(String s);
-	
-	/**
 	 * @param baseClassName the name of the base class
 	 * @param method the method to be called
 	 * @param arguments the argument list

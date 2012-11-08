@@ -171,7 +171,7 @@ RoomModel SendingDataTestJava {
 			Attribute i32Val: int32 = "4711"
 			Attribute i64Val: int64 = "11470815"
 			Attribute i32Array [ 10 ]: int32="{0,1,2,3,4,5,6,7,8,9}"
-			Attribute f32Val: float32="3.14f"
+			Attribute f32Val: float32="3.14"
 			Attribute f64Val: float64="7.987654321"
 			Attribute data: PingPongData
 			Attribute dataD: PingPongDataDerived
