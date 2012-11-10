@@ -19,7 +19,10 @@
  *
  * */
 
+#include <windows.h>
 #include <stdio.h>
+#include <process.h>
+
 
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
@@ -75,5 +78,17 @@ typedef float64 etFloat64;
 typedef FILE* etFileHandle;
 
 typedef int8 etAddressId;
+
+/*
+ * typedefs for threading
+ */
+
+typedef CRITICAL_SECTION etMutex;
+typedef HANDLE etThread;
+typedef HANDLE etSema;
+
+typedef int32 etStacksize;
+typedef int32 etPriority;
+typedef charPtr etThreadname;
 
 #endif /* _DATATYPES_H_ */
