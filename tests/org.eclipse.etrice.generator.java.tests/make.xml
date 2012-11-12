@@ -80,6 +80,7 @@
 		<mkdir dir="${output}"/>
 		<path id="clspath">
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin"/>
