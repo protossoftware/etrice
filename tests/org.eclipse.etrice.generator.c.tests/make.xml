@@ -128,7 +128,8 @@
 	-->
 	<target name="compile_runtime" depends="set_rp">
 		<mkdir dir="${c-runtime.path}/bin"/>
-		<exec dir="${c-runtime.path}/bin" executable="gcc">
+		<mkdir dir="${output}"/>
+		<exec dir="${c-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_runtime.txt">
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -147,7 +148,7 @@
 			<arg value="../src/platforms/generic/etPlatform.c"/>
 			<arg value="../src/platforms/generic/etTimer.c"/>
 		</exec>
-		<exec dir="${c-runtime.path}/bin" executable="ar">
+		<exec dir="${c-runtime.path}/bin" executable="ar" failonerror="true" output="${output}/compile_runtime.txt" append="true">
 			<arg value="-r"/>
 			<arg value="liborg.eclipse.etrice.runtime.c.a"/>
 			<arg value="etMSCLogger.o"/>
@@ -170,7 +171,7 @@
 
 		<!-- compile and link HandlerTest -->
 		<mkdir dir="bin/HandlerTest"/>
-		<exec dir="bin/HandlerTest" executable="gcc">
+		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt">
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
@@ -188,7 +189,7 @@
 			<arg value="../../src-gen/HandlerTest/Tester.c"/>
 			<arg value="../../src-gen/HandlerTest/TestProtocol.c"/>
 		</exec>
-		<exec dir="bin/HandlerTest" executable="gcc">
+		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
 			<arg value="-oHandlerTest.exe"/>
 			<arg value="HandlerTest_Top.o"/>
@@ -204,7 +205,7 @@
 		
 		<!-- compile and link ChoicepointTest -->
 		<mkdir dir="bin/ChoicePointTest"/>
-		<exec dir="bin/ChoicePointTest" executable="gcc">
+		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
@@ -222,7 +223,7 @@
 			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest_Runner.c"/>
 			<arg value="../../src-gen/ChoicePointTest/TestProtocol.c"/>
 		</exec>
-		<exec dir="bin/ChoicePointTest" executable="gcc">
+		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
 			<arg value="-oChoicePointTest.exe"/>
 			<arg value="CPTest_Top.o"/>
@@ -238,7 +239,7 @@
 		
 		<!-- compile and link SendingDataTestC -->
 		<mkdir dir="bin/SendingDataTestC"/>
-		<exec dir="bin/SendingDataTestC" executable="gcc">
+		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
@@ -259,7 +260,7 @@
 			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData.c"/>
 			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData_Runner.c"/>
 		</exec>
-		<exec dir="bin/SendingDataTestC" executable="gcc">
+		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
 			<arg value="-oSendingDataTestC.exe"/>
 			<arg value="MrPing.o"/>
