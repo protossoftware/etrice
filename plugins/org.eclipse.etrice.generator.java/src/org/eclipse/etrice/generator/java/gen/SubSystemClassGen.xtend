@@ -18,13 +18,12 @@ import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
-
+import org.eclipse.etrice.generator.base.IDataConfiguration
 
 @Singleton
 class SubSystemClassGen {
@@ -32,8 +31,8 @@ class SubSystemClassGen {
 	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
-	@Inject extension ConfigExtension
-	@Inject ConfigGenAddon configAddon
+	@Inject IDataConfiguration dataConfigExt
+	@Inject ConfigGenAddon configGenAddon
 	@Inject extension ProcedureHelpers
 
 	@Inject VariableServiceGen varService
@@ -46,7 +45,7 @@ class SubSystemClassGen {
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
-			if(ssi.subSystemClass.hasVariableService)
+			if(dataConfigExt.hasVariableService(ssi.subSystemClass))
 				varService.doGenerate(root, ssi);
 		}
 	}
@@ -54,7 +53,7 @@ class SubSystemClassGen {
 	def generate(Root root, SubSystemInstance comp, SubSystemClass cc) {'''
 		package «cc.getPackage()»;
 		
-		«IF cc.hasVariableService»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
+		«IF dataConfigExt.hasVariableService(cc)»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -168,23 +167,18 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 						}
-						«IF ai.configAttributes.exists(c | c.dynConfig)»
+						«IF !dataConfigExt.getDynConfigWriteAttributes(ai.path).empty»
 							, variableService
 						«ENDIF»
 					); 
 				«ENDFOR»
 				
 				// apply instance attribute configurations
-				«FOR ai : comp.allContainedInstances»
-					«IF !(ai.configAttributes.empty && ai.getConfigPorts.empty)»
-						{
-							«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
-							«configAddon.applyInstanceConfig("inst", ai.actorClass.name, ai.configAttributes)»
-							«FOR portConfig : ai.configPorts»
-								«configAddon.applyInstanceConfig(("inst."+portConfig.item.name.invokeGetter(ai.actorClass.name)), portConfig.item.portClassName, portConfig.attributes)»
-							«ENDFOR»
-						}
-					«ENDIF»
+				«FOR ai: comp.allContainedInstances»
+					{
+						«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
+						«configGenAddon.genActorInstanceConfig(ai, "inst")»
+					}
 				«ENDFOR»
 		
 				// create the subsystem system port	
@@ -204,17 +198,17 @@ class SubSystemClassGen {
 						});
 				}
 			
-				«IF cc.hasVariableService»
+				«IF dataConfigExt.hasVariableService(cc)»
 					private VariableService variableService;
 				«ENDIF»
 				
 				@Override
 				public void init(){
-					«IF cc.hasVariableService»
+					«IF dataConfigExt.hasVariableService(cc)»
 						variableService = new «comp.name»VariableService(this);
 					«ENDIF»
 					super.init();
-					«IF cc.hasVariableService»
+					«IF dataConfigExt.hasVariableService(cc)»
 						variableService.init();
 					«ENDIF»
 				}
@@ -222,7 +216,7 @@ class SubSystemClassGen {
 				@Override
 				public void stop(){
 					super.stop();
-					«IF cc.hasVariableService»
+					«IF dataConfigExt.hasVariableService(cc)»
 						variableService.stop();
 					«ENDIF»
 				}

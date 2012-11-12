@@ -35,7 +35,6 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
-import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -59,9 +58,6 @@ public class SubSystemClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
-  
-  @Inject
-  private ConfigExtension _configExtension;
   
   @Inject
   private ILanguageExtension languageExt;
@@ -1305,7 +1301,7 @@ public class SubSystemClassGen {
   private String genAttributeInitializer(final ActorInstance ai, final Attribute att) {
     String _xblockexpression = null;
     {
-      final String value = this._configExtension.getInitValueLiteral(att);
+      final String value = ((String) null);
       String _xifexpression = null;
       boolean _equals = Objects.equal(value, null);
       if (_equals) {

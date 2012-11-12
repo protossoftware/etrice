@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.java.setup;
 
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.MainGen;
@@ -39,6 +40,8 @@ public class GeneratorModule extends GeneratorBaseModule {
 		binder.bind(ILanguageExtension.class).to(JavaExtensions.class);
 
 		binder.bind(ITranslationProvider.class).to(JavaTranslationProvider.class);
+		
+		binder.bind(IDataConfiguration.class).to(org.eclipse.etrice.generator.config.DataConfiguration.class);
 	}
 
 }

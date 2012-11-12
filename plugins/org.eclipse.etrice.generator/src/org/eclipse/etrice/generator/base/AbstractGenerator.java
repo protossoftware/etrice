@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -128,13 +127,6 @@ public abstract class AbstractGenerator {
 		Injector roomInjector = new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
 		validator = roomInjector.getInstance(IResourceValidator.class);
 		org.eclipse.etrice.core.genmodel.SetupGenmodel.doSetup();
-	}
-	
-	/**
-	 * setup the Config model plug-in
-	 */
-	protected void setupConfigModel() {
-		ConfigStandaloneSetup.doSetup();
 	}
 
 	/**

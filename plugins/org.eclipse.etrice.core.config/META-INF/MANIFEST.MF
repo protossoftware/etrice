@@ -20,10 +20,10 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.1";visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.common.types;bundle-version="2.1.1",
  org.eclipse.etrice.core.room;bundle-version="0.2.0"
-Import-Package: org.apache.log4j,
- org.apache.commons.logging,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend.lib
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.services,

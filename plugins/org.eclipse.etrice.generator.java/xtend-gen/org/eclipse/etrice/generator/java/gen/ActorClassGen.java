@@ -3,7 +3,6 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -21,7 +20,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.generic.ConfigExtension;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -47,10 +46,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private RoomExtensions _roomExtensions;
   
   @Inject
-  private ConfigExtension _configExtension;
+  private IDataConfiguration dataConfigExt;
   
   @Inject
-  private ConfigGenAddon configAddon;
+  private ConfigGenAddon configGenAddon;
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
@@ -109,8 +108,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
         };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
-      final HashSet<Attribute> dynConfigReadAttributes = this._configExtension.getDynConfigAttributes(ac, true, false);
-      final HashSet<Attribute> dynConfigWriteAttributes = this._configExtension.getDynConfigAttributes(ac, false, true);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(ac);
@@ -119,7 +116,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _isEmpty = dynConfigReadAttributes.isEmpty();
+        List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
@@ -128,12 +126,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       {
         boolean _or = false;
-        boolean _isEmpty_1 = dynConfigReadAttributes.isEmpty();
+        List<Attribute> _dynConfigReadAttributes_1 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty_1 = _dynConfigReadAttributes_1.isEmpty();
         boolean _not_1 = (!_isEmpty_1);
         if (_not_1) {
           _or = true;
         } else {
-          boolean _isEmpty_2 = dynConfigWriteAttributes.isEmpty();
+          List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+          boolean _isEmpty_2 = _dynConfigWriteAttributes.isEmpty();
           boolean _not_2 = (!_isEmpty_2);
           _or = (_not_1 || _not_2);
         }
@@ -221,7 +221,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _isEmpty_3 = dynConfigWriteAttributes.isEmpty();
+        List<Attribute> _dynConfigWriteAttributes_1 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+        boolean _isEmpty_3 = _dynConfigWriteAttributes_1.isEmpty();
         boolean _not_3 = (!_isEmpty_3);
         if (_not_3) {
           _builder.append("\t");
@@ -297,7 +298,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _genMinMaxConstants = this.configAddon.genMinMaxConstants(ac);
+      CharSequence _genMinMaxConstants = this.configGenAddon.genMinMaxConstants(ac);
       _builder.append(_genMinMaxConstants, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -306,7 +307,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_attributes_1, "	");
       _builder.newLineIfNotEmpty();
       {
-        for(final Attribute a : dynConfigReadAttributes) {
+        List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        for(final Attribute a : _dynConfigReadAttributes_2) {
           _builder.append("\t");
           _builder.append("private DynConfigLock lock_");
           String _name_7 = a.getName();
@@ -352,7 +354,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_2 = ac.getAttributes();
-      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_2, false);
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_2, ac, false);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -503,12 +505,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         boolean _or_1 = false;
-        boolean _isEmpty_4 = dynConfigReadAttributes.isEmpty();
+        List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+        boolean _isEmpty_4 = _dynConfigReadAttributes_3.isEmpty();
         boolean _not_4 = (!_isEmpty_4);
         if (_not_4) {
           _or_1 = true;
         } else {
-          boolean _isEmpty_5 = dynConfigWriteAttributes.isEmpty();
+          List<Attribute> _dynConfigWriteAttributes_2 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+          boolean _isEmpty_5 = _dynConfigWriteAttributes_2.isEmpty();
           boolean _not_5 = (!_isEmpty_5);
           _or_1 = (_not_4 || _not_5);
         }
@@ -527,7 +531,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.newLine();
           {
-            boolean _isEmpty_6 = dynConfigWriteAttributes.isEmpty();
+            List<Attribute> _dynConfigWriteAttributes_3 = this.dataConfigExt.getDynConfigWriteAttributes(ac);
+            boolean _isEmpty_6 = _dynConfigWriteAttributes_3.isEmpty();
             boolean _not_6 = (!_isEmpty_6);
             if (_not_6) {
               _builder.append("\t");
@@ -537,7 +542,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           {
-            for(final Attribute a_1 : dynConfigReadAttributes) {
+            List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+            for(final Attribute a_1 : _dynConfigReadAttributes_4) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("lock_");
@@ -556,8 +562,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
-      List<Attribute> _list = IterableExtensions.<Attribute>toList(dynConfigReadAttributes);
-      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _list);
+      List<Attribute> _dynConfigReadAttributes_5 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_5);
       String _name_27 = ac.getName();
       CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_27);
       _builder.append(_attributeSettersGettersImplementation, "	");
@@ -565,7 +571,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _genDynConfigGetterSetter = this.configAddon.genDynConfigGetterSetter(ac);
+      CharSequence _genDynConfigGetterSetter = this.configGenAddon.genDynConfigGetterSetter(ac);
       _builder.append(_genDynConfigGetterSetter, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
