@@ -217,7 +217,9 @@ RoomModel ConfigTest {
 			Attribute float_i: float32 = "256"
 			Operation varCheck():boolean {
 				"int caseId = etUnit_openTestCase(\"ConfigTest_case_PortProtocol_regular\");"
-				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", float_r == 4 && float_c == 3 && float_i == 25);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"float_r: <|MODEL_LOCATION|>\", 4.f, float_r, 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"float_c: <|MODEL_LOCATION|>\", 3.f, float_c, 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"float_i: <|MODEL_LOCATION|>\", 25.f, float_i, 0.1f);"
 				"etUnit_testFinished(caseId);"
 				"return etUnit_isSuccess(caseId);"
 			}
@@ -232,10 +234,15 @@ RoomModel ConfigTest {
 			Attribute array2_i [ 2 ]: int64 = "{0,0}"
 			Operation varCheck():boolean {
 				"int caseId = etUnit_openTestCase(\"ConfigTest_case_PortProtocol_conjugated\");"
-				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array1_r[0] == 1000 && array1_c[0] == 1 && array1_i[0] == 256);"
-				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_r[0] == 11 && array2_r[1] == 22);"
-				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_c[0] == 16 && array2_c[1] == 32);"
-				"EXPECT_TRUE(caseId,\"<|MODEL_LOCATION|>\", array2_i[0] == 1 && array2_i[1] == 2);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"array1_r[0]: <|MODEL_LOCATION|>\", 1000.f, array1_r[0], 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"array1_c[0]: <|MODEL_LOCATION|>\", 1.f, array1_c[0], 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"array1_i[0]: <|MODEL_LOCATION|>\", 256.f, array1_i[0], 0.1f);"
+				"EXPECT_TRUE(caseId,\"array2_r[0]: <|MODEL_LOCATION|>\", array2_r[0] == 11);"
+				"EXPECT_TRUE(caseId,\"array2_r[1]: <|MODEL_LOCATION|>\", array2_r[1] == 22);"
+				"EXPECT_TRUE(caseId,\"array2_c[0]: <|MODEL_LOCATION|>\", array2_c[0] == 16);"
+				"EXPECT_TRUE(caseId,\"array2_c[1]: <|MODEL_LOCATION|>\", array2_c[1] == 32);"
+				"EXPECT_TRUE(caseId,\"array2_i[0]: <|MODEL_LOCATION|>\", array2_i[0] == 1);"
+				"EXPECT_TRUE(caseId,\"array2_i[1]: <|MODEL_LOCATION|>\", array2_i[1] == 2);"
 				"etUnit_testFinished(caseId);"
 				"return etUnit_isSuccess(caseId);"
 			}
