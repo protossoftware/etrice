@@ -19,15 +19,15 @@
  *
  * */
 
+#include <stdio.h>
+
 #if defined __MINGW32__
 #include <windows.h>
+#include <process.h>
 #elif defined __GNUC__
 #else
 #error
 #endif
-
-#include <stdio.h>
-#include <process.h>
 
 
 /* unsigned integer datatypes */
@@ -52,7 +52,9 @@ typedef char* charPtr;
 
 /* boolean datatypes and values */
 typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-// typedef bool boolean;
+#ifndef __MINGW32__
+	typedef bool boolean;
+#endif
 
 #ifndef TRUE
 	#define TRUE 1
