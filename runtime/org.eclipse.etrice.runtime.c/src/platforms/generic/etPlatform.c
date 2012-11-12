@@ -25,8 +25,10 @@ void etUserExit(void){ }
 
 /* platform specific functions */
 
+#if defined __MINGW32__
+
 /******************thread********************/
-void etThread_construct(etThread* self, etThreadname name,void (*func)(void *),etStacksize stacksize, etPriority prio){
+void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){
 	   *self = (HANDLE)_beginthread( func, stacksize, NULL );
 	   SetThreadPriority(*self,THREAD_PRIORITY_NORMAL);
 }
@@ -59,3 +61,27 @@ void etSema_waitForWakeup(etSema* self){
 	WaitForSingleObject( self, INFINITE );
 }
 /*********************************************/
+
+#elif defined __GNUC__
+
+/******************thread********************/
+void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){}
+
+void etThread_destruct(etThread* self){}
+
+/*****************mutex**********************/
+void etMutex_construct(etMutex* self){}
+void etMutex_destruct(etMutex* self){}
+void etMutex_enter(etMutex* self){}
+void etMutex_leave(etMutex* self){}
+
+/********************semaphore****************/
+void etSema_contruct(etSema* self){}
+void etSema_destruct(etSema* self){}
+
+void etSema_wakeup(etSema* self){}
+
+void etSema_waitForWakeup(etSema* self){}
+/*********************************************/
+
+#endif

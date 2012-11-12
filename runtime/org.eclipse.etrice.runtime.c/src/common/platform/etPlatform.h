@@ -23,7 +23,7 @@
 /* platform specific functions */
 
 /******************thread********************/
-void etThread_construct(etThread* self, etThreadname name,void (*func)(void *),etStacksize stacksize, etPriority prio);
+void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio);
 void etThread_destruct(etThread* self);
 
 /*****************mutex**********************/

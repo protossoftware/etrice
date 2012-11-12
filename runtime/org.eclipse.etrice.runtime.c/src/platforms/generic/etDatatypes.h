@@ -19,7 +19,13 @@
  *
  * */
 
+#if defined __MINGW32__
 #include <windows.h>
+#elif defined __GNUC__
+#else
+#error
+#endif
+
 #include <stdio.h>
 #include <process.h>
 
@@ -83,12 +89,29 @@ typedef int8 etAddressId;
  * typedefs for threading
  */
 
-typedef CRITICAL_SECTION etMutex;
-typedef HANDLE etThread;
-typedef HANDLE etSema;
+#if defined __MINGW32__
 
-typedef int32 etStacksize;
-typedef int32 etPriority;
-typedef charPtr etThreadname;
+	typedef CRITICAL_SECTION etMutex;
+	typedef HANDLE etThread;
+	typedef HANDLE etSema;
+
+	typedef int32 etStacksize;
+	typedef int32 etPriority;
+	typedef charPtr etThreadname;
+
+#elif defined __GNUC__
+
+	/* dummy for LINUX/UNIX */
+	typedef int etMutex;
+	typedef int etThread;
+	typedef int etSema;
+
+	typedef int32 etStacksize;
+	typedef int32 etPriority;
+	typedef charPtr etThreadname;
+
+#else
+	#error
+#endif
 
 #endif /* _DATATYPES_H_ */
