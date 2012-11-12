@@ -149,12 +149,16 @@ public class DataConfigurationHelper {
 	private static void collectConfigs(ProtocolClassConfig protocolConfig,
 			Map<String, AttrClassConfig> map) {
 		String path = "/" + protocolConfig.getProtocol().getName();
-		for (AttrClassConfig c : protocolConfig.getRegular().getAttributes())
-			collectConfigs(c, path + "/regular/" + c.getAttribute().getName(),
-					map);
-		for (AttrClassConfig c : protocolConfig.getConjugated().getAttributes())
-			collectConfigs(c, path + "/conjugated/"
-					+ c.getAttribute().getName(), map);
+		if (protocolConfig.getRegular() != null)
+			for (AttrClassConfig c : protocolConfig.getRegular()
+					.getAttributes())
+				collectConfigs(c, path + "/regular/"
+						+ c.getAttribute().getName(), map);
+		if (protocolConfig.getConjugated() != null)
+			for (AttrClassConfig c : protocolConfig.getConjugated()
+					.getAttributes())
+				collectConfigs(c, path + "/conjugated/"
+						+ c.getAttribute().getName(), map);
 	}
 
 	private static void collectConfigs(ActorClassConfig actorConfig,
