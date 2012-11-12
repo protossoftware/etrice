@@ -216,7 +216,7 @@ class CExtensions implements ILanguageExtension {
 				dv.initializer(att.size)
 		}
 		else if (att.refType.ref) {
-			"NULL"
+			"NULL".initializer(att.size)
 		}
 		else
 			att.refType.type.initializationWithDefaultValues(att.size)
