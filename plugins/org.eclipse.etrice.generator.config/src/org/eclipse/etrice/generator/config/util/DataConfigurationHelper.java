@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
@@ -127,7 +128,7 @@ public class DataConfigurationHelper {
 			String path, Map<String, AttrInstanceConfig> map) {
 		for (AttrInstanceConfig c : actorConfig.getAttributes()) {
 			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
-
+			
 			if (c.isDynConfig()) {
 				List<AttrInstanceConfig> list = dynActorInstanceAttrMap
 						.get(path);
@@ -143,6 +144,10 @@ public class DataConfigurationHelper {
 				list.add(c);
 				dynActorClassAttrMap.put(ac, list);
 			}
+		}
+		for(PortInstanceConfig c : actorConfig.getPorts()){
+			for(AttrInstanceConfig a : c.getAttributes())
+				collectConfigs(a, path+"/"+c.getItem().getName()+"/"+a.getAttribute().getName(), map);
 		}
 	}
 

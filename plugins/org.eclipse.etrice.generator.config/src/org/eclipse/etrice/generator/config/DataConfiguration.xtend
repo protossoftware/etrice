@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.config.RealLiteral
 import org.eclipse.etrice.core.config.StringLiteral
 import org.eclipse.etrice.core.config.LiteralArray
 import org.eclipse.etrice.core.config.Literal
+import org.eclipse.etrice.core.room.InterfaceItem
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -72,6 +73,11 @@ class DataConfiguration implements IDataConfiguration {
 	
 	override getAttrInstanceConfigValue(ActorInstance ai, List<Attribute> path) {
 		var id = ai.path+"/"+path.toStringPath
+		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
+	}
+	
+	override getAttrInstanceConfigValue(ActorInstance ai, InterfaceItem port, List<Attribute> path) {
+		var id = ai.path+"/"+port.name+"/"+path.toStringPath
 		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
 	}
 	

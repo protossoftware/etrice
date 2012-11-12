@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
@@ -130,6 +131,24 @@ public class DataConfiguration implements IDataConfiguration {
       String _plus = (_path + "/");
       String _stringPath = this.toStringPath(path);
       String id = (_plus + _stringPath);
+      AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
+      LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
+      String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
+      _xblockexpression = (_stringExpr);
+    }
+    return _xblockexpression;
+  }
+  
+  public String getAttrInstanceConfigValue(final ActorInstance ai, final InterfaceItem port, final List<Attribute> path) {
+    String _xblockexpression = null;
+    {
+      String _path = ai.getPath();
+      String _plus = (_path + "/");
+      String _name = port.getName();
+      String _plus_1 = (_plus + _name);
+      String _plus_2 = (_plus_1 + "/");
+      String _stringPath = this.toStringPath(path);
+      String id = (_plus_2 + _stringPath);
       AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
       LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
       String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
