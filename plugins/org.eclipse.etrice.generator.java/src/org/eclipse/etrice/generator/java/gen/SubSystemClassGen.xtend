@@ -175,10 +175,13 @@ class SubSystemClassGen {
 				
 				// apply instance attribute configurations
 				«FOR ai: comp.allContainedInstances»
-					{
-						«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
-						«configGenAddon.genActorInstanceConfig(ai, "inst")»
-					}
+					«val cfg = configGenAddon.genActorInstanceConfig(ai, "inst")»
+					«IF cfg.length>0»
+						{
+							«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
+							«cfg»
+						}
+					«ENDIF»
 				«ENDFOR»
 		
 				// create the subsystem system port	

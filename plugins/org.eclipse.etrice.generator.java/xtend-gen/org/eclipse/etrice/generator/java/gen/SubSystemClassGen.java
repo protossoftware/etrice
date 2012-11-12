@@ -597,31 +597,39 @@ public class SubSystemClassGen {
       EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
       for(final ActorInstance ai_3 : _allContainedInstances_8) {
         _builder.append("\t\t");
-        _builder.append("{");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        ActorClass _actorClass_1 = ai_3.getActorClass();
-        String _name_6 = _actorClass_1.getName();
-        _builder.append(_name_6, "			");
-        _builder.append(" inst = (");
-        ActorClass _actorClass_2 = ai_3.getActorClass();
-        String _name_7 = _actorClass_2.getName();
-        _builder.append(_name_7, "			");
-        _builder.append(") instances[");
-        EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
-        int _indexOf_7 = _allContainedInstances_9.indexOf(ai_3);
-        _builder.append(_indexOf_7, "			");
-        _builder.append("];");
+        final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_3, "inst");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        CharSequence _genActorInstanceConfig = this.configGenAddon.genActorInstanceConfig(ai_3, "inst");
-        _builder.append(_genActorInstanceConfig, "			");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          int _length = cfg.length();
+          boolean _greaterThan = (_length > 0);
+          if (_greaterThan) {
+            _builder.append("\t\t");
+            _builder.append("{");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            ActorClass _actorClass_1 = ai_3.getActorClass();
+            String _name_6 = _actorClass_1.getName();
+            _builder.append(_name_6, "			");
+            _builder.append(" inst = (");
+            ActorClass _actorClass_2 = ai_3.getActorClass();
+            String _name_7 = _actorClass_2.getName();
+            _builder.append(_name_7, "			");
+            _builder.append(") instances[");
+            EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
+            int _indexOf_7 = _allContainedInstances_9.indexOf(ai_3);
+            _builder.append(_indexOf_7, "			");
+            _builder.append("];");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append(cfg, "			");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
       }
     }
     _builder.newLine();
