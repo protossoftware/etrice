@@ -1,0 +1,84 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+grammar org.eclipse.etrice.core.etphys.ETPhys with org.eclipse.xtext.common.Terminals
+
+generate eTPhys "http://www.eclipse.org/etrice/core/etphys/ETPhys"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+PhysicalModel:
+	'PhysicalModel' name=FQN '{'
+		(imports+=Import)*
+		(
+			systems+=PhysicalSystem |
+			nodeClasses+=NodeClass |
+			runtimeClasses+=RuntimeClass
+		)*
+	'}'
+;
+
+PhysicalSystem:
+	'PhysicalSystem' name=ID (docu=Documentation)? '{'
+		nodeRefs+=NodeRef*
+	'}'
+;
+
+NodeRef:
+	'NodeRef' name=ID ':' type=[NodeClass|FQN] (docu=Documentation)?
+;
+
+NodeClass:
+	'NodeClass'name=ID (docu=Documentation)? '{'
+		'runtime' '=' runtime=[RuntimeClass|FQN]
+		threads+=Thread*
+	'}'
+;
+
+Thread:
+	(default?='DefaultThread' | 'Thread') name=ID '{'
+		'execmode' '=' execmode=ExecMode
+		('prio' '=' prio=PRIO)?
+		('stacksize' '=' stacksize=INT)?
+	'}'
+;
+
+enum ExecMode:
+	POLLED='polled' |
+	BLOCKED='blocked' |
+	MIXED='mixed'
+;
+
+RuntimeClass:
+	'RuntimeClass' name=ID (docu=Documentation)? '{'
+		'model' '=' threadModel=ThreadModel
+	'}'
+;
+
+enum ThreadModel:
+	SINGLE_THREADED='singleThreaded' |
+	MULTI_THREADED='multiThreaded'
+;
+
+Documentation: '['
+		text+=STRING+
+	']';
+
+PRIO returns ecore::EInt hidden(): ('+'|'-')? INT;
+
+Import :
+	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+
+ImportedFQN:
+	FQN ('.*')?;
+
+FQN:
+	ID ('.' ID)*;
