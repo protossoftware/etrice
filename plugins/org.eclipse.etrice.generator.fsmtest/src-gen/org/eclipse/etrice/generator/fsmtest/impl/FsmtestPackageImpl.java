@@ -9,18 +9,19 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.etrice.generator.fsmtest.DestinationDeclaration;
+import org.eclipse.etrice.generator.fsmtest.ConditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.FsmDefinition;
 import org.eclipse.etrice.generator.fsmtest.FsmtestFactory;
 import org.eclipse.etrice.generator.fsmtest.FsmtestPackage;
-import org.eclipse.etrice.generator.fsmtest.InitialDeclaration;
+import org.eclipse.etrice.generator.fsmtest.GuardDeclaration;
 import org.eclipse.etrice.generator.fsmtest.LoopsDeclaration;
 import org.eclipse.etrice.generator.fsmtest.Model;
+import org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.RandomTest;
 import org.eclipse.etrice.generator.fsmtest.SeedDeclaration;
 import org.eclipse.etrice.generator.fsmtest.SignalDeclaration;
-import org.eclipse.etrice.generator.fsmtest.SourceDeclaration;
-import org.eclipse.etrice.generator.fsmtest.State;
 import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
-import org.eclipse.etrice.generator.fsmtest.Testscript;
 import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
 
 /**
@@ -43,14 +44,49 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass testscriptEClass = null;
+  private EClass fsmDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stateEClass = null;
+  private EClass randomTestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass guardDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transitionDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass conditionDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass preconditionDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass postconditionDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -58,13 +94,6 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * @generated
    */
   private EClass stateDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass initialDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,27 +115,6 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * @generated
    */
   private EClass signalDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sourceDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass destinationDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass transitionDeclarationEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -186,7 +194,7 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Testscripts()
+  public EReference getModel_FsmDefinitions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -196,9 +204,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTestscript()
+  public EReference getModel_RandomTests()
   {
-    return testscriptEClass;
+    return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -206,9 +214,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTestscript_Name()
+  public EClass getFsmDefinition()
   {
-    return (EAttribute)testscriptEClass.getEStructuralFeatures().get(0);
+    return fsmDefinitionEClass;
   }
 
   /**
@@ -216,9 +224,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTestscript_StateDeclaration()
+  public EAttribute getFsmDefinition_Name()
   {
-    return (EReference)testscriptEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)fsmDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -226,9 +234,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTestscript_InitialDeclaration()
+  public EReference getFsmDefinition_States()
   {
-    return (EReference)testscriptEClass.getEStructuralFeatures().get(2);
+    return (EReference)fsmDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -236,9 +244,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTestscript_LoopsDeclaration()
+  public EClass getRandomTest()
   {
-    return (EReference)testscriptEClass.getEStructuralFeatures().get(3);
+    return randomTestEClass;
   }
 
   /**
@@ -246,9 +254,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTestscript_SeedDeclaration()
+  public EAttribute getRandomTest_Name()
   {
-    return (EReference)testscriptEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)randomTestEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -256,9 +264,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTestscript_TransitionDeclarations()
+  public EReference getRandomTest_Fsm()
   {
-    return (EReference)testscriptEClass.getEStructuralFeatures().get(5);
+    return (EReference)randomTestEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -266,9 +274,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getState()
+  public EReference getRandomTest_LoopsDeclaration()
   {
-    return stateEClass;
+    return (EReference)randomTestEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -276,9 +284,159 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_Name()
+  public EReference getRandomTest_SeedDeclaration()
   {
-    return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
+    return (EReference)randomTestEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGuardDeclaration()
+  {
+    return guardDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGuardDeclaration_Signal()
+  {
+    return (EReference)guardDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTransitionDeclaration()
+  {
+    return transitionDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransitionDeclaration_Name()
+  {
+    return (EAttribute)transitionDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionDeclaration_Destination()
+  {
+    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionDeclaration_Trigger()
+  {
+    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionDeclaration_Triggers()
+  {
+    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionDeclaration_Precondition()
+  {
+    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionDeclaration_Postcondition()
+  {
+    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConditionDeclaration()
+  {
+    return conditionDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConditionDeclaration_Signal()
+  {
+    return (EReference)conditionDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPreconditionDeclaration()
+  {
+    return preconditionDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPreconditionDeclaration_Signal()
+  {
+    return (EReference)preconditionDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPostconditionDeclaration()
+  {
+    return postconditionDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPostconditionDeclaration_Signal()
+  {
+    return (EReference)postconditionDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -296,9 +454,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStateDeclaration_States()
+  public EAttribute getStateDeclaration_Name()
   {
-    return (EReference)stateDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)stateDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -306,9 +464,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getInitialDeclaration()
+  public EReference getStateDeclaration_Condition()
   {
-    return initialDeclarationEClass;
+    return (EReference)stateDeclarationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -316,9 +474,9 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInitialDeclaration_Initial()
+  public EReference getStateDeclaration_Transitions()
   {
-    return (EReference)initialDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EReference)stateDeclarationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -416,96 +574,6 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSourceDeclaration()
-  {
-    return sourceDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSourceDeclaration_Ref()
-  {
-    return (EReference)sourceDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDestinationDeclaration()
-  {
-    return destinationDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getDestinationDeclaration_Ref()
-  {
-    return (EReference)destinationDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTransitionDeclaration()
-  {
-    return transitionDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDeclaration_Source()
-  {
-    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDeclaration_In()
-  {
-    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDeclaration_Out()
-  {
-    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDeclaration_Destination()
-  {
-    return (EReference)transitionDeclarationEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FsmtestFactory getFsmtestFactory()
   {
     return (FsmtestFactory)getEFactoryInstance();
@@ -532,24 +600,43 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__TESTSCRIPTS);
+    createEReference(modelEClass, MODEL__FSM_DEFINITIONS);
+    createEReference(modelEClass, MODEL__RANDOM_TESTS);
 
-    testscriptEClass = createEClass(TESTSCRIPT);
-    createEAttribute(testscriptEClass, TESTSCRIPT__NAME);
-    createEReference(testscriptEClass, TESTSCRIPT__STATE_DECLARATION);
-    createEReference(testscriptEClass, TESTSCRIPT__INITIAL_DECLARATION);
-    createEReference(testscriptEClass, TESTSCRIPT__LOOPS_DECLARATION);
-    createEReference(testscriptEClass, TESTSCRIPT__SEED_DECLARATION);
-    createEReference(testscriptEClass, TESTSCRIPT__TRANSITION_DECLARATIONS);
+    fsmDefinitionEClass = createEClass(FSM_DEFINITION);
+    createEAttribute(fsmDefinitionEClass, FSM_DEFINITION__NAME);
+    createEReference(fsmDefinitionEClass, FSM_DEFINITION__STATES);
 
-    stateEClass = createEClass(STATE);
-    createEAttribute(stateEClass, STATE__NAME);
+    randomTestEClass = createEClass(RANDOM_TEST);
+    createEAttribute(randomTestEClass, RANDOM_TEST__NAME);
+    createEReference(randomTestEClass, RANDOM_TEST__FSM);
+    createEReference(randomTestEClass, RANDOM_TEST__LOOPS_DECLARATION);
+    createEReference(randomTestEClass, RANDOM_TEST__SEED_DECLARATION);
+
+    guardDeclarationEClass = createEClass(GUARD_DECLARATION);
+    createEReference(guardDeclarationEClass, GUARD_DECLARATION__SIGNAL);
+
+    transitionDeclarationEClass = createEClass(TRANSITION_DECLARATION);
+    createEAttribute(transitionDeclarationEClass, TRANSITION_DECLARATION__NAME);
+    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__DESTINATION);
+    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__TRIGGER);
+    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__TRIGGERS);
+    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__PRECONDITION);
+    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__POSTCONDITION);
+
+    conditionDeclarationEClass = createEClass(CONDITION_DECLARATION);
+    createEReference(conditionDeclarationEClass, CONDITION_DECLARATION__SIGNAL);
+
+    preconditionDeclarationEClass = createEClass(PRECONDITION_DECLARATION);
+    createEReference(preconditionDeclarationEClass, PRECONDITION_DECLARATION__SIGNAL);
+
+    postconditionDeclarationEClass = createEClass(POSTCONDITION_DECLARATION);
+    createEReference(postconditionDeclarationEClass, POSTCONDITION_DECLARATION__SIGNAL);
 
     stateDeclarationEClass = createEClass(STATE_DECLARATION);
-    createEReference(stateDeclarationEClass, STATE_DECLARATION__STATES);
-
-    initialDeclarationEClass = createEClass(INITIAL_DECLARATION);
-    createEReference(initialDeclarationEClass, INITIAL_DECLARATION__INITIAL);
+    createEAttribute(stateDeclarationEClass, STATE_DECLARATION__NAME);
+    createEReference(stateDeclarationEClass, STATE_DECLARATION__CONDITION);
+    createEReference(stateDeclarationEClass, STATE_DECLARATION__TRANSITIONS);
 
     loopsDeclarationEClass = createEClass(LOOPS_DECLARATION);
     createEAttribute(loopsDeclarationEClass, LOOPS_DECLARATION__VAL);
@@ -562,18 +649,6 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
     createEAttribute(signalDeclarationEClass, SIGNAL_DECLARATION__SIGNAME);
     createEAttribute(signalDeclarationEClass, SIGNAL_DECLARATION__INT_VAL);
     createEAttribute(signalDeclarationEClass, SIGNAL_DECLARATION__STR_VAL);
-
-    sourceDeclarationEClass = createEClass(SOURCE_DECLARATION);
-    createEReference(sourceDeclarationEClass, SOURCE_DECLARATION__REF);
-
-    destinationDeclarationEClass = createEClass(DESTINATION_DECLARATION);
-    createEReference(destinationDeclarationEClass, DESTINATION_DECLARATION__REF);
-
-    transitionDeclarationEClass = createEClass(TRANSITION_DECLARATION);
-    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__SOURCE);
-    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__IN);
-    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__OUT);
-    createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__DESTINATION);
   }
 
   /**
@@ -608,24 +683,43 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Testscripts(), this.getTestscript(), null, "Testscripts", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_FsmDefinitions(), this.getFsmDefinition(), null, "FsmDefinitions", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_RandomTests(), this.getRandomTest(), null, "RandomTests", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(testscriptEClass, Testscript.class, "Testscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTestscript_Name(), ecorePackage.getEString(), "name", null, 0, 1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTestscript_StateDeclaration(), this.getStateDeclaration(), null, "stateDeclaration", null, 0, 1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTestscript_InitialDeclaration(), this.getInitialDeclaration(), null, "initialDeclaration", null, 0, 1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTestscript_LoopsDeclaration(), this.getLoopsDeclaration(), null, "loopsDeclaration", null, 0, 1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTestscript_SeedDeclaration(), this.getSeedDeclaration(), null, "seedDeclaration", null, 0, 1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTestscript_TransitionDeclarations(), this.getTransitionDeclaration(), null, "transitionDeclarations", null, 0, -1, Testscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(fsmDefinitionEClass, FsmDefinition.class, "FsmDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFsmDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, FsmDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFsmDefinition_States(), this.getStateDeclaration(), null, "states", null, 0, -1, FsmDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(randomTestEClass, RandomTest.class, "RandomTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRandomTest_Name(), ecorePackage.getEString(), "name", null, 0, 1, RandomTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRandomTest_Fsm(), this.getFsmDefinition(), null, "fsm", null, 0, 1, RandomTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRandomTest_LoopsDeclaration(), this.getLoopsDeclaration(), null, "loopsDeclaration", null, 0, 1, RandomTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRandomTest_SeedDeclaration(), this.getSeedDeclaration(), null, "seedDeclaration", null, 0, 1, RandomTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(guardDeclarationEClass, GuardDeclaration.class, "GuardDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGuardDeclaration_Signal(), this.getSignalDeclaration(), null, "signal", null, 0, 1, GuardDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transitionDeclarationEClass, TransitionDeclaration.class, "TransitionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTransitionDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Destination(), this.getStateDeclaration(), null, "destination", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Trigger(), this.getSignalDeclaration(), null, "trigger", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Triggers(), this.getGuardDeclaration(), null, "triggers", null, 0, -1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Precondition(), this.getPreconditionDeclaration(), null, "precondition", null, 0, -1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Postcondition(), this.getPostconditionDeclaration(), null, "postcondition", null, 0, -1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(conditionDeclarationEClass, ConditionDeclaration.class, "ConditionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConditionDeclaration_Signal(), this.getSignalDeclaration(), null, "signal", null, 0, 1, ConditionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(preconditionDeclarationEClass, PreconditionDeclaration.class, "PreconditionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPreconditionDeclaration_Signal(), this.getSignalDeclaration(), null, "signal", null, 0, 1, PreconditionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(postconditionDeclarationEClass, PostconditionDeclaration.class, "PostconditionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPostconditionDeclaration_Signal(), this.getSignalDeclaration(), null, "signal", null, 0, 1, PostconditionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateDeclarationEClass, StateDeclaration.class, "StateDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateDeclaration_States(), this.getState(), null, "states", null, 0, -1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(initialDeclarationEClass, InitialDeclaration.class, "InitialDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getInitialDeclaration_Initial(), this.getState(), null, "initial", null, 0, 1, InitialDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStateDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateDeclaration_Condition(), this.getConditionDeclaration(), null, "condition", null, 0, -1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateDeclaration_Transitions(), this.getTransitionDeclaration(), null, "transitions", null, 0, -1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(loopsDeclarationEClass, LoopsDeclaration.class, "LoopsDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLoopsDeclaration_Val(), ecorePackage.getEInt(), "val", null, 0, 1, LoopsDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -638,18 +732,6 @@ public class FsmtestPackageImpl extends EPackageImpl implements FsmtestPackage
     initEAttribute(getSignalDeclaration_Signame(), ecorePackage.getEString(), "signame", null, 0, 1, SignalDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSignalDeclaration_IntVal(), ecorePackage.getEInt(), "intVal", null, 0, 1, SignalDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSignalDeclaration_StrVal(), ecorePackage.getEString(), "strVal", null, 0, 1, SignalDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(sourceDeclarationEClass, SourceDeclaration.class, "SourceDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSourceDeclaration_Ref(), this.getState(), null, "ref", null, 0, 1, SourceDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(destinationDeclarationEClass, DestinationDeclaration.class, "DestinationDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDestinationDeclaration_Ref(), this.getState(), null, "ref", null, 0, 1, DestinationDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(transitionDeclarationEClass, TransitionDeclaration.class, "TransitionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionDeclaration_Source(), this.getSourceDeclaration(), null, "source", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionDeclaration_In(), this.getSignalDeclaration(), null, "in", null, 0, -1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionDeclaration_Out(), this.getSignalDeclaration(), null, "out", null, 0, -1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionDeclaration_Destination(), this.getDestinationDeclaration(), null, "destination", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

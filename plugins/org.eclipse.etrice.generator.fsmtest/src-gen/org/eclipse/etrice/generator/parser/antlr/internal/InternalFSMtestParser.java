@@ -21,9 +21,14 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalFSMtestParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'fsmtest'", "';'", "'states:'", "','", "'initial:'", "'loops:'", "'randseed:'", "'.'", "'='", "':'", "'-> '", "'in:'", "'out:'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'fsmdefinition'", "'initial'", "';'", "'randomtest'", "'fsm:'", "'transition'", "'to'", "'trigger:'", "'guards:'", "'constraints:'", "'condition'", "'precondition'", "'postcondition'", "'state'", "'loops:'", "'randseed:'", "'.'", "'='"
     };
     public static final int RULE_ID=4;
+    public static final int T__28=28;
+    public static final int T__27=27;
+    public static final int T__26=26;
+    public static final int T__25=25;
+    public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
     public static final int RULE_ANY_OTHER=10;
@@ -120,42 +125,50 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:76:1: ruleModel returns [EObject current=null] : ( (lv_Testscripts_0_0= ruleTestscript ) )* ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) ) | ( (lv_RandomTests_1_0= ruleRandomTest ) ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_Testscripts_0_0 = null;
+        EObject lv_FsmDefinitions_0_0 = null;
+
+        EObject lv_RandomTests_1_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:79:28: ( ( (lv_Testscripts_0_0= ruleTestscript ) )* )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:1: ( (lv_Testscripts_0_0= ruleTestscript ) )*
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:79:28: ( ( ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) ) | ( (lv_RandomTests_1_0= ruleRandomTest ) ) )* )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:1: ( ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) ) | ( (lv_RandomTests_1_0= ruleRandomTest ) ) )*
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:1: ( (lv_Testscripts_0_0= ruleTestscript ) )*
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:1: ( ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) ) | ( (lv_RandomTests_1_0= ruleRandomTest ) ) )*
             loop1:
             do {
-                int alt1=2;
+                int alt1=3;
                 int LA1_0 = input.LA(1);
 
                 if ( (LA1_0==11) ) {
                     alt1=1;
                 }
+                else if ( (LA1_0==14) ) {
+                    alt1=2;
+                }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:81:1: (lv_Testscripts_0_0= ruleTestscript )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:2: ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) )
             	    {
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:81:1: (lv_Testscripts_0_0= ruleTestscript )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:82:3: lv_Testscripts_0_0= ruleTestscript
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:80:2: ( (lv_FsmDefinitions_0_0= ruleFsmDefinition ) )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:81:1: (lv_FsmDefinitions_0_0= ruleFsmDefinition )
+            	    {
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:81:1: (lv_FsmDefinitions_0_0= ruleFsmDefinition )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:82:3: lv_FsmDefinitions_0_0= ruleFsmDefinition
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getTestscriptsTestscriptParserRuleCall_0()); 
+            	    	        newCompositeNode(grammarAccess.getModelAccess().getFsmDefinitionsFsmDefinitionParserRuleCall_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTestscript_in_ruleModel130);
-            	    lv_Testscripts_0_0=ruleTestscript();
+            	    pushFollow(FOLLOW_ruleFsmDefinition_in_ruleModel131);
+            	    lv_FsmDefinitions_0_0=ruleFsmDefinition();
 
             	    state._fsp--;
 
@@ -165,11 +178,51 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"Testscripts",
-            	            		lv_Testscripts_0_0, 
-            	            		"Testscript");
+            	           			"FsmDefinitions",
+            	            		lv_FsmDefinitions_0_0, 
+            	            		"FsmDefinition");
             	    	        afterParserOrEnumRuleCall();
             	    	    
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:99:6: ( (lv_RandomTests_1_0= ruleRandomTest ) )
+            	    {
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:99:6: ( (lv_RandomTests_1_0= ruleRandomTest ) )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:100:1: (lv_RandomTests_1_0= ruleRandomTest )
+            	    {
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:100:1: (lv_RandomTests_1_0= ruleRandomTest )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:101:3: lv_RandomTests_1_0= ruleRandomTest
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getModelAccess().getRandomTestsRandomTestParserRuleCall_1_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleRandomTest_in_ruleModel158);
+            	    lv_RandomTests_1_0=ruleRandomTest();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"RandomTests",
+            	            		lv_RandomTests_1_0, 
+            	            		"RandomTest");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
 
             	    }
 
@@ -199,26 +252,26 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start "entryRuleTestscript"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:106:1: entryRuleTestscript returns [EObject current=null] : iv_ruleTestscript= ruleTestscript EOF ;
-    public final EObject entryRuleTestscript() throws RecognitionException {
+    // $ANTLR start "entryRuleFsmDefinition"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:125:1: entryRuleFsmDefinition returns [EObject current=null] : iv_ruleFsmDefinition= ruleFsmDefinition EOF ;
+    public final EObject entryRuleFsmDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleTestscript = null;
+        EObject iv_ruleFsmDefinition = null;
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:107:2: (iv_ruleTestscript= ruleTestscript EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:108:2: iv_ruleTestscript= ruleTestscript EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:126:2: (iv_ruleFsmDefinition= ruleFsmDefinition EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:127:2: iv_ruleFsmDefinition= ruleFsmDefinition EOF
             {
-             newCompositeNode(grammarAccess.getTestscriptRule()); 
-            pushFollow(FOLLOW_ruleTestscript_in_entryRuleTestscript166);
-            iv_ruleTestscript=ruleTestscript();
+             newCompositeNode(grammarAccess.getFsmDefinitionRule()); 
+            pushFollow(FOLLOW_ruleFsmDefinition_in_entryRuleFsmDefinition195);
+            iv_ruleFsmDefinition=ruleFsmDefinition();
 
             state._fsp--;
 
-             current =iv_ruleTestscript; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestscript176); 
+             current =iv_ruleFsmDefinition; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFsmDefinition205); 
 
             }
 
@@ -232,54 +285,49 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleTestscript"
+    // $ANTLR end "entryRuleFsmDefinition"
 
 
-    // $ANTLR start "ruleTestscript"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:115:1: ruleTestscript returns [EObject current=null] : (otherlv_0= 'fsmtest' ( (lv_name_1_0= RULE_ID ) ) ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) ) ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )* otherlv_7= ';' ) ;
-    public final EObject ruleTestscript() throws RecognitionException {
+    // $ANTLR start "ruleFsmDefinition"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:134:1: ruleFsmDefinition returns [EObject current=null] : (otherlv_0= 'fsmdefinition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'initial' ( (lv_states_3_0= ruleStateDeclaration ) ) ( (lv_states_4_0= ruleStateDeclaration ) )* otherlv_5= ';' ) ;
+    public final EObject ruleFsmDefinition() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
-        Token otherlv_7=null;
-        EObject lv_stateDeclaration_2_0 = null;
+        Token otherlv_2=null;
+        Token otherlv_5=null;
+        EObject lv_states_3_0 = null;
 
-        EObject lv_initialDeclaration_3_0 = null;
-
-        EObject lv_loopsDeclaration_4_0 = null;
-
-        EObject lv_seedDeclaration_5_0 = null;
-
-        EObject lv_transitionDeclarations_6_0 = null;
+        EObject lv_states_4_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:118:28: ( (otherlv_0= 'fsmtest' ( (lv_name_1_0= RULE_ID ) ) ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) ) ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )* otherlv_7= ';' ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:119:1: (otherlv_0= 'fsmtest' ( (lv_name_1_0= RULE_ID ) ) ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) ) ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )* otherlv_7= ';' )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:137:28: ( (otherlv_0= 'fsmdefinition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'initial' ( (lv_states_3_0= ruleStateDeclaration ) ) ( (lv_states_4_0= ruleStateDeclaration ) )* otherlv_5= ';' ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:138:1: (otherlv_0= 'fsmdefinition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'initial' ( (lv_states_3_0= ruleStateDeclaration ) ) ( (lv_states_4_0= ruleStateDeclaration ) )* otherlv_5= ';' )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:119:1: (otherlv_0= 'fsmtest' ( (lv_name_1_0= RULE_ID ) ) ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) ) ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )* otherlv_7= ';' )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:119:3: otherlv_0= 'fsmtest' ( (lv_name_1_0= RULE_ID ) ) ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) ) ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )* otherlv_7= ';'
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:138:1: (otherlv_0= 'fsmdefinition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'initial' ( (lv_states_3_0= ruleStateDeclaration ) ) ( (lv_states_4_0= ruleStateDeclaration ) )* otherlv_5= ';' )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:138:3: otherlv_0= 'fsmdefinition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'initial' ( (lv_states_3_0= ruleStateDeclaration ) ) ( (lv_states_4_0= ruleStateDeclaration ) )* otherlv_5= ';'
             {
-            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleTestscript213); 
+            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleFsmDefinition242); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTestscriptAccess().getFsmtestKeyword_0());
+                	newLeafNode(otherlv_0, grammarAccess.getFsmDefinitionAccess().getFsmdefinitionKeyword_0());
                 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:123:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:124:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:142:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:143:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:124:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:125:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:143:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:144:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTestscript230); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFsmDefinition259); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getTestscriptAccess().getNameIDTerminalRuleCall_1_0()); 
+            			newLeafNode(lv_name_1_0, grammarAccess.getFsmDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
             		
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTestscriptRule());
+            	            current = createModelElement(grammarAccess.getFsmDefinitionRule());
             	        }
                    		setWithLastConsumed(
                    			current, 
@@ -293,28 +341,32 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:141:2: ( (lv_stateDeclaration_2_0= ruleStateDeclaration ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:142:1: (lv_stateDeclaration_2_0= ruleStateDeclaration )
+            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleFsmDefinition276); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getFsmDefinitionAccess().getInitialKeyword_2());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:164:1: ( (lv_states_3_0= ruleStateDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:165:1: (lv_states_3_0= ruleStateDeclaration )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:142:1: (lv_stateDeclaration_2_0= ruleStateDeclaration )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:143:3: lv_stateDeclaration_2_0= ruleStateDeclaration
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:165:1: (lv_states_3_0= ruleStateDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:166:3: lv_states_3_0= ruleStateDeclaration
             {
              
-            	        newCompositeNode(grammarAccess.getTestscriptAccess().getStateDeclarationStateDeclarationParserRuleCall_2_0()); 
+            	        newCompositeNode(grammarAccess.getFsmDefinitionAccess().getStatesStateDeclarationParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleStateDeclaration_in_ruleTestscript256);
-            lv_stateDeclaration_2_0=ruleStateDeclaration();
+            pushFollow(FOLLOW_ruleStateDeclaration_in_ruleFsmDefinition297);
+            lv_states_3_0=ruleStateDeclaration();
 
             state._fsp--;
 
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTestscriptRule());
+            	            current = createModelElementForParent(grammarAccess.getFsmDefinitionRule());
             	        }
-                   		set(
+                   		add(
                    			current, 
-                   			"stateDeclaration",
-                    		lv_stateDeclaration_2_0, 
+                   			"states",
+                    		lv_states_3_0, 
                     		"StateDeclaration");
             	        afterParserOrEnumRuleCall();
             	    
@@ -324,30 +376,162 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:159:2: ( (lv_initialDeclaration_3_0= ruleInitialDeclaration ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:160:1: (lv_initialDeclaration_3_0= ruleInitialDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:182:2: ( (lv_states_4_0= ruleStateDeclaration ) )*
+            loop2:
+            do {
+                int alt2=2;
+                int LA2_0 = input.LA(1);
+
+                if ( (LA2_0==24) ) {
+                    alt2=1;
+                }
+
+
+                switch (alt2) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:183:1: (lv_states_4_0= ruleStateDeclaration )
+            	    {
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:183:1: (lv_states_4_0= ruleStateDeclaration )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:184:3: lv_states_4_0= ruleStateDeclaration
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getFsmDefinitionAccess().getStatesStateDeclarationParserRuleCall_4_0()); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleStateDeclaration_in_ruleFsmDefinition318);
+            	    lv_states_4_0=ruleStateDeclaration();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getFsmDefinitionRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"states",
+            	            		lv_states_4_0, 
+            	            		"StateDeclaration");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop2;
+                }
+            } while (true);
+
+            otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleFsmDefinition331); 
+
+                	newLeafNode(otherlv_5, grammarAccess.getFsmDefinitionAccess().getSemicolonKeyword_5());
+                
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleFsmDefinition"
+
+
+    // $ANTLR start "entryRuleRandomTest"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:212:1: entryRuleRandomTest returns [EObject current=null] : iv_ruleRandomTest= ruleRandomTest EOF ;
+    public final EObject entryRuleRandomTest() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleRandomTest = null;
+
+
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:213:2: (iv_ruleRandomTest= ruleRandomTest EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:214:2: iv_ruleRandomTest= ruleRandomTest EOF
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:160:1: (lv_initialDeclaration_3_0= ruleInitialDeclaration )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:161:3: lv_initialDeclaration_3_0= ruleInitialDeclaration
-            {
-             
-            	        newCompositeNode(grammarAccess.getTestscriptAccess().getInitialDeclarationInitialDeclarationParserRuleCall_3_0()); 
-            	    
-            pushFollow(FOLLOW_ruleInitialDeclaration_in_ruleTestscript277);
-            lv_initialDeclaration_3_0=ruleInitialDeclaration();
+             newCompositeNode(grammarAccess.getRandomTestRule()); 
+            pushFollow(FOLLOW_ruleRandomTest_in_entryRuleRandomTest367);
+            iv_ruleRandomTest=ruleRandomTest();
 
             state._fsp--;
 
+             current =iv_ruleRandomTest; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRandomTest377); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleRandomTest"
+
+
+    // $ANTLR start "ruleRandomTest"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:221:1: ruleRandomTest returns [EObject current=null] : (otherlv_0= 'randomtest' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'fsm:' ( (otherlv_3= RULE_ID ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? otherlv_6= ';' ) ;
+    public final EObject ruleRandomTest() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
+        Token otherlv_6=null;
+        EObject lv_loopsDeclaration_4_0 = null;
+
+        EObject lv_seedDeclaration_5_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:224:28: ( (otherlv_0= 'randomtest' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'fsm:' ( (otherlv_3= RULE_ID ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? otherlv_6= ';' ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:225:1: (otherlv_0= 'randomtest' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'fsm:' ( (otherlv_3= RULE_ID ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? otherlv_6= ';' )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:225:1: (otherlv_0= 'randomtest' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'fsm:' ( (otherlv_3= RULE_ID ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? otherlv_6= ';' )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:225:3: otherlv_0= 'randomtest' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'fsm:' ( (otherlv_3= RULE_ID ) ) ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) ) ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )? otherlv_6= ';'
+            {
+            otherlv_0=(Token)match(input,14,FOLLOW_14_in_ruleRandomTest414); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getRandomTestAccess().getRandomtestKeyword_0());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:229:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:230:1: (lv_name_1_0= RULE_ID )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:230:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:231:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRandomTest431); 
+
+            			newLeafNode(lv_name_1_0, grammarAccess.getRandomTestAccess().getNameIDTerminalRuleCall_1_0()); 
+            		
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTestscriptRule());
+            	            current = createModelElement(grammarAccess.getRandomTestRule());
             	        }
-                   		set(
+                   		setWithLastConsumed(
                    			current, 
-                   			"initialDeclaration",
-                    		lv_initialDeclaration_3_0, 
-                    		"InitialDeclaration");
-            	        afterParserOrEnumRuleCall();
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
             	    
 
             }
@@ -355,23 +539,48 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:177:2: ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:178:1: (lv_loopsDeclaration_4_0= ruleLoopsDeclaration )
+            otherlv_2=(Token)match(input,15,FOLLOW_15_in_ruleRandomTest448); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getRandomTestAccess().getFsmKeyword_2());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:251:1: ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:252:1: (otherlv_3= RULE_ID )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:178:1: (lv_loopsDeclaration_4_0= ruleLoopsDeclaration )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:179:3: lv_loopsDeclaration_4_0= ruleLoopsDeclaration
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:252:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:253:3: otherlv_3= RULE_ID
+            {
+
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getRandomTestRule());
+            	        }
+                    
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRandomTest468); 
+
+            		newLeafNode(otherlv_3, grammarAccess.getRandomTestAccess().getFsmFsmDefinitionCrossReference_3_0()); 
+            	
+
+            }
+
+
+            }
+
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:264:2: ( (lv_loopsDeclaration_4_0= ruleLoopsDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:265:1: (lv_loopsDeclaration_4_0= ruleLoopsDeclaration )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:265:1: (lv_loopsDeclaration_4_0= ruleLoopsDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:266:3: lv_loopsDeclaration_4_0= ruleLoopsDeclaration
             {
              
-            	        newCompositeNode(grammarAccess.getTestscriptAccess().getLoopsDeclarationLoopsDeclarationParserRuleCall_4_0()); 
+            	        newCompositeNode(grammarAccess.getRandomTestAccess().getLoopsDeclarationLoopsDeclarationParserRuleCall_4_0()); 
             	    
-            pushFollow(FOLLOW_ruleLoopsDeclaration_in_ruleTestscript298);
+            pushFollow(FOLLOW_ruleLoopsDeclaration_in_ruleRandomTest489);
             lv_loopsDeclaration_4_0=ruleLoopsDeclaration();
 
             state._fsp--;
 
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTestscriptRule());
+            	            current = createModelElementForParent(grammarAccess.getRandomTestRule());
             	        }
                    		set(
                    			current, 
@@ -386,31 +595,31 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:195:2: ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:282:2: ( (lv_seedDeclaration_5_0= ruleSeedDeclaration ) )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            if ( (LA2_0==17) ) {
-                alt2=1;
+            if ( (LA3_0==26) ) {
+                alt3=1;
             }
-            switch (alt2) {
+            switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:196:1: (lv_seedDeclaration_5_0= ruleSeedDeclaration )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:283:1: (lv_seedDeclaration_5_0= ruleSeedDeclaration )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:196:1: (lv_seedDeclaration_5_0= ruleSeedDeclaration )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:197:3: lv_seedDeclaration_5_0= ruleSeedDeclaration
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:283:1: (lv_seedDeclaration_5_0= ruleSeedDeclaration )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:284:3: lv_seedDeclaration_5_0= ruleSeedDeclaration
                     {
                      
-                    	        newCompositeNode(grammarAccess.getTestscriptAccess().getSeedDeclarationSeedDeclarationParserRuleCall_5_0()); 
+                    	        newCompositeNode(grammarAccess.getRandomTestAccess().getSeedDeclarationSeedDeclarationParserRuleCall_5_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleSeedDeclaration_in_ruleTestscript319);
+                    pushFollow(FOLLOW_ruleSeedDeclaration_in_ruleRandomTest510);
                     lv_seedDeclaration_5_0=ruleSeedDeclaration();
 
                     state._fsp--;
 
 
                     	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getTestscriptRule());
+                    	            current = createModelElementForParent(grammarAccess.getRandomTestRule());
                     	        }
                            		set(
                            			current, 
@@ -428,58 +637,9 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:213:3: ( (lv_transitionDeclarations_6_0= ruleTransitionDeclaration ) )*
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
+            otherlv_6=(Token)match(input,13,FOLLOW_13_in_ruleRandomTest523); 
 
-                if ( (LA3_0==RULE_ID) ) {
-                    alt3=1;
-                }
-
-
-                switch (alt3) {
-            	case 1 :
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:214:1: (lv_transitionDeclarations_6_0= ruleTransitionDeclaration )
-            	    {
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:214:1: (lv_transitionDeclarations_6_0= ruleTransitionDeclaration )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:215:3: lv_transitionDeclarations_6_0= ruleTransitionDeclaration
-            	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTestscriptAccess().getTransitionDeclarationsTransitionDeclarationParserRuleCall_6_0()); 
-            	    	    
-            	    pushFollow(FOLLOW_ruleTransitionDeclaration_in_ruleTestscript341);
-            	    lv_transitionDeclarations_6_0=ruleTransitionDeclaration();
-
-            	    state._fsp--;
-
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTestscriptRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"transitionDeclarations",
-            	            		lv_transitionDeclarations_6_0, 
-            	            		"TransitionDeclaration");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop3;
-                }
-            } while (true);
-
-            otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleTestscript354); 
-
-                	newLeafNode(otherlv_7, grammarAccess.getTestscriptAccess().getSemicolonKeyword_7());
+                	newLeafNode(otherlv_6, grammarAccess.getRandomTestAccess().getSemicolonKeyword_6());
                 
 
             }
@@ -498,29 +658,29 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleTestscript"
+    // $ANTLR end "ruleRandomTest"
 
 
-    // $ANTLR start "entryRuleState"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:243:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
-    public final EObject entryRuleState() throws RecognitionException {
+    // $ANTLR start "entryRuleGuardDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:312:1: entryRuleGuardDeclaration returns [EObject current=null] : iv_ruleGuardDeclaration= ruleGuardDeclaration EOF ;
+    public final EObject entryRuleGuardDeclaration() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleState = null;
+        EObject iv_ruleGuardDeclaration = null;
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:244:2: (iv_ruleState= ruleState EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:245:2: iv_ruleState= ruleState EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:313:2: (iv_ruleGuardDeclaration= ruleGuardDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:314:2: iv_ruleGuardDeclaration= ruleGuardDeclaration EOF
             {
-             newCompositeNode(grammarAccess.getStateRule()); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState390);
-            iv_ruleState=ruleState();
+             newCompositeNode(grammarAccess.getGuardDeclarationRule()); 
+            pushFollow(FOLLOW_ruleGuardDeclaration_in_entryRuleGuardDeclaration559);
+            iv_ruleGuardDeclaration=ruleGuardDeclaration();
 
             state._fsp--;
 
-             current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState400); 
+             current =iv_ruleGuardDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuardDeclaration569); 
 
             }
 
@@ -534,41 +694,47 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleState"
+    // $ANTLR end "entryRuleGuardDeclaration"
 
 
-    // $ANTLR start "ruleState"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:252:1: ruleState returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final EObject ruleState() throws RecognitionException {
+    // $ANTLR start "ruleGuardDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:321:1: ruleGuardDeclaration returns [EObject current=null] : ( (lv_signal_0_0= ruleSignalDeclaration ) ) ;
+    public final EObject ruleGuardDeclaration() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0_0=null;
+        EObject lv_signal_0_0 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:255:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:256:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:324:28: ( ( (lv_signal_0_0= ruleSignalDeclaration ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:325:1: ( (lv_signal_0_0= ruleSignalDeclaration ) )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:256:1: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:257:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:325:1: ( (lv_signal_0_0= ruleSignalDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:326:1: (lv_signal_0_0= ruleSignalDeclaration )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:257:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:258:3: lv_name_0_0= RULE_ID
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:326:1: (lv_signal_0_0= ruleSignalDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:327:3: lv_signal_0_0= ruleSignalDeclaration
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState441); 
+             
+            	        newCompositeNode(grammarAccess.getGuardDeclarationAccess().getSignalSignalDeclarationParserRuleCall_0()); 
+            	    
+            pushFollow(FOLLOW_ruleSignalDeclaration_in_ruleGuardDeclaration614);
+            lv_signal_0_0=ruleSignalDeclaration();
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getStateAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            state._fsp--;
+
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getStateRule());
+            	            current = createModelElementForParent(grammarAccess.getGuardDeclarationRule());
             	        }
-                   		setWithLastConsumed(
+                   		set(
                    			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"ID");
+                   			"signal",
+                    		lv_signal_0_0, 
+                    		"SignalDeclaration");
+            	        afterParserOrEnumRuleCall();
             	    
 
             }
@@ -590,11 +756,732 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleState"
+    // $ANTLR end "ruleGuardDeclaration"
+
+
+    // $ANTLR start "entryRuleTransitionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:351:1: entryRuleTransitionDeclaration returns [EObject current=null] : iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF ;
+    public final EObject entryRuleTransitionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleTransitionDeclaration = null;
+
+
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:352:2: (iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:353:2: iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF
+            {
+             newCompositeNode(grammarAccess.getTransitionDeclarationRule()); 
+            pushFollow(FOLLOW_ruleTransitionDeclaration_in_entryRuleTransitionDeclaration649);
+            iv_ruleTransitionDeclaration=ruleTransitionDeclaration();
+
+            state._fsp--;
+
+             current =iv_ruleTransitionDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionDeclaration659); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleTransitionDeclaration"
+
+
+    // $ANTLR start "ruleTransitionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:360:1: ruleTransitionDeclaration returns [EObject current=null] : (otherlv_0= 'transition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'to' ( (otherlv_3= RULE_ID ) ) (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )? (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )? (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )? otherlv_11= ';' ) ;
+    public final EObject ruleTransitionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
+        Token otherlv_8=null;
+        Token otherlv_11=null;
+        EObject lv_trigger_5_0 = null;
+
+        EObject lv_triggers_7_0 = null;
+
+        EObject lv_precondition_9_0 = null;
+
+        EObject lv_postcondition_10_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:363:28: ( (otherlv_0= 'transition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'to' ( (otherlv_3= RULE_ID ) ) (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )? (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )? (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )? otherlv_11= ';' ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:364:1: (otherlv_0= 'transition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'to' ( (otherlv_3= RULE_ID ) ) (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )? (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )? (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )? otherlv_11= ';' )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:364:1: (otherlv_0= 'transition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'to' ( (otherlv_3= RULE_ID ) ) (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )? (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )? (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )? otherlv_11= ';' )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:364:3: otherlv_0= 'transition' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'to' ( (otherlv_3= RULE_ID ) ) (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )? (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )? (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )? otherlv_11= ';'
+            {
+            otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleTransitionDeclaration696); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getTransitionDeclarationAccess().getTransitionKeyword_0());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:368:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:369:1: (lv_name_1_0= RULE_ID )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:369:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:370:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionDeclaration713); 
+
+            			newLeafNode(lv_name_1_0, grammarAccess.getTransitionDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
+            		
+
+            	        if (current==null) {
+            	            current = createModelElement(grammarAccess.getTransitionDeclarationRule());
+            	        }
+                   		setWithLastConsumed(
+                   			current, 
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
+            	    
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleTransitionDeclaration730); 
+
+                	newLeafNode(otherlv_2, grammarAccess.getTransitionDeclarationAccess().getToKeyword_2());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:390:1: ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:391:1: (otherlv_3= RULE_ID )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:391:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:392:3: otherlv_3= RULE_ID
+            {
+
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getTransitionDeclarationRule());
+            	        }
+                    
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionDeclaration750); 
+
+            		newLeafNode(otherlv_3, grammarAccess.getTransitionDeclarationAccess().getDestinationStateDeclarationCrossReference_3_0()); 
+            	
+
+            }
+
+
+            }
+
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:403:2: (otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) ) )?
+            int alt4=2;
+            int LA4_0 = input.LA(1);
+
+            if ( (LA4_0==18) ) {
+                alt4=1;
+            }
+            switch (alt4) {
+                case 1 :
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:403:4: otherlv_4= 'trigger:' ( (lv_trigger_5_0= ruleSignalDeclaration ) )
+                    {
+                    otherlv_4=(Token)match(input,18,FOLLOW_18_in_ruleTransitionDeclaration763); 
+
+                        	newLeafNode(otherlv_4, grammarAccess.getTransitionDeclarationAccess().getTriggerKeyword_4_0());
+                        
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:407:1: ( (lv_trigger_5_0= ruleSignalDeclaration ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:408:1: (lv_trigger_5_0= ruleSignalDeclaration )
+                    {
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:408:1: (lv_trigger_5_0= ruleSignalDeclaration )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:409:3: lv_trigger_5_0= ruleSignalDeclaration
+                    {
+                     
+                    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getTriggerSignalDeclarationParserRuleCall_4_1_0()); 
+                    	    
+                    pushFollow(FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration784);
+                    lv_trigger_5_0=ruleSignalDeclaration();
+
+                    state._fsp--;
+
+
+                    	        if (current==null) {
+                    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
+                    	        }
+                           		set(
+                           			current, 
+                           			"trigger",
+                            		lv_trigger_5_0, 
+                            		"SignalDeclaration");
+                    	        afterParserOrEnumRuleCall();
+                    	    
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:425:4: (otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+ )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
+
+            if ( (LA6_0==19) ) {
+                alt6=1;
+            }
+            switch (alt6) {
+                case 1 :
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:425:6: otherlv_6= 'guards:' ( (lv_triggers_7_0= ruleGuardDeclaration ) )+
+                    {
+                    otherlv_6=(Token)match(input,19,FOLLOW_19_in_ruleTransitionDeclaration799); 
+
+                        	newLeafNode(otherlv_6, grammarAccess.getTransitionDeclarationAccess().getGuardsKeyword_5_0());
+                        
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:429:1: ( (lv_triggers_7_0= ruleGuardDeclaration ) )+
+                    int cnt5=0;
+                    loop5:
+                    do {
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
+
+                        if ( (LA5_0==RULE_ID) ) {
+                            alt5=1;
+                        }
+
+
+                        switch (alt5) {
+                    	case 1 :
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:430:1: (lv_triggers_7_0= ruleGuardDeclaration )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:430:1: (lv_triggers_7_0= ruleGuardDeclaration )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:431:3: lv_triggers_7_0= ruleGuardDeclaration
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getTriggersGuardDeclarationParserRuleCall_5_1_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_ruleGuardDeclaration_in_ruleTransitionDeclaration820);
+                    	    lv_triggers_7_0=ruleGuardDeclaration();
+
+                    	    state._fsp--;
+
+
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"triggers",
+                    	            		lv_triggers_7_0, 
+                    	            		"GuardDeclaration");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt5 >= 1 ) break loop5;
+                                EarlyExitException eee =
+                                    new EarlyExitException(5, input);
+                                throw eee;
+                        }
+                        cnt5++;
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:447:5: (otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+ )?
+            int alt8=2;
+            int LA8_0 = input.LA(1);
+
+            if ( (LA8_0==20) ) {
+                alt8=1;
+            }
+            switch (alt8) {
+                case 1 :
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:447:7: otherlv_8= 'constraints:' ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+
+                    {
+                    otherlv_8=(Token)match(input,20,FOLLOW_20_in_ruleTransitionDeclaration836); 
+
+                        	newLeafNode(otherlv_8, grammarAccess.getTransitionDeclarationAccess().getConstraintsKeyword_6_0());
+                        
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:451:1: ( ( (lv_precondition_9_0= rulePreconditionDeclaration ) ) | ( (lv_postcondition_10_0= rulePostconditionDeclaration ) ) )+
+                    int cnt7=0;
+                    loop7:
+                    do {
+                        int alt7=3;
+                        int LA7_0 = input.LA(1);
+
+                        if ( (LA7_0==22) ) {
+                            alt7=1;
+                        }
+                        else if ( (LA7_0==23) ) {
+                            alt7=2;
+                        }
+
+
+                        switch (alt7) {
+                    	case 1 :
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:451:2: ( (lv_precondition_9_0= rulePreconditionDeclaration ) )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:451:2: ( (lv_precondition_9_0= rulePreconditionDeclaration ) )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:452:1: (lv_precondition_9_0= rulePreconditionDeclaration )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:452:1: (lv_precondition_9_0= rulePreconditionDeclaration )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:453:3: lv_precondition_9_0= rulePreconditionDeclaration
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getPreconditionPreconditionDeclarationParserRuleCall_6_1_0_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_rulePreconditionDeclaration_in_ruleTransitionDeclaration858);
+                    	    lv_precondition_9_0=rulePreconditionDeclaration();
+
+                    	    state._fsp--;
+
+
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"precondition",
+                    	            		lv_precondition_9_0, 
+                    	            		"PreconditionDeclaration");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:470:6: ( (lv_postcondition_10_0= rulePostconditionDeclaration ) )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:470:6: ( (lv_postcondition_10_0= rulePostconditionDeclaration ) )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:471:1: (lv_postcondition_10_0= rulePostconditionDeclaration )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:471:1: (lv_postcondition_10_0= rulePostconditionDeclaration )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:472:3: lv_postcondition_10_0= rulePostconditionDeclaration
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getPostconditionPostconditionDeclarationParserRuleCall_6_1_1_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_rulePostconditionDeclaration_in_ruleTransitionDeclaration885);
+                    	    lv_postcondition_10_0=rulePostconditionDeclaration();
+
+                    	    state._fsp--;
+
+
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"postcondition",
+                    	            		lv_postcondition_10_0, 
+                    	            		"PostconditionDeclaration");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt7 >= 1 ) break loop7;
+                                EarlyExitException eee =
+                                    new EarlyExitException(7, input);
+                                throw eee;
+                        }
+                        cnt7++;
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+            otherlv_11=(Token)match(input,13,FOLLOW_13_in_ruleTransitionDeclaration901); 
+
+                	newLeafNode(otherlv_11, grammarAccess.getTransitionDeclarationAccess().getSemicolonKeyword_7());
+                
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleTransitionDeclaration"
+
+
+    // $ANTLR start "entryRuleConditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:500:1: entryRuleConditionDeclaration returns [EObject current=null] : iv_ruleConditionDeclaration= ruleConditionDeclaration EOF ;
+    public final EObject entryRuleConditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleConditionDeclaration = null;
+
+
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:501:2: (iv_ruleConditionDeclaration= ruleConditionDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:502:2: iv_ruleConditionDeclaration= ruleConditionDeclaration EOF
+            {
+             newCompositeNode(grammarAccess.getConditionDeclarationRule()); 
+            pushFollow(FOLLOW_ruleConditionDeclaration_in_entryRuleConditionDeclaration937);
+            iv_ruleConditionDeclaration=ruleConditionDeclaration();
+
+            state._fsp--;
+
+             current =iv_ruleConditionDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleConditionDeclaration947); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleConditionDeclaration"
+
+
+    // $ANTLR start "ruleConditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:509:1: ruleConditionDeclaration returns [EObject current=null] : (otherlv_0= 'condition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) ;
+    public final EObject ruleConditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        EObject lv_signal_1_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:512:28: ( (otherlv_0= 'condition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:513:1: (otherlv_0= 'condition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:513:1: (otherlv_0= 'condition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:513:3: otherlv_0= 'condition' ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            {
+            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleConditionDeclaration984); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getConditionDeclarationAccess().getConditionKeyword_0());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:517:1: ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:518:1: (lv_signal_1_0= ruleSignalDeclaration )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:518:1: (lv_signal_1_0= ruleSignalDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:519:3: lv_signal_1_0= ruleSignalDeclaration
+            {
+             
+            	        newCompositeNode(grammarAccess.getConditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0()); 
+            	    
+            pushFollow(FOLLOW_ruleSignalDeclaration_in_ruleConditionDeclaration1005);
+            lv_signal_1_0=ruleSignalDeclaration();
+
+            state._fsp--;
+
+
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getConditionDeclarationRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"signal",
+                    		lv_signal_1_0, 
+                    		"SignalDeclaration");
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleConditionDeclaration"
+
+
+    // $ANTLR start "entryRulePreconditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:543:1: entryRulePreconditionDeclaration returns [EObject current=null] : iv_rulePreconditionDeclaration= rulePreconditionDeclaration EOF ;
+    public final EObject entryRulePreconditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePreconditionDeclaration = null;
+
+
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:544:2: (iv_rulePreconditionDeclaration= rulePreconditionDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:545:2: iv_rulePreconditionDeclaration= rulePreconditionDeclaration EOF
+            {
+             newCompositeNode(grammarAccess.getPreconditionDeclarationRule()); 
+            pushFollow(FOLLOW_rulePreconditionDeclaration_in_entryRulePreconditionDeclaration1041);
+            iv_rulePreconditionDeclaration=rulePreconditionDeclaration();
+
+            state._fsp--;
+
+             current =iv_rulePreconditionDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePreconditionDeclaration1051); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePreconditionDeclaration"
+
+
+    // $ANTLR start "rulePreconditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:552:1: rulePreconditionDeclaration returns [EObject current=null] : (otherlv_0= 'precondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) ;
+    public final EObject rulePreconditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        EObject lv_signal_1_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:555:28: ( (otherlv_0= 'precondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:556:1: (otherlv_0= 'precondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:556:1: (otherlv_0= 'precondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:556:3: otherlv_0= 'precondition' ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            {
+            otherlv_0=(Token)match(input,22,FOLLOW_22_in_rulePreconditionDeclaration1088); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getPreconditionDeclarationAccess().getPreconditionKeyword_0());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:560:1: ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:561:1: (lv_signal_1_0= ruleSignalDeclaration )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:561:1: (lv_signal_1_0= ruleSignalDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:562:3: lv_signal_1_0= ruleSignalDeclaration
+            {
+             
+            	        newCompositeNode(grammarAccess.getPreconditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0()); 
+            	    
+            pushFollow(FOLLOW_ruleSignalDeclaration_in_rulePreconditionDeclaration1109);
+            lv_signal_1_0=ruleSignalDeclaration();
+
+            state._fsp--;
+
+
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getPreconditionDeclarationRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"signal",
+                    		lv_signal_1_0, 
+                    		"SignalDeclaration");
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePreconditionDeclaration"
+
+
+    // $ANTLR start "entryRulePostconditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:586:1: entryRulePostconditionDeclaration returns [EObject current=null] : iv_rulePostconditionDeclaration= rulePostconditionDeclaration EOF ;
+    public final EObject entryRulePostconditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePostconditionDeclaration = null;
+
+
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:587:2: (iv_rulePostconditionDeclaration= rulePostconditionDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:588:2: iv_rulePostconditionDeclaration= rulePostconditionDeclaration EOF
+            {
+             newCompositeNode(grammarAccess.getPostconditionDeclarationRule()); 
+            pushFollow(FOLLOW_rulePostconditionDeclaration_in_entryRulePostconditionDeclaration1145);
+            iv_rulePostconditionDeclaration=rulePostconditionDeclaration();
+
+            state._fsp--;
+
+             current =iv_rulePostconditionDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePostconditionDeclaration1155); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePostconditionDeclaration"
+
+
+    // $ANTLR start "rulePostconditionDeclaration"
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:595:1: rulePostconditionDeclaration returns [EObject current=null] : (otherlv_0= 'postcondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) ;
+    public final EObject rulePostconditionDeclaration() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        EObject lv_signal_1_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:598:28: ( (otherlv_0= 'postcondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:599:1: (otherlv_0= 'postcondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:599:1: (otherlv_0= 'postcondition' ( (lv_signal_1_0= ruleSignalDeclaration ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:599:3: otherlv_0= 'postcondition' ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            {
+            otherlv_0=(Token)match(input,23,FOLLOW_23_in_rulePostconditionDeclaration1192); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getPostconditionDeclarationAccess().getPostconditionKeyword_0());
+                
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:603:1: ( (lv_signal_1_0= ruleSignalDeclaration ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:604:1: (lv_signal_1_0= ruleSignalDeclaration )
+            {
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:604:1: (lv_signal_1_0= ruleSignalDeclaration )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:605:3: lv_signal_1_0= ruleSignalDeclaration
+            {
+             
+            	        newCompositeNode(grammarAccess.getPostconditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0()); 
+            	    
+            pushFollow(FOLLOW_ruleSignalDeclaration_in_rulePostconditionDeclaration1213);
+            lv_signal_1_0=ruleSignalDeclaration();
+
+            state._fsp--;
+
+
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getPostconditionDeclarationRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"signal",
+                    		lv_signal_1_0, 
+                    		"SignalDeclaration");
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePostconditionDeclaration"
 
 
     // $ANTLR start "entryRuleStateDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:282:1: entryRuleStateDeclaration returns [EObject current=null] : iv_ruleStateDeclaration= ruleStateDeclaration EOF ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:629:1: entryRuleStateDeclaration returns [EObject current=null] : iv_ruleStateDeclaration= ruleStateDeclaration EOF ;
     public final EObject entryRuleStateDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -602,17 +1489,17 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:283:2: (iv_ruleStateDeclaration= ruleStateDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:284:2: iv_ruleStateDeclaration= ruleStateDeclaration EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:630:2: (iv_ruleStateDeclaration= ruleStateDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:631:2: iv_ruleStateDeclaration= ruleStateDeclaration EOF
             {
              newCompositeNode(grammarAccess.getStateDeclarationRule()); 
-            pushFollow(FOLLOW_ruleStateDeclaration_in_entryRuleStateDeclaration481);
+            pushFollow(FOLLOW_ruleStateDeclaration_in_entryRuleStateDeclaration1249);
             iv_ruleStateDeclaration=ruleStateDeclaration();
 
             state._fsp--;
 
              current =iv_ruleStateDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateDeclaration491); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateDeclaration1259); 
 
             }
 
@@ -630,54 +1517,51 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStateDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:291:1: ruleStateDeclaration returns [EObject current=null] : (otherlv_0= 'states:' ( (lv_states_1_0= ruleState ) ) (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )* ) ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:638:1: ruleStateDeclaration returns [EObject current=null] : (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )? ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+ otherlv_5= ';' ) ;
     public final EObject ruleStateDeclaration() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
+        Token lv_name_1_0=null;
         Token otherlv_2=null;
-        EObject lv_states_1_0 = null;
+        Token otherlv_5=null;
+        EObject lv_condition_3_0 = null;
 
-        EObject lv_states_3_0 = null;
+        EObject lv_transitions_4_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:294:28: ( (otherlv_0= 'states:' ( (lv_states_1_0= ruleState ) ) (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )* ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:295:1: (otherlv_0= 'states:' ( (lv_states_1_0= ruleState ) ) (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )* )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:641:28: ( (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )? ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+ otherlv_5= ';' ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:642:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )? ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+ otherlv_5= ';' )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:295:1: (otherlv_0= 'states:' ( (lv_states_1_0= ruleState ) ) (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )* )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:295:3: otherlv_0= 'states:' ( (lv_states_1_0= ruleState ) ) (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )*
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:642:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )? ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+ otherlv_5= ';' )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:642:3: otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )? ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+ otherlv_5= ';'
             {
-            otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleStateDeclaration528); 
+            otherlv_0=(Token)match(input,24,FOLLOW_24_in_ruleStateDeclaration1296); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getStateDeclarationAccess().getStatesKeyword_0());
+                	newLeafNode(otherlv_0, grammarAccess.getStateDeclarationAccess().getStateKeyword_0());
                 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:299:1: ( (lv_states_1_0= ruleState ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:300:1: (lv_states_1_0= ruleState )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:646:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:647:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:300:1: (lv_states_1_0= ruleState )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:301:3: lv_states_1_0= ruleState
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:647:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:648:3: lv_name_1_0= RULE_ID
             {
-             
-            	        newCompositeNode(grammarAccess.getStateDeclarationAccess().getStatesStateParserRuleCall_1_0()); 
-            	    
-            pushFollow(FOLLOW_ruleState_in_ruleStateDeclaration549);
-            lv_states_1_0=ruleState();
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateDeclaration1313); 
 
-            state._fsp--;
-
+            			newLeafNode(lv_name_1_0, grammarAccess.getStateDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
+            		
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getStateDeclarationRule());
+            	            current = createModelElement(grammarAccess.getStateDeclarationRule());
             	        }
-                   		add(
+                   		setWithLastConsumed(
                    			current, 
-                   			"states",
-                    		lv_states_1_0, 
-                    		"State");
-            	        afterParserOrEnumRuleCall();
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
             	    
 
             }
@@ -685,36 +1569,105 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:317:2: (otherlv_2= ',' ( (lv_states_3_0= ruleState ) ) )*
-            loop4:
-            do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:664:2: (otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+ )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-                if ( (LA4_0==14) ) {
-                    alt4=1;
+            if ( (LA10_0==20) ) {
+                alt10=1;
+            }
+            switch (alt10) {
+                case 1 :
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:664:4: otherlv_2= 'constraints:' ( (lv_condition_3_0= ruleConditionDeclaration ) )+
+                    {
+                    otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleStateDeclaration1331); 
+
+                        	newLeafNode(otherlv_2, grammarAccess.getStateDeclarationAccess().getConstraintsKeyword_2_0());
+                        
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:668:1: ( (lv_condition_3_0= ruleConditionDeclaration ) )+
+                    int cnt9=0;
+                    loop9:
+                    do {
+                        int alt9=2;
+                        int LA9_0 = input.LA(1);
+
+                        if ( (LA9_0==21) ) {
+                            alt9=1;
+                        }
+
+
+                        switch (alt9) {
+                    	case 1 :
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:669:1: (lv_condition_3_0= ruleConditionDeclaration )
+                    	    {
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:669:1: (lv_condition_3_0= ruleConditionDeclaration )
+                    	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:670:3: lv_condition_3_0= ruleConditionDeclaration
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getStateDeclarationAccess().getConditionConditionDeclarationParserRuleCall_2_1_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_ruleConditionDeclaration_in_ruleStateDeclaration1352);
+                    	    lv_condition_3_0=ruleConditionDeclaration();
+
+                    	    state._fsp--;
+
+
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getStateDeclarationRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"condition",
+                    	            		lv_condition_3_0, 
+                    	            		"ConditionDeclaration");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt9 >= 1 ) break loop9;
+                                EarlyExitException eee =
+                                    new EarlyExitException(9, input);
+                                throw eee;
+                        }
+                        cnt9++;
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:686:5: ( (lv_transitions_4_0= ruleTransitionDeclaration ) )+
+            int cnt11=0;
+            loop11:
+            do {
+                int alt11=2;
+                int LA11_0 = input.LA(1);
+
+                if ( (LA11_0==16) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:317:4: otherlv_2= ',' ( (lv_states_3_0= ruleState ) )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:687:1: (lv_transitions_4_0= ruleTransitionDeclaration )
             	    {
-            	    otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleStateDeclaration562); 
-
-            	        	newLeafNode(otherlv_2, grammarAccess.getStateDeclarationAccess().getCommaKeyword_2_0());
-            	        
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:321:1: ( (lv_states_3_0= ruleState ) )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:322:1: (lv_states_3_0= ruleState )
-            	    {
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:322:1: (lv_states_3_0= ruleState )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:323:3: lv_states_3_0= ruleState
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:687:1: (lv_transitions_4_0= ruleTransitionDeclaration )
+            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:688:3: lv_transitions_4_0= ruleTransitionDeclaration
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getStateDeclarationAccess().getStatesStateParserRuleCall_2_1_0()); 
+            	    	        newCompositeNode(grammarAccess.getStateDeclarationAccess().getTransitionsTransitionDeclarationParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleState_in_ruleStateDeclaration583);
-            	    lv_states_3_0=ruleState();
+            	    pushFollow(FOLLOW_ruleTransitionDeclaration_in_ruleStateDeclaration1376);
+            	    lv_transitions_4_0=ruleTransitionDeclaration();
 
             	    state._fsp--;
 
@@ -724,14 +1677,11 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"states",
-            	            		lv_states_3_0, 
-            	            		"State");
+            	           			"transitions",
+            	            		lv_transitions_4_0, 
+            	            		"TransitionDeclaration");
             	    	        afterParserOrEnumRuleCall();
             	    	    
-
-            	    }
-
 
             	    }
 
@@ -740,10 +1690,18 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop4;
+            	    if ( cnt11 >= 1 ) break loop11;
+                        EarlyExitException eee =
+                            new EarlyExitException(11, input);
+                        throw eee;
                 }
+                cnt11++;
             } while (true);
 
+            otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleStateDeclaration1389); 
+
+                	newLeafNode(otherlv_5, grammarAccess.getStateDeclarationAccess().getSemicolonKeyword_4());
+                
 
             }
 
@@ -764,106 +1722,8 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleStateDeclaration"
 
 
-    // $ANTLR start "entryRuleInitialDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:347:1: entryRuleInitialDeclaration returns [EObject current=null] : iv_ruleInitialDeclaration= ruleInitialDeclaration EOF ;
-    public final EObject entryRuleInitialDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleInitialDeclaration = null;
-
-
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:348:2: (iv_ruleInitialDeclaration= ruleInitialDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:349:2: iv_ruleInitialDeclaration= ruleInitialDeclaration EOF
-            {
-             newCompositeNode(grammarAccess.getInitialDeclarationRule()); 
-            pushFollow(FOLLOW_ruleInitialDeclaration_in_entryRuleInitialDeclaration621);
-            iv_ruleInitialDeclaration=ruleInitialDeclaration();
-
-            state._fsp--;
-
-             current =iv_ruleInitialDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialDeclaration631); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleInitialDeclaration"
-
-
-    // $ANTLR start "ruleInitialDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:356:1: ruleInitialDeclaration returns [EObject current=null] : (otherlv_0= 'initial:' ( (otherlv_1= RULE_ID ) ) ) ;
-    public final EObject ruleInitialDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:359:28: ( (otherlv_0= 'initial:' ( (otherlv_1= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:360:1: (otherlv_0= 'initial:' ( (otherlv_1= RULE_ID ) ) )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:360:1: (otherlv_0= 'initial:' ( (otherlv_1= RULE_ID ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:360:3: otherlv_0= 'initial:' ( (otherlv_1= RULE_ID ) )
-            {
-            otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleInitialDeclaration668); 
-
-                	newLeafNode(otherlv_0, grammarAccess.getInitialDeclarationAccess().getInitialKeyword_0());
-                
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:364:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:365:1: (otherlv_1= RULE_ID )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:365:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:366:3: otherlv_1= RULE_ID
-            {
-
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getInitialDeclarationRule());
-            	        }
-                    
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialDeclaration688); 
-
-            		newLeafNode(otherlv_1, grammarAccess.getInitialDeclarationAccess().getInitialStateCrossReference_1_0()); 
-            	
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleInitialDeclaration"
-
-
     // $ANTLR start "entryRuleLoopsDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:385:1: entryRuleLoopsDeclaration returns [EObject current=null] : iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:716:1: entryRuleLoopsDeclaration returns [EObject current=null] : iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF ;
     public final EObject entryRuleLoopsDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -871,17 +1731,17 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:386:2: (iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:387:2: iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:717:2: (iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:718:2: iv_ruleLoopsDeclaration= ruleLoopsDeclaration EOF
             {
              newCompositeNode(grammarAccess.getLoopsDeclarationRule()); 
-            pushFollow(FOLLOW_ruleLoopsDeclaration_in_entryRuleLoopsDeclaration724);
+            pushFollow(FOLLOW_ruleLoopsDeclaration_in_entryRuleLoopsDeclaration1425);
             iv_ruleLoopsDeclaration=ruleLoopsDeclaration();
 
             state._fsp--;
 
              current =iv_ruleLoopsDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLoopsDeclaration734); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLoopsDeclaration1435); 
 
             }
 
@@ -899,7 +1759,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLoopsDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:394:1: ruleLoopsDeclaration returns [EObject current=null] : (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) ) ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:725:1: ruleLoopsDeclaration returns [EObject current=null] : (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final EObject ruleLoopsDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -909,23 +1769,23 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:397:28: ( (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:398:1: (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:728:28: ( (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:729:1: (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:398:1: (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:398:3: otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:729:1: (otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:729:3: otherlv_0= 'loops:' ( (lv_val_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleLoopsDeclaration771); 
+            otherlv_0=(Token)match(input,25,FOLLOW_25_in_ruleLoopsDeclaration1472); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLoopsDeclarationAccess().getLoopsKeyword_0());
                 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:402:1: ( (lv_val_1_0= RULE_INT ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:403:1: (lv_val_1_0= RULE_INT )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:733:1: ( (lv_val_1_0= RULE_INT ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:734:1: (lv_val_1_0= RULE_INT )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:403:1: (lv_val_1_0= RULE_INT )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:404:3: lv_val_1_0= RULE_INT
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:734:1: (lv_val_1_0= RULE_INT )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:735:3: lv_val_1_0= RULE_INT
             {
-            lv_val_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleLoopsDeclaration788); 
+            lv_val_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleLoopsDeclaration1489); 
 
             			newLeafNode(lv_val_1_0, grammarAccess.getLoopsDeclarationAccess().getValINTTerminalRuleCall_1_0()); 
             		
@@ -966,7 +1826,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSeedDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:428:1: entryRuleSeedDeclaration returns [EObject current=null] : iv_ruleSeedDeclaration= ruleSeedDeclaration EOF ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:759:1: entryRuleSeedDeclaration returns [EObject current=null] : iv_ruleSeedDeclaration= ruleSeedDeclaration EOF ;
     public final EObject entryRuleSeedDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -974,17 +1834,17 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:429:2: (iv_ruleSeedDeclaration= ruleSeedDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:430:2: iv_ruleSeedDeclaration= ruleSeedDeclaration EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:760:2: (iv_ruleSeedDeclaration= ruleSeedDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:761:2: iv_ruleSeedDeclaration= ruleSeedDeclaration EOF
             {
              newCompositeNode(grammarAccess.getSeedDeclarationRule()); 
-            pushFollow(FOLLOW_ruleSeedDeclaration_in_entryRuleSeedDeclaration829);
+            pushFollow(FOLLOW_ruleSeedDeclaration_in_entryRuleSeedDeclaration1530);
             iv_ruleSeedDeclaration=ruleSeedDeclaration();
 
             state._fsp--;
 
              current =iv_ruleSeedDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSeedDeclaration839); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSeedDeclaration1540); 
 
             }
 
@@ -1002,7 +1862,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSeedDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:437:1: ruleSeedDeclaration returns [EObject current=null] : (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) ) ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:768:1: ruleSeedDeclaration returns [EObject current=null] : (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final EObject ruleSeedDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -1012,23 +1872,23 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:440:28: ( (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:441:1: (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:771:28: ( (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:772:1: (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:441:1: (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:441:3: otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:772:1: (otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:772:3: otherlv_0= 'randseed:' ( (lv_val_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleSeedDeclaration876); 
+            otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleSeedDeclaration1577); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSeedDeclarationAccess().getRandseedKeyword_0());
                 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:445:1: ( (lv_val_1_0= RULE_INT ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:446:1: (lv_val_1_0= RULE_INT )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:776:1: ( (lv_val_1_0= RULE_INT ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:777:1: (lv_val_1_0= RULE_INT )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:446:1: (lv_val_1_0= RULE_INT )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:447:3: lv_val_1_0= RULE_INT
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:777:1: (lv_val_1_0= RULE_INT )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:778:3: lv_val_1_0= RULE_INT
             {
-            lv_val_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSeedDeclaration893); 
+            lv_val_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSeedDeclaration1594); 
 
             			newLeafNode(lv_val_1_0, grammarAccess.getSeedDeclarationAccess().getValINTTerminalRuleCall_1_0()); 
             		
@@ -1069,7 +1929,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSignalDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:471:1: entryRuleSignalDeclaration returns [EObject current=null] : iv_ruleSignalDeclaration= ruleSignalDeclaration EOF ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:802:1: entryRuleSignalDeclaration returns [EObject current=null] : iv_ruleSignalDeclaration= ruleSignalDeclaration EOF ;
     public final EObject entryRuleSignalDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -1077,17 +1937,17 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:472:2: (iv_ruleSignalDeclaration= ruleSignalDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:473:2: iv_ruleSignalDeclaration= ruleSignalDeclaration EOF
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:803:2: (iv_ruleSignalDeclaration= ruleSignalDeclaration EOF )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:804:2: iv_ruleSignalDeclaration= ruleSignalDeclaration EOF
             {
              newCompositeNode(grammarAccess.getSignalDeclarationRule()); 
-            pushFollow(FOLLOW_ruleSignalDeclaration_in_entryRuleSignalDeclaration934);
+            pushFollow(FOLLOW_ruleSignalDeclaration_in_entryRuleSignalDeclaration1635);
             iv_ruleSignalDeclaration=ruleSignalDeclaration();
 
             state._fsp--;
 
              current =iv_ruleSignalDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSignalDeclaration944); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSignalDeclaration1645); 
 
             }
 
@@ -1105,7 +1965,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSignalDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:480:1: ruleSignalDeclaration returns [EObject current=null] : ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? ) ;
+    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:811:1: ruleSignalDeclaration returns [EObject current=null] : ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? ) ;
     public final EObject ruleSignalDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -1120,34 +1980,34 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:483:28: ( ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:1: ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:814:28: ( ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:1: ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:1: ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:2: ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )?
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:1: ( ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )? )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:2: ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )? ( (lv_signame_2_0= RULE_ID ) ) ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )?
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:2: ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:2: ( ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.' )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA5_0==RULE_ID) ) {
-                int LA5_1 = input.LA(2);
+            if ( (LA12_0==RULE_ID) ) {
+                int LA12_1 = input.LA(2);
 
-                if ( (LA5_1==18) ) {
-                    alt5=1;
+                if ( (LA12_1==27) ) {
+                    alt12=1;
                 }
             }
-            switch (alt5) {
+            switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:3: ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.'
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:3: ( (lv_port_0_0= RULE_ID ) ) otherlv_1= '.'
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:484:3: ( (lv_port_0_0= RULE_ID ) )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:485:1: (lv_port_0_0= RULE_ID )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:815:3: ( (lv_port_0_0= RULE_ID ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:816:1: (lv_port_0_0= RULE_ID )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:485:1: (lv_port_0_0= RULE_ID )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:486:3: lv_port_0_0= RULE_ID
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:816:1: (lv_port_0_0= RULE_ID )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:817:3: lv_port_0_0= RULE_ID
                     {
-                    lv_port_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignalDeclaration987); 
+                    lv_port_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignalDeclaration1688); 
 
                     			newLeafNode(lv_port_0_0, grammarAccess.getSignalDeclarationAccess().getPortIDTerminalRuleCall_0_0_0()); 
                     		
@@ -1167,7 +2027,7 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleSignalDeclaration1004); 
+                    otherlv_1=(Token)match(input,27,FOLLOW_27_in_ruleSignalDeclaration1705); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getSignalDeclarationAccess().getFullStopKeyword_0_1());
                         
@@ -1177,13 +2037,13 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:506:3: ( (lv_signame_2_0= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:507:1: (lv_signame_2_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:837:3: ( (lv_signame_2_0= RULE_ID ) )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:838:1: (lv_signame_2_0= RULE_ID )
             {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:507:1: (lv_signame_2_0= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:508:3: lv_signame_2_0= RULE_ID
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:838:1: (lv_signame_2_0= RULE_ID )
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:839:3: lv_signame_2_0= RULE_ID
             {
-            lv_signame_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignalDeclaration1023); 
+            lv_signame_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignalDeclaration1724); 
 
             			newLeafNode(lv_signame_2_0, grammarAccess.getSignalDeclarationAccess().getSignameIDTerminalRuleCall_1_0()); 
             		
@@ -1203,38 +2063,38 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:524:2: ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )?
-            int alt6=3;
-            int LA6_0 = input.LA(1);
+            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:855:2: ( (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) ) | (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) ) )?
+            int alt13=3;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA6_0==19) ) {
-                int LA6_1 = input.LA(2);
+            if ( (LA13_0==28) ) {
+                int LA13_1 = input.LA(2);
 
-                if ( (LA6_1==RULE_INT) ) {
-                    alt6=1;
+                if ( (LA13_1==RULE_STRING) ) {
+                    alt13=2;
                 }
-                else if ( (LA6_1==RULE_STRING) ) {
-                    alt6=2;
+                else if ( (LA13_1==RULE_INT) ) {
+                    alt13=1;
                 }
             }
-            switch (alt6) {
+            switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:524:3: (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:855:3: (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:524:3: (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:524:5: otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:855:3: (otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:855:5: otherlv_3= '=' ( (lv_intVal_4_0= RULE_INT ) )
                     {
-                    otherlv_3=(Token)match(input,19,FOLLOW_19_in_ruleSignalDeclaration1042); 
+                    otherlv_3=(Token)match(input,28,FOLLOW_28_in_ruleSignalDeclaration1743); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getSignalDeclarationAccess().getEqualsSignKeyword_2_0_0());
                         
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:528:1: ( (lv_intVal_4_0= RULE_INT ) )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:529:1: (lv_intVal_4_0= RULE_INT )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:859:1: ( (lv_intVal_4_0= RULE_INT ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:860:1: (lv_intVal_4_0= RULE_INT )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:529:1: (lv_intVal_4_0= RULE_INT )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:530:3: lv_intVal_4_0= RULE_INT
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:860:1: (lv_intVal_4_0= RULE_INT )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:861:3: lv_intVal_4_0= RULE_INT
                     {
-                    lv_intVal_4_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignalDeclaration1059); 
+                    lv_intVal_4_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignalDeclaration1760); 
 
                     			newLeafNode(lv_intVal_4_0, grammarAccess.getSignalDeclarationAccess().getIntValINTTerminalRuleCall_2_0_1_0()); 
                     		
@@ -1261,22 +2121,22 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:547:6: (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:878:6: (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:547:6: (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:547:8: otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:878:6: (otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:878:8: otherlv_5= '=' ( (lv_strVal_6_0= RULE_STRING ) )
                     {
-                    otherlv_5=(Token)match(input,19,FOLLOW_19_in_ruleSignalDeclaration1084); 
+                    otherlv_5=(Token)match(input,28,FOLLOW_28_in_ruleSignalDeclaration1785); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getSignalDeclarationAccess().getEqualsSignKeyword_2_1_0());
                         
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:551:1: ( (lv_strVal_6_0= RULE_STRING ) )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:552:1: (lv_strVal_6_0= RULE_STRING )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:882:1: ( (lv_strVal_6_0= RULE_STRING ) )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:883:1: (lv_strVal_6_0= RULE_STRING )
                     {
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:552:1: (lv_strVal_6_0= RULE_STRING )
-                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:553:3: lv_strVal_6_0= RULE_STRING
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:883:1: (lv_strVal_6_0= RULE_STRING )
+                    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:884:3: lv_strVal_6_0= RULE_STRING
                     {
-                    lv_strVal_6_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSignalDeclaration1101); 
+                    lv_strVal_6_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSignalDeclaration1802); 
 
                     			newLeafNode(lv_strVal_6_0, grammarAccess.getSignalDeclarationAccess().getStrValSTRINGTerminalRuleCall_2_1_1_0()); 
                     		
@@ -1324,451 +2184,6 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end "ruleSignalDeclaration"
 
-
-    // $ANTLR start "entryRuleSourceDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:577:1: entryRuleSourceDeclaration returns [EObject current=null] : iv_ruleSourceDeclaration= ruleSourceDeclaration EOF ;
-    public final EObject entryRuleSourceDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleSourceDeclaration = null;
-
-
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:578:2: (iv_ruleSourceDeclaration= ruleSourceDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:579:2: iv_ruleSourceDeclaration= ruleSourceDeclaration EOF
-            {
-             newCompositeNode(grammarAccess.getSourceDeclarationRule()); 
-            pushFollow(FOLLOW_ruleSourceDeclaration_in_entryRuleSourceDeclaration1145);
-            iv_ruleSourceDeclaration=ruleSourceDeclaration();
-
-            state._fsp--;
-
-             current =iv_ruleSourceDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSourceDeclaration1155); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleSourceDeclaration"
-
-
-    // $ANTLR start "ruleSourceDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:586:1: ruleSourceDeclaration returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ) ;
-    public final EObject ruleSourceDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:589:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:590:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:590:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:590:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= ':'
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:590:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:591:1: (otherlv_0= RULE_ID )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:591:1: (otherlv_0= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:592:3: otherlv_0= RULE_ID
-            {
-
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getSourceDeclarationRule());
-            	        }
-                    
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSourceDeclaration1200); 
-
-            		newLeafNode(otherlv_0, grammarAccess.getSourceDeclarationAccess().getRefStateCrossReference_0_0()); 
-            	
-
-            }
-
-
-            }
-
-            otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleSourceDeclaration1212); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getSourceDeclarationAccess().getColonKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleSourceDeclaration"
-
-
-    // $ANTLR start "entryRuleDestinationDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:615:1: entryRuleDestinationDeclaration returns [EObject current=null] : iv_ruleDestinationDeclaration= ruleDestinationDeclaration EOF ;
-    public final EObject entryRuleDestinationDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDestinationDeclaration = null;
-
-
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:616:2: (iv_ruleDestinationDeclaration= ruleDestinationDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:617:2: iv_ruleDestinationDeclaration= ruleDestinationDeclaration EOF
-            {
-             newCompositeNode(grammarAccess.getDestinationDeclarationRule()); 
-            pushFollow(FOLLOW_ruleDestinationDeclaration_in_entryRuleDestinationDeclaration1248);
-            iv_ruleDestinationDeclaration=ruleDestinationDeclaration();
-
-            state._fsp--;
-
-             current =iv_ruleDestinationDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestinationDeclaration1258); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDestinationDeclaration"
-
-
-    // $ANTLR start "ruleDestinationDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:624:1: ruleDestinationDeclaration returns [EObject current=null] : (otherlv_0= '-> ' ( (otherlv_1= RULE_ID ) ) ) ;
-    public final EObject ruleDestinationDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:627:28: ( (otherlv_0= '-> ' ( (otherlv_1= RULE_ID ) ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:628:1: (otherlv_0= '-> ' ( (otherlv_1= RULE_ID ) ) )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:628:1: (otherlv_0= '-> ' ( (otherlv_1= RULE_ID ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:628:3: otherlv_0= '-> ' ( (otherlv_1= RULE_ID ) )
-            {
-            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleDestinationDeclaration1295); 
-
-                	newLeafNode(otherlv_0, grammarAccess.getDestinationDeclarationAccess().getHyphenMinusGreaterThanSignSpaceKeyword_0());
-                
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:632:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:633:1: (otherlv_1= RULE_ID )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:633:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:634:3: otherlv_1= RULE_ID
-            {
-
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getDestinationDeclarationRule());
-            	        }
-                    
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDestinationDeclaration1315); 
-
-            		newLeafNode(otherlv_1, grammarAccess.getDestinationDeclarationAccess().getRefStateCrossReference_1_0()); 
-            	
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDestinationDeclaration"
-
-
-    // $ANTLR start "entryRuleTransitionDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:653:1: entryRuleTransitionDeclaration returns [EObject current=null] : iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF ;
-    public final EObject entryRuleTransitionDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleTransitionDeclaration = null;
-
-
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:654:2: (iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:655:2: iv_ruleTransitionDeclaration= ruleTransitionDeclaration EOF
-            {
-             newCompositeNode(grammarAccess.getTransitionDeclarationRule()); 
-            pushFollow(FOLLOW_ruleTransitionDeclaration_in_entryRuleTransitionDeclaration1351);
-            iv_ruleTransitionDeclaration=ruleTransitionDeclaration();
-
-            state._fsp--;
-
-             current =iv_ruleTransitionDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionDeclaration1361); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleTransitionDeclaration"
-
-
-    // $ANTLR start "ruleTransitionDeclaration"
-    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:662:1: ruleTransitionDeclaration returns [EObject current=null] : ( ( (lv_source_0_0= ruleSourceDeclaration ) ) otherlv_1= 'in:' ( (lv_in_2_0= ruleSignalDeclaration ) )* otherlv_3= 'out:' ( (lv_out_4_0= ruleSignalDeclaration ) )* ( (lv_destination_5_0= ruleDestinationDeclaration ) ) ) ;
-    public final EObject ruleTransitionDeclaration() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-        EObject lv_source_0_0 = null;
-
-        EObject lv_in_2_0 = null;
-
-        EObject lv_out_4_0 = null;
-
-        EObject lv_destination_5_0 = null;
-
-
-         enterRule(); 
-            
-        try {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:665:28: ( ( ( (lv_source_0_0= ruleSourceDeclaration ) ) otherlv_1= 'in:' ( (lv_in_2_0= ruleSignalDeclaration ) )* otherlv_3= 'out:' ( (lv_out_4_0= ruleSignalDeclaration ) )* ( (lv_destination_5_0= ruleDestinationDeclaration ) ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:666:1: ( ( (lv_source_0_0= ruleSourceDeclaration ) ) otherlv_1= 'in:' ( (lv_in_2_0= ruleSignalDeclaration ) )* otherlv_3= 'out:' ( (lv_out_4_0= ruleSignalDeclaration ) )* ( (lv_destination_5_0= ruleDestinationDeclaration ) ) )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:666:1: ( ( (lv_source_0_0= ruleSourceDeclaration ) ) otherlv_1= 'in:' ( (lv_in_2_0= ruleSignalDeclaration ) )* otherlv_3= 'out:' ( (lv_out_4_0= ruleSignalDeclaration ) )* ( (lv_destination_5_0= ruleDestinationDeclaration ) ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:666:2: ( (lv_source_0_0= ruleSourceDeclaration ) ) otherlv_1= 'in:' ( (lv_in_2_0= ruleSignalDeclaration ) )* otherlv_3= 'out:' ( (lv_out_4_0= ruleSignalDeclaration ) )* ( (lv_destination_5_0= ruleDestinationDeclaration ) )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:666:2: ( (lv_source_0_0= ruleSourceDeclaration ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:667:1: (lv_source_0_0= ruleSourceDeclaration )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:667:1: (lv_source_0_0= ruleSourceDeclaration )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:668:3: lv_source_0_0= ruleSourceDeclaration
-            {
-             
-            	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getSourceSourceDeclarationParserRuleCall_0_0()); 
-            	    
-            pushFollow(FOLLOW_ruleSourceDeclaration_in_ruleTransitionDeclaration1407);
-            lv_source_0_0=ruleSourceDeclaration();
-
-            state._fsp--;
-
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"source",
-                    		lv_source_0_0, 
-                    		"SourceDeclaration");
-            	        afterParserOrEnumRuleCall();
-            	    
-
-            }
-
-
-            }
-
-            otherlv_1=(Token)match(input,22,FOLLOW_22_in_ruleTransitionDeclaration1419); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getInKeyword_1());
-                
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:688:1: ( (lv_in_2_0= ruleSignalDeclaration ) )*
-            loop7:
-            do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
-
-                if ( (LA7_0==RULE_ID) ) {
-                    alt7=1;
-                }
-
-
-                switch (alt7) {
-            	case 1 :
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:689:1: (lv_in_2_0= ruleSignalDeclaration )
-            	    {
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:689:1: (lv_in_2_0= ruleSignalDeclaration )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:690:3: lv_in_2_0= ruleSignalDeclaration
-            	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getInSignalDeclarationParserRuleCall_2_0()); 
-            	    	    
-            	    pushFollow(FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration1440);
-            	    lv_in_2_0=ruleSignalDeclaration();
-
-            	    state._fsp--;
-
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"in",
-            	            		lv_in_2_0, 
-            	            		"SignalDeclaration");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop7;
-                }
-            } while (true);
-
-            otherlv_3=(Token)match(input,23,FOLLOW_23_in_ruleTransitionDeclaration1453); 
-
-                	newLeafNode(otherlv_3, grammarAccess.getTransitionDeclarationAccess().getOutKeyword_3());
-                
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:710:1: ( (lv_out_4_0= ruleSignalDeclaration ) )*
-            loop8:
-            do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
-
-                if ( (LA8_0==RULE_ID) ) {
-                    alt8=1;
-                }
-
-
-                switch (alt8) {
-            	case 1 :
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:711:1: (lv_out_4_0= ruleSignalDeclaration )
-            	    {
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:711:1: (lv_out_4_0= ruleSignalDeclaration )
-            	    // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:712:3: lv_out_4_0= ruleSignalDeclaration
-            	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getOutSignalDeclarationParserRuleCall_4_0()); 
-            	    	    
-            	    pushFollow(FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration1474);
-            	    lv_out_4_0=ruleSignalDeclaration();
-
-            	    state._fsp--;
-
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"out",
-            	            		lv_out_4_0, 
-            	            		"SignalDeclaration");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop8;
-                }
-            } while (true);
-
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:728:3: ( (lv_destination_5_0= ruleDestinationDeclaration ) )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:729:1: (lv_destination_5_0= ruleDestinationDeclaration )
-            {
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:729:1: (lv_destination_5_0= ruleDestinationDeclaration )
-            // ../org.eclipse.etrice.generator.fsmtest/src-gen/org/eclipse/etrice/generator/parser/antlr/internal/InternalFSMtest.g:730:3: lv_destination_5_0= ruleDestinationDeclaration
-            {
-             
-            	        newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getDestinationDestinationDeclarationParserRuleCall_5_0()); 
-            	    
-            pushFollow(FOLLOW_ruleDestinationDeclaration_in_ruleTransitionDeclaration1496);
-            lv_destination_5_0=ruleDestinationDeclaration();
-
-            state._fsp--;
-
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"destination",
-                    		lv_destination_5_0, 
-                    		"DestinationDeclaration");
-            	        afterParserOrEnumRuleCall();
-            	    
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleTransitionDeclaration"
-
     // Delegated rules
 
 
@@ -1776,62 +2191,78 @@ public class InternalFSMtestParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestscript_in_ruleModel130 = new BitSet(new long[]{0x0000000000000802L});
-    public static final BitSet FOLLOW_ruleTestscript_in_entryRuleTestscript166 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestscript176 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleTestscript213 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTestscript230 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_ruleStateDeclaration_in_ruleTestscript256 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_ruleInitialDeclaration_in_ruleTestscript277 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_ruleLoopsDeclaration_in_ruleTestscript298 = new BitSet(new long[]{0x0000000000021010L});
-    public static final BitSet FOLLOW_ruleSeedDeclaration_in_ruleTestscript319 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleTransitionDeclaration_in_ruleTestscript341 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_12_in_ruleTestscript354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState390 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateDeclaration_in_entryRuleStateDeclaration481 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateDeclaration491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleStateDeclaration528 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateDeclaration549 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleStateDeclaration562 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateDeclaration583 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_ruleInitialDeclaration_in_entryRuleInitialDeclaration621 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInitialDeclaration631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleInitialDeclaration668 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialDeclaration688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLoopsDeclaration_in_entryRuleLoopsDeclaration724 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLoopsDeclaration734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleLoopsDeclaration771 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleLoopsDeclaration788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSeedDeclaration_in_entryRuleSeedDeclaration829 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSeedDeclaration839 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleSeedDeclaration876 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSeedDeclaration893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignalDeclaration_in_entryRuleSignalDeclaration934 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSignalDeclaration944 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSignalDeclaration987 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleSignalDeclaration1004 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSignalDeclaration1023 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleSignalDeclaration1042 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSignalDeclaration1059 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleSignalDeclaration1084 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleSignalDeclaration1101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSourceDeclaration_in_entryRuleSourceDeclaration1145 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSourceDeclaration1155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSourceDeclaration1200 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleSourceDeclaration1212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestinationDeclaration_in_entryRuleDestinationDeclaration1248 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestinationDeclaration1258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleDestinationDeclaration1295 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleDestinationDeclaration1315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionDeclaration_in_entryRuleTransitionDeclaration1351 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionDeclaration1361 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSourceDeclaration_in_ruleTransitionDeclaration1407 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleTransitionDeclaration1419 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration1440 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_23_in_ruleTransitionDeclaration1453 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration1474 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleDestinationDeclaration_in_ruleTransitionDeclaration1496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFsmDefinition_in_ruleModel131 = new BitSet(new long[]{0x0000000000004802L});
+    public static final BitSet FOLLOW_ruleRandomTest_in_ruleModel158 = new BitSet(new long[]{0x0000000000004802L});
+    public static final BitSet FOLLOW_ruleFsmDefinition_in_entryRuleFsmDefinition195 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFsmDefinition205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleFsmDefinition242 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFsmDefinition259 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleFsmDefinition276 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_ruleStateDeclaration_in_ruleFsmDefinition297 = new BitSet(new long[]{0x0000000001002000L});
+    public static final BitSet FOLLOW_ruleStateDeclaration_in_ruleFsmDefinition318 = new BitSet(new long[]{0x0000000001002000L});
+    public static final BitSet FOLLOW_13_in_ruleFsmDefinition331 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRandomTest_in_entryRuleRandomTest367 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRandomTest377 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleRandomTest414 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRandomTest431 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleRandomTest448 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRandomTest468 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_ruleLoopsDeclaration_in_ruleRandomTest489 = new BitSet(new long[]{0x0000000004002000L});
+    public static final BitSet FOLLOW_ruleSeedDeclaration_in_ruleRandomTest510 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleRandomTest523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuardDeclaration_in_entryRuleGuardDeclaration559 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuardDeclaration569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_ruleGuardDeclaration614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionDeclaration_in_entryRuleTransitionDeclaration649 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionDeclaration659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleTransitionDeclaration696 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionDeclaration713 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleTransitionDeclaration730 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionDeclaration750 = new BitSet(new long[]{0x00000000001C2000L});
+    public static final BitSet FOLLOW_18_in_ruleTransitionDeclaration763 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_ruleTransitionDeclaration784 = new BitSet(new long[]{0x0000000000182000L});
+    public static final BitSet FOLLOW_19_in_ruleTransitionDeclaration799 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleGuardDeclaration_in_ruleTransitionDeclaration820 = new BitSet(new long[]{0x0000000000102010L});
+    public static final BitSet FOLLOW_20_in_ruleTransitionDeclaration836 = new BitSet(new long[]{0x0000000000C00000L});
+    public static final BitSet FOLLOW_rulePreconditionDeclaration_in_ruleTransitionDeclaration858 = new BitSet(new long[]{0x0000000000C02000L});
+    public static final BitSet FOLLOW_rulePostconditionDeclaration_in_ruleTransitionDeclaration885 = new BitSet(new long[]{0x0000000000C02000L});
+    public static final BitSet FOLLOW_13_in_ruleTransitionDeclaration901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleConditionDeclaration_in_entryRuleConditionDeclaration937 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleConditionDeclaration947 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleConditionDeclaration984 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_ruleConditionDeclaration1005 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePreconditionDeclaration_in_entryRulePreconditionDeclaration1041 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePreconditionDeclaration1051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rulePreconditionDeclaration1088 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_rulePreconditionDeclaration1109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePostconditionDeclaration_in_entryRulePostconditionDeclaration1145 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePostconditionDeclaration1155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rulePostconditionDeclaration1192 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_rulePostconditionDeclaration1213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateDeclaration_in_entryRuleStateDeclaration1249 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateDeclaration1259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_ruleStateDeclaration1296 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStateDeclaration1313 = new BitSet(new long[]{0x0000000000110000L});
+    public static final BitSet FOLLOW_20_in_ruleStateDeclaration1331 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_ruleConditionDeclaration_in_ruleStateDeclaration1352 = new BitSet(new long[]{0x0000000000310000L});
+    public static final BitSet FOLLOW_ruleTransitionDeclaration_in_ruleStateDeclaration1376 = new BitSet(new long[]{0x0000000000112000L});
+    public static final BitSet FOLLOW_13_in_ruleStateDeclaration1389 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLoopsDeclaration_in_entryRuleLoopsDeclaration1425 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLoopsDeclaration1435 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_ruleLoopsDeclaration1472 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleLoopsDeclaration1489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSeedDeclaration_in_entryRuleSeedDeclaration1530 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSeedDeclaration1540 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleSeedDeclaration1577 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSeedDeclaration1594 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignalDeclaration_in_entryRuleSignalDeclaration1635 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSignalDeclaration1645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSignalDeclaration1688 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleSignalDeclaration1705 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSignalDeclaration1724 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_28_in_ruleSignalDeclaration1743 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSignalDeclaration1760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleSignalDeclaration1785 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleSignalDeclaration1802 = new BitSet(new long[]{0x0000000000000002L});
 
 }
