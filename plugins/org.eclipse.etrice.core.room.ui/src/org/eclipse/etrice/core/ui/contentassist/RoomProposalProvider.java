@@ -18,8 +18,10 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Function;
 
@@ -98,6 +100,13 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		
 		// delegate to default
 		return super.getProposalFactory(ruleName, contentAssistContext);
+	}
+	
+	@Override
+	public void completeImport_ImportURI(EObject model, Assignment assignment,
+			final ContentAssistContext context,
+			final ICompletionProposalAcceptor acceptor) {
+		ImportModelAssist.addPaths(this, context, acceptor, ".room");
 	}
 
 //	public void completeActorRef_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
