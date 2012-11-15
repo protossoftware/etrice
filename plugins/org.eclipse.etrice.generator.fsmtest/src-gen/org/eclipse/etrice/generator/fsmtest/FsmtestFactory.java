@@ -32,22 +32,67 @@ public interface FsmtestFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>Testscript</em>'.
+   * Returns a new object of class '<em>Fsm Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Testscript</em>'.
+   * @return a new object of class '<em>Fsm Definition</em>'.
    * @generated
    */
-  Testscript createTestscript();
+  FsmDefinition createFsmDefinition();
 
   /**
-   * Returns a new object of class '<em>State</em>'.
+   * Returns a new object of class '<em>Random Test</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>State</em>'.
+   * @return a new object of class '<em>Random Test</em>'.
    * @generated
    */
-  State createState();
+  RandomTest createRandomTest();
+
+  /**
+   * Returns a new object of class '<em>Guard Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Guard Declaration</em>'.
+   * @generated
+   */
+  GuardDeclaration createGuardDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Transition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Declaration</em>'.
+   * @generated
+   */
+  TransitionDeclaration createTransitionDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Condition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Condition Declaration</em>'.
+   * @generated
+   */
+  ConditionDeclaration createConditionDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Precondition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Precondition Declaration</em>'.
+   * @generated
+   */
+  PreconditionDeclaration createPreconditionDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Postcondition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Postcondition Declaration</em>'.
+   * @generated
+   */
+  PostconditionDeclaration createPostconditionDeclaration();
 
   /**
    * Returns a new object of class '<em>State Declaration</em>'.
@@ -57,15 +102,6 @@ public interface FsmtestFactory extends EFactory
    * @generated
    */
   StateDeclaration createStateDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Initial Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Initial Declaration</em>'.
-   * @generated
-   */
-  InitialDeclaration createInitialDeclaration();
 
   /**
    * Returns a new object of class '<em>Loops Declaration</em>'.
@@ -93,33 +129,6 @@ public interface FsmtestFactory extends EFactory
    * @generated
    */
   SignalDeclaration createSignalDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Source Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Source Declaration</em>'.
-   * @generated
-   */
-  SourceDeclaration createSourceDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Destination Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destination Declaration</em>'.
-   * @generated
-   */
-  DestinationDeclaration createDestinationDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Transition Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition Declaration</em>'.
-   * @generated
-   */
-  TransitionDeclaration createTransitionDeclaration();
 
   /**
    * Returns the package supported by this factory.

@@ -16,9 +16,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.generator.fsmtest.FsmDefinition;
 import org.eclipse.etrice.generator.fsmtest.FsmtestPackage;
 import org.eclipse.etrice.generator.fsmtest.Model;
-import org.eclipse.etrice.generator.fsmtest.Testscript;
+import org.eclipse.etrice.generator.fsmtest.RandomTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,8 @@ import org.eclipse.etrice.generator.fsmtest.Testscript;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.ModelImpl#getTestscripts <em>Testscripts</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.ModelImpl#getFsmDefinitions <em>Fsm Definitions</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.ModelImpl#getRandomTests <em>Random Tests</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +38,24 @@ import org.eclipse.etrice.generator.fsmtest.Testscript;
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The cached value of the '{@link #getTestscripts() <em>Testscripts</em>}' containment reference list.
+   * The cached value of the '{@link #getFsmDefinitions() <em>Fsm Definitions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTestscripts()
+   * @see #getFsmDefinitions()
    * @generated
    * @ordered
    */
-  protected EList<Testscript> testscripts;
+  protected EList<FsmDefinition> fsmDefinitions;
+
+  /**
+   * The cached value of the '{@link #getRandomTests() <em>Random Tests</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRandomTests()
+   * @generated
+   * @ordered
+   */
+  protected EList<RandomTest> randomTests;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +83,27 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Testscript> getTestscripts()
+  public EList<FsmDefinition> getFsmDefinitions()
   {
-    if (testscripts == null)
+    if (fsmDefinitions == null)
     {
-      testscripts = new EObjectContainmentEList<Testscript>(Testscript.class, this, FsmtestPackage.MODEL__TESTSCRIPTS);
+      fsmDefinitions = new EObjectContainmentEList<FsmDefinition>(FsmDefinition.class, this, FsmtestPackage.MODEL__FSM_DEFINITIONS);
     }
-    return testscripts;
+    return fsmDefinitions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<RandomTest> getRandomTests()
+  {
+    if (randomTests == null)
+    {
+      randomTests = new EObjectContainmentEList<RandomTest>(RandomTest.class, this, FsmtestPackage.MODEL__RANDOM_TESTS);
+    }
+    return randomTests;
   }
 
   /**
@@ -90,8 +116,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case FsmtestPackage.MODEL__TESTSCRIPTS:
-        return ((InternalEList<?>)getTestscripts()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.MODEL__FSM_DEFINITIONS:
+        return ((InternalEList<?>)getFsmDefinitions()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.MODEL__RANDOM_TESTS:
+        return ((InternalEList<?>)getRandomTests()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +134,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case FsmtestPackage.MODEL__TESTSCRIPTS:
-        return getTestscripts();
+      case FsmtestPackage.MODEL__FSM_DEFINITIONS:
+        return getFsmDefinitions();
+      case FsmtestPackage.MODEL__RANDOM_TESTS:
+        return getRandomTests();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +153,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case FsmtestPackage.MODEL__TESTSCRIPTS:
-        getTestscripts().clear();
-        getTestscripts().addAll((Collection<? extends Testscript>)newValue);
+      case FsmtestPackage.MODEL__FSM_DEFINITIONS:
+        getFsmDefinitions().clear();
+        getFsmDefinitions().addAll((Collection<? extends FsmDefinition>)newValue);
+        return;
+      case FsmtestPackage.MODEL__RANDOM_TESTS:
+        getRandomTests().clear();
+        getRandomTests().addAll((Collection<? extends RandomTest>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +175,11 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case FsmtestPackage.MODEL__TESTSCRIPTS:
-        getTestscripts().clear();
+      case FsmtestPackage.MODEL__FSM_DEFINITIONS:
+        getFsmDefinitions().clear();
+        return;
+      case FsmtestPackage.MODEL__RANDOM_TESTS:
+        getRandomTests().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,8 +195,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case FsmtestPackage.MODEL__TESTSCRIPTS:
-        return testscripts != null && !testscripts.isEmpty();
+      case FsmtestPackage.MODEL__FSM_DEFINITIONS:
+        return fsmDefinitions != null && !fsmDefinitions.isEmpty();
+      case FsmtestPackage.MODEL__RANDOM_TESTS:
+        return randomTests != null && !randomTests.isEmpty();
     }
     return super.eIsSet(featureID);
   }

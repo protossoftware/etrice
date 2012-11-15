@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
@@ -34,6 +35,7 @@ public interface IDataConfiguration {
 	public String getAttrClassConfigMaxValue(ActorClass actor, List<Attribute> path);
 	
 	public String getAttrInstanceConfigValue(ActorInstance ai, List<Attribute> path);
+	public String getAttrInstanceConfigValue(ActorInstance ai, InterfaceItem port, List<Attribute> path);
 	
 	// dynamic configuration
 	

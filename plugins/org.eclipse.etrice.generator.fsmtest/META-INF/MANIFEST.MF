@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.etrice.generator.fsmtest
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: eTrice (Incubation)
+Bundle-Version: 0.3.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.fsmtest; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,

@@ -3,17 +3,18 @@ package org.eclipse.etrice.generator.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.generator.fsmtest.DestinationDeclaration;
+import org.eclipse.etrice.generator.fsmtest.ConditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.FsmDefinition;
 import org.eclipse.etrice.generator.fsmtest.FsmtestPackage;
-import org.eclipse.etrice.generator.fsmtest.InitialDeclaration;
+import org.eclipse.etrice.generator.fsmtest.GuardDeclaration;
 import org.eclipse.etrice.generator.fsmtest.LoopsDeclaration;
 import org.eclipse.etrice.generator.fsmtest.Model;
+import org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.RandomTest;
 import org.eclipse.etrice.generator.fsmtest.SeedDeclaration;
 import org.eclipse.etrice.generator.fsmtest.SignalDeclaration;
-import org.eclipse.etrice.generator.fsmtest.SourceDeclaration;
-import org.eclipse.etrice.generator.fsmtest.State;
 import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
-import org.eclipse.etrice.generator.fsmtest.Testscript;
 import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
 import org.eclipse.etrice.generator.services.FSMtestGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -35,15 +36,21 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FsmtestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case FsmtestPackage.DESTINATION_DECLARATION:
-				if(context == grammarAccess.getDestinationDeclarationRule()) {
-					sequence_DestinationDeclaration(context, (DestinationDeclaration) semanticObject); 
+			case FsmtestPackage.CONDITION_DECLARATION:
+				if(context == grammarAccess.getConditionDeclarationRule()) {
+					sequence_ConditionDeclaration(context, (ConditionDeclaration) semanticObject); 
 					return; 
 				}
 				else break;
-			case FsmtestPackage.INITIAL_DECLARATION:
-				if(context == grammarAccess.getInitialDeclarationRule()) {
-					sequence_InitialDeclaration(context, (InitialDeclaration) semanticObject); 
+			case FsmtestPackage.FSM_DEFINITION:
+				if(context == grammarAccess.getFsmDefinitionRule()) {
+					sequence_FsmDefinition(context, (FsmDefinition) semanticObject); 
+					return; 
+				}
+				else break;
+			case FsmtestPackage.GUARD_DECLARATION:
+				if(context == grammarAccess.getGuardDeclarationRule()) {
+					sequence_GuardDeclaration(context, (GuardDeclaration) semanticObject); 
 					return; 
 				}
 				else break;
@@ -59,6 +66,24 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 					return; 
 				}
 				else break;
+			case FsmtestPackage.POSTCONDITION_DECLARATION:
+				if(context == grammarAccess.getPostconditionDeclarationRule()) {
+					sequence_PostconditionDeclaration(context, (PostconditionDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case FsmtestPackage.PRECONDITION_DECLARATION:
+				if(context == grammarAccess.getPreconditionDeclarationRule()) {
+					sequence_PreconditionDeclaration(context, (PreconditionDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case FsmtestPackage.RANDOM_TEST:
+				if(context == grammarAccess.getRandomTestRule()) {
+					sequence_RandomTest(context, (RandomTest) semanticObject); 
+					return; 
+				}
+				else break;
 			case FsmtestPackage.SEED_DECLARATION:
 				if(context == grammarAccess.getSeedDeclarationRule()) {
 					sequence_SeedDeclaration(context, (SeedDeclaration) semanticObject); 
@@ -71,27 +96,9 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 					return; 
 				}
 				else break;
-			case FsmtestPackage.SOURCE_DECLARATION:
-				if(context == grammarAccess.getSourceDeclarationRule()) {
-					sequence_SourceDeclaration(context, (SourceDeclaration) semanticObject); 
-					return; 
-				}
-				else break;
-			case FsmtestPackage.STATE:
-				if(context == grammarAccess.getStateRule()) {
-					sequence_State(context, (State) semanticObject); 
-					return; 
-				}
-				else break;
 			case FsmtestPackage.STATE_DECLARATION:
 				if(context == grammarAccess.getStateDeclarationRule()) {
 					sequence_StateDeclaration(context, (StateDeclaration) semanticObject); 
-					return; 
-				}
-				else break;
-			case FsmtestPackage.TESTSCRIPT:
-				if(context == grammarAccess.getTestscriptRule()) {
-					sequence_Testscript(context, (Testscript) semanticObject); 
 					return; 
 				}
 				else break;
@@ -107,32 +114,41 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     ref=[State|ID]
+	 *     signal=SignalDeclaration
 	 */
-	protected void sequence_DestinationDeclaration(EObject context, DestinationDeclaration semanticObject) {
+	protected void sequence_ConditionDeclaration(EObject context, ConditionDeclaration semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.DESTINATION_DECLARATION__REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.DESTINATION_DECLARATION__REF));
+			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.CONDITION_DECLARATION__SIGNAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.CONDITION_DECLARATION__SIGNAL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getDestinationDeclarationAccess().getRefStateIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getConditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0(), semanticObject.getSignal());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     initial=[State|ID]
+	 *     (name=ID states+=StateDeclaration states+=StateDeclaration*)
 	 */
-	protected void sequence_InitialDeclaration(EObject context, InitialDeclaration semanticObject) {
+	protected void sequence_FsmDefinition(EObject context, FsmDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     signal=SignalDeclaration
+	 */
+	protected void sequence_GuardDeclaration(EObject context, GuardDeclaration semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.INITIAL_DECLARATION__INITIAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.INITIAL_DECLARATION__INITIAL));
+			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.GUARD_DECLARATION__SIGNAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.GUARD_DECLARATION__SIGNAL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getInitialDeclarationAccess().getInitialStateIDTerminalRuleCall_1_0_1(), semanticObject.getInitial());
+		feeder.accept(grammarAccess.getGuardDeclarationAccess().getSignalSignalDeclarationParserRuleCall_0(), semanticObject.getSignal());
 		feeder.finish();
 	}
 	
@@ -155,9 +171,50 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     Testscripts+=Testscript*
+	 *     (FsmDefinitions+=FsmDefinition | RandomTests+=RandomTest)*
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     signal=SignalDeclaration
+	 */
+	protected void sequence_PostconditionDeclaration(EObject context, PostconditionDeclaration semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.POSTCONDITION_DECLARATION__SIGNAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.POSTCONDITION_DECLARATION__SIGNAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPostconditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0(), semanticObject.getSignal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     signal=SignalDeclaration
+	 */
+	protected void sequence_PreconditionDeclaration(EObject context, PreconditionDeclaration semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.PRECONDITION_DECLARATION__SIGNAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.PRECONDITION_DECLARATION__SIGNAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPreconditionDeclarationAccess().getSignalSignalDeclarationParserRuleCall_1_0(), semanticObject.getSignal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID fsm=[FsmDefinition|ID] loopsDeclaration=LoopsDeclaration seedDeclaration=SeedDeclaration?)
+	 */
+	protected void sequence_RandomTest(EObject context, RandomTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -189,23 +246,7 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     ref=[State|ID]
-	 */
-	protected void sequence_SourceDeclaration(EObject context, SourceDeclaration semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.SOURCE_DECLARATION__REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.SOURCE_DECLARATION__REF));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getSourceDeclarationAccess().getRefStateIDTerminalRuleCall_0_0_1(), semanticObject.getRef());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (states+=State states+=State*)
+	 *     (name=ID condition+=ConditionDeclaration* transitions+=TransitionDeclaration+)
 	 */
 	protected void sequence_StateDeclaration(EObject context, StateDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -214,39 +255,13 @@ public class FSMtestSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_State(EObject context, State semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FsmtestPackage.Literals.STATE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FsmtestPackage.Literals.STATE__NAME));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (
 	 *         name=ID 
-	 *         stateDeclaration=StateDeclaration 
-	 *         initialDeclaration=InitialDeclaration 
-	 *         loopsDeclaration=LoopsDeclaration 
-	 *         seedDeclaration=SeedDeclaration? 
-	 *         transitionDeclarations+=TransitionDeclaration*
+	 *         destination=[StateDeclaration|ID] 
+	 *         trigger=SignalDeclaration? 
+	 *         triggers+=GuardDeclaration* 
+	 *         (precondition+=PreconditionDeclaration | postcondition+=PostconditionDeclaration)*
 	 *     )
-	 */
-	protected void sequence_Testscript(EObject context, Testscript semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (source=SourceDeclaration in+=SignalDeclaration* out+=SignalDeclaration* destination=DestinationDeclaration)
 	 */
 	protected void sequence_TransitionDeclaration(EObject context, TransitionDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

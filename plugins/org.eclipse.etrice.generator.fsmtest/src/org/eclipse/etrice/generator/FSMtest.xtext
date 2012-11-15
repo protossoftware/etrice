@@ -1,30 +1,83 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+
 grammar org.eclipse.etrice.generator.FSMtest with org.eclipse.xtext.common.Terminals
 
 generate fsmtest "http://www.eclipse.org/etrice/generator/FSMtest"
 
 Model:
-	Testscripts+=Testscript*;
+	(
+		FsmDefinitions+=FsmDefinition |
+		RandomTests+=RandomTest
+	)*;
 	
-Testscript:
-	'fsmtest' name=ID
-	stateDeclaration = StateDeclaration
-	initialDeclaration = InitialDeclaration
+FsmDefinition:
+	'fsmdefinition' name=ID
+	'initial' states+=StateDeclaration
+	(states+=StateDeclaration)*
+	';' 
+;
+	
+RandomTest:
+	'randomtest' name=ID
+	'fsm:' fsm=[FsmDefinition|ID]
 	loopsDeclaration = LoopsDeclaration
 	(seedDeclaration = SeedDeclaration)?
-	(transitionDeclarations += TransitionDeclaration)*
 	';' 
 ;
 
-State:
-	name=ID
+GuardDeclaration:
+	signal=SignalDeclaration
+;
+
+TransitionDeclaration:
+	'transition' name=ID 'to' destination=[StateDeclaration|ID]
+	(
+		'trigger:' trigger=SignalDeclaration
+	)?
+	(
+		'guards:'
+		(triggers+=GuardDeclaration)+
+	)?
+	(
+		'constraints:'
+		(
+			precondition+=PreconditionDeclaration |
+			postcondition+=PostconditionDeclaration
+		)+
+	)?
+	';' 
+;
+
+ConditionDeclaration:
+	'condition' signal=SignalDeclaration
+;
+
+PreconditionDeclaration:
+	'precondition' signal=SignalDeclaration
+;
+
+PostconditionDeclaration:
+	'postcondition' signal=SignalDeclaration
 ;
 
 StateDeclaration:
-	'states:' states+=State (',' states+=State)*
-;
-
-InitialDeclaration:
-	"initial:" initial=[State|ID]
+	'state' name=ID 
+	(
+		'constraints:'
+		(condition+=ConditionDeclaration)+
+	)?
+	(transitions+=TransitionDeclaration)+
+	';' 
 ;
 
 LoopsDeclaration:
@@ -37,19 +90,4 @@ SeedDeclaration:
 
 SignalDeclaration:
 	(port=ID '.')? signame=ID (('=' intVal=INT) | ('=' strVal=STRING))?
-;
-
-SourceDeclaration:
-	ref=[State|ID] ':'
-;
-
-DestinationDeclaration:
-	'-> ' ref=[State|ID]
-;
-
-TransitionDeclaration:
-	source=SourceDeclaration
-	'in:' (in+=SignalDeclaration)*
-	'out:' (out+=SignalDeclaration)*
-	destination=DestinationDeclaration
 ;
