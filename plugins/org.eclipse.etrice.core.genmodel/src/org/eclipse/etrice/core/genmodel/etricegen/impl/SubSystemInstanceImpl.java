@@ -161,7 +161,7 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 			
 			// create mapping
 			for (ActorInstanceMapping aim : getSubSystemClass().getActorInstanceMappings()) {
-				int tid = getSubSystemClass().getThreads().indexOf(aim.getThread());
+				int tid = getSubSystemClass().getThreads().indexOf(aim.getThread())+1;
 				String path = getPath();
 				for (String seg : aim.getPath().getRefs()) {
 					path += InstanceBase.pathDelim+seg;
