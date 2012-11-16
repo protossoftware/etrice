@@ -13,9 +13,11 @@
 package org.eclipse.etrice.core.ui.outline;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -119,6 +121,12 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected void _createChildren(IOutlineNode parentNode, SubSystemClass ssc) {
 		for (ActorRef aref : ssc.getActorRefs()) {
 			createNode(parentNode, aref);
+		}
+		for (LogicalThread thread : ssc.getThreads()) {
+			createNode(parentNode, thread);
+		}
+		for (ActorInstanceMapping aim : ssc.getActorInstanceMappings()) {
+			createNode(parentNode, aim);
 		}
 	}
 

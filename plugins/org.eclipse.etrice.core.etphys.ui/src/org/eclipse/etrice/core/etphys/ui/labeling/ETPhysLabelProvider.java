@@ -13,7 +13,16 @@
 package org.eclipse.etrice.core.etphys.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.etrice.core.etphys.eTPhys.Import;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
+import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
+import org.eclipse.xtext.ui.label.StylerFactory;
  
 import com.google.inject.Inject;
 
@@ -24,20 +33,58 @@ import com.google.inject.Inject;
  */
 public class ETPhysLabelProvider extends DefaultEObjectLabelProvider {
 
+	private static final String KEYWORD_COLOR = "KEYWORD_COLOR";
+
+	@Inject
+	private StylerFactory stylerFactory;
+	private Styler keywordStyler = null;
+	private Styler typeStyler = null;
+
 	@Inject
 	public ETPhysLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	String text(RuntimeClass rc) {
+		return rc.getName()+"("+rc.getThreadModel().getLiteral()+")";
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	
+	StyledString text(NodeRef ref) {
+		String cls = ref.getType()!=null? (" : "+ref.getType().getName()):"";
+		StyledString txt = new StyledString("NodeRef "+ref.getName()+cls);
+		if (!cls.isEmpty())
+			txt.setStyle(txt.length()-cls.length()+2, cls.length()-2, getTypeStyler());
+		return txt;
+	}
+	
+	StyledString text(Import im) {
+		if (im.getImportedNamespace()==null) {
+			StyledString txt = new StyledString("import model "+im.getImportURI());
+			txt.setStyle(0, 12, getKeywordStyler());
+			return txt;
+		}
+		else {
+			StyledString txt = new StyledString("import ns "+im.getImportedNamespace());
+			txt.setStyle(0, 9, getKeywordStyler());
+			return txt;
+		}
+	}
+	
+	private Styler getKeywordStyler() {
+		if (keywordStyler==null) {
+			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
+			FontDescriptor boldFont = font.setStyle(SWT.BOLD);
+			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null);
+		}
+		return keywordStyler;
+	}
+
+	private Styler getTypeStyler() {
+		if (typeStyler==null) {
+			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
+			FontDescriptor italicFont = font.setStyle(SWT.ITALIC);
+			typeStyler = stylerFactory.createStyler(italicFont, null, null);
+		}
+		return typeStyler;
+	}
 }
