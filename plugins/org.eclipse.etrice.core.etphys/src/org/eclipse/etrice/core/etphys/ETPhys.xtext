@@ -9,6 +9,7 @@
  * 		Henrik Rentz-Reichert (initial contribution)
  * 
  *******************************************************************************/
+
 grammar org.eclipse.etrice.core.etphys.ETPhys with org.eclipse.xtext.common.Terminals
 
 generate eTPhys "http://www.eclipse.org/etrice/core/etphys/ETPhys"
