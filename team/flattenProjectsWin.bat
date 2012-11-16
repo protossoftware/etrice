@@ -9,6 +9,8 @@ REM examples
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.simulators.trafficlight.example ..\examples\org.eclipse.etrice.tutorials.simulators.trafficlight.example
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.c ..\examples\org.eclipse.etrice.tutorials.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.java ..\examples\org.eclipse.etrice.tutorials.java
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.generator.c.reference ..\examples\org.eclipse.etrice.generator.c.reference
+
 
 REM runtime
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.modellib.c ..\runtime\org.eclipse.etrice.modellib.c

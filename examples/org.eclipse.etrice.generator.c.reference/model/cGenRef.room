@@ -1,5 +1,5 @@
 RoomModel cGenRef {
-	import room.basic.types.c.* from "CTypes.room"
+	import room.basic.types.* from "Types.room"
 	
 	SubSystemClass SubSys {
 		ActorRef Sender: Sender
@@ -175,10 +175,10 @@ RoomModel cGenRef {
 		Attribute Attr3: float32
 		
 		Operation MultiplyWithAttr1(value: int32): int32 {
-			"return self->Attr1*value;"
+			"return Attr1*value;"
 		}
 		Operation MultiplyWithAttr3(value: float32): float32 {
-			"return self->Attr3*value;"
+			"return Attr3*value;"
 		}
 	}
 
