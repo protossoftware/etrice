@@ -93,17 +93,10 @@ public class ETMapSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ETMapPackage.ACTOR_INSTANCE_MAPPING:
+      case ETMapPackage.THREAD_MAPPING:
       {
-        ActorInstanceMapping actorInstanceMapping = (ActorInstanceMapping)theEObject;
-        T result = caseActorInstanceMapping(actorInstanceMapping);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ETMapPackage.REF_PATH:
-      {
-        RefPath refPath = (RefPath)theEObject;
-        T result = caseRefPath(refPath);
+        ThreadMapping threadMapping = (ThreadMapping)theEObject;
+        T result = caseThreadMapping(threadMapping);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -167,33 +160,17 @@ public class ETMapSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Actor Instance Mapping</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Thread Mapping</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Actor Instance Mapping</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Thread Mapping</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseActorInstanceMapping(ActorInstanceMapping object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Ref Path</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ref Path</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRefPath(RefPath object)
+  public T caseThreadMapping(ThreadMapping object)
   {
     return null;
   }

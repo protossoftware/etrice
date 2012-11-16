@@ -10,15 +10,13 @@
  * 
  *******************************************************************************/
 
-
-package org.eclipse.etrice.core.etmap.ui.linking;
+package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping;
-import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.ui.linking.ImportAwareHyperlinkHelper;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -29,10 +27,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 
 /**
- * @author Henrik Rentz-Reichert (initial contribution)
+ * @author Henrik Rentz-Reichert
  *
  */
-public class ETMapHyperlinkHelper extends ImportAwareHyperlinkHelper {
+public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
@@ -64,7 +62,7 @@ public class ETMapHyperlinkHelper extends ImportAwareHyperlinkHelper {
 	}
 
 	private EObject getCrossLinkedEObject(ActorInstanceMapping aim) {
-		ActorContainerClass lastAcContainer = ETMapUtil.getParentContainer(aim);
+		ActorContainerClass lastAcContainer = RoomHelpers.getParentContainer(aim);
 		ActorRef lastRef = null;
 		for (String ref : aim.getPath().getRefs()) {
 			for (ActorRef r : lastAcContainer.getActorRefs())

@@ -31,15 +31,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="#//RuntimeClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priomin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priomax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
-        eType="#//Thread" containment="true"/>
+        eType="#//PhysThread" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Thread">
+  <eClassifiers xsi:type="ecore:EClass" name="PhysThread">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="execmode" eType="#//ExecMode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stacksize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="msgblocksize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="msgpoolsize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ExecMode">
     <eLiterals name="POLLED" literal="polled"/>

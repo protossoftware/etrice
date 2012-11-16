@@ -146,20 +146,20 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNodeNodeRefIDTerminalRuleCall_3_0_1 = (RuleCall)cNodeNodeRefCrossReference_3_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cLeftCurlyBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cActorInstanceMappingsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0 = (RuleCall)cActorInstanceMappingsAssignment_4_1.eContents().get(0);
+		private final Assignment cThreadMappingsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cThreadMappingsThreadMappingParserRuleCall_4_1_0 = (RuleCall)cThreadMappingsAssignment_4_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//SubSystemMapping:
 		//
-		//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{"
+		//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
 		//
-		//	actorInstanceMappings+=ActorInstanceMapping* "}")?;
+		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{"
+		//"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
 		//
-		//actorInstanceMappings+=ActorInstanceMapping* "}")?
+		//"}")?
 		public Group getGroup() { return cGroup; }
 
 		//"SubSystemMapping"
@@ -186,120 +186,65 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNodeNodeRefIDTerminalRuleCall_3_0_1() { return cNodeNodeRefIDTerminalRuleCall_3_0_1; }
 
-		//("{" actorInstanceMappings+=ActorInstanceMapping* "}")?
+		//("{" threadMappings+=ThreadMapping* "}")?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4_0() { return cLeftCurlyBracketKeyword_4_0; }
 
-		//actorInstanceMappings+=ActorInstanceMapping*
-		public Assignment getActorInstanceMappingsAssignment_4_1() { return cActorInstanceMappingsAssignment_4_1; }
+		//threadMappings+=ThreadMapping*
+		public Assignment getThreadMappingsAssignment_4_1() { return cThreadMappingsAssignment_4_1; }
 
-		//ActorInstanceMapping
-		public RuleCall getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0() { return cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0; }
+		//ThreadMapping
+		public RuleCall getThreadMappingsThreadMappingParserRuleCall_4_1_0() { return cThreadMappingsThreadMappingParserRuleCall_4_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
 	}
 
-	public class ActorInstanceMappingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActorInstanceMapping");
+	public class ThreadMappingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThreadMapping");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cActorInstanceMappingKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cPathAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cPathRefPathParserRuleCall_1_0 = (RuleCall)cPathAssignment_1.eContents().get(0);
+		private final Keyword cThreadMappingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cLogicalThreadAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cLogicalThreadLogicalThreadCrossReference_1_0 = (CrossReference)cLogicalThreadAssignment_1.eContents().get(0);
+		private final RuleCall cLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1 = (RuleCall)cLogicalThreadLogicalThreadCrossReference_1_0.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cThreadAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cThreadThreadCrossReference_3_0 = (CrossReference)cThreadAssignment_3.eContents().get(0);
-		private final RuleCall cThreadThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cThreadThreadCrossReference_3_0.eContents().get(1);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cLeftCurlyBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cActorInstanceMappingsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0 = (RuleCall)cActorInstanceMappingsAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
+		private final Assignment cPhysicalThreadAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cPhysicalThreadPhysThreadCrossReference_3_0 = (CrossReference)cPhysicalThreadAssignment_3.eContents().get(0);
+		private final RuleCall cPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cPhysicalThreadPhysThreadCrossReference_3_0.eContents().get(1);
 		
-		//ActorInstanceMapping:
+		//ThreadMapping:
 		//
-		//	"ActorInstanceMapping" path=RefPath "->" thread=[phys::Thread] ("{" actorInstanceMappings+=ActorInstanceMapping*
-		//
-		//	"}")?;
+		//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread];
 		public ParserRule getRule() { return rule; }
 
-		//"ActorInstanceMapping" path=RefPath "->" thread=[phys::Thread] ("{" actorInstanceMappings+=ActorInstanceMapping* "}")?
+		//"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread]
 		public Group getGroup() { return cGroup; }
 
-		//"ActorInstanceMapping"
-		public Keyword getActorInstanceMappingKeyword_0() { return cActorInstanceMappingKeyword_0; }
+		//"ThreadMapping"
+		public Keyword getThreadMappingKeyword_0() { return cThreadMappingKeyword_0; }
 
-		//path=RefPath
-		public Assignment getPathAssignment_1() { return cPathAssignment_1; }
+		//logicalThread=[room::LogicalThread]
+		public Assignment getLogicalThreadAssignment_1() { return cLogicalThreadAssignment_1; }
 
-		//RefPath
-		public RuleCall getPathRefPathParserRuleCall_1_0() { return cPathRefPathParserRuleCall_1_0; }
+		//[room::LogicalThread]
+		public CrossReference getLogicalThreadLogicalThreadCrossReference_1_0() { return cLogicalThreadLogicalThreadCrossReference_1_0; }
+
+		//ID
+		public RuleCall getLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1() { return cLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1; }
 
 		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 
-		//thread=[phys::Thread]
-		public Assignment getThreadAssignment_3() { return cThreadAssignment_3; }
+		//physicalThread=[phys::PhysThread]
+		public Assignment getPhysicalThreadAssignment_3() { return cPhysicalThreadAssignment_3; }
 
-		//[phys::Thread]
-		public CrossReference getThreadThreadCrossReference_3_0() { return cThreadThreadCrossReference_3_0; }
-
-		//ID
-		public RuleCall getThreadThreadIDTerminalRuleCall_3_0_1() { return cThreadThreadIDTerminalRuleCall_3_0_1; }
-
-		//("{" actorInstanceMappings+=ActorInstanceMapping* "}")?
-		public Group getGroup_4() { return cGroup_4; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_4_0() { return cLeftCurlyBracketKeyword_4_0; }
-
-		//actorInstanceMappings+=ActorInstanceMapping*
-		public Assignment getActorInstanceMappingsAssignment_4_1() { return cActorInstanceMappingsAssignment_4_1; }
-
-		//ActorInstanceMapping
-		public RuleCall getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0() { return cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
-	}
-
-	public class RefPathElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefPath");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cRefsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cRefsIDTerminalRuleCall_0_0 = (RuleCall)cRefsAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cSolidusKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cRefsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRefsIDTerminalRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
-		
-		//RefPath:
-		//
-		//	refs+=ID ("/" refs+=ID)*;
-		public ParserRule getRule() { return rule; }
-
-		//refs+=ID ("/" refs+=ID)*
-		public Group getGroup() { return cGroup; }
-
-		//refs+=ID
-		public Assignment getRefsAssignment_0() { return cRefsAssignment_0; }
+		//[phys::PhysThread]
+		public CrossReference getPhysicalThreadPhysThreadCrossReference_3_0() { return cPhysicalThreadPhysThreadCrossReference_3_0; }
 
 		//ID
-		public RuleCall getRefsIDTerminalRuleCall_0_0() { return cRefsIDTerminalRuleCall_0_0; }
-
-		//("/" refs+=ID)*
-		public Group getGroup_1() { return cGroup_1; }
-
-		//"/"
-		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
-
-		//refs+=ID
-		public Assignment getRefsAssignment_1_1() { return cRefsAssignment_1_1; }
-
-		//ID
-		public RuleCall getRefsIDTerminalRuleCall_1_1_0() { return cRefsIDTerminalRuleCall_1_1_0; }
+		public RuleCall getPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1() { return cPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -405,8 +350,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	private MappingModelElements pMappingModel;
 	private MappingElements pMapping;
 	private SubSystemMappingElements pSubSystemMapping;
-	private ActorInstanceMappingElements pActorInstanceMapping;
-	private RefPathElements pRefPath;
+	private ThreadMappingElements pThreadMapping;
 	private ImportElements pImport;
 	private ImportedFQNElements pImportedFQN;
 	private FQNElements pFQN;
@@ -475,9 +419,9 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 
 	//SubSystemMapping:
 	//
-	//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{"
+	//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
 	//
-	//	actorInstanceMappings+=ActorInstanceMapping* "}")?;
+	//	"}")?;
 	public SubSystemMappingElements getSubSystemMappingAccess() {
 		return (pSubSystemMapping != null) ? pSubSystemMapping : (pSubSystemMapping = new SubSystemMappingElements());
 	}
@@ -486,28 +430,15 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getSubSystemMappingAccess().getRule();
 	}
 
-	//ActorInstanceMapping:
+	//ThreadMapping:
 	//
-	//	"ActorInstanceMapping" path=RefPath "->" thread=[phys::Thread] ("{" actorInstanceMappings+=ActorInstanceMapping*
-	//
-	//	"}")?;
-	public ActorInstanceMappingElements getActorInstanceMappingAccess() {
-		return (pActorInstanceMapping != null) ? pActorInstanceMapping : (pActorInstanceMapping = new ActorInstanceMappingElements());
+	//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread];
+	public ThreadMappingElements getThreadMappingAccess() {
+		return (pThreadMapping != null) ? pThreadMapping : (pThreadMapping = new ThreadMappingElements());
 	}
 	
-	public ParserRule getActorInstanceMappingRule() {
-		return getActorInstanceMappingAccess().getRule();
-	}
-
-	//RefPath:
-	//
-	//	refs+=ID ("/" refs+=ID)*;
-	public RefPathElements getRefPathAccess() {
-		return (pRefPath != null) ? pRefPath : (pRefPath = new RefPathElements());
-	}
-	
-	public ParserRule getRefPathRule() {
-		return getRefPathAccess().getRule();
+	public ParserRule getThreadMappingRule() {
+		return getThreadMappingAccess().getRule();
 	}
 
 	//Import:

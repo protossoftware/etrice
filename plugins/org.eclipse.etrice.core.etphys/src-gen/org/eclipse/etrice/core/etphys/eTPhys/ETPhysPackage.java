@@ -251,13 +251,31 @@ public interface ETPhysPackage extends EPackage
   int NODE_CLASS__RUNTIME = 2;
 
   /**
+   * The feature id for the '<em><b>Priomin</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_CLASS__PRIOMIN = 3;
+
+  /**
+   * The feature id for the '<em><b>Priomax</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_CLASS__PRIOMAX = 4;
+
+  /**
    * The feature id for the '<em><b>Threads</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NODE_CLASS__THREADS = 3;
+  int NODE_CLASS__THREADS = 5;
 
   /**
    * The number of structural features of the '<em>Node Class</em>' class.
@@ -266,17 +284,17 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NODE_CLASS_FEATURE_COUNT = 4;
+  int NODE_CLASS_FEATURE_COUNT = 6;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl <em>Thread</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl <em>Phys Thread</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl
+   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getPhysThread()
    * @generated
    */
-  int THREAD = 4;
+  int PHYS_THREAD = 4;
 
   /**
    * The feature id for the '<em><b>Default</b></em>' attribute.
@@ -285,7 +303,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREAD__DEFAULT = 0;
+  int PHYS_THREAD__DEFAULT = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -294,7 +312,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREAD__NAME = 1;
+  int PHYS_THREAD__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Execmode</b></em>' attribute.
@@ -303,7 +321,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREAD__EXECMODE = 2;
+  int PHYS_THREAD__EXECMODE = 2;
 
   /**
    * The feature id for the '<em><b>Prio</b></em>' attribute.
@@ -312,7 +330,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREAD__PRIO = 3;
+  int PHYS_THREAD__PRIO = 3;
 
   /**
    * The feature id for the '<em><b>Stacksize</b></em>' attribute.
@@ -321,16 +339,34 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREAD__STACKSIZE = 4;
+  int PHYS_THREAD__STACKSIZE = 4;
 
   /**
-   * The number of structural features of the '<em>Thread</em>' class.
+   * The feature id for the '<em><b>Msgblocksize</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int THREAD_FEATURE_COUNT = 5;
+  int PHYS_THREAD__MSGBLOCKSIZE = 5;
+
+  /**
+   * The feature id for the '<em><b>Msgpoolsize</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PHYS_THREAD__MSGPOOLSIZE = 6;
+
+  /**
+   * The number of structural features of the '<em>Phys Thread</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PHYS_THREAD_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl <em>Runtime Class</em>}' class.
@@ -659,6 +695,28 @@ public interface ETPhysPackage extends EPackage
   EReference getNodeClass_Runtime();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomin <em>Priomin</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Priomin</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomin()
+   * @see #getNodeClass()
+   * @generated
+   */
+  EAttribute getNodeClass_Priomin();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax <em>Priomax</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Priomax</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax()
+   * @see #getNodeClass()
+   * @generated
+   */
+  EAttribute getNodeClass_Priomax();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getThreads <em>Threads</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -670,69 +728,91 @@ public interface ETPhysPackage extends EPackage
   EReference getNodeClass_Threads();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread <em>Thread</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread <em>Phys Thread</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Thread</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread
+   * @return the meta object for class '<em>Phys Thread</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread
    * @generated
    */
-  EClass getThread();
+  EClass getPhysThread();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread#isDefault <em>Default</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#isDefault <em>Default</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Default</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread#isDefault()
-   * @see #getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#isDefault()
+   * @see #getPhysThread()
    * @generated
    */
-  EAttribute getThread_Default();
+  EAttribute getPhysThread_Default();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread#getName()
-   * @see #getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getName()
+   * @see #getPhysThread()
    * @generated
    */
-  EAttribute getThread_Name();
+  EAttribute getPhysThread_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread#getExecmode <em>Execmode</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getExecmode <em>Execmode</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Execmode</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread#getExecmode()
-   * @see #getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getExecmode()
+   * @see #getPhysThread()
    * @generated
    */
-  EAttribute getThread_Execmode();
+  EAttribute getPhysThread_Execmode();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread#getPrio <em>Prio</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getPrio <em>Prio</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Prio</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread#getPrio()
-   * @see #getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getPrio()
+   * @see #getPhysThread()
    * @generated
    */
-  EAttribute getThread_Prio();
+  EAttribute getPhysThread_Prio();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread#getStacksize <em>Stacksize</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getStacksize <em>Stacksize</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Stacksize</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread#getStacksize()
-   * @see #getThread()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getStacksize()
+   * @see #getPhysThread()
    * @generated
    */
-  EAttribute getThread_Stacksize();
+  EAttribute getPhysThread_Stacksize();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgblocksize <em>Msgblocksize</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Msgblocksize</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgblocksize()
+   * @see #getPhysThread()
+   * @generated
+   */
+  EAttribute getPhysThread_Msgblocksize();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgpoolsize <em>Msgpoolsize</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Msgpoolsize</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgpoolsize()
+   * @see #getPhysThread()
+   * @generated
+   */
+  EAttribute getPhysThread_Msgpoolsize();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass <em>Runtime Class</em>}'.
@@ -1026,6 +1106,22 @@ public interface ETPhysPackage extends EPackage
     EReference NODE_CLASS__RUNTIME = eINSTANCE.getNodeClass_Runtime();
 
     /**
+     * The meta object literal for the '<em><b>Priomin</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NODE_CLASS__PRIOMIN = eINSTANCE.getNodeClass_Priomin();
+
+    /**
+     * The meta object literal for the '<em><b>Priomax</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NODE_CLASS__PRIOMAX = eINSTANCE.getNodeClass_Priomax();
+
+    /**
      * The meta object literal for the '<em><b>Threads</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1034,14 +1130,14 @@ public interface ETPhysPackage extends EPackage
     EReference NODE_CLASS__THREADS = eINSTANCE.getNodeClass_Threads();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl <em>Thread</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl <em>Phys Thread</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getThread()
+     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl
+     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getPhysThread()
      * @generated
      */
-    EClass THREAD = eINSTANCE.getThread();
+    EClass PHYS_THREAD = eINSTANCE.getPhysThread();
 
     /**
      * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
@@ -1049,7 +1145,7 @@ public interface ETPhysPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THREAD__DEFAULT = eINSTANCE.getThread_Default();
+    EAttribute PHYS_THREAD__DEFAULT = eINSTANCE.getPhysThread_Default();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1057,7 +1153,7 @@ public interface ETPhysPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THREAD__NAME = eINSTANCE.getThread_Name();
+    EAttribute PHYS_THREAD__NAME = eINSTANCE.getPhysThread_Name();
 
     /**
      * The meta object literal for the '<em><b>Execmode</b></em>' attribute feature.
@@ -1065,7 +1161,7 @@ public interface ETPhysPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THREAD__EXECMODE = eINSTANCE.getThread_Execmode();
+    EAttribute PHYS_THREAD__EXECMODE = eINSTANCE.getPhysThread_Execmode();
 
     /**
      * The meta object literal for the '<em><b>Prio</b></em>' attribute feature.
@@ -1073,7 +1169,7 @@ public interface ETPhysPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THREAD__PRIO = eINSTANCE.getThread_Prio();
+    EAttribute PHYS_THREAD__PRIO = eINSTANCE.getPhysThread_Prio();
 
     /**
      * The meta object literal for the '<em><b>Stacksize</b></em>' attribute feature.
@@ -1081,7 +1177,23 @@ public interface ETPhysPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THREAD__STACKSIZE = eINSTANCE.getThread_Stacksize();
+    EAttribute PHYS_THREAD__STACKSIZE = eINSTANCE.getPhysThread_Stacksize();
+
+    /**
+     * The meta object literal for the '<em><b>Msgblocksize</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PHYS_THREAD__MSGBLOCKSIZE = eINSTANCE.getPhysThread_Msgblocksize();
+
+    /**
+     * The meta object literal for the '<em><b>Msgpoolsize</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PHYS_THREAD__MSGPOOLSIZE = eINSTANCE.getPhysThread_Msgpoolsize();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl <em>Runtime Class</em>}' class.

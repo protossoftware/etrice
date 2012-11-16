@@ -85,7 +85,7 @@ class SubSystemClassGen {
 			
 				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
 				«FOR thread : cc.threads»
-					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «cc.threads.indexOf(thread)+1», 0),"MessageService_«thread.name»", «thread.prio»));
+					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «cc.threads.indexOf(thread)+1», 0),"MessageService_«thread.name»" /*, thread_prio */));
 				«ENDFOR»
 				}
 		

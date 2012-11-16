@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.etmap.eTMap;
+package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -14,11 +14,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.RefPath#getRefs <em>Refs</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.RefPath#getRefs <em>Refs</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getRefPath()
+ * @see org.eclipse.etrice.core.room.RoomPackage#getRefPath()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface RefPath extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Refs</em>' attribute list.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getRefPath_Refs()
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRefPath_Refs()
    * @model unique="false"
    * @generated
    */

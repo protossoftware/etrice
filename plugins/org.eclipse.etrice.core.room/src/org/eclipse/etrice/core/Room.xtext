@@ -265,16 +265,21 @@ SubSystemClass:
 		bindings+=Binding*
 		connections+=LayerConnection*
 		threads+=LogicalThread*
+		actorInstanceMappings+=ActorInstanceMapping*
 	'}';
 
 LogicalThread:
-	'LogicalThread' name=ID 'prio' '=' prio=INT '{'
-		instances+=ActorInstancePath (',' instances+=ActorInstancePath)*
-	'}';
-	
+	'LogicalThread' name=ID
+;
 
-ActorInstancePath:
-	segments+=ID ('.' segments+=ID)*;
+ActorInstanceMapping:
+	'ActorInstanceMapping' path=RefPath '->' thread=[LogicalThread|ID] ('{'
+		actorInstanceMappings+=ActorInstanceMapping*
+	'}')?
+;
+
+RefPath:
+	refs+=ID ('/' refs+=ID)*;
 	
 // TODOHRR: bindings for replicated ports
 // (1) declare several bindings

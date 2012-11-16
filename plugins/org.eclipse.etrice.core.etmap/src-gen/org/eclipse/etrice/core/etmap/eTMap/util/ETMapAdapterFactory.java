@@ -90,14 +90,9 @@ public class ETMapAdapterFactory extends AdapterFactoryImpl
         return createSubSystemMappingAdapter();
       }
       @Override
-      public Adapter caseActorInstanceMapping(ActorInstanceMapping object)
+      public Adapter caseThreadMapping(ThreadMapping object)
       {
-        return createActorInstanceMappingAdapter();
-      }
-      @Override
-      public Adapter caseRefPath(RefPath object)
-      {
-        return createRefPathAdapter();
+        return createThreadMappingAdapter();
       }
       @Override
       public Adapter caseImport(Import object)
@@ -172,31 +167,16 @@ public class ETMapAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping <em>Thread Mapping</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping
+   * @see org.eclipse.etrice.core.etmap.eTMap.ThreadMapping
    * @generated
    */
-  public Adapter createActorInstanceMappingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etmap.eTMap.RefPath <em>Ref Path</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.etmap.eTMap.RefPath
-   * @generated
-   */
-  public Adapter createRefPathAdapter()
+  public Adapter createThreadMappingAdapter()
   {
     return null;
   }

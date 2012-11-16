@@ -188,10 +188,7 @@ public class SubSystemClassGen {
         _builder.append(", 0),\"MessageService_");
         String _name_3 = thread.getName();
         _builder.append(_name_3, "		");
-        _builder.append("\", ");
-        int _prio = thread.getPrio();
-        _builder.append(_prio, "		");
-        _builder.append("));");
+        _builder.append("\" /*, thread_prio */));");
         _builder.newLineIfNotEmpty();
       }
     }

@@ -9,14 +9,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapFactory;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
 import org.eclipse.etrice.core.etmap.eTMap.Import;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
-import org.eclipse.etrice.core.etmap.eTMap.RefPath;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
+import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 
@@ -56,14 +55,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass actorInstanceMappingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass refPathEClass = null;
+  private EClass threadMappingEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -254,7 +246,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSubSystemMapping_ActorInstanceMappings()
+  public EReference getSubSystemMapping_ThreadMappings()
   {
     return (EReference)subSystemMappingEClass.getEStructuralFeatures().get(2);
   }
@@ -264,9 +256,9 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getActorInstanceMapping()
+  public EClass getThreadMapping()
   {
-    return actorInstanceMappingEClass;
+    return threadMappingEClass;
   }
 
   /**
@@ -274,9 +266,9 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorInstanceMapping_Path()
+  public EReference getThreadMapping_LogicalThread()
   {
-    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(0);
+    return (EReference)threadMappingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -284,39 +276,9 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorInstanceMapping_Thread()
+  public EReference getThreadMapping_PhysicalThread()
   {
-    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getActorInstanceMapping_ActorInstanceMappings()
-  {
-    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getRefPath()
-  {
-    return refPathEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getRefPath_Refs()
-  {
-    return (EAttribute)refPathEClass.getEStructuralFeatures().get(0);
+    return (EReference)threadMappingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -392,15 +354,11 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     subSystemMappingEClass = createEClass(SUB_SYSTEM_MAPPING);
     createEReference(subSystemMappingEClass, SUB_SYSTEM_MAPPING__LOGICAL_SUB_SYS);
     createEReference(subSystemMappingEClass, SUB_SYSTEM_MAPPING__NODE);
-    createEReference(subSystemMappingEClass, SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS);
+    createEReference(subSystemMappingEClass, SUB_SYSTEM_MAPPING__THREAD_MAPPINGS);
 
-    actorInstanceMappingEClass = createEClass(ACTOR_INSTANCE_MAPPING);
-    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__PATH);
-    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__THREAD);
-    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS);
-
-    refPathEClass = createEClass(REF_PATH);
-    createEAttribute(refPathEClass, REF_PATH__REFS);
+    threadMappingEClass = createEClass(THREAD_MAPPING);
+    createEReference(threadMappingEClass, THREAD_MAPPING__LOGICAL_THREAD);
+    createEReference(threadMappingEClass, THREAD_MAPPING__PHYSICAL_THREAD);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
@@ -455,15 +413,11 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     initEClass(subSystemMappingEClass, SubSystemMapping.class, "SubSystemMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSubSystemMapping_LogicalSubSys(), theRoomPackage.getSubSystemRef(), null, "logicalSubSys", null, 0, 1, SubSystemMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSubSystemMapping_Node(), theETPhysPackage.getNodeRef(), null, "node", null, 0, 1, SubSystemMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSubSystemMapping_ActorInstanceMappings(), this.getActorInstanceMapping(), null, "actorInstanceMappings", null, 0, -1, SubSystemMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubSystemMapping_ThreadMappings(), this.getThreadMapping(), null, "threadMappings", null, 0, -1, SubSystemMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(actorInstanceMappingEClass, ActorInstanceMapping.class, "ActorInstanceMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getActorInstanceMapping_Path(), this.getRefPath(), null, "path", null, 0, 1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getActorInstanceMapping_Thread(), theETPhysPackage.getThread(), null, "thread", null, 0, 1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getActorInstanceMapping_ActorInstanceMappings(), this.getActorInstanceMapping(), null, "actorInstanceMappings", null, 0, -1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRefPath_Refs(), ecorePackage.getEString(), "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(threadMappingEClass, ThreadMapping.class, "ThreadMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getThreadMapping_LogicalThread(), theRoomPackage.getLogicalThread(), null, "logicalThread", null, 0, 1, ThreadMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getThreadMapping_PhysicalThread(), theETPhysPackage.getPhysThread(), null, "physicalThread", null, 0, 1, ThreadMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

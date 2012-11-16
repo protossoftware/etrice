@@ -290,17 +290,17 @@ ruleSubSystemMapping returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemMappingAccess().getThreadMappingsThreadMappingParserRuleCall_4_1_0()); 
 	    }
-		lv_actorInstanceMappings_5_0=ruleActorInstanceMapping		{
+		lv_threadMappings_5_0=ruleThreadMapping		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemMappingRule());
 	        }
        		add(
        			$current, 
-       			"actorInstanceMappings",
-        		lv_actorInstanceMappings_5_0, 
-        		"ActorInstanceMapping");
+       			"threadMappings",
+        		lv_threadMappings_5_0, 
+        		"ThreadMapping");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -316,147 +316,55 @@ ruleSubSystemMapping returns [EObject current=null]
 
 
 
-// Entry rule entryRuleActorInstanceMapping
-entryRuleActorInstanceMapping returns [EObject current=null] 
+// Entry rule entryRuleThreadMapping
+entryRuleThreadMapping returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getActorInstanceMappingRule()); }
-	 iv_ruleActorInstanceMapping=ruleActorInstanceMapping 
-	 { $current=$iv_ruleActorInstanceMapping.current; } 
+	{ newCompositeNode(grammarAccess.getThreadMappingRule()); }
+	 iv_ruleThreadMapping=ruleThreadMapping 
+	 { $current=$iv_ruleThreadMapping.current; } 
 	 EOF 
 ;
 
-// Rule ActorInstanceMapping
-ruleActorInstanceMapping returns [EObject current=null] 
+// Rule ThreadMapping
+ruleThreadMapping returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='ActorInstanceMapping' 
+(	otherlv_0='ThreadMapping' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingKeyword_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getPathRefPathParserRuleCall_1_0()); 
-	    }
-		lv_path_1_0=ruleRefPath		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getActorInstanceMappingRule());
-	        }
-       		set(
-       			$current, 
-       			"path",
-        		lv_path_1_0, 
-        		"RefPath");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_2='->' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getActorInstanceMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+    	newLeafNode(otherlv_0, grammarAccess.getThreadMappingAccess().getThreadMappingKeyword_0());
     }
 (
 (
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getActorInstanceMappingRule());
+	            $current = createModelElement(grammarAccess.getThreadMappingRule());
+	        }
+        }
+	otherlv_1=RULE_ID
+	{
+		newLeafNode(otherlv_1, grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadCrossReference_1_0()); 
+	}
+
+)
+)	otherlv_2='->' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getThreadMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getThreadMappingRule());
 	        }
         }
 	otherlv_3=RULE_ID
 	{
-		newLeafNode(otherlv_3, grammarAccess.getActorInstanceMappingAccess().getThreadThreadCrossReference_3_0()); 
+		newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysThreadCrossReference_3_0()); 
 	}
 
 )
-)(	otherlv_4='{' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
-	    }
-		lv_actorInstanceMappings_5_0=ruleActorInstanceMapping		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getActorInstanceMappingRule());
-	        }
-       		add(
-       			$current, 
-       			"actorInstanceMappings",
-        		lv_actorInstanceMappings_5_0, 
-        		"ActorInstanceMapping");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_6='}' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2());
-    }
-)?)
-;
-
-
-
-
-
-// Entry rule entryRuleRefPath
-entryRuleRefPath returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getRefPathRule()); }
-	 iv_ruleRefPath=ruleRefPath 
-	 { $current=$iv_ruleRefPath.current; } 
-	 EOF 
-;
-
-// Rule RefPath
-ruleRefPath returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_refs_0_0=RULE_ID
-		{
-			newLeafNode(lv_refs_0_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getRefPathRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"refs",
-        		lv_refs_0_0, 
-        		"ID");
-	    }
-
-)
-)(	otherlv_1='/' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getRefPathAccess().getSolidusKeyword_1_0());
-    }
-(
-(
-		lv_refs_2_0=RULE_ID
-		{
-			newLeafNode(lv_refs_2_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_1_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getRefPathRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"refs",
-        		lv_refs_2_0, 
-        		"ID");
-	    }
-
-)
-))*)
+))
 ;
 
 

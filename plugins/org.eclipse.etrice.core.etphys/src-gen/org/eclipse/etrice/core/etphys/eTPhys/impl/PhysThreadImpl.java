@@ -11,25 +11,28 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Thread</b></em>'.
+ * An implementation of the model object '<em><b>Phys Thread</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl#getExecmode <em>Execmode</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl#getPrio <em>Prio</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ThreadImpl#getStacksize <em>Stacksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getExecmode <em>Execmode</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getPrio <em>Prio</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getStacksize <em>Stacksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getMsgblocksize <em>Msgblocksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getMsgpoolsize <em>Msgpoolsize</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ThreadImpl extends MinimalEObjectImpl.Container implements org.eclipse.etrice.core.etphys.eTPhys.Thread
+public class PhysThreadImpl extends MinimalEObjectImpl.Container implements PhysThread
 {
   /**
    * The default value of the '{@link #isDefault() <em>Default</em>}' attribute.
@@ -132,11 +135,51 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   protected int stacksize = STACKSIZE_EDEFAULT;
 
   /**
+   * The default value of the '{@link #getMsgblocksize() <em>Msgblocksize</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMsgblocksize()
+   * @generated
+   * @ordered
+   */
+  protected static final int MSGBLOCKSIZE_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getMsgblocksize() <em>Msgblocksize</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMsgblocksize()
+   * @generated
+   * @ordered
+   */
+  protected int msgblocksize = MSGBLOCKSIZE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getMsgpoolsize() <em>Msgpoolsize</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMsgpoolsize()
+   * @generated
+   * @ordered
+   */
+  protected static final int MSGPOOLSIZE_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getMsgpoolsize() <em>Msgpoolsize</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMsgpoolsize()
+   * @generated
+   * @ordered
+   */
+  protected int msgpoolsize = MSGPOOLSIZE_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ThreadImpl()
+  protected PhysThreadImpl()
   {
     super();
   }
@@ -149,7 +192,7 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   @Override
   protected EClass eStaticClass()
   {
-    return ETPhysPackage.Literals.THREAD;
+    return ETPhysPackage.Literals.PHYS_THREAD;
   }
 
   /**
@@ -172,7 +215,7 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     boolean oldDefault = default_;
     default_ = newDefault;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.THREAD__DEFAULT, oldDefault, default_));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__DEFAULT, oldDefault, default_));
   }
 
   /**
@@ -195,7 +238,7 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.THREAD__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__NAME, oldName, name));
   }
 
   /**
@@ -218,7 +261,7 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     ExecMode oldExecmode = execmode;
     execmode = newExecmode == null ? EXECMODE_EDEFAULT : newExecmode;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.THREAD__EXECMODE, oldExecmode, execmode));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__EXECMODE, oldExecmode, execmode));
   }
 
   /**
@@ -241,7 +284,7 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     int oldPrio = prio;
     prio = newPrio;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.THREAD__PRIO, oldPrio, prio));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__PRIO, oldPrio, prio));
   }
 
   /**
@@ -264,7 +307,53 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     int oldStacksize = stacksize;
     stacksize = newStacksize;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.THREAD__STACKSIZE, oldStacksize, stacksize));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__STACKSIZE, oldStacksize, stacksize));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getMsgblocksize()
+  {
+    return msgblocksize;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setMsgblocksize(int newMsgblocksize)
+  {
+    int oldMsgblocksize = msgblocksize;
+    msgblocksize = newMsgblocksize;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE, oldMsgblocksize, msgblocksize));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getMsgpoolsize()
+  {
+    return msgpoolsize;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setMsgpoolsize(int newMsgpoolsize)
+  {
+    int oldMsgpoolsize = msgpoolsize;
+    msgpoolsize = newMsgpoolsize;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE, oldMsgpoolsize, msgpoolsize));
   }
 
   /**
@@ -277,16 +366,20 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   {
     switch (featureID)
     {
-      case ETPhysPackage.THREAD__DEFAULT:
+      case ETPhysPackage.PHYS_THREAD__DEFAULT:
         return isDefault();
-      case ETPhysPackage.THREAD__NAME:
+      case ETPhysPackage.PHYS_THREAD__NAME:
         return getName();
-      case ETPhysPackage.THREAD__EXECMODE:
+      case ETPhysPackage.PHYS_THREAD__EXECMODE:
         return getExecmode();
-      case ETPhysPackage.THREAD__PRIO:
+      case ETPhysPackage.PHYS_THREAD__PRIO:
         return getPrio();
-      case ETPhysPackage.THREAD__STACKSIZE:
+      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
         return getStacksize();
+      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+        return getMsgblocksize();
+      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+        return getMsgpoolsize();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -301,20 +394,26 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   {
     switch (featureID)
     {
-      case ETPhysPackage.THREAD__DEFAULT:
+      case ETPhysPackage.PHYS_THREAD__DEFAULT:
         setDefault((Boolean)newValue);
         return;
-      case ETPhysPackage.THREAD__NAME:
+      case ETPhysPackage.PHYS_THREAD__NAME:
         setName((String)newValue);
         return;
-      case ETPhysPackage.THREAD__EXECMODE:
+      case ETPhysPackage.PHYS_THREAD__EXECMODE:
         setExecmode((ExecMode)newValue);
         return;
-      case ETPhysPackage.THREAD__PRIO:
+      case ETPhysPackage.PHYS_THREAD__PRIO:
         setPrio((Integer)newValue);
         return;
-      case ETPhysPackage.THREAD__STACKSIZE:
+      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
         setStacksize((Integer)newValue);
+        return;
+      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+        setMsgblocksize((Integer)newValue);
+        return;
+      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+        setMsgpoolsize((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -330,20 +429,26 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   {
     switch (featureID)
     {
-      case ETPhysPackage.THREAD__DEFAULT:
+      case ETPhysPackage.PHYS_THREAD__DEFAULT:
         setDefault(DEFAULT_EDEFAULT);
         return;
-      case ETPhysPackage.THREAD__NAME:
+      case ETPhysPackage.PHYS_THREAD__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case ETPhysPackage.THREAD__EXECMODE:
+      case ETPhysPackage.PHYS_THREAD__EXECMODE:
         setExecmode(EXECMODE_EDEFAULT);
         return;
-      case ETPhysPackage.THREAD__PRIO:
+      case ETPhysPackage.PHYS_THREAD__PRIO:
         setPrio(PRIO_EDEFAULT);
         return;
-      case ETPhysPackage.THREAD__STACKSIZE:
+      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
         setStacksize(STACKSIZE_EDEFAULT);
+        return;
+      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+        setMsgblocksize(MSGBLOCKSIZE_EDEFAULT);
+        return;
+      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+        setMsgpoolsize(MSGPOOLSIZE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -359,16 +464,20 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
   {
     switch (featureID)
     {
-      case ETPhysPackage.THREAD__DEFAULT:
+      case ETPhysPackage.PHYS_THREAD__DEFAULT:
         return default_ != DEFAULT_EDEFAULT;
-      case ETPhysPackage.THREAD__NAME:
+      case ETPhysPackage.PHYS_THREAD__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case ETPhysPackage.THREAD__EXECMODE:
+      case ETPhysPackage.PHYS_THREAD__EXECMODE:
         return execmode != EXECMODE_EDEFAULT;
-      case ETPhysPackage.THREAD__PRIO:
+      case ETPhysPackage.PHYS_THREAD__PRIO:
         return prio != PRIO_EDEFAULT;
-      case ETPhysPackage.THREAD__STACKSIZE:
+      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
         return stacksize != STACKSIZE_EDEFAULT;
+      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+        return msgblocksize != MSGBLOCKSIZE_EDEFAULT;
+      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+        return msgpoolsize != MSGPOOLSIZE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -394,8 +503,12 @@ public class ThreadImpl extends MinimalEObjectImpl.Container implements org.ecli
     result.append(prio);
     result.append(", stacksize: ");
     result.append(stacksize);
+    result.append(", msgblocksize: ");
+    result.append(msgblocksize);
+    result.append(", msgpoolsize: ");
+    result.append(msgpoolsize);
     result.append(')');
     return result.toString();
   }
 
-} //ThreadImpl
+} //PhysThreadImpl

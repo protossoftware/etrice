@@ -204,16 +204,28 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRuntimeAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final CrossReference cRuntimeRuntimeClassCrossReference_6_0 = (CrossReference)cRuntimeAssignment_6.eContents().get(0);
 		private final RuleCall cRuntimeRuntimeClassFQNParserRuleCall_6_0_1 = (RuleCall)cRuntimeRuntimeClassCrossReference_6_0.eContents().get(1);
-		private final Assignment cThreadsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cThreadsThreadParserRuleCall_7_0 = (RuleCall)cThreadsAssignment_7.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Keyword cPriominKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cEqualsSignKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cPriominAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cPriominPRIOParserRuleCall_9_0 = (RuleCall)cPriominAssignment_9.eContents().get(0);
+		private final Keyword cPriomaxKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cEqualsSignKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cPriomaxAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cPriomaxPRIOParserRuleCall_12_0 = (RuleCall)cPriomaxAssignment_12.eContents().get(0);
+		private final Assignment cThreadsAssignment_13 = (Assignment)cGroup.eContents().get(13);
+		private final RuleCall cThreadsPhysThreadParserRuleCall_13_0 = (RuleCall)cThreadsAssignment_13.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
 		
 		//NodeClass:
 		//
-		//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] threads+=Thread* "}";
+		//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
+		//
+		//	"priomax" "=" priomax=PRIO threads+=PhysThread* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] threads+=Thread* "}"
+		//"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
+		//
+		//"priomax" "=" priomax=PRIO threads+=PhysThread* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"NodeClass"
@@ -249,18 +261,42 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getRuntimeRuntimeClassFQNParserRuleCall_6_0_1() { return cRuntimeRuntimeClassFQNParserRuleCall_6_0_1; }
 
-		//threads+=Thread*
-		public Assignment getThreadsAssignment_7() { return cThreadsAssignment_7; }
+		//"priomin"
+		public Keyword getPriominKeyword_7() { return cPriominKeyword_7; }
 
-		//Thread
-		public RuleCall getThreadsThreadParserRuleCall_7_0() { return cThreadsThreadParserRuleCall_7_0; }
+		//"="
+		public Keyword getEqualsSignKeyword_8() { return cEqualsSignKeyword_8; }
+
+		//priomin=PRIO
+		public Assignment getPriominAssignment_9() { return cPriominAssignment_9; }
+
+		//PRIO
+		public RuleCall getPriominPRIOParserRuleCall_9_0() { return cPriominPRIOParserRuleCall_9_0; }
+
+		//"priomax"
+		public Keyword getPriomaxKeyword_10() { return cPriomaxKeyword_10; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_11() { return cEqualsSignKeyword_11; }
+
+		//priomax=PRIO
+		public Assignment getPriomaxAssignment_12() { return cPriomaxAssignment_12; }
+
+		//PRIO
+		public RuleCall getPriomaxPRIOParserRuleCall_12_0() { return cPriomaxPRIOParserRuleCall_12_0; }
+
+		//threads+=PhysThread*
+		public Assignment getThreadsAssignment_13() { return cThreadsAssignment_13; }
+
+		//PhysThread
+		public RuleCall getThreadsPhysThreadParserRuleCall_13_0() { return cThreadsPhysThreadParserRuleCall_13_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		public Keyword getRightCurlyBracketKeyword_14() { return cRightCurlyBracketKeyword_14; }
 	}
 
-	public class ThreadElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Thread");
+	public class PhysThreadElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PhysThread");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment cDefaultAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
@@ -273,28 +309,34 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cExecmodeAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cExecmodeExecModeEnumRuleCall_5_0 = (RuleCall)cExecmodeAssignment_5.eContents().get(0);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cPrioKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
-		private final Assignment cPrioAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cPrioPRIOParserRuleCall_6_2_0 = (RuleCall)cPrioAssignment_6_2.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cStacksizeKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cStacksizeAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cStacksizeINTTerminalRuleCall_7_2_0 = (RuleCall)cStacksizeAssignment_7_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Keyword cPrioKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cEqualsSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cPrioAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cPrioPRIOParserRuleCall_8_0 = (RuleCall)cPrioAssignment_8.eContents().get(0);
+		private final Keyword cStacksizeKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Keyword cEqualsSignKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Assignment cStacksizeAssignment_11 = (Assignment)cGroup.eContents().get(11);
+		private final RuleCall cStacksizeINTTerminalRuleCall_11_0 = (RuleCall)cStacksizeAssignment_11.eContents().get(0);
+		private final Keyword cMsgblocksizeKeyword_12 = (Keyword)cGroup.eContents().get(12);
+		private final Keyword cEqualsSignKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Assignment cMsgblocksizeAssignment_14 = (Assignment)cGroup.eContents().get(14);
+		private final RuleCall cMsgblocksizeINTTerminalRuleCall_14_0 = (RuleCall)cMsgblocksizeAssignment_14.eContents().get(0);
+		private final Keyword cMsgpoolsizeKeyword_15 = (Keyword)cGroup.eContents().get(15);
+		private final Keyword cEqualsSignKeyword_16 = (Keyword)cGroup.eContents().get(16);
+		private final Assignment cMsgpoolsizeAssignment_17 = (Assignment)cGroup.eContents().get(17);
+		private final RuleCall cMsgpoolsizeINTTerminalRuleCall_17_0 = (RuleCall)cMsgpoolsizeAssignment_17.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_18 = (Keyword)cGroup.eContents().get(18);
 		
-		//Thread:
+		//PhysThread:
 		//
-		//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode ("prio" "=" prio=PRIO)?
+		//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode "prio" "=" prio=PRIO "stacksize"
 		//
-		//	("stacksize" "=" stacksize=INT)? "}";
+		//	"=" stacksize=INT "msgblocksize" "=" msgblocksize=INT "msgpoolsize" "=" msgpoolsize=INT "}";
 		public ParserRule getRule() { return rule; }
 
-		//(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode ("prio" "=" prio=PRIO)? ("stacksize"
+		//(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode "prio" "=" prio=PRIO "stacksize" "="
 		//
-		//"=" stacksize=INT)? "}"
+		//stacksize=INT "msgblocksize" "=" msgblocksize=INT "msgpoolsize" "=" msgpoolsize=INT "}"
 		public Group getGroup() { return cGroup; }
 
 		//default?="DefaultThread" | "Thread"
@@ -330,38 +372,56 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//ExecMode
 		public RuleCall getExecmodeExecModeEnumRuleCall_5_0() { return cExecmodeExecModeEnumRuleCall_5_0; }
 
-		//("prio" "=" prio=PRIO)?
-		public Group getGroup_6() { return cGroup_6; }
-
 		//"prio"
-		public Keyword getPrioKeyword_6_0() { return cPrioKeyword_6_0; }
+		public Keyword getPrioKeyword_6() { return cPrioKeyword_6; }
 
 		//"="
-		public Keyword getEqualsSignKeyword_6_1() { return cEqualsSignKeyword_6_1; }
+		public Keyword getEqualsSignKeyword_7() { return cEqualsSignKeyword_7; }
 
 		//prio=PRIO
-		public Assignment getPrioAssignment_6_2() { return cPrioAssignment_6_2; }
+		public Assignment getPrioAssignment_8() { return cPrioAssignment_8; }
 
 		//PRIO
-		public RuleCall getPrioPRIOParserRuleCall_6_2_0() { return cPrioPRIOParserRuleCall_6_2_0; }
-
-		//("stacksize" "=" stacksize=INT)?
-		public Group getGroup_7() { return cGroup_7; }
+		public RuleCall getPrioPRIOParserRuleCall_8_0() { return cPrioPRIOParserRuleCall_8_0; }
 
 		//"stacksize"
-		public Keyword getStacksizeKeyword_7_0() { return cStacksizeKeyword_7_0; }
+		public Keyword getStacksizeKeyword_9() { return cStacksizeKeyword_9; }
 
 		//"="
-		public Keyword getEqualsSignKeyword_7_1() { return cEqualsSignKeyword_7_1; }
+		public Keyword getEqualsSignKeyword_10() { return cEqualsSignKeyword_10; }
 
 		//stacksize=INT
-		public Assignment getStacksizeAssignment_7_2() { return cStacksizeAssignment_7_2; }
+		public Assignment getStacksizeAssignment_11() { return cStacksizeAssignment_11; }
 
 		//INT
-		public RuleCall getStacksizeINTTerminalRuleCall_7_2_0() { return cStacksizeINTTerminalRuleCall_7_2_0; }
+		public RuleCall getStacksizeINTTerminalRuleCall_11_0() { return cStacksizeINTTerminalRuleCall_11_0; }
+
+		//"msgblocksize"
+		public Keyword getMsgblocksizeKeyword_12() { return cMsgblocksizeKeyword_12; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_13() { return cEqualsSignKeyword_13; }
+
+		//msgblocksize=INT
+		public Assignment getMsgblocksizeAssignment_14() { return cMsgblocksizeAssignment_14; }
+
+		//INT
+		public RuleCall getMsgblocksizeINTTerminalRuleCall_14_0() { return cMsgblocksizeINTTerminalRuleCall_14_0; }
+
+		//"msgpoolsize"
+		public Keyword getMsgpoolsizeKeyword_15() { return cMsgpoolsizeKeyword_15; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_16() { return cEqualsSignKeyword_16; }
+
+		//msgpoolsize=INT
+		public Assignment getMsgpoolsizeAssignment_17() { return cMsgpoolsizeAssignment_17; }
+
+		//INT
+		public RuleCall getMsgpoolsizeINTTerminalRuleCall_17_0() { return cMsgpoolsizeINTTerminalRuleCall_17_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		public Keyword getRightCurlyBracketKeyword_18() { return cRightCurlyBracketKeyword_18; }
 	}
 
 	public class RuntimeClassElements extends AbstractParserRuleElementFinder {
@@ -649,7 +709,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	private PhysicalSystemElements pPhysicalSystem;
 	private NodeRefElements pNodeRef;
 	private NodeClassElements pNodeClass;
-	private ThreadElements pThread;
+	private PhysThreadElements pPhysThread;
 	private ExecModeElements unknownRuleExecMode;
 	private RuntimeClassElements pRuntimeClass;
 	private ThreadModelElements unknownRuleThreadModel;
@@ -734,7 +794,9 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 
 	//NodeClass:
 	//
-	//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] threads+=Thread* "}";
+	//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
+	//
+	//	"priomax" "=" priomax=PRIO threads+=PhysThread* "}";
 	public NodeClassElements getNodeClassAccess() {
 		return (pNodeClass != null) ? pNodeClass : (pNodeClass = new NodeClassElements());
 	}
@@ -743,17 +805,17 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getNodeClassAccess().getRule();
 	}
 
-	//Thread:
+	//PhysThread:
 	//
-	//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode ("prio" "=" prio=PRIO)?
+	//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode "prio" "=" prio=PRIO "stacksize"
 	//
-	//	("stacksize" "=" stacksize=INT)? "}";
-	public ThreadElements getThreadAccess() {
-		return (pThread != null) ? pThread : (pThread = new ThreadElements());
+	//	"=" stacksize=INT "msgblocksize" "=" msgblocksize=INT "msgpoolsize" "=" msgpoolsize=INT "}";
+	public PhysThreadElements getPhysThreadAccess() {
+		return (pPhysThread != null) ? pPhysThread : (pPhysThread = new PhysThreadElements());
 	}
 	
-	public ParserRule getThreadRule() {
-		return getThreadAccess().getRule();
+	public ParserRule getPhysThreadRule() {
+		return getPhysThreadAccess().getRule();
 	}
 
 	//enum ExecMode:

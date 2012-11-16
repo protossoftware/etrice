@@ -11,15 +11,50 @@
  *******************************************************************************/
 
 package org.eclipse.etrice.core.etphys.validation;
+
+import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
+import org.eclipse.xtext.validation.Check;
  
 
 public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
-//		}
-//	}
-
+	@Check
+	public void checkThread(PhysThread thread) {
+		NodeClass nc = (NodeClass) thread.eContainer();
+		
+		if (thread.getPrio()<nc.getPriomin())
+			error("prio less than minimum", ETPhysPackage.Literals.PHYS_THREAD__PRIO);
+		
+		if (thread.getPrio()>nc.getPriomax())
+			error("prio greater than maximum", ETPhysPackage.Literals.PHYS_THREAD__PRIO);
+	}
+	
+	@Check
+	public void checkNodeClass(NodeClass nc) {
+		{
+			// make sure there is one and only one DefaultThread
+			boolean hasDefault = false;
+			for (PhysThread thread : nc.getThreads()) {
+				if (thread.isDefault())
+					if (hasDefault) {
+						int idx = nc.getThreads().indexOf(thread);
+						error("only one DefaultThread allowed", ETPhysPackage.Literals.NODE_CLASS__THREADS, idx);
+					}
+					else
+						hasDefault = true;
+			}
+			
+			if (!hasDefault)
+				error("there must be one DefaultThread", ETPhysPackage.Literals.NODE_CLASS__THREADS);
+		}
+		
+		// single threaded mode has to have one thread
+		if (nc.getRuntime()!=null) {
+			if (nc.getRuntime().getThreadModel()==ThreadModel.SINGLE_THREADED && nc.getThreads().size()>1)
+				error("runtime is single threaded but more than one thread defined", ETPhysPackage.Literals.NODE_CLASS__THREADS);
+		}
+	}
 }

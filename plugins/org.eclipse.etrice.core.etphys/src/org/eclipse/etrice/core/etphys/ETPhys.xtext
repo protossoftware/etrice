@@ -40,15 +40,19 @@ NodeRef:
 NodeClass:
 	'NodeClass'name=ID (docu=Documentation)? '{'
 		'runtime' '=' runtime=[RuntimeClass|FQN]
-		threads+=Thread*
+		'priomin' '=' priomin=PRIO
+		'priomax' '=' priomax=PRIO
+		threads+=PhysThread*
 	'}'
 ;
 
-Thread:
+PhysThread:
 	(default?='DefaultThread' | 'Thread') name=ID '{'
 		'execmode' '=' execmode=ExecMode
-		('prio' '=' prio=PRIO)?
-		('stacksize' '=' stacksize=INT)?
+		'prio' '=' prio=PRIO
+		'stacksize' '=' stacksize=INT
+		'msgblocksize' '=' msgblocksize=INT
+		'msgpoolsize' '=' msgpoolsize=INT
 	'}'
 ;
 

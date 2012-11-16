@@ -42,10 +42,7 @@ public class ETMapParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingAccess().getGroup(), "rule__Mapping__Group__0");
 					put(grammarAccess.getSubSystemMappingAccess().getGroup(), "rule__SubSystemMapping__Group__0");
 					put(grammarAccess.getSubSystemMappingAccess().getGroup_4(), "rule__SubSystemMapping__Group_4__0");
-					put(grammarAccess.getActorInstanceMappingAccess().getGroup(), "rule__ActorInstanceMapping__Group__0");
-					put(grammarAccess.getActorInstanceMappingAccess().getGroup_4(), "rule__ActorInstanceMapping__Group_4__0");
-					put(grammarAccess.getRefPathAccess().getGroup(), "rule__RefPath__Group__0");
-					put(grammarAccess.getRefPathAccess().getGroup_1(), "rule__RefPath__Group_1__0");
+					put(grammarAccess.getThreadMappingAccess().getGroup(), "rule__ThreadMapping__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
@@ -59,12 +56,9 @@ public class ETMapParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingAccess().getSubsysMappingsAssignment_5(), "rule__Mapping__SubsysMappingsAssignment_5");
 					put(grammarAccess.getSubSystemMappingAccess().getLogicalSubSysAssignment_1(), "rule__SubSystemMapping__LogicalSubSysAssignment_1");
 					put(grammarAccess.getSubSystemMappingAccess().getNodeAssignment_3(), "rule__SubSystemMapping__NodeAssignment_3");
-					put(grammarAccess.getSubSystemMappingAccess().getActorInstanceMappingsAssignment_4_1(), "rule__SubSystemMapping__ActorInstanceMappingsAssignment_4_1");
-					put(grammarAccess.getActorInstanceMappingAccess().getPathAssignment_1(), "rule__ActorInstanceMapping__PathAssignment_1");
-					put(grammarAccess.getActorInstanceMappingAccess().getThreadAssignment_3(), "rule__ActorInstanceMapping__ThreadAssignment_3");
-					put(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsAssignment_4_1(), "rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1");
-					put(grammarAccess.getRefPathAccess().getRefsAssignment_0(), "rule__RefPath__RefsAssignment_0");
-					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
+					put(grammarAccess.getSubSystemMappingAccess().getThreadMappingsAssignment_4_1(), "rule__SubSystemMapping__ThreadMappingsAssignment_4_1");
+					put(grammarAccess.getThreadMappingAccess().getLogicalThreadAssignment_1(), "rule__ThreadMapping__LogicalThreadAssignment_1");
+					put(grammarAccess.getThreadMappingAccess().getPhysicalThreadAssignment_3(), "rule__ThreadMapping__PhysicalThreadAssignment_3");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
 					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 				}

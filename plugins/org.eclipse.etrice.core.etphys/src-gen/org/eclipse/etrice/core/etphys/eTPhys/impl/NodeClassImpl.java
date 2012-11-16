@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 
 /**
@@ -33,6 +34,8 @@ import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getRuntime <em>Runtime</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getPriomin <em>Priomin</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getPriomax <em>Priomax</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getThreads <em>Threads</em>}</li>
  * </ul>
  * </p>
@@ -82,6 +85,46 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
   protected RuntimeClass runtime;
 
   /**
+   * The default value of the '{@link #getPriomin() <em>Priomin</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPriomin()
+   * @generated
+   * @ordered
+   */
+  protected static final int PRIOMIN_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getPriomin() <em>Priomin</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPriomin()
+   * @generated
+   * @ordered
+   */
+  protected int priomin = PRIOMIN_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getPriomax() <em>Priomax</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPriomax()
+   * @generated
+   * @ordered
+   */
+  protected static final int PRIOMAX_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getPriomax() <em>Priomax</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPriomax()
+   * @generated
+   * @ordered
+   */
+  protected int priomax = PRIOMAX_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getThreads() <em>Threads</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -89,7 +132,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected EList<org.eclipse.etrice.core.etphys.eTPhys.Thread> threads;
+  protected EList<PhysThread> threads;
 
   /**
    * <!-- begin-user-doc -->
@@ -231,11 +274,57 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<org.eclipse.etrice.core.etphys.eTPhys.Thread> getThreads()
+  public int getPriomin()
+  {
+    return priomin;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPriomin(int newPriomin)
+  {
+    int oldPriomin = priomin;
+    priomin = newPriomin;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.NODE_CLASS__PRIOMIN, oldPriomin, priomin));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getPriomax()
+  {
+    return priomax;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPriomax(int newPriomax)
+  {
+    int oldPriomax = priomax;
+    priomax = newPriomax;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.NODE_CLASS__PRIOMAX, oldPriomax, priomax));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<PhysThread> getThreads()
   {
     if (threads == null)
     {
-      threads = new EObjectContainmentEList<org.eclipse.etrice.core.etphys.eTPhys.Thread>(org.eclipse.etrice.core.etphys.eTPhys.Thread.class, this, ETPhysPackage.NODE_CLASS__THREADS);
+      threads = new EObjectContainmentEList<PhysThread>(PhysThread.class, this, ETPhysPackage.NODE_CLASS__THREADS);
     }
     return threads;
   }
@@ -275,6 +364,10 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
       case ETPhysPackage.NODE_CLASS__RUNTIME:
         if (resolve) return getRuntime();
         return basicGetRuntime();
+      case ETPhysPackage.NODE_CLASS__PRIOMIN:
+        return getPriomin();
+      case ETPhysPackage.NODE_CLASS__PRIOMAX:
+        return getPriomax();
       case ETPhysPackage.NODE_CLASS__THREADS:
         return getThreads();
     }
@@ -301,9 +394,15 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
       case ETPhysPackage.NODE_CLASS__RUNTIME:
         setRuntime((RuntimeClass)newValue);
         return;
+      case ETPhysPackage.NODE_CLASS__PRIOMIN:
+        setPriomin((Integer)newValue);
+        return;
+      case ETPhysPackage.NODE_CLASS__PRIOMAX:
+        setPriomax((Integer)newValue);
+        return;
       case ETPhysPackage.NODE_CLASS__THREADS:
         getThreads().clear();
-        getThreads().addAll((Collection<? extends org.eclipse.etrice.core.etphys.eTPhys.Thread>)newValue);
+        getThreads().addAll((Collection<? extends PhysThread>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -328,6 +427,12 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
       case ETPhysPackage.NODE_CLASS__RUNTIME:
         setRuntime((RuntimeClass)null);
         return;
+      case ETPhysPackage.NODE_CLASS__PRIOMIN:
+        setPriomin(PRIOMIN_EDEFAULT);
+        return;
+      case ETPhysPackage.NODE_CLASS__PRIOMAX:
+        setPriomax(PRIOMAX_EDEFAULT);
+        return;
       case ETPhysPackage.NODE_CLASS__THREADS:
         getThreads().clear();
         return;
@@ -351,6 +456,10 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
         return docu != null;
       case ETPhysPackage.NODE_CLASS__RUNTIME:
         return runtime != null;
+      case ETPhysPackage.NODE_CLASS__PRIOMIN:
+        return priomin != PRIOMIN_EDEFAULT;
+      case ETPhysPackage.NODE_CLASS__PRIOMAX:
+        return priomax != PRIOMAX_EDEFAULT;
       case ETPhysPackage.NODE_CLASS__THREADS:
         return threads != null && !threads.isEmpty();
     }
@@ -370,6 +479,10 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", priomin: ");
+    result.append(priomin);
+    result.append(", priomax: ");
+    result.append(priomax);
     result.append(')');
     return result.toString();
   }

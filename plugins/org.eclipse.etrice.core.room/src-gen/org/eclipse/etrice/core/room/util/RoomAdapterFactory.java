@@ -275,9 +275,14 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createLogicalThreadAdapter();
       }
       @Override
-      public Adapter caseActorInstancePath(ActorInstancePath object)
+      public Adapter caseActorInstanceMapping(ActorInstanceMapping object)
       {
-        return createActorInstancePathAdapter();
+        return createActorInstanceMappingAdapter();
+      }
+      @Override
+      public Adapter caseRefPath(RefPath object)
+      {
+        return createRefPathAdapter();
       }
       @Override
       public Adapter caseBinding(Binding object)
@@ -1107,16 +1112,31 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorInstancePath <em>Actor Instance Path</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ActorInstancePath
+   * @see org.eclipse.etrice.core.room.ActorInstanceMapping
    * @generated
    */
-  public Adapter createActorInstancePathAdapter()
+  public Adapter createActorInstanceMappingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefPath <em>Ref Path</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefPath
+   * @generated
+   */
+  public Adapter createRefPathAdapter()
   {
     return null;
   }

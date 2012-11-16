@@ -20,7 +20,7 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getLogicalSubSys <em>Logical Sub Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getNode <em>Node</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getThreadMappings <em>Thread Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,19 +83,19 @@ public interface SubSystemMapping extends EObject
   void setNode(NodeRef value);
 
   /**
-   * Returns the value of the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping}.
+   * Returns the value of the '<em><b>Thread Mappings</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Actor Instance Mappings</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Thread Mappings</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping_ActorInstanceMappings()
+   * @return the value of the '<em>Thread Mappings</em>' containment reference list.
+   * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping_ThreadMappings()
    * @model containment="true"
    * @generated
    */
-  EList<ActorInstanceMapping> getActorInstanceMappings();
+  EList<ThreadMapping> getThreadMappings();
 
 } // SubSystemMapping

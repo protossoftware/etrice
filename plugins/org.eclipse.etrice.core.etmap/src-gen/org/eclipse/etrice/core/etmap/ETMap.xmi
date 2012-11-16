@@ -20,11 +20,11 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="MappingModel"/>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="mappings" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -43,7 +43,7 @@
             <type metamodel="/0/@metamodelDeclarations.2">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LogicalSystem"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="->"/>
@@ -52,7 +52,7 @@
             <type metamodel="/0/@metamodelDeclarations.3">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysicalSystem"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
@@ -87,53 +87,35 @@
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="{"/>
-          <elements xsi:type="xtext:Assignment" cardinality="*" feature="actorInstanceMappings" operator="+=">
+          <elements xsi:type="xtext:Assignment" cardinality="*" feature="threadMappings" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Keyword" value="}"/>
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ActorInstanceMapping">
+    <rules xsi:type="xtext:ParserRule" name="ThreadMapping">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etmap/ETMap#//ActorInstanceMapping"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etmap/ETMap#//ThreadMapping"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="ActorInstanceMapping"/>
-        <elements xsi:type="xtext:Assignment" feature="path" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value="->"/>
-        <elements xsi:type="xtext:Assignment" feature="thread" operator="=">
+        <elements xsi:type="xtext:Keyword" value="ThreadMapping"/>
+        <elements xsi:type="xtext:Assignment" feature="logicalThread" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.3">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//Thread"/>
+            <type metamodel="/0/@metamodelDeclarations.2">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LogicalThread"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </terminal>
         </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="{"/>
-          <elements xsi:type="xtext:Assignment" cardinality="*" feature="actorInstanceMappings" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value="}"/>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="RefPath">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etmap/ETMap#//RefPath"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="refs" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="*">
-          <elements xsi:type="xtext:Keyword" value="/"/>
-          <elements xsi:type="xtext:Assignment" feature="refs" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="->"/>
+        <elements xsi:type="xtext:Assignment" feature="physicalThread" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.3">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysThread"/>
+            </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </elements>
+          </terminal>
         </elements>
       </alternatives>
     </rules>
@@ -146,7 +128,7 @@
         <elements xsi:type="xtext:Alternatives">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Assignment" feature="importedNamespace" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
             </elements>
             <elements xsi:type="xtext:Keyword" value="from"/>
           </elements>
@@ -162,7 +144,7 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         <elements xsi:type="xtext:Keyword" cardinality="?" value=".*"/>
       </alternatives>
     </rules>

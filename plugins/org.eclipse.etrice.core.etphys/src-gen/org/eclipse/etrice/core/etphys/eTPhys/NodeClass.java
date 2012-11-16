@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getRuntime <em>Runtime</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomin <em>Priomin</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax <em>Priomax</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getThreads <em>Threads</em>}</li>
  * </ul>
  * </p>
@@ -106,8 +108,60 @@ public interface NodeClass extends EObject
   void setRuntime(RuntimeClass value);
 
   /**
+   * Returns the value of the '<em><b>Priomin</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Priomin</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Priomin</em>' attribute.
+   * @see #setPriomin(int)
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomin()
+   * @model
+   * @generated
+   */
+  int getPriomin();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomin <em>Priomin</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Priomin</em>' attribute.
+   * @see #getPriomin()
+   * @generated
+   */
+  void setPriomin(int value);
+
+  /**
+   * Returns the value of the '<em><b>Priomax</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Priomax</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Priomax</em>' attribute.
+   * @see #setPriomax(int)
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomax()
+   * @model
+   * @generated
+   */
+  int getPriomax();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax <em>Priomax</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Priomax</em>' attribute.
+   * @see #getPriomax()
+   * @generated
+   */
+  void setPriomax(int value);
+
+  /**
    * Returns the value of the '<em><b>Threads</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.Thread}.
+   * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Threads</em>' containment reference list isn't clear,
@@ -119,6 +173,6 @@ public interface NodeClass extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<org.eclipse.etrice.core.etphys.eTPhys.Thread> getThreads();
+  EList<PhysThread> getThreads();
 
 } // NodeClass

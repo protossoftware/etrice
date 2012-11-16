@@ -12,39 +12,30 @@
 
 package org.eclipse.etrice.core.etmap.validation;
 
-import org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping;
+import java.util.HashSet;
+
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
-import org.eclipse.etrice.core.etmap.eTMap.RefPath;
-import org.eclipse.etrice.core.etmap.util.ETMapUtil;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
+import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.xtext.validation.Check;
- 
+
 
 public class ETMapJavaValidator extends AbstractETMapJavaValidator {
 
 	@Check
-	public void checkActorInstanceConfig(ActorInstanceMapping aim) {
-		ActorContainerClass root = ETMapUtil.getParentContainer(aim);
-		if (root != null && !root.eIsProxy()) {
-			RefPath path = aim.getPath();
-			if (path != null) {
-				String invalidSegment = ETMapUtil.checkPath(root, path);
-				if (invalidSegment != null)
-					error("no match for segment '" + invalidSegment + "'",
-							ETMapPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
-				else {
-					ActorRef aRef = ETMapUtil.getLastActorRef(root, path);
-					if (aRef != null) {
-						if (aRef.getSize() > 1)
-							error("no arrays of actor references supported",
-									ETMapPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
-					} else
-						error("invalid actor reference",
-								ETMapPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
-				}
-			}
+	public void checkSubSystemMapping(SubSystemMapping ssm) {
+		HashSet<LogicalThread> mapped = new HashSet<LogicalThread>();
+		for (ThreadMapping tm : ssm.getThreadMappings()) {
+			mapped.add(tm.getLogicalThread());
 		}
+		
+		StringBuilder sb = new StringBuilder();
+		for (LogicalThread lt : ssm.getLogicalSubSys().getType().getThreads()) {
+			if (!mapped.contains(lt))
+				sb.append("unmapped logical thread '"+lt.getName()+"'\n");
+		}
+		if (sb.length()>0)
+			error(sb.substring(0, sb.length()-2), ETMapPackage.Literals.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS);
 	}
-
 }

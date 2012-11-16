@@ -99,15 +99,25 @@
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
           </terminal>
         </elements>
+        <elements xsi:type="xtext:Keyword" value="priomin"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="priomin" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="priomax"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="priomax" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="threads" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="Thread">
+    <rules xsi:type="xtext:ParserRule" name="PhysThread">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//Thread"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysThread"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Alternatives">
@@ -125,19 +135,25 @@
         <elements xsi:type="xtext:Assignment" feature="execmode" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
         </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="prio"/>
-          <elements xsi:type="xtext:Keyword" value="="/>
-          <elements xsi:type="xtext:Assignment" feature="prio" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-          </elements>
+        <elements xsi:type="xtext:Keyword" value="prio"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="prio" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
         </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="stacksize"/>
-          <elements xsi:type="xtext:Keyword" value="="/>
-          <elements xsi:type="xtext:Assignment" feature="stacksize" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-          </elements>
+        <elements xsi:type="xtext:Keyword" value="stacksize"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="stacksize" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="msgblocksize"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="msgblocksize" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="msgpoolsize"/>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="msgpoolsize" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>

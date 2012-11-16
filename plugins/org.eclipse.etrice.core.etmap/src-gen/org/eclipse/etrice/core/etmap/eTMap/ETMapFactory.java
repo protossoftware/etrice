@@ -50,22 +50,13 @@ public interface ETMapFactory extends EFactory
   SubSystemMapping createSubSystemMapping();
 
   /**
-   * Returns a new object of class '<em>Actor Instance Mapping</em>'.
+   * Returns a new object of class '<em>Thread Mapping</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Actor Instance Mapping</em>'.
+   * @return a new object of class '<em>Thread Mapping</em>'.
    * @generated
    */
-  ActorInstanceMapping createActorInstanceMapping();
-
-  /**
-   * Returns a new object of class '<em>Ref Path</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ref Path</em>'.
-   * @generated
-   */
-  RefPath createRefPath();
+  ThreadMapping createThreadMapping();
 
   /**
    * Returns a new object of class '<em>Import</em>'.

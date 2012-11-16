@@ -44,7 +44,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
 		}		
 	
-		for (Keyword k: f.findKeywords("(", "|", ".", "*")) {
+		for (Keyword k: f.findKeywords("(", "|", ".", "*", "/")) {
 			c.setNoSpace().around(k);
 		}
 		
@@ -71,6 +71,8 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getPrimitiveTypeRule());
 		c.setLinewrap().around(f.getExternalTypeRule());
 		c.setLinewrap(2).around(f.getProtocolClassRule());
+		
+		c.setLinewrap().around(f.getActorInstanceMappingRule());
 		
 		// structure classes
 		c.setLinewrap().around(f.getActorRefRule());

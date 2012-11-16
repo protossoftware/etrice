@@ -33,18 +33,14 @@ Mapping:
 
 SubSystemMapping:
 	'SubSystemMapping' logicalSubSys=[room::SubSystemRef|ID] '->' node=[phys::NodeRef|ID] ('{'
-		actorInstanceMappings+=ActorInstanceMapping*
+		threadMappings+=ThreadMapping*
 	'}')?
 ;
 
-ActorInstanceMapping:
-	'ActorInstanceMapping' path=RefPath '->' thread=[phys::Thread|ID] ('{'
-		actorInstanceMappings+=ActorInstanceMapping*
-	'}')?
+ThreadMapping:
+	'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysThread|ID]
 ;
 
-RefPath:
-	refs+=ID ('/' refs+=ID)*;
 
 Import :
 	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;

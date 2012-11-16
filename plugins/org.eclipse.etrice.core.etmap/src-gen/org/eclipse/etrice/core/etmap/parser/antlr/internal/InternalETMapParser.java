@@ -21,10 +21,9 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalETMapParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'MappingModel'", "'{'", "'}'", "'Mapping'", "'->'", "'SubSystemMapping'", "'ActorInstanceMapping'", "'/'", "'import'", "'from'", "'model'", "'.*'", "'.'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'MappingModel'", "'{'", "'}'", "'Mapping'", "'->'", "'SubSystemMapping'", "'ThreadMapping'", "'import'", "'from'", "'model'", "'.*'", "'.'"
     };
     public static final int RULE_ID=4;
-    public static final int T__23=23;
     public static final int T__22=22;
     public static final int RULE_ANY_OTHER=10;
     public static final int T__21=21;
@@ -188,7 +187,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==19) ) {
+                if ( (LA1_0==18) ) {
                     alt1=1;
                 }
 
@@ -539,7 +538,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubSystemMapping"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:248:1: ruleSubSystemMapping returns [EObject current=null] : (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? ) ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:248:1: ruleSubSystemMapping returns [EObject current=null] : (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) ;
     public final EObject ruleSubSystemMapping() throws RecognitionException {
         EObject current = null;
 
@@ -549,17 +548,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         Token otherlv_3=null;
         Token otherlv_4=null;
         Token otherlv_6=null;
-        EObject lv_actorInstanceMappings_5_0 = null;
+        EObject lv_threadMappings_5_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:251:28: ( (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:251:28: ( (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:3: otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:1: (otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )? )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:252:3: otherlv_0= 'SubSystemMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
             {
             otherlv_0=(Token)match(input,16,FOLLOW_16_in_ruleSubSystemMapping481); 
 
@@ -611,7 +610,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:286:2: (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:286:2: (otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -620,13 +619,13 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:286:4: otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}'
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:286:4: otherlv_4= '{' ( (lv_threadMappings_5_0= ruleThreadMapping ) )* otherlv_6= '}'
                     {
                     otherlv_4=(Token)match(input,12,FOLLOW_12_in_ruleSubSystemMapping546); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getSubSystemMappingAccess().getLeftCurlyBracketKeyword_4_0());
                         
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:290:1: ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )*
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:290:1: ( (lv_threadMappings_5_0= ruleThreadMapping ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -639,16 +638,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:291:1: (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping )
+                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:291:1: (lv_threadMappings_5_0= ruleThreadMapping )
                     	    {
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:291:1: (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping )
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:292:3: lv_actorInstanceMappings_5_0= ruleActorInstanceMapping
+                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:291:1: (lv_threadMappings_5_0= ruleThreadMapping )
+                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:292:3: lv_threadMappings_5_0= ruleThreadMapping
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getSubSystemMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
+                    	    	        newCompositeNode(grammarAccess.getSubSystemMappingAccess().getThreadMappingsThreadMappingParserRuleCall_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemMapping567);
-                    	    lv_actorInstanceMappings_5_0=ruleActorInstanceMapping();
+                    	    pushFollow(FOLLOW_ruleThreadMapping_in_ruleSubSystemMapping567);
+                    	    lv_threadMappings_5_0=ruleThreadMapping();
 
                     	    state._fsp--;
 
@@ -658,9 +657,9 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"actorInstanceMappings",
-                    	            		lv_actorInstanceMappings_5_0, 
-                    	            		"ActorInstanceMapping");
+                    	           			"threadMappings",
+                    	            		lv_threadMappings_5_0, 
+                    	            		"ThreadMapping");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -705,26 +704,26 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleSubSystemMapping"
 
 
-    // $ANTLR start "entryRuleActorInstanceMapping"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:320:1: entryRuleActorInstanceMapping returns [EObject current=null] : iv_ruleActorInstanceMapping= ruleActorInstanceMapping EOF ;
-    public final EObject entryRuleActorInstanceMapping() throws RecognitionException {
+    // $ANTLR start "entryRuleThreadMapping"
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:320:1: entryRuleThreadMapping returns [EObject current=null] : iv_ruleThreadMapping= ruleThreadMapping EOF ;
+    public final EObject entryRuleThreadMapping() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleActorInstanceMapping = null;
+        EObject iv_ruleThreadMapping = null;
 
 
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:321:2: (iv_ruleActorInstanceMapping= ruleActorInstanceMapping EOF )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:322:2: iv_ruleActorInstanceMapping= ruleActorInstanceMapping EOF
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:321:2: (iv_ruleThreadMapping= ruleThreadMapping EOF )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:322:2: iv_ruleThreadMapping= ruleThreadMapping EOF
             {
-             newCompositeNode(grammarAccess.getActorInstanceMappingRule()); 
-            pushFollow(FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping618);
-            iv_ruleActorInstanceMapping=ruleActorInstanceMapping();
+             newCompositeNode(grammarAccess.getThreadMappingRule()); 
+            pushFollow(FOLLOW_ruleThreadMapping_in_entryRuleThreadMapping618);
+            iv_ruleThreadMapping=ruleThreadMapping();
 
             state._fsp--;
 
-             current =iv_ruleActorInstanceMapping; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorInstanceMapping628); 
+             current =iv_ruleThreadMapping; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleThreadMapping628); 
 
             }
 
@@ -738,86 +737,46 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleActorInstanceMapping"
+    // $ANTLR end "entryRuleThreadMapping"
 
 
-    // $ANTLR start "ruleActorInstanceMapping"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:329:1: ruleActorInstanceMapping returns [EObject current=null] : (otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? ) ;
-    public final EObject ruleActorInstanceMapping() throws RecognitionException {
+    // $ANTLR start "ruleThreadMapping"
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:329:1: ruleThreadMapping returns [EObject current=null] : (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) ;
+    public final EObject ruleThreadMapping() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
+        Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_3=null;
-        Token otherlv_4=null;
-        Token otherlv_6=null;
-        EObject lv_path_1_0 = null;
-
-        EObject lv_actorInstanceMappings_5_0 = null;
-
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:332:28: ( (otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:1: (otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:332:28: ( (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:1: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:1: (otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:3: otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:1: (otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:333:3: otherlv_0= 'ThreadMapping' ( (otherlv_1= RULE_ID ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleActorInstanceMapping665); 
+            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleThreadMapping665); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingKeyword_0());
+                	newLeafNode(otherlv_0, grammarAccess.getThreadMappingAccess().getThreadMappingKeyword_0());
                 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:337:1: ( (lv_path_1_0= ruleRefPath ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:338:1: (lv_path_1_0= ruleRefPath )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:337:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:338:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:338:1: (lv_path_1_0= ruleRefPath )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:339:3: lv_path_1_0= ruleRefPath
-            {
-             
-            	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getPathRefPathParserRuleCall_1_0()); 
-            	    
-            pushFollow(FOLLOW_ruleRefPath_in_ruleActorInstanceMapping686);
-            lv_path_1_0=ruleRefPath();
-
-            state._fsp--;
-
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getActorInstanceMappingRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"path",
-                    		lv_path_1_0, 
-                    		"RefPath");
-            	        afterParserOrEnumRuleCall();
-            	    
-
-            }
-
-
-            }
-
-            otherlv_2=(Token)match(input,15,FOLLOW_15_in_ruleActorInstanceMapping698); 
-
-                	newLeafNode(otherlv_2, grammarAccess.getActorInstanceMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
-                
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:359:1: ( (otherlv_3= RULE_ID ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:360:1: (otherlv_3= RULE_ID )
-            {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:360:1: (otherlv_3= RULE_ID )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:361:3: otherlv_3= RULE_ID
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:338:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:339:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
-            	            current = createModelElement(grammarAccess.getActorInstanceMappingRule());
+            	            current = createModelElement(grammarAccess.getThreadMappingRule());
             	        }
                     
-            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorInstanceMapping718); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThreadMapping685); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getActorInstanceMappingAccess().getThreadThreadCrossReference_3_0()); 
+            		newLeafNode(otherlv_1, grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadCrossReference_1_0()); 
             	
 
             }
@@ -825,233 +784,30 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:372:2: (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            otherlv_2=(Token)match(input,15,FOLLOW_15_in_ruleThreadMapping697); 
 
-            if ( (LA7_0==12) ) {
-                alt7=1;
-            }
-            switch (alt7) {
-                case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:372:4: otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}'
-                    {
-                    otherlv_4=(Token)match(input,12,FOLLOW_12_in_ruleActorInstanceMapping731); 
-
-                        	newLeafNode(otherlv_4, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0());
-                        
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:376:1: ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )*
-                    loop6:
-                    do {
-                        int alt6=2;
-                        int LA6_0 = input.LA(1);
-
-                        if ( (LA6_0==17) ) {
-                            alt6=1;
-                        }
-
-
-                        switch (alt6) {
-                    	case 1 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:377:1: (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping )
-                    	    {
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:377:1: (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping )
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:378:3: lv_actorInstanceMappings_5_0= ruleActorInstanceMapping
-                    	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
-                    	    	    
-                    	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping752);
-                    	    lv_actorInstanceMappings_5_0=ruleActorInstanceMapping();
-
-                    	    state._fsp--;
-
-
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getActorInstanceMappingRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"actorInstanceMappings",
-                    	            		lv_actorInstanceMappings_5_0, 
-                    	            		"ActorInstanceMapping");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
-
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop6;
-                        }
-                    } while (true);
-
-                    otherlv_6=(Token)match(input,13,FOLLOW_13_in_ruleActorInstanceMapping765); 
-
-                        	newLeafNode(otherlv_6, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2());
-                        
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleActorInstanceMapping"
-
-
-    // $ANTLR start "entryRuleRefPath"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:406:1: entryRuleRefPath returns [EObject current=null] : iv_ruleRefPath= ruleRefPath EOF ;
-    public final EObject entryRuleRefPath() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleRefPath = null;
-
-
-        try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:407:2: (iv_ruleRefPath= ruleRefPath EOF )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:408:2: iv_ruleRefPath= ruleRefPath EOF
+                	newLeafNode(otherlv_2, grammarAccess.getThreadMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
+                
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:354:1: ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:355:1: (otherlv_3= RULE_ID )
             {
-             newCompositeNode(grammarAccess.getRefPathRule()); 
-            pushFollow(FOLLOW_ruleRefPath_in_entryRuleRefPath803);
-            iv_ruleRefPath=ruleRefPath();
-
-            state._fsp--;
-
-             current =iv_ruleRefPath; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefPath813); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleRefPath"
-
-
-    // $ANTLR start "ruleRefPath"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:415:1: ruleRefPath returns [EObject current=null] : ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) ;
-    public final EObject ruleRefPath() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_refs_0_0=null;
-        Token otherlv_1=null;
-        Token lv_refs_2_0=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:418:28: ( ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:419:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:355:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:356:3: otherlv_3= RULE_ID
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:419:1: ( ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )* )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:419:2: ( (lv_refs_0_0= RULE_ID ) ) (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
-            {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:419:2: ( (lv_refs_0_0= RULE_ID ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:420:1: (lv_refs_0_0= RULE_ID )
-            {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:420:1: (lv_refs_0_0= RULE_ID )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:421:3: lv_refs_0_0= RULE_ID
-            {
-            lv_refs_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath855); 
 
-            			newLeafNode(lv_refs_0_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_0_0()); 
-            		
-
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRefPathRule());
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getThreadMappingRule());
             	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"refs",
-                    		lv_refs_0_0, 
-                    		"ID");
-            	    
+                    
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThreadMapping717); 
+
+            		newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysThreadCrossReference_3_0()); 
+            	
 
             }
 
 
             }
-
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:437:2: (otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) ) )*
-            loop8:
-            do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
-
-                if ( (LA8_0==18) ) {
-                    alt8=1;
-                }
-
-
-                switch (alt8) {
-            	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:437:4: otherlv_1= '/' ( (lv_refs_2_0= RULE_ID ) )
-            	    {
-            	    otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleRefPath873); 
-
-            	        	newLeafNode(otherlv_1, grammarAccess.getRefPathAccess().getSolidusKeyword_1_0());
-            	        
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:441:1: ( (lv_refs_2_0= RULE_ID ) )
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:442:1: (lv_refs_2_0= RULE_ID )
-            	    {
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:442:1: (lv_refs_2_0= RULE_ID )
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:443:3: lv_refs_2_0= RULE_ID
-            	    {
-            	    lv_refs_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefPath890); 
-
-            	    			newLeafNode(lv_refs_2_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_1_1_0()); 
-            	    		
-
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getRefPathRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"refs",
-            	            		lv_refs_2_0, 
-            	            		"ID");
-            	    	    
-
-            	    }
-
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop8;
-                }
-            } while (true);
 
 
             }
@@ -1070,11 +826,11 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleRefPath"
+    // $ANTLR end "ruleThreadMapping"
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:467:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:375:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1082,17 +838,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:468:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:469:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:376:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:377:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport933);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport753);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport943); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport763); 
 
             }
 
@@ -1110,7 +866,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:476:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:384:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -1124,49 +880,49 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:479:28: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:480:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:387:28: ( (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:388:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:480:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:480:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:388:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:388:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,19,FOLLOW_19_in_ruleImport980); 
+            otherlv_0=(Token)match(input,18,FOLLOW_18_in_ruleImport800); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' )
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:392:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' )
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA9_0==RULE_ID) ) {
-                alt9=1;
+            if ( (LA6_0==RULE_ID) ) {
+                alt6=1;
             }
-            else if ( (LA9_0==21) ) {
-                alt9=2;
+            else if ( (LA6_0==20) ) {
+                alt6=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 9, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
-            switch (alt9) {
+            switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:392:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
                     {
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from'
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:392:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:392:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from'
                     {
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:485:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:392:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:393:1: (lv_importedNamespace_1_0= ruleImportedFQN )
                     {
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:485:1: (lv_importedNamespace_1_0= ruleImportedFQN )
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:486:3: lv_importedNamespace_1_0= ruleImportedFQN
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:393:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:394:3: lv_importedNamespace_1_0= ruleImportedFQN
                     {
                      
                     	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport1003);
+                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport823);
                     lv_importedNamespace_1_0=ruleImportedFQN();
 
                     state._fsp--;
@@ -1188,7 +944,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleImport1015); 
+                    otherlv_2=(Token)match(input,19,FOLLOW_19_in_ruleImport835); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
                         
@@ -1199,9 +955,9 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:507:7: otherlv_3= 'model'
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:415:7: otherlv_3= 'model'
                     {
-                    otherlv_3=(Token)match(input,21,FOLLOW_21_in_ruleImport1034); 
+                    otherlv_3=(Token)match(input,20,FOLLOW_20_in_ruleImport854); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
                         
@@ -1211,13 +967,13 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:511:2: ( (lv_importURI_4_0= RULE_STRING ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:512:1: (lv_importURI_4_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:419:2: ( (lv_importURI_4_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:420:1: (lv_importURI_4_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:512:1: (lv_importURI_4_0= RULE_STRING )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:513:3: lv_importURI_4_0= RULE_STRING
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:420:1: (lv_importURI_4_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:421:3: lv_importURI_4_0= RULE_STRING
             {
-            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport1052); 
+            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport872); 
 
             			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
             		
@@ -1258,7 +1014,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:537:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:445:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -1266,17 +1022,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:538:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:539:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:446:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:447:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1094);
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN914);
             iv_ruleImportedFQN=ruleImportedFQN();
 
             state._fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN1105); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN925); 
 
             }
 
@@ -1294,7 +1050,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportedFQN"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:546:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:454:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1305,16 +1061,16 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:549:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:550:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:457:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:458:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:550:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:551:5: this_FQN_0= ruleFQN (kw= '.*' )?
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:458:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:459:5: this_FQN_0= ruleFQN (kw= '.*' )?
             {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN1152);
+            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN972);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -1325,18 +1081,18 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
              
                     afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:561:1: (kw= '.*' )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:469:1: (kw= '.*' )?
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA10_0==22) ) {
-                alt10=1;
+            if ( (LA7_0==21) ) {
+                alt7=1;
             }
-            switch (alt10) {
+            switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:562:2: kw= '.*'
+                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:470:2: kw= '.*'
                     {
-                    kw=(Token)match(input,22,FOLLOW_22_in_ruleImportedFQN1171); 
+                    kw=(Token)match(input,21,FOLLOW_21_in_ruleImportedFQN991); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
@@ -1368,7 +1124,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:575:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:483:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -1376,17 +1132,17 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:576:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:577:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:484:2: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:485:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1214);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1034);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1225); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1045); 
 
             }
 
@@ -1404,7 +1160,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:584:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:492:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1415,40 +1171,40 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:587:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:588:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:495:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:496:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:588:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:588:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:496:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:496:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1265); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1085); 
 
             		current.merge(this_ID_0);
                 
              
                 newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:595:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop11:
+            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:503:1: (kw= '.' this_ID_2= RULE_ID )*
+            loop8:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA11_0==23) ) {
-                    alt11=1;
+                if ( (LA8_0==22) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:596:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:504:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,23,FOLLOW_23_in_ruleFQN1284); 
+            	    kw=(Token)match(input,22,FOLLOW_22_in_ruleFQN1104); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1299); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1119); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -1460,7 +1216,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop8;
                 }
             } while (true);
 
@@ -1492,8 +1248,8 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleMappingModel85 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleMappingModel122 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleFQN_in_ruleMappingModel143 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleMappingModel155 = new BitSet(new long[]{0x0000000000086000L});
-    public static final BitSet FOLLOW_ruleImport_in_ruleMappingModel176 = new BitSet(new long[]{0x0000000000086000L});
+    public static final BitSet FOLLOW_12_in_ruleMappingModel155 = new BitSet(new long[]{0x0000000000046000L});
+    public static final BitSet FOLLOW_ruleImport_in_ruleMappingModel176 = new BitSet(new long[]{0x0000000000046000L});
     public static final BitSet FOLLOW_ruleMapping_in_ruleMappingModel198 = new BitSet(new long[]{0x0000000000006000L});
     public static final BitSet FOLLOW_13_in_ruleMappingModel211 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMapping_in_entryRuleMapping247 = new BitSet(new long[]{0x0000000000000000L});
@@ -1512,37 +1268,29 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_15_in_ruleSubSystemMapping513 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemMapping533 = new BitSet(new long[]{0x0000000000001002L});
     public static final BitSet FOLLOW_12_in_ruleSubSystemMapping546 = new BitSet(new long[]{0x0000000000022000L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemMapping567 = new BitSet(new long[]{0x0000000000022000L});
+    public static final BitSet FOLLOW_ruleThreadMapping_in_ruleSubSystemMapping567 = new BitSet(new long[]{0x0000000000022000L});
     public static final BitSet FOLLOW_13_in_ruleSubSystemMapping580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping618 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorInstanceMapping628 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleActorInstanceMapping665 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceMapping686 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleActorInstanceMapping698 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleActorInstanceMapping718 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_12_in_ruleActorInstanceMapping731 = new BitSet(new long[]{0x0000000000022000L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping752 = new BitSet(new long[]{0x0000000000022000L});
-    public static final BitSet FOLLOW_13_in_ruleActorInstanceMapping765 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath803 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefPath813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath855 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_18_in_ruleRefPath873 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefPath890 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport933 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleImport980 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport1003 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleImport1015 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_21_in_ruleImport1034 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport1052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1094 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN1105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN1152 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_ruleImportedFQN1171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1214 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1265 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_23_in_ruleFQN1284 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1299 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_ruleThreadMapping_in_entryRuleThreadMapping618 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleThreadMapping628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleThreadMapping665 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThreadMapping685 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleThreadMapping697 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThreadMapping717 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport753 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleImport800 = new BitSet(new long[]{0x0000000000100010L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport823 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleImport835 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_20_in_ruleImport854 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport872 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN914 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN972 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_21_in_ruleImportedFQN991 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1034 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1045 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1085 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_ruleFQN1104 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1119 = new BitSet(new long[]{0x0000000000400002L});
 
 }

@@ -177,13 +177,13 @@ public interface ETMapPackage extends EPackage
   int SUB_SYSTEM_MAPPING__NODE = 1;
 
   /**
-   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * The feature id for the '<em><b>Thread Mappings</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS = 2;
+  int SUB_SYSTEM_MAPPING__THREAD_MAPPINGS = 2;
 
   /**
    * The number of structural features of the '<em>Sub System Mapping</em>' class.
@@ -195,78 +195,41 @@ public interface ETMapPackage extends EPackage
   int SUB_SYSTEM_MAPPING_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ActorInstanceMappingImpl <em>Actor Instance Mapping</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl <em>Thread Mapping</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.etmap.eTMap.impl.ActorInstanceMappingImpl
-   * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getActorInstanceMapping()
+   * @see org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl
+   * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getThreadMapping()
    * @generated
    */
-  int ACTOR_INSTANCE_MAPPING = 3;
+  int THREAD_MAPPING = 3;
 
   /**
-   * The feature id for the '<em><b>Path</b></em>' containment reference.
+   * The feature id for the '<em><b>Logical Thread</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_MAPPING__PATH = 0;
+  int THREAD_MAPPING__LOGICAL_THREAD = 0;
 
   /**
-   * The feature id for the '<em><b>Thread</b></em>' reference.
+   * The feature id for the '<em><b>Physical Thread</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_MAPPING__THREAD = 1;
+  int THREAD_MAPPING__PHYSICAL_THREAD = 1;
 
   /**
-   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * The number of structural features of the '<em>Thread Mapping</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS = 2;
-
-  /**
-   * The number of structural features of the '<em>Actor Instance Mapping</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_INSTANCE_MAPPING_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.RefPathImpl <em>Ref Path</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.etmap.eTMap.impl.RefPathImpl
-   * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getRefPath()
-   * @generated
-   */
-  int REF_PATH = 4;
-
-  /**
-   * The feature id for the '<em><b>Refs</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REF_PATH__REFS = 0;
-
-  /**
-   * The number of structural features of the '<em>Ref Path</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REF_PATH_FEATURE_COUNT = 1;
+  int THREAD_MAPPING_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ImportImpl <em>Import</em>}' class.
@@ -276,7 +239,7 @@ public interface ETMapPackage extends EPackage
    * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 5;
+  int IMPORT = 4;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -425,79 +388,47 @@ public interface ETMapPackage extends EPackage
   EReference getSubSystemMapping_Node();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getThreadMappings <em>Thread Mappings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getActorInstanceMappings()
+   * @return the meta object for the containment reference list '<em>Thread Mappings</em>'.
+   * @see org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getThreadMappings()
    * @see #getSubSystemMapping()
    * @generated
    */
-  EReference getSubSystemMapping_ActorInstanceMappings();
+  EReference getSubSystemMapping_ThreadMappings();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping <em>Thread Mapping</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Actor Instance Mapping</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping
+   * @return the meta object for class '<em>Thread Mapping</em>'.
+   * @see org.eclipse.etrice.core.etmap.eTMap.ThreadMapping
    * @generated
    */
-  EClass getActorInstanceMapping();
+  EClass getThreadMapping();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getPath <em>Path</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getLogicalThread <em>Logical Thread</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Path</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getPath()
-   * @see #getActorInstanceMapping()
+   * @return the meta object for the reference '<em>Logical Thread</em>'.
+   * @see org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getLogicalThread()
+   * @see #getThreadMapping()
    * @generated
    */
-  EReference getActorInstanceMapping_Path();
+  EReference getThreadMapping_LogicalThread();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getThread <em>Thread</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getPhysicalThread <em>Physical Thread</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Thread</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getThread()
-   * @see #getActorInstanceMapping()
+   * @return the meta object for the reference '<em>Physical Thread</em>'.
+   * @see org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getPhysicalThread()
+   * @see #getThreadMapping()
    * @generated
    */
-  EReference getActorInstanceMapping_Thread();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping#getActorInstanceMappings()
-   * @see #getActorInstanceMapping()
-   * @generated
-   */
-  EReference getActorInstanceMapping_ActorInstanceMappings();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.etmap.eTMap.RefPath <em>Ref Path</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Ref Path</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.RefPath
-   * @generated
-   */
-  EClass getRefPath();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.etmap.eTMap.RefPath#getRefs <em>Refs</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Refs</em>'.
-   * @see org.eclipse.etrice.core.etmap.eTMap.RefPath#getRefs()
-   * @see #getRefPath()
-   * @generated
-   */
-  EAttribute getRefPath_Refs();
+  EReference getThreadMapping_PhysicalThread();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.etmap.eTMap.Import <em>Import</em>}'.
@@ -649,64 +580,38 @@ public interface ETMapPackage extends EPackage
     EReference SUB_SYSTEM_MAPPING__NODE = eINSTANCE.getSubSystemMapping_Node();
 
     /**
-     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Thread Mappings</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getSubSystemMapping_ActorInstanceMappings();
+    EReference SUB_SYSTEM_MAPPING__THREAD_MAPPINGS = eINSTANCE.getSubSystemMapping_ThreadMappings();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ActorInstanceMappingImpl <em>Actor Instance Mapping</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl <em>Thread Mapping</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.etmap.eTMap.impl.ActorInstanceMappingImpl
-     * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getActorInstanceMapping()
+     * @see org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl
+     * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getThreadMapping()
      * @generated
      */
-    EClass ACTOR_INSTANCE_MAPPING = eINSTANCE.getActorInstanceMapping();
+    EClass THREAD_MAPPING = eINSTANCE.getThreadMapping();
 
     /**
-     * The meta object literal for the '<em><b>Path</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Logical Thread</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTOR_INSTANCE_MAPPING__PATH = eINSTANCE.getActorInstanceMapping_Path();
+    EReference THREAD_MAPPING__LOGICAL_THREAD = eINSTANCE.getThreadMapping_LogicalThread();
 
     /**
-     * The meta object literal for the '<em><b>Thread</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Physical Thread</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTOR_INSTANCE_MAPPING__THREAD = eINSTANCE.getActorInstanceMapping_Thread();
-
-    /**
-     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getActorInstanceMapping_ActorInstanceMappings();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.RefPathImpl <em>Ref Path</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.etmap.eTMap.impl.RefPathImpl
-     * @see org.eclipse.etrice.core.etmap.eTMap.impl.ETMapPackageImpl#getRefPath()
-     * @generated
-     */
-    EClass REF_PATH = eINSTANCE.getRefPath();
-
-    /**
-     * The meta object literal for the '<em><b>Refs</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REF_PATH__REFS = eINSTANCE.getRefPath_Refs();
+    EReference THREAD_MAPPING__PHYSICAL_THREAD = eINSTANCE.getThreadMapping_PhysicalThread();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.etmap.eTMap.impl.ImportImpl <em>Import</em>}' class.

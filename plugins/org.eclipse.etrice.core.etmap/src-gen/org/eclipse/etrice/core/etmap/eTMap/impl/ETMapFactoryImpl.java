@@ -67,8 +67,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
       case ETMapPackage.MAPPING_MODEL: return createMappingModel();
       case ETMapPackage.MAPPING: return createMapping();
       case ETMapPackage.SUB_SYSTEM_MAPPING: return createSubSystemMapping();
-      case ETMapPackage.ACTOR_INSTANCE_MAPPING: return createActorInstanceMapping();
-      case ETMapPackage.REF_PATH: return createRefPath();
+      case ETMapPackage.THREAD_MAPPING: return createThreadMapping();
       case ETMapPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -113,21 +112,10 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorInstanceMapping createActorInstanceMapping()
+  public ThreadMapping createThreadMapping()
   {
-    ActorInstanceMappingImpl actorInstanceMapping = new ActorInstanceMappingImpl();
-    return actorInstanceMapping;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RefPath createRefPath()
-  {
-    RefPathImpl refPath = new RefPathImpl();
-    return refPath;
+    ThreadMappingImpl threadMapping = new ThreadMappingImpl();
+    return threadMapping;
   }
 
   /**

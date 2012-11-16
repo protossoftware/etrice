@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorInstancePath;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
@@ -43,6 +43,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -255,16 +256,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error(result.getMsg(), RoomPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
-	private SubSystemClass getSubSystemClass(EObject obj) {
-		EObject ctx = obj.eContainer();
-		while (!(ctx instanceof SubSystemClass) && ctx.eContainer()!=null)
-			ctx = ctx.eContainer();
-		if (ctx instanceof SubSystemClass)
-			return (SubSystemClass) ctx;
-		
-		return null;
-	}
-
 	@Check  
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
@@ -277,21 +268,28 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("LogicalSystem must contain at least one SubSystemRef", RoomPackage.eINSTANCE.getLogicalSystem_SubSystems());
 	}
 
-	
+
 	@Check
-	public void checkInstancePath(ActorInstancePath ai) {
-		ActorContainerClass acc = getSubSystemClass(ai);
-		for (String seg : ai.getSegments()) {
-			boolean found = false;
-			for (ActorRef ar : acc.getActorRefs()) {
-				if (ar.getName().equals(seg)) {
-					acc = ar.getType();
-					found = true;
-					break;
+	public void checkActorInstanceConfig(ActorInstanceMapping aim) {
+		ActorContainerClass root = RoomHelpers.getParentContainer(aim);
+		if (root != null && !root.eIsProxy()) {
+			RefPath path = aim.getPath();
+			if (path != null) {
+				String invalidSegment = RoomHelpers.checkPath(root, path);
+				if (invalidSegment != null)
+					error("no match for segment '" + invalidSegment + "'",
+							RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
+				else {
+					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
+					if (aRef != null) {
+						if (aRef.getSize() > 1)
+							error("no arrays of actor references supported",
+									RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
+					} else
+						error("invalid actor reference",
+								RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				}
 			}
-			if (!found)
-				error("wrong actor instance path (segment number "+ai.getSegments().indexOf(seg)+")", RoomPackage.eINSTANCE.getActorInstancePath_Segments());
 		}
 	}
 	

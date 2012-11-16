@@ -38,7 +38,7 @@ public class ETPhysParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getPhysicalModelAccess().getAlternatives_4(), "rule__PhysicalModel__Alternatives_4");
-					put(grammarAccess.getThreadAccess().getAlternatives_0(), "rule__Thread__Alternatives_0");
+					put(grammarAccess.getPhysThreadAccess().getAlternatives_0(), "rule__PhysThread__Alternatives_0");
 					put(grammarAccess.getPRIOAccess().getAlternatives_0(), "rule__PRIO__Alternatives_0");
 					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getExecModeAccess().getAlternatives(), "rule__ExecMode__Alternatives");
@@ -47,9 +47,7 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPhysicalSystemAccess().getGroup(), "rule__PhysicalSystem__Group__0");
 					put(grammarAccess.getNodeRefAccess().getGroup(), "rule__NodeRef__Group__0");
 					put(grammarAccess.getNodeClassAccess().getGroup(), "rule__NodeClass__Group__0");
-					put(grammarAccess.getThreadAccess().getGroup(), "rule__Thread__Group__0");
-					put(grammarAccess.getThreadAccess().getGroup_6(), "rule__Thread__Group_6__0");
-					put(grammarAccess.getThreadAccess().getGroup_7(), "rule__Thread__Group_7__0");
+					put(grammarAccess.getPhysThreadAccess().getGroup(), "rule__PhysThread__Group__0");
 					put(grammarAccess.getRuntimeClassAccess().getGroup(), "rule__RuntimeClass__Group__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
 					put(grammarAccess.getPRIOAccess().getGroup(), "rule__PRIO__Group__0");
@@ -72,12 +70,16 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNodeClassAccess().getNameAssignment_1(), "rule__NodeClass__NameAssignment_1");
 					put(grammarAccess.getNodeClassAccess().getDocuAssignment_2(), "rule__NodeClass__DocuAssignment_2");
 					put(grammarAccess.getNodeClassAccess().getRuntimeAssignment_6(), "rule__NodeClass__RuntimeAssignment_6");
-					put(grammarAccess.getNodeClassAccess().getThreadsAssignment_7(), "rule__NodeClass__ThreadsAssignment_7");
-					put(grammarAccess.getThreadAccess().getDefaultAssignment_0_0(), "rule__Thread__DefaultAssignment_0_0");
-					put(grammarAccess.getThreadAccess().getNameAssignment_1(), "rule__Thread__NameAssignment_1");
-					put(grammarAccess.getThreadAccess().getExecmodeAssignment_5(), "rule__Thread__ExecmodeAssignment_5");
-					put(grammarAccess.getThreadAccess().getPrioAssignment_6_2(), "rule__Thread__PrioAssignment_6_2");
-					put(grammarAccess.getThreadAccess().getStacksizeAssignment_7_2(), "rule__Thread__StacksizeAssignment_7_2");
+					put(grammarAccess.getNodeClassAccess().getPriominAssignment_9(), "rule__NodeClass__PriominAssignment_9");
+					put(grammarAccess.getNodeClassAccess().getPriomaxAssignment_12(), "rule__NodeClass__PriomaxAssignment_12");
+					put(grammarAccess.getNodeClassAccess().getThreadsAssignment_13(), "rule__NodeClass__ThreadsAssignment_13");
+					put(grammarAccess.getPhysThreadAccess().getDefaultAssignment_0_0(), "rule__PhysThread__DefaultAssignment_0_0");
+					put(grammarAccess.getPhysThreadAccess().getNameAssignment_1(), "rule__PhysThread__NameAssignment_1");
+					put(grammarAccess.getPhysThreadAccess().getExecmodeAssignment_5(), "rule__PhysThread__ExecmodeAssignment_5");
+					put(grammarAccess.getPhysThreadAccess().getPrioAssignment_8(), "rule__PhysThread__PrioAssignment_8");
+					put(grammarAccess.getPhysThreadAccess().getStacksizeAssignment_11(), "rule__PhysThread__StacksizeAssignment_11");
+					put(grammarAccess.getPhysThreadAccess().getMsgblocksizeAssignment_14(), "rule__PhysThread__MsgblocksizeAssignment_14");
+					put(grammarAccess.getPhysThreadAccess().getMsgpoolsizeAssignment_17(), "rule__PhysThread__MsgpoolsizeAssignment_17");
 					put(grammarAccess.getRuntimeClassAccess().getNameAssignment_1(), "rule__RuntimeClass__NameAssignment_1");
 					put(grammarAccess.getRuntimeClassAccess().getDocuAssignment_2(), "rule__RuntimeClass__DocuAssignment_2");
 					put(grammarAccess.getRuntimeClassAccess().getThreadModelAssignment_6(), "rule__RuntimeClass__ThreadModelAssignment_6");

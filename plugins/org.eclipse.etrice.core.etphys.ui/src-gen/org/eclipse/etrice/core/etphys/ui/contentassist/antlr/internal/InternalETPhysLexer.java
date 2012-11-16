@@ -25,29 +25,33 @@ public class InternalETPhysLexer extends Lexer {
     public static final int T__21=21;
     public static final int T__20=20;
     public static final int EOF=-1;
+    public static final int T__19=19;
+    public static final int T__16=16;
+    public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
+    public static final int RULE_INT=4;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
     public static final int RULE_SL_COMMENT=8;
     public static final int RULE_ML_COMMENT=7;
     public static final int T__30=30;
-    public static final int T__19=19;
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_STRING=6;
-    public static final int T__16=16;
     public static final int T__33=33;
-    public static final int T__15=15;
     public static final int T__34=34;
-    public static final int T__18=18;
     public static final int T__35=35;
-    public static final int T__17=17;
     public static final int T__36=36;
-    public static final int T__12=12;
     public static final int T__37=37;
-    public static final int T__11=11;
     public static final int T__38=38;
-    public static final int T__14=14;
     public static final int T__39=39;
-    public static final int T__13=13;
-    public static final int RULE_INT=4;
     public static final int RULE_WS=9;
 
     // delegates
@@ -440,10 +444,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:29:7: ( 'execmode' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:29:9: 'execmode'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:29:7: ( 'priomin' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:29:9: 'priomin'
             {
-            match("execmode"); 
+            match("priomin"); 
 
 
             }
@@ -461,10 +465,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:30:7: ( 'prio' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:30:9: 'prio'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:30:7: ( 'priomax' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:30:9: 'priomax'
             {
-            match("prio"); 
+            match("priomax"); 
 
 
             }
@@ -482,10 +486,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:31:7: ( 'stacksize' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:31:9: 'stacksize'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:31:7: ( 'execmode' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:31:9: 'execmode'
             {
-            match("stacksize"); 
+            match("execmode"); 
 
 
             }
@@ -503,10 +507,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:32:7: ( 'RuntimeClass' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:32:9: 'RuntimeClass'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:32:7: ( 'prio' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:32:9: 'prio'
             {
-            match("RuntimeClass"); 
+            match("prio"); 
 
 
             }
@@ -524,10 +528,11 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:33:7: ( '[' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:33:9: '['
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:33:7: ( 'stacksize' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:33:9: 'stacksize'
             {
-            match('['); 
+            match("stacksize"); 
+
 
             }
 
@@ -544,10 +549,11 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:34:7: ( ']' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:34:9: ']'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:34:7: ( 'msgblocksize' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:34:9: 'msgblocksize'
             {
-            match(']'); 
+            match("msgblocksize"); 
+
 
             }
 
@@ -564,10 +570,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:35:7: ( 'import' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:35:9: 'import'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:35:7: ( 'msgpoolsize' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:35:9: 'msgpoolsize'
             {
-            match("import"); 
+            match("msgpoolsize"); 
 
 
             }
@@ -585,10 +591,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:36:7: ( 'from' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:36:9: 'from'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:36:7: ( 'RuntimeClass' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:36:9: 'RuntimeClass'
             {
-            match("from"); 
+            match("RuntimeClass"); 
 
 
             }
@@ -606,11 +612,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:37:7: ( '.*' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:37:9: '.*'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:37:7: ( '[' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:37:9: '['
             {
-            match(".*"); 
-
+            match('['); 
 
             }
 
@@ -627,10 +632,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:38:7: ( '.' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:38:9: '.'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:38:7: ( ']' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:38:9: ']'
             {
-            match('.'); 
+            match(']'); 
 
             }
 
@@ -647,10 +652,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:39:7: ( 'DefaultThread' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:39:9: 'DefaultThread'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:39:7: ( 'import' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:39:9: 'import'
             {
-            match("DefaultThread"); 
+            match("import"); 
 
 
             }
@@ -663,15 +668,98 @@ public class InternalETPhysLexer extends Lexer {
     }
     // $ANTLR end "T__39"
 
+    // $ANTLR start "T__40"
+    public final void mT__40() throws RecognitionException {
+        try {
+            int _type = T__40;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:40:7: ( 'from' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:40:9: 'from'
+            {
+            match("from"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__40"
+
+    // $ANTLR start "T__41"
+    public final void mT__41() throws RecognitionException {
+        try {
+            int _type = T__41;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:41:7: ( '.*' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:41:9: '.*'
+            {
+            match(".*"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__41"
+
+    // $ANTLR start "T__42"
+    public final void mT__42() throws RecognitionException {
+        try {
+            int _type = T__42;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:42:7: ( '.' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:42:9: '.'
+            {
+            match('.'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__42"
+
+    // $ANTLR start "T__43"
+    public final void mT__43() throws RecognitionException {
+        try {
+            int _type = T__43;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:43:7: ( 'DefaultThread' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:43:9: 'DefaultThread'
+            {
+            match("DefaultThread"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__43"
+
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3052:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3052:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3440:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3440:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3052:11: ( '^' )?
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3440:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -680,7 +768,7 @@ public class InternalETPhysLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3052:11: '^'
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3440:11: '^'
                     {
                     match('^'); 
 
@@ -698,7 +786,7 @@ public class InternalETPhysLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3052:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3440:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -747,10 +835,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3054:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3054:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3442:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3442:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3054:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3442:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -764,7 +852,7 @@ public class InternalETPhysLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3054:13: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3442:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -796,10 +884,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -817,10 +905,10 @@ public class InternalETPhysLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -836,7 +924,7 @@ public class InternalETPhysLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -852,7 +940,7 @@ public class InternalETPhysLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -877,10 +965,10 @@ public class InternalETPhysLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -896,7 +984,7 @@ public class InternalETPhysLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -912,7 +1000,7 @@ public class InternalETPhysLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3056:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3444:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -955,12 +1043,12 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3058:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3058:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3446:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3446:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3058:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3446:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -985,7 +1073,7 @@ public class InternalETPhysLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3058:52: .
+            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3446:52: .
             	    {
             	    matchAny(); 
 
@@ -1015,12 +1103,12 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1033,7 +1121,7 @@ public class InternalETPhysLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1053,7 +1141,7 @@ public class InternalETPhysLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1062,9 +1150,9 @@ public class InternalETPhysLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:41: ( '\\r' )?
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1073,7 +1161,7 @@ public class InternalETPhysLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3060:41: '\\r'
+                            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3448:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1105,10 +1193,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3062:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3062:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3450:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3450:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3062:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3450:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1162,8 +1250,8 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3064:16: ( . )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3064:18: .
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3452:16: ( . )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3452:18: .
             {
             matchAny(); 
 
@@ -1178,8 +1266,8 @@ public class InternalETPhysLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=36;
+        // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=40;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -1386,49 +1474,77 @@ public class InternalETPhysLexer extends Lexer {
                 }
                 break;
             case 30 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:184: RULE_ID
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:184: T__40
+                {
+                mT__40(); 
+
+                }
+                break;
+            case 31 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:190: T__41
+                {
+                mT__41(); 
+
+                }
+                break;
+            case 32 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:196: T__42
+                {
+                mT__42(); 
+
+                }
+                break;
+            case 33 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:202: T__43
+                {
+                mT__43(); 
+
+                }
+                break;
+            case 34 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:208: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 31 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:192: RULE_INT
+            case 35 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:216: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 32 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:201: RULE_STRING
+            case 36 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:225: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 33 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:213: RULE_ML_COMMENT
+            case 37 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:237: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 34 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:229: RULE_SL_COMMENT
+            case 38 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:253: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 35 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:245: RULE_WS
+            case 39 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:269: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 36 :
-                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:253: RULE_ANY_OTHER
+            case 40 :
+                // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1:277: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1443,65 +1559,70 @@ public class InternalETPhysLexer extends Lexer {
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
         "\1\uffff\1\40\2\uffff\5\40\2\uffff\1\40\1\uffff\1\40\1\uffff\2"+
-        "\40\2\uffff\2\40\1\71\1\40\1\36\2\uffff\3\36\2\uffff\1\40\3\uffff"+
-        "\11\40\2\uffff\1\40\1\uffff\1\40\1\uffff\2\40\2\uffff\2\40\2\uffff"+
-        "\1\40\5\uffff\26\40\1\147\11\40\1\162\2\40\1\165\1\166\2\40\1\uffff"+
-        "\12\40\1\uffff\1\40\1\u0084\2\uffff\1\40\1\u0086\11\40\1\u0090\1"+
-        "\40\1\uffff\1\40\1\uffff\1\u0093\3\40\1\u0097\1\40\1\u0099\2\40"+
-        "\1\uffff\2\40\1\uffff\3\40\1\uffff\1\40\1\uffff\1\u00a3\4\40\1\u00a8"+
-        "\2\40\1\u00ab\1\uffff\4\40\1\uffff\2\40\1\uffff\14\40\1\u00be\1"+
-        "\40\1\u00c0\1\40\1\u00c2\1\40\1\uffff\1\u00c4\1\uffff\1\u00c5\1"+
-        "\uffff\1\u00c6\3\uffff";
+        "\40\2\uffff\2\40\1\72\1\40\1\36\2\uffff\3\36\2\uffff\1\40\3\uffff"+
+        "\12\40\2\uffff\1\40\1\uffff\1\40\1\uffff\2\40\2\uffff\2\40\2\uffff"+
+        "\1\40\5\uffff\31\40\1\156\11\40\1\171\2\40\1\174\1\175\5\40\1\uffff"+
+        "\12\40\1\uffff\1\40\1\u008f\2\uffff\3\40\1\u0093\13\40\1\u009f\1"+
+        "\40\1\uffff\3\40\1\uffff\1\u00a4\1\u00a5\1\u00a6\3\40\1\u00aa\1"+
+        "\40\1\u00ac\2\40\1\uffff\4\40\3\uffff\3\40\1\uffff\1\40\1\uffff"+
+        "\1\u00b8\6\40\1\u00bf\2\40\1\u00c2\1\uffff\6\40\1\uffff\2\40\1\uffff"+
+        "\4\40\1\u00cf\6\40\1\u00d6\1\uffff\3\40\1\u00da\1\40\1\u00dc\1\uffff"+
+        "\1\40\1\u00de\1\40\1\uffff\1\u00e0\1\uffff\1\u00e1\1\uffff\1\u00e2"+
+        "\3\uffff";
     static final String DFA12_eofS =
-        "\u00c7\uffff";
+        "\u00e3\uffff";
     static final String DFA12_minS =
         "\1\0\1\150\2\uffff\1\151\1\157\1\154\1\151\1\150\2\uffff\1\157"+
         "\1\uffff\1\165\1\uffff\1\170\1\165\2\uffff\1\155\1\162\1\52\1\145"+
-        "\1\101\2\uffff\2\0\1\52\2\uffff\1\162\3\uffff\1\144\1\170\2\154"+
-        "\1\151\1\157\1\156\1\141\1\171\2\uffff\1\144\1\uffff\1\156\1\uffff"+
-        "\1\145\1\156\2\uffff\1\160\1\157\2\uffff\1\146\5\uffff\3\145\1\164"+
-        "\1\154\1\157\1\143\1\147\1\143\1\163\1\145\1\164\1\143\1\164\1\157"+
-        "\1\155\2\141\1\154\1\144\1\151\1\145\1\60\1\153\1\154\1\153\1\151"+
-        "\1\103\1\151\1\155\1\151\1\162\1\60\1\165\1\144\2\60\1\124\1\144"+
-        "\1\uffff\2\145\1\163\1\143\1\145\1\154\1\155\1\157\1\155\1\164\1"+
-        "\uffff\1\154\1\60\2\uffff\1\150\1\60\1\144\1\124\1\151\1\141\1\146"+
-        "\1\141\1\145\1\144\1\145\1\60\1\164\1\uffff\1\162\1\uffff\1\60\1"+
-        "\150\1\172\1\154\1\60\1\163\1\60\1\145\1\103\1\uffff\1\124\1\145"+
-        "\1\uffff\1\162\1\145\1\115\1\uffff\1\163\1\uffff\1\60\1\154\1\150"+
-        "\1\141\1\145\1\60\1\157\1\171\1\60\1\uffff\1\141\1\162\1\144\1\141"+
-        "\1\uffff\1\144\1\163\1\uffff\1\163\2\145\1\144\1\145\1\164\1\163"+
-        "\1\141\1\144\1\145\1\154\1\145\1\60\1\144\1\60\1\144\1\60\1\155"+
-        "\1\uffff\1\60\1\uffff\1\60\1\uffff\1\60\3\uffff";
+        "\1\101\2\uffff\2\0\1\52\2\uffff\1\162\3\uffff\1\144\1\170\1\154"+
+        "\1\147\1\154\1\151\1\157\1\156\1\141\1\171\2\uffff\1\144\1\uffff"+
+        "\1\156\1\uffff\1\145\1\156\2\uffff\1\160\1\157\2\uffff\1\146\5\uffff"+
+        "\3\145\1\164\1\142\1\154\1\157\1\143\1\147\1\143\1\163\1\145\1\164"+
+        "\1\143\1\164\1\157\1\155\2\141\1\154\1\144\1\151\1\154\1\157\1\145"+
+        "\1\60\1\153\1\154\1\153\1\151\1\103\1\151\1\155\1\151\1\162\1\60"+
+        "\1\165\1\144\2\60\1\124\2\157\1\144\1\141\1\uffff\2\145\1\163\1"+
+        "\143\1\145\1\154\1\155\1\157\1\155\1\164\1\uffff\1\154\1\60\2\uffff"+
+        "\1\150\1\143\1\154\1\60\1\156\1\170\1\144\1\124\1\151\1\141\1\146"+
+        "\1\141\1\145\1\144\1\145\1\60\1\164\1\uffff\1\162\1\153\1\163\1"+
+        "\uffff\3\60\1\150\1\172\1\154\1\60\1\163\1\60\1\145\1\103\1\uffff"+
+        "\1\124\1\145\1\163\1\151\3\uffff\1\162\1\145\1\115\1\uffff\1\163"+
+        "\1\uffff\1\60\1\154\1\150\1\141\1\151\1\172\1\145\1\60\1\157\1\171"+
+        "\1\60\1\uffff\1\141\1\162\1\144\1\172\1\145\1\141\1\uffff\1\144"+
+        "\1\163\1\uffff\1\163\3\145\1\60\1\144\1\145\1\164\1\163\1\141\1"+
+        "\144\1\60\1\uffff\1\145\1\154\1\145\1\60\1\144\1\60\1\uffff\1\144"+
+        "\1\60\1\155\1\uffff\1\60\1\uffff\1\60\1\uffff\1\60\3\uffff";
     static final String DFA12_maxS =
         "\1\uffff\1\150\2\uffff\1\165\1\162\1\154\1\164\1\150\2\uffff\1"+
         "\157\1\uffff\1\165\1\uffff\1\170\1\165\2\uffff\1\155\1\162\1\52"+
         "\1\145\1\172\2\uffff\2\uffff\1\57\2\uffff\1\162\3\uffff\1\144\1"+
-        "\170\2\154\1\151\1\157\1\156\1\141\1\171\2\uffff\1\144\1\uffff\1"+
-        "\156\1\uffff\1\145\1\156\2\uffff\1\160\1\157\2\uffff\1\146\5\uffff"+
-        "\3\145\1\164\1\154\1\157\1\143\1\147\1\143\1\163\1\145\1\164\1\143"+
-        "\1\164\1\157\1\155\2\141\1\154\1\144\1\151\1\145\1\172\1\153\1\154"+
-        "\1\153\1\151\1\122\1\151\1\155\1\151\1\162\1\172\1\165\1\144\2\172"+
-        "\1\124\1\144\1\uffff\2\145\1\163\1\143\1\145\1\154\1\155\1\157\1"+
-        "\155\1\164\1\uffff\1\154\1\172\2\uffff\1\150\1\172\1\144\1\124\1"+
+        "\170\1\154\1\147\1\154\1\151\1\157\1\156\1\141\1\171\2\uffff\1\144"+
+        "\1\uffff\1\156\1\uffff\1\145\1\156\2\uffff\1\160\1\157\2\uffff\1"+
+        "\146\5\uffff\3\145\1\164\1\160\1\154\1\157\1\143\1\147\1\143\1\163"+
+        "\1\145\1\164\1\143\1\164\1\157\1\155\2\141\1\154\1\144\1\151\1\154"+
+        "\1\157\1\145\1\172\1\153\1\154\1\153\1\151\1\122\1\151\1\155\1\151"+
+        "\1\162\1\172\1\165\1\144\2\172\1\124\2\157\1\144\1\151\1\uffff\2"+
+        "\145\1\163\1\143\1\145\1\154\1\155\1\157\1\155\1\164\1\uffff\1\154"+
+        "\1\172\2\uffff\1\150\1\143\1\154\1\172\1\156\1\170\1\144\1\124\1"+
         "\151\1\141\1\146\1\141\1\145\1\144\1\145\1\172\1\164\1\uffff\1\162"+
-        "\1\uffff\1\172\1\150\1\172\1\154\1\172\1\163\1\172\1\145\1\103\1"+
-        "\uffff\1\124\1\145\1\uffff\1\162\1\145\1\123\1\uffff\1\163\1\uffff"+
-        "\1\172\1\154\1\150\1\141\1\145\1\172\1\157\1\171\1\172\1\uffff\1"+
-        "\141\1\162\1\144\1\141\1\uffff\1\144\1\163\1\uffff\1\163\2\145\1"+
-        "\144\1\145\1\164\1\163\1\141\1\144\1\145\1\154\1\145\1\172\1\144"+
-        "\1\172\1\144\1\172\1\155\1\uffff\1\172\1\uffff\1\172\1\uffff\1\172"+
-        "\3\uffff";
+        "\1\153\1\163\1\uffff\3\172\1\150\1\172\1\154\1\172\1\163\1\172\1"+
+        "\145\1\103\1\uffff\1\124\1\145\1\163\1\151\3\uffff\1\162\1\145\1"+
+        "\123\1\uffff\1\163\1\uffff\1\172\1\154\1\150\1\141\1\151\1\172\1"+
+        "\145\1\172\1\157\1\171\1\172\1\uffff\1\141\1\162\1\144\1\172\1\145"+
+        "\1\141\1\uffff\1\144\1\163\1\uffff\1\163\3\145\1\172\1\144\1\145"+
+        "\1\164\1\163\1\141\1\144\1\172\1\uffff\1\145\1\154\1\145\1\172\1"+
+        "\144\1\172\1\uffff\1\144\1\172\1\155\1\uffff\1\172\1\uffff\1\172"+
+        "\1\uffff\1\172\3\uffff";
     static final String DFA12_acceptS =
         "\2\uffff\1\2\1\3\5\uffff\1\13\1\14\1\uffff\1\17\1\uffff\1\22\2"+
-        "\uffff\1\27\1\30\5\uffff\1\36\1\37\3\uffff\1\43\1\44\1\uffff\1\36"+
-        "\1\2\1\3\11\uffff\1\13\1\14\1\uffff\1\17\1\uffff\1\22\2\uffff\1"+
-        "\27\1\30\2\uffff\1\33\1\34\1\uffff\1\37\1\40\1\41\1\42\1\43\47\uffff"+
-        "\1\24\12\uffff\1\32\2\uffff\1\4\1\7\15\uffff\1\1\1\uffff\1\5\11"+
-        "\uffff\1\31\2\uffff\1\6\3\uffff\1\16\1\uffff\1\21\11\uffff\1\23"+
-        "\4\uffff\1\25\2\uffff\1\20\22\uffff\1\26\1\uffff\1\11\1\uffff\1"+
-        "\12\1\uffff\1\35\1\10\1\15";
+        "\uffff\1\33\1\34\5\uffff\1\42\1\43\3\uffff\1\47\1\50\1\uffff\1\42"+
+        "\1\2\1\3\12\uffff\1\13\1\14\1\uffff\1\17\1\uffff\1\22\2\uffff\1"+
+        "\33\1\34\2\uffff\1\37\1\40\1\uffff\1\43\1\44\1\45\1\46\1\47\55\uffff"+
+        "\1\26\12\uffff\1\36\2\uffff\1\4\1\7\21\uffff\1\1\3\uffff\1\5\13"+
+        "\uffff\1\35\4\uffff\1\23\1\24\1\6\3\uffff\1\16\1\uffff\1\21\13\uffff"+
+        "\1\25\6\uffff\1\27\2\uffff\1\20\14\uffff\1\31\6\uffff\1\30\3\uffff"+
+        "\1\32\1\uffff\1\11\1\uffff\1\12\1\uffff\1\41\1\10\1\15";
     static final String DFA12_specialS =
-        "\1\0\31\uffff\1\1\1\2\u00ab\uffff}>";
+        "\1\1\31\uffff\1\2\1\0\u00c7\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\36\2\35\2\36\1\35\22\36\1\35\1\36\1\32\4\36\1\33\3\36\1"+
             "\2\1\36\1\3\1\25\1\34\12\31\1\14\2\36\1\16\3\36\3\30\1\26\11"+
@@ -1511,38 +1632,37 @@ public class InternalETPhysLexer extends Lexer {
             "\1\37",
             "",
             "",
-            "\1\44\5\uffff\1\43\5\uffff\1\45",
-            "\1\46\2\uffff\1\47",
-            "\1\50",
-            "\1\51\12\uffff\1\52",
-            "\1\53",
+            "\1\44\5\uffff\1\43\3\uffff\1\46\1\uffff\1\45",
+            "\1\47\2\uffff\1\50",
+            "\1\51",
+            "\1\52\12\uffff\1\53",
+            "\1\54",
             "",
             "",
-            "\1\56",
+            "\1\57",
             "",
-            "\1\60",
+            "\1\61",
             "",
-            "\1\62",
             "\1\63",
+            "\1\64",
             "",
             "",
-            "\1\66",
             "\1\67",
             "\1\70",
-            "\1\72",
+            "\1\71",
+            "\1\73",
             "\32\40\4\uffff\1\40\1\uffff\32\40",
             "",
             "",
-            "\0\74",
-            "\0\74",
-            "\1\75\4\uffff\1\76",
-            "",
-            "",
-            "\1\100",
-            "",
+            "\0\75",
+            "\0\75",
+            "\1\76\4\uffff\1\77",
             "",
             "",
             "\1\101",
+            "",
+            "",
+            "",
             "\1\102",
             "\1\103",
             "\1\104",
@@ -1551,34 +1671,33 @@ public class InternalETPhysLexer extends Lexer {
             "\1\107",
             "\1\110",
             "\1\111",
-            "",
-            "",
             "\1\112",
-            "",
             "\1\113",
             "",
-            "\1\114",
-            "\1\115",
             "",
+            "\1\114",
+            "",
+            "\1\115",
             "",
             "\1\116",
             "\1\117",
             "",
             "",
             "\1\120",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\121",
+            "",
+            "",
             "\1\122",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\123",
             "\1\124",
             "\1\125",
             "\1\126",
-            "\1\127",
-            "\1\130",
+            "\1\127\15\uffff\1\130",
             "\1\131",
             "\1\132",
             "\1\133",
@@ -1593,41 +1712,36 @@ public class InternalETPhysLexer extends Lexer {
             "\1\144",
             "\1\145",
             "\1\146",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\147",
             "\1\150",
             "\1\151",
             "\1\152",
             "\1\153",
-            "\1\155\16\uffff\1\154",
-            "\1\156",
+            "\1\154",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\14\40\1\155\15\40",
             "\1\157",
             "\1\160",
             "\1\161",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\163",
-            "\1\164",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\162",
+            "\1\164\16\uffff\1\163",
+            "\1\165",
+            "\1\166",
             "\1\167",
             "\1\170",
-            "",
-            "\1\171",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\172",
             "\1\173",
-            "\1\174",
-            "\1\175",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\176",
             "\1\177",
             "\1\u0080",
             "\1\u0081",
-            "\1\u0082",
+            "\1\u0083\7\uffff\1\u0082",
             "",
-            "\1\u0083",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "",
-            "",
+            "\1\u0084",
             "\1\u0085",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u0086",
             "\1\u0087",
             "\1\u0088",
             "\1\u0089",
@@ -1635,68 +1749,103 @@ public class InternalETPhysLexer extends Lexer {
             "\1\u008b",
             "\1\u008c",
             "\1\u008d",
+            "",
             "\1\u008e",
-            "\1\u008f",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "",
+            "\1\u0090",
             "\1\u0091",
-            "",
             "\1\u0092",
-            "",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\u0094",
             "\1\u0095",
             "\1\u0096",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u0097",
             "\1\u0098",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u0099",
             "\1\u009a",
             "\1\u009b",
-            "",
             "\1\u009c",
             "\1\u009d",
-            "",
             "\1\u009e",
-            "\1\u009f",
-            "\1\u00a0\5\uffff\1\u00a1",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00a0",
             "",
+            "\1\u00a1",
             "\1\u00a2",
+            "\1\u00a3",
             "",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\u00a4",
-            "\1\u00a5",
-            "\1\u00a6",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\u00a7",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00a8",
             "\1\u00a9",
-            "\1\u00aa",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "",
-            "\1\u00ac",
+            "\1\u00ab",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\u00ad",
             "\1\u00ae",
-            "\1\u00af",
             "",
+            "\1\u00af",
             "\1\u00b0",
             "\1\u00b1",
-            "",
             "\1\u00b2",
+            "",
+            "",
+            "",
             "\1\u00b3",
             "\1\u00b4",
-            "\1\u00b5",
-            "\1\u00b6",
+            "\1\u00b5\5\uffff\1\u00b6",
+            "",
             "\1\u00b7",
-            "\1\u00b8",
+            "",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\u00b9",
             "\1\u00ba",
             "\1\u00bb",
             "\1\u00bc",
             "\1\u00bd",
+            "\1\u00be",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\u00bf",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00c0",
             "\1\u00c1",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
             "\1\u00c3",
+            "\1\u00c4",
+            "\1\u00c5",
+            "\1\u00c6",
+            "\1\u00c7",
+            "\1\u00c8",
+            "",
+            "\1\u00c9",
+            "\1\u00ca",
+            "",
+            "\1\u00cb",
+            "\1\u00cc",
+            "\1\u00cd",
+            "\1\u00ce",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00d0",
+            "\1\u00d1",
+            "\1\u00d2",
+            "\1\u00d3",
+            "\1\u00d4",
+            "\1\u00d5",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "\1\u00d7",
+            "\1\u00d8",
+            "\1\u00d9",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00db",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "\1\u00dd",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\u00df",
             "",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "",
@@ -1738,13 +1887,23 @@ public class InternalETPhysLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_27 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_27>='\u0000' && LA12_27<='\uFFFF')) ) {s = 61;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1810,21 +1969,11 @@ public class InternalETPhysLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA12_26 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_26>='\u0000' && LA12_26<='\uFFFF')) ) {s = 60;}
-
-                        else s = 30;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_27 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_27>='\u0000' && LA12_27<='\uFFFF')) ) {s = 60;}
+                        if ( ((LA12_26>='\u0000' && LA12_26<='\uFFFF')) ) {s = 61;}
 
                         else s = 30;
 

@@ -18,13 +18,11 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class ETMapSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ETMapGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_SubSystemMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ETMapGrammarAccess) access;
-		match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2()));
 		match_SubSystemMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSubSystemMappingAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getSubSystemMappingAccess().getRightCurlyBracketKeyword_4_2()));
 	}
 	
@@ -40,22 +38,12 @@ public class ETMapSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q.equals(syntax))
-				emit_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SubSystemMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q.equals(syntax))
+			if(match_SubSystemMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q.equals(syntax))
 				emit_SubSystemMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Syntax:
-	 *     ('{' '}')?
-	 */
-	protected void emit_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 	/**
 	 * Syntax:
 	 *     ('{' '}')?

@@ -9,14 +9,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
-import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
+import org.eclipse.etrice.core.etphys.eTPhys.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,9 +95,9 @@ public class ETPhysAdapterFactory extends AdapterFactoryImpl
         return createNodeClassAdapter();
       }
       @Override
-      public Adapter caseThread(org.eclipse.etrice.core.etphys.eTPhys.Thread object)
+      public Adapter casePhysThread(PhysThread object)
       {
-        return createThreadAdapter();
+        return createPhysThreadAdapter();
       }
       @Override
       public Adapter caseRuntimeClass(RuntimeClass object)
@@ -204,16 +197,16 @@ public class ETPhysAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etphys.eTPhys.Thread <em>Thread</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread <em>Phys Thread</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Thread
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread
    * @generated
    */
-  public Adapter createThreadAdapter()
+  public Adapter createPhysThreadAdapter()
   {
     return null;
   }

@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.core.etmap.ui;
 
-import org.eclipse.etrice.core.etmap.ui.linking.ETMapHyperlinkHelper;
 import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
+import org.eclipse.etrice.core.ui.linking.ImportAwareHyperlinkHelper;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 
@@ -30,6 +30,6 @@ public class ETMapUiModule extends org.eclipse.etrice.core.etmap.ui.AbstractETMa
 	}
 
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-		return ETMapHyperlinkHelper.class;
+		return ImportAwareHyperlinkHelper.class;
 	}
 }

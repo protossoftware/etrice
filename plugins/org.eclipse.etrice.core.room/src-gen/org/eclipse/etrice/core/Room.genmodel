@@ -202,14 +202,18 @@
     <genClasses ecoreClass="Room.ecore#//SubSystemClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/relayPorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/threads"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/actorInstanceMappings"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//LogicalThread">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//LogicalThread/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//LogicalThread/prio"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//LogicalThread/instances"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//ActorInstancePath">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorInstancePath/segments"/>
+    <genClasses ecoreClass="Room.ecore#//ActorInstanceMapping">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorInstanceMapping/path"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorInstanceMapping/thread"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorInstanceMapping/actorInstanceMappings"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefPath">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefPath/refs"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Binding">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Binding/endpoint1"/>

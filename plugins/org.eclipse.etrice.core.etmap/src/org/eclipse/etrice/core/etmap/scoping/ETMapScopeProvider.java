@@ -17,11 +17,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
+import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.Thread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -62,7 +63,7 @@ public class ETMapScopeProvider extends AbstractDeclarativeScopeProvider {
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 	
-	public IScope scope_ActorInstanceMapping_thread(ActorInstanceMapping aim, EReference ref) {
+	public IScope scope_ThreadMapping_physicalThread(ThreadMapping aim, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
 		EObject parent = aim.eContainer();
@@ -74,7 +75,27 @@ public class ETMapScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		if (parent instanceof SubSystemMapping) {
 			SubSystemMapping ssm = (SubSystemMapping) parent;
-			for (Thread thread : ssm.getNode().getType().getThreads()) {
+			for (PhysThread thread : ssm.getNode().getType().getThreads()) {
+				scopes.add(EObjectDescription.create(thread.getName(), thread));
+			}
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+	
+	public IScope scope_ThreadMapping_logicalThread(ThreadMapping tm, EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+
+		EObject parent = tm.eContainer();
+		while (parent!=null) {
+			if (parent instanceof SubSystemMapping)
+				break;
+			parent = parent.eContainer();
+		}
+		
+		if (parent instanceof SubSystemMapping) {
+			SubSystemMapping ssm = (SubSystemMapping) parent;
+			for (LogicalThread thread : ssm.getLogicalSubSys().getType().getThreads()) {
 				scopes.add(EObjectDescription.create(thread.getName(), thread));
 			}
 		}

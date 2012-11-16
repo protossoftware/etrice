@@ -54,6 +54,6 @@ public class ETMapFormatter extends AbstractDeclarativeFormatter {
 
 		c.setLinewrap(1).after(f.getMappingRule());
 		c.setLinewrap(1).after(f.getSubSystemMappingRule());
-		c.setLinewrap(1).after(f.getActorInstanceMappingRule());
+		c.setLinewrap(1).after(f.getThreadMappingRule());
 	}
 }

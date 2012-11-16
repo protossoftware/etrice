@@ -11,17 +11,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysFactory;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
-import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
+import org.eclipse.etrice.core.etphys.eTPhys.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,7 +69,7 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
       case ETPhysPackage.PHYSICAL_SYSTEM: return createPhysicalSystem();
       case ETPhysPackage.NODE_REF: return createNodeRef();
       case ETPhysPackage.NODE_CLASS: return createNodeClass();
-      case ETPhysPackage.THREAD: return createThread();
+      case ETPhysPackage.PHYS_THREAD: return createPhysThread();
       case ETPhysPackage.RUNTIME_CLASS: return createRuntimeClass();
       case ETPhysPackage.DOCUMENTATION: return createDocumentation();
       case ETPhysPackage.IMPORT: return createImport();
@@ -175,10 +165,10 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.etrice.core.etphys.eTPhys.Thread createThread()
+  public PhysThread createPhysThread()
   {
-    ThreadImpl thread = new ThreadImpl();
-    return thread;
+    PhysThreadImpl physThread = new PhysThreadImpl();
+    return physThread;
   }
 
   /**

@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.core.etmap.eTMap.ActorInstanceMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
+import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 
@@ -35,7 +35,7 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getLogicalSubSys <em>Logical Sub Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getNode <em>Node</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getThreadMappings <em>Thread Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,14 +64,14 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
   protected NodeRef node;
 
   /**
-   * The cached value of the '{@link #getActorInstanceMappings() <em>Actor Instance Mappings</em>}' containment reference list.
+   * The cached value of the '{@link #getThreadMappings() <em>Thread Mappings</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActorInstanceMappings()
+   * @see #getThreadMappings()
    * @generated
    * @ordered
    */
-  protected EList<ActorInstanceMapping> actorInstanceMappings;
+  protected EList<ThreadMapping> threadMappings;
 
   /**
    * <!-- begin-user-doc -->
@@ -185,13 +185,13 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ActorInstanceMapping> getActorInstanceMappings()
+  public EList<ThreadMapping> getThreadMappings()
   {
-    if (actorInstanceMappings == null)
+    if (threadMappings == null)
     {
-      actorInstanceMappings = new EObjectContainmentEList<ActorInstanceMapping>(ActorInstanceMapping.class, this, ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS);
+      threadMappings = new EObjectContainmentEList<ThreadMapping>(ThreadMapping.class, this, ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS);
     }
-    return actorInstanceMappings;
+    return threadMappings;
   }
 
   /**
@@ -204,8 +204,8 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS:
-        return ((InternalEList<?>)getActorInstanceMappings()).basicRemove(otherEnd, msgs);
+      case ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS:
+        return ((InternalEList<?>)getThreadMappings()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -226,8 +226,8 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
       case ETMapPackage.SUB_SYSTEM_MAPPING__NODE:
         if (resolve) return getNode();
         return basicGetNode();
-      case ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS:
-        return getActorInstanceMappings();
+      case ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS:
+        return getThreadMappings();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -249,9 +249,9 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
       case ETMapPackage.SUB_SYSTEM_MAPPING__NODE:
         setNode((NodeRef)newValue);
         return;
-      case ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS:
-        getActorInstanceMappings().clear();
-        getActorInstanceMappings().addAll((Collection<? extends ActorInstanceMapping>)newValue);
+      case ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS:
+        getThreadMappings().clear();
+        getThreadMappings().addAll((Collection<? extends ThreadMapping>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -273,8 +273,8 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
       case ETMapPackage.SUB_SYSTEM_MAPPING__NODE:
         setNode((NodeRef)null);
         return;
-      case ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS:
-        getActorInstanceMappings().clear();
+      case ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS:
+        getThreadMappings().clear();
         return;
     }
     super.eUnset(featureID);
@@ -294,8 +294,8 @@ public class SubSystemMappingImpl extends MinimalEObjectImpl.Container implement
         return logicalSubSys != null;
       case ETMapPackage.SUB_SYSTEM_MAPPING__NODE:
         return node != null;
-      case ETMapPackage.SUB_SYSTEM_MAPPING__ACTOR_INSTANCE_MAPPINGS:
-        return actorInstanceMappings != null && !actorInstanceMappings.isEmpty();
+      case ETMapPackage.SUB_SYSTEM_MAPPING__THREAD_MAPPINGS:
+        return threadMappings != null && !threadMappings.isEmpty();
     }
     return super.eIsSet(featureID);
   }

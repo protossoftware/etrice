@@ -7,14 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
-import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
+import org.eclipse.etrice.core.etphys.eTPhys.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,10 +100,10 @@ public class ETPhysSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ETPhysPackage.THREAD:
+      case ETPhysPackage.PHYS_THREAD:
       {
-        org.eclipse.etrice.core.etphys.eTPhys.Thread thread = (org.eclipse.etrice.core.etphys.eTPhys.Thread)theEObject;
-        T result = caseThread(thread);
+        PhysThread physThread = (PhysThread)theEObject;
+        T result = casePhysThread(physThread);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -204,17 +197,17 @@ public class ETPhysSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Thread</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Phys Thread</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Thread</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Phys Thread</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseThread(org.eclipse.etrice.core.etphys.eTPhys.Thread object)
+  public T casePhysThread(PhysThread object)
   {
     return null;
   }

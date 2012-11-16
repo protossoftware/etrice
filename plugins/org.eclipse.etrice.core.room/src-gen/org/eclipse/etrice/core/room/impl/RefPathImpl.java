@@ -12,40 +12,40 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
-import org.eclipse.etrice.core.room.ActorInstancePath;
+import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Actor Instance Path</b></em>'.
+ * An implementation of the model object '<em><b>Ref Path</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorInstancePathImpl#getSegments <em>Segments</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RefPathImpl#getRefs <em>Refs</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implements ActorInstancePath
+public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
 {
   /**
-   * The cached value of the '{@link #getSegments() <em>Segments</em>}' attribute list.
+   * The cached value of the '{@link #getRefs() <em>Refs</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSegments()
+   * @see #getRefs()
    * @generated
    * @ordered
    */
-  protected EList<String> segments;
+  protected EList<String> refs;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ActorInstancePathImpl()
+  protected RefPathImpl()
   {
     super();
   }
@@ -58,7 +58,7 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.ACTOR_INSTANCE_PATH;
+    return RoomPackage.Literals.REF_PATH;
   }
 
   /**
@@ -66,13 +66,13 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getSegments()
+  public EList<String> getRefs()
   {
-    if (segments == null)
+    if (refs == null)
     {
-      segments = new EDataTypeEList<String>(String.class, this, RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS);
+      refs = new EDataTypeEList<String>(String.class, this, RoomPackage.REF_PATH__REFS);
     }
-    return segments;
+    return refs;
   }
 
   /**
@@ -85,8 +85,8 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS:
-        return getSegments();
+      case RoomPackage.REF_PATH__REFS:
+        return getRefs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -102,9 +102,9 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS:
-        getSegments().clear();
-        getSegments().addAll((Collection<? extends String>)newValue);
+      case RoomPackage.REF_PATH__REFS:
+        getRefs().clear();
+        getRefs().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -120,8 +120,8 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS:
-        getSegments().clear();
+      case RoomPackage.REF_PATH__REFS:
+        getRefs().clear();
         return;
     }
     super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_INSTANCE_PATH__SEGMENTS:
-        return segments != null && !segments.isEmpty();
+      case RoomPackage.REF_PATH__REFS:
+        return refs != null && !refs.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -154,10 +154,10 @@ public class ActorInstancePathImpl extends MinimalEObjectImpl.Container implemen
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (segments: ");
-    result.append(segments);
+    result.append(" (refs: ");
+    result.append(refs);
     result.append(')');
     return result.toString();
   }
 
-} //ActorInstancePathImpl
+} //RefPathImpl

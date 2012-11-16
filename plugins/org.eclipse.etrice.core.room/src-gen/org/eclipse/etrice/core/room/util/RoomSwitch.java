@@ -389,10 +389,17 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.ACTOR_INSTANCE_PATH:
+      case RoomPackage.ACTOR_INSTANCE_MAPPING:
       {
-        ActorInstancePath actorInstancePath = (ActorInstancePath)theEObject;
-        T result = caseActorInstancePath(actorInstancePath);
+        ActorInstanceMapping actorInstanceMapping = (ActorInstanceMapping)theEObject;
+        T result = caseActorInstanceMapping(actorInstanceMapping);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.REF_PATH:
+      {
+        RefPath refPath = (RefPath)theEObject;
+        T result = caseRefPath(refPath);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1379,17 +1386,33 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Actor Instance Path</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Actor Instance Mapping</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Actor Instance Path</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Actor Instance Mapping</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseActorInstancePath(ActorInstancePath object)
+  public T caseActorInstanceMapping(ActorInstanceMapping object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ref Path</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ref Path</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRefPath(RefPath object)
   {
     return null;
   }
