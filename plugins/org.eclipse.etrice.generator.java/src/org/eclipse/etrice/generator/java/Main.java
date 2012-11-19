@@ -15,13 +15,19 @@ package org.eclipse.etrice.generator.java;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Inject;
 
@@ -62,6 +68,9 @@ public class Main extends AbstractGenerator {
 	
 	@Inject
 	protected IDataConfiguration dataConfig;
+	
+	@Inject
+	protected ImportUriResolver uriResolver;
 	
 	public int runGenerator(String[] args) {
 		if (args.length == 0) {
@@ -138,5 +147,37 @@ public class Main extends AbstractGenerator {
 		logger.logInfo("-- finished code generation");
 		
 		return true;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.base.AbstractGenerator#addReferencedModels(org.eclipse.emf.ecore.resource.Resource, java.util.List)
+	 */
+	@Override
+	protected void addReferencedModels(Resource resource, List<String> uriList) {
+		EObject root = resource.getContents().get(0);
+		if (root instanceof RoomModel) {
+			for (org.eclipse.etrice.core.room.Import imp : ((RoomModel)root).getImports()) {
+				String importURI = uriResolver.resolve(imp);
+				logger.logInfo("adding imported model "+importURI);
+				uriList.add(importURI);
+			}
+		}
+		else if (root instanceof PhysicalModel) {
+			for (org.eclipse.etrice.core.etphys.eTPhys.Import imp : ((PhysicalModel)root).getImports()) {
+				String importURI = uriResolver.resolve(imp);
+				logger.logInfo("adding imported model "+importURI);
+				uriList.add(importURI);
+			}
+		}
+		else if (root instanceof MappingModel) {
+			for (org.eclipse.etrice.core.etmap.eTMap.Import imp : ((MappingModel)root).getImports()) {
+				String importURI = uriResolver.resolve(imp);
+				logger.logInfo("adding imported model "+importURI);
+				uriList.add(importURI);
+			}
+		}
+		else {
+			dataConfig.addReferencedModels(resource, uriList);
+		}
 	}
 }
