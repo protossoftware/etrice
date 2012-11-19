@@ -13,6 +13,8 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.List;
+
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -49,5 +51,7 @@ public interface IDataConfiguration {
 	
 	public List<Attribute> getDynConfigReadAttributes(ActorClass actor);
 	public List<Attribute> getDynConfigWriteAttributes(ActorClass actor);
+	
+	public void addReferencedModels(Resource resource, List<String> uriList);
 	
 }

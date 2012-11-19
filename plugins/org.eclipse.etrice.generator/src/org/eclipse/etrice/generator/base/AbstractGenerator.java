@@ -215,7 +215,8 @@ public abstract class AbstractGenerator {
 
 	protected boolean loadModel(String uriString, ResourceSet rs)
 			throws RuntimeException, IOException {
-		String can = URI.createFileURI(uriString).toFileString();
+		URI uri = uriString.startsWith("file:/")? URI.createURI(uriString):URI.createFileURI(uriString);
+		String can = uri.toFileString();
 		File f = new File(can);
 		can = f.getCanonicalPath();	// e.g. remove embedded ../
 		if (rs.getResource(URI.createFileURI(can), false) != null)
@@ -236,22 +237,34 @@ public abstract class AbstractGenerator {
 	 */
 	protected boolean loadModels(List<String> uriList, ResourceSet rs) {
 		logger.logInfo("-- reading models");
+		
+		ArrayList<String> uris = new ArrayList<String>(uriList);
+		
 		boolean ok = true;
-		for (String uriString : uriList) {
+		while (!uris.isEmpty()) {
+			String uriString = uris.get(0);
 			//logger.logInfo("Loading " + uriString);
 			try {
-				loadModel(uriString,rs);
+				loadModel(uriString, rs);
+				addReferencedModels(rs.getResources().get(rs.getResources().size()-1), uris);
 			}
 			catch (Exception e) {
 				ok = false;
 				logger.logError("couldn't load '"+uriString+"'", null);
 			}
+			uris.remove(0);
 		}
 		
 		EcoreUtil.resolveAll(rs);
 		
 		return ok;
 	}
+
+	/**
+	 * @param resource
+	 * @param uriList
+	 */
+	protected void addReferencedModels(Resource resource, List<String> uriList) {}
 
 	/**
 	 * create detail code translations once and for all
