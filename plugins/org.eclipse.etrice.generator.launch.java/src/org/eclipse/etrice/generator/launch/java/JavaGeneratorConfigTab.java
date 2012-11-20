@@ -121,7 +121,7 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 				handlePathButtonSelected();
 			}
 		});
-		instanceDiagramButton = createCheckButton(mainComposite, "generate instance diagram");
+		instanceDiagramButton = createCheckButton(mainComposite, "generate documentation");
 		instanceDiagramButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		instanceDiagramButton.addSelectionListener(new SelectionListener() {
 			
