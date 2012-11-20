@@ -214,27 +214,24 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public Process runDot2Jpg(final String path, final String bat) {
-    Process _xblockexpression = null;
-    {
-      File _file = new File(path);
-      File wdir = _file;
-      Process _xtrycatchfinallyexpression = null;
-      try {
-        Runtime _runtime = Runtime.getRuntime();
-        String _plus = ("cmd /C " + bat);
-        Process _exec = _runtime.exec(_plus, null, wdir);
-        _xtrycatchfinallyexpression = _exec;
-      } catch (final Throwable _t) {
-        if (_t instanceof Exception) {
-          final Exception e = (Exception)_t;
-          e.printStackTrace();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+  public void runDot2Jpg(final String path, final String bat) {
+    File _file = new File(path);
+    File wdir = _file;
+    try {
+      Runtime _runtime = Runtime.getRuntime();
+      String _plus = ("cmd /C " + bat);
+      final Process p = _runtime.exec(_plus, null, wdir);
+      String _plus_1 = (bat + " finished with ");
+      int _waitFor = p.waitFor();
+      String _plus_2 = (_plus_1 + Integer.valueOf(_waitFor));
+      this.logger.logInfo(_plus_2);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        e.printStackTrace();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
     }
-    return _xblockexpression;
   }
 }

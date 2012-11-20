@@ -94,7 +94,8 @@ class InstanceDiagramGen implements IRoomGenerator {
  	def runDot2Jpg(String path, String bat){
  		var wdir = new File(path)
  		try {
-			getRuntime.exec("cmd /C "+bat, null, wdir)
+			val p = getRuntime.exec("cmd /C "+bat, null, wdir)
+			logger.logInfo(bat+" finished with "+p.waitFor)
 		}
 		catch (Exception e) {
 			e.printStackTrace();
