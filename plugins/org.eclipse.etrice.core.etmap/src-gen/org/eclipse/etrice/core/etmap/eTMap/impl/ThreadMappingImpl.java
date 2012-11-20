@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 
 import org.eclipse.etrice.core.room.LogicalThread;
 
@@ -51,7 +51,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * @generated
    * @ordered
    */
-  protected PhysThread physicalThread;
+  protected PhysicalThread physicalThread;
 
   /**
    * <!-- begin-user-doc -->
@@ -122,12 +122,12 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
-  public PhysThread getPhysicalThread()
+  public PhysicalThread getPhysicalThread()
   {
     if (physicalThread != null && physicalThread.eIsProxy())
     {
       InternalEObject oldPhysicalThread = (InternalEObject)physicalThread;
-      physicalThread = (PhysThread)eResolveProxy(oldPhysicalThread);
+      physicalThread = (PhysicalThread)eResolveProxy(oldPhysicalThread);
       if (physicalThread != oldPhysicalThread)
       {
         if (eNotificationRequired())
@@ -142,7 +142,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
-  public PhysThread basicGetPhysicalThread()
+  public PhysicalThread basicGetPhysicalThread()
   {
     return physicalThread;
   }
@@ -152,9 +152,9 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPhysicalThread(PhysThread newPhysicalThread)
+  public void setPhysicalThread(PhysicalThread newPhysicalThread)
   {
-    PhysThread oldPhysicalThread = physicalThread;
+    PhysicalThread oldPhysicalThread = physicalThread;
     physicalThread = newPhysicalThread;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ETMapPackage.THREAD_MAPPING__PHYSICAL_THREAD, oldPhysicalThread, physicalThread));
@@ -194,7 +194,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
         setLogicalThread((LogicalThread)newValue);
         return;
       case ETMapPackage.THREAD_MAPPING__PHYSICAL_THREAD:
-        setPhysicalThread((PhysThread)newValue);
+        setPhysicalThread((PhysicalThread)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -214,7 +214,7 @@ public class ThreadMappingImpl extends MinimalEObjectImpl.Container implements T
         setLogicalThread((LogicalThread)null);
         return;
       case ETMapPackage.THREAD_MAPPING__PHYSICAL_THREAD:
-        setPhysicalThread((PhysThread)null);
+        setPhysicalThread((PhysicalThread)null);
         return;
     }
     super.eUnset(featureID);

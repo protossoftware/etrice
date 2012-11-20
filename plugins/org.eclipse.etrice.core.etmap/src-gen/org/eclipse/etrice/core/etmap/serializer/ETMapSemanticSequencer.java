@@ -101,7 +101,7 @@ public class ETMapSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Constraint:
-	 *     (logicalThread=[LogicalThread|ID] physicalThread=[PhysThread|ID])
+	 *     (logicalThread=[LogicalThread|ID] physicalThread=[PhysicalThread|ID])
 	 */
 	protected void sequence_ThreadMapping(EObject context, ThreadMapping semanticObject) {
 		if(errorAcceptor != null) {
@@ -113,7 +113,7 @@ public class ETMapSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1(), semanticObject.getLogicalThread());
-		feeder.accept(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1(), semanticObject.getPhysicalThread());
+		feeder.accept(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1(), semanticObject.getPhysicalThread());
 		feeder.finish();
 	}
 }

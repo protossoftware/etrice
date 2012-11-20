@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -75,7 +75,7 @@ public class ETMapScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		if (parent instanceof SubSystemMapping) {
 			SubSystemMapping ssm = (SubSystemMapping) parent;
-			for (PhysThread thread : ssm.getNode().getType().getThreads()) {
+			for (PhysicalThread thread : ssm.getNode().getType().getThreads()) {
 				scopes.add(EObjectDescription.create(thread.getName(), thread));
 			}
 		}

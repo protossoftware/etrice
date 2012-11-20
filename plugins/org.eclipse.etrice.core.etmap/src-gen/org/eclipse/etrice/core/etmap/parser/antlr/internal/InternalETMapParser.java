@@ -801,7 +801,7 @@ public class InternalETMapParser extends AbstractInternalAntlrParser {
                     
             otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThreadMapping717); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysThreadCrossReference_3_0()); 
+            		newLeafNode(otherlv_3, grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadCrossReference_3_0()); 
             	
 
             }

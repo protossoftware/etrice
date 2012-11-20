@@ -211,15 +211,15 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1 = (RuleCall)cLogicalThreadLogicalThreadCrossReference_1_0.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cPhysicalThreadAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cPhysicalThreadPhysThreadCrossReference_3_0 = (CrossReference)cPhysicalThreadAssignment_3.eContents().get(0);
-		private final RuleCall cPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cPhysicalThreadPhysThreadCrossReference_3_0.eContents().get(1);
+		private final CrossReference cPhysicalThreadPhysicalThreadCrossReference_3_0 = (CrossReference)cPhysicalThreadAssignment_3.eContents().get(0);
+		private final RuleCall cPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cPhysicalThreadPhysicalThreadCrossReference_3_0.eContents().get(1);
 		
 		//ThreadMapping:
 		//
-		//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread];
+		//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread];
 		public ParserRule getRule() { return rule; }
 
-		//"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread]
+		//"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread]
 		public Group getGroup() { return cGroup; }
 
 		//"ThreadMapping"
@@ -237,14 +237,14 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 
-		//physicalThread=[phys::PhysThread]
+		//physicalThread=[phys::PhysicalThread]
 		public Assignment getPhysicalThreadAssignment_3() { return cPhysicalThreadAssignment_3; }
 
-		//[phys::PhysThread]
-		public CrossReference getPhysicalThreadPhysThreadCrossReference_3_0() { return cPhysicalThreadPhysThreadCrossReference_3_0; }
+		//[phys::PhysicalThread]
+		public CrossReference getPhysicalThreadPhysicalThreadCrossReference_3_0() { return cPhysicalThreadPhysicalThreadCrossReference_3_0; }
 
 		//ID
-		public RuleCall getPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1() { return cPhysicalThreadPhysThreadIDTerminalRuleCall_3_0_1; }
+		public RuleCall getPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1() { return cPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -432,7 +432,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ThreadMapping:
 	//
-	//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysThread];
+	//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread];
 	public ThreadMappingElements getThreadMappingAccess() {
 		return (pThreadMapping != null) ? pThreadMapping : (pThreadMapping = new ThreadMappingElements());
 	}

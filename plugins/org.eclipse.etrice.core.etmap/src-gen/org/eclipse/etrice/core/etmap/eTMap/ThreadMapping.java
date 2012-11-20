@@ -4,7 +4,7 @@ package org.eclipse.etrice.core.etmap.eTMap;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 
 import org.eclipse.etrice.core.room.LogicalThread;
 
@@ -62,12 +62,12 @@ public interface ThreadMapping extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Physical Thread</em>' reference.
-   * @see #setPhysicalThread(PhysThread)
+   * @see #setPhysicalThread(PhysicalThread)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getThreadMapping_PhysicalThread()
    * @model
    * @generated
    */
-  PhysThread getPhysicalThread();
+  PhysicalThread getPhysicalThread();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getPhysicalThread <em>Physical Thread</em>}' reference.
@@ -77,6 +77,6 @@ public interface ThreadMapping extends EObject
    * @see #getPhysicalThread()
    * @generated
    */
-  void setPhysicalThread(PhysThread value);
+  void setPhysicalThread(PhysicalThread value);
 
 } // ThreadMapping

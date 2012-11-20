@@ -38,7 +38,7 @@ SubSystemMapping:
 ;
 
 ThreadMapping:
-	'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysThread|ID]
+	'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysicalThread|ID]
 ;
 
 

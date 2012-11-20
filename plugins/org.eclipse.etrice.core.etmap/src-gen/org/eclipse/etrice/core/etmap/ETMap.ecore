@@ -23,7 +23,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThreadMapping">
     <eStructuralFeatures xsi:type="ecore:EReference" name="logicalThread" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="physicalThread" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore#//PhysThread"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="physicalThread" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore#//PhysicalThread"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

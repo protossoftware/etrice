@@ -112,7 +112,7 @@
         <elements xsi:type="xtext:Assignment" feature="physicalThread" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.3">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysThread"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysicalThread"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </terminal>
