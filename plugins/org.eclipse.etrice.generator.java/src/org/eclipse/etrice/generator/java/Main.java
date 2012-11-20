@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -130,6 +131,11 @@ public class Main extends AbstractGenerator {
 		
 		if (!validator.validate(genModel))
 			return false;
+		
+		ETMapUtil.processModels(genModel, rs);
+		logger.logInfo("-- begin dump of mappings");
+		logger.logInfo(ETMapUtil.dumpMappings());
+		logger.logInfo("-- end dump of mappings");
 		
 		logger.logInfo("-- starting code generation");
 		fileAccess.setOutputPath("src-gen/");
