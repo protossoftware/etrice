@@ -147,7 +147,9 @@ public class GeneratorModelBuilder {
 			for (RoomModel mdl : models) {
 				for (LogicalSystem sys : mdl.getSystems()) {
 					hasSystem = true;
-					root.getSystemInstances().add(createLogicalSystemInstance(sys));
+					SystemInstance si = createLogicalSystemInstance(sys);
+					root.getSystemInstances().add(si);
+					root.getSubSystemInstances().addAll(si.getInstances());
 				}
 			}
 			
@@ -433,7 +435,8 @@ public class GeneratorModelBuilder {
 		instance.setLogicalSystem(sys);
 		
 		for (SubSystemRef sr : sys.getSubSystems()) {
-			instance.getInstances().add(createSubSystemInstance(instance, sr));
+			SubSystemInstance ssi = createSubSystemInstance(instance, sr);
+			instance.getInstances().add(ssi);
 		}
 		
 		return instance;
