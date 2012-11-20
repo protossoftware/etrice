@@ -846,7 +846,7 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNodeClass"
-    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:369:1: ruleNodeClass returns [EObject current=null] : (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysThread ) )* otherlv_14= '}' ) ;
+    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:369:1: ruleNodeClass returns [EObject current=null] : (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysicalThread ) )* otherlv_14= '}' ) ;
     public final EObject ruleNodeClass() throws RecognitionException {
         EObject current = null;
 
@@ -872,11 +872,11 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:372:28: ( (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysThread ) )* otherlv_14= '}' ) )
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:1: (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysThread ) )* otherlv_14= '}' )
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:372:28: ( (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysicalThread ) )* otherlv_14= '}' ) )
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:1: (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysicalThread ) )* otherlv_14= '}' )
             {
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:1: (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysThread ) )* otherlv_14= '}' )
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:3: otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysThread ) )* otherlv_14= '}'
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:1: (otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysicalThread ) )* otherlv_14= '}' )
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:373:3: otherlv_0= 'NodeClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'runtime' otherlv_5= '=' ( ( ruleFQN ) ) otherlv_7= 'priomin' otherlv_8= '=' ( (lv_priomin_9_0= rulePRIO ) ) otherlv_10= 'priomax' otherlv_11= '=' ( (lv_priomax_12_0= rulePRIO ) ) ( (lv_threads_13_0= rulePhysicalThread ) )* otherlv_14= '}'
             {
             otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleNodeClass685); 
 
@@ -1068,7 +1068,7 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:492:2: ( (lv_threads_13_0= rulePhysThread ) )*
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:492:2: ( (lv_threads_13_0= rulePhysicalThread ) )*
             loop7:
             do {
                 int alt7=2;
@@ -1081,16 +1081,16 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:493:1: (lv_threads_13_0= rulePhysThread )
+            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:493:1: (lv_threads_13_0= rulePhysicalThread )
             	    {
-            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:493:1: (lv_threads_13_0= rulePhysThread )
-            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:494:3: lv_threads_13_0= rulePhysThread
+            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:493:1: (lv_threads_13_0= rulePhysicalThread )
+            	    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:494:3: lv_threads_13_0= rulePhysicalThread
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getNodeClassAccess().getThreadsPhysThreadParserRuleCall_13_0()); 
+            	    	        newCompositeNode(grammarAccess.getNodeClassAccess().getThreadsPhysicalThreadParserRuleCall_13_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePhysThread_in_ruleNodeClass899);
-            	    lv_threads_13_0=rulePhysThread();
+            	    pushFollow(FOLLOW_rulePhysicalThread_in_ruleNodeClass899);
+            	    lv_threads_13_0=rulePhysicalThread();
 
             	    state._fsp--;
 
@@ -1102,7 +1102,7 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"threads",
             	            		lv_threads_13_0, 
-            	            		"PhysThread");
+            	            		"PhysicalThread");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1141,26 +1141,26 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleNodeClass"
 
 
-    // $ANTLR start "entryRulePhysThread"
-    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:522:1: entryRulePhysThread returns [EObject current=null] : iv_rulePhysThread= rulePhysThread EOF ;
-    public final EObject entryRulePhysThread() throws RecognitionException {
+    // $ANTLR start "entryRulePhysicalThread"
+    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:522:1: entryRulePhysicalThread returns [EObject current=null] : iv_rulePhysicalThread= rulePhysicalThread EOF ;
+    public final EObject entryRulePhysicalThread() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_rulePhysThread = null;
+        EObject iv_rulePhysicalThread = null;
 
 
         try {
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:523:2: (iv_rulePhysThread= rulePhysThread EOF )
-            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:524:2: iv_rulePhysThread= rulePhysThread EOF
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:523:2: (iv_rulePhysicalThread= rulePhysicalThread EOF )
+            // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:524:2: iv_rulePhysicalThread= rulePhysicalThread EOF
             {
-             newCompositeNode(grammarAccess.getPhysThreadRule()); 
-            pushFollow(FOLLOW_rulePhysThread_in_entryRulePhysThread948);
-            iv_rulePhysThread=rulePhysThread();
+             newCompositeNode(grammarAccess.getPhysicalThreadRule()); 
+            pushFollow(FOLLOW_rulePhysicalThread_in_entryRulePhysicalThread948);
+            iv_rulePhysicalThread=rulePhysicalThread();
 
             state._fsp--;
 
-             current =iv_rulePhysThread; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePhysThread958); 
+             current =iv_rulePhysicalThread; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePhysicalThread958); 
 
             }
 
@@ -1174,12 +1174,12 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRulePhysThread"
+    // $ANTLR end "entryRulePhysicalThread"
 
 
-    // $ANTLR start "rulePhysThread"
-    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:531:1: rulePhysThread returns [EObject current=null] : ( ( ( (lv_default_0_0= 'DefaultThread' ) ) | otherlv_1= 'Thread' ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= 'execmode' otherlv_5= '=' ( (lv_execmode_6_0= ruleExecMode ) ) otherlv_7= 'prio' otherlv_8= '=' ( (lv_prio_9_0= rulePRIO ) ) otherlv_10= 'stacksize' otherlv_11= '=' ( (lv_stacksize_12_0= RULE_INT ) ) otherlv_13= 'msgblocksize' otherlv_14= '=' ( (lv_msgblocksize_15_0= RULE_INT ) ) otherlv_16= 'msgpoolsize' otherlv_17= '=' ( (lv_msgpoolsize_18_0= RULE_INT ) ) otherlv_19= '}' ) ;
-    public final EObject rulePhysThread() throws RecognitionException {
+    // $ANTLR start "rulePhysicalThread"
+    // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:531:1: rulePhysicalThread returns [EObject current=null] : ( ( ( (lv_default_0_0= 'DefaultThread' ) ) | otherlv_1= 'Thread' ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= 'execmode' otherlv_5= '=' ( (lv_execmode_6_0= ruleExecMode ) ) otherlv_7= 'prio' otherlv_8= '=' ( (lv_prio_9_0= rulePRIO ) ) otherlv_10= 'stacksize' otherlv_11= '=' ( (lv_stacksize_12_0= RULE_INT ) ) otherlv_13= 'msgblocksize' otherlv_14= '=' ( (lv_msgblocksize_15_0= RULE_INT ) ) otherlv_16= 'msgpoolsize' otherlv_17= '=' ( (lv_msgpoolsize_18_0= RULE_INT ) ) otherlv_19= '}' ) ;
+    public final EObject rulePhysicalThread() throws RecognitionException {
         EObject current = null;
 
         Token lv_default_0_0=null;
@@ -1240,13 +1240,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:536:1: (lv_default_0_0= 'DefaultThread' )
                     // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:537:3: lv_default_0_0= 'DefaultThread'
                     {
-                    lv_default_0_0=(Token)match(input,22,FOLLOW_22_in_rulePhysThread1002); 
+                    lv_default_0_0=(Token)match(input,22,FOLLOW_22_in_rulePhysicalThread1002); 
 
-                            newLeafNode(lv_default_0_0, grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0());
+                            newLeafNode(lv_default_0_0, grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0());
                         
 
                     	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getPhysThreadRule());
+                    	            current = createModelElement(grammarAccess.getPhysicalThreadRule());
                     	        }
                            		setWithLastConsumed(current, "default", true, "DefaultThread");
                     	    
@@ -1262,9 +1262,9 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:551:7: otherlv_1= 'Thread'
                     {
-                    otherlv_1=(Token)match(input,23,FOLLOW_23_in_rulePhysThread1033); 
+                    otherlv_1=(Token)match(input,23,FOLLOW_23_in_rulePhysicalThread1033); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getPhysThreadAccess().getThreadKeyword_0_1());
+                        	newLeafNode(otherlv_1, grammarAccess.getPhysicalThreadAccess().getThreadKeyword_0_1());
                         
 
                     }
@@ -1278,13 +1278,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:556:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:557:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePhysThread1051); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePhysicalThread1051); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getPhysThreadAccess().getNameIDTerminalRuleCall_1_0()); 
+            			newLeafNode(lv_name_2_0, grammarAccess.getPhysicalThreadAccess().getNameIDTerminalRuleCall_1_0()); 
             		
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPhysThreadRule());
+            	            current = createModelElement(grammarAccess.getPhysicalThreadRule());
             	        }
                    		setWithLastConsumed(
                    			current, 
@@ -1298,17 +1298,17 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,12,FOLLOW_12_in_rulePhysThread1068); 
+            otherlv_3=(Token)match(input,12,FOLLOW_12_in_rulePhysicalThread1068); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getPhysThreadAccess().getLeftCurlyBracketKeyword_2());
+                	newLeafNode(otherlv_3, grammarAccess.getPhysicalThreadAccess().getLeftCurlyBracketKeyword_2());
                 
-            otherlv_4=(Token)match(input,24,FOLLOW_24_in_rulePhysThread1080); 
+            otherlv_4=(Token)match(input,24,FOLLOW_24_in_rulePhysicalThread1080); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getPhysThreadAccess().getExecmodeKeyword_3());
+                	newLeafNode(otherlv_4, grammarAccess.getPhysicalThreadAccess().getExecmodeKeyword_3());
                 
-            otherlv_5=(Token)match(input,19,FOLLOW_19_in_rulePhysThread1092); 
+            otherlv_5=(Token)match(input,19,FOLLOW_19_in_rulePhysicalThread1092); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_4());
+                	newLeafNode(otherlv_5, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_4());
                 
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:585:1: ( (lv_execmode_6_0= ruleExecMode ) )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:586:1: (lv_execmode_6_0= ruleExecMode )
@@ -1317,16 +1317,16 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:587:3: lv_execmode_6_0= ruleExecMode
             {
              
-            	        newCompositeNode(grammarAccess.getPhysThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
+            	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleExecMode_in_rulePhysThread1113);
+            pushFollow(FOLLOW_ruleExecMode_in_rulePhysicalThread1113);
             lv_execmode_6_0=ruleExecMode();
 
             state._fsp--;
 
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getPhysThreadRule());
+            	            current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
             	        }
                    		set(
                    			current, 
@@ -1341,13 +1341,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,25,FOLLOW_25_in_rulePhysThread1125); 
+            otherlv_7=(Token)match(input,25,FOLLOW_25_in_rulePhysicalThread1125); 
 
-                	newLeafNode(otherlv_7, grammarAccess.getPhysThreadAccess().getPrioKeyword_6());
+                	newLeafNode(otherlv_7, grammarAccess.getPhysicalThreadAccess().getPrioKeyword_6());
                 
-            otherlv_8=(Token)match(input,19,FOLLOW_19_in_rulePhysThread1137); 
+            otherlv_8=(Token)match(input,19,FOLLOW_19_in_rulePhysicalThread1137); 
 
-                	newLeafNode(otherlv_8, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_7());
+                	newLeafNode(otherlv_8, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_7());
                 
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:611:1: ( (lv_prio_9_0= rulePRIO ) )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:612:1: (lv_prio_9_0= rulePRIO )
@@ -1356,16 +1356,16 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:613:3: lv_prio_9_0= rulePRIO
             {
              
-            	        newCompositeNode(grammarAccess.getPhysThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
+            	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
             	    
-            pushFollow(FOLLOW_rulePRIO_in_rulePhysThread1158);
+            pushFollow(FOLLOW_rulePRIO_in_rulePhysicalThread1158);
             lv_prio_9_0=rulePRIO();
 
             state._fsp--;
 
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getPhysThreadRule());
+            	            current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
             	        }
                    		set(
                    			current, 
@@ -1380,13 +1380,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_10=(Token)match(input,26,FOLLOW_26_in_rulePhysThread1170); 
+            otherlv_10=(Token)match(input,26,FOLLOW_26_in_rulePhysicalThread1170); 
 
-                	newLeafNode(otherlv_10, grammarAccess.getPhysThreadAccess().getStacksizeKeyword_9());
+                	newLeafNode(otherlv_10, grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_9());
                 
-            otherlv_11=(Token)match(input,19,FOLLOW_19_in_rulePhysThread1182); 
+            otherlv_11=(Token)match(input,19,FOLLOW_19_in_rulePhysicalThread1182); 
 
-                	newLeafNode(otherlv_11, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_10());
+                	newLeafNode(otherlv_11, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_10());
                 
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:637:1: ( (lv_stacksize_12_0= RULE_INT ) )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:638:1: (lv_stacksize_12_0= RULE_INT )
@@ -1394,13 +1394,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:638:1: (lv_stacksize_12_0= RULE_INT )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:639:3: lv_stacksize_12_0= RULE_INT
             {
-            lv_stacksize_12_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysThread1199); 
+            lv_stacksize_12_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysicalThread1199); 
 
-            			newLeafNode(lv_stacksize_12_0, grammarAccess.getPhysThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
+            			newLeafNode(lv_stacksize_12_0, grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
             		
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPhysThreadRule());
+            	            current = createModelElement(grammarAccess.getPhysicalThreadRule());
             	        }
                    		setWithLastConsumed(
                    			current, 
@@ -1414,13 +1414,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_13=(Token)match(input,27,FOLLOW_27_in_rulePhysThread1216); 
+            otherlv_13=(Token)match(input,27,FOLLOW_27_in_rulePhysicalThread1216); 
 
-                	newLeafNode(otherlv_13, grammarAccess.getPhysThreadAccess().getMsgblocksizeKeyword_12());
+                	newLeafNode(otherlv_13, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_12());
                 
-            otherlv_14=(Token)match(input,19,FOLLOW_19_in_rulePhysThread1228); 
+            otherlv_14=(Token)match(input,19,FOLLOW_19_in_rulePhysicalThread1228); 
 
-                	newLeafNode(otherlv_14, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_13());
+                	newLeafNode(otherlv_14, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_13());
                 
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:663:1: ( (lv_msgblocksize_15_0= RULE_INT ) )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:664:1: (lv_msgblocksize_15_0= RULE_INT )
@@ -1428,13 +1428,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:664:1: (lv_msgblocksize_15_0= RULE_INT )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:665:3: lv_msgblocksize_15_0= RULE_INT
             {
-            lv_msgblocksize_15_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysThread1245); 
+            lv_msgblocksize_15_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysicalThread1245); 
 
-            			newLeafNode(lv_msgblocksize_15_0, grammarAccess.getPhysThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
+            			newLeafNode(lv_msgblocksize_15_0, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
             		
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPhysThreadRule());
+            	            current = createModelElement(grammarAccess.getPhysicalThreadRule());
             	        }
                    		setWithLastConsumed(
                    			current, 
@@ -1448,13 +1448,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_16=(Token)match(input,28,FOLLOW_28_in_rulePhysThread1262); 
+            otherlv_16=(Token)match(input,28,FOLLOW_28_in_rulePhysicalThread1262); 
 
-                	newLeafNode(otherlv_16, grammarAccess.getPhysThreadAccess().getMsgpoolsizeKeyword_15());
+                	newLeafNode(otherlv_16, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_15());
                 
-            otherlv_17=(Token)match(input,19,FOLLOW_19_in_rulePhysThread1274); 
+            otherlv_17=(Token)match(input,19,FOLLOW_19_in_rulePhysicalThread1274); 
 
-                	newLeafNode(otherlv_17, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_16());
+                	newLeafNode(otherlv_17, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_16());
                 
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:689:1: ( (lv_msgpoolsize_18_0= RULE_INT ) )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:690:1: (lv_msgpoolsize_18_0= RULE_INT )
@@ -1462,13 +1462,13 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:690:1: (lv_msgpoolsize_18_0= RULE_INT )
             // ../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/parser/antlr/internal/InternalETPhys.g:691:3: lv_msgpoolsize_18_0= RULE_INT
             {
-            lv_msgpoolsize_18_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysThread1291); 
+            lv_msgpoolsize_18_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_rulePhysicalThread1291); 
 
-            			newLeafNode(lv_msgpoolsize_18_0, grammarAccess.getPhysThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
+            			newLeafNode(lv_msgpoolsize_18_0, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
             		
 
             	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPhysThreadRule());
+            	            current = createModelElement(grammarAccess.getPhysicalThreadRule());
             	        }
                    		setWithLastConsumed(
                    			current, 
@@ -1482,9 +1482,9 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_19=(Token)match(input,13,FOLLOW_13_in_rulePhysThread1308); 
+            otherlv_19=(Token)match(input,13,FOLLOW_13_in_rulePhysicalThread1308); 
 
-                	newLeafNode(otherlv_19, grammarAccess.getPhysThreadAccess().getRightCurlyBracketKeyword_18());
+                	newLeafNode(otherlv_19, grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_18());
                 
 
             }
@@ -1503,7 +1503,7 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePhysThread"
+    // $ANTLR end "rulePhysicalThread"
 
 
     // $ANTLR start "entryRuleRuntimeClass"
@@ -2613,30 +2613,30 @@ public class InternalETPhysParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_21_in_ruleNodeClass845 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_19_in_ruleNodeClass857 = new BitSet(new long[]{0x0000000600000020L});
     public static final BitSet FOLLOW_rulePRIO_in_ruleNodeClass878 = new BitSet(new long[]{0x0000000000C02000L});
-    public static final BitSet FOLLOW_rulePhysThread_in_ruleNodeClass899 = new BitSet(new long[]{0x0000000000C02000L});
+    public static final BitSet FOLLOW_rulePhysicalThread_in_ruleNodeClass899 = new BitSet(new long[]{0x0000000000C02000L});
     public static final BitSet FOLLOW_13_in_ruleNodeClass912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePhysThread_in_entryRulePhysThread948 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePhysThread958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rulePhysThread1002 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_23_in_rulePhysThread1033 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulePhysThread1051 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_rulePhysThread1068 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_rulePhysThread1080 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePhysThread1092 = new BitSet(new long[]{0x0000038000000000L});
-    public static final BitSet FOLLOW_ruleExecMode_in_rulePhysThread1113 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_rulePhysThread1125 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePhysThread1137 = new BitSet(new long[]{0x0000000600000020L});
-    public static final BitSet FOLLOW_rulePRIO_in_rulePhysThread1158 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_rulePhysThread1170 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePhysThread1182 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_rulePhysThread1199 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_rulePhysThread1216 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePhysThread1228 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_rulePhysThread1245 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_rulePhysThread1262 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePhysThread1274 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_rulePhysThread1291 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_rulePhysThread1308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePhysicalThread_in_entryRulePhysicalThread948 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePhysicalThread958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rulePhysicalThread1002 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_23_in_rulePhysicalThread1033 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePhysicalThread1051 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_rulePhysicalThread1068 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_rulePhysicalThread1080 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_rulePhysicalThread1092 = new BitSet(new long[]{0x0000038000000000L});
+    public static final BitSet FOLLOW_ruleExecMode_in_rulePhysicalThread1113 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_rulePhysicalThread1125 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_rulePhysicalThread1137 = new BitSet(new long[]{0x0000000600000020L});
+    public static final BitSet FOLLOW_rulePRIO_in_rulePhysicalThread1158 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_26_in_rulePhysicalThread1170 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_rulePhysicalThread1182 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_rulePhysicalThread1199 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_rulePhysicalThread1216 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_rulePhysicalThread1228 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_rulePhysicalThread1245 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_rulePhysicalThread1262 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_rulePhysicalThread1274 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_rulePhysicalThread1291 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_rulePhysicalThread1308 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRuntimeClass_in_entryRuleRuntimeClass1344 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRuntimeClass1354 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_29_in_ruleRuntimeClass1391 = new BitSet(new long[]{0x0000000000000010L});

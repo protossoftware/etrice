@@ -8,9 +8,9 @@ import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.Import;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 import org.eclipse.etrice.core.etphys.services.ETPhysGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -53,12 +53,6 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
-			case ETPhysPackage.PHYS_THREAD:
-				if(context == grammarAccess.getPhysThreadRule()) {
-					sequence_PhysThread(context, (PhysThread) semanticObject); 
-					return; 
-				}
-				else break;
 			case ETPhysPackage.PHYSICAL_MODEL:
 				if(context == grammarAccess.getPhysicalModelRule()) {
 					sequence_PhysicalModel(context, (PhysicalModel) semanticObject); 
@@ -68,6 +62,12 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case ETPhysPackage.PHYSICAL_SYSTEM:
 				if(context == grammarAccess.getPhysicalSystemRule()) {
 					sequence_PhysicalSystem(context, (PhysicalSystem) semanticObject); 
+					return; 
+				}
+				else break;
+			case ETPhysPackage.PHYSICAL_THREAD:
+				if(context == grammarAccess.getPhysicalThreadRule()) {
+					sequence_PhysicalThread(context, (PhysicalThread) semanticObject); 
 					return; 
 				}
 				else break;
@@ -107,7 +107,7 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *         runtime=[RuntimeClass|FQN] 
 	 *         priomin=PRIO 
 	 *         priomax=PRIO 
-	 *         threads+=PhysThread*
+	 *         threads+=PhysicalThread*
 	 *     )
 	 */
 	protected void sequence_NodeClass(EObject context, NodeClass semanticObject) {
@@ -126,23 +126,6 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         default?='DefaultThread'? 
-	 *         name=ID 
-	 *         execmode=ExecMode 
-	 *         prio=PRIO 
-	 *         stacksize=INT 
-	 *         msgblocksize=INT 
-	 *         msgpoolsize=INT
-	 *     )
-	 */
-	protected void sequence_PhysThread(EObject context, PhysThread semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (name=FQN imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass | runtimeClasses+=RuntimeClass)*)
 	 */
 	protected void sequence_PhysicalModel(EObject context, PhysicalModel semanticObject) {
@@ -155,6 +138,23 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     (name=ID docu=Documentation? nodeRefs+=NodeRef*)
 	 */
 	protected void sequence_PhysicalSystem(EObject context, PhysicalSystem semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         default?='DefaultThread'? 
+	 *         name=ID 
+	 *         execmode=ExecMode 
+	 *         prio=PRIO 
+	 *         stacksize=INT 
+	 *         msgblocksize=INT 
+	 *         msgpoolsize=INT
+	 *     )
+	 */
+	protected void sequence_PhysicalThread(EObject context, PhysicalThread semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

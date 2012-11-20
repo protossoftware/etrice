@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 
 /**
@@ -132,7 +132,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected EList<PhysThread> threads;
+  protected EList<PhysicalThread> threads;
 
   /**
    * <!-- begin-user-doc -->
@@ -320,11 +320,11 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PhysThread> getThreads()
+  public EList<PhysicalThread> getThreads()
   {
     if (threads == null)
     {
-      threads = new EObjectContainmentEList<PhysThread>(PhysThread.class, this, ETPhysPackage.NODE_CLASS__THREADS);
+      threads = new EObjectContainmentEList<PhysicalThread>(PhysicalThread.class, this, ETPhysPackage.NODE_CLASS__THREADS);
     }
     return threads;
   }
@@ -402,7 +402,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
         return;
       case ETPhysPackage.NODE_CLASS__THREADS:
         getThreads().clear();
-        getThreads().addAll((Collection<? extends PhysThread>)newValue);
+        getThreads().addAll((Collection<? extends PhysicalThread>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

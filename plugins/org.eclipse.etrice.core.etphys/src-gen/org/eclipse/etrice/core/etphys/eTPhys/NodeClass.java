@@ -161,7 +161,7 @@ public interface NodeClass extends EObject
 
   /**
    * Returns the value of the '<em><b>Threads</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread}.
+   * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Threads</em>' containment reference list isn't clear,
@@ -173,6 +173,6 @@ public interface NodeClass extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<PhysThread> getThreads();
+  EList<PhysicalThread> getThreads();
 
 } // NodeClass

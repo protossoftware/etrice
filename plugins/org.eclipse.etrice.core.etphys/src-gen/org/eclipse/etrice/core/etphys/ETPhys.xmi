@@ -115,9 +115,9 @@
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="PhysThread">
+    <rules xsi:type="xtext:ParserRule" name="PhysicalThread">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysThread"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/etphys/ETPhys#//PhysicalThread"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Alternatives">

@@ -17,9 +17,9 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.Import;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
 
@@ -64,7 +64,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass physThreadEClass = null;
+  private EClass physicalThreadEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -379,9 +379,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPhysThread()
+  public EClass getPhysicalThread()
   {
-    return physThreadEClass;
+    return physicalThreadEClass;
   }
 
   /**
@@ -389,9 +389,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Default()
+  public EAttribute getPhysicalThread_Default()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -399,9 +399,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Name()
+  public EAttribute getPhysicalThread_Name()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -409,9 +409,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Execmode()
+  public EAttribute getPhysicalThread_Execmode()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -419,9 +419,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Prio()
+  public EAttribute getPhysicalThread_Prio()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -429,9 +429,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Stacksize()
+  public EAttribute getPhysicalThread_Stacksize()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -439,9 +439,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Msgblocksize()
+  public EAttribute getPhysicalThread_Msgblocksize()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -449,9 +449,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysThread_Msgpoolsize()
+  public EAttribute getPhysicalThread_Msgpoolsize()
   {
-    return (EAttribute)physThreadEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -619,14 +619,14 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     createEAttribute(nodeClassEClass, NODE_CLASS__PRIOMAX);
     createEReference(nodeClassEClass, NODE_CLASS__THREADS);
 
-    physThreadEClass = createEClass(PHYS_THREAD);
-    createEAttribute(physThreadEClass, PHYS_THREAD__DEFAULT);
-    createEAttribute(physThreadEClass, PHYS_THREAD__NAME);
-    createEAttribute(physThreadEClass, PHYS_THREAD__EXECMODE);
-    createEAttribute(physThreadEClass, PHYS_THREAD__PRIO);
-    createEAttribute(physThreadEClass, PHYS_THREAD__STACKSIZE);
-    createEAttribute(physThreadEClass, PHYS_THREAD__MSGBLOCKSIZE);
-    createEAttribute(physThreadEClass, PHYS_THREAD__MSGPOOLSIZE);
+    physicalThreadEClass = createEClass(PHYSICAL_THREAD);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__DEFAULT);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__NAME);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__EXECMODE);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__PRIO);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__STACKSIZE);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__MSGBLOCKSIZE);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__MSGPOOLSIZE);
 
     runtimeClassEClass = createEClass(RUNTIME_CLASS);
     createEAttribute(runtimeClassEClass, RUNTIME_CLASS__NAME);
@@ -699,16 +699,16 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     initEReference(getNodeClass_Runtime(), this.getRuntimeClass(), null, "runtime", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getNodeClass_Priomin(), ecorePackage.getEInt(), "priomin", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getNodeClass_Priomax(), ecorePackage.getEInt(), "priomax", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNodeClass_Threads(), this.getPhysThread(), null, "threads", null, 0, -1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNodeClass_Threads(), this.getPhysicalThread(), null, "threads", null, 0, -1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(physThreadEClass, PhysThread.class, "PhysThread", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPhysThread_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Name(), ecorePackage.getEString(), "name", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Execmode(), this.getExecMode(), "execmode", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Prio(), ecorePackage.getEInt(), "prio", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Stacksize(), ecorePackage.getEInt(), "stacksize", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Msgblocksize(), ecorePackage.getEInt(), "msgblocksize", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPhysThread_Msgpoolsize(), ecorePackage.getEInt(), "msgpoolsize", null, 0, 1, PhysThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(physicalThreadEClass, PhysicalThread.class, "PhysicalThread", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPhysicalThread_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Name(), ecorePackage.getEString(), "name", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Execmode(), this.getExecMode(), "execmode", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Prio(), ecorePackage.getEInt(), "prio", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Stacksize(), ecorePackage.getEInt(), "stacksize", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Msgblocksize(), ecorePackage.getEInt(), "msgblocksize", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Msgpoolsize(), ecorePackage.getEInt(), "msgpoolsize", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(runtimeClassEClass, RuntimeClass.class, "RuntimeClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRuntimeClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, RuntimeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

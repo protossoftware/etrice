@@ -95,9 +95,9 @@ public class ETPhysAdapterFactory extends AdapterFactoryImpl
         return createNodeClassAdapter();
       }
       @Override
-      public Adapter casePhysThread(PhysThread object)
+      public Adapter casePhysicalThread(PhysicalThread object)
       {
-        return createPhysThreadAdapter();
+        return createPhysicalThreadAdapter();
       }
       @Override
       public Adapter caseRuntimeClass(RuntimeClass object)
@@ -197,16 +197,16 @@ public class ETPhysAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread <em>Phys Thread</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread <em>Physical Thread</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysThread
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
    * @generated
    */
-  public Adapter createPhysThreadAdapter()
+  public Adapter createPhysicalThreadAdapter()
   {
     return null;
   }

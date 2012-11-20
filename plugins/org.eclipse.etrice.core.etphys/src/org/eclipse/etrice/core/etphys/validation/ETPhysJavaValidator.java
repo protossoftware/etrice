@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.etphys.validation;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
 import org.eclipse.xtext.validation.Check;
  
@@ -22,14 +22,14 @@ import org.eclipse.xtext.validation.Check;
 public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 
 	@Check
-	public void checkThread(PhysThread thread) {
+	public void checkThread(PhysicalThread thread) {
 		NodeClass nc = (NodeClass) thread.eContainer();
 		
 		if (thread.getPrio()<nc.getPriomin())
-			error("prio less than minimum", ETPhysPackage.Literals.PHYS_THREAD__PRIO);
+			error("prio less than minimum", ETPhysPackage.Literals.PHYSICAL_THREAD__PRIO);
 		
 		if (thread.getPrio()>nc.getPriomax())
-			error("prio greater than maximum", ETPhysPackage.Literals.PHYS_THREAD__PRIO);
+			error("prio greater than maximum", ETPhysPackage.Literals.PHYSICAL_THREAD__PRIO);
 	}
 	
 	@Check
@@ -37,7 +37,7 @@ public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 		{
 			// make sure there is one and only one DefaultThread
 			boolean hasDefault = false;
-			for (PhysThread thread : nc.getThreads()) {
+			for (PhysicalThread thread : nc.getThreads()) {
 				if (thread.isDefault())
 					if (hasDefault) {
 						int idx = nc.getThreads().indexOf(thread);

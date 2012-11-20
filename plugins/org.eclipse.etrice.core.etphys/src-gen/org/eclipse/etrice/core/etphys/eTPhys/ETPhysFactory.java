@@ -59,13 +59,13 @@ public interface ETPhysFactory extends EFactory
   NodeClass createNodeClass();
 
   /**
-   * Returns a new object of class '<em>Phys Thread</em>'.
+   * Returns a new object of class '<em>Physical Thread</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Phys Thread</em>'.
+   * @return a new object of class '<em>Physical Thread</em>'.
    * @generated
    */
-  PhysThread createPhysThread();
+  PhysicalThread createPhysicalThread();
 
   /**
    * Returns a new object of class '<em>Runtime Class</em>'.

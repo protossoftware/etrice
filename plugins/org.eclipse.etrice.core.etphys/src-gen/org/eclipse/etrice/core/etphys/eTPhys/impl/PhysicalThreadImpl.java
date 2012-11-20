@@ -11,28 +11,28 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysThread;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Phys Thread</b></em>'.
+ * An implementation of the model object '<em><b>Physical Thread</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getExecmode <em>Execmode</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getPrio <em>Prio</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getStacksize <em>Stacksize</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getMsgblocksize <em>Msgblocksize</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysThreadImpl#getMsgpoolsize <em>Msgpoolsize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getExecmode <em>Execmode</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getPrio <em>Prio</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getStacksize <em>Stacksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getMsgblocksize <em>Msgblocksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getMsgpoolsize <em>Msgpoolsize</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PhysThreadImpl extends MinimalEObjectImpl.Container implements PhysThread
+public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements PhysicalThread
 {
   /**
    * The default value of the '{@link #isDefault() <em>Default</em>}' attribute.
@@ -179,7 +179,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PhysThreadImpl()
+  protected PhysicalThreadImpl()
   {
     super();
   }
@@ -192,7 +192,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
   @Override
   protected EClass eStaticClass()
   {
-    return ETPhysPackage.Literals.PHYS_THREAD;
+    return ETPhysPackage.Literals.PHYSICAL_THREAD;
   }
 
   /**
@@ -215,7 +215,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     boolean oldDefault = default_;
     default_ = newDefault;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__DEFAULT, oldDefault, default_));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__DEFAULT, oldDefault, default_));
   }
 
   /**
@@ -238,7 +238,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__NAME, oldName, name));
   }
 
   /**
@@ -261,7 +261,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     ExecMode oldExecmode = execmode;
     execmode = newExecmode == null ? EXECMODE_EDEFAULT : newExecmode;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__EXECMODE, oldExecmode, execmode));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__EXECMODE, oldExecmode, execmode));
   }
 
   /**
@@ -284,7 +284,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     int oldPrio = prio;
     prio = newPrio;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__PRIO, oldPrio, prio));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__PRIO, oldPrio, prio));
   }
 
   /**
@@ -307,7 +307,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     int oldStacksize = stacksize;
     stacksize = newStacksize;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__STACKSIZE, oldStacksize, stacksize));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__STACKSIZE, oldStacksize, stacksize));
   }
 
   /**
@@ -330,7 +330,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     int oldMsgblocksize = msgblocksize;
     msgblocksize = newMsgblocksize;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE, oldMsgblocksize, msgblocksize));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__MSGBLOCKSIZE, oldMsgblocksize, msgblocksize));
   }
 
   /**
@@ -353,7 +353,7 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     int oldMsgpoolsize = msgpoolsize;
     msgpoolsize = newMsgpoolsize;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE, oldMsgpoolsize, msgpoolsize));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__MSGPOOLSIZE, oldMsgpoolsize, msgpoolsize));
   }
 
   /**
@@ -366,19 +366,19 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
   {
     switch (featureID)
     {
-      case ETPhysPackage.PHYS_THREAD__DEFAULT:
+      case ETPhysPackage.PHYSICAL_THREAD__DEFAULT:
         return isDefault();
-      case ETPhysPackage.PHYS_THREAD__NAME:
+      case ETPhysPackage.PHYSICAL_THREAD__NAME:
         return getName();
-      case ETPhysPackage.PHYS_THREAD__EXECMODE:
+      case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         return getExecmode();
-      case ETPhysPackage.PHYS_THREAD__PRIO:
+      case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         return getPrio();
-      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
         return getStacksize();
-      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGBLOCKSIZE:
         return getMsgblocksize();
-      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGPOOLSIZE:
         return getMsgpoolsize();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -394,25 +394,25 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
   {
     switch (featureID)
     {
-      case ETPhysPackage.PHYS_THREAD__DEFAULT:
+      case ETPhysPackage.PHYSICAL_THREAD__DEFAULT:
         setDefault((Boolean)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__NAME:
+      case ETPhysPackage.PHYSICAL_THREAD__NAME:
         setName((String)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__EXECMODE:
+      case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         setExecmode((ExecMode)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__PRIO:
+      case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio((Integer)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
         setStacksize((Integer)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGBLOCKSIZE:
         setMsgblocksize((Integer)newValue);
         return;
-      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGPOOLSIZE:
         setMsgpoolsize((Integer)newValue);
         return;
     }
@@ -429,25 +429,25 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
   {
     switch (featureID)
     {
-      case ETPhysPackage.PHYS_THREAD__DEFAULT:
+      case ETPhysPackage.PHYSICAL_THREAD__DEFAULT:
         setDefault(DEFAULT_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__NAME:
+      case ETPhysPackage.PHYSICAL_THREAD__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__EXECMODE:
+      case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         setExecmode(EXECMODE_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__PRIO:
+      case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio(PRIO_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
         setStacksize(STACKSIZE_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGBLOCKSIZE:
         setMsgblocksize(MSGBLOCKSIZE_EDEFAULT);
         return;
-      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGPOOLSIZE:
         setMsgpoolsize(MSGPOOLSIZE_EDEFAULT);
         return;
     }
@@ -464,19 +464,19 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
   {
     switch (featureID)
     {
-      case ETPhysPackage.PHYS_THREAD__DEFAULT:
+      case ETPhysPackage.PHYSICAL_THREAD__DEFAULT:
         return default_ != DEFAULT_EDEFAULT;
-      case ETPhysPackage.PHYS_THREAD__NAME:
+      case ETPhysPackage.PHYSICAL_THREAD__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case ETPhysPackage.PHYS_THREAD__EXECMODE:
+      case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         return execmode != EXECMODE_EDEFAULT;
-      case ETPhysPackage.PHYS_THREAD__PRIO:
+      case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         return prio != PRIO_EDEFAULT;
-      case ETPhysPackage.PHYS_THREAD__STACKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
         return stacksize != STACKSIZE_EDEFAULT;
-      case ETPhysPackage.PHYS_THREAD__MSGBLOCKSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGBLOCKSIZE:
         return msgblocksize != MSGBLOCKSIZE_EDEFAULT;
-      case ETPhysPackage.PHYS_THREAD__MSGPOOLSIZE:
+      case ETPhysPackage.PHYSICAL_THREAD__MSGPOOLSIZE:
         return msgpoolsize != MSGPOOLSIZE_EDEFAULT;
     }
     return super.eIsSet(featureID);
@@ -511,4 +511,4 @@ public class PhysThreadImpl extends MinimalEObjectImpl.Container implements Phys
     return result.toString();
   }
 
-} //PhysThreadImpl
+} //PhysicalThreadImpl

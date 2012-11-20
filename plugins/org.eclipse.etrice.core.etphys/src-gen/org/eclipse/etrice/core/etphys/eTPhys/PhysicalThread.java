@@ -6,27 +6,27 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Phys Thread</b></em>'.
+ * A representation of the model object '<em><b>Physical Thread</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getExecmode <em>Execmode</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getPrio <em>Prio</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getStacksize <em>Stacksize</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgblocksize <em>Msgblocksize</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgpoolsize <em>Msgpoolsize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#isDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getExecmode <em>Execmode</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getPrio <em>Prio</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getStacksize <em>Stacksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getMsgblocksize <em>Msgblocksize</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getMsgpoolsize <em>Msgpoolsize</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread()
+ * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread()
  * @model
  * @generated
  */
-public interface PhysThread extends EObject
+public interface PhysicalThread extends EObject
 {
   /**
    * Returns the value of the '<em><b>Default</b></em>' attribute.
@@ -38,14 +38,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Default</em>' attribute.
    * @see #setDefault(boolean)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Default()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Default()
    * @model
    * @generated
    */
   boolean isDefault();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#isDefault <em>Default</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#isDefault <em>Default</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Default</em>' attribute.
@@ -64,14 +64,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Name()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -92,14 +92,14 @@ public interface PhysThread extends EObject
    * @return the value of the '<em>Execmode</em>' attribute.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ExecMode
    * @see #setExecmode(ExecMode)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Execmode()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Execmode()
    * @model
    * @generated
    */
   ExecMode getExecmode();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getExecmode <em>Execmode</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getExecmode <em>Execmode</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Execmode</em>' attribute.
@@ -119,14 +119,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Prio</em>' attribute.
    * @see #setPrio(int)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Prio()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Prio()
    * @model
    * @generated
    */
   int getPrio();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getPrio <em>Prio</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getPrio <em>Prio</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Prio</em>' attribute.
@@ -145,14 +145,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Stacksize</em>' attribute.
    * @see #setStacksize(int)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Stacksize()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Stacksize()
    * @model
    * @generated
    */
   int getStacksize();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getStacksize <em>Stacksize</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getStacksize <em>Stacksize</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Stacksize</em>' attribute.
@@ -171,14 +171,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Msgblocksize</em>' attribute.
    * @see #setMsgblocksize(int)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Msgblocksize()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Msgblocksize()
    * @model
    * @generated
    */
   int getMsgblocksize();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgblocksize <em>Msgblocksize</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getMsgblocksize <em>Msgblocksize</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Msgblocksize</em>' attribute.
@@ -197,14 +197,14 @@ public interface PhysThread extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Msgpoolsize</em>' attribute.
    * @see #setMsgpoolsize(int)
-   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysThread_Msgpoolsize()
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Msgpoolsize()
    * @model
    * @generated
    */
   int getMsgpoolsize();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysThread#getMsgpoolsize <em>Msgpoolsize</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getMsgpoolsize <em>Msgpoolsize</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Msgpoolsize</em>' attribute.
@@ -213,4 +213,4 @@ public interface PhysThread extends EObject
    */
   void setMsgpoolsize(int value);
 
-} // PhysThread
+} // PhysicalThread

@@ -42,11 +42,11 @@ NodeClass:
 		'runtime' '=' runtime=[RuntimeClass|FQN]
 		'priomin' '=' priomin=PRIO
 		'priomax' '=' priomax=PRIO
-		threads+=PhysThread*
+		threads+=PhysicalThread*
 	'}'
 ;
 
-PhysThread:
+PhysicalThread:
 	(default?='DefaultThread' | 'Thread') name=ID '{'
 		'execmode' '=' execmode=ExecMode
 		'prio' '=' prio=PRIO

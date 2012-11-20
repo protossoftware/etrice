@@ -69,7 +69,7 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
       case ETPhysPackage.PHYSICAL_SYSTEM: return createPhysicalSystem();
       case ETPhysPackage.NODE_REF: return createNodeRef();
       case ETPhysPackage.NODE_CLASS: return createNodeClass();
-      case ETPhysPackage.PHYS_THREAD: return createPhysThread();
+      case ETPhysPackage.PHYSICAL_THREAD: return createPhysicalThread();
       case ETPhysPackage.RUNTIME_CLASS: return createRuntimeClass();
       case ETPhysPackage.DOCUMENTATION: return createDocumentation();
       case ETPhysPackage.IMPORT: return createImport();
@@ -165,10 +165,10 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PhysThread createPhysThread()
+  public PhysicalThread createPhysicalThread()
   {
-    PhysThreadImpl physThread = new PhysThreadImpl();
-    return physThread;
+    PhysicalThreadImpl physicalThread = new PhysicalThreadImpl();
+    return physicalThread;
   }
 
   /**

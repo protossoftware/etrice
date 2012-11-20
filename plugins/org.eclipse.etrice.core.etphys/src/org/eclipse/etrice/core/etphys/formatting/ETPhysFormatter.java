@@ -57,6 +57,6 @@ public class ETPhysFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(2).after(f.getRuntimeClassRule());
 		
 		c.setLinewrap(1).after(f.getNodeRefRule());
-		c.setLinewrap(1).around(f.getPhysThreadRule());
+		c.setLinewrap(1).around(f.getPhysicalThreadRule());
 	}
 }

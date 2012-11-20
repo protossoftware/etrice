@@ -41,14 +41,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//NodeClass/priomax"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ETPhys.ecore#//NodeClass/threads"/>
     </genClasses>
-    <genClasses ecoreClass="ETPhys.ecore#//PhysThread">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/default"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/execmode"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/prio"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/stacksize"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/msgblocksize"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysThread/msgpoolsize"/>
+    <genClasses ecoreClass="ETPhys.ecore#//PhysicalThread">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/execmode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/prio"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/stacksize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/msgblocksize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/msgpoolsize"/>
     </genClasses>
     <genClasses ecoreClass="ETPhys.ecore#//RuntimeClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//RuntimeClass/name"/>

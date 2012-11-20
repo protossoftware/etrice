@@ -213,19 +213,19 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cPriomaxAssignment_12 = (Assignment)cGroup.eContents().get(12);
 		private final RuleCall cPriomaxPRIOParserRuleCall_12_0 = (RuleCall)cPriomaxAssignment_12.eContents().get(0);
 		private final Assignment cThreadsAssignment_13 = (Assignment)cGroup.eContents().get(13);
-		private final RuleCall cThreadsPhysThreadParserRuleCall_13_0 = (RuleCall)cThreadsAssignment_13.eContents().get(0);
+		private final RuleCall cThreadsPhysicalThreadParserRuleCall_13_0 = (RuleCall)cThreadsAssignment_13.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
 		
 		//NodeClass:
 		//
 		//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
 		//
-		//	"priomax" "=" priomax=PRIO threads+=PhysThread* "}";
+		//	"priomax" "=" priomax=PRIO threads+=PhysicalThread* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
 		//
-		//"priomax" "=" priomax=PRIO threads+=PhysThread* "}"
+		//"priomax" "=" priomax=PRIO threads+=PhysicalThread* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"NodeClass"
@@ -285,18 +285,18 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//PRIO
 		public RuleCall getPriomaxPRIOParserRuleCall_12_0() { return cPriomaxPRIOParserRuleCall_12_0; }
 
-		//threads+=PhysThread*
+		//threads+=PhysicalThread*
 		public Assignment getThreadsAssignment_13() { return cThreadsAssignment_13; }
 
-		//PhysThread
-		public RuleCall getThreadsPhysThreadParserRuleCall_13_0() { return cThreadsPhysThreadParserRuleCall_13_0; }
+		//PhysicalThread
+		public RuleCall getThreadsPhysicalThreadParserRuleCall_13_0() { return cThreadsPhysicalThreadParserRuleCall_13_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_14() { return cRightCurlyBracketKeyword_14; }
 	}
 
-	public class PhysThreadElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PhysThread");
+	public class PhysicalThreadElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PhysicalThread");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment cDefaultAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
@@ -327,7 +327,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMsgpoolsizeINTTerminalRuleCall_17_0 = (RuleCall)cMsgpoolsizeAssignment_17.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_18 = (Keyword)cGroup.eContents().get(18);
 		
-		//PhysThread:
+		//PhysicalThread:
 		//
 		//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode "prio" "=" prio=PRIO "stacksize"
 		//
@@ -709,7 +709,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	private PhysicalSystemElements pPhysicalSystem;
 	private NodeRefElements pNodeRef;
 	private NodeClassElements pNodeClass;
-	private PhysThreadElements pPhysThread;
+	private PhysicalThreadElements pPhysicalThread;
 	private ExecModeElements unknownRuleExecMode;
 	private RuntimeClassElements pRuntimeClass;
 	private ThreadModelElements unknownRuleThreadModel;
@@ -796,7 +796,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	"NodeClass" name=ID docu=Documentation? "{" "runtime" "=" runtime=[RuntimeClass|FQN] "priomin" "=" priomin=PRIO
 	//
-	//	"priomax" "=" priomax=PRIO threads+=PhysThread* "}";
+	//	"priomax" "=" priomax=PRIO threads+=PhysicalThread* "}";
 	public NodeClassElements getNodeClassAccess() {
 		return (pNodeClass != null) ? pNodeClass : (pNodeClass = new NodeClassElements());
 	}
@@ -805,17 +805,17 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getNodeClassAccess().getRule();
 	}
 
-	//PhysThread:
+	//PhysicalThread:
 	//
 	//	(default?="DefaultThread" | "Thread") name=ID "{" "execmode" "=" execmode=ExecMode "prio" "=" prio=PRIO "stacksize"
 	//
 	//	"=" stacksize=INT "msgblocksize" "=" msgblocksize=INT "msgpoolsize" "=" msgpoolsize=INT "}";
-	public PhysThreadElements getPhysThreadAccess() {
-		return (pPhysThread != null) ? pPhysThread : (pPhysThread = new PhysThreadElements());
+	public PhysicalThreadElements getPhysicalThreadAccess() {
+		return (pPhysicalThread != null) ? pPhysicalThread : (pPhysicalThread = new PhysicalThreadElements());
 	}
 	
-	public ParserRule getPhysThreadRule() {
-		return getPhysThreadAccess().getRule();
+	public ParserRule getPhysicalThreadRule() {
+		return getPhysicalThreadAccess().getRule();
 	}
 
 	//enum ExecMode:

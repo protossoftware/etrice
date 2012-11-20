@@ -34,9 +34,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priomin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priomax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
-        eType="#//PhysThread" containment="true"/>
+        eType="#//PhysicalThread" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PhysThread">
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalThread">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="execmode" eType="#//ExecMode"/>

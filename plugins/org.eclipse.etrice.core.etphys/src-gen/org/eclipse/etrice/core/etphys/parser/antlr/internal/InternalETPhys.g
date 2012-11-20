@@ -492,9 +492,9 @@ ruleNodeClass returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getNodeClassAccess().getThreadsPhysThreadParserRuleCall_13_0()); 
+	        newCompositeNode(grammarAccess.getNodeClassAccess().getThreadsPhysicalThreadParserRuleCall_13_0()); 
 	    }
-		lv_threads_13_0=rulePhysThread		{
+		lv_threads_13_0=rulePhysicalThread		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNodeClassRule());
 	        }
@@ -502,7 +502,7 @@ ruleNodeClass returns [EObject current=null]
        			$current, 
        			"threads",
         		lv_threads_13_0, 
-        		"PhysThread");
+        		"PhysicalThread");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -518,17 +518,17 @@ ruleNodeClass returns [EObject current=null]
 
 
 
-// Entry rule entryRulePhysThread
-entryRulePhysThread returns [EObject current=null] 
+// Entry rule entryRulePhysicalThread
+entryRulePhysicalThread returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getPhysThreadRule()); }
-	 iv_rulePhysThread=rulePhysThread 
-	 { $current=$iv_rulePhysThread.current; } 
+	{ newCompositeNode(grammarAccess.getPhysicalThreadRule()); }
+	 iv_rulePhysicalThread=rulePhysicalThread 
+	 { $current=$iv_rulePhysicalThread.current; } 
 	 EOF 
 ;
 
-// Rule PhysThread
-rulePhysThread returns [EObject current=null] 
+// Rule PhysicalThread
+rulePhysicalThread returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -536,12 +536,12 @@ rulePhysThread returns [EObject current=null]
 (
 		lv_default_0_0=	'DefaultThread' 
     {
-        newLeafNode(lv_default_0_0, grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0());
+        newLeafNode(lv_default_0_0, grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPhysThreadRule());
+	            $current = createModelElement(grammarAccess.getPhysicalThreadRule());
 	        }
        		setWithLastConsumed($current, "default", true, "DefaultThread");
 	    }
@@ -550,17 +550,17 @@ rulePhysThread returns [EObject current=null]
 )
     |	otherlv_1='Thread' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getPhysThreadAccess().getThreadKeyword_0_1());
+    	newLeafNode(otherlv_1, grammarAccess.getPhysicalThreadAccess().getThreadKeyword_0_1());
     }
 )(
 (
 		lv_name_2_0=RULE_ID
 		{
-			newLeafNode(lv_name_2_0, grammarAccess.getPhysThreadAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_2_0, grammarAccess.getPhysicalThreadAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPhysThreadRule());
+	            $current = createModelElement(grammarAccess.getPhysicalThreadRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -572,24 +572,24 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_3='{' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getPhysThreadAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getPhysicalThreadAccess().getLeftCurlyBracketKeyword_2());
     }
 	otherlv_4='execmode' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPhysThreadAccess().getExecmodeKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getPhysicalThreadAccess().getExecmodeKeyword_3());
     }
 	otherlv_5='=' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_4());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPhysThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
 	    }
 		lv_execmode_6_0=ruleExecMode		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getPhysThreadRule());
+	            $current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
 	        }
        		set(
        			$current, 
@@ -602,20 +602,20 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_7='prio' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getPhysThreadAccess().getPrioKeyword_6());
+    	newLeafNode(otherlv_7, grammarAccess.getPhysicalThreadAccess().getPrioKeyword_6());
     }
 	otherlv_8='=' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_7());
+    	newLeafNode(otherlv_8, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_7());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPhysThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
+	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
 	    }
 		lv_prio_9_0=rulePRIO		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getPhysThreadRule());
+	            $current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
 	        }
        		set(
        			$current, 
@@ -628,21 +628,21 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_10='stacksize' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getPhysThreadAccess().getStacksizeKeyword_9());
+    	newLeafNode(otherlv_10, grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_9());
     }
 	otherlv_11='=' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_10());
+    	newLeafNode(otherlv_11, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_10());
     }
 (
 (
 		lv_stacksize_12_0=RULE_INT
 		{
-			newLeafNode(lv_stacksize_12_0, grammarAccess.getPhysThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
+			newLeafNode(lv_stacksize_12_0, grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPhysThreadRule());
+	            $current = createModelElement(grammarAccess.getPhysicalThreadRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -654,21 +654,21 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_13='msgblocksize' 
     {
-    	newLeafNode(otherlv_13, grammarAccess.getPhysThreadAccess().getMsgblocksizeKeyword_12());
+    	newLeafNode(otherlv_13, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_12());
     }
 	otherlv_14='=' 
     {
-    	newLeafNode(otherlv_14, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_13());
+    	newLeafNode(otherlv_14, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_13());
     }
 (
 (
 		lv_msgblocksize_15_0=RULE_INT
 		{
-			newLeafNode(lv_msgblocksize_15_0, grammarAccess.getPhysThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
+			newLeafNode(lv_msgblocksize_15_0, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPhysThreadRule());
+	            $current = createModelElement(grammarAccess.getPhysicalThreadRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -680,21 +680,21 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_16='msgpoolsize' 
     {
-    	newLeafNode(otherlv_16, grammarAccess.getPhysThreadAccess().getMsgpoolsizeKeyword_15());
+    	newLeafNode(otherlv_16, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_15());
     }
 	otherlv_17='=' 
     {
-    	newLeafNode(otherlv_17, grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_16());
+    	newLeafNode(otherlv_17, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_16());
     }
 (
 (
 		lv_msgpoolsize_18_0=RULE_INT
 		{
-			newLeafNode(lv_msgpoolsize_18_0, grammarAccess.getPhysThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
+			newLeafNode(lv_msgpoolsize_18_0, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPhysThreadRule());
+	            $current = createModelElement(grammarAccess.getPhysicalThreadRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -706,7 +706,7 @@ rulePhysThread returns [EObject current=null]
 )
 )	otherlv_19='}' 
     {
-    	newLeafNode(otherlv_19, grammarAccess.getPhysThreadAccess().getRightCurlyBracketKeyword_18());
+    	newLeafNode(otherlv_19, grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_18());
     }
 )
 ;

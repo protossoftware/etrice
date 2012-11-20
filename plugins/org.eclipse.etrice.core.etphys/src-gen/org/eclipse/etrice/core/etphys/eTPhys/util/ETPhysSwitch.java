@@ -100,10 +100,10 @@ public class ETPhysSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ETPhysPackage.PHYS_THREAD:
+      case ETPhysPackage.PHYSICAL_THREAD:
       {
-        PhysThread physThread = (PhysThread)theEObject;
-        T result = casePhysThread(physThread);
+        PhysicalThread physicalThread = (PhysicalThread)theEObject;
+        T result = casePhysicalThread(physicalThread);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -197,17 +197,17 @@ public class ETPhysSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Phys Thread</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Physical Thread</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Phys Thread</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Physical Thread</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casePhysThread(PhysThread object)
+  public T casePhysicalThread(PhysicalThread object)
   {
     return null;
   }

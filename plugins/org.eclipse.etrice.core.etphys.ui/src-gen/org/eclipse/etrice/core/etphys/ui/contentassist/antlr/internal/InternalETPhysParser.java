@@ -411,21 +411,21 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleNodeClass"
 
 
-    // $ANTLR start "entryRulePhysThread"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:172:1: entryRulePhysThread : rulePhysThread EOF ;
-    public final void entryRulePhysThread() throws RecognitionException {
+    // $ANTLR start "entryRulePhysicalThread"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:172:1: entryRulePhysicalThread : rulePhysicalThread EOF ;
+    public final void entryRulePhysicalThread() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:173:1: ( rulePhysThread EOF )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:174:1: rulePhysThread EOF
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:173:1: ( rulePhysicalThread EOF )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:174:1: rulePhysicalThread EOF
             {
-             before(grammarAccess.getPhysThreadRule()); 
-            pushFollow(FOLLOW_rulePhysThread_in_entryRulePhysThread301);
-            rulePhysThread();
+             before(grammarAccess.getPhysicalThreadRule()); 
+            pushFollow(FOLLOW_rulePhysicalThread_in_entryRulePhysicalThread301);
+            rulePhysicalThread();
 
             state._fsp--;
 
-             after(grammarAccess.getPhysThreadRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePhysThread308); 
+             after(grammarAccess.getPhysicalThreadRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePhysicalThread308); 
 
             }
 
@@ -438,35 +438,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRulePhysThread"
+    // $ANTLR end "entryRulePhysicalThread"
 
 
-    // $ANTLR start "rulePhysThread"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:181:1: rulePhysThread : ( ( rule__PhysThread__Group__0 ) ) ;
-    public final void rulePhysThread() throws RecognitionException {
+    // $ANTLR start "rulePhysicalThread"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:181:1: rulePhysicalThread : ( ( rule__PhysicalThread__Group__0 ) ) ;
+    public final void rulePhysicalThread() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:185:2: ( ( ( rule__PhysThread__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:186:1: ( ( rule__PhysThread__Group__0 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:185:2: ( ( ( rule__PhysicalThread__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:186:1: ( ( rule__PhysicalThread__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:186:1: ( ( rule__PhysThread__Group__0 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:187:1: ( rule__PhysThread__Group__0 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:186:1: ( ( rule__PhysicalThread__Group__0 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:187:1: ( rule__PhysicalThread__Group__0 )
             {
-             before(grammarAccess.getPhysThreadAccess().getGroup()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:188:1: ( rule__PhysThread__Group__0 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:188:2: rule__PhysThread__Group__0
+             before(grammarAccess.getPhysicalThreadAccess().getGroup()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:188:1: ( rule__PhysicalThread__Group__0 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:188:2: rule__PhysicalThread__Group__0
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__0_in_rulePhysThread334);
-            rule__PhysThread__Group__0();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__0_in_rulePhysicalThread334);
+            rule__PhysicalThread__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getGroup()); 
+             after(grammarAccess.getPhysicalThreadAccess().getGroup()); 
 
             }
 
@@ -485,7 +485,7 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rulePhysThread"
+    // $ANTLR end "rulePhysicalThread"
 
 
     // $ANTLR start "entryRuleRuntimeClass"
@@ -1177,14 +1177,14 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__PhysicalModel__Alternatives_4"
 
 
-    // $ANTLR start "rule__PhysThread__Alternatives_0"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:442:1: rule__PhysThread__Alternatives_0 : ( ( ( rule__PhysThread__DefaultAssignment_0_0 ) ) | ( 'Thread' ) );
-    public final void rule__PhysThread__Alternatives_0() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Alternatives_0"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:442:1: rule__PhysicalThread__Alternatives_0 : ( ( ( rule__PhysicalThread__DefaultAssignment_0_0 ) ) | ( 'Thread' ) );
+    public final void rule__PhysicalThread__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:446:1: ( ( ( rule__PhysThread__DefaultAssignment_0_0 ) ) | ( 'Thread' ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:446:1: ( ( ( rule__PhysicalThread__DefaultAssignment_0_0 ) ) | ( 'Thread' ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1202,24 +1202,24 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:447:1: ( ( rule__PhysThread__DefaultAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:447:1: ( ( rule__PhysicalThread__DefaultAssignment_0_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:447:1: ( ( rule__PhysThread__DefaultAssignment_0_0 ) )
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:448:1: ( rule__PhysThread__DefaultAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:447:1: ( ( rule__PhysicalThread__DefaultAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:448:1: ( rule__PhysicalThread__DefaultAssignment_0_0 )
                     {
-                     before(grammarAccess.getPhysThreadAccess().getDefaultAssignment_0_0()); 
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:449:1: ( rule__PhysThread__DefaultAssignment_0_0 )
-                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:449:2: rule__PhysThread__DefaultAssignment_0_0
+                     before(grammarAccess.getPhysicalThreadAccess().getDefaultAssignment_0_0()); 
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:449:1: ( rule__PhysicalThread__DefaultAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:449:2: rule__PhysicalThread__DefaultAssignment_0_0
                     {
-                    pushFollow(FOLLOW_rule__PhysThread__DefaultAssignment_0_0_in_rule__PhysThread__Alternatives_0880);
-                    rule__PhysThread__DefaultAssignment_0_0();
+                    pushFollow(FOLLOW_rule__PhysicalThread__DefaultAssignment_0_0_in_rule__PhysicalThread__Alternatives_0880);
+                    rule__PhysicalThread__DefaultAssignment_0_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getPhysThreadAccess().getDefaultAssignment_0_0()); 
+                     after(grammarAccess.getPhysicalThreadAccess().getDefaultAssignment_0_0()); 
 
                     }
 
@@ -1232,9 +1232,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:453:6: ( 'Thread' )
                     // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:454:1: 'Thread'
                     {
-                     before(grammarAccess.getPhysThreadAccess().getThreadKeyword_0_1()); 
-                    match(input,11,FOLLOW_11_in_rule__PhysThread__Alternatives_0899); 
-                     after(grammarAccess.getPhysThreadAccess().getThreadKeyword_0_1()); 
+                     before(grammarAccess.getPhysicalThreadAccess().getThreadKeyword_0_1()); 
+                    match(input,11,FOLLOW_11_in_rule__PhysicalThread__Alternatives_0899); 
+                     after(grammarAccess.getPhysicalThreadAccess().getThreadKeyword_0_1()); 
 
                     }
 
@@ -1255,7 +1255,7 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Alternatives_0"
+    // $ANTLR end "rule__PhysicalThread__Alternatives_0"
 
 
     // $ANTLR start "rule__PRIO__Alternatives_0"
@@ -4241,23 +4241,23 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__NodeClass__Group__14__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__0"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1595:1: rule__PhysThread__Group__0 : rule__PhysThread__Group__0__Impl rule__PhysThread__Group__1 ;
-    public final void rule__PhysThread__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__0"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1595:1: rule__PhysicalThread__Group__0 : rule__PhysicalThread__Group__0__Impl rule__PhysicalThread__Group__1 ;
+    public final void rule__PhysicalThread__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1599:1: ( rule__PhysThread__Group__0__Impl rule__PhysThread__Group__1 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1600:2: rule__PhysThread__Group__0__Impl rule__PhysThread__Group__1
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1599:1: ( rule__PhysicalThread__Group__0__Impl rule__PhysicalThread__Group__1 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1600:2: rule__PhysicalThread__Group__0__Impl rule__PhysicalThread__Group__1
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__0__Impl_in_rule__PhysThread__Group__03187);
-            rule__PhysThread__Group__0__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__0__Impl_in_rule__PhysicalThread__Group__03187);
+            rule__PhysicalThread__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__1_in_rule__PhysThread__Group__03190);
-            rule__PhysThread__Group__1();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__1_in_rule__PhysicalThread__Group__03190);
+            rule__PhysicalThread__Group__1();
 
             state._fsp--;
 
@@ -4276,35 +4276,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__0"
+    // $ANTLR end "rule__PhysicalThread__Group__0"
 
 
-    // $ANTLR start "rule__PhysThread__Group__0__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1607:1: rule__PhysThread__Group__0__Impl : ( ( rule__PhysThread__Alternatives_0 ) ) ;
-    public final void rule__PhysThread__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__0__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1607:1: rule__PhysicalThread__Group__0__Impl : ( ( rule__PhysicalThread__Alternatives_0 ) ) ;
+    public final void rule__PhysicalThread__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1611:1: ( ( ( rule__PhysThread__Alternatives_0 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1612:1: ( ( rule__PhysThread__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1611:1: ( ( ( rule__PhysicalThread__Alternatives_0 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1612:1: ( ( rule__PhysicalThread__Alternatives_0 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1612:1: ( ( rule__PhysThread__Alternatives_0 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1613:1: ( rule__PhysThread__Alternatives_0 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1612:1: ( ( rule__PhysicalThread__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1613:1: ( rule__PhysicalThread__Alternatives_0 )
             {
-             before(grammarAccess.getPhysThreadAccess().getAlternatives_0()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1614:1: ( rule__PhysThread__Alternatives_0 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1614:2: rule__PhysThread__Alternatives_0
+             before(grammarAccess.getPhysicalThreadAccess().getAlternatives_0()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1614:1: ( rule__PhysicalThread__Alternatives_0 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1614:2: rule__PhysicalThread__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__PhysThread__Alternatives_0_in_rule__PhysThread__Group__0__Impl3217);
-            rule__PhysThread__Alternatives_0();
+            pushFollow(FOLLOW_rule__PhysicalThread__Alternatives_0_in_rule__PhysicalThread__Group__0__Impl3217);
+            rule__PhysicalThread__Alternatives_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getAlternatives_0()); 
+             after(grammarAccess.getPhysicalThreadAccess().getAlternatives_0()); 
 
             }
 
@@ -4323,26 +4323,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__0__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__0__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__1"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1624:1: rule__PhysThread__Group__1 : rule__PhysThread__Group__1__Impl rule__PhysThread__Group__2 ;
-    public final void rule__PhysThread__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__1"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1624:1: rule__PhysicalThread__Group__1 : rule__PhysicalThread__Group__1__Impl rule__PhysicalThread__Group__2 ;
+    public final void rule__PhysicalThread__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1628:1: ( rule__PhysThread__Group__1__Impl rule__PhysThread__Group__2 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1629:2: rule__PhysThread__Group__1__Impl rule__PhysThread__Group__2
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1628:1: ( rule__PhysicalThread__Group__1__Impl rule__PhysicalThread__Group__2 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1629:2: rule__PhysicalThread__Group__1__Impl rule__PhysicalThread__Group__2
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__1__Impl_in_rule__PhysThread__Group__13247);
-            rule__PhysThread__Group__1__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__1__Impl_in_rule__PhysicalThread__Group__13247);
+            rule__PhysicalThread__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__2_in_rule__PhysThread__Group__13250);
-            rule__PhysThread__Group__2();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__2_in_rule__PhysicalThread__Group__13250);
+            rule__PhysicalThread__Group__2();
 
             state._fsp--;
 
@@ -4361,35 +4361,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__1"
+    // $ANTLR end "rule__PhysicalThread__Group__1"
 
 
-    // $ANTLR start "rule__PhysThread__Group__1__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1636:1: rule__PhysThread__Group__1__Impl : ( ( rule__PhysThread__NameAssignment_1 ) ) ;
-    public final void rule__PhysThread__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__1__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1636:1: rule__PhysicalThread__Group__1__Impl : ( ( rule__PhysicalThread__NameAssignment_1 ) ) ;
+    public final void rule__PhysicalThread__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1640:1: ( ( ( rule__PhysThread__NameAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1641:1: ( ( rule__PhysThread__NameAssignment_1 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1640:1: ( ( ( rule__PhysicalThread__NameAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1641:1: ( ( rule__PhysicalThread__NameAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1641:1: ( ( rule__PhysThread__NameAssignment_1 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1642:1: ( rule__PhysThread__NameAssignment_1 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1641:1: ( ( rule__PhysicalThread__NameAssignment_1 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1642:1: ( rule__PhysicalThread__NameAssignment_1 )
             {
-             before(grammarAccess.getPhysThreadAccess().getNameAssignment_1()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1643:1: ( rule__PhysThread__NameAssignment_1 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1643:2: rule__PhysThread__NameAssignment_1
+             before(grammarAccess.getPhysicalThreadAccess().getNameAssignment_1()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1643:1: ( rule__PhysicalThread__NameAssignment_1 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1643:2: rule__PhysicalThread__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__PhysThread__NameAssignment_1_in_rule__PhysThread__Group__1__Impl3277);
-            rule__PhysThread__NameAssignment_1();
+            pushFollow(FOLLOW_rule__PhysicalThread__NameAssignment_1_in_rule__PhysicalThread__Group__1__Impl3277);
+            rule__PhysicalThread__NameAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getNameAssignment_1()); 
+             after(grammarAccess.getPhysicalThreadAccess().getNameAssignment_1()); 
 
             }
 
@@ -4408,26 +4408,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__1__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__1__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__2"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1653:1: rule__PhysThread__Group__2 : rule__PhysThread__Group__2__Impl rule__PhysThread__Group__3 ;
-    public final void rule__PhysThread__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__2"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1653:1: rule__PhysicalThread__Group__2 : rule__PhysicalThread__Group__2__Impl rule__PhysicalThread__Group__3 ;
+    public final void rule__PhysicalThread__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1657:1: ( rule__PhysThread__Group__2__Impl rule__PhysThread__Group__3 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1658:2: rule__PhysThread__Group__2__Impl rule__PhysThread__Group__3
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1657:1: ( rule__PhysicalThread__Group__2__Impl rule__PhysicalThread__Group__3 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1658:2: rule__PhysicalThread__Group__2__Impl rule__PhysicalThread__Group__3
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__2__Impl_in_rule__PhysThread__Group__23307);
-            rule__PhysThread__Group__2__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__2__Impl_in_rule__PhysicalThread__Group__23307);
+            rule__PhysicalThread__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__3_in_rule__PhysThread__Group__23310);
-            rule__PhysThread__Group__3();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__3_in_rule__PhysicalThread__Group__23310);
+            rule__PhysicalThread__Group__3();
 
             state._fsp--;
 
@@ -4446,12 +4446,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__2"
+    // $ANTLR end "rule__PhysicalThread__Group__2"
 
 
-    // $ANTLR start "rule__PhysThread__Group__2__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1665:1: rule__PhysThread__Group__2__Impl : ( '{' ) ;
-    public final void rule__PhysThread__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__2__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1665:1: rule__PhysicalThread__Group__2__Impl : ( '{' ) ;
+    public final void rule__PhysicalThread__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -4462,9 +4462,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1670:1: ( '{' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1671:1: '{'
             {
-             before(grammarAccess.getPhysThreadAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,21,FOLLOW_21_in_rule__PhysThread__Group__2__Impl3338); 
-             after(grammarAccess.getPhysThreadAccess().getLeftCurlyBracketKeyword_2()); 
+             before(grammarAccess.getPhysicalThreadAccess().getLeftCurlyBracketKeyword_2()); 
+            match(input,21,FOLLOW_21_in_rule__PhysicalThread__Group__2__Impl3338); 
+             after(grammarAccess.getPhysicalThreadAccess().getLeftCurlyBracketKeyword_2()); 
 
             }
 
@@ -4483,26 +4483,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__2__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__2__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__3"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1684:1: rule__PhysThread__Group__3 : rule__PhysThread__Group__3__Impl rule__PhysThread__Group__4 ;
-    public final void rule__PhysThread__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__3"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1684:1: rule__PhysicalThread__Group__3 : rule__PhysicalThread__Group__3__Impl rule__PhysicalThread__Group__4 ;
+    public final void rule__PhysicalThread__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1688:1: ( rule__PhysThread__Group__3__Impl rule__PhysThread__Group__4 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1689:2: rule__PhysThread__Group__3__Impl rule__PhysThread__Group__4
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1688:1: ( rule__PhysicalThread__Group__3__Impl rule__PhysicalThread__Group__4 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1689:2: rule__PhysicalThread__Group__3__Impl rule__PhysicalThread__Group__4
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__3__Impl_in_rule__PhysThread__Group__33369);
-            rule__PhysThread__Group__3__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__3__Impl_in_rule__PhysicalThread__Group__33369);
+            rule__PhysicalThread__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__4_in_rule__PhysThread__Group__33372);
-            rule__PhysThread__Group__4();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__4_in_rule__PhysicalThread__Group__33372);
+            rule__PhysicalThread__Group__4();
 
             state._fsp--;
 
@@ -4521,12 +4521,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__3"
+    // $ANTLR end "rule__PhysicalThread__Group__3"
 
 
-    // $ANTLR start "rule__PhysThread__Group__3__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1696:1: rule__PhysThread__Group__3__Impl : ( 'execmode' ) ;
-    public final void rule__PhysThread__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__3__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1696:1: rule__PhysicalThread__Group__3__Impl : ( 'execmode' ) ;
+    public final void rule__PhysicalThread__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -4537,9 +4537,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1701:1: ( 'execmode' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1702:1: 'execmode'
             {
-             before(grammarAccess.getPhysThreadAccess().getExecmodeKeyword_3()); 
-            match(input,31,FOLLOW_31_in_rule__PhysThread__Group__3__Impl3400); 
-             after(grammarAccess.getPhysThreadAccess().getExecmodeKeyword_3()); 
+             before(grammarAccess.getPhysicalThreadAccess().getExecmodeKeyword_3()); 
+            match(input,31,FOLLOW_31_in_rule__PhysicalThread__Group__3__Impl3400); 
+             after(grammarAccess.getPhysicalThreadAccess().getExecmodeKeyword_3()); 
 
             }
 
@@ -4558,26 +4558,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__3__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__3__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__4"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1715:1: rule__PhysThread__Group__4 : rule__PhysThread__Group__4__Impl rule__PhysThread__Group__5 ;
-    public final void rule__PhysThread__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__4"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1715:1: rule__PhysicalThread__Group__4 : rule__PhysicalThread__Group__4__Impl rule__PhysicalThread__Group__5 ;
+    public final void rule__PhysicalThread__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1719:1: ( rule__PhysThread__Group__4__Impl rule__PhysThread__Group__5 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1720:2: rule__PhysThread__Group__4__Impl rule__PhysThread__Group__5
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1719:1: ( rule__PhysicalThread__Group__4__Impl rule__PhysicalThread__Group__5 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1720:2: rule__PhysicalThread__Group__4__Impl rule__PhysicalThread__Group__5
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__4__Impl_in_rule__PhysThread__Group__43431);
-            rule__PhysThread__Group__4__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__4__Impl_in_rule__PhysicalThread__Group__43431);
+            rule__PhysicalThread__Group__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__5_in_rule__PhysThread__Group__43434);
-            rule__PhysThread__Group__5();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__5_in_rule__PhysicalThread__Group__43434);
+            rule__PhysicalThread__Group__5();
 
             state._fsp--;
 
@@ -4596,12 +4596,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__4"
+    // $ANTLR end "rule__PhysicalThread__Group__4"
 
 
-    // $ANTLR start "rule__PhysThread__Group__4__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1727:1: rule__PhysThread__Group__4__Impl : ( '=' ) ;
-    public final void rule__PhysThread__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__4__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1727:1: rule__PhysicalThread__Group__4__Impl : ( '=' ) ;
+    public final void rule__PhysicalThread__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -4612,9 +4612,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1732:1: ( '=' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1733:1: '='
             {
-             before(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_4()); 
-            match(input,28,FOLLOW_28_in_rule__PhysThread__Group__4__Impl3462); 
-             after(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_4()); 
+             before(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_4()); 
+            match(input,28,FOLLOW_28_in_rule__PhysicalThread__Group__4__Impl3462); 
+             after(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_4()); 
 
             }
 
@@ -4633,26 +4633,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__4__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__4__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__5"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1746:1: rule__PhysThread__Group__5 : rule__PhysThread__Group__5__Impl rule__PhysThread__Group__6 ;
-    public final void rule__PhysThread__Group__5() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__5"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1746:1: rule__PhysicalThread__Group__5 : rule__PhysicalThread__Group__5__Impl rule__PhysicalThread__Group__6 ;
+    public final void rule__PhysicalThread__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1750:1: ( rule__PhysThread__Group__5__Impl rule__PhysThread__Group__6 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1751:2: rule__PhysThread__Group__5__Impl rule__PhysThread__Group__6
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1750:1: ( rule__PhysicalThread__Group__5__Impl rule__PhysicalThread__Group__6 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1751:2: rule__PhysicalThread__Group__5__Impl rule__PhysicalThread__Group__6
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__5__Impl_in_rule__PhysThread__Group__53493);
-            rule__PhysThread__Group__5__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__5__Impl_in_rule__PhysicalThread__Group__53493);
+            rule__PhysicalThread__Group__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__6_in_rule__PhysThread__Group__53496);
-            rule__PhysThread__Group__6();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__6_in_rule__PhysicalThread__Group__53496);
+            rule__PhysicalThread__Group__6();
 
             state._fsp--;
 
@@ -4671,35 +4671,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__5"
+    // $ANTLR end "rule__PhysicalThread__Group__5"
 
 
-    // $ANTLR start "rule__PhysThread__Group__5__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1758:1: rule__PhysThread__Group__5__Impl : ( ( rule__PhysThread__ExecmodeAssignment_5 ) ) ;
-    public final void rule__PhysThread__Group__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__5__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1758:1: rule__PhysicalThread__Group__5__Impl : ( ( rule__PhysicalThread__ExecmodeAssignment_5 ) ) ;
+    public final void rule__PhysicalThread__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1762:1: ( ( ( rule__PhysThread__ExecmodeAssignment_5 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1763:1: ( ( rule__PhysThread__ExecmodeAssignment_5 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1762:1: ( ( ( rule__PhysicalThread__ExecmodeAssignment_5 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1763:1: ( ( rule__PhysicalThread__ExecmodeAssignment_5 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1763:1: ( ( rule__PhysThread__ExecmodeAssignment_5 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1764:1: ( rule__PhysThread__ExecmodeAssignment_5 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1763:1: ( ( rule__PhysicalThread__ExecmodeAssignment_5 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1764:1: ( rule__PhysicalThread__ExecmodeAssignment_5 )
             {
-             before(grammarAccess.getPhysThreadAccess().getExecmodeAssignment_5()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1765:1: ( rule__PhysThread__ExecmodeAssignment_5 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1765:2: rule__PhysThread__ExecmodeAssignment_5
+             before(grammarAccess.getPhysicalThreadAccess().getExecmodeAssignment_5()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1765:1: ( rule__PhysicalThread__ExecmodeAssignment_5 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1765:2: rule__PhysicalThread__ExecmodeAssignment_5
             {
-            pushFollow(FOLLOW_rule__PhysThread__ExecmodeAssignment_5_in_rule__PhysThread__Group__5__Impl3523);
-            rule__PhysThread__ExecmodeAssignment_5();
+            pushFollow(FOLLOW_rule__PhysicalThread__ExecmodeAssignment_5_in_rule__PhysicalThread__Group__5__Impl3523);
+            rule__PhysicalThread__ExecmodeAssignment_5();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getExecmodeAssignment_5()); 
+             after(grammarAccess.getPhysicalThreadAccess().getExecmodeAssignment_5()); 
 
             }
 
@@ -4718,26 +4718,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__5__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__5__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__6"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1775:1: rule__PhysThread__Group__6 : rule__PhysThread__Group__6__Impl rule__PhysThread__Group__7 ;
-    public final void rule__PhysThread__Group__6() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__6"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1775:1: rule__PhysicalThread__Group__6 : rule__PhysicalThread__Group__6__Impl rule__PhysicalThread__Group__7 ;
+    public final void rule__PhysicalThread__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1779:1: ( rule__PhysThread__Group__6__Impl rule__PhysThread__Group__7 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1780:2: rule__PhysThread__Group__6__Impl rule__PhysThread__Group__7
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1779:1: ( rule__PhysicalThread__Group__6__Impl rule__PhysicalThread__Group__7 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1780:2: rule__PhysicalThread__Group__6__Impl rule__PhysicalThread__Group__7
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__6__Impl_in_rule__PhysThread__Group__63553);
-            rule__PhysThread__Group__6__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__6__Impl_in_rule__PhysicalThread__Group__63553);
+            rule__PhysicalThread__Group__6__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__7_in_rule__PhysThread__Group__63556);
-            rule__PhysThread__Group__7();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__7_in_rule__PhysicalThread__Group__63556);
+            rule__PhysicalThread__Group__7();
 
             state._fsp--;
 
@@ -4756,12 +4756,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__6"
+    // $ANTLR end "rule__PhysicalThread__Group__6"
 
 
-    // $ANTLR start "rule__PhysThread__Group__6__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1787:1: rule__PhysThread__Group__6__Impl : ( 'prio' ) ;
-    public final void rule__PhysThread__Group__6__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__6__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1787:1: rule__PhysicalThread__Group__6__Impl : ( 'prio' ) ;
+    public final void rule__PhysicalThread__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -4772,9 +4772,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1792:1: ( 'prio' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1793:1: 'prio'
             {
-             before(grammarAccess.getPhysThreadAccess().getPrioKeyword_6()); 
-            match(input,32,FOLLOW_32_in_rule__PhysThread__Group__6__Impl3584); 
-             after(grammarAccess.getPhysThreadAccess().getPrioKeyword_6()); 
+             before(grammarAccess.getPhysicalThreadAccess().getPrioKeyword_6()); 
+            match(input,32,FOLLOW_32_in_rule__PhysicalThread__Group__6__Impl3584); 
+             after(grammarAccess.getPhysicalThreadAccess().getPrioKeyword_6()); 
 
             }
 
@@ -4793,26 +4793,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__6__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__6__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__7"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1806:1: rule__PhysThread__Group__7 : rule__PhysThread__Group__7__Impl rule__PhysThread__Group__8 ;
-    public final void rule__PhysThread__Group__7() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__7"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1806:1: rule__PhysicalThread__Group__7 : rule__PhysicalThread__Group__7__Impl rule__PhysicalThread__Group__8 ;
+    public final void rule__PhysicalThread__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1810:1: ( rule__PhysThread__Group__7__Impl rule__PhysThread__Group__8 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1811:2: rule__PhysThread__Group__7__Impl rule__PhysThread__Group__8
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1810:1: ( rule__PhysicalThread__Group__7__Impl rule__PhysicalThread__Group__8 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1811:2: rule__PhysicalThread__Group__7__Impl rule__PhysicalThread__Group__8
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__7__Impl_in_rule__PhysThread__Group__73615);
-            rule__PhysThread__Group__7__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__7__Impl_in_rule__PhysicalThread__Group__73615);
+            rule__PhysicalThread__Group__7__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__8_in_rule__PhysThread__Group__73618);
-            rule__PhysThread__Group__8();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__8_in_rule__PhysicalThread__Group__73618);
+            rule__PhysicalThread__Group__8();
 
             state._fsp--;
 
@@ -4831,12 +4831,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__7"
+    // $ANTLR end "rule__PhysicalThread__Group__7"
 
 
-    // $ANTLR start "rule__PhysThread__Group__7__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1818:1: rule__PhysThread__Group__7__Impl : ( '=' ) ;
-    public final void rule__PhysThread__Group__7__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__7__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1818:1: rule__PhysicalThread__Group__7__Impl : ( '=' ) ;
+    public final void rule__PhysicalThread__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -4847,9 +4847,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1823:1: ( '=' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1824:1: '='
             {
-             before(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_7()); 
-            match(input,28,FOLLOW_28_in_rule__PhysThread__Group__7__Impl3646); 
-             after(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_7()); 
+             before(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_7()); 
+            match(input,28,FOLLOW_28_in_rule__PhysicalThread__Group__7__Impl3646); 
+             after(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_7()); 
 
             }
 
@@ -4868,26 +4868,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__7__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__7__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__8"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1837:1: rule__PhysThread__Group__8 : rule__PhysThread__Group__8__Impl rule__PhysThread__Group__9 ;
-    public final void rule__PhysThread__Group__8() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__8"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1837:1: rule__PhysicalThread__Group__8 : rule__PhysicalThread__Group__8__Impl rule__PhysicalThread__Group__9 ;
+    public final void rule__PhysicalThread__Group__8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1841:1: ( rule__PhysThread__Group__8__Impl rule__PhysThread__Group__9 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1842:2: rule__PhysThread__Group__8__Impl rule__PhysThread__Group__9
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1841:1: ( rule__PhysicalThread__Group__8__Impl rule__PhysicalThread__Group__9 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1842:2: rule__PhysicalThread__Group__8__Impl rule__PhysicalThread__Group__9
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__8__Impl_in_rule__PhysThread__Group__83677);
-            rule__PhysThread__Group__8__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__8__Impl_in_rule__PhysicalThread__Group__83677);
+            rule__PhysicalThread__Group__8__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__9_in_rule__PhysThread__Group__83680);
-            rule__PhysThread__Group__9();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__9_in_rule__PhysicalThread__Group__83680);
+            rule__PhysicalThread__Group__9();
 
             state._fsp--;
 
@@ -4906,35 +4906,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__8"
+    // $ANTLR end "rule__PhysicalThread__Group__8"
 
 
-    // $ANTLR start "rule__PhysThread__Group__8__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1849:1: rule__PhysThread__Group__8__Impl : ( ( rule__PhysThread__PrioAssignment_8 ) ) ;
-    public final void rule__PhysThread__Group__8__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__8__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1849:1: rule__PhysicalThread__Group__8__Impl : ( ( rule__PhysicalThread__PrioAssignment_8 ) ) ;
+    public final void rule__PhysicalThread__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1853:1: ( ( ( rule__PhysThread__PrioAssignment_8 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1854:1: ( ( rule__PhysThread__PrioAssignment_8 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1853:1: ( ( ( rule__PhysicalThread__PrioAssignment_8 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1854:1: ( ( rule__PhysicalThread__PrioAssignment_8 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1854:1: ( ( rule__PhysThread__PrioAssignment_8 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1855:1: ( rule__PhysThread__PrioAssignment_8 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1854:1: ( ( rule__PhysicalThread__PrioAssignment_8 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1855:1: ( rule__PhysicalThread__PrioAssignment_8 )
             {
-             before(grammarAccess.getPhysThreadAccess().getPrioAssignment_8()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1856:1: ( rule__PhysThread__PrioAssignment_8 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1856:2: rule__PhysThread__PrioAssignment_8
+             before(grammarAccess.getPhysicalThreadAccess().getPrioAssignment_8()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1856:1: ( rule__PhysicalThread__PrioAssignment_8 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1856:2: rule__PhysicalThread__PrioAssignment_8
             {
-            pushFollow(FOLLOW_rule__PhysThread__PrioAssignment_8_in_rule__PhysThread__Group__8__Impl3707);
-            rule__PhysThread__PrioAssignment_8();
+            pushFollow(FOLLOW_rule__PhysicalThread__PrioAssignment_8_in_rule__PhysicalThread__Group__8__Impl3707);
+            rule__PhysicalThread__PrioAssignment_8();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getPrioAssignment_8()); 
+             after(grammarAccess.getPhysicalThreadAccess().getPrioAssignment_8()); 
 
             }
 
@@ -4953,26 +4953,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__8__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__8__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__9"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1866:1: rule__PhysThread__Group__9 : rule__PhysThread__Group__9__Impl rule__PhysThread__Group__10 ;
-    public final void rule__PhysThread__Group__9() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__9"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1866:1: rule__PhysicalThread__Group__9 : rule__PhysicalThread__Group__9__Impl rule__PhysicalThread__Group__10 ;
+    public final void rule__PhysicalThread__Group__9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1870:1: ( rule__PhysThread__Group__9__Impl rule__PhysThread__Group__10 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1871:2: rule__PhysThread__Group__9__Impl rule__PhysThread__Group__10
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1870:1: ( rule__PhysicalThread__Group__9__Impl rule__PhysicalThread__Group__10 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1871:2: rule__PhysicalThread__Group__9__Impl rule__PhysicalThread__Group__10
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__9__Impl_in_rule__PhysThread__Group__93737);
-            rule__PhysThread__Group__9__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__9__Impl_in_rule__PhysicalThread__Group__93737);
+            rule__PhysicalThread__Group__9__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__10_in_rule__PhysThread__Group__93740);
-            rule__PhysThread__Group__10();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__10_in_rule__PhysicalThread__Group__93740);
+            rule__PhysicalThread__Group__10();
 
             state._fsp--;
 
@@ -4991,12 +4991,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__9"
+    // $ANTLR end "rule__PhysicalThread__Group__9"
 
 
-    // $ANTLR start "rule__PhysThread__Group__9__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1878:1: rule__PhysThread__Group__9__Impl : ( 'stacksize' ) ;
-    public final void rule__PhysThread__Group__9__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__9__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1878:1: rule__PhysicalThread__Group__9__Impl : ( 'stacksize' ) ;
+    public final void rule__PhysicalThread__Group__9__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5007,9 +5007,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1883:1: ( 'stacksize' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1884:1: 'stacksize'
             {
-             before(grammarAccess.getPhysThreadAccess().getStacksizeKeyword_9()); 
-            match(input,33,FOLLOW_33_in_rule__PhysThread__Group__9__Impl3768); 
-             after(grammarAccess.getPhysThreadAccess().getStacksizeKeyword_9()); 
+             before(grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_9()); 
+            match(input,33,FOLLOW_33_in_rule__PhysicalThread__Group__9__Impl3768); 
+             after(grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_9()); 
 
             }
 
@@ -5028,26 +5028,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__9__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__9__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__10"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1897:1: rule__PhysThread__Group__10 : rule__PhysThread__Group__10__Impl rule__PhysThread__Group__11 ;
-    public final void rule__PhysThread__Group__10() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__10"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1897:1: rule__PhysicalThread__Group__10 : rule__PhysicalThread__Group__10__Impl rule__PhysicalThread__Group__11 ;
+    public final void rule__PhysicalThread__Group__10() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1901:1: ( rule__PhysThread__Group__10__Impl rule__PhysThread__Group__11 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1902:2: rule__PhysThread__Group__10__Impl rule__PhysThread__Group__11
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1901:1: ( rule__PhysicalThread__Group__10__Impl rule__PhysicalThread__Group__11 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1902:2: rule__PhysicalThread__Group__10__Impl rule__PhysicalThread__Group__11
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__10__Impl_in_rule__PhysThread__Group__103799);
-            rule__PhysThread__Group__10__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__10__Impl_in_rule__PhysicalThread__Group__103799);
+            rule__PhysicalThread__Group__10__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__11_in_rule__PhysThread__Group__103802);
-            rule__PhysThread__Group__11();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__11_in_rule__PhysicalThread__Group__103802);
+            rule__PhysicalThread__Group__11();
 
             state._fsp--;
 
@@ -5066,12 +5066,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__10"
+    // $ANTLR end "rule__PhysicalThread__Group__10"
 
 
-    // $ANTLR start "rule__PhysThread__Group__10__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1909:1: rule__PhysThread__Group__10__Impl : ( '=' ) ;
-    public final void rule__PhysThread__Group__10__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__10__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1909:1: rule__PhysicalThread__Group__10__Impl : ( '=' ) ;
+    public final void rule__PhysicalThread__Group__10__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5082,9 +5082,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1914:1: ( '=' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1915:1: '='
             {
-             before(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_10()); 
-            match(input,28,FOLLOW_28_in_rule__PhysThread__Group__10__Impl3830); 
-             after(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_10()); 
+             before(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_10()); 
+            match(input,28,FOLLOW_28_in_rule__PhysicalThread__Group__10__Impl3830); 
+             after(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_10()); 
 
             }
 
@@ -5103,26 +5103,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__10__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__10__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__11"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1928:1: rule__PhysThread__Group__11 : rule__PhysThread__Group__11__Impl rule__PhysThread__Group__12 ;
-    public final void rule__PhysThread__Group__11() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__11"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1928:1: rule__PhysicalThread__Group__11 : rule__PhysicalThread__Group__11__Impl rule__PhysicalThread__Group__12 ;
+    public final void rule__PhysicalThread__Group__11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1932:1: ( rule__PhysThread__Group__11__Impl rule__PhysThread__Group__12 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1933:2: rule__PhysThread__Group__11__Impl rule__PhysThread__Group__12
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1932:1: ( rule__PhysicalThread__Group__11__Impl rule__PhysicalThread__Group__12 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1933:2: rule__PhysicalThread__Group__11__Impl rule__PhysicalThread__Group__12
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__11__Impl_in_rule__PhysThread__Group__113861);
-            rule__PhysThread__Group__11__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__11__Impl_in_rule__PhysicalThread__Group__113861);
+            rule__PhysicalThread__Group__11__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__12_in_rule__PhysThread__Group__113864);
-            rule__PhysThread__Group__12();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__12_in_rule__PhysicalThread__Group__113864);
+            rule__PhysicalThread__Group__12();
 
             state._fsp--;
 
@@ -5141,35 +5141,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__11"
+    // $ANTLR end "rule__PhysicalThread__Group__11"
 
 
-    // $ANTLR start "rule__PhysThread__Group__11__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1940:1: rule__PhysThread__Group__11__Impl : ( ( rule__PhysThread__StacksizeAssignment_11 ) ) ;
-    public final void rule__PhysThread__Group__11__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__11__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1940:1: rule__PhysicalThread__Group__11__Impl : ( ( rule__PhysicalThread__StacksizeAssignment_11 ) ) ;
+    public final void rule__PhysicalThread__Group__11__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1944:1: ( ( ( rule__PhysThread__StacksizeAssignment_11 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1945:1: ( ( rule__PhysThread__StacksizeAssignment_11 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1944:1: ( ( ( rule__PhysicalThread__StacksizeAssignment_11 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1945:1: ( ( rule__PhysicalThread__StacksizeAssignment_11 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1945:1: ( ( rule__PhysThread__StacksizeAssignment_11 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1946:1: ( rule__PhysThread__StacksizeAssignment_11 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1945:1: ( ( rule__PhysicalThread__StacksizeAssignment_11 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1946:1: ( rule__PhysicalThread__StacksizeAssignment_11 )
             {
-             before(grammarAccess.getPhysThreadAccess().getStacksizeAssignment_11()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1947:1: ( rule__PhysThread__StacksizeAssignment_11 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1947:2: rule__PhysThread__StacksizeAssignment_11
+             before(grammarAccess.getPhysicalThreadAccess().getStacksizeAssignment_11()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1947:1: ( rule__PhysicalThread__StacksizeAssignment_11 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1947:2: rule__PhysicalThread__StacksizeAssignment_11
             {
-            pushFollow(FOLLOW_rule__PhysThread__StacksizeAssignment_11_in_rule__PhysThread__Group__11__Impl3891);
-            rule__PhysThread__StacksizeAssignment_11();
+            pushFollow(FOLLOW_rule__PhysicalThread__StacksizeAssignment_11_in_rule__PhysicalThread__Group__11__Impl3891);
+            rule__PhysicalThread__StacksizeAssignment_11();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getStacksizeAssignment_11()); 
+             after(grammarAccess.getPhysicalThreadAccess().getStacksizeAssignment_11()); 
 
             }
 
@@ -5188,26 +5188,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__11__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__11__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__12"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1957:1: rule__PhysThread__Group__12 : rule__PhysThread__Group__12__Impl rule__PhysThread__Group__13 ;
-    public final void rule__PhysThread__Group__12() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__12"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1957:1: rule__PhysicalThread__Group__12 : rule__PhysicalThread__Group__12__Impl rule__PhysicalThread__Group__13 ;
+    public final void rule__PhysicalThread__Group__12() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1961:1: ( rule__PhysThread__Group__12__Impl rule__PhysThread__Group__13 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1962:2: rule__PhysThread__Group__12__Impl rule__PhysThread__Group__13
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1961:1: ( rule__PhysicalThread__Group__12__Impl rule__PhysicalThread__Group__13 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1962:2: rule__PhysicalThread__Group__12__Impl rule__PhysicalThread__Group__13
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__12__Impl_in_rule__PhysThread__Group__123921);
-            rule__PhysThread__Group__12__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__12__Impl_in_rule__PhysicalThread__Group__123921);
+            rule__PhysicalThread__Group__12__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__13_in_rule__PhysThread__Group__123924);
-            rule__PhysThread__Group__13();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__13_in_rule__PhysicalThread__Group__123924);
+            rule__PhysicalThread__Group__13();
 
             state._fsp--;
 
@@ -5226,12 +5226,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__12"
+    // $ANTLR end "rule__PhysicalThread__Group__12"
 
 
-    // $ANTLR start "rule__PhysThread__Group__12__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1969:1: rule__PhysThread__Group__12__Impl : ( 'msgblocksize' ) ;
-    public final void rule__PhysThread__Group__12__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__12__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1969:1: rule__PhysicalThread__Group__12__Impl : ( 'msgblocksize' ) ;
+    public final void rule__PhysicalThread__Group__12__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5242,9 +5242,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1974:1: ( 'msgblocksize' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1975:1: 'msgblocksize'
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgblocksizeKeyword_12()); 
-            match(input,34,FOLLOW_34_in_rule__PhysThread__Group__12__Impl3952); 
-             after(grammarAccess.getPhysThreadAccess().getMsgblocksizeKeyword_12()); 
+             before(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_12()); 
+            match(input,34,FOLLOW_34_in_rule__PhysicalThread__Group__12__Impl3952); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_12()); 
 
             }
 
@@ -5263,26 +5263,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__12__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__12__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__13"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1988:1: rule__PhysThread__Group__13 : rule__PhysThread__Group__13__Impl rule__PhysThread__Group__14 ;
-    public final void rule__PhysThread__Group__13() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__13"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1988:1: rule__PhysicalThread__Group__13 : rule__PhysicalThread__Group__13__Impl rule__PhysicalThread__Group__14 ;
+    public final void rule__PhysicalThread__Group__13() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1992:1: ( rule__PhysThread__Group__13__Impl rule__PhysThread__Group__14 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1993:2: rule__PhysThread__Group__13__Impl rule__PhysThread__Group__14
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1992:1: ( rule__PhysicalThread__Group__13__Impl rule__PhysicalThread__Group__14 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:1993:2: rule__PhysicalThread__Group__13__Impl rule__PhysicalThread__Group__14
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__13__Impl_in_rule__PhysThread__Group__133983);
-            rule__PhysThread__Group__13__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__13__Impl_in_rule__PhysicalThread__Group__133983);
+            rule__PhysicalThread__Group__13__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__14_in_rule__PhysThread__Group__133986);
-            rule__PhysThread__Group__14();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__14_in_rule__PhysicalThread__Group__133986);
+            rule__PhysicalThread__Group__14();
 
             state._fsp--;
 
@@ -5301,12 +5301,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__13"
+    // $ANTLR end "rule__PhysicalThread__Group__13"
 
 
-    // $ANTLR start "rule__PhysThread__Group__13__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2000:1: rule__PhysThread__Group__13__Impl : ( '=' ) ;
-    public final void rule__PhysThread__Group__13__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__13__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2000:1: rule__PhysicalThread__Group__13__Impl : ( '=' ) ;
+    public final void rule__PhysicalThread__Group__13__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5317,9 +5317,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2005:1: ( '=' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2006:1: '='
             {
-             before(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_13()); 
-            match(input,28,FOLLOW_28_in_rule__PhysThread__Group__13__Impl4014); 
-             after(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_13()); 
+             before(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_13()); 
+            match(input,28,FOLLOW_28_in_rule__PhysicalThread__Group__13__Impl4014); 
+             after(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_13()); 
 
             }
 
@@ -5338,26 +5338,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__13__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__13__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__14"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2019:1: rule__PhysThread__Group__14 : rule__PhysThread__Group__14__Impl rule__PhysThread__Group__15 ;
-    public final void rule__PhysThread__Group__14() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__14"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2019:1: rule__PhysicalThread__Group__14 : rule__PhysicalThread__Group__14__Impl rule__PhysicalThread__Group__15 ;
+    public final void rule__PhysicalThread__Group__14() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2023:1: ( rule__PhysThread__Group__14__Impl rule__PhysThread__Group__15 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2024:2: rule__PhysThread__Group__14__Impl rule__PhysThread__Group__15
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2023:1: ( rule__PhysicalThread__Group__14__Impl rule__PhysicalThread__Group__15 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2024:2: rule__PhysicalThread__Group__14__Impl rule__PhysicalThread__Group__15
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__14__Impl_in_rule__PhysThread__Group__144045);
-            rule__PhysThread__Group__14__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__14__Impl_in_rule__PhysicalThread__Group__144045);
+            rule__PhysicalThread__Group__14__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__15_in_rule__PhysThread__Group__144048);
-            rule__PhysThread__Group__15();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__15_in_rule__PhysicalThread__Group__144048);
+            rule__PhysicalThread__Group__15();
 
             state._fsp--;
 
@@ -5376,35 +5376,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__14"
+    // $ANTLR end "rule__PhysicalThread__Group__14"
 
 
-    // $ANTLR start "rule__PhysThread__Group__14__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2031:1: rule__PhysThread__Group__14__Impl : ( ( rule__PhysThread__MsgblocksizeAssignment_14 ) ) ;
-    public final void rule__PhysThread__Group__14__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__14__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2031:1: rule__PhysicalThread__Group__14__Impl : ( ( rule__PhysicalThread__MsgblocksizeAssignment_14 ) ) ;
+    public final void rule__PhysicalThread__Group__14__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2035:1: ( ( ( rule__PhysThread__MsgblocksizeAssignment_14 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2036:1: ( ( rule__PhysThread__MsgblocksizeAssignment_14 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2035:1: ( ( ( rule__PhysicalThread__MsgblocksizeAssignment_14 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2036:1: ( ( rule__PhysicalThread__MsgblocksizeAssignment_14 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2036:1: ( ( rule__PhysThread__MsgblocksizeAssignment_14 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2037:1: ( rule__PhysThread__MsgblocksizeAssignment_14 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2036:1: ( ( rule__PhysicalThread__MsgblocksizeAssignment_14 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2037:1: ( rule__PhysicalThread__MsgblocksizeAssignment_14 )
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgblocksizeAssignment_14()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2038:1: ( rule__PhysThread__MsgblocksizeAssignment_14 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2038:2: rule__PhysThread__MsgblocksizeAssignment_14
+             before(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeAssignment_14()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2038:1: ( rule__PhysicalThread__MsgblocksizeAssignment_14 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2038:2: rule__PhysicalThread__MsgblocksizeAssignment_14
             {
-            pushFollow(FOLLOW_rule__PhysThread__MsgblocksizeAssignment_14_in_rule__PhysThread__Group__14__Impl4075);
-            rule__PhysThread__MsgblocksizeAssignment_14();
+            pushFollow(FOLLOW_rule__PhysicalThread__MsgblocksizeAssignment_14_in_rule__PhysicalThread__Group__14__Impl4075);
+            rule__PhysicalThread__MsgblocksizeAssignment_14();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getMsgblocksizeAssignment_14()); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeAssignment_14()); 
 
             }
 
@@ -5423,26 +5423,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__14__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__14__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__15"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2048:1: rule__PhysThread__Group__15 : rule__PhysThread__Group__15__Impl rule__PhysThread__Group__16 ;
-    public final void rule__PhysThread__Group__15() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__15"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2048:1: rule__PhysicalThread__Group__15 : rule__PhysicalThread__Group__15__Impl rule__PhysicalThread__Group__16 ;
+    public final void rule__PhysicalThread__Group__15() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2052:1: ( rule__PhysThread__Group__15__Impl rule__PhysThread__Group__16 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2053:2: rule__PhysThread__Group__15__Impl rule__PhysThread__Group__16
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2052:1: ( rule__PhysicalThread__Group__15__Impl rule__PhysicalThread__Group__16 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2053:2: rule__PhysicalThread__Group__15__Impl rule__PhysicalThread__Group__16
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__15__Impl_in_rule__PhysThread__Group__154105);
-            rule__PhysThread__Group__15__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__15__Impl_in_rule__PhysicalThread__Group__154105);
+            rule__PhysicalThread__Group__15__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__16_in_rule__PhysThread__Group__154108);
-            rule__PhysThread__Group__16();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__16_in_rule__PhysicalThread__Group__154108);
+            rule__PhysicalThread__Group__16();
 
             state._fsp--;
 
@@ -5461,12 +5461,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__15"
+    // $ANTLR end "rule__PhysicalThread__Group__15"
 
 
-    // $ANTLR start "rule__PhysThread__Group__15__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2060:1: rule__PhysThread__Group__15__Impl : ( 'msgpoolsize' ) ;
-    public final void rule__PhysThread__Group__15__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__15__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2060:1: rule__PhysicalThread__Group__15__Impl : ( 'msgpoolsize' ) ;
+    public final void rule__PhysicalThread__Group__15__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5477,9 +5477,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2065:1: ( 'msgpoolsize' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2066:1: 'msgpoolsize'
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgpoolsizeKeyword_15()); 
-            match(input,35,FOLLOW_35_in_rule__PhysThread__Group__15__Impl4136); 
-             after(grammarAccess.getPhysThreadAccess().getMsgpoolsizeKeyword_15()); 
+             before(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_15()); 
+            match(input,35,FOLLOW_35_in_rule__PhysicalThread__Group__15__Impl4136); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_15()); 
 
             }
 
@@ -5498,26 +5498,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__15__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__15__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__16"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2079:1: rule__PhysThread__Group__16 : rule__PhysThread__Group__16__Impl rule__PhysThread__Group__17 ;
-    public final void rule__PhysThread__Group__16() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__16"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2079:1: rule__PhysicalThread__Group__16 : rule__PhysicalThread__Group__16__Impl rule__PhysicalThread__Group__17 ;
+    public final void rule__PhysicalThread__Group__16() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2083:1: ( rule__PhysThread__Group__16__Impl rule__PhysThread__Group__17 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2084:2: rule__PhysThread__Group__16__Impl rule__PhysThread__Group__17
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2083:1: ( rule__PhysicalThread__Group__16__Impl rule__PhysicalThread__Group__17 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2084:2: rule__PhysicalThread__Group__16__Impl rule__PhysicalThread__Group__17
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__16__Impl_in_rule__PhysThread__Group__164167);
-            rule__PhysThread__Group__16__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__16__Impl_in_rule__PhysicalThread__Group__164167);
+            rule__PhysicalThread__Group__16__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__17_in_rule__PhysThread__Group__164170);
-            rule__PhysThread__Group__17();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__17_in_rule__PhysicalThread__Group__164170);
+            rule__PhysicalThread__Group__17();
 
             state._fsp--;
 
@@ -5536,12 +5536,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__16"
+    // $ANTLR end "rule__PhysicalThread__Group__16"
 
 
-    // $ANTLR start "rule__PhysThread__Group__16__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2091:1: rule__PhysThread__Group__16__Impl : ( '=' ) ;
-    public final void rule__PhysThread__Group__16__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__16__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2091:1: rule__PhysicalThread__Group__16__Impl : ( '=' ) ;
+    public final void rule__PhysicalThread__Group__16__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5552,9 +5552,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2096:1: ( '=' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2097:1: '='
             {
-             before(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_16()); 
-            match(input,28,FOLLOW_28_in_rule__PhysThread__Group__16__Impl4198); 
-             after(grammarAccess.getPhysThreadAccess().getEqualsSignKeyword_16()); 
+             before(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_16()); 
+            match(input,28,FOLLOW_28_in_rule__PhysicalThread__Group__16__Impl4198); 
+             after(grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_16()); 
 
             }
 
@@ -5573,26 +5573,26 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__16__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__16__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__17"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2110:1: rule__PhysThread__Group__17 : rule__PhysThread__Group__17__Impl rule__PhysThread__Group__18 ;
-    public final void rule__PhysThread__Group__17() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__17"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2110:1: rule__PhysicalThread__Group__17 : rule__PhysicalThread__Group__17__Impl rule__PhysicalThread__Group__18 ;
+    public final void rule__PhysicalThread__Group__17() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2114:1: ( rule__PhysThread__Group__17__Impl rule__PhysThread__Group__18 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2115:2: rule__PhysThread__Group__17__Impl rule__PhysThread__Group__18
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2114:1: ( rule__PhysicalThread__Group__17__Impl rule__PhysicalThread__Group__18 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2115:2: rule__PhysicalThread__Group__17__Impl rule__PhysicalThread__Group__18
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__17__Impl_in_rule__PhysThread__Group__174229);
-            rule__PhysThread__Group__17__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__17__Impl_in_rule__PhysicalThread__Group__174229);
+            rule__PhysicalThread__Group__17__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PhysThread__Group__18_in_rule__PhysThread__Group__174232);
-            rule__PhysThread__Group__18();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__18_in_rule__PhysicalThread__Group__174232);
+            rule__PhysicalThread__Group__18();
 
             state._fsp--;
 
@@ -5611,35 +5611,35 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__17"
+    // $ANTLR end "rule__PhysicalThread__Group__17"
 
 
-    // $ANTLR start "rule__PhysThread__Group__17__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2122:1: rule__PhysThread__Group__17__Impl : ( ( rule__PhysThread__MsgpoolsizeAssignment_17 ) ) ;
-    public final void rule__PhysThread__Group__17__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__17__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2122:1: rule__PhysicalThread__Group__17__Impl : ( ( rule__PhysicalThread__MsgpoolsizeAssignment_17 ) ) ;
+    public final void rule__PhysicalThread__Group__17__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2126:1: ( ( ( rule__PhysThread__MsgpoolsizeAssignment_17 ) ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2127:1: ( ( rule__PhysThread__MsgpoolsizeAssignment_17 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2126:1: ( ( ( rule__PhysicalThread__MsgpoolsizeAssignment_17 ) ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2127:1: ( ( rule__PhysicalThread__MsgpoolsizeAssignment_17 ) )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2127:1: ( ( rule__PhysThread__MsgpoolsizeAssignment_17 ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2128:1: ( rule__PhysThread__MsgpoolsizeAssignment_17 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2127:1: ( ( rule__PhysicalThread__MsgpoolsizeAssignment_17 ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2128:1: ( rule__PhysicalThread__MsgpoolsizeAssignment_17 )
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgpoolsizeAssignment_17()); 
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2129:1: ( rule__PhysThread__MsgpoolsizeAssignment_17 )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2129:2: rule__PhysThread__MsgpoolsizeAssignment_17
+             before(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeAssignment_17()); 
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2129:1: ( rule__PhysicalThread__MsgpoolsizeAssignment_17 )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2129:2: rule__PhysicalThread__MsgpoolsizeAssignment_17
             {
-            pushFollow(FOLLOW_rule__PhysThread__MsgpoolsizeAssignment_17_in_rule__PhysThread__Group__17__Impl4259);
-            rule__PhysThread__MsgpoolsizeAssignment_17();
+            pushFollow(FOLLOW_rule__PhysicalThread__MsgpoolsizeAssignment_17_in_rule__PhysicalThread__Group__17__Impl4259);
+            rule__PhysicalThread__MsgpoolsizeAssignment_17();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getMsgpoolsizeAssignment_17()); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeAssignment_17()); 
 
             }
 
@@ -5658,21 +5658,21 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__17__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__17__Impl"
 
 
-    // $ANTLR start "rule__PhysThread__Group__18"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2139:1: rule__PhysThread__Group__18 : rule__PhysThread__Group__18__Impl ;
-    public final void rule__PhysThread__Group__18() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__18"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2139:1: rule__PhysicalThread__Group__18 : rule__PhysicalThread__Group__18__Impl ;
+    public final void rule__PhysicalThread__Group__18() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2143:1: ( rule__PhysThread__Group__18__Impl )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2144:2: rule__PhysThread__Group__18__Impl
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2143:1: ( rule__PhysicalThread__Group__18__Impl )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2144:2: rule__PhysicalThread__Group__18__Impl
             {
-            pushFollow(FOLLOW_rule__PhysThread__Group__18__Impl_in_rule__PhysThread__Group__184289);
-            rule__PhysThread__Group__18__Impl();
+            pushFollow(FOLLOW_rule__PhysicalThread__Group__18__Impl_in_rule__PhysicalThread__Group__184289);
+            rule__PhysicalThread__Group__18__Impl();
 
             state._fsp--;
 
@@ -5691,12 +5691,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__18"
+    // $ANTLR end "rule__PhysicalThread__Group__18"
 
 
-    // $ANTLR start "rule__PhysThread__Group__18__Impl"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2150:1: rule__PhysThread__Group__18__Impl : ( '}' ) ;
-    public final void rule__PhysThread__Group__18__Impl() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__Group__18__Impl"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2150:1: rule__PhysicalThread__Group__18__Impl : ( '}' ) ;
+    public final void rule__PhysicalThread__Group__18__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -5707,9 +5707,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2155:1: ( '}' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:2156:1: '}'
             {
-             before(grammarAccess.getPhysThreadAccess().getRightCurlyBracketKeyword_18()); 
-            match(input,22,FOLLOW_22_in_rule__PhysThread__Group__18__Impl4317); 
-             after(grammarAccess.getPhysThreadAccess().getRightCurlyBracketKeyword_18()); 
+             before(grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_18()); 
+            match(input,22,FOLLOW_22_in_rule__PhysicalThread__Group__18__Impl4317); 
+             after(grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_18()); 
 
             }
 
@@ -5728,7 +5728,7 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__Group__18__Impl"
+    // $ANTLR end "rule__PhysicalThread__Group__18__Impl"
 
 
     // $ANTLR start "rule__RuntimeClass__Group__0"
@@ -8346,25 +8346,25 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NodeClass__ThreadsAssignment_13"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3221:1: rule__NodeClass__ThreadsAssignment_13 : ( rulePhysThread ) ;
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3221:1: rule__NodeClass__ThreadsAssignment_13 : ( rulePhysicalThread ) ;
     public final void rule__NodeClass__ThreadsAssignment_13() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3225:1: ( ( rulePhysThread ) )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3226:1: ( rulePhysThread )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3225:1: ( ( rulePhysicalThread ) )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3226:1: ( rulePhysicalThread )
             {
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3226:1: ( rulePhysThread )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3227:1: rulePhysThread
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3226:1: ( rulePhysicalThread )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3227:1: rulePhysicalThread
             {
-             before(grammarAccess.getNodeClassAccess().getThreadsPhysThreadParserRuleCall_13_0()); 
-            pushFollow(FOLLOW_rulePhysThread_in_rule__NodeClass__ThreadsAssignment_136408);
-            rulePhysThread();
+             before(grammarAccess.getNodeClassAccess().getThreadsPhysicalThreadParserRuleCall_13_0()); 
+            pushFollow(FOLLOW_rulePhysicalThread_in_rule__NodeClass__ThreadsAssignment_136408);
+            rulePhysicalThread();
 
             state._fsp--;
 
-             after(grammarAccess.getNodeClassAccess().getThreadsPhysThreadParserRuleCall_13_0()); 
+             after(grammarAccess.getNodeClassAccess().getThreadsPhysicalThreadParserRuleCall_13_0()); 
 
             }
 
@@ -8386,9 +8386,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__NodeClass__ThreadsAssignment_13"
 
 
-    // $ANTLR start "rule__PhysThread__DefaultAssignment_0_0"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3236:1: rule__PhysThread__DefaultAssignment_0_0 : ( ( 'DefaultThread' ) ) ;
-    public final void rule__PhysThread__DefaultAssignment_0_0() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__DefaultAssignment_0_0"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3236:1: rule__PhysicalThread__DefaultAssignment_0_0 : ( ( 'DefaultThread' ) ) ;
+    public final void rule__PhysicalThread__DefaultAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8399,17 +8399,17 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3241:1: ( ( 'DefaultThread' ) )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3242:1: ( 'DefaultThread' )
             {
-             before(grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3243:1: ( 'DefaultThread' )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3244:1: 'DefaultThread'
             {
-             before(grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
-            match(input,43,FOLLOW_43_in_rule__PhysThread__DefaultAssignment_0_06444); 
-             after(grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
+            match(input,43,FOLLOW_43_in_rule__PhysicalThread__DefaultAssignment_0_06444); 
+             after(grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
 
             }
 
-             after(grammarAccess.getPhysThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
+             after(grammarAccess.getPhysicalThreadAccess().getDefaultDefaultThreadKeyword_0_0_0()); 
 
             }
 
@@ -8428,12 +8428,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__DefaultAssignment_0_0"
+    // $ANTLR end "rule__PhysicalThread__DefaultAssignment_0_0"
 
 
-    // $ANTLR start "rule__PhysThread__NameAssignment_1"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3259:1: rule__PhysThread__NameAssignment_1 : ( RULE_ID ) ;
-    public final void rule__PhysThread__NameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__NameAssignment_1"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3259:1: rule__PhysicalThread__NameAssignment_1 : ( RULE_ID ) ;
+    public final void rule__PhysicalThread__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8444,9 +8444,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3264:1: ( RULE_ID )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3265:1: RULE_ID
             {
-             before(grammarAccess.getPhysThreadAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PhysThread__NameAssignment_16483); 
-             after(grammarAccess.getPhysThreadAccess().getNameIDTerminalRuleCall_1_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getNameIDTerminalRuleCall_1_0()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PhysicalThread__NameAssignment_16483); 
+             after(grammarAccess.getPhysicalThreadAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
 
@@ -8465,12 +8465,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__NameAssignment_1"
+    // $ANTLR end "rule__PhysicalThread__NameAssignment_1"
 
 
-    // $ANTLR start "rule__PhysThread__ExecmodeAssignment_5"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3274:1: rule__PhysThread__ExecmodeAssignment_5 : ( ruleExecMode ) ;
-    public final void rule__PhysThread__ExecmodeAssignment_5() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__ExecmodeAssignment_5"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3274:1: rule__PhysicalThread__ExecmodeAssignment_5 : ( ruleExecMode ) ;
+    public final void rule__PhysicalThread__ExecmodeAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8481,13 +8481,13 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3279:1: ( ruleExecMode )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3280:1: ruleExecMode
             {
-             before(grammarAccess.getPhysThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleExecMode_in_rule__PhysThread__ExecmodeAssignment_56514);
+             before(grammarAccess.getPhysicalThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
+            pushFollow(FOLLOW_ruleExecMode_in_rule__PhysicalThread__ExecmodeAssignment_56514);
             ruleExecMode();
 
             state._fsp--;
 
-             after(grammarAccess.getPhysThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
+             after(grammarAccess.getPhysicalThreadAccess().getExecmodeExecModeEnumRuleCall_5_0()); 
 
             }
 
@@ -8506,12 +8506,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__ExecmodeAssignment_5"
+    // $ANTLR end "rule__PhysicalThread__ExecmodeAssignment_5"
 
 
-    // $ANTLR start "rule__PhysThread__PrioAssignment_8"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3289:1: rule__PhysThread__PrioAssignment_8 : ( rulePRIO ) ;
-    public final void rule__PhysThread__PrioAssignment_8() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__PrioAssignment_8"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3289:1: rule__PhysicalThread__PrioAssignment_8 : ( rulePRIO ) ;
+    public final void rule__PhysicalThread__PrioAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8522,13 +8522,13 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3294:1: ( rulePRIO )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3295:1: rulePRIO
             {
-             before(grammarAccess.getPhysThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_rulePRIO_in_rule__PhysThread__PrioAssignment_86545);
+             before(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
+            pushFollow(FOLLOW_rulePRIO_in_rule__PhysicalThread__PrioAssignment_86545);
             rulePRIO();
 
             state._fsp--;
 
-             after(grammarAccess.getPhysThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
+             after(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
 
             }
 
@@ -8547,12 +8547,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__PrioAssignment_8"
+    // $ANTLR end "rule__PhysicalThread__PrioAssignment_8"
 
 
-    // $ANTLR start "rule__PhysThread__StacksizeAssignment_11"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3304:1: rule__PhysThread__StacksizeAssignment_11 : ( RULE_INT ) ;
-    public final void rule__PhysThread__StacksizeAssignment_11() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__StacksizeAssignment_11"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3304:1: rule__PhysicalThread__StacksizeAssignment_11 : ( RULE_INT ) ;
+    public final void rule__PhysicalThread__StacksizeAssignment_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8563,9 +8563,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3309:1: ( RULE_INT )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3310:1: RULE_INT
             {
-             before(grammarAccess.getPhysThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysThread__StacksizeAssignment_116576); 
-             after(grammarAccess.getPhysThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysicalThread__StacksizeAssignment_116576); 
+             after(grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
 
             }
 
@@ -8584,12 +8584,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__StacksizeAssignment_11"
+    // $ANTLR end "rule__PhysicalThread__StacksizeAssignment_11"
 
 
-    // $ANTLR start "rule__PhysThread__MsgblocksizeAssignment_14"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3319:1: rule__PhysThread__MsgblocksizeAssignment_14 : ( RULE_INT ) ;
-    public final void rule__PhysThread__MsgblocksizeAssignment_14() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__MsgblocksizeAssignment_14"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3319:1: rule__PhysicalThread__MsgblocksizeAssignment_14 : ( RULE_INT ) ;
+    public final void rule__PhysicalThread__MsgblocksizeAssignment_14() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8600,9 +8600,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3324:1: ( RULE_INT )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3325:1: RULE_INT
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysThread__MsgblocksizeAssignment_146607); 
-             after(grammarAccess.getPhysThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysicalThread__MsgblocksizeAssignment_146607); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
 
             }
 
@@ -8621,12 +8621,12 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__MsgblocksizeAssignment_14"
+    // $ANTLR end "rule__PhysicalThread__MsgblocksizeAssignment_14"
 
 
-    // $ANTLR start "rule__PhysThread__MsgpoolsizeAssignment_17"
-    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3334:1: rule__PhysThread__MsgpoolsizeAssignment_17 : ( RULE_INT ) ;
-    public final void rule__PhysThread__MsgpoolsizeAssignment_17() throws RecognitionException {
+    // $ANTLR start "rule__PhysicalThread__MsgpoolsizeAssignment_17"
+    // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3334:1: rule__PhysicalThread__MsgpoolsizeAssignment_17 : ( RULE_INT ) ;
+    public final void rule__PhysicalThread__MsgpoolsizeAssignment_17() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8637,9 +8637,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3339:1: ( RULE_INT )
             // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:3340:1: RULE_INT
             {
-             before(grammarAccess.getPhysThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysThread__MsgpoolsizeAssignment_176638); 
-             after(grammarAccess.getPhysThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
+             before(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__PhysicalThread__MsgpoolsizeAssignment_176638); 
+             after(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
 
             }
 
@@ -8658,7 +8658,7 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PhysThread__MsgpoolsizeAssignment_17"
+    // $ANTLR end "rule__PhysicalThread__MsgpoolsizeAssignment_17"
 
 
     // $ANTLR start "rule__RuntimeClass__NameAssignment_1"
@@ -8911,9 +8911,9 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleNodeClass_in_entryRuleNodeClass241 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNodeClass248 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__NodeClass__Group__0_in_ruleNodeClass274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePhysThread_in_entryRulePhysThread301 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePhysThread308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__0_in_rulePhysThread334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePhysicalThread_in_entryRulePhysicalThread301 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePhysicalThread308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__0_in_rulePhysicalThread334 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRuntimeClass_in_entryRuleRuntimeClass361 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRuntimeClass368 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RuntimeClass__Group__0_in_ruleRuntimeClass394 = new BitSet(new long[]{0x0000000000000002L});
@@ -8937,8 +8937,8 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__PhysicalModel__SystemsAssignment_4_0_in_rule__PhysicalModel__Alternatives_4811 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PhysicalModel__NodeClassesAssignment_4_1_in_rule__PhysicalModel__Alternatives_4829 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PhysicalModel__RuntimeClassesAssignment_4_2_in_rule__PhysicalModel__Alternatives_4847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__DefaultAssignment_0_0_in_rule__PhysThread__Alternatives_0880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__PhysThread__Alternatives_0899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__DefaultAssignment_0_0_in_rule__PhysicalThread__Alternatives_0880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_rule__PhysicalThread__Alternatives_0899 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_rule__PRIO__Alternatives_0934 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_13_in_rule__PRIO__Alternatives_0954 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Import__Group_1_0__0_in_rule__Import__Alternatives_1988 = new BitSet(new long[]{0x0000000000000002L});
@@ -9040,62 +9040,62 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__NodeClass__ThreadsAssignment_13_in_rule__NodeClass__Group__13__Impl3067 = new BitSet(new long[]{0x0000080000000802L});
     public static final BitSet FOLLOW_rule__NodeClass__Group__14__Impl_in_rule__NodeClass__Group__143098 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_22_in_rule__NodeClass__Group__14__Impl3126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__0__Impl_in_rule__PhysThread__Group__03187 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__1_in_rule__PhysThread__Group__03190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Alternatives_0_in_rule__PhysThread__Group__0__Impl3217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__1__Impl_in_rule__PhysThread__Group__13247 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__2_in_rule__PhysThread__Group__13250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__NameAssignment_1_in_rule__PhysThread__Group__1__Impl3277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__2__Impl_in_rule__PhysThread__Group__23307 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__3_in_rule__PhysThread__Group__23310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__PhysThread__Group__2__Impl3338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__3__Impl_in_rule__PhysThread__Group__33369 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__4_in_rule__PhysThread__Group__33372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__PhysThread__Group__3__Impl3400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__4__Impl_in_rule__PhysThread__Group__43431 = new BitSet(new long[]{0x0000000000038000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__5_in_rule__PhysThread__Group__43434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PhysThread__Group__4__Impl3462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__5__Impl_in_rule__PhysThread__Group__53493 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__6_in_rule__PhysThread__Group__53496 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__ExecmodeAssignment_5_in_rule__PhysThread__Group__5__Impl3523 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__6__Impl_in_rule__PhysThread__Group__63553 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__7_in_rule__PhysThread__Group__63556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__PhysThread__Group__6__Impl3584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__7__Impl_in_rule__PhysThread__Group__73615 = new BitSet(new long[]{0x0000000000003010L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__8_in_rule__PhysThread__Group__73618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PhysThread__Group__7__Impl3646 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__8__Impl_in_rule__PhysThread__Group__83677 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__9_in_rule__PhysThread__Group__83680 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__PrioAssignment_8_in_rule__PhysThread__Group__8__Impl3707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__9__Impl_in_rule__PhysThread__Group__93737 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__10_in_rule__PhysThread__Group__93740 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__PhysThread__Group__9__Impl3768 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__10__Impl_in_rule__PhysThread__Group__103799 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__11_in_rule__PhysThread__Group__103802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PhysThread__Group__10__Impl3830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__11__Impl_in_rule__PhysThread__Group__113861 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__12_in_rule__PhysThread__Group__113864 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__StacksizeAssignment_11_in_rule__PhysThread__Group__11__Impl3891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__12__Impl_in_rule__PhysThread__Group__123921 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__13_in_rule__PhysThread__Group__123924 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__PhysThread__Group__12__Impl3952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__13__Impl_in_rule__PhysThread__Group__133983 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__14_in_rule__PhysThread__Group__133986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PhysThread__Group__13__Impl4014 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__14__Impl_in_rule__PhysThread__Group__144045 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__15_in_rule__PhysThread__Group__144048 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__MsgblocksizeAssignment_14_in_rule__PhysThread__Group__14__Impl4075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__15__Impl_in_rule__PhysThread__Group__154105 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__16_in_rule__PhysThread__Group__154108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__PhysThread__Group__15__Impl4136 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__16__Impl_in_rule__PhysThread__Group__164167 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__17_in_rule__PhysThread__Group__164170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PhysThread__Group__16__Impl4198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__17__Impl_in_rule__PhysThread__Group__174229 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__18_in_rule__PhysThread__Group__174232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__MsgpoolsizeAssignment_17_in_rule__PhysThread__Group__17__Impl4259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PhysThread__Group__18__Impl_in_rule__PhysThread__Group__184289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__PhysThread__Group__18__Impl4317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__0__Impl_in_rule__PhysicalThread__Group__03187 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__1_in_rule__PhysicalThread__Group__03190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Alternatives_0_in_rule__PhysicalThread__Group__0__Impl3217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__1__Impl_in_rule__PhysicalThread__Group__13247 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__2_in_rule__PhysicalThread__Group__13250 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__NameAssignment_1_in_rule__PhysicalThread__Group__1__Impl3277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__2__Impl_in_rule__PhysicalThread__Group__23307 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__3_in_rule__PhysicalThread__Group__23310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__PhysicalThread__Group__2__Impl3338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__3__Impl_in_rule__PhysicalThread__Group__33369 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__4_in_rule__PhysicalThread__Group__33372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__PhysicalThread__Group__3__Impl3400 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__4__Impl_in_rule__PhysicalThread__Group__43431 = new BitSet(new long[]{0x0000000000038000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__5_in_rule__PhysicalThread__Group__43434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__PhysicalThread__Group__4__Impl3462 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__5__Impl_in_rule__PhysicalThread__Group__53493 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__6_in_rule__PhysicalThread__Group__53496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__ExecmodeAssignment_5_in_rule__PhysicalThread__Group__5__Impl3523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__6__Impl_in_rule__PhysicalThread__Group__63553 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__7_in_rule__PhysicalThread__Group__63556 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__PhysicalThread__Group__6__Impl3584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__7__Impl_in_rule__PhysicalThread__Group__73615 = new BitSet(new long[]{0x0000000000003010L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__8_in_rule__PhysicalThread__Group__73618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__PhysicalThread__Group__7__Impl3646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__8__Impl_in_rule__PhysicalThread__Group__83677 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__9_in_rule__PhysicalThread__Group__83680 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__PrioAssignment_8_in_rule__PhysicalThread__Group__8__Impl3707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__9__Impl_in_rule__PhysicalThread__Group__93737 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__10_in_rule__PhysicalThread__Group__93740 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__PhysicalThread__Group__9__Impl3768 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__10__Impl_in_rule__PhysicalThread__Group__103799 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__11_in_rule__PhysicalThread__Group__103802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__PhysicalThread__Group__10__Impl3830 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__11__Impl_in_rule__PhysicalThread__Group__113861 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__12_in_rule__PhysicalThread__Group__113864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__StacksizeAssignment_11_in_rule__PhysicalThread__Group__11__Impl3891 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__12__Impl_in_rule__PhysicalThread__Group__123921 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__13_in_rule__PhysicalThread__Group__123924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__PhysicalThread__Group__12__Impl3952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__13__Impl_in_rule__PhysicalThread__Group__133983 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__14_in_rule__PhysicalThread__Group__133986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__PhysicalThread__Group__13__Impl4014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__14__Impl_in_rule__PhysicalThread__Group__144045 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__15_in_rule__PhysicalThread__Group__144048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__MsgblocksizeAssignment_14_in_rule__PhysicalThread__Group__14__Impl4075 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__15__Impl_in_rule__PhysicalThread__Group__154105 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__16_in_rule__PhysicalThread__Group__154108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__PhysicalThread__Group__15__Impl4136 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__16__Impl_in_rule__PhysicalThread__Group__164167 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__17_in_rule__PhysicalThread__Group__164170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__PhysicalThread__Group__16__Impl4198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__17__Impl_in_rule__PhysicalThread__Group__174229 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__18_in_rule__PhysicalThread__Group__174232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__MsgpoolsizeAssignment_17_in_rule__PhysicalThread__Group__17__Impl4259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PhysicalThread__Group__18__Impl_in_rule__PhysicalThread__Group__184289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__PhysicalThread__Group__18__Impl4317 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RuntimeClass__Group__0__Impl_in_rule__RuntimeClass__Group__04386 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_rule__RuntimeClass__Group__1_in_rule__RuntimeClass__Group__04389 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_rule__RuntimeClass__Group__0__Impl4417 = new BitSet(new long[]{0x0000000000000002L});
@@ -9177,14 +9177,14 @@ public class InternalETPhysParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleFQN_in_rule__NodeClass__RuntimeAssignment_66311 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePRIO_in_rule__NodeClass__PriominAssignment_96346 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePRIO_in_rule__NodeClass__PriomaxAssignment_126377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePhysThread_in_rule__NodeClass__ThreadsAssignment_136408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__PhysThread__DefaultAssignment_0_06444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__PhysThread__NameAssignment_16483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExecMode_in_rule__PhysThread__ExecmodeAssignment_56514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePRIO_in_rule__PhysThread__PrioAssignment_86545 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysThread__StacksizeAssignment_116576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysThread__MsgblocksizeAssignment_146607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysThread__MsgpoolsizeAssignment_176638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePhysicalThread_in_rule__NodeClass__ThreadsAssignment_136408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__PhysicalThread__DefaultAssignment_0_06444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__PhysicalThread__NameAssignment_16483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExecMode_in_rule__PhysicalThread__ExecmodeAssignment_56514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePRIO_in_rule__PhysicalThread__PrioAssignment_86545 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysicalThread__StacksizeAssignment_116576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysicalThread__MsgblocksizeAssignment_146607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__PhysicalThread__MsgpoolsizeAssignment_176638 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__RuntimeClass__NameAssignment_16669 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__RuntimeClass__DocuAssignment_26700 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleThreadModel_in_rule__RuntimeClass__ThreadModelAssignment_66731 = new BitSet(new long[]{0x0000000000000002L});
