@@ -270,7 +270,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 
 	@Check
-	public void checkActorInstanceConfig(ActorInstanceMapping aim) {
+	public void checkActorInstanceMapping(ActorInstanceMapping aim) {
 		ActorContainerClass root = RoomHelpers.getParentContainer(aim);
 		if (root != null && !root.eIsProxy()) {
 			RefPath path = aim.getPath();
