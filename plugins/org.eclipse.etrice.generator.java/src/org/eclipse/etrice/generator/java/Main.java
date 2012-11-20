@@ -36,8 +36,9 @@ public class Main extends AbstractGenerator {
 	
 	public static final String OPTION_LIB = "-lib";
 	public static final String OPTION_NOEXIT = "-noexit";
-	public static final String OPTION_GEN_INST_DIAG = "-genInstDiag";
+	public static final String OPTION_DOCUMENTATION = "-genDocu";
 	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
+	public static final String OPTION_DEBUG = "-debug";
 	
 	/**
 	 * print usage message to stderr
@@ -47,9 +48,10 @@ public class Main extends AbstractGenerator {
 		output.println("      <list of model file paths>        # model file paths may be specified as");
 		output.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
 		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
-		output.println("      -genInstDiag                      # if specified an instance diagram is created for each subsystem");
+		output.println("      -genDocu                          # if specified documentation is created");
 		output.println("      -lib                              # if specified all classes are generated and no instances");
 		output.println("      -noexit                           # if specified the JVM is not exited");
+		output.println("      -debug                            # if specified create debug output");
 	}
 
 	public static void main(String[] args) {
@@ -83,22 +85,26 @@ public class Main extends AbstractGenerator {
 		// parsing arguments
 		String genModelPath = null;
 		List<String> uriList = new ArrayList<String>();
-		boolean genInstDiag = false;
+		boolean genDocumentation = false;
 		boolean asLibrary = false;
+		boolean debug = false;
 		for (int i=0; i<args.length; ++i) {
 			if (args[i].equals(OPTION_SAVE_GEN_MODEL)) {
 				if (++i<args.length) {
 					genModelPath = args[i]+"/genmodel.egm";
 				}
 			}
-			else if (args[i].equals(OPTION_GEN_INST_DIAG)) {
-				genInstDiag = true;
+			else if (args[i].equals(OPTION_DOCUMENTATION)) {
+				genDocumentation = true;
 			}
 			else if (args[i].equals(OPTION_LIB)) {
 				asLibrary = true;
 			}
 			else if (args[i].equals(OPTION_NOEXIT)) {
 				setTerminateOnError(false);
+			}
+			else if (args[i].equals(OPTION_DEBUG)) {
+				debug = true;
 			}
 			else {
 				uriList.add(args[i]);
@@ -108,13 +114,13 @@ public class Main extends AbstractGenerator {
 		setupRoomModel();
 		dataConfig.doSetup();
 
-		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary))
+		if (!runGenerator(uriList, genModelPath, genDocumentation, asLibrary, debug))
 			return GENERATOR_ERROR;
 		
 		return GENERATOR_OK;
 	}
 
-	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary) {
+	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genDocumentation, boolean asLibrary, boolean debug) {
 		ResourceSet rs = resourceSetProvider.get();
 
 		loadModels(uriList, rs);
@@ -133,15 +139,17 @@ public class Main extends AbstractGenerator {
 			return false;
 		
 		ETMapUtil.processModels(genModel, rs);
-		logger.logInfo("-- begin dump of mappings");
-		logger.logInfo(ETMapUtil.dumpMappings());
-		logger.logInfo("-- end dump of mappings");
+		if (debug) {
+			logger.logInfo("-- begin dump of mappings");
+			logger.logInfo(ETMapUtil.dumpMappings());
+			logger.logInfo("-- end dump of mappings");
+		}
 		
 		logger.logInfo("-- starting code generation");
 		fileAccess.setOutputPath("src-gen/");
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
-		if (genInstDiag) {
+		if (genDocumentation) {
 			mainDocGenerator.doGenerate(genModel);
 		}
 		

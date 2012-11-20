@@ -37,16 +37,38 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  */
 public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 
+	protected class UpdateConfig implements SelectionListener {
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			validate();
+			setDirty(true);
+			updateLaunchConfigurationDialog();
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			widgetSelected(e);
+		}
+	}
+
+	/**
+	 * @deprecated
+	 * @see GEN_DOCUMENTATION
+	 */
 	public static final String GEN_INSTANCE_DIAGRAM = "GenInstanceDiagram";
+	public static final String GEN_DOCUMENTATION = "GenDocumentation";
+	
 	public static final String GEN_MODEL_PATH = "GenModelPath";
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
 	public static final String LIB = "Lib";
+	public static final String DEBUG = "Debug";
 	
 	private Button libButton;
-	private Button instanceDiagramButton;
+	private Button documentationButton;
 	private Button saveGenModel;
 	private Text genModelPath;
 	private Button browsePath;
+	private Button debugButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
@@ -73,18 +95,7 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 		
 		libButton = createCheckButton(mainComposite, "generate all classes as library");
 		libButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
-		libButton.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				setDirty(true);
-				updateLaunchConfigurationDialog();
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
+		libButton.addSelectionListener(new UpdateConfig());
 
 		saveGenModel = createCheckButton(mainComposite, "save generator model");
 		saveGenModel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -121,22 +132,13 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 				handlePathButtonSelected();
 			}
 		});
-		instanceDiagramButton = createCheckButton(mainComposite, "generate documentation");
-		instanceDiagramButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
-		instanceDiagramButton.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				validate();
-				setDirty(true);
-				updateLaunchConfigurationDialog();
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
+		documentationButton = createCheckButton(mainComposite, "generate documentation");
+		documentationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		documentationButton.addSelectionListener(new UpdateConfig());
+
+		debugButton = createCheckButton(mainComposite, "debug output");
+		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		debugButton.addSelectionListener(new UpdateConfig());
 	}
 
 	/**
@@ -205,7 +207,11 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 			genModelPath.setEnabled(save);
 			browsePath.setEnabled(save);
 			genModelPath.setText(configuration.getAttribute(GEN_MODEL_PATH, ""));
-			instanceDiagramButton.setSelection(configuration.getAttribute(GEN_INSTANCE_DIAGRAM, false));
+			boolean genDocu = configuration.getAttribute(GEN_DOCUMENTATION, false);
+			if (configuration.getAttribute(GEN_INSTANCE_DIAGRAM, false))
+				genDocu = true;
+			documentationButton.setSelection(genDocu);
+			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -220,7 +226,9 @@ public class JavaGeneratorConfigTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(LIB, libButton.getSelection());
 		configuration.setAttribute(SAVE_GEN_MODEL, saveGenModel.getSelection());
 		configuration.setAttribute(GEN_MODEL_PATH, genModelPath.getText());
-		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, instanceDiagramButton.getSelection());
+		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, documentationButton.getSelection());
+		configuration.setAttribute(GEN_DOCUMENTATION, documentationButton.getSelection());
+		configuration.setAttribute(DEBUG, debugButton.getSelection());
 	}
 
 	/* (non-Javadoc)
