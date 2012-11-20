@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -67,6 +68,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSystemInstances <em>System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getModels <em>Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpActorClasses <em>Xp Actor Classes</em>}</li>
@@ -119,6 +121,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected boolean library = LIBRARY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSystemInstances() <em>System Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSystemInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SystemInstance> systemInstances;
 
 	/**
 	 * The cached value of the '{@link #getSubSystemInstances() <em>Sub System Instances</em>}' containment reference list.
@@ -301,6 +313,18 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SystemInstance> getSystemInstances() {
+		if (systemInstances == null) {
+			systemInstances = new EObjectContainmentEList<SystemInstance>(SystemInstance.class, this, ETriceGenPackage.ROOT__SYSTEM_INSTANCES);
+		}
+		return systemInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public EList<RoomModel> getReferencedModels(RoomClass cls) {
@@ -396,6 +420,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return ((InternalEList<?>)getSystemInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				return ((InternalEList<?>)getSubSystemInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
@@ -414,6 +440,8 @@ public class RootImpl extends EObjectImpl implements Root {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				return isLibrary();
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return getSystemInstances();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				return getSubSystemInstances();
 			case ETriceGenPackage.ROOT__MODELS:
@@ -445,6 +473,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				setLibrary((Boolean)newValue);
+				return;
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				getSystemInstances().clear();
+				getSystemInstances().addAll((Collection<? extends SystemInstance>)newValue);
 				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				getSubSystemInstances().clear();
@@ -493,6 +525,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				setLibrary(LIBRARY_EDEFAULT);
 				return;
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				getSystemInstances().clear();
+				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				getSubSystemInstances().clear();
 				return;
@@ -531,6 +566,8 @@ public class RootImpl extends EObjectImpl implements Root {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				return library != LIBRARY_EDEFAULT;
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return systemInstances != null && !systemInstances.isEmpty();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				return subSystemInstances != null && !subSystemInstances.isEmpty();
 			case ETriceGenPackage.ROOT__MODELS:

@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.genmodel.etricegen.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.etrice.core.genmodel.etricegen.*;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
@@ -112,6 +113,13 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				StructureInstance structureInstance = (StructureInstance)theEObject;
 				T result = caseStructureInstance(structureInstance);
 				if (result == null) result = caseInstanceBase(structureInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ETriceGenPackage.SYSTEM_INSTANCE: {
+				SystemInstance systemInstance = (SystemInstance)theEObject;
+				T result = caseSystemInstance(systemInstance);
+				if (result == null) result = caseInstanceBase(systemInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,6 +263,21 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStructureInstance(StructureInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>System Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>System Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSystemInstance(SystemInstance object) {
 		return null;
 	}
 

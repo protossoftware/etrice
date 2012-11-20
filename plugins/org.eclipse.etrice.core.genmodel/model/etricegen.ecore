@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="etricegen"
-    nsURI="http://www.eclipse.org/etrice/generator" nsPrefix="etricegen">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="etricegen" nsURI="http://www.eclipse.org/etrice/generator" nsPrefix="etricegen">
   <eClassifiers xsi:type="ecore:EClass" name="Root">
     <eOperations name="getReferencedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel">
       <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
@@ -14,6 +12,8 @@
       <eParameters name="ai" eType="#//ActorInstance"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="systemInstances" upperBound="-1"
+        eType="#//SystemInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemInstances" upperBound="-1"
         eType="#//SubSystemInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
@@ -67,6 +67,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="orderedIfItemInstances"
         upperBound="-1" eType="#//InterfaceItemInstance" changeable="false" transient="true"
         derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemInstance" eSuperTypes="#//InstanceBase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="#//SubSystemInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalSystem" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubSystemInstance" eSuperTypes="#//StructureInstance">
     <eOperations name="getThreadId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
