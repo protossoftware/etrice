@@ -75,14 +75,14 @@ public class VariableServiceGen {
     String _plus_3 = (_plus_2 + "\'");
     this.logger.logInfo(_plus_3);
     this.fileAccess.setOutputPath(path);
-    SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-    CharSequence _generate = this.generate(root, ssi, _subSystemClass_3);
+    CharSequence _generate = this.generate(root, ssi);
     this.fileAccess.generateFile(file, _generate);
   }
   
-  private CharSequence generate(final Root root, final SubSystemInstance comp, final SubSystemClass cc) {
+  private CharSequence generate(final Root root, final SubSystemInstance comp) {
     CharSequence _xblockexpression = null;
     {
+      final SubSystemClass cc = comp.getSubSystemClass();
       HashMap<ActorInstance,List<Attribute>> _hashMap = new HashMap<ActorInstance,List<Attribute>>();
       final HashMap<ActorInstance,List<Attribute>> aisAttrMap = _hashMap;
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
@@ -133,7 +133,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("public class ");
-      String _name_1 = comp.getName();
+      String _name_1 = cc.getName();
       String _plus = (_name_1 + "VariableService");
       _builder.append(_plus, "");
       _builder.append(" extends VariableService{");
@@ -170,7 +170,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_4 = comp.getName();
+      String _name_4 = cc.getName();
       String _plus_1 = (_name_4 + "VariableService");
       _builder.append(_plus_1, "	");
       _builder.append("(");

@@ -17,7 +17,6 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
@@ -44,13 +43,15 @@ class SubSystemClassGen {
 			var file = ssi.subSystemClass.getJavaFileName
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
+			fileAccess.generateFile(file, root.generate(ssi))
 			if(dataConfigExt.hasVariableService(ssi.subSystemClass))
 				varService.doGenerate(root, ssi);
 		}
 	}
 
-	def generate(Root root, SubSystemInstance comp, SubSystemClass cc) {'''
+	def generate(Root root, SubSystemInstance comp) {
+		val cc = comp.subSystemClass
+	'''
 		package «cc.getPackage()»;
 		
 		«IF dataConfigExt.hasVariableService(cc)»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
@@ -68,11 +69,11 @@ class SubSystemClassGen {
 		
 		«cc.userCode(1)»
 		
-		public class «comp.name» extends SubSystemClassBase{
+		public class «cc.name» extends SubSystemClassBase {
 		
 			«cc.userCode(2)»
 			
-			public «comp.name»(String name) {
+			public «cc.name»(String name) {
 				super(name);
 			}
 			
@@ -208,7 +209,7 @@ class SubSystemClassGen {
 				@Override
 				public void init(){
 					«IF dataConfigExt.hasVariableService(cc)»
-						variableService = new «comp.name»VariableService(this);
+						variableService = new «cc.name»VariableService(this);
 					«ENDIF»
 					super.init();
 					«IF dataConfigExt.hasVariableService(cc)»
