@@ -1,6 +1,10 @@
 RoomModel ConfigTest {
 
 	import room.basic.types.* from "Types.room"
+	
+	LogicalSystem System_ConfigTest {
+		SubSystemRef SubSystem_ConfigTest: SubSystemConfigTest
+	}
 
 	SubSystemClass SubSystemConfigTest {
 		ActorRef top: ConfigTest_Top_ac
