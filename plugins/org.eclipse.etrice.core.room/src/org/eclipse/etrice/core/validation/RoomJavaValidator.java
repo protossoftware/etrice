@@ -13,8 +13,10 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.HashSet;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -67,6 +69,9 @@ import com.google.inject.Inject;
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
+	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
+	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
+	
 	@Inject ImportUriResolver importUriResolver;
 	
 	@Check
@@ -260,6 +265,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
 			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
+
+		if (ssc.getThreads().isEmpty())
+			error("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread dflt_thread");
+		
+		checkMappings(ssc.getActorInstanceMappings());
 	}
 
 	@Check
@@ -291,8 +301,20 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 			}
 		}
+		checkMappings(aim.getActorInstanceMappings());
 	}
 	
+	private void checkMappings(EList<ActorInstanceMapping> actorInstanceMappings) {
+		HashSet<String> paths = new HashSet<String>();
+		for (ActorInstanceMapping aim : actorInstanceMappings) {
+			if (!paths.add(RoomHelpers.asString(aim.getPath()))) {
+				EObject parent = aim.eContainer();
+				int idx = actorInstanceMappings.indexOf(aim);
+				error("duplicate mapping", parent, aim.eContainingFeature(), idx, DUPLICATE_ACTOR_INSTANCE_MAPPING);
+			}
+		}
+	}
+
 	@Check
 	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);

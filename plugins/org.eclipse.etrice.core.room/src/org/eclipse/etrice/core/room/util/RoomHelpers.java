@@ -1253,6 +1253,14 @@ public class RoomHelpers {
 		return result;
 	}
 	
+	public static String asString(RefPath path) {
+		StringBuilder sb = new StringBuilder();
+		for (String ref : path.getRefs()) {
+			sb.append("/"+ref);
+		}
+		return sb.toString();
+	}
+	
 	public static ActorRef getLastActorRef(ActorContainerClass root, RefPath path) {
 		if (path.getRefs().isEmpty())
 			return null;
