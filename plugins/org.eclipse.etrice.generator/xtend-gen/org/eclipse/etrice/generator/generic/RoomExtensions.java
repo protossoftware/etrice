@@ -12,14 +12,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
@@ -44,7 +42,6 @@ import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
@@ -961,29 +958,6 @@ public class RoomExtensions {
       result.addAll(_outgoingTransitionsHierarchical);
     }
     return result;
-  }
-  
-  public String subsyspath(final ActorInstance ai) {
-    String _xblockexpression = null;
-    {
-      EObject parent = ai.eContainer();
-      boolean _not = (!(parent instanceof SubSystemInstance));
-      boolean _while = _not;
-      while (_while) {
-        EObject _eContainer = parent.eContainer();
-        parent = _eContainer;
-        boolean _not_1 = (!(parent instanceof SubSystemInstance));
-        _while = _not_1;
-      }
-      String _path = ai.getPath();
-      SubSystemClass _subSystemClass = ((SubSystemInstance) parent).getSubSystemClass();
-      String _name = _subSystemClass.getName();
-      String _plus = ("/" + _name);
-      String _plus_1 = (_plus + "/");
-      String _replaceFirst = _path.replaceFirst("/[a-zA-Z_]+/", _plus_1);
-      _xblockexpression = (_replaceFirst);
-    }
-    return _xblockexpression;
   }
   
   public String getPortClassName(final EObject p) {

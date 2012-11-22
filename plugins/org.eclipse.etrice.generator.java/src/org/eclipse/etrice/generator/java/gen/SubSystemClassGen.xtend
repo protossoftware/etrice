@@ -168,7 +168,7 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 						}
-						«IF !dataConfigExt.getDynConfigWriteAttributes(ai.subsyspath).empty»
+						«IF !dataConfigExt.getDynConfigWriteAttributes(ai.path).empty»
 							, variableService
 						«ENDIF»
 					); 

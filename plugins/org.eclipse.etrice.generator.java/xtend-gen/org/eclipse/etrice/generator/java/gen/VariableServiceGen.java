@@ -88,13 +88,13 @@ public class VariableServiceGen {
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
       final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
           public void apply(final ActorInstance ai) {
-            String _subsyspath = VariableServiceGen.this.roomExt.subsyspath(ai);
-            List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_subsyspath);
+            String _path = ai.getPath();
+            List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path);
             boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
-              String _subsyspath_1 = VariableServiceGen.this.roomExt.subsyspath(ai);
-              List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_subsyspath_1);
+              String _path_1 = ai.getPath();
+              List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path_1);
               aisAttrMap.put(ai, _dynConfigReadAttributes_1);
             }
           }
@@ -537,8 +537,8 @@ public class VariableServiceGen {
     final HashSet<DataClass> result = _hashSet;
     final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
         public void apply(final ActorInstance ai) {
-          String _subsyspath = VariableServiceGen.this.roomExt.subsyspath(ai);
-          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_subsyspath);
+          String _path = ai.getPath();
+          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path);
           final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
               public void apply(final Attribute a) {
                 RefableType _refType = a.getRefType();
@@ -623,8 +623,8 @@ public class VariableServiceGen {
   private CharSequence getVarName(final ActorInstance ai) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _subsyspath = this.roomExt.subsyspath(ai);
-      String[] _split = _subsyspath.split("/");
+      String _path = ai.getPath();
+      String[] _split = _path.split("/");
       Iterable<String> _drop = IterableExtensions.<String>drop(((Iterable<String>)Conversions.doWrapArray(_split)), 2);
       boolean _hasElements = false;
       for(final String p : _drop) {
@@ -650,8 +650,8 @@ public class VariableServiceGen {
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("values.put(\"");
-        String _subsyspath = this.roomExt.subsyspath(ai);
-        _builder.append(_subsyspath, "");
+        String _path = ai.getPath();
+        _builder.append(_path, "");
         String _absolutePath = this.toAbsolutePath(path, "/");
         _builder.append(_absolutePath, "");
         _builder.append("\", ");
@@ -721,8 +721,8 @@ public class VariableServiceGen {
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("id = \"");
-        String _subsyspath = this.roomExt.subsyspath(ai);
-        _builder.append(_subsyspath, "");
+        String _path = ai.getPath();
+        _builder.append(_path, "");
         String _absolutePath = this.toAbsolutePath(path, "/");
         _builder.append(_absolutePath, "");
         _builder.append("\";");
@@ -902,8 +902,8 @@ public class VariableServiceGen {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("getDiffMap().put(\"");
-          String _subsyspath = this.roomExt.subsyspath(ai);
-          _builder.append(_subsyspath, "	");
+          String _path = ai.getPath();
+          _builder.append(_path, "	");
           String _absolutePath = this.toAbsolutePath(path, "/");
           _builder.append(_absolutePath, "	");
           _builder.append("\", ");

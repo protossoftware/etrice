@@ -56,7 +56,7 @@ class VariableServiceGen {
 	def private generate(Root root, SubSystemInstance comp) {
 		val cc = comp.subSystemClass
 		val aisAttrMap = new HashMap<ActorInstance, List<Attribute>>
-		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai.subsyspath).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai.subsyspath)))
+		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai.path).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai.path)))
 	'''
 		
 		package «cc.getPackage()»;
@@ -173,7 +173,7 @@ class VariableServiceGen {
 
 	def private getDynConfigDataClasses(Iterable<ActorInstance> ais){
 		val result = new HashSet<DataClass>
-		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai.subsyspath).
+		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai.path).
 			forEach(a | if(a.refType.type.dataClass)result.add(a.refType.type as DataClass)
 			))
 		return result
@@ -202,13 +202,13 @@ class VariableServiceGen {
 	}
 	
 	def private getVarName(ActorInstance ai){
-		'''«FOR p : ai.subsyspath.split('/').drop(2) SEPARATOR '_'»«p»«ENDFOR»'''
+		'''«FOR p : ai.path.split('/').drop(2) SEPARATOR '_'»«p»«ENDFOR»'''
 	}
 	
 	def private genGetAttributeValues(List<Attribute> path, ActorInstance ai){
 		var a = path.last
 		if(a.refType.type.primitive){'''
-			values.put("«ai.subsyspath»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
+			values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
 		'''
 		} else if(a.refType.type.dataClass){
 			var dataClass = (a.refType.type as DataClass)
@@ -224,7 +224,7 @@ class VariableServiceGen {
 		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
 		if(a.refType.type.primitive){'''
-			id = "«ai.subsyspath»«path.toAbsolutePath("/")»";
+			id = "«ai.path»«path.toAbsolutePath("/")»";
 			«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF» «aVarName» = null;
 			object = values.get(id);
 			if(object != null){
@@ -253,7 +253,7 @@ class VariableServiceGen {
 		'''
 			if(«aVarName» != null){
 				«ai.varName».«getters»«invokeSetter(a.name, null, aVarName)»;
-				getDiffMap().put("«ai.subsyspath»«path.toAbsolutePath("/")»", «aVarName»);
+				getDiffMap().put("«ai.path»«path.toAbsolutePath("/")»", «aVarName»);
 			}
 		'''
 		} else if(a.refType.type.dataClass){
