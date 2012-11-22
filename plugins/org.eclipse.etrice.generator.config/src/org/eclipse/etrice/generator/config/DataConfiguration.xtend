@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.config.ConfigModel
 import com.google.inject.Inject
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -81,12 +82,12 @@ class DataConfiguration implements IDataConfiguration {
 	}
 	
 	override getAttrInstanceConfigValue(ActorInstance ai, List<Attribute> path) {
-		var id = ai.path+"/"+path.toStringPath
+		var id = ai.subsyspath+"/"+path.toStringPath
 		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
 	}
 	
 	override getAttrInstanceConfigValue(ActorInstance ai, InterfaceItem port, List<Attribute> path) {
-		var id = ai.path+"/"+port.name+"/"+path.toStringPath
+		var id = ai.subsyspath+"/"+port.name+"/"+path.toStringPath
 		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
 	}
 	
@@ -175,6 +176,14 @@ class DataConfiguration implements IDataConfiguration {
 				uriList.add(importURI)
 			}
 		}
+	}
+	
+	// TODO: this has to be replaced by a simple ai.path later
+	def subsyspath(ActorInstance ai) {
+		var parent = ai.eContainer
+		while (! (parent instanceof SubSystemInstance))
+			parent = parent.eContainer
+		ai.path.replaceFirst("/[a-zA-Z_]+/", "/"+(parent as SubSystemInstance).subSystemClass.name+"/")
 	}
 	
 }

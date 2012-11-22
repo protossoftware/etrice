@@ -571,8 +571,8 @@ public class SubSystemClassGen {
           _builder.append("}");
           _builder.newLine();
           {
-            String _path_10 = ai_2.getPath();
-            List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(_path_10);
+            String _subsyspath = this._roomExtensions.subsyspath(ai_2);
+            List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(_subsyspath);
             boolean _isEmpty_5 = _dynConfigWriteAttributes.isEmpty();
             boolean _not_2 = (!_isEmpty_5);
             if (_not_2) {
@@ -684,8 +684,8 @@ public class SubSystemClassGen {
           }
           _builder.append("\t\t\t\t\t");
           _builder.append("addr_item_");
-          String _path_11 = ai_5.getPath();
-          String _pathName_8 = this._roomExtensions.getPathName(_path_11);
+          String _path_10 = ai_5.getPath();
+          String _pathName_8 = this._roomExtensions.getPathName(_path_10);
           _builder.append(_pathName_8, "					");
           _builder.newLineIfNotEmpty();
         }

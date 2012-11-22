@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.config.StringLiteral;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -139,8 +140,8 @@ public class DataConfiguration implements IDataConfiguration {
   public String getAttrInstanceConfigValue(final ActorInstance ai, final List<Attribute> path) {
     String _xblockexpression = null;
     {
-      String _path = ai.getPath();
-      String _plus = (_path + "/");
+      String _subsyspath = this.subsyspath(ai);
+      String _plus = (_subsyspath + "/");
       String _stringPath = this.toStringPath(path);
       String id = (_plus + _stringPath);
       AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
@@ -154,8 +155,8 @@ public class DataConfiguration implements IDataConfiguration {
   public String getAttrInstanceConfigValue(final ActorInstance ai, final InterfaceItem port, final List<Attribute> path) {
     String _xblockexpression = null;
     {
-      String _path = ai.getPath();
-      String _plus = (_path + "/");
+      String _subsyspath = this.subsyspath(ai);
+      String _plus = (_subsyspath + "/");
       String _name = port.getName();
       String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + "/");
@@ -368,5 +369,28 @@ public class DataConfiguration implements IDataConfiguration {
         }
       }
     }
+  }
+  
+  public String subsyspath(final ActorInstance ai) {
+    String _xblockexpression = null;
+    {
+      EObject parent = ai.eContainer();
+      boolean _not = (!(parent instanceof SubSystemInstance));
+      boolean _while = _not;
+      while (_while) {
+        EObject _eContainer = parent.eContainer();
+        parent = _eContainer;
+        boolean _not_1 = (!(parent instanceof SubSystemInstance));
+        _while = _not_1;
+      }
+      String _path = ai.getPath();
+      SubSystemClass _subSystemClass = ((SubSystemInstance) parent).getSubSystemClass();
+      String _name = _subSystemClass.getName();
+      String _plus = ("/" + _name);
+      String _plus_1 = (_plus + "/");
+      String _replaceFirst = _path.replaceFirst("/[a-zA-Z_]+/", _plus_1);
+      _xblockexpression = (_replaceFirst);
+    }
+    return _xblockexpression;
   }
 }

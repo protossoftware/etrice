@@ -55,6 +55,8 @@ import org.eclipse.etrice.core.room.Trigger
 import static org.eclipse.etrice.generator.base.CodegenHelpers.*
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 
 @Singleton
 class RoomExtensions {
@@ -592,6 +594,14 @@ class RoomExtensions {
 		}
 		
 		return result;
+	}
+	
+	// TODO: this has to be replaced by a simple ai.path later
+	def subsyspath(ActorInstance ai) {
+		var parent = ai.eContainer
+		while (! (parent instanceof SubSystemInstance))
+			parent = parent.eContainer
+		ai.path.replaceFirst("/[a-zA-Z_]+/", "/"+(parent as SubSystemInstance).subSystemClass.name+"/")
 	}
 	
 }
