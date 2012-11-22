@@ -267,7 +267,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
 
 		if (ssc.getThreads().isEmpty())
-			error("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread dflt_thread");
+			warning("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread dflt_thread");
 		
 		checkMappings(ssc.getActorInstanceMappings());
 	}
