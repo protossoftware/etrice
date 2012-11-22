@@ -1702,6 +1702,60 @@ Sub state machine of Running
 !images/040-HierarchicalFSMRunning.jpg!
 
 
+h1. eTrice Models and Their Relations
+
+eTrice comprises several models:
+
+* the ROOM model (*.room) -- defines model classes and the logical structure of the model
+* Config model (*.config) -- defines configuration values for attributes
+* Physical model (*.etphys) -- defines the structure and properties of the physical system
+* Mapping model (*.etmap) -- defines a mapping from logical elements to physical elements
+
+In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
+
+!{width:50%}images/080-models.jpg!
+
+In the following sections we will describe those models with emphasis of their cross relations.
+
+h2. The ROOM Model
+
+The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+Thereby the three latter form a hierarchy. The @LogicalSystem@ is the top level element of the structure. It contains references to @SubSystemClass@ elements. The @SubSystemClass@ in turn contain references to @ActorClass@ elements which again contain (recursively) references to @ActorClass@ elements. The complete structural hierarchy implies a tree which has the @LogicalSystem@ as root and where each reference stands for a new node with possibly further branches.
+
+Let's consider a simple example. It doesn't implement any meaningful and completely omits behavioral and other aspects.
+
+!images/080-room.jpg!
+
+When a @LogicalSstem@ is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+
+!{width:40%}images/080-instances.jpg!
+
+
+h2. The Config Model
+
+Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.
+
+!images/080-config.jpg!
+
+h2. The Physical Model
+
+The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only defines the overall execution model of the platform.
+
+!images/080-runtimes.jpg!
+
+The physical system is composed of @Node@ references where each @Node@ is defined as a class referencing a @RuntimeClass@ and defining @Threads@.
+
+!images/080-phys.jpg!
+
+h2. The Mapping Model
+
+The last model finally combines all this information by mapping logical to physical entities.
+
+!images/080-map.jpg!
+
+The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ _node_ : _thread_).
+
+
 
 h1. eTrice Developer's Reference
 
@@ -1709,7 +1763,7 @@ h2. Architecture
 
 The basic components of eTrice are depicted in the following diagram.
 
-!{width:50%}images/components.jpg!
+!{width:50%}images/200-components.jpg!
 
 Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.
 

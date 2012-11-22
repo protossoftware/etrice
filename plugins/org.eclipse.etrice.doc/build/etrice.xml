@@ -3186,6 +3186,113 @@ carLights.setState(TrafficLight3.OFF);
 			</section>
 		</section>
 	</chapter>
+	<chapter id="eTriceModelsandTheirRelations">
+		<title>eTrice Models and Their Relations</title>
+		<para>eTrice comprises several models:</para>
+		<itemizedlist>
+			<listitem>
+				<para>the ROOM model (*.room) — defines model classes and the logical structure of the model</para>
+			</listitem>
+			<listitem>
+				<para>Config model (*.config) — defines configuration values for attributes</para>
+			</listitem>
+			<listitem>
+				<para>Physical model (*.etphys) — defines the structure and properties of the physical system</para>
+			</listitem>
+			<listitem>
+				<para>Mapping model (*.etmap) — defines a mapping from logical elements to physical elements</para>
+			</listitem>
+		</itemizedlist>
+		<para>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/080-models.jpg" scale="50"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>In the following sections we will describe those models with emphasis of their cross relations.</para>
+		<section id="TheROOMModel">
+			<title>The ROOM Model</title>
+			<para>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+				Thereby the three latter form a hierarchy. The 
+				<code>LogicalSystem</code> is the top level element of the structure. It contains references to 
+				<code>SubSystemClass</code> elements. The 
+				<code>SubSystemClass</code> in turn contain references to 
+				<code>ActorClass</code> elements which again contain (recursively) references to 
+				<code>ActorClass</code> elements. The complete structural hierarchy implies a tree which has the 
+				<code>LogicalSystem</code> as root and where each reference stands for a new node with possibly further branches.
+			</para>
+			<para>Let’s consider a simple example. It doesn’t implement any meaningful and completely omits behavioral and other aspects.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-room.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>When a 
+				<code>LogicalSstem</code> is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-instances.jpg" scale="40"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="TheConfigModel">
+			<title>The Config Model</title>
+			<para>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-config.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="ThePhysicalModel">
+			<title>The Physical Model</title>
+			<para>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only defines the overall execution model of the platform.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-runtimes.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The physical system is composed of 
+				<code>Node</code> references where each 
+				<code>Node</code> is defined as a class referencing a 
+				<code>RuntimeClass</code> and defining 
+				<code>Threads</code>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-phys.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="TheMappingModel">
+			<title>The Mapping Model</title>
+			<para>The last model finally combines all this information by mapping logical to physical entities.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-map.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ 
+				<emphasis>node</emphasis> : 
+				<emphasis>thread</emphasis>).
+			</para>
+		</section>
+	</chapter>
 	<chapter id="eTriceDevelopersReference">
 		<title>eTrice Developer’s Reference</title>
 		<section id="Architecture">
@@ -3194,7 +3301,7 @@ carLights.setState(TrafficLight3.OFF);
 			<para>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/components.jpg" scale="50"/>
+						<imagedata fileref="images/200-components.jpg" scale="50"/>
 					</imageobject>
 				</mediaobject>
 			</para>

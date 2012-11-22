@@ -224,6 +224,7 @@
 			<param name="admon.graphics.extension" expression=".gif" />
 			<param name="admon.textlabel" expression="0" />
 			<param name="admon.graphics" expression="1" />
+			<param name="double.sided" expression="1" />
 		</xslt>
 
 		<docbook2pdf source="${build.dir}${file.separator}${document.name}.fo" target="manual${file.separator}${document.name}.pdf" />
