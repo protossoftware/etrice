@@ -14,8 +14,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="systemInstances" upperBound="-1"
         eType="#//SystemInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownSubSystemInstances"
+        upperBound="-1" eType="#//SubSystemInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemInstances" upperBound="-1"
-        eType="#//SubSystemInstance" containment="true"/>
+        eType="#//SubSystemInstance" changeable="false" volatile="true" transient="true"
+        derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="xpActorClasses" upperBound="-1"

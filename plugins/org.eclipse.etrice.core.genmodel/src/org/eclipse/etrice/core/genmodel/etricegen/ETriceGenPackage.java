@@ -95,13 +95,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__SYSTEM_INSTANCES = 1;
 
 	/**
-	 * The feature id for the '<em><b>Sub System Instances</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Own Sub System Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__SUB_SYSTEM_INSTANCES = 2;
+	int ROOT__OWN_SUB_SYSTEM_INSTANCES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Sub System Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__SUB_SYSTEM_INSTANCES = 3;
 
 	/**
 	 * The feature id for the '<em><b>Models</b></em>' reference list.
@@ -110,7 +119,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__MODELS = 3;
+	int ROOT__MODELS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Xp Actor Classes</b></em>' containment reference list.
@@ -119,7 +128,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__XP_ACTOR_CLASSES = 4;
+	int ROOT__XP_ACTOR_CLASSES = 5;
 
 	/**
 	 * The feature id for the '<em><b>Used Data Classes</b></em>' reference list.
@@ -128,7 +137,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_DATA_CLASSES = 5;
+	int ROOT__USED_DATA_CLASSES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Used Protocol Classes</b></em>' reference list.
@@ -137,7 +146,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_PROTOCOL_CLASSES = 6;
+	int ROOT__USED_PROTOCOL_CLASSES = 7;
 
 	/**
 	 * The feature id for the '<em><b>Used Actor Classes</b></em>' reference list.
@@ -146,7 +155,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_ACTOR_CLASSES = 7;
+	int ROOT__USED_ACTOR_CLASSES = 8;
 
 	/**
 	 * The feature id for the '<em><b>Used Room Models</b></em>' reference list.
@@ -155,7 +164,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_ROOM_MODELS = 8;
+	int ROOT__USED_ROOM_MODELS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Sub System Classes</b></em>' reference list.
@@ -164,7 +173,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__SUB_SYSTEM_CLASSES = 9;
+	int ROOT__SUB_SYSTEM_CLASSES = 10;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -173,7 +182,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 10;
+	int ROOT_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -1677,10 +1686,21 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_SystemInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemInstances <em>Sub System Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOwnSubSystemInstances <em>Own Sub System Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub System Instances</em>'.
+	 * @return the meta object for the containment reference list '<em>Own Sub System Instances</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getOwnSubSystemInstances()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_OwnSubSystemInstances();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemInstances <em>Sub System Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sub System Instances</em>'.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemInstances()
 	 * @see #getRoot()
 	 * @generated
@@ -2544,7 +2564,15 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__SYSTEM_INSTANCES = eINSTANCE.getRoot_SystemInstances();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub System Instances</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Own Sub System Instances</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__OWN_SUB_SYSTEM_INSTANCES = eINSTANCE.getRoot_OwnSubSystemInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub System Instances</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

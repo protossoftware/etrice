@@ -287,7 +287,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_SubSystemInstances() {
+	public EReference getRoot_OwnSubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -296,7 +296,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_Models() {
+	public EReference getRoot_SubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -305,7 +305,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_XpActorClasses() {
+	public EReference getRoot_Models() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -314,7 +314,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedDataClasses() {
+	public EReference getRoot_XpActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -323,7 +323,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedProtocolClasses() {
+	public EReference getRoot_UsedDataClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -332,7 +332,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedActorClasses() {
+	public EReference getRoot_UsedProtocolClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -341,7 +341,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedRoomModels() {
+	public EReference getRoot_UsedActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -350,8 +350,17 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_SubSystemClasses() {
+	public EReference getRoot_UsedRoomModels() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_SubSystemClasses() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -997,6 +1006,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		rootEClass = createEClass(ROOT);
 		createEAttribute(rootEClass, ROOT__LIBRARY);
 		createEReference(rootEClass, ROOT__SYSTEM_INSTANCES);
+		createEReference(rootEClass, ROOT__OWN_SUB_SYSTEM_INSTANCES);
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_INSTANCES);
 		createEReference(rootEClass, ROOT__MODELS);
 		createEReference(rootEClass, ROOT__XP_ACTOR_CLASSES);
@@ -1141,7 +1151,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoot_Library(), ecorePackage.getEBoolean(), "library", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_SystemInstances(), this.getSystemInstance(), null, "systemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoot_SubSystemInstances(), this.getSubSystemInstance(), null, "subSystemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_OwnSubSystemInstances(), this.getSubSystemInstance(), null, "ownSubSystemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_SubSystemInstances(), this.getSubSystemInstance(), null, "subSystemInstances", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Models(), theRoomPackage.getRoomModel(), null, "models", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_XpActorClasses(), this.getExpandedActorClass(), null, "xpActorClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_UsedDataClasses(), theRoomPackage.getDataClass(), null, "usedDataClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

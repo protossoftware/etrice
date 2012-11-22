@@ -149,7 +149,6 @@ public class GeneratorModelBuilder {
 					hasSystem = true;
 					SystemInstance si = createLogicalSystemInstance(sys);
 					root.getSystemInstances().add(si);
-					root.getSubSystemInstances().addAll(si.getInstances());
 				}
 			}
 			
@@ -157,7 +156,7 @@ public class GeneratorModelBuilder {
 				logger.logInfo("GeneratorModelBuilder: no SystemClass found, assuming SubSystemClasses as top level elements");
 				for (RoomModel mdl : models) {
 					for (SubSystemClass comp : mdl.getSubSystemClasses()) {
-						root.getSubSystemInstances().add(createSubSystemInstance(comp));
+						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp));
 					}
 				}
 			}
