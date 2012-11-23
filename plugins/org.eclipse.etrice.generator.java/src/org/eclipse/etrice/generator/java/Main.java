@@ -16,15 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -121,24 +119,22 @@ public class Main extends AbstractGenerator {
 	}
 
 	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genDocumentation, boolean asLibrary, boolean debug) {
-		ResourceSet rs = resourceSetProvider.get();
+		loadModels(uriList);
 
-		loadModels(uriList, rs);
-
-		if (!validateModels(rs))
+		if (!validateModels())
 			return false;
 			
-		if(!dataConfig.setResources(rs, logger))
+		if(!dataConfig.setResources(getResourceSet(), logger))
 			return false;
 
-		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);
+		Root genModel = createGeneratorModel(asLibrary, genModelPath);
 		if (genModel==null)
 			return false;
 		
 		if (!validator.validate(genModel))
 			return false;
 		
-		ETMapUtil.processModels(genModel, rs);
+		ETMapUtil.processModels(genModel, getResourceSet());
 		if (debug) {
 			logger.logInfo("-- begin dump of mappings");
 			logger.logInfo(ETMapUtil.dumpMappings());
@@ -167,31 +163,23 @@ public class Main extends AbstractGenerator {
 	 * @see org.eclipse.etrice.generator.base.AbstractGenerator#addReferencedModels(org.eclipse.emf.ecore.resource.Resource, java.util.List)
 	 */
 	@Override
-	protected void addReferencedModels(Resource resource, List<String> uriList) {
-		EObject root = resource.getContents().get(0);
-		if (root instanceof RoomModel) {
-			for (org.eclipse.etrice.core.room.Import imp : ((RoomModel)root).getImports()) {
-				String importURI = uriResolver.resolve(imp);
-				logger.logInfo("adding imported model "+importURI);
-				uriList.add(importURI);
-			}
-		}
-		else if (root instanceof PhysicalModel) {
+	protected void addReferencedModels(EObject root, IResourceURIAcceptor acceptor) {
+		super.addReferencedModels(root, acceptor);
+		
+		if (root instanceof PhysicalModel) {
 			for (org.eclipse.etrice.core.etphys.eTPhys.Import imp : ((PhysicalModel)root).getImports()) {
 				String importURI = uriResolver.resolve(imp);
-				logger.logInfo("adding imported model "+importURI);
-				uriList.add(importURI);
+				acceptor.addResourceURI(importURI);
 			}
 		}
 		else if (root instanceof MappingModel) {
 			for (org.eclipse.etrice.core.etmap.eTMap.Import imp : ((MappingModel)root).getImports()) {
 				String importURI = uriResolver.resolve(imp);
-				logger.logInfo("adding imported model "+importURI);
-				uriList.add(importURI);
+				acceptor.addResourceURI(importURI);
 			}
 		}
 		else {
-			dataConfig.addReferencedModels(resource, uriList);
+			dataConfig.addReferencedModels(acceptor, root);
 		}
 	}
 }

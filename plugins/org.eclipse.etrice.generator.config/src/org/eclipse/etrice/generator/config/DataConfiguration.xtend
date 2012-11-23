@@ -31,10 +31,11 @@ import org.eclipse.etrice.core.config.StringLiteral
 import org.eclipse.etrice.core.config.LiteralArray
 import org.eclipse.etrice.core.config.Literal
 import org.eclipse.etrice.core.room.InterfaceItem
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.config.ConfigModel
 import com.google.inject.Inject
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import org.eclipse.etrice.generator.base.IResourceURIAcceptor
+import org.eclipse.emf.ecore.EObject
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -166,13 +167,11 @@ class DataConfiguration implements IDataConfiguration {
 		return result
 	}
 	
-	override addReferencedModels(Resource resource, List<String> uriList) {
-		val root = resource.contents.get(0)
+	override void addReferencedModels(IResourceURIAcceptor acceptor, EObject root) {
 		if (root instanceof ConfigModel) {
 			for (imp : (root as ConfigModel).imports) {
 				val importURI = uriResolver.resolve(imp)
-				logger.logInfo("adding imported model "+importURI)
-				uriList.add(importURI)
+				acceptor.addResourceURI(importURI);
 			}
 		}
 	}

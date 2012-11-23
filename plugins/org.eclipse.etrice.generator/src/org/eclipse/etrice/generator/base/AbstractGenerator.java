@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -51,7 +52,7 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractGenerator {
+public abstract class AbstractGenerator implements IResourceURIAcceptor {
 
 	public static final int GENERATOR_OK = 0;
 	public static final int GENERATOR_ERROR = 1;
@@ -63,7 +64,10 @@ public abstract class AbstractGenerator {
 	private static Injector injector;
 	
 	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
-	
+	private ResourceSet resourceSet;
+	private HashSet<URI> modelURIs = new HashSet<URI>();
+	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
+
 	public static void setTerminateOnError(boolean terminateOnError) {
 		AbstractGenerator.terminateOnError = terminateOnError;
 	}
@@ -120,6 +124,10 @@ public abstract class AbstractGenerator {
 	
 	protected IResourceValidator validator;
 
+	protected ResourceSet getResourceSet() {
+		return resourceSet;
+	}
+
 	/**
 	 * setup the ROOM core model plug-in and create a validator using injection
 	 */
@@ -130,15 +138,14 @@ public abstract class AbstractGenerator {
 	}
 
 	/**
-	 * @param rs the {@link ResourceSet} to which the generator model should be added
 	 * @param genModelPath path to store the generator model (not stored if {@code null})
 	 * 
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
-	protected Root createGeneratorModel(ResourceSet rs, boolean asLibrary, String genModelPath) {
+	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
 		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
-		for (Resource resource : rs.getResources()) {
+		for (Resource resource : resourceSet.getResources()) {
 			List<EObject> contents = resource.getContents();
 			if (!contents.isEmpty() && contents.get(0) instanceof RoomModel) {
 				rml.add((RoomModel)contents.get(0));
@@ -162,7 +169,7 @@ public abstract class AbstractGenerator {
 			translateDetailCodes(gmRoot);
 			
 			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
-			Resource genResource = rs.createResource(genModelURI);
+			Resource genResource = resourceSet.createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
 			if (genModelPath!=null) {
 				try {
@@ -182,14 +189,13 @@ public abstract class AbstractGenerator {
 	/**
 	 * validate the models
 	 * 
-	 * @param rs
 	 */
-	protected boolean validateModels(ResourceSet rs) {
+	protected boolean validateModels() {
 		logger.logInfo("-- validating models");
 		
 		int errors = 0;
 		int warnings = 0;
-		for (Resource resource : rs.getResources()) {
+		for (Resource resource : resourceSet.getResources()) {
 			List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 			if (!list.isEmpty()) {
 				for (Issue issue : list) {
@@ -213,58 +219,83 @@ public abstract class AbstractGenerator {
 		return true;
 	}
 
-	protected boolean loadModel(String uriString, ResourceSet rs)
+	protected boolean loadModel(URI uri)
 			throws RuntimeException, IOException {
+		
+		if (loadedModelURIs.contains(uri))
+			return true;
+		
+		if (resourceSet.getResource(uri, false) != null)
+			// already loaded
+			return false;
+		
+		logger.logInfo("Loading " + uri);
+		resourceSet.getResource(uri, true);	// Could throw an exception...
+		loadedModelURIs.add(uri);
+		return true;
+	}
+
+	private static URI getCanonicalFileURI(String uriString) throws IOException {
 		URI uri = uriString.startsWith("file:/")? URI.createURI(uriString):URI.createFileURI(uriString);
 		String can = uri.toFileString();
 		File f = new File(can);
 		can = f.getCanonicalPath();	// e.g. remove embedded ../
-		if (rs.getResource(URI.createFileURI(can), false) != null)
-			// already loaded
-			return false;
-		
-		logger.logInfo("Loading " + can);
-		rs.getResource(URI.createFileURI(can), true);	// Could throw an exception...
-		return true;
+		return URI.createFileURI(can);
 	}	
 	
 	
 	/**
-	 * load all models into a {@link ResourceSet}
+	 * load all models into a {@link ResourceSet} which is create by this method and
+	 * maintained in this object
 	 * 
 	 * @param uriList a list of {@link URI}s as Strings
-	 * @param rs the {@link ResourceSet}
 	 */
-	protected boolean loadModels(List<String> uriList, ResourceSet rs) {
+	protected boolean loadModels(List<String> uriList) {
 		logger.logInfo("-- reading models");
+
+		resourceSet = resourceSetProvider.get();
+		modelURIs.clear();
+		loadedModelURIs.clear();
 		
-		ArrayList<String> uris = new ArrayList<String>(uriList);
+		for (String uri : uriList) {
+			addResourceURI(uri);
+		}
 		
 		boolean ok = true;
-		while (!uris.isEmpty()) {
-			String uriString = uris.get(0);
+		while (!modelURIs.isEmpty()) {
+			URI uri = modelURIs.iterator().next();
 			//logger.logInfo("Loading " + uriString);
 			try {
-				loadModel(uriString, rs);
-				addReferencedModels(rs.getResources().get(rs.getResources().size()-1), uris);
+				loadModel(uri);
+				Resource resource = resourceSet.getResources().get(resourceSet.getResources().size()-1);
+				for (EObject root : resource.getContents()) {
+					addReferencedModels(root, this);
+				}
 			}
 			catch (Exception e) {
 				ok = false;
-				logger.logError("couldn't load '"+uriString+"'", null);
+				logger.logError("couldn't load '"+uri+"'", null);
 			}
-			uris.remove(0);
+			modelURIs.remove(uri);
 		}
 		
-		EcoreUtil.resolveAll(rs);
+		EcoreUtil.resolveAll(resourceSet);
 		
 		return ok;
 	}
 
 	/**
 	 * @param resource
-	 * @param uriList
+	 * @param acceptor
 	 */
-	protected void addReferencedModels(Resource resource, List<String> uriList) {}
+	protected void addReferencedModels(EObject root, IResourceURIAcceptor acceptor) {
+		if (root instanceof RoomModel) {
+			for (org.eclipse.etrice.core.room.Import imp : ((RoomModel)root).getImports()) {
+				String importURI = uriResolver.resolve(imp);
+				acceptor.addResourceURI(importURI);
+			}
+		}
+	}
 
 	/**
 	 * create detail code translations once and for all
@@ -331,5 +362,25 @@ public abstract class AbstractGenerator {
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
 	protected abstract int runGenerator(String[] args);
+	
+	public boolean addResourceURI(String uri) {
+		try {
+			URI can = getCanonicalFileURI(uri);
+			if (loadedModelURIs.contains(can))
+				return false;
+			
+			boolean added = modelURIs.add(can);
+			if (added) {
+				if (loadedModelURIs.isEmpty())
+					logger.logInfo("added model "+uri);
+				else
+					logger.logInfo("added referenced model "+uri);
+			}
+			return added;
+		}
+		catch (IOException e) {
+			return false;
+		}
+	}
 
 }

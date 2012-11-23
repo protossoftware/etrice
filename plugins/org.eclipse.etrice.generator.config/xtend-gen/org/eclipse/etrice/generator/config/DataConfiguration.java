@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.config.AttrClassConfig;
@@ -30,6 +29,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -354,17 +354,13 @@ public class DataConfiguration implements IDataConfiguration {
     return result;
   }
   
-  public void addReferencedModels(final Resource resource, final List<String> uriList) {
-    EList<EObject> _contents = resource.getContents();
-    final EObject root = _contents.get(0);
+  public void addReferencedModels(final IResourceURIAcceptor acceptor, final EObject root) {
     if ((root instanceof ConfigModel)) {
       EList<Import> _imports = ((ConfigModel) root).getImports();
       for (final Import imp : _imports) {
         {
           final String importURI = this.uriResolver.resolve(imp);
-          String _plus = ("adding imported model " + importURI);
-          this.logger.logInfo(_plus);
-          uriList.add(importURI);
+          acceptor.addResourceURI(importURI);
         }
       }
     }
