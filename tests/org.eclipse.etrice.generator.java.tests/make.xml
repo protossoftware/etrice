@@ -51,6 +51,7 @@
 		<delete dir="${output}"/>
 		<delete dir="${test.results}"/>
 		<delete dir="src-gen"/>
+		<delete dir="src-gen2"/>
 		<delete dir="tmp"/>
 	</target>
 	
@@ -112,14 +113,18 @@
 			<arg value="${java.tests.model.path}/PingPongThreadReplPortTest.room"/>
 			<arg value="${java.tests.model.path}/SendingDataTestJava.room"/>
 			<arg value="${java.tests.model.path}/TCPTest.room"/>
-			<arg value="${java.tests.model.path}/ConfigTest.room"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<!-- the following is a work-around for the configuration which doesn't work in the prsence of a LogicalSystems.
+			When all models are generated together, there is a logical system.
+			So we have to move awy src-gen since this is cleared by the generator and compile src-gen and src-gen2 separately
+		-->
+		<deltree dir="src-gen2"/>
+		<move file="src-gen" tofile="src-gen2"/>
+		
+		<java output="${output}/generate.txt" append="true" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
 			<arg value="${java.tests.model.path}/ConfigTest.config"/>
-			
-			<!-- copied modellib.java models -->
-			<arg value="${java.tests.model.path}/TimingService.room"/>
-			<arg value="${java.tests.model.path}/TcpService.room"/>
-			<arg value="${java.tests.model.path}/Types.room"/>
-			<arg value="${java.tests.model.path}/Language.room"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -130,6 +135,11 @@
 	<target name="compile" depends="generate">
 		<mkdir dir="${bin.path}"/>
 		<javac srcdir="src-gen"
+			 destdir="${bin.path}"
+			 classpath="${runtime.path}/bin"
+			 debug="on"
+			/>
+		<javac srcdir="src-gen2"
 			 destdir="${bin.path}"
 			 classpath="${runtime.path}/bin"
 			 debug="on"
