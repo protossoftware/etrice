@@ -161,7 +161,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
 			Root gmRoot = gmb.createGeneratorModel(rml, asLibrary);
 			if (diagnostician.isFailed()) {
-				logger.logInfo("validation failed during build of generator model");
+				logger.logError("validation failed during build of generator model", null);
 				logger.logError("-- terminating", null);
 				return null;
 			}

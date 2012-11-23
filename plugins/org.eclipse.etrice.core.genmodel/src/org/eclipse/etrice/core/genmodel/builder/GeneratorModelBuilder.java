@@ -103,6 +103,8 @@ public class GeneratorModelBuilder {
 	 */
 	private IDiagnostician diagnostician;
 
+	private boolean debug;
+
 	/**
 	 * the only constructor takes a logger and a diagnostician as arguments
 	 * @param logger
@@ -113,7 +115,9 @@ public class GeneratorModelBuilder {
 		this.diagnostician = diagnostician;
 	}
 	
-	// TODOHRR: combine a RoomProject (.room_proj) with RoomModels (.room)
+	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
+		return createGeneratorModel(models, asLibrary, false);
+	}
 	
 	/**
 	 * Creates a model of all instances for all sub systems.
@@ -131,12 +135,15 @@ public class GeneratorModelBuilder {
 	 * are removed and their contents is relocated.
 	 * 
 	 * @param models
+	 * @param asLibrary
+	 * @param debug if true more output is produced
 	 * @return the root of the newly created instance model
 	 */
-	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
+	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary, boolean debug) {
 		Root root = ETriceGenFactory.eINSTANCE.createRoot();
 		root.getModels().addAll(models);
 		root.setLibrary(asLibrary);
+		this.debug = debug;
 
 		if (!root.isLibrary()) {
 			// create instance model
@@ -476,7 +483,7 @@ public class GeneratorModelBuilder {
 	 * @return the newly created hierarchy of instances
 	 */
 	private SubSystemInstance createSubSystemInstance(SubSystemClass ssc) {
-		logger.logInfo("GeneratorModelBuilder: creating subsystem class from "+ssc.getName());
+		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+ssc.getName());
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
 		allObjects.add(instance);
@@ -519,7 +526,8 @@ public class GeneratorModelBuilder {
 		if (idx>=0)
 			name += "_"+idx;
 		
-		logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
+		if (debug)
+			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
 		allObjects.add(ai);
@@ -1108,8 +1116,9 @@ public class GeneratorModelBuilder {
 	 * @return - the newly created expanded actor class
 	 */
 	public ExpandedActorClass createExpandedActorClass(ActorClass ac) {
-		logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
-			+" of "+((RoomModel)ac.eContainer()).getName());
+		if (debug)
+			logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
+					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
 		xpac.setActorClass(ac);
