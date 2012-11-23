@@ -9,24 +9,43 @@
   <genPackages prefix="Fsmtest" basePackage="org.eclipse.etrice.generator" disposableProviderFactory="true"
       ecorePackage="FSMtest.ecore#/">
     <genClasses ecoreClass="FSMtest.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Model/Testscripts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Model/FsmDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Model/RandomTests"/>
     </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//Testscript">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//Testscript/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Testscript/stateDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Testscript/initialDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Testscript/loopsDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Testscript/seedDeclaration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//Testscript/transitionDeclarations"/>
+    <genClasses ecoreClass="FSMtest.ecore#//FsmDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//FsmDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//FsmDefinition/states"/>
     </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//State">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//State/name"/>
+    <genClasses ecoreClass="FSMtest.ecore#//RandomTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//RandomTest/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSMtest.ecore#//RandomTest/fsm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//RandomTest/loopsDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//RandomTest/seedDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FSMtest.ecore#//GuardDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//GuardDeclaration/signal"/>
+    </genClasses>
+    <genClasses ecoreClass="FSMtest.ecore#//TransitionDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//TransitionDeclaration/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/destination"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/trigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/precondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/postcondition"/>
+    </genClasses>
+    <genClasses ecoreClass="FSMtest.ecore#//ConditionDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//ConditionDeclaration/signal"/>
+    </genClasses>
+    <genClasses ecoreClass="FSMtest.ecore#//PreconditionDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//PreconditionDeclaration/signal"/>
+    </genClasses>
+    <genClasses ecoreClass="FSMtest.ecore#//PostconditionDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//PostconditionDeclaration/signal"/>
     </genClasses>
     <genClasses ecoreClass="FSMtest.ecore#//StateDeclaration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//StateDeclaration/states"/>
-    </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//InitialDeclaration">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSMtest.ecore#//InitialDeclaration/initial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//StateDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//StateDeclaration/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//StateDeclaration/transitions"/>
     </genClasses>
     <genClasses ecoreClass="FSMtest.ecore#//LoopsDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//LoopsDeclaration/val"/>
@@ -39,18 +58,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//SignalDeclaration/signame"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//SignalDeclaration/intVal"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSMtest.ecore#//SignalDeclaration/strVal"/>
-    </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//SourceDeclaration">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSMtest.ecore#//SourceDeclaration/ref"/>
-    </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//DestinationDeclaration">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSMtest.ecore#//DestinationDeclaration/ref"/>
-    </genClasses>
-    <genClasses ecoreClass="FSMtest.ecore#//TransitionDeclaration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/source"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/in"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/out"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSMtest.ecore#//TransitionDeclaration/destination"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

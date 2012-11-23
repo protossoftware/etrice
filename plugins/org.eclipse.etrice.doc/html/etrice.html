@@ -257,7 +257,26 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#eTriceDevelopersReference">13. eTrice Developer&rsquo;s Reference</a></span>
+<span class="chapter"><a href="#eTriceModelsandTheirRelations">13. eTrice Models and Their Relations</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#TheROOMModel">The ROOM Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#TheConfigModel">The Config Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#ThePhysicalModel">The Physical Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#TheMappingModel">The Mapping Model</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#eTriceDevelopersReference">14. eTrice Developer&rsquo;s Reference</a></span>
 </dt>
 <dd>
 <dl>
@@ -4601,12 +4620,163 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;13.&nbsp;eTrice Developer&rsquo;s Reference">
+<div class="chapter" title="Chapter&nbsp;13.&nbsp;eTrice Models and Their Relations">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="eTriceDevelopersReference"></a>Chapter&nbsp;13.&nbsp;eTrice Developer&rsquo;s Reference</h2>
+<a name="eTriceModelsandTheirRelations"></a>Chapter&nbsp;13.&nbsp;eTrice Models and Their Relations</h2>
+</div>
+</div>
+</div>
+<p>eTrice comprises several models:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the ROOM model (*.room) &mdash; defines model classes and the logical structure of the model</p>
+</li>
+<li class="listitem">
+<p>Config model (*.config) &mdash; defines configuration values for attributes</p>
+</li>
+<li class="listitem">
+<p>Physical model (*.etphys) &mdash; defines the structure and properties of the physical system</p>
+</li>
+<li class="listitem">
+<p>Mapping model (*.etmap) &mdash; defines a mapping from logical elements to physical elements</p>
+</li>
+</ul>
+</div>
+<p>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</p>
+<p>
+			
+</p>
+<div class="mediaobject">
+<img src="images/080-models.jpg"></div>
+<p>
+		
+</p>
+<p>In the following sections we will describe those models with emphasis of their cross relations.</p>
+<div class="section" title="The ROOM Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheROOMModel"></a>The ROOM Model</h2>
+</div>
+</div>
+</div>
+<p>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+				Thereby the three latter form a hierarchy. The 
+				<code class="code">LogicalSystem</code> is the top level element of the structure. It contains references to 
+				<code class="code">SubSystemClass</code> elements. The 
+				<code class="code">SubSystemClass</code> in turn contain references to 
+				<code class="code">ActorClass</code> elements which again contain (recursively) references to 
+				<code class="code">ActorClass</code> elements. The complete structural hierarchy implies a tree which has the 
+				<code class="code">LogicalSystem</code> as root and where each reference stands for a new node with possibly further branches.
+			</p>
+<p>Let&rsquo;s consider a simple example. It doesn&rsquo;t implement any meaningful and completely omits behavioral and other aspects.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-room.jpg"></div>
+<p>
+			
+</p>
+<p>When a 
+				<code class="code">LogicalSstem</code> is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-instances.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Config Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheConfigModel"></a>The Config Model</h2>
+</div>
+</div>
+</div>
+<p>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-config.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Physical Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="ThePhysicalModel"></a>The Physical Model</h2>
+</div>
+</div>
+</div>
+<p>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only defines the overall execution model of the platform.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-runtimes.jpg"></div>
+<p>
+			
+</p>
+<p>The physical system is composed of 
+				<code class="code">Node</code> references where each 
+				<code class="code">Node</code> is defined as a class referencing a 
+				<code class="code">RuntimeClass</code> and defining 
+				<code class="code">Threads</code>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-phys.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Mapping Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheMappingModel"></a>The Mapping Model</h2>
+</div>
+</div>
+</div>
+<p>The last model finally combines all this information by mapping logical to physical entities.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-map.jpg"></div>
+<p>
+			
+</p>
+<p>The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ 
+				<span class="emphasis"><em>node</em></span> : 
+				<span class="emphasis"><em>thread</em></span>).
+			</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;14.&nbsp;eTrice Developer&rsquo;s Reference">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="eTriceDevelopersReference"></a>Chapter&nbsp;14.&nbsp;eTrice Developer&rsquo;s Reference</h2>
 </div>
 </div>
 </div>
@@ -4624,7 +4794,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 				
 </p>
 <div class="mediaobject">
-<img src="images/components.jpg"></div>
+<img src="images/200-components.jpg"></div>
 <p>
 			
 </p>

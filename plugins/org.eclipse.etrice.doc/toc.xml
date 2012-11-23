@@ -133,6 +133,12 @@
 </topic>
 </topic>
 </topic>
+<topic href="help/eTriceModelsandTheirRelations.html" label="eTrice Models and Their Relations">
+<topic href="help/eTriceModelsandTheirRelations.html#TheROOMModel" label="The ROOM Model"></topic>
+<topic href="help/TheConfigModel.html" label="The Config Model"></topic>
+<topic href="help/ThePhysicalModel.html" label="The Physical Model"></topic>
+<topic href="help/TheMappingModel.html" label="The Mapping Model"></topic>
+</topic>
 <topic href="help/eTriceDevelopersReference.html" label="eTrice Developer&rsquo;s Reference">
 <topic href="help/eTriceDevelopersReference.html#Architecture" label="Architecture">
 <topic href="help/eTriceDevelopersReference.html#EditorandGeneratorComponents" label="Editor and Generator Components"></topic>

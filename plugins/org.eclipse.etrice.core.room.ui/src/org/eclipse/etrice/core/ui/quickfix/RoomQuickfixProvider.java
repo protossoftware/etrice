@@ -15,23 +15,18 @@ package org.eclipse.etrice.core.ui.quickfix;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.etrice.core.validation.RoomJavaValidator;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 
 public class RoomQuickfixProvider extends DefaultQuickfixProvider {
-
-//	@Fix(MyJavaValidator.INVALID_TYPE_NAME)
-//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, "Capitalize name", "Capitalize name of type", "upcase.png", new IModification() {
-//			public void apply(IModificationContext context) throws BadLocationException {
-//				IXtextDocument xtextDocument = context.getXtextDocument();
-//				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-//				xtextDocument.replace(issue.getOffset(), 1, Strings.toFirstUpper(firstLetter));
-//			}
-//		});
-//	}
 
 	@Override
 	public List<IssueResolution> getResolutions(Issue issue) {
@@ -48,7 +43,29 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 	}
 	
 	@Override
-		public boolean hasResolutionFor(String issueCode) {
-			return super.hasResolutionFor(issueCode) || QuickfixExtensionManager.getInstance().hasResolutionFor(issueCode);
-		}
+	public boolean hasResolutionFor(String issueCode) {
+		return super.hasResolutionFor(issueCode) || QuickfixExtensionManager.getInstance().hasResolutionFor(issueCode);
+	}
+	
+	@Fix(RoomJavaValidator.THREAD_MISSING)
+	public void fixMissingThread(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add a default thread", issue.getData()[0], "add.gif", new IModification() {
+			public void apply(IModificationContext context) throws BadLocationException {
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				int offset = issue.getOffset()+issue.getLength()-1;
+				String insertion = "\n\t\t"+issue.getData()[0]+"\n\t";
+				xtextDocument.replace(offset, 0, insertion);
+			}
+		});
+	}
+
+	@Fix(RoomJavaValidator.DUPLICATE_ACTOR_INSTANCE_MAPPING)
+	public void removeDuplicateThreadMapping(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove duplicate mapping", "remove this mapping", "remove.gif", new IModification() {
+			public void apply(IModificationContext context) throws BadLocationException {
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				xtextDocument.replace(issue.getOffset(), issue.getLength(), "");
+			}
+		});
+	}
 }

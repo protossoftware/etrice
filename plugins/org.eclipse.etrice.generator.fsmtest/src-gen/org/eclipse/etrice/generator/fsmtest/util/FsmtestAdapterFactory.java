@@ -80,24 +80,44 @@ public class FsmtestAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseTestscript(Testscript object)
+      public Adapter caseFsmDefinition(FsmDefinition object)
       {
-        return createTestscriptAdapter();
+        return createFsmDefinitionAdapter();
       }
       @Override
-      public Adapter caseState(State object)
+      public Adapter caseRandomTest(RandomTest object)
       {
-        return createStateAdapter();
+        return createRandomTestAdapter();
+      }
+      @Override
+      public Adapter caseGuardDeclaration(GuardDeclaration object)
+      {
+        return createGuardDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseTransitionDeclaration(TransitionDeclaration object)
+      {
+        return createTransitionDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseConditionDeclaration(ConditionDeclaration object)
+      {
+        return createConditionDeclarationAdapter();
+      }
+      @Override
+      public Adapter casePreconditionDeclaration(PreconditionDeclaration object)
+      {
+        return createPreconditionDeclarationAdapter();
+      }
+      @Override
+      public Adapter casePostconditionDeclaration(PostconditionDeclaration object)
+      {
+        return createPostconditionDeclarationAdapter();
       }
       @Override
       public Adapter caseStateDeclaration(StateDeclaration object)
       {
         return createStateDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseInitialDeclaration(InitialDeclaration object)
-      {
-        return createInitialDeclarationAdapter();
       }
       @Override
       public Adapter caseLoopsDeclaration(LoopsDeclaration object)
@@ -113,21 +133,6 @@ public class FsmtestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseSignalDeclaration(SignalDeclaration object)
       {
         return createSignalDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseSourceDeclaration(SourceDeclaration object)
-      {
-        return createSourceDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseDestinationDeclaration(DestinationDeclaration object)
-      {
-        return createDestinationDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseTransitionDeclaration(TransitionDeclaration object)
-      {
-        return createTransitionDeclarationAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -167,31 +172,106 @@ public class FsmtestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.Testscript <em>Testscript</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.FsmDefinition <em>Fsm Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript
+   * @see org.eclipse.etrice.generator.fsmtest.FsmDefinition
    * @generated
    */
-  public Adapter createTestscriptAdapter()
+  public Adapter createFsmDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.State <em>State</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.RandomTest <em>Random Test</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.State
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest
    * @generated
    */
-  public Adapter createStateAdapter()
+  public Adapter createRandomTestAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.GuardDeclaration <em>Guard Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.generator.fsmtest.GuardDeclaration
+   * @generated
+   */
+  public Adapter createGuardDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration <em>Transition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration
+   * @generated
+   */
+  public Adapter createTransitionDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.ConditionDeclaration <em>Condition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.generator.fsmtest.ConditionDeclaration
+   * @generated
+   */
+  public Adapter createConditionDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration <em>Precondition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration
+   * @generated
+   */
+  public Adapter createPreconditionDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration <em>Postcondition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration
+   * @generated
+   */
+  public Adapter createPostconditionDeclarationAdapter()
   {
     return null;
   }
@@ -207,21 +287,6 @@ public class FsmtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStateDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.InitialDeclaration <em>Initial Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.InitialDeclaration
-   * @generated
-   */
-  public Adapter createInitialDeclarationAdapter()
   {
     return null;
   }
@@ -267,51 +332,6 @@ public class FsmtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSignalDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.SourceDeclaration <em>Source Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.SourceDeclaration
-   * @generated
-   */
-  public Adapter createSourceDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.DestinationDeclaration <em>Destination Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.DestinationDeclaration
-   * @generated
-   */
-  public Adapter createDestinationDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration <em>Transition Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration
-   * @generated
-   */
-  public Adapter createTransitionDeclarationAdapter()
   {
     return null;
   }

@@ -65,16 +65,17 @@ public class FsmtestFactoryImpl extends EFactoryImpl implements FsmtestFactory
     switch (eClass.getClassifierID())
     {
       case FsmtestPackage.MODEL: return createModel();
-      case FsmtestPackage.TESTSCRIPT: return createTestscript();
-      case FsmtestPackage.STATE: return createState();
+      case FsmtestPackage.FSM_DEFINITION: return createFsmDefinition();
+      case FsmtestPackage.RANDOM_TEST: return createRandomTest();
+      case FsmtestPackage.GUARD_DECLARATION: return createGuardDeclaration();
+      case FsmtestPackage.TRANSITION_DECLARATION: return createTransitionDeclaration();
+      case FsmtestPackage.CONDITION_DECLARATION: return createConditionDeclaration();
+      case FsmtestPackage.PRECONDITION_DECLARATION: return createPreconditionDeclaration();
+      case FsmtestPackage.POSTCONDITION_DECLARATION: return createPostconditionDeclaration();
       case FsmtestPackage.STATE_DECLARATION: return createStateDeclaration();
-      case FsmtestPackage.INITIAL_DECLARATION: return createInitialDeclaration();
       case FsmtestPackage.LOOPS_DECLARATION: return createLoopsDeclaration();
       case FsmtestPackage.SEED_DECLARATION: return createSeedDeclaration();
       case FsmtestPackage.SIGNAL_DECLARATION: return createSignalDeclaration();
-      case FsmtestPackage.SOURCE_DECLARATION: return createSourceDeclaration();
-      case FsmtestPackage.DESTINATION_DECLARATION: return createDestinationDeclaration();
-      case FsmtestPackage.TRANSITION_DECLARATION: return createTransitionDeclaration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -96,10 +97,10 @@ public class FsmtestFactoryImpl extends EFactoryImpl implements FsmtestFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Testscript createTestscript()
+  public FsmDefinition createFsmDefinition()
   {
-    TestscriptImpl testscript = new TestscriptImpl();
-    return testscript;
+    FsmDefinitionImpl fsmDefinition = new FsmDefinitionImpl();
+    return fsmDefinition;
   }
 
   /**
@@ -107,10 +108,65 @@ public class FsmtestFactoryImpl extends EFactoryImpl implements FsmtestFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public State createState()
+  public RandomTest createRandomTest()
   {
-    StateImpl state = new StateImpl();
-    return state;
+    RandomTestImpl randomTest = new RandomTestImpl();
+    return randomTest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GuardDeclaration createGuardDeclaration()
+  {
+    GuardDeclarationImpl guardDeclaration = new GuardDeclarationImpl();
+    return guardDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionDeclaration createTransitionDeclaration()
+  {
+    TransitionDeclarationImpl transitionDeclaration = new TransitionDeclarationImpl();
+    return transitionDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConditionDeclaration createConditionDeclaration()
+  {
+    ConditionDeclarationImpl conditionDeclaration = new ConditionDeclarationImpl();
+    return conditionDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PreconditionDeclaration createPreconditionDeclaration()
+  {
+    PreconditionDeclarationImpl preconditionDeclaration = new PreconditionDeclarationImpl();
+    return preconditionDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PostconditionDeclaration createPostconditionDeclaration()
+  {
+    PostconditionDeclarationImpl postconditionDeclaration = new PostconditionDeclarationImpl();
+    return postconditionDeclaration;
   }
 
   /**
@@ -122,17 +178,6 @@ public class FsmtestFactoryImpl extends EFactoryImpl implements FsmtestFactory
   {
     StateDeclarationImpl stateDeclaration = new StateDeclarationImpl();
     return stateDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InitialDeclaration createInitialDeclaration()
-  {
-    InitialDeclarationImpl initialDeclaration = new InitialDeclarationImpl();
-    return initialDeclaration;
   }
 
   /**
@@ -166,39 +211,6 @@ public class FsmtestFactoryImpl extends EFactoryImpl implements FsmtestFactory
   {
     SignalDeclarationImpl signalDeclaration = new SignalDeclarationImpl();
     return signalDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SourceDeclaration createSourceDeclaration()
-  {
-    SourceDeclarationImpl sourceDeclaration = new SourceDeclarationImpl();
-    return sourceDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestinationDeclaration createDestinationDeclaration()
-  {
-    DestinationDeclarationImpl destinationDeclaration = new DestinationDeclarationImpl();
-    return destinationDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDeclaration createTransitionDeclaration()
-  {
-    TransitionDeclarationImpl transitionDeclaration = new TransitionDeclarationImpl();
-    return transitionDeclaration;
   }
 
   /**

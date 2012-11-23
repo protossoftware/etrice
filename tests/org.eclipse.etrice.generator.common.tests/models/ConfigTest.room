@@ -2,6 +2,12 @@ RoomModel ConfigTest {
 
 	import room.basic.types.* from "Types.room"
 
+	/* if this is included the paths start with the LogicalSystem's name and the configuration mappings don't work	
+	LogicalSystem System_ConfigTest {
+		SubSystemRef SubSystem_ConfigTest: SubSystemConfigTest
+	}
+	*/
+
 	SubSystemClass SubSystemConfigTest {
 		ActorRef top: ConfigTest_Top_ac
 	}

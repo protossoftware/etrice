@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="eTMap" nsURI="http://www.eclipse.org/etrice/core/etmap/ETMap"
+    nsPrefix="eTMap">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+        eType="#//Mapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalSys" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="physicalSys" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore#//PhysicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsysMappings" upperBound="-1"
+        eType="#//SubSystemMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubSystemMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalSubSys" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore#//NodeRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="threadMappings" upperBound="-1"
+        eType="#//ThreadMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThreadMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalThread" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalThread"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="physicalThread" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore#//PhysicalThread"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

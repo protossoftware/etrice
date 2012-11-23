@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
-import org.eclipse.etrice.core.ui.linking.ImportAwareHyperlinkHelper;
+import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -51,6 +51,6 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 
 	// HOWTO: use URI imports - need special class for creating hyper links for imports
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-		return ImportAwareHyperlinkHelper.class;
+		return RoomHyperlinkHelper.class;
 	}
 }

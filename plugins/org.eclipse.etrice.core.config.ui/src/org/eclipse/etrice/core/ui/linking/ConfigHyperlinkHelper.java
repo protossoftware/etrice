@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -45,9 +46,11 @@ public class ConfigHyperlinkHelper extends ImportAwareHyperlinkHelper {
 						crossLinkedEObject = getCrossLinkedEObject((ActorInstanceConfig) parent);
 					}
 				}
-				if (crossLinkedEObject != null)
-					createHyperlinksTo(resource, null, crossLinkedEObject,
+				if (crossLinkedEObject != null) {
+					Region region = new Region(leaf.getOffset(), leaf.getLength());
+					createHyperlinksTo(resource, region, crossLinkedEObject,
 							acceptor);
+				}
 			}
 		}
 

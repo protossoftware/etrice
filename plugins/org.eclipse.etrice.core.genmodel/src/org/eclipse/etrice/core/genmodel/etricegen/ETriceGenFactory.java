@@ -50,6 +50,15 @@ public interface ETriceGenFactory extends EFactory {
 	StructureInstance createStructureInstance();
 
 	/**
+	 * Returns a new object of class '<em>System Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>System Instance</em>'.
+	 * @generated
+	 */
+	SystemInstance createSystemInstance();
+
+	/**
 	 * Returns a new object of class '<em>Sub System Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

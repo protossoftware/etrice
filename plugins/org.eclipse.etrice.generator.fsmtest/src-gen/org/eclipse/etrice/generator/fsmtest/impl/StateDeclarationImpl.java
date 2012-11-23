@@ -4,6 +4,7 @@ package org.eclipse.etrice.generator.fsmtest.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,14 +12,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.generator.fsmtest.ConditionDeclaration;
 import org.eclipse.etrice.generator.fsmtest.FsmtestPackage;
-import org.eclipse.etrice.generator.fsmtest.State;
 import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
+import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +30,9 @@ import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl#getStates <em>States</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl#getTransitions <em>Transitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +41,44 @@ import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
 public class StateDeclarationImpl extends MinimalEObjectImpl.Container implements StateDeclaration
 {
   /**
-   * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStates()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<State> states;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCondition()
+   * @generated
+   * @ordered
+   */
+  protected EList<ConditionDeclaration> condition;
+
+  /**
+   * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTransitions()
+   * @generated
+   * @ordered
+   */
+  protected EList<TransitionDeclaration> transitions;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +106,50 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<State> getStates()
+  public String getName()
   {
-    if (states == null)
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.STATE_DECLARATION__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ConditionDeclaration> getCondition()
+  {
+    if (condition == null)
     {
-      states = new EObjectContainmentEList<State>(State.class, this, FsmtestPackage.STATE_DECLARATION__STATES);
+      condition = new EObjectContainmentEList<ConditionDeclaration>(ConditionDeclaration.class, this, FsmtestPackage.STATE_DECLARATION__CONDITION);
     }
-    return states;
+    return condition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<TransitionDeclaration> getTransitions()
+  {
+    if (transitions == null)
+    {
+      transitions = new EObjectContainmentEList<TransitionDeclaration>(TransitionDeclaration.class, this, FsmtestPackage.STATE_DECLARATION__TRANSITIONS);
+    }
+    return transitions;
   }
 
   /**
@@ -90,8 +162,10 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case FsmtestPackage.STATE_DECLARATION__STATES:
-        return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.STATE_DECLARATION__CONDITION:
+        return ((InternalEList<?>)getCondition()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.STATE_DECLARATION__TRANSITIONS:
+        return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +180,12 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case FsmtestPackage.STATE_DECLARATION__STATES:
-        return getStates();
+      case FsmtestPackage.STATE_DECLARATION__NAME:
+        return getName();
+      case FsmtestPackage.STATE_DECLARATION__CONDITION:
+        return getCondition();
+      case FsmtestPackage.STATE_DECLARATION__TRANSITIONS:
+        return getTransitions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +201,16 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case FsmtestPackage.STATE_DECLARATION__STATES:
-        getStates().clear();
-        getStates().addAll((Collection<? extends State>)newValue);
+      case FsmtestPackage.STATE_DECLARATION__NAME:
+        setName((String)newValue);
+        return;
+      case FsmtestPackage.STATE_DECLARATION__CONDITION:
+        getCondition().clear();
+        getCondition().addAll((Collection<? extends ConditionDeclaration>)newValue);
+        return;
+      case FsmtestPackage.STATE_DECLARATION__TRANSITIONS:
+        getTransitions().clear();
+        getTransitions().addAll((Collection<? extends TransitionDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +226,14 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case FsmtestPackage.STATE_DECLARATION__STATES:
-        getStates().clear();
+      case FsmtestPackage.STATE_DECLARATION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case FsmtestPackage.STATE_DECLARATION__CONDITION:
+        getCondition().clear();
+        return;
+      case FsmtestPackage.STATE_DECLARATION__TRANSITIONS:
+        getTransitions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +249,31 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case FsmtestPackage.STATE_DECLARATION__STATES:
-        return states != null && !states.isEmpty();
+      case FsmtestPackage.STATE_DECLARATION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case FsmtestPackage.STATE_DECLARATION__CONDITION:
+        return condition != null && !condition.isEmpty();
+      case FsmtestPackage.STATE_DECLARATION__TRANSITIONS:
+        return transitions != null && !transitions.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //StateDeclarationImpl

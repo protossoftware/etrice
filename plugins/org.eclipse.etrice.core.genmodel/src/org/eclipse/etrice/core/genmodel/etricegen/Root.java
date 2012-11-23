@@ -33,6 +33,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSystemInstances <em>System Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOwnSubSystemInstances <em>Own Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getModels <em>Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpActorClasses <em>Xp Actor Classes</em>}</li>
@@ -76,7 +78,39 @@ public interface Root extends EObject {
 	void setLibrary(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Sub System Instances</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>System Instances</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SystemInstance}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>System Instances</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>System Instances</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_SystemInstances()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<SystemInstance> getSystemInstances();
+
+	/**
+	 * Returns the value of the '<em><b>Own Sub System Instances</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Own Sub System Instances</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Own Sub System Instances</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_OwnSubSystemInstances()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<SubSystemInstance> getOwnSubSystemInstances();
+
+	/**
+	 * Returns the value of the '<em><b>Sub System Instances</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -84,9 +118,9 @@ public interface Root extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub System Instances</em>' containment reference list.
+	 * @return the value of the '<em>Sub System Instances</em>' reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_SubSystemInstances()
-	 * @model containment="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SubSystemInstance> getSubSystemInstances();

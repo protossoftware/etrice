@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -28,6 +29,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getRelayPorts <em>Relay Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getThreads <em>Threads</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +56,16 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
    * @ordered
    */
   protected EList<LogicalThread> threads;
+
+  /**
+   * The cached value of the '{@link #getActorInstanceMappings() <em>Actor Instance Mappings</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getActorInstanceMappings()
+   * @generated
+   * @ordered
+   */
+  protected EList<ActorInstanceMapping> actorInstanceMappings;
 
   /**
    * <!-- begin-user-doc -->
@@ -109,6 +121,20 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<ActorInstanceMapping> getActorInstanceMappings()
+  {
+    if (actorInstanceMappings == null)
+    {
+      actorInstanceMappings = new EObjectContainmentEList<ActorInstanceMapping>(ActorInstanceMapping.class, this, RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS);
+    }
+    return actorInstanceMappings;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -118,6 +144,8 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
         return ((InternalEList<?>)getRelayPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
         return ((InternalEList<?>)getThreads()).basicRemove(otherEnd, msgs);
+      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+        return ((InternalEList<?>)getActorInstanceMappings()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -136,6 +164,8 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
         return getRelayPorts();
       case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
         return getThreads();
+      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+        return getActorInstanceMappings();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -159,6 +189,10 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
         getThreads().clear();
         getThreads().addAll((Collection<? extends LogicalThread>)newValue);
         return;
+      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+        getActorInstanceMappings().clear();
+        getActorInstanceMappings().addAll((Collection<? extends ActorInstanceMapping>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -179,6 +213,9 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
       case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
         getThreads().clear();
         return;
+      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+        getActorInstanceMappings().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -197,6 +234,8 @@ public class SubSystemClassImpl extends ActorContainerClassImpl implements SubSy
         return relayPorts != null && !relayPorts.isEmpty();
       case RoomPackage.SUB_SYSTEM_CLASS__THREADS:
         return threads != null && !threads.isEmpty();
+      case RoomPackage.SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS:
+        return actorInstanceMappings != null && !actorInstanceMappings.isEmpty();
     }
     return super.eIsSet(featureID);
   }

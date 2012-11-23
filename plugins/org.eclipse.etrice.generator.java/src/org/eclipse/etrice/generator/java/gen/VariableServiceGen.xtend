@@ -26,7 +26,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -51,10 +50,11 @@ class VariableServiceGen {
 		var file = ssi.subSystemClass.name+"VariableService.java"
 		logger.logInfo("generating VariableService implementation: '"+file+"' in '"+path+"'")
 		fileAccess.setOutputPath(path)
-		fileAccess.generateFile(file, root.generate(ssi, ssi.subSystemClass))
+		fileAccess.generateFile(file, root.generate(ssi))
 	}
 	
-	def private generate(Root root, SubSystemInstance comp, SubSystemClass cc) {
+	def private generate(Root root, SubSystemInstance comp) {
+		val cc = comp.subSystemClass
 		val aisAttrMap = new HashMap<ActorInstance, List<Attribute>>
 		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai.path).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai.path)))
 	'''
@@ -71,7 +71,7 @@ class VariableServiceGen {
 		«ENDFOR»
 		
 		
-		public class «comp.name+"VariableService"» extends VariableService{
+		public class «cc.name+"VariableService"» extends VariableService{
 			
 			private «cc.name» subSystem;
 			
@@ -80,7 +80,7 @@ class VariableServiceGen {
 				private «ai.actorClass.name» «ai.varName»;
 			«ENDFOR»
 			
-			public «comp.name+"VariableService"»(«cc.name» subSystem) {
+			public «cc.name+"VariableService"»(«cc.name» subSystem) {
 				super(«configExt.getUserCode2(cc)»);
 				this.subSystem = subSystem;
 			}
@@ -265,6 +265,4 @@ class VariableServiceGen {
 			'''
 		}
 	}
-	
-	
 }

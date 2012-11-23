@@ -383,13 +383,22 @@ public interface RoomFactory extends EFactory
   LogicalThread createLogicalThread();
 
   /**
-   * Returns a new object of class '<em>Actor Instance Path</em>'.
+   * Returns a new object of class '<em>Actor Instance Mapping</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Actor Instance Path</em>'.
+   * @return a new object of class '<em>Actor Instance Mapping</em>'.
    * @generated
    */
-  ActorInstancePath createActorInstancePath();
+  ActorInstanceMapping createActorInstanceMapping();
+
+  /**
+   * Returns a new object of class '<em>Ref Path</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ref Path</em>'.
+   * @generated
+   */
+  RefPath createRefPath();
 
   /**
    * Returns a new object of class '<em>Binding</em>'.

@@ -1,15 +1,19 @@
 package org.eclipse.etrice.generator.config;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.BooleanLiteral;
+import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.DynamicConfig;
+import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.IntLiteral;
 import org.eclipse.etrice.core.config.Literal;
 import org.eclipse.etrice.core.config.LiteralArray;
@@ -25,13 +29,21 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class DataConfiguration implements IDataConfiguration {
+  @Inject
+  protected ILogger logger;
+  
+  @Inject
+  protected ImportUriResolver uriResolver;
+  
   public void doSetup() {
     ConfigStandaloneSetup.doSetup();
   }
@@ -330,5 +342,17 @@ public class DataConfiguration implements IDataConfiguration {
       };
     if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     return result;
+  }
+  
+  public void addReferencedModels(final IResourceURIAcceptor acceptor, final EObject root) {
+    if ((root instanceof ConfigModel)) {
+      EList<Import> _imports = ((ConfigModel) root).getImports();
+      for (final Import imp : _imports) {
+        {
+          final String importURI = this.uriResolver.resolve(imp);
+          acceptor.addResourceURI(importURI);
+        }
+      }
+    }
   }
 }

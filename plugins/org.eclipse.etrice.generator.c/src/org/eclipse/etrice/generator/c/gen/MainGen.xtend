@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
+import org.eclipse.etrice.generator.c.gen.SubSystemClassGen
 
 @Singleton
 class MainGen implements IGenerator {

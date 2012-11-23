@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -70,6 +71,13 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	private EClass structureInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass systemInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -270,7 +278,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_SubSystemInstances() {
+	public EReference getRoot_SystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -279,7 +287,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_Models() {
+	public EReference getRoot_OwnSubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -288,7 +296,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_XpActorClasses() {
+	public EReference getRoot_SubSystemInstances() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -297,7 +305,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedDataClasses() {
+	public EReference getRoot_Models() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -306,7 +314,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedProtocolClasses() {
+	public EReference getRoot_XpActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -315,7 +323,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedActorClasses() {
+	public EReference getRoot_UsedDataClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -324,7 +332,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_UsedRoomModels() {
+	public EReference getRoot_UsedProtocolClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -333,8 +341,26 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_SubSystemClasses() {
+	public EReference getRoot_UsedActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_UsedRoomModels() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_SubSystemClasses() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -479,6 +505,33 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getStructureInstance_OrderedIfItemInstances() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSystemInstance() {
+		return systemInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSystemInstance_Instances() {
+		return (EReference)systemInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSystemInstance_LogicalSystem() {
+		return (EReference)systemInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -952,6 +1005,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		// Create classes and their features
 		rootEClass = createEClass(ROOT);
 		createEAttribute(rootEClass, ROOT__LIBRARY);
+		createEReference(rootEClass, ROOT__SYSTEM_INSTANCES);
+		createEReference(rootEClass, ROOT__OWN_SUB_SYSTEM_INSTANCES);
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_INSTANCES);
 		createEReference(rootEClass, ROOT__MODELS);
 		createEReference(rootEClass, ROOT__XP_ACTOR_CLASSES);
@@ -978,6 +1033,10 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__CONNECTIONS);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__ALL_CONTAINED_INSTANCES);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__ORDERED_IF_ITEM_INSTANCES);
+
+		systemInstanceEClass = createEClass(SYSTEM_INSTANCE);
+		createEReference(systemInstanceEClass, SYSTEM_INSTANCE__INSTANCES);
+		createEReference(systemInstanceEClass, SYSTEM_INSTANCE__LOGICAL_SYSTEM);
 
 		subSystemInstanceEClass = createEClass(SUB_SYSTEM_INSTANCE);
 		createEReference(subSystemInstanceEClass, SUB_SYSTEM_INSTANCE__SUB_SYSTEM_CLASS);
@@ -1078,6 +1137,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		// Add supertypes to classes
 		structureInstanceEClass.getESuperTypes().add(this.getInstanceBase());
+		systemInstanceEClass.getESuperTypes().add(this.getInstanceBase());
 		subSystemInstanceEClass.getESuperTypes().add(this.getStructureInstance());
 		actorInstanceEClass.getESuperTypes().add(this.getStructureInstance());
 		interfaceItemInstanceEClass.getESuperTypes().add(this.getInstanceBase());
@@ -1090,7 +1150,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoot_Library(), ecorePackage.getEBoolean(), "library", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoot_SubSystemInstances(), this.getSubSystemInstance(), null, "subSystemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_SystemInstances(), this.getSystemInstance(), null, "systemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_OwnSubSystemInstances(), this.getSubSystemInstance(), null, "ownSubSystemInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_SubSystemInstances(), this.getSubSystemInstance(), null, "subSystemInstances", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Models(), theRoomPackage.getRoomModel(), null, "models", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_XpActorClasses(), this.getExpandedActorClass(), null, "xpActorClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_UsedDataClasses(), theRoomPackage.getDataClass(), null, "usedDataClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1125,6 +1187,10 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getStructureInstance_Connections(), this.getConnectionInstance(), null, "connections", null, 0, -1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStructureInstance_AllContainedInstances(), this.getActorInstance(), null, "allContainedInstances", null, 0, -1, StructureInstance.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getStructureInstance_OrderedIfItemInstances(), this.getInterfaceItemInstance(), null, "orderedIfItemInstances", null, 0, -1, StructureInstance.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(systemInstanceEClass, SystemInstance.class, "SystemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSystemInstance_Instances(), this.getSubSystemInstance(), null, "instances", null, 0, -1, SystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSystemInstance_LogicalSystem(), theRoomPackage.getLogicalSystem(), null, "logicalSystem", null, 0, 1, SystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subSystemInstanceEClass, SubSystemInstance.class, "SubSystemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSubSystemInstance_SubSystemClass(), theRoomPackage.getSubSystemClass(), null, "subSystemClass", null, 0, 1, SubSystemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

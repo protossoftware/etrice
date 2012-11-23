@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +25,8 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
@@ -43,6 +46,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
@@ -1214,6 +1218,118 @@ public class RoomHelpers {
 			ac = ac.getBase();
 		}
 		
+		return null;
+	}
+	
+	public static ActorContainerClass getParentContainer(ActorInstanceMapping aim) {
+		ActorContainerClass root = null;
+		if (aim.eContainer() instanceof ActorInstanceMapping) {
+			ActorInstanceMapping parent = (ActorInstanceMapping) aim.eContainer();
+			root = getActorContainerClass(parent);
+		}
+		else if (aim.eContainer() instanceof SubSystemClass) {
+			root = (SubSystemClass) aim.eContainer();
+		}
+		return root;
+	}
+
+	public static ActorContainerClass getActorContainerClass(ActorInstanceMapping aim) {
+		// follow segments
+		ActorContainerClass result = getParentContainer(aim);
+		for (String ref : aim.getPath().getRefs()) {
+			ActorRef match = null;
+			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+					match = (ActorRef) actor;
+					break;
+				}
+			}
+
+			if (match == null)
+				return null;
+			result = match.getType();
+		}
+
+		return result;
+	}
+	
+	public static String asString(RefPath path) {
+		StringBuilder sb = new StringBuilder();
+		for (String ref : path.getRefs()) {
+			sb.append("/"+ref);
+		}
+		return sb.toString();
+	}
+	
+	public static ActorRef getLastActorRef(ActorContainerClass root, RefPath path) {
+		if (path.getRefs().isEmpty())
+			return null;
+		
+		ActorRef lastMatch = null;
+		ActorContainerClass result = root;
+		for (String ref : path.getRefs()) {
+			ActorRef match = null;
+			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+					match = (ActorRef) actor;
+					break;
+				}
+			}
+
+			if (match == null)
+				return null;
+			
+			result = match.getType();
+			lastMatch = match;
+		}
+
+		return lastMatch;
+	}
+
+	/**
+	 * returns first invalid path segment else null
+	 * 
+	 * @param root
+	 * @param path
+	 * @return
+	 */
+	public static String checkPath(ActorContainerClass root, RefPath path) {
+		if (path == null)
+			return null;
+
+		ActorContainerClass last = root;
+		Iterator<String> it = path.getRefs().iterator();
+		String ref;
+		while (it.hasNext()) {
+			ref = it.next();
+			// actor
+			ActorRef match = null;
+			for (ActorRef actor : last.getActorRefs()) {
+				if (actor.getName().equals(ref)) {
+					match = actor;
+					break;
+				}
+			}
+			// port
+			List<InterfaceItem> ifs = new ArrayList<InterfaceItem>();
+			ifs.addAll(last.getIfSPPs());
+			if (last instanceof ActorClass) {
+				ActorClass actor = (ActorClass) last;
+				ifs.addAll(actor.getIfPorts());
+				ifs.addAll(actor.getIntPorts());
+			}
+			if (last instanceof SubSystemClass)
+				ifs.addAll(((SubSystemClass) last).getRelayPorts());
+			for (InterfaceItem item : ifs) {
+				// not nested, quit if last segment
+				if (item.getName().equals(ref) && !it.hasNext())
+					return null;
+			}
+			if (match == null)
+				return ref;
+			last = match.getType();
+		}
+
 		return null;
 	}
 }

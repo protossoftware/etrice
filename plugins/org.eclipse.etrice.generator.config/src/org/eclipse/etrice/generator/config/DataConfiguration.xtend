@@ -12,11 +12,14 @@
 
 package org.eclipse.etrice.generator.config
 
+import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.etrice.core.ConfigStandaloneSetup
 import org.eclipse.etrice.core.config.BooleanLiteral
+import org.eclipse.etrice.core.config.ConfigModel
 import org.eclipse.etrice.core.config.IntLiteral
 import org.eclipse.etrice.core.config.Literal
 import org.eclipse.etrice.core.config.LiteralArray
@@ -30,10 +33,17 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.base.IResourceURIAcceptor
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
+import org.eclipse.xtext.scoping.impl.ImportUriResolver
 
 class DataConfiguration implements IDataConfiguration {
 	
+	@Inject
+	protected ILogger logger;
+	
+	@Inject
+	protected ImportUriResolver uriResolver;
 
 	override doSetup() {
 		ConfigStandaloneSetup::doSetup()
@@ -155,6 +165,13 @@ class DataConfiguration implements IDataConfiguration {
 		return result
 	}
 	
-
+	override void addReferencedModels(IResourceURIAcceptor acceptor, EObject root) {
+		if (root instanceof ConfigModel) {
+			for (imp : (root as ConfigModel).imports) {
+				val importURI = uriResolver.resolve(imp)
+				acceptor.addResourceURI(importURI);
+			}
+		}
+	}
 	
 }

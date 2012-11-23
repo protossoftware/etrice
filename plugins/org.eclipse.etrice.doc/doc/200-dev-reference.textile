@@ -5,7 +5,7 @@ h2. Architecture
 
 The basic components of eTrice are depicted in the following diagram.
 
-!{width:50%}images/components.jpg!
+!{width:50%}images/200-components.jpg!
 
 Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.
 

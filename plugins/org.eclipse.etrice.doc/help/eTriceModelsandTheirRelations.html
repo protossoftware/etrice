@@ -1,0 +1,107 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>eTrice Models and Their Relations</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="index.html" title="eTrice User Guide">
+<link rel="prev" href="FiniteStateMachines.html" title="Finite State Machines">
+<link rel="next" href="TheConfigModel.html" title="The Config Model">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">eTrice Models and Their Relations</h1>
+<div class="chapter" title="eTrice Models and Their Relations">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="eTriceModelsandTheirRelations"></a>eTrice Models and Their Relations</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="eTriceModelsandTheirRelations.html#TheROOMModel">The ROOM Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="TheConfigModel.html">The Config Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ThePhysicalModel.html">The Physical Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="TheMappingModel.html">The Mapping Model</a></span>
+</dt>
+</dl>
+</div>
+<p>eTrice comprises several models:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the ROOM model (*.room) &mdash; defines model classes and the logical structure of the model</p>
+</li>
+<li class="listitem">
+<p>Config model (*.config) &mdash; defines configuration values for attributes</p>
+</li>
+<li class="listitem">
+<p>Physical model (*.etphys) &mdash; defines the structure and properties of the physical system</p>
+</li>
+<li class="listitem">
+<p>Mapping model (*.etmap) &mdash; defines a mapping from logical elements to physical elements</p>
+</li>
+</ul>
+</div>
+<p>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</p>
+<p>
+			
+</p>
+<div class="mediaobject">
+<img src="images/080-models.jpg"></div>
+<p>
+		
+</p>
+<p>In the following sections we will describe those models with emphasis of their cross relations.</p>
+<div class="section" title="The ROOM Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheROOMModel"></a>The ROOM Model</h2>
+</div>
+</div>
+</div>
+<p>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+				Thereby the three latter form a hierarchy. The 
+				<code class="code">LogicalSystem</code> is the top level element of the structure. It contains references to 
+				<code class="code">SubSystemClass</code> elements. The 
+				<code class="code">SubSystemClass</code> in turn contain references to 
+				<code class="code">ActorClass</code> elements which again contain (recursively) references to 
+				<code class="code">ActorClass</code> elements. The complete structural hierarchy implies a tree which has the 
+				<code class="code">LogicalSystem</code> as root and where each reference stands for a new node with possibly further branches.
+			</p>
+<p>Let&rsquo;s consider a simple example. It doesn&rsquo;t implement any meaningful and completely omits behavioral and other aspects.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-room.jpg"></div>
+<p>
+			
+</p>
+<p>When a 
+				<code class="code">LogicalSstem</code> is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-instances.jpg"></div>
+<p>
+			
+</p>
+</div>
+</div>
+</body>
+</html>
