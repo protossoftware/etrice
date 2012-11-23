@@ -16,21 +16,21 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.etrice.core.ConfigStandaloneSetup
+import org.eclipse.etrice.core.config.BooleanLiteral
+import org.eclipse.etrice.core.config.IntLiteral
+import org.eclipse.etrice.core.config.Literal
+import org.eclipse.etrice.core.config.LiteralArray
+import org.eclipse.etrice.core.config.RealLiteral
+import org.eclipse.etrice.core.config.StringLiteral
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
-import org.eclipse.etrice.core.config.BooleanLiteral
-import org.eclipse.etrice.core.config.IntLiteral
-import org.eclipse.etrice.core.config.RealLiteral
-import org.eclipse.etrice.core.config.StringLiteral
-import org.eclipse.etrice.core.config.LiteralArray
-import org.eclipse.etrice.core.config.Literal
-import org.eclipse.etrice.core.room.InterfaceItem
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -76,11 +76,9 @@ class DataConfiguration implements IDataConfiguration {
 		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
 	}
 	
-	override getAttrInstanceConfigValue(ActorInstance ai, InterfaceItem port, List<Attribute> path) {
-		var id = ai.path+"/"+port.name+"/"+path.toStringPath
-		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
+	override getAttrInstanceConfigValue(InterfaceItemInstance item, List<Attribute> path) {
+		DataConfigurationHelper::actorInstanceAttrMap.get(item.path)?.value?.toStringExpr
 	}
-	
 	// dynamic
 	
 	override getPollingTimerUser(SubSystemClass subsystem) {
@@ -156,5 +154,7 @@ class DataConfiguration implements IDataConfiguration {
 		configs?.forEach(c | if(!c.readOnly)result.add(c.attribute))
 		return result
 	}
+	
+
 	
 }

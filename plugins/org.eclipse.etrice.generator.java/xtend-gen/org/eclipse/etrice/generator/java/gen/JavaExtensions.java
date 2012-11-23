@@ -299,7 +299,9 @@ public class JavaExtensions implements ILanguageExtension {
   
   public String defaultValue(final DataType dt) {
     if ((dt instanceof PrimitiveType)) {
-      return ((PrimitiveType) dt).getDefaultValueLiteral();
+      PrimitiveType pType = ((PrimitiveType) dt);
+      String _defaultValueLiteral = pType.getDefaultValueLiteral();
+      return this.toValueLiteral(pType, _defaultValueLiteral);
     } else {
       if ((dt instanceof ExternalType)) {
         String _targetName = ((ExternalType) dt).getTargetName();

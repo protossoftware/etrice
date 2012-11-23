@@ -250,60 +250,103 @@ public class CExtensions implements ILanguageExtension {
   }
   
   public String toValueLiteral(final PrimitiveType type, final String value) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO Config for C");
-    throw _unsupportedOperationException;
+    String _switchResult = null;
+    String _targetName = type.getTargetName();
+    final String _switchValue = _targetName;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"char")) {
+        _matched=true;
+        String _plus = ("\'" + value);
+        String _plus_1 = (_plus + "\'");
+        _switchResult = _plus_1;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"charPtr")) {
+        _matched=true;
+        String _plus_2 = ("\"" + value);
+        String _plus_3 = (_plus_2 + "\"");
+        _switchResult = _plus_3;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"stringPtr")) {
+        _matched=true;
+        String _plus_4 = ("\"" + value);
+        String _plus_5 = (_plus_4 + "\"");
+        _switchResult = _plus_5;
+      }
+    }
+    if (!_matched) {
+      _switchResult = value;
+    }
+    return _switchResult;
   }
   
   public String defaultValue(final DataType dt) {
-    String _xifexpression = null;
-    if ((dt instanceof PrimitiveType)) {
-      return ((PrimitiveType) dt).getDefaultValueLiteral();
-    } else {
-      String _xifexpression_1 = null;
-      if ((dt instanceof ExternalType)) {
-        String _defaultValueLiteral = ((ExternalType) dt).getDefaultValueLiteral();
-        boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
-        if (_notEquals) {
-          return ((ExternalType) dt).getDefaultValueLiteral();
-        }
-        String _name = dt.getName();
-        String _plus = ("cannot initialize external type " + _name);
-        EObject _eContainer = dt.eContainer();
-        EStructuralFeature _eContainingFeature = dt.eContainingFeature();
-        this.diagnostician.error(_plus, _eContainer, _eContainingFeature);
-        String _name_1 = dt.getName();
-        return ("cannot instantiate external data type " + _name_1);
-      } else {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (dt instanceof PrimitiveType) {
+        final PrimitiveType _primitiveType = (PrimitiveType)dt;
+        _matched=true;
+        String _defaultValueLiteral = _primitiveType.getDefaultValueLiteral();
+        String _valueLiteral = this.toValueLiteral(_primitiveType, _defaultValueLiteral);
+        _switchResult = _valueLiteral;
+      }
+    }
+    if (!_matched) {
+      if (dt instanceof ExternalType) {
+        final ExternalType _externalType = (ExternalType)dt;
+        _matched=true;
         String _xblockexpression = null;
         {
-          final DataClass dc = ((DataClass) dt);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          {
-            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(dc);
-            boolean _hasElements = false;
-            for(final Attribute att : _allAttributes) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
-              _builder.append("\t");
-              String _initializationWithDefaultValues = this.initializationWithDefaultValues(att);
-              _builder.append(_initializationWithDefaultValues, "	");
-              _builder.newLineIfNotEmpty();
-            }
+          String _defaultValueLiteral = _externalType.getDefaultValueLiteral();
+          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+          if (_notEquals) {
+            return _externalType.getDefaultValueLiteral();
           }
-          _builder.append("}");
-          _builder.newLine();
-          _xblockexpression = (_builder.toString());
+          String _name = _externalType.getName();
+          String _plus = ("cannot initialize external type " + _name);
+          EObject _eContainer = _externalType.eContainer();
+          EStructuralFeature _eContainingFeature = _externalType.eContainingFeature();
+          this.diagnostician.error(_plus, _eContainer, _eContainingFeature);
+          String _name_1 = _externalType.getName();
+          String _plus_1 = ("cannot instantiate external data type " + _name_1);
+          _xblockexpression = (_plus_1);
         }
-        _xifexpression_1 = _xblockexpression;
+        _switchResult = _xblockexpression;
       }
-      _xifexpression = _xifexpression_1;
     }
-    return _xifexpression;
+    if (!_matched) {
+      if (dt instanceof DataClass) {
+        final DataClass _dataClass = (DataClass)dt;
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        {
+          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(_dataClass);
+          boolean _hasElements = false;
+          for(final Attribute att : _allAttributes) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "	");
+            }
+            _builder.append("\t");
+            String _initializationWithDefaultValues = this.initializationWithDefaultValues(att);
+            _builder.append(_initializationWithDefaultValues, "	");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+        _switchResult = _builder.toString();
+      }
+    }
+    return _switchResult;
   }
   
   public String initializationWithDefaultValues(final DataType dt, final int size) {

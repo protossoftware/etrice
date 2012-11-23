@@ -6,18 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -53,50 +52,27 @@ public class ConfigGenAddon {
       for(final Attribute a : _attributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
-        CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, null, aiVariableName, _union);
+        CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, aiVariableName, _union);
         _builder.append(_applyInstanceConfig, "");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      ActorClass _actorClass_1 = ai.getActorClass();
-      List<Port> _allEndPorts = this._roomExtensions.getAllEndPorts(_actorClass_1);
-      for(final Port p : _allEndPorts) {
+      EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+      for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
         {
-          GeneralProtocolClass _protocol = p.getProtocol();
-          boolean _isConjugated = p.isConjugated();
-          boolean _not = (!_isConjugated);
-          List<Attribute> _attributes_1 = this.getAttributes(_protocol, _not);
+          InterfaceItem _interfaceItem = pi.getInterfaceItem();
+          PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
+          EList<Attribute> _attributes_1 = _portClass.getAttributes();
           for(final Attribute a_1 : _attributes_1) {
             String _plus = (aiVariableName + ".");
-            String _name = p.getName();
+            String _name = pi.getName();
             CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
             String _plus_1 = (_plus + _invokeGetter);
             ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
             List<Attribute> _union_1 = this._roomExtensions.<Attribute>union(_arrayList_1, a_1);
-            CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(ai, p, _plus_1, _union_1);
+            CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
             _builder.append(_applyInstanceConfig_1, "");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    {
-      ActorClass _actorClass_2 = ai.getActorClass();
-      List<SAPRef> _allSAPs = this._roomExtensions.getAllSAPs(_actorClass_2);
-      for(final SAPRef sap : _allSAPs) {
-        {
-          ProtocolClass _protocol_1 = sap.getProtocol();
-          List<Attribute> _attributes_2 = this.getAttributes(_protocol_1, true);
-          for(final Attribute a_2 : _attributes_2) {
-            String _plus_2 = (aiVariableName + ".");
-            String _name_1 = sap.getName();
-            CharSequence _invokeGetter_1 = this.helpers.invokeGetter(_name_1, null);
-            String _plus_3 = (_plus_2 + _invokeGetter_1);
-            ArrayList<Attribute> _arrayList_2 = new ArrayList<Attribute>();
-            List<Attribute> _union_2 = this._roomExtensions.<Attribute>union(_arrayList_2, a_2);
-            CharSequence _applyInstanceConfig_2 = this.applyInstanceConfig(ai, sap, _plus_3, _union_2);
-            _builder.append(_applyInstanceConfig_2, "");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -105,46 +81,7 @@ public class ConfigGenAddon {
     return _builder;
   }
   
-  private List<Attribute> getAttributes(final GeneralProtocolClass gpc, final boolean regular) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    ArrayList<Attribute> result = _arrayList;
-    if ((gpc instanceof ProtocolClass)) {
-      ProtocolClass protocol = ((ProtocolClass) gpc);
-      boolean _and = false;
-      if (!regular) {
-        _and = false;
-      } else {
-        PortClass _regular = protocol.getRegular();
-        EList<Attribute> _attributes = _regular==null?(EList<Attribute>)null:_regular.getAttributes();
-        boolean _notEquals = (!Objects.equal(_attributes, null));
-        _and = (regular && _notEquals);
-      }
-      if (_and) {
-        PortClass _regular_1 = protocol.getRegular();
-        EList<Attribute> _attributes_1 = _regular_1.getAttributes();
-        result.addAll(_attributes_1);
-      } else {
-        boolean _and_1 = false;
-        boolean _not = (!regular);
-        if (!_not) {
-          _and_1 = false;
-        } else {
-          PortClass _conjugate = protocol.getConjugate();
-          EList<Attribute> _attributes_2 = _conjugate==null?(EList<Attribute>)null:_conjugate.getAttributes();
-          boolean _notEquals_1 = (!Objects.equal(_attributes_2, null));
-          _and_1 = (_not && _notEquals_1);
-        }
-        if (_and_1) {
-          PortClass _conjugate_1 = protocol.getConjugate();
-          EList<Attribute> _attributes_3 = _conjugate_1.getAttributes();
-          result.addAll(_attributes_3);
-        }
-      }
-    }
-    return result;
-  }
-  
-  private CharSequence applyInstanceConfig(final ActorInstance ai, final InterfaceItem port, final String invokes, final List<Attribute> path) {
+  private CharSequence applyInstanceConfig(final InstanceBase instance, final String invokes, final List<Attribute> path) {
     CharSequence _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
@@ -155,31 +92,40 @@ public class ConfigGenAddon {
       if (_isPrimitive) {
         CharSequence _xblockexpression_1 = null;
         {
-          String _xifexpression_1 = null;
-          boolean _equals = Objects.equal(port, null);
-          if (_equals) {
-            String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(ai, path);
-            _xifexpression_1 = _attrInstanceConfigValue;
-          } else {
-            String _attrInstanceConfigValue_1 = this.dataConfigExt.getAttrInstanceConfigValue(ai, port, path);
-            _xifexpression_1 = _attrInstanceConfigValue_1;
+          String _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (instance instanceof ActorInstance) {
+              final ActorInstance _actorInstance = (ActorInstance)instance;
+              _matched=true;
+              String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_actorInstance, path);
+              _switchResult = _attrInstanceConfigValue;
+            }
           }
-          String value = _xifexpression_1;
-          CharSequence _xifexpression_2 = null;
-          boolean _equals_1 = Objects.equal(value, null);
-          if (_equals_1) {
+          if (!_matched) {
+            if (instance instanceof InterfaceItemInstance) {
+              final InterfaceItemInstance _interfaceItemInstance = (InterfaceItemInstance)instance;
+              _matched=true;
+              String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_interfaceItemInstance, path);
+              _switchResult = _attrInstanceConfigValue;
+            }
+          }
+          String value = _switchResult;
+          CharSequence _xifexpression_1 = null;
+          boolean _equals = Objects.equal(value, null);
+          if (_equals) {
             StringConcatenation _builder = new StringConcatenation();
-            _xifexpression_2 = _builder;
+            _xifexpression_1 = _builder;
           } else {
-            CharSequence _xifexpression_3 = null;
+            CharSequence _xifexpression_2 = null;
             boolean _or = false;
             int _size = a.getSize();
-            boolean _equals_2 = (_size == 0);
-            if (_equals_2) {
+            boolean _equals_1 = (_size == 0);
+            if (_equals_1) {
               _or = true;
             } else {
               boolean _isCharacterType = this.typeHelpers.isCharacterType(aType);
-              _or = (_equals_2 || _isCharacterType);
+              _or = (_equals_1 || _isCharacterType);
             }
             if (_or) {
               StringConcatenation _builder_1 = new StringConcatenation();
@@ -190,14 +136,14 @@ public class ConfigGenAddon {
               CharSequence _invokeSetter = this.helpers.invokeSetter(_name, null, _valueLiteral);
               _builder_1.append(_invokeSetter, "");
               _builder_1.append(";");
-              _xifexpression_3 = _builder_1;
+              _xifexpression_2 = _builder_1;
             } else {
-              CharSequence _xifexpression_4 = null;
+              CharSequence _xifexpression_3 = null;
               int _size_1 = a.getSize();
               String[] _split = value.split(",");
               int _size_2 = ((List<String>)Conversions.doWrapArray(_split)).size();
-              boolean _equals_3 = (_size_1 == _size_2);
-              if (_equals_3) {
+              boolean _equals_2 = (_size_1 == _size_2);
+              if (_equals_2) {
                 CharSequence _xblockexpression_2 = null;
                 {
                   StringConcatenation _builder_2 = new StringConcatenation();
@@ -234,7 +180,7 @@ public class ConfigGenAddon {
                   _builder_3.append(";");
                   _xblockexpression_2 = (_builder_3);
                 }
-                _xifexpression_4 = _xblockexpression_2;
+                _xifexpression_3 = _xblockexpression_2;
               } else {
                 StringConcatenation _builder_2 = new StringConcatenation();
                 _builder_2.append("{");
@@ -263,13 +209,13 @@ public class ConfigGenAddon {
                 _builder_2.append(";");
                 _builder_2.newLineIfNotEmpty();
                 _builder_2.append("}");
-                _xifexpression_4 = _builder_2;
+                _xifexpression_3 = _builder_2;
               }
-              _xifexpression_3 = _xifexpression_4;
+              _xifexpression_2 = _xifexpression_3;
             }
-            _xifexpression_2 = _xifexpression_3;
+            _xifexpression_1 = _xifexpression_2;
           }
-          _xblockexpression_1 = (_xifexpression_2);
+          _xblockexpression_1 = (_xifexpression_1);
         }
         _xifexpression = _xblockexpression_1;
       } else {
@@ -285,7 +231,7 @@ public class ConfigGenAddon {
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
               String _plus_1 = (_plus + _invokeGetter);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, port, _plus_1, _union);
+              CharSequence _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
             }

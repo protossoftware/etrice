@@ -156,26 +156,32 @@ class CExtensions implements ILanguageExtension {
 		""
 	}
 	override String toValueLiteral(PrimitiveType type, String value){
-		throw new UnsupportedOperationException("TODO Config for C");
+		switch(type.targetName){
+			case "char":
+				"'"+value+"'"
+			case "charPtr":
+				"\""+value+"\""
+			case "stringPtr":
+				"\""+value+"\""
+			default:
+				value	
+		}
 	}
 
 	override String defaultValue(DataType dt) {
-		if (dt instanceof PrimitiveType) {
-			return (dt as PrimitiveType).getDefaultValueLiteral
-		}
-		else if (dt instanceof ExternalType) {
-			if ((dt as ExternalType).defaultValueLiteral != null ){
-				return (dt as ExternalType).getDefaultValueLiteral
+		switch dt{
+			PrimitiveType:
+				toValueLiteral(dt, dt.defaultValueLiteral)
+			ExternalType:{
+				if (dt.defaultValueLiteral != null )
+					return dt.getDefaultValueLiteral
+				diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
+				"cannot instantiate external data type "+dt.name
 			}
-			diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
-			return "cannot instantiate external data type "+dt.name
-		}
-		else {
-			val dc = dt as DataClass
-			
+			DataClass:			
 			'''
 				{
-					«FOR att : dc.allAttributes SEPARATOR ","»
+					«FOR att : dt.allAttributes SEPARATOR ","»
 						«att.initializationWithDefaultValues»
 					«ENDFOR»
 				}

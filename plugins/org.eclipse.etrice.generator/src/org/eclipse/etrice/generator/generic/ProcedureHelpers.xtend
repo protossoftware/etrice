@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.base.AbstractGenerator
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
+import org.eclipse.etrice.core.room.PrimitiveType
 
 @Singleton
 class ProcedureHelpers {
@@ -234,4 +234,34 @@ class ProcedureHelpers {
 		'''«languageExt.accessLevelPublic()»«returnType» «languageExt.memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
 	}
 	
+//	def attributeInitializer(Attribute a, String valueFromModel){
+//		if(a.refType.type.primitive){
+//			var aType = a.refType.type as PrimitiveType
+//			var value = languageExt.toValueLiteral(aType, valueFromModel)
+//			return switch null {
+//				case a.size == 0 || aType.characterType:
+//					value
+//				case value.startsWith("{")
+//			}
+//		'''
+//			«IF a.size == 0 || aType.characterType»
+//					«getter»«procedureHelpers.invokeSetter(a.name,null,literalValue)»;
+//				«ELSEIF literalValue.startsWith("{")»
+//					«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «literalValue»''')»;
+//				«ELSE»
+//					{
+//						«aType.typeName»[] _«a.name» = new «aType.typeName»[«a.size»];
+//						for (int i=0;i<«a.size»;i++){
+//							_«a.name»[i] = «literalValue»;
+//						}
+//						«getter»«procedureHelpers.invokeSetter(a.name,null,"_"+a.name)»;
+//					}
+//			«ENDIF»
+//		'''
+//		}
+//	}
+//
+//	def attributeDefaultInitialzier(Attribute a){
+//		
+//	}	
 }

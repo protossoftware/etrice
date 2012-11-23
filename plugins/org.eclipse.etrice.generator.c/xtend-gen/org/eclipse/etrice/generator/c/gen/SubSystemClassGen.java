@@ -35,12 +35,14 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -58,6 +60,9 @@ public class SubSystemClassGen {
   
   @Inject
   private ProcedureHelpers helpers;
+  
+  @Inject
+  private Initialization attrInitGenAddon;
   
   @Inject
   private ILanguageExtension languageExt;
@@ -761,56 +766,55 @@ public class SubSystemClassGen {
                   ProtocolClass _protocol = pi.getProtocol();
                   boolean _isConjugated = this.roomExt.isConjugated(pi);
                   PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
-                  boolean _notEquals = (!Objects.equal(_portClass, null));
-                  if (_notEquals) {
+                  EList<Attribute> _attributes = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
+                  boolean _isEmpty_1 = _attributes==null?false:_attributes.isEmpty();
+                  boolean _not = (!_isEmpty_1);
+                  if (_not) {
+                    _builder.append("static ");
+                    ProtocolClass _protocol_1 = pi.getProtocol();
+                    boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
+                    String _portClassName = this.roomExt.getPortClassName(_protocol_1, _isConjugated_1);
+                    _builder.append(_portClassName, "");
+                    _builder.append("_var ");
+                    String _path_1 = pi.getPath();
+                    String _pathName_1 = this.roomExt.getPathName(_path_1);
+                    _builder.append(_pathName_1, "");
+                    _builder.append("_var");
                     {
-                      ProtocolClass _protocol_1 = pi.getProtocol();
-                      boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
-                      PortClass _portClass_1 = this.roomExt.getPortClass(_protocol_1, _isConjugated_1);
-                      EList<Attribute> _attributes = _portClass_1.getAttributes();
-                      boolean _isEmpty_1 = _attributes.isEmpty();
-                      boolean _not = (!_isEmpty_1);
-                      if (_not) {
-                        {
-                          boolean _isReplicated = pi.isReplicated();
-                          if (_isReplicated) {
-                            _builder.append("static ");
-                            ProtocolClass _protocol_2 = pi.getProtocol();
-                            boolean _isConjugated_2 = this.roomExt.isConjugated(pi);
-                            String _portClassName = this.roomExt.getPortClassName(_protocol_2, _isConjugated_2);
-                            _builder.append(_portClassName, "");
-                            _builder.append("_var ");
-                            String _path_1 = pi.getPath();
-                            String _pathName_1 = this.roomExt.getPathName(_path_1);
-                            _builder.append(_pathName_1, "");
-                            _builder.append("_var[");
-                            EList<InterfaceItemInstance> _peers = pi.getPeers();
-                            int _size = _peers.size();
-                            _builder.append(_size, "");
-                            _builder.append("]={");
-                            String _genReplPortAttributeInitializer = this.genReplPortAttributeInitializer(pi);
-                            _builder.append(_genReplPortAttributeInitializer, "");
-                            _builder.append("};");
-                            _builder.newLineIfNotEmpty();
-                          } else {
-                            _builder.append("static ");
-                            ProtocolClass _protocol_3 = pi.getProtocol();
-                            boolean _isConjugated_3 = this.roomExt.isConjugated(pi);
-                            String _portClassName_1 = this.roomExt.getPortClassName(_protocol_3, _isConjugated_3);
-                            _builder.append(_portClassName_1, "");
-                            _builder.append("_var ");
-                            String _path_2 = pi.getPath();
-                            String _pathName_2 = this.roomExt.getPathName(_path_2);
-                            _builder.append(_pathName_2, "");
-                            _builder.append("_var={");
-                            CharSequence _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
-                            _builder.append(_genPortAttributeInitializer, "");
-                            _builder.append("};");
-                            _builder.newLineIfNotEmpty();
-                          }
-                        }
+                      boolean _isReplicated = pi.isReplicated();
+                      if (_isReplicated) {
+                        _builder.append("[");
+                        EList<InterfaceItemInstance> _peers = pi.getPeers();
+                        int _size = _peers.size();
+                        _builder.append(_size, "");
+                        _builder.append("]");
                       }
                     }
+                    _builder.append("={");
+                    _builder.newLineIfNotEmpty();
+                    {
+                      EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+                      int _size_1 = _peers_1.size();
+                      IntegerRange _upTo = new IntegerRange(1, _size_1);
+                      boolean _hasElements = false;
+                      for(final Integer i : _upTo) {
+                        if (!_hasElements) {
+                          _hasElements = true;
+                        } else {
+                          _builder.appendImmediate(", ", "	");
+                        }
+                        _builder.append("\t");
+                        InterfaceItem _interfaceItem = pi.getInterfaceItem();
+                        PortClass _portClass_1 = RoomHelpers.getPortClass(_interfaceItem);
+                        EList<Attribute> _attributes_1 = _portClass_1.getAttributes();
+                        CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(pi, _attributes_1);
+                        _builder.append(_generateAttributeInit, "	");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t\t\t\t\t\t");
+                      }
+                    }
+                    _builder.append("};");
+                    _builder.newLineIfNotEmpty();
                   }
                 }
               }
@@ -825,9 +829,9 @@ public class SubSystemClassGen {
       for(final ActorInstance ai_2 : _allContainedInstances_2) {
         _builder.newLine();
         _builder.append("/* instance ");
-        String _path_3 = ai_2.getPath();
-        String _pathName_3 = this.roomExt.getPathName(_path_3);
-        _builder.append(_pathName_3, "");
+        String _path_2 = ai_2.getPath();
+        String _pathName_2 = this.roomExt.getPathName(_path_2);
+        _builder.append(_pathName_2, "");
         _builder.append(" */");
         _builder.newLineIfNotEmpty();
         {
@@ -845,67 +849,6 @@ public class SubSystemClassGen {
       }
     }
     _builder.newLine();
-    return _builder;
-  }
-  
-  private String genReplPortAttributeInitializer(final InterfaceItemInstance pi) {
-    int i = 0;
-    String retval = "";
-    EList<InterfaceItemInstance> _peers = pi.getPeers();
-    int _size = _peers.size();
-    i = _size;
-    boolean _greaterThan = (i > 0);
-    boolean _while = _greaterThan;
-    while (_while) {
-      {
-        String _plus = (retval + "\r\n\t\t\t{");
-        CharSequence _genPortAttributeInitializer = this.genPortAttributeInitializer(pi);
-        String _plus_1 = (_plus + _genPortAttributeInitializer);
-        String _plus_2 = (_plus_1 + "}");
-        retval = _plus_2;
-        int _minus = (i - 1);
-        i = _minus;
-        boolean _greaterThan_1 = (i > 0);
-        if (_greaterThan_1) {
-          String _plus_3 = (retval + ",");
-          retval = _plus_3;
-        }
-      }
-      boolean _greaterThan_1 = (i > 0);
-      _while = _greaterThan_1;
-    }
-    return retval;
-  }
-  
-  private CharSequence genPortAttributeInitializer(final InterfaceItemInstance pi) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      ProtocolClass _protocol = pi.getProtocol();
-      boolean _isConjugated = this.roomExt.isConjugated(pi);
-      PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
-      EList<Attribute> _attributes = _portClass.getAttributes();
-      boolean _hasElements = false;
-      for(final Attribute attr : _attributes) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(",", "");
-        }
-        {
-          String _defaultValueLiteral = attr.getDefaultValueLiteral();
-          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
-          if (_notEquals) {
-            String _defaultValueLiteral_1 = attr.getDefaultValueLiteral();
-            _builder.append(_defaultValueLiteral_1, "");
-          } else {
-            RefableType _refType = attr.getRefType();
-            DataType _type = _refType.getType();
-            String _defaultValue = this.stdExt.defaultValue(_type);
-            _builder.append(_defaultValue, "");
-          }
-        }
-      }
-    }
     return _builder;
   }
   
@@ -1177,30 +1120,12 @@ public class SubSystemClassGen {
           _builder.append("\t");
           _builder.append("/* attributes */");
           _builder.newLine();
-          {
-            ActorClass _actorClass_2 = ai.getActorClass();
-            List<Attribute> _allAttributes = this.roomExt.getAllAttributes(_actorClass_2);
-            for(final Attribute att : _allAttributes) {
-              _builder.append("\t");
-              String _genAttributeInitializer = this.genAttributeInitializer(ai, att);
-              _builder.append(_genAttributeInitializer, "	");
-              _builder.append(",\t/* ");
-              String _name_2 = att.getName();
-              _builder.append(_name_2, "	");
-              {
-                int _size_1 = att.getSize();
-                boolean _greaterThan = (_size_1 > 1);
-                if (_greaterThan) {
-                  _builder.append("[");
-                  int _size_2 = att.getSize();
-                  _builder.append(_size_2, "	");
-                  _builder.append("]");
-                }
-              }
-              _builder.append(" */");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t");
+          ActorClass _actorClass_2 = ai.getActorClass();
+          List<Attribute> _allAttributes = this.roomExt.getAllAttributes(_actorClass_2);
+          CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
+          _builder.append(_generateAttributeInit, "	");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
@@ -1294,24 +1219,6 @@ public class SubSystemClassGen {
       _builder.append("}");
       _builder.newLine();
       _xblockexpression = (_builder);
-    }
-    return _xblockexpression;
-  }
-  
-  private String genAttributeInitializer(final ActorInstance ai, final Attribute att) {
-    String _xblockexpression = null;
-    {
-      final String value = ((String) null);
-      String _xifexpression = null;
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
-        String _initializationWithDefaultValues = this.stdExt.initializationWithDefaultValues(att);
-        _xifexpression = _initializationWithDefaultValues;
-      } else {
-        String _string = value.toString();
-        _xifexpression = _string;
-      }
-      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

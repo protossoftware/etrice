@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.c.setup;
 
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CTranslationProvider;
@@ -21,6 +22,7 @@ import org.eclipse.etrice.generator.c.gen.MainGen;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.config.DataConfiguration;
 
 import com.google.inject.Binder;
 
@@ -37,6 +39,8 @@ public class GeneratorModule extends GeneratorBaseModule {
 		binder.bind(ILanguageExtension.class).to(CExtensions.class);
 
 		binder.bind(ITranslationProvider.class).to(CTranslationProvider.class);
+		
+		binder.bind(IDataConfiguration.class).to(DataConfiguration.class);
 	}
 
 }

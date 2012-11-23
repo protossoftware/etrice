@@ -151,7 +151,8 @@ class JavaExtensions implements ILanguageExtension {
 
 	override defaultValue(DataType dt) {
 		if (dt instanceof PrimitiveType) {
-			return (dt as PrimitiveType).getDefaultValueLiteral
+			var pType = dt as PrimitiveType
+			return toValueLiteral(pType, pType.defaultValueLiteral)
 		}
 		else if (dt instanceof ExternalType)
 			return "new "+(dt as ExternalType).targetName+"()"

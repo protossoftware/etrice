@@ -13,28 +13,26 @@
 
 package org.eclipse.etrice.generator.c.gen
 
-import java.util.HashMap
-import java.util.ArrayList
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.CommunicationType
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
+import java.util.ArrayList
+import java.util.HashMap
 import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
-import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
+import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import static extension org.eclipse.etrice.generator.base.Indexed.*
-import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class SubSystemClassGen {
@@ -43,6 +41,7 @@ class SubSystemClassGen {
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
+	@Inject Initialization attrInitGenAddon
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 	
@@ -277,14 +276,11 @@ class SubSystemClassGen {
 				/*nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
-					«IF pi.protocol.getPortClass(pi.conjugated)!=null»
-						«IF !pi.protocol.getPortClass(pi.conjugated).attributes.empty»
-							«IF pi.replicated»
-								static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var[«pi.peers.size»]={«genReplPortAttributeInitializer(pi)»};
-							«ELSE»
-								static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var={«genPortAttributeInitializer(pi)»};
-							«ENDIF»
-						«ENDIF»
+					«IF !pi.protocol.getPortClass(pi.conjugated)?.attributes?.empty»
+						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
+							«FOR Integer i:1..pi.peers.size SEPARATOR ', '»
+								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
+							«ENDFOR»};
 					«ENDIF»		
 				«ENDFOR»
 			«ENDIF» 
@@ -301,25 +297,6 @@ class SubSystemClassGen {
 		«ENDFOR»
 		
 	'''
-	}
-		
-	def private genReplPortAttributeInitializer(InterfaceItemInstance pi){
-		var int i
-		var retval="" 
-		i=pi.peers.size
-		
-		while (i>0){
-			retval=retval+"
-			{"+genPortAttributeInitializer(pi)+"}"
-			i=i-1
-			if (i>0){retval=retval+","}
-		}
-		return retval
-	}	
-	
-	def private genPortAttributeInitializer(InterfaceItemInstance pi){
-		'''
-		«FOR attr:pi.protocol.getPortClass(pi.conjugated).attributes SEPARATOR ","»«IF attr.defaultValueLiteral != null»«attr.defaultValueLiteral»«ELSE»«attr.refType.type.defaultValue»«ENDIF»«ENDFOR»'''
 	}
 	
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
@@ -385,9 +362,7 @@ class SubSystemClassGen {
 				«ENDFOR»
 				
 				/* attributes */
-				«FOR att : ai.actorClass.allAttributes»
-					«ai.genAttributeInitializer(att)»,	/* «att.name»«IF att.size>1»[«att.size»]«ENDIF» */
-				«ENDFOR»
+				«attrInitGenAddon.generateAttributeInit(ai, ai.actorClass.allAttributes)»
 				
 				/* state and history are initialized in init fuction */
 			};
@@ -415,14 +390,6 @@ class SubSystemClassGen {
 				«ENDFOR»
 			}
 		'''
-	}
-	
-	def private genAttributeInitializer(ActorInstance ai, Attribute att) {
-		val value = null as String // att.initValueLiteral
-		if (value==null)
-			att.initializationWithDefaultValues
-		else
-			value.toString
 	}
 	
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){

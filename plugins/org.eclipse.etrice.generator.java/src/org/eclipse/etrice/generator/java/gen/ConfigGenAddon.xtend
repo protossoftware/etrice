@@ -16,17 +16,17 @@ import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.room.GeneralProtocolClass
-import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 class ConfigGenAddon {
 	
@@ -40,39 +40,24 @@ class ConfigGenAddon {
 	
 	def public genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
 			«FOR a : ai.actorClass.attributes»
-				«applyInstanceConfig(ai, null, aiVariableName, new ArrayList<Attribute>().union(a))»
+				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
-			«FOR p : ai.actorClass.allEndPorts»
-				«FOR a : getAttributes(p.protocol, !p.conjugated)»
-					«applyInstanceConfig(ai, p, aiVariableName+"."+invokeGetter(p.name, null), new ArrayList<Attribute>().union(a))»
-				«ENDFOR»
-			«ENDFOR»
-			«FOR sap : ai.actorClass.allSAPs»
-				«FOR a : getAttributes(sap.protocol, true)»
-					«applyInstanceConfig(ai, sap, aiVariableName+"."+invokeGetter(sap.name, null), new ArrayList<Attribute>().union(a))»
+			«FOR pi : ai.orderedIfItemInstances»
+				«FOR a : RoomHelpers::getPortClass(pi.interfaceItem).attributes»
+					«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»
 				«ENDFOR»
 			«ENDFOR»
 		'''
 	}
 	
-	def private List<Attribute> getAttributes(GeneralProtocolClass gpc, boolean regular){
-		var result = new ArrayList<Attribute>
-		if(gpc instanceof ProtocolClass){
-			var protocol = gpc as ProtocolClass
-			if(regular && protocol.regular?.attributes != null)
-				result.addAll(protocol.regular.attributes)
-			else if(!regular && protocol.conjugate?.attributes != null)
-				result.addAll(protocol.conjugate.attributes)
-		}
-		return result
-	}
-	
-	def private applyInstanceConfig(ActorInstance ai, InterfaceItem port, String invokes, List<Attribute> path){
+	def private applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type
 		if(aType.primitive){
-			var value = if(port==null)dataConfigExt.getAttrInstanceConfigValue(ai, path)
-							else dataConfigExt.getAttrInstanceConfigValue(ai, port, path)
+			var value = switch instance {
+				ActorInstance: dataConfigExt.getAttrInstanceConfigValue(instance, path)
+				InterfaceItemInstance: dataConfigExt.getAttrInstanceConfigValue(instance, path)
+			}
 			if(value == null)
 				''''''
 			else if(a.size == 0 || aType.characterType)
@@ -89,7 +74,7 @@ class ConfigGenAddon {
 		}
 		else if (aType.dataClass)'''
 				«FOR e : (aType as DataClass).attributes»
-					«applyInstanceConfig(ai, port, invokes+"."+a.name.invokeGetter(null), path.union(e))»
+					«applyInstanceConfig(instance, invokes+"."+a.name.invokeGetter(null), path.union(e))»
 				«ENDFOR»
 			'''
 	}
