@@ -27,6 +27,7 @@ import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.ExternalType
 
 class ConfigGenAddon {
 	
@@ -139,13 +140,17 @@ class ConfigGenAddon {
 	
 	def private genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
 		var temp = null as String
-		if(path.last.refType.type.dataClass)
+		if (path.last.refType.type.dataClass)
 			'''
 				«FOR e : (path.last.refType.type as DataClass).allAttributes»
 					«genMinMaxConstantsRec(ac, varNamePath+"_"+e.name, path.union(e))»
 				«ENDFOR»
 			'''
-		else {
+		else if (path.last.refType.type instanceof ExternalType) {
+			// do nothing
+		}
+		else
+		{
 			var aType = (path.last.refType.type as PrimitiveType)
 			'''
 				«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
@@ -155,7 +160,7 @@ class ConfigGenAddon {
 					public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
 				«ENDIF»
 			'''
-			}
+		}
 	}
 	
 	def private getMinMaxType(PrimitiveType type){

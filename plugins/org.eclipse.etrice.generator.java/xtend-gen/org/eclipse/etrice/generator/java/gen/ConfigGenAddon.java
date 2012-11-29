@@ -10,6 +10,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
@@ -532,50 +533,59 @@ public class ConfigGenAddon {
         }
         _xifexpression = _builder;
       } else {
-        CharSequence _xblockexpression_1 = null;
-        {
-          Attribute _last_2 = IterableExtensions.<Attribute>last(path);
-          RefableType _refType_2 = _last_2.getRefType();
-          DataType _type_2 = _refType_2.getType();
-          PrimitiveType aType = ((PrimitiveType) _type_2);
-          StringConcatenation _builder_1 = new StringConcatenation();
+        CharSequence _xifexpression_1 = null;
+        Attribute _last_2 = IterableExtensions.<Attribute>last(path);
+        RefableType _refType_2 = _last_2.getRefType();
+        DataType _type_2 = _refType_2.getType();
+        if ((_type_2 instanceof ExternalType)) {
+          _xifexpression_1 = null;
+        } else {
+          CharSequence _xblockexpression_1 = null;
           {
-            String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
-            String _temp = temp = _attrClassConfigMinValue;
-            boolean _notEquals = (!Objects.equal(_temp, null));
-            if (_notEquals) {
-              _builder_1.append("public static ");
-              String _minMaxType = this.getMinMaxType(aType);
-              _builder_1.append(_minMaxType, "");
-              _builder_1.append(" MIN_");
-              _builder_1.append(varNamePath, "");
-              _builder_1.append(" = ");
-              String _valueLiteral = this.stdExt.toValueLiteral(aType, temp);
-              _builder_1.append(_valueLiteral, "");
-              _builder_1.append(";");
-              _builder_1.newLineIfNotEmpty();
+            Attribute _last_3 = IterableExtensions.<Attribute>last(path);
+            RefableType _refType_3 = _last_3.getRefType();
+            DataType _type_3 = _refType_3.getType();
+            PrimitiveType aType = ((PrimitiveType) _type_3);
+            StringConcatenation _builder_1 = new StringConcatenation();
+            {
+              String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
+              String _temp = temp = _attrClassConfigMinValue;
+              boolean _notEquals = (!Objects.equal(_temp, null));
+              if (_notEquals) {
+                _builder_1.append("public static ");
+                String _minMaxType = this.getMinMaxType(aType);
+                _builder_1.append(_minMaxType, "");
+                _builder_1.append(" MIN_");
+                _builder_1.append(varNamePath, "");
+                _builder_1.append(" = ");
+                String _valueLiteral = this.stdExt.toValueLiteral(aType, temp);
+                _builder_1.append(_valueLiteral, "");
+                _builder_1.append(";");
+                _builder_1.newLineIfNotEmpty();
+              }
             }
-          }
-          {
-            String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
-            String _temp_1 = temp = _attrClassConfigMaxValue;
-            boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
-            if (_notEquals_1) {
-              _builder_1.append("public static ");
-              String _minMaxType_1 = this.getMinMaxType(aType);
-              _builder_1.append(_minMaxType_1, "");
-              _builder_1.append(" MAX_");
-              _builder_1.append(varNamePath, "");
-              _builder_1.append(" = ");
-              String _valueLiteral_1 = this.stdExt.toValueLiteral(aType, temp);
-              _builder_1.append(_valueLiteral_1, "");
-              _builder_1.append(";");
-              _builder_1.newLineIfNotEmpty();
+            {
+              String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
+              String _temp_1 = temp = _attrClassConfigMaxValue;
+              boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
+              if (_notEquals_1) {
+                _builder_1.append("public static ");
+                String _minMaxType_1 = this.getMinMaxType(aType);
+                _builder_1.append(_minMaxType_1, "");
+                _builder_1.append(" MAX_");
+                _builder_1.append(varNamePath, "");
+                _builder_1.append(" = ");
+                String _valueLiteral_1 = this.stdExt.toValueLiteral(aType, temp);
+                _builder_1.append(_valueLiteral_1, "");
+                _builder_1.append(";");
+                _builder_1.newLineIfNotEmpty();
+              }
             }
+            _xblockexpression_1 = (_builder_1);
           }
-          _xblockexpression_1 = (_builder_1);
+          _xifexpression_1 = _xblockexpression_1;
         }
-        _xifexpression = _xblockexpression_1;
+        _xifexpression = _xifexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }
