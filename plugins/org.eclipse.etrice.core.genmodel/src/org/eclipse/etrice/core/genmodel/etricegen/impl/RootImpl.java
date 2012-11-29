@@ -795,7 +795,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void getOperationDataClasses(HashSet<DataClass> dataClasses, EList<? extends Operation> operations) {
 		for (Operation op : operations) {
 			if (op.getReturntype()!=null) {
-				DataClass dc = name2dc.get(op.getReturntype());
+				DataClass dc = name2dc.get(op.getReturntype().getType());
 				if (dc!=null)
 					dataClasses.add(dc);
 			}

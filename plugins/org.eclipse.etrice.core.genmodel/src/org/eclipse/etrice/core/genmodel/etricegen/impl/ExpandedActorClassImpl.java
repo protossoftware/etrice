@@ -540,7 +540,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		for (TrPoint tp : sg.getTrPoints()) {
 			NodeData data = node2data.get(tp);
-			int idx = sg.getChPoints().indexOf(tp);
+			int idx = sg.getTrPoints().indexOf(tp);
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
