@@ -9,7 +9,7 @@
 	
 	@author Henrik Rentz-Reichert
 -->
-<project name="project">
+<project name="project" default="all">
 	
 	<property name="java.tests.model.path" value="./models"/>
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java"/>
