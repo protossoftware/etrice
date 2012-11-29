@@ -330,8 +330,9 @@ public class ValidationUtil {
 					spc2 = (ProtocolClass) pc2;
 				else if (sub2.getProtocol() instanceof ProtocolClass)
 					spc2 = (ProtocolClass) sub2.getProtocol();
-				if (spc1.getCommType()!=spc2.getCommType())
-					return Result.error("protocol communication types don't match");
+				if (spc1!=null && spc2!=null)
+					if (spc1.getCommType()!=spc2.getCommType())
+						return Result.error("protocol communication types don't match");
 			}
 			if (compoundInvolved) {
 				List<Match> matches = CompoundProtocolHelpers.getMatches(p1, ref1, p2, ref2, sc, exclude);
@@ -951,7 +952,8 @@ public class ValidationUtil {
 							tr.eContainer(),
 							RoomPackage.eINSTANCE.getStateGraph_Transitions(),
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
-			}		}
+			}
+		}
 		return Result.ok();
 	}
 	

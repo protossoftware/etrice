@@ -139,9 +139,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkRefHasFixedMultiplicityPorts(ActorRef ar) {
-		if (ar.getSize()>1) {
+		if (ar!=null) {
 			ActorClass ac = ar.getType();
-			if (ar!=null) {
+			if (ar.getSize()>1) {
 				for (Port p : ac.getIfPorts()) {
 					if (p.getMultiplicity()<0) {
 						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
