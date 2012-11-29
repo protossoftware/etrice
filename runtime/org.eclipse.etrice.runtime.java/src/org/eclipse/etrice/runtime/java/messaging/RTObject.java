@@ -8,6 +8,8 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.ArrayList;
+
 /**
  * An implementation of the IRTObject interface using a hierarchical structure
  * to assemble paths.
@@ -17,33 +19,47 @@ package org.eclipse.etrice.runtime.java.messaging;
  */
 public class RTObject implements IRTObject	{
 
-	private IRTObject parent = null;
 	private String name = NO_NAME;
+	private IRTObject parent = null;
+	ArrayList<IRTObject> children = new ArrayList<IRTObject>();
 	
-	public RTObject(IRTObject parent, String name){
+	protected RTObject(IRTObject parent, String name){
 		this.parent = parent;
 		this.name = name;
+		if (parent instanceof RTObject)
+			((RTObject) parent).children.add(this);
 	}
 
+	protected void destroy() {
+		for (IRTObject child : children) {
+			if (child instanceof RTObject)
+				((RTObject) child).destroy();
+		}
+		
+		if (parent instanceof RTObject)
+			((RTObject) parent).children.remove(this);
+		
+		parent = null;
+	}
+	
 	public IRTObject getParent() {
 		return parent;
 	}
 	
-	public String getInstancePath() {
-		String path = PATH_DELIM + name;
+	public String getInstancePath(char delim) {
+		String path = delim + name;
 		
 		if (parent!=null)
 			path = parent.getInstancePath()+path;
 		
 		return path;
 	}
+	
+	public String getInstancePath() {
+		return getInstancePath(PATH_DELIM);
+	}
 
 	public String getInstancePathName() {
-		String path = PATHNAME_DELIM + name;
-		
-		if (parent!=null)
-			path = parent.getInstancePathName()+path;
-		
-		return path;
+		return getInstancePath(PATHNAME_DELIM);
 	}
 }

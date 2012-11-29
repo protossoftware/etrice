@@ -23,6 +23,7 @@ public interface IRTObject {
 	static final char PATHNAME_DELIM = '_';
 	static final String NO_NAME = "<no name>";
 
+	String getInstancePath(char delim);
 	String getInstancePath();
 	String getInstancePathName();
 }

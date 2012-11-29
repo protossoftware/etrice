@@ -36,11 +36,18 @@ public class DummyMessageReceiver implements IMessageReceiver {
 	private Message last_received_message = null;
 	private Address address = null;
 	
+	@Override
+	public String getInstancePath(char delim) {
+		return null;
+	}
+	
+	@Override
 	public String getInstancePath() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	@Override
 	public String getInstancePathName() {
 		// TODO Auto-generated method stub
 		return null;

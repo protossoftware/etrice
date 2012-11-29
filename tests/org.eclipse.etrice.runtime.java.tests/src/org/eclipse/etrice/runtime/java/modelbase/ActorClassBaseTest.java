@@ -34,6 +34,11 @@ public class ActorClassBaseTest extends TestCase {
 		public String getInstancePathName() {
 			return "TOP_PathName";
 		}
+
+		@Override
+		public String getInstancePath(char delim) {
+			return null;
+		}
 		
 	}
 	

@@ -8,6 +8,7 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,12 +22,26 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 	private HashMap<Number, IMessageReceiver> local_map = new HashMap<Number, IMessageReceiver>();
 	private HashMap<Number, IMessageReceiver> thread_map = new HashMap<Number, IMessageReceiver>();
 	private HashMap<Number, IMessageReceiver> node_map = new HashMap<Number, IMessageReceiver>();
+	private ArrayList<Address> freeAdresses = new ArrayList<Address>();
 	
 	private Address address = null;
+	private int nextFreeObjId = 1;
 
 	public MessageDispatcher(IRTObject parent, Address addr, String name){
 		super(parent, name);
 		address = addr;
+	}
+	
+	public Address getFreeAddress() {
+		if (freeAdresses.isEmpty()) {
+			return new Address(getAddress().nodeID, getAddress().threadID, nextFreeObjId++);
+		}
+		else
+			return freeAdresses.remove(0);
+	}
+	
+	public void freeAddress(Address addr) {
+		freeAdresses.add(addr);
 	}
 	
 	public void addMessageReceiver(IMessageReceiver receiver){

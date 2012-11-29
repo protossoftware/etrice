@@ -29,6 +29,11 @@ public class PortBaseTest extends TestCase {
 		public String getInstancePathName() {
 			return "TOP_PathName";
 		}
+		
+		@Override
+		public String getInstancePath(char delim) {
+			return null;
+		}
 
 		@Override
 		public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
@@ -45,6 +50,11 @@ public class PortBaseTest extends TestCase {
 		@Override
 		public String getInstancePathName() {
 			return "TOP_PathName";
+		}
+
+		@Override
+		public String getInstancePath(char delim) {
+			return null;
 		}
 		
 	}
