@@ -37,7 +37,10 @@ public class ActorClassBaseTest extends TestCase {
 
 		@Override
 		public String getInstancePath(char delim) {
-			return null;
+			if (delim == IRTObject.PATH_DELIM)
+				return getInstancePath();
+			else
+				return getInstancePathName();
 		}
 		
 	}

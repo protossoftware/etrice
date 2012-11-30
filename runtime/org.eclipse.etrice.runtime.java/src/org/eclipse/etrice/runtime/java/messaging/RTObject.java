@@ -50,7 +50,7 @@ public class RTObject implements IRTObject	{
 		String path = delim + name;
 		
 		if (parent!=null)
-			path = parent.getInstancePath()+path;
+			path = parent.getInstancePath(delim)+path;
 		
 		return path;
 	}
