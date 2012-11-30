@@ -153,7 +153,10 @@ public class DataConfiguration implements IDataConfiguration {
   
   public String getAttrInstanceConfigValue(final InterfaceItemInstance item, final List<Attribute> path) {
     String _path = item.getPath();
-    AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(_path);
+    String _plus = (_path + "/");
+    String _stringPath = this.toStringPath(path);
+    String _plus_1 = (_plus + _stringPath);
+    AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(_plus_1);
     LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
     String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
     return _stringExpr;

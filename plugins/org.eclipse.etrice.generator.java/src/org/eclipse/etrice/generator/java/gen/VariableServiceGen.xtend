@@ -141,7 +141,7 @@ class VariableServiceGen {
 			
 			«FOR dc : getAllDataClasses(dataClasses)»
 				private void writeDataClass(String id, «dc.typeName» object, Map<String, Object> map){
-					«FOR a : dc.attributes»
+					«FOR a : dc.allAttributes»
 						«IF a.refType.type.primitive»
 							map.put(id+"/«a.name»", «IF a.size>0»toObjectArray(«ENDIF»object.«invokeGetter(a.name, null)»«IF a.size>0»)«ENDIF»);
 						«ELSE»

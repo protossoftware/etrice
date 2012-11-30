@@ -776,9 +776,9 @@ public class SubSystemClassGen {
                     boolean _isConjugated = this.roomExt.isConjugated(pi);
                     PortClass _portClass = this.roomExt.getPortClass(_protocol, _isConjugated);
                     EList<Attribute> _attributes = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
-                    boolean _isEmpty_1 = _attributes==null?false:_attributes.isEmpty();
-                    boolean _not = (!_isEmpty_1);
-                    if (_not) {
+                    int _size = _attributes==null?0:_attributes.size();
+                    boolean _greaterThan = (_size > 0);
+                    if (_greaterThan) {
                       _builder.append("static ");
                       ProtocolClass _protocol_1 = pi.getProtocol();
                       boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
@@ -794,17 +794,26 @@ public class SubSystemClassGen {
                         if (_isReplicated) {
                           _builder.append("[");
                           EList<InterfaceItemInstance> _peers = pi.getPeers();
-                          int _size = _peers.size();
-                          _builder.append(_size, "");
+                          int _size_1 = _peers.size();
+                          _builder.append(_size_1, "");
                           _builder.append("]");
                         }
                       }
                       _builder.append("={");
                       _builder.newLineIfNotEmpty();
                       {
+                        int _xifexpression = (int) 0;
                         EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-                        int _size_1 = _peers_1.size();
-                        IntegerRange _upTo = new IntegerRange(1, _size_1);
+                        int _size_2 = _peers_1.size();
+                        boolean _equals = (_size_2 == 0);
+                        if (_equals) {
+                          _xifexpression = 1;
+                        } else {
+                          EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+                          int _size_3 = _peers_2.size();
+                          _xifexpression = _size_3;
+                        }
+                        IntegerRange _upTo = new IntegerRange(1, _xifexpression);
                         boolean _hasElements = false;
                         for(final Integer i : _upTo) {
                           if (!_hasElements) {
@@ -845,8 +854,8 @@ public class SubSystemClassGen {
           _builder.newLineIfNotEmpty();
           {
             EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
-            boolean _isEmpty_2 = _orderedIfItemInstances_2.isEmpty();
-            if (_isEmpty_2) {
+            boolean _isEmpty_1 = _orderedIfItemInstances_2.isEmpty();
+            if (_isEmpty_1) {
               _builder.append("/* no ports/saps/services - nothing to initialize statically */");
               _builder.newLine();
             } else {

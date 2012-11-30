@@ -48,8 +48,8 @@ public class ConfigGenAddon {
     StringConcatenation _builder = new StringConcatenation();
     {
       ActorClass _actorClass = ai.getActorClass();
-      EList<Attribute> _attributes = _actorClass.getAttributes();
-      for(final Attribute a : _attributes) {
+      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(_actorClass);
+      for(final Attribute a : _allAttributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
         CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, aiVariableName, _union);
@@ -60,20 +60,26 @@ public class ConfigGenAddon {
     {
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
+        InterfaceItem _interfaceItem = pi.getInterfaceItem();
+        PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
+        EList<Attribute> attribs = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
+        _builder.newLineIfNotEmpty();
         {
-          InterfaceItem _interfaceItem = pi.getInterfaceItem();
-          PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
-          EList<Attribute> _attributes_1 = _portClass.getAttributes();
-          for(final Attribute a_1 : _attributes_1) {
-            String _plus = (aiVariableName + ".");
-            String _name = pi.getName();
-            CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
-            String _plus_1 = (_plus + _invokeGetter);
-            ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
-            List<Attribute> _union_1 = this._roomExtensions.<Attribute>union(_arrayList_1, a_1);
-            CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
-            _builder.append(_applyInstanceConfig_1, "");
-            _builder.newLineIfNotEmpty();
+          boolean _notEquals = (!Objects.equal(attribs, null));
+          if (_notEquals) {
+            {
+              for(final Attribute a_1 : attribs) {
+                String _plus = (aiVariableName + ".");
+                String _name = pi.getName();
+                CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
+                String _plus_1 = (_plus + _invokeGetter);
+                ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
+                List<Attribute> _union_1 = this._roomExtensions.<Attribute>union(_arrayList_1, a_1);
+                CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
+                _builder.append(_applyInstanceConfig_1, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
       }
@@ -224,8 +230,8 @@ public class ConfigGenAddon {
         if (_isDataClass) {
           StringConcatenation _builder = new StringConcatenation();
           {
-            EList<Attribute> _attributes = ((DataClass) aType).getAttributes();
-            for(final Attribute e : _attributes) {
+            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) aType));
+            for(final Attribute e : _allAttributes) {
               String _plus = (invokes + ".");
               String _name = a.getName();
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
@@ -428,8 +434,8 @@ public class ConfigGenAddon {
   public CharSequence genMinMaxConstants(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EList<Attribute> _attributes = ac.getAttributes();
-      for(final Attribute a : _attributes) {
+      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(ac);
+      for(final Attribute a : _allAttributes) {
         String _name = a.getName();
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
@@ -454,18 +460,15 @@ public class ConfigGenAddon {
     CharSequence _xblockexpression = null;
     {
       String temp = ((String) null);
-      CharSequence _xifexpression = null;
       Attribute _last = IterableExtensions.<Attribute>last(path);
       RefableType _refType = _last.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isDataClass = this.typeHelpers.isDataClass(_type);
+      DataType aType = _refType.getType();
+      CharSequence _xifexpression = null;
+      boolean _isDataClass = this.typeHelpers.isDataClass(aType);
       if (_isDataClass) {
         StringConcatenation _builder = new StringConcatenation();
         {
-          Attribute _last_1 = IterableExtensions.<Attribute>last(path);
-          RefableType _refType_1 = _last_1.getRefType();
-          DataType _type_1 = _refType_1.getType();
-          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _type_1));
+          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) aType));
           for(final Attribute e : _allAttributes) {
             String _plus = (varNamePath + "_");
             String _name = e.getName();
@@ -478,50 +481,51 @@ public class ConfigGenAddon {
         }
         _xifexpression = _builder;
       } else {
-        CharSequence _xblockexpression_1 = null;
-        {
-          Attribute _last_2 = IterableExtensions.<Attribute>last(path);
-          RefableType _refType_2 = _last_2.getRefType();
-          DataType _type_2 = _refType_2.getType();
-          PrimitiveType aType = ((PrimitiveType) _type_2);
-          StringConcatenation _builder_1 = new StringConcatenation();
+        CharSequence _xifexpression_1 = null;
+        if ((aType instanceof PrimitiveType)) {
+          CharSequence _xblockexpression_1 = null;
           {
-            String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
-            String _temp = temp = _attrClassConfigMinValue;
-            boolean _notEquals = (!Objects.equal(_temp, null));
-            if (_notEquals) {
-              _builder_1.append("public static ");
-              String _minMaxType = this.getMinMaxType(aType);
-              _builder_1.append(_minMaxType, "");
-              _builder_1.append(" MIN_");
-              _builder_1.append(varNamePath, "");
-              _builder_1.append(" = ");
-              String _valueLiteral = this.stdExt.toValueLiteral(aType, temp);
-              _builder_1.append(_valueLiteral, "");
-              _builder_1.append(";");
-              _builder_1.newLineIfNotEmpty();
+            PrimitiveType pType = ((PrimitiveType) aType);
+            StringConcatenation _builder_1 = new StringConcatenation();
+            {
+              String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
+              String _temp = temp = _attrClassConfigMinValue;
+              boolean _notEquals = (!Objects.equal(_temp, null));
+              if (_notEquals) {
+                _builder_1.append("public static ");
+                String _minMaxType = this.getMinMaxType(pType);
+                _builder_1.append(_minMaxType, "");
+                _builder_1.append(" MIN_");
+                _builder_1.append(varNamePath, "");
+                _builder_1.append(" = ");
+                String _valueLiteral = this.stdExt.toValueLiteral(pType, temp);
+                _builder_1.append(_valueLiteral, "");
+                _builder_1.append(";");
+                _builder_1.newLineIfNotEmpty();
+              }
             }
-          }
-          {
-            String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
-            String _temp_1 = temp = _attrClassConfigMaxValue;
-            boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
-            if (_notEquals_1) {
-              _builder_1.append("public static ");
-              String _minMaxType_1 = this.getMinMaxType(aType);
-              _builder_1.append(_minMaxType_1, "");
-              _builder_1.append(" MAX_");
-              _builder_1.append(varNamePath, "");
-              _builder_1.append(" = ");
-              String _valueLiteral_1 = this.stdExt.toValueLiteral(aType, temp);
-              _builder_1.append(_valueLiteral_1, "");
-              _builder_1.append(";");
-              _builder_1.newLineIfNotEmpty();
+            {
+              String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
+              String _temp_1 = temp = _attrClassConfigMaxValue;
+              boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
+              if (_notEquals_1) {
+                _builder_1.append("public static ");
+                String _minMaxType_1 = this.getMinMaxType(pType);
+                _builder_1.append(_minMaxType_1, "");
+                _builder_1.append(" MAX_");
+                _builder_1.append(varNamePath, "");
+                _builder_1.append(" = ");
+                String _valueLiteral_1 = this.stdExt.toValueLiteral(pType, temp);
+                _builder_1.append(_valueLiteral_1, "");
+                _builder_1.append(";");
+                _builder_1.newLineIfNotEmpty();
+              }
             }
+            _xblockexpression_1 = (_builder_1);
           }
-          _xblockexpression_1 = (_builder_1);
+          _xifexpression_1 = _xblockexpression_1;
         }
-        _xifexpression = _xblockexpression_1;
+        _xifexpression = _xifexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }

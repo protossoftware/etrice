@@ -170,7 +170,7 @@ public class ConfigSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (root=[SubSystemClass|FQN] path=RefPath attributes+=AttrInstanceConfig* ports+=PortInstanceConfig*)
+	 *     (root=[LogicalSystem|FQN] subSystem=[SubSystemRef|FQN] path=RefPath attributes+=AttrInstanceConfig* ports+=PortInstanceConfig*)
 	 */
 	protected void sequence_ActorInstanceConfig(EObject context, ActorInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -206,7 +206,7 @@ public class ConfigSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (imports+=Import* configElements+=ConfigElement*)
+	 *     (name=FQN imports+=Import* configElements+=ConfigElement*)
 	 */
 	protected void sequence_ConfigModel(EObject context, ConfigModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

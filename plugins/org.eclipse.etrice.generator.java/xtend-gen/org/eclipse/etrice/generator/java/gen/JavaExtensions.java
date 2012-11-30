@@ -1,6 +1,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.etrice.core.room.DataType;
@@ -11,6 +12,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -20,6 +22,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class JavaExtensions implements ILanguageExtension {
+  @Inject
+  private TypeHelpers typeHelpers;
+  
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
     String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
@@ -228,7 +233,7 @@ public class JavaExtensions implements ILanguageExtension {
     if (!_matched) {
       if (Objects.equal(_switchValue,"boolean")) {
         _matched=true;
-        return value;
+        return value.toLowerCase();
       }
     }
     if (!_matched) {

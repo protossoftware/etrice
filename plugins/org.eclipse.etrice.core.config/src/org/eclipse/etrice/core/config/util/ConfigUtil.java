@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -23,6 +24,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -51,11 +53,10 @@ public class ConfigUtil {
 		return null;
 	}
 
-	public static ActorClass resolve(ActorContainerClass root,
-			RefPath path) {
-		if(path.getRefs().isEmpty())
+	public static ActorClass resolve(ActorContainerClass root, RefPath path) {
+		if (path.getRefs().isEmpty())
 			return null;
-		
+
 		ActorContainerClass result = root;
 		for (String ref : path.getRefs()) {
 			ActorRef match = null;
@@ -73,12 +74,12 @@ public class ConfigUtil {
 
 		return (ActorClass) result;
 	}
-	
+
 	public static ActorRef getLastActorRef(ActorContainerClass root,
 			RefPath path) {
-		if(path.getRefs().isEmpty())
+		if (path.getRefs().isEmpty())
 			return null;
-		
+
 		ActorRef lastMatch = null;
 		ActorContainerClass result = root;
 		for (String ref : path.getRefs()) {
@@ -187,4 +188,26 @@ public class ConfigUtil {
 		return result;
 	}
 
+	public static String getPath(ActorInstanceConfig config) {
+		String path = "/" + config.getRoot().getName() + "/"
+				+ config.getSubSystem().getName();
+		for (String s : config.getPath().getRefs())
+			path += "/" + s;
+
+		return path;
+	}
+
+	public static List<Attribute> filterConfigurableAttributes(
+			List<Attribute> attributes) {
+		List<Attribute> result = new ArrayList<Attribute>();
+		for (Attribute a : attributes) {
+			if (!a.getRefType().isRef())
+				if (a.getRefType().getType() instanceof PrimitiveType
+						|| (a.getRefType().getType() instanceof DataClass && a
+								.getSize() == 0))
+					result.add(a);
+		}
+
+		return result;
+	}
 }

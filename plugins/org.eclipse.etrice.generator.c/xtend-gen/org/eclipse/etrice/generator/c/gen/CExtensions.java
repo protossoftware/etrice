@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -28,6 +29,9 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 public class CExtensions implements ILanguageExtension {
   @Inject
   private IDiagnostician diagnostician;
+  
+  @Inject
+  private TypeHelpers typeHelpers;
   
   @Inject
   private RoomExtensions _roomExtensions;
@@ -257,25 +261,66 @@ public class CExtensions implements ILanguageExtension {
     if (!_matched) {
       if (Objects.equal(_switchValue,"char")) {
         _matched=true;
-        String _plus = ("\'" + value);
-        String _plus_1 = (_plus + "\'");
-        _switchResult = _plus_1;
+        String _xifexpression = null;
+        int _length = value.length();
+        boolean _equals = (_length == 1);
+        if (_equals) {
+          String _plus = ("\'" + value);
+          String _plus_1 = (_plus + "\'");
+          _xifexpression = _plus_1;
+        } else {
+          String _plus_2 = ("\"" + value);
+          String _plus_3 = (_plus_2 + "\"");
+          _xifexpression = _plus_3;
+        }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"charPtr")) {
         _matched=true;
-        String _plus_2 = ("\"" + value);
-        String _plus_3 = (_plus_2 + "\"");
-        _switchResult = _plus_3;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_switchValue,"stringPtr")) {
-        _matched=true;
         String _plus_4 = ("\"" + value);
         String _plus_5 = (_plus_4 + "\"");
         _switchResult = _plus_5;
+      }
+    }
+    if (!_matched) {
+      boolean _contains = value.contains(",");
+      if (_contains) {
+        _matched=true;
+        String _xblockexpression = null;
+        {
+          String _replace = value.replace("{", "");
+          String _replace_1 = _replace.replace("}", "");
+          String _trim = _replace_1.trim();
+          String[] singleValues = _trim.split(",");
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("{ ");
+          {
+            boolean _hasElements = false;
+            for(final String v : singleValues) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(", ", "");
+              }
+              String _trim_1 = v.trim();
+              String _valueLiteral = this.toValueLiteral(type, _trim_1);
+              _builder.append(_valueLiteral, "");
+            }
+          }
+          _builder.append(" }");
+          String _string = _builder.toString();
+          _xblockexpression = (_string);
+        }
+        _switchResult = _xblockexpression;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_switchValue,"boolean")) {
+        _matched=true;
+        String _upperCase = value.toUpperCase();
+        _switchResult = _upperCase;
       }
     }
     if (!_matched) {

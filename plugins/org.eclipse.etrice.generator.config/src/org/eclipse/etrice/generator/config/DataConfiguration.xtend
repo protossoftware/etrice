@@ -87,7 +87,7 @@ class DataConfiguration implements IDataConfiguration {
 	}
 	
 	override getAttrInstanceConfigValue(InterfaceItemInstance item, List<Attribute> path) {
-		DataConfigurationHelper::actorInstanceAttrMap.get(item.path)?.value?.toStringExpr
+		DataConfigurationHelper::actorInstanceAttrMap.get(item.path+"/"+path.toStringPath)?.value?.toStringExpr
 	}
 	// dynamic
 	

@@ -281,9 +281,9 @@ class SubSystemClassGen {
 				/*nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
-					«IF !pi.protocol.getPortClass(pi.conjugated)?.attributes?.empty»
+					«IF pi.protocol.getPortClass(pi.conjugated)?.attributes?.size > 0»
 						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
-							«FOR Integer i:1..pi.peers.size SEPARATOR ', '»
+							«FOR Integer i:1.. if(pi.peers.size==0)1 else pi.peers.size SEPARATOR ', '»
 								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
 							«ENDFOR»};
 					«ENDIF»		

@@ -75,8 +75,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		Set<String> actorRefs = new HashSet<String>();
 		for (ActorInstanceConfig instanceConfig : model
 				.getActorInstanceConfigs()) {
-			String ref = instanceConfig.getRoot().getName()
-					+ refPathToString(instanceConfig.getPath());
+			String ref = ConfigUtil.getPath(instanceConfig);
 			if (actorRefs.contains(ref))
 				error("duplicate actor instance config", model,
 						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
@@ -109,7 +108,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	@Check
 	public void checkActorInstanceConfig(ActorInstanceConfig config) {
-		ActorContainerClass root = config.getRoot();
+		ActorContainerClass root = config.getSubSystem().getType();
 		if (root != null && !root.eIsProxy()) {
 			RefPath path = config.getPath();
 			if (path != null) {
@@ -176,7 +175,10 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			return;
 
 		DataType type = a.getRefType().getType();
-		if (type instanceof PrimitiveType) {
+		if (a.getRefType().isRef())
+			error("reference not supported",
+					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
+		else if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 			checkAttrConfigValue(primitive, config);
 		} else if (type instanceof DataType) {
@@ -186,7 +188,9 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (a.getSize() > 0)
 				error("DataClass arrays not supported",
 						ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
-		}
+		} else
+			error("Type not supported",
+					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 	}
 
 	@Check
@@ -217,7 +221,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				error("dynamic configuration only at root attributes", feature);
 			if (config.eContainer() instanceof ActorInstanceConfig) {
 				SubSystemClass ssc = ((ActorInstanceConfig) config.eContainer())
-						.getRoot();
+						.getSubSystem().getType();
 				ConfigModel model = getConfigModel(config);
 				boolean found = false;
 				for (SubSystemConfig c : model.getSubSystemConfigs())
@@ -365,45 +369,45 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 					error("incompatible datatype: maximum is not int", minRef);
 			}
 			// check room default if config default is not set
-//			String defaultValue = config.getAttribute()
-//					.getDefaultValueLiteral();
-//			if (config.getValue() == null && defaultValue != null) {
-//				if (type == LiteralType.INT) {
-//					if (min instanceof IntLiteral) {
-//						try {
-//							long lDefaultValue = converter.getLongConverter()
-//									.toValue(defaultValue, null);
-//							long lMax = ((IntLiteral) min).getValue();
-//							if (lMax < lDefaultValue)
-//								error("default value in ROOM model is less than this maximum",
-//										minRef);
-//						} catch (ValueConverterException e) {
-//							warning("could not compare with int value in ROOM model (parse error)",
-//									minRef);
-//						}
-//					} else
-//						warning("could not compare with int value in ROOM model (incompatible datatypes)",
-//								minRef);
-//				} else if (type == LiteralType.REAL) {
-//					if (min instanceof RealLiteral) {
-//						try {
-//							double dbDefaultValue = converter
-//									.getRealConverter().toValue(defaultValue,
-//											null);
-//							double dbMax = ((RealLiteral) min).getValue();
-//							if (dbMax < dbDefaultValue)
-//								error("default value in ROOM model is less than this maximum",
-//										minRef);
-//						} catch (ValueConverterException e1) {
-//							warning("could not compare with real value in ROOM model (parse error)",
-//									minRef);
-//						}
-//					} else
-//						warning("could not compare with real value in ROOM model (incompatible datatypes)",
-//								minRef);
-//				}
-//
-//			}
+			// String defaultValue = config.getAttribute()
+			// .getDefaultValueLiteral();
+			// if (config.getValue() == null && defaultValue != null) {
+			// if (type == LiteralType.INT) {
+			// if (min instanceof IntLiteral) {
+			// try {
+			// long lDefaultValue = converter.getLongConverter()
+			// .toValue(defaultValue, null);
+			// long lMax = ((IntLiteral) min).getValue();
+			// if (lMax < lDefaultValue)
+			// error("default value in ROOM model is less than this maximum",
+			// minRef);
+			// } catch (ValueConverterException e) {
+			// warning("could not compare with int value in ROOM model (parse error)",
+			// minRef);
+			// }
+			// } else
+			// warning("could not compare with int value in ROOM model (incompatible datatypes)",
+			// minRef);
+			// } else if (type == LiteralType.REAL) {
+			// if (min instanceof RealLiteral) {
+			// try {
+			// double dbDefaultValue = converter
+			// .getRealConverter().toValue(defaultValue,
+			// null);
+			// double dbMax = ((RealLiteral) min).getValue();
+			// if (dbMax < dbDefaultValue)
+			// error("default value in ROOM model is less than this maximum",
+			// minRef);
+			// } catch (ValueConverterException e1) {
+			// warning("could not compare with real value in ROOM model (parse error)",
+			// minRef);
+			// }
+			// } else
+			// warning("could not compare with real value in ROOM model (incompatible datatypes)",
+			// minRef);
+			// }
+			//
+			// }
 		}
 
 	}
@@ -423,45 +427,45 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 					error("incompatible datatype: maximum is not int", maxRef);
 			}
 			// check room default if config default is not set
-//			String defaultValue = config.getAttribute()
-//					.getDefaultValueLiteral();
-//			if (config.getValue() == null && defaultValue != null) {
-//				if (type == LiteralType.INT) {
-//					if (max instanceof IntLiteral) {
-//						try {
-//							long lDefaultValue = converter.getLongConverter()
-//									.toValue(defaultValue, null);
-//							long lMax = ((IntLiteral) max).getValue();
-//							if (lMax < lDefaultValue)
-//								error("default value in ROOM model exceeds this maximum",
-//										maxRef);
-//						} catch (ValueConverterException e) {
-//							warning("could not compare with int value in ROOM model (parse error)",
-//									maxRef);
-//						}
-//					} else
-//						warning("could not compare with int value in ROOM model (incompatible datatypes)",
-//								maxRef);
-//				} else if (type == LiteralType.REAL) {
-//					if (max instanceof RealLiteral) {
-//						try {
-//							double dbDefaultValue = converter
-//									.getRealConverter().toValue(defaultValue,
-//											null);
-//							double dbMax = ((RealLiteral) max).getValue();
-//							if (dbMax < dbDefaultValue)
-//								error("default value in ROOM model exceeds this maximum",
-//										maxRef);
-//						} catch (ValueConverterException e1) {
-//							warning("could not compare with real value in ROOM model (parse error)",
-//									maxRef);
-//						}
-//					} else
-//						warning("could not compare with real value in ROOM model (incompatible datatypes)",
-//								maxRef);
-//				}
-//
-//			}
+			// String defaultValue = config.getAttribute()
+			// .getDefaultValueLiteral();
+			// if (config.getValue() == null && defaultValue != null) {
+			// if (type == LiteralType.INT) {
+			// if (max instanceof IntLiteral) {
+			// try {
+			// long lDefaultValue = converter.getLongConverter()
+			// .toValue(defaultValue, null);
+			// long lMax = ((IntLiteral) max).getValue();
+			// if (lMax < lDefaultValue)
+			// error("default value in ROOM model exceeds this maximum",
+			// maxRef);
+			// } catch (ValueConverterException e) {
+			// warning("could not compare with int value in ROOM model (parse error)",
+			// maxRef);
+			// }
+			// } else
+			// warning("could not compare with int value in ROOM model (incompatible datatypes)",
+			// maxRef);
+			// } else if (type == LiteralType.REAL) {
+			// if (max instanceof RealLiteral) {
+			// try {
+			// double dbDefaultValue = converter
+			// .getRealConverter().toValue(defaultValue,
+			// null);
+			// double dbMax = ((RealLiteral) max).getValue();
+			// if (dbMax < dbDefaultValue)
+			// error("default value in ROOM model exceeds this maximum",
+			// maxRef);
+			// } catch (ValueConverterException e1) {
+			// warning("could not compare with real value in ROOM model (parse error)",
+			// maxRef);
+			// }
+			// } else
+			// warning("could not compare with real value in ROOM model (incompatible datatypes)",
+			// maxRef);
+			// }
+			//
+			// }
 		}
 	}
 
@@ -510,8 +514,9 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		} else if (source.eContainer() instanceof ActorInstanceConfig) {
 			ActorInstanceConfig aiConfig = (ActorInstanceConfig) source
 					.eContainer();
-			ActorClass actor = ConfigUtil.getLastActorRef(aiConfig.getRoot(),
-					aiConfig.getPath()).getType();
+			ActorClass actor = ConfigUtil.getLastActorRef(
+					aiConfig.getSubSystem().getType(), aiConfig.getPath())
+					.getType();
 			// find ActorClassConfig
 			for (ActorClassConfig cf : model.getActorClassConfigs()) {
 				if (cf.getActor().equals(actor)) {
@@ -542,13 +547,5 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		}
 
 		return target;
-	}
-
-	private String refPathToString(RefPath path) {
-		String str = "";
-		for (String s : path.getRefs())
-			str += "/" + s;
-
-		return str;
 	}
 }

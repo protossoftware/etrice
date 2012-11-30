@@ -85,6 +85,9 @@ public class DataClassGen {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+      _builder.newLine();
+      _builder.newLine();
       EList<RoomModel> models = root.getReferencedModels(dc);
       _builder.newLineIfNotEmpty();
       {

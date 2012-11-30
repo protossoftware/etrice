@@ -98,8 +98,7 @@ public class DataConfigurationHelper {
 			}
 			for (ActorInstanceConfig instanceConfig : config
 					.getActorInstanceConfigs()) {
-				String path = "/" + instanceConfig.getRoot().getName()
-						+ toStringPath(instanceConfig.getPath().getRefs(), "/");
+				String path = ConfigUtil.getPath(instanceConfig);
 				if (actorInstances.contains(path)) {
 					logger.logError(
 							"Multiple configurations for actor instance "
@@ -138,7 +137,7 @@ public class DataConfigurationHelper {
 				dynActorInstanceAttrMap.put(path, list);
 
 				ActorClass ac = ConfigUtil.getLastActorRef(
-						actorConfig.getRoot(), actorConfig.getPath()).getType();
+						actorConfig.getSubSystem().getType(), actorConfig.getPath()).getType();
 				if ((list = dynActorClassAttrMap.get(ac)) == null)
 					list = new ArrayList<AttrInstanceConfig>();
 				list.add(c);

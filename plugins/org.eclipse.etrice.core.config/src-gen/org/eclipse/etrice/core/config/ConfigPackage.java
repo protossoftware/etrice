@@ -67,13 +67,22 @@ public interface ConfigPackage extends EPackage
   int CONFIG_MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_MODEL__NAME = 0;
+
+  /**
    * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONFIG_MODEL__IMPORTS = 0;
+  int CONFIG_MODEL__IMPORTS = 1;
 
   /**
    * The feature id for the '<em><b>Config Elements</b></em>' containment reference list.
@@ -82,7 +91,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONFIG_MODEL__CONFIG_ELEMENTS = 1;
+  int CONFIG_MODEL__CONFIG_ELEMENTS = 2;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -91,7 +100,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONFIG_MODEL_FEATURE_COUNT = 2;
+  int CONFIG_MODEL_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ConfigElementImpl <em>Element</em>}' class.
@@ -261,13 +270,22 @@ public interface ConfigPackage extends EPackage
   int ACTOR_INSTANCE_CONFIG__ROOT = CONFIG_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Sub System</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_CONFIG__SUB_SYSTEM = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Path</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_CONFIG__PATH = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+  int ACTOR_INSTANCE_CONFIG__PATH = CONFIG_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -276,7 +294,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_CONFIG__ATTRIBUTES = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+  int ACTOR_INSTANCE_CONFIG__ATTRIBUTES = CONFIG_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Ports</b></em>' containment reference list.
@@ -285,7 +303,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_CONFIG__PORTS = CONFIG_ELEMENT_FEATURE_COUNT + 3;
+  int ACTOR_INSTANCE_CONFIG__PORTS = CONFIG_ELEMENT_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Actor Instance Config</em>' class.
@@ -294,7 +312,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 4;
+  int ACTOR_INSTANCE_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl <em>Protocol Class Config</em>}' class.
@@ -827,6 +845,17 @@ public interface ConfigPackage extends EPackage
   EClass getConfigModel();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.ConfigModel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigModel#getName()
+   * @see #getConfigModel()
+   * @generated
+   */
+  EAttribute getConfigModel_Name();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ConfigModel#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -996,6 +1025,17 @@ public interface ConfigPackage extends EPackage
    * @generated
    */
   EReference getActorInstanceConfig_Root();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getSubSystem <em>Sub System</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Sub System</em>'.
+   * @see org.eclipse.etrice.core.config.ActorInstanceConfig#getSubSystem()
+   * @see #getActorInstanceConfig()
+   * @generated
+   */
+  EReference getActorInstanceConfig_SubSystem();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPath <em>Path</em>}'.
@@ -1456,6 +1496,14 @@ public interface ConfigPackage extends EPackage
     EClass CONFIG_MODEL = eINSTANCE.getConfigModel();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_MODEL__NAME = eINSTANCE.getConfigModel_Name();
+
+    /**
      * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1592,6 +1640,14 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EReference ACTOR_INSTANCE_CONFIG__ROOT = eINSTANCE.getActorInstanceConfig_Root();
+
+    /**
+     * The meta object literal for the '<em><b>Sub System</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_INSTANCE_CONFIG__SUB_SYSTEM = eINSTANCE.getActorInstanceConfig_SubSystem();
 
     /**
      * The meta object literal for the '<em><b>Path</b></em>' containment reference feature.

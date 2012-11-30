@@ -88,7 +88,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	private List<ActorRef> collectInstances(ActorInstanceConfig config) {
 		List<ActorRef> refs = new ArrayList<ActorRef>();
 
-		ActorContainerClass root = config.getRoot();
+		ActorContainerClass root = config.getSubSystem().getType();
 		if (root != null) {
 			RefPath path = config.getPath();
 			if (path != null && !path.getRefs().isEmpty())

@@ -53,6 +53,8 @@ class DataClassGen {
 	'''
 		package «dc.getPackage()»;
 		
+		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+		
 		«var models = root.getReferencedModels(dc)»
 		«FOR model : models»import «model.name».*;
 		«ENDFOR»

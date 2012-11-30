@@ -33,11 +33,14 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.RefableType
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
+	@Inject TypeHelpers typeHelpers
 	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(Message m) {
@@ -158,11 +161,19 @@ class CExtensions implements ILanguageExtension {
 	override String toValueLiteral(PrimitiveType type, String value){
 		switch(type.targetName){
 			case "char":
-				"'"+value+"'"
+				if(value.length==1)
+					"'"+value+"'"
+				else
+					"\""+value+"\""
+				// TODO ensure \0
 			case "charPtr":
 				"\""+value+"\""
-			case "stringPtr":
-				"\""+value+"\""
+			case value.contains(','): {
+					var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+					'''{ «FOR v: singleValues SEPARATOR ', '»«toValueLiteral(type, v.trim)»«ENDFOR» }'''.toString
+				}
+			case "boolean":
+				value.toUpperCase
 			default:
 				value	
 		}

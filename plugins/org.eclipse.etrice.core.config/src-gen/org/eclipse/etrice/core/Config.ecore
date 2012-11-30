@@ -22,6 +22,7 @@
         <details key="body" value="EList&lt;SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList&lt;SubSystemConfig>();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;for(ConfigElement element : this.getConfigElements())&#xD;&#xA;&#x9;&#x9;&#x9; &#x9;&#x9;if(element instanceof SubSystemConfig)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;list.add((SubSystemConfig) element);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;return list;"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="configElements" upperBound="-1"
@@ -45,7 +46,8 @@
         eType="#//AttrClassConfig" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorInstanceConfig" eSuperTypes="#//ConfigElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="path" eType="#//RefPath"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"

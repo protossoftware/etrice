@@ -271,9 +271,19 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getConfigModel_Name()
+  {
+    return (EAttribute)configModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getConfigModel_Imports()
   {
-    return (EReference)configModelEClass.getEStructuralFeatures().get(0);
+    return (EReference)configModelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -283,7 +293,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    */
   public EReference getConfigModel_ConfigElements()
   {
-    return (EReference)configModelEClass.getEStructuralFeatures().get(1);
+    return (EReference)configModelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -431,7 +441,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorInstanceConfig_Path()
+  public EReference getActorInstanceConfig_SubSystem()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(1);
   }
@@ -441,7 +451,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorInstanceConfig_Attributes()
+  public EReference getActorInstanceConfig_Path()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(2);
   }
@@ -451,9 +461,19 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActorInstanceConfig_Ports()
+  public EReference getActorInstanceConfig_Attributes()
   {
     return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActorInstanceConfig_Ports()
+  {
+    return (EReference)actorInstanceConfigEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -857,6 +877,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     // Create classes and their features
     configModelEClass = createEClass(CONFIG_MODEL);
+    createEAttribute(configModelEClass, CONFIG_MODEL__NAME);
     createEReference(configModelEClass, CONFIG_MODEL__IMPORTS);
     createEReference(configModelEClass, CONFIG_MODEL__CONFIG_ELEMENTS);
 
@@ -878,6 +899,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     actorInstanceConfigEClass = createEClass(ACTOR_INSTANCE_CONFIG);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ROOT);
+    createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__SUB_SYSTEM);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__PATH);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
     createEReference(actorInstanceConfigEClass, ACTOR_INSTANCE_CONFIG__PORTS);
@@ -981,6 +1003,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(configModelEClass, ConfigModel.class, "ConfigModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConfigModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConfigModel_Imports(), this.getImport(), null, "imports", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConfigModel_ConfigElements(), this.getConfigElement(), null, "configElements", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1009,7 +1032,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEReference(getActorClassConfig_Attributes(), this.getAttrClassConfig(), null, "attributes", null, 0, -1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorInstanceConfigEClass, ActorInstanceConfig.class, "ActorInstanceConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getActorInstanceConfig_Root(), theRoomPackage.getSubSystemClass(), null, "root", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceConfig_Root(), theRoomPackage.getLogicalSystem(), null, "root", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceConfig_SubSystem(), theRoomPackage.getSubSystemRef(), null, "subSystem", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorInstanceConfig_Path(), this.getRefPath(), null, "path", null, 0, 1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorInstanceConfig_Ports(), this.getPortInstanceConfig(), null, "ports", null, 0, -1, ActorInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -198,6 +198,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
+	public void checkAttributeNoStringArray(Attribute att){
+		if(!att.getRefType().isRef() && att.getRefType().getType() instanceof PrimitiveType){
+			PrimitiveType type = (PrimitiveType)att.getRefType().getType();
+			if(type.getName().equalsIgnoreCase("string") && att.getSize() > 0)
+				error("string type must have multiplicity 0", RoomPackage.Literals.ATTRIBUTE__SIZE);
+		}
+	}
+	
+	@Check
 	public void checkBaseClassesNotCircular(ProtocolClass pc) {
 		if (pc==null)
 			return;

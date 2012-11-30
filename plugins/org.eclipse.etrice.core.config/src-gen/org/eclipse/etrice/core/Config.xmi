@@ -15,12 +15,18 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/core/Config#//ConfigModel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="ConfigModel"/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="configElements" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ConfigElement">
@@ -125,7 +131,16 @@
         <elements xsi:type="xtext:Assignment" feature="root" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.2">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubSystemClass"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//LogicalSystem"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="/"/>
+        <elements xsi:type="xtext:Assignment" feature="subSystem" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.2">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/etrice/Room#//SubSystemRef"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
           </terminal>

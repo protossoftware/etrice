@@ -23,7 +23,6 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.config.DataConfiguration;
-
 import com.google.inject.Binder;
 
 public class GeneratorModule extends GeneratorBaseModule {

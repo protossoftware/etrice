@@ -27,8 +27,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -45,13 +47,24 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  */
 public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	public IScope scope_ActorInstanceConfig_subSystem(ActorInstanceConfig ctx,
+			EReference ref) {
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+
+		LogicalSystem root = ctx.getRoot();
+		for (SubSystemRef ssRef : root.getSubSystems())
+			scopes.add(EObjectDescription.create(ref.getName(), ssRef));
+
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+
 	public IScope scope_PortInstanceConfig_item(PortInstanceConfig ctx,
 			EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
 		ActorInstanceConfig actorConfig = (ActorInstanceConfig) ctx
 				.eContainer();
-		SubSystemClass subsystem = actorConfig.getRoot();
+		SubSystemClass subsystem = actorConfig.getSubSystem().getType();
 		if (subsystem != null) {
 			ActorClass ac = ConfigUtil
 					.resolve(subsystem, actorConfig.getPath());
@@ -84,7 +97,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (config.getAttribute().getRefType().getType() instanceof DataClass) {
 			DataClass dc = (DataClass) config.getAttribute().getRefType()
 					.getType();
-			for (Attribute att : RoomHelpers.getAllAttributes(dc)) {
+			for (Attribute att : ConfigUtil
+					.filterConfigurableAttributes(RoomHelpers
+							.getAllAttributes(dc))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
 		}
@@ -94,7 +109,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			List<IEObjectDescription> scopes) {
 		ActorClass actor = config.getActor();
 		if (actor != null) {
-			for (Attribute att : RoomHelpers.getAllAttributes(actor)) {
+			for (Attribute att : ConfigUtil
+					.filterConfigurableAttributes(RoomHelpers
+							.getAllAttributes(actor))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
 		}
@@ -102,10 +119,12 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	private void collectAttributes(ActorInstanceConfig config,
 			List<IEObjectDescription> scopes) {
-		SubSystemClass subsystem = config.getRoot();
+		SubSystemClass subsystem = config.getSubSystem().getType();
 		if (subsystem != null) {
 			ActorClass actor = ConfigUtil.resolve(subsystem, config.getPath());
-			for (Attribute att : RoomHelpers.getAllAttributes(actor)) {
+			for (Attribute att : ConfigUtil
+					.filterConfigurableAttributes(RoomHelpers
+							.getAllAttributes(actor))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
 		}
@@ -122,7 +141,8 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			portClass = protocolConfig.getProtocol().getConjugate();
 
 		if (portClass != null)
-			for (Attribute att : portClass.getAttributes())
+			for (Attribute att : ConfigUtil
+					.filterConfigurableAttributes(portClass.getAttributes()))
 				scopes.add(EObjectDescription.create(att.getName(), att));
 	}
 
@@ -130,7 +150,8 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			List<IEObjectDescription> scopes) {
 		PortClass portClass = ConfigUtil.getPortClass(config);
 		if (portClass != null)
-			for (Attribute att : portClass.getAttributes())
+			for (Attribute att : ConfigUtil
+					.filterConfigurableAttributes(portClass.getAttributes()))
 				scopes.add(EObjectDescription.create(att.getName(), att));
 	}
 }

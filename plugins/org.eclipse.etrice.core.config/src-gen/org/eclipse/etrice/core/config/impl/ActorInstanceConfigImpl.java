@@ -23,7 +23,8 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.RefPath;
 
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.SubSystemRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +34,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getRoot <em>Root</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getSubSystem <em>Sub System</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorInstanceConfigImpl#getPorts <em>Ports</em>}</li>
@@ -51,7 +53,17 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * @generated
    * @ordered
    */
-  protected SubSystemClass root;
+  protected LogicalSystem root;
+
+  /**
+   * The cached value of the '{@link #getSubSystem() <em>Sub System</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSubSystem()
+   * @generated
+   * @ordered
+   */
+  protected SubSystemRef subSystem;
 
   /**
    * The cached value of the '{@link #getPath() <em>Path</em>}' containment reference.
@@ -109,12 +121,12 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubSystemClass getRoot()
+  public LogicalSystem getRoot()
   {
     if (root != null && root.eIsProxy())
     {
       InternalEObject oldRoot = (InternalEObject)root;
-      root = (SubSystemClass)eResolveProxy(oldRoot);
+      root = (LogicalSystem)eResolveProxy(oldRoot);
       if (root != oldRoot)
       {
         if (eNotificationRequired())
@@ -129,7 +141,7 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubSystemClass basicGetRoot()
+  public LogicalSystem basicGetRoot()
   {
     return root;
   }
@@ -139,12 +151,55 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRoot(SubSystemClass newRoot)
+  public void setRoot(LogicalSystem newRoot)
   {
-    SubSystemClass oldRoot = root;
+    LogicalSystem oldRoot = root;
     root = newRoot;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.ACTOR_INSTANCE_CONFIG__ROOT, oldRoot, root));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubSystemRef getSubSystem()
+  {
+    if (subSystem != null && subSystem.eIsProxy())
+    {
+      InternalEObject oldSubSystem = (InternalEObject)subSystem;
+      subSystem = (SubSystemRef)eResolveProxy(oldSubSystem);
+      if (subSystem != oldSubSystem)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM, oldSubSystem, subSystem));
+      }
+    }
+    return subSystem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubSystemRef basicGetSubSystem()
+  {
+    return subSystem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSubSystem(SubSystemRef newSubSystem)
+  {
+    SubSystemRef oldSubSystem = subSystem;
+    subSystem = newSubSystem;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM, oldSubSystem, subSystem));
   }
 
   /**
@@ -256,6 +311,9 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ROOT:
         if (resolve) return getRoot();
         return basicGetRoot();
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM:
+        if (resolve) return getSubSystem();
+        return basicGetSubSystem();
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__PATH:
         return getPath();
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:
@@ -278,7 +336,10 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
     switch (featureID)
     {
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ROOT:
-        setRoot((SubSystemClass)newValue);
+        setRoot((LogicalSystem)newValue);
+        return;
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM:
+        setSubSystem((SubSystemRef)newValue);
         return;
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__PATH:
         setPath((RefPath)newValue);
@@ -306,7 +367,10 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
     switch (featureID)
     {
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ROOT:
-        setRoot((SubSystemClass)null);
+        setRoot((LogicalSystem)null);
+        return;
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM:
+        setSubSystem((SubSystemRef)null);
         return;
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__PATH:
         setPath((RefPath)null);
@@ -333,6 +397,8 @@ public class ActorInstanceConfigImpl extends ConfigElementImpl implements ActorI
     {
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ROOT:
         return root != null;
+      case ConfigPackage.ACTOR_INSTANCE_CONFIG__SUB_SYSTEM:
+        return subSystem != null;
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__PATH:
         return path != null;
       case ConfigPackage.ACTOR_INSTANCE_CONFIG__ATTRIBUTES:

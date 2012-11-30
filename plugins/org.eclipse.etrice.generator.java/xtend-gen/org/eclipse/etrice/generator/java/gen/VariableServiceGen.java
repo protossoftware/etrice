@@ -399,8 +399,8 @@ public class VariableServiceGen {
           _builder.append(" object, Map<String, Object> map){");
           _builder.newLineIfNotEmpty();
           {
-            EList<Attribute> _attributes = dc_1.getAttributes();
-            for(final Attribute a_2 : _attributes) {
+            List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dc_1);
+            for(final Attribute a_2 : _allAttributes) {
               {
                 RefableType _refType = a_2.getRefType();
                 DataType _type = _refType.getType();

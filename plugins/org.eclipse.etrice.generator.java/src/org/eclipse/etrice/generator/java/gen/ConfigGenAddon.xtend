@@ -39,20 +39,23 @@ class ConfigGenAddon {
 	// For SubSystemClassGen
 	
 	def public genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
-			«FOR a : ai.actorClass.attributes»
+			«FOR a : ai.actorClass.allAttributes»
 				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
 			«FOR pi : ai.orderedIfItemInstances»
-				«FOR a : RoomHelpers::getPortClass(pi.interfaceItem).attributes»
-					«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»
-				«ENDFOR»
+				«var attribs = RoomHelpers::getPortClass(pi.interfaceItem)?.attributes»
+				«IF attribs != null»
+					«FOR a : attribs»
+						«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»
+					«ENDFOR»
+				«ENDIF»
 			«ENDFOR»
 		'''
 	}
 	
 	def private applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
-		var aType = a.refType.type
+		var aType = a.refType.type		
 		if(aType.primitive){
 			var value = switch instance {
 				ActorInstance: dataConfigExt.getAttrInstanceConfigValue(instance, path)
@@ -73,7 +76,7 @@ class ConfigGenAddon {
 					}'''
 		}
 		else if (aType.dataClass)'''
-				«FOR e : (aType as DataClass).attributes»
+				«FOR e : (aType as DataClass).allAttributes»
 					«applyInstanceConfig(instance, invokes+"."+a.name.invokeGetter(null), path.union(e))»
 				«ENDFOR»
 			'''
@@ -113,7 +116,7 @@ class ConfigGenAddon {
 	
 	def public genMinMaxConstants(ActorClass ac){
 		var result = '''
-			«FOR a : ac.attributes»
+			«FOR a : ac.allAttributes»
 				«genMinMaxConstantsRec(ac, a.name, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
 		'''
@@ -124,23 +127,24 @@ class ConfigGenAddon {
 	
 	def private genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
 		var temp = null as String
-		if(path.last.refType.type.dataClass)
+		var aType = path.last.refType.type
+		if(aType.dataClass)
 			'''
-				«FOR e : (path.last.refType.type as DataClass).allAttributes»
+				«FOR e : (aType as DataClass).allAttributes»
 					«genMinMaxConstantsRec(ac, varNamePath+"_"+e.name, path.union(e))»
 				«ENDFOR»
 			'''
-		else {
-			var aType = (path.last.refType.type as PrimitiveType)
+		else if(aType instanceof PrimitiveType){
+			var pType = aType as PrimitiveType
 			'''
 				«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
-					public static «aType.minMaxType» MIN_«varNamePath» = «aType.toValueLiteral(temp)»;
+					public static «pType.minMaxType» MIN_«varNamePath» = «pType.toValueLiteral(temp)»;
 				«ENDIF»
 				«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) != null»
-					public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
+					public static «pType.minMaxType» MAX_«varNamePath» = «pType.toValueLiteral(temp)»;
 				«ENDIF»
 			'''
-			}
+		}
 	}
 	
 	def private getMinMaxType(PrimitiveType type){

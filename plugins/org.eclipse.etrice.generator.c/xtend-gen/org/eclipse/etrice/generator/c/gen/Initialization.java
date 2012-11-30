@@ -85,10 +85,19 @@ public class Initialization {
       if (_equals) {
         _or = true;
       } else {
+        boolean _and = false;
         RefableType _refType = a.getRefType();
-        DataType _type = _refType.getType();
-        boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
-        _or = (_equals || _isPrimitive);
+        boolean _isRef = _refType.isRef();
+        boolean _not = (!_isRef);
+        if (!_not) {
+          _and = false;
+        } else {
+          RefableType _refType_1 = a.getRefType();
+          DataType _type = _refType_1.getType();
+          boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+          _and = (_not && _isPrimitive);
+        }
+        _or = (_equals || _and);
       }
       if (_or) {
         String _initAttribute = this.initAttribute(instance, path);
@@ -204,15 +213,16 @@ public class Initialization {
               _and_1 = false;
             } else {
               boolean _isCharacterType = this._typeHelpers.isCharacterType(_primitiveType);
-              _and_1 = (_greaterThan && _isCharacterType);
+              boolean _not = (!_isCharacterType);
+              _and_1 = (_greaterThan && _not);
             }
             if (!_and_1) {
               _and = false;
             } else {
               String _trim = value.trim();
               boolean _startsWith = _trim.startsWith("{");
-              boolean _not = (!_startsWith);
-              _and = (_and_1 && _not);
+              boolean _not_1 = (!_startsWith);
+              _and = (_and_1 && _not_1);
             }
             if (_and) {
               StringConcatenation _builder = new StringConcatenation();

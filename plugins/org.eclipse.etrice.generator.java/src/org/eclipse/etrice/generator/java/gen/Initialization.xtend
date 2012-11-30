@@ -53,12 +53,12 @@ class Initialization {
 		if(a.refType.ref){
 			if(a.defaultValueLiteral != null)
 				attributeInit(a, a.defaultValueLiteral)
-			else if(!useClassDefaultsOnly)
+			else
 				attributeInit(a, languageExt.nullPointer)	
 		}
 		else{
 			if(aType.primitive){
-				var value = getDataConfigValueLiteral(new ArrayList<Attribute>.union(a), roomClass)
+				var value = getDataConfigValue(new ArrayList<Attribute>.union(a), roomClass)
 				if(value == null) value = a.defaultValueLiteral
 				if(value != null) attributeInit(a, languageExt.toValueLiteral(aType as PrimitiveType, value))
 				else if(!useClassDefaultsOnly) attributeInit(a, languageExt.defaultValue(aType))
@@ -78,8 +78,8 @@ class Initialization {
 			'''
 		}
 		else if(aType.primitive){
-			var value = getDataConfigValueLiteral(path, roomClass)
-			return if(value != null) attributeInit(path, value)
+			var value = getDataConfigValue(path, roomClass)
+			return if(value != null) attributeInit(path, languageExt.toValueLiteral(aType as PrimitiveType, value))
 		 }
 	}
 	
@@ -108,14 +108,14 @@ class Initialization {
 	 	'''
 	}
 	
-	def private getDataConfigValueLiteral(List<Attribute> path, EObject roomClass){
+	def private getDataConfigValue(List<Attribute> path, EObject roomClass){
 		return switch roomClass{
 			ActorClass:
 				dataConfigExt.getAttrClassConfigValue(roomClass, path)
 			PortClass:
 				if(roomClass.eContainer instanceof ProtocolClass){
 					var pc = roomClass.eContainer as ProtocolClass
-					dataConfigExt.getAttrClassConfigValue(pc, pc.regular.equals(roomClass), path)
+					dataConfigExt.getAttrClassConfigValue(pc, pc.regular?.equals(roomClass), path)
 				}
 			DataClass: null
 		}

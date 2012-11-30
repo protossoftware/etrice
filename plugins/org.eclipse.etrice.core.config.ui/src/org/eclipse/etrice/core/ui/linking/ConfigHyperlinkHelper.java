@@ -58,7 +58,7 @@ public class ConfigHyperlinkHelper extends ImportAwareHyperlinkHelper {
 	}
 
 	private EObject getCrossLinkedEObject(ActorInstanceConfig config) {
-		ActorContainerClass lastAcContainer = config.getRoot();
+		ActorContainerClass lastAcContainer = config.getSubSystem().getType();
 		ActorRef lastRef = null;
 		for (String ref : config.getPath().getRefs()) {
 			for (ActorRef r : lastAcContainer.getActorRefs())

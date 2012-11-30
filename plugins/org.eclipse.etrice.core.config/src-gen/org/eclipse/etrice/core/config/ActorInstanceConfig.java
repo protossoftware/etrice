@@ -4,7 +4,8 @@ package org.eclipse.etrice.core.config;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.SubSystemRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,6 +16,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot <em>Root</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getSubSystem <em>Sub System</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPorts <em>Ports</em>}</li>
@@ -36,12 +38,12 @@ public interface ActorInstanceConfig extends ConfigElement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Root</em>' reference.
-   * @see #setRoot(SubSystemClass)
+   * @see #setRoot(LogicalSystem)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Root()
    * @model
    * @generated
    */
-  SubSystemClass getRoot();
+  LogicalSystem getRoot();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot <em>Root</em>}' reference.
@@ -51,7 +53,33 @@ public interface ActorInstanceConfig extends ConfigElement
    * @see #getRoot()
    * @generated
    */
-  void setRoot(SubSystemClass value);
+  void setRoot(LogicalSystem value);
+
+  /**
+   * Returns the value of the '<em><b>Sub System</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Sub System</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Sub System</em>' reference.
+   * @see #setSubSystem(SubSystemRef)
+   * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_SubSystem()
+   * @model
+   * @generated
+   */
+  SubSystemRef getSubSystem();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getSubSystem <em>Sub System</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Sub System</em>' reference.
+   * @see #getSubSystem()
+   * @generated
+   */
+  void setSubSystem(SubSystemRef value);
 
   /**
    * Returns the value of the '<em><b>Path</b></em>' containment reference.

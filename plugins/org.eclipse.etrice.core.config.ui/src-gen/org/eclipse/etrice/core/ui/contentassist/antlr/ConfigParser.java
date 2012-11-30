@@ -96,8 +96,9 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDotDecimalAccess().getGroup(), "rule__DotDecimal__Group__0");
 					put(grammarAccess.getDecimalDotAccess().getGroup(), "rule__DecimalDot__Group__0");
 					put(grammarAccess.getDecimalExpAccess().getGroup(), "rule__DecimalExp__Group__0");
-					put(grammarAccess.getConfigModelAccess().getImportsAssignment_0(), "rule__ConfigModel__ImportsAssignment_0");
-					put(grammarAccess.getConfigModelAccess().getConfigElementsAssignment_1(), "rule__ConfigModel__ConfigElementsAssignment_1");
+					put(grammarAccess.getConfigModelAccess().getNameAssignment_1(), "rule__ConfigModel__NameAssignment_1");
+					put(grammarAccess.getConfigModelAccess().getImportsAssignment_3(), "rule__ConfigModel__ImportsAssignment_3");
+					put(grammarAccess.getConfigModelAccess().getConfigElementsAssignment_4(), "rule__ConfigModel__ConfigElementsAssignment_4");
 					put(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_1(), "rule__SubSystemConfig__SubSystemAssignment_1");
 					put(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_3(), "rule__SubSystemConfig__DynConfigAssignment_3");
 					put(grammarAccess.getDynamicConfigAccess().getFilePathAssignment_2_0_0_1(), "rule__DynamicConfig__FilePathAssignment_2_0_0_1");
@@ -107,9 +108,10 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorClassConfigAccess().getActorAssignment_1(), "rule__ActorClassConfig__ActorAssignment_1");
 					put(grammarAccess.getActorClassConfigAccess().getAttributesAssignment_3(), "rule__ActorClassConfig__AttributesAssignment_3");
 					put(grammarAccess.getActorInstanceConfigAccess().getRootAssignment_1(), "rule__ActorInstanceConfig__RootAssignment_1");
-					put(grammarAccess.getActorInstanceConfigAccess().getPathAssignment_3(), "rule__ActorInstanceConfig__PathAssignment_3");
-					put(grammarAccess.getActorInstanceConfigAccess().getAttributesAssignment_5_0(), "rule__ActorInstanceConfig__AttributesAssignment_5_0");
-					put(grammarAccess.getActorInstanceConfigAccess().getPortsAssignment_5_1(), "rule__ActorInstanceConfig__PortsAssignment_5_1");
+					put(grammarAccess.getActorInstanceConfigAccess().getSubSystemAssignment_3(), "rule__ActorInstanceConfig__SubSystemAssignment_3");
+					put(grammarAccess.getActorInstanceConfigAccess().getPathAssignment_5(), "rule__ActorInstanceConfig__PathAssignment_5");
+					put(grammarAccess.getActorInstanceConfigAccess().getAttributesAssignment_7_0(), "rule__ActorInstanceConfig__AttributesAssignment_7_0");
+					put(grammarAccess.getActorInstanceConfigAccess().getPortsAssignment_7_1(), "rule__ActorInstanceConfig__PortsAssignment_7_1");
 					put(grammarAccess.getProtocolClassConfigAccess().getProtocolAssignment_1(), "rule__ProtocolClassConfig__ProtocolAssignment_1");
 					put(grammarAccess.getProtocolClassConfigAccess().getRegularAssignment_3_0_1(), "rule__ProtocolClassConfig__RegularAssignment_3_0_1");
 					put(grammarAccess.getProtocolClassConfigAccess().getConjugatedAssignment_3_1_1(), "rule__ProtocolClassConfig__ConjugatedAssignment_3_1_1");
@@ -137,7 +139,7 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIntLiteralAccess().getValueAssignment_1(), "rule__IntLiteral__ValueAssignment_1");
 					put(grammarAccess.getStringLiteralAccess().getValueAssignment_1(), "rule__StringLiteral__ValueAssignment_1");
 					put(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2(), "rule__DynamicConfig__UnorderedGroup_2");
-					put(grammarAccess.getActorInstanceConfigAccess().getUnorderedGroup_5(), "rule__ActorInstanceConfig__UnorderedGroup_5");
+					put(grammarAccess.getActorInstanceConfigAccess().getUnorderedGroup_7(), "rule__ActorInstanceConfig__UnorderedGroup_7");
 					put(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), "rule__ProtocolClassConfig__UnorderedGroup_3");
 				}
 			};

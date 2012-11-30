@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug (initial contribution)
+ * 
+ *******************************************************************************/
+
+
 package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
@@ -31,7 +44,7 @@ class Initialization {
 	def private initAttributeArray(InstanceBase instance, List<Attribute> path){
 		var a = path.last
 		var COMMENT = '''		/* «a.name»«IF a.size>1»[«a.size»]«ENDIF» */'''.toString
-		if(a.size == 0 || a.refType.type.primitive)
+		if(a.size == 0 || (!a.refType.ref && a.refType.type.primitive))
 			initAttribute(instance, path)+COMMENT
 		else 
 		'''
@@ -63,7 +76,7 @@ class Initialization {
 					languageExt.defaultValue(aType)
 			PrimitiveType: {
 				var value = getPrimitiveValue(instance, path)
-				if(a.size > 0 && aType.characterType && !value.trim.startsWith('{'))
+				if(a.size > 0 && !aType.characterType && !value.trim.startsWith('{'))
 					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
 				else
 					value

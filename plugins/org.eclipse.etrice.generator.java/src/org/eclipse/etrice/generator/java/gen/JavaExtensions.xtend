@@ -27,9 +27,14 @@ import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.RefableType
+import org.eclipse.etrice.generator.generic.TypeHelpers
+import com.google.inject.Inject
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
+
+	@Inject TypeHelpers typeHelpers
 
 	override String getTypedDataDefinition(Message m) {
 		generateArglistAndTypedData(m.data).get(1)
@@ -123,7 +128,7 @@ class JavaExtensions implements ILanguageExtension {
 	def private castValue(PrimitiveType type, String value){
 		switch(type.targetName){
 			case "boolean":
-				return value
+				return value.toLowerCase
 			case "byte":
 				return "(byte)"+value
 			case "short":
@@ -197,7 +202,5 @@ class JavaExtensions implements ILanguageExtension {
 		
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
-	
-
 	
 }
