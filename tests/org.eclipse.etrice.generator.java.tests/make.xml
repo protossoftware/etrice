@@ -51,7 +51,6 @@
 		<delete dir="${output}"/>
 		<delete dir="${test.results}"/>
 		<delete dir="src-gen"/>
-		<delete dir="src-gen2"/>
 		<delete dir="tmp"/>
 	</target>
 	
@@ -72,6 +71,7 @@
 				<include name="Language.room"/>
 			</fileset>
 		</copy>
+		<move file="models/StaticConfigTest_Java.room" toFile="models/StaticConfigTest.room"/>
 	</target>
 	
 	<!--
@@ -84,6 +84,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
@@ -113,18 +114,8 @@
 			<arg value="${java.tests.model.path}/PingPongThreadReplPortTest.room"/>
 			<arg value="${java.tests.model.path}/SendingDataTestJava.room"/>
 			<arg value="${java.tests.model.path}/TCPTest.room"/>
-			<classpath refid="clspath"/>
-		</java>
-
-		<!-- the following is a work-around for the configuration which doesn't work in the prsence of a LogicalSystems.
-			When all models are generated together, there is a logical system.
-			So we have to move awy src-gen since this is cleared by the generator and compile src-gen and src-gen2 separately
-		-->
-		<deltree dir="src-gen2"/>
-		<move file="src-gen" tofile="src-gen2"/>
-		
-		<java output="${output}/generate.txt" append="true" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
-			<arg value="${java.tests.model.path}/ConfigTest.config"/>
+			<arg value="${java.tests.model.path}/StaticConfigTest.room"/>
+			<arg value="${java.tests.model.path}/StaticConfigTest.config"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -134,12 +125,7 @@
 	-->
 	<target name="compile" depends="generate">
 		<mkdir dir="${bin.path}"/>
-		<javac srcdir="src-gen"
-			 destdir="${bin.path}"
-			 classpath="${runtime.path}/bin"
-			 debug="on"
-			/>
-		<javac srcdir="src-gen2"
+		<javac srcdir="src-gen:src"
 			 destdir="${bin.path}"
 			 classpath="${runtime.path}/bin"
 			 debug="on"
@@ -151,7 +137,7 @@
 	-->
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
-		<java output="${output}/runConfigTest.txt" classname="ConfigTest.SubSystemConfigTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.SubSystem_StaticConfigTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
@@ -239,8 +225,8 @@
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.ConfigPTest"/>
-			<arg value="./tmp/ConfigTest.etu"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.StaticConfigTest"/>
+			<arg value="./tmp/StaticConfigTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -251,6 +237,7 @@
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
+		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/StaticConfigTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>

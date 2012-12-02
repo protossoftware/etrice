@@ -71,6 +71,7 @@
 		<copy todir="models" >
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
+				<include name="*.config"/>
 			</fileset>
 			<fileset dir="${modellib.path}/model">
 				<include name="TimingService.room"/>
@@ -78,6 +79,7 @@
 				<include name="Language.room"/>
 			</fileset>
 		</copy>
+		<move file="models/StaticConfigTest_C.room" toFile="models/StaticConfigTest.room"/>
 	</target>
 	
 	<!--
@@ -89,6 +91,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.c/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
@@ -115,6 +118,8 @@
 			<arg value="${c.tests.model.path}/ChoicePointTest.room"/>
 			<arg value="${c.tests.model.path}/HandlerTest.room"/>
 			<arg value="${c.tests.model.path}/SendingDataTestC.room"/>
+			<arg value="${c.tests.model.path}/StaticConfigTest.room"/>
+			<arg value="${c.tests.model.path}/StaticConfigTest.config"/>
 			
 			<!-- modelib.c -->
 			<!-- not needed yet
@@ -177,6 +182,7 @@
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I../../src-gen/StaticConfigTest"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -211,6 +217,7 @@
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I../../src-gen/StaticConfigTest"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -245,6 +252,7 @@
 			<arg value="-I../../src-gen/ChoicePointTest"/>
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I../../src-gen/StaticConfigTest"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -278,6 +286,55 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 		</exec>
+		
+		<!-- compile and link StaticConfigTest-->
+		<mkdir dir="bin/StaticConfigTest"/>
+		<exec dir="bin/StaticConfigTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-I../../src-gen/ChoicePointTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../../src-gen/StaticConfigTest/Tester_ac.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Testee_1_ac.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Testee_2_ac.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Testee_Super2_ac.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Data_1_dc.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Data_Super1_dc.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Data_2_dc.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Data_3_dc.c"/>
+			<arg value="../../src-gen/StaticConfigTest/TestProtocol.c"/>
+			<arg value="../../src-gen/StaticConfigTest/TestProtocolWithDataClass.c"/>
+			<arg value="../../src-gen/StaticConfigTest/Top_ac.c"/>
+			<arg value="../../src-gen/StaticConfigTest/SubSystem_StaticConfigTest.c"/>
+			<arg value="../../src-gen/StaticConfigTest/SubSystem_StaticConfigTest_Runner.c"/>
+		</exec>
+		<exec dir="bin/StaticConfigTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-oStaticConfigTest.exe"/>
+			<arg value="Tester_ac.o"/>
+			<arg value="Testee_1_ac.o"/>
+			<arg value="Testee_2_ac.o"/>
+			<arg value="Testee_Super2_ac.o"/>
+			<arg value="Data_1_dc.o"/>
+			<arg value="Data_Super1_dc.o"/>
+			<arg value="Data_2_dc.o"/>
+			<arg value="Data_3_dc.o"/>
+			<arg value="TestProtocol.o"/>
+			<arg value="TestProtocolWithDataClass.o"/>
+			<arg value="Top_ac.o"/>
+			<arg value="SubSystem_StaticConfigTest.o"/>
+			<arg value="SubSystem_StaticConfigTest_Runner.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+		</exec>
 	</target>
 
 	<!--
@@ -288,6 +345,7 @@
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
 		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
 	</target>
 	
 	<!--
@@ -324,6 +382,13 @@
 			<arg value="./tmp/SendingDataTestC.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.StaticConfigTest"/>
+			<arg value="./tmp/StaticConfigTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 	</target>
 	
 	<!--
@@ -333,6 +398,7 @@
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CChoicePointTest.xml"/>
 		<move file="./tmp/SendingDataTestC.xml" tofile="./tmp/CSendingDataTest.xml"/>
+		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/StaticConfigTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>
