@@ -1,0 +1,374 @@
+RoomModel StaticConfigTest {
+
+	import room.basic.types.* from "Types.room"
+
+	LogicalSystem System_StaticConfigTest {
+		SubSystemRef subSystem: SubSystem_StaticConfigTest
+	}
+
+	SubSystemClass SubSystem_StaticConfigTest {
+		ActorRef top: Top_ac
+		LogicalThread dflt_thread
+	}
+
+	ActorClass Top_ac {
+		Structure {
+			ActorRef testee_1: Testee_1_ac
+			ActorRef tester: Tester_ac
+			LayerConnection ref testee_1 satisfied_by tester.spp
+		}
+		Behavior {
+			Operation Top_ac() {
+				"etUnit_open(\"tmp\", \"StaticConfigTest\");"
+				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.StaticConfigTest\");"
+			}
+			Operation ~Top_ac() {
+				"etUnit_closeTestSuite();"
+				"etUnit_close();"
+			}
+		}
+	}
+
+	ActorClass Tester_ac {
+		Interface {
+			SPP spp: TestProtocolWithDataClass
+		}
+		Structure {
+			ServiceImplementation of spp
+			Attribute caseId: int32
+
+			// none config test
+			Attribute data_3: Data_3_dc
+			ActorRef testee_super2: Testee_Super2_ac
+		}
+		Behavior {
+			Operation Tester_ac() {
+				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
+				"etUnit_testFinished(caseId);"
+			}
+			Operation ~Tester_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> s1 { }
+				State s1 {
+					entry {
+						"data_3.varCheck3(caseId);"
+						"SubSystemClassBase subSystem = (SubSystemClassBase) ((ActorClassBase)getParent()).getParent();"
+						"Testee_Super2_ac testee_super2 = (Testee_Super2_ac) subSystem.getInstance(\"/subSystem/top/tester/testee_super2\");"
+						"int caseId_2 = testee_super2.getCaseId();"
+						"testee_super2.getReg_port().varCheck(caseId_2);"
+						"EXPECT_TRUE(caseId_2, \"Tester_ac:1\", testee_super2.getFloat64_super_r() == 1.1);"
+						"EXPECT_TRUE(caseId_2, \"Tester_ac:2\", testee_super2.getFloat64_super_c() == 2.2);"
+						"EXPECT_TRUE(caseId_2, \"Tester_ac:3\", testee_super2.getFloat64_super_i() == 3.3);"
+						"EXPECT_EQUAL_FLOAT32(caseId,\"Tester_ac:4\", 25.f, testee_super2.getReg_port().getFloat_i(), 0.1f);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Testee_1_ac {
+		Interface {
+			conjugated Port conj_port: TestProtocol
+		}
+		Structure {
+			external Port conj_port
+			Attribute caseId: int32
+			Attribute data_1: Data_1_dc
+			ActorRef testee_2: Testee_2_ac
+		}
+		Behavior {
+			Operation Testee_1_ac() {
+				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
+				"etUnit_testFinished(caseId);"
+			}
+			Operation ~Testee_1_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> s1 { }
+				State s1 {
+					entry {
+						"conj_port.varCheck();"
+						"data_1.varCheck1(caseId);"
+						"EXPECT_FALSE(caseId,\"testee_1:data_1:1\", getData_1().getBool_c());"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:2\", getData_1().getInt8_c() == 24);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:3\", getData_1().getInt16_c() == 48);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:4\", getData_1().getInt32_c() == 96);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:5\", getData_1().getInt64_c() == 192);"
+						"EXPECT_EQUAL_FLOAT32(caseId,\"testee_1:data_1:6\", 9.6f, getData_1().getFloat32_c(), 0.1f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:7\", getData_1().getFloat64_c() == 19.2);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:8\", getData_1().getChar_c() == \'C\');"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:9\", getData_1().getString_c().equals(\":)\"));"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:10\", getData_1().getBool_i());"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:11\", getData_1().getInt8_i() == 2);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:12\", getData_1().getInt16_i() == 4);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:13\", getData_1().getInt32_i() == 8);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:14\", getData_1().getInt64_i() == 16);"
+						"EXPECT_EQUAL_FLOAT32(caseId,\"testee_1:data_1:15\", 1.6f, getData_1().getFloat32_i(), 0.1f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:16\", getData_1().getFloat64_i() == 3.2);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:17\", getData_1().getChar_i() == \'I\');"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:18\", getData_1().getString_i().equals(\":]\"));"
+
+						// Array
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:19\", getData_1().getBool_array_c()[0] == true && getData_1().getBool_array_c()[1] == false);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:20\", getData_1().getInt8_array_c()[0] == 24 && getData_1().getInt8_array_c()[1] == 48);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:21\", getData_1().getInt16_array_c()[0] == 48 && getData_1().getInt16_array_c()[1] == 96);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:22\", getData_1().getInt32_array_c()[0] == 96 && getData_1().getInt32_array_c()[1] == 192);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:23\", getData_1().getInt64_array_c()[0] == 192 && getData_1().getInt64_array_c()[1] == 384);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:24\", getData_1().getFloat32_array_c()[0] == 9.6f && getData_1().getFloat32_array_c()[1] == 19.2f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:25\", getData_1().getFloat64_array_c()[0] == 19.2 && getData_1().getFloat64_array_c()[1] == 38.4);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:26\", String.valueOf(getData_1().getChar_array_c()).equals(\"Claz\"));"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:27\", getData_1().getBool_array_i()[0] == true && getData_1().getBool_array_i()[1] == true);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:28\", getData_1().getInt8_array_i()[0] == 2 && getData_1().getInt8_array_i()[1] == 6);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:29\", getData_1().getInt16_array_i()[0] == 4 && getData_1().getInt16_array_i()[1] == 12);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:30\", getData_1().getInt32_array_i()[0] == 8 && getData_1().getInt32_array_i()[1] == 24);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:31\", getData_1().getInt64_array_i()[0] == 16 && getData_1().getInt64_array_i()[1] == 48);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:32\", getData_1().getFloat32_array_i()[0] == 1.6f && getData_1().getFloat32_array_i()[1] == 4.8f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:33\", getData_1().getFloat64_array_i()[0] == 5 && getData_1().getFloat64_array_i()[1] == 15);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:34\", String.valueOf(getData_1().getChar_array_i()).equals(\"Inst\"));"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:35\", getData_1().getData_2().getInt32_c() == 42);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:36\", getData_1().getData_2().getInt32_i() == 43);"
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Testee_Super2_ac {
+		Interface {
+			Port reg_port: TestProtocol
+		}
+		Structure {
+			external Port reg_port
+			Attribute caseId: int32
+
+			// test
+			Attribute data_2: Data_2_dc
+			Attribute float64_super_r: float64 = "1.1"
+			Attribute float64_super_c: float64 = "1.1"
+			Attribute float64_super_i: float64 = "1.1"
+		}
+		Behavior {
+			Operation Testee_Super2_ac() {
+				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_Super2_ac\");"
+			}
+			Operation ~Testee_Super2_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
+		}
+	}
+
+	ActorClass Testee_2_ac extends Testee_Super2_ac {
+		Structure {
+			SAP sap: TestProtocolWithDataClass
+			Attribute int32_own_r: int32 = "11"
+			Attribute int32_own_c: int32 = "11"
+			Attribute int32_own_i: int32 = "11"
+		}
+		Behavior {
+			Operation Testee_2_ac() {
+				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
+				"etUnit_testFinished(caseId);"
+			}
+			Operation ~Testee_2_ac() {
+				"etUnit_closeTestCase(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> s1 { }
+				State s1 {
+					entry {
+						"sap.varCheck(caseId);"
+						"reg_port.varCheck(caseId);"
+
+						"EXPECT_TRUE(caseId, \"Testee_2_ac:1\", float64_super_c == 2.2);"
+						"EXPECT_TRUE(caseId, \"Testee_2_ac:2\", float64_super_i == 4.4);"
+						"EXPECT_TRUE(caseId, \"Testee_2_ac:3\", int32_own_r == 11);"
+						"EXPECT_TRUE(caseId, \"Testee_2_ac:4\", int32_own_c == 12);"
+						"EXPECT_TRUE(caseId, \"Testee_2_ac:5\", int32_own_i == 13);"
+						"EXPECT_EQUAL_FLOAT32(caseId,\"Testee_2_ac:reg_port:6\", 50.f, reg_port.getFloat_i(), 0.1f);"
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass TestProtocol {
+		incoming {
+			Message dummy()
+		}
+		regular PortClass
+		{
+			Attribute float_r: float32 = "4"
+			Attribute float_c: float32 = "16"
+			Attribute float_i: float32 = "256"
+			Operation varCheck(caseId: int32): void {
+				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocol:1\", 4.f, float_r, 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocol:2\", 3.f, float_c, 0.1f);"
+			}
+		}
+		conjugate PortClass
+		{
+			Attribute array2_r [ 2 ]: int64 = "{11,22}"
+			Attribute array2_c [ 2 ]: int64 = "{0,0}"
+			Attribute array2_i [ 2 ]: int64 = "{0,0}"
+			Operation varCheck(): void {
+				"int caseId = etUnit_openTestCase(\"ConfigTest_case_PortProtocol_conjugated\");"
+				"EXPECT_TRUE(caseId,\"array2_r[0]: <|MODEL_LOCATION|>\", array2_r[0] == 11);"
+				"EXPECT_TRUE(caseId,\"array2_r[1]: <|MODEL_LOCATION|>\", array2_r[1] == 22);"
+				"EXPECT_TRUE(caseId,\"array2_c[0]: <|MODEL_LOCATION|>\", array2_c[0] == 16);"
+				"EXPECT_TRUE(caseId,\"array2_c[1]: <|MODEL_LOCATION|>\", array2_c[1] == 32);"
+				"EXPECT_TRUE(caseId,\"array2_i[0]: <|MODEL_LOCATION|>\", array2_i[0] == 1);"
+				"EXPECT_TRUE(caseId,\"array2_i[1]: <|MODEL_LOCATION|>\", array2_i[1] == 2);"
+				"etUnit_testFinished(caseId);"
+			}
+		}
+	}
+
+	ProtocolClass TestProtocolWithDataClass {
+		incoming {
+			Message dummy()
+		}
+
+		//SAP
+		conjugate PortClass
+		{
+			Attribute sap_data_2: Data_2_dc
+
+			// none config test
+			Attribute sap_data_3: Data_3_dc
+			Operation varCheck(caseId: int32): void {
+				"sap_data_2.varCheck2(caseId);"
+				"sap_data_3.varCheck3(caseId);"
+				"EXPECT_TRUE(caseId, \"TestProtocolWithDataClass:1\", getSap_data_2().getInt32_c() == 2);"
+				"EXPECT_TRUE(caseId, \"TestProtocolWithDataClass:1\", getSap_data_2().getInt32_i() == 3);"
+			}
+		}
+	}
+
+	ExternalType extType -> External_Type_Test
+
+	DataClass Data_Super1_dc {
+
+	// PrimitiveType
+		Attribute bool_r: boolean = "falSe"
+		Attribute bool_c: boolean = "false"
+		Attribute bool_i: boolean = "false"
+		Attribute int8_r: int8 = "8"
+		Attribute int8_c: int8 = "8"
+		Attribute int8_i: int8 = "8"
+
+		// Array
+		Attribute bool_array_r [ 2 ]: boolean = "{ FALSE, false }"
+		Attribute bool_array_c [ 2 ]: boolean = "{ false, false }"
+		Attribute bool_array_i [ 2 ]: boolean = "{ false, false }"
+		Attribute int8_array_r [ 2 ]: int8 = "{ 8, 16 }"
+		Attribute int8_array_c [ 2 ]: int8 = "{ 8, 16 }"
+		Attribute int8_array_i [ 2 ]: int8 = "{ 8, 16 }"
+	}
+
+	DataClass Data_1_dc extends Data_Super1_dc {
+		
+		Attribute int16_r: int16 = "16"
+		Attribute int16_c: int16 = "16"
+		Attribute int16_i: int16 = "16"
+		Attribute int32_r: int32 = "32"
+		Attribute int32_c: int32 = "32"
+		Attribute int32_i: int32 = "32"
+		Attribute int64_r: int64 = "64"
+		Attribute int64_c: int64 = "64"
+		Attribute int64_i: int64 = "64"
+		Attribute float32_r: float32 = "3.2"
+		Attribute float32_c: float32 = "3.2"
+		Attribute float32_i: float32 = "3.2"
+		Attribute float64_r: float64 = "6.4"
+		Attribute float64_c: float64 = "6.4"
+		Attribute float64_i: float64 = "6.4"
+		Attribute char_r: char = "R"
+		Attribute char_c: char = 'R'
+		Attribute char_i: char = "R"
+		Attribute string_r: string = ":/"
+		Attribute string_c: string = ":/"
+		Attribute string_i: string = ":/"
+
+		// Array
+		Attribute int16_array_r [ 2 ]: int16 = "{ 16, 32 }"
+		Attribute int16_array_c [ 2 ]: int16 = "{ 16, 32 }"
+		Attribute int16_array_i [ 2 ]: int16 = "{ 16, 32 }"
+		Attribute int32_array_r [ 2 ]: int32 = "{ 32, 64 }"
+		Attribute int32_array_c [ 2 ]: int32 = "{ 32, 64 }"
+		Attribute int32_array_i [ 2 ]: int32 = "{ 32, 64 }"
+		Attribute int64_array_r [ 2 ]: int64 = "{ 64, 128 }"
+		Attribute int64_array_c [ 2 ]: int64 = "{ 64, 128 }"
+		Attribute int64_array_i [ 2 ]: int64 = "{ 64, 128 }"
+		Attribute float32_array_r [ 2 ]: float32 = "{ 3.2, 6.4 }"
+		Attribute float32_array_c [ 2 ]: float32 = "{ 3.2, 6.4 }"
+		Attribute float32_array_i [ 2 ]: float32 = "{ 3.2, 6.4 }"
+		Attribute float64_array_r [ 2 ]: float64 = "{ 6.4, 12.8 }"
+		Attribute float64_array_c [ 2 ]: float64 = "{ 6.4, 12.8 }"
+		Attribute float64_array_i [ 2 ]: float64 = "{ 6.4, 12.8 }"
+		Attribute char_array_r [ 5 ]: char = "ROOM"
+		Attribute char_array_c [ 5 ]: char = "ROOM"
+		Attribute char_array_i [ 5 ]: char = "ROOM"
+
+		// ComplexType
+		Attribute data_2: Data_2_dc
+		Operation varCheck1(caseId: int32) {
+			"data_2.varCheck2(caseId);"
+
+			// PrimitiveType
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:1\", bool_r == false);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:2\", int8_r == 8);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:3\", int16_r == 16);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:4\", int32_r == 32);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:5\", int64_r == 64);"
+			"EXPECT_EQUAL_FLOAT32(caseId,\"Data_1_dc:varCheck:6\", 3.2f, float32_r, 0.1f);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:7\", float64_r == 6.4);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:8\", char_r == \'R\');"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:9\", string_r.equals(\":/\"));"
+
+			// Array
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:10\", bool_array_r[0] == false && bool_array_r[1] == false);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:11\", int8_array_r[0] == 8 && int8_array_r[1] == 16);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:12\", int16_array_r[0] == 16 && int16_array_r[1] == 32);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:13\", int32_array_r[0] == 32 && int32_array_r[1] == 64);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:24\", int64_array_r[0] == 64 && int64_array_r[1] == 128);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:25\", float32_array_r[0] == 3.2f && float32_array_r[1] == 6.4f);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:26\", float64_array_r[0] == 6.4 && float64_array_r[1] == 12.8);"
+			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:27\", String.valueOf(char_array_r).equals(\"ROOM\"));"
+		}
+	}
+
+	DataClass Data_2_dc {
+		Attribute int32_r: int32 = "1"
+		Attribute int32_c: int32 = "1"
+		Attribute int32_i: int32 = "1"
+		Operation varCheck2(caseId: int32): void {
+			"EXPECT_TRUE(caseId, \"Data_2_dc:1\", int32_r == 1);"
+		}
+	}
+
+	DataClass Data_3_dc {
+
+	// none config test
+		Attribute dataClass_array [ 2 ]: Data_2_dc
+		Attribute dataClass_ref: Data_2_dc ref
+		Attribute dataClass_ref_array [ 2 ]: Data_2_dc ref
+		Attribute ext_type: extType
+		Attribute ext_type_array [ 2 ]: extType
+		Attribute ext_type_ref: extType ref
+		Attribute ext_type_ref_array [ 2 ]: extType ref
+		Operation varCheck3(caseId: int32): void {
+			//TODO dataClass_array
+			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", dataClass_ref == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", dataClass_ref_array[0] == null && dataClass_ref_array[1] == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type instanceof External_Type_Test);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type_array[0] instanceof External_Type_Test && ext_type_array[1] instanceof External_Type_Test);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type_ref_array[0] == null && ext_type_ref_array[1] == null);"
+		}
+	}
+
+} 
