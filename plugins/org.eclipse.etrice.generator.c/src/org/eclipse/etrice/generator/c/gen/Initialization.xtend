@@ -23,7 +23,7 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
@@ -32,7 +32,6 @@ class Initialization {
 	@Inject CExtensions languageExt
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers
-	@Inject IDataConfiguration dataExt
 	
 	def generateAttributeInit(InstanceBase instance, List<Attribute> attributes){'''
 		«FOR a : attributes SEPARATOR ','»
@@ -85,21 +84,15 @@ class Initialization {
 	}
 	
 	def private getPrimitiveValue(InstanceBase instance, List<Attribute> path){
-		var value = switch instance {
-			ActorInstance: dataExt.getAttrInstanceConfigValue(instance, path)
-			InterfaceItemInstance: dataExt.getAttrInstanceConfigValue(instance, path)
-		}
+		var value = path.getAttrInstanceConfigValue(instance)
 		if(value == null)
 			value = switch instance {
-			ActorInstance: dataExt.getAttrClassConfigValue(instance.actorClass, path)
-			InterfaceItemInstance: dataExt.getAttrClassConfigValue(instance.protocol, !instance.conjugated, path)
-		}
+				ActorInstance: path.getAttrClassConfigValue(instance.actorClass, true)
+				InterfaceItemInstance: path.getAttrClassConfigValue(RoomHelpers::getPortClass(instance.interfaceItem))
+			}
 		if(value == null)
 			value = path.last.defaultValueLiteral
 		return if(value != null) languageExt.toValueLiteral(path.last.refType.type as PrimitiveType, value)
 			else languageExt.defaultValue(path.last.refType.type)
 	}
-	
-	
-
 }

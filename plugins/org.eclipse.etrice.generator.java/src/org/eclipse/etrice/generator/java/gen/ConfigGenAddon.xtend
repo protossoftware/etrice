@@ -17,16 +17,15 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
-import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.util.RoomHelpers
 
 class ConfigGenAddon {
 	
@@ -57,10 +56,7 @@ class ConfigGenAddon {
 		var a = path.last
 		var aType = a.refType.type		
 		if(aType.primitive){
-			var value = switch instance {
-				ActorInstance: dataConfigExt.getAttrInstanceConfigValue(instance, path)
-				InterfaceItemInstance: dataConfigExt.getAttrInstanceConfigValue(instance, path)
-			}
+			var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
 			if(value == null)
 				''''''
 			else if(a.size == 0 || aType.characterType)

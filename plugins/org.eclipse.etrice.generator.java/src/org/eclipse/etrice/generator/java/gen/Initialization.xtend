@@ -17,17 +17,15 @@ import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.PortClass
-import org.eclipse.etrice.core.room.ProtocolClass
 
 @Singleton
 class Initialization {
@@ -36,7 +34,6 @@ class Initialization {
 	@Inject extension RoomExtensions
 	@Inject extension ILanguageExtension languageExt
 	@Inject extension ProcedureHelpers procedureHelpers
-	@Inject IDataConfiguration dataConfigExt
 	
 	def attributeInitialization(List<Attribute> attribs, EObject roomClass, boolean useClassDefaultsOnly) {	
 		'''
@@ -53,7 +50,7 @@ class Initialization {
 		if(a.refType.ref){
 			if(a.defaultValueLiteral != null)
 				attributeInit(a, a.defaultValueLiteral)
-			else
+			else if(!(useClassDefaultsOnly && aType.primitive))
 				attributeInit(a, languageExt.nullPointer)	
 		}
 		else{
@@ -111,12 +108,9 @@ class Initialization {
 	def private getDataConfigValue(List<Attribute> path, EObject roomClass){
 		return switch roomClass{
 			ActorClass:
-				dataConfigExt.getAttrClassConfigValue(roomClass, path)
+				typeHelpers.getAttrClassConfigValue(path, roomClass, false)
 			PortClass:
-				if(roomClass.eContainer instanceof ProtocolClass){
-					var pc = roomClass.eContainer as ProtocolClass
-					dataConfigExt.getAttrClassConfigValue(pc, pc.regular?.equals(roomClass), path)
-				}
+				typeHelpers.getAttrClassConfigValue(path, roomClass)
 			DataClass: null
 		}
 	}

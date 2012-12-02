@@ -19,17 +19,27 @@ package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.List
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.LiteralType
+import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.IDataConfiguration
 
 @Singleton
 class TypeHelpers {
 
 	@Inject ILanguageExtension languageExt
+	@Inject IDataConfiguration dataConfigExt
 	
 	def String typeName(DataType type) {
 		if (type instanceof PrimitiveType)
@@ -70,5 +80,32 @@ class TypeHelpers {
 	
 	def isCharacterType(DataType type){
 		return type.primitive && (type as PrimitiveType).characterType
+	}
+	
+	def String getAttrInstanceConfigValue(List<Attribute> attributePath, InstanceBase instance){
+		switch instance {
+			ActorInstance: dataConfigExt.getAttrInstanceConfigValue(instance, attributePath)
+			InterfaceItemInstance: dataConfigExt.getAttrInstanceConfigValue(instance, attributePath)
+		}
+	}
+	
+	def String getAttrClassConfigValue(List<Attribute> attributePath, ActorClass actor, boolean inherite){
+		var result = dataConfigExt.getAttrClassConfigValue(actor, attributePath)
+		if(result == null && inherite){
+			var base = actor.base
+			while(base != null && result == null){
+				result = dataConfigExt.getAttrClassConfigValue(base, attributePath)
+				base = base.base
+			}
+		}
+		
+		return result
+	}
+	
+	def String getAttrClassConfigValue(List<Attribute> attributePath, PortClass port){
+		var pc = RoomHelpers::getProtocolClass(port)
+		if(pc == null)
+			return null
+		return dataConfigExt.getAttrClassConfigValue(pc, port.equals(pc.regular), attributePath)
 	}
 }

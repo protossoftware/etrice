@@ -12,10 +12,11 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
@@ -33,9 +34,6 @@ public class Initialization {
   
   @Inject
   private TypeHelpers _typeHelpers;
-  
-  @Inject
-  private IDataConfiguration dataExt;
   
   public CharSequence generateAttributeInit(final InstanceBase instance, final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
@@ -256,50 +254,31 @@ public class Initialization {
   }
   
   private String getPrimitiveValue(final InstanceBase instance, final List<Attribute> path) {
-    String _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (instance instanceof ActorInstance) {
-        final ActorInstance _actorInstance = (ActorInstance)instance;
-        _matched=true;
-        String _attrInstanceConfigValue = this.dataExt.getAttrInstanceConfigValue(_actorInstance, path);
-        _switchResult = _attrInstanceConfigValue;
-      }
-    }
-    if (!_matched) {
-      if (instance instanceof InterfaceItemInstance) {
-        final InterfaceItemInstance _interfaceItemInstance = (InterfaceItemInstance)instance;
-        _matched=true;
-        String _attrInstanceConfigValue = this.dataExt.getAttrInstanceConfigValue(_interfaceItemInstance, path);
-        _switchResult = _attrInstanceConfigValue;
-      }
-    }
-    String value = _switchResult;
+    String value = this._typeHelpers.getAttrInstanceConfigValue(path, instance);
     boolean _equals = Objects.equal(value, null);
     if (_equals) {
-      String _switchResult_1 = null;
-      boolean _matched_1 = false;
-      if (!_matched_1) {
+      String _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
         if (instance instanceof ActorInstance) {
           final ActorInstance _actorInstance = (ActorInstance)instance;
-          _matched_1=true;
+          _matched=true;
           ActorClass _actorClass = _actorInstance.getActorClass();
-          String _attrClassConfigValue = this.dataExt.getAttrClassConfigValue(_actorClass, path);
-          _switchResult_1 = _attrClassConfigValue;
+          String _attrClassConfigValue = this._typeHelpers.getAttrClassConfigValue(path, _actorClass, true);
+          _switchResult = _attrClassConfigValue;
         }
       }
-      if (!_matched_1) {
+      if (!_matched) {
         if (instance instanceof InterfaceItemInstance) {
           final InterfaceItemInstance _interfaceItemInstance = (InterfaceItemInstance)instance;
-          _matched_1=true;
-          ProtocolClass _protocol = _interfaceItemInstance.getProtocol();
-          boolean _isConjugated = this._roomExtensions.isConjugated(_interfaceItemInstance);
-          boolean _not = (!_isConjugated);
-          String _attrClassConfigValue = this.dataExt.getAttrClassConfigValue(_protocol, _not, path);
-          _switchResult_1 = _attrClassConfigValue;
+          _matched=true;
+          InterfaceItem _interfaceItem = _interfaceItemInstance.getInterfaceItem();
+          PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
+          String _attrClassConfigValue = this._typeHelpers.getAttrClassConfigValue(path, _portClass);
+          _switchResult = _attrClassConfigValue;
         }
       }
-      value = _switchResult_1;
+      value = _switchResult;
     }
     boolean _equals_1 = Objects.equal(value, null);
     if (_equals_1) {

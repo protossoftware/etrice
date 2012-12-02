@@ -98,25 +98,7 @@ public class ConfigGenAddon {
       if (_isPrimitive) {
         CharSequence _xblockexpression_1 = null;
         {
-          String _switchResult = null;
-          boolean _matched = false;
-          if (!_matched) {
-            if (instance instanceof ActorInstance) {
-              final ActorInstance _actorInstance = (ActorInstance)instance;
-              _matched=true;
-              String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_actorInstance, path);
-              _switchResult = _attrInstanceConfigValue;
-            }
-          }
-          if (!_matched) {
-            if (instance instanceof InterfaceItemInstance) {
-              final InterfaceItemInstance _interfaceItemInstance = (InterfaceItemInstance)instance;
-              _matched=true;
-              String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_interfaceItemInstance, path);
-              _switchResult = _attrInstanceConfigValue;
-            }
-          }
-          String value = _switchResult;
+          String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
           CharSequence _xifexpression_1 = null;
           boolean _equals = Objects.equal(value, null);
           if (_equals) {
