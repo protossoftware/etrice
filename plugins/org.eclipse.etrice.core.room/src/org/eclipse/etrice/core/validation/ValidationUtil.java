@@ -286,6 +286,10 @@ public class ValidationUtil {
 			return Result.error("ports are already bound");
 		
 		// check protocol compatibility
+		boolean pc1extendsIncoming = false;
+		boolean pc1extendsOutgoing = false;
+		boolean pc2extendsIncoming = false;
+		boolean pc2extendsOutgoing = false;
 		{
 			GeneralProtocolClass pc1 = p1.getProtocol();
 			GeneralProtocolClass pc2 = p2.getProtocol();
@@ -315,8 +319,32 @@ public class ValidationUtil {
 				}
 			}
 			else {
-				if (pc1!=pc2)
-					return Result.error("protocols don't match");
+				if (pc1!=pc2) {
+					if (compoundInvolved) {
+						return Result.error("protocols don't match");
+					}
+					else {
+						if (RoomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
+							if (((ProtocolClass)pc1).getIncomingMessages().size()>0)
+								pc1extendsIncoming = true;
+							if (((ProtocolClass)pc1).getOutgoingMessages().size()>0)
+								pc1extendsOutgoing = true;
+							if (pc1extendsIncoming && pc1extendsOutgoing)
+								return Result.error("derived protocols not connectable (both directions extended)");
+
+						}
+						else if (RoomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
+							if (((ProtocolClass)pc2).getIncomingMessages().size()>0)
+								pc2extendsIncoming = true;
+							if (((ProtocolClass)pc2).getOutgoingMessages().size()>0)
+								pc2extendsOutgoing = true;
+							if (pc2extendsIncoming && pc2extendsOutgoing)
+								return Result.error("derived protocols not connectable (both directions extended)");
+						}
+						else
+							return Result.error("protocols don't match");
+					}
+				}
 			}
 
 			if (checkCompound || !compoundInvolved) {
@@ -360,6 +388,15 @@ public class ValidationUtil {
 			if (p1.isConjugated()==p2.isConjugated())
 				return Result.error("connected sub component ports must be conjugated to each other");
 			
+			if (p1.isConjugated() && pc1extendsIncoming)
+				return Result.error("protocol extends incoming");
+			if (p2.isConjugated() && pc2extendsIncoming)
+				return Result.error("protocol extends incoming");
+			if (!p1.isConjugated() && pc1extendsOutgoing)
+				return Result.error("protocol extends outgoing");
+			if (!p2.isConjugated() && pc2extendsOutgoing)
+				return Result.error("protocol extends outgoing");
+			
 			Result result = isConnectable(p1, ref1, sc, exclude);
 			if (!result.isOk())
 				return result;
@@ -378,6 +415,26 @@ public class ValidationUtil {
 				if (local.isConjugated()!=sub.isConjugated())
 					return Result.error("relay port must have same direction as local port");
 
+				if (local==p1) {
+					if (!p1.isConjugated() && pc1extendsIncoming)
+						return Result.error("protocol extends incoming");
+					if (p2.isConjugated() && pc2extendsIncoming)
+						return Result.error("protocol extends incoming");
+					if (p1.isConjugated() && pc1extendsOutgoing)
+						return Result.error("protocol extends outgoing");
+					if (!p2.isConjugated() && pc2extendsOutgoing)
+						return Result.error("protocol extends outgoing");
+				}
+				else {
+					if (p1.isConjugated() && pc1extendsIncoming)
+						return Result.error("protocol extends incoming");
+					if (!p2.isConjugated() && pc2extendsIncoming)
+						return Result.error("protocol extends incoming");
+					if (!p1.isConjugated() && pc1extendsOutgoing)
+						return Result.error("protocol extends outgoing");
+					if (p2.isConjugated() && pc2extendsOutgoing)
+						return Result.error("protocol extends outgoing");
+				}
 				Result result = isConnectable(local, null, acc, exclude);
 				if (!result.isOk())
 					return result;
@@ -390,6 +447,15 @@ public class ValidationUtil {
 				
 				if (local.isConjugated()==sub.isConjugated())
 					return Result.error("internal end port must have opposite direction");
+				
+				if (p1.isConjugated() && pc1extendsIncoming)
+					return Result.error("protocol extends incoming");
+				if (p2.isConjugated() && pc2extendsIncoming)
+					return Result.error("protocol extends incoming");
+				if (!p1.isConjugated() && pc1extendsOutgoing)
+					return Result.error("protocol extends outgoing");
+				if (!p2.isConjugated() && pc2extendsOutgoing)
+					return Result.error("protocol extends outgoing");
 
 				Result result = isConnectable(sub, ref, sc, exclude);
 				if (!result.isOk())

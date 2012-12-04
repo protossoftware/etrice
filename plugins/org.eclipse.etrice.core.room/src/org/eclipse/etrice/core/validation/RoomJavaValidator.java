@@ -389,6 +389,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkProtocol(ProtocolClass pc) {
+		if (ValidationUtil.isCircularClassHierarchy(pc))
+			return;
+		
 		switch (pc.getCommType()) {
 		case DATA_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.DATA_DRIVEN)
@@ -408,6 +411,36 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("synchronous communication type not supported yet", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
 			break;
 		default:
+		}
+		
+		if (pc.getBase()!=null) {
+			// derived protocol
+			if (pc.getIncomingMessages().size()>0 && pc.getOutgoingMessages().size()>0)
+				warning("a derived protocol should add either incoming or outgoing messages, not both", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
+			
+			{
+				List<Message> incoming = RoomHelpers.getAllMessages(pc, true);
+				HashSet<String> inNames = new HashSet<String>();
+				for (Message in : incoming) {
+					if (!inNames.add(in.getName())) {
+						int idx = pc.getIncomingMessages().indexOf(in);
+						if (idx>=0)
+							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES, idx);
+					}
+				}
+			}
+
+			{
+				List<Message> outgoing = RoomHelpers.getAllMessages(pc, true);
+				HashSet<String> outNames = new HashSet<String>();
+				for (Message out : outgoing) {
+					if (!outNames.add(out.getName())) {
+						int idx = pc.getOutgoingMessages().indexOf(out);
+						if (idx>=0)
+							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES, idx);
+					}
+				}
+			}
 		}
 	}
 	

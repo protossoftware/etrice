@@ -1332,4 +1332,24 @@ public class RoomHelpers {
 
 		return null;
 	}
+
+	/**
+	 * checks whether pc1 is derived from (but not equal) pc2
+	 * 
+	 * @param pc1 potential sub class
+	 * @param pc2 potential super class
+	 * 
+	 * @return true if pc1 is derived from pc2
+	 */
+	public static boolean isDerivedFrom(ProtocolClass pc1, ProtocolClass pc2) {
+		if (pc1==pc2)
+			return false;
+		
+		while (pc1!=null) {
+			if (pc1==pc2)
+				return true;
+			pc1 = pc1.getBase();
+		}
+		return false;
+	}
 }
