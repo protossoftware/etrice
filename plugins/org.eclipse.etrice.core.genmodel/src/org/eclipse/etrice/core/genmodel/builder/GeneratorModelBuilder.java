@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
@@ -65,6 +66,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
 
 /**
@@ -101,6 +103,8 @@ public class GeneratorModelBuilder {
 	 */
 	private IDiagnostician diagnostician;
 
+	private boolean debug;
+
 	/**
 	 * the only constructor takes a logger and a diagnostician as arguments
 	 * @param logger
@@ -111,7 +115,9 @@ public class GeneratorModelBuilder {
 		this.diagnostician = diagnostician;
 	}
 	
-	// TODOHRR: combine a RoomProject (.room_proj) with RoomModels (.room)
+	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
+		return createGeneratorModel(models, asLibrary, false);
+	}
 	
 	/**
 	 * Creates a model of all instances for all sub systems.
@@ -129,21 +135,36 @@ public class GeneratorModelBuilder {
 	 * are removed and their contents is relocated.
 	 * 
 	 * @param models
+	 * @param asLibrary
+	 * @param debug if true more output is produced
 	 * @return the root of the newly created instance model
 	 */
-	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
+	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary, boolean debug) {
 		Root root = ETriceGenFactory.eINSTANCE.createRoot();
 		root.getModels().addAll(models);
 		root.setLibrary(asLibrary);
+		this.debug = debug;
 
 		if (!root.isLibrary()) {
 			// create instance model
 			
 			determineRelayPorts(root);
 			
+			boolean hasSystem = false;
 			for (RoomModel mdl : models) {
-				for (SubSystemClass comp : mdl.getSubSystemClasses()) {
-					root.getSubSystemInstances().add(createSubSystemInstance(comp));
+				for (LogicalSystem sys : mdl.getSystems()) {
+					hasSystem = true;
+					SystemInstance si = createLogicalSystemInstance(sys);
+					root.getSystemInstances().add(si);
+				}
+			}
+			
+			if (!hasSystem) {
+				logger.logInfo("GeneratorModelBuilder: no SystemClass found, assuming SubSystemClasses as top level elements");
+				for (RoomModel mdl : models) {
+					for (SubSystemClass comp : mdl.getSubSystemClasses()) {
+						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp));
+					}
 				}
 			}
 			
@@ -410,13 +431,59 @@ public class GeneratorModelBuilder {
 		}
 	}
 	
+	private SystemInstance createLogicalSystemInstance(LogicalSystem sys) {
+		logger.logInfo("GeneratorModelBuilder: creating system class from "+sys.getName());
+		
+		SystemInstance instance = ETriceGenFactory.eINSTANCE.createSystemInstance();
+		allObjects.add(instance);
+		
+		instance.setName(sys.getName());
+		instance.setLogicalSystem(sys);
+		
+		for (SubSystemRef sr : sys.getSubSystems()) {
+			SubSystemInstance ssi = createSubSystemInstance(instance, sr);
+			instance.getInstances().add(ssi);
+		}
+		
+		return instance;
+	}
+	
+	/**
+	 * hierarchically (i.e. recursively) creates all instances implied by this component
+	 * @param ssc - the component class
+	 * @return the newly created hierarchy of instances
+	 */
+	private SubSystemInstance createSubSystemInstance(SystemInstance si, SubSystemRef sr) {
+		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+sr.getName());
+
+		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
+		allObjects.add(instance);
+		
+		SubSystemClass ssc = sr.getType();
+		
+		instance.setName(sr.getName());
+		instance.setSubSystemClass(ssc);
+		
+		// TODOHRR: enumerate object ids per thread
+		
+		for (ActorRef ar : ssc.getActorRefs()) {
+			addRefInstances(instance, ar);
+		}
+		
+		// bindings are handled now since port instances of sub-actor instances are available
+		createBindingInstances(instance, ssc.getBindings());
+		createConnectionInstances(instance, ssc.getConnections());
+		
+		return instance;
+	}
+	
 	/**
 	 * hierarchically (i.e. recursively) creates all instances implied by this component
 	 * @param ssc - the component class
 	 * @return the newly created hierarchy of instances
 	 */
 	private SubSystemInstance createSubSystemInstance(SubSystemClass ssc) {
-		logger.logInfo("GeneratorModelBuilder: creating subsystem class from "+ssc.getName());
+		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+ssc.getName());
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
 		allObjects.add(instance);
@@ -459,7 +526,8 @@ public class GeneratorModelBuilder {
 		if (idx>=0)
 			name += "_"+idx;
 		
-		logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
+		if (debug)
+			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
 		allObjects.add(ai);
@@ -1048,8 +1116,9 @@ public class GeneratorModelBuilder {
 	 * @return - the newly created expanded actor class
 	 */
 	public ExpandedActorClass createExpandedActorClass(ActorClass ac) {
-		logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
-			+" of "+((RoomModel)ac.eContainer()).getName());
+		if (debug)
+			logger.logInfo("GeneratorModelBuilder: creating expanded actor class from "+ac.getName()
+					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
 		xpac.setActorClass(ac);

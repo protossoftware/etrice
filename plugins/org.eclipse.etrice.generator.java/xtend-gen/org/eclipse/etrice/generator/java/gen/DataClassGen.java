@@ -164,7 +164,7 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t\t");
       EList<Attribute> _attributes_3 = dc.getAttributes();
-      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, true);
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, dc, true);
       _builder.append(_attributeInitialization, "		");
       _builder.newLineIfNotEmpty();
       {

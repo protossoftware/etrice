@@ -245,12 +245,6 @@ public class CExtensions implements ILanguageExtension {
     return "void";
   }
   
-  public String toCharArrayExpr(final String s) {
-    String _plus = ("\"" + s);
-    String _plus_1 = (_plus + "\"");
-    return _plus_1;
-  }
-  
   public String superCall(final String baseClassName, final String method, final String args) {
     return "";
   }
@@ -379,12 +373,14 @@ public class CExtensions implements ILanguageExtension {
         RefableType _refType = att.getRefType();
         boolean _isRef = _refType.isRef();
         if (_isRef) {
-          _xifexpression_2 = "NULL";
+          int _size_1 = att.getSize();
+          String _initializer_1 = this.initializer("NULL", _size_1);
+          _xifexpression_2 = _initializer_1;
         } else {
           RefableType _refType_1 = att.getRefType();
           DataType _type = _refType_1.getType();
-          int _size_1 = att.getSize();
-          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_1);
+          int _size_2 = att.getSize();
+          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_2);
           _xifexpression_2 = _initializationWithDefaultValues;
         }
         _xifexpression = _xifexpression_2;

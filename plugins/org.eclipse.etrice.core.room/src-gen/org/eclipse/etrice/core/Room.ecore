@@ -271,16 +271,22 @@
         eType="#//Port" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
         eType="#//LogicalThread" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
+        upperBound="-1" eType="#//ActorInstanceMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalThread">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
-        eType="#//ActorInstancePath" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActorInstancePath">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="segments" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorInstanceMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" eType="#//RefPath"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thread" eType="#//LogicalThread"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
+        upperBound="-1" eType="#//ActorInstanceMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefPath">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refs" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Binding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint1" eType="#//BindingEndPoint"

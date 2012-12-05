@@ -69,6 +69,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 		switch (eClass.getClassifierID()) {
 			case ETriceGenPackage.ROOT: return createRoot();
 			case ETriceGenPackage.STRUCTURE_INSTANCE: return createStructureInstance();
+			case ETriceGenPackage.SYSTEM_INSTANCE: return createSystemInstance();
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE: return createSubSystemInstance();
 			case ETriceGenPackage.ACTOR_INSTANCE: return createActorInstance();
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE: return createInterfaceItemInstance();
@@ -135,6 +136,16 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public StructureInstance createStructureInstance() {
 		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
 		return structureInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SystemInstance createSystemInstance() {
+		SystemInstanceImpl systemInstance = new SystemInstanceImpl();
+		return systemInstance;
 	}
 
 	/**

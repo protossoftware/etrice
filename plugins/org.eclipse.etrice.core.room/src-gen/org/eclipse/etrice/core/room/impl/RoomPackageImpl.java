@@ -14,7 +14,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorInstancePath;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
@@ -61,6 +61,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
+import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -391,7 +392,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass actorInstancePathEClass = null;
+  private EClass actorInstanceMappingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refPathEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2209,6 +2217,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSubSystemClass_ActorInstanceMappings()
+  {
+    return (EReference)subSystemClassEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getLogicalThread()
   {
     return logicalThreadEClass;
@@ -2229,9 +2247,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLogicalThread_Prio()
+  public EClass getActorInstanceMapping()
   {
-    return (EAttribute)logicalThreadEClass.getEStructuralFeatures().get(1);
+    return actorInstanceMappingEClass;
   }
 
   /**
@@ -2239,9 +2257,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLogicalThread_Instances()
+  public EReference getActorInstanceMapping_Path()
   {
-    return (EReference)logicalThreadEClass.getEStructuralFeatures().get(2);
+    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2249,9 +2267,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getActorInstancePath()
+  public EReference getActorInstanceMapping_Thread()
   {
-    return actorInstancePathEClass;
+    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2259,9 +2277,29 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getActorInstancePath_Segments()
+  public EReference getActorInstanceMapping_ActorInstanceMappings()
   {
-    return (EAttribute)actorInstancePathEClass.getEStructuralFeatures().get(0);
+    return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRefPath()
+  {
+    return refPathEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRefPath_Refs()
+  {
+    return (EAttribute)refPathEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3496,14 +3534,18 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     subSystemClassEClass = createEClass(SUB_SYSTEM_CLASS);
     createEReference(subSystemClassEClass, SUB_SYSTEM_CLASS__RELAY_PORTS);
     createEReference(subSystemClassEClass, SUB_SYSTEM_CLASS__THREADS);
+    createEReference(subSystemClassEClass, SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS);
 
     logicalThreadEClass = createEClass(LOGICAL_THREAD);
     createEAttribute(logicalThreadEClass, LOGICAL_THREAD__NAME);
-    createEAttribute(logicalThreadEClass, LOGICAL_THREAD__PRIO);
-    createEReference(logicalThreadEClass, LOGICAL_THREAD__INSTANCES);
 
-    actorInstancePathEClass = createEClass(ACTOR_INSTANCE_PATH);
-    createEAttribute(actorInstancePathEClass, ACTOR_INSTANCE_PATH__SEGMENTS);
+    actorInstanceMappingEClass = createEClass(ACTOR_INSTANCE_MAPPING);
+    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__PATH);
+    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__THREAD);
+    createEReference(actorInstanceMappingEClass, ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS);
+
+    refPathEClass = createEClass(REF_PATH);
+    createEAttribute(refPathEClass, REF_PATH__REFS);
 
     bindingEClass = createEClass(BINDING);
     createEReference(bindingEClass, BINDING__ENDPOINT1);
@@ -3915,14 +3957,18 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(subSystemClassEClass, SubSystemClass.class, "SubSystemClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSubSystemClass_RelayPorts(), this.getPort(), null, "relayPorts", null, 0, -1, SubSystemClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSubSystemClass_Threads(), this.getLogicalThread(), null, "threads", null, 0, -1, SubSystemClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubSystemClass_ActorInstanceMappings(), this.getActorInstanceMapping(), null, "actorInstanceMappings", null, 0, -1, SubSystemClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(logicalThreadEClass, LogicalThread.class, "LogicalThread", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLogicalThread_Name(), ecorePackage.getEString(), "name", null, 0, 1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLogicalThread_Prio(), ecorePackage.getEInt(), "prio", null, 0, 1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLogicalThread_Instances(), this.getActorInstancePath(), null, "instances", null, 0, -1, LogicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(actorInstancePathEClass, ActorInstancePath.class, "ActorInstancePath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getActorInstancePath_Segments(), ecorePackage.getEString(), "segments", null, 0, -1, ActorInstancePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(actorInstanceMappingEClass, ActorInstanceMapping.class, "ActorInstanceMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getActorInstanceMapping_Path(), this.getRefPath(), null, "path", null, 0, 1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceMapping_Thread(), this.getLogicalThread(), null, "thread", null, 0, 1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getActorInstanceMapping_ActorInstanceMappings(), this.getActorInstanceMapping(), null, "actorInstanceMappings", null, 0, -1, ActorInstanceMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRefPath_Refs(), ecorePackage.getEString(), "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bindingEClass, Binding.class, "Binding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBinding_Endpoint1(), this.getBindingEndPoint(), null, "endpoint1", null, 0, 1, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -133,4 +133,47 @@
 </topic>
 </topic>
 </topic>
+<topic href="help/eTriceModelsandTheirRelations.html" label="eTrice Models and Their Relations">
+<topic href="help/eTriceModelsandTheirRelations.html#TheROOMModel" label="The ROOM Model"></topic>
+<topic href="help/TheConfigModel.html" label="The Config Model"></topic>
+<topic href="help/ThePhysicalModel.html" label="The Physical Model"></topic>
+<topic href="help/TheMappingModel.html" label="The Mapping Model"></topic>
+</topic>
+<topic href="help/eTriceDevelopersReference.html" label="eTrice Developer&rsquo;s Reference">
+<topic href="help/eTriceDevelopersReference.html#Architecture" label="Architecture">
+<topic href="help/eTriceDevelopersReference.html#EditorandGeneratorComponents" label="Editor and Generator Components"></topic>
+<topic href="help/eTriceDevelopersReference.html#Runtimes" label="Runtimes"></topic>
+<topic href="help/eTriceDevelopersReference.html#UnitTests" label="Unit Tests"></topic>
+</topic>
+<topic href="help/ComponentOverview.html" label="Component Overview">
+<topic href="help/ComponentOverview.html#RoomLanguageOverview" label="Room Language Overview">
+<topic href="help/ComponentOverview.html#ModelTweaks" label="Model Tweaks"></topic>
+<topic href="help/ComponentOverview.html#ImportsbyURIUsingNamespaces" label="Imports by URI Using Namespaces"></topic>
+<topic href="help/ComponentOverview.html#Naming" label="Naming"></topic>
+<topic href="help/ComponentOverview.html#Helpers" label="Helpers"></topic>
+<topic href="help/ComponentOverview.html#Validation" label="Validation"></topic>
+</topic>
+<topic href="help/ComponentOverview.html#ConfigLanguageOverview" label="Config Language Overview">
+<topic href="help/ComponentOverview.html#ModelTweaks2" label="Model Tweaks"></topic>
+<topic href="help/ComponentOverview.html#ImportsbyURIUsingNamespaces2" label="Imports by URI Using Namespaces"></topic>
+<topic href="help/ComponentOverview.html#Util" label="Util"></topic>
+</topic>
+<topic href="help/ComponentOverview.html#AggregationLayerOverview" label="Aggregation Layer Overview">
+<topic href="help/ComponentOverview.html#TheInstanceModel" label="The Instance Model"></topic>
+<topic href="help/ComponentOverview.html#TheExpandedActorClass" label="The Expanded Actor Class"></topic>
+<topic href="help/ComponentOverview.html#TransitionChains" label="Transition Chains"></topic>
+</topic>
+<topic href="help/ComponentOverview.html#GeneratorOverview" label="Generator Overview">
+<topic href="help/ComponentOverview.html#BaseClassesandInterfaces" label="Base Classes and Interfaces"></topic>
+<topic href="help/ComponentOverview.html#GenericGeneratorParts" label="Generic Generator Parts">
+<topic href="help/ComponentOverview.html#GenericActorClassGenerator" label="GenericActorClassGenerator"></topic>
+<topic href="help/ComponentOverview.html#GenericProtocolClassGenerator" label="GenericProtocolClassGenerator"></topic>
+<topic href="help/ComponentOverview.html#GenericStateMachineGenerator" label="GenericStateMachineGenerator"></topic>
+</topic>
+<topic href="help/ComponentOverview.html#TheJavaGenerator" label="The Java Generator"></topic>
+<topic href="help/ComponentOverview.html#TheANSICGenerator" label="The ANSI-C Generator"></topic>
+<topic href="help/ComponentOverview.html#TheDocumentationGenerator" label="The Documentation Generator"></topic>
+</topic>
+</topic>
+</topic>
 </toc>

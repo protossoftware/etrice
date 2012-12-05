@@ -2013,7 +2013,8 @@ carLights.setState(TrafficLight3.OFF);
 					</imageobject>
 				</mediaobject>
 			</para>
-			<para>A new configuration should be created. Name it _gen_HelloWorldC_ and add the model via one of the 
+			<para>A new configuration should be created. Name it 
+				<emphasis>gen_HelloWorldC</emphasis> and add the model via one of the 
 				<emphasis>add</emphasis> buttons.
 			</para>
 			<para>
@@ -2058,7 +2059,9 @@ carLights.setState(TrafficLight3.OFF);
 		</section>
 		<section id="Generatethecode">
 			<title>Generate the code</title>
-			<para>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.</para>
+			<para>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as 
+				<emphasis>gen_HelloWorldC</emphasis>.
+			</para>
 			<para>
 				<mediaobject>
 					<imageobject>
@@ -3179,6 +3182,600 @@ carLights.setState(TrafficLight3.OFF);
 							</imageobject>
 						</mediaobject>
 					</para>
+				</section>
+			</section>
+		</section>
+	</chapter>
+	<chapter id="eTriceModelsandTheirRelations">
+		<title>eTrice Models and Their Relations</title>
+		<para>eTrice comprises several models:</para>
+		<itemizedlist>
+			<listitem>
+				<para>the ROOM model (*.room) — defines model classes and the logical structure of the model</para>
+			</listitem>
+			<listitem>
+				<para>Config model (*.config) — defines configuration values for attributes</para>
+			</listitem>
+			<listitem>
+				<para>Physical model (*.etphys) — defines the structure and properties of the physical system</para>
+			</listitem>
+			<listitem>
+				<para>Mapping model (*.etmap) — defines a mapping from logical elements to physical elements</para>
+			</listitem>
+		</itemizedlist>
+		<para>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</para>
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/080-models.jpg" scale="50"/>
+				</imageobject>
+			</mediaobject>
+		</para>
+		<para>In the following sections we will describe those models with emphasis of their cross relations.</para>
+		<section id="TheROOMModel">
+			<title>The ROOM Model</title>
+			<para>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+				Thereby the three latter form a hierarchy. The 
+				<code>LogicalSystem</code> is the top level element of the structure. It contains references to 
+				<code>SubSystemClass</code> elements. The 
+				<code>SubSystemClass</code> in turn contain references to 
+				<code>ActorClass</code> elements which again contain (recursively) references to 
+				<code>ActorClass</code> elements. The complete structural hierarchy implies a tree which has the 
+				<code>LogicalSystem</code> as root and where each reference stands for a new node with possibly further branches.
+			</para>
+			<para>Let’s consider a simple example. It doesn’t implement any meaningful and completely omits behavioral and other aspects.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-room.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>When a 
+				<code>LogicalSstem</code> is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-instances.jpg" scale="40"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="TheConfigModel">
+			<title>The Config Model</title>
+			<para>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-config.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="ThePhysicalModel">
+			<title>The Physical Model</title>
+			<para>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only defines the overall execution model of the platform.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-runtimes.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The physical system is composed of 
+				<code>Node</code> references where each 
+				<code>Node</code> is defined as a class referencing a 
+				<code>RuntimeClass</code> and defining 
+				<code>Threads</code>.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-phys.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="TheMappingModel">
+			<title>The Mapping Model</title>
+			<para>The last model finally combines all this information by mapping logical to physical entities.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-map.jpg"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ 
+				<emphasis>node</emphasis> : 
+				<emphasis>thread</emphasis>).
+			</para>
+		</section>
+	</chapter>
+	<chapter id="eTriceDevelopersReference">
+		<title>eTrice Developer’s Reference</title>
+		<section id="Architecture">
+			<title>Architecture</title>
+			<para>The basic components of eTrice are depicted in the following diagram.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/200-components.jpg" scale="50"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.</para>
+			<section id="EditorandGeneratorComponents">
+				<title>Editor and Generator Components</title>
+				<itemizedlist>
+					<listitem>
+						<para>core</para>
+						<itemizedlist>
+							<listitem>
+								<para>core.coom is an Xtext based language called Room. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.core.room</emphasis>. Room is the basic modeling language of eTrice.
+								</para>
+							</listitem>
+							<listitem>
+								<para>core.config is an Xtext based language called Config. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.core.config</emphasis>. Config is a language designed for the data configuration of model elements. E.g. class and instance attributes can be specified.
+								</para>
+							</listitem>
+							<listitem>
+								<para>core.genmodel is an EMF based aggregation layer for Room models. It consists of the plugin 
+									<emphasis>org.eclipse.etrice.core.genmodel</emphasis>. a Room model can be transformed into a genmodel which allows easy access to implicit relations of the Room model.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem>
+						<para>ui</para>
+						<itemizedlist>
+							<listitem>
+								<para>textual</para>
+								<itemizedlist>
+									<listitem>
+										<para>room.ui is the ui counterpart of core.room.  It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.core.room.ui</emphasis>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Room language.
+										</para>
+									</listitem>
+									<listitem>
+										<para>config.ui is the ui counterpart of core.config.  It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.core.config.ui</emphasis>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Config language.
+										</para>
+									</listitem>
+								</itemizedlist>
+							</listitem>
+							<listitem>
+								<para>graphical</para>
+								<itemizedlist>
+									<listitem>
+										<para>ui.common is a set of common code for the two diagram editors. It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.ui.common</emphasis>.
+										</para>
+									</listitem>
+									<listitem>
+										<para>ui.commands encapsulates some commands related to the navigation between eTrice editors. It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.ui.commands</emphasis>.
+										</para>
+									</listitem>
+									<listitem>
+										<para>ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.ui.structure</emphasis>.
+										</para>
+									</listitem>
+									<listitem>
+										<para>ui.behavior is the Graphiti based editor for the Actor behavior. It consists of the plug-in 
+											<emphasis>org.eclipse.etrice.ui.behavior</emphasis>.
+										</para>
+									</listitem>
+								</itemizedlist>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem>
+						<para>generators</para>
+						<itemizedlist>
+							<listitem>
+								<para>generator is a set of general classes and language independent parts of all generators. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.generator</emphasis>.
+								</para>
+							</listitem>
+							<listitem>
+								<para>generator.c is the generator for the ANSI-C target language. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.generator.c</emphasis>.
+								</para>
+							</listitem>
+							<listitem>
+								<para>generator.java is the generator for the Java target language. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.generator.java</emphasis>.
+								</para>
+							</listitem>
+							<listitem>
+								<para>generator.doc is the generator for the model documentation. It consists of the plug-in 
+									<emphasis>org.eclipse.etrice.generator.doc</emphasis>.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="Runtimes">
+				<title>Runtimes</title>
+				<para>Currently eTrice ships with a C and a Java runtime. The runtimes are libraries written in the target language against which the generated code is compiled.</para>
+			</section>
+			<section id="UnitTests">
+				<title>Unit Tests</title>
+				<para>Most plug-ins and other parts of the code have related unit tests.</para>
+			</section>
+		</section>
+		<section id="ComponentOverview">
+			<title>Component Overview</title>
+			<section id="RoomLanguageOverview">
+				<title>Room Language Overview</title>
+				<para>We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that are worth to be pointed out.</para>
+				<section id="ModelTweaks">
+					<title>Model Tweaks</title>
+					<para>The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at some places.
+						This is done in the 
+						<emphasis>/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext</emphasis> which is written in the legacy Xtend language.
+					</para>
+					<para>The following parts of the model are changed or added:</para>
+					<itemizedlist>
+						<listitem>
+							<para>the default 
+								<code>multiplicity</code> of the 
+								<code>Port</code> is set to 1
+							</para>
+						</listitem>
+						<listitem>
+							<para>the operation 
+								<code>isReplicated</code> is added to the 
+								<code>Port</code>
+							</para>
+						</listitem>
+						<listitem>
+							<para>the default 
+								<code>size</code> of the 
+								<code>ActorRef</code> is set to 1
+							</para>
+						</listitem>
+						<listitem>
+							<para>an operation 
+								<code>getName</code> is add to the 
+								<code>State</code> class
+							</para>
+						</listitem>
+						<listitem>
+							<para>an operation 
+								<code>getName</code> is add to the 
+								<code>StateGraphItem</code> class
+							</para>
+						</listitem>
+						<listitem>
+							<para>an operation 
+								<code>getGeneralProtocol</code> is added to the 
+								<code>InterfaceItem</code>
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="ImportsbyURIUsingNamespaces">
+					<title>Imports by URI Using Namespaces</title>
+					<para>The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in the Guice modules by binding</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<code>PlatformRelativeUriResolver</code> — this class tries to convert the import URI into a platform relative URI. It also replaces environment variables written in ${} with their respective values.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>ImportedNamespaceAwareLocalScopeProvider</code> — this is a standard scope provider which is aware of namespaces
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>GlobalNonPlatformURIEditorOpener</code> — this editor opener tries to convert general URIs into platform URIs because editors can only open platform URIs
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>ImportAwareHyperlinkHelper</code> — turns the URI part of an import into a navigatable hyper link
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="Naming">
+					<title>Naming</title>
+					<para>Two classes provide object names used for link resolution and for labels.
+						The 
+						<code>RoomNameProvider</code> provides frequently used name strings, some of them are hierarchical like State paths.
+						The 
+						<code>RoomFragmentProvider</code> serves a more formal purpose since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by Xtext.
+					</para>
+				</section>
+				<section id="Helpers">
+					<title>Helpers</title>
+					<para>The 
+						<code>RoomHelpers</code> class provides a great deal of static methods that help retrieve frequently used information from the model.
+						Among many, many others
+					</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<code>getAllEndPorts(ActorClass)</code> - returns a list of all end ports of an actor class including inherited ones
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getInheritedActionCode(Transition, ActorClass)</code> - get the inherited part of a transition’s action code
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getSignature(Operation)</code> - returns a string representing the operation signature suited for a label
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="Validation">
+					<title>Validation</title>
+					<para>Validation is used from various places. Therefore all validation code is accumulated in the 
+						<code>ValidationUtil</code> class. All methods are static and many of them return a Result object which contains information about the problem detected as well as object and feature as suited for most validation purposes.
+					</para>
+				</section>
+			</section>
+			<section id="ConfigLanguageOverview">
+				<title>Config Language Overview</title>
+				<section id="ModelTweaks2">
+					<title>Model Tweaks</title>
+					<para>A couple of operations are added to the ConfigModel</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<code>getActorClassConfigs</code>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getActorInstanceConfigs</code>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getProtocolClassConfigs</code>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getSubSystemConfigs</code>
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="ImportsbyURIUsingNamespaces2">
+					<title>Imports by URI Using Namespaces</title>
+					<para>Imports are treated similar than in the 
+						<link linkend="ImportsbyURIUsingNamespaces">Room language</link>.
+					</para>
+				</section>
+				<section id="Util">
+					<title>Util</title>
+					<para>A set of static utility methods can be found in the 
+						<code>ConfigUtil</code> class.
+					</para>
+				</section>
+			</section>
+			<section id="AggregationLayerOverview">
+				<title>Aggregation Layer Overview</title>
+				<para>The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information which is implicitly contained in the Room model but not simple to retrieve.
+					Examples of this are the state machine with inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of an end port (following bindings through relay ports).</para>
+				<para>The Generator Model is created from a list of Room models by a call of the</para>
+				<literallayout><code>createGeneratorModel(List&lt;RoomModel&gt;, boolean)
+</code></literallayout>
+				<para>method of the 
+					<code>GeneratorModelBuilder</code> class.
+				</para>
+				<para>The 
+					<code>Root</code> object of the resulting Generator Model provides chiefly two things:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>a tree of instances starting at each 
+							<code>SubSystem</code> with representations of each 
+							<code>ActorInstance</code> and 
+							<code>PortInstance</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>for each 
+							<code>ActorClass</code> a corresponding 
+							<code>ExpandedActorClass</code> with an explicit state machine containing all inherited state graph items
+						</para>
+					</listitem>
+				</itemizedlist>
+				<section id="TheInstanceModel">
+					<title>The Instance Model</title>
+					<para>The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to get a list of all peer port instances for each port instance without having to bother about port and actor replication.</para>
+				</section>
+				<section id="TheExpandedActorClass">
+					<title>The Expanded Actor Class</title>
+					<para>The expanded actor class contains, as already mentioned, the complete state machine of the actor class. This considerably simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of an actor. I.e. no target language inheritance is used to implement the state machine inheritance.
+						Furthermore the 
+						<code>ExpandedActorClass</code> gives access to
+					</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<code>getIncomingTransitions(StateGraphNode)</code> — the set of incoming transition of a 
+								<code>StateGraphNode</code> (
+								<code>State</code>, 
+								<code>ChoicePoint</code> or 
+								<code>TransitionPoint</code>)
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getOutgoingTransitions(StateGraphNode)</code> — the set of outgoing transition of a 
+								<code>StateGraphNode</code>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>getActiveTriggers(State)</code> — the triggers that are active in this 
+								<code>State</code> in the order they are evaluated
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="TransitionChains">
+					<title>Transition Chains</title>
+					<para>By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in choice points).
+						A 
+						<code>TransitionChain</code> of a transition is retrieved by a call of 
+						<code>getChain(Transition)</code> of the 
+						<code>ExpandedActorClass</code>.
+						The 
+						<code>TransitionChain</code> accepts an 
+						<code>ITransitionChainVisitor</code> which is called along the chain to generate the action codes of involved transitions and the conditional statements arising from the involved choice points. 
+					</para>
+				</section>
+			</section>
+			<section id="GeneratorOverview">
+				<title>Generator Overview</title>
+				<para>There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific generators</para>
+				<section id="BaseClassesandInterfaces">
+					<title>Base Classes and Interfaces</title>
+					<para>We just want to mention the most important classes and interfaces.</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<code>ITranslationProvider</code> — this interface is used by the 
+								<code>DetailCodeTranslator</code> for the language dependent translation of e.g. port.message() notation in detail code
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>AbstractGenerator</code> — concrete language generators should derive from this base class
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>DefaultTranslationProvider</code> — a stub implementation of 
+								<code>ITranslationProvider</code> from which clients may derive
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>Indexed</code> — provides an indexed iterable of a given iterable
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<code>GeneratorBaseModule</code> — a Google Guice module that binds a couple of basic services. Concrete language generators should use a module that derives from this
+							</para>
+						</listitem>
+					</itemizedlist>
+				</section>
+				<section id="GenericGeneratorParts">
+					<title>Generic Generator Parts</title>
+					<para>The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by means of an 
+						<code>ILanguageExtension</code>. This extension and other parts of the generator be configured using Google Guice dependency injection.
+					</para>
+					<section id="GenericActorClassGenerator">
+						<title>GenericActorClassGenerator</title>
+						<para>The 
+							<code>GenericActorClassGenerator</code> generates constants for the interface items of a actor. Those constants are used by the generated state machine.
+						</para>
+					</section>
+					<section id="GenericProtocolClassGenerator">
+						<title>GenericProtocolClassGenerator</title>
+						<para>The 
+							<code>GenericProtocolClassGenerator</code> generates message ID constants for a protocol.
+						</para>
+					</section>
+					<section id="GenericStateMachineGenerator">
+						<title>GenericStateMachineGenerator</title>
+						<para>The 
+							<code>GenericStateMachineGenerator</code> generates the complete state machine implementation. The skeleton of the generated code is
+						</para>
+						<itemizedlist>
+							<listitem>
+								<para>definition state ID constants</para>
+							</listitem>
+							<listitem>
+								<para>definition of transition chain constants</para>
+							</listitem>
+							<listitem>
+								<para>definition of trigger constants</para>
+							</listitem>
+							<listitem>
+								<para>entry, exit and action code methods</para>
+							</listitem>
+							<listitem>
+								<para>the 
+									<code>exitTo</code> method 
+								</para>
+							</listitem>
+							<listitem>
+								<para>the 
+									<code>executeTransitionChain</code> method
+								</para>
+							</listitem>
+							<listitem>
+								<para>the 
+									<code>enterHistory</code> method
+								</para>
+							</listitem>
+							<listitem>
+								<para>the 
+									<code>executeInitTransition</code> method
+								</para>
+							</listitem>
+							<listitem>
+								<para>the 
+									<code>receiveEvent</code> method
+								</para>
+							</listitem>
+						</itemizedlist>
+						<para>The state machine works as follows. The main entry method is the 
+							<code>receiveEvent</code> method. This is the case for both, data driven (polled) and event driven state machines. Then a number of nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a trigger fires then the 
+							<code>exitTo</code> method is called to execute all exit codes involved. Then the transition chain action codes are executed and the choice point conditions are evaluated in the 
+							<code>executeTransitionChain</code> method. Finally the history of the state where the chain ends is entered and all entry codes are executed by 
+							<code>enterHistory</code>.
+						</para>
+					</section>
+				</section>
+				<section id="TheJavaGenerator">
+					<title>The Java Generator</title>
+					<para>The Java generator employs the generic parts of the generator. The 
+						<code>JavaTranslationProvider</code> is very simple and only handles the case of sending a message from a distinct replicated port: 
+						<code>replPort[2].message()</code>. Other cases are handled by the base class by returning the original text.
+					</para>
+					<para>The 
+						<code>DataClassGen</code> uses Java inheritance for the generated data classes. Otherwise it is pretty much straight forward.
+					</para>
+					<para>The 
+						<code>ProtocolClassGen</code> generates a class for the protocol with nested static classes for regular and conjugated ports and similar for replicated ports.
+					</para>
+					<para>The 
+						<code>ActorClassGen</code> uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code methods are inherited. Not inherited is the state machine implementation.
+					</para>
+				</section>
+				<section id="TheANSICGenerator">
+					<title>The ANSI-C Generator</title>
+					<para>The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them and receive a pointer to those data (called 
+						<code>self</code> in analogy to the implicit C++ 
+						<code>this</code> pointer).
+						No dynamic memory allocation is employed. All actor instances are statically initialized.
+						One of the design goals for the generated C code was an optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end micro controllers.
+					</para>
+				</section>
+				<section id="TheDocumentationGenerator">
+					<title>The Documentation Generator</title>
+					<para>The documentation generator creates documentation in LaTex format which can be converted into PDF and many other formats.</para>
 				</section>
 			</section>
 		</section>

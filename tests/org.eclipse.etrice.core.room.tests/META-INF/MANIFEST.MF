@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Room Core Tests
 Bundle-SymbolicName: org.eclipse.etrice.core.room.tests
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.3.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: eTrice (Incubation)
 Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.1.0",

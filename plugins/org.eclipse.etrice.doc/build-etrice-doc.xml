@@ -37,8 +37,9 @@
 	<!--  
 		WikiText Toolchain 
 	<property name="wikitext.url" value="http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip"/>
-	-->
 	<property name="wikitext.url" value="http://download.eclipse.org/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip" />
+	-->
+	<property name="wikitext.url" value="http://www.eclipse.org/downloads/download.php?file_id=1362554" />
 	<property name="wikitext.dir" value="${download.dir}${file.separator}wikitext" />
 
 	<target name="check-wikitext">
@@ -109,7 +110,7 @@
 	<property name="docbook.dir" value="${download.dir}${file.separator}docbook-xsl-${docbook.version}" />
 	<property name="docbookxsl.url" value="http://downloads.sourceforge.net/project/docbook/docbook-xsl/1.75.1/docbook-xsl-${docbook.version}.zip" />
 	<property name="fop.dir" value="${download.dir}${file.separator}fop-1.0" />
-	<property name="fop.url" value="http://apache.linux-mirror.org/xmlgraphics/fop/binaries/fop-1.0-bin.zip" />
+	<property name="fop.url" value="http://archive.apache.org/dist/xmlgraphics/fop/binaries/fop-1.0-bin.zip" />
 	<property name="jai.dir" value="ENTER_JAI_DIRECTORY" />
 
 	<macrodef name="docbook2pdf">
@@ -223,6 +224,7 @@
 			<param name="admon.graphics.extension" expression=".gif" />
 			<param name="admon.textlabel" expression="0" />
 			<param name="admon.graphics" expression="1" />
+			<param name="double.sided" expression="1" />
 		</xslt>
 
 		<docbook2pdf source="${build.dir}${file.separator}${document.name}.fo" target="manual${file.separator}${document.name}.pdf" />

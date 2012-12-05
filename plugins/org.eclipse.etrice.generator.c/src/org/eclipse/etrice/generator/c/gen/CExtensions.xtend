@@ -151,9 +151,6 @@ class CExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
-	override String toCharArrayExpr(String s){
-		"\"" + s + "\"";
-	}
 	
 	override String superCall(String baseClassName, String method, String args) {
 		""
@@ -216,7 +213,7 @@ class CExtensions implements ILanguageExtension {
 				dv.initializer(att.size)
 		}
 		else if (att.refType.ref) {
-			"NULL"
+			"NULL".initializer(att.size)
 		}
 		else
 			att.refType.type.initializationWithDefaultValues(att.size)

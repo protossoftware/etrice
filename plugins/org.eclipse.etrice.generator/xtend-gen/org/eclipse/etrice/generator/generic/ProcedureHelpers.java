@@ -416,6 +416,24 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  public CharSequence invokeGetters(final Iterable<Attribute> path, final String classname) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _hasElements = false;
+      for(final Attribute a : path) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(".", "");
+        }
+        String _name = a.getName();
+        CharSequence _invokeGetter = this.invokeGetter(_name, classname);
+        _builder.append(_invokeGetter, "");
+      }
+    }
+    return _builder;
+  }
+  
   public CharSequence getterImplementation(final String typeName, final String name, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();

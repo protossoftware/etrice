@@ -2392,13 +2392,22 @@ public interface RoomPackage extends EPackage
   int SUB_SYSTEM_CLASS__THREADS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Sub System Class</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
+  int SUB_SYSTEM_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.LogicalThreadImpl <em>Logical Thread</em>}' class.
@@ -2420,59 +2429,87 @@ public interface RoomPackage extends EPackage
   int LOGICAL_THREAD__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Prio</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGICAL_THREAD__PRIO = 1;
-
-  /**
-   * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGICAL_THREAD__INSTANCES = 2;
-
-  /**
    * The number of structural features of the '<em>Logical Thread</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOGICAL_THREAD_FEATURE_COUNT = 3;
+  int LOGICAL_THREAD_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorInstancePathImpl <em>Actor Instance Path</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl <em>Actor Instance Mapping</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ActorInstancePathImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstancePath()
+   * @see org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstanceMapping()
    * @generated
    */
-  int ACTOR_INSTANCE_PATH = 40;
+  int ACTOR_INSTANCE_MAPPING = 40;
 
   /**
-   * The feature id for the '<em><b>Segments</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_INSTANCE_PATH__SEGMENTS = 0;
-
-  /**
-   * The number of structural features of the '<em>Actor Instance Path</em>' class.
+   * The feature id for the '<em><b>Path</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_INSTANCE_PATH_FEATURE_COUNT = 1;
+  int ACTOR_INSTANCE_MAPPING__PATH = 0;
+
+  /**
+   * The feature id for the '<em><b>Thread</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_MAPPING__THREAD = 1;
+
+  /**
+   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS = 2;
+
+  /**
+   * The number of structural features of the '<em>Actor Instance Mapping</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_INSTANCE_MAPPING_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefPathImpl <em>Ref Path</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.impl.RefPathImpl
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefPath()
+   * @generated
+   */
+  int REF_PATH = 41;
+
+  /**
+   * The feature id for the '<em><b>Refs</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_PATH__REFS = 0;
+
+  /**
+   * The number of structural features of the '<em>Ref Path</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_PATH_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.BindingImpl <em>Binding</em>}' class.
@@ -2482,7 +2519,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBinding()
    * @generated
    */
-  int BINDING = 41;
+  int BINDING = 42;
 
   /**
    * The feature id for the '<em><b>Endpoint1</b></em>' containment reference.
@@ -2519,7 +2556,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBindingEndPoint()
    * @generated
    */
-  int BINDING_END_POINT = 42;
+  int BINDING_END_POINT = 43;
 
   /**
    * The feature id for the '<em><b>Actor Ref</b></em>' reference.
@@ -2565,7 +2602,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLayerConnection()
    * @generated
    */
-  int LAYER_CONNECTION = 43;
+  int LAYER_CONNECTION = 44;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -2602,7 +2639,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSAPoint()
    * @generated
    */
-  int SA_POINT = 44;
+  int SA_POINT = 45;
 
   /**
    * The number of structural features of the '<em>SA Point</em>' class.
@@ -2621,7 +2658,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefSAPoint()
    * @generated
    */
-  int REF_SA_POINT = 45;
+  int REF_SA_POINT = 46;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2649,7 +2686,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRelaySAPoint()
    * @generated
    */
-  int RELAY_SA_POINT = 46;
+  int RELAY_SA_POINT = 47;
 
   /**
    * The feature id for the '<em><b>Relay</b></em>' reference.
@@ -2677,7 +2714,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSPPoint()
    * @generated
    */
-  int SP_POINT = 47;
+  int SP_POINT = 48;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2714,7 +2751,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorRef()
    * @generated
    */
-  int ACTOR_REF = 48;
+  int ACTOR_REF = 49;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2769,7 +2806,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphItem()
    * @generated
    */
-  int STATE_GRAPH_ITEM = 50;
+  int STATE_GRAPH_ITEM = 51;
 
   /**
    * The number of structural features of the '<em>State Graph Item</em>' class.
@@ -2788,7 +2825,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphNode()
    * @generated
    */
-  int STATE_GRAPH_NODE = 49;
+  int STATE_GRAPH_NODE = 50;
 
   /**
    * The number of structural features of the '<em>State Graph Node</em>' class.
@@ -2807,7 +2844,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getState()
    * @generated
    */
-  int STATE = 51;
+  int STATE = 52;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -2871,7 +2908,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraph()
    * @generated
    */
-  int STATE_GRAPH = 52;
+  int STATE_GRAPH = 53;
 
   /**
    * The feature id for the '<em><b>States</b></em>' containment reference list.
@@ -2935,7 +2972,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
    * @generated
    */
-  int SIMPLE_STATE = 53;
+  int SIMPLE_STATE = 54;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -3008,7 +3045,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedState()
    * @generated
    */
-  int REFINED_STATE = 54;
+  int REFINED_STATE = 55;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -3081,7 +3118,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDetailCode()
    * @generated
    */
-  int DETAIL_CODE = 55;
+  int DETAIL_CODE = 56;
 
   /**
    * The feature id for the '<em><b>Commands</b></em>' attribute list.
@@ -3109,7 +3146,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPoint()
    * @generated
    */
-  int TR_POINT = 56;
+  int TR_POINT = 57;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3137,7 +3174,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionPoint()
    * @generated
    */
-  int TRANSITION_POINT = 57;
+  int TRANSITION_POINT = 58;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3174,7 +3211,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getEntryPoint()
    * @generated
    */
-  int ENTRY_POINT = 58;
+  int ENTRY_POINT = 59;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3202,7 +3239,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExitPoint()
    * @generated
    */
-  int EXIT_POINT = 59;
+  int EXIT_POINT = 60;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3230,7 +3267,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicePoint()
    * @generated
    */
-  int CHOICE_POINT = 60;
+  int CHOICE_POINT = 61;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3267,7 +3304,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransition()
    * @generated
    */
-  int TRANSITION = 61;
+  int TRANSITION = 62;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3322,7 +3359,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getNonInitialTransition()
    * @generated
    */
-  int NON_INITIAL_TRANSITION = 62;
+  int NON_INITIAL_TRANSITION = 63;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3386,7 +3423,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionChainStartTransition()
    * @generated
    */
-  int TRANSITION_CHAIN_START_TRANSITION = 63;
+  int TRANSITION_CHAIN_START_TRANSITION = 64;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3450,7 +3487,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInitialTransition()
    * @generated
    */
-  int INITIAL_TRANSITION = 64;
+  int INITIAL_TRANSITION = 65;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3505,7 +3542,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getContinuationTransition()
    * @generated
    */
-  int CONTINUATION_TRANSITION = 65;
+  int CONTINUATION_TRANSITION = 66;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3569,7 +3606,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTriggeredTransition()
    * @generated
    */
-  int TRIGGERED_TRANSITION = 66;
+  int TRIGGERED_TRANSITION = 67;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3642,7 +3679,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuardedTransition()
    * @generated
    */
-  int GUARDED_TRANSITION = 67;
+  int GUARDED_TRANSITION = 68;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3715,7 +3752,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCPBranchTransition()
    * @generated
    */
-  int CP_BRANCH_TRANSITION = 68;
+  int CP_BRANCH_TRANSITION = 69;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3788,7 +3825,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedTransition()
    * @generated
    */
-  int REFINED_TRANSITION = 69;
+  int REFINED_TRANSITION = 70;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' reference.
@@ -3834,7 +3871,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionTerminal()
    * @generated
    */
-  int TRANSITION_TERMINAL = 70;
+  int TRANSITION_TERMINAL = 71;
 
   /**
    * The number of structural features of the '<em>Transition Terminal</em>' class.
@@ -3853,7 +3890,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateTerminal()
    * @generated
    */
-  int STATE_TERMINAL = 71;
+  int STATE_TERMINAL = 72;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -3881,7 +3918,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPointTerminal()
    * @generated
    */
-  int TR_POINT_TERMINAL = 72;
+  int TR_POINT_TERMINAL = 73;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3909,7 +3946,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubStateTrPointTerminal()
    * @generated
    */
-  int SUB_STATE_TR_POINT_TERMINAL = 73;
+  int SUB_STATE_TR_POINT_TERMINAL = 74;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -3946,7 +3983,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicepointTerminal()
    * @generated
    */
-  int CHOICEPOINT_TERMINAL = 74;
+  int CHOICEPOINT_TERMINAL = 75;
 
   /**
    * The feature id for the '<em><b>Cp</b></em>' reference.
@@ -3974,7 +4011,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrigger()
    * @generated
    */
-  int TRIGGER = 75;
+  int TRIGGER = 76;
 
   /**
    * The feature id for the '<em><b>Msg From If Pairs</b></em>' containment reference list.
@@ -4011,7 +4048,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getMessageFromIf()
    * @generated
    */
-  int MESSAGE_FROM_IF = 76;
+  int MESSAGE_FROM_IF = 77;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' reference.
@@ -4048,7 +4085,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuard()
    * @generated
    */
-  int GUARD = 77;
+  int GUARD = 78;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -4076,7 +4113,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDocumentation()
    * @generated
    */
-  int DOCUMENTATION = 78;
+  int DOCUMENTATION = 79;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' attribute list.
@@ -4104,7 +4141,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
    * @generated
    */
-  int ANNOTATION = 79;
+  int ANNOTATION = 80;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4141,7 +4178,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
    * @generated
    */
-  int KEY_VALUE = 80;
+  int KEY_VALUE = 81;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4178,7 +4215,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 81;
+  int IMPORT = 82;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -4215,7 +4252,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
    * @generated
    */
-  int LITERAL_TYPE = 82;
+  int LITERAL_TYPE = 83;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
@@ -4225,7 +4262,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 83;
+  int COMMUNICATION_TYPE = 84;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -4235,7 +4272,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 84;
+  int ACTOR_COMMUNICATION_TYPE = 85;
 
 
   /**
@@ -5784,6 +5821,17 @@ public interface RoomPackage extends EPackage
   EReference getSubSystemClass_Threads();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
+   * @see org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings()
+   * @see #getSubSystemClass()
+   * @generated
+   */
+  EReference getSubSystemClass_ActorInstanceMappings();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.LogicalThread <em>Logical Thread</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5805,47 +5853,68 @@ public interface RoomPackage extends EPackage
   EAttribute getLogicalThread_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.LogicalThread#getPrio <em>Prio</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ActorInstanceMapping <em>Actor Instance Mapping</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Prio</em>'.
-   * @see org.eclipse.etrice.core.room.LogicalThread#getPrio()
-   * @see #getLogicalThread()
+   * @return the meta object for class '<em>Actor Instance Mapping</em>'.
+   * @see org.eclipse.etrice.core.room.ActorInstanceMapping
    * @generated
    */
-  EAttribute getLogicalThread_Prio();
+  EClass getActorInstanceMapping();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.LogicalThread#getInstances <em>Instances</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getPath <em>Path</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Instances</em>'.
-   * @see org.eclipse.etrice.core.room.LogicalThread#getInstances()
-   * @see #getLogicalThread()
+   * @return the meta object for the containment reference '<em>Path</em>'.
+   * @see org.eclipse.etrice.core.room.ActorInstanceMapping#getPath()
+   * @see #getActorInstanceMapping()
    * @generated
    */
-  EReference getLogicalThread_Instances();
+  EReference getActorInstanceMapping_Path();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ActorInstancePath <em>Actor Instance Path</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getThread <em>Thread</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Actor Instance Path</em>'.
-   * @see org.eclipse.etrice.core.room.ActorInstancePath
+   * @return the meta object for the reference '<em>Thread</em>'.
+   * @see org.eclipse.etrice.core.room.ActorInstanceMapping#getThread()
+   * @see #getActorInstanceMapping()
    * @generated
    */
-  EClass getActorInstancePath();
+  EReference getActorInstanceMapping_Thread();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.ActorInstancePath#getSegments <em>Segments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Segments</em>'.
-   * @see org.eclipse.etrice.core.room.ActorInstancePath#getSegments()
-   * @see #getActorInstancePath()
+   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
+   * @see org.eclipse.etrice.core.room.ActorInstanceMapping#getActorInstanceMappings()
+   * @see #getActorInstanceMapping()
    * @generated
    */
-  EAttribute getActorInstancePath_Segments();
+  EReference getActorInstanceMapping_ActorInstanceMappings();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefPath <em>Ref Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Ref Path</em>'.
+   * @see org.eclipse.etrice.core.room.RefPath
+   * @generated
+   */
+  EClass getRefPath();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.RefPath#getRefs <em>Refs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Refs</em>'.
+   * @see org.eclipse.etrice.core.room.RefPath#getRefs()
+   * @see #getRefPath()
+   * @generated
+   */
+  EAttribute getRefPath_Refs();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Binding <em>Binding</em>}'.
@@ -8179,6 +8248,14 @@ public interface RoomPackage extends EPackage
     EReference SUB_SYSTEM_CLASS__THREADS = eINSTANCE.getSubSystemClass_Threads();
 
     /**
+     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getSubSystemClass_ActorInstanceMappings();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.LogicalThreadImpl <em>Logical Thread</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -8197,38 +8274,56 @@ public interface RoomPackage extends EPackage
     EAttribute LOGICAL_THREAD__NAME = eINSTANCE.getLogicalThread_Name();
 
     /**
-     * The meta object literal for the '<em><b>Prio</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl <em>Actor Instance Mapping</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstanceMapping()
      * @generated
      */
-    EAttribute LOGICAL_THREAD__PRIO = eINSTANCE.getLogicalThread_Prio();
+    EClass ACTOR_INSTANCE_MAPPING = eINSTANCE.getActorInstanceMapping();
 
     /**
-     * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Path</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference LOGICAL_THREAD__INSTANCES = eINSTANCE.getLogicalThread_Instances();
+    EReference ACTOR_INSTANCE_MAPPING__PATH = eINSTANCE.getActorInstanceMapping_Path();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ActorInstancePathImpl <em>Actor Instance Path</em>}' class.
+     * The meta object literal for the '<em><b>Thread</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ActorInstancePathImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstancePath()
      * @generated
      */
-    EClass ACTOR_INSTANCE_PATH = eINSTANCE.getActorInstancePath();
+    EReference ACTOR_INSTANCE_MAPPING__THREAD = eINSTANCE.getActorInstanceMapping_Thread();
 
     /**
-     * The meta object literal for the '<em><b>Segments</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ACTOR_INSTANCE_PATH__SEGMENTS = eINSTANCE.getActorInstancePath_Segments();
+    EReference ACTOR_INSTANCE_MAPPING__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getActorInstanceMapping_ActorInstanceMappings();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefPathImpl <em>Ref Path</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.impl.RefPathImpl
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefPath()
+     * @generated
+     */
+    EClass REF_PATH = eINSTANCE.getRefPath();
+
+    /**
+     * The meta object literal for the '<em><b>Refs</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REF_PATH__REFS = eINSTANCE.getRefPath_Refs();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.BindingImpl <em>Binding</em>}' class.

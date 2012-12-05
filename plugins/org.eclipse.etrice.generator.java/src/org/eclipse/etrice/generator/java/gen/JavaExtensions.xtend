@@ -100,13 +100,27 @@ class JavaExtensions implements ILanguageExtension {
 	override String destructorReturnType() {
 		"void"
 	}
-	override String toCharArrayExpr(String s){
-		"\"" + s + "\".toCharArray()"
-	}
+	
 	override String superCall(String baseClassName, String method, String args) {
 		"super."+method+"("+args+");"
 	}
-	override String toValueLiteral(PrimitiveType type, String value){
+	
+	override toValueLiteral(PrimitiveType type, String value) {
+		switch(type.targetName){
+			case "char":
+				castValue(type, value)
+			case "string":
+				castValue(type, value)
+			case  value.contains(','):{
+				var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+				'''{ «FOR v: singleValues SEPARATOR ', '»«castValue(type, v.trim)»«ENDFOR» }'''.toString
+			}
+			default:
+				castValue(type, value)		
+		}
+	}
+	
+	def private castValue(PrimitiveType type, String value){
 		switch(type.targetName){
 			case "boolean":
 				return value
@@ -126,10 +140,10 @@ class JavaExtensions implements ILanguageExtension {
 				if(value.length == 1)
 					return "'"+value+"'"
 				else
-					return value.toCharArrayExpr
+					return "\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\".toCharArray()"
 			}
 			case "String":
-				return "\""+value+"\""
+				return "\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\""
 		}
 		
 		throw new UnsupportedOperationException(type.targetName)
@@ -182,5 +196,7 @@ class JavaExtensions implements ILanguageExtension {
 		
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
+	
+
 	
 }

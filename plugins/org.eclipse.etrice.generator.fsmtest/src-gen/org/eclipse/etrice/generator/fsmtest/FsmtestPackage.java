@@ -67,13 +67,22 @@ public interface FsmtestPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Testscripts</b></em>' containment reference list.
+   * The feature id for the '<em><b>Fsm Definitions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__TESTSCRIPTS = 0;
+  int MODEL__FSM_DEFINITIONS = 0;
+
+  /**
+   * The feature id for the '<em><b>Random Tests</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__RANDOM_TESTS = 1;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -82,17 +91,17 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 1;
+  int MODEL_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TestscriptImpl <em>Testscript</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.FsmDefinitionImpl <em>Fsm Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.TestscriptImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTestscript()
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmDefinitionImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getFsmDefinition()
    * @generated
    */
-  int TESTSCRIPT = 1;
+  int FSM_DEFINITION = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -101,25 +110,53 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__NAME = 0;
+  int FSM_DEFINITION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>State Declaration</b></em>' containment reference.
+   * The feature id for the '<em><b>States</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__STATE_DECLARATION = 1;
+  int FSM_DEFINITION__STATES = 1;
 
   /**
-   * The feature id for the '<em><b>Initial Declaration</b></em>' containment reference.
+   * The number of structural features of the '<em>Fsm Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__INITIAL_DECLARATION = 2;
+  int FSM_DEFINITION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.RandomTestImpl <em>Random Test</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.RandomTestImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getRandomTest()
+   * @generated
+   */
+  int RANDOM_TEST = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RANDOM_TEST__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Fsm</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RANDOM_TEST__FSM = 1;
 
   /**
    * The feature id for the '<em><b>Loops Declaration</b></em>' containment reference.
@@ -128,7 +165,7 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__LOOPS_DECLARATION = 3;
+  int RANDOM_TEST__LOOPS_DECLARATION = 2;
 
   /**
    * The feature id for the '<em><b>Seed Declaration</b></em>' containment reference.
@@ -137,35 +174,54 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__SEED_DECLARATION = 4;
+  int RANDOM_TEST__SEED_DECLARATION = 3;
 
   /**
-   * The feature id for the '<em><b>Transition Declarations</b></em>' containment reference list.
+   * The number of structural features of the '<em>Random Test</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TESTSCRIPT__TRANSITION_DECLARATIONS = 5;
+  int RANDOM_TEST_FEATURE_COUNT = 4;
 
   /**
-   * The number of structural features of the '<em>Testscript</em>' class.
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.GuardDeclarationImpl <em>Guard Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.GuardDeclarationImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getGuardDeclaration()
+   * @generated
+   */
+  int GUARD_DECLARATION = 3;
+
+  /**
+   * The feature id for the '<em><b>Signal</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TESTSCRIPT_FEATURE_COUNT = 6;
+  int GUARD_DECLARATION__SIGNAL = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.StateImpl <em>State</em>}' class.
+   * The number of structural features of the '<em>Guard Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.StateImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getState()
+   * @generated
+   * @ordered
+   */
+  int GUARD_DECLARATION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTransitionDeclaration()
    * @generated
    */
-  int STATE = 2;
+  int TRANSITION_DECLARATION = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -174,16 +230,145 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE__NAME = 0;
+  int TRANSITION_DECLARATION__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>State</em>' class.
+   * The feature id for the '<em><b>Destination</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_FEATURE_COUNT = 1;
+  int TRANSITION_DECLARATION__DESTINATION = 1;
+
+  /**
+   * The feature id for the '<em><b>Trigger</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DECLARATION__TRIGGER = 2;
+
+  /**
+   * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DECLARATION__TRIGGERS = 3;
+
+  /**
+   * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DECLARATION__PRECONDITION = 4;
+
+  /**
+   * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DECLARATION__POSTCONDITION = 5;
+
+  /**
+   * The number of structural features of the '<em>Transition Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DECLARATION_FEATURE_COUNT = 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.ConditionDeclarationImpl <em>Condition Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.ConditionDeclarationImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getConditionDeclaration()
+   * @generated
+   */
+  int CONDITION_DECLARATION = 5;
+
+  /**
+   * The feature id for the '<em><b>Signal</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_DECLARATION__SIGNAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Condition Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_DECLARATION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.PreconditionDeclarationImpl <em>Precondition Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.PreconditionDeclarationImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getPreconditionDeclaration()
+   * @generated
+   */
+  int PRECONDITION_DECLARATION = 6;
+
+  /**
+   * The feature id for the '<em><b>Signal</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRECONDITION_DECLARATION__SIGNAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Precondition Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRECONDITION_DECLARATION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.PostconditionDeclarationImpl <em>Postcondition Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.generator.fsmtest.impl.PostconditionDeclarationImpl
+   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getPostconditionDeclaration()
+   * @generated
+   */
+  int POSTCONDITION_DECLARATION = 7;
+
+  /**
+   * The feature id for the '<em><b>Signal</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSTCONDITION_DECLARATION__SIGNAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Postcondition Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSTCONDITION_DECLARATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
@@ -193,16 +378,34 @@ public interface FsmtestPackage extends EPackage
    * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getStateDeclaration()
    * @generated
    */
-  int STATE_DECLARATION = 3;
+  int STATE_DECLARATION = 8;
 
   /**
-   * The feature id for the '<em><b>States</b></em>' containment reference list.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION__STATES = 0;
+  int STATE_DECLARATION__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_DECLARATION__CONDITION = 1;
+
+  /**
+   * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_DECLARATION__TRANSITIONS = 2;
 
   /**
    * The number of structural features of the '<em>State Declaration</em>' class.
@@ -211,35 +414,7 @@ public interface FsmtestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.InitialDeclarationImpl <em>Initial Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.InitialDeclarationImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getInitialDeclaration()
-   * @generated
-   */
-  int INITIAL_DECLARATION = 4;
-
-  /**
-   * The feature id for the '<em><b>Initial</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_DECLARATION__INITIAL = 0;
-
-  /**
-   * The number of structural features of the '<em>Initial Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_DECLARATION_FEATURE_COUNT = 1;
+  int STATE_DECLARATION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.LoopsDeclarationImpl <em>Loops Declaration</em>}' class.
@@ -249,7 +424,7 @@ public interface FsmtestPackage extends EPackage
    * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getLoopsDeclaration()
    * @generated
    */
-  int LOOPS_DECLARATION = 5;
+  int LOOPS_DECLARATION = 9;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -277,7 +452,7 @@ public interface FsmtestPackage extends EPackage
    * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getSeedDeclaration()
    * @generated
    */
-  int SEED_DECLARATION = 6;
+  int SEED_DECLARATION = 10;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -305,7 +480,7 @@ public interface FsmtestPackage extends EPackage
    * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getSignalDeclaration()
    * @generated
    */
-  int SIGNAL_DECLARATION = 7;
+  int SIGNAL_DECLARATION = 11;
 
   /**
    * The feature id for the '<em><b>Port</b></em>' attribute.
@@ -352,117 +527,6 @@ public interface FsmtestPackage extends EPackage
    */
   int SIGNAL_DECLARATION_FEATURE_COUNT = 4;
 
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.SourceDeclarationImpl <em>Source Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.SourceDeclarationImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getSourceDeclaration()
-   * @generated
-   */
-  int SOURCE_DECLARATION = 8;
-
-  /**
-   * The feature id for the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SOURCE_DECLARATION__REF = 0;
-
-  /**
-   * The number of structural features of the '<em>Source Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SOURCE_DECLARATION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.DestinationDeclarationImpl <em>Destination Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.DestinationDeclarationImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getDestinationDeclaration()
-   * @generated
-   */
-  int DESTINATION_DECLARATION = 9;
-
-  /**
-   * The feature id for the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESTINATION_DECLARATION__REF = 0;
-
-  /**
-   * The number of structural features of the '<em>Destination Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESTINATION_DECLARATION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl
-   * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTransitionDeclaration()
-   * @generated
-   */
-  int TRANSITION_DECLARATION = 10;
-
-  /**
-   * The feature id for the '<em><b>Source</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION__SOURCE = 0;
-
-  /**
-   * The feature id for the '<em><b>In</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION__IN = 1;
-
-  /**
-   * The feature id for the '<em><b>Out</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION__OUT = 2;
-
-  /**
-   * The feature id for the '<em><b>Destination</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION__DESTINATION = 3;
-
-  /**
-   * The number of structural features of the '<em>Transition Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION_FEATURE_COUNT = 4;
-
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.Model <em>Model</em>}'.
@@ -475,112 +539,272 @@ public interface FsmtestPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.Model#getTestscripts <em>Testscripts</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.Model#getFsmDefinitions <em>Fsm Definitions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Testscripts</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Model#getTestscripts()
+   * @return the meta object for the containment reference list '<em>Fsm Definitions</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.Model#getFsmDefinitions()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_Testscripts();
+  EReference getModel_FsmDefinitions();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.Testscript <em>Testscript</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.Model#getRandomTests <em>Random Tests</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Testscript</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript
+   * @return the meta object for the containment reference list '<em>Random Tests</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.Model#getRandomTests()
+   * @see #getModel()
    * @generated
    */
-  EClass getTestscript();
+  EReference getModel_RandomTests();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.FsmDefinition <em>Fsm Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fsm Definition</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.FsmDefinition
+   * @generated
+   */
+  EClass getFsmDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.FsmDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getName()
-   * @see #getTestscript()
+   * @see org.eclipse.etrice.generator.fsmtest.FsmDefinition#getName()
+   * @see #getFsmDefinition()
    * @generated
    */
-  EAttribute getTestscript_Name();
+  EAttribute getFsmDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getStateDeclaration <em>State Declaration</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.FsmDefinition#getStates <em>States</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getStateDeclaration()
-   * @see #getTestscript()
+   * @return the meta object for the containment reference list '<em>States</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.FsmDefinition#getStates()
+   * @see #getFsmDefinition()
    * @generated
    */
-  EReference getTestscript_StateDeclaration();
+  EReference getFsmDefinition_States();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getInitialDeclaration <em>Initial Declaration</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.RandomTest <em>Random Test</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Initial Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getInitialDeclaration()
-   * @see #getTestscript()
+   * @return the meta object for class '<em>Random Test</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest
    * @generated
    */
-  EReference getTestscript_InitialDeclaration();
+  EClass getRandomTest();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getLoopsDeclaration <em>Loops Declaration</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.RandomTest#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest#getName()
+   * @see #getRandomTest()
+   * @generated
+   */
+  EAttribute getRandomTest_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.generator.fsmtest.RandomTest#getFsm <em>Fsm</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Fsm</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest#getFsm()
+   * @see #getRandomTest()
+   * @generated
+   */
+  EReference getRandomTest_Fsm();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.RandomTest#getLoopsDeclaration <em>Loops Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Loops Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getLoopsDeclaration()
-   * @see #getTestscript()
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest#getLoopsDeclaration()
+   * @see #getRandomTest()
    * @generated
    */
-  EReference getTestscript_LoopsDeclaration();
+  EReference getRandomTest_LoopsDeclaration();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getSeedDeclaration <em>Seed Declaration</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.RandomTest#getSeedDeclaration <em>Seed Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Seed Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getSeedDeclaration()
-   * @see #getTestscript()
+   * @see org.eclipse.etrice.generator.fsmtest.RandomTest#getSeedDeclaration()
+   * @see #getRandomTest()
    * @generated
    */
-  EReference getTestscript_SeedDeclaration();
+  EReference getRandomTest_SeedDeclaration();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.Testscript#getTransitionDeclarations <em>Transition Declarations</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.GuardDeclaration <em>Guard Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Transition Declarations</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.Testscript#getTransitionDeclarations()
-   * @see #getTestscript()
+   * @return the meta object for class '<em>Guard Declaration</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.GuardDeclaration
    * @generated
    */
-  EReference getTestscript_TransitionDeclarations();
+  EClass getGuardDeclaration();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.State <em>State</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.GuardDeclaration#getSignal <em>Signal</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.State
+   * @return the meta object for the containment reference '<em>Signal</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.GuardDeclaration#getSignal()
+   * @see #getGuardDeclaration()
    * @generated
    */
-  EClass getState();
+  EReference getGuardDeclaration_Signal();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.State#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration <em>Transition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition Declaration</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration
+   * @generated
+   */
+  EClass getTransitionDeclaration();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.State#getName()
-   * @see #getState()
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getName()
+   * @see #getTransitionDeclaration()
    * @generated
    */
-  EAttribute getState_Name();
+  EAttribute getTransitionDeclaration_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getDestination <em>Destination</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Destination</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getDestination()
+   * @see #getTransitionDeclaration()
+   * @generated
+   */
+  EReference getTransitionDeclaration_Destination();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getTrigger <em>Trigger</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Trigger</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getTrigger()
+   * @see #getTransitionDeclaration()
+   * @generated
+   */
+  EReference getTransitionDeclaration_Trigger();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getTriggers <em>Triggers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Triggers</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getTriggers()
+   * @see #getTransitionDeclaration()
+   * @generated
+   */
+  EReference getTransitionDeclaration_Triggers();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getPrecondition <em>Precondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Precondition</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getPrecondition()
+   * @see #getTransitionDeclaration()
+   * @generated
+   */
+  EReference getTransitionDeclaration_Precondition();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getPostcondition <em>Postcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Postcondition</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getPostcondition()
+   * @see #getTransitionDeclaration()
+   * @generated
+   */
+  EReference getTransitionDeclaration_Postcondition();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.ConditionDeclaration <em>Condition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Condition Declaration</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.ConditionDeclaration
+   * @generated
+   */
+  EClass getConditionDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.ConditionDeclaration#getSignal <em>Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Signal</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.ConditionDeclaration#getSignal()
+   * @see #getConditionDeclaration()
+   * @generated
+   */
+  EReference getConditionDeclaration_Signal();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration <em>Precondition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Precondition Declaration</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration
+   * @generated
+   */
+  EClass getPreconditionDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration#getSignal <em>Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Signal</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration#getSignal()
+   * @see #getPreconditionDeclaration()
+   * @generated
+   */
+  EReference getPreconditionDeclaration_Signal();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration <em>Postcondition Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Postcondition Declaration</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration
+   * @generated
+   */
+  EClass getPostconditionDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration#getSignal <em>Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Signal</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration#getSignal()
+   * @see #getPostconditionDeclaration()
+   * @generated
+   */
+  EReference getPostconditionDeclaration_Signal();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.StateDeclaration <em>State Declaration</em>}'.
@@ -593,36 +817,37 @@ public interface FsmtestPackage extends EPackage
   EClass getStateDeclaration();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.StateDeclaration#getStates <em>States</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.generator.fsmtest.StateDeclaration#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>States</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.StateDeclaration#getStates()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.StateDeclaration#getName()
    * @see #getStateDeclaration()
    * @generated
    */
-  EReference getStateDeclaration_States();
+  EAttribute getStateDeclaration_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.InitialDeclaration <em>Initial Declaration</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.StateDeclaration#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Initial Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.InitialDeclaration
+   * @return the meta object for the containment reference list '<em>Condition</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.StateDeclaration#getCondition()
+   * @see #getStateDeclaration()
    * @generated
    */
-  EClass getInitialDeclaration();
+  EReference getStateDeclaration_Condition();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.generator.fsmtest.InitialDeclaration#getInitial <em>Initial</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.StateDeclaration#getTransitions <em>Transitions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Initial</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.InitialDeclaration#getInitial()
-   * @see #getInitialDeclaration()
+   * @return the meta object for the containment reference list '<em>Transitions</em>'.
+   * @see org.eclipse.etrice.generator.fsmtest.StateDeclaration#getTransitions()
+   * @see #getStateDeclaration()
    * @generated
    */
-  EReference getInitialDeclaration_Initial();
+  EReference getStateDeclaration_Transitions();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.LoopsDeclaration <em>Loops Declaration</em>}'.
@@ -721,102 +946,6 @@ public interface FsmtestPackage extends EPackage
   EAttribute getSignalDeclaration_StrVal();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.SourceDeclaration <em>Source Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Source Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.SourceDeclaration
-   * @generated
-   */
-  EClass getSourceDeclaration();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.generator.fsmtest.SourceDeclaration#getRef <em>Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.SourceDeclaration#getRef()
-   * @see #getSourceDeclaration()
-   * @generated
-   */
-  EReference getSourceDeclaration_Ref();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.DestinationDeclaration <em>Destination Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Destination Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.DestinationDeclaration
-   * @generated
-   */
-  EClass getDestinationDeclaration();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.generator.fsmtest.DestinationDeclaration#getRef <em>Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.DestinationDeclaration#getRef()
-   * @see #getDestinationDeclaration()
-   * @generated
-   */
-  EReference getDestinationDeclaration_Ref();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration <em>Transition Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Declaration</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration
-   * @generated
-   */
-  EClass getTransitionDeclaration();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getSource <em>Source</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Source</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getSource()
-   * @see #getTransitionDeclaration()
-   * @generated
-   */
-  EReference getTransitionDeclaration_Source();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getIn <em>In</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>In</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getIn()
-   * @see #getTransitionDeclaration()
-   * @generated
-   */
-  EReference getTransitionDeclaration_In();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getOut <em>Out</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Out</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getOut()
-   * @see #getTransitionDeclaration()
-   * @generated
-   */
-  EReference getTransitionDeclaration_Out();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getDestination <em>Destination</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Destination</em>'.
-   * @see org.eclipse.etrice.generator.fsmtest.TransitionDeclaration#getDestination()
-   * @see #getTransitionDeclaration()
-   * @generated
-   */
-  EReference getTransitionDeclaration_Destination();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -850,22 +979,30 @@ public interface FsmtestPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Testscripts</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Fsm Definitions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__TESTSCRIPTS = eINSTANCE.getModel_Testscripts();
+    EReference MODEL__FSM_DEFINITIONS = eINSTANCE.getModel_FsmDefinitions();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TestscriptImpl <em>Testscript</em>}' class.
+     * The meta object literal for the '<em><b>Random Tests</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.TestscriptImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTestscript()
      * @generated
      */
-    EClass TESTSCRIPT = eINSTANCE.getTestscript();
+    EReference MODEL__RANDOM_TESTS = eINSTANCE.getModel_RandomTests();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.FsmDefinitionImpl <em>Fsm Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmDefinitionImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getFsmDefinition()
+     * @generated
+     */
+    EClass FSM_DEFINITION = eINSTANCE.getFsmDefinition();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -873,23 +1010,41 @@ public interface FsmtestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TESTSCRIPT__NAME = eINSTANCE.getTestscript_Name();
+    EAttribute FSM_DEFINITION__NAME = eINSTANCE.getFsmDefinition_Name();
 
     /**
-     * The meta object literal for the '<em><b>State Declaration</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TESTSCRIPT__STATE_DECLARATION = eINSTANCE.getTestscript_StateDeclaration();
+    EReference FSM_DEFINITION__STATES = eINSTANCE.getFsmDefinition_States();
 
     /**
-     * The meta object literal for the '<em><b>Initial Declaration</b></em>' containment reference feature.
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.RandomTestImpl <em>Random Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.RandomTestImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getRandomTest()
+     * @generated
+     */
+    EClass RANDOM_TEST = eINSTANCE.getRandomTest();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TESTSCRIPT__INITIAL_DECLARATION = eINSTANCE.getTestscript_InitialDeclaration();
+    EAttribute RANDOM_TEST__NAME = eINSTANCE.getRandomTest_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Fsm</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RANDOM_TEST__FSM = eINSTANCE.getRandomTest_Fsm();
 
     /**
      * The meta object literal for the '<em><b>Loops Declaration</b></em>' containment reference feature.
@@ -897,7 +1052,7 @@ public interface FsmtestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TESTSCRIPT__LOOPS_DECLARATION = eINSTANCE.getTestscript_LoopsDeclaration();
+    EReference RANDOM_TEST__LOOPS_DECLARATION = eINSTANCE.getRandomTest_LoopsDeclaration();
 
     /**
      * The meta object literal for the '<em><b>Seed Declaration</b></em>' containment reference feature.
@@ -905,25 +1060,35 @@ public interface FsmtestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TESTSCRIPT__SEED_DECLARATION = eINSTANCE.getTestscript_SeedDeclaration();
+    EReference RANDOM_TEST__SEED_DECLARATION = eINSTANCE.getRandomTest_SeedDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>Transition Declarations</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.GuardDeclarationImpl <em>Guard Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.GuardDeclarationImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getGuardDeclaration()
+     * @generated
+     */
+    EClass GUARD_DECLARATION = eINSTANCE.getGuardDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Signal</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TESTSCRIPT__TRANSITION_DECLARATIONS = eINSTANCE.getTestscript_TransitionDeclarations();
+    EReference GUARD_DECLARATION__SIGNAL = eINSTANCE.getGuardDeclaration_Signal();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.StateImpl <em>State</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.StateImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getState()
+     * @see org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTransitionDeclaration()
      * @generated
      */
-    EClass STATE = eINSTANCE.getState();
+    EClass TRANSITION_DECLARATION = eINSTANCE.getTransitionDeclaration();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -931,7 +1096,101 @@ public interface FsmtestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute STATE__NAME = eINSTANCE.getState_Name();
+    EAttribute TRANSITION_DECLARATION__NAME = eINSTANCE.getTransitionDeclaration_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DECLARATION__DESTINATION = eINSTANCE.getTransitionDeclaration_Destination();
+
+    /**
+     * The meta object literal for the '<em><b>Trigger</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DECLARATION__TRIGGER = eINSTANCE.getTransitionDeclaration_Trigger();
+
+    /**
+     * The meta object literal for the '<em><b>Triggers</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DECLARATION__TRIGGERS = eINSTANCE.getTransitionDeclaration_Triggers();
+
+    /**
+     * The meta object literal for the '<em><b>Precondition</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DECLARATION__PRECONDITION = eINSTANCE.getTransitionDeclaration_Precondition();
+
+    /**
+     * The meta object literal for the '<em><b>Postcondition</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DECLARATION__POSTCONDITION = eINSTANCE.getTransitionDeclaration_Postcondition();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.ConditionDeclarationImpl <em>Condition Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.ConditionDeclarationImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getConditionDeclaration()
+     * @generated
+     */
+    EClass CONDITION_DECLARATION = eINSTANCE.getConditionDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Signal</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITION_DECLARATION__SIGNAL = eINSTANCE.getConditionDeclaration_Signal();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.PreconditionDeclarationImpl <em>Precondition Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.PreconditionDeclarationImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getPreconditionDeclaration()
+     * @generated
+     */
+    EClass PRECONDITION_DECLARATION = eINSTANCE.getPreconditionDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Signal</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PRECONDITION_DECLARATION__SIGNAL = eINSTANCE.getPreconditionDeclaration_Signal();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.PostconditionDeclarationImpl <em>Postcondition Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.generator.fsmtest.impl.PostconditionDeclarationImpl
+     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getPostconditionDeclaration()
+     * @generated
+     */
+    EClass POSTCONDITION_DECLARATION = eINSTANCE.getPostconditionDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Signal</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference POSTCONDITION_DECLARATION__SIGNAL = eINSTANCE.getPostconditionDeclaration_Signal();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
@@ -944,30 +1203,28 @@ public interface FsmtestPackage extends EPackage
     EClass STATE_DECLARATION = eINSTANCE.getStateDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STATE_DECLARATION__STATES = eINSTANCE.getStateDeclaration_States();
+    EAttribute STATE_DECLARATION__NAME = eINSTANCE.getStateDeclaration_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.InitialDeclarationImpl <em>Initial Declaration</em>}' class.
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.InitialDeclarationImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getInitialDeclaration()
      * @generated
      */
-    EClass INITIAL_DECLARATION = eINSTANCE.getInitialDeclaration();
+    EReference STATE_DECLARATION__CONDITION = eINSTANCE.getStateDeclaration_Condition();
 
     /**
-     * The meta object literal for the '<em><b>Initial</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference INITIAL_DECLARATION__INITIAL = eINSTANCE.getInitialDeclaration_Initial();
+    EReference STATE_DECLARATION__TRANSITIONS = eINSTANCE.getStateDeclaration_Transitions();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.LoopsDeclarationImpl <em>Loops Declaration</em>}' class.
@@ -1046,84 +1303,6 @@ public interface FsmtestPackage extends EPackage
      * @generated
      */
     EAttribute SIGNAL_DECLARATION__STR_VAL = eINSTANCE.getSignalDeclaration_StrVal();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.SourceDeclarationImpl <em>Source Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.SourceDeclarationImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getSourceDeclaration()
-     * @generated
-     */
-    EClass SOURCE_DECLARATION = eINSTANCE.getSourceDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SOURCE_DECLARATION__REF = eINSTANCE.getSourceDeclaration_Ref();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.DestinationDeclarationImpl <em>Destination Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.DestinationDeclarationImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getDestinationDeclaration()
-     * @generated
-     */
-    EClass DESTINATION_DECLARATION = eINSTANCE.getDestinationDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DESTINATION_DECLARATION__REF = eINSTANCE.getDestinationDeclaration_Ref();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl
-     * @see org.eclipse.etrice.generator.fsmtest.impl.FsmtestPackageImpl#getTransitionDeclaration()
-     * @generated
-     */
-    EClass TRANSITION_DECLARATION = eINSTANCE.getTransitionDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DECLARATION__SOURCE = eINSTANCE.getTransitionDeclaration_Source();
-
-    /**
-     * The meta object literal for the '<em><b>In</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DECLARATION__IN = eINSTANCE.getTransitionDeclaration_In();
-
-    /**
-     * The meta object literal for the '<em><b>Out</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DECLARATION__OUT = eINSTANCE.getTransitionDeclaration_Out();
-
-    /**
-     * The meta object literal for the '<em><b>Destination</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DECLARATION__DESTINATION = eINSTANCE.getTransitionDeclaration_Destination();
 
   }
 

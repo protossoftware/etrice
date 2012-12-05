@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
@@ -346,6 +347,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return s.getName();
 	}
 
+	String text(ActorInstanceMapping aim) {
+		StringBuilder path = new StringBuilder();
+		for (String seg : aim.getPath().getRefs()) {
+			path.append("/"+seg);
+		}
+		return path+" -> "+aim.getThread().getName();
+	}
+	
 	private Styler getKeywordStyler() {
 		if (keywordStyler==null) {
 			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);

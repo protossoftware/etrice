@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.generator.fsmtest.DestinationDeclaration;
 import org.eclipse.etrice.generator.fsmtest.FsmtestPackage;
+import org.eclipse.etrice.generator.fsmtest.GuardDeclaration;
+import org.eclipse.etrice.generator.fsmtest.PostconditionDeclaration;
+import org.eclipse.etrice.generator.fsmtest.PreconditionDeclaration;
 import org.eclipse.etrice.generator.fsmtest.SignalDeclaration;
-import org.eclipse.etrice.generator.fsmtest.SourceDeclaration;
+import org.eclipse.etrice.generator.fsmtest.StateDeclaration;
 import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
 
 /**
@@ -31,10 +33,12 @@ import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getIn <em>In</em>}</li>
- *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getOut <em>Out</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getTriggers <em>Triggers</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.generator.fsmtest.impl.TransitionDeclarationImpl#getPostcondition <em>Postcondition</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,44 +47,74 @@ import org.eclipse.etrice.generator.fsmtest.TransitionDeclaration;
 public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container implements TransitionDeclaration
 {
   /**
-   * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSource()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected SourceDeclaration source;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getIn() <em>In</em>}' containment reference list.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIn()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<SignalDeclaration> in;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getOut() <em>Out</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOut()
-   * @generated
-   * @ordered
-   */
-  protected EList<SignalDeclaration> out;
-
-  /**
-   * The cached value of the '{@link #getDestination() <em>Destination</em>}' containment reference.
+   * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getDestination()
    * @generated
    * @ordered
    */
-  protected DestinationDeclaration destination;
+  protected StateDeclaration destination;
+
+  /**
+   * The cached value of the '{@link #getTrigger() <em>Trigger</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTrigger()
+   * @generated
+   * @ordered
+   */
+  protected SignalDeclaration trigger;
+
+  /**
+   * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTriggers()
+   * @generated
+   * @ordered
+   */
+  protected EList<GuardDeclaration> triggers;
+
+  /**
+   * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPrecondition()
+   * @generated
+   * @ordered
+   */
+  protected EList<PreconditionDeclaration> precondition;
+
+  /**
+   * The cached value of the '{@link #getPostcondition() <em>Postcondition</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPostcondition()
+   * @generated
+   * @ordered
+   */
+  protected EList<PostconditionDeclaration> postcondition;
 
   /**
    * <!-- begin-user-doc -->
@@ -108,9 +142,9 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public SourceDeclaration getSource()
+  public String getName()
   {
-    return source;
+    return name;
   }
 
   /**
@@ -118,16 +152,12 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSource(SourceDeclaration newSource, NotificationChain msgs)
+  public void setName(String newName)
   {
-    SourceDeclaration oldSource = source;
-    source = newSource;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__SOURCE, oldSource, newSource);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -135,20 +165,19 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSource(SourceDeclaration newSource)
+  public StateDeclaration getDestination()
   {
-    if (newSource != source)
+    if (destination != null && destination.eIsProxy())
     {
-      NotificationChain msgs = null;
-      if (source != null)
-        msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__SOURCE, null, msgs);
-      if (newSource != null)
-        msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__SOURCE, null, msgs);
-      msgs = basicSetSource(newSource, msgs);
-      if (msgs != null) msgs.dispatch();
+      InternalEObject oldDestination = (InternalEObject)destination;
+      destination = (StateDeclaration)eResolveProxy(oldDestination);
+      if (destination != oldDestination)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, oldDestination, destination));
+      }
     }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__SOURCE, newSource, newSource));
+    return destination;
   }
 
   /**
@@ -156,35 +185,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SignalDeclaration> getIn()
-  {
-    if (in == null)
-    {
-      in = new EObjectContainmentEList<SignalDeclaration>(SignalDeclaration.class, this, FsmtestPackage.TRANSITION_DECLARATION__IN);
-    }
-    return in;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<SignalDeclaration> getOut()
-  {
-    if (out == null)
-    {
-      out = new EObjectContainmentEList<SignalDeclaration>(SignalDeclaration.class, this, FsmtestPackage.TRANSITION_DECLARATION__OUT);
-    }
-    return out;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestinationDeclaration getDestination()
+  public StateDeclaration basicGetDestination()
   {
     return destination;
   }
@@ -194,13 +195,36 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDestination(DestinationDeclaration newDestination, NotificationChain msgs)
+  public void setDestination(StateDeclaration newDestination)
   {
-    DestinationDeclaration oldDestination = destination;
+    StateDeclaration oldDestination = destination;
     destination = newDestination;
     if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, oldDestination, destination));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SignalDeclaration getTrigger()
+  {
+    return trigger;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTrigger(SignalDeclaration newTrigger, NotificationChain msgs)
+  {
+    SignalDeclaration oldTrigger = trigger;
+    trigger = newTrigger;
+    if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, oldDestination, newDestination);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__TRIGGER, oldTrigger, newTrigger);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -211,20 +235,62 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDestination(DestinationDeclaration newDestination)
+  public void setTrigger(SignalDeclaration newTrigger)
   {
-    if (newDestination != destination)
+    if (newTrigger != trigger)
     {
       NotificationChain msgs = null;
-      if (destination != null)
-        msgs = ((InternalEObject)destination).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, null, msgs);
-      if (newDestination != null)
-        msgs = ((InternalEObject)newDestination).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, null, msgs);
-      msgs = basicSetDestination(newDestination, msgs);
+      if (trigger != null)
+        msgs = ((InternalEObject)trigger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__TRIGGER, null, msgs);
+      if (newTrigger != null)
+        msgs = ((InternalEObject)newTrigger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FsmtestPackage.TRANSITION_DECLARATION__TRIGGER, null, msgs);
+      msgs = basicSetTrigger(newTrigger, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__DESTINATION, newDestination, newDestination));
+      eNotify(new ENotificationImpl(this, Notification.SET, FsmtestPackage.TRANSITION_DECLARATION__TRIGGER, newTrigger, newTrigger));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<GuardDeclaration> getTriggers()
+  {
+    if (triggers == null)
+    {
+      triggers = new EObjectContainmentEList<GuardDeclaration>(GuardDeclaration.class, this, FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS);
+    }
+    return triggers;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<PreconditionDeclaration> getPrecondition()
+  {
+    if (precondition == null)
+    {
+      precondition = new EObjectContainmentEList<PreconditionDeclaration>(PreconditionDeclaration.class, this, FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION);
+    }
+    return precondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<PostconditionDeclaration> getPostcondition()
+  {
+    if (postcondition == null)
+    {
+      postcondition = new EObjectContainmentEList<PostconditionDeclaration>(PostconditionDeclaration.class, this, FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION);
+    }
+    return postcondition;
   }
 
   /**
@@ -237,14 +303,14 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case FsmtestPackage.TRANSITION_DECLARATION__SOURCE:
-        return basicSetSource(null, msgs);
-      case FsmtestPackage.TRANSITION_DECLARATION__IN:
-        return ((InternalEList<?>)getIn()).basicRemove(otherEnd, msgs);
-      case FsmtestPackage.TRANSITION_DECLARATION__OUT:
-        return ((InternalEList<?>)getOut()).basicRemove(otherEnd, msgs);
-      case FsmtestPackage.TRANSITION_DECLARATION__DESTINATION:
-        return basicSetDestination(null, msgs);
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGER:
+        return basicSetTrigger(null, msgs);
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS:
+        return ((InternalEList<?>)getTriggers()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION:
+        return ((InternalEList<?>)getPrecondition()).basicRemove(otherEnd, msgs);
+      case FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION:
+        return ((InternalEList<?>)getPostcondition()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -259,14 +325,19 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case FsmtestPackage.TRANSITION_DECLARATION__SOURCE:
-        return getSource();
-      case FsmtestPackage.TRANSITION_DECLARATION__IN:
-        return getIn();
-      case FsmtestPackage.TRANSITION_DECLARATION__OUT:
-        return getOut();
+      case FsmtestPackage.TRANSITION_DECLARATION__NAME:
+        return getName();
       case FsmtestPackage.TRANSITION_DECLARATION__DESTINATION:
-        return getDestination();
+        if (resolve) return getDestination();
+        return basicGetDestination();
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGER:
+        return getTrigger();
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS:
+        return getTriggers();
+      case FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION:
+        return getPrecondition();
+      case FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION:
+        return getPostcondition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -282,19 +353,26 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case FsmtestPackage.TRANSITION_DECLARATION__SOURCE:
-        setSource((SourceDeclaration)newValue);
-        return;
-      case FsmtestPackage.TRANSITION_DECLARATION__IN:
-        getIn().clear();
-        getIn().addAll((Collection<? extends SignalDeclaration>)newValue);
-        return;
-      case FsmtestPackage.TRANSITION_DECLARATION__OUT:
-        getOut().clear();
-        getOut().addAll((Collection<? extends SignalDeclaration>)newValue);
+      case FsmtestPackage.TRANSITION_DECLARATION__NAME:
+        setName((String)newValue);
         return;
       case FsmtestPackage.TRANSITION_DECLARATION__DESTINATION:
-        setDestination((DestinationDeclaration)newValue);
+        setDestination((StateDeclaration)newValue);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGER:
+        setTrigger((SignalDeclaration)newValue);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS:
+        getTriggers().clear();
+        getTriggers().addAll((Collection<? extends GuardDeclaration>)newValue);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION:
+        getPrecondition().clear();
+        getPrecondition().addAll((Collection<? extends PreconditionDeclaration>)newValue);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION:
+        getPostcondition().clear();
+        getPostcondition().addAll((Collection<? extends PostconditionDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -310,17 +388,23 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case FsmtestPackage.TRANSITION_DECLARATION__SOURCE:
-        setSource((SourceDeclaration)null);
-        return;
-      case FsmtestPackage.TRANSITION_DECLARATION__IN:
-        getIn().clear();
-        return;
-      case FsmtestPackage.TRANSITION_DECLARATION__OUT:
-        getOut().clear();
+      case FsmtestPackage.TRANSITION_DECLARATION__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case FsmtestPackage.TRANSITION_DECLARATION__DESTINATION:
-        setDestination((DestinationDeclaration)null);
+        setDestination((StateDeclaration)null);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGER:
+        setTrigger((SignalDeclaration)null);
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS:
+        getTriggers().clear();
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION:
+        getPrecondition().clear();
+        return;
+      case FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION:
+        getPostcondition().clear();
         return;
     }
     super.eUnset(featureID);
@@ -336,16 +420,37 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case FsmtestPackage.TRANSITION_DECLARATION__SOURCE:
-        return source != null;
-      case FsmtestPackage.TRANSITION_DECLARATION__IN:
-        return in != null && !in.isEmpty();
-      case FsmtestPackage.TRANSITION_DECLARATION__OUT:
-        return out != null && !out.isEmpty();
+      case FsmtestPackage.TRANSITION_DECLARATION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FsmtestPackage.TRANSITION_DECLARATION__DESTINATION:
         return destination != null;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGER:
+        return trigger != null;
+      case FsmtestPackage.TRANSITION_DECLARATION__TRIGGERS:
+        return triggers != null && !triggers.isEmpty();
+      case FsmtestPackage.TRANSITION_DECLARATION__PRECONDITION:
+        return precondition != null && !precondition.isEmpty();
+      case FsmtestPackage.TRANSITION_DECLARATION__POSTCONDITION:
+        return postcondition != null && !postcondition.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //TransitionDeclarationImpl

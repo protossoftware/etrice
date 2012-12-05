@@ -256,6 +256,38 @@
 </dt>
 </dl>
 </dd>
+<dt>
+<span class="chapter"><a href="#eTriceModelsandTheirRelations">13. eTrice Models and Their Relations</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#TheROOMModel">The ROOM Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#TheConfigModel">The Config Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#ThePhysicalModel">The Physical Model</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#TheMappingModel">The Mapping Model</a></span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter"><a href="#eTriceDevelopersReference">14. eTrice Developer&rsquo;s Reference</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#Architecture">Architecture</a></span>
+</dt>
+<dt>
+<span class="section"><a href="#ComponentOverview">Component Overview</a></span>
+</dt>
+</dl>
+</dd>
 </dl>
 </div>
  
@@ -3009,7 +3041,8 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 			
 </p>
-<p>A new configuration should be created. Name it _gen_HelloWorldC_ and add the model via one of the 
+<p>A new configuration should be created. Name it 
+				<span class="emphasis"><em>gen_HelloWorldC</em></span> and add the model via one of the 
 				<span class="emphasis"><em>add</em></span> buttons.
 			</p>
 <p>
@@ -3066,7 +3099,9 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<p>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.</p>
+<p>Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as 
+				<span class="emphasis"><em>gen_HelloWorldC</em></span>.
+			</p>
 <p>
 				
 </p>
@@ -3482,7 +3517,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BD1">
+<table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10BD7">
 <tr>
 							
 <td align="center">
@@ -3565,7 +3600,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <span class="bold"><strong>Bindings</strong></span> connect Ports inside an ActorClass.
 					</p>
 <p>Example:</p>
-<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C56">
+<table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10C5C">
 <tr>
 								
 <td align="center">
@@ -3847,7 +3882,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </li>
 </ul>
 </div>
-<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D5D">
+<table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10D63">
 <tr>
 								
 <td align="center">
@@ -4045,7 +4080,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined in the ActorClass, no textual notation for the Reference Ports exists.</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10E95">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10E9B">
 <tr>
 								
 <td align="center">
@@ -4202,7 +4237,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 </div>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F58">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N10F5E">
 <tr>
 							
 <td align="center">
@@ -4333,7 +4368,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 </div>
 <p>The simpler flat finite state machines are composed of the following elements:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N11008">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N1100E">
 <tr>
 								
 <td align="center">
@@ -4447,7 +4482,7 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 </div>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 						A few modeling elements are added to the set listed above:</p>
-<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110C7">
+<table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0" id="N110CD">
 <tr>
 								
 <td align="center">
@@ -4581,6 +4616,908 @@ carLights.setState(TrafficLight3.OFF);&nbsp;<br>
 <p>
 					
 </p>
+</div>
+</div>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;13.&nbsp;eTrice Models and Their Relations">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="eTriceModelsandTheirRelations"></a>Chapter&nbsp;13.&nbsp;eTrice Models and Their Relations</h2>
+</div>
+</div>
+</div>
+<p>eTrice comprises several models:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the ROOM model (*.room) &mdash; defines model classes and the logical structure of the model</p>
+</li>
+<li class="listitem">
+<p>Config model (*.config) &mdash; defines configuration values for attributes</p>
+</li>
+<li class="listitem">
+<p>Physical model (*.etphys) &mdash; defines the structure and properties of the physical system</p>
+</li>
+<li class="listitem">
+<p>Mapping model (*.etmap) &mdash; defines a mapping from logical elements to physical elements</p>
+</li>
+</ul>
+</div>
+<p>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</p>
+<p>
+			
+</p>
+<div class="mediaobject">
+<img src="images/080-models.jpg"></div>
+<p>
+		
+</p>
+<p>In the following sections we will describe those models with emphasis of their cross relations.</p>
+<div class="section" title="The ROOM Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheROOMModel"></a>The ROOM Model</h2>
+</div>
+</div>
+</div>
+<p>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
+				Thereby the three latter form a hierarchy. The 
+				<code class="code">LogicalSystem</code> is the top level element of the structure. It contains references to 
+				<code class="code">SubSystemClass</code> elements. The 
+				<code class="code">SubSystemClass</code> in turn contain references to 
+				<code class="code">ActorClass</code> elements which again contain (recursively) references to 
+				<code class="code">ActorClass</code> elements. The complete structural hierarchy implies a tree which has the 
+				<code class="code">LogicalSystem</code> as root and where each reference stands for a new node with possibly further branches.
+			</p>
+<p>Let&rsquo;s consider a simple example. It doesn&rsquo;t implement any meaningful and completely omits behavioral and other aspects.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-room.jpg"></div>
+<p>
+			
+</p>
+<p>When a 
+				<code class="code">LogicalSstem</code> is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-instances.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Config Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheConfigModel"></a>The Config Model</h2>
+</div>
+</div>
+</div>
+<p>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-config.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Physical Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="ThePhysicalModel"></a>The Physical Model</h2>
+</div>
+</div>
+</div>
+<p>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only defines the overall execution model of the platform.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-runtimes.jpg"></div>
+<p>
+			
+</p>
+<p>The physical system is composed of 
+				<code class="code">Node</code> references where each 
+				<code class="code">Node</code> is defined as a class referencing a 
+				<code class="code">RuntimeClass</code> and defining 
+				<code class="code">Threads</code>.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-phys.jpg"></div>
+<p>
+			
+</p>
+</div>
+<div class="section" title="The Mapping Model">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="TheMappingModel"></a>The Mapping Model</h2>
+</div>
+</div>
+</div>
+<p>The last model finally combines all this information by mapping logical to physical entities.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/080-map.jpg"></div>
+<p>
+			
+</p>
+<p>The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ 
+				<span class="emphasis"><em>node</em></span> : 
+				<span class="emphasis"><em>thread</em></span>).
+			</p>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;14.&nbsp;eTrice Developer&rsquo;s Reference">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="eTriceDevelopersReference"></a>Chapter&nbsp;14.&nbsp;eTrice Developer&rsquo;s Reference</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Architecture">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Architecture"></a>Architecture</h2>
+</div>
+</div>
+</div>
+<p>The basic components of eTrice are depicted in the following diagram.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/200-components.jpg"></div>
+<p>
+			
+</p>
+<p>Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.</p>
+<div class="section" title="Editor and Generator Components">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EditorandGeneratorComponents"></a>Editor and Generator Components</h3>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>core</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>core.coom is an Xtext based language called Room. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.core.room</em></span>. Room is the basic modeling language of eTrice.
+								</p>
+</li>
+<li class="listitem">
+<p>core.config is an Xtext based language called Config. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.core.config</em></span>. Config is a language designed for the data configuration of model elements. E.g. class and instance attributes can be specified.
+								</p>
+</li>
+<li class="listitem">
+<p>core.genmodel is an EMF based aggregation layer for Room models. It consists of the plugin 
+									<span class="emphasis"><em>org.eclipse.etrice.core.genmodel</em></span>. a Room model can be transformed into a genmodel which allows easy access to implicit relations of the Room model.
+								</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>ui</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>textual</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="square">
+<li class="listitem">
+<p>room.ui is the ui counterpart of core.room.  It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.core.room.ui</em></span>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Room language.
+										</p>
+</li>
+<li class="listitem">
+<p>config.ui is the ui counterpart of core.config.  It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.core.config.ui</em></span>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Config language.
+										</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>graphical</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="square">
+<li class="listitem">
+<p>ui.common is a set of common code for the two diagram editors. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.common</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.commands encapsulates some commands related to the navigation between eTrice editors. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.commands</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.structure</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.behavior is the Graphiti based editor for the Actor behavior. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.behavior</em></span>.
+										</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>generators</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>generator is a set of general classes and language independent parts of all generators. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.c is the generator for the ANSI-C target language. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.c</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.java is the generator for the Java target language. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.java</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.doc is the generator for the model documentation. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.doc</em></span>.
+								</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Runtimes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Runtimes"></a>Runtimes</h3>
+</div>
+</div>
+</div>
+<p>Currently eTrice ships with a C and a Java runtime. The runtimes are libraries written in the target language against which the generated code is compiled.</p>
+</div>
+<div class="section" title="Unit Tests">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="UnitTests"></a>Unit Tests</h3>
+</div>
+</div>
+</div>
+<p>Most plug-ins and other parts of the code have related unit tests.</p>
+</div>
+</div>
+<div class="section" title="Component Overview">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="ComponentOverview"></a>Component Overview</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Room Language Overview">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="RoomLanguageOverview"></a>Room Language Overview</h3>
+</div>
+</div>
+</div>
+<p>We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that are worth to be pointed out.</p>
+<div class="section" title="Model Tweaks">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ModelTweaks"></a>Model Tweaks</h4>
+</div>
+</div>
+</div>
+<p>The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at some places.
+						This is done in the 
+						<span class="emphasis"><em>/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext</em></span> which is written in the legacy Xtend language.
+					</p>
+<p>The following parts of the model are changed or added:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the default 
+								<code class="code">multiplicity</code> of the 
+								<code class="code">Port</code> is set to 1
+							</p>
+</li>
+<li class="listitem">
+<p>the operation 
+								<code class="code">isReplicated</code> is added to the 
+								<code class="code">Port</code>
+							
+</p>
+</li>
+<li class="listitem">
+<p>the default 
+								<code class="code">size</code> of the 
+								<code class="code">ActorRef</code> is set to 1
+							</p>
+</li>
+<li class="listitem">
+<p>an operation 
+								<code class="code">getName</code> is add to the 
+								<code class="code">State</code> class
+							</p>
+</li>
+<li class="listitem">
+<p>an operation 
+								<code class="code">getName</code> is add to the 
+								<code class="code">StateGraphItem</code> class
+							</p>
+</li>
+<li class="listitem">
+<p>an operation 
+								<code class="code">getGeneralProtocol</code> is added to the 
+								<code class="code">InterfaceItem</code>
+							
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Imports by URI Using Namespaces">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ImportsbyURIUsingNamespaces"></a>Imports by URI Using Namespaces</h4>
+</div>
+</div>
+</div>
+<p>The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in the Guice modules by binding</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">PlatformRelativeUriResolver</code> &mdash; this class tries to convert the import URI into a platform relative URI. It also replaces environment variables written in ${} with their respective values.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">ImportedNamespaceAwareLocalScopeProvider</code> &mdash; this is a standard scope provider which is aware of namespaces
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">GlobalNonPlatformURIEditorOpener</code> &mdash; this editor opener tries to convert general URIs into platform URIs because editors can only open platform URIs
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">ImportAwareHyperlinkHelper</code> &mdash; turns the URI part of an import into a navigatable hyper link
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Naming">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Naming"></a>Naming</h4>
+</div>
+</div>
+</div>
+<p>Two classes provide object names used for link resolution and for labels.
+						The 
+						<code class="code">RoomNameProvider</code> provides frequently used name strings, some of them are hierarchical like State paths.
+						The 
+						<code class="code">RoomFragmentProvider</code> serves a more formal purpose since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by Xtext.
+					</p>
+</div>
+<div class="section" title="Helpers">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Helpers"></a>Helpers</h4>
+</div>
+</div>
+</div>
+<p>The 
+						<code class="code">RoomHelpers</code> class provides a great deal of static methods that help retrieve frequently used information from the model.
+						Among many, many others
+					</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">getAllEndPorts(ActorClass)</code> - returns a list of all end ports of an actor class including inherited ones
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getInheritedActionCode(Transition, ActorClass)</code> - get the inherited part of a transition&rsquo;s action code
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getSignature(Operation)</code> - returns a string representing the operation signature suited for a label
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Validation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Validation"></a>Validation</h4>
+</div>
+</div>
+</div>
+<p>Validation is used from various places. Therefore all validation code is accumulated in the 
+						<code class="code">ValidationUtil</code> class. All methods are static and many of them return a Result object which contains information about the problem detected as well as object and feature as suited for most validation purposes.
+					</p>
+</div>
+</div>
+<div class="section" title="Config Language Overview">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ConfigLanguageOverview"></a>Config Language Overview</h3>
+</div>
+</div>
+</div>
+<div class="section" title="Model Tweaks">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ModelTweaks2"></a>Model Tweaks</h4>
+</div>
+</div>
+</div>
+<p>A couple of operations are added to the ConfigModel</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">getActorClassConfigs</code>
+							
+</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getActorInstanceConfigs</code>
+							
+</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getProtocolClassConfigs</code>
+							
+</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getSubSystemConfigs</code>
+							
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Imports by URI Using Namespaces">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ImportsbyURIUsingNamespaces2"></a>Imports by URI Using Namespaces</h4>
+</div>
+</div>
+</div>
+<p>Imports are treated similar than in the 
+						<a class="link" href="#ImportsbyURIUsingNamespaces" title="Imports by URI Using Namespaces">Room language</a>.
+					</p>
+</div>
+<div class="section" title="Util">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Util"></a>Util</h4>
+</div>
+</div>
+</div>
+<p>A set of static utility methods can be found in the 
+						<code class="code">ConfigUtil</code> class.
+					</p>
+</div>
+</div>
+<div class="section" title="Aggregation Layer Overview">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="AggregationLayerOverview"></a>Aggregation Layer Overview</h3>
+</div>
+</div>
+</div>
+<p>The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information which is implicitly contained in the Room model but not simple to retrieve.
+					Examples of this are the state machine with inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of an end port (following bindings through relay ports).</p>
+<p>The Generator Model is created from a list of Room models by a call of the</p>
+<div class="literallayout">
+<p>
+<code class="code">createGeneratorModel(List&lt;RoomModel&gt;,&nbsp;boolean)<br>
+
+</code>
+</p>
+</div>
+<p>method of the 
+					<code class="code">GeneratorModelBuilder</code> class.
+				</p>
+<p>The 
+					<code class="code">Root</code> object of the resulting Generator Model provides chiefly two things:
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>a tree of instances starting at each 
+							<code class="code">SubSystem</code> with representations of each 
+							<code class="code">ActorInstance</code> and 
+							<code class="code">PortInstance</code>
+						
+</p>
+</li>
+<li class="listitem">
+<p>for each 
+							<code class="code">ActorClass</code> a corresponding 
+							<code class="code">ExpandedActorClass</code> with an explicit state machine containing all inherited state graph items
+						</p>
+</li>
+</ul>
+</div>
+<div class="section" title="The Instance Model">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TheInstanceModel"></a>The Instance Model</h4>
+</div>
+</div>
+</div>
+<p>The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to get a list of all peer port instances for each port instance without having to bother about port and actor replication.</p>
+</div>
+<div class="section" title="The Expanded Actor Class">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TheExpandedActorClass"></a>The Expanded Actor Class</h4>
+</div>
+</div>
+</div>
+<p>The expanded actor class contains, as already mentioned, the complete state machine of the actor class. This considerably simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of an actor. I.e. no target language inheritance is used to implement the state machine inheritance.
+						Furthermore the 
+						<code class="code">ExpandedActorClass</code> gives access to
+					</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">getIncomingTransitions(StateGraphNode)</code> &mdash; the set of incoming transition of a 
+								<code class="code">StateGraphNode</code> (
+								<code class="code">State</code>, 
+								<code class="code">ChoicePoint</code> or 
+								<code class="code">TransitionPoint</code>)
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getOutgoingTransitions(StateGraphNode)</code> &mdash; the set of outgoing transition of a 
+								<code class="code">StateGraphNode</code>
+							
+</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">getActiveTriggers(State)</code> &mdash; the triggers that are active in this 
+								<code class="code">State</code> in the order they are evaluated
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Transition Chains">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TransitionChains"></a>Transition Chains</h4>
+</div>
+</div>
+</div>
+<p>By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in choice points).
+						A 
+						<code class="code">TransitionChain</code> of a transition is retrieved by a call of 
+						<code class="code">getChain(Transition)</code> of the 
+						<code class="code">ExpandedActorClass</code>.
+						The 
+						<code class="code">TransitionChain</code> accepts an 
+						<code class="code">ITransitionChainVisitor</code> which is called along the chain to generate the action codes of involved transitions and the conditional statements arising from the involved choice points. 
+					</p>
+</div>
+</div>
+<div class="section" title="Generator Overview">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="GeneratorOverview"></a>Generator Overview</h3>
+</div>
+</div>
+</div>
+<p>There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific generators</p>
+<div class="section" title="Base Classes and Interfaces">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="BaseClassesandInterfaces"></a>Base Classes and Interfaces</h4>
+</div>
+</div>
+</div>
+<p>We just want to mention the most important classes and interfaces.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">ITranslationProvider</code> &mdash; this interface is used by the 
+								<code class="code">DetailCodeTranslator</code> for the language dependent translation of e.g. port.message() notation in detail code
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">AbstractGenerator</code> &mdash; concrete language generators should derive from this base class
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">DefaultTranslationProvider</code> &mdash; a stub implementation of 
+								<code class="code">ITranslationProvider</code> from which clients may derive
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">Indexed</code> &mdash; provides an indexed iterable of a given iterable
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">GeneratorBaseModule</code> &mdash; a Google Guice module that binds a couple of basic services. Concrete language generators should use a module that derives from this
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Generic Generator Parts">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="GenericGeneratorParts"></a>Generic Generator Parts</h4>
+</div>
+</div>
+</div>
+<p>The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by means of an 
+						<code class="code">ILanguageExtension</code>. This extension and other parts of the generator be configured using Google Guice dependency injection.
+					</p>
+<div class="section" title="GenericActorClassGenerator">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="GenericActorClassGenerator"></a>GenericActorClassGenerator</h5>
+</div>
+</div>
+</div>
+<p>The 
+							<code class="code">GenericActorClassGenerator</code> generates constants for the interface items of a actor. Those constants are used by the generated state machine.
+						</p>
+</div>
+<div class="section" title="GenericProtocolClassGenerator">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="GenericProtocolClassGenerator"></a>GenericProtocolClassGenerator</h5>
+</div>
+</div>
+</div>
+<p>The 
+							<code class="code">GenericProtocolClassGenerator</code> generates message ID constants for a protocol.
+						</p>
+</div>
+<div class="section" title="GenericStateMachineGenerator">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="GenericStateMachineGenerator"></a>GenericStateMachineGenerator</h5>
+</div>
+</div>
+</div>
+<p>The 
+							<code class="code">GenericStateMachineGenerator</code> generates the complete state machine implementation. The skeleton of the generated code is
+						</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>definition state ID constants</p>
+</li>
+<li class="listitem">
+<p>definition of transition chain constants</p>
+</li>
+<li class="listitem">
+<p>definition of trigger constants</p>
+</li>
+<li class="listitem">
+<p>entry, exit and action code methods</p>
+</li>
+<li class="listitem">
+<p>the 
+									<code class="code">exitTo</code> method 
+								</p>
+</li>
+<li class="listitem">
+<p>the 
+									<code class="code">executeTransitionChain</code> method
+								</p>
+</li>
+<li class="listitem">
+<p>the 
+									<code class="code">enterHistory</code> method
+								</p>
+</li>
+<li class="listitem">
+<p>the 
+									<code class="code">executeInitTransition</code> method
+								</p>
+</li>
+<li class="listitem">
+<p>the 
+									<code class="code">receiveEvent</code> method
+								</p>
+</li>
+</ul>
+</div>
+<p>The state machine works as follows. The main entry method is the 
+							<code class="code">receiveEvent</code> method. This is the case for both, data driven (polled) and event driven state machines. Then a number of nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a trigger fires then the 
+							<code class="code">exitTo</code> method is called to execute all exit codes involved. Then the transition chain action codes are executed and the choice point conditions are evaluated in the 
+							<code class="code">executeTransitionChain</code> method. Finally the history of the state where the chain ends is entered and all entry codes are executed by 
+							<code class="code">enterHistory</code>.
+						</p>
+</div>
+</div>
+<div class="section" title="The Java Generator">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TheJavaGenerator"></a>The Java Generator</h4>
+</div>
+</div>
+</div>
+<p>The Java generator employs the generic parts of the generator. The 
+						<code class="code">JavaTranslationProvider</code> is very simple and only handles the case of sending a message from a distinct replicated port: 
+						<code class="code">replPort[2].message()</code>. Other cases are handled by the base class by returning the original text.
+					</p>
+<p>The 
+						<code class="code">DataClassGen</code> uses Java inheritance for the generated data classes. Otherwise it is pretty much straight forward.
+					</p>
+<p>The 
+						<code class="code">ProtocolClassGen</code> generates a class for the protocol with nested static classes for regular and conjugated ports and similar for replicated ports.
+					</p>
+<p>The 
+						<code class="code">ActorClassGen</code> uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code methods are inherited. Not inherited is the state machine implementation.
+					</p>
+</div>
+<div class="section" title="The ANSI-C Generator">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TheANSICGenerator"></a>The ANSI-C Generator</h4>
+</div>
+</div>
+</div>
+<p>The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them and receive a pointer to those data (called 
+						<code class="code">self</code> in analogy to the implicit C++ 
+						<code class="code">this</code> pointer).
+						No dynamic memory allocation is employed. All actor instances are statically initialized.
+						One of the design goals for the generated C code was an optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end micro controllers.
+					</p>
+</div>
+<div class="section" title="The Documentation Generator">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="TheDocumentationGenerator"></a>The Documentation Generator</h4>
+</div>
+</div>
+</div>
+<p>The documentation generator creates documentation in LaTex format which can be converted into PDF and many other formats.</p>
 </div>
 </div>
 </div>

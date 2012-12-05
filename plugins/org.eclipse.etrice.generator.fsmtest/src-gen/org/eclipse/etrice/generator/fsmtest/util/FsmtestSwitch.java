@@ -79,17 +79,52 @@ public class FsmtestSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FsmtestPackage.TESTSCRIPT:
+      case FsmtestPackage.FSM_DEFINITION:
       {
-        Testscript testscript = (Testscript)theEObject;
-        T result = caseTestscript(testscript);
+        FsmDefinition fsmDefinition = (FsmDefinition)theEObject;
+        T result = caseFsmDefinition(fsmDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FsmtestPackage.STATE:
+      case FsmtestPackage.RANDOM_TEST:
       {
-        State state = (State)theEObject;
-        T result = caseState(state);
+        RandomTest randomTest = (RandomTest)theEObject;
+        T result = caseRandomTest(randomTest);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FsmtestPackage.GUARD_DECLARATION:
+      {
+        GuardDeclaration guardDeclaration = (GuardDeclaration)theEObject;
+        T result = caseGuardDeclaration(guardDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FsmtestPackage.TRANSITION_DECLARATION:
+      {
+        TransitionDeclaration transitionDeclaration = (TransitionDeclaration)theEObject;
+        T result = caseTransitionDeclaration(transitionDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FsmtestPackage.CONDITION_DECLARATION:
+      {
+        ConditionDeclaration conditionDeclaration = (ConditionDeclaration)theEObject;
+        T result = caseConditionDeclaration(conditionDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FsmtestPackage.PRECONDITION_DECLARATION:
+      {
+        PreconditionDeclaration preconditionDeclaration = (PreconditionDeclaration)theEObject;
+        T result = casePreconditionDeclaration(preconditionDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FsmtestPackage.POSTCONDITION_DECLARATION:
+      {
+        PostconditionDeclaration postconditionDeclaration = (PostconditionDeclaration)theEObject;
+        T result = casePostconditionDeclaration(postconditionDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -97,13 +132,6 @@ public class FsmtestSwitch<T> extends Switch<T>
       {
         StateDeclaration stateDeclaration = (StateDeclaration)theEObject;
         T result = caseStateDeclaration(stateDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FsmtestPackage.INITIAL_DECLARATION:
-      {
-        InitialDeclaration initialDeclaration = (InitialDeclaration)theEObject;
-        T result = caseInitialDeclaration(initialDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -128,27 +156,6 @@ public class FsmtestSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FsmtestPackage.SOURCE_DECLARATION:
-      {
-        SourceDeclaration sourceDeclaration = (SourceDeclaration)theEObject;
-        T result = caseSourceDeclaration(sourceDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FsmtestPackage.DESTINATION_DECLARATION:
-      {
-        DestinationDeclaration destinationDeclaration = (DestinationDeclaration)theEObject;
-        T result = caseDestinationDeclaration(destinationDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FsmtestPackage.TRANSITION_DECLARATION:
-      {
-        TransitionDeclaration transitionDeclaration = (TransitionDeclaration)theEObject;
-        T result = caseTransitionDeclaration(transitionDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       default: return defaultCase(theEObject);
     }
   }
@@ -170,33 +177,113 @@ public class FsmtestSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Testscript</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Fsm Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Testscript</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Fsm Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTestscript(Testscript object)
+  public T caseFsmDefinition(FsmDefinition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Random Test</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Random Test</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseState(State object)
+  public T caseRandomTest(RandomTest object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Guard Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Guard Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGuardDeclaration(GuardDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionDeclaration(TransitionDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Condition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Condition Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConditionDeclaration(ConditionDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Precondition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Precondition Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePreconditionDeclaration(PreconditionDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Postcondition Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Postcondition Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePostconditionDeclaration(PostconditionDeclaration object)
   {
     return null;
   }
@@ -213,22 +300,6 @@ public class FsmtestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStateDeclaration(StateDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Initial Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Initial Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseInitialDeclaration(InitialDeclaration object)
   {
     return null;
   }
@@ -277,54 +348,6 @@ public class FsmtestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSignalDeclaration(SignalDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Source Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Source Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSourceDeclaration(SourceDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Destination Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Destination Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDestinationDeclaration(DestinationDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionDeclaration(TransitionDeclaration object)
   {
     return null;
   }

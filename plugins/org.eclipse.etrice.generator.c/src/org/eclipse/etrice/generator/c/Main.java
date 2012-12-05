@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.c;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.c.gen.Validator;
@@ -100,14 +99,12 @@ public class Main extends AbstractGenerator {
 	}
 
 	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary) {
-		ResourceSet rs = resourceSetProvider.get();
+		loadModels(uriList);
 
-		loadModels(uriList, rs);
-
-		if (!validateModels(rs))
+		if (!validateModels())
 			return false;
 
-		Root genModel = createGeneratorModel(rs, asLibrary, genModelPath);
+		Root genModel = createGeneratorModel(asLibrary, genModelPath);
 		if (genModel==null)
 			return false;
 		

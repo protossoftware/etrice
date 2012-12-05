@@ -112,7 +112,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
 				«IF pclass!=null»
-					«pclass.attributes.attributeInitialization(true)»
+					«pclass.attributes.attributeInitialization(pclass, true)»
 				«ENDIF»
 				DebuggingService.getInstance().addPortInstance(this);
 			}

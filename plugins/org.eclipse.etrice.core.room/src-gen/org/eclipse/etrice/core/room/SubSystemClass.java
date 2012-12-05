@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.SubSystemClass#getRelayPorts <em>Relay Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.SubSystemClass#getThreads <em>Threads</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,5 +55,21 @@ public interface SubSystemClass extends ActorContainerClass
    * @generated
    */
   EList<LogicalThread> getThreads();
+
+  /**
+   * Returns the value of the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.ActorInstanceMapping}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Actor Instance Mappings</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemClass_ActorInstanceMappings()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ActorInstanceMapping> getActorInstanceMappings();
 
 } // SubSystemClass

@@ -64,6 +64,14 @@ public class RoomExtensions {
     return ret;
   }
   
+  public <T extends Object> List<T> union(final List<T> l, final T e) {
+    ArrayList<T> _arrayList = new ArrayList<T>();
+    ArrayList<T> ret = _arrayList;
+    ret.addAll(l);
+    ret.add(e);
+    return ret;
+  }
+  
   public <T extends Object> Iterable<T> union(final Iterable<T> l1, final Iterable<T> l2) {
     ArrayList<T> _arrayList = new ArrayList<T>();
     ArrayList<T> ret = _arrayList;

@@ -18,8 +18,7 @@ import java.util.HashMap;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.room.ActorInstancePath;
-import org.eclipse.etrice.core.room.LogicalThread;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -154,20 +153,20 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		if (instance==null)
 			return -1;
 		
+		if (instance instanceof SubSystemInstance)
+			return 0;
+		
 		if (inst2thread==null) {
 			inst2thread = new HashMap<String, Integer>();
 			
 			// create mapping
-			int tid = 1;
-			for (LogicalThread ls : getSubSystemClass().getThreads()) {
-				for (ActorInstancePath inst : ls.getInstances()) {
-					String path = getPath();
-					for (String seg : inst.getSegments()) {
-						path += InstanceBase.pathDelim+seg;
-					}
-					inst2thread.put(path, tid);
+			for (ActorInstanceMapping aim : getSubSystemClass().getActorInstanceMappings()) {
+				int tid = getSubSystemClass().getThreads().indexOf(aim.getThread())+1;
+				String path = getPath();
+				for (String seg : aim.getPath().getRefs()) {
+					path += InstanceBase.pathDelim+seg;
 				}
-				tid++;
+				inst2thread.put(path, tid);
 			}
 		}
 		
@@ -176,8 +175,8 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 		if (tid!=null)
 			return tid;
 		
-		// use own thread id
-		return getThreadId();
+		// use parent thread id
+		return getThreadId((InstanceBase) instance.eContainer());
 	}
 
 	/**

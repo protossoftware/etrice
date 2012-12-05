@@ -252,7 +252,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         if (_notEquals_1) {
           _builder.append("\t\t");
           EList<Attribute> _attributes = pclass.getAttributes();
-          CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes, true);
+          CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes, pclass, true);
           _builder.append(_attributeInitialization, "		");
           _builder.newLineIfNotEmpty();
         }

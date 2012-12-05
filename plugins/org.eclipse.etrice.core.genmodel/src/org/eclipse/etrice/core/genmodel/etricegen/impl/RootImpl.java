@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +23,7 @@ import java.util.LinkedList;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -41,6 +43,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -67,6 +70,8 @@ import org.eclipse.etrice.core.room.VarDecl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#isLibrary <em>Library</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSystemInstances <em>System Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOwnSubSystemInstances <em>Own Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getModels <em>Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpActorClasses <em>Xp Actor Classes</em>}</li>
@@ -121,14 +126,24 @@ public class RootImpl extends EObjectImpl implements Root {
 	protected boolean library = LIBRARY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSubSystemInstances() <em>Sub System Instances</em>}' containment reference list.
+	 * The cached value of the '{@link #getSystemInstances() <em>System Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubSystemInstances()
+	 * @see #getSystemInstances()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SubSystemInstance> subSystemInstances;
+	protected EList<SystemInstance> systemInstances;
+
+	/**
+	 * The cached value of the '{@link #getOwnSubSystemInstances() <em>Own Sub System Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnSubSystemInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SubSystemInstance> ownSubSystemInstances;
 
 	/**
 	 * The cached value of the '{@link #getModels() <em>Models</em>}' reference list.
@@ -172,13 +187,22 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<SubSystemInstance> getSubSystemInstances() {
-		if (subSystemInstances == null) {
-			subSystemInstances = new EObjectContainmentEList<SubSystemInstance>(SubSystemInstance.class, this, ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES);
+		if (getOwnSubSystemInstances().isEmpty()) {
+			// we have top level logical system(s)
+			// add all their sub system instances
+			ArrayList<SubSystemInstance> result = new ArrayList<SubSystemInstance>();
+			
+			for (SystemInstance si : getSystemInstances()) {
+				result.addAll(si.getInstances());
+			}
+			
+			return new DelegatingEList.UnmodifiableEList<SubSystemInstance>(result);
 		}
-		return subSystemInstances;
+		else
+			return new DelegatingEList.UnmodifiableEList<SubSystemInstance>((getOwnSubSystemInstances()));
 	}
 
 	/**
@@ -301,6 +325,30 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SystemInstance> getSystemInstances() {
+		if (systemInstances == null) {
+			systemInstances = new EObjectContainmentEList<SystemInstance>(SystemInstance.class, this, ETriceGenPackage.ROOT__SYSTEM_INSTANCES);
+		}
+		return systemInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SubSystemInstance> getOwnSubSystemInstances() {
+		if (ownSubSystemInstances == null) {
+			ownSubSystemInstances = new EObjectContainmentEList<SubSystemInstance>(SubSystemInstance.class, this, ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES);
+		}
+		return ownSubSystemInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public EList<RoomModel> getReferencedModels(RoomClass cls) {
@@ -396,8 +444,10 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
-				return ((InternalEList<?>)getSubSystemInstances()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return ((InternalEList<?>)getSystemInstances()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES:
+				return ((InternalEList<?>)getOwnSubSystemInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				return ((InternalEList<?>)getXpActorClasses()).basicRemove(otherEnd, msgs);
 		}
@@ -414,6 +464,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				return isLibrary();
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return getSystemInstances();
+			case ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES:
+				return getOwnSubSystemInstances();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
 				return getSubSystemInstances();
 			case ETriceGenPackage.ROOT__MODELS:
@@ -446,9 +500,13 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				setLibrary((Boolean)newValue);
 				return;
-			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
-				getSubSystemInstances().clear();
-				getSubSystemInstances().addAll((Collection<? extends SubSystemInstance>)newValue);
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				getSystemInstances().clear();
+				getSystemInstances().addAll((Collection<? extends SystemInstance>)newValue);
+				return;
+			case ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES:
+				getOwnSubSystemInstances().clear();
+				getOwnSubSystemInstances().addAll((Collection<? extends SubSystemInstance>)newValue);
 				return;
 			case ETriceGenPackage.ROOT__MODELS:
 				getModels().clear();
@@ -493,8 +551,11 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				setLibrary(LIBRARY_EDEFAULT);
 				return;
-			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
-				getSubSystemInstances().clear();
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				getSystemInstances().clear();
+				return;
+			case ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES:
+				getOwnSubSystemInstances().clear();
 				return;
 			case ETriceGenPackage.ROOT__MODELS:
 				getModels().clear();
@@ -531,8 +592,12 @@ public class RootImpl extends EObjectImpl implements Root {
 		switch (featureID) {
 			case ETriceGenPackage.ROOT__LIBRARY:
 				return library != LIBRARY_EDEFAULT;
+			case ETriceGenPackage.ROOT__SYSTEM_INSTANCES:
+				return systemInstances != null && !systemInstances.isEmpty();
+			case ETriceGenPackage.ROOT__OWN_SUB_SYSTEM_INSTANCES:
+				return ownSubSystemInstances != null && !ownSubSystemInstances.isEmpty();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_INSTANCES:
-				return subSystemInstances != null && !subSystemInstances.isEmpty();
+				return !getSubSystemInstances().isEmpty();
 			case ETriceGenPackage.ROOT__MODELS:
 				return models != null && !models.isEmpty();
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
@@ -730,7 +795,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void getOperationDataClasses(HashSet<DataClass> dataClasses, EList<? extends Operation> operations) {
 		for (Operation op : operations) {
 			if (op.getReturntype()!=null) {
-				DataClass dc = name2dc.get(op.getReturntype());
+				DataClass dc = name2dc.get(op.getReturntype().getType().getName());
 				if (dc!=null)
 					dataClasses.add(dc);
 			}

@@ -1,0 +1,191 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>eTrice Developer&rsquo;s Reference</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="index.html" title="eTrice User Guide">
+<link rel="prev" href="TheMappingModel.html" title="The Mapping Model">
+<link rel="next" href="ComponentOverview.html" title="Component Overview">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">eTrice Developer&rsquo;s Reference</h1>
+<div class="chapter" title="eTrice Developer&rsquo;s Reference">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="eTriceDevelopersReference"></a>eTrice Developer&rsquo;s Reference</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="eTriceDevelopersReference.html#Architecture">Architecture</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ComponentOverview.html">Component Overview</a></span>
+</dt>
+</dl>
+</div>
+<div class="section" title="Architecture">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Architecture"></a>Architecture</h2>
+</div>
+</div>
+</div>
+<p>The basic components of eTrice are depicted in the following diagram.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/200-components.jpg"></div>
+<p>
+			
+</p>
+<p>Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.</p>
+<div class="section" title="Editor and Generator Components">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EditorandGeneratorComponents"></a>Editor and Generator Components</h3>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>core</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>core.coom is an Xtext based language called Room. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.core.room</em></span>. Room is the basic modeling language of eTrice.
+								</p>
+</li>
+<li class="listitem">
+<p>core.config is an Xtext based language called Config. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.core.config</em></span>. Config is a language designed for the data configuration of model elements. E.g. class and instance attributes can be specified.
+								</p>
+</li>
+<li class="listitem">
+<p>core.genmodel is an EMF based aggregation layer for Room models. It consists of the plugin 
+									<span class="emphasis"><em>org.eclipse.etrice.core.genmodel</em></span>. a Room model can be transformed into a genmodel which allows easy access to implicit relations of the Room model.
+								</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>ui</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>textual</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="square">
+<li class="listitem">
+<p>room.ui is the ui counterpart of core.room.  It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.core.room.ui</em></span>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Room language.
+										</p>
+</li>
+<li class="listitem">
+<p>config.ui is the ui counterpart of core.config.  It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.core.config.ui</em></span>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Config language.
+										</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>graphical</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="square">
+<li class="listitem">
+<p>ui.common is a set of common code for the two diagram editors. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.common</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.commands encapsulates some commands related to the navigation between eTrice editors. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.commands</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.structure</em></span>.
+										</p>
+</li>
+<li class="listitem">
+<p>ui.behavior is the Graphiti based editor for the Actor behavior. It consists of the plug-in 
+											<span class="emphasis"><em>org.eclipse.etrice.ui.behavior</em></span>.
+										</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>generators</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>generator is a set of general classes and language independent parts of all generators. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.c is the generator for the ANSI-C target language. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.c</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.java is the generator for the Java target language. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.java</em></span>.
+								</p>
+</li>
+<li class="listitem">
+<p>generator.doc is the generator for the model documentation. It consists of the plug-in 
+									<span class="emphasis"><em>org.eclipse.etrice.generator.doc</em></span>.
+								</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Runtimes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Runtimes"></a>Runtimes</h3>
+</div>
+</div>
+</div>
+<p>Currently eTrice ships with a C and a Java runtime. The runtimes are libraries written in the target language against which the generated code is compiled.</p>
+</div>
+<div class="section" title="Unit Tests">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="UnitTests"></a>Unit Tests</h3>
+</div>
+</div>
+</div>
+<p>Most plug-ins and other parts of the code have related unit tests.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

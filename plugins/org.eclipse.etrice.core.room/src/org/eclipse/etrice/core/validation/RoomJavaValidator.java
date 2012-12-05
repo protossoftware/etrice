@@ -13,8 +13,10 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.HashSet;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorInstancePath;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
@@ -43,6 +45,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -66,6 +69,9 @@ import com.google.inject.Inject;
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
+	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
+	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
+	
 	@Inject ImportUriResolver importUriResolver;
 	
 	@Check
@@ -133,9 +139,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkRefHasFixedMultiplicityPorts(ActorRef ar) {
-		if (ar.getSize()>1) {
+		if (ar!=null) {
 			ActorClass ac = ar.getType();
-			if (ar!=null) {
+			if (ar.getSize()>1) {
 				for (Port p : ac.getIfPorts()) {
 					if (p.getMultiplicity()<0) {
 						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
@@ -255,20 +261,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error(result.getMsg(), RoomPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
-	private SubSystemClass getSubSystemClass(EObject obj) {
-		EObject ctx = obj.eContainer();
-		while (!(ctx instanceof SubSystemClass) && ctx.eContainer()!=null)
-			ctx = ctx.eContainer();
-		if (ctx instanceof SubSystemClass)
-			return (SubSystemClass) ctx;
-		
-		return null;
-	}
-
 	@Check  
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
 			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
+
+		if (ssc.getThreads().isEmpty())
+			warning("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread dflt_thread");
+		
+		checkMappings(ssc.getActorInstanceMappings());
 	}
 
 	@Check
@@ -277,24 +278,43 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("LogicalSystem must contain at least one SubSystemRef", RoomPackage.eINSTANCE.getLogicalSystem_SubSystems());
 	}
 
-	
+
 	@Check
-	public void checkInstancePath(ActorInstancePath ai) {
-		ActorContainerClass acc = getSubSystemClass(ai);
-		for (String seg : ai.getSegments()) {
-			boolean found = false;
-			for (ActorRef ar : acc.getActorRefs()) {
-				if (ar.getName().equals(seg)) {
-					acc = ar.getType();
-					found = true;
-					break;
+	public void checkActorInstanceMapping(ActorInstanceMapping aim) {
+		ActorContainerClass root = RoomHelpers.getParentContainer(aim);
+		if (root != null && !root.eIsProxy()) {
+			RefPath path = aim.getPath();
+			if (path != null) {
+				String invalidSegment = RoomHelpers.checkPath(root, path);
+				if (invalidSegment != null)
+					error("no match for segment '" + invalidSegment + "'",
+							RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
+				else {
+					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
+					if (aRef != null) {
+						if (aRef.getSize() > 1)
+							error("no arrays of actor references supported",
+									RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
+					} else
+						error("invalid actor reference",
+								RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				}
 			}
-			if (!found)
-				error("wrong actor instance path (segment number "+ai.getSegments().indexOf(seg)+")", RoomPackage.eINSTANCE.getActorInstancePath_Segments());
 		}
+		checkMappings(aim.getActorInstanceMappings());
 	}
 	
+	private void checkMappings(EList<ActorInstanceMapping> actorInstanceMappings) {
+		HashSet<String> paths = new HashSet<String>();
+		for (ActorInstanceMapping aim : actorInstanceMappings) {
+			if (!paths.add(RoomHelpers.asString(aim.getPath()))) {
+				EObject parent = aim.eContainer();
+				int idx = actorInstanceMappings.indexOf(aim);
+				error("duplicate mapping", parent, aim.eContainingFeature(), idx, DUPLICATE_ACTOR_INSTANCE_MAPPING);
+			}
+		}
+	}
+
 	@Check
 	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);
@@ -369,6 +389,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkProtocol(ProtocolClass pc) {
+		if (ValidationUtil.isCircularClassHierarchy(pc))
+			return;
+		
 		switch (pc.getCommType()) {
 		case DATA_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.DATA_DRIVEN)
@@ -388,6 +411,36 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("synchronous communication type not supported yet", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
 			break;
 		default:
+		}
+		
+		if (pc.getBase()!=null) {
+			// derived protocol
+			if (pc.getIncomingMessages().size()>0 && pc.getOutgoingMessages().size()>0)
+				warning("a derived protocol should add either incoming or outgoing messages, not both", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
+			
+			{
+				List<Message> incoming = RoomHelpers.getAllMessages(pc, true);
+				HashSet<String> inNames = new HashSet<String>();
+				for (Message in : incoming) {
+					if (!inNames.add(in.getName())) {
+						int idx = pc.getIncomingMessages().indexOf(in);
+						if (idx>=0)
+							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES, idx);
+					}
+				}
+			}
+
+			{
+				List<Message> outgoing = RoomHelpers.getAllMessages(pc, true);
+				HashSet<String> outNames = new HashSet<String>();
+				for (Message out : outgoing) {
+					if (!outNames.add(out.getName())) {
+						int idx = pc.getOutgoingMessages().indexOf(out);
+						if (idx>=0)
+							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES, idx);
+					}
+				}
+			}
 		}
 	}
 	

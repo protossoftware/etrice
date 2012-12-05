@@ -15,14 +15,6 @@ package org.eclipse.etrice.core.ui.contentassist;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceProxy;
-import org.eclipse.core.resources.IResourceProxyVisitor;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
@@ -39,8 +31,6 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.ui.contentassist.AbstractConfigProposalProvider;
-import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -58,39 +48,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
 			final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
-		final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot()
-				.getFullPath();
-		URI configURI = context.getRootModel().eResource().getURI();
-		final IPath configPath = new Path(configURI.toPlatformString(false)
-				.replace(configURI.lastSegment(), ""));
-		IResourceProxyVisitor visitor = new IResourceProxyVisitor() {
-
-			@Override
-			public boolean visit(IResourceProxy proxy) throws CoreException {
-				if (proxy.getType() != IResource.FILE)
-					return true;
-
-				String name = proxy.getName();
-				if (name.regionMatches(true, name.length() - 4, "room", 0, 4)) {
-					IPath relConfigPath = proxy.requestFullPath()
-							.makeRelativeTo(configPath);
-					IPath relWorkspacePath = proxy.requestFullPath()
-							.makeRelativeTo(rootPath);
-					String proposal = "\"" + relConfigPath.toString() + "\"";
-					String displayString = relConfigPath.lastSegment() + " - "
-							+ relWorkspacePath;
-					acceptor.accept(createCompletionProposal(proposal,
-							new StyledString(displayString), null, context));
-				}
-				return false;
-			}
-		};
-		try {
-			ResourcesPlugin.getWorkspace().getRoot()
-					.accept(visitor, IResource.NONE);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		ImportModelAssist.addPaths(this, context, acceptor, ".room");
 	}
 
 	@Override
