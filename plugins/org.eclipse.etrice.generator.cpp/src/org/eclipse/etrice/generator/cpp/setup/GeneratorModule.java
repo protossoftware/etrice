@@ -12,15 +12,18 @@
 
 package org.eclipse.etrice.generator.cpp.setup;
 
+import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.cpp.Main;
+import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.CppTranslationProvider;
 import org.eclipse.etrice.generator.cpp.gen.MainGen;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
 
@@ -38,7 +41,10 @@ public class GeneratorModule extends GeneratorBaseModule {
 
 		binder.bind(ITranslationProvider.class).to(CppTranslationProvider.class);
 		
+		binder.bind(IDataConfiguration.class).to(org.eclipse.etrice.generator.config.DataConfiguration.class);
 		
+		binder.bind(ImportUriResolver.class).to(PlatformRelativeUriResolver.class);
+
 		
 	}
 

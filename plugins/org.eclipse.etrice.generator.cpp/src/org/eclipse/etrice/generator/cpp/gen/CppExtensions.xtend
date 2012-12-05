@@ -28,7 +28,6 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.generator.generic.ConfigExtension
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
@@ -36,9 +35,7 @@ import org.eclipse.xtext.util.Pair
 @Singleton
 class CppExtensions implements ILanguageExtension {
 
-	@Inject ILanguageExtension languageExt
 	@Inject IDiagnostician diagnostician
-	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
 	
 
@@ -132,10 +129,6 @@ class CppExtensions implements ILanguageExtension {
 
 	override superCall(String baseClassName, String method, String arguments) {
 		baseClassName+"::"+method+"("+arguments+");"
-	}
-	
-	override toCharArrayExpr(String s) {
-		"\"" + s + "\"";
 	}
 	
 

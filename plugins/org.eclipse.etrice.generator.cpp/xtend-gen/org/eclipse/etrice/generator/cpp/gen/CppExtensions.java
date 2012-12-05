@@ -17,7 +17,6 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.generic.ConfigExtension;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -29,13 +28,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 @SuppressWarnings("all")
 public class CppExtensions implements ILanguageExtension {
   @Inject
-  private ILanguageExtension languageExt;
-  
-  @Inject
   private IDiagnostician diagnostician;
-  
-  @Inject
-  private ConfigExtension _configExtension;
   
   @Inject
   private TypeHelpers _typeHelpers;
@@ -221,12 +214,6 @@ public class CppExtensions implements ILanguageExtension {
     String _plus_3 = (_plus_2 + arguments);
     String _plus_4 = (_plus_3 + ");");
     return _plus_4;
-  }
-  
-  public String toCharArrayExpr(final String s) {
-    String _plus = ("\"" + s);
-    String _plus_1 = (_plus + "\"");
-    return _plus_1;
   }
   
   public String toValueLiteral(final PrimitiveType type, final String value) {

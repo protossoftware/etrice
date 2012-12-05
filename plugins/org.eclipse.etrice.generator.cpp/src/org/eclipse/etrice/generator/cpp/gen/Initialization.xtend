@@ -1,27 +1,43 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ * 
+ *******************************************************************************/
+
 package org.eclipse.etrice.generator.cpp.gen
 
-import org.eclipse.etrice.core.room.Attribute
-import java.util.List
 import com.google.inject.Inject
-import org.eclipse.etrice.generator.generic.ConfigExtension
-import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.ComplexType
-import org.eclipse.etrice.generator.generic.ILanguageExtension
 import com.google.inject.Singleton
+import java.util.List
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.ComplexType
+import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class Initialization {
 
-	@Inject extension ConfigExtension
 	@Inject extension TypeHelpers
+	@Inject extension RoomExtensions
 	@Inject ILanguageExtension languageExt
+	@Inject IDataConfiguration dataConfigExt
+	@Inject ProcedureHelpers procedureHelpers
 	
 	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
 				«var aType = a.refType.type»
-				«var value = a.initValueLiteral»
+				«var value = a.defaultValueLiteral»
 				«IF value!=null»
 					«IF a.size == 0 || aType.characterType»
 					«ELSEIF value.startsWith("{")»
@@ -53,7 +69,7 @@ class Initialization {
 
 	def attributeInitialization(Attribute a, boolean useClassDefaultsOnly) {
 		var aType = a.refType.type
-		var value = a.initValueLiteral
+		var value = a.defaultValueLiteral
 		if (value != null) {
 				if (a.size == 0 || aType.characterType) {
 					if (a.refType.isRef) 
@@ -79,5 +95,6 @@ class Initialization {
 				'''«a.name»()'''
 		}
 	}
-
+	
+	
 }

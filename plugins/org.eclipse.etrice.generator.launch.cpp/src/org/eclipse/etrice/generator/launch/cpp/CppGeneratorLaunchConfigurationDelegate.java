@@ -37,7 +37,7 @@ public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 			argString.append(" "+configuration.getAttribute(CppGeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
 		if (configuration.getAttribute(CppGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
-			argString.append(" "+Main.OPTION_GEN_INST_DIAG);
+			argString.append(" "+Main.OPTION_DOCUMENTATION);
 	}
 
 	/* (non-Javadoc)
