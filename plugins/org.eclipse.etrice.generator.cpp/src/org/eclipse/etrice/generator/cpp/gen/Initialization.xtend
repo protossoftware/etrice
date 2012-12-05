@@ -24,24 +24,16 @@ class Initialization {
 				«var value = a.initValueLiteral»
 				«IF value!=null»
 					«IF a.size == 0 || aType.characterType»
-						«a.name» = «value»;
 					«ELSEIF value.startsWith("{")»
-						«a.name» = new «aType.typeName»[] «value»;
+						«initializeArrayWithValues(a.name, value.replace("{", "").replace("}", "").split(","))»
 					«ELSE»
-						«a.name» = new «aType.typeName»[«a.size»];
 						for (int i=0;i<«a.size»;i++){
 							«a.name»[i] = «value»;
 						}
 					«ENDIF»
 				«ELSEIF aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
 					«IF a.size==0»
-						«IF a.refType.isRef»
-							«a.name» = «languageExt.nullPointer()»;
-						«ELSE»
-							«a.name» = «languageExt.defaultValue(aType)»;
-						«ENDIF»
 					«ELSE»
-						«a.name» = new «aType.typeName»[«a.size»];
 						«IF !useClassDefaultsOnly»
 							for (int i=0;i<«a.size»;i++){
 								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«languageExt.defaultValue(aType)»«ENDIF»;
@@ -52,4 +44,40 @@ class Initialization {
 			«ENDFOR»
 		'''
 	}
+	
+	def initializeArrayWithValues(String varName, String[] values) {
+		'''
+		«values.map(v | varName + "[" + values.indexOf(v) + "] = " + v + ";" ).join("\r\n")»
+		'''
+	}
+
+	def attributeInitialization(Attribute a, boolean useClassDefaultsOnly) {
+		var aType = a.refType.type
+		var value = a.initValueLiteral
+		if (value != null) {
+				if (a.size == 0 || aType.characterType) {
+					if (a.refType.isRef) 
+						'''«a.name»(new «aType.name»(«value»))'''
+					else
+						'''«a.name»(«value»)'''
+				}
+				else if (value.startsWith("{")) {
+					'''«a.name»()'''
+				}
+				else {
+					'''«a.name»()'''
+				}
+		} 
+		else if (aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly) {
+			if (a.size==0) {
+				if (a.refType.isRef)
+					'''«a.name»(«languageExt.nullPointer()»)'''
+				else
+					'''«a.name»(«languageExt.defaultValue(aType)»)'''
+			}
+			else 
+				'''«a.name»()'''
+		}
+	}
+
 }

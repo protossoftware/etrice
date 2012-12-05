@@ -61,7 +61,7 @@ protected:
 	int m_state;
 	RTSystemServicesProtocolPort* m_RTSystemPort;
 
-	virtual bool handleSystemEvent(const InterfaceItemBase& ifitem, int evt, void* generic_data);
+	virtual bool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);
 private:
 	std::string m_className;
 	Address m_ownAddr;

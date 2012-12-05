@@ -252,11 +252,36 @@ public class DataClassGen {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
+      {
+        DataClass _base_5 = dc.getBase();
+        boolean _notEquals_2 = (!Objects.equal(_base_5, null));
+        if (_notEquals_2) {
+          _builder.append("\t");
+          _builder.append("// constructor using base class constructor");
+          _builder.newLine();
+          _builder.append("\t");
+          String _name_14 = dc.getName();
+          _builder.append(_name_14, "	");
+          _builder.append("(");
+          DataClass _base_6 = dc.getBase();
+          String _name_15 = _base_6.getName();
+          _builder.append(_name_15, "	");
+          _builder.append(" _super, ");
+          EList<Attribute> _attributes_3 = dc.getAttributes();
+          CharSequence _argListConstructor = this.argListConstructor(_attributes_3);
+          String _string = _argListConstructor.toString();
+          _builder.append(_string, "	");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("};");
       _builder.newLine();
       _builder.newLine();
-      String _name_14 = dc.getName();
-      CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_14);
+      String _name_16 = dc.getName();
+      CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_16);
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -480,16 +505,73 @@ public class DataClassGen {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
+      {
+        DataClass _base_7 = dc.getBase();
+        boolean _notEquals_4 = (!Objects.equal(_base_7, null));
+        if (_notEquals_4) {
+          _builder.append("// constructor using base class constructor");
+          _builder.newLine();
+          String _name_15 = dc.getName();
+          _builder.append(_name_15, "");
+          _builder.append("::");
+          String _name_16 = dc.getName();
+          _builder.append(_name_16, "");
+          _builder.append("(");
+          DataClass _base_8 = dc.getBase();
+          String _name_17 = _base_8.getName();
+          _builder.append(_name_17, "");
+          _builder.append(" _super, ");
+          EList<Attribute> _attributes_3 = dc.getAttributes();
+          CharSequence _argListConstructor = this.argListConstructor(_attributes_3);
+          String _string = _argListConstructor.toString();
+          _builder.append(_string, "");
+          _builder.append(")");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(":");
+          _builder.newLine();
+          _builder.append("\t");
+          DataClass _base_9 = dc.getBase();
+          String _name_18 = _base_9.getName();
+          _builder.append(_name_18, "	");
+          _builder.append("(_super),");
+          _builder.newLineIfNotEmpty();
+          {
+            EList<Attribute> _attributes_4 = dc.getAttributes();
+            boolean _hasElements_2 = false;
+            for(final Attribute a_2 : _attributes_4) {
+              if (!_hasElements_2) {
+                _hasElements_2 = true;
+              } else {
+                _builder.appendImmediate(",", "	");
+              }
+              _builder.append("\t");
+              String _name_19 = a_2.getName();
+              _builder.append(_name_19, "	");
+              _builder.append("(");
+              String _name_20 = a_2.getName();
+              _builder.append(_name_20, "	");
+              _builder.append("_)");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
       _builder.append("// assignment operator");
       _builder.newLine();
-      String _name_15 = dc.getName();
-      _builder.append(_name_15, "");
+      String _name_21 = dc.getName();
+      _builder.append(_name_21, "");
       _builder.append("& ");
-      String _name_16 = dc.getName();
-      _builder.append(_name_16, "");
+      String _name_22 = dc.getName();
+      _builder.append(_name_22, "");
       _builder.append("::operator=(const ");
-      String _name_17 = dc.getName();
-      _builder.append(_name_17, "");
+      String _name_23 = dc.getName();
+      _builder.append(_name_23, "");
       _builder.append("& rhs)");
       _builder.newLineIfNotEmpty();
       _builder.append("{\t\t");
@@ -498,26 +580,26 @@ public class DataClassGen {
       _builder.append("if (this == &rhs) { return *this; };");
       _builder.newLine();
       {
-        DataClass _base_7 = dc.getBase();
-        boolean _notEquals_4 = (!Objects.equal(_base_7, null));
-        if (_notEquals_4) {
+        DataClass _base_10 = dc.getBase();
+        boolean _notEquals_5 = (!Objects.equal(_base_10, null));
+        if (_notEquals_5) {
           _builder.append("\t");
-          DataClass _base_8 = dc.getBase();
-          String _name_18 = _base_8.getName();
-          _builder.append(_name_18, "	");
+          DataClass _base_11 = dc.getBase();
+          String _name_24 = _base_11.getName();
+          _builder.append(_name_24, "	");
           _builder.append("::operator=(rhs);");
           _builder.newLineIfNotEmpty();
         }
       }
       {
-        EList<Attribute> _attributes_3 = dc.getAttributes();
-        for(final Attribute a_2 : _attributes_3) {
+        EList<Attribute> _attributes_5 = dc.getAttributes();
+        for(final Attribute a_3 : _attributes_5) {
           _builder.append("\t");
-          String _name_19 = a_2.getName();
-          _builder.append(_name_19, "	");
+          String _name_25 = a_3.getName();
+          _builder.append(_name_25, "	");
           _builder.append("= rhs.");
-          String _name_20 = a_2.getName();
-          _builder.append(_name_20, "	");
+          String _name_26 = a_3.getName();
+          _builder.append(_name_26, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -529,8 +611,8 @@ public class DataClassGen {
       _builder.newLine();
       _builder.newLine();
       EList<StandardOperation> _operations_2 = dc.getOperations();
-      String _name_21 = dc.getName();
-      CharSequence _operationsImplementation = this.helpers.operationsImplementation(_operations_2, _name_21);
+      String _name_27 = dc.getName();
+      CharSequence _operationsImplementation = this.helpers.operationsImplementation(_operations_2, _name_27);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

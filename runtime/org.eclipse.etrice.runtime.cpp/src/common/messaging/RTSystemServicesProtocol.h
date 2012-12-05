@@ -13,6 +13,7 @@
 #include "common/messaging/Address.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 namespace etRuntime {
 
@@ -72,10 +73,10 @@ public:
 	class RTSystemServicesProtocolPort : public PortBase , public IRTSystemServicesProtocolPort {
 	public:
 		RTSystemServicesProtocolPort(IEventReceiver& actor, IRTObject* parent, std::string name,
-				int localId, Address addr, Address peerAddress);
+				int localId, Address addr, Address peerAddress, bool doRegistration = true);
 
 		RTSystemServicesProtocolPort(IEventReceiver& actor, IRTObject* parent, std::string name,
-				int localId, int idx, Address addr, Address peerAddress);
+				int localId, int idx, Address addr, Address peerAddress, bool doRegistration = true);
 
 		virtual void receive(Message* m);
 		// sent messages
@@ -88,7 +89,7 @@ public:
 	class RTSystemServicesProtocolPortRepl: public IRTSystemServicesProtocolPort {
 	private:
 		int m_replication;
-		std::vector<RTSystemServicesProtocolPort> m_ports;
+		RTSystemServicesProtocolPort* m_ports;
 
 	public:
 		//TODO: data type of addr and peerAddress?
@@ -96,7 +97,7 @@ public:
 										 const std::vector<Address>& addr, const std::vector<Address> peerAddress);
 
 		int getReplication() const { return m_replication; } ;
-		RTSystemServicesProtocolPort& get(int i) { return m_ports.at(i); };
+		RTSystemServicesProtocolPort& get(int i) { return m_ports[i]; };
 		// outgoing messages
 		void dummy();
 	};
@@ -108,10 +109,10 @@ public:
 	class RTSystemServicesProtocolConjPort : public PortBase, public IRTSystemServicesProtocolConjPort{
 	public:
 		RTSystemServicesProtocolConjPort(IEventReceiver& actor, IRTObject* parent,
-				std::string name, int localId, Address addr, Address peerAddress);
+				std::string name, int localId, Address addr, Address peerAddress, bool doRegistration = true);
 		RTSystemServicesProtocolConjPort(IEventReceiver& actor, IRTObject* parent,
 				std::string name, int localId, int idx, Address addr,
-				Address peerAddress);
+				Address peerAddress, bool doRegistration = true);
 
 		virtual void receive(Message* m);
 		void executeInitialTransition();
@@ -125,7 +126,7 @@ public:
 	class RTSystemServicesProtocolConjPortRepl : public IRTSystemServicesProtocolConjPort{
 	private:
 		int m_replication;
-		std::vector<RTSystemServicesProtocolConjPort> m_ports;
+		RTSystemServicesProtocolConjPort* m_ports;  //dynamic array used instead of vector to avoid copy construction
 
 	public:
 		//TODO: data type of addr and peerAddress
@@ -133,7 +134,7 @@ public:
 											 const std::vector<Address>& addr, const std::vector<Address>& peerAddress);
 
 		int getReplication() const { return m_replication; } ;
-		RTSystemServicesProtocolConjPort& get(int i) { return m_ports.at(i); };
+		RTSystemServicesProtocolConjPort& get(int i) { return m_ports[i]; };
 
 		void executeInitialTransition();
 		void startDebugging();

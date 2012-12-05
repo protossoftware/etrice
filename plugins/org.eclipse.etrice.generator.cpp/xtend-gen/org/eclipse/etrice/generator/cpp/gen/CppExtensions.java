@@ -112,6 +112,10 @@ public class CppExtensions implements ILanguageExtension {
     return true;
   }
   
+  public boolean usesPointers() {
+    return true;
+  }
+  
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("typedef enum {");
@@ -154,8 +158,10 @@ public class CppExtensions implements ILanguageExtension {
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
     String _plus = (type + " ");
     String _plus_1 = (_plus + name);
-    String _plus_2 = (_plus_1 + "[]");
-    return _plus_2;
+    String _plus_2 = (_plus_1 + "[");
+    String _plus_3 = (_plus_2 + Integer.valueOf(size));
+    String _plus_4 = (_plus_3 + "]");
+    return _plus_4;
   }
   
   public String constructorName(final String cls) {
@@ -319,6 +325,7 @@ public class CppExtensions implements ILanguageExtension {
   }
   
   public String[] generateArglistAndTypedData(final VarDecl data) {
+    String deref = "*";
     boolean _equals = Objects.equal(data, null);
     if (_equals) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
@@ -378,28 +385,34 @@ public class CppExtensions implements ILanguageExtension {
       typeName = _plus_1;
       String _plus_2 = (castTypeName + "*");
       castTypeName = _plus_2;
-    }
-    RefableType _refType_5 = data.getRefType();
-    DataType _type_4 = _refType_5.getType();
-    boolean _not = (!(_type_4 instanceof PrimitiveType));
-    if (_not) {
-      String _plus_3 = (typeName + "*");
-      typeName = _plus_3;
-      String _plus_4 = (castTypeName + "*");
-      castTypeName = _plus_4;
+    } else {
+      RefableType _refType_5 = data.getRefType();
+      DataType _type_4 = _refType_5.getType();
+      boolean _not = (!(_type_4 instanceof PrimitiveType));
+      if (_not) {
+        String _plus_3 = (typeName + "*");
+        typeName = _plus_3;
+        String _plus_4 = (castTypeName + "*");
+        castTypeName = _plus_4;
+      } else {
+        castTypeName = typeName;
+        deref = "";
+      }
     }
     String _plus_5 = (typeName + " ");
     String _name_1 = data.getName();
     String _plus_6 = (_plus_5 + _name_1);
-    String _plus_7 = (_plus_6 + " = *((");
-    String _plus_8 = (_plus_7 + castTypeName);
-    final String typedData = (_plus_8 + ") generic_data);\n");
+    String _plus_7 = (_plus_6 + " = ");
+    String _plus_8 = (_plus_7 + deref);
+    String _plus_9 = (_plus_8 + "((");
+    String _plus_10 = (_plus_9 + castTypeName);
+    final String typedData = (_plus_10 + ") generic_data);\n");
     String _name_2 = data.getName();
     final String dataArg = (", " + _name_2);
-    String _plus_9 = (", " + typeName);
-    String _plus_10 = (_plus_9 + " ");
+    String _plus_11 = (", " + typeName);
+    String _plus_12 = (_plus_11 + " ");
     String _name_3 = data.getName();
-    final String typedArgList = (_plus_10 + _name_3);
+    final String typedArgList = (_plus_12 + _name_3);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
 }

@@ -126,7 +126,7 @@ RoomModel room.basic.service.timing {
 			etTimerControlBlock* temp=usedTcbsRoot;
 				printf(\"list: \");
 				while (temp!=0){
-					printf(\"(%d,%d),\",temp->expTime.sec,temp->expTime.nSec);
+					printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);
 					temp=temp->next;
 				}
 				printf(\"\\n\");
@@ -277,7 +277,7 @@ RoomModel room.basic.service.timing {
 					status=0;
 				}
 				// msg to fsm
-				getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+				getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 			}
 			"
 			}

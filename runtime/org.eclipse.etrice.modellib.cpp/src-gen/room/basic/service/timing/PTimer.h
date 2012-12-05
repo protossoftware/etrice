@@ -65,8 +65,8 @@ class PTimer {
 class PTimerPort : public etRuntime::PortBase {
    public:
 	// constructors
-	 PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
-	 PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+	 PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true); 
+	 PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true);
 
 	 virtual void receive(etRuntime::Message* m);
 	
@@ -80,7 +80,7 @@ class PTimerPort : public etRuntime::PortBase {
 class PTimerReplPort {
 	private:
 	    int m_replication;
-	    std::vector<PTimerPort> m_ports;
+	    PTimerPort* m_ports;  //dynamic array used instead of vector to avoid copy construction
 
 	public:
 		PTimerReplPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
@@ -88,7 +88,7 @@ class PTimerReplPort {
 		
 		int getReplication() {	return m_replication; }
 		int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
-		PTimerPort get(int i) {return m_ports.at(i);}
+		PTimerPort get(int i) {return m_ports[i];}
 		
 		 // outgoing messages
 		public: void timeout();
@@ -100,8 +100,8 @@ class PTimerReplPort {
 class PTimerConjPort : public etRuntime::PortBase {
    public:
 	// constructors
-	 PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
-	 PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+	 PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true); 
+	 PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true);
 
 	 virtual void receive(etRuntime::Message* m);
 	/*--------------------- attributes ---------------------*/
@@ -120,7 +120,7 @@ class PTimerConjPort : public etRuntime::PortBase {
 class PTimerConjReplPort {
 	private:
 	    int m_replication;
-	    std::vector<PTimerConjPort> m_ports;
+	    PTimerConjPort* m_ports;  //dynamic array used instead of vector to avoid copy construction
 
 	public:
 		PTimerConjReplPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
@@ -128,7 +128,7 @@ class PTimerConjReplPort {
 		
 		int getReplication() {	return m_replication; }
 		int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
-		PTimerConjPort get(int i) {return m_ports.at(i);}
+		PTimerConjPort get(int i) {return m_ports[i];}
 		
 		 // outgoing messages
 		public: void startTimer(uint32 time);

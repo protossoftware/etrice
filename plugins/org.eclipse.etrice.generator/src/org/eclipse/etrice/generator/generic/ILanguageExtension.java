@@ -96,6 +96,13 @@ public interface ILanguageExtension {
 	boolean usesInheritance();
 	
 	/**
+	 * does the target language use pointers
+	 * 
+	 * @return true for C++ and C, false for Java
+	 */
+	boolean usesPointers();
+	
+	/**
 	 * generate an enumeration (enum in C, int constants in Java)
 	 * @param name the enumeration name
 	 * @param entries a list of name/value pairs

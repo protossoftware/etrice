@@ -91,6 +91,11 @@ class DataClassGen {
 			// constructor using fields
 			«dc.name»(«dc.argList»);
 			
+			«IF dc.base!=null»
+			// constructor using base class constructor
+			«dc.name»(«dc.base.name» _super, «dc.attributes.argListConstructor.toString»);
+			«ENDIF»
+			
 		};
 		
 		«generateIncludeGuardEnd(dc.name)»
@@ -154,6 +159,18 @@ class DataClassGen {
 			«ENDFOR»
 		{
 		}
+		
+		«IF dc.base!=null»
+		// constructor using base class constructor
+		«dc.name»::«dc.name»(«dc.base.name» _super, «dc.attributes.argListConstructor.toString»)
+			:
+			«dc.base.name»(_super),
+			«FOR a : dc.attributes SEPARATOR ","»
+			«a.name»(«a.name»_)
+			«ENDFOR»
+		{
+		}
+		«ENDIF»
 		
 		// assignment operator
 		«dc.name»& «dc.name»::operator=(const «dc.name»& rhs)

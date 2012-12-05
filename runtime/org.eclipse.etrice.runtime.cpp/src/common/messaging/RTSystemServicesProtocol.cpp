@@ -44,17 +44,21 @@ RTSystemServicesProtocol::~RTSystemServicesProtocol() {
 //------------------------------------------------------------------
 
 RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IEventReceiver& actor, IRTObject* parent, std::string name,
-		int localId, Address addr, Address peerAddress)
+		int localId, Address addr, Address peerAddress, bool doRegistration)
 :PortBase(actor, parent, name, localId, 0, addr, peerAddress)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
+	if (doRegistration) {
+		DebuggingService::getInstance().addPortInstance(*this);
+	}
 };
 
 RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IEventReceiver& actor, IRTObject* parent, std::string name,
-		int localId, int idx, Address addr, Address peerAddress)
+		int localId, int idx, Address addr, Address peerAddress, bool doRegistration)
 : PortBase(actor, parent, name, localId, idx, addr, peerAddress)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
+	if (doRegistration) {
+		DebuggingService::getInstance().addPortInstance(*this);
+	}
 };
 
 void RTSystemServicesProtocolPort::receive(Message* msg) {
@@ -65,7 +69,7 @@ void RTSystemServicesProtocolPort::receive(Message* msg) {
 		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
 			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+		getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 	}
 };
 
@@ -89,14 +93,19 @@ RTSystemServicesProtocolPortRepl(IEventReceiver& actor, IRTObject* parent, std::
 {
 	char numstr[10]; // enough to hold all numbers up to 32-bits
 
-	m_ports.reserve(m_replication);
+	//m_ports.reserve(m_replication);
+	m_ports = reinterpret_cast<RTSystemServicesProtocolPort*> (new char[sizeof(RTSystemServicesProtocolPort) * addr.size()]);
+
 	for (int i = 0; i < m_replication; ++i) {
 		snprintf(numstr, sizeof(numstr), "%d", i);
-		m_ports.push_back(RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
+		new  (&m_ports[i]) RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);
+
+		//m_ports.push_back(std::auto_ptr_ref<RTSystemServicesProtocolPort>(new RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i], false)));
+		//m_ports[i] = std::auto_ptr<RTSystemServicesProtocolPort>(new RTSystemServicesProtocolPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
 	}
-	for (int i = 0; i < m_replication; ++i) {
-		DebuggingService::getInstance().addPortInstance(m_ports.at(i));
-	}
+//	for (int i = 0; i < m_replication; ++i) {
+//		DebuggingService::getInstance().addPortInstance(m_ports.at(i));
+//	}
 
 };
 
@@ -104,7 +113,7 @@ RTSystemServicesProtocolPortRepl(IEventReceiver& actor, IRTObject* parent, std::
 
 void RTSystemServicesProtocolPortRepl::dummy() {
 	for (int i = 0; i < m_replication; ++i) {
-		m_ports.at(i).dummy();
+		m_ports[i].dummy();
 	}
 };
 
@@ -113,17 +122,21 @@ void RTSystemServicesProtocolPortRepl::dummy() {
 //------------------------------------------------------------------
 
 RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IEventReceiver& actor, IRTObject* parent,
-		std::string name, int localId, Address addr, Address peerAddress)
+		std::string name, int localId, Address addr, Address peerAddress, bool doRegistration)
 			: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
+	if (doRegistration) {
+		DebuggingService::getInstance().addPortInstance(*this);
+	}
 }
 RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IEventReceiver& actor, IRTObject* parent,
 		std::string name, int localId, int idx, Address addr,
-		Address peerAddress)
+		Address peerAddress, bool doRegistration)
 : PortBase(actor, parent, name, localId, idx, addr, peerAddress)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
+	if (doRegistration) {
+		DebuggingService::getInstance().addPortInstance(*this);
+	}
 }
 
 void RTSystemServicesProtocolConjPort::receive(Message* msg) {
@@ -134,7 +147,7 @@ void RTSystemServicesProtocolConjPort::receive(Message* msg) {
 		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
 			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+		getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 	}
 }
 
@@ -169,14 +182,11 @@ RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, s
   m_ports()
 {
 	char numstr[10]; // enough to hold all numbers up to 32-bits
-
-	m_ports.reserve(m_replication);
+	m_ports = reinterpret_cast<RTSystemServicesProtocolConjPort*> (new char[sizeof(RTSystemServicesProtocolConjPort) * addr.size()]);
 	for (int i = 0; i < m_replication; ++i) {
 		snprintf(numstr, sizeof(numstr), "%d", i);
-		m_ports.push_back(RTSystemServicesProtocolConjPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
-	}
-	for (int i = 0; i < m_replication; ++i) {
-		DebuggingService::getInstance().addPortInstance(m_ports.at(i));
+		//placement new to avoid copy construction, therefore no vector is used
+		new  (&m_ports[i]) RTSystemServicesProtocolConjPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);
 	}
 
 };
@@ -185,19 +195,19 @@ RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, s
 
 void RTSystemServicesProtocolConjPortRepl::executeInitialTransition() {
 	for (int i = 0; i < m_replication; ++i) {
-		m_ports.at(i).executeInitialTransition();
+		m_ports[i].executeInitialTransition();
 	}
 }
 
 void RTSystemServicesProtocolConjPortRepl::startDebugging() {
 	for (int i = 0; i < m_replication; ++i) {
-		m_ports.at(i).startDebugging();
+		m_ports[i].startDebugging();
 	}
 }
 
 void RTSystemServicesProtocolConjPortRepl::stopDebugging() {
 	for (int i = 0; i < m_replication; ++i) {
-		m_ports.at(i).stopDebugging();
+		m_ports[i].stopDebugging();
 	}
 }
 

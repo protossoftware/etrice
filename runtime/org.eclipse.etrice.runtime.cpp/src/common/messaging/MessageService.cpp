@@ -21,7 +21,9 @@ MessageService::MessageService(IRTObject* parent, Address addr, std::string name
 				Address(addr.m_nodeID, addr.m_threadID,	addr.m_objectID + 1),
 				"Dispatcher"),
 		m_address(addr),
-		m_lastMessageTimestamp(0) {
+		m_lastMessageTimestamp(0),
+        m_asyncActors()
+{
 
 	// check and set priority
 //			assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)");
@@ -42,6 +44,7 @@ void MessageService::run() {
 }
 
 void MessageService::runOnce() {
+	pollAsyncActors();
 	while (m_messageQueue.isNotEmpty()){
 		pollOneMessage();
 	}
@@ -98,6 +101,18 @@ void MessageService::pollOneMessage() {
 		m_messageDispatcher.receive(msg);
 	}
 
+}
+
+void MessageService::addAsyncActor(IEventReceiver& evtReceiver) {
+	m_asyncActors.push_back(&evtReceiver);
+}
+
+void MessageService::pollAsyncActors() {
+	std::vector<IEventReceiver*>::iterator it = m_asyncActors.begin();
+	for ( ; it != m_asyncActors.end(); ++it) {
+		// polling event
+		(*it)->receiveEvent(0,0,0);
+	}
 }
 
 

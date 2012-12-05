@@ -68,6 +68,10 @@ class JavaExtensions implements ILanguageExtension {
 		return true
 	}
 	
+	override boolean usesPointers() {
+		return false
+	}
+	
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		'''
 		«FOR entry: entries»

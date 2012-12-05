@@ -9,6 +9,7 @@
 #define ADDRESS_H_
 
 #include <string>
+#include <vector>
 
 namespace etRuntime {
 
@@ -20,8 +21,8 @@ public:
 	bool operator< (const Address& right) const;
 	~Address();
 
-	std::string toString();
-	std::string toID();
+	std::string toString() const;
+	std::string toID()const;
 
 	Address createInc(int i);
 	bool isValid() const {
@@ -31,6 +32,10 @@ public:
 	int m_nodeID;
 	int m_threadID;
 	int m_objectID;
+
+	//debug helper function
+	static void printAddrVector(const std::vector<std::vector<etRuntime::Address> >& addresses);
+
 
 private:
 };

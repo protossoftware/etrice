@@ -7,6 +7,7 @@
 
 #include "SubSystemRunnerBase.h"
 #include "SubSystemClassBase.h"
+#include "common/platform/etTimer.h"
 
 namespace etRuntime {
 
@@ -28,7 +29,12 @@ void SubSystemRunnerBase::waitMultiThreaded() {
 }
 
 void SubSystemRunnerBase::waitAndPollSingleThreaded(SubSystemClassBase& mainComponent) {
-	mainComponent.runOnce();
+	for (int i=0; i< 100; ++i) {
+		if (etTimer_executeNeeded()) {
+			mainComponent.runOnce();
+		}
+		Sleep(100);
+	}
 
 	std::string token = "";
 	std::cout << "type 'quit' to exit" << std::endl;

@@ -9,8 +9,10 @@
 #define MESSAGESERVICE_H_
 
 #include <string>
+#include <vector>
 #include "common/messaging/MessageDispatcher.h"
 #include "common/messaging/Address.h"
+#include "common/modelbase/IEventReceiver.h"
 #include "MessageSeQueue.h"
 
 namespace etRuntime {
@@ -38,6 +40,10 @@ public:
 	virtual std::string getInstancePathName() const ;
 	virtual bool isMsgService() const { return true;};
 
+	void addAsyncActor(IEventReceiver& evtReceiver);
+	void pollAsyncActors();
+
+
 	// protected methods for sole use by test cases
 protected:
 	MessageSeQueue& getMessageQueue() {	return m_messageQueue;	}
@@ -58,6 +64,8 @@ private:
 	MessageDispatcher m_messageDispatcher;
 	Address m_address;
 	long m_lastMessageTimestamp;
+
+	std::vector<IEventReceiver*> m_asyncActors;
 
 	MessageService();
 	MessageService(const MessageService& right);

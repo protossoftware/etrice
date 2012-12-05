@@ -28,8 +28,8 @@ ActorClassBase::~ActorClassBase() {
 	m_RTSystemPort = 0;
 }
 
-bool ActorClassBase::handleSystemEvent(const InterfaceItemBase& ifitem, int evt, void* generic_data) {
-	if (ifitem.getLocalId() != 0) {
+bool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
+	if ((ifitem != 0) && (ifitem->getLocalId() != 0)) {
 		return false;
 	}
 
@@ -41,6 +41,8 @@ bool ActorClassBase::handleSystemEvent(const InterfaceItemBase& ifitem, int evt,
 		break;
 	case RTSystemServicesProtocol::IN_stopDebugging:
 		break;
+	default:
+		return false;
 	}
 	return true;
 }

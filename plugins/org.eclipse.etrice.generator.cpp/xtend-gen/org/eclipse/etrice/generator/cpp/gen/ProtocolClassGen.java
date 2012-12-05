@@ -3,6 +3,7 @@ package org.eclipse.etrice.generator.cpp.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -27,12 +28,14 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -51,6 +54,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   @Inject
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  private Initialization _initialization;
   
   @Inject
   private ILogger logger;
@@ -309,11 +315,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.append("\t ");
       _builder.append(portClassName, "	 ");
-      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); ");
+      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true); ");
       _builder.newLineIfNotEmpty();
       _builder.append("\t ");
       _builder.append(portClassName, "	 ");
-      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);");
+      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t ");
@@ -374,9 +380,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("int m_replication;");
       _builder.newLine();
       _builder.append("\t    ");
-      _builder.append("std::vector<");
       _builder.append(portClassName, "	    ");
-      _builder.append("> m_ports;");
+      _builder.append("* m_ports;  //dynamic array used instead of vector to avoid copy construction");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
@@ -401,7 +406,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append(portClassName, "		");
-      _builder.append(" get(int i) {return m_ports.at(i);}");
+      _builder.append(" get(int i) {return m_ports[i];}");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.newLine();
@@ -540,15 +545,33 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(portClassName, "");
       _builder.append("::");
       _builder.append(portClassName, "");
-      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)");
+      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress, bool doRegistration)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append(": PortBase(actor, parent, name, localId, 0, addr, peerAddress)");
-      _builder.newLine();
+      _builder.append(": ");
+      CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(pclass, "0");
+      _builder.append(_generateConstructorInitalizerList, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
+      {
+        boolean _notEquals = (!Objects.equal(pclass, null));
+        if (_notEquals) {
+          EList<Attribute> _attributes = pclass.getAttributes();
+          CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes, false);
+          _builder.append(_attributeInitialization, "	");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("if (doRegistration) {");
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("DebuggingService::getInstance().addPortInstance(*this);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -556,15 +579,33 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(portClassName, "");
       _builder.append("::");
       _builder.append(portClassName, "");
-      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)");
+      _builder.append("(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress, bool doRegistration)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append(": PortBase(actor, parent, name, localId, idx, addr, peerAddress)");
-      _builder.newLine();
+      _builder.append(": ");
+      CharSequence _generateConstructorInitalizerList_1 = this.generateConstructorInitalizerList(pclass, "idx");
+      _builder.append(_generateConstructorInitalizerList_1, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
+      {
+        boolean _notEquals_1 = (!Objects.equal(pclass, null));
+        if (_notEquals_1) {
+          EList<Attribute> _attributes_1 = pclass.getAttributes();
+          CharSequence _attributeInitialization_1 = this._initialization.attributeInitialization(_attributes_1, false);
+          _builder.append(_attributeInitialization_1, "	");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("if (doRegistration) {");
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("DebuggingService::getInstance().addPortInstance(*this);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -578,7 +619,15 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("if (! ");
       String _name = pc.getName();
       _builder.append(_name, "	");
-      _builder.append("::isValidIncomingEvtID(msg->getEvtId())) {");
+      _builder.append("::");
+      {
+        if ((conj).booleanValue()) {
+          _builder.append("isValidOutgoingEvtID");
+        } else {
+          _builder.append("isValidIncomingEvtID");
+        }
+      }
+      _builder.append("(msg->getEvtId())) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("std::cout << \"unknown\" << std::endl;");
@@ -658,7 +707,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       _builder.append("\t\t\t\t");
-      _builder.append("getActor().receiveEvent(*this, msg->getEvtId(),\tmsg->getData());");
+      _builder.append("getActor().receiveEvent(this, msg->getEvtId(),\tmsg->getData());");
       _builder.newLine();
       {
         boolean _handlesReceive_1 = this.roomExt.handlesReceive(pc, (conj).booleanValue());
@@ -679,8 +728,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _notEquals = (!Objects.equal(pclass, null));
-        if (_notEquals) {
+        boolean _notEquals_2 = (!Objects.equal(pclass, null));
+        if (_notEquals_2) {
           EList<PortOperation> _operations = pclass.getOperations();
           CharSequence _operationsImplementation = this.helpers.operationsImplementation(_operations, portClassName);
           _builder.append(_operationsImplementation, "");
@@ -732,8 +781,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("m_ports.reserve(m_replication);");
-      _builder.newLine();
+      _builder.append("m_ports = reinterpret_cast<");
+      _builder.append(portClassName, "	");
+      _builder.append("*> (new char[sizeof(");
+      _builder.append(portClassName, "	");
+      _builder.append(") * addr.size()]);");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("for (int i = 0; i < m_replication; ++i) {");
       _builder.newLine();
@@ -741,9 +794,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("snprintf(numstr, sizeof(numstr), \"%d\", i);");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("m_ports.push_back(");
+      _builder.append("//placement new to avoid copy construction, therefore no vector is used");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new  (&m_ports[i]) ");
       _builder.append(portClassName, "		");
-      _builder.append("(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));");
+      _builder.append("(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
@@ -766,7 +822,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("for (int i=0; i<m_replication; ++i) {");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("m_ports.at(i).");
+          _builder.append("m_ports[i].");
           CharSequence _messageCall = this.messageCall(m_1);
           _builder.append(_messageCall, "		");
           _builder.append(";");
@@ -781,6 +837,29 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  public CharSequence generateConstructorInitalizerList(final PortClass pc, final String index) {
+    ArrayList<CharSequence> _arrayList = new ArrayList<CharSequence>();
+    ArrayList<CharSequence> initializerList = _arrayList;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("PortBase(actor, parent, name, localId, ");
+    _builder.append(index, "");
+    _builder.append(", addr, peerAddress)");
+    initializerList.add(_builder);
+    boolean _notEquals = (!Objects.equal(pc, null));
+    if (_notEquals) {
+      EList<Attribute> _attributes = pc.getAttributes();
+      for (final Attribute attrib : _attributes) {
+        CharSequence _attributeInitialization = this._initialization.attributeInitialization(attrib, false);
+        initializerList.add(_attributeInitialization);
+      }
+    }
+    StringConcatenation _builder_1 = new StringConcatenation();
+    String _join = IterableExtensions.join(initializerList, ",\n");
+    _builder_1.append(_join, "");
+    _builder_1.newLineIfNotEmpty();
+    return _builder_1;
   }
   
   private CharSequence messageCall(final Message m) {
@@ -1150,14 +1229,15 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                 VarDecl _data_1 = m.getData();
                 RefableType _refType = _data_1.getRefType();
                 boolean _isRef = _refType.isRef();
-                if (!_isRef) {
+                boolean _not = (!_isRef);
+                if (!_not) {
                   _and = false;
                 } else {
                   VarDecl _data_2 = m.getData();
                   RefableType _refType_1 = _data_2.getRefType();
                   DataType _type = _refType_1.getType();
-                  boolean _not = (!(_type instanceof PrimitiveType));
-                  _and = (_isRef && _not);
+                  boolean _not_1 = (!(_type instanceof PrimitiveType));
+                  _and = (_not && _not_1);
                 }
                 if (_and) {
                   _builder.append("&");

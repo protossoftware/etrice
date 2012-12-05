@@ -26,6 +26,9 @@ public:
 	//raises an exception if the service does not exist for this threadID
 	MessageService* getMsgSvc(int threadID);
 
+	void addAsyncActor(IEventReceiver& evtReceiver);
+	void pollAsyncActors();
+
 	//the connectAll method connects all messageServices
 	//it is included for test purposes
 	//currently it is not called

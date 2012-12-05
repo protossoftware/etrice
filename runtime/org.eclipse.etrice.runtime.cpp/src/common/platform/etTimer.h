@@ -20,6 +20,9 @@ typedef struct etTargetTime {
        unsigned long sec;
 } etTargetTime_t;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void etTimer_init(void);
 
 uint32 getNSecFromTarget(void);
@@ -37,4 +40,7 @@ uint32 getTimeBaseUS(void);
 
 uint32 getTimeBaseMS(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* __ETTIMER_H__ */

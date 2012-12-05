@@ -822,8 +822,8 @@ public class GenericStateMachineGenerator {
       _builder.append(_selfPointer_11, "");
       {
         if (handleEvents) {
-          String _constRef = this.constRef("InterfaceItemBase");
-          _builder.append(_constRef, "");
+          String _pointer = this.pointer("InterfaceItemBase");
+          _builder.append(_pointer, "");
           _builder.append(" ifitem, int evt, ");
           String _voidPointer_1 = this.langExt.voidPointer();
           _builder.append(_voidPointer_1, "");
@@ -840,11 +840,11 @@ public class GenericStateMachineGenerator {
           _builder.append(_nullPointer_4, "	");
           _builder.append(")? POLLING : ");
           {
-            boolean _usesInheritance_4 = this.langExt.usesInheritance();
-            if (_usesInheritance_4) {
-              _builder.append("ifitem.getLocalId()");
+            boolean _usesPointers = this.langExt.usesPointers();
+            if (_usesPointers) {
+              _builder.append("ifitem->getLocalId()");
             } else {
-              _builder.append("ifitem->localId");
+              _builder.append("ifitem.getLocalId()");
             }
           }
           _builder.append(" + EVT_SHIFT*evt;");
@@ -854,11 +854,11 @@ public class GenericStateMachineGenerator {
             _builder.append("\t");
             _builder.append("int trigger = ");
             {
-              boolean _usesInheritance_5 = this.langExt.usesInheritance();
-              if (_usesInheritance_5) {
-                _builder.append("ifitem.getLocalId()");
+              boolean _usesPointers_1 = this.langExt.usesPointers();
+              if (_usesPointers_1) {
+                _builder.append("ifitem->getLocalId()");
               } else {
-                _builder.append("ifitem->localId");
+                _builder.append("ifitem.getLocalId()");
               }
             }
             _builder.append(" + EVT_SHIFT*evt;");
@@ -923,10 +923,7 @@ public class GenericStateMachineGenerator {
       _builder.append("chain");
       {
         if (handleEvents) {
-          _builder.append(", ");
-          String _addressOp = this.addressOp("ifitem");
-          _builder.append(_addressOp, "		");
-          _builder.append(", generic_data");
+          _builder.append(", ifitem, generic_data");
         }
       }
       _builder.append(");");
@@ -1308,7 +1305,10 @@ public class GenericStateMachineGenerator {
       if (_hasDoCode) {
         String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(state);
         _builder.append(_doCodeOperationName, "");
-        _builder.append("(self);");
+        _builder.append("(");
+        String _selfPointer = this.langExt.selfPointer(false);
+        _builder.append(_selfPointer, "");
+        _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1790,7 +1790,7 @@ public class GenericStateMachineGenerator {
       _builder.append(_selfPointer_5, "	");
       {
         if (handleEvents) {
-          _builder.append("const etRuntime::InterfaceItemBase& ifitem, int evt, ");
+          _builder.append("etRuntime::InterfaceItemBase* ifitem, int evt, ");
           String _voidPointer_1 = this.langExt.voidPointer();
           _builder.append(_voidPointer_1, "	");
           _builder.append(" generic_data");

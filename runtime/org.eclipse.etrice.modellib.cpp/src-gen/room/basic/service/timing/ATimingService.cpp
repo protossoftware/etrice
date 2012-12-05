@@ -15,17 +15,18 @@ using namespace etRuntime;
 ATimingService::ATimingService(etRuntime::IRTObject* parent, std::string name, const std::vector<std::vector<etRuntime::Address> >& port_addr, 
  						  											 const std::vector<std::vector<etRuntime::Address> >& peer_addr)
 :  ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0]),
-timer(*this, this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer])
+timer(*this, this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]),
+tcbs(),
+usedTcbsRoot(0),
+freeTcbsRoot(0)
 {
 	setClassName("ATimingService");
-			// initialize attributes
-			tcbs = new etTimerControlBlock[10];
-			for (int i=0;i<10;i++){
-				tcbs[i] = etTimerControlBlock();
-			}
-			usedTcbsRoot = 0;
-			freeTcbsRoot = 0;
+	// initialize attributes
+	for (int i=0;i<10;i++){
+		tcbs[i] = etTimerControlBlock();
+	}
 
+	getMsgsvc()->addAsyncActor(*this);
 }
 
 void ATimingService::init(){
@@ -160,13 +161,13 @@ int ATimingService::executeTransitionChain(int chain, const InterfaceItemBase* i
 		}
 		case CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1:
 		{
-			uint32 time = *((uint32*) generic_data);
+			uint32 time = ((uint32) generic_data);
 			action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ifitem, time);
 			return STATE_Operational;
 		}
 		case CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3:
 		{
-			uint32 time = *((uint32*) generic_data);
+			uint32 time = ((uint32) generic_data);
 			action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ifitem, time);
 			return STATE_Operational;
 		}
@@ -209,8 +210,8 @@ void ATimingService::executeInitTransition() {
 }
 
 /* receiveEvent contains the main implementation of the FSM */
-void ATimingService::receiveEvent(const InterfaceItemBase& ifitem, int evt, void* generic_data) {
-	int trigger = (ifitem==0)? POLLING : ifitem.getLocalId() + EVT_SHIFT*evt;
+void ATimingService::receiveEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
+	int trigger = (ifitem==0)? POLLING : ifitem->getLocalId() + EVT_SHIFT*evt;
 	int chain = NOT_CAUGHT;
 	int catching_state = NO_STATE;
 	bool is_handler = false;
@@ -221,7 +222,7 @@ void ATimingService::receiveEvent(const InterfaceItemBase& ifitem, int evt, void
 			case STATE_Operational:
 				switch(trigger) {
 				case POLLING:
-					do_Operational(self);
+					do_Operational();
 					break;
 					case TRIG_timer__startTimeout:
 						{
@@ -247,7 +248,7 @@ void ATimingService::receiveEvent(const InterfaceItemBase& ifitem, int evt, void
 	}
 	if (chain != NOT_CAUGHT) {
 		exitTo(getState(), catching_state, is_handler);
-		int next = executeTransitionChain(chain, &ifitem, generic_data);
+		int next = executeTransitionChain(chain, ifitem, generic_data);
 		next = enterHistory(next, is_handler, skip_entry);
 		setState(next);
 	}

@@ -224,11 +224,11 @@ class GenericStateMachineGenerator {
 		}
 		
 		/* receiveEvent contains the main implementation of the FSM */
-		«IF langExt.usesInheritance»«langExt.accessLevelPublic»«ELSE»«langExt.accessLevelPrivate»«ENDIF»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«"InterfaceItemBase".constRef» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
+		«IF langExt.usesInheritance»«langExt.accessLevelPublic»«ELSE»«langExt.accessLevelPrivate»«ENDIF»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«"InterfaceItemBase".pointer» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
 			«IF async»
-				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : «IF langExt.usesInheritance»ifitem.getLocalId()«ELSE»ifitem->localId«ENDIF» + EVT_SHIFT*evt;
+				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : «IF langExt.usesPointers»ifitem->getLocalId()«ELSE»ifitem.getLocalId()«ENDIF» + EVT_SHIFT*evt;
 			«ELSEIF eventDriven»
-				int trigger = «IF langExt.usesInheritance»ifitem.getLocalId()«ELSE»ifitem->localId«ENDIF» + EVT_SHIFT*evt;
+				int trigger = «IF langExt.usesPointers»ifitem->getLocalId()«ELSE»ifitem.getLocalId()«ENDIF» + EVT_SHIFT*evt;
 			«ENDIF»
 			int chain = NOT_CAUGHT;
 			int catching_state = NO_STATE;
@@ -244,7 +244,7 @@ class GenericStateMachineGenerator {
 			«ENDIF»
 			if (chain != NOT_CAUGHT) {
 				exitTo(getState(), catching_state, is_handler);
-				int next = executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «addressOp("ifitem")», generic_data«ENDIF»);
+				int next = executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
 				next = enterHistory(«langExt.selfPointer(true)»next, is_handler, skip_entry);
 				setState(«langExt.selfPointer(true)»next);
 			}
@@ -352,7 +352,7 @@ class GenericStateMachineGenerator {
 	
 	def private genDoCodes(State state) {'''
 		«IF state.hasDoCode()»
-			«state.getDoCodeOperationName()»(self);
+			«state.getDoCodeOperationName()»(«langExt.selfPointer(false)»);
 		«ENDIF»
 		«IF state.eContainer.eContainer instanceof State»
 			«genDoCodes(state.eContainer.eContainer as State)»
@@ -514,7 +514,7 @@ class GenericStateMachineGenerator {
 			void executeInitTransition(«langExt.selfPointer(ac.name, false)»);
 			
 			/* receiveEvent contains the main implementation of the FSM */
-			void receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»const etRuntime::InterfaceItemBase& ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF»);
+			void receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»etRuntime::InterfaceItemBase* ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF»);
 	'''
 	}
 }

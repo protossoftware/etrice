@@ -22,6 +22,7 @@ public:
 	MessageDispatcher(IRTObject* parent, Address addr, std::string name);
 	void addMessageReceiver(IMessageReceiver& receiver);
 	void receive(Message* msg);
+
 	Address getAddress() const { return m_address; };
 
 private:

@@ -4,23 +4,24 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.ArrayList
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.core.room.InterfaceItem
-import org.eclipse.etrice.core.room.Port
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
-
+import org.eclipse.etrice.core.room.PortClass
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -30,6 +31,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
+	@Inject extension Initialization
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) { 
@@ -118,8 +120,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«ENDIF»
 	   public:
 		// constructors
-		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress); 
-		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress);
+		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true); 
+		 «portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, etRuntime::Address addr, etRuntime::Address peerAddress, bool doRegistration = true);
 	
 		 virtual void receive(etRuntime::Message* m);
 		«IF pclass!=null»
@@ -139,7 +141,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	class «replPortClassName» {
 		private:
 		    int m_replication;
-		    std::vector<«portClassName»> m_ports;
+		    «portClassName»* m_ports;  //dynamic array used instead of vector to avoid copy construction
 	
 		public:
 			«replPortClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, std::vector<etRuntime::Address> addr, std::vector<etRuntime::Address> peerAddress);
@@ -147,7 +149,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			
 			int getReplication() {	return m_replication; }
 			int getIndexOf(const etRuntime::InterfaceItemBase& ifitem){ return ifitem.getIdx();	}
-			«portClassName» get(int i) {return m_ports.at(i);}
+			«portClassName» get(int i) {return m_ports[i];}
 			
 			«IF pc.commType==CommunicationType::EVENT_DRIVEN»
 				 // outgoing messages
@@ -200,20 +202,26 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	// «IF conj»conjugated «ENDIF»port class
 	//------------------------------------------------------------------------------------------------------------
 	
-	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
-		: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
+	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress, bool doRegistration)
+		: «pclass.generateConstructorInitalizerList("0")»
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		«IF pclass!=null»«pclass.attributes.attributeInitialization(false)»«ENDIF»
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 
-	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
-		: PortBase(actor, parent, name, localId, idx, addr, peerAddress)
+	«portClassName»::«portClassName»(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress, bool doRegistration)
+		: «pclass.generateConstructorInitalizerList("idx")»
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		«IF pclass!=null»«pclass.attributes.attributeInitialization(false)»«ENDIF»
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 		
 	void «portClassName»::receive(Message* msg) {
-		if (! «pc.name»::isValidIncomingEvtID(msg->getEvtId())) {
+		if (! «pc.name»::«IF conj»isValidOutgoingEvtID«ELSE»isValidIncomingEvtID«ENDIF»(msg->getEvtId())) {
 			std::cout << "unknown" << std::endl;
 		}
 		else {
@@ -234,7 +242,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«ENDFOR»
 				default:
 			«ENDIF»
-					getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 			«IF pc.handlesReceive(conj)»
 					break;
 			}
@@ -260,10 +268,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	{
 		char numstr[10]; // enough to hold all numbers up to 32-bits
 	
-		m_ports.reserve(m_replication);
+		m_ports = reinterpret_cast<«portClassName»*> (new char[sizeof(«portClassName») * addr.size()]);
 		for (int i = 0; i < m_replication; ++i) {
 			snprintf(numstr, sizeof(numstr), "%d", i);
-			m_ports.push_back(«portClassName»(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
+			//placement new to avoid copy construction, therefore no vector is used
+			new  (&m_ports[i]) «portClassName»(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);
 		}
 	};
 	
@@ -272,13 +281,26 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	«FOR m : pc.getOutgoing(conj)»
 	«messageSignatureDefinition(m, replPortClassName)»{
 		for (int i=0; i<m_replication; ++i) {
-			m_ports.at(i).«messageCall(m)»;
+			m_ports[i].«messageCall(m)»;
 		}
 	}
 	«ENDFOR»
 	'''
 	}
 	
+	def generateConstructorInitalizerList(PortClass pc, String index) { 
+		var initializerList = new ArrayList<CharSequence>();
+		initializerList.add('''PortBase(actor, parent, name, localId, «index», addr, peerAddress)''')
+		if (pc != null) {
+			for (attrib: pc.attributes) {
+				initializerList.add(attrib.attributeInitialization(false))
+			}
+		}
+		return 
+		'''
+		  «initializerList.join(',\n')»
+		'''
+	}
 
 	
 	
@@ -361,7 +383,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					if (getPeerAddress().isValid()){
 						«IF m.data==null»getPeerMsgReceiver()->receive(new Message(getPeerAddress(), «portClassName»::«dir»_«m.name»));
 						«ELSE»getPeerMsgReceiver()->receive(new Message(getPeerAddress(),«portClassName»::«dir»_«m.name», 
-						                                                reinterpret_cast<void*>(«IF (m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»),
+						                                                reinterpret_cast<void*>(«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))»&«ENDIF»«m.data.name»),
 						                                                sizeof(«m.data.refType.type.typeName»)));
 						«ENDIF»
 					}

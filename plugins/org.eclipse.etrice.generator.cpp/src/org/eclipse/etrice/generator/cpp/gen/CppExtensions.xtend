@@ -75,6 +75,10 @@ class CppExtensions implements ILanguageExtension {
 		return true
 	}
 	
+	override boolean usesPointers() {
+		return true
+	}
+	
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		'''
 		typedef enum {
@@ -93,7 +97,7 @@ class CppExtensions implements ILanguageExtension {
 	override String voidPointer() { "void*" }
 
 	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
-		type+" "+name+"[]";
+		type+" "+name+"["+size+"]";
 	}
 	
 	override String constructorName(String cls) {
@@ -135,41 +139,6 @@ class CppExtensions implements ILanguageExtension {
 	}
 	
 
-//	def attributeConstructorInitList(List<Attribute> attribs, boolean useClassDefaultsOnly) {
-//		'''
-//			// initialize attributes
-//			«FOR a : attribs»
-//				«var value = a.initValue»
-//				«IF value!=null»
-//					«IF !a.isArray»
-//						«a.name» ( «value» ),
-//					«ELSE»
-//						«a.name» ( {
-//						«FOR i : 0 .. a.size»
-//							value,
-//						«ENDFOR»
-//						} )
-//					«ENDIF»
-//				«ELSEIF a.refType.type instanceof ComplexType || a.size>1 || !useClassDefaultsOnly»
-//					«IF a.size==0»
-//						«IF a.refType.isRef»
-//							«a.name» ( «languageExt.nullPointer()» ),
-//						«ELSE»
-//							«a.name» ( «a.refType.type.defaultValue» ),
-//						«ENDIF»
-//					«ELSE»
-//						«a.name» ( new «a.refType.type.typeName»[«a.size»] ),
-//						«IF !useClassDefaultsOnly»
-//							for (int i=0;i<«a.size»;i++){
-//								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«a.refType.type.defaultValue»«ENDIF»;
-//							}
-//						«ENDIF»
-//					«ENDIF»
-//				«ENDIF»
-//			«ENDFOR»
-//		'''
-//	}
-			 
 	override String toValueLiteral(PrimitiveType type, String value){
 		throw new UnsupportedOperationException("TODO Config for Cpp");
 	}
@@ -213,6 +182,7 @@ class CppExtensions implements ILanguageExtension {
 	}
 	
 	override generateArglistAndTypedData(VarDecl data) {
+		var deref = "*"
 		if (data==null)
 			return newArrayList("", "", "")
 			
@@ -236,12 +206,16 @@ class CppExtensions implements ILanguageExtension {
 			typeName = typeName+"*"
 			castTypeName = castTypeName+"*"
 		}
-		if (!(data.getRefType().getType() instanceof PrimitiveType)) {
+		else if (!(data.getRefType().getType() instanceof PrimitiveType)) {
 			typeName = typeName+"*"
 			castTypeName = castTypeName+"*"
 		}
+		else {
+			castTypeName = typeName
+			deref = ""
+		}
 			
-		val typedData = typeName+" "+data.getName() + " = *(("+castTypeName+") generic_data);\n"
+		val typedData = typeName+" "+data.getName() + " = " + deref + "(("+castTypeName+") generic_data);\n"
 
 		val dataArg = ", "+data.getName()
 		val typedArgList = ", "+typeName+" "+data.getName()

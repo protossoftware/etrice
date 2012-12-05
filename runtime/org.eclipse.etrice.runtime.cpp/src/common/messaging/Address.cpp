@@ -7,6 +7,7 @@
 
 #include "Address.h"
 #include <sstream>
+#include <iostream>
 
 namespace etRuntime {
 
@@ -48,13 +49,13 @@ bool Address::operator< (const Address& right) const {
 Address::~Address() {
 }
 
-std::string Address::toString(){
+std::string Address::toString() const{
    std::stringstream strm;
    strm << "Address(nodeID=" << m_nodeID
 		   << ",threadID=" << m_threadID  << ",objectID=" << m_objectID+")";
    return strm.str();
 }
-std::string Address::toID(){
+std::string Address::toID() const{
 	std::stringstream strm;
 	strm << m_nodeID << "_" << m_threadID << "_" << m_objectID;
 	return strm.str();
@@ -64,5 +65,18 @@ Address Address::createInc(int i) {
 	return Address(m_nodeID, m_threadID, m_objectID+i);
 }
 
+void Address::printAddrVector(const std::vector<std::vector<etRuntime::Address> >& addresses){
+	std::vector<std::vector<etRuntime::Address> >::const_iterator outerIt = addresses.begin();
+	std::cout << "{" ;
+	for (int i=0; outerIt!= addresses.end(); ++outerIt,++i) {
+		std::cout << "{" ;
+		std::vector<etRuntime::Address>::const_iterator it = (*outerIt).begin();
+		for (int j=0; it!=(*outerIt).end(); ++it,++j) {
+			std::cout << (*it).toID() << ":" << addresses[i][j].toID() << ",";
+		}
+		std::cout << "}" << std::endl;
+	}
+	std::cout << "}" << std::endl;
+}
 
 } /* namespace etRuntime */

@@ -20,16 +20,20 @@
 	// port class
 	//------------------------------------------------------------------------------------------------------------
 	
-	PTimerPort::PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
+	PTimerPort::PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress, bool doRegistration)
 		: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 	
-	PTimerPort::PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
+	PTimerPort::PTimerPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress, bool doRegistration)
 		: PortBase(actor, parent, name, localId, idx, addr, peerAddress)
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 		
 	void PTimerPort::receive(Message* msg) {
@@ -41,7 +45,7 @@
 				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), PTimer::getMessageString(msg->getEvtId()));
 			}
 			
-					getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 		}
 	};
 	
@@ -65,10 +69,11 @@
 	{
 		char numstr[10]; // enough to hold all numbers up to 32-bits
 	
-		m_ports.reserve(m_replication);
+		m_ports = reinterpret_cast<PTimerPort*> (new char[sizeof(PTimerPort) * addr.size()]);
 		for (int i = 0; i < m_replication; ++i) {
 			snprintf(numstr, sizeof(numstr), "%d", i);
-			m_ports.push_back(PTimerPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
+			//placement new to avoid copy construction, therefore no vector is used
+			new  (&m_ports[i]) PTimerPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);
 		}
 	};
 	
@@ -76,27 +81,35 @@
 	// outgoing messages
 	void PTimerReplPort::timeout(){
 		for (int i=0; i<m_replication; ++i) {
-			m_ports.at(i).timeout();
+			m_ports[i].timeout();
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------
 	// conjugated port class
 	//------------------------------------------------------------------------------------------------------------
 	
-	PTimerConjPort::PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress)
-		: PortBase(actor, parent, name, localId, 0, addr, peerAddress)
+	PTimerConjPort::PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, Address addr, Address peerAddress, bool doRegistration)
+		: PortBase(actor, parent, name, localId, 0, addr, peerAddress),
+		status(0)
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		// initialize attributes
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 	
-	PTimerConjPort::PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress)
-		: PortBase(actor, parent, name, localId, idx, addr, peerAddress)
+	PTimerConjPort::PTimerConjPort(etRuntime::IEventReceiver& actor, etRuntime::IRTObject* parent, std::string name, int localId, int idx, Address addr, Address peerAddress, bool doRegistration)
+		: PortBase(actor, parent, name, localId, idx, addr, peerAddress),
+		status(0)
 	{
-		DebuggingService::getInstance().addPortInstance(*this);
+		// initialize attributes
+		if (doRegistration) {
+			DebuggingService::getInstance().addPortInstance(*this);
+		}
 	}
 		
 	void PTimerConjPort::receive(Message* msg) {
-		if (! PTimer::isValidIncomingEvtID(msg->getEvtId())) {
+		if (! PTimer::isValidOutgoingEvtID(msg->getEvtId())) {
 			std::cout << "unknown" << std::endl;
 		}
 		else {
@@ -115,12 +128,12 @@
 											status=0;
 										}
 										// msg to fsm
-										getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+										getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 									}
 					}
 					break;
 				default:
-					getActor().receiveEvent(*this, msg->getEvtId(),	msg->getData());
+					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
 					break;
 			}
 		}
@@ -179,10 +192,11 @@
 	{
 		char numstr[10]; // enough to hold all numbers up to 32-bits
 	
-		m_ports.reserve(m_replication);
+		m_ports = reinterpret_cast<PTimerConjPort*> (new char[sizeof(PTimerConjPort) * addr.size()]);
 		for (int i = 0; i < m_replication; ++i) {
 			snprintf(numstr, sizeof(numstr), "%d", i);
-			m_ports.push_back(PTimerConjPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]));
+			//placement new to avoid copy construction, therefore no vector is used
+			new  (&m_ports[i]) PTimerConjPort(actor, parent, name + numstr, localId, i, addr[i], peerAddress[i]);
 		}
 	};
 	
@@ -190,17 +204,17 @@
 	// outgoing messages
 	void PTimerConjReplPort::startTimer(uint32 time){
 		for (int i=0; i<m_replication; ++i) {
-			m_ports.at(i).startTimer( time);
+			m_ports[i].startTimer( time);
 		}
 	}
 	void PTimerConjReplPort::startTimeout(uint32 time){
 		for (int i=0; i<m_replication; ++i) {
-			m_ports.at(i).startTimeout( time);
+			m_ports[i].startTimeout( time);
 		}
 	}
 	void PTimerConjReplPort::kill(){
 		for (int i=0; i<m_replication; ++i) {
-			m_ports.at(i).kill();
+			m_ports[i].kill();
 		}
 	}
 	

@@ -7,6 +7,7 @@
 
 #include "DebuggingService.h"
 #include "common/modelbase/ActorClassBase.h"
+#include <iostream>
 
 namespace etRuntime {
 
@@ -54,6 +55,7 @@ void DebuggingService::addActorState(const ActorClassBase& actor,
 
 void DebuggingService::addPortInstance(PortBase& port) {
 	portInstances[port.getAddress()] = &port;
+	std::cout << "adding " << port.getAddress().toID() << " " << &port << " " << port.getParent()->getInstancePathName()<< std::endl;
 }
 
 MSCLogger& DebuggingService::getSyncLogger() {

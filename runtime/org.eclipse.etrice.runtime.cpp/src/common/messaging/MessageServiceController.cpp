@@ -108,7 +108,7 @@ void MessageServiceController::runOnce() {
 	if (!m_running) {
 		return;
 	}
-	m_running = false;
+	//m_running = false;
 
 	// terminate all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();

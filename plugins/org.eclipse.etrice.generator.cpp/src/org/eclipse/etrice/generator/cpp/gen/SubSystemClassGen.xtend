@@ -96,7 +96,7 @@ class SubSystemClassGen {
 				{
 				}
 				
-				virtual void receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* data);
+				virtual void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data);
 				virtual void instantiateMessageServices();
 				virtual void instantiateActors();
 				
@@ -127,7 +127,7 @@ class SubSystemClassGen {
 		
 		using namespace etRuntime;
 		
-		void «comp.name»::receiveEvent(const InterfaceItemBase& ifitem, int evt, void* data){
+		void «comp.name»::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data){
 		}
 			
 		void «comp.name»::instantiateMessageServices(){

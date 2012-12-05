@@ -54,7 +54,7 @@
 			} interface_items;
 				
 			/*--------------------- attributes ---------------------*/
-			etTimerControlBlock tcbs[];
+			etTimerControlBlock tcbs[10];
 			etTimerControlBlock* usedTcbsRoot;
 			etTimerControlBlock* freeTcbsRoot;
 
@@ -251,7 +251,7 @@
 			void executeInitTransition();
 			
 			/* receiveEvent contains the main implementation of the FSM */
-			void receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* generic_data);
+			void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* generic_data);
 
 		/*--------------------- begin user code ---------------------*/
 		//uc2

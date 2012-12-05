@@ -13,11 +13,10 @@ import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.cpp.gen.Initialization
-import org.eclipse.etrice.generator.cpp.gen.StateMachineGen
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.ActorCommunicationType
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -133,7 +132,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ELSEIF !xpac.hasStateMachine()»
 			public: 
 				//--------------------- no state machine
-				virtual void receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* data);
+				virtual void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data);
 				virtual void executeInitTransition();
 			«ENDIF»
 
@@ -165,6 +164,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		for (svc : ac.serviceImplementations) {
 			initializerList.add('''«svc.spp.name»(*this, this, "«svc.spp.name»", IFITEM_«svc.spp.name», port_addr[IFITEM_«svc.spp.name»], peer_addr[IFITEM_«svc.spp.name»])''');
 		}
+		for (attrib: ac.attributes) {
+			initializerList.add(attrib.attributeInitialization(false))
+		}
 		return 
 		'''
 		  «initializerList.join(',\n')»
@@ -175,6 +177,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
+		val async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
 		
 		'''
 		/**
@@ -196,14 +199,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 		:  «ac.generateConstructorInitalizerList»
 		{
 			setClassName("«ac.name»");
-		«««				TODO change to constructor initializer list
 			«ac.attributes.attributeInitialization(false)»
 		
+			«IF async»
+			getMsgsvc()->addAsyncActor(*this);
+			«ENDIF»
 			«IF ctor!=null»
-			{
-				// user defined constructor body
-				«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
-			}
+			// user defined constructor body
+			«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
 			«ENDIF»
 		}
 		
@@ -233,7 +236,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«xpac.genStateMachine(false)»
 		«ELSEIF !xpac.hasStateMachine()»
 			//--------------------- no state machine
-			void «ac.name»::receiveEvent(const etRuntime::InterfaceItemBase& ifitem, int evt, void* data) {
+			void «ac.name»::receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data) {
 				handleSystemEvent(ifitem, evt, data);
 			}
 			
