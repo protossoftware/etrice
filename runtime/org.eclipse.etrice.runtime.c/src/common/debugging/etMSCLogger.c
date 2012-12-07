@@ -41,17 +41,25 @@ char* etMSCLogger_getObjectName(void){
 }
 
 void etMSCLogger_syncCall(char* sourceName, char* messageName, char* targetName){
-	etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s\n", sourceName, targetName, messageName);
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s\n", sourceName, targetName, messageName);
+	}
 }
 
 void etMSCLogger_syncReturn(char* sourceName, char* targetName){
-	etLogger_fprintf(etMSCLogger_fileHandle, "%s <== %s\n", sourceName, targetName);
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s <== %s\n", sourceName, targetName);
+	}
 }
 
 void etMSCLogger_asyncOut(char* sourceName, char* messageName, char* targetName){
-	etLogger_fprintf(etMSCLogger_fileHandle, "%s >-- %s %s\n", sourceName, targetName, messageName);
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s >-- %s %s\n", sourceName, targetName, messageName);
+	}
 }
 
 void etMSCLogger_asyncIn(char* sourceName, char* messageName, char* targetName){
-	etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
+	}
 }
