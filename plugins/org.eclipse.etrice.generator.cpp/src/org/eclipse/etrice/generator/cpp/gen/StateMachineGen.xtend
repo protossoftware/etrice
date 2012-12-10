@@ -28,7 +28,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	@Inject ProtocolClassGen cppProtGen
 	
 	override genExtraDecl(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
+//		val ac = xpac.actorClass
 	'''
 		protected:
 		 	static std::string s_stateStrings[];
@@ -77,22 +77,6 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		}
 		
 		return langExt.genEnumeration("triggers", list)
-	}
-	
-	override constRef(String classname) {
-		return "const " + classname + "&"	
-	}
-	
-	override pointer(String classname) {
-		return classname + "*"	
-	}
-	
-	override scopePrefix(String classname) {
-		return classname + "::"		
-	}
-	
-	override addressOp(String classname) {
-		return "&" + classname	
 	}
 	
 	override constPointer(String classname) {
