@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<!--
+	Ant makefile for building and running of tests.
+	This includes invocation of the Java code generator and conversion of the etunit
+	results into xunit xml.
+	
+	To work locally you should define in your environment
+	ETRICE_TARGET_PLATFORM=path to the eclipse folder of your Juno installation
+	ETRICE_CPP_RUNTIME=path to the org.eclipse.etrice.runtime.cpp folder (relative path doesn't work)
+	
+	@author Henrik Rentz-Reichert
+-->
+<project name="project" default="all">
+	
+	<property name="cpp.tests.model.path" value="./models"/>
+	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.cpp"/>
+	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.cpp"/>
+	<property name="bin.path" value="./bin"/>
+	<property name="xml.output" value="./tmp"/>
+	<property name="output" value="./output"/>
+	<property environment="env"/>
+
+	
+	<!--
+		all: copies the models, generates, compiles, runs, converts and copies the results
+	-->
+	<target name="all" depends="convert,copy_results">
+		<echo>done with org.eclipse.etrice.generator.cpp.tests</echo>
+	</target>
+
+	<!--
+		set_tp: get the target.platform property from the environment var ETRICE_TARGET_PLATFORM if not set already
+	-->
+	<target name="set_tp" unless="target.platform">
+		<echo>using local target platform</echo>
+		<property name="target.platform" value="${env.ETRICE_TARGET_PLATFORM}"/>
+	</target>
+
+	<!--
+		set_tr: sets the test.result property if not set already
+	-->
+	<target name="set_tr" unless="test.results">
+		<echo>using local test result folder</echo>
+		<property name="test.results" value="./results"/>
+	</target>
+
+	<!--
+		set_rp: sets the runtime.path from the ETRICE_CPP_RUNTIME environment variable property if not set already
+	-->
+	<target name="set_rp" unless="c-runtime.path,cpp-runtime.path">
+		<echo>using local runtime folder</echo>
+		<property name="cpp-runtime.path" value="${env.ETRICE_CPP_RUNTIME}"/>
+		<property name="c-runtime.path" value="${env.ETRICE_C_RUNTIME}"/>
+	</target>
+	
+	<!--
+		clean: deletes all folders created by this script
+	-->
+	<target name="clean" depends="set_tr">
+		<delete dir="${bin.path}"/>
+		<delete dir="models"/>
+		<delete dir="${output}"/>
+		<delete dir="${test.results}"/>
+		<delete dir="src-gen"/>
+		<delete dir="tmp"/>
+	</target>
+	
+	<!--
+		copy_models: copies the models from their original folders to the build location
+	-->
+	<target name="copy_models">
+		<copy todir="models" >
+			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
+				<include name="*.room"/>
+			</fileset>
+			<fileset dir="${modellib.path}/model">
+				<include name="TimingService.room"/>
+				<include name="Types.room"/>
+				<include name="Language.room"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<!--
+		generate: invokes the Java generator for the ROOM models
+	-->
+	<target name="generate" depends="set_tp,copy_models">
+		<mkdir dir="${output}"/>
+		<path id="clspath">
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.cpp/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin"/>
+			<fileset dir="${target.platform}/plugins/">
+				<include name="org.eclipse.emf.ecore_2.8*.jar" />
+				<include name="org.eclipse.emf.common_2.8*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8*.jar" />
+				<include name="org.eclipse.xtext_2.*.jar" />
+				<include name="com.google.inject_*.jar" />
+				<include name="com.google.guava_10.*.jar" />
+				<include name="org.eclipse.equinox.common_3.6.*.jar" />
+				<include name="org.eclipse.xtext.util_2.*.jar" />
+				<include name="org.eclipse.xtend.lib_2.*.jar" />
+				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
+				<include name="org.apache.log4j_1.2*.jar" />
+				<include name="org.antlr.runtime_3.2*.jar" />
+				<include name="javax.inject_1.0*.jar" />
+			</fileset>
+		</path>
+
+		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.cpp.Main" fork="true" failonerror="true">
+			<arg value="${cpp.tests.model.path}/ChoicePointTest.room"/>
+			<arg value="${cpp.tests.model.path}/HandlerTest.room"/>
+			<arg value="-etunit"/>
+			<classpath refid="clspath"/>
+		</java>
+	</target>
+	
+	<!--
+		compile_runtime: compiles the CPP runtime library
+	-->
+	<target name="compile_runtime" depends="set_rp">
+		<mkdir dir="${cpp-runtime.path}/bin"/>
+		<mkdir dir="${output}"/>
+		<exec dir="${cpp-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_runtime.txt">
+			<arg value="-I${cpp-runtime.path}/src"/>
+			<arg value="-I${cpp-runtime.path}/src/platforms/generic"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../src/common/debugging/DebuggingService.cpp"/>
+			<arg value="../src/common/debugging/MSCFilter.cpp"/>
+			<arg value="../src/common/debugging/MSCLogger.cpp"/>
+			<!--arg value="../src/common/etUnit/etUnit.c"/-->
+			<arg value="../src/common/messaging/Address.cpp"/>
+			<arg value="../src/common/messaging/IMessageReceiver.cpp"/>
+			<arg value="../src/common/messaging/IRTObject.cpp"/>
+			<arg value="../src/common/messaging/Message.cpp"/>
+			<arg value="../src/common/messaging/MessageDispatcher.cpp"/>
+			<arg value="../src/common/messaging/MessageSeQueue.cpp"/>
+			<arg value="../src/common/messaging/MessageService.cpp"/>
+			<arg value="../src/common/messaging/MessageServiceController.cpp"/>
+			<arg value="../src/common/messaging/RTObject.cpp"/>
+			<arg value="../src/common/messaging/RTServices.cpp"/>
+			<arg value="../src/common/messaging/RTSystemServicesProtocol.cpp"/>
+			<arg value="../src/common/modelbase/ActorClassBase.cpp"/>
+			<arg value="../src/common/modelbase/EventReceiver.cpp"/>
+			<arg value="../src/common/modelbase/IEventReceiver.cpp"/>
+			<arg value="../src/common/modelbase/InterfaceItemBase.cpp"/>
+			<arg value="../src/common/modelbase/PortBase.cpp"/>
+			<arg value="../src/common/modelbase/SubSystemClassBase.cpp"/>
+			<arg value="../src/common/modelbase/SubSystemRunnerBase.cpp"/>
+			<arg value="../src/common/modelbase/TestSemaphore.cpp"/>
+		</exec>
+		<exec dir="${cpp-runtime.path}/bin" executable="ar" failonerror="true" output="${output}/compile_runtime.txt" append="true">
+			<arg value="-r"/>
+			<arg value="liborg.eclipse.etrice.runtime.cpp.a"/>
+			<arg value="DebuggingService.o"/>
+			<arg value="MSCFilter.o"/>
+			<arg value="MSCLogger.o"/>
+			<arg value="Address.o"/>
+			<arg value="IMessageReceiver.o"/>
+			<arg value="IRTObject.o"/>
+			<arg value="Message.o"/>
+			<arg value="MessageDispatcher.o"/>
+			<arg value="MessageSeQueue.o"/>
+			<arg value="MessageService.o"/>
+			<arg value="MessageServiceController.o"/>
+			<arg value="RTObject.o"/>
+			<arg value="RTServices.o"/>
+			<arg value="RTSystemServicesProtocol.o"/>
+			<arg value="ActorClassBase.o"/>
+			<arg value="EventReceiver.o"/>
+			<arg value="IEventReceiver.o"/>
+			<arg value="InterfaceItemBase.o"/>
+			<arg value="PortBase.o"/>
+			<arg value="SubSystemClassBase.o"/>
+			<arg value="SubSystemRunnerBase.o"/>
+			<arg value="TestSemaphore.o"/>
+		</exec>
+	</target>
+	
+	<!--
+		compile: compiles the generated C sources
+	-->
+	<target name="build" depends="set_rp,compile_runtime,generate">
+
+		<!-- compile and link HandlerTest -->
+		<mkdir dir="bin/HandlerTest"/>
+		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt">
+			<arg value="-I../../src-gen/ChoicePointTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen"/>
+			<arg value="-I${cpp-runtime.path}/src"/>
+			<arg value="-I${cpp-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/common/etUnit"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../../src-gen/HandlerTest/HandlerTest_Top.cpp"/>
+			<arg value="../../src-gen/HandlerTest/HandlerUser.cpp"/>
+			<arg value="../../src-gen/HandlerTest/SubSystem_HandlerTest.cpp"/>
+			<arg value="../../src-gen/HandlerTest/SubSystem_HandlerTest_Runner.cpp"/>
+			<arg value="../../src-gen/HandlerTest/Tester.cpp"/>
+			<arg value="../../src-gen/HandlerTest/TestProtocol.cpp"/>
+		</exec>
+		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.cpp/bin"/>
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-oHandlerTest.exe"/>
+			<arg value="HandlerTest_Top.o"/>
+			<arg value="HandlerUser.o"/>
+			<arg value="SubSystem_HandlerTest.o"/>
+			<arg value="Tester.o"/>
+			<arg value="TestProtocol.o"/>
+			<arg value="SubSystem_HandlerTest_Runner.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.cpp"/>
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+		</exec>
+		
+		<!-- compile and link ChoicepointTest -->
+		<mkdir dir="bin/ChoicePointTest"/>
+		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-I../../src-gen/ChoicePointTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen"/>
+			<arg value="-I${cpp-runtime.path}/src"/>
+			<arg value="-I${cpp-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/common/etUnit"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../../src-gen/ChoicePointTest/CPTest_Top.cpp"/>
+			<arg value="../../src-gen/ChoicePointTest/CPTester.cpp"/>
+			<arg value="../../src-gen/ChoicePointTest/CPUser.cpp"/>
+			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest.cpp"/>
+			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest_Runner.cpp"/>
+			<arg value="../../src-gen/ChoicePointTest/TestProtocol.cpp"/>
+		</exec>
+		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.cpp/bin"/>
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-oChoicePointTest.exe"/>
+			<arg value="CPTest_Top.o"/>
+			<arg value="CPTester.o"/>
+			<arg value="CPUser.o"/>
+			<arg value="SubSystem_CPTest.o"/>
+			<arg value="SubSystem_CPTest_Runner.o"/>
+			<arg value="TestProtocol.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.cpp"/>
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+		</exec>
+		</target>
+
+	<!--
+		run: runs all executables
+	-->
+	<target name="run" depends="build">
+		<mkdir dir="tmp/log"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+	</target>
+	
+	<!--
+		convert: converts etu- into xunit xml-format
+	-->
+	<target name="convert" depends="run,set_tp">
+		<path id="clspath">
+			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
+			<fileset dir="${target.platform}/plugins/">
+				<include name="org.eclipse.core.runtime_3.8*.jar" />
+				<include name="org.eclipse.emf.ecore_2.8*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.8*.jar" />
+				<include name="org.eclipse.emf.common_2.8*.jar" />
+			</fileset>
+		</path>
+
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.ChoicePointTest"/>
+			<arg value="./tmp/ChoicePointTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.HandlerTest"/>
+			<arg value="./tmp/HandlerTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+	</target>
+	
+	<!--
+		copy_results: copies the *.xml results to their final destination
+	-->
+	<target name="copy_results" depends="set_tr">
+		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CPPHandlerTest.xml"/>
+		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CPPChoicePointTest.xml"/>
+		<copy todir="${test.results}" >
+			<fileset dir="./tmp">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	
+</project>
