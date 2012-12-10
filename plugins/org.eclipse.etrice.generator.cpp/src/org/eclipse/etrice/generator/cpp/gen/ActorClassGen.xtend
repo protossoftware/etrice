@@ -43,7 +43,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 	}
 	
-	def generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
+	def private generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		
@@ -149,7 +149,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«generateIncludeGuardEnd(ac.name)»
 	'''
 	}
-	def generateConstructorInitalizerList(ActorClass ac) { 
+	def private generateConstructorInitalizerList(ActorClass ac) { 
 		var initializerList = new ArrayList<CharSequence>();
 		if (ac.base==null) {
 			initializerList.add('''ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0])''')
@@ -179,7 +179,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	
-	def generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
+	def private generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
@@ -195,11 +195,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "«ac.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
 		#include <iostream>
-		«IF GeneratorOptions::useEtUnit»
-			extern "C" {
-				#include "etUnit.h"
-			}
-		«ENDIF»
 		
 		using namespace etRuntime;
 		
