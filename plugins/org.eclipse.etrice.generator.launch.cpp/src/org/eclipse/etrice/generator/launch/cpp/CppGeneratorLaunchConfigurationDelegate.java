@@ -27,6 +27,7 @@ public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#addArguments(org.eclipse.debug.core.ILaunchConfiguration, java.lang.StringBuffer)
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
 		if (configuration.getAttribute(CppGeneratorConfigTab.LIB, false)) {
@@ -36,8 +37,11 @@ public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 			argString.append(" "+Main.OPTION_SAVE_GEN_MODEL);
 			argString.append(" "+configuration.getAttribute(CppGeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
-		if (configuration.getAttribute(CppGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
+		if (configuration.getAttribute(CppGeneratorConfigTab.GEN_DOCUMENTATION, false)
+				|| configuration.getAttribute(CppGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
 			argString.append(" "+Main.OPTION_DOCUMENTATION);
+		if (configuration.getAttribute(CppGeneratorConfigTab.ETUNIT, false))
+			argString.append(" "+Main.OPTION_ETUNIT);
 	}
 
 	/* (non-Javadoc)

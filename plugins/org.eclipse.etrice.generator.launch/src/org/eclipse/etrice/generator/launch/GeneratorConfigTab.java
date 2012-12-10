@@ -38,6 +38,9 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab {
 
 	protected class UpdateConfig implements SelectionListener {
+		public UpdateConfig() {
+		}
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			validate();
@@ -63,12 +66,12 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String LIB = "Lib";
 	public static final String DEBUG = "Debug";
 	
-	protected Button libButton;
-	protected Button documentationButton;
-	protected Button saveGenModel;
-	protected Text genModelPath;
-	protected Button browsePath;
-	protected Button debugButton;
+	private Button libButton;
+	private Button documentationButton;
+	private Button saveGenModel;
+	private Text genModelPath;
+	private Button browsePath;
+	private Button debugButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -131,6 +134,14 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		debugButton = createCheckButton(mainComposite, "debug output");
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		debugButton.addSelectionListener(new UpdateConfig());
+		
+		addFurtherControls(mainComposite);
+	}
+
+	/**
+	 * @param mainComposite
+	 */
+	protected void addFurtherControls(Composite mainComposite) {
 	}
 
 	/**
