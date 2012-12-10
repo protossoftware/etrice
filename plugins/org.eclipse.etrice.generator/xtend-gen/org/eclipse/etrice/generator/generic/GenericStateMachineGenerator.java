@@ -226,6 +226,17 @@ public class GenericStateMachineGenerator {
         _xifexpression_2 = "->localId";
       }
       final String getLocalId = _xifexpression_2;
+      String _pointerLiteral = this.langExt.pointerLiteral();
+      final String ifItemPtr = ("InterfaceItemBase" + _pointerLiteral);
+      String _xifexpression_4 = null;
+      boolean _usesPointers_1 = this.langExt.usesPointers();
+      if (_usesPointers_1) {
+        String _plus = ("const " + ifItemPtr);
+        _xifexpression_4 = _plus;
+      } else {
+        _xifexpression_4 = ifItemPtr;
+      }
+      final String constIfItemPtr = _xifexpression_4;
       StringConcatenation _builder = new StringConcatenation();
       {
         if (shallGenerateOneFile) {
@@ -326,9 +337,7 @@ public class GenericStateMachineGenerator {
               _builder.append(_selfPointer, "");
               {
                 if (hasArgs) {
-                  _builder.append("InterfaceItemBase");
-                  String _pointerLiteral = this.langExt.pointerLiteral();
-                  _builder.append(_pointerLiteral, "");
+                  _builder.append(constIfItemPtr, "");
                   _builder.append(" ifitem");
                   String _generateArgumentList = this.transitionChainGenerator.generateArgumentList(xpac, tr);
                   _builder.append(_generateArgumentList, "");
@@ -472,9 +481,8 @@ public class GenericStateMachineGenerator {
       _builder.append("int chain");
       {
         if (handleEvents) {
-          _builder.append(", InterfaceItemBase");
-          String _pointerLiteral_1 = this.langExt.pointerLiteral();
-          _builder.append(_pointerLiteral_1, "");
+          _builder.append(", ");
+          _builder.append(constIfItemPtr, "");
           _builder.append(" ifitem, ");
           String _voidPointer = this.langExt.voidPointer();
           _builder.append(_voidPointer, "");
@@ -796,9 +804,7 @@ public class GenericStateMachineGenerator {
       _builder.append(_selfPointer_7, "");
       {
         if (handleEvents) {
-          _builder.append("InterfaceItemBase");
-          String _pointerLiteral_2 = this.langExt.pointerLiteral();
-          _builder.append(_pointerLiteral_2, "");
+          _builder.append(ifItemPtr, "");
           _builder.append(" ifitem, int evt, ");
           String _voidPointer_1 = this.langExt.voidPointer();
           _builder.append(_voidPointer_1, "");

@@ -120,7 +120,11 @@ class GenericStateMachineGenerator {
 							}
 							else
 								"->localId"
-		
+		val ifItemPtr = "InterfaceItemBase"+langExt.pointerLiteral()
+		val constIfItemPtr = if (langExt.usesPointers)
+								"const "+ifItemPtr
+							else
+								ifItemPtr
 	'''
 		«IF shallGenerateOneFile»
 		/* state IDs */
@@ -147,7 +151,7 @@ class GenericStateMachineGenerator {
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
-				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase«langExt.pointerLiteral()» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
+				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
 				}
 			«ENDIF»
@@ -181,7 +185,7 @@ class GenericStateMachineGenerator {
 		 * @param generic_data - the generic data pointer
 		 * @return the ID of the final state
 		 */
-		«privAccess»int «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», InterfaceItemBase«langExt.pointerLiteral()» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
+		«privAccess»int «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
 			switch (chain) {
 				«var allchains = xpac.getTransitionChains()»
 				«FOR tc : allchains»
@@ -245,7 +249,7 @@ class GenericStateMachineGenerator {
 		}
 		
 		/* receiveEvent contains the main implementation of the FSM */
-		«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»InterfaceItemBase«langExt.pointerLiteral()» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
+		«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
 			«IF async»
 				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ELSEIF eventDriven»
