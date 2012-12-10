@@ -36,6 +36,40 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.runtime.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" 
+			name="eTrice C++ Runtime" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>The C++ Runtime required by eTrice C++ projects</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.runtime.cpp" contentURI="contents/org.eclipse.etrice.runtime.cpp.zip" description="eTrice Runtime for C++"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.modellib.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" 
+			name="eTrice C++ ModelLib" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>A ROOM Model Library for C++ with useful services</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.modellib.cpp" contentURI="contents/org.eclipse.etrice.modellib.cpp.zip" description="eTrice ModelLib for C++"/>
+	  </example>
+	</extension>   
+
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" 
