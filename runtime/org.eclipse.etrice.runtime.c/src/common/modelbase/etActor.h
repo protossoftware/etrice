@@ -19,6 +19,6 @@
 #define NOT_CAUGHT 0
 #define EVT_SHIFT 100
 
-etBool handleSystemEvent(InterfaceItemBase ifitem, int evt, void* generic_data);
+etBool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);
 
 #endif /* _ETACTOR_H_ */

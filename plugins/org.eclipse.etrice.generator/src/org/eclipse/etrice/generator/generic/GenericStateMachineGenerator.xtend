@@ -94,11 +94,32 @@ class GenericStateMachineGenerator {
 	def genStateMachine(ExpandedActorClass xpac) {
 		xpac.genStateMachine(true)
 	}
+	
 	def genStateMachine(ExpandedActorClass xpac, boolean shallGenerateOneFile) {
 		val ac = xpac.actorClass
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
+		val opScope = langExt.operationScope(ac.name, false)
+		val opScopePriv = if (langExt.usesInheritance)
+							opScope
+						else
+							""
+		val publicIf = if (langExt.usesInheritance)
+				langExt.accessLevelPublic
+			else
+				langExt.accessLevelPrivate
+		val privAccess = langExt.accessLevelPrivate
+		val self = langExt.selfPointer(ac.name, true)
+		val selfOnly = langExt.selfPointer(ac.name, false)
+		val getLocalId = 	if (langExt.usesInheritance) {
+								if (langExt.usesPointers)
+									"->getLocalId()"
+								else
+									".getLocalId()"
+							}
+							else
+								"->localId"
 		
 	'''
 		«IF shallGenerateOneFile»
@@ -126,7 +147,7 @@ class GenericStateMachineGenerator {
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
-				«langExt.accessLevelProtected»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«"InterfaceItemBase".constPointer» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
+				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»InterfaceItemBase«langExt.pointerLiteral()» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
 				}
 			«ENDIF»
@@ -139,7 +160,7 @@ class GenericStateMachineGenerator {
 		 * @param to - the final parent state
 		 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
 		 */
-		«langExt.accessLevelPrivate»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»exitTo(«langExt.selfPointer(ac.name, true)»int current, int to, «boolType» handler) {
+		«privAccess»void «opScopePriv»exitTo(«self»int current, int to, «boolType» handler) {
 			while (current!=to) {
 				switch (current) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
@@ -160,7 +181,7 @@ class GenericStateMachineGenerator {
 		 * @param generic_data - the generic data pointer
 		 * @return the ID of the final state
 		 */
-		«langExt.accessLevelPrivate»int «IF !shallGenerateOneFile»«ac.name»::«ENDIF»executeTransitionChain(«langExt.selfPointer(ac.name, true)»int chain«IF handleEvents», «"InterfaceItemBase".constPointer» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
+		«privAccess»int «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», InterfaceItemBase«langExt.pointerLiteral()» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
 			switch (chain) {
 				«var allchains = xpac.getTransitionChains()»
 				«FOR tc : allchains»
@@ -179,7 +200,7 @@ class GenericStateMachineGenerator {
 		 * @param handler - entry code is executed if not handler
 		 * @return - the ID of the final leaf state
 		 */
-		«langExt.accessLevelPrivate»int «IF !shallGenerateOneFile»«ac.name»::«ENDIF»enterHistory(«langExt.selfPointer(ac.name, true)»int state, «boolType» handler, «boolType» skip_entry) {
+		«privAccess»int «opScopePriv»enterHistory(«self»int state, «boolType» handler, «boolType» skip_entry) {
 			while («langExt.booleanConstant(true)») {
 				switch (state) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
@@ -215,20 +236,20 @@ class GenericStateMachineGenerator {
 			//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 		}
 		
-		«IF langExt.usesInheritance»«langExt.accessLevelPublic»«ELSE»«langExt.accessLevelPrivate»«ENDIF»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»executeInitTransition(«langExt.selfPointer(ac.name, false)») {
+		«publicIf»void «opScope»executeInitTransition(«selfOnly») {
 			«var initt = xpac.stateMachine.getInitTransition()»
 			int chain = «xpac.getChain(initt).getChainId()»;
-			int next = executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-			next = enterHistory(«langExt.selfPointer(true)»next, «langExt.booleanConstant(false)», «langExt.booleanConstant(false)»);
+			int next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, «langExt.booleanConstant(false)», «langExt.booleanConstant(false)»);
 			setState(«langExt.selfPointer(true)»next);
 		}
 		
 		/* receiveEvent contains the main implementation of the FSM */
-		«IF langExt.usesInheritance»«langExt.accessLevelPublic»«ELSE»«langExt.accessLevelPrivate»«ENDIF»void «IF !shallGenerateOneFile»«ac.name»::«ENDIF»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«"InterfaceItemBase".pointer» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
+		«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»InterfaceItemBase«langExt.pointerLiteral()» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
 			«IF async»
-				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : «IF langExt.usesPointers»ifitem->getLocalId()«ELSE»ifitem.getLocalId()«ENDIF» + EVT_SHIFT*evt;
+				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ELSEIF eventDriven»
-				int trigger = «IF langExt.usesPointers»ifitem->getLocalId()«ELSE»ifitem.getLocalId()«ENDIF» + EVT_SHIFT*evt;
+				int trigger = ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ENDIF»
 			int chain = NOT_CAUGHT;
 			int catching_state = NO_STATE;
@@ -243,9 +264,9 @@ class GenericStateMachineGenerator {
 				«genStateSwitch(xpac)»
 			«ENDIF»
 			if (chain != NOT_CAUGHT) {
-				exitTo(getState(), catching_state, is_handler);
-				int next = executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
-				next = enterHistory(«langExt.selfPointer(true)»next, is_handler, skip_entry);
+				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state, is_handler);
+				int next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
+				next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, is_handler, skip_entry);
 				setState(«langExt.selfPointer(true)»next);
 			}
 		}
@@ -260,7 +281,7 @@ class GenericStateMachineGenerator {
 		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
 		'''
-			switch (getState()) {
+			switch (getState(«langExt.selfPointer(false)»)) {
 				«FOR state : xpac.stateMachine.getLeafStateList()»
 				case «state.getStateId()»:
 					«IF async»
@@ -366,6 +387,11 @@ class GenericStateMachineGenerator {
 	def private genActionCodeMethods(ExpandedActorClass xpac, State state, boolean generateImplementation) {
 		val ac = xpac.actorClass
 		val selfPtr = langExt.selfPointer(xpac.actorClass.name, false)
+		val opScope = langExt.operationScope(ac.name, false)
+		val opScopePriv = if (langExt.usesInheritance)
+							opScope
+						else
+							""
 		val entryOp = state.getEntryCodeOperationName()
 		val exitOp = state.getExitCodeOperationName()
 		val doOp = state.getDoCodeOperationName()
@@ -397,7 +423,7 @@ class GenericStateMachineGenerator {
 		'''
 		«IF !entry.empty»
 			«IF generateImplementation»
-			«langExt.accessLevelProtected»void «scopePrefix(ac.name)»«entryOp»(«selfPtr») {
+			«langExt.accessLevelProtected»void «opScopePriv»«entryOp»(«selfPtr») {
 				«entry»
 			}
 			«ELSE»
@@ -406,7 +432,7 @@ class GenericStateMachineGenerator {
 		«ENDIF»
 		«IF !exit.empty»
 			«IF generateImplementation»
-			«langExt.accessLevelProtected»void «scopePrefix(ac.name)»«exitOp»(«selfPtr») {
+			«langExt.accessLevelProtected»void «opScopePriv»«exitOp»(«selfPtr») {
 				«exit»
 			}
 			«ELSE»
@@ -415,7 +441,7 @@ class GenericStateMachineGenerator {
 		«ENDIF»
 		«IF !docode.empty»
 			«IF generateImplementation»
-			«langExt.accessLevelProtected» void «scopePrefix(ac.name)»«doOp»(«selfPtr») {
+			«langExt.accessLevelProtected» void «opScopePriv»«doOp»(«selfPtr») {
 				«docode»
 			}
 			«ELSE»
@@ -424,24 +450,11 @@ class GenericStateMachineGenerator {
 		«ENDIF»
 		'''
 	}
-	def constRef(String classname) {
-		return classname	
-	}
-	
-	def addressOp(String classname) {
-		return classname	
-	}
 	
 	def constPointer(String classname) {
 		return classname	
 	}
 
-	def pointer(String classname) {
-		return classname	
-	}
-	def scopePrefix(String classname) {
-		return ""		
-	}
 	def boolType() {
 		return "boolean"
 	}
@@ -452,6 +465,7 @@ class GenericStateMachineGenerator {
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
+		val self = langExt.selfPointer(ac.name, true)
 		
 	'''
 		
@@ -490,7 +504,7 @@ class GenericStateMachineGenerator {
 			 * @param to - the final parent state
 			 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
 			 */
-			void exitTo(«langExt.selfPointer(ac.name, true)»int current, int to, «boolType» handler);
+			void exitTo(«self»int current, int to, «boolType» handler);
 			
 			/**
 			 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
@@ -499,7 +513,7 @@ class GenericStateMachineGenerator {
 			 * @param generic_data - the generic data pointer
 			 * @return the ID of the final state
 			 */
-			int executeTransitionChain(«langExt.selfPointer(ac.name, true)»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data«ENDIF»);
+			int executeTransitionChain(«self»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data«ENDIF»);
 			
 			/**
 			 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
@@ -507,7 +521,7 @@ class GenericStateMachineGenerator {
 			 * @param handler - entry code is executed if not handler
 			 * @return - the ID of the final leaf state
 			 */
-			int enterHistory(«langExt.selfPointer(ac.name, true)»int state, «boolType» handler, «boolType» skip_entry);
+			int enterHistory(«self»int state, «boolType» handler, «boolType» skip_entry);
 		
 		public:
 

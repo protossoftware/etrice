@@ -28,12 +28,13 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
-
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
 	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject extension ILanguageExtension langExt
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	
@@ -231,7 +232,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !xpac.stateMachine.empty»
 				
-				receiveEvent(self«IF handleEvents», (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage)))«ENDIF»);
+				«langExt.operationScope(ac.name, false)»receiveEvent(self«IF handleEvents», (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage)))«ENDIF»);
 			«ENDIF»
 			
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -242,7 +243,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_execute")
 				«IF !xpac.stateMachine.empty»
 					
-					receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
+					«langExt.operationScope(ac.name, false)»receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
 				«ENDIF»
 				
 				ET_MSC_LOGGER_SYNC_EXIT
