@@ -55,8 +55,9 @@
 	<!--
 		clean: deletes all folders created by this script
 	-->
-	<target name="clean" depends="set_tr">
+	<target name="clean" depends="set_tr,set_rp">
 		<delete dir="${bin.path}"/>
+		<delete dir="${c-runtime.path}/bin"/>
 		<delete dir="models"/>
 		<delete dir="${output}"/>
 		<delete dir="${test.results}"/>
@@ -192,7 +193,7 @@
 			<arg value="../../src-gen/HandlerTest/TestProtocol.c"/>
 		</exec>
 		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oHandlerTest.exe"/>
 			<arg value="HandlerTest_Top.o"/>
 			<arg value="HandlerUser.o"/>
@@ -226,7 +227,7 @@
 			<arg value="../../src-gen/ChoicePointTest/TestProtocol.c"/>
 		</exec>
 		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oChoicePointTest.exe"/>
 			<arg value="CPTest_Top.o"/>
 			<arg value="CPTester.o"/>
@@ -263,7 +264,7 @@
 			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData_Runner.c"/>
 		</exec>
 		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oSendingDataTestC.exe"/>
 			<arg value="MrPing.o"/>
 			<arg value="MrPong.o"/>
