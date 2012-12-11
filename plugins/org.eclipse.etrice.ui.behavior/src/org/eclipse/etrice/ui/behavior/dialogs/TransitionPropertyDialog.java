@@ -323,7 +323,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			return false;
 		
 		for (InterfaceItem item : interfaceItems) {
-			if (!RoomHelpers.getMessageList(item, false).isEmpty())
+			if (!RoomHelpers.getMessageListDeep(item, false).isEmpty())
 				return true;
 		}
 		return false;
@@ -619,7 +619,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						currentMsgs = RoomHelpers.getMessageList(mif.getFrom(), false);
+						currentMsgs = RoomHelpers.getMessageListDeep(mif.getFrom(), false);
 						int pos = 0;
 						int idx = -1;
 						for (Message message : currentMsgs) {
@@ -659,7 +659,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private MessageFromIf createDefaultMif() {
 		MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
 		for (InterfaceItem item : interfaceItems) {
-			List<Message> msgs = RoomHelpers.getMessageList(item, false);
+			List<Message> msgs = RoomHelpers.getMessageListDeep(item, false);
 			if (!msgs.isEmpty()) {
 				mif.setFrom(item);
 				mif.setMessage(msgs.get(0));

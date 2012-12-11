@@ -814,7 +814,7 @@ public class RoomHelpers {
 		return true;
 	}
 	
-	public static List<Message> getMessageList(InterfaceItem item, boolean outgoing) {
+	public static List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
 		if (item instanceof Port) {
 			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
@@ -839,7 +839,7 @@ public class RoomHelpers {
 			return null;
 		}
 		
-		return outgoing? protocol.getOutgoingMessages():protocol.getIncomingMessages();
+		return outgoing? RoomHelpers.getAllMessages(protocol,false):RoomHelpers.getAllMessages(protocol,true);
 	}
 	
 	public static PortClass getPortClass(InterfaceItem item) {

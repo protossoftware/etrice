@@ -325,18 +325,18 @@ public class ValidationUtil {
 					}
 					else {
 						if (RoomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
-							if (((ProtocolClass)pc1).getIncomingMessages().size()>0)
+							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
 								pc1extendsIncoming = true;
-							if (((ProtocolClass)pc1).getOutgoingMessages().size()>0)
+							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,false).size()>RoomHelpers.getAllMessages((ProtocolClass)pc2,false).size())
 								pc1extendsOutgoing = true;
 							if (pc1extendsIncoming && pc1extendsOutgoing)
 								return Result.error("derived protocols not connectable (both directions extended)");
 
 						}
 						else if (RoomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
-							if (((ProtocolClass)pc2).getIncomingMessages().size()>0)
+							if (RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size()>RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size())
 								pc2extendsIncoming = true;
-							if (((ProtocolClass)pc2).getOutgoingMessages().size()>0)
+							if (RoomHelpers.getAllMessages((ProtocolClass)pc2,false).size()>RoomHelpers.getAllMessages((ProtocolClass)pc1,false).size())	
 								pc2extendsOutgoing = true;
 							if (pc2extendsIncoming && pc2extendsOutgoing)
 								return Result.error("derived protocols not connectable (both directions extended)");

@@ -698,20 +698,26 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	private void fillTriggerStringMap() {
 		// improve performance using maps name2ifitem and name2msgs
 		HashMap<String, InterfaceItem> name2ifitem = new HashMap<String, InterfaceItem>();
-		HashMap<String, EList<Message>> name2msgs = new HashMap<String, EList<Message>>();
+		HashMap<String, List<Message>> name2msgs = new HashMap<String, List<Message>>();
 		ActorClass ac = getActorClass();
-		while (ac!=null) {
+		while (ac!=null){ 
 			for (Port ip : ac.getIntPorts()) {
-				mapPort(ip, name2ifitem, name2msgs);
+				name2ifitem.put(ip.getName(), ip);
+				name2msgs.put(ip.getName(),RoomHelpers.getMessageListDeep(ip, false));      								
 			}
 			for (ExternalPort ep : ac.getExtPorts()) {
-				mapPort(ep.getIfport(), name2ifitem, name2msgs);
+				Port p=ep.getIfport();
+				name2ifitem.put(p.getName(),p);
+				name2msgs.put(p.getName(),RoomHelpers.getMessageListDeep(p, false));      								
 			}
 			for (SAPRef sap : ac.getStrSAPs()) {
-				mapSAP(sap, name2ifitem, name2msgs);
+				name2ifitem.put(sap.getName(),sap);
+				name2msgs.put(sap.getName(),RoomHelpers.getMessageListDeep(sap, false));      																
 			}
 			for (ServiceImplementation spp : ac.getServiceImplementations()) {
-				mapSPP(spp.getSpp(), name2ifitem, name2msgs);
+				SPPRef p=spp.getSpp();
+				name2ifitem.put(p.getName(),p);
+				name2msgs.put(p.getName(),RoomHelpers.getMessageListDeep(p, false));      												
 			}
 
 			ac = ac.getBase();
@@ -738,7 +744,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			// this should always hold true
 			assert(ii!=null): "The name '"+parts[0]+"' did not match an interface item (in name2ifitem)!";
 
-			EList<Message> msgs = name2msgs.get(parts[0]);
+			List<Message> msgs = name2msgs.get(parts[0]);
 			
 			// this should always hold true
 			assert(msgs!=null): "The name '"+parts[0]+"' did not match an interface item (in name2msgs)!";
@@ -758,36 +764,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			triggerstring2mif.put(trig, mif);
 		}
 	}
-
-	private void mapPort(Port p, HashMap<String, InterfaceItem> name2ifitem,
-			HashMap<String, EList<Message>> name2msgs) {
-		name2ifitem.put(p.getName(), p);
-		
-		if (!(p.getProtocol() instanceof ProtocolClass))
-			return;
-		
-		if (p.isConjugated())
-			name2msgs.put(p.getName(), ((ProtocolClass)p.getProtocol()).getOutgoingMessages());
-		else
-			name2msgs.put(p.getName(), ((ProtocolClass)p.getProtocol()).getIncomingMessages());
-	}
-
-	private void mapSAP(SAPRef sap, HashMap<String, InterfaceItem> name2ifitem,
-			HashMap<String, EList<Message>> name2msgs) {
-		name2ifitem.put(sap.getName(), sap);
-
-		// sap is conjugated wrt to the protocol
-		name2msgs.put(sap.getName(), sap.getProtocol().getOutgoingMessages());
-	}
-
-	private void mapSPP(SPPRef spp, HashMap<String, InterfaceItem> name2ifitem,
-			HashMap<String, EList<Message>> name2msgs) {
-		name2ifitem.put(spp.getName(), spp);
-
-		// spp is regular wrt to the protocol
-		name2msgs.put(spp.getName(), spp.getProtocol().getIncomingMessages());
-	}
-
+	
 	private void addTransitionChain(Transition t) {
 		TransitionChain tc = ETriceGenFactory.eINSTANCE.createTransitionChain();
 		tc.setTransition(t);

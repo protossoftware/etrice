@@ -270,7 +270,7 @@ public class DetailCodeTranslator {
 		
 		String token = getToken(text, curr);
 		
-		List<Message> messages = RoomHelpers.getMessageList(item, outgoing);
+		List<Message> messages = RoomHelpers.getMessageListDeep(item, outgoing);
 		for (Message message : messages) {
 			if (message.getName().equals(token))
 				return message;
