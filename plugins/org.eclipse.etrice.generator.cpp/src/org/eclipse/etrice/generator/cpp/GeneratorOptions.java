@@ -4,21 +4,27 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- *
+ * 
  *******************************************************************************/
 
-#ifndef _ETACTOR_H_
-#define _ETACTOR_H_
+package org.eclipse.etrice.generator.cpp;
 
-#include "etDatatypes.h"
-#include "modelbase/etPort.h"
+/**
+ * @author Henrik Rentz-Reichert
+ *
+ */
+public class GeneratorOptions {
 
-#define NOT_CAUGHT 0
-#define EVT_SHIFT 100
+	static private boolean useEtUnit = false;
 
-etBool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);
+	public static boolean isUseEtUnit() {
+		return useEtUnit;
+	}
 
-#endif /* _ETACTOR_H_ */
+	public static void setUseEtUnit(boolean useEtUnit) {
+		GeneratorOptions.useEtUnit = useEtUnit;
+	}
+}

@@ -50,7 +50,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			for (i=0; i<«ac.name.toUpperCase»_HISTORY_SIZE; ++i)
 				self->history[i] = NO_STATE;
 		}
-		executeInitTransition(self);
+		«langExt.operationScope(ac.name, false)»executeInitTransition(self);
 	'''}
 	
 	override genExtra(ExpandedActorClass xpac) {
@@ -59,6 +59,10 @@ class StateMachineGen extends GenericStateMachineGenerator {
 
 		«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
 			self->state = new_state;
+		}
+
+		«langExt.accessLevelPrivate»int getState(«ac.name»* self) {
+			return self->state;
 		}
 	'''
 	}

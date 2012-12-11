@@ -15,6 +15,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.cpp.gen.Initialization
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.cpp.GeneratorOptions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -115,6 +116,11 @@ class DataClassGen {
 		 */
 
 		#include "«dc.getCppHeaderFileName»"
+		«IF GeneratorOptions::useEtUnit»
+			extern "C" {
+				#include "etUnit.h"
+			}
+		«ENDIF»
 		
 		«helpers.userCode(dc.userCode3)»
 		

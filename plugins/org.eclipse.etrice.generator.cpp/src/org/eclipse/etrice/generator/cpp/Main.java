@@ -37,6 +37,7 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_DOCUMENTATION = "-genDocu";
 	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
 	public static final String OPTION_DEBUG = "-debug";
+	public static final String OPTION_ETUNIT = "-etunit";
 	
 	/**
 	 * print usage message to stderr
@@ -103,6 +104,9 @@ public class Main extends AbstractGenerator {
 			}
 			else if (args[i].equals(OPTION_DEBUG)) {
 				debug = true;
+			}
+			else if (args[i].equals(OPTION_ETUNIT)) {
+				GeneratorOptions.setUseEtUnit(true);
 			}
 			else {
 				uriList.add(args[i]);

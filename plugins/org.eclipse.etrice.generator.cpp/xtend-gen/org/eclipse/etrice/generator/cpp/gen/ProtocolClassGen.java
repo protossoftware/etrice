@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.generator.cpp.GeneratorOptions;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
@@ -473,6 +474,21 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("\t");
     _builder.append("#include <iostream>");
     _builder.newLine();
+    {
+      boolean _isUseEtUnit = GeneratorOptions.isUseEtUnit();
+      if (_isUseEtUnit) {
+        _builder.append("\t");
+        _builder.append("extern \"C\" {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("#include \"etUnit.h\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("\t");
     _builder.append("using namespace etRuntime;");

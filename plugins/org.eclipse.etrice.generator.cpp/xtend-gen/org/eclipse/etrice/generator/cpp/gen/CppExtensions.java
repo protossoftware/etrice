@@ -89,7 +89,14 @@ public class CppExtensions implements ILanguageExtension {
   }
   
   public String operationScope(final String classname, final boolean isDeclaration) {
-    return "";
+    String _xifexpression = null;
+    if (isDeclaration) {
+      _xifexpression = "";
+    } else {
+      String _plus = (classname + "::");
+      _xifexpression = _plus;
+    }
+    return _xifexpression;
   }
   
   public String memberInDeclaration(final String namespace, final String member) {

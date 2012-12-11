@@ -22,6 +22,8 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.core.room.PortClass
+import org.eclipse.etrice.generator.cpp.GeneratorOptions
+
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -173,6 +175,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
 		#include <iostream>
+		«IF GeneratorOptions::useEtUnit»
+			extern "C" {
+				#include "etUnit.h"
+			}
+		«ENDIF»
 
 		using namespace etRuntime;
 		

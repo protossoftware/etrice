@@ -26,7 +26,10 @@ public class CGeneratorMainTab extends GeneratorMainTab {
 	 */
 	@Override
 	protected boolean isValidModelFile(IResource resource) {
-		return resource.getName().endsWith(".room");
+		return resource.getName().endsWith(".room")
+				|| resource.getName().endsWith(".config")
+				|| resource.getName().endsWith(".etphys")
+				|| resource.getName().endsWith(".etmap");
 	}
 
 }

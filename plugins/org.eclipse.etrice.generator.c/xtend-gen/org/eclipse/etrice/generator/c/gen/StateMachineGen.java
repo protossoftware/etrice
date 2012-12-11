@@ -85,8 +85,11 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
+      String _name_1 = ac.getName();
+      String _operationScope = this.langExt.operationScope(_name_1, false);
+      _builder.append(_operationScope, "");
       _builder.append("executeInitTransition(self);");
-      _builder.newLine();
+      _builder.newLineIfNotEmpty();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -107,6 +110,19 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("self->state = new_state;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      String _accessLevelPrivate_1 = this.langExt.accessLevelPrivate();
+      _builder.append(_accessLevelPrivate_1, "");
+      _builder.append("int getState(");
+      String _name_1 = ac.getName();
+      _builder.append(_name_1, "");
+      _builder.append("* self) {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("return self->state;");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

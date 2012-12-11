@@ -14,7 +14,7 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
+import org.eclipse.etrice.generator.cpp.GeneratorOptions
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ActorCommunicationType
 
@@ -43,7 +43,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 	}
 	
-	def generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
+	def private generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		
@@ -66,6 +66,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/IMessageReceiver.h"
 		#include "common/debugging/DebuggingService.h"
+		«IF GeneratorOptions::useEtUnit»
+			extern "C" {
+				#include "etUnit.h"
+			}
+		«ENDIF»
 		#include <string>
 		#include <vector>
 		
@@ -144,7 +149,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«generateIncludeGuardEnd(ac.name)»
 	'''
 	}
-	def generateConstructorInitalizerList(ActorClass ac) { 
+	def private generateConstructorInitalizerList(ActorClass ac) { 
 		var initializerList = new ArrayList<CharSequence>();
 		if (ac.base==null) {
 			initializerList.add('''ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0])''')
@@ -174,7 +179,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	
-	def generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
+	def private generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS

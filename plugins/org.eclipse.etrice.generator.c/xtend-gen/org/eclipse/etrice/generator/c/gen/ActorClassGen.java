@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,6 +40,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
+  
+  @Inject
+  private ILanguageExtension langExt;
   
   @Inject
   private CExtensions _cExtensions;
@@ -683,6 +687,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
+          String _name_6 = ac.getName();
+          String _operationScope = this.langExt.operationScope(_name_6, false);
+          _builder.append(_operationScope, "	");
           _builder.append("receiveEvent(self");
           {
             if (handleEvents) {
@@ -710,17 +717,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
         if (_or_1) {
           _builder.append("void ");
-          String _name_6 = ac.getName();
-          _builder.append(_name_6, "");
-          _builder.append("_execute(");
           String _name_7 = ac.getName();
           _builder.append(_name_7, "");
+          _builder.append("_execute(");
+          String _name_8 = ac.getName();
+          _builder.append(_name_8, "");
           _builder.append("* self) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-          String _name_8 = ac.getName();
-          _builder.append(_name_8, "	");
+          String _name_9 = ac.getName();
+          _builder.append(_name_9, "	");
           _builder.append("\", \"_execute\")");
           _builder.newLineIfNotEmpty();
           {
@@ -731,6 +738,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");
+              String _name_10 = ac.getName();
+              String _operationScope_1 = this.langExt.operationScope(_name_10, false);
+              _builder.append(_operationScope_1, "	");
               _builder.append("receiveEvent(self");
               {
                 if (handleEvents) {
