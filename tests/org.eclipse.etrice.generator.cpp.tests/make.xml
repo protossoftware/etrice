@@ -14,7 +14,6 @@
 	
 	<property name="cpp.tests.model.path" value="./models"/>
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.cpp"/>
-	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.cpp"/>
 	<property name="bin.path" value="./bin"/>
 	<property name="xml.output" value="./tmp"/>
 	<property name="output" value="./output"/>
@@ -56,8 +55,10 @@
 	<!--
 		clean: deletes all folders created by this script
 	-->
-	<target name="clean" depends="set_tr">
+	<target name="clean" depends="set_tr,set_rp">
 		<delete dir="${bin.path}"/>
+		<delete dir="${c-runtime.path}/bin"/>
+		<delete dir="${cpp-runtime.path}/bin"/>
 		<delete dir="models"/>
 		<delete dir="${output}"/>
 		<delete dir="${test.results}"/>
@@ -119,6 +120,47 @@
 			<arg value="-etunit"/>
 			<classpath refid="clspath"/>
 		</java>
+	</target>
+	
+	<!--
+		compile_c_runtime: compiles the C runtime library
+	-->
+	<target name="compile_c_runtime" depends="set_rp">
+		<mkdir dir="${c-runtime.path}/bin"/>
+		<mkdir dir="${output}"/>
+		<exec dir="${c-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_c_runtime.txt">
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="../src/common/debugging/etMSCLogger.c"/>
+			<arg value="../src/common/etUnit/etUnit.c"/>
+			<arg value="../src/common/messaging/etMessage.c"/>
+			<arg value="../src/common/messaging/etMessageQueue.c"/>
+			<arg value="../src/common/messaging/etMessageService.c"/>
+			<arg value="../src/common/modelbase/etActor.c"/>
+			<arg value="../src/common/modelbase/etPort.c"/>
+			<arg value="../src/platforms/generic/etLogger.c"/>
+			<arg value="../src/platforms/generic/etPlatform.c"/>
+			<arg value="../src/platforms/generic/etTimer.c"/>
+		</exec>
+		<exec dir="${c-runtime.path}/bin" executable="ar" failonerror="true" output="${output}/compile_c_runtime.txt" append="true">
+			<arg value="-r"/>
+			<arg value="liborg.eclipse.etrice.runtime.c.a"/>
+			<arg value="etMSCLogger.o"/>
+			<arg value="etUnit.o"/>
+			<arg value="etMessage.o"/>
+			<arg value="etMessageQueue.o"/>
+			<arg value="etMessageService.o"/>
+			<arg value="etActor.o"/>
+			<arg value="etPort.o"/>
+			<arg value="etLogger.o"/>
+			<arg value="etPlatform.o"/>
+			<arg value="etTimer.o"/>
+		</exec>
 	</target>
 	
 	<!--
@@ -189,7 +231,7 @@
 	<!--
 		compile: compiles the generated C sources
 	-->
-	<target name="build" depends="set_rp,compile_runtime,generate">
+	<target name="build" depends="set_rp,compile_c_runtime,compile_runtime,generate">
 
 		<!-- compile and link HandlerTest -->
 		<mkdir dir="bin/HandlerTest"/>
@@ -211,9 +253,9 @@
 			<arg value="../../src-gen/HandlerTest/Tester.cpp"/>
 			<arg value="../../src-gen/HandlerTest/TestProtocol.cpp"/>
 		</exec>
-		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.cpp/bin"/>
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+		<exec dir="bin/HandlerTest" executable="g++" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L${cpp-runtime.path}/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oHandlerTest.exe"/>
 			<arg value="HandlerTest_Top.o"/>
 			<arg value="HandlerUser.o"/>
@@ -247,9 +289,9 @@
 			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest_Runner.cpp"/>
 			<arg value="../../src-gen/ChoicePointTest/TestProtocol.cpp"/>
 		</exec>
-		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.cpp/bin"/>
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+		<exec dir="bin/ChoicePointTest" executable="g++" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L${cpp-runtime.path}/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oChoicePointTest.exe"/>
 			<arg value="CPTest_Top.o"/>
 			<arg value="CPTester.o"/>
