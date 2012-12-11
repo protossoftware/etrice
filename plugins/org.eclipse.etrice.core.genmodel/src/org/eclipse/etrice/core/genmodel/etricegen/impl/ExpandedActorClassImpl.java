@@ -57,7 +57,6 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
@@ -699,28 +698,10 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// improve performance using maps name2ifitem and name2msgs
 		HashMap<String, InterfaceItem> name2ifitem = new HashMap<String, InterfaceItem>();
 		HashMap<String, List<Message>> name2msgs = new HashMap<String, List<Message>>();
-		ActorClass ac = getActorClass();
-		while (ac!=null){ 
-			for (Port ip : ac.getIntPorts()) {
-				name2ifitem.put(ip.getName(), ip);
-				name2msgs.put(ip.getName(),RoomHelpers.getMessageListDeep(ip, false));      								
-			}
-			for (ExternalPort ep : ac.getExtPorts()) {
-				Port p=ep.getIfport();
-				name2ifitem.put(p.getName(),p);
-				name2msgs.put(p.getName(),RoomHelpers.getMessageListDeep(p, false));      								
-			}
-			for (SAPRef sap : ac.getStrSAPs()) {
-				name2ifitem.put(sap.getName(),sap);
-				name2msgs.put(sap.getName(),RoomHelpers.getMessageListDeep(sap, false));      																
-			}
-			for (ServiceImplementation spp : ac.getServiceImplementations()) {
-				SPPRef p=spp.getSpp();
-				name2ifitem.put(p.getName(),p);
-				name2msgs.put(p.getName(),RoomHelpers.getMessageListDeep(p, false));      												
-			}
-
-			ac = ac.getBase();
+		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(getActorClass());
+		for (InterfaceItem item : items) {
+			name2ifitem.put(item.getName(), item);
+			name2msgs.put(item.getName(),RoomHelpers.getMessageListDeep(item, false));      								
 		}
 		
 		// compute a set of all trigger strings
