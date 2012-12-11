@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.c.gen;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -27,17 +26,15 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
-import org.eclipse.etrice.generator.base.ITranslationProvider;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 
 import com.google.inject.Inject;
 
-public class CTranslationProvider implements ITranslationProvider {
+public class CTranslationProvider extends DefaultTranslationProvider {
 
 	@Inject private RoomExtensions roomExt;
-	@Inject ILogger logger;
 	@Inject ILanguageExtension langExt;
 	
 	@Override
@@ -144,15 +141,8 @@ public class CTranslationProvider implements ITranslationProvider {
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("ifitem.index"))
 			return "((etReplSubPort*)ifitem)->index";
-		
-		if (tag.equals("MODEL_LOCATION")) {
-			return RoomNameProvider.getDetailCodeLocation(code);
-		}
-		
-		logger.logInfo("unrecognized tag '"+tag+"' in "
-				+RoomNameProvider.getDetailCodeLocation(code)+" of "
-				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));
-		return TAG_START+"?"+tag+"?"+TAG_END;
+
+		return super.translateTag(tag, code);
 	}
 	
 	private String getOrigComment(String orig) {

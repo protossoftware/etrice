@@ -14,23 +14,17 @@ package org.eclipse.etrice.generator.java.gen;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
-
-import com.google.inject.Inject;
 
 /**
  * @author hrentz
  *
  */
 public class JavaTranslationProvider extends DefaultTranslationProvider {
-
-	@Inject ILogger logger;
 
 	@Override
 	public boolean translateMembers() {
@@ -71,14 +65,7 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 		if (tag.equals("ifitem.index"))
 			return "ifitem.getIdx()";
 		
-		if (tag.equals("MODEL_LOCATION")) {
-			return RoomNameProvider.getDetailCodeLocation(code);
-		}
-		
-		logger.logInfo("unrecognized tag '"+tag+"' in "
-				+RoomNameProvider.getDetailCodeLocation(code)+" of "
-				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));
-		return TAG_START+"?"+tag+"?"+TAG_END;
+		return super.translateTag(tag, code);
 	}
 
 }
