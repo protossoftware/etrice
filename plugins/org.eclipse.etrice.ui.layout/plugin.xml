@@ -83,5 +83,29 @@
             name="Structure">
       </page>
    </extension>
+   <extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+		      locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+		   <command
+		         commandId="de.cau.cs.kieler.kiml.ui.command.layout"
+		         label="Layout"
+		         style="push">
+		      <parameter
+		            name="de.cau.cs.kieler.kiml.ui.layoutScope"
+		            value="selection">
+		      </parameter>
+		      <visibleWhen
+		            checkEnabled="false">
+		         <with
+		               variable="activeEditor">
+		            <test
+		                  property="de.cau.cs.kieler.kiml.ui.activeEditorIsSupported">
+		            </test>
+		         </with>
+		      </visibleWhen>
+		   </command>
+		</menuContribution>
+   </extension>
 
 </plugin>
