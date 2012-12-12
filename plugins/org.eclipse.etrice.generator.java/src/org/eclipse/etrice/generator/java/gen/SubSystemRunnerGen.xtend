@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 
 @Singleton
 class SubSystemRunnerGen {
@@ -54,11 +55,19 @@ class SubSystemRunnerGen {
 		     */
 			public static void main(String[] args) {
 				// instantiate the main component
-				«cc.name» main_component = new «cc.name»("«ssc.name»");
+				«cc.name» main_component = new «cc.name»("«ssc.runtimeName»");
 				
 				run(main_component, args);
 			}
 		};
 	'''
+	}
+	
+	def private getRuntimeName(SubSystemInstance ssc){
+		var parent = ssc.eContainer
+		switch parent{
+			SystemInstance: parent.name+"/"+ssc.name
+			default: ssc.name
+		}
 	}	
 }
