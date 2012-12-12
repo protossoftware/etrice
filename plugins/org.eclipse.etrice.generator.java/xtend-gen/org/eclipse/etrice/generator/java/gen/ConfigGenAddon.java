@@ -21,9 +21,9 @@ import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -43,6 +43,9 @@ public class ConfigGenAddon {
   
   @Inject
   private RoomExtensions _roomExtensions;
+  
+  @Inject
+  private Initialization initGen;
   
   public CharSequence genActorInstanceConfig(final ActorInstance ai, final String aiVariableName) {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,126 +96,34 @@ public class ConfigGenAddon {
       Attribute a = IterableExtensions.<Attribute>last(path);
       RefableType _refType = a.getRefType();
       DataType aType = _refType.getType();
-      CharSequence _xifexpression = null;
-      boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-      if (_isPrimitive) {
-        CharSequence _xblockexpression_1 = null;
-        {
-          String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
-          CharSequence _xifexpression_1 = null;
-          boolean _equals = Objects.equal(value, null);
-          if (_equals) {
-            StringConcatenation _builder = new StringConcatenation();
-            _xifexpression_1 = _builder;
-          } else {
-            CharSequence _xifexpression_2 = null;
-            boolean _or = false;
-            int _size = a.getSize();
-            boolean _equals_1 = (_size == 0);
-            if (_equals_1) {
-              _or = true;
-            } else {
-              boolean _isCharacterType = this.typeHelpers.isCharacterType(aType);
-              _or = (_equals_1 || _isCharacterType);
+      CharSequence _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (aType instanceof PrimitiveType) {
+          final PrimitiveType _primitiveType = (PrimitiveType)aType;
+          _matched=true;
+          CharSequence _xblockexpression_1 = null;
+          {
+            String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
+            CharSequence _xifexpression = null;
+            boolean _notEquals = (!Objects.equal(value, null));
+            if (_notEquals) {
+              String _valueLiteral = this.stdExt.toValueLiteral(_primitiveType, value);
+              CharSequence _genAttributeInitializer = this.initGen.genAttributeInitializer(a, _valueLiteral, invokes);
+              _xifexpression = _genAttributeInitializer;
             }
-            if (_or) {
-              StringConcatenation _builder_1 = new StringConcatenation();
-              _builder_1.append(invokes, "");
-              _builder_1.append(".");
-              String _name = a.getName();
-              String _valueLiteral = this.stdExt.toValueLiteral(((PrimitiveType) aType), value);
-              CharSequence _invokeSetter = this.helpers.invokeSetter(_name, null, _valueLiteral);
-              _builder_1.append(_invokeSetter, "");
-              _builder_1.append(";");
-              _xifexpression_2 = _builder_1;
-            } else {
-              CharSequence _xifexpression_3 = null;
-              int _size_1 = a.getSize();
-              String[] _split = value.split(",");
-              int _size_2 = ((List<String>)Conversions.doWrapArray(_split)).size();
-              boolean _equals_2 = (_size_1 == _size_2);
-              if (_equals_2) {
-                CharSequence _xblockexpression_2 = null;
-                {
-                  StringConcatenation _builder_2 = new StringConcatenation();
-                  _builder_2.append("{ ");
-                  {
-                    String[] _split_1 = value.split(",");
-                    boolean _hasElements = false;
-                    for(final String s : _split_1) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder_2.appendImmediate(", ", "");
-                      }
-                      String _trim = s.trim();
-                      String _valueLiteral_1 = this.stdExt.toValueLiteral(((PrimitiveType) aType), _trim);
-                      _builder_2.append(_valueLiteral_1, "");
-                    }
-                  }
-                  _builder_2.append(" }");
-                  CharSequence arrayExpr = _builder_2;
-                  StringConcatenation _builder_3 = new StringConcatenation();
-                  _builder_3.append(invokes, "");
-                  _builder_3.append(".");
-                  String _name_1 = a.getName();
-                  StringConcatenation _builder_4 = new StringConcatenation();
-                  _builder_4.append("new ");
-                  String _typeName = this.typeHelpers.typeName(aType);
-                  _builder_4.append(_typeName, "");
-                  _builder_4.append("[] ");
-                  _builder_4.append(arrayExpr, "");
-                  String _string = _builder_4.toString();
-                  CharSequence _invokeSetter_1 = this.helpers.invokeSetter(_name_1, null, _string);
-                  _builder_3.append(_invokeSetter_1, "");
-                  _builder_3.append(";");
-                  _xblockexpression_2 = (_builder_3);
-                }
-                _xifexpression_3 = _xblockexpression_2;
-              } else {
-                StringConcatenation _builder_2 = new StringConcatenation();
-                _builder_2.append("{");
-                _builder_2.newLine();
-                _builder_2.append("\t");
-                String _typeName = this.typeHelpers.typeName(aType);
-                _builder_2.append(_typeName, "	");
-                _builder_2.append("[] array = ");
-                _builder_2.append(invokes, "	");
-                _builder_2.append(".");
-                String _name_1 = a.getName();
-                CharSequence _invokeGetter = this.helpers.invokeGetter(_name_1, null);
-                _builder_2.append(_invokeGetter, "	");
-                _builder_2.append(";");
-                _builder_2.newLineIfNotEmpty();
-                _builder_2.append("\t");
-                _builder_2.append("for (int i=0;i<");
-                int _size_3 = a.getSize();
-                _builder_2.append(_size_3, "	");
-                _builder_2.append(";i++){");
-                _builder_2.newLineIfNotEmpty();
-                _builder_2.append("\t\t");
-                _builder_2.append("array[i] = ");
-                String _valueLiteral_1 = this.stdExt.toValueLiteral(((PrimitiveType) aType), value);
-                _builder_2.append(_valueLiteral_1, "		");
-                _builder_2.append(";");
-                _builder_2.newLineIfNotEmpty();
-                _builder_2.append("}");
-                _xifexpression_3 = _builder_2;
-              }
-              _xifexpression_2 = _xifexpression_3;
-            }
-            _xifexpression_1 = _xifexpression_2;
+            _xblockexpression_1 = (_xifexpression);
           }
-          _xblockexpression_1 = (_xifexpression_1);
+          _switchResult = _xblockexpression_1;
         }
-        _xifexpression = _xblockexpression_1;
-      } else {
-        CharSequence _xifexpression_1 = null;
-        boolean _isDataClass = this.typeHelpers.isDataClass(aType);
-        if (_isDataClass) {
+      }
+      if (!_matched) {
+        if (aType instanceof DataClass) {
+          final DataClass _dataClass = (DataClass)aType;
+          _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) aType));
+            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _dataClass));
             for(final Attribute e : _allAttributes) {
               String _plus = (invokes + ".");
               String _name = a.getName();
@@ -224,11 +135,10 @@ public class ConfigGenAddon {
               _builder.newLineIfNotEmpty();
             }
           }
-          _xifexpression_1 = _builder;
+          _switchResult = _builder;
         }
-        _xifexpression = _xifexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }
@@ -441,49 +351,54 @@ public class ConfigGenAddon {
   private CharSequence genMinMaxConstantsRec(final ActorClass ac, final String varNamePath, final List<Attribute> path) {
     CharSequence _xblockexpression = null;
     {
-      String temp = ((String) null);
       Attribute _last = IterableExtensions.<Attribute>last(path);
       RefableType _refType = _last.getRefType();
       DataType aType = _refType.getType();
-      CharSequence _xifexpression = null;
-      boolean _isDataClass = this.typeHelpers.isDataClass(aType);
-      if (_isDataClass) {
-        StringConcatenation _builder = new StringConcatenation();
-        {
-          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) aType));
-          for(final Attribute e : _allAttributes) {
-            String _plus = (varNamePath + "_");
-            String _name = e.getName();
-            String _plus_1 = (_plus + _name);
-            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-            CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
-            _builder.append(_genMinMaxConstantsRec, "");
-            _builder.newLineIfNotEmpty();
+      CharSequence _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (aType instanceof DataClass) {
+          final DataClass _dataClass = (DataClass)aType;
+          _matched=true;
+          StringConcatenation _builder = new StringConcatenation();
+          {
+            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _dataClass));
+            for(final Attribute e : _allAttributes) {
+              String _plus = (varNamePath + "_");
+              String _name = e.getName();
+              String _plus_1 = (_plus + _name);
+              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
+              _builder.append(_genMinMaxConstantsRec, "");
+              _builder.newLineIfNotEmpty();
+            }
           }
+          _switchResult = _builder;
         }
-        _xifexpression = _builder;
-      } else {
-        CharSequence _xifexpression_1 = null;
-        if ((aType instanceof PrimitiveType)) {
+      }
+      if (!_matched) {
+        if (aType instanceof PrimitiveType) {
+          final PrimitiveType _primitiveType = (PrimitiveType)aType;
+          _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
-            PrimitiveType pType = ((PrimitiveType) aType);
-            StringConcatenation _builder_1 = new StringConcatenation();
+            String temp = ((String) null);
+            StringConcatenation _builder = new StringConcatenation();
             {
               String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
               String _temp = temp = _attrClassConfigMinValue;
               boolean _notEquals = (!Objects.equal(_temp, null));
               if (_notEquals) {
-                _builder_1.append("public static ");
-                String _minMaxType = this.getMinMaxType(pType);
-                _builder_1.append(_minMaxType, "");
-                _builder_1.append(" MIN_");
-                _builder_1.append(varNamePath, "");
-                _builder_1.append(" = ");
-                String _valueLiteral = this.stdExt.toValueLiteral(pType, temp);
-                _builder_1.append(_valueLiteral, "");
-                _builder_1.append(";");
-                _builder_1.newLineIfNotEmpty();
+                _builder.append("public static ");
+                String _minMaxType = this.getMinMaxType(_primitiveType);
+                _builder.append(_minMaxType, "");
+                _builder.append(" MIN_");
+                _builder.append(varNamePath, "");
+                _builder.append(" = ");
+                String _valueLiteral = this.stdExt.toValueLiteral(_primitiveType, temp);
+                _builder.append(_valueLiteral, "");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
               }
             }
             {
@@ -491,25 +406,24 @@ public class ConfigGenAddon {
               String _temp_1 = temp = _attrClassConfigMaxValue;
               boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
               if (_notEquals_1) {
-                _builder_1.append("public static ");
-                String _minMaxType_1 = this.getMinMaxType(pType);
-                _builder_1.append(_minMaxType_1, "");
-                _builder_1.append(" MAX_");
-                _builder_1.append(varNamePath, "");
-                _builder_1.append(" = ");
-                String _valueLiteral_1 = this.stdExt.toValueLiteral(pType, temp);
-                _builder_1.append(_valueLiteral_1, "");
-                _builder_1.append(";");
-                _builder_1.newLineIfNotEmpty();
+                _builder.append("public static ");
+                String _minMaxType_1 = this.getMinMaxType(_primitiveType);
+                _builder.append(_minMaxType_1, "");
+                _builder.append(" MAX_");
+                _builder.append(varNamePath, "");
+                _builder.append(" = ");
+                String _valueLiteral_1 = this.stdExt.toValueLiteral(_primitiveType, temp);
+                _builder.append(_valueLiteral_1, "");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
               }
             }
-            _xblockexpression_1 = (_builder_1);
+            _xblockexpression_1 = (_builder);
           }
-          _xifexpression_1 = _xblockexpression_1;
+          _switchResult = _xblockexpression_1;
         }
-        _xifexpression = _xifexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }

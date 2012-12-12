@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
@@ -58,6 +59,32 @@ public class JavaExtensions implements ILanguageExtension {
       _switchResult = _firstUpper;
     }
     return _switchResult;
+  }
+  
+  public boolean needsInitialization(final Attribute a) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    int _size = a.getSize();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      _or_1 = true;
+    } else {
+      RefableType _refType = a.getRefType();
+      DataType _type = _refType.getType();
+      boolean _isPrimitive = this.typeHelpers.isPrimitive(_type);
+      boolean _not = (!_isPrimitive);
+      _or_1 = (_greaterThan || _not);
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      RefableType _refType_1 = a.getRefType();
+      DataType _type_1 = _refType_1.getType();
+      String _typeName = this.typeHelpers.typeName(_type_1);
+      boolean _equals = _typeName==null?false:_typeName.equals("String");
+      _or = (_or_1 || _equals);
+    }
+    return _or;
   }
   
   public String accessLevelPrivate() {
@@ -174,22 +201,16 @@ public class JavaExtensions implements ILanguageExtension {
     final String _switchValue = _targetName;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_switchValue,"char")) {
-        _matched=true;
-        String _castValue = this.castValue(type, value);
-        _switchResult = _castValue;
+      boolean _and = false;
+      boolean _isCharacterType = this.typeHelpers.isCharacterType(type);
+      boolean _not = (!_isCharacterType);
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _contains = value.contains(",");
+        _and = (_not && _contains);
       }
-    }
-    if (!_matched) {
-      if (Objects.equal(_switchValue,"string")) {
-        _matched=true;
-        String _castValue_1 = this.castValue(type, value);
-        _switchResult = _castValue_1;
-      }
-    }
-    if (!_matched) {
-      boolean _contains = value.contains(",");
-      if (_contains) {
+      if (_and) {
         _matched=true;
         String _xblockexpression = null;
         {
@@ -208,8 +229,8 @@ public class JavaExtensions implements ILanguageExtension {
                 _builder.appendImmediate(", ", "");
               }
               String _trim_1 = v.trim();
-              String _castValue_2 = this.castValue(type, _trim_1);
-              _builder.append(_castValue_2, "");
+              String _castValue = this.castValue(type, _trim_1);
+              _builder.append(_castValue, "");
             }
           }
           _builder.append(" }");
@@ -220,72 +241,91 @@ public class JavaExtensions implements ILanguageExtension {
       }
     }
     if (!_matched) {
-      String _castValue_2 = this.castValue(type, value);
-      _switchResult = _castValue_2;
+      String _castValue = this.castValue(type, value);
+      _switchResult = _castValue;
     }
     return _switchResult;
   }
   
   private String castValue(final PrimitiveType type, final String value) {
+    String _switchResult = null;
     String _targetName = type.getTargetName();
     final String _switchValue = _targetName;
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(_switchValue,"boolean")) {
         _matched=true;
-        return value.toLowerCase();
+        String _lowerCase = value.toLowerCase();
+        _switchResult = _lowerCase;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"byte")) {
         _matched=true;
-        return ("(byte)" + value);
+        String _plus = ("(byte)" + value);
+        _switchResult = _plus;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"short")) {
         _matched=true;
-        return ("(short)" + value);
+        String _plus_1 = ("(short)" + value);
+        _switchResult = _plus_1;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"int")) {
         _matched=true;
-        return value;
+        _switchResult = value;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"long")) {
         _matched=true;
-        return (value + "L");
+        String _plus_2 = (value + "L");
+        _switchResult = _plus_2;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"float")) {
         _matched=true;
-        return (value + "f");
+        String _plus_3 = (value + "f");
+        _switchResult = _plus_3;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"double")) {
         _matched=true;
-        return (value + "d");
+        String _plus_4 = (value + "d");
+        _switchResult = _plus_4;
       }
     }
     if (!_matched) {
       if (Objects.equal(_switchValue,"char")) {
         _matched=true;
-        int _length = value.length();
-        boolean _equals = (_length == 1);
-        if (_equals) {
-          String _plus = ("\'" + value);
-          return (_plus + "\'");
+        String _xifexpression = null;
+        boolean _isEmpty = value.isEmpty();
+        if (_isEmpty) {
+          _xifexpression = "(char) 0";
         } else {
-          String _replace = value.replace("\\", "\\\\");
-          String _replace_1 = _replace.replace("\"", "\\\"");
-          String _plus_1 = ("\"" + _replace_1);
-          return (_plus_1 + "\".toCharArray()");
+          String _xifexpression_1 = null;
+          int _length = value.length();
+          boolean _equals = (_length == 1);
+          if (_equals) {
+            char _charAt = value.charAt(0);
+            String _plus_5 = ("\'" + Character.valueOf(_charAt));
+            String _plus_6 = (_plus_5 + "\'");
+            _xifexpression_1 = _plus_6;
+          } else {
+            String _replace = value.replace("\\", "\\\\");
+            String _replace_1 = _replace.replace("\"", "\\\"");
+            String _plus_7 = ("\"" + _replace_1);
+            String _plus_8 = (_plus_7 + "\".toCharArray()");
+            _xifexpression_1 = _plus_8;
+          }
+          _xifexpression = _xifexpression_1;
         }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {
@@ -293,31 +333,48 @@ public class JavaExtensions implements ILanguageExtension {
         _matched=true;
         String _replace_2 = value.replace("\\", "\\\\");
         String _replace_3 = _replace_2.replace("\"", "\\\"");
-        String _plus_2 = ("\"" + _replace_3);
-        return (_plus_2 + "\"");
+        String _plus_9 = ("\"" + _replace_3);
+        String _plus_10 = (_plus_9 + "\"");
+        _switchResult = _plus_10;
       }
     }
-    String _targetName_1 = type.getTargetName();
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_targetName_1);
-    throw _unsupportedOperationException;
+    if (!_matched) {
+      String _targetName_1 = type.getTargetName();
+      UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_targetName_1);
+      throw _unsupportedOperationException;
+    }
+    return _switchResult;
   }
   
   public String defaultValue(final DataType dt) {
-    if ((dt instanceof PrimitiveType)) {
-      PrimitiveType pType = ((PrimitiveType) dt);
-      String _defaultValueLiteral = pType.getDefaultValueLiteral();
-      return this.toValueLiteral(pType, _defaultValueLiteral);
-    } else {
-      if ((dt instanceof ExternalType)) {
-        String _targetName = ((ExternalType) dt).getTargetName();
-        String _plus = ("new " + _targetName);
-        return (_plus + "()");
-      } else {
-        String _name = dt.getName();
-        String _plus_1 = ("new " + _name);
-        return (_plus_1 + "()");
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (dt instanceof PrimitiveType) {
+        final PrimitiveType _primitiveType = (PrimitiveType)dt;
+        _matched=true;
+        String _defaultValueLiteral = _primitiveType.getDefaultValueLiteral();
+        String _valueLiteral = this.toValueLiteral(_primitiveType, _defaultValueLiteral);
+        _switchResult = _valueLiteral;
       }
     }
+    if (!_matched) {
+      if (dt instanceof ExternalType) {
+        final ExternalType _externalType = (ExternalType)dt;
+        _matched=true;
+        String _targetName = ((ExternalType) _externalType).getTargetName();
+        String _plus = ("new " + _targetName);
+        String _plus_1 = (_plus + "()");
+        _switchResult = _plus_1;
+      }
+    }
+    if (!_matched) {
+      String _name = dt.getName();
+      String _plus = ("new " + _name);
+      String _plus_1 = (_plus + "()");
+      _switchResult = _plus_1;
+    }
+    return _switchResult;
   }
   
   public String initializationWithDefaultValues(final DataType dt, final int size) {

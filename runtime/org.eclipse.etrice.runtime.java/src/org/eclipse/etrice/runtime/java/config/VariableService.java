@@ -469,7 +469,7 @@ public abstract class VariableService {
 		return Double.parseDouble(value.toString());
 	}
 
-	protected double[] ensuredoubleArray(Object value, int length)
+	protected double[] ensureDoubleArray(Object value, int length)
 			throws IllegalArgumentException {
 		double[] result = null;
 		if (value instanceof double[])

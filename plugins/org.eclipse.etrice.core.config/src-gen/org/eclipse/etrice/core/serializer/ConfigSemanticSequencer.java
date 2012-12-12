@@ -170,7 +170,7 @@ public class ConfigSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (root=[LogicalSystem|FQN] subSystem=[SubSystemRef|FQN] path=RefPath attributes+=AttrInstanceConfig* ports+=PortInstanceConfig*)
+	 *     (root=[LogicalSystem|FQN] subSystem=[SubSystemRef|ID] path=RefPath attributes+=AttrInstanceConfig* ports+=PortInstanceConfig*)
 	 */
 	protected void sequence_ActorInstanceConfig(EObject context, ActorInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -326,10 +326,12 @@ public class ConfigSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (subSystem=[SubSystemClass|ID] dynConfig=DynamicConfig)
+	 *     (root=[LogicalSystem|FQN] subSystem=[SubSystemRef|ID] dynConfig=DynamicConfig)
 	 */
 	protected void sequence_SubSystemConfig(EObject context, SubSystemConfig semanticObject) {
 		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__ROOT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__ROOT));
 			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__SUB_SYSTEM) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__SUB_SYSTEM));
 			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__DYN_CONFIG) == ValueTransient.YES)
@@ -337,8 +339,9 @@ public class ConfigSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1(), semanticObject.getSubSystem());
-		feeder.accept(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_3_0(), semanticObject.getDynConfig());
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemFQNParserRuleCall_1_0_1(), semanticObject.getRoot());
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1(), semanticObject.getSubSystem());
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_5_0(), semanticObject.getDynConfig());
 		feeder.finish();
 	}
 }

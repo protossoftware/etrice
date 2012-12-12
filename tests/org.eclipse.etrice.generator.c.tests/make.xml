@@ -10,7 +10,7 @@
 	
 	@author Henrik Rentz-Reichert
 -->
-<project name="project">
+<project name="project" default="all">
 	
 	<property name="c.tests.model.path" value="./models"/>
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.c"/>
@@ -55,8 +55,9 @@
 	<!--
 		clean: deletes all folders created by this script
 	-->
-	<target name="clean" depends="set_tr">
+	<target name="clean" depends="set_tr,set_rp">
 		<delete dir="${bin.path}"/>
+		<delete dir="${c-runtime.path}/bin"/>
 		<delete dir="models"/>
 		<delete dir="${output}"/>
 		<delete dir="${test.results}"/>
@@ -198,7 +199,7 @@
 			<arg value="../../src-gen/HandlerTest/TestProtocol.c"/>
 		</exec>
 		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oHandlerTest.exe"/>
 			<arg value="HandlerTest_Top.o"/>
 			<arg value="HandlerUser.o"/>
@@ -233,7 +234,7 @@
 			<arg value="../../src-gen/ChoicePointTest/TestProtocol.c"/>
 		</exec>
 		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oChoicePointTest.exe"/>
 			<arg value="CPTest_Top.o"/>
 			<arg value="CPTester.o"/>
@@ -271,7 +272,7 @@
 			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData_Runner.c"/>
 		</exec>
 		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oSendingDataTestC.exe"/>
 			<arg value="MrPing.o"/>
 			<arg value="MrPong.o"/>
@@ -309,7 +310,7 @@
 			<arg value="../../src-gen/StaticConfigTest/Data_Super1_dc.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Data_2_dc.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Data_3_dc.c"/>
-			<arg value="../../src-gen/StaticConfigTest/TestProtocol.c"/>
+			<arg value="../../src-gen/StaticConfigTest/TestProtocolAttributes.c"/>
 			<arg value="../../src-gen/StaticConfigTest/TestProtocolWithDataClass.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Top_ac.c"/>
 			<arg value="../../src-gen/StaticConfigTest/SubSystem_StaticConfigTest.c"/>
@@ -326,7 +327,7 @@
 			<arg value="Data_Super1_dc.o"/>
 			<arg value="Data_2_dc.o"/>
 			<arg value="Data_3_dc.o"/>
-			<arg value="TestProtocol.o"/>
+			<arg value="TestProtocolAttributes.o"/>
 			<arg value="TestProtocolWithDataClass.o"/>
 			<arg value="Top_ac.o"/>
 			<arg value="SubSystem_StaticConfigTest.o"/>

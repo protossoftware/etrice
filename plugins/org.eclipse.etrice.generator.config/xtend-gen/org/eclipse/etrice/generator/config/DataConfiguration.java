@@ -24,10 +24,10 @@ import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper;
@@ -62,15 +62,15 @@ public class DataConfiguration implements IDataConfiguration {
   
   public String getAttrClassConfigMaxValue(final ActorClass actor, final List<Attribute> path) {
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    NumberLiteral _min = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMin();
-    String _stringExpr = _min==null?(String)null:this.toStringExpr(_min);
+    NumberLiteral _max = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMax();
+    String _stringExpr = _max==null?(String)null:this.toStringExpr(_max);
     return _stringExpr;
   }
   
   public String getAttrClassConfigMinValue(final ActorClass actor, final List<Attribute> path) {
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    NumberLiteral _max = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMax();
-    String _stringExpr = _max==null?(String)null:this.toStringExpr(_max);
+    NumberLiteral _min = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMin();
+    String _stringExpr = _min==null?(String)null:this.toStringExpr(_min);
     return _stringExpr;
   }
   
@@ -162,14 +162,14 @@ public class DataConfiguration implements IDataConfiguration {
     return _stringExpr;
   }
   
-  public int getPollingTimerUser(final SubSystemClass subsystem) {
+  public int getPollingTimerUser(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
     int _polling = _dynConfig==null?0:_dynConfig.getPolling();
     return _polling;
   }
   
-  public String getUserCode1(final SubSystemClass subsystem) {
+  public String getUserCode1(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
     String _xifexpression = null;
@@ -184,7 +184,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _xifexpression;
   }
   
-  public String getUserCode2(final SubSystemClass subsystem) {
+  public String getUserCode2(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
     String _xifexpression = null;
@@ -204,10 +204,11 @@ public class DataConfiguration implements IDataConfiguration {
     return _xifexpression;
   }
   
-  public List<Attribute> getDynConfigReadAttributes(final String actorInstance) {
+  public List<Attribute> getDynConfigReadAttributes(final ActorInstance ai) {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
     final ArrayList<Attribute> result = _arrayList;
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(actorInstance);
+    String _path = ai.getPath();
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
@@ -221,10 +222,11 @@ public class DataConfiguration implements IDataConfiguration {
     return result;
   }
   
-  public List<Attribute> getDynConfigWriteAttributes(final String actorInstance) {
+  public List<Attribute> getDynConfigWriteAttributes(final ActorInstance ai) {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
     final ArrayList<Attribute> result = _arrayList;
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(actorInstance);
+    String _path = ai.getPath();
+    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
@@ -239,7 +241,7 @@ public class DataConfiguration implements IDataConfiguration {
     return result;
   }
   
-  public boolean hasVariableService(final SubSystemClass subsystem) {
+  public boolean hasVariableService(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
     boolean _notEquals = (!Objects.equal(_dynConfig, null));
@@ -307,8 +309,9 @@ public class DataConfiguration implements IDataConfiguration {
     return _switchResult;
   }
   
-  private SubSystemConfig getConfig(final SubSystemClass cc) {
-    SubSystemConfig _get = DataConfigurationHelper.subSystemConfigMap.get(cc);
+  private SubSystemConfig getConfig(final SubSystemInstance cc) {
+    String _path = cc.getPath();
+    SubSystemConfig _get = DataConfigurationHelper.subSystemConfigMap.get(_path);
     return _get;
   }
   

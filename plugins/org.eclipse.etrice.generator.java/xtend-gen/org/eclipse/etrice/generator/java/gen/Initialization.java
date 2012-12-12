@@ -13,10 +13,10 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -30,7 +30,7 @@ public class Initialization {
   private RoomExtensions _roomExtensions;
   
   @Inject
-  private ILanguageExtension languageExt;
+  private JavaExtensions languageExt;
   
   @Inject
   private ProcedureHelpers procedureHelpers;
@@ -79,15 +79,8 @@ public class Initialization {
           _xifexpression_1 = _attributeInit;
         } else {
           CharSequence _xifexpression_2 = null;
-          boolean _and = false;
-          if (!useClassDefaultsOnly) {
-            _and = false;
-          } else {
-            boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-            _and = (useClassDefaultsOnly && _isPrimitive);
-          }
-          boolean _not = (!_and);
-          if (_not) {
+          boolean _needsInitialization = this.languageExt.needsInitialization(a);
+          if (_needsInitialization) {
             String _nullPointer = this.languageExt.nullPointer();
             CharSequence _attributeInit_1 = this.attributeInit(a, _nullPointer);
             _xifexpression_2 = _attributeInit_1;
@@ -97,8 +90,8 @@ public class Initialization {
         _xifexpression = _xifexpression_1;
       } else {
         CharSequence _xifexpression_3 = null;
-        boolean _isPrimitive_1 = this.typeHelpers.isPrimitive(aType);
-        if (_isPrimitive_1) {
+        boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
+        if (_isPrimitive) {
           CharSequence _xblockexpression_1 = null;
           {
             ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
@@ -117,8 +110,15 @@ public class Initialization {
               _xifexpression_4 = _attributeInit_2;
             } else {
               CharSequence _xifexpression_5 = null;
-              boolean _not_1 = (!useClassDefaultsOnly);
-              if (_not_1) {
+              boolean _or = false;
+              boolean _not = (!useClassDefaultsOnly);
+              if (_not) {
+                _or = true;
+              } else {
+                boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
+                _or = (_not || _needsInitialization_1);
+              }
+              if (_or) {
                 String _defaultValue = this.languageExt.defaultValue(aType);
                 CharSequence _attributeInit_3 = this.attributeInit(a, _defaultValue);
                 _xifexpression_5 = _attributeInit_3;
@@ -182,105 +182,150 @@ public class Initialization {
   }
   
   private CharSequence attributeInit(final List<Attribute> path, final String value) {
-    Attribute a = IterableExtensions.<Attribute>last(path);
-    RefableType _refType = a.getRefType();
-    DataType aType = _refType.getType();
     String _xifexpression = null;
     int _size = path.size();
-    boolean _greaterThan = (_size > 1);
-    if (_greaterThan) {
+    boolean _equals = (_size == 1);
+    if (_equals) {
+      _xifexpression = "this";
+    } else {
       int _size_1 = path.size();
       int _minus = (_size_1 - 1);
       Iterable<Attribute> _take = IterableExtensions.<Attribute>take(path, _minus);
       CharSequence _invokeGetters = this.procedureHelpers.invokeGetters(_take, null);
-      String _plus = (_invokeGetters + ".");
-      _xifexpression = _plus;
-    } else {
-      _xifexpression = "";
+      String _string = _invokeGetters.toString();
+      _xifexpression = _string;
     }
     String getter = _xifexpression;
-    StringConcatenation _builder = new StringConcatenation();
+    Attribute _last = IterableExtensions.<Attribute>last(path);
+    return this.genAttributeInitializer(_last, value, getter);
+  }
+  
+  public CharSequence genAttributeInitializer(final Attribute a, final String value, final String invokes) {
+    CharSequence _xblockexpression = null;
     {
-      boolean _or = false;
-      int _size_2 = a.getSize();
-      boolean _equals = (_size_2 == 0);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _isCharacterType = this.typeHelpers.isCharacterType(aType);
-        _or = (_equals || _isCharacterType);
-      }
-      if (_or) {
-        _builder.append(getter, "");
-        String _name = a.getName();
-        CharSequence _invokeSetter = this.procedureHelpers.invokeSetter(_name, null, value);
-        _builder.append(_invokeSetter, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      } else {
-        String _trim = value.trim();
-        boolean _startsWith = _trim.startsWith("{");
-        boolean _not = (!_startsWith);
-        if (_not) {
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          String _typeName = this.typeHelpers.typeName(aType);
-          _builder.append(_typeName, "	");
-          _builder.append("[] ");
-          String _name_1 = a.getName();
-          _builder.append(_name_1, "	");
-          _builder.append(" = new ");
-          String _typeName_1 = this.typeHelpers.typeName(aType);
-          _builder.append(_typeName_1, "	");
-          _builder.append("[");
-          int _size_3 = a.getSize();
-          _builder.append(_size_3, "	");
-          _builder.append("];");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("for (int i=0;i<");
-          int _size_4 = a.getSize();
-          _builder.append(_size_4, "	");
-          _builder.append(";i++){");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          String _name_2 = a.getName();
-          _builder.append(_name_2, "		");
-          _builder.append("[i] = ");
-          _builder.append(value, "		");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append(getter, "	");
-          String _name_3 = a.getName();
-          String _name_4 = a.getName();
-          CharSequence _invokeSetter_1 = this.procedureHelpers.invokeSetter(_name_3, null, _name_4);
-          _builder.append(_invokeSetter_1, "	");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
+      RefableType _refType = a.getRefType();
+      DataType aType = _refType.getType();
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _or = false;
+        int _size = a.getSize();
+        boolean _equals = (_size == 0);
+        if (_equals) {
+          _or = true;
         } else {
-          _builder.append(getter, "");
-          String _name_5 = a.getName();
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("new ");
-          String _typeName_2 = this.typeHelpers.typeName(aType);
-          _builder_1.append(_typeName_2, "");
-          _builder_1.append("[] ");
-          _builder_1.append(value, "");
-          CharSequence _invokeSetter_2 = this.procedureHelpers.invokeSetter(_name_5, null, _builder_1.toString());
-          _builder.append(_invokeSetter_2, "");
+          boolean _and = false;
+          boolean _and_1 = false;
+          int _size_1 = a.getSize();
+          boolean _greaterThan = (_size_1 > 0);
+          if (!_greaterThan) {
+            _and_1 = false;
+          } else {
+            String _typeName = this.typeHelpers.typeName(aType);
+            boolean _equals_1 = "char".equals(_typeName);
+            _and_1 = (_greaterThan && _equals_1);
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            boolean _matches = value.matches("\'.\'|\\(char\\).*");
+            boolean _not = (!_matches);
+            _and = (_and_1 && _not);
+          }
+          _or = (_equals || _and);
+        }
+        if (_or) {
+          _builder.append(invokes, "");
+          _builder.append(".");
+          String _name = a.getName();
+          CharSequence _invokeSetter = this.procedureHelpers.invokeSetter(_name, null, value);
+          _builder.append(_invokeSetter, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
+        } else {
+          boolean _or_1 = false;
+          String _trim = value.trim();
+          boolean _startsWith = _trim.startsWith("{");
+          boolean _not_1 = (!_startsWith);
+          if (_not_1) {
+            _or_1 = true;
+          } else {
+            String _typeName_1 = this.typeHelpers.typeName(aType);
+            boolean _equals_2 = "char".equals(_typeName_1);
+            _or_1 = (_not_1 || _equals_2);
+          }
+          if (_or_1) {
+            _builder.append("{");
+            _builder.newLine();
+            _builder.append("\t");
+            String _typeName_2 = this.typeHelpers.typeName(aType);
+            _builder.append(_typeName_2, "	");
+            _builder.append("[] array = new ");
+            String _typeName_3 = this.typeHelpers.typeName(aType);
+            _builder.append(_typeName_3, "	");
+            _builder.append("[");
+            int _size_2 = a.getSize();
+            _builder.append(_size_2, "	");
+            _builder.append("];");
+            _builder.newLineIfNotEmpty();
+            {
+              boolean _and_2 = false;
+              RefableType _refType_1 = a.getRefType();
+              boolean _isRef = _refType_1.isRef();
+              if (!_isRef) {
+                _and_2 = false;
+              } else {
+                boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
+                _and_2 = (_isRef && _isPrimitive);
+              }
+              boolean _not_2 = (!_and_2);
+              if (_not_2) {
+                _builder.append("\t");
+                _builder.append("for (int i=0;i<");
+                int _size_3 = a.getSize();
+                _builder.append(_size_3, "	");
+                _builder.append(";i++){");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("array[i] = ");
+                _builder.append(value, "		");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+            _builder.append("\t");
+            _builder.append(invokes, "	");
+            _builder.append(".");
+            String _name_1 = a.getName();
+            CharSequence _invokeSetter_1 = this.procedureHelpers.invokeSetter(_name_1, null, "array");
+            _builder.append(_invokeSetter_1, "	");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          } else {
+            _builder.append(invokes, "");
+            _builder.append(".");
+            String _name_2 = a.getName();
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("new ");
+            String _typeName_4 = this.typeHelpers.typeName(aType);
+            _builder_1.append(_typeName_4, "");
+            _builder_1.append("[] ");
+            _builder_1.append(value, "");
+            CharSequence _invokeSetter_2 = this.procedureHelpers.invokeSetter(_name_2, null, _builder_1.toString());
+            _builder.append(_invokeSetter_2, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
         }
       }
+      _xblockexpression = (_builder);
     }
-    return _builder;
+    return _xblockexpression;
   }
   
   private String getDataConfigValue(final List<Attribute> path, final EObject roomClass) {

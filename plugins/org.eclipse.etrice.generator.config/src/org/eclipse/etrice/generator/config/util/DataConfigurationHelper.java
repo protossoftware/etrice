@@ -35,7 +35,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
 
 public class DataConfigurationHelper {
 
@@ -45,7 +44,7 @@ public class DataConfigurationHelper {
 	public static Map<String, AttrInstanceConfig> actorInstanceAttrMap = new HashMap<String, AttrInstanceConfig>();
 
 	// dynamic
-	public static Map<SubSystemClass, SubSystemConfig> subSystemConfigMap = new HashMap<SubSystemClass, SubSystemConfig>();
+	public static Map<String, SubSystemConfig> subSystemConfigMap = new HashMap<String, SubSystemConfig>();
 	public static Map<String, List<AttrInstanceConfig>> dynActorInstanceAttrMap = new HashMap<String, List<AttrInstanceConfig>>();
 	public static Map<ActorClass, List<AttrInstanceConfig>> dynActorClassAttrMap = new HashMap<ActorClass, List<AttrInstanceConfig>>();
 
@@ -109,14 +108,13 @@ public class DataConfigurationHelper {
 				}
 			}
 			for (SubSystemConfig ssConfig : config.getSubSystemConfigs()) {
-				if (subSystemConfigMap.containsKey(ssConfig.getSubSystem())) {
-					logger.logError(
-							"Multiple configurations for subSystem class "
-									+ ssConfig.getSubSystem().getName()
-									+ " found", null);
+				String path = ConfigUtil.getPath(ssConfig);
+				if (subSystemConfigMap.containsKey(path)) {
+					logger.logError("Multiple configurations for subSystem"
+							+ path + " found", null);
 					error = true;
 				} else
-					subSystemConfigMap.put(ssConfig.getSubSystem(), ssConfig);
+					subSystemConfigMap.put(path, ssConfig);
 			}
 		}
 
@@ -127,7 +125,7 @@ public class DataConfigurationHelper {
 			String path, Map<String, AttrInstanceConfig> map) {
 		for (AttrInstanceConfig c : actorConfig.getAttributes()) {
 			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
-			
+
 			if (c.isDynConfig()) {
 				List<AttrInstanceConfig> list = dynActorInstanceAttrMap
 						.get(path);
@@ -137,16 +135,18 @@ public class DataConfigurationHelper {
 				dynActorInstanceAttrMap.put(path, list);
 
 				ActorClass ac = ConfigUtil.getLastActorRef(
-						actorConfig.getSubSystem().getType(), actorConfig.getPath()).getType();
+						actorConfig.getSubSystem().getType(),
+						actorConfig.getPath()).getType();
 				if ((list = dynActorClassAttrMap.get(ac)) == null)
 					list = new ArrayList<AttrInstanceConfig>();
 				list.add(c);
 				dynActorClassAttrMap.put(ac, list);
 			}
 		}
-		for(PortInstanceConfig c : actorConfig.getPorts()){
-			for(AttrInstanceConfig a : c.getAttributes())
-				collectConfigs(a, path+"/"+c.getItem().getName()+"/"+a.getAttribute().getName(), map);
+		for (PortInstanceConfig c : actorConfig.getPorts()) {
+			for (AttrInstanceConfig a : c.getAttributes())
+				collectConfigs(a, path + "/" + c.getItem().getName() + "/"
+						+ a.getAttribute().getName(), map);
 		}
 	}
 

@@ -1554,9 +1554,9 @@ rule__SubSystemConfig__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_1()); }
-(rule__SubSystemConfig__SubSystemAssignment_1)
-{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_1()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getRootAssignment_1()); }
+(rule__SubSystemConfig__RootAssignment_1)
+{ after(grammarAccess.getSubSystemConfigAccess().getRootAssignment_1()); }
 )
 
 ;
@@ -1583,11 +1583,11 @@ rule__SubSystemConfig__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_2()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getSolidusKeyword_2()); }
 
-	'{' 
+	'/' 
 
-{ after(grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_2()); }
+{ after(grammarAccess.getSubSystemConfigAccess().getSolidusKeyword_2()); }
 )
 
 ;
@@ -1614,9 +1614,9 @@ rule__SubSystemConfig__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_3()); }
-(rule__SubSystemConfig__DynConfigAssignment_3)
-{ after(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_3()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_3()); }
+(rule__SubSystemConfig__SubSystemAssignment_3)
+{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_3()); }
 )
 
 ;
@@ -1631,6 +1631,7 @@ rule__SubSystemConfig__Group__4
     }
 :
 	rule__SubSystemConfig__Group__4__Impl
+	rule__SubSystemConfig__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1642,17 +1643,80 @@ rule__SubSystemConfig__Group__4__Impl
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_4()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_4()); }
 
-	'}' 
+	'{' 
 
-{ after(grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_4()); }
+{ after(grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_4()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__SubSystemConfig__Group__5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubSystemConfig__Group__5__Impl
+	rule__SubSystemConfig__Group__6
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubSystemConfig__Group__5__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_5()); }
+(rule__SubSystemConfig__DynConfigAssignment_5)
+{ after(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_5()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__SubSystemConfig__Group__6
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SubSystemConfig__Group__6__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubSystemConfig__Group__6__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_6()); }
+
+	'}' 
+
+{ after(grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_6()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
 
 
 
@@ -5856,18 +5920,18 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__SubSystemConfig__SubSystemAssignment_1
+rule__SubSystemConfig__RootAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassCrossReference_1_0()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemCrossReference_1_0()); }
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1()); }
-	RULE_ID{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemFQNParserRuleCall_1_0_1()); }
+	ruleFQN{ after(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemFQNParserRuleCall_1_0_1()); }
 )
-{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassCrossReference_1_0()); }
+{ after(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemCrossReference_1_0()); }
 )
 
 ;
@@ -5875,14 +5939,33 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__SubSystemConfig__DynConfigAssignment_3
+rule__SubSystemConfig__SubSystemAssignment_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_3_0()); }
-	ruleDynamicConfig{ after(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_3_0()); }
+{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); }
+(
+{ before(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1()); }
+	RULE_ID{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1()); }
+)
+{ after(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SubSystemConfig__DynConfigAssignment_5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_5_0()); }
+	ruleDynamicConfig{ after(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_5_0()); }
 )
 
 ;
@@ -6011,8 +6094,8 @@ rule__ActorInstanceConfig__SubSystemAssignment_3
 (
 { before(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); }
 (
-{ before(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefFQNParserRuleCall_3_0_1()); }
-	ruleFQN{ after(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefFQNParserRuleCall_3_0_1()); }
+{ before(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1()); }
+	RULE_ID{ after(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1()); }
 )
 { after(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); }
 )

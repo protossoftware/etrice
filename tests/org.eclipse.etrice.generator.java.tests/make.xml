@@ -9,7 +9,7 @@
 	
 	@author Henrik Rentz-Reichert
 -->
-<project name="project">
+<project name="project" default="all">
 	
 	<property name="java.tests.model.path" value="./models"/>
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java"/>
@@ -116,6 +116,8 @@
 			<arg value="${java.tests.model.path}/TCPTest.room"/>
 			<arg value="${java.tests.model.path}/StaticConfigTest.room"/>
 			<arg value="${java.tests.model.path}/StaticConfigTest.config"/>
+			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.room"/>
+			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.config"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -138,6 +140,10 @@
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
 		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.SubSystem_StaticConfigTestRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystemRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
@@ -229,6 +235,13 @@
 			<arg value="./tmp/StaticConfigTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicConfigTest"/>
+			<arg value="./tmp/DynamicConfigTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 	</target>
 	
 	<!--
@@ -238,6 +251,7 @@
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/StaticConfigTest.xml"/>
+		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/DynamicConfigTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>

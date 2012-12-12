@@ -55,7 +55,7 @@ RoomModel StaticConfigTest {
 					entry {
 						"data_3.varCheck3(caseId);"
 						"SubSystemClassBase subSystem = (SubSystemClassBase) ((ActorClassBase)getParent()).getParent();"
-						"Testee_Super2_ac testee_super2 = (Testee_Super2_ac) subSystem.getInstance(\"/subSystem/top/tester/testee_super2\");"
+						"Testee_Super2_ac testee_super2 = (Testee_Super2_ac) subSystem.getInstance(\"/System_StaticConfigTest/subSystem/top/tester/testee_super2\");"
 						"int caseId_2 = testee_super2.getCaseId();"
 						"testee_super2.getReg_port().varCheck(caseId_2);"
 						"EXPECT_TRUE(caseId_2, \"Tester_ac:1\", testee_super2.getFloat64_super_r() == 1.1);"
@@ -70,7 +70,7 @@ RoomModel StaticConfigTest {
 
 	ActorClass Testee_1_ac {
 		Interface {
-			conjugated Port conj_port: TestProtocol
+			conjugated Port conj_port: TestProtocolAttributes
 		}
 		Structure {
 			external Port conj_port
@@ -117,16 +117,16 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:21\", getData_1().getInt16_array_c()[0] == 48 && getData_1().getInt16_array_c()[1] == 96);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:22\", getData_1().getInt32_array_c()[0] == 96 && getData_1().getInt32_array_c()[1] == 192);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:23\", getData_1().getInt64_array_c()[0] == 192 && getData_1().getInt64_array_c()[1] == 384);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:24\", getData_1().getFloat32_array_c()[0] == 9.6f && getData_1().getFloat32_array_c()[1] == 19.2f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:25\", getData_1().getFloat64_array_c()[0] == 19.2 && getData_1().getFloat64_array_c()[1] == 38.4);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:24\", getData_1().getFloat32_array_c()[0] == 9.6f && getData_1().getFloat32_array_c()[1] == 9.6f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:25\", getData_1().getFloat64_array_c()[0] == 19.2 && getData_1().getFloat64_array_c()[1] == 19.2);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:26\", String.valueOf(getData_1().getChar_array_c()).equals(\"Claz\"));"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:27\", getData_1().getBool_array_i()[0] == true && getData_1().getBool_array_i()[1] == true);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:28\", getData_1().getInt8_array_i()[0] == 2 && getData_1().getInt8_array_i()[1] == 6);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:29\", getData_1().getInt16_array_i()[0] == 4 && getData_1().getInt16_array_i()[1] == 12);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:30\", getData_1().getInt32_array_i()[0] == 8 && getData_1().getInt32_array_i()[1] == 24);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:31\", getData_1().getInt64_array_i()[0] == 16 && getData_1().getInt64_array_i()[1] == 48);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:32\", getData_1().getFloat32_array_i()[0] == 1.6f && getData_1().getFloat32_array_i()[1] == 4.8f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:33\", getData_1().getFloat64_array_i()[0] == 5 && getData_1().getFloat64_array_i()[1] == 15);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:32\", getData_1().getFloat32_array_i()[0] == 1.6f && getData_1().getFloat32_array_i()[1] == 1.6f);"
+						"EXPECT_TRUE(caseId,\"testee_1:data_1:33\", getData_1().getFloat64_array_i()[0] == 3.2 && getData_1().getFloat64_array_i()[1] == 3.2);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:34\", String.valueOf(getData_1().getChar_array_i()).equals(\"Inst\"));"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:35\", getData_1().getData_2().getInt32_c() == 42);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:36\", getData_1().getData_2().getInt32_i() == 43);"
@@ -139,7 +139,7 @@ RoomModel StaticConfigTest {
 
 	ActorClass Testee_Super2_ac {
 		Interface {
-			Port reg_port: TestProtocol
+			Port reg_port: TestProtocolAttributes
 		}
 		Structure {
 			external Port reg_port
@@ -182,7 +182,6 @@ RoomModel StaticConfigTest {
 					entry {
 						"sap.varCheck(caseId);"
 						"reg_port.varCheck(caseId);"
-
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:1\", float64_super_c == 2.2);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:2\", float64_super_i == 4.4);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:3\", int32_own_r == 11);"
@@ -196,7 +195,7 @@ RoomModel StaticConfigTest {
 		}
 	}
 
-	ProtocolClass TestProtocol {
+	ProtocolClass TestProtocolAttributes {
 		incoming {
 			Message dummy()
 		}
@@ -206,8 +205,8 @@ RoomModel StaticConfigTest {
 			Attribute float_c: float32 = "16"
 			Attribute float_i: float32 = "256"
 			Operation varCheck(caseId: int32): void {
-				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocol:1\", 4.f, float_r, 0.1f);"
-				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocol:2\", 3.f, float_c, 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocolAttributes:1\", 4.f, float_r, 0.1f);"
+				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocolAttributes:2\", 3.f, float_c, 0.1f);"
 			}
 		}
 		conjugate PortClass
@@ -271,7 +270,6 @@ RoomModel StaticConfigTest {
 	}
 
 	DataClass Data_1_dc extends Data_Super1_dc {
-		
 		Attribute int16_r: int16 = "16"
 		Attribute int16_c: int16 = "16"
 		Attribute int16_i: int16 = "16"
@@ -361,13 +359,23 @@ RoomModel StaticConfigTest {
 		Attribute ext_type_array [ 2 ]: extType
 		Attribute ext_type_ref: extType ref
 		Attribute ext_type_ref_array [ 2 ]: extType ref
+		Attribute primitive_array_ref [ 2 ]: int8 ref
+		Attribute string_ref: string ref
+
+		// no check at all
+		Attribute primitive1_ref: int8 ref
+		Attribute primitive3_ref: char ref
 		Operation varCheck3(caseId: int32): void {
-			//TODO dataClass_array
 			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", dataClass_ref == null);"
-			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", dataClass_ref_array[0] == null && dataClass_ref_array[1] == null);"
-			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type instanceof External_Type_Test);"
-			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type_array[0] instanceof External_Type_Test && ext_type_array[1] instanceof External_Type_Test);"
-			"EXPECT_TRUE(caseId, \"Data_3_dc:1\", ext_type_ref_array[0] == null && ext_type_ref_array[1] == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:2\", dataClass_array[0].getInt32_r() == 1);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:3\", dataClass_array[1].getInt32_c() == 1);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:4\", dataClass_ref_array[0] == null && dataClass_ref_array[1] == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:5\", ext_type instanceof External_Type_Test);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:6\", ext_type_array[0] instanceof External_Type_Test && ext_type_array[1] instanceof External_Type_Test);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:7\", ext_type_ref == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:8\", ext_type_ref_array[0] == null && ext_type_ref_array[1] == null);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:9\", primitive_array_ref instanceof byte[]);"
+			"EXPECT_TRUE(caseId, \"Data_3_dc:10\", string_ref == null);"
 		}
 	}
 

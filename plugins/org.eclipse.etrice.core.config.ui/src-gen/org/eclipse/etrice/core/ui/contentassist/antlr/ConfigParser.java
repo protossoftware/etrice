@@ -99,8 +99,9 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConfigModelAccess().getNameAssignment_1(), "rule__ConfigModel__NameAssignment_1");
 					put(grammarAccess.getConfigModelAccess().getImportsAssignment_3(), "rule__ConfigModel__ImportsAssignment_3");
 					put(grammarAccess.getConfigModelAccess().getConfigElementsAssignment_4(), "rule__ConfigModel__ConfigElementsAssignment_4");
-					put(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_1(), "rule__SubSystemConfig__SubSystemAssignment_1");
-					put(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_3(), "rule__SubSystemConfig__DynConfigAssignment_3");
+					put(grammarAccess.getSubSystemConfigAccess().getRootAssignment_1(), "rule__SubSystemConfig__RootAssignment_1");
+					put(grammarAccess.getSubSystemConfigAccess().getSubSystemAssignment_3(), "rule__SubSystemConfig__SubSystemAssignment_3");
+					put(grammarAccess.getSubSystemConfigAccess().getDynConfigAssignment_5(), "rule__SubSystemConfig__DynConfigAssignment_5");
 					put(grammarAccess.getDynamicConfigAccess().getFilePathAssignment_2_0_0_1(), "rule__DynamicConfig__FilePathAssignment_2_0_0_1");
 					put(grammarAccess.getDynamicConfigAccess().getUserCode1Assignment_2_0_1_0_1(), "rule__DynamicConfig__UserCode1Assignment_2_0_1_0_1");
 					put(grammarAccess.getDynamicConfigAccess().getUserCode2Assignment_2_0_1_1_1(), "rule__DynamicConfig__UserCode2Assignment_2_0_1_1_1");

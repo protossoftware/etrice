@@ -34,6 +34,7 @@ class ConfigGenAddon {
 	@Inject extension ProcedureHelpers helpers
 	@Inject IDataConfiguration dataConfigExt
 	@Inject extension RoomExtensions
+	@Inject Initialization initGen
 	
 	// For SubSystemClassGen
 	
@@ -55,27 +56,19 @@ class ConfigGenAddon {
 	def private applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type		
-		if(aType.primitive){
-			var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
-			if(value == null)
-				''''''
-			else if(a.size == 0 || aType.characterType)
-				'''«invokes».«a.name.invokeSetter(null, (aType as PrimitiveType).toValueLiteral(value))»;'''
-			else if(a.size == value.split(",").size){
-				var arrayExpr = '''{ «FOR s : value.split(",") SEPARATOR ', '»«(aType as PrimitiveType).toValueLiteral(s.trim)»«ENDFOR» }'''
-				'''«invokes».«a.name.invokeSetter(null, '''new «aType.typeName»[] «arrayExpr»'''.toString)»;'''
-			} else '''
-					{
-						«aType.typeName»[] array = «invokes».«a.name.invokeGetter(null)»;
-						for (int i=0;i<«a.size»;i++){
-							array[i] = «(aType as PrimitiveType).toValueLiteral(value)»;
-					}'''
-		}
-		else if (aType.dataClass)'''
-				«FOR e : (aType as DataClass).allAttributes»
-					«applyInstanceConfig(instance, invokes+"."+a.name.invokeGetter(null), path.union(e))»
-				«ENDFOR»
-			'''
+		switch aType {
+			PrimitiveType: {
+				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
+				if(value != null)
+					initGen.genAttributeInitializer(a, toValueLiteral(aType, value), invokes)	
+			}
+			DataClass:
+				'''
+					«FOR e : (aType as DataClass).allAttributes»
+						«applyInstanceConfig(instance, invokes+"."+a.name.invokeGetter(null), path.union(e))»
+					«ENDFOR»
+				'''	
+		}	
 	}
 	
 	// For ActorClassGen
@@ -122,24 +115,25 @@ class ConfigGenAddon {
 	}
 	
 	def private genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
-		var temp = null as String
 		var aType = path.last.refType.type
-		if(aType.dataClass)
-			'''
-				«FOR e : (aType as DataClass).allAttributes»
-					«genMinMaxConstantsRec(ac, varNamePath+"_"+e.name, path.union(e))»
-				«ENDFOR»
-			'''
-		else if(aType instanceof PrimitiveType){
-			var pType = aType as PrimitiveType
-			'''
-				«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
-					public static «pType.minMaxType» MIN_«varNamePath» = «pType.toValueLiteral(temp)»;
-				«ENDIF»
-				«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) != null»
-					public static «pType.minMaxType» MAX_«varNamePath» = «pType.toValueLiteral(temp)»;
-				«ENDIF»
-			'''
+		switch aType {
+			DataClass:
+				'''
+					«FOR e : (aType as DataClass).allAttributes»
+						«genMinMaxConstantsRec(ac, varNamePath+"_"+e.name, path.union(e))»
+					«ENDFOR»
+				'''
+			PrimitiveType:{
+				var temp = null as String
+				'''
+					«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
+						public static «aType.minMaxType» MIN_«varNamePath» = «aType.toValueLiteral(temp)»;
+					«ENDIF»
+					«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) != null»
+						public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
+					«ENDIF»
+				'''
+			}
 		}
 	}
 	

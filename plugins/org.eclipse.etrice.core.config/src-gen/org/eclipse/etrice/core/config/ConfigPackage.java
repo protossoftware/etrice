@@ -132,13 +132,22 @@ public interface ConfigPackage extends EPackage
   int SUB_SYSTEM_CONFIG = 2;
 
   /**
+   * The feature id for the '<em><b>Root</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CONFIG__ROOT = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Sub System</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CONFIG__SUB_SYSTEM = CONFIG_ELEMENT_FEATURE_COUNT + 0;
+  int SUB_SYSTEM_CONFIG__SUB_SYSTEM = CONFIG_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Dyn Config</b></em>' containment reference.
@@ -147,7 +156,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CONFIG__DYN_CONFIG = CONFIG_ELEMENT_FEATURE_COUNT + 1;
+  int SUB_SYSTEM_CONFIG__DYN_CONFIG = CONFIG_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Sub System Config</em>' class.
@@ -156,7 +165,7 @@ public interface ConfigPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 2;
+  int SUB_SYSTEM_CONFIG_FEATURE_COUNT = CONFIG_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl <em>Dynamic Config</em>}' class.
@@ -898,6 +907,17 @@ public interface ConfigPackage extends EPackage
   EClass getSubSystemConfig();
 
   /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.SubSystemConfig#getRoot <em>Root</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Root</em>'.
+   * @see org.eclipse.etrice.core.config.SubSystemConfig#getRoot()
+   * @see #getSubSystemConfig()
+   * @generated
+   */
+  EReference getSubSystemConfig_Root();
+
+  /**
    * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.SubSystemConfig#getSubSystem <em>Sub System</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1538,6 +1558,14 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EClass SUB_SYSTEM_CONFIG = eINSTANCE.getSubSystemConfig();
+
+    /**
+     * The meta object literal for the '<em><b>Root</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SUB_SYSTEM_CONFIG__ROOT = eINSTANCE.getSubSystemConfig_Root();
 
     /**
      * The meta object literal for the '<em><b>Sub System</b></em>' reference feature.

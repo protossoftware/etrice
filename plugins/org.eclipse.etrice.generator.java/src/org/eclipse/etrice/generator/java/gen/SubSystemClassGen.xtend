@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.core.room.LogicalThread
 
 @Singleton
 class SubSystemClassGen {
@@ -44,7 +45,7 @@ class SubSystemClassGen {
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi))
-			if(dataConfigExt.hasVariableService(ssi.subSystemClass))
+			if(dataConfigExt.hasVariableService(ssi))
 				varService.doGenerate(root, ssi);
 		}
 	}
@@ -54,7 +55,7 @@ class SubSystemClassGen {
 	'''
 		package «cc.getPackage()»;
 		
-		«IF dataConfigExt.hasVariableService(cc)»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
+		«IF dataConfigExt.hasVariableService(comp)»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -70,6 +71,10 @@ class SubSystemClassGen {
 		«cc.userCode(1)»
 		
 		public class «cc.name» extends SubSystemClassBase {
+			public final int THREAD__DEFAULT = 0;
+			«FOR thread : cc.threads.indexed»
+				public final int «thread.value.threadId» = «thread.index1»;
+			«ENDFOR»
 		
 			«cc.userCode(2)»
 			
@@ -84,9 +89,9 @@ class SubSystemClassGen {
 			@Override	
 			public void instantiateMessageServices(){
 			
-				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
+				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(THREAD__DEFAULT, 0, 0),"MessageService_Main"));
 				«FOR thread : cc.threads»
-					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «cc.threads.indexOf(thread)+1», 0),"MessageService_«thread.name»" /*, thread_prio */));
+					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «thread.threadId», 0),"MessageService_«thread.name»" /*, thread_prio */));
 				«ENDFOR»
 				}
 		
@@ -95,23 +100,24 @@ class SubSystemClassGen {
 				
 				// all addresses
 				// Addresses for the Subsystem Systemport
-				«FOR ai : comp.allContainedInstances.indexed(comp.maxObjId)»
-					Address addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai.value)» = new Address(0,0,«ai.index1»);
+				«FOR ai : comp.allContainedInstances»
+					Address addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)» = getFreeAddress(THREAD__DEFAULT);
 				«ENDFOR»
 				
 				«FOR ai : comp.allContainedInstances»
+					«val threadId = if (ai.threadId==0) "THREAD__DEFAULT" else cc.threads.get(ai.threadId-1).threadId»
 					// actor instance «ai.path» itself => Systemport Address
 «««					// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-					Address addr_item_«ai.path.getPathName()» = new Address(0,«ai.threadId»,«ai.objId»);
+					Address addr_item_«ai.path.getPathName()» = getFreeAddress(«threadId»);
 					// interface items of «ai.path»
 					«FOR pi : ai.orderedIfItemInstances»
 						«IF pi.replicated»
 							«FOR peer : pi.peers»
 								«var i = pi.peers.indexOf(peer)»
-								Address addr_item_«pi.path.getPathName()»_«i» = new Address(0,«ai.threadId»,«pi.objId+i»);
+								Address addr_item_«pi.path.getPathName()»_«i» = getFreeAddress(«threadId»);
 							«ENDFOR»
 						«ELSE»
-							Address addr_item_«pi.path.getPathName()» = new Address(0,«ai.threadId»,«pi.objId»);
+							Address addr_item_«pi.path.getPathName()» = getFreeAddress(«threadId»);
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
@@ -168,7 +174,8 @@ class SubSystemClassGen {
 								«ENDIF»
 							«ENDFOR»
 						}
-						«IF !dataConfigExt.getDynConfigWriteAttributes(ai.path).empty»
+						«IF !(dataConfigExt.getDynConfigReadAttributes(ai).empty && 
+							dataConfigExt.getDynConfigWriteAttributes(ai).empty)»
 							, variableService
 						«ENDIF»
 					); 
@@ -202,17 +209,17 @@ class SubSystemClassGen {
 						});
 				}
 			
-				«IF dataConfigExt.hasVariableService(cc)»
+				«IF dataConfigExt.hasVariableService(comp)»
 					private VariableService variableService;
 				«ENDIF»
 				
 				@Override
 				public void init(){
-					«IF dataConfigExt.hasVariableService(cc)»
+					«IF dataConfigExt.hasVariableService(comp)»
 						variableService = new «cc.name»VariableService(this);
 					«ENDIF»
 					super.init();
-					«IF dataConfigExt.hasVariableService(cc)»
+					«IF dataConfigExt.hasVariableService(comp)»
 						variableService.init();
 					«ENDIF»
 				}
@@ -220,7 +227,7 @@ class SubSystemClassGen {
 				@Override
 				public void stop(){
 					super.stop();
-					«IF dataConfigExt.hasVariableService(cc)»
+					«IF dataConfigExt.hasVariableService(comp)»
 						variableService.stop();
 					«ENDIF»
 				}
@@ -229,4 +236,7 @@ class SubSystemClassGen {
 	'''
 	}
 
+	def private getThreadId(LogicalThread thread) {
+		"THREAD_"+thread.name.toUpperCase
+	}
 }

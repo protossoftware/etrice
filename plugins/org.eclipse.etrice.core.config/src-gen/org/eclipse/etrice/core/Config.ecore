@@ -30,7 +30,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubSystemConfig" eSuperTypes="#//ConfigElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dynConfig" eType="#//DynamicConfig"
         containment="true"/>
   </eClassifiers>

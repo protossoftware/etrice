@@ -54,18 +54,18 @@ class VariableServiceGen {
 	}
 	
 	def private generate(Root root, SubSystemInstance comp) {
-		val cc = comp.subSystemClass
+		var cc = comp.subSystemClass
 		val aisAttrMap = new HashMap<ActorInstance, List<Attribute>>
-		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai.path).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai.path)))
+		comp.allContainedInstances.forEach(ai | if(!configExt.getDynConfigReadAttributes(ai).empty)aisAttrMap.put(ai, configExt.getDynConfigReadAttributes(ai)))
 	'''
 		
-		package «cc.getPackage()»;
+		package «comp.subSystemClass.getPackage()»;
 		
 		import java.util.Arrays;
 		import java.util.HashMap;
 		import java.util.Map;
 		import org.eclipse.etrice.runtime.java.config.VariableService;
-		«configExt.getUserCode1(cc)»
+		«configExt.getUserCode1(comp)»
 		«FOR model : aisAttrMap.keySet.roomModels»
 			import «model.name».*;
 		«ENDFOR»
@@ -73,7 +73,7 @@ class VariableServiceGen {
 		
 		public class «cc.name+"VariableService"» extends VariableService{
 			
-			private «cc.name» subSystem;
+			private «comp.subSystemClass.name» subSystem;
 			
 			// Actor instances
 			«FOR ai : aisAttrMap.keySet»
@@ -81,7 +81,7 @@ class VariableServiceGen {
 			«ENDFOR»
 			
 			public «cc.name+"VariableService"»(«cc.name» subSystem) {
-				super(«configExt.getUserCode2(cc)»);
+				super(«configExt.getUserCode2(comp)»);
 				this.subSystem = subSystem;
 			}
 			
@@ -153,27 +153,27 @@ class VariableServiceGen {
 			
 			@Override
 			protected int getPollingTimerUser(){
-				return «configExt.getPollingTimerUser(cc)»;
+				return «configExt.getPollingTimerUser(comp)»;
 			}
 			
 		}
 	'''}
 	
 	def private genMinMaxCheck(List<Attribute> path, ActorClass ac){
+		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
 		var min = configExt.getAttrClassConfigMinValue(ac, path) != null
 		var max = configExt.getAttrClassConfigMaxValue(ac, path) != null
 		if(min || max)
 			'''
-				checkMinMax(«aVarName», «IF min»«ac.name».MIN«aVarName»«ELSE»null«ENDIF», «IF max»«ac.name».MAX«aVarName»«ELSE»null«ENDIF»);
+				«IF a.size>0»for(«a.refType.type.typeName» e : «aVarName»)
+					«ENDIF»checkMinMax(«IF a.size>0»e«ELSE»«aVarName»«ENDIF», «IF min»«ac.name».MIN«aVarName»«ELSE»null«ENDIF», «IF max»«ac.name».MAX«aVarName»«ELSE»null«ENDIF»);
 			'''
-		else
-			''''''
 	}
 
 	def private getDynConfigDataClasses(Iterable<ActorInstance> ais){
 		val result = new HashSet<DataClass>
-		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai.path).
+		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai).
 			forEach(a | if(a.refType.type.dataClass)result.add(a.refType.type as DataClass)
 			))
 		return result

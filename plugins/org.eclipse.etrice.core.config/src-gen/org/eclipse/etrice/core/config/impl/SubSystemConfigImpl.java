@@ -14,7 +14,8 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.SubSystemRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +24,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getSubSystem <em>Sub System</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getDynConfig <em>Dyn Config</em>}</li>
  * </ul>
@@ -33,6 +35,16 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemConfig
 {
   /**
+   * The cached value of the '{@link #getRoot() <em>Root</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRoot()
+   * @generated
+   * @ordered
+   */
+  protected LogicalSystem root;
+
+  /**
    * The cached value of the '{@link #getSubSystem() <em>Sub System</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -40,7 +52,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * @generated
    * @ordered
    */
-  protected SubSystemClass subSystem;
+  protected SubSystemRef subSystem;
 
   /**
    * The cached value of the '{@link #getDynConfig() <em>Dyn Config</em>}' containment reference.
@@ -78,12 +90,55 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubSystemClass getSubSystem()
+  public LogicalSystem getRoot()
+  {
+    if (root != null && root.eIsProxy())
+    {
+      InternalEObject oldRoot = (InternalEObject)root;
+      root = (LogicalSystem)eResolveProxy(oldRoot);
+      if (root != oldRoot)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConfigPackage.SUB_SYSTEM_CONFIG__ROOT, oldRoot, root));
+      }
+    }
+    return root;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LogicalSystem basicGetRoot()
+  {
+    return root;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRoot(LogicalSystem newRoot)
+  {
+    LogicalSystem oldRoot = root;
+    root = newRoot;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.SUB_SYSTEM_CONFIG__ROOT, oldRoot, root));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubSystemRef getSubSystem()
   {
     if (subSystem != null && subSystem.eIsProxy())
     {
       InternalEObject oldSubSystem = (InternalEObject)subSystem;
-      subSystem = (SubSystemClass)eResolveProxy(oldSubSystem);
+      subSystem = (SubSystemRef)eResolveProxy(oldSubSystem);
       if (subSystem != oldSubSystem)
       {
         if (eNotificationRequired())
@@ -98,7 +153,7 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubSystemClass basicGetSubSystem()
+  public SubSystemRef basicGetSubSystem()
   {
     return subSystem;
   }
@@ -108,9 +163,9 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSubSystem(SubSystemClass newSubSystem)
+  public void setSubSystem(SubSystemRef newSubSystem)
   {
-    SubSystemClass oldSubSystem = subSystem;
+    SubSystemRef oldSubSystem = subSystem;
     subSystem = newSubSystem;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.SUB_SYSTEM_CONFIG__SUB_SYSTEM, oldSubSystem, subSystem));
@@ -190,6 +245,9 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
   {
     switch (featureID)
     {
+      case ConfigPackage.SUB_SYSTEM_CONFIG__ROOT:
+        if (resolve) return getRoot();
+        return basicGetRoot();
       case ConfigPackage.SUB_SYSTEM_CONFIG__SUB_SYSTEM:
         if (resolve) return getSubSystem();
         return basicGetSubSystem();
@@ -209,8 +267,11 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
   {
     switch (featureID)
     {
+      case ConfigPackage.SUB_SYSTEM_CONFIG__ROOT:
+        setRoot((LogicalSystem)newValue);
+        return;
       case ConfigPackage.SUB_SYSTEM_CONFIG__SUB_SYSTEM:
-        setSubSystem((SubSystemClass)newValue);
+        setSubSystem((SubSystemRef)newValue);
         return;
       case ConfigPackage.SUB_SYSTEM_CONFIG__DYN_CONFIG:
         setDynConfig((DynamicConfig)newValue);
@@ -229,8 +290,11 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
   {
     switch (featureID)
     {
+      case ConfigPackage.SUB_SYSTEM_CONFIG__ROOT:
+        setRoot((LogicalSystem)null);
+        return;
       case ConfigPackage.SUB_SYSTEM_CONFIG__SUB_SYSTEM:
-        setSubSystem((SubSystemClass)null);
+        setSubSystem((SubSystemRef)null);
         return;
       case ConfigPackage.SUB_SYSTEM_CONFIG__DYN_CONFIG:
         setDynConfig((DynamicConfig)null);
@@ -249,6 +313,8 @@ public class SubSystemConfigImpl extends ConfigElementImpl implements SubSystemC
   {
     switch (featureID)
     {
+      case ConfigPackage.SUB_SYSTEM_CONFIG__ROOT:
+        return root != null;
       case ConfigPackage.SUB_SYSTEM_CONFIG__SUB_SYSTEM:
         return subSystem != null;
       case ConfigPackage.SUB_SYSTEM_CONFIG__DYN_CONFIG:

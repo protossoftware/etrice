@@ -51,7 +51,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.xtext.validation.Check;
 
 public class ConfigJavaValidator extends AbstractConfigJavaValidator {
@@ -220,17 +220,18 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (!(config.eContainer() instanceof ActorInstanceConfig))
 				error("dynamic configuration only at root attributes", feature);
 			if (config.eContainer() instanceof ActorInstanceConfig) {
-				SubSystemClass ssc = ((ActorInstanceConfig) config.eContainer())
-						.getSubSystem().getType();
 				ConfigModel model = getConfigModel(config);
+				SubSystemRef ssRef = ((ActorInstanceConfig) config.eContainer())
+						.getSubSystem();
 				boolean found = false;
-				for (SubSystemConfig c : model.getSubSystemConfigs())
-					if (c.getSubSystem().equals(ssc)) {
+				for (SubSystemConfig c : model.getSubSystemConfigs()) {
+					if (c.getSubSystem().equals(ssRef)) {
 						if (c.getDynConfig() == null)
 							error("no source for dynamic config in SubSystemConfig",
 									feature);
 						found = true;
 					}
+				}
 				if (!found)
 					error("no SubSystemConfig found", feature);
 

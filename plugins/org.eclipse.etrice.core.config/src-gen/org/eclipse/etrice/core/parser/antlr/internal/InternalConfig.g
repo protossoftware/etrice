@@ -235,37 +235,56 @@ ruleSubSystemConfig returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getSubSystemConfigRule());
 	        }
         }
-	otherlv_1=RULE_ID
+		{ 
+	        newCompositeNode(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemCrossReference_1_0()); 
+	    }
+		ruleFQN		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2='/' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getSubSystemConfigAccess().getSolidusKeyword_2());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSubSystemConfigRule());
+	        }
+        }
+	otherlv_3=RULE_ID
 	{
-		newLeafNode(otherlv_1, grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemClassCrossReference_1_0()); 
+		newLeafNode(otherlv_3, grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); 
 	}
 
 )
-)	otherlv_2='{' 
+)	otherlv_4='{' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_4, grammarAccess.getSubSystemConfigAccess().getLeftCurlyBracketKeyword_4());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_5_0()); 
 	    }
-		lv_dynConfig_3_0=ruleDynamicConfig		{
+		lv_dynConfig_5_0=ruleDynamicConfig		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemConfigRule());
 	        }
        		set(
        			$current, 
        			"dynConfig",
-        		lv_dynConfig_3_0, 
+        		lv_dynConfig_5_0, 
         		"DynamicConfig");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4='}' 
+)	otherlv_6='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_6, grammarAccess.getSubSystemConfigAccess().getRightCurlyBracketKeyword_6());
     }
 )
 ;
@@ -547,12 +566,10 @@ ruleActorInstanceConfig returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getActorInstanceConfigRule());
 	        }
         }
-		{ 
-	        newCompositeNode(grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); 
-	    }
-		ruleFQN		{ 
-	        afterParserOrEnumRuleCall();
-	    }
+	otherlv_3=RULE_ID
+	{
+		newLeafNode(otherlv_3, grammarAccess.getActorInstanceConfigAccess().getSubSystemSubSystemRefCrossReference_3_0()); 
+	}
 
 )
 )	otherlv_4='/' 

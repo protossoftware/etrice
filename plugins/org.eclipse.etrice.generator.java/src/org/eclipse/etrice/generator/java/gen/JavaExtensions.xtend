@@ -17,8 +17,10 @@
 
 package org.eclipse.etrice.generator.java.gen
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
@@ -26,10 +28,8 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import com.google.inject.Inject
+import org.eclipse.xtext.util.Pair
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -48,6 +48,10 @@ class JavaExtensions implements ILanguageExtension {
 			case "char" : "Character"
 			default: type.toFirstUpper
 		}
+	}
+	
+	def boolean needsInitialization(Attribute a){
+		a.size > 0 || !typeHelpers.isPrimitive(a.refType.type)|| typeHelpers.typeName(a.refType.type)?.equals("String")
 	}
 	
 	override String accessLevelPrivate() {"private "}
@@ -112,11 +116,7 @@ class JavaExtensions implements ILanguageExtension {
 	
 	override toValueLiteral(PrimitiveType type, String value) {
 		switch(type.targetName){
-			case "char":
-				castValue(type, value)
-			case "string":
-				castValue(type, value)
-			case  value.contains(','):{
+			case !typeHelpers.isCharacterType(type) && value.contains(','): {
 				var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
 				'''{ «FOR v: singleValues SEPARATOR ', '»«castValue(type, v.trim)»«ENDFOR» }'''.toString
 			}
@@ -128,41 +128,42 @@ class JavaExtensions implements ILanguageExtension {
 	def private castValue(PrimitiveType type, String value){
 		switch(type.targetName){
 			case "boolean":
-				return value.toLowerCase
+				value.toLowerCase
 			case "byte":
-				return "(byte)"+value
+				"(byte)"+value
 			case "short":
-				return "(short)"+value
+				"(short)"+value
 			case "int":
-				return value
+				value
 			case "long":
-				return value+"L"
+				value+"L"
 			case "float":
-				return value+"f"
+				value+"f"
 			case "double":
-				return value+"d"
-			case "char":{
-				if(value.length == 1)
-					return "'"+value+"'"
+				value+"d"
+			case "char":
+				if(value.empty)
+					"(char) 0"
+				else if(value.length==1)
+					"'"+value.charAt(0)+"'"
 				else
-					return "\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\".toCharArray()"
-			}
+					"\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\".toCharArray()"
 			case "String":
-				return "\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\""
+				"\""+value.replace("\\", "\\\\").replace("\"", "\\\"")+"\""
+			default:
+				throw new UnsupportedOperationException(type.targetName)
 		}
-		
-		throw new UnsupportedOperationException(type.targetName)
 	}
 
 	override defaultValue(DataType dt) {
-		if (dt instanceof PrimitiveType) {
-			var pType = dt as PrimitiveType
-			return toValueLiteral(pType, pType.defaultValueLiteral)
+		switch dt {
+			PrimitiveType:
+				toValueLiteral(dt, dt.defaultValueLiteral)
+			ExternalType:
+				"new "+(dt as ExternalType).targetName+"()"
+			default:
+				"new "+dt.name+"()"
 		}
-		else if (dt instanceof ExternalType)
-			return "new "+(dt as ExternalType).targetName+"()"
-		else
-			return "new "+dt.name+"()"
 	}
 	
 

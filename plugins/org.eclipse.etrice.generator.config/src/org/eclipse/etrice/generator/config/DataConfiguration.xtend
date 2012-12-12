@@ -28,10 +28,10 @@ import org.eclipse.etrice.core.config.StringLiteral
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
@@ -60,11 +60,11 @@ class DataConfiguration implements IDataConfiguration {
 	}
 	
 	override getAttrClassConfigMaxValue(ActorClass actor, List<Attribute> path) {
-		actor.getAttrClassConfig(path)?.min?.toStringExpr
+		actor.getAttrClassConfig(path)?.max?.toStringExpr
 	}
 	
 	override getAttrClassConfigMinValue(ActorClass actor, List<Attribute> path) {
-		actor.getAttrClassConfig(path)?.max?.toStringExpr
+		actor.getAttrClassConfig(path)?.min?.toStringExpr
 	}
 	
 	def private getAttrClassConfig(ActorClass actor, List<Attribute> path){
@@ -91,11 +91,11 @@ class DataConfiguration implements IDataConfiguration {
 	}
 	// dynamic
 	
-	override getPollingTimerUser(SubSystemClass subsystem) {
+	override getPollingTimerUser(SubSystemInstance subsystem) {
 		 subsystem.config?.dynConfig?.polling
 	}
 	
-	override getUserCode1(SubSystemClass subsystem) {
+	override getUserCode1(SubSystemInstance subsystem) {
 		var dynConfig = subsystem.config?.dynConfig
 		return 
 			if(dynConfig?.filePath != null)
@@ -104,7 +104,7 @@ class DataConfiguration implements IDataConfiguration {
 				dynConfig?.userCode1
 	}
 	
-	override getUserCode2(SubSystemClass subsystem) {
+	override getUserCode2(SubSystemInstance subsystem) {
 		var dynConfig = subsystem.config?.dynConfig
 		return 
 			if(dynConfig?.filePath != null)
@@ -113,24 +113,24 @@ class DataConfiguration implements IDataConfiguration {
 				dynConfig?.userCode2
 	}
 	
-	override getDynConfigReadAttributes(String actorInstance) {
+	override getDynConfigReadAttributes(ActorInstance ai) {
 		val result = new ArrayList<Attribute>
-		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(actorInstance)
+		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(ai.path)
 		configs?.forEach(c | if(c.readOnly)result.add(c.attribute))
 		
 		return result
 	}
 	
-	override getDynConfigWriteAttributes(String actorInstance) {
+	override getDynConfigWriteAttributes(ActorInstance ai) {
 		val result = new ArrayList<Attribute>
-		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(actorInstance)
+		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(ai.path)
 		configs?.forEach(c | if(!c.readOnly)result.add(c.attribute))
 		
 		return result
 	}
 	
 	
-	override hasVariableService(SubSystemClass subsystem) {
+	override hasVariableService(SubSystemInstance subsystem) {
 		subsystem.config?.dynConfig != null
 	}
 	
@@ -147,8 +147,8 @@ class DataConfiguration implements IDataConfiguration {
 		}
 	}
 
-	def private getConfig(SubSystemClass cc){
-		DataConfigurationHelper::subSystemConfigMap.get(cc)
+	def private getConfig(SubSystemInstance cc){
+		DataConfigurationHelper::subSystemConfigMap.get(cc.path)
 	}	
 
 	override getDynConfigReadAttributes(ActorClass actor) {

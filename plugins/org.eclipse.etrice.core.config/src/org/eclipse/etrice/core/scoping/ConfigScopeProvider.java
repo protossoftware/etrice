@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
@@ -47,6 +48,16 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  */
 public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	public IScope scope_SubSystemConfig_subSystem(SubSystemConfig ctx, EReference ref){
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+
+		LogicalSystem root = ctx.getRoot();
+		for (SubSystemRef ssRef : root.getSubSystems())
+			scopes.add(EObjectDescription.create(ref.getName(), ssRef));
+
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+	
 	public IScope scope_ActorInstanceConfig_subSystem(ActorInstanceConfig ctx,
 			EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();

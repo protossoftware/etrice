@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
+import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
@@ -18,7 +19,6 @@ import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -29,9 +29,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 public class CExtensions implements ILanguageExtension {
   @Inject
   private IDiagnostician diagnostician;
-  
-  @Inject
-  private TypeHelpers typeHelpers;
   
   @Inject
   private RoomExtensions _roomExtensions;
@@ -259,29 +256,31 @@ public class CExtensions implements ILanguageExtension {
     final String _switchValue = _targetName;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_switchValue,"char")) {
-        _matched=true;
-        String _xifexpression = null;
+      boolean _and = false;
+      String _targetName_1 = type.getTargetName();
+      boolean _equals = _targetName_1.equals("char");
+      if (!_equals) {
+        _and = false;
+      } else {
         int _length = value.length();
-        boolean _equals = (_length == 1);
-        if (_equals) {
-          String _plus = ("\'" + value);
-          String _plus_1 = (_plus + "\'");
-          _xifexpression = _plus_1;
-        } else {
-          String _plus_2 = ("\"" + value);
-          String _plus_3 = (_plus_2 + "\"");
-          _xifexpression = _plus_3;
-        }
-        _switchResult = _xifexpression;
+        boolean _equals_1 = (_length == 1);
+        _and = (_equals && _equals_1);
+      }
+      if (_and) {
+        _matched=true;
+        String _plus = ("\'" + value);
+        String _plus_1 = (_plus + "\'");
+        _switchResult = _plus_1;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"charPtr")) {
+      LiteralType _type = type.getType();
+      boolean _equals_2 = Objects.equal(_type, LiteralType.CHAR);
+      if (_equals_2) {
         _matched=true;
-        String _plus_4 = ("\"" + value);
-        String _plus_5 = (_plus_4 + "\"");
-        _switchResult = _plus_5;
+        String _plus_2 = ("\"" + value);
+        String _plus_3 = (_plus_2 + "\"");
+        _switchResult = _plus_3;
       }
     }
     if (!_matched) {

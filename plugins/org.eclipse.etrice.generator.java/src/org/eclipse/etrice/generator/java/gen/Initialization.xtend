@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
@@ -32,7 +31,7 @@ class Initialization {
 
 	@Inject extension TypeHelpers typeHelpers
 	@Inject extension RoomExtensions
-	@Inject extension ILanguageExtension languageExt
+	@Inject extension JavaExtensions languageExt
 	@Inject extension ProcedureHelpers procedureHelpers
 	
 	def attributeInitialization(List<Attribute> attribs, EObject roomClass, boolean useClassDefaultsOnly) {	
@@ -50,7 +49,7 @@ class Initialization {
 		if(a.refType.ref){
 			if(a.defaultValueLiteral != null)
 				attributeInit(a, a.defaultValueLiteral)
-			else if(!(useClassDefaultsOnly && aType.primitive))
+			else if(languageExt.needsInitialization(a))
 				attributeInit(a, languageExt.nullPointer)	
 		}
 		else{
@@ -58,7 +57,7 @@ class Initialization {
 				var value = getDataConfigValue(new ArrayList<Attribute>.union(a), roomClass)
 				if(value == null) value = a.defaultValueLiteral
 				if(value != null) attributeInit(a, languageExt.toValueLiteral(aType as PrimitiveType, value))
-				else if(!useClassDefaultsOnly) attributeInit(a, languageExt.defaultValue(aType))
+				else if(!useClassDefaultsOnly || languageExt.needsInitialization(a)) attributeInit(a, languageExt.defaultValue(aType))
 			} else
 				attributeInit(a, languageExt.defaultValue(aType))			
 		}
@@ -85,22 +84,28 @@ class Initialization {
 	}
 	
 	def private attributeInit(List<Attribute> path, String value){
-		var a = path.last
+		var getter = if(path.size == 1) "this" else procedureHelpers.invokeGetters(path.take(path.size-1), null).toString
+	 	return genAttributeInitializer(path.last, value, getter)
+	}
+	
+	def genAttributeInitializer(Attribute a, String value, String invokes){
 		var aType = a.refType.type
-		var getter = if(path.size > 1)procedureHelpers.invokeGetters(path.take(path.size-1), null)+"." else ""
-	 	return '''
-	 		«IF a.size == 0 || aType.characterType»
-	 			«getter»«procedureHelpers.invokeSetter(a.name, null, value)»;
-	 		«ELSEIF !value.trim.startsWith('{')»
-	 			{
-	 				«aType.typeName»[] «a.name» = new «aType.typeName»[«a.size»];
-	 				for (int i=0;i<«a.size»;i++){
-	 					«a.name»[i] = «value»;
-	 				}
-	 				«getter»«procedureHelpers.invokeSetter(a.name, null, a.name)»;
-	 			}
+		// be careful of: char array with single character ('x')
+		'''
+	 		«IF a.size == 0 || (a.size > 0 && "char".equals(aType.typeName) && !value.matches("'.'|\\(char\\).*"))»
+	 			«invokes».«procedureHelpers.invokeSetter(a.name, null, value)»;
+	 		«ELSEIF !value.trim.startsWith('{') || "char".equals(aType.typeName)»
+				{
+					«aType.typeName»[] array = new «aType.typeName»[«a.size»];
+					«IF !(a.refType.ref && aType.primitive)»
+						for (int i=0;i<«a.size»;i++){
+							array[i] = «value»;
+						}
+					«ENDIF»
+					«invokes».«procedureHelpers.invokeSetter(a.name, null, "array")»;
+				}
 	 		«ELSE»
-	 			«getter»«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
+	 			«invokes».«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
 	 		«ENDIF»
 	 	'''
 	}

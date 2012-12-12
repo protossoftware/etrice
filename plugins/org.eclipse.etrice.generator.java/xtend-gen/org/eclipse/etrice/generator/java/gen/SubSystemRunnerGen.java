@@ -3,8 +3,10 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -107,8 +109,8 @@ public class SubSystemRunnerGen {
       String _name_4 = cc.getName();
       _builder.append(_name_4, "		");
       _builder.append("(\"");
-      String _name_5 = ssc.getName();
-      _builder.append(_name_5, "		");
+      String _runtimeName = this.getRuntimeName(ssc);
+      _builder.append(_runtimeName, "		");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -122,6 +124,32 @@ public class SubSystemRunnerGen {
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private String getRuntimeName(final SubSystemInstance ssc) {
+    String _xblockexpression = null;
+    {
+      EObject parent = ssc.eContainer();
+      String _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (parent instanceof SystemInstance) {
+          final SystemInstance _systemInstance = (SystemInstance)parent;
+          _matched=true;
+          String _name = _systemInstance.getName();
+          String _plus = (_name + "/");
+          String _name_1 = ssc.getName();
+          String _plus_1 = (_plus + _name_1);
+          _switchResult = _plus_1;
+        }
+      }
+      if (!_matched) {
+        String _name = ssc.getName();
+        _switchResult = _name;
+      }
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }

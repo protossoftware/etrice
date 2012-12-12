@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -195,6 +196,11 @@ public class ConfigUtil {
 			path += "/" + s;
 
 		return path;
+	}
+
+	public static String getPath(SubSystemConfig config) {
+		return "/" + config.getRoot().getName() + "/"
+				+ config.getSubSystem().getName();
 	}
 
 	public static List<Attribute> filterConfigurableAttributes(

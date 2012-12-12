@@ -23,6 +23,7 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.LiteralType
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import java.util.List
 import org.eclipse.xtext.util.Pair
@@ -33,14 +34,11 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.core.room.RefableType
-import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
-	@Inject TypeHelpers typeHelpers
 	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(Message m) {
@@ -160,13 +158,10 @@ class CExtensions implements ILanguageExtension {
 	}
 	override String toValueLiteral(PrimitiveType type, String value){
 		switch(type.targetName){
-			case "char":
-				if(value.length==1)
-					"'"+value+"'"
-				else
-					"\""+value+"\""
-				// TODO ensure \0
-			case "charPtr":
+			// TODO JH: char* with length 1
+			case type.targetName.equals("char") && value.length == 1:
+				"'"+value+"'"
+			case type.type == LiteralType::CHAR:
 				"\""+value+"\""
 			case value.contains(','): {
 					var singleValues = value.replace('{', '').replace('}', '').trim.split(',')

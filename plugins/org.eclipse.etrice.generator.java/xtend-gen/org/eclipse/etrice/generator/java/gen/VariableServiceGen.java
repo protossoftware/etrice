@@ -82,19 +82,17 @@ public class VariableServiceGen {
   private CharSequence generate(final Root root, final SubSystemInstance comp) {
     CharSequence _xblockexpression = null;
     {
-      final SubSystemClass cc = comp.getSubSystemClass();
+      SubSystemClass cc = comp.getSubSystemClass();
       HashMap<ActorInstance,List<Attribute>> _hashMap = new HashMap<ActorInstance,List<Attribute>>();
       final HashMap<ActorInstance,List<Attribute>> aisAttrMap = _hashMap;
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
       final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
           public void apply(final ActorInstance ai) {
-            String _path = ai.getPath();
-            List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path);
+            List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
             boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
-              String _path_1 = ai.getPath();
-              List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path_1);
+              List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
               aisAttrMap.put(ai, _dynConfigReadAttributes_1);
             }
           }
@@ -103,7 +101,8 @@ public class VariableServiceGen {
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
       _builder.append("package ");
-      String _package = this.roomExt.getPackage(cc);
+      SubSystemClass _subSystemClass = comp.getSubSystemClass();
+      String _package = this.roomExt.getPackage(_subSystemClass);
       _builder.append(_package, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
@@ -116,7 +115,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
       _builder.newLine();
-      String _userCode1 = this.configExt.getUserCode1(cc);
+      String _userCode1 = this.configExt.getUserCode1(comp);
       _builder.append(_userCode1, "");
       _builder.newLineIfNotEmpty();
       {
@@ -142,7 +141,8 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("private ");
-      String _name_2 = cc.getName();
+      SubSystemClass _subSystemClass_1 = comp.getSubSystemClass();
+      String _name_2 = _subSystemClass_1.getName();
       _builder.append(_name_2, "	");
       _builder.append(" subSystem;");
       _builder.newLineIfNotEmpty();
@@ -180,7 +180,7 @@ public class VariableServiceGen {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(");
-      String _userCode2 = this.configExt.getUserCode2(cc);
+      String _userCode2 = this.configExt.getUserCode2(comp);
       _builder.append(_userCode2, "		");
       _builder.append(");");
       _builder.newLineIfNotEmpty();
@@ -463,7 +463,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return ");
-      int _pollingTimerUser = this.configExt.getPollingTimerUser(cc);
+      int _pollingTimerUser = this.configExt.getPollingTimerUser(comp);
       _builder.append(_pollingTimerUser, "		");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
@@ -482,6 +482,7 @@ public class VariableServiceGen {
   private CharSequence genMinMaxCheck(final List<Attribute> path, final ActorClass ac) {
     CharSequence _xblockexpression = null;
     {
+      Attribute a = IterableExtensions.<Attribute>last(path);
       String aVarName = this.toAbsolutePath(path, "_");
       String _attrClassConfigMinValue = this.configExt.getAttrClassConfigMinValue(ac, path);
       boolean min = (!Objects.equal(_attrClassConfigMinValue, null));
@@ -496,8 +497,32 @@ public class VariableServiceGen {
       }
       if (_or) {
         StringConcatenation _builder = new StringConcatenation();
+        {
+          int _size = a.getSize();
+          boolean _greaterThan = (_size > 0);
+          if (_greaterThan) {
+            _builder.append("for(");
+            RefableType _refType = a.getRefType();
+            DataType _type = _refType.getType();
+            String _typeName = this._typeHelpers.typeName(_type);
+            _builder.append(_typeName, "");
+            _builder.append(" e : ");
+            _builder.append(aVarName, "");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+          }
+        }
         _builder.append("checkMinMax(");
-        _builder.append(aVarName, "");
+        {
+          int _size_1 = a.getSize();
+          boolean _greaterThan_1 = (_size_1 > 0);
+          if (_greaterThan_1) {
+            _builder.append("e");
+          } else {
+            _builder.append(aVarName, "");
+          }
+        }
         _builder.append(", ");
         {
           if (min) {
@@ -523,9 +548,6 @@ public class VariableServiceGen {
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _xifexpression = _builder;
-      } else {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _xifexpression = _builder_1;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -537,8 +559,7 @@ public class VariableServiceGen {
     final HashSet<DataClass> result = _hashSet;
     final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
         public void apply(final ActorInstance ai) {
-          String _path = ai.getPath();
-          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(_path);
+          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
           final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
               public void apply(final Attribute a) {
                 RefableType _refType = a.getRefType();

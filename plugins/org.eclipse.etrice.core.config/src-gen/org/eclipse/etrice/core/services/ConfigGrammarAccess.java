@@ -101,45 +101,61 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubSystemConfig");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSubSystemConfigKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubSystemAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cSubSystemSubSystemClassCrossReference_1_0 = (CrossReference)cSubSystemAssignment_1.eContents().get(0);
-		private final RuleCall cSubSystemSubSystemClassIDTerminalRuleCall_1_0_1 = (RuleCall)cSubSystemSubSystemClassCrossReference_1_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cDynConfigAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDynConfigDynamicConfigParserRuleCall_3_0 = (RuleCall)cDynConfigAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cRootAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRootLogicalSystemCrossReference_1_0 = (CrossReference)cRootAssignment_1.eContents().get(0);
+		private final RuleCall cRootLogicalSystemFQNParserRuleCall_1_0_1 = (RuleCall)cRootLogicalSystemCrossReference_1_0.eContents().get(1);
+		private final Keyword cSolidusKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSubSystemAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cSubSystemSubSystemRefCrossReference_3_0 = (CrossReference)cSubSystemAssignment_3.eContents().get(0);
+		private final RuleCall cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1 = (RuleCall)cSubSystemSubSystemRefCrossReference_3_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cDynConfigAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDynConfigDynamicConfigParserRuleCall_5_0 = (RuleCall)cDynConfigAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//SubSystemConfig:
 		//
-		//	"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}";
+		//	"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}";
 		public ParserRule getRule() { return rule; }
 
-		//"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}"
+		//"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}"
 		public Group getGroup() { return cGroup; }
 
 		//"SubSystemConfig"
 		public Keyword getSubSystemConfigKeyword_0() { return cSubSystemConfigKeyword_0; }
 
-		//subSystem=[room::SubSystemClass]
-		public Assignment getSubSystemAssignment_1() { return cSubSystemAssignment_1; }
+		//root=[room::LogicalSystem|FQN]
+		public Assignment getRootAssignment_1() { return cRootAssignment_1; }
 
-		//[room::SubSystemClass]
-		public CrossReference getSubSystemSubSystemClassCrossReference_1_0() { return cSubSystemSubSystemClassCrossReference_1_0; }
+		//[room::LogicalSystem|FQN]
+		public CrossReference getRootLogicalSystemCrossReference_1_0() { return cRootLogicalSystemCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getRootLogicalSystemFQNParserRuleCall_1_0_1() { return cRootLogicalSystemFQNParserRuleCall_1_0_1; }
+
+		//"/"
+		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
+
+		//subSystem=[room::SubSystemRef]
+		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
+
+		//[room::SubSystemRef]
+		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
 
 		//ID
-		public RuleCall getSubSystemSubSystemClassIDTerminalRuleCall_1_0_1() { return cSubSystemSubSystemClassIDTerminalRuleCall_1_0_1; }
+		public RuleCall getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1() { return cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//dynConfig=DynamicConfig
-		public Assignment getDynConfigAssignment_3() { return cDynConfigAssignment_3; }
+		public Assignment getDynConfigAssignment_5() { return cDynConfigAssignment_5; }
 
 		//DynamicConfig
-		public RuleCall getDynConfigDynamicConfigParserRuleCall_3_0() { return cDynConfigDynamicConfigParserRuleCall_3_0; }
+		public RuleCall getDynConfigDynamicConfigParserRuleCall_5_0() { return cDynConfigDynamicConfigParserRuleCall_5_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class DynamicConfigElements extends AbstractParserRuleElementFinder {
@@ -310,7 +326,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSolidusKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSubSystemAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cSubSystemSubSystemRefCrossReference_3_0 = (CrossReference)cSubSystemAssignment_3.eContents().get(0);
-		private final RuleCall cSubSystemSubSystemRefFQNParserRuleCall_3_0_1 = (RuleCall)cSubSystemSubSystemRefCrossReference_3_0.eContents().get(1);
+		private final RuleCall cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1 = (RuleCall)cSubSystemSubSystemRefCrossReference_3_0.eContents().get(1);
 		private final Keyword cSolidusKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cPathAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cPathRefPathParserRuleCall_5_0 = (RuleCall)cPathAssignment_5.eContents().get(0);
@@ -336,12 +352,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//	 * / ActorInstanceConfig:
 		//
-		//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef|FQN] "/" path=RefPath "{"
+		//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
 		//
 		//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}";
 		public ParserRule getRule() { return rule; }
 
-		//"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef|FQN] "/" path=RefPath "{"
+		//"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
 		//
 		//(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}"
 		public Group getGroup() { return cGroup; }
@@ -361,14 +377,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//"/"
 		public Keyword getSolidusKeyword_2() { return cSolidusKeyword_2; }
 
-		//subSystem=[room::SubSystemRef|FQN]
+		//subSystem=[room::SubSystemRef]
 		public Assignment getSubSystemAssignment_3() { return cSubSystemAssignment_3; }
 
-		//[room::SubSystemRef|FQN]
+		//[room::SubSystemRef]
 		public CrossReference getSubSystemSubSystemRefCrossReference_3_0() { return cSubSystemSubSystemRefCrossReference_3_0; }
 
-		//FQN
-		public RuleCall getSubSystemSubSystemRefFQNParserRuleCall_3_0_1() { return cSubSystemSubSystemRefFQNParserRuleCall_3_0_1; }
+		//ID
+		public RuleCall getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1() { return cSubSystemSubSystemRefIDTerminalRuleCall_3_0_1; }
 
 		//"/"
 		public Keyword getSolidusKeyword_4() { return cSolidusKeyword_4; }
@@ -1523,7 +1539,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 	//SubSystemConfig:
 	//
-	//	"SubSystemConfig" subSystem=[room::SubSystemClass] "{" dynConfig=DynamicConfig "}";
+	//	"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}";
 	public SubSystemConfigElements getSubSystemConfigAccess() {
 		return (pSubSystemConfig != null) ? pSubSystemConfig : (pSubSystemConfig = new SubSystemConfigElements());
 	}
@@ -1576,7 +1592,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	 * / ActorInstanceConfig:
 	//
-	//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef|FQN] "/" path=RefPath "{"
+	//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
 	//
 	//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}";
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {

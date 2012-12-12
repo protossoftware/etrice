@@ -25,7 +25,7 @@ ConfigElement:
 	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 
 SubSystemConfig:
-	'SubSystemConfig' subSystem=[room::SubSystemClass] '{'
+	'SubSystemConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '{'
 	dynConfig=DynamicConfig
 	'}';
 
@@ -54,7 +54,7 @@ ActorClassConfig:
 	 * attributes
 	 */
 ActorInstanceConfig:
-	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|FQN] '/' path=RefPath '{'
+	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '/' path=RefPath '{'
 	((attributes+=AttrInstanceConfig)* &
 	(ports+=PortInstanceConfig)*)
 	'}';

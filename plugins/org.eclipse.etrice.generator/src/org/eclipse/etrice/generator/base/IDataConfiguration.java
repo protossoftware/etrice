@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SubSystemClass;
 
 public interface IDataConfiguration {
 	
@@ -41,13 +41,13 @@ public interface IDataConfiguration {
 	
 	// dynamic configuration
 	
-	public String getUserCode1(SubSystemClass subsystem);
-	public String getUserCode2(SubSystemClass subsystem);
-	public int getPollingTimerUser(SubSystemClass subsystem);
-	public boolean hasVariableService(SubSystemClass subsystem);
+	public String getUserCode1(SubSystemInstance subsystem);
+	public String getUserCode2(SubSystemInstance subsystem);
+	public int getPollingTimerUser(SubSystemInstance subsystem);
+	public boolean hasVariableService(SubSystemInstance subsystem);
 	
-	public List<Attribute> getDynConfigReadAttributes(String actorInstance);
-	public List<Attribute> getDynConfigWriteAttributes(String actorInstance);
+	public List<Attribute> getDynConfigReadAttributes(ActorInstance ai);
+	public List<Attribute> getDynConfigWriteAttributes(ActorInstance ai);
 	
 	public List<Attribute> getDynConfigReadAttributes(ActorClass actor);
 	public List<Attribute> getDynConfigWriteAttributes(ActorClass actor);

@@ -321,7 +321,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSubSystemConfig_SubSystem()
+  public EReference getSubSystemConfig_Root()
   {
     return (EReference)subSystemConfigEClass.getEStructuralFeatures().get(0);
   }
@@ -331,9 +331,19 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSubSystemConfig_DynConfig()
+  public EReference getSubSystemConfig_SubSystem()
   {
     return (EReference)subSystemConfigEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSubSystemConfig_DynConfig()
+  {
+    return (EReference)subSystemConfigEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -884,6 +894,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     configElementEClass = createEClass(CONFIG_ELEMENT);
 
     subSystemConfigEClass = createEClass(SUB_SYSTEM_CONFIG);
+    createEReference(subSystemConfigEClass, SUB_SYSTEM_CONFIG__ROOT);
     createEReference(subSystemConfigEClass, SUB_SYSTEM_CONFIG__SUB_SYSTEM);
     createEReference(subSystemConfigEClass, SUB_SYSTEM_CONFIG__DYN_CONFIG);
 
@@ -1018,7 +1029,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEClass(configElementEClass, ConfigElement.class, "ConfigElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(subSystemConfigEClass, SubSystemConfig.class, "SubSystemConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSubSystemConfig_SubSystem(), theRoomPackage.getSubSystemClass(), null, "subSystem", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubSystemConfig_Root(), theRoomPackage.getLogicalSystem(), null, "root", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubSystemConfig_SubSystem(), theRoomPackage.getSubSystemRef(), null, "subSystem", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSubSystemConfig_DynConfig(), this.getDynamicConfig(), null, "dynConfig", null, 0, 1, SubSystemConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dynamicConfigEClass, DynamicConfig.class, "DynamicConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

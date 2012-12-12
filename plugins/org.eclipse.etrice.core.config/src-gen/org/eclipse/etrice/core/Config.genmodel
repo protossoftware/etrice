@@ -18,6 +18,7 @@
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//ConfigElement"/>
     <genClasses ecoreClass="Config.ecore#//SubSystemConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//SubSystemConfig/root"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//SubSystemConfig/subSystem"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//SubSystemConfig/dynConfig"/>
     </genClasses>
