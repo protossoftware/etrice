@@ -111,6 +111,10 @@ class CExtensions implements ILanguageExtension {
 		return false
 	}
 	
+	override boolean usesPointers() {
+		return true
+	}
+	
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		if (entries.empty)
 			return "/* empty enum not generated */"

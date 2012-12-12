@@ -128,6 +128,10 @@ public class JavaExtensions implements ILanguageExtension {
     return true;
   }
   
+  public boolean usesPointers() {
+    return false;
+  }
+  
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     {

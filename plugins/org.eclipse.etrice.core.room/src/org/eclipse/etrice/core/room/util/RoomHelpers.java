@@ -814,7 +814,7 @@ public class RoomHelpers {
 		return true;
 	}
 	
-	public static List<Message> getMessageList(InterfaceItem item, boolean outgoing) {
+	public static List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
 		if (item instanceof Port) {
 			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
@@ -839,7 +839,7 @@ public class RoomHelpers {
 			return null;
 		}
 		
-		return outgoing? protocol.getOutgoingMessages():protocol.getIncomingMessages();
+		return outgoing? RoomHelpers.getAllMessages(protocol,false):RoomHelpers.getAllMessages(protocol,true);
 	}
 	
 	public static PortClass getPortClass(InterfaceItem item) {
@@ -1331,5 +1331,25 @@ public class RoomHelpers {
 		}
 
 		return null;
+	}
+
+	/**
+	 * checks whether pc1 is derived from (but not equal) pc2
+	 * 
+	 * @param pc1 potential sub class
+	 * @param pc2 potential super class
+	 * 
+	 * @return true if pc1 is derived from pc2
+	 */
+	public static boolean isDerivedFrom(ProtocolClass pc1, ProtocolClass pc2) {
+		if (pc1==pc2)
+			return false;
+		
+		while (pc1!=null) {
+			if (pc1==pc2)
+				return true;
+			pc1 = pc1.getBase();
+		}
+		return false;
 	}
 }

@@ -93,6 +93,14 @@ public class MessageService extends Thread implements IMessageReceiver,
 
 	}
 
+	public Address getFreeAddress() {
+		return messageDispatcher.getFreeAddress();
+	}
+	
+	public void freeAddress(Address addr) {
+		messageDispatcher.freeAddress(addr);
+	}
+	
 	// protected methods for sole use by test cases
 	protected MessageSeQueue getMessageQueue() {
 		return messageQueue;
@@ -107,23 +115,23 @@ public class MessageService extends Thread implements IMessageReceiver,
 	}
 
 	@Override
-	public String getInstancePath() {
-		String path = PATH_DELIM + name;
+	public String getInstancePath(char delim) {
+		String path = delim + name;
 		
 		if (parent!=null)
 			path = parent.getInstancePath()+path;
 		
 		return path;
 	}
+	
+	@Override
+	public String getInstancePath() {
+		return getInstancePath(PATH_DELIM);
+	}
 
 	@Override
 	public String getInstancePathName() {
-		String path = PATHNAME_DELIM + name;
-		
-		if (parent!=null)
-			path = parent.getInstancePathName()+path;
-		
-		return path;
+		return getInstancePath(PATHNAME_DELIM);
 	}
 	
 	public synchronized void terminate() {

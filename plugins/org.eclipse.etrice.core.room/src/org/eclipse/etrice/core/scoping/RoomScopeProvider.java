@@ -337,7 +337,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 			
 			if (protocol!=null)
-				for (Message msg : conjugated?protocol.getOutgoingMessages():protocol.getIncomingMessages()) {
+				for (Message msg : conjugated?RoomHelpers.getAllMessages(protocol,false):RoomHelpers.getAllMessages(protocol,true)) {
 					scopes.add(EObjectDescription.create(msg.getName(), msg));
 				}
 		}

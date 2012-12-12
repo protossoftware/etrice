@@ -24,7 +24,6 @@ enum interface_items {
 	IFITEM_timer = 1
 };
 
-
 /* state IDs */
 enum state_ids {
 	NO_STATE = 0,
@@ -214,7 +213,7 @@ static void receiveEvent(ATimingService* self, InterfaceItemBase ifitem, int evt
 	boolean skip_entry = FALSE;
 	
 	if (!handleSystemEvent(ifitem, evt, generic_data)) {
-		switch (self->state) {
+		switch (getState()) {
 			case STATE_Operational:
 				switch(trigger) {
 				case POLLING:
@@ -243,7 +242,7 @@ static void receiveEvent(ATimingService* self, InterfaceItemBase ifitem, int evt
 		}
 	}
 	if (chain != NOT_CAUGHT) {
-		exitTo(self, self->state, catching_state, is_handler);
+		exitTo(getState(), catching_state, is_handler);
 		int next = executeTransitionChain(self, chain, ifitem, generic_data);
 		next = enterHistory(self, next, is_handler, skip_entry);
 		setState(self, next);

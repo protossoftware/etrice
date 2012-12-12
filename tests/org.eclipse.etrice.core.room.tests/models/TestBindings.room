@@ -1,0 +1,104 @@
+RoomModel TestBindings {
+	LogicalSystem Sys {
+		SubSystemRef main: Application
+	}
+	
+	SubSystemClass Application {
+		ActorRef ref1: AC1
+		ActorRef ref2: AC2
+		
+		// no self connection allowed, ports are indentical
+		Binding ref1.reg and ref1.reg
+		
+		// port with multiplicity 1 is already connected
+		Binding ref1.reg and ref2.conj
+		Binding ref1.reg and ref2.conj
+		
+		// protocols don't match
+		Binding ref1.reg and ref2.other
+		
+		// protocol extends incoming
+		Binding ref1.base and ref2.extin
+		
+		// ok
+		Binding ref1.base2 and ref2.extout
+
+		// protocol extends outgoing
+		Binding ref1.base3 and ref2.extout2
+
+		// derived protocols not connectable (both directions extended)
+		Binding ref1.base4 and ref2.extinout 
+
+		LogicalThread dflt_thread
+	}
+	
+	ActorClass AC1 {
+		Interface {
+			Port reg: PC1
+			Port base: PCBase
+			Port base2: PCBase
+			conjugated Port base3: PCBase
+			conjugated Port base4: PCBase
+		}
+		Structure {
+			external Port reg
+		}
+		Behavior { }
+	}
+	
+	ActorClass AC2 {
+		Interface {
+			conjugated Port conj: PC1
+			conjugated Port other: PC2
+			conjugated Port extout: PCExtendOut
+			conjugated Port extin: PCExtendIn
+			Port extout2: PCExtendOut
+			Port extinout: PCExtendInOut
+		}
+		Structure {
+			external Port conj
+		}
+		Behavior { }
+	}
+	
+	ProtocolClass PC1 {
+		incoming {
+			Message in1()
+		}
+	}
+	
+	ProtocolClass PC2 {
+		incoming {
+			Message in1()
+		}
+	}
+	
+	ProtocolClass PCBase {
+		incoming {
+			Message in1()
+		}
+	}
+	
+	ProtocolClass PCExtendIn extends PCBase {
+		incoming {
+			Message in2()
+		}
+	}
+	
+	ProtocolClass PCExtendOut extends PCBase {
+		outgoing {
+			Message out1()
+		}
+	}
+	
+	ProtocolClass PCExtendInOut extends PCBase {
+		incoming {
+			Message in2()
+		}
+		outgoing {
+			// a derived protocol should add either incoming or outgoing messages, not both
+			Message out1()
+		}
+	}
+	
+}

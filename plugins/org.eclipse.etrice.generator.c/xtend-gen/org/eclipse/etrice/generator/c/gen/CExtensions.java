@@ -151,6 +151,10 @@ public class CExtensions implements ILanguageExtension {
     return false;
   }
   
+  public boolean usesPointers() {
+    return true;
+  }
+  
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     String _xblockexpression = null;
     {

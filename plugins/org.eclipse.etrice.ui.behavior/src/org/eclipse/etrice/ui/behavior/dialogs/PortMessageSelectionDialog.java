@@ -103,7 +103,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
 			for (InterfaceItem item : items) {
 				ArrayList<MethodItemPair> pairs = new ArrayList<MethodItemPair>();
-				List<Message> out = RoomHelpers.getMessageList(item, true);
+				List<Message> out = RoomHelpers.getMessageListDeep(item, true);
 				if (!recvOnly) {
 					for (Message msg : out) {
 						if (!msg.isPriv())
@@ -111,7 +111,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 					}
 				}
 				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
-					List<Message> in = RoomHelpers.getMessageList(item, false);
+					List<Message> in = RoomHelpers.getMessageListDeep(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())
 							pairs.add(new MsgItemPair(item, msg, false));
@@ -158,11 +158,11 @@ public class PortMessageSelectionDialog extends FormDialog {
 		public boolean hasChildren(Object element) {
 			if (element instanceof InterfaceItem) {
 				InterfaceItem item = (InterfaceItem)element;
-				if (!RoomHelpers.getMessageList(item, true).isEmpty())
+				if (!RoomHelpers.getMessageListDeep(item, true).isEmpty())
 					return true;
 				
 				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN)
-					if (!RoomHelpers.getMessageList(item, false).isEmpty())
+					if (!RoomHelpers.getMessageListDeep(item, false).isEmpty())
 						return true;
 			}
 			

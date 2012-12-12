@@ -9,6 +9,7 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
@@ -111,6 +112,10 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	
 	public MessageService getMsgService(int idx) {
 		return RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(idx);
+	}
+	
+	public Address getFreeAddress(int msgSvcId) {
+		return getMsgService(msgSvcId).getFreeAddress();
 	}
 	
 	public ActorClassBase getInstance(int i) {

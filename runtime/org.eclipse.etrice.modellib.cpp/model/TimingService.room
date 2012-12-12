@@ -1,0 +1,301 @@
+RoomModel room.basic.service.timing {
+
+	import room.basic.types.* from "Types.room"
+
+	async ActorClass ATimingService {
+		Interface {
+			SPP timer: PTimer
+		}
+		Structure {
+			usercode1 {
+			"
+			#include \"common/platform/etTimer.h\" 
+			#define ET_NB_OF_TCBS 10
+			typedef struct etTCB etTimerControlBlock; 
+			struct etTCB {
+				etTargetTime_t expTime;
+				etTargetTime_t pTime;
+				int32 portIdx;
+				etTimerControlBlock* next;
+				};
+			"
+			}
+			usercode2 {
+				"//uc2"
+			}
+			usercode3{
+				"//etTimerControlBlock tcbs[ET_NB_OF_TCBS];"
+			}
+		ServiceImplementation of timer
+		Attribute tcbs[10]:tcb
+		Attribute usedTcbsRoot : tcb ref
+		Attribute freeTcbsRoot : tcb ref
+		}
+		Behavior {
+			Operation getTcb():tcb ref{"
+			etTimerControlBlock* temp = freeTcbsRoot;
+			
+			if(freeTcbsRoot!=0) {
+				freeTcbsRoot=freeTcbsRoot->next;
+				temp->next=0;
+				}
+			return temp;
+			"}
+			Operation returnTcb(block:tcb ref){"
+			block->next=freeTcbsRoot;
+			freeTcbsRoot=block;
+			"}
+			Operation removeTcbFromUsedList(idx:int32){"
+			etTimerControlBlock* temp=usedTcbsRoot;
+			etTimerControlBlock* temp2=usedTcbsRoot;
+			
+			if (temp==0) return;
+
+			if (usedTcbsRoot->portIdx == idx){
+				// element found, the first one
+				usedTcbsRoot = usedTcbsRoot->next;
+				returnTcb(temp);
+				return;
+				}
+
+			temp=temp->next;
+			while(temp!=0){
+				if(temp->portIdx==idx){
+					temp2->next=temp->next;
+					returnTcb(temp);
+					return;			
+				}else{
+					// try next
+					temp2=temp;
+					temp=temp->next;
+					}
+				}
+			"}
+			Operation putTcbToUsedList(block:tcb ref){"
+			etTimerControlBlock* temp=usedTcbsRoot;
+			etTimerControlBlock* temp2=usedTcbsRoot;
+
+			if (temp==0){
+				// list empty put new block to root
+				block->next=0;
+				usedTcbsRoot=block;
+				return;
+				}
+			
+			while(1){
+				if (temp != 0){
+					if (isTimeGreater(&block->expTime,&temp->expTime)){
+						//try next position
+						temp2=temp;	
+						temp=temp->next;
+						}else{
+						// right position found
+						block->next=temp;
+						if(temp==usedTcbsRoot){
+							usedTcbsRoot=block;
+							}else{
+							temp2->next=block;
+							}
+						return;
+						}
+					}else{
+					// end of list reached
+					block->next=0;
+					temp2->next=block;
+					return;
+				}
+			}
+			"}
+			Operation isTimeGreater(t1:targetTime ref, t2 :targetTime ref):boolean{"
+				if (t1->sec > t2->sec) return TRUE;
+				if (t1->sec < t2->sec) return FALSE;
+				if (t1->nSec > t2->nSec) return TRUE;
+				return FALSE;
+			"}
+			
+			Operation addTime(t1:targetTime ref, t2:targetTime ref){"
+				t1->sec += t2->sec;
+				t1->nSec += t2->nSec;
+				while(t1->nSec >= 1000000000L){
+					t1->sec++;
+					t1->nSec-=1000000000L;
+					}
+			"}
+			
+			Operation printList(){"
+			etTimerControlBlock* temp=usedTcbsRoot;
+				printf(\"list: \");
+				while (temp!=0){
+					printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);
+					temp=temp->next;
+				}
+				printf(\"\\n\");
+			"}
+			StateMachine {
+				Transition tr0: initial -> Operational {
+					action {
+						"int i;"
+						"usedTcbsRoot=0;"
+						"freeTcbsRoot=&tcbs[0];"
+						"tcbs[ET_NB_OF_TCBS-1].next=0;"
+						"for (i=0;i<ET_NB_OF_TCBS-1;i++){"
+						"\ttcbs[i].next=&tcbs[i+1];"
+						"\t}"
+					}
+				}
+				Transition tr1: Operational -> Operational {
+					triggers {
+						<startTimeout: timer>
+					}
+					action {
+						"etTimerControlBlock* timer = getTcb();"
+						"etTargetTime_t t;"
+						"if (timer!= 0){"
+						"\tt.sec=time/1000;"
+						"\tt.nSec=(time%1000)*1000000L;"
+						"\ttimer->pTime.sec = 0;"
+						"\ttimer->pTime.nSec = 0;"
+						"\ttimer->portIdx=ifitem->getIdx();"
+						"\tgetTimeFromTarget(&(timer->expTime));"
+						"\taddTime(&(timer->expTime),&t);"
+						"\tputTcbToUsedList(timer);"
+						"\t}"
+					}
+				}
+				Transition tr3: Operational -> Operational {
+					triggers {
+						<startTimer: timer>
+					}
+					action {
+						"etTimerControlBlock* timer = getTcb();"
+						"etTargetTime_t t;"
+						"if (timer!= 0){"
+						"\tt.sec=time/1000;"
+						"\tt.nSec=(time%1000)*1000000L;"
+						"\ttimer->pTime = t;"
+						"\ttimer->portIdx=ifitem->getIdx();"
+						"\tgetTimeFromTarget(&(timer->expTime));"
+						"\taddTime(&(timer->expTime),&t);"
+						"\tputTcbToUsedList(timer);"
+						"\t}"
+					}
+				}
+				Transition tr4: Operational -> Operational {
+					triggers {
+						<kill: timer>
+					}
+					action {
+						"removeTcbFromUsedList(ifitem->getIdx());"
+					}
+				}
+				State Operational {
+					entry {
+						"// prepare"
+					} do {
+						"// maintain timers"
+						"etTimerControlBlock* temp;"
+						"etTargetTime_t t;"
+						""
+						"getTimeFromTarget(&t);"
+						"while (usedTcbsRoot !=0 ){"
+						"\tif (isTimeGreater(&t,&(usedTcbsRoot->expTime))){"
+						"\t\ttimer[usedTcbsRoot->portIdx].timeout();"
+						"\t\ttemp=usedTcbsRoot;"
+						"\t\tusedTcbsRoot=usedTcbsRoot->next;"
+						"\t\tif((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){"
+						"\t\t\t// single shot timer"
+						"\t\t\treturnTcb(temp);"
+						"\t\t}else{"
+						"\t\t\t// periodic timer"
+						"\t\t\taddTime(&temp->expTime,&temp->pTime);"
+						"\t\t\tputTcbToUsedList(temp);"
+						"\t\t\t}"
+						"\t\t}else{"
+						"\t\t\tbreak;"
+						"\t\t\t}"
+						"\t}"
+					}
+				}
+			}
+		}
+	}
+
+
+	ProtocolClass PTimer {
+		usercode1 {"
+			#define ET_TIMER_RUNNING	0x01
+			#define ET_TIMER_PERIODIC	0x02
+			"
+		}
+		usercode2 {
+			"//uc2		"
+		}
+		incoming {
+			Message startTimer(time: uint32)
+			Message startTimeout(time: uint32)
+			Message kill()
+		}
+		outgoing {
+			Message timeout()
+		}
+		conjugate PortClass
+		{
+			handle incoming startTimer{
+			"
+			if (status==0){
+				status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
+				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+												   PTimer::getMessageString(PTimer::IN_startTimer));
+				if (getPeerAddress().isValid()){
+					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_startTimer, 
+					                                                reinterpret_cast<void*>(time),
+					                                                sizeof(uint32)));
+				}
+			}
+			"	
+			}
+			handle incoming startTimeout{
+			"
+			if (status==0){
+				status = ET_TIMER_RUNNING;
+				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+												   PTimer::getMessageString(PTimer::IN_startTimeout));
+				if (getPeerAddress().isValid()){
+					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_startTimeout, 
+					                                                reinterpret_cast<void*>(time),
+					                                                sizeof(uint32)));
+				}
+			}
+			"	
+			}
+			handle outgoing timeout{
+			"
+			//TODO: clear active bit in case of single shot timer
+			if (status!=0){
+				if (status==ET_TIMER_RUNNING){
+					// single shot timer
+					status=0;
+				}
+				// msg to fsm
+				getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+			}
+			"
+			}
+			handle incoming kill {	
+			"
+			if (status!=0){
+				status=0;
+				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+												   PTimer::getMessageString(PTimer::IN_kill));
+				if (getPeerAddress().isValid()){
+					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_kill, 0, 0));
+				}
+			}
+			"
+			}
+			Attribute status:int8="0"
+		}
+	}
+	ExternalType tcb -> etTimerControlBlock
+	ExternalType targetTime -> etTargetTime_t
+}

@@ -129,7 +129,7 @@ public class DetailCodeTranslator {
 				}
 				else {
 					Operation operation = name2op.get(token);
-					if (operation!=null) {
+					if (operation!=null && operation.eContainer() instanceof ActorClass) {
 						ArrayList<String> args = getArgs(text, curr);
 						if (args!=null && operation.getArguments().size()==args.size()) {
 							// recursively apply this algorithm to each argument
@@ -270,7 +270,7 @@ public class DetailCodeTranslator {
 		
 		String token = getToken(text, curr);
 		
-		List<Message> messages = RoomHelpers.getMessageList(item, outgoing);
+		List<Message> messages = RoomHelpers.getMessageListDeep(item, outgoing);
 		for (Message message : messages) {
 			if (message.getName().equals(token))
 				return message;
