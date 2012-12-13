@@ -87,7 +87,7 @@ public class ETriceLayoutConfig implements ILayoutConfig {
 	 */
 	@Override
 	public Object getValue(LayoutOptionData<?> optionData, LayoutContext context) {
-		if (optionData.getId().equals(LayoutOptions.DIAGRAM_TYPE.getId())) {
+		if (optionData.equals(LayoutOptions.DIAGRAM_TYPE)) {
 			EObject element = context.getProperty(LayoutContext.DOMAIN_MODEL);
 
 			if (element instanceof ActorContainerClass

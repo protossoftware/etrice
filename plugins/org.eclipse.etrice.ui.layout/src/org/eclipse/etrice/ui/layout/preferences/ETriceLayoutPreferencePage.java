@@ -31,7 +31,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.cau.cs.kieler.kiml.ui.Messages;
 import de.cau.cs.kieler.kiml.ui.diagram.LayoutHandler;
 import de.cau.cs.kieler.kiml.ui.service.EclipseLayoutInfoService;
-import de.cau.cs.kieler.kiml.ui.views.LayoutViewPart;
 
 /**
  * Preference page for common KIML preferences.
@@ -176,10 +175,6 @@ public class ETriceLayoutPreferencePage extends PreferencePage implements
 		preferenceStore.setValue(EclipseLayoutInfoService.PREF_OBLIQUE_ROUTE,
 				obliqueCheckBox.getSelection());
 
-		LayoutViewPart layoutView = LayoutViewPart.findView();
-		if (layoutView != null) {
-			layoutView.refresh();
-		}
 		return true;
 	}
 

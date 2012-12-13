@@ -250,7 +250,7 @@ public abstract class ETriceDiagramLayoutManager extends
 						(Shape) element, null));
 			} else {
 
-				KGraphElement internalKGraphElement = createKGaphElementFromShape(
+				KGraphElement internalKGraphElement = createKGraphElementFromShape(
 						mapping, null, (Shape) element);
 
 				if (internalKGraphElement instanceof KNode
@@ -259,7 +259,7 @@ public abstract class ETriceDiagramLayoutManager extends
 					for (Shape childShape : ((ContainerShape) element)
 							.getChildren()) {
 
-						createKGaphElementFromShape(mapping,
+						createKGraphElementFromShape(mapping,
 								internalKGraphElement, childShape);
 					}
 
@@ -337,24 +337,24 @@ public abstract class ETriceDiagramLayoutManager extends
 		KNode topLevelBoundingBoxNode = createNode(mapping, diagramNode,
 				topLevelBoundingBox);
 
-		for (Shape secondtLevelShape : ((ContainerShape) topLevelBoundingBox)
+		for (Shape secondLevelShape : ((ContainerShape) topLevelBoundingBox)
 				.getChildren()) {
 			// Second Level
-			KGraphElement secondLevelKGraphElement = createKGaphElementFromShape(
-					mapping, topLevelBoundingBoxNode, secondtLevelShape);
+			KGraphElement secondLevelKGraphElement = createKGraphElementFromShape(
+					mapping, topLevelBoundingBoxNode, secondLevelShape);
 
 			if (secondLevelKGraphElement instanceof KNode) {
-				for (Shape thirdLevelShape : ((ContainerShape) secondtLevelShape)
+				for (Shape thirdLevelShape : ((ContainerShape) secondLevelShape)
 						.getChildren()) {
 					// Third Level
-					createKGaphElementFromShape(mapping,
+					createKGraphElementFromShape(mapping,
 							secondLevelKGraphElement, thirdLevelShape);
 				}
 
-				if (!isInternalPort(secondtLevelShape)) {
+				if (!isInternalPort(secondLevelShape)) {
 					// For KNodes which are not internal ports.
 					setNodeLayoutOptions(mapping,
-							(KNode) secondLevelKGraphElement, secondtLevelShape);
+							(KNode) secondLevelKGraphElement, secondLevelShape);
 				}
 
 			}
@@ -382,7 +382,7 @@ public abstract class ETriceDiagramLayoutManager extends
 	 * @author jayant
 	 */
 	/* This is fairly general for both the eTrice editors */
-	private KGraphElement createKGaphElementFromShape(
+	private KGraphElement createKGraphElementFromShape(
 			LayoutMapping<PictogramElement> mapping, KGraphElement parent,
 			Shape shape) {
 
@@ -455,7 +455,7 @@ public abstract class ETriceDiagramLayoutManager extends
 
 		// Set Port label
 		Shape portLabelShape = ((ContainerShape) shape).getChildren().get(0);
-		createKGaphElementFromShape(mapping, port, portLabelShape);
+		createKGraphElementFromShape(mapping, port, portLabelShape);
 
 		// gather all connections connected to the parentNode via this port
 		for (Anchor anchor : shape.getAnchors()) {
