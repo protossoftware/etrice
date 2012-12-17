@@ -143,12 +143,10 @@
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
-<!--
 		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystemRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
--->
 		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.SubSystem_HandlerTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
