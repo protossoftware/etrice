@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 
@@ -172,7 +173,8 @@ public class BindingUtil {
 			ArrayList<PortInstance> ports = ep2portInstances.get(entry.getKey());
 			PortInstance pi = ports.get(0);
 			Port p = pi.getPort();
-			if (p.getMultiplicity()<0) {
+			boolean implicitMany = pi.getProtocol()==null || pi.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN; 
+			if (implicitMany || p.getMultiplicity()<0) {
 				int m = 0;
 				for (BindingInfo bi : entry.getValue()) {
 					Port peer = bi.getPeer(p);
