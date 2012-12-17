@@ -88,11 +88,11 @@ public class ConverterTest {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report3.etu");
 		args.add(basePath+"report4.etu");
-		args.add(EtUnitReportConverter.OPTION_TEX_OUTPUT);
+		args.add(EtUnitReportConverterWithTex.OPTION_TEX_OUTPUT);
 		args.add(basePath+"out.tex");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		EtUnitReportConverterWithTex.main(args.toArray(arguments));
 	}
 
 	@Test

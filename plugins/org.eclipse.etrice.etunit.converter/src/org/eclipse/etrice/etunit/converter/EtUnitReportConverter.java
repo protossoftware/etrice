@@ -16,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -44,14 +43,12 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
-	public static class Options {
+	protected static class Options {
 		private boolean combinedResults = false;
 		private boolean replaceSuiteName = false;
 		private boolean onlyCombinedResults = false;
 		private String combinedFile = null;
 		private String suiteName = null;
-		private boolean texOutput = false;
-		private String texFile = null;
 		private ArrayList<String> files = new ArrayList<String>();
 		
 		public boolean isCombinedResults() {
@@ -94,22 +91,6 @@ public class EtUnitReportConverter {
 			this.suiteName = suiteName;
 		}
 
-		public boolean isTexOutput() {
-			return texOutput;
-		}
-
-		public void setTexOutput(boolean texOutput) {
-			this.texOutput = texOutput;
-		}
-
-		public String getTexFile() {
-			return texFile;
-		}
-
-		public void setTexFile(String texFile) {
-			this.texFile = texFile;
-		}
-
 		public ArrayList<String> getFiles() {
 			return files;
 		}
@@ -119,84 +100,65 @@ public class EtUnitReportConverter {
 		}
 		
 		public boolean needCombined() {
-			return combinedResults || texOutput;
+			return combinedResults;
 		}
 
-		public static Options parseOptions(String[] args) {
-			Options options = new Options();
-
+		public boolean parseOptions(String[] args) {
 			for (int i=0; i<args.length; ++i) {
 				if (args[i].equals(OPTION_COMBINED)) {
-					options.setCombinedResults(true);
+					setCombinedResults(true);
 					if (++i<args.length) {
-						options.setCombinedFile(args[i]);
+						setCombinedFile(args[i]);
 					}
 					else {
 						System.err.println("Error: "+OPTION_COMBINED+" must be followed by filename");
-						printUsage();
-						return null;
+						return false;
 					}
 				}
 				else if (args[i].equals(OPTION_SUITE_NAME)) {
-					options.setReplaceSuiteName(true);
+					setReplaceSuiteName(true);
 					if (++i<args.length) {
-						options.setSuiteName(args[i]);
+						setSuiteName(args[i]);
 					}
 					else {
 						System.err.println("Error: "+OPTION_SUITE_NAME+" must be followed by a suite name");
-						printUsage();
-						return null;
+						return false;
 					}
 				}
 				else if (args[i].equals(OPTION_ONLY_COMBINED)) {
-					options.setCombinedResults(true);
-					options.setOnlyCombinedResults(true);
+					setCombinedResults(true);
+					setOnlyCombinedResults(true);
 					if (++i<args.length) {
-						options.setCombinedFile(args[i]);
+						setCombinedFile(args[i]);
 					}
 					else {
 						System.err.println("Error: "+OPTION_ONLY_COMBINED+" must be followed by filename");
-						printUsage();
-						return null;
-					}
-				}
-				else if (args[i].equals(OPTION_TEX_OUTPUT)) {
-					options.setTexOutput(true);
-					if (++i<args.length) {
-						options.setTexFile(args[i]);
-					}
-					else {
-						System.err.println("Error: "+OPTION_TEX_OUTPUT+" must be followed by filename");
-						printUsage();
-						return null;
+						return false;
 					}
 				}
 				else if (args[i].startsWith("-")) {
 					int nextOption = parseOption(args, i);
 					if (nextOption<0) {
 						System.err.println("Error: unknown option "+args[i]);
-						printUsage();
-						return null;
+						return false;
 					}
 					i = nextOption;
 				}
 				else {
 					if (args[i].endsWith(ETU_EXTENSION))
-						options.getFiles().add(args[i]);
+						getFiles().add(args[i]);
 					else {
 						System.err.println("Error: invalid file name '"+args[i]+"' (only *"+ETU_EXTENSION+" files allowed)");
-						printUsage();
-						return null;
+						return false;
 					}
 				}
 			}
-			if (options.getFiles().isEmpty()) {
+			if (getFiles().isEmpty()) {
 				System.err.println("Error: no reports specified");
-				printUsage();
-				return null;
+				return false;
 			}
 			
-			return options;
+			return true;
 		}
 
 		/**
@@ -204,7 +166,7 @@ public class EtUnitReportConverter {
 		 * @param i
 		 * @return
 		 */
-		private static int parseOption(String[] args, int i) {
+		protected int parseOption(String[] args, int i) {
 			return -1;
 		}
 	}
@@ -216,14 +178,12 @@ public class EtUnitReportConverter {
 	public static final String ETU_EXTENSION = ".etu";
 	public static final String OPTION_COMBINED = "-combined";
 	public static final String OPTION_ONLY_COMBINED = "-only_combined";
-	public static final String OPTION_TEX_OUTPUT = "-tex";
 	public static final String OPTION_SUITE_NAME = "-suite";
 
-	private static void printUsage() {
-		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_TEX_OUTPUT+" <tex file>] ["+OPTION_SUITE_NAME+" <name>] <*"+ETU_EXTENSION+" files>\n"
+	protected void printUsage() {
+		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_SUITE_NAME+" <name>] <*"+ETU_EXTENSION+" files>\n"
 				+"    "+OPTION_COMBINED+" <combined file>: also save a combined result for all tests to the specified file\n"
 				+"    "+OPTION_ONLY_COMBINED+" <combined file>: don't create reports for every single test, only combined one to the specified file\n"
-				+"    "+OPTION_TEX_OUTPUT+" <tex file>: produce tex output to specified file\n"
 				+"    "+OPTION_SUITE_NAME+" <name>: replace the suite name in the result\n"
 			);
 	}
@@ -232,9 +192,12 @@ public class EtUnitReportConverter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		new EtUnitReportConverter().run(args);
+	}
+
+	protected void run(String[] args) {
 		// check options and create file list
-		Options options = Options.parseOptions(args);
+		Options options = parseOptions(args);
 		
 		doEMFRegistration();
 		
@@ -244,8 +207,22 @@ public class EtUnitReportConverter {
 		saveReports(options, rs);
 		saveCombinedReport(options, rs);
 	}
+	
+	/**
+	 * @param args
+	 * @return
+	 */
+	protected Options parseOptions(String[] args) {
+		Options options = new Options();
+		if (!options.parseOptions(args)) {
+			printUsage();
+			return null;
+		}
+		
+		return options;
+	}
 
-	protected static void saveCombinedReport(Options options, ResourceSet rs) {
+	protected void saveCombinedReport(Options options, ResourceSet rs) {
 		if (options.needCombined()) {
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
@@ -262,18 +239,14 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	protected static void saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
+	protected void saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
 		if (options.isCombinedResults()) {
 			File report = new File(options.getCombinedFile());
 			saveJUnitReport(root, report, rs, true);
 		}
-		if (options.isTexOutput()) {
-			File report = new File(options.getTexFile());
-			saveTexReport(root, report);
-		}
 	}
 
-	protected static void saveReports(Options options, ResourceSet rs) {
+	protected void saveReports(Options options, ResourceSet rs) {
 		for (String file : options.getFiles()) {
 			File report = new File(file);
 			if (report.exists()) {
@@ -302,7 +275,7 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	private static void computeAndSetInfo(TestsuitesType testsuites) {
+	private void computeAndSetInfo(TestsuitesType testsuites) {
 		for (TestsuiteType ts : testsuites.getTestsuite()) {
 			int failures = 0;
 			BigDecimal time = new BigDecimal(0);
@@ -318,7 +291,7 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	private static void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
+	private void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
 		URI uri = URI.createFileURI(report.toString());
 		uri = uri.trimFileExtension();
 		uri = uri.appendFileExtension("xml");
@@ -334,80 +307,12 @@ public class EtUnitReportConverter {
 			}
 		}
 	}
-	
-	private static String doEscape(String x){
-		int index = 0;
-		String c = "azAZ";
-		String ret = x;
-		while (index < x.length()-2)
-		{
-			if (ret.charAt(index) >= c.charAt(0) && 
-				ret.charAt(index) <= c.charAt(1) && 
-				ret.charAt(index+1) >= c.charAt(2) && 
-				ret.charAt(index+1) <= c.charAt(3)
-			)
-			{
-				ret = ret.substring(0,index+1) + "\\-" + ret.substring(index+1);
-			}
-			index = index + 1;
-		}
-		return ret.replaceAll("_","\\\\-\\\\_");
-	}
-
-	private static void saveTexReport(DocumentRoot root, File report) {
-		StringBuilder contents = new StringBuilder();
-
-		contents.append("\\newcommand{\\ForAllTestCases}{}%\n");
-		contents.append("\\newcounter{FailCount}%\n");
-		contents.append("\\newcommand{\\ForAllSuites}{%\n");
-		contents.append("    %\\DoSuite{name}{nTests}{nPassed}{nFail}{time}%\n");
-		for (TestsuiteType ts : root.getTestsuites().getTestsuite()) {
-			contents.append("    \\setcounter{FailCount}{"+ts.getFailures()+"}%\n");
-			contents.append("    \\renewcommand{\\ForAllTestCases}{%\n");
-			contents.append("        %\\DoCase{name}{time}{status}{msg}{short}{long}%\n");
-			for (TestcaseType tc : ts.getTestcase()) {
-				String status = tc.getFailure()!=null?"fail":"pass";
-				String msg = tc.getFailure()!=null?
-						"expected "+tc.getFailure().getExpected()+" but was "+tc.getFailure().getActual()
-						:
-						"";
-				String combinedName = ts.getName()+tc.getName();
-				contents.append("        \\DoCase{" + tc.getName() + "}{" + doEscape(tc.getName()) + "}{" + tc.getTime() + "}{" + status + "}{" + msg
-						+ "}{\\" + combinedName + "shortdesc}{\\" + combinedName + "longdesc}%\n");
-			}
-			contents.append("    }%\n");
-			int nPassed = ts.getTests()-ts.getFailures();
-			contents.append("    \\DoSuite{"+ts.getName()+"}{" + doEscape(ts.getName()) + "}{"+ts.getTests()+"}{"+nPassed+"}{"+ts.getFailures()+"}{"+ts.getTime()+"}%\n");
-		}
-		contents.append("}%\n");
-		
-		FileWriter fos = null;
-		try {
-			fos = new FileWriter(report);
-			fos.append(contents.toString());
-		} catch (FileNotFoundException e) {
-			System.err.println("Error: file "+report.toString()+" could not be saved ("+e.getMessage()+")");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("Error: file "+report.toString()+" could not be written ("+e.getMessage()+")");
-			e.printStackTrace();
-		}
-		finally {
-			if (fos!=null)
-				try {
-					fos.close();
-				} catch (IOException e) {
-					System.err.println("Error: file "+report.toString()+" could not be closed ("+e.getMessage()+")");
-					e.printStackTrace();
-				}
-		}
-	}
 
 	/**
 	 * @param string
 	 * @return
 	 */
-	private static DocumentRoot createParseTree(File report) {
+	private DocumentRoot createParseTree(File report) {
 		
 		int count = 0;
 		try {
@@ -509,7 +414,7 @@ public class EtUnitReportConverter {
 		return null;
 	}
 
-	private static void doEMFRegistration() {
+	private void doEMFRegistration() {
 		if (!EPackage.Registry.INSTANCE.containsKey("platform:/resource/org.eclipse.etrice.etunit.converter/model/etunit.xsd")) {
 			EPackage.Registry.INSTANCE.put("platform:/resource/org.eclipse.etrice.etunit.converter/model/etunit.xsd", EtunitPackage.eINSTANCE);
 		}
