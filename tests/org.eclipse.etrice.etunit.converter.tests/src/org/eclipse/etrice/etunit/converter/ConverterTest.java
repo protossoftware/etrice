@@ -84,18 +84,6 @@ public class ConverterTest {
 	}
 
 	@Test
-	public void testTex() {
-		ArrayList<String> args = new ArrayList<String>();
-		args.add(basePath+"report3.etu");
-		args.add(basePath+"report4.etu");
-		args.add(EtUnitReportConverterWithTex.OPTION_TEX_OUTPUT);
-		args.add(basePath+"out.tex");
-		
-		String[] arguments = new String[args.size()];
-		EtUnitReportConverterWithTex.main(args.toArray(arguments));
-	}
-
-	@Test
 	public void testChangeSuiteName() {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report5.etu");
