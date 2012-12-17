@@ -44,6 +44,171 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  */
 public class EtUnitReportConverter {
 
+	public static class Options {
+		private boolean combinedResults = false;
+		private boolean replaceSuiteName = false;
+		private boolean onlyCombinedResults = false;
+		private String combinedFile = null;
+		private String suiteName = null;
+		private boolean texOutput = false;
+		private String texFile = null;
+		private ArrayList<String> files = new ArrayList<String>();
+		
+		public boolean isCombinedResults() {
+			return combinedResults;
+		}
+
+		public void setCombinedResults(boolean combinedResults) {
+			this.combinedResults = combinedResults;
+		}
+
+		public boolean isReplaceSuiteName() {
+			return replaceSuiteName;
+		}
+
+		public void setReplaceSuiteName(boolean replaceSuiteName) {
+			this.replaceSuiteName = replaceSuiteName;
+		}
+
+		public boolean isOnlyCombinedResults() {
+			return onlyCombinedResults;
+		}
+
+		public void setOnlyCombinedResults(boolean onlyCombinedResults) {
+			this.onlyCombinedResults = onlyCombinedResults;
+		}
+
+		public String getCombinedFile() {
+			return combinedFile;
+		}
+
+		public void setCombinedFile(String combinedFile) {
+			this.combinedFile = combinedFile;
+		}
+
+		public String getSuiteName() {
+			return suiteName;
+		}
+
+		public void setSuiteName(String suiteName) {
+			this.suiteName = suiteName;
+		}
+
+		public boolean isTexOutput() {
+			return texOutput;
+		}
+
+		public void setTexOutput(boolean texOutput) {
+			this.texOutput = texOutput;
+		}
+
+		public String getTexFile() {
+			return texFile;
+		}
+
+		public void setTexFile(String texFile) {
+			this.texFile = texFile;
+		}
+
+		public ArrayList<String> getFiles() {
+			return files;
+		}
+
+		public void setFiles(ArrayList<String> files) {
+			this.files = files;
+		}
+		
+		public boolean needCombined() {
+			return combinedResults || texOutput;
+		}
+
+		public static Options parseOptions(String[] args) {
+			Options options = new Options();
+
+			for (int i=0; i<args.length; ++i) {
+				if (args[i].equals(OPTION_COMBINED)) {
+					options.setCombinedResults(true);
+					if (++i<args.length) {
+						options.setCombinedFile(args[i]);
+					}
+					else {
+						System.err.println("Error: "+OPTION_COMBINED+" must be followed by filename");
+						printUsage();
+						return null;
+					}
+				}
+				else if (args[i].equals(OPTION_SUITE_NAME)) {
+					options.setReplaceSuiteName(true);
+					if (++i<args.length) {
+						options.setSuiteName(args[i]);
+					}
+					else {
+						System.err.println("Error: "+OPTION_SUITE_NAME+" must be followed by a suite name");
+						printUsage();
+						return null;
+					}
+				}
+				else if (args[i].equals(OPTION_ONLY_COMBINED)) {
+					options.setCombinedResults(true);
+					options.setOnlyCombinedResults(true);
+					if (++i<args.length) {
+						options.setCombinedFile(args[i]);
+					}
+					else {
+						System.err.println("Error: "+OPTION_ONLY_COMBINED+" must be followed by filename");
+						printUsage();
+						return null;
+					}
+				}
+				else if (args[i].equals(OPTION_TEX_OUTPUT)) {
+					options.setTexOutput(true);
+					if (++i<args.length) {
+						options.setTexFile(args[i]);
+					}
+					else {
+						System.err.println("Error: "+OPTION_TEX_OUTPUT+" must be followed by filename");
+						printUsage();
+						return null;
+					}
+				}
+				else if (args[i].startsWith("-")) {
+					int nextOption = parseOption(args, i);
+					if (nextOption<0) {
+						System.err.println("Error: unknown option "+args[i]);
+						printUsage();
+						return null;
+					}
+					i = nextOption;
+				}
+				else {
+					if (args[i].endsWith(ETU_EXTENSION))
+						options.getFiles().add(args[i]);
+					else {
+						System.err.println("Error: invalid file name '"+args[i]+"' (only *"+ETU_EXTENSION+" files allowed)");
+						printUsage();
+						return null;
+					}
+				}
+			}
+			if (options.getFiles().isEmpty()) {
+				System.err.println("Error: no reports specified");
+				printUsage();
+				return null;
+			}
+			
+			return options;
+		}
+
+		/**
+		 * @param args
+		 * @param i
+		 * @return
+		 */
+		private static int parseOption(String[] args, int i) {
+			return -1;
+		}
+	}
+	
 	private static final String TC_END = "tc end";
 	private static final String TC_FAIL = "tc fail";
 	private static final String TC_START = "tc start";
@@ -69,113 +234,19 @@ public class EtUnitReportConverter {
 	public static void main(String[] args) {
 		
 		// check options and create file list
-		boolean combinedResults = false;
-		boolean replaceSuiteName = false;
-		boolean onlyCombinedResults = false;
-		String combinedFile = null;
-		String suiteName = null;
-		boolean texOutput = false;
-		String texFile = null;
-		ArrayList<String> files = new ArrayList<String>();
-		for (int i=0; i<args.length; ++i) {
-			if (args[i].equals(OPTION_COMBINED)) {
-				combinedResults = true;
-				if (++i<args.length) {
-					combinedFile = args[i];
-				}
-				else {
-					System.err.println("Error: "+OPTION_COMBINED+" must be followed by filename");
-					printUsage();
-					return;
-				}
-			}
-			else if (args[i].equals(OPTION_SUITE_NAME)) {
-				replaceSuiteName = true;
-				if (++i<args.length) {
-					suiteName = args[i];
-				}
-				else {
-					System.err.println("Error: "+OPTION_SUITE_NAME+" must be followed by a suite name");
-					printUsage();
-					return;
-				}
-			}
-			else if (args[i].equals(OPTION_ONLY_COMBINED)) {
-				combinedResults = true;
-				onlyCombinedResults = true;
-				if (++i<args.length) {
-					combinedFile = args[i];
-				}
-				else {
-					System.err.println("Error: "+OPTION_ONLY_COMBINED+" must be followed by filename");
-					printUsage();
-					return;
-				}
-			}
-			else if (args[i].equals(OPTION_TEX_OUTPUT)) {
-				texOutput = true;
-				if (++i<args.length) {
-					texFile = args[i];
-				}
-				else {
-					System.err.println("Error: "+OPTION_TEX_OUTPUT+" must be followed by filename");
-					printUsage();
-					return;
-				}
-			}
-			else if (args[i].startsWith("-")) {
-				System.err.println("Error: unknown option "+args[i]);
-				printUsage();
-				return;
-			}
-			else {
-				if (args[i].endsWith(ETU_EXTENSION))
-					files.add(args[i]);
-				else {
-					System.err.println("Error: invalid file name '"+args[i]+"' (only *"+ETU_EXTENSION+" files allowed)");
-					printUsage();
-					return;
-				}
-			}
-		}
-		if (files.isEmpty()) {
-			System.err.println("Error: no reports specified");
-			printUsage();
-			return;
-		}
+		Options options = Options.parseOptions(args);
 		
 		doEMFRegistration();
 		
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new EtunitResourceFactoryImpl());
-		for (String file : files) {
-			File report = new File(file);
-			if (report.exists()) {
-				DocumentRoot root = createParseTree(report);
-				if (root!=null && replaceSuiteName) {
-					if (root.getTestsuites()!=null) {
-						if (root.getTestsuites().getTestsuite().size()==1) {
-							root.getTestsuites().getTestsuite().get(0).setName(suiteName);
-						}
-						else {
-							int i=0;
-							for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
-								suite.setName(suiteName+i);
-								++i;
-							}
-						}
-					}
-				}
-				if (root!=null) {
-					saveJUnitReport(root, report, rs, !onlyCombinedResults);
-				}
-			}
-			else {
-				System.err.println("Error: report "+file+" does not exist");
-			}
-		}
-		
-		if (combinedResults || texOutput) {
+
+		saveReports(options, rs);
+		saveCombinedReport(options, rs);
+	}
+
+	protected static void saveCombinedReport(Options options, ResourceSet rs) {
+		if (options.needCombined()) {
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
 			root.setTestsuites(testsuites);
@@ -187,13 +258,46 @@ public class EtUnitReportConverter {
 			
 			computeAndSetInfo(testsuites);
 			
-			if (combinedResults) {
-				File report = new File(combinedFile);
-				saveJUnitReport(root, report, rs, true);
+			saveCombined(root, options, rs);
+		}
+	}
+
+	protected static void saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
+		if (options.isCombinedResults()) {
+			File report = new File(options.getCombinedFile());
+			saveJUnitReport(root, report, rs, true);
+		}
+		if (options.isTexOutput()) {
+			File report = new File(options.getTexFile());
+			saveTexReport(root, report);
+		}
+	}
+
+	protected static void saveReports(Options options, ResourceSet rs) {
+		for (String file : options.getFiles()) {
+			File report = new File(file);
+			if (report.exists()) {
+				DocumentRoot root = createParseTree(report);
+				if (root!=null && options.isReplaceSuiteName()) {
+					if (root.getTestsuites()!=null) {
+						if (root.getTestsuites().getTestsuite().size()==1) {
+							root.getTestsuites().getTestsuite().get(0).setName(options.getSuiteName());
+						}
+						else {
+							int i=0;
+							for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+								suite.setName(options.getSuiteName()+i);
+								++i;
+							}
+						}
+					}
+				}
+				if (root!=null) {
+					saveJUnitReport(root, report, rs, !options.isCombinedResults());
+				}
 			}
-			if (texOutput) {
-				File report = new File(texFile);
-				saveTexReport(root, report);
+			else {
+				System.err.println("Error: report "+file+" does not exist");
 			}
 		}
 	}
