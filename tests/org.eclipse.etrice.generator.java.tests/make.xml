@@ -57,7 +57,7 @@
 	<!--
 		copy_models: copies the models from their original folders to the build location
 	-->
-	<target name="copy_models">
+	<target name="copy_models" depends="clean">
 		<copy todir="models" >
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
