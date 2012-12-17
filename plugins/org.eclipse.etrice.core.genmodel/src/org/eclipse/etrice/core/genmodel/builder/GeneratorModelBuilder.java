@@ -15,7 +15,6 @@ package org.eclipse.etrice.core.genmodel.builder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -25,30 +24,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.RelaySAPoint;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
-import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SubProtocol;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
@@ -68,6 +43,29 @@ import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAPoint;
+import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPPoint;
+import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SubProtocol;
+import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 
 /**
  * A class for the creation of an intermediate model combining all information needed by
@@ -471,7 +469,7 @@ public class GeneratorModelBuilder {
 		}
 		
 		// bindings are handled now since port instances of sub-actor instances are available
-		createBindingInstances(instance, ssc.getBindings());
+		new BindingUtil(instance, diagnostician).createBindingInstances();
 		createConnectionInstances(instance, ssc.getConnections());
 		
 		return instance;
@@ -498,7 +496,7 @@ public class GeneratorModelBuilder {
 		}
 		
 		// bindings are handled now since port instances of sub-actor instances are available
-		createBindingInstances(instance, ssc.getBindings());
+		new BindingUtil(instance, diagnostician).createBindingInstances();
 		createConnectionInstances(instance, ssc.getConnections());
 		
 		return instance;
@@ -569,7 +567,7 @@ public class GeneratorModelBuilder {
 			bindings.addAll(acl.getBindings());
 			connections.addAll(acl.getConnections());
 		}
-		createBindingInstances(ai, bindings);
+		new BindingUtil(ai, diagnostician).createBindingInstances();
 		createConnectionInstances(ai, connections);
 		
 		return ai;
@@ -664,131 +662,6 @@ public class GeneratorModelBuilder {
 			
 			ai.getServices().add(sii);
 		}
-	}
-	
-	private static final String SEP = "#";
-	
-	/**
-	 * create binding instances. Since bindings connect port instances the ports can point back to their bindings
-	 * using EOpposite
-	 * @param si - create bindings for this actor instance
-	 * @param bindings - a list of bindings
-	 */
-	private void createBindingInstances(StructureInstance si, List<Binding> bindings) {
-		HashMap<String, ArrayList<PortInstance>> ep2portInstances = initPortInstanceMap(si, bindings);
-		
-		for (Binding bind : bindings) {
-			if (bind.getEndpoint1().getActorRef()==null && bind.getEndpoint2().getActorRef()==null) {
-				int idx = bindings.indexOf(bind);
-				diagnostician.error("binding connects two ports of the same actor", bind, RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
-			}
-			else {
-				ArrayList<PortInstance> ep1Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint1()));
-				ArrayList<PortInstance> ep2Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint2()));
-				int nBind = ep1Ports.size()>ep2Ports.size()? ep2Ports.size():ep1Ports.size();
-				for (int i=0; i<nBind; ++i) {
-					createBindingInstance(si, ep1Ports.get(0), ep2Ports.get(0), bind);
-					ep1Ports.remove(0);
-					ep2Ports.remove(0);
-				}
-			}
-		}
-	}
-
-	private void createBindingInstance(StructureInstance si, PortInstance pi1, PortInstance pi2, Binding bind) {
-		BindingInstance bi = ETriceGenFactory.eINSTANCE.createBindingInstance();
-		
-		bi.getPorts().add(pi1);
-		bi.getPorts().add(pi2);
-		bi.setBinding(bind);
-		
-		si.getBindings().add(bi);
-	}
-
-	private HashMap<String, ArrayList<PortInstance>> initPortInstanceMap(StructureInstance si, List<Binding> bindings) {
-		HashMap<String, ArrayList<PortInstance>> ep2portInstances = new HashMap<String, ArrayList<PortInstance>>();
-		for (PortInstance pi : si.getPorts()) {
-			if (pi.getKind()!=PortKind.EXTERNAL) {
-				addPortInstance(pi, getEndPointKey(null, pi), ep2portInstances);
-			}
-		}
-		for (ActorInstance sub : si.getInstances()) {
-			boolean forceMultFixed = sub.getReplIdx()>1;
-			for (PortInstance pi : sub.getPorts()) {
-				if (pi.getKind()!=PortKind.INTERNAL) {
-					if (forceMultFixed && pi.getPort().getMultiplicity()<0)
-						diagnostician.error("port multiplicity of replicated actor has to be fixed", pi.getPort(), RoomPackage.eINSTANCE.getPort_Multiplicity());
-					addPortInstance(pi, getEndPointKey(sub, pi), ep2portInstances);
-				}
-			}
-		}
-		
-		// in a second step the actually needed number of instances for multiplicity * is filled into the list
-		HashSet<String> multAny = new HashSet<String>();
-		for (Binding bind : bindings) {
-			addNeededInstance(bind.getEndpoint1(), bind.getEndpoint2(), ep2portInstances, multAny);
-			addNeededInstance(bind.getEndpoint2(), bind.getEndpoint1(), ep2portInstances, multAny);
-		}
-		
-		return ep2portInstances;
-	}
-
-	private void addNeededInstance(BindingEndPoint ep, BindingEndPoint peer_ep, HashMap<String, ArrayList<PortInstance>> ep2portInstances, HashSet<String> multAny) {
-		String endPointKey = getEndPointKey(ep);
-		ArrayList<PortInstance> ports = ep2portInstances.get(endPointKey);
-		PortInstance pi = ports.get(0);
-		boolean implicitMany = pi.getProtocol()==null || pi.getProtocol().getCommType() == CommunicationType.DATA_DRIVEN; 
-		if (implicitMany || pi.getPort().getMultiplicity() < 0) {
-			int size = 1;
-			if (peer_ep.getActorRef() instanceof ActorRef) {
-				int peerMult = peer_ep.getPort().getMultiplicity();
-				if (peerMult<=0)
-					peerMult = 1;
-				size = ((ActorRef)peer_ep.getActorRef()).getSize()*peerMult;
-			}
-			
-			for (int i=0; i<size; ++i) {
-				if (!multAny.contains(endPointKey)) {
-					// we just register
-					multAny.add(endPointKey);
-				}
-				else {
-					// we add another copy of this instance
-					ports.add(pi);
-				}
-			}
-		}
-	}
-	
-	private String getEndPointKey(ActorInstance ai, PortInstance pi) {
-		return (ai!=null? ai.getUnindexedName():"")+SEP+pi.getPort().getName();
-	}
-	
-	private String getEndPointKey(BindingEndPoint ep) {
-		return getEndPointKey(ep.getActorRef(), ep.getPort());
-	}
-	
-	private String getEndPointKey(ActorContainerRef ref, Port port) {
-		return ref==null? SEP+port.getName() : ref.getName()+SEP+port.getName();
-	}
-	
-	/**
-	 * add the port instance to the map. Replicated ports are added 'multiplicity' times. If the multiplicity is * then the port is added once.
-	 *  
-	 * @param pi
-	 * @param ep2portInstances
-	 */
-	private void addPortInstance(PortInstance pi, String key, HashMap<String, ArrayList<PortInstance>> ep2portInstances) {
-		ArrayList<PortInstance> ports = ep2portInstances.get(key);
-		if (ports==null) {
-			ports = new ArrayList<PortInstance>();
-			ep2portInstances.put(key, ports);
-		}
-		int repl = pi.getPort().getMultiplicity();
-		if (repl<=0)
-			repl = 1;
-		for (int i=0; i<repl; ++i)
-			ports.add(pi);
 	}
 
 	/**
@@ -911,8 +784,12 @@ public class GeneratorModelBuilder {
 			if (obj instanceof ActorInstance) {
 				for (PortInstance pi : ((ActorInstance) obj).getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY && pi.getPeers().size()>1)
-						if (pi.getPeers().get(0).getPeers().size()>1)
-							connectPeersOneToOne(pi);
+						if (pi.getPeers().get(0).getPeers().size()>1) {
+							BindingInstance bi = pi.getBindings().get(0);
+							if (bi.getPorts().get(0).getKind()==PortKind.RELAY
+									|| bi.getPorts().get(1).getKind()==PortKind.RELAY)
+								connectPeersOneToOne(pi);
+						}
 				}
 			}
 		}
