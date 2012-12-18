@@ -13,21 +13,39 @@
 package org.eclipse.etrice.generator.doc.setup;
 
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
+import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.doc.Main;
 import org.eclipse.etrice.generator.doc.gen.MainGen;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Binder;
 
-public class GeneratorModule extends GeneratorBaseModule {
+public class GeneratorModule extends AbstractGeneratorBaseModule {
 
-//	@Override
+	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		
 		binder.bind(AbstractGenerator.class).to(Main.class);
 		binder.bind(IGenerator.class).to(MainGen.class);
+	}
+
+	@Override
+	public Class<? extends ILanguageExtension> bindILanguageExtension() {
+		return null;
+	}
+
+	@Override
+	public Class<? extends ITranslationProvider> bindITranslationProvider() {
+		return null;
+	}
+
+	@Override
+	public Class<? extends IDataConfiguration> bindIDataConfiguration() {
+		return null;
 	}
 
 }

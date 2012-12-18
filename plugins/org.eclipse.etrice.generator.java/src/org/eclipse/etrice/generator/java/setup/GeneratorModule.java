@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.java.setup;
 
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.java.Main;
@@ -29,7 +29,7 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 
 import com.google.inject.Binder;
 
-public class GeneratorModule extends GeneratorBaseModule {
+public class GeneratorModule extends AbstractGeneratorBaseModule {
 
 //	@Override
 	public void configure(Binder binder) {
@@ -38,14 +38,22 @@ public class GeneratorModule extends GeneratorBaseModule {
 		binder.bind(AbstractGenerator.class).to(Main.class);
 		binder.bind(IGenerator.class).to(MainGen.class);
 
-		// bind language specific code to generic Interfaces
-		binder.bind(ILanguageExtension.class).to(JavaExtensions.class);
-
-		binder.bind(ITranslationProvider.class).to(JavaTranslationProvider.class);
-		
-		binder.bind(IDataConfiguration.class).to(org.eclipse.etrice.generator.config.DataConfiguration.class);
-		
 		binder.bind(ImportUriResolver.class).to(PlatformRelativeUriResolver.class);
+	}
+
+	@Override
+	public Class<? extends ILanguageExtension> bindILanguageExtension() {
+		return JavaExtensions.class;
+	}
+
+	@Override
+	public Class<? extends ITranslationProvider> bindITranslationProvider() {
+		return JavaTranslationProvider.class;
+	}
+
+	@Override
+	public Class<? extends IDataConfiguration> bindIDataConfiguration() {
+		return org.eclipse.etrice.generator.config.DataConfiguration.class;
 	}
 
 }

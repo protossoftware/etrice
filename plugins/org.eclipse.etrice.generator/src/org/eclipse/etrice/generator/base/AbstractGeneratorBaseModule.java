@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 
 import com.google.inject.Binder;
@@ -26,7 +27,7 @@ import com.google.inject.Singleton;
  * @author Henrik Rentz-Reichert
  *
  */
-public class GeneratorBaseModule implements Module {
+public abstract class AbstractGeneratorBaseModule implements Module {
 
 	/* (non-Javadoc)
 	 * @see com.google.inject.Module#configure(com.google.inject.Binder)
@@ -43,6 +44,17 @@ public class GeneratorBaseModule implements Module {
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
 		
 		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
+
+		if (bindILanguageExtension()!=null)
+			binder.bind(ILanguageExtension.class).to(bindILanguageExtension());
+		if (bindITranslationProvider()!=null)
+			binder.bind(ITranslationProvider.class).to(bindITranslationProvider());
+		if (bindIDataConfiguration()!=null)
+			binder.bind(IDataConfiguration.class).to(bindIDataConfiguration());
 	}
+	
+	public abstract Class<? extends ILanguageExtension> bindILanguageExtension();
+	public abstract Class<? extends ITranslationProvider> bindITranslationProvider();
+	public abstract Class<? extends IDataConfiguration> bindIDataConfiguration();
 
 }
