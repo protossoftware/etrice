@@ -126,14 +126,21 @@
 		compile: compiles the generated Java sources
 	-->
 	<target name="compile" depends="generate">
+		<!-- introduced this indiraction to be able to log the output -->
+		<ant antfile="make.xml" target="logged_compile" output="${output}/compile.txt">
+		</ant>
+	</target>
+
+	<target name="logged_compile">
 		<mkdir dir="${bin.path}"/>
 		<javac srcdir="src-gen:src"
 			 destdir="${bin.path}"
 			 classpath="${runtime.path}/bin"
 			 debug="on"
+			 verbose="on"
 			/>
 	</target>
-
+	
 	<!--
 		run: runs all executables
 	-->
