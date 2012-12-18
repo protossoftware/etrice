@@ -99,7 +99,7 @@ class DataConfiguration implements IDataConfiguration {
 		var dynConfig = subsystem.config?.dynConfig
 		return 
 			if(dynConfig?.filePath != null)
-				"import org.eclipse.etrice.runtime.java.config.ConfigSourceFile; // TODO JH make lang independent"
+				"import org.eclipse.etrice.runtime.java.config.ConfigSourceFile;" // TODO JH make lang independent
 			else 
 				dynConfig?.userCode1
 	}

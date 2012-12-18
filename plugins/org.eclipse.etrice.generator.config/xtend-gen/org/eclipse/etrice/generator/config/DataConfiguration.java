@@ -176,7 +176,7 @@ public class DataConfiguration implements IDataConfiguration {
     String _filePath = dynConfig==null?(String)null:dynConfig.getFilePath();
     boolean _notEquals = (!Objects.equal(_filePath, null));
     if (_notEquals) {
-      _xifexpression = "import org.eclipse.etrice.runtime.java.config.ConfigSourceFile; // TODO JH make lang independent";
+      _xifexpression = "import org.eclipse.etrice.runtime.java.config.ConfigSourceFile;";
     } else {
       String _userCode1 = dynConfig==null?(String)null:dynConfig.getUserCode1();
       _xifexpression = _userCode1;

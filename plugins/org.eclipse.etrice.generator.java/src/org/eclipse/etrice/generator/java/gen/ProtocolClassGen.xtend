@@ -154,7 +154,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 			«IF pclass!=null»
 				«pclass.attributes.attributes»
-				// TODO JH: Avoid collision attr getters/setter <-> user operations
+«««				// TODO JH: Avoid collision attr getters/setter <-> user operations
 				«attributeSettersGettersImplementation(pclass.attributes, null)»
 				«pclass.operations.operationsImplementation(portClassName)»
 			«ENDIF»

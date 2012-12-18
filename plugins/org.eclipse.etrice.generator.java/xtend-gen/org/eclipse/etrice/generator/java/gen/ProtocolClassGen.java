@@ -381,9 +381,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(_attributes_2, "	");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("// TODO JH: Avoid collision attr getters/setter <-> user operations");
-          _builder.newLine();
-          _builder.append("\t");
           EList<Attribute> _attributes_3 = pclass.getAttributes();
           CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_3, null);
           _builder.append(_attributeSettersGettersImplementation, "	");
