@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 /*--------------------- begin user code ---------------------*/
@@ -76,12 +75,10 @@ public class PTimer {
 		// constructors
 		public PTimerPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTimerPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
 			// initialize attributes
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -92,9 +89,6 @@ public class PTimer {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 					switch (msg.getEvtId()) {
 						case IN_internalStartTimer:
 						{
@@ -134,22 +128,15 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		// TODO JH: Avoid collision attr getters/setter <-> user operations
 		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		
 		// sent messages
 		public void timeout() {
-			if (messageStrings[ OUT_timeout] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_timeout]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeout));
 				}
 		private void internalTimeout(TimerData td) {
-			if (messageStrings[ OUT_internalTimeout] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_internalTimeout]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimeout, td.deepCopy()));
 		}
@@ -208,12 +195,10 @@ public class PTimer {
 		// constructors
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTimerConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
 			// initialize attributes
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -224,9 +209,6 @@ public class PTimer {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 					switch (msg.getEvtId()) {
 						case OUT_internalTimeout:
 						{
@@ -249,7 +231,6 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		// TODO JH: Avoid collision attr getters/setter <-> user operations
 		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		public void startTimer(int time_ms) {
@@ -257,7 +238,6 @@ public class PTimer {
 							if (active) return;
 							active = true;
 			
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
 							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, new TimerData(time_ms,++currentId)));
 		}
 		public void startTimeout(int time_ms) {
@@ -265,16 +245,12 @@ public class PTimer {
 							if (active) return;
 							active = true;
 			
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
 							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, new TimerData(time_ms,++currentId)));
 		}
 		
 		// sent messages
 		public void kill() {
 				//conjugate PortClass kill
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-									getPeerAddress(), messageStrings[IN_kill]);
-				
 							if (active) {
 								active = false;
 								TimerData td = new TimerData();
@@ -284,9 +260,6 @@ public class PTimer {
 							}
 		}
 		private void internalStartTimer(TimerData td) {
-			if (messageStrings[ IN_internalStartTimer] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, td.deepCopy()));
 		}
@@ -294,9 +267,6 @@ public class PTimer {
 			internalStartTimer(new TimerData(time, id));
 		}
 		private void internalStartTimeout(TimerData td) {
-			if (messageStrings[ IN_internalStartTimeout] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, td.deepCopy()));
 		}

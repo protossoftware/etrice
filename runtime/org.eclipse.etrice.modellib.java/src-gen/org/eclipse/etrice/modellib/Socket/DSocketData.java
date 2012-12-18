@@ -1,5 +1,7 @@
 package org.eclipse.etrice.modellib.Socket;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -31,6 +33,7 @@ public class DSocketData {
 		super();
 		
 		// initialize attributes
+		this.setData("");
 	}
 	
 	// constructor using fields

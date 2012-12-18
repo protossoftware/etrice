@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -38,11 +37,9 @@ public class PTcpControl {
 		// constructors
 		public PTcpControlPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpControlPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -53,9 +50,6 @@ public class PTcpControl {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -66,16 +60,10 @@ public class PTcpControl {
 		
 		// sent messages
 		public void established() {
-			if (messageStrings[ OUT_established] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_established]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_established));
 				}
 		public void error() {
-			if (messageStrings[ OUT_error] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_error]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_error));
 				}
@@ -127,11 +115,9 @@ public class PTcpControl {
 		// constructors
 		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -142,9 +128,6 @@ public class PTcpControl {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -155,9 +138,6 @@ public class PTcpControl {
 		
 		// sent messages
 		public void open(DTcpControl data) {
-			if (messageStrings[ IN_open] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, data.deepCopy()));
 		}
@@ -165,9 +145,6 @@ public class PTcpControl {
 			open(new DTcpControl(IPAddr, TcpPort));
 		}
 		public void close() {
-			if (messageStrings[ IN_close] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_close]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_close));
 				}

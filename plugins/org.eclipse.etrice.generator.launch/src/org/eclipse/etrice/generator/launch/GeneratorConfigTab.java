@@ -65,6 +65,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
 	public static final String LIB = "Lib";
 	public static final String DEBUG = "Debug";
+	public static final String MSC = "MSC";
+	public static final String VERBOSE = "Verbose";
 	
 	private Button libButton;
 	private Button documentationButton;
@@ -72,6 +74,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Text genModelPath;
 	private Button browsePath;
 	private Button debugButton;
+	private Button mscButton;
+	private Button verboseButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -134,6 +138,14 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		debugButton = createCheckButton(mainComposite, "debug output");
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		debugButton.addSelectionListener(new UpdateConfig());
+
+		mscButton = createCheckButton(mainComposite, "generate instrumentation for MSC generation");
+		mscButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		mscButton.addSelectionListener(new UpdateConfig());
+
+		verboseButton = createCheckButton(mainComposite, "generate instrumentation for verbose output");
+		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		verboseButton.addSelectionListener(new UpdateConfig());
 		
 		addFurtherControls(mainComposite);
 	}
@@ -215,6 +227,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				genDocu = true;
 			documentationButton.setSelection(genDocu);
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
+			mscButton.setSelection(configuration.getAttribute(MSC, false));
+			verboseButton.setSelection(configuration.getAttribute(VERBOSE, false));
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -232,6 +246,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, documentationButton.getSelection());
 		configuration.setAttribute(GEN_DOCUMENTATION, documentationButton.getSelection());
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
+		configuration.setAttribute(MSC, mscButton.getSelection());
+		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
 	}
 
 	/* (non-Javadoc)

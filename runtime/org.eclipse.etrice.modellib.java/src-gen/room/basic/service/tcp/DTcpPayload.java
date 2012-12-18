@@ -1,5 +1,7 @@
 package room.basic.service.tcp;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -38,7 +40,13 @@ public class DTcpPayload {
 		super();
 		
 		// initialize attributes
-		data = new byte[1000];
+		{
+			byte[] array = new byte[1000];
+			for (int i=0;i<1000;i++){
+				array[i] = (byte)0;
+			}
+			this.setData(array);
+		}
 	}
 	
 	// constructor using fields

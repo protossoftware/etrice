@@ -36,7 +36,6 @@ public class ATimingService extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_timer = 1;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 	public void stop() {
@@ -82,7 +81,6 @@ public class ATimingService extends ActorClassBase {
 	public void destroy(){
 	}
 
-	
 	/* state IDs */
 	public static final int STATE_Operational = 2;
 	
@@ -106,7 +104,6 @@ public class ATimingService extends ActorClassBase {
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
-		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
@@ -230,7 +227,7 @@ public class ATimingService extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_Operational:
 					switch(trigger) {
 						case TRIG_timer__internalStartTimer:
@@ -256,7 +253,7 @@ public class ATimingService extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

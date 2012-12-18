@@ -163,9 +163,6 @@ RoomModel room.basic.service.timing {
 			handle
 			incoming kill {
 			"//conjugate PortClass kill
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(),
-						getPeerAddress(), messageStrings[IN_kill]);
-	
 				if (active) {
 					active = false;
 					TimerData td = new TimerData();
@@ -179,7 +176,6 @@ RoomModel room.basic.service.timing {
 				if (active) return;
 				active = true;
 
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, new TimerData(time_ms,++currentId)));
 			"
 			}
@@ -188,7 +184,6 @@ RoomModel room.basic.service.timing {
 				if (active) return;
 				active = true;
 
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, new TimerData(time_ms,++currentId)));
 		"
 			}

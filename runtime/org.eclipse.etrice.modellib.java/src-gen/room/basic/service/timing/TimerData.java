@@ -1,5 +1,7 @@
 package room.basic.service.timing;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 

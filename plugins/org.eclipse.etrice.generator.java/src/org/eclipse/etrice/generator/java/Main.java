@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
+import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.generator.IGenerator;
@@ -37,19 +38,31 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_DOCUMENTATION = "-genDocu";
 	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
 	public static final String OPTION_DEBUG = "-debug";
+	public static final String OPTION_MSC = "-msc_instr";
+	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 	
 	/**
 	 * print usage message to stderr
 	 */
 	private static void printUsage() {
-		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] [-lib] <list of model file paths>");
+		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>]"
+				+" ["+OPTION_DOCUMENTATION+"]"
+				+" ["+OPTION_LIB+"]"
+				+" ["+OPTION_NOEXIT+"]"
+				+" ["+OPTION_SAVE_GEN_MODEL+" <genmodel path>]"
+				+" ["+OPTION_DEBUG+"]"
+				+" ["+OPTION_MSC+"]"
+				+" ["+OPTION_VERBOSE_RT+"]"
+				+" <list of model file paths>");
 		output.println("      <list of model file paths>        # model file paths may be specified as");
 		output.println("                                        # e.g. C:\\path\\to\\model\\mymodel.room");
-		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
 		output.println("      -genDocu                          # if specified documentation is created");
 		output.println("      -lib                              # if specified all classes are generated and no instances");
 		output.println("      -noexit                           # if specified the JVM is not exited");
+		output.println("      -saveGenModel <genmodel path>     # if specified the generator model will be saved to this location");
 		output.println("      -debug                            # if specified create debug output");
+		output.println("      -msc_instr                        # generate instrumentation for MSC generation");
+		output.println("      -gen_as_verbose                   # generate instrumentation for verbose console output");
 	}
 
 	public static void main(String[] args) {
@@ -100,6 +113,12 @@ public class Main extends AbstractGenerator {
 			}
 			else if (args[i].equals(OPTION_NOEXIT)) {
 				setTerminateOnError(false);
+			}
+			else if (args[i].equals(OPTION_MSC)) {
+				GlobalSettings.setGenerateMSCInstrumentation(true);
+			}
+			else if (args[i].equals(OPTION_VERBOSE_RT)) {
+				GlobalSettings.setGenerateWithVerboseOutput(true);
 			}
 			else if (args[i].equals(OPTION_DEBUG)) {
 				debug = true;

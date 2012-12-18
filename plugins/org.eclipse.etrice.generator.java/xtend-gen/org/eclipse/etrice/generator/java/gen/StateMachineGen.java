@@ -8,6 +8,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @Singleton
@@ -57,15 +58,29 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("private void setState(int new_state) {");
       _builder.newLine();
-      _builder.append("\t");
-      _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
-      _builder.newLine();
+      {
+        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation) {
+          _builder.append("\t");
+          _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("System.out.println(getInstancePath() + \" -> \" + stateStrings[new_state]);");
-      _builder.newLine();
+      {
+        boolean _generateWithVerboseOutput = GlobalSettings.generateWithVerboseOutput();
+        if (_generateWithVerboseOutput) {
+          _builder.append("\t\t");
+          _builder.append("System.out.println(\"state switch of \"+getInstancePath() + \": \"");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t");
+          _builder.append("+ stateStrings[this.state] + \" -> \" + stateStrings[new_state]);");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("}\t");
       _builder.newLine();

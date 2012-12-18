@@ -25,6 +25,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
+import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -94,8 +95,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.*;");
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
-    _builder.newLine();
+    {
+      boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+      if (_generateMSCInstrumentation) {
+        _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
+        _builder.newLine();
+      }
+    }
     _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
     _builder.newLine();
     _builder.newLine();
@@ -233,9 +239,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t\t");
       _builder.append("this(actor, name, localId, 0, addr, peerAddress);");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("DebuggingService.getInstance().addPortInstance(this);");
-      _builder.newLine();
+      {
+        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation) {
+          _builder.append("\t\t");
+          _builder.append("DebuggingService.getInstance().addPortInstance(this);");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -257,9 +268,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
-      _builder.append("DebuggingService.getInstance().addPortInstance(this);");
-      _builder.newLine();
+      {
+        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_1) {
+          _builder.append("\t\t");
+          _builder.append("DebuggingService.getInstance().addPortInstance(this);");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -280,23 +296,23 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("EventMessage msg = (EventMessage) m;");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)");
+      _builder.append("if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("System.out.println(\"unknown\");");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("else {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
+      {
+        boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_2) {
+          _builder.append("\t\t\t\t");
+          _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
+          _builder.newLine();
+          _builder.append("\t\t\t\t");
+          _builder.append("\t");
+          _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
+          _builder.newLine();
+          _builder.append("\t\t\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       {
         boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
         if (_handlesReceive) {
@@ -674,25 +690,31 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             }
           }
         } else {
-          _builder.append("\t");
-          _builder.append("if (messageStrings[ ");
-          _builder.append(dir, "	");
-          _builder.append("_");
-          String _name = m.getName();
-          _builder.append(_name, "	");
-          _builder.append("] != \"timerTick\"){");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
-          _builder.append(dir, "	");
-          _builder.append("_");
-          String _name_1 = m.getName();
-          _builder.append(_name_1, "	");
-          _builder.append("]);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
+          {
+            boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+            if (_generateMSCInstrumentation) {
+              _builder.append("\t");
+              _builder.append("if (messageStrings[ ");
+              _builder.append(dir, "	");
+              _builder.append("_");
+              String _name = m.getName();
+              _builder.append(_name, "	");
+              _builder.append("] != \"timerTick\") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
+              _builder.append(dir, "		");
+              _builder.append("_");
+              String _name_1 = m.getName();
+              _builder.append(_name_1, "		");
+              _builder.append("]);");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("if (getPeerAddress()!=null)");
           _builder.newLine();

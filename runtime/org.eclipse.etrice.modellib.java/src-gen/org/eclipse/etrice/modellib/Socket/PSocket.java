@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -42,11 +41,9 @@ public class PSocket {
 		// constructors
 		public PSocketPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PSocketPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -57,9 +54,6 @@ public class PSocket {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -70,37 +64,22 @@ public class PSocket {
 		
 		// sent messages
 		public void connected() {
-			if (messageStrings[ OUT_connected] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_connected]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_connected));
 				}
 		public void disconnected() {
-			if (messageStrings[ OUT_disconnected] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_disconnected]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_disconnected));
 				}
 		public void receivedData() {
-			if (messageStrings[ OUT_receivedData] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_receivedData]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_receivedData));
 				}
 		public void sentData() {
-			if (messageStrings[ OUT_sentData] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_sentData]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_sentData));
 				}
 		public void error() {
-			if (messageStrings[ OUT_error] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_error]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_error));
 				}
@@ -167,11 +146,9 @@ public class PSocket {
 		// constructors
 		public PSocketConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PSocketConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -182,9 +159,6 @@ public class PSocket {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -195,9 +169,6 @@ public class PSocket {
 		
 		// sent messages
 		public void connect(DSocketConfiguration config) {
-			if (messageStrings[ IN_connect] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_connect]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_connect, config.deepCopy()));
 		}
@@ -205,16 +176,10 @@ public class PSocket {
 			connect(new DSocketConfiguration(serverName, portNumber, protocol, checkCookie, mode));
 		}
 		public void disconnect() {
-			if (messageStrings[ IN_disconnect] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_disconnect]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_disconnect));
 				}
 		public void sendData(DSocketData data) {
-			if (messageStrings[ IN_sendData] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_sendData]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_sendData, data.deepCopy()));
 		}

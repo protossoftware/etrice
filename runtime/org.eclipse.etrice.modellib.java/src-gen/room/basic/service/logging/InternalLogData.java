@@ -1,5 +1,7 @@
 package room.basic.service.logging;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -38,6 +40,8 @@ public class InternalLogData {
 		super();
 		
 		// initialize attributes
+		this.setUserString("");
+		this.setSender("");
 	}
 	
 	// constructor using fields

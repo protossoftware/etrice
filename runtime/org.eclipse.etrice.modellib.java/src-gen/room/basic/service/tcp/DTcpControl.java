@@ -1,5 +1,7 @@
 package room.basic.service.tcp;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -31,6 +33,7 @@ public class DTcpControl {
 		super();
 		
 		// initialize attributes
+		this.setIPAddr("");
 	}
 	
 	// constructor using fields

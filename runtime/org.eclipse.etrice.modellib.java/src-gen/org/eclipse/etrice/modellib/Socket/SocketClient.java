@@ -28,7 +28,6 @@ public class SocketClient extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_fct = 1;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -42,11 +41,9 @@ public class Log {
 		// constructors
 		public LogPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public LogPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -57,9 +54,6 @@ public class Log {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -111,12 +105,10 @@ public class Log {
 		// constructors
 		public LogConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public LogConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
 			// initialize attributes
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -127,9 +119,6 @@ public class Log {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -138,7 +127,6 @@ public class Log {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		// TODO JH: Avoid collision attr getters/setter <-> user operations
 		//--------------------- attribute setters and getters
 		/*--------------------- operations ---------------------*/
 		public void setLogLevel(int l) {
@@ -158,23 +146,14 @@ public class Log {
 		
 		// sent messages
 		public void open(String fileName) {
-			if (messageStrings[ IN_open] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, fileName));
 		}
 		public void close() {
-			if (messageStrings[ IN_close] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_close]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_close));
 				}
 		private void internalLog(InternalLogData data) {
-			if (messageStrings[ IN_internalLog] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalLog]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, data.deepCopy()));
 		}

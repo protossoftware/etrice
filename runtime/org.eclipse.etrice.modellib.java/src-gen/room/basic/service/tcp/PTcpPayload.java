@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.modelbase.*;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -36,11 +35,9 @@ public class PTcpPayload {
 		// constructors
 		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -51,9 +48,6 @@ public class PTcpPayload {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -64,9 +58,6 @@ public class PTcpPayload {
 		
 		// sent messages
 		public void receive(DTcpPayload data) {
-			if (messageStrings[ OUT_receive] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_receive]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_receive, data.deepCopy()));
 		}
@@ -116,11 +107,9 @@ public class PTcpPayload {
 		// constructors
 		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 			super(actor, name, localId, idx, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
 		@Override
@@ -131,9 +120,6 @@ public class PTcpPayload {
 				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
 					System.out.println("unknown");
 				else {
-					if (messageStrings[msg.getEvtId()] != "timerTick"){
-						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-					}
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -144,9 +130,6 @@ public class PTcpPayload {
 		
 		// sent messages
 		public void send(DTcpPayload data) {
-			if (messageStrings[ IN_send] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_send]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_send, data.deepCopy()));
 		}

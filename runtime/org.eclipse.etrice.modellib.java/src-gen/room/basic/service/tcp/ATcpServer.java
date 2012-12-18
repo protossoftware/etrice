@@ -100,7 +100,6 @@ public class ATcpServer extends ActorClassBase {
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_PayloadPort = 2;
 
-		
 	/*--------------------- attributes ---------------------*/
 	int lastError;
 	int payloadPortReplocation;
@@ -120,8 +119,8 @@ public class ATcpServer extends ActorClassBase {
 		setClassName("ATcpServer");
 		
 		// initialize attributes
-		lastError = 0;
-		payloadPortReplocation = 0;
+		this.setLastError(0);
+		this.setPayloadPortReplocation(0);
 
 		// own ports
 		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
@@ -172,7 +171,6 @@ public class ATcpServer extends ActorClassBase {
 	public void destroy(){
 	}
 
-	
 	/* state IDs */
 	public static final int STATE_closed = 2;
 	public static final int STATE_opened = 3;
@@ -200,7 +198,6 @@ public class ATcpServer extends ActorClassBase {
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
-		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
 			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
@@ -356,7 +353,7 @@ public class ATcpServer extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_closed:
 					switch(trigger) {
 						case TRIG_ControlPort__open:
@@ -388,7 +385,7 @@ public class ATcpServer extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

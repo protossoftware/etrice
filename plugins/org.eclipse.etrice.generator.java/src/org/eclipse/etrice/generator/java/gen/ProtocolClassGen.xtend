@@ -60,7 +60,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.Message;
 		import org.eclipse.etrice.runtime.java.modelbase.*;
-		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		«IF GlobalSettings::generateMSCInstrumentation»
+			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		«ENDIF»
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
 		«pc.userCode(1)»
@@ -107,14 +109,18 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// constructors
 			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
 				this(actor, name, localId, 0, addr, peerAddress);
-				DebuggingService.getInstance().addPortInstance(this);
+				«IF GlobalSettings::generateMSCInstrumentation»
+					DebuggingService.getInstance().addPortInstance(this);
+				«ENDIF»
 			}
 			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
 				super(actor, name, localId, idx, addr, peerAddress);
 				«IF pclass!=null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
 				«ENDIF»
-				DebuggingService.getInstance().addPortInstance(this);
+				«IF GlobalSettings::generateMSCInstrumentation»
+					DebuggingService.getInstance().addPortInstance(this);
+				«ENDIF»
 			}
 		
 			@Override
@@ -122,13 +128,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					if (!(m instanceof EventMessage))
 						return;
 					EventMessage msg = (EventMessage) m;
-					if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-						System.out.println("unknown");
-					else {
-						if (messageStrings[msg.getEvtId()] != "timerTick"){
-«««							TODOTS: model switch for activation
-							DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-						}
+					if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
+						«IF GlobalSettings::generateMSCInstrumentation»
+							if (messageStrings[msg.getEvtId()] != "timerTick"){
+«««								TODOTS: model switch for activation
+								DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
+							}
+						«ENDIF»
 						«IF pc.handlesReceive(conj)»
 						switch (msg.getEvtId()) {
 							«FOR hdlr : pc.getReceiveHandlers(conj)»
@@ -250,10 +256,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«FOR command : hdlr.detailCode.commands»	«command»
 					«ENDFOR»
 				«ELSE»
-					if (messageStrings[ «dir»_«m.name»] != "timerTick"){
-«««						TODOTS: model switch for activation
-					DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-					}
+					«IF GlobalSettings::generateMSCInstrumentation»
+						if (messageStrings[ «dir»_«m.name»] != "timerTick") {
+«««							TODOTS: model switch for activation
+							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
+						}
+					«ENDIF»
 					if (getPeerAddress()!=null)
 						«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
 						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));

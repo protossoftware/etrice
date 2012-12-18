@@ -39,10 +39,14 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		protected int history[] = {NO_STATE,NO_STATE«FOR state : ac.getAllBaseStates()»,NO_STATE«ENDFOR»};
 		
 		private void setState(int new_state) {
-			DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
+			«IF GlobalSettings::generateMSCInstrumentation»
+				DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
+			«ENDIF»
 			if (stateStrings[new_state]!="Idle") {
-«««				TODOTS: model switch for activation
-				System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+				«IF GlobalSettings::generateWithVerboseOutput»
+					System.out.println("state switch of "+getInstancePath() + ": "
+							+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
+				«ENDIF»
 			}	
 			this.state = new_state;
 		}

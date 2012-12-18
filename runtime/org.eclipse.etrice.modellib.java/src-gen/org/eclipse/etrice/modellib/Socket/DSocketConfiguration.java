@@ -1,5 +1,7 @@
 package org.eclipse.etrice.modellib.Socket;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -52,6 +54,7 @@ public class DSocketConfiguration {
 		super();
 		
 		// initialize attributes
+		this.setServerName("");
 	}
 	
 	// constructor using fields
