@@ -134,7 +134,7 @@
 	<!--
 		compile_runtime: compiles the C runtime library
 	-->
-	<target name="compile_runtime" depends="set_rp">
+	<target name="compile_runtime" depends="clean,set_rp">
 		<mkdir dir="${c-runtime.path}/bin"/>
 		<mkdir dir="${output}"/>
 		<exec dir="${c-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_runtime.txt">
