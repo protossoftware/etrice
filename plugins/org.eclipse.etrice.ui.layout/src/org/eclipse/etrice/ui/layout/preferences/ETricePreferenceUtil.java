@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2012 Jayant Gupta
- * This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright 2010 by Christian-Albrechts-University of Kiel and Others
+ * Department of Computer Science
+ *   + Real-Time and Embedded Systems Group
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
  * 
  * CONTRIBUTORS:
- * 		Jayant Gupta (initial contribution)
- * 
- * 
+ * 		Jayant Gupta (used KIELER code with minor modifications in eTrice)
+ *  
  *******************************************************************************/
 
 package org.eclipse.etrice.ui.layout.preferences;
@@ -53,15 +52,16 @@ import de.cau.cs.kieler.kiml.ui.service.EclipseLayoutDataService;
 import de.cau.cs.kieler.kiml.ui.service.EclipseLayoutInfoService;
 
 /**
- * The Utility class for eTrice Preference Pages. 
+ * The Utility class for eTrice Preference Pages.
  * <p>
- * This class provides a few useful methods, an enumerated type and two static nested class :
+ * This class provides a few useful methods, an enumerated type and two static
+ * nested class :
  * <ul>
  * <li>{@link ElementType}</li>
  * <li>{@link NewOptionDialog}</li>
  * <li>{@link OptionsTableProvider}</li>
  * </ul>
- *  
+ * 
  * @author jayant
  */
 public final class ETricePreferenceUtil {
@@ -148,46 +148,45 @@ public final class ETricePreferenceUtil {
 			}
 		}
 	}
-	
-	
-	
+
 	/**
 	 * Enumeration of element types that can receive default options.
-	 *
+	 * 
 	 * @author msp
 	 */
 	public static enum ElementType {
-	    
-	    /** highest priority: edit parts of specific diagram editors. */
-	    EDIT_PART,
-	    
-	    /** medium priority: domain model elements. */
-	    MODEL_ELEM,
-	    
-	    /** lowest priority: diagram type definition (contributed via extension point). */
-	    DIAG_TYPE;
-	    
-	    /**
-	     * Returns a description for the element type.
-	     * 
-	     * @return a user-friendly description
-	     */
-	    public String getDescription() {
-	        switch (this) {
-	        case EDIT_PART:
-	            return Messages.getString("kiml.ui.54");
-	        case MODEL_ELEM:
-	            return Messages.getString("kiml.ui.55");
-	        case DIAG_TYPE:
-	            return Messages.getString("kiml.ui.56");
-	        }
-	        return null;
-	    }
+
+		/** highest priority: edit parts of specific diagram editors. */
+		EDIT_PART,
+
+		/** medium priority: domain model elements. */
+		MODEL_ELEM,
+
+		/**
+		 * lowest priority: diagram type definition (contributed via extension
+		 * point).
+		 */
+		DIAG_TYPE;
+
+		/**
+		 * Returns a description for the element type.
+		 * 
+		 * @return a user-friendly description
+		 */
+		public String getDescription() {
+			switch (this) {
+			case EDIT_PART:
+				return Messages.getString("kiml.ui.54");
+			case MODEL_ELEM:
+				return Messages.getString("kiml.ui.55");
+			case DIAG_TYPE:
+				return Messages.getString("kiml.ui.56");
+			}
+			return null;
+		}
 
 	}
-	
-	
-	
+
 	/**
 	 * A dialog to add new default layout options in the preference page.
 	 * 
