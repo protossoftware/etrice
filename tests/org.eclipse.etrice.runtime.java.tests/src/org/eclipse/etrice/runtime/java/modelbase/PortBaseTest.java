@@ -14,28 +14,15 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 public class PortBaseTest extends TestCase {
 	// TODO: pull out all Mock Objects 
-	public class MockEventReceiver implements IEventReceiver {
+	public class MockEventReceiver extends RTObject implements IEventReceiver {
 
-		@Override
-		public String getInstancePath() {
-			return "TOP_Path";
-		}
-
-		@Override
-		public String getInstancePathName() {
-			return "TOP_PathName";
-		}
-		
-		@Override
-		public String getInstancePath(char delim) {
-			if (delim == IRTObject.PATH_DELIM)
-				return getInstancePath();
-			else
-				return getInstancePathName();
+		protected MockEventReceiver(String name) {
+			super(null, name);
 		}
 
 		@Override
@@ -43,21 +30,10 @@ public class PortBaseTest extends TestCase {
 		}
 	
 	}
-	public class MockRTObject implements IRTObject {
+	public class MockRTObject extends RTObject implements IRTObject {
 
-		@Override
-		public String getInstancePath() {
-			return "TOP_Path";
-		}
-
-		@Override
-		public String getInstancePathName() {
-			return "TOP_PathName";
-		}
-
-		@Override
-		public String getInstancePath(char delim) {
-			return null;
+		protected MockRTObject(String name) {
+			super(null, name);
 		}
 		
 	}
@@ -82,13 +58,13 @@ public class PortBaseTest extends TestCase {
 	}
 
 	public void testPortBase() {
-		MockRTObject topRTObject = new MockRTObject();
+		MockRTObject topRTObject = new MockRTObject("TOP");
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
 				new MessageService(topRTObject, new Address(0, 0, 0),"MessageService_0", Thread.NORM_PRIORITY));
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
 				new MessageService(topRTObject, new Address(0, 1, 0),"MessageService_1", Thread.NORM_PRIORITY));
 
-		MockEventReceiver eventRcv = new MockEventReceiver();
+		MockEventReceiver eventRcv = new MockEventReceiver("TOP");
 		Address portAddress = new Address(0, 0, 5);
 		Address peerAddress = new Address(0, 1, 10);
 
@@ -103,10 +79,10 @@ public class PortBaseTest extends TestCase {
 		assertEquals(peerAddress, port1.getAddress());
 		assertEquals(portAddress, port1.getPeerAddress());
 		
-		assertEquals("TOP_Path/Port0", port0.getInstancePath());
-		assertEquals("TOP_PathName_Port0", port0.getInstancePathName());
-		assertEquals("TOP_Path/Port1", port1.getInstancePath());
-		assertEquals("TOP_PathName_Port1", port1.getInstancePathName());
+		assertEquals("/TOP/Port0", port0.getInstancePath());
+		assertEquals("_TOP_Port0", port0.getInstancePathName());
+		assertEquals("/TOP/Port1", port1.getInstancePath());
+		assertEquals("_TOP_Port1", port1.getInstancePathName());
 		
 		assertEquals(33, port0.getLocalId());
 		assertEquals(44, port1.getLocalId());

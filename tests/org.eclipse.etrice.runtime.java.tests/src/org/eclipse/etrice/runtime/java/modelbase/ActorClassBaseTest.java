@@ -12,6 +12,7 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 
@@ -23,24 +24,10 @@ public class ActorClassBaseTest extends TestCase {
 
 	
 	
-	public class MockRTObject implements IRTObject {
+	public class MockRTObject extends RTObject implements IRTObject {
 
-		@Override
-		public String getInstancePath() {
-			return "TOP_Path";
-		}
-
-		@Override
-		public String getInstancePathName() {
-			return "TOP_PathName";
-		}
-
-		@Override
-		public String getInstancePath(char delim) {
-			if (delim == IRTObject.PATH_DELIM)
-				return getInstancePath();
-			else
-				return getInstancePathName();
+		public MockRTObject(String name) {
+			super(null, name);
 		}
 		
 	}
@@ -72,7 +59,7 @@ public class ActorClassBaseTest extends TestCase {
 	}
 
 	public void testActorClassBase() {
-		MockRTObject topRTObject = new MockRTObject();
+		MockRTObject topRTObject = new MockRTObject("TOP");
 		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
 				new MessageService(topRTObject, new Address(0, 2, 0),"MessageService_Main", Thread.NORM_PRIORITY));
 
@@ -81,15 +68,15 @@ public class ActorClassBaseTest extends TestCase {
 
 		// PathNames
 		ActorClassBase actor = new MockActor(topRTObject, "MockActor1", system_port_addr, peer_system_port_addr);
-		assertEquals("TOP_Path/MockActor1", actor.getInstancePath());
-		assertEquals("TOP_PathName_MockActor1", actor.getInstancePathName());
+		assertEquals("/TOP/MockActor1", actor.getInstancePath());
+		assertEquals("_TOP_MockActor1", actor.getInstancePathName());
 		
 		// ClassName
 		actor.setClassName("MockActor");
 		assertEquals("MockActor", actor.getClassName());
 
 		actor.setClassName("MockActor");
-		assertEquals("ActorClass(className=MockActor, instancePath=TOP_Path/MockActor1)", actor.toString());
+		assertEquals("ActorClass(className=MockActor, instancePath=/TOP/MockActor1)", actor.toString());
 		
 	}
 

@@ -12,9 +12,12 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.List;
+
 /**
  * The runtime object interface
  * @author Thomas Schuetz
+ * @author Henrik Rentz-Reichert
  *
  */
 public interface IRTObject {
@@ -23,6 +26,13 @@ public interface IRTObject {
 	static final char PATHNAME_DELIM = '_';
 	static final String NO_NAME = "<no name>";
 
+	String getName();
+	List<IRTObject> getChildren();
+	IRTObject getParent();
+	IRTObject getRoot();
+	IRTObject getChild(String name);
+	IRTObject getObject(String path);
+	
 	String getInstancePath(char delim);
 	String getInstancePath();
 	String getInstancePathName();

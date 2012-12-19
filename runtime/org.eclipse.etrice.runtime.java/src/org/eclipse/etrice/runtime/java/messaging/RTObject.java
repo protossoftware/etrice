@@ -26,8 +26,21 @@ public class RTObject implements IRTObject	{
 	protected RTObject(IRTObject parent, String name){
 		this.parent = parent;
 		this.name = name;
-		if (parent instanceof RTObject)
-			((RTObject) parent).children.add(this);
+		
+		if (parent!=null)
+			parent.getChildren().add(this);
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public IRTObject getParent() {
+		return parent;
+	}
+
+	public ArrayList<IRTObject> getChildren() {
+		return children;
 	}
 
 	protected void destroy() {
@@ -36,14 +49,43 @@ public class RTObject implements IRTObject	{
 				((RTObject) child).destroy();
 		}
 		
-		if (parent instanceof RTObject)
-			((RTObject) parent).children.remove(this);
+		parent.getChildren().remove(this);
 		
 		parent = null;
 	}
 	
-	public IRTObject getParent() {
-		return parent;
+	public IRTObject getRoot() {
+		IRTObject root = parent;
+		while (root.getParent()!=null)
+			root = root.getParent();
+		
+		return root;
+	}
+	
+	public IRTObject getChild(String name) {
+		for (IRTObject child : children) {
+			if (child.getName().equals(name))
+				return child;
+		}
+		
+		return null;
+	}
+	
+	public IRTObject getObject(String path) {
+		boolean isAbsolute = path.charAt(0)==PATH_DELIM;
+		IRTObject current = isAbsolute? getRoot() : this;
+		
+		if (isAbsolute)
+			path = path.substring(1);
+		
+		String[] segments = path.split(Character.toString(PATH_DELIM));
+		for (String segment : segments) {
+			current = current.getChild(segment);
+			if (current==null)
+				return null;
+		}
+		
+		return current;
 	}
 	
 	public String getInstancePath(char delim) {

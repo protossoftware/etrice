@@ -50,12 +50,12 @@ public class MessageServiceTest extends TestCase {
 		Message msg5 = new Message(new Address(0,4,39));
 		Message msg6 = new Message(new Address(0,5,111));
 
-		msg_service1.start();
-		msg_service2.start();
-		msg_service3.start();
-		msg_service4.start();
-		msg_service5.start();
-		msg_service6.start();
+		start(msg_service1);
+		start(msg_service2);
+		start(msg_service3);
+		start(msg_service4);
+		start(msg_service5);
+		start(msg_service6);
 
 		msg_service1.receive(msg1);
 		msg_service2.receive(msg2);
@@ -111,7 +111,7 @@ public class MessageServiceTest extends TestCase {
 
 		// Start Message Service before sending the Messages to test the synchronization
 		// This test fails without the synchronized keywords in the MessageService 
-		msg_service.start();
+		start(msg_service);
 		
 		// send all messages
 		for (int j=0; j<max_iter; j++){
@@ -148,10 +148,14 @@ public class MessageServiceTest extends TestCase {
 
 		// setInstanceId via Constructor
 		MessageService msg_service = new MessageService(null, addr, "MessageService1");
-		assertEquals("/MessageService1", msg_service.getInstancePath());
-		assertEquals("/MessageService1/Queue", msg_service.getMessageQueue().getInstancePath());
-		assertEquals("/MessageService1/Dispatcher", msg_service.getMessageDispatcher().getInstancePath());
+		assertEquals("/MessageService_MessageService1", msg_service.getInstancePath());
+		assertEquals("/MessageService_MessageService1/Queue", msg_service.getMessageQueue().getInstancePath());
+		assertEquals("/MessageService_MessageService1/Dispatcher", msg_service.getMessageDispatcher().getInstancePath());
 	}
 
-	
+	private void start(MessageService svc) {
+		Thread thread = new Thread(svc, svc.getName());
+		svc.setThread(thread);
+		thread.start();
+	}
 }
