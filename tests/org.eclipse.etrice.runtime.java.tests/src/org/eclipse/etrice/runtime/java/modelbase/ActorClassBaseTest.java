@@ -8,33 +8,20 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import junit.framework.TestCase;
+
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
-import org.eclipse.etrice.runtime.java.messaging.RTObject;
+import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
-
-import junit.framework.TestCase;
-
-
 
 public class ActorClassBaseTest extends TestCase {
 
-	
-	
-	public class MockRTObject extends RTObject implements IRTObject {
-
-		public MockRTObject(String name) {
-			super(null, name);
-		}
-		
-	}
-	
 	public class MockActor extends ActorClassBase {
-		public MockActor(IRTObject parent, String name, Address system_port_addr,Address peer_system_port_addr) {
-			super(parent, name, system_port_addr, peer_system_port_addr);
+		public MockActor(IRTObject parent, String name) {
+			super(parent, name);
 		}
 		public void receive(Message msg) {
 			
@@ -59,15 +46,13 @@ public class ActorClassBaseTest extends TestCase {
 	}
 
 	public void testActorClassBase() {
-		MockRTObject topRTObject = new MockRTObject("TOP");
-		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(
-				new MessageService(topRTObject, new Address(0, 2, 0),"MessageService_Main", Thread.NORM_PRIORITY));
-
-		Address peer_system_port_addr = new Address(0, 0, 0);
-		Address system_port_addr = new Address(0, 0, 1);
+		TopRTObject topRTObject = new TopRTObject("TOP");
+		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
+		msgSvcCtrl.addMsgSvc(
+				new MessageService(topRTObject, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_Main", Thread.NORM_PRIORITY));
 
 		// PathNames
-		ActorClassBase actor = new MockActor(topRTObject, "MockActor1", system_port_addr, peer_system_port_addr);
+		ActorClassBase actor = new MockActor(topRTObject, "MockActor1");
 		assertEquals("/TOP/MockActor1", actor.getInstancePath());
 		assertEquals("_TOP_MockActor1", actor.getInstancePathName());
 		

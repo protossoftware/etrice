@@ -13,7 +13,7 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSystemServicesProtocolConjPortRepl;
+import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
 
 /**
  * The base class for all SubSystems.
@@ -25,7 +25,8 @@ import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSyst
 public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 
 	//--------------------- ports
-	protected RTSystemServicesProtocolConjPortRepl RTSystemPort = null;
+	protected RTSystemConjPort RTSystemPort = null;
+	
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
 	protected ActorClassBase[] instances = null;
@@ -34,6 +35,8 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	
 	public SubSystemClassBase(String name) {
 		super(null, name);
+		
+		RTSystemPort = new RTSystemConjPort(this, IFITEM_RTSystemPort);
 
 		DebuggingService.getInstance().getAsyncLogger()
 				.setMSC(name + "_Async", "");

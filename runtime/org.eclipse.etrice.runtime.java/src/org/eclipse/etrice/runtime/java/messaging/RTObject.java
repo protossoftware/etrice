@@ -73,19 +73,30 @@ public class RTObject implements IRTObject	{
 	
 	public IRTObject getObject(String path) {
 		boolean isAbsolute = path.charAt(0)==PATH_DELIM;
-		IRTObject current = isAbsolute? getRoot() : this;
-		
 		if (isAbsolute)
 			path = path.substring(1);
-		
 		String[] segments = path.split(Character.toString(PATH_DELIM));
-		for (String segment : segments) {
-			current = current.getChild(segment);
-			if (current==null)
-				return null;
+
+		if (segments.length>0) {
+			IRTObject current = isAbsolute? getRoot() : this;
+			
+			
+			String first = segments[0];
+			for (String segment : segments) {
+				if (segment==first) {
+					if (!segment.equals(current.getName()))
+						return null;
+				}
+				else {
+					current = current.getChild(segment);
+					if (current==null)
+						return null;
+				}
+			}
+			return current;
 		}
 		
-		return current;
+		return null;
 	}
 	
 	public String getInstancePath(char delim) {

@@ -12,10 +12,7 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.messaging.MessageService;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
+import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemPort;
 
 
 /**
@@ -32,6 +29,8 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	protected static final int STATE_TOP = 1;
 
 	protected static final int NOT_CAUGHT = 0;
+
+	protected static final int IFITEM_RTSystemPort = 0;
 	
 	private String className = "noname";
 
@@ -40,19 +39,13 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	 */
 	protected int state;
 
-	private MessageService ownMsgsvc = null;
-	private Address ownAddr = null;
-	protected RTSystemServicesProtocolPort RTSystemPort = null;
+	protected RTSystemPort rtSystemPort = null;
 	
-	public ActorClassBase(IRTObject parent, String name, Address ownAddr, Address systemPortPeerAddr) {
+	public ActorClassBase(IRTObject parent, String name) {
 		super(parent, name);
 		
-		this.ownAddr = ownAddr;
-		ownMsgsvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(this.ownAddr.threadID);
 		// own ports
-		RTSystemPort = new RTSystemServicesProtocolPort(this, "RTSystemPort",
-				0, 0, ownAddr,
-				systemPortPeerAddr);
+		rtSystemPort = new RTSystemPort(this, IFITEM_RTSystemPort);
 	}
 
 	public String toString(){
@@ -92,10 +85,6 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	
 	public int getState() {
 		return state;
-	}
-
-	public MessageService getMsgsvc() {
-		return ownMsgsvc;
 	}
 	
 	protected boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, Object generic_data){

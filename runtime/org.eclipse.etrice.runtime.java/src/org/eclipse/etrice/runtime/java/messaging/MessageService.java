@@ -18,7 +18,7 @@ package org.eclipse.etrice.runtime.java.messaging;
  * The MessageService the backbone of the asynchronous communication inside a SubSystem
  * It usually contains a thread a message queue and a dispatcher
  * 
- * @author Thomas Schuetz
+ * @author Thomas Schuetz (initial contribution)
  * @author Henrik Rentz-Reichert (extending RTObject, implementing Runnable)
  *
  */
@@ -34,21 +34,21 @@ public class MessageService extends RTObject implements IMessageReceiver, Runnab
 	private Thread thread;
 	private int priority;
 
-	public MessageService(IRTObject parent, Address addr, String name) {
-		this(parent, addr, name, Thread.NORM_PRIORITY);
+	public MessageService(IRTObject parent, int node, int thread, String name) {
+		this(parent, node, thread, name, Thread.NORM_PRIORITY);
 	}
 	
-	public MessageService(IRTObject parent, Address addr, String name, int priority) {
+	public MessageService(IRTObject parent, int node, int thread, String name, int priority) {
 		super(parent, "MessageService_"+name);
 		
-		address = addr;
+		address = new Address(node, thread, 0);
 		this.priority = priority;
 
 		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
 		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
 
 		// instantiate dispatcher and queue
-		messageDispatcher = new MessageDispatcher(this, new Address(addr.nodeID,addr.threadID, addr.objectID + 1), "Dispatcher");
+		messageDispatcher = new MessageDispatcher(this, new Address(address.nodeID,address.threadID, address.objectID + 1), "Dispatcher");
 		messageQueue = new MessageSeQueue(this, "Queue");
 	}
 

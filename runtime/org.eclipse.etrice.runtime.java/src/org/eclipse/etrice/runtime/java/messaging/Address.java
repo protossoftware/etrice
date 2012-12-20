@@ -42,4 +42,16 @@ public class Address {
 	public Address createInc(int i) {
 		return new Address(nodeID, threadID, objectID+i);
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Address) {
+			Address other = (Address) obj;
+			return nodeID==other.nodeID && threadID==other.threadID && objectID==other.objectID;
+		}
+		return super.equals(obj);
+	}
 }

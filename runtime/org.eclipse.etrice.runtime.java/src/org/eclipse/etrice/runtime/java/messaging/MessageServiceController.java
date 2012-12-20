@@ -76,6 +76,10 @@ public class MessageServiceController {
 		messageServiceList.add(msgSvc);
 	}
 	
+	public int getNMsgSvc() {
+		return messageServiceList.size();
+	}
+	
 	public MessageService getMsgSvc(int threadID){
 		assert(threadID < messageServiceList.size());
 		return messageServiceList.get(threadID);
@@ -93,9 +97,14 @@ public class MessageServiceController {
 	}
 
 	public void stop() {
+		if (!running)
+			return;
+		
 		//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
 		terminate();
 		waitTerminate();
+		
+		running = false;
 	}
 
 	/**
@@ -120,11 +129,6 @@ public class MessageServiceController {
 	}
 
 	private void terminate() {
-		if (!running){
-			return;
-		}
-		running = false;
-		
 		// terminate all message services
 		for (MessageService msgSvc : messageServiceList){
 			msgSvc.terminate();
@@ -198,4 +202,18 @@ public class MessageServiceController {
 		path2peers.put(path, peers);
 	}
 	
+	/**
+	 * @param path
+	 * @return list of peer paths
+	 */
+	public List<String> getPeersForPath(String path) {
+		return path2peers.get(path);
+	}
+	
+	public void resetAll() {
+		stop();
+		messageServiceList.clear();
+		path2peers.clear();
+		path2thread.clear();
+	}
 }
