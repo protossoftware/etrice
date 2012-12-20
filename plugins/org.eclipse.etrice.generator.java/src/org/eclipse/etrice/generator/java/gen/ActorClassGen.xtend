@@ -115,29 +115,25 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ac.operationsImplementation»
 		
 			//--------------------- construction
-			public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-				«IF ac.base==null»
-					super(parent, name, port_addr[0][0], peer_addr[0][0]);
-				«ELSE»
-					super(parent, name, port_addr, peer_addr);
-				«ENDIF»
+			public «ac.name»(IRTObject parent, String name) {
+				super(parent, name);
 				setClassName("«ac.name»");
 				
 				«ac.attributes.attributeInitialization(ac, false)»
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»
-					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF»); 
+					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name»); 
 				«ENDFOR»
 				
 				// own saps
 				«FOR sap : ac.strSAPs»
-					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0, port_addr[IFITEM_«sap.name»][0], peer_addr[IFITEM_«sap.name»][0]); 
+					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0); 
 				«ENDFOR»
 				
 				// own service implementations
 				«FOR svc : ac.serviceImplementations»
-					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name», port_addr[IFITEM_«svc.spp.name»], peer_addr[IFITEM_«svc.spp.name»]); 
+					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»); 
 				«ENDFOR»
 				«IF ctor!=null»
 					
@@ -149,8 +145,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 
 			«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
-				public «ac.name»(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr, VariableService variableService){
-					this(parent, name, port_addr, peer_addr);
+				public «ac.name»(IRTObject parent, String name, VariableService variableService) {
+					this(parent, name);
 					
 					«IF !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 						this.variableService = variableService;

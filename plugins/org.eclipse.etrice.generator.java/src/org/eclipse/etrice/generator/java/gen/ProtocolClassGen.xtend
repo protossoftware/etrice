@@ -55,11 +55,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def generate(Root root, ProtocolClass pc) {'''
 		package «pc.getPackage()»;
 		
-		import java.util.ArrayList;
-		
-		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.Message;
-		import org.eclipse.etrice.runtime.java.modelbase.*;
+		import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+		import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+		import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+		import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+		import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 		«IF GlobalSettings::generateMSCInstrumentation»
 			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		«ENDIF»
@@ -107,14 +109,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
-			public «portClassName»(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-				this(actor, name, localId, 0, addr, peerAddress);
-				«IF GlobalSettings::generateMSCInstrumentation»
-					DebuggingService.getInstance().addPortInstance(this);
-				«ENDIF»
+			public «portClassName»(IEventReceiver actor, String name, int localId) {
+				this(actor, name, localId, 0);
 			}
-			public «portClassName»(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-				super(actor, name, localId, idx, addr, peerAddress);
+			public «portClassName»(IEventReceiver actor, String name, int localId, int idx) {
+				super(actor, name, localId, idx);
 				«IF pclass!=null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
 				«ENDIF»
@@ -172,50 +171,46 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		}
 		
 		// replicated port class
-		static public class «replPortClassName» {
-			private ArrayList<«portClassName»> ports;
-			private int replication;
+		static public class «replPortClassName» extends ReplicatedPortBase {
 		
-			public «replPortClassName»(IEventReceiver actor, String name, int localId, Address[] addr,
-					Address[] peerAddress) {
-				replication = addr==null? 0:addr.length;
-				ports = new ArrayList<«pc.name».«portClassName»>(replication);
-				for (int i=0; i<replication; ++i) {
-					ports.add(new «portClassName»(
-							actor, name+i, localId, i, addr[i], peerAddress[i]));
-				}
+			public «replPortClassName»(IEventReceiver actor, String name, int localId) {
+				super(actor, name, localId);
 			}
 			
 			public int getReplication() {
-				return replication;
+				return getNInterfaceItems();
 			}
 			
 			public int getIndexOf(InterfaceItemBase ifitem){
 					return ifitem.getIdx();
 				}
 			
-			public «portClassName» get(int i) {
-				return ports.get(i);
+			public «portClassName» get(int idx) {
+				return («portClassName») getInterfaceItem(idx);
+			}
+			
+			protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+				return new «portClassName»(rcv, name, lid, idx);
 			}
 			
 			«IF conj»
-			// incoming messages
-			«FOR m : pc.getAllIncomingMessages()»
-			«messageSignature(m)»{
-				for (int i=0; i<replication; ++i) {
-					ports.get(i).«messageCall(m)»;
-				}
-			}
-			«ENDFOR»
+				// incoming messages
+				«FOR m : pc.getAllIncomingMessages()»
+					«messageSignature(m)»{
+						for (int i=0; i<getReplication(); ++i) {
+							get(i).«messageCall(m)»;
+						}
+					}
+				«ENDFOR»
 			«ELSE»
-			// outgoing messages
-			«FOR m : pc.getAllOutgoingMessages()»
-			«messageSignature(m)»{
-				for (int i=0; i<replication; ++i) {
-					ports.get(i).«messageCall(m)»;
-				}
-			}
-			«ENDFOR»
+				// outgoing messages
+				«FOR m : pc.getAllOutgoingMessages()»
+					«messageSignature(m)»{
+						for (int i=0; i<getReplication(); ++i) {
+							get(i).«messageCall(m)»;
+						}
+					}
+				«ENDFOR»
 			«ENDIF»
 		}
 		

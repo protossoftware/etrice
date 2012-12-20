@@ -94,16 +94,16 @@ public class SubSystemClassGen {
         boolean _hasVariableService = this.dataConfigExt.hasVariableService(comp);
         if (_hasVariableService) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
+          _builder.newLine();
         }
       }
-      _builder.newLineIfNotEmpty();
+      _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
+      _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.MessageService;");
       _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;");
+      _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTServices;");
-      _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
-      _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
       _builder.newLine();
@@ -135,6 +135,8 @@ public class SubSystemClassGen {
       _builder.append(" extends SubSystemClassBase {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("public final int THREAD__DEFAULT = 0;");
       _builder.newLine();
       {
@@ -164,10 +166,10 @@ public class SubSystemClassGen {
       _builder.append("public ");
       String _name_2 = cc.getName();
       _builder.append(_name_2, "	");
-      _builder.append("(String name) {");
+      _builder.append("(IRTObject parent, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("super(name);");
+      _builder.append("super(parent, name);");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -189,28 +191,28 @@ public class SubSystemClassGen {
       _builder.append("@Override\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public void instantiateMessageServices(){");
+      _builder.append("public void instantiateMessageServices() {");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(THREAD__DEFAULT, 0, 0),\"MessageService_Main\"));");
+      _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD__DEFAULT, \"MessageService_Main\"));");
       _builder.newLine();
       {
         EList<LogicalThread> _threads_1 = cc.getThreads();
         for(final LogicalThread thread_1 : _threads_1) {
           _builder.append("\t\t");
-          _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, ");
+          _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, ");
           String _threadId_1 = this.getThreadId(thread_1);
           _builder.append(_threadId_1, "		");
-          _builder.append(", 0),\"MessageService_");
+          _builder.append(", \"MessageService_");
           String _name_3 = thread_1.getName();
           _builder.append(_name_3, "		");
           _builder.append("\" /*, thread_prio */));");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
@@ -218,42 +220,35 @@ public class SubSystemClassGen {
       _builder.append("@Override");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public void instantiateActors(){");
+      _builder.append("public void instantiateActors() {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("// all addresses");
+      _builder.append("MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("// Addresses for the Subsystem Systemport");
+      _builder.append("// thread mappings");
       _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("msgSvcCtrl.addPathToThread(\"");
+      String _path = comp.getPath();
+      _builder.append(_path, "		");
+      _builder.append("\", THREAD__DEFAULT);");
+      _builder.newLineIfNotEmpty();
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t\t");
-          _builder.append("Address addr_item_SystemPort_");
-          EList<ActorInstance> _allContainedInstances_1 = comp.getAllContainedInstances();
-          int _indexOf = _allContainedInstances_1.indexOf(ai);
-          _builder.append(_indexOf, "		");
-          _builder.append(" = getFreeAddress(THREAD__DEFAULT);");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t\t");
-      _builder.newLine();
-      {
-        EList<ActorInstance> _allContainedInstances_2 = comp.getAllContainedInstances();
-        for(final ActorInstance ai_1 : _allContainedInstances_2) {
-          _builder.append("\t\t");
           String _xifexpression = null;
-          int _threadId_2 = ai_1.getThreadId();
+          int _threadId_2 = ai.getThreadId();
           boolean _equals = (_threadId_2 == 0);
           if (_equals) {
             _xifexpression = "THREAD__DEFAULT";
           } else {
             EList<LogicalThread> _threads_2 = cc.getThreads();
-            int _threadId_3 = ai_1.getThreadId();
+            int _threadId_3 = ai.getThreadId();
             int _minus = (_threadId_3 - 1);
             LogicalThread _get = _threads_2.get(_minus);
             String _threadId_4 = this.getThreadId(_get);
@@ -262,60 +257,39 @@ public class SubSystemClassGen {
           final String threadId = _xifexpression;
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("// actor instance ");
-          String _path = ai_1.getPath();
-          _builder.append(_path, "		");
-          _builder.append(" itself => Systemport Address");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("Address addr_item_");
-          String _path_1 = ai_1.getPath();
-          String _pathName = this._roomExtensions.getPathName(_path_1);
-          _builder.append(_pathName, "		");
-          _builder.append(" = getFreeAddress(");
+          _builder.append("msgSvcCtrl.addPathToThread(\"");
+          String _path_1 = ai.getPath();
+          _builder.append(_path_1, "		");
+          _builder.append("\", ");
           _builder.append(threadId, "		");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("// interface items of ");
-          String _path_2 = ai_1.getPath();
-          _builder.append(_path_2, "		");
-          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// port to peer port mappings");
+      _builder.newLine();
+      {
+        EList<ActorInstance> _allContainedInstances_1 = comp.getAllContainedInstances();
+        for(final ActorInstance ai_1 : _allContainedInstances_1) {
           {
             EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
             for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
+              _builder.append("\t\t");
+              final String path = pi.getPath();
+              _builder.newLineIfNotEmpty();
               {
-                boolean _isReplicated = pi.isReplicated();
-                if (_isReplicated) {
-                  {
-                    EList<InterfaceItemInstance> _peers = pi.getPeers();
-                    for(final InterfaceItemInstance peer : _peers) {
-                      _builder.append("\t\t");
-                      EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-                      int i = _peers_1.indexOf(peer);
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t\t");
-                      _builder.append("Address addr_item_");
-                      String _path_3 = pi.getPath();
-                      String _pathName_1 = this._roomExtensions.getPathName(_path_3);
-                      _builder.append(_pathName_1, "		");
-                      _builder.append("_");
-                      _builder.append(i, "		");
-                      _builder.append(" = getFreeAddress(");
-                      _builder.append(threadId, "		");
-                      _builder.append(");");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                } else {
+                EList<InterfaceItemInstance> _peers = pi.getPeers();
+                for(final InterfaceItemInstance peer : _peers) {
                   _builder.append("\t\t");
-                  _builder.append("Address addr_item_");
-                  String _path_4 = pi.getPath();
-                  String _pathName_2 = this._roomExtensions.getPathName(_path_4);
-                  _builder.append(_pathName_2, "		");
-                  _builder.append(" = getFreeAddress(");
-                  _builder.append(threadId, "		");
-                  _builder.append(");");
+                  _builder.append("msgSvcCtrl.addPathToPeer(\"");
+                  _builder.append(path, "		");
+                  _builder.append("\", \"");
+                  String _path_2 = peer.getPath();
+                  _builder.append(_path_2, "		");
+                  _builder.append("\");");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -329,19 +303,19 @@ public class SubSystemClassGen {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("instances = new ActorClassBase[");
-      EList<ActorInstance> _allContainedInstances_3 = comp.getAllContainedInstances();
-      int _size = _allContainedInstances_3.size();
+      EList<ActorInstance> _allContainedInstances_2 = comp.getAllContainedInstances();
+      int _size = _allContainedInstances_2.size();
       _builder.append(_size, "		");
       _builder.append("];");
       _builder.newLineIfNotEmpty();
       {
-        EList<ActorInstance> _allContainedInstances_4 = comp.getAllContainedInstances();
-        for(final ActorInstance ai_2 : _allContainedInstances_4) {
+        EList<ActorInstance> _allContainedInstances_3 = comp.getAllContainedInstances();
+        for(final ActorInstance ai_2 : _allContainedInstances_3) {
           _builder.append("\t\t");
           _builder.append("instances[");
-          EList<ActorInstance> _allContainedInstances_5 = comp.getAllContainedInstances();
-          int _indexOf_1 = _allContainedInstances_5.indexOf(ai_2);
-          _builder.append(_indexOf_1, "		");
+          EList<ActorInstance> _allContainedInstances_4 = comp.getAllContainedInstances();
+          int _indexOf = _allContainedInstances_4.indexOf(ai_2);
+          _builder.append(_indexOf, "		");
           _builder.append("] = new ");
           ActorClass _actorClass = ai_2.getActorClass();
           String _name_4 = _actorClass.getName();
@@ -359,10 +333,10 @@ public class SubSystemClassGen {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("instances[");
-              EList<ActorInstance> _allContainedInstances_6 = comp.getAllContainedInstances();
+              EList<ActorInstance> _allContainedInstances_5 = comp.getAllContainedInstances();
               EObject _eContainer_1 = ai_2.eContainer();
-              int _indexOf_2 = _allContainedInstances_6.indexOf(_eContainer_1);
-              _builder.append(_indexOf_2, "			");
+              int _indexOf_1 = _allContainedInstances_5.indexOf(_eContainer_1);
+              _builder.append(_indexOf_1, "			");
               _builder.append("],");
               _builder.newLineIfNotEmpty();
             }
@@ -372,230 +346,21 @@ public class SubSystemClassGen {
           _builder.append("\"");
           String _name_5 = ai_2.getName();
           _builder.append(_name_5, "			");
-          _builder.append("\",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// own interface item addresses");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("new Address[][] {{addr_item_");
-          String _path_5 = ai_2.getPath();
-          String _pathName_3 = this._roomExtensions.getPathName(_path_5);
-          _builder.append(_pathName_3, "			");
-          _builder.append("}");
-          {
-            EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai_2.getOrderedIfItemInstances();
-            boolean _isEmpty = _orderedIfItemInstances_1.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              _builder.append(",");
-            }
-          }
+          _builder.append("\"");
           _builder.newLineIfNotEmpty();
           {
-            EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
-            boolean _hasElements = false;
-            for(final InterfaceItemInstance pi_1 : _orderedIfItemInstances_2) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(",", "				");
-              }
-              {
-                boolean _isReplicated_1 = pi_1.isReplicated();
-                if (_isReplicated_1) {
-                  {
-                    EList<InterfaceItemInstance> _peers_2 = pi_1.getPeers();
-                    boolean _isEmpty_1 = _peers_2.isEmpty();
-                    if (_isEmpty_1) {
-                      _builder.append("\t\t");
-                      _builder.append("\t\t");
-                      _builder.append("null");
-                      _builder.newLine();
-                    } else {
-                      _builder.append("\t\t");
-                      _builder.append("\t\t");
-                      _builder.append("{");
-                      _builder.newLine();
-                      {
-                        EList<InterfaceItemInstance> _peers_3 = pi_1.getPeers();
-                        boolean _hasElements_1 = false;
-                        for(final InterfaceItemInstance peer_1 : _peers_3) {
-                          if (!_hasElements_1) {
-                            _hasElements_1 = true;
-                          } else {
-                            _builder.appendImmediate(",", "					");
-                          }
-                          _builder.append("\t\t");
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("addr_item_");
-                          String _path_6 = pi_1.getPath();
-                          String _pathName_4 = this._roomExtensions.getPathName(_path_6);
-                          _builder.append(_pathName_4, "					");
-                          _builder.append("_");
-                          EList<InterfaceItemInstance> _peers_4 = pi_1.getPeers();
-                          int _indexOf_3 = _peers_4.indexOf(peer_1);
-                          _builder.append(_indexOf_3, "					");
-                          _builder.newLineIfNotEmpty();
-                        }
-                      }
-                      _builder.append("\t\t");
-                      _builder.append("\t\t");
-                      _builder.append("}");
-                      _builder.newLine();
-                    }
-                  }
-                } else {
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("{");
-                  _builder.newLine();
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("\t");
-                  _builder.append("addr_item_");
-                  String _path_7 = pi_1.getPath();
-                  String _pathName_5 = this._roomExtensions.getPathName(_path_7);
-                  _builder.append(_pathName_5, "					");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("},");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// peer interface item addresses");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("new Address[][] {{addr_item_SystemPort_");
-          EList<ActorInstance> _allContainedInstances_7 = comp.getAllContainedInstances();
-          int _indexOf_4 = _allContainedInstances_7.indexOf(ai_2);
-          _builder.append(_indexOf_4, "			");
-          _builder.append("}");
-          {
-            EList<InterfaceItemInstance> _orderedIfItemInstances_3 = ai_2.getOrderedIfItemInstances();
-            boolean _isEmpty_2 = _orderedIfItemInstances_3.isEmpty();
-            boolean _not_1 = (!_isEmpty_2);
-            if (_not_1) {
-              _builder.append(",");
-            }
-          }
-          _builder.newLineIfNotEmpty();
-          {
-            EList<InterfaceItemInstance> _orderedIfItemInstances_4 = ai_2.getOrderedIfItemInstances();
-            boolean _hasElements_2 = false;
-            for(final InterfaceItemInstance pi_2 : _orderedIfItemInstances_4) {
-              if (!_hasElements_2) {
-                _hasElements_2 = true;
-              } else {
-                _builder.appendImmediate(",", "				");
-              }
-              {
-                boolean _and = false;
-                boolean _isReplicated_2 = pi_2.isReplicated();
-                if (!_isReplicated_2) {
-                  _and = false;
-                } else {
-                  EList<InterfaceItemInstance> _peers_5 = pi_2.getPeers();
-                  boolean _isEmpty_3 = _peers_5.isEmpty();
-                  _and = (_isReplicated_2 && _isEmpty_3);
-                }
-                if (_and) {
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("null");
-                  _builder.newLine();
-                } else {
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("{");
-                  _builder.newLine();
-                  {
-                    EList<InterfaceItemInstance> _peers_6 = pi_2.getPeers();
-                    boolean _isEmpty_4 = _peers_6.isEmpty();
-                    if (_isEmpty_4) {
-                      _builder.append("\t\t");
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("null");
-                      _builder.newLine();
-                    } else {
-                      {
-                        EList<InterfaceItemInstance> _peers_7 = pi_2.getPeers();
-                        boolean _hasElements_3 = false;
-                        for(final InterfaceItemInstance pp : _peers_7) {
-                          if (!_hasElements_3) {
-                            _hasElements_3 = true;
-                          } else {
-                            _builder.appendImmediate(",", "					");
-                          }
-                          {
-                            boolean _isReplicated_3 = pp.isReplicated();
-                            if (_isReplicated_3) {
-                              _builder.append("\t\t");
-                              _builder.append("\t\t");
-                              _builder.append("\t");
-                              _builder.append("addr_item_");
-                              String _path_8 = pp.getPath();
-                              String _pathName_6 = this._roomExtensions.getPathName(_path_8);
-                              _builder.append(_pathName_6, "					");
-                              _builder.append("_");
-                              EList<InterfaceItemInstance> _peers_8 = pp.getPeers();
-                              int _indexOf_5 = _peers_8.indexOf(pi_2);
-                              _builder.append(_indexOf_5, "					");
-                              _builder.newLineIfNotEmpty();
-                            } else {
-                              _builder.append("\t\t");
-                              _builder.append("\t\t");
-                              _builder.append("\t");
-                              _builder.append("addr_item_");
-                              String _path_9 = pp.getPath();
-                              String _pathName_7 = this._roomExtensions.getPathName(_path_9);
-                              _builder.append(_pathName_7, "					");
-                              _builder.newLineIfNotEmpty();
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          {
-            boolean _and_1 = false;
+            boolean _and = false;
             List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ai_2);
-            boolean _isEmpty_5 = _dynConfigReadAttributes.isEmpty();
-            if (!_isEmpty_5) {
-              _and_1 = false;
+            boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
+            if (!_isEmpty) {
+              _and = false;
             } else {
               List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ai_2);
-              boolean _isEmpty_6 = _dynConfigWriteAttributes.isEmpty();
-              _and_1 = (_isEmpty_5 && _isEmpty_6);
+              boolean _isEmpty_1 = _dynConfigWriteAttributes.isEmpty();
+              _and = (_isEmpty && _isEmpty_1);
             }
-            boolean _not_2 = (!_and_1);
-            if (_not_2) {
+            boolean _not = (!_and);
+            if (_not) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append(", variableService");
@@ -613,8 +378,8 @@ public class SubSystemClassGen {
       _builder.append("// apply instance attribute configurations");
       _builder.newLine();
       {
-        EList<ActorInstance> _allContainedInstances_8 = comp.getAllContainedInstances();
-        for(final ActorInstance ai_3 : _allContainedInstances_8) {
+        EList<ActorInstance> _allContainedInstances_6 = comp.getAllContainedInstances();
+        for(final ActorInstance ai_3 : _allContainedInstances_6) {
           _builder.append("\t\t");
           final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_3, "inst");
           _builder.newLineIfNotEmpty();
@@ -635,9 +400,9 @@ public class SubSystemClassGen {
               String _name_7 = _actorClass_2.getName();
               _builder.append(_name_7, "			");
               _builder.append(") instances[");
-              EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
-              int _indexOf_6 = _allContainedInstances_9.indexOf(ai_3);
-              _builder.append(_indexOf_6, "			");
+              EList<ActorInstance> _allContainedInstances_7 = comp.getAllContainedInstances();
+              int _indexOf_2 = _allContainedInstances_7.indexOf(ai_3);
+              _builder.append(_indexOf_2, "			");
               _builder.append("];");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -651,69 +416,7 @@ public class SubSystemClassGen {
           }
         }
       }
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// create the subsystem system port\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, \"RTSystemPort\",");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("0, //local ID");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("// own addresses");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("new Address[]{");
-      _builder.newLine();
-      {
-        EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
-        boolean _hasElements_4 = false;
-        for(final ActorInstance ai_4 : _allContainedInstances_10) {
-          if (!_hasElements_4) {
-            _hasElements_4 = true;
-          } else {
-            _builder.appendImmediate(",", "					");
-          }
-          _builder.append("\t\t\t\t\t");
-          _builder.append("addr_item_SystemPort_");
-          EList<ActorInstance> _allContainedInstances_11 = comp.getAllContainedInstances();
-          int _indexOf_7 = _allContainedInstances_11.indexOf(ai_4);
-          _builder.append(_indexOf_7, "					");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t\t\t\t");
-      _builder.append("},");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("// peer addresses");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("new Address[]{");
-      _builder.newLine();
-      {
-        EList<ActorInstance> _allContainedInstances_12 = comp.getAllContainedInstances();
-        boolean _hasElements_5 = false;
-        for(final ActorInstance ai_5 : _allContainedInstances_12) {
-          if (!_hasElements_5) {
-            _hasElements_5 = true;
-          } else {
-            _builder.appendImmediate(",", "					");
-          }
-          _builder.append("\t\t\t\t\t");
-          _builder.append("addr_item_");
-          String _path_10 = ai_5.getPath();
-          String _pathName_8 = this._roomExtensions.getPathName(_path_10);
-          _builder.append(_pathName_8, "					");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t\t\t\t");
-      _builder.append("});");
-      _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
@@ -721,64 +424,64 @@ public class SubSystemClassGen {
       {
         boolean _hasVariableService_1 = this.dataConfigExt.hasVariableService(comp);
         if (_hasVariableService_1) {
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("private VariableService variableService;");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("@Override");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("public void init(){");
       _builder.newLine();
       {
         boolean _hasVariableService_2 = this.dataConfigExt.hasVariableService(comp);
         if (_hasVariableService_2) {
-          _builder.append("\t\t\t");
+          _builder.append("\t\t");
           _builder.append("variableService = new ");
           String _name_8 = cc.getName();
-          _builder.append(_name_8, "			");
+          _builder.append(_name_8, "		");
           _builder.append("VariableService(this);");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("super.init();");
       _builder.newLine();
       {
         boolean _hasVariableService_3 = this.dataConfigExt.hasVariableService(comp);
         if (_hasVariableService_3) {
-          _builder.append("\t\t\t");
+          _builder.append("\t\t");
           _builder.append("variableService.init();");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.newLine();
       _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("@Override");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("public void stop(){");
       _builder.newLine();
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("super.stop();");
       _builder.newLine();
       {
         boolean _hasVariableService_4 = this.dataConfigExt.hasVariableService(comp);
         if (_hasVariableService_4) {
-          _builder.append("\t\t\t");
+          _builder.append("\t\t");
           _builder.append("variableService.stop();");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t\t");

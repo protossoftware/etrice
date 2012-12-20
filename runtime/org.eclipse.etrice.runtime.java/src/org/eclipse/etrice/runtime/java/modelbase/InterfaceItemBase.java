@@ -40,7 +40,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 		int thread = RTServices.getInstance().getMsgSvcCtrl().getThreadForPath(getParent().getInstancePath());
 		if (thread>=0) {
 			MessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
-			Address addr = msgSvc.getAddress();
+			Address addr = msgSvc.getFreeAddress();
 			setAddress(addr);
 			
 			this.ownMsgReceiver = msgSvc;

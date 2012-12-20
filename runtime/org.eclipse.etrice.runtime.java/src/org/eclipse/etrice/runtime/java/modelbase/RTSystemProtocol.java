@@ -31,6 +31,8 @@ public class RTSystemProtocol {
 			
 			// since we have no mapping for the system ports we connect them directly here
 			IRTObject root = getRoot();
+			if (root instanceof RTSystem)
+				root = root.getChildren().get(0);
 			IRTObject sysport = root.getChild(RT_SYSTEM_PORT_NAME);
 			if (sysport!=null) {
 				InterfaceItemBase peer = ((IReplicatedInterfaceItem) sysport).createSubInterfaceItem();
