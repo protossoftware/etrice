@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637" moduleId="org.eclipse.cdt.core.settings" name="Debug">
@@ -51,9 +49,19 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.278235928" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base"/>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637.91518658" name="/" resourcePath="src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.lib.debug.2014762902" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.lib.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug.554229249" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug.806687472"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug.2115657260" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug.1896612237"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug.263513205" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug.1813889263"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1485555154" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1185604346"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.base.333821521" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.base.597146923"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.102741495" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.278235928"/>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
 						<entry excluding="test|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
