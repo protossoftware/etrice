@@ -77,16 +77,16 @@ public class ATcpClient extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public ATcpClient(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public ATcpClient(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("ATcpClient");
 		
 		// initialize attributes
 		this.setLastError(0);
 
 		// own ports
-		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
-		PayloadPort = new PTcpPayloadPort(this, "PayloadPort", IFITEM_PayloadPort, 0, port_addr[IFITEM_PayloadPort][0], peer_addr[IFITEM_PayloadPort][0]); 
+		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort); 
+		PayloadPort = new PTcpPayloadPort(this, "PayloadPort", IFITEM_PayloadPort); 
 		
 		// own saps
 		
@@ -155,7 +155,6 @@ public class ATcpClient extends ActorClassBase {
 	
 	private void setState(int new_state) {
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}

@@ -1,10 +1,12 @@
 package org.eclipse.etrice.modellib.Socket;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -39,11 +41,11 @@ public class PSocket {
 	// port class
 	static public class PSocketPort extends PortBase {
 		// constructors
-		public PSocketPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PSocketPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PSocketPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PSocketPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -51,9 +53,7 @@ public class PSocket {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -86,56 +86,52 @@ public class PSocket {
 	}
 	
 	// replicated port class
-	static public class PSocketReplPort {
-		private ArrayList<PSocketPort> ports;
-		private int replication;
+	static public class PSocketReplPort extends ReplicatedPortBase {
 	
-		public PSocketReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PSocket.PSocketPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PSocketPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PSocketReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PSocketPort get(int i) {
-			return ports.get(i);
+		public PSocketPort get(int idx) {
+			return (PSocketPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PSocketPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void connected(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).connected();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).connected();
 			}
 		}
 		public void disconnected(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).disconnected();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).disconnected();
 			}
 		}
 		public void receivedData(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).receivedData();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).receivedData();
 			}
 		}
 		public void sentData(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).sentData();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).sentData();
 			}
 		}
 		public void error(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).error();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).error();
 			}
 		}
 	}
@@ -144,11 +140,11 @@ public class PSocket {
 	// port class
 	static public class PSocketConjPort extends PortBase {
 		// constructors
-		public PSocketConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PSocketConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PSocketConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PSocketConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -156,9 +152,7 @@ public class PSocket {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -189,46 +183,42 @@ public class PSocket {
 	}
 	
 	// replicated port class
-	static public class PSocketConjReplPort {
-		private ArrayList<PSocketConjPort> ports;
-		private int replication;
+	static public class PSocketConjReplPort extends ReplicatedPortBase {
 	
-		public PSocketConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PSocket.PSocketConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PSocketConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PSocketConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PSocketConjPort get(int i) {
-			return ports.get(i);
+		public PSocketConjPort get(int idx) {
+			return (PSocketConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PSocketConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void connect(DSocketConfiguration config){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).connect( config);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).connect( config);
 			}
 		}
 		public void disconnect(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).disconnect();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).disconnect();
 			}
 		}
 		public void sendData(DSocketData data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).sendData( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).sendData( data);
 			}
 		}
 	}

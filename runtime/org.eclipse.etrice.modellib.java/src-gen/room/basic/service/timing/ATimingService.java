@@ -45,8 +45,8 @@ public class ATimingService extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public ATimingService(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public ATimingService(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("ATimingService");
 		
 		// initialize attributes
@@ -56,7 +56,7 @@ public class ATimingService extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-		timer = new PTimerReplPort(this, "timer", IFITEM_timer, port_addr[IFITEM_timer], peer_addr[IFITEM_timer]); 
+		timer = new PTimerReplPort(this, "timer", IFITEM_timer); 
 	}
 
 	
@@ -105,7 +105,6 @@ public class ATimingService extends ActorClassBase {
 	
 	private void setState(int new_state) {
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}

@@ -28,19 +28,18 @@ public class MrPongActor1 extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_PingPongPort = 1;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public MrPongActor1(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public MrPongActor1(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("MrPongActor1");
 		
 		// initialize attributes
 
 		// own ports
-		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort, 0, port_addr[IFITEM_PingPongPort][0], peer_addr[IFITEM_PingPongPort][0]); 
+		PingPongPort = new PingPongProtocolPort(this, "PingPongPort", IFITEM_PingPongPort); 
 		
 		// own saps
 		
@@ -72,7 +71,6 @@ public class MrPongActor1 extends ActorClassBase {
 	public void destroy(){
 	}
 
-	
 	/* state IDs */
 	public static final int STATE_waitForPing = 2;
 	
@@ -94,7 +92,8 @@ public class MrPongActor1 extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
@@ -183,7 +182,7 @@ public class MrPongActor1 extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_waitForPing:
 					switch(trigger) {
 						case TRIG_PingPongPort__ping:
@@ -197,7 +196,7 @@ public class MrPongActor1 extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

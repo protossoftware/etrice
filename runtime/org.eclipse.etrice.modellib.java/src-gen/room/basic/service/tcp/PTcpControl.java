@@ -1,10 +1,12 @@
 package room.basic.service.tcp;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -35,11 +37,11 @@ public class PTcpControl {
 	// port class
 	static public class PTcpControlPort extends PortBase {
 		// constructors
-		public PTcpControlPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTcpControlPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTcpControlPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTcpControlPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -47,9 +49,7 @@ public class PTcpControl {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -70,41 +70,37 @@ public class PTcpControl {
 	}
 	
 	// replicated port class
-	static public class PTcpControlReplPort {
-		private ArrayList<PTcpControlPort> ports;
-		private int replication;
+	static public class PTcpControlReplPort extends ReplicatedPortBase {
 	
-		public PTcpControlReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpControl.PTcpControlPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpControlPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTcpControlReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTcpControlPort get(int i) {
-			return ports.get(i);
+		public PTcpControlPort get(int idx) {
+			return (PTcpControlPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTcpControlPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void established(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).established();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).established();
 			}
 		}
 		public void error(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).error();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).error();
 			}
 		}
 	}
@@ -113,11 +109,11 @@ public class PTcpControl {
 	// port class
 	static public class PTcpControlConjPort extends PortBase {
 		// constructors
-		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTcpControlConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTcpControlConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -125,9 +121,7 @@ public class PTcpControl {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -151,41 +145,37 @@ public class PTcpControl {
 	}
 	
 	// replicated port class
-	static public class PTcpControlConjReplPort {
-		private ArrayList<PTcpControlConjPort> ports;
-		private int replication;
+	static public class PTcpControlConjReplPort extends ReplicatedPortBase {
 	
-		public PTcpControlConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpControl.PTcpControlConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpControlConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTcpControlConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTcpControlConjPort get(int i) {
-			return ports.get(i);
+		public PTcpControlConjPort get(int idx) {
+			return (PTcpControlConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTcpControlConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void open(DTcpControl data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).open( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).open( data);
 			}
 		}
 		public void close(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).close();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).close();
 			}
 		}
 	}

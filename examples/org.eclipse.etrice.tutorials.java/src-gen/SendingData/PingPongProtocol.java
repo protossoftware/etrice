@@ -1,11 +1,14 @@
 package SendingData;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -35,12 +38,11 @@ public class PingPongProtocol {
 	// port class
 	static public class PingPongProtocolPort extends PortBase {
 		// constructors
-		public PingPongProtocolPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PingPongProtocolPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PingPongProtocolPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PingPongProtocolPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -49,9 +51,7 @@ public class PingPongProtocol {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -65,8 +65,8 @@ public class PingPongProtocol {
 		
 		// sent messages
 		public void pong(DemoData data) {
-			if (messageStrings[ OUT_pong] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
+			if (messageStrings[ OUT_pong] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pong]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pong, data.deepCopy()));
@@ -75,8 +75,8 @@ public class PingPongProtocol {
 			pong(new DemoData(int32Val, int8Array, float64Val, stringVal));
 		}
 		public void pongSimple(int data) {
-			if (messageStrings[ OUT_pongSimple] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
+			if (messageStrings[ OUT_pongSimple] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_pongSimple]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_pongSimple, data));
@@ -84,41 +84,37 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolReplPort {
-		private ArrayList<PingPongProtocolPort> ports;
-		private int replication;
+	static public class PingPongProtocolReplPort extends ReplicatedPortBase {
 	
-		public PingPongProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PingPongProtocol.PingPongProtocolPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PingPongProtocolPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PingPongProtocolReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PingPongProtocolPort get(int i) {
-			return ports.get(i);
+		public PingPongProtocolPort get(int idx) {
+			return (PingPongProtocolPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PingPongProtocolPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void pong(DemoData data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).pong( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).pong( data);
 			}
 		}
 		public void pongSimple(int data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).pongSimple( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).pongSimple( data);
 			}
 		}
 	}
@@ -127,12 +123,11 @@ public class PingPongProtocol {
 	// port class
 	static public class PingPongProtocolConjPort extends PortBase {
 		// constructors
-		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PingPongProtocolConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -141,9 +136,7 @@ public class PingPongProtocol {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -157,8 +150,8 @@ public class PingPongProtocol {
 		
 		// sent messages
 		public void ping(DemoData data) {
-			if (messageStrings[ IN_ping] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
+			if (messageStrings[ IN_ping] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_ping]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_ping, data.deepCopy()));
@@ -167,8 +160,8 @@ public class PingPongProtocol {
 			ping(new DemoData(int32Val, int8Array, float64Val, stringVal));
 		}
 		public void pingSimple(int data) {
-			if (messageStrings[ IN_pingSimple] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
+			if (messageStrings[ IN_pingSimple] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_pingSimple]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_pingSimple, data));
@@ -176,41 +169,37 @@ public class PingPongProtocol {
 	}
 	
 	// replicated port class
-	static public class PingPongProtocolConjReplPort {
-		private ArrayList<PingPongProtocolConjPort> ports;
-		private int replication;
+	static public class PingPongProtocolConjReplPort extends ReplicatedPortBase {
 	
-		public PingPongProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PingPongProtocol.PingPongProtocolConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PingPongProtocolConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PingPongProtocolConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PingPongProtocolConjPort get(int i) {
-			return ports.get(i);
+		public PingPongProtocolConjPort get(int idx) {
+			return (PingPongProtocolConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PingPongProtocolConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void ping(DemoData data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).ping( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).ping( data);
 			}
 		}
 		public void pingSimple(int data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).pingSimple( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).pingSimple( data);
 			}
 		}
 	}

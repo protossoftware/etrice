@@ -1,10 +1,12 @@
 package room.basic.service.timing;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 /*--------------------- begin user code ---------------------*/
@@ -73,11 +75,11 @@ public class PTimer {
 						public TimerTask getTask() { return task; }
 		/*--------------------- end user code ---------------------*/
 		// constructors
-		public PTimerPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTimerPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTimerPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTimerPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			// initialize attributes
 		}
 	
@@ -86,9 +88,7 @@ public class PTimer {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					switch (msg.getEvtId()) {
 						case IN_internalStartTimer:
 						{
@@ -146,41 +146,37 @@ public class PTimer {
 	}
 	
 	// replicated port class
-	static public class PTimerReplPort {
-		private ArrayList<PTimerPort> ports;
-		private int replication;
+	static public class PTimerReplPort extends ReplicatedPortBase {
 	
-		public PTimerReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTimer.PTimerPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTimerPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTimerReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTimerPort get(int i) {
-			return ports.get(i);
+		public PTimerPort get(int idx) {
+			return (PTimerPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTimerPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void timeout(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).timeout();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).timeout();
 			}
 		}
 		private void internalTimeout(TimerData td){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalTimeout( td);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).internalTimeout( td);
 			}
 		}
 	}
@@ -193,11 +189,11 @@ public class PTimer {
 					private boolean active = false;
 		/*--------------------- end user code ---------------------*/
 		// constructors
-		public PTimerConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTimerConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTimerConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTimerConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			// initialize attributes
 		}
 	
@@ -206,9 +202,7 @@ public class PTimer {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					switch (msg.getEvtId()) {
 						case OUT_internalTimeout:
 						{
@@ -276,46 +270,42 @@ public class PTimer {
 	}
 	
 	// replicated port class
-	static public class PTimerConjReplPort {
-		private ArrayList<PTimerConjPort> ports;
-		private int replication;
+	static public class PTimerConjReplPort extends ReplicatedPortBase {
 	
-		public PTimerConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTimer.PTimerConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTimerConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTimerConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTimerConjPort get(int i) {
-			return ports.get(i);
+		public PTimerConjPort get(int idx) {
+			return (PTimerConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTimerConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void kill(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).kill();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).kill();
 			}
 		}
 		private void internalStartTimer(TimerData td){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalStartTimer( td);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).internalStartTimer( td);
 			}
 		}
 		private void internalStartTimeout(TimerData td){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalStartTimeout( td);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).internalStartTimeout( td);
 			}
 		}
 	}

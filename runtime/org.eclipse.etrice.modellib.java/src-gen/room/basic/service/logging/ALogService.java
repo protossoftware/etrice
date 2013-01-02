@@ -48,8 +48,8 @@ public class ALogService extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public ALogService(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public ALogService(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("ALogService");
 		
 		// initialize attributes
@@ -59,7 +59,7 @@ public class ALogService extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-		log = new LogReplPort(this, "log", IFITEM_log, port_addr[IFITEM_log], peer_addr[IFITEM_log]); 
+		log = new LogReplPort(this, "log", IFITEM_log); 
 	}
 
 	
@@ -113,7 +113,6 @@ public class ALogService extends ActorClassBase {
 	
 	private void setState(int new_state) {
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}

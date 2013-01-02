@@ -32,14 +32,14 @@ public class SocketClient extends ActorClassBase {
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public SocketClient(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public SocketClient(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("SocketClient");
 		
 		// initialize attributes
 
 		// own ports
-		fct = new PSocketPort(this, "fct", IFITEM_fct, 0, port_addr[IFITEM_fct][0], peer_addr[IFITEM_fct][0]); 
+		fct = new PSocketPort(this, "fct", IFITEM_fct); 
 		
 		// own saps
 		

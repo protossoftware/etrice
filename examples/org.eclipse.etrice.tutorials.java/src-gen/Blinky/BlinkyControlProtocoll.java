@@ -1,11 +1,14 @@
 package Blinky;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -33,12 +36,11 @@ public class BlinkyControlProtocoll {
 	// port class
 	static public class BlinkyControlProtocollPort extends PortBase {
 		// constructors
-		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public BlinkyControlProtocollPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -47,9 +49,7 @@ public class BlinkyControlProtocoll {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -65,30 +65,26 @@ public class BlinkyControlProtocoll {
 	}
 	
 	// replicated port class
-	static public class BlinkyControlProtocollReplPort {
-		private ArrayList<BlinkyControlProtocollPort> ports;
-		private int replication;
+	static public class BlinkyControlProtocollReplPort extends ReplicatedPortBase {
 	
-		public BlinkyControlProtocollReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<BlinkyControlProtocoll.BlinkyControlProtocollPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new BlinkyControlProtocollPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public BlinkyControlProtocollReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public BlinkyControlProtocollPort get(int i) {
-			return ports.get(i);
+		public BlinkyControlProtocollPort get(int idx) {
+			return (BlinkyControlProtocollPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new BlinkyControlProtocollPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
@@ -98,12 +94,11 @@ public class BlinkyControlProtocoll {
 	// port class
 	static public class BlinkyControlProtocollConjPort extends PortBase {
 		// constructors
-		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public BlinkyControlProtocollConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -112,9 +107,7 @@ public class BlinkyControlProtocoll {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -128,15 +121,15 @@ public class BlinkyControlProtocoll {
 		
 		// sent messages
 		public void start() {
-			if (messageStrings[ IN_start] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_start]);
+			if (messageStrings[ IN_start] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_start]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_start));
 				}
 		public void stop() {
-			if (messageStrings[ IN_stop] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_stop]);
+			if (messageStrings[ IN_stop] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_stop]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_stop));
@@ -144,41 +137,37 @@ public class BlinkyControlProtocoll {
 	}
 	
 	// replicated port class
-	static public class BlinkyControlProtocollConjReplPort {
-		private ArrayList<BlinkyControlProtocollConjPort> ports;
-		private int replication;
+	static public class BlinkyControlProtocollConjReplPort extends ReplicatedPortBase {
 	
-		public BlinkyControlProtocollConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<BlinkyControlProtocoll.BlinkyControlProtocollConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new BlinkyControlProtocollConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public BlinkyControlProtocollConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public BlinkyControlProtocollConjPort get(int i) {
-			return ports.get(i);
+		public BlinkyControlProtocollConjPort get(int idx) {
+			return (BlinkyControlProtocollConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new BlinkyControlProtocollConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void start(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).start();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).start();
 			}
 		}
 		public void stop(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).stop();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).stop();
 			}
 		}
 	}

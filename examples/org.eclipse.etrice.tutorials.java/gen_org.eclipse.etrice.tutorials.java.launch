@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="Debug" value="false"/>
+<booleanAttribute key="GenDocumentation" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="false"/>
+<booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/scratch/PingPong.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/Blinky/Blinky.room}"/>
@@ -11,5 +14,6 @@
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/HelloWorld.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="Verbose" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

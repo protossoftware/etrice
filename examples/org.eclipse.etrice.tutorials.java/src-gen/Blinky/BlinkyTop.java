@@ -25,13 +25,12 @@ public class BlinkyTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public BlinkyTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public BlinkyTop(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("BlinkyTop");
 		
 		// initialize attributes

@@ -25,13 +25,12 @@ public class SendingDataTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public SendingDataTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public SendingDataTop(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("SendingDataTop");
 		
 		// initialize attributes
