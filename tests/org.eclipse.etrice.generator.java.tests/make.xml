@@ -131,13 +131,14 @@
 		</ant>
 	</target>
 
+	<!-- set debug and verbose to on to produce more output -->
 	<target name="logged_compile">
 		<mkdir dir="${bin.path}"/>
 		<javac srcdir="src-gen:src"
 			 destdir="${bin.path}"
 			 classpath="${runtime.path}/bin"
-			 debug="on"
-			 verbose="on"
+			 debug="off"
+			 verbose="off"
 			/>
 	</target>
 	
@@ -158,7 +159,7 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   ChoicePointTest</echo>
-		<echo>start  PingPongThreadTest</echo>
+		<echo>start PingPongThreadTest</echo>
 		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.SubSystem_PingPongRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>

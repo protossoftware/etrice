@@ -343,10 +343,18 @@
 	-->
 	<target name="run" depends="build">
 		<mkdir dir="tmp/log"/>
+		<echo>start HandlerTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
+		<echo>start HandlerTest</echo>
+		<echo>end   ChoicePointTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+		<echo>end   ChoicePointTest</echo>
+		<echo>start SendingDataTestJava</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
+		<echo>end   SendingDataTestJava</echo>
+		<echo>start StaticConfigTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
+		<echo>end   StaticConfigTest</echo>
 	</target>
 	
 	<!--
