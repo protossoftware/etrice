@@ -14,7 +14,9 @@ package org.eclipse.etrice.abstractexec.behavior.tests;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -23,9 +25,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
@@ -34,9 +38,9 @@ import com.google.common.collect.Maps;
 
 /**
  * Base class for tests helps with getting diagnostics from a model.
- *
+ * 
  * @author Henrik Rentz-Reichert initial contribution and API
- *
+ * 
  */
 public class TestBase {
 
@@ -45,20 +49,26 @@ public class TestBase {
 	private HashMap<String, Diagnostic> infoMsg2diagnostic = new HashMap<String, Diagnostic>();
 	private HashMap<String, Diagnostic> warnMsg2diagnostic = new HashMap<String, Diagnostic>();
 	private HashMap<String, Diagnostic> errorMsg2diagnostic = new HashMap<String, Diagnostic>();
+	private HashMap<String, List<AbstractValidationDiagnostic>> issueCode2diagnostic = new HashMap<String, List<AbstractValidationDiagnostic>>();
 
 	protected void prepare(String modelFile) {
 		try {
-			URL modelsDir = Activator.getInstance().getBundle().getEntry("models");
+			URL modelsDir = Activator.getInstance().getBundle()
+					.getEntry("models");
 			URL fileURL = FileLocator.toFileURL(modelsDir);
 			basePath = fileURL.getFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		resource = getResource(modelFile);
 
 		Diagnostic diag = getDiag(resource.getContents().get(0));
 		createMappedDiagnostics(diag);
+	}
+
+	protected RoomModel getRoomModel() {
+		return (RoomModel) resource.getContents().get(0);
 	}
 
 	/**
@@ -82,6 +92,14 @@ public class TestBase {
 		return errorMsg2diagnostic;
 	}
 
+	/**
+	 * 
+	 * @return a map from issueCode to Diagnostic object
+	 */
+	protected HashMap<String, List<AbstractValidationDiagnostic>> getIssueCode2diagnostic() {
+		return issueCode2diagnostic;
+	}
+
 	protected Resource getResource(String modelName) {
 		XtextResourceSet rs = new XtextResourceSet();
 		rs.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
@@ -93,13 +111,20 @@ public class TestBase {
 	protected Diagnostic getDiag(EObject ele) {
 		Map<Object, Object> options = Maps.newHashMap();
 		options.put(CheckMode.KEY, CheckMode.ALL);
-		options.put(CancelableDiagnostician.CANCEL_INDICATOR, CancelIndicator.NullImpl);
-		// disable concrete syntax validation, since a semantic model that has been parsed 
-		// from the concrete syntax always complies with it - otherwise there are parse errors.
-		options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+		options.put(CancelableDiagnostician.CANCEL_INDICATOR,
+				CancelIndicator.NullImpl);
+		// disable concrete syntax validation, since a semantic model that has
+		// been parsed
+		// from the concrete syntax always complies with it - otherwise there
+		// are parse errors.
+		options.put(
+				ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR,
+				Boolean.TRUE);
 		// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-		options.put(EValidator.class, Activator.getInstance().getDiagnostician());
-		return Activator.getInstance().getDiagnostician().validate(ele, options);
+		options.put(EValidator.class, Activator.getInstance()
+				.getDiagnostician());
+		return Activator.getInstance().getDiagnostician()
+				.validate(ele, options);
 	}
 
 	/**
@@ -110,13 +135,22 @@ public class TestBase {
 		for (Diagnostic d : diag.getChildren()) {
 			if ((d.getSeverity() & Diagnostic.INFO) != 0) {
 				infoMsg2diagnostic.put(d.getMessage(), d);
-			}
-			else if ((d.getSeverity() & Diagnostic.WARNING) != 0) {
+			} else if ((d.getSeverity() & Diagnostic.WARNING) != 0) {
 				warnMsg2diagnostic.put(d.getMessage(), d);
-			}
-			else if ((d.getSeverity() & Diagnostic.ERROR) != 0) {
+			} else if ((d.getSeverity() & Diagnostic.ERROR) != 0) {
 				errorMsg2diagnostic.put(d.getMessage(), d);
 			}
+			if (d instanceof AbstractValidationDiagnostic) {
+				AbstractValidationDiagnostic dx = (AbstractValidationDiagnostic) d;
+				List<AbstractValidationDiagnostic> list = issueCode2diagnostic
+						.get(dx.getIssueCode());
+				if (list == null) {
+					list = new ArrayList<AbstractValidationDiagnostic>();
+					issueCode2diagnostic.put(dx.getIssueCode(), list);
+				}
+				list.add(dx);
+			}
+
 		}
 		for (Diagnostic d : diag.getChildren()) {
 			if (!d.getChildren().isEmpty())

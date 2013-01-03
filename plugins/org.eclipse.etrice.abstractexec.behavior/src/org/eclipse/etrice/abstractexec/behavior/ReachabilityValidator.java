@@ -29,6 +29,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 public class ReachabilityValidator implements IRoomValidator {
 
+	public static String DIAG_CODE_UNREACHABLE = "etrice.unreachable";
 	
 	@Override
 	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor) {
@@ -63,7 +64,7 @@ public class ReachabilityValidator implements IRoomValidator {
 							messageAcceptor.acceptWarning(
 									"Unreachable state/point of graph",
 									xpac.getOrig(toCheck).eContainer(), xpac.getOrig(toCheck).eContainingFeature(), idx,
-									"UNREACHABLE", toCheck.getName());
+									DIAG_CODE_UNREACHABLE, toCheck.getName());
 						}
 					}
 				}

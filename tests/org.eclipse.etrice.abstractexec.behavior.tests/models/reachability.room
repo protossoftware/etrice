@@ -1,0 +1,302 @@
+RoomModel Reachability {
+
+	LogicalSystem System_Reachability {
+		SubSystemRef subSystem: SubSystem
+	}
+
+	SubSystemClass SubSystem {
+		ActorRef testee1: Testee_Super_ac
+		ActorRef testee2: Testee_ac
+		LogicalThread dflt_thread
+	}
+
+	ActorClass Testee_Super_ac {
+		Structure {
+			Port p: ReachabilityProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0_1: state01_1 -> tp0_1 of state0_1 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr2_1: state02_1 -> tp1_1 of state0_1 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr3_0: state03_0 -> tp2_0 of state0_1 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr0_0: tp7_0 of state0_1 -> state04_0
+				Transition tr01_1: tp3_1 of state0_1 -> state07_1
+				Transition tr02_1: tp5_1 of state0_1 -> state08_1
+				Transition tr03_1: tp4_1 of state0_1 -> state09_1
+				Transition init: initial -> state_1 { }
+				Transition tr_1: state_1 -> stateA_1 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr0a_1: stateA_1 -> state01_1 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr0b_1: stateA_1 -> state02_1 {
+					triggers {
+						<in2: p>
+					}
+				}
+				Transition tr11_1: state_1 -> state1_1 {
+					triggers {
+						<in2: p>
+					}
+				}
+				Transition trC_0: state_0 -> state2_0 {
+					triggers {
+						<in2: p>
+					}
+				}
+				Transition tr20_1: state_1 -> tp0_1 of state2_0 {
+					triggers {
+						<in3: p>
+					}
+				}
+				Transition tr20_0: tp0_0 of state2_0 -> state20_0
+				Transition tr21_0: state2_0 -> state21_0 {
+					triggers {
+						<in3: p>
+					}
+				}
+				Transition tr22_1: tp1_1 of state2_0 -> state21_1
+				Transition trx_0: state_0 -> state03_0 {
+					triggers {
+						<in1: p>
+					}
+				}
+				Transition tr5_0: tp8_0 of state0_1 -> state04_0
+				Transition tr6_0: tp6_0 of state0_1 -> state04_0
+				Transition tr30_1: state_1 -> state3_1 {
+					triggers {
+						<in4: p>
+					}
+				}
+				Transition tr31_0: state_0 -> tp0_0 of state3_1 {
+					triggers {
+						<in3: p>
+					}
+				}
+				Transition tr31_1: state3_1 -> state1_1 {
+					triggers {
+						<in4: p>
+					}
+				}
+				State state0_1 {
+					subgraph {
+						Transition tr0_1: my tp0_1 -> state00_1
+						Transition tr1_1: my tp1_1 -> state01_1
+						Transition tr2_0: my tp2_0 -> state03_0
+						Transition tr6_1: state00_1 -> my tp3_1 {
+							triggers {
+								<in1: p>
+							}
+						}
+						Transition tr3_0: state03_0 -> my tp6_0 {
+							triggers {
+								<in1: p>
+							}
+						}
+						Transition tr4zzz_0: state02_0 -> my tp7_0 {
+							triggers {
+								<in1: p>
+							}
+						}
+						Transition tr5_0: state02_0 -> my tp5_1 {
+							triggers {
+								<in2: p>
+							}
+						}
+						Transition tr4_1: tp0_1 of state01_1 -> my tp4_1
+						Transition tr2_1: state01_1 -> my tp5_1 {
+							triggers {
+								<in1: p>
+							}
+						}
+						Transition tr8_0: state01_1 -> my tp8_0 {
+							triggers {
+								<in2: p>
+							}
+						}
+						EntryPoint tp0_1
+						EntryPoint tp1_1
+						EntryPoint tp2_0
+						ExitPoint tp3_1
+						ExitPoint tp4_1
+						ExitPoint tp5_1
+						ExitPoint tp6_0
+						ExitPoint tp7_0
+						ExitPoint tp8_0
+						State state00_1 {
+							subgraph {
+								Transition init: initial -> state0_1 { }
+								State state0_1
+							}
+						}
+						State state01_1 {
+							subgraph {
+								Transition init: initial -> tp0_1 of state0_1 { }
+								Transition tr0_1: tp1_1 of state0_1 -> my tp0_1
+								Transition tr2_1: state0_1 -> state0_1 {
+									triggers {
+										<in2: p>
+									}
+								}
+								ExitPoint tp0_1
+								State state0_1 {
+									subgraph {
+										Transition tr0_1: my tp0_1 -> cp cp0_1
+										Transition tr3_1: cp cp0_1 -> state0_1
+										Transition tr4_1: cp cp0_1 -> state1_1 {
+											cond {
+												"true"
+											}
+										}
+										Transition tr2_1: state1_1 -> my tp1_1 {
+											triggers {
+												<in1: p>
+											}
+										}
+										Transition tr1_1: state0_1 -> my tp1_1 {
+											triggers {
+												<in2: p>
+											}
+										}
+										ChoicePoint cp0_1
+										EntryPoint tp0_1
+										ExitPoint tp1_1
+										State state0_1
+										State state1_1
+									}
+								}
+							}
+						}
+						State state03_0
+						State state02_0
+					}
+				}
+				State state01_1
+				State state02_1
+				State state03_0
+				State state04_0
+				State state07_1
+				State state08_1
+				State state09_1
+				State state_1
+				State stateA_1
+				State state1_1
+				State state_0
+				State state2_0 {
+					subgraph {
+						Transition init: initial -> state0_0 { }
+						Transition tr0_1: my tp0_1 -> state0_1
+						Transition tr1_1: state0_1 -> my tp1_1 {
+							triggers {
+								<in3: p>
+							}
+						}
+						Transition tr1_0: state0_0 -> my tp0_0 {
+							triggers {
+								<in1: p>
+							}
+						}
+						ExitPoint tp0_0
+						EntryPoint tp0_1
+						ExitPoint tp1_1
+						State state0_0
+						State state0_1
+					}
+				}
+				State state20_0
+				State state21_0
+				State state21_1
+				State state3_1 {
+					subgraph {
+						Transition init: initial -> state30_1 { }
+						Transition tr30_0: my tp0_0 -> state32_0
+						Transition tr0_1: state31_1 -> state31_1 {
+							triggers {
+								<in2: p>
+							}
+						}
+						Transition tr1_1: state30_1 -> state30_1 {
+							triggers {
+								<in4: p>
+							}
+						}
+						Transition tr2_1: state30_1 -> tp0_1 of state31_1 {
+							triggers {
+								<in1: p>
+							}
+						}
+						EntryPoint tp0_0
+						State state30_1
+						State state31_1 {
+							subgraph {
+								Transition tr0_1: my tp0_1 -> state300_1
+								Transition init: initial -> state301_1 { }
+								EntryPoint tp0_1
+								State state300_1
+								State state301_1
+							}
+						}
+						State state32_0
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Testee_ac extends Testee_Super_ac {
+		Structure { }
+		Behavior {
+			StateMachine {
+				RefinedTransition tr4zzz_0 {
+					action {
+						""
+					}
+				}
+				Transition tr_new_0: state_new1_0 -> state_new2_0 {
+					triggers {
+						<in1: p>
+					}
+				}
+				State state_new1_0
+				State state_new2_0
+				RefinedState state0_1 {
+					subgraph {
+						State state0_new_0
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass ReachabilityProtocol {
+		incoming {
+			Message in1()
+			Message in2()
+			Message in3()
+			Message in4()
+		}
+		outgoing {
+			Message out1()
+			Message out2()
+			Message out3()
+		}
+	}
+
+}
