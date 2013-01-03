@@ -636,33 +636,4 @@ public class ActorClassGen extends GenericActorClassGenerator {
     }
     return _xblockexpression;
   }
-  
-  private StringBuffer genActorArray(final ActorRef sub) {
-    int i = 0;
-    StringBuffer _stringBuffer = new StringBuffer();
-    StringBuffer result = _stringBuffer;
-    int _size = sub.getSize();
-    boolean _lessThan = (i < _size);
-    boolean _while = _lessThan;
-    while (_while) {
-      {
-        ActorClass _type = sub.getType();
-        String _name = _type.getName();
-        String _plus = ("new " + _name);
-        String _plus_1 = (_plus + "(this, \"");
-        String _name_1 = sub.getName();
-        String _plus_2 = (_plus_1 + _name_1);
-        String _plus_3 = (_plus_2 + "_");
-        String _plus_4 = (_plus_3 + Integer.valueOf(i));
-        String _plus_5 = (_plus_4 + "\");\n");
-        result.append(_plus_5);
-        int _plus_6 = (i + 1);
-        i = _plus_6;
-      }
-      int _size_1 = sub.getSize();
-      boolean _lessThan_1 = (i < _size_1);
-      _while = _lessThan_1;
-    }
-    return result;
-  }
 }

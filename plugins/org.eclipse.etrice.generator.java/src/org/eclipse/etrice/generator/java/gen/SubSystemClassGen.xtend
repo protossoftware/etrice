@@ -131,9 +131,6 @@ class SubSystemClassGen {
 						new «sub.type.name»(this, "«sub.name»"); 
 					«ENDIF»
 				«ENDFOR»
-«««				«FOR ai : comp.instances.indexed»
-«««					new «ai.value.actorClass.name»(this, "«ai.value.name»"); 
-«««				«ENDFOR»
 				
 				// apply instance attribute configurations
 				«FOR ai: comp.allContainedInstances»

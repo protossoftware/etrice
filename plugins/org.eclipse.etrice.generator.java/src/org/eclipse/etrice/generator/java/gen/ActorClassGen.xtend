@@ -25,7 +25,6 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.core.room.ActorRef
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -199,15 +198,5 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 		};
 	'''
-	}
-
-	def private genActorArray(ActorRef sub) {
-		var i = 0
-		var result = new StringBuffer()
-		while (i<sub.size) {
-			result.append("new "+sub.type.name+"(this, \""+sub.name+"_"+i+"\");\n")
-			i = i+1
-		}
-		return result
 	}
 }
