@@ -8,6 +8,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -65,12 +66,63 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 		return null;
 	}
 	
+	public SubSystemClassBase getSubSystem() {
+		// the sub system could be cached
+		// but it is rarely used so we just compute it every time
+		IRTObject p = getParent();
+		while (p!=null) {
+			if (p instanceof SubSystemClassBase)
+				return (SubSystemClassBase) p;
+			p = p.getParent();
+		}
+		return null;
+	}
+	
+	public IVariableService getVariableService() {
+		// the variable service could be cached
+		// but variable service operations are costly so it doesn't hurt if we compute it every time
+		SubSystemClassBase ssc = getSubSystem();
+		if (ssc==null)
+			return null;
+		
+		return ssc.getVariableService();
+	}
+	
 	//--------------------- lifecycle functions
-	// automatically generated lifecycle functions
-	public abstract void init();
-	public abstract void start();
-	public abstract void stop();
-	public abstract void destroy();
+	public void init() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).init();
+		}
+		
+		initUser();
+	}
+
+	public void start() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).start();
+		}
+
+		startUser();
+	}
+	
+	public void stop() {
+		stopUser();
+
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).stop();
+		}
+	}
+	
+	public void destroy() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).destroy();
+		}
+	}
+	
 	public abstract void executeInitTransition();
 
 	// not automatically generated lifecycle functions

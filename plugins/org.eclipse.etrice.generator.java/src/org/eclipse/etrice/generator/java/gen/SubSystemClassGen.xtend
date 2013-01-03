@@ -52,12 +52,12 @@ class SubSystemClassGen {
 
 	def generate(Root root, SubSystemInstance comp) {
 		val cc = comp.subSystemClass
+		val models = root.getReferencedModels(cc)
+		
 	'''
 		package «cc.getPackage()»;
 		
-		«IF dataConfigExt.hasVariableService(comp)»
-			import org.eclipse.etrice.runtime.java.config.VariableService;
-		«ENDIF»
+		import org.eclipse.etrice.runtime.java.config.IVariableService;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
 		import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
@@ -66,9 +66,9 @@ class SubSystemClassGen {
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		
-		«var models = root.getReferencedModels(cc)»
-		«FOR model : models»import «model.name».*;«ENDFOR»
-		
+		«FOR model : models»
+			import «model.name».*;
+		«ENDFOR»
 		
 		«cc.userCode(1)»
 		
@@ -120,21 +120,9 @@ class SubSystemClassGen {
 					«ENDFOR»
 				«ENDFOR»
 		
-				// instantiate all actor instances
-				instances = new ActorClassBase[«comp.allContainedInstances.size»];
-				«FOR ai : comp.allContainedInstances»
-					instances[«comp.allContainedInstances.indexOf(ai)»] = new «ai.actorClass.name»(
-						«IF ai.eContainer instanceof SubSystemInstance»
-							this,
-						«ELSE»
-							instances[«comp.allContainedInstances.indexOf(ai.eContainer)»],
-						«ENDIF»
-						"«ai.name»"
-						«IF !(dataConfigExt.getDynConfigReadAttributes(ai).empty && 
-							dataConfigExt.getDynConfigWriteAttributes(ai).empty)»
-							, variableService
-						«ENDIF»
-					); 
+				// sub actors
+				«FOR ai : comp.instances.indexed»
+					new «ai.value.actorClass.name»(this, "«ai.value.name»"); 
 				«ENDFOR»
 				
 				// apply instance attribute configurations
@@ -142,16 +130,14 @@ class SubSystemClassGen {
 					«val cfg = configGenAddon.genActorInstanceConfig(ai, "inst")»
 					«IF cfg.length>0»
 						{
-							«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
-							«cfg»
+							«ai.actorClass.name» inst = («ai.actorClass.name») getObject("«ai.path»");
+							if (inst!=null) {
+								«cfg»
+							}
 						}
 					«ENDIF»
 				«ENDFOR»
 			}
-			
-			«IF dataConfigExt.hasVariableService(comp)»
-				private VariableService variableService;
-			«ENDIF»
 			
 			@Override
 			public void init(){

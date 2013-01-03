@@ -1,5 +1,6 @@
 package PingPong;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
@@ -9,7 +10,6 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 
 import room.basic.service.timing.*;
-
 
 
 public class SubSystem_PingPong extends SubSystemClassBase {
@@ -53,28 +53,12 @@ public class SubSystem_PingPong extends SubSystemClassBase {
 		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/application/MrPong1/PingPongPort", "/System_PingPong/subsystem/application/MrPing/PingPongPort");
 		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/services/timer", "/System_PingPong/subsystem/application/MrPing/timer");
 
-		// instantiate all actor instances
-		instances = new ActorClassBase[4];
-		instances[0] = new PingPongTop(
-			this,
-			"application"
-		); 
-		instances[1] = new MrPingActor(
-			instances[0],
-			"MrPing"
-		); 
-		instances[2] = new MrPongActor1(
-			instances[0],
-			"MrPong1"
-		); 
-		instances[3] = new ATimingService(
-			this,
-			"services"
-		); 
+		// sub actors
+		new PingPongTop(this, "application"); 
+		new ATimingService(this, "services"); 
 		
 		// apply instance attribute configurations
 	}
-	
 	
 	@Override
 	public void init(){

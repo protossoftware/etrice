@@ -25,7 +25,6 @@ public class GuiAdapter extends ActorClassBase {
 	private TrafficLight2 pedLights;
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	protected PedControlProtocolConjPort ControlPort = null;
 	
@@ -55,8 +54,10 @@ public class GuiAdapter extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -67,20 +68,14 @@ public class GuiAdapter extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
 	public void destroy(){
 		GuiAdapter_dtor();
+		super.destroy();
 	}
 
 	/* state IDs */

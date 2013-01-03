@@ -1,5 +1,6 @@
 package SendingData;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
@@ -7,7 +8,6 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-
 
 
 
@@ -45,24 +45,11 @@ public class SendingData_SubSystem extends SubSystemClassBase {
 		msgSvcCtrl.addPathToPeer("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref0/PingPongPort", "/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref1/PingPongPort");
 		msgSvcCtrl.addPathToPeer("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref1/PingPongPort", "/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref0/PingPongPort");
 
-		// instantiate all actor instances
-		instances = new ActorClassBase[3];
-		instances[0] = new SendingDataTop(
-			this,
-			"SendigDataTopRef"
-		); 
-		instances[1] = new MrPing(
-			instances[0],
-			"ref0"
-		); 
-		instances[2] = new MrPong(
-			instances[0],
-			"ref1"
-		); 
+		// sub actors
+		new SendingDataTop(this, "SendigDataTopRef"); 
 		
 		// apply instance attribute configurations
 	}
-	
 	
 	@Override
 	public void init(){

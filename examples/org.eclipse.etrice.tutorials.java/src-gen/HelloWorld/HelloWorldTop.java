@@ -16,7 +16,6 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 public class HelloWorldTop extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -40,8 +39,10 @@ public class HelloWorldTop extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -49,20 +50,11 @@ public class HelloWorldTop extends ActorClassBase {
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_state0 = 2;

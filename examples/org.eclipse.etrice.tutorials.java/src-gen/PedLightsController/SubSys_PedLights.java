@@ -1,5 +1,6 @@
 package PedLightsController;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
@@ -9,7 +10,6 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 
 import room.basic.service.timing.*;
-
 
 
 public class SubSys_PedLights extends SubSystemClassBase {
@@ -49,28 +49,12 @@ public class SubSys_PedLights extends SubSystemClassBase {
 		msgSvcCtrl.addPathToPeer("/LogSys_PedLights/application/PedLightsTopRef/controller/timer", "/LogSys_PedLights/application/timingService/timer");
 		msgSvcCtrl.addPathToPeer("/LogSys_PedLights/application/timingService/timer", "/LogSys_PedLights/application/PedLightsTopRef/controller/timer");
 
-		// instantiate all actor instances
-		instances = new ActorClassBase[4];
-		instances[0] = new PedLightsTop(
-			this,
-			"PedLightsTopRef"
-		); 
-		instances[1] = new GuiAdapter(
-			instances[0],
-			"adapter"
-		); 
-		instances[2] = new Controller(
-			instances[0],
-			"controller"
-		); 
-		instances[3] = new ATimingService(
-			this,
-			"timingService"
-		); 
+		// sub actors
+		new PedLightsTop(this, "PedLightsTopRef"); 
+		new ATimingService(this, "timingService"); 
 		
 		// apply instance attribute configurations
 	}
-	
 	
 	@Override
 	public void init(){

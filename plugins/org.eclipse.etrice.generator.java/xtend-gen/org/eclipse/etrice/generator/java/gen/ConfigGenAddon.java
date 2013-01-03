@@ -308,7 +308,7 @@ public class ConfigGenAddon {
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("variableService.write(this.getInstancePath()+\"/");
+        _builder.append("getVariableService().write(this.getInstancePath()+\"/");
         String _name_19 = a_1.getName();
         _builder.append(_name_19, "		");
         _builder.append("\", ");

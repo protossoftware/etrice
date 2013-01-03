@@ -64,14 +64,14 @@ class VariableServiceGen {
 		import java.util.Arrays;
 		import java.util.HashMap;
 		import java.util.Map;
-		import org.eclipse.etrice.runtime.java.config.VariableService;
+		import org.eclipse.etrice.runtime.java.config.AbstractVariableService;
 		«configExt.getUserCode1(comp)»
 		«FOR model : aisAttrMap.keySet.roomModels»
 			import «model.name».*;
 		«ENDFOR»
 		
 		
-		public class «cc.name+"VariableService"» extends VariableService{
+		public class «cc.name+"VariableService"» extends AbstractVariableService{
 			
 			private «comp.subSystemClass.name» subSystem;
 			

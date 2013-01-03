@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class VariableService {
+public abstract class AbstractVariableService implements IVariableService {
 
 	private final static String POLLINGTIMER_KEY = "polling_timer[ms]";
 	private final static int defaultPollingTimer = 5000;
@@ -31,7 +31,7 @@ public abstract class VariableService {
 
 	private IConfigSource source;
 
-	public VariableService(IConfigSource source) {
+	public AbstractVariableService(IConfigSource source) {
 		this.source = source;
 		diffMap = new HashMap<String, Object>();
 		writeTasks = new HashMap<String, Object>();

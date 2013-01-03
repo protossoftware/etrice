@@ -27,7 +27,6 @@ public class Blinky extends ActorClassBase {
 	private TrafficLight2 pedLights;
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	protected BlinkyControlProtocollPort ControlPort = null;
 	
@@ -60,8 +59,10 @@ public class Blinky extends ActorClassBase {
 		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -75,20 +76,14 @@ public class Blinky extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
 	public void destroy(){
 		Blinky_dtor();
+		super.destroy();
 	}
 
 	/* state IDs */

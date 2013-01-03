@@ -26,7 +26,6 @@ public class ALogService extends ActorClassBase {
 	static long tStart = System.currentTimeMillis();
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -60,8 +59,10 @@ public class ALogService extends ActorClassBase {
 		
 		// own service implementations
 		log = new LogReplPort(this, "log", IFITEM_log); 
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -72,20 +73,11 @@ public class ALogService extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_closed = 2;

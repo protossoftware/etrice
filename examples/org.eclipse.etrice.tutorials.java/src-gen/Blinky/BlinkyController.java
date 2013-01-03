@@ -19,7 +19,6 @@ import room.basic.service.timing.PTimer.*;
 public class BlinkyController extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected BlinkyControlProtocollConjPort ControlPort = null;
 	
@@ -49,8 +48,10 @@ public class BlinkyController extends ActorClassBase {
 		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -64,20 +65,11 @@ public class BlinkyController extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_on = 2;

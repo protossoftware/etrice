@@ -26,7 +26,6 @@ import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.ExternalType
 
 class ConfigGenAddon {
 	
@@ -99,7 +98,7 @@ class ConfigGenAddon {
 		«FOR a : dataConfigExt.getDynConfigWriteAttributes(ac)»
 			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
 					set«a.name.toFirstUpper»(«a.name»);
-					variableService.write(this.getInstancePath()+"/«a.name»", «a.name»);
+					getVariableService().write(this.getInstancePath()+"/«a.name»", «a.name»);
 			}
 		«ENDFOR»
 	'''}

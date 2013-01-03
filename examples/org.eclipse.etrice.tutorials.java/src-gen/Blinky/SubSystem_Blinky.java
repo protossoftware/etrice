@@ -1,5 +1,6 @@
 package Blinky;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
@@ -9,7 +10,6 @@ import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 
 import room.basic.service.timing.*;
-
 
 
 public class SubSystem_Blinky extends SubSystemClassBase {
@@ -51,28 +51,12 @@ public class SubSystem_Blinky extends SubSystemClassBase {
 		msgSvcCtrl.addPathToPeer("/System_Blinky/subsystem/timingService/timer", "/System_Blinky/subsystem/application/blinky/timer");
 		msgSvcCtrl.addPathToPeer("/System_Blinky/subsystem/timingService/timer", "/System_Blinky/subsystem/application/controller/timer");
 
-		// instantiate all actor instances
-		instances = new ActorClassBase[4];
-		instances[0] = new BlinkyTop(
-			this,
-			"application"
-		); 
-		instances[1] = new Blinky(
-			instances[0],
-			"blinky"
-		); 
-		instances[2] = new BlinkyController(
-			instances[0],
-			"controller"
-		); 
-		instances[3] = new ATimingService(
-			this,
-			"timingService"
-		); 
+		// sub actors
+		new BlinkyTop(this, "application"); 
+		new ATimingService(this, "timingService"); 
 		
 		// apply instance attribute configurations
 	}
-	
 	
 	@Override
 	public void init(){

@@ -9,13 +9,15 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
+import room.basic.service.timing.*;
 
+import room.basic.service.timing.PTimer.*;
+import PingPong.PingPongProtocol.*;
 
 
 
 public class PingPongTop extends ActorClassBase {
 
-	
 	
 	//--------------------- ports
 	
@@ -40,8 +42,12 @@ public class PingPongTop extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
+		new MrPingActor(this, "MrPing"); 
+		new MrPongActor1(this, "MrPong1"); 
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -49,28 +55,16 @@ public class PingPongTop extends ActorClassBase {
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	//--------------------- no state machine
-	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-	handleSystemEvent(ifitem, evt, data);
+		handleSystemEvent(ifitem, evt, data);
 	}
 	
-	@Override
-	public void executeInitTransition(){
-	}
+	public void executeInitTransition() {}
 };

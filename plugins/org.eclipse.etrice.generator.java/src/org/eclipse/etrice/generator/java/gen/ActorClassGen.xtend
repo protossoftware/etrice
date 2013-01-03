@@ -25,6 +25,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.core.room.ActorRef
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -53,14 +54,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
+		val models = root.getReferencedModels(ac)
 		
 	'''
 		package «ac.getPackage»;
 		
 		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty»
-		import org.eclipse.etrice.runtime.java.config.DynConfigLock;«ENDIF»
-		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
-		import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
+			import org.eclipse.etrice.runtime.java.config.DynConfigLock;
+		«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
@@ -70,7 +71,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
-		«FOR model : root.getReferencedModels(ac)»
+		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
 		
@@ -84,10 +85,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		public «IF ac.^abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
 		
 			«ac.userCode(2)»
-			
-			«IF !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
-				private VariableService variableService;
-			«ENDIF»
 			
 			//--------------------- ports
 			«FOR ep : ac.getEndPorts()»
@@ -135,6 +132,15 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«FOR svc : ac.serviceImplementations»
 					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»); 
 				«ENDFOR»
+				
+				// sub actors
+				«FOR sub : ac.actorRefs»
+					«IF sub.size>1»
+						«genActorArray(sub)» 
+					«ELSE»
+						new «sub.type.name»(this, "«sub.name»"); 
+					«ENDIF»
+				«ENDFOR»
 				«IF ctor!=null»
 					
 					{
@@ -142,20 +148,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
 					}
 				«ENDIF»
-			}
 
-			«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
-				public «ac.name»(IRTObject parent, String name, VariableService variableService) {
-					this(parent, name);
-					
-					«IF !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
-						this.variableService = variableService;
-					«ENDIF»
+				«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 					«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 						lock_«a.name» = new DynConfigLock();
 					«ENDFOR»
-				}
-			«ENDIF»
+				«ENDIF»
+			}
 			
 			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getDynConfigReadAttributes(ac)), ac.name)»
 			
@@ -173,41 +172,41 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDFOR»
 		
 			//--------------------- lifecycle functions
-			public void init(){
-				initUser();
-			}
-		
-			public void start(){
-				startUser();
-			}
-		
 			«IF !ac.overridesStop()»
-			public void stop(){
-				stopUser();
-			}
+				public void stop(){
+					stopUser();
+					super.stop();
+				}
 			«ENDIF»
 			
-			public void destroy(){
-				«IF dtor!=null»
+			«IF dtor!=null»
+				public void destroy(){
 					«ac.name.destructorCall»;
-				«ENDIF»
-			}
+					super.destroy();
+				}
+			«ENDIF»
 		
 			«IF ac.hasNonEmptyStateMachine»
 				«xpac.genStateMachine()»
 			«ELSEIF !xpac.hasStateMachine()»
 				//--------------------- no state machine
-				@Override
 				public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-				handleSystemEvent(ifitem, evt, data);
+					handleSystemEvent(ifitem, evt, data);
 				}
 				
-				@Override
-				public void executeInitTransition(){
-				}
+				public void executeInitTransition() {}
 			«ENDIF»
 		};
 	'''
 	}
 
+	def private genActorArray(ActorRef sub) {
+		var i = 0
+		var result = new StringBuffer()
+		while (i<sub.size) {
+			result.append("new "+sub.type.name+"(this, \""+sub.name+"_"+i+"\");\n")
+			i = i+1
+		}
+		return result
+	}
 }

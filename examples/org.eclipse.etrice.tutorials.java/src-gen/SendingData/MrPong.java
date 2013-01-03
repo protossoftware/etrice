@@ -17,7 +17,6 @@ import SendingData.PingPongProtocol.*;
 public class MrPong extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PingPongProtocolPort PingPongPort = null;
 	
@@ -44,8 +43,10 @@ public class MrPong extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -56,20 +57,11 @@ public class MrPong extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_looping = 2;

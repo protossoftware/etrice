@@ -17,7 +17,6 @@ import org.eclipse.etrice.modellib.Socket.PSocket.*;
 public class SocketClient extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PSocketPort fct = null;
 	
@@ -44,8 +43,10 @@ public class SocketClient extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -56,28 +57,16 @@ public class SocketClient extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	//--------------------- no state machine
-	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-	handleSystemEvent(ifitem, evt, data);
+		handleSystemEvent(ifitem, evt, data);
 	}
 	
-	@Override
-	public void executeInitTransition(){
-	}
+	public void executeInitTransition() {}
 };

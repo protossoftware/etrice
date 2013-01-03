@@ -113,7 +113,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("import java.util.Map;");
       _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
+      _builder.append("import org.eclipse.etrice.runtime.java.config.AbstractVariableService;");
       _builder.newLine();
       String _userCode1 = this.configExt.getUserCode1(comp);
       _builder.append(_userCode1, "");
@@ -135,7 +135,7 @@ public class VariableServiceGen {
       String _name_1 = cc.getName();
       String _plus = (_name_1 + "VariableService");
       _builder.append(_plus, "");
-      _builder.append(" extends VariableService{");
+      _builder.append(" extends AbstractVariableService{");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();

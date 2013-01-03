@@ -22,7 +22,6 @@ import org.eclipse.etrice.tutorials.PedLightGUI.*;
 public class Controller extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PedControlProtocolPort ControlPort = null;
 	
@@ -52,8 +51,10 @@ public class Controller extends ActorClassBase {
 		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -67,20 +68,11 @@ public class Controller extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_off = 2;

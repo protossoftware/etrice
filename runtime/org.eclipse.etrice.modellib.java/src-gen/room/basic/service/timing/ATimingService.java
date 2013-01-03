@@ -25,7 +25,6 @@ public class ATimingService extends ActorClassBase {
 	private static final int PURGE_LIMIT = 1000;
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -57,8 +56,10 @@ public class ATimingService extends ActorClassBase {
 		
 		// own service implementations
 		timer = new PTimerReplPort(this, "timer", IFITEM_timer); 
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -69,17 +70,7 @@ public class ATimingService extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	
-	public void destroy(){
-	}
 
 	/* state IDs */
 	public static final int STATE_Operational = 2;
