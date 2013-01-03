@@ -37,7 +37,6 @@ public class SubSystem_HelloWorld extends SubSystemClassBase {
 
 		// thread mappings
 		msgSvcCtrl.addPathToThread("/System_HelloWorld/subsystem", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_HelloWorld/subsystem/application", THREAD__DEFAULT);
 		
 		// port to peer port mappings
 

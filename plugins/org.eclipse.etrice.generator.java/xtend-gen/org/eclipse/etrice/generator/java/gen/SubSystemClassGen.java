@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -230,30 +231,36 @@ public class SubSystemClassGen {
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
-          _builder.append("\t\t");
-          String _xifexpression = null;
-          int _threadId_2 = ai.getThreadId();
-          boolean _equals = (_threadId_2 == 0);
-          if (_equals) {
-            _xifexpression = "THREAD__DEFAULT";
-          } else {
-            EList<LogicalThread> _threads_2 = cc.getThreads();
-            int _threadId_3 = ai.getThreadId();
-            int _minus = (_threadId_3 - 1);
-            LogicalThread _get = _threads_2.get(_minus);
-            String _threadId_4 = this.getThreadId(_get);
-            _xifexpression = _threadId_4;
+          {
+            int _threadId_2 = ai.getThreadId();
+            boolean _notEquals = (_threadId_2 != 0);
+            if (_notEquals) {
+              _builder.append("\t\t");
+              String _xifexpression = null;
+              int _threadId_3 = ai.getThreadId();
+              boolean _equals = (_threadId_3 == 0);
+              if (_equals) {
+                _xifexpression = "THREAD__DEFAULT";
+              } else {
+                EList<LogicalThread> _threads_2 = cc.getThreads();
+                int _threadId_4 = ai.getThreadId();
+                int _minus = (_threadId_4 - 1);
+                LogicalThread _get = _threads_2.get(_minus);
+                String _threadId_5 = this.getThreadId(_get);
+                _xifexpression = _threadId_5;
+              }
+              final String threadId = _xifexpression;
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("msgSvcCtrl.addPathToThread(\"");
+              String _path_1 = ai.getPath();
+              _builder.append(_path_1, "		");
+              _builder.append("\", ");
+              _builder.append(threadId, "		");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
           }
-          final String threadId = _xifexpression;
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("msgSvcCtrl.addPathToThread(\"");
-          String _path_1 = ai.getPath();
-          _builder.append(_path_1, "		");
-          _builder.append("\", ");
-          _builder.append(threadId, "		");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t\t");
@@ -292,21 +299,42 @@ public class SubSystemClassGen {
       _builder.append("// sub actors");
       _builder.newLine();
       {
-        EList<ActorInstance> _instances = comp.getInstances();
-        Iterable<Indexed<ActorInstance>> _indexed_1 = Indexed.<ActorInstance>indexed(_instances);
-        for(final Indexed<ActorInstance> ai_2 : _indexed_1) {
-          _builder.append("\t\t");
-          _builder.append("new ");
-          ActorInstance _value_1 = ai_2.getValue();
-          ActorClass _actorClass = _value_1.getActorClass();
-          String _name_4 = _actorClass.getName();
-          _builder.append(_name_4, "		");
-          _builder.append("(this, \"");
-          ActorInstance _value_2 = ai_2.getValue();
-          String _name_5 = _value_2.getName();
-          _builder.append(_name_5, "		");
-          _builder.append("\"); ");
-          _builder.newLineIfNotEmpty();
+        EList<ActorRef> _actorRefs = cc.getActorRefs();
+        for(final ActorRef sub : _actorRefs) {
+          {
+            int _size = sub.getSize();
+            boolean _greaterThan = (_size > 1);
+            if (_greaterThan) {
+              _builder.append("\t\t");
+              _builder.append("for (int i=0; i<");
+              int _size_1 = sub.getSize();
+              _builder.append(_size_1, "		");
+              _builder.append("; ++i)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("new ");
+              ActorClass _type = sub.getType();
+              String _name_4 = _type.getName();
+              _builder.append(_name_4, "			");
+              _builder.append("(this, \"");
+              String _name_5 = sub.getName();
+              _builder.append(_name_5, "			");
+              _builder.append("_\"+i); ");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              _builder.append("new ");
+              ActorClass _type_1 = sub.getType();
+              String _name_6 = _type_1.getName();
+              _builder.append(_name_6, "		");
+              _builder.append("(this, \"");
+              String _name_7 = sub.getName();
+              _builder.append(_name_7, "		");
+              _builder.append("\"); ");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _builder.append("\t\t");
@@ -316,28 +344,28 @@ public class SubSystemClassGen {
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances_2 = comp.getAllContainedInstances();
-        for(final ActorInstance ai_3 : _allContainedInstances_2) {
+        for(final ActorInstance ai_2 : _allContainedInstances_2) {
           _builder.append("\t\t");
-          final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_3, "inst");
+          final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_2, "inst");
           _builder.newLineIfNotEmpty();
           {
             int _length = cfg.length();
-            boolean _greaterThan = (_length > 0);
-            if (_greaterThan) {
+            boolean _greaterThan_1 = (_length > 0);
+            if (_greaterThan_1) {
               _builder.append("\t\t");
               _builder.append("{");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              ActorClass _actorClass_1 = ai_3.getActorClass();
-              String _name_6 = _actorClass_1.getName();
-              _builder.append(_name_6, "			");
+              ActorClass _actorClass = ai_2.getActorClass();
+              String _name_8 = _actorClass.getName();
+              _builder.append(_name_8, "			");
               _builder.append(" inst = (");
-              ActorClass _actorClass_2 = ai_3.getActorClass();
-              String _name_7 = _actorClass_2.getName();
-              _builder.append(_name_7, "			");
+              ActorClass _actorClass_1 = ai_2.getActorClass();
+              String _name_9 = _actorClass_1.getName();
+              _builder.append(_name_9, "			");
               _builder.append(") getObject(\"");
-              String _path_3 = ai_3.getPath();
+              String _path_3 = ai_2.getPath();
               _builder.append(_path_3, "			");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
@@ -376,8 +404,8 @@ public class SubSystemClassGen {
         if (_hasVariableService) {
           _builder.append("\t\t");
           _builder.append("variableService = new ");
-          String _name_8 = cc.getName();
-          _builder.append(_name_8, "		");
+          String _name_10 = cc.getName();
+          _builder.append(_name_10, "		");
           _builder.append("VariableService(this);");
           _builder.newLineIfNotEmpty();
         }

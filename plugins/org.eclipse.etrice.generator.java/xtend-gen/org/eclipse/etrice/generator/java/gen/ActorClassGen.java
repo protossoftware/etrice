@@ -405,19 +405,31 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _greaterThan = (_size > 1);
             if (_greaterThan) {
               _builder.append("\t\t");
-              StringBuffer _genActorArray = this.genActorArray(sub);
-              _builder.append(_genActorArray, "		");
-              _builder.append(" ");
+              _builder.append("for (int i=0; i<");
+              int _size_1 = sub.getSize();
+              _builder.append(_size_1, "		");
+              _builder.append("; ++i)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("new ");
+              ActorClass _type = sub.getType();
+              String _name_19 = _type.getName();
+              _builder.append(_name_19, "			");
+              _builder.append("(this, \"");
+              String _name_20 = sub.getName();
+              _builder.append(_name_20, "			");
+              _builder.append("_\"+i); ");
               _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t\t");
               _builder.append("new ");
-              ActorClass _type = sub.getType();
-              String _name_19 = _type.getName();
-              _builder.append(_name_19, "		");
+              ActorClass _type_1 = sub.getType();
+              String _name_21 = _type_1.getName();
+              _builder.append(_name_21, "		");
               _builder.append("(this, \"");
-              String _name_20 = sub.getName();
-              _builder.append(_name_20, "		");
+              String _name_22 = sub.getName();
+              _builder.append(_name_22, "		");
               _builder.append("\"); ");
               _builder.newLineIfNotEmpty();
             }
@@ -468,8 +480,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final Attribute a_1 : _dynConfigReadAttributes_3) {
               _builder.append("\t\t");
               _builder.append("lock_");
-              String _name_21 = a_1.getName();
-              _builder.append(_name_21, "		");
+              String _name_23 = a_1.getName();
+              _builder.append(_name_23, "		");
               _builder.append(" = new DynConfigLock();");
               _builder.newLineIfNotEmpty();
             }
@@ -485,8 +497,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       EList<Attribute> _attributes_3 = ac.getAttributes();
       List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
       List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_4);
-      String _name_22 = ac.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_22);
+      String _name_24 = ac.getName();
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_24);
       _builder.append(_attributeSettersGettersImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -505,9 +517,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Port ep_2 : _endPorts_2) {
           _builder.append("\t");
           String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
-          String _name_23 = ep_2.getName();
-          String _name_24 = ac.getName();
-          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_23, _name_24);
+          String _name_25 = ep_2.getName();
+          String _name_26 = ac.getName();
+          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_25, _name_26);
           _builder.append(_terImplementation, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -517,9 +529,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final SAPRef sap_2 : _strSAPs_2) {
           _builder.append("\t");
           String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
-          String _name_25 = sap_2.getName();
-          String _name_26 = ac.getName();
-          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_25, _name_26);
+          String _name_27 = sap_2.getName();
+          String _name_28 = ac.getName();
+          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_27, _name_28);
           _builder.append(_terImplementation_1, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -530,9 +542,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
           SPPRef _spp_4 = svc_2.getSpp();
-          String _name_27 = _spp_4.getName();
-          String _name_28 = ac.getName();
-          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_27, _name_28);
+          String _name_29 = _spp_4.getName();
+          String _name_30 = ac.getName();
+          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_29, _name_30);
           _builder.append(_terImplementation_2, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -571,8 +583,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          String _name_29 = ac.getName();
-          String _destructorCall = this._procedureHelpers.destructorCall(_name_29);
+          String _name_31 = ac.getName();
+          String _destructorCall = this._procedureHelpers.destructorCall(_name_31);
           _builder.append(_destructorCall, "		");
           _builder.append(";");
           _builder.newLineIfNotEmpty();

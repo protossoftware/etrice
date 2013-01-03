@@ -1,6 +1,5 @@
 package org.eclipse.etrice.generator.java.gen;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.EList;
@@ -45,8 +44,6 @@ public class SubSystemRunnerGen {
     CharSequence _xblockexpression = null;
     {
       final SubSystemClass cc = ssc.getSubSystemClass();
-      EObject _eContainer = ssc.eContainer();
-      final SystemInstance sys = ((SystemInstance) _eContainer);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -110,11 +107,11 @@ public class SubSystemRunnerGen {
       _builder.append("\t\t");
       _builder.append("RTSystem sys = ");
       {
-        EObject _eContainer_1 = ssc.eContainer();
-        boolean _notEquals = (!Objects.equal(_eContainer_1, null));
-        if (_notEquals) {
+        EObject _eContainer = ssc.eContainer();
+        if ((_eContainer instanceof SystemInstance)) {
           _builder.append("new RTSystem(\"");
-          String _name_3 = sys.getName();
+          EObject _eContainer_1 = ssc.eContainer();
+          String _name_3 = ((SystemInstance) _eContainer_1).getName();
           _builder.append(_name_3, "		");
           _builder.append("\")");
         } else {

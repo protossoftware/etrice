@@ -42,10 +42,8 @@ public class SubSystem_PingPong extends SubSystemClassBase {
 
 		// thread mappings
 		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/application", THREAD__DEFAULT);
 		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/application/MrPing", THREAD_MRPINGTHREAD);
 		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/application/MrPong1", THREAD_MRPONG1THREAD);
-		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/services", THREAD__DEFAULT);
 		
 		// port to peer port mappings
 		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/application/MrPing/PingPongPort", "/System_PingPong/subsystem/application/MrPong1/PingPongPort");

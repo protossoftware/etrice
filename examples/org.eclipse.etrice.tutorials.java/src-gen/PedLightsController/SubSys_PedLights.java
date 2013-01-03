@@ -38,10 +38,6 @@ public class SubSys_PedLights extends SubSystemClassBase {
 
 		// thread mappings
 		msgSvcCtrl.addPathToThread("/LogSys_PedLights/application", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/LogSys_PedLights/application/PedLightsTopRef", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/LogSys_PedLights/application/PedLightsTopRef/adapter", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/LogSys_PedLights/application/PedLightsTopRef/controller", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/LogSys_PedLights/application/timingService", THREAD__DEFAULT);
 		
 		// port to peer port mappings
 		msgSvcCtrl.addPathToPeer("/LogSys_PedLights/application/PedLightsTopRef/adapter/ControlPort", "/LogSys_PedLights/application/PedLightsTopRef/controller/ControlPort");

@@ -38,10 +38,6 @@ public class SubSystem_Blinky extends SubSystemClassBase {
 
 		// thread mappings
 		msgSvcCtrl.addPathToThread("/System_Blinky/subsystem", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_Blinky/subsystem/application", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_Blinky/subsystem/application/blinky", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_Blinky/subsystem/application/controller", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/System_Blinky/subsystem/timingService", THREAD__DEFAULT);
 		
 		// port to peer port mappings
 		msgSvcCtrl.addPathToPeer("/System_Blinky/subsystem/application/blinky/ControlPort", "/System_Blinky/subsystem/application/controller/ControlPort");

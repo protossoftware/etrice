@@ -136,7 +136,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 				// sub actors
 				«FOR sub : ac.actorRefs»
 					«IF sub.size>1»
-						«genActorArray(sub)» 
+						for (int i=0; i<«sub.size»; ++i)
+							new «sub.type.name»(this, "«sub.name»_"+i); 
 					«ELSE»
 						new «sub.type.name»(this, "«sub.name»"); 
 					«ENDIF»

@@ -106,8 +106,10 @@ class SubSystemClassGen {
 				// thread mappings
 				msgSvcCtrl.addPathToThread("«comp.path»", THREAD__DEFAULT);
 				«FOR ai : comp.allContainedInstances»
-					«val threadId = if (ai.threadId==0) "THREAD__DEFAULT" else cc.threads.get(ai.threadId-1).threadId»
-					msgSvcCtrl.addPathToThread("«ai.path»", «threadId»);
+					«IF ai.threadId!=0»
+						«val threadId = if (ai.threadId==0) "THREAD__DEFAULT" else cc.threads.get(ai.threadId-1).threadId»
+						msgSvcCtrl.addPathToThread("«ai.path»", «threadId»);
+					«ENDIF»
 				«ENDFOR»
 				
 				// port to peer port mappings
@@ -121,9 +123,17 @@ class SubSystemClassGen {
 				«ENDFOR»
 		
 				// sub actors
-				«FOR ai : comp.instances.indexed»
-					new «ai.value.actorClass.name»(this, "«ai.value.name»"); 
+				«FOR sub : cc.actorRefs»
+					«IF sub.size>1»
+						for (int i=0; i<«sub.size»; ++i)
+							new «sub.type.name»(this, "«sub.name»_"+i); 
+					«ELSE»
+						new «sub.type.name»(this, "«sub.name»"); 
+					«ENDIF»
 				«ENDFOR»
+«««				«FOR ai : comp.instances.indexed»
+«««					new «ai.value.actorClass.name»(this, "«ai.value.name»"); 
+«««				«ENDFOR»
 				
 				// apply instance attribute configurations
 				«FOR ai: comp.allContainedInstances»

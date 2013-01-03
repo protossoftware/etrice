@@ -37,9 +37,6 @@ public class SendingData_SubSystem extends SubSystemClassBase {
 
 		// thread mappings
 		msgSvcCtrl.addPathToThread("/SendingData_LogSystem/SendingDataAppl", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref0", THREAD__DEFAULT);
-		msgSvcCtrl.addPathToThread("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref1", THREAD__DEFAULT);
 		
 		// port to peer port mappings
 		msgSvcCtrl.addPathToPeer("/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref0/PingPongPort", "/SendingData_LogSystem/SendingDataAppl/SendigDataTopRef/ref1/PingPongPort");

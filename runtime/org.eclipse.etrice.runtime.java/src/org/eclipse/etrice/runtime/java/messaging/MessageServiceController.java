@@ -170,7 +170,7 @@ public class MessageServiceController {
 	public int getThreadForPath(String path) {
 		Integer thread = path2thread.get(path);
 		if (thread==null)
-			return -1;
+			return 0;
 		
 		return thread;
 	}
