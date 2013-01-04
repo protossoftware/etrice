@@ -588,6 +588,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private String getTriggerString(MessageFromIf mifp) {
+		assert(mifp.getFrom().getName()!=null) : "ifitem name must not be null";
+		assert(mifp.getMessage().getName()!=null) : "message name must not be null";
 		return mifp.getFrom().getName()+TRIGGER_SEP+mifp.getMessage().getName();
 	}
 
