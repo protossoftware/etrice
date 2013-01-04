@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -102,8 +103,8 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			}
 			
 			// now we add each extension to our maps
-			try {
-				for (IConfigurationElement e : config) {
+			for (IConfigurationElement e : config) {
+				try {
 					final Object ext = e.createExecutableExtension("class");
 					if (ext instanceof IRoomValidator) {
 						IRoomValidator validator = (IRoomValidator) ext;
@@ -132,8 +133,9 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 						System.out.println("ValidatorExtensionManager: unexpected extension");
 					}
 				}
-			} catch (CoreException ex) {
-				System.out.println(ex.getMessage());
+				catch (CoreException ex) {
+					System.out.println(ex.getMessage());
+				}
 			}
 		}
 		
@@ -228,6 +230,7 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkObject(EObject object) {
+		//EcoreUtil.resolveAll(object.eResource().getResourceSet());
 		Registry.getInstance().validate(object, getCheckMode(), getMessageAcceptor());
 	}
 
