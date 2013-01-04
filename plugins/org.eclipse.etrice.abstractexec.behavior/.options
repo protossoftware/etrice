@@ -1,0 +1,8 @@
+org.eclipse.etrice.abstractexec.behavior/debug=true
+org.eclipse.etrice.abstractexec.behavior/trace/proposals=true
+org.eclipse.etrice.abstractexec.behavior/trace/checks=true
+org.eclipse.etrice.abstractexec.behavior/trace/checks/level=1
+org.eclipse.etrice.abstractexec.behavior/trace/rules=true
+org.eclipse.etrice.abstractexec.behavior/trace/rules/level=2
+org.eclipse.etrice.abstractexec.behavior/trace/abstractexec=true
+org.eclipse.etrice.abstractexec.behavior/trace/abstractexec/name=AETest
