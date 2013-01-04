@@ -23,22 +23,54 @@
 /* platform specific functions */
 
 /******************thread********************/
-void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio);
+
+typedef int32 etStacksize;
+typedef int32 etPriority;
+typedef charPtr etThreadname;
+typedef void (*etThreadFunction)(void *);
+
+typedef struct etThread{
+	etOSThreadData osData;  /* OS specific thread data (e.g. handle or id) */
+	etStacksize stacksize;
+	etPriority priority;
+	etThreadname threadName;
+	etThreadFunction threadFunction;
+	void* threadFunctionData;
+} etThread;
+
+
+void etThread_construct(etThread* self);
 void etThread_destruct(etThread* self);
 
+/******************thread helpers********************/
+void etThread_sleep(etInt32 millis);
+
+
 /*****************mutex**********************/
+
+typedef struct etMutex {
+	etOSMutexData osData;
+} etMutex;
+
 void etMutex_construct(etMutex* self);
 void etMutex_destruct(etMutex* self);
 void etMutex_enter(etMutex* self);
 void etMutex_leave(etMutex* self);
 
 /********************semaphore****************/
-void etSema_contruct(etSema* self);
+
+typedef struct etSema {
+	etOSSemaData osData;
+} etSema;
+
+void etSema_construct(etSema* self);
 void etSema_destruct(etSema* self);
 void etSema_wakeup(etSema* self);
 void etSema_waitForWakeup(etSema* self);
 
 /*********************************************/
+
+
 
 /*
  * Platform startup and shutdown -> generated code for SubSystemClass uses these interfaces

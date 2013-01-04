@@ -63,3 +63,9 @@ void etMSCLogger_asyncIn(char* sourceName, char* messageName, char* targetName){
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
 	}
 }
+
+void etMSCLogger_setState(char* objectName, char* stateName){
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
+	}
+}

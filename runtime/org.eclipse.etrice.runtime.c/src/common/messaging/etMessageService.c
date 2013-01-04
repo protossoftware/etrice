@@ -17,19 +17,54 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
+
+
+/*
+ * initialize message service with all needed data and initialize message queue and message pool
+ *
+ */
 void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
+
+	/* copy init data to self */
 	self->messageBuffer.buffer = buffer;
 	self->messageBuffer.maxBlocks = maxBlocks;
 	self->messageBuffer.blockSize = blockSize;
 	self->msgDispatcher = msgDispatcher;
 
-	etMessageQueue_init(&self->messagePool);
-	etMessageQueue_init(&self->messageQueue);
-
+	/* copy init queue and pool */
+	etMessageQueue_init( &(self->messagePool) ); 	/* the pool is also a queue*/
+	etMessageQueue_init( &(self->messageQueue) );
 	etMessageService_initMessagePool(self);
+
+	/* init mutexes and semaphores */
+	etMutex_construct( &(self->poolMutex) );
+	etMutex_construct( &(self->queueMutex) );
+	etSema_construct( &(self->executionSemaphore) );
+
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+void etMessageService_start(etMessageService* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "start")
+	etThread_construct( &(self->thread) );
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etMessageService_stop(etMessageService* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "stop")
+	etThread_destruct( &(self->thread) );
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etMessageService_destroy(etMessageService* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "destroy")
+	etMutex_destruct( &(self->poolMutex) );
+	etMutex_destruct( &(self->queueMutex) );
+	etSema_destruct( &(self->executionSemaphore) );
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 
 /*
  * initialize message pool with block buffer

@@ -96,27 +96,23 @@ typedef int8 etAddressId;
 
 #if defined __MINGW32__
 
-	typedef CRITICAL_SECTION etMutex;
-	typedef HANDLE etThread;
-	typedef HANDLE etSema;
+	typedef CRITICAL_SECTION etOSMutexData;
+	typedef HANDLE etOSThreadData;
+	typedef HANDLE etOSSemaData;
 
-	typedef int32 etStacksize;
-	typedef int32 etPriority;
-	typedef charPtr etThreadname;
+
 
 #elif defined __GNUC__
 
 	/* dummy for LINUX/UNIX */
-	typedef int etMutex;
-	typedef int etThread;
-	typedef int etSema;
-
-	typedef int32 etStacksize;
-	typedef int32 etPriority;
-	typedef charPtr etThreadname;
+	typedef int etOSMutexData;
+	typedef int etOSThreadData;
+	typedef int etOSSemaData;
 
 #else
 	#error
 #endif
+
+
 
 #endif /* _DATATYPES_H_ */

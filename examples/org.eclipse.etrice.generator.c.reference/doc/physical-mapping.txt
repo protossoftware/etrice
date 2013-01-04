@@ -6,3 +6,7 @@
 
 TODO:
 rename SubSysDisp -> NodeINstance_Disp.h
+
+destruct functions for platform API and stop and destroy for message service -> implement for etSema
+
+

@@ -10,7 +10,11 @@
  *
  *******************************************************************************/
 
-#include <etDatatypes.h>
+#include "etDatatypes.h"
+#include "platform/etPlatform.h"
+
+#include "debugging/etLogger.h"
+#include "debugging/etMSCLogger.h"
 
 /* implemenatation for eTrice interfaces*/
 
@@ -28,44 +32,79 @@ void etUserExit(void){ }
 #if defined __MINGW32__
 
 /******************thread********************/
-void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){
-	   *self = (HANDLE)_beginthread( func, stacksize, NULL );
-	   SetThreadPriority(*self,THREAD_PRIORITY_NORMAL);
+void etThread_construct(etThread* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "construct")
+	self->osData = (HANDLE)_beginthread( self->threadFunction, self->stacksize, self->threadFunctionData );
+	SetThreadPriority(self->osData, self->priority);
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void etThread_destruct(etThread* self){}
+void etThread_destruct(etThread* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "destruct")
+	TerminateThread(self->osData, 0);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+
+/******************thread helpers********************/
+void etThread_sleep(etInt32 millis){
+	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "sleep")
+	Sleep(millis);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
 
 /*****************mutex**********************/
 void etMutex_construct(etMutex* self){
-	InitializeCriticalSection( self );
+	ET_MSC_LOGGER_SYNC_ENTRY("etMutex", "construct")
+	InitializeCriticalSection( &(self->osData) );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
-void etMutex_destruct(etMutex* self){}
+void etMutex_destruct(etMutex* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMutex", "destruct")
+	DeleteCriticalSection( &(self->osData) );
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 void etMutex_enter(etMutex* self){
-    EnterCriticalSection( self );
+	ET_MSC_LOGGER_SYNC_ENTRY("etMutex", "enter")
+    EnterCriticalSection( &(self->osData) );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 void etMutex_leave(etMutex* self){
-    LeaveCriticalSection( self );
+	ET_MSC_LOGGER_SYNC_ENTRY("etMutex", "leave")
+    LeaveCriticalSection( &(self->osData) );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 /********************semaphore****************/
-void etSema_contruct(etSema* self){
-	*self = CreateEvent( NULL, FALSE, FALSE, NULL );
+void etSema_construct(etSema* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "construct")
+	self->osData = CreateEvent( NULL, FALSE, FALSE, NULL );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
-void etSema_destruct(etSema* self){}
+void etSema_destruct(etSema* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "destruct")
+	// TODO: implement this function
+	ET_MSC_LOGGER_SYNC_EXIT
+}
 
 void etSema_wakeup(etSema* self){
-	SetEvent(self);
+	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "wakeup")
+	SetEvent( self->osData );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etSema_waitForWakeup(etSema* self){
-	WaitForSingleObject( self, INFINITE );
+	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "waitForWakeup")
+	WaitForSingleObject( self->osData, INFINITE );
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 /*********************************************/
 
 #elif defined __GNUC__
 
 /******************thread********************/
-void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){}
+void etThread_construct(etThread* self){}
 
 void etThread_destruct(etThread* self){}
 
@@ -76,7 +115,7 @@ void etMutex_enter(etMutex* self){}
 void etMutex_leave(etMutex* self){}
 
 /********************semaphore****************/
-void etSema_contruct(etSema* self){}
+void etSema_construct(etSema* self){}
 void etSema_destruct(etSema* self){}
 
 void etSema_wakeup(etSema* self){}
