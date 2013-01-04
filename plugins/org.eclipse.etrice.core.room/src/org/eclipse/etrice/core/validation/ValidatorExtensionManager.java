@@ -39,6 +39,35 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 	
+	public static class ValidatorInfo {
+		public static final String SEP = "@";
+		
+		private IRoomValidator validator;
+		private String id;
+		
+		public ValidatorInfo(IRoomValidator validator, String id) {
+			super();
+			this.validator = validator;
+			this.id = id;
+		}
+		
+		public IRoomValidator getValidator() {
+			return validator;
+		}
+
+		public String getName() {
+			return validator.getName();
+		}
+
+		public String getDescription() {
+			return validator.getDescription();
+		}
+
+		public String getId() {
+			return id;
+		}
+	}
+	
 	public static class Registry {
 		
 		private static final String PACKAGE = RoomPackage.class.getPackage().getName()+".";
@@ -47,6 +76,8 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 		private HashMap<String, ArrayList<IRoomValidator>> fastClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
 		private HashMap<String, ArrayList<IRoomValidator>> normalClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
 		private HashMap<String, ArrayList<IRoomValidator>> expensiveClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
+		private ArrayList<ValidatorInfo> infos = new ArrayList<ValidatorExtensionManager.ValidatorInfo>();
+		private HashSet<IRoomValidator> excluded = new HashSet<IRoomValidator>();
 		
 		public static Registry getInstance() {
 			if (instance==null)
@@ -75,6 +106,11 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 				for (IConfigurationElement e : config) {
 					final Object ext = e.createExecutableExtension("class");
 					if (ext instanceof IRoomValidator) {
+						IRoomValidator validator = (IRoomValidator) ext;
+						infos.add(new ValidatorInfo(
+								validator,
+								e.getName()+ValidatorInfo.SEP+e.getNamespaceIdentifier()
+							));
 						String mode = e.getAttribute("mode");
 						String classToCheck = e.getAttribute("classToCheck");
 						if (classToCheck.startsWith(PACKAGE))
@@ -101,9 +137,19 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			}
 		}
 		
-		public void validate(EObject object, CheckMode checkMode,
-				ValidationMessageAcceptor messageAcceptor) {
-			HashSet<IRoomValidator> executed = new HashSet<IRoomValidator>();
+		public void exclude(ValidatorInfo info) {
+			excluded.add(info.getValidator());
+		}
+		
+		public void include(ValidatorInfo info) {
+			excluded.remove(info.getValidator());
+		}
+		
+		public void validate(EObject object, CheckMode checkMode, ValidationMessageAcceptor messageAcceptor) {
+			
+			// we initialize the set of executed validators with the excluded ones
+			HashSet<IRoomValidator> executed = new HashSet<IRoomValidator>(excluded);
+			
 			if (checkMode.shouldCheck(CheckType.FAST))
 				validate(object, messageAcceptor, fastClass2Ext, executed);
 			if (checkMode.shouldCheck(CheckType.NORMAL))

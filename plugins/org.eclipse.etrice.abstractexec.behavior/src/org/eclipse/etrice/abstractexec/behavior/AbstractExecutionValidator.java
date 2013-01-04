@@ -96,4 +96,14 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		}
 	}
 
+	@Override
+	public String getName() {
+		return "Abstract FSM Execution Validator";
+	}
+
+	@Override
+	public String getDescription() {
+		return "This validator checks the state machine against the protocol semantics of its ports.";
+	}
+
 }
