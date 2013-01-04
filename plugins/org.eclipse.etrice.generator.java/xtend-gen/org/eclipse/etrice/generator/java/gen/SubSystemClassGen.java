@@ -236,27 +236,16 @@ public class SubSystemClassGen {
             boolean _notEquals = (_threadId_2 != 0);
             if (_notEquals) {
               _builder.append("\t\t");
-              String _xifexpression = null;
-              int _threadId_3 = ai.getThreadId();
-              boolean _equals = (_threadId_3 == 0);
-              if (_equals) {
-                _xifexpression = "THREAD__DEFAULT";
-              } else {
-                EList<LogicalThread> _threads_2 = cc.getThreads();
-                int _threadId_4 = ai.getThreadId();
-                int _minus = (_threadId_4 - 1);
-                LogicalThread _get = _threads_2.get(_minus);
-                String _threadId_5 = this.getThreadId(_get);
-                _xifexpression = _threadId_5;
-              }
-              final String threadId = _xifexpression;
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t\t");
               _builder.append("msgSvcCtrl.addPathToThread(\"");
               String _path_1 = ai.getPath();
               _builder.append(_path_1, "		");
               _builder.append("\", ");
-              _builder.append(threadId, "		");
+              EList<LogicalThread> _threads_2 = cc.getThreads();
+              int _threadId_3 = ai.getThreadId();
+              int _minus = (_threadId_3 - 1);
+              LogicalThread _get = _threads_2.get(_minus);
+              String _threadId_4 = this.getThreadId(_get);
+              _builder.append(_threadId_4, "		");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
@@ -274,19 +263,32 @@ public class SubSystemClassGen {
           {
             EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
             for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
-              _builder.append("\t\t");
-              final String path = pi.getPath();
-              _builder.newLineIfNotEmpty();
               {
                 EList<InterfaceItemInstance> _peers = pi.getPeers();
-                for(final InterfaceItemInstance peer : _peers) {
+                int _size = _peers.size();
+                boolean _greaterThan = (_size > 0);
+                if (_greaterThan) {
                   _builder.append("\t\t");
-                  _builder.append("msgSvcCtrl.addPathToPeer(\"");
-                  _builder.append(path, "		");
-                  _builder.append("\", \"");
-                  String _path_2 = peer.getPath();
+                  _builder.append("msgSvcCtrl.addPathToPeers(\"");
+                  String _path_2 = pi.getPath();
                   _builder.append(_path_2, "		");
-                  _builder.append("\");");
+                  _builder.append("\", ");
+                  {
+                    EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+                    boolean _hasElements = false;
+                    for(final InterfaceItemInstance peer : _peers_1) {
+                      if (!_hasElements) {
+                        _hasElements = true;
+                      } else {
+                        _builder.appendImmediate(",", "		");
+                      }
+                      _builder.append("\"");
+                      String _path_3 = peer.getPath();
+                      _builder.append(_path_3, "		");
+                      _builder.append("\"");
+                    }
+                  }
+                  _builder.append(");");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -302,13 +304,13 @@ public class SubSystemClassGen {
         EList<ActorRef> _actorRefs = cc.getActorRefs();
         for(final ActorRef sub : _actorRefs) {
           {
-            int _size = sub.getSize();
-            boolean _greaterThan = (_size > 1);
-            if (_greaterThan) {
+            int _size_1 = sub.getSize();
+            boolean _greaterThan_1 = (_size_1 > 1);
+            if (_greaterThan_1) {
               _builder.append("\t\t");
               _builder.append("for (int i=0; i<");
-              int _size_1 = sub.getSize();
-              _builder.append(_size_1, "		");
+              int _size_2 = sub.getSize();
+              _builder.append(_size_2, "		");
               _builder.append("; ++i)");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -350,8 +352,8 @@ public class SubSystemClassGen {
           _builder.newLineIfNotEmpty();
           {
             int _length = cfg.length();
-            boolean _greaterThan_1 = (_length > 0);
-            if (_greaterThan_1) {
+            boolean _greaterThan_2 = (_length > 0);
+            if (_greaterThan_2) {
               _builder.append("\t\t");
               _builder.append("{");
               _builder.newLine();
@@ -365,8 +367,8 @@ public class SubSystemClassGen {
               String _name_9 = _actorClass_1.getName();
               _builder.append(_name_9, "			");
               _builder.append(") getObject(\"");
-              String _path_3 = ai_2.getPath();
-              _builder.append(_path_3, "			");
+              String _path_4 = ai_2.getPath();
+              _builder.append(_path_4, "			");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");

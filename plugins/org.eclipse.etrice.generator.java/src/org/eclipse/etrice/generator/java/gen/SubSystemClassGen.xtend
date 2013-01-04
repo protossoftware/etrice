@@ -107,18 +107,16 @@ class SubSystemClassGen {
 				msgSvcCtrl.addPathToThread("«comp.path»", THREAD__DEFAULT);
 				«FOR ai : comp.allContainedInstances»
 					«IF ai.threadId!=0»
-						«val threadId = if (ai.threadId==0) "THREAD__DEFAULT" else cc.threads.get(ai.threadId-1).threadId»
-						msgSvcCtrl.addPathToThread("«ai.path»", «threadId»);
+						msgSvcCtrl.addPathToThread("«ai.path»", «cc.threads.get(ai.threadId-1).threadId»);
 					«ENDIF»
 				«ENDFOR»
 				
 				// port to peer port mappings
 				«FOR ai : comp.allContainedInstances»
 					«FOR pi : ai.orderedIfItemInstances»
-						«val path=pi.path»
-						«FOR peer : pi.peers»
-							msgSvcCtrl.addPathToPeer("«path»", "«peer.path»");
-						«ENDFOR»
+						«IF pi.peers.size>0»
+							msgSvcCtrl.addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
+						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 		

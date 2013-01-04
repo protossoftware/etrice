@@ -194,11 +194,11 @@ public class MessageServiceController {
 	}
 	
 	/**
-	 * add an array of peers to the given path
+	 * add several peers to the given path
 	 * @param path
 	 * @param peers
 	 */
-	public void addPathToPeers(String path, String[] peers) {
+	public void addPathToPeers(String path, String... peers) {
 		path2peers.put(path, peers);
 	}
 	
