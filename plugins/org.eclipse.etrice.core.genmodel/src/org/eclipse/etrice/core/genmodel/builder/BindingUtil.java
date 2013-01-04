@@ -186,7 +186,7 @@ public class BindingUtil {
 					}
 				}
 				
-				// fill in port instances such that ports.size()==p.getMultiplicity()
+				// fill in port instances such that ports.size()==m
 				m -= ports.size();
 				for (; m>0; --m)
 					ports.add(pi);
