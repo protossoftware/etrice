@@ -78,10 +78,13 @@ typedef uint8 etUInt8;
 typedef uint16 etUInt16;
 typedef uint32 etUInt32;
 
-typedef bool etBool;
+typedef charPtr etCharPtr;
 
 typedef float32 etFloat32;
 typedef float64 etFloat64;
+
+typedef bool etBool;
+
 
 typedef FILE* etFileHandle;
 

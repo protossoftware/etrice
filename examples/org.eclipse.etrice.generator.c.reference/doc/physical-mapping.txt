@@ -1,0 +1,8 @@
+- queue1: MESSAGE_BLOCK_SIZE, MESSAGE_POOL_MAX
+- queue2: heapsize, number of buffers
+// - move threads to NodeRef
+- prio min max
+
+
+TODO:
+rename SubSysDisp -> NodeINstance_Disp.h
