@@ -83,13 +83,18 @@ void etMessageService_initMessagePool(etMessageService* self){
 
 void etMessageService_pushMessage(etMessageService* self, etMessage* msg){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "pushMessage")
+	etMutex_enter(&self->queueMutex);
 	etMessageQueue_push(&self->messageQueue, msg);
+	etSema_wakeup(&self->executionSemaphore);
+	etMutex_leave(&self->queueMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 etMessage* etMessageService_popMessage(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "popMessage")
+	etMutex_enter(&self->queueMutex);
 	etMessage* msg = etMessageQueue_pop(&self->messageQueue);
+	etMutex_leave(&self->queueMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 	return msg;
 }
@@ -97,6 +102,7 @@ etMessage* etMessageService_popMessage(etMessageService* self){
 
 etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 size){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "getMessageBuffer")
+	etMutex_enter(&self->poolMutex);
 	if (size<=self->messageBuffer.blockSize){
 		if (self->messagePool.size>0){
 			etMessage* msg = etMessageQueue_pop(&self->messagePool);
@@ -104,22 +110,28 @@ etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 si
 			return msg;
 		}
 	}
+	etMutex_leave(&self->poolMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 	return NULL;
 }
 
 void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buffer){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "returnMessageBuffer")
+	etMutex_enter(&self->poolMutex);
 	etMessageQueue_push(&self->messagePool, buffer);
+	etMutex_leave(&self->poolMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
-	while (etMessageQueue_isNotEmpty(&self->messageQueue)){
-		etMessage* msg = etMessageService_popMessage(self);
-		self->msgDispatcher(msg);
-		etMessageService_returnMessageBuffer(self, msg);
+	while (TRUE){
+		while (etMessageQueue_isNotEmpty(&self->messageQueue)){
+			etMessage* msg = etMessageService_popMessage(self);
+			self->msgDispatcher(msg);
+			etMessageService_returnMessageBuffer(self, msg);
+		}
+		etSema_waitForWakeup(&self->executionSemaphore);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }

@@ -75,17 +75,26 @@ Node1 ==> Node1 initActorInstances
 Node1 ==> Sender init
 Sender ==> CommunicationProtocolConjPort sendData
 CommunicationProtocolConjPort ==> etMessageService getMessageBuffer
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
 CommunicationProtocolConjPort <== etMessageService
 CommunicationProtocolConjPort ==> etMessageService pushMessage
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
 etMessageService ==> etMessageQueue push
 etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup
+etMessageService <== etSema
+etMessageService ==> etMutex leave
+etMessageService <== etMutex
 CommunicationProtocolConjPort <== etMessageService
 Sender <== CommunicationProtocolConjPort
 Sender >>> SendingData
 Node1 <== Sender
 Node1 ==> Receiver init
+Receiver >>> Idle
 Node1 <== Receiver
 Node1 <== Node1
 main <== Node1
@@ -97,55 +106,79 @@ etMessageService <== etThread
 Node1 <== etMessageService
 Node1 ==> etMessageService start
 etMessageService ==> etThread construct
+etThread ==> etMessageService execute
+etMessageService ==> etMessageService deliverAllMessages
+etMessageService ==> etMessageQueue isNotEmpty
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup
 etMessageService <== etThread
 Node1 <== etMessageService
 Node1 <== Node1
 main <== Node1
 main ==> Node1 run
 Node1 ==> etThread sleep
-etThread ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etThread <== etMessageService
-etThread ==> etMessageService execute
+etSema ==> etMessageService execute
 etMessageService ==> etMessageService deliverAllMessages
 etMessageService ==> etMessageQueue isNotEmpty
 etMessageService <== etMessageQueue
 etMessageService ==> etMessageService popMessage
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave
+etMessageService <== etMutex
 etMessageService <== etMessageService
 etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage
 MsgDispatcher_PhysicalThread2 ==> Receiver receiveMessage
 Receiver ==> Receiver receiveEvent
 Receiver ==> CommunicationProtocolPort receivedData
 CommunicationProtocolPort ==> etMessageService getMessageBuffer
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
 etMessageService ==> etMessageQueue pop
 etMessageService <== etMessageQueue
 CommunicationProtocolPort <== etMessageService
 CommunicationProtocolPort ==> etMessageService pushMessage
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
 etMessageService ==> etMessageQueue push
-Node1 <== etThread
 etMessageService <== etMessageQueue
-main <== Node1
+etMessageService ==> etSema wakeup
+etMessageService <== etSema
+etMessageService ==> etMutex leave
+etMessageService <== etMutex
+etMessageService <== etSema
 CommunicationProtocolPort <== etMessageService
-main ==> Node1 stop
-Receiver <== CommunicationProtocolPort
-Receiver ==> Node1 stopMessageServices
-Node1 ==> etMessageService stop
-Receiver <== Receiver
-MsgDispatcher_PhysicalThread2 <== Receiver
-etMessageService <== MsgDispatcher_PhysicalThread2
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
-etMessageService <== etMessageQueue
-etMessageService <== etMessageService
 etMessageService ==> etMessageQueue isNotEmpty
+Receiver <== CommunicationProtocolPort
 etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage
+etMessageService ==> etMutex enter
+etMessageService <== etMutex
+Receiver >>> DataReceived
+etMessageService ==> etMessageQueue pop
+Receiver <== Receiver
+etMessageService <== etMessageQueue
+MsgDispatcher_PhysicalThread2 <== Receiver
+etMessageService ==> etMutex leave
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer
 etMessageService <== etMessageService
-etThread <== etMessageService
+etMessageService ==> etMutex enter
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage
+MsgDispatcher_PhysicalThread1 ==> Sender _receiveMessage
+Sender >>> Done
+MsgDispatcher_PhysicalThread1 <== Sender
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMessageService returnMessageBuffer
+etMessageService ==> etMutex enter
+Node1 <== etThread
+main <== Node1
+main ==> Node1 stop
+Node1 ==> Node1 stopMessageServices
+Node1 ==> etMessageService stop
 etMessageService ==> etThread destruct
 etMessageService <== etThread
 Node1 <== etMessageService
@@ -153,7 +186,7 @@ Node1 ==> etMessageService stop
 etMessageService ==> etThread destruct
 etMessageService <== etThread
 Node1 <== etMessageService
-Receiver <== Node1
+Node1 <== Node1
 main <== Node1
 main ==> Node1 destroy
 Node1 ==> Node1 destroyMessageServices
