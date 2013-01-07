@@ -19,10 +19,16 @@ RoomModel trafficlight.example {
 
 	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
 
+	LogicalSystem LSTraffic {
+		SubSystemRef main: SSTraffic
+	}
+	
 	SubSystemClass SSTraffic ["Subsystem of Trafficlight Example Application. The Subsystem contains all Actors of the application."] {
 		ActorRef application: TrafficlightExampleApplication ["reference to application"]
 		ActorRef TimingService: ATimingService ["reference to timing service"]
 		LayerConnection ref application satisfied_by TimingService.timer 
+	
+		LogicalThread dflt_thread
 	}
 
 	ActorClass TrafficlightExampleApplication ["Toplevel Actor of the Trafficlight Example Application."]{

@@ -19,7 +19,6 @@ import trafficlight.example.PTrafficLight.*;
 public class TrafficController extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PTrafficLightConjPort light1 = null;
 	protected PTrafficLightConjPort light2 = null;
@@ -34,27 +33,28 @@ public class TrafficController extends ActorClassBase {
 	public static final int IFITEM_light2 = 2;
 	public static final int IFITEM_timeout = 3;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public TrafficController(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public TrafficController(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("TrafficController");
 		
 		// initialize attributes
 
 		// own ports
-		light1 = new PTrafficLightConjPort(this, "light1", IFITEM_light1, 0, port_addr[IFITEM_light1][0], peer_addr[IFITEM_light1][0]); 
-		light2 = new PTrafficLightConjPort(this, "light2", IFITEM_light2, 0, port_addr[IFITEM_light2][0], peer_addr[IFITEM_light2][0]); 
+		light1 = new PTrafficLightConjPort(this, "light1", IFITEM_light1); 
+		light2 = new PTrafficLightConjPort(this, "light2", IFITEM_light2); 
 		
 		// own saps
-		timeout = new PTimerConjPort(this, "timeout", IFITEM_timeout, 0, port_addr[IFITEM_timeout][0], peer_addr[IFITEM_timeout][0]); 
+		timeout = new PTimerConjPort(this, "timeout", IFITEM_timeout, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -71,22 +71,12 @@ public class TrafficController extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
-	
 	/* state IDs */
 	public static final int STATE_Idle = 2;
 	public static final int STATE_Light1GreenForCars = 3;
@@ -138,7 +128,8 @@ public class TrafficController extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
@@ -341,7 +332,7 @@ public class TrafficController extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_Idle:
 					switch(trigger) {
 						case TRIG_timeout__timeout:
@@ -447,7 +438,7 @@ public class TrafficController extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);
