@@ -56,6 +56,7 @@ void etMSCLogger_setState(char* objectName, char* stateName);
 
 	#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
 	#define ET_MSC_LOGGER_SYNC_EXIT
+	#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
 #endif
 
 
