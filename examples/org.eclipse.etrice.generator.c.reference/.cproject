@@ -65,9 +65,18 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1915798937" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug"/>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.54263550.834203625" name="/" resourcePath="src-gen-ts">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.1267442943" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.989031536" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.2128193487"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.2002258166" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base.1852443642"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.936216193" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.1864486752"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.262501100" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1547425303"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.2064786241" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.2141539090"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.213598096" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1915798937"/>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src-gen|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src-gen"/>
+						<entry excluding="src-gen-ts|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -132,8 +141,8 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src-gen"/>
-						<entry excluding="src-gen|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src-gen-ts|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src-gen-ts"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -160,8 +169,13 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.generator.c.reference"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.generator.c.reference"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.generator.c.reference"/>
+		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>

@@ -1,10 +1,21 @@
 RoomModel cGenRef {
 	import room.basic.types.* from "Types.room"
 	
+	LogicalSystem LS {
+		SubSystemRef sys1: SubSys
+		SubSystemRef sys2: SubSys
+	}
+	
 	SubSystemClass SubSys {
 		ActorRef Sender: Sender
 		ActorRef Receiver: Receiver
 		Binding Sender.dataOut and Receiver.dataIn
+	
+		LogicalThread dflt_thread
+		LogicalThread other_thread
+		
+		ActorInstanceMapping Receiver -> dflt_thread
+		ActorInstanceMapping Sender -> other_thread
 	}
 
 //	SubSystemClass SubSysSomewhatBigger {

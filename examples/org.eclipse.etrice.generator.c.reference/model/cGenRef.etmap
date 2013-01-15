@@ -1,0 +1,16 @@
+MappingModel cgenRef {
+	
+	import cGenRef from "cGenRef.room"
+	import cGenRef from "cGenRef.etphys"
+	
+	Mapping cGenRef.LS -> cGenRef.Sys {
+		SubSystemMapping sys1 -> node1 {
+			ThreadMapping dflt_thread -> PhysicalThread1
+			ThreadMapping other_thread -> PhysicalThread2
+		}
+		SubSystemMapping sys2 -> node2 {
+			ThreadMapping dflt_thread -> PhysicalThread1
+			ThreadMapping other_thread -> PhysicalThread2
+		}
+	}
+}
