@@ -109,7 +109,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("* self, int new_state) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("self->state = new_state;");
+      _builder.append("self->state = (etInt16) new_state;");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

@@ -58,7 +58,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	'''
 
 		«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
-			self->state = new_state;
+			self->state = (etInt16) new_state;
 		}
 
 		«langExt.accessLevelPrivate»int getState(«ac.name»* self) {

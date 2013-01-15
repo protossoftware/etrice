@@ -34,6 +34,8 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -90,6 +92,23 @@ class CExtensions implements ILanguageExtension {
 
 	def String getDispSourceFileName(RoomClass rc) {
 		return rc.name+"_Disp.h";
+	}
+	
+	// used
+	def String getCHeaderFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+".h";
+	}
+
+	def String getCSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+".c";
+	}
+
+	def String getInstSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+"_Inst.h";
+	}
+
+	def String getDispSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+"_Disp.h";
 	}
 
 	def getIncludeGuardString(String filename){

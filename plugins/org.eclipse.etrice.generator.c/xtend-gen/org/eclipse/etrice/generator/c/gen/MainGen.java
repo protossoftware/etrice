@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.c.gen.ActorClassGen;
 import org.eclipse.etrice.generator.c.gen.DataClassGen;
+import org.eclipse.etrice.generator.c.gen.NodeGen;
+import org.eclipse.etrice.generator.c.gen.NodeRunnerGen;
 import org.eclipse.etrice.generator.c.gen.ProtocolClassGen;
-import org.eclipse.etrice.generator.c.gen.SubSystemClassGen;
-import org.eclipse.etrice.generator.c.gen.SubSystemRunnerGen;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
@@ -28,10 +28,10 @@ public class MainGen implements IGenerator {
   private ActorClassGen actorClassGen;
   
   @Inject
-  private SubSystemClassGen subsystemClassGen;
+  private NodeGen subsystemClassGen;
   
   @Inject
-  private SubSystemRunnerGen subsystemRunnerGen;
+  private NodeRunnerGen subsystemRunnerGen;
   
   @Inject
   private PrepareFileSystem prepFS;

@@ -13,8 +13,11 @@
 package org.eclipse.etrice.core.etmap.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,16 +47,40 @@ public class ETMapUtil {
 
 	@SuppressWarnings("serial")
 	private static class PathToPThread extends HashMap<String, PhysicalThread> {}
+	
 	@SuppressWarnings("serial")
 	private static class PathToNodeRef extends HashMap<String, NodeRef> {}
+	
 	@SuppressWarnings("serial")
 	private static class LThreadToPThread extends HashMap<LogicalThread, PhysicalThread> {}
 	
+	@SuppressWarnings("serial")
+	private static class NodeRefToSubSysInstances extends HashMap<NodeRef, List<String>> {
+		void put(NodeRef nr, String path) {
+			List<String> list = get(nr);
+			if (list==null) {
+				list = new ArrayList<String>();
+				put(nr, list);
+			}
+			list.add(path);
+		}
+	}
+	
 	private static PathToPThread path2pthread = new PathToPThread();
 	private static PathToNodeRef path2ndref = new PathToNodeRef();
+	private static NodeRefToSubSysInstances ndref2ssipaths = new NodeRefToSubSysInstances();
+	private static HashSet<NodeRef> noderefs = new HashSet<NodeRef>();
 	
-	public static NodeRef getNodeRef(ActorInstance ai) {
-		String path = ai.getPath();
+	public static Collection<NodeRef> getNodeRefs() {
+		return noderefs;
+	}
+	
+	public static List<String> getSubSystemInstancePaths(NodeRef nr) {
+		return ndref2ssipaths.get(nr);
+	}
+	
+	public static NodeRef getNodeRef(StructureInstance si) {
+		String path = si.getPath();
 		NodeRef nodeRef = path2ndref.get(path);
 		return nodeRef;
 	}
@@ -98,6 +125,8 @@ public class ETMapUtil {
 						+InstanceBase.pathDelim+ssmp.getLogicalSubSys().getName();
 				
 				path2ndref.put(path, ssmp.getNode());
+				ndref2ssipaths.put(ssmp.getNode(), path);
+				noderefs.add(ssmp.getNode());
 				
 				LThreadToPThread lthread2pthread = new LThreadToPThread();
 				for (ThreadMapping tmp : ssmp.getThreadMappings()) {

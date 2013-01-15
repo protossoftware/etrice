@@ -2,46 +2,67 @@ package org.eclipse.etrice.generator.c.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.eclipse.emf.common.util.EList;
+import java.util.Collection;
+import java.util.List;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 
 @Singleton
 @SuppressWarnings("all")
-public class SubSystemRunnerGen {
+public class NodeRunnerGen {
   @Inject
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
-  private RoomExtensions roomExt;
+  private CExtensions _cExtensions;
+  
+  @Inject
+  private RoomExtensions _roomExtensions;
   
   public void doGenerate(final Root root) {
-    EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (final SubSystemInstance sc : _subSystemInstances) {
-      {
-        SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _plus = (_generationTargetPath + _path);
-        this.fileAccess.setOutputPath(_plus);
-        SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        String _name = _subSystemClass_2.getName();
-        String _plus_1 = (_name + "_Runner.c");
-        CharSequence _generateSourceFile = this.generateSourceFile(root, sc);
-        this.fileAccess.generateFile(_plus_1, _generateSourceFile);
+    boolean first = true;
+    Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
+    for (final NodeRef nr : _nodeRefs) {
+      List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
+      for (final String instpath : _subSystemInstancePaths) {
+        {
+          StructureInstance _instance = root.getInstance(instpath);
+          final SubSystemInstance ssi = ((SubSystemInstance) _instance);
+          String _name = nr.getName();
+          String _plus = (_name + "_");
+          String _name_1 = ssi.getName();
+          final String clsname = (_plus + _name_1);
+          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
+          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+          String _path = this._roomExtensions.getPath(_subSystemClass_1);
+          String _plus_1 = (_generationTargetPath + _path);
+          this.fileAccess.setOutputPath(_plus_1);
+          String _plus_2 = (clsname + "_Runner.c");
+          CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, first);
+          this.fileAccess.generateFile(_plus_2, _generateSourceFile);
+          first = false;
+        }
       }
     }
   }
   
-  public CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi) {
+  public CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final boolean first) {
     CharSequence _xblockexpression = null;
     {
-      final SubSystemClass ssc = ssi.getSubSystemClass();
+      final NodeRef nr = ETMapUtil.getNodeRef(ssi);
+      String _name = nr.getName();
+      String _plus = (_name + "_");
+      String _name_1 = ssi.getName();
+      final String clsname = (_plus + _name_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -52,14 +73,20 @@ public class SubSystemRunnerGen {
       _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
-      _builder.append("* this class contains the main function running component ");
-      String _name = ssi.getName();
-      _builder.append(_name, " ");
+      _builder.append("* this class contains the main function running Node ");
+      String _name_2 = nr.getName();
+      _builder.append(_name_2, " ");
+      _builder.append(" with SubSystem ");
+      String _name_3 = ssi.getName();
+      _builder.append(_name_3, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* it instantiates ");
-      String _name_1 = ssi.getName();
-      _builder.append(_name_1, " ");
+      _builder.append("* it instantiates Node ");
+      String _name_4 = nr.getName();
+      _builder.append(_name_4, " ");
+      _builder.append(" with SubSystem ");
+      String _name_5 = ssi.getName();
+      _builder.append(_name_5, " ");
       _builder.append(" and starts and ends the lifecycle");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
@@ -68,9 +95,9 @@ public class SubSystemRunnerGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("#include \"");
-      String _name_2 = ssc.getName();
-      _builder.append(_name_2, "");
-      _builder.append(".h\"");
+      String _cHeaderFileName = this._cExtensions.getCHeaderFileName(nr, ssi);
+      _builder.append(_cHeaderFileName, "");
+      _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("#include \"debugging/etLogger.h\"");
@@ -93,8 +120,15 @@ public class SubSystemRunnerGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("int main(void) {");
-      _builder.newLine();
+      {
+        if (first) {
+          _builder.append("int main(void) {");
+          _builder.newLine();
+        } else {
+          _builder.append("static int main_unused(void) {");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("etUserEntry(); /* platform specific */");
       _builder.newLine();
@@ -111,13 +145,11 @@ public class SubSystemRunnerGen {
       _builder.append("/* startup sequence  of lifecycle */");
       _builder.newLine();
       _builder.append("\t");
-      String _name_3 = ssc.getName();
-      _builder.append(_name_3, "	");
+      _builder.append(clsname, "	");
       _builder.append("_init(); \t\t/* lifecycle init */");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      String _name_4 = ssc.getName();
-      _builder.append(_name_4, "	");
+      _builder.append(clsname, "	");
       _builder.append("_start(); \t/* lifecycle start */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -129,8 +161,7 @@ public class SubSystemRunnerGen {
       _builder.append("/* run Scheduler */");
       _builder.newLine();
       _builder.append("\t");
-      String _name_5 = ssc.getName();
-      _builder.append(_name_5, "	");
+      _builder.append(clsname, "	");
       _builder.append("_run();");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -142,13 +173,11 @@ public class SubSystemRunnerGen {
       _builder.append("/* shutdown sequence of lifecycle */");
       _builder.newLine();
       _builder.append("\t");
-      String _name_6 = ssc.getName();
-      _builder.append(_name_6, "	");
+      _builder.append(clsname, "	");
       _builder.append("_stop(); \t\t/* lifecycle stop */");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      String _name_7 = ssc.getName();
-      _builder.append(_name_7, "	");
+      _builder.append(clsname, "	");
       _builder.append("_destroy(); \t/* lifecycle destroy */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

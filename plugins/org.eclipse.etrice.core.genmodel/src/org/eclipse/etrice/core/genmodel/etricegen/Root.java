@@ -261,6 +261,14 @@ public interface Root extends EObject {
 	 */
 	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	StructureInstance getInstance(String path);
+
 	// TODO: is this the right place ?
 	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
 	HashSet<DataClass> getReferencedDataClasses(ActorClass cls);

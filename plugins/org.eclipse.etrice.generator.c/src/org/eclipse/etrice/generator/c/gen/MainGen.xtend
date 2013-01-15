@@ -20,7 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
-import org.eclipse.etrice.generator.c.gen.SubSystemClassGen
+import org.eclipse.etrice.generator.c.gen.NodeGen
 
 @Singleton
 class MainGen implements IGenerator {
@@ -28,8 +28,8 @@ class MainGen implements IGenerator {
 	@Inject DataClassGen dataClassGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
-	@Inject SubSystemClassGen subsystemClassGen
-	@Inject SubSystemRunnerGen subsystemRunnerGen
+	@Inject NodeGen subsystemClassGen
+	@Inject NodeRunnerGen subsystemRunnerGen
 	@Inject PrepareFileSystem prepFS
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {

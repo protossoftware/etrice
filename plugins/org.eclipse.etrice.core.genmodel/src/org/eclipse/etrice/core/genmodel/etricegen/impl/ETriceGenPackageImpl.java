@@ -1170,6 +1170,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		op = addEOperation(rootEClass, this.getExpandedActorClass(), "getExpandedActorClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getActorInstance(), "ai", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(rootEClass, this.getStructureInstance(), "getInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(instanceBaseEClass, InstanceBase.class, "InstanceBase", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstanceBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInstanceBase_Path(), ecorePackage.getEString(), "path", null, 0, 1, InstanceBase.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

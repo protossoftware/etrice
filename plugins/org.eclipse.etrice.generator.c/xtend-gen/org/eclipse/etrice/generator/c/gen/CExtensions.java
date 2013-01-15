@@ -6,7 +6,9 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -113,6 +115,38 @@ public class CExtensions implements ILanguageExtension {
   public String getDispSourceFileName(final RoomClass rc) {
     String _name = rc.getName();
     return (_name + "_Disp.h");
+  }
+  
+  public String getCHeaderFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + ".h");
+  }
+  
+  public String getCSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + ".c");
+  }
+  
+  public String getInstSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + "_Inst.h");
+  }
+  
+  public String getDispSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + "_Disp.h");
   }
   
   public CharSequence getIncludeGuardString(final String filename) {
