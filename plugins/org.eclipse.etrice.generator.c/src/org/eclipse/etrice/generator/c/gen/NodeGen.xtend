@@ -156,14 +156,14 @@ class NodeGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "initMessageServices")
 			
 			/* filling all message service threads with data */
-			«FOR thread: nr.type.threads»
+			«FOR thread: nr.type.threads SEPARATOR "\n"»
 				msgService_«thread.name».thread.stacksize = «thread.stacksize»;
 				msgService_«thread.name».thread.priority = «thread.prio»;
 				msgService_«thread.name».thread.threadName = "«thread.name»";
 				msgService_«thread.name».thread.threadFunction = (etThreadFunction) etMessageService_execute;
 				msgService_«thread.name».thread.threadFunctionData = &msgService_«thread.name»;
+				
 			«ENDFOR»
-			
 			/* initialization of all message services */
 			«FOR thread: nr.type.threads»
 				etMessageService_init(&msgService_«thread.name», &msgBuffer_«thread.name», MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_«thread.name»_receiveMessage);
@@ -290,19 +290,23 @@ class NodeGen {
 
 		void «clsname»_constructActorInstances(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "constructActorInstances")
+			
 			«FOR ai : ssi.allContainedInstances»
 				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
 					«languageExt.memberInUse(ai.actorClass.name, languageExt.constructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
+			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 
 		void «clsname»_initActorInstances(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "initActorInstances")
+			
 			«FOR ai : ssi.allContainedInstances»
 				«ai.actorClass.name»_init(&«ai.path.getPathName()»);
 			«ENDFOR»
+			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 		
@@ -322,15 +326,6 @@ class NodeGen {
 
 		#include "messaging/etMessageService.h"
 		#include "platform/etMemory.h"
-		
-		/* instantiation of message services */
-		
-		/* MessageServices */
-		«FOR thread: nr.type.threads»
-			static uint8 msgBuffer_«thread.name»;
-			static etMessageService msgService_«thread.name»;
-		«ENDFOR»
-
 
 		/* include all used ActorClasses */
 		«FOR actorClass : root.getUsedActorClasses()»
@@ -342,6 +337,11 @@ class NodeGen {
 			#include "«protocolClass.name».h"
 		«ENDFOR»
 		
+		/* instantiation of message services */
+		«FOR thread: nr.type.threads»
+			static uint8 msgBuffer_«thread.name»;
+			static etMessageService msgService_«thread.name»;
+		«ENDFOR»
 		
 		/* declarations of all ActorClass instances (const and variable structs) */
 
@@ -454,7 +454,7 @@ class NodeGen {
 		val idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getPhysicalThread(pi.peers.get(0).eContainer as ActorInstance).name
 		
-		"{"+getInterfaceItemInstanceData(pi)+"," 
+		"{"+getInterfaceItemInstanceData(pi)+", " 
 		+msgSvc+", "
 		+(objId+idx)+", "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
@@ -529,30 +529,30 @@ class NodeGen {
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
 		
-		«FOR thread: nr.type.threads»
+		«FOR thread: nr.type.threads SEPARATOR "\n"»
 			static void MsgDispatcher_«thread.name»_receiveMessage(const etMessage* msg){
 				ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_«thread.name»", "receiveMessage")
 				switch(msg->address){
 				
-					«FOR ai : ssi.allContainedInstances»
+					«FOR ai : ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)»
 						/* interface items of «ai.path» */
 						«FOR pi : ai. orderedIfItemInstances.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN)»
 							«IF pi.replicated»
 								«FOR peer: pi.peers»
 									case «pi.objId+pi.peers.indexOf(peer)»:
-									«IF (pi.protocol.handlesReceive(pi.isConjugated()))»
-										switch (msg->evtID){
-											«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
-												case «pi.protocol.name»_«h.msg.codeName»:
-													«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+										«IF (pi.protocol.handlesReceive(pi.isConjugated()))»
+											switch (msg->evtID){
+												«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
+													case «pi.protocol.name»_«h.msg.codeName»:
+														«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»],msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+													break;
+												«ENDFOR»
+												default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
 												break;
-											«ENDFOR»
-											default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
-											break;
-											}										
-									«ELSE»
-										«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
-									«ENDIF»
+												}										
+										«ELSE»
+											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+										«ENDIF»
 									break;
 								«ENDFOR»
 							«ELSE»
