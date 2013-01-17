@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="my.etrice.generator.launch.DerivedGeneratorLaunchConfigurationDelegate"
+            delegateDescription="Generates Java source code from ROOM models"
+            delegateName="Derived Java Generator Delegate"
+            id="my.etrice.generator.launch.launchConfigurationType"
+            modes="run,debug"
+            name="Derived Java Generator">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="my.etrice.generator.launch.launchConfigurationType"
+            icon="icons/derived-launch.gif"
+            id="my.etrice.generator.launch.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="my.etrice.generator.launch.DerivedGeneratorLaunchConfigurationTabGroup"
+            description="Tab Group for Derived Java Generator Launch Configurations"
+            id="my.etrice.generator.launch.launchConfigurationTabGroup"
+            type="my.etrice.generator.launch.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+</plugin>
