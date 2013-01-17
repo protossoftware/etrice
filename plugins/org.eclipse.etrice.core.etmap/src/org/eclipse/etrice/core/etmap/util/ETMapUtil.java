@@ -108,6 +108,8 @@ public class ETMapUtil {
 	public static void processModels(Root genmodel, ResourceSet rs) {
 		path2pthread.clear();
 		path2ndref.clear();
+		ndref2ssipaths.clear();
+		noderefs.clear();
 		
 		for (Resource res : rs.getResources()) {
 			if (!res.getContents().isEmpty()) {
