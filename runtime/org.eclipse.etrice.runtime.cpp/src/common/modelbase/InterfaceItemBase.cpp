@@ -11,19 +11,23 @@
 
 namespace etRuntime {
 
-InterfaceItemBase::InterfaceItemBase (IEventReceiver& actor, IRTObject* parent, std::string name, int localId, int idx, Address ownAddress, Address peerAddress)
+InterfaceItemBase::InterfaceItemBase (IEventReceiver& evtReceiver, IRTObject* parent, std::string name, int localId, int idx, Address ownAddress, Address peerAddress)
 : AbstractMessageReceiver(parent, ownAddress, name),
   m_idx(idx),
   m_localId(localId),
+  m_actorPath(name),
   m_peerAddress(peerAddress),
   m_ownMsgReceiver(RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(ownAddress.m_threadID)),
   m_peerMsgReceiver(peerAddress.isValid()? RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.m_threadID): 0),
-  m_actor(&actor)
+  m_eventReceiver(&evtReceiver)
 {
 	if (getAddress().isValid() && m_ownMsgReceiver->isMsgService()) {
 		MessageService* ms = static_cast<MessageService*>(m_ownMsgReceiver);
 		// register at the own dispatcher to receive messages
 		ms->getMessageDispatcher().addMessageReceiver(*this);
+	}
+	if (parent) {
+		m_actorPath = parent->getInstancePath();
 	}
 }
 

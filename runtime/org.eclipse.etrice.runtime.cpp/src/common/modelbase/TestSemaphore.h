@@ -9,31 +9,28 @@
 #define TESTSEMAPHORE_H_
 
 #include <iostream>
+#include <semaphore.h>
 
 namespace etRuntime {
 
 class TestSemaphore { //extends Semaphore
 public:
+	TestSemaphore(int permits = 1)
+		: m_sem()
+	{
+		sem_init(&m_sem, 0, permits);
+	}
+
 	virtual ~TestSemaphore();
 
-	TestSemaphore(int permits) {
-	}
-	void release(int count) {};
+	void give() { sem_post(&m_sem); };
+	void take() { sem_wait(&m_sem); };
 
-	void printWaitingThreads() {
-		std::cout << ">>> begin semaphore info >>>" << std::endl;
-//		std::cout << "current thread is " + Thread.currentThread().getName() << std::endl;
-//		Collection < Thread > threads = getQueuedThreads();
-//		if (threads.isEmpty())
-//			std::cout << " no waiting threads" << std::endl;
-//		else
-//			for (Thread thread : threads) {
-//				std::cout << " blocked: " << thread.getName() << std::endl;
-//			}
-		std::cout << "<<< end semaphore info <<<" << std::endl;
-	}
+	void printWaitingThreads();
+
 private:
-	TestSemaphore();
+	sem_t m_sem;
+
 	TestSemaphore(const TestSemaphore& right);
 	TestSemaphore& operator=(const TestSemaphore& right);
 

@@ -13,6 +13,7 @@ ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownA
 	: 	EventReceiver(parent, name),
 		IMessageReceiver(),
 		m_state(0),
+		history(0), //to be instantiated by derived class
 		m_RTSystemPort(0),
 		m_className("noname"),
 		m_ownAddr(ownAddr),
@@ -26,6 +27,8 @@ ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownA
 ActorClassBase::~ActorClassBase() {
 	delete m_RTSystemPort;
 	m_RTSystemPort = 0;
+	delete history;
+	history = 0;
 }
 
 bool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {

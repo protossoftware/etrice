@@ -20,12 +20,12 @@ class IEventReceiver;
 
 class InterfaceItemBase : public AbstractMessageReceiver{
 public:
-	InterfaceItemBase (IEventReceiver& actor, IRTObject* parent, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
+	InterfaceItemBase (IEventReceiver& evtReceiver, IRTObject* parentActor, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
 	virtual ~InterfaceItemBase();
 
 	int getIdx() const  { return m_idx; } ;
-	IEventReceiver& getActor() {	return *m_actor; };
-	IRTObject& getActorRTObject() {	return *this; };
+	IEventReceiver& getEventReceiver() {	return *m_eventReceiver; };
+	std::string& getActorPath() {	return m_actorPath; };
 	int getLocalId() const {return m_localId; };
 
 	void setMsgReceiver(IMessageReceiver& msgReceiver) {	m_ownMsgReceiver = &msgReceiver; };
@@ -40,10 +40,12 @@ private:
 	int m_idx;
 	int m_localId;
 
+	std::string m_actorPath;
+
 	Address m_peerAddress;
 	IMessageReceiver* m_ownMsgReceiver;
 	IMessageReceiver* m_peerMsgReceiver;
-	IEventReceiver* m_actor;
+	IEventReceiver* m_eventReceiver;
 
 	InterfaceItemBase();
 

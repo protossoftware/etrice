@@ -59,6 +59,8 @@ protected:
 	 * the current state
 	 */
 	int m_state;
+ 	int* history; //Todo pka: name is not prefixed by m_ because generic generator uses this member
+
 	RTSystemServicesProtocolPort* m_RTSystemPort;
 
 	virtual bool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);

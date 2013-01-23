@@ -63,7 +63,10 @@ class Initialization {
 	
 	def initializeArrayWithValues(String varName, String[] values) {
 		'''
-		«values.map(v | varName + "[" + values.indexOf(v) + "] = " + v + ";" ).join("\r\n")»
+		«var i = -1»
+		«FOR v : values»
+			«varName»[«i=i+1»] = «v»;
+		«ENDFOR»
 		'''
 	}
 

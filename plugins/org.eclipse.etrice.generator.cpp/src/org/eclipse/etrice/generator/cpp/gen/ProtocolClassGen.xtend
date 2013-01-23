@@ -249,7 +249,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«ENDFOR»
 				default:
 			«ENDIF»
-					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+					getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 			«IF pc.handlesReceive(conj)»
 					break;
 			}

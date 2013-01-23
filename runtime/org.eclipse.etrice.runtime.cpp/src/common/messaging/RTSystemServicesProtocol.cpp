@@ -69,7 +69,7 @@ void RTSystemServicesProtocolPort::receive(Message* msg) {
 		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
 			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+		getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 	}
 };
 
@@ -147,7 +147,7 @@ void RTSystemServicesProtocolConjPort::receive(Message* msg) {
 		if (msg->hasDebugFlagSet()) {			// TODO: model switch for activation of this flag
 			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
 		}
-		getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+		getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 	}
 }
 

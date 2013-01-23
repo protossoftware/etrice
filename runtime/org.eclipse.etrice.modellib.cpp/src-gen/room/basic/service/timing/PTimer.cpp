@@ -45,7 +45,7 @@
 				DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), PTimer::getMessageString(msg->getEvtId()));
 			}
 			
-					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+					getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 		}
 	};
 	
@@ -128,12 +128,12 @@
 											status=0;
 										}
 										// msg to fsm
-										getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+										getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 									}
 					}
 					break;
 				default:
-					getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+					getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 					break;
 			}
 		}

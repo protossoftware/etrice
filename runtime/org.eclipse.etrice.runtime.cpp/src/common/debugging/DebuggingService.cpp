@@ -26,26 +26,26 @@ DebuggingService::~DebuggingService() {
 
 void DebuggingService::addMessageAsyncOut(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageAsyncOut(portInstances.at(source)->getActorRTObject().getInstancePath(),
-								   portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
+	asyncLogger.addMessageAsyncOut(portInstances.at(source)->getActorPath(),
+								   portInstances.at(target)->getActorPath(), msg);
 }
 
 void DebuggingService::addMessageAsyncIn(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageAsyncIn(portInstances.at(source)->getActorRTObject().getInstancePath(),
-								  portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
+	asyncLogger.addMessageAsyncIn(portInstances.at(source)->getActorPath(),
+								  portInstances.at(target)->getActorPath(), msg);
 }
 
 void DebuggingService::addMessageSyncCall(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageSyncCall(portInstances.at(source)->getActorRTObject().getInstancePath(),
-								   portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
+	asyncLogger.addMessageSyncCall(portInstances.at(source)->getActorPath(),
+								   portInstances.at(target)->getActorPath(), msg);
 }
 
 void DebuggingService::addMessageSyncReturn(Address source, Address target,
 		std::string msg) {
-	asyncLogger.addMessageSyncReturn(portInstances.at(source)->getActorRTObject().getInstancePath(),
-		                             portInstances.at(target)->getActorRTObject().getInstancePath(), msg);
+	asyncLogger.addMessageSyncReturn(portInstances.at(source)->getActorPath(),
+		                             portInstances.at(target)->getActorPath(), msg);
 }
 
 void DebuggingService::addActorState(const ActorClassBase& actor,

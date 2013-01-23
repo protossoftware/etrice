@@ -203,6 +203,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		 						  											 const std::vector<std::vector<etRuntime::Address> >& peer_addr)
 		:  «ac.generateConstructorInitalizerList»
 		{
+			«IF ac.hasNonEmptyStateMachine»
+			history = new int[s_numberOfStates];
+			for (int i = 0; i < s_numberOfStates; i++) {
+				history[i] = NO_STATE;
+			}
+			«ENDIF»
 			setClassName("«ac.name»");
 			«ac.attributes.attributeInitialization(false)»
 		

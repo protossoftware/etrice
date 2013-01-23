@@ -20,6 +20,10 @@ tcbs(),
 usedTcbsRoot(0),
 freeTcbsRoot(0)
 {
+	history = new int[s_numberOfStates];
+	for (int i = 0; i < s_numberOfStates; i++) {
+		history[i] = NO_STATE;
+	}
 	setClassName("ATimingService");
 	// initialize attributes
 	for (int i=0;i<10;i++){
@@ -47,8 +51,8 @@ void ATimingService::destroy(){
 
 std::string ATimingService::s_stateStrings[] = {"<no state>","<top>","Operational"
 };
+const int ATimingService::s_numberOfStates = 3;
 
-		
 void ATimingService::setState(int new_state) {
 	DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);
 	if (s_stateStrings[new_state]!="Idle") {
@@ -204,8 +208,8 @@ int ATimingService::enterHistory(int state, bool handler, bool skip_entry) {
 
 void ATimingService::executeInitTransition() {
 	int chain = CHAIN_TRANS_INITIAL_TO__Operational;
-	int next = executeTransitionChain(chain, 0, 0);
-	next = enterHistory(next, false, false);
+	int next = ATimingService::executeTransitionChain(chain, 0, 0);
+	next = ATimingService::enterHistory(next, false, false);
 	setState(next);
 }
 
@@ -247,9 +251,9 @@ void ATimingService::receiveEvent(InterfaceItemBase* ifitem, int evt, void* gene
 		}
 	}
 	if (chain != NOT_CAUGHT) {
-		exitTo(getState(), catching_state, is_handler);
-		int next = executeTransitionChain(chain, ifitem, generic_data);
-		next = enterHistory(next, is_handler, skip_entry);
+		ATimingService::exitTo(getState(), catching_state, is_handler);
+		int next = ATimingService::executeTransitionChain(chain, ifitem, generic_data);
+		next = ATimingService::enterHistory(next, is_handler, skip_entry);
 		setState(next);
 	}
 }

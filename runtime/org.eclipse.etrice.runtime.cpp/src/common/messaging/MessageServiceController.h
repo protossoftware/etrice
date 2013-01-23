@@ -33,8 +33,8 @@ public:
 	//it is included for test purposes
 	//currently it is not called
 	void connectAll();
-	void start();
-	void stop();
+	void start(bool singlethreaded);
+	void stop(bool singlethreaded);
 
 	//TODO: this is only for single threaded configurations
 	void runOnce();

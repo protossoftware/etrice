@@ -54,19 +54,19 @@ void SubSystemClassBase::init() {
 	}
 }
 
-void SubSystemClassBase::start() {
+void SubSystemClassBase::start(bool singlethreaded) {
 	// start all actors instances
 	m_RTSystemPort->executeInitialTransition();
 
 	// start all message services
-	RTServices::getInstance().getMsgSvcCtrl().start();
+	RTServices::getInstance().getMsgSvcCtrl().start(singlethreaded);
 
 }
 
-void SubSystemClassBase::stop() {
+void SubSystemClassBase::stop(bool singlethreaded) {
 	std::cout << "*** MainComponent " << this->getInstancePath() << "::stop ***" << std::endl;
 
-	RTServices::getInstance().getMsgSvcCtrl().stop();
+	RTServices::getInstance().getMsgSvcCtrl().stop(singlethreaded);
 	std::cout << "=== done stop MsgSvcCtrl" << std::endl;
 
 	// stop all actor instances
@@ -119,9 +119,9 @@ ActorClassBase* SubSystemClassBase::getInstance(std::string path) {
 
 // this is to run integration tests
 // TODO synchronized
-void SubSystemClassBase::setTestSemaphore(TestSemaphore* sem) {
+void SubSystemClassBase::setTestSemaphore(TestSemaphore& sem) {
 	m_testErrorCode = -1;
-	m_testSem = sem;
+	m_testSem = &sem;
 }
 
 //TODO synchronized
@@ -132,15 +132,15 @@ int SubSystemClassBase::getTestErrorCode() const {
 void SubSystemClassBase::testFinished(int errorCode) {
 	if (m_testSem != 0) {
 		std::cout
-			<< "org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore"
+			<< "org.eclipse.etrice.runtime.cpp.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore"
 			<< std::endl;
 		//m_testSem.printWaitingThreads();
 		//TODO synchronized (this) {
 		m_testErrorCode = errorCode;
-		m_testSem->release(1);
+		m_testSem->give();
 		//}
 		std::cout
-			<< "org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): semaphore released"
+			<< "org.eclipse.etrice.runtime.cpp.modelbase.SubSystemClassBase.testFinished(int): semaphore released"
 			<< std::endl;
 		//m_testSem.printWaitingThreads();
 		//TODO

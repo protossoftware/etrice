@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <pthread.h>
 #include "common/messaging/MessageDispatcher.h"
 #include "common/messaging/Address.h"
 #include "common/modelbase/IEventReceiver.h"
@@ -17,7 +18,7 @@
 
 namespace etRuntime {
 
-//TODO: implementation missing yet for threads
+//TODO: abstraction from posix threads missing
 
 class MessageService: public IMessageReceiver, public IRTObject {
 public:
@@ -25,16 +26,18 @@ public:
 	virtual ~MessageService();
 
 	Address getAddress() const {	return m_address; }	;
+	std::string getName() const { return m_name; };
+
+	void start(bool singlethreaded);
 
 	void run();
-	//TODO: for single threaded configuration only
+	// for single threaded configuration only
 	void runOnce();
 
-	//TODO: synchronized
+	void join();
 	void terminate();
-	//TODO: synchronized
 	void receive(Message* msg);
-	//TODO: synchronized
+
 	virtual MessageDispatcher& getMessageDispatcher() {	return m_messageDispatcher; }
 	virtual std::string getInstancePath() const ;
 	virtual std::string getInstancePathName() const ;
@@ -47,7 +50,6 @@ public:
 	// protected methods for sole use by test cases
 protected:
 	MessageSeQueue& getMessageQueue() {	return m_messageQueue;	}
-	//TODO: synchronized
 	long getLastMessageTimestamp() const { return m_lastMessageTimestamp;	}
 
 private:
@@ -57,6 +59,11 @@ private:
 	IRTObject* m_parent;
 	std::string m_name;
 	bool m_running;
+	pthread_t m_thread;
+	pthread_mutex_t m_mutex;
+	pthread_mutexattr_t m_mutexAttr;
+	pthread_cond_t m_conditionVar;
+	pthread_attr_t m_threadAttr;
 
 	// TODO: add internal message queue for less locks (faster thread internal
 	// messaging)

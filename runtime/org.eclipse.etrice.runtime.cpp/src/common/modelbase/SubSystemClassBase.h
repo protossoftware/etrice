@@ -33,8 +33,8 @@ public:
 	virtual void instantiateMessageServices() = 0;
 	virtual void instantiateActors() = 0;
 
-	void start();
-	void stop();
+	void start(bool singlethreaded);
+	void stop(bool singlethreaded);
 	void runOnce();
 
 	void destroy();
@@ -48,7 +48,7 @@ public:
 	// this is to run integration tests
 	//---------------------------------------------
 	// TODO synchronized
-	void setTestSemaphore(TestSemaphore* sem);
+	void setTestSemaphore(TestSemaphore& sem);
 	//TODO synchronized
 	int getTestErrorCode() const;
 	void testFinished(int errorCode);

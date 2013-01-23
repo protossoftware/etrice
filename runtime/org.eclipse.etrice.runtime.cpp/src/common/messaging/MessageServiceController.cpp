@@ -43,31 +43,28 @@ void MessageServiceController::connectAll() {
 	}
 }
 
-void MessageServiceController::start() {
+void MessageServiceController::start(bool singlethreaded) {
 	// start all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//TODO start thread
-		//msgSvc.start();
+		(*it)->start(singlethreaded);
 		// TODOTS: start in order of priorities
 	}
 	m_running = true;
 }
 
-void MessageServiceController::stop() {
+void MessageServiceController::stop(bool singlethreaded) {
 	//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
-	terminate();
-	waitTerminate();
+	if (! singlethreaded) {
+		terminate();
+		waitTerminate();
+	}
 }
 
 void MessageServiceController::waitTerminate() {
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//try {
-			//TODO thread join
-			//msgSvc.join();
-		//} catch (InterruptedException e1) {
-		//}
+		(*it)->join();
 	}
 }
 
@@ -98,8 +95,7 @@ void MessageServiceController::terminate() {
 	// terminate all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//TODO: terminate thread
-		//msgSvc.terminate();
+		(*it)->terminate();
 		// TODOTS: stop in order of priorities
 	}
 }
@@ -108,9 +104,7 @@ void MessageServiceController::runOnce() {
 	if (!m_running) {
 		return;
 	}
-	//m_running = false;
 
-	// terminate all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
 		(*it)->runOnce();

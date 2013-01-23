@@ -1,0 +1,6 @@
+../../src-gen/HandlerTest/HandlerUser.cpp: In member function 'int HandlerUser::executeTransitionChain(int, const etRuntime::InterfaceItemBase*, void*)':
+../../src-gen/HandlerTest/HandlerUser.cpp:324:10: warning: unused variable 'p1' [-Wunused-variable]
+../../src-gen/HandlerTest/Tester.cpp: In member function 'virtual void Tester::receiveEvent(etRuntime::InterfaceItemBase*, int, void*)':
+../../src-gen/HandlerTest/Tester.cpp:142:6: warning: unused variable 'trigger' [-Wunused-variable]
+../../src-gen/ChoicePointTest/CPTester.cpp: In member function 'virtual void CPTester::receiveEvent(etRuntime::InterfaceItemBase*, int, void*)':
+../../src-gen/ChoicePointTest/CPTester.cpp:135:6: warning: unused variable 'trigger' [-Wunused-variable]

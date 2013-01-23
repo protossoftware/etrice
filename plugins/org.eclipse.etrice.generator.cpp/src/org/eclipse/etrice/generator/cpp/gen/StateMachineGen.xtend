@@ -32,13 +32,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	'''
 		protected:
 		 	static std::string s_stateStrings[];
-		
-«««	 	TODOHRR: history defined in ActorClassBase, init in constructor
-«««			history = new int[5];
-«««			for (int i = 0; i < history.length; i++) {
-«««				history[i] = NO_STATE;
-«««			}
-		 	int history[];
+		 	static const int s_numberOfStates;
 		
 		private:
 			 void setState(int new_state);
@@ -49,13 +43,8 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	'''
 		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.getStatePathName()»"
 		«ENDFOR»};
+		const int «ac.name»::s_numberOfStates = «ac.getAllBaseStatesLeavesLast().size + 2»;
 		
-«««	 	TODOHRR: history defined in ActorClassBase, init in constructor
-«««			history = new int[5];
-«««			for (int i = 0; i < history.length; i++) {
-«««				history[i] = NO_STATE;
-«««			}
-				
 		void «ac.name»::setState(int new_state) {
 			DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);
 			if (s_stateStrings[new_state]!="Idle") {

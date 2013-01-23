@@ -277,7 +277,7 @@ RoomModel room.basic.service.timing {
 					status=0;
 				}
 				// msg to fsm
-				getActor().receiveEvent(this, msg->getEvtId(),	msg->getData());
+				getEventReceiver().receiveEvent(this, msg->getEvtId(),	msg->getData());
 			}
 			"
 			}
