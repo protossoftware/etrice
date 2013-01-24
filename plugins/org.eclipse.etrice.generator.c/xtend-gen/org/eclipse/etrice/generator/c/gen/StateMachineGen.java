@@ -95,39 +95,51 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence genExtra(final ExpandedActorClass xpac) {
+  protected CharSequence genExtra(final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
+      _builder.append("\t\t");
       String _accessLevelPrivate = this.langExt.accessLevelPrivate();
-      _builder.append(_accessLevelPrivate, "");
+      _builder.append(_accessLevelPrivate, "		");
       _builder.append("void setState(");
       String _name = ac.getName();
-      _builder.append(_name, "");
+      _builder.append(_name, "		");
       _builder.append("* self, int new_state) {");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
+      _builder.append("\t\t\t");
       _builder.append("self->state = new_state;");
       _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("\t\t");
       String _accessLevelPrivate_1 = this.langExt.accessLevelPrivate();
-      _builder.append(_accessLevelPrivate_1, "");
+      _builder.append(_accessLevelPrivate_1, "		");
       _builder.append("int getState(");
       String _name_1 = ac.getName();
-      _builder.append(_name_1, "");
+      _builder.append(_name_1, "		");
       _builder.append("* self) {");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
+      _builder.append("\t\t\t");
       _builder.append("return self->state;");
       _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  protected String stateType() {
+    return "etInt16";
+  }
+  
+  protected String unreachableReturn() {
+    return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }
 }

@@ -70,9 +70,12 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 
 /**
- * description
+ * a collection of convenience methods that extract more implicit information from a
+ * {@link org.eclipse.etrice.core.room.RoomModel RoomModel}.<br/><br/>
+ * 
+ * All methods of this class are static.
  *
- * @author Henrik Rentz-Reichert initial contribution and API
+ * @author Henrik Rentz-Reichert (initial contribution and API)
  *
  */
 public class RoomHelpers {
@@ -455,6 +458,10 @@ public class RoomHelpers {
 
 	public static List<TrPoint> getAllTrPoints(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), false);
+	}
+
+	public static List<TrPoint> getAllTrPointsRecursive(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), true);
 	}
 
 	public static List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
@@ -890,6 +897,52 @@ public class RoomHelpers {
 		}
 		else
 			return true;
+	}
+	
+	/**
+	 * returns true if this is a (internal or external) end port
+	 * 
+	 * @param port
+	 * @return true if end port
+	 */
+	public static boolean isEndPort(Port port) {
+		return !isRelay(port);
+	}
+	
+	/**
+	 * returns true if this is an internal port
+	 * 
+	 * @param port
+	 * @return true if internal port
+	 */
+	public static boolean isInternal(Port port) {
+		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
+		if (acc instanceof ActorClass) {
+			if (((ActorClass)acc).getIntPorts().contains(port)) {
+				return true;
+			}
+			return false;
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * returns true if this is an external port
+	 * 
+	 * @param port
+	 * @return true if external port
+	 */
+	public static boolean isExternal(Port port) {
+		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
+		if (acc instanceof ActorClass) {
+			for (ExternalPort ep : ((ActorClass)acc).getExtPorts()) {
+				if (ep.getIfport()==port) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean isConstructor(Operation op) {

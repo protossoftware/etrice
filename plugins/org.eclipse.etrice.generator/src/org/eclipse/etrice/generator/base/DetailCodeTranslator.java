@@ -395,6 +395,7 @@ public class DetailCodeTranslator {
 	private void prepare(EObject container) {
 		if (container instanceof ActorClass) {
 			ActorClass ac = (ActorClass) container;
+			provider.setActorClass(ac);
 
 			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
 			for (InterfaceItem item : items) {

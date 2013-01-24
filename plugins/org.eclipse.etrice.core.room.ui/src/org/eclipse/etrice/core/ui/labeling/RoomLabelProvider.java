@@ -168,19 +168,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String image(Port p) {
-		ActorClass ac = (ActorClass) p.eContainer();
-		boolean relay = true;
-		if (ac.getIntPorts().contains(p)) {
-			relay = false;
-		}
-		else {
-			for (ExternalPort ep : ac.getExtPorts()) {
-				if (ep.getIfport()==p) {
-					relay = false;
-					break;
-				}
-			}
-		}
+		boolean relay = RoomHelpers.isRelay(p);
 		if (relay)
 			if (p.isConjugated())
 				if (p.isReplicated())
@@ -249,18 +237,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text(Port p) {
 		String location = null;
-		ActorClass ac = (ActorClass) p.eContainer();
-		if (ac.getIntPorts().contains(p))
+		if (RoomHelpers.isInternal(p))
 			location = "internal";
-		else {
-			for (ExternalPort ep : ac.getExtPorts()) {
-				if (ep.getIfport()==p) {
-					location = "external";
-					break;
-				}
-			}
+		else if (RoomHelpers.isExternal(p)) {
+			location = "external";
 		}
-		if (location==null)
+		else
 			location = "relay";
 		String conjugated = p.isConjugated()?"conjugated ":"";
 		String multiplicity = p.getMultiplicity()>1? ("["+p.getMultiplicity()+"]") : p.getMultiplicity()==-1? "[*]" : "";
