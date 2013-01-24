@@ -152,8 +152,8 @@
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
-		<echo>start HandlerTest</echo>
-		<echo>end   ChoicePointTest</echo>
+		<echo>end   HandlerTest</echo>
+		<echo>start ChoicePointTest</echo>
 		<java output="${output}/runChoicePointTest.txt" classname="ChoicePointTest.SubSystem_CPTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>

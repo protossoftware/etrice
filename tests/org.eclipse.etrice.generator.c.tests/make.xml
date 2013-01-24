@@ -345,8 +345,8 @@
 		<mkdir dir="tmp/log"/>
 		<echo>start HandlerTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
-		<echo>start HandlerTest</echo>
-		<echo>end   ChoicePointTest</echo>
+		<echo>end   HandlerTest</echo>
+		<echo>start ChoicePointTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
 		<echo>end   ChoicePointTest</echo>
 		<echo>start SendingDataTestJava</echo>
