@@ -93,14 +93,18 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 				if (basePath.segmentCount()<2) {
 					// it's a project
 					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(basePath.lastSegment());
-					String abs = project.getRawLocationURI().toString();
-					base = URI.createURI(abs);
+					if (project!=null) {
+						String abs = project.getRawLocationURI().toString();
+						base = URI.createURI(abs);
+					}
 				}
 				else {
 					// it's a folder
 					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(basePath);
-					String abs = folder.getRawLocationURI().toString();
-					base = URI.createURI(abs);
+					if (folder!=null) {
+						String abs = folder.getRawLocationURI().toString();
+						base = URI.createURI(abs);
+					}
 				}
 			}
 			else if (base.isRelative()) {
