@@ -71,6 +71,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
+	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -107,7 +108,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			
 			RoomModel model = (RoomModel) res.getContents().get(0);
 			if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
 			}
 		}
 		catch (RuntimeException re) {
