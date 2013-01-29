@@ -6,6 +6,7 @@ import com.google.inject.Singleton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +28,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
@@ -394,6 +396,50 @@ public class RoomExtensions {
     }
   }
   
+  public List<Message> getIncoming(final InterfaceItem p) {
+    List<Message> _xifexpression = null;
+    ProtocolClass _protocol = RoomHelpers.getProtocol(p);
+    boolean _notEquals = (!Objects.equal(_protocol, null));
+    if (_notEquals) {
+      ProtocolClass _protocol_1 = RoomHelpers.getProtocol(p);
+      boolean _isConjugated = this.isConjugated(p);
+      List<Message> _incoming = this.getIncoming(_protocol_1, _isConjugated);
+      _xifexpression = _incoming;
+    } else {
+      List<Message> _emptyList = Collections.<Message>emptyList();
+      _xifexpression = _emptyList;
+    }
+    return _xifexpression;
+  }
+  
+  public List<Message> getOutgoing(final InterfaceItem p) {
+    List<Message> _xifexpression = null;
+    ProtocolClass _protocol = RoomHelpers.getProtocol(p);
+    boolean _notEquals = (!Objects.equal(_protocol, null));
+    if (_notEquals) {
+      ProtocolClass _protocol_1 = RoomHelpers.getProtocol(p);
+      boolean _isConjugated = this.isConjugated(p);
+      List<Message> _outgoing = this.getOutgoing(_protocol_1, _isConjugated);
+      _xifexpression = _outgoing;
+    } else {
+      List<Message> _emptyList = Collections.<Message>emptyList();
+      _xifexpression = _emptyList;
+    }
+    return _xifexpression;
+  }
+  
+  public boolean isOnlyOutgoing(final InterfaceItem p) {
+    List<Message> _incoming = this.getIncoming(p);
+    boolean _isEmpty = _incoming.isEmpty();
+    return _isEmpty;
+  }
+  
+  public boolean isOnlyIncoming(final InterfaceItem p) {
+    List<Message> _outgoing = this.getOutgoing(p);
+    boolean _isEmpty = _outgoing.isEmpty();
+    return _isEmpty;
+  }
+  
   public PortClass getPortClass(final ProtocolClass pc, final boolean conj) {
     if (conj) {
       return pc.getConjugate();
@@ -440,6 +486,22 @@ public class RoomExtensions {
       }
     }
     return false;
+  }
+  
+  public boolean isConjugated(final InterfaceItem iii) {
+    if ((iii instanceof Port)) {
+      return ((Port) iii).isConjugated();
+    } else {
+      if ((iii instanceof SAPRef)) {
+        return true;
+      } else {
+        if ((iii instanceof SPPRef)) {
+          return false;
+        } else {
+          return false;
+        }
+      }
+    }
   }
   
   public boolean isConjugated(final InterfaceItemInstance iii) {
