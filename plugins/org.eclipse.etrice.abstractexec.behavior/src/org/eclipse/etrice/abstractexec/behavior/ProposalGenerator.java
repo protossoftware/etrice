@@ -21,8 +21,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.State;
@@ -57,7 +57,6 @@ public class ProposalGenerator {
 		return outgoingProposal;
 	}
 
-	
 	public void createProposals(State st) {
 		ActiveRules rules = checker.getActiveRules(st);
 
@@ -65,48 +64,35 @@ public class ProposalGenerator {
 		if (rules == null)
 			return;
 
+		// ignore substates
+		if (RoomHelpers.hasDirectSubStructure(st))
+			return;
+
 		outgoingProposal.clear();
 		incomingProposal.clear();
 
-		Set<SemanticsRule> rulesToIgnore = new HashSet<SemanticsRule>();
-		
-			for (ActiveTrigger trigger : xpac.getActiveTriggers(st)) {
-				SemanticsRule match = null;
-				Port port = (Port) trigger.getIfitem();
-				if (rules.getPortList().contains(port)) {
-					List<SemanticsRule> ruleList = rules.getRulesForPort(port);
-					for (SemanticsRule curRule : ruleList) {
-						if (curRule.getMsg() == trigger.getMsg()) {
-							match = curRule;
-							break;
+		for (InterfaceItem port : rules.getPortList()) {
+			// collect all messages from active triggers
+			Set<Message> messages = new HashSet<Message>();
+			for (ActiveTrigger t : xpac.getActiveTriggers(st))
+				if (t.getIfitem().equals(port))
+					messages.add(t.getMsg());
+			// check if every rule has its messages
+			if (rules.getPortList().contains(port)) {
+				for (SemanticsRule curRule : rules.getRulesForPort(port)) {
+					if (!messages.contains(curRule.getMsg())) {
+						MessageFromIf mif = RoomFactory.eINSTANCE
+								.createMessageFromIf();
+						mif.setFrom(port);
+						mif.setMessage(curRule.getMsg());
+						boolean isOutgoing = RoomHelpers.getMessageListDeep(
+								port, true).contains(curRule.getMsg());
+						if (isOutgoing) {
+							outgoingProposal.add(mif);
+						} else {
+							incomingProposal.add(mif);
 						}
 					}
-				}
-				if (match != null) {
-					// mark this rule for ignoring while generating proposals
-					// as they have already been taken care of
-					rulesToIgnore.add(match);
-				} 
-			}
-
-		// now start generating proposals by listing all the rules and ignoring
-		// the ones
-		// marked above
-		for (InterfaceItem item : rules.getPortList()) {
-			for (SemanticsRule ruleToCheck : rules.getRulesForPort(item)) {
-				if (!rulesToIgnore.contains(ruleToCheck)) {
-					MessageFromIf mif = RoomFactory.eINSTANCE
-							.createMessageFromIf();
-					mif.setFrom(item);
-					mif.setMessage(ruleToCheck.getMsg());
-					boolean isOutgoing = RoomHelpers.getMessageListDeep(item, true)
-							.contains(ruleToCheck.getMsg());
-					if (isOutgoing) {
-						outgoingProposal.add(mif);
-					} else {
-						incomingProposal.add(mif);
-					}
-
 				}
 			}
 		}

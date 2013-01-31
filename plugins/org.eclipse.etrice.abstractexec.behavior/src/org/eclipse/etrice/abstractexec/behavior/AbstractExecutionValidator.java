@@ -10,7 +10,6 @@
  * 
  *******************************************************************************/
 
-
 package org.eclipse.etrice.abstractexec.behavior;
 
 import java.util.List;
@@ -43,6 +42,12 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public class AbstractExecutionValidator implements IRoomValidator {
 
+	// c&p in tests
+	public static String DIAG_CODE_VIOLATION_TRIGGER = "etrice.violation_trigger";
+	public static String DIAG_CODE_VIOLATION_MESSAGESEND = "etrice.violation_messagesend";
+	public static String DIAG_CODE_MISSING_TRIGGER = "etrice.receive_message";
+	public static String DIAG_CODE_MISSING_MESSAGESEND = "etrice.send_message";
+	
 	private static boolean traceExec = false;
 	private static String traceName = "";
 	static {
@@ -72,11 +77,12 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		if (!(object instanceof ActorClass))
 			return;
 		ActorClass ac = (ActorClass) object;
-		if (traceExec && !ac.getName().equals(traceName))
-			return;
-		if (traceExec)
+		if (traceExec) {
+			if (!(traceName.isEmpty() || ac.getName().equals(traceName)))
+				return;
 			System.out.println("AbstractExecutionValidator checking class "
 					+ ac.getName());
+		}
 		boolean oneProtocolsWithSemantics = false;
 		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
 		for (InterfaceItem item : ifItems) {
@@ -137,6 +143,9 @@ public class AbstractExecutionValidator implements IRoomValidator {
 							.println("AbstractExecutionValidator done checking class "
 									+ ac.getName());
 			}
+			else
+				if(traceExec)
+					System.out.println("No checking because internal generation failed");
 		}
 	}
 
@@ -164,16 +173,16 @@ public class AbstractExecutionValidator implements IRoomValidator {
 			messageAcceptor.acceptWarning("State should handle the message "
 					+ msg.getMessage().getName() + " from port "
 					+ msg.getFrom().getName() + " ", container,
-					orig.eContainingFeature(), idx, "Receive message",
+					orig.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER,
 					st.getName());
 		}
 		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
 
 		for (MessageFromIf msg : outgoing) {
-			messageAcceptor.acceptInfo("State could send the message "
+			messageAcceptor.acceptInfo("State should send the message "
 					+ msg.getMessage().getName() + " to port "
 					+ msg.getFrom().getName() + " ", container,
-					orig.eContainingFeature(), idx, "Send message",
+					orig.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND,
 					st.getName());
 
 		}
@@ -212,7 +221,7 @@ public class AbstractExecutionValidator implements IRoomValidator {
 													mif.eContainingFeature(),
 													trig.getMsgFromIfPairs()
 															.indexOf(trig),
-													"VIOLATION", trigger
+													DIAG_CODE_VIOLATION_TRIGGER, trigger
 															.getMsg().getName());
 								}
 							}
@@ -225,7 +234,7 @@ public class AbstractExecutionValidator implements IRoomValidator {
 							"The message violates the semantic rule",
 							orig.eContainer(), orig.eContainingFeature(),
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							"VIOLATION");
+							DIAG_CODE_VIOLATION_MESSAGESEND);
 
 				}
 			}
