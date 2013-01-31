@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -31,8 +32,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestReachability extends TestBase {
-
-	public static String DIAG_CODE_UNREACHABLE = "etrice.unreachable";
 
 	private RoomModel model = null;
 
@@ -49,18 +48,18 @@ public class TestReachability extends TestBase {
 
 		Set<StateGraphItem> items = new HashSet<StateGraphItem>();
 		for (ActorClass ac : model.getActorClasses()) {
-			if(ac.getStateMachine() == null)
+			if (ac.getStateMachine() == null)
 				continue;
 			TreeIterator<EObject> iter = ac.getStateMachine().eAllContents();
-			while(iter.hasNext()){
+			while (iter.hasNext()) {
 				EObject obj = iter.next();
-				if(obj instanceof StateGraphItem)
-					items.add((StateGraphItem)obj);
+				if (obj instanceof StateGraphItem)
+					items.add((StateGraphItem) obj);
 			}
 		}
 
 		for (AbstractValidationDiagnostic d : getIssueCode2diagnostic().get(
-				DIAG_CODE_UNREACHABLE)) {
+				ReachabilityValidator.DIAG_CODE_UNREACHABLE)) {
 			if (d instanceof FeatureBasedDiagnostic) {
 				FeatureBasedDiagnostic dx = (FeatureBasedDiagnostic) d;
 				StateGraph graph = (StateGraph) dx.getSourceEObject();
@@ -79,24 +78,28 @@ public class TestReachability extends TestBase {
 
 		for (StateGraphItem item : items) {
 			if (item instanceof InitialTransition) {
-				if(item.eContainer().eContainer() instanceof ActorClass)
+				if (item.eContainer().eContainer() instanceof ActorClass)
 					continue;
 				State container = (State) item.eContainer().eContainer();
-				Assert.assertTrue(item + " is NOT marked Unreachable (or name doesn't end with '_1' ?)",
+				Assert.assertTrue(
+						item + " is NOT marked Unreachable (or name doesn't end with '_1' ?)",
 						container.getName().endsWith("_1"));
 			} else
-				Assert.assertTrue(item + " is NOT marked Unreachable (or name doesn't end with '_1' ?)", item
-						.getName().endsWith("_1"));
+				Assert.assertTrue(
+						item + " is NOT marked Unreachable (or name doesn't end with '_1' ?)",
+						item.getName().endsWith("_1"));
 		}
 	}
 
 	private void checkUnreachable(StateGraphItem item) {
 		if (item instanceof InitialTransition) {
 			State container = (State) item.eContainer().eContainer();
-			Assert.assertTrue(item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
+			Assert.assertTrue(
+					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
 					container.getName().endsWith("_0"));
 		} else
-			Assert.assertTrue(item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)", item
-					.getName().endsWith("_0"));
+			Assert.assertTrue(
+					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
+					item.getName().endsWith("_0"));
 	}
 }

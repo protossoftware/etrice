@@ -1,0 +1,216 @@
+RoomModel CashTerminal {
+
+	ActorClass Controller {
+		Interface {
+			conjugated Port terminal:TerminalProtocol
+			conjugated Port auth:AuthProtocol
+		}
+		Structure { 
+			external Port terminal
+			external Port auth
+		}
+		Behavior {
+			StateMachine{
+				Transition init: initial -> state0_sm {
+					action {
+						"auth.hello();"
+					}
+				}
+				Transition tr0: state0_sm -> offline {
+					triggers {
+						<serviceNA: auth>
+					}
+					action {
+						"terminal.showOffline();"
+					}
+				}
+				Transition tr1: state0_sm -> idle_sm {
+					triggers {
+						<hello: auth>
+					}
+				}
+				Transition tr2: idle_sm -> handleCard {
+					triggers {
+						<cardEntered: terminal>
+					}
+				}
+				Transition tr3: tp0 of handleCard -> tp0 of handlePIN
+				Transition tr4: tp1 of handlePIN -> idle_sm
+				Transition tr5: handlePIN -> idle_sm {
+					triggers {
+						<correctPIN: auth>
+					}
+					action {
+						"terminal.dispenseMoney();"
+					}
+				}
+				Transition tr6: tp1 of handleCard -> idle_sm
+				State state0_sm
+				State idle_sm {
+					entry {
+						"terminal.showWelcome();"
+					}
+				}
+				State offline
+				State handleCard {
+					subgraph {
+						Transition init: initial -> state0_sm {
+							action {
+								"auth.checkCard();"
+							}
+						}
+						Transition tr0: state0_sm -> wait_sm {
+							triggers {
+								<validCard: auth>
+							}
+							action {
+								"terminal.showPIN();"
+							}
+						}
+						Transition tr1: wait_sm -> my tp0 {
+							triggers {
+								<pinEntered: terminal>
+							}
+						}
+						Transition tr2: state0_sm -> my tp1 {
+							triggers {
+								<invalidCard: auth>
+							}
+						}
+						ExitPoint tp0
+						ExitPoint tp1
+						State state0_sm
+						State wait_sm
+					}
+				}
+				State handlePIN {
+					subgraph {
+						Transition tr0: my tp0 -> wait_sm
+						Transition tr1: wait_sm -> cp cp0 {
+							triggers {
+								<wrongPIN: auth>
+							}
+						}
+						Transition tr2: cp cp0 -> my tp1 {
+							action {
+								"terminal.confiscateCard();"
+							}
+						}
+						Transition tr3: cp cp0 -> wait_sm {
+							cond {
+								"if(count_tries < 2)"
+							}
+						}
+						ChoicePoint cp0
+						EntryPoint tp0
+						ExitPoint tp1
+						State wait_sm {
+							entry {
+								"auth.checkPIN();"
+							}
+						}
+					}
+				}
+			}
+			
+			}
+	}
+	
+	ActorClass AuthServer {
+		Interface {
+			Port client:AuthProtocol
+		}
+		Structure { 
+			external Port client
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: cp cp0 -> error {
+					action {
+						"client.serviceNA();"
+					}
+				}
+				Transition tr2: cp cp0 -> standby {
+					cond {
+						"if(okay)"
+					}
+					action {
+						"client.hello();"
+					}
+				}
+				Transition tr4: standby -> standby {
+					triggers {
+						<checkCard: client>
+					}
+					action {
+						"if(valid)"
+						"\tclient.validCard();"
+						"else"
+						"\tinvalidCard();"
+					}
+				}
+				Transition tr5_vm: standby -> standby {
+					triggers {
+						<checkPIN: client>
+					}
+					action {
+						"if(correct)"
+						"\tclient.correctPIN();"
+						"else"
+						"\tclient.wrongPIN();"
+					}
+				}
+				Transition init: initial -> state0 { }
+				Transition tr6: state0 -> cp cp0 {
+					triggers {
+						<hello: client>
+					}
+				}
+				ChoicePoint cp0
+				State standby
+				State error
+				State state0
+			}
+		}
+	}
+	
+	ProtocolClass TerminalProtocol {
+		incoming {
+			Message showWelcome()
+			Message showPIN()
+			Message confiscateCard()
+			Message dispenseMoney()
+			Message showOffline()
+			
+		}
+		outgoing {
+			Message pinEntered()
+			Message cardEntered()
+		}
+		semantics { 
+			in:showOffline
+			in:showWelcome->out:cardEntered->(in:showPIN->out:pinEntered->(in:dispenseMoney->in:showWelcome,in:confiscateCard->in:showWelcome),in:showWelcome)
+		}
+	}
+	
+	ProtocolClass AuthProtocol {
+		incoming {
+			Message hello()
+			Message checkCard()
+			Message checkPIN()
+		}
+		
+		outgoing {
+			Message validCard()
+			Message invalidCard()
+			Message correctPIN()
+			Message wrongPIN()
+			Message serviceNA()
+			Message hello()
+		}
+		semantics {
+			in:hello->(out:hello->in:checkCard->(out:validCard->in:checkPIN->(out:correctPIN, out:wrongPIN->in:checkPIN->(out:correctPIN, out:wrongPIN)), out:invalidCard), out:serviceNA)
+		}
+	}
+
+}

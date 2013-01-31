@@ -142,12 +142,13 @@ public class ActiveRules {
 				.getActorClass());
 		for (InterfaceItem ifitem : portList) {
 			GeneralProtocolClass gpc = ifitem.getGeneralProtocol();
-			if (gpc instanceof ProtocolClass
-					&& ((ProtocolClass) gpc).getSemantics() != null)
-				rules.put(ifitem, ((ProtocolClass) gpc).getSemantics()
-						.getRules());
+			if (gpc instanceof ProtocolClass) {
+				ProtocolClass pc = (ProtocolClass) gpc;
+				if (pc.getSemantics() != null)
+					rules.put(ifitem, new ArrayList<SemanticsRule>(pc
+							.getSemantics().getRules()));
+			}
 		}
-
 	}
 
 	public void print() {

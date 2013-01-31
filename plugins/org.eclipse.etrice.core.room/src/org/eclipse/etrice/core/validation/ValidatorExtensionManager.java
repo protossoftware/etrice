@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -212,7 +211,7 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			ISafeRunnable runnable = new ISafeRunnable() {
 				@Override
 				public void handleException(Throwable exception) {
-					System.out.println("Exception in IRoomValidator");
+					System.out.println("Exception in IRoomValidator " + validator.getName());
 				}
 
 				@Override
