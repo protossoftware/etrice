@@ -419,7 +419,6 @@ public class ValidationUtil {
 			Port local = ref1==null? p1:p2;
 			Port sub = ref1!=null? p1:p2;
 			ActorContainerRef ref = ref1!=null? ref1:ref2;
-			ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
 			
 			if (RoomHelpers.isRelay(local)) {
 				if (local.isConjugated()!=sub.isConjugated())
@@ -445,6 +444,7 @@ public class ValidationUtil {
 					if (p2.isConjugated() && pc2extendsOutgoing)
 						return Result.error("protocol extends outgoing");
 				}
+				ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
 				Result result = isConnectable(local, null, acc, exclude);
 				if (!result.isOk())
 					return result;
