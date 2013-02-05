@@ -154,7 +154,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 			if (selected instanceof Attribute)
 				insertText(((Attribute)selected).getName());
 			else if (selected instanceof Operation)
-				insertText(((Operation)selected).getName()+RoomHelpers.getSignature((Operation) selected));
+				insertText(((Operation)selected).getName()+RoomHelpers.getTypedArgumentList((Operation) selected));
 		}
 	}
 

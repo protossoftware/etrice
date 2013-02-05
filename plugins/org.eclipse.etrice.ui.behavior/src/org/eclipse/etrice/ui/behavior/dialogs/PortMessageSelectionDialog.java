@@ -224,7 +224,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 						return msg.getData().getName()+" : "+msg.getData().getRefType().getType().getName();
 				}
 				else if (element instanceof OperationItemPair) {
-					String sig = RoomHelpers.getSignature(((OperationItemPair) element).op);
+					String sig = RoomHelpers.getTypedArgumentList(((OperationItemPair) element).op);
 					return sig.substring(1, sig.length()-1);	// omit round brackets
 				}
 				break;
