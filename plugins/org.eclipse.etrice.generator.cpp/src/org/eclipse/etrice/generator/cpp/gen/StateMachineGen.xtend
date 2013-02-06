@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Peter Karlitschek
  * 
  *******************************************************************************/
 
@@ -21,7 +22,11 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
-@Singleton
+/**
+ * @author Peter Karlitschek
+ *
+ */
+ @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 	
 	@Inject extension RoomExtensions

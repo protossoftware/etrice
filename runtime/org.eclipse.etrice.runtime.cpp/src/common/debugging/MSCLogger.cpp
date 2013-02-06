@@ -1,9 +1,14 @@
-/*
- * MSCLogger.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 16.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "MSCLogger.h"
 
@@ -23,39 +28,39 @@ MSCLogger::~MSCLogger() {
 	filter = 0;
 }
 
-void MSCLogger::setMSC(std::string msc_name_, std::string path_) {
+void MSCLogger::setMSC(const std::string& msc_name_, const std::string& path_) {
 	msc_name = msc_name_;
 	path = path_;
 	delete filter;
 	filter = new MSCFilter();
 }
 
-void MSCLogger::addMessageAsyncOut(std::string source, std::string target,
-		std::string message) {
+void MSCLogger::addMessageAsyncOut(const std::string& source, const std::string& target,
+		const std::string& message) {
 	createLine(source, " >-- ", target, message);
 }
 
-void MSCLogger::addMessageAsyncIn(std::string source, std::string target,
-		std::string message) {
+void MSCLogger::addMessageAsyncIn(const std::string& source, const std::string& target,
+		const std::string& message) {
 	createLine(source, " --> ", target, message);
 }
 
-void MSCLogger::addMessageSyncCall(std::string source, std::string target,
-		std::string message) {
+void MSCLogger::addMessageSyncCall(const std::string& source, const std::string& target,
+		const std::string& message) {
 	createLine(source, " ==> ", target, message);
 }
 
-void MSCLogger::addMessageSyncReturn(std::string source, std::string target,
-		std::string message) {
+void MSCLogger::addMessageSyncReturn(const std::string& source, const std::string& target,
+		const std::string& message) {
 	createLine(source, " <== ", target, message);
 }
 
-void MSCLogger::addActorState(std::string actor, std::string state) {
+void MSCLogger::addActorState(const std::string& actor, const std::string& state) {
 	if (filter->applyTo(actor))
 		commandList.push_back("\t" + filter->reduceString(actor) + " >>> " + state);
 }
 
-void MSCLogger::createLine(std::string source, std::string mid, std::string target, std::string message) {
+void MSCLogger::createLine(const std::string& source, const std::string& mid, const std::string& target, const std::string& message) {
 	if (filter->applyTo(source) && filter->applyTo(target)) {
 		commandList.push_back( "\t"+filter->reduceString(source)+mid+filter->reduceString(target)+ " " + message);
 	}

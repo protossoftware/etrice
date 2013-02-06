@@ -1,9 +1,14 @@
-/*
- * MSCFilter.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 16.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #ifndef MSCFILTER_H_
 #define MSCFILTER_H_
@@ -17,7 +22,7 @@ class MSCFilter {
 public:
 	class FilterItem{
 	public:
-		FilterItem(std::string filter_, bool exclude_)
+		FilterItem(const std::string& filter_, bool exclude_)
 		: exclude(exclude_),
 		  filter(filter_)
 		{};
@@ -31,8 +36,8 @@ public:
 	virtual ~MSCFilter();
 
 	void addFilter(FilterItem filter);
-	bool applyTo(std::string text);
-	std::string reduceString(std::string string);
+	bool applyTo(const std::string& text);
+	std::string reduceString(const std::string& string);
 
 private:
 	std::list<FilterItem> filterList;

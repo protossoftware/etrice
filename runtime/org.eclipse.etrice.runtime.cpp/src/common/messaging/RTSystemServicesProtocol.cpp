@@ -1,9 +1,14 @@
-/*
- * RTSystemServicesProtocol.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 29.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "RTSystemServicesProtocol.h"
 #include "common/debugging/DebuggingService.h"
@@ -175,7 +180,6 @@ void RTSystemServicesProtocolConjPort::stopDebugging() {
 // RTSystemServicesProtocolConjPortRepl
 //------------------------------------------------------------------
 
-//TODO: data type of addr and peerAddress
 RTSystemServicesProtocolConjPortRepl::
 RTSystemServicesProtocolConjPortRepl(IEventReceiver& actor,	IRTObject* parent, std::string name, int localId, const std::vector<Address>& addr, const std::vector<Address>& peerAddress)
 : m_replication(addr.size()),

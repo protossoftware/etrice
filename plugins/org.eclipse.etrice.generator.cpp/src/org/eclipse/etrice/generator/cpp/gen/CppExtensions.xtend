@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 		Peter Karlitschek
  * 
  *******************************************************************************/
 

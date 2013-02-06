@@ -1,9 +1,14 @@
-/*
- * MessageDispatcher.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 22.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #ifndef MESSAGEDISPATCHER_H_
 #define MESSAGEDISPATCHER_H_
@@ -17,23 +22,24 @@
 namespace etRuntime {
 
 class MessageDispatcher : public RTObject, public IMessageReceiver {
-public:
-	virtual ~MessageDispatcher();
-	MessageDispatcher(IRTObject* parent, Address addr, std::string name);
-	void addMessageReceiver(IMessageReceiver& receiver);
-	void receive(Message* msg);
+	public:
+		MessageDispatcher(IRTObject* parent, Address addr, std::string name);
+		virtual ~MessageDispatcher();
 
-	Address getAddress() const { return m_address; };
+		void addMessageReceiver(IMessageReceiver& receiver);
+		void receive(Message* msg);
 
-private:
-	std::map<int, IMessageReceiver*> m_local_map;
-	std::map<int, IMessageReceiver*> m_thread_map;
-	std::map<int, IMessageReceiver*> m_node_map;
-	Address m_address;
+		Address getAddress() const { return m_address; };
 
-	MessageDispatcher();
-	MessageDispatcher(const MessageDispatcher& right);
-	MessageDispatcher& operator=(const MessageDispatcher& right);
+	private:
+		std::map<int, IMessageReceiver*> m_local_map;
+		std::map<int, IMessageReceiver*> m_thread_map;
+		std::map<int, IMessageReceiver*> m_node_map;
+		Address m_address;
+
+		MessageDispatcher();
+		MessageDispatcher(const MessageDispatcher& right);
+		MessageDispatcher& operator=(const MessageDispatcher& right);
 };
 
 } /* namespace etRuntime */

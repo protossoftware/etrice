@@ -1,9 +1,14 @@
-/*
- * InterfaceItemBaase.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 06.06.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "InterfaceItemBase.h"
 #include "common/messaging/AbstractMessageReceiver.h"
@@ -31,9 +36,25 @@ InterfaceItemBase::InterfaceItemBase (IEventReceiver& evtReceiver, IRTObject* pa
 	}
 }
 
+InterfaceItemBase::InterfaceItemBase(const InterfaceItemBase & right)
+: AbstractMessageReceiver(right),
+  m_idx(right.m_idx),
+  m_localId(right.m_localId),
+  m_actorPath(right.m_actorPath),
+  m_peerAddress(right.m_peerAddress),
+  m_ownMsgReceiver(right.m_ownMsgReceiver),
+  m_peerMsgReceiver(right.m_peerMsgReceiver),
+  m_eventReceiver(right.m_eventReceiver)
+{
+
+}
+
 
 InterfaceItemBase::~InterfaceItemBase() {
-	// TODO Auto-generated destructor stub
+	m_ownMsgReceiver = 0;
+	m_peerMsgReceiver = 0;
+	m_eventReceiver = 0;
+
 }
 
 } /* namespace etRuntime */

@@ -1,4 +1,14 @@
-
+/*******************************************************************************
+ * Copyright (c) 2011 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ * 
+ *******************************************************************************/
 package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
@@ -9,6 +19,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
+/**
+ * @author Peter Karlitschek
+ *
+ */
 @Singleton
 class SubSystemRunnerGen {
 

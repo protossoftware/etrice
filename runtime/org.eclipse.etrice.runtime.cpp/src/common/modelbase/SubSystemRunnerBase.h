@@ -1,21 +1,21 @@
-/*
- * SubSystemRunnerBase.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * The base class for running components.
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
  *
- *  Created on: 29.08.2012
- *      Author: karlitsc
- */
+ *******************************************************************************/
 
 #ifndef SUBSYSTEMRUNNERBASE_H_
 #define SUBSYSTEMRUNNERBASE_H_
 
 #include <iostream>
 #include <string>
-#ifdef WIN32
-#include <windows.h>
 #include "common/modelbase/TestSemaphore.h"
-#endif
 
 namespace etRuntime {
 

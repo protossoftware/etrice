@@ -1,9 +1,14 @@
-/*
- * MSCLogger.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 16.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #ifndef MSCLOGGER_H_
 #define MSCLOGGER_H_
@@ -21,20 +26,20 @@ public:
 	MSCLogger();
 	virtual ~MSCLogger();
 
-	void setMSC(std::string msc_name_, std::string path_);
+	void setMSC(const std::string& msc_name_, const std::string& path_);
 
 	//TODO synchronized
 	void open() {is_open = true; };
 	//TODO synchronized
-	void addMessageAsyncOut(std::string source, std::string target, std::string message);
+	void addMessageAsyncOut(const std::string& source, const std::string& target, const std::string& message);
 	//TODO synchronized
-	void addMessageAsyncIn(std::string source, std::string target, std::string message);
+	void addMessageAsyncIn(const std::string& source, const std::string& target, const std::string& message);
 	//TODO synchronized
-	void addMessageSyncCall(std::string source, std::string target, std::string message);
+	void addMessageSyncCall(const std::string& source, const std::string& target, const std::string& message);
 	//TODO synchronized
-	void addMessageSyncReturn(std::string source, std::string target, std::string message);
+	void addMessageSyncReturn(const std::string& source, const std::string& target, const std::string& message);
 	//TODO synchronized
-	void addActorState(std::string actor, std::string state);
+	void addActorState(const std::string& actor, const std::string& state);
 	//TODO synchronized
 	void close();
 
@@ -42,7 +47,7 @@ public:
 	MSCFilter* getMSCFilter(){ return filter; };
 
 private:
-	void createLine(std::string source, std::string mid, std::string target, std::string message);
+	void createLine(const std::string& source, const std::string& mid, const std::string& target, const std::string& message);
 	void saveMSCforTrace2UML(std::ofstream& out);
 
 	std::list<std::string> commandList;

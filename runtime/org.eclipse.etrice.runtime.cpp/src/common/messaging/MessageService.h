@@ -1,9 +1,14 @@
-/*
- * MessageService.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 22.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #ifndef MESSAGESERVICE_H_
 #define MESSAGESERVICE_H_
@@ -20,16 +25,14 @@ namespace etRuntime {
 
 //TODO: abstraction from posix threads missing
 
-class MessageService: public IMessageReceiver, public IRTObject {
+class MessageService: public IMessageReceiver, public RTObject {
 public:
 	MessageService(IRTObject* parent, Address addr, std::string name, int priority = 0);
 	virtual ~MessageService();
 
 	Address getAddress() const {	return m_address; }	;
-	std::string getName() const { return m_name; };
 
 	void start(bool singlethreaded);
-
 	void run();
 	// for single threaded configuration only
 	void runOnce();
@@ -39,8 +42,6 @@ public:
 	void receive(Message* msg);
 
 	virtual MessageDispatcher& getMessageDispatcher() {	return m_messageDispatcher; }
-	virtual std::string getInstancePath() const ;
-	virtual std::string getInstancePathName() const ;
 	virtual bool isMsgService() const { return true;};
 
 	void addAsyncActor(IEventReceiver& evtReceiver);
@@ -56,8 +57,6 @@ private:
 	//TODO: synchronized
 	void pollOneMessage();
 
-	IRTObject* m_parent;
-	std::string m_name;
 	bool m_running;
 	pthread_t m_thread;
 	pthread_mutex_t m_mutex;

@@ -1,9 +1,14 @@
-/*
- * MessageService.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 22.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "MessageService.h"
 #include <iostream>
@@ -22,11 +27,8 @@ extern "C" {
 }
 
 MessageService::MessageService(IRTObject* parent, Address addr, std::string name, int priority)
-	:	// super("MessageService "+name),
-		IMessageReceiver(),
-		IRTObject(),
-		m_parent(parent),
-		m_name(name),
+	:	IMessageReceiver(),
+		RTObject(parent, name),
 		m_running(false),
 		m_thread(),
 		m_mutex(),
@@ -56,7 +58,6 @@ MessageService::MessageService(IRTObject* parent, Address addr, std::string name
 }
 
 MessageService::~MessageService() {
-	m_parent = 0;
 	pthread_attr_destroy(&m_threadAttr);
 	pthread_mutex_destroy(&m_mutex);
 	pthread_cond_destroy(&m_conditionVar);
@@ -66,10 +67,10 @@ MessageService::~MessageService() {
 
 void MessageService::start(bool singlethreaded) {
 	if (singlethreaded) {
-		std::cout << "starting message service " << m_name << " singlethreaded" << std::endl;
+		std::cout << "starting message service " << getName() << " singlethreaded" << std::endl;
 	}
 	else {
-		std::cout << "starting message service " << m_name << " on own thread" << std::endl;
+		std::cout << "starting message service " << getName() << " on own thread" << std::endl;
 		int rc = pthread_create(&m_thread, &m_threadAttr, threadStarter, static_cast<void *>(this));
 		if (rc){
 			 std::cout << "ERROR; return code from pthread_create() is " << rc << std::endl;
@@ -92,7 +93,7 @@ void MessageService::run() {
 		pollOneMessage();
 		usleep(10000);
 	}
-	std::cout << "ending message service " << m_name << " on own thread" << std::endl;
+	std::cout << "ending message service " << getName() << " on own thread" << std::endl;
 }
 
 void MessageService::runOnce() {
@@ -114,23 +115,6 @@ void MessageService::receive(Message* msg) {
 	pthread_mutex_unlock(&m_mutex);
 }
 
-std::string MessageService::getInstancePath() const {
-	std::string path = PATH_DELIM + m_name;
-
-	if (m_parent != 0)
-		path = m_parent->getInstancePath() + path;
-
-	return path;
-}
-
-std::string MessageService::getInstancePathName() const {
-	std::string path = PATHNAME_DELIM + m_name;
-
-	if (m_parent != 0)
-		path = m_parent->getInstancePathName() + path;
-
-	return path;
-}
 
 // TODO: synchronized
 void MessageService::terminate() {

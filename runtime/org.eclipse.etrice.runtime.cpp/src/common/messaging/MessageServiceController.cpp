@@ -1,9 +1,14 @@
-/*
- * MessageServiceController.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 22.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "MessageServiceController.h"
 
@@ -22,7 +27,7 @@ MessageServiceController::MessageServiceController(/*IRTObject parent*/)
 }
 
 void MessageServiceController::addMsgSvc(MessageService& msgSvc) {
-	// TODOTS: Who is parent of MessageServices ?
+	// TODO TS: Who is parent of MessageServices ?
 	//TODO assert
 	//assert(msgSvc.getAddress().m_threadID == m_messageServiceList.size());
 	m_messageServiceList.push_back(&msgSvc);
@@ -48,7 +53,7 @@ void MessageServiceController::start(bool singlethreaded) {
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
 		(*it)->start(singlethreaded);
-		// TODOTS: start in order of priorities
+		// TODO TS: start in order of priorities
 	}
 	m_running = true;
 }
@@ -96,7 +101,7 @@ void MessageServiceController::terminate() {
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
 		(*it)->terminate();
-		// TODOTS: stop in order of priorities
+		//TODO TS: stop in order of priorities
 	}
 }
 
