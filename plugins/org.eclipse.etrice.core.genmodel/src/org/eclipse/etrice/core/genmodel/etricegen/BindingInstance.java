@@ -20,6 +20,9 @@ import org.eclipse.etrice.core.room.Binding;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Binding Instance</b></em>'.
+ * In the instance model each binding is turned into (at least one) binding instances. A binding between
+ * a replicated port and a port of a replicated actor is turned into as many binding instances as
+ * there are instances in the actor array.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -41,8 +44,7 @@ public interface BindingInstance extends EObject {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance#getBindings <em>Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ports</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This list of {@link PortInstance}s has exactly two members: the two ports that are connected by this binding instance.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ports</em>' reference list.
@@ -57,8 +59,7 @@ public interface BindingInstance extends EObject {
 	 * Returns the value of the '<em><b>Binding</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Binding</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * A reference to the original binding.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Binding</em>' reference.

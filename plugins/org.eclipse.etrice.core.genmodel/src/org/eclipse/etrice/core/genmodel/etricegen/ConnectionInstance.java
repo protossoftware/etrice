@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection Instance</b></em>'.
+ * In the instance model each layer connection is turned into a connection instance.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -40,8 +41,7 @@ public interface ConnectionInstance extends EObject {
 	 * Returns the value of the '<em><b>From AI</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>From AI</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the source {@link ActorInstance} of this connection.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From AI</em>' reference.
@@ -67,8 +67,7 @@ public interface ConnectionInstance extends EObject {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>From SPP</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the source {@link SPPRef} of this connection.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From SPP</em>' reference.
@@ -95,8 +94,7 @@ public interface ConnectionInstance extends EObject {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getIncoming <em>Incoming</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>To SPP</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the destination {@link SPPRef} of this connection.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To SPP</em>' reference.
@@ -122,8 +120,7 @@ public interface ConnectionInstance extends EObject {
 	 * Returns the value of the '<em><b>Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Connection</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is a reference to the original {@link LayerConnection}.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Connection</em>' reference.

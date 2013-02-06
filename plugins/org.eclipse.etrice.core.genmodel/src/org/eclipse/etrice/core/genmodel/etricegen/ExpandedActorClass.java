@@ -30,6 +30,8 @@ import org.eclipse.etrice.core.room.VarDecl;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Expanded Actor Class</b></em>'.
+ * The expanded actor class holds a state machine which includes all inherited state graph items
+ * and has the refined states replaced with simple states.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -49,8 +51,7 @@ public interface ExpandedActorClass extends EObject {
 	 * Returns the value of the '<em><b>Actor Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Actor Class</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * A reference to the original {@link ActorClass}.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actor Class</em>' reference.
@@ -75,8 +76,7 @@ public interface ExpandedActorClass extends EObject {
 	 * Returns the value of the '<em><b>State Machine</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>State Machine</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
+	 * The transformed state machine with all inherited items made explicit.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>State Machine</em>' containment reference.
@@ -99,6 +99,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * This is for <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model validatorType="org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician"
 	 * @generated
@@ -107,6 +108,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * This is for <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -115,6 +117,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * This is for <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -123,6 +126,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return <code>true</code> if the item is not inherited
+	 * @param obj a state graph item of the state machine
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -131,6 +136,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * The local ID of an interface item (port, spp, sap) is computed recursively starting with
+	 * the base class and an ID of 0. For each class in the class hierarchy the enumeratins
+	 * starts with external ports, then internal ports, then SAPs and finally SPPs.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -139,6 +147,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return  <code>true</code> if a state machine is defined somewhere in actor the class hierarchy
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -147,6 +156,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a string that can serve as the name of a constant representing this trigger.
+	 * @see {@link #getTriggerCodeName(String)}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -155,6 +166,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a string that can serve as the name of a constant representing this trigger.
+	 * @see {@link #getTriggerCodeName(MessageFromIf)}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
