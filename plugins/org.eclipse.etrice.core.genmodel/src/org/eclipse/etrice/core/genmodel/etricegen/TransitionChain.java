@@ -21,6 +21,8 @@ import org.eclipse.etrice.core.room.VarDecl;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Transition Chain</b></em>'.
+ * A transition chain is a connected part of the state machine. Connections are mediated by
+ * choice points and entry and exit points.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -41,8 +43,7 @@ public interface TransitionChain extends EObject {
 	 * Returns the value of the '<em><b>Transition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transition</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * The associated ROOM model transition.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transition</em>' reference.
@@ -68,8 +69,9 @@ public interface TransitionChain extends EObject {
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Skip Entry</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If <code>true</code> then the entry code execution of the state whose history will be entered
+	 * should be skipped after traversal of this chain.
+	 * This is the case
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Skip Entry</em>' attribute.
@@ -94,8 +96,7 @@ public interface TransitionChain extends EObject {
 	 * Returns the value of the '<em><b>Data</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Data</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * It is the data type common to all associated transitions.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data</em>' reference.
@@ -118,6 +119,7 @@ public interface TransitionChain extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the parent state of this transition (if applicable, i.e. if not already on the top level)
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -126,6 +128,8 @@ public interface TransitionChain extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return <code>true</code> if the starting point of the transition chain is a {@link TransitionPoint} and
+	 * has its {@link org.eclipse.etrice.core.room.TransitionPoint#isHandler() handler flag} set
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

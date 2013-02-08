@@ -17,6 +17,11 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Structure Instance</b></em>'.
+ * It is the base class of
+ * <ul>
+ *   <li> {@link ActorInstance}</li>
+ *   <li> {@link SubSystemInstance}</li>
+ * </ul>
  * <!-- end-user-doc -->
  *
  * <p>
@@ -44,8 +49,7 @@ public interface StructureInstance extends InstanceBase {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * It contains all child instances which are implicitly created by {@link ActorRef}s.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instances</em>' containment reference list.
@@ -59,10 +63,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ports</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ports</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Ports()
@@ -75,10 +75,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Saps</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SAPInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Saps</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Saps</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Saps()
@@ -91,10 +87,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Spps</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Spps</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Spps</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Spps()
@@ -107,10 +99,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Services</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Services</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Services()
@@ -123,10 +111,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.BindingInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bindings</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Bindings()
@@ -139,10 +123,6 @@ public interface StructureInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Connections</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Connections</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Connections</em>' containment reference list.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Connections()
@@ -156,8 +136,7 @@ public interface StructureInstance extends InstanceBase {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>All Contained Instances</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * It contains all instances of the instance's sub tree.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>All Contained Instances</em>' reference list.
@@ -172,8 +151,8 @@ public interface StructureInstance extends InstanceBase {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ordered If Item Instances</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * The interface items are ordered base class first followed by derived classes. For each class
+	 * the interface items start with port instances followed by SAP instances and service implementations.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ordered If Item Instances</em>' reference list.

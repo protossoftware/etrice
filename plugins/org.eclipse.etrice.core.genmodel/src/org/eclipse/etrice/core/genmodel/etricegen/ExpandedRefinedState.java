@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.room.RefinedState;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Expanded Refined State</b></em>'.
+ * The expanded refined state is a {@link SimpleState} that additionally holds inherited action codes.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -39,8 +40,7 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * Returns the value of the '<em><b>Inherited Entry</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Inherited Entry</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * This {@link DetailCode} holds the pre-assembled inherited entry code of the original {@link RefinedState} 
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Entry</em>' containment reference.
@@ -65,8 +65,7 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * Returns the value of the '<em><b>Inherited Exit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Inherited Exit</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * This {@link DetailCode} holds the pre-assembled inherited exit code of the original {@link RefinedState} 
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Exit</em>' containment reference.
@@ -91,8 +90,7 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * Returns the value of the '<em><b>Inherited Do</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Inherited Do</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * This {@link DetailCode} holds the pre-assembled inherited do code of the original {@link RefinedState} 
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Do</em>' containment reference.
@@ -115,6 +113,7 @@ public interface ExpandedRefinedState extends SimpleState {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * For <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

@@ -16,7 +16,8 @@ import org.eclipse.etrice.core.room.LogicalSystem;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>System Instance</b></em>'.
+ * A representation of the model object '<em><b>System Instance</b></em>' derived from
+ * {@link InstanceBase}.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -37,8 +38,7 @@ public interface SystemInstance extends InstanceBase {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * It contains all direct child instances.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instances</em>' containment reference list.
@@ -52,8 +52,7 @@ public interface SystemInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Logical System</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Logical System</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * The associated ROOM logical system.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Logical System</em>' reference.

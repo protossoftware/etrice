@@ -20,6 +20,11 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Interface Item Instance</b></em>'.
+ * <ul>
+ *   <li> {@link PortInstance}</li>
+ *   <li> {@link SAPInstance}</li>
+ *   <li> {@link ServiceImplInstance}</li>
+ * </ul>
  * <!-- end-user-doc -->
  *
  * <p>
@@ -39,8 +44,7 @@ public interface InterfaceItemInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Protocol</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Protocol</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * Interface items have an associated protocol.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Protocol</em>' reference.
@@ -55,8 +59,7 @@ public interface InterfaceItemInstance extends InstanceBase {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Peers</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * The list contains all peers to which this item is connected.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Peers</em>' reference list.
@@ -68,6 +71,8 @@ public interface InterfaceItemInstance extends InstanceBase {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return <code>true</code> if the interface item (a port in this case) is replicated (i.e. has a
+	 * {@link org.eclipse.etrice.core.room.Port#getMultiplicity() multiplicity}>1)
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -76,6 +81,7 @@ public interface InterfaceItemInstance extends InstanceBase {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return <code>true</code> if it is a port that is not replicated.
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -84,6 +90,7 @@ public interface InterfaceItemInstance extends InstanceBase {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return <code>true</code> if it is a relay port.
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -92,6 +99,7 @@ public interface InterfaceItemInstance extends InstanceBase {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the associated {@link InterfaceItem}
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

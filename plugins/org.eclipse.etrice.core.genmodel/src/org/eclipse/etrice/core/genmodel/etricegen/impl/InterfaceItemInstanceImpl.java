@@ -128,7 +128,7 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 			if (pi.getKind()==PortKind.RELAY)
 				return false;
 			
-			return pi.getPort().getMultiplicity()!=1;
+			return pi.getPort().getMultiplicity()>1;
 		}
 		else if (this instanceof SAPInstance)
 			return false;

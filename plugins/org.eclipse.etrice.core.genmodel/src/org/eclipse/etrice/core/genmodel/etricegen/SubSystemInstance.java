@@ -16,7 +16,8 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Sub System Instance</b></em>'.
+ * A representation of the model object '<em><b>Sub System Instance</b></em>' derived from
+ * {@link StructureInstance}.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -36,8 +37,7 @@ public interface SubSystemInstance extends StructureInstance {
 	 * Returns the value of the '<em><b>Sub System Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub System Class</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the associated ROOM sub system class.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub System Class</em>' reference.
@@ -62,8 +62,7 @@ public interface SubSystemInstance extends StructureInstance {
 	 * Returns the value of the '<em><b>Max Obj Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Max Obj Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * The highest object ID used.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max Obj Id</em>' attribute.
@@ -75,6 +74,8 @@ public interface SubSystemInstance extends StructureInstance {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param instance an instance object
+	 * @return the thread ID of this instance
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

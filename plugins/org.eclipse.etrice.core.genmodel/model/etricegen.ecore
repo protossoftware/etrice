@@ -179,7 +179,7 @@
       <eParameters name="mif" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//MessageFromIf"/>
     </eOperations>
     <eOperations name="getTriggerCodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eParameters name="mif" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="at" eType="#//ActiveTrigger"/>
     </eOperations>
     <eOperations name="getOutgoingTransitions" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Transition">
       <eParameters name="node" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode"/>
@@ -200,9 +200,6 @@
     </eOperations>
     <eOperations name="getTransitionChains" upperBound="-1" eType="#//TransitionChain"/>
     <eOperations name="getOwnTransitionChains" upperBound="-1" eType="#//TransitionChain"/>
-    <eOperations name="getNode" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//StateGraphNode">
-      <eParameters name="tt" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//TransitionTerminal"/>
-    </eOperations>
     <eOperations name="isMatching" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="trig" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Trigger"/>
       <eParameters name="trigstr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

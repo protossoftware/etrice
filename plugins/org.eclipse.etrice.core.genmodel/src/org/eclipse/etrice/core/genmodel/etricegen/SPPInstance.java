@@ -39,8 +39,7 @@ public interface SPPInstance extends InstanceBase {
 	 * Returns the value of the '<em><b>Spp</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Spp</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * The associated ROOM model SPP
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Spp</em>' reference.
@@ -67,8 +66,7 @@ public interface SPPInstance extends InstanceBase {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getToSPP <em>To SPP</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Incoming</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * It contains all incoming layer connections.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Incoming</em>' reference list.
@@ -84,8 +82,7 @@ public interface SPPInstance extends InstanceBase {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getFromSPP <em>From SPP</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Outgoing</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * It contains all outgoing layer connections.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outgoing</em>' reference.

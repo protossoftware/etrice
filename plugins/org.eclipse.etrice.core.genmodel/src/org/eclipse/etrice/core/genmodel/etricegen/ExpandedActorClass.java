@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.VarDecl;
 
@@ -126,8 +125,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @return <code>true</code> if the item is not inherited
 	 * @param obj a state graph item of the state machine
+	 * @return <code>true</code> if the item is not inherited
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -136,7 +135,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * The local ID of an interface item (port, spp, sap) is computed recursively starting with
+	 * @param ifitem an interface item (no relay port or SPP) of this actor class
+	 * @return the local ID of an interface item (port, spp, sap) is computed recursively starting with
 	 * the base class and an ID of 0. For each class in the class hierarchy the enumeratins
 	 * starts with external ports, then internal ports, then SAPs and finally SPPs.
 	 * <!-- end-user-doc -->
@@ -156,8 +156,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param mif a message/interface item pair
 	 * @return a string that can serve as the name of a constant representing this trigger.
-	 * @see {@link #getTriggerCodeName(String)}
+	 * @see {@link #getTriggerCodeName(ActiveTrigger)}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -166,16 +167,19 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param at the active trigger
 	 * @return a string that can serve as the name of a constant representing this trigger.
 	 * @see {@link #getTriggerCodeName(MessageFromIf)}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
-	String getTriggerCodeName(String mif);
+	String getTriggerCodeName(ActiveTrigger at);
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param node a state graph node
+	 * @return a list of all outgoing transitions of this node
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -184,6 +188,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param node a state graph node
+	 * @return a list of all incoming transitions of this node
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -192,6 +198,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param state the state
+	 * @return a list of the active triggers of a state
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -200,6 +208,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a sorted list of triggers of this actor class (including base classes).
+	 * The elements are sorted by the trigger name (a concatenation of interface item name and message name).
+	 * @see {@link #getOwnTriggers()}
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -208,6 +219,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a sorted list of triggers of this actor class (including base classes).
+	 * The elements are sorted by the trigger name (a concatenation of interface item name and message name).
+	 * @see {@link #getTriggers()}
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -216,6 +230,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a string that may serve as a constant name for a message/interface item pair
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -224,6 +239,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param trans a transition
+	 * @return the associated {@link TransitionChain}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -232,6 +249,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a list of all {@link TransitionChain}s
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -240,6 +258,7 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a list of all {@link TransitionChain}s that aren't inherited
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -248,14 +267,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	StateGraphNode getNode(TransitionTerminal tt);
-
-	/**
-	 * <!-- begin-user-doc -->
+	 * @param trig the trigger
+	 * @param trigstr the encoded trigger string
+	 * @return <code>true</code> if the encoded trigger string is matching the {@link Trigger}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -264,6 +278,9 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param out a list of outgoing transitions
+	 * @return the first {@link ContinuationTransition} in the list (which for a {@link ChoicePoint}
+	 * corresponds to the unique default branch)
 	 * <!-- end-user-doc -->
 	 * @model outMany="true"
 	 * @generated
@@ -272,6 +289,11 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * The state machine of an {@link ExpandedActorClass} contains only copies of the original
+	 * {@link StateGraphItem}s. This methods maps back to the original object if applicable.
+	 * 
+	 * @param copy a copied object
+	 * @return the original object of the {@link RoomModel}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -280,6 +302,8 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param trans a {@link Transition}
+	 * @return the common data type of the {@link TransitionChainBundle} associated with the transition
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

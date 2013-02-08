@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -264,7 +265,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		
 		result.append(tcv.genActionOperationCall(tr));
 		
-		StateGraphNode node = ac.getNode(tr.getTo());
+		StateGraphNode node = RoomHelpers.getNode(tr.getTo());
 		EList<Transition> out = ac.getOutgoingTransitions(node);
 		if (node instanceof ChoicePoint) {
 			ContinuationTransition dflt = ac.getDefaultBranch(out);

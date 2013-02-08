@@ -1288,7 +1288,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEParameter(op, theRoomPackage.getMessageFromIf(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getActiveTrigger(), "at", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, theRoomPackage.getTransition(), "getOutgoingTransitions", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getStateGraphNode(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1312,9 +1312,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getOwnTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theRoomPackage.getStateGraphNode(), "getNode", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theRoomPackage.getTransitionTerminal(), "tt", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "isMatching", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getTrigger(), "trig", 0, 1, IS_UNIQUE, IS_ORDERED);

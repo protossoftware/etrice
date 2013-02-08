@@ -16,7 +16,8 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Service Impl Instance</b></em>'.
+ * A representation of the model object '<em><b>Service Impl Instance</b></em>' which is derived from
+ * {@link InterfaceItemInstance}.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -35,8 +36,7 @@ public interface ServiceImplInstance extends InterfaceItemInstance {
 	 * Returns the value of the '<em><b>Svc Impl</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Svc Impl</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * The associated ROOM model service implementation
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Svc Impl</em>' reference.
