@@ -86,7 +86,7 @@ public class SemanticsCheck {
 		EList<Transition> transitions = graph.getTransitions();
 		for (Transition trans : transitions)
 			if (trans instanceof InitialTransition) {
-				StateGraphNode cur = xpAct.getNode(trans.getTo());
+				StateGraphNode cur = RoomHelpers.getNode(trans.getTo());
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
 				if (cur instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
@@ -128,7 +128,7 @@ public class SemanticsCheck {
 					}
 					
 					for (Transition trans : trigger.getTransitions()) {
-						StateGraphNode target = xpAct.getNode(trans.getTo());
+						StateGraphNode target = RoomHelpers.getNode(trans.getTo());
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
@@ -188,7 +188,7 @@ public class SemanticsCheck {
 			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
 				ActiveRules tempRule = mapToRules.get(node).createCopy();
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
-				StateGraphNode target = xpAct.getNode(trans.getTo());
+				StateGraphNode target = RoomHelpers.getNode(trans.getTo());
 				if (target instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}

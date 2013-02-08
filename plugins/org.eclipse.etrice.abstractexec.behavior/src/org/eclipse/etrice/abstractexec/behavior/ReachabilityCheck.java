@@ -58,7 +58,7 @@ public class ReachabilityCheck {
 			for (Transition trans : transitions)
 				if (trans instanceof InitialTransition) {
 					visited.add(trans);
-					StateGraphNode cur = xpAct.getNode(trans.getTo());
+					StateGraphNode cur = RoomHelpers.getNode(trans.getTo());
 					if (!visited.contains(cur))
 						queue.add(cur);
 					break;
@@ -100,7 +100,7 @@ public class ReachabilityCheck {
 				for (ActiveTrigger trigger : xpAct.getActiveTriggers(st)) {
 					for (Transition trans : trigger.getTransitions()) {
 						visited.add(trans);
-						StateGraphNode target = xpAct.getNode(trans.getTo());
+						StateGraphNode target = RoomHelpers.getNode(trans.getTo());
 						if (!visited.contains(target)) {
 							queue.add(target);
 							StateGraph triggerContext = (StateGraph) trans
@@ -131,7 +131,7 @@ public class ReachabilityCheck {
 			}
 			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
 				visited.add(trans);
-				StateGraphNode target = xpAct.getNode(trans.getTo());
+				StateGraphNode target = RoomHelpers.getNode(trans.getTo());
 				if (!visited.contains(target)) {
 					queue.add(target);
 

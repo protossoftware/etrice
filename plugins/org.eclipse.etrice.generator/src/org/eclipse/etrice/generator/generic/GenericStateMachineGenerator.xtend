@@ -393,7 +393,7 @@ class GenericStateMachineGenerator {
 	def protected genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist, boolean usesHdlr) {
 		'''
 			«FOR at : atlist»
-				case «xpac.getTriggerCodeName(at.trigger)»:
+				case «xpac.getTriggerCodeName(at)»:
 					«var needData = xpac.hasGuard(at)»
 					«IF needData»{ «langExt.getTypedDataDefinition(at.msg)»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»

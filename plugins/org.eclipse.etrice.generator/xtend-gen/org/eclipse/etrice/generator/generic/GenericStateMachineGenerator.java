@@ -1260,8 +1260,7 @@ public class GenericStateMachineGenerator {
     {
       for(final ActiveTrigger at : atlist) {
         _builder.append("case ");
-        String _trigger = at.getTrigger();
-        String _triggerCodeName = xpac.getTriggerCodeName(_trigger);
+        String _triggerCodeName = xpac.getTriggerCodeName(at);
         _builder.append(_triggerCodeName, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
@@ -1292,8 +1291,8 @@ public class GenericStateMachineGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             Transition _transition = chain.getTransition();
-            String _trigger_1 = at.getTrigger();
-            CharSequence _guard = this.guard(_transition, _trigger_1, xpac);
+            String _trigger = at.getTrigger();
+            CharSequence _guard = this.guard(_transition, _trigger, xpac);
             _builder.append(_guard, "	");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");

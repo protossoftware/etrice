@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -61,10 +62,15 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.StateGraphNode;
+import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.validation.ValidationUtil;
@@ -664,6 +670,26 @@ public class RoomHelpers {
 	 */
 	public static boolean isGuarded(Trigger trig) {
 		return trig.getGuard()!=null && RoomHelpers.hasDetailCode(trig.getGuard().getGuard());
+	}
+
+	/**
+	 * Returns the destination {@link StateGraphNode} of a {@link TransitionTerminal}.
+	 * 
+	 * @param tt the transition terminal
+	 * 
+	 * @return the destination {@link StateGraphNode} of a {@link TransitionTerminal}
+	 */
+	public static StateGraphNode getNode(TransitionTerminal tt) {
+		if (tt instanceof StateTerminal)
+			return ((StateTerminal)tt).getState();
+		else if (tt instanceof TrPointTerminal)
+			return ((TrPointTerminal)tt).getTrPoint();
+		else if (tt instanceof SubStateTrPointTerminal)
+			return ((SubStateTrPointTerminal)tt).getTrPoint();
+		else if (tt instanceof ChoicepointTerminal)
+			return ((ChoicepointTerminal)tt).getCp();
+		
+		return null;
 	}
 
 	/**
