@@ -516,7 +516,7 @@ public class GenericStateMachineGenerator {
       _builder.append("* @param generic_data - the generic data pointer");
       _builder.newLine();
       _builder.append(" ");
-      _builder.append("* @return the ID of the final state");
+      _builder.append("* @return the +/- ID of the final state either with a positive sign, that indicates to execute the state\'s entry code, or a negative sign vice versa");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -941,14 +941,6 @@ public class GenericStateMachineGenerator {
         }
       }
       _builder.append("\t");
-      String _boolType_4 = this.boolType();
-      _builder.append(_boolType_4, "	");
-      _builder.append(" skip_entry = ");
-      String _booleanConstant_5 = this.langExt.booleanConstant(false);
-      _builder.append(_booleanConstant_5, "	");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         if (handleEvents) {
@@ -1005,6 +997,29 @@ public class GenericStateMachineGenerator {
       }
       _builder.append(");");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      String _boolType_4 = this.boolType();
+      _builder.append(_boolType_4, "		");
+      _builder.append(" skip_entry = ");
+      String _booleanConstant_5 = this.langExt.booleanConstant(false);
+      _builder.append(_booleanConstant_5, "		");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("if(next < 0){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("next = -next;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("skip_entry = ");
+      String _booleanConstant_6 = this.langExt.booleanConstant(true);
+      _builder.append(_booleanConstant_6, "			");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.append("next = ");
       _builder.append(opScopePriv, "		");
@@ -1230,16 +1245,6 @@ public class GenericStateMachineGenerator {
           }
         }
         {
-          boolean _isSkipEntry = chain.isSkipEntry();
-          if (_isSkipEntry) {
-            _builder.append("\t");
-            _builder.append("skip_entry = TRUE;");
-            _builder.newLine();
-          }
-        }
-        _builder.append("}");
-        _builder.newLine();
-        {
           Transition _last = IterableExtensions.<Transition>last(transitions);
           boolean _notEquals = (!Objects.equal(tr, _last));
           if (_notEquals) {
@@ -1326,18 +1331,6 @@ public class GenericStateMachineGenerator {
                 _builder.append("is_handler = ");
                 String _booleanConstant = this.langExt.booleanConstant(true);
                 _builder.append(_booleanConstant, "		");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            {
-              boolean _isSkipEntry = chain.isSkipEntry();
-              if (_isSkipEntry) {
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("skip_entry = ");
-                String _booleanConstant_1 = this.langExt.booleanConstant(true);
-                _builder.append(_booleanConstant_1, "		");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               }
