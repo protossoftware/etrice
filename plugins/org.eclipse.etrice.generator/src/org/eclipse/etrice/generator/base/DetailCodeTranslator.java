@@ -29,6 +29,25 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
+ * This class parses detail code in a pretty naive and heuristic way to recognize
+ * and replace
+ * <ul>
+ *   <li>attributes</li>
+ *   <li>operations</li>
+ *   <li>port.message</li>
+ *   <li>tags of the form <code><|tag|></code></li>
+ * </ul>
+ * 
+ * <p>
+ * The recognized constructs are passed to the configured {@link ITranslationProvider}
+ * which returns a text that replaces the original one.
+ * </p>
+ * 
+ * <p>
+ * This way target language independent access to attributes (getters and setters),
+ * to sending messages via ports and to member operation calls can be achieved.
+ * </p>
+ * 
  * @author Henrik Rentz-Reichert
  *
  */
@@ -45,18 +64,36 @@ public class DetailCodeTranslator {
 	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
 	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
 	
+	/**
+	 * Constructor to be used with actor classes
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * @param provider a {@link ITranslationProvider}
+	 */
 	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider) {
 		this((EObject) ac, provider);
 	}
 	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param provider a {@link ITranslationProvider}
+	 */
 	public DetailCodeTranslator(ProtocolClass pc, ITranslationProvider provider) {
 		this((EObject) pc, provider);
 	}
 	
+	/**
+	 * @param pc a {@link PortClass}
+	 * @param provider a {@link ITranslationProvider}
+	 */
 	public DetailCodeTranslator(PortClass pc, ITranslationProvider provider) {
 		this((EObject) pc, provider);
 	}
 	
+	/**
+	 * @param dc a {@link DataClass}
+	 * @param provider a {@link ITranslationProvider}
+	 */
 	public DetailCodeTranslator(DataClass dc, ITranslationProvider provider) {
 		this((EObject) dc, provider);
 	}
@@ -66,6 +103,10 @@ public class DetailCodeTranslator {
 		prepare(container);
 	}
 	
+	/**
+	 * @param code a {@link DetailCode} to translate
+	 * @return the translated code as string
+	 */
 	public String translateDetailCode(DetailCode code) {
 		if (code==null)
 			return "";

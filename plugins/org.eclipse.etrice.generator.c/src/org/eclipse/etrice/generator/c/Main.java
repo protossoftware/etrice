@@ -24,6 +24,35 @@ import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Inject;
 
+/**
+ * This class is implementing the eTrice C generator.
+ * 
+ * <p>
+ * It is based on the {@link org.eclipse.etrice.generator.base.AbstractGenerator AbstractGenerator}
+ * and is a plain Java program with a main method and command line options.
+ * </p>
+ * <p>
+ * It can be called using the launcher (see plug-in org.eclipse.etrice.generator.launch.c, i.e. using a
+ * launch configuration (Run or Debug) which allows to configure command line options).
+ * </p>
+ * <p>
+ * Alternatively it can be called from the command line as Java application. In this case the following jars
+ * have to be on the class path:
+ * <ul>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ *   <li></li>
+ * </ul>
+ * </p>
+ *  
+ * @author Henrik Rentz-Reichert
+ *
+ */
 public class Main extends AbstractGenerator {
 	
 	public static final String OPTION_LIB = "-lib";

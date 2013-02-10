@@ -14,8 +14,8 @@ package org.eclipse.etrice.generator.base;
 
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 
 /**
@@ -24,41 +24,60 @@ import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
  */
 public class CodegenHelpers {
 	
+	/**
+	 * @param t a {@link Transition}
+	 * @return a name for the action code operation the generator will generate
+	 */
 	public static String getActionCodeOperationName(Transition t) {
 		return "action_"+RoomNameProvider.getFullPath(t);
 	}
 	
+	/**
+	 * @param s a {@link State}
+	 * @return a name for the entry code operation the generator will generate
+	 */
 	public static String getEntryCodeOperationName(State s) {
 		return "entry_"+getGenStatePathName(s);
 	}
 	
+	/**
+	 * @param s a {@link State}
+	 * @return a name for the exit code operation the generator will generate
+	 */
 	public static String getExitCodeOperationName(State s) {
 		return "exit_"+getGenStatePathName(s);
 	}
 	
+	/**
+	 * @param s a {@link State}
+	 * @return a name for the do code operation the generator will generate
+	 */
 	public static String getDoCodeOperationName(State s) {
 		return "do_"+getGenStatePathName(s);
 	}
 	
+	/**
+	 * @param tc a {@link TransitionChain}
+	 * @return a name for the constant transition chain ID the generator will generate
+	 */
 	public static String getGenChainId(TransitionChain tc) {
 		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
 	}
 	
-	public static boolean isTopLevel(StateGraphNode s) {
-		return !(s.eContainer().eContainer() instanceof State);
-	}
-	
-	public static State getParentState(StateGraphNode s) {
-		if (isTopLevel(s))
-			return null;
-		else
-			return (State) s.eContainer().eContainer();
-	}
-	
+	/**
+	 * @param s a {@link State} (must not be <code>null</code>)
+	 * @return the path of the state that may serve as a unique identifier
+	 * 
+	 * @see {@link org.eclipse.etrice.core.naming.RoomNameProvider#getFullPath(StateGraphItem)}
+	 */
 	public static String getGenStatePathName(State s) {
 		return RoomNameProvider.getFullPath(s);
 	}
 	
+	/**
+	 * @param s a {@link State} (may be <code>null</code>)
+	 * @return a unique identifier used by the generator for state IDs
+	 */
 	public static String getGenStateId(State s) {
 		if (s==null)
 			return "STATE_"+RoomNameProvider.getStateName(s);
@@ -66,8 +85,13 @@ public class CodegenHelpers {
 			return "STATE_"+RoomNameProvider.getFullPath(s);
 	}
 	
+	/**
+	 * @param s a {@link State} (may be <code>null</code>)
+	 * @return an ID for the parent state of s
+	 * @see {@link #getGenStateId(State)}
+	 */
 	public static String getParentStateId(State s) {
-		return getGenStateId(getParentState(s));
+		return getGenStateId(RoomHelpers.getParentState(s));
 	}
 
 }

@@ -13,17 +13,24 @@
 package org.eclipse.etrice.generator.base;
 
 /**
- * this object represents an (generated) file in a file system
+ * this object represents a (generated) file in a file system
  * 
  * @author Henrik Rentz-Reichert
  *
  */
 public class GenFile extends GenItem {
 
+	/**
+	 * @param parent the parent directory
+	 * @param name the name of this file
+	 */
 	public GenFile(GenDir parent, String name) {
 		super(parent, name);
 	}
 	
+	/**
+	 * @return the file name with the extension stripped of (if there)
+	 */
 	public String getBaseName() {
 		int pos = getName().lastIndexOf('.');
 		if (pos>=0)
@@ -38,6 +45,9 @@ public class GenFile extends GenItem {
 		return path.substring(0, path.length()-1);
 	}
 	
+	/**
+	 * @return the extension of this file or an empty string if no extensions exists
+	 */
 	public String getExtension() {
 		int pos = getName().lastIndexOf('.');
 		if (pos>=0)

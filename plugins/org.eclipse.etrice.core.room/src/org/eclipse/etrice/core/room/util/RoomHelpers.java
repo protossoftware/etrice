@@ -460,6 +460,27 @@ public class RoomHelpers {
 		
 		return true;
 	}
+	
+	/**
+	 * @param s a {@link State}
+	 * @return <code>true</code> if the state resides in the top level (i.e.
+	 * directly in the actor's state machine)
+	 */
+	public static boolean isTopLevel(StateGraphNode s) {
+		return !(s.eContainer().eContainer() instanceof State);
+	}
+	
+	/**
+	 * @param s a {@link State}
+	 * @return the parent state of s if there is such. If the state is on
+	 * the top level then <code>null</code> is returned
+	 */
+	public static State getParentState(StateGraphNode s) {
+		if (isTopLevel(s))
+			return null;
+		else
+			return (State) s.eContainer().eContainer();
+	}
 
 	/**
 	 * Returns the {@link RefinedState} in the derived state machine of the {@link ActorClass}

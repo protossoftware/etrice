@@ -19,18 +19,30 @@ import java.util.Collections;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * A class that creates a tree structure from a list of file paths.
+ * It allows to filter the paths before they enter the tree.
+ * 
  * @author Henrik Rentz-Reichert
- *
  */
 public class GenFileTreeBuilder {
 	
 	private GenDir genFileTree;
 	private IFileFilter filter; 
 	
+	/**
+	 * @param uri a file URI as base path
+	 * @param files a list of file paths
+	 * @param filter an optional filter, may be <code>null</code>
+	 */
 	public GenFileTreeBuilder(String uri, Collection<String> files, IFileFilter filter) {
 		this(getURI(uri), files, filter);
 	}
 	
+	/**
+	 * @param base a base URI which is subtracted from the beginning of the paths
+	 * @param files a list of file paths
+	 * @param filter an optional filter, may be <code>null</code>
+	 */
 	public GenFileTreeBuilder(URI base, Collection<String> files, IFileFilter filter) {
 		this.filter = filter;
 		ArrayList<String> relPaths = computeFilesAsRelativePaths(base, files);
@@ -38,7 +50,7 @@ public class GenFileTreeBuilder {
 	}
 	
 	/**
-	 * @return the genTree
+	 * @return the genTree composed of {@link GenItem}s
 	 */
 	public GenDir getGenFileTree() {
 		return genFileTree;
