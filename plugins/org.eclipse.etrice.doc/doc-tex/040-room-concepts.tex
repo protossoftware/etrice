@@ -1,7 +1,7 @@
 \chapter{ROOM Concepts}
 
 This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-The formal ROOM grammar based on Xtext (EBNF) you can find here: "ROOM Grammar":http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext
+The formal ROOM grammar based on Xtext (EBNF) you can find here: \href{http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext}{ROOM Grammar}
 
 \section{Actors}
 
@@ -26,8 +26,8 @@ The actor is the basic structural building block for building systems with ROOM.
 \begin{tabular}{|l|l|l|}
 \hline
  \textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
-  ActorClass & \includegraphics{images/040-ActorClassNotation.png} & \includegraphics{images/040-ActorClassTextualNotation.png} \\ \hline
-  ActorRef & \includegraphics{images/040-ActorReferenceNotation.png} & \includegraphics{images/040-ActorReferenceTextualNotation.png} \\ \hline
+  ActorClass & \includegraphics[scale=0.7]{images/040-ActorClassNotation.png} & \includegraphics[scale=0.7]{images/040-ActorClassTextualNotation.png} \\ \hline
+  ActorRef & \includegraphics[scale=0.7]{images/040-ActorReferenceNotation.png} & \includegraphics[scale=0.7]{images/040-ActorReferenceTextualNotation.png} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -69,7 +69,7 @@ Example:
 \begin{tabular}{|l|l|l|}
 \hline
  \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- \includegraphics{images/040-ActorClass.png} & \includegraphics{images/040-ActorClassExampleTextualNotation.png} \\ \hline
+ \includegraphics[scale=0.7]{images/040-ActorClass.png} & \includegraphics[scale=0.7]{images/040-ActorClassExampleTextualNotation.png} \\ \hline
  \end{tabular}
  \end{table}
  
@@ -131,7 +131,7 @@ ProtocolClasses have only textual notation.
 The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.
 
 \includegraphics{images/040-ProtocolClassTextualNotation.png}
-!images/040-ProtocolClassTextualNotation.png!
+% !images/040-ProtocolClassTextualNotation.png!
 
 \section{Ports}
 
@@ -161,21 +161,20 @@ Ports that define an external interface of the ActorClass, are defined in the \t
 \item \textbf{End Ports} are always connected to the internal behavior of the ActorClass
 \item \textbf{Replicated Ports} can be defined with a fixed replication factor ( e.g. \textit{Port port18 [ 5 ]: ProtocolClass1} ) or a variable replication factor (e.g. \textit{Port port18[ * ]: ProtocolClass1} )
 \end{itemize}
-
 \begin{table}
 \caption{Class Port Notation}
-\begin{tabular}{|l|l|l|}
+\begin{longtable}{|b{2.5cm}|c|b{5.5cm}|}
 \hline
  \textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- Class End Port & \includegraphics{images/040-ClassEndPort.png} & \\ \hline
- Class End Port & \includegraphics{images/040-ConjugatedClassEndPort.png} & \\ \hline
- Class Relay Port & \includegraphics{images/040-ClassRelayPort.png} & \\ \hline
- Conjugated Class Relay Port & \includegraphics{images/040-ConjugatedClassRelayPort.png} & \\ \hline
- Replicated Class End Port & \includegraphics{images/040-ReplicatedClassEndPort.png} & \\ \hline
- Conjugated Replicated Class End Port & \includegraphics{images/040-ConjugatedReplicatedClassEndPort.png} & \\ \hline
- Replicated Class Relay Port & \includegraphics{images/040-ReplicatedClassRelayPort.png} & \\ \hline
- Conjugated Replicated Class Relay Port & \includegraphics{images/040-ConjugatedReplicatedClassRelayPort.png} & \\ \hline
-\end{tabular}
+ \raggedright Class End Port & \includegraphics[scale=0.7]{images/040-ClassEndPort.png} & \begin{tabular}{c} \textbf{External Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ClassEndPortTextual} \\ \textbf{Internal Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ClassEndPortInternalTextual} \\ \end{tabular} \\ \hline
+ \raggedright Conjugated Class End Port & \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} \textbf{External Conjugated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPortTextual}\\ \textbf{Internal Conjugated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPortInternalTextual} \\ \end{tabular} \\ \hline
+ \raggedright Class Relay Port & \includegraphics[scale=0.7]{images/040-ClassRelayPort.png} & \includegraphics[scale=0.7]{images/040-ClassRelayPortTextual} \\ \hline
+ \raggedright Conjugated Class Relay Port & \includegraphics[scale=0.7]{images/040-ConjugatedClassRelayPort.png} & \includegraphics[scale=0.7]{images/040-ConjugatedClassRelayPortTextual} \\ \hline
+ \raggedright Replicated Class End Port & \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} \textbf{External Replicated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPortTextual} \\ \textbf{Internal Replicated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPortInternalTextual} \\ \end{tabular} \\ \hline
+ \raggedright Conjugated Replicated Class End Port & \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} \textbf{External Conjugated Replicated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPortTextual} \\ \textbf{Internal Conjugated Replicated Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPortInternalTextual} \\ \end{tabular} \\ \hline
+ \raggedright Replicated Class Relay Port & \includegraphics[scale=0.7]{images/040-ReplicatedClassRelayPort.png} & \includegraphics[scale=0.7]{images/040-ReplicatedClassRelayPortTextual} \\ \hline
+ \raggedright Conjugated Replicated Class Relay Port & \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassRelayPort.png} & \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassRelayPortTextual} \\ \hline
+\end{longtable}
 \end{table}
 
 % <table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0">
@@ -266,7 +265,7 @@ These symbols can only appear on the border of an ActorReference symbol. Since t
  Reference Port & \includegraphics{images/040-ReferencePort.png} & \textit{implicit} \\ \hline
  Conjugated Reference Port & \includegraphics{images/040-ConjugatedReferencePort.png} & \textit{implicit} \\ \hline
  Replicated Reference Port & \includegraphics{images/040-ReplicatedReferencePort.png} & \textit{implicit} \\ \hline
- Conjugated Replicated Reference Port & \includegraphics{images/040-ConjugatedReplicatedReferencePort.png} & \textit{implicit} \\ \hline
+ Conjugated Replicated \\ Reference Port & \includegraphics{images/040-ConjugatedReplicatedReferencePort.png} & \textit{implicit} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -331,12 +330,12 @@ In addition to the Actor containment hierarchies, Layering provides another meth
 \subsection{Notation}
 
 \begin{table}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|m{3cm}|c|c|}
 \hline
  \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- The Layer Connections in this model define which services are provided by the \textit{ServiceLayer} (\textit{digitalIO} and \textit{timer}) & \includegraphics{images/040-LayeringModel.png} & \includegraphics{images/040-LayeringModelTextual.png}  \\ \hline
- The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor \textit{ServiceLayer} relays (delegates) the implementation services \textit{digitalIO} and \textit{timer} to sub actors & \includegraphics{images/040-LayeringServiceLayer.png} & \includegraphics{images/040-LayeringServiceLayerTextual.png} \\ \hline
- Every Actor inside the \textit{ApplicationLayer} that contains an SAP with the same Protocol as \textit{timer} or \textit{digitalIO} will be connected to the specified SPP & \includegraphics{images/040-LayeringApplicationLayer.png} & \includegraphics{images/040-LayeringApplicationLayerTextual.png} \\ \hline
+ \begin{flushleft}The Layer Connections in this model define which services are provided by the \textit{ServiceLayer} (\textit{digitalIO} and \textit{timer})\end{flushleft} & \includegraphics[scale=0.5]{images/040-LayeringModel.png} & \includegraphics[scale=0.5]{images/040-LayeringModelTextual.png}  \\ \hline
+ \begin{flushleft}The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor \textit{ServiceLayer} relays (delegates) the implementation services \textit{digitalIO} and \textit{timer} to sub actors\end{flushleft} & \includegraphics[scale=0.5]{images/040-LayeringServiceLayer.png} & \includegraphics[scale=0.5]{images/040-LayeringServiceLayerTextual.png} \\ \hline
+ \begin{flushleft}Every Actor inside the \textit{ApplicationLayer} that contains an SAP with the same Protocol as \textit{timer} or \textit{digitalIO} will be connected to the specified SPP\end{flushleft} & \includegraphics[scale=0.5]{images/040-LayeringApplicationLayer.png} & \includegraphics[scale=0.5]{images/040-LayeringApplicationLayerTextual.png} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -367,13 +366,13 @@ In addition to the Actor containment hierarchies, Layering provides another meth
 
 \subsection{Description}
 
-Definition from "Wikipedia":http://en.wikipedia.org/wiki/Finite-state\_machine:
+Definition from \href{http://en.wikipedia.org/wiki/Finite-state\_machine}{Wikipedia}:
 
-\begin{verbatim}
+\begin{quote}
 A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.
 
 In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
-\end{verbatim}
+\end{quote}
 
 \subsection{Motivation}
 
@@ -392,12 +391,12 @@ The simpler flat finite state machines are composed of the following elements:
 \begin{tabular}{|c|c|c|}
 \hline
  \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- State & \includegraphics{images/040-State.jpg} & \includegraphics{images/040-StateTextual.jpg} \\ \hline
+ State & \includegraphics{images/040-State.jpg} & \includegraphics[scale=0.7]{images/040-StateTextual.jpg} \\ \hline
  InitialPoint & \includegraphics{images/040-InitialPoint.jpg} & \textit{implicit} \\ \hline
- TransitionPoint & \includegraphics{images/040-TransitionPoint.jpg} & \includegraphics{images/040-TransitionPointTextual.jpg} \\ \hline
- ChoicePoint & \includegraphics{images/040-ChoicePoint.jpg} & \includegraphics{images/040-ChoicePointTextual.jpg} \\ \hline
- Initial Transition & \includegraphics{images/040-InitialTransition.jpg} & \includegraphics{images/040-InitialTransitionTextual.jpg} \\ \hline
- Triggered Transition & \includegraphics{images/040-TriggeredTransition.jpg} & \includegraphics{images/040-TriggeredTransitionTextual.jpg} \\ \hline
+ TransitionPoint & \includegraphics{images/040-TransitionPoint.jpg} & \includegraphics[scale=0.7]{images/040-TransitionPointTextual.jpg} \\ \hline
+ ChoicePoint & \includegraphics{images/040-ChoicePoint.jpg} & \includegraphics[scale=0.7]{images/040-ChoicePointTextual.jpg} \\ \hline
+ Initial Transition & \includegraphics[scale=0.7]{images/040-InitialTransition.jpg} & \includegraphics[scale=0.7]{images/040-InitialTransitionTextual.jpg} \\ \hline
+ Triggered Transition & \includegraphics[scale=0.7]{images/040-TriggeredTransition.jpg} & \includegraphics[scale=0.5]{images/040-TriggeredTransitionTextual.jpg} \\ \hline
 \end{tabular}
 \end{table}
 % <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
@@ -446,11 +445,11 @@ A few modeling elements are added to the set listed above:
 
 \begin{table}
 \caption{Title}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|b{3cm}|c|c|}
 \hline
  \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- State with sub state machine &  & \includegraphics{images/040-StateWithSubFSMTextual.jpg} \\ \hline
- Entry Point & & \includegraphics{images/040-EntryPointTextual.jpg} \\ \hline
+ State with sub state machine & \specialcell{Parent State \\ \includegraphics[scale=0.7]{images/040-StateWithSubFSM.jpg}} & \specialcell{Sub state machine \\ \includegraphics[scale=0.5]{images/040-StateWithSubFSMTextual}} \\ \hline
+ Entry Point & \specialcell{In sub state machine \\ \includegraphics[scale=0.7]{images/040-EntryPoint}} & \specialcell{ \\ \includegraphics{images/040-EntryPointTextual}} \\ \hline
  Exit Point & & \includegraphics{images/040-ExitPointTextual.jpg} \\ \hline
 \end{tabular}
 \end{table}
@@ -493,18 +492,21 @@ A few modeling elements are added to the set listed above:
 \subsubsection{Example of a flat finite state machine:}
 
 % !images/040-FlatFSM.jpg!
-\includegraphics{images/040-FlatFSM.jpg}
+\includegraphics[scale=0.7]{images/040-FlatFSM.jpg}
 
 \subsubsection{Example of a hierarchical finite state machine:}
 
 Top level
+
 % !images/040-HierarchicalFSMTop.jpg!
-\includegraphics{images/040-HierarchicalFSMTop.jpg}
+\includegraphics[scale=0.7]{images/040-HierarchicalFSMTop.jpg}
 
 Sub state machine of Initializing
+
 % !images/040-HierarchicalFSMInitializing.jpg!
-\includegraphics{images/040-HierarchicalFSMInitializing.jpg}
+\includegraphics[scale=0.7]{images/040-HierarchicalFSMInitializing.jpg}
 
 Sub state machine of Running
+
 % !images/040-HierarchicalFSMRunning.jpg!
-\includegraphics{images/040-HierarchicalFSMRunning.jpg}
+\includegraphics[scale=0.7]{images/040-HierarchicalFSMRunning.jpg}

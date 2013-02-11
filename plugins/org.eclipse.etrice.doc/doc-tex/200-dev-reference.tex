@@ -4,7 +4,7 @@
 
 The basic components of eTrice are depicted in the following diagram.
 
-\includegraphics{images/200-components.jpg}
+\includegraphics[scale=0.5]{images/200-components}
 % !{width:50%}images/200-components.jpg!
 
 Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.
@@ -120,7 +120,7 @@ A couple of operations are added to the ConfigModel
 
 \subsubsection{Imports by URI Using Namespaces}
 
-Imports are treated similar than in the "Room language":ImportsbyURIUsingNamespaces.
+Imports are treated like in Room language, section \textit{Imports by URI Using Namespaces}.
 
 \subsubsection{Util}
 
@@ -172,11 +172,11 @@ There is one plug-in that consists of base classes and some generic generator pa
 We just want to mention the most important classes and interfaces.
 
 \begin{itemize}
-\item \texttt{ITranslationProvider} -- this interface is used by the @DetailCodeTranslator@ for the language dependent translation of e.g. port.message() notation in detail code
-\item \texttt{AbstractGenerator} -- concrete language generators should derive from this base class
-\item \texttt{DefaultTranslationProvider} -- a stub implementation of \texttt{ITranslationProvider} from which clients may derive
-\item \texttt{Indexed} -- provides an indexed iterable of a given iterable
-\item \texttt{GeneratorBaseModule} -- a Google Guice module that binds a couple of basic services. Concrete language generators should use a module that derives from this
+\item \begin{flushleft}\texttt{ITranslationProvider} --- this interface is used by the \texttt{DetailCodeTranslator} for the language dependent translation of e.g. port.message() notation in detail code\end{flushleft}
+\item \texttt{AbstractGenerator} --- concrete language generators should derive from this base class
+\item \begin{flushleft}\texttt{DefaultTranslationProvider} --- a stub implementation of \texttt{ITranslationProvider} from which clients may derive\end{flushleft}
+\item \texttt{Indexed} --- provides an indexed iterable of a given iterable
+\item \texttt{GeneratorBaseModule} --- a Google Guice module that binds a couple of basic services. Concrete language generators should use a module that derives from this
 \end{itemize}
 
 \subsubsection{Generic Generator Parts}
@@ -193,7 +193,7 @@ The \texttt{GenericProtocolClassGenerator} generates message ID constants for a 
 
 \paragraph{GenericStateMachineGenerator}
 
-The \texttt{GenericStateMachineGenerator} generates the complete state machine implementation. The skeleton of the generated code is
+\begin{flushleft}The \texttt{GenericStateMachineGenerator} generates the complete state machine implementation. The skeleton of the generated code is\end{flushleft}
 
 \begin{itemize}
 \item definition state ID constants
@@ -207,7 +207,7 @@ The \texttt{GenericStateMachineGenerator} generates the complete state machine i
 \item the \texttt{receiveEvent} method
 \end{itemize}
 
-The state machine works as follows. The main entry method is the \texttt{receiveEvent} method. This is the case for both, data driven (polled) and event driven state machines. Then a number of nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a trigger fires then the \texttt{exitTo} method is called to execute all exit codes involved. Then the transition chain action codes are executed and the choice point conditions are evaluated in the \texttt{executeTransitionChain} method. Finally the history of the state where the chain ends is entered and all entry codes are executed by \texttt{enterHistory}.
+The state machine works as follows. The main entry method is the \\ \texttt{receiveEvent} method. This is the case for both, data driven (polled) and event driven state machines. Then a number of nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a trigger fires then the \texttt{exitTo} method is called to execute all exit codes involved. Then the transition chain action codes are executed and the choice point conditions are evaluated in the \texttt{executeTransitionChain} method. Finally the history of the state where the chain ends is entered and all entry codes are executed by \texttt{enterHistory}.
 
 \subsubsection{The Java Generator}
 

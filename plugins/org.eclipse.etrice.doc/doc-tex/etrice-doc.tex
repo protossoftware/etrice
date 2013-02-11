@@ -1,9 +1,29 @@
-\documentclass{book}
-\usepackage{hyperref}
+\documentclass[a4paper,oneside,10pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{longtable}
+\usepackage[urlcolor=blue]{hyperref}
+\usepackage{array}
 \usepackage{graphicx}
+\setlength{\parindent}{0pt}  
+\setlength{\parskip}{4pt plus 1pt minus 0pt}  % Abstand zwischen Absaetzen
+ \nonfrenchspacing
+ \sloppy
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}} 
+ 
+ 
+\title{\Huge eTrice}
+\author{Henkrik Renz-Reichert \and Thomas Schütz}
 \begin{document}
+\maketitle
+
+\tableofcontents
+
 \include{000-etrice-introduction}
-\include{012-room-introduction}
+\include{010-room-introduction}
+\include{012-working-with-tutorials}
 \include{013-setting-up-the-workspace}
 \include{015-getting-started}
 \include{020-tutorial-blinky}

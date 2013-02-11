@@ -14,13 +14,11 @@ In this tutorial you will build your first very simple eTrice model. The goal is
 
 Make sure that you have set up the workspace as described in \textit{Setting up the workspace}.
 
-"video hello world":http://eclipse.org/etrice/images/015-HelloWorld01.avi
-
 \section{Create a new model from scratch}
 
 The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select \textbf{File->New->Project} and create a new eTrice project and name it \textbf{HelloWorld}.
 
-\includegraphics{images/015-HelloWorld10}
+\includegraphics[width=\linewidth]{images/015-HelloWorld10}
 % !images/015-HelloWorld10.png!
 
 The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like this:
@@ -30,7 +28,7 @@ The wizard creates everything that is needed to create, build and run an eTrice 
 
 Within the model directory the model file \textit{HelloWorld.room} was created. Open the \textit{HelloWorld.room} file and delete the contents of the file. Open the content assist with Ctrl+Space and select \textit{model skeleton}.
 
-\includegraphics{images/015-HelloWorld12}
+\includegraphics[width=\linewidth]{images/015-HelloWorld12}
 % !images/015-HelloWorld12.png!   
 
 Edit the template variables by typing the new names and jumping with Tab from name to name.
@@ -64,7 +62,7 @@ The \textit{LogicalSystem} represents the complete distributed system and contai
 
 The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate tree.
 
-\includegraphics{images/015-HelloWorld02.png}
+\includegraphics[width=\linewidth]{images/015-HelloWorld02.png}
 % !images/015-HelloWorld02.png!
 
 
@@ -83,12 +81,12 @@ bc. System.out.println("Hello World !");
  
 The result should look like this:
 
-\includegraphics{images/015-HelloWorld04}
+\includegraphics[width=\linewidth]{images/015-HelloWorld04}
 % !images/015-HelloWorld04.png!
 
 Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.
 
-\includegraphics{images/015-HelloWorld05}
+\includegraphics[width=\linewidth]{images/015-HelloWorld05}
 % !images/015-HelloWorld05.png!
 
 
@@ -96,7 +94,7 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From \textit{HelloWorld/} right click \textbf{gen\_HelloWorld.launch} and run it as gen\_HelloWorld. All model files in the model directory will be generated.
 
-\includegraphics{images/015-HelloWorld06}
+\includegraphics[width=\linewidth]{images/015-HelloWorld06}
 % !images/015-HelloWorld06.png!
 
 The code will be generated to the src-gen directory. The main function will be contained in \textbf{SubSystem\_HelloWorldRunner.java}. Select this file and run it as Java application.
@@ -107,14 +105,14 @@ The code will be generated to the src-gen directory. The main function will be c
 
 The Hello World application starts and the string will be printed on the console window. To stop the application the user must type \textbf{quit} in the console window.
 
-\includegraphics{images/015-HelloWorld08}
+\includegraphics[width=\linewidth]{images/015-HelloWorld08}
 % !images/015-HelloWorld08.png!
 
 \section{Open the Message Sequence Chart}
 
 During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem\_HelloWorld\_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
-\includegraphics{images/015-HelloWorld09}
+\includegraphics[width=\linewidth]{images/015-HelloWorld09}
 % !images/015-HelloWorld09.png!
 
 

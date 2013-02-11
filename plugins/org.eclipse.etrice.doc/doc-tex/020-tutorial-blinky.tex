@@ -42,10 +42,10 @@ Open the \textit{Blinky.room} file and copy the following code into the file or 
 RoomModel Blinky {
 
     LogicalSystem System_Blinky {
-        SubSystemRef subsystem : SubSystem\_Blinky
+        SubSystemRef subsystem : SubSystem_Blinky
     }
 
-    SubSystemClass SubSystem\_Blinky {
+    SubSystemClass SubSystem_Blinky {
         ActorRef application : BlinkyTop
     }
 
@@ -58,12 +58,12 @@ RoomModel Blinky {
 
 Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select \textit{Content Assist}  
 
-\includegraphics{images/020-Blinky02}
+\includegraphics[width=\linewidth]{images/020-Blinky02}
 % !images/020-Blinky02.png!
 
 Select \textit{ActorClass - actor class skeleton} and name it \textit{Blinky}.
 
-\includegraphics{images/020-Blinky01}
+\includegraphics[width=\linewidth]{images/020-Blinky01}
 % !images/020-Blinky01.png! 
 
 Repeat the described procedure and name the new actor \textit{BlinkyController}.
@@ -79,7 +79,7 @@ Inside the brackets use the \textit{Content Assist} (CTRL+Space) to create two i
 
 The resulting code should look like this:
 
-\includegraphics{images/020-Blinky03}
+\includegraphics[width=\linewidth]{images/020-Blinky03}
 % !images/020-Blinky03.png!
 
 With Ctrl-Shift+F or selecting \textit{Format} from the context menu you can format the text. Note that all elements are displayed in the outline view.
@@ -91,15 +91,17 @@ Switching on and off the LED is timing controlled. The timing service is provide
 This is the first time you use an element from the modellib. Make sure that your Java Build Path has the appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib, can not be referenced.
 (right click to \textit{Blinky} and select properties. Select the \textit{Java Build Path} tab) 
   
-\includegraphics{images/020-Blinky16}
+\includegraphics[width=\linewidth]{images/020-Blinky16}
 % !images/020-Blinky16.png! 
 
 After the build path is set up return to the model and navigate the cursor at the beginning of the model and import the timing service: 
 
+\begin{small}
 \begin{verbatim}
 RoomModel Blinky {
     
-    import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+    import room.basic.service.timing.* from 
+		"../../org.eclipse.etrice.modellib/models/TimingService.room" 
     
     LogicalSystem System_Blinky {
         SubSystemRef subsystem: SubSystem\_Blinky
@@ -107,12 +109,13 @@ RoomModel Blinky {
 }
 ...     
 \end{verbatim}
+\end{small}
 
 Make sure that the path fits to your folder structure. The original tutorial code is different due to the folder structure.  
 
 Now it can be used within the model. Right click to \textbf{SubSystem\_Blinky} within the outline view. Select \textit{Edit Structure}. The \textit{application} is already referenced in the subsystem. Drag and Drop an \textit{ActorRef} to the \textbf{SubSystem\_Blinky} and name it \textit{timingService}. From the actor class drop down list select \textit{room.basic.service.timing.ATimingService}. Draw a \textit{LayerConnection} from \textit{application} to each service provision point (SPP) of the \textit{timingService}. The resulting structure should look like this:
 
-\includegraphics{images/020-Blinky06}
+\includegraphics[width=\linewidth]{images/020-Blinky06}
 % !images/020-Blinky06.png! 
 
 The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the \textit{Blinky.room} file and navigate to the \textit{Blinky} actor. Add the following line to the structure of the actor:
@@ -123,7 +126,7 @@ Do the same thing for \textit{BlinkyController}.
 
 The resulting code should look like this:
 
-\includegraphics{images/020-Blinky07}
+\includegraphics[width=\linewidth]{images/020-Blinky07}
 % !images/020-Blinky07.png!
 
 
@@ -131,7 +134,7 @@ The resulting code should look like this:
 
 From the outline view right click to \textit{Blinky} and select \textit{Edit Structure}. Drag and Drop an \textit{Interface Port} to the boarder of the \textit{Blinky} actor. Note that an interface port is not possible inside the actor. Name the port \textit{ControlPort} and select \textit{BlinkyControlProtocol} from the drop down list. Uncheck \textit{Conjugated} and \textit{Is Relay Port}. Click \textit{ok}. The resulting structure should look like this:
 
-\includegraphics{images/020-Blinky04}
+\includegraphics[width=\linewidth]{images/020-Blinky04}
 % !images/020-Blinky04.png!
 
 Repeat the above steps for the \textit{BlinkyController}. Make the port \textit{Conjugated}
@@ -143,7 +146,7 @@ From the outline view right click \textit{BlinkyTop} and select \textit{Edit Str
 
 Drag and Drop an \textit{ActorRef} inside the \textit{BlinkyTop} actor. Name it \textit{blinky}. From the actor class drop down list select \textit{Blinky}. Do the same for \textit{controller}. Connect the ports via the binding tool. The resulting structure should look like this:
 
-\includegraphics{images/020-Blinky05}
+\includegraphics[width=\linewidth]{images/020-Blinky05}
 % !images/020-Blinky05.png!
 
 \section{Implement the Behavior}
@@ -158,7 +161,7 @@ Open the transition dialog by double click the arrow to specify the trigger even
 
 The transition dialog should look like this:
 
-\includegraphics{images/020-Blinky09}
+\includegraphics[width=\linewidth]{images/020-Blinky09}
 % !{width=500px}images/020-Blinky09.png! 
 
 The defined ports will be generated as a member attribute of the actor class from type of the attached protocol. So, to send e message you must state \textit{port.message(param);}. In this example \textit{ControlPort.start()} sends the \textit{start} message via the \textit{ControlPort} to the outside world. Assuming that \textit{Blinky} is connected to this port, the message will start the one second blinking FSM. It is the same thing with the \textit{timer}. The SAP is also a port and follows the same rules. So it is clear that \textit{timer.Start(5000);} will send the \textit{Start} message to the timing service. The timing service will send a \textit{timeoutTick} message back after 5000ms.
@@ -168,12 +171,12 @@ Within each transition the timer will be restarted and the appropriate message w
 The resulting state machine should look like this:
 (Note that the arrows peak changes if the transition contains action code.)
 
-\includegraphics{images/020-Blinky10}
+\includegraphics[width=\linewidth]{images/020-Blinky10}
 % !images/020-Blinky10.png!
 
 Save the diagram and inspect the \textit{Blinky.room} file. The \textit{BlinkyController} should look like this:
 
-\includegraphics{images/020-Blinky11}
+\includegraphics[width=\linewidth]{images/020-Blinky11}
 % !images/020-Blinky11.png! 
  
 Now we will implement \textit{Blinky}. Due to the fact that \textit{Blinky} interacts with the GUI class a view things must to be done in the model file.
@@ -182,7 +185,7 @@ Double click \textit{Blinky} in the outline view to navigate to \textit{Blinky} 
 Add the following code:
 (type it or simply copy it from the tutorial project)
 
-\includegraphics{images/020-Blinky12}
+\includegraphics[width=\linewidth]{images/020-Blinky12}
 % !images/020-Blinky12.png! 
 
 \textit{usercode1} will be generated at the beginning of the file, outside the class definition. \textit{usercode2} will be generated within the class definition. The code imports the GUI class and instantiates the window class. Attributes for the carLights and pedLights will be declared to easily access the lights in the state machine.
@@ -192,12 +195,12 @@ Now design the FSM of \textit{Blinky}. Remember, as the name suggested \textit{b
 
 Open the behavior diagram of \textit{Blinky} by right clicking the \textit{Blinky} actor in the outline view. Create two states named \textit{blinking} and \textit{off}. Right click to \textit{blinking} and create a subgraph.
 
-\includegraphics{images/020-Blinky13}
+\includegraphics[width=\linewidth]{images/020-Blinky13}
 % !images/020-Blinky13.png!
 
 Create the following state machine. The trigger events between \textit{on} and \textit{off} are the \textit{timeoutTick} from the \textit{timer} port. 
 
-\includegraphics{images/020-Blinky14}
+\includegraphics[width=\linewidth]{images/020-Blinky14}
 % !images/020-Blinky14.png!
 
 Create entry code for both states by right clicking the state and select \textit{Edit State...}
@@ -219,7 +222,7 @@ carLights.setState(TrafficLight3.OFF);
 
 Navigate to the Top level state by double clicking the \textit{/blinking} state. Create the following state machine:
 
-\includegraphics{images/020-Blinky15}
+\includegraphics[width=\linewidth]{images/020-Blinky15}
 % !images/020-Blinky15.png!
 
 The trigger event from \textit{off} to \textit{blinking} is the \textit{start} event from the \textit{ControlPort}.The trigger event from \textit{blinking} to \textit{off} is the \textit{stop} event from the \textit{ControlPort}.

@@ -28,12 +28,16 @@ There are several possibilities to receive external events (e.g. TCP/UDP Socket,
 \item Use the \textit{New Model Wizzard} to create a new eTrice project and name it \textit{PedLightsController}.
 \item Copy the package \textit{org.eclipse.etrice.tutorials.PedLightGUI} to your \textit{src} directory (see blinky tutorial).
 \item In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134 (registration). The error markers will disappear after the code is generated from the model.
-\item Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory. 
+\item \begin{flushleft}Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run the model directly in the tutorial directory.\end{flushleft} 
 \item Adapt the import statement to your path.
 \end{itemize}
+
+\begin{small}
 \begin{verbatim} 
-import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/models/TimingService.room" 
+import room.basic.service.timing.* from 
+	"../../org.eclipse.etrice.modellib/models/TimingService.room" 
 \end{verbatim}
+\end{small}
 
 \begin{itemize}
 \item Generate the code from the model.
@@ -42,15 +46,15 @@ import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib/model
 \item Arrange the Structure and the Statemachines to understand the model
 \end{itemize}
 
-\includegraphics{images/030-PedLights01}
+\includegraphics[width=\linewidth]{images/030-PedLights01}
 % !images/030-PedLights01.png!
 The \textit{GuiAdapter} represents the interface to the external code. It registers its \textit{ControlPort} by the external code.
 
-\includegraphics{images/030-PedLights02}
+\includegraphics[width=\linewidth]{images/030-PedLights02}
 % !images/030-PedLights02.png!
 Visit the initial transition to understand the registration. The actor handles the incoming messages as usual and controls the traffic lights as known from blinky. 
 
-\includegraphics{images/030-PedLights03}
+\includegraphics[width=\linewidth]{images/030-PedLights03}
 % !images/030-PedLights03.png!
 The \textit{Controller} receives the \textit{start} message and controls the timing of the lights. Note that the \textit{start} message will be sent from the external code whenever the \textit{REQUEST} button is pressed.
 
@@ -66,7 +70,7 @@ The \textit{Controller} receives the \textit{start} message and controls the tim
 \item Take a look at the generated MSC => notice that the start message will shown as if the \textit{GuiAdapter} had sent it.
 \end{itemize}
 
-\includegraphics{images/030-PedLights04}
+\includegraphics[width=\linewidth]{images/030-PedLights04}
 % !images/030-PedLights04.png!
 
 \section{Why does it work and why is it safe?}

@@ -11,8 +11,8 @@ eTrice comprises several models:
 
 In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
 
-\includegraphics{images/080-models.jpg}
-% !{width:50%}images/080-models.jpg!
+\includegraphics[scale=0.4]{images/080-models.jpg}
+% !{width:50}images/080-models.jpg!
 
 In the following sections we will describe those models with emphasis of their cross relations.
 
@@ -28,8 +28,8 @@ Let's consider a simple example. It doesn't implement any meaningful and complet
 
 When a \texttt{LogicalSstem} is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this (the third line in the white boxes shows some mapping information, s.b.):
 
-\includegraphics{images/080-instances.jpg}
-!{width:40%}images/080-instances.jpg!
+\includegraphics[scale=0.35]{images/080-instances.jpg}
+% !{width:40%}images/080-instances.jpg!
 
 
 \section{The Config Model}
@@ -55,6 +55,6 @@ The physical system is composed of @Node@ references where each @Node@ is define
 The last model finally combines all this information by mapping logical to physical entities.
 
 \includegraphics{images/080-map.jpg}
-!images/080-map.jpg!
+% !images/080-map.jpg!
 
 The result of the mapping is also depicted in above tree diagram of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @ \textit{node} : \textit{thread}).

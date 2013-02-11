@@ -40,7 +40,7 @@ RoomModel SendingData {
 
 Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select \textit{Content Assist} (or Ctrl+Space).  
 
-\includegraphics{images/025-SendingData01.png}
+\includegraphics[width=\linewidth]{images/025-SendingData01.png}
 % !images/025-SendingData01.png!
 
 Select \textit{DataClass - data class skeleton} and name it \textit{DemoData}.
@@ -134,7 +134,7 @@ The outline view should look like this:
 
 Save the model and visit the outline view. Within the outline view, right click on the \textit{MrPong} actor and select \textit{Edit Structure}. Select an \textit{Interface Port} from the toolbox and add it to MrPong. Name the Port \textit{PingPongPort} and select the \textit{PingPongProtocol}.
 
-\includegraphics{images/025-SendingData02.png}
+\includegraphics[width=\linewidth]{images/025-SendingData02.png}
 % !images/025-SendingData02.png!
 
 Do the same with MrPing but mark the port as \textit{conjugated}
@@ -143,18 +143,18 @@ Do the same with MrPing but mark the port as \textit{conjugated}
 
 Within the outline view, right click MrPong and select \textit{Edit Behavior}. Create the following state machine:
 
-\includegraphics{images/025-SendingData04.png}
+\includegraphics[width=\linewidth]{images/025-SendingData04.png}
 % !images/025-SendingData04.png!
 
 The transition dialogues should look like this:
 For \textit{ping}:
 
-\includegraphics{images/025-SendingData05.png}
+\includegraphics[width=\linewidth]{images/025-SendingData05.png}
 % !images/025-SendingData05.png!
 
 For \textit{pingSimple}:
 
-\includegraphics{images/025-SendingData06.png}
+\includegraphics[width=\linewidth]{images/025-SendingData06.png}
 % !images/025-SendingData06.png!
 
 
@@ -162,13 +162,14 @@ For \textit{pingSimple}:
 
 Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of content assist create a new operation.
 
-\includegraphics{images/025-SendingData07.png}
+\includegraphics[width=\linewidth]{images/025-SendingData07.png}
 % !images/025-SendingData07.png!
 
 Name the operation \textit{printData} and define the DemoData as a parameter.
 
 Fill in the following code:
 
+\begin{small}
 \begin{verbatim}
 Operation printData(d: DemoData) : void {
             "System.out.printf(\"d.int32Val: %d\\n\",d.int32Val);"
@@ -179,43 +180,44 @@ Operation printData(d: DemoData) : void {
             "System.out.printf(\"\\nd.stringVal: %s\\n\",d.stringVal);"
 }
 \end{verbatim}
+\end{small}
 
 For MrPing create the following state machine:
 (Remember that you can copy and paste the action code from the tutorial directory.)
 
-\includegraphics{images/025-SendingData08.png}
+\includegraphics[width=\linewidth]{images/025-SendingData08.png}
 % !images/025-SendingData08.png!
 
 The transition dialogues should look like this:
 
 For \textit{init}:
 
-\includegraphics{images/025-SendingData09.png}
+\includegraphics[width=\linewidth]{images/025-SendingData09.png}
 % !images/025-SendingData09.png!
 
 For \textit{wait1}:
 
-\includegraphics{images/025-SendingData10.png}
+\includegraphics[width=\linewidth]{images/025-SendingData10.png}
 % !images/025-SendingData10.png!
 
 For \textit{next}:
 
-\includegraphics{images/025-SendingData11.png}
+\includegraphics[width=\linewidth]{images/025-SendingData11.png}
 % !images/025-SendingData11.png!
 
 For \textit{wait2}:
 
-\includegraphics{images/025-SendingData12.png}
+\includegraphics[width=\linewidth]{images/025-SendingData12.png}
 % !images/025-SendingData12.png!
 
 \section{Define the top level}
 
 Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the ports.
 
-\includegraphics{images/025-SendingData13.png}
+\includegraphics[width=\linewidth]{images/025-SendingData13.png}
 % !images/025-SendingData13.png!
 
-The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.
+\begin{flushleft}The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.\end{flushleft}
 
 \section{Generate and run the model}
 

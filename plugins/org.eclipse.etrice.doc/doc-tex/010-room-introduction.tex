@@ -9,14 +9,14 @@ This chapter will give a rough overview of what ROOM (\b R eal time \b O bject \
 \item What is the relation between OOP and ROOM?
 \item What are the benefits of ROOM?
 \item Which consequences must be taken into account?
+\end{itemize}
 
 \subsection{Where does it come from?}
 
 Room was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is, in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for distributed, event driven, real time systems. 
 
-Bran Selic, Garth Gullekson and Paul T. Ward have published t
-he concepts 1994 in the book \empf{Real-Time Object-Oriented Modeling}. The company \textit{object time} \texttrademark developed a ROOM tool which was taken over by \textit{Rational SW} \texttrademark and later on by \textit{IBM} \texttrademark. 
-The company \textit{Protos Software Gmbh} \texttrademark also developed a ROOM tool called \textit{Trice} \texttrademark for control software for production machines and automotive systems. \textit{Trice\ \texttrademark is the predecessor of eTrice (see Introduction to eTrice). 
+Bran Selic, Garth Gullekson and Paul T. Ward have published the concepts 1994 in the book \textbf{Real-Time Object-Oriented Modeling}. The company \textit{object time} \texttrademark developed a ROOM tool which was taken over by \textit{Rational SW} \texttrademark and later on by \textit{IBM} \texttrademark. 
+The company \textit{Protos Software Gmbh} \texttrademark also developed a ROOM tool called \textit{Trice} \texttrademark for control software for production machines and automotive systems. \textit{Trice} \texttrademark is the predecessor of eTrice (see Introduction to eTrice). 
  
 From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.
  
@@ -45,17 +45,17 @@ A SW system which mainly consists of data transformations like signal/image proc
 
 The relation between classical object oriented programming and ROOM is comparable to the relation between assembler programming and C programming. It provides a shift of the object paradigm. As the picture shows, the classic object paradigm provides some kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provide the requested behavior to the user.   
 
-\includegraphics{images/010-RoomIntroduction01.png}
+\includegraphics{images/010-RoomIntroduction01}
 % !images/010-RoomIntroduction01.png!
 
 As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided by the underlying operating system and the user is responsible to avoid access violations by using those operating system mechanisms directly (semaphore, mutex).
 
-\includegraphics{images/010-RoomIntroduction02.png}
+\includegraphics{images/010-RoomIntroduction02}
 % !images/010-RoomIntroduction02.png!
 
 ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter \textbf{Run to completion}). 
 
-\includegraphics{images/010-RoomIntroduction03.png}
+\includegraphics[width=\linewidth]{images/010-RoomIntroduction03}
 % !images/010-RoomIntroduction03.png!
 
 This thinking of an object is much more general than the classic one.  
@@ -88,7 +88,7 @@ The basic elements of ROOM are the actors with their ports and protocols. The pr
 \caption{Actor and Protocol Example}
 \begin{tabular}{|l|l|}
 \hline
-\includegraphics{images/040-ActorClass.png} & \includegraphics{images/040-ProtocolClassTextualNotation.png} \\ \hline
+\includegraphics[scale=0.85]{images/040-ActorClass} & \includegraphics[scale=0.85]{images/040-ProtocolClassTextualNotation} \\ \hline
 \textbf{Actor with Subactors} & \textbf{Protocol Definition} \\ \hline
 \end{tabular}
 \end{table}
@@ -113,18 +113,20 @@ Receiving a message via a port will trigger the internal state machine. A transi
 With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round: The complex behavior will be provided by a network of relatively simple components which are communicating with each other via well defined interfaces.
 
 
-\subsection{Hierarchy in Structure and Behavior
+\subsection{Hierarchy in Structure and Behavior}
 
 ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide your problem in smaller pieces, so that you can focus on the level of abstraction you want to work on. 
 
 The actor's behavior will be described with a state machine. A state in turn may contain sub states. This is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from the blinky tutorial. 
    
 Top level:
-\includegraphics{images/020-Blinky15.png}
+
+\includegraphics[width=\linewidth]{images/020-Blinky15}
 % !images/020-Blinky15.png!
 
 \textit{blinking} Sub machine:
-\includegraphics{images/020-Blinky151.png}
+
+\includegraphics[width=\linewidth]{images/020-Blinky151}
 % !images/020-Blinky151.png!
 
 From an abstract point of view there is a state \textit{blinking}. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
@@ -140,10 +142,10 @@ Layering can be expressed in ROOM by Actors with specialized Ports, called Servi
 
 The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.
 
-\includegraphics{images/010-LayerExample.png}
+\includegraphics{images/010-LayerExample}
 % !images/010-LayerExample.png!
 
-The Example shows a layered model. The Layer Connections define e.g. that the \textit{ApplicationLayer} can only use the services of the \textit{ServiceLayer} and the \textit{CommunicationLayer}. Actors inside the _ApplicationLayer_ that implement an SAP for those services are connected directly to the implementation of the services. 
+The Example shows a layered model. The Layer Connections define e.g. that the \textit{ApplicationLayer} can only use the services of the \textit{ServiceLayer} and the \textit{CommunicationLayer}. Actors inside the \textit{ApplicationLayer} that implement an SAP for those services are connected directly to the implementation of the services. 
 Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
 
 \subsection{Run to Completion}
@@ -175,6 +177,7 @@ Currently the eTrice tooling only supports the \textbf{message driven} and parts
 \item \textbf{execution by receive event}: The message queue or the event dispatcher calls a \textbf{receive event} function of the message receiver an thereby executes the processing of the event.
 \item \textbf{polled execution}: The objects are processed by a cyclic \textbf{execute} call
 \item \textbf{execution by function call}: The caller executes the called object via function call
+\end{itemize}
 
 \subsection{Execution Models}
 

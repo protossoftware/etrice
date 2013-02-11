@@ -58,14 +58,17 @@ With this declaration, you make the \textit{string} keyword available on model l
 To not interfere with other models, we will declare the type direct in the model.
 Add the following line to your model:
 
+\begin{small}
 \begin{verbatim}
 RoomModel RemoveComment {
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from 
+		"../../../org.eclipse.etrice.modellib.c/model/Types.room"
 	
 	PrimitiveType file:ptInteger -> FILE default "0"
 \end{verbatim}
+\end{small}
 
-\textit{FILE} is the native type for MinGW. Therefore you don´t need a mapping within \textit{etDatatypes.h}. If your model should be portable across different platforms you should not take this shortcut.
+\textit{FILE} is the native type for MinGW. Therefore you don't need a mapping within \textit{etDatatypes.h}. If your model should be portable across different platforms you should not take this shortcut.
  
 \section{Create the model}
 
@@ -86,17 +89,17 @@ Try to create the model by yourself and take the following solution as an exampl
 
 Structure:
 
-\includegraphics{images/036-RemoveCommentC04.png}
+\includegraphics[width=\linewidth]{images/036-RemoveCommentC04.png}
 % !images/036-RemoveCommentC04.png!
 
 File reader FSM:
 
-\includegraphics{images/036-RemoveCommentC05.png}
+\includegraphics[width=\linewidth]{images/036-RemoveCommentC05.png}
 % !images/036-RemoveCommentC05.png!
 
 Parser FSM:
 
-\includegraphics{images/036-RemoveCommentC06.png}
+\includegraphics[width=\linewidth]{images/036-RemoveCommentC06.png}
 % !images/036-RemoveCommentC06.png!
 
 The complete model can be found in \textit{org.eclipse.etrice.tutorials.c}
@@ -121,7 +124,7 @@ Generate, build and run the model.
 
 Your output should start like this:
 
-\includegraphics{images/036-RemoveCommentC08.png}
+\includegraphics[width=\linewidth]{images/036-RemoveCommentC08.png}
 % !images/036-RemoveCommentC08.png!
 
 
