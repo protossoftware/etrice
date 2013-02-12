@@ -23,13 +23,25 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
+/**
+ * A class that is used to recursively erase all folders receiving generated code
+ * an to place a readme file into those folders.
+ */
 @Singleton
 class PrepareFileSystem {
 	
-	@Inject extension RoomExtensions roomExt
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject extension RoomExtensions
+	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject ILogger logger
 	
+	/**
+	 * Recursively erase all folders receiving generated code
+	 * an to place a readme file into those folders.
+	 * The folders are determined from the used models of every generator
+	 * model found in the resource.
+	 * 
+	 * @param resource a {@link Resource}
+	 */
 	def void prepare(Resource resource) {
 		var Set<String> pathes = new HashSet<String>();
 		for (e: resource.contents){
@@ -48,7 +60,7 @@ class PrepareFileSystem {
 		}
 	}
 	
-	def void eraseContents(File f) {
+	def private void eraseContents(File f) {
 		if (f.directory) {
 			var children = f.listFiles
 			for (child : children) {
@@ -58,7 +70,7 @@ class PrepareFileSystem {
 		}
 	}
 	
-	def readmeText() {
+	def private readmeText() {
 		'''
 			This directory is an eTrice code generation target.
 			It will be erased every time the generator is executed.

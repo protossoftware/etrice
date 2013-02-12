@@ -17,8 +17,8 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -29,9 +29,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 public class CExtensions implements ILanguageExtension {
   @Inject
   private IDiagnostician diagnostician;
-  
-  @Inject
-  private RoomExtensions _roomExtensions;
   
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
@@ -375,7 +372,7 @@ public class CExtensions implements ILanguageExtension {
         _builder.append("{");
         _builder.newLine();
         {
-          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(_dataClass);
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_dataClass);
           boolean _hasElements = false;
           for(final Attribute att : _allAttributes) {
             if (!_hasElements) {

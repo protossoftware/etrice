@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -115,7 +116,7 @@ public class DataClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.append("\t");
-    List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(dc);
+    List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
     CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
     _builder.append(_attributes, "	");
     _builder.newLineIfNotEmpty();
@@ -126,7 +127,7 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<Attribute> _allAttributes_1 = this._roomExtensions.getAllAttributes(dc);
+      List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(dc);
       for(final Attribute a : _allAttributes_1) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();

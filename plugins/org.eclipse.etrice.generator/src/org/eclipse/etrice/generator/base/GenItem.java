@@ -12,11 +12,26 @@
 
 package org.eclipse.etrice.generator.base;
 
+/**
+ * This is the abstract base class for {@link GenFile} and {@link GenDir} which are
+ * used to form a hierarchical tree structure of (relative) paths.
+ * 
+ * @author Henrik Rentz-Reichert
+ */
+public abstract class GenItem {
+	
+	/**
+	 * the path separator
+	 */
+	public static final String PATH_SEP = "/";
 
-public class GenItem {
 	private GenDir parent;
 	private String name;
 	
+	/**
+	 * @param parent the parent directory
+	 * @param name the name of this item
+	 */
 	public GenItem(GenDir parent, String name) {
 		super();
 		this.parent = parent;
@@ -26,21 +41,34 @@ public class GenItem {
 			parent.getContents().add(this);
 	}
 
+	/**
+	 * @return the item's name
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * @return the parent directory
+	 */
 	public GenDir getParent() {
 		return parent;
 	}
 	
+	/**
+	 * @return the path of this item with a trailing / ({@link #PATH_SEP})
+	 */
 	public String getPath() {
 		if (parent==null)
 			return "";
 		
-		return parent.getPath()+name+"/";
+		return parent.getPath()+name+PATH_SEP;
 	}
 	
+	/**
+	 * @return the path of this item
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return getPath();

@@ -33,13 +33,13 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
-	@Inject JavaIoFileSystemAccess fileAccess
-	@Inject extension ILanguageExtension langExt
+	@Inject protected extension RoomExtensions
 	@Inject extension CExtensions
-	@Inject extension RoomExtensions
-	
 	@Inject extension ProcedureHelpers
 	@Inject extension StateMachineGen
+
+	@Inject protected ILanguageExtension langExt
+	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -213,7 +213,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(3)»
 
 		/* interface item IDs */
-		«genInterfaceItemConstants(xpac, ac)»
+		«xpac.genInterfaceItemConstants»
 
 		«IF !xpac.stateMachine.empty»
 			«xpac.genStateMachine()»

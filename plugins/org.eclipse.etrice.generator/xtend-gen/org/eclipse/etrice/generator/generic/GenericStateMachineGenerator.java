@@ -40,13 +40,16 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * A target language independent generator of the state machine implementation-
+ */
 @SuppressWarnings("all")
 public class GenericStateMachineGenerator {
   @Inject
-  protected ILanguageExtension langExt;
+  protected RoomExtensions _roomExtensions;
   
   @Inject
-  protected RoomExtensions _roomExtensions;
+  protected ILanguageExtension langExt;
   
   @Inject
   protected GenericProtocolClassGenerator pcGen;
@@ -57,6 +60,9 @@ public class GenericStateMachineGenerator {
   /**
    * generates state ID constants.
    * Inheritance (if available) is used for base class IDs.
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @return the generated code
    */
   protected String genStateIdConstants(final ExpandedActorClass xpac) {
     final ActorClass ac = xpac.getActorClass();
@@ -107,8 +113,11 @@ public class GenericStateMachineGenerator {
   }
   
   /**
-   * generates transition chain IDs.
+   * generates transition chain ID constants.
    * Inheritance (if available) is used for base class IDs.
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @return the generated code
    */
   protected String genTransitionChainConstants(final ExpandedActorClass xpac) {
     EList<TransitionChain> _xifexpression = null;
@@ -151,6 +160,9 @@ public class GenericStateMachineGenerator {
   /**
    * generates trigger IDs.
    * Inheritance (if available) is used for base class IDs.
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @return the generated code
    */
   protected String genTriggerConstants(final ExpandedActorClass xpac) {
     EList<MessageFromIf> _xifexpression = null;
@@ -184,7 +196,10 @@ public class GenericStateMachineGenerator {
   /**
    * generates the code of the whole state machine
    * 
-   * @see {@link GenericStateMachineGenerator#genStateMachine}
+   * @param xpac the {@link ExpandedActorClass}
+   * @return the generated code
+   * 
+   * @see {@link #genStateMachine}
    */
   public CharSequence genStateMachine(final ExpandedActorClass xpac) {
     CharSequence _genStateMachine = this.genStateMachine(xpac, true);
@@ -193,6 +208,11 @@ public class GenericStateMachineGenerator {
   
   /**
    * generates the code of the whole state machine
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @param shallGenerateOneFile if <code>true</code> the generation of state IDs and
+   * 		other constants is skipped (and left for the header file)
+   * @return the generated code
    */
   public CharSequence genStateMachine(final ExpandedActorClass xpac, final boolean shallGenerateOneFile) {
     CharSequence _xblockexpression = null;
@@ -260,7 +280,7 @@ public class GenericStateMachineGenerator {
         _xifexpression_4 = ifItemPtr;
       }
       final String constIfItemPtr = _xifexpression_4;
-      final boolean usesHdlr = this.usesHandlerTrPoints(ac);
+      final boolean usesHdlr = this.usesHandlerTrPoints(xpac);
       StringConcatenation _builder = new StringConcatenation();
       {
         if (shallGenerateOneFile) {
@@ -1038,6 +1058,11 @@ public class GenericStateMachineGenerator {
   /**
    * helper method which generates the state switch.
    * Asynchronous, data driven and event driven state machines are distinguished
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+   * 		at all then unused variables can be avoided by passing <code>true</code>
+   * @return the generated code
    */
   protected CharSequence genStateSwitch(final ExpandedActorClass xpac, final boolean usesHdlr) {
     CharSequence _xblockexpression = null;
@@ -1175,6 +1200,12 @@ public class GenericStateMachineGenerator {
   
   /**
    * helper method which generates the data driven triggers
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @param state the {@link State} for which the trigger if-else switch should be generated
+   * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+   * 		at all then unused variables can be avoided by passing <code>true</code>
+   * @return the generated code
    */
   protected CharSequence genDataDrivenTriggers(final ExpandedActorClass xpac, final State state, final boolean usesHdlr) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1254,6 +1285,13 @@ public class GenericStateMachineGenerator {
   
   /**
    * helper method which generates the event driven triggers
+   * 
+   * @param xpac the {@link ExpandedActorClass}
+   * @param state the {@link State} for which the trigger switch should be generated
+   * @param atlist the list of {@link ActiveTrigger}s of this state
+   * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+   * 		at all then unused variables can be avoided by passing <code>true</code>
+   * @return the generated code
    */
   protected CharSequence genEventDrivenTriggers(final ExpandedActorClass xpac, final State state, final List<ActiveTrigger> atlist, final boolean usesHdlr) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1370,44 +1408,54 @@ public class GenericStateMachineGenerator {
   }
   
   /**
-   * setter for history array
+   * getter for history array
+   * 
+   * @param state the ID of the history state
+   * @return the generated code
    */
-  protected String getHistory(final String parent) {
+  protected String getHistory(final String state) {
     String _memberAccess = this.langExt.memberAccess();
     String _plus = (_memberAccess + "history[");
-    String _plus_1 = (_plus + parent);
+    String _plus_1 = (_plus + state);
     String _plus_2 = (_plus_1 + "]");
     return _plus_2;
   }
   
   /**
-   * getter for history array
+   * setter for history array
+   * 
+   * @param the ID of the state whose history should be set
+   * @param the ID of the state that should be assigned
+   * @return the generated code
    */
-  protected String setHistory(final String parent, final String state) {
+  protected String setHistory(final String state, final String historyState) {
     String _memberAccess = this.langExt.memberAccess();
     String _plus = (_memberAccess + "history[");
-    String _plus_1 = (_plus + parent);
+    String _plus_1 = (_plus + state);
     String _plus_2 = (_plus_1 + "] = ");
-    String _plus_3 = (_plus_2 + state);
+    String _plus_3 = (_plus_2 + historyState);
     return _plus_3;
   }
   
   /**
-   * type of (temporary) state variables
+   * @return the type of (temporary) state variables (defaults to "int")
    */
   protected String stateType() {
     return "int";
   }
   
   /**
-   * allow target language dependent generation of unrechable return in generated enterHistory method
+   * allow target language dependent generation of unreachable return in generated enterHistory method.
+   * The default is just a comment.
+   * @return the generated code
    */
   protected String unreachableReturn() {
     return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }
   
   /**
-   * type of (temporary) boolean variables
+   * type of (temporary) boolean variables (defaults to "boolean")
+   * @return the generated code
    */
   protected String boolType() {
     return "boolean";
@@ -1417,6 +1465,7 @@ public class GenericStateMachineGenerator {
    * let derived class add extra code after definition of constants
    * 
    * @param xpac an expanded actor class
+   * @return the generated code
    */
   protected CharSequence genExtra(final ExpandedActorClass xpac) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1427,6 +1476,7 @@ public class GenericStateMachineGenerator {
    * let derived class add extra code after definition of constants in header (if applicable)
    * 
    * @param xpac an expanded actor class
+   * @return the generated code
    */
   protected CharSequence genExtraDecl(final ExpandedActorClass xpac) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1435,6 +1485,11 @@ public class GenericStateMachineGenerator {
   
   /**
    * generate a transition guard if applicable
+   * 
+   * @param tt a {@link TriggeredTransition}
+   * @param trigger a trigger string
+   * @param xpac an expanded actor class
+   * @return the generated code
    */
   protected CharSequence _guard(final TriggeredTransition tt, final String trigger, final ExpandedActorClass ac) {
     CharSequence _xblockexpression = null;
@@ -1446,7 +1501,7 @@ public class GenericStateMachineGenerator {
             return Boolean.valueOf(_isMatching);
           }
         };
-      Trigger tr = IterableExtensions.<Trigger>findFirst(_triggers, _function);
+      final Trigger tr = IterableExtensions.<Trigger>findFirst(_triggers, _function);
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _hasGuard = this._roomExtensions.hasGuard(tr);
@@ -1478,6 +1533,9 @@ public class GenericStateMachineGenerator {
   
   /**
    * generate the do code calls for a given state
+   * 
+   * @param state the {@link State}
+   * @return the generated code
    */
   protected CharSequence genDoCodes(final State state) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1509,6 +1567,10 @@ public class GenericStateMachineGenerator {
   
   /**
    * generate action code method implementations
+   * 
+   * @param xpax the {@link ExpandedActorClass}
+   * @param state the {@link State}
+   * @return the generated code
    */
   protected CharSequence genActionCodeMethods(final ExpandedActorClass xpac, final State state) {
     CharSequence _genActionCodeMethods = this.genActionCodeMethods(xpac, state, true);
@@ -1517,6 +1579,11 @@ public class GenericStateMachineGenerator {
   
   /**
    * generate action code method implementations or declarations
+   * 
+   * @param xpax the {@link ExpandedActorClass}
+   * @param state the {@link State}
+   * @param generateImplementation if only declarations should be generated then <code>false</code> has to be passed
+   * @return the generated code
    */
   protected CharSequence genActionCodeMethods(final ExpandedActorClass xpac, final State state, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
@@ -1701,10 +1768,20 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
+  /**
+   * @param classname the name of the type
+   * @return the type name for a constant pointer
+   */
   protected String constPointer(final String classname) {
     return classname;
   }
   
+  /**
+   * generate all method declarations
+   * 
+   * @param xpax the {@link ExpandedActorClass}
+   * @return the generated code
+   */
   public CharSequence genStateMachineMethodDeclarations(final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
@@ -1722,7 +1799,7 @@ public class GenericStateMachineGenerator {
       final boolean handleEvents = _or;
       String _name = ac.getName();
       final String self = this.langExt.selfPointer(_name, true);
-      final boolean usesHdlr = this.usesHandlerTrPoints(ac);
+      final boolean usesHdlr = this.usesHandlerTrPoints(xpac);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
       _builder.append("/* state IDs */");
@@ -1989,16 +2066,23 @@ public class GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  private boolean usesHandlerTrPoints(final ActorClass ac) {
+  /**
+   * helper method to determine whether this state machine uses handler transitions
+   * points at all
+   * 
+   * @param xpax the {@link ExpandedActorClass}
+   * @return <code>true</code> if the state machine uses handler transition points
+   */
+  private boolean usesHandlerTrPoints(final ExpandedActorClass xpac) {
     boolean _xblockexpression = false;
     {
-      boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
-      boolean _not = (!_hasNonEmptyStateMachine);
-      if (_not) {
+      StateGraph _stateMachine = xpac.getStateMachine();
+      boolean _isEmpty = RoomHelpers.isEmpty(_stateMachine);
+      if (_isEmpty) {
         return false;
       }
-      StateGraph _stateMachine = ac.getStateMachine();
-      List<TrPoint> _allTrPointsRecursive = RoomHelpers.getAllTrPointsRecursive(_stateMachine);
+      StateGraph _stateMachine_1 = xpac.getStateMachine();
+      List<TrPoint> _allTrPointsRecursive = RoomHelpers.getAllTrPointsRecursive(_stateMachine_1);
       final Function1<TrPoint,Boolean> _function = new Function1<TrPoint,Boolean>() {
           public Boolean apply(final TrPoint t) {
             boolean _and = false;
@@ -2012,9 +2096,9 @@ public class GenericStateMachineGenerator {
           }
         };
       Iterable<TrPoint> _filter = IterableExtensions.<TrPoint>filter(_allTrPointsRecursive, _function);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-      boolean _not_1 = (!_isEmpty);
-      _xblockexpression = (_not_1);
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
+      boolean _not = (!_isEmpty_1);
+      _xblockexpression = (_not);
     }
     return Boolean.valueOf(_xblockexpression);
   }

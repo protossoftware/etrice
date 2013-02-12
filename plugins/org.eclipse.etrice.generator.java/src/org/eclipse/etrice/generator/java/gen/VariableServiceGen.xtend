@@ -33,6 +33,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.core.room.ActorClass
 import java.util.Collection
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class VariableServiceGen {
@@ -206,11 +207,13 @@ class VariableServiceGen {
 	}
 	
 	def private genGetAttributeValues(List<Attribute> path, ActorInstance ai){
-		var a = path.last
-		if(a.refType.type.primitive){'''
-			values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
-		'''
-		} else if(a.refType.type.dataClass){
+		val a = path.last
+		if (a.refType.type.primitive) {
+			'''
+				values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
+			'''
+		}
+		else if (a.refType.type.dataClass) {
 			var dataClass = (a.refType.type as DataClass)
 			'''
 				«FOR at : dataClass.allAttributes»
@@ -248,16 +251,16 @@ class VariableServiceGen {
 	def private genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
 		var a = path.last 
 		var aVarName = path.toAbsolutePath("_")
-		if(a.refType.type.primitive){
-			var getters = if(path.size>1)path.take(path.size-1).invokeGetters(null)+"." else ""
-		'''
-			if(«aVarName» != null){
-				«ai.varName».«getters»«invokeSetter(a.name, null, aVarName)»;
-				getDiffMap().put("«ai.path»«path.toAbsolutePath("/")»", «aVarName»);
-			}
-		'''
-		} else if(a.refType.type.dataClass){
-			var dataClass = (a.refType.type as DataClass)
+		if (a.refType.type.primitive) {
+			val getters = if(path.size>1)path.take(path.size-1).invokeGetters(null)+"." else ""
+			'''
+				if(«aVarName» != null){
+					«ai.varName».«getters»«invokeSetter(a.name, null, aVarName)»;
+					getDiffMap().put("«ai.path»«path.toAbsolutePath("/")»", «aVarName»);
+				}
+			'''
+		} else if (a.refType.type.dataClass) {
+			val dataClass = (a.refType.type as DataClass)
 			'''
 				«FOR at : dataClass.allAttributes»
 					«genSetAttributeValues2(path.union(at), ai)»

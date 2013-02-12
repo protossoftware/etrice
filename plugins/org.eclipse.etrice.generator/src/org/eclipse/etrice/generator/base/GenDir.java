@@ -3,7 +3,7 @@ package org.eclipse.etrice.generator.base;
 import java.util.ArrayList;
 
 /**
- * This class is derived from {@link GenItem} and represents a driectory which can have
+ * This class is derived from {@link GenItem} and represents a directory which can have
  * {@link GenItem}s as children.
  * 
  * @author Henrik Rentz-Reichert

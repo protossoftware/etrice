@@ -1113,22 +1113,79 @@ public class RoomHelpers {
 	}
 	
 	/**
-	 * Returns a list of all (internal and external) end {@link Port}s of an {@link ActorClass}
+	 * Returns a list of the (internal and external) end {@link Port}s of an {@link ActorClass}.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of the end {@link Port}s of an {@link ActorClass}
+	 */
+	public static List<Port> getEndPorts(ActorClass ac) {
+		ArrayList<Port> result = new ArrayList<Port>(ac.getIntPorts());
+		
+		for (ExternalPort p : ac.getExtPorts()) {
+			result.add(0, p.getIfport());
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of {@link SAPRef}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all end {@link SAPRef}s of an {@link ActorClass}
+	 * 		with base class items first
+	 */
+	public static List<SAPRef> getAllSAPs(ActorClass ac) {
+		ArrayList<SAPRef> result = new ArrayList<SAPRef>();
+		
+		while (ac!=null) {
+			result.addAll(0, ac.getStrSAPs());
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all (internal and external) end {@link ServiceImplementation}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all end {@link ServiceImplementation}s of an {@link ActorClass}
+	 * 		with base class items first
+	 */
+	public static List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
+		ArrayList<ServiceImplementation> result = new ArrayList<ServiceImplementation>();
+		
+		while (ac!=null) {
+			result.addAll(0, ac.getServiceImplementations());
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all {@link SAPRef}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all end {@link Port}s of an {@link ActorClass}
+	 * 		with base class items firast
 	 */
 	public static List<Port> getAllEndPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>();
 		
 		while (ac!=null) {
-			result.addAll(ac.getIntPorts());
+			result.addAll(0, ac.getIntPorts());
 			for (ExternalPort p : ac.getExtPorts()) {
-				result.add(p.getIfport());
+				result.add(0, p.getIfport());
 			}
-			
 			ac = ac.getBase();
 		}
 		
@@ -1485,7 +1542,7 @@ public class RoomHelpers {
 			return null;
 		}
 		
-		return outgoing? RoomHelpers.getAllMessages(protocol,false):RoomHelpers.getAllMessages(protocol,true);
+		return RoomHelpers.getAllMessages(protocol, !outgoing);
 	}
 	
 	/**

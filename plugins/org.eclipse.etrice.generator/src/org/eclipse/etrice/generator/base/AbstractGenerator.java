@@ -63,10 +63,6 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-/**
- * @author Henrik Rentz-Reichert
- *
- */
 public abstract class AbstractGenerator implements IResourceURIAcceptor {
 
 	/**
@@ -429,6 +425,12 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 	}
 	
+	/**
+	 * Creates translations for all {@link DetailCode}s found in the {@link EObject#eAllContents()}.
+	 * 
+	 * @param container the root of an {@link EObject} containment tree that should be translated
+	 * @param dct the {@link DetailCodeTranslator} to apply
+	 */
 	protected void translateDetailCodesOfTree(EObject container, DetailCodeTranslator dct) {
 		if (container==null)
 			return;
@@ -448,6 +450,10 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 	}
 
+	/**
+	 * @param dc a {@link DetailCode}
+	 * @return the mapped result of the translation or an empty string
+	 */
 	public String getTranslatedCode(DetailCode dc) {
 		String code = detailcode2string.get(dc);
 		if (code==null)

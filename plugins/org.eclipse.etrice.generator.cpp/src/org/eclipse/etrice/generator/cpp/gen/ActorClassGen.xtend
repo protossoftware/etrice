@@ -115,7 +115,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ac.serviceImplementations.map(svc | '''«svc.portClassName» «svc.spp.name»;''').join("\n")»
 			
 				//--------------------- interface item IDs
-				«genInterfaceItemConstants(xpac, ac)»
+				«xpac.genInterfaceItemConstants»
 					
 				«ac.attributes.attributes»
 

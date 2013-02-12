@@ -16,24 +16,33 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+/**
+ * Target language independent protocol class generator.
+ */
 @SuppressWarnings("all")
 public class GenericProtocolClassGenerator {
   @Inject
-  private ILanguageExtension langExt;
+  protected ILanguageExtension _iLanguageExtension;
   
   @Inject
-  private RoomExtensions roomExt;
+  protected RoomExtensions _roomExtensions;
   
+  /**
+   * Generate constants for message IDs.
+   * 
+   * @param pc the {@link ProtocolClass}
+   * @return the generated code for message ID constants
+   */
   public String genMessageIDs(final ProtocolClass pc) {
     int offset = 0;
     ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
     ArrayList<Pair<String,String>> list = _arrayList;
     String _name = pc.getName();
-    String _memberInDeclaration = this.langExt.memberInDeclaration(_name, "MSG_MIN");
+    String _memberInDeclaration = this._iLanguageExtension.memberInDeclaration(_name, "MSG_MIN");
     String _string = Integer.valueOf(offset).toString();
     Pair<String,String> _pair = Tuples.<String, String>pair(_memberInDeclaration, _string);
     list.add(_pair);
-    List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+    List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
     for (final Message msg : _allOutgoingMessages) {
       {
         int _plus = (offset + 1);
@@ -41,13 +50,13 @@ public class GenericProtocolClassGenerator {
         String _name_1 = pc.getName();
         String _name_2 = msg.getName();
         String _plus_1 = ("OUT_" + _name_2);
-        String _memberInDeclaration_1 = this.langExt.memberInDeclaration(_name_1, _plus_1);
+        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus_1);
         String _string_1 = Integer.valueOf(offset).toString();
         Pair<String,String> _pair_1 = Tuples.<String, String>pair(_memberInDeclaration_1, _string_1);
         list.add(_pair_1);
       }
     }
-    List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+    List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
     for (final Message msg_1 : _allIncomingMessages) {
       {
         int _plus = (offset + 1);
@@ -55,7 +64,7 @@ public class GenericProtocolClassGenerator {
         String _name_1 = pc.getName();
         String _name_2 = msg_1.getName();
         String _plus_1 = ("IN_" + _name_2);
-        String _memberInDeclaration_1 = this.langExt.memberInDeclaration(_name_1, _plus_1);
+        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus_1);
         String _string_1 = Integer.valueOf(offset).toString();
         Pair<String,String> _pair_1 = Tuples.<String, String>pair(_memberInDeclaration_1, _string_1);
         list.add(_pair_1);
@@ -64,21 +73,30 @@ public class GenericProtocolClassGenerator {
     int _plus = (offset + 1);
     offset = _plus;
     String _name_1 = pc.getName();
-    String _memberInDeclaration_1 = this.langExt.memberInDeclaration(_name_1, "MSG_MAX");
+    String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, "MSG_MAX");
     String _string_1 = Integer.valueOf(offset).toString();
     Pair<String,String> _pair_1 = Tuples.<String, String>pair(_memberInDeclaration_1, _string_1);
     list.add(_pair_1);
     String _name_2 = pc.getName();
-    String _memberInDeclaration_2 = this.langExt.memberInDeclaration(_name_2, "msg_ids");
-    return this.langExt.genEnumeration(_memberInDeclaration_2, list);
+    String _memberInDeclaration_2 = this._iLanguageExtension.memberInDeclaration(_name_2, "msg_ids");
+    return this._iLanguageExtension.genEnumeration(_memberInDeclaration_2, list);
   }
   
+  /**
+   * @param mif a {@link MessageFromIf}
+   * @return an identifier for the message
+   */
   public String getMessageID(final MessageFromIf mif) {
     Message _message = mif.getMessage();
     InterfaceItem _from = mif.getFrom();
     return this.getMessageID(_message, _from);
   }
   
+  /**
+   * @param msg a {@link Message}
+   * @param item a {@link InterfaceItem}
+   * @return an identifier for the message
+   */
   public String getMessageID(final Message msg, final InterfaceItem item) {
     if ((item instanceof Port)) {
       Port p = ((Port) item);
@@ -94,7 +112,7 @@ public class GenericProtocolClassGenerator {
       String _name = _protocol.getName();
       String _name_1 = msg.getName();
       String _plus = (direction + _name_1);
-      return this.langExt.memberInUse(_name, _plus);
+      return this._iLanguageExtension.memberInUse(_name, _plus);
     } else {
       if ((item instanceof SAPRef)) {
         SAPRef sap = ((SAPRef) item);
@@ -102,7 +120,7 @@ public class GenericProtocolClassGenerator {
         String _name_2 = _protocol_1.getName();
         String _name_3 = msg.getName();
         String _plus_1 = ("OUT_" + _name_3);
-        return this.langExt.memberInUse(_name_2, _plus_1);
+        return this._iLanguageExtension.memberInUse(_name_2, _plus_1);
       } else {
         if ((item instanceof SPPRef)) {
           SPPRef spp = ((SPPRef) item);
@@ -110,7 +128,7 @@ public class GenericProtocolClassGenerator {
           String _name_4 = _protocol_2.getName();
           String _name_5 = msg.getName();
           String _plus_2 = ("IN_" + _name_5);
-          return this.langExt.memberInUse(_name_4, _plus_2);
+          return this._iLanguageExtension.memberInUse(_name_4, _plus_2);
         }
       }
     }

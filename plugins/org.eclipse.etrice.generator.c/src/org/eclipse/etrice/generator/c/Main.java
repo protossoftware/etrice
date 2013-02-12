@@ -39,14 +39,22 @@ import com.google.inject.Inject;
  * Alternatively it can be called from the command line as Java application. In this case the following jars
  * have to be on the class path:
  * <ul>
- *   <li></li>
- *   <li></li>
- *   <li></li>
- *   <li></li>
- *   <li></li>
- *   <li></li>
- *   <li></li>
- *   <li></li>
+ *   <li>org.eclipse.etrice.core.room</li>
+ *   <li>org.eclipse.etrice.core.genmodel</li>
+ *   <li>org.eclipse.etrice.generator</li>
+ *   <li>org.eclipse.emf.ecore</li>
+ *   <li>org.eclipse.emf.common</li>
+ *   <li>org.eclipse.emf.ecore.xmi</li>
+ *   <li>org.eclipse.xtext</li>
+ *   <li>org.eclipse.equinox.common</li>
+ *   <li>org.eclipse.xtext.util</li>
+ *   <li>org.eclipse.xtend.lib</li>
+ *   <li>org.eclipse.xtext.xbase.lib</li>
+ *   <li>org.apache.log4j</li>
+ *   <li>org.antlr.runtime</li>
+ *   <li>com.google.inject</li>
+ *   <li>com.google.guava</li>
+ *   <li>javax.inject</li>
  * </ul>
  * </p>
  *  

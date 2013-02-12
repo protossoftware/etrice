@@ -917,8 +917,8 @@ public class SubSystemClassGen {
           }
         };
       Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_3);
-      Iterable<InterfaceItemInstance> _union = this.roomExt.<InterfaceItemInstance>union(_filter_1, replPorts);
-      Iterables.<InterfaceItemInstance>addAll(eventPorts, _union);
+      List<InterfaceItemInstance> _union = this.roomExt.<InterfaceItemInstance>union(_filter_1, replPorts);
+      eventPorts.addAll(_union);
       final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             ProtocolClass _protocol = p.getProtocol();
@@ -1142,7 +1142,7 @@ public class SubSystemClassGen {
           _builder.newLine();
           _builder.append("\t");
           ActorClass _actorClass_2 = ai.getActorClass();
-          List<Attribute> _allAttributes = this.roomExt.getAllAttributes(_actorClass_2);
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
           CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
           _builder.append(_generateAttributeInit, "	");
           _builder.newLineIfNotEmpty();

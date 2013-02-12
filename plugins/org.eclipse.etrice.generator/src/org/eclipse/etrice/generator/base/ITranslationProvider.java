@@ -21,6 +21,25 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 
+/**
+ * This interface is used by the detail code parser to replace
+ * common constructs in detail level code with a target language specific
+ * piece of code.
+ *
+ * <p>
+ * The constructs that are replaced are
+ * <ul>
+ *   <li>attributes</li>
+ *   <li>operations</li>
+ *   <li>port.message</li>
+ *   <li>tags of the form <code><|tag|></code></li>
+ * </ul>
+ * </p>
+ * 
+ * @see {@link DetailCodeTranslator}
+ * 
+ * @author Henrik Rentz-Reichert
+ */
 public interface ITranslationProvider {
 
 	/**

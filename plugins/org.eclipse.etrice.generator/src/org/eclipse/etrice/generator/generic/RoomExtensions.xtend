@@ -10,17 +10,13 @@
  * 
  *******************************************************************************/
 
-/*
-	collection of convenience functions for code generation
-*/
-
 package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Singleton
 import java.io.File
 import java.util.ArrayList
-import java.util.List
 import java.util.Collections
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
@@ -31,11 +27,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.InitialTransition
+import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageHandler
 import org.eclipse.etrice.core.room.Port
@@ -56,44 +51,62 @@ import org.eclipse.etrice.core.room.Trigger
 import static org.eclipse.etrice.generator.base.CodegenHelpers.*
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.InterfaceItem
 
+
+/**
+	collection of convenience functions for code generation
+*/
 @Singleton
 class RoomExtensions {
 
 	//-------------------------------------------------------
 	// union methods
 	
-	def <T> List<T> union(List<T> l1, List<T> l2) {
-		var ret = new ArrayList<T>()
-		ret.addAll(l1)
-		ret.addAll(l2)
-		return ret
-	}
-	
-	def <T> List<T> union(List<T> l, T e) {
+	/**
+	 * the template type is T
+	 * @param l an iterable of type T
+	 * @param e a single element of type T
+	 * @return the union of the iterable and the element as new list
+	 */
+	def <T> List<T> union(Iterable<T> l, T e) {
 		var ret = new ArrayList<T>()
 		ret.addAll(l)
 		ret.add(e)
 		return ret
 	}
 	
-	def <T> Iterable<T> union(Iterable<T> l1, Iterable<T> l2) {
+	/**
+	 * the template type is T
+	 * @param l1 an iterable of type T
+	 * @param l2 a second iterable of type T
+	 * @return the union of the two iterables as new list
+	 */
+	def <T> List<T> union(Iterable<T> l1, Iterable<T> l2) {
 		var ret = new ArrayList<T>()
 		ret.addAll(l1)
 		ret.addAll(l2)
 		return ret
 	}
     
-	def List<Port> punion(List<Port> in1, List<ExternalPort> in2){
-		var ret=new ArrayList<Port>();
-		for(ele : in2){
-			ret.add(ele.ifport)
-		}
+	/**
+	 * a specialized version of {@link #union(Iterable, Iterable)}
+	 * @param l1 an iterable of type T
+	 * @param l2 a second iterable of type T
+	 * @return the union of the two iterables as new list
+	 */
+	def List<Port> punion(Iterable<Port> in1, Iterable<ExternalPort> in2){
+		val ret=new ArrayList<Port>()
+		in2.forEach(e|ret.add(e.ifport))
 		ret.addAll(in1)
 		return ret
 	}
 	
+	/**
+	 * the template type is T
+	 * @param l1 a list of elements of type T
+	 * @param l2 a second list of elements of type T
+	 * @return a new list with the contents of l1 
+	 */
 	def <T> List<T> minus(List<T> l1, List<T> l2){
 		var ret = new ArrayList<T>(l1)
 		ret.removeAll(l2)
@@ -103,14 +116,25 @@ class RoomExtensions {
 	//-------------------------------------------------------
 	// path related methods
 	
+	/**
+	 * @return the relative path to the destination folder for the generated code
+	 */
 	def String getGenerationPathSegment() {
 		return "/src-gen/"
 	}
 
+	/**
+	 * @return the relative path to the destination folder for the generated documentation
+	 */
 	def String getDocGenerationPathSegment() {
 		return "/doc-gen/"
 	}
 
+	/**
+	 * @param e an {@link EObject}
+	 * @return the URI of the EObject's resource as file string
+	 * 		(or an empty string if no such resource exists)
+	 */
 	def String getModelPath(EObject e) {
 		var res = e.eResource;
 		if (res==null) {
@@ -125,27 +149,43 @@ class RoomExtensions {
 	//-------------------------------------------------------
 	// packages and pathes
 	
+	/**
+	 * @param rc a {@link RoomClass}
+	 * @return the name of the room model which also serves as a package name
+	 */
 	def String getPackage(RoomClass rc) {
 		return (rc.eContainer as RoomModel).name
 	}
 	
+	/**
+	 * @param packageName a dot (.) separated package anem
+	 * @return the input with dots replaced with slashes (/)
+	 */
 	def String getPathFromPackage(String packageName) {
 		return packageName.replaceAll("\\.", "/") + "/"
 	}
 	
+	/**
+	 * @param rc a {@link RoomClass}
+	 * @return the relative folder path of the package
+	 * 		(as defined by the Java convention)
+	 */
 	def String getPath(RoomClass rc) {
 		getPathFromPackage(getPackage(rc))
 	}
 	
 	// a directory is a eclipse project if it contains a ".project" file
+	/**
+	 * @param e an {@link EObject}
+	 * @return the path of the Eclipse project containing the EObject's resource
+	 */
 	def String getProjectPath(EObject e) {
-		var res = e.eResource;
+		val res = e.eResource;
 		if (res==null) {
 			return ""
 		}
 		else {
-			var tmpf = new File("")
-			tmpf = new File(res.URI.toFileString)
+			var tmpf = new File(res.URI.toFileString)
 			if (!tmpf.file)
 				return ""
 			var isProject = false;
@@ -163,94 +203,97 @@ class RoomExtensions {
 		}
 	}
 	
+	/**
+	 * @param e an {@link EObject}
+	 * @return the concatenation of the objects project path
+	 * 		with the {@link #getGenerationPathSegment()}
+	 */
 	def String getGenerationTargetPath(EObject e){
-		return getProjectPath(e)+getGenerationPathSegment();
+		return getProjectPath(e)+getGenerationPathSegment()
 	}
 
+	/**
+	 * @param e an {@link EObject}
+	 * @return the concatenation of the objects project path
+	 * 		with the {@link #getDocGenerationPathSegment()}
+	 */
 	def String getDocGenerationTargetPath(EObject e){
-		return getProjectPath(e)+getDocGenerationPathSegment();
-	}
-
-	def List<Port> getEndPorts(ActorClass ac) {
-		ac.intPorts.punion(ac.extPorts)
-	}
-
-	def List<Port> getAllEndPorts(ActorClass ac) {
-		if (ac.base==null)
-			return ac.getEndPorts()
-		else
-			ac.base.getAllEndPorts().union(ac.getEndPorts())
-	}
-
-	def List<SAPRef> getAllSAPs(ActorClass ac) {
-		if (ac.base==null)
-			return ac.strSAPs
-		else
-			ac.base.allSAPs.union(ac.strSAPs)
-	}
-
-	def List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
-		if (ac.base==null)
-			return ac.serviceImplementations
-		else
-			ac.base.allServiceImplementations.union(ac.serviceImplementations)
+		return getProjectPath(e)+getDocGenerationPathSegment()
 	}
 	
-	// make a valid identifier from a path string
+	/**
+	 * makes a valid identifier from a path string
+	 * @param path a slash (/) separated path
+	 * @return the path with slashes replaced by underscores (_)
+	 */
 	def String getPathName(String path){
 		path.replaceAll("/","_");
-	}
-
-	def List<Attribute> getAllAttributes(DataClass dc) {
-		if (dc.base==null)
-			return dc.attributes
-		else
-			dc.base.allAttributes.union(dc.attributes)
-	}
-
-	def List<Attribute> getAllAttributes(ActorClass ac) {
-		if (ac.base==null)
-			return ac.attributes
-		else
-			ac.base.allAttributes.union(ac.attributes)
-	}
-	
-	def ActorClass getContainingActorClass(EObject o){
-		o.actorClass;
 	}
 
 	//-------------------------------------------------------
 	// protocol related methods
 	
+	/**
+	 * @param p a {@link Port}
+	 * @return a name for the associated port class
+	 */
 	def dispatch String getPortClassName(Port p){
 		if (p.protocol instanceof ProtocolClass)
 			(p.protocol as ProtocolClass).getPortClassName(p.conjugated, p.replicated)
 		else
 			""
 	}
+
+	/**
+	 * @param p a {@link ExternalPort}
+	 * @return a name for the associated port class
+	 */
+	def dispatch String getPortClassName(ExternalPort p){
+		return p.ifport.getPortClassName()
+	}
 	
+	/**
+	 * @param sap a {@link SAPRef}
+	 * @return a name for the associated port class
+	 */
 	def dispatch getPortClassName(SAPRef sap) {
 		return sap.protocol.getPortClassName(true)
 	}
 
+	/**
+	 * @param spp a {@link SPPRef}
+	 * @return a name for the associated port class
+	 */
 	def dispatch String getPortClassName(SPPRef spp) {
 		return spp.protocol.getPortClassName(false, true)
 	}
+
+	/**
+	 * @param svc a {@link ServiceImplementation}
+	 * @return a name for the associated port class
+	 */
+	def dispatch String getPortClassName(ServiceImplementation svc) {
+		return svc.spp.protocol.getPortClassName(false, true)
+	}
 	
+	/**
+	 * @param p a {@link ProtocolClass}
+	 * @param conj if <code>true</code> consider conjugate port, else regular
+	 * @return a name for the associated port class
+	 */
 	def String getPortClassName(ProtocolClass p, boolean conj) {
 		getPortClassName(p, conj, false)
 	}
 	
+	/**
+	 * @param p a {@link ProtocolClass}
+	 * @param conj if <code>true</code> consider conjugate port, else regular
+	 * @param repl if <code>true</code> class name for replicated port
+	 * 		else for plain port
+	 * @return a name for the associated port class
+	 */
 	def String getPortClassName(ProtocolClass p, boolean conj, boolean repl) {
 		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
-	}
-
-	def dispatch String getPortClassName(ExternalPort p){
-		return p.ifport.getPortClassName()
-	}
-
-	def dispatch String getPortClassName(ServiceImplementation svc) {
-		return svc.spp.protocol.getPortClassName(false, true)
 	}
 
 	// message lists with super class messages, super classes first

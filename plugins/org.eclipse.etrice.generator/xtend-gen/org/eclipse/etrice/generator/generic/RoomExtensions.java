@@ -21,8 +21,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
@@ -54,27 +52,35 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * collection of convenience functions for code generation
+ */
 @Singleton
 @SuppressWarnings("all")
 public class RoomExtensions {
-  public <T extends Object> List<T> union(final List<T> l1, final List<T> l2) {
+  /**
+   * the template type is T
+   * @param l an iterable of type T
+   * @param e a single element of type T
+   * @return the union of the iterable and the element as new list
+   */
+  public <T extends Object> List<T> union(final Iterable<T> l, final T e) {
     ArrayList<T> _arrayList = new ArrayList<T>();
     ArrayList<T> ret = _arrayList;
-    ret.addAll(l1);
-    ret.addAll(l2);
-    return ret;
-  }
-  
-  public <T extends Object> List<T> union(final List<T> l, final T e) {
-    ArrayList<T> _arrayList = new ArrayList<T>();
-    ArrayList<T> ret = _arrayList;
-    ret.addAll(l);
+    Iterables.<T>addAll(ret, l);
     ret.add(e);
     return ret;
   }
   
-  public <T extends Object> Iterable<T> union(final Iterable<T> l1, final Iterable<T> l2) {
+  /**
+   * the template type is T
+   * @param l1 an iterable of type T
+   * @param l2 a second iterable of type T
+   * @return the union of the two iterables as new list
+   */
+  public <T extends Object> List<T> union(final Iterable<T> l1, final Iterable<T> l2) {
     ArrayList<T> _arrayList = new ArrayList<T>();
     ArrayList<T> ret = _arrayList;
     Iterables.<T>addAll(ret, l1);
@@ -82,17 +88,32 @@ public class RoomExtensions {
     return ret;
   }
   
-  public List<Port> punion(final List<Port> in1, final List<ExternalPort> in2) {
+  /**
+   * a specialized version of {@link #union(Iterable, Iterable)}
+   * @param l1 an iterable of type T
+   * @param l2 a second iterable of type T
+   * @return the union of the two iterables as new list
+   */
+  public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {
     ArrayList<Port> _arrayList = new ArrayList<Port>();
-    ArrayList<Port> ret = _arrayList;
-    for (final ExternalPort ele : in2) {
-      Port _ifport = ele.getIfport();
-      ret.add(_ifport);
-    }
-    ret.addAll(in1);
+    final ArrayList<Port> ret = _arrayList;
+    final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
+        public void apply(final ExternalPort e) {
+          Port _ifport = e.getIfport();
+          ret.add(_ifport);
+        }
+      };
+    IterableExtensions.<ExternalPort>forEach(in2, _function);
+    Iterables.<Port>addAll(ret, in1);
     return ret;
   }
   
+  /**
+   * the template type is T
+   * @param l1 a list of elements of type T
+   * @param l2 a second list of elements of type T
+   * @return a new list with the contents of l1
+   */
   public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
     ArrayList<T> _arrayList = new ArrayList<T>(l1);
     ArrayList<T> ret = _arrayList;
@@ -100,14 +121,25 @@ public class RoomExtensions {
     return ret;
   }
   
+  /**
+   * @return the relative path to the destination folder for the generated code
+   */
   public String getGenerationPathSegment() {
     return "/src-gen/";
   }
   
+  /**
+   * @return the relative path to the destination folder for the generated documentation
+   */
   public String getDocGenerationPathSegment() {
     return "/doc-gen/";
   }
   
+  /**
+   * @param e an {@link EObject}
+   * @return the URI of the EObject's resource as file string
+   * 		(or an empty string if no such resource exists)
+   */
   public String getModelPath(final EObject e) {
     Resource res = e.eResource();
     boolean _equals = Objects.equal(res, null);
@@ -119,34 +151,49 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param rc a {@link RoomClass}
+   * @return the name of the room model which also serves as a package name
+   */
   public String getPackage(final RoomClass rc) {
     EObject _eContainer = rc.eContainer();
     return ((RoomModel) _eContainer).getName();
   }
   
+  /**
+   * @param packageName a dot (.) separated package anem
+   * @return the input with dots replaced with slashes (/)
+   */
   public String getPathFromPackage(final String packageName) {
     String _replaceAll = packageName.replaceAll("\\.", "/");
     return (_replaceAll + "/");
   }
   
+  /**
+   * @param rc a {@link RoomClass}
+   * @return the relative folder path of the package
+   * 		(as defined by the Java convention)
+   */
   public String getPath(final RoomClass rc) {
     String _package = this.getPackage(rc);
     String _pathFromPackage = this.getPathFromPackage(_package);
     return _pathFromPackage;
   }
   
+  /**
+   * @param e an {@link EObject}
+   * @return the path of the Eclipse project containing the EObject's resource
+   */
   public String getProjectPath(final EObject e) {
-    Resource res = e.eResource();
+    final Resource res = e.eResource();
     boolean _equals = Objects.equal(res, null);
     if (_equals) {
       return "";
     } else {
-      File _file = new File("");
-      File tmpf = _file;
       URI _uRI = res.getURI();
       String _fileString = _uRI.toFileString();
-      File _file_1 = new File(_fileString);
-      tmpf = _file_1;
+      File _file = new File(_fileString);
+      File tmpf = _file;
       boolean _isFile = tmpf.isFile();
       boolean _not = (!_isFile);
       if (_not) {
@@ -181,115 +228,42 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param e an {@link EObject}
+   * @return the concatenation of the objects project path
+   * 		with the {@link #getGenerationPathSegment()}
+   */
   public String getGenerationTargetPath(final EObject e) {
     String _projectPath = this.getProjectPath(e);
     String _generationPathSegment = this.getGenerationPathSegment();
     return (_projectPath + _generationPathSegment);
   }
   
+  /**
+   * @param e an {@link EObject}
+   * @return the concatenation of the objects project path
+   * 		with the {@link #getDocGenerationPathSegment()}
+   */
   public String getDocGenerationTargetPath(final EObject e) {
     String _projectPath = this.getProjectPath(e);
     String _docGenerationPathSegment = this.getDocGenerationPathSegment();
     return (_projectPath + _docGenerationPathSegment);
   }
   
-  public List<Port> getEndPorts(final ActorClass ac) {
-    EList<Port> _intPorts = ac.getIntPorts();
-    EList<ExternalPort> _extPorts = ac.getExtPorts();
-    List<Port> _punion = this.punion(_intPorts, _extPorts);
-    return _punion;
-  }
-  
-  public List<Port> getAllEndPorts(final ActorClass ac) {
-    List<Port> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      return this.getEndPorts(ac);
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<Port> _allEndPorts = this.getAllEndPorts(_base_1);
-      List<Port> _endPorts = this.getEndPorts(ac);
-      List<Port> _union = this.<Port>union(_allEndPorts, _endPorts);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
-  public List<SAPRef> getAllSAPs(final ActorClass ac) {
-    List<SAPRef> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      return ac.getStrSAPs();
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<SAPRef> _allSAPs = this.getAllSAPs(_base_1);
-      EList<SAPRef> _strSAPs = ac.getStrSAPs();
-      List<SAPRef> _union = this.<SAPRef>union(_allSAPs, _strSAPs);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
-  public List<ServiceImplementation> getAllServiceImplementations(final ActorClass ac) {
-    List<ServiceImplementation> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      return ac.getServiceImplementations();
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<ServiceImplementation> _allServiceImplementations = this.getAllServiceImplementations(_base_1);
-      EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      List<ServiceImplementation> _union = this.<ServiceImplementation>union(_allServiceImplementations, _serviceImplementations);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
+  /**
+   * makes a valid identifier from a path string
+   * @param path a slash (/) separated path
+   * @return the path with slashes replaced by underscores (_)
+   */
   public String getPathName(final String path) {
     String _replaceAll = path.replaceAll("/", "_");
     return _replaceAll;
   }
   
-  public List<Attribute> getAllAttributes(final DataClass dc) {
-    List<Attribute> _xifexpression = null;
-    DataClass _base = dc.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      return dc.getAttributes();
-    } else {
-      DataClass _base_1 = dc.getBase();
-      List<Attribute> _allAttributes = this.getAllAttributes(_base_1);
-      EList<Attribute> _attributes = dc.getAttributes();
-      List<Attribute> _union = this.<Attribute>union(_allAttributes, _attributes);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
-  public List<Attribute> getAllAttributes(final ActorClass ac) {
-    List<Attribute> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      return ac.getAttributes();
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<Attribute> _allAttributes = this.getAllAttributes(_base_1);
-      EList<Attribute> _attributes = ac.getAttributes();
-      List<Attribute> _union = this.<Attribute>union(_allAttributes, _attributes);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
-  public ActorClass getContainingActorClass(final EObject o) {
-    ActorClass _actorClass = RoomHelpers.getActorClass(o);
-    return _actorClass;
-  }
-  
+  /**
+   * @param p a {@link Port}
+   * @return a name for the associated port class
+   */
   protected String _getPortClassName(final Port p) {
     String _xifexpression = null;
     GeneralProtocolClass _protocol = p.getProtocol();
@@ -305,21 +279,60 @@ public class RoomExtensions {
     return _xifexpression;
   }
   
+  /**
+   * @param p a {@link ExternalPort}
+   * @return a name for the associated port class
+   */
+  protected String _getPortClassName(final ExternalPort p) {
+    Port _ifport = p.getIfport();
+    return this.getPortClassName(_ifport);
+  }
+  
+  /**
+   * @param sap a {@link SAPRef}
+   * @return a name for the associated port class
+   */
   protected String _getPortClassName(final SAPRef sap) {
     ProtocolClass _protocol = sap.getProtocol();
     return this.getPortClassName(_protocol, true);
   }
   
+  /**
+   * @param spp a {@link SPPRef}
+   * @return a name for the associated port class
+   */
   protected String _getPortClassName(final SPPRef spp) {
     ProtocolClass _protocol = spp.getProtocol();
     return this.getPortClassName(_protocol, false, true);
   }
   
+  /**
+   * @param svc a {@link ServiceImplementation}
+   * @return a name for the associated port class
+   */
+  protected String _getPortClassName(final ServiceImplementation svc) {
+    SPPRef _spp = svc.getSpp();
+    ProtocolClass _protocol = _spp.getProtocol();
+    return this.getPortClassName(_protocol, false, true);
+  }
+  
+  /**
+   * @param p a {@link ProtocolClass}
+   * @param conj if <code>true</code> consider conjugate port, else regular
+   * @return a name for the associated port class
+   */
   public String getPortClassName(final ProtocolClass p, final boolean conj) {
     String _portClassName = this.getPortClassName(p, conj, false);
     return _portClassName;
   }
   
+  /**
+   * @param p a {@link ProtocolClass}
+   * @param conj if <code>true</code> consider conjugate port, else regular
+   * @param repl if <code>true</code> class name for replicated port
+   * 		else for plain port
+   * @return a name for the associated port class
+   */
   public String getPortClassName(final ProtocolClass p, final boolean conj, final boolean repl) {
     String _name = p.getName();
     String _xifexpression = null;
@@ -338,17 +351,6 @@ public class RoomExtensions {
     String _plus_1 = (_plus + _xifexpression_1);
     String _plus_2 = (_plus_1 + "Port");
     return _plus_2;
-  }
-  
-  protected String _getPortClassName(final ExternalPort p) {
-    Port _ifport = p.getIfport();
-    return this.getPortClassName(_ifport);
-  }
-  
-  protected String _getPortClassName(final ServiceImplementation svc) {
-    SPPRef _spp = svc.getSpp();
-    ProtocolClass _protocol = _spp.getProtocol();
-    return this.getPortClassName(_protocol, false, true);
   }
   
   public List<Message> getAllIncomingMessages(final ProtocolClass pc) {

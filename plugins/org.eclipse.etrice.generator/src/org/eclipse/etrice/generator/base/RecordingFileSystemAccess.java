@@ -37,10 +37,19 @@ public class RecordingFileSystemAccess extends JavaIoFileSystemAccess {
 		super.generateFile(fileName, slot, contents);
 	}
 	
+	/**
+	 * @return a list of the generated files (their paths relative to the output)
+	 */
 	public ArrayList<String> getFiles() {
 		return files;
 	}
 	
+	/**
+	 * @param path a folder path
+	 * @param extension a file extension
+	 * @return a list of files contained in the specified folder and
+	 * 		its sub folders filtered by extension
+	 */
 	public ArrayList<String> getFiles(String path, String extension) {
 		ArrayList<String> result = new ArrayList<String>();
 		

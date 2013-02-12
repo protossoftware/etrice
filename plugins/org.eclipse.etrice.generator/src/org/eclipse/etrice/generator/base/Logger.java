@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class Logger implements ILineOutputLogger {
 
-	ILineOutput output = null;
+	private ILineOutput output = null;
 	
 	public void logInfo(String text) {
 		println("Info: " + text);

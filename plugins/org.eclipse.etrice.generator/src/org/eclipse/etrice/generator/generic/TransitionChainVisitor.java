@@ -39,6 +39,11 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	private ExpandedActorClass xpac;
 	private boolean dataDriven;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param xpac an {@link ExpandedActorClass}
+	 */
 	protected TransitionChainVisitor(ExpandedActorClass xpac) {
 		this.xpac = xpac;
 	}

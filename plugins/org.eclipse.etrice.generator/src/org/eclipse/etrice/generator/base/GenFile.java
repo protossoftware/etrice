@@ -29,7 +29,7 @@ public class GenFile extends GenItem {
 	}
 	
 	/**
-	 * @return the file name with the extension stripped of (if there)
+	 * @return the file name with the extension stripped off (if there)
 	 */
 	public String getBaseName() {
 		int pos = getName().lastIndexOf('.');
@@ -39,10 +39,14 @@ public class GenFile extends GenItem {
 			return getName();
 	}
 	
+	/**
+	 * @return the path of this file (no trailing /)
+	 * @see org.eclipse.etrice.generator.base.GenItem#getPath()
+	 */
 	@Override
 	public String getPath() {
 		String path = super.getPath();
-		return path.substring(0, path.length()-1);
+		return path.substring(0, path.length()-PATH_SEP.length());
 	}
 	
 	/**

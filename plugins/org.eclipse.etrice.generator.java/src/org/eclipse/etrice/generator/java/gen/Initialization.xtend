@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class Initialization {
@@ -84,13 +85,13 @@ class Initialization {
 	}
 	
 	def private attributeInit(List<Attribute> path, String value){
-		var getter = if(path.size == 1) "this" else procedureHelpers.invokeGetters(path.take(path.size-1), null).toString
+		val getter = if(path.size == 1) "this" else procedureHelpers.invokeGetters(path.take(path.size-1), null).toString
 	 	return genAttributeInitializer(path.last, value, getter)
 	}
 	
 	def genAttributeInitializer(Attribute a, String value, String invokes){
 		var aType = a.refType.type
-		// be careful of: char array with single character ('x')
+		// special treatment of char array with single character ('x')
 		'''
 	 		«IF a.size == 0 || (a.size > 0 && "char".equals(aType.typeName) && !value.matches("'.'|\\(char\\).*"))»
 	 			«invokes».«procedureHelpers.invokeSetter(a.name, null, value)»;

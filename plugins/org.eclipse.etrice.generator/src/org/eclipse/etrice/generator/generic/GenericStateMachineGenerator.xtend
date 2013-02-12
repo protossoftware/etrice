@@ -29,23 +29,28 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.generator.generic.TransitionChainGenerator
+import org.eclipse.etrice.core.room.TransitionPoint
 
 import static org.eclipse.xtext.util.Tuples.*
 
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.TransitionPoint
 
+/**
+ * A target language independent generator of the state machine implementation-
+ */
 class GenericStateMachineGenerator {
 
-	@Inject protected ILanguageExtension langExt
 	@Inject protected extension RoomExtensions
+	@Inject protected ILanguageExtension langExt
 	@Inject protected GenericProtocolClassGenerator pcGen
 	@Inject protected TransitionChainGenerator transitionChainGenerator
 
 	/**
 	 * generates state ID constants.
 	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
 	 */
 	def protected genStateIdConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
@@ -71,8 +76,11 @@ class GenericStateMachineGenerator {
 	}
 	
 	/**
-	 * generates transition chain IDs.
+	 * generates transition chain ID constants.
 	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
 	 */
 	def protected genTransitionChainConstants(ExpandedActorClass xpac) {
 		var chains = if (langExt.usesInheritance)
@@ -92,6 +100,9 @@ class GenericStateMachineGenerator {
 	/**
 	 * generates trigger IDs.
 	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
 	 */
 	def protected genTriggerConstants(ExpandedActorClass xpac) {
 		val triggers = if (langExt.usesInheritance)
@@ -109,7 +120,10 @@ class GenericStateMachineGenerator {
 	/**
 	 * generates the code of the whole state machine
 	 * 
-	 * @see {@link GenericStateMachineGenerator#genStateMachine}
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
+	 * 
+	 * @see {@link #genStateMachine}
 	 */
 	def genStateMachine(ExpandedActorClass xpac) {
 		xpac.genStateMachine(true)
@@ -117,6 +131,11 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * generates the code of the whole state machine
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param shallGenerateOneFile if <code>true</code> the generation of state IDs and
+	 * 		other constants is skipped (and left for the header file)
+	 * @return the generated code
 	 */
 	def genStateMachine(ExpandedActorClass xpac, boolean shallGenerateOneFile) {
 		val ac = xpac.actorClass
@@ -148,7 +167,7 @@ class GenericStateMachineGenerator {
 								"const "+ifItemPtr
 							else
 								ifItemPtr
-		val usesHdlr = usesHandlerTrPoints(ac)
+		val usesHdlr = usesHandlerTrPoints(xpac)
 		
 	'''
 		«IF shallGenerateOneFile»
@@ -320,6 +339,11 @@ class GenericStateMachineGenerator {
 	/**
 	 * helper method which generates the state switch.
 	 * Asynchronous, data driven and event driven state machines are distinguished
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
 	 */
 	def protected genStateSwitch(ExpandedActorClass xpac, boolean usesHdlr) {
 		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
@@ -362,6 +386,12 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * helper method which generates the data driven triggers
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param state the {@link State} for which the trigger if-else switch should be generated
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
 	 */
 	def protected genDataDrivenTriggers(ExpandedActorClass xpac, State state, boolean usesHdlr) {
 		'''
@@ -389,6 +419,13 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * helper method which generates the event driven triggers
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param state the {@link State} for which the trigger switch should be generated
+	 * @param atlist the list of {@link ActiveTrigger}s of this state
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
 	 */
 	def protected genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist, boolean usesHdlr) {
 		'''
@@ -420,35 +457,45 @@ class GenericStateMachineGenerator {
 	}
 	
 	/**
-	 * setter for history array
+	 * getter for history array
+	 * 
+	 * @param state the ID of the history state
+	 * @return the generated code
 	 */
-	def protected getHistory(String parent) {
-		langExt.memberAccess+"history["+parent+"]"
+	def protected getHistory(String state) {
+		langExt.memberAccess+"history["+state+"]"
 	}
 
 	/**
-	 * getter for history array
+	 * setter for history array
+	 * 
+	 * @param the ID of the state whose history should be set
+	 * @param the ID of the state that should be assigned
+	 * @return the generated code
 	 */
-	def protected setHistory(String parent, String state) {
-		langExt.memberAccess+"history["+parent+"] = "+state
+	def protected setHistory(String state, String historyState) {
+		langExt.memberAccess+"history["+state+"] = "+historyState
 	}
 	
 	/**
-	 * type of (temporary) state variables
+	 * @return the type of (temporary) state variables (defaults to "int")
 	 */
 	def protected stateType() {
 		"int"
 	}
 
 	/**
-	 * allow target language dependent generation of unrechable return in generated enterHistory method
+	 * allow target language dependent generation of unreachable return in generated enterHistory method.
+	 * The default is just a comment.
+	 * @return the generated code
 	 */	
 	def protected unreachableReturn() {
 		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
 	}
 
 	/**
-	 * type of (temporary) boolean variables
+	 * type of (temporary) boolean variables (defaults to "boolean")
+	 * @return the generated code
 	 */
 	def protected boolType() {
 		return "boolean"
@@ -458,6 +505,7 @@ class GenericStateMachineGenerator {
 	 * let derived class add extra code after definition of constants
 	 * 
 	 * @param xpac an expanded actor class
+	 * @return the generated code
 	 */
 	def protected genExtra(ExpandedActorClass xpac) {''''''}
 	
@@ -465,14 +513,20 @@ class GenericStateMachineGenerator {
 	 * let derived class add extra code after definition of constants in header (if applicable)
 	 * 
 	 * @param xpac an expanded actor class
+	 * @return the generated code
 	 */
 	def protected genExtraDecl(ExpandedActorClass xpac) {''''''}
 
 	/**
 	 * generate a transition guard if applicable
+	 * 
+	 * @param tt a {@link TriggeredTransition}
+	 * @param trigger a trigger string
+	 * @param xpac an expanded actor class
+	 * @return the generated code
 	 */	
 	def protected dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {
-		var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
+		val tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
 	'''
 		«IF tr.hasGuard()»
 			if («AbstractGenerator::getInstance().getTranslatedCode(tr.guard.guard)»)
@@ -491,6 +545,9 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * generate the do code calls for a given state
+	 * 
+	 * @param state the {@link State}
+	 * @return the generated code
 	 */
 	def protected genDoCodes(State state) {'''
 		«IF state.hasDoCode()»
@@ -503,6 +560,10 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * generate action code method implementations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @param state the {@link State}
+	 * @return the generated code
 	 */
 	def protected genActionCodeMethods(ExpandedActorClass xpac, State state) {
 		genActionCodeMethods(xpac, state, true);
@@ -510,6 +571,11 @@ class GenericStateMachineGenerator {
 
 	/**
 	 * generate action code method implementations or declarations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @param state the {@link State}
+	 * @param generateImplementation if only declarations should be generated then <code>false</code> has to be passed
+	 * @return the generated code
 	 */
 	def protected genActionCodeMethods(ExpandedActorClass xpac, State state, boolean generateImplementation) {
 		val ac = xpac.actorClass
@@ -580,10 +646,20 @@ class GenericStateMachineGenerator {
 	
 	// TODO: move the next two methods to the C++ generator
 	
+	/**
+	 * @param classname the name of the type
+	 * @return the type name for a constant pointer
+	 */
 	def protected constPointer(String classname) {
 		return classname	
 	}
 
+	/**
+	 * generate all method declarations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
 	def genStateMachineMethodDeclarations(ExpandedActorClass xpac)
 	{
 		val ac = xpac.actorClass
@@ -591,7 +667,7 @@ class GenericStateMachineGenerator {
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
 		val self = langExt.selfPointer(ac.name, true)
-		val usesHdlr = usesHandlerTrPoints(ac)
+		val usesHdlr = usesHandlerTrPoints(xpac)
 		
 	'''
 		
@@ -662,9 +738,16 @@ class GenericStateMachineGenerator {
 	'''
 	}
 	
-	def private usesHandlerTrPoints(ActorClass ac) {
-		if (!RoomHelpers::hasNonEmptyStateMachine(ac))
+	/**
+	 * helper method to determine whether this state machine uses handler transitions
+	 * points at all
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @return <code>true</code> if the state machine uses handler transition points
+	 */
+	def private usesHandlerTrPoints(ExpandedActorClass xpac) {
+		if (RoomHelpers::isEmpty(xpac.stateMachine))
 			return false
-		!RoomHelpers::getAllTrPointsRecursive(ac.stateMachine).filter(t|t instanceof TransitionPoint && ((t as TransitionPoint).handler)).empty
+		!RoomHelpers::getAllTrPointsRecursive(xpac.stateMachine).filter(t|t instanceof TransitionPoint && ((t as TransitionPoint).handler)).empty
 	}
 }

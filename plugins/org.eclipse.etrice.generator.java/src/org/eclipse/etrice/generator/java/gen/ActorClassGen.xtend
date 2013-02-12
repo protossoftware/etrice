@@ -101,7 +101,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDFOR»
 		
 			//--------------------- interface item IDs
-			«genInterfaceItemConstants(xpac, ac)»
+			«xpac.genInterfaceItemConstants»
 
 			«configGenAddon.genMinMaxConstants(ac)»
 			«ac.attributes.attributes»

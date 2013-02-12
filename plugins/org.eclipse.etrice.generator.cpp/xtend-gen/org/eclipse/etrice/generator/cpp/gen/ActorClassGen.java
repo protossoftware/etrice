@@ -275,7 +275,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- ports");
       _builder.newLine();
       _builder.append("\t\t\t");
-      List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
+      List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
       final Function1<Port,CharSequence> _function_2 = new Function1<Port,CharSequence>() {
           public CharSequence apply(final Port port) {
             StringConcatenation _builder = new StringConcatenation();
@@ -341,7 +341,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- interface item IDs");
       _builder.newLine();
       _builder.append("\t\t\t");
-      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac, ac);
+      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac);
       _builder.append(_genInterfaceItemConstants, "			");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
@@ -377,7 +377,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- port getters");
       _builder.newLine();
       {
-        List<Port> _endPorts_1 = this._roomExtensions.getEndPorts(ac);
+        List<Port> _endPorts_1 = RoomHelpers.getEndPorts(ac);
         for(final Port ep : _endPorts_1) {
           _builder.append("\t\t");
           String _portClassName = this._roomExtensions.getPortClassName(ep);
@@ -505,7 +505,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder_1.append("(*this, parent, name, port_addr, peer_addr)");
       initializerList.add(_builder_1);
     }
-    List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
+    List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
     for (final Port ep : _endPorts) {
       StringConcatenation _builder_2 = new StringConcatenation();
       String _name_1 = ep.getName();

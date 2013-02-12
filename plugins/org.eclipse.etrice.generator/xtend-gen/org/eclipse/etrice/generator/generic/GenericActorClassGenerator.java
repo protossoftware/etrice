@@ -10,27 +10,40 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+/**
+ * Target language independent part of an actor class generator.
+ * It uses the {@link ILanguageExtension}.
+ */
 @SuppressWarnings("all")
 public class GenericActorClassGenerator {
   @Inject
-  private ILanguageExtension langExt;
+  protected RoomExtensions _roomExtensions;
   
   @Inject
-  private RoomExtensions roomExt;
+  protected ILanguageExtension langExt;
   
-  public String genInterfaceItemConstants(final ExpandedActorClass xpac, final ActorClass ac) {
+  /**
+   * Generate constants for the local IDs of all interface items of an actor
+   * class.
+   * 
+   * @param xpac an {@link ExpandedActorClass}
+   * @return the generated code
+   */
+  public String genInterfaceItemConstants(final ExpandedActorClass xpac) {
+    final ActorClass ac = xpac.getActorClass();
     List<Port> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
-      List<Port> _endPorts = this.roomExt.getEndPorts(ac);
+      List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
       _xifexpression = _endPorts;
     } else {
-      List<Port> _allEndPorts = this.roomExt.getAllEndPorts(ac);
+      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       _xifexpression = _allEndPorts;
     }
     List<Port> endPorts = _xifexpression;
@@ -40,7 +53,7 @@ public class GenericActorClassGenerator {
       EList<SAPRef> _strSAPs = ac.getStrSAPs();
       _xifexpression_1 = _strSAPs;
     } else {
-      List<SAPRef> _allSAPs = this.roomExt.getAllSAPs(ac);
+      List<SAPRef> _allSAPs = RoomHelpers.getAllSAPs(ac);
       _xifexpression_1 = _allSAPs;
     }
     List<SAPRef> strSAPs = _xifexpression_1;
@@ -50,7 +63,7 @@ public class GenericActorClassGenerator {
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
       _xifexpression_2 = _serviceImplementations;
     } else {
-      List<ServiceImplementation> _allServiceImplementations = this.roomExt.getAllServiceImplementations(ac);
+      List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
       _xifexpression_2 = _allServiceImplementations;
     }
     List<ServiceImplementation> svcImpls = _xifexpression_2;

@@ -51,7 +51,7 @@ public class ConfigGenAddon {
     StringConcatenation _builder = new StringConcatenation();
     {
       ActorClass _actorClass = ai.getActorClass();
-      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(_actorClass);
+      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass);
       for(final Attribute a : _allAttributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
@@ -123,7 +123,7 @@ public class ConfigGenAddon {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _dataClass));
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
             for(final Attribute e : _allAttributes) {
               String _plus = (invokes + ".");
               String _name = a.getName();
@@ -326,7 +326,7 @@ public class ConfigGenAddon {
   public CharSequence genMinMaxConstants(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(ac);
+      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
       for(final Attribute a : _allAttributes) {
         String _name = a.getName();
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
@@ -362,7 +362,7 @@ public class ConfigGenAddon {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _dataClass));
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
             for(final Attribute e : _allAttributes) {
               String _plus = (varNamePath + "_");
               String _name = e.getName();
