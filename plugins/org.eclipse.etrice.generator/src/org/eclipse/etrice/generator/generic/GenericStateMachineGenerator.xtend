@@ -213,7 +213,7 @@ class GenericStateMachineGenerator {
 		 * matching the trigger of this chain. The ID of the final state is returned
 		 * @param chain - the chain ID
 		 * @param generic_data - the generic data pointer
-		 * @return the ID of the final state
+		 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 		 */
 		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
 			switch (chain) {
@@ -298,7 +298,6 @@ class GenericStateMachineGenerator {
 			«IF usesHdlr»
 			«boolType» is_handler = «langExt.booleanConstant(false)»;
 			«ENDIF»
-			«boolType» skip_entry = «langExt.booleanConstant(false)»;
 			
 			«IF handleEvents»
 				if (!handleSystemEvent(ifitem, evt, generic_data)) {
@@ -310,6 +309,11 @@ class GenericStateMachineGenerator {
 			if (chain != NOT_CAUGHT) {
 				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state«IF usesHdlr», is_handler«ENDIF»);
 				«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
+				«boolType» skip_entry = «langExt.booleanConstant(false)»;
+				if(next < 0){
+					next = -next;
+					skip_entry = «langExt.booleanConstant(true)»;
+				}
 				next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, «IF usesHdlr»is_handler, «ENDIF»skip_entry);
 				setState(«langExt.selfPointer(true)»next);
 			}
@@ -376,10 +380,6 @@ class GenericStateMachineGenerator {
 					«IF chain.isHandler() && usesHdlr»
 						is_handler = TRUE;
 					«ENDIF»
-					«IF chain.skipEntry»
-						skip_entry = TRUE;
-					«ENDIF»
-				}
 				«IF tr!=transitions.last»
 					else 
 				«ENDIF»
@@ -404,9 +404,6 @@ class GenericStateMachineGenerator {
 							catching_state = «chain.getContextId()»;
 							«IF chain.isHandler() && usesHdlr»
 								is_handler = «langExt.booleanConstant(true)»;
-							«ENDIF»
-							«IF chain.skipEntry»
-								skip_entry = «langExt.booleanConstant(true)»;
 							«ENDIF»
 						}
 					«ENDFOR»
