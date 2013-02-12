@@ -77,8 +77,9 @@ public interface ITransitionChainVisitor {
 	
 	/**
 	 * @param state a state
+	 * @param executeEntryCode <code>true</code> if entry code of state should be executed
 	 * @return a return statement with the ID of the state
 	 */
-	String genReturnState(State state);
+	String genReturnState(State state, boolean executeEntryCode);
 
 }

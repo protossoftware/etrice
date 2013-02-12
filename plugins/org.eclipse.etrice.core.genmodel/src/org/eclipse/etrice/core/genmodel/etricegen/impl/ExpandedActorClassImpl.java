@@ -803,11 +803,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			return;
 		
 		// the chain ends if source and destination coincide
-		if (tc.getTransition() instanceof NonInitialTransition && node==RoomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom())) {
-			if (node instanceof TransitionPoint)
-				tc.setSkipEntry(true);
+		if (tc.getTransition() instanceof NonInitialTransition && node==RoomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
 			return;
-		}
 		
 		for (Transition next : getOutgoingTransitions(node)) {
 			// from the second transition in the chain on we have:
