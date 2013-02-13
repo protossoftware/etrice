@@ -15,22 +15,15 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Singleton
 import java.io.File
 import java.util.ArrayList
-import java.util.Collections
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.DetailCode
 import org.eclipse.etrice.core.room.ExternalPort
-import org.eclipse.etrice.core.room.InitialTransition
-import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageHandler
 import org.eclipse.etrice.core.room.Port
@@ -41,14 +34,10 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
 import org.eclipse.etrice.core.room.ServiceImplementation
-import org.eclipse.etrice.core.room.SimpleState
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
-import org.eclipse.etrice.core.room.Trigger
-
-import static org.eclipse.etrice.generator.base.CodegenHelpers.*
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -296,57 +285,11 @@ class RoomExtensions {
 		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
 	}
 
-	// message lists with super class messages, super classes first
-	def List<Message> getAllIncomingMessages(ProtocolClass pc) {
-		if (pc.base!=null)
-			return pc.base.getAllIncomingMessages().union(pc.incomingMessages)
-		else
-			return pc.incomingMessages
-	}
-	
-	def List<Message> getAllOutgoingMessages(ProtocolClass pc) {
-		if (pc.base!=null)
-			return pc.base.getAllOutgoingMessages().union(pc.outgoingMessages)
-		else
-			pc.outgoingMessages
-	}
-		
-	def List<Message> getIncoming(ProtocolClass pc, boolean conj) {
-		if (conj)
-			return pc.getAllOutgoingMessages()
-		else
-			return pc.getAllIncomingMessages()
-	}
-
-	def List<Message> getOutgoing(ProtocolClass pc, boolean conj) {
-		if (conj)
-			return pc.getAllIncomingMessages()
-		else
-			return pc.getAllOutgoingMessages()
-	}
-	
-	def List<Message> getIncoming(InterfaceItem p) {
-		if (p.protocol!=null)
-			p.protocol.getIncoming(p.conjugated)
-		else
-			Collections::emptyList()
-	}
-		
-	def List<Message> getOutgoing(InterfaceItem p) {
-		if (p.protocol!=null)
-			p.protocol.getOutgoing(p.conjugated)
-		else
-			Collections::emptyList()
-	}
-	
-	def boolean isOnlyOutgoing(InterfaceItem p){
-		getIncoming(p).empty
-	}
-
-	def boolean isOnlyIncoming(InterfaceItem p){
-		getOutgoing(p).empty
-	}
-	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired {@link PortClass}
+	 * @return the port class
+	 */
 	def PortClass getPortClass(ProtocolClass pc, boolean conj) {
 		if (conj)
 			return pc.conjugate
@@ -354,44 +297,42 @@ class RoomExtensions {
 			return pc.regular
 	}
 	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return <code>true</code> if a send handler is specified for this direction
+	 */
 	def boolean handlesSend(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return false
 		else {
 			for (hdlr : pc.getPortClass(conj).msgHandlers)
-				if (pc.getOutgoing(conj).contains(hdlr.msg))
+				if (pc.getAllMessages(conj).contains(hdlr.msg))
 					return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return <code>true</code> if a receive handler is specified for this direction
+	 */
 	def boolean handlesReceive(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return false
 		else {
 			for (hdlr : pc.getPortClass(conj).msgHandlers)
-				if (pc.getIncoming(conj).contains(hdlr.msg))
+				if (pc.getAllMessages(!conj).contains(hdlr.msg))
 					return true;
 		}
 		return false;
 	}
 
-	def boolean isConjugated(InterfaceItem iii) {
-		if (iii instanceof Port) {
-			return (iii as Port).conjugated
-		}
-		else if (iii instanceof SAPRef)  {
-			return true
-		}
-		else if (iii instanceof SPPRef) {
-			return false
-		}
-		else {
-			// should not happen
-			return false
-		}
-	}
-
+	/**
+	 * @param iii an {@link InterfaceItemInstance}
+	 * @return <code>true</code> if the interface item instance is logically conjugate
+	 */
 	def boolean isConjugated(InterfaceItemInstance iii) {
 		if (iii instanceof PortInstance) {
 			return (iii as PortInstance).port.conjugated
@@ -408,40 +349,64 @@ class RoomExtensions {
 		}
 	}
 	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return a list of defined receive {@link MessageHandler} for this direction
+	 */
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return new ArrayList<MessageHandler>()
 		else {
 			var res = new ArrayList<MessageHandler>()
 			for (hdlr : pc.getPortClass(conj).msgHandlers) {
-				if (pc.getIncoming(conj).contains(hdlr.msg))
+				if (pc.getAllMessages(!conj).contains(hdlr.msg))
 					res.add(hdlr)
 			}
 			return res
 		}
 	}
 
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return a list of defined send {@link MessageHandler} for this direction
+	 */
 	def List<MessageHandler> getSendHandlers(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
 			return new ArrayList<MessageHandler>()
 		else {
 			var res = new ArrayList<MessageHandler>()
 			for (hdlr : pc.getPortClass(conj).msgHandlers) {
-				if (pc.getOutgoing(conj).contains(hdlr.msg))
+				if (pc.getAllMessages(conj).contains(hdlr.msg))
 					res.add(hdlr)
 			}
 			return res
 		}
 	}
 	
+	/**
+	 * @param m a {@link Message}
+	 * @param conj flag indicating the desired communication direction
+	 * @return a send {@link MessageHandler} for this direction if it is defined, <code>null</code> else
+	 */
 	def MessageHandler getSendHandler(Message m, boolean conj) {
 		return (m.eContainer as ProtocolClass).getSendHandlers(conj).findFirst(e|e.msg==m)
 	}
 	
+	/**
+	 * @param m a {@link Message}
+	 * @return <code>true</code> if this message is an incoming message
+	 */
 	def boolean isIncoming(Message m) {
 		return (m.eContainer as ProtocolClass).allIncomingMessages.contains(m)
 	}
 	
+	/*
+	 * @param m a {@link Message}
+	 * @return a string that can be used as identifier for the message. It is prefixed with IN_ or OUT_
+	 * 		to avoid ambiguities
+	 */
 	def String getCodeName(Message m) {
 		if (m.isIncoming())
 			return "IN_"+m.name
@@ -451,96 +416,48 @@ class RoomExtensions {
 
 	//-------------------------------------------------------
 	// state graph related methods
-	
-	// state lists
-	def boolean isLeaf(State s){
-		s.subgraph==null
-	}
 
-	def List<State> getLeafStateList(StateGraph sg) {
-		var ArrayList<State> res = new ArrayList<State>()
-		if (sg!=null)
-			for (s : sg.states) {
-				res.addAll(s.leafStateList)
-			}
-		return res
-	}
-	
-	def List<State> getLeafStateList(State s) {
-		if (s.isLeaf()) {
-			var res = new ArrayList<State>()
-			res.add(s)
-			return res
-		}
-		else
-			return s.subgraph.getLeafStateList()
-	}
-
-	def List<State> getStateList(StateGraph sg){
-		var ret = new ArrayList<State>()
-		if (sg!=null) {
-			for (e : sg.states){
-				ret.add(e)
-				if (e.subgraph!=null){
-					ret.addAll(e.subgraph.stateList)
-				}
-			}
-		}
-		return ret
-	}
-
-	def List<State> getBaseStateList(StateGraph sg) {
-		var ret = new ArrayList<State>()
-		if (sg!=null) {
-			for (e : sg.getStateList()){
-				if (e instanceof SimpleState){
-					ret.add(e)
-				}
-			}
-		}
-		return ret
-	}
-
+	/**
+	 * @param states a list of {@link State}s
+	 * @return a list ordered such that leaf states are last
+	 */
 	def getLeafStatesLast(List<State> states) {
-		var leaf = new ArrayList<State>()
-		var nonLeaf = new ArrayList<State>()
-		for (state : states) {
-			if (state.leaf)
-				leaf.add(state)
-			else
-				nonLeaf.add(state)
-		}
-		nonLeaf.addAll(leaf)
+		val leaf = states.filter(s|s.leaf)
+		val nonLeaf = states.filter(s|!s.leaf)
 		
-		return nonLeaf
+		nonLeaf.union(leaf)
 	}
 
-	def List<State> getAllBaseStates(ActorClass ac) {
-		if (ac.base==null)
-			return ac.stateMachine.getBaseStateList()
-		else
-			ac.base.getAllBaseStates().union(ac.stateMachine.getBaseStateList())
-	}
-
-	def List<State> getAllBaseStatesLeavesLast(ActorClass ac) {
-		if (ac.base==null)
-			return ac.stateMachine.getBaseStateList().getLeafStatesLast
-		else
-			ac.base.getAllBaseStates().getLeafStatesLast.union(ac.stateMachine.getBaseStateList().getLeafStatesLast)
-	}
-
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of all leaf states
+	 */
 	def List<State> getAllLeafStates(ActorClass ac) {
-		if (ac.base==null)
-			return ac.stateMachine.getLeafStateList()
-		else
-			ac.base.getAllLeafStates().union(ac.stateMachine.getLeafStateList())
+		ac.stateMachine.leafStateList
 	}
 
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of simple states with leaf states last
+	 */
+	def List<State> getAllBaseStatesLeavesLast(ActorClass ac) {
+		ac.allBaseStates.getLeafStatesLast
+	}
+
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return <code>true</code> if an operation named 'stop' is defined with a void argument list and
+	 * 		void return type
+	 */
 	def boolean overridesStop(ActorClass ac) {
-		return ac.operations.exists(e|e.name=="stop"&&e.arguments.isEmpty&&e.returntype==null)
+		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returntype==null)
 			|| (ac.base!=null && ac.base.overridesStop())
 	}
 
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return the number of all inherited states
+	 */
 	def int getNumberOfInheritedStates(ActorClass ac) {
 		if (ac.base==null)
 			return 0
@@ -548,6 +465,10 @@ class RoomExtensions {
 			return ac.base.stateMachine.getStateList().size+ac.base.getNumberOfInheritedStates()
 	}
 	
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return the number of all inherited base (or simple) states
+	 */
 	def int getNumberOfInheritedBaseStates(ActorClass ac) {
 		if (ac.base==null)
 			return 0
@@ -555,107 +476,12 @@ class RoomExtensions {
 			return ac.base.stateMachine.getBaseStateList().size+ac.base.getNumberOfInheritedBaseStates()
 	}
 
-	def String getStateId(State s) {
-		return getGenStateId(s)
-	}
-
-	def String getStatePathName(State s) {
-		return getGenStatePathName(s);
-	}
-	
-	def String getChainId(TransitionChain t) {
-		return getGenChainId(t)
-	}
-	
-	def boolean hasGuard(Trigger tr) {
-		return tr.guard!=null && tr.guard.guard!=null && tr.guard.guard.commands.size>0
-	}
-	
-	def boolean hasGuard(ExpandedActorClass ac, ActiveTrigger at) {
-		var hasGuard = false
-		for (t : at.transitions) {
-			if (t.triggers.exists(e|ac.isMatching(e, at.trigger) && e.hasGuard()))
-				hasGuard = true
-		}
-		return hasGuard
-	}
-	
-	// TODO. in the following methods handle inheritance language independent and proper
-	
-	def boolean empty(DetailCode dc) {
-		dc.detailCode==""
-	}
-
-	def boolean hasEntryCode(State s) {
-		if (!s.entryCode.empty)
-			return true
-			
-		if (s instanceof ExpandedRefinedState)
-			return !(s as ExpandedRefinedState).inheritedEntry.empty
-			
-		return false
-	}
-
-	def boolean hasExitCode(State s) {
-		if (!s.exitCode.empty)
-			return true
-			
-		if (s instanceof ExpandedRefinedState)
-			return !(s as ExpandedRefinedState).inheritedExit.empty
-			
-		return false
-	}
-
-	def boolean hasDoCode(State s) {
-		if (!s.doCode.empty)
-			return true
-			
-		if (s instanceof ExpandedRefinedState)
-			return !(s as ExpandedRefinedState).inheritedDo.empty
-			
-		return false
-	}
-	
-	def boolean hasActionCode(Transition t) {
-		t.action!=null && t.action.commands.size>0
-	}
-	
-	def String getContextId(TransitionChain tc) {
-		tc.getStateContext().getStateId()
-	}
-	
-	def Transition getInitTransition(StateGraph sg) {
-		for (tr : sg.transitions) {
-			if (tr instanceof InitialTransition)
-				return tr
-		}
-		return null
-	}
-	
-	def boolean hasInitTransition(StateGraph sg) {
-		for (tr : sg.transitions) {
-			if (tr instanceof InitialTransition)
-				return true
-		}
-		return false
-	}
-	
-	def List<Transition> getTransitionList(State s) {
-		if (s.isLeaf())
-			return new ArrayList<Transition>()
-		else
-			return s.subgraph.getTransitionList()
-		}
-
-	def List<Transition> getTransitionList(StateGraph sg) {
-		var res = new ArrayList<Transition>(sg.transitions)
-		for (s : sg.states) {
-			res.addAll(s.transitionList)
-		}
-		return res
-	}
-	
-
+	/**
+	 * @param ac an {@link ExpandedActorClass}
+	 * @param s a {@link State}
+	 * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
+	 * 		following the logic of evaluation of firing conditions
+	 */
 	def List<Transition> getOutgoingTransitionsHierarchical(ExpandedActorClass ac, State s) {
 		var result = new ArrayList<Transition>()
 		

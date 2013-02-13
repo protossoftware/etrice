@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.MessageFromIf
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 /**
  * Target language independent protocol class generator.

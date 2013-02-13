@@ -6,27 +6,19 @@ import com.google.inject.Singleton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.Guard;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
@@ -38,18 +30,14 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -353,95 +341,11 @@ public class RoomExtensions {
     return _plus_2;
   }
   
-  public List<Message> getAllIncomingMessages(final ProtocolClass pc) {
-    ProtocolClass _base = pc.getBase();
-    boolean _notEquals = (!Objects.equal(_base, null));
-    if (_notEquals) {
-      ProtocolClass _base_1 = pc.getBase();
-      List<Message> _allIncomingMessages = this.getAllIncomingMessages(_base_1);
-      EList<Message> _incomingMessages = pc.getIncomingMessages();
-      return this.<Message>union(_allIncomingMessages, _incomingMessages);
-    } else {
-      return pc.getIncomingMessages();
-    }
-  }
-  
-  public List<Message> getAllOutgoingMessages(final ProtocolClass pc) {
-    EList<Message> _xifexpression = null;
-    ProtocolClass _base = pc.getBase();
-    boolean _notEquals = (!Objects.equal(_base, null));
-    if (_notEquals) {
-      ProtocolClass _base_1 = pc.getBase();
-      List<Message> _allOutgoingMessages = this.getAllOutgoingMessages(_base_1);
-      EList<Message> _outgoingMessages = pc.getOutgoingMessages();
-      return this.<Message>union(_allOutgoingMessages, _outgoingMessages);
-    } else {
-      EList<Message> _outgoingMessages_1 = pc.getOutgoingMessages();
-      _xifexpression = _outgoingMessages_1;
-    }
-    return _xifexpression;
-  }
-  
-  public List<Message> getIncoming(final ProtocolClass pc, final boolean conj) {
-    if (conj) {
-      return this.getAllOutgoingMessages(pc);
-    } else {
-      return this.getAllIncomingMessages(pc);
-    }
-  }
-  
-  public List<Message> getOutgoing(final ProtocolClass pc, final boolean conj) {
-    if (conj) {
-      return this.getAllIncomingMessages(pc);
-    } else {
-      return this.getAllOutgoingMessages(pc);
-    }
-  }
-  
-  public List<Message> getIncoming(final InterfaceItem p) {
-    List<Message> _xifexpression = null;
-    ProtocolClass _protocol = RoomHelpers.getProtocol(p);
-    boolean _notEquals = (!Objects.equal(_protocol, null));
-    if (_notEquals) {
-      ProtocolClass _protocol_1 = RoomHelpers.getProtocol(p);
-      boolean _isConjugated = this.isConjugated(p);
-      List<Message> _incoming = this.getIncoming(_protocol_1, _isConjugated);
-      _xifexpression = _incoming;
-    } else {
-      List<Message> _emptyList = Collections.<Message>emptyList();
-      _xifexpression = _emptyList;
-    }
-    return _xifexpression;
-  }
-  
-  public List<Message> getOutgoing(final InterfaceItem p) {
-    List<Message> _xifexpression = null;
-    ProtocolClass _protocol = RoomHelpers.getProtocol(p);
-    boolean _notEquals = (!Objects.equal(_protocol, null));
-    if (_notEquals) {
-      ProtocolClass _protocol_1 = RoomHelpers.getProtocol(p);
-      boolean _isConjugated = this.isConjugated(p);
-      List<Message> _outgoing = this.getOutgoing(_protocol_1, _isConjugated);
-      _xifexpression = _outgoing;
-    } else {
-      List<Message> _emptyList = Collections.<Message>emptyList();
-      _xifexpression = _emptyList;
-    }
-    return _xifexpression;
-  }
-  
-  public boolean isOnlyOutgoing(final InterfaceItem p) {
-    List<Message> _incoming = this.getIncoming(p);
-    boolean _isEmpty = _incoming.isEmpty();
-    return _isEmpty;
-  }
-  
-  public boolean isOnlyIncoming(final InterfaceItem p) {
-    List<Message> _outgoing = this.getOutgoing(p);
-    boolean _isEmpty = _outgoing.isEmpty();
-    return _isEmpty;
-  }
-  
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired {@link PortClass}
+   * @return the port class
+   */
   public PortClass getPortClass(final ProtocolClass pc, final boolean conj) {
     if (conj) {
       return pc.getConjugate();
@@ -450,6 +354,11 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return <code>true</code> if a send handler is specified for this direction
+   */
   public boolean handlesSend(final ProtocolClass pc, final boolean conj) {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
@@ -459,9 +368,9 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _outgoing = this.getOutgoing(pc, conj);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
-        boolean _contains = _outgoing.contains(_msg);
+        boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
           return true;
         }
@@ -470,6 +379,11 @@ public class RoomExtensions {
     return false;
   }
   
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return <code>true</code> if a receive handler is specified for this direction
+   */
   public boolean handlesReceive(final ProtocolClass pc, final boolean conj) {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
@@ -479,9 +393,10 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _incoming = this.getIncoming(pc, conj);
+        boolean _not = (!conj);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, _not);
         Message _msg = hdlr.getMsg();
-        boolean _contains = _incoming.contains(_msg);
+        boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
           return true;
         }
@@ -490,22 +405,10 @@ public class RoomExtensions {
     return false;
   }
   
-  public boolean isConjugated(final InterfaceItem iii) {
-    if ((iii instanceof Port)) {
-      return ((Port) iii).isConjugated();
-    } else {
-      if ((iii instanceof SAPRef)) {
-        return true;
-      } else {
-        if ((iii instanceof SPPRef)) {
-          return false;
-        } else {
-          return false;
-        }
-      }
-    }
-  }
-  
+  /**
+   * @param iii an {@link InterfaceItemInstance}
+   * @return <code>true</code> if the interface item instance is logically conjugate
+   */
   public boolean isConjugated(final InterfaceItemInstance iii) {
     if ((iii instanceof PortInstance)) {
       Port _port = ((PortInstance) iii).getPort();
@@ -523,6 +426,11 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return a list of defined receive {@link MessageHandler} for this direction
+   */
   public List<MessageHandler> getReceiveHandlers(final ProtocolClass pc, final boolean conj) {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
@@ -535,9 +443,10 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _incoming = this.getIncoming(pc, conj);
+        boolean _not = (!conj);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, _not);
         Message _msg = hdlr.getMsg();
-        boolean _contains = _incoming.contains(_msg);
+        boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
           res.add(hdlr);
         }
@@ -546,6 +455,11 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return a list of defined send {@link MessageHandler} for this direction
+   */
   public List<MessageHandler> getSendHandlers(final ProtocolClass pc, final boolean conj) {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
@@ -558,9 +472,9 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _outgoing = this.getOutgoing(pc, conj);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
-        boolean _contains = _outgoing.contains(_msg);
+        boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
           res.add(hdlr);
         }
@@ -569,6 +483,11 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param m a {@link Message}
+   * @param conj flag indicating the desired communication direction
+   * @return a send {@link MessageHandler} for this direction if it is defined, <code>null</code> else
+   */
   public MessageHandler getSendHandler(final Message m, final boolean conj) {
     EObject _eContainer = m.eContainer();
     List<MessageHandler> _sendHandlers = this.getSendHandlers(((ProtocolClass) _eContainer), conj);
@@ -582,12 +501,21 @@ public class RoomExtensions {
     return IterableExtensions.<MessageHandler>findFirst(_sendHandlers, _function);
   }
   
+  /**
+   * @param m a {@link Message}
+   * @return <code>true</code> if this message is an incoming message
+   */
   public boolean isIncoming(final Message m) {
     EObject _eContainer = m.eContainer();
-    List<Message> _allIncomingMessages = this.getAllIncomingMessages(((ProtocolClass) _eContainer));
+    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(((ProtocolClass) _eContainer));
     return _allIncomingMessages.contains(m);
   }
   
+  /**
+   * @param m a {@link Message}
+   * @return a string that can be used as identifier for the message. It is prefixed with IN_ or OUT_
+   * 		to avoid ambiguities
+   */
   public String getCodeName(final Message m) {
     boolean _isIncoming = this.isIncoming(m);
     if (_isIncoming) {
@@ -599,150 +527,59 @@ public class RoomExtensions {
     }
   }
   
-  public boolean isLeaf(final State s) {
-    StateGraph _subgraph = s.getSubgraph();
-    boolean _equals = Objects.equal(_subgraph, null);
-    return _equals;
-  }
-  
-  public List<State> getLeafStateList(final StateGraph sg) {
-    ArrayList<State> _arrayList = new ArrayList<State>();
-    ArrayList<State> res = _arrayList;
-    boolean _notEquals = (!Objects.equal(sg, null));
-    if (_notEquals) {
-      EList<State> _states = sg.getStates();
-      for (final State s : _states) {
-        List<State> _leafStateList = this.getLeafStateList(s);
-        res.addAll(_leafStateList);
-      }
-    }
-    return res;
-  }
-  
-  public List<State> getLeafStateList(final State s) {
-    boolean _isLeaf = this.isLeaf(s);
-    if (_isLeaf) {
-      ArrayList<State> _arrayList = new ArrayList<State>();
-      ArrayList<State> res = _arrayList;
-      res.add(s);
-      return res;
-    } else {
-      StateGraph _subgraph = s.getSubgraph();
-      return this.getLeafStateList(_subgraph);
-    }
-  }
-  
-  public List<State> getStateList(final StateGraph sg) {
-    ArrayList<State> _arrayList = new ArrayList<State>();
-    ArrayList<State> ret = _arrayList;
-    boolean _notEquals = (!Objects.equal(sg, null));
-    if (_notEquals) {
-      EList<State> _states = sg.getStates();
-      for (final State e : _states) {
-        {
-          ret.add(e);
-          StateGraph _subgraph = e.getSubgraph();
-          boolean _notEquals_1 = (!Objects.equal(_subgraph, null));
-          if (_notEquals_1) {
-            StateGraph _subgraph_1 = e.getSubgraph();
-            List<State> _stateList = this.getStateList(_subgraph_1);
-            ret.addAll(_stateList);
+  /**
+   * @param states a list of {@link State}s
+   * @return a list ordered such that leaf states are last
+   */
+  public List<State> getLeafStatesLast(final List<State> states) {
+    List<State> _xblockexpression = null;
+    {
+      final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
+          public Boolean apply(final State s) {
+            boolean _isLeaf = RoomHelpers.isLeaf(s);
+            return Boolean.valueOf(_isLeaf);
           }
-        }
-      }
+        };
+      final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
+      final Function1<State,Boolean> _function_1 = new Function1<State,Boolean>() {
+          public Boolean apply(final State s) {
+            boolean _isLeaf = RoomHelpers.isLeaf(s);
+            boolean _not = (!_isLeaf);
+            return Boolean.valueOf(_not);
+          }
+        };
+      final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
+      List<State> _union = this.<State>union(nonLeaf, leaf);
+      _xblockexpression = (_union);
     }
-    return ret;
+    return _xblockexpression;
   }
   
-  public List<State> getBaseStateList(final StateGraph sg) {
-    ArrayList<State> _arrayList = new ArrayList<State>();
-    ArrayList<State> ret = _arrayList;
-    boolean _notEquals = (!Objects.equal(sg, null));
-    if (_notEquals) {
-      List<State> _stateList = this.getStateList(sg);
-      for (final State e : _stateList) {
-        if ((e instanceof SimpleState)) {
-          ret.add(e);
-        }
-      }
-    }
-    return ret;
-  }
-  
-  public ArrayList<State> getLeafStatesLast(final List<State> states) {
-    ArrayList<State> _arrayList = new ArrayList<State>();
-    ArrayList<State> leaf = _arrayList;
-    ArrayList<State> _arrayList_1 = new ArrayList<State>();
-    ArrayList<State> nonLeaf = _arrayList_1;
-    for (final State state : states) {
-      boolean _isLeaf = this.isLeaf(state);
-      if (_isLeaf) {
-        leaf.add(state);
-      } else {
-        nonLeaf.add(state);
-      }
-    }
-    nonLeaf.addAll(leaf);
-    return nonLeaf;
-  }
-  
-  public List<State> getAllBaseStates(final ActorClass ac) {
-    List<State> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      StateGraph _stateMachine = ac.getStateMachine();
-      return this.getBaseStateList(_stateMachine);
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      StateGraph _stateMachine_1 = ac.getStateMachine();
-      List<State> _baseStateList = this.getBaseStateList(_stateMachine_1);
-      List<State> _union = this.<State>union(_allBaseStates, _baseStateList);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
-  public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
-    List<State> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      StateGraph _stateMachine = ac.getStateMachine();
-      List<State> _baseStateList = this.getBaseStateList(_stateMachine);
-      return this.getLeafStatesLast(_baseStateList);
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<State> _allBaseStates = this.getAllBaseStates(_base_1);
-      ArrayList<State> _leafStatesLast = this.getLeafStatesLast(_allBaseStates);
-      StateGraph _stateMachine_1 = ac.getStateMachine();
-      List<State> _baseStateList_1 = this.getBaseStateList(_stateMachine_1);
-      ArrayList<State> _leafStatesLast_1 = this.getLeafStatesLast(_baseStateList_1);
-      List<State> _union = this.<State>union(_leafStatesLast, _leafStatesLast_1);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
-  }
-  
+  /**
+   * @param ac an {@link ActorClass}
+   * @return a list of all leaf states
+   */
   public List<State> getAllLeafStates(final ActorClass ac) {
-    List<State> _xifexpression = null;
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
-    if (_equals) {
-      StateGraph _stateMachine = ac.getStateMachine();
-      return this.getLeafStateList(_stateMachine);
-    } else {
-      ActorClass _base_1 = ac.getBase();
-      List<State> _allLeafStates = this.getAllLeafStates(_base_1);
-      StateGraph _stateMachine_1 = ac.getStateMachine();
-      List<State> _leafStateList = this.getLeafStateList(_stateMachine_1);
-      List<State> _union = this.<State>union(_allLeafStates, _leafStateList);
-      _xifexpression = _union;
-    }
-    return _xifexpression;
+    StateGraph _stateMachine = ac.getStateMachine();
+    List<State> _leafStateList = RoomHelpers.getLeafStateList(_stateMachine);
+    return _leafStateList;
   }
   
+  /**
+   * @param ac an {@link ActorClass}
+   * @return a list of simple states with leaf states last
+   */
+  public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
+    List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
+    List<State> _leafStatesLast = this.getLeafStatesLast(_allBaseStates);
+    return _leafStatesLast;
+  }
+  
+  /**
+   * @param ac an {@link ActorClass}
+   * @return <code>true</code> if an operation named 'stop' is defined with a void argument list and
+   * 		void return type
+   */
   public boolean overridesStop(final ActorClass ac) {
     boolean _or = false;
     EList<StandardOperation> _operations = ac.getOperations();
@@ -788,6 +625,10 @@ public class RoomExtensions {
     return _or;
   }
   
+  /**
+   * @param ac an {@link ActorClass}
+   * @return the number of all inherited states
+   */
   public int getNumberOfInheritedStates(final ActorClass ac) {
     ActorClass _base = ac.getBase();
     boolean _equals = Objects.equal(_base, null);
@@ -796,7 +637,7 @@ public class RoomExtensions {
     } else {
       ActorClass _base_1 = ac.getBase();
       StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _stateList = this.getStateList(_stateMachine);
+      List<State> _stateList = RoomHelpers.getStateList(_stateMachine);
       int _size = _stateList.size();
       ActorClass _base_2 = ac.getBase();
       int _numberOfInheritedStates = this.getNumberOfInheritedStates(_base_2);
@@ -804,6 +645,10 @@ public class RoomExtensions {
     }
   }
   
+  /**
+   * @param ac an {@link ActorClass}
+   * @return the number of all inherited base (or simple) states
+   */
   public int getNumberOfInheritedBaseStates(final ActorClass ac) {
     ActorClass _base = ac.getBase();
     boolean _equals = Objects.equal(_base, null);
@@ -812,7 +657,7 @@ public class RoomExtensions {
     } else {
       ActorClass _base_1 = ac.getBase();
       StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _baseStateList = this.getBaseStateList(_stateMachine);
+      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       ActorClass _base_2 = ac.getBase();
       int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_base_2);
@@ -820,187 +665,12 @@ public class RoomExtensions {
     }
   }
   
-  public String getStateId(final State s) {
-    return CodegenHelpers.getGenStateId(s);
-  }
-  
-  public String getStatePathName(final State s) {
-    return CodegenHelpers.getGenStatePathName(s);
-  }
-  
-  public String getChainId(final TransitionChain t) {
-    return CodegenHelpers.getGenChainId(t);
-  }
-  
-  public boolean hasGuard(final Trigger tr) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    Guard _guard = tr.getGuard();
-    boolean _notEquals = (!Objects.equal(_guard, null));
-    if (!_notEquals) {
-      _and_1 = false;
-    } else {
-      Guard _guard_1 = tr.getGuard();
-      DetailCode _guard_2 = _guard_1.getGuard();
-      boolean _notEquals_1 = (!Objects.equal(_guard_2, null));
-      _and_1 = (_notEquals && _notEquals_1);
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      Guard _guard_3 = tr.getGuard();
-      DetailCode _guard_4 = _guard_3.getGuard();
-      EList<String> _commands = _guard_4.getCommands();
-      int _size = _commands.size();
-      boolean _greaterThan = (_size > 0);
-      _and = (_and_1 && _greaterThan);
-    }
-    return _and;
-  }
-  
-  public boolean hasGuard(final ExpandedActorClass ac, final ActiveTrigger at) {
-    boolean hasGuard = false;
-    EList<TriggeredTransition> _transitions = at.getTransitions();
-    for (final TriggeredTransition t : _transitions) {
-      EList<Trigger> _triggers = t.getTriggers();
-      final Function1<Trigger,Boolean> _function = new Function1<Trigger,Boolean>() {
-          public Boolean apply(final Trigger e) {
-            boolean _and = false;
-            String _trigger = at.getTrigger();
-            boolean _isMatching = ac.isMatching(e, _trigger);
-            if (!_isMatching) {
-              _and = false;
-            } else {
-              boolean _hasGuard = RoomExtensions.this.hasGuard(e);
-              _and = (_isMatching && _hasGuard);
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-      boolean _exists = IterableExtensions.<Trigger>exists(_triggers, _function);
-      if (_exists) {
-        hasGuard = true;
-      }
-    }
-    return hasGuard;
-  }
-  
-  public boolean empty(final DetailCode dc) {
-    String _detailCode = RoomHelpers.getDetailCode(dc);
-    boolean _equals = Objects.equal(_detailCode, "");
-    return _equals;
-  }
-  
-  public boolean hasEntryCode(final State s) {
-    DetailCode _entryCode = s.getEntryCode();
-    boolean _empty = this.empty(_entryCode);
-    boolean _not = (!_empty);
-    if (_not) {
-      return true;
-    }
-    if ((s instanceof ExpandedRefinedState)) {
-      DetailCode _inheritedEntry = ((ExpandedRefinedState) s).getInheritedEntry();
-      boolean _empty_1 = this.empty(_inheritedEntry);
-      return (!_empty_1);
-    }
-    return false;
-  }
-  
-  public boolean hasExitCode(final State s) {
-    DetailCode _exitCode = s.getExitCode();
-    boolean _empty = this.empty(_exitCode);
-    boolean _not = (!_empty);
-    if (_not) {
-      return true;
-    }
-    if ((s instanceof ExpandedRefinedState)) {
-      DetailCode _inheritedExit = ((ExpandedRefinedState) s).getInheritedExit();
-      boolean _empty_1 = this.empty(_inheritedExit);
-      return (!_empty_1);
-    }
-    return false;
-  }
-  
-  public boolean hasDoCode(final State s) {
-    DetailCode _doCode = s.getDoCode();
-    boolean _empty = this.empty(_doCode);
-    boolean _not = (!_empty);
-    if (_not) {
-      return true;
-    }
-    if ((s instanceof ExpandedRefinedState)) {
-      DetailCode _inheritedDo = ((ExpandedRefinedState) s).getInheritedDo();
-      boolean _empty_1 = this.empty(_inheritedDo);
-      return (!_empty_1);
-    }
-    return false;
-  }
-  
-  public boolean hasActionCode(final Transition t) {
-    boolean _and = false;
-    DetailCode _action = t.getAction();
-    boolean _notEquals = (!Objects.equal(_action, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      DetailCode _action_1 = t.getAction();
-      EList<String> _commands = _action_1.getCommands();
-      int _size = _commands.size();
-      boolean _greaterThan = (_size > 0);
-      _and = (_notEquals && _greaterThan);
-    }
-    return _and;
-  }
-  
-  public String getContextId(final TransitionChain tc) {
-    State _stateContext = tc.getStateContext();
-    String _stateId = this.getStateId(_stateContext);
-    return _stateId;
-  }
-  
-  public Transition getInitTransition(final StateGraph sg) {
-    EList<Transition> _transitions = sg.getTransitions();
-    for (final Transition tr : _transitions) {
-      if ((tr instanceof InitialTransition)) {
-        return tr;
-      }
-    }
-    return null;
-  }
-  
-  public boolean hasInitTransition(final StateGraph sg) {
-    EList<Transition> _transitions = sg.getTransitions();
-    for (final Transition tr : _transitions) {
-      if ((tr instanceof InitialTransition)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  
-  public List<Transition> getTransitionList(final State s) {
-    boolean _isLeaf = this.isLeaf(s);
-    if (_isLeaf) {
-      ArrayList<Transition> _arrayList = new ArrayList<Transition>();
-      return _arrayList;
-    } else {
-      StateGraph _subgraph = s.getSubgraph();
-      return this.getTransitionList(_subgraph);
-    }
-  }
-  
-  public List<Transition> getTransitionList(final StateGraph sg) {
-    EList<Transition> _transitions = sg.getTransitions();
-    ArrayList<Transition> _arrayList = new ArrayList<Transition>(_transitions);
-    ArrayList<Transition> res = _arrayList;
-    EList<State> _states = sg.getStates();
-    for (final State s : _states) {
-      List<Transition> _transitionList = this.getTransitionList(s);
-      res.addAll(_transitionList);
-    }
-    return res;
-  }
-  
+  /**
+   * @param ac an {@link ExpandedActorClass}
+   * @param s a {@link State}
+   * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
+   * 		following the logic of evaluation of firing conditions
+   */
   public List<Transition> getOutgoingTransitionsHierarchical(final ExpandedActorClass ac, final State s) {
     ArrayList<Transition> _arrayList = new ArrayList<Transition>();
     ArrayList<Transition> result = _arrayList;

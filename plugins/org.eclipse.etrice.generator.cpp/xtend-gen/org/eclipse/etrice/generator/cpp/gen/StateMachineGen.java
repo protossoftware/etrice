@@ -10,6 +10,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -67,8 +68,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
             _builder.appendImmediate(",", "");
           }
           _builder.append("\"");
-          String _statePathName = this._roomExtensions.getStatePathName(state);
-          _builder.append(_statePathName, "");
+          String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+          _builder.append(_genStatePathName, "");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
         }

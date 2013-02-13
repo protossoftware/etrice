@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 
 @Singleton
@@ -165,7 +166,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDIF»
 			
 			// sent messages
-			«FOR m : pc.getOutgoing(conj)»
+			«FOR m : pc.getAllMessages(conj)»
 				«sendMessage(m, conj)»
 			«ENDFOR»
 		}

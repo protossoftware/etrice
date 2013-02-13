@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.StandardOperation
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.generator.base.IRoomGenerator
 import org.eclipse.etrice.core.genmodel.etricegen.Root
@@ -276,7 +277,7 @@ class DocGen implements IRoomGenerator {
 		\begin{par}
 		«FOR s : ac.stateMachine.states»
 			«IF s.docu != null»	
-				\textbf{State description} \textit{«s.statePathName.replaceAll("_","\\\\_")»}:
+				\textbf{State description} \textit{«s.genStatePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
 				\newline\newline
@@ -302,21 +303,21 @@ class DocGen implements IRoomGenerator {
 	}
 		
 	def generateStateDoc(RoomModel model, ActorClass ac, State state){
-		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.statePathName + "_behavior.jpg"
+		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.genStatePathName + "_behavior.jpg"
 		filename = filename.replaceAll("\\\\","/");
 		var latexFilename = filename.replaceAll("/","//"); 
 
 		logger.logInfo("Gen Filename: " + filename); 
 		'''
-		\level{4}{Subgraph «state.statePathName.replaceAll("_","\\\\_")»}
+		\level{4}{Subgraph «state.genStatePathName.replaceAll("_","\\\\_")»}
 		«IF fileExists(filename).equals("true")»
-			«includeGraphics(latexFilename,"0.4",ac.name + "_" + state.statePathName)»
+			«includeGraphics(latexFilename,"0.4",ac.name + "_" + state.genStatePathName)»
 		«ENDIF»
 		
 		\begin{par}
 		«FOR s : state.subgraph.states»
 			«IF s.docu != null»	
-				\textbf{State description} \textit{«s.statePathName.replaceAll("_","\\\\_")»}:
+				\textbf{State description} \textit{«s.genStatePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
 				\newline\newline

@@ -17,6 +17,8 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -27,7 +29,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		val ac = xpac.actorClass
 	'''
 		// state names
-		protected static final String stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.getStatePathName()»"
+		protected static final String stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
 		«ENDFOR»};
 		
 «««	 	TODOHRR: history defined in ActorClassBase, init in constructor

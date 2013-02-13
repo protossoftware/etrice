@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -271,10 +272,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
       if ((conj).booleanValue()) {
-        List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+        List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
         _xifexpression = _allIncomingMessages;
       } else {
-        List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+        List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
         _xifexpression = _allOutgoingMessages;
       }
       List<Message> messages = _xifexpression;
@@ -467,7 +468,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence genDataDrivenPortHeaders(final ProtocolClass pc) {
     CharSequence _xblockexpression = null;
     {
-      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
           public Boolean apply(final Message m) {
             VarDecl _data = m.getData();
@@ -604,7 +605,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence genDataDrivenPortSources(final ProtocolClass pc) {
     CharSequence _xblockexpression = null;
     {
-      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
           public Boolean apply(final Message m) {
             VarDecl _data = m.getData();
@@ -680,10 +681,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
       if ((conj).booleanValue()) {
-        List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+        List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
         _xifexpression = _allIncomingMessages;
       } else {
-        List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+        List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
         _xifexpression = _allOutgoingMessages;
       }
       List<Message> messages = _xifexpression;
@@ -1123,7 +1124,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_name, "");
     _builder.append("_messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_1 = m.getName();
@@ -1132,7 +1133,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
     }
     {
-      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_2 = m_1.getName();

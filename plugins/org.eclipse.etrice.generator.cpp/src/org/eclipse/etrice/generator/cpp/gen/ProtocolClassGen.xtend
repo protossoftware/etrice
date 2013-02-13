@@ -33,6 +33,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.generator.cpp.GeneratorOptions
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 /**
  * @author Peter Karlitschek
@@ -121,7 +122,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 	}
 	
-	def portClassDeclaration(ProtocolClass pc, Boolean conj) {
+	def private portClassDeclaration(ProtocolClass pc, Boolean conj) {
 		var pclass = pc.getPortClass(conj)
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
@@ -145,7 +146,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«ENDIF»
 		
 		  // outgoing messages
-		«FOR m : pc.getOutgoing(conj)»
+		«FOR m : pc.getAllMessages(conj)»
 		  	«sendMessageDeclaration(m,conj)»
 		«ENDFOR»
 	};
@@ -168,7 +169,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			
 			«IF pc.commType==CommunicationType::EVENT_DRIVEN»
 				 // outgoing messages
-				«FOR m : pc.getOutgoing(conj)»
+				«FOR m : pc.getAllMessages(conj)»
 				  	«sendMessageDeclaration(m,conj)»
 				«ENDFOR»
 			«ENDIF»
@@ -275,7 +276,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	«ENDIF»
 			
 	// sent messages
-	«FOR m : pc.getOutgoing(conj)»
+	«FOR m : pc.getAllMessages(conj)»
 		«sendMessage(m, pc.name, portClassName, conj)»
 	«ENDFOR»
 		
@@ -298,7 +299,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 		
 	// outgoing messages
-	«FOR m : pc.getOutgoing(conj)»
+	«FOR m : pc.getAllMessages(conj)»
 	«messageSignatureDefinition(m, replPortClassName)»{
 		for (int i=0; i<m_replication; ++i) {
 			m_ports[i].«messageCall(m)»;

@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -147,7 +148,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("\t");
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_2 = m.getName();
@@ -157,7 +158,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
     _builder.append(" ");
     {
-      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_3 = m_1.getName();
@@ -411,8 +412,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _outgoing = this._roomExtensions.getOutgoing(pc, (conj).booleanValue());
-        for(final Message m : _outgoing) {
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        for(final Message m : _allMessages) {
           _builder.append("\t");
           CharSequence _sendMessage = this.sendMessage(m, (conj).booleanValue());
           _builder.append(_sendMessage, "	");
@@ -498,7 +499,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// incoming messages");
           _builder.newLine();
           {
-            List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+            List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
             for(final Message m_1 : _allIncomingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature = this.messageSignature(m_1);
@@ -530,7 +531,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// outgoing messages");
           _builder.newLine();
           {
-            List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+            List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
             for(final Message m_2 : _allOutgoingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature_1 = this.messageSignature(m_2);

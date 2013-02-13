@@ -22,6 +22,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+
 /**
  * @author Peter Karlitschek
  *
@@ -46,7 +48,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	override genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 	'''
-		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.getStatePathName()»"
+		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
 		«ENDFOR»};
 		const int «ac.name»::s_numberOfStates = «ac.getAllBaseStatesLeavesLast().size + 2»;
 		

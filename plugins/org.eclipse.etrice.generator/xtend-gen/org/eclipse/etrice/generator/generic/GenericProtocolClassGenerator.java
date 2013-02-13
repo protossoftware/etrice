@@ -11,6 +11,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
@@ -42,7 +43,7 @@ public class GenericProtocolClassGenerator {
     String _string = Integer.valueOf(offset).toString();
     Pair<String,String> _pair = Tuples.<String, String>pair(_memberInDeclaration, _string);
     list.add(_pair);
-    List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+    List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
     for (final Message msg : _allOutgoingMessages) {
       {
         int _plus = (offset + 1);
@@ -56,7 +57,7 @@ public class GenericProtocolClassGenerator {
         list.add(_pair_1);
       }
     }
-    List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
     for (final Message msg_1 : _allIncomingMessages) {
       {
         int _plus = (offset + 1);

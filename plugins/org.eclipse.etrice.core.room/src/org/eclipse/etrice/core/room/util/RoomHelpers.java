@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -222,17 +223,6 @@ public class RoomHelpers {
 			assert(false): "unexpected sub type";
 		}
 
-		return result;
-	}
-	
-	private static List<EObject> getContainedObjects(StructureClass sc) {
-		ArrayList<EObject> result = new ArrayList<EObject>();
-		
-		result.addAll(getInterfaceItems(sc, true));
-		result.addAll(getRefs(sc, true));
-		result.addAll(getBindings(sc, true));
-		result.addAll(getConnections(sc, true));
-		
 		return result;
 	}
 
@@ -472,6 +462,87 @@ public class RoomHelpers {
 	
 	/**
 	 * @param s a {@link State}
+	 * @return <code>true</code> if the state has no sub-graph
+	 */
+	public static boolean isLeaf(State s) {
+		return s.getSubgraph()==null;
+	}
+	
+	/**
+	 * @param state a {@link State}
+	 * @return a list of all leaf states recursively
+	 */
+	public static List<State> getLeafStateList(State state) {
+		return getLeafStateList(state.getSubgraph());
+	}
+	
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return a list of all leaf states recursively
+	 */
+	public static List<State> getLeafStateList(StateGraph sg) {
+		ArrayList<State> res = new ArrayList<State>();
+		
+		if (sg!=null) {
+			TreeIterator<EObject> it = sg.eAllContents();
+			while (it.hasNext()) {
+				EObject obj = it.next();
+				if ((obj instanceof State) && isLeaf((State) obj))
+					res.add((State) obj);
+			}
+		}
+		
+		return res;
+	}
+	
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return a list of all states recursively
+	 */
+	public static List<State> getStateList(StateGraph sg) {
+		ArrayList<State> res = new ArrayList<State>();
+		
+		if (sg!=null) {
+			TreeIterator<EObject> it = sg.eAllContents();
+			while (it.hasNext()) {
+				EObject obj = it.next();
+				if (obj instanceof State)
+					res.add((State) obj);
+			}
+		}
+		
+		return res;
+	}
+	
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return a list of all base states recursively
+	 */
+	public static List<State> getBaseStateList(StateGraph sg) {
+		ArrayList<State> res = new ArrayList<State>();
+		
+		if (sg!=null) {
+			TreeIterator<EObject> it = sg.eAllContents();
+			while (it.hasNext()) {
+				EObject obj = it.next();
+				if (obj instanceof SimpleState)
+					res.add((State) obj);
+			}
+		}
+		
+		return res;
+	}
+	
+	/**
+	 * @param ac an {@link ActorClass} 
+	 * @return all base states of the actor class
+	 */
+	public static List<State> getAllBaseStates(ActorClass ac) {
+		return getBaseStateList(ac.getStateMachine());
+	}
+	
+	/**
+	 * @param s a {@link State}
 	 * @return the parent state of s if there is such. If the state is on
 	 * the top level then <code>null</code> is returned
 	 */
@@ -517,12 +588,20 @@ public class RoomHelpers {
 		
 		for (String cmd : dc.getCommands()) {
 			if (!cmd.isEmpty())
-		return true;
-	}
+				return true;
+		}
 
 		return false;
 	}
 
+	/**
+	 * @param trig a {@link Trigger}
+	 * @return <code>true</code> if a guard condition is defined for this trigger
+	 */
+	public static boolean hasGuard(Trigger trig) {
+		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
+	}
+	
 	/**
 	 * Returns <code>true</code> if the entry code of a {@link State} is empty.
 	 * 
@@ -780,6 +859,18 @@ public class RoomHelpers {
 	public static List<Transition> getAllTransitions(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), false);
 	}
+
+	/**
+	 * Returns all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
+	 * and descend also into sub graphs.
+
+	 * @param sg the {@link StateGraph}
+	 * 
+	 * @return all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
+	 */
+	public static List<Transition> getAllTransitionsRecursive(StateGraph sg) {
+		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), true);
+	}
 	
 	@SuppressWarnings("unchecked")
 	private static <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature, boolean recurse) {
@@ -1009,6 +1100,22 @@ public class RoomHelpers {
 	}
 	
 	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @return all incoming {@link Message}s including base class with base class messages first
+	 */
+	public static List<Message> getAllIncomingMessages(ProtocolClass pc) {
+		return getAllMessages(pc, true);
+	}
+	
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @return all outgoing {@link Message}s including base class with base class messages first
+	 */
+	public static List<Message> getAllOutgoingMessages(ProtocolClass pc) {
+		return getAllMessages(pc, false);
+	}
+	
+	/**
 	 * Returns a list of all {@link Message}s of one direction a {@link ProtocolClass}
 	 * including base classes.
 	 * 
@@ -1032,6 +1139,44 @@ public class RoomHelpers {
 		return result;
 	}
 
+	/**
+	 * @param item an {@link InterfaceItem}
+	 * @return a list of all incoming {@link Messages} of this item
+	 */
+	public static List<Message> getIncoming(InterfaceItem item) {
+		if (getProtocol(item)!=null)
+			return getAllMessages(getProtocol(item), !isConjugated(item));
+		else
+			return Collections.emptyList();
+	}
+
+	/**
+	 * @param item an {@link InterfaceItem}
+	 * @return a list of all outgoing {@link Messages} of this item
+	 */
+	public static List<Message> getOutgoing(InterfaceItem item) {
+		if (getProtocol(item)!=null)
+			return getAllMessages(getProtocol(item), isConjugated(item));
+		else
+			return Collections.emptyList();
+	}
+	
+	/**
+	 * @param item an {@link InterfaceItem}
+	 * @return <code>true</code> if the item is logically conjugate
+	 */
+	public static boolean isConjugated(InterfaceItem item) {
+		if (item instanceof Port)
+			return ((Port) item).isConjugated();
+		else if (item instanceof SAPRef)
+			return true;
+		else if (item instanceof SPPRef)
+			return false;
+		
+		assert(false): "unexpected sub type";
+		return true;
+	}
+	
 	/**
 	 * Returns a list of all {@link Attribute}s of an {@link ActorClass}
 	 * including base classes.
@@ -2053,6 +2198,26 @@ public class RoomHelpers {
 		return getActionCode(trans, ac, false);
 	}
 
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return the initial transition or <code>null</code> if no such is available
+	 */
+	public static Transition getInitTransition(StateGraph sg) {
+		for (Transition tr : sg.getTransitions()) {
+			if (tr instanceof InitialTransition)
+				return tr;
+		}
+		return null;
+	}
+	
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return <code>true</code> if an initial transition is available
+	 */
+	public static boolean hasInitTransition(StateGraph sg) {
+		return getInitTransition(sg)!=null;
+	}
+	
 	/**
 	 * Returns the complete action code including base class code of a {@link Transition}.
 	 * 
