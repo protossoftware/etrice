@@ -411,6 +411,7 @@ class GenericStateMachineGenerator {
 					«IF chain.isHandler() && usesHdlr»
 						is_handler = TRUE;
 					«ENDIF»
+				}
 				«IF tr!=transitions.last»
 					else 
 				«ENDIF»
