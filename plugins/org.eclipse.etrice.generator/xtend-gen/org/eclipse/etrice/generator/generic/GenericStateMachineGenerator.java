@@ -1255,6 +1255,7 @@ public class GenericStateMachineGenerator {
         _builder.append("chain = ");
         String _genChainId = CodegenHelpers.getGenChainId(chain);
         _builder.append(_genChainId, "	");
+        _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("catching_state = ");
@@ -1277,6 +1278,8 @@ public class GenericStateMachineGenerator {
             _builder.newLine();
           }
         }
+        _builder.append("}");
+        _builder.newLine();
         {
           Transition _last = IterableExtensions.<Transition>last(transitions);
           boolean _notEquals = (!Objects.equal(tr, _last));

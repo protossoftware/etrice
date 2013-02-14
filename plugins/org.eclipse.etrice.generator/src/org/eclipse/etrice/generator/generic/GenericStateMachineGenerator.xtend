@@ -406,7 +406,7 @@ class GenericStateMachineGenerator {
 				if («AbstractGenerator::getInstance().getTranslatedCode((tr as GuardedTransition).guard)»)
 				{
 					«var chain = xpac.getChain(tr)»
-					chain = «chain.genChainId»
+					chain = «chain.genChainId»;
 					catching_state = «chain.stateContext.genStateId»;
 					«IF chain.isHandler() && usesHdlr»
 						is_handler = TRUE;
