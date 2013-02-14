@@ -110,6 +110,9 @@ public class GenericStateMachineGenerator {
         offset = _plus;
       }
     }
+    String _string = Integer.valueOf(offset).toString();
+    Pair<String,String> _pair_2 = Tuples.<String, String>pair("STATE_MAX", _string);
+    list.add(_pair_2);
     return this.langExt.genEnumeration("state_ids", list);
   }
   
@@ -638,22 +641,44 @@ public class GenericStateMachineGenerator {
       _builder.append(self, "");
       String _stateType_4 = this.stateType();
       _builder.append(_stateType_4, "");
-      _builder.append(" state, ");
+      _builder.append(" state");
       {
         if (usesHdlr) {
+          _builder.append(", ");
           String _boolType_1 = this.boolType();
           _builder.append(_boolType_1, "");
-          _builder.append(" handler, ");
+          _builder.append(" handler");
         }
       }
-      String _boolType_2 = this.boolType();
-      _builder.append(_boolType_2, "");
-      _builder.append(" skip_entry) {");
+      _builder.append(") {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("while (");
-      String _booleanConstant = this.langExt.booleanConstant(true);
+      String _boolType_2 = this.boolType();
+      _builder.append(_boolType_2, "	");
+      _builder.append(" skip_entry = ");
+      String _booleanConstant = this.langExt.booleanConstant(false);
       _builder.append(_booleanConstant, "	");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("if (state >= STATE_MAX) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("state = state - STATE_MAX;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("skip_entry = ");
+      String _booleanConstant_1 = this.langExt.booleanConstant(true);
+      _builder.append(_booleanConstant_1, "		");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("while (");
+      String _booleanConstant_2 = this.langExt.booleanConstant(true);
+      _builder.append(_booleanConstant_2, "	");
       _builder.append(") {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -822,8 +847,8 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("skip_entry = ");
-      String _booleanConstant_1 = this.langExt.booleanConstant(false);
-      _builder.append(_booleanConstant_1, "		");
+      String _booleanConstant_3 = this.langExt.booleanConstant(false);
+      _builder.append(_booleanConstant_3, "		");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -881,16 +906,14 @@ public class GenericStateMachineGenerator {
       _builder.append("enterHistory(");
       String _selfPointer_5 = this.langExt.selfPointer(true);
       _builder.append(_selfPointer_5, "	");
-      _builder.append("next, ");
+      _builder.append("next");
       {
         if (usesHdlr) {
-          String _booleanConstant_2 = this.langExt.booleanConstant(false);
-          _builder.append(_booleanConstant_2, "	");
           _builder.append(", ");
+          String _booleanConstant_4 = this.langExt.booleanConstant(false);
+          _builder.append(_booleanConstant_4, "	");
         }
       }
-      String _booleanConstant_3 = this.langExt.booleanConstant(false);
-      _builder.append(_booleanConstant_3, "	");
       _builder.append(");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -956,8 +979,8 @@ public class GenericStateMachineGenerator {
           String _boolType_3 = this.boolType();
           _builder.append(_boolType_3, "	");
           _builder.append(" is_handler = ");
-          String _booleanConstant_4 = this.langExt.booleanConstant(false);
-          _builder.append(_booleanConstant_4, "	");
+          String _booleanConstant_5 = this.langExt.booleanConstant(false);
+          _builder.append(_booleanConstant_5, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -1004,13 +1027,16 @@ public class GenericStateMachineGenerator {
       _builder.append(");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t");
       String _stateType_7 = this.stateType();
-      _builder.append(_stateType_7, "		");
+      _builder.append(_stateType_7, "			");
       _builder.append(" next = ");
-      _builder.append(opScopePriv, "		");
+      _builder.append(opScopePriv, "			");
       _builder.append("executeTransitionChain(");
       String _selfPointer_10 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_10, "		");
+      _builder.append(_selfPointer_10, "			");
       _builder.append("chain");
       {
         if (handleEvents) {
@@ -1019,49 +1045,29 @@ public class GenericStateMachineGenerator {
       }
       _builder.append(");");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      String _boolType_4 = this.boolType();
-      _builder.append(_boolType_4, "		");
-      _builder.append(" skip_entry = ");
-      String _booleanConstant_5 = this.langExt.booleanConstant(false);
-      _builder.append(_booleanConstant_5, "		");
-      _builder.append(";");
+      _builder.append("\t\t\t");
+      _builder.append("next = ");
+      _builder.append(opScopePriv, "			");
+      _builder.append("enterHistory(");
+      String _selfPointer_11 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_11, "			");
+      _builder.append("next");
+      {
+        if (usesHdlr) {
+          _builder.append(", is_handler");
+        }
+      }
+      _builder.append(");");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("if(next < 0){");
-      _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("next = -next;");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("skip_entry = ");
-      String _booleanConstant_6 = this.langExt.booleanConstant(true);
-      _builder.append(_booleanConstant_6, "			");
-      _builder.append(";");
+      _builder.append("setState(");
+      String _selfPointer_12 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_12, "			");
+      _builder.append("next);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("next = ");
-      _builder.append(opScopePriv, "		");
-      _builder.append("enterHistory(");
-      String _selfPointer_11 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_11, "		");
-      _builder.append("next, ");
-      {
-        if (usesHdlr) {
-          _builder.append("is_handler, ");
-        }
-      }
-      _builder.append("skip_entry);");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("setState(");
-      String _selfPointer_12 = this.langExt.selfPointer(true);
-      _builder.append(_selfPointer_12, "		");
-      _builder.append("next);");
-      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -1438,6 +1444,7 @@ public class GenericStateMachineGenerator {
   
   /**
    * @return the type of (temporary) state variables (defaults to "int")
+   * and has to be signed
    */
   protected String stateType() {
     return "int";
@@ -2015,17 +2022,16 @@ public class GenericStateMachineGenerator {
       _builder.append("\t");
       _builder.append("int enterHistory(");
       _builder.append(self, "	");
-      _builder.append("int state, ");
+      _builder.append("int state");
       {
         if (usesHdlr) {
+          _builder.append(", ");
           String _boolType_1 = this.boolType();
           _builder.append(_boolType_1, "	");
-          _builder.append(" handler, ");
+          _builder.append(" handler");
         }
       }
-      String _boolType_2 = this.boolType();
-      _builder.append(_boolType_2, "	");
-      _builder.append(" skip_entry);");
+      _builder.append(");");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("public:");

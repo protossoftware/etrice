@@ -107,7 +107,10 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genReturnState(State state, boolean executeEntryCode) {
-		return "return " + ((executeEntryCode)?"":"-") + CodegenHelpers.getGenStateId(state) + ";";
+		if (executeEntryCode)
+			return "return " + CodegenHelpers.getGenStateId(state) + ";";
+		else
+			return "return " + CodegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
 	public String genTypedData(TransitionChain tc) {

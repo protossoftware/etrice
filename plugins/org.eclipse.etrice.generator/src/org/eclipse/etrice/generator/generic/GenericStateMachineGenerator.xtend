@@ -72,6 +72,7 @@ class GenericStateMachineGenerator {
 			list.add(pair(state.getGenStateId, offset.toString))
 			offset = offset+1;
 		}
+		list.add(pair("STATE_MAX", offset.toString))
 		
 		return langExt.genEnumeration("state_ids", list)
 	}
@@ -259,7 +260,12 @@ class GenericStateMachineGenerator {
 		 «ENDIF»
 		 * @return - the ID of the final leaf state
 		 */
-		«privAccess»«stateType» «opScopePriv»enterHistory(«self»«stateType» state, «IF usesHdlr»«boolType» handler, «ENDIF»«boolType» skip_entry) {
+		«privAccess»«stateType» «opScopePriv»enterHistory(«self»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
+			«boolType» skip_entry = «langExt.booleanConstant(false)»;
+			if (state >= STATE_MAX) {
+				state = state - STATE_MAX;
+				skip_entry = «langExt.booleanConstant(true)»;
+			}
 			while («langExt.booleanConstant(true)») {
 				switch (state) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
@@ -302,7 +308,7 @@ class GenericStateMachineGenerator {
 			«var initt = xpac.stateMachine.getInitTransition()»
 			int chain = «xpac.getChain(initt).genChainId»;
 			«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, «IF usesHdlr»«langExt.booleanConstant(false)», «ENDIF»«langExt.booleanConstant(false)»);
+			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
 			setState(«langExt.selfPointer(true)»next);
 		}
 		
@@ -328,14 +334,11 @@ class GenericStateMachineGenerator {
 			«ENDIF»
 			if (chain != NOT_CAUGHT) {
 				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state«IF usesHdlr», is_handler«ENDIF»);
-				«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
-				«boolType» skip_entry = «langExt.booleanConstant(false)»;
-				if(next < 0){
-					next = -next;
-					skip_entry = «langExt.booleanConstant(true)»;
+				{
+					«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
+					next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», is_handler«ENDIF»);
+					setState(«langExt.selfPointer(true)»next);
 				}
-				next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, «IF usesHdlr»is_handler, «ENDIF»skip_entry);
-				setState(«langExt.selfPointer(true)»next);
 			}
 		}
 	'''}
@@ -478,6 +481,7 @@ class GenericStateMachineGenerator {
 	
 	/**
 	 * @return the type of (temporary) state variables (defaults to "int")
+	 * and has to be signed
 	 */
 	def protected stateType() {
 		"int"
@@ -726,7 +730,7 @@ class GenericStateMachineGenerator {
 			 «ENDIF»
 			 * @return - the ID of the final leaf state
 			 */
-			int enterHistory(«self»int state, «IF usesHdlr»«boolType» handler, «ENDIF»«boolType» skip_entry);
+			int enterHistory(«self»int state«IF usesHdlr», «boolType» handler«ENDIF»);
 		
 		public:
 
