@@ -111,7 +111,6 @@ class DataClassGen {
 		
 		«dc.operations.operationsImplementation(dc.name)»
 		
-		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {
 			memcpy(target, source, sizeof(«dc.name»));
 		}

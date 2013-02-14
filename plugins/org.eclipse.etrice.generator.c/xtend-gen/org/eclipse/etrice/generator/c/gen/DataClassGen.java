@@ -220,8 +220,6 @@ public class DataClassGen {
     _builder.append(_operationsImplementation, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("// deep copy");
-    _builder.newLine();
     _builder.append("void ");
     String _name_2 = dc.getName();
     _builder.append(_name_2, "");

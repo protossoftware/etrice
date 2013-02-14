@@ -291,7 +291,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«pc.getPortClass(conj).operations.operationsImplementation(replPortClassName)»
 			«ENDIF»
 
-			// getReplication
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
 				return ((etReplPort*)self)->size;
 			}

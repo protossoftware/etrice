@@ -23,7 +23,7 @@
 /* timing and scheduling */
 #define FREQUENCY 10L
 #define ET_RUNTIME_MAXLOOP 100
-//#define ET_RUNTIME_ENDLESS
+/*#define ET_RUNTIME_ENDLESS*/
 
 /* pool and block size */
 #define MESSAGE_POOL_MAX 50

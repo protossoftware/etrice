@@ -187,7 +187,7 @@ RoomModel SendingDataTestC {
 						"caseId = etUnit_openAll(\"tmp\", \"SendingDataTestC\", \"org.eclipse.etrice.generator.common.tests.SendingDataTest\", \"SendingDataTest_case\");"
 						"EXPECT_ORDER_START(caseId,resultlist,23);"
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
-						"// send the default values"
+						"/* send the default values */"
 						""
 						"PingPongPort.pingInt8(i8Val);"
 						"PingPongPort.pingInt16(i16Val);"
@@ -270,7 +270,7 @@ RoomModel SendingDataTestC {
 							action {
 								"counter=0;"
 								"if (lang == 1){"
-								"// Java cannot send references of primitive types"
+								"/* Java cannot send references of primitive types */"
 								"\tif (d==4711){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
 								"\t}else{"
@@ -278,7 +278,7 @@ RoomModel SendingDataTestC {
 								"\t}"
 								"} "
 								"if (lang == 2){"
-								"// C"
+								"/* C */"
 								"\tif (d==4712){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
 								"\t}else{"
@@ -427,7 +427,7 @@ RoomModel SendingDataTestC {
 							action {
 								"counter++;"
 								"if (lang == 1){"
-								"// Java cannot send references of primitive types"
+								"/* Java cannot send references of primitive types */"
 								"\tif (d==19){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
 								"\t}else{"
@@ -435,7 +435,7 @@ RoomModel SendingDataTestC {
 								"\t}"
 								"} "
 								"if (lang == 2){"
-								"// C"
+								"/* C */"
 								"\tif (d==20){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
 								"\t}else{"
@@ -477,7 +477,7 @@ RoomModel SendingDataTestC {
 						Transition tr0: my tp0 -> state0 {
 							action {
 								"counter=0;"
-								"// send default values"
+								"/* send default values */"
 								"PingPongPort.pingComplex(&(data));"
 								"PingPongPort.pingComplexRef(&(data));"
 							}

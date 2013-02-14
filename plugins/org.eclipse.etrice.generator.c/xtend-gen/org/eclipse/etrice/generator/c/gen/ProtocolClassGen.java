@@ -988,8 +988,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       _builder.newLine();
-      _builder.append("// getReplication");
-      _builder.newLine();
       _builder.append("etInt32 ");
       _builder.append(replPortClassName, "");
       _builder.append("_getReplication(const ");

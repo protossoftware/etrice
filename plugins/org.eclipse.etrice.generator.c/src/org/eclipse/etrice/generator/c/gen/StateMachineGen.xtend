@@ -59,11 +59,11 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	override protected genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-	
+			
 			«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
 				self->state = new_state;
 			}
-	
+			
 			«langExt.accessLevelPrivate»int getState(«ac.name»* self) {
 				return self->state;
 			}
