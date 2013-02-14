@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.lib.debug.44153035">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.lib.debug.44153035" moduleId="org.eclipse.cdt.core.settings" name="Debug">
@@ -28,7 +26,7 @@
 								<option id="gnu.both.asm.option.include.paths.1757143474" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.modellib.cpp/src-gen}&quot;"/>
-									<listOptionValue builtIn="false" value="/org.eclipse.etrice.runtime.cpp/src/platform/generic"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src/platforms/generic}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1284881452" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -87,6 +85,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.modellib.cpp/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="/org.eclipse.etrice.runtime.cpp/src/platform/generic"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src/platforms/generic}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1692202427" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

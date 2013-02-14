@@ -88,16 +88,16 @@ public class ATcpServer extends ActorClassBase {
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
-	protected PTcpControlPort ControlPort = null;
 	protected PTcpPayloadPort PayloadPort = null;
+	protected PTcpControlPort ControlPort = null;
 	
 	//--------------------- saps
 	
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_PayloadPort = 2;
+	public static final int IFITEM_ControlPort = 1;
 
 	/*--------------------- attributes ---------------------*/
 	int lastError;
@@ -122,8 +122,8 @@ public class ATcpServer extends ActorClassBase {
 		this.setPayloadPortReplocation(0);
 
 		// own ports
-		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort); 
 		PayloadPort = new PTcpPayloadPort(this, "PayloadPort", IFITEM_PayloadPort); 
+		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort); 
 		
 		// own saps
 		
@@ -133,27 +133,31 @@ public class ATcpServer extends ActorClassBase {
 
 	}
 	
-	//--------------------- attribute setters and getters
-	public void setLastError (int lastError) {
+	/* --------------------- attribute setters and getters */
+	public void setLastError (int lastError)
+	 {
 		 this.lastError = lastError;
 	}
-	public int getLastError () {
+	public int getLastError ()
+	 {
 		return this.lastError;
 	}
-	public void setPayloadPortReplocation (int payloadPortReplocation) {
+	public void setPayloadPortReplocation (int payloadPortReplocation)
+	 {
 		 this.payloadPortReplocation = payloadPortReplocation;
 	}
-	public int getPayloadPortReplocation () {
+	public int getPayloadPortReplocation ()
+	 {
 		return this.payloadPortReplocation;
 	}
 	
 	
 	//--------------------- port getters
-	public PTcpControlPort getControlPort (){
-		return this.ControlPort;
-	}
 	public PTcpPayloadPort getPayloadPort (){
 		return this.PayloadPort;
+	}
+	public PTcpControlPort getControlPort (){
+		return this.ControlPort;
 	}
 
 	//--------------------- lifecycle functions
@@ -241,9 +245,8 @@ public class ATcpServer extends ActorClassBase {
 	 * parent states while remembering the history
 	 * @param current - the current state
 	 * @param to - the final parent state
-	 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
 	 */
-	private void exitTo(int current, int to, boolean handler) {
+	private void exitTo(int current, int to) {
 		while (current!=to) {
 			switch (current) {
 				case STATE_closed:
@@ -258,6 +261,9 @@ public class ATcpServer extends ActorClassBase {
 					this.history[STATE_TOP] = STATE_error;
 					current = STATE_TOP;
 					break;
+				default:
+					/* should not occur */
+					break;
 			}
 		}
 	}
@@ -267,7 +273,7 @@ public class ATcpServer extends ActorClassBase {
 	 * matching the trigger of this chain. The ID of the final state is returned
 	 * @param chain - the chain ID
 	 * @param generic_data - the generic data pointer
-	 * @return the ID of the final state
+	 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 	 */
 	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
 		switch (chain) {
@@ -297,6 +303,9 @@ public class ATcpServer extends ActorClassBase {
 				action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(ifitem, data);
 				return STATE_opened;
 			}
+				default:
+					/* should not occur */
+					break;
 		}
 		return NO_STATE;
 	}
@@ -304,34 +313,36 @@ public class ATcpServer extends ActorClassBase {
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 	 * @param state - the state which is entered
-	 * @param handler - entry code is executed if not handler
 	 * @return - the ID of the final leaf state
 	 */
-	private int enterHistory(int state, boolean handler, boolean skip_entry) {
+	private int enterHistory(int state, boolean skip_entry) {
 		while (true) {
 			switch (state) {
 				case STATE_closed:
-					// in leaf state: return state id
+					/* in leaf state: return state id */
 					return STATE_closed;
 				case STATE_opened:
-					// in leaf state: return state id
+					/* in leaf state: return state id */
 					return STATE_opened;
 				case STATE_error:
-					// in leaf state: return state id
+					/* in leaf state: return state id */
 					return STATE_error;
 				case STATE_TOP:
 					state = this.history[STATE_TOP];
 					break;
+				default:
+					/* should not occur */
+					break;
 			}
 			skip_entry = false;
 		}
-		//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
+		/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */
 	}
 	
 	public void executeInitTransition() {
 		int chain = CHAIN_TRANS_INITIAL_TO__closed;
 		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false, false);
+		next = enterHistory(next, false);
 		setState(next);
 	}
 	
@@ -340,50 +351,58 @@ public class ATcpServer extends ActorClassBase {
 		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
 		int chain = NOT_CAUGHT;
 		int catching_state = NO_STATE;
-		boolean is_handler = false;
-		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
 			switch (getState()) {
 				case STATE_closed:
 					switch(trigger) {
-						case TRIG_ControlPort__open:
-							{
-								chain = CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
-								catching_state = STATE_TOP;
-							}
-						break;
+							case TRIG_ControlPort__open:
+								{
+									chain = CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
+									catching_state = STATE_TOP;
+								}
+							break;
+							default:
+								/* should not occur */
+								break;
 					}
 					break;
 				case STATE_opened:
 					switch(trigger) {
-						case TRIG_ControlPort__close:
-							{
-								chain = CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
-								catching_state = STATE_TOP;
-							}
-						break;
-						case TRIG_PayloadPort__send:
-							{
-								chain = CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
-								catching_state = STATE_TOP;
-							}
-						break;
+							case TRIG_ControlPort__close:
+								{
+									chain = CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
+									catching_state = STATE_TOP;
+								}
+							break;
+							case TRIG_PayloadPort__send:
+								{
+									chain = CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
+									catching_state = STATE_TOP;
+								}
+							break;
+							default:
+								/* should not occur */
+								break;
 					}
 					break;
 				case STATE_error:
 					break;
+				default:
+					/* should not occur */
+					break;
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(getState(), catching_state, is_handler);
+			exitTo(getState(), catching_state);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
-			next = enterHistory(next, is_handler, skip_entry);
+			boolean skip_entry = false;
+			if(next < 0){
+				next = -next;
+				skip_entry = true;
+			}
+			next = enterHistory(next, skip_entry);
 			setState(next);
 		}
 	}
-		 
-	//******************************************
-	// END of generated code for FSM
-	//******************************************
 };

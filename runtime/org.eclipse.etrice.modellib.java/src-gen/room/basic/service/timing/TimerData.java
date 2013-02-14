@@ -12,17 +12,21 @@ public class TimerData {
 	int time;
 	int id;
 	
-	//--------------------- attribute setters and getters
-	public void setTime (int time) {
+	/* --------------------- attribute setters and getters */
+	public void setTime (int time)
+	 {
 		 this.time = time;
 	}
-	public int getTime () {
+	public int getTime ()
+	 {
 		return this.time;
 	}
-	public void setId (int id) {
+	public void setId (int id)
+	 {
 		 this.id = id;
 	}
-	public int getId () {
+	public int getId ()
+	 {
 		return this.id;
 	}
 	

@@ -121,15 +121,14 @@ public class Log {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		//--------------------- attribute setters and getters
+		/* --------------------- attribute setters and getters */
 		/*--------------------- operations ---------------------*/
 		public void setLogLevel(int l) {
 			logLevel=l;
 			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
 		}
 		public void log(int logLevel, String userString) {
-			long s;
-			if (logLevel>this.logLevel){
+			if (logLevel>LogConjPort.logLevel){
 			d.userString=userString;
 			d.timeStamp=System.currentTimeMillis();
 			d.sender=getInstancePath();

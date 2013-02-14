@@ -128,7 +128,7 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		//--------------------- attribute setters and getters
+		/* --------------------- attribute setters and getters */
 		/*--------------------- operations ---------------------*/
 		
 		// sent messages
@@ -225,7 +225,7 @@ public class PTimer {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		//--------------------- attribute setters and getters
+		/* --------------------- attribute setters and getters */
 		/*--------------------- operations ---------------------*/
 		public void startTimer(int time_ms) {
 			

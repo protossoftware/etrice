@@ -48,7 +48,7 @@ public class SocketClient extends ActorClassBase {
 
 	}
 	
-	//--------------------- attribute setters and getters
+	/* --------------------- attribute setters and getters */
 	
 	
 	//--------------------- port getters

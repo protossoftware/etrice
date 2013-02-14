@@ -243,7 +243,7 @@
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
             class="org.eclipse.etrice.generator.ui.FSMtestExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.etrice.generator.ui.fsmtest.check.fast">
+            markerType="org.eclipse.etrice.generator.fsmtest.ui.fsmtest.check.fast">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -251,7 +251,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="org.eclipse.etrice.generator.ui.FSMtestExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.etrice.generator.ui.fsmtest.check.normal">
+            markerType="org.eclipse.etrice.generator.fsmtest.ui.fsmtest.check.normal">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -259,7 +259,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="org.eclipse.etrice.generator.ui.FSMtestExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.etrice.generator.ui.fsmtest.check.expensive">
+            markerType="org.eclipse.etrice.generator.fsmtest.ui.fsmtest.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">

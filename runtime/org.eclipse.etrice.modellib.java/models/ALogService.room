@@ -94,8 +94,7 @@ RoomModel room.basic.service.logging {
 				"if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;"
 			}
 			Operation log(logLevel: int32, userString: string) sends internalLog {
-				"long s;"
-				"if (logLevel>this.logLevel){"
+				"if (logLevel>LogConjPort.logLevel){"
 				"d.userString=userString;"
 				"d.timeStamp=System.currentTimeMillis();"
 				"d.sender=getInstancePath();"
