@@ -1321,16 +1321,20 @@ public class RoomHelpers {
 	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all end {@link Port}s of an {@link ActorClass}
-	 * 		with base class items firast
+	 * 		with base class items first
 	 */
 	public static List<Port> getAllEndPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>();
 		
 		while (ac!=null) {
 			result.addAll(0, ac.getIntPorts());
+			
+			// to preserve the order of external ports we use insertAt
+			int insertAt = 0;
 			for (ExternalPort p : ac.getExtPorts()) {
-				result.add(0, p.getIfport());
+				result.add(insertAt++, p.getIfport());
 			}
+			
 			ac = ac.getBase();
 		}
 		
