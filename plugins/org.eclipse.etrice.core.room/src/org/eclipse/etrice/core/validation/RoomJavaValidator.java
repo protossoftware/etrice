@@ -118,16 +118,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkTypeNameStartsWithCapital(RoomClass type) {
-		if (type instanceof PrimitiveType || type instanceof ExternalType)
-			return;
-		
-		if (!Character.isUpperCase(type.getName().charAt(0))) {
-			warning("Name should start with a capital", RoomPackage.eINSTANCE.getRoomClass_Name());
-		}
-	}
-
-	@Check
 	public void checkActorRefIsNotCircular(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {
 			ActorClass ac = (ActorClass) ar.eContainer();
