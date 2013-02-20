@@ -15,7 +15,12 @@ RoomModel room.basic.types {
 	PrimitiveType float32:ptReal -> float32 default "0"
 	PrimitiveType float64:ptReal -> float64 default "0"
 
+
 	// TODO: define strings for C
 	PrimitiveType charPtr:ptCharacter -> charPtr default "0"
-	PrimitiveType string:ptCharacter -> charPtr default "0"  
+	PrimitiveType string:ptCharacter -> charPtr default "0"
+	
+	// et-datatypes for the model
+	PrimitiveType etAddressId:ptInteger -> etAddressId default "0"
+	  
 }
