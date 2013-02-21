@@ -285,7 +285,7 @@ class SubSystemClassGen {
 						/* attributes of «pi.path.getPathName()» */
 						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
 							«FOR i:1.. if (pi.peers.size==0) 1 else pi.peers.size SEPARATOR ', '»
-								«IF pi.peers.size>1»{«ENDIF»«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»«IF pi.peers.size>1»}«ENDIF»
+								«IF pi.replicated»{«ENDIF»«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»«IF pi.replicated»}«ENDIF»
 							«ENDFOR»
 						};
 					«ENDIF»		

@@ -833,10 +833,8 @@ public class SubSystemClassGen {
                           }
                           _builder.append("\t");
                           {
-                            EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
-                            int _size_4 = _peers_3.size();
-                            boolean _greaterThan_1 = (_size_4 > 1);
-                            if (_greaterThan_1) {
+                            boolean _isReplicated_1 = pi.isReplicated();
+                            if (_isReplicated_1) {
                               _builder.append("{");
                             }
                           }
@@ -846,10 +844,8 @@ public class SubSystemClassGen {
                           CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(pi, _attributes_1);
                           _builder.append(_generateAttributeInit, "	");
                           {
-                            EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
-                            int _size_5 = _peers_4.size();
-                            boolean _greaterThan_2 = (_size_5 > 1);
-                            if (_greaterThan_2) {
+                            boolean _isReplicated_2 = pi.isReplicated();
+                            if (_isReplicated_2) {
                               _builder.append("}");
                             }
                           }
