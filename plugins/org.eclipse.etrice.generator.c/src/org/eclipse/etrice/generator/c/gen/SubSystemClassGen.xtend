@@ -278,14 +278,16 @@ class SubSystemClassGen {
 		/* forward declaration of variable port structs */		
 		«FOR ai: ssi.allContainedInstances»
 			«IF ai.orderedIfItemInstances.empty»
-				/*nothing to do */
+				/* no end ports/SAPs in «ai.path.getPathName()» */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
 					«IF pi.protocol.getPortClass(pi.conjugated)?.attributes?.size > 0»
+						/* attributes of «pi.path.getPathName()» */
 						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
-							«FOR Integer i:1.. if(pi.peers.size==0)1 else pi.peers.size SEPARATOR ', '»
-								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
-							«ENDFOR»};
+							«FOR i:1.. if (pi.peers.size==0) 1 else pi.peers.size SEPARATOR ', '»
+								«IF pi.peers.size>1»{«ENDIF»«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»«IF pi.peers.size>1»}«ENDIF»
+							«ENDFOR»
+						};
 					«ENDIF»		
 				«ENDFOR»
 			«ENDIF» 

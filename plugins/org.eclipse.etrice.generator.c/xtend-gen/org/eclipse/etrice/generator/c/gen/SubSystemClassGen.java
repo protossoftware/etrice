@@ -765,8 +765,12 @@ public class SubSystemClassGen {
             EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
             boolean _isEmpty = _orderedIfItemInstances.isEmpty();
             if (_isEmpty) {
-              _builder.append("/*nothing to do */");
-              _builder.newLine();
+              _builder.append("/* no end ports/SAPs in ");
+              String _path_1 = ai_1.getPath();
+              String _pathName_1 = this.roomExt.getPathName(_path_1);
+              _builder.append(_pathName_1, "");
+              _builder.append(" */");
+              _builder.newLineIfNotEmpty();
             } else {
               {
                 EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai_1.getOrderedIfItemInstances();
@@ -779,15 +783,21 @@ public class SubSystemClassGen {
                     int _size = _attributes==null?0:_attributes.size();
                     boolean _greaterThan = (_size > 0);
                     if (_greaterThan) {
+                      _builder.append("/* attributes of ");
+                      String _path_2 = pi.getPath();
+                      String _pathName_2 = this.roomExt.getPathName(_path_2);
+                      _builder.append(_pathName_2, "");
+                      _builder.append(" */");
+                      _builder.newLineIfNotEmpty();
                       _builder.append("static ");
                       ProtocolClass _protocol_1 = pi.getProtocol();
                       boolean _isConjugated_1 = this.roomExt.isConjugated(pi);
                       String _portClassName = this.roomExt.getPortClassName(_protocol_1, _isConjugated_1);
                       _builder.append(_portClassName, "");
                       _builder.append("_var ");
-                      String _path_1 = pi.getPath();
-                      String _pathName_1 = this.roomExt.getPathName(_path_1);
-                      _builder.append(_pathName_1, "");
+                      String _path_3 = pi.getPath();
+                      String _pathName_3 = this.roomExt.getPathName(_path_3);
+                      _builder.append(_pathName_3, "");
                       _builder.append("_var");
                       {
                         boolean _isReplicated = pi.isReplicated();
@@ -822,17 +832,32 @@ public class SubSystemClassGen {
                             _builder.appendImmediate(", ", "	");
                           }
                           _builder.append("\t");
+                          {
+                            EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
+                            int _size_4 = _peers_3.size();
+                            boolean _greaterThan_1 = (_size_4 > 1);
+                            if (_greaterThan_1) {
+                              _builder.append("{");
+                            }
+                          }
                           InterfaceItem _interfaceItem = pi.getInterfaceItem();
                           PortClass _portClass_1 = RoomHelpers.getPortClass(_interfaceItem);
                           EList<Attribute> _attributes_1 = _portClass_1.getAttributes();
                           CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(pi, _attributes_1);
                           _builder.append(_generateAttributeInit, "	");
+                          {
+                            EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
+                            int _size_5 = _peers_4.size();
+                            boolean _greaterThan_2 = (_size_5 > 1);
+                            if (_greaterThan_2) {
+                              _builder.append("}");
+                            }
+                          }
                           _builder.newLineIfNotEmpty();
-                          _builder.append("\t\t\t\t\t\t\t");
                         }
                       }
                       _builder.append("};");
-                      _builder.newLineIfNotEmpty();
+                      _builder.newLine();
                     }
                   }
                 }
@@ -847,9 +872,9 @@ public class SubSystemClassGen {
         for(final ActorInstance ai_2 : _allContainedInstances_2) {
           _builder.newLine();
           _builder.append("/* instance ");
-          String _path_2 = ai_2.getPath();
-          String _pathName_2 = this.roomExt.getPathName(_path_2);
-          _builder.append(_pathName_2, "");
+          String _path_4 = ai_2.getPath();
+          String _pathName_4 = this.roomExt.getPathName(_path_4);
+          _builder.append(_pathName_4, "");
           _builder.append(" */");
           _builder.newLineIfNotEmpty();
           {
