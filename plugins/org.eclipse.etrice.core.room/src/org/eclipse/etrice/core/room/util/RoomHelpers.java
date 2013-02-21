@@ -1266,11 +1266,13 @@ public class RoomHelpers {
 	 */
 	public static List<Port> getEndPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>(ac.getIntPorts());
-		
+
+		// to preserve the order of external ports we use insertAt
+		int insertAt = 0;
 		for (ExternalPort p : ac.getExtPorts()) {
-			result.add(0, p.getIfport());
+			result.add(insertAt++, p.getIfport());
 		}
-		
+
 		return result;
 	}
 	
