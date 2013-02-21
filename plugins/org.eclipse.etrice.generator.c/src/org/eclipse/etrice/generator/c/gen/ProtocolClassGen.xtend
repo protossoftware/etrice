@@ -167,7 +167,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«IF (pc.getPortClass(conj) != null)»	
 			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
-			«pc.getPortClass(conj).operations.operationsDeclaration(replPortClassName)»
 		«ENDIF»
 		
 		«IF pc.handlesReceive(conj)»
@@ -288,7 +287,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			
 			«IF (pc.getPortClass(conj) != null)»
 				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
-				«pc.getPortClass(conj).operations.operationsImplementation(replPortClassName)»
 			«ENDIF»
 
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {

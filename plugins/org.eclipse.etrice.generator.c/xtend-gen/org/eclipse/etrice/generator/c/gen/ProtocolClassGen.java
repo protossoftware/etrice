@@ -427,11 +427,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, portClassName);
           _builder.append(_operationsDeclaration, "");
           _builder.newLineIfNotEmpty();
-          PortClass _portClass_6 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-          EList<PortOperation> _operations_1 = _portClass_6.getOperations();
-          CharSequence _operationsDeclaration_1 = this._procedureHelpers.operationsDeclaration(_operations_1, replPortClassName);
-          _builder.append(_operationsDeclaration_1, "");
-          _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
@@ -976,11 +971,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           EList<PortOperation> _operations = _portClass_1.getOperations();
           CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, portClassName);
           _builder.append(_operationsImplementation, "");
-          _builder.newLineIfNotEmpty();
-          PortClass _portClass_2 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-          EList<PortOperation> _operations_1 = _portClass_2.getOperations();
-          CharSequence _operationsImplementation_1 = this._procedureHelpers.operationsImplementation(_operations_1, replPortClassName);
-          _builder.append(_operationsImplementation_1, "");
           _builder.newLineIfNotEmpty();
         }
       }
