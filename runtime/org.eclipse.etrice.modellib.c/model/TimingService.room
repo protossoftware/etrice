@@ -24,12 +24,14 @@ RoomModel room.basic.service.timing {
 				"//uc2"
 			}
 			usercode3{
-				"//etTimerControlBlock tcbs[ET_NB_OF_TCBS];"
+				"etTimerControlBlock tcbs[ET_NB_OF_TCBS];"
+				"etTimerControlBlock* usedTcbsRoot; "
+				"etTimerControlBlock* freeTcbsRoot;"
 			}
 		ServiceImplementation of timer
-		Attribute tcbs[10]:tcb
-		Attribute usedTcbsRoot : tcb ref
-		Attribute freeTcbsRoot : tcb ref
+//		Attribute tcbs[10]:tcb
+//		Attribute usedTcbsRoot : tcb ref
+//		Attribute freeTcbsRoot : tcb ref
 		}
 		Behavior {
 			Operation getTcb():tcb ref{"
@@ -126,7 +128,7 @@ RoomModel room.basic.service.timing {
 			etTimerControlBlock* temp=usedTcbsRoot;
 				printf(\"list: \");
 				while (temp!=0){
-					printf(\"(%d,%d),\",temp->expTime.sec,temp->expTime.nSec);
+					printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);
 					temp=temp->next;
 				}
 				printf(\"\\n\");
@@ -241,25 +243,25 @@ RoomModel room.basic.service.timing {
 		conjugate PortClass
 		{
 			handle incoming startTimer{
-			"if (((PTimerConjPort_var*)(self->varData))->status==0){
-				((PTimerConjPort_var*)(self->varData))->status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
+			"if (status==0){
+				status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
 				etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data);
 				}
 			"	
 			}
 			handle incoming startTimeout{
-			"if (((PTimerConjPort_var*)(self->varData))->status==0){
-				((PTimerConjPort_var*)(self->varData))->status = ET_TIMER_RUNNING;
+			"if (status==0){
+				status = ET_TIMER_RUNNING;
 				etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data);
 				}
 			"	
 			}
 			handle outgoing timeout{
 			"//TODO: clear active bit in case of single shot timer
-			if (((PTimerConjPort_var*)(self->varData))->status!=0){
-				if (((PTimerConjPort_var*)(self->varData))->status==ET_TIMER_RUNNING){
+			if (status!=0){
+				if (status==ET_TIMER_RUNNING){
 					// single shot timer
-					((PTimerConjPort_var*)(self->varData))->status=0;
+					status=0;
 					}
 				// msg to fsm
 				(*receiveMessageFunc)(actor, self, msg);
@@ -268,8 +270,8 @@ RoomModel room.basic.service.timing {
 			}
 			handle incoming kill {	
 			"
-			if (((PTimerConjPort_var*)(self->varData))->status!=0){
-				((PTimerConjPort_var*)(self->varData))->status=0;
+			if (status!=0){
+				status=0;
 				etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
 				}
 			"

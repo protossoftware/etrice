@@ -35,7 +35,6 @@ void PTimerReplPort_timeout(const PTimerReplPort* self, int idx) {
 }
 
 
-// getReplication
 etInt32 PTimerReplPort_getReplication(const PTimerReplPort* self) {
 	return ((etReplPort*)self)->size;
 }
@@ -43,8 +42,8 @@ etInt32 PTimerReplPort_getReplication(const PTimerReplPort* self) {
 
 
 void PTimerConjPort_startTimer(const PTimerConjPort* self, uint32 data) {
-		if (((PTimerConjPort_var*)(self->varData))->status==0){
-					((PTimerConjPort_var*)(self->varData))->status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
+	if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */==0){
+					((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
 					etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data);
 					}
 }
@@ -61,8 +60,8 @@ void PTimerConjReplPort_startTimer(const PTimerConjReplPort* self, int idx, uint
 }
 
 void PTimerConjPort_startTimeout(const PTimerConjPort* self, uint32 data) {
-		if (((PTimerConjPort_var*)(self->varData))->status==0){
-					((PTimerConjPort_var*)(self->varData))->status = ET_TIMER_RUNNING;
+	if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */==0){
+					((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */ = ET_TIMER_RUNNING;
 					etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data);
 					}
 }
@@ -79,9 +78,9 @@ void PTimerConjReplPort_startTimeout(const PTimerConjReplPort* self, int idx, ui
 }
 
 void PTimerConjPort_kill(const PTimerConjPort* self) {
-		
-				if (((PTimerConjPort_var*)(self->varData))->status!=0){
-					((PTimerConjPort_var*)(self->varData))->status=0;
+	
+				if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */!=0){
+					((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */=0;
 					etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
 					}
 }
@@ -100,25 +99,21 @@ void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx) {
 /*--------------------- operations ---------------------*/
 /*--------------------- operations ---------------------*/
 
-// getReplication
 etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 	return ((etReplPort*)self)->size;
 }
 
 /* receiver handlers */
 void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-	/*--------------------- begin user code ---------------------*/
 	//TODO: clear active bit in case of single shot timer
-				if (((PTimerConjPort_var*)(self->varData))->status!=0){
-					if (((PTimerConjPort_var*)(self->varData))->status==ET_TIMER_RUNNING){
+				if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */!=0){
+					if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */==ET_TIMER_RUNNING){
 						// single shot timer
-						((PTimerConjPort_var*)(self->varData))->status=0;
+						((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */=0;
 						}
 					// msg to fsm
 					(*receiveMessageFunc)(actor, self, msg);
 					}
-				
-	/*--------------------- end user code ---------------------*/
 	/* hand over the message to the actor:      */
 	/* (*receiveMessageFunc)(actor, self, msg); */
 }

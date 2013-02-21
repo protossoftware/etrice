@@ -54,9 +54,6 @@ struct ATimingService {
 	/* data send ports */
 
 	/*--------------------- attributes ---------------------*/
-	etTimerControlBlock tcbs[10];
-	etTimerControlBlock* usedTcbsRoot;
-	etTimerControlBlock* freeTcbsRoot;
 	
 	
 		/* state machine variables */
