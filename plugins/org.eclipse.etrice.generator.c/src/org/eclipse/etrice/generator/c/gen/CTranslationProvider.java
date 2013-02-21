@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.c.gen;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -36,9 +37,16 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 
 	@Inject private RoomExtensions roomExt;
 	@Inject ILanguageExtension langExt;
+	private String self = "self->";
 	
 	@Override
-	public void setActorClass(ActorClass ac) {
+	public void setContainerClass(EObject container) {
+		if (container instanceof PortClass) {
+			PortClass pc = (PortClass) container;
+			ProtocolClass prot = (ProtocolClass) container.eContainer();
+			String portClassName = roomExt.getPortClassName(prot, prot.getConjugate()==pc);
+			self = "(("+portClassName+"_var*)(self->varData))->";
+		}
 	}
 
 	@Override
@@ -49,17 +57,17 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	@Override
 	public String getAttributeGetter(Attribute att, String index, String orig) {
 		if (index==null)
-			return "self->"+att.getName() + getOrigComment(orig);
+			return self+att.getName() + getOrigComment(orig);
 		else
-			return "self->"+att.getName()+"["+index+"]"+getOrigComment(orig);
+			return self+att.getName()+"["+index+"]"+getOrigComment(orig);
 	}
 
 	@Override
 	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
 		if (index==null)
-			return "self->"+att.getName()+" = "+value + getOrigComment(orig);
+			return self+att.getName()+" = "+value + getOrigComment(orig);
 		else
-			return "self->"+att.getName()+"["+index+"] = "+value + getOrigComment(orig);
+			return self+att.getName()+"["+index+"] = "+value + getOrigComment(orig);
 	}
 
 	@Override

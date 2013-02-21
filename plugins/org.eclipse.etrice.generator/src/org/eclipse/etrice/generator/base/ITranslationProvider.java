@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -52,10 +52,18 @@ public interface ITranslationProvider {
 	public static final String TAG_END = "|>";
 
 	/**
-	 * the actor class for which translations have to be provided
-	 * @param ac
+	 * the container class for which translations have to be provided.
+	 * This can be either of
+	 * <ul>
+	 *   <li>{@link ActorClass}</li>
+	 *   <li>{@link DataClass}</li>
+	 *   <li>{@link ProtocolClass}</li>
+	 *   <li>{@link PortClass}</li>
+	 * </ul>
+	 * 
+	 * @param container
 	 */
-	void setActorClass(ActorClass ac);
+	void setContainerClass(EObject container);
 	
 	/**
 	 * @return true if translation should be applied to members (attributes, operations and port.msg

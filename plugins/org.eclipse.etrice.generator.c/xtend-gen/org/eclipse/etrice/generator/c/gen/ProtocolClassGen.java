@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -816,15 +817,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             boolean _notEquals = (!Objects.equal(hdlr, null));
             if (_notEquals) {
               _builder.append("\t");
-              {
-                DetailCode _detailCode = hdlr.getDetailCode();
-                EList<String> _commands = _detailCode.getCommands();
-                for(final String command : _commands) {
-                  _builder.append("\t");
-                  _builder.append(command, "	");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              AbstractGenerator _instance = AbstractGenerator.getInstance();
+              DetailCode _detailCode = hdlr.getDetailCode();
+              String _translatedCode = _instance.getTranslatedCode(_detailCode);
+              _builder.append(_translatedCode, "	");
+              _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t");
               _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
@@ -1093,9 +1090,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
+          AbstractGenerator _instance = AbstractGenerator.getInstance();
           DetailCode _detailCode = h.getDetailCode();
-          CharSequence _userCode = this._procedureHelpers.userCode(_detailCode);
-          _builder.append(_userCode, "	");
+          String _translatedCode = _instance.getTranslatedCode(_detailCode);
+          _builder.append(_translatedCode, "	");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("/* hand over the message to the actor:      */");

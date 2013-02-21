@@ -14,9 +14,9 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -123,7 +123,7 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	}
 
 	@Override
-	public void setActorClass(ActorClass ac) {
+	public void setContainerClass(EObject container) {
 	}
 	
 }

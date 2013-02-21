@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.base.AbstractGenerator
 
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -248,8 +249,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				
 				«messageSignature(portClassName, message.name, "", data)» {
 					«IF hdlr != null»
-						«FOR command : hdlr.detailCode.commands»	«command»
-						«ENDFOR»									
+						«AbstractGenerator::getInstance().getTranslatedCode(hdlr.detailCode)»
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
@@ -340,7 +340,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	/* receiver handlers */
 	«FOR h:getReceiveHandlers(pc,conj)»
 		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-			«userCode(h.detailCode)»
+			«AbstractGenerator::getInstance().getTranslatedCode(h.detailCode)»
 			/* hand over the message to the actor:      */
 			/* (*receiveMessageFunc)(actor, self, msg); */
 		}

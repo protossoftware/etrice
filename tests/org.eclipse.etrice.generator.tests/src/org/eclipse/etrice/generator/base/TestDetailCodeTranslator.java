@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
@@ -115,7 +116,7 @@ public class TestDetailCodeTranslator {
 		}
 
 		@Override
-		public void setActorClass(ActorClass ac) {
+		public void setContainerClass(EObject container) {
 		}
 	}
 
