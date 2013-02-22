@@ -470,7 +470,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			if (chain==null)
 				if (!getActorClass().isAbstract()) {
 					int idx = sg.getTransitions().indexOf(t);
-					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+					Transition orig = (Transition) copy2orig.get(t);
+					String name = RoomNameProvider.getName(orig);
+					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 				}
 		}
 		
@@ -818,8 +820,12 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 
 	private void findTransitionChains(StateGraph sg, Class<?> cls) {
+		findTransitionChains(sg, cls, true);
+	}
+	
+	private void findTransitionChains(StateGraph sg, Class<?> cls, boolean includeInitial) {
 		for (Transition t : sg.getTransitions()) {
-			if (cls.isInstance(t) || t instanceof InitialTransition) {
+			if (cls.isInstance(t) || (includeInitial && (t instanceof InitialTransition))) {
 				addTransitionChain(t);
 			}
 		}
@@ -827,7 +833,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// recurse into sub graphs of states
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				findTransitionChains(s.getSubgraph(), cls);
+				findTransitionChains(s.getSubgraph(), cls, includeInitial);
 		}
 	}
 
@@ -863,6 +869,14 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			findTransitionChains(getStateMachine(), GuardedTransition.class);
+		}
+		else if (getActorClass().getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+			findLeafStateTriggers(getStateMachine());
+			fillTriggerStringMap();
+			findTransitionChains(getStateMachine(), TriggeredTransition.class);
+			computeCommonChainData();
+			findTransitionChains(getStateMachine(), GuardedTransition.class, false);
+			checkTransitionChains(getStateMachine());
 		}
 		else {
 			// event driven state machine
