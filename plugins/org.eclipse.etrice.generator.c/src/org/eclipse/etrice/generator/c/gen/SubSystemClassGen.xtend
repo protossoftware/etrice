@@ -32,6 +32,9 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.Port
+import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.SPPRef
 
 @Singleton
 class SubSystemClassGen {
@@ -275,7 +278,7 @@ class SubSystemClassGen {
 			static «ai.actorClass.name» «ai.path.getPathName()»;
 		«ENDFOR»
 		
-		/* forward declaration of variable port structs */		
+		/* initialization of variable port structs */		
 		«FOR ai: ssi.allContainedInstances»
 			«IF ai.orderedIfItemInstances.empty»
 				/* no end ports/SAPs in «ai.path.getPathName()» */
@@ -307,73 +310,97 @@ class SubSystemClassGen {
 	}
 	
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
-		var instName = ai.path.pathName
+		val instName = ai.path.pathName
 		
-		// list of replicated ports
-		var replPorts = new ArrayList<InterfaceItemInstance>()
-		replPorts.addAll(ai.orderedIfItemInstances.filter(e|e.replicated))
-		var haveReplSubPorts = replPorts.findFirst(e|!e.peers.empty)!=null
+		// list of replicated interface items (all are event driven ports)
+		val replEventItems = new ArrayList<InterfaceItemInstance>()
+		replEventItems.addAll(ai.orderedIfItemInstances.filter(e|e.replicated))
+		val haveReplSubItems = replEventItems.findFirst(e|!e.peers.empty)!=null
+		val replEventPorts = replEventItems.filter(i|i.interfaceItem instanceof Port)
+		val replEventSPPs = replEventItems.filter(i|i.interfaceItem instanceof SPPRef)
 		
-		var simplePorts = ai.orderedIfItemInstances.filter(e|e.simple)
+		val simplePorts = ai.orderedIfItemInstances.filter(e|e.simple)
 		
-		// list of event ports, simple first, then replicated
-		var eventPorts = new ArrayList<InterfaceItemInstance>()
-		eventPorts.addAll(simplePorts.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN).union(replPorts))
-
-		var dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
-		var recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
-		var sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
+		// list of simple event interface items
+		val simpleEventItems = new ArrayList<InterfaceItemInstance>()
+		simpleEventItems.addAll(simplePorts.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN))
+		
+		// lists of event driven ports and saps
+		val simpleEventPorts = simpleEventItems.filter(i|i.interfaceItem instanceof Port)
+		val simpleEventSAPs = simpleEventItems.filter(i|i.interfaceItem instanceof SAPRef)
+		
+		val dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
+		val recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)
+		val sendPorts = dataPorts.filter(p|p instanceof PortInstance && (p as PortInstance).port.conjugated)
 		
 		// compute replicated port offsets		
-		var offsets = new HashMap<InterfaceItemInstance, Integer>()
+		val offsets = new HashMap<InterfaceItemInstance, Integer>()
 		var offset = 0
-		for (p: replPorts) {
+		for (p: replEventItems) {
 			offsets.put(p, offset)
 			offset = offset + p.peers.size
 		}
 		
-		var replSubPortsArray = if (haveReplSubPorts) instName+"_repl_sub_ports" else "NULL"
-		
+		var replSubPortsArray = if (haveReplSubItems) instName+"_repl_sub_ports" else "NULL"
+		val haveConstData = !simpleEventItems.empty || !recvPorts.empty || !replEventItems.empty
+		var needSep = false;
 	'''
-		«IF haveReplSubPorts»
+		«IF haveReplSubItems»
 			static const etReplSubPort «replSubPortsArray»[«offset»] = {
 				/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-				«FOR pi : replPorts.filter(e|!e.peers.empty) SEPARATOR ","»
+				«FOR pi : replEventItems.filter(e|!e.peers.empty) SEPARATOR ","»
 					«genReplSubPortInitializers(root, ai, pi)»
 				«ENDFOR»
 			};
 		«ENDIF»
-		«IF !(eventPorts.empty && recvPorts.empty)»
+		«IF haveConstData»
 			static const «ai.actorClass.name»_const «instName»_const = {
 				/* Ports: {varData, msgService, peerAddress, localId} */
-				«FOR pi : eventPorts SEPARATOR ","»
-					«IF pi.simple»
-						«genPortInitializer(root, ai, pi)»
-					«ELSE»
-						{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
-					«ENDIF»
+				/* simple ports */
+				«FOR pi : simpleEventPorts SEPARATOR ","»
+					«genPortInitializer(root, ai, pi)»
 				«ENDFOR»
-				«IF !eventPorts.empty && !recvPorts.empty»,«ENDIF»
 				
 				/* data receive ports */
+				«IF (needSep || (needSep=!simpleEventPorts.empty)) && !recvPorts.empty»,«ENDIF»
 				«FOR pi : recvPorts SEPARATOR ","»
 					«genRecvPortInitializer(root, ai, pi)»
 				«ENDFOR»
-			};
-			static «ai.actorClass.name» «instName» = {
-				&«instName»_const,
 				
-				/* data send ports */
-				«FOR pi : sendPorts»
-					«pi.genSendPortInitializer»,
+				/* saps */
+				«IF (needSep || (needSep=!recvPorts.empty)) && !simpleEventSAPs.empty»,«ENDIF»
+				«FOR pi : simpleEventSAPs SEPARATOR ","»
+					«genPortInitializer(root, ai, pi)»
 				«ENDFOR»
 				
-				/* attributes */
-				«attrInitGenAddon.generateAttributeInit(ai, ai.actorClass.allAttributes)»
+				/* replicated ports */
+				«IF (needSep || (needSep=!simpleEventSAPs.empty)) && !replEventPorts.empty»,«ENDIF»
+				«FOR pi : replEventPorts SEPARATOR ","»
+					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
+				«ENDFOR»
 				
-				/* state and history are initialized in init fuction */
+				/* services */
+				«IF (needSep || (needSep=!replEventPorts.empty)) && !replEventSPPs.empty»,«ENDIF»
+				«FOR pi : replEventSPPs SEPARATOR ","»
+					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
+				«ENDFOR»
 			};
 		«ENDIF»
+		static «ai.actorClass.name» «instName» = {
+			«IF haveConstData»
+				&«instName»_const,
+				
+			«ENDIF»			
+			/* data send ports */
+			«FOR pi : sendPorts»
+				«pi.genSendPortInitializer»,
+			«ENDFOR»
+			
+			/* attributes */
+			«attrInitGenAddon.generateAttributeInit(ai, ai.actorClass.allAttributes)»
+			
+			/* state and history are initialized in init fuction */
+		};
 	'''}
 		
 	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
@@ -395,7 +422,7 @@ class SubSystemClassGen {
 				«FOR m : pc.incomingMessages SEPARATOR ","»
 					«m.data.refType.type.defaultValue»
 				«ENDFOR»
-			}
+			} /* send port «pi.name» */
 		'''
 	}
 	
