@@ -325,6 +325,11 @@ public class ValidationUtil {
 						return Result.error("protocols don't match");
 					}
 					else {
+						// under some circumstances the protocols are instances of GeneralProtocolClass
+						// (why?)
+						if (!(pc1 instanceof ProtocolClass && pc2 instanceof ProtocolClass))
+							return Result.error("protocols don't match");
+						
 						if (RoomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
 							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
 								pc1extendsIncoming = true;
