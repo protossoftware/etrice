@@ -209,7 +209,19 @@ RoomModel CashTerminal {
 			Message hello()
 		}
 		semantics {
-			in:hello->(out:hello->in:checkCard->(out:validCard->in:checkPIN->(out:correctPIN, out:wrongPIN->in:checkPIN->(out:correctPIN, out:wrongPIN)), out:invalidCard), out:serviceNA)
+			in:hello->(
+				out:hello->in:checkCard->(
+					out:validCard->in:checkPIN->(
+						out:correctPIN,
+						out:wrongPIN->in:checkPIN->(
+							out:correctPIN,
+							out:wrongPIN
+						)
+					),
+					out:invalidCard
+				),
+				out:serviceNA
+			)
 		}
 	}
 
