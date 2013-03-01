@@ -62,7 +62,6 @@ void PTimerConjReplPort_kill_broadcast(const PTimerConjReplPort* self);
 void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx);
 
 /*--------------------- operations ---------------------*/
-/*--------------------- operations ---------------------*/
 
 void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
 etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self);

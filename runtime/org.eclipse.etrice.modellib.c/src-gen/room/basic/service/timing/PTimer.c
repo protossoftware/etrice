@@ -97,7 +97,6 @@ void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx) {
 }
 
 /*--------------------- operations ---------------------*/
-/*--------------------- operations ---------------------*/
 
 etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 	return ((etReplPort*)self)->size;

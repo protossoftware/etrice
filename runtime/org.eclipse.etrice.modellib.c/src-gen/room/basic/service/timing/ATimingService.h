@@ -16,7 +16,7 @@
 /*--------------------- begin user code ---------------------*/
 
 			#include "platform/etTimer.h" 
-			#define ET_NB_OF_TCBS 10
+			#define ET_NB_OF_TCBS 30
 			typedef struct etTCB etTimerControlBlock; 
 			struct etTCB {
 				etTargetTime_t expTime;
