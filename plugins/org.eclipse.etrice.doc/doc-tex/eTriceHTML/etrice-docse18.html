@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Implement the Behavior</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,3,next --> 
+<meta name="src" content="etrice-doc.tex"> 
+<meta name="date" content="2013-02-26 19:42:00"> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css"> 
+</head><body 
+>
+<!--l. 152--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse19.html" >next</a>] [<a 
+href="etrice-docse17.html" >prev</a>] [<a 
+href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse18.html">tail</a>] [<a 
+href="etrice-docch6.html#etrice-docse18.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">6.7   </span> <a 
+ id="x26-400006.7"></a>Implement the Behavior</h3>
+<!--l. 154--><p class="noindent" >The application should switch on and off the LED for 5 seconds in a 1 second
+interval, then stop blinking for 5 seconds and start again. To implement this behavior
+we will implement two FSMs. One for the 1 second interval and one for the 5 second
+interval. The 1 second blinking should be implemented in <span 
+class="ecti-1000">Blinky</span>. The 5 second
+interval should be implemented in <span 
+class="ecti-1000">BlinkyController</span>. First implement the
+Controller.
+<!--l. 156--><p class="noindent" >Right click to <span 
+class="ecti-1000">BlinkyController </span>and select <span 
+class="ecti-1000">Edit Behavior</span>. Drag and Drop the <span 
+class="ecti-1000">Initial</span>
+<span 
+class="ecti-1000">Point </span>and two <span 
+class="ecti-1000">States </span>into the top state. Name the states <span 
+class="ecti-1000">on </span>and <span 
+class="ecti-1000">off</span>. Use the
+<span 
+class="ecti-1000">Transition </span>tool to draw transitions from <span 
+class="ecti-1000">init </span>to <span 
+class="ecti-1000">on </span>from <span 
+class="ecti-1000">on </span>to <span 
+class="ecti-1000">off </span>and from <span 
+class="ecti-1000">off </span>to
+<span 
+class="ecti-1000">on</span>.
+<!--l. 160--><p class="noindent" >Open the transition dialog by double click the arrow to specify the trigger event and
+the action code of each transition. Note that the initial transition does not have a
+trigger event.
+<!--l. 162--><p class="noindent" >The transition dialog should look like this:
+<!--l. 164--><p class="noindent" ><img 
+src="images/020-Blinky09.png" alt="PIC"  
+>
+<!--l. 167--><p class="noindent" >The defined ports will be generated as a member attribute of the actor class
+from type of the attached protocol. So, to send e message you must state
+<span 
+class="ecti-1000">port.message(param);</span>. In this example <span 
+class="ecti-1000">ControlPort.start() </span>sends the <span 
+class="ecti-1000">start </span>message
+via the <span 
+class="ecti-1000">ControlPort </span>to the outside world. Assuming that <span 
+class="ecti-1000">Blinky </span>is connected to this
+port, the message will start the one second blinking FSM. It is the same
+thing with the <span 
+class="ecti-1000">timer</span>. The SAP is also a port and follows the same rules.
+So it is clear that <span 
+class="ecti-1000">timer.Start(5000); </span>will send the <span 
+class="ecti-1000">Start </span>message to the
+timing service. The timing service will send a <span 
+class="ecti-1000">timeoutTick </span>message back after
+5000ms.
+<!--l. 169--><p class="noindent" >Within each transition the timer will be restarted and the appropriate message will
+be sent via the <span 
+class="ecti-1000">ControlPort</span>.
+<!--l. 171--><p class="noindent" >The resulting state machine should look like this: (Note that the arrows peak changes
+if the transition contains action code.)
+<!--l. 174--><p class="noindent" ><img 
+src="images/020-Blinky10.png" alt="PIC"  
+>
+<!--l. 177--><p class="noindent" >Save the diagram and inspect the <span 
+class="ecti-1000">Blinky.room </span>file. The <span 
+class="ecti-1000">BlinkyController </span>should look
+like this:
+<!--l. 179--><p class="noindent" ><img 
+src="images/020-Blinky11.png" alt="PIC"  
+>
+<!--l. 182--><p class="noindent" >Now we will implement <span 
+class="ecti-1000">Blinky</span>. Due to the fact that <span 
+class="ecti-1000">Blinky </span>interacts with the GUI
+class a view things must to be done in the model file.
+<!--l. 184--><p class="noindent" >Double click <span 
+class="ecti-1000">Blinky </span>in the outline view to navigate to <span 
+class="ecti-1000">Blinky </span>within the model
+file. Add the following code: (type it or simply copy it from the tutorial
+                                                                  
+
+                                                                  
+project)
+<!--l. 188--><p class="noindent" ><img 
+src="images/020-Blinky12.png" alt="PIC"  
+>
+<!--l. 191--><p class="noindent" ><span 
+class="ecti-1000">usercode1 </span>will be generated at the beginning of the file, outside the class definition.
+<span 
+class="ecti-1000">usercode2 </span>will be generated within the class definition. The code imports the GUI
+class and instantiates the window class. Attributes for the carLights and pedLights
+will be declared to easily access the lights in the state machine. The Operation
+<span 
+class="ecti-1000">destroyUser() </span>is a predefined operation that will be called during shutdown of the
+application. Within this operation, cleanup of manual coded classes can be
+done.
+<!--l. 194--><p class="noindent" >Now design the FSM of <span 
+class="ecti-1000">Blinky</span>. Remember, as the name suggested <span 
+class="ecti-1000">blinking </span>is a state
+in which the LED must be switched on and off. We will realize that by an
+hierarchical FSM in which the <span 
+class="ecti-1000">blinking </span>state has two sub states.
+<!--l. 196--><p class="noindent" >Open the behavior diagram of <span 
+class="ecti-1000">Blinky </span>by right clicking the <span 
+class="ecti-1000">Blinky </span>actor in the outline
+view. Create two states named <span 
+class="ecti-1000">blinking </span>and <span 
+class="ecti-1000">off</span>. Right click to <span 
+class="ecti-1000">blinking </span>and create a
+subgraph.
+<!--l. 198--><p class="noindent" ><img 
+src="images/020-Blinky13.png" alt="PIC"  
+>
+<!--l. 201--><p class="noindent" >Create the following state machine. The trigger events between <span 
+class="ecti-1000">on </span>and <span 
+class="ecti-1000">off </span>are the
+<span 
+class="ecti-1000">timeoutTick </span>from the <span 
+class="ecti-1000">timer </span>port.
+<!--l. 203--><p class="noindent" ><img 
+src="images/020-Blinky14.png" alt="PIC"  
+>
+<!--l. 206--><p class="noindent" >Create entry code for both states by right clicking the state and select <span 
+class="ecti-1000">Edit</span>
+<span 
+class="ecti-1000">State...</span>
+<!--l. 208--><p class="noindent" >Entry code of <span 
+class="ecti-1000">on </span>is:
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-6">
+timer.Start(1000);
+&#x00A0;<br />carLights.setState(TrafficLight3.YELLOW);
+</div>
+<!--l. 213--><p class="nopar" >
+<!--l. 216--><p class="noindent" >Entry code of <span 
+class="ecti-1000">off  </span>is:
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-7">
+timer.Start(1000);
+&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
+</div>
+<!--l. 221--><p class="nopar" >
+<!--l. 223--><p class="noindent" >Navigate to the Top level state by double clicking the <span 
+class="ecti-1000">/blinking </span>state. Create the
+following state machine:
+<!--l. 225--><p class="noindent" ><img 
+src="images/020-Blinky15.png" alt="PIC"  
+>
+<!--l. 228--><p class="noindent" >The trigger event from <span 
+class="ecti-1000">off </span>to <span 
+class="ecti-1000">blinking </span>is the <span 
+class="ecti-1000">start </span>event from the <span 
+class="ecti-1000">ControlPort</span>.The
+trigger event from <span 
+class="ecti-1000">blinking </span>to <span 
+class="ecti-1000">off </span>is the <span 
+class="ecti-1000">stop </span>event from the <span 
+class="ecti-1000">ControlPort</span>. Note: The
+transition from <span 
+class="ecti-1000">blinking </span>to <span 
+class="ecti-1000">off  </span>is a so called group transition. This is a outgoing
+transition from a super state (state with sub states) without specifying the concrete
+leave state (state without sub states). An incoming transition to a super state is
+called history transition.
+<!--l. 231--><p class="noindent" >Action code of the init transition is:
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-8">
+carLights&#x00A0;=&#x00A0;light.getCarLights();
+&#x00A0;<br />pedLights&#x00A0;=&#x00A0;light.getPedLights();
+&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
+&#x00A0;<br />pedLights.setState(TrafficLight2.OFF);
+</div>
+<!--l. 238--><p class="nopar" >
+<!--l. 240--><p class="noindent" >Action code from <span 
+class="ecti-1000">blinking </span>to <span 
+class="ecti-1000">off  </span>is:
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-9">
+timer.Kill();
+&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
+</div>
+<!--l. 245--><p class="nopar" >
+<!--l. 247--><p class="noindent" >The model is complete now. You can run and debug the model as described in
+getting started. Have fun.
+<!--l. 249--><p class="noindent" >The complete model can be found in /org.eclipse.etrice.tutorials/model/Blinky.
+                                                                  
+
+                                                                  
+<!--l. 251--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse19.html" >next</a>] [<a 
+href="etrice-docse17.html" >prev</a>] [<a 
+href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
+href="etrice-docse18.html" >front</a>] [<a 
+href="etrice-docch6.html#etrice-docse18.html" >up</a>] </p></div>
+<!--l. 251--><p class="noindent" ><a 
+ id="tailetrice-docse18.html"></a>  
+</body></html> 

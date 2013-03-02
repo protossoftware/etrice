@@ -18,7 +18,7 @@ Make sure that you have set up the workspace as described in \textit{Setting up 
 
 The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select \textbf{File->New->Project} and create a new eTrice project and name it \textbf{HelloWorld}.
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld10}
+\includegraphics[width=\linewidth]{images/015-HelloWorld10.png}
 % !images/015-HelloWorld10.png!
 
 The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like this:
@@ -28,7 +28,7 @@ The wizard creates everything that is needed to create, build and run an eTrice 
 
 Within the model directory the model file \textit{HelloWorld.room} was created. Open the \textit{HelloWorld.room} file and delete the contents of the file. Open the content assist with Ctrl+Space and select \textit{model skeleton}.
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld12}
+\includegraphics[width=\linewidth]{images/015-HelloWorld12.png}
 % !images/015-HelloWorld12.png!   
 
 Edit the template variables by typing the new names and jumping with Tab from name to name.
@@ -76,17 +76,17 @@ We will implement the Hello World code on the initial transition of the \textit{
 The state machine editor will be opened. Drag and drop an \textit{Initial Point} from the tool box to the diagram into the top level state. Drag and drop a \textit{State} from the tool box to the diagram. Confirm the dialogue with \textit{ok}. Select the \textit{Transition} in the tool box and draw the transition from the \textit{Initial Point} to the State. Open the transition dialogue by double clicking the transition arrow and fill in the action code.
 
 \begin{verbatim}
-bc. System.out.println("Hello World !");
+	System.out.println("Hello World !");
 \end{verbatim}
  
 The result should look like this:
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld04}
+\includegraphics[width=\linewidth]{images/015-HelloWorld04.png}
 % !images/015-HelloWorld04.png!
 
 Save the diagram and inspect the model file. Note that the textual representation was created after saving the diagram.
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld05}
+\includegraphics[width=\linewidth]{images/015-HelloWorld05.png}
 % !images/015-HelloWorld05.png!
 
 
@@ -94,25 +94,25 @@ Save the diagram and inspect the model file. Note that the textual representatio
 
 Now the model is finished and source code can be generated. The project wizard has created a launch configuration that is responsible for generating the source code. From \textit{HelloWorld/} right click \textbf{gen\_HelloWorld.launch} and run it as gen\_HelloWorld. All model files in the model directory will be generated.
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld06}
+\includegraphics[width=\linewidth]{images/015-HelloWorld06.png}
 % !images/015-HelloWorld06.png!
 
 The code will be generated to the src-gen directory. The main function will be contained in \textbf{SubSystem\_HelloWorldRunner.java}. Select this file and run it as Java application.
 
-\includegraphics{images/015-HelloWorld07}
+\includegraphics{images/015-HelloWorld07.png}
 % !images/015-HelloWorld07.png!
 
 
 The Hello World application starts and the string will be printed on the console window. To stop the application the user must type \textbf{quit} in the console window.
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld08}
+\includegraphics[width=\linewidth]{images/015-HelloWorld08.png}
 % !images/015-HelloWorld08.png!
 
 \section{Open the Message Sequence Chart}
 
 During runtime the application produced a MSC and wrote it to a file. Open HelloWorld/tmp/log/SubSystem\_HelloWorld\_Async.seq using Trace2UML (it is open source and can be obtained from  http://trace2uml.tigris.org/). You should see something like this:
 
-\includegraphics[width=\linewidth]{images/015-HelloWorld09}
+\includegraphics[width=\linewidth]{images/015-HelloWorld09.png}
 % !images/015-HelloWorld09.png!
 
 
@@ -120,4 +120,3 @@ During runtime the application produced a MSC and wrote it to a file. Open Hello
 
 Now you have generated your first eTrice model from scratch. You can switch between diagram editor and model (.room file) and you can see what will be generated during editing and saving the diagram files. 
 You should take a look at the generated source files to understand how the state machine is generated and the life cycle of the application. The next tutorials will deal with more complex hierarchies in structure and behavior.
- 

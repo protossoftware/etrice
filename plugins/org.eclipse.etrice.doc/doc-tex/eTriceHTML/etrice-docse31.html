@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Why does it work and why is it safe?</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,3,next --> 
+<meta name="src" content="etrice-doc.tex"> 
+<meta name="date" content="2013-02-26 19:42:00"> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css"> 
+</head><body 
+>
+<!--l. 76--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch9.html" >next</a>] [<a 
+href="etrice-docse30.html" >prev</a>] [<a 
+href="etrice-docse30.html#tailetrice-docse30.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse31.html">tail</a>] [<a 
+href="etrice-docch8.html#etrice-docse31.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">8.3   </span> <a 
+ id="x41-570008.3"></a>Why does it work and why is it safe?</h3>
+<!--l. 78--><p class="noindent" >The tutorial shows that it is generally possible to use every port from outside the
+model as long as the port knows its peer. This is guaranteed by describing protocol
+and the complete structure (especially the bindings) within the model. The only
+remaining question is: Why is it safe and does not violate the <span 
+class="ecbx-1000">run to completion</span>
+semantic. To answer this question, take a look at the <span 
+class="ecti-1000">MessageService.java </span>from the
+runtime environment. There you will find the receive method which puts each
+message into the queue.
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-18">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;public&#x00A0;synchronized&#x00A0;void&#x00A0;receive(Message&#x00A0;msg)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;(msg!=null)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;messageQueue.push(msg);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;notifyAll();&#x00A0;//&#x00A0;wake&#x00A0;up&#x00A0;thread&#x00A0;to&#x00A0;compute&#x00A0;message
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+</div>
+<!--l. 89--><p class="nopar" >
+<!--l. 91--><p class="noindent" >This method is synchronized. That means, regardless who sends the message, the
+queue is secured. If we later on (e.g. for performance reasons in C/C++) distinguish
+between internal and external senders (same thread or not), care must be taken to
+use the external (secure) queue.
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch9.html" >next</a>] [<a 
+href="etrice-docse30.html" >prev</a>] [<a 
+href="etrice-docse30.html#tailetrice-docse30.html" >prev-tail</a>] [<a 
+href="etrice-docse31.html" >front</a>] [<a 
+href="etrice-docch8.html#etrice-docse31.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
+ id="tailetrice-docse31.html"></a>  
+</body></html> 

@@ -31,28 +31,28 @@ Remember:
 
 The workspace should look like this:
 
-\includegraphics{images/034-HelloWorldC01}
+\includegraphics{images/034-HelloWorldC01.png}
 % !images/034-HelloWorldC01.png!
 
 The next step is to add the model folder:
 Right click on the new project. Select \textit{New->Folder_ and name it _model}.
 
-\includegraphics{images/034-HelloWorldC02}
+\includegraphics{images/034-HelloWorldC02.png}
 % !images/034-HelloWorldC02.png!
 
 Add the model file to the folder. Right click on the new folder. Select \textit{New->file} and name it \textit{HelloWorldC.room}.
 
-\includegraphics{images/034-HelloWorldC03}
+\includegraphics{images/034-HelloWorldC03.png}
 % !images/034-HelloWorldC03.png!
 
 Due to the file ending \textit{.room}, the tool will ask you to add the Xtext nature. Answer with \textit{Yes}. 
 
-\includegraphics{images/034-HelloWorldC04}
+\includegraphics{images/034-HelloWorldC04.png}
 % !images/034-HelloWorldC04.png!
 
 The workspace should look like this:
 
-\includegraphics{images/034-HelloWorldC05}
+\includegraphics{images/034-HelloWorldC05.png}
 % !images/034-HelloWorldC05.png!
 
 
@@ -97,32 +97,32 @@ Other than in Java a launch configuration for the C code generator must be creat
 
 From the \textit{Run} menu select \textit{Run Configurations}
 
-\includegraphics{images/034-HelloWorldC06}
+\includegraphics{images/034-HelloWorldC06.png}
 % !images/034-HelloWorldC06.png!
 
 Within the dialog select \textit{eTrice C Generator} and click the \textit{New} button to create a new launch configuration.
 
-\includegraphics{images/034-HelloWorldC07}
+\includegraphics{images/034-HelloWorldC07.png}
 % !images/034-HelloWorldC07.png!
 
 A new configuration should be created. Name it \textit{gen\_HelloWorldC} and add the model via one of the \textit{add} buttons.
 
-\includegraphics{images/034-HelloWorldC08}
+\includegraphics{images/034-HelloWorldC08.png}
 % !images/034-HelloWorldC08.png!
 
 In the \textit{Refresh} tab select \textit{The entire workspace} 
 
-\includegraphics{images/034-HelloWorldC09}
+\includegraphics{images/034-HelloWorldC09.png}
 % !images/034-HelloWorldC09.png!
 
 In the \textit{Common} tab select \textit{Shared file} and add the \textit{HelloWorldC} project via the \textit{Browse} button.
 
-\includegraphics{images/034-HelloWorldC10}
+\includegraphics{images/034-HelloWorldC10.png}
 % !images/034-HelloWorldC10.png!
 
 Apply your changes. The new configuration should now exist in your workspace.
 
-\includegraphics{images/034-HelloWorldC11}
+\includegraphics{images/034-HelloWorldC11.png}
 % !images/034-HelloWorldC11.png!
 
 
@@ -130,24 +130,24 @@ Apply your changes. The new configuration should now exist in your workspace.
 
 Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as _gen_HelloWorldC_.
 
-\includegraphics{images/034-HelloWorldC12}
+\includegraphics{images/034-HelloWorldC12.png}
 % !images/034-HelloWorldC12.png!
 
 The code should be generated.
 
-\includegraphics{images/034-HelloWorldC13}
+\includegraphics{images/034-HelloWorldC13.png}
 % !images/034-HelloWorldC13.png!
 
 \section{Setup the include path}
 
 Before you can build the application you must setup the include path for the runtime system. Right click the project and select \textit{Properties}. Add the include path as described in \textit{setting up the workspace}.
 
-\includegraphics{images/034-HelloWorldC14}
+\includegraphics{images/034-HelloWorldC14.png}
 % !images/034-HelloWorldC14.png!
 
 Add the runtime library.
 
-\includegraphics{images/034-HelloWorldC15}
+\includegraphics{images/034-HelloWorldC15.png}
 % !images/034-HelloWorldC15!
 
 Recognize the name of the library ("org.eclipse.etrice.runtime.c"). The library file on your disk is "liborg.eclipse.etrice.runtime.c.a". 
@@ -158,7 +158,7 @@ Now you can build the application. Click the build button to build the applicati
 Run the application as \textit{Local C/C++ Application}.
 Verify the output.
 
-\includegraphics{images/034-HelloWorldC16}
+\includegraphics{images/034-HelloWorldC16.png}
 % !images/034-HelloWorldC16.png!
 
 \section{Summary}

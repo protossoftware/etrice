@@ -45,17 +45,17 @@ A SW system which mainly consists of data transformations like signal/image proc
 
 The relation between classical object oriented programming and ROOM is comparable to the relation between assembler programming and C programming. It provides a shift of the object paradigm. As the picture shows, the classic object paradigm provides some kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provide the requested behavior to the user.   
 
-\includegraphics{images/010-RoomIntroduction01}
+\includegraphics{images/010-RoomIntroduction01.png}
 % !images/010-RoomIntroduction01.png!
 
 As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided by the underlying operating system and the user is responsible to avoid access violations by using those operating system mechanisms directly (semaphore, mutex).
 
-\includegraphics{images/010-RoomIntroduction02}
+\includegraphics{images/010-RoomIntroduction02.png}
 % !images/010-RoomIntroduction02.png!
 
 ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter \textbf{Run to completion}). 
 
-\includegraphics[width=\linewidth]{images/010-RoomIntroduction03}
+\includegraphics[width=\linewidth]{images/010-RoomIntroduction03.png}
 % !images/010-RoomIntroduction03.png!
 
 This thinking of an object is much more general than the classic one.  
@@ -88,7 +88,7 @@ The basic elements of ROOM are the actors with their ports and protocols. The pr
 \caption{Actor and Protocol Example}
 \begin{tabular}{|l|l|}
 \hline
-\includegraphics[scale=0.85]{images/040-ActorClass} & \includegraphics[scale=0.85]{images/040-ProtocolClassTextualNotation} \\ \hline
+\includegraphics[scale=0.85]{images/040-ActorClass.png} & \includegraphics[scale=0.85]{images/040-ProtocolClassTextualNotation.png} \\ \hline
 \textbf{Actor with Subactors} & \textbf{Protocol Definition} \\ \hline
 \end{tabular}
 \end{table}
@@ -121,12 +121,12 @@ The actor's behavior will be described with a state machine. A state in turn may
    
 Top level:
 
-\includegraphics[width=\linewidth]{images/020-Blinky15}
+\includegraphics[width=\linewidth]{images/020-Blinky15.png}
 % !images/020-Blinky15.png!
 
 \textit{blinking} Sub machine:
 
-\includegraphics[width=\linewidth]{images/020-Blinky151}
+\includegraphics[width=\linewidth]{images/020-Blinky151.png}
 % !images/020-Blinky151.png!
 
 From an abstract point of view there is a state \textit{blinking}. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 
@@ -142,7 +142,7 @@ Layering can be expressed in ROOM by Actors with specialized Ports, called Servi
 
 The Actor that provides a service implements an SPP and the client of that service implements an SAP. The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular ports.
 
-\includegraphics{images/010-LayerExample}
+\includegraphics{images/010-LayerExample.png}
 % !images/010-LayerExample.png!
 
 The Example shows a layered model. The Layer Connections define e.g. that the \textit{ApplicationLayer} can only use the services of the \textit{ServiceLayer} and the \textit{CommunicationLayer}. Actors inside the \textit{ApplicationLayer} that implement an SAP for those services are connected directly to the implementation of the services. 

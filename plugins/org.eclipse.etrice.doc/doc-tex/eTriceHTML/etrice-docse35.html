@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Create the model</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,3,next --> 
+<meta name="src" content="etrice-doc.tex"> 
+<meta name="date" content="2013-02-26 19:42:00"> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css"> 
+</head><body 
+>
+<!--l. 73--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse36.html" >next</a>] [<a 
+href="etrice-docse34.html" >prev</a>] [<a 
+href="etrice-docse34.html#tailetrice-docse34.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse35.html">tail</a>] [<a 
+href="etrice-docch9.html#etrice-docse35.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">9.4   </span> <a 
+ id="x46-620009.4"></a>Create the model</h3>
+<!--l. 75--><p class="noindent" >Due to the former tutorials you should be familiar with the steps to create the model
+with protocols, actors and state machines.
+<!--l. 77--><p class="noindent" >The basic idea of the exercise is to create a file reader actor, which is responsible to
+open, close and read characters from the source file. Another actor receives the
+characters and filters the comments (parser). The remaining characters (pure source
+code) should be print out.
+<!--l. 79--><p class="noindent" >Remember the logical steps:
+     <ul class="itemize1">
+     <li class="itemize">create the model by the help of content assist (CTRL Space)
+     </li>
+     <li class="itemize">name the model, subsystem and top level actor
+     </li>
+     <li class="itemize">define the protocol (in this case it should be able to send a char, and to
+     request the next char from the file reader)
+     </li>
+     <li class="itemize">create the structure (file reader and parser with an appropriate port, create
+     the references and connect the ports)
+     </li>
+     <li class="itemize">create the state machines</li></ul>
+<!--l. 88--><p class="noindent" >Try to create the model by yourself and take the following solution as an
+example.
+<!--l. 90--><p class="noindent" >Structure:
+<!--l. 92--><p class="noindent" ><img 
+src="images/036-RemoveCommentC04.png" alt="PIC"  
+>
+<!--l. 95--><p class="noindent" >File reader FSM:
+<!--l. 97--><p class="noindent" ><img 
+src="images/036-RemoveCommentC05.png" alt="PIC"  
+>
+<!--l. 100--><p class="noindent" >Parser FSM:
+<!--l. 102--><p class="noindent" ><img 
+src="images/036-RemoveCommentC06.png" alt="PIC"  
+>
+<!--l. 105--><p class="noindent" >The complete model can be found in <span 
+class="ecti-1000">org.eclipse.etrice.tutorials.c</span>
+<!--l. 107--><p class="noindent" >Take a look at the file attribute of the file reader.
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-20">
+Attribute&#x00A0;f:file&#x00A0;ref
+</div>
+<!--l. 111--><p class="nopar" >
+<!--l. 113--><p class="noindent" ><span 
+class="ecti-1000">fopen </span>expects a <span 
+class="ecti-1000">FILE *</span>. <span 
+class="ecti-1000">f:file ref  </span>declares a variable <span 
+class="ecti-1000">f  </span>from type reference to <span 
+class="ecti-1000">file</span>,
+which is a pointer to <span 
+class="ecti-1000">FILE</span>.
+                                                                  
+
+                                                                  
+<!--l. 116--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse36.html" >next</a>] [<a 
+href="etrice-docse34.html" >prev</a>] [<a 
+href="etrice-docse34.html#tailetrice-docse34.html" >prev-tail</a>] [<a 
+href="etrice-docse35.html" >front</a>] [<a 
+href="etrice-docch9.html#etrice-docse35.html" >up</a>] </p></div>
+<!--l. 116--><p class="noindent" ><a 
+ id="tailetrice-docse35.html"></a>  
+</body></html> 

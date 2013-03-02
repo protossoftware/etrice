@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Create a new model from scratch</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,3,next --> 
+<meta name="src" content="etrice-doc.tex"> 
+<meta name="date" content="2013-02-26 19:42:00"> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css"> 
+</head><body 
+>
+<!--l. 19--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse22.html" >next</a>] [<a 
+href="etrice-docse20.html" >prev</a>] [<a 
+href="etrice-docse20.html#tailetrice-docse20.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse21.html">tail</a>] [<a 
+href="etrice-docch7.html#etrice-docse21.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
+ id="x30-440007.2"></a>Create a new model from scratch</h3>
+<!--l. 21--><p class="noindent" >Remember exercise <span 
+class="ecti-1000">HelloWorld</span>. Create a new eTrice project and name it
+<span 
+class="ecti-1000">SendingData</span>. Open the <span 
+class="ecti-1000">SendingData.room </span>file and copy the following code into the
+file or use content assist to create the model.
+                                                                  
+
+                                                                  
+<div class="verbatim" id="verbatim-10">
+RoomModel&#x00A0;SendingData&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:SendingData_SubSystem
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:SendingDataTop
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />}
+</div>
+<!--l. 37--><p class="nopar" >
+                                                                  
+
+                                                                  
+<!--l. 39--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse22.html" >next</a>] [<a 
+href="etrice-docse20.html" >prev</a>] [<a 
+href="etrice-docse20.html#tailetrice-docse20.html" >prev-tail</a>] [<a 
+href="etrice-docse21.html" >front</a>] [<a 
+href="etrice-docch7.html#etrice-docse21.html" >up</a>] </p></div>
+<!--l. 39--><p class="noindent" ><a 
+ id="tailetrice-docse21.html"></a>  
+</body></html> 
