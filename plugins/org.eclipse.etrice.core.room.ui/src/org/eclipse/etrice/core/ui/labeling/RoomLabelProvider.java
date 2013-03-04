@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -148,7 +149,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String image(RefinedState state) {
 		return "RefinedState.gif";
 	}
-
+	
 	String image(ServiceImplementation svc) {
 		return "ServiceImpl.gif";
 	}
@@ -193,6 +194,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 					return "Port.gif";
 	}
 	
+	String image(ActorInstanceMapping aim) {
+		return "actorInstanceMapping.gif";
+	}
+	String image(LogicalThread lt) {
+		return "LogicalThread.gif";
+	} 
 	// custom labels
 	
 	StyledString text(Import im) {
@@ -336,6 +343,9 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return path+" -> "+aim.getThread().getName();
 	}
 	
+	String text (LogicalThread lt ) {
+		return lt.getName();		
+	}
 	private Styler getKeywordStyler() {
 		if (keywordStyler==null) {
 			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
