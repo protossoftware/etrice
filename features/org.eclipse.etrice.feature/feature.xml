@@ -36,6 +36,10 @@ which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
+   <includes
+         id="org.eclipse.etrice.layout.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.emf.ecore" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common" version="2.6.0" match="greaterOrEqual"/>
