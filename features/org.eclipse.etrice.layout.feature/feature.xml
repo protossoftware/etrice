@@ -40,6 +40,10 @@ http://www.eclipse.org/legal/epl-v10.html
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.eclipse.etrice.kieler.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.graphiti" version="0.8.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.graphiti.ui" version="0.8.1" match="greaterOrEqual"/>
@@ -54,7 +58,6 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.etrice.ui.structure" version="0.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.common" version="0.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.room" version="0.2.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.etrice.kieler.feature" version="0.0.3.qualifier"/>
    </requires>
 
    <plugin
