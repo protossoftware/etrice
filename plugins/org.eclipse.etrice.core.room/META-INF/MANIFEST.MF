@@ -22,15 +22,16 @@ Import-Package: org.apache.log4j,
  org.eclipse.etrice.core.room
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core,
+ org.eclipse.etrice.core.formatting,
  org.eclipse.etrice.core.naming,
  org.eclipse.etrice.core.parseTreeConstruction,
  org.eclipse.etrice.core.parser.antlr,
  org.eclipse.etrice.core.parser.antlr.internal,
+ org.eclipse.etrice.core.postprocessing,
  org.eclipse.etrice.core.room,
  org.eclipse.etrice.core.room.impl,
  org.eclipse.etrice.core.room.util,
  org.eclipse.etrice.core.scoping,
  org.eclipse.etrice.core.services,
- org.eclipse.etrice.core.validation,
- org.eclipse.etrice.core.formatting
+ org.eclipse.etrice.core.validation
 Bundle-Activator: org.eclipse.etrice.core.RoomActivator

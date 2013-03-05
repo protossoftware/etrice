@@ -88,7 +88,7 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();\r\n\t       \t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t       \t\t\t\tif(element instanceof ActorClassConfig)\r\n\t       \t\t\t\t\tlist.add((ActorClassConfig) element);\r\n\t       \t\t return list;'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ActorClassConfig)\r\n\t\tlist.add((ActorClassConfig) element);\r\nreturn list;\r\n'"
    * @generated
    */
   EList<ActorClassConfig> getActorClassConfigs();
@@ -97,7 +97,7 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof ActorInstanceConfig)\r\n\t\t\t\t\t\tlist.add((ActorInstanceConfig) element);\r\n\t\t\t\treturn list;'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ActorInstanceConfig)\r\n\t\tlist.add((ActorInstanceConfig) element);\r\nreturn list;'"
    * @generated
    */
   EList<ActorInstanceConfig> getActorInstanceConfigs();
@@ -106,7 +106,7 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof ProtocolClassConfig)\r\n\t\t\t\t\t\tlist.add((ProtocolClassConfig) element);\r\n\t\t\t\treturn list;'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof ProtocolClassConfig)\r\n\t\tlist.add((ProtocolClassConfig) element);\r\nreturn list;\r\n'"
    * @generated
    */
   EList<ProtocolClassConfig> getProtocolClassConfigs();
@@ -115,7 +115,7 @@ public interface ConfigModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();\r\n\t\t\t\tfor(ConfigElement element : this.getConfigElements())\r\n\t\t\t \t\tif(element instanceof SubSystemConfig)\r\n\t\t\t\t\t\tlist.add((SubSystemConfig) element);\r\n\t\t\t\treturn list;'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();\r\nfor(ConfigElement element : this.getConfigElements())\r\n\tif(element instanceof SubSystemConfig)\r\n\t\tlist.add((SubSystemConfig) element);\r\nreturn list;'"
    * @generated
    */
   EList<SubSystemConfig> getSubSystemConfigs();

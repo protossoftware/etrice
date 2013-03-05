@@ -13,5 +13,5 @@
 import xtext;
 
 process(GeneratedMetamodel this) :
-	JAVA org.eclipse.etrice.core.postprocessing.PostprocessorController.process(org.eclipse.xtext.GeneratedMetamodel)
+	JAVA org.eclipse.etrice.core.etphys.postprocessing.PostprocessorController.process(org.eclipse.xtext.GeneratedMetamodel)
 ;

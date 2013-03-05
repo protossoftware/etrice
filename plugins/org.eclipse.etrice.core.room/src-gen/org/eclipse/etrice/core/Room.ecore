@@ -2,7 +2,14 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="room" nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
   <eClassifiers xsi:type="ecore:EClass" name="RoomModel">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
@@ -224,7 +231,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
     <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xA;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAPRef)&#xA;return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPPRef)&#xA;return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;"/>
+        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAPRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPPRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -325,7 +332,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StateGraphItem">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.State) return ((org.eclipse.etrice.core.room.State)this).getName();&#xA;else if (this instanceof org.eclipse.etrice.core.room.TrPoint) return ((org.eclipse.etrice.core.room.TrPoint)this).getName();&#xA;else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint) return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();&#xA;else if (this instanceof org.eclipse.etrice.core.room.Transition) return ((org.eclipse.etrice.core.room.Transition)this).getName();&#xA;return &quot;&quot;;"/>
+        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.State) &#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.State)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.TrPoint)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.TrPoint)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.Transition)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Transition)this).getName();&#xD;&#xA;return &quot;&quot;;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
