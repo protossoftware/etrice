@@ -4,6 +4,7 @@
         <cs:dependency name="org.eclipse.etrice.generator.c.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.java.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.layout.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.c" componentType="buckminster"/>
@@ -12,7 +13,7 @@
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials.java" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.layout.feature" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.etrice.kieler.feature" componentType="eclipse.feature"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
