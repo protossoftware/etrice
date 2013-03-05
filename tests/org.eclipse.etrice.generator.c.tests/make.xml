@@ -354,9 +354,9 @@
 		<echo>start ChoicePointTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
 		<echo>end   ChoicePointTest</echo>
-		<echo>start SendingDataTestJava</echo>
+		<echo>start SendingDataTestC</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
-		<echo>end   SendingDataTestJava</echo>
+		<echo>end   SendingDataTestC</echo>
 		<echo>start StaticConfigTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
 		<echo>end   StaticConfigTest</echo>
