@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.core.ui.outline;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -27,7 +28,11 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
@@ -63,20 +68,30 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	protected void _createChildren(IOutlineNode parentNode, ActorClass ac) {
+		Object nodeName = parentNode.getText();
+		if(parentNode.getText() instanceof StyledString)
+			nodeName = ((StyledString)parentNode.getText()).getString();
+		if(nodeName.equals(ac.getName()))
+			createChildren1(parentNode, ac);
+		else
+			createChildren2(parentNode, ac);
+	}
+	
+	private void createChildren1(IOutlineNode parentNode, ActorClass ac) {
 		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
-			new ExtraOutlineNode(ac, parentNode, INTERFACE_LABEL);
+			createExtraNode(ac, parentNode, INTERFACE_LABEL);
 		}
 		if (ac.getIntPorts().size()>0 || ac.getExtPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
 				ac.getStrSAPs().size()>0 || ac.getAttributes().size()>0 ||
 				ac.getActorRefs().size()>0) {
-			new ExtraOutlineNode(ac, parentNode, STRUCTURE_LABEL);
+			createExtraNode(ac, parentNode, STRUCTURE_LABEL);
 		}
 		if (ac.getOperations().size()>0 || ac.getStateMachine()!=null) {
-			new ExtraOutlineNode(ac, parentNode, BEHAVIOR_LABEL);
+			createExtraNode(ac, parentNode, BEHAVIOR_LABEL);
 		}
 	}
 	
-	protected void _createChildren(ExtraOutlineNode parentNode, ActorClass ac) {
+	private void createChildren2(IOutlineNode parentNode, ActorClass ac) {
 		if (parentNode.getText().equals(INTERFACE_LABEL)) {
 			for (Port port : ac.getIfPorts())
 				createNode(parentNode, port);
@@ -101,14 +116,22 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			for (Operation op : ac.getOperations())
 				createNode(parentNode, op);
 			if (ac.getStateMachine()!=null) {
-				new ExtraOutlineNode(ac, parentNode, STATE_MACHINE_LABEL);
+				createNode(parentNode, ac.getStateMachine());
 			}
 		}
-		else if (parentNode.getText().equals(STATE_MACHINE_LABEL)) {
-			for (State s : ac.getStateMachine().getStates()) {
-				createNode(parentNode, s);
-			}
-		}
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, StateGraph st) {
+		for (State s : st.getStates()) 
+			createNode(parentNode, s);
+	}
+	
+	protected Object _text(StateGraph modelElement) {
+		return STATE_MACHINE_LABEL;
+	}
+	
+	protected Image _image(StateGraph modelElement) {
+		return RoomActivator.getInstance().getImageRegistry().get("defaultoutlinenode.gif");
 	}
 	
 	protected boolean _isLeaf(SubSystemClass ssc) {
@@ -146,19 +169,29 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	protected void _createChildren(IOutlineNode parentNode, ProtocolClass pc) {
+		Object nodeName = parentNode.getText();
+		if(parentNode.getText() instanceof StyledString)
+			nodeName = ((StyledString)parentNode.getText()).getString();
+		if(nodeName.equals(pc.getName()))
+			createChildren1(parentNode, pc);
+		else
+			createChildren2(parentNode, pc);
+	}
+	
+	private void createChildren1(IOutlineNode parentNode, ProtocolClass pc) {
 		if (pc.getIncomingMessages().size()>0) {
-			new ExtraOutlineNode(pc, parentNode, INCOMING_LABEL);
+			createExtraNode(pc, parentNode, INCOMING_LABEL);
 		}
 		if (pc.getOutgoingMessages().size()>0) {
-			new ExtraOutlineNode(pc, parentNode, OUTGOING_LABEL);
+			createExtraNode(pc, parentNode, OUTGOING_LABEL);
 		}
 		if (pc.getRegular()!=null)
-			new ExtraOutlineNode(pc, parentNode, REG_PORT_CLASS_LABEL);
+			createExtraNode(pc, parentNode, REG_PORT_CLASS_LABEL);
 		if (pc.getConjugate()!=null)
-			new ExtraOutlineNode(pc, parentNode, CONJ_PORT_CLASS_LABEL);
+			createExtraNode(pc, parentNode, CONJ_PORT_CLASS_LABEL);
 	}	
 	
-	protected void _createChildren(ExtraOutlineNode parentNode, ProtocolClass pc) {
+	private void createChildren2(IOutlineNode parentNode, ProtocolClass pc) {
 		if (parentNode.getText().equals(INCOMING_LABEL)) {
 			for (Message m : pc.getIncomingMessages()) {
 				createNode(parentNode, m);
@@ -197,5 +230,9 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	protected boolean _isLeaf(Attribute ac) {
 		return true;
+	}
+	
+	private void createExtraNode(EObject obj, IOutlineNode parent, Object text){		
+		createEObjectNode(parent, obj, RoomActivator.getInstance().getImageRegistry().get("defaultoutlinenode.gif"), text, false);
 	}
 }
