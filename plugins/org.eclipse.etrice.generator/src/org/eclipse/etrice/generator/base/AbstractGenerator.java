@@ -25,16 +25,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -362,7 +362,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			modelURIs.remove(uri);
 		}
 		
-		EcoreUtil.resolveAll(resourceSet);
+		for (Resource res : resourceSet.getResources()) {
+			EcoreUtil2.resolveAll(res, CancelIndicator.NullImpl);
+		}
 		
 		return ok;
 	}
