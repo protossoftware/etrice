@@ -1,0 +1,199 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Configuring Layout Options</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="eTrice User Guide">
+<link rel="up" href="AutomaticDiagramLayoutwithKIELER.html" title="Automatic Diagram Layout with KIELER">
+<link rel="prev" href="layoutOptions.html" title="Layout Options">
+<link rel="next" href="specialOptions.html" title="Special Layout Options">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Configuring Layout Options </h1>
+<div class="section" title="Configuring Layout Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="configureOptions"></a>Configuring Layout Options </h2>
+</div>
+</div>
+</div>
+<p>The values of the layout options for a particular diagram object (in the visible diagram) can be changed using the Layout View of that diagram object. The initial values are the predefined 
+				<span class="bold"><strong>default</strong></span> values. These defaults can be changed using the context menu in Layout View as well as the Layout preference pages provided by eTrice.
+			</p>
+<div class="section" title="The Layout View">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="layoutView"></a>The Layout View</h3>
+</div>
+</div>
+</div>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/043-LayoutView.png"></div>
+<p>
+				
+</p>
+<p>The Layout view allows flexible customization of layout options for the selected objects in the eTrice diagram. If no object is selected, the view shows the options for the top-level container of the diagram. Options are stored persistently in diagram file (*.structure file / *.behavior file) of the eTrice diagram, so that they are still available after the next Eclipse restart. Of course this requires the diagram to be saved after an option was changed.</p>
+<p>The options are grouped according to the function of the selected objects. The group Nodes (respectively Edges, Ports, or Labels) contains options related to the object itself, such as its size or priority, while the group Parents contains options for the elements contained in the selected objects, such as the applied layout algorithm or the spacing between elements. Which layout options are displayed depends on the types of selected objects and the active layout algorithm, since each algorithm supports only a subset of the available options. Furthermore, some options are only visible if the 
+					<span class="emphasis"><em>Show Advanced Properties</em></span> button in the view toolbar is activated. The group types can be hidden using the Show Categories button.
+				</p>
+<p>An option can be changed by selecting or entering a new value in the corresponding cell of the Value column.</p>
+<p>The most important option is Layout Algorithm, which is used to determine the layout algorithm for the contents of the selected element. Here either a specific layout algorithm or a layout type can be chosen; in the latter case, the most suitable layout algorithm of the given type is taken. By changing the active layout algorithm, the content of the layout view is updated to display only those options that are supported by the new layout algorithm.</p>
+<p>Selecting Restore Default Value in the context menu or the view toolbar removes any value for the currently selected option that is stored in the current model file, thus resetting the option to its default value. The view menu has an entry Remove all Layout Options which resets all options of the current model by removing persistent data in the model file.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/043-ContextMenu.png"></div>
+<p>
+				
+</p>
+<p>The context menu for a specific layout option has different alternatives to set the currently active value as 
+					<span class="bold"><strong>default</strong></span> value:
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Set as Default for this Diagram</em></span>: Changes the open diagram file so that the same value is applied to all similar objects (edit parts) of that diagram.
+						</p>
+</li>
+</ul>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Set as Default for ... in this Context</em></span>: Applies the value to all similar objects that are displayed with the any of the eTrice editors (the option is linked to the edit part class of the selected object).
+						</p>
+</li>
+</ul>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Set as Default for all ...</em></span>: Links the option value with the domain model element or the diagram type of the selected object (see the context menu depicted above).
+						</p>
+</li>
+</ul>
+</div>
+<p>These four alternatives have different priorities: if present, the default value for the current diagram is taken first, then the default value for the edit part is checked, then the default value for the domain model element, and then the default value for the diagram type.</p>
+<p>Tips:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The information button of the view toolbar can be used to display some useful details on the current selection, such as the edit part and domain model classes.</p>
+</li>
+<li class="listitem">
+<p>Default values for layout options can most easily be manipulated based on the eTrice domain model elements.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Preference Pages">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="preferencePage"></a>Preference Pages</h3>
+</div>
+</div>
+</div>
+<p>The user-defined 
+					<span class="bold"><strong>default</strong></span> values for layout options can also be set using the preference pages provided in eTrice. Three preference pages have been provided for this purpose
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Layout</em></span>: for general preferences regarding layout
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Behavior</em></span>: for setting default values of layout options for eTrice behavior diagrams
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="emphasis"><em>Structure</em></span>: for setting default values of layout options for eTrice structure diagrams
+						</p>
+</li>
+</ul>
+</div>
+<p>These preference pages can be accessed via 
+					<span class="emphasis"><em>Windows &gt; Preferences &gt; eTrice &gt; Layout</em></span>.
+				</p>
+<p>Note that the contents of these preference pages are in sync with the 
+					<span class="emphasis"><em>KIELER &gt; Layout</em></span> preference page provided by the KIELER. Relevant entries in the 
+					<span class="emphasis"><em>KIELER &gt; Layout</em></span> page are shown in the above preference pages.
+				</p>
+<div class="section" title="Layout Preference Page">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="LayoutPreferencePage"></a>
+						<span class="emphasis"><em>Layout</em></span> Preference Page
+					</h4>
+</div>
+</div>
+</div>
+<p>The 
+						<span class="emphasis"><em>Layout</em></span> preference page is meant to configure general options regarding the layout. 
+					</p>
+<p>If 
+						<span class="emphasis"><em>Set routing style of all edges to oblique</em></span> is active, all routing styles and smoothness settings of edges are removed when automatic layout is performed. Since most layouters compute the routing of edges as part of their algorithm, these styles usually do not yield the expected results.
+					</p>
+</div>
+<div class="section" title="Behavior and Structure Preference Pages">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="BehaviorandStructurePreferencePages"></a>
+						<span class="emphasis"><em>Behavior</em></span> and 
+						<span class="emphasis"><em>Structure</em></span> Preference Pages
+					</h4>
+</div>
+</div>
+</div>
+<p>The 
+						<span class="emphasis"><em>Behavior</em></span> and 
+						<span class="emphasis"><em>Structure</em></span> sub-preference pages help in setting up the default values of layout options in behavior and structure diagrams respectively.
+					</p>
+<p>The 
+						<span class="emphasis"><em>Default Layout Option Values</em></span> table is used to manage the default setting for layout options, which can also be modified with the context menu of the layout view (see above). All user-defined settings are displayed here, and the buttons on the right of the table serve to create, edit, and remove entries. The Type column shows the type of element the option is linked with: either edit part, model element, or diagram type. The Element column shows the class name for options that relate to edit parts or domain model elements, and the diagram type name for options that relate to diagram types. Option is the name of the layout option, and Value is the currently set value of the option.
+					</p>
+<p>Creating a new entry requires the selection of the type of related element and entering its class name or identifier. Class names of edit parts can be explored using the information button of the layout view, while the class names for the domain model elements and the diagram type identifiers for the diagram types can be selected with the Browse button. After that, a layout option has to be selected from the list using the corresponding Browse button. Hitting OK creates an entry, and its value can then be set using the Edit button.</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images/043-PreferencePage.png"></div>
+<p>
+					
+</p>
+<p>Note that the 
+						<span class="emphasis"><em>Behavior</em></span> preference page will show only those entries which hold for the behavior diagrams. Moreover, it will allow setting default values of layout options for only those domain model elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for the 
+						<span class="emphasis"><em>Structure</em></span> preference page.
+					</p>
+</div>
+</div>
+</div>
+</body>
+</html>
