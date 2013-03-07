@@ -673,8 +673,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence portClassSource(final ProtocolClass pc, final Boolean conj) {
     CharSequence _xblockexpression = null;
     {
-      String portClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue());
-      String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
+      final PortClass pclass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
+      final String portClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue());
+      final String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
       if ((conj).booleanValue()) {
         List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
@@ -683,14 +684,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
         _xifexpression = _allOutgoingMessages;
       }
-      List<Message> messages = _xifexpression;
+      final List<Message> messages = _xifexpression;
       String _xifexpression_1 = null;
       if ((conj).booleanValue()) {
         _xifexpression_1 = "IN_";
       } else {
         _xifexpression_1 = "OUT_";
       }
-      String dir = _xifexpression_1;
+      final String dir = _xifexpression_1;
       StringConcatenation _builder = new StringConcatenation();
       {
         for(final Message message : messages) {
@@ -960,21 +961,33 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           }
           _builder.append("}");
           _builder.newLine();
+          _builder.newLine();
         }
       }
-      _builder.newLine();
       {
-        PortClass _portClass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-        boolean _notEquals_3 = (!Objects.equal(_portClass, null));
+        boolean _notEquals_3 = (!Objects.equal(pclass, null));
         if (_notEquals_3) {
-          PortClass _portClass_1 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-          EList<PortOperation> _operations = _portClass_1.getOperations();
+          _builder.append("/* begin ");
+          _builder.append(portClassName, "");
+          _builder.append(" specific */");
+          _builder.newLineIfNotEmpty();
+          DetailCode _userCode = pclass.getUserCode();
+          CharSequence _userCode_1 = this._procedureHelpers.userCode(_userCode);
+          _builder.append(_userCode_1, "");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          PortClass _portClass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
+          EList<PortOperation> _operations = _portClass.getOperations();
           CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, portClassName);
           _builder.append(_operationsImplementation, "");
           _builder.newLineIfNotEmpty();
+          _builder.append("/* end ");
+          _builder.append(portClassName, "");
+          _builder.append(" specific */");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
         }
       }
-      _builder.newLine();
       _builder.append("etInt32 ");
       _builder.append(replPortClassName, "");
       _builder.append("_getReplication(const ");

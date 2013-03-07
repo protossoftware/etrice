@@ -229,11 +229,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 	}
 	
-	def private portClassSource(ProtocolClass pc, Boolean conj){
-		var portClassName = pc.getPortClassName(conj)
-		var replPortClassName = pc.getPortClassName(conj, true)
-		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
-		var dir = if (conj) "IN_" else "OUT_"
+	def private portClassSource(ProtocolClass pc, Boolean conj) {
+		val pclass = pc.getPortClass(conj)
+		val portClassName = pc.getPortClassName(conj)
+		val replPortClassName = pc.getPortClassName(conj, true)
+		val messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
+		val dir = if (conj) "IN_" else "OUT_"
 
 		'''
 			«FOR message : messages»
@@ -283,12 +284,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
+				
 			«ENDFOR»
-			
-			«IF (pc.getPortClass(conj) != null)»
+			«IF pclass!=null»
+				/* begin «portClassName» specific */
+				«pclass.userCode.userCode»
+				
 				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
+				/* end «portClassName» specific */
+				
 			«ENDIF»
-
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
 				return ((etReplPort*)self)->size;
 			}
