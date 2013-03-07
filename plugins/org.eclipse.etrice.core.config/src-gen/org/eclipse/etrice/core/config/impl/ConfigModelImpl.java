@@ -164,10 +164,11 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   public EList<ActorClassConfig> getActorClassConfigs()
   {
     EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
-             			for(ConfigElement element : this.getConfigElements())
-             				if(element instanceof ActorClassConfig)
-             					list.add((ActorClassConfig) element);
-             		 return list;
+    for(ConfigElement element : this.getConfigElements())
+      if(element instanceof ActorClassConfig)
+        list.add((ActorClassConfig) element);
+    return list;
+    
   }
 
   /**
@@ -178,10 +179,10 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   public EList<ActorInstanceConfig> getActorInstanceConfigs()
   {
     EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
-            for(ConfigElement element : this.getConfigElements())
-           		if(element instanceof ActorInstanceConfig)
-                list.add((ActorInstanceConfig) element);
-            return list;
+    for(ConfigElement element : this.getConfigElements())
+      if(element instanceof ActorInstanceConfig)
+        list.add((ActorInstanceConfig) element);
+    return list;
   }
 
   /**
@@ -192,10 +193,11 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   public EList<ProtocolClassConfig> getProtocolClassConfigs()
   {
     EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
-            for(ConfigElement element : this.getConfigElements())
-           		if(element instanceof ProtocolClassConfig)
-                list.add((ProtocolClassConfig) element);
-            return list;
+    for(ConfigElement element : this.getConfigElements())
+      if(element instanceof ProtocolClassConfig)
+        list.add((ProtocolClassConfig) element);
+    return list;
+    
   }
 
   /**
@@ -206,10 +208,10 @@ public class ConfigModelImpl extends MinimalEObjectImpl.Container implements Con
   public EList<SubSystemConfig> getSubSystemConfigs()
   {
     EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
-            for(ConfigElement element : this.getConfigElements())
-           		if(element instanceof SubSystemConfig)
-                list.add((SubSystemConfig) element);
-            return list;
+    for(ConfigElement element : this.getConfigElements())
+      if(element instanceof SubSystemConfig)
+        list.add((SubSystemConfig) element);
+    return list;
   }
 
   /**

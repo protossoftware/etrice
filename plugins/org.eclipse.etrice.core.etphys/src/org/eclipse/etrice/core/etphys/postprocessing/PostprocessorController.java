@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Juergen Haug
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,8 +10,13 @@
  * 
  *******************************************************************************/
 
-import xtext;
+package org.eclipse.etrice.core.etphys.postprocessing;
 
-process(GeneratedMetamodel this) :
-	JAVA org.eclipse.etrice.core.postprocessing.PostprocessorController.process(org.eclipse.xtext.GeneratedMetamodel)
-;
+import org.eclipse.xtext.GeneratedMetamodel;
+
+public class PostprocessorController {
+
+	public static void process(GeneratedMetamodel metamodel){
+		new DocuPostprocessor().process(metamodel);
+	}
+}
