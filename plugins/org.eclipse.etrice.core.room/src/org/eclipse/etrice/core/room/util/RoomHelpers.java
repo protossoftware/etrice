@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -2115,6 +2116,7 @@ public class RoomHelpers {
 
 	/**
 	 * Determines the last common super type of a list of types or <code>null</code> if no such exists.
+	 * If a  {@link RefableType} is returned then it is an independent copy not part of the model.
 	 * 
 	 * @param types a list of {@link RefableType}s
 	 * 
@@ -2146,7 +2148,7 @@ public class RoomHelpers {
 				if (rt.getType()!=type)
 					return null;
 			}
-			return types.get(0);
+			return EcoreUtil.copy(types.get(0));
 		}
 		else if (ndc==types.size()) {
 			// in this case we have to find a common super type
