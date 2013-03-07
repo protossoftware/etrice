@@ -8,6 +8,8 @@ RoomModel ChoicePointTest {
 
 	SubSystemClass SubSystem_CPTest {
 		ActorRef ChoicePointTest_Top: CPTest_Top
+	
+		LogicalThread dflt_thread
 	}
 
 	ActorClass CPTest_Top {
@@ -119,6 +121,11 @@ RoomModel ChoicePointTest {
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 18);"
 					}
 				}
+				Transition tr0: ENTRY3_EXIT4 -> cp cp1 {
+					triggers {
+						<msg2: TestPort1>
+					}
+				}
 				ChoicePoint cp0
 				ChoicePoint cp1
 				handler TransitionPoint tp0
@@ -194,12 +201,12 @@ RoomModel ChoicePointTest {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"TestPort1.msg1();"
-						"TestPort1.msg1();"
-						"TestPort1.msg1();"
-						"TestPort1.msg1();"
-						"TestPort1.msg1();"
-						"TestPort1.msg1();"
+						"TestPort1.msg1(1);"
+						"TestPort1.msg1(2);"
+						"TestPort1.msg1(3);"
+						"TestPort1.msg1(4);"
+						"TestPort1.msg1(5);"
+						"TestPort1.msg1(6);"
 					}
 				}
 				State state0
@@ -209,11 +216,11 @@ RoomModel ChoicePointTest {
 
 	ProtocolClass TestProtocol {
 		incoming {
-			Message msg1()
-			Message msg2()
-			Message msg3()
-			Message msg4()
-			Message msg5()
+			Message msg1(data: int32)
+			Message msg2(data: int32)
+			Message msg3(data: int32)
+			Message msg4(data: int32)
+			Message msg5(data: int32)
 		}
 	}
 
