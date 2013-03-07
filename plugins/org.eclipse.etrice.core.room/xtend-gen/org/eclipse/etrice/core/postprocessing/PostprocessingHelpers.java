@@ -8,12 +8,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class PostprocessingHelpers {
+  public static int UNBOUNDED_MULTIPLICITY = ETypedElement.UNBOUNDED_MULTIPLICITY;
+  
   public static EClass getClass(final EPackage pckg, final String name) {
     EClassifier _eClassifier = pckg.getEClassifier(name);
     return ((EClass) _eClassifier);
@@ -32,14 +35,19 @@ public class PostprocessingHelpers {
     return _findFirst;
   }
   
+  public static boolean addOperation(final EClass owner, final String name, final EClassifier type, final String body) {
+    boolean _addOperation = PostprocessingHelpers.addOperation(owner, name, type, Integer.valueOf(1), body);
+    return _addOperation;
+  }
+  
   public static boolean addOperation(final EClass owner, final String name, final EClassifier type, final Integer upperBound, final String body) {
     boolean _xblockexpression = false;
     {
-      EOperation op = EcoreFactory.eINSTANCE.createEOperation();
+      final EOperation op = EcoreFactory.eINSTANCE.createEOperation();
       op.setName(name);
       op.setEType(type);
       op.setUpperBound((upperBound).intValue());
-      EAnnotation anno = EcoreFactory.eINSTANCE.createEAnnotation();
+      final EAnnotation anno = EcoreFactory.eINSTANCE.createEAnnotation();
       anno.setSource("http://www.eclipse.org/emf/2002/GenModel");
       EMap<String,String> _details = anno.getDetails();
       _details.put("body", body);

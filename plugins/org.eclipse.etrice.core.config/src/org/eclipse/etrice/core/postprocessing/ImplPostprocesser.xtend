@@ -25,7 +25,7 @@ class ImplPostProcessing {
 		configModel.addOperation(
 				"getActorClassConfigs",
 	       		configPackage.getEClassifier("ActorClassConfig"),
-	       		-1,
+	       		UNBOUNDED_MULTIPLICITY,
 	       		'''
 	       		EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
 	       		for(ConfigElement element : this.getConfigElements())
@@ -36,7 +36,7 @@ class ImplPostProcessing {
 		configModel.addOperation(
 		   		"getActorInstanceConfigs",
 	       		configPackage.getEClassifier("ActorInstanceConfig"),
-	       		-1,
+	       		UNBOUNDED_MULTIPLICITY,
 	       		'''
 				EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
 				for(ConfigElement element : this.getConfigElements())
@@ -46,7 +46,7 @@ class ImplPostProcessing {
 		configModel.addOperation(
 		   		"getProtocolClassConfigs",
 	       		configPackage.getEClassifier("ProtocolClassConfig"),
-	       		-1,
+	       		UNBOUNDED_MULTIPLICITY,
 	       		'''
 				EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
 				for(ConfigElement element : this.getConfigElements())
@@ -57,7 +57,7 @@ class ImplPostProcessing {
 		configModel.addOperation(
 		   		"getSubSystemConfigs",
 	       		configPackage.getEClassifier("SubSystemConfig"),
-	       		-1,
+	       		UNBOUNDED_MULTIPLICITY,
 	       		'''
 				EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
 				for(ConfigElement element : this.getConfigElements())
