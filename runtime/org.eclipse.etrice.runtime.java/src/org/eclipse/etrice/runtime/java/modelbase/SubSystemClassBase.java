@@ -8,12 +8,14 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSystemServicesProtocolConjPortRepl;
+import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
 
 /**
  * The base class for all SubSystems.
@@ -23,17 +25,24 @@ import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.RTSyst
  *
  */
 public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
+	
+	// variable service (is only instantiated if needed)
+	protected IVariableService variableService = null;
 
 	//--------------------- ports
-	protected RTSystemServicesProtocolConjPortRepl RTSystemPort = null;
+	protected RTSystemConjPort RTSystemPort = null;
+	
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
-	protected ActorClassBase[] instances = null;
+	
+	// for tests only
 	private TestSemaphore testSem=null;
 	private int testErrorCode;
 	
-	public SubSystemClassBase(String name) {
-		super(null, name);
+	public SubSystemClassBase(IRTObject parent, String name) {
+		super(parent, name);
+		
+		RTSystemPort = new RTSystemConjPort(this, IFITEM_RTSystemPort);
 
 		DebuggingService.getInstance().getAsyncLogger()
 				.setMSC(name + "_Async", "");
@@ -61,10 +70,10 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		instantiateActors();
 
 		// initialize all actor instances
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				instances[i].init();
-			}
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).init();
+		}
 	}
 
 	public abstract void instantiateMessageServices();
@@ -87,19 +96,19 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		System.out.println("=== done stop MsgSvcCtrl");
 
 		// stop all actor instances
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				instances[i].stop();
-			}
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).stop();
+		}
 		System.out.println("=== done stop actor instances");
 	}
 	
 	public void destroy() {
 		System.out.println("*** MainComponent "+getInstancePath()+"::destroy ***");
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				instances[i].destroy();
-			}
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).destroy();
+		}
 		System.out.println("=== done destroy actor instances");
 
 		DebuggingService.getInstance().getAsyncLogger().close();
@@ -117,20 +126,12 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	public Address getFreeAddress(int msgSvcId) {
 		return getMsgService(msgSvcId).getFreeAddress();
 	}
-	
-	public ActorClassBase getInstance(int i) {
-		if (instances==null || i<0 || i>= instances.length)
-			return null;
-		
-		return instances[i];
-	}
-	
+
 	public ActorClassBase getInstance(String path) {
-		if (instances!=null)
-			for (int i = 0; i < instances.length; i++) {
-				if (instances[i].getInstancePath().equals(path))
-					return instances[i];
-			}
+		IRTObject object = getObject(path);
+		
+		if (object instanceof ActorClassBase)
+			return (ActorClassBase) object;
 		
 		return null;
 	}
@@ -157,5 +158,9 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 			//testSem.printWaitingThreads();
 			Thread.yield();
 		}
+	}
+
+	public IVariableService getVariableService() {
+		return variableService;
 	}
 }

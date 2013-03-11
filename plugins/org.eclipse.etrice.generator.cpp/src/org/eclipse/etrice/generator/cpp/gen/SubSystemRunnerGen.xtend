@@ -1,4 +1,14 @@
-
+/*******************************************************************************
+ * Copyright (c) 2011 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ * 
+ *******************************************************************************/
 package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
@@ -9,6 +19,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
+/**
+ * @author Peter Karlitschek
+ *
+ */
 @Singleton
 class SubSystemRunnerGen {
 
@@ -40,12 +54,6 @@ class SubSystemRunnerGen {
 		
 		class «cc.name+"Runner"» :public etRuntime::SubSystemRunnerBase {
 		
-			/**
-		     * main function
-		     * creates component and starts and stops the lifecycle
-		     */
-			public:
-				static void run(); 
 		};
 		
 		«generateIncludeGuardEnd(cc.name+"_Runner")»
@@ -72,34 +80,14 @@ class SubSystemRunnerGen {
 		 * creates component and starts and stops the lifecycle
 		 */
 		
-		int main(void) {
-			«ssc.name+"Runner"»::run();
+			
+		int main(int argc, char* argv[]) {
+			«ssc.name» mainComponent(0, "«ssc.name»");
+			«ssc.name+"Runner"»::run(mainComponent, argc, argv);
 			return 0;
 		}
 			
 			
-		void «ssc.name+"Runner"»::run() {
-			«ssc.name» main_component(0, "«ssc.name»");
-			
-			//etUserEntry(); /* platform specific */
-			
-			std::cout << "***   T H E   B E G I N   ***" << std::endl;
-				
-			main_component.init(); // lifecycle init
-			main_component.start(); // lifecycle start
-				
-			// application runs until quit 
-			waitForQuit(main_component);
-			
-			// end the lifecycle
-			main_component.stop(); // lifecycle stop
-			main_component.destroy(); // lifecycle destroy
-			
-			std::cout << "***   T H E   E N D   ***" << std::endl;
-		
-			//etUserExit(); /* platform specific */
-		}
-		
 	'''
 	}	
 }

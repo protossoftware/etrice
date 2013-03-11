@@ -203,8 +203,7 @@
 		
 		protected:
 		 	static std::string s_stateStrings[];
-		
-		 	int history[];
+		 	static const int s_numberOfStates;
 		
 		private:
 			 void setState(int new_state);

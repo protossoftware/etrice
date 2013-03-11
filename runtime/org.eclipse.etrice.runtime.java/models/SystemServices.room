@@ -1,0 +1,9 @@
+RoomModel org.eclipse.etrice.runtime.java.modelbase {
+	ProtocolClass RTSystemServicesProtocol {
+		incoming {
+			Message executeInitialTransition()
+			Message startDebugging()
+			Message stopDebugging()
+		}
+	}
+}

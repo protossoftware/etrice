@@ -44,7 +44,6 @@ RoomModel StaticConfigTest {
 		Behavior {
 			Operation Tester_ac() {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
-				"etUnit_testFinished(caseId);"
 			}
 			Operation ~Tester_ac() {
 				"etUnit_closeTestCase(caseId);"
@@ -62,6 +61,7 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId_2, \"Tester_ac:2\", testee_super2.getFloat64_super_c() == 2.2);"
 						"EXPECT_TRUE(caseId_2, \"Tester_ac:3\", testee_super2.getFloat64_super_i() == 3.3);"
 						"EXPECT_EQUAL_FLOAT32(caseId,\"Tester_ac:4\", 25.f, testee_super2.getReg_port().getFloat_i(), 0.1f);"
+						"etUnit_testFinished(caseId);"
 					}
 				}
 			}
@@ -81,7 +81,6 @@ RoomModel StaticConfigTest {
 		Behavior {
 			Operation Testee_1_ac() {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
-				"etUnit_testFinished(caseId);"
 			}
 			Operation ~Testee_1_ac() {
 				"etUnit_closeTestCase(caseId);"
@@ -171,7 +170,6 @@ RoomModel StaticConfigTest {
 		Behavior {
 			Operation Testee_2_ac() {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
-				"etUnit_testFinished(caseId);"
 			}
 			Operation ~Testee_2_ac() {
 				"etUnit_closeTestCase(caseId);"
@@ -379,4 +377,4 @@ RoomModel StaticConfigTest {
 		}
 	}
 
-} 
+}

@@ -39,22 +39,22 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
-  
-  @Inject
-  private ILanguageExtension langExt;
+  protected RoomExtensions _roomExtensions;
   
   @Inject
   private CExtensions _cExtensions;
-  
-  @Inject
-  private RoomExtensions _roomExtensions;
   
   @Inject
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
   private StateMachineGen _stateMachineGen;
+  
+  @Inject
+  protected ILanguageExtension langExt;
+  
+  @Inject
+  private JavaIoFileSystemAccess fileAccess;
   
   @Inject
   private ILogger logger;
@@ -133,7 +133,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
     CharSequence _xblockexpression = null;
     {
-      List<Port> _allEndPorts = this._roomExtensions.getAllEndPorts(ac);
+      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             GeneralProtocolClass _protocol = p.getProtocol();
@@ -143,7 +143,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         };
       Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
-      List<Port> _allEndPorts_1 = this._roomExtensions.getAllEndPorts(ac);
+      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _and = false;
@@ -160,7 +160,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         };
       Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
-      List<Port> _allEndPorts_2 = this._roomExtensions.getAllEndPorts(ac);
+      List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
             boolean _and = false;
@@ -263,14 +263,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (!_and_2) {
           _and_1 = false;
         } else {
-          List<SAPRef> _allSAPs = this._roomExtensions.getAllSAPs(ac);
+          List<SAPRef> _allSAPs = RoomHelpers.getAllSAPs(ac);
           boolean _isEmpty_2 = _allSAPs.isEmpty();
           _and_1 = (_and_2 && _isEmpty_2);
         }
         if (!_and_1) {
           _and = false;
         } else {
-          List<ServiceImplementation> _allServiceImplementations = this._roomExtensions.getAllServiceImplementations(ac);
+          List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
           boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
           _and = (_and_1 && _isEmpty_3);
         }
@@ -334,7 +334,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* saps */");
           _builder.newLine();
           {
-            List<SAPRef> _allSAPs_1 = this._roomExtensions.getAllSAPs(ac);
+            List<SAPRef> _allSAPs_1 = RoomHelpers.getAllSAPs(ac);
             for(final SAPRef sap : _allSAPs_1) {
               _builder.append("\t");
               _builder.append("const ");
@@ -353,7 +353,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* replicated ports */");
           _builder.newLine();
           {
-            List<Port> _allEndPorts_3 = this._roomExtensions.getAllEndPorts(ac);
+            List<Port> _allEndPorts_3 = RoomHelpers.getAllEndPorts(ac);
             for(final Port ep_2 : _allEndPorts_3) {
               {
                 int _multiplicity_2 = ep_2.getMultiplicity();
@@ -375,7 +375,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* services */");
           _builder.newLine();
           {
-            List<ServiceImplementation> _allServiceImplementations_1 = this._roomExtensions.getAllServiceImplementations(ac);
+            List<ServiceImplementation> _allServiceImplementations_1 = RoomHelpers.getAllServiceImplementations(ac);
             for(final ServiceImplementation svc : _allServiceImplementations_1) {
               _builder.append("\t");
               _builder.append("const etReplPort ");
@@ -427,14 +427,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (!_and_5) {
           _and_4 = false;
         } else {
-          List<SAPRef> _allSAPs_2 = this._roomExtensions.getAllSAPs(ac);
+          List<SAPRef> _allSAPs_2 = RoomHelpers.getAllSAPs(ac);
           boolean _isEmpty_7 = _allSAPs_2.isEmpty();
           _and_4 = (_and_5 && _isEmpty_7);
         }
         if (!_and_4) {
           _and_3 = false;
         } else {
-          List<ServiceImplementation> _allServiceImplementations_2 = this._roomExtensions.getAllServiceImplementations(ac);
+          List<ServiceImplementation> _allServiceImplementations_2 = RoomHelpers.getAllServiceImplementations(ac);
           boolean _isEmpty_8 = _allServiceImplementations_2.isEmpty();
           _and_3 = (_and_4 && _isEmpty_8);
         }
@@ -473,7 +473,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       _builder.append("\t");
-      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(ac);
+      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
       CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
       _builder.append(_attributes, "	");
       _builder.newLineIfNotEmpty();
@@ -621,7 +621,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("/* interface item IDs */");
       _builder.newLine();
-      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac, ac);
+      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac);
       _builder.append(_genInterfaceItemConstants, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

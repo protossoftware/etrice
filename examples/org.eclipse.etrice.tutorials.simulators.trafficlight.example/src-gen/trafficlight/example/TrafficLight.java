@@ -22,7 +22,6 @@ import trafficlight.example.PTrafficLight.*;
 public class TrafficLight extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PTrafficLightPort controller = null;
 	protected PTcpControlConjPort tcpCtrl = null;
@@ -41,7 +40,6 @@ public class TrafficLight extends ActorClassBase {
 	public static final int IFITEM_timeout = 4;
 	public static final int IFITEM_blinkerTimeout = 5;
 
-		
 	/*--------------------- attributes ---------------------*/
 	DTcpControl ipConfig;
 	/*--------------------- operations ---------------------*/
@@ -53,25 +51,28 @@ public class TrafficLight extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public TrafficLight(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public TrafficLight(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("TrafficLight");
 		
 		// initialize attributes
-		ipConfig = new DTcpControl();
+		this.setIpConfig(new DTcpControl());
 
 		// own ports
-		controller = new PTrafficLightPort(this, "controller", IFITEM_controller, 0, port_addr[IFITEM_controller][0], peer_addr[IFITEM_controller][0]); 
-		tcpCtrl = new PTcpControlConjPort(this, "tcpCtrl", IFITEM_tcpCtrl, 0, port_addr[IFITEM_tcpCtrl][0], peer_addr[IFITEM_tcpCtrl][0]); 
-		tcpPayload = new PTcpPayloadConjPort(this, "tcpPayload", IFITEM_tcpPayload, 0, port_addr[IFITEM_tcpPayload][0], peer_addr[IFITEM_tcpPayload][0]); 
+		controller = new PTrafficLightPort(this, "controller", IFITEM_controller); 
+		tcpCtrl = new PTcpControlConjPort(this, "tcpCtrl", IFITEM_tcpCtrl); 
+		tcpPayload = new PTcpPayloadConjPort(this, "tcpPayload", IFITEM_tcpPayload); 
 		
 		// own saps
-		timeout = new PTimerConjPort(this, "timeout", IFITEM_timeout, 0, port_addr[IFITEM_timeout][0], peer_addr[IFITEM_timeout][0]); 
-		blinkerTimeout = new PTimerConjPort(this, "blinkerTimeout", IFITEM_blinkerTimeout, 0, port_addr[IFITEM_blinkerTimeout][0], peer_addr[IFITEM_blinkerTimeout][0]); 
+		timeout = new PTimerConjPort(this, "timeout", IFITEM_timeout, 0); 
+		blinkerTimeout = new PTimerConjPort(this, "blinkerTimeout", IFITEM_blinkerTimeout, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
+		new ATcpClient(this, "trafficLightSocket"); 
 
+	}
 	
 	//--------------------- attribute setters and getters
 	public void setIpConfig (DTcpControl ipConfig) {
@@ -100,22 +101,12 @@ public class TrafficLight extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
-	
 	/* state IDs */
 	public static final int STATE_Off_Blinking = 2;
 	public static final int STATE_OpenSocket = 3;
@@ -169,7 +160,8 @@ public class TrafficLight extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
@@ -409,7 +401,7 @@ public class TrafficLight extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_OpenSocket:
 					switch(trigger) {
 						case TRIG_tcpCtrl__established:
@@ -527,7 +519,7 @@ public class TrafficLight extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

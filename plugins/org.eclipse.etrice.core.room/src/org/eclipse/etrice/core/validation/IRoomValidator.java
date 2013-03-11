@@ -21,6 +21,8 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public interface IRoomValidator {
 
+	String getName();
+	String getDescription();
 	void validate(EObject object, ValidationMessageAcceptor messageAcceptor);
 
 }

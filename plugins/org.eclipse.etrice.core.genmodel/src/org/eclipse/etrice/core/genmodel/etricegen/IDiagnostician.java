@@ -17,12 +17,51 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public interface IDiagnostician {
 
+	/**
+	 * A constant indicating that the index is not relevant or not applicable.
+	 */
 	static final int INSIGNIFICANT_INDEX = -1;
 	
+	/**
+	 * Issue a warning on the source object associated with a structural feature,
+	 * 
+	 * @param msg the warning message
+	 * @param source the offending object
+	 * @param feature the feature that should be marked with the warning
+	 */
 	void warning(String msg, EObject source, EStructuralFeature feature);
+
+	/**
+	 * Issue a warning on the source object associated with a structural feature,
+	 * 
+	 * @param msg the warning message
+	 * @param source the offending object
+	 * @param feature the feature that should be marked with the warning
+	 * @param idx the index if the feature has multiplicity>1
+	 */
 	void warning(String msg, EObject source, EStructuralFeature feature, int idx);
+	
+	/**
+	 * Issue an error on the source object associated with a structural feature,
+	 * 
+	 * @param msg the error message
+	 * @param source the offending object
+	 * @param feature the feature that should be marked with the error
+	 */
 	void error(String msg, EObject source, EStructuralFeature feature);
+
+	/**
+	 * Issue a error on the source object associated with a structural feature,
+	 * 
+	 * @param msg the error message
+	 * @param source the offending object
+	 * @param feature the feature that should be marked with the error
+	 * @param idx the index if the feature has multiplicity>1
+	 */
 	void error(String msg, EObject source, EStructuralFeature feature, int idx);
 	
+	/**
+	 * @return <code>true</code> if at least one error has been issued before
+	 */
 	boolean isFailed();
 }

@@ -1,4 +1,4 @@
-RoomModel semantics {
+RoomModel Semantics {
 
 	// simple cascade
 	ActorClass AETest1  {

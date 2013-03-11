@@ -8,14 +8,12 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.messaging.MessageService;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
+import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemPort;
 
 
 /**
@@ -32,6 +30,8 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	protected static final int STATE_TOP = 1;
 
 	protected static final int NOT_CAUGHT = 0;
+
+	protected static final int IFITEM_RTSystemPort = 0;
 	
 	private String className = "noname";
 
@@ -40,19 +40,13 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	 */
 	protected int state;
 
-	private MessageService ownMsgsvc = null;
-	private Address ownAddr = null;
-	protected RTSystemServicesProtocolPort RTSystemPort = null;
+	protected RTSystemPort rtSystemPort = null;
 	
-	public ActorClassBase(IRTObject parent, String name, Address ownAddr, Address systemPortPeerAddr) {
+	public ActorClassBase(IRTObject parent, String name) {
 		super(parent, name);
 		
-		this.ownAddr = ownAddr;
-		ownMsgsvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(this.ownAddr.threadID);
 		// own ports
-		RTSystemPort = new RTSystemServicesProtocolPort(this, "RTSystemPort",
-				0, 0, ownAddr,
-				systemPortPeerAddr);
+		rtSystemPort = new RTSystemPort(this, IFITEM_RTSystemPort);
 	}
 
 	public String toString(){
@@ -72,12 +66,63 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 		return null;
 	}
 	
+	public SubSystemClassBase getSubSystem() {
+		// the sub system could be cached
+		// but it is rarely used so we just compute it every time
+		IRTObject p = getParent();
+		while (p!=null) {
+			if (p instanceof SubSystemClassBase)
+				return (SubSystemClassBase) p;
+			p = p.getParent();
+		}
+		return null;
+	}
+	
+	public IVariableService getVariableService() {
+		// the variable service could be cached
+		// but variable service operations are costly so it doesn't hurt if we compute it every time
+		SubSystemClassBase ssc = getSubSystem();
+		if (ssc==null)
+			return null;
+		
+		return ssc.getVariableService();
+	}
+	
 	//--------------------- lifecycle functions
-	// automatically generated lifecycle functions
-	public abstract void init();
-	public abstract void start();
-	public abstract void stop();
-	public abstract void destroy();
+	public void init() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).init();
+		}
+		
+		initUser();
+	}
+
+	public void start() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).start();
+		}
+
+		startUser();
+	}
+	
+	public void stop() {
+		stopUser();
+
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).stop();
+		}
+	}
+	
+	public void destroy() {
+		for (IRTObject child : getChildren()) {
+			if (child instanceof ActorClassBase)
+				((ActorClassBase) child).destroy();
+		}
+	}
+	
 	public abstract void executeInitTransition();
 
 	// not automatically generated lifecycle functions
@@ -92,10 +137,6 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	
 	public int getState() {
 		return state;
-	}
-
-	public MessageService getMsgsvc() {
-		return ownMsgsvc;
 	}
 	
 	protected boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, Object generic_data){

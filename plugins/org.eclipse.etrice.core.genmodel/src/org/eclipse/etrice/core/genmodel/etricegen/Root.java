@@ -26,7 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Root</b></em>'.
+ * A representation of the model object '<em><b>Root</b></em>' which represents the root object of the
+ * whole generator model.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -55,8 +56,8 @@ public interface Root extends EObject {
 	 * Returns the value of the '<em><b>Library</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Library</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Return <code>true</code> if the models form a library. In this case all ROOM classes are transformed
+	 * and accessible through this object regardless if they are used (referenced) or not
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Library</em>' attribute.
@@ -82,8 +83,7 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>System Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * A list of all generated system instances.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>System Instances</em>' containment reference list.
@@ -98,8 +98,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Own Sub System Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * A list of all generated top level sub system instances (i.e. sub system instances not referenced
+	 * by a logical system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Own Sub System Instances</em>' containment reference list.
@@ -114,8 +114,7 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub System Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * A list of all generated sub system instances.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub System Instances</em>' reference list.
@@ -130,8 +129,7 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.RoomModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Models</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a collection of all models that have been transformed.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Models</em>' reference list.
@@ -146,8 +144,7 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Xp Actor Classes</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all generated expanded actor classes.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Xp Actor Classes</em>' containment reference list.
@@ -162,8 +159,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.DataClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Used Data Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all used data classes (i.e. directly or indirectly referenced starting from the top level object
+	 * which is a logical system or, if no such is present, a sub system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Data Classes</em>' reference list.
@@ -178,8 +175,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.ProtocolClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Used Protocol Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all used protocol classes (i.e. directly or indirectly referenced starting from the top level object
+	 * which is a logical system or, if no such is present, a sub system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Protocol Classes</em>' reference list.
@@ -194,8 +191,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.ActorClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Used Actor Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all used actor classes (i.e. directly or indirectly referenced starting from the top level object
+	 * which is a logical system or, if no such is present, a sub system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Actor Classes</em>' reference list.
@@ -210,8 +207,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.RoomModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Used Room Models</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all used models (i.e. directly or indirectly referenced starting from the top level object
+	 * which is a logical system or, if no such is present, a sub system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Used Room Models</em>' reference list.
@@ -226,8 +223,8 @@ public interface Root extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub System Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * This is a list of all used sub system classes (i.e. directly or indirectly referenced starting from the top level object
+	 * which is a logical system or, if no such is present, a sub system).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub System Classes</em>' reference list.
@@ -239,6 +236,8 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param cls a room class
+	 * @return all room models referenced directly or indirectly by this room class
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -247,6 +246,8 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param cls an actor class
+	 * @return all protocol classes referenced directly or indirectly by this actor class
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -255,15 +256,42 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param ai an actor instance
+	 * @return the expanded actor class associated with this instance
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
 
-	// TODO: is this the right place ?
+	/**
+	 * <!-- begin-user-doc -->
+	 * @param cls a data class
+	 * @return all data classes referenced directly or indirectly by this data class
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
 	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @param cls an actor class
+	 * @return all data classes referenced directly or indirectly by this actor class
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
 	HashSet<DataClass> getReferencedDataClasses(ActorClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @param cls a protocol class
+	 * @return all data classes referenced directly or indirectly by this protocol class
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
 	HashSet<DataClass> getReferencedDataClasses(ProtocolClass pc);
 
 	

@@ -1,9 +1,14 @@
-/*
- * MessageServiceController.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 22.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "MessageServiceController.h"
 
@@ -22,7 +27,7 @@ MessageServiceController::MessageServiceController(/*IRTObject parent*/)
 }
 
 void MessageServiceController::addMsgSvc(MessageService& msgSvc) {
-	// TODOTS: Who is parent of MessageServices ?
+	// TODO TS: Who is parent of MessageServices ?
 	//TODO assert
 	//assert(msgSvc.getAddress().m_threadID == m_messageServiceList.size());
 	m_messageServiceList.push_back(&msgSvc);
@@ -43,31 +48,28 @@ void MessageServiceController::connectAll() {
 	}
 }
 
-void MessageServiceController::start() {
+void MessageServiceController::start(bool singlethreaded) {
 	// start all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//TODO start thread
-		//msgSvc.start();
-		// TODOTS: start in order of priorities
+		(*it)->start(singlethreaded);
+		// TODO TS: start in order of priorities
 	}
 	m_running = true;
 }
 
-void MessageServiceController::stop() {
+void MessageServiceController::stop(bool singlethreaded) {
 	//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
-	terminate();
-	waitTerminate();
+	if (! singlethreaded) {
+		terminate();
+		waitTerminate();
+	}
 }
 
 void MessageServiceController::waitTerminate() {
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//try {
-			//TODO thread join
-			//msgSvc.join();
-		//} catch (InterruptedException e1) {
-		//}
+		(*it)->join();
 	}
 }
 
@@ -98,9 +100,8 @@ void MessageServiceController::terminate() {
 	// terminate all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
-		//TODO: terminate thread
-		//msgSvc.terminate();
-		// TODOTS: stop in order of priorities
+		(*it)->terminate();
+		//TODO TS: stop in order of priorities
 	}
 }
 
@@ -108,9 +109,7 @@ void MessageServiceController::runOnce() {
 	if (!m_running) {
 		return;
 	}
-	//m_running = false;
 
-	// terminate all message services
 	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
 			it != m_messageServiceList.end(); ++it) {
 		(*it)->runOnce();

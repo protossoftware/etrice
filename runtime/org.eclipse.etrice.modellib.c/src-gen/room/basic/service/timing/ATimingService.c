@@ -16,7 +16,9 @@
 #include "PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
-//etTimerControlBlock tcbs[ET_NB_OF_TCBS];
+etTimerControlBlock tcbs[ET_NB_OF_TCBS];
+etTimerControlBlock* usedTcbsRoot; 
+etTimerControlBlock* freeTcbsRoot;
 /*--------------------- end user code ---------------------*/
 
 /* interface item IDs */
@@ -28,7 +30,8 @@ enum interface_items {
 enum state_ids {
 	NO_STATE = 0,
 	STATE_TOP = 1,
-	STATE_Operational = 2
+	STATE_Operational = 2,
+	STATE_MAX = 3
 };
 
 /* transition chains */
@@ -52,6 +55,10 @@ static void setState(ATimingService* self, int new_state) {
 	self->state = new_state;
 }
 
+static int getState(ATimingService* self) {
+	return self->state;
+}
+
 /* Entry and Exit Codes */
 static void entry_Operational(ATimingService* self) {
 	// prepare
@@ -62,11 +69,11 @@ static  void do_Operational(ATimingService* self) {
 	etTargetTime_t t;
 	
 	getTimeFromTarget(&t);
-	while (self->usedTcbsRoot /* ORIG: usedTcbsRoot */ !=0 ){
-		if (ATimingService_isTimeGreater(self, &t, &(self->usedTcbsRoot /* ORIG: usedTcbsRoot */->expTime)) /* ORIG: isTimeGreater(&t,&(usedTcbsRoot->expTime)) */){
-			PTimerReplPort_timeout(&self->constData->timer, self->usedTcbsRoot /* ORIG: usedTcbsRoot */->portIdx) /* ORIG: timer[usedTcbsRoot->portIdx].timeout() */;
-			temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
-			self->usedTcbsRoot /* ORIG: usedTcbsRoot */=self->usedTcbsRoot /* ORIG: usedTcbsRoot */->next;
+	while (usedTcbsRoot !=0 ){
+		if (ATimingService_isTimeGreater(self, &t, &(usedTcbsRoot->expTime)) /* ORIG: isTimeGreater(&t,&(usedTcbsRoot->expTime)) */){
+			PTimerReplPort_timeout(&self->constData->timer, usedTcbsRoot->portIdx) /* ORIG: timer[usedTcbsRoot->portIdx].timeout() */;
+			temp=usedTcbsRoot;
+			usedTcbsRoot=usedTcbsRoot->next;
 			if((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){
 				// single shot timer
 				ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
@@ -84,14 +91,14 @@ static  void do_Operational(ATimingService* self) {
 /* Action Codes */
 static void action_TRANS_INITIAL_TO__Operational(ATimingService* self) {
 	int i;
-	self->usedTcbsRoot /* ORIG: usedTcbsRoot */=0;
-	self->freeTcbsRoot /* ORIG: freeTcbsRoot */=&self->tcbs[0] /* ORIG: tcbs[0] */;
-	self->tcbs[ET_NB_OF_TCBS-1] /* ORIG: tcbs[ET_NB_OF_TCBS-1] */.next=0;
+	usedTcbsRoot=0;
+	freeTcbsRoot=&tcbs[0];
+	tcbs[ET_NB_OF_TCBS-1].next=0;
 	for (i=0;i<ET_NB_OF_TCBS-1;i++){
-		self->tcbs[i] /* ORIG: tcbs[i] */.next=&self->tcbs[i+1] /* ORIG: tcbs[i+1] */;
+		tcbs[i].next=&tcbs[i+1];
 		}
 }
-static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ATimingService* self, InterfaceItemBase ifitem, uint32 time) {
+static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ATimingService* self, const InterfaceItemBase* ifitem, uint32 time) {
 	etTimerControlBlock* timer = ATimingService_getTcb(self) /* ORIG: getTcb() */;
 	etTargetTime_t t;
 	if (timer!= 0){
@@ -105,7 +112,7 @@ static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttime
 		ATimingService_putTcbToUsedList(self, timer) /* ORIG: putTcbToUsedList(timer) */;
 		}
 }
-static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ATimingService* self, InterfaceItemBase ifitem, uint32 time) {
+static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ATimingService* self, const InterfaceItemBase* ifitem, uint32 time) {
 	etTimerControlBlock* timer = ATimingService_getTcb(self) /* ORIG: getTcb() */;
 	etTargetTime_t t;
 	if (timer!= 0){
@@ -118,7 +125,7 @@ static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_
 		ATimingService_putTcbToUsedList(self, timer) /* ORIG: putTcbToUsedList(timer) */;
 		}
 }
-static void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(ATimingService* self, InterfaceItemBase ifitem) {
+static void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(ATimingService* self, const InterfaceItemBase* ifitem) {
 	ATimingService_removeTcbFromUsedList(self, ((etReplSubPort*)ifitem)->index) /* ORIG: removeTcbFromUsedList(((etReplSubPort*)ifitem)->index) */;
 }
 
@@ -127,14 +134,16 @@ static void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(AT
  * parent states while remembering the history
  * @param current - the current state
  * @param to - the final parent state
- * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
  */
-static void exitTo(ATimingService* self, int current, int to, boolean handler) {
+static void exitTo(ATimingService* self, etInt16 current, etInt16 to) {
 	while (current!=to) {
 		switch (current) {
 			case STATE_Operational:
 				self->history[STATE_TOP] = STATE_Operational;
 				current = STATE_TOP;
+				break;
+			default:
+				/* should not occur */
 				break;
 		}
 	}
@@ -145,9 +154,9 @@ static void exitTo(ATimingService* self, int current, int to, boolean handler) {
  * matching the trigger of this chain. The ID of the final state is returned
  * @param chain - the chain ID
  * @param generic_data - the generic data pointer
- * @return the ID of the final state
+ * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
  */
-static int executeTransitionChain(ATimingService* self, int chain, InterfaceItemBase ifitem, void* generic_data) {
+static etInt16 executeTransitionChain(ATimingService* self, int chain, const InterfaceItemBase* ifitem, void* generic_data) {
 	switch (chain) {
 		case CHAIN_TRANS_INITIAL_TO__Operational:
 		{
@@ -171,6 +180,9 @@ static int executeTransitionChain(ATimingService* self, int chain, InterfaceItem
 			action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(self, ifitem);
 			return STATE_Operational;
 		}
+			default:
+				/* should not occur */
+				break;
 	}
 	return NO_STATE;
 }
@@ -178,80 +190,89 @@ static int executeTransitionChain(ATimingService* self, int chain, InterfaceItem
 /**
  * calls entry codes while entering a state's history. The ID of the final leaf state is returned
  * @param state - the state which is entered
- * @param handler - entry code is executed if not handler
  * @return - the ID of the final leaf state
  */
-static int enterHistory(ATimingService* self, int state, boolean handler, boolean skip_entry) {
+static etInt16 enterHistory(ATimingService* self, etInt16 state) {
+	boolean skip_entry = FALSE;
+	if (state >= STATE_MAX) {
+		state = state - STATE_MAX;
+		skip_entry = TRUE;
+	}
 	while (TRUE) {
 		switch (state) {
 			case STATE_Operational:
-				if (!(skip_entry || handler)) entry_Operational(self);
-				// in leaf state: return state id
+				if (!(skip_entry)) entry_Operational(self);
+				/* in leaf state: return state id */
 				return STATE_Operational;
 			case STATE_TOP:
 				state = self->history[STATE_TOP];
 				break;
+			default:
+				/* should not occur */
+				break;
 		}
 		skip_entry = FALSE;
 	}
-	//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
+	/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */
 }
 
-static void executeInitTransition(ATimingService* self) {
+static void ATimingService_executeInitTransition(ATimingService* self) {
 	int chain = CHAIN_TRANS_INITIAL_TO__Operational;
-	int next = executeTransitionChain(self, chain, NULL, NULL);
-	next = enterHistory(self, next, FALSE, FALSE);
+	etInt16 next = executeTransitionChain(self, chain, NULL, NULL);
+	next = enterHistory(self, next);
 	setState(self, next);
 }
 
 /* receiveEvent contains the main implementation of the FSM */
-static void receiveEvent(ATimingService* self, InterfaceItemBase ifitem, int evt, void* generic_data) {
+static void ATimingService_receiveEvent(ATimingService* self, InterfaceItemBase* ifitem, int evt, void* generic_data) {
 	int trigger = (ifitem==NULL)? POLLING : ifitem->localId + EVT_SHIFT*evt;
 	int chain = NOT_CAUGHT;
-	int catching_state = NO_STATE;
-	boolean is_handler = FALSE;
-	boolean skip_entry = FALSE;
+	etInt16 catching_state = NO_STATE;
 	
 	if (!handleSystemEvent(ifitem, evt, generic_data)) {
-		switch (getState()) {
+		switch (getState(self)) {
 			case STATE_Operational:
 				switch(trigger) {
 				case POLLING:
-					do_Operational(self);
+						do_Operational(self);
 					break;
-					case TRIG_timer__startTimeout:
-						{
-							chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__startTimer:
-						{
-							chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
-							catching_state = STATE_TOP;
-						}
-					break;
-					case TRIG_timer__kill:
-						{
-							chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
-							catching_state = STATE_TOP;
-						}
-					break;
+						case TRIG_timer__startTimeout:
+							{
+								chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__startTimer:
+							{
+								chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
+								catching_state = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__kill:
+							{
+								chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
+								catching_state = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
 				}
+				break;
+			default:
+				/* should not occur */
 				break;
 		}
 	}
 	if (chain != NOT_CAUGHT) {
-		exitTo(getState(), catching_state, is_handler);
-		int next = executeTransitionChain(self, chain, ifitem, generic_data);
-		next = enterHistory(self, next, is_handler, skip_entry);
-		setState(self, next);
+		exitTo(self, getState(self), catching_state);
+		{
+			etInt16 next = executeTransitionChain(self, chain, ifitem, generic_data);
+			next = enterHistory(self, next);
+			setState(self, next);
+		}
 	}
 }
-	 
-//******************************************
-// END of generated code for FSM
-//******************************************
 
 void ATimingService_init(ATimingService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("ATimingService", "init")
@@ -261,7 +282,7 @@ void ATimingService_init(ATimingService* self){
 		for (i=0; i<ATIMINGSERVICE_HISTORY_SIZE; ++i)
 			self->history[i] = NO_STATE;
 	}
-	executeInitTransition(self);
+	ATimingService_executeInitTransition(self);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
@@ -269,7 +290,7 @@ void ATimingService_init(ATimingService* self){
 void ATimingService_receiveMessage(void* self, void* ifitem, const etMessage* msg){
 	ET_MSC_LOGGER_SYNC_ENTRY("ATimingService", "_receiveMessage")
 	
-	receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
+	ATimingService_receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -277,7 +298,7 @@ void ATimingService_receiveMessage(void* self, void* ifitem, const etMessage* ms
 void ATimingService_execute(ATimingService* self) {
 	ET_MSC_LOGGER_SYNC_ENTRY("ATimingService", "_execute")
 	
-	receiveEvent(self, NULL, 0, NULL);
+	ATimingService_receiveEvent(self, NULL, 0, NULL);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -285,29 +306,29 @@ void ATimingService_execute(ATimingService* self) {
 /*--------------------- operations ---------------------*/
 etTimerControlBlock* ATimingService_getTcb(ATimingService* self) {
 	
-				etTimerControlBlock* temp = self->freeTcbsRoot /* ORIG: freeTcbsRoot */;
+				etTimerControlBlock* temp = freeTcbsRoot;
 				
-				if(self->freeTcbsRoot /* ORIG: freeTcbsRoot */!=0) {
-					self->freeTcbsRoot /* ORIG: freeTcbsRoot */=self->freeTcbsRoot /* ORIG: freeTcbsRoot */->next;
+				if(freeTcbsRoot!=0) {
+					freeTcbsRoot=freeTcbsRoot->next;
 					temp->next=0;
 					}
 				return temp;
 }
 void ATimingService_returnTcb(ATimingService* self, etTimerControlBlock* block) {
 	
-				block->next=self->freeTcbsRoot /* ORIG: freeTcbsRoot */;
-				self->freeTcbsRoot /* ORIG: freeTcbsRoot */=block;
+				block->next=freeTcbsRoot;
+				freeTcbsRoot=block;
 }
 void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
-				etTimerControlBlock* temp2=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+				etTimerControlBlock* temp=usedTcbsRoot;
+				etTimerControlBlock* temp2=usedTcbsRoot;
 				
 				if (temp==0) return;
 	
-				if (self->usedTcbsRoot /* ORIG: usedTcbsRoot */->portIdx == idx){
+				if (usedTcbsRoot->portIdx == idx){
 					// element found, the first one
-					self->usedTcbsRoot /* ORIG: usedTcbsRoot */ = self->usedTcbsRoot /* ORIG: usedTcbsRoot */->next;
+					usedTcbsRoot = usedTcbsRoot->next;
 					ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
 					return;
 					}
@@ -327,13 +348,13 @@ void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 }
 void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* block) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
-				etTimerControlBlock* temp2=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+				etTimerControlBlock* temp=usedTcbsRoot;
+				etTimerControlBlock* temp2=usedTcbsRoot;
 	
 				if (temp==0){
 					// list empty put new block to root
 					block->next=0;
-					self->usedTcbsRoot /* ORIG: usedTcbsRoot */=block;
+					usedTcbsRoot=block;
 					return;
 					}
 				
@@ -346,8 +367,8 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 							}else{
 							// right position found
 							block->next=temp;
-							if(temp==self->usedTcbsRoot /* ORIG: usedTcbsRoot */){
-								self->usedTcbsRoot /* ORIG: usedTcbsRoot */=block;
+							if(temp==usedTcbsRoot){
+								usedTcbsRoot=block;
 								}else{
 								temp2->next=block;
 								}
@@ -379,10 +400,10 @@ void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTi
 }
 void ATimingService_printList(ATimingService* self) {
 	
-				etTimerControlBlock* temp=self->usedTcbsRoot /* ORIG: usedTcbsRoot */;
+				etTimerControlBlock* temp=usedTcbsRoot;
 					printf("list: ");
 					while (temp!=0){
-						printf("(%d,%d),",temp->expTime.sec,temp->expTime.nSec);
+						printf("(%ld,%ld),",temp->expTime.sec,temp->expTime.nSec);
 						temp=temp->next;
 					}
 					printf("\n");

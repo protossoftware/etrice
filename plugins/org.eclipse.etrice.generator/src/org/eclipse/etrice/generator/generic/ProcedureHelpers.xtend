@@ -30,15 +30,23 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.base.AbstractGenerator
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.PrimitiveType
 
+/**
+ * A collection of methods for generation of user code, attributes with getters and setters
+ * and operations.
+ */
 @Singleton
 class ProcedureHelpers {
 
-	@Inject ILanguageExtension languageExt
 	@Inject extension TypeHelpers
+	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
 
+	/**
+	 * @param dc a {@link DataClass}
+	 * @param id 0, 1 or 2 for the corresponding user codes
+	 * @return the generated code
+	 */
 	def userCode(DataClass dc, int id) {
 		switch (id) {
 			case 1: userCode(getDeepUserCode1(dc))
@@ -47,6 +55,11 @@ class ProcedureHelpers {
 		}
 	}
 
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param id 0, 1 or 2 for the corresponding user codes
+	 * @return the generated code
+	 */
 	def userCode(ProtocolClass pc, int id) {
 		switch (id) {
 			case 1: userCode(getDeepUserCode1(pc))
@@ -55,6 +68,11 @@ class ProcedureHelpers {
 		}
 	}
 
+	/**
+	 * @param ac an {@link ActorContainerClass}
+	 * @param id 0, 1 or 2 for the corresponding user codes
+	 * @return the generated code
+	 */
 	def userCode(ActorContainerClass ac, int id) {
 		switch (id) {
 			case 1: userCode(getDeepUserCode1(ac))
@@ -63,12 +81,16 @@ class ProcedureHelpers {
 		}
 	}
 	
+	/**
+	 * @param dc some {@link DetailCode}
+	 * @return a string containing the expanded code surrounded by
+	 * 		comments (no tag replacement will happen)
+	 */
 	def userCode(DetailCode dc) {
 		userCode(getDetailCode(dc))
 	}
 	
 	def private userCode(String code) {
-		
 	'''
 		«IF code!=null && !code.empty»
 			/*--------------------- begin user code ---------------------*/
@@ -78,9 +100,14 @@ class ProcedureHelpers {
 	'''
 	}
 	
-	// Attributes 
-	/* TODO: add ref type */
-	def attributes(List<Attribute> attribs) {'''
+	// Attributes
+	
+	/**
+	 * @param attribs a list of {@link Attribute}s
+	 * @return code declaring the attributes
+	 */
+	def attributes(List<Attribute> attribs) {
+	'''
 		/*--------------------- attributes ---------------------*/
 		«FOR attribute : attribs»
 			«attributeDeclaration(attribute)»
@@ -88,7 +115,12 @@ class ProcedureHelpers {
 	'''
 	}
 	
-	def attributeDeclaration(Attribute attribute){'''
+	/**
+	 * @param attribute an {@link Attribute}
+	 * @return the code declaring the attribute
+	 */
+	def attributeDeclaration(Attribute attribute){
+	'''
 		«IF attribute.size==0»
 			«attribute.refType.type.typeName»«IF attribute.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
 		«ELSE»
@@ -97,8 +129,12 @@ class ProcedureHelpers {
 	'''	
 	}
 
+	/**
+	 * @param attribute an {@link Attribute}
+	 * @return the code for an array initializer
+	 */
 	def arrayInitializer(Attribute att) {
-		var dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.refType.type)
+		val dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.refType.type)
 
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)
@@ -119,17 +155,30 @@ class ProcedureHelpers {
 	}
 	
 	// Attribute setters & getters
-	def attributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {'''
-		//--------------------- attribute setters and getters
+	
+	/**
+	 * @param attribs a list of {@link Attribute}s
+	 * @param classname the name of the defining class
+	 * @return code declaring setters and getters for the attributes
+	 */	
+	def attributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {
+	'''
+		/* --------------------- attribute setters and getters */
 		«FOR attribute : attribs»
 			«setterHeader(attribute, classname)»;
 			«getterHeader(attribute, classname)»;
 		«ENDFOR»
 	'''
 	}
-	
-	def attributeSettersGettersImplementation(List<Attribute> attribs, String classname) {'''
-		//--------------------- attribute setters and getters
+
+	/**
+	 * @param attribs a list of {@link Attribute}s
+	 * @param classname the name of the defining class
+	 * @return code defining setters and getters for the attributes
+	 */	
+	def attributeSettersGettersImplementation(List<Attribute> attribs, String classname) {
+	'''
+		/* --------------------- attribute setters and getters */
 		«FOR attribute : attribs»«setterHeader(attribute, classname)» {
 			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
 		}
@@ -140,38 +189,87 @@ class ProcedureHelpers {
 	'''
 	}
 	
-	def private setterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
-	}
-	def private getterHeader(Attribute attribute, String classname){'''
-		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
+	/**
+	 * @param attribute an {@link Attribute}
+	 * @param classname the name of the defining class
+	 * @return code for the attribute setter declaration
+	 */	
+	def private setterHeader(Attribute attribute, String classname){
+	'''
+		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)
+	'''
 	}
 	
+	/**
+	 * @param attribute an {@link Attribute}
+	 * @param classname the name of the defining class
+	 * @return code for the attribute getter declaration
+	 */	
+	def private getterHeader(Attribute attribute, String classname){
+	'''
+		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)
+	'''
+	}
+	
+	/**
+	 * @param attribs a list of {@link Attribute}s
+	 * @return an argument list for the attributes
+	 */
 	def argList(List<Attribute> attributes) {
 		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 	
+	/**
+	 * @param attribs an iterable of {@link Attribute}s representing a path
+	 * @param classname the name of the defining class
+	 * @return the invocation code for the call of a setter
+	 */	
 	def invokeGetters(Iterable<Attribute> path, String classname){
 		'''«FOR a : path SEPARATOR '.'»«invokeGetter(a.name, classname)»«ENDFOR»'''
 	}
 
 	// generic setters & getters
 	
-	def getterImplementation(String typeName, String name, String classname){'''
+	/**
+	 * @param typeName the type name of the attribute
+	 * @param name the name of the attribute
+	 * @param classname the name of the type defining the getter
+	 * @return code defining the attribute getter
+	 */
+	def getterImplementation(String typeName, String name, String classname){
+	'''
 		«languageExt.accessLevelPublic()»«typeName» get«name.toFirstUpper()» («languageExt.selfPointer(classname, false)»){
 			return «languageExt.memberAccess()»«name»;
-		}'''
+		}
+	'''
 	}
 	
+	/**
+	 * @param name the name of the attribute
+	 * @param classname the name of the type defining the getter
+	 * @return code defining the getter call
+	 */
 	def invokeGetter(String name, String classname){
 		'''get«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»)'''
 	}
 	
+	/**
+	 * @param name the name of the attribute
+	 * @param classname the name of the type defining the getter
+	 * @param value the value to be assigned
+	 * @return code defining the setter call
+	 */
 	def invokeSetter(String name, String classname, String value){
 		'''set«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
 	}
 	
 	// Operations
+	
+	/**
+	 * @param operations a list of {@link Operation}s
+	 * @param classname the name of the type defining the getter
+	 * @return code declaring the operations
+	 */
 	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
@@ -182,6 +280,11 @@ class ProcedureHelpers {
 		'''
 	}
 
+	/**
+	 * @param operations a list of {@link Operation}s
+	 * @param classname the name of the type defining the getter
+	 * @return code defining the operations
+	 */
 	def operationsImplementation(List<? extends Operation> operations, String classname) {
 	'''
 		/*--------------------- operations ---------------------*/
@@ -195,14 +298,27 @@ class ProcedureHelpers {
 		'''
 	}
 
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return code defining all operations of the actor class
+	 */
 	def operationsImplementation(ActorClass ac) {
 		operationsImplementation(ac.operations, ac.name)
 	}
 	
+	/**
+	 * @param classname the name of a class
+	 * @return code calling the destructor of the class
+	 */
 	def destructorCall(String classname) {
 		languageExt.destructorName(classname)+"()"
 	}
 	
+	/**
+	 * @param operation an {@link Operation}
+	 * @return the operation signature (with special care for
+	 * 		constructor and destructor
+	 */
 	def private operationSignature(Operation operation, String classname) {
 		if (operation.constructor)
 			classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType)
@@ -212,6 +328,10 @@ class ProcedureHelpers {
 			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype))
 	}
 
+	/**
+	 * @param type a {@link RefableType}
+	 * @return a string for the type (also for pointers)
+	 */
 	def private dataTypeToString(RefableType type) {
 		return if (type==null)
 			"void"
@@ -234,6 +354,7 @@ class ProcedureHelpers {
 		'''«languageExt.accessLevelPublic()»«returnType» «languageExt.memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
 	}
 	
+<<<<<<< HEAD
 //	def attributeInitializer(Attribute a, String valueFromModel){
 //		if(a.refType.type.primitive){
 //			var aType = a.refType.type as PrimitiveType
@@ -265,3 +386,6 @@ class ProcedureHelpers {
 //		
 //	}	
 }
+=======
+}
+>>>>>>> origin/master

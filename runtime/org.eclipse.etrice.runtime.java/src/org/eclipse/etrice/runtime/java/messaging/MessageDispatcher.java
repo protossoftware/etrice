@@ -14,7 +14,8 @@ import java.util.HashMap;
 /**
  * The message dispatcher class used by the MessageService.
  * 
- * @author Thomas Schuetz
+ * @author Thomas Schuetz (initial contribution)
+ * @author Henrik Rentz-Reichert (address management)
  *
  */
 public class MessageDispatcher extends RTObject implements IMessageReceiver {
@@ -25,11 +26,12 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 	private ArrayList<Address> freeAdresses = new ArrayList<Address>();
 	
 	private Address address = null;
-	private int nextFreeObjId = 1;
+	private int nextFreeObjId;
 
 	public MessageDispatcher(IRTObject parent, Address addr, String name){
 		super(parent, name);
 		address = addr;
+		nextFreeObjId = addr.objectID+1;
 	}
 	
 	public Address getFreeAddress() {

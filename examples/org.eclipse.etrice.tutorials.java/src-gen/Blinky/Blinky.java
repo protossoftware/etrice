@@ -27,7 +27,6 @@ public class Blinky extends ActorClassBase {
 	private TrafficLight2 pedLights;
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	protected BlinkyControlProtocollPort ControlPort = null;
 	
@@ -40,7 +39,6 @@ public class Blinky extends ActorClassBase {
 	public static final int IFITEM_ControlPort = 1;
 	public static final int IFITEM_timer = 2;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 	public void Blinky_dtor() {
@@ -48,21 +46,23 @@ public class Blinky extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public Blinky(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public Blinky(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("Blinky");
 		
 		// initialize attributes
 
 		// own ports
-		ControlPort = new BlinkyControlProtocollPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		ControlPort = new BlinkyControlProtocollPort(this, "ControlPort", IFITEM_ControlPort); 
 		
 		// own saps
-		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0, port_addr[IFITEM_timer][0], peer_addr[IFITEM_timer][0]); 
+		timer = new PTimerConjPort(this, "timer", IFITEM_timer, 0); 
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -76,23 +76,16 @@ public class Blinky extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
 	public void destroy(){
 		Blinky_dtor();
+		super.destroy();
 	}
 
-	
 	/* state IDs */
 	public static final int STATE_blinking = 2;
 	public static final int STATE_off = 3;
@@ -126,14 +119,15 @@ public class Blinky extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
 	
 	/* Entry and Exit Codes */
 	protected void entry_blinking_on() {
-		timer.startTimer(1000);
+		timer.startTimeout(1000);
 		carLights.setState(TrafficLight3.YELLOW);
 	}
 	protected void entry_blinking_off() {
@@ -277,7 +271,7 @@ public class Blinky extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_off:
 					switch(trigger) {
 						case TRIG_ControlPort__start:
@@ -323,7 +317,7 @@ public class Blinky extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

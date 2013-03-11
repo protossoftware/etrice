@@ -28,19 +28,32 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.generator.generic.TransitionChainGenerator
+import org.eclipse.etrice.core.room.TransitionPoint
 
 import static org.eclipse.xtext.util.Tuples.*
 
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import static extension org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil.*
 
+/**
+ * A target language independent generator of the state machine implementation-
+ */
 class GenericStateMachineGenerator {
 
-	@Inject protected ILanguageExtension langExt
 	@Inject protected extension RoomExtensions
+	@Inject protected ILanguageExtension langExt
 	@Inject protected GenericProtocolClassGenerator pcGen
 	@Inject protected TransitionChainGenerator transitionChainGenerator
 
-	def private genStateIdConstants(ExpandedActorClass xpac) {
+	/**
+	 * generates state ID constants.
+	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
+	def protected genStateIdConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		// with inheritance we exclude inherited base states
 		var offset = 2 + if (langExt.usesInheritance)
@@ -56,14 +69,22 @@ class GenericStateMachineGenerator {
 			list.add(pair("STATE_TOP","1"))
 		}
 		for (state : baseStates) {
-			list.add(pair(state.getStateId, offset.toString))
+			list.add(pair(state.getGenStateId, offset.toString))
 			offset = offset+1;
 		}
+		list.add(pair("STATE_MAX", offset.toString))
 		
 		return langExt.genEnumeration("state_ids", list)
 	}
 	
-	def private genTransitionChainConstants(ExpandedActorClass xpac) {
+	/**
+	 * generates transition chain ID constants.
+	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
+	def protected genTransitionChainConstants(ExpandedActorClass xpac) {
 		var chains = if (langExt.usesInheritance)
 			xpac.getOwnTransitionChains() else xpac.transitionChains
 		var offset = if (langExt.usesInheritance)
@@ -72,13 +93,20 @@ class GenericStateMachineGenerator {
 		var list = new ArrayList<Pair<String, String>>()
 		for (chain : chains) {
 			offset = offset+1;
-			list.add(pair(chain.getChainId, offset.toString))
+			list.add(pair(chain.genChainId, offset.toString))
 		}
 		
 		return langExt.genEnumeration("chain_ids", list)
 	}
 	
-	def genTriggerConstants(ExpandedActorClass xpac) {
+	/**
+	 * generates trigger IDs.
+	 * Inheritance (if available) is used for base class IDs.
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
+	def protected genTriggerConstants(ExpandedActorClass xpac) {
 		val triggers = if (langExt.usesInheritance)
 			xpac.getOwnTriggers() else xpac.triggers
 
@@ -91,10 +119,26 @@ class GenericStateMachineGenerator {
 		return langExt.genEnumeration("triggers", list)
 	}
 	
+	/**
+	 * generates the code of the whole state machine
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @return the generated code
+	 * 
+	 * @see {@link #genStateMachine}
+	 */
 	def genStateMachine(ExpandedActorClass xpac) {
 		xpac.genStateMachine(true)
 	}
 	
+	/**
+	 * generates the code of the whole state machine
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param shallGenerateOneFile if <code>true</code> the generation of state IDs and
+	 * 		other constants is skipped (and left for the header file)
+	 * @return the generated code
+	 */
 	def genStateMachine(ExpandedActorClass xpac, boolean shallGenerateOneFile) {
 		val ac = xpac.actorClass
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
@@ -125,6 +169,8 @@ class GenericStateMachineGenerator {
 								"const "+ifItemPtr
 							else
 								ifItemPtr
+		val usesHdlr = usesHandlerTrPoints(xpac)
+		
 	'''
 		«IF shallGenerateOneFile»
 		/* state IDs */
@@ -147,8 +193,8 @@ class GenericStateMachineGenerator {
 		«ENDFOR»
 		
 		/* Action Codes */
-		«FOR tr : xpac.stateMachine.getTransitionList()»
-			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
+		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
+			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
@@ -162,18 +208,23 @@ class GenericStateMachineGenerator {
 		 * parent states while remembering the history
 		 * @param current - the current state
 		 * @param to - the final parent state
+		 «IF usesHdlr»
 		 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+		 «ENDIF»
 		 */
-		«privAccess»void «opScopePriv»exitTo(«self»int current, int to, «boolType» handler) {
+		«privAccess»void «opScopePriv»exitTo(«self»«stateType» current, «stateType» to«IF usesHdlr», «boolType» handler«ENDIF») {
 			while (current!=to) {
 				switch (current) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
-						case «state.getStateId()»:
-							«IF state.hasExitCode()»if (!handler) «state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
-							«langExt.memberAccess»history[«state.getParentStateId()»] = «state.getStateId()»;
+						case «state.getGenStateId()»:
+							«IF state.hasExitCode(true)»«IF usesHdlr»if (!handler) «ENDIF»«state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
+							«setHistory(state.getParentStateId(), state.getGenStateId())»;
 							current = «state.getParentStateId()»;
 							break;
 					«ENDFOR»
+					default:
+						/* should not occur */
+						break;
 				}
 			}
 		}
@@ -183,17 +234,20 @@ class GenericStateMachineGenerator {
 		 * matching the trigger of this chain. The ID of the final state is returned
 		 * @param chain - the chain ID
 		 * @param generic_data - the generic data pointer
-		 * @return the ID of the final state
+		 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 		 */
-		«privAccess»int «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
+		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
 			switch (chain) {
 				«var allchains = xpac.getTransitionChains()»
 				«FOR tc : allchains»
-					case «tc.getChainId()»:
+					case «tc.genChainId»:
 					{
 						«transitionChainGenerator.generateExecuteChain(xpac, tc)»
 					}
 				«ENDFOR»
+					default:
+						/* should not occur */
+						break;
 			}
 			return NO_STATE;
 		}
@@ -201,50 +255,60 @@ class GenericStateMachineGenerator {
 		/**
 		 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 		 * @param state - the state which is entered
+		 «IF usesHdlr»
 		 * @param handler - entry code is executed if not handler
+		 «ENDIF»
 		 * @return - the ID of the final leaf state
 		 */
-		«privAccess»int «opScopePriv»enterHistory(«self»int state, «boolType» handler, «boolType» skip_entry) {
+		«privAccess»«stateType» «opScopePriv»enterHistory(«self»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
+			«boolType» skip_entry = «langExt.booleanConstant(false)»;
+			if (state >= STATE_MAX) {
+				state = state - STATE_MAX;
+				skip_entry = «langExt.booleanConstant(true)»;
+			}
 			while («langExt.booleanConstant(true)») {
 				switch (state) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
-					case «state.getStateId()»:
-						«IF state.hasEntryCode()»if (!(skip_entry || handler)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
+					case «state.getGenStateId()»:
+						«IF state.hasEntryCode(true)»if (!(skip_entry«IF usesHdlr» || handler«ENDIF»)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 						«IF state.isLeaf()»
-							// in leaf state: return state id
-							return «state.getStateId()»;
+							/* in leaf state: return state id */
+							return «state.getGenStateId()»;
 						«ELSE»
-							// state has a sub graph
+							/* state has a sub graph */
 							«IF state.subgraph.hasInitTransition()»
-								// with init transition
-								if («langExt.memberAccess»history[«state.getStateId()»]==NO_STATE) {
+								/* with init transition */
+								if («getHistory(state.getGenStateId())»==NO_STATE) {
 									«var sub_initt = state.subgraph.getInitTransition()»
-									state = executeTransitionChain(«langExt.selfPointer(true)»«xpac.getChain(sub_initt).getChainId()»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+									state = executeTransitionChain(«langExt.selfPointer(true)»«xpac.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
 								}
 								else {
-									state = «langExt.memberAccess»history[«state.getStateId()»];
+									state = «getHistory(state.getGenStateId())»;
 								}
 							«ELSE»
-								// without init transition
-								state = «langExt.memberAccess»history[«state.getStateId()»];
+								/* without init transition */
+								state = «getHistory(state.getGenStateId())»;
 							«ENDIF»
 							break;
 						«ENDIF»
 					«ENDFOR»
 					case STATE_TOP:
-						state = «langExt.memberAccess»history[STATE_TOP];
+						state = «getHistory("STATE_TOP")»;
+						break;
+					default:
+						/* should not occur */
 						break;
 				}
 				skip_entry = «langExt.booleanConstant(false)»;
 			}
-			//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
+			«unreachableReturn»
 		}
 		
 		«publicIf»void «opScope»executeInitTransition(«selfOnly») {
 			«var initt = xpac.stateMachine.getInitTransition()»
-			int chain = «xpac.getChain(initt).getChainId()»;
-			int next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, «langExt.booleanConstant(false)», «langExt.booleanConstant(false)»);
+			int chain = «xpac.getChain(initt).genChainId»;
+			«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
 			setState(«langExt.selfPointer(true)»next);
 		}
 		
@@ -256,67 +320,88 @@ class GenericStateMachineGenerator {
 				int trigger = ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ENDIF»
 			int chain = NOT_CAUGHT;
-			int catching_state = NO_STATE;
+			«stateType» catching_state = NO_STATE;
+			«IF usesHdlr»
 			«boolType» is_handler = «langExt.booleanConstant(false)»;
-			«boolType» skip_entry = «langExt.booleanConstant(false)»;
+			«ENDIF»
 			
 			«IF handleEvents»
 				if (!handleSystemEvent(ifitem, evt, generic_data)) {
-					«genStateSwitch(xpac)»
+					«genStateSwitch(xpac, usesHdlr)»
 				}
 			«ELSE»
-				«genStateSwitch(xpac)»
+				«genStateSwitch(xpac, usesHdlr)»
 			«ENDIF»
 			if (chain != NOT_CAUGHT) {
-				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state, is_handler);
-				int next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
-				next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next, is_handler, skip_entry);
-				setState(«langExt.selfPointer(true)»next);
+				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state«IF usesHdlr», is_handler«ENDIF»);
+				{
+					«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
+					next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», is_handler«ENDIF»);
+					setState(«langExt.selfPointer(true)»next);
+				}
 			}
 		}
-			 
-		//******************************************
-		// END of generated code for FSM
-		//******************************************
 	'''}
+
 	
-	def private genStateSwitch(ExpandedActorClass xpac) {
+	/**
+	 * helper method which generates the state switch.
+	 * Asynchronous, data driven and event driven state machines are distinguished
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
+	 */
+	def protected genStateSwitch(ExpandedActorClass xpac, boolean usesHdlr) {
 		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
 		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
 		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
 		'''
 			switch (getState(«langExt.selfPointer(false)»)) {
 				«FOR state : xpac.stateMachine.getLeafStateList()»
-				case «state.getStateId()»:
+				case «state.getGenStateId()»:
 					«IF async»
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
 							switch(trigger) {
 							case POLLING:
-								«genDataDrivenTriggers(xpac, state)»
+									«genDataDrivenTriggers(xpac, state, usesHdlr)»
 								break;
-								«genEventDrivenTriggers(xpac, state, atlist)»
+									«genEventDrivenTriggers(xpac, state, atlist, usesHdlr)»
 							}
 						«ELSE»
-							«genDataDrivenTriggers(xpac, state)»
+								«genDataDrivenTriggers(xpac, state, usesHdlr)»
 						«ENDIF»
 					«ELSEIF dataDriven»
-						«genDataDrivenTriggers(xpac, state)»
+							«genDataDrivenTriggers(xpac, state, usesHdlr)»
 					«ELSEIF eventDriven»
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
 							switch(trigger) {
-								«genEventDrivenTriggers(xpac, state, atlist)»
+									«genEventDrivenTriggers(xpac, state, atlist, usesHdlr)»
 							}
 						«ENDIF»
 					«ENDIF»
 					break;
 				«ENDFOR»
+				default:
+					/* should not occur */
+					break;
 			}
 		'''
 	}
 	
-	def private genDataDrivenTriggers(ExpandedActorClass xpac, State state) {
+	/**
+	 * helper method which generates the data driven triggers
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param state the {@link State} for which the trigger if-else switch should be generated
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
+	 */
+	def protected genDataDrivenTriggers(ExpandedActorClass xpac, State state, boolean usesHdlr) {
 		'''
 			«genDoCodes(state)»
 			«var transitions = xpac.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)»
@@ -324,10 +409,11 @@ class GenericStateMachineGenerator {
 				if («AbstractGenerator::getInstance().getTranslatedCode((tr as GuardedTransition).guard)»)
 				{
 					«var chain = xpac.getChain(tr)»
-					chain = «chain.getChainId()»;
-					catching_state = «chain.getContextId()»;
-					«IF chain.isHandler()»is_handler = TRUE;«ENDIF»
-					«IF chain.skipEntry»skip_entry = TRUE;«ENDIF»
+					chain = «chain.genChainId»;
+					catching_state = «chain.stateContext.genStateId»;
+					«IF chain.isHandler() && usesHdlr»
+						is_handler = TRUE;
+					«ENDIF»
 				}
 				«IF tr!=transitions.last»
 					else 
@@ -336,32 +422,114 @@ class GenericStateMachineGenerator {
 		'''
 	}
 	
-	def private genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist) {
+	/**
+	 * helper method which generates the event driven triggers
+	 * 
+	 * @param xpac the {@link ExpandedActorClass}
+	 * @param state the {@link State} for which the trigger switch should be generated
+	 * @param atlist the list of {@link ActiveTrigger}s of this state
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * 		at all then unused variables can be avoided by passing <code>true</code> 
+	 * @return the generated code
+	 */
+	def protected genEventDrivenTriggers(ExpandedActorClass xpac, State state, List<ActiveTrigger> atlist, boolean usesHdlr) {
 		'''
 			«FOR at : atlist»
-				case «xpac.getTriggerCodeName(at.trigger)»:
-					«var needData = xpac.hasGuard(at)»
+				case «xpac.getTriggerCodeName(at)»:
+					«var needData = at.hasGuard»
 					«IF needData»{ «langExt.getTypedDataDefinition(at.msg)»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»
 						«var chain = xpac.getChain(tt)»
 						«guard(chain.transition, at.trigger, xpac)»
 						{
-							chain = «chain.getChainId()»;
-							catching_state = «chain.getContextId()»;
-							«IF chain.isHandler()»is_handler = «langExt.booleanConstant(true)»;«ENDIF»
-							«IF chain.skipEntry»skip_entry = «langExt.booleanConstant(true)»;«ENDIF»
+							chain = «chain.genChainId»;
+							catching_state = «chain.stateContext.genStateId»;
+							«IF chain.isHandler() && usesHdlr»
+								is_handler = «langExt.booleanConstant(true)»;
+							«ENDIF»
 						}
 					«ENDFOR»
 					«IF needData»}«ENDIF»
 				break;
 			«ENDFOR»
+			default:
+				/* should not occur */
+				break;
 		'''
 	}
-	def genExtra(ExpandedActorClass xpac) {''''''}
-	def genExtraDecl(ExpandedActorClass xpac) {''''''}
 	
-	def private dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {
-		var tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
+	/**
+	 * getter for history array
+	 * 
+	 * @param state the ID of the history state
+	 * @return the generated code
+	 */
+	def protected getHistory(String state) {
+		langExt.memberAccess+"history["+state+"]"
+	}
+
+	/**
+	 * setter for history array
+	 * 
+	 * @param the ID of the state whose history should be set
+	 * @param the ID of the state that should be assigned
+	 * @return the generated code
+	 */
+	def protected setHistory(String state, String historyState) {
+		langExt.memberAccess+"history["+state+"] = "+historyState
+	}
+	
+	/**
+	 * @return the type of (temporary) state variables (defaults to "int")
+	 * and has to be signed
+	 */
+	def protected stateType() {
+		"int"
+	}
+
+	/**
+	 * allow target language dependent generation of unreachable return in generated enterHistory method.
+	 * The default is just a comment.
+	 * @return the generated code
+	 */	
+	def protected unreachableReturn() {
+		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
+	}
+
+	/**
+	 * type of (temporary) boolean variables (defaults to "boolean")
+	 * @return the generated code
+	 */
+	def protected boolType() {
+		return "boolean"
+	}
+	
+	/**
+	 * let derived class add extra code after definition of constants
+	 * 
+	 * @param xpac an expanded actor class
+	 * @return the generated code
+	 */
+	def protected genExtra(ExpandedActorClass xpac) {''''''}
+	
+	/**
+	 * let derived class add extra code after definition of constants in header (if applicable)
+	 * 
+	 * @param xpac an expanded actor class
+	 * @return the generated code
+	 */
+	def protected genExtraDecl(ExpandedActorClass xpac) {''''''}
+
+	/**
+	 * generate a transition guard if applicable
+	 * 
+	 * @param tt a {@link TriggeredTransition}
+	 * @param trigger a trigger string
+	 * @param xpac an expanded actor class
+	 * @return the generated code
+	 */	
+	def protected dispatch guard(TriggeredTransition tt, String trigger, ExpandedActorClass ac) {
+		val tr = tt.triggers.findFirst(e|ac.isMatching(e, trigger))
 	'''
 		«IF tr.hasGuard()»
 			if («AbstractGenerator::getInstance().getTranslatedCode(tr.guard.guard)»)
@@ -369,14 +537,23 @@ class GenericStateMachineGenerator {
 	'''
 	}
 
-	def private dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {
+	/**
+	 * (necessary for completeness of the dispatching, never called)
+	 */
+	def protected dispatch guard(Transition t, String trigger, ExpandedActorClass ac) {
 	'''
 		/* error */
 	'''
 	}
 	
-	def private genDoCodes(State state) {'''
-		«IF state.hasDoCode()»
+	/**
+	 * generate the do code calls for a given state
+	 * 
+	 * @param state the {@link State}
+	 * @return the generated code
+	 */
+	def protected genDoCodes(State state) {'''
+		«IF state.hasDoCode(true)»
 			«state.getDoCodeOperationName()»(«langExt.selfPointer(false)»);
 		«ENDIF»
 		«IF state.eContainer.eContainer instanceof State»
@@ -384,11 +561,26 @@ class GenericStateMachineGenerator {
 		«ENDIF»
 	'''}
 	
-	def private genActionCodeMethods(ExpandedActorClass xpac, State state) {
+	/**
+	 * generate action code method implementations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @param state the {@link State}
+	 * @return the generated code
+	 */
+	def protected genActionCodeMethods(ExpandedActorClass xpac, State state) {
 		genActionCodeMethods(xpac, state, true);
 	}
 
-	def private genActionCodeMethods(ExpandedActorClass xpac, State state, boolean generateImplementation) {
+	/**
+	 * generate action code method implementations or declarations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @param state the {@link State}
+	 * @param generateImplementation if only declarations should be generated then <code>false</code> has to be passed
+	 * @return the generated code
+	 */
+	def protected genActionCodeMethods(ExpandedActorClass xpac, State state, boolean generateImplementation) {
 		val ac = xpac.actorClass
 		val selfPtr = langExt.selfPointer(xpac.actorClass.name, false)
 		val opScope = langExt.operationScope(ac.name, false)
@@ -410,11 +602,11 @@ class GenericStateMachineGenerator {
 			if (langExt.usesInheritance) {
 				// we call the super method in the generated code
 				val baseName = xpac.actorClass.base.name
-				if (!rs.inheritedEntry.empty)
+				if (rs.inheritedEntry.hasDetailCode)
 					entry = langExt.superCall(baseName, entryOp, "") + entry
-				if (!rs.inheritedExit.empty)
+				if (rs.inheritedExit.hasDetailCode)
 					exit = exit + langExt.superCall(baseName, exitOp, "")
-				if (!rs.inheritedDo.empty)
+				if (rs.inheritedDo.hasDetailCode)
 					docode = langExt.superCall(baseName, doOp, "") + docode
 			}
 			else {
@@ -455,14 +647,22 @@ class GenericStateMachineGenerator {
 		'''
 	}
 	
-	def constPointer(String classname) {
+	// TODO: move the next two methods to the C++ generator
+	
+	/**
+	 * @param classname the name of the type
+	 * @return the type name for a constant pointer
+	 */
+	def protected constPointer(String classname) {
 		return classname	
 	}
 
-	def boolType() {
-		return "boolean"
-	}
-	
+	/**
+	 * generate all method declarations
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
 	def genStateMachineMethodDeclarations(ExpandedActorClass xpac)
 	{
 		val ac = xpac.actorClass
@@ -470,6 +670,7 @@ class GenericStateMachineGenerator {
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
 		val self = langExt.selfPointer(ac.name, true)
+		val usesHdlr = usesHandlerTrPoints(xpac)
 		
 	'''
 		
@@ -492,8 +693,8 @@ class GenericStateMachineGenerator {
 		«ENDFOR»
 		
 		/* Action Codes */
-		«FOR tr : xpac.stateMachine.getTransitionList()»
-			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.hasActionCode()»
+		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
+			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
 				«var start = xpac.getChain(tr).transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constPointer("etRuntime::InterfaceItemBase")» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF»);
@@ -506,9 +707,11 @@ class GenericStateMachineGenerator {
 			 * parent states while remembering the history
 			 * @param current - the current state
 			 * @param to - the final parent state
+			 «IF usesHdlr»
 			 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+			 «ENDIF»
 			 */
-			void exitTo(«self»int current, int to, «boolType» handler);
+			void exitTo(«self»int current, int to«IF usesHdlr», «boolType» handler«ENDIF»);
 			
 			/**
 			 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
@@ -522,10 +725,12 @@ class GenericStateMachineGenerator {
 			/**
 			 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 			 * @param state - the state which is entered
+			 «IF usesHdlr»
 			 * @param handler - entry code is executed if not handler
+			 «ENDIF»
 			 * @return - the ID of the final leaf state
 			 */
-			int enterHistory(«self»int state, «boolType» handler, «boolType» skip_entry);
+			int enterHistory(«self»int state«IF usesHdlr», «boolType» handler«ENDIF»);
 		
 		public:
 
@@ -535,4 +740,20 @@ class GenericStateMachineGenerator {
 			void receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»etRuntime::InterfaceItemBase* ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF»);
 	'''
 	}
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * helper method to determine whether this state machine uses handler transitions
+	 * points at all
+	 * 
+	 * @param xpax the {@link ExpandedActorClass}
+	 * @return <code>true</code> if the state machine uses handler transition points
+	 */
+	def private usesHandlerTrPoints(ExpandedActorClass xpac) {
+		if (xpac.stateMachine.empty)
+			return false
+		!xpac.stateMachine.allTrPointsRecursive.filter(t|t instanceof TransitionPoint && ((t as TransitionPoint).handler)).empty
+	}
+>>>>>>> origin/master
 }

@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionChainStartTransition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +48,6 @@ import org.eclipse.etrice.core.room.VarDecl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#isSkipEntry <em>Skip Entry</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getData <em>Data</em>}</li>
  * </ul>
  * </p>
@@ -64,26 +64,6 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @ordered
 	 */
 	protected Transition transition;
-
-	/**
-	 * The default value of the '{@link #isSkipEntry() <em>Skip Entry</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSkipEntry()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SKIP_ENTRY_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isSkipEntry() <em>Skip Entry</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSkipEntry()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean skipEntry = SKIP_ENTRY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getData() <em>Data</em>}' reference.
@@ -150,27 +130,6 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		transition = newTransition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSkipEntry() {
-		return skipEntry;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSkipEntry(boolean newSkipEntry) {
-		boolean oldSkipEntry = skipEntry;
-		skipEntry = newSkipEntry;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY, oldSkipEntry, skipEntry));
 	}
 
 	/**
@@ -264,7 +223,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		
 		result.append(tcv.genActionOperationCall(tr));
 		
-		StateGraphNode node = ac.getNode(tr.getTo());
+		StateGraphNode node = RoomHelpers.getNode(tr.getTo());
 		EList<Transition> out = ac.getOutgoingTransitions(node);
 		if (node instanceof ChoicePoint) {
 			ContinuationTransition dflt = ac.getDefaultBranch(out);
@@ -296,7 +255,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			if (node instanceof TrPoint) {
 				if (node instanceof TransitionPoint) {
 					// TransitionPoint is final destination of the chain
-					result.append(tcv.genReturnState(getStateContext()));
+					result.append(tcv.genReturnState(getStateContext(), false));
 					return;
 				}
 				else {
@@ -323,7 +282,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				// the following assertion should always hold true
 				assert(node instanceof State): "A transition target can be a ChoicePoint, a TrPoint or a State!";
 				
-				result.append(tcv.genReturnState((State) node));
+				result.append(tcv.genReturnState((State) node, true));
 			}
 		}
 	}
@@ -349,8 +308,6 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
-			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
-				return isSkipEntry();
 			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
 				if (resolve) return getData();
 				return basicGetData();
@@ -368,9 +325,6 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		switch (featureID) {
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)newValue);
-				return;
-			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
-				setSkipEntry((Boolean)newValue);
 				return;
 			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
 				setData((VarDecl)newValue);
@@ -390,9 +344,6 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)null);
 				return;
-			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
-				setSkipEntry(SKIP_ENTRY_EDEFAULT);
-				return;
 			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
 				setData((VarDecl)null);
 				return;
@@ -410,28 +361,10 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		switch (featureID) {
 			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
 				return transition != null;
-			case ETriceGenPackage.TRANSITION_CHAIN__SKIP_ENTRY:
-				return skipEntry != SKIP_ENTRY_EDEFAULT;
 			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
 				return data != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (skipEntry: ");
-		result.append(skipEntry);
-		result.append(')');
-		return result.toString();
 	}
 
 } //TransitionChainImpl

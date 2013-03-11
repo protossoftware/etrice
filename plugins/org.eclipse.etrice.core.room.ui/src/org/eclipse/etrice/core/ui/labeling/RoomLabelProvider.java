@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -148,7 +149,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String image(RefinedState state) {
 		return "RefinedState.gif";
 	}
-
+	
 	String image(ServiceImplementation svc) {
 		return "ServiceImpl.gif";
 	}
@@ -168,19 +169,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String image(Port p) {
-		ActorClass ac = (ActorClass) p.eContainer();
-		boolean relay = true;
-		if (ac.getIntPorts().contains(p)) {
-			relay = false;
-		}
-		else {
-			for (ExternalPort ep : ac.getExtPorts()) {
-				if (ep.getIfport()==p) {
-					relay = false;
-					break;
-				}
-			}
-		}
+		boolean relay = RoomHelpers.isRelay(p);
 		if (relay)
 			if (p.isConjugated())
 				if (p.isReplicated())
@@ -205,6 +194,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 					return "Port.gif";
 	}
 	
+	String image(ActorInstanceMapping aim) {
+		return "actorInstanceMapping.gif";
+	}
+	String image(LogicalThread lt) {
+		return "LogicalThread.gif";
+	} 
 	// custom labels
 	
 	StyledString text(Import im) {
@@ -249,18 +244,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text(Port p) {
 		String location = null;
-		ActorClass ac = (ActorClass) p.eContainer();
-		if (ac.getIntPorts().contains(p))
+		if (RoomHelpers.isInternal(p))
 			location = "internal";
-		else {
-			for (ExternalPort ep : ac.getExtPorts()) {
-				if (ep.getIfport()==p) {
-					location = "external";
-					break;
-				}
-			}
+		else if (RoomHelpers.isExternal(p)) {
+			location = "external";
 		}
-		if (location==null)
+		else
 			location = "relay";
 		String conjugated = p.isConjugated()?"conjugated ":"";
 		String multiplicity = p.getMultiplicity()>1? ("["+p.getMultiplicity()+"]") : p.getMultiplicity()==-1? "[*]" : "";
@@ -318,13 +307,12 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	StyledString text(Operation op) {
 		/* TODO TS: create complete signature including return type and ref */
 
-		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getType().getName():"";
 		String signature = RoomHelpers.getSignature(op);
 		String special = RoomHelpers.isConstructor(op)? "ctor " : RoomHelpers.isDestructor(op)? "dtor " : "";
-		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
-			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
+		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null) {
+		}
 		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";
-		StyledString result = new StyledString(special+destr+op.getName()+signature+rt);
+		StyledString result = new StyledString(special+destr+signature);
 		int pos = result.toString().indexOf(" sends ");
 		if (pos>=0)
 			result.setStyle(pos+1, 5, getKeywordStyler());
@@ -355,6 +343,9 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return path+" -> "+aim.getThread().getName();
 	}
 	
+	String text (LogicalThread lt ) {
+		return lt.getName();		
+	}
 	private Styler getKeywordStyler() {
 		if (keywordStyler==null) {
 			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);

@@ -23,8 +23,16 @@ public abstract class AbstractMessageReceiver extends RTObject implements IMessa
 
 	private Address address = null;
 
+	protected AbstractMessageReceiver(IRTObject parent, String name){
+		this(parent, null, name);
+	}
+
 	protected AbstractMessageReceiver(IRTObject parent, Address address, String name){
 		super(parent, name);
+		this.address = address;
+	}
+
+	protected void setAddress(Address address) {
 		this.address = address;
 	}
 

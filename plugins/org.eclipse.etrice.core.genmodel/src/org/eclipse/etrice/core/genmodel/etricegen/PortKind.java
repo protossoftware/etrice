@@ -31,6 +31,7 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>External</b></em>' literal object.
 	 * <!-- begin-user-doc -->
+	 * It applies to an external end port.
 	 * <!-- end-user-doc -->
 	 * @see #EXTERNAL_VALUE
 	 * @generated
@@ -41,6 +42,7 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>Internal</b></em>' literal object.
 	 * <!-- begin-user-doc -->
+	 * It applies to an internal end port.
 	 * <!-- end-user-doc -->
 	 * @see #INTERNAL_VALUE
 	 * @generated
@@ -51,6 +53,7 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>Relay</b></em>' literal object.
 	 * <!-- begin-user-doc -->
+	 * It applies to a relay port.
 	 * <!-- end-user-doc -->
 	 * @see #RELAY_VALUE
 	 * @generated
@@ -61,10 +64,6 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>External</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>External</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #EXTERNAL
 	 * @model name="external"
@@ -76,10 +75,6 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>Internal</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Internal</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INTERNAL
 	 * @model name="internal"
@@ -91,10 +86,6 @@ public enum PortKind implements Enumerator {
 	/**
 	 * The '<em><b>Relay</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Relay</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RELAY
 	 * @model name="relay"

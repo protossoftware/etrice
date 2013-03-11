@@ -1,4 +1,14 @@
-
+/*******************************************************************************
+ * Copyright (c) 2011 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ * 
+ *******************************************************************************/
 
 package org.eclipse.etrice.generator.cpp.gen
 
@@ -16,7 +26,10 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.generator.base.IDataConfiguration
 
-
+/**
+ * @author Peter Karlitschek
+ *
+ */
 @Singleton
 class SubSystemClassGen {
 	

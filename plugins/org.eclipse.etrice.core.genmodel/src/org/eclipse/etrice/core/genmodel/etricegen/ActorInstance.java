@@ -17,6 +17,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Actor Instance</b></em>'.
+ * The generator model contains an object tree of {@link StructureInstance}s starting at a {@link LogicalSystem}
+ * or a {@link SubSystemClass} as root of the instance tree. Each {@link ActorContainerRef} (either a {@link SubSystemRef}
+ * or an {@link ActorRef}) is turned into an instance of the corresponding class carrying the reference's name.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -64,8 +67,8 @@ public interface ActorInstance extends StructureInstance {
 	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Repl Idx</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If this actor instance stands for an instance of a replicated actor array the index corresponds
+	 * to the 0 based position in the array.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Repl Idx</em>' attribute.
@@ -90,8 +93,9 @@ public interface ActorInstance extends StructureInstance {
 	 * Returns the value of the '<em><b>Unindexed Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Unindexed Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If this actor instance stands for an instance of a replicated actor array then the name
+	 * of this instances contains the array index as string. The unindexed name is the name with the
+	 * index stripped of.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unindexed Name</em>' attribute.

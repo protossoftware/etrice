@@ -13,46 +13,42 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+
 /**
- * The MessageService the backbone of the asynchroneous communication inside a SubSystem
+ * The MessageService the backbone of the asynchronous communication inside a SubSystem
  * It usually contains a thread a message queue and a dispatcher
  * 
- * @author Thomas Schuetz
+ * @author Thomas Schuetz (initial contribution)
+ * @author Henrik Rentz-Reichert (extending RTObject, implementing Runnable)
  *
  */
-public class MessageService extends Thread implements IMessageReceiver,
-		IRTObject {
+public class MessageService extends RTObject implements IMessageReceiver, Runnable {
 
-	private IRTObject parent = null;
-	private String name = NO_NAME;
 	private boolean running = false;
 	
-	// TODO: add internal message queue for less locks (faster thread internal
-	// messaging)
+	// TODO: add internal message queue for less locks (faster thread internal messaging)
 	private MessageSeQueue messageQueue = null;
 	private MessageDispatcher messageDispatcher = null;
 	private Address address = null;
 	private long lastMessageTimestamp;
+	private Thread thread;
+	private int priority;
 
-	public MessageService(IRTObject parent, Address addr, String name) {
-		this(parent, addr, name, Thread.NORM_PRIORITY);
+	public MessageService(IRTObject parent, int node, int thread, String name) {
+		this(parent, node, thread, name, Thread.NORM_PRIORITY);
 	}
 	
-	
-	public MessageService(IRTObject parent, Address addr, String name, int priority) {
-		super("MessageService "+name);
+	public MessageService(IRTObject parent, int node, int thread, String name, int priority) {
+		super(parent, "MessageService_"+name);
 		
-		this.parent = parent;
-		address = addr;
-		this.name = name;
+		address = new Address(node, thread, 0);
+		this.priority = priority;
 
-		// check and set priority 
 		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
 		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
-		this.setPriority(priority);
 
 		// instantiate dispatcher and queue
-		messageDispatcher = new MessageDispatcher(this, new Address(addr.nodeID,addr.threadID, addr.objectID + 1), "Dispatcher");
+		messageDispatcher = new MessageDispatcher(this, new Address(address.nodeID,address.threadID, address.objectID + 1), "Dispatcher");
 		messageQueue = new MessageSeQueue(this, "Queue");
 	}
 
@@ -113,26 +109,6 @@ public class MessageService extends Thread implements IMessageReceiver,
 	protected synchronized long getLastMessageTimestamp() {
 		return lastMessageTimestamp;
 	}
-
-	@Override
-	public String getInstancePath(char delim) {
-		String path = delim + name;
-		
-		if (parent!=null)
-			path = parent.getInstancePath()+path;
-		
-		return path;
-	}
-	
-	@Override
-	public String getInstancePath() {
-		return getInstancePath(PATH_DELIM);
-	}
-
-	@Override
-	public String getInstancePathName() {
-		return getInstancePath(PATHNAME_DELIM);
-	}
 	
 	public synchronized void terminate() {
 		if (running) {
@@ -140,4 +116,24 @@ public class MessageService extends Thread implements IMessageReceiver,
 			notifyAll();
 		}
 	}
+
+	/**
+	 * set the thread of this service
+	 * (also sets the thread priority)
+	 * 
+	 * @param thread
+	 */
+	public void setThread(Thread thread) {
+		this.thread = thread;
+		
+		thread.setPriority(priority);
+	}
+
+	/**
+	 * @return the thread of this service
+	 */
+	public Thread getThread() {
+		return thread;
+	}
+
 }

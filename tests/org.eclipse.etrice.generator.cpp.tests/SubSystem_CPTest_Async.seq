@@ -1,0 +1,27 @@
+#generated MSC for Trace2UML
+	/SubSystem_CPTest >-- /SubSystem_CPTest/ChoicePointTest_Top executeInitialTransition
+	/SubSystem_CPTest >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_tester executeInitialTransition
+	/SubSystem_CPTest >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user executeInitialTransition
+	/SubSystem_CPTest --> /SubSystem_CPTest/ChoicePointTest_Top executeInitialTransition
+	/SubSystem_CPTest --> /SubSystem_CPTest/ChoicePointTest_Top/cp_tester executeInitialTransition
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >-- /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester >>> state0
+	/SubSystem_CPTest --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user executeInitialTransition
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY3_EXIT4
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY3_EXIT4
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY8_EXIT9_ENTRY11_EXIT12
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY3_EXIT4
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY8_EXIT9_ENTRY11_EXIT12
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> ENTRY8_EXIT9_ENTRY11_EXIT12
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_tester --> /SubSystem_CPTest/ChoicePointTest_Top/cp_user msg1
+	/SubSystem_CPTest/ChoicePointTest_Top/cp_user >>> testOk

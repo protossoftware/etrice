@@ -100,11 +100,13 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   public GeneralProtocolClass getGeneralProtocol()
   {
     if (this instanceof org.eclipse.etrice.core.room.Port)
-    return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
+      return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
     else if (this instanceof org.eclipse.etrice.core.room.SAPRef)
-    return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();
+      return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();
     else if (this instanceof org.eclipse.etrice.core.room.SPPRef)
-    return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();return null;
+      return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();
+    return null;
+    
   }
 
   /**

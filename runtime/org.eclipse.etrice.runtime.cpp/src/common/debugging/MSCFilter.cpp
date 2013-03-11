@@ -1,9 +1,14 @@
-/*
- * MSCFilter.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 16.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "MSCFilter.h"
 
@@ -19,7 +24,7 @@ void MSCFilter::addFilter(FilterItem filter) {
 	filterList.push_back(filter);
 }
 
-bool MSCFilter::applyTo(std::string text) {
+bool MSCFilter::applyTo(const std::string& text) {
 	if (filterList.empty())
 		return true; // no filters -> all messages will be logged
 	std::list<FilterItem>::iterator it = filterList.begin();
@@ -30,7 +35,7 @@ bool MSCFilter::applyTo(std::string text) {
 	return false;
 }
 
-std::string MSCFilter::reduceString(std::string string) {
+std::string MSCFilter::reduceString(const std::string& string) {
 	if (filterList.size() == 1)
 		//TODO: filtering with regular expression
 		// return string.replaceFirst(filterList.front().filter, "");

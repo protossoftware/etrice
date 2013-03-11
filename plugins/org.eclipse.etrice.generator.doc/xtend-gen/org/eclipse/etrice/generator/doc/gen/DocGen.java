@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -416,7 +417,7 @@ public class DocGen implements IRoomGenerator {
     _builder.append("Message & Data & Description\\\\");
     _builder.newLine();
     {
-      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       for(final Message ims : _allIncomingMessages) {
         _builder.append("\t");
         _builder.append("\\hline");
@@ -465,7 +466,7 @@ public class DocGen implements IRoomGenerator {
     _builder.append("Message & Data & Description\\\\");
     _builder.newLine();
     {
-      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
       for(final Message oms : _allOutgoingMessages) {
         _builder.append("\t");
         _builder.append("\\hline");
@@ -658,8 +659,8 @@ public class DocGen implements IRoomGenerator {
             boolean _notEquals = (!Objects.equal(_docu, null));
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
-              String _statePathName = this.roomExt.getStatePathName(s);
-              String _replaceAll_1 = _statePathName.replaceAll("_", "\\\\_");
+              String _genStatePathName = CodegenHelpers.getGenStatePathName(s);
+              String _replaceAll_1 = _genStatePathName.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_1, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
@@ -709,7 +710,7 @@ public class DocGen implements IRoomGenerator {
         EList<State> _states_1 = _stateMachine_2.getStates();
         for(final State s_1 : _states_1) {
           {
-            boolean _isLeaf = this.roomExt.isLeaf(s_1);
+            boolean _isLeaf = RoomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
               CharSequence _generateStateDoc = this.generateStateDoc(model, ac, s_1);
@@ -732,8 +733,8 @@ public class DocGen implements IRoomGenerator {
       String _name = ac.getName();
       String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + "_");
-      String _statePathName = this.roomExt.getStatePathName(state);
-      String _plus_3 = (_plus_2 + _statePathName);
+      String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+      String _plus_3 = (_plus_2 + _genStatePathName);
       String filename = (_plus_3 + "_behavior.jpg");
       String _replaceAll = filename.replaceAll("\\\\", "/");
       filename = _replaceAll;
@@ -742,8 +743,8 @@ public class DocGen implements IRoomGenerator {
       this.logger.logInfo(_plus_4);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Subgraph ");
-      String _statePathName_1 = this.roomExt.getStatePathName(state);
-      String _replaceAll_1 = _statePathName_1.replaceAll("_", "\\\\_");
+      String _genStatePathName_1 = CodegenHelpers.getGenStatePathName(state);
+      String _replaceAll_1 = _genStatePathName_1.replaceAll("_", "\\\\_");
       _builder.append(_replaceAll_1, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
@@ -753,8 +754,8 @@ public class DocGen implements IRoomGenerator {
         if (_equals) {
           String _name_1 = ac.getName();
           String _plus_5 = (_name_1 + "_");
-          String _statePathName_2 = this.roomExt.getStatePathName(state);
-          String _plus_6 = (_plus_5 + _statePathName_2);
+          String _genStatePathName_2 = CodegenHelpers.getGenStatePathName(state);
+          String _plus_6 = (_plus_5 + _genStatePathName_2);
           CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_6);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
@@ -772,8 +773,8 @@ public class DocGen implements IRoomGenerator {
             boolean _notEquals = (!Objects.equal(_docu, null));
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
-              String _statePathName_3 = this.roomExt.getStatePathName(s);
-              String _replaceAll_2 = _statePathName_3.replaceAll("_", "\\\\_");
+              String _genStatePathName_3 = CodegenHelpers.getGenStatePathName(s);
+              String _replaceAll_2 = _genStatePathName_3.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_2, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
@@ -824,7 +825,7 @@ public class DocGen implements IRoomGenerator {
         EList<State> _states_1 = _subgraph_2.getStates();
         for(final State s_1 : _states_1) {
           {
-            boolean _isLeaf = this.roomExt.isLeaf(s_1);
+            boolean _isLeaf = RoomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
               CharSequence _generateStateDoc = this.generateStateDoc(model, ac, s_1);

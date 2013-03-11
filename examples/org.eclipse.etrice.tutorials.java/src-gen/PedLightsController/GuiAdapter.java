@@ -25,7 +25,6 @@ public class GuiAdapter extends ActorClassBase {
 	private TrafficLight2 pedLights;
 	/*--------------------- end user code ---------------------*/
 	
-	
 	//--------------------- ports
 	protected PedControlProtocolConjPort ControlPort = null;
 	
@@ -36,7 +35,6 @@ public class GuiAdapter extends ActorClassBase {
 	//--------------------- interface item IDs
 	public static final int IFITEM_ControlPort = 1;
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 	public void GuiAdapter_dtor() {
@@ -44,20 +42,22 @@ public class GuiAdapter extends ActorClassBase {
 	}
 
 	//--------------------- construction
-	public GuiAdapter(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public GuiAdapter(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("GuiAdapter");
 		
 		// initialize attributes
 
 		// own ports
-		ControlPort = new PedControlProtocolConjPort(this, "ControlPort", IFITEM_ControlPort, 0, port_addr[IFITEM_ControlPort][0], peer_addr[IFITEM_ControlPort][0]); 
+		ControlPort = new PedControlProtocolConjPort(this, "ControlPort", IFITEM_ControlPort); 
 		
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -68,23 +68,16 @@ public class GuiAdapter extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
 	public void destroy(){
 		GuiAdapter_dtor();
+		super.destroy();
 	}
 
-	
 	/* state IDs */
 	public static final int STATE_running = 2;
 	
@@ -108,7 +101,8 @@ public class GuiAdapter extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
@@ -215,7 +209,7 @@ public class GuiAdapter extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_running:
 					switch(trigger) {
 						case TRIG_ControlPort__setCarLights:
@@ -235,7 +229,7 @@ public class GuiAdapter extends ActorClassBase {
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

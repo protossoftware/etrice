@@ -15,11 +15,15 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 
+/**
+ * A class that is used to recursively erase all folders receiving generated code
+ * an to place a readme file into those folders.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class PrepareFileSystem {
   @Inject
-  private RoomExtensions roomExt;
+  private RoomExtensions _roomExtensions;
   
   @Inject
   private JavaIoFileSystemAccess fileAccess;
@@ -27,6 +31,14 @@ public class PrepareFileSystem {
   @Inject
   private ILogger logger;
   
+  /**
+   * Recursively erase all folders receiving generated code
+   * an to place a readme file into those folders.
+   * The folders are determined from the used models of every generator
+   * model found in the resource.
+   * 
+   * @param resource a {@link Resource}
+   */
   public void prepare(final Resource resource) {
     HashSet<String> _hashSet = new HashSet<String>();
     Set<String> pathes = _hashSet;
@@ -35,7 +47,7 @@ public class PrepareFileSystem {
       if ((e instanceof Root)) {
         EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
         for (final RoomModel mdl : _usedRoomModels) {
-          String _generationTargetPath = this.roomExt.getGenerationTargetPath(mdl);
+          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(mdl);
           pathes.add(_generationTargetPath);
         }
       }
@@ -54,7 +66,7 @@ public class PrepareFileSystem {
     }
   }
   
-  public void eraseContents(final File f) {
+  private void eraseContents(final File f) {
     boolean _isDirectory = f.isDirectory();
     if (_isDirectory) {
       File[] children = f.listFiles();
@@ -67,7 +79,7 @@ public class PrepareFileSystem {
     }
   }
   
-  public CharSequence readmeText() {
+  private CharSequence readmeText() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("This directory is an eTrice code generation target.");
     _builder.newLine();

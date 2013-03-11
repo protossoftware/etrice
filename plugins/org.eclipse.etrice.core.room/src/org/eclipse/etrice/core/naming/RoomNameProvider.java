@@ -58,9 +58,20 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 
 
+/**
+ * A class providing names for instances of central types of the ROOM model.
+ * 
+ * @author Henrik Rentz-Reichert
+ */
 public class RoomNameProvider {
 	
+	/**
+	 * a name for the virtual top level state containing the whole state machine
+	 */
 	public static final String TOP_STATE_NAME = "TOP";
+	/**
+	 * a separator character (a string of size 1) for paths
+	 */
 	public static final String PATH_SEP = "_";
 	
 	private static RoomSwitch<String> nameProvider = new RoomSwitch<String>() {
@@ -76,6 +87,26 @@ public class RoomNameProvider {
 		public String caseSubSystemClass(SubSystemClass object) { return "SubsystemClass "+object.getName(); }
 	};
 	
+	/**
+	 * Explicitly supported types are
+	 * <ul>
+	 *   <li>State</li>
+	 *   <li>ChoicePoint</li>
+	 *   <li>TrPoint</li>
+	 *   <li>Transition</li>
+	 *   <li>ActorRef</li>
+	 *   <li>Port</li>
+	 *   <li>SAPRef</li>
+	 *   <li>SPPRef</li>
+	 *   <li>ActorClass</li>
+	 *   <li>SubSystemClass</li>
+	 * </ul>
+	 * 
+	 * Also supported are the sub types of these types.
+	 * 
+	 * @param item an {@link EObject}
+	 * @return a human readable name of the item
+	 */
 	public static String getName(EObject item) {
 		String name = nameProvider.doSwitch(item);
 		if (name==null)
@@ -83,10 +114,19 @@ public class RoomNameProvider {
 		return name;
 	}
 	
+	/**
+	 * @param item a {@link StateGraphItem}
+	 * @return the path in the state machine of this item
+	 */
 	public static String getFullPath(StateGraphItem item) {
 		return getParentPath(item)+getName(item);
 	}
 
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return a path to the containing state (using {@link #getFullPath(StateGraphItem)}
+	 * 		or the {@link #TOP_STATE_NAME}
+	 */
 	public static String getFullPath(StateGraph sg) {
 		if (sg.eContainer() instanceof State)
 			return getFullPath((State)sg.eContainer());
@@ -94,6 +134,10 @@ public class RoomNameProvider {
 			return TOP_STATE_NAME;
 	}
 
+	/**
+	 * @param obj an {@link EObject}
+	 * @return the {@link RoomClass} containing this object or null
+	 */
 	public static RoomClass getModelClass(EObject obj) {
 		while (obj!=null) {
 			if (obj instanceof RoomClass) {
@@ -104,6 +148,10 @@ public class RoomNameProvider {
 		return null;
 	}
 	
+	/**
+	 * @param cls a {@link RoomClass}
+	 * @return a human readable name for the ROOM class including its name space (model name)
+	 */
 	public static String getClassLocation(RoomClass cls) {
 		if (cls==null)
 			return null;
@@ -114,6 +162,10 @@ public class RoomNameProvider {
 		return cls.getName();
 	}
 	
+	/**
+	 * @param source an {@link EObject}
+	 * @return a human readable location that allows to identify the object in the model
+	 */
 	public static String getLocation(EObject source) {
 		String location = null;
 		String clsLocation = getClassLocation(getModelClass(source));
@@ -144,6 +196,11 @@ public class RoomNameProvider {
 		return location;
 	}
 	
+	/**
+	 * @param t a {@link Transition}
+	 * @return a unique identifier for the transition composed of the transition name, the terminal names
+	 * 		and the trigger (if applicable)
+	 */
 	public static String getTransitionName(Transition t) {
 		String toName = getTerminalName(t.getTo());
 		if (t instanceof InitialTransition) {
@@ -173,17 +230,37 @@ public class RoomNameProvider {
 		return null;
 	}
 	
+	/**
+	 * This is a redundant implementation of
+	 * {@link org.eclipse.etrice.core.room.util.RoomHelpers#isTopLevel(StateGraphNode)}
+	 * which is here to avoid cyclic dependencies.
+	 * 
+	 * @param item
+	 * @return
+	 */
 	private static boolean isTopLevel(StateGraphItem item) {
 		return item==null? true : !(item.eContainer().eContainer() instanceof State);
 	}
 	
-	public static State getParentState(StateGraphItem item) {
+	/**
+	 * This is a redundant implementation of
+	 * {@link org.eclipse.etrice.core.room.util.RoomHelpers#getParentState(StateGraphItem)}
+	 * which is here to avoid cyclic dependencies.
+	 * 
+	 * @param item
+	 * @return
+	 */
+	private static State getParentState(StateGraphItem item) {
 		if (isTopLevel(item))
 			return null;
 		else
 			return (State) item.eContainer().eContainer();
 	}
 	
+	/**
+	 * @param s a {@link State}
+	 * @return the name of the state of {@link #TOP_STATE_NAME} if s is <code>null</code>
+	 */
 	public static String getStateName(State s) {
 		if (s==null) {
 			return TOP_STATE_NAME;
@@ -193,11 +270,19 @@ public class RoomNameProvider {
 		}
 	}
 	
+	/**
+	 * @param s a {@link State}
+	 * @return the full path of the state
+	 */
 	public static String getStatePathName(State s) {
 		return getParentPath(s)+getStateName(s);
 	}
 	
-	public static String getParentPath(StateGraphItem item) {
+	/**
+	 * @param item a {@link StateGraphItem}
+	 * @return the path of the parent of this item (for refined states the parent path of the target state)
+	 */
+	private static String getParentPath(StateGraphItem item) {
 		if (item instanceof RefinedState)
 			item = ((RefinedState)item).getTarget();
 		
@@ -208,7 +293,11 @@ public class RoomNameProvider {
 			return getStatePathName(parent)+PATH_SEP;
 	}
 	
-	public static String getTriggerName(TriggeredTransition tr) {
+	/**
+	 * @param tr a {@link TriggeredTransition}
+	 * @return a unique name for the transition triggers
+	 */
+	private static String getTriggerName(TriggeredTransition tr) {
 		String result = "";
 		for (Trigger tri : tr.getTriggers()) {
 			for (MessageFromIf mif : tri.getMsgFromIfPairs()) {
@@ -218,7 +307,11 @@ public class RoomNameProvider {
 		return result;
 	}
 
-	public static String getTerminalName(TransitionTerminal tt) {
+	/**
+	 * @param tt a {@link TransitionTerminal}
+	 * @return a name for the terminal
+	 */
+	private static String getTerminalName(TransitionTerminal tt) {
 		if (tt instanceof StateTerminal) {
 			return getStateName(((StateTerminal) tt).getState());
 		}
@@ -236,6 +329,11 @@ public class RoomNameProvider {
 		return null;
 	}
 
+	/**
+	 * @param sg a {@link StateGraph} serving as name space
+	 * @return a unique name for a new {@link Transition} (has to be unique among
+	 * 		all {@link StateGraphItems} of the state graph)
+	 */
 	public static String getUniqueTransitionName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
 		
@@ -248,6 +346,11 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	/**
+	 * @param sg a {@link StateGraph} serving as name space
+	 * @return a unique name for a new {@link InitialTransition} (has to be unique among
+	 * 		all {@link StateGraphItems} of the state graph)
+	 */
 	public static String getUniqueInitialTransitionName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
 		
@@ -263,6 +366,11 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	/**
+	 * @param sg a {@link StateGraph} serving as name space
+	 * @return a unique name for a new {@link ChoicePoint} (has to be unique among
+	 * 		all {@link StateGraphItems} of the state graph)
+	 */
 	public static String getUniqueChoicePointName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
 		
@@ -275,6 +383,11 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	/**
+	 * @param sg a {@link StateGraph} serving as name space
+	 * @return a unique name for a new {@link TrPoint} (has to be unique among
+	 * 		all {@link StateGraphItems} of the state graph)
+	 */
 	public static String getUniqueTrPointName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
 		
@@ -287,6 +400,11 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	/**
+	 * @param sg a {@link StateGraph} serving as name space
+	 * @return a unique name for a new {@link State} (has to be unique among
+	 * 		all {@link StateGraphItems} of the state graph)
+	 */
 	public static String getUniqueStateName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
 		
@@ -299,6 +417,10 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 
+	/**
+	 * @param acr a {@link ActorContainerRef}
+	 * @return a human readable label name for the reference
+	 */
 	public static String getRefLabelName(ActorContainerRef acr) {
 		String className = "<unknown>";
 		if (acr instanceof ActorRef) {
@@ -312,6 +434,10 @@ public class RoomNameProvider {
 		return acr.getName()+"\n("+className+")";
 	}
 	
+	/**
+	 * @param t a {@link Transition}
+	 * @return a human readable label name for the transition
+	 */
 	public static String getTransitionLabelName(Transition t) {
 		String name = null;
 		if (t instanceof InitialTransition) {
@@ -355,6 +481,10 @@ public class RoomNameProvider {
 		return name;
 	}
 	
+	/**
+	 * @param trig a {@link Trigger}
+	 * @return a human readable label name for the trigger
+	 */
 	public static String getTriggerLabel(Trigger trig) {
 		String name = "<";
 		boolean first = true;
@@ -371,10 +501,18 @@ public class RoomNameProvider {
 		return name+">";
 	}
 
+	/**
+	 * @param mif a {@link MessageFromIf}
+	 * @return a label for a message from interface pair
+	 */
 	public static String getMsgFromIfLabel(MessageFromIf mif) {
 		return mif.getMessage().getName()+":"+mif.getFrom().getName();
 	}
 
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return a human readable label for the state graph
+	 */
 	public static String getStateGraphLabel(StateGraph sg) {
 		if (sg.eContainer() instanceof State) {
 			State s = (State) sg.eContainer();
@@ -384,6 +522,10 @@ public class RoomNameProvider {
 			return "/";
 	}
 
+	/**
+	 * @param s a {@link State}
+	 * @return a / separated path label for the state
+	 */
 	public static String getStatePathLabel(State s) {
 		if (s.eContainer().eContainer() instanceof State) {
 			return getStatePathLabel((State) s.eContainer().eContainer())+"/"+s.getName();
@@ -393,8 +535,8 @@ public class RoomNameProvider {
 	}
 
 	/**
-	 * @param sc
-	 * @return
+	 * @param sc a {@link StructureClass}
+	 * @return a unique name for a new {@link ActorContainerRef}
 	 */
 	public static String getUniqueActorContainerRefName(StructureClass sc) {
 		HashSet<String> names = new HashSet<String>();
@@ -419,8 +561,9 @@ public class RoomNameProvider {
 	}
 
 	/**
-	 * @param acc
-	 * @return
+	 * @param prefix a prefix (e.g. to distinguish ports, SAPs, SPPs)
+	 * @param acc a {@link ActorContainerClass}
+	 * @return a unique name for a new {@link InterfaceItem} of the actor container class
 	 */
 	public static String getUniqueInterfaceItemName(String prefix, ActorContainerClass acc) {
 		HashSet<String> names = new HashSet<String>();
@@ -462,6 +605,10 @@ public class RoomNameProvider {
 		return "not_unique";
 	}
 	
+	/**
+	 * @param code a {@link DetailCode}
+	 * @return a human readable location of a detail code in the model
+	 */
 	public static String getDetailCodeLocation(DetailCode code) {
 		if (code.eContainer() instanceof Transition) {
 			Transition tr = (Transition) code.eContainer();
@@ -498,6 +645,10 @@ public class RoomNameProvider {
 		}
 	}
 
+	/**
+	 * @param ep a {@link BindingEndPoint}
+	 * @return a human readable name for the end point
+	 */
 	public static String getDisplayName(BindingEndPoint ep) {
 		if (ep.getSub()!=null)
 			return ep.getPort().getName()+" sub "+ep.getSub().getName();
@@ -505,6 +656,10 @@ public class RoomNameProvider {
 			return ep.getPort().getName();
 	}
 
+	/**
+	 * @param ep a {@link Binding}
+	 * @return a human readable name for the binding
+	 */
 	public static String getDisplayName(Binding bind) {
 		return getDisplayName(bind.getEndpoint1())+" and "+getDisplayName(bind.getEndpoint2());
 	}

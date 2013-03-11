@@ -353,9 +353,6 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public EList<RoomModel> getReferencedModels(RoomClass cls) {
 
-		if (cls instanceof ExpandedActorClass)
-			cls = ((ExpandedActorClass)cls).getActorClass();
-		
 		HashSet<DataClass> dataClasses = new HashSet<DataClass>();
 		HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
 		HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
@@ -702,6 +699,14 @@ public class RootImpl extends EObjectImpl implements Root {
 			while (ac.getBase()!=null) {
 				ac = ac.getBase();
 				actorClasses.add(ac);
+			}
+		}
+		
+		// add referenced actor classes
+		tmpAc = new LinkedList<ActorClass>(actorClasses);
+		for (ActorClass ac : tmpAc) {
+			for (ActorRef ref : ac.getActorRefs()) {
+				actorClasses.add(ref.getType());
 			}
 		}
 		

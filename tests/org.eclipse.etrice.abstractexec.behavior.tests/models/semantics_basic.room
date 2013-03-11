@@ -1,0 +1,329 @@
+RoomModel Semantics_basic {
+		
+	ActorClass GroupTransition_ac  {
+		Structure {
+			Port p0 : Sem_Protocol2
+		}
+		Behavior { 
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"p0.out3();"
+					}
+				}
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: state1 -> state0 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				Transition tr2: state0 -> tp0 of state2 {
+					triggers {
+						<in1: p0 guard {
+							"if(true)"
+						}>
+					}
+				}
+				Transition tr3: tp1 of state2 -> state0
+				Transition tr4: state2 -> state0 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				Transition tr5_vt: state2 -> state1 {
+					triggers {
+						<wrong1: p0>
+					}
+				}
+				State state0
+				State state1 {
+					subgraph {
+						Transition init: initial -> state1_0 { }
+						State state1_0 {
+							subgraph {
+								Transition init: initial -> state1_0_0_vm { }
+								State state1_0_0_vm {
+									entry {
+										"p0.out2();"
+									}
+								}
+							}
+						}
+					}
+				}
+				State state2 {
+					subgraph {
+						Transition tr0: my tp0 -> state0
+						Transition tr1: state0 -> my tp1 {
+							triggers {
+								<in2: p0 guard {
+									"if(true)"
+								}>
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						State state0
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass SimpleAlternative_ac  {
+		Structure {
+			Port p0 : Sem_Protocol2
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: state0 -> state2 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				Transition tr2: state2 -> state3 {
+					triggers {
+						<in3: p0 guard {
+							"if(true)"
+						}>
+					}
+				}
+				Transition tr3: state1 -> state3 {
+					triggers {
+						<in3: p0>
+					}
+				}
+				Transition tr4: state3 -> state5 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr5: state3 -> state4 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				Transition tr6_vt: state3 -> state6_rm {
+					triggers {
+						<in3: p0>
+					}
+				}
+				State state0 {
+					entry {
+						"p0.out1();"
+					}
+				}
+				State state1
+				State state2
+				State state3
+				State state4
+				State state5
+				State state6_rm
+			}
+		}
+	}
+	
+	ActorClass TransitionsPoint_ac{
+		Structure {
+			Port p0 : Sem_Protocol2
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"p0.out2();"
+					}
+				}
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: my tp0 -> state2 {
+					triggers {
+						<in3: p0>
+					}
+				}
+				Transition tr2: state2 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr3_vtvm: my tp0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+					action {
+						"p0.out1();"
+					}
+				}
+				TransitionPoint tp0
+				State state0
+				State state1
+				State state2
+			}
+		}
+	}
+	
+	ActorClass NoSemantics_ac{
+		Structure {
+			Port p0 : Sem_ProtocolA
+			Port p1: Dummy
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0_rm { }
+				Transition tr0: state0_rm -> state1_rm {
+					triggers {
+						<someEvent1: p1>
+					}
+				}
+				Transition tr1: state1_rm -> state0_rm {
+					triggers {
+						<someEvent2: p1>
+					}
+				}
+				State state0_rm
+				State state1_rm
+			}
+		}
+	}
+	
+	ActorClass DualSemantics_ac{
+		Structure {
+			Port a: Sem_ProtocolA
+			Port b: Sem_ProtocolB
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"b.outB1();"
+					}
+				}
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<inA1: a>
+					}
+				}
+				Transition tr1: state0 -> state2_sm {
+					triggers {
+						<inA1: a guard {
+							"if(true)"
+						}>
+					}
+				}
+				Transition tr3: state1 -> state3 {
+					triggers {
+						<inB1: b>
+					}
+				}
+				Transition tr4: state2_sm -> state3 {
+					triggers {
+						<inB1: b>
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<inB1: b>
+					}
+				}
+				Transition tr5_vm: state2_sm -> state4 {
+					triggers {
+						<inB1: b guard {
+							"if(true)"
+						}>
+					}
+					action {
+						"a.outA1();"
+					}
+				}
+				State state0
+				State state1 {
+					entry {
+						"a.outA1();"
+					}
+				}
+				State state2_sm {
+					exit {
+						"a.outA1();"
+					}
+				}
+				State state3
+				State state4
+			}
+		}
+	}
+
+	ProtocolClass Sem_Protocol2 {
+		incoming {
+			Message in1()
+			Message in2()
+			Message in3()
+			Message wrong1()
+		}
+		outgoing {
+			Message out1()
+			Message out2()
+			Message out3()
+			Message wrong1()
+		}
+		semantics {
+			// TransitionPoint
+			out:out1->(in:in2->in:in3->in:in2, in:in1->in:in3->in:in1)
+			// SimpleAlternative
+			out:out2->(in:in1->in:in3->in:in1, in:in3->(in:in1, in:in3))
+			// GroupTransition
+			out:out3->in:in1->in:in2 
+			
+		}
+	}
+	
+	ProtocolClass Sem_ProtocolA {
+		incoming {
+			Message inA1()
+		}
+		outgoing {
+			Message outA1()
+		}
+		semantics {
+			in: inA1 -> out: outA1
+		}
+	}
+	
+	ProtocolClass Sem_ProtocolB {
+		incoming {
+			Message inB1()
+		}
+		outgoing {
+			Message outB1()
+		}
+		semantics {
+			out: outB1 -> in: inB1
+		}
+	}
+	
+	ProtocolClass Dummy {
+		incoming {
+			Message someEvent1()
+			Message someEvent2()
+			Message someEvent3()
+		}
+		outgoing {
+			Message someEvent1()
+			Message someEvent2()
+			Message someEvent3()
+		}
+	}
+
+}

@@ -28,6 +28,9 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * @author Peter Karlitschek
+ */
 @Singleton
 @SuppressWarnings("all")
 public class DataClassGen {

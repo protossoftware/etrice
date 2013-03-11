@@ -10,77 +10,8 @@
  * 
  *******************************************************************************/
 
-import ecore;
 import xtext;
-import room;
 
-process(xtext::GeneratedMetamodel this) :
-  process(ePackage)
+process(GeneratedMetamodel this) :
+	JAVA org.eclipse.etrice.core.postprocessing.PostprocessorController.process(org.eclipse.xtext.GeneratedMetamodel)
 ;
-
-process(ecore::EPackage this) :
-	this.eClassifiers.typeSelect(ecore::EClass).process()
-;
-
-process(EClass this) :
-	switch(name){
-		case("ConfigModel"):
-			(addOperation(
-				"getActorClassConfigs",
-	       		ePackage.getEClassifier("ActorClassConfig"),
-	       		-1,
-	       		'EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();
-	       			for(ConfigElement element : this.getConfigElements())
-	       				if(element instanceof ActorClassConfig)
-	       					list.add((ActorClassConfig) element);
-	       		 return list;'
-			)->addOperation(
-		   		"getActorInstanceConfigs",
-	       		ePackage.getEClassifier("ActorInstanceConfig"),
-	       		-1,
-	       		'EList<ActorInstanceConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorInstanceConfig>();
-				for(ConfigElement element : this.getConfigElements())
-			 		if(element instanceof ActorInstanceConfig)
-						list.add((ActorInstanceConfig) element);
-				return list;'
-			)->addOperation(
-		   		"getProtocolClassConfigs",
-	       		ePackage.getEClassifier("ProtocolClassConfig"),
-	       		-1,
-	       		'EList<ProtocolClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ProtocolClassConfig>();
-				for(ConfigElement element : this.getConfigElements())
-			 		if(element instanceof ProtocolClassConfig)
-						list.add((ProtocolClassConfig) element);
-				return list;'
-			)->addOperation(
-		   		"getSubSystemConfigs",
-	       		ePackage.getEClassifier("SubSystemConfig"),
-	       		-1,
-	       		'EList<SubSystemConfig> list = new org.eclipse.emf.common.util.BasicEList<SubSystemConfig>();
-				for(ConfigElement element : this.getConfigElements())
-			 		if(element instanceof SubSystemConfig)
-						list.add((SubSystemConfig) element);
-				return list;'
-			))
-		default: null
-	}
-;
-	
-
-
-create ecore::EOperation addOperation(ecore::EClassifier c, String strName, ecore::EClassifier type, Integer upperBound, String strBody):
-	setName(strName) ->
-	setEType(type) -> 
-	setUpperBound(upperBound)->
-	addBodyAnnotation(strBody)->
-	((ecore::EClass)c).eOperations.add(this);
-
-create ecore::EAnnotation addBodyAnnotation(ecore::EOperation op, String strBody):
-	setSource("http://www.eclipse.org/emf/2002/GenModel") ->
-	this.createBody(strBody) ->
-	op.eAnnotations.add(this);
-
-create ecore::EStringToStringMapEntry createBody(ecore::EAnnotation anno, String strBody):
-	setKey("body") ->
-	setValue(strBody) ->
-	anno.details.add(this);

@@ -267,6 +267,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.cpp"/>
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		
 		<!-- compile and link ChoicepointTest -->
@@ -303,6 +304,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.cpp"/>
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		</target>
 
@@ -311,8 +313,14 @@
 	-->
 	<target name="run" depends="build">
 		<mkdir dir="tmp/log"/>
-		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
-		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe">
+			<arg value="-run_as_test_single_threaded"/>
+			<arg value="200"/>
+		</exec>
+		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe">
+			<arg value="-run_as_test_single_threaded"/>
+			<arg value="200"/>
+		</exec>
 	</target>
 	
 	<!--

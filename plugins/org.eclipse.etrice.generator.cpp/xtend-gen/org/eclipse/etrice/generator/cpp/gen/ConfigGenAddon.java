@@ -49,7 +49,7 @@ public class ConfigGenAddon {
     StringConcatenation _builder = new StringConcatenation();
     {
       ActorClass _actorClass = ai.getActorClass();
-      List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(_actorClass);
+      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass);
       for(final Attribute a : _allAttributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
@@ -454,7 +454,7 @@ public class ConfigGenAddon {
           Attribute _last_1 = IterableExtensions.<Attribute>last(path);
           RefableType _refType_1 = _last_1.getRefType();
           DataType _type_1 = _refType_1.getType();
-          List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _type_1));
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _type_1));
           for(final Attribute e : _allAttributes) {
             String _plus = (varNamePath + "_");
             String _name = e.getName();

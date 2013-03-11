@@ -14,18 +14,30 @@ package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Inject
 import java.util.ArrayList
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
+/**
+ * Target language independent part of an actor class generator.
+ * It uses the {@link ILanguageExtension}.
+ */
 class GenericActorClassGenerator {
 
-	@Inject extension ILanguageExtension langExt
-	@Inject extension RoomExtensions roomExt
+	@Inject protected extension RoomExtensions
+	@Inject protected ILanguageExtension langExt
 
-	def genInterfaceItemConstants(ExpandedActorClass xpac, ActorClass ac) {
+	/**
+	 * Generate constants for the local IDs of all interface items of an actor
+	 * class.
+	 * 
+	 * @param xpac an {@link ExpandedActorClass}
+	 * @return the generated code
+	 */
+	def genInterfaceItemConstants(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
 		var endPorts = if (langExt.usesInheritance)
 			ac.endPorts else ac.allEndPorts
 		var strSAPs = if (langExt.usesInheritance)

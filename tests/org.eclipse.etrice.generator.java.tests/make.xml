@@ -131,13 +131,14 @@
 		</ant>
 	</target>
 
+	<!-- set debug and verbose to on to produce more output -->
 	<target name="logged_compile">
 		<mkdir dir="${bin.path}"/>
 		<javac srcdir="src-gen:src"
 			 destdir="${bin.path}"
 			 classpath="${runtime.path}/bin"
-			 debug="on"
-			 verbose="on"
+			 debug="off"
+			 verbose="off"
 			/>
 	</target>
 	
@@ -146,38 +147,54 @@
 	-->
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
-		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.SubSystem_StaticConfigTestRunner" fork="true" failonerror="true">
-			<arg value="-run_as_test"/>
-			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
-		</java>
-		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystemRunner" fork="true" failonerror="true">
-			<arg value="-run_as_test"/>
-			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
-		</java>
+		<echo>start HandlerTest</echo>
 		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.SubSystem_HandlerTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   HandlerTest</echo>
+		<echo>start ChoicePointTest</echo>
 		<java output="${output}/runChoicePointTest.txt" classname="ChoicePointTest.SubSystem_CPTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   ChoicePointTest</echo>
+		<echo>start PingPongThreadTest</echo>
 		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.SubSystem_PingPongRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   PingPongThreadTest</echo>
+		<echo>start PingPongThreadTestReplPort</echo>
 		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.SubSystem_PingPongRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   PingPongThreadTestReplPort</echo>
+		<echo>start SendingDataTestJava</echo>
 		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.SubSys_SendingDataRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   SendingDataTestJava</echo>
+		<echo>start TCPTest</echo>
 		<java output="${output}/runTCPTest.txt" classname="TCPTest.TCPTestSubSysRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
+		<echo>end   TCPTest</echo>
+		<echo>start StaticConfigTest</echo>
+		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.SubSystem_StaticConfigTestRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   StaticConfigTest</echo>
+		<echo>start DynamicConfigTest</echo>
+		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystemRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicConfigTest</echo>
 	</target>
 	
 	<!--

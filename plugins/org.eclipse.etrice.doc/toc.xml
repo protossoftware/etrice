@@ -133,8 +133,23 @@
 </topic>
 </topic>
 </topic>
-<topic href="help/eTriceModelsandTheirRelations.html" label="eTrice Models and Their Relations">
-<topic href="help/eTriceModelsandTheirRelations.html#TheROOMModel" label="The ROOM Model"></topic>
+<topic href="help/AutomaticDiagramLayoutwithKIELER.html" label="Automatic Diagram Layout with KIELER">
+<topic href="help/AutomaticDiagramLayoutwithKIELER.html#Overview" label="Overview"></topic>
+<topic href="help/performLayout.html" label="Performing Automatic Layout"></topic>
+<topic href="help/layoutOptions.html" label="Layout Options"></topic>
+<topic href="help/configureOptions.html" label="Configuring Layout Options">
+<topic href="help/configureOptions.html#layoutView" label="The Layout View"></topic>
+<topic href="help/configureOptions.html#preferencePage" label="Preference Pages">
+<topic href="help/configureOptions.html#LayoutPreferencePage" label="Layout Preference Page"></topic>
+<topic href="help/configureOptions.html#BehaviorandStructurePreferencePages" label="Behavior and Structure Preference Pages"></topic>
+</topic>
+</topic>
+<topic href="help/specialOptions.html" label="Special Layout Options">
+<topic href="help/specialOptions.html#LayoutAlgorithm" label="Layout Algorithm"></topic>
+<topic href="help/specialOptions.html#DiagramType" label="Diagram Type"></topic>
+</topic>
+<topic href="help/FurtherReferences.html" label="Further References"></topic>
+<topic href="help/TheROOMModel.html" label="The ROOM Model"></topic>
 <topic href="help/TheConfigModel.html" label="The Config Model"></topic>
 <topic href="help/ThePhysicalModel.html" label="The Physical Model"></topic>
 <topic href="help/TheMappingModel.html" label="The Mapping Model"></topic>

@@ -1,10 +1,12 @@
 package trafficlight.example;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
@@ -36,12 +38,11 @@ public class PTrafficLight {
 	// port class
 	static public class PTrafficLightPort extends PortBase {
 		// constructors
-		public PTrafficLightPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PTrafficLightPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTrafficLightPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTrafficLightPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -50,9 +51,7 @@ public class PTrafficLight {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -66,15 +65,15 @@ public class PTrafficLight {
 		
 		// sent messages
 		public void greenForCarDone() {
-			if (messageStrings[ OUT_greenForCarDone] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_greenForCarDone]);
+			if (messageStrings[ OUT_greenForCarDone] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_greenForCarDone]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_greenForCarDone));
 				}
 		public void greenForPedDone() {
-			if (messageStrings[ OUT_greenForPedDone] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_greenForPedDone]);
+			if (messageStrings[ OUT_greenForPedDone] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_greenForPedDone]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_greenForPedDone));
@@ -82,41 +81,37 @@ public class PTrafficLight {
 	}
 	
 	// replicated port class
-	static public class PTrafficLightReplPort {
-		private ArrayList<PTrafficLightPort> ports;
-		private int replication;
+	static public class PTrafficLightReplPort extends ReplicatedPortBase {
 	
-		public PTrafficLightReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTrafficLight.PTrafficLightPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTrafficLightPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTrafficLightReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTrafficLightPort get(int i) {
-			return ports.get(i);
+		public PTrafficLightPort get(int idx) {
+			return (PTrafficLightPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTrafficLightPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void greenForCarDone(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).greenForCarDone();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).greenForCarDone();
 			}
 		}
 		public void greenForPedDone(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).greenForPedDone();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).greenForPedDone();
 			}
 		}
 	}
@@ -125,12 +120,11 @@ public class PTrafficLight {
 	// port class
 	static public class PTrafficLightConjPort extends PortBase {
 		// constructors
-		public PTrafficLightConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PTrafficLightConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTrafficLightConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTrafficLightConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -139,9 +133,7 @@ public class PTrafficLight {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -155,15 +147,15 @@ public class PTrafficLight {
 		
 		// sent messages
 		public void greenForCar() {
-			if (messageStrings[ IN_greenForCar] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_greenForCar]);
+			if (messageStrings[ IN_greenForCar] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_greenForCar]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_greenForCar));
 				}
 		public void greenForPed() {
-			if (messageStrings[ IN_greenForPed] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_greenForPed]);
+			if (messageStrings[ IN_greenForPed] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_greenForPed]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_greenForPed));
@@ -171,41 +163,37 @@ public class PTrafficLight {
 	}
 	
 	// replicated port class
-	static public class PTrafficLightConjReplPort {
-		private ArrayList<PTrafficLightConjPort> ports;
-		private int replication;
+	static public class PTrafficLightConjReplPort extends ReplicatedPortBase {
 	
-		public PTrafficLightConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTrafficLight.PTrafficLightConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTrafficLightConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTrafficLightConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTrafficLightConjPort get(int i) {
-			return ports.get(i);
+		public PTrafficLightConjPort get(int idx) {
+			return (PTrafficLightConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTrafficLightConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void greenForCar(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).greenForCar();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).greenForCar();
 			}
 		}
 		public void greenForPed(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).greenForPed();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).greenForPed();
 			}
 		}
 	}

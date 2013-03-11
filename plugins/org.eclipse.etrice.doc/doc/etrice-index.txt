@@ -13,6 +13,8 @@
 
 040-room-concepts.textile
 
+043-layout-with-kieler.textile
+
 080-etrice-models.textile
 
 200-dev-reference.textile

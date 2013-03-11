@@ -21,4 +21,7 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.3.0",
  org.eclipse.xtext.util;bundle-version="2.1.1"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.etrice.generator.java
+Export-Package: org.eclipse.etrice.generator.java,
+ org.eclipse.etrice.generator.java.gen,
+ org.eclipse.etrice.generator.java.newwizard,
+ org.eclipse.etrice.generator.java.setup

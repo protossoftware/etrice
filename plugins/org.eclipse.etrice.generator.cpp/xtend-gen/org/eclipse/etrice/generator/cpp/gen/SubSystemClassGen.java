@@ -22,6 +22,9 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 
+/**
+ * @author Peter Karlitschek
+ */
 @Singleton
 @SuppressWarnings("all")
 public class SubSystemClassGen {

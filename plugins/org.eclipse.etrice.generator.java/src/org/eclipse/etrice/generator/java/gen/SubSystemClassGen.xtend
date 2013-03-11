@@ -52,25 +52,28 @@ class SubSystemClassGen {
 
 	def generate(Root root, SubSystemInstance comp) {
 		val cc = comp.subSystemClass
+		val models = root.getReferencedModels(cc)
+		
 	'''
 		package «cc.getPackage()»;
 		
-		«IF dataConfigExt.hasVariableService(comp)»import org.eclipse.etrice.runtime.java.config.VariableService;«ENDIF»
+		import org.eclipse.etrice.runtime.java.config.IVariableService;
+		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.MessageService;
+		import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
-		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
 		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		
-		«var models = root.getReferencedModels(cc)»
-		«FOR model : models»import «model.name».*;«ENDFOR»
-		
+		«FOR model : models»
+			import «model.name».*;
+		«ENDFOR»
 		
 		«cc.userCode(1)»
 		
 		public class «cc.name» extends SubSystemClassBase {
+			
 			public final int THREAD__DEFAULT = 0;
 			«FOR thread : cc.threads.indexed»
 				public final int «thread.value.threadId» = «thread.index1»;
@@ -78,8 +81,8 @@ class SubSystemClassGen {
 		
 			«cc.userCode(2)»
 			
-			public «cc.name»(String name) {
-				super(name);
+			public «cc.name»(IRTObject parent, String name) {
+				super(parent, name);
 			}
 			
 			@Override
@@ -87,98 +90,44 @@ class SubSystemClassGen {
 			}
 			
 			@Override	
-			public void instantiateMessageServices(){
+			public void instantiateMessageServices() {
 			
-				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(THREAD__DEFAULT, 0, 0),"MessageService_Main"));
+				RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD__DEFAULT, "MessageService_Main"));
 				«FOR thread : cc.threads»
-					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, «thread.threadId», 0),"MessageService_«thread.name»" /*, thread_prio */));
+					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */));
 				«ENDFOR»
-				}
+			}
 		
 			@Override
-			public void instantiateActors(){
+			public void instantiateActors() {
 				
-				// all addresses
-				// Addresses for the Subsystem Systemport
+				MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
+
+				// thread mappings
+				msgSvcCtrl.addPathToThread("«comp.path»", THREAD__DEFAULT);
 				«FOR ai : comp.allContainedInstances»
-					Address addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)» = getFreeAddress(THREAD__DEFAULT);
+					«IF ai.threadId!=0»
+						msgSvcCtrl.addPathToThread("«ai.path»", «cc.threads.get(ai.threadId-1).threadId»);
+					«ENDIF»
 				«ENDFOR»
 				
+				// port to peer port mappings
 				«FOR ai : comp.allContainedInstances»
-					«val threadId = if (ai.threadId==0) "THREAD__DEFAULT" else cc.threads.get(ai.threadId-1).threadId»
-					// actor instance «ai.path» itself => Systemport Address
-«««					// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-					Address addr_item_«ai.path.getPathName()» = getFreeAddress(«threadId»);
-					// interface items of «ai.path»
 					«FOR pi : ai.orderedIfItemInstances»
-						«IF pi.replicated»
-							«FOR peer : pi.peers»
-								«var i = pi.peers.indexOf(peer)»
-								Address addr_item_«pi.path.getPathName()»_«i» = getFreeAddress(«threadId»);
-							«ENDFOR»
-						«ELSE»
-							Address addr_item_«pi.path.getPathName()» = getFreeAddress(«threadId»);
+						«IF pi.peers.size>0»
+							msgSvcCtrl.addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 		
-				// instantiate all actor instances
-				instances = new ActorClassBase[«comp.allContainedInstances.size»];
-				«FOR ai : comp.allContainedInstances»
-					instances[«comp.allContainedInstances.indexOf(ai)»] = new «ai.actorClass.name»(
-						«IF ai.eContainer instanceof SubSystemInstance»
-							this,
-						«ELSE»
-							instances[«comp.allContainedInstances.indexOf(ai.eContainer)»],
-						«ENDIF»
-						"«ai.name»",
-						// own interface item addresses
-						new Address[][] {{addr_item_«ai.path.getPathName()»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
-							«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-								«IF pi.replicated»
-									«IF pi.peers.empty»
-										null
-									«ELSE»
-										{
-											«FOR peer : pi.peers SEPARATOR ","»
-												addr_item_«pi.path.getPathName()»_«pi.peers.indexOf(peer)»
-											«ENDFOR»
-										}
-									«ENDIF»
-								«ELSE»
-									{
-										addr_item_«pi.path.getPathName()»
-									}
-								«ENDIF»
-							«ENDFOR»
-						},
-						// peer interface item addresses
-						new Address[][] {{addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)»}«IF !ai.orderedIfItemInstances.empty»,«ENDIF»
-							«FOR pi : ai.orderedIfItemInstances SEPARATOR ","»
-								«IF pi.replicated && pi.peers.isEmpty»
-									null
-								«ELSE»
-									{
-										«IF pi.peers.empty»
-											null
-										«ELSE»
-											«FOR pp : pi.peers SEPARATOR ","»
-												«IF pp.replicated»
-													addr_item_«pp.path.getPathName()»_«pp.peers.indexOf(pi)»
-												«ELSE»
-													addr_item_«pp.path.getPathName()»
-												«ENDIF»
-											«ENDFOR»
-										«ENDIF»
-									}
-								«ENDIF»
-							«ENDFOR»
-						}
-						«IF !(dataConfigExt.getDynConfigReadAttributes(ai).empty && 
-							dataConfigExt.getDynConfigWriteAttributes(ai).empty)»
-							, variableService
-						«ENDIF»
-					); 
+				// sub actors
+				«FOR sub : cc.actorRefs»
+					«IF sub.size>1»
+						for (int i=0; i<«sub.size»; ++i)
+							new «sub.type.name»(this, "«sub.name»_"+i); 
+					«ELSE»
+						new «sub.type.name»(this, "«sub.name»"); 
+					«ENDIF»
 				«ENDFOR»
 				
 				// apply instance attribute configurations
@@ -186,51 +135,33 @@ class SubSystemClassGen {
 					«val cfg = configGenAddon.genActorInstanceConfig(ai, "inst")»
 					«IF cfg.length>0»
 						{
-							«ai.actorClass.name» inst = («ai.actorClass.name») instances[«comp.allContainedInstances.indexOf(ai)»];
-							«cfg»
+							«ai.actorClass.name» inst = («ai.actorClass.name») getObject("«ai.path»");
+							if (inst!=null) {
+								«cfg»
+							}
 						}
 					«ENDIF»
 				«ENDFOR»
-		
-				// create the subsystem system port	
-				RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",
-						0, //local ID
-						// own addresses
-						new Address[]{
-							«FOR ai : comp.allContainedInstances SEPARATOR ","»
-								addr_item_SystemPort_«comp.allContainedInstances.indexOf(ai)»
-							«ENDFOR»
-						},
-						// peer addresses
-						new Address[]{
-							«FOR ai : comp.allContainedInstances SEPARATOR ","»
-								addr_item_«ai.path.getPathName()»
-							«ENDFOR»
-						});
-				}
+			}
 			
+			@Override
+			public void init(){
 				«IF dataConfigExt.hasVariableService(comp)»
-					private VariableService variableService;
+					variableService = new «cc.name»VariableService(this);
 				«ENDIF»
+				super.init();
+				«IF dataConfigExt.hasVariableService(comp)»
+					variableService.init();
+				«ENDIF»
+			}
 				
-				@Override
-				public void init(){
-					«IF dataConfigExt.hasVariableService(comp)»
-						variableService = new «cc.name»VariableService(this);
-					«ENDIF»
-					super.init();
-					«IF dataConfigExt.hasVariableService(comp)»
-						variableService.init();
-					«ENDIF»
-				}
-					
-				@Override
-				public void stop(){
-					super.stop();
-					«IF dataConfigExt.hasVariableService(comp)»
-						variableService.stop();
-					«ENDIF»
-				}
+			@Override
+			public void stop(){
+				super.stop();
+				«IF dataConfigExt.hasVariableService(comp)»
+					variableService.stop();
+				«ENDIF»
+			}
 				
 		};
 	'''

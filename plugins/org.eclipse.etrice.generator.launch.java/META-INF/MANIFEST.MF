@@ -19,3 +19,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.launching,
  org.eclipse.ui.dialogs
 Bundle-Vendor: eTrice (Incubation)
+Export-Package: org.eclipse.etrice.generator.launch.java

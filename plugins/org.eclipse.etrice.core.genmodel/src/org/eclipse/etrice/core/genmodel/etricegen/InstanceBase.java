@@ -17,6 +17,13 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Instance Base</b></em>'.
+ * Serves as a base class for all structural objects:
+ * <ul>
+ *   <li> {@link SystemInstance}</li>
+ *   <li> {@link StructureInstance}</li>
+ *   <li> {@link InterfaceItemInstance}</li>
+ *   <li> {@link SPPInstance}</li>
+ * </ul>
  * <!-- end-user-doc -->
  *
  * <p>
@@ -44,10 +51,6 @@ public interface InstanceBase extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -71,8 +74,8 @@ public interface InstanceBase extends EObject {
 	 * Returns the value of the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * The path of a structural object is assembled using the names in the object tree separated
+	 * by {@link #pathDelim path delimiters}. The path starts with a delimiter.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Path</em>' attribute.
@@ -86,8 +89,8 @@ public interface InstanceBase extends EObject {
 	 * Returns the value of the '<em><b>Obj Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Obj Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * This is a unique object id per sub-tree of a sub system. This ID may be used by the generator to
+	 * generate addresses for the messaging.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Obj Id</em>' attribute.
@@ -113,8 +116,7 @@ public interface InstanceBase extends EObject {
 	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Thread Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * The ID of the thread associated with this object.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Thread Id</em>' attribute.
@@ -128,8 +130,9 @@ public interface InstanceBase extends EObject {
 	 * Returns the value of the '<em><b>NObj IDs</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>NObj IDs</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * The number of object IDs that should be reserved for this structural instance.
+	 * This is always one except for {@link InterfaceItemInstance}s with more than one peer. Then
+	 * it is the number of peers (and thus allows replicated ports to have consecutive IDs).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>NObj IDs</em>' attribute.

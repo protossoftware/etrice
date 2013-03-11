@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz (initial contribution)
+ * 
+ *******************************************************************************/
 
 package org.eclipse.etrice.generator.generic;
 
@@ -11,11 +22,24 @@ import org.eclipse.xtext.util.Pair;
 
 
 /**
- * @author hrentz
- *
+ * This interface is used to achieve target language independence of the
+ * generic generator parts such as the {@link GenericActorClassGenerator},
+ * the {@link GenericProtocolClassGenerator} and the {@link GenericStateMachineGenerator}.
+ * 
+ * @author Thomas Schuetz
+ * @author Henrik Rentz-Reichert
  */
 public interface ILanguageExtension {
 
+	/**
+	 * This method is called to get a target language specific piece of
+	 * code that defines a typed local variable holding the data passed with
+	 * the message (if applicable). The name of the local variable should
+	 * be that of the message parameter.
+	 * 
+	 * @param m the {@link Message}
+	 * @return the variable definition
+	 */
 	String getTypedDataDefinition(Message m);
 
 	/** 

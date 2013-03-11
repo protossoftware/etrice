@@ -14,10 +14,6 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -153,21 +149,21 @@ public class Initialization {
   
   public CharSequence initializeArrayWithValues(final String varName, final String[] values) {
     StringConcatenation _builder = new StringConcatenation();
-    final Function1<String,String> _function = new Function1<String,String>() {
-        public String apply(final String v) {
-          String _plus = (varName + "[");
-          int _indexOf = ((List<String>)Conversions.doWrapArray(values)).indexOf(v);
-          String _plus_1 = (_plus + Integer.valueOf(_indexOf));
-          String _plus_2 = (_plus_1 + "] = ");
-          String _plus_3 = (_plus_2 + v);
-          String _plus_4 = (_plus_3 + ";");
-          return _plus_4;
-        }
-      };
-    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(values)), _function);
-    String _join = IterableExtensions.join(_map, "\r\n");
-    _builder.append(_join, "");
+    int i = (-1);
     _builder.newLineIfNotEmpty();
+    {
+      for(final String v : values) {
+        _builder.append(varName, "");
+        _builder.append("[");
+        int _plus = (i + 1);
+        int _i = i = _plus;
+        _builder.append(_i, "");
+        _builder.append("] = ");
+        _builder.append(v, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
   

@@ -10,79 +10,8 @@
  * 
  *******************************************************************************/
 
-// possible improvement: http://christiandietrich.wordpress.com/2011/07/22/customizing-xtext-metamodel-inference-using-xtend2/
-
-import ecore;
 import xtext;
 
-process(xtext::GeneratedMetamodel this) :
-  process(ePackage)
-;
-
-// the multiplicity is an optional attribute with a default of 1
-process(ecore::EPackage this) :
-	this.eClassifiers.typeSelect(ecore::EClass).process()
-;
-
-process(EClass this) :
-    switch (name) {
-        case "Port": (eAllAttributes.select(e|e.name=="multiplicity").first().setDefaultValueLiteral("1")
-        			-> addOperation("isReplicated", getEcoreDataType("EBoolean")))
-        case "ActorRef": (eAllAttributes.select(e|e.name=="size").first().setDefaultValueLiteral("1"))
-        case "State": (addOperation("getName", getEcoreDataType("EString")))
-        case "StateGraphItem": (addOperation("getName", getEcoreDataType("EString")))
-        case "InterfaceItem": (addOperation("getGeneralProtocol", ePackage.getEClassifier("GeneralProtocolClass")))
-        default:    null
-    }
-;
-
-EDataType getEcoreDataType(String name) :
-    org::eclipse::emf::ecore::EcorePackage::eINSTANCE.getEClassifier(name)
-;
-
-addOperation(EClass this, String name, EClassifier type) :
-    let op  = newOperation(name, type) :
-        newDelegatingBodyAnnotation(this, op)
-;
-
-create EOperation newOperation(EClass owner, String name, EClassifier type) :
-    setName(name) -> setEType(type) -> owner.eOperations.add(this)
-;
-
-create EAnnotation newDelegatingBodyAnnotation(EClass cls, EOperation op) :
-    let d = new EStringToStringMapEntry :
-        setSource("http://www.eclipse.org/emf/2002/GenModel") ->
-        d.setKey("body") ->
-        switch (op.name) {
-	        case "getName":
-	        	(switch (cls.name) {
-	        		case "State":
-			        	(d.setValue("return (this instanceof org.eclipse.etrice.core.room.SimpleState)? "
-				        +"((org.eclipse.etrice.core.room.SimpleState)this).getName() :"
-				        +"(this instanceof org.eclipse.etrice.core.room.RefinedState)? "
-				        +"(((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null?"
-				        +" \"\":((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :"
-				        +"\"\";"))
-				    case "StateGraphItem":
-				    	(d.setValue("if (this instanceof org.eclipse.etrice.core.room.State) return ((org.eclipse.etrice.core.room.State)this).getName();\n"
-							+ "else if (this instanceof org.eclipse.etrice.core.room.TrPoint) return ((org.eclipse.etrice.core.room.TrPoint)this).getName();\n"
-							+ "else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint) return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();\n"
-							+ "else if (this instanceof org.eclipse.etrice.core.room.Transition) return ((org.eclipse.etrice.core.room.Transition)this).getName();\n"
-							+ "return \"\";"))
-				    default: null
-				})
-			case "isReplicated":
-				(d.setValue("return multiplicity>1 || multiplicity==-1;"))
-			case "getGeneralProtocol":
-				(d.setValue("if (this instanceof org.eclipse.etrice.core.room.Port)\n"
-					+"return ((org.eclipse.etrice.core.room.Port) this).getProtocol();\n"
-					+"else if (this instanceof org.eclipse.etrice.core.room.SAPRef)\n"
-					+"return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();\n"
-					+"else if (this instanceof org.eclipse.etrice.core.room.SPPRef)\n"
-					+"return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();"
-					+"return null;"))
-	        default:    null
-	    } ->
-        details.add(d) ->
-        op.eAnnotations.add(this)
+process(GeneratedMetamodel this) :
+	JAVA org.eclipse.etrice.core.postprocessing.PostprocessorController.process(org.eclipse.xtext.GeneratedMetamodel)
 ;

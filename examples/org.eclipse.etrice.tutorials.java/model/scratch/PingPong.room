@@ -10,9 +10,10 @@ RoomModel PingPong {
 		ActorRef application: PingPongTop
 		ActorRef services: ATimingService
 		LayerConnection ref application satisfied_by services.timer
-		LogicalThread mrPingThread prio=5 {application.MrPing}
-		LogicalThread mrPong1Thread prio=5  {application.MrPong1}
-//		LogicalThread mrPong2Thread prio=5 {application.MrPong2}
+		LogicalThread mrPingThread 
+		LogicalThread mrPong1Thread
+		ActorInstanceMapping application/MrPing -> mrPingThread
+		ActorInstanceMapping application/MrPong1 -> mrPong1Thread 
 	}
 
 	// automatically inserted App_SubSystem_PedLightController

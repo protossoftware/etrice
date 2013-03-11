@@ -1,9 +1,14 @@
-/*
- * ActorClassBase.cpp
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 29.08.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #include "ActorClassBase.h"
 
@@ -13,6 +18,7 @@ ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownA
 	: 	EventReceiver(parent, name),
 		IMessageReceiver(),
 		m_state(0),
+		history(0), //to be instantiated by derived class
 		m_RTSystemPort(0),
 		m_className("noname"),
 		m_ownAddr(ownAddr),
@@ -26,6 +32,8 @@ ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownA
 ActorClassBase::~ActorClassBase() {
 	delete m_RTSystemPort;
 	m_RTSystemPort = 0;
+	delete history;
+	history = 0;
 }
 
 bool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {

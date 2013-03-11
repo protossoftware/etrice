@@ -872,17 +872,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransitionChain_SkipEntry() {
-		return (EAttribute)transitionChainEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTransitionChain_Data() {
-		return (EReference)transitionChainEClass.getEStructuralFeatures().get(2);
+		return (EReference)transitionChainEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1085,7 +1076,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		transitionChainEClass = createEClass(TRANSITION_CHAIN);
 		createEReference(transitionChainEClass, TRANSITION_CHAIN__TRANSITION);
-		createEAttribute(transitionChainEClass, TRANSITION_CHAIN__SKIP_ENTRY);
 		createEReference(transitionChainEClass, TRANSITION_CHAIN__DATA);
 
 		iTransitionChainVisitorEClass = createEClass(ITRANSITION_CHAIN_VISITOR);
@@ -1250,7 +1240,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(transitionChainEClass, TransitionChain.class, "TransitionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransitionChain_Transition(), theRoomPackage.getTransition(), null, "transition", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransitionChain_SkipEntry(), ecorePackage.getEBoolean(), "skipEntry", "false", 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransitionChain_Data(), theRoomPackage.getVarDecl(), null, "data", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(transitionChainEClass, theRoomPackage.getState(), "getStateContext", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1288,7 +1277,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEParameter(op, theRoomPackage.getMessageFromIf(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getActiveTrigger(), "at", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, theRoomPackage.getTransition(), "getOutgoingTransitions", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getStateGraphNode(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1312,9 +1301,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getOwnTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theRoomPackage.getStateGraphNode(), "getNode", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theRoomPackage.getTransitionTerminal(), "tt", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "isMatching", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getTrigger(), "trig", 0, 1, IS_UNIQUE, IS_ORDERED);

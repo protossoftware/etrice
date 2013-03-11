@@ -37,6 +37,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
+/**
+ * @author Peter Karlitschek
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ActorClassGen extends GenericActorClassGenerator {
@@ -272,7 +275,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- ports");
       _builder.newLine();
       _builder.append("\t\t\t");
-      List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
+      List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
       final Function1<Port,CharSequence> _function_2 = new Function1<Port,CharSequence>() {
           public CharSequence apply(final Port port) {
             StringConcatenation _builder = new StringConcatenation();
@@ -338,7 +341,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- interface item IDs");
       _builder.newLine();
       _builder.append("\t\t\t");
-      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac, ac);
+      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac);
       _builder.append(_genInterfaceItemConstants, "			");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
@@ -374,7 +377,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- port getters");
       _builder.newLine();
       {
-        List<Port> _endPorts_1 = this._roomExtensions.getEndPorts(ac);
+        List<Port> _endPorts_1 = RoomHelpers.getEndPorts(ac);
         for(final Port ep : _endPorts_1) {
           _builder.append("\t\t");
           String _portClassName = this._roomExtensions.getPortClassName(ep);
@@ -502,7 +505,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder_1.append("(*this, parent, name, port_addr, peer_addr)");
       initializerList.add(_builder_1);
     }
-    List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
+    List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
     for (final Port ep : _endPorts) {
       StringConcatenation _builder_2 = new StringConcatenation();
       String _name_1 = ep.getName();
@@ -678,6 +681,24 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
+      {
+        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+        if (_hasNonEmptyStateMachine) {
+          _builder.append("\t");
+          _builder.append("history = new int[s_numberOfStates];");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("for (int i = 0; i < s_numberOfStates; i++) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("history[i] = NO_STATE;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("setClassName(\"");
       String _name_3 = ac.getName();
@@ -782,8 +803,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
-        if (_hasNonEmptyStateMachine) {
+        boolean _hasNonEmptyStateMachine_1 = RoomHelpers.hasNonEmptyStateMachine(ac);
+        if (_hasNonEmptyStateMachine_1) {
           CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac, false);
           _builder.append(_genStateMachine, "");
           _builder.newLineIfNotEmpty();

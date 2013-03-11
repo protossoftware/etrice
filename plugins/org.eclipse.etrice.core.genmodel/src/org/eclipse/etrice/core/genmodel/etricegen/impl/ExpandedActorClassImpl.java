@@ -44,7 +44,6 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -70,12 +69,10 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.StateTerminal;
-import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -459,7 +456,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		for (Transition t : sg.getTransitions()) {
 			addIncomingTransition(getAdjustedTargetNode(t), t);
 			if (t instanceof NonInitialTransition) {
-				addOutgoingTransition(getNode(((NonInitialTransition)t).getFrom()), t);
+				addOutgoingTransition(RoomHelpers.getNode(((NonInitialTransition)t).getFrom()), t);
 			}
 		}
 	}
@@ -473,7 +470,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			if (chain==null)
 				if (!getActorClass().isAbstract()) {
 					int idx = sg.getTransitions().indexOf(t);
-					validationError("transition is not part of a transition chain (only allowed for abstract actor classes)", sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+					Transition orig = (Transition) copy2orig.get(t);
+					String name = RoomNameProvider.getName(orig);
+					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 				}
 		}
 		
@@ -543,32 +542,32 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getActorClass().getName()+": TrPoint is not connected", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" is not connected", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!getActorClass().isAbstract() && data.getInTrans().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint has no incoming transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" has no incoming transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getActorClass().getName()+": TrPoint must have at most one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getActorClass().getName()+": TrPoint must have exactly one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint must have no self transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have no self transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getActorClass().getName()+": TrPoint must have no incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have no incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -588,6 +587,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private String getTriggerString(MessageFromIf mifp) {
+		assert(mifp.getFrom().getName()!=null) : "ifitem name must not be null";
+		assert(mifp.getMessage().getName()!=null) : "message name must not be null";
 		return mifp.getFrom().getName()+TRIGGER_SEP+mifp.getMessage().getName();
 	}
 
@@ -796,22 +797,16 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 
 	private void collectChainTransitions(TransitionChain tc, Transition t) {
 		trans2chainBundle.put(t, tc);
-
-		// should always hold true
-//		assert(t instanceof NonInitialTransition): "A transition chain must not contain initial transitions!";
 		
-		StateGraphNode node = getNode(t.getTo());
+		StateGraphNode node = RoomHelpers.getNode(t.getTo());
 		
 		// the chain ends if a state is reached
 		if (node instanceof State)
 			return;
 		
 		// the chain ends if source and destination coincide
-		if (tc.getTransition() instanceof NonInitialTransition && node==getNode(((NonInitialTransition)tc.getTransition()).getFrom())) {
-			if (node instanceof TransitionPoint)
-				tc.setSkipEntry(true);
+		if (tc.getTransition() instanceof NonInitialTransition && node==RoomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
 			return;
-		}
 		
 		for (Transition next : getOutgoingTransitions(node)) {
 			// from the second transition in the chain on we have:
@@ -825,8 +820,12 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 
 	private void findTransitionChains(StateGraph sg, Class<?> cls) {
+		findTransitionChains(sg, cls, true);
+	}
+	
+	private void findTransitionChains(StateGraph sg, Class<?> cls, boolean includeInitial) {
 		for (Transition t : sg.getTransitions()) {
-			if (cls.isInstance(t) || t instanceof InitialTransition) {
+			if (cls.isInstance(t) || (includeInitial && (t instanceof InitialTransition))) {
 				addTransitionChain(t);
 			}
 		}
@@ -834,7 +833,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// recurse into sub graphs of states
 		for (State s : sg.getStates()) {
 			if (s.getSubgraph()!=null)
-				findTransitionChains(s.getSubgraph(), cls);
+				findTransitionChains(s.getSubgraph(), cls, includeInitial);
 		}
 	}
 
@@ -870,6 +869,14 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			findTransitionChains(getStateMachine(), GuardedTransition.class);
+		}
+		else if (getActorClass().getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+			findLeafStateTriggers(getStateMachine());
+			fillTriggerStringMap();
+			findTransitionChains(getStateMachine(), TriggeredTransition.class);
+			computeCommonChainData();
+			findTransitionChains(getStateMachine(), GuardedTransition.class, false);
+			checkTransitionChains(getStateMachine());
 		}
 		else {
 			// event driven state machine
@@ -1015,8 +1022,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getTriggerCodeName(String trigger) {
-		String[] parts = trigger.split(TRIGGER_SEP);
+	public String getTriggerCodeName(ActiveTrigger at) {
+		String[] parts = at.getTrigger().split(TRIGGER_SEP);
 		return "TRIG_"+parts[0]+"__"+parts[1];
 	}
 
@@ -1194,27 +1201,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		return result;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public StateGraphNode getNode(TransitionTerminal tt) {
-		if (tt instanceof StateTerminal)
-			return ((StateTerminal)tt).getState();
-		else if (tt instanceof TrPointTerminal)
-			return ((TrPointTerminal)tt).getTrPoint();
-		else if (tt instanceof SubStateTrPointTerminal)
-			return ((SubStateTrPointTerminal)tt).getTrPoint();
-		else if (tt instanceof ChoicepointTerminal)
-			return ((ChoicepointTerminal)tt).getCp();
-		
-		return null;
-	}
 	
 	private StateGraphNode getAdjustedTargetNode(Transition t) {
-		StateGraphNode node = getNode(t.getTo());
+		StateGraphNode node = RoomHelpers.getNode(t.getTo());
 		if (node instanceof EntryPoint) {
 			NodeData data = node2data.get(node);
 			if (data==null || data.getOutTrans().isEmpty()) {

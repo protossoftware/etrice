@@ -111,7 +111,7 @@ public class BindingUtil {
 		for (Binding bind : bindings) {
 			if (bind.getEndpoint1().getActorRef()==null && bind.getEndpoint2().getActorRef()==null) {
 				int idx = bindings.indexOf(bind);
-				diagnostician.error("binding connects two ports of the same actor", bind, RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
+				diagnostician.error("binding connects two ports of the same actor", bind.eContainer(), RoomPackage.eINSTANCE.getStructureClass_Bindings(), idx);
 			}
 			else {
 				ArrayList<PortInstance> ep1Ports = ep2portInstances.get(getEndPointKey(bind.getEndpoint1()));
@@ -186,7 +186,7 @@ public class BindingUtil {
 					}
 				}
 				
-				// fill in port instances such that ports.size()==p.getMultiplicity()
+				// fill in port instances such that ports.size()==m
 				m -= ports.size();
 				for (; m>0; --m)
 					ports.add(pi);

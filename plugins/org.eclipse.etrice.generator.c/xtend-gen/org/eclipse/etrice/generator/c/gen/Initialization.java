@@ -159,7 +159,7 @@ public class Initialization {
           _builder.append("{");
           _builder.newLine();
           {
-            List<Attribute> _allAttributes = this._roomExtensions.getAllAttributes(((DataClass) _dataClass));
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
             boolean _hasElements = false;
             for(final Attribute subA : _allAttributes) {
               if (!_hasElements) {

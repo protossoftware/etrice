@@ -8,7 +8,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import org.eclipse.etrice.runtime.java.messaging.Address;
 
 /**
  * An abstract base class for port instances.
@@ -18,7 +17,11 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
  */
 public abstract class PortBase extends InterfaceItemBase {
 	
-	public PortBase (IEventReceiver actor, String name, int localId, int idx, Address address, Address peerAddress){
-		super(actor, name, localId, idx, address, peerAddress);
+	public PortBase (IEventReceiver actor, String name, int localId){
+		super(actor, name, localId, 0);
+	}
+	
+	public PortBase (IEventReceiver actor, String name, int localId, int idx){
+		super(actor, name, localId, idx);
 	}
 }

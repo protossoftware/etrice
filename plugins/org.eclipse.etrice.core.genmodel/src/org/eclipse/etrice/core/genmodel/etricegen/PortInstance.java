@@ -18,7 +18,8 @@ import org.eclipse.etrice.core.room.Port;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Port Instance</b></em>'.
+ * A representation of the model object '<em><b>Port Instance</b></em>' which is derived from
+ * {@link InterfaceItemInstance}.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -39,8 +40,7 @@ public interface PortInstance extends InterfaceItemInstance {
 	 * Returns the value of the '<em><b>Port</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Port</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * The associated {@link Port}
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Port</em>' reference.
@@ -65,10 +65,6 @@ public interface PortInstance extends InterfaceItemInstance {
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.etrice.core.genmodel.etricegen.PortKind}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.PortKind
@@ -96,8 +92,7 @@ public interface PortInstance extends InterfaceItemInstance {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.BindingInstance#getPorts <em>Ports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bindings</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * The list contains all binding instances connected with this port.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bindings</em>' reference list.

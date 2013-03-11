@@ -14,9 +14,10 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
 
 // this class is purely for testing purposes
 // it remembers the last receive message
-public class DummyMessageReceiver implements IMessageReceiver {
+public class DummyMessageReceiver extends RTObject implements IMessageReceiver {
 
 	DummyMessageReceiver (Address address){
+		super(null, "dummy");
 		this.address = address;
 	}
 	

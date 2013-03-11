@@ -3186,32 +3186,263 @@ carLights.setState(TrafficLight3.OFF);
 			</section>
 		</section>
 	</chapter>
-	<chapter id="eTriceModelsandTheirRelations">
-		<title>eTrice Models and Their Relations</title>
-		<para>eTrice comprises several models:</para>
-		<itemizedlist>
-			<listitem>
-				<para>the ROOM model (*.room) — defines model classes and the logical structure of the model</para>
-			</listitem>
-			<listitem>
-				<para>Config model (*.config) — defines configuration values for attributes</para>
-			</listitem>
-			<listitem>
-				<para>Physical model (*.etphys) — defines the structure and properties of the physical system</para>
-			</listitem>
-			<listitem>
-				<para>Mapping model (*.etmap) — defines a mapping from logical elements to physical elements</para>
-			</listitem>
-		</itemizedlist>
-		<para>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</para>
-		<para>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/080-models.jpg" scale="50"/>
-				</imageobject>
-			</mediaobject>
-		</para>
-		<para>In the following sections we will describe those models with emphasis of their cross relations.</para>
+	<chapter id="AutomaticDiagramLayoutwithKIELER">
+		<title>Automatic Diagram Layout with KIELER</title>
+		<section id="Overview">
+			<title>Overview</title>
+			<para>eTrice now provides a new feature of automatic layout of the ROOM diagrams in its graphical editors. This helps in improving the pragmatics of the diagrams and frees the user from the burden of manually lay-outing the diagrams on the canvas. </para>
+			<para>The automatic lay-outing has been provided with the help of the well known KIELER framework, which focuses on the pragmatics of model-based system design, which can improve comprehensibility of diagrams, improve development and maintenance time, and improve the analysis of dynamic behavior.</para>
+			<para>This chapter will answer the following questions </para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<link linkend="performLayout">How to perform automatic layout in the graphical editors of eTrice?</link>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<link linkend="layoutOptions">What are layout options?</link>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<link linkend="configureOptions">How to configure the layout options to alter the diagram layout as desired?</link>
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>Moreover, some 
+				<link linkend="specialOptions">special layout options</link> will also be discussed.
+			</para>
+		</section>
+		<section id="performLayout">
+			<title>Performing Automatic Layout</title>
+			<para>Automatic layout could be performed in eTrice graphical editors using the command to layout the current diagram.</para>
+			<para>This command is available in</para>
+			<itemizedlist>
+				<listitem>
+					<para>The context menu of the diagrams</para>
+				</listitem>
+				<listitem>
+					<para>Using the 
+						<emphasis>Ctrl+R L</emphasis> shortcut.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>Additionally, an entry in the context menu allows to layout only a selected part of the diagram.</para>
+		</section>
+		<section id="layoutOptions">
+			<title>Layout Options</title>
+			<para>A layout option is a customization point for the layout algorithms, with a specific data type and optionally a default value, used to affect how the active layout algorithm computes concrete coordinates for the graph elements.</para>
+			<para>User-configurable layout options for a particular diagram object can be viewed and configured through the Layout View.The Layout View can be opened from the context menu of a selected diagram object by clicking the 
+				<emphasis>Show Layout View</emphasis> entry. 
+			</para>
+			<para>On opening the layout view, and selecting any layout option, a description of the layout option is available in the footer of eclipse SDK. This is shown below:</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/043-LayoutOptionDescription.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+		</section>
+		<section id="configureOptions">
+			<title>Configuring Layout Options </title>
+			<para>The values of the layout options for a particular diagram object (in the visible diagram) can be changed using the Layout View of that diagram object. The initial values are the predefined 
+				<emphasis role="bold">default</emphasis> values. These defaults can be changed using the context menu in Layout View as well as the Layout preference pages provided by eTrice.
+			</para>
+			<section id="layoutView">
+				<title>The Layout View</title>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/043-LayoutView.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The Layout view allows flexible customization of layout options for the selected objects in the eTrice diagram. If no object is selected, the view shows the options for the top-level container of the diagram. Options are stored persistently in diagram file (*.structure file / *.behavior file) of the eTrice diagram, so that they are still available after the next Eclipse restart. Of course this requires the diagram to be saved after an option was changed.</para>
+				<para>The options are grouped according to the function of the selected objects. The group Nodes (respectively Edges, Ports, or Labels) contains options related to the object itself, such as its size or priority, while the group Parents contains options for the elements contained in the selected objects, such as the applied layout algorithm or the spacing between elements. Which layout options are displayed depends on the types of selected objects and the active layout algorithm, since each algorithm supports only a subset of the available options. Furthermore, some options are only visible if the 
+					<emphasis>Show Advanced Properties</emphasis> button in the view toolbar is activated. The group types can be hidden using the Show Categories button.
+				</para>
+				<para>An option can be changed by selecting or entering a new value in the corresponding cell of the Value column.</para>
+				<para>The most important option is Layout Algorithm, which is used to determine the layout algorithm for the contents of the selected element. Here either a specific layout algorithm or a layout type can be chosen; in the latter case, the most suitable layout algorithm of the given type is taken. By changing the active layout algorithm, the content of the layout view is updated to display only those options that are supported by the new layout algorithm.</para>
+				<para>Selecting Restore Default Value in the context menu or the view toolbar removes any value for the currently selected option that is stored in the current model file, thus resetting the option to its default value. The view menu has an entry Remove all Layout Options which resets all options of the current model by removing persistent data in the model file.</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/043-ContextMenu.png"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The context menu for a specific layout option has different alternatives to set the currently active value as 
+					<emphasis role="bold">default</emphasis> value:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>Set as Default for this Diagram</emphasis>: Changes the open diagram file so that the same value is applied to all similar objects (edit parts) of that diagram.
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>Set as Default for ... in this Context</emphasis>: Applies the value to all similar objects that are displayed with the any of the eTrice editors (the option is linked to the edit part class of the selected object).
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>Set as Default for all ...</emphasis>: Links the option value with the domain model element or the diagram type of the selected object (see the context menu depicted above).
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>These four alternatives have different priorities: if present, the default value for the current diagram is taken first, then the default value for the edit part is checked, then the default value for the domain model element, and then the default value for the diagram type.</para>
+				<para>Tips:</para>
+				<itemizedlist>
+					<listitem>
+						<para>The information button of the view toolbar can be used to display some useful details on the current selection, such as the edit part and domain model classes.</para>
+					</listitem>
+					<listitem>
+						<para>Default values for layout options can most easily be manipulated based on the eTrice domain model elements.</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+			<section id="preferencePage">
+				<title>Preference Pages</title>
+				<para>The user-defined 
+					<emphasis role="bold">default</emphasis> values for layout options can also be set using the preference pages provided in eTrice. Three preference pages have been provided for this purpose
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>Layout</emphasis>: for general preferences regarding layout
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>Behavior</emphasis>: for setting default values of layout options for eTrice behavior diagrams
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>Structure</emphasis>: for setting default values of layout options for eTrice structure diagrams
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>These preference pages can be accessed via 
+					<emphasis>Windows &gt; Preferences &gt; eTrice &gt; Layout</emphasis>.
+				</para>
+				<para>Note that the contents of these preference pages are in sync with the 
+					<emphasis>KIELER &gt; Layout</emphasis> preference page provided by the KIELER. Relevant entries in the 
+					<emphasis>KIELER &gt; Layout</emphasis> page are shown in the above preference pages.
+				</para>
+				<section id="LayoutPreferencePage">
+					<title>
+						<emphasis>Layout</emphasis> Preference Page
+					</title>
+					<para>The 
+						<emphasis>Layout</emphasis> preference page is meant to configure general options regarding the layout. 
+					</para>
+					<para>If 
+						<emphasis>Set routing style of all edges to oblique</emphasis> is active, all routing styles and smoothness settings of edges are removed when automatic layout is performed. Since most layouters compute the routing of edges as part of their algorithm, these styles usually do not yield the expected results.
+					</para>
+				</section>
+				<section id="BehaviorandStructurePreferencePages">
+					<title>
+						<emphasis>Behavior</emphasis> and 
+						<emphasis>Structure</emphasis> Preference Pages
+					</title>
+					<para>The 
+						<emphasis>Behavior</emphasis> and 
+						<emphasis>Structure</emphasis> sub-preference pages help in setting up the default values of layout options in behavior and structure diagrams respectively.
+					</para>
+					<para>The 
+						<emphasis>Default Layout Option Values</emphasis> table is used to manage the default setting for layout options, which can also be modified with the context menu of the layout view (see above). All user-defined settings are displayed here, and the buttons on the right of the table serve to create, edit, and remove entries. The Type column shows the type of element the option is linked with: either edit part, model element, or diagram type. The Element column shows the class name for options that relate to edit parts or domain model elements, and the diagram type name for options that relate to diagram types. Option is the name of the layout option, and Value is the currently set value of the option.
+					</para>
+					<para>Creating a new entry requires the selection of the type of related element and entering its class name or identifier. Class names of edit parts can be explored using the information button of the layout view, while the class names for the domain model elements and the diagram type identifiers for the diagram types can be selected with the Browse button. After that, a layout option has to be selected from the list using the corresponding Browse button. Hitting OK creates an entry, and its value can then be set using the Edit button.</para>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/043-PreferencePage.png"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+					<para>Note that the 
+						<emphasis>Behavior</emphasis> preference page will show only those entries which hold for the behavior diagrams. Moreover, it will allow setting default values of layout options for only those domain model elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for the 
+						<emphasis>Structure</emphasis> preference page.
+					</para>
+				</section>
+			</section>
+		</section>
+		<section id="specialOptions">
+			<title>Special Layout Options</title>
+			<para>While most layout options are used to affect how the active layout algorithm computes concrete coordinates for the graph elements, there are some layout options that have a special role.</para>
+			<section id="LayoutAlgorithm">
+				<title>Layout Algorithm</title>
+				<para>The option with identifier de.cau.cs.kieler.algorithm specifies which layout algorithm to use for the content of a composite node. The value can be either the identifier of a layout algorithm or the identifier of a layout type. In the latter case the algorithm with highest priority of that type is applied.</para>
+				<para>For the purpose of automatic diagram layout in eTrice, we use the 
+					<emphasis>Layered</emphasis> algorithms which are meant for lay-outing hierarchical diagrams and are best suited for behavior and structure diagrams in eTrice. For the behavior diagrams we have used the 
+					<emphasis>Graphviz Dot</emphasis> algorithm whereas for the structure diagrams we have used the 
+					<emphasis>KLay Layered</emphasis> algorithm. Though the layout algorithm being used for performing layout can be changed at ones own will, it is recommended to use the defaults.  
+				</para>
+			</section>
+			<section id="DiagramType">
+				<title>Diagram Type</title>
+				<para>Diagram types are used to classify graphical diagrams for setting default layout option values for a set of similar diagrams. The diagram type of an element is specified with the layout option de.cau.cs.kieler.diagramType. Thus, these help in </para>
+				<para>The following diagram types have been defined and used in eTrice:</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>General</emphasis> - This type is automatically assigned to all diagrams for which no specific type is declared. (Predefined in KIELER)
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>eTrice Behavior Diagrams</emphasis> - This type has been assigned to the diagram objects in eTrice Behavior Diagrams. 
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis>eTrice Structure Diagrams</emphasis> - This type has been assigned to the diagram objects in eTrice Structurer Diagrams.
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>Note that not all diagrams objects in the behavior and structure diagrams are assigned the last two diagram types. Only the top-level container and the visible bounding box has been assigned these diagram types in respective editors.</para>
+			</section>
+		</section>
+		<section id="FurtherReferences">
+			<title>Further References</title>
+			<para>Most parts of the above documentation have been taken from the 
+				<ulink url="http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078">KIML wiki</ulink> and have been modified for automatic layout in eTrice. A more detailed description about the layout algorithms, predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout(KIML) can be found at the 
+				<ulink url="http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078">KIML wiki</ulink> .
+				h1. eTrice Models and Their Relations
+			</para>
+			<para>eTrice comprises several models:</para>
+			<itemizedlist>
+				<listitem>
+					<para>the ROOM model (*.room) — defines model classes and the logical structure of the model</para>
+				</listitem>
+				<listitem>
+					<para>Config model (*.config) — defines configuration values for attributes</para>
+				</listitem>
+				<listitem>
+					<para>Physical model (*.etphys) — defines the structure and properties of the physical system</para>
+				</listitem>
+				<listitem>
+					<para>Mapping model (*.etmap) — defines a mapping from logical elements to physical elements</para>
+				</listitem>
+			</itemizedlist>
+			<para>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/080-models.jpg" scale="50"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>In the following sections we will describe those models with emphasis of their cross relations.</para>
+		</section>
 		<section id="TheROOMModel">
 			<title>The ROOM Model</title>
 			<para>The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.

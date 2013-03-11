@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 
 @Singleton
@@ -110,7 +111,6 @@ class DataClassGen {
 		
 		«dc.operations.operationsImplementation(dc.name)»
 		
-		// deep copy
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {
 			memcpy(target, source, sizeof(«dc.name»));
 		}

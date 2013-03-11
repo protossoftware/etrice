@@ -25,18 +25,27 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+/**
+ * A collection of methods for generation of user code, attributes with getters and setters
+ * and operations.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ProcedureHelpers {
   @Inject
-  private ILanguageExtension languageExt;
+  private TypeHelpers _typeHelpers;
   
   @Inject
-  private TypeHelpers _typeHelpers;
+  private ILanguageExtension languageExt;
   
   @Inject
   private ILogger logger;
   
+  /**
+   * @param dc a {@link DataClass}
+   * @param id 0, 1 or 2 for the corresponding user codes
+   * @return the generated code
+   */
   public CharSequence userCode(final DataClass dc, final int id) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -67,6 +76,11 @@ public class ProcedureHelpers {
     return _switchResult;
   }
   
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param id 0, 1 or 2 for the corresponding user codes
+   * @return the generated code
+   */
   public CharSequence userCode(final ProtocolClass pc, final int id) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -97,6 +111,11 @@ public class ProcedureHelpers {
     return _switchResult;
   }
   
+  /**
+   * @param ac an {@link ActorContainerClass}
+   * @param id 0, 1 or 2 for the corresponding user codes
+   * @return the generated code
+   */
   public CharSequence userCode(final ActorContainerClass ac, final int id) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -127,6 +146,11 @@ public class ProcedureHelpers {
     return _switchResult;
   }
   
+  /**
+   * @param dc some {@link DetailCode}
+   * @return a string containing the expanded code surrounded by
+   * 		comments (no tag replacement will happen)
+   */
   public CharSequence userCode(final DetailCode dc) {
     String _detailCode = RoomHelpers.getDetailCode(dc);
     CharSequence _userCode = this.userCode(_detailCode);
@@ -158,7 +182,8 @@ public class ProcedureHelpers {
   }
   
   /**
-   * TODO: add ref type
+   * @param attribs a list of {@link Attribute}s
+   * @return code declaring the attributes
    */
   public CharSequence attributes(final List<Attribute> attribs) {
     StringConcatenation _builder = new StringConcatenation();
@@ -174,6 +199,10 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param attribute an {@link Attribute}
+   * @return the code declaring the attribute
+   */
   public CharSequence attributeDeclaration(final Attribute attribute) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -214,6 +243,10 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param attribute an {@link Attribute}
+   * @return the code for an array initializer
+   */
   public String arrayInitializer(final Attribute att) {
     String _xifexpression = null;
     String _defaultValueLiteral = att.getDefaultValueLiteral();
@@ -227,7 +260,7 @@ public class ProcedureHelpers {
       String _defaultValue = this.languageExt.defaultValue(_type);
       _xifexpression = _defaultValue;
     }
-    String dflt = _xifexpression;
+    final String dflt = _xifexpression;
     boolean _startsWith = dflt.startsWith("{");
     if (_startsWith) {
       String[] _split = dflt.split(",");
@@ -272,9 +305,14 @@ public class ProcedureHelpers {
     return (result + "}");
   }
   
+  /**
+   * @param attribs a list of {@link Attribute}s
+   * @param classname the name of the defining class
+   * @return code declaring setters and getters for the attributes
+   */
   public CharSequence attributeSettersGettersDeclaration(final List<Attribute> attribs, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//--------------------- attribute setters and getters");
+    _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
       for(final Attribute attribute : attribs) {
@@ -291,9 +329,14 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param attribs a list of {@link Attribute}s
+   * @param classname the name of the defining class
+   * @return code defining setters and getters for the attributes
+   */
   public CharSequence attributeSettersGettersImplementation(final List<Attribute> attribs, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//--------------------- attribute setters and getters");
+    _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
       for(final Attribute attribute : attribs) {
@@ -332,6 +375,11 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param attribute an {@link Attribute}
+   * @param classname the name of the defining class
+   * @return code for the attribute setter declaration
+   */
   private CharSequence setterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
@@ -358,9 +406,15 @@ public class ProcedureHelpers {
     String _name_1 = attribute.getName();
     _builder.append(_name_1, "");
     _builder.append(")");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
+  /**
+   * @param attribute an {@link Attribute}
+   * @param classname the name of the defining class
+   * @return code for the attribute getter declaration
+   */
   private CharSequence getterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
@@ -384,9 +438,14 @@ public class ProcedureHelpers {
     String _selfPointer = this.languageExt.selfPointer(classname, false);
     _builder.append(_selfPointer, "");
     _builder.append(")");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
+  /**
+   * @param attribs a list of {@link Attribute}s
+   * @return an argument list for the attributes
+   */
   public CharSequence argList(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -416,6 +475,11 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param attribs an iterable of {@link Attribute}s representing a path
+   * @param classname the name of the defining class
+   * @return the invocation code for the call of a setter
+   */
   public CharSequence invokeGetters(final Iterable<Attribute> path, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -434,6 +498,12 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param typeName the type name of the attribute
+   * @param name the name of the attribute
+   * @param classname the name of the type defining the getter
+   * @return code defining the attribute getter
+   */
   public CharSequence getterImplementation(final String typeName, final String name, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
@@ -455,9 +525,15 @@ public class ProcedureHelpers {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
   
+  /**
+   * @param name the name of the attribute
+   * @param classname the name of the type defining the getter
+   * @return code defining the getter call
+   */
   public CharSequence invokeGetter(final String name, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("get");
@@ -470,6 +546,12 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param name the name of the attribute
+   * @param classname the name of the type defining the getter
+   * @param value the value to be assigned
+   * @return code defining the setter call
+   */
   public CharSequence invokeSetter(final String name, final String classname, final String value) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("set");
@@ -483,6 +565,11 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param operations a list of {@link Operation}s
+   * @param classname the name of the type defining the getter
+   * @return code declaring the operations
+   */
   public CharSequence operationsDeclaration(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- operations ---------------------*/");
@@ -511,6 +598,11 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param operations a list of {@link Operation}s
+   * @param classname the name of the type defining the getter
+   * @return code defining the operations
+   */
   public CharSequence operationsImplementation(final List<? extends Operation> operations, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- operations ---------------------*/");
@@ -547,6 +639,10 @@ public class ProcedureHelpers {
     return _builder;
   }
   
+  /**
+   * @param ac an {@link ActorClass}
+   * @return code defining all operations of the actor class
+   */
   public CharSequence operationsImplementation(final ActorClass ac) {
     EList<StandardOperation> _operations = ac.getOperations();
     String _name = ac.getName();
@@ -554,12 +650,21 @@ public class ProcedureHelpers {
     return _operationsImplementation;
   }
   
+  /**
+   * @param classname the name of a class
+   * @return code calling the destructor of the class
+   */
   public String destructorCall(final String classname) {
     String _destructorName = this.languageExt.destructorName(classname);
     String _plus = (_destructorName + "()");
     return _plus;
   }
   
+  /**
+   * @param operation an {@link Operation}
+   * @return the operation signature (with special care for
+   * 		constructor and destructor
+   */
   private CharSequence operationSignature(final Operation operation, final String classname) {
     CharSequence _xifexpression = null;
     boolean _isConstructor = RoomHelpers.isConstructor(operation);
@@ -591,6 +696,10 @@ public class ProcedureHelpers {
     return _xifexpression;
   }
   
+  /**
+   * @param type a {@link RefableType}
+   * @return a string for the type (also for pointers)
+   */
   private String dataTypeToString(final RefableType type) {
     String _xifexpression = null;
     boolean _equals = Objects.equal(type, null);

@@ -85,7 +85,7 @@ typedef float64 etFloat64;
 
 typedef FILE* etFileHandle;
 
-typedef int8 etAddressId;
+typedef int16 etAddressId;
 
 /*
  * typedefs for threading

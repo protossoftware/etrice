@@ -1,4 +1,14 @@
-
+/*******************************************************************************
+ * Copyright (c) 2011 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ * 
+ *******************************************************************************/
 
 package org.eclipse.etrice.generator.cpp.gen
 
@@ -18,6 +28,10 @@ import org.eclipse.etrice.generator.cpp.GeneratorOptions
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ActorCommunicationType
 
+/**
+ * @author Peter Karlitschek
+ *
+ */
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
@@ -101,7 +115,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ac.serviceImplementations.map(svc | '''«svc.portClassName» «svc.spp.name»;''').join("\n")»
 			
 				//--------------------- interface item IDs
-				«genInterfaceItemConstants(xpac, ac)»
+				«xpac.genInterfaceItemConstants»
 					
 				«ac.attributes.attributes»
 
@@ -203,6 +217,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		 						  											 const std::vector<std::vector<etRuntime::Address> >& peer_addr)
 		:  «ac.generateConstructorInitalizerList»
 		{
+			«IF ac.hasNonEmptyStateMachine»
+			history = new int[s_numberOfStates];
+			for (int i = 0; i < s_numberOfStates; i++) {
+				history[i] = NO_STATE;
+			}
+			«ENDIF»
 			setClassName("«ac.name»");
 			«ac.attributes.attributeInitialization(false)»
 		

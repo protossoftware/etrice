@@ -21,11 +21,13 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.base.AbstractGenerator
 
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 
 @Singleton
@@ -165,7 +167,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«IF (pc.getPortClass(conj) != null)»	
 			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
-			«pc.getPortClass(conj).operations.operationsDeclaration(replPortClassName)»
 		«ENDIF»
 		
 		«IF pc.handlesReceive(conj)»
@@ -228,11 +229,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 	}
 	
-	def private portClassSource(ProtocolClass pc, Boolean conj){
-		var portClassName = pc.getPortClassName(conj)
-		var replPortClassName = pc.getPortClassName(conj, true)
-		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
-		var dir = if (conj) "IN_" else "OUT_"
+	def private portClassSource(ProtocolClass pc, Boolean conj) {
+		val pclass = pc.getPortClass(conj)
+		val portClassName = pc.getPortClassName(conj)
+		val replPortClassName = pc.getPortClassName(conj, true)
+		val messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
+		val dir = if (conj) "IN_" else "OUT_"
 
 		'''
 			«FOR message : messages»
@@ -247,8 +249,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				
 				«messageSignature(portClassName, message.name, "", data)» {
 					«IF hdlr != null»
-						«FOR command : hdlr.detailCode.commands»	«command»
-						«ENDFOR»									
+						«AbstractGenerator::getInstance().getTranslatedCode(hdlr.detailCode)»
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
@@ -283,14 +284,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
+				
 			«ENDFOR»
-			
-			«IF (pc.getPortClass(conj) != null)»
+			«IF pclass!=null»
+				/* begin «portClassName» specific */
+				«pclass.userCode.userCode»
+				
 				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
-				«pc.getPortClass(conj).operations.operationsImplementation(replPortClassName)»
+				/* end «portClassName» specific */
+				
 			«ENDIF»
-
-			// getReplication
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
 				return ((etReplPort*)self)->size;
 			}
@@ -340,7 +343,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	/* receiver handlers */
 	«FOR h:getReceiveHandlers(pc,conj)»
 		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-			«userCode(h.detailCode)»
+			«AbstractGenerator::getInstance().getTranslatedCode(h.detailCode)»
 			/* hand over the message to the actor:      */
 			/* (*receiveMessageFunc)(actor, self, msg); */
 		}

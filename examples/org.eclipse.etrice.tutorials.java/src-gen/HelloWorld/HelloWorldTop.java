@@ -16,7 +16,6 @@ import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 public class HelloWorldTop extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	
 	//--------------------- saps
@@ -25,13 +24,12 @@ public class HelloWorldTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public HelloWorldTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public HelloWorldTop(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("HelloWorldTop");
 		
 		// initialize attributes
@@ -41,8 +39,10 @@ public class HelloWorldTop extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -50,22 +50,12 @@ public class HelloWorldTop extends ActorClassBase {
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
-	
 	/* state IDs */
 	public static final int STATE_state0 = 2;
 	
@@ -85,7 +75,8 @@ public class HelloWorldTop extends ActorClassBase {
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
-			System.out.println(getInstancePath() + " -> " + stateStrings[new_state]);
+			System.out.println("state switch of "+getInstancePath() + ": "
+					+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
 		}	
 		this.state = new_state;
 	}
@@ -170,13 +161,13 @@ public class HelloWorldTop extends ActorClassBase {
 		boolean skip_entry = false;
 		
 		if (!handleSystemEvent(ifitem, evt, generic_data)) {
-			switch (this.state) {
+			switch (getState()) {
 				case STATE_state0:
 					break;
 			}
 		}
 		if (chain != NOT_CAUGHT) {
-			exitTo(this.state, catching_state, is_handler);
+			exitTo(getState(), catching_state, is_handler);
 			int next = executeTransitionChain(chain, ifitem, generic_data);
 			next = enterHistory(next, is_handler, skip_entry);
 			setState(next);

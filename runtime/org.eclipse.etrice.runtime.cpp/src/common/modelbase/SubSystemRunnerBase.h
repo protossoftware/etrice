@@ -1,19 +1,21 @@
-/*
- * SubSystemRunnerBase.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * The base class for running components.
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
  *
- *  Created on: 29.08.2012
- *      Author: karlitsc
- */
+ *******************************************************************************/
 
 #ifndef SUBSYSTEMRUNNERBASE_H_
 #define SUBSYSTEMRUNNERBASE_H_
 
 #include <iostream>
-#ifdef WIN32
-#include <windows.h>
-#endif
+#include <string>
+#include "common/modelbase/TestSemaphore.h"
 
 namespace etRuntime {
 
@@ -23,18 +25,21 @@ class SubSystemRunnerBase {
 public:
 	SubSystemRunnerBase();
 	~SubSystemRunnerBase();
+	static void run(SubSystemClassBase& mainComponent, int argc, char* argv[] );
 
+protected:
 	/**
 	 * blocks until the String "quit" is entered on the console
 	 */
-protected:
-	static void waitForQuit(SubSystemClassBase& mainComponent) {
-		waitAndPollSingleThreaded(mainComponent);
-	}
+	static void waitForTestcase();
+	static TestSemaphore s_testSem;
 
 private:
-	static void waitMultiThreaded();
-	static void waitAndPollSingleThreaded(SubSystemClassBase& mainComponent);
+	static const std::string OPTION_RUN_AS_TEST;
+	static const std::string OPTION_RUN_AS_TEST_SINGLETHREADED;
+	static const std::string OPTION_RUN_SINGLETHREADED;
+	static void waitForQuitMultiThreaded();
+	static void waitAndPollSingleThreaded(SubSystemClassBase& mainComponent, int cycles);
 };
 
 } /* namespace etRuntime */

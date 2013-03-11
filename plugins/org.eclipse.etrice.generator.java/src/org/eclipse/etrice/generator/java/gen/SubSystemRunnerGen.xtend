@@ -45,6 +45,7 @@ class SubSystemRunnerGen {
 		
 		package «cc.getPackage()»;
 		
+		import org.eclipse.etrice.runtime.java.modelbase.RTSystem;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemRunnerBase;
 		
 		class «cc.name+"Runner"» extends SubSystemRunnerBase {
@@ -55,19 +56,12 @@ class SubSystemRunnerGen {
 		     */
 			public static void main(String[] args) {
 				// instantiate the main component
-				«cc.name» main_component = new «cc.name»("«ssc.runtimeName»");
+				RTSystem sys = «IF ssc.eContainer instanceof SystemInstance»new RTSystem("«(ssc.eContainer as SystemInstance).name»")«ELSE»null«ENDIF»;
+				«cc.name» main_component = new «cc.name»(sys, "«ssc.name»");
 				
 				run(main_component, args);
 			}
 		};
 	'''
 	}
-	
-	def private getRuntimeName(SubSystemInstance ssc){
-		var parent = ssc.eContainer
-		switch parent{
-			SystemInstance: parent.name+"/"+ssc.name
-			default: ssc.name
-		}
-	}	
 }

@@ -24,13 +24,22 @@ import org.eclipse.etrice.core.room.MessageFromIf
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
-
+/**
+ * Target language independent protocol class generator.
+ */
 class GenericProtocolClassGenerator {
 
-	@Inject extension ILanguageExtension langExt
-	@Inject extension RoomExtensions roomExt
+	@Inject protected extension ILanguageExtension
+	@Inject protected extension RoomExtensions
 
+	/**
+	 * Generate constants for message IDs.
+	 * 
+	 * @param pc the {@link ProtocolClass}
+	 * @return the generated code for message ID constants
+	 */
 	def genMessageIDs(ProtocolClass pc) {
 		var offset = 0
 		
@@ -47,13 +56,22 @@ class GenericProtocolClassGenerator {
 		offset = offset+1
 		list.add(pair(memberInDeclaration(pc.name, "MSG_MAX"), offset.toString))
 		
-		return langExt.genEnumeration(langExt.memberInDeclaration(pc.name, "msg_ids"), list)
+		return genEnumeration(memberInDeclaration(pc.name, "msg_ids"), list)
 	}
 	
+	/**
+	 * @param mif a {@link MessageFromIf}
+	 * @return an identifier for the message
+	 */
 	def getMessageID(MessageFromIf mif) {
 		return getMessageID(mif.message, mif.from)
 	}
 	
+	/**
+	 * @param msg a {@link Message}
+	 * @param item a {@link InterfaceItem}
+	 * @return an identifier for the message
+	 */
 	def getMessageID(Message msg, InterfaceItem item) {
 		if (item instanceof Port) {
 			var p = item as Port;

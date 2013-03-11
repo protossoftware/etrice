@@ -1,11 +1,14 @@
 package PedLightsController;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -34,12 +37,11 @@ public class PedControlProtocol {
 	// port class
 	static public class PedControlProtocolPort extends PortBase {
 		// constructors
-		public PedControlProtocolPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PedControlProtocolPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PedControlProtocolPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PedControlProtocolPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -48,9 +50,7 @@ public class PedControlProtocol {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -64,15 +64,15 @@ public class PedControlProtocol {
 		
 		// sent messages
 		public void setCarLights(int state) {
-			if (messageStrings[ OUT_setCarLights] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_setCarLights]);
+			if (messageStrings[ OUT_setCarLights] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_setCarLights]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_setCarLights, state));
 		}
 		public void setPedLights(int state) {
-			if (messageStrings[ OUT_setPedLights] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_setPedLights]);
+			if (messageStrings[ OUT_setPedLights] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_setPedLights]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_setPedLights, state));
@@ -80,41 +80,37 @@ public class PedControlProtocol {
 	}
 	
 	// replicated port class
-	static public class PedControlProtocolReplPort {
-		private ArrayList<PedControlProtocolPort> ports;
-		private int replication;
+	static public class PedControlProtocolReplPort extends ReplicatedPortBase {
 	
-		public PedControlProtocolReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PedControlProtocol.PedControlProtocolPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PedControlProtocolPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PedControlProtocolReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PedControlProtocolPort get(int i) {
-			return ports.get(i);
+		public PedControlProtocolPort get(int idx) {
+			return (PedControlProtocolPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PedControlProtocolPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void setCarLights(int state){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).setCarLights( state);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).setCarLights( state);
 			}
 		}
 		public void setPedLights(int state){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).setPedLights( state);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).setPedLights( state);
 			}
 		}
 	}
@@ -123,12 +119,11 @@ public class PedControlProtocol {
 	// port class
 	static public class PedControlProtocolConjPort extends PortBase {
 		// constructors
-		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
-			DebuggingService.getInstance().addPortInstance(this);
+		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PedControlProtocolConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
 	
@@ -137,9 +132,7 @@ public class PedControlProtocol {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					if (messageStrings[msg.getEvtId()] != "timerTick"){
 						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					}
@@ -153,8 +146,8 @@ public class PedControlProtocol {
 		
 		// sent messages
 		public void start() {
-			if (messageStrings[ IN_start] != "timerTick"){
-			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_start]);
+			if (messageStrings[ IN_start] != "timerTick") {
+				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_start]);
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_start));
@@ -162,36 +155,32 @@ public class PedControlProtocol {
 	}
 	
 	// replicated port class
-	static public class PedControlProtocolConjReplPort {
-		private ArrayList<PedControlProtocolConjPort> ports;
-		private int replication;
+	static public class PedControlProtocolConjReplPort extends ReplicatedPortBase {
 	
-		public PedControlProtocolConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PedControlProtocol.PedControlProtocolConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PedControlProtocolConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PedControlProtocolConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PedControlProtocolConjPort get(int i) {
-			return ports.get(i);
+		public PedControlProtocolConjPort get(int idx) {
+			return (PedControlProtocolConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PedControlProtocolConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void start(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).start();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).start();
 			}
 		}
 	}

@@ -9,13 +9,15 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
+import room.basic.service.timing.*;
 
+import room.basic.service.timing.PTimer.*;
+import PedLightsController.PedControlProtocol.*;
 
 
 
 public class PedLightsTop extends ActorClassBase {
 
-	
 	
 	//--------------------- ports
 	
@@ -25,13 +27,12 @@ public class PedLightsTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public PedLightsTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public PedLightsTop(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("PedLightsTop");
 		
 		// initialize attributes
@@ -41,8 +42,12 @@ public class PedLightsTop extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
+		new GuiAdapter(this, "adapter"); 
+		new Controller(this, "controller"); 
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -50,28 +55,16 @@ public class PedLightsTop extends ActorClassBase {
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	//--------------------- no state machine
-	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-	handleSystemEvent(ifitem, evt, data);
+		handleSystemEvent(ifitem, evt, data);
 	}
 	
-	@Override
-	public void executeInitTransition(){
-	}
+	public void executeInitTransition() {}
 };

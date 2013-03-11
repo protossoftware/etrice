@@ -17,7 +17,6 @@ import org.eclipse.etrice.modellib.Socket.PSocket.*;
 public class SocketClient extends ActorClassBase {
 
 	
-	
 	//--------------------- ports
 	protected PSocketPort fct = null;
 	
@@ -32,22 +31,24 @@ public class SocketClient extends ActorClassBase {
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public SocketClient(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public SocketClient(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("SocketClient");
 		
 		// initialize attributes
 
 		// own ports
-		fct = new PSocketPort(this, "fct", IFITEM_fct, 0, port_addr[IFITEM_fct][0], peer_addr[IFITEM_fct][0]); 
+		fct = new PSocketPort(this, "fct", IFITEM_fct); 
 		
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
 
+	}
 	
-	//--------------------- attribute setters and getters
+	/* --------------------- attribute setters and getters */
 	
 	
 	//--------------------- port getters
@@ -56,28 +57,16 @@ public class SocketClient extends ActorClassBase {
 	}
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	//--------------------- no state machine
-	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-	handleSystemEvent(ifitem, evt, data);
+		handleSystemEvent(ifitem, evt, data);
 	}
 	
-	@Override
-	public void executeInitTransition(){
-	}
+	public void executeInitTransition() {}
 };

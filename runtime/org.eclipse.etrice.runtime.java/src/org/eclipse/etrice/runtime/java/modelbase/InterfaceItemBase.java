@@ -8,9 +8,12 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.List;
+
 import org.eclipse.etrice.runtime.java.messaging.AbstractMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
@@ -26,20 +29,51 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	private IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
-	private Address peerAddress;
+	private Address peerAddress = null;
 
-	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx, Address ownAddress, Address peerAddress){
-		super(actor, ownAddress, name);
-		this.ownMsgReceiver = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(ownAddress.threadID);
-		this.peerMsgReceiver = peerAddress==null? null: RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.threadID);
+	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx) {
+		super(actor, name);
+		
 		this.localId = localId;
 		this.idx = idx;
-		this.peerAddress = peerAddress;
 		
-		if (getAddress()!=null && this.ownMsgReceiver instanceof MessageService) {
-			MessageService ms = (MessageService) this.ownMsgReceiver;
-			// register at the own dispatcher to receive messages
-			ms.getMessageDispatcher().addMessageReceiver(this);
+		int thread = RTServices.getInstance().getMsgSvcCtrl().getThreadForPath(getParent().getInstancePath());
+		if (thread>=0) {
+			MessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
+			Address addr = msgSvc.getFreeAddress();
+			setAddress(addr);
+			
+			this.ownMsgReceiver = msgSvc;
+			
+			if (this.ownMsgReceiver instanceof MessageService) {
+				MessageService ms = (MessageService) this.ownMsgReceiver;
+				// register at the own dispatcher to receive messages
+				ms.getMessageDispatcher().addMessageReceiver(this);
+			}
+		}
+		
+		List<String> peerPaths = RTServices.getInstance().getMsgSvcCtrl().getPeersForPath(getInstancePath());
+		if (peerPaths!=null && !peerPaths.isEmpty()) {
+			IRTObject object = getObject(peerPaths.get(0));
+			InterfaceItemBase peer = null;
+			if (object instanceof InterfaceItemBase) {
+				peer = ((InterfaceItemBase) object);
+			}
+			else if (object instanceof IReplicatedInterfaceItem) {
+				peer = ((IReplicatedInterfaceItem) object).createSubInterfaceItem();
+			}
+			connectWith(peer);
+		}
+		
+	}
+
+	protected void connectWith(InterfaceItemBase peer) {
+		if (peer!=null) {
+			// connect with each other
+			peerAddress = peer.getAddress();
+			peer.peerAddress = getAddress();
+			this.peerMsgReceiver = peer.ownMsgReceiver;
+			peer.peerMsgReceiver = ownMsgReceiver;
 		}
 	}
 

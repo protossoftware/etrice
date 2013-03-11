@@ -808,31 +808,31 @@ public class RoomFragmentProvider implements IFragmentProvider {
 	
 	private RoomClass getRoomClass(RoomModel model, String className) {
 		for (DataClass dc : model.getDataClasses()) {
-			if (dc.getName().equals(className))
+			if (dc.getName() != null && dc.getName().equals(className))
 				return dc;
 		}
 		for (ExternalType et : model.getExternalTypes()) {
-			if (et.getName().equals(className))
+			if (et.getName() != null && et.getName().equals(className))
 				return et;
 		}
 		for (PrimitiveType pt : model.getPrimitiveTypes()) {
-			if (pt.getName().equals(className))
+			if (pt.getName() != null && pt.getName().equals(className))
 				return pt;
 		}
 		for (GeneralProtocolClass pc : model.getProtocolClasses()) {
-			if (pc.getName().equals(className))
+			if (pc.getName() != null && pc.getName().equals(className))
 				return pc;
 		}
 		for (ActorClass ac : model.getActorClasses()) {
-			if (ac.getName().equals(className))
+			if (ac.getName() != null && ac.getName().equals(className))
 				return ac;
 		}
 		for (SubSystemClass ssc : model.getSubSystemClasses()) {
-			if (ssc.getName().equals(className))
+			if (ssc.getName() != null && ssc.getName().equals(className))
 				return ssc;
 		}
 		for (LogicalSystem ls : model.getSystems()) {
-			if (ls.getName().equals(className))
+			if (ls.getName() != null && ls.getName().equals(className))
 				return ls;
 		}
 		return null;

@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -86,14 +87,19 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import java.util.ArrayList;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
-    _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.messaging.Message;");
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.*;");
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.EventMessage;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.PortBase;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;");
     _builder.newLine();
     {
       boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
@@ -142,7 +148,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("\t");
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_2 = m.getName();
@@ -152,7 +158,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
     _builder.append(" ");
     {
-      List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_3 = m_1.getName();
@@ -234,29 +240,21 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {");
+      _builder.append("(IEventReceiver actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("this(actor, name, localId, 0, addr, peerAddress);");
+      _builder.append("this(actor, name, localId, 0);");
       _builder.newLine();
-      {
-        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation) {
-          _builder.append("\t\t");
-          _builder.append("DebuggingService.getInstance().addPortInstance(this);");
-          _builder.newLine();
-        }
-      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {");
+      _builder.append("(IEventReceiver actor, String name, int localId, int idx) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("super(actor, name, localId, idx, addr, peerAddress);");
+      _builder.append("super(actor, name, localId, idx);");
       _builder.newLine();
       {
         boolean _notEquals_1 = (!Objects.equal(pclass, null));
@@ -269,8 +267,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       {
-        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
+        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addPortInstance(this);");
           _builder.newLine();
@@ -299,8 +297,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_2) {
+        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_1) {
           _builder.append("\t\t\t\t");
           _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
           _builder.newLine();
@@ -414,8 +412,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _outgoing = this._roomExtensions.getOutgoing(pc, (conj).booleanValue());
-        for(final Message m : _outgoing) {
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        for(final Message m : _allMessages) {
           _builder.append("\t");
           CharSequence _sendMessage = this.sendMessage(m, (conj).booleanValue());
           _builder.append(_sendMessage, "	");
@@ -429,49 +427,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.append("static public class ");
       _builder.append(replPortClassName, "");
-      _builder.append(" {");
+      _builder.append(" extends ReplicatedPortBase {");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("private ArrayList<");
-      _builder.append(portClassName, "	");
-      _builder.append("> ports;");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("private int replication;");
-      _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(replPortClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId, Address[] addr,");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t");
-      _builder.append("Address[] peerAddress) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("replication = addr==null? 0:addr.length;");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("ports = new ArrayList<");
-      String _name = pc.getName();
-      _builder.append(_name, "		");
-      _builder.append(".");
-      _builder.append(portClassName, "		");
-      _builder.append(">(replication);");
+      _builder.append("(IEventReceiver actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("for (int i=0; i<replication; ++i) {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("ports.add(new ");
-      _builder.append(portClassName, "			");
-      _builder.append("(");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("actor, name+i, localId, i, addr[i], peerAddress[i]));");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
+      _builder.append("super(actor, name, localId);");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -482,7 +447,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("public int getReplication() {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("return replication;");
+      _builder.append("return getNInterfaceItems();");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -503,11 +468,26 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append(" get(int i) {");
+      _builder.append(" get(int idx) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("return ports.get(i);");
+      _builder.append("return (");
+      _builder.append(portClassName, "		");
+      _builder.append(") getInterfaceItem(idx);");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return new ");
+      _builder.append(portClassName, "		");
+      _builder.append("(rcv, name, lid, idx);");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -519,7 +499,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// incoming messages");
           _builder.newLine();
           {
-            List<Message> _allIncomingMessages = this._roomExtensions.getAllIncomingMessages(pc);
+            List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
             for(final Message m_1 : _allIncomingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature = this.messageSignature(m_1);
@@ -528,11 +508,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("for (int i=0; i<replication; ++i) {");
+              _builder.append("for (int i=0; i<getReplication(); ++i) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t\t");
-              _builder.append("ports.get(i).");
+              _builder.append("get(i).");
               CharSequence _messageCall = this.messageCall(m_1);
               _builder.append(_messageCall, "			");
               _builder.append(";");
@@ -551,7 +531,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// outgoing messages");
           _builder.newLine();
           {
-            List<Message> _allOutgoingMessages = this._roomExtensions.getAllOutgoingMessages(pc);
+            List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
             for(final Message m_2 : _allOutgoingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature_1 = this.messageSignature(m_2);
@@ -560,11 +540,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("for (int i=0; i<replication; ++i) {");
+              _builder.append("for (int i=0; i<getReplication(); ++i) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t\t");
-              _builder.append("ports.get(i).");
+              _builder.append("get(i).");
               CharSequence _messageCall_1 = this.messageCall(m_2);
               _builder.append(_messageCall_1, "			");
               _builder.append(";");

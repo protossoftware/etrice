@@ -145,6 +145,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
+			<arg value="-ansi"/>
 			<arg value="../src/common/debugging/etMSCLogger.c"/>
 			<arg value="../src/common/etUnit/etUnit.c"/>
 			<arg value="../src/common/messaging/etMessage.c"/>
@@ -191,6 +192,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
+			<arg value="-ansi"/>
 			<arg value="../../src-gen/HandlerTest/HandlerTest_Top.c"/>
 			<arg value="../../src-gen/HandlerTest/HandlerUser.c"/>
 			<arg value="../../src-gen/HandlerTest/SubSystem_HandlerTest.c"/>
@@ -226,6 +228,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
+			<arg value="-ansi"/>
 			<arg value="../../src-gen/ChoicePointTest/CPTest_Top.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPTester.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPUser.c"/>
@@ -261,6 +264,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
+			<arg value="-ansi"/>
 			<arg value="../../src-gen/SendingDataTestC/MrPing.c"/>
 			<arg value="../../src-gen/SendingDataTestC/MrPong.c"/>
 			<arg value="../../src-gen/SendingDataTestC/PingPongData.c"/>
@@ -302,6 +306,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
+			<arg value="-ansi"/>
 			<arg value="../../src-gen/StaticConfigTest/Tester_ac.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Testee_1_ac.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Testee_2_ac.c"/>
@@ -343,10 +348,18 @@
 	-->
 	<target name="run" depends="build">
 		<mkdir dir="tmp/log"/>
+		<echo>start HandlerTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
+		<echo>end   HandlerTest</echo>
+		<echo>start ChoicePointTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+		<echo>end   ChoicePointTest</echo>
+		<echo>start SendingDataTestC</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
+		<echo>end   SendingDataTestC</echo>
+		<echo>start StaticConfigTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
+		<echo>end   StaticConfigTest</echo>
 	</target>
 	
 	<!--

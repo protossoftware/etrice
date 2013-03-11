@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Peter Karlitschek
  * 
  *******************************************************************************/
 
@@ -21,7 +22,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
-@Singleton
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+
+/**
+ * @author Peter Karlitschek
+ *
+ */
+ @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 	
 	@Inject extension RoomExtensions
@@ -32,13 +39,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	'''
 		protected:
 		 	static std::string s_stateStrings[];
-		
-«««	 	TODOHRR: history defined in ActorClassBase, init in constructor
-«««			history = new int[5];
-«««			for (int i = 0; i < history.length; i++) {
-«««				history[i] = NO_STATE;
-«««			}
-		 	int history[];
+		 	static const int s_numberOfStates;
 		
 		private:
 			 void setState(int new_state);
@@ -47,15 +48,10 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	override genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 	'''
-		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.getStatePathName()»"
+		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
 		«ENDFOR»};
+		const int «ac.name»::s_numberOfStates = «ac.getAllBaseStatesLeavesLast().size + 2»;
 		
-«««	 	TODOHRR: history defined in ActorClassBase, init in constructor
-«««			history = new int[5];
-«««			for (int i = 0; i < history.length; i++) {
-«««				history[i] = NO_STATE;
-«««			}
-				
 		void «ac.name»::setState(int new_state) {
 			DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);
 			if (s_stateStrings[new_state]!="Idle") {

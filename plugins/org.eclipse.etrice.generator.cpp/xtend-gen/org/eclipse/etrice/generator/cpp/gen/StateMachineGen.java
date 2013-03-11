@@ -10,6 +10,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -17,6 +18,9 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+/**
+ * @author Peter Karlitschek
+ */
 @Singleton
 @SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
@@ -33,9 +37,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     _builder.append(" \t");
     _builder.append("static std::string s_stateStrings[];");
     _builder.newLine();
-    _builder.newLine();
     _builder.append(" \t");
-    _builder.append("int history[];");
+    _builder.append("static const int s_numberOfStates;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("private:");
@@ -65,20 +68,28 @@ public class StateMachineGen extends GenericStateMachineGenerator {
             _builder.appendImmediate(",", "");
           }
           _builder.append("\"");
-          String _statePathName = this._roomExtensions.getStatePathName(state);
-          _builder.append(_statePathName, "");
+          String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+          _builder.append(_genStatePathName, "");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("};");
       _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("void ");
+      _builder.append("const int ");
       String _name_1 = ac.getName();
       _builder.append(_name_1, "");
+      _builder.append("::s_numberOfStates = ");
+      List<State> _allBaseStatesLeavesLast_1 = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
+      int _size = _allBaseStatesLeavesLast_1.size();
+      int _plus = (_size + 2);
+      _builder.append(_plus, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("void ");
+      String _name_2 = ac.getName();
+      _builder.append(_name_2, "");
       _builder.append("::setState(int new_state) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

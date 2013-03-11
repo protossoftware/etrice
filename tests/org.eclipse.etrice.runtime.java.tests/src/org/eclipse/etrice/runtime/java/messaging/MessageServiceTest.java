@@ -20,13 +20,12 @@ public class MessageServiceTest extends TestCase {
 	public void testRun() {
 		
 		// testing basic functionality of MessageService and Dispatcher
-		Address addr = new Address(0,0,0);
-		MessageService msg_service1 = new MessageService(null, addr, "MessageService1", Thread.NORM_PRIORITY);
-		MessageService msg_service2 = new MessageService(null, addr, "MessageService2", Thread.NORM_PRIORITY);
-		MessageService msg_service3 = new MessageService(null, addr, "MessageService3", Thread.NORM_PRIORITY);
-		MessageService msg_service4 = new MessageService(null, addr, "MessageService4", Thread.NORM_PRIORITY);
-		MessageService msg_service5 = new MessageService(null, addr, "MessageService5", Thread.NORM_PRIORITY);
-		MessageService msg_service6 = new MessageService(null, addr, "MessageService6", Thread.NORM_PRIORITY);
+		MessageService msg_service1 = new MessageService(null, 0, 0, "MessageService1", Thread.NORM_PRIORITY);
+		MessageService msg_service2 = new MessageService(null, 0, 0, "MessageService2", Thread.NORM_PRIORITY);
+		MessageService msg_service3 = new MessageService(null, 0, 0, "MessageService3", Thread.NORM_PRIORITY);
+		MessageService msg_service4 = new MessageService(null, 0, 0, "MessageService4", Thread.NORM_PRIORITY);
+		MessageService msg_service5 = new MessageService(null, 0, 0, "MessageService5", Thread.NORM_PRIORITY);
+		MessageService msg_service6 = new MessageService(null, 0, 0, "MessageService6", Thread.NORM_PRIORITY);
 
 		DummyMessageReceiver receiver1 = new DummyMessageReceiver(new Address(0,0,1)); 
 		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,2)); 
@@ -50,12 +49,12 @@ public class MessageServiceTest extends TestCase {
 		Message msg5 = new Message(new Address(0,4,39));
 		Message msg6 = new Message(new Address(0,5,111));
 
-		msg_service1.start();
-		msg_service2.start();
-		msg_service3.start();
-		msg_service4.start();
-		msg_service5.start();
-		msg_service6.start();
+		start(msg_service1);
+		start(msg_service2);
+		start(msg_service3);
+		start(msg_service4);
+		start(msg_service5);
+		start(msg_service6);
 
 		msg_service1.receive(msg1);
 		msg_service2.receive(msg2);
@@ -87,8 +86,7 @@ public class MessageServiceTest extends TestCase {
 		// current thread sends, MessageService has its own thread to dispatch the received messages
 		// implicit test of race conditions -> test breaks if you take out the synchronized keywords from the MessageService
 		
-		Address addr = new Address(0,0,0);
-		MessageService msg_service = new MessageService(null, addr, "MessageService1");
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
 
 		int max=3000;
 		int max_iter=10;
@@ -111,7 +109,7 @@ public class MessageServiceTest extends TestCase {
 
 		// Start Message Service before sending the Messages to test the synchronization
 		// This test fails without the synchronized keywords in the MessageService 
-		msg_service.start();
+		start(msg_service);
 		
 		// send all messages
 		for (int j=0; j<max_iter; j++){
@@ -138,20 +136,22 @@ public class MessageServiceTest extends TestCase {
 
 	public void testMessageService() {
 		Address addr = new Address(0,0,0);
-		MessageService msg_service = new MessageService(null, addr, "MessageService1");
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
 		assertEquals(addr, msg_service.getAddress());
 		assertEquals(msg_service.getMessageDispatcher().getAddress().objectID, msg_service.getAddress().objectID+1);
 	}
 
 	public void testInstanceId() {
-		Address addr = new Address(0,0,0);
-
 		// setInstanceId via Constructor
-		MessageService msg_service = new MessageService(null, addr, "MessageService1");
-		assertEquals("/MessageService1", msg_service.getInstancePath());
-		assertEquals("/MessageService1/Queue", msg_service.getMessageQueue().getInstancePath());
-		assertEquals("/MessageService1/Dispatcher", msg_service.getMessageDispatcher().getInstancePath());
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
+		assertEquals("/MessageService_MessageService1", msg_service.getInstancePath());
+		assertEquals("/MessageService_MessageService1/Queue", msg_service.getMessageQueue().getInstancePath());
+		assertEquals("/MessageService_MessageService1/Dispatcher", msg_service.getMessageDispatcher().getInstancePath());
 	}
 
-	
+	private void start(MessageService svc) {
+		Thread thread = new Thread(svc, svc.getName());
+		svc.setThread(thread);
+		thread.start();
+	}
 }

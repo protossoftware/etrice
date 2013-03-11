@@ -34,6 +34,8 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.core.room.RefableType
+import org.eclipse.etrice.core.room.Message
 
 @Singleton
 class TypeHelpers {
@@ -48,6 +50,41 @@ class TypeHelpers {
 			return (type as ExternalType).targetName
 		else
 			return type.name
+	}
+	
+	def String getTypeName(DataType t) {
+		typeName(t)
+	}
+	
+	def String getTypeName(RefableType t) {
+		typeName(t.getType())
+	}
+	
+	def String getTypeName(Message m) {
+		getTypeName(m.getData().getRefType())
+	}
+	
+	def String getTypeName(Attribute att) {
+		getTypeName(att.getRefType())
+	}
+
+	/**
+	 * This function returns the name of the primitive type.
+	 * It can be overridden to map room types to the target language. This (basic) implementation returns the room type
+	 * 
+	 * @param t
+	 * @return
+	 */
+	def String getPrimitiveTypeName(RefableType t) {
+		t.getType().getName()
+	}
+
+	def String getPrimitiveTypeName(Message m) {
+		getPrimitiveTypeName(m.getData().getRefType())
+	}
+	
+	def String getPrimitiveTypeName(Attribute att) {
+		getPrimitiveTypeName(att.getRefType())
 	}
 
 	def String defaultValue(VarDecl a) {

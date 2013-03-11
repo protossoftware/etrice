@@ -33,7 +33,6 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -48,7 +47,6 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
-import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SimpleState;
@@ -71,6 +69,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
+	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -107,7 +106,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			
 			RoomModel model = (RoomModel) res.getContents().get(0);
 			if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
 			}
 		}
 		catch (RuntimeException re) {
@@ -116,16 +115,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 	}
 	
-	@Check
-	public void checkTypeNameStartsWithCapital(RoomClass type) {
-		if (type instanceof PrimitiveType || type instanceof ExternalType)
-			return;
-		
-		if (!Character.isUpperCase(type.getName().charAt(0))) {
-			warning("Name should start with a capital", RoomPackage.eINSTANCE.getRoomClass_Name());
-		}
-	}
-
 	@Check
 	public void checkActorRefIsNotCircular(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {

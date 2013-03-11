@@ -111,7 +111,7 @@ public class MemberSelectionDialog extends FormDialog {
 				break;
 			case 2:
 				if (element instanceof Operation)
-					return RoomHelpers.getSignature((Operation) element);
+					return RoomHelpers.getTypedArgumentList((Operation) element);
 			}
 			return null;
 		}

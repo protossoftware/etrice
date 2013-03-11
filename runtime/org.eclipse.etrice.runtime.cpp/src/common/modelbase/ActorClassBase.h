@@ -1,11 +1,14 @@
-/*
- * ActorClassBase.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * The base class for model actor classes.
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
  *
- *  Created on: 29.08.2012
- *      Author: karlitsc
- */
+ *******************************************************************************/
 
 #ifndef ACTORCLASSBASE_H_
 #define ACTORCLASSBASE_H_
@@ -59,6 +62,8 @@ protected:
 	 * the current state
 	 */
 	int m_state;
+ 	int* history; //Todo pka: name is not prefixed by m_ because generic generator uses this member
+
 	RTSystemServicesProtocolPort* m_RTSystemPort;
 
 	virtual bool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);

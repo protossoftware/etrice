@@ -10,12 +10,12 @@ import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
+import SendingData.PingPongProtocol.*;
 
 
 
 public class SendingDataTop extends ActorClassBase {
 
-	
 	
 	//--------------------- ports
 	
@@ -25,13 +25,12 @@ public class SendingDataTop extends ActorClassBase {
 
 	//--------------------- interface item IDs
 
-		
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
 
 	//--------------------- construction
-	public SendingDataTop(IRTObject parent, String name, Address[][] port_addr, Address[][] peer_addr){
-		super(parent, name, port_addr[0][0], peer_addr[0][0]);
+	public SendingDataTop(IRTObject parent, String name) {
+		super(parent, name);
 		setClassName("SendingDataTop");
 		
 		// initialize attributes
@@ -41,8 +40,12 @@ public class SendingDataTop extends ActorClassBase {
 		// own saps
 		
 		// own service implementations
-	}
+		
+		// sub actors
+		new MrPing(this, "ref0"); 
+		new MrPong(this, "ref1"); 
 
+	}
 	
 	//--------------------- attribute setters and getters
 	
@@ -50,28 +53,16 @@ public class SendingDataTop extends ActorClassBase {
 	//--------------------- port getters
 
 	//--------------------- lifecycle functions
-	public void init(){
-		initUser();
-	}
-
-	public void start(){
-		startUser();
-	}
-
 	public void stop(){
 		stopUser();
+		super.stop();
 	}
 	
-	public void destroy(){
-	}
 
 	//--------------------- no state machine
-	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-	handleSystemEvent(ifitem, evt, data);
+		handleSystemEvent(ifitem, evt, data);
 	}
 	
-	@Override
-	public void executeInitTransition(){
-	}
+	public void executeInitTransition() {}
 };

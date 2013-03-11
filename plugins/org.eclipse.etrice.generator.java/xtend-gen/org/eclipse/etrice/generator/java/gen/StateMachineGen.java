@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
@@ -35,8 +37,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
             _builder.appendImmediate(",", "");
           }
           _builder.append("\"");
-          String _statePathName = this._roomExtensions.getStatePathName(state);
-          _builder.append(_statePathName, "");
+          String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+          _builder.append(_genStatePathName, "");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
         }
@@ -48,7 +50,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("protected int history[] = {NO_STATE,NO_STATE");
       {
-        List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
+        List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
         for(final State state_1 : _allBaseStates) {
           _builder.append(",NO_STATE");
         }

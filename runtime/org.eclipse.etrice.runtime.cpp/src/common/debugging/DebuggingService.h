@@ -1,9 +1,14 @@
-/*
- * DebuggingService.h
+/*******************************************************************************
+ * Copyright (c) 2012 Draeger Medical GmbH (http://www.draeger.com).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- *  Created on: 06.06.2012
- *      Author: karlitsc
- */
+ * CONTRIBUTORS:
+ * 		Peter Karlitschek (initial contribution)
+ *
+ *******************************************************************************/
 
 #ifndef DEBUGGINGSERVICE_H_
 #define DEBUGGINGSERVICE_H_
@@ -15,8 +20,8 @@
 #include <map>
 
 namespace etRuntime {
+	class ActorClassBase;
 
-class ActorClassBase;
 
 class DebuggingService {
 private:
@@ -32,11 +37,11 @@ public:
 		return *s_instance;
 	}
 
-	void addMessageAsyncOut(Address source, Address target, std::string msg);
-	void addMessageAsyncIn(Address source, Address target, std::string msg);
-	void addMessageSyncCall(Address source, Address target, std::string msg);
-	void addMessageSyncReturn(Address source, Address target, std::string msg);
-	void addActorState(const ActorClassBase& actor, std::string state);
+	void addMessageAsyncOut(Address source, Address target, const std::string& msg);
+	void addMessageAsyncIn(Address source, Address target, const std::string& msg);
+	void addMessageSyncCall(Address source, Address target, const std::string& msg);
+	void addMessageSyncReturn(Address source, Address target, const std::string& msg);
+	void addActorState(const ActorClassBase& actor, const std::string& state);
 	void addPortInstance(PortBase& port);
 	MSCLogger& getSyncLogger();
 	MSCLogger& getAsyncLogger();

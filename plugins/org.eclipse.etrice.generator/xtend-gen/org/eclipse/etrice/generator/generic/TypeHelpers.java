@@ -13,6 +13,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.LiteralType;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -42,6 +43,56 @@ public class TypeHelpers {
         return type.getName();
       }
     }
+  }
+  
+  public String getTypeName(final DataType t) {
+    String _typeName = this.typeName(t);
+    return _typeName;
+  }
+  
+  public String getTypeName(final RefableType t) {
+    DataType _type = t.getType();
+    String _typeName = this.typeName(_type);
+    return _typeName;
+  }
+  
+  public String getTypeName(final Message m) {
+    VarDecl _data = m.getData();
+    RefableType _refType = _data.getRefType();
+    String _typeName = this.getTypeName(_refType);
+    return _typeName;
+  }
+  
+  public String getTypeName(final Attribute att) {
+    RefableType _refType = att.getRefType();
+    String _typeName = this.getTypeName(_refType);
+    return _typeName;
+  }
+  
+  /**
+   * This function returns the name of the primitive type.
+   * It can be overridden to map room types to the target language. This (basic) implementation returns the room type
+   * 
+   * @param t
+   * @return
+   */
+  public String getPrimitiveTypeName(final RefableType t) {
+    DataType _type = t.getType();
+    String _name = _type.getName();
+    return _name;
+  }
+  
+  public String getPrimitiveTypeName(final Message m) {
+    VarDecl _data = m.getData();
+    RefableType _refType = _data.getRefType();
+    String _primitiveTypeName = this.getPrimitiveTypeName(_refType);
+    return _primitiveTypeName;
+  }
+  
+  public String getPrimitiveTypeName(final Attribute att) {
+    RefableType _refType = att.getRefType();
+    String _primitiveTypeName = this.getPrimitiveTypeName(_refType);
+    return _primitiveTypeName;
   }
   
   public String defaultValue(final VarDecl a) {

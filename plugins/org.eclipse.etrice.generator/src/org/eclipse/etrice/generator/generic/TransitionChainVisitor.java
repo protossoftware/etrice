@@ -39,6 +39,11 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	private ExpandedActorClass xpac;
 	private boolean dataDriven;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param xpac an {@link ExpandedActorClass}
+	 */
 	protected TransitionChainVisitor(ExpandedActorClass xpac) {
 		this.xpac = xpac;
 	}
@@ -101,8 +106,11 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 		return "}\n";
 	}
 
-	public String genReturnState(State state) {
-		return "return " + CodegenHelpers.getGenStateId(state) + ";";
+	public String genReturnState(State state, boolean executeEntryCode) {
+		if (executeEntryCode)
+			return "return " + CodegenHelpers.getGenStateId(state) + ";";
+		else
+			return "return " + CodegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
 	public String genTypedData(TransitionChain tc) {

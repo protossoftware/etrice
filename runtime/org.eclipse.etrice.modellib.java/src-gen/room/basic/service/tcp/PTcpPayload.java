@@ -1,10 +1,12 @@
 package room.basic.service.tcp;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -33,11 +35,11 @@ public class PTcpPayload {
 	// port class
 	static public class PTcpPayloadPort extends PortBase {
 		// constructors
-		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTcpPayloadPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTcpPayloadPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -45,9 +47,7 @@ public class PTcpPayload {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -67,36 +67,32 @@ public class PTcpPayload {
 	}
 	
 	// replicated port class
-	static public class PTcpPayloadReplPort {
-		private ArrayList<PTcpPayloadPort> ports;
-		private int replication;
+	static public class PTcpPayloadReplPort extends ReplicatedPortBase {
 	
-		public PTcpPayloadReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpPayload.PTcpPayloadPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpPayloadPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTcpPayloadReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTcpPayloadPort get(int i) {
-			return ports.get(i);
+		public PTcpPayloadPort get(int idx) {
+			return (PTcpPayloadPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTcpPayloadPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
 		public void receive(DTcpPayload data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).receive( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).receive( data);
 			}
 		}
 	}
@@ -105,11 +101,11 @@ public class PTcpPayload {
 	// port class
 	static public class PTcpPayloadConjPort extends PortBase {
 		// constructors
-		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public PTcpPayloadConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -117,9 +113,7 @@ public class PTcpPayload {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -139,36 +133,32 @@ public class PTcpPayload {
 	}
 	
 	// replicated port class
-	static public class PTcpPayloadConjReplPort {
-		private ArrayList<PTcpPayloadConjPort> ports;
-		private int replication;
+	static public class PTcpPayloadConjReplPort extends ReplicatedPortBase {
 	
-		public PTcpPayloadConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<PTcpPayload.PTcpPayloadConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new PTcpPayloadConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public PTcpPayloadConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public PTcpPayloadConjPort get(int i) {
-			return ports.get(i);
+		public PTcpPayloadConjPort get(int idx) {
+			return (PTcpPayloadConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new PTcpPayloadConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void send(DTcpPayload data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).send( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).send( data);
 			}
 		}
 	}

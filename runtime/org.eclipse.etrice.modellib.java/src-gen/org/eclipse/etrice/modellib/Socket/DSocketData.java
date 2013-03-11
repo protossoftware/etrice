@@ -12,17 +12,21 @@ public class DSocketData {
 	int size;
 	String data;
 	
-	//--------------------- attribute setters and getters
-	public void setSize (int size) {
+	/* --------------------- attribute setters and getters */
+	public void setSize (int size)
+	 {
 		 this.size = size;
 	}
-	public int getSize () {
+	public int getSize ()
+	 {
 		return this.size;
 	}
-	public void setData (String data) {
+	public void setData (String data)
+	 {
 		 this.data = data;
 	}
-	public String getData () {
+	public String getData ()
+	 {
 		return this.data;
 	}
 	

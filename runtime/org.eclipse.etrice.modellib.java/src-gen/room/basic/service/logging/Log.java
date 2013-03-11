@@ -1,10 +1,12 @@
 package room.basic.service.logging;
 
-import java.util.ArrayList;
-
-import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.*;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -39,11 +41,11 @@ public class Log {
 	// port class
 	static public class LogPort extends PortBase {
 		// constructors
-		public LogPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public LogPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public LogPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public LogPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 		}
 	
 		@Override
@@ -51,9 +53,7 @@ public class Log {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -66,30 +66,26 @@ public class Log {
 	}
 	
 	// replicated port class
-	static public class LogReplPort {
-		private ArrayList<LogPort> ports;
-		private int replication;
+	static public class LogReplPort extends ReplicatedPortBase {
 	
-		public LogReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<Log.LogPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new LogPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public LogReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public LogPort get(int i) {
-			return ports.get(i);
+		public LogPort get(int idx) {
+			return (LogPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new LogPort(rcv, name, lid, idx);
 		}
 		
 		// outgoing messages
@@ -103,11 +99,11 @@ public class Log {
 		InternalLogData d = new InternalLogData();
 		/*--------------------- end user code ---------------------*/
 		// constructors
-		public LogConjPort(IEventReceiver actor, String name, int localId, Address addr, Address peerAddress) {
-			this(actor, name, localId, 0, addr, peerAddress);
+		public LogConjPort(IEventReceiver actor, String name, int localId) {
+			this(actor, name, localId, 0);
 		}
-		public LogConjPort(IEventReceiver actor, String name, int localId, int idx, Address addr, Address peerAddress) {
-			super(actor, name, localId, idx, addr, peerAddress);
+		public LogConjPort(IEventReceiver actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
 			// initialize attributes
 		}
 	
@@ -116,9 +112,7 @@ public class Log {
 				if (!(m instanceof EventMessage))
 					return;
 				EventMessage msg = (EventMessage) m;
-				if (msg.getEvtId() <= 0 || msg.getEvtId() >= MSG_MAX)
-					System.out.println("unknown");
-				else {
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 						if (msg instanceof EventWithDataMessage)
 							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 						else
@@ -127,15 +121,14 @@ public class Log {
 		}
 	
 		/*--------------------- attributes ---------------------*/
-		//--------------------- attribute setters and getters
+		/* --------------------- attribute setters and getters */
 		/*--------------------- operations ---------------------*/
 		public void setLogLevel(int l) {
 			logLevel=l;
 			if (logLevel > LOG_LEVEL_HIGH) logLevel=LOG_LEVEL_HIGH;
 		}
 		public void log(int logLevel, String userString) {
-			long s;
-			if (logLevel>this.logLevel){
+			if (logLevel>LogConjPort.logLevel){
 			d.userString=userString;
 			d.timeStamp=System.currentTimeMillis();
 			d.sender=getInstancePath();
@@ -163,46 +156,42 @@ public class Log {
 	}
 	
 	// replicated port class
-	static public class LogConjReplPort {
-		private ArrayList<LogConjPort> ports;
-		private int replication;
+	static public class LogConjReplPort extends ReplicatedPortBase {
 	
-		public LogConjReplPort(IEventReceiver actor, String name, int localId, Address[] addr,
-				Address[] peerAddress) {
-			replication = addr==null? 0:addr.length;
-			ports = new ArrayList<Log.LogConjPort>(replication);
-			for (int i=0; i<replication; ++i) {
-				ports.add(new LogConjPort(
-						actor, name+i, localId, i, addr[i], peerAddress[i]));
-			}
+		public LogConjReplPort(IEventReceiver actor, String name, int localId) {
+			super(actor, name, localId);
 		}
 		
 		public int getReplication() {
-			return replication;
+			return getNInterfaceItems();
 		}
 		
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
 			}
 		
-		public LogConjPort get(int i) {
-			return ports.get(i);
+		public LogConjPort get(int idx) {
+			return (LogConjPort) getInterfaceItem(idx);
+		}
+		
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			return new LogConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void open(String fileName){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).open( fileName);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).open( fileName);
 			}
 		}
 		public void close(){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).close();
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).close();
 			}
 		}
 		private void internalLog(InternalLogData data){
-			for (int i=0; i<replication; ++i) {
-				ports.get(i).internalLog( data);
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).internalLog( data);
 			}
 		}
 	}

@@ -25,16 +25,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -49,12 +49,31 @@ import com.google.inject.Module;
 import com.google.inject.Provider;
 
 /**
+ * A base class for generators of ROOM models.
+ * 
+ * <p>
+ * As examples see
+ * <ul>
+ *   <li>the {@link org.eclipse.etrice.generator.c.Main C generator}</li>
+ *   <li>the {@link org.eclipse.etrice.generator.cpp.Main C++ generator}</li>
+ *   <li>the {@link org.eclipse.etrice.generator.java.Main Java generator}</li>
+ * </ul>
+ * </p>
+ * 
  * @author Henrik Rentz-Reichert
  *
  */
 public abstract class AbstractGenerator implements IResourceURIAcceptor {
 
+	/**
+	 * constant used as return value of {@link #runGenerator(String[])}
+	 * @see {@link #GENERATOR_ERROR}
+	 */
 	public static final int GENERATOR_OK = 0;
+	/**
+	 * constant used as return value of {@link #runGenerator(String[])}
+	 * @see {@link #GENERATOR_OK}
+	 */
 	public static final int GENERATOR_ERROR = 1;
 	
 	private static boolean terminateOnError = true;
@@ -68,19 +87,49 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	private HashSet<URI> modelURIs = new HashSet<URI>();
 	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
 
+	/**
+	 * determines the behavior of the generator on exit
+	 * 
+	 * @param terminateOnError a flag that determines shut down behavior
+	 * (this behavior is implemented in the concrete generator defining <code>main()</code>)
+	 * 
+	 * @see {@link #isTerminateOnError()}
+	 */
 	public static void setTerminateOnError(boolean terminateOnError) {
 		AbstractGenerator.terminateOnError = terminateOnError;
 	}
 	
+	/**
+	 * If ran in stand alone mode in a separate JVM e.g. in a makefile then it is desirable to terminate
+	 * the JVM with an error code to let the make program fail.
+	 * 
+	 * <p>
+	 * If ran inside Eclipse we better don't terminate the JVM in case of an error because this
+	 * would also shut down Eclipse.
+	 * </p>
+	 * 
+	 * @return <code>true</code> if the JVM should be terminated on exit with an error code.
+	 */
 	public static boolean isTerminateOnError() {
 		return terminateOnError;
 	}
 
+	/**
+	 * This method can be used to achieve different output behavior: in stand alone mode this might
+	 * be just the console, inside Eclipse this rather would be the console view
+	 * 
+	 * @param out an {@link ILineOutput}
+	 */
 	public static void setOutput(ILineOutput out) {
 		if (out!=null)
 			output = out;
 	}
 	
+	/**
+	 * It is assumed (though not enforced) that the generator is a singleton.
+	 * 
+	 * @return the singleton {@link AbstractGenerator}
+	 */
 	public static AbstractGenerator getInstance() {
 		return instance;
 	}
@@ -91,7 +140,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 
 	/**
 	 * creates an instance of the generator and invokes the {@link #runGenerator(String[])} method
-	 * @param generatorModule a Guice module from which the {@link Injector} is created
+	 * @param generatorModule a Guice module from which the {@link com.google.inject.Injector Injector} is created
 	 * @return
 	 */
 	protected static int createAndRunGenerator(Module generatorModule, String[] args) {
@@ -101,29 +150,61 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		return generator.runGenerator(args);
 	}
 
+	/**
+	 * Provides access to the Guice injector of the generator.
+	 * This is useful if classes with injected dependencies are instantiated manually.
+	 * 
+	 * @return the Guice {@link com.google.inject.Injector Injector}
+	 */
 	public static Injector getInjector() {
 		return injector;
 	}
 	
+	/**
+	 * The injected resource set provider
+	 */
 	@Inject
 	protected Provider<ResourceSet> resourceSetProvider;
 
+	/**
+	 * The injected logger
+	 */
 	@Inject
 	protected ILineOutputLogger logger;
+	
+	/**
+	 * The injected diagnostician
+	 */
 	@Inject
 	protected IDiagnostician diagnostician;
 	
+	/**
+	 * The injected Java IO file access
+	 */
 	@Inject
 	protected JavaIoFileSystemAccess fileAccess;
 	
+	/**
+	 * The injected platform relative URI resolver
+	 */
 	@Inject
 	protected PlatformRelativeUriResolver uriResolver;
 	
+	/**
+	 * The injected translation provider
+	 */
 	@Inject
 	protected ITranslationProvider translationProvider;
 	
+	/**
+	 * The rsource validator which is injected using the ROOM DSL injector
+	 */
 	protected IResourceValidator validator;
 
+	/**
+	 * This resource set combines all resources processed by the generator
+	 * @return
+	 */
 	protected ResourceSet getResourceSet() {
 		return resourceSet;
 	}
@@ -219,6 +300,14 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		return true;
 	}
 
+	/**
+	 * Called by {@link #loadModels(List)} for each single model.
+	 * 
+	 * @param uri the model URI
+	 * @return <code>true</code> if successfully loaded or already loaded
+	 * @throws RuntimeException
+	 * @throws IOException
+	 */
 	protected boolean loadModel(URI uri)
 			throws RuntimeException, IOException {
 		
@@ -234,21 +323,14 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		loadedModelURIs.add(uri);
 		return true;
 	}
-
-	private static URI getCanonicalFileURI(String uriString) throws IOException {
-		URI uri = uriString.startsWith("file:/")? URI.createURI(uriString):URI.createFileURI(uriString);
-		String can = uri.toFileString();
-		File f = new File(can);
-		can = f.getCanonicalPath();	// e.g. remove embedded ../
-		return URI.createFileURI(can);
-	}	
 	
 	
 	/**
-	 * load all models into a {@link ResourceSet} which is create by this method and
-	 * maintained in this object
+	 * load all models into a {@link ResourceSet} which is created by this method and
+	 * maintained in this object (cf. {@link #getResourceSet()})
 	 * 
 	 * @param uriList a list of {@link URI}s as Strings
+	 * 
 	 */
 	protected boolean loadModels(List<String> uriList) {
 		logger.logInfo("-- reading models");
@@ -266,10 +348,11 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			URI uri = modelURIs.iterator().next();
 			//logger.logInfo("Loading " + uriString);
 			try {
-				loadModel(uri);
-				Resource resource = resourceSet.getResources().get(resourceSet.getResources().size()-1);
-				for (EObject root : resource.getContents()) {
-					addReferencedModels(root, this);
+				if (loadModel(uri)) {
+					Resource resource = resourceSet.getResources().get(resourceSet.getResources().size()-1);
+					for (EObject root : resource.getContents()) {
+						addReferencedModels(root, this);
+					}
 				}
 			}
 			catch (Exception e) {
@@ -279,12 +362,18 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			modelURIs.remove(uri);
 		}
 		
-		EcoreUtil.resolveAll(resourceSet);
+		for (Resource res : resourceSet.getResources()) {
+			EcoreUtil2.resolveAll(res, CancelIndicator.NullImpl);
+		}
 		
 		return ok;
 	}
 
 	/**
+	 * Called by {@link #loadModels(List)} after a model was loaded successfully.
+	 * This method treats import statements in ROOM models and has to be overridden if
+	 * imports of other models should be treated as well.
+	 *  
 	 * @param resource
 	 * @param acceptor
 	 */
@@ -298,7 +387,15 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	}
 
 	/**
-	 * create detail code translations once and for all
+	 * Create detail code translations once and for all.
+	 * This method is called by {@link #createGeneratorModel(boolean, String)} after all models
+	 * have been read and validated and the transformation into a generator model succeeded.
+	 * 
+	 * <p>
+	 * The translation of a detail code can be looked up from a map by a call to
+	 * {@link #getTranslatedCode(DetailCode)}.
+	 * </p>
+	 * 
 	 * @param gmRoot
 	 */
 	protected void translateDetailCodes(Root gmRoot) {
@@ -330,6 +427,12 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 	}
 	
+	/**
+	 * Creates translations for all {@link DetailCode}s found in the {@link EObject#eAllContents()}.
+	 * 
+	 * @param container the root of an {@link EObject} containment tree that should be translated
+	 * @param dct the {@link DetailCodeTranslator} to apply
+	 */
 	protected void translateDetailCodesOfTree(EObject container, DetailCodeTranslator dct) {
 		if (container==null)
 			return;
@@ -349,6 +452,10 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 	}
 
+	/**
+	 * @param dc a {@link DetailCode}
+	 * @return the mapped result of the translation or an empty string
+	 */
 	public String getTranslatedCode(DetailCode dc) {
 		String code = detailcode2string.get(dc);
 		if (code==null)
@@ -363,6 +470,12 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 */
 	protected abstract int runGenerator(String[] args);
 	
+	/**
+	 * This implementation of the method normalizes the URI and adds it to the
+	 * list of models to load if not already loaded.
+	 * 
+	 * @see org.eclipse.etrice.generator.base.IResourceURIAcceptor#addResourceURI(java.lang.String)
+	 */
 	public boolean addResourceURI(String uri) {
 		try {
 			URI can = getCanonicalFileURI(uri);
@@ -382,5 +495,23 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			return false;
 		}
 	}
+
+	/**
+	 * Turns a normal or file URI string into a normalized URI.
+	 * The URI is then converted into a file string which is used to initialize
+	 * a {@link java.io.File.File File}. The {@link java.io.File.getCanonicalPath() getCanonicalPath()} methods
+	 * of File is called and again a URI is created from this path.
+	 * 
+	 * @param uriString a string representation of a URI
+	 * @return a normalized {@link org.eclipse.emf.common.util.URI URI}
+	 * @throws IOException
+	 */
+	private static URI getCanonicalFileURI(String uriString) throws IOException {
+		URI uri = uriString.startsWith("file:/")? URI.createURI(uriString):URI.createFileURI(uriString);
+		String can = uri.toFileString();
+		File f = new File(can);
+		can = f.getCanonicalPath();	// e.g. remove embedded ../
+		return URI.createFileURI(can);
+	}	
 
 }

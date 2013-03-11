@@ -20,12 +20,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import com.google.inject.Inject;
 
 /**
+ * This class is an implementation of the {@link IDiagnostician} interface that
+ * logs errors and warnings using the configured {@link ILineOutputLogger}.
+ * 
  * @author Henrik Rentz-Reichert
- *
  */
 public class Diagnostician implements IDiagnostician {
 
-	public final static int INSIGNIFICANT_INDEX = -1;
 	private boolean validationFailed = false;
 
 	@Inject

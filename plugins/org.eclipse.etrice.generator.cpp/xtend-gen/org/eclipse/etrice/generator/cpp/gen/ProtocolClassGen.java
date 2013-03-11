@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.cpp.GeneratorOptions;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
@@ -38,6 +39,9 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * @author Peter Karlitschek
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -275,7 +279,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _builder;
   }
   
-  public CharSequence portClassDeclaration(final ProtocolClass pc, final Boolean conj) {
+  private CharSequence portClassDeclaration(final ProtocolClass pc, final Boolean conj) {
     CharSequence _xblockexpression = null;
     {
       PortClass pclass = this.roomExt.getPortClass(pc, (conj).booleanValue());
@@ -347,8 +351,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// outgoing messages");
       _builder.newLine();
       {
-        List<Message> _outgoing = this.roomExt.getOutgoing(pc, (conj).booleanValue());
-        for(final Message m : _outgoing) {
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        for(final Message m : _allMessages) {
           _builder.append("\t");
           CharSequence _sendMessageDeclaration = this.sendMessageDeclaration(m, (conj).booleanValue());
           _builder.append(_sendMessageDeclaration, "	");
@@ -420,8 +424,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// outgoing messages");
           _builder.newLine();
           {
-            List<Message> _outgoing_1 = this.roomExt.getOutgoing(pc, (conj).booleanValue());
-            for(final Message m_1 : _outgoing_1) {
+            List<Message> _allMessages_1 = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+            for(final Message m_1 : _allMessages_1) {
               _builder.append("\t\t");
               CharSequence _sendMessageDeclaration_1 = this.sendMessageDeclaration(m_1, (conj).booleanValue());
               _builder.append(_sendMessageDeclaration_1, "		");
@@ -723,7 +727,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       _builder.append("\t\t\t\t");
-      _builder.append("getActor().receiveEvent(this, msg->getEvtId(),\tmsg->getData());");
+      _builder.append("getEventReceiver().receiveEvent(this, msg->getEvtId(),\tmsg->getData());");
       _builder.newLine();
       {
         boolean _handlesReceive_1 = this.roomExt.handlesReceive(pc, (conj).booleanValue());
@@ -757,8 +761,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _outgoing = this.roomExt.getOutgoing(pc, (conj).booleanValue());
-        for(final Message m : _outgoing) {
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        for(final Message m : _allMessages) {
           String _name_3 = pc.getName();
           CharSequence _sendMessage = this.sendMessage(m, _name_3, portClassName, (conj).booleanValue());
           _builder.append(_sendMessage, "");
@@ -828,8 +832,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// outgoing messages");
       _builder.newLine();
       {
-        List<Message> _outgoing_1 = this.roomExt.getOutgoing(pc, (conj).booleanValue());
-        for(final Message m_1 : _outgoing_1) {
+        List<Message> _allMessages_1 = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        for(final Message m_1 : _allMessages_1) {
           CharSequence _messageSignatureDefinition = this.messageSignatureDefinition(m_1, replPortClassName);
           _builder.append(_messageSignatureDefinition, "");
           _builder.append("{");
@@ -911,7 +915,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("= {\"MIN\", ");
     _builder.newLine();
     {
-      List<Message> _allOutgoingMessages = this.roomExt.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\t\t   ");
         _builder.append("\"");
@@ -922,7 +926,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
     }
     {
-      List<Message> _allIncomingMessages = this.roomExt.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\t\t   ");
         _builder.append("\"");

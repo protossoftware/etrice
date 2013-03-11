@@ -1,5 +1,7 @@
 package SendingData;
 
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+
 
 
 
@@ -45,10 +47,10 @@ public class DemoData {
 		super();
 		
 		// initialize attributes
-		int32Val = 4711;
-		int8Array = new byte[] {1,2,3,4,5,6,7,8,9,10};
-		float64Val = 0.0;
-		stringVal = "empty";
+		this.setInt32Val(4711);
+		this.setInt8Array(new byte[] { (byte)1, (byte)2, (byte)3, (byte)4, (byte)5, (byte)6, (byte)7, (byte)8, (byte)9, (byte)10 });
+		this.setFloat64Val(0.0d);
+		this.setStringVal("\"empty\"");
 	}
 	
 	// constructor using fields

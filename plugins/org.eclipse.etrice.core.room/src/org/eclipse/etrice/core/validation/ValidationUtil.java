@@ -52,6 +52,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.SPPoint;
@@ -324,6 +325,11 @@ public class ValidationUtil {
 						return Result.error("protocols don't match");
 					}
 					else {
+						// under some circumstances the protocols are instances of GeneralProtocolClass
+						// (why?)
+						if (!(pc1 instanceof ProtocolClass && pc2 instanceof ProtocolClass))
+							return Result.error("protocols don't match");
+						
 						if (RoomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
 							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
 								pc1extendsIncoming = true;
@@ -341,8 +347,17 @@ public class ValidationUtil {
 							if (pc2extendsIncoming && pc2extendsOutgoing)
 								return Result.error("derived protocols not connectable (both directions extended)");
 						}
-						else
+						else {
+							if (pc1.getName().equals(pc2.getName())) {
+								String ns1 = ((RoomModel)pc1.eContainer()).getName();
+								String ns2 = ((RoomModel)pc2.eContainer()).getName();
+								if (!ns1.equals(ns2))
+									return Result.error("protocols don't match (same name, different name spaces)");
+								
+								return Result.error("protocols don't match (but have same name)");
+							}
 							return Result.error("protocols don't match");
+						}
 					}
 				}
 			}
@@ -409,7 +424,6 @@ public class ValidationUtil {
 			Port local = ref1==null? p1:p2;
 			Port sub = ref1!=null? p1:p2;
 			ActorContainerRef ref = ref1!=null? ref1:ref2;
-			ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
 			
 			if (RoomHelpers.isRelay(local)) {
 				if (local.isConjugated()!=sub.isConjugated())
@@ -435,6 +449,7 @@ public class ValidationUtil {
 					if (p2.isConjugated() && pc2extendsOutgoing)
 						return Result.error("protocol extends outgoing");
 				}
+				ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
 				Result result = isConnectable(local, null, acc, exclude);
 				if (!result.isOk())
 					return result;

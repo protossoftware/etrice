@@ -64,7 +64,7 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		LogicalSystem root = ctx.getRoot();
 		for (SubSystemRef ssRef : root.getSubSystems())
-			scopes.add(EObjectDescription.create(ref.getName(), ssRef));
+			scopes.add(EObjectDescription.create(ssRef.getName(), ssRef));
 
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}

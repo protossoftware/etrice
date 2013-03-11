@@ -20,26 +20,26 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.List
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.ExternalType
+import org.eclipse.etrice.core.room.LiteralType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.LiteralType
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import java.util.List
-import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.DataType
-import org.eclipse.etrice.core.room.ExternalType
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
-import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.xtext.util.Pair
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
-	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(Message m) {
 		generateArglistAndTypedData(m.data).get(1)

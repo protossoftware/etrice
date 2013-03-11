@@ -17,6 +17,10 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
+<<<<<<< HEAD
+=======
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+>>>>>>> origin/master
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -27,43 +31,54 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		val ac = xpac.actorClass
 		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
 		val historySize = ac.allBaseStates.size - ac.allLeafStates.size + 2
-	'''
-	/* constant for state machine data */
-	#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
-	'''
+		'''
+			/* constant for state machine data */
+			#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
+		'''
 	}
 	
 	def genDataMembers(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-	'''
-		/* state machine variables */
-		etInt16 state;
-		etInt16 history[«ac.name.toUpperCase»_HISTORY_SIZE];
-	'''}
+		'''
+			/* state machine variables */
+			etInt16 state;
+			etInt16 history[«ac.name.toUpperCase»_HISTORY_SIZE];
+		'''
+	}
 	
 	def genInitialization(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-	'''
-		self->state = STATE_TOP;
-		{
-			int i;
-			for (i=0; i<«ac.name.toUpperCase»_HISTORY_SIZE; ++i)
-				self->history[i] = NO_STATE;
-		}
-		«langExt.operationScope(ac.name, false)»executeInitTransition(self);
-	'''}
-	
-	override genExtra(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
-	'''
-
-		«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
-			self->state = new_state;
-		}
-
-		«langExt.accessLevelPrivate»int getState(«ac.name»* self) {
-			return self->state;
-		}
-	'''
+		'''
+			self->state = STATE_TOP;
+			{
+				int i;
+				for (i=0; i<«ac.name.toUpperCase»_HISTORY_SIZE; ++i)
+					self->history[i] = NO_STATE;
+			}
+			«langExt.operationScope(ac.name, false)»executeInitTransition(self);
+		'''
 	}
+	
+	override protected genExtra(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		'''
+			
+			«langExt.accessLevelPrivate»void setState(«ac.name»* self, int new_state) {
+				self->state = new_state;
+			}
+			
+			«langExt.accessLevelPrivate»int getState(«ac.name»* self) {
+				return self->state;
+			}
+		'''
+	}
+	
+	override protected stateType() {
+		"etInt16"
+	}
+	
+	override protected unreachableReturn() {
+		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
+	}
+	
 }

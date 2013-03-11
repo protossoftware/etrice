@@ -23,6 +23,15 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Active Trigger</b></em>'.
+ * It combines information from a transition {@link Trigger} and is meant to represent a trigger which is
+ * attached to a {@link State}. The active triggers of a state are computed by collecting all triggers
+ * of {@link Transition}s starting at the state. Then transitions starting at {@link TrPoint}s of the parent state
+ * are considered. This process is recursively done for all parent states. When a msg/ifitem pair is already
+ * in the list of active triggers then further occurrences are skipped except when the first occurrences are
+ * {@link Guard}ed.<br/><br/>
+ * 
+ * The ordered list of active triggers can be obtained from the ExpandedActorClass by calling
+ * {@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getActiveTriggers(State) getActiveTriggers(State)}
  * <!-- end-user-doc -->
  *
  * <p>
@@ -44,8 +53,7 @@ public interface ActiveTrigger extends EObject {
 	 * Returns the value of the '<em><b>Msg</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Msg</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the triggering message (in combination with an interface item, cf. {@link #getIfitem()}
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Msg</em>' reference.
@@ -70,8 +78,7 @@ public interface ActiveTrigger extends EObject {
 	 * Returns the value of the '<em><b>Ifitem</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ifitem</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the interface item from which the triggering message (see {@link #getMsg()} originates.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ifitem</em>' reference.
@@ -96,8 +103,7 @@ public interface ActiveTrigger extends EObject {
 	 * Returns the value of the '<em><b>Trigger</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Trigger</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * A string representation of the trigger (<b>for internal use only</b>).
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Trigger</em>' attribute.
@@ -123,8 +129,7 @@ public interface ActiveTrigger extends EObject {
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.TriggeredTransition}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transitions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * An ordered list of {@link Transition}s with this trigger.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transitions</em>' reference list.

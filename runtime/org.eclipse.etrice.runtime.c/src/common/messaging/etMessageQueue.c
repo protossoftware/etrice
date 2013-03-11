@@ -25,7 +25,7 @@ void etMessageQueue_init(etMessageQueue* self){
 
 
 void etMessageQueue_push(etMessageQueue* self, etMessage* msg){
-	// TODO: optimize queue for concurrent push / pop
+	/* TODO: optimize queue for concurrent push / pop */
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "push")
 	if (self->first == NULL) {
 		/*no message in queue*/

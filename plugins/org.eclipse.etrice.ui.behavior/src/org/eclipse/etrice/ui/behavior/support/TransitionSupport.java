@@ -89,6 +89,7 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -181,8 +182,47 @@ public class TransitionSupport {
 						trans = t;
 					}
 					else {
-						NonInitialTransition t = ac.getCommType()==ActorCommunicationType.DATA_DRIVEN? 
-								RoomFactory.eINSTANCE.createGuardedTransition() : RoomFactory.eINSTANCE.createTriggeredTransition();
+						NonInitialTransition t = null;
+						switch (ac.getCommType()) {
+						case DATA_DRIVEN:
+							t = RoomFactory.eINSTANCE.createGuardedTransition();
+							break;
+						case ASYNCHRONOUS:
+							// let user choose between triggered and guarded transition
+				        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        	MessageDialog dlg = new MessageDialog(
+				        			shell,
+				        			"Create new transition",
+									null, 	// accept the default window icon
+				        			"Select the kind of transition",
+									MessageDialog.QUESTION,
+									new String[] {
+				        				"triggered",
+				        				"guarded"
+				        			},
+									0		// default button index
+								);
+				        	
+				        	switch (dlg.open()) {	// open returns index of pressed button
+							case 0:
+								t = RoomFactory.eINSTANCE.createTriggeredTransition();
+								break;
+							case 1:
+								t = RoomFactory.eINSTANCE.createGuardedTransition();
+								break;
+				        	}
+							break;
+						case EVENT_DRIVEN:
+							t = RoomFactory.eINSTANCE.createTriggeredTransition();
+							break;
+						case SYNCHRONOUS:
+							break;
+						default:
+							break; 
+						}
+						if (t==null)
+							return null;
+						
 						t.setFrom(src);
 						t.setTo(dst);
 						trans = t;

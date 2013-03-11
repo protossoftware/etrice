@@ -1,10 +1,10 @@
 package PingPong;
 
-import org.eclipse.etrice.runtime.java.messaging.MessageService;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.Address;
+import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-import org.eclipse.etrice.runtime.java.messaging.RTSystemServicesProtocol.*;
+import org.eclipse.etrice.runtime.java.messaging.MessageService;
+import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
+import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
@@ -12,12 +12,15 @@ import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import room.basic.service.timing.*;
 
 
-
-public class SubSystem_PingPong extends SubSystemClassBase{
+public class SubSystem_PingPong extends SubSystemClassBase {
+	
+	public final int THREAD__DEFAULT = 0;
+	public final int THREAD_MRPINGTHREAD = 1;
+	public final int THREAD_MRPONG1THREAD = 2;
 
 	
-	public SubSystem_PingPong(String name) {
-		super(name);
+	public SubSystem_PingPong(IRTObject parent, String name) {
+		super(parent, name);
 	}
 	
 	@Override
@@ -25,141 +28,44 @@ public class SubSystem_PingPong extends SubSystemClassBase{
 	}
 	
 	@Override	
-	public void instantiateMessageServices(){
+	public void instantiateMessageServices() {
 	
-		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 0, 0),"MessageService_Main"));
-		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 1, 0),"MessageService_mrPingThread", 5));
-		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, new Address(0, 2, 0),"MessageService_mrPong1Thread", 5));
-		}
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD__DEFAULT, "MessageService_Main"));
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD_MRPINGTHREAD, "MessageService_mrPingThread" /*, thread_prio */));
+		RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD_MRPONG1THREAD, "MessageService_mrPong1Thread" /*, thread_prio */));
+	}
 
 	@Override
-	public void instantiateActors(){
+	public void instantiateActors() {
 		
-		// all addresses
-		// Addresses for the Subsystem Systemport
-		Address addr_item_SystemPort_0 = new Address(0,0,110);
-		Address addr_item_SystemPort_1 = new Address(0,0,111);
-		Address addr_item_SystemPort_2 = new Address(0,0,112);
-		Address addr_item_SystemPort_3 = new Address(0,0,113);
-		
-		// actor instance /SubSystem_PingPong/application itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystem_PingPong_application = new Address(0,0,101);
-		// interface items of /SubSystem_PingPong/application
-		// actor instance /SubSystem_PingPong/application/MrPing itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystem_PingPong_application_MrPing = new Address(0,1,102);
-		// interface items of /SubSystem_PingPong/application/MrPing
-		Address addr_item__SubSystem_PingPong_application_MrPing_PingPongPort_0 = new Address(0,0,103);
-		Address addr_item__SubSystem_PingPong_application_MrPing_timer = new Address(0,1,105);
-		// actor instance /SubSystem_PingPong/application/MrPong1 itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystem_PingPong_application_MrPong1 = new Address(0,2,106);
-		// interface items of /SubSystem_PingPong/application/MrPong1
-		Address addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort = new Address(0,2,107);
-		// actor instance /SubSystem_PingPong/services itself => Systemport Address
-		// TODOTJ: For each Actor, multiple addresses should be generated (actor?, systemport, debugport)
-		Address addr_item__SubSystem_PingPong_services = new Address(0,0,108);
-		// interface items of /SubSystem_PingPong/services
-		Address addr_item__SubSystem_PingPong_services_timer_0 = new Address(0,0,109);
+		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 
-		// instantiate all actor instances
-		instances = new ActorClassBase[4];
-		instances[0] = new PingPongTop(
-			this,
-			"application",
-			// own interface item addresses
-			new Address[][] {{addr_item__SubSystem_PingPong_application}
-			},
-			// peer interface item addresses
-			new Address[][] {{addr_item_SystemPort_0}
-			}
-		); 
-		instances[1] = new MrPingActor(
-			instances[0],
-			"MrPing",
-			// own interface item addresses
-			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPing},
-				{
-					addr_item__SubSystem_PingPong_application_MrPing_PingPongPort_0
-				},
-				{
-					addr_item__SubSystem_PingPong_application_MrPing_timer
-				}
-			},
-			// peer interface item addresses
-			new Address[][] {{addr_item_SystemPort_1},
-				{
-					addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort
-				},
-				{
-					addr_item__SubSystem_PingPong_services_timer_0
-				}
-			}
-		); 
-		instances[2] = new MrPongActor1(
-			instances[0],
-			"MrPong1",
-			// own interface item addresses
-			new Address[][] {{addr_item__SubSystem_PingPong_application_MrPong1},
-				{
-					addr_item__SubSystem_PingPong_application_MrPong1_PingPongPort
-				}
-			},
-			// peer interface item addresses
-			new Address[][] {{addr_item_SystemPort_2},
-				{
-					addr_item__SubSystem_PingPong_application_MrPing_PingPongPort_0
-				}
-			}
-		); 
-		instances[3] = new ATimingService(
-			this,
-			"services",
-			// own interface item addresses
-			new Address[][] {{addr_item__SubSystem_PingPong_services},
-				{
-					addr_item__SubSystem_PingPong_services_timer_0
-				}
-			},
-			// peer interface item addresses
-			new Address[][] {{addr_item_SystemPort_3},
-				{
-					addr_item__SubSystem_PingPong_application_MrPing_timer
-				}
-			}
-		); 
+		// thread mappings
+		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem", THREAD__DEFAULT);
+		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/application/MrPing", THREAD_MRPINGTHREAD);
+		msgSvcCtrl.addPathToThread("/System_PingPong/subsystem/application/MrPong1", THREAD_MRPONG1THREAD);
+		
+		// port to peer port mappings
+		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/application/MrPing/PingPongPort", "/System_PingPong/subsystem/application/MrPong1/PingPongPort");
+		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/application/MrPing/timer", "/System_PingPong/subsystem/services/timer");
+		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/application/MrPong1/PingPongPort", "/System_PingPong/subsystem/application/MrPing/PingPongPort");
+		msgSvcCtrl.addPathToPeer("/System_PingPong/subsystem/services/timer", "/System_PingPong/subsystem/application/MrPing/timer");
+
+		// sub actors
+		new PingPongTop(this, "application"); 
+		new ATimingService(this, "services"); 
 		
 		// apply instance attribute configurations
-
-		// create the subsystem system port	
-		RTSystemPort = new RTSystemServicesProtocolConjPortRepl(this, "RTSystemPort",
-				0, //local ID
-				// own addresses
-				new Address[]{
-					addr_item_SystemPort_0,
-					addr_item_SystemPort_1,
-					addr_item_SystemPort_2,
-					addr_item_SystemPort_3
-				},
-				// peer addresses
-				new Address[]{
-					addr_item__SubSystem_PingPong_application,
-					addr_item__SubSystem_PingPong_application_MrPing,
-					addr_item__SubSystem_PingPong_application_MrPong1,
-					addr_item__SubSystem_PingPong_services
-				});
-		}
+	}
 	
+	@Override
+	public void init(){
+		super.init();
+	}
 		
-		@Override
-		public void init(){
-			super.init();
-		}
-			
-		@Override
-		public void stop(){
-			super.stop();
-		}
+	@Override
+	public void stop(){
+		super.stop();
+	}
 		
 };

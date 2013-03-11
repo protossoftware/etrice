@@ -74,6 +74,8 @@ public class SubSystemRunnerGen {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.RTSystem;");
+      _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemRunnerBase;");
       _builder.newLine();
       _builder.newLine();
@@ -103,14 +105,30 @@ public class SubSystemRunnerGen {
       _builder.append("// instantiate the main component");
       _builder.newLine();
       _builder.append("\t\t");
-      String _name_3 = cc.getName();
-      _builder.append(_name_3, "		");
-      _builder.append(" main_component = new ");
+      _builder.append("RTSystem sys = ");
+      {
+        EObject _eContainer = ssc.eContainer();
+        if ((_eContainer instanceof SystemInstance)) {
+          _builder.append("new RTSystem(\"");
+          EObject _eContainer_1 = ssc.eContainer();
+          String _name_3 = ((SystemInstance) _eContainer_1).getName();
+          _builder.append(_name_3, "		");
+          _builder.append("\")");
+        } else {
+          _builder.append("null");
+        }
+      }
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
       String _name_4 = cc.getName();
       _builder.append(_name_4, "		");
-      _builder.append("(\"");
-      String _runtimeName = this.getRuntimeName(ssc);
-      _builder.append(_runtimeName, "		");
+      _builder.append(" main_component = new ");
+      String _name_5 = cc.getName();
+      _builder.append(_name_5, "		");
+      _builder.append("(sys, \"");
+      String _name_6 = ssc.getName();
+      _builder.append(_name_6, "		");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -124,32 +142,6 @@ public class SubSystemRunnerGen {
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);
-    }
-    return _xblockexpression;
-  }
-  
-  private String getRuntimeName(final SubSystemInstance ssc) {
-    String _xblockexpression = null;
-    {
-      EObject parent = ssc.eContainer();
-      String _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (parent instanceof SystemInstance) {
-          final SystemInstance _systemInstance = (SystemInstance)parent;
-          _matched=true;
-          String _name = _systemInstance.getName();
-          String _plus = (_name + "/");
-          String _name_1 = ssc.getName();
-          String _plus_1 = (_plus + _name_1);
-          _switchResult = _plus_1;
-        }
-      }
-      if (!_matched) {
-        String _name = ssc.getName();
-        _switchResult = _name;
-      }
-      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }

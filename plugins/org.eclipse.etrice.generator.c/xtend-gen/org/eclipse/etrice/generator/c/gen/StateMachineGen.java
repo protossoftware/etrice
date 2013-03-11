@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,7 +21,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      List<State> _allBaseStates = this._roomExtensions.getAllBaseStates(ac);
+      List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
       int _size = _allBaseStates.size();
       List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(ac);
       int _size_1 = _allLeafStates.size();
@@ -95,7 +96,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence genExtra(final ExpandedActorClass xpac) {
+  protected CharSequence genExtra(final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -129,5 +130,13 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  protected String stateType() {
+    return "etInt16";
+  }
+  
+  protected String unreachableReturn() {
+    return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }
 }

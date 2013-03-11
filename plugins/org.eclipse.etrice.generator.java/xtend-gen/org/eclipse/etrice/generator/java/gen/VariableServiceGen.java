@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -113,7 +114,7 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("import java.util.Map;");
       _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.config.VariableService;");
+      _builder.append("import org.eclipse.etrice.runtime.java.config.AbstractVariableService;");
       _builder.newLine();
       String _userCode1 = this.configExt.getUserCode1(comp);
       _builder.append(_userCode1, "");
@@ -135,7 +136,7 @@ public class VariableServiceGen {
       String _name_1 = cc.getName();
       String _plus = (_name_1 + "VariableService");
       _builder.append(_plus, "");
-      _builder.append(" extends VariableService{");
+      _builder.append(" extends AbstractVariableService{");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
@@ -399,7 +400,7 @@ public class VariableServiceGen {
           _builder.append(" object, Map<String, Object> map){");
           _builder.newLineIfNotEmpty();
           {
-            List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dc_1);
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc_1);
             for(final Attribute a_2 : _allAttributes) {
               {
                 RefableType _refType = a_2.getRefType();
@@ -592,7 +593,7 @@ public class VariableServiceGen {
     while (_while) {
       {
         DataClass dc = visit.pop();
-        List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dc);
+        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
         final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
             public void apply(final Attribute a) {
               RefableType _refType = a.getRefType();
@@ -663,7 +664,7 @@ public class VariableServiceGen {
   private CharSequence genGetAttributeValues(final List<Attribute> path, final ActorInstance ai) {
     CharSequence _xblockexpression = null;
     {
-      Attribute a = IterableExtensions.<Attribute>last(path);
+      final Attribute a = IterableExtensions.<Attribute>last(path);
       CharSequence _xifexpression = null;
       RefableType _refType = a.getRefType();
       DataType _type = _refType.getType();
@@ -711,7 +712,7 @@ public class VariableServiceGen {
             DataClass dataClass = ((DataClass) _type_2);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
@@ -861,7 +862,7 @@ public class VariableServiceGen {
             DataClass dataClass = ((DataClass) _type_7);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
@@ -905,7 +906,7 @@ public class VariableServiceGen {
           } else {
             _xifexpression_1 = "";
           }
-          String getters = _xifexpression_1;
+          final String getters = _xifexpression_1;
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("if(");
           _builder.append(aVarName, "");
@@ -946,10 +947,10 @@ public class VariableServiceGen {
           {
             RefableType _refType_2 = a.getRefType();
             DataType _type_2 = _refType_2.getType();
-            DataClass dataClass = ((DataClass) _type_2);
+            final DataClass dataClass = ((DataClass) _type_2);
             StringConcatenation _builder = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);

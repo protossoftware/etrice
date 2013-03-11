@@ -14,13 +14,32 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 
+/**
+ * This interface is used by the detail code parser to replace
+ * common constructs in detail level code with a target language specific
+ * piece of code.
+ *
+ * <p>
+ * The constructs that are replaced are
+ * <ul>
+ *   <li>attributes</li>
+ *   <li>operations</li>
+ *   <li>port.message</li>
+ *   <li>tags of the form <code><|tag|></code></li>
+ * </ul>
+ * </p>
+ * 
+ * @see {@link DetailCodeTranslator}
+ * 
+ * @author Henrik Rentz-Reichert
+ */
 public interface ITranslationProvider {
 
 	/**
@@ -33,10 +52,18 @@ public interface ITranslationProvider {
 	public static final String TAG_END = "|>";
 
 	/**
-	 * the actor class for which translations have to be provided
-	 * @param ac
+	 * the container class for which translations have to be provided.
+	 * This can be either of
+	 * <ul>
+	 *   <li>{@link ActorClass}</li>
+	 *   <li>{@link DataClass}</li>
+	 *   <li>{@link ProtocolClass}</li>
+	 *   <li>{@link PortClass}</li>
+	 * </ul>
+	 * 
+	 * @param container
 	 */
-	void setActorClass(ActorClass ac);
+	void setContainerClass(EObject container);
 	
 	/**
 	 * @return true if translation should be applied to members (attributes, operations and port.msg
