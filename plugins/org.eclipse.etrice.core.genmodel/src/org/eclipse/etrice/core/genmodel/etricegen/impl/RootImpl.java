@@ -845,6 +845,14 @@ public class RootImpl extends EObjectImpl implements Root {
 		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
 		getMessageDataClasses(dataClasses, pc.getIncomingMessages());
 		getMessageDataClasses(dataClasses, pc.getOutgoingMessages());
+		if (pc.getRegular()!=null) {
+			getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
+			getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
+		}
+		if (pc.getConjugate()!=null) {
+			getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
+			getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
+		}
 		return dataClasses;
 	}
 	
