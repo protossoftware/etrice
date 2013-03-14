@@ -1343,6 +1343,41 @@ public class RoomHelpers {
 		
 		return result;
 	}
+    
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of the interface ports
+	 */
+	public static List<Port> getInterfacePorts(ActorContainerClass ac) {
+		if (ac instanceof ActorClass)
+			return ((ActorClass) ac).getIfPorts();
+		else if (ac instanceof SubSystemClass)
+			return ((SubSystemClass) ac).getRelayPorts();
+
+		assert (false) : "unexpected sub type";
+		return null;
+	}
+
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of the all interface ports including inherited with base
+	 *         class ports first
+	 */
+	public static List<Port> getAllInterfacePorts(ActorContainerClass ac) {
+		if (ac instanceof ActorClass) {
+			ArrayList<Port> result = new ArrayList<Port>();
+			ActorClass curr = (ActorClass) ac;
+			while (curr != null) {
+				result.addAll(0, curr.getIfPorts());
+				curr = curr.getBase();
+			}
+			return result;
+		} else if (ac instanceof SubSystemClass)
+			return ((SubSystemClass) ac).getRelayPorts();
+
+		assert (false) : "unexpected sub type";
+		return null;
+	}
 	
 	/**
 	 * Returns a list of all end {@link InterfaceItem}s of an {@link ActorClass}
