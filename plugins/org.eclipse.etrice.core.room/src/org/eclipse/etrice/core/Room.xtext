@@ -72,7 +72,7 @@ DataClass:
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
-		attributes+=Attribute+
+		attributes+=Attribute*
 		operations+=StandardOperation*
 	'}';
 	

@@ -4563,16 +4563,9 @@ rule__DataClass__Group__9__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getDataClassAccess().getAttributesAssignment_9()); }
-(rule__DataClass__AttributesAssignment_9)
-{ after(grammarAccess.getDataClassAccess().getAttributesAssignment_9()); }
-)
-(
 { before(grammarAccess.getDataClassAccess().getAttributesAssignment_9()); }
 (rule__DataClass__AttributesAssignment_9)*
 { after(grammarAccess.getDataClassAccess().getAttributesAssignment_9()); }
-)
 )
 
 ;

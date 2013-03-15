@@ -2030,7 +2030,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDataClass"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:828:1: ruleDataClass returns [EObject current=null] : (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )+ ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:828:1: ruleDataClass returns [EObject current=null] : (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )* ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' ) ;
     public final EObject ruleDataClass() throws RecognitionException {
         EObject current = null;
 
@@ -2060,11 +2060,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:831:28: ( (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )+ ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )+ ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:831:28: ( (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )* ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )* ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )+ ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:3: otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )+ ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )* ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:832:3: otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( (lv_attributes_13_0= ruleAttribute ) )* ( (lv_operations_14_0= ruleStandardOperation ) )* otherlv_15= '}'
             {
             otherlv_0=(Token)match(input,22,FOLLOW_22_in_ruleDataClass1682); 
 
@@ -2396,8 +2396,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:979:4: ( (lv_attributes_13_0= ruleAttribute ) )+
-            int cnt19=0;
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:979:4: ( (lv_attributes_13_0= ruleAttribute ) )*
             loop19:
             do {
                 int alt19=2;
@@ -2442,12 +2441,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt19 >= 1 ) break loop19;
-                        EarlyExitException eee =
-                            new EarlyExitException(19, input);
-                        throw eee;
+            	    break loop19;
                 }
-                cnt19++;
             } while (true);
 
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:997:3: ( (lv_operations_14_0= ruleStandardOperation ) )*
@@ -5585,11 +5580,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             if ( (LA58_0==47) ) {
                 int LA58_1 = input.LA(2);
 
-                if ( (LA58_1==37) ) {
-                    alt58=1;
-                }
-                else if ( (LA58_1==38) ) {
+                if ( (LA58_1==38) ) {
                     alt58=2;
+                }
+                else if ( (LA58_1==37) ) {
+                    alt58=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -19174,15 +19169,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final String DFA140_eotS =
         "\32\uffff";
     static final String DFA140_eofS =
-        "\13\uffff\1\21\7\uffff\2\21\3\uffff\2\21";
+        "\13\uffff\1\22\7\uffff\3\22\3\uffff\1\22";
     static final String DFA140_minS =
-        "\1\131\1\4\1\16\1\4\1\21\4\4\2\21\1\14\2\4\1\21\1\5\1\15\1\uffff"+
-        "\1\4\2\14\1\5\2\uffff\2\14";
+        "\1\131\1\4\1\16\1\4\1\21\4\4\2\21\1\14\2\4\1\21\1\4\1\5\1\15\1"+
+        "\uffff\3\14\1\5\2\uffff\1\14";
     static final String DFA140_maxS =
-        "\1\131\2\16\1\142\1\76\2\4\1\142\1\4\2\21\1\140\2\4\1\21\1\5\1"+
-        "\137\1\uffff\1\4\2\140\1\35\2\uffff\2\140";
+        "\1\131\2\16\1\142\1\76\2\4\1\142\1\4\2\21\1\140\2\4\1\21\1\4\1"+
+        "\5\1\137\1\uffff\3\140\1\35\2\uffff\1\140";
     static final String DFA140_acceptS =
-        "\21\uffff\1\2\4\uffff\1\1\1\3\2\uffff";
+        "\22\uffff\1\2\4\uffff\1\1\1\3\1\uffff";
     static final String DFA140_specialS =
         "\32\uffff}>";
     static final String[] DFA140_transitionS = {
@@ -19197,25 +19192,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             "\1\16",
             "\1\7",
             "\1\7",
-            "\1\20\1\21\16\uffff\1\17\41\uffff\1\22\17\uffff\1\21\4\uffff"+
-            "\7\21\6\uffff\1\21",
+            "\1\21\1\22\16\uffff\1\20\41\uffff\1\17\17\uffff\1\22\4\uffff"+
+            "\7\22\6\uffff\1\22",
             "\1\23",
             "\1\24",
             "\1\7",
             "\1\25",
-            "\1\21\115\uffff\1\21\1\26\1\uffff\1\26\1\27",
+            "\1\26",
+            "\1\22\115\uffff\1\22\1\27\1\uffff\1\27\1\30",
             "",
-            "\1\30",
-            "\1\20\1\21\16\uffff\1\17\61\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21",
-            "\1\20\1\21\16\uffff\1\17\61\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21",
-            "\1\25\27\uffff\1\31",
+            "\1\21\1\22\16\uffff\1\20\61\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\21\1\22\16\uffff\1\20\61\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\21\1\22\16\uffff\1\20\61\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\26\27\uffff\1\31",
             "",
             "",
-            "\1\20\1\21\16\uffff\1\17\61\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21",
-            "\1\20\1\21\100\uffff\1\21\4\uffff\7\21\6\uffff\1\21"
+            "\1\21\1\22\100\uffff\1\22\4\uffff\7\22\6\uffff\1\22"
     };
 
     static final short[] DFA140_eot = DFA.unpackEncodedString(DFA140_eotS);
@@ -19256,13 +19251,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final String DFA141_eofS =
         "\31\uffff";
     static final String DFA141_minS =
-        "\1\131\1\4\1\16\1\4\1\21\4\4\2\21\1\14\2\4\1\21\1\4\1\5\1\134\3"+
-        "\14\1\5\2\uffff\1\14";
+        "\1\131\1\4\1\16\1\4\1\21\4\4\2\21\1\14\2\4\1\21\1\5\1\134\1\4\2"+
+        "\14\1\5\2\uffff\2\14";
     static final String DFA141_maxS =
-        "\1\131\2\16\1\142\1\76\2\4\1\142\1\4\2\21\1\76\2\4\1\21\1\4\1\5"+
-        "\1\136\3\34\1\35\2\uffff\1\14";
+        "\1\131\2\16\1\142\1\76\2\4\1\142\1\4\2\21\1\76\2\4\1\21\1\5\1\136"+
+        "\1\4\2\34\1\35\2\uffff\1\34\1\14";
     static final String DFA141_acceptS =
-        "\26\uffff\1\2\1\1\1\uffff";
+        "\25\uffff\1\1\1\2\2\uffff";
     static final String DFA141_specialS =
         "\31\uffff}>";
     static final String[] DFA141_transitionS = {
@@ -19277,20 +19272,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             "\1\16",
             "\1\7",
             "\1\7",
-            "\1\21\17\uffff\1\20\41\uffff\1\17",
+            "\1\20\17\uffff\1\17\41\uffff\1\21",
             "\1\22",
             "\1\23",
             "\1\7",
             "\1\24",
-            "\1\25",
-            "\1\27\1\uffff\1\26",
-            "\1\21\17\uffff\1\20",
-            "\1\21\17\uffff\1\20",
-            "\1\21\17\uffff\1\20",
-            "\1\25\27\uffff\1\30",
+            "\1\25\1\uffff\1\26",
+            "\1\27",
+            "\1\20\17\uffff\1\17",
+            "\1\20\17\uffff\1\17",
+            "\1\24\27\uffff\1\30",
             "",
             "",
-            "\1\21"
+            "\1\20\17\uffff\1\17",
+            "\1\20"
     };
 
     static final short[] DFA141_eot = DFA.unpackEncodedString(DFA141_eotS);
@@ -19398,15 +19393,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleDataClass1725 = new BitSet(new long[]{0x0000000000801000L});
     public static final BitSet FOLLOW_23_in_ruleDataClass1739 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleFQN_in_ruleDataClass1762 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleDataClass1776 = new BitSet(new long[]{0x000000000F000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleDataClass1797 = new BitSet(new long[]{0x000000000F000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_12_in_ruleDataClass1776 = new BitSet(new long[]{0x000000008F002000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleDataClass1797 = new BitSet(new long[]{0x000000008F002000L,0x0000004000000000L});
     public static final BitSet FOLLOW_24_in_ruleDataClass1811 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1832 = new BitSet(new long[]{0x000000000F000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1832 = new BitSet(new long[]{0x000000008E002000L});
     public static final BitSet FOLLOW_25_in_ruleDataClass1847 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1868 = new BitSet(new long[]{0x000000000F000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1868 = new BitSet(new long[]{0x000000008C002000L});
     public static final BitSet FOLLOW_26_in_ruleDataClass1883 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1904 = new BitSet(new long[]{0x000000000F000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass1927 = new BitSet(new long[]{0x000000008F002000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass1904 = new BitSet(new long[]{0x0000000088002000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass1927 = new BitSet(new long[]{0x0000000088002000L});
     public static final BitSet FOLLOW_ruleStandardOperation_in_ruleDataClass1949 = new BitSet(new long[]{0x0000000080002000L});
     public static final BitSet FOLLOW_13_in_ruleDataClass1962 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute1998 = new BitSet(new long[]{0x0000000000000000L});
@@ -19514,12 +19509,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleMessage4099 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePortClass_in_entryRulePortClass4136 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePortClass4146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rulePortClass4183 = new BitSet(new long[]{0x0000C0008F000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_12_in_rulePortClass4183 = new BitSet(new long[]{0x0000C00088000000L});
     public static final BitSet FOLLOW_46_in_rulePortClass4196 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4217 = new BitSet(new long[]{0x0000C0008F000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4241 = new BitSet(new long[]{0x0000C0008F002000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4268 = new BitSet(new long[]{0x0000C0008F002000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4295 = new BitSet(new long[]{0x0000C0008F002000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4217 = new BitSet(new long[]{0x0000C00088000000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4241 = new BitSet(new long[]{0x0000C00088002000L});
+    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4268 = new BitSet(new long[]{0x0000C00088002000L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4295 = new BitSet(new long[]{0x0000C00088002000L});
     public static final BitSet FOLLOW_13_in_rulePortClass4309 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler4345 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleMessageHandler4355 = new BitSet(new long[]{0x0000000000000002L});
@@ -19589,18 +19584,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_13_in_ruleActorClass5912 = new BitSet(new long[]{0x00C0000000002000L});
     public static final BitSet FOLLOW_54_in_ruleActorClass5927 = new BitSet(new long[]{0x0000000010001000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5948 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleActorClass5961 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
+    public static final BitSet FOLLOW_12_in_ruleActorClass5961 = new BitSet(new long[]{0x2F0000000F002000L,0x0000000000001220L});
     public static final BitSet FOLLOW_24_in_ruleActorClass5974 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass5995 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass5995 = new BitSet(new long[]{0x2F0000000E002000L,0x0000000000001220L});
     public static final BitSet FOLLOW_25_in_ruleActorClass6010 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6031 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6031 = new BitSet(new long[]{0x2F0000000C002000L,0x0000000000001220L});
     public static final BitSet FOLLOW_26_in_ruleActorClass6046 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6067 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6091 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6118 = new BitSet(new long[]{0x2F0000000F002000L,0x0000004000001220L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6141 = new BitSet(new long[]{0x280000000F002000L,0x0000004000001220L});
-    public static final BitSet FOLLOW_ruleSAPRef_in_ruleActorClass6163 = new BitSet(new long[]{0x080000000F002000L,0x0000004000001220L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6185 = new BitSet(new long[]{0x000000000F002000L,0x0000004000001220L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6067 = new BitSet(new long[]{0x2F00000008002000L,0x0000000000001220L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6091 = new BitSet(new long[]{0x2F00000008002000L,0x0000000000001220L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6118 = new BitSet(new long[]{0x2F00000008002000L,0x0000000000001220L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6141 = new BitSet(new long[]{0x2800000008002000L,0x0000000000001220L});
+    public static final BitSet FOLLOW_ruleSAPRef_in_ruleActorClass6163 = new BitSet(new long[]{0x0800000008002000L,0x0000000000001220L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6185 = new BitSet(new long[]{0x0000000008002000L,0x0000000000001220L});
     public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass6207 = new BitSet(new long[]{0x0000000000002000L,0x0000000000001220L});
     public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass6229 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000220L});
     public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass6251 = new BitSet(new long[]{0x0000000000002000L,0x0000000000000200L});

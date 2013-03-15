@@ -994,7 +994,7 @@ ruleDataClass returns [EObject current=null]
 	    }
 
 )
-)+(
+)*(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_10_0()); 

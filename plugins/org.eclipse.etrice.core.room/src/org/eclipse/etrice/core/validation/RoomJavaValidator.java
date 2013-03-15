@@ -13,6 +13,7 @@
 
 package org.eclipse.etrice.core.validation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -47,6 +48,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
+import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SimpleState;
@@ -482,6 +484,53 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			StateGraph sg = (StateGraph) rt.eContainer();
 			int idx = sg.getRefinedTransitions().indexOf(rt);
 			error("RefinedTransition only allowed in top level state graph of an actor", sg, RoomPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
+		}
+	}
+	
+	@Check
+	public void checkDataClass(DataClass dc) {
+		if (dc.getAttributes().isEmpty() && dc.getBase()==null)
+			error("Non-derived data classes have to define at least one attribute", RoomPackage.Literals.DATA_CLASS__ATTRIBUTES);
+	}
+	
+	@Check
+	public void checkAttribute(Attribute att) {
+		ArrayList<Attribute> all = new ArrayList<Attribute>();
+		
+		if (att.eContainer() instanceof ActorClass) {
+			ActorClass ac = (ActorClass) att.eContainer();
+			if (ValidationUtil.isCircularClassHierarchy(ac))
+				// is checked elsewhere
+				return;
+			
+			do {
+				all.addAll(ac.getAttributes());
+				ac = ac.getBase();
+			}
+			while (ac!=null);
+		}
+		else if (att.eContainer() instanceof DataClass) {
+			DataClass dc = (DataClass) att.eContainer();
+			if (ValidationUtil.isCircularClassHierarchy(dc))
+				// is checked elsewhere
+				return;
+			
+			do {
+				all.addAll(dc.getAttributes());
+				dc = dc.getBase();
+			}
+			while (dc!=null);
+		}
+		// skip PortClass case since they don't inherit (yet)
+		
+		String name = att.getName();
+		for (Attribute a : all) {
+			if (a!=att && a.getName().equals(name))
+				if (a.eContainer()!=att.eContainer())
+					error("name already used in base class '"+((RoomClass)a.eContainer()).getName()+"'",
+							RoomPackage.Literals.ATTRIBUTE__NAME);
+				else
+					error("name already used", RoomPackage.Literals.ATTRIBUTE__NAME);
 		}
 	}
 	

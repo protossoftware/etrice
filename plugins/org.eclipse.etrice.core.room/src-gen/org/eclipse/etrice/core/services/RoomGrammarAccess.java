@@ -513,14 +513,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 		//
-		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
 		//
 		//	operations+=StandardOperation* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 		//
-		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
 		//
 		//operations+=StandardOperation* "}"
 		public Group getGroup() { return cGroup; }
@@ -600,7 +600,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_8_1_0() { return cUserCode3DetailCodeParserRuleCall_8_1_0; }
 
-		//attributes+=Attribute+
+		//attributes+=Attribute*
 		public Assignment getAttributesAssignment_9() { return cAttributesAssignment_9; }
 
 		//Attribute
@@ -5372,7 +5372,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 	//
-	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute+
+	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
 	//
 	//	operations+=StandardOperation* "}";
 	public DataClassElements getDataClassAccess() {
