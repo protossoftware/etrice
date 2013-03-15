@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.IRoomValidator;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
@@ -77,13 +78,20 @@ public class AbstractExecutionValidator implements IRoomValidator {
 
 		if (!(object instanceof ActorClass))
 			return;
+		
 		ActorClass ac = (ActorClass) object;
+		
 		if (traceExec) {
 			if (!(traceName.isEmpty() || ac.getName().equals(traceName)))
 				return;
 			System.out.println("AbstractExecutionValidator checking class "
 					+ ac.getName());
 		}
+		
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			// is checked elsewhere
+			return;
+
 		boolean oneProtocolsWithSemantics = false;
 		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
 		for (InterfaceItem item : ifItems) {

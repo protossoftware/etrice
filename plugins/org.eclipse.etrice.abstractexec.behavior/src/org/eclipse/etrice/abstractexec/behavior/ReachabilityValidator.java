@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.validation.IRoomValidator;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 
@@ -39,6 +40,10 @@ public class ReachabilityValidator implements IRoomValidator {
 			return;
 
 		ActorClass ac = (ActorClass) object;
+		
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			// is checked elsewhere
+			return;
 
 		NullDiagnostician diagnostician = new NullDiagnostician();
 		GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
