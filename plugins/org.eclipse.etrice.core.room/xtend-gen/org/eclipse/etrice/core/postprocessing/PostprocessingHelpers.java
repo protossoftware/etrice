@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -32,6 +33,19 @@ public class PostprocessingHelpers {
         }
       };
     EAttribute _findFirst = IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
+    return _findFirst;
+  }
+  
+  public static EReference getReference(final EClass cls, final String name) {
+    EList<EReference> _eAllReferences = cls.getEAllReferences();
+    final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+        public Boolean apply(final EReference a) {
+          String _name = a.getName();
+          boolean _equals = _name.equals(name);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
     return _findFirst;
   }
   

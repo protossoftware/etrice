@@ -30,6 +30,10 @@ class PostprocessingHelpers {
 		cls.EAllAttributes.findFirst(a | a.name.equals(name))
 	}
 	
+	def static getReference(EClass cls, String name) {
+		cls.EAllReferences.findFirst(a | a.name.equals(name))
+	}
+	
 	def static addOperation(EClass owner, String name, EClassifier type, String body) {
 		addOperation(owner, name, type, 1, body)
 	}

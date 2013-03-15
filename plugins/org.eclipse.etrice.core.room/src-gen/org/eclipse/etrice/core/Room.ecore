@@ -3,11 +3,11 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="room" nsURI="http://www.eclipse.org/etrice/Room" nsPrefix="room">
   <eClassifiers xsi:type="ecore:EClass" name="RoomModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>&#xD;&#xA;"/>
+      <details key="documentation" value="The root object for the ROOM model. It gives access to {@link Import imports} and&#xD;&#xA;the {@link SubSystemClass sub system},&#xD;&#xA;{@link ActorClass actor}, {@link ProtocolClass protocol} and&#xD;&#xA;{@link DataClass data} classes defined.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>&#xD;&#xA;"/>
+        <details key="documentation" value="The model name is a dot separated fully qualified name and is&#xD;&#xA;used to provide a name space. The generators may use that also&#xD;&#xA;to place the generated code into separate directories.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
@@ -30,7 +30,11 @@
         eType="#//LogicalSystem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomClass">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The name of the data class by which it is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
         containment="true"/>
   </eClassifiers>
@@ -82,7 +86,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataClass" eSuperTypes="#//ComplexType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The data class in ROOM is a {@link ComplexType} which has {@link Attribute} members.&#xD;&#xA;It can be derived from a single base data class. &#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//DataClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The base class from which all attributes and operations are inherited.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="#//Annotation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode1" eType="#//DetailCode"
@@ -92,9 +103,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="userCode3" eType="#//DetailCode"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Attributes are the data members of the data class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="#//StandardOperation" containment="true"/>
+        eType="#//StandardOperation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Operations are the methods of the data class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -465,7 +484,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The import references another ROOM model. Optionally it may import also&#xD;&#xA;the name space of the imported model.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The imported name space has to be a dot separated qualified name followed by .*.&#xD;&#xA;Example: my.namespace.*&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The import URI can be a relative or absolute file system path.&#xD;&#xA;It may contain environment variables in ${} which will be expanded.&#xD;&#xA;&lt;p>&#xD;&#xA;Examples:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>import model &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;../../AnotherProject/models/AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;/${ROOM_MODELS}/SomeModel.room&quot;&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

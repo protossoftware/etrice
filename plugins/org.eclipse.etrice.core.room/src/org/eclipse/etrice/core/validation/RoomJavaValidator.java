@@ -70,6 +70,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
 	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
+	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -179,8 +180,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 		
 		while (dc!=null) {
-			if (att.getRefType().getType()==dc)
-				error("Attribute type must not refer to own class or a super class", RoomPackage.Literals.ATTRIBUTE__REF_TYPE);
+			if (att.getRefType().getType()==dc && !att.getRefType().isRef()) {
+				error(
+						"Attribute type must not refer to own class or a super class",
+						RoomPackage.Literals.ATTRIBUTE__REF_TYPE,
+						CIRCULAR_CONTAINMENT,
+						""+att.getRefType().getType().getName().length()
+					);
+				break;
+			}
 			
 			dc = dc.getBase();
 		}

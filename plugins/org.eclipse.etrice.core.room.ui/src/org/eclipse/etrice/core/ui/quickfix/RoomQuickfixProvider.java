@@ -79,4 +79,15 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 	}
+	
+	@Fix(RoomJavaValidator.CIRCULAR_CONTAINMENT)
+	public void fixCircularContainment(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Make attribute a reference", "add 'ref' keyword", "add.gif", new IModification() {
+			public void apply(IModificationContext context) throws BadLocationException {
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				int offset = Integer.parseInt(issue.getData()[0]);
+				xtextDocument.replace(issue.getOffset()+offset, 0, " ref");
+			}
+		});
+	}
 }

@@ -9,6 +9,12 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Data Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The data class in ROOM is a {@link ComplexType} which has {@link Attribute} members.
+ * It can be derived from a single base data class. 
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,11 +37,11 @@ public interface DataClass extends ComplexType
   /**
    * Returns the value of the '<em><b>Base</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Base</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The base class from which all attributes and operations are inherited.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Base</em>' reference.
    * @see #setBase(DataClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Base()
@@ -152,11 +158,11 @@ public interface DataClass extends ComplexType
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * Attributes are the data members of the data class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Attributes()
    * @model containment="true"
@@ -168,11 +174,11 @@ public interface DataClass extends ComplexType
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * Operations are the methods of the data class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Operations()
    * @model containment="true"

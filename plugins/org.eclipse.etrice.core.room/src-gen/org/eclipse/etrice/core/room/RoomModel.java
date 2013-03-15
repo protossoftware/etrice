@@ -11,6 +11,14 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The root object for the ROOM model. It gives access to {@link Import imports} and
+ * the {@link SubSystemClass sub system},
+ * {@link ActorClass actor}, {@link ProtocolClass protocol} and
+ * {@link DataClass data} classes defined.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -36,11 +44,13 @@ public interface RoomModel extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The model name is a dot separated fully qualified name and is
+   * used to provide a name space. The generators may use that also
+   * to place the generated code into separate directories.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Name()
