@@ -12,6 +12,7 @@
 
 #include "MessageService.h"
 #include <iostream>
+#include <stdlib.h>
 #include <unistd.h>
 
 namespace etRuntime {
