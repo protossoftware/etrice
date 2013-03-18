@@ -55,7 +55,7 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 	@Test
 	public void checkModel() {
 		assertEquals("models read", 1, getModels().size());
-		assertEquals("actor classes in our model", 3, getModels().get(0).getActorClasses().size());
+		assertEquals("actor classes in our model", 5, getModels().get(0).getActorClasses().size());
 	}
 	
 	@Test
@@ -119,6 +119,52 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 		
 		// top and four sub state graph
 		assertEquals("diagram children", 5, diagram.getChildren().size());
+
+		for (Shape shape : diagram.getChildren()) {
+			assertTrue("top level shape is container shape", shape instanceof ContainerShape);
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
+			assertTrue("top level business object is StateGraph", bo instanceof StateGraph);
+		}
+	}
+	
+	@Test
+	public void testBase2Class() {
+		ActorClass ac = getActorClass("Base2");
+		assertTrue("actor class Base2 present in model", ac!=null);
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
+		
+		// have to use the actor class from the diagram since this is another instance
+		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		
+		testSGItems(ac.getStateMachine(), diagram);
+		
+		// top and one sub state graph
+		assertEquals("diagram children", 2, diagram.getChildren().size());
+
+		for (Shape shape : diagram.getChildren()) {
+			assertTrue("top level shape is container shape", shape instanceof ContainerShape);
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(shape);
+			assertTrue("top level business object is StateGraph", bo instanceof StateGraph);
+		}
+	}
+	
+	@Test
+	public void testDerived2Class() {
+		ActorClass ac = getActorClass("Derived2");
+		assertTrue("actor class Derived2 present in model", ac!=null);
+		Diagram diagram = new DiagramAccess().getDiagram(ac);
+		
+		// have to use the actor class from the diagram since this is another instance
+		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		assertTrue("is derived", ac.getBase()!=null);
+		assertTrue("extends Base2", ac.getBase().getName().equals("Base2"));
+		
+		testSGItems(ac.getStateMachine(), diagram);
+		
+		// top and one sub state graph
+		assertEquals("diagram children", 2, diagram.getChildren().size());
 
 		for (Shape shape : diagram.getChildren()) {
 			assertTrue("top level shape is container shape", shape instanceof ContainerShape);

@@ -88,6 +88,30 @@ RoomModel InheritedStateMachine {
 			}
 		}
 	}
+	
+	ActorClass Base2 {
+		Behavior {
+			StateMachine {
+				State Test {
+					subgraph {
+						EntryPoint tp0
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass Derived2 extends Base2 {
+		Behavior {
+			StateMachine {
+				RefinedState Test {
+					entry {
+						"//"
+					}
+				}
+			}
+		}
+	}
 
 	ProtocolClass PC {
 		incoming {
