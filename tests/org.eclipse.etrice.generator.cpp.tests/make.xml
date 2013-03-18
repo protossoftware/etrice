@@ -68,7 +68,7 @@
 	<!--
 		copy_models: copies the models from their original folders to the build location
 	-->
-	<target name="copy_models" depends="clean">
+	<target name="copy_models">
 		<copy todir="models" >
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
@@ -124,7 +124,7 @@
 	<!--
 		compile_c_runtime: compiles the C runtime library
 	-->
-	<target name="compile_c_runtime" depends="set_rp">
+	<target name="compile_c_runtime" depends="clean,set_rp">
 		<mkdir dir="${c-runtime.path}/bin"/>
 		<mkdir dir="${output}"/>
 		<exec dir="${c-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_c_runtime.txt">
