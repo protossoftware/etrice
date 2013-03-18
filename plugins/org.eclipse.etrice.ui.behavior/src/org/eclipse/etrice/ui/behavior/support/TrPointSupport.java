@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
@@ -345,6 +346,12 @@ public class TrPointSupport {
 					assert(bo instanceof StateGraph): "expected state graph";
 					assert(((StateGraph)bo).eContainer() instanceof State): "expected state";
 					s = (State) ((StateGraph)bo).eContainer();
+					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
+				}
+				if (elements.isEmpty()) {
+			        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					s = RoomHelpers.getTargettingState(s, ac);
+					assert(s!=null): "a refined state should point to our parent state";
 					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
 				}
 				assert(elements.size()==1): "expected unique pe";
