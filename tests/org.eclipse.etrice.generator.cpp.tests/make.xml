@@ -61,7 +61,6 @@
 		<delete dir="${cpp-runtime.path}/bin"/>
 		<delete dir="models"/>
 		<delete dir="${output}"/>
-		<delete dir="${test.results}"/>
 		<delete dir="src-gen"/>
 		<delete dir="tmp"/>
 	</target>
@@ -69,7 +68,7 @@
 	<!--
 		copy_models: copies the models from their original folders to the build location
 	-->
-	<target name="copy_models">
+	<target name="copy_models" depends="clean">
 		<copy todir="models" >
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
@@ -313,14 +312,18 @@
 	-->
 	<target name="run" depends="build">
 		<mkdir dir="tmp/log"/>
+		<echo>start HandlerTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe">
 			<arg value="-run_as_test_single_threaded"/>
 			<arg value="200"/>
 		</exec>
+		<echo>end   HandlerTest</echo>
+		<echo>start ChoicePointTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe">
 			<arg value="-run_as_test_single_threaded"/>
 			<arg value="200"/>
 		</exec>
+		<echo>end   ChoicePointTest</echo>
 	</target>
 	
 	<!--
@@ -339,14 +342,14 @@
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.c.tests.ChoicePointTest"/>
+			<arg value="org.eclipse.etrice.generator.cpp.tests.ChoicePointTest"/>
 			<arg value="./tmp/ChoicePointTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.c.tests.HandlerTest"/>
+			<arg value="org.eclipse.etrice.generator.cpp.tests.HandlerTest"/>
 			<arg value="./tmp/HandlerTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>

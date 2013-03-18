@@ -49,7 +49,6 @@
 		<delete dir="${bin.path}"/>
 		<delete dir="models"/>
 		<delete dir="${output}"/>
-		<delete dir="${test.results}"/>
 		<delete dir="src-gen"/>
 		<delete dir="tmp"/>
 	</target>
@@ -274,8 +273,8 @@
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
-		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/StaticConfigTest.xml"/>
-		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/DynamicConfigTest.xml"/>
+		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml"/>
+		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/JavaDynamicConfigTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>
