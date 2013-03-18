@@ -79,9 +79,13 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	protected void _createChildren(IOutlineNode parentNode, ActorClass ac) {
 		Object nodeName = parentNode.getText();
-		if(parentNode.getText() instanceof StyledString)
+		if (parentNode.getText() instanceof StyledString)
 			nodeName = ((StyledString)parentNode.getText()).getString();
-		if(nodeName.equals(ac.getName()))
+		
+		// if the parent is the top node of an actor class it starts with the actor class name
+		// (eventually followed by 'extends')
+		// otherwise it is one of the Interface/Structure/Behavior nodes
+		if (((String)nodeName).startsWith(ac.getName()))
 			createChildren1(parentNode, ac);
 		else
 			createChildren2(parentNode, ac);
