@@ -88,6 +88,9 @@ public class AbstractExecutionValidator implements IRoomValidator {
 					+ ac.getName());
 		}
 		
+		if (ac.isAbstract())
+			return;
+		
 		if (ValidationUtil.isCircularClassHierarchy(ac))
 			// is checked elsewhere
 			return;

@@ -41,6 +41,9 @@ public class ReachabilityValidator implements IRoomValidator {
 
 		ActorClass ac = (ActorClass) object;
 		
+		if (ac.isAbstract())
+			return;
+		
 		if (ValidationUtil.isCircularClassHierarchy(ac))
 			// is checked elsewhere
 			return;
