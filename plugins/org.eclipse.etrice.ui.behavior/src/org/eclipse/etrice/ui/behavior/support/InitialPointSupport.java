@@ -220,7 +220,7 @@ public class InitialPointSupport {
 				if (canMove) {
 					Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 					if (bo instanceof StateGraph) {
-						return true;
+						return !SupportUtil.isInherited(getDiagram(), (StateGraph)bo);
 					}
 					return false;
 				}

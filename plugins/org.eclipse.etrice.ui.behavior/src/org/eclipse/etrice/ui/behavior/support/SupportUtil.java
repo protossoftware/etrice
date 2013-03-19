@@ -566,6 +566,9 @@ public class SupportUtil {
 			if (pe instanceof FreeFormConnection) {
 				FreeFormConnection conn = (FreeFormConnection) pe;
 				
+				// JH: workaround for correct bend points of inherited self transition
+				conn.getBendpoints().clear();
+				
 				List<Pos> points = positionProvider.getPoints(trans);
 				if (points!=null && !points.isEmpty()) {
 					Iterator<Pos> it = points.iterator();
