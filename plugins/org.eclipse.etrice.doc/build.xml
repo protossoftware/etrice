@@ -1,0 +1,172 @@
+<!-- ===========================================================
+     ANT project ETRICE_HELP: compiles PDF, HTML and Eclipse TOC
+     files out of TeX files.                                    
+
+	 Copyright (c) 2013 Frank Lippert
+     All rights reserved. This program and the accompanying materials
+     are made available under the terms of the Eclipse Public License v1.0
+     which accompanies this distribution, and is available at 
+	 www.eclipse.org/legal/epl-v10.html
+
+     CONTRIBUTORS:
+     Frank Lippert (initial contribution)
+	 =========================================================== --> 
+<project name="ETRICE_HELP" basedir="." default="default">
+
+<!-- ============ setting uo properties ============ --> 
+<property name="author" 	value="Frank Lippert" />
+<property name="version" 	value="1.0" />
+
+<property name="doc.dir" 	value="doc" />
+<property name="image.dir" 	value="${doc.dir}\images" />
+<property name="manual.dir" value="manual" />
+<property name="html.dir" 	value="html" />
+<property name="styles.dir" value="styles" />
+
+<property name="tex.file" 	value="etrice-doc.tex" />
+<property name="pdf.file" 	value="${manual.dir}\etrice.pdf" />
+<property name="html.file" 	value="${html.dir}\etrice-doc.html" /> 
+<property name="toc.file" 	value="toc.xml" />
+<property name="style.file" value="${styles.dir}\build_eclipse_toc.xsl" />
+
+<path id="project.class.path">
+	<pathelement path="${java.class.path}" />
+	<pathelement path="C:/Program Files/Saxonica/SaxonHE9.4N/lib/saxon9he.jar" />
+	<pathelement path="D:/setup/applications/software_engineering/apache/ant/extensions/ant_latex/ant_latex_0.0.9_1.jar" />
+</path>
+
+
+<!-- ============ initialization ================== -->
+<target name="init" >
+	<tstamp/>
+	<mkdir dir="${manual.dir}" />
+	<mkdir dir="${image.dir}" />
+</target>
+
+
+<!-- ============ creating PDF manual ============= --> 
+<taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
+    classpathref="project.class.path"
+/> 
+
+<!-- do we actually need to run PDF creation? -->
+<target name="checkPdfCreationNeeded">
+	<condition property="pdfCreation.notNeeded">
+		<and>
+			<uptodate  targetfile="${pdf.file}" >
+				<srcfiles dir="${doc.dir}" includes="**/*.tex" />
+			</uptodate>
+			<uptodate  targetfile="${pdf.file}" >
+				<srcfiles dir="${image.dir}" includes="**/*.*" />
+			</uptodate>
+		</and>
+	</condition>
+</target>
+
+<!-- the actual PDF creation task -->
+<target name="createEtricePDF" depends="init, checkPdfCreationNeeded" unless="pdfCreation.notNeeded"
+	description="creates PDF manual from TeX files for eTrice documentation">
+	<property name="latex.tmp.dir" value="${java.io.tmpdir}miktex" />
+	<mkdir dir="${latex.tmp.dir}" />
+	<latex
+		latexfile="${tex.file}"
+		verbose="on"
+		clean="off"  
+		pdftex="on"  
+		workingDir="${doc.dir}"
+		jobname="etrice"
+		auxDir="${latex.tmp.dir}"
+		outputDir="${manual.dir}"
+		MikTeX="on"
+    /> 
+	<delete dir="${latex.tmp.dir}" />
+</target>
+
+
+<!-- ============ TARGET: HTML FILES =============== -->
+
+<!-- do we actually need to run HTML creation? -->
+<target name="checkHtmlCreationNeeded">
+	<condition property="htmlCreation.notNeeded">
+		<and>
+			<uptodate targetfile="${html.file}" >
+				<srcfiles dir="${doc.dir}" includes="**/*.tex" />
+			</uptodate>
+			<uptodate targetfile="${html.file}" >
+				<srcfiles dir="${image.dir}" includes="**/*.*" />
+			</uptodate>
+		</and>
+	</condition>
+</target>
+ 
+<!-- the actual HTML creation task -->
+<target name="createEtriceHTML" depends="init, checkHtmlCreationNeeded" unless="htmlCreation.notNeeded" 
+	description="creates HTML files from TeX files for eTrice documentation">
+	<copy todir="${html.dir}/images">
+		<fileset dir="${image.dir}" />
+	</copy>
+	<exec dir="doc" executable="htlatex" vmlauncher="false">
+		<arg value="${tex.file}" />
+		<arg value='"xhtml,3,next"' />
+		<arg value='""' />
+		<arg line='"-d../html"' />
+	</exec>
+	<copy todir="${html.dir}">
+		<fileset dir="${doc.dir}"
+			includes="**/*.html **/*.png **/*.css" 
+		/>
+	</copy>
+	<delete>
+		<fileset dir="${doc.dir}" 
+			includes="**/*.aux **/*.html **/*.css **/*.4ct **/*.4tc **/*.log **/*.dvi **/*.lg **/*.xref **/*.tmp **/*.idv **/*.png" 
+			excludes="images/**" 
+		/> 
+	</delete>
+</target>
+
+
+<!-- ============ XSLT for Eclipse TOCs ============ -->
+
+<!-- do we actually need to run TOCs creation? -->
+<target name="checkTocsCreationNeeded">
+	<condition property="tocsCreation.notNeeded">
+		<and>
+			<available file="${html.file}" />
+			<uptodate  srcfile="${html.file}" targetfile="${toc.file}" />
+		</and>
+	</condition>
+</target>
+
+<!-- the actual TOCs creation task --> 
+<target name="createEclipseTocFiles" depends="checkTocsCreationNeeded, createEtriceHTML" unless="tocsCreation.notNeeded" 
+		description="creates Eclipse Table of Content files from HTML file as part of the eTrice documentation">
+   <!-- Transform one file into an HTML file -->
+   <xslt basedir="html" destdir="."
+		classpathref="project.class.path"
+		in="${html.file}" out="dummy_out.xml"
+		style="${style.file}"
+		excludes="*.xml *.txt"
+		scanincludeddirectories="false"
+		processor="trax"
+	>
+		<factory name="net.sf.saxon.TransformerFactoryImpl" />
+	</xslt>
+	<delete file="dummy_out.xml"/>
+</target>
+
+ 
+<!-- ============ TARGET: DEFAULT ================== -->
+<target name="default" depends="createEtricePDF, createEclipseTocFiles"/>
+
+
+<!-- ============ TARGET: clean ================== -->
+<target name="clean" description="deletes all generated files for eTrice documentation">
+	<delete dir="${html.dir}/images"/>
+	<delete>
+		<fileset dir="."
+			includes="*.xml ${pdf.file} ${html.dir}/*.html ${html.dir}/*.css ${html.dir}/*.png"
+			excludes="build.xml" 
+		/>
+	</delete>
+</target>
+</project>

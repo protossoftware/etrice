@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Define Actor Structure and Behavior</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,3,next,html --> 
+<meta name="src" content="etrice-doc.tex" /> 
+<meta name="date" content="2013-03-25 22:23:00" /> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
+</head><body 
+>
+<!--l. 133--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse26.html" >next</a>] [<a 
+href="etrice-docse24.html" >prev</a>] [<a 
+href="etrice-docse24.html#tailetrice-docse24.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse25.html">tail</a>] [<a 
+href="etrice-docch7.html#etrice-docse25.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">7.6   </span> <a 
+ id="x34-480007.6"></a>Define Actor Structure and Behavior</h3>
+<!--l. 135--><p class="noindent" >Save the model and visit the outline view. Within the outline view, right click on the
+<span 
+class="ecti-1000">MrPong </span>actor and select <span 
+class="ecti-1000">Edit Structure</span>. Select an <span 
+class="ecti-1000">Interface Port </span>from the
+toolbox and add it to MrPong. Name the Port <span 
+class="ecti-1000">PingPongPort </span>and select the
+<span 
+class="ecti-1000">PingPongProtocol</span>.
+</p><!--l. 137--><p class="noindent" ><img 
+src="images/025-SendingData02.png" alt="PIC"  
+ />
+</p><!--l. 140--><p class="noindent" >Do the same with MrPing but mark the port as <span 
+class="ecti-1000">conjugated</span>
+</p><!--l. 142--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">7.6.1   </span> <a 
+ id="x34-490007.6.1"></a>Define MrPongs behavior</h4>
+<!--l. 144--><p class="noindent" >Within the outline view, right click MrPong and select <span 
+class="ecti-1000">Edit Behavior</span>. Create the
+following state machine:
+</p><!--l. 146--><p class="noindent" ><img 
+src="images/025-SendingData04.png" alt="PIC"  
+ />
+</p><!--l. 149--><p class="noindent" >The transition dialogues should look like this: For <span 
+class="ecti-1000">ping</span>:
+</p><!--l. 152--><p class="noindent" ><img 
+src="images/025-SendingData05.png" alt="PIC"  
+ />
+</p><!--l. 155--><p class="noindent" >For <span 
+class="ecti-1000">pingSimple</span>:
+</p><!--l. 157--><p class="noindent" ><img 
+src="images/025-SendingData06.png" alt="PIC"  
+ />
+</p><!--l. 161--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">7.6.2   </span> <a 
+ id="x34-500007.6.2"></a>Define MrPing behavior</h4>
+<!--l. 163--><p class="noindent" >Within the outline view double click MrPing. Navigate the cursor to the behavior of
+MrPing. With the help of content assist create a new operation.
+</p><!--l. 165--><p class="noindent" ><img 
+src="images/025-SendingData07.png" alt="PIC"  
+ />
+</p><!--l. 168--><p class="noindent" >Name the operation <span 
+class="ecti-1000">printData </span>and define the DemoData as a parameter.
+</p><!--l. 170--><p class="noindent" >Fill in the following code:
+                                                                  
+
+                                                                  
+</p>
+<div class="verbatim" id="verbatim-14">
+Operation&#x00A0;printData(d:&#x00A0;DemoData)&#x00A0;:&#x00A0;void&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int32Val:&#x00A0;%d\\n\",d.int32Val);"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.float64Val:&#x00A0;%f\\n\",d.float64Val);"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int8Array:&#x00A0;\");"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"for(int&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x003C;d.int8Array.length;&#x00A0;i++)&#x00A0;{"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"%d&#x00A0;\",d.int8Array[i]);}"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"\\nd.stringVal:&#x00A0;%s\\n\",d.stringVal);"
+&#x00A0;<br />}
+</div>
+<!--l. 182--><p class="nopar" >
+</p><!--l. 185--><p class="noindent" >For MrPing create the following state machine: (Remember that you can copy and
+paste the action code from the tutorial directory.)
+</p><!--l. 188--><p class="noindent" ><img 
+src="images/025-SendingData08.png" alt="PIC"  
+ />
+</p><!--l. 191--><p class="noindent" >The transition dialogues should look like this:
+</p><!--l. 193--><p class="noindent" >For <span 
+class="ecti-1000">init</span>:
+</p><!--l. 195--><p class="noindent" ><img 
+src="images/025-SendingData09.png" alt="PIC"  
+ />
+</p><!--l. 198--><p class="noindent" >For <span 
+class="ecti-1000">wait1</span>:
+</p><!--l. 200--><p class="noindent" ><img 
+src="images/025-SendingData10.png" alt="PIC"  
+ />
+</p><!--l. 203--><p class="noindent" >For <span 
+class="ecti-1000">next</span>:
+</p><!--l. 205--><p class="noindent" ><img 
+src="images/025-SendingData11.png" alt="PIC"  
+ />
+</p><!--l. 208--><p class="noindent" >For <span 
+class="ecti-1000">wait2</span>:
+</p><!--l. 210--><p class="noindent" ><img 
+src="images/025-SendingData12.png" alt="PIC"  
+ />
+                                                                  
+
+                                                                  
+</p>
+<!--l. 213--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse26.html" >next</a>] [<a 
+href="etrice-docse24.html" >prev</a>] [<a 
+href="etrice-docse24.html#tailetrice-docse24.html" >prev-tail</a>] [<a 
+href="etrice-docse25.html" >front</a>] [<a 
+href="etrice-docch7.html#etrice-docse25.html" >up</a>] </p></div>
+<!--l. 213--><p class="noindent" ><a 
+ id="tailetrice-docse25.html"></a> </p> 
+</body></html> 

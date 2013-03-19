@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Architecture</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,3,next,html --> 
+<meta name="src" content="etrice-doc.tex" /> 
+<meta name="date" content="2013-03-25 22:23:00" /> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
+</head><body 
+>
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse56.html" >next</a>] [<a 
+href="etrice-docch16.html" >prev</a>] [<a 
+href="etrice-docch16.html#tailetrice-docch16.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse55.html">tail</a>] [<a 
+href="etrice-docch16.html#etrice-docse55.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">16.1   </span> <a 
+ id="x73-12500016.1"></a>Architecture</h3>
+<!--l. 5--><p class="noindent" >The basic components of eTrice are depicted in the following diagram.
+</p><!--l. 7--><p class="noindent" ><img 
+src="images/200-components.jpg" alt="PIC"  
+ />
+</p><!--l. 10--><p class="noindent" >Additional to that the eTrice project comprises runtime libraries and unit tests which
+are treated in subsequent sections.
+</p><!--l. 12--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">16.1.1   </span> <a 
+ id="x73-12600016.1.1"></a>Editor and Generator Components</h4>
+     <ul class="itemize1">
+     <li class="itemize">core
+         <ul class="itemize2">
+         <li class="itemize">core.room is an Xtext based language called Room. It consists of
+         the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.core.room</span>. Room is the basic modeling
+         language of eTrice.
+                                                                  
+
+                                                                  
+         </li>
+         <li class="itemize">core.config is an Xtext based language called Config. It consists of the
+         plug-in <span 
+class="ecti-1000">org.eclipse.etrice.core.config</span>. Config is a language designed
+         for the data configuration of model elements. E.g. class and instance
+         attributes can be specified.
+         </li>
+         <li class="itemize">core.genmodel is an EMF based aggregation layer for Room models.
+         It  consists  of  the  plugin  <span 
+class="ecti-1000">org.eclipse.etrice.core.genmodel</span>.  a  Room
+         model can be transformed into a genmodel which allows easy access
+         to implicit relations of the Room model.</li></ul>
+     </li>
+     <li class="itemize">ui
+         <ul class="itemize2">
+         <li class="itemize">textual
+             <ul class="itemize3">
+             <li class="itemize">room.ui is the ui counterpart of core.room. It consists of the
+             plug-in <span 
+class="ecti-1000">org.eclipse.etrice.core.room.ui</span>. This plug-in realizes IDE
+             concepts  like  content  assist,  error  markers  and  navigation  by
+             hyper links for the Room language.
+             </li>
+             <li class="itemize">config.ui is the ui counterpart of core.config. It consists of the
+             plug-in <span 
+class="ecti-1000">org.eclipse.etrice.core.config.ui</span>. This plug-in realizes IDE
+             concepts  like  content  assist,  error  markers  and  navigation  by
+             hyper links for the Config language.</li></ul>
+         </li>
+         <li class="itemize">graphical
+             <ul class="itemize3">
+             <li class="itemize">ui.common is a set of common code for the two diagram editors.
+             It consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.ui.common</span>.
+             </li>
+             <li class="itemize">ui.commands  encapsulates  some  commands  related  to  the
+             navigation  between  eTrice  editors.  It  consists  of  the  plug-in
+             <span 
+class="ecti-1000">org.eclipse.etrice.ui.commands</span>.
+             </li>
+             <li class="itemize">ui.structure is the Graphiti based editor for the Actor structure.
+             It consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.ui.structure</span>.
+             </li>
+             <li class="itemize">ui.behavior is the Graphiti based editor for the Actor behavior.
+             It consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.ui.behavior</span>.</li></ul>
+         </li></ul>
+     </li>
+     <li class="itemize">generators
+         <ul class="itemize2">
+         <li class="itemize">generator is a set of general classes and language independent parts
+         of all generators. It consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.generator</span>.
+                                                                  
+
+                                                                  
+         </li>
+         <li class="itemize">generator.c  is  the  generator  for  the  ANSI-C  target  language.  It
+         consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.generator.c</span>.
+         </li>
+         <li class="itemize">generator.java  is  the  generator  for  the  Java  target  language.  It
+         consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.generator.java</span>.
+         </li>
+         <li class="itemize">generator.doc  is  the  generator  for  the  model  documentation.  It
+         consists of the plug-in <span 
+class="ecti-1000">org.eclipse.etrice.generator.doc</span>.</li></ul>
+     </li></ul>
+<!--l. 50--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">16.1.2   </span> <a 
+ id="x73-12700016.1.2"></a>Runtimes</h4>
+<!--l. 52--><p class="noindent" >Currently eTrice ships with a C and a Java runtime. The runtimes are libraries
+written in the target language against which the generated code is compiled.
+</p><!--l. 54--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">16.1.3   </span> <a 
+ id="x73-12800016.1.3"></a>Unit Tests</h4>
+<!--l. 56--><p class="noindent" >Most plug-ins and other parts of the code have related unit tests.
+                                                                  
+
+                                                                  
+</p>
+<!--l. 58--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse56.html" >next</a>] [<a 
+href="etrice-docch16.html" >prev</a>] [<a 
+href="etrice-docch16.html#tailetrice-docch16.html" >prev-tail</a>] [<a 
+href="etrice-docse55.html" >front</a>] [<a 
+href="etrice-docch16.html#etrice-docse55.html" >up</a>] </p></div>
+<!--l. 58--><p class="noindent" ><a 
+ id="tailetrice-docse55.html"></a> </p> 
+</body></html> 

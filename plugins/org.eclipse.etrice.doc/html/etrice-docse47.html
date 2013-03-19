@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Configuring Layout Options</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,3,next,html --> 
+<meta name="src" content="etrice-doc.tex" /> 
+<meta name="date" content="2013-03-25 22:23:00" /> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
+</head><body 
+>
+<!--l. 43--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse48.html" >next</a>] [<a 
+href="etrice-docse46.html" >prev</a>] [<a 
+href="etrice-docse46.html#tailetrice-docse46.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse47.html">tail</a>] [<a 
+href="etrice-docch11.html#etrice-docse47.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">11.4   </span> <a 
+ id="x60-10300011.4"></a>Configuring Layout Options</h3>
+<!--l. 46--><p class="noindent" >The values of the layout options for a particular diagram object (in the visible
+diagram) can be changed using the Layout View of that diagram object. The initial
+values are the predefined *default* values. These defaults can be changed using the
+context menu in Layout View as well as the Layout preference pages provided by
+eTrice.
+</p><!--l. 48--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">11.4.1   </span> <a 
+ id="x60-10400011.4.1"></a>The Layout View</h4>
+<!--l. 51--><p class="noindent" ><img 
+src="images/043-LayoutView.png" alt="PIC"  
+ />
+</p><!--l. 54--><p class="noindent" >The Layout view allows flexible customization of layout options for the selected
+objects in the eTrice diagram. If no object is selected, the view shows the options for
+the top-level container of the diagram. Options are stored persistently in diagram file
+(*.structure file / *.behavior file) of the eTrice diagram, so that they are still
+available after the next Eclipse restart. Of course this requires the diagram to be
+saved after an option was changed.
+</p><!--l. 56--><p class="noindent" >The options are grouped according to the function of the selected objects. The group
+Nodes (respectively Edges, Ports, or Labels) contains options related to the object
+itself, such as its size or priority, while the group Parents contains options for the
+elements contained in the selected objects, such as the applied layout algorithm or
+the spacing between elements. Which layout options are displayed depends on
+the types of selected objects and the active layout algorithm, since each
+algorithm supports only a subset of the available options. Furthermore, some
+options are only visible if the <span 
+class="ecti-1000">Show Advanced Properties </span>button in the view
+toolbar is activated. The group types can be hidden using the Show Categories
+button.
+</p><!--l. 58--><p class="noindent" >An option can be changed by selecting or entering a new value in the corresponding
+cell of the Value column.
+</p><!--l. 60--><p class="noindent" >The most important option is Layout Algorithm, which is used to determine the
+layout algorithm for the contents of the selected element. Here either a specific layout
+algorithm or a layout type can be chosen; in the latter case, the most suitable layout
+algorithm of the given type is taken. By changing the active layout algorithm, the
+content of the layout view is updated to display only those options that are
+supported by the new layout algorithm.
+                                                                  
+
+                                                                  
+</p><!--l. 62--><p class="noindent" >Selecting Restore Default Value in the context menu or the view toolbar removes any
+value for the currently selected option that is stored in the current model file, thus
+resetting the option to its default value. The view menu has an entry Remove all
+Layout Options which resets all options of the current model by removing persistent
+data in the model file.
+</p><!--l. 64--><p class="noindent" ><img 
+src="images/043-ContextMenu.png" alt="PIC"  
+ />
+</p><!--l. 67--><p class="noindent" >The context menu for a specific layout option has different alternatives to set the
+currently active value as <span 
+class="ecbx-1000">default </span>value: </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ecti-1000">Set as Default for this Diagram</span>: Changes the open diagram file so that the
+     same value is applied to all similar objects (edit parts) of that diagram.
+     </li>
+     <li class="itemize"><span 
+class="ecti-1000">Set as Default for ... in this Context</span>: Applies the value to all similar
+     objects that are displayed with the any of the eTrice editors (the option
+     is linked to the edit part class of the selected object).
+     </li>
+     <li class="itemize"><span 
+class="ecti-1000">Set as Default for all ...</span>: Links the option value with the domain model
+     element or the diagram type of the selected object (see the context menu
+     depicted above).</li></ul>
+<!--l. 76--><p class="noindent" >These four alternatives have different priorities: if present, the default value for the
+current diagram is taken first, then the default value for the edit part is checked, then
+the default value for the domain model element, and then the default value for the
+diagram type.
+</p><!--l. 78--><p class="noindent" >Tips: </p>
+     <ul class="itemize1">
+     <li class="itemize">The information button of the view toolbar can be used to display some
+     useful details on the current selection, such as the edit part and domain
+     model classes.
+     </li>
+     <li class="itemize">Default values for layout options can most easily be manipulated based
+     on the eTrice domain model elements.</li></ul>
+<!--l. 84--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">11.4.2   </span> <a 
+ id="x60-10500011.4.2"></a>Preference Page</h4>
+<!--l. 87--><p class="noindent" >The user-defined *default* values for layout options can also be set using the
+preference pages provided in eTrice. Three preference pages have been provided for
+this purpose </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ecti-1000">Layout</span>: for general preferences regarding layout
+                                                                  
+
+                                                                  
+     </li>
+     <li class="itemize"><span 
+class="ecti-1000">Behavior</span>: for setting default values of layout options for eTrice behavior
+     diagrams
+     </li>
+     <li class="itemize"><span 
+class="ecti-1000">Structure</span>: for setting default values of layout options for eTrice structure
+     diagrams</li></ul>
+<!--l. 94--><p class="noindent" >These preference pages can be accessed via <span 
+class="ecti-1000">Windows &#x003E; Preferences &#x003E; eTrice &#x003E;</span>
+<span 
+class="ecti-1000">Layout</span>.
+</p><!--l. 96--><p class="noindent" >Note that the contents of these preference pages are in sync with the <span 
+class="ecti-1000">KIELER &#x003E;</span>
+<span 
+class="ecti-1000">Layout </span>preference page provided by the KIELER. Relevant entries in the <span 
+class="ecti-1000">KIELER &#x003E;</span>
+<span 
+class="ecti-1000">Layout </span>page are shown in the above preference pages.
+</p><!--l. 98--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x60-10600011.4.2"></a><span 
+class="ecti-1000">Layout </span>Preference Page</h5>
+<!--l. 101--><p class="noindent" >The <span 
+class="ecti-1000">Layout </span>preference page is meant to configure general options regarding the
+layout.
+</p><!--l. 103--><p class="noindent" >If <span 
+class="ecti-1000">Set routing style of all edges to oblique </span>is active, all routing styles and smoothness
+settings of edges are removed when automatic layout is performed. Since most
+layouters compute the routing of edges as part of their algorithm, these styles usually
+do not yield the expected results.
+</p><!--l. 105--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x60-10700011.4.2"></a><span 
+class="ecti-1000">Behavior </span>and <span 
+class="ecti-1000">Structure </span>Preference Page</h5>
+<!--l. 108--><p class="noindent" >The <span 
+class="ecti-1000">Behavior </span>and <span 
+class="ecti-1000">Structure </span>sub-preference pages help in setting up the default
+values of layout options in behavior and structure diagrams respectively.
+</p><!--l. 110--><p class="noindent" >The <span 
+class="ecti-1000">Default Layout Option Values </span>table is used to manage the default setting for
+layout options, which can also be modified with the context menu of the
+layout view (see above). All user-defined settings are displayed here, and the
+buttons on the right of the table serve to create, edit, and remove entries. The
+Type column shows the type of element the option is linked with: either edit
+part, model element, or diagram type. The Element column shows the class
+name for options that relate to edit parts or domain model elements, and
+the diagram type name for options that relate to diagram types. Option is
+the name of the layout option, and Value is the currently set value of the
+option.
+</p><!--l. 112--><p class="noindent" >Creating a new entry requires the selection of the type of related element and
+entering its class name or identifier. Class names of edit parts can be explored using
+the information button of the layout view, while the class names for the
+domain model elements and the diagram type identifiers for the diagram
+types can be selected with the Browse button. After that, a layout option
+                                                                  
+
+                                                                  
+has to be selected from the list using the corresponding Browse button.
+Hitting OK creates an entry, and its value can then be set using the Edit
+button.
+</p><!--l. 114--><p class="noindent" ><img 
+src="images/043-PreferencePage.png" alt="PIC"  
+ />
+</p><!--l. 117--><p class="noindent" >Note that the <span 
+class="ecti-1000">Behavior </span>preference page will show only those entries which hold for
+the behavior diagrams. Moreover, it will allow setting default values of layout options
+for only those domain model elements and diagram types which could be present in
+the behavior editor diagrams. Similar thing holds for the <span 
+class="ecti-1000">Structure </span>preference
+page.
+                                                                  
+
+                                                                  
+</p>
+<!--l. 119--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse48.html" >next</a>] [<a 
+href="etrice-docse46.html" >prev</a>] [<a 
+href="etrice-docse46.html#tailetrice-docse46.html" >prev-tail</a>] [<a 
+href="etrice-docse47.html" >front</a>] [<a 
+href="etrice-docch11.html#etrice-docse47.html" >up</a>] </p></div>
+<!--l. 119--><p class="noindent" ><a 
+ id="tailetrice-docse47.html"></a>  </p> 
+</body></html> 
