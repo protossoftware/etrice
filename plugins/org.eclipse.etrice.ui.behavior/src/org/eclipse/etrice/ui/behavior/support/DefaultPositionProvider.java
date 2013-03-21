@@ -54,6 +54,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	
 	private HashMap<String, Position> obj2pos = new HashMap<String, Position>();
 	private HashMap<String, ArrayList<Position>> trans2points = new HashMap<String, ArrayList<Position>>();
+	private HashMap<String, StateGraph> initialPointObj = new HashMap<String, StateGraph>();
 	private double scaleX;
 	private double scaleY;
 	
@@ -85,6 +86,27 @@ public class DefaultPositionProvider implements IPositionProvider {
 		return pt;
 	}
 	
+	@Override
+	public PosAndSize getPosition(StateGraph graph) {
+		EObject container = graph.eContainer();
+		String path = "#init";
+		if(container instanceof StateGraphNode)
+			path = RoomNameProvider.getFullPath((StateGraphNode)container) + path;
+		Position pos = obj2pos.get(path);
+		
+		if (pos==null)
+			return null;
+		
+		int margin = getMargin(graph);
+		PosAndSize pt = new PosAndSize(
+			(int) (pos.x * scaleX) + margin,
+			(int) (pos.y * scaleY) + margin,
+			(int) (pos.sx * scaleX),
+			(int) (pos.sy * scaleY)
+		);
+		return pt;
+	}
+
 	public List<Pos> getPoints(Transition trans) {
 		ArrayList<Pos> result = new ArrayList<Pos>();
 		
@@ -187,19 +209,34 @@ public class DefaultPositionProvider implements IPositionProvider {
 				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
 					// this is the level of States, TrPoints and ChoicePoints
 					obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
+					GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
+					if(ga==null)
+						continue;
+					int margin = 0;
+					String path = null;
 					if (obj instanceof StateGraphNode) {
-						GraphicsAlgorithm ga = sgItemShape.getGraphicsAlgorithm();
-						if (ga!=null) {
-							int margin = getMargin((StateGraphNode) obj);
-							Position pos = new Position();
-							pos.x = ga.getX() / width;
-							pos.y = ga.getY() / height;
-							pos.sx = (ga.getWidth() - 2*margin) / width;
-							pos.sy = (ga.getHeight()- 2*margin) / height;
-							obj2pos.put(RoomNameProvider.getFullPath((StateGraphItem) obj), pos);
-						}
-						// Entry and Exit Points on State borders are treated by the insertion of the State
+						StateGraphNode node = (StateGraphNode)obj;
+						margin = getMargin(node);
+						path = RoomNameProvider.getFullPath((StateGraphItem) obj);						
+					} else if(obj instanceof StateGraph){
+						StateGraph graph = (StateGraph)obj;
+						margin = getMargin(graph);
+						EObject container = graph.eContainer();
+						path = "#init";
+						if(container instanceof StateGraphNode)
+							path = RoomNameProvider.getFullPath((StateGraphNode)container) + path;
+						initialPointObj.put(path, graph);
 					}
+					if(path != null){
+						Position pos = new Position();
+						pos.x = ga.getX() / width;
+						pos.y = ga.getY() / height;
+						pos.sx = (ga.getWidth() - 2*margin) / width;
+						pos.sy = (ga.getHeight()- 2*margin) / height;
+						obj2pos.put(path, pos);
+					}
+					
+					// Entry and Exit Points on State borders are treated by the insertion of the State
 				}
 			}
 		}
@@ -247,5 +284,17 @@ public class DefaultPositionProvider implements IPositionProvider {
 			return TrPointSupport.MARGIN;
 		
 		return 0;
+	}
+	
+	private int getMargin(StateGraph graph) {
+		return 0;
+	}
+	
+	public StateGraph getInitialPoint(StateGraph graph){
+		EObject container = graph.eContainer();
+		String path = "#init";
+		if(container instanceof StateGraphNode)
+			path = RoomNameProvider.getFullPath((StateGraphNode)container) + path;
+		return initialPointObj.get(path);
 	}
 }

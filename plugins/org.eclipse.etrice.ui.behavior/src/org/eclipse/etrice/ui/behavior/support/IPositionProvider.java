@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.List;
 
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
 
@@ -86,4 +87,16 @@ public interface IPositionProvider {
 	public PosAndSize getPosition(StateGraphNode node);
 	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
 	public List<Pos> getPoints(Transition trans);
+	/**
+	 * 
+	 * @param graph
+	 * @return position of inital point
+	 */
+	public PosAndSize getPosition(StateGraph graph);
+	
+	/**
+	 * @param graph
+	 * @return BO of initial point's shape. A super graph or given graph itself.
+	 */
+	public StateGraph getInitialPoint(StateGraph graph);
 }

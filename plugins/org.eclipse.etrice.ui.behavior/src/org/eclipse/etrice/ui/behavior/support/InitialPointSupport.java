@@ -17,6 +17,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
@@ -119,7 +120,7 @@ public class InitialPointSupport {
 							ContainerShape parent = context.getTargetContainer().getContainer();
 							if (! (parent instanceof StateGraph)) {
 								StateGraph sg = (StateGraph) obj;
-								for (Transition t : sg.getTransitions()) {
+								for (Transition t : RoomHelpers.getAllTransitions(sg)) {
 									if (t instanceof InitialTransition)
 										return false;
 								}
@@ -155,12 +156,7 @@ public class InitialPointSupport {
 				ContainerShape sgShape = context.getTargetContainer();
 				StateGraph sg = (StateGraph) context.getNewObject();
 	
-				boolean inherited = false;
-				for (Transition tr : sg.getTransitions()) {
-					if (tr instanceof InitialTransition) {
-						inherited = SupportUtil.isInherited(tr, sgShape);
-					}
-				}
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 				
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
