@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -149,22 +150,27 @@ public abstract class DiagramAccessBase {
 	private void updateDiagram(Diagram diagram, boolean doSave) {
 		ResourceSet rs = diagram.eResource().getResourceSet();
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
-		if (editingDomain == null) {
-			// Not yet existing, create one
-			editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
-		}
-		
-		Command updateCommand = getUpdateCommand(diagram, editingDomain);
-		if (updateCommand!=null) {
-			editingDomain.getCommandStack().execute(updateCommand);
+		try {
+			if (editingDomain == null) {
+				// Not yet existing, create one and start a write transaction
+				editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+				((TransactionalEditingDomainImpl)editingDomain).startTransaction(false, null);
+			}
 			
-			if (doSave) {
-				try {
-					diagram.eResource().save(Collections.EMPTY_MAP);
-				} catch (IOException e) {
-					e.printStackTrace();
+			Command updateCommand = getUpdateCommand(diagram, editingDomain);
+			if (updateCommand!=null) {
+				editingDomain.getCommandStack().execute(updateCommand);
+				
+				if (doSave) {
+					try {
+						diagram.eResource().save(Collections.EMPTY_MAP);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
+		}
+		catch (InterruptedException e) {
 		}
 		
 		editingDomain.dispose();
