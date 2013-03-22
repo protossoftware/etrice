@@ -155,12 +155,7 @@ public class InitialPointSupport {
 				ContainerShape sgShape = context.getTargetContainer();
 				StateGraph sg = (StateGraph) context.getNewObject();
 	
-				boolean inherited = false;
-				for (Transition tr : sg.getTransitions()) {
-					if (tr instanceof InitialTransition) {
-						inherited = SupportUtil.isInherited(tr, sgShape);
-					}
-				}
+				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
 				
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
