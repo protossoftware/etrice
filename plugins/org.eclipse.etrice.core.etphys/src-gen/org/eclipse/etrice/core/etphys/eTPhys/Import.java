@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The import declares an imported model (given as a URI) and
+ * an optional imported namespace.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +32,12 @@ public interface Import extends EObject
   /**
    * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imported Namespace</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The imported name space has to be a dot separated qualified name followed by .*.
+   * Example: my.namespace.*
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Imported Namespace</em>' attribute.
    * @see #setImportedNamespace(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getImport_ImportedNamespace()
@@ -52,11 +59,21 @@ public interface Import extends EObject
   /**
    * Returns the value of the '<em><b>Import URI</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Import URI</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The import URI can be a relative or absolute file system path.
+   * It may contain environment variables in ${} which will be expanded.
+   * <p>
+   * Examples:
+   * <ul>
+   *   <li>import model "AnotherModel.room"</li>
+   *   <li>import my.namespace.* from "AnotherModel.room"</li>
+   *   <li>import my.namespace.* from "../../AnotherProject/models/AnotherModel.room"</li>
+   *   <li>import my.namespace.* from "/${ROOM_MODELS}/SomeModel.room"</li>
+   * </ul>
+   * </p>
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Import URI</em>' attribute.
    * @see #setImportURI(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getImport_ImportURI()

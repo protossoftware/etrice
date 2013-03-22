@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Physical Thread</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This defines a physical thread running in a node.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,11 +36,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Default</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Default</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If this is {@code true} then this is the default thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Default</em>' attribute.
    * @see #setDefault(boolean)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Default()
@@ -57,11 +62,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the thread by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Name()
@@ -84,11 +89,11 @@ public interface PhysicalThread extends EObject
    * Returns the value of the '<em><b>Execmode</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.etrice.core.etphys.eTPhys.ExecMode}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Execmode</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the execution mode of the thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Execmode</em>' attribute.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ExecMode
    * @see #setExecmode(ExecMode)
@@ -112,11 +117,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Prio</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Prio</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the priority of the thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Prio</em>' attribute.
    * @see #setPrio(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Prio()
@@ -138,11 +143,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Stacksize</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Stacksize</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the stacksize of the thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Stacksize</em>' attribute.
    * @see #setStacksize(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Stacksize()
@@ -164,11 +169,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Msgblocksize</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msgblocksize</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the msgblocksize of the thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msgblocksize</em>' attribute.
    * @see #setMsgblocksize(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Msgblocksize()
@@ -190,11 +195,11 @@ public interface PhysicalThread extends EObject
   /**
    * Returns the value of the '<em><b>Msgpoolsize</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msgpoolsize</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the msgpoolsize of the thread.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msgpoolsize</em>' attribute.
    * @see #setMsgpoolsize(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Msgpoolsize()

@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Runtime Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This defines a runtime class.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -27,11 +32,11 @@ public interface RuntimeClass extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the runtime class by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getRuntimeClass_Name()
@@ -53,11 +58,11 @@ public interface RuntimeClass extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getRuntimeClass_Docu()
@@ -80,11 +85,11 @@ public interface RuntimeClass extends EObject
    * Returns the value of the '<em><b>Thread Model</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.etrice.core.etphys.eTPhys.ThreadModel}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Thread Model</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This distinguishes single and multi threaded.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Thread Model</em>' attribute.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ThreadModel
    * @see #setThreadModel(ThreadModel)

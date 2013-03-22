@@ -11,6 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Physical System</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This model object represents a complete physical system.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -29,11 +34,11 @@ public interface PhysicalSystem extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the physical system by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalSystem_Name()
@@ -55,11 +60,11 @@ public interface PhysicalSystem extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalSystem_Docu()
@@ -82,11 +87,11 @@ public interface PhysicalSystem extends EObject
    * Returns the value of the '<em><b>Node Refs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.NodeRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Node Refs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * A list of referenced nodes.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Node Refs</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalSystem_NodeRefs()
    * @model containment="true"

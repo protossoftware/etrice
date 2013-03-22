@@ -11,6 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Physical Model</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The root object for the physical model. It gives access to the systems, node classes
+ * and runtimes defined.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,11 +37,12 @@ public interface PhysicalModel extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The model name is a dot separated fully qualified name and is
+   * used to provide a name space.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel_Name()
@@ -58,11 +65,11 @@ public interface PhysicalModel extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * A list of all imported models.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel_Imports()
    * @model containment="true"
@@ -74,11 +81,11 @@ public interface PhysicalModel extends EObject
    * Returns the value of the '<em><b>Systems</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Systems</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * A list of all defined physical systems.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Systems</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel_Systems()
    * @model containment="true"
@@ -90,11 +97,11 @@ public interface PhysicalModel extends EObject
    * Returns the value of the '<em><b>Node Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Node Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * A list of all defined node classes.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Node Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel_NodeClasses()
    * @model containment="true"
@@ -106,11 +113,11 @@ public interface PhysicalModel extends EObject
    * Returns the value of the '<em><b>Runtime Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Runtime Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * A list of all defined runtime classes.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Runtime Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel_RuntimeClasses()
    * @model containment="true"

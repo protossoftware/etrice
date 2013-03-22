@@ -11,6 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Documentation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A piece of documentation that can be optionally attached at
+ * certain places in the model.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +34,11 @@ public interface Documentation extends EObject
    * Returns the value of the '<em><b>Text</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Text</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the documentation's contents.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Text</em>' attribute list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getDocumentation_Text()
    * @model unique="false"

@@ -11,6 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Node Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This defines a node class.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,11 +37,11 @@ public interface NodeClass extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the node class by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Name()
@@ -58,11 +63,11 @@ public interface NodeClass extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Docu()
@@ -84,11 +89,11 @@ public interface NodeClass extends EObject
   /**
    * Returns the value of the '<em><b>Runtime</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Runtime</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the associated runtime class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Runtime</em>' reference.
    * @see #setRuntime(RuntimeClass)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Runtime()
@@ -110,11 +115,11 @@ public interface NodeClass extends EObject
   /**
    * Returns the value of the '<em><b>Priomin</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Priomin</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the minimal thread priority for this node type.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Priomin</em>' attribute.
    * @see #setPriomin(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomin()
@@ -136,11 +141,11 @@ public interface NodeClass extends EObject
   /**
    * Returns the value of the '<em><b>Priomax</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Priomax</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the maximum thread priority for this node type.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Priomax</em>' attribute.
    * @see #setPriomax(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomax()
@@ -163,11 +168,11 @@ public interface NodeClass extends EObject
    * Returns the value of the '<em><b>Threads</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Threads</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all threads defined for this node.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Threads</em>' containment reference list.
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Threads()
    * @model containment="true"
