@@ -40,8 +40,7 @@ public interface ActorInstance extends StructureInstance {
 	 * Returns the value of the '<em><b>Actor Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Actor Class</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * This is the actor class of which this is an instance.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actor Class</em>' reference.
