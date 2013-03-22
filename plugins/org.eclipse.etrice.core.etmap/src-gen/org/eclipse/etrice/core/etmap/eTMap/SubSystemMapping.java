@@ -15,6 +15,12 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * A representation of the model object '<em><b>Sub System Mapping</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the mapping of a sub system (defined in a ROOM model) to a
+ * node (defined in a physical model).
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,11 +39,11 @@ public interface SubSystemMapping extends EObject
   /**
    * Returns the value of the '<em><b>Logical Sub Sys</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Logical Sub Sys</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the logical sub system being mapped.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Sub Sys</em>' reference.
    * @see #setLogicalSubSys(SubSystemRef)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping_LogicalSubSys()
@@ -59,11 +65,11 @@ public interface SubSystemMapping extends EObject
   /**
    * Returns the value of the '<em><b>Node</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Node</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the node being mapped to.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Node</em>' reference.
    * @see #setNode(NodeRef)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping_Node()
@@ -86,11 +92,11 @@ public interface SubSystemMapping extends EObject
    * Returns the value of the '<em><b>Thread Mappings</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Thread Mappings</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of nested mappings of logical to physical threads.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Thread Mappings</em>' containment reference list.
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping_ThreadMappings()
    * @model containment="true"

@@ -13,6 +13,12 @@ import org.eclipse.etrice.core.room.LogicalThread;
  * A representation of the model object '<em><b>Thread Mapping</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the mapping of a logical thread (defined in a ROOM model) to a
+ * physical thread (defined in a physical model).
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -30,11 +36,11 @@ public interface ThreadMapping extends EObject
   /**
    * Returns the value of the '<em><b>Logical Thread</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Logical Thread</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the logical thread being mapped.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Thread</em>' reference.
    * @see #setLogicalThread(LogicalThread)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getThreadMapping_LogicalThread()
@@ -56,11 +62,11 @@ public interface ThreadMapping extends EObject
   /**
    * Returns the value of the '<em><b>Physical Thread</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Physical Thread</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the physical thread being mapped to.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Physical Thread</em>' reference.
    * @see #setPhysicalThread(PhysicalThread)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getThreadMapping_PhysicalThread()

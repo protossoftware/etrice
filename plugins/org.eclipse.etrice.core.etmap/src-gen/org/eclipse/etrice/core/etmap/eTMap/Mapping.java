@@ -15,6 +15,12 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  * A representation of the model object '<em><b>Mapping</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the mapping of a logical system (defined in a ROOM model) to a
+ * physical system (defined in a physical model).
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,11 +39,11 @@ public interface Mapping extends EObject
   /**
    * Returns the value of the '<em><b>Logical Sys</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Logical Sys</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the logical system being mapped.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Sys</em>' reference.
    * @see #setLogicalSys(LogicalSystem)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getMapping_LogicalSys()
@@ -59,11 +65,11 @@ public interface Mapping extends EObject
   /**
    * Returns the value of the '<em><b>Physical Sys</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Physical Sys</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the physical system being mapped to.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Physical Sys</em>' reference.
    * @see #setPhysicalSys(PhysicalSystem)
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getMapping_PhysicalSys()
@@ -86,11 +92,11 @@ public interface Mapping extends EObject
    * Returns the value of the '<em><b>Subsys Mappings</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Subsys Mappings</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of nested mappings of the sub systems of this system.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Subsys Mappings</em>' containment reference list.
    * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getMapping_SubsysMappings()
    * @model containment="true"
