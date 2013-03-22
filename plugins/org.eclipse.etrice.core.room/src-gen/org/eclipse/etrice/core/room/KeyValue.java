@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Key Value</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A key/value pair.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +31,11 @@ public interface KeyValue extends EObject
   /**
    * Returns the value of the '<em><b>Key</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Key</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the key of the pair.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Key</em>' attribute.
    * @see #setKey(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue_Key()
@@ -52,11 +57,11 @@ public interface KeyValue extends EObject
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the value of the pair.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Value</em>' attribute.
    * @see #setValue(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue_Value()

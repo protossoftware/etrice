@@ -8,6 +8,15 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>State</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link SimpleState}</li>
+ *   <li>{@link RefinedState}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +37,11 @@ public interface State extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getState_Docu()
@@ -54,11 +63,12 @@ public interface State extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Entry Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Entry Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional entry code written in the code generator's target language.
+   * It is executed when the state is entered.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Entry Code</em>' containment reference.
    * @see #setEntryCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getState_EntryCode()
@@ -80,11 +90,12 @@ public interface State extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Exit Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Exit Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional entry code written in the code generator's target language.
+   * It is executed when the state is left.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Exit Code</em>' containment reference.
    * @see #setExitCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getState_ExitCode()
@@ -106,11 +117,13 @@ public interface State extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Do Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Do Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional do code written in the code generator's target language.
+   * It is executed whenever the actor instance is polled (applies only to
+   * data driven and sync actor classes).
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Do Code</em>' containment reference.
    * @see #setDoCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getState_DoCode()
@@ -132,11 +145,11 @@ public interface State extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Subgraph</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Subgraph</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional sub state graph of this state.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Subgraph</em>' containment reference.
    * @see #setSubgraph(StateGraph)
    * @see org.eclipse.etrice.core.room.RoomPackage#getState_Subgraph()

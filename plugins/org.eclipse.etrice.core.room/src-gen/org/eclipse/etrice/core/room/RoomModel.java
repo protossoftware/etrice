@@ -72,11 +72,11 @@ public interface RoomModel extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Docu()
@@ -99,11 +99,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all imported models.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Imports()
    * @model containment="true"
@@ -115,11 +115,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Primitive Types</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.PrimitiveType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Primitive Types</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all primitive types defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Primitive Types</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_PrimitiveTypes()
    * @model containment="true"
@@ -131,11 +131,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>External Types</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ExternalType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>External Types</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all external types defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>External Types</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_ExternalTypes()
    * @model containment="true"
@@ -147,11 +147,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Data Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.DataClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Data Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all data classes defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Data Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_DataClasses()
    * @model containment="true"
@@ -163,11 +163,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Protocol Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.GeneralProtocolClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Protocol Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all protocol classes defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_ProtocolClasses()
    * @model containment="true"
@@ -179,11 +179,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Actor Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ActorClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actor Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all actor classes defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_ActorClasses()
    * @model containment="true"
@@ -195,11 +195,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Sub System Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub System Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all sub system classes defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sub System Classes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_SubSystemClasses()
    * @model containment="true"
@@ -211,11 +211,11 @@ public interface RoomModel extends EObject
    * Returns the value of the '<em><b>Systems</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.LogicalSystem}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Systems</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all logical systems defined by this model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Systems</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Systems()
    * @model containment="true"

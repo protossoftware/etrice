@@ -8,6 +8,12 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>State Terminal</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The terminal point (source or target) of a transition ending
+ * at a {@link State}.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +30,11 @@ public interface StateTerminal extends TransitionTerminal
   /**
    * Returns the value of the '<em><b>State</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the target state.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>State</em>' reference.
    * @see #setState(State)
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateTerminal_State()

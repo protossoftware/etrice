@@ -9,6 +9,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Binding</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A binding connects two {@link Port}s.
+ * To be able to distinguish the ports of two {@link ActorContainerRef}s of the same type
+ * a {@link BindingEndPoint} is needed for disambiguation.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +33,11 @@ public interface Binding extends EObject
   /**
    * Returns the value of the '<em><b>Endpoint1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Endpoint1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The first end point of a binding.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Endpoint1</em>' containment reference.
    * @see #setEndpoint1(BindingEndPoint)
    * @see org.eclipse.etrice.core.room.RoomPackage#getBinding_Endpoint1()
@@ -52,11 +59,11 @@ public interface Binding extends EObject
   /**
    * Returns the value of the '<em><b>Endpoint2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Endpoint2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The second end point of a binding.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Endpoint2</em>' containment reference.
    * @see #setEndpoint2(BindingEndPoint)
    * @see org.eclipse.etrice.core.room.RoomPackage#getBinding_Endpoint2()

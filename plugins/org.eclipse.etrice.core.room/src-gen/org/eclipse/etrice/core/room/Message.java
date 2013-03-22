@@ -9,6 +9,15 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Message</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
+ * For event driven protocols the message is an object that is deliverd using a message
+ * service of the runtime. For data driven systems only messages holding data are valid. In this
+ * case the conjugate port is the one holding (and writing) the data and the regular port is
+ * reading the data.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +37,12 @@ public interface Message extends EObject
   /**
    * Returns the value of the '<em><b>Priv</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Priv</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If this flag is {@code true} then the message is treated as private for this protocol
+   * and can only be sent by a PortClass.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Priv</em>' attribute.
    * @see #setPriv(boolean)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Priv()
@@ -54,11 +64,11 @@ public interface Message extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the message is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Name()
@@ -80,11 +90,11 @@ public interface Message extends EObject
   /**
    * Returns the value of the '<em><b>Data</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Data</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a reference to optional message data.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Data</em>' containment reference.
    * @see #setData(VarDecl)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Data()
@@ -106,11 +116,11 @@ public interface Message extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Docu()

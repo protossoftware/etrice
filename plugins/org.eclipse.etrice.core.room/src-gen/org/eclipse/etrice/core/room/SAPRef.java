@@ -8,6 +8,17 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>SAP Ref</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A service access point is similar to a {@link Port} but is not explicitly bound to a peer.
+ * Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the
+ * containing actors.
+ * 
+ * <p>
+ * An SAP is associated with a {@link ProtocolClass} and is conjugate to this protocol.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +35,11 @@ public interface SAPRef extends InterfaceItem
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Protocol</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the SAPRef's protocol class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.
    * @see #setProtocol(ProtocolClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSAPRef_Protocol()

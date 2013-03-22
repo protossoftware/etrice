@@ -9,6 +9,15 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>External Port</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An external port is part of the actor structure and references an interface port.
+ * An interface port which is referenced by an external port is an external end port.
+ * If it is not referenced it is a relay port.
+ * 
+ * @see {@link Port}
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,11 +34,11 @@ public interface ExternalPort extends EObject
   /**
    * Returns the value of the '<em><b>Ifport</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ifport</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced interface port of the actor class which is now an external end port.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ifport</em>' reference.
    * @see #setIfport(Port)
    * @see org.eclipse.etrice.core.room.RoomPackage#getExternalPort_Ifport()

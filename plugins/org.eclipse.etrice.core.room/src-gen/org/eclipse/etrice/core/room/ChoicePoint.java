@@ -8,6 +8,17 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Choice Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A choice point corresponds to an {@code if else} construct.
+ * It is the target of one or more {@link Transition}s and the
+ * source of several {@link Transition}s.
+ * One outgoing transitions must be a {@link ContinuationTransition}
+ * and corresponds to the final else. It is called the
+ * <em>default branch</em> of the choice point.
+ * All other outgoing transitions have to be {@link CPBranchTransition}s.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,11 +36,11 @@ public interface ChoicePoint extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the choice point is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getChoicePoint_Name()
@@ -51,11 +62,11 @@ public interface ChoicePoint extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getChoicePoint_Docu()

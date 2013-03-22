@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Service Implementation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s
+ * that are bound to it following the service resolution logic.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,11 +31,11 @@ public interface ServiceImplementation extends EObject
   /**
    * Returns the value of the '<em><b>Spp</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Spp</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the SPP connected to the service.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Spp</em>' reference.
    * @see #setSpp(SPPRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getServiceImplementation_Spp()

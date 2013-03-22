@@ -11,6 +11,15 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Semantics Rule</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link InSemanticsRule}</li>
+ *   <li>{@link OutSemanticsRule}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +37,11 @@ public interface SemanticsRule extends EObject
   /**
    * Returns the value of the '<em><b>Msg</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msg</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The message to which this rule applies.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msg</em>' reference.
    * @see #setMsg(Message)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSemanticsRule_Msg()
@@ -55,11 +64,11 @@ public interface SemanticsRule extends EObject
    * Returns the value of the '<em><b>Follow Ups</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SemanticsRule}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Follow Ups</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The possible follow up rules.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Follow Ups</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getSemanticsRule_FollowUps()
    * @model containment="true"

@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Refable Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is a type with an optional reference attribute.
+ * If 'ref' is {@code true} then by reference semantic is chosen.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +32,11 @@ public interface RefableType extends EObject
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the data type.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(DataType)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefableType_Type()
@@ -52,11 +58,11 @@ public interface RefableType extends EObject
   /**
    * Returns the value of the '<em><b>Ref</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If {@code true} then by reference semantics is chosen, by value semantics else.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' attribute.
    * @see #setRef(boolean)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefableType_Ref()

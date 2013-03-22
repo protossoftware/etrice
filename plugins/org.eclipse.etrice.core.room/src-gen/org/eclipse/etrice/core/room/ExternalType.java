@@ -8,6 +8,12 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>External Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An external type is not defined in the ROOM model
+ * but only referenced. It can not be instantiated.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,11 +31,11 @@ public interface ExternalType extends ComplexType
   /**
    * Returns the value of the '<em><b>Target Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the type name in the target language.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Target Name</em>' attribute.
    * @see #setTargetName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getExternalType_TargetName()
@@ -51,11 +57,11 @@ public interface ExternalType extends ComplexType
   /**
    * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional default value literal.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.
    * @see #setDefaultValueLiteral(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getExternalType_DefaultValueLiteral()

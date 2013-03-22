@@ -8,6 +8,12 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Sub System Ref</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A means to compose {@link LogicalSystem}s of {@link SubSystemClass}es. Each ref will
+ * be turned into a sub system instance of the referenced type.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +30,11 @@ public interface SubSystemRef extends ActorContainerRef
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The type of the reference.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(SubSystemClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSubSystemRef_Type()

@@ -11,6 +11,17 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Port Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A port class can be specified to customize the behavior of a {@link ProtocolClass}.
+ * There can be one for regular ports and another one for conjugate ports independently.
+ * 
+ * <p>
+ * Port classes can be used to define attributes and operations and message handlers
+ * (or interceptors).
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -30,11 +41,11 @@ public interface PortClass extends EObject
   /**
    * Returns the value of the '<em><b>User Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code</em>' containment reference.
    * @see #setUserCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_UserCode()
@@ -57,11 +68,11 @@ public interface PortClass extends EObject
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of attributes of this nested class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_Attributes()
    * @model containment="true"
@@ -73,11 +84,11 @@ public interface PortClass extends EObject
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.PortOperation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of operations of this nested class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_Operations()
    * @model containment="true"
@@ -89,11 +100,11 @@ public interface PortClass extends EObject
    * Returns the value of the '<em><b>Msg Handlers</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.MessageHandler}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msg Handlers</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of message handlers.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msg Handlers</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_MsgHandlers()
    * @model containment="true"

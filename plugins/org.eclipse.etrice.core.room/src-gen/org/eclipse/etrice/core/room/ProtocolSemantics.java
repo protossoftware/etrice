@@ -11,6 +11,18 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Protocol Semantics</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An optional semantics specification as part of a {@link ProtocolClass}.
+ * The semantic is defined as a <em>legal execution tree</em>.
+ * This tree is composed of incoming and outgoing messages and each path through
+ * this tree is a valid sequence of messages exchanged through a port instance.
+ * 
+ * <p>
+ * The semantics are composed using {@link SemanticsRule]s.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +40,11 @@ public interface ProtocolSemantics extends EObject
    * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SemanticsRule}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of semantic rules.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Rules</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolSemantics_Rules()
    * @model containment="true"

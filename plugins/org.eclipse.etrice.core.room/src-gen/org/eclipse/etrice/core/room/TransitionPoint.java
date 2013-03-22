@@ -8,6 +8,16 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Transition Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A transition point is located at the border of a {@link State}
+ * and is not visible or accessible outside. It is used
+ * to globally handle messages. If a {@link Transition} starting
+ * at a transition point triggers then exit and entry codes
+ * are executed as usual as long as the handler flag of the
+ * transition point isn't set.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +34,12 @@ public interface TransitionPoint extends TrPoint
   /**
    * Returns the value of the '<em><b>Handler</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Handler</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If this flag is {@code true} then for a transition triggerd from this point
+   * no exit and entry codes of the states left and entered are executed.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Handler</em>' attribute.
    * @see #setHandler(boolean)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTransitionPoint_Handler()

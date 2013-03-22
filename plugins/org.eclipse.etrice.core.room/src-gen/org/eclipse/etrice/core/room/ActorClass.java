@@ -9,6 +9,43 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Actor Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Together with {@link ProtocolClass} and {@link DataClass} one of
+ * the main class types of the ROOM language.
+ * 
+ * <p>
+ * The actor class in ROOM has three compartments which aren't represented as separate model objects.
+ * To understand to which compartment an attribute or reference belongs to here is a list
+ * <ul>
+ *   <li>Interface: everything which is visible from the outside from a model point of view
+ *   <ul>
+ *     <li>{@link #getIfPorts}: a list of all interface {@link Port}s</li>
+ *     <li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s</li>
+ *   </ul>
+ *   <li>Structure: all internal structural aspects of an actor class</li>
+ *   <ul>
+ *     <li>{@link #getUsercode1}-3: user defined code with generator dependent meaning</li>
+ *     <li>{@link #getIntPorts}: a list of all internal end {@link Port}s</li>
+ *     <li>{@link #getExtPorts}: a list of all {@link ExternalPort}s (the interface ports that
+ *        are end ports, not relay ports</li>
+ *     <li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s</li>
+ *     <li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class</li>
+ *     <li>{@link #getAttributes}: a list of all actor class {@link Attribute}s</li>
+ *     <li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}
+ *        has the meaning of a composition)</li>
+ *     <li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class</li>
+ *     <li>{@link #getConnections}: a list of all {@link LayerConnections}</li>
+ *   </ul>
+ *   <li>Behavior: the behavioral aspects of an actor class</li>
+ *   <ul>
+ *     <li>{@link #getOperations}: a list of {@link Operation}s</li>
+ *     <li>{@link #getStateMachine}: the {@link StateMachine} definition</li>
+ *   </ul>
+ * </ul>
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -38,11 +75,12 @@ public interface ActorClass extends ActorContainerClass
   /**
    * Returns the value of the '<em><b>Abstract</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If {@code true} this actor class can not be instantiated and can only be base class
+   * for other actor classes.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Abstract</em>' attribute.
    * @see #setAbstract(boolean)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Abstract()
@@ -65,11 +103,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Comm Type</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.etrice.core.room.ActorCommunicationType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Comm Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The communication type of this actor class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Comm Type</em>' attribute.
    * @see org.eclipse.etrice.core.room.ActorCommunicationType
    * @see #setCommType(ActorCommunicationType)
@@ -93,11 +131,12 @@ public interface ActorClass extends ActorContainerClass
   /**
    * Returns the value of the '<em><b>Base</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Base</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The base class from which all attributes, operations, ports, SAPs
+   * and state machine are inherited.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Base</em>' reference.
    * @see #setBase(ActorClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Base()
@@ -120,11 +159,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>If Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>If Ports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list containing all ports of the actor interface.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>If Ports</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_IfPorts()
    * @model containment="true"
@@ -135,11 +174,11 @@ public interface ActorClass extends ActorContainerClass
   /**
    * Returns the value of the '<em><b>Structure Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Structure Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation of the actor structure.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Structure Docu</em>' containment reference.
    * @see #setStructureDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StructureDocu()
@@ -162,11 +201,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Int Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int Ports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list containing all ports of the actor structure (internal end ports).
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Int Ports</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_IntPorts()
    * @model containment="true"
@@ -178,11 +217,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Ext Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ExternalPort}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ext Ports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list containing all ports of the actor interface that are end ports.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ext Ports</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ExtPorts()
    * @model containment="true"
@@ -194,11 +233,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Service Implementations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ServiceImplementation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Service Implementations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all service implementations.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Service Implementations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ServiceImplementations()
    * @model containment="true"
@@ -210,11 +249,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Str SA Ps</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SAPRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Str SA Ps</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all SAPs.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Str SA Ps</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StrSAPs()
    * @model containment="true"
@@ -226,11 +265,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all actor class private attributes.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Attributes()
    * @model containment="true"
@@ -241,11 +280,11 @@ public interface ActorClass extends ActorContainerClass
   /**
    * Returns the value of the '<em><b>Behavior Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Behavior Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation of the actor behavior.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Behavior Docu</em>' containment reference.
    * @see #setBehaviorDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_BehaviorDocu()
@@ -268,11 +307,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Behavior Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Behavior Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of annotations to the actor behavior.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Behavior Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_BehaviorAnnotations()
    * @model containment="true"
@@ -284,11 +323,11 @@ public interface ActorClass extends ActorContainerClass
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all private operations of this actor class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Operations()
    * @model containment="true"
@@ -299,11 +338,11 @@ public interface ActorClass extends ActorContainerClass
   /**
    * Returns the value of the '<em><b>State Machine</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State Machine</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the actor's optional state machine.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>State Machine</em>' containment reference.
    * @see #setStateMachine(StateGraph)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StateMachine()

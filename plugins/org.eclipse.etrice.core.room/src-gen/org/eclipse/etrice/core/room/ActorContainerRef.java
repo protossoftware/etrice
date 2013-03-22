@@ -9,6 +9,16 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Actor Container Ref</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link SubSystemRef}</li>
+ *   <li>{@link ActorRef}</li>
+ * </ul>
+ * The reference designates a specific role of the referenced structure class.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +36,11 @@ public interface ActorContainerRef extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the actor container reference is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Name()
@@ -52,11 +62,11 @@ public interface ActorContainerRef extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerRef_Docu()

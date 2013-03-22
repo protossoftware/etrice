@@ -8,6 +8,16 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Non Initial Transition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link TransitionChainStartTransition}</li>
+ *   <li>{@link ContinuationTransition}</li>
+ *   <li>{@link CPBranchTransition}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +34,11 @@ public interface NonInitialTransition extends Transition
   /**
    * Returns the value of the '<em><b>From</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>From</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the source node of the transition.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>From</em>' containment reference.
    * @see #setFrom(TransitionTerminal)
    * @see org.eclipse.etrice.core.room.RoomPackage#getNonInitialTransition_From()

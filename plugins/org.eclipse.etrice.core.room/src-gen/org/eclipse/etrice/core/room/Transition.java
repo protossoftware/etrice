@@ -8,6 +8,15 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Transition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link InitialTransition}</li>
+ *   <li>{@link NonInitialTransition}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -27,11 +36,11 @@ public interface Transition extends StateGraphItem
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional name of the transition.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTransition_Name()
@@ -53,11 +62,11 @@ public interface Transition extends StateGraphItem
   /**
    * Returns the value of the '<em><b>To</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>To</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the target node of the transition.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>To</em>' containment reference.
    * @see #setTo(TransitionTerminal)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTransition_To()
@@ -79,11 +88,11 @@ public interface Transition extends StateGraphItem
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTransition_Docu()
@@ -105,11 +114,12 @@ public interface Transition extends StateGraphItem
   /**
    * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional code in the code generator's target language.
+   * It is execute when the transition fires.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
    * @see #setAction(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTransition_Action()

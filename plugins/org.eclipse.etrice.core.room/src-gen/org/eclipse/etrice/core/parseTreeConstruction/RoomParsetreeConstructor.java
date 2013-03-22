@@ -166,7 +166,7 @@ protected class RoomModel_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "RoomModel"
 protected class RoomModel_RoomModelKeyword_0 extends KeywordToken  {
 	
 	public RoomModel_RoomModelKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -187,7 +187,7 @@ protected class RoomModel_RoomModelKeyword_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// name=FQN
 protected class RoomModel_NameAssignment_1 extends AssignmentToken  {
 	
 	public RoomModel_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -221,7 +221,7 @@ protected class RoomModel_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// docu=Documentation?
 protected class RoomModel_DocuAssignment_2 extends AssignmentToken  {
 	
 	public RoomModel_DocuAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -267,7 +267,7 @@ protected class RoomModel_DocuAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "{"
 protected class RoomModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public RoomModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -290,7 +290,7 @@ protected class RoomModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// imports+=Import*
 protected class RoomModel_ImportsAssignment_4 extends AssignmentToken  {
 	
 	public RoomModel_ImportsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1772,7 +1772,7 @@ protected class PrimitiveType_TypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "->"
 protected class PrimitiveType_HyphenMinusGreaterThanSignKeyword_4 extends KeywordToken  {
 	
 	public PrimitiveType_HyphenMinusGreaterThanSignKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1794,7 +1794,7 @@ protected class PrimitiveType_HyphenMinusGreaterThanSignKeyword_4 extends Keywor
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// targetName=FQN
 protected class PrimitiveType_TargetNameAssignment_5 extends AssignmentToken  {
 	
 	public PrimitiveType_TargetNameAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1828,7 +1828,7 @@ protected class PrimitiveType_TargetNameAssignment_5 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ("(" castName=FQN ")")?
 protected class PrimitiveType_Group_6 extends GroupToken {
 	
 	public PrimitiveType_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1850,7 +1850,7 @@ protected class PrimitiveType_Group_6 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "("
 protected class PrimitiveType_LeftParenthesisKeyword_6_0 extends KeywordToken  {
 	
 	public PrimitiveType_LeftParenthesisKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1872,7 +1872,7 @@ protected class PrimitiveType_LeftParenthesisKeyword_6_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// castName=FQN
 protected class PrimitiveType_CastNameAssignment_6_1 extends AssignmentToken  {
 	
 	public PrimitiveType_CastNameAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1906,7 +1906,7 @@ protected class PrimitiveType_CastNameAssignment_6_1 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ")"
 protected class PrimitiveType_RightParenthesisKeyword_6_2 extends KeywordToken  {
 	
 	public PrimitiveType_RightParenthesisKeyword_6_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1929,7 +1929,7 @@ protected class PrimitiveType_RightParenthesisKeyword_6_2 extends KeywordToken  
 }
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "default"
 protected class PrimitiveType_DefaultKeyword_7 extends KeywordToken  {
 	
 	public PrimitiveType_DefaultKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1952,7 +1952,7 @@ protected class PrimitiveType_DefaultKeyword_7 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// defaultValueLiteral=STRING
 protected class PrimitiveType_DefaultValueLiteralAssignment_8 extends AssignmentToken  {
 	
 	public PrimitiveType_DefaultValueLiteralAssignment_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1986,7 +1986,7 @@ protected class PrimitiveType_DefaultValueLiteralAssignment_8 extends Assignment
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// docu=Documentation?
 protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
 	
 	public PrimitiveType_DocuAssignment_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2038,11 +2038,13 @@ protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
 
 /************ begin Rule ExternalType ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+ * ExternalType:
+ * 
+ * 	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?
 protected class ExternalType_Group extends GroupToken {
 	
 	public ExternalType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2073,7 +2075,7 @@ protected class ExternalType_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "ExternalType"
 protected class ExternalType_ExternalTypeKeyword_0 extends KeywordToken  {
 	
 	public ExternalType_ExternalTypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2094,7 +2096,7 @@ protected class ExternalType_ExternalTypeKeyword_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// name=ID
 protected class ExternalType_NameAssignment_1 extends AssignmentToken  {
 	
 	public ExternalType_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2128,7 +2130,7 @@ protected class ExternalType_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "->"
 protected class ExternalType_HyphenMinusGreaterThanSignKeyword_2 extends KeywordToken  {
 	
 	public ExternalType_HyphenMinusGreaterThanSignKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2150,7 +2152,7 @@ protected class ExternalType_HyphenMinusGreaterThanSignKeyword_2 extends Keyword
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// targetName=FQN
 protected class ExternalType_TargetNameAssignment_3 extends AssignmentToken  {
 	
 	public ExternalType_TargetNameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2184,7 +2186,7 @@ protected class ExternalType_TargetNameAssignment_3 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ("default" defaultValueLiteral=STRING)?
 protected class ExternalType_Group_4 extends GroupToken {
 	
 	public ExternalType_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2206,7 +2208,7 @@ protected class ExternalType_Group_4 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "default"
 protected class ExternalType_DefaultKeyword_4_0 extends KeywordToken  {
 	
 	public ExternalType_DefaultKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2228,7 +2230,7 @@ protected class ExternalType_DefaultKeyword_4_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// defaultValueLiteral=STRING
 protected class ExternalType_DefaultValueLiteralAssignment_4_1 extends AssignmentToken  {
 	
 	public ExternalType_DefaultValueLiteralAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2263,7 +2265,7 @@ protected class ExternalType_DefaultValueLiteralAssignment_4_1 extends Assignmen
 }
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// docu=Documentation?
 protected class ExternalType_DocuAssignment_5 extends AssignmentToken  {
 	
 	public ExternalType_DocuAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2316,11 +2318,23 @@ protected class ExternalType_DocuAssignment_5 extends AssignmentToken  {
 
 /************ begin Rule DataClass ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+ * // TODOHRR: define detail level language?
+ * 
+ * DataClass:
+ * 
+ * 	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+ * 
+ * 	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
+ * 
+ * 	operations+=StandardOperation* "}";
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+// 
+// userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
+// 
+// operations+=StandardOperation* "}"
 protected class DataClass_Group extends GroupToken {
 	
 	public DataClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2349,7 +2363,7 @@ protected class DataClass_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "DataClass"
 protected class DataClass_DataClassKeyword_0 extends KeywordToken  {
 	
 	public DataClass_DataClassKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2370,7 +2384,7 @@ protected class DataClass_DataClassKeyword_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// name=ID
 protected class DataClass_NameAssignment_1 extends AssignmentToken  {
 	
 	public DataClass_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2404,7 +2418,7 @@ protected class DataClass_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// docu=Documentation?
 protected class DataClass_DocuAssignment_2 extends AssignmentToken  {
 	
 	public DataClass_DocuAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4198,7 +4212,7 @@ protected class PortOperation_LeftParenthesisKeyword_2 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// (arguments+=VarDecl ("," arguments+=VarDecl)*)?
 protected class PortOperation_Group_3 extends GroupToken {
 	
 	public PortOperation_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4221,7 +4235,7 @@ protected class PortOperation_Group_3 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// arguments+=VarDecl
 protected class PortOperation_ArgumentsAssignment_3_0 extends AssignmentToken  {
 	
 	public PortOperation_ArgumentsAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4267,7 +4281,7 @@ protected class PortOperation_ArgumentsAssignment_3_0 extends AssignmentToken  {
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ("," arguments+=VarDecl)*
 protected class PortOperation_Group_3_1 extends GroupToken {
 	
 	public PortOperation_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4289,7 +4303,7 @@ protected class PortOperation_Group_3_1 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ","
 protected class PortOperation_CommaKeyword_3_1_0 extends KeywordToken  {
 	
 	public PortOperation_CommaKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4312,7 +4326,7 @@ protected class PortOperation_CommaKeyword_3_1_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// arguments+=VarDecl
 protected class PortOperation_ArgumentsAssignment_3_1_1 extends AssignmentToken  {
 	
 	public PortOperation_ArgumentsAssignment_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4360,7 +4374,7 @@ protected class PortOperation_ArgumentsAssignment_3_1_1 extends AssignmentToken 
 
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ")"
 protected class PortOperation_RightParenthesisKeyword_4 extends KeywordToken  {
 	
 	public PortOperation_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4383,7 +4397,7 @@ protected class PortOperation_RightParenthesisKeyword_4 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// (":" ("void" | returntype=RefableType) | "sends" sendsMsg=[Message])?
 protected class PortOperation_Alternatives_5 extends AlternativesToken {
 
 	public PortOperation_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9050,7 +9064,7 @@ protected class ActorClass_ExtendsKeyword_4_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// base=[ActorClass|FQN]
 protected class ActorClass_BaseAssignment_4_1 extends AssignmentToken  {
 	
 	public ActorClass_BaseAssignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9088,7 +9102,7 @@ protected class ActorClass_BaseAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// "{"
 protected class ActorClass_LeftCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public ActorClass_LeftCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9112,7 +9126,7 @@ protected class ActorClass_LeftCurlyBracketKeyword_5 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// annotations+=Annotation*
 protected class ActorClass_AnnotationsAssignment_6 extends AssignmentToken  {
 	
 	public ActorClass_AnnotationsAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9159,7 +9173,7 @@ protected class ActorClass_AnnotationsAssignment_6 extends AssignmentToken  {
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: java.lang.IllegalStateException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext'
+// ("Interface" "{" ifPorts+=Port* ifSPPs+=SPPRef* "}")?
 protected class ActorClass_Group_7 extends GroupToken {
 	
 	public ActorClass_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

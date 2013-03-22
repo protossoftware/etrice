@@ -8,6 +8,16 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Tr Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link TransitionPoint}</li>
+ *   <li>{@link EntryPoint}</li>
+ *   <li>{@link ExitPoint}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +34,11 @@ public interface TrPoint extends StateGraphNode
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the transition, entry or exit point is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTrPoint_Name()

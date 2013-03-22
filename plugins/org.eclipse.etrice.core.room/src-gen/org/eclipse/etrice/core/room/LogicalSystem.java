@@ -9,6 +9,19 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Logical System</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.
+ * This way the logical system is composed of sub system instances. It also defines
+ * {@link Binding}s and {@link LayerConnection}s between those sub systems.
+ * 
+ * <p>
+ * The logical system is the root of the instance tree of the generator model.
+ * Each {@link SubSystemRef} is turned into a {@link SubSystemInstance} and each
+ * {@link ActorRef} is turned into an {@link ActorInstance}.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +39,11 @@ public interface LogicalSystem extends StructureClass
    * Returns the value of the '<em><b>Sub Systems</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SubSystemRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub Systems</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The list of all sub systems contained in the logical system.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sub Systems</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getLogicalSystem_SubSystems()
    * @model containment="true"

@@ -9,6 +9,17 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This class is the super class of all classes
+ * of the ROOM class model:
+ * <ul>
+ *   <li>{@link DataType}</li>
+ *   <li>{@link GeneralProtocolClass}</li>
+ *   <li>{@link StructureClass}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,7 +39,7 @@ public interface RoomClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the data class by which it is referred to in the model.
+   * By this name the actor class is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -52,11 +63,11 @@ public interface RoomClass extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRoomClass_Docu()

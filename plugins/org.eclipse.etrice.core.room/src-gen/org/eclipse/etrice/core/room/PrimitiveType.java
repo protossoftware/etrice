@@ -8,6 +8,13 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Primitive Type</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A primitive type describes a type like int, char, float
+ * and can represent the type with a certain precision
+ * in the target language
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +35,11 @@ public interface PrimitiveType extends DataType
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.etrice.core.room.LiteralType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is one of the basic variable types.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' attribute.
    * @see org.eclipse.etrice.core.room.LiteralType
    * @see #setType(LiteralType)
@@ -56,11 +63,11 @@ public interface PrimitiveType extends DataType
   /**
    * Returns the value of the '<em><b>Target Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the type name in the target language.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Target Name</em>' attribute.
    * @see #setTargetName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPrimitiveType_TargetName()
@@ -82,11 +89,11 @@ public interface PrimitiveType extends DataType
   /**
    * Returns the value of the '<em><b>Cast Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Cast Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This (optional) name is used for casts to this type.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Cast Name</em>' attribute.
    * @see #setCastName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPrimitiveType_CastName()
@@ -108,11 +115,11 @@ public interface PrimitiveType extends DataType
   /**
    * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional default value literal.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.
    * @see #setDefaultValueLiteral(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPrimitiveType_DefaultValueLiteral()

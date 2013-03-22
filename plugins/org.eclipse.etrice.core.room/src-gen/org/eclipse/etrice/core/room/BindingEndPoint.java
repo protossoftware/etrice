@@ -9,6 +9,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Binding End Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A binding end point is a pair of an {@link ActorContainerRef} and a {@link Port} and is used
+ * to uniquely describe a port of a sub actor. If the actor container ref is {@code null} then
+ * a port of the actor class itself is addressed.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -27,11 +34,11 @@ public interface BindingEndPoint extends EObject
   /**
    * Returns the value of the '<em><b>Actor Ref</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actor Ref</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The actor reference holding the bound port or {@code null} in case of a local port.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Ref</em>' reference.
    * @see #setActorRef(ActorContainerRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_ActorRef()
@@ -53,11 +60,11 @@ public interface BindingEndPoint extends EObject
   /**
    * Returns the value of the '<em><b>Port</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Port</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the bound port.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Port</em>' reference.
    * @see #setPort(Port)
    * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_Port()
@@ -79,11 +86,11 @@ public interface BindingEndPoint extends EObject
   /**
    * Returns the value of the '<em><b>Sub</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the bound sub protocol or {@code null} if not applicable.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sub</em>' reference.
    * @see #setSub(SubProtocol)
    * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint_Sub()

@@ -11,6 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>State Graph</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A state graph is a directed graph composed of
+ * {@link StateGraphNode}s as nodes and {@link Transitions} as edges.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,11 +38,11 @@ public interface StateGraph extends EObject
    * Returns the value of the '<em><b>States</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.State}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>States</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all states of this state graph.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>States</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_States()
    * @model containment="true"
@@ -48,11 +54,11 @@ public interface StateGraph extends EObject
    * Returns the value of the '<em><b>Tr Points</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.TrPoint}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Tr Points</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all transition, entry and exit points of this state graph.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Tr Points</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_TrPoints()
    * @model containment="true"
@@ -64,11 +70,11 @@ public interface StateGraph extends EObject
    * Returns the value of the '<em><b>Ch Points</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ChoicePoint}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ch Points</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all choice points of this state graph.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ch Points</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_ChPoints()
    * @model containment="true"
@@ -80,11 +86,11 @@ public interface StateGraph extends EObject
    * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Transition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Transitions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all transitions of this state graph.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Transitions</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_Transitions()
    * @model containment="true"
@@ -96,11 +102,11 @@ public interface StateGraph extends EObject
    * Returns the value of the '<em><b>Refined Transitions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.RefinedTransition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Refined Transitions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all refined transitions of this state graph.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Refined Transitions</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getStateGraph_RefinedTransitions()
    * @model containment="true"

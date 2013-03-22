@@ -9,6 +9,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Refined Transition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The refined transition is only allowed in {@link StateGraph}s
+ * of derived {@link ActorClass}es. It targets a {@link Transition}
+ * of the base class state machine.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -27,11 +34,11 @@ public interface RefinedTransition extends EObject
   /**
    * Returns the value of the '<em><b>Target</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Target</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced transition in the base class state machine.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Target</em>' reference.
    * @see #setTarget(Transition)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefinedTransition_Target()
@@ -53,11 +60,11 @@ public interface RefinedTransition extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefinedTransition_Docu()
@@ -79,11 +86,12 @@ public interface RefinedTransition extends EObject
   /**
    * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional code in the code generator's target language.
+   * It is execute when the transition fires.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
    * @see #setAction(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefinedTransition_Action()

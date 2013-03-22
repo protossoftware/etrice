@@ -11,6 +11,15 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Operation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link StandardOperation}</li>
+ *   <li>{@link PortOperation}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,11 +40,11 @@ public interface Operation extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the operation by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Name()
@@ -58,11 +67,11 @@ public interface Operation extends EObject
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.VarDecl}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of arguments for the operation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Arguments()
    * @model containment="true"
@@ -73,11 +82,11 @@ public interface Operation extends EObject
   /**
    * Returns the value of the '<em><b>Returntype</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Returntype</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional return type of the operation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Returntype</em>' containment reference.
    * @see #setReturntype(RefableType)
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Returntype()
@@ -99,11 +108,11 @@ public interface Operation extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_Docu()
@@ -125,11 +134,11 @@ public interface Operation extends EObject
   /**
    * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Detail Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the operation body written in code generator target language.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Detail Code</em>' containment reference.
    * @see #setDetailCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getOperation_DetailCode()

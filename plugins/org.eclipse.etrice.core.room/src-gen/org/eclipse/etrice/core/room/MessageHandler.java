@@ -9,6 +9,15 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Message Handler</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link InMessageHandler}</li>
+ *   <li>{@link OutMessageHandler}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +35,11 @@ public interface MessageHandler extends EObject
   /**
    * Returns the value of the '<em><b>Msg</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msg</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the message that is handled.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msg</em>' reference.
    * @see #setMsg(Message)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_Msg()
@@ -52,11 +61,11 @@ public interface MessageHandler extends EObject
   /**
    * Returns the value of the '<em><b>Detail Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Detail Code</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the handler code written in code generator target language.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Detail Code</em>' containment reference.
    * @see #setDetailCode(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessageHandler_DetailCode()

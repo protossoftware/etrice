@@ -8,6 +8,17 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>SPP Ref</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A service provision point is used to connect an actor class with a {@link ServiceImplementation}.
+ * It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})
+ * or connect to a {@link ServiceImplementation} of its actor class.
+ * 
+ * <p>
+ * An SPP is associated with a {@link ProtocolClass} and is regular to this protocol.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +35,11 @@ public interface SPPRef extends InterfaceItem
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Protocol</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the SAPRef's protocol class.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.
    * @see #setProtocol(ProtocolClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSPPRef_Protocol()

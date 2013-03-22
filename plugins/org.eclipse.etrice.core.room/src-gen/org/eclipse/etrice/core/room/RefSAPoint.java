@@ -8,6 +8,11 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Ref SA Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Links from a {@link ActorContainerRef}, i.e. from a sub actor.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +29,11 @@ public interface RefSAPoint extends SAPoint
   /**
    * Returns the value of the '<em><b>Ref</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced actor container ref.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' reference.
    * @see #setRef(ActorContainerRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefSAPoint_Ref()

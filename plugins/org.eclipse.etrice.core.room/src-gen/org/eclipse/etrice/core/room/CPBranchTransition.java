@@ -8,6 +8,12 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>CP Branch Transition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The choice point branch transitions is allowed only as outgoing
+ * transition of {@link ChoicePoint}s.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +30,12 @@ public interface CPBranchTransition extends NonInitialTransition
   /**
    * Returns the value of the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the condition of the choice point branch specified in the code generator's target language.
+   * It has to evaluate to a boolean value.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
    * @see #setCondition(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getCPBranchTransition_Condition()

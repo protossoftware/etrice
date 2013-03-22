@@ -8,6 +8,11 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Relay SA Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Links from a relay {@link SPPRef} of the actor class.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +29,11 @@ public interface RelaySAPoint extends SAPoint
   /**
    * Returns the value of the '<em><b>Relay</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Relay</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced SPPRef.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Relay</em>' reference.
    * @see #setRelay(SPPRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRelaySAPoint_Relay()

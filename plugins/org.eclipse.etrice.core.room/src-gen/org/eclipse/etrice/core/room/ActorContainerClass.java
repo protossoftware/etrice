@@ -9,6 +9,15 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Actor Container Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This class is the super class of the structural classes
+ * <ul>
+ *   <li>{@link ActorClass}</li>
+ *   <li>{@link SubSystemClass}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -30,11 +39,11 @@ public interface ActorContainerClass extends StructureClass
    * Returns the value of the '<em><b>If SP Ps</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SPPRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>If SP Ps</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all interface SPPs.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>If SP Ps</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_IfSPPs()
    * @model containment="true"
@@ -45,11 +54,11 @@ public interface ActorContainerClass extends StructureClass
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' containment reference.
    * @see #setUserCode1(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_UserCode1()
@@ -71,11 +80,11 @@ public interface ActorContainerClass extends StructureClass
   /**
    * Returns the value of the '<em><b>User Code2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' containment reference.
    * @see #setUserCode2(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_UserCode2()
@@ -97,11 +106,11 @@ public interface ActorContainerClass extends StructureClass
   /**
    * Returns the value of the '<em><b>User Code3</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code3</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code3</em>' containment reference.
    * @see #setUserCode3(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_UserCode3()
@@ -124,11 +133,11 @@ public interface ActorContainerClass extends StructureClass
    * Returns the value of the '<em><b>Actor Refs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ActorRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actor Refs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of all actor refs.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Refs</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_ActorRefs()
    * @model containment="true"

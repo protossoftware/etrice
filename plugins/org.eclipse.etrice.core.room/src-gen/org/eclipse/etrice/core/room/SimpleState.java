@@ -8,6 +8,14 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Simple State</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A simple state is the standard case of a @link State}.
+ * It comprises and <em>entry</em>, <em>exit</em> and <em>do</em> code
+ * and it can contain another {@link StateGRaph} as sub state
+ * graph.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +32,11 @@ public interface SimpleState extends State
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the state is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSimpleState_Name()

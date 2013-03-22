@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Guard</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A detail code that evaluates to a boolean in the target
+ * language.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,11 +31,12 @@ public interface Guard extends EObject
   /**
    * Returns the value of the '<em><b>Guard</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a guard condition specified in the code generator's target language.
+   * It has to evaluate to a boolean value.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Guard</em>' containment reference.
    * @see #setGuard(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getGuard_Guard()

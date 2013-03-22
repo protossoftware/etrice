@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Layer Connection</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.
+ * The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +32,11 @@ public interface LayerConnection extends EObject
   /**
    * Returns the value of the '<em><b>From</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>From</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is source point of the layer connection.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>From</em>' containment reference.
    * @see #setFrom(SAPoint)
    * @see org.eclipse.etrice.core.room.RoomPackage#getLayerConnection_From()
@@ -52,11 +58,11 @@ public interface LayerConnection extends EObject
   /**
    * Returns the value of the '<em><b>To</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>To</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is target point of the layer connection.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>To</em>' containment reference.
    * @see #setTo(SPPoint)
    * @see org.eclipse.etrice.core.room.RoomPackage#getLayerConnection_To()

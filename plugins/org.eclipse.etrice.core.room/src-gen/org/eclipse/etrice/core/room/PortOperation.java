@@ -8,6 +8,18 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Port Operation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The port operation is very similar to the {@link StandardOperation}
+ * and is used in the {@link PortClass}. It is not possible to
+ * define constructor or destructor.
+ * <p>
+ * Optionally a {@link Message} can be specified which is sent
+ * when the method is invoked. For this reason these operations
+ * are also shown in the 'messages' dialog of the behavior editor.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +36,11 @@ public interface PortOperation extends Operation
   /**
    * Returns the value of the '<em><b>Sends Msg</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sends Msg</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This optional reference to a message means that the operation sends a message.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sends Msg</em>' reference.
    * @see #setSendsMsg(Message)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPortOperation_SendsMsg()

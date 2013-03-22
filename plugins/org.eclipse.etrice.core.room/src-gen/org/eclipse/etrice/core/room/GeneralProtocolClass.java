@@ -9,6 +9,15 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>General Protocol Class</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The super class of
+ * <ul>
+ *   <li>{@link ProtocolClass}</li>
+ *   <li>{@link CompoundProtocolClass}</li>
+ * </ul>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +35,11 @@ public interface GeneralProtocolClass extends RoomClass
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of protocol class annotations.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getGeneralProtocolClass_Annotations()
    * @model containment="true"

@@ -8,6 +8,12 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Actor Ref</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will
+ * be turned into an actor instance of the referenced type.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +32,11 @@ public interface ActorRef extends ActorContainerRef
    * Returns the value of the '<em><b>Size</b></em>' attribute.
    * The default value is <code>"1"</code>.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Size</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If the size is >1 then this is a replicated actor.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Size</em>' attribute.
    * @see #setSize(int)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorRef_Size()
@@ -52,11 +58,11 @@ public interface ActorRef extends ActorContainerRef
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the type (i.e. actor class) of the actor ref.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(ActorClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getActorRef_Type()

@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>SP Point</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +31,11 @@ public interface SPPoint extends EObject
   /**
    * Returns the value of the '<em><b>Ref</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced actor container ref.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' reference.
    * @see #setRef(ActorContainerRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Ref()
@@ -52,11 +57,11 @@ public interface SPPoint extends EObject
   /**
    * Returns the value of the '<em><b>Service</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Service</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the referenced service.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Service</em>' reference.
    * @see #setService(SPPRef)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Service()

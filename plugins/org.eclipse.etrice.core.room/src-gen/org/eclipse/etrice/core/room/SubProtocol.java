@@ -9,6 +9,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Sub Protocol</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The sub protocol is part of the {@link CompoundProtocolClass} and defines
+ * kind of a named channel for messages. The sub protocols are used to associate an
+ * end port with a particular channel.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -26,11 +33,11 @@ public interface SubProtocol extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * By this name the sub protocols or channels are distinguished.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSubProtocol_Name()
@@ -52,11 +59,11 @@ public interface SubProtocol extends EObject
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Protocol</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the protocol of this channel.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.
    * @see #setProtocol(GeneralProtocolClass)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSubProtocol_Protocol()

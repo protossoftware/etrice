@@ -8,6 +8,23 @@ package org.eclipse.etrice.core.room;
  * A representation of the model object '<em><b>Standard Operation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * The standard form of an operation as used by
+ * {@link ActorClass} and {@link DataClass}.
+ * <p>
+ * If the name coincides with it's containing classes name
+ * then it is a constructor (with void return type).
+ * If the name additionally is preceded by a tilde ~ then it
+ * is a destructor.
+ * </p>
+ * <p>
+ * The operation has a list of {@link VarDecl} arguments, an
+ * optional return {@link RefableType} and a body (specified
+ * as {@link DetailCode}).
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -24,11 +41,12 @@ public interface StandardOperation extends Operation
   /**
    * Returns the value of the '<em><b>Destructor</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Destructor</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * If this flag is {@code true} <em>and</em> the name conincides with the class name
+   * it is treated as a destructor.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Destructor</em>' attribute.
    * @see #setDestructor(boolean)
    * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation_Destructor()

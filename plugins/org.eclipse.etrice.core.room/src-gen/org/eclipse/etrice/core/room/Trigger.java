@@ -11,6 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Trigger</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A transition trigger is a list of {@link MessageFromIf} pairs
+ * and an optional {@link Guard}.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -29,11 +35,11 @@ public interface Trigger extends EObject
    * Returns the value of the '<em><b>Msg From If Pairs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.MessageFromIf}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Msg From If Pairs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of message/interface item pairs.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Msg From If Pairs</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getTrigger_MsgFromIfPairs()
    * @model containment="true"
@@ -44,11 +50,12 @@ public interface Trigger extends EObject
   /**
    * Returns the value of the '<em><b>Guard</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional guard condition of the trigger specified in the code generator's target language.
+   * It has to evaluate to a boolean value.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Guard</em>' containment reference.
    * @see #setGuard(Guard)
    * @see org.eclipse.etrice.core.room.RoomPackage#getTrigger_Guard()

@@ -10,8 +10,20 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The data class in ROOM is a {@link ComplexType} which has {@link Attribute} members.
- * It can be derived from a single base data class. 
+ * Together with {@link ProtocolClass} and {@link ActorClass} one of
+ * the main class types of the ROOM language.
+ * 
+ * <p>
+ * In ROOM this is the equivalent to a class in Java or C++.
+ * A data class can be derived from a base class (single
+ * inheritance), has {@link Attribute}s and {@link Operation}s.
+ * </p>
+ * 
+ * <p>
+ * Additionally it can be annotated with generator specific
+ * meaning and user ocde can be added in several places
+ * (again generator specific).
+ * </p>
  * 
  * <!-- end-model-doc -->
  *
@@ -64,11 +76,11 @@ public interface DataClass extends ComplexType
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is a list of data class annotations.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Annotations()
    * @model containment="true"
@@ -79,11 +91,11 @@ public interface DataClass extends ComplexType
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' containment reference.
    * @see #setUserCode1(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_UserCode1()
@@ -105,11 +117,11 @@ public interface DataClass extends ComplexType
   /**
    * Returns the value of the '<em><b>User Code2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' containment reference.
    * @see #setUserCode2(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_UserCode2()
@@ -131,11 +143,11 @@ public interface DataClass extends ComplexType
   /**
    * Returns the value of the '<em><b>User Code3</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code3</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The user code is treated in a generator dependent way.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code3</em>' containment reference.
    * @see #setUserCode3(DetailCode)
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_UserCode3()

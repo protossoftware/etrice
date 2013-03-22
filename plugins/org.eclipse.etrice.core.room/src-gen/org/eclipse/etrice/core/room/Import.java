@@ -10,8 +10,8 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The import references another ROOM model. Optionally it may import also
- * the name space of the imported model.
+ * The import declares an imported model (given as a URI) and
+ * an optional imported namespace.
  * 
  * <!-- end-model-doc -->
  *

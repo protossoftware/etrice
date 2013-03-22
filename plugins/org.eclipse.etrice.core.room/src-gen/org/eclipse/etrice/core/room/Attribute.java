@@ -9,6 +9,20 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An attribute is a named member of a
+ * <ul>
+ *   <li>{@link DataClass}</li>
+ *   <li>{@link ActorClass}</li>
+ *   <li>{@link PortClass}</li>
+ * </ul>
+ * <p>
+ * It can be of scalar or array type and is of a {@link RefableType}.
+ * It is possible to assign a default value literal.
+ * </p>
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -29,11 +43,11 @@ public interface Attribute extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The name of the attribute by which it is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Name()
@@ -55,11 +69,11 @@ public interface Attribute extends EObject
   /**
    * Returns the value of the '<em><b>Size</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Size</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * The default is scalar ({@code size=1}), values {@code >1} indicate an array.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Size</em>' attribute.
    * @see #setSize(int)
    * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Size()
@@ -81,11 +95,11 @@ public interface Attribute extends EObject
   /**
    * Returns the value of the '<em><b>Ref Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is the attribute's type.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ref Type</em>' containment reference.
    * @see #setRefType(RefableType)
    * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_RefType()
@@ -107,11 +121,11 @@ public interface Attribute extends EObject
   /**
    * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional default value literal.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.
    * @see #setDefaultValueLiteral(String)
    * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_DefaultValueLiteral()
@@ -133,11 +147,11 @@ public interface Attribute extends EObject
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Docu</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * This is an optional documentation.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
    * @see #setDocu(Documentation)
    * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Docu()
