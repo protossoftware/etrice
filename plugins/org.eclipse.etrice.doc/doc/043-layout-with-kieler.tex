@@ -37,7 +37,7 @@ User-configurable layout options for a particular diagram object can be viewed a
 
 On opening the layout view, and selecting any layout option, a description of the layout option is available in the footer of eclipse SDK. This is shown below:
 
-\includegraphics[width=\linewidth]{images/043-LayoutOptionDescription.png}
+\includegraphics[width=0.8\textwidth]{images/043-LayoutOptionDescription.png}
 % !images/043-LayoutOptionDescription.png!
 
 \section{\label{configureOptions}Configuring Layout Options}
@@ -48,7 +48,7 @@ The values of the layout options for a particular diagram object (in the visible
 \subsection{\label{layoutView}The Layout View}
 % h3(#layoutView). The Layout View
 
-\includegraphics[width=\linewidth]{images/043-LayoutView.png}
+\includegraphics[width=0.8\textwidth]{images/043-LayoutView.png}
 % !images/043-LayoutView.png!
 
 The Layout view allows flexible customization of layout options for the selected objects in the eTrice diagram. If no object is selected, the view shows the options for the top-level container of the diagram. Options are stored persistently in diagram file (*.structure file / *.behavior file) of the eTrice diagram, so that they are still available after the next Eclipse restart. Of course this requires the diagram to be saved after an option was changed.
@@ -61,7 +61,7 @@ The most important option is Layout Algorithm, which is used to determine the la
 
 Selecting Restore Default Value in the context menu or the view toolbar removes any value for the currently selected option that is stored in the current model file, thus resetting the option to its default value. The view menu has an entry Remove all Layout Options which resets all options of the current model by removing persistent data in the model file.
 
-\includegraphics[width=\linewidth]{images/043-ContextMenu.png}
+\includegraphics[width=0.8\textwidth]{images/043-ContextMenu.png}
 % !images/043-ContextMenu.png!
 
 The context menu for a specific layout option has different alternatives to set the currently active value as \textbf{default} value:
@@ -111,7 +111,7 @@ The \textit{Default Layout Option Values} table is used to manage the default se
 
 Creating a new entry requires the selection of the type of related element and entering its class name or identifier. Class names of edit parts can be explored using the information button of the layout view, while the class names for the domain model elements and the diagram type identifiers for the diagram types can be selected with the Browse button. After that, a layout option has to be selected from the list using the corresponding Browse button. Hitting OK creates an entry, and its value can then be set using the Edit button.
 
-\includegraphics[width=\linewidth]{images/043-PreferencePage.png}
+\includegraphics[width=0.8\textwidth]{images/043-PreferencePage.png}
 % !images/043-PreferencePage.png!
 
 Note that the \textit{Behavior} preference page will show only those entries which hold for the behavior diagrams. Moreover, it will allow setting default values of layout options for only those domain model elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for the \textit{Structure} preference page.

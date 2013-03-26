@@ -4,75 +4,60 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create your own data type</title> 
+<head><title>Scope</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-03-25 22:23:00" /> 
+<meta name="date" content="2013-03-26 21:41:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 48--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse35.html" >next</a>] [<a 
-href="etrice-docse33.html" >prev</a>] [<a 
-href="etrice-docse33.html#tailetrice-docse33.html" >prev-tail</a>] [<a 
+href="etrice-docch10.html" >prev</a>] [<a 
+href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse34.html">tail</a>] [<a 
-href="etrice-docch9.html#etrice-docse34.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">9.3   </span> <a 
- id="x45-610009.3"></a>Create your own data type</h3>
-<!--l. 50--><p class="noindent" >The planed application should read a C source file and remove the comments.
-Therefore we need a file descriptor which is not part of the basic C types. The type
-for the file descriptor for MinGW is <span 
-class="ecti-1000">FILE</span>. To make this type available on the model
-level, you have to declare the type.
-</p><!--l. 52--><p class="noindent" >Open the file <span 
-class="ecti-1000">Types.room </span>from <span 
-class="ecti-1000">org.eclipse.modellib.c </span>and take a look at the
-declaration of <span 
-class="ecti-1000">string </span>(last line) which is not a basic C type.
-</p><!--l. 54--><p class="noindent" ><span 
-class="ecti-1000">PrimitiveType string:ptCharacter -&#x003E; charPtr default "0"</span>
-</p><!--l. 56--><p class="noindent" >With this declaration, you make the <span 
-class="ecti-1000">string </span>keyword available on model level as a
-primitive type. This type will be translated to <span 
-class="ecti-1000">charPtr </span>in your C sources. <span 
-class="ecti-1000">charPtr </span>is
-defined in <span 
-class="ecti-1000">etDatatypes.h</span>. This header file is platform specific (<span 
-class="ecti-1000">generic</span>). With this
-mechanism you can define your own type system on model level and map the model
-types to specific target/platform types.
-</p><!--l. 58--><p class="noindent" >To not interfere with other models, we will declare the type direct in the model. Add
-the following line to your model:
-                                                                  
-
-                                                                  
-</p>
-<div class="verbatim" id="verbatim-19">
-RoomModel&#x00A0;RemoveComment&#x00A0;{
-&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from
-&#x00A0;<br />"../../../org.eclipse.etrice.modellib.c/model/Types.room"
-&#x00A0;<br />
-&#x00A0;<br />PrimitiveType&#x00A0;file:ptInteger&#x00A0;-&#x003E;&#x00A0;FILE&#x00A0;default&#x00A0;"0"
-</div>
-<!--l. 68--><p class="nopar" >
-</p><!--l. 71--><p class="noindent" ><span 
-class="ecti-1000">FILE </span>is the native type for MinGW. Therefore you don&#8217;t need a mapping within
+href="etrice-docch10.html#etrice-docse34.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">10.1   </span> <a 
+ id="x46-6200010.1"></a>Scope</h3>
+<!--l. 5--><p class="noindent" >In this tutorial you will learn how to create a model for C from scratch. There are some more
+steps to do in C compared to Java. The goal is to get familiar with the additional steps. The
+Java tutorial is a prerequisite for the following explanations. You will perform the following
+steps:
+</p><!--l. 8--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x46-62002x1">create a new model from scratch for C
+     </li>
+     <li 
+  class="enumerate" id="x46-62004x2">create structure and behavior similar to Java
+     </li>
+     <li 
+  class="enumerate" id="x46-62006x3">create a launch configuration for the C code generator
+     </li>
+     <li 
+  class="enumerate" id="x46-62008x4">setup the C environment
+     </li>
+     <li 
+  class="enumerate" id="x46-62010x5">generate the source code
+     </li>
+     <li 
+  class="enumerate" id="x46-62012x6">run the model</li></ol>
+<!--l. 17--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
+class="ecti-1000">Setting up the Workspace for C</span>
 <span 
-class="ecti-1000">etDatatypes.h</span>. If your model should be portable across different platforms you should
-not take this shortcut.
-                                                                  
-
-                                                                  
+class="ecti-1000">Projects</span>.
+                                                                                 
+                                                                                 
 </p>
-<!--l. 73--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 20--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse35.html" >next</a>] [<a 
-href="etrice-docse33.html" >prev</a>] [<a 
-href="etrice-docse33.html#tailetrice-docse33.html" >prev-tail</a>] [<a 
+href="etrice-docch10.html" >prev</a>] [<a 
+href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
 href="etrice-docse34.html" >front</a>] [<a 
-href="etrice-docch9.html#etrice-docse34.html" >up</a>] </p></div>
-<!--l. 73--><p class="noindent" ><a 
+href="etrice-docch10.html#etrice-docse34.html" >up</a>] </p></div>
+<!--l. 20--><p class="noindent" ><a 
  id="tailetrice-docse34.html"></a> </p> 
 </body></html> 
