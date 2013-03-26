@@ -145,16 +145,22 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	}
 	private class GuardValidator implements IValidator {
 
+		private String text;
+		
+		public GuardValidator(String text) {
+			this.text = text;
+			
+		}
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				String name = (String) value;
 				if (name.isEmpty())
-					return ValidationStatus.error("guard must not be empty");
+					return ValidationStatus.error(text);
 			}
 			else if (value instanceof DetailCode) {
-				if (RoomHelpers.getDetailCode((DetailCode)value).isEmpty())
-					return ValidationStatus.error("guard must not be empty");
+				if (RoomHelpers.getDetailCode((DetailCode)value).trim().isEmpty())
+					return ValidationStatus.error(text);
 			}
 			return Status.OK_STATUS;
 		}
@@ -257,7 +263,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				createFixedText(body, "&Guard:", code, true);
 			}
 			else {
-				GuardValidator gv = new GuardValidator();
+				GuardValidator gv = new GuardValidator("guard must not be empty");
 				
 				Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
 				configureMemberAware(cond, true, true, true);
@@ -275,11 +281,15 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				createFixedText(body, "&Condition", code, true);
 			}
 			else {
-				Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), null, s2m, m2s, true);
+				GuardValidator gv = new GuardValidator("condition must not be empty");
+				
+				Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), gv, s2m_not_null, m2s_null_empty, true);
 				configureMemberAware(cond, true, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				cond.setLayoutData(gd);
+				
+				createDecorator(cond, "empty condition");
 			}
 		}
 

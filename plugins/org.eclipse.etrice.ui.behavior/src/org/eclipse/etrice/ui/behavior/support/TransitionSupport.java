@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
+import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -177,6 +178,11 @@ public class TransitionSupport {
 						}
 						NonInitialTransition t = dfltBranch? RoomFactory.eINSTANCE.createContinuationTransition()
 								: RoomFactory.eINSTANCE.createCPBranchTransition();
+						
+						if (t instanceof CPBranchTransition) {
+							((CPBranchTransition) t).setCondition(RoomFactory.eINSTANCE.createDetailCode());
+						}
+						
 						t.setFrom(src);
 						t.setTo(dst);
 						trans = t;
