@@ -230,6 +230,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		ActorCommunicationType commType = ac.getCommType();
 		
+		switch (commType) {
+		case ASYNCHRONOUS:
+			break;
+		case DATA_DRIVEN:
+			break;
+		case EVENT_DRIVEN:
+			break;
+		case SYNCHRONOUS:
+			error("synchronous communication type not supported yet", RoomPackage.eINSTANCE.getActorClass_CommType());
+		}
+		
 		while (ac.getBase()!=null) {
 			ac = ac.getBase();
 
