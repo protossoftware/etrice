@@ -61,6 +61,11 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 	}
 	
 	@Override
+	public String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig) {
+		return item.getName()+"."+msg.getName()+"()";
+	}
+	
+	@Override
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("ifitem.index"))
 			return "ifitem.getIdx()";

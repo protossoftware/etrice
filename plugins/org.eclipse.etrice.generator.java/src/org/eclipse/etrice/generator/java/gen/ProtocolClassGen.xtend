@@ -29,6 +29,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.CommunicationType
 
 
 @Singleton
@@ -49,7 +50,15 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			var file = pc.getJavaFileName
 			logger.logInfo("generating ProtocolClass implementation '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(pc))
+			
+			switch (pc.commType) {
+				case CommunicationType::EVENT_DRIVEN:
+					fileAccess.generateFile(file, root.generate(pc))
+				case CommunicationType::DATA_DRIVEN:
+					fileAccess.generateFile(file, root.generateDataDriven(pc))
+				case CommunicationType::SYNCHRONOUS:
+					logger.logError("synchronous protocols not supported yet", pc)
+			}
 		}
 	}
 	
@@ -269,6 +278,76 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«m.name»(new «m.data.refType.type.name»(«(m.data.refType.type as DataClass).paramList»));
 				}
 			«ENDIF»
+		'''
+	}
+	
+	def generateDataDriven(Root root, ProtocolClass pc) {
+		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
+		val models = root.getReferencedModels(pc)
+		'''
+			package «pc.getPackage()»;
+			
+			import org.eclipse.etrice.runtime.java.messaging.IRTObject;
+			import org.eclipse.etrice.runtime.java.modelbase.DataReceivePort;
+			import org.eclipse.etrice.runtime.java.modelbase.DataSendPort;
+			import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+			
+			«pc.userCode(1)»
+			
+			«FOR model : models»
+				import «model.name».*;
+			«ENDFOR»
+			
+			public class «pc.name» {
+				
+				«pc.userCode(2)»
+				
+				// send port holds data
+				static public class «pc.getPortClassName(true)» extends DataSendPort {
+					«FOR msg : sentMsgs»
+						private «msg.data.refType.type.typeName» «msg.name»;
+					«ENDFOR»
+					
+					// constructor
+					public «pc.getPortClassName(true)»(IRTObject parent, String name, int localId) {
+						super(parent, name, localId);
+					}
+					
+					// getters and setters
+					«FOR msg : sentMsgs»
+						public void «msg.name»(«msg.data.refType.type.typeName» «msg.name») {
+							this.«msg.name» = «msg.name»;
+						}
+						public «msg.data.refType.type.typeName» «msg.name»() {
+							return «msg.name»;
+						}
+					«ENDFOR»
+				}
+				
+				// receive port accesses send port
+				static public class «pc.getPortClassName(false)» extends DataReceivePort {
+					private «pc.getPortClassName(true)» peer;
+					
+					// constructor
+					public «pc.getPortClassName(false)»(IRTObject parent, String name, int localId) {
+						super(parent, name, localId);
+					}
+					
+					// getters
+					«FOR msg : sentMsgs»
+						public «msg.data.refType.type.typeName» «msg.name»() {
+							if (peer==null)
+								return «msg.data.refType.type.defaultValue»;
+							return peer.«msg.name»();
+						}
+					«ENDFOR»
+					
+					protected void connect(DataSendPort dataSendPort) {
+						if (dataSendPort instanceof «pc.getPortClassName(true)»)
+							peer = («pc.getPortClassName(true)»)dataSendPort;
+					}
+				}
+			}
 		'''
 	}
 }

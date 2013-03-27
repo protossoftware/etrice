@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -31,6 +32,8 @@ import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -73,8 +76,29 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         String _plus_3 = (_plus_2 + "\'");
         this.logger.logInfo(_plus_3);
         this.fileAccess.setOutputPath(path);
-        CharSequence _generate = this.generate(root, pc);
-        this.fileAccess.generateFile(file, _generate);
+        CommunicationType _commType = pc.getCommType();
+        final CommunicationType _switchValue = _commType;
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,CommunicationType.EVENT_DRIVEN)) {
+            _matched=true;
+            CharSequence _generate = this.generate(root, pc);
+            this.fileAccess.generateFile(file, _generate);
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_switchValue,CommunicationType.DATA_DRIVEN)) {
+            _matched=true;
+            CharSequence _generateDataDriven = this.generateDataDriven(root, pc);
+            this.fileAccess.generateFile(file, _generateDataDriven);
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_switchValue,CommunicationType.SYNCHRONOUS)) {
+            _matched=true;
+            this.logger.logError("synchronous protocols not supported yet", pc);
+          }
+        }
       }
     }
   }
@@ -788,6 +812,275 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
         }
       }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence generateDataDriven(final Root root, final ProtocolClass pc) {
+    CharSequence _xblockexpression = null;
+    {
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+          public Boolean apply(final Message m) {
+            VarDecl _data = m.getData();
+            boolean _notEquals = (!Objects.equal(_data, null));
+            return Boolean.valueOf(_notEquals);
+          }
+        };
+      final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      final EList<RoomModel> models = root.getReferencedModels(pc);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package ");
+      String _package = this._roomExtensions.getPackage(pc);
+      _builder.append(_package, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.DataReceivePort;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.DataSendPort;");
+      _builder.newLine();
+      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+      _builder.newLine();
+      _builder.newLine();
+      CharSequence _userCode = this._procedureHelpers.userCode(pc, 1);
+      _builder.append(_userCode, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        for(final RoomModel model : models) {
+          _builder.append("import ");
+          String _name = model.getName();
+          _builder.append(_name, "");
+          _builder.append(".*;");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      _builder.append("public class ");
+      String _name_1 = pc.getName();
+      _builder.append(_name_1, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(pc, 2);
+      _builder.append(_userCode_1, "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// send port holds data");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static public class ");
+      String _portClassName = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName, "	");
+      _builder.append(" extends DataSendPort {");
+      _builder.newLineIfNotEmpty();
+      {
+        for(final Message msg : sentMsgs) {
+          _builder.append("\t\t");
+          _builder.append("private ");
+          VarDecl _data = msg.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _typeName = this._typeHelpers.typeName(_type);
+          _builder.append(_typeName, "		");
+          _builder.append(" ");
+          String _name_2 = msg.getName();
+          _builder.append(_name_2, "		");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// constructor");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public ");
+      String _portClassName_1 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_1, "		");
+      _builder.append("(IRTObject parent, String name, int localId) {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t");
+      _builder.append("super(parent, name, localId);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// getters and setters");
+      _builder.newLine();
+      {
+        for(final Message msg_1 : sentMsgs) {
+          _builder.append("\t\t");
+          _builder.append("public void ");
+          String _name_3 = msg_1.getName();
+          _builder.append(_name_3, "		");
+          _builder.append("(");
+          VarDecl _data_1 = msg_1.getData();
+          RefableType _refType_1 = _data_1.getRefType();
+          DataType _type_1 = _refType_1.getType();
+          String _typeName_1 = this._typeHelpers.typeName(_type_1);
+          _builder.append(_typeName_1, "		");
+          _builder.append(" ");
+          String _name_4 = msg_1.getName();
+          _builder.append(_name_4, "		");
+          _builder.append(") {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("this.");
+          String _name_5 = msg_1.getName();
+          _builder.append(_name_5, "			");
+          _builder.append(" = ");
+          String _name_6 = msg_1.getName();
+          _builder.append(_name_6, "			");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("public ");
+          VarDecl _data_2 = msg_1.getData();
+          RefableType _refType_2 = _data_2.getRefType();
+          DataType _type_2 = _refType_2.getType();
+          String _typeName_2 = this._typeHelpers.typeName(_type_2);
+          _builder.append(_typeName_2, "		");
+          _builder.append(" ");
+          String _name_7 = msg_1.getName();
+          _builder.append(_name_7, "		");
+          _builder.append("() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("return ");
+          String _name_8 = msg_1.getName();
+          _builder.append(_name_8, "			");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// receive port accesses send port");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static public class ");
+      String _portClassName_2 = this._roomExtensions.getPortClassName(pc, false);
+      _builder.append(_portClassName_2, "	");
+      _builder.append(" extends DataReceivePort {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("private ");
+      String _portClassName_3 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_3, "		");
+      _builder.append(" peer;");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// constructor");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public ");
+      String _portClassName_4 = this._roomExtensions.getPortClassName(pc, false);
+      _builder.append(_portClassName_4, "		");
+      _builder.append("(IRTObject parent, String name, int localId) {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t");
+      _builder.append("super(parent, name, localId);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// getters");
+      _builder.newLine();
+      {
+        for(final Message msg_2 : sentMsgs) {
+          _builder.append("\t\t");
+          _builder.append("public ");
+          VarDecl _data_3 = msg_2.getData();
+          RefableType _refType_3 = _data_3.getRefType();
+          DataType _type_3 = _refType_3.getType();
+          String _typeName_3 = this._typeHelpers.typeName(_type_3);
+          _builder.append(_typeName_3, "		");
+          _builder.append(" ");
+          String _name_9 = msg_2.getName();
+          _builder.append(_name_9, "		");
+          _builder.append("() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("if (peer==null)");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t");
+          _builder.append("return ");
+          VarDecl _data_4 = msg_2.getData();
+          RefableType _refType_4 = _data_4.getRefType();
+          DataType _type_4 = _refType_4.getType();
+          String _defaultValue = this._javaExtensions.defaultValue(_type_4);
+          _builder.append(_defaultValue, "				");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("return peer.");
+          String _name_10 = msg_2.getName();
+          _builder.append(_name_10, "			");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected void connect(DataSendPort dataSendPort) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("if (dataSendPort instanceof ");
+      String _portClassName_5 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_5, "			");
+      _builder.append(")");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t\t");
+      _builder.append("peer = (");
+      String _portClassName_6 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_6, "				");
+      _builder.append(")dataSendPort;");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
