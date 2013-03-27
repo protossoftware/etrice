@@ -362,7 +362,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			modelURIs.remove(uri);
 		}
 		
-		for (Resource res : resourceSet.getResources()) {
+		// make a copy to avoid concurrent modification
+		ArrayList<Resource> resources = new ArrayList<Resource>(resourceSet.getResources());
+		for (Resource res : resources) {
 			EcoreUtil2.resolveAll(res, CancelIndicator.NullImpl);
 		}
 		
