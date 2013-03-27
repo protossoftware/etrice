@@ -117,6 +117,7 @@
 			<arg value="${java.tests.model.path}/StaticConfigTest.config"/>
 			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.room"/>
 			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.config"/>
+			<arg value="${java.tests.model.path}/DataDrivenTest.room"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -194,6 +195,12 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicConfigTest</echo>
+		<echo>start DataDrivenTest</echo>
+		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.SubSystemRunner" fork="true" failonerror="true">
+			<arg value="-run_as_test"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DataDrivenTest</echo>
 	</target>
 	
 	<!--
@@ -265,6 +272,13 @@
 			<arg value="./tmp/DynamicConfigTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DataDrivenTest"/>
+			<arg value="./tmp/DataDrivenTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 	</target>
 	
 	<!--
@@ -275,6 +289,7 @@
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml"/>
 		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/JavaDynamicConfigTest.xml"/>
+		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/JavaDataDrivenTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>
