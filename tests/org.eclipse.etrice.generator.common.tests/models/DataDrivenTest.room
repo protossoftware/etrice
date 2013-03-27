@@ -1,0 +1,115 @@
+RoomModel DataDrivenTest {
+	
+	import room.basic.types.* from "Types.room"
+	import room.basic.service.timing.* from "TimingService.room"
+	
+	LogicalSystem LS {
+		SubSystemRef subsys: SubSystem
+	}	
+	
+	SubSystemClass SubSystem {
+		ActorRef appl: Appl
+		ActorRef timing: ATimingService
+		LayerConnection ref appl satisfied_by timing.timer
+		LogicalThread dflt_thread
+	}
+
+	ActorClass Appl {
+		Structure {
+			ActorRef srv: Tester
+			ActorRef cli: Testee
+			Binding srv.p0 and cli.p0
+		}
+		Behavior { }
+	}	
+	async ActorClass Tester {
+		Interface {
+			conjugated Port p0: PC
+		}
+		Structure {
+			external Port p0
+			SAP timer: PTimer
+			
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle {
+					action {
+						"timer.startTimer(100);"
+						"counter = 0;"
+					}
+				}
+				Transition tr0: Idle -> Idle {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				State Idle {
+					entry {
+						"p0.in1(counter++);"
+					}
+				}
+			}
+		}
+	}
+	async ActorClass Testee {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+			SAP timer: PTimer
+			
+			Attribute caseId: int32
+			Attribute counter: int32
+			Attribute resultlist[10]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
+		}
+		Behavior {
+			Operation Testee() {
+				"caseId = etUnit_openAll(\"tmp\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
+			}
+			Operation ~Testee() {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> Idle {
+					action {
+						"timer.startTimer(20);"
+						"counter = 0;"
+					}
+				}
+				Transition tr0: Idle -> Idle {
+					guard {
+						"p0.in1==counter"
+					}
+					action {
+						"if (p0.in1==1)"
+						"	EXPECT_ORDER_START(caseId, resultlist, 10);"
+						"if (p0.in1<10)"
+						"	EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", p0.in1);"
+						"else if (counter==10) {"
+						"	EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 10);"
+						"	etUnit_testFinished(caseId);"
+						"}"
+						"++counter;"
+					}
+				}
+				State Idle
+			}
+		}
+	}
+	
+	datadriven ProtocolClass PC {
+		incoming {
+			Message in1(data: int32)
+			Message in2(data: int8)
+			Message in3(data: DC)
+		}
+	}
+	
+	DataClass DC {
+		Attribute x: float32
+		Attribute i: int32
+	}
+}
