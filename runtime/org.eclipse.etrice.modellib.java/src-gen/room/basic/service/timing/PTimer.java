@@ -18,29 +18,35 @@ public class PTimer {
 	// message IDs
 	public static final int MSG_MIN = 0;
 	public static final int OUT_timeout = 1;
-	public static final int OUT_internalTimeout = 2;
-	public static final int IN_kill = 3;
-	public static final int IN_internalStartTimer = 4;
-	public static final int IN_internalStartTimeout = 5;
-	public static final int MSG_MAX = 6;
+	public static final int OUT_internalTimer = 2;
+	public static final int OUT_internalTimeout = 3;
+	public static final int IN_kill = 4;
+	public static final int IN_internalStartTimer = 5;
+	public static final int IN_internalStartTimeout = 6;
+	public static final int MSG_MAX = 7;
 
 	/*--------------------- begin user code ---------------------*/
 	static protected class FireTimeoutTask extends TimerTask {
-		
+					
 					private int time;
 					private int id;
+					private boolean periodic;
 					private PTimerPort port;
 		
-					public FireTimeoutTask(int time, int id, PTimerPort port) {
+					public FireTimeoutTask(int time, int id, boolean periodic, PTimerPort port) {
 						this.time = time;
 						this.id = id;
+						this.periodic = periodic;
 						this.port = port;
 					}
 		
 					@Override
 					public void run() {
 						TimerData td = new TimerData(0,id);
-						port.internalTimeout(td);
+						if (periodic)
+							port.internalTimer(td);
+						else
+							port.internalTimeout(td);
 					}
 					
 					public int getTime() {
@@ -54,7 +60,7 @@ public class PTimer {
 				
 	/*--------------------- end user code ---------------------*/
 
-	private static String messageStrings[] = {"MIN", "timeout","internalTimeout", "kill","internalStartTimer","internalStartTimeout","MAX"};
+	private static String messageStrings[] = {"MIN", "timeout","internalTimer","internalTimeout", "kill","internalStartTimer","internalStartTimeout","MAX"};
 
 	public String getMessageString(int msg_id) {
 		if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
@@ -95,7 +101,7 @@ public class PTimer {
 							
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 											TimerData td = (TimerData)dataMsg.getData();
-											task = new FireTimeoutTask(td.time, td.id, this);
+											task = new FireTimeoutTask(td.time, td.id, true, this);
 											getActor().receiveEvent(this, IN_internalStartTimer, td);
 						}
 						break;
@@ -104,7 +110,7 @@ public class PTimer {
 							
 											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 											TimerData td = (TimerData)dataMsg.getData();
-											task = new FireTimeoutTask(td.time, td.id, this);
+											task = new FireTimeoutTask(td.time, td.id, false, this);
 											getActor().receiveEvent(this, IN_internalStartTimeout, td);
 						}
 						break;
@@ -136,6 +142,13 @@ public class PTimer {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeout));
 				}
+		private void internalTimer(TimerData td) {
+			if (getPeerAddress()!=null)
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimer, td.deepCopy()));
+		}
+		public void internalTimer(int time, int id) {
+			internalTimer(new TimerData(time, id));
+		}
 		private void internalTimeout(TimerData td) {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimeout, td.deepCopy()));
@@ -174,6 +187,11 @@ public class PTimer {
 				get(i).timeout();
 			}
 		}
+		private void internalTimer(TimerData td){
+			for (int i=0; i<getReplication(); ++i) {
+				get(i).internalTimer( td);
+			}
+		}
 		private void internalTimeout(TimerData td){
 			for (int i=0; i<getReplication(); ++i) {
 				get(i).internalTimeout( td);
@@ -204,6 +222,16 @@ public class PTimer {
 				EventMessage msg = (EventMessage) m;
 				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					switch (msg.getEvtId()) {
+						case OUT_internalTimer:
+						{
+							//conjugate PortClass handle timer
+											EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
+											TimerData td = (TimerData) dataMsg.getData();
+											if (active && td.getId()==currentId) {
+												getActor().receiveEvent(this, OUT_timeout, null);
+											}
+						}
+						break;
 						case OUT_internalTimeout:
 						{
 							//conjugate PortClass handle timeout

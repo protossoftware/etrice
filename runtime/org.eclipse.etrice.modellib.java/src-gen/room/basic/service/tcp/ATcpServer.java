@@ -88,16 +88,16 @@ public class ATcpServer extends ActorClassBase {
 	/*--------------------- end user code ---------------------*/
 	
 	//--------------------- ports
-	protected PTcpPayloadPort PayloadPort = null;
 	protected PTcpControlPort ControlPort = null;
+	protected PTcpPayloadPort PayloadPort = null;
 	
 	//--------------------- saps
 	
 	//--------------------- services
 
 	//--------------------- interface item IDs
-	public static final int IFITEM_PayloadPort = 2;
 	public static final int IFITEM_ControlPort = 1;
+	public static final int IFITEM_PayloadPort = 2;
 
 	/*--------------------- attributes ---------------------*/
 	int lastError;
@@ -122,8 +122,8 @@ public class ATcpServer extends ActorClassBase {
 		this.setPayloadPortReplocation(0);
 
 		// own ports
-		PayloadPort = new PTcpPayloadPort(this, "PayloadPort", IFITEM_PayloadPort); 
 		ControlPort = new PTcpControlPort(this, "ControlPort", IFITEM_ControlPort); 
+		PayloadPort = new PTcpPayloadPort(this, "PayloadPort", IFITEM_PayloadPort); 
 		
 		// own saps
 		
@@ -153,11 +153,11 @@ public class ATcpServer extends ActorClassBase {
 	
 	
 	//--------------------- port getters
-	public PTcpPayloadPort getPayloadPort (){
-		return this.PayloadPort;
-	}
 	public PTcpControlPort getControlPort (){
 		return this.ControlPort;
+	}
+	public PTcpPayloadPort getPayloadPort (){
+		return this.PayloadPort;
 	}
 
 	//--------------------- lifecycle functions
@@ -171,6 +171,7 @@ public class ATcpServer extends ActorClassBase {
 	public static final int STATE_closed = 2;
 	public static final int STATE_opened = 3;
 	public static final int STATE_error = 4;
+	public static final int STATE_MAX = 5;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__closed = 1;
@@ -315,7 +316,12 @@ public class ATcpServer extends ActorClassBase {
 	 * @param state - the state which is entered
 	 * @return - the ID of the final leaf state
 	 */
-	private int enterHistory(int state, boolean skip_entry) {
+	private int enterHistory(int state) {
+		boolean skip_entry = false;
+		if (state >= STATE_MAX) {
+			state = state - STATE_MAX;
+			skip_entry = true;
+		}
 		while (true) {
 			switch (state) {
 				case STATE_closed:
@@ -342,7 +348,7 @@ public class ATcpServer extends ActorClassBase {
 	public void executeInitTransition() {
 		int chain = CHAIN_TRANS_INITIAL_TO__closed;
 		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false);
+		next = enterHistory(next);
 		setState(next);
 	}
 	
@@ -395,14 +401,11 @@ public class ATcpServer extends ActorClassBase {
 		}
 		if (chain != NOT_CAUGHT) {
 			exitTo(getState(), catching_state);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			boolean skip_entry = false;
-			if(next < 0){
-				next = -next;
-				skip_entry = true;
+			{
+				int next = executeTransitionChain(chain, ifitem, generic_data);
+				next = enterHistory(next);
+				setState(next);
 			}
-			next = enterHistory(next, skip_entry);
-			setState(next);
 		}
 	}
 };

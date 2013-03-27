@@ -75,21 +75,26 @@ RoomModel room.basic.service.timing {
 		}
 		usercode2 {
 		"static protected class FireTimeoutTask extends TimerTask {
-	
+				
 				private int time;
 				private int id;
+				private boolean periodic;
 				private PTimerPort port;
 	
-				public FireTimeoutTask(int time, int id, PTimerPort port) {
+				public FireTimeoutTask(int time, int id, boolean periodic, PTimerPort port) {
 					this.time = time;
 					this.id = id;
+					this.periodic = periodic;
 					this.port = port;
 				}
 	
 				@Override
 				public void run() {
 					TimerData td = new TimerData(0,id);
-					port.internalTimeout(td);
+					if (periodic)
+						port.internalTimer(td);
+					else
+						port.internalTimeout(td);
 				}
 				
 				public int getTime() {
@@ -109,6 +114,7 @@ RoomModel room.basic.service.timing {
 		}
 		outgoing {
 			Message timeout()
+			private Message internalTimer(td: TimerData)
 			private Message internalTimeout(td: TimerData)
 		}
 		regular PortClass
@@ -123,7 +129,7 @@ RoomModel room.basic.service.timing {
 			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
-				task = new FireTimeoutTask(td.time, td.id, this);
+				task = new FireTimeoutTask(td.time, td.id, true, this);
 				getActor().receiveEvent(this, IN_internalStartTimer, td);"
 			}
 			handle
@@ -131,7 +137,7 @@ RoomModel room.basic.service.timing {
 			"
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData)dataMsg.getData();
-				task = new FireTimeoutTask(td.time, td.id, this);
+				task = new FireTimeoutTask(td.time, td.id, false, this);
 				getActor().receiveEvent(this, IN_internalStartTimeout, td);"
 			}
 			handle
@@ -149,6 +155,15 @@ RoomModel room.basic.service.timing {
 			usercode {
 			"private int currentId = 0;
 			private boolean active = false;"
+			}
+			handle
+			outgoing internalTimer {
+			"//conjugate PortClass handle timer
+				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
+				TimerData td = (TimerData) dataMsg.getData();
+				if (active && td.getId()==currentId) {
+					getActor().receiveEvent(this, OUT_timeout, null);
+				}"
 			}
 			handle
 			outgoing internalTimeout {

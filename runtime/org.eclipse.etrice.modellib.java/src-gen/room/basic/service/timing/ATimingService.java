@@ -74,6 +74,7 @@ public class ATimingService extends ActorClassBase {
 
 	/* state IDs */
 	public static final int STATE_Operational = 2;
+	public static final int STATE_MAX = 3;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__Operational = 1;
@@ -189,7 +190,12 @@ public class ATimingService extends ActorClassBase {
 	 * @param state - the state which is entered
 	 * @return - the ID of the final leaf state
 	 */
-	private int enterHistory(int state, boolean skip_entry) {
+	private int enterHistory(int state) {
+		boolean skip_entry = false;
+		if (state >= STATE_MAX) {
+			state = state - STATE_MAX;
+			skip_entry = true;
+		}
 		while (true) {
 			switch (state) {
 				case STATE_Operational:
@@ -211,7 +217,7 @@ public class ATimingService extends ActorClassBase {
 	public void executeInitTransition() {
 		int chain = CHAIN_TRANS_INITIAL_TO__Operational;
 		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next, false);
+		next = enterHistory(next);
 		setState(next);
 	}
 	
@@ -255,14 +261,11 @@ public class ATimingService extends ActorClassBase {
 		}
 		if (chain != NOT_CAUGHT) {
 			exitTo(getState(), catching_state);
-			int next = executeTransitionChain(chain, ifitem, generic_data);
-			boolean skip_entry = false;
-			if(next < 0){
-				next = -next;
-				skip_entry = true;
+			{
+				int next = executeTransitionChain(chain, ifitem, generic_data);
+				next = enterHistory(next);
+				setState(next);
 			}
-			next = enterHistory(next, skip_entry);
-			setState(next);
 		}
 	}
 };
