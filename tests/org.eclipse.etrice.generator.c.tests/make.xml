@@ -120,11 +120,10 @@
 			<arg value="${c.tests.model.path}/SendingDataTestC.room"/>
 			<arg value="${c.tests.model.path}/StaticConfigTest.room"/>
 			<arg value="${c.tests.model.path}/StaticConfigTest.config"/>
+			<arg value="${c.tests.model.path}/DataDrivenTest.room"/>
 			
 			<!-- modelib.c -->
-			<!-- not needed yet
-				<arg value="${modellib.path}/model/TimingService.room"/>
-			-->
+			<arg value="${modellib.path}/model/TimingService.room"/>
 			<arg value="${modellib.path}/model/Types.room"/>
 			<classpath refid="clspath"/>
 		</java>
@@ -184,6 +183,8 @@
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I../../src-gen/DataDrivenTest"/>
+			<arg value="-I../../src-gen/room/basic/service/timing"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -220,6 +221,8 @@
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I../../src-gen/DataDrivenTest"/>
+			<arg value="-I../../src-gen/room/basic/service/timing"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -256,6 +259,8 @@
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I../../src-gen/DataDrivenTest"/>
+			<arg value="-I../../src-gen/room/basic/service/timing"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -298,6 +303,8 @@
 			<arg value="-I../../src-gen/HandlerTest"/>
 			<arg value="-I../../src-gen/SendingDataTestC"/>
 			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I../../src-gen/DataDrivenTest"/>
+			<arg value="-I../../src-gen/room/basic/service/timing"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -340,6 +347,50 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 		</exec>
+		
+		<!-- compile and link DataDrivenTest-->
+		<mkdir dir="bin/DataDrivenTest"/>
+		<exec dir="bin/DataDrivenTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-I../../src-gen/ChoicePointTest"/>
+			<arg value="-I../../src-gen/HandlerTest"/>
+			<arg value="-I../../src-gen/SendingDataTestC"/>
+			<arg value="-I../../src-gen/StaticConfigTest"/>
+			<arg value="-I../../src-gen/DataDrivenTest"/>
+			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<arg value="-ansi"/>
+			<arg value="../../src-gen/DataDrivenTest/Tester.c"/>
+			<arg value="../../src-gen/DataDrivenTest/Testee.c"/>
+			<arg value="../../src-gen/DataDrivenTest/Appl.c"/>
+			<arg value="../../src-gen/DataDrivenTest/DC.c"/>
+			<arg value="../../src-gen/DataDrivenTest/PC.c"/>
+			<arg value="../../src-gen/DataDrivenTest/SubSystem.c"/>
+			<arg value="../../src-gen/DataDrivenTest/SubSystem_Runner.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/ATimingService.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/PTimer.c"/>
+		</exec>
+		<exec dir="bin/DataDrivenTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
+			<arg value="-oDataDrivenTest.exe"/>
+			<arg value="Tester.o"/>
+			<arg value="Testee.o"/>
+			<arg value="Appl.o"/>
+			<arg value="DC.o"/>
+			<arg value="PC.o"/>
+			<arg value="SubSystem.o"/>
+			<arg value="SubSystem_Runner.o"/>
+			<arg value="ATimingService.o"/>
+			<arg value="PTimer.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+		</exec>
 	</target>
 
 	<!--
@@ -359,6 +410,9 @@
 		<echo>start StaticConfigTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
 		<echo>end   StaticConfigTest</echo>
+		<echo>start DataDrivenTest</echo>
+		<exec dir="./" resolveexecutable="true" executable="./bin/DataDrivenTest/DataDrivenTest.exe"/>
+		<echo>end   DataDrivenTest</echo>
 	</target>
 	
 	<!--
@@ -396,10 +450,19 @@
 			<classpath refid="clspath"/>
 		</java>
 		
+		<!-- TODO: jh
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.c.tests.StaticConfigTest"/>
 			<arg value="./tmp/StaticConfigTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+		-->
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.DataDrivenTest"/>
+			<arg value="./tmp/DataDrivenTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -411,7 +474,10 @@
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CChoicePointTest.xml"/>
 		<move file="./tmp/SendingDataTestC.xml" tofile="./tmp/CSendingDataTest.xml"/>
-		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/StaticConfigTest.xml"/>
+		<!--  TODO: jh
+		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/CStaticConfigTest.xml"/>
+		-->
+		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/CDataDrivenTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>
