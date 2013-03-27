@@ -72,7 +72,7 @@ etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self);
 const char* PTimer_getMessageString(int msg_id);
 
 /*--------------------- begin user code ---------------------*/
-//uc2		
+/*uc2*/
 /*--------------------- end user code ---------------------*/
 
 #endif /* _PTIMER_H_ */

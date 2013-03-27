@@ -77,7 +77,7 @@ void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTi
 void ATimingService_printList(ATimingService* self);
 
 /*--------------------- begin user code ---------------------*/
-//uc2
+/*uc2*/
 /*--------------------- end user code ---------------------*/
 
 #endif /* _ATIMINGSERVICE_H_ */

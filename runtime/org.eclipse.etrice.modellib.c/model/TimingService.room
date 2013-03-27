@@ -21,7 +21,7 @@ RoomModel room.basic.service.timing {
 			"
 			}
 			usercode2 {
-				"//uc2"
+				"/*uc2*/"
 			}
 			usercode3{
 				"etTimerControlBlock tcbs[ET_NB_OF_TCBS];"
@@ -54,7 +54,7 @@ RoomModel room.basic.service.timing {
 			if (temp==0) return;
 
 			if (usedTcbsRoot->portIdx == idx){
-				// element found, the first one
+				/* element found, the first one */
 				usedTcbsRoot = usedTcbsRoot->next;
 				returnTcb(temp);
 				return;
@@ -67,7 +67,7 @@ RoomModel room.basic.service.timing {
 					returnTcb(temp);
 					return;			
 				}else{
-					// try next
+					/* try next */
 					temp2=temp;
 					temp=temp->next;
 					}
@@ -78,7 +78,7 @@ RoomModel room.basic.service.timing {
 			etTimerControlBlock* temp2=usedTcbsRoot;
 
 			if (temp==0){
-				// list empty put new block to root
+				/* list empty put new block to root */
 				block->next=0;
 				usedTcbsRoot=block;
 				return;
@@ -87,11 +87,11 @@ RoomModel room.basic.service.timing {
 			while(1){
 				if (temp != 0){
 					if (isTimeGreater(&block->expTime,&temp->expTime)){
-						//try next position
+						/* try next position */
 						temp2=temp;	
 						temp=temp->next;
 						}else{
-						// right position found
+						/* right position found */
 						block->next=temp;
 						if(temp==usedTcbsRoot){
 							usedTcbsRoot=block;
@@ -101,7 +101,7 @@ RoomModel room.basic.service.timing {
 						return;
 						}
 					}else{
-					// end of list reached
+					/* end of list reached */
 					block->next=0;
 					temp2->next=block;
 					return;
@@ -192,9 +192,9 @@ RoomModel room.basic.service.timing {
 				}
 				State Operational {
 					entry {
-						"// prepare"
+						"/* prepare */"
 					} do {
-						"// maintain timers"
+						"/* maintain timers */"
 						"etTimerControlBlock* temp;"
 						"etTargetTime_t t;"
 						""
@@ -205,10 +205,10 @@ RoomModel room.basic.service.timing {
 						"\t\ttemp=usedTcbsRoot;"
 						"\t\tusedTcbsRoot=usedTcbsRoot->next;"
 						"\t\tif((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){"
-						"\t\t\t// single shot timer"
+						"\t\t\t/* single shot timer */"
 						"\t\t\treturnTcb(temp);"
 						"\t\t}else{"
-						"\t\t\t// periodic timer"
+						"\t\t\t/* periodic timer */"
 						"\t\t\taddTime(&temp->expTime,&temp->pTime);"
 						"\t\t\tputTcbToUsedList(temp);"
 						"\t\t\t}"
@@ -230,7 +230,7 @@ RoomModel room.basic.service.timing {
 			"
 		}
 		usercode2 {
-			"//uc2		"
+			"/*uc2*/"
 		}
 		incoming {
 			Message startTimer(time: uint32)
@@ -257,13 +257,13 @@ RoomModel room.basic.service.timing {
 			"	
 			}
 			handle outgoing timeout{
-			"//TODO: clear active bit in case of single shot timer
+			"/* TODO: clear active bit in case of single shot timer */
 			if (status!=0){
 				if (status==ET_TIMER_RUNNING){
-					// single shot timer
+					/* single shot timer */
 					status=0;
 					}
-				// msg to fsm
+				/* msg to fsm */
 				(*receiveMessageFunc)(actor, self, msg);
 				}
 			"

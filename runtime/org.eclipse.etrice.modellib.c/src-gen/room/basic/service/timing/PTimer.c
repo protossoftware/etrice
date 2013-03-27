@@ -34,7 +34,6 @@ void PTimerReplPort_timeout(const PTimerReplPort* self, int idx) {
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-
 etInt32 PTimerReplPort_getReplication(const PTimerReplPort* self) {
 	return ((etReplPort*)self)->size;
 }
@@ -59,6 +58,7 @@ void PTimerConjReplPort_startTimer(const PTimerConjReplPort* self, int idx, uint
 	PTimerConjPort_startTimer((etPort*)&((etReplPort*)self)->ports[idx], data);
 }
 
+
 void PTimerConjPort_startTimeout(const PTimerConjPort* self, uint32 data) {
 	if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */==0){
 					((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */ = ET_TIMER_RUNNING;
@@ -76,6 +76,7 @@ void PTimerConjReplPort_startTimeout_broadcast(const PTimerConjReplPort* self, u
 void PTimerConjReplPort_startTimeout(const PTimerConjReplPort* self, int idx, uint32 data) {
 	PTimerConjPort_startTimeout((etPort*)&((etReplPort*)self)->ports[idx], data);
 }
+
 
 void PTimerConjPort_kill(const PTimerConjPort* self) {
 	
@@ -96,7 +97,10 @@ void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx) {
 	PTimerConjPort_kill((etPort*)&((etReplPort*)self)->ports[idx]);
 }
 
+/* begin PTimerConjPort specific */
+
 /*--------------------- operations ---------------------*/
+/* end PTimerConjPort specific */
 
 etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 	return ((etReplPort*)self)->size;
@@ -104,13 +108,13 @@ etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 
 /* receiver handlers */
 void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-	//TODO: clear active bit in case of single shot timer
+	/* TODO: clear active bit in case of single shot timer */
 				if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */!=0){
 					if (((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */==ET_TIMER_RUNNING){
-						// single shot timer
+						/* single shot timer */
 						((PTimerConjPort_var*)(self->varData))->status /* ORIG: status */=0;
 						}
-					// msg to fsm
+					/* msg to fsm */
 					(*receiveMessageFunc)(actor, self, msg);
 					}
 	/* hand over the message to the actor:      */

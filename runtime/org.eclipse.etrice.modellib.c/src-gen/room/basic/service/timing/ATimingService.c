@@ -61,10 +61,10 @@ static int getState(ATimingService* self) {
 
 /* Entry and Exit Codes */
 static void entry_Operational(ATimingService* self) {
-	// prepare
+	/* prepare */
 }
 static  void do_Operational(ATimingService* self) {
-	// maintain timers
+	/* maintain timers */
 	etTimerControlBlock* temp;
 	etTargetTime_t t;
 	
@@ -75,10 +75,10 @@ static  void do_Operational(ATimingService* self) {
 			temp=usedTcbsRoot;
 			usedTcbsRoot=usedTcbsRoot->next;
 			if((temp->pTime.sec==0)&&(temp->pTime.nSec==0)){
-				// single shot timer
+				/* single shot timer */
 				ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
 			}else{
-				// periodic timer
+				/* periodic timer */
 				ATimingService_addTime(self, &temp->expTime, &temp->pTime) /* ORIG: addTime(&temp->expTime,&temp->pTime) */;
 				ATimingService_putTcbToUsedList(self, temp) /* ORIG: putTcbToUsedList(temp) */;
 				}
@@ -327,7 +327,7 @@ void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 				if (temp==0) return;
 	
 				if (usedTcbsRoot->portIdx == idx){
-					// element found, the first one
+					/* element found, the first one */
 					usedTcbsRoot = usedTcbsRoot->next;
 					ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
 					return;
@@ -340,7 +340,7 @@ void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
 						ATimingService_returnTcb(self, temp) /* ORIG: returnTcb(temp) */;
 						return;			
 					}else{
-						// try next
+						/* try next */
 						temp2=temp;
 						temp=temp->next;
 						}
@@ -352,7 +352,7 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 				etTimerControlBlock* temp2=usedTcbsRoot;
 	
 				if (temp==0){
-					// list empty put new block to root
+					/* list empty put new block to root */
 					block->next=0;
 					usedTcbsRoot=block;
 					return;
@@ -361,11 +361,11 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 				while(1){
 					if (temp != 0){
 						if (ATimingService_isTimeGreater(self, &block->expTime, &temp->expTime) /* ORIG: isTimeGreater(&block->expTime,&temp->expTime) */){
-							//try next position
+							/* try next position */
 							temp2=temp;	
 							temp=temp->next;
 							}else{
-							// right position found
+							/* right position found */
 							block->next=temp;
 							if(temp==usedTcbsRoot){
 								usedTcbsRoot=block;
@@ -375,7 +375,7 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 							return;
 							}
 						}else{
-						// end of list reached
+						/* end of list reached */
 						block->next=0;
 						temp2->next=block;
 						return;
