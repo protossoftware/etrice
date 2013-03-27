@@ -644,7 +644,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("self->");
           String _name_1 = message.getName();
           _builder.append(_name_1, "	");
-          _builder.append(" = data;");
+          _builder.append(" = ");
+          _builder.append(refp, "	");
+          _builder.append("data;");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
           _builder.newLine();

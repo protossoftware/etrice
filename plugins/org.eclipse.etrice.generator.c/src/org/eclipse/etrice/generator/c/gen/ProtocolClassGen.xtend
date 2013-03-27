@@ -219,7 +219,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var refp = if (!(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
-					self->«message.name» = data;
+					self->«message.name» = «refp»data;
 				}
 				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)» {
 					return self->peer->«message.name»;
