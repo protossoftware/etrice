@@ -50,6 +50,7 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
+        	category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
             class="org.eclipse.etrice.generator.ui.FSMtestExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.etrice.generator.FSMtest"
             name="FSMtest">
@@ -70,6 +71,7 @@
             <keywordReference id="org.eclipse.etrice.generator.ui.keyword_FSMtest"/>
         </page>
     </extension>
+    <!--
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
@@ -83,6 +85,7 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    -->
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
@@ -180,6 +183,7 @@
             class="org.eclipse.etrice.generator.ui.FSMtestExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
+   <!--
    <extension
             point="org.eclipse.ui.preferencePages">
         <page
@@ -204,6 +208,7 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    -->
 
 	<!-- Quick Outline -->
 	<extension

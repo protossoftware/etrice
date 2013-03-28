@@ -90,7 +90,7 @@ Workflow {
 	            fragment = scoping.ImportURIScopingFragment {}
                 //fragment = scoping.ImportNamespacesScopingFragment {}
                 fragment = exporting.QualifiedNamesFragment {}
-                fragment = builder.BuilderIntegrationFragment {}
+                //fragment = builder.BuilderIntegrationFragment {}
     
                 // generator API
                 fragment = generator.GeneratorFragment {

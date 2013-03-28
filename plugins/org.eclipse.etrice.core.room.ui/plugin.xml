@@ -52,6 +52,7 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
+        	category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
             class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.etrice.core.Room"
             name="Room">

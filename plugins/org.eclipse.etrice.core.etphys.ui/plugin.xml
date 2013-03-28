@@ -51,6 +51,7 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
+        	category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
             class="org.eclipse.etrice.core.etphys.ui.ETPhysExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.etrice.core.etphys.ETPhys"
             name="ETPhys">
@@ -71,6 +72,7 @@
             <keywordReference id="org.eclipse.etrice.core.etphys.ui.keyword_ETPhys"/>
         </page>
     </extension>
+    <!--
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
@@ -84,6 +86,7 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    -->
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
@@ -181,6 +184,7 @@
             class="org.eclipse.etrice.core.etphys.ui.ETPhysExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
+   <!--
    <extension
             point="org.eclipse.ui.preferencePages">
         <page
@@ -205,6 +209,7 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    -->
 
 	<!-- Quick Outline -->
 	<extension
