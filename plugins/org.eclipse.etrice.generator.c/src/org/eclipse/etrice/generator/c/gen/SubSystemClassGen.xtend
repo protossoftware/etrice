@@ -35,6 +35,8 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.SAPRef
 import org.eclipse.etrice.core.room.SPPRef
+import java.util.HashSet
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 
 @Singleton
 class SubSystemClassGen {
@@ -44,13 +46,18 @@ class SubSystemClassGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject Initialization attrInitGenAddon
+
 	@Inject ILanguageExtension languageExt
 	@Inject ILogger logger
+	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
 		for (ssi: root.subSystemInstances) {
 			var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 			var file = ssi.subSystemClass.getCHeaderFileName
+			
+			checkDataPorts(ssi)
+			
 			logger.logInfo("generating SubSystemClass declaration: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generateHeaderFile(ssi))
@@ -542,6 +549,32 @@ class SubSystemClassGen {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	}
+	
+	def private checkDataPorts(SubSystemInstance comp) {
+		val found = new HashSet<String>()
+		for (ai: comp.allContainedInstances) {
+			val thread = ai.threadId
+			for (pi: ai.orderedIfItemInstances) {
+				if (pi.protocol.commType==CommunicationType::DATA_DRIVEN) {
+					for (peer: pi.peers) {
+						val peer_ai = peer.eContainer as ActorInstance
+						val peer_thread = peer_ai.threadId
+						if (thread!=peer_thread) {
+							val path = pi.path
+							val ppath = peer.path
+							val pair = if (path.compareTo(ppath)<0) path+" and "+ppath
+										else ppath+" and "+path
+							if (!found.contains(pair)) {
+								found.add(pair)
+								diagnostician.error(pair+": data ports placed on different threads (not supported yet)",
+									pi.interfaceItem, pi.interfaceItem.eContainingFeature)
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 }
