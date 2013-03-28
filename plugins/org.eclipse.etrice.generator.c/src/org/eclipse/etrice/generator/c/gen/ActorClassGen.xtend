@@ -69,6 +69,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
 		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
+		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
+		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
 		
 	'''
 		/**
@@ -95,9 +97,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		typedef struct «ac.name» «ac.name»;
 		
 		/* const part of ActorClass (ROM) */
-		«IF eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty»
-			/* this actor class has no ports and thus no constant data */
-		«ELSE»
+		«IF hasConstData»
 			typedef struct «ac.name»_const {
 				/* simple ports */
 				«FOR ep : eventPorts»
@@ -130,6 +130,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 					const etReplPort «svc.spp.name»;
 				«ENDFOR»
 			} «ac.name»_const;
+		«ELSE»
+			/* this actor class has no ports and thus no constant data */
 		«ENDIF»
 		
 		«IF !xpac.stateMachine.empty»
@@ -138,25 +140,35 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 		
 		/* variable part of ActorClass (RAM) */
-		struct «ac.name» {
-			«IF !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)»
-				const «ac.name»_const* const constData;
-				
-			«ENDIF»
-			/* data send ports */
-			«FOR ep : sendPorts»
-				«IF ep.multiplicity==1»
-					«ep.getPortClassName()» «ep.name»;
+		«IF hasVarData»
+			struct «ac.name» {
+				«IF hasConstData»
+					const «ac.name»_const* const constData;
+					
 				«ENDIF»
-			«ENDFOR»
-
-			«ac.allAttributes.attributes»
-			
-			«IF !xpac.stateMachine.empty»
-			
-				«xpac.genDataMembers»
-			«ENDIF»
-		};
+				/* data send ports */
+				«FOR ep : sendPorts»
+					«IF ep.multiplicity==1»
+						«ep.getPortClassName()» «ep.name»;
+					«ENDIF»
+				«ENDFOR»
+		
+				«ac.allAttributes.attributes»
+				
+				«IF !xpac.stateMachine.empty»
+				
+					«xpac.genDataMembers»
+				«ENDIF»
+			};
+		«ELSE»
+			struct «ac.name» {
+				/* This actor class has no data at all.
+				   But the private actor instance data is passed to all life cycle functions.
+				   By introducing the dummy data we keep this case simple
+				*/
+				int dummy;
+			};
+		«ENDIF»
 
 		void «ac.name»_init(«ac.name»* self);
 
