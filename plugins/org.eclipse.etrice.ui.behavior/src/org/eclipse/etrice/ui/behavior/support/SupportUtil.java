@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -416,6 +417,16 @@ public class SupportUtil {
 		return transitions;
 	}
 
+	private static Map<Transition, Connection> getTransitionsMap(Diagram diagram, IFeatureProvider fp) {
+		Map<Transition, Connection> transitions = new HashMap<Transition, Connection>();
+		for (Connection conn : diagram.getConnections()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(conn);
+			if (bo instanceof Transition)
+				transitions.put((Transition) bo, conn);
+		}
+		return transitions;
+	}
+
 	/**
 	 * @param sgShape
 	 * @param node2anchor
@@ -444,7 +455,7 @@ public class SupportUtil {
 		GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 		ctx.getPositionProvider().setScale(borderRect.getWidth(), borderRect.getHeight());
 		
-		addInitialPointIff(ctx.getTransitions(), sgShape, fp, node2anchor);
+		addInitialPointIff(ctx, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		addStateGraphNodes(ctx.getTrPoints(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		addStateGraphNodes(ctx.getStates(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		addStateGraphNodes(ctx.getChPoints(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
@@ -460,6 +471,39 @@ public class SupportUtil {
 		return sgShape;
 	}
 	
+	private static void addInitialPointIff(StateGraphContext ctx, IPositionProvider positionProvider, ContainerShape sgShape, IFeatureProvider fp,
+			HashMap<String, Anchor> node2anchor) {
+	
+		// model
+		StateGraph sg = ctx.getInitialPoint();
+		if(sg==null)
+			// (super class) diagram
+			sg = positionProvider.getInitialPoint(ctx.getStateGraph());
+		if(sg==null)
+			return;
+		
+		PosAndSize pos = positionProvider.getPosition(sg);		
+		AddContext addContext = new AddContext();
+		addContext.setNewObject(sg);
+		addContext.setTargetContainer(sgShape);
+		if(pos != null){
+			addContext.setX(pos.getX());
+			addContext.setY(pos.getY());
+			if (pos.getWidth()>0 && pos.getHeight()>0) {
+				addContext.setWidth(pos.getWidth());
+				addContext.setHeight(pos.getHeight());
+			}
+		} else {
+			addContext.setX(3*StateGraphSupport.MARGIN);
+			addContext.setY(3*StateGraphSupport.MARGIN);
+		}
+		
+		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
+		assert(pe!=null): "initial point should have been created";
+		assert(!pe.getAnchors().isEmpty()): "initial point should have an anchor";
+		node2anchor.put(INITIAL, pe.getAnchors().get(0));
+	}
+
 	public static void updateStateGraph(StateGraph sg, StateGraphContext ctx, ContainerShape sgShape, IFeatureProvider fp) {
 
 		HashMap<String, Anchor> node2anchor = new HashMap<String, Anchor>();
@@ -523,16 +567,38 @@ public class SupportUtil {
 		
 		SupportUtil.getSubTpAnchors(sgShape, node2anchor);
 
+		// initial point
+		{
+			// exists in this diagram ?
+			Shape present = null;
+			for (Shape ch : sgShape.getChildren()) {
+				Object bo = fp.getBusinessObjectForPictogramElement(ch);
+				if (bo instanceof StateGraph)
+					present = ch;
+			}
+			if(present != null)
+				node2anchor.put(INITIAL, present.getAnchors().get(0));
+			// exists in model ?
+			StateGraph expected = ctx.getInitialPoint();
+			if(expected == null)
+				// exists in (super class) diagram ? 
+				expected = ctx.getPositionProvider().getInitialPoint(ctx.getStateGraph());
+			if(expected != null && present == null)
+				addInitialPointIff(ctx, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+			else
+				SupportUtil.updateInitialPoint(present, ctx.getPositionProvider(), fp);
+		}
 		// transitions
 		{
-			List<Transition> present = SupportUtil.getTransitions((Diagram) sgShape.eContainer(), fp);
+			Map<Transition, Connection> present = SupportUtil.getTransitionsMap((Diagram) sgShape.eContainer(), fp);
 			List<Transition> expected = ctx.getTransitions();
-			List<Transition> items = new ArrayList<Transition>();
-			for (Transition trans : expected) {
-				if (!present.contains(trans))
-					items.add(trans);
-			}
-			SupportUtil.addTransitions(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+			List<Transition> toAdd = new ArrayList<Transition>();
+			for (Transition trans : expected)
+				if (!present.containsKey(trans))
+					toAdd.add(trans);
+			
+			SupportUtil.addTransitions(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+			SupportUtil.updateTransitions(present, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 	}
 
@@ -624,6 +690,29 @@ public class SupportUtil {
 		node2anchor.put(getKey(tp), pe.getAnchors().get(0));
 	}
 
+	private static void updateInitialPoint(Shape shape,
+			IPositionProvider positionProvider, IFeatureProvider fp) {
+		StateGraph sg = (StateGraph) fp.getBusinessObjectForPictogramElement(shape);
+		PosAndSize ps = positionProvider.getPosition(sg);
+		if (ps==null)
+			return;
+		
+		// relocate and resize the invisible rectangle
+		GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
+	
+		Graphiti.getLayoutService().setLocationAndSize(
+			ga,
+			ps.getX(),
+			ps.getY(),
+			ps.getWidth(),
+			ps.getHeight()
+		);
+		
+		// have to call the layout to adjust the visible border
+		LayoutContext lc = new LayoutContext(shape);
+		fp.layoutIfPossible(lc);
+	}
+
 	private static void updateStateGraphNodes(List<? extends StateGraphNode> nodes, List<Shape> shapes, IPositionProvider positionProvider, IFeatureProvider fp) {
 		
 		ILinkService linkService = Graphiti.getLinkService();
@@ -665,30 +754,50 @@ public class SupportUtil {
 			}
 		}
 	}
+	
+	private static void updateTransitions(Map<Transition, Connection> transitions, IPositionProvider positionProvider, ContainerShape sgShape,
+			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+		
+		for(Entry<Transition, Connection> e: transitions.entrySet()){
+			Transition trans = e.getKey();
+			Connection conn = e.getValue();
+			
+			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom());
+			String to = getKey(trans.getTo());
+			Anchor newSrc = node2anchor.get(from);
+			Anchor newDst = node2anchor.get(to);
+			
+			assert(newSrc!=null && newDst!=null): "transition endpoints must be present";
+			
+			if(conn.getStart()!=newSrc)
+				conn.setStart(newSrc);
+			if(conn.getEnd()!=newDst)
+				conn.setEnd(newDst);			
+			
+			List<Pos> points = positionProvider.getPoints(trans);
+			Iterator<Pos> it = points.iterator();
+			if (points==null || points.isEmpty())
+				continue;
+			
+			// first is label position
+			Pos pos = it.next();
+			ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+			Graphiti.getGaService().setLocation(cd.getGraphicsAlgorithm(), pos.getX(), pos.getY());
+			
+			if (conn instanceof FreeFormConnection) {
+				FreeFormConnection fconn = (FreeFormConnection) conn;
 
-	private static void addInitialPointIff(List<Transition> transitions, ContainerShape sgShape, IFeatureProvider fp,
-			HashMap<String, Anchor> node2anchor) {
-
-		StateGraph sg = null;
-		for (Transition t : transitions) {
-			if (t instanceof InitialTransition) {
-				sg = (StateGraph) t.eContainer();
-				break;
+				// remaining are bend points
+				fconn.getBendpoints().clear();
+				List<Point> bendpoints = new ArrayList<Point>();
+				while (it.hasNext()) {
+					pos = it.next();
+					Point pt = Graphiti.getGaService().createPoint(pos.getX(), pos.getY());
+					bendpoints.add(pt);
+				}
+				fconn.getBendpoints().addAll(bendpoints);
 			}
 		}
-		if (sg==null)
-			return;
-		
-		AddContext addContext = new AddContext();
-		addContext.setNewObject(sg);
-		addContext.setTargetContainer(sgShape);
-		addContext.setX(3*StateGraphSupport.MARGIN);
-		addContext.setY(3*StateGraphSupport.MARGIN);
-		
-		ContainerShape pe = (ContainerShape) fp.addIfPossible(addContext);
-		assert(pe!=null): "initial point should have been created";
-		assert(!pe.getAnchors().isEmpty()): "initial point should have an anchor";
-		node2anchor.put(INITIAL, pe.getAnchors().get(0));
 	}
 
 	private static void getAnchors(State state, PictogramElement stateShape,

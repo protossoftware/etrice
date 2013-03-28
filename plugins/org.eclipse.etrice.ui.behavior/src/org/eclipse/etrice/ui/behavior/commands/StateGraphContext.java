@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SimpleState;
@@ -260,5 +261,12 @@ public class StateGraphContext {
 	
 	public StateGraphContext getContext(StateGraphItem item) {
 		return obj2ctx.get(item);
+	}
+	
+	public StateGraph getInitialPoint(){
+		for(Transition t : transitions)
+			if(t instanceof InitialTransition)
+				return (StateGraph) t.eContainer();
+		return null;
 	}
 }
