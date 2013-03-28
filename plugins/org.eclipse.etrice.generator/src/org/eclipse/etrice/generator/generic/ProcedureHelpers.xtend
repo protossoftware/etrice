@@ -195,9 +195,7 @@ class ProcedureHelpers {
 	 * @return code for the attribute setter declaration
 	 */	
 	def private setterHeader(Attribute attribute, String classname){
-	'''
-		«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)
-	'''
+		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
 	}
 	
 	/**
@@ -206,9 +204,7 @@ class ProcedureHelpers {
 	 * @return code for the attribute getter declaration
 	 */	
 	def private getterHeader(Attribute attribute, String classname){
-	'''
-		«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)
-	'''
+		'''«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
 	}
 	
 	/**

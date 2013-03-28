@@ -406,7 +406,6 @@ public class ProcedureHelpers {
     String _name_1 = attribute.getName();
     _builder.append(_name_1, "");
     _builder.append(")");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -438,7 +437,6 @@ public class ProcedureHelpers {
     String _selfPointer = this.languageExt.selfPointer(classname, false);
     _builder.append(_selfPointer, "");
     _builder.append(")");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

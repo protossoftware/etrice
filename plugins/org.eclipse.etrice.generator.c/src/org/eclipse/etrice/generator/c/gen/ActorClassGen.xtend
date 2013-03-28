@@ -15,20 +15,19 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.core.room.CommunicationType
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -44,40 +43,32 @@ class ActorClassGen extends GenericActorClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
-			var path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
+			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			
 			// header file
 			logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCHeaderFileName+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(xpac.actorClass.getCHeaderFileName, root.generateHeaderFile(xpac, xpac.actorClass))
+			fileAccess.generateFile(xpac.actorClass.getCHeaderFileName, root.generateHeaderFile(xpac))
 
 			// source file
-			if (hasBehaviorAnnotation(xpac, "BehaviorManual")) {
+			if (xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")) {
 				logger.logInfo("omitting ActorClass source for '"+xpac.actorClass.name+"' since @BehaviorManual is specified")
 			}
 			else {
 				logger.logInfo("generating ActorClass source '"+xpac.actorClass.getCSourceFileName +"' in '"+path+"'")
 				fileAccess.setOutputPath(path)
-				fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac, xpac.actorClass))
+				fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac))
 			}
 		}
 	}
 	
-	def private hasBehaviorAnnotation(ExpandedActorClass xpac, String annotation) {
-		if (xpac.actorClass.behaviorAnnotations != null){
-			if(xpac.actorClass.behaviorAnnotations.findFirst(e|e.name == annotation) != null){
-				return true;
-			}
-		}
-		return false;		
-	}
-	
-	def private generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
-		var eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
-		var sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
-		var recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
-		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
-		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
+	def private generateHeaderFile(Root root, ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
+		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
+		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
+		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
+		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		
 	'''
 		/**
@@ -184,11 +175,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 	'''
 	}
 	
-	def private generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
-		var async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
-		var eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
-		var dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
-		var handleEvents = async || eventDriven
+	def private generateSourceFile(Root root, ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
+		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
+		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
+		val handleEvents = async || eventDriven
 		
 	'''
 		/**

@@ -11,7 +11,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
@@ -67,7 +66,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
         String _path = this._roomExtensions.getPath(_actorClass_1);
-        String path = (_generationTargetPath + _path);
+        final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_2 = xpac.getActorClass();
         String _cHeaderFileName = this._cExtensions.getCHeaderFileName(_actorClass_2);
         String _plus = ("generating ActorClass header \'" + _cHeaderFileName);
@@ -78,11 +77,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
         this.fileAccess.setOutputPath(path);
         ActorClass _actorClass_3 = xpac.getActorClass();
         String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(_actorClass_3);
-        ActorClass _actorClass_4 = xpac.getActorClass();
-        CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac, _actorClass_4);
+        CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac);
         this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
-        boolean _hasBehaviorAnnotation = this.hasBehaviorAnnotation(xpac, "BehaviorManual");
-        if (_hasBehaviorAnnotation) {
+        ActorClass _actorClass_4 = xpac.getActorClass();
+        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_4, "BehaviorManual");
+        if (_isBehaviorAnnotationPresent) {
           ActorClass _actorClass_5 = xpac.getActorClass();
           String _name = _actorClass_5.getName();
           String _plus_4 = ("omitting ActorClass source for \'" + _name);
@@ -99,40 +98,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
           this.fileAccess.setOutputPath(path);
           ActorClass _actorClass_7 = xpac.getActorClass();
           String _cSourceFileName_1 = this._cExtensions.getCSourceFileName(_actorClass_7);
-          ActorClass _actorClass_8 = xpac.getActorClass();
-          CharSequence _generateSourceFile = this.generateSourceFile(root, xpac, _actorClass_8);
+          CharSequence _generateSourceFile = this.generateSourceFile(root, xpac);
           this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
         }
       }
     }
   }
   
-  private boolean hasBehaviorAnnotation(final ExpandedActorClass xpac, final String annotation) {
-    ActorClass _actorClass = xpac.getActorClass();
-    EList<Annotation> _behaviorAnnotations = _actorClass.getBehaviorAnnotations();
-    boolean _notEquals = (!Objects.equal(_behaviorAnnotations, null));
-    if (_notEquals) {
-      ActorClass _actorClass_1 = xpac.getActorClass();
-      EList<Annotation> _behaviorAnnotations_1 = _actorClass_1.getBehaviorAnnotations();
-      final Function1<Annotation,Boolean> _function = new Function1<Annotation,Boolean>() {
-          public Boolean apply(final Annotation e) {
-            String _name = e.getName();
-            boolean _equals = Objects.equal(_name, annotation);
-            return Boolean.valueOf(_equals);
-          }
-        };
-      Annotation _findFirst = IterableExtensions.<Annotation>findFirst(_behaviorAnnotations_1, _function);
-      boolean _notEquals_1 = (!Objects.equal(_findFirst, null));
-      if (_notEquals_1) {
-        return true;
-      }
-    }
-    return false;
-  }
-  
-  private CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
+  private CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
+      final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
@@ -142,7 +118,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             return Boolean.valueOf(_equals);
           }
         };
-      Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
+      final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
@@ -159,7 +135,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
+      final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
@@ -177,11 +153,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
+      final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
       ActorCommunicationType _commType = ac.getCommType();
-      boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
+      final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
       ActorCommunicationType _commType_1 = ac.getCommType();
-      boolean async = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+      final boolean async = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -550,22 +526,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
-  private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
+  private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
+      final ActorClass ac = xpac.getActorClass();
       ActorCommunicationType _commType = ac.getCommType();
-      boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
       ActorCommunicationType _commType_1 = ac.getCommType();
-      boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
+      final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
       ActorCommunicationType _commType_2 = ac.getCommType();
-      boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
+      final boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;
       } else {
         _or = (async || eventDriven);
       }
-      boolean handleEvents = _or;
+      final boolean handleEvents = _or;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
