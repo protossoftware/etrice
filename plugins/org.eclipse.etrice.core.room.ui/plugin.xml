@@ -59,6 +59,13 @@
             <keywordReference id="org.eclipse.etrice.core.ui.keyword_Room"/>
         </page>
         <page
+        	category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
+            class="org.eclipse.etrice.core.ui.preferences.ValidationExtensionPreferences"
+            id="org.eclipse.etrice.core.Room.ValidationExtensions"
+            name="Validation Extensions">
+            <keywordReference id="org.eclipse.etrice.core.ui.keyword_Room"/>
+        </page>
+        <page
             category="org.eclipse.etrice.core.Room"
             class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.etrice.core.Room.coloring"

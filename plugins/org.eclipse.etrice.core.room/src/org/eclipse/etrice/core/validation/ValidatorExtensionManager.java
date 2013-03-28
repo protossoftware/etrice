@@ -77,6 +77,7 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 		private HashMap<String, ArrayList<IRoomValidator>> normalClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
 		private HashMap<String, ArrayList<IRoomValidator>> expensiveClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
 		private ArrayList<ValidatorInfo> infos = new ArrayList<ValidatorExtensionManager.ValidatorInfo>();
+		private ArrayList<ValidatorInfo> excludedInfos = new ArrayList<ValidatorExtensionManager.ValidatorInfo>();
 		private HashSet<IRoomValidator> excluded = new HashSet<IRoomValidator>();
 		
 		public static Registry getInstance() {
@@ -139,11 +140,21 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 		}
 		
 		public void exclude(ValidatorInfo info) {
+			excludedInfos.add(info);
 			excluded.add(info.getValidator());
 		}
 		
 		public void include(ValidatorInfo info) {
+			excludedInfos.remove(info);
 			excluded.remove(info.getValidator());
+		}
+
+		public ArrayList<ValidatorInfo> getInfos() {
+			return infos;
+		}
+
+		public ArrayList<ValidatorInfo> getExcludedInfos() {
+			return excludedInfos;
 		}
 		
 		public void validate(EObject object, CheckMode checkMode, ValidationMessageAcceptor messageAcceptor) {
