@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -416,6 +417,16 @@ public class SupportUtil {
 		return transitions;
 	}
 
+	private static Map<Transition, Connection> getTransitionsMap(Diagram diagram, IFeatureProvider fp) {
+		Map<Transition, Connection> transitions = new HashMap<Transition, Connection>();
+		for (Connection conn : diagram.getConnections()) {
+			Object bo = fp.getBusinessObjectForPictogramElement(conn);
+			if (bo instanceof Transition)
+				transitions.put((Transition) bo, conn);
+		}
+		return transitions;
+	}
+
 	/**
 	 * @param sgShape
 	 * @param node2anchor
@@ -579,14 +590,15 @@ public class SupportUtil {
 		}
 		// transitions
 		{
-			List<Transition> present = SupportUtil.getTransitions((Diagram) sgShape.eContainer(), fp);
+			Map<Transition, Connection> present = SupportUtil.getTransitionsMap((Diagram) sgShape.eContainer(), fp);
 			List<Transition> expected = ctx.getTransitions();
-			List<Transition> items = new ArrayList<Transition>();
-			for (Transition trans : expected) {
-				if (!present.contains(trans))
-					items.add(trans);
-			}
-			SupportUtil.addTransitions(items, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+			List<Transition> toAdd = new ArrayList<Transition>();
+			for (Transition trans : expected)
+				if (!present.containsKey(trans))
+					toAdd.add(trans);
+			
+			SupportUtil.addTransitions(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+			SupportUtil.updateTransitions(present, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		}
 	}
 
@@ -739,6 +751,51 @@ public class SupportUtil {
 					fp.layoutIfPossible(lc);
 					break;
 				}
+			}
+		}
+	}
+	
+	private static void updateTransitions(Map<Transition, Connection> transitions, IPositionProvider positionProvider, ContainerShape sgShape,
+			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
+		
+		for(Entry<Transition, Connection> e: transitions.entrySet()){
+			Transition trans = e.getKey();
+			Connection conn = e.getValue();
+			
+			String from = (trans instanceof InitialTransition)? INITIAL:getKey(((NonInitialTransition)trans).getFrom());
+			String to = getKey(trans.getTo());
+			Anchor newSrc = node2anchor.get(from);
+			Anchor newDst = node2anchor.get(to);
+			
+			assert(newSrc!=null && newDst!=null): "transition endpoints must be present";
+			
+			if(conn.getStart()!=newSrc)
+				conn.setStart(newSrc);
+			if(conn.getEnd()!=newDst)
+				conn.setEnd(newDst);			
+			
+			List<Pos> points = positionProvider.getPoints(trans);
+			Iterator<Pos> it = points.iterator();
+			if (points==null || points.isEmpty())
+				continue;
+			
+			// first is label position
+			Pos pos = it.next();
+			ConnectionDecorator cd = conn.getConnectionDecorators().get(1);
+			Graphiti.getGaService().setLocation(cd.getGraphicsAlgorithm(), pos.getX(), pos.getY());
+			
+			if (conn instanceof FreeFormConnection) {
+				FreeFormConnection fconn = (FreeFormConnection) conn;
+
+				// remaining are bend points
+				fconn.getBendpoints().clear();
+				List<Point> bendpoints = new ArrayList<Point>();
+				while (it.hasNext()) {
+					pos = it.next();
+					Point pt = Graphiti.getGaService().createPoint(pos.getX(), pos.getY());
+					bendpoints.add(pt);
+				}
+				fconn.getBendpoints().addAll(bendpoints);
 			}
 		}
 	}
