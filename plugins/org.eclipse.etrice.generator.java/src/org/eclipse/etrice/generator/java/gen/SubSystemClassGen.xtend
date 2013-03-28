@@ -14,16 +14,20 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.HashSet
 import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.LogicalThread
+import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
-import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.core.room.LogicalThread
 
 @Singleton
 class SubSystemClassGen {
@@ -37,12 +41,14 @@ class SubSystemClassGen {
 
 	@Inject VariableServiceGen varService
 	@Inject ILogger logger
+	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
 		for (ssi: root.subSystemInstances) {
 			var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 			var file = ssi.subSystemClass.getJavaFileName
 			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
+			checkDataPorts(ssi)
 			fileAccess.setOutputPath(path)
 			fileAccess.generateFile(file, root.generate(ssi))
 			if(dataConfigExt.hasVariableService(ssi))
@@ -169,5 +175,31 @@ class SubSystemClassGen {
 
 	def private getThreadId(LogicalThread thread) {
 		"THREAD_"+thread.name.toUpperCase
+	}
+	
+	def private checkDataPorts(SubSystemInstance comp) {
+		val found = new HashSet<String>()
+		for (ai: comp.allContainedInstances) {
+			val thread = ai.threadId
+			for (pi: ai.orderedIfItemInstances) {
+				if (pi.protocol.commType==CommunicationType::DATA_DRIVEN) {
+					for (peer: pi.peers) {
+						val peer_ai = peer.eContainer as ActorInstance
+						val peer_thread = peer_ai.threadId
+						if (thread!=peer_thread) {
+							val path = pi.path
+							val ppath = peer.path
+							val pair = if (path.compareTo(ppath)<0) path+" and "+ppath
+										else ppath+" and "+path
+							if (!found.contains(pair)) {
+								found.add(pair)
+								diagnostician.error(pair+": data ports placed on different threads (not supported yet)",
+									pi.interfaceItem, pi.interfaceItem.eContainingFeature)
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

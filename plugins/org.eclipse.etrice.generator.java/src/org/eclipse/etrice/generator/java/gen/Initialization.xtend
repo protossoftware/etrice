@@ -93,21 +93,21 @@ class Initialization {
 		var aType = a.refType.type
 		// special treatment of char array with single character ('x')
 		'''
-	 		«IF a.size == 0 || (a.size > 0 && "char".equals(aType.typeName) && !value.matches("'.'|\\(char\\).*"))»
-	 			«invokes».«procedureHelpers.invokeSetter(a.name, null, value)»;
-	 		«ELSEIF !value.trim.startsWith('{') || "char".equals(aType.typeName)»
-				{
-					«aType.typeName»[] array = new «aType.typeName»[«a.size»];
-					«IF !(a.refType.ref && aType.primitive)»
-						for (int i=0;i<«a.size»;i++){
-							array[i] = «value»;
-						}
-					«ENDIF»
-					«invokes».«procedureHelpers.invokeSetter(a.name, null, "array")»;
-				}
-	 		«ELSE»
-	 			«invokes».«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
-	 		«ENDIF»
+		«IF a.size == 0 || (a.size > 0 && "char".equals(aType.typeName) && !value.matches("'.'|\\(char\\).*"))»
+			«invokes».«procedureHelpers.invokeSetter(a.name, null, value)»;
+		«ELSEIF !value.trim.startsWith('{') || "char".equals(aType.typeName)»
+			{
+				«aType.typeName»[] array = new «aType.typeName»[«a.size»];
+				«IF !(a.refType.ref && aType.primitive)»
+					for (int i=0;i<«a.size»;i++){
+						array[i] = «value»;
+					}
+				«ENDIF»
+				«invokes».«procedureHelpers.invokeSetter(a.name, null, "array")»;
+			}
+		«ELSE»
+			«invokes».«procedureHelpers.invokeSetter(a.name,null, '''new «aType.typeName»[] «value»''')»;
+		«ENDIF»
 	 	'''
 	}
 	

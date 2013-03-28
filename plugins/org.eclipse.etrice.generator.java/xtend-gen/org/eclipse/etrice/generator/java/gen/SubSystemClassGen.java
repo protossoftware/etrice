@@ -1,16 +1,24 @@
 package org.eclipse.etrice.generator.java.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashSet;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalThread;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
@@ -50,6 +58,9 @@ public class SubSystemClassGen {
   @Inject
   private ILogger logger;
   
+  @Inject
+  private IDiagnostician diagnostician;
+  
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
     for (final SubSystemInstance ssi : _subSystemInstances) {
@@ -66,6 +77,7 @@ public class SubSystemClassGen {
         String _plus_2 = (_plus_1 + path);
         String _plus_3 = (_plus_2 + "\'");
         this.logger.logInfo(_plus_3);
+        this.checkDataPorts(ssi);
         this.fileAccess.setOutputPath(path);
         CharSequence _generate = this.generate(root, ssi);
         this.fileAccess.generateFile(file, _generate);
@@ -462,5 +474,60 @@ public class SubSystemClassGen {
     String _upperCase = _name.toUpperCase();
     String _plus = ("THREAD_" + _upperCase);
     return _plus;
+  }
+  
+  private void checkDataPorts(final SubSystemInstance comp) {
+    HashSet<String> _hashSet = new HashSet<String>();
+    final HashSet<String> found = _hashSet;
+    EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
+    for (final ActorInstance ai : _allContainedInstances) {
+      {
+        final int thread = ai.getThreadId();
+        EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+        for (final InterfaceItemInstance pi : _orderedIfItemInstances) {
+          ProtocolClass _protocol = pi.getProtocol();
+          CommunicationType _commType = _protocol.getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (_equals) {
+            EList<InterfaceItemInstance> _peers = pi.getPeers();
+            for (final InterfaceItemInstance peer : _peers) {
+              {
+                EObject _eContainer = peer.eContainer();
+                final ActorInstance peer_ai = ((ActorInstance) _eContainer);
+                final int peer_thread = peer_ai.getThreadId();
+                boolean _notEquals = (thread != peer_thread);
+                if (_notEquals) {
+                  final String path = pi.getPath();
+                  final String ppath = peer.getPath();
+                  String _xifexpression = null;
+                  int _compareTo = path.compareTo(ppath);
+                  boolean _lessThan = (_compareTo < 0);
+                  if (_lessThan) {
+                    String _plus = (path + " and ");
+                    String _plus_1 = (_plus + ppath);
+                    _xifexpression = _plus_1;
+                  } else {
+                    String _plus_2 = (ppath + " and ");
+                    String _plus_3 = (_plus_2 + path);
+                    _xifexpression = _plus_3;
+                  }
+                  final String pair = _xifexpression;
+                  boolean _contains = found.contains(pair);
+                  boolean _not = (!_contains);
+                  if (_not) {
+                    found.add(pair);
+                    String _plus_4 = (pair + ": data ports placed on different threads (not supported yet)");
+                    InterfaceItem _interfaceItem = pi.getInterfaceItem();
+                    InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
+                    EStructuralFeature _eContainingFeature = _interfaceItem_1.eContainingFeature();
+                    this.diagnostician.error(_plus_4, _interfaceItem, _eContainingFeature);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
