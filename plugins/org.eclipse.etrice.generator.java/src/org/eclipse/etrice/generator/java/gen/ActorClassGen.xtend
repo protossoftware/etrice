@@ -14,17 +14,17 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -42,15 +42,20 @@ class ActorClassGen extends GenericActorClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
-			var path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
+			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
+			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			var file = xpac.actorClass.getJavaFileName
+			if (manualBehavior)
+				file = "Abstract"+file
 			logger.logInfo("generating ActorClass implementation '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(xpac, xpac.actorClass))
+			fileAccess.generateFile(file, root.generate(xpac, manualBehavior))
 		}
 	}
 	
-	def generate(Root root, ExpandedActorClass xpac, ActorClass ac) {
+	def generate(Root root, ExpandedActorClass xpac, boolean manualBehavior) {
+		val ac = xpac.actorClass
+		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
@@ -81,7 +86,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(1)»
 		
 		
-		public «IF ac.^abstract»abstract «ENDIF»class «ac.name» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
+		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
 		
 			«ac.userCode(2)»
 			
@@ -111,7 +116,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ac.operationsImplementation»
 		
 			//--------------------- construction
-			public «ac.name»(IRTObject parent, String name) {
+			public «clsname»(IRTObject parent, String name) {
 				super(parent, name);
 				setClassName("«ac.name»");
 				
@@ -173,28 +178,41 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 			//--------------------- lifecycle functions
 			«IF !ac.overridesStop()»
-				public void stop(){
-					stopUser();
-					super.stop();
-				}
+				«IF manualBehavior»
+					public abstract void stop();
+				«ELSE»
+					public void stop(){
+						stopUser();
+						super.stop();
+					}
+				«ENDIF»
 			«ENDIF»
 			
 			«IF dtor!=null»
-				public void destroy(){
-					«ac.name.destructorCall»;
-					super.destroy();
-				}
+				«IF manualBehavior»
+					public abstract void destroy();
+				«ELSE»
+					public void destroy(){
+						«ac.name.destructorCall»;
+						super.destroy();
+					}
+				«ENDIF»
 			«ENDIF»
 		
-			«IF ac.hasNonEmptyStateMachine»
-				«xpac.genStateMachine()»
-			«ELSEIF !xpac.hasStateMachine()»
-				//--------------------- no state machine
-				public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
-					handleSystemEvent(ifitem, evt, data);
-				}
-				
-				public void executeInitTransition() {}
+			«IF manualBehavior»
+				public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);
+				public abstract void executeInitTransition();
+			«ELSE»
+				«IF ac.hasNonEmptyStateMachine»
+					«xpac.genStateMachine()»
+				«ELSEIF !xpac.hasStateMachine()»
+					//--------------------- no state machine
+					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
+						handleSystemEvent(ifitem, evt, data);
+					}
+					
+					public void executeInitTransition() {}
+				«ENDIF»
 			«ENDIF»
 		};
 	'''

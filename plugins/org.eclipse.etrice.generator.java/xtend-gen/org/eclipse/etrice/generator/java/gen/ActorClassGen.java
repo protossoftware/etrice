@@ -69,28 +69,44 @@ public class ActorClassGen extends GenericActorClassGenerator {
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);
+        final boolean manualBehavior = RoomHelpers.isBehaviorAnnotationPresent(_actorClass, "BehaviorManual");
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _path = this._roomExtensions.getPath(_actorClass_1);
-        String path = (_generationTargetPath + _path);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass_1);
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String file = this._javaExtensions.getJavaFileName(_actorClass_2);
-        String _plus = ("generating ActorClass implementation \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
+        String _path = this._roomExtensions.getPath(_actorClass_2);
+        final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        CharSequence _generate = this.generate(root, xpac, _actorClass_3);
+        String file = this._javaExtensions.getJavaFileName(_actorClass_3);
+        if (manualBehavior) {
+          String _plus = ("Abstract" + file);
+          file = _plus;
+        }
+        String _plus_1 = ("generating ActorClass implementation \'" + file);
+        String _plus_2 = (_plus_1 + "\' in \'");
+        String _plus_3 = (_plus_2 + path);
+        String _plus_4 = (_plus_3 + "\'");
+        this.logger.logInfo(_plus_4);
+        this.fileAccess.setOutputPath(path);
+        CharSequence _generate = this.generate(root, xpac, manualBehavior);
         this.fileAccess.generateFile(file, _generate);
       }
     }
   }
   
-  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
+  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final boolean manualBehavior) {
     CharSequence _xblockexpression = null;
     {
+      final ActorClass ac = xpac.getActorClass();
+      String _xifexpression = null;
+      if (manualBehavior) {
+        String _name = ac.getName();
+        String _plus = ("Abstract" + _name);
+        _xifexpression = _plus;
+      } else {
+        String _name_1 = ac.getName();
+        _xifexpression = _name_1;
+      }
+      final String clsname = _xifexpression;
       EList<StandardOperation> _operations = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
           public Boolean apply(final StandardOperation op) {
@@ -146,8 +162,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final RoomModel model : models) {
           _builder.append("import ");
-          String _name = model.getName();
-          _builder.append(_name, "");
+          String _name_2 = model.getName();
+          _builder.append(_name_2, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
@@ -160,8 +176,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _package_1 = this._roomExtensions.getPackage(pc);
           _builder.append(_package_1, "");
           _builder.append(".");
-          String _name_1 = pc.getName();
-          _builder.append(_name_1, "");
+          String _name_3 = pc.getName();
+          _builder.append(_name_3, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
@@ -174,22 +190,27 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("public ");
       {
-        boolean _isAbstract = ac.isAbstract();
-        if (_isAbstract) {
+        boolean _or = false;
+        if (manualBehavior) {
+          _or = true;
+        } else {
+          boolean _isAbstract = ac.isAbstract();
+          _or = (manualBehavior || _isAbstract);
+        }
+        if (_or) {
           _builder.append("abstract ");
         }
       }
       _builder.append("class ");
-      String _name_2 = ac.getName();
-      _builder.append(_name_2, "");
+      _builder.append(clsname, "");
       _builder.append(" extends ");
       {
         ActorClass _base = ac.getBase();
         boolean _notEquals = (!Objects.equal(_base, null));
         if (_notEquals) {
           ActorClass _base_1 = ac.getBase();
-          String _name_3 = _base_1.getName();
-          _builder.append(_name_3, "");
+          String _name_4 = _base_1.getName();
+          _builder.append(_name_4, "");
         } else {
           _builder.append("ActorClassBase");
         }
@@ -214,8 +235,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName = this._roomExtensions.getPortClassName(ep);
           _builder.append(_portClassName, "	");
           _builder.append(" ");
-          String _name_4 = ep.getName();
-          _builder.append(_name_4, "	");
+          String _name_5 = ep.getName();
+          _builder.append(_name_5, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -233,8 +254,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName_1, "	");
           _builder.append(" ");
-          String _name_5 = sap.getName();
-          _builder.append(_name_5, "	");
+          String _name_6 = sap.getName();
+          _builder.append(_name_6, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -253,8 +274,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_portClassName_2, "	");
           _builder.append(" ");
           SPPRef _spp = svc.getSpp();
-          String _name_6 = _spp.getName();
-          _builder.append(_name_6, "	");
+          String _name_7 = _spp.getName();
+          _builder.append(_name_7, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -282,8 +303,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Attribute a : _dynConfigReadAttributes_1) {
           _builder.append("\t");
           _builder.append("private DynConfigLock lock_");
-          String _name_7 = a.getName();
-          _builder.append(_name_7, "	");
+          String _name_8 = a.getName();
+          _builder.append(_name_8, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -298,8 +319,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_8 = ac.getName();
-      _builder.append(_name_8, "	");
+      _builder.append(clsname, "	");
       _builder.append("(IRTObject parent, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -462,19 +482,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       {
-        boolean _or = false;
+        boolean _or_1 = false;
         List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
         boolean _isEmpty_1 = _dynConfigReadAttributes_2.isEmpty();
         boolean _not_1 = (!_isEmpty_1);
         if (_not_1) {
-          _or = true;
+          _or_1 = true;
         } else {
           List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
           boolean _isEmpty_2 = _dynConfigWriteAttributes.isEmpty();
           boolean _not_2 = (!_isEmpty_2);
-          _or = (_not_1 || _not_2);
+          _or_1 = (_not_1 || _not_2);
         }
-        if (_or) {
+        if (_or_1) {
           {
             List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
             for(final Attribute a_1 : _dynConfigReadAttributes_3) {
@@ -557,20 +577,28 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _overridesStop = this._roomExtensions.overridesStop(ac);
         boolean _not_3 = (!_overridesStop);
         if (_not_3) {
-          _builder.append("\t");
-          _builder.append("public void stop(){");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("stopUser();");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("super.stop();");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
+          {
+            if (manualBehavior) {
+              _builder.append("\t");
+              _builder.append("public abstract void stop();");
+              _builder.newLine();
+            } else {
+              _builder.append("\t");
+              _builder.append("public void stop(){");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("stopUser();");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("super.stop();");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
         }
       }
       _builder.append("\t");
@@ -578,55 +606,74 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         boolean _notEquals_2 = (!Objects.equal(dtor, null));
         if (_notEquals_2) {
-          _builder.append("\t");
-          _builder.append("public void destroy(){");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          String _name_31 = ac.getName();
-          String _destructorCall = this._procedureHelpers.destructorCall(_name_31);
-          _builder.append(_destructorCall, "		");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("super.destroy();");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
+          {
+            if (manualBehavior) {
+              _builder.append("\t");
+              _builder.append("public abstract void destroy();");
+              _builder.newLine();
+            } else {
+              _builder.append("\t");
+              _builder.append("public void destroy(){");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              String _name_31 = ac.getName();
+              String _destructorCall = this._procedureHelpers.destructorCall(_name_31);
+              _builder.append(_destructorCall, "		");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("super.destroy();");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
         }
       }
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
-        if (_hasNonEmptyStateMachine) {
+        if (manualBehavior) {
           _builder.append("\t");
-          CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
-          _builder.append(_genStateMachine, "	");
-          _builder.newLineIfNotEmpty();
+          _builder.append("public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public abstract void executeInitTransition();");
+          _builder.newLine();
         } else {
-          boolean _hasStateMachine = xpac.hasStateMachine();
-          boolean _not_4 = (!_hasStateMachine);
-          if (_not_4) {
-            _builder.append("\t");
-            _builder.append("//--------------------- no state machine");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("handleSystemEvent(ifitem, evt, data);");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("public void executeInitTransition() {}");
-            _builder.newLine();
+          {
+            boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+            if (_hasNonEmptyStateMachine) {
+              _builder.append("\t");
+              CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
+              _builder.append(_genStateMachine, "	");
+              _builder.newLineIfNotEmpty();
+            } else {
+              boolean _hasStateMachine = xpac.hasStateMachine();
+              boolean _not_4 = (!_hasStateMachine);
+              if (_not_4) {
+                _builder.append("\t");
+                _builder.append("//--------------------- no state machine");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("handleSystemEvent(ifitem, evt, data);");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("}");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("public void executeInitTransition() {}");
+                _builder.newLine();
+              }
+            }
           }
         }
       }
