@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz (changed for C code generator)
+ */
 package org.eclipse.etrice.generator.c.gen;
 
 import com.google.common.base.Objects;
@@ -33,7 +44,7 @@ public class CExtensions implements ILanguageExtension {
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
     String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
-    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(1);
+    String _get = _generateArglistAndTypedData[1];
     return _get;
   }
   

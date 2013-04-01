@@ -21,5 +21,6 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.etmap.ui.contentassist,
  org.eclipse.etrice.core.etmap.ui.contentassist.antlr,
- org.eclipse.etrice.core.etmap.ui.internal
+ org.eclipse.etrice.core.etmap.ui.internal,
+ org.eclipse.etrice.core.etmap.ui.quickfix
 Bundle-Activator: org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator

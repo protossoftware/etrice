@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
@@ -19,21 +29,26 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
 public class Initialization {
   @Inject
+  @Extension
   private TypeHelpers typeHelpers;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
+  @Extension
   private JavaExtensions languageExt;
   
   @Inject
+  @Extension
   private ProcedureHelpers procedureHelpers;
   
   public CharSequence attributeInitialization(final List<Attribute> attribs, final EObject roomClass, final boolean useClassDefaultsOnly) {
@@ -142,37 +157,44 @@ public class Initialization {
   }
   
   private CharSequence attributeInitPrimitiveRec(final List<Attribute> path, final EObject roomClass) {
-    Attribute a = IterableExtensions.<Attribute>last(path);
-    RefableType _refType = a.getRefType();
-    DataType aType = _refType.getType();
-    boolean _isDataClass = this.typeHelpers.isDataClass(aType);
-    if (_isDataClass) {
-      StringConcatenation _builder = new StringConcatenation();
-      {
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
-        for(final Attribute e : _allAttributes) {
-          List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-          CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
-          _builder.append(_attributeInitPrimitiveRec, "");
-          _builder.newLineIfNotEmpty();
+    CharSequence _xblockexpression = null;
+    {
+      Attribute a = IterableExtensions.<Attribute>last(path);
+      RefableType _refType = a.getRefType();
+      DataType aType = _refType.getType();
+      CharSequence _xifexpression = null;
+      boolean _isDataClass = this.typeHelpers.isDataClass(aType);
+      if (_isDataClass) {
+        StringConcatenation _builder = new StringConcatenation();
+        {
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+          for(final Attribute e : _allAttributes) {
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+            Object _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
+            _builder.append(_attributeInitPrimitiveRec, "");
+            _builder.newLineIfNotEmpty();
+          }
         }
-      }
-      return _builder;
-    } else {
-      boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-      if (_isPrimitive) {
-        String value = this.getDataConfigValue(path, roomClass);
-        CharSequence _xifexpression = null;
-        boolean _notEquals = (!Objects.equal(value, null));
-        if (_notEquals) {
-          String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) aType), value);
-          CharSequence _attributeInit = this.attributeInit(path, _valueLiteral);
-          _xifexpression = _attributeInit;
+        return _builder.toString();
+      } else {
+        CharSequence _xifexpression_1 = null;
+        boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
+        if (_isPrimitive) {
+          String value = this.getDataConfigValue(path, roomClass);
+          CharSequence _xifexpression_2 = null;
+          boolean _notEquals = (!Objects.equal(value, null));
+          if (_notEquals) {
+            String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) aType), value);
+            CharSequence _attributeInit = this.attributeInit(path, _valueLiteral);
+            _xifexpression_2 = _attributeInit;
+          }
+          return _xifexpression_2;
         }
-        return _xifexpression;
+        _xifexpression = _xifexpression_1;
       }
+      _xblockexpression = (_xifexpression);
     }
-    return null;
+    return _xblockexpression;
   }
   
   private CharSequence attributeInit(final Attribute a, final String value) {

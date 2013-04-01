@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug (initial contribution)
+ */
 package org.eclipse.etrice.generator.c.gen;
 
 import com.google.common.base.Objects;
@@ -21,6 +31,7 @@ import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -30,9 +41,11 @@ public class Initialization {
   private CExtensions languageExt;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
+  @Extension
   private TypeHelpers _typeHelpers;
   
   public CharSequence generateAttributeInit(final InstanceBase instance, final List<Attribute> attributes) {
@@ -98,7 +111,7 @@ public class Initialization {
         _or = (_equals || _and);
       }
       if (_or) {
-        String _initAttribute = this.initAttribute(instance, path);
+        CharSequence _initAttribute = this.initAttribute(instance, path);
         String _plus = (_initAttribute + COMMENT);
         _xifexpression = _plus;
       } else {
@@ -114,7 +127,7 @@ public class Initialization {
             } else {
               _builder_1.appendImmediate(", ", "");
             }
-            String _initAttribute_1 = this.initAttribute(instance, path);
+            CharSequence _initAttribute_1 = this.initAttribute(instance, path);
             _builder_1.append(_initAttribute_1, "");
           }
         }
@@ -128,8 +141,8 @@ public class Initialization {
     return _xblockexpression;
   }
   
-  private String initAttribute(final InstanceBase instance, final List<Attribute> path) {
-    String _xblockexpression = null;
+  private CharSequence initAttribute(final InstanceBase instance, final List<Attribute> path) {
+    CharSequence _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
       RefableType _refType = a.getRefType();
@@ -149,7 +162,7 @@ public class Initialization {
         }
         return _xifexpression;
       }
-      String _switchResult = null;
+      CharSequence _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
         if (aType instanceof DataClass) {
@@ -169,13 +182,13 @@ public class Initialization {
               }
               _builder.append("\t");
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, subA);
-              CharSequence _initAttributeArray = this.initAttributeArray(instance, _union);
+              Object _initAttributeArray = this.initAttributeArray(instance, _union);
               _builder.append(_initAttributeArray, "	");
               _builder.newLineIfNotEmpty();
             }
           }
           _builder.append("}");
-          _switchResult = _builder.toString();
+          _switchResult = _builder;
         }
       }
       if (!_matched) {
@@ -199,10 +212,10 @@ public class Initialization {
         if (aType instanceof PrimitiveType) {
           final PrimitiveType _primitiveType = (PrimitiveType)aType;
           _matched=true;
-          String _xblockexpression_1 = null;
+          CharSequence _xblockexpression_1 = null;
           {
             String value = this.getPrimitiveValue(instance, path);
-            String _xifexpression_1 = null;
+            CharSequence _xifexpression_1 = null;
             boolean _and = false;
             boolean _and_1 = false;
             int _size = a.getSize();
@@ -239,7 +252,7 @@ public class Initialization {
                 }
               }
               _builder.append(" }");
-              _xifexpression_1 = _builder.toString();
+              _xifexpression_1 = _builder;
             } else {
               _xifexpression_1 = value;
             }

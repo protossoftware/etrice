@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 Juergen Haug
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug
+ */
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
@@ -24,24 +34,29 @@ import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class ConfigGenAddon {
   @Inject
+  @Extension
   private JavaExtensions stdExt;
   
   @Inject
+  @Extension
   private TypeHelpers typeHelpers;
   
   @Inject
+  @Extension
   private ProcedureHelpers helpers;
   
   @Inject
   private IDataConfiguration dataConfigExt;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
@@ -130,7 +145,7 @@ public class ConfigGenAddon {
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
               String _plus_1 = (_plus + _invokeGetter);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
+              Object _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
             }
@@ -323,7 +338,7 @@ public class ConfigGenAddon {
     return _builder;
   }
   
-  public CharSequence genMinMaxConstants(final ActorClass ac) {
+  public String genMinMaxConstants(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     {
       List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
@@ -336,13 +351,13 @@ public class ConfigGenAddon {
         _builder.newLineIfNotEmpty();
       }
     }
-    CharSequence result = _builder;
+    String result = _builder.toString();
     int _length = result.length();
     boolean _notEquals = (_length != 0);
     if (_notEquals) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("//--------------------- Attribute Specifications");
-      String _plus = (result + _builder_1.toString());
+      String _plus = (result + _builder_1);
       result = _plus;
     }
     return result;
@@ -368,7 +383,7 @@ public class ConfigGenAddon {
               String _name = e.getName();
               String _plus_1 = (_plus + _name);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
+              Object _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
               _builder.append(_genMinMaxConstantsRec, "");
               _builder.newLineIfNotEmpty();
             }

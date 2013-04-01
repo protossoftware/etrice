@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.generic;
 
 import com.google.common.base.Objects;
@@ -22,7 +32,6 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.xtext.xbase.lib.Conversions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -103,19 +112,19 @@ public class TypeHelpers {
   
   public String getArgumentList(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(0);
+    String _get = _generateArglistAndTypedData[0];
     return _get;
   }
   
   public String getTypedDataDefinition(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(1);
+    String _get = _generateArglistAndTypedData[1];
     return _get;
   }
   
   public String generateTypedArgumentList(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = ((List<String>)Conversions.doWrapArray(_generateArglistAndTypedData)).get(2);
+    String _get = _generateArglistAndTypedData[2];
     return _get;
   }
   
