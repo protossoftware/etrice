@@ -16,7 +16,6 @@ import org.eclipse.xtext.GeneratedMetamodel
 
 import org.eclipse.emf.ecore.EcorePackage
 
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.etrice.core.postprocessing.PostprocessingHelpers.*
 
 class ImplPostprocessor {

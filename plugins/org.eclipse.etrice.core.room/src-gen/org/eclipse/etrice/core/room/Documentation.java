@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A piece of documentation that can be optionally attached at
+ * <br>A piece of documentation that can be optionally attached at
  * certain places in the model.
  * 
  * <!-- end-model-doc -->
@@ -36,7 +36,7 @@ public interface Documentation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the documentation's contents.
+   * <br>This is the documentation's contents.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Text</em>' attribute list.

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The root object for the physical model. It gives access to the systems, node classes
+ * <br>The root object for the physical model. It gives access to the systems, node classes
  * and runtimes defined.
  * 
  * <!-- end-model-doc -->
@@ -39,7 +39,7 @@ public interface PhysicalModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The model name is a dot separated fully qualified name and is
+   * <br>The model name is a dot separated fully qualified name and is
    * used to provide a name space.
    * 
    * <!-- end-model-doc -->
@@ -67,7 +67,7 @@ public interface PhysicalModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all imported models.
+   * <br>A list of all imported models.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
@@ -83,7 +83,7 @@ public interface PhysicalModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all defined physical systems.
+   * <br>A list of all defined physical systems.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Systems</em>' containment reference list.
@@ -99,7 +99,7 @@ public interface PhysicalModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all defined node classes.
+   * <br>A list of all defined node classes.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Node Classes</em>' containment reference list.
@@ -115,7 +115,7 @@ public interface PhysicalModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all defined runtime classes.
+   * <br>A list of all defined runtime classes.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Runtime Classes</em>' containment reference list.

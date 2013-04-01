@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A port defines a part of the interface of an {@link ActorClass} in a specific role.
+ * <br>A port defines a part of the interface of an {@link ActorClass} in a specific role.
  * The port is associated with a {@link ProtocolClass}. If it is conjugated then the
  * roles of incoming and outgoing messages of the protocol are inverted.
  * 
@@ -56,7 +56,7 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If a port is conjugated then the roles of outgoing and incoming messages are interchanged.
+   * <br>If a port is conjugated then the roles of outgoing and incoming messages are interchanged.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Conjugated</em>' attribute.
@@ -83,7 +83,7 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * Ports with multiplicity >1 are called relay ports. A multiplicity of {@code -1} means replicated
+   * <br>Ports with multiplicity >1 are called relay ports. A multiplicity of {@code -1} means replicated
    * port with arbitrary multiplicity.
    * 
    * <!-- end-model-doc -->
@@ -110,7 +110,7 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the port's protocol class.
+   * <br>This is the port's protocol class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.
@@ -136,7 +136,7 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.

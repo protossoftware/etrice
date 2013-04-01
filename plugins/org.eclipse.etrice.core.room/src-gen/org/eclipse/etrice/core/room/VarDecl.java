@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A variable declaration consists of a name and a type.
+ * <br>A variable declaration consists of a name and a type.
  * 
  * <!-- end-model-doc -->
  *
@@ -33,7 +33,7 @@ public interface VarDecl extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the variable is referred to in the model.
+   * <br>By this name the variable is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -59,7 +59,7 @@ public interface VarDecl extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the data type of the variable.
+   * <br>This is the data type of the variable.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ref Type</em>' containment reference.

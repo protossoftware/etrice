@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The terminal point (source or target) of a transition ending
+ * <br>The terminal point (source or target) of a transition ending
  * at a {@link ChoicepointTerminal}.
  * 
  * <!-- end-model-doc -->
@@ -32,7 +32,7 @@ public interface ChoicepointTerminal extends TransitionTerminal
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the target choice point.
+   * <br>This is the target choice point.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Cp</em>' reference.

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A path of strings that are interpreted as {@link ActorRef}s starting at a {@link SubSystemClass}.
+ * <br>A path of strings that are interpreted as {@link ActorRef}s starting at a {@link SubSystemClass}.
  * 
  * <!-- end-model-doc -->
  *
@@ -35,7 +35,7 @@ public interface RefPath extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a path in the instance tree where each segment corresponds to the name of the
+   * <br>This is a path in the instance tree where each segment corresponds to the name of the
    * corresponding {@link ActorContainerRef}.
    * 
    * <!-- end-model-doc -->

@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The sub protocol is part of the {@link CompoundProtocolClass} and defines
+ * <br>The sub protocol is part of the {@link CompoundProtocolClass} and defines
  * kind of a named channel for messages. The sub protocols are used to associate an
  * end port with a particular channel.
  * 
@@ -35,7 +35,7 @@ public interface SubProtocol extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the sub protocols or channels are distinguished.
+   * <br>By this name the sub protocols or channels are distinguished.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -61,7 +61,7 @@ public interface SubProtocol extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the protocol of this channel.
+   * <br>This is the protocol of this channel.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.

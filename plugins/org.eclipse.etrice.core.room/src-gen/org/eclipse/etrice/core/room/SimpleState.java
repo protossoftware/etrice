@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A simple state is the standard case of a @link State}.
+ * <br>A simple state is the standard case of a @link State}.
  * It comprises and <em>entry</em>, <em>exit</em> and <em>do</em> code
  * and it can contain another {@link StateGRaph} as sub state
  * graph.
@@ -34,7 +34,7 @@ public interface SimpleState extends State
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the state is referred to in the model.
+   * <br>By this name the state is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.

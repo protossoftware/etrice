@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A logical thread is addressed by the {@link ActorInstanceMapping}s of a {@link SubSystemClass}.
+ * <br>A logical thread is addressed by the {@link ActorInstanceMapping}s of a {@link SubSystemClass}.
  * 
  * <!-- end-model-doc -->
  *
@@ -32,7 +32,7 @@ public interface LogicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the thread is referred to in the model.
+   * <br>By this name the thread is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.

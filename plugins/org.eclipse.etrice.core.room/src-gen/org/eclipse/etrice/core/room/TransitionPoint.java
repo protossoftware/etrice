@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A transition point is located at the border of a {@link State}
+ * <br>A transition point is located at the border of a {@link State}
  * and is not visible or accessible outside. It is used
  * to globally handle messages. If a {@link Transition} starting
  * at a transition point triggers then exit and entry codes
@@ -36,7 +36,7 @@ public interface TransitionPoint extends TrPoint
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If this flag is {@code true} then for a transition triggerd from this point
+   * <br>If this flag is {@code true} then for a transition triggerd from this point
    * no exit and entry codes of the states left and entered are executed.
    * 
    * <!-- end-model-doc -->

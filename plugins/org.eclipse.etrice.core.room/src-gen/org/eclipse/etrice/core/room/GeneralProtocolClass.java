@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link ProtocolClass}</li>
  *   <li>{@link CompoundProtocolClass}</li>
@@ -37,7 +37,7 @@ public interface GeneralProtocolClass extends RoomClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of protocol class annotations.
+   * <br>This is a list of protocol class annotations.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.

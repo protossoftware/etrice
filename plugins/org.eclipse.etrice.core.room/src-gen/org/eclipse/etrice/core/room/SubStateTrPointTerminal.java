@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The terminal point (source or target) of a transition ending
+ * <br>The terminal point (source or target) of a transition ending
  * at a {@link TrPoint} of a sub {@link State}.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +33,7 @@ public interface SubStateTrPointTerminal extends TransitionTerminal
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the target entry or exit point contained in the target state.
+   * <br>This is the target entry or exit point contained in the target state.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Tr Point</em>' reference.
@@ -59,7 +59,7 @@ public interface SubStateTrPointTerminal extends TransitionTerminal
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the target state.
+   * <br>This is the target state.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>State</em>' reference.

@@ -12,6 +12,17 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * A representation of the model object '<em><b>Actor Instance Config</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>This class models a configuration for an {@link org.eclipse.etrice.core.room.ActorRef actor instance}.
+ * The configuration defines values for this actor instance and overrides the default values from the corresponding class config.
+ * The values are applied at generation time.
+ * The config sub elements are:
+ * <ul>
+ * 	<li>{@link AttrInstanceConfig attribute instance config}</li>
+ * </ul>				
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,11 +43,11 @@ public interface ActorInstanceConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Root</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Root</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the logical system that contains the {@link #getSubSystem sub system}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Root</em>' reference.
    * @see #setRoot(LogicalSystem)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Root()
@@ -58,11 +69,11 @@ public interface ActorInstanceConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Sub System</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub System</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the sub system that contains the {@link #getRefPath actor instance}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sub System</em>' reference.
    * @see #setSubSystem(SubSystemRef)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_SubSystem()
@@ -84,11 +95,11 @@ public interface ActorInstanceConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Path</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Path</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the path of the actor instance relative to the {@link #getSubSystem sub system}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Path</em>' containment reference.
    * @see #setPath(RefPath)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Path()
@@ -111,11 +122,11 @@ public interface ActorInstanceConfig extends ConfigElement
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.config.AttrInstanceConfig}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all attribute configurations.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Attributes()
    * @model containment="true"
@@ -127,11 +138,11 @@ public interface ActorInstanceConfig extends ConfigElement
    * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.config.PortInstanceConfig}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all port configurations.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Ports</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig_Ports()
    * @model containment="true"

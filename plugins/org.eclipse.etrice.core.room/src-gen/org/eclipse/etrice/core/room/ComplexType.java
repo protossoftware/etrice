@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link DataClass}</li>
  *   <li>{@link ExternalType}</li>

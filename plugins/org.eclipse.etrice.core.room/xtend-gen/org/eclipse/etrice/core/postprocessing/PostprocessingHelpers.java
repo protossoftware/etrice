@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug
+ */
 package org.eclipse.etrice.core.postprocessing;
 
 import org.eclipse.emf.common.util.EList;
@@ -6,11 +16,13 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -18,9 +30,16 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class PostprocessingHelpers {
   public static int UNBOUNDED_MULTIPLICITY = ETypedElement.UNBOUNDED_MULTIPLICITY;
   
+  public static String JAVADOC_NEWLINE = "<br>";
+  
   public static EClass getClass(final EPackage pckg, final String name) {
     EClassifier _eClassifier = pckg.getEClassifier(name);
     return ((EClass) _eClassifier);
+  }
+  
+  public static void setDocumentation(final EModelElement eModelElement, final String documentation) {
+    String _plus = (PostprocessingHelpers.JAVADOC_NEWLINE + documentation);
+    EcoreUtil.setDocumentation(eModelElement, _plus);
   }
   
   public static EAttribute getAttribute(final EClass cls, final String name) {

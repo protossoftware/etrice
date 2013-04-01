@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The root object for the ROOM model. It gives access to {@link Import imports} and
+ * <br>The root object for the ROOM model. It gives access to {@link Import imports} and
  * the {@link SubSystemClass sub system},
  * {@link ActorClass actor}, {@link ProtocolClass protocol} and
  * {@link DataClass data} classes defined.
@@ -46,7 +46,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The model name is a dot separated fully qualified name and is
+   * <br>The model name is a dot separated fully qualified name and is
    * used to provide a name space. The generators may use that also
    * to place the generated code into separate directories.
    * 
@@ -74,7 +74,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -101,7 +101,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all imported models.
+   * <br>This is a list of all imported models.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
@@ -117,7 +117,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all primitive types defined by this model.
+   * <br>This is a list of all primitive types defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Primitive Types</em>' containment reference list.
@@ -133,7 +133,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all external types defined by this model.
+   * <br>This is a list of all external types defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>External Types</em>' containment reference list.
@@ -149,7 +149,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all data classes defined by this model.
+   * <br>This is a list of all data classes defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Data Classes</em>' containment reference list.
@@ -165,7 +165,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all protocol classes defined by this model.
+   * <br>This is a list of all protocol classes defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol Classes</em>' containment reference list.
@@ -181,7 +181,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all actor classes defined by this model.
+   * <br>This is a list of all actor classes defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Classes</em>' containment reference list.
@@ -197,7 +197,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all sub system classes defined by this model.
+   * <br>This is a list of all sub system classes defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sub System Classes</em>' containment reference list.
@@ -213,7 +213,7 @@ public interface RoomModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all logical systems defined by this model.
+   * <br>This is a list of all logical systems defined by this model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Systems</em>' containment reference list.

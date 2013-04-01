@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A detail code that evaluates to a boolean in the target
+ * <br>A detail code that evaluates to a boolean in the target
  * language.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +33,7 @@ public interface Guard extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a guard condition specified in the code generator's target language.
+   * <br>This is a guard condition specified in the code generator's target language.
    * It has to evaluate to a boolean value.
    * 
    * <!-- end-model-doc -->

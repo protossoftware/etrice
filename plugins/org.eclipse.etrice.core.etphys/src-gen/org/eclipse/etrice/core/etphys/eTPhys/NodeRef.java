@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This stands for a node instance in a specific role.
+ * <br>This stands for a node instance in a specific role.
  * 
  * <!-- end-model-doc -->
  *
@@ -34,7 +34,7 @@ public interface NodeRef extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the reference by which it is referred to in the model.
+   * <br>The name of the reference by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -60,7 +60,7 @@ public interface NodeRef extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The node class of this reference.
+   * <br>The node class of this reference.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.
@@ -86,7 +86,7 @@ public interface NodeRef extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.

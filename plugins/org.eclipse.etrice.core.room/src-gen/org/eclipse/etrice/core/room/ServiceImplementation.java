@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s
+ * <br>A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s
  * that are bound to it following the service resolution logic.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +33,7 @@ public interface ServiceImplementation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the SPP connected to the service.
+   * <br>This is the SPP connected to the service.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Spp</em>' reference.

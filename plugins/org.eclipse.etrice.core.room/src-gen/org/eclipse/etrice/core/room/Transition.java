@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link InitialTransition}</li>
  *   <li>{@link NonInitialTransition}</li>
@@ -38,7 +38,7 @@ public interface Transition extends StateGraphItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional name of the transition.
+   * <br>This is an optional name of the transition.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -64,7 +64,7 @@ public interface Transition extends StateGraphItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the target node of the transition.
+   * <br>This is the target node of the transition.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>To</em>' containment reference.
@@ -90,7 +90,7 @@ public interface Transition extends StateGraphItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -116,7 +116,7 @@ public interface Transition extends StateGraphItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional code in the code generator's target language.
+   * <br>This is an optional code in the code generator's target language.
    * It is execute when the transition fires.
    * 
    * <!-- end-model-doc -->

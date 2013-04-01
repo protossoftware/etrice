@@ -9,6 +9,18 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Attr Class Config</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>This class models a configuration for an {@link org.eclipse.etrice.core.room.Attribute attribute}.
+ * The configuration defines a default value for all instances of the attribute.
+ * The values are applied at generation time.
+ * <br>If the type of the given {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} is
+ * <ul>
+ * 	<li>primitive, then a {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} might exist and {@link #getAttributes attributes} is empty</li>
+ * 	<li>compound attribute (e.g. {@link org.eclipse.etrice.core.room.DataClass data class}), then {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} is null and configurations for children {@link #getAttributes attributes} might exist</li>
+ * </ul>				
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -27,11 +39,11 @@ public interface AttrClassConfig extends AttrConfig
   /**
    * Returns the value of the '<em><b>Min</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Min</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the lower bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Min</em>' containment reference.
    * @see #setMin(NumberLiteral)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrClassConfig_Min()
@@ -53,11 +65,11 @@ public interface AttrClassConfig extends AttrConfig
   /**
    * Returns the value of the '<em><b>Max</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Max</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the upper bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Max</em>' containment reference.
    * @see #setMax(NumberLiteral)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrClassConfig_Max()
@@ -80,11 +92,11 @@ public interface AttrClassConfig extends AttrConfig
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.config.AttrClassConfig}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of attribute configurations of children attributes, in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} is compound.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrClassConfig_Attributes()
    * @model containment="true"

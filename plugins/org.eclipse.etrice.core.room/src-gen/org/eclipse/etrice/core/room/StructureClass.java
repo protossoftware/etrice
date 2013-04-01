@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This class is the super class of the structural classes
+ * <br>This class is the super class of the structural classes
  * <ul>
  *   <li>{@link ActorContainerClass}</li>
  *   <li>{@link LogicalSystem}</li>
@@ -39,7 +39,7 @@ public interface StructureClass extends RoomClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of structure class annotations.
+   * <br>This is a list of structure class annotations.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
@@ -55,7 +55,7 @@ public interface StructureClass extends RoomClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of structure class bindings.
+   * <br>This is a list of structure class bindings.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Bindings</em>' containment reference list.
@@ -71,7 +71,7 @@ public interface StructureClass extends RoomClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of structure class connections.
+   * <br>This is a list of structure class connections.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Connections</em>' containment reference list.

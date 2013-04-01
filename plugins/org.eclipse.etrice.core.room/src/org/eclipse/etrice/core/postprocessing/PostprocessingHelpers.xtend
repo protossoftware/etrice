@@ -17,13 +17,20 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.ETypedElement
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.EModelElement
 
 class PostprocessingHelpers {
 	
 	public static int UNBOUNDED_MULTIPLICITY = ETypedElement::UNBOUNDED_MULTIPLICITY
+	public static String JAVADOC_NEWLINE = "<br>"
 	
 	def static getClass(EPackage pckg, String name) {
 		pckg.getEClassifier(name) as EClass
+	}
+	
+	def static setDocumentation(EModelElement eModelElement, String documentation){
+		EcoreUtil::setDocumentation(eModelElement, JAVADOC_NEWLINE+documentation)
 	}
 	
 	def static getAttribute(EClass cls, String name) {

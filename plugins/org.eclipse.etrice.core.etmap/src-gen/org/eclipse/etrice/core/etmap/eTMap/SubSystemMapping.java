@@ -16,7 +16,7 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This is the mapping of a sub system (defined in a ROOM model) to a
+ * <br>This is the mapping of a sub system (defined in a ROOM model) to a
  * node (defined in a physical model).
  * 
  * <!-- end-model-doc -->
@@ -41,7 +41,7 @@ public interface SubSystemMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the logical sub system being mapped.
+   * <br>This is the logical sub system being mapped.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Sub Sys</em>' reference.
@@ -67,7 +67,7 @@ public interface SubSystemMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the node being mapped to.
+   * <br>This is the node being mapped to.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Node</em>' reference.
@@ -94,7 +94,7 @@ public interface SubSystemMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of nested mappings of logical to physical threads.
+   * <br>This is a list of nested mappings of logical to physical threads.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Thread Mappings</em>' containment reference list.

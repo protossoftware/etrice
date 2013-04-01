@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A transition trigger is a list of {@link MessageFromIf} pairs
+ * <br>A transition trigger is a list of {@link MessageFromIf} pairs
  * and an optional {@link Guard}.
  * 
  * <!-- end-model-doc -->
@@ -37,7 +37,7 @@ public interface Trigger extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of message/interface item pairs.
+   * <br>This is a list of message/interface item pairs.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msg From If Pairs</em>' containment reference list.
@@ -52,7 +52,7 @@ public interface Trigger extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional guard condition of the trigger specified in the code generator's target language.
+   * <br>This is an optional guard condition of the trigger specified in the code generator's target language.
    * It has to evaluate to a boolean value.
    * 
    * <!-- end-model-doc -->

@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link SimpleState}</li>
  *   <li>{@link RefinedState}</li>
@@ -39,7 +39,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -65,7 +65,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional entry code written in the code generator's target language.
+   * <br>This is an optional entry code written in the code generator's target language.
    * It is executed when the state is entered.
    * 
    * <!-- end-model-doc -->
@@ -92,7 +92,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional entry code written in the code generator's target language.
+   * <br>This is an optional entry code written in the code generator's target language.
    * It is executed when the state is left.
    * 
    * <!-- end-model-doc -->
@@ -119,7 +119,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional do code written in the code generator's target language.
+   * <br>This is an optional do code written in the code generator's target language.
    * It is executed whenever the actor instance is polled (applies only to
    * data driven and sync actor classes).
    * 
@@ -147,7 +147,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional sub state graph of this state.
+   * <br>This is an optional sub state graph of this state.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Subgraph</em>' containment reference.

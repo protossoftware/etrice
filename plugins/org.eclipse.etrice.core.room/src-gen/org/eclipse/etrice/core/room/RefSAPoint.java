@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Links from a {@link ActorContainerRef}, i.e. from a sub actor.
+ * <br>Links from a {@link ActorContainerRef}, i.e. from a sub actor.
  * 
  * <!-- end-model-doc -->
  *
@@ -31,7 +31,7 @@ public interface RefSAPoint extends SAPoint
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced actor container ref.
+   * <br>This is the referenced actor container ref.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' reference.

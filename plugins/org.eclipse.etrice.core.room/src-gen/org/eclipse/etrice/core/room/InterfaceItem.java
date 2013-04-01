@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link Port}</li>
  *   <li>{@link SAPRef}</li>
@@ -37,7 +37,7 @@ public interface InterfaceItem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the interface item is referred to in the model.
+   * <br>By this name the interface item is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.

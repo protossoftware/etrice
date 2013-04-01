@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
+ * <br>A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
  * For event driven protocols the message is an object that is deliverd using a message
  * service of the runtime. For data driven systems only messages holding data are valid. In this
  * case the conjugate port is the one holding (and writing) the data and the regular port is
@@ -39,7 +39,7 @@ public interface Message extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If this flag is {@code true} then the message is treated as private for this protocol
+   * <br>If this flag is {@code true} then the message is treated as private for this protocol
    * and can only be sent by a PortClass.
    * 
    * <!-- end-model-doc -->
@@ -66,7 +66,7 @@ public interface Message extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the message is referred to in the model.
+   * <br>By this name the message is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -92,7 +92,7 @@ public interface Message extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a reference to optional message data.
+   * <br>This is a reference to optional message data.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Data</em>' containment reference.
@@ -118,7 +118,7 @@ public interface Message extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link StandardOperation}</li>
  *   <li>{@link PortOperation}</li>
@@ -42,7 +42,7 @@ public interface Operation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the operation by which it is referred to in the model.
+   * <br>The name of the operation by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -69,7 +69,7 @@ public interface Operation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of arguments for the operation.
+   * <br>This is a list of arguments for the operation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
@@ -84,7 +84,7 @@ public interface Operation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional return type of the operation.
+   * <br>This is an optional return type of the operation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Returntype</em>' containment reference.
@@ -110,7 +110,7 @@ public interface Operation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -136,7 +136,7 @@ public interface Operation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the operation body written in code generator target language.
+   * <br>This is the operation body written in code generator target language.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Detail Code</em>' containment reference.

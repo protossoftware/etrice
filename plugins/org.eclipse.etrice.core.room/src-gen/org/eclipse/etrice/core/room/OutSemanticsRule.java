@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A {@link SemanticsRule} for outgoing messages.
+ * <br>A {@link SemanticsRule} for outgoing messages.
  * The rule points to an outgoing messages and allows follow-up rules.
  * 
  * <!-- end-model-doc -->

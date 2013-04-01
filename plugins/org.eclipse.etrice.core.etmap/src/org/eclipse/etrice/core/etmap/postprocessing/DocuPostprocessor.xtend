@@ -14,7 +14,6 @@ package org.eclipse.etrice.core.etmap.postprocessing
 
 import org.eclipse.xtext.GeneratedMetamodel
 
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.etrice.core.postprocessing.PostprocessingHelpers.*
 
 class DocuPostprocessor {

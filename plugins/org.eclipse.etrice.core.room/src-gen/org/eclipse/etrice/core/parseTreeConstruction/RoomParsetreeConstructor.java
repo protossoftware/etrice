@@ -6,14 +6,13 @@ package org.eclipse.etrice.core.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class RoomParsetreeConstructor extends AbstractParseTreeConstructor {
+public class RoomParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private RoomGrammarAccess grammarAccess;

@@ -16,7 +16,7 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This is the mapping of a logical system (defined in a ROOM model) to a
+ * <br>This is the mapping of a logical system (defined in a ROOM model) to a
  * physical system (defined in a physical model).
  * 
  * <!-- end-model-doc -->
@@ -41,7 +41,7 @@ public interface Mapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the logical system being mapped.
+   * <br>This is the logical system being mapped.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Sys</em>' reference.
@@ -67,7 +67,7 @@ public interface Mapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the physical system being mapped to.
+   * <br>This is the physical system being mapped to.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Physical Sys</em>' reference.
@@ -94,7 +94,7 @@ public interface Mapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of nested mappings of the sub systems of this system.
+   * <br>This is a list of nested mappings of the sub systems of this system.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Subsys Mappings</em>' containment reference list.

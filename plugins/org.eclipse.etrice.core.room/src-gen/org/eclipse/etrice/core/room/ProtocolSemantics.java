@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An optional semantics specification as part of a {@link ProtocolClass}.
+ * <br>An optional semantics specification as part of a {@link ProtocolClass}.
  * The semantic is defined as a <em>legal execution tree</em>.
  * This tree is composed of incoming and outgoing messages and each path through
  * this tree is a valid sequence of messages exchanged through a port instance.
@@ -42,7 +42,7 @@ public interface ProtocolSemantics extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of semantic rules.
+   * <br>This is a list of semantic rules.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Rules</em>' containment reference list.

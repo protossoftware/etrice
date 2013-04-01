@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will
+ * <br>A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will
  * be turned into an actor instance of the referenced type.
  * 
  * <!-- end-model-doc -->
@@ -34,7 +34,7 @@ public interface ActorRef extends ActorContainerRef
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If the size is >1 then this is a replicated actor.
+   * <br>If the size is >1 then this is a replicated actor.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Size</em>' attribute.
@@ -60,7 +60,7 @@ public interface ActorRef extends ActorContainerRef
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the type (i.e. actor class) of the actor ref.
+   * <br>This is the type (i.e. actor class) of the actor ref.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.

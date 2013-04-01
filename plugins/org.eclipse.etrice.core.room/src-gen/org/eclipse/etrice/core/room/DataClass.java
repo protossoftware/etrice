@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Together with {@link ProtocolClass} and {@link ActorClass} one of
+ * <br>Together with {@link ProtocolClass} and {@link ActorClass} one of
  * the main class types of the ROOM language.
  * 
  * <p>
@@ -51,7 +51,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The base class from which all attributes and operations are inherited.
+   * <br>The base class from which all attributes and operations are inherited.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Base</em>' reference.
@@ -78,7 +78,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of data class annotations.
+   * <br>This is a list of data class annotations.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
@@ -93,7 +93,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' containment reference.
@@ -119,7 +119,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' containment reference.
@@ -145,7 +145,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code3</em>' containment reference.
@@ -172,7 +172,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * Attributes are the data members of the data class.
+   * <br>Attributes are the data members of the data class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
@@ -188,7 +188,7 @@ public interface DataClass extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * Operations are the methods of the data class.
+   * <br>Operations are the methods of the data class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.

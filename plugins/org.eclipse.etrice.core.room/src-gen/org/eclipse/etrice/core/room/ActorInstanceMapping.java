@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An actor instance mapping maps an actor instances (described as a path of actor references)
+ * <br>An actor instance mapping maps an actor instances (described as a path of actor references)
  * to a {@link LogicalThread}
  * 
  * <!-- end-model-doc -->
@@ -37,7 +37,7 @@ public interface ActorInstanceMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the path of references starting at this sub system that uniquely references an actor instance.
+   * <br>This is the path of references starting at this sub system that uniquely references an actor instance.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Path</em>' containment reference.
@@ -63,7 +63,7 @@ public interface ActorInstanceMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the logical thread to which the referenced actor instance and all of its contained instances
+   * <br>This is the logical thread to which the referenced actor instance and all of its contained instances
    * are mapped.
    * 
    * <!-- end-model-doc -->
@@ -91,7 +91,7 @@ public interface ActorInstanceMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of nested mappings which override parent mappings.
+   * <br>This is a list of nested mappings which override parent mappings.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.

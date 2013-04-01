@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A sub system class corresponds to a process with a separate address space.
+ * <br>A sub system class corresponds to a process with a separate address space.
  * It has no behavior of its own and is composed of {@link ActorClass}es.
  * 
  * <p>
@@ -46,7 +46,7 @@ public interface SubSystemClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all relay ports of the sub system.
+   * <br>This is a list of all relay ports of the sub system.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Relay Ports</em>' containment reference list.
@@ -62,7 +62,7 @@ public interface SubSystemClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all actor instance mappings of the sub system.
+   * <br>This is a list of all actor instance mappings of the sub system.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Threads</em>' containment reference list.
@@ -78,7 +78,7 @@ public interface SubSystemClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of actor instance mappings.
+   * <br>This is a list of actor instance mappings.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Instance Mappings</em>' containment reference list.

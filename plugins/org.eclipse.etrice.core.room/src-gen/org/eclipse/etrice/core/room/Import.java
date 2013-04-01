@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The import declares an imported model (given as a URI) and
+ * <br>The import declares an imported model (given as a URI) and
  * an optional imported namespace.
  * 
  * <!-- end-model-doc -->
@@ -34,7 +34,7 @@ public interface Import extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The imported name space has to be a dot separated qualified name followed by .*.
+   * <br>The imported name space has to be a dot separated qualified name followed by .*.
    * Example: my.namespace.*
    * 
    * <!-- end-model-doc -->
@@ -61,7 +61,7 @@ public interface Import extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The import URI can be a relative or absolute file system path.
+   * <br>The import URI can be a relative or absolute file system path.
    * It may contain environment variables in ${} which will be expanded.
    * <p>
    * Examples:

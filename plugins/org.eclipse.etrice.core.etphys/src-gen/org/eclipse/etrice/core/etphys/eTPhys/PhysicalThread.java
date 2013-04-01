@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This defines a physical thread running in a node.
+ * <br>This defines a physical thread running in a node.
  * 
  * <!-- end-model-doc -->
  *
@@ -38,7 +38,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If this is {@code true} then this is the default thread.
+   * <br>If this is {@code true} then this is the default thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Default</em>' attribute.
@@ -64,7 +64,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the thread by which it is referred to in the model.
+   * <br>The name of the thread by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -91,7 +91,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the execution mode of the thread.
+   * <br>This is the execution mode of the thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Execmode</em>' attribute.
@@ -119,7 +119,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the priority of the thread.
+   * <br>This is the priority of the thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Prio</em>' attribute.
@@ -145,7 +145,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the stacksize of the thread.
+   * <br>This is the stacksize of the thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Stacksize</em>' attribute.
@@ -171,7 +171,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the msgblocksize of the thread.
+   * <br>This is the msgblocksize of the thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msgblocksize</em>' attribute.
@@ -197,7 +197,7 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the msgpoolsize of the thread.
+   * <br>This is the msgpoolsize of the thread.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msgpoolsize</em>' attribute.

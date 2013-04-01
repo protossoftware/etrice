@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This is a type with an optional reference attribute.
+ * <br>This is a type with an optional reference attribute.
  * If 'ref' is {@code true} then by reference semantic is chosen.
  * 
  * <!-- end-model-doc -->
@@ -34,7 +34,7 @@ public interface RefableType extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the data type.
+   * <br>This is the data type.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' reference.
@@ -60,7 +60,7 @@ public interface RefableType extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If {@code true} then by reference semantics is chosen, by value semantics else.
+   * <br>If {@code true} then by reference semantics is chosen, by value semantics else.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' attribute.

@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A primitive type describes a type like int, char, float
+ * <br>A primitive type describes a type like int, char, float
  * and can represent the type with a certain precision
  * in the target language
  * 
@@ -37,7 +37,7 @@ public interface PrimitiveType extends DataType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is one of the basic variable types.
+   * <br>This is one of the basic variable types.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' attribute.
@@ -65,7 +65,7 @@ public interface PrimitiveType extends DataType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the type name in the target language.
+   * <br>This is the type name in the target language.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Target Name</em>' attribute.
@@ -91,7 +91,7 @@ public interface PrimitiveType extends DataType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This (optional) name is used for casts to this type.
+   * <br>This (optional) name is used for casts to this type.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Cast Name</em>' attribute.
@@ -117,7 +117,7 @@ public interface PrimitiveType extends DataType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional default value literal.
+   * <br>This is an optional default value literal.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.

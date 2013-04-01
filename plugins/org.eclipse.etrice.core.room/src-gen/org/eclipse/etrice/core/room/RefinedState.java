@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A refined state can be used only in a derived {@link ActorClass}.
+ * <br>A refined state can be used only in a derived {@link ActorClass}.
  * It refers to a {@link State} in the inherited state machine
  * which is refined by adding detail code and/or
  * {@link StateGRaphItem}s in the sub state graph.
@@ -34,7 +34,7 @@ public interface RefinedState extends State
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced state in the base class state machine.
+   * <br>This is the referenced state in the base class state machine.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Target</em>' reference.

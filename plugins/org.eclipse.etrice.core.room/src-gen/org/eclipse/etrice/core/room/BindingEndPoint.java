@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A binding end point is a pair of an {@link ActorContainerRef} and a {@link Port} and is used
+ * <br>A binding end point is a pair of an {@link ActorContainerRef} and a {@link Port} and is used
  * to uniquely describe a port of a sub actor. If the actor container ref is {@code null} then
  * a port of the actor class itself is addressed.
  * 
@@ -36,7 +36,7 @@ public interface BindingEndPoint extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The actor reference holding the bound port or {@code null} in case of a local port.
+   * <br>The actor reference holding the bound port or {@code null} in case of a local port.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Ref</em>' reference.
@@ -62,7 +62,7 @@ public interface BindingEndPoint extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the bound port.
+   * <br>This is the bound port.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Port</em>' reference.
@@ -88,7 +88,7 @@ public interface BindingEndPoint extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the bound sub protocol or {@code null} if not applicable.
+   * <br>This is the bound sub protocol or {@code null} if not applicable.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sub</em>' reference.

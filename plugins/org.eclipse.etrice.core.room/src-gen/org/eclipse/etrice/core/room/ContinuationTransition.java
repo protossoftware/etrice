@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Continuation transitions start at entry or exit points
+ * <br>Continuation transitions start at entry or exit points
  * ({@link EntryPoint}s or {@link ExitPoint}s) or form
  * the default branch of a {@link ChoicePoint}.
  * 

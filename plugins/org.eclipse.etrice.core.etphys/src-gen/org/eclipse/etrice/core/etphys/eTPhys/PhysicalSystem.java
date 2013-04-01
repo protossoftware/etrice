@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This model object represents a complete physical system.
+ * <br>This model object represents a complete physical system.
  * 
  * <!-- end-model-doc -->
  *
@@ -36,7 +36,7 @@ public interface PhysicalSystem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the physical system by which it is referred to in the model.
+   * <br>The name of the physical system by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -62,7 +62,7 @@ public interface PhysicalSystem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -89,7 +89,7 @@ public interface PhysicalSystem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of referenced nodes.
+   * <br>A list of referenced nodes.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Node Refs</em>' containment reference list.

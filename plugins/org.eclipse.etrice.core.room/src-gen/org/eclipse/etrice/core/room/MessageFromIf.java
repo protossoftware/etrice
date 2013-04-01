@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A pair consisting of a {@link Message} arising from an
+ * <br>A pair consisting of a {@link Message} arising from an
  * {@link InterfaceItem}.
  * 
  * <!-- end-model-doc -->
@@ -34,7 +34,7 @@ public interface MessageFromIf extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the triggerering message (or event).
+   * <br>This is the triggerering message (or event).
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Message</em>' reference.
@@ -60,7 +60,7 @@ public interface MessageFromIf extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the interface item where the message occurred.
+   * <br>This is the interface item where the message occurred.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>From</em>' reference.

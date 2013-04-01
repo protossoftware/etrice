@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The choice point branch transitions is allowed only as outgoing
+ * <br>The choice point branch transitions is allowed only as outgoing
  * transition of {@link ChoicePoint}s.
  * 
  * <!-- end-model-doc -->
@@ -32,7 +32,7 @@ public interface CPBranchTransition extends NonInitialTransition
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the condition of the choice point branch specified in the code generator's target language.
+   * <br>This is the condition of the choice point branch specified in the code generator's target language.
    * It has to evaluate to a boolean value.
    * 
    * <!-- end-model-doc -->

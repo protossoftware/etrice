@@ -10,6 +10,11 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * A representation of the model object '<em><b>Sub System Config</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>This class defines settings with a sub system scope.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +33,11 @@ public interface SubSystemConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Root</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Root</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the logical system that contains the {@link #org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Root</em>' reference.
    * @see #setRoot(LogicalSystem)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getSubSystemConfig_Root()
@@ -54,11 +59,11 @@ public interface SubSystemConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Sub System</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub System</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the sub system reference.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Sub System</em>' reference.
    * @see #setSubSystem(SubSystemRef)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getSubSystemConfig_SubSystem()
@@ -80,11 +85,11 @@ public interface SubSystemConfig extends ConfigElement
   /**
    * Returns the value of the '<em><b>Dyn Config</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Dyn Config</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the dynamic configuration. It is available within the {@link #getSubSystem sub system}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Dyn Config</em>' containment reference.
    * @see #setDynConfig(DynamicConfig)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getSubSystemConfig_DynConfig()

@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link TransitionPoint}</li>
  *   <li>{@link EntryPoint}</li>
@@ -36,7 +36,7 @@ public interface TrPoint extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the transition, entry or exit point is referred to in the model.
+   * <br>By this name the transition, entry or exit point is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.

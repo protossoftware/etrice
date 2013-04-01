@@ -9,6 +9,14 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Dynamic Config</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>The dynamic configuration provides a configuration at runtime.
+ * The source of the configuration is abstracted by an interface.
+ * <br>
+ * This feature is experimental and implemented for target language java only.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -28,11 +36,11 @@ public interface DynamicConfig extends EObject
   /**
    * Returns the value of the '<em><b>File Path</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>File Path</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the file path of the configuration. In this case the source of the configuration is a simple file.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>File Path</em>' attribute.
    * @see #setFilePath(String)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_FilePath()
@@ -54,11 +62,11 @@ public interface DynamicConfig extends EObject
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>Defines the import statement for the implemenation of the configuration source.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' attribute.
    * @see #setUserCode1(String)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_UserCode1()
@@ -80,11 +88,11 @@ public interface DynamicConfig extends EObject
   /**
    * Returns the value of the '<em><b>User Code2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>User Code2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is the constructor statement for the implemenation of the configuration source.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' attribute.
    * @see #setUserCode2(String)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_UserCode2()
@@ -106,11 +114,11 @@ public interface DynamicConfig extends EObject
   /**
    * Returns the value of the '<em><b>Polling</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Polling</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>Defines the time interval in milliseconds to query changes from the configuration source.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Polling</em>' attribute.
    * @see #setPolling(int)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_Polling()

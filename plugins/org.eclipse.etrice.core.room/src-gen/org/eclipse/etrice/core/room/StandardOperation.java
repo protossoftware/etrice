@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The standard form of an operation as used by
+ * <br>The standard form of an operation as used by
  * {@link ActorClass} and {@link DataClass}.
  * <p>
  * If the name coincides with it's containing classes name
@@ -43,7 +43,7 @@ public interface StandardOperation extends Operation
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If this flag is {@code true} <em>and</em> the name conincides with the class name
+   * <br>If this flag is {@code true} <em>and</em> the name conincides with the class name
    * it is treated as a destructor.
    * 
    * <!-- end-model-doc -->

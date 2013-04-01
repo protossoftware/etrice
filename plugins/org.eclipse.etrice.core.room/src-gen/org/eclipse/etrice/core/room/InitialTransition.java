@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * There can be at most one initial transition in a {@link StateGraph}.
+ * <br>There can be at most one initial transition in a {@link StateGraph}.
  * It defines the starting point of the state graph and is traversed
  * exactly once when the state graph is accessed for the first time.
  * 

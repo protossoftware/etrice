@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A choice point corresponds to an {@code if else} construct.
+ * <br>A choice point corresponds to an {@code if else} construct.
  * It is the target of one or more {@link Transition}s and the
  * source of several {@link Transition}s.
  * One outgoing transitions must be a {@link ContinuationTransition}
@@ -38,7 +38,7 @@ public interface ChoicePoint extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * By this name the choice point is referred to in the model.
+   * <br>By this name the choice point is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -64,7 +64,7 @@ public interface ChoicePoint extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.

@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A binding connects two {@link Port}s.
+ * <br>A binding connects two {@link Port}s.
  * To be able to distinguish the ports of two {@link ActorContainerRef}s of the same type
  * a {@link BindingEndPoint} is needed for disambiguation.
  * 
@@ -35,7 +35,7 @@ public interface Binding extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The first end point of a binding.
+   * <br>The first end point of a binding.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Endpoint1</em>' containment reference.
@@ -61,7 +61,7 @@ public interface Binding extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The second end point of a binding.
+   * <br>The second end point of a binding.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Endpoint2</em>' containment reference.

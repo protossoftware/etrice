@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This special protocol class is used to bundle several protocols
+ * <br>This special protocol class is used to bundle several protocols
  * in relay ports. This can be useful to avoid parallel chains
  * of {@link Binding}s traversing the structural hierarchy.
  * <p>
@@ -38,7 +38,7 @@ public interface CompoundProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of sub protocols.
+   * <br>This is a list of sub protocols.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sub Protocols</em>' containment reference list.

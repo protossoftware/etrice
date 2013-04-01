@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The refined transition is only allowed in {@link StateGraph}s
+ * <br>The refined transition is only allowed in {@link StateGraph}s
  * of derived {@link ActorClass}es. It targets a {@link Transition}
  * of the base class state machine.
  * 
@@ -36,7 +36,7 @@ public interface RefinedTransition extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced transition in the base class state machine.
+   * <br>This is the referenced transition in the base class state machine.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Target</em>' reference.
@@ -62,7 +62,7 @@ public interface RefinedTransition extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -88,7 +88,7 @@ public interface RefinedTransition extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional code in the code generator's target language.
+   * <br>This is an optional code in the code generator's target language.
    * It is execute when the transition fires.
    * 
    * <!-- end-model-doc -->

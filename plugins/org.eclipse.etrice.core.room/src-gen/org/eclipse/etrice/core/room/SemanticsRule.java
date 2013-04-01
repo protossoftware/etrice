@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link InSemanticsRule}</li>
  *   <li>{@link OutSemanticsRule}</li>
@@ -39,7 +39,7 @@ public interface SemanticsRule extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The message to which this rule applies.
+   * <br>The message to which this rule applies.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msg</em>' reference.
@@ -66,7 +66,7 @@ public interface SemanticsRule extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The possible follow up rules.
+   * <br>The possible follow up rules.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Follow Ups</em>' containment reference list.

@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A guarded transition is very similar to a {@link CPBranchTransition}.
+ * <br>A guarded transition is very similar to a {@link CPBranchTransition}.
  * It defines a guard condition which lets the transition fire if
  * evaluated to {@code true}. This kind of transition is only
  * allowed in data driven or moixed (async) state machines.
@@ -34,7 +34,7 @@ public interface GuardedTransition extends TransitionChainStartTransition
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the guard condition of the transition specified in the code generator's target language.
+   * <br>This is the guard condition of the transition specified in the code generator's target language.
    * It has to evaluate to a boolean value.
    * 
    * <!-- end-model-doc -->

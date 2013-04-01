@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor
+ * <br>Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor
  * 
  * <!-- end-model-doc -->
  *
@@ -33,7 +33,7 @@ public interface SPPoint extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced actor container ref.
+   * <br>This is the referenced actor container ref.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ref</em>' reference.
@@ -59,7 +59,7 @@ public interface SPPoint extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced service.
+   * <br>This is the referenced service.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Service</em>' reference.

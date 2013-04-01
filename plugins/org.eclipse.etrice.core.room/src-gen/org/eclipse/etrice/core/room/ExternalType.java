@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An external type is not defined in the ROOM model
+ * <br>An external type is not defined in the ROOM model
  * but only referenced. It can not be instantiated.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +33,7 @@ public interface ExternalType extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the type name in the target language.
+   * <br>This is the type name in the target language.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Target Name</em>' attribute.
@@ -59,7 +59,7 @@ public interface ExternalType extends ComplexType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional default value literal.
+   * <br>This is an optional default value literal.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.

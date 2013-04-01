@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The detail code contains a list of strings which
+ * <br>The detail code contains a list of strings which
  * are considered verbatim code of the code generator
  * target language.
  * 
@@ -43,7 +43,7 @@ public interface DetailCode extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of commands in the code generator's target language.
+   * <br>This is a list of commands in the code generator's target language.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Commands</em>' attribute list.

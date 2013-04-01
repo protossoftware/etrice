@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link InMessageHandler}</li>
  *   <li>{@link OutMessageHandler}</li>
@@ -37,7 +37,7 @@ public interface MessageHandler extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the message that is handled.
+   * <br>This is the message that is handled.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msg</em>' reference.
@@ -63,7 +63,7 @@ public interface MessageHandler extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the handler code written in code generator target language.
+   * <br>This is the handler code written in code generator target language.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Detail Code</em>' containment reference.

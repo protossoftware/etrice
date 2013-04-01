@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The super class of
+ * <br>The super class of
  * <ul>
  *   <li>{@link TransitionChainStartTransition}</li>
  *   <li>{@link ContinuationTransition}</li>
@@ -36,7 +36,7 @@ public interface NonInitialTransition extends Transition
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the source node of the transition.
+   * <br>This is the source node of the transition.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>From</em>' containment reference.

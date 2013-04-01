@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.
+ * <br>The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.
  * This way the logical system is composed of sub system instances. It also defines
  * {@link Binding}s and {@link LayerConnection}s between those sub systems.
  * 
@@ -41,7 +41,7 @@ public interface LogicalSystem extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The list of all sub systems contained in the logical system.
+   * <br>The list of all sub systems contained in the logical system.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sub Systems</em>' containment reference list.

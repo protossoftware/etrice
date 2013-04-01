@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The root object for the mapping model. It gives access to the mappings defined.
+ * <br>The root object for the mapping model. It gives access to the mappings defined.
  * 
  * <!-- end-model-doc -->
  *
@@ -36,7 +36,7 @@ public interface MappingModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The model name is a dot separated fully qualified name and is
+   * <br>The model name is a dot separated fully qualified name and is
    * used to provide a name space.
    * 
    * <!-- end-model-doc -->
@@ -64,7 +64,7 @@ public interface MappingModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all imported models.
+   * <br>A list of all imported models.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
@@ -80,7 +80,7 @@ public interface MappingModel extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * A list of all defined mappings.
+   * <br>A list of all defined mappings.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Mappings</em>' containment reference list.

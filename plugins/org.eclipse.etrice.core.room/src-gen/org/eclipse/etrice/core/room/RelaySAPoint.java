@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Links from a relay {@link SPPRef} of the actor class.
+ * <br>Links from a relay {@link SPPRef} of the actor class.
  * 
  * <!-- end-model-doc -->
  *
@@ -31,7 +31,7 @@ public interface RelaySAPoint extends SAPoint
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the referenced SPPRef.
+   * <br>This is the referenced SPPRef.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Relay</em>' reference.

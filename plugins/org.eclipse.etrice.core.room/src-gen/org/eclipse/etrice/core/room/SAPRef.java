@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A service access point is similar to a {@link Port} but is not explicitly bound to a peer.
+ * <br>A service access point is similar to a {@link Port} but is not explicitly bound to a peer.
  * Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the
  * containing actors.
  * 
@@ -37,7 +37,7 @@ public interface SAPRef extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the SAPRef's protocol class.
+   * <br>This is the SAPRef's protocol class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.

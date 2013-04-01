@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The port operation is very similar to the {@link StandardOperation}
+ * <br>The port operation is very similar to the {@link StandardOperation}
  * and is used in the {@link PortClass}. It is not possible to
  * define constructor or destructor.
  * <p>
@@ -38,7 +38,7 @@ public interface PortOperation extends Operation
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This optional reference to a message means that the operation sends a message.
+   * <br>This optional reference to a message means that the operation sends a message.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sends Msg</em>' reference.

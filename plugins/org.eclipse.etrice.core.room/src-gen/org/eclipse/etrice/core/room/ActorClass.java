@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Together with {@link ProtocolClass} and {@link DataClass} one of
+ * <br>Together with {@link ProtocolClass} and {@link DataClass} one of
  * the main class types of the ROOM language.
  * 
  * <p>
@@ -77,7 +77,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * If {@code true} this actor class can not be instantiated and can only be base class
+   * <br>If {@code true} this actor class can not be instantiated and can only be base class
    * for other actor classes.
    * 
    * <!-- end-model-doc -->
@@ -105,7 +105,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The communication type of this actor class.
+   * <br>The communication type of this actor class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Comm Type</em>' attribute.
@@ -133,7 +133,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The base class from which all attributes, operations, ports, SAPs
+   * <br>The base class from which all attributes, operations, ports, SAPs
    * and state machine are inherited.
    * 
    * <!-- end-model-doc -->
@@ -161,7 +161,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list containing all ports of the actor interface.
+   * <br>This is a list containing all ports of the actor interface.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>If Ports</em>' containment reference list.
@@ -176,7 +176,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation of the actor structure.
+   * <br>This is an optional documentation of the actor structure.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Structure Docu</em>' containment reference.
@@ -203,7 +203,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list containing all ports of the actor structure (internal end ports).
+   * <br>This is a list containing all ports of the actor structure (internal end ports).
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Int Ports</em>' containment reference list.
@@ -219,7 +219,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list containing all ports of the actor interface that are end ports.
+   * <br>This is a list containing all ports of the actor interface that are end ports.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ext Ports</em>' containment reference list.
@@ -235,7 +235,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all service implementations.
+   * <br>This is a list of all service implementations.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Service Implementations</em>' containment reference list.
@@ -251,7 +251,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all SAPs.
+   * <br>This is a list of all SAPs.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Str SA Ps</em>' containment reference list.
@@ -267,7 +267,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all actor class private attributes.
+   * <br>This is a list of all actor class private attributes.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
@@ -282,7 +282,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation of the actor behavior.
+   * <br>This is an optional documentation of the actor behavior.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Behavior Docu</em>' containment reference.
@@ -309,7 +309,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of annotations to the actor behavior.
+   * <br>This is a list of annotations to the actor behavior.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Behavior Annotations</em>' containment reference list.
@@ -325,7 +325,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all private operations of this actor class.
+   * <br>This is a list of all private operations of this actor class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
@@ -340,7 +340,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the actor's optional state machine.
+   * <br>This is the actor's optional state machine.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>State Machine</em>' containment reference.

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Together with {@link ActorClass} and {@link DataClass} one of
+ * <br>Together with {@link ActorClass} and {@link DataClass} one of
  * the main class types of the ROOM language.
  * <p>
  * A protocol class specifies a directed {@link Port} interface
@@ -63,7 +63,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the communication type of the protocol.
+   * <br>This is the communication type of the protocol.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Comm Type</em>' attribute.
@@ -91,7 +91,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The base class from which all messages are inherited.
+   * <br>The base class from which all messages are inherited.
    * The port classes and the semantics are not inherited.
    * 
    * <!-- end-model-doc -->
@@ -118,7 +118,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' containment reference.
@@ -144,7 +144,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' containment reference.
@@ -170,7 +170,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code3</em>' containment reference.
@@ -197,7 +197,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the set of incoming messages of this protocol.
+   * <br>This is the set of incoming messages of this protocol.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Incoming Messages</em>' containment reference list.
@@ -213,7 +213,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the set of outgoing messages of this protocol.
+   * <br>This is the set of outgoing messages of this protocol.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Outgoing Messages</em>' containment reference list.
@@ -228,7 +228,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the optional regular port class specification.
+   * <br>This is the optional regular port class specification.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Regular</em>' containment reference.
@@ -254,7 +254,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the optional conjugate port class specification.
+   * <br>This is the optional conjugate port class specification.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Conjugate</em>' containment reference.
@@ -280,7 +280,7 @@ public interface ProtocolClass extends GeneralProtocolClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the optional semantics specification for this protocol.
+   * <br>This is the optional semantics specification for this protocol.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Semantics</em>' containment reference.

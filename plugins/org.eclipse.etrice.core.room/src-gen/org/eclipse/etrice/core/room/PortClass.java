@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A port class can be specified to customize the behavior of a {@link ProtocolClass}.
+ * <br>A port class can be specified to customize the behavior of a {@link ProtocolClass}.
  * There can be one for regular ports and another one for conjugate ports independently.
  * 
  * <p>
@@ -43,7 +43,7 @@ public interface PortClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code</em>' containment reference.
@@ -70,7 +70,7 @@ public interface PortClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of attributes of this nested class.
+   * <br>This is a list of attributes of this nested class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
@@ -86,7 +86,7 @@ public interface PortClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of operations of this nested class.
+   * <br>This is a list of operations of this nested class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
@@ -102,7 +102,7 @@ public interface PortClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of message handlers.
+   * <br>This is a list of message handlers.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msg Handlers</em>' containment reference list.

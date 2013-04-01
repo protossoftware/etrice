@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The terminal point (source or target) of a transition ending
+ * <br>The terminal point (source or target) of a transition ending
  * at a local {@link TrPoint}.
  * 
  * <!-- end-model-doc -->
@@ -32,7 +32,7 @@ public interface TrPointTerminal extends TransitionTerminal
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the target transition, entry or exit point.
+   * <br>This is the target transition, entry or exit point.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Tr Point</em>' reference.

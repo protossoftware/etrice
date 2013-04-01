@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An annotation similar to Java annotations that can be used
+ * <br>An annotation similar to Java annotations that can be used
  * to add {@link KeyValue} pairs to certain model items.
  * 
  * <!-- end-model-doc -->
@@ -36,7 +36,7 @@ public interface Annotation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the name of the annotation.
+   * <br>This is the name of the annotation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -63,7 +63,7 @@ public interface Annotation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of key/value pairs.
+   * <br>This is a list of key/value pairs.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.

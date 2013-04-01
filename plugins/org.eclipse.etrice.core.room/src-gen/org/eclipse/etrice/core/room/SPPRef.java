@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A service provision point is used to connect an actor class with a {@link ServiceImplementation}.
+ * <br>A service provision point is used to connect an actor class with a {@link ServiceImplementation}.
  * It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})
  * or connect to a {@link ServiceImplementation} of its actor class.
  * 
@@ -37,7 +37,7 @@ public interface SPPRef extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the SAPRef's protocol class.
+   * <br>This is the SAPRef's protocol class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.

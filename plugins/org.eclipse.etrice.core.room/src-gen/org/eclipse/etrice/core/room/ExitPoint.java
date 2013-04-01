@@ -9,7 +9,7 @@ package org.eclipse.etrice.core.room;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An exit point is located at the border of a {@link State}
+ * <br>An exit point is located at the border of a {@link State}
  * and is visible and accessible outside. Outside
  * it can be the source of a {@link Transition} and inside the target.
  * If it is not connected in the interior then it is a

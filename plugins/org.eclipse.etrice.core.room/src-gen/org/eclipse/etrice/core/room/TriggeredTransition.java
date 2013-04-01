@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Triggered transitions start at a {@link State} or a {@link TransitionPoint}.
+ * <br>Triggered transitions start at a {@link State} or a {@link TransitionPoint}.
  * It defines a list of {@link Trigger}s that specify the conditions
  * when the transition fires and is traversed. This kind of
  * transition is only allowed in event driven and mixed (async) state
@@ -37,7 +37,7 @@ public interface TriggeredTransition extends TransitionChainStartTransition
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all triggers of the transition.
+   * <br>This is a list of all triggers of the transition.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Triggers</em>' containment reference list.

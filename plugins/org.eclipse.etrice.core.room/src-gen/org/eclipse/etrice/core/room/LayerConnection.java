@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.
+ * <br>Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.
  * The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.
  * 
  * <!-- end-model-doc -->
@@ -34,7 +34,7 @@ public interface LayerConnection extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is source point of the layer connection.
+   * <br>This is source point of the layer connection.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>From</em>' containment reference.
@@ -60,7 +60,7 @@ public interface LayerConnection extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is target point of the layer connection.
+   * <br>This is target point of the layer connection.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>To</em>' containment reference.

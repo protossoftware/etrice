@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This defines a runtime class.
+ * <br>This defines a runtime class.
  * 
  * <!-- end-model-doc -->
  *
@@ -34,7 +34,7 @@ public interface RuntimeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the runtime class by which it is referred to in the model.
+   * <br>The name of the runtime class by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -60,7 +60,7 @@ public interface RuntimeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -87,7 +87,7 @@ public interface RuntimeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This distinguishes single and multi threaded.
+   * <br>This distinguishes single and multi threaded.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Thread Model</em>' attribute.

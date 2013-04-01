@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This defines a node class.
+ * <br>This defines a node class.
  * 
  * <!-- end-model-doc -->
  *
@@ -39,7 +39,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the node class by which it is referred to in the model.
+   * <br>The name of the node class by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -65,7 +65,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.
@@ -91,7 +91,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the associated runtime class.
+   * <br>This is the associated runtime class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Runtime</em>' reference.
@@ -117,7 +117,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the minimal thread priority for this node type.
+   * <br>This is the minimal thread priority for this node type.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Priomin</em>' attribute.
@@ -143,7 +143,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the maximum thread priority for this node type.
+   * <br>This is the maximum thread priority for this node type.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Priomax</em>' attribute.
@@ -170,7 +170,7 @@ public interface NodeClass extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all threads defined for this node.
+   * <br>This is a list of all threads defined for this node.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Threads</em>' containment reference list.

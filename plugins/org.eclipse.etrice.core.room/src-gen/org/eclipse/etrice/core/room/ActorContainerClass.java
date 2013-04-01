@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This class is the super class of the structural classes
+ * <br>This class is the super class of the structural classes
  * <ul>
  *   <li>{@link ActorClass}</li>
  *   <li>{@link SubSystemClass}</li>
@@ -41,7 +41,7 @@ public interface ActorContainerClass extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all interface SPPs.
+   * <br>This is a list of all interface SPPs.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>If SP Ps</em>' containment reference list.
@@ -56,7 +56,7 @@ public interface ActorContainerClass extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code1</em>' containment reference.
@@ -82,7 +82,7 @@ public interface ActorContainerClass extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code2</em>' containment reference.
@@ -108,7 +108,7 @@ public interface ActorContainerClass extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The user code is treated in a generator dependent way.
+   * <br>The user code is treated in a generator dependent way.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>User Code3</em>' containment reference.
@@ -135,7 +135,7 @@ public interface ActorContainerClass extends StructureClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all actor refs.
+   * <br>This is a list of all actor refs.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Actor Refs</em>' containment reference list.

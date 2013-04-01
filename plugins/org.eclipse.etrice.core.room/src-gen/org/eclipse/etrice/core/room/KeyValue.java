@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A key/value pair.
+ * <br>A key/value pair.
  * 
  * <!-- end-model-doc -->
  *
@@ -33,7 +33,7 @@ public interface KeyValue extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the key of the pair.
+   * <br>This is the key of the pair.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Key</em>' attribute.
@@ -59,7 +59,7 @@ public interface KeyValue extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the value of the pair.
+   * <br>This is the value of the pair.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Value</em>' attribute.

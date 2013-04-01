@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A state graph is a directed graph composed of
+ * <br>A state graph is a directed graph composed of
  * {@link StateGraphNode}s as nodes and {@link Transitions} as edges.
  * 
  * <!-- end-model-doc -->
@@ -40,7 +40,7 @@ public interface StateGraph extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all states of this state graph.
+   * <br>This is a list of all states of this state graph.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>States</em>' containment reference list.
@@ -56,7 +56,7 @@ public interface StateGraph extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all transition, entry and exit points of this state graph.
+   * <br>This is a list of all transition, entry and exit points of this state graph.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Tr Points</em>' containment reference list.
@@ -72,7 +72,7 @@ public interface StateGraph extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all choice points of this state graph.
+   * <br>This is a list of all choice points of this state graph.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ch Points</em>' containment reference list.
@@ -88,7 +88,7 @@ public interface StateGraph extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all transitions of this state graph.
+   * <br>This is a list of all transitions of this state graph.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Transitions</em>' containment reference list.
@@ -104,7 +104,7 @@ public interface StateGraph extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is a list of all refined transitions of this state graph.
+   * <br>This is a list of all refined transitions of this state graph.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Refined Transitions</em>' containment reference list.

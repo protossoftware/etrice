@@ -37,22 +37,11 @@ DynamicConfig:
 	('polling timer [ms]' polling=INT)?)
 	'}';
 
-	/*
-	 * Validation:
-	 * duplicates config, attributes
-	 */
 ActorClassConfig:
 	'ActorClassConfig' actor=[room::ActorClass|FQN] '{'
 	(attributes+=AttrClassConfig)*
 	'}';
 
-	/*
-	 * Validation: 
-	 * duplicates config, attributes
-	 * valid instance reference
-	 * Proposal:
-	 * attributes
-	 */
 ActorInstanceConfig:
 	'ActorInstanceConfig' root=[room::LogicalSystem|FQN] '/' subSystem=[room::SubSystemRef|ID] '/' path=RefPath '{'
 	((attributes+=AttrInstanceConfig)* &
@@ -75,23 +64,9 @@ PortInstanceConfig:
 	(attributes+=AttrInstanceConfig)*
 	'}';
 
-	/*
-	 * Validation:
-	 * correct value type
-	 * Proposal:
-	 * correct Literal
-	 */
 AttrConfig:
 	AttrClassConfig | AttrInstanceConfig;
 
-	/*
-	 * Validation:
-	 * correct min, max type + available
-	 * min <= value <= max
-	 * if !value -> min <= attribute.defaultValue <= max
-	 * character length
-	 * 
-	 */
 AttrClassConfig:
 	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
 	(('min' '=' min=NumberLiteral)?
@@ -105,10 +80,6 @@ AttrInstanceConfig:
 	(attributes+=AttrInstanceConfig*))
 	'}')?;
 
-	/*
-	 * Proposal:
-	 * for ActorInstanceConfig
-	 */
 RefPath:
 	refs+=ID ('/' refs+=ID)*;
 
@@ -139,8 +110,6 @@ FQN:
 //	KW
 //;
 
-// LiteralArray = BooleanLiteral+|NumberLiteral+
-// LiteralArray = StringLiteral
 LiteralArray:
 	literals+=Literal (',' literals+=Literal)*;
 

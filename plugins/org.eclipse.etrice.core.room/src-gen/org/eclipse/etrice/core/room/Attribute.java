@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An attribute is a named member of a
+ * <br>An attribute is a named member of a
  * <ul>
  *   <li>{@link DataClass}</li>
  *   <li>{@link ActorClass}</li>
@@ -45,7 +45,7 @@ public interface Attribute extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The name of the attribute by which it is referred to in the model.
+   * <br>The name of the attribute by which it is referred to in the model.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
@@ -71,7 +71,7 @@ public interface Attribute extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * The default is scalar ({@code size=1}), values {@code >1} indicate an array.
+   * <br>The default is scalar ({@code size=1}), values {@code >1} indicate an array.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Size</em>' attribute.
@@ -97,7 +97,7 @@ public interface Attribute extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the attribute's type.
+   * <br>This is the attribute's type.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Ref Type</em>' containment reference.
@@ -123,7 +123,7 @@ public interface Attribute extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional default value literal.
+   * <br>This is an optional default value literal.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Default Value Literal</em>' attribute.
@@ -149,7 +149,7 @@ public interface Attribute extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is an optional documentation.
+   * <br>This is an optional documentation.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Docu</em>' containment reference.

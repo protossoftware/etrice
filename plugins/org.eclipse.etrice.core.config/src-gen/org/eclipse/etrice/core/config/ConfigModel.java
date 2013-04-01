@@ -11,6 +11,14 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>The root object for the ROOM Config model. It gives access to
+ * the {@link SubSystemConfig sub system class},
+ * {@link ActorClassConfig actor class}, {@link ProtocolClassConfig protocol class} and
+ * {@link ActorInstanceConfig actor instance} configurations and the room model {@link Import imports}.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -29,11 +37,12 @@ public interface ConfigModel extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>The model name is a dot separated fully qualified name and is
+   * used to provide a name space.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_Name()
@@ -56,11 +65,11 @@ public interface ConfigModel extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.config.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all imported room models. The config elements reference these imports.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_Imports()
    * @model containment="true"
@@ -72,11 +81,11 @@ public interface ConfigModel extends EObject
    * Returns the value of the '<em><b>Config Elements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.config.ConfigElement}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Config Elements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all top level config elements
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Config Elements</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel_ConfigElements()
    * @model containment="true"

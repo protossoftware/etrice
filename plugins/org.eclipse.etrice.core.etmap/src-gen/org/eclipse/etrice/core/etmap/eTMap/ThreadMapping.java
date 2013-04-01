@@ -14,7 +14,7 @@ import org.eclipse.etrice.core.room.LogicalThread;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * This is the mapping of a logical thread (defined in a ROOM model) to a
+ * <br>This is the mapping of a logical thread (defined in a ROOM model) to a
  * physical thread (defined in a physical model).
  * 
  * <!-- end-model-doc -->
@@ -38,7 +38,7 @@ public interface ThreadMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the logical thread being mapped.
+   * <br>This is the logical thread being mapped.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Logical Thread</em>' reference.
@@ -64,7 +64,7 @@ public interface ThreadMapping extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * This is the physical thread being mapped to.
+   * <br>This is the physical thread being mapped to.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Physical Thread</em>' reference.
