@@ -417,11 +417,11 @@ public class SupportUtil {
 		return transitions;
 	}
 
-	private static Map<Transition, Connection> getTransitionsMap(Diagram diagram, IFeatureProvider fp) {
+	private static Map<Transition, Connection> getTransitionsMap(StateGraph sg, Diagram diagram, IFeatureProvider fp) {
 		Map<Transition, Connection> transitions = new HashMap<Transition, Connection>();
 		for (Connection conn : diagram.getConnections()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(conn);
-			if (bo instanceof Transition)
+			if (bo instanceof Transition && sg.getTransitions().contains(bo))
 				transitions.put((Transition) bo, conn);
 		}
 		return transitions;
@@ -588,9 +588,10 @@ public class SupportUtil {
 			else
 				SupportUtil.updateInitialPoint(present, ctx.getPositionProvider(), fp);
 		}
+		
 		// transitions
 		{
-			Map<Transition, Connection> present = SupportUtil.getTransitionsMap((Diagram) sgShape.eContainer(), fp);
+			Map<Transition, Connection> present = SupportUtil.getTransitionsMap(sg, (Diagram) sgShape.eContainer(), fp);
 			List<Transition> expected = ctx.getTransitions();
 			List<Transition> toAdd = new ArrayList<Transition>();
 			for (Transition trans : expected)
