@@ -83,7 +83,9 @@
     <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
-      <rm:uri format="{0}/modeling/tmf/xtext/updates/composite/releases/"/>
+      <rm:uri format="{0}/modeling/tmf/xtext/updates/composite/releases/">
+        <bc:propertyRef key="eclipse.downloads"/>
+      </rm:uri>
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="eclipse.license">
