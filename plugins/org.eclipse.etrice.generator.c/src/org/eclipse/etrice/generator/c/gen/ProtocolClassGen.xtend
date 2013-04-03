@@ -15,25 +15,24 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.CommunicationType
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.AbstractGenerator
-
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
@@ -42,15 +41,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (pc: root.usedProtocolClasses) {
-			var path = pc.generationTargetPath+pc.getPath
+			val path = pc.generationTargetPath+pc.getPath
+			val infopath = pc.generationInfoPath+pc.getPath
+			var file = pc.getCHeaderFileName
 
-			logger.logInfo("generating ProtocolClass header '"+pc.getCHeaderFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(pc.getCHeaderFileName, root.generateHeaderFile(pc))
+			// header file
+			fileIO.generateFile("generating ProtocolClass header", path, infopath, file, root.generateHeaderFile(pc))
 
-			logger.logInfo("generating ProtocolClass source '"+pc.getCSourceFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(pc.getCSourceFileName, root.generateSourceFile(pc))
+			// source file
+			file = pc.getCSourceFileName
+			fileIO.generateFile("generating ProtocolClass source", path, infopath, file, root.generateSourceFile(pc))
 		}
 	}
 

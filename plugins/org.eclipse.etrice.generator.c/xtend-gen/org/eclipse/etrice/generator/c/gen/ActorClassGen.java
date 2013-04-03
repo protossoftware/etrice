@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -41,7 +42,6 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -69,7 +69,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
   protected ILanguageExtension langExt;
   
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   private ILogger logger;
@@ -84,38 +84,30 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String _path = this._roomExtensions.getPath(_actorClass_1);
         final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _cHeaderFileName = this._cExtensions.getCHeaderFileName(_actorClass_2);
-        String _plus = ("generating ActorClass header \'" + _cHeaderFileName);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_2);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(_actorClass_3);
-        CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac);
-        this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
+        String _path_1 = this._roomExtensions.getPath(_actorClass_3);
+        final String infopath = (_generationInfoPath + _path_1);
         ActorClass _actorClass_4 = xpac.getActorClass();
-        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_4, "BehaviorManual");
+        String file = this._cExtensions.getCHeaderFileName(_actorClass_4);
+        CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac);
+        this.fileIO.generateFile("generating ActorClass header", path, infopath, file, _generateHeaderFile);
+        CharSequence _generateHeaderFile_1 = this.generateHeaderFile(root, xpac);
+        this.fileIO.generateFile("generating ActorClass header", path, infopath, file, _generateHeaderFile_1);
+        ActorClass _actorClass_5 = xpac.getActorClass();
+        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_5, "BehaviorManual");
         if (_isBehaviorAnnotationPresent) {
-          ActorClass _actorClass_5 = xpac.getActorClass();
-          String _name = _actorClass_5.getName();
-          String _plus_4 = ("omitting ActorClass source for \'" + _name);
-          String _plus_5 = (_plus_4 + "\' since @BehaviorManual is specified");
-          this.logger.logInfo(_plus_5);
-        } else {
           ActorClass _actorClass_6 = xpac.getActorClass();
-          String _cSourceFileName = this._cExtensions.getCSourceFileName(_actorClass_6);
-          String _plus_6 = ("generating ActorClass source \'" + _cSourceFileName);
-          String _plus_7 = (_plus_6 + "\' in \'");
-          String _plus_8 = (_plus_7 + path);
-          String _plus_9 = (_plus_8 + "\'");
-          this.logger.logInfo(_plus_9);
-          this.fileAccess.setOutputPath(path);
+          String _name = _actorClass_6.getName();
+          String _plus = ("omitting ActorClass source for \'" + _name);
+          String _plus_1 = (_plus + "\' since @BehaviorManual is specified");
+          this.logger.logInfo(_plus_1);
+        } else {
           ActorClass _actorClass_7 = xpac.getActorClass();
-          String _cSourceFileName_1 = this._cExtensions.getCSourceFileName(_actorClass_7);
+          String _cSourceFileName = this._cExtensions.getCSourceFileName(_actorClass_7);
+          file = _cSourceFileName;
           CharSequence _generateSourceFile = this.generateSourceFile(root, xpac);
-          this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
+          this.fileIO.generateFile("generating ActorClass source", path, infopath, file, _generateSourceFile);
         }
       }
     }

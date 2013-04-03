@@ -17,17 +17,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class SubSystemRunnerGen {
   @Inject
-  @Extension
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -35,19 +34,20 @@ public class SubSystemRunnerGen {
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (final SubSystemInstance sc : _subSystemInstances) {
+    for (final SubSystemInstance ssi : _subSystemInstances) {
       {
-        SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _plus = (_generationTargetPath + _path);
-        this.fileAccess.setOutputPath(_plus);
-        SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        String _name = _subSystemClass_2.getName();
-        String _plus_1 = (_name + "_Runner.c");
-        CharSequence _generateSourceFile = this.generateSourceFile(root, sc);
-        this.fileAccess.generateFile(_plus_1, _generateSourceFile);
+        final SubSystemClass ssc = ssi.getSubSystemClass();
+        String _generationTargetPath = this.roomExt.getGenerationTargetPath(ssc);
+        String _path = this.roomExt.getPath(ssc);
+        final String path = (_generationTargetPath + _path);
+        String _generationInfoPath = this.roomExt.getGenerationInfoPath(ssc);
+        String _path_1 = this.roomExt.getPath(ssc);
+        final String infopath = (_generationInfoPath + _path_1);
+        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+        String _name = _subSystemClass.getName();
+        String file = (_name + "_Runner.c");
+        CharSequence _generateSourceFile = this.generateSourceFile(root, ssi);
+        this.fileIO.generateFile("generating SubSystemRunner implementation", path, infopath, file, _generateSourceFile);
       }
     }
   }

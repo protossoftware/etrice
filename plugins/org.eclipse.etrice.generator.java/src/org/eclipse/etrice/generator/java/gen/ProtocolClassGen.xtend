@@ -14,28 +14,25 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.core.room.DataClass
-
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
@@ -46,19 +43,22 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (pc: root.usedProtocolClasses) {
-			var path = pc.generationTargetPath+pc.getPath
-			var file = pc.getJavaFileName
-			logger.logInfo("generating ProtocolClass implementation '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			
+			val path = pc.generationTargetPath+pc.getPath
+			val infopath = pc.generationInfoPath+pc.getPath
+			val file = pc.getJavaFileName
+			val contents =
 			switch (pc.commType) {
 				case CommunicationType::EVENT_DRIVEN:
-					fileAccess.generateFile(file, root.generate(pc))
+					root.generate(pc)
 				case CommunicationType::DATA_DRIVEN:
-					fileAccess.generateFile(file, root.generateDataDriven(pc))
+					root.generateDataDriven(pc)
 				case CommunicationType::SYNCHRONOUS:
-					logger.logError("synchronous protocols not supported yet", pc)
+					""
 			}
+			if (contents.toString.empty)
+				logger.logError("synchronous protocols not supported yet", pc)
+			else
+				fileIO.generateFile("generating ProtocolClass implementation", path, infopath, file, contents)
 		}
 	}
 	

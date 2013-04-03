@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.HashSet
-import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.Root
@@ -23,16 +22,16 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.LogicalThread
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
 
 @Singleton
 class SubSystemClassGen {
 	
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject IDataConfiguration dataConfigExt
@@ -40,18 +39,16 @@ class SubSystemClassGen {
 	@Inject extension ProcedureHelpers
 
 	@Inject VariableServiceGen varService
-	@Inject ILogger logger
 	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
 		for (ssi: root.subSystemInstances) {
-			var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-			var file = ssi.subSystemClass.getJavaFileName
-			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
+			val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+			val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+			val file = ssi.subSystemClass.getJavaFileName
 			checkDataPorts(ssi)
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(ssi))
-			if(dataConfigExt.hasVariableService(ssi))
+			fileIO.generateFile("generating SubSystemClass implementation", path, infopath, file, root.generate(ssi))
+			if (dataConfigExt.hasVariableService(ssi))
 				varService.doGenerate(root, ssi);
 		}
 	}

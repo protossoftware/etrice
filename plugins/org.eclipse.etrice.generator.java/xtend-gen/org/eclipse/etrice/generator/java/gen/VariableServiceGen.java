@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
@@ -36,12 +35,12 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -52,8 +51,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class VariableServiceGen {
   @Inject
-  @Extension
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -74,26 +72,22 @@ public class VariableServiceGen {
   @Extension
   private TypeHelpers _typeHelpers;
   
-  @Inject
-  private ILogger logger;
-  
   public void doGenerate(final Root root, final SubSystemInstance ssi) {
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
     SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
     String _path = this.roomExt.getPath(_subSystemClass_1);
-    String path = (_generationTargetPath + _path);
+    final String path = (_generationTargetPath + _path);
     SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-    String _name = _subSystemClass_2.getName();
-    String file = (_name + "VariableService.java");
-    String _plus = ("generating VariableService implementation: \'" + file);
-    String _plus_1 = (_plus + "\' in \'");
-    String _plus_2 = (_plus_1 + path);
-    String _plus_3 = (_plus_2 + "\'");
-    this.logger.logInfo(_plus_3);
-    this.fileAccess.setOutputPath(path);
+    String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
+    SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+    String _path_1 = this.roomExt.getPath(_subSystemClass_3);
+    final String infopath = (_generationInfoPath + _path_1);
+    SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+    String _name = _subSystemClass_4.getName();
+    final String file = (_name + "VariableService.java");
     CharSequence _generate = this.generate(root, ssi);
-    this.fileAccess.generateFile(file, _generate);
+    this.fileIO.generateFile("generating VariableService implementation", path, infopath, file, _generate);
   }
   
   private CharSequence generate(final Root root, final SubSystemInstance comp) {
@@ -731,7 +725,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                Object _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
+                CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
                 _builder_1.append(_genGetAttributeValues, "");
                 _builder_1.newLineIfNotEmpty();
               }
@@ -881,7 +875,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                Object _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
+                CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
                 _builder_1.append(_genSetAttributeValues1, "");
                 _builder_1.newLineIfNotEmpty();
               }
@@ -969,7 +963,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                Object _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);
+                CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);
                 _builder.append(_genSetAttributeValues2, "");
                 _builder.newLineIfNotEmpty();
               }

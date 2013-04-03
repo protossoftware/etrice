@@ -15,19 +15,19 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class DataClassGen {
 
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
@@ -35,17 +35,16 @@ class DataClassGen {
 	
 	def doGenerate(Root root) {
 		for (dc: root.usedDataClasses) {
-			var path = dc.generationTargetPath+dc.getPath
+			val path = dc.generationTargetPath+dc.getPath
+			val infopath = dc.generationInfoPath+dc.getPath
+			var file = dc.getCHeaderFileName
 
 			// header file
-			logger.logInfo("generating DataClass header '"+dc.getCHeaderFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(dc.getCHeaderFileName, root.generateHeaderFile(dc))
+			fileIO.generateFile("generating DataClass header", path, infopath, file, root.generateHeaderFile(dc))
 			
 			// source file
-			logger.logInfo("generating DataClass source '"+dc.getCSourceFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(dc.getCSourceFileName, root.generateSourceFile(dc))
+			file = dc.getCSourceFileName
+			fileIO.generateFile("generating DataClass header", path, infopath, file, root.generateSourceFile(dc))
 			
 		}
 	}

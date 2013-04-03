@@ -64,7 +64,7 @@ class Initialization {
 		}
 	}
 	
-	def private attributeInitPrimitiveRec(List<Attribute> path, EObject roomClass){
+	def private CharSequence attributeInitPrimitiveRec(List<Attribute> path, EObject roomClass){
 		var a = path.last
 		var aType = a.refType.type
 		if(aType.dataClass){

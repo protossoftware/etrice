@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -32,6 +31,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -40,7 +40,6 @@ import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -49,7 +48,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -77,9 +76,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
   @Extension
   private StateMachineGen _stateMachineGen;
   
-  @Inject
-  private ILogger logger;
-  
   public void doGenerate(final Root root) {
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     for (final ExpandedActorClass xpac : _xpActorClasses) {
@@ -92,19 +88,18 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String _path = this._roomExtensions.getPath(_actorClass_2);
         final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        String file = this._javaExtensions.getJavaFileName(_actorClass_3);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_3);
+        ActorClass _actorClass_4 = xpac.getActorClass();
+        String _path_1 = this._roomExtensions.getPath(_actorClass_4);
+        final String infopath = (_generationInfoPath + _path_1);
+        ActorClass _actorClass_5 = xpac.getActorClass();
+        String file = this._javaExtensions.getJavaFileName(_actorClass_5);
         if (manualBehavior) {
           String _plus = ("Abstract" + file);
           file = _plus;
         }
-        String _plus_1 = ("generating ActorClass implementation \'" + file);
-        String _plus_2 = (_plus_1 + "\' in \'");
-        String _plus_3 = (_plus_2 + path);
-        String _plus_4 = (_plus_3 + "\'");
-        this.logger.logInfo(_plus_4);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generate = this.generate(root, xpac, manualBehavior);
-        this.fileAccess.generateFile(file, _generate);
+        this.fileIO.generateFile("generating ActorClass implementation", path, infopath, file, _generate);
       }
     }
   }

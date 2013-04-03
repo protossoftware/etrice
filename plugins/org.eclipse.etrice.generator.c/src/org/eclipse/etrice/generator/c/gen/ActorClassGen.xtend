@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -38,26 +38,26 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension StateMachineGen
 
 	@Inject protected ILanguageExtension langExt
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
+			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
+			var file = xpac.actorClass.getCHeaderFileName
 			
 			// header file
-			logger.logInfo("generating ActorClass header '"+xpac.actorClass.getCHeaderFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(xpac.actorClass.getCHeaderFileName, root.generateHeaderFile(xpac))
+			fileIO.generateFile("generating ActorClass header", path, infopath, file, root.generateHeaderFile(xpac))
 
 			// source file
+			fileIO.generateFile("generating ActorClass header", path, infopath, file, root.generateHeaderFile(xpac))
 			if (xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")) {
 				logger.logInfo("omitting ActorClass source for '"+xpac.actorClass.name+"' since @BehaviorManual is specified")
 			}
 			else {
-				logger.logInfo("generating ActorClass source '"+xpac.actorClass.getCSourceFileName +"' in '"+path+"'")
-				fileAccess.setOutputPath(path)
-				fileAccess.generateFile(xpac.actorClass.getCSourceFileName , root.generateSourceFile(xpac))
+				file = xpac.actorClass.getCSourceFileName
+				fileIO.generateFile("generating ActorClass source", path, infopath, file, root.generateSourceFile(xpac))
 			}
 		}
 	}

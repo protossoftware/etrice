@@ -15,35 +15,31 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
-import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.room.ComplexType
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
-import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.ComplexType
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class DataClassGen {
 
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
-	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (dc: root.usedDataClasses) {
 			var path = dc.generationTargetPath+dc.getPath
+			var infopath = dc.generationInfoPath+dc.getPath
 			var file = dc.getJavaFileName
-			logger.logInfo("generating DataClass implementation '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(dc))
+			fileIO.generateFile("generating DataClass implementation", path, infopath, file, root.generate(dc))
 		}
 	}
 	

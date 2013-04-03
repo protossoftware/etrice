@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -41,7 +42,6 @@ import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -50,7 +50,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ProtocolClassGen extends GenericProtocolClassGenerator {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -85,14 +85,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(pc);
         String _path = this._roomExtensions.getPath(pc);
-        String path = (_generationTargetPath + _path);
-        String file = this._javaExtensions.getJavaFileName(pc);
-        String _plus = ("generating ProtocolClass implementation \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
+        final String path = (_generationTargetPath + _path);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(pc);
+        String _path_1 = this._roomExtensions.getPath(pc);
+        final String infopath = (_generationInfoPath + _path_1);
+        final String file = this._javaExtensions.getJavaFileName(pc);
+        CharSequence _switchResult = null;
         CommunicationType _commType = pc.getCommType();
         final CommunicationType _switchValue = _commType;
         boolean _matched = false;
@@ -100,21 +98,29 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           if (Objects.equal(_switchValue,CommunicationType.EVENT_DRIVEN)) {
             _matched=true;
             CharSequence _generate = this.generate(root, pc);
-            this.fileAccess.generateFile(file, _generate);
+            _switchResult = _generate;
           }
         }
         if (!_matched) {
           if (Objects.equal(_switchValue,CommunicationType.DATA_DRIVEN)) {
             _matched=true;
             CharSequence _generateDataDriven = this.generateDataDriven(root, pc);
-            this.fileAccess.generateFile(file, _generateDataDriven);
+            _switchResult = _generateDataDriven;
           }
         }
         if (!_matched) {
           if (Objects.equal(_switchValue,CommunicationType.SYNCHRONOUS)) {
             _matched=true;
-            this.logger.logError("synchronous protocols not supported yet", pc);
+            _switchResult = "";
           }
+        }
+        final CharSequence contents = _switchResult;
+        String _string = contents.toString();
+        boolean _isEmpty = _string.isEmpty();
+        if (_isEmpty) {
+          this.logger.logError("synchronous protocols not supported yet", pc);
+        } else {
+          this.fileIO.generateFile("generating ProtocolClass implementation", path, infopath, file, contents);
         }
       }
     }

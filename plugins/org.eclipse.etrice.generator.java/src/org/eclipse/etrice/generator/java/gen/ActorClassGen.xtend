@@ -14,22 +14,21 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
-	@Inject JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject IDataConfiguration dataConfigExt
@@ -38,18 +37,16 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
-	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
+			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
 			var file = xpac.actorClass.getJavaFileName
 			if (manualBehavior)
 				file = "Abstract"+file
-			logger.logInfo("generating ActorClass implementation '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generate(xpac, manualBehavior))
+			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, manualBehavior))
 		}
 	}
 	

@@ -170,12 +170,12 @@ public class Initialization {
           List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
           for(final Attribute e : _allAttributes) {
             List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-            Object _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
+            CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
             _builder.append(_attributeInitPrimitiveRec, "");
             _builder.newLineIfNotEmpty();
           }
         }
-        return _builder.toString();
+        return _builder;
       } else {
         CharSequence _xifexpression_1 = null;
         boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);

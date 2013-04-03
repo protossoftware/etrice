@@ -22,7 +22,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -50,13 +49,13 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -67,8 +66,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class SubSystemClassGen {
   @Inject
-  @Extension
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -89,64 +87,39 @@ public class SubSystemClassGen {
   private ILanguageExtension languageExt;
   
   @Inject
-  private ILogger logger;
-  
-  @Inject
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
     EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
     for (final SubSystemInstance ssi : _subSystemInstances) {
       {
+        final SubSystemClass ssc = ssi.getSubSystemClass();
+        String _generationTargetPath = this.roomExt.getGenerationTargetPath(ssc);
+        String _path = this.roomExt.getPath(ssc);
+        final String path = (_generationTargetPath + _path);
+        String _generationInfoPath = this.roomExt.getGenerationInfoPath(ssc);
+        String _path_1 = this.roomExt.getPath(ssc);
+        final String infopath = (_generationInfoPath + _path_1);
         SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
-        String path = (_generationTargetPath + _path);
-        SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String file = this.stdExt.getCHeaderFileName(_subSystemClass_2);
+        String file = this.stdExt.getCHeaderFileName(_subSystemClass);
         this.checkDataPorts(ssi);
-        String _plus = ("generating SubSystemClass declaration: \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi);
-        this.fileAccess.generateFile(file, _generateHeaderFile);
-        SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-        String _cSourceFileName = this.stdExt.getCSourceFileName(_subSystemClass_3);
+        this.fileIO.generateFile("generating SubSystemClass declaration", path, infopath, file, _generateHeaderFile);
+        SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+        String _cSourceFileName = this.stdExt.getCSourceFileName(_subSystemClass_1);
         file = _cSourceFileName;
-        String _plus_4 = ("generating SubSystemClass implementation: \'" + file);
-        String _plus_5 = (_plus_4 + "\' in \'");
-        String _plus_6 = (_plus_5 + path);
-        String _plus_7 = (_plus_6 + "\'");
-        this.logger.logInfo(_plus_7);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generateSourceFile = this.generateSourceFile(root, ssi);
-        this.fileAccess.generateFile(file, _generateSourceFile);
-        SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
-        String _instSourceFileName = this.stdExt.getInstSourceFileName(_subSystemClass_4);
+        this.fileIO.generateFile("generating SubSystemClass implementation", path, infopath, file, _generateSourceFile);
+        SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+        String _instSourceFileName = this.stdExt.getInstSourceFileName(_subSystemClass_2);
         file = _instSourceFileName;
-        String _plus_8 = ("generating SubSystemClass instance file: \'" + file);
-        String _plus_9 = (_plus_8 + "\' in \'");
-        String _plus_10 = (_plus_9 + path);
-        String _plus_11 = (_plus_10 + "\'");
-        this.logger.logInfo(_plus_11);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi);
-        this.fileAccess.generateFile(file, _generateInstanceFile);
-        SubSystemClass _subSystemClass_5 = ssi.getSubSystemClass();
-        String _dispSourceFileName = this.stdExt.getDispSourceFileName(_subSystemClass_5);
+        this.fileIO.generateFile("generating SubSystemClass instance file", path, infopath, file, _generateInstanceFile);
+        SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+        String _dispSourceFileName = this.stdExt.getDispSourceFileName(_subSystemClass_3);
         file = _dispSourceFileName;
-        String _plus_12 = ("generating SubSystemClass dispatcher file: \'" + file);
-        String _plus_13 = (_plus_12 + "\' in \'");
-        String _plus_14 = (_plus_13 + path);
-        String _plus_15 = (_plus_14 + "\'");
-        this.logger.logInfo(_plus_15);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi);
-        this.fileAccess.generateFile(file, _generateDispatcherFile);
+        this.fileIO.generateFile("generating SubSystemClass dispatcher file", path, infopath, file, _generateDispatcherFile);
       }
     }
   }

@@ -23,18 +23,18 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class DataClassGen {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -57,27 +57,17 @@ public class DataClassGen {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
         String _path = this._roomExtensions.getPath(dc);
-        String path = (_generationTargetPath + _path);
-        String _cHeaderFileName = this._cExtensions.getCHeaderFileName(dc);
-        String _plus = ("generating DataClass header \'" + _cHeaderFileName);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
-        String _cHeaderFileName_1 = this._cExtensions.getCHeaderFileName(dc);
+        final String path = (_generationTargetPath + _path);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(dc);
+        String _path_1 = this._roomExtensions.getPath(dc);
+        final String infopath = (_generationInfoPath + _path_1);
+        String file = this._cExtensions.getCHeaderFileName(dc);
         CharSequence _generateHeaderFile = this.generateHeaderFile(root, dc);
-        this.fileAccess.generateFile(_cHeaderFileName_1, _generateHeaderFile);
+        this.fileIO.generateFile("generating DataClass header", path, infopath, file, _generateHeaderFile);
         String _cSourceFileName = this._cExtensions.getCSourceFileName(dc);
-        String _plus_4 = ("generating DataClass source \'" + _cSourceFileName);
-        String _plus_5 = (_plus_4 + "\' in \'");
-        String _plus_6 = (_plus_5 + path);
-        String _plus_7 = (_plus_6 + "\'");
-        this.logger.logInfo(_plus_7);
-        this.fileAccess.setOutputPath(path);
-        String _cSourceFileName_1 = this._cExtensions.getCSourceFileName(dc);
+        file = _cSourceFileName;
         CharSequence _generateSourceFile = this.generateSourceFile(root, dc);
-        this.fileAccess.generateFile(_cSourceFileName_1, _generateSourceFile);
+        this.fileIO.generateFile("generating DataClass header", path, infopath, file, _generateSourceFile);
       }
     }
   }

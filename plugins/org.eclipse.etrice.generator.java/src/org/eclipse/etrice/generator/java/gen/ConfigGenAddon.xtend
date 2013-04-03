@@ -54,7 +54,7 @@ class ConfigGenAddon {
 		'''
 	}
 	
-	def private applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
+	def private CharSequence applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type		
 		switch aType {
@@ -115,7 +115,7 @@ class ConfigGenAddon {
 		return result
 	}
 	
-	def private genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
+	def private CharSequence genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
 		var aType = path.last.refType.type
 		switch aType {
 			DataClass:

@@ -16,20 +16,22 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class SubSystemRunnerGen {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension RoomExtensions roomExt
 	
 	def doGenerate(Root root) {
 		for (sc: root.subSystemInstances) {
-			fileAccess.setOutputPath(sc.subSystemClass.generationTargetPath+sc.subSystemClass.getPath)
-			fileAccess.generateFile(sc.subSystemClass.name+"Runner.java", root.generate(sc))
+			val path = sc.subSystemClass.generationTargetPath+sc.subSystemClass.getPath
+			val infopath = sc.subSystemClass.generationInfoPath+sc.subSystemClass.getPath
+			val file = sc.subSystemClass.name+"Runner.java"
+			fileIO.generateFile("generating SubSystemRunner implementation", path, infopath, file, root.generate(sc))
 		}
 	}
 	

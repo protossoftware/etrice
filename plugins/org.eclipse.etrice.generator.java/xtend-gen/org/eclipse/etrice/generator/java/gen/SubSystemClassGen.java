@@ -17,7 +17,6 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
@@ -32,6 +31,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -39,14 +39,13 @@ import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.VariableServiceGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class SubSystemClassGen {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -70,9 +69,6 @@ public class SubSystemClassGen {
   private VariableServiceGen varService;
   
   @Inject
-  private ILogger logger;
-  
-  @Inject
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
@@ -83,18 +79,17 @@ public class SubSystemClassGen {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
         String _path = this._roomExtensions.getPath(_subSystemClass_1);
-        String path = (_generationTargetPath + _path);
+        final String path = (_generationTargetPath + _path);
         SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String file = this._javaExtensions.getJavaFileName(_subSystemClass_2);
-        String _plus = ("generating SubSystemClass implementation: \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
+        SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+        String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
+        final String infopath = (_generationInfoPath + _path_1);
+        SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+        final String file = this._javaExtensions.getJavaFileName(_subSystemClass_4);
         this.checkDataPorts(ssi);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generate = this.generate(root, ssi);
-        this.fileAccess.generateFile(file, _generate);
+        this.fileIO.generateFile("generating SubSystemClass implementation", path, infopath, file, _generate);
         boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
         if (_hasVariableService) {
           this.varService.doGenerate(root, ssi);

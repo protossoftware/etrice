@@ -17,65 +17,57 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.HashMap
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import java.util.HashSet
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.Port
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
-import java.util.HashSet
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 
 @Singleton
 class SubSystemClassGen {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension CExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject Initialization attrInitGenAddon
 
 	@Inject ILanguageExtension languageExt
-	@Inject ILogger logger
 	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
 		for (ssi: root.subSystemInstances) {
-			var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+			val ssc = ssi.subSystemClass
+			val path = ssc.generationTargetPath+ssc.getPath
+			val infopath = ssc.generationInfoPath+ssc.getPath
 			var file = ssi.subSystemClass.getCHeaderFileName
 			
 			checkDataPorts(ssi)
 			
-			logger.logInfo("generating SubSystemClass declaration: '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generateHeaderFile(ssi))
+			fileIO.generateFile("generating SubSystemClass declaration", path, infopath, file, root.generateHeaderFile(ssi))
 			
 			file = ssi.subSystemClass.getCSourceFileName
-			logger.logInfo("generating SubSystemClass implementation: '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generateSourceFile(ssi))
+			fileIO.generateFile("generating SubSystemClass implementation", path, infopath, file, root.generateSourceFile(ssi))
 			
 			file = ssi.subSystemClass.getInstSourceFileName
-			logger.logInfo("generating SubSystemClass instance file: '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generateInstanceFile(ssi))
+			fileIO.generateFile("generating SubSystemClass instance file", path, infopath, file, root.generateInstanceFile(ssi))
 
 			file = ssi.subSystemClass.getDispSourceFileName
-			logger.logInfo("generating SubSystemClass dispatcher file: '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generateDispatcherFile(ssi))
+			fileIO.generateFile("generating SubSystemClass dispatcher file", path, infopath, file, root.generateDispatcherFile(ssi))
 		}
 	}
 

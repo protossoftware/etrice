@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
@@ -26,12 +25,12 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.Initialization;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -40,7 +39,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class DataClassGen {
   @Inject
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -58,9 +57,6 @@ public class DataClassGen {
   @Extension
   private Initialization _initialization;
   
-  @Inject
-  private ILogger logger;
-  
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     for (final DataClass dc : _usedDataClasses) {
@@ -68,15 +64,12 @@ public class DataClassGen {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
         String _path = this._roomExtensions.getPath(dc);
         String path = (_generationTargetPath + _path);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(dc);
+        String _path_1 = this._roomExtensions.getPath(dc);
+        String infopath = (_generationInfoPath + _path_1);
         String file = this._javaExtensions.getJavaFileName(dc);
-        String _plus = ("generating DataClass implementation \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
-        this.fileAccess.setOutputPath(path);
         CharSequence _generate = this.generate(root, dc);
-        this.fileAccess.generateFile(file, _generate);
+        this.fileIO.generateFile("generating DataClass implementation", path, infopath, file, _generate);
       }
     }
   }

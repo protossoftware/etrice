@@ -688,6 +688,13 @@ public class RootImpl extends EObjectImpl implements Root {
 			usedActorClasses = new BasicEList<ActorClass>(actorClasses);
 			usedRoomModels = new BasicEList<RoomModel>(models);
 		}
+		
+		RoomClassComparator rcComp = new RoomClassComparator();
+		RoomModelComparator mdlComp = new RoomModelComparator();
+		Collections.sort(usedDataClasses, rcComp);
+		Collections.sort(usedProtocolClasses, rcComp);
+		Collections.sort(usedActorClasses, rcComp);
+		Collections.sort(usedRoomModels, mdlComp);
 	}
 
 	private void getReferencedClassesAndModels(HashSet<DataClass> dataClasses,

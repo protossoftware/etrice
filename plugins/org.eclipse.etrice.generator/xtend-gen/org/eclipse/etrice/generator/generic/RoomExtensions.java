@@ -127,6 +127,13 @@ public class RoomExtensions {
   }
   
   /**
+   * @return the relative path to the destination folder for the generated code
+   */
+  public String getGenerationInfoSegment() {
+    return "/src-gen-info/";
+  }
+  
+  /**
    * @return the relative path to the destination folder for the generated documentation
    */
   public String getDocGenerationPathSegment() {
@@ -228,13 +235,24 @@ public class RoomExtensions {
   
   /**
    * @param e an {@link EObject}
-   * @return the concatenation of the objects project path
+   * @return the concatenation of the object's project path
    * 		with the {@link #getGenerationPathSegment()}
    */
   public String getGenerationTargetPath(final EObject e) {
     String _projectPath = this.getProjectPath(e);
     String _generationPathSegment = this.getGenerationPathSegment();
     return (_projectPath + _generationPathSegment);
+  }
+  
+  /**
+   * @param e an {@link EObject}
+   * @return the concatenation of the object's project path
+   * 		with the {@link #getGenerationInfoSegment()}
+   */
+  public String getGenerationInfoPath(final EObject e) {
+    String _projectPath = this.getProjectPath(e);
+    String _generationInfoSegment = this.getGenerationInfoSegment();
+    return (_projectPath + _generationInfoSegment);
   }
   
   /**

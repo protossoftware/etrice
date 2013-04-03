@@ -18,17 +18,16 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class SubSystemRunnerGen {
   @Inject
-  @Extension
-  private JavaIoFileSystemAccess fileAccess;
+  private IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
@@ -42,13 +41,17 @@ public class SubSystemRunnerGen {
         String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
         SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
         String _path = this.roomExt.getPath(_subSystemClass_1);
-        String _plus = (_generationTargetPath + _path);
-        this.fileAccess.setOutputPath(_plus);
+        final String path = (_generationTargetPath + _path);
         SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        String _name = _subSystemClass_2.getName();
-        String _plus_1 = (_name + "Runner.java");
+        String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
+        SubSystemClass _subSystemClass_3 = sc.getSubSystemClass();
+        String _path_1 = this.roomExt.getPath(_subSystemClass_3);
+        final String infopath = (_generationInfoPath + _path_1);
+        SubSystemClass _subSystemClass_4 = sc.getSubSystemClass();
+        String _name = _subSystemClass_4.getName();
+        final String file = (_name + "Runner.java");
         CharSequence _generate = this.generate(root, sc);
-        this.fileAccess.generateFile(_plus_1, _generate);
+        this.fileIO.generateFile("generating SubSystemRunner implementation", path, infopath, file, _generate);
       }
     }
   }

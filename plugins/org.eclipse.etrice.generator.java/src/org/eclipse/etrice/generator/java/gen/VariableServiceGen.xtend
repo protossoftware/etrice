@@ -15,43 +15,41 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
+import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.LinkedList
 import java.util.List
-import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.core.room.ActorClass
-import java.util.Collection
+
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class VariableServiceGen {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject IDataConfiguration configExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
-	@Inject ILogger logger
 	 
 	def doGenerate(Root root, SubSystemInstance ssi) {
-		var path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-		var file = ssi.subSystemClass.name+"VariableService.java"
-		logger.logInfo("generating VariableService implementation: '"+file+"' in '"+path+"'")
-		fileAccess.setOutputPath(path)
-		fileAccess.generateFile(file, root.generate(ssi))
+		val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+		val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+		val file = ssi.subSystemClass.name+"VariableService.java"
+		fileIO.generateFile("generating VariableService implementation", path, infopath, file, root.generate(ssi))
 	}
 	
 	def private generate(Root root, SubSystemInstance comp) {
@@ -206,7 +204,7 @@ class VariableServiceGen {
 		'''«FOR p : ai.path.split('/').drop(2) SEPARATOR '_'»«p»«ENDFOR»'''
 	}
 	
-	def private genGetAttributeValues(List<Attribute> path, ActorInstance ai){
+	def private CharSequence genGetAttributeValues(List<Attribute> path, ActorInstance ai){
 		val a = path.last
 		if (a.refType.type.primitive) {
 			'''
@@ -223,7 +221,7 @@ class VariableServiceGen {
 		}
 	}
 	
-	def private genSetAttributeValues1(List<Attribute> path, ActorInstance ai){
+	def private CharSequence genSetAttributeValues1(List<Attribute> path, ActorInstance ai){
 		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
 		if(a.refType.type.primitive){'''
@@ -248,7 +246,7 @@ class VariableServiceGen {
 		}
 	}
 	
-	def private genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
+	def private CharSequence genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
 		var a = path.last 
 		var aVarName = path.toAbsolutePath("_")
 		if (a.refType.type.primitive) {

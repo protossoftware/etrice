@@ -145,7 +145,7 @@ public class ConfigGenAddon {
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
               String _plus_1 = (_plus + _invokeGetter);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              Object _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
+              CharSequence _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
             }
@@ -383,7 +383,7 @@ public class ConfigGenAddon {
               String _name = e.getName();
               String _plus_1 = (_plus + _name);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              Object _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
+              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
               _builder.append(_genMinMaxConstantsRec, "");
               _builder.newLineIfNotEmpty();
             }

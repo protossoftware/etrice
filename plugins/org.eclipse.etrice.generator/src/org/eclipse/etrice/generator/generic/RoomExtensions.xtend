@@ -111,6 +111,13 @@ class RoomExtensions {
 	def String getGenerationPathSegment() {
 		return "/src-gen/"
 	}
+	
+	/**
+	 * @return the relative path to the destination folder for the generated code
+	 */
+	def String getGenerationInfoSegment() {
+		return "/src-gen-info/"
+	}
 
 	/**
 	 * @return the relative path to the destination folder for the generated documentation
@@ -194,11 +201,20 @@ class RoomExtensions {
 	
 	/**
 	 * @param e an {@link EObject}
-	 * @return the concatenation of the objects project path
+	 * @return the concatenation of the object's project path
 	 * 		with the {@link #getGenerationPathSegment()}
 	 */
 	def String getGenerationTargetPath(EObject e){
 		return getProjectPath(e)+getGenerationPathSegment()
+	}
+	
+	/**
+	 * @param e an {@link EObject}
+	 * @return the concatenation of the object's project path
+	 * 		with the {@link #getGenerationInfoSegment()}
+	 */
+	def String getGenerationInfoPath(EObject e){
+		return getProjectPath(e)+getGenerationInfoSegment()
 	}
 
 	/**
