@@ -58,6 +58,48 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class RoomExtensions {
+  private static String genDir = "/src-gen/";
+  
+  private static String genInfoDir = "/src-gen-info/";
+  
+  private static String genDocDir = "/doc-gen/";
+  
+  public static String setDefaultGenDir() {
+    String _genDir = RoomExtensions.genDir = "/src-gen/";
+    return _genDir;
+  }
+  
+  public static String setDefaultGenInfoDir() {
+    String _genInfoDir = RoomExtensions.genInfoDir = "/src-gen-info/";
+    return _genInfoDir;
+  }
+  
+  public static String setDefaultGenDocDir() {
+    String _genDocDir = RoomExtensions.genDocDir = "/doc-gen/";
+    return _genDocDir;
+  }
+  
+  public static String setGenDir(final String dir) {
+    String _plus = ("/" + dir);
+    String _plus_1 = (_plus + "/");
+    String _genDir = RoomExtensions.genDir = _plus_1;
+    return _genDir;
+  }
+  
+  public static String setGenInfoDir(final String dir) {
+    String _plus = ("/" + dir);
+    String _plus_1 = (_plus + "/");
+    String _genInfoDir = RoomExtensions.genInfoDir = _plus_1;
+    return _genInfoDir;
+  }
+  
+  public static String setGenDocDir(final String dir) {
+    String _plus = ("/" + dir);
+    String _plus_1 = (_plus + "/");
+    String _genDocDir = RoomExtensions.genDocDir = _plus_1;
+    return _genDocDir;
+  }
+  
   /**
    * the template type is T
    * @param l an iterable of type T
@@ -123,21 +165,21 @@ public class RoomExtensions {
    * @return the relative path to the destination folder for the generated code
    */
   public String getGenerationPathSegment() {
-    return "/src-gen/";
+    return RoomExtensions.genDir;
   }
   
   /**
    * @return the relative path to the destination folder for the generated code
    */
   public String getGenerationInfoSegment() {
-    return "/src-gen-info/";
+    return RoomExtensions.genInfoDir;
   }
   
   /**
    * @return the relative path to the destination folder for the generated documentation
    */
   public String getDocGenerationPathSegment() {
-    return "/doc-gen/";
+    return RoomExtensions.genDocDir;
   }
   
   /**

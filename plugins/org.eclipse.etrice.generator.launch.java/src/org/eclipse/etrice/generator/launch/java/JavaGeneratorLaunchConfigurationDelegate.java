@@ -13,10 +13,13 @@
 package org.eclipse.etrice.generator.launch.java;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.etrice.generator.base.ILineOutput;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -49,6 +52,20 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 		if (configuration.getAttribute(JavaGeneratorConfigTab.VERBOSE, false)) {
 			argString.append(" "+Main.OPTION_VERBOSE_RT);
 		}
+		
+		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {
+			argString.append(" "+Main.OPTION_GEN_INCREMENTAL);
+		}
+		
+		argString.append(" "+Main.OPTION_GEN_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DIR));
+		
+		argString.append(" "+Main.OPTION_GEN_INFO_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
+		
+		argString.append(" "+Main.OPTION_GEN_DOC_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DOC_DIR));
 	}
 
 	/* (non-Javadoc)

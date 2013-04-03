@@ -48,6 +48,29 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 @Singleton
 class RoomExtensions {
 
+	private static String genDir = "/src-gen/"
+	private static String genInfoDir = "/src-gen-info/"
+	private static String genDocDir = "/doc-gen/"
+	
+	def static setDefaultGenDir() {
+		genDir = "/src-gen/"
+	}
+	def static setDefaultGenInfoDir() {
+		genInfoDir = "/src-gen-info/"
+	}
+	def static setDefaultGenDocDir() {
+		genDocDir = "/doc-gen/"
+	}
+	def static setGenDir(String dir) {
+		genDir = "/"+dir+"/"
+	}
+	def static setGenInfoDir(String dir) {
+		genInfoDir = "/"+dir+"/"
+	}
+	def static setGenDocDir(String dir) {
+		genDocDir = "/"+dir+"/"
+	}
+	
 	//-------------------------------------------------------
 	// union methods
 	
@@ -109,21 +132,21 @@ class RoomExtensions {
 	 * @return the relative path to the destination folder for the generated code
 	 */
 	def String getGenerationPathSegment() {
-		return "/src-gen/"
+		genDir
 	}
 	
 	/**
 	 * @return the relative path to the destination folder for the generated code
 	 */
 	def String getGenerationInfoSegment() {
-		return "/src-gen-info/"
+		genInfoDir
 	}
 
 	/**
 	 * @return the relative path to the destination folder for the generated documentation
 	 */
 	def String getDocGenerationPathSegment() {
-		return "/doc-gen/"
+		genDocDir
 	}
 
 	/**
