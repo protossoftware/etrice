@@ -166,7 +166,7 @@ class NodeGen {
 			«ENDFOR»
 			/* initialization of all message services */
 			«FOR thread: nr.type.threads»
-				etMessageService_init(&msgService_«thread.name», &msgBuffer_«thread.name», MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_«thread.name»_receiveMessage);
+				etMessageService_init(&msgService_«thread.name», msgBuffer_«thread.name», «thread.msgpoolsize», «thread.msgblocksize», MsgDispatcher_«thread.name»_receiveMessage);
 			«ENDFOR»
 			
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -337,9 +337,10 @@ class NodeGen {
 			#include "«protocolClass.name».h"
 		«ENDFOR»
 		
-		/* instantiation of message services */
+		/* instantiation of message services and message buffers */
 		«FOR thread: nr.type.threads»
-			static uint8 msgBuffer_«thread.name»;
+			/* «thread.name» */
+			static uint8 msgBuffer_«thread.name»[«thread.msgpoolsize» * «thread.msgblocksize»]; /* msgBuffer_<threadname>[<msgpoolsize> * <msgblocksize>] */ 
 			static etMessageService msgService_«thread.name»;
 		«ENDFOR»
 		

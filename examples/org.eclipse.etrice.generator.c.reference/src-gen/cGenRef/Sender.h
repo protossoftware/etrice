@@ -41,6 +41,7 @@ struct Sender {
 	/* data send ports */
 
 	/*--------------------- attributes ---------------------*/
+	int32 counter;
 	
 	
 		/* state machine variables */

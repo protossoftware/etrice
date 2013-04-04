@@ -106,6 +106,7 @@ etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 si
 	if (size<=self->messageBuffer.blockSize){
 		if (self->messagePool.size>0){
 			etMessage* msg = etMessageQueue_pop(&self->messagePool);
+			etMutex_leave(&self->poolMutex);
 			ET_MSC_LOGGER_SYNC_EXIT
 			return msg;
 		}

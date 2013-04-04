@@ -2,7 +2,7 @@ PhysicalModel cGenRef {
 	
 	PhysicalSystem Sys {
 		NodeRef node1: PC
-		NodeRef node2: PC
+//		NodeRef node2: PC
 	}
 	
 	NodeClass PC {
@@ -15,7 +15,7 @@ PhysicalModel cGenRef {
 			prio = 5
 			stacksize = 1024
 			msgblocksize = 64
-			msgpoolsize = 256
+			msgpoolsize = 5
 		}
 		
 		Thread PhysicalThread2 {
@@ -23,7 +23,7 @@ PhysicalModel cGenRef {
 			prio = 5
 			stacksize = 1024
 			msgblocksize = 64
-			msgpoolsize = 256
+			msgpoolsize = 3
 		}
 	}
 	

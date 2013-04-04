@@ -8,8 +8,8 @@
 #include "Node1.h"
 
 /* include instances for all classes */
-#include "Node1_Inst.h"
-#include "Node1_Disp.h"
+#include "node1_sys1_Inst.h"
+#include "node1_sys1_Disp.h"
 
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
@@ -26,11 +26,11 @@ typedef struct Node1 {
 
 static Node1 Node1Inst = {"Node1",0};
 
-void Node1_initActorInstances(void);
-void Node1_constructActorInstances(void);
+void node1_sys1_initActorInstances(void);
+void node1_sys1_constructActorInstances(void);
 
 
-void Node1_initMessageServices(void){
+void node1_sys1_initMessageServices(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "initMessageServices")
 
 	/* filling all message service threads with data */
@@ -58,7 +58,7 @@ void Node1_initMessageServices(void){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_startMessageServices(void){
+void node1_sys1_startMessageServices(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "startMessageServices")
 
 	etMessageService_start(&msgService_PhysicalThread1);
@@ -67,7 +67,7 @@ void Node1_startMessageServices(void){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_stopMessageServices(void){
+void node1_sys1_stopMessageServices(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "stopMessageServices")
 
 	etMessageService_stop(&msgService_PhysicalThread1);
@@ -76,7 +76,7 @@ void Node1_stopMessageServices(void){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_destroyMessageServices(void){
+void node1_sys1_destroyMessageServices(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "destroyMessageServices")
 
 	etMessageService_destroy(&msgService_PhysicalThread1);
@@ -85,29 +85,29 @@ void Node1_destroyMessageServices(void){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_init(void){
+void node1_sys1_init(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "init")
 	etLogger_logInfoF("%s_init", Node1Inst.name);
 
 	/* construct all actors */
-	Node1_constructActorInstances();
+	node1_sys1_constructActorInstances();
 
-	Node1_initMessageServices();
+	node1_sys1_initMessageServices();
 
 	/* init all actors */
-	Node1_initActorInstances();
+	node1_sys1_initActorInstances();
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_start(void){
+void node1_sys1_start(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "start")
 	etLogger_logInfoF("%s_start", Node1Inst.name);
-	Node1_startMessageServices();
+	node1_sys1_startMessageServices();
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_run(void){
+void node1_sys1_run(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "run")
 	
 	etThread_sleep(1000);
@@ -134,21 +134,21 @@ void Node1_run(void){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_stop(void){
+void node1_sys1_stop(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "stop")
 	etLogger_logInfoF("%s_stop", Node1Inst.name);
-	Node1_stopMessageServices();
+	node1_sys1_stopMessageServices();
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_destroy(void){
+void node1_sys1_destroy(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "destroy")
 	etLogger_logInfoF("%s_destroy", Node1Inst.name);
-	Node1_destroyMessageServices();
+	node1_sys1_destroyMessageServices();
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_shutdown(void){
+void node1_sys1_shutdown(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "shutdown")
 	etLogger_logInfoF("%s_shutdown", Node1Inst.name);
 	Node1Inst.shutdownRequest = 1;
@@ -156,12 +156,12 @@ void Node1_shutdown(void){
 }
 
 
-void Node1_constructActorInstances(void){
+void node1_sys1_constructActorInstances(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "constructActorInstances")
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void Node1_initActorInstances(void){
+void node1_sys1_initActorInstances(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("Node1", "initActorInstances")
 	Sender_init(&_SubSys_Sender);
 	Receiver_init(&_SubSys_Receiver);

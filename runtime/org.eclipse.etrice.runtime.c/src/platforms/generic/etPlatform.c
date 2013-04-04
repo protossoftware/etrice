@@ -32,12 +32,22 @@ void etUserExit(void){ }
 #if defined __MINGW32__
 
 /******************thread********************/
+void etThread_execute(etThread* self);
+
 void etThread_construct(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "construct")
-	self->osData = (HANDLE)_beginthread( self->threadFunction, self->stacksize, self->threadFunctionData );
+	self->osData = (HANDLE)_beginthread( (etThreadFunction)etThread_execute, self->stacksize, self );
 	SetThreadPriority(self->osData, self->priority);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+void etThread_execute(etThread* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "execute")
+	/* etThread_execute redirects the call from the thread to the execute function in the eTrice runtime to enable correct synchronous MSC logging */
+	self->threadFunction(self->threadFunctionData);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 
 void etThread_destruct(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "destruct")

@@ -3,7 +3,7 @@ RoomModel cGenRef {
 	
 	LogicalSystem LS {
 		SubSystemRef sys1: SubSys
-		SubSystemRef sys2: SubSys
+//		SubSystemRef sys2: SubSys
 	}
 	
 	SubSystemClass SubSys {
@@ -49,6 +49,14 @@ RoomModel cGenRef {
 			StateMachine {
 				Transition init: initial -> Idle { }
 				Transition tr0: Idle -> DataReceived {
+					triggers {
+						<sendData: dataIn>
+					}
+					action {
+						"dataIn.receivedData();"
+					}
+				}
+				Transition tr1: DataReceived -> DataReceived {
 					triggers {
 						<sendData: dataIn>
 					}
@@ -147,21 +155,41 @@ RoomModel cGenRef {
 		}
 		Structure {
 			external Port dataOut
+			Attribute counter: int32
+			
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> SendingData { }
-				Transition tr0: SendingData -> Done {
+				Transition init: initial -> SendingData {
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr0: SendingData -> cp cp0 {
 					triggers {
 						<receivedData: dataOut>
 					}
+					action {
+						"counter++;"
+					}
 				}
+				Transition tr1: cp cp0 -> Done
+				Transition tr2: cp cp0 -> SendingData {
+					cond {
+						"counter<10"
+					}
+				}
+				ChoicePoint cp0
 				State SendingData {
 					entry {
 						"dataOut.sendData();"
 					}
 				}
-				State Done
+				State Done {
+					entry {
+						"etLogger_logInfo(\"+++   Sender Done   +++\");"
+					}
+				}
 			}
 		}
 	}

@@ -417,10 +417,16 @@ public class NodeGen {
           _builder.append("etMessageService_init(&msgService_");
           String _name_13 = thread_1.getName();
           _builder.append(_name_13, "	");
-          _builder.append(", &msgBuffer_");
+          _builder.append(", msgBuffer_");
           String _name_14 = thread_1.getName();
           _builder.append(_name_14, "	");
-          _builder.append(", MESSAGE_POOL_MAX, MESSAGE_BLOCK_SIZE, MsgDispatcher_");
+          _builder.append(", ");
+          int _msgpoolsize = thread_1.getMsgpoolsize();
+          _builder.append(_msgpoolsize, "	");
+          _builder.append(", ");
+          int _msgblocksize = thread_1.getMsgblocksize();
+          _builder.append(_msgblocksize, "	");
+          _builder.append(", MsgDispatcher_");
           String _name_15 = thread_1.getName();
           _builder.append(_name_15, "	");
           _builder.append("_receiveMessage);");
@@ -898,20 +904,31 @@ public class NodeGen {
         }
       }
       _builder.newLine();
-      _builder.append("/* instantiation of message services */");
+      _builder.append("/* instantiation of message services and message buffers */");
       _builder.newLine();
       {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
         for(final PhysicalThread thread : _threads) {
-          _builder.append("static uint8 msgBuffer_");
+          _builder.append("/* ");
           String _name_4 = thread.getName();
           _builder.append(_name_4, "");
-          _builder.append(";");
+          _builder.append(" */");
           _builder.newLineIfNotEmpty();
-          _builder.append("static etMessageService msgService_");
+          _builder.append("static uint8 msgBuffer_");
           String _name_5 = thread.getName();
           _builder.append(_name_5, "");
+          _builder.append("[");
+          int _msgpoolsize = thread.getMsgpoolsize();
+          _builder.append(_msgpoolsize, "");
+          _builder.append(" * ");
+          int _msgblocksize = thread.getMsgblocksize();
+          _builder.append(_msgblocksize, "");
+          _builder.append("]; /* msgBuffer_<threadname>[<msgpoolsize> * <msgblocksize>] */ ");
+          _builder.newLineIfNotEmpty();
+          _builder.append("static etMessageService msgService_");
+          String _name_6 = thread.getName();
+          _builder.append(_name_6, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -927,8 +944,8 @@ public class NodeGen {
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("static ");
           ActorClass _actorClass = ai.getActorClass();
-          String _name_6 = _actorClass.getName();
-          _builder.append(_name_6, "");
+          String _name_7 = _actorClass.getName();
+          _builder.append(_name_7, "");
           _builder.append(" ");
           String _path = ai.getPath();
           String _pathName = this._roomExtensions.getPathName(_path);

@@ -21,7 +21,6 @@ enum interface_items {
 	IFITEM_dataOut = 1
 };
 
-
 /* state IDs */
 enum state_ids {
 	NO_STATE = 0,
@@ -30,14 +29,10 @@ enum state_ids {
 	STATE_Done = 3
 };
 
-static char* state_names[] = {
-		"NO_STATE", "TOP", "SendingData", "Done"
-};
-
 /* transition chains */
 enum chain_ids {
 	CHAIN_TRANS_INITIAL_TO__SendingData = 1,
-	CHAIN_TRANS_tr0_FROM_SendingData_TO_Done_BY_receivedDatadataOut = 2
+	CHAIN_TRANS_tr0_FROM_SendingData_TO_cp0_BY_receivedDatadataOut = 2
 };
 
 /* triggers */
@@ -48,17 +43,28 @@ enum triggers {
 
 
 static void setState(Sender* self, int new_state) {
-	etLogger_logInfoF("Sender: setState: new state=%d", new_state);
-	ET_MSC_LOGGER_CHANGE_STATE("Sender", state_names[new_state]);
-	self->state = new_state;
+	self->state = (etInt16) new_state;
+}
+
+static int getState(Sender* self) {
+	return self->state;
 }
 
 /* Entry and Exit Codes */
 static void entry_SendingData(Sender* self) {
 	CommunicationProtocolConjPort_sendData(&self->constData->dataOut) /* ORIG: dataOut.sendData() */;
 }
+static void entry_Done(Sender* self) {
+	etLogger_logInfo("+++   Sender Done   +++");
+}
 
 /* Action Codes */
+static void action_TRANS_INITIAL_TO__SendingData(Sender* self) {
+	self->counter /* ORIG: counter */=0;
+}
+static void action_TRANS_tr0_FROM_SendingData_TO_cp0_BY_receivedDatadataOut(Sender* self, const InterfaceItemBase* ifitem) {
+	self->counter /* ORIG: counter */++;
+}
 
 /**
  * calls exit codes while exiting from the current state to one of its
@@ -89,15 +95,20 @@ static void exitTo(Sender* self, int current, int to, boolean handler) {
  * @param generic_data - the generic data pointer
  * @return the ID of the final state
  */
-static int executeTransitionChain(Sender* self, int chain, InterfaceItemBase* ifitem, void* generic_data) {
+static int executeTransitionChain(Sender* self, int chain, const InterfaceItemBase* ifitem, void* generic_data) {
 	switch (chain) {
 		case CHAIN_TRANS_INITIAL_TO__SendingData:
 		{
+			action_TRANS_INITIAL_TO__SendingData(self);
 			return STATE_SendingData;
 		}
-		case CHAIN_TRANS_tr0_FROM_SendingData_TO_Done_BY_receivedDatadataOut:
+		case CHAIN_TRANS_tr0_FROM_SendingData_TO_cp0_BY_receivedDatadataOut:
 		{
-			return STATE_Done;
+			action_TRANS_tr0_FROM_SendingData_TO_cp0_BY_receivedDatadataOut(self, ifitem);
+			if (self->counter /* ORIG: counter */<10) {
+			return STATE_SendingData;}
+			else {
+			return STATE_Done;}
 		}
 	}
 	return NO_STATE;
@@ -117,6 +128,7 @@ static int enterHistory(Sender* self, int state, boolean handler, boolean skip_e
 				// in leaf state: return state id
 				return STATE_SendingData;
 			case STATE_Done:
+				if (!(skip_entry || handler)) entry_Done(self);
 				// in leaf state: return state id
 				return STATE_Done;
 			case STATE_TOP:
@@ -128,7 +140,7 @@ static int enterHistory(Sender* self, int state, boolean handler, boolean skip_e
 	//return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true)
 }
 
-static void executeInitTransition(Sender* self) {
+static void Sender_executeInitTransition(Sender* self) {
 	int chain = CHAIN_TRANS_INITIAL_TO__SendingData;
 	int next = executeTransitionChain(self, chain, NULL, NULL);
 	next = enterHistory(self, next, FALSE, FALSE);
@@ -136,7 +148,7 @@ static void executeInitTransition(Sender* self) {
 }
 
 /* receiveEvent contains the main implementation of the FSM */
-static void receiveEvent(Sender* self, InterfaceItemBase *ifitem, int evt, void* generic_data) {
+static void Sender_receiveEvent(Sender* self, InterfaceItemBase* ifitem, int evt, void* generic_data) {
 	int trigger = ifitem->localId + EVT_SHIFT*evt;
 	int chain = NOT_CAUGHT;
 	int catching_state = NO_STATE;
@@ -144,12 +156,12 @@ static void receiveEvent(Sender* self, InterfaceItemBase *ifitem, int evt, void*
 	boolean skip_entry = FALSE;
 	
 	if (!handleSystemEvent(ifitem, evt, generic_data)) {
-		switch (self->state) {
+		switch (getState(self)) {
 			case STATE_SendingData:
 				switch(trigger) {
 					case TRIG_dataOut__receivedData:
 						{
-							chain = CHAIN_TRANS_tr0_FROM_SendingData_TO_Done_BY_receivedDatadataOut;
+							chain = CHAIN_TRANS_tr0_FROM_SendingData_TO_cp0_BY_receivedDatadataOut;
 							catching_state = STATE_TOP;
 						}
 					break;
@@ -160,7 +172,7 @@ static void receiveEvent(Sender* self, InterfaceItemBase *ifitem, int evt, void*
 		}
 	}
 	if (chain != NOT_CAUGHT) {
-		exitTo(self, self->state, catching_state, is_handler);
+		exitTo(self, getState(self), catching_state, is_handler);
 		int next = executeTransitionChain(self, chain, ifitem, generic_data);
 		next = enterHistory(self, next, is_handler, skip_entry);
 		setState(self, next);
@@ -179,7 +191,7 @@ void Sender_init(Sender* self){
 		for (i=0; i<SENDER_HISTORY_SIZE; ++i)
 			self->history[i] = NO_STATE;
 	}
-	executeInitTransition(self);
+	Sender_executeInitTransition(self);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
@@ -187,7 +199,7 @@ void Sender_init(Sender* self){
 void Sender_receiveMessage(void* self, void* ifitem, const etMessage* msg){
 	ET_MSC_LOGGER_SYNC_ENTRY("Sender", "_receiveMessage")
 	
-	receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
+	Sender_receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
