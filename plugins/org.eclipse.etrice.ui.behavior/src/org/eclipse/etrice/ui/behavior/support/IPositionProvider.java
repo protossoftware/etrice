@@ -82,21 +82,48 @@ public interface IPositionProvider {
 		}
 	}
 
+	/**
+	 * Set the size of the state graph to which coordinates should be mapped.
+	 * 
+	 * @param sx scale in x direction
+	 * @param sy scale in y direction
+	 */
 	public void setScale(double sx, double sy);
 
-	public PosAndSize getPosition(StateGraphNode node);
-	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
-	public List<Pos> getPoints(Transition trans);
 	/**
-	 * 
-	 * @param graph
+	 * @param sg a {@link StateGraph}
+	 * @return the size of the state graph
+	 */
+	public PosAndSize getGraphPosAndSize(StateGraph sg);
+	
+	/**
+	 * @param node a {@link StateGraphNode}
+	 * @return the position of the node
+	 */
+	public PosAndSize getPosition(StateGraphNode node);
+	
+	/**
+	 * @param items a list of {@link StateGraphNode}
+	 * @return the positions of the nodes
+	 */
+	public <T extends StateGraphNode> List<PosAndSize> getPositions(List<T> items);
+	
+	/**
+	 * @param trans a transition
+	 * @return a list of {@link Pos positions}, the first is the label position further are bend point positions
+	 */
+	public List<Pos> getPoints(Transition trans);
+	
+	/**
+	 * @param graph a {@link StateGraph}
 	 * @return position of inital point
 	 */
 	public PosAndSize getPosition(StateGraph graph);
 	
 	/**
-	 * @param graph
-	 * @return BO of initial point's shape. A super graph or given graph itself.
+	 * @param graph a {@link StateGraph}
+	 * @return BO of initial point's shape. A super graph of one of the base classes
+	 * or given graph itself.
 	 */
 	public StateGraph getInitialPoint(StateGraph graph);
 }

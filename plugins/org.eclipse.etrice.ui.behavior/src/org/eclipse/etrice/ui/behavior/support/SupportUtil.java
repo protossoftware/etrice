@@ -417,11 +417,14 @@ public class SupportUtil {
 		return transitions;
 	}
 
-	private static Map<Transition, Connection> getTransitionsMap(StateGraph sg, Diagram diagram, IFeatureProvider fp) {
+	private static Map<Transition, Connection> getTransitionsMap(ContainerShape sgShape, IFeatureProvider fp) {
+		Diagram diagram = (Diagram) sgShape.eContainer();
 		Map<Transition, Connection> transitions = new HashMap<Transition, Connection>();
 		for (Connection conn : diagram.getConnections()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(conn);
-			if (bo instanceof Transition && sg.getTransitions().contains(bo))
+			
+			// we only collect connections that have a starting point contained in our sgShape
+			if (bo instanceof Transition && EcoreUtil.isAncestor(sgShape, conn.getStart()))
 				transitions.put((Transition) bo, conn);
 		}
 		return transitions;
@@ -443,8 +446,17 @@ public class SupportUtil {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(ctx.getStateGraph());
 		addContext.setTargetContainer(diagram);
-		addContext.setX(StateGraphSupport.MARGIN);
-		addContext.setY(StateGraphSupport.MARGIN);
+		PosAndSize graphPosAndSize = ctx.getPositionProvider().getGraphPosAndSize(ctx.getStateGraph());
+		if (graphPosAndSize!=null) {
+			addContext.setX(graphPosAndSize.getX());
+			addContext.setY(graphPosAndSize.getY());
+			addContext.setWidth(graphPosAndSize.getWidth());
+			addContext.setHeight(graphPosAndSize.getHeight());
+		}
+		else {
+			addContext.setX(StateGraphSupport.MARGIN);
+			addContext.setY(StateGraphSupport.MARGIN);
+		}
 		
 		ContainerShape sgShape = (ContainerShape) fp.addIfPossible(addContext);
 		if (sgShape==null)
@@ -591,7 +603,9 @@ public class SupportUtil {
 		
 		// transitions
 		{
-			Map<Transition, Connection> present = SupportUtil.getTransitionsMap(sg, (Diagram) sgShape.eContainer(), fp);
+			// get transitions that belong to our state graph
+			// (for other connections we might not have the node anchors yet)
+			Map<Transition, Connection> present = SupportUtil.getTransitionsMap(sgShape, fp);
 			List<Transition> expected = ctx.getTransitions();
 			List<Transition> toAdd = new ArrayList<Transition>();
 			for (Transition trans : expected)
@@ -693,6 +707,9 @@ public class SupportUtil {
 
 	private static void updateInitialPoint(Shape shape,
 			IPositionProvider positionProvider, IFeatureProvider fp) {
+		if (shape==null)
+			return;
+		
 		StateGraph sg = (StateGraph) fp.getBusinessObjectForPictogramElement(shape);
 		PosAndSize ps = positionProvider.getPosition(sg);
 		if (ps==null)

@@ -55,6 +55,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	private HashMap<String, Position> obj2pos = new HashMap<String, Position>();
 	private HashMap<String, ArrayList<Position>> trans2points = new HashMap<String, ArrayList<Position>>();
 	private HashMap<String, StateGraph> initialPointObj = new HashMap<String, StateGraph>();
+	private HashMap<String, PosAndSize> sg2sz = new HashMap<String, PosAndSize>();
 	private double scaleX;
 	private double scaleY;
 	
@@ -192,8 +193,6 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		StateGraphContext tree = StateGraphContext.createContextTree(SupportUtil.getActorClass(diagram));
 		
-		HashMap<StateGraph, Position> sg2sz = new HashMap<StateGraph, Position>();
-		
 		ILinkService linkService = Graphiti.getLinkService();
 		for (Shape sgShape : diagram.getChildren()) {
 			// this is the level of StateGraphs
@@ -202,10 +201,10 @@ public class DefaultPositionProvider implements IPositionProvider {
 				GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 				double width = borderRect.getWidth();
 				double height = borderRect.getHeight();
-				Position sz = new Position();
-				sz.sx = width;
-				sz.sy = height;
-				sg2sz.put((StateGraph) obj, sz);
+				PosAndSize sz = new PosAndSize(
+						sgShape.getGraphicsAlgorithm().getX(), sgShape.getGraphicsAlgorithm().getY(),
+						borderRect.getWidth(), borderRect.getHeight());
+				sg2sz.put(RoomNameProvider.getFullPath((StateGraph) obj), sz);
 				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
 					// this is the level of States, TrPoints and ChoicePoints
 					obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
@@ -250,21 +249,21 @@ public class DefaultPositionProvider implements IPositionProvider {
 					StateGraph sg = tree.getContext(trans).getStateGraph();
 					
 					// graph size
-					Position sz = sg2sz.get(sg);
+					PosAndSize sz = sg2sz.get(RoomNameProvider.getFullPath(sg));
 					ArrayList<Position> points = new  ArrayList<Position>();
 					trans2points.put(RoomNameProvider.getFullPath((Transition) obj), points);
 					
 					// label position
 					Position pos = new Position();
-					pos.x = cd.getGraphicsAlgorithm().getX() / sz.sx;
-					pos.y = cd.getGraphicsAlgorithm().getY() / sz.sy;
+					pos.x = cd.getGraphicsAlgorithm().getX() / ((double)sz.getWidth());
+					pos.y = cd.getGraphicsAlgorithm().getY() / ((double)sz.getHeight());
 					points.add(pos);
 					
 					if (conn instanceof FreeFormConnection) {
 						for (Point bp : ((FreeFormConnection) conn).getBendpoints()) {
 							pos = new Position();
-							pos.x = bp.getX() / sz.sx;
-							pos.y = bp.getY() / sz.sy;
+							pos.x = bp.getX() / ((double)sz.getWidth());
+							pos.y = bp.getY() / ((double)sz.getHeight());
 							points.add(pos);
 						}
 					}
@@ -296,5 +295,13 @@ public class DefaultPositionProvider implements IPositionProvider {
 		if(container instanceof StateGraphNode)
 			path = RoomNameProvider.getFullPath((StateGraphNode)container) + path;
 		return initialPointObj.get(path);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.behavior.support.IPositionProvider#getGraphSize(org.eclipse.etrice.core.room.StateGraph)
+	 */
+	@Override
+	public PosAndSize getGraphPosAndSize(StateGraph sg) {
+		return sg2sz.get(RoomNameProvider.getFullPath(sg));
 	}
 }
