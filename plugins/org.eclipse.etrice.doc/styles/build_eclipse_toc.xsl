@@ -67,7 +67,7 @@
 		<xsl:processing-instruction name="NLS">
 			TYPE="org.eclipse.help.toc"
 		</xsl:processing-instruction>
-		<toc label="eTrice Help" topic="html/toc.html">
+		<toc label="eTrice Help" topic="html/etrice-doc.html">
 			<link toc="toc.xml" />
 			<link toc="reference-toc.xml" />
 		</toc>

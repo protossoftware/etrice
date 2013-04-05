@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"
-		?><toc label="eTrice Help" topic="html/toc.html">
+		?><toc label="eTrice Help" topic="html/etrice-doc.html">
    <link toc="toc.xml"/>
    <link toc="reference-toc.xml"/>
 </toc>
