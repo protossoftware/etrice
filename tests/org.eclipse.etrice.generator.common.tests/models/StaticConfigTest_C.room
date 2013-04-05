@@ -92,7 +92,7 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:4\", data_1.int32_c == 96);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:5\", data_1.int64_c == 192);"
 						"EXPECT_EQUAL_FLOAT32(caseId,\"testee_1:data_1:6\", 9.6f, data_1.float32_c, 0.1f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:7\", data_1.float64_c == 19.2);"
+						"EXPECT_EQUAL_FLOAT64(caseId,\"testee_1:data_1:7\", 19.2, data_1.float64_c, 0.1);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:8\", data_1.char_c == \'C\');"
 						"EXPECT_TRUE(caseId,\"testee_1:varCheck:8.1\", strcmp(data_1.string_c, \":)\") == 0 );"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:10\", data_1.bool_i);"
@@ -101,7 +101,7 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:13\", data_1.int32_i == 8);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:14\", data_1.int64_i == 16);"
 						"EXPECT_EQUAL_FLOAT32(caseId,\"testee_1:data_1:15\", 1.6f, data_1.float32_i, 0.1f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:16\", data_1.float64_i == 3.2);"
+						"EXPECT_EQUAL_FLOAT64(caseId,\"testee_1:data_1:16\", 3.2, data_1.float64_i, 0.1);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:17\", data_1.char_i == \'I\');"
 						"EXPECT_TRUE(caseId,\"testee_1:varCheck:18\", strcmp(data_1.string_i, \":]\") == 0 );"
 
@@ -111,16 +111,20 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:21\", data_1.int16_array_c[0] == 48 && data_1.int16_array_c[1] == 96);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:22\", data_1.int32_array_c[0] == 96 && data_1.int32_array_c[1] == 192);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:23\", data_1.int64_array_c[0] == 192 && data_1.int64_array_c[1] == 384);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:24\", data_1.float32_array_c[0] == 9.6f && data_1.float32_array_c[1] == 9.6f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:25\", data_1.float64_array_c[0] == 19.2 && data_1.float64_array_c[1] == 19.2);"
+						"EXPECT_EQUAL_FLOAT32(caseId, \"testee_1:data_1:24_1\", 9.6f, data_1.float32_array_c[0], 0.1f);"
+ 						"EXPECT_EQUAL_FLOAT32(caseId, \"testee_1:data_1:24_2\", 9.6f, data_1.float32_array_c[1], 0.1f);"
+						"EXPECT_EQUAL_FLOAT64(caseId, \"testee_1:data_1:25_1\", 19.2, data_1.float64_array_c[0], 0.1);"
+ 						"EXPECT_EQUAL_FLOAT64(caseId, \"testee_1:data_1:25_2\", 19.2, data_1.float64_array_c[1], 0.1);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:26\", strcmp(data_1.char_array_c, \"Claz\") == 0);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:27\", data_1.bool_array_i[0] == TRUE && data_1.bool_array_i[1] == TRUE);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:28\", data_1.int8_array_i[0] == 2 && data_1.int8_array_i[1] == 6);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:29\", data_1.int16_array_i[0] == 4 && data_1.int16_array_i[1] == 12);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:30\", data_1.int32_array_i[0] == 8 && data_1.int32_array_i[1] == 24);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:31\", data_1.int64_array_i[0] == 16 && data_1.int64_array_i[1] == 48);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:32\", data_1.float32_array_i[0] == 1.6f && data_1.float32_array_i[1] == 1.6f);"
-						"EXPECT_TRUE(caseId,\"testee_1:data_1:33\", data_1.float64_array_i[0] == 3.2 && data_1.float64_array_i[1] == 3.2);"
+						"EXPECT_EQUAL_FLOAT32(caseId, \"testee_1:data_1:32_1\", 1.6f, data_1.float32_array_i[0], 0.1f);"
+ 						"EXPECT_EQUAL_FLOAT32(caseId, \"testee_1:data_1:32_2\", 1.6f, data_1.float32_array_i[1], 0.1f);"
+						"EXPECT_EQUAL_FLOAT64(caseId, \"testee_1:data_1:33_1\", 3.2, data_1.float64_array_i[0], 0.1);"
+ 						"EXPECT_EQUAL_FLOAT64(caseId, \"testee_1:data_1:33_2\", 3.2, data_1.float64_array_i[1], 0.1);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:34\", strcmp(data_1.char_array_i, \"Inst\") == 0);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:35\", data_1.data_2.int32_c == 42);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:36\", data_1.data_2.int32_i == 43);"
@@ -159,9 +163,9 @@ RoomModel StaticConfigTest {
 		Behavior {
 			Operation Testee_Super2_ac() {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_Super2_ac\");"
-				"EXPECT_TRUE(caseId, \"Testee_Super2_ac:1\", float64_super_r == 1.1);"
-				"EXPECT_TRUE(caseId, \"Testee_Super2_ac:2\", float64_super_c == 2.2);"
-				"EXPECT_TRUE(caseId, \"Testee_Super2_ac:3\", float64_super_i == 3.3);"
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:1\", 1.1, float64_super_r, 0.1);"
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:2\", 2.2, float64_super_c, 0.1);"
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:3\", 3.3, float64_super_i, 0.1);"
 
 				// reg_port
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:5\", 4.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_r, 0.1f);"
@@ -194,8 +198,8 @@ RoomModel StaticConfigTest {
 				State s1 {
 					entry {
 
-						"EXPECT_TRUE(caseId, \"Testee_2_ac:1\", float64_super_c == 2.2);"
-						"EXPECT_TRUE(caseId, \"Testee_2_ac:2\", float64_super_i == 4.4);"
+						"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:1\", 2.2, float64_super_c, 0.1);"
+						"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:2\", 4.4, float64_super_i, 0.1);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:3\", int32_own_r == 11);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:4\", int32_own_c == 12);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:5\", int32_own_i == 13);"
@@ -333,7 +337,7 @@ RoomModel StaticConfigTest {
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:4\", int32_r == 32);"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:5\", int64_r == 64);"
 			"EXPECT_EQUAL_FLOAT32(caseId,\"Data_1_dc:varCheck:6\", 3.2f, float32_r, 0.1f);"
-			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:7\", float64_r == 6.4);"
+			"EXPECT_EQUAL_FLOAT64(caseId,\"Data_1_dc:varCheck:7\", 6.4, float64_r, 0.1);"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:8\", char_r == \'R\');"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:8\", strcmp(string_r, \":/\") == 0 );"
 
@@ -343,8 +347,10 @@ RoomModel StaticConfigTest {
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:12\", int16_array_r[0] == 16 && int16_array_r[1] == 32);"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:13\", int32_array_r[0] == 32 && int32_array_r[1] == 64);"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:24\", int64_array_r[0] == 64 && int64_array_r[1] == 128);"
-			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:25\", float32_array_r[0] == 3.2f && float32_array_r[1] == 6.4f);"
-			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:26\", float64_array_r[0] == 6.4 && float64_array_r[1] == 12.8);"
+			"EXPECT_EQUAL_FLOAT32(caseId, \"Data_1_dc:varCheck:25_1\", 3.2f, float32_array_r[0], 0.1f);"
+ 			"EXPECT_EQUAL_FLOAT32(caseId, \"Data_1_dc:varCheck:25_2\", 6.4f, float32_array_r[1], 0.1f);"
+			"EXPECT_EQUAL_FLOAT64(caseId, \"Data_1_dc:varCheck:26_1\", 6.4, float64_array_r[0], 0.1);"
+ 			"EXPECT_EQUAL_FLOAT64(caseId, \"Data_1_dc:varCheck:26_2\", 12.8, float64_array_r[1], 0.1);"
 			"EXPECT_TRUE(caseId,\"Data_1_dc:varCheck:27\", strcmp(char_array_r, \"ROOM\")==0);"
 		}
 	}

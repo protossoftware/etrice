@@ -450,14 +450,13 @@
 			<classpath refid="clspath"/>
 		</java>
 		
-		<!-- TODO: jh
+		
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.c.tests.StaticConfigTest"/>
 			<arg value="./tmp/StaticConfigTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
-		-->
 		
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
@@ -474,9 +473,7 @@
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CChoicePointTest.xml"/>
 		<move file="./tmp/SendingDataTestC.xml" tofile="./tmp/CSendingDataTest.xml"/>
-		<!--  TODO: jh
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/CStaticConfigTest.xml"/>
-		-->
 		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/CDataDrivenTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
