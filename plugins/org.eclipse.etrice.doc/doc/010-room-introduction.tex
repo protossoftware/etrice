@@ -50,12 +50,12 @@ The relation between classical object oriented programming and ROOM is comparabl
 
 As the figure illustrates, the classical object paradigm does not care about concurrency issues. The threads of control will be provided by the underlying operating system and the user is responsible to avoid access violations by using those operating system mechanisms directly (semaphore, mutex).
 
-\includegraphics{images/010-RoomIntroduction02.png}
+\includegraphics[width=0.8\textwidth]{images/010-RoomIntroduction02.png}
 % !images/010-RoomIntroduction02.png!
 
 ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantic. That makes developing of business logic easy and safe (see basic concepts). The logical machine provides an encapsulation shell including concurrency issues (see chapter \textbf{Run to completion}). 
 
-\includegraphics[width=\linewidth]{images/010-RoomIntroduction03.png}
+\includegraphics[width=0.8\textwidth]{images/010-RoomIntroduction03.png}
 % !images/010-RoomIntroduction03.png!
 
 This thinking of an object is much more general than the classic one.  
@@ -121,12 +121,12 @@ The actor's behavior will be described with a state machine. A state in turn may
    
 Top level:
 
-\includegraphics[width=\linewidth]{images/020-Blinky15.png}
+\includegraphics[width=0.8\textwidth]{images/020-Blinky15.png}
 % !images/020-Blinky15.png!
 
 \textit{blinking} Sub machine:
 
-\includegraphics[width=\linewidth]{images/020-Blinky151.png}
+\includegraphics[width=0.8\textwidth]{images/020-Blinky151.png}
 % !images/020-Blinky151.png!
 
 From an abstract point of view there is a state \textit{blinking}. But a simple LED is not able to blink autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the current work it is not of interest how the blinking is realized. This will be done in the next lower level of the hierarchy. 

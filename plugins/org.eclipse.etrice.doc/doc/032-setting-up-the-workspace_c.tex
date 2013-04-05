@@ -3,8 +3,8 @@
 Before you can start with C, some preconditions must be fulfilled:
 
 \begin{description}
-- A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
-- The CDT-Eclipse plug in must be installed as the C development environment.
+\item{A C compiler} must be installed on your machine (all tests and tutorials are based on MinGW)
+\item{The CDT-Eclipse plugin} must be installed as the C development environment.
 \end{description}
 
 Once the CDT is installed, the C runtime and model library must be imported. 
@@ -18,8 +18,7 @@ The resulting workspace should look like this:
 
 \section{Testing the environment}
 
-To verify the C tool chain you should generate and run the Hello World example program of the CDT.
- Activate the \textit{C/C++} perspective. 
+To verify the C tool chain you should generate and run the Hello World example program of the CDT. Activate the \textit{C/C++} perspective. 
 
 \includegraphics{images/032-SetupWorkspaceC03.png} 
 % !images/032-SetupWorkspaceC03.png!
@@ -37,7 +36,7 @@ Name the project. Select an \textit{Executable->Hello World ANSI C} as project t
 Select the new project and click the build button (or right click the project and select \textit{Build Project})
 
 \includegraphics{images/032-SetupWorkspaceC05.png}
-!images/032-SetupWorkspaceC05.png!
+% !images/032-SetupWorkspaceC05.png!
 
 The binary should be generated. Run the binary as \textit{Local C/C++ Application}.
 
@@ -54,20 +53,22 @@ Remember these steps. In the following Tutorials these steps will be referenced 
 
 \section{Building the C runtime system}
 
-The C runtime system contains some basic functionalities to run the generated models. The so called runtime is common for all C projects. The requirements for several projects may differ depending on the functionality of the model or the resources of the different platforms. Therefore the runtime is configurable in terms of message queue size, frequency and memory alignment. The configuration file \textit{etRuntimeConfig.h} is located in _src/config_.
+The C runtime system contains some basic functionalities to run the generated models. The so called runtime is common for all C projects. The requirements for several projects may differ depending on the functionality of the model or the resources of the different platforms. Therefore the runtime is configurable in terms of message queue size, frequency and memory alignment. The configuration file \textit{etRuntimeConfig.h} is located in \textit{src/config}.
 
 After changing the configuration, the runtime must be built.
 
-Open the properties of the \textit{org.eclipse.runtime.c} project and select \textit{C/C++ Build->Settings->Tool Settings_ and select _Includes}.
+Open the properties of the \textit{org.eclipse.runtime.c} project and select \textit{C/C++ Build->Settings->Tool Settings} and select \textit{Includes}.
 
 \includegraphics{images/032-SetupWorkspaceC08.png}
 % !images/032-SetupWorkspaceC08.png!
 
 Verify the include paths
 
-_src/config_
-_src/common_
-_src/platforms/generic_
+\begin{itemize}
+\item \textit{src/config}
+\item \textit{src/common}
+\item \textit{src/platforms/generic}
+\end{itemize}
 
 Within the Setting dialog select the tab \textit{Build Artefact} and select \textit{Static Library}
 

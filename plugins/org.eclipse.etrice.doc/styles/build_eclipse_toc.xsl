@@ -38,7 +38,7 @@
 	
 	<!-- ======================= analyzing div element ============================ -->
 	<xsl:template match="xhtml:div">
-		<toc topic="etrice-doc.html" label="eTrice User Guide">
+		<toc topic="html/etrice-doc.html" label="eTrice User Guide">
 			<xsl:apply-templates select="xhtml:span"/>
 		</toc>
 	</xsl:template>
@@ -49,11 +49,11 @@
 		<xsl:if test="./@class='chapterToc'">
 			<xsl:variable name="chapter" select="."/>
 			<xsl:element name="topic">
-				<xsl:attribute name="href"><xsl:value-of select="xhtml:a/@href" /></xsl:attribute>
+				<xsl:attribute name="href">html/<xsl:value-of select="xhtml:a/@href" /></xsl:attribute>
 				<xsl:attribute name="label"><xsl:value-of select="xhtml:a" /></xsl:attribute>
 				<xsl:for-each select="following-sibling::xhtml:span[@class='sectionToc'][preceding-sibling::xhtml:span[@class='chapterToc'][1] = $chapter]">
                     <xsl:element name="topic">
-						<xsl:attribute name="href"><xsl:value-of select="xhtml:a/@href" /></xsl:attribute>
+						<xsl:attribute name="href">html/<xsl:value-of select="xhtml:a/@href" /></xsl:attribute>
 						<xsl:attribute name="label"><xsl:value-of select="xhtml:a" /></xsl:attribute>
 					</xsl:element>
                 </xsl:for-each>

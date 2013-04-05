@@ -4,44 +4,82 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Performing Automatic Layout</title> 
+<head><title>Create the model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-03-25 22:23:00" /> 
+<meta name="date" content="2013-03-26 21:41:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 73--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse46.html" >next</a>] [<a 
 href="etrice-docse44.html" >prev</a>] [<a 
 href="etrice-docse44.html#tailetrice-docse44.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse45.html">tail</a>] [<a 
 href="etrice-docch11.html#etrice-docse45.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">11.2   </span> <a 
- id="x58-10100011.2"></a>Performing Automatic Layout</h3>
-<!--l. 21--><p class="noindent" >Automatic layout could be performed in eTrice graphical editors using the command
-to layout the current diagram.
-</p><!--l. 23--><p class="noindent" >This command is available in </p>
+<h3 class="sectionHead"><span class="titlemark">11.4   </span> <a 
+ id="x58-7400011.4"></a>Create the model</h3>
+<!--l. 75--><p class="noindent" >Due to the former tutorials you should be familiar with the steps to create the model with protocols,
+actors and state machines.
+</p><!--l. 77--><p class="noindent" >The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read
+characters from the source file. Another actor receives the characters and filters the comments (parser).
+The remaining characters (pure source code) should be print out.
+</p><!--l. 79--><p class="noindent" >Remember the logical steps: </p>
      <ul class="itemize1">
-     <li class="itemize">The context menu of the diagrams
+     <li class="itemize">create the model by the help of content assist (CTRL Space)
      </li>
-     <li class="itemize">Using the <span 
-class="ecti-1000">Ctrl+R L </span>shortcut.</li></ul>
-<!--l. 29--><p class="noindent" >Additionally, an entry in the context menu allows to layout only a selected part of
-the diagram.
-                                                                  
-
-                                                                  
+     <li class="itemize">name the model, subsystem and top level actor
+     </li>
+     <li class="itemize">define the protocol (in this case it should be able to send a char, and to request the next char
+     from the file reader)
+     </li>
+     <li class="itemize">create the structure (file reader and parser with an appropriate port, create the references
+     and connect the ports)
+     </li>
+     <li class="itemize">create the state machines</li></ul>
+<!--l. 88--><p class="noindent" >Try to create the model by yourself and take the following solution as an example.
+</p><!--l. 90--><p class="noindent" >Structure:
+</p><!--l. 92--><p class="noindent" ><img 
+src="images/036-RemoveCommentC04.png" alt="PIC"  
+ />
+</p><!--l. 95--><p class="noindent" >File reader FSM:
+</p><!--l. 97--><p class="noindent" ><img 
+src="images/036-RemoveCommentC05.png" alt="PIC"  
+ />
+</p><!--l. 100--><p class="noindent" >Parser FSM:
+</p><!--l. 102--><p class="noindent" ><img 
+src="images/036-RemoveCommentC06.png" alt="PIC"  
+ />
+</p><!--l. 105--><p class="noindent" >The complete model can be found in <span 
+class="ecti-1000">org.eclipse.etrice.tutorials.c</span>
+</p><!--l. 107--><p class="noindent" >Take a look at the file attribute of the file reader.
+                                                                                 
+                                                                                 
 </p>
-<!--l. 31--><div class="crosslinks"><p class="noindent">[<a 
+<div class="verbatim" id="verbatim-21">
+Attribute&#x00A0;f:file&#x00A0;ref
+</div>
+<!--l. 111--><p class="nopar" >
+</p><!--l. 113--><p class="noindent" ><span 
+class="ecti-1000">fopen </span>expects a <span 
+class="ecti-1000">FILE *</span>. <span 
+class="ecti-1000">f:file ref </span>declares a variable <span 
+class="ecti-1000">f </span>from type reference to <span 
+class="ecti-1000">file</span>, which is a pointer to
+<span 
+class="ecti-1000">FILE</span>.
+                                                                                 
+                                                                                 
+</p>
+<!--l. 116--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse46.html" >next</a>] [<a 
 href="etrice-docse44.html" >prev</a>] [<a 
 href="etrice-docse44.html#tailetrice-docse44.html" >prev-tail</a>] [<a 
 href="etrice-docse45.html" >front</a>] [<a 
 href="etrice-docch11.html#etrice-docse45.html" >up</a>] </p></div>
-<!--l. 31--><p class="noindent" ><a 
+<!--l. 116--><p class="noindent" ><a 
  id="tailetrice-docse45.html"></a> </p> 
 </body></html> 

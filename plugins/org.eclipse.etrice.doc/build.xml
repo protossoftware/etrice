@@ -53,10 +53,10 @@
 <target name="checkPdfCreationNeeded">
 	<condition property="pdfCreation.notNeeded">
 		<and>
-			<uptodate  targetfile="${pdf.file}" >
+			<uptodate targetfile="${pdf.file}" >
 				<srcfiles dir="${doc.dir}" includes="**/*.tex" />
 			</uptodate>
-			<uptodate  targetfile="${pdf.file}" >
+			<uptodate targetfile="${pdf.file}" >
 				<srcfiles dir="${image.dir}" includes="**/*.*" />
 			</uptodate>
 		</and>
@@ -133,6 +133,7 @@
 		<and>
 			<available file="${html.file}" />
 			<uptodate  srcfile="${html.file}" targetfile="${toc.file}" />
+			<uptodate  srcfile="${style.file}" targetfile="${toc.file}" />
 		</and>
 	</condition>
 </target>
