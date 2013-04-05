@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.support;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
@@ -96,6 +98,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -453,7 +456,12 @@ public class ActorContainerRefSupport {
 			
 			@Override
 			public boolean hasDoneChanges() {
-				return false;
+				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
+				boolean autoSave = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				if (autoSave)
+					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
+				else
+					return false;
 			}
 		}
 		
@@ -500,7 +508,12 @@ public class ActorContainerRefSupport {
 			
 			@Override
 			public boolean hasDoneChanges() {
-				return false;
+				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
+				boolean autoSave = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				if (autoSave)
+					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
+				else
+					return false;
 			}
 		}
 		

@@ -45,4 +45,5 @@ public class StructureEditor extends RoomDiagramEditor {
 		
 		return null;
 	}
+	
 }
