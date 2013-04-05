@@ -47,6 +47,7 @@ void etUnit_closeAll(etInt16 id);
 
 /* float values */
 #define EXPECT_EQUAL_FLOAT32(id, msg, expected, actual, precision)		expectEqualFloat32(id, msg, expected, actual, precision, __FILE__, __LINE__)
+#define EXPECT_EQUAL_FLOAT64(id, msg, expected, actual, precision)		expectEqualFloat64(id, msg, expected, actual, precision, __FILE__, __LINE__)
 
 /* Pointers */
 #define EXPECT_EQUAL_PTR(id, msg, expected, actual) \
@@ -76,6 +77,7 @@ void expectEqualUInt8(etInt16 id, const char* msg, etUInt8 expected, etUInt8 act
 void expectEqualUInt16(etInt16 id, const char* msg, etUInt16 expected, etUInt16 actual, const char* file, int line);
 void expectEqualUInt32(etInt16 id, const char* msg, etUInt32 expected, etUInt32 actual, const char* file, int line);
 void expectEqualFloat32(etInt16 id, const char* msg, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line);
+void expectEqualFloat64(etInt16 id, const char* msg, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
 void expect_equal_void_ptr(etInt16 id, const char* msg, const void* expected, const void* actual, const char* file, int line);
 void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file, int line);
 void expectOrder(etInt16 id, const char* msg, etInt16 identifier, const char* file, int line);

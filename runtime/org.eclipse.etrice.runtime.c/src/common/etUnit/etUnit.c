@@ -48,7 +48,7 @@ static OrderInfo etUnit_orderInfo[ETUNIT_ORDER_MAX];
 /* forward declarations of private functions */
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line);
 static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected, etUInt32 actual, const char* file, int line);
-static void expect_equal_float(etInt16 id, const char* message, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line);
+static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
 static void etUnit_handleExpect(etInt16 id, etBool result, const char *trace, const char* expected, const char* actual, const char* file, int line);
 
 /* public functions */
@@ -206,6 +206,10 @@ void expectEqualFloat32(etInt16 id, const char* message, etFloat32 expected, etF
 	expect_equal_float(id, message, expected, actual, precision, file, line);
 }
 
+void expectEqualFloat64(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
+	expect_equal_float(id, message, expected, actual, precision, file, line);
+}
+
 static OrderInfo* getOrderInfo(etInt16 id) {
 	int i;
 	for (i=0; i<ETUNIT_ORDER_MAX; ++i)
@@ -296,7 +300,7 @@ static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected
 }
 
 
-static void expect_equal_float(etInt16 id, const char* message, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line) {
+static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
 	if (expected - actual < -precision || expected - actual > precision) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
