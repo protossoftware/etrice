@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Execution Models</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,3,next,html --> 
+<meta name="src" content="etrice-doc.tex" /> 
+<meta name="date" content="2013-03-25 22:23:00" /> 
+<link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
+</head><body 
+>
+<!--l. 161--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch3.html" >next</a>] [<a 
+href="etrice-docse4.html" >prev</a>] [<a 
+href="etrice-docse4.html#tailetrice-docse4.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse5.html">tail</a>] [<a 
+href="etrice-docch2.html#etrice-docse5.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">2.3   </span> <a 
+ id="x9-170002.3"></a>Execution Models</h3>
+<!--l. 163--><p class="noindent" >Since from ROOM models executable code can be generated, it is important to define
+the way the actors are executed and communicate with each other. The combination
+of communication and execution is called the Execution Model. Currently the eTrice
+tooling only supports the <span 
+class="ecbx-1000">message driven </span>and parts of the <span 
+class="ecbx-1000">data driven </span>execution
+model. In future releases more execution models will be supported, depending on the
+requirements of the community.
+</p><!--l. 166--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.3.1   </span> <a 
+ id="x9-180002.3.1"></a>Communication Methods</h4>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ecbx-1000">message driven </span>(asynchronous, non blocking, no return value): Usually
+     the message driven communication is implemented with message queues.
+     Message  queues  are  inherently  asynchronous  and  enable  a  very  good
+     decoupling of the communicating parties.
+     </li>
+     <li class="itemize"><span 
+class="ecbx-1000">data driven </span>(asynchronous, non blocking, no return value): In data driven
+     communication sender and receiver often have a shared block of data. The
+     sender writes the data and the receiver polls the data.
+     </li>
+     <li class="itemize"><span 
+class="ecbx-1000">function call </span>(synchronous, blocking, return value): Regular function call
+     as known in most programming languages.</li></ul>
+<!--l. 174--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
+ id="x9-190002.3.2"></a>Execution Methods</h4>
+                                                                  
+
+                                                                  
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ecbx-1000">execution by receive event</span>: The message queue or the event dispatcher
+     calls a <span 
+class="ecbx-1000">receive event </span>function of the message receiver an thereby executes
+     the processing of the event.
+     </li>
+     <li class="itemize"><span 
+class="ecbx-1000">polled execution</span>: The objects are processed by a cyclic <span 
+class="ecbx-1000">execute </span>call
+     </li>
+     <li class="itemize"><span 
+class="ecbx-1000">execution by function call</span>: The caller executes the called object via
+     function call</li></ul>
+<!--l. 182--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.3.3   </span> <a 
+ id="x9-200002.3.3"></a>Execution Models</h4>
+<!--l. 184--><p class="noindent" >In todays embedded systems in most cases one or several of the following execution
+models are used:
+</p><!--l. 186--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x9-210002.3.3"></a>message driven</h5>
+<!--l. 188--><p class="noindent" >The message driven execution model is a combination of message driven
+communication and execution by receive event. This model allows for distributed
+systems with a very high throughput. It can be deterministic but the determinism is
+hard to proof. This execution model is often found in telecommunication systems and
+high performance automation control systems.
+</p><!--l. 193--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x9-220002.3.3"></a>data driven</h5>
+<!--l. 195--><p class="noindent" >The data driven execution model is a combination of data driven communication and
+polled execution. This model is highly deterministic and very robust, but the polling
+creates a huge performance overhead. The determinism is easy to proof (simple
+mathematics). The execution model is also compatible with the execution model of
+control software generated by Tools like Matlab(TM) and LabView(TM). This model
+is usually used for systems with requirements for safety, such as automotive and
+avionic systems.
+                                                                  
+
+                                                                  
+</p><!--l. 201--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x9-230002.3.3"></a>synchronous</h5>
+<!--l. 203--><p class="noindent" >The synchronous execution model could also be called <span 
+class="ecbx-1000">simple function calls</span>. This
+model is in general not very well suited to support the <span 
+class="ecbx-1000">run to completion </span>semantic
+typical for ROOM models, but could also be generated from ROOM models. With
+this execution model also lower levels of a software system, such as device drivers,
+could be generated from ROOM models.
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+</p>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch3.html" >next</a>] [<a 
+href="etrice-docse4.html" >prev</a>] [<a 
+href="etrice-docse4.html#tailetrice-docse4.html" >prev-tail</a>] [<a 
+href="etrice-docse5.html" >front</a>] [<a 
+href="etrice-docch2.html#etrice-docse5.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
+ id="tailetrice-docse5.html"></a>  </p> 
+</body></html> 
