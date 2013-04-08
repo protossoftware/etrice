@@ -302,7 +302,7 @@ class DocGen implements IRoomGenerator {
 		'''
 	}
 		
-	def generateStateDoc(RoomModel model, ActorClass ac, State state){
+	def String generateStateDoc(RoomModel model, ActorClass ac, State state){
 		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.genStatePathName + "_behavior.jpg"
 		filename = filename.replaceAll("\\\\","/");
 		var latexFilename = filename.replaceAll("/","//"); 

@@ -91,7 +91,7 @@ public class JavaExtensions implements ILanguageExtension {
       RefableType _refType_1 = a.getRefType();
       DataType _type_1 = _refType_1.getType();
       String _typeName = this.typeHelpers.typeName(_type_1);
-      boolean _equals = _typeName==null?false:_typeName.equals("String");
+      boolean _equals = _typeName.equals("String");
       _or = (_or_1 || _equals);
     }
     return _or;

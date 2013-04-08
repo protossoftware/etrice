@@ -173,10 +173,21 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public int getPollingTimerUser(final SubSystemInstance subsystem) {
-    SubSystemConfig _config = this.getConfig(subsystem);
-    DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
-    int _polling = _dynConfig==null?0:_dynConfig.getPolling();
-    return _polling;
+    int _xblockexpression = (int) 0;
+    {
+      SubSystemConfig _config = this.getConfig(subsystem);
+      final DynamicConfig dynConf = _config==null?(DynamicConfig)null:_config.getDynConfig();
+      int _xifexpression = (int) 0;
+      boolean _equals = Objects.equal(dynConf, null);
+      if (_equals) {
+        _xifexpression = 0;
+      } else {
+        int _polling = dynConf.getPolling();
+        _xifexpression = _polling;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
   
   public String getUserCode1(final SubSystemInstance subsystem) {

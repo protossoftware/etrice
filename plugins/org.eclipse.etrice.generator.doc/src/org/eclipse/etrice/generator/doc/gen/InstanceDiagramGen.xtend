@@ -76,7 +76,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 		'''
 	}
 	
-	def instance(ActorInstance ai) {
+	def String instance(ActorInstance ai) {
 		val parent = ai.eContainer as StructureInstance
 		val pthread = ETMapUtil::getPhysicalThread(ai)
 		val tname = if (pthread==null) "?" else pthread.name

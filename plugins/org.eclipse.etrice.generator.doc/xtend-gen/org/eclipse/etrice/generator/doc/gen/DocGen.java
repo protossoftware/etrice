@@ -726,7 +726,7 @@ public class DocGen implements IRoomGenerator {
             boolean _isLeaf = RoomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
-              CharSequence _generateStateDoc = this.generateStateDoc(model, ac, s_1);
+              String _generateStateDoc = this.generateStateDoc(model, ac, s_1);
               _builder.append(_generateStateDoc, "");
               _builder.newLineIfNotEmpty();
             }
@@ -738,8 +738,8 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
-    CharSequence _xblockexpression = null;
+  public String generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
+    String _xblockexpression = null;
     {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
       String _plus = (_docGenerationTargetPath + "images\\");
@@ -841,14 +841,14 @@ public class DocGen implements IRoomGenerator {
             boolean _isLeaf = RoomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
-              Object _generateStateDoc = this.generateStateDoc(model, ac, s_1);
+              String _generateStateDoc = this.generateStateDoc(model, ac, s_1);
               _builder.append(_generateStateDoc, "");
               _builder.newLineIfNotEmpty();
             }
           }
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = (_builder.toString());
     }
     return _xblockexpression;
   }

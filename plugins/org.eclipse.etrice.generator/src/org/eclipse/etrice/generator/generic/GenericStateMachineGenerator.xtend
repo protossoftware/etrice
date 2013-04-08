@@ -195,7 +195,7 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
-				«var start = xpac.getChain(tr).transition»
+				«var start = xpac.getChain(tr)?.transition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
@@ -552,7 +552,7 @@ class GenericStateMachineGenerator {
 	 * @param state the {@link State}
 	 * @return the generated code
 	 */
-	def protected genDoCodes(State state) {'''
+	def protected String genDoCodes(State state) {'''
 		«IF state.hasDoCode(true)»
 			«state.getDoCodeOperationName()»(«langExt.selfPointer(false)»);
 		«ENDIF»

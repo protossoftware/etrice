@@ -375,7 +375,7 @@ public class GenericStateMachineGenerator {
             }
             if (_and) {
               TransitionChain _chain = xpac.getChain(tr);
-              Transition start = _chain.getTransition();
+              Transition start = _chain==null?(Transition)null:_chain.getTransition();
               _builder.newLineIfNotEmpty();
               boolean _and_1 = false;
               if (!(start instanceof NonInitialTransition)) {
@@ -1244,7 +1244,7 @@ public class GenericStateMachineGenerator {
    */
   protected CharSequence genDataDrivenTriggers(final ExpandedActorClass xpac, final State state, final boolean usesHdlr) {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _genDoCodes = this.genDoCodes(state);
+    String _genDoCodes = this.genDoCodes(state);
     _builder.append(_genDoCodes, "");
     _builder.newLineIfNotEmpty();
     List<Transition> _outgoingTransitionsHierarchical = this._roomExtensions.getOutgoingTransitionsHierarchical(xpac, state);
@@ -1555,7 +1555,7 @@ public class GenericStateMachineGenerator {
    * @param state the {@link State}
    * @return the generated code
    */
-  protected CharSequence genDoCodes(final State state) {
+  protected String genDoCodes(final State state) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _hasDoCode = RoomHelpers.hasDoCode(state, true);
@@ -1575,12 +1575,12 @@ public class GenericStateMachineGenerator {
       if ((_eContainer_1 instanceof State)) {
         EObject _eContainer_2 = state.eContainer();
         EObject _eContainer_3 = _eContainer_2.eContainer();
-        Object _genDoCodes = this.genDoCodes(((State) _eContainer_3));
+        String _genDoCodes = this.genDoCodes(((State) _eContainer_3));
         _builder.append(_genDoCodes, "");
         _builder.newLineIfNotEmpty();
       }
     }
-    return _builder;
+    return _builder.toString();
   }
   
   /**

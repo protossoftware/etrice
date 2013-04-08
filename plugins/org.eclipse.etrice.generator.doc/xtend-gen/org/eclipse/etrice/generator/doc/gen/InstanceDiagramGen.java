@@ -151,7 +151,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
           EList<ActorInstance> _instances_1 = ssi.getInstances();
           for(final ActorInstance ai : _instances_1) {
             _builder.append("\t");
-            CharSequence _instance = this.instance(ai);
+            String _instance = this.instance(ai);
             _builder.append(_instance, "	");
             _builder.newLineIfNotEmpty();
           }
@@ -163,8 +163,8 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence instance(final ActorInstance ai) {
-    CharSequence _xblockexpression = null;
+  public String instance(final ActorInstance ai) {
+    String _xblockexpression = null;
     {
       EObject _eContainer = ai.eContainer();
       final StructureInstance parent = ((StructureInstance) _eContainer);
@@ -217,12 +217,12 @@ public class InstanceDiagramGen implements IRoomGenerator {
       {
         EList<ActorInstance> _instances = ai.getInstances();
         for(final ActorInstance sub_ai : _instances) {
-          Object _instance = this.instance(sub_ai);
+          String _instance = this.instance(sub_ai);
           _builder.append(_instance, "");
           _builder.newLineIfNotEmpty();
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = (_builder.toString());
     }
     return _xblockexpression;
   }

@@ -92,7 +92,11 @@ class DataConfiguration implements IDataConfiguration {
 	// dynamic
 	
 	override getPollingTimerUser(SubSystemInstance subsystem) {
-		 subsystem.config?.dynConfig?.polling
+		 val dynConf = subsystem.config?.dynConfig
+		 if (dynConf==null)
+		 	0
+		 else
+		 	dynConf.polling
 	}
 	
 	override getUserCode1(SubSystemInstance subsystem) {
