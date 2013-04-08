@@ -442,26 +442,27 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						ActorContainerRef ref = (ActorContainerRef) bo;
-						DiagramAccess diagramAccess = new DiagramAccess();
-						if (ref instanceof ActorRef) {
-							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
-						}
-						else if (ref instanceof SubSystemRef) {
-							diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
-						}
+						final ActorContainerRef ref = (ActorContainerRef) bo;
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								DiagramAccess diagramAccess = new DiagramAccess();
+								if (ref instanceof ActorRef) {
+									diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
+								}
+								else if (ref instanceof SubSystemRef) {
+									diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
+								}
+							}
+				        });
 					}
 				}
 			}
 			
 			@Override
 			public boolean hasDoneChanges() {
-				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
-				boolean autoSave = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
-				if (autoSave)
-					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
-				else
-					return false;
+				return false;
 			}
 		}
 		
@@ -497,11 +498,17 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						ActorContainerRef ref = (ActorContainerRef) bo;
-						org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
-						if (ref instanceof ActorRef) {
-							diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
-						}
+						final ActorContainerRef ref = (ActorContainerRef) bo;
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+								if (ref instanceof ActorRef) {
+									diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
+								}
+							}
+				        });
 					}
 				}
 			}
