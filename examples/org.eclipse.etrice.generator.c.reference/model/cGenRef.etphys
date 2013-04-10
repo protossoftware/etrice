@@ -14,17 +14,17 @@ PhysicalModel cGenRef {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 32
 			msgpoolsize = 5
 		}
 		
-		Thread PhysicalThread2 {
-			execmode = blocked
-			prio = 5
-			stacksize = 1024
-			msgblocksize = 64
-			msgpoolsize = 3
-		}
+//		Thread PhysicalThread2 {
+//			execmode = blocked
+//			prio = 5
+//			stacksize = 1024
+//			msgblocksize = 64
+//			msgpoolsize = 3
+//		}
 	}
 	
 	RuntimeClass PC {

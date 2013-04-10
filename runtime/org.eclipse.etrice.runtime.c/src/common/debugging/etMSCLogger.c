@@ -13,6 +13,7 @@
 #include "debugging/etMSCLogger.h"
 
 #include "debugging/etLogger.h"
+#include "platform/etPlatform.h"
 
 static etFileHandle etMSCLogger_fileHandle = NULL;
 static char* etMSCLogger_objectName = "";
@@ -42,7 +43,7 @@ char* etMSCLogger_getObjectName(void){
 
 void etMSCLogger_syncCall(char* sourceName, char* messageName, char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
-		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s\n", sourceName, targetName, messageName);
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s(thread=%ld)\n", sourceName, targetName, messageName, etThread_self_id());
 	}
 }
 

@@ -17,9 +17,8 @@
 /* message IDs */
 enum CommunicationProtocol_msg_ids {
 	CommunicationProtocol_MSG_MIN = 0,
-	CommunicationProtocol_OUT_receivedData = 1,
-	CommunicationProtocol_IN_sendData = 2,
-	CommunicationProtocol_MSG_MAX = 3
+	CommunicationProtocol_IN_sendData = 1,
+	CommunicationProtocol_MSG_MAX = 2
 };
 
 /*--------------------- port structs and methods */
@@ -27,9 +26,6 @@ typedef etPort CommunicationProtocolPort;
 typedef etReplPort CommunicationProtocolReplPort;
 
 
-void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self);
-void CommunicationProtocolReplPort_receivedData_broadcast(const CommunicationProtocolReplPort* self);
-void CommunicationProtocolReplPort_receivedData(const CommunicationProtocolReplPort* self, int idx);
 
 
 etInt32 CommunicationProtocolReplPort_getReplication(const CommunicationProtocolReplPort* self);

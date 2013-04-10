@@ -50,6 +50,11 @@ typedef double float64;
 /* string datatypes */
 typedef char* charPtr;
 
+
+#ifndef NULL
+	#define NULL 0
+#endif
+
 /* boolean datatypes and values */
 typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
 #ifndef __MINGW32__
@@ -88,7 +93,7 @@ typedef bool etBool;
 
 typedef FILE* etFileHandle;
 
-typedef int8 etAddressId;
+typedef int16 etAddressId;
 
 /*
  * typedefs for threading
@@ -98,6 +103,7 @@ typedef int8 etAddressId;
 
 	typedef CRITICAL_SECTION etOSMutexData;
 	typedef HANDLE etOSThreadData;
+	typedef DWORD etOSThreadId;
 	typedef HANDLE etOSSemaData;
 
 

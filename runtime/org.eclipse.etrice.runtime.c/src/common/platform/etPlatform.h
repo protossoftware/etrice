@@ -15,35 +15,54 @@
 
 #include "etDatatypes.h"
 
-/*
+/**
  * etPlatform.h defines a generic interface for platform specific implementations
  *
  * */
 
-/* platform specific functions */
-
-/******************thread********************/
+/*
+ * typedefs
+ */
 
 typedef int32 etStacksize;
 typedef int32 etPriority;
 typedef charPtr etThreadname;
 typedef void (*etThreadFunction)(void *);
 
+/**
+ * etThread holds all data needed to handle a thread instance
+ * the struct has to be filled before calling etThread_construct except for osData and osId
+ **/
 typedef struct etThread{
-	etOSThreadData osData;  /* OS specific thread data (e.g. handle or id) */
-	etStacksize stacksize;
-	etPriority priority;
-	etThreadname threadName;
-	etThreadFunction threadFunction;
-	void* threadFunctionData;
+	etOSThreadData osData;		/**< OS specific thread data (e.g. handle or id) -> is filled in by etThread_construct **/
+	etOSThreadId osId;			/**< integer thread id (used e.g. for debugging)  -> is filled in by etThread_construct **/
+	etStacksize stacksize;		/**< configuration of stacksize -> has to be filled in by caller of etThread_construct **/
+	etPriority priority;		/**< configuration of priority -> has to be filled in by caller of etThread_construct **/
+	etThreadname threadName;	/**< configuration of threadName -> has to be filled in by caller of etThread_construct **/
+	etThreadFunction threadFunction; /**< call back function to be called by thread -> has to be filled in by caller of etThread_construct **/
+	void* threadFunctionData;	/**< data for call back function to be called by thread -> has to be filled in by caller of etThread_construct **/
 } etThread;
 
-
+/**
+ * create and start a new thread
+ * \param self pointer to thread instance
+ */
+// TODO: add return values for error handling
 void etThread_construct(etThread* self);
+
+/**
+ * stop and destroy a new thread
+ * \param self pointer to thread instance
+ */
 void etThread_destruct(etThread* self);
 
-/******************thread helpers********************/
+/**
+ * pausing the execution of the thread for <b>millis</b> milliseconds
+ * \param millis sleeping time in milliseconds
+ */
 void etThread_sleep(etInt32 millis);
+etOSThreadData etThread_self(void);
+etOSThreadId etThread_self_id(void);
 
 
 /*****************mutex**********************/

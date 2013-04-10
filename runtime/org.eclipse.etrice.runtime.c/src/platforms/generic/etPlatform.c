@@ -63,6 +63,14 @@ void etThread_sleep(etInt32 millis){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+etOSThreadData etThread_self(void){
+	return GetCurrentThread();
+}
+
+etOSThreadId etThread_self_id(void){
+	return GetCurrentThreadId();
+}
+
 /*****************mutex**********************/
 void etMutex_construct(etMutex* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMutex", "construct")

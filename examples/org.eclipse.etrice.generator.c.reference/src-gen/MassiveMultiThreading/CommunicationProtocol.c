@@ -11,29 +11,6 @@
 
 /*--------------------- port methods */
 
-void CommunicationProtocolPort_receivedData(const CommunicationProtocolPort* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolPort", "receivedData")
-		etPort_sendMessage(self, CommunicationProtocol_OUT_receivedData, 0, NULL);
-	ET_MSC_LOGGER_SYNC_EXIT
-}
-
-void CommunicationProtocolReplPort_receivedData_broadcast(const CommunicationProtocolReplPort* self) {
-	int i;
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolReplPort", "receivedData")
-	for (i=0; i<((etReplPort*)self)->size; ++i) {
-		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[i]), CommunicationProtocol_OUT_receivedData, 0, NULL);
-	}
-	ET_MSC_LOGGER_SYNC_EXIT
-}
-
-void CommunicationProtocolReplPort_receivedData(const CommunicationProtocolReplPort* self, int idx) {
-	ET_MSC_LOGGER_SYNC_ENTRY("CommunicationProtocolReplPort", "receivedData")
-	if (0<=idx && idx<((etReplPort*)self)->size) {
-		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[idx]), CommunicationProtocol_OUT_receivedData, 0, NULL);
-	}
-	ET_MSC_LOGGER_SYNC_EXIT
-}
-
 
 // getReplication
 etInt32 CommunicationProtocolReplPort_getReplication(const CommunicationProtocolReplPort* self) {
@@ -76,7 +53,7 @@ etInt32 CommunicationProtocolConjReplPort_getReplication(const CommunicationProt
 /*--------------------- debug helpers */
 
 /* message names as strings for debugging (generate MSC) */
-static const char* const CommunicationProtocol_messageStrings[] = {"MIN", "receivedData","sendData", "MAX"};
+static const char* const CommunicationProtocol_messageStrings[] = {"MIN", "sendData", "MAX"};
 
 const char* CommunicationProtocol_getMessageString(int msg_id) {
 	if (msg_id<CommunicationProtocol_MSG_MIN || msg_id>CommunicationProtocol_MSG_MAX+1){

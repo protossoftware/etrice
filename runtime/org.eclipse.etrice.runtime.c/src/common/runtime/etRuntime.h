@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,15 +10,9 @@
  *
  *******************************************************************************/
 
+#ifndef _ETRUNTIME_H_
+#define _ETRUNTIME_H_
 
 
-#ifndef _ETMESSAGERECEIVER_H_
-#define _ETMESSAGERECEIVER_H_
 
-#include "messaging/etMessage.h"
-
-typedef void (*etActorReceiveMessage)(void* self, void* ifitem, const etMessage*  msg);
-typedef void (*etDispatcherReceiveMessage)(const etMessage* msg);
-typedef void (*etDispatcherExecute)(void);
-
-#endif /* _ETMESSAGERECEIVER_H_ */
+#endif /* _ETRUNTIME_H_ */

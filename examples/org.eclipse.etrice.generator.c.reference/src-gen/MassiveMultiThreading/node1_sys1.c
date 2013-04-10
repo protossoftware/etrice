@@ -34,7 +34,7 @@ static void node1_sys1_initMessageServices(void) {
 	
 	/* filling all message service threads with data */
 	msgService_PhysicalThread1.thread.stacksize = 1024;
-	msgService_PhysicalThread1.thread.priority = 5;
+	msgService_PhysicalThread1.thread.priority = 1;
 	msgService_PhysicalThread1.thread.threadName = "PhysicalThread1";
 	msgService_PhysicalThread1.thread.threadFunction = (etThreadFunction) etMessageService_execute;
 	msgService_PhysicalThread1.thread.threadFunctionData = &msgService_PhysicalThread1;
@@ -46,9 +46,17 @@ static void node1_sys1_initMessageServices(void) {
 	msgService_PhysicalThread2.thread.threadFunction = (etThreadFunction) etMessageService_execute;
 	msgService_PhysicalThread2.thread.threadFunctionData = &msgService_PhysicalThread2;
 	
+	
+	msgService_PhysicalThread3.thread.stacksize = 1024;
+	msgService_PhysicalThread3.thread.priority = 10;
+	msgService_PhysicalThread3.thread.threadName = "PhysicalThread3";
+	msgService_PhysicalThread3.thread.threadFunction = (etThreadFunction) etMessageService_execute;
+	msgService_PhysicalThread3.thread.threadFunctionData = &msgService_PhysicalThread3;
+	
 	/* initialization of all message services */
-	etMessageService_init(&msgService_PhysicalThread1, msgBuffer_PhysicalThread1, 5, 64, MsgDispatcher_PhysicalThread1_receiveMessage);
-	etMessageService_init(&msgService_PhysicalThread2, msgBuffer_PhysicalThread2, 3, 64, MsgDispatcher_PhysicalThread2_receiveMessage);
+	etMessageService_init(&msgService_PhysicalThread1, msgBuffer_PhysicalThread1, 50, 64, MsgDispatcher_PhysicalThread1_receiveMessage, MsgDispatcher_PhysicalThread1_execute, EXECMODE_BLOCKED);
+	etMessageService_init(&msgService_PhysicalThread2, msgBuffer_PhysicalThread2, 50, 64, MsgDispatcher_PhysicalThread2_receiveMessage, MsgDispatcher_PhysicalThread2_execute, EXECMODE_BLOCKED);
+	etMessageService_init(&msgService_PhysicalThread3, msgBuffer_PhysicalThread3, 50, 64, MsgDispatcher_PhysicalThread3_receiveMessage, MsgDispatcher_PhysicalThread3_execute, EXECMODE_BLOCKED);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -58,6 +66,7 @@ static void node1_sys1_startMessageServices(void) {
 	
 	etMessageService_start(&msgService_PhysicalThread1);
 	etMessageService_start(&msgService_PhysicalThread2);
+	etMessageService_start(&msgService_PhysicalThread3);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -67,6 +76,7 @@ static void node1_sys1_stopMessageServices(void) {
 	
 	etMessageService_stop(&msgService_PhysicalThread1);
 	etMessageService_stop(&msgService_PhysicalThread2);
+	etMessageService_stop(&msgService_PhysicalThread3);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -76,6 +86,7 @@ static void node1_sys1_destroyMessageServices(void) {
 	
 	etMessageService_destroy(&msgService_PhysicalThread1);
 	etMessageService_destroy(&msgService_PhysicalThread2);
+	etMessageService_destroy(&msgService_PhysicalThread3);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -150,8 +161,20 @@ void node1_sys1_constructActorInstances(void){
 void node1_sys1_initActorInstances(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("node1_sys1", "initActorInstances")
 	
-	Sender_init(&_LS_sys1_Sender);
-	Receiver_init(&_LS_sys1_Receiver);
+	Tester_init(&_LS_sys1_tester);
+	Fork_init(&_LS_sys1_fork);
+	Redirect_init(&_LS_sys1_redirect1);
+	Redirect_init(&_LS_sys1_redirect2);
+	Redirect_init(&_LS_sys1_redirect3);
+	Redirect_init(&_LS_sys1_redirect4);
+	Redirect_init(&_LS_sys1_redirect5);
+	Redirect_init(&_LS_sys1_redirect6);
+	Redirect_init(&_LS_sys1_redirect7);
+	Redirect_init(&_LS_sys1_redirect8);
+	Redirect_init(&_LS_sys1_redirect9);
+	Redirect_init(&_LS_sys1_redirect10);
+	Join_init(&_LS_sys1_join);
+	Supervisor_init(&_LS_sys1_supervisor);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }

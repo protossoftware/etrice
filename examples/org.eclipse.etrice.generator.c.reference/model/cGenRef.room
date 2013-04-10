@@ -36,8 +36,7 @@ RoomModel cGenRef {
 //		Binding ref3.dataIn and ref1.dataOut
 //	}
 
-
-	ActorClass Receiver {
+	async ActorClass Receiver {
 		Interface {
 			Port dataIn: CommunicationProtocol
 		}
@@ -149,7 +148,7 @@ RoomModel cGenRef {
 		}
 	}		
 
-	ActorClass Sender {
+	async ActorClass Sender {
 		Interface {
 			conjugated Port dataOut: CommunicationProtocol
 		}
@@ -197,14 +196,18 @@ RoomModel cGenRef {
 	ProtocolClass CommunicationProtocol {
 		incoming {
 			Message sendData()
-			
 		}
 		outgoing {
 			Message receivedData()
 		}
 	}
 	
-
+	ProtocolClass etSystemProtocol {
+		incoming {
+			Message poll()
+		}
+	}
+	
 	DataClass DataClass1 {
 		usercode1 {"// usercode1"}
 		usercode2 {"// usercode2"}

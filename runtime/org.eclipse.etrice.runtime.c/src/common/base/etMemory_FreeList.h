@@ -20,10 +20,11 @@
  *
  * \param heap pointer to the heap to be managed
  * \param size the size in bytes of the heap
- * \nslots the number of slots to be used (should be greater or equal the number of different object sizes)
+ * \param nslots the number of slots to be used (should be greater or equal the number of different object sizes)
  *
  * \return the pointer to the initialized etMemory struct
  */
+
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots);
 
 etUInt32 etMemory_FreeList_freeHeapMem(void* heap);

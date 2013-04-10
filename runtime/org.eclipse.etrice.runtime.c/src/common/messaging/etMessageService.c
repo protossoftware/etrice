@@ -23,7 +23,7 @@
  * initialize message service with all needed data and initialize message queue and message pool
  *
  */
-void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher){
+void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher, etDispatcherExecute executeFct, enum etMessageService_execmode execmode){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
 
 	/* copy init data to self */
@@ -31,6 +31,8 @@ void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 max
 	self->messageBuffer.maxBlocks = maxBlocks;
 	self->messageBuffer.blockSize = blockSize;
 	self->msgDispatcher = msgDispatcher;
+	self->executeFct = executeFct;
+	self->execmode = execmode;
 
 	/* copy init queue and pool */
 	etMessageQueue_init( &(self->messagePool) ); 	/* the pool is also a queue*/
@@ -110,6 +112,12 @@ etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 si
 			ET_MSC_LOGGER_SYNC_EXIT
 			return msg;
 		}
+		else {
+			etLogger_logErrorF("etMessageService_getMessageBuffer: message pool empty: %d", etMessageService_getMessagePoolLowWaterMark(self));
+		}
+	}
+	else {
+		etLogger_logErrorF("etMessageService_getMessageBuffer: message too big: %d, blockSize: %d", size, self->messageBuffer.blockSize);
 	}
 	etMutex_leave(&self->poolMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
