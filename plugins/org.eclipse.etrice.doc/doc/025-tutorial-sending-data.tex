@@ -2,7 +2,8 @@
 
 \section{Scope}
 
-This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors (MrPing and MrPong). MrPong will simply loop back every data it received.
+This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors 
+(MrPing and MrPong). MrPong will simply loop back every data it received.
 MrPing will send data and verify the result.   
 
 You will perform the following steps:
@@ -20,7 +21,8 @@ You will perform the following steps:
 
 Remember exercise \textit{HelloWorld}.
 Create a new eTrice project and name it \textit{SendingData}.
-Open the \textit{SendingData.room} file and copy the following code into the file or use content assist to create the model.
+Open the \textit{SendingData.room} file and copy the following code into the file or use content assist to 
+create the model.
 
 
 \begin{verbatim} 
@@ -38,7 +40,8 @@ RoomModel SendingData {
 
 \section{Add a data class}
 
-Position the cursor outside any class definition and right click the mouse within the editor window. From the context menu select \textit{Content Assist} (or Ctrl+Space).  
+Position the cursor outside any class definition and right click the mouse within the editor window. From 
+the context menu select \textit{Content Assist} (or Ctrl+Space).  
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData01.png}
 % !images/025-SendingData01.png!
@@ -60,7 +63,8 @@ Note that the outline view contains all data elements as defined in the model.
 
 \section{Create a new protocol}
 
-With the help of \textit{Content Assist} create a \textit{ProtocolClass} and name it \textit{PingPongProtocol}. Create the following messages:
+With the help of \textit{Content Assist} create a \textit{ProtocolClass} and name it 
+\textit{PingPongProtocol}. Create the following messages:
 
 \begin{verbatim} 
 ProtocolClass PingPongProtocol {
@@ -77,7 +81,8 @@ ProtocolClass PingPongProtocol {
 
 \section{Create MrPing and MrPong Actors}
 
-With the help of \textit{Content Assist} create two new actor classes and name them \textit{MrPing} and \textit{MrPong}. The resulting model should look like this:
+With the help of \textit{Content Assist} create two new actor classes and name them \textit{MrPing} and 
+\textit{MrPong}. The resulting model should look like this:
 
 \begin{verbatim}
 RoomModel SendingData {
@@ -132,7 +137,9 @@ The outline view should look like this:
 
 \section{Define Actor Structure and Behavior}
 
-Save the model and visit the outline view. Within the outline view, right click on the \textit{MrPong} actor and select \textit{Edit Structure}. Select an \textit{Interface Port} from the toolbox and add it to MrPong. Name the Port \textit{PingPongPort} and select the \textit{PingPongProtocol}.
+Save the model and visit the outline view. Within the outline view, right click on the \textit{MrPong} 
+actor and select \textit{Edit Structure}. Select an \textit{Interface Port} from the toolbox and add it to 
+MrPong. Name the Port \textit{PingPongPort} and select the \textit{PingPongProtocol}.
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData02.png}
 % !images/025-SendingData02.png!
@@ -141,7 +148,8 @@ Do the same with MrPing but mark the port as \textit{conjugated}
 
 \subsection{Define MrPongs behavior}
 
-Within the outline view, right click MrPong and select \textit{Edit Behavior}. Create the following state machine:
+Within the outline view, right click MrPong and select \textit{Edit Behavior}. Create the following state 
+machine:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData04.png}
 % !images/025-SendingData04.png!
@@ -160,7 +168,8 @@ For \textit{pingSimple}:
 
 \subsection{Define MrPing behavior}
 
-Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of content assist create a new operation.
+Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help 
+of content assist create a new operation.
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData07.png}
 % !images/025-SendingData07.png!
@@ -217,11 +226,13 @@ Open the Structure from SendingDataTop and add MrPing and MrPong as a reference.
 \includegraphics[width=0.8\textwidth]{images/025-SendingData13.png}
 % !images/025-SendingData13.png!
 
-\begin{flushleft}The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.\end{flushleft}
+\begin{flushleft}The model is finished now and can be found in 
+/org.eclipse.etrice.tutorials/model/SendingData.\end{flushleft}
 
 \section{Generate and run the model}
 
-Generate the code by right click to \textbf{gen\_SendingData.launch} and run it as \textbf{gen\_SendingData}. Run the model. 
+Generate the code by right click to \textbf{gen\_SendingData.launch} and run it as 
+\textbf{gen\_SendingData}. Run the model. 
 The output should look like this:
 
 \begin{verbatim}
@@ -276,10 +287,19 @@ echo: quit
 
 \section{Summary}
 
-Within the first loop an integer value will be incremented by \textit{MrPong} and sent back to \textit{MrPing}. As long as the guard is true \textit{MrPing} sends back the value.
+Within the first loop an integer value will be incremented by \textit{MrPong} and sent back to 
+\textit{MrPing}. As long as the guard is true \textit{MrPing} sends back the value.
 
-Within the \textit{next} transition, \textit{MrPing} creates a data class and sends the default values. Then \textit{MrPing} changes the values and sends the class again. At this point you should note that during the send operation, a copy of the data class will be created and sent. Otherwise it would not be possible to send the same object two times, even more it would not be possible to send a stack object at all. This type of data passing is called \textit{sending data by value}.
-However, for performance reasons some applications requires \textit{sending data by reference}. In this case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle of an object. This is not the case for C/C++. Consider that a object which is created within a transition of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an invalid reference. Therefore care must be taken when sending references.      
+Within the \textit{next} transition, \textit{MrPing} creates a data class and sends the default values. 
+Then \textit{MrPing} changes the values and sends the class again. At this point you should note that 
+during the send operation, a copy of the data class will be created and sent. Otherwise it would not be 
+possible to send the same object two times, even more it would not be possible to send a stack object at 
+all. This type of data passing is called \textit{sending data by value}.
+However, for performance reasons some applications requires \textit{sending data by reference}. In this 
+case the user is responsible for the life cycle of the object. In Java the VM takes care of the life cycle 
+of an object. This is not the case for C/C++. Consider that a object which is created within a transition 
+of a state machine will be destroyed when the transition is finished. The receiving FSM would receive an 
+invalid reference. Therefore care must be taken when sending references.      
 
 For sending data by reference you simply have to add the keyword \textit{ref} to the protocol definition.
  
