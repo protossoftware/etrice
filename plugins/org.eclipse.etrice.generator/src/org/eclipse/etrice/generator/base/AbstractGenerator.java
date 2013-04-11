@@ -357,7 +357,10 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			}
 			catch (Exception e) {
 				ok = false;
-				logger.logError("couldn't load '"+uri+"'", null);
+				if (e instanceof IllegalArgumentException)
+					logger.logError(e.getMessage(), null);
+				else
+					logger.logError("couldn't load '"+uri+"'", null);
 			}
 			modelURIs.remove(uri);
 		}
