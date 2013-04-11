@@ -192,7 +192,8 @@ public class Main extends AbstractGenerator {
 	}
 
 	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genDocumentation, boolean asLibrary, boolean debug) {
-		loadModels(uriList);
+		if (!loadModels(uriList))
+			return false;
 
 		if (!validateModels())
 			return false;
