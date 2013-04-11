@@ -14,28 +14,22 @@ public class InternalLogData {
 	long timeStamp;
 	
 	/* --------------------- attribute setters and getters */
-	public void setUserString (String userString)
-	 {
+	public void setUserString (String userString) {
 		 this.userString = userString;
 	}
-	public String getUserString ()
-	 {
+	public String getUserString () {
 		return this.userString;
 	}
-	public void setSender (String sender)
-	 {
+	public void setSender (String sender) {
 		 this.sender = sender;
 	}
-	public String getSender ()
-	 {
+	public String getSender () {
 		return this.sender;
 	}
-	public void setTimeStamp (long timeStamp)
-	 {
+	public void setTimeStamp (long timeStamp) {
 		 this.timeStamp = timeStamp;
 	}
-	public long getTimeStamp ()
-	 {
+	public long getTimeStamp () {
 		return this.timeStamp;
 	}
 	

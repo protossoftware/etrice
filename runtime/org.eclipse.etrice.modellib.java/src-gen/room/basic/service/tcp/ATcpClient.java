@@ -96,12 +96,10 @@ public class ATcpClient extends ActorClassBase {
 	}
 	
 	/* --------------------- attribute setters and getters */
-	public void setLastError (int lastError)
-	 {
+	public void setLastError (int lastError) {
 		 this.lastError = lastError;
 	}
-	public int getLastError ()
-	 {
+	public int getLastError () {
 		return this.lastError;
 	}
 	

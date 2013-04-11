@@ -14,28 +14,22 @@ public class DTcpPayload {
 	byte data[];
 	
 	/* --------------------- attribute setters and getters */
-	public void setConnectionId (int connectionId)
-	 {
+	public void setConnectionId (int connectionId) {
 		 this.connectionId = connectionId;
 	}
-	public int getConnectionId ()
-	 {
+	public int getConnectionId () {
 		return this.connectionId;
 	}
-	public void setLength (int length)
-	 {
+	public void setLength (int length) {
 		 this.length = length;
 	}
-	public int getLength ()
-	 {
+	public int getLength () {
 		return this.length;
 	}
-	public void setData (byte[] data)
-	 {
+	public void setData (byte[] data) {
 		 this.data = data;
 	}
-	public byte[] getData ()
-	 {
+	public byte[] getData () {
 		return this.data;
 	}
 	

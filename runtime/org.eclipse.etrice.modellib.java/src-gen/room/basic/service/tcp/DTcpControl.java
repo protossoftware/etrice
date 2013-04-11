@@ -13,20 +13,16 @@ public class DTcpControl {
 	int TcpPort;
 	
 	/* --------------------- attribute setters and getters */
-	public void setIPAddr (String IPAddr)
-	 {
+	public void setIPAddr (String IPAddr) {
 		 this.IPAddr = IPAddr;
 	}
-	public String getIPAddr ()
-	 {
+	public String getIPAddr () {
 		return this.IPAddr;
 	}
-	public void setTcpPort (int TcpPort)
-	 {
+	public void setTcpPort (int TcpPort) {
 		 this.TcpPort = TcpPort;
 	}
-	public int getTcpPort ()
-	 {
+	public int getTcpPort () {
 		return this.TcpPort;
 	}
 	
