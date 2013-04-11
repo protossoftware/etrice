@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.ui.behavior;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
+import org.eclipse.etrice.ui.common.support.RemoveBendpointsFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -59,6 +61,7 @@ import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -316,11 +319,30 @@ public class ProviderDispatcher {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
+			
+			ICustomFeature[] custom;
 	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
 			if (fp!=null)
-				return fp.getCustomFeatures(context);
+				custom = fp.getCustomFeatures(context);
 			else
-				return super.getCustomFeatures(context);
+				custom = super.getCustomFeatures(context);
+			
+			for (ICustomFeature cust : custom) {
+				result.add(cust);
+			}
+			
+			boolean allFreeForm = true;
+			PictogramElement[] pes = context.getPictogramElements();
+			for (PictogramElement pe : pes) {
+				if (!(pe instanceof FreeFormConnection))
+					allFreeForm = false;
+			}
+			if (allFreeForm)
+				result.add(new RemoveBendpointsFeature(fp));
+			
+			ICustomFeature features[] = new ICustomFeature[result.size()];
+			return result.toArray(features);
 		}
 		
 		private EObject getBusinessObject(IPictogramElementContext context) {
