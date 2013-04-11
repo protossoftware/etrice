@@ -43,7 +43,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
  * how to customize content assistant
  */
 public class ConfigProposalProvider extends AbstractConfigProposalProvider {
-
+	
 	@Override
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
 			final ContentAssistContext context,

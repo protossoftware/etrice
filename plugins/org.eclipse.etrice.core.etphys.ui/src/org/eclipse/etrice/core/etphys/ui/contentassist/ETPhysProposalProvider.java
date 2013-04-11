@@ -13,11 +13,11 @@
 package org.eclipse.etrice.core.etphys.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.etphys.ui.contentassist.AbstractETPhysProposalProvider;
 import org.eclipse.etrice.core.ui.contentassist.ImportModelAssist;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

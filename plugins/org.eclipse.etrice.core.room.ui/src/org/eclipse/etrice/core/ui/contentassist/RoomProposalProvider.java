@@ -16,7 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.ui.contentassist.AbstractRoomProposalProvider;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorInstanceMapping;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
@@ -27,15 +34,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Function;
-
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
-import org.eclipse.etrice.core.room.ActorInstanceMapping;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.RefPath;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
@@ -102,7 +100,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		}
 		
 	}
-	
+
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		if (contentAssistContext!=null && contentAssistContext.getCurrentModel().eClass()==RoomPackage.eINSTANCE.getActorRef())
 			return new FilteredProposalCreator(new ActorRefFilter(), contentAssistContext, ruleName);

@@ -8,20 +8,20 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.etrice.core.room.util.RelativePathHelpers;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 public class ImportModelAssist {
-
+	
 	public static void addPaths(final AbstractContentProposalProvider provider, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor, final String extension) {
-		final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot()
-				.getFullPath();
-		URI configURI = context.getRootModel().eResource().getURI();
-		final IPath configPath = new Path(configURI.toPlatformString(false)
-				.replace(configURI.lastSegment(), ""));
+		final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot().getFullPath();
+		IPath modelPath = new Path(context.getRootModel().eResource().getURI().toPlatformString(false));
+		modelPath = ResourcesPlugin.getWorkspace().getRoot().getFile(modelPath).getLocation();
+		final URI modelURI = URI.createFileURI(modelPath.toOSString()).trimSegments(1);
 		IResourceProxyVisitor visitor = new IResourceProxyVisitor() {
 
 			@Override
@@ -29,14 +29,16 @@ public class ImportModelAssist {
 				if (proxy.getType() != IResource.FILE)
 					return true;
 
-				String name = proxy.getName();
-				if (name.endsWith(extension)) {
-					IPath relConfigPath = proxy.requestFullPath()
-							.makeRelativeTo(configPath);
-					IPath relWorkspacePath = proxy.requestFullPath()
-							.makeRelativeTo(rootPath);
-					String proposal = "\"" + relConfigPath.toString() + "\"";
-					String displayString = relConfigPath.lastSegment() + " - "
+				if (proxy.getName().endsWith(extension)) {
+					IPath relModelPath = proxy.requestFullPath();
+					relModelPath = ResourcesPlugin.getWorkspace().getRoot().getFile(relModelPath).getLocation();
+					URI relURI = URI.createFileURI(relModelPath.toOSString());
+					String relPath = RelativePathHelpers.getRelativePath(modelURI, relURI, true);
+					if (relPath==null)
+						relPath = "file:/"+(relURI.toFileString().replaceAll("\\\\", "/"));
+					IPath relWorkspacePath = proxy.requestFullPath().makeRelativeTo(rootPath);
+					String proposal = "\"" + relPath + "\"";
+					String displayString = relModelPath.lastSegment() + " - "
 							+ relWorkspacePath;
 					acceptor.accept(provider.createCompletionProposal(proposal,
 							new StyledString(displayString), null, context));

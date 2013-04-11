@@ -249,6 +249,9 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected void _createChildren(IOutlineNode parentNode, Import im) {
 		String uriString = importUriResolver.resolve(im);
 		
+		if (uriString==null)
+			return;
+		
 		URI uri = URI.createURI(uriString);
 		ResourceSet rs = new ResourceSetImpl();
 		RoomModel refModel = null;
