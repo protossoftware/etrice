@@ -13,7 +13,7 @@
 #include "etUnit/etUnit.h"
 #include "platform/etMemory.h"
 
-#include "PTimer.h"
+#include "room/basic/service/timing/PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
 etTimerControlBlock tcbs[ET_NB_OF_TCBS];

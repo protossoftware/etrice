@@ -11,7 +11,7 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
-#include "PTimer.h"
+#include "room/basic/service/timing/PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
 
@@ -48,18 +48,18 @@ typedef struct ATimingService_const {
 #define ATIMINGSERVICE_HISTORY_SIZE 2
 
 /* variable part of ActorClass (RAM) */
-struct ATimingService {
-	const ATimingService_const* const constData;
-	
-	/* data send ports */
+	struct ATimingService {
+		const ATimingService_const* const constData;
+		
+		/* data send ports */
 
-	/*--------------------- attributes ---------------------*/
-	
-	
-		/* state machine variables */
-		etInt16 state;
-		etInt16 history[ATIMINGSERVICE_HISTORY_SIZE];
-};
+		/*--------------------- attributes ---------------------*/
+		
+		
+			/* state machine variables */
+			etInt16 state;
+			etInt16 history[ATIMINGSERVICE_HISTORY_SIZE];
+	};
 
 void ATimingService_init(ATimingService* self);
 
