@@ -843,8 +843,13 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	public HashSet<DataClass> getReferencedDataClasses(ActorClass cls){
 		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
-		getAttributeDataClasses(dataClasses, cls.getAttributes());
-		getOperationDataClasses(dataClasses, cls.getOperations());
+		do {
+			getAttributeDataClasses(dataClasses, cls.getAttributes());
+			getOperationDataClasses(dataClasses, cls.getOperations());
+			cls = cls.getBase();
+		}
+		while (cls!=null);
+		
 		return dataClasses;
 	}
 
