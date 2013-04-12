@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 6--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 8--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse49.html" >next</a>] [<a 
 href="etrice-docch12.html" >prev</a>] [<a 
 href="etrice-docch12.html#tailetrice-docch12.html" >prev-tail</a>] [<a 
@@ -22,16 +22,16 @@ href="#tailetrice-docse48.html">tail</a>] [<a
 href="etrice-docch12.html#etrice-docse48.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">12.1   </span> <a 
  id="x62-7800012.1"></a>Actors</h3>
-<!--l. 8--><p class="noindent" >
+<!--l. 10--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.1.1   </span> <a 
  id="x62-7900012.1.1"></a>Description</h4>
                                                                                  
                                                                                  
-<!--l. 10--><p class="noindent" >The actor is the basic structural building block for building systems with ROOM. An actor can be refined
+<!--l. 12--><p class="noindent" >The actor is the basic structural building block for building systems with ROOM. An actor can be refined
 hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An Actor
 can also have a behavior usually defined by a finite state machine.
-</p><!--l. 12--><p class="noindent" >
+</p><!--l. 16--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.1.2   </span> <a 
  id="x62-8000012.1.2"></a>Motivation</h4>
@@ -43,14 +43,14 @@ can also have a behavior usually defined by a finite state machine.
      <li class="itemize">Actors can be freely deployed
      </li>
      <li class="itemize">Actors define potentially reusable blocks</li></ul>
-<!--l. 21--><p class="noindent" >
+<!--l. 25--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.1.3   </span> <a 
  id="x62-8100012.1.3"></a>Notation</h4>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 25--><p class="noindent" ><a 
+<!--l. 29--><p class="noindent" ><a 
  id="x62-810011"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
@@ -102,30 +102,30 @@ class="td11">           </td></tr></table></div>
 </div>
 <h4 class="subsectionHead"><span class="titlemark">12.1.4   </span> <a 
  id="x62-8200012.1.4"></a>Details</h4>
-<!--l. 55--><p class="noindent" >
+<!--l. 61--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x62-8300012.1.4"></a>Actor Classes, Actor References, Ports and Bindings</h5>
-<!--l. 57--><p class="noindent" >An <span 
+<!--l. 63--><p class="noindent" >An <span 
 class="ecbx-1000">ActorClass </span>defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that
 contain <span 
 class="ecbx-1000">ActorReferences </span>which have another ActorClass as type. The interface of an ActorClass is
 always defined by Ports. The ActorClass can also contain Attributes, Operations and a finite state
 machine.
-</p><!--l. 59--><p class="noindent" ><span 
-class="ecbx-1000">External Ports </span>define the external interface of an actor and are defined in the *Interface* section of the
-ActorClass.
-</p><!--l. 61--><p class="noindent" ><span 
-class="ecbx-1000">Internal Ports </span>define the internal interface of an actor and are defined in the *Structure* section of the
-ActorClass.
-</p><!--l. 63--><p class="noindent" ><span 
+</p><!--l. 68--><p class="noindent" ><span 
+class="ecbx-1000">External Ports </span>define the external interface of an actor and are defined in the &#x003C;em&#x003E;Interface&#x003C;/em&#x003E;
+section of the ActorClass.
+</p><!--l. 71--><p class="noindent" ><span 
+class="ecbx-1000">Internal Ports </span>define the internal interface of an actor and are defined in the &#x003C;em&#x003E;Structure&#x003C;/em&#x003E;
+section of the ActorClass.
+</p><!--l. 74--><p class="noindent" ><span 
 class="ecbx-1000">Bindings </span>connect Ports inside an ActorClass.
-</p><!--l. 65--><p class="noindent" >Example:
+</p><!--l. 76--><p class="noindent" >Example:
 </p>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 68--><p class="noindent" ><a 
+<!--l. 79--><p class="noindent" ><a 
  id="x62-830012"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
@@ -197,33 +197,33 @@ class="ecti-1000">port9  </span>can
 class="ecbx-1000">Bindings </span>can connect ports of the ActorClass and its contained ActorReferences.</li></ul>
 <h5 class="subsubsectionHead"><a 
  id="x62-8400012.1.4"></a>Attributes</h5>
-<!--l. 98--><p class="noindent" >Attributes are part of the Structure of an ActorClass. They can be of a PrimitiveType or a
+<!--l. 116--><p class="noindent" >Attributes are part of the Structure of an ActorClass. They can be of a PrimitiveType or a
 DataClass.
-</p><!--l. 100--><p class="noindent" >Example:
-</p><!--l. 102--><p class="noindent" ><img 
+</p><!--l. 118--><p class="noindent" >Example:
+</p><!--l. 120--><p class="noindent" ><img 
 src="images/040-ActorClassAttributes.png" alt="PIC"  
  />
-</p><!--l. 105--><p class="noindent" >
+</p><!--l. 123--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x62-8500012.1.4"></a>Operations</h5>
-<!--l. 107--><p class="noindent" >Operations are part of the Behavior of an ActorClass. Arguments and return values can be of a
+<!--l. 125--><p class="noindent" >Operations are part of the Behavior of an ActorClass. Arguments and return values can be of a
 PrimitiveType or a DataClass. DataClasses can be passed by value (implicit) or by reference (keyword
 <span 
 class="ecbx-1000">ref</span>).
-</p><!--l. 109--><p class="noindent" >Example:
-</p><!--l. 111--><p class="noindent" ><img 
+</p><!--l. 129--><p class="noindent" >Example:
+</p><!--l. 131--><p class="noindent" ><img 
 src="images/040-ActorClassOperations.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 114--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 134--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse49.html" >next</a>] [<a 
 href="etrice-docch12.html" >prev</a>] [<a 
 href="etrice-docch12.html#tailetrice-docch12.html" >prev-tail</a>] [<a 
 href="etrice-docse48.html" >front</a>] [<a 
 href="etrice-docch12.html#etrice-docse48.html" >up</a>] </p></div>
-<!--l. 114--><p class="noindent" ><a 
+<!--l. 134--><p class="noindent" ><a 
  id="tailetrice-docse48.html"></a>  </p> 
 </body></html> 

@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 54--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch10.html" >next</a>] [<a 
 href="etrice-docse32.html" >prev</a>] [<a 
 href="etrice-docse32.html#tailetrice-docse32.html" >prev-tail</a>] [<a 
@@ -22,24 +22,24 @@ href="#tailetrice-docse33.html">tail</a>] [<a
 href="etrice-docch9.html#etrice-docse33.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">9.2   </span> <a 
  id="x44-600009.2"></a>Building the C runtime system</h3>
-<!--l. 56--><p class="noindent" >The C runtime system contains some basic functionalities to run the generated models. The so called
+<!--l. 59--><p class="noindent" >The C runtime system contains some basic functionalities to run the generated models. The so called
 runtime is common for all C projects. The requirements for several projects may differ depending on the
 functionality of the model or the resources of the different platforms. Therefore the runtime is
 configurable in terms of message queue size, frequency and memory alignment. The configuration file
 <span 
 class="ecti-1000">etRuntimeConfig.h </span>is located in <span 
 class="ecti-1000">src/config</span>.
-</p><!--l. 58--><p class="noindent" >After changing the configuration, the runtime must be built.
-</p><!--l. 60--><p class="noindent" >Open the properties of the <span 
+</p><!--l. 65--><p class="noindent" >After changing the configuration, the runtime must be built.
+</p><!--l. 67--><p class="noindent" >Open the properties of the <span 
 class="ecti-1000">org.eclipse.runtime.c </span>project and select <span 
 class="ecti-1000">C/C++ Build-&#x003E;Settings-&#x003E;Tool</span>
 <span 
 class="ecti-1000">Settings </span>and select <span 
 class="ecti-1000">Includes</span>.
-</p><!--l. 62--><p class="noindent" ><img 
+</p><!--l. 70--><p class="noindent" ><img 
 src="images/032-SetupWorkspaceC08.png" alt="PIC"  
  />
-</p><!--l. 65--><p class="noindent" >Verify the include paths
+</p><!--l. 73--><p class="noindent" >Verify the include paths
 </p>
      <ul class="itemize1">
      <li class="itemize"><span 
@@ -50,21 +50,21 @@ class="ecti-1000">src/common</span>
      </li>
      <li class="itemize"><span 
 class="ecti-1000">src/platforms/generic</span></li></ul>
-<!--l. 73--><p class="noindent" >Within the Setting dialog select the tab <span 
+<!--l. 81--><p class="noindent" >Within the Setting dialog select the tab <span 
 class="ecti-1000">Build Artefact </span>and select <span 
 class="ecti-1000">Static Library</span>
-</p><!--l. 75--><p class="noindent" ><img 
+</p><!--l. 83--><p class="noindent" ><img 
 src="images/032-SetupWorkspaceC09.png" alt="PIC"  
  />
-</p><!--l. 78--><p class="noindent" >Build the runtime by clicking
-</p><!--l. 80--><p class="noindent" ><img 
+</p><!--l. 86--><p class="noindent" >Build the runtime by clicking
+</p><!--l. 88--><p class="noindent" ><img 
 src="images/032-SetupWorkspaceC10.png" alt="PIC"  
  />
-</p><!--l. 83--><p class="noindent" >The runtime library should be created.
-</p><!--l. 85--><p class="noindent" ><img 
+</p><!--l. 91--><p class="noindent" >The runtime library should be created.
+</p><!--l. 93--><p class="noindent" ><img 
 src="images/032-SetupWorkspaceC11.png" alt="PIC"  
  />
-</p><!--l. 88--><p class="noindent" >For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to
+</p><!--l. 96--><p class="noindent" >For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to
 build project specific runtime libraries. In this case a separate project for the runtime should be created.
 Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be
 duplicated. A specific library file must exist within the project. Such specific runtime libraries might be

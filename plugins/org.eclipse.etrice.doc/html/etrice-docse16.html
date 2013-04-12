@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 87--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 102--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse17.html" >next</a>] [<a 
 href="etrice-docse15.html" >prev</a>] [<a 
 href="etrice-docse15.html#tailetrice-docse15.html" >prev-tail</a>] [<a 
@@ -22,18 +22,18 @@ href="#tailetrice-docse16.html">tail</a>] [<a
 href="etrice-docch6.html#etrice-docse16.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">6.5   </span> <a 
  id="x24-380006.5"></a>Import the Timing Service</h3>
-<!--l. 89--><p class="noindent" >Switching on and off the LED is timing controlled. The timing service is provided from the model library
+<!--l. 104--><p class="noindent" >Switching on and off the LED is timing controlled. The timing service is provided from the model library
 and must be imported before it can be used from the model.
-</p><!--l. 91--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path has the
+</p><!--l. 107--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path has the
 appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib,
 can not be referenced. (right click to <span 
 class="ecti-1000">Blinky </span>and select properties. Select the <span 
 class="ecti-1000">Java Build Path</span>
 tab)
-</p><!--l. 94--><p class="noindent" ><img 
+</p><!--l. 112--><p class="noindent" ><img 
 src="images/020-Blinky16.png" alt="PIC"  
  />
-</p><!--l. 97--><p class="noindent" >After the build path is set up return to the model and navigate the cursor at the beginning of the model
+</p><!--l. 115--><p class="noindent" >After the build path is set up return to the model and navigate the cursor at the beginning of the model
 and import the timing service:
                                                                                  
                                                                                  
@@ -50,10 +50,10 @@ RoomModel&#x00A0;Blinky&#x00A0;{
 &#x00A0;<br />}
 &#x00A0;<br />...
 </div>
-<!--l. 111--><p class="nopar" >
-</p><!--l. 114--><p class="noindent" >Make sure that the path fits to your folder structure. The original tutorial code is different due to the
+<!--l. 130--><p class="nopar" >
+</p><!--l. 133--><p class="noindent" >Make sure that the path fits to your folder structure. The original tutorial code is different due to the
 folder structure.
-</p><!--l. 116--><p class="noindent" >Now it can be used within the model. Right click to <span 
+</p><!--l. 136--><p class="noindent" >Now it can be used within the model. Right click to <span 
 class="ecbx-1000">SubSystem_Blinky </span>within the outline view. Select
 <span 
 class="ecti-1000">Edit Structure</span>. The <span 
@@ -69,10 +69,10 @@ class="ecti-1000">application </span>to each
 service provision point (SPP) of the <span 
 class="ecti-1000">timingService</span>. The resulting structure should look like
 this:
-</p><!--l. 118--><p class="noindent" ><img 
+</p><!--l. 143--><p class="noindent" ><img 
 src="images/020-Blinky06.png" alt="PIC"  
  />
-</p><!--l. 121--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point (SAP).
+</p><!--l. 146--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point (SAP).
 Therefore the SAPs to access the timing service must be added in the .room file. Open the
 <span 
 class="ecti-1000">Blinky.room </span>file and navigate to the <span 
@@ -84,22 +84,22 @@ actor:
 <div class="verbatim" id="verbatim-5">
 SAP&#x00A0;timer:&#x00A0;room.basic.service.timing.PTimeout&#x00A0;
 </div>
-<!--l. 123--><p class="nopar" >
-</p><!--l. 125--><p class="noindent" >Do the same thing for <span 
+<!--l. 151--><p class="nopar" >
+</p><!--l. 153--><p class="noindent" >Do the same thing for <span 
 class="ecti-1000">BlinkyController</span>.
-</p><!--l. 127--><p class="noindent" >The resulting code should look like this:
-</p><!--l. 129--><p class="noindent" ><img 
+</p><!--l. 155--><p class="noindent" >The resulting code should look like this:
+</p><!--l. 157--><p class="noindent" ><img 
 src="images/020-Blinky07.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 133--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 161--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse17.html" >next</a>] [<a 
 href="etrice-docse15.html" >prev</a>] [<a 
 href="etrice-docse15.html#tailetrice-docse15.html" >prev-tail</a>] [<a 
 href="etrice-docse16.html" >front</a>] [<a 
 href="etrice-docch6.html#etrice-docse16.html" >up</a>] </p></div>
-<!--l. 133--><p class="noindent" ><a 
+<!--l. 161--><p class="noindent" ><a 
  id="tailetrice-docse16.html"></a> </p> 
 </body></html> 

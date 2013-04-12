@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 17--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
@@ -22,32 +22,32 @@ href="#tailetrice-docse7.html">tail</a>] [<a
 href="etrice-docch5.html#etrice-docse7.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
  id="x14-280005.2"></a>Create a new model from scratch</h3>
-<!--l. 19--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the
+<!--l. 20--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the
 eclipse file menu select <span 
 class="ecbx-1000">File-&#x003E;New-&#x003E;Project </span>and create a new eTrice project and name it
 <span 
 class="ecbx-1000">HelloWorld</span>.
-</p><!--l. 21--><p class="noindent" ><img 
+</p><!--l. 23--><p class="noindent" ><img 
 src="images/015-HelloWorld10.png" alt="PIC"  
  />
-</p><!--l. 24--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting
+</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting
 project should look like this:
-</p><!--l. 26--><p class="noindent" ><img 
+</p><!--l. 29--><p class="noindent" ><img 
 src="images/015-HelloWorld11.png" alt="PIC"  
  />
-</p><!--l. 29--><p class="noindent" >Within the model directory the model file <span 
+</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
 class="ecti-1000">HelloWorld.room </span>was created. Open the <span 
 class="ecti-1000">HelloWorld.room </span>file
 and delete the contents of the file. Open the content assist with Ctrl+Space and select <span 
 class="ecti-1000">model</span>
 <span 
 class="ecti-1000">skeleton</span>.
-</p><!--l. 31--><p class="noindent" ><img 
+</p><!--l. 36--><p class="noindent" ><img 
 src="images/015-HelloWorld12.png" alt="PIC"  
  />
-</p><!--l. 34--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to
+</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to
 name.
-</p><!--l. 36--><p class="noindent" >The resulting model code should look like this:
+</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
                                                                                  
                                                                                  
 </p>
@@ -66,8 +66,8 @@ RoomModel&#x00A0;HelloWorld&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
 &#x00A0;<br />}
 </div>
-<!--l. 52--><p class="nopar" >
-</p><!--l. 54--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
+<!--l. 57--><p class="nopar" >
+</p><!--l. 59--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
 elements will be used. But as prerequisite for further versions the following elements can be defined:
 </p>
      <ul class="itemize1">
@@ -79,7 +79,7 @@ class="ecti-1000">SubSystemClass </span>(mandatory)
      </li>
      <li class="itemize">at least one <span 
 class="ecti-1000">ActorClass </span>(mandatory)</li></ul>
-<!--l. 61--><p class="noindent" >The <span 
+<!--l. 67--><p class="noindent" >The <span 
 class="ecti-1000">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
 class="ecti-1000">SubSystemRef</span>.
 The <span 
@@ -88,20 +88,20 @@ class="ecti-1000">ActorRef</span>. The <span
 class="ecti-1000">ActorClass </span>is
 the building block of which an application will be built of. It is in general a good idea to define a top level
 actor that can be used as reference within the subsystem.
-</p><!--l. 63--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
+</p><!--l. 72--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
 tree.
-</p><!--l. 65--><p class="noindent" ><img 
+</p><!--l. 74--><p class="noindent" ><img 
 src="images/015-HelloWorld02.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 69--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 78--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="etrice-docse7.html" >front</a>] [<a 
 href="etrice-docch5.html#etrice-docse7.html" >up</a>] </p></div>
-<!--l. 69--><p class="noindent" ><a 
+<!--l. 78--><p class="noindent" ><a 
  id="tailetrice-docse7.html"></a> </p> 
 </body></html> 

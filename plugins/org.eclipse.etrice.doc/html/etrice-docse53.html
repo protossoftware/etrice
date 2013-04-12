@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 365--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 440--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch13.html" >next</a>] [<a 
 href="etrice-docse52.html" >prev</a>] [<a 
 href="etrice-docse52.html#tailetrice-docse52.html" >prev-tail</a>] [<a 
@@ -22,15 +22,15 @@ href="#tailetrice-docse53.html">tail</a>] [<a
 href="etrice-docch12.html#etrice-docse53.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">12.6   </span> <a 
  id="x67-10200012.6"></a>Finite State Machines</h3>
-<!--l. 367--><p class="noindent" >
+<!--l. 442--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.6.1   </span> <a 
  id="x67-10300012.6.1"></a>Description</h4>
-<!--l. 369--><p class="noindent" >Definition from <a 
+<!--l. 444--><p class="noindent" >Definition from <a 
 href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
-</p><!--l. 371--><p class="noindent" >
+</p><!--l. 446--><p class="noindent" >
      </p><div class="quote">
-     <!--l. 372--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a
+     <!--l. 447--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a
      state machine, is a mathematical model used to design computer programs and digital
      logic circuits. It is conceived as an abstract machine that can be in one of a finite
      number of states. The machine is in only one state at a time; the state it is in at any
@@ -38,32 +38,32 @@ href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
      initiated by a triggering event or condition, this is called a transition. A particular FSM
      is defined by a list of the possible states it can transition to from each state, and the
      triggering condition for each transition.
-     </p><!--l. 374--><p class="noindent" >In ROOM each actor class can implement its behavior using a state machine. Events
+     </p><!--l. 455--><p class="noindent" >In ROOM each actor class can implement its behavior using a state machine. Events
      occurring at the end ports of an actor will be forwarded to and processed by the state
      machine. Events possibly trigger state transitions.</p></div>
-<!--l. 377--><p class="noindent" >
+<!--l. 460--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.6.2   </span> <a 
  id="x67-10400012.6.2"></a>Motivation</h4>
-<!--l. 379--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically
+<!--l. 462--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically
 during processing new events are produced which are sent to peer actors.
-</p><!--l. 381--><p class="noindent" >We distinguish flat and hierarchical state machines.
-</p><!--l. 383--><p class="noindent" >
+</p><!--l. 465--><p class="noindent" >We distinguish flat and hierarchical state machines.
+</p><!--l. 467--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.6.3   </span> <a 
  id="x67-10500012.6.3"></a>Notation</h4>
                                                                                  
                                                                                  
-<!--l. 385--><p class="noindent" >
+<!--l. 469--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x67-10600012.6.3"></a>Flat Finite State Machine</h5>
-<!--l. 387--><p class="noindent" >The simpler flat finite state machines are composed of the following elements:
+<!--l. 471--><p class="noindent" >The simpler flat finite state machines are composed of the following elements:
 </p>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 390--><p class="noindent" ><a 
+<!--l. 474--><p class="noindent" ><a 
  id="x67-1060016"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
@@ -153,13 +153,13 @@ class="td11">                   </td></tr></table></div>
 </div>
 <h5 class="subsubsectionHead"><a 
  id="x67-10700012.6.3"></a>Hierarchical Finite State Machine</h5>
-<!--l. 443--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few
+<!--l. 532--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few
 modeling elements are added to the set listed above:
 </p>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 447--><p class="noindent" ><a 
+<!--l. 536--><p class="noindent" ><a 
  id="x67-1070017"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
@@ -175,7 +175,7 @@ id="TBL-13-2" /></colgroup><colgroup id="TBL-13-3g"><col
 id="TBL-13-3" /></colgroup><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-13-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-1-1"  
-class="td11"> <!--l. 450--><p class="noindent" ><span 
+class="td11"> <!--l. 539--><p class="noindent" ><span 
 class="ecbx-1000">Description</span>         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-2"  
 class="td11">                                <span 
 class="ecbx-1000">Graphical Notation                                             </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-3"  
@@ -184,7 +184,7 @@ class="ecbx-1000">Textual Notation                                              
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-13-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-2-1"  
-class="td11"> <!--l. 451--><p class="noindent" >State with sub state
+class="td11"> <!--l. 540--><p class="noindent" >State with sub state
   machine                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-2"  
 class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-14" class="tabular" 
 cellspacing="0" cellpadding="0"  
@@ -209,7 +209,7 @@ src="images/040-StateWithSubFSMTextual.jpg" alt="PIC"
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-13-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-3-1"  
-class="td11"> <!--l. 452--><p class="noindent" >Entry Point             </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
+class="td11"> <!--l. 543--><p class="noindent" >Entry Point             </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
 class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-16" class="tabular" 
 cellspacing="0" cellpadding="0"  
 ><colgroup id="TBL-16-1g"><col 
@@ -233,7 +233,7 @@ src="images/040-EntryPointTextual.jpg" alt="PIC"
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-13-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-4-1"  
-class="td11"> <!--l. 453--><p class="noindent" >Exit Point               </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
+class="td11"> <!--l. 546--><p class="noindent" >Exit Point               </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
 class="td11">                                                                                    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-3"  
 class="td11">                                        <img 
 src="images/040-ExitPointTextual.jpg" alt="PIC"  
@@ -249,27 +249,27 @@ class="td11">                   </td></tr></table>
 </div>
 <h4 class="subsectionHead"><span class="titlemark">12.6.4   </span> <a 
  id="x67-10800012.6.4"></a>Examples</h4>
-<!--l. 492--><p class="noindent" >
+<!--l. 585--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x67-10900012.6.4"></a>Example of a flat finite state machine:</h5>
-<!--l. 495--><p class="noindent" ><img 
+<!--l. 588--><p class="noindent" ><img 
 src="images/040-FlatFSM.jpg" alt="PIC"  
  />
-</p><!--l. 497--><p class="noindent" >
+</p><!--l. 590--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x67-11000012.6.4"></a>Example of a hierarchical finite state machine:</h5>
-<!--l. 499--><p class="noindent" >Top level
-</p><!--l. 502--><p class="noindent" ><img 
+<!--l. 592--><p class="noindent" >Top level
+</p><!--l. 595--><p class="noindent" ><img 
 src="images/040-HierarchicalFSMTop.jpg" alt="PIC"  
  />
-</p><!--l. 504--><p class="noindent" >Sub state machine of Initializing
-</p><!--l. 507--><p class="noindent" ><img 
+</p><!--l. 597--><p class="noindent" >Sub state machine of Initializing
+</p><!--l. 600--><p class="noindent" ><img 
 src="images/040-HierarchicalFSMInitializing.jpg" alt="PIC"  
  />
-</p><!--l. 509--><p class="noindent" >Sub state machine of Running
-</p><!--l. 512--><p class="noindent" ><img 
+</p><!--l. 602--><p class="noindent" >Sub state machine of Running
+</p><!--l. 605--><p class="noindent" ><img 
 src="images/040-HierarchicalFSMRunning.jpg" alt="PIC"  
  />
                                                                                  

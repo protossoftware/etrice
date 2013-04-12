@@ -128,7 +128,7 @@ The protocol provides a formal interface description. The port is an interaction
 point where the actor interacts with its outside world. Each port has exactly one protocol
 attached. The sum of all ports builds up the complete interface of an actor.
 Each port can receive messages, with or without data, which are defined in the attached protocol.
-Each message will be handled by the actors behavior (state machine) or will be delegated to the actors internal structure.
+Each message will be handled by the actor's behavior (state machine) or will be delegated to the actor's internal structure.
 
 \begin{table}
 \caption{Actor and Protocol Example}
@@ -153,7 +153,7 @@ Each message will be handled by the actors behavior (state machine) or will be d
 The actor provides access protection for its own attributes (including complex types (classical objects)), 
 including concurrency protection. An actor has neither public attributes nor public operations. The only 
 interaction with the outside world takes place via interface ports. This ensures a high degree of 
-reusability on actor level and provides an effective and safe programming model to the developer. 
+re-usability on actor level and provides an effective and safe programming model to the developer. 
 
 Receiving a message via a port will trigger the internal state machine. A transition will be executed 
 depending on the message and the current state. Within this transition, detail level code will be executed 

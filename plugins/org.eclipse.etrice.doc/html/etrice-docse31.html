@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-04-05 16:53:00" /> 
+<meta name="date" content="2013-04-12 12:54:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 76--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch9.html" >next</a>] [<a 
 href="etrice-docse30.html" >prev</a>] [<a 
 href="etrice-docse30.html#tailetrice-docse30.html" >prev-tail</a>] [<a 
@@ -22,7 +22,7 @@ href="#tailetrice-docse31.html">tail</a>] [<a
 href="etrice-docch8.html#etrice-docse31.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">8.3   </span> <a 
  id="x41-570008.3"></a>Why does it work and why is it safe?</h3>
-<!--l. 78--><p class="noindent" >The tutorial shows that it is generally possible to use every port from outside the model as long as the
+<!--l. 99--><p class="noindent" >The tutorial shows that it is generally possible to use every port from outside the model as long as the
 port knows its peer. This is guaranteed by describing protocol and the complete structure (especially the
 bindings) within the model. The only remaining question is: Why is it safe and does not violate the <span 
 class="ecbx-1000">run</span>
@@ -43,8 +43,8 @@ queue.
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
 </div>
-<!--l. 89--><p class="nopar" >
-</p><!--l. 91--><p class="noindent" >This method is synchronized. That means, regardless who sends the message, the queue is
+<!--l. 114--><p class="nopar" >
+</p><!--l. 116--><p class="noindent" >This method is synchronized. That means, regardless who sends the message, the queue is
 secured. If we later on (e.g. for performance reasons in C/C++) distinguish between internal
 and external senders (same thread or not), care must be taken to use the external (secure)
 queue.
