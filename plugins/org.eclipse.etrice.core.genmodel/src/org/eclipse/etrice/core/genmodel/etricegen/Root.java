@@ -12,17 +12,14 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
-import java.util.HashSet;
-
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -246,13 +243,36 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param cls an actor class
-	 * @return all protocol classes referenced directly or indirectly by this actor class
+	 * @param cls a {@link RoomClass}, actually an {@link ActorClass}
+	 * @return all protocol classes that are directly or indirectly referenced by {@code cls} and also
+	 *   descending into base classes
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
-	EList<ProtocolClass> getReferencedProtocolClasses(ActorClass cls);
+	EList<ProtocolClass> getReferencedProtocolClasses(RoomClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @param cls a {@link RoomClass}, actually a {@link DataClass}, a {@link ProtocoClass} or an {@link ActorClass}
+	 * @return all data classes that are directly or indirectly referenced by {@code cls} and also
+	 *   descending into base classes
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<DataClass> getReferencedDataClasses(RoomClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @param cls a {@link RoomClass}, actually a {@link SubSystemClass} or an {@link ActorClass}
+	 * @return all actor classes that are directly or indirectly referenced by {@code cls} but not
+	 *   descending into base classes
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<ActorClass> getReferencedActorClasses(RoomClass cls);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,36 +283,6 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param cls a data class
-	 * @return all data classes referenced directly or indirectly by this data class
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	HashSet<DataClass> getReferencedDataClasses(DataClass cls);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param cls an actor class
-	 * @return all data classes referenced directly or indirectly by this actor class
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	HashSet<DataClass> getReferencedDataClasses(ActorClass cls);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param cls a protocol class
-	 * @return all data classes referenced directly or indirectly by this protocol class
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	HashSet<DataClass> getReferencedDataClasses(ProtocolClass pc);
 
 	
 } // Root

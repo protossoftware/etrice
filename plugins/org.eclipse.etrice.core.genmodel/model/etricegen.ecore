@@ -6,7 +6,13 @@
       <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
     </eOperations>
     <eOperations name="getReferencedProtocolClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass">
-      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    </eOperations>
+    <eOperations name="getReferencedDataClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    </eOperations>
+    <eOperations name="getReferencedActorClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
     </eOperations>
     <eOperations name="getExpandedActorClass" eType="#//ExpandedActorClass">
       <eParameters name="ai" eType="#//ActorInstance"/>

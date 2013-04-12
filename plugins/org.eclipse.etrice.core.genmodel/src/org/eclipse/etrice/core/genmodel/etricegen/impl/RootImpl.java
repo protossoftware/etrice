@@ -386,12 +386,30 @@ public class RootImpl extends EObjectImpl implements Root {
 		return result;
 	}
 
-	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
-		actorClasses.add(ac);
-		
-		for (ActorRef ar : ac.getActorRefs()) {
-			recursivelyAddReferencedClasses(ar.getType(), actorClasses);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<ProtocolClass> getReferencedProtocolClasses(RoomClass rc) {
+		BasicEList<ProtocolClass> result = new BasicEList<ProtocolClass>();
+		if (rc instanceof ActorClass) {
+			ActorClass cls = (ActorClass) rc;
+			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
+			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
+			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
+			HashSet<RoomModel> models = new HashSet<RoomModel>();
+			
+			actorClasses.add(cls);
+			
+			getReferencedClassesAndModels(dataClasses, protocolClasses,
+					actorClasses, models);
+			
+			result.addAll(protocolClasses);
+			Comparator<RoomClass> comp = new RoomClassComparator();
+			Collections.sort(result, comp);
 		}
+		return result;
 	}
 
 	/**
@@ -399,25 +417,66 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<ProtocolClass> getReferencedProtocolClasses(ActorClass cls) {
+	public EList<DataClass> getReferencedDataClasses(RoomClass rc) {
+		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
+		if (rc instanceof DataClass) {
+			DataClass cls = (DataClass) rc;
+			if (cls.getBase()!=null)
+				dataClasses.add(cls.getBase());
+			getAttributeDataClasses(dataClasses, cls.getAttributes());
+			getOperationDataClasses(dataClasses, cls.getOperations());
+		}
+		else if (rc instanceof ActorClass) {
+			ActorClass cls = (ActorClass) rc;
+			do {
+				getAttributeDataClasses(dataClasses, cls.getAttributes());
+				getOperationDataClasses(dataClasses, cls.getOperations());
+				cls = cls.getBase();
+			}
+			while (cls!=null);
+		}
+		else if (rc instanceof ProtocolClass) {
+			ProtocolClass pc = (ProtocolClass) rc;
+			getMessageDataClasses(dataClasses, pc.getIncomingMessages());
+			getMessageDataClasses(dataClasses, pc.getOutgoingMessages());
+			if (pc.getRegular()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
+			}
+			if (pc.getConjugate()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
+			}
+		}
+		return new BasicEList<DataClass>(dataClasses);
+	}
 
-		if (cls instanceof ExpandedActorClass)
-			cls = ((ExpandedActorClass)cls).getActorClass();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<ActorClass> getReferencedActorClasses(RoomClass rc) {
+		HashSet<ActorClass> result = new HashSet<ActorClass>();
+		if (rc instanceof ActorClass) {
+			ActorClass cls = (ActorClass) rc;
+			recursivelyAddReferencedClasses(cls, result);
+		}
+		else if (rc instanceof SubSystemClass) {
+			SubSystemClass cls = (SubSystemClass) rc;
+			for (ActorRef ar : cls.getActorRefs()) {
+				recursivelyAddReferencedClasses(ar.getType(), result);
+			}
+		}
+		return new BasicEList<ActorClass>(result);
+	}
 
-		HashSet<DataClass> dataClasses = new HashSet<DataClass>();
-		HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-		HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
-		HashSet<RoomModel> models = new HashSet<RoomModel>();
-
-		actorClasses.add(cls);
-
-		getReferencedClassesAndModels(dataClasses, protocolClasses,
-				actorClasses, models);
+	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
+		actorClasses.add(ac);
 		
-		BasicEList<ProtocolClass> result = new BasicEList<ProtocolClass>(protocolClasses);
-		Comparator<RoomClass> comp = new RoomClassComparator();
-		Collections.sort(result, comp);
-		return result;
+		for (ActorRef ar : ac.getActorRefs()) {
+			recursivelyAddReferencedClasses(ar.getType(), actorClasses);
+		}
 	}
 
 	/**
@@ -829,43 +888,6 @@ public class RootImpl extends EObjectImpl implements Root {
 			if (dc!=null)
 				dataClasses.add(dc);
 		}
-	}
-
-	// TODO: is this the correct place?
-	public HashSet<DataClass> getReferencedDataClasses(DataClass cls){
-		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
-		if (cls.getBase()!=null)
-			dataClasses.add(cls.getBase());
-		getAttributeDataClasses(dataClasses, cls.getAttributes());
-		getOperationDataClasses(dataClasses, cls.getOperations());
-		return dataClasses;
-	}
-
-	public HashSet<DataClass> getReferencedDataClasses(ActorClass cls){
-		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
-		do {
-			getAttributeDataClasses(dataClasses, cls.getAttributes());
-			getOperationDataClasses(dataClasses, cls.getOperations());
-			cls = cls.getBase();
-		}
-		while (cls!=null);
-		
-		return dataClasses;
-	}
-
-	public HashSet<DataClass> getReferencedDataClasses(ProtocolClass pc){
-		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
-		getMessageDataClasses(dataClasses, pc.getIncomingMessages());
-		getMessageDataClasses(dataClasses, pc.getOutgoingMessages());
-		if (pc.getRegular()!=null) {
-			getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
-			getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
-		}
-		if (pc.getConjugate()!=null) {
-			getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
-			getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
-		}
-		return dataClasses;
 	}
 	
 	private void getMessageDataClasses(HashSet<DataClass> dataClasses, EList<Message> messages) {
