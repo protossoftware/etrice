@@ -179,12 +179,7 @@
 		<!-- compile and link HandlerTest -->
 		<mkdir dir="bin/HandlerTest"/>
 		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt">
-			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../../src-gen/HandlerTest"/>
-			<arg value="-I../../src-gen/SendingDataTestC"/>
-			<arg value="-I../../src-gen/StaticConfigTest"/>
-			<arg value="-I../../src-gen/DataDrivenTest"/>
-			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -217,12 +212,7 @@
 		<!-- compile and link ChoicepointTest -->
 		<mkdir dir="bin/ChoicePointTest"/>
 		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../../src-gen/HandlerTest"/>
-			<arg value="-I../../src-gen/SendingDataTestC"/>
-			<arg value="-I../../src-gen/StaticConfigTest"/>
-			<arg value="-I../../src-gen/DataDrivenTest"/>
-			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -255,12 +245,7 @@
 		<!-- compile and link SendingDataTestC -->
 		<mkdir dir="bin/SendingDataTestC"/>
 		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../../src-gen/HandlerTest"/>
-			<arg value="-I../../src-gen/SendingDataTestC"/>
-			<arg value="-I../../src-gen/StaticConfigTest"/>
-			<arg value="-I../../src-gen/DataDrivenTest"/>
-			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -299,12 +284,7 @@
 		<!-- compile and link StaticConfigTest-->
 		<mkdir dir="bin/StaticConfigTest"/>
 		<exec dir="bin/StaticConfigTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../../src-gen/HandlerTest"/>
-			<arg value="-I../../src-gen/SendingDataTestC"/>
-			<arg value="-I../../src-gen/StaticConfigTest"/>
-			<arg value="-I../../src-gen/DataDrivenTest"/>
-			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
@@ -351,12 +331,7 @@
 		<!-- compile and link DataDrivenTest-->
 		<mkdir dir="bin/DataDrivenTest"/>
 		<exec dir="bin/DataDrivenTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
-			<arg value="-I../../src-gen/ChoicePointTest"/>
-			<arg value="-I../../src-gen/HandlerTest"/>
-			<arg value="-I../../src-gen/SendingDataTestC"/>
-			<arg value="-I../../src-gen/StaticConfigTest"/>
-			<arg value="-I../../src-gen/DataDrivenTest"/>
-			<arg value="-I../../src-gen/room/basic/service/timing"/>
+			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
