@@ -14,7 +14,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -175,7 +174,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
+      EList<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
       for(final DataClass dataClass : _referencedDataClasses) {
         _builder.append("#include \"");
         String _path = this.roomExt.getPath(dataClass);

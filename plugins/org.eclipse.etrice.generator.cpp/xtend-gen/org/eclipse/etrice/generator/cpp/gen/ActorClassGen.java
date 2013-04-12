@@ -14,7 +14,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -239,7 +238,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(ac);
+        EList<DataClass> _referencedDataClasses = root.getReferencedDataClasses(ac);
         for(final DataClass dc : _referencedDataClasses) {
           _builder.append("\t");
           _builder.append("#include \"");

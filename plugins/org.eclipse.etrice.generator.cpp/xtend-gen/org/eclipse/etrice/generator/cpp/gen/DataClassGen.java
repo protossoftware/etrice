@@ -13,7 +13,6 @@ package org.eclipse.etrice.generator.cpp.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -149,7 +148,7 @@ public class DataClassGen {
         }
       }
       {
-        HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
+        EList<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
         for(final DataClass classes : _referencedDataClasses) {
           _builder.append("#include \"");
           String _path_2 = this.roomExt.getPath(classes);
