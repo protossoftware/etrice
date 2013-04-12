@@ -133,27 +133,47 @@ public class CExtensions implements ILanguageExtension {
     return _builder;
   }
   
-  public CharSequence generateIncludeGuardBegin(final String filename) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("#ifndef ");
-    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
-    _builder.append(_includeGuardString, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("#define ");
-    CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
-    _builder.append(_includeGuardString_1, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+  public CharSequence generateIncludeGuardBegin(final RoomClass rc) {
+    CharSequence _xblockexpression = null;
+    {
+      EObject _eContainer = rc.eContainer();
+      String _name = ((RoomModel) _eContainer).getName();
+      String _replaceAll = _name.replaceAll("\\.", "_");
+      String _plus = (_replaceAll + "_");
+      String _name_1 = rc.getName();
+      final String filename = (_plus + _name_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("#ifndef ");
+      CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+      _builder.append(_includeGuardString, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("#define ");
+      CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
+      _builder.append(_includeGuardString_1, "");
+      _builder.newLineIfNotEmpty();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
-  public CharSequence generateIncludeGuardEnd(final String filename) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("#endif /* ");
-    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
-    _builder.append(_includeGuardString, "");
-    _builder.append(" */");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+  public CharSequence generateIncludeGuardEnd(final RoomClass rc) {
+    CharSequence _xblockexpression = null;
+    {
+      EObject _eContainer = rc.eContainer();
+      String _name = ((RoomModel) _eContainer).getName();
+      String _replaceAll = _name.replaceAll("\\.", "_");
+      String _plus = (_replaceAll + "_");
+      String _name_1 = rc.getName();
+      final String filename = (_plus + _name_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("#endif /* ");
+      CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+      _builder.append(_includeGuardString, "");
+      _builder.append(" */");
+      _builder.newLineIfNotEmpty();
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
   }
   
   public boolean usesInheritance() {

@@ -81,7 +81,7 @@ class SubSystemClassGen {
 		 * 
 		 */
 		
-		«generateIncludeGuardBegin(ssc.name)»
+		«generateIncludeGuardBegin(ssc)»
 
 		«helpers.userCode(ssc.userCode1)»
 		
@@ -102,7 +102,7 @@ class SubSystemClassGen {
 		
 		«helpers.userCode(ssc.userCode2)»
 		
-		«generateIncludeGuardEnd(ssc.name)»
+		«generateIncludeGuardEnd(ssc)»
 		
 		
 	'''
@@ -260,12 +260,12 @@ class SubSystemClassGen {
 
 
 		/* include all used ActorClasses */
-		«FOR actorClass : root.getUsedActorClasses()»
+		«FOR actorClass : root.getReferencedActorClasses(ssc)»
 			#include «actorClass.includePath»
 		«ENDFOR»
 
 		/* include all used ProtcolClasses */
-		«FOR protocolClass : root.getUsedProtocolClasses()»
+		«FOR protocolClass : root.getReferencedProtocolClasses(ssc)»
 			#include «protocolClass.includePath»
 		«ENDFOR»
 		

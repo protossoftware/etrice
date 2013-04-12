@@ -63,7 +63,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 * 
 		 */
 
-		«generateIncludeGuardBegin(pc.name)»
+		«generateIncludeGuardBegin(pc)»
 		
 		#include "etDatatypes.h"
 		#include "modelbase/etPort.h"
@@ -98,7 +98,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		«pc.userCode(2)»
 		
-		«generateIncludeGuardEnd(pc.name)»
+		«generateIncludeGuardEnd(pc)»
 		
 	'''
 	}

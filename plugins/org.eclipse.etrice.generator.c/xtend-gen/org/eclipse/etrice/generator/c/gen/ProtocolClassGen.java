@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.c.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -113,8 +112,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("*/");
     _builder.newLine();
     _builder.newLine();
-    String _name_1 = pc.getName();
-    CharSequence _generateIncludeGuardBegin = this._cExtensions.generateIncludeGuardBegin(_name_1);
+    CharSequence _generateIncludeGuardBegin = this._cExtensions.generateIncludeGuardBegin(pc);
     _builder.append(_generateIncludeGuardBegin, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -128,7 +126,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
+      EList<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
       for(final DataClass dataClass : _referencedDataClasses) {
         _builder.append("#include ");
         String _includePath = this._cExtensions.getIncludePath(dataClass);
@@ -182,8 +180,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("/* get message string for message id */");
     _builder.newLine();
     _builder.append("const char* ");
-    String _name_2 = pc.getName();
-    _builder.append(_name_2, "");
+    String _name_1 = pc.getName();
+    _builder.append(_name_1, "");
     _builder.append("_getMessageString(int msg_id);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -191,8 +189,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_3 = pc.getName();
-    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_3);
+    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(pc);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

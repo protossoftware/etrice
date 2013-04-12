@@ -149,8 +149,7 @@ public class SubSystemClassGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      String _name_1 = ssc.getName();
-      CharSequence _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(_name_1);
+      CharSequence _generateIncludeGuardBegin = this.stdExt.generateIncludeGuardBegin(ssc);
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -170,30 +169,30 @@ public class SubSystemClassGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("void ");
-      String _name_2 = ssc.getName();
-      _builder.append(_name_2, "");
+      String _name_1 = ssc.getName();
+      _builder.append(_name_1, "");
       _builder.append("_init(void);\t\t/* lifecycle init  \t */");
       _builder.newLineIfNotEmpty();
       _builder.append("void ");
+      String _name_2 = ssc.getName();
+      _builder.append(_name_2, "");
+      _builder.append("_start(void);\t/* lifecycle start \t */");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("void ");
       String _name_3 = ssc.getName();
       _builder.append(_name_3, "");
-      _builder.append("_start(void);\t/* lifecycle start \t */");
+      _builder.append("_run(void);\t\t/* lifecycle run \t */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("void ");
       String _name_4 = ssc.getName();
       _builder.append(_name_4, "");
-      _builder.append("_run(void);\t\t/* lifecycle run \t */");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("void ");
-      String _name_5 = ssc.getName();
-      _builder.append(_name_5, "");
       _builder.append("_stop(void); \t/* lifecycle stop\t */");
       _builder.newLineIfNotEmpty();
       _builder.append("void ");
-      String _name_6 = ssc.getName();
-      _builder.append(_name_6, "");
+      String _name_5 = ssc.getName();
+      _builder.append(_name_5, "");
       _builder.append("_destroy(void); \t/* lifecycle destroy */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -205,8 +204,7 @@ public class SubSystemClassGen {
       _builder.append(_userCode_1, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      String _name_7 = ssc.getName();
-      CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(_name_7);
+      CharSequence _generateIncludeGuardEnd = this.stdExt.generateIncludeGuardEnd(ssc);
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -709,8 +707,8 @@ public class SubSystemClassGen {
       _builder.append("/* include all used ActorClasses */");
       _builder.newLine();
       {
-        EList<ActorClass> _usedActorClasses = root.getUsedActorClasses();
-        for(final ActorClass actorClass : _usedActorClasses) {
+        EList<ActorClass> _referencedActorClasses = root.getReferencedActorClasses(ssc);
+        for(final ActorClass actorClass : _referencedActorClasses) {
           _builder.append("#include ");
           String _includePath = this.stdExt.getIncludePath(actorClass);
           _builder.append(_includePath, "");
@@ -721,8 +719,8 @@ public class SubSystemClassGen {
       _builder.append("/* include all used ProtcolClasses */");
       _builder.newLine();
       {
-        EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-        for(final ProtocolClass protocolClass : _usedProtocolClasses) {
+        EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ssc);
+        for(final ProtocolClass protocolClass : _referencedProtocolClasses) {
           _builder.append("#include ");
           String _includePath_1 = this.stdExt.getIncludePath(protocolClass);
           _builder.append(_includePath_1, "");

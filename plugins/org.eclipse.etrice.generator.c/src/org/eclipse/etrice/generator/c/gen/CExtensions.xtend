@@ -97,13 +97,17 @@ class CExtensions implements ILanguageExtension {
 		'''_«filename.toUpperCase»_H_'''
 	}
 
-	def generateIncludeGuardBegin(String filename){'''
+	def generateIncludeGuardBegin(RoomClass rc) {
+		val filename = (rc.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+rc.name
+	'''
 		#ifndef «filename.getIncludeGuardString»
 		#define «filename.getIncludeGuardString»
 		'''
 	}
 
-	def generateIncludeGuardEnd(String filename){'''
+	def generateIncludeGuardEnd(RoomClass rc) {
+		val filename = (rc.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+rc.name
+	'''
 		#endif /* «filename.getIncludeGuardString» */
 		'''
 	}

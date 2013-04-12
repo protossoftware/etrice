@@ -80,7 +80,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		 * 
 		 */
 
-		«generateIncludeGuardBegin(ac.name)»
+		«generateIncludeGuardBegin(ac)»
 		
 		#include "etDatatypes.h"
 		#include "messaging/etMessage.h"
@@ -182,7 +182,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		«ac.userCode(2)»
 		
-		«generateIncludeGuardEnd(ac.name)»
+		«generateIncludeGuardEnd(ac)»
 		
 	'''
 	}

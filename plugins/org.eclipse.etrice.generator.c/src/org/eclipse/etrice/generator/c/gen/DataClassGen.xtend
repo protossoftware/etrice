@@ -57,7 +57,7 @@ class DataClassGen {
 		 * 
 		 */
 
-		«generateIncludeGuardBegin(dc.name)»
+		«generateIncludeGuardBegin(dc)»
 		
 		#include "etDatatypes.h"
 
@@ -87,7 +87,7 @@ class DataClassGen {
 		
 		«dc.userCode(2)»
 		
-		«generateIncludeGuardEnd(dc.name)»
+		«generateIncludeGuardEnd(dc)»
 		
 		'''
 	}
