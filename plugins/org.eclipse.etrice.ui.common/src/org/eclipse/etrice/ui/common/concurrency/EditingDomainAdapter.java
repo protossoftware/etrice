@@ -228,7 +228,7 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 			Shell shell = Display.getDefault().getActiveShell();
 			isYesResult = MessageDialog.open(MessageDialog.QUESTION, shell, "Concurrent Modification",
 					"Other editors have a modified version of models you are going to change.\n"
-							+ "If apply your changes you are loosing the possibility to save the others.\n"
+							+ "If you apply your changes you are loosing the possibility to save the others.\n"
 							+ "Apply changes anyway?", SWT.NONE);
 		}
 	}
