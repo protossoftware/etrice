@@ -71,7 +71,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«pc.userCode(1)»
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
-			#include "«dataClass.name».h"
+			#include «dataClass.includePath»
 		«ENDFOR»
 		
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»

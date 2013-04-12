@@ -711,10 +711,9 @@ public class SubSystemClassGen {
       {
         EList<ActorClass> _usedActorClasses = root.getUsedActorClasses();
         for(final ActorClass actorClass : _usedActorClasses) {
-          _builder.append("#include \"");
-          String _name_1 = actorClass.getName();
-          _builder.append(_name_1, "");
-          _builder.append(".h\"");
+          _builder.append("#include ");
+          String _includePath = this.stdExt.getIncludePath(actorClass);
+          _builder.append(_includePath, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -724,10 +723,9 @@ public class SubSystemClassGen {
       {
         EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
         for(final ProtocolClass protocolClass : _usedProtocolClasses) {
-          _builder.append("#include \"");
-          String _name_2 = protocolClass.getName();
-          _builder.append(_name_2, "");
-          _builder.append(".h\"");
+          _builder.append("#include ");
+          String _includePath_1 = this.stdExt.getIncludePath(protocolClass);
+          _builder.append(_includePath_1, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -743,8 +741,8 @@ public class SubSystemClassGen {
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("static ");
           ActorClass _actorClass = ai.getActorClass();
-          String _name_3 = _actorClass.getName();
-          _builder.append(_name_3, "");
+          String _name_1 = _actorClass.getName();
+          _builder.append(_name_1, "");
           _builder.append(" ");
           String _path = ai.getPath();
           String _pathName = this.roomExt.getPathName(_path);

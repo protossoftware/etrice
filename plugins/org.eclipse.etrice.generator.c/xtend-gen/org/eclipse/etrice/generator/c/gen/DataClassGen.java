@@ -105,10 +105,9 @@ public class DataClassGen {
     {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(dc);
       for(final DataClass dataClass : _referencedDataClasses) {
-        _builder.append("#include \"");
-        String _name_2 = dataClass.getName();
-        _builder.append(_name_2, "");
-        _builder.append(".h\"");
+        _builder.append("#include ");
+        String _includePath = this._cExtensions.getIncludePath(dataClass);
+        _builder.append(_includePath, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -126,8 +125,8 @@ public class DataClassGen {
     _builder.append(_attributes, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("} ");
-    String _name_3 = dc.getName();
-    _builder.append(_name_3, "");
+    String _name_2 = dc.getName();
+    _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -138,10 +137,10 @@ public class DataClassGen {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
           boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
           if (_notEquals) {
-            String _name_4 = dc.getName();
-            String _plus = (_name_4 + " ");
-            String _name_5 = a.getName();
-            String _plus_1 = (_plus + _name_5);
+            String _name_3 = dc.getName();
+            String _plus = (_name_3 + " ");
+            String _name_4 = a.getName();
+            String _plus_1 = (_plus + _name_4);
             String _plus_2 = (_plus_1 + ": Attribute initialization not supported in C");
             this.logger.logInfo(_plus_2);
             _builder.newLineIfNotEmpty();
@@ -152,22 +151,22 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
-    String _name_6 = dc.getName();
-    CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_6);
+    String _name_5 = dc.getName();
+    CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_5);
     _builder.append(_operationsDeclaration, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/* deep copy */");
     _builder.newLine();
     _builder.append("void ");
+    String _name_6 = dc.getName();
+    _builder.append(_name_6, "");
+    _builder.append("_deepCopy(");
     String _name_7 = dc.getName();
     _builder.append(_name_7, "");
-    _builder.append("_deepCopy(");
+    _builder.append("* source, ");
     String _name_8 = dc.getName();
     _builder.append(_name_8, "");
-    _builder.append("* source, ");
-    String _name_9 = dc.getName();
-    _builder.append(_name_9, "");
     _builder.append("* target);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -175,8 +174,8 @@ public class DataClassGen {
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_10 = dc.getName();
-    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_10);
+    String _name_9 = dc.getName();
+    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_9);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

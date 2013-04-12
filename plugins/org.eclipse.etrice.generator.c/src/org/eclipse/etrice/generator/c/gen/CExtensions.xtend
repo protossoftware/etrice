@@ -35,6 +35,7 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.RoomModel
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -277,4 +278,7 @@ class CExtensions implements ILanguageExtension {
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
 	
+	def getIncludePath(RoomClass rc) {
+		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCHeaderFileName+"\""
+	}
 }

@@ -261,12 +261,12 @@ class SubSystemClassGen {
 
 		/* include all used ActorClasses */
 		«FOR actorClass : root.getUsedActorClasses()»
-			#include "«actorClass.name».h"
+			#include «actorClass.includePath»
 		«ENDFOR»
 
 		/* include all used ProtcolClasses */
 		«FOR protocolClass : root.getUsedProtocolClasses()»
-			#include "«protocolClass.name».h"
+			#include «protocolClass.includePath»
 		«ENDFOR»
 		
 		

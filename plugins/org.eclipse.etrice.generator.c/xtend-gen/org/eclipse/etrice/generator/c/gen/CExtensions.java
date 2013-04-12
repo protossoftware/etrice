@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -576,5 +577,17 @@ public class CExtensions implements ILanguageExtension {
     String _name_3 = data.getName();
     final String typedArgList = (_plus_11 + _name_3);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
+  }
+  
+  public String getIncludePath(final RoomClass rc) {
+    EObject _eContainer = rc.eContainer();
+    String _name = ((RoomModel) _eContainer).getName();
+    String _replaceAll = _name.replaceAll("\\.", "/");
+    String _plus = ("\"" + _replaceAll);
+    String _plus_1 = (_plus + "/");
+    String _cHeaderFileName = this.getCHeaderFileName(rc);
+    String _plus_2 = (_plus_1 + _cHeaderFileName);
+    String _plus_3 = (_plus_2 + "\"");
+    return _plus_3;
   }
 }

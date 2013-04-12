@@ -86,10 +86,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "messaging/etMessage.h"
 		
 		«FOR dataClass : root.getReferencedDataClasses(ac)»
-			#include "«dataClass.name».h"
+			#include «dataClass.includePath»
 		«ENDFOR»
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
-			#include "«pc.name».h"
+			#include «pc.includePath»
 		«ENDFOR»
 		
 		«ac.userCode(1)»
@@ -211,7 +211,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "platform/etMemory.h"
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
-			#include "«pc.getCHeaderFileName»"
+			#include «pc.includePath»
 		«ENDFOR»
 		
 		«ac.userCode(3)»

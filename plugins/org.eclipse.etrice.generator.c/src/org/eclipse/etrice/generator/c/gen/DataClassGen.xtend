@@ -63,7 +63,7 @@ class DataClassGen {
 
 «««		TODO: includes only for used DataClasses, also for other models
 		«FOR dataClass : root.getReferencedDataClasses(dc)»
-			#include "«dataClass.name».h"
+			#include «dataClass.includePath»
 		«ENDFOR»
 		
 		«dc.userCode(1)»

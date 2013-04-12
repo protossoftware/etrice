@@ -130,10 +130,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       HashSet<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
       for(final DataClass dataClass : _referencedDataClasses) {
-        _builder.append("#include \"");
-        String _name_2 = dataClass.getName();
-        _builder.append(_name_2, "");
-        _builder.append(".h\"");
+        _builder.append("#include ");
+        String _includePath = this._cExtensions.getIncludePath(dataClass);
+        _builder.append(_includePath, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -183,8 +182,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("/* get message string for message id */");
     _builder.newLine();
     _builder.append("const char* ");
-    String _name_3 = pc.getName();
-    _builder.append(_name_3, "");
+    String _name_2 = pc.getName();
+    _builder.append(_name_2, "");
     _builder.append("_getMessageString(int msg_id);");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -192,8 +191,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_userCode_1, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _name_4 = pc.getName();
-    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_4);
+    String _name_3 = pc.getName();
+    CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(_name_3);
     _builder.append(_generateIncludeGuardEnd, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
