@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Generator Config
 Bundle-SymbolicName: org.eclipse.etrice.generator.config;singleton:=true
 Bundle-Version: 0.3.0.qualifier
-Bundle-Vendor: eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice (Incubation)
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.3.0",

@@ -19,4 +19,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.launching,
  org.eclipse.ui.dialogs
-Bundle-Vendor: eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice (Incubation)

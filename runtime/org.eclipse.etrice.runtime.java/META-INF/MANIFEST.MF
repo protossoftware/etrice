@@ -8,5 +8,5 @@ Export-Package: org.eclipse.etrice.runtime.java.config,
  org.eclipse.etrice.runtime.java.etunit,
  org.eclipse.etrice.runtime.java.messaging,
  org.eclipse.etrice.runtime.java.modelbase
-Bundle-Vendor: eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice (Incubation)
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
