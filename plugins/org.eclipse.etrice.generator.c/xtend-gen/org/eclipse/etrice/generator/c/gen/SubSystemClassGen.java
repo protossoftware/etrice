@@ -446,9 +446,6 @@ public class SubSystemClassGen {
       _builder.append(_generateDatadrivenExecutes_1, "				");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
-      _builder.append("etLogger_logInfo(\"Execute\");");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
       _builder.append("if (loopCounter++ > ET_RUNTIME_MAXLOOP){");
       _builder.newLine();
       _builder.append("\t\t\t\t\t");

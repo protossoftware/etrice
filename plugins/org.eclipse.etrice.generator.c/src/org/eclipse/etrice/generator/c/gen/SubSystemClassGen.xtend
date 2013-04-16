@@ -181,7 +181,6 @@ class SubSystemClassGen {
 					if (etTimer_executeNeeded()){
 						etMessageService_execute(&msgService_Thread1);
 						«generateDatadrivenExecutes(root, ssi)»
-						etLogger_logInfo("Execute");
 						if (loopCounter++ > ET_RUNTIME_MAXLOOP){
 							break;
 						}

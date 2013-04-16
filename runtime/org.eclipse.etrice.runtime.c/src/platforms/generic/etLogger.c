@@ -17,10 +17,12 @@
 
 void etLogger_logError(const char* message){
 	printf("ERROR:   %s\n", message);
+	fflush(stdout);
 }
 
 void etLogger_logWarning(const char* message){
 	printf("WARNING: %s\n", message);
+	fflush(stdout);
 }
 
 void etLogger_logInfo(const char* message){
@@ -35,6 +37,7 @@ void etLogger_logErrorF(const char* format, ... ){
 	vprintf( format, arglist );
 	va_end( arglist );
 	printf("\n");
+	fflush(stdout);
 }
 
 void etLogger_logWarningF(const char* format, ... ){
@@ -44,6 +47,7 @@ void etLogger_logWarningF(const char* format, ... ){
 	vprintf( format, arglist );
 	va_end( arglist );
 	printf("\n");
+	fflush(stdout);
 }
 
 void etLogger_logInfoF(const char* format, ... ){
@@ -53,6 +57,7 @@ void etLogger_logInfoF(const char* format, ... ){
 	vprintf( format, arglist );
 	va_end( arglist );
 	printf("\n");
+	fflush(stdout);
 }
 
 etFileHandle etLogger_fopen(const char* filename, const char* mode){

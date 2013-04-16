@@ -1,4 +1,5 @@
 /Debug
+/src-gen-info
 *.aux
 *.lof
 *.gz
