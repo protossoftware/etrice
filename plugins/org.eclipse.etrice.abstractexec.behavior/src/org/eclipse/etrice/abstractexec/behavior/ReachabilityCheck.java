@@ -40,6 +40,7 @@ public class ReachabilityCheck {
 	
 	Queue<StateGraphNode> queue;
 	public Set<StateGraphItem> visited;
+	private Set<State> visitedSubStates;
 	private ExpandedActorClass xpAct;
 	//private Set<StateGraphItem> exitUsed;
 
@@ -48,6 +49,7 @@ public class ReachabilityCheck {
 		queue = new LinkedList<StateGraphNode>();
 		xpAct = xpac;
 		visited = new HashSet<StateGraphItem>();
+		visitedSubStates = new HashSet<State>();
 		//exitUsed = new HashSet<StateGraphItem>();
 	}
 
@@ -55,6 +57,7 @@ public class ReachabilityCheck {
 		StateGraph graph = xpAct.getStateMachine();
 		addStartingPoints(graph, true);
 		doTraversal();
+		visited.addAll(visitedSubStates);
 	}
 
 	private void addStartingPoints(StateGraph graph, boolean add_initial) {
@@ -114,15 +117,9 @@ public class ReachabilityCheck {
 			}
 		} else {
 			if (node instanceof EntryPoint) {
-				// if container has no initial transition then mark it visited
-				boolean markVisited = true;
+				// don't set container visited. otherwise its initial transition could not be visited any more
 				State container = (State) node.eContainer().eContainer();
-				StateGraph parentGraph = container.getSubgraph();
-				for (Transition tr : parentGraph.getTransitions())
-					if (tr instanceof InitialTransition)
-						markVisited = false;
-				if (markVisited)
-					visited.add(container);
+				visitedSubStates.add(container);
 			}
 			for (Transition trans : xpAct.getOutgoingTransitions(node))
 				visit(trans);
