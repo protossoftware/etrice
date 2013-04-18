@@ -56,23 +56,23 @@ RoomModel Reachability {
 						<in2: p>
 					}
 				}
-				Transition trC_0: state_0 -> state2_0 {
+				Transition trC_0: state_0 -> state2_1 {
 					triggers {
 						<in2: p>
 					}
 				}
-				Transition tr20_1: state_1 -> tp0_1 of state2_0 {
+				Transition tr20_1: state_1 -> tp0_1 of state2_1 {
 					triggers {
 						<in3: p>
 					}
 				}
-				Transition tr20_0: tp0_0 of state2_0 -> state20_0
-				Transition tr21_0: state2_0 -> state21_0 {
+				Transition tr20_0: tp0_0 of state2_1 -> state20_0
+				Transition tr21_0: state2_1 -> state21_0 {
 					triggers {
 						<in3: p>
 					}
 				}
-				Transition tr22_1: tp1_1 of state2_0 -> state21_1
+				Transition tr22_1: tp1_1 of state2_1 -> state21_1
 				Transition trx_0: state_0 -> state03_0 {
 					triggers {
 						<in1: p>
@@ -199,7 +199,7 @@ RoomModel Reachability {
 				State stateA_1
 				State state1_1
 				State state_0
-				State state2_0 {
+				State state2_1 {
 					subgraph {
 						Transition init: initial -> state0_0 { }
 						Transition tr0_1: my tp0_1 -> state0_1
