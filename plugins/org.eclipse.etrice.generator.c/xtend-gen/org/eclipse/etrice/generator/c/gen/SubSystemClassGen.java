@@ -50,6 +50,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -1035,7 +1036,8 @@ public class SubSystemClassGen {
         _or = (_or_1 || _not_2);
       }
       final boolean haveConstData = _or;
-      boolean needSep = false;
+      IntelligentSeparator _intelligentSeparator = new IntelligentSeparator(",");
+      final IntelligentSeparator sep = _intelligentSeparator;
       StringConcatenation _builder = new StringConcatenation();
       {
         if (haveReplSubItems) {
@@ -1092,14 +1094,9 @@ public class SubSystemClassGen {
           _builder.append("/* simple ports */");
           _builder.newLine();
           {
-            boolean _hasElements_1 = false;
             for(final InterfaceItemInstance pi_1 : simpleEventPorts) {
-              if (!_hasElements_1) {
-                _hasElements_1 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               String _genPortInitializer = this.genPortInitializer(root, ai, pi_1);
               _builder.append(_genPortInitializer, "	");
               _builder.newLineIfNotEmpty();
@@ -1110,39 +1107,10 @@ public class SubSystemClassGen {
           _builder.append("\t");
           _builder.append("/* data receive ports */");
           _builder.newLine();
-          _builder.append("\t");
           {
-            boolean _and = false;
-            boolean _or_2 = false;
-            if (needSep) {
-              _or_2 = true;
-            } else {
-              boolean _isEmpty_3 = IterableExtensions.isEmpty(simpleEventPorts);
-              boolean _not_3 = (!_isEmpty_3);
-              boolean _needSep = needSep = _not_3;
-              _or_2 = (needSep || _needSep);
-            }
-            if (!_or_2) {
-              _and = false;
-            } else {
-              boolean _isEmpty_4 = IterableExtensions.isEmpty(recvPorts);
-              boolean _not_4 = (!_isEmpty_4);
-              _and = (_or_2 && _not_4);
-            }
-            if (_and) {
-              _builder.append(",");
-            }
-          }
-          _builder.newLineIfNotEmpty();
-          {
-            boolean _hasElements_2 = false;
             for(final InterfaceItemInstance pi_2 : recvPorts) {
-              if (!_hasElements_2) {
-                _hasElements_2 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               String _genRecvPortInitializer = this.genRecvPortInitializer(root, ai, pi_2);
               _builder.append(_genRecvPortInitializer, "	");
               _builder.newLineIfNotEmpty();
@@ -1153,39 +1121,10 @@ public class SubSystemClassGen {
           _builder.append("\t");
           _builder.append("/* saps */");
           _builder.newLine();
-          _builder.append("\t");
           {
-            boolean _and_1 = false;
-            boolean _or_3 = false;
-            if (needSep) {
-              _or_3 = true;
-            } else {
-              boolean _isEmpty_5 = IterableExtensions.isEmpty(recvPorts);
-              boolean _not_5 = (!_isEmpty_5);
-              boolean _needSep_1 = needSep = _not_5;
-              _or_3 = (needSep || _needSep_1);
-            }
-            if (!_or_3) {
-              _and_1 = false;
-            } else {
-              boolean _isEmpty_6 = IterableExtensions.isEmpty(simpleEventSAPs);
-              boolean _not_6 = (!_isEmpty_6);
-              _and_1 = (_or_3 && _not_6);
-            }
-            if (_and_1) {
-              _builder.append(",");
-            }
-          }
-          _builder.newLineIfNotEmpty();
-          {
-            boolean _hasElements_3 = false;
             for(final InterfaceItemInstance pi_3 : simpleEventSAPs) {
-              if (!_hasElements_3) {
-                _hasElements_3 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               String _genPortInitializer_1 = this.genPortInitializer(root, ai, pi_3);
               _builder.append(_genPortInitializer_1, "	");
               _builder.newLineIfNotEmpty();
@@ -1196,39 +1135,10 @@ public class SubSystemClassGen {
           _builder.append("\t");
           _builder.append("/* replicated ports */");
           _builder.newLine();
-          _builder.append("\t");
           {
-            boolean _and_2 = false;
-            boolean _or_4 = false;
-            if (needSep) {
-              _or_4 = true;
-            } else {
-              boolean _isEmpty_7 = IterableExtensions.isEmpty(simpleEventSAPs);
-              boolean _not_7 = (!_isEmpty_7);
-              boolean _needSep_2 = needSep = _not_7;
-              _or_4 = (needSep || _needSep_2);
-            }
-            if (!_or_4) {
-              _and_2 = false;
-            } else {
-              boolean _isEmpty_8 = IterableExtensions.isEmpty(replEventPorts);
-              boolean _not_8 = (!_isEmpty_8);
-              _and_2 = (_or_4 && _not_8);
-            }
-            if (_and_2) {
-              _builder.append(",");
-            }
-          }
-          _builder.newLineIfNotEmpty();
-          {
-            boolean _hasElements_4 = false;
             for(final InterfaceItemInstance pi_4 : replEventPorts) {
-              if (!_hasElements_4) {
-                _hasElements_4 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               _builder.append("{");
               EList<InterfaceItemInstance> _peers = pi_4.getPeers();
               int _size = _peers.size();
@@ -1247,39 +1157,10 @@ public class SubSystemClassGen {
           _builder.append("\t");
           _builder.append("/* services */");
           _builder.newLine();
-          _builder.append("\t");
           {
-            boolean _and_3 = false;
-            boolean _or_5 = false;
-            if (needSep) {
-              _or_5 = true;
-            } else {
-              boolean _isEmpty_9 = IterableExtensions.isEmpty(replEventPorts);
-              boolean _not_9 = (!_isEmpty_9);
-              boolean _needSep_3 = needSep = _not_9;
-              _or_5 = (needSep || _needSep_3);
-            }
-            if (!_or_5) {
-              _and_3 = false;
-            } else {
-              boolean _isEmpty_10 = IterableExtensions.isEmpty(replEventSPPs);
-              boolean _not_10 = (!_isEmpty_10);
-              _and_3 = (_or_5 && _not_10);
-            }
-            if (_and_3) {
-              _builder.append(",");
-            }
-          }
-          _builder.newLineIfNotEmpty();
-          {
-            boolean _hasElements_5 = false;
             for(final InterfaceItemInstance pi_5 : replEventSPPs) {
-              if (!_hasElements_5) {
-                _hasElements_5 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               _builder.append("{");
               EList<InterfaceItemInstance> _peers_1 = pi_5.getPeers();
               int _size_1 = _peers_1.size();

@@ -36,6 +36,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.base.IntelligentSeparator
 
 @Singleton
 class SubSystemClassGen {
@@ -341,7 +342,7 @@ class SubSystemClassGen {
 		
 		var replSubPortsArray = if (haveReplSubItems) instName+"_repl_sub_ports" else "NULL"
 		val haveConstData = !simpleEventItems.empty || !recvPorts.empty || !replEventItems.empty
-		var needSep = false;
+		val sep = new IntelligentSeparator(",");
 	'''
 		«IF haveReplSubItems»
 			static const etReplSubPort «replSubPortsArray»[«offset»] = {
@@ -355,32 +356,28 @@ class SubSystemClassGen {
 			static const «ai.actorClass.name»_const «instName»_const = {
 				/* Ports: {varData, msgService, peerAddress, localId} */
 				/* simple ports */
-				«FOR pi : simpleEventPorts SEPARATOR ","»
-					«genPortInitializer(root, ai, pi)»
+				«FOR pi : simpleEventPorts»
+					«sep»«genPortInitializer(root, ai, pi)»
 				«ENDFOR»
 				
 				/* data receive ports */
-				«IF (needSep || (needSep=!simpleEventPorts.empty)) && !recvPorts.empty»,«ENDIF»
-				«FOR pi : recvPorts SEPARATOR ","»
-					«genRecvPortInitializer(root, ai, pi)»
+				«FOR pi : recvPorts»
+					«sep»«genRecvPortInitializer(root, ai, pi)»
 				«ENDFOR»
 				
 				/* saps */
-				«IF (needSep || (needSep=!recvPorts.empty)) && !simpleEventSAPs.empty»,«ENDIF»
-				«FOR pi : simpleEventSAPs SEPARATOR ","»
-					«genPortInitializer(root, ai, pi)»
+				«FOR pi : simpleEventSAPs»
+					«sep»«genPortInitializer(root, ai, pi)»
 				«ENDFOR»
 				
 				/* replicated ports */
-				«IF (needSep || (needSep=!simpleEventSAPs.empty)) && !replEventPorts.empty»,«ENDIF»
-				«FOR pi : replEventPorts SEPARATOR ","»
-					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
+				«FOR pi : replEventPorts»
+					«sep»{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
 				«ENDFOR»
 				
 				/* services */
-				«IF (needSep || (needSep=!replEventPorts.empty)) && !replEventSPPs.empty»,«ENDIF»
-				«FOR pi : replEventSPPs SEPARATOR ","»
-					{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
+				«FOR pi : replEventSPPs»
+					«sep»{«pi.peers.size», «replSubPortsArray»+«offsets.get(pi)»}
 				«ENDFOR»
 			};
 		«ENDIF»
