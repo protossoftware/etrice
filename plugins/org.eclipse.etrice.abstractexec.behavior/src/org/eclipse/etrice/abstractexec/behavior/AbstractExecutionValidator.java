@@ -116,8 +116,8 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		}
 		if (oneProtocolsWithSemantics) {
 			// begin abstract execution on state machine of expanded actor class
-			System.out
-					.println("  Reached where at least one interface items has semantics");
+			if (traceExec)
+				System.out.println("  Reached where at least one interface items has semantics");
 			NullDiagnostician diagnostician = new NullDiagnostician();
 			GeneratorModelBuilder builder = new GeneratorModelBuilder(
 					new NullLogger(), diagnostician);
