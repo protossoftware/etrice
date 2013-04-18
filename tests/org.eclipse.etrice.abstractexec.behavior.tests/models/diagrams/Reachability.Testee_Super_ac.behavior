@@ -33,7 +33,7 @@
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="162" height="104" x="231" y="442">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="102" height="44" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
           <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="51" y="38">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
@@ -591,7 +591,7 @@
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="162" height="104" x="706" y="222">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="102" height="44" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
           <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="51" y="38">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
@@ -777,7 +777,7 @@
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="162" height="104" x="538" y="222">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="102" height="44" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="15" height="8" x="77" y="3" cornerHeight="5" cornerWidth="5"/>
           <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="51" y="38">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>

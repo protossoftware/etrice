@@ -93,10 +93,9 @@ public class TestReachability extends TestBase {
 
 	private void checkUnreachable(StateGraphItem item) {
 		if (item instanceof InitialTransition) {
-			State container = (State) item.eContainer().eContainer();
 			Assert.assertTrue(
 					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
-					container.getName().endsWith("_0"));
+					item.getName().endsWith("_0"));
 		} else
 			Assert.assertTrue(
 					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
