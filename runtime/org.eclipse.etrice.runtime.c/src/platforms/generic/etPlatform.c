@@ -10,9 +10,14 @@
  *
  *******************************************************************************/
 
-#include <etDatatypes.h>
+#if defined __MINGW32__
+#elif defined __GNUC__
+#include <sched.h>
+#endif
 
-/* implemenatation for eTrice interfaces*/
+#include "etDatatypes.h"
+
+/* implementation for eTrice interfaces*/
 
 void etUserEntry(void){ }
 
@@ -28,8 +33,11 @@ void etUserExit(void){ }
 #if defined __MINGW32__
 
 /******************thread********************/
-void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){
-	   *self = (HANDLE)_beginthread( func, stacksize, NULL );
+
+typedef void (*ThreadFunc)(void*);
+
+void etThread_construct(etThread* self, const etThreadname name, void* (*func)(void *), etStacksize stacksize, etPriority prio, void* threadData) {
+	   *self = (HANDLE)_beginthread((ThreadFunc) func, stacksize, threadData);
 	   SetThreadPriority(*self,THREAD_PRIORITY_NORMAL);
 }
 
@@ -65,7 +73,21 @@ void etSema_waitForWakeup(etSema* self){
 #elif defined __GNUC__
 
 /******************thread********************/
-void etThread_construct(etThread* self, const etThreadname name, void (*func)(void *), etStacksize stacksize, etPriority prio){}
+void etThread_construct(etThread* self, const etThreadname name, void* (*func)(void *), etStacksize stacksize, etPriority prio, void* threadData) {
+	pthread_attr_t attr;
+
+	/*
+	struct sched_param param;
+
+	param.sched_priority = prio;
+	pthread_attr_setschedparam (&attr, &param);
+	*/
+
+	pthread_attr_init(&attr);
+	pthread_attr_setstacksize(&attr, stacksize);
+
+	pthread_create(self, &attr, func, threadData);
+}
 
 void etThread_destruct(etThread* self){}
 

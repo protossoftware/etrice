@@ -25,6 +25,7 @@
 #include <windows.h>
 #include <process.h>
 #elif defined __GNUC__
+#include <pthread.h>
 #else
 #error
 #endif
@@ -105,7 +106,7 @@ typedef int16 etAddressId;
 
 	/* dummy for LINUX/UNIX */
 	typedef int etMutex;
-	typedef int etThread;
+	typedef pthread_t etThread;
 	typedef int etSema;
 
 	typedef int32 etStacksize;
