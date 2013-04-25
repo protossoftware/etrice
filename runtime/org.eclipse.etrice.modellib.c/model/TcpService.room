@@ -1,0 +1,225 @@
+RoomModel room.basic.service.tcp {
+
+	import room.basic.types.* from "Types.room"
+
+
+	ActorClass ATcpServer {
+		Interface {
+			Port ControlPort: PTcpControl
+			Port PayloadPort: PTcpPayload
+		}
+		Structure {
+			usercode1 {
+				"#include \"platform/etTcpSockets.h\""
+			}
+			usercode3 {
+				"/* user code 3 */"
+			}
+			external Port ControlPort
+			external Port PayloadPort
+			Attribute lastError: int32
+			Attribute payloadPortReplocation: int32
+			Attribute server: etSocketServerData ref
+		}
+		Behavior {
+			Operation ATcpServer() {
+				"etInitSockets();"
+				"server = etCreateSocketServerData();"
+			}
+			Operation ~ATcpServer() {
+				"etCleanupSockets();"
+				"etFreeSocketServerData(server);"
+			}
+			Operation stopUser() {
+				"/* stop user: close socket */"
+			}
+			StateMachine {
+				Transition init: initial -> closed {
+				}
+				Transition tr0: closed -> cp cp0 {
+					triggers {
+						<open: ControlPort>
+					}
+					action {
+						"lastError=0;"
+						"/* start accept thread */"
+						"if (etStartListening(server, data->TcpPort)!=ETSOCKET_OK) lastError = 1;"
+					}
+				}
+				Transition tr1: opened -> closed {
+					triggers {
+						<close: ControlPort>
+					}
+					action {
+						"/* close accept thread */"
+						"etCloseAllServerSockets(server);"
+						"etStopSocketServer(server);"
+					}
+				}
+				Transition tr2: cp cp0 -> opened {
+					action {
+						"ControlPort.established();"
+					}
+				}
+				Transition socketError: cp cp0 -> error {
+					cond {
+						"lastError!=0"
+					}
+					action {
+						"ControlPort.error();"
+						"/* handle not connected */"
+					}
+				}
+				Transition tr3: opened -> opened {
+					triggers {
+						<send: PayloadPort>
+					}
+					action {
+						"/* send payload to connection */"
+						"etWriteServerSocket(server, data->connectionId, data->length, data->data);"
+					}
+				}
+				ChoicePoint cp0
+				State closed
+				State opened
+				State error
+			}
+		}
+	}
+
+	ActorClass ATcpClient {
+		Interface {
+			Port ControlPort: PTcpControl
+			Port PayloadPort: PTcpPayload
+		}
+		Structure {
+			usercode1 {
+				"#include \"platform/etTcpSockets.h\""
+			}
+			usercode3 {
+"static int8* bufferProvider(void* slf, int* size) {
+	ATcpClient* self = (ATcpClient*) slf;
+	*size = 1000;
+	return self->payload.data;
+}
+
+static int socketReceiver(void* slf, int channel, int size, const int8* data) {
+	ATcpClient* self = (ATcpClient*) slf;
+	self->payload.length = size;
+	PTcpPayloadPort_receive(&self->constData->PayloadPort, &self->payload);
+	return ETSOCKET_OK;
+}"
+			}
+			external Port ControlPort
+			external Port PayloadPort
+			Attribute lastError: int32
+			Attribute payload: DTcpPayload
+			Attribute client: etSocketConnectionData ref
+		}
+		Behavior {
+			Operation ATcpClient() {
+				"client = etCreateSocketConnectionData();"
+				"client->receiver = socketReceiver;"
+				"client->bufferProvider = bufferProvider;"
+				"client->userData = self;"
+			}
+			Operation ~ATcpClient() {
+				"etCloseSocket(client);"
+				"etFreeSocketConnectionData(client);"
+			}
+			Operation stopUser() {
+				"/* stop user: close socket */"
+			}
+			StateMachine {
+				Transition init: initial -> closed {
+					action {
+						"printf(\"Client Init!\\n\");"
+					}
+				}
+				Transition tr0: closed -> cp cp0 {
+					triggers {
+						<open: ControlPort>
+					}
+					action {
+						"lastError=0;"
+						"/* connect to server */"
+						"if (etConnectServer(client, data->IPAddr, data->TcpPort)!=ETSOCKET_OK) lastError = 1;"
+					}
+				}
+				Transition tr1: opened -> closed {
+					triggers {
+						<close: ControlPort>
+					}
+					action {
+						"/* close read thread */"
+						"etCloseSocket(client);"
+					}
+				}
+				Transition tr2: cp cp0 -> opened {
+					action {
+						"ControlPort.established();"
+					}
+				}
+				Transition socketError: cp cp0 -> error {
+					cond {
+						"lastError!=0"
+					}
+					action {
+						"ControlPort.error();"
+						"/* handle error */"
+					}
+				}
+				Transition tr3: opened -> opened {
+					triggers {
+						<send: PayloadPort>
+					}
+					action {
+						"/* send payload"
+						"\tout.write(data.getData(),0,data.length);"
+						"*/"
+						"etWriteSocket(client, data->length, data->data);"
+					}
+				}
+				ChoicePoint cp0
+				State closed
+				State opened
+				State error
+			}
+		}
+	}
+
+	ProtocolClass PTcpControl {
+		incoming {
+			Message open(data: DTcpControl)
+			Message close()
+		}
+		outgoing {
+			Message established()
+			Message error()
+		}
+	}
+
+	ProtocolClass PTcpPayload {
+		incoming {
+			Message send(data: DTcpPayload)
+		}
+		outgoing {
+			Message receive(data: DTcpPayload)
+		}
+	}
+
+	DataClass DTcpControl {
+		Attribute IPAddr: string
+		Attribute TcpPort: int32
+	}
+
+	DataClass DTcpPayload {
+		Attribute connectionId: int32
+		Attribute length: int32
+		Attribute data [ 128 ]: int8
+	}
+
+	ExternalType etSocketServerData -> etSocketServerData
+	ExternalType etSocketConnectionData -> etSocketConnectionData
+	
+}

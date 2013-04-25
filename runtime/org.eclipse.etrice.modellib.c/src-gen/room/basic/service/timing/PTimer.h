@@ -5,8 +5,8 @@
  * 
  */
 
-#ifndef _PTIMER_H_
-#define _PTIMER_H_
+#ifndef _ROOM_BASIC_SERVICE_TIMING_PTIMER_H_
+#define _ROOM_BASIC_SERVICE_TIMING_PTIMER_H_
 
 #include "etDatatypes.h"
 #include "modelbase/etPort.h"
@@ -75,5 +75,5 @@ const char* PTimer_getMessageString(int msg_id);
 /*uc2*/
 /*--------------------- end user code ---------------------*/
 
-#endif /* _PTIMER_H_ */
+#endif /* _ROOM_BASIC_SERVICE_TIMING_PTIMER_H_ */
 

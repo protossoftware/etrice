@@ -5,8 +5,8 @@
  * 
  */
 
-#ifndef _ATIMINGSERVICE_H_
-#define _ATIMINGSERVICE_H_
+#ifndef _ROOM_BASIC_SERVICE_TIMING_ATIMINGSERVICE_H_
+#define _ROOM_BASIC_SERVICE_TIMING_ATIMINGSERVICE_H_
 
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
@@ -80,5 +80,5 @@ void ATimingService_printList(ATimingService* self);
 /*uc2*/
 /*--------------------- end user code ---------------------*/
 
-#endif /* _ATIMINGSERVICE_H_ */
+#endif /* _ROOM_BASIC_SERVICE_TIMING_ATIMINGSERVICE_H_ */
 
