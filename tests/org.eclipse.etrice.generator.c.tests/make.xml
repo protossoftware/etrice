@@ -207,6 +207,7 @@
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		
 		<!-- compile and link ChoicepointTest -->
@@ -240,6 +241,7 @@
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		
 		<!-- compile and link SendingDataTestC -->
@@ -279,6 +281,7 @@
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		
 		<!-- compile and link StaticConfigTest-->
@@ -326,6 +329,7 @@
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 		
 		<!-- compile and link DataDrivenTest-->
@@ -365,6 +369,7 @@
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
 		</exec>
 	</target>
 
