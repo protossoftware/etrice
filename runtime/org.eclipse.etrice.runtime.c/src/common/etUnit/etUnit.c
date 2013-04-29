@@ -24,6 +24,7 @@ static FILE* etUnit_reportfile = NULL;
 
 /* counters */
 static etInt16 etUnit_nextCaseId = 1;
+static etInt32 etUnit_errorCounter = 0;
 
 #define ETUNIT_MAX_TEST_CASES		256
 static etBool etUnit_testcaseSuccess[ETUNIT_MAX_TEST_CASES];
@@ -94,6 +95,7 @@ void etUnit_close(void) {
 		etUnit_reportfile = NULL;
 	}
 	etLogger_logInfoF("End Time: %ld", clock());
+	etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
 	etLogger_logInfoF("************* TEST END **************");
 }
 
@@ -314,6 +316,7 @@ static void etUnit_handleExpect(etInt16 id, etBool result, const char *resulttex
 		/* nothing to do because no failure */
 	}
 	else {
+		etUnit_errorCounter++;
 		if (etUnit_testcaseSuccess[id] == TRUE){
 			/* first failure will be remembered */
 			etUnit_testcaseSuccess[id] = FALSE;

@@ -15,7 +15,6 @@
 
 #include "etDatatypes.h"
 #include "etTime.h"
-#include "etThread.h"
 
 
 /**
@@ -23,13 +22,13 @@
  * the struct has to be filled before calling etThread_construct except for osData and osId
  **/
 typedef struct etTimer{
-	etOSTimerId osTimerId;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
+	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
 	etTime timerInterval;			/**< timer interval **/
 	etTimerFunction timerFunction; /**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct **/
 } etTimer;
 
 
-void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction threadFunction);
+void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction);
 void etTimer_start(etTimer* self);
 void etTimer_stop(etTimer* self);
 void etTimer_destruct(etTimer* self);

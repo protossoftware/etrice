@@ -21,8 +21,8 @@
 
 #include <stdio.h>
 
+#define WINVER 0x0500
 #include <windows.h>
-#include <process.h>
 
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
@@ -90,24 +90,15 @@ typedef int16 etAddressId;
  * typedefs for OS-specific types
  */
 
-	typedef CRITICAL_SECTION etOSMutexData;
-	typedef HANDLE etOSThreadData;
-	typedef DWORD etOSThreadId;
-	typedef HANDLE etOSSemaData;
+typedef CRITICAL_SECTION etOSMutexData;
+typedef HANDLE etOSThreadData;
+typedef DWORD etOSThreadId;
+typedef HANDLE etOSSemaData;
+typedef HANDLE etOSTimerData;
+typedef DWORD etOSTimerId;
 
-	typedef UINT_PTR etOSTimerId;
-
-//typedef TIMERPROC etTimerFunction;
-typedef VOID(CALLBACK *etTimerFunction)(HWND,UINT,UINT,DWORD);
-//typedef void (*etThreadFunction)(void *);
-
+typedef VOID(CALLBACK *etTimerFunction)(PVOID lpParam, BOOLEAN TimerOrWaitFired);
 #define etTimerFunction_RETURN_VALUE VOID CALLBACK
-
-#define etTimerFunction_ARGUMENT_LIST HWND arg1, UINT arg2, UINT arg3, DWORD arg4
-
-
-//typedef void (*etTimerFunction)(void); /**< OS specific timer callback function **/
-//typedef VOID(CALLBACK *TIMERPROC)(HWND,UINT,UINT,DWORD);
-
+#define etTimerFunction_ARGUMENT_LIST PVOID lpParam, BOOLEAN TimerOrWaitFired
 
 #endif /* _DATATYPES_H_ */
