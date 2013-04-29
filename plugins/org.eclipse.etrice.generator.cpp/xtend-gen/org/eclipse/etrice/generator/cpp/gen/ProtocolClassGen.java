@@ -36,27 +36,34 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
 public class ProtocolClassGen extends GenericProtocolClassGenerator {
   @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private CppExtensions stdExt;
   
   @Inject
+  @Extension
   private RoomExtensions roomExt;
   
   @Inject
+  @Extension
   private ProcedureHelpers helpers;
   
   @Inject
+  @Extension
   private TypeHelpers _typeHelpers;
   
   @Inject
+  @Extension
   private Initialization _initialization;
   
   @Inject
@@ -565,7 +572,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append(": ");
-      CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(pclass, "0");
+      String _generateConstructorInitalizerList = this.generateConstructorInitalizerList(pclass, "0");
       _builder.append(_generateConstructorInitalizerList, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -599,7 +606,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append(": ");
-      CharSequence _generateConstructorInitalizerList_1 = this.generateConstructorInitalizerList(pclass, "idx");
+      String _generateConstructorInitalizerList_1 = this.generateConstructorInitalizerList(pclass, "idx");
       _builder.append(_generateConstructorInitalizerList_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -855,7 +862,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateConstructorInitalizerList(final PortClass pc, final String index) {
+  public String generateConstructorInitalizerList(final PortClass pc, final String index) {
     ArrayList<CharSequence> _arrayList = new ArrayList<CharSequence>();
     ArrayList<CharSequence> initializerList = _arrayList;
     StringConcatenation _builder = new StringConcatenation();
@@ -875,7 +882,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     String _join = IterableExtensions.join(initializerList, ",\n");
     _builder_1.append(_join, "");
     _builder_1.newLineIfNotEmpty();
-    return _builder_1;
+    return _builder_1.toString();
   }
   
   private CharSequence messageCall(final Message m) {

@@ -204,7 +204,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
 		#include "etUnit/etUnit.h"
-		#include "platform/etMemory.h"
+		#include "osal/etMemory.h"
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			#include "«pc.getCHeaderFileName»"

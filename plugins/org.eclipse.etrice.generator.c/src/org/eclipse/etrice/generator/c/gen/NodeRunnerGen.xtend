@@ -57,8 +57,8 @@ class NodeRunnerGen {
 
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
-		#include "platform/etPlatform.h"
 		
+		#include "osal/etPlatformLifecycle.h"
 		
 		/**
 		 * main function

@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz (changed for C code generator)
+ */
 package org.eclipse.etrice.generator.c.gen;
 
 import com.google.common.base.Objects;
@@ -32,6 +43,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -42,18 +54,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private ILanguageExtension langExt;
   
   @Inject
+  @Extension
   private CExtensions _cExtensions;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
+  @Extension
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
+  @Extension
   private StateMachineGen _stateMachineGen;
   
   @Inject
@@ -601,7 +618,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"etUnit/etUnit.h\"");
       _builder.newLine();
-      _builder.append("#include \"platform/etMemory.h\"");
+      _builder.append("#include \"osal/etMemory.h\"");
       _builder.newLine();
       _builder.newLine();
       {

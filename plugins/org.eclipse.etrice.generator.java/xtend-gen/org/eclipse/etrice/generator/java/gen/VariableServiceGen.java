@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 Juergen Haug
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Juergen Haug
+ */
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
@@ -32,6 +42,7 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -40,21 +51,26 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class VariableServiceGen {
   @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private JavaExtensions stdExt;
   
   @Inject
+  @Extension
   private RoomExtensions roomExt;
   
   @Inject
   private IDataConfiguration configExt;
   
   @Inject
+  @Extension
   private ProcedureHelpers helpers;
   
   @Inject
+  @Extension
   private TypeHelpers _typeHelpers;
   
   @Inject
@@ -714,7 +730,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
+                Object _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
                 _builder_1.append(_genGetAttributeValues, "");
                 _builder_1.newLineIfNotEmpty();
               }
@@ -864,7 +880,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
+                Object _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
                 _builder_1.append(_genSetAttributeValues1, "");
                 _builder_1.newLineIfNotEmpty();
               }
@@ -952,7 +968,7 @@ public class VariableServiceGen {
               List<Attribute> _allAttributes = this.roomExt.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
-                CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);
+                Object _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);
                 _builder.append(_genSetAttributeValues2, "");
                 _builder.newLineIfNotEmpty();
               }

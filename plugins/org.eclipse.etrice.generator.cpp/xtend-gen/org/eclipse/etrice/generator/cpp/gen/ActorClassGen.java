@@ -33,6 +33,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -44,18 +45,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private CppExtensions _cppExtensions;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
+  @Extension
   private Initialization _initialization;
   
   @Inject
+  @Extension
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
+  @Extension
   private StateMachineGen _stateMachineGen;
   
   @Inject
@@ -273,8 +279,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t\t");
       List<Port> _endPorts = this._roomExtensions.getEndPorts(ac);
-      final Function1<Port,CharSequence> _function_2 = new Function1<Port,CharSequence>() {
-          public CharSequence apply(final Port port) {
+      final Function1<Port,String> _function_2 = new Function1<Port,String>() {
+          public String apply(final Port port) {
             StringConcatenation _builder = new StringConcatenation();
             String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(port);
             _builder.append(_portClassName, "");
@@ -282,10 +288,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
             String _name = port.getName();
             _builder.append(_name, "");
             _builder.append(";");
-            return _builder;
+            return _builder.toString();
           }
         };
-      List<CharSequence> _map = ListExtensions.<Port, CharSequence>map(_endPorts, _function_2);
+      List<String> _map = ListExtensions.<Port, String>map(_endPorts, _function_2);
       String _join = IterableExtensions.join(_map, "\n");
       _builder.append(_join, "			");
       _builder.newLineIfNotEmpty();
@@ -294,8 +300,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t\t");
       EList<SAPRef> _strSAPs = ac.getStrSAPs();
-      final Function1<SAPRef,CharSequence> _function_3 = new Function1<SAPRef,CharSequence>() {
-          public CharSequence apply(final SAPRef sap) {
+      final Function1<SAPRef,String> _function_3 = new Function1<SAPRef,String>() {
+          public String apply(final SAPRef sap) {
             StringConcatenation _builder = new StringConcatenation();
             String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(sap);
             _builder.append(_portClassName, "");
@@ -303,10 +309,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
             String _name = sap.getName();
             _builder.append(_name, "");
             _builder.append(";");
-            return _builder;
+            return _builder.toString();
           }
         };
-      List<CharSequence> _map_1 = ListExtensions.<SAPRef, CharSequence>map(_strSAPs, _function_3);
+      List<String> _map_1 = ListExtensions.<SAPRef, String>map(_strSAPs, _function_3);
       String _join_1 = IterableExtensions.join(_map_1, "\n");
       _builder.append(_join_1, "			");
       _builder.newLineIfNotEmpty();
@@ -315,8 +321,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t\t");
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      final Function1<ServiceImplementation,CharSequence> _function_4 = new Function1<ServiceImplementation,CharSequence>() {
-          public CharSequence apply(final ServiceImplementation svc) {
+      final Function1<ServiceImplementation,String> _function_4 = new Function1<ServiceImplementation,String>() {
+          public String apply(final ServiceImplementation svc) {
             StringConcatenation _builder = new StringConcatenation();
             String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(svc);
             _builder.append(_portClassName, "");
@@ -325,10 +331,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
             String _name = _spp.getName();
             _builder.append(_name, "");
             _builder.append(";");
-            return _builder;
+            return _builder.toString();
           }
         };
-      List<CharSequence> _map_2 = ListExtensions.<ServiceImplementation, CharSequence>map(_serviceImplementations, _function_4);
+      List<String> _map_2 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_4);
       String _join_2 = IterableExtensions.join(_map_2, "\n");
       _builder.append(_join_2, "			");
       _builder.newLineIfNotEmpty();
@@ -485,7 +491,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
-  private CharSequence generateConstructorInitalizerList(final ActorClass ac) {
+  private String generateConstructorInitalizerList(final ActorClass ac) {
     ArrayList<CharSequence> _arrayList = new ArrayList<CharSequence>();
     ArrayList<CharSequence> initializerList = _arrayList;
     ActorClass _base = ac.getBase();
@@ -600,7 +606,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _join = IterableExtensions.join(initializerList, ",\n");
     _builder_5.append(_join, "");
     _builder_5.newLineIfNotEmpty();
-    return _builder_5;
+    return _builder_5.toString();
   }
   
   private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac, final ActorClass ac) {
@@ -673,7 +679,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("const std::vector<std::vector<etRuntime::Address> >& peer_addr)");
       _builder.newLine();
       _builder.append(":  ");
-      CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(ac);
+      String _generateConstructorInitalizerList = this.generateConstructorInitalizerList(ac);
       _builder.append(_generateConstructorInitalizerList, "");
       _builder.newLineIfNotEmpty();
       _builder.append("{");

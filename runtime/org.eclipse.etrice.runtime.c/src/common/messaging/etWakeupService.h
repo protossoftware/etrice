@@ -16,13 +16,8 @@
 #include "etDatatypes.h"
 #include "etSystemProtocol.h"
 
-/**
- * time definition composed by the number of seconds and the number of nano seconds
- */
-typedef struct etTime {
-	etInt32 seconds;
-	etInt32 nseconds;
-} etTime;
+#include "osal/etTime.h"
+
 
 
 typedef struct etWakeupTarget {

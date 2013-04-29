@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.generic;
 
 import com.google.inject.Inject;
@@ -15,13 +25,16 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class GenericProtocolClassGenerator {
   @Inject
+  @Extension
   private ILanguageExtension langExt;
   
   @Inject
+  @Extension
   private RoomExtensions roomExt;
   
   public String genMessageIDs(final ProtocolClass pc) {

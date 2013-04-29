@@ -11,13 +11,14 @@
  *******************************************************************************/
 
 #include "debugging/etMSCLogger.h"
-
 #include "debugging/etLogger.h"
-#include "platform/etPlatform.h"
+
+#include "osal/etThread.h"
 
 static etFileHandle etMSCLogger_fileHandle = NULL;
 static char* etMSCLogger_objectName = "";
 
+/*TODO: move or replace ET_MAX_FILENAME_LEN */
 #define ET_MAX_FILENAME_LEN 256
 
 void etMSCLogger_open(char* logPath, char* mscName){

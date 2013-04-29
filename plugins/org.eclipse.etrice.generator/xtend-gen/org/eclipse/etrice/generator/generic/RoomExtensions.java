@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.generic;
 
 import com.google.common.base.Objects;
@@ -303,6 +313,11 @@ public class RoomExtensions {
     return _xifexpression;
   }
   
+  protected String _getPortClassName(final ExternalPort p) {
+    Port _ifport = p.getIfport();
+    return this.getPortClassName(_ifport);
+  }
+  
   protected String _getPortClassName(final SAPRef sap) {
     ProtocolClass _protocol = sap.getProtocol();
     return this.getPortClassName(_protocol, true);
@@ -336,11 +351,6 @@ public class RoomExtensions {
     String _plus_1 = (_plus + _xifexpression_1);
     String _plus_2 = (_plus_1 + "Port");
     return _plus_2;
-  }
-  
-  protected String _getPortClassName(final ExternalPort p) {
-    Port _ifport = p.getIfport();
-    return this.getPortClassName(_ifport);
   }
   
   protected String _getPortClassName(final ServiceImplementation svc) {

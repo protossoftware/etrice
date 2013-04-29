@@ -227,6 +227,10 @@ class RoomExtensions {
 			""
 	}
 	
+	def dispatch String getPortClassName(ExternalPort p){
+		return p.ifport.getPortClassName()
+	}
+
 	def dispatch getPortClassName(SAPRef sap) {
 		return sap.protocol.getPortClassName(true)
 	}
@@ -241,10 +245,6 @@ class RoomExtensions {
 	
 	def String getPortClassName(ProtocolClass p, boolean conj, boolean repl) {
 		p.name + (if (conj) "Conj" else "") + (if (repl) "Repl" else "") +"Port"
-	}
-
-	def dispatch String getPortClassName(ExternalPort p){
-		return p.ifport.getPortClassName()
 	}
 
 	def dispatch String getPortClassName(ServiceImplementation svc) {

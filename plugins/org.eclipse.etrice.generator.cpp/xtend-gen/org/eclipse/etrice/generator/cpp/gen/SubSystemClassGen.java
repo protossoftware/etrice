@@ -21,6 +21,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
@@ -29,12 +30,15 @@ public class SubSystemClassGen {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private CppExtensions _cppExtensions;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
+  @Extension
   private ProcedureHelpers _procedureHelpers;
   
   @Inject

@@ -1,2 +1,0 @@
-This generic platform can be used for most 32 or 64 bit systems like windows and linux.
-It uses standard c libraries only and it makes use of the file system.

@@ -10,8 +10,8 @@
  *
  *******************************************************************************/
 
-#ifndef ETRTSYSTEMSERVICESPROTOCOL_H_
-#define ETRTSYSTEMSERVICESPROTOCOL_H_
+#ifndef _ETRTSYSTEMSERVICESPROTOCOL_H_
+#define _ETRTSYSTEMSERVICESPROTOCOL_H_
 
 
 

@@ -135,7 +135,7 @@ class NodeGen {
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
 		
-		#include "platform/etTimer.h"
+		#include "osal/etTimer.h"
 		#include "etRuntimeConfig.h"
 
 «««		TODOCGENPHYS: user code?
@@ -325,7 +325,6 @@ class NodeGen {
 		 */
 
 		#include "messaging/etMessageService.h"
-		#include "platform/etMemory.h"
 
 		/* include all used ActorClasses */
 		«FOR actorClass : root.getUsedActorClasses()»

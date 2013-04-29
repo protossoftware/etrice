@@ -17,7 +17,10 @@
 #include "etDatatypes.h"
 #include "messaging/etMessageQueue.h"
 #include "messaging/etMessageReceiver.h"
-#include "platform/etPlatform.h"
+
+#include "osal/etMutex.h"
+#include "osal/etThread.h"
+#include "osal/etSema.h"
 
 
 enum etMessageService_execmode {

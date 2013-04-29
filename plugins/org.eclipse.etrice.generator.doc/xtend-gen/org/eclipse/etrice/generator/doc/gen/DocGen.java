@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Thomas Jung, Thomas Schuetz (initial contribution)
+ */
 package org.eclipse.etrice.generator.doc.gen;
 
 import com.google.common.base.Objects;
@@ -32,15 +42,18 @@ import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
 public class DocGen implements IRoomGenerator {
   @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private RoomExtensions roomExt;
   
   @Inject
@@ -827,7 +840,7 @@ public class DocGen implements IRoomGenerator {
             boolean _isLeaf = this.roomExt.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
-              CharSequence _generateStateDoc = this.generateStateDoc(model, ac, s_1);
+              Object _generateStateDoc = this.generateStateDoc(model, ac, s_1);
               _builder.append(_generateStateDoc, "");
               _builder.newLineIfNotEmpty();
             }

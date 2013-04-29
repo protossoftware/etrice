@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.generic;
 
 import com.google.common.base.Objects;
@@ -34,6 +44,7 @@ import org.eclipse.etrice.generator.generic.TransitionChainGenerator;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -43,6 +54,7 @@ public class GenericStateMachineGenerator {
   protected ILanguageExtension langExt;
   
   @Inject
+  @Extension
   protected RoomExtensions _roomExtensions;
   
   @Inject
@@ -1299,7 +1311,7 @@ public class GenericStateMachineGenerator {
       if ((_eContainer_1 instanceof State)) {
         EObject _eContainer_2 = state.eContainer();
         EObject _eContainer_3 = _eContainer_2.eContainer();
-        CharSequence _genDoCodes = this.genDoCodes(((State) _eContainer_3));
+        Object _genDoCodes = this.genDoCodes(((State) _eContainer_3));
         _builder.append(_genDoCodes, "");
         _builder.newLineIfNotEmpty();
       }

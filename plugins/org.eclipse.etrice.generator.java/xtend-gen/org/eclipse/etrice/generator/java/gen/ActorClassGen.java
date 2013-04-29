@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ */
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
@@ -31,6 +41,7 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.StateMachineGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -41,9 +52,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private JavaExtensions _javaExtensions;
   
   @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
@@ -53,12 +66,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private ConfigGenAddon configGenAddon;
   
   @Inject
+  @Extension
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
+  @Extension
   private Initialization _initialization;
   
   @Inject
+  @Extension
   private StateMachineGen _stateMachineGen;
   
   @Inject
@@ -269,7 +285,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _genMinMaxConstants = this.configGenAddon.genMinMaxConstants(ac);
+      String _genMinMaxConstants = this.configGenAddon.genMinMaxConstants(ac);
       _builder.append(_genMinMaxConstants, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Thomas Schuetz (refactoring, adapted for other target languages)
+ */
 package org.eclipse.etrice.generator.generic;
 
 import com.google.common.base.Objects;
@@ -23,6 +34,7 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
@@ -32,6 +44,7 @@ public class ProcedureHelpers {
   private ILanguageExtension languageExt;
   
   @Inject
+  @Extension
   private TypeHelpers _typeHelpers;
   
   @Inject

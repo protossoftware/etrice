@@ -25,6 +25,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -32,21 +33,27 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class DataClassGen {
   @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
+  @Extension
   private CppExtensions stdExt;
   
   @Inject
+  @Extension
   private RoomExtensions roomExt;
   
   @Inject
+  @Extension
   private ProcedureHelpers helpers;
   
   @Inject
+  @Extension
   private TypeHelpers typeHelpers;
   
   @Inject
+  @Extension
   private Initialization _initialization;
   
   @Inject

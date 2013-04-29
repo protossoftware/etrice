@@ -13,7 +13,7 @@
 #ifndef _etThreadController_H_
 #define _etThreadController_H_
 
-#include "platform/etPlatform.h"
+#include "osal/etThread.h"
 
 /**
  * etThreadController holds a complete list of all threads

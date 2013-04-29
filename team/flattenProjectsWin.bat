@@ -18,3 +18,5 @@ mklink /J ..\..\FlatWorld\org.eclipse.etrice.modellib.java ..\runtime\org.eclips
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.c ..\runtime\org.eclipse.etrice.runtime.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.java ..\runtime\org.eclipse.etrice.runtime.java
 
+REM tests
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.c.tests ..\tests\org.eclipse.etrice.runtime.c.tests

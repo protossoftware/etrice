@@ -1,12 +1,12 @@
 etUnit report
 ts start: TestQueue
 tc start 1: TestEtQueue_test
-tc end 1: 0
+tc end 1: 19
 ts start: TestMemory
 tc start 2: TestEtMemory_testFixedSize
-tc end 2: 15
+tc end 2: 9
 tc start 3: TestEtMemory_testFreeList
-tc end 3: 0
+tc end 3: 2
 ts start: TestMessage
 tc start 4: TestEtMessage_testBasicMessage
 tc end 4: 0
@@ -14,20 +14,12 @@ ts start: TestEtMessageQueue
 tc start 5: TestEtMessageQueue_testPushPop
 tc end 5: 0
 tc start 6: TestEtMessageQueue_testMassiveMessaging
-tc end 6: 16
-ts start: TestEtMessageService
-tc start 7: TestEtMessageService_init
-tc end 7: 0
-tc start 8: TestEtMessageService_GetPushPopReturn
-tc end 8: 0
-tc start 9: TestEtMessageService_GetReturn
-tc end 9: 0
-tc start 10: TestEtMessageService_execute
-tc end 10: 0
-tc start 11: TestEtMessageService_getMessagePoolLowWaterMark
-tc end 11: 0
+tc end 6: 9
 ts start: TestEtUnit
-tc start 12: TestEtUnit_Expect_Order
-tc end 12: 0
-tc start 13: TestEtUnit_Expect
-tc end 13: 0
+tc start 7: TestEtUnit_Expect_Order
+tc end 7: 0
+tc start 8: TestEtUnit_Expect
+tc end 8: 0
+ts start: TestEtTimer
+tc start 9: TestEtTimer_lifecycle
+tc end 9: 11142

@@ -44,6 +44,11 @@ void DummyMessageDispatcher(const etMessage* msg){
 	}
 }
 
+/* dummy execute dispatcher */
+void DummyExecuteDispatcher(void){
+	//nothing to do
+}
+
 void TestEtMessageService_init(etInt16 id){
 
 	etMessageService msgService;
@@ -52,7 +57,7 @@ void TestEtMessageService_init(etInt16 id){
 
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher, DummyExecuteDispatcher, EXECMODE_BLOCKED);
 
 	EXPECT_EQUAL_PTR(id, "msgService.messagePool.first", msgBuffer, msgService.messagePool.first);
 	EXPECT_EQUAL_PTR(id, "msgService.messagePool in between", &msgBuffer[3*blockSize], msgService.messagePool.first->next->next->next);
@@ -69,7 +74,7 @@ void TestEtMessageService_GetPushPopReturn(etInt16 id){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher, DummyExecuteDispatcher, EXECMODE_BLOCKED);
 
 	// get messages from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -114,7 +119,7 @@ void TestEtMessageService_GetReturn(etInt16 id){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher, DummyExecuteDispatcher, EXECMODE_BLOCKED);
 
 	// get one message too much from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -141,7 +146,7 @@ void TestEtMessageService_execute(etInt16 id){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher, DummyExecuteDispatcher, EXECMODE_BLOCKED);
 
 	// get messages from pool
 	etMessage* msg1 = etMessageService_getMessageBuffer(&msgService, sizeof(etMessage));
@@ -170,7 +175,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	uint16 blockSize = 32;
 	uint8 msgBuffer[max*blockSize];
 
-	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher);
+	etMessageService_init(&msgService, msgBuffer, max, blockSize, DummyMessageDispatcher, DummyExecuteDispatcher, EXECMODE_BLOCKED);
 
 	EXPECT_EQUAL_INT16(id, "inital low water mark", max, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
