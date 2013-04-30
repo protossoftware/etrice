@@ -281,7 +281,8 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		
 		int errors = 0;
 		int warnings = 0;
-		for (Resource resource : resourceSet.getResources()) {
+		ArrayList<Resource> resources = new ArrayList<Resource>(resourceSet.getResources());
+		for (Resource resource : resources) {
 			List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 			if (!list.isEmpty()) {
 				for (Issue issue : list) {
