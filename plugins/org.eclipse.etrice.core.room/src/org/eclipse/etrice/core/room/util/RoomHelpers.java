@@ -1408,6 +1408,23 @@ public class RoomHelpers {
 		return result;
 	}
 	
+	public static List<ActorContainerRef> getAllActorContainerRefs(StructureClass sc) {
+		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
+		
+		if(sc instanceof LogicalSystem)
+			refs.addAll(((LogicalSystem)sc).getSubSystems());
+		else if(sc instanceof ActorContainerClass) {
+			refs.addAll(((ActorContainerClass)sc).getActorRefs());
+			if(sc instanceof ActorClass){
+				ActorClass base = (ActorClass)sc;
+				while((base = base.getBase()) != null)
+					refs.addAll(base.getActorRefs());
+			}
+		}
+		
+		return refs;
+	}
+
 	/**
 	 * Returns the parent {@link ActorClass} of a {@link StateGraphItem}.
 	 * 

@@ -16,8 +16,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
+import org.eclipse.etrice.ui.structure.support.provider.SuperDiagramPositionProvider;
+import org.eclipse.graphiti.dt.IDiagramTypeProvider;
+import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -49,8 +55,17 @@ public class StructureEditor extends RoomDiagramEditor {
 
 	@Override
 	protected void superClassChanged() {
-		// TODO Auto-generated method stub
-		
+		IDiagramTypeProvider diagramTypeProvider = getDiagramTypeProvider();
+		Diagram diagram = diagramTypeProvider.getDiagram();
+		IFeatureProvider featureProvider = diagramTypeProvider.getFeatureProvider();
+		IUpdateContext updateCtx = new PositionUpdateContext(diagram, new SuperDiagramPositionProvider(getStructureClass()));
+		featureProvider.updateIfPossible(updateCtx);
+		refresh();
+	}
+	
+	@Override
+	protected DefaultRefreshBehavior createRefreshBehavior() {
+		return new DiagramRefreshBehavior(this);
 	}
 	
 }
