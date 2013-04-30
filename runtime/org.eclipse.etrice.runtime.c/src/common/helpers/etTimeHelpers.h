@@ -10,14 +10,13 @@
  *
  *******************************************************************************/
 
-#ifndef ETTIMEHELPERS_H_
-#define ETTIMEHELPERS_H_
+#ifndef _ETTIMEHELPERS_H_
+#define _ETTIMEHELPERS_H_
 
 #include "osal/etTime.h"
 
-void etTime_subtract(etTime *self, etTime* subtractValue);
-void etTime_add(etTime *self, etTime* addValue);
 etInt32 etTimeHelpers_convertToMSec(etTime *time);
+void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds);
 
 
-#endif /* ETTIMEHELPERS_H_ */
+#endif /* _ETTIMEHELPERS_H_ */
