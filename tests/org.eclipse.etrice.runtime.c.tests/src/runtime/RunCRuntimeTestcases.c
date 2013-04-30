@@ -44,7 +44,7 @@ void RunCRuntimeTestcases(void){
 	TestEtMemory_runSuite();
 	TestEtMessage_runSuite();
 	TestEtMessageQueue_runSuite();
-//	TestEtMessageService_runSuite();
+	TestEtMessageService_runSuite();
 	TestEtUnit_runSuite();
 	TestEtTimer_runSuite();
 	TestEtTimeHelpers_runSuite();
