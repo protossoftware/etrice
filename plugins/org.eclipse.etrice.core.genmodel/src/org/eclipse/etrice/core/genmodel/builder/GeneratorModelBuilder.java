@@ -79,7 +79,7 @@ public class GeneratorModelBuilder {
 	/**
 	 * the first object id used for the {@link org.eclipse.etrice.core.etrice.runtime.messaging.Address Address}es s of runtime instances
 	 */
-	private static final int OBJ_ID_OFFSET = 100;
+	private static final int OBJ_ID_OFFSET = 0;
 	
 	/**
 	 * a set containing all relay ports for fast frequent access to this information
