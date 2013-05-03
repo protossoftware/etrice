@@ -11,7 +11,8 @@ PhysicalModel cGenRef {
 		priomax = 5
 		
 		DefaultThread PhysicalThread1 {
-			execmode = blocked
+			execmode = mixed
+			interval = 100 ms
 			prio = 5
 			stacksize = 1024
 			msgblocksize = 32

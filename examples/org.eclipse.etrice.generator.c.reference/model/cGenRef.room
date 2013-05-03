@@ -146,7 +146,9 @@ RoomModel cGenRef {
 		Behavior {
 			//@BehaviorManual
 		}
-	}		
+	}
+	
+	
 
 	async ActorClass Sender {
 		Interface {
@@ -183,10 +185,16 @@ RoomModel cGenRef {
 					entry {
 						"dataOut.sendData();"
 					}
+					do {
+						"etLogger_logInfo(\">>> sending tick\");"
+					}
 				}
 				State Done {
 					entry {
 						"etLogger_logInfo(\"+++   Sender Done   +++\");"
+					}
+					do {
+						"etLogger_logInfo(\">>> done tick\");"
 					}
 				}
 			}
