@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.etphys.validation;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
+import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
@@ -30,6 +31,19 @@ public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 		
 		if (thread.getPrio()>nc.getPriomax())
 			error("prio greater than maximum", ETPhysPackage.Literals.PHYSICAL_THREAD__PRIO);
+		
+		if (thread.getExecmode()==ExecMode.BLOCKED) {
+			if (thread.getTime()!=0)
+				error("no time interval must be specified with blocked execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+		}
+		else if (thread.getExecmode()==ExecMode.POLLED){
+			if (thread.getTime()==0)
+				error("a time interval must be specified with polled execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+		}
+		else if (thread.getExecmode()==ExecMode.MIXED){
+			if (thread.getTime()==0)
+				error("a time interval must be specified with mixed execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+		}
 	}
 	
 	@Check

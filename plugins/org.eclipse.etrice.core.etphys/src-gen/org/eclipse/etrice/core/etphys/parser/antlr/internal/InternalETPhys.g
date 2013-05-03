@@ -600,45 +600,71 @@ rulePhysicalThread returns [EObject current=null]
 	    }
 
 )
-)	otherlv_7='prio' 
+)(	otherlv_7='interval' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getPhysicalThreadAccess().getPrioKeyword_6());
+    	newLeafNode(otherlv_7, grammarAccess.getPhysicalThreadAccess().getIntervalKeyword_6_0());
     }
 	otherlv_8='=' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_7());
+    	newLeafNode(otherlv_8, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_6_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_8_0()); 
+	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getTimeTIMEParserRuleCall_6_2_0()); 
 	    }
-		lv_prio_9_0=rulePRIO		{
+		lv_time_9_0=ruleTIME		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
+	        }
+       		set(
+       			$current, 
+       			"time",
+        		lv_time_9_0, 
+        		"TIME");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?	otherlv_10='prio' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getPhysicalThreadAccess().getPrioKeyword_7());
+    }
+	otherlv_11='=' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_8());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_9_0()); 
+	    }
+		lv_prio_12_0=rulePRIO		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
 	        }
        		set(
        			$current, 
        			"prio",
-        		lv_prio_9_0, 
+        		lv_prio_12_0, 
         		"PRIO");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_10='stacksize' 
+)	otherlv_13='stacksize' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_9());
+    	newLeafNode(otherlv_13, grammarAccess.getPhysicalThreadAccess().getStacksizeKeyword_10());
     }
-	otherlv_11='=' 
+	otherlv_14='=' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_10());
+    	newLeafNode(otherlv_14, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_11());
     }
 (
 (
-		lv_stacksize_12_0=RULE_INT
+		lv_stacksize_15_0=RULE_INT
 		{
-			newLeafNode(lv_stacksize_12_0, grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_11_0()); 
+			newLeafNode(lv_stacksize_15_0, grammarAccess.getPhysicalThreadAccess().getStacksizeINTTerminalRuleCall_12_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -647,24 +673,24 @@ rulePhysicalThread returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"stacksize",
-        		lv_stacksize_12_0, 
+        		lv_stacksize_15_0, 
         		"INT");
 	    }
 
 )
-)	otherlv_13='msgblocksize' 
+)	otherlv_16='msgblocksize' 
     {
-    	newLeafNode(otherlv_13, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_12());
+    	newLeafNode(otherlv_16, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeKeyword_13());
     }
-	otherlv_14='=' 
+	otherlv_17='=' 
     {
-    	newLeafNode(otherlv_14, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_13());
+    	newLeafNode(otherlv_17, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_14());
     }
 (
 (
-		lv_msgblocksize_15_0=RULE_INT
+		lv_msgblocksize_18_0=RULE_INT
 		{
-			newLeafNode(lv_msgblocksize_15_0, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_14_0()); 
+			newLeafNode(lv_msgblocksize_18_0, grammarAccess.getPhysicalThreadAccess().getMsgblocksizeINTTerminalRuleCall_15_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -673,24 +699,24 @@ rulePhysicalThread returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"msgblocksize",
-        		lv_msgblocksize_15_0, 
+        		lv_msgblocksize_18_0, 
         		"INT");
 	    }
 
 )
-)	otherlv_16='msgpoolsize' 
+)	otherlv_19='msgpoolsize' 
     {
-    	newLeafNode(otherlv_16, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_15());
+    	newLeafNode(otherlv_19, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeKeyword_16());
     }
-	otherlv_17='=' 
+	otherlv_20='=' 
     {
-    	newLeafNode(otherlv_17, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_16());
+    	newLeafNode(otherlv_20, grammarAccess.getPhysicalThreadAccess().getEqualsSignKeyword_17());
     }
 (
 (
-		lv_msgpoolsize_18_0=RULE_INT
+		lv_msgpoolsize_21_0=RULE_INT
 		{
-			newLeafNode(lv_msgpoolsize_18_0, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_17_0()); 
+			newLeafNode(lv_msgpoolsize_21_0, grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeINTTerminalRuleCall_18_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -699,14 +725,14 @@ rulePhysicalThread returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"msgpoolsize",
-        		lv_msgpoolsize_18_0, 
+        		lv_msgpoolsize_21_0, 
         		"INT");
 	    }
 
 )
-)	otherlv_19='}' 
+)	otherlv_22='}' 
     {
-    	newLeafNode(otherlv_19, grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_18());
+    	newLeafNode(otherlv_22, grammarAccess.getPhysicalThreadAccess().getRightCurlyBracketKeyword_19());
     }
 )
 ;
@@ -1051,6 +1077,82 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
     }
 )*)
+    ;
+
+
+
+
+
+// Entry rule entryRuleTIME
+entryRuleTIME returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTIMERule()); } 
+	 iv_ruleTIME=ruleTIME 
+	 { $current=$iv_ruleTIME.current.getText(); }  
+	 EOF 
+;
+
+// Rule TIME
+ruleTIME returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
+    }
+
+    { 
+    newLeafNode(this_INT_0, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_0_0()); 
+    }
+
+	kw='s' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getSKeyword_0_1()); 
+    }
+)
+    |(    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
+    }
+
+    { 
+    newLeafNode(this_INT_2, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_1_0()); 
+    }
+
+	kw='ms' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getMsKeyword_1_1()); 
+    }
+)
+    |(    this_INT_4=RULE_INT    {
+		$current.merge(this_INT_4);
+    }
+
+    { 
+    newLeafNode(this_INT_4, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_2_0()); 
+    }
+
+	kw='us' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getUsKeyword_2_1()); 
+    }
+)
+    |(    this_INT_6=RULE_INT    {
+		$current.merge(this_INT_6);
+    }
+
+    { 
+    newLeafNode(this_INT_6, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_3_0()); 
+    }
+
+	kw='ns' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getNsKeyword_3_1()); 
+    }
+))
     ;
 
 

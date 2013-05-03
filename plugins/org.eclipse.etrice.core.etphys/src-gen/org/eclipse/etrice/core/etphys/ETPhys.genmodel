@@ -45,6 +45,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/default"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/execmode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/time"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/prio"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/stacksize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/msgblocksize"/>

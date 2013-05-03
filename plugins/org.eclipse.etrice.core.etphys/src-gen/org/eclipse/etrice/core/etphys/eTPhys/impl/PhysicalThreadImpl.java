@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#isDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getExecmode <em>Execmode</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getTime <em>Time</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getPrio <em>Prio</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getStacksize <em>Stacksize</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getMsgblocksize <em>Msgblocksize</em>}</li>
@@ -93,6 +94,26 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected ExecMode execmode = EXECMODE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getTime() <em>Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTime()
+   * @generated
+   * @ordered
+   */
+  protected static final int TIME_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTime()
+   * @generated
+   * @ordered
+   */
+  protected int time = TIME_EDEFAULT;
 
   /**
    * The default value of the '{@link #getPrio() <em>Prio</em>}' attribute.
@@ -269,6 +290,29 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  public int getTime()
+  {
+    return time;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTime(int newTime)
+  {
+    int oldTime = time;
+    time = newTime;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__TIME, oldTime, time));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public int getPrio()
   {
     return prio;
@@ -372,6 +416,8 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         return getName();
       case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         return getExecmode();
+      case ETPhysPackage.PHYSICAL_THREAD__TIME:
+        return getTime();
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         return getPrio();
       case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
@@ -402,6 +448,9 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         return;
       case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         setExecmode((ExecMode)newValue);
+        return;
+      case ETPhysPackage.PHYSICAL_THREAD__TIME:
+        setTime((Integer)newValue);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio((Integer)newValue);
@@ -438,6 +487,9 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
       case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         setExecmode(EXECMODE_EDEFAULT);
         return;
+      case ETPhysPackage.PHYSICAL_THREAD__TIME:
+        setTime(TIME_EDEFAULT);
+        return;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio(PRIO_EDEFAULT);
         return;
@@ -470,6 +522,8 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         return execmode != EXECMODE_EDEFAULT;
+      case ETPhysPackage.PHYSICAL_THREAD__TIME:
+        return time != TIME_EDEFAULT;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         return prio != PRIO_EDEFAULT;
       case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
@@ -499,6 +553,8 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
     result.append(name);
     result.append(", execmode: ");
     result.append(execmode);
+    result.append(", time: ");
+    result.append(time);
     result.append(", prio: ");
     result.append(prio);
     result.append(", stacksize: ");

@@ -148,6 +148,7 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *         default?='DefaultThread'? 
 	 *         name=ID 
 	 *         execmode=ExecMode 
+	 *         time=TIME? 
 	 *         prio=PRIO 
 	 *         stacksize=INT 
 	 *         msgblocksize=INT 

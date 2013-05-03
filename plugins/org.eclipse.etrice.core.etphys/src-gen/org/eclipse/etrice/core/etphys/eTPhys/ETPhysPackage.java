@@ -324,13 +324,22 @@ public interface ETPhysPackage extends EPackage
   int PHYSICAL_THREAD__EXECMODE = 2;
 
   /**
+   * The feature id for the '<em><b>Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PHYSICAL_THREAD__TIME = 3;
+
+  /**
    * The feature id for the '<em><b>Prio</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PHYSICAL_THREAD__PRIO = 3;
+  int PHYSICAL_THREAD__PRIO = 4;
 
   /**
    * The feature id for the '<em><b>Stacksize</b></em>' attribute.
@@ -339,7 +348,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PHYSICAL_THREAD__STACKSIZE = 4;
+  int PHYSICAL_THREAD__STACKSIZE = 5;
 
   /**
    * The feature id for the '<em><b>Msgblocksize</b></em>' attribute.
@@ -348,7 +357,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PHYSICAL_THREAD__MSGBLOCKSIZE = 5;
+  int PHYSICAL_THREAD__MSGBLOCKSIZE = 6;
 
   /**
    * The feature id for the '<em><b>Msgpoolsize</b></em>' attribute.
@@ -357,7 +366,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PHYSICAL_THREAD__MSGPOOLSIZE = 6;
+  int PHYSICAL_THREAD__MSGPOOLSIZE = 7;
 
   /**
    * The number of structural features of the '<em>Physical Thread</em>' class.
@@ -366,7 +375,7 @@ public interface ETPhysPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PHYSICAL_THREAD_FEATURE_COUNT = 7;
+  int PHYSICAL_THREAD_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl <em>Runtime Class</em>}' class.
@@ -771,6 +780,17 @@ public interface ETPhysPackage extends EPackage
   EAttribute getPhysicalThread_Execmode();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Time</em>'.
+   * @see org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime()
+   * @see #getPhysicalThread()
+   * @generated
+   */
+  EAttribute getPhysicalThread_Time();
+
+  /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getPrio <em>Prio</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1162,6 +1182,14 @@ public interface ETPhysPackage extends EPackage
      * @generated
      */
     EAttribute PHYSICAL_THREAD__EXECMODE = eINSTANCE.getPhysicalThread_Execmode();
+
+    /**
+     * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PHYSICAL_THREAD__TIME = eINSTANCE.getPhysicalThread_Time();
 
     /**
      * The meta object literal for the '<em><b>Prio</b></em>' attribute feature.

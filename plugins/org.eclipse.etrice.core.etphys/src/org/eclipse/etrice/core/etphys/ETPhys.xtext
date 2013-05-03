@@ -49,6 +49,7 @@ NodeClass:
 PhysicalThread:
 	(default?='DefaultThread' | 'Thread') name=ID '{'
 		'execmode' '=' execmode=ExecMode
+		('interval' '=' time=TIME)?
 		'prio' '=' prio=PRIO
 		'stacksize' '=' stacksize=INT
 		'msgblocksize' '=' msgblocksize=INT
@@ -87,3 +88,5 @@ ImportedFQN:
 
 FQN:
 	ID ('.' ID)*;
+	
+TIME returns ecore::EInt: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
