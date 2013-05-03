@@ -1,5 +1,6 @@
-/Debug
-/src-gen-info
+Debug
+Release
+src-gen-info
 *.aux
 *.lof
 *.gz

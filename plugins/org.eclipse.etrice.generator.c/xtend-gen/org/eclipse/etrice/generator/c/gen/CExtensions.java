@@ -17,7 +17,9 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -124,6 +126,38 @@ public class CExtensions implements ILanguageExtension {
     return (_name + "_Disp.h");
   }
   
+  public String getCHeaderFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + ".h");
+  }
+  
+  public String getCSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + ".c");
+  }
+  
+  public String getInstSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + "_Inst.h");
+  }
+  
+  public String getDispSourceFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = (_name + "_");
+    String _name_1 = ssi.getName();
+    String _plus_1 = (_plus + _name_1);
+    return (_plus_1 + "_Disp.h");
+  }
+  
   public CharSequence getIncludeGuardString(final String filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("_");
@@ -142,16 +176,8 @@ public class CExtensions implements ILanguageExtension {
       String _plus = (_replaceAll + "_");
       String _name_1 = rc.getName();
       final String filename = (_plus + _name_1);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("#ifndef ");
-      CharSequence _includeGuardString = this.getIncludeGuardString(filename);
-      _builder.append(_includeGuardString, "");
-      _builder.newLineIfNotEmpty();
-      _builder.append("#define ");
-      CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
-      _builder.append(_includeGuardString_1, "");
-      _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      CharSequence _generateIncludeGuardBegin = this.generateIncludeGuardBegin(filename);
+      _xblockexpression = (_generateIncludeGuardBegin);
     }
     return _xblockexpression;
   }
@@ -165,15 +191,33 @@ public class CExtensions implements ILanguageExtension {
       String _plus = (_replaceAll + "_");
       String _name_1 = rc.getName();
       final String filename = (_plus + _name_1);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("#endif /* ");
-      CharSequence _includeGuardString = this.getIncludeGuardString(filename);
-      _builder.append(_includeGuardString, "");
-      _builder.append(" */");
-      _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      CharSequence _generateIncludeGuardEnd = this.generateIncludeGuardEnd(filename);
+      _xblockexpression = (_generateIncludeGuardEnd);
     }
     return _xblockexpression;
+  }
+  
+  public CharSequence generateIncludeGuardBegin(final String filename) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#ifndef ");
+    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("#define ");
+    CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString_1, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence generateIncludeGuardEnd(final String filename) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#endif /* ");
+    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+    _builder.append(_includeGuardString, "");
+    _builder.append(" */");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   public boolean usesInheritance() {

@@ -1,0 +1,81 @@
+digraph RuntimeArchitecture {
+	subgraph cluster_100 {
+
+	subgraph cluster_0 {
+		label = "base"
+		etMemory_FixedSize
+		etMemory_FreeList
+		etMemory
+		etQueue
+		etMemory_FixedSize -> etMemory
+		etMemory_FixedSize -> etQueue
+		etMemory_FreeList -> etMemory
+	}
+#	etMemory_FixedSize -> etMSCLogger
+#	etMemory_FixedSize -> etLogger
+	
+	subgraph cluster_1 {
+		label = "debugging"
+		etLogger
+		etMSCLogger
+		etMSCLogger -> etLogger
+	}
+	subgraph cluster_2 {
+		label = "etUnit"
+		etUnit
+	}
+	etUnit -> etLogger
+
+	subgraph cluster_3 {
+		label = "messaging"
+		etMessage
+		etMessageQueue
+		etMessageReceiver
+		etMessageService
+		etMessageQueue -> etMessage
+		etMessageReceiver -> etMessage
+		etMessageService -> etMessageQueue
+		etMessageService -> etMessageReceiver
+	}
+	etMessageService -> etPlatform
+	subgraph cluster_4 {
+		label = "modelbase"
+		etActor
+		etPort
+		etActor -> etPort
+	}
+	etPort -> etMessage
+	etPort -> etMessageReceiver
+	etPort -> etMessageService
+	subgraph cluster_5 {
+		label = "platform"
+		etMemory
+		etPlatform
+		etTimer
+	}
+	subgraph cluster_6 {
+		label = "runtime"
+		etRuntime
+		etThreadController
+	}
+	}
+	etMemory -> etDatatypes
+	etQueue -> etDatatypes
+	etUnit -> etDatatypes
+	etLogger -> etDatatypes
+	etMSCLogger -> etDatatypes
+	etMSCLogger -> etRuntimeConfig
+
+
+
+	subgraph cluster_101 {
+		label = "platforms"
+		etDatatypes
+	}
+	subgraph cluster_102 {
+		label = "config"
+		etRuntimeConfig
+	}
+	
+	
+}

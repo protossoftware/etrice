@@ -7,7 +7,10 @@
  * 
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+<<<<<<< HEAD
  * 		Peter Karlitschek
+=======
+>>>>>>> refs/remotes/origin/CGenPhysical
  */
 package org.eclipse.etrice.generator.cpp.gen;
 

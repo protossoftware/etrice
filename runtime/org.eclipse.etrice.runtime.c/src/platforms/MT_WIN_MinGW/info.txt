@@ -1,0 +1,10 @@
+Platform: MT_WIN_MinGW
+
+Threading:         Multi Threaded 
+Processor:         -
+Operating System:  Windows (MinGW)
+Compiler:          GCC (MinGW)
+Board:             -
+
+Description: 
+This platform should work for all Windows based MinGW compilers

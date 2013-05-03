@@ -1,786 +1,2346 @@
-main ==> SubSys init
-SubSys ==> SubSys constructActorInstances
-SubSys <== SubSys
-SubSys ==> etMessageService init
-etMessageService ==> etMessageQueue init
+main ==> node1_sys1 init(thread=5740)
+node1_sys1 ==> node1_sys1 constructActorInstances(thread=5740)
+node1_sys1 <== node1_sys1
+node1_sys1 ==> node1_sys1 initMessageServices(thread=5740)
+node1_sys1 ==> etMessageService init(thread=5740)
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue init
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageService initMessagePool
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageService initMessagePool(thread=5740)
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> SubSys initActorInstances
-SubSys ==> Sender init
-Sender ==> CommunicationProtocolConjPort sendData
-CommunicationProtocolConjPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema construct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService init(thread=5740)
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-CommunicationProtocolConjPort <== etMessageService
-CommunicationProtocolConjPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-CommunicationProtocolConjPort <== etMessageService
-Sender <== CommunicationProtocolConjPort
-SubSys <== Sender
-SubSys ==> Receiver init
-SubSys <== Receiver
-SubSys <== SubSys
-main <== SubSys
-main ==> SubSys start
-main <== SubSys
-main ==> SubSys run
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageService initMessagePool(thread=5740)
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageService popMessage
-etMessageService ==> etMessageQueue pop
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> MsgDispatcher_Thread1 receiveMessage
-MsgDispatcher_Thread1 ==> Receiver _receiveMessage
-Receiver ==> CommunicationProtocolPort receivedData
-CommunicationProtocolPort ==> etMessageService getMessageBuffer
-etMessageService ==> etMessageQueue pop
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-CommunicationProtocolPort ==> etMessageService pushMessage
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-CommunicationProtocolPort <== etMessageService
-Receiver <== CommunicationProtocolPort
-MsgDispatcher_Thread1 <== Receiver
-etMessageService <== MsgDispatcher_Thread1
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService ==> etMessageService popMessage
-etMessageService ==> etMessageQueue pop
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> MsgDispatcher_Thread1 receiveMessage
-MsgDispatcher_Thread1 ==> Sender _receiveMessage
-MsgDispatcher_Thread1 <== Sender
-etMessageService <== MsgDispatcher_Thread1
-etMessageService ==> etMessageService returnMessageBuffer
-etMessageService ==> etMessageQueue push
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema construct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService init(thread=5740)
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue init(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageService initMessagePool(thread=5740)
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
 etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex construct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema construct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 <== node1_sys1
+node1_sys1 ==> node1_sys1 initActorInstances(thread=5740)
+node1_sys1 ==> Tester init(thread=5740)
+Tester ==> CommunicationProtocolConjPort sendData(thread=5740)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=5740)
+etPort ==> etMessageService getMessageBuffer(thread=5740)
+etMessageService ==> etMutex enter(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMutex leave(thread=5740)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=5740)
+etMessageService ==> etMutex enter(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=5740)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etSema wakeup(thread=5740)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=5740)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjPort <== etPort
+Tester <== CommunicationProtocolConjPort
+node1_sys1 <== Tester
+node1_sys1 ==> Fork init(thread=5740)
+node1_sys1 <== Fork
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Redirect init(thread=5740)
+node1_sys1 <== Redirect
+node1_sys1 ==> Join init(thread=5740)
+node1_sys1 <== Join
+node1_sys1 ==> Supervisor init(thread=5740)
+node1_sys1 <== Supervisor
+node1_sys1 <== node1_sys1
+main <== node1_sys1
+main ==> node1_sys1 start(thread=5740)
+node1_sys1 ==> node1_sys1 startMessageServices(thread=5740)
+node1_sys1 ==> etMessageService start(thread=5740)
+etMessageService ==> etThread construct(thread=5740)
+etMessageService <== etThread
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService start(thread=5740)
+etMessageService ==> etThread construct(thread=5740)
+etMessageService <== etThread
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService start(thread=5740)
+node1_sys1 ==> etThread execute(thread=7720)
+etMessageService ==> etThread construct(thread=5740)
+etThread ==> etMessageService execute(thread=7720)
+etMessageService ==> etMessageService deliverAllMessages(thread=7720)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etSema waitForWakeup(thread=7720)
+etSema ==> etThread execute(thread=7076)
+etThread ==> etMessageService execute(thread=7076)
+etMessageService ==> etMessageService deliverAllMessages(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
 etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
 etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Fork _receiveMessage(thread=7076)
+etMessageService <== etThread
+Fork ==> CommunicationProtocolConjReplPort sendData(thread=7076)
+node1_sys1 <== etMessageService
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+node1_sys1 <== node1_sys1
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+main <== node1_sys1
+etMessageService ==> etMutex enter(thread=7076)
+main ==> node1_sys1 run(thread=5740)
+etMessageService <== etMutex
+node1_sys1 ==> etThread sleep(thread=5740)
+etMessageService ==> etMessageQueue pop(thread=7076)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
 etMessageService <== etMessageQueue
-etMessageService <== etMessageService
-SubSys <== etMessageService
-SubSys ==> etMessageService execute
-etMessageService ==> etMessageService deliverAllMessages
-etMessageService ==> etMessageQueue isNotEmpty
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageQueue ==> etThread execute(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etThread ==> etMessageService execute(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageService deliverAllMessages(thread=1708)
+etPort <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
 etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etMutex leave(thread=7720)
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
 etMessageService <== etMessageService
-SubSys <== etMessageService
-main <== SubSys
-main ==> SubSys stop
-main <== SubSys
-main ==> SubSys destroy
-main <== SubSys
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService <== etMessageQueue
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService <== etSema
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etPort <== etMessageService
+etMessageService ==> etMessageQueue pop(thread=7720)
+CommunicationProtocolConjReplPort <== etPort
+etMessageService <== etMessageQueue
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etSema wakeup(thread=7720)
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etSema wakeup(thread=7076)
+CommunicationProtocolConjPort <== etPort
+etMessageService <== etSema
+Redirect <== CommunicationProtocolConjPort
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread1
+etPort <== etMessageService
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etMessageService popMessage(thread=7720)
+CommunicationProtocolConjReplPort <== etPort
+etMessageService ==> etMutex enter(thread=7720)
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etSema wakeup(thread=7076)
+CommunicationProtocolConjPort <== etPort
+Redirect <== CommunicationProtocolConjPort
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjReplPort <== etPort
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etMessageService popMessage(thread=7720)
+CommunicationProtocolConjReplPort <== etPort
+etMessageService ==> etMutex enter(thread=7720)
+CommunicationProtocolConjReplPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etPort <== etMessageService
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etPort ==> etMessageService pushMessage(thread=7076)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etSema wakeup(thread=7720)
+CommunicationProtocolConjReplPort <== etPort
+etMessageService <== etSema
+Fork <== CommunicationProtocolConjReplPort
+etMessageService ==> etMutex leave(thread=7720)
+MsgDispatcher_PhysicalThread2 <== Fork
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread2
+etPort <== etMessageService
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+CommunicationProtocolConjPort <== etPort
+etMessageService ==> etMutex enter(thread=7076)
+Redirect <== CommunicationProtocolConjPort
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Redirect _receiveMessage(thread=7076)
+etMessageService <== etMutex
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7076)
+etMessageService <== etMessageService
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7720)
+etPort <== etMessageService
+etMessageService <== etMutex
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etMessageService <== etMessageQueue
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService <== etSema
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7720)
+etPort <== etMessageService
+etMessageService <== etMutex
+CommunicationProtocolConjPort <== etPort
+etPort <== etMessageService
+Redirect <== CommunicationProtocolConjPort
+CommunicationProtocolConjPort <== etPort
+Redirect <== CommunicationProtocolConjPort
+MsgDispatcher_PhysicalThread2 <== Redirect
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService <== etMessageQueue
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+MsgDispatcher_PhysicalThread2 ==> Redirect _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etMessageService <== etMessageQueue
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etPort <== etMessageService
+etMessageService <== etMutex
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etSema wakeup(thread=7076)
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjPort <== etPort
+Redirect <== CommunicationProtocolConjPort
+MsgDispatcher_PhysicalThread2 <== Redirect
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort <== etMessageService
+CommunicationProtocolConjPort <== etPort
+etPort ==> etMessageService pushMessage(thread=7076)
+Redirect <== CommunicationProtocolConjPort
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+etMessageService <== etSema
+MsgDispatcher_PhysicalThread1 <== Redirect
+Join <== SecurityProtocolConjPort
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService <== etMessageService
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMutex enter(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etPort <== etMessageService
+etMessageService ==> etMessageQueue push(thread=7720)
+etPort ==> etMessageService pushMessage(thread=1708)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMessageQueue
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMutex
+CommunicationProtocolConjPort <== etPort
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+Redirect <== CommunicationProtocolConjPort
+etMessageService ==> etSema wakeup(thread=1708)
+etPort ==> etMessageService pushMessage(thread=7076)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etSema
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etPort <== etMessageService
+etMessageService ==> etMessageQueue push(thread=7076)
+SecurityProtocolPort <== etPort
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+Supervisor <== SecurityProtocolPort
+etMessageService <== etMessageQueue
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService <== etMessageService
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMutex leave(thread=1708)
+etPort <== etMessageService
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageService
+SecurityProtocolConjPort <== etPort
+etMessageService <== etMutex
+Join <== SecurityProtocolConjPort
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+etMessageService <== etMessageQueue
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService ==> etMutex leave(thread=1708)
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== etMutex
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService <== etMessageService
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=7720)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService <== etMutex
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etPort <== etMessageService
+etMessageService ==> etMessageQueue push(thread=7076)
+etPort ==> etMessageService pushMessage(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etSema
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=1708)
+CommunicationProtocolConjPort <== etPort
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+Redirect <== CommunicationProtocolConjPort
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=1708)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread1
+etPort <== etMessageService
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+SecurityProtocolPort <== etPort
+etMessageService ==> etMutex enter(thread=7720)
+Supervisor <== SecurityProtocolPort
+etMessageService <== etMutex
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=1708)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService ==> etMutex enter(thread=7720)
+etPort <== etMessageService
+etMessageService <== etMutex
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+SecurityProtocolConjPort <== etPort
+etMessageService ==> etMessageService popMessage(thread=1708)
+Join <== SecurityProtocolConjPort
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== etMessageService
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService <== etMutex
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService <== etMessageQueue
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+MsgDispatcher_PhysicalThread1 ==> Redirect _receiveMessage(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+Redirect ==> CommunicationProtocolConjPort sendData(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMutex
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7720)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etPort ==> etMessageService getMessageBuffer(thread=7720)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMessageQueue
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=1708)
+etPort <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etPort ==> etMessageService pushMessage(thread=7720)
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService ==> etMutex enter(thread=7720)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMessageQueue
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+SecurityProtocolPort <== etPort
+etPort <== etMessageService
+Supervisor <== SecurityProtocolPort
+etPort ==> etMessageService pushMessage(thread=7076)
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etSema
+etMessageService ==> etSema wakeup(thread=7720)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etPort <== etMessageService
+etMessageService ==> etMutex leave(thread=7720)
+SecurityProtocolConjPort <== etPort
+etMessageService ==> etMutex leave(thread=1708)
+Join <== SecurityProtocolConjPort
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etPort <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+CommunicationProtocolConjPort <== etPort
+etMessageService <== etMessageQueue
+Redirect <== CommunicationProtocolConjPort
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+MsgDispatcher_PhysicalThread1 <== Redirect
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=7720)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService <== etMutex
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7720)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etSema waitForWakeup(thread=7720)
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService <== etSema
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etSema waitForWakeup(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+SecurityProtocolPort <== etPort
+etMessageService <== etMessageService
+Supervisor <== SecurityProtocolPort
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService <== etMessageQueue
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+etMessageService <== etSema
+Join <== SecurityProtocolConjPort
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== etMutex
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService <== etMutex
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService <== etMessageService
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService <== etMessageQueue
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService ==> etSema wakeup(thread=1708)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+SecurityProtocolPort <== etPort
+etMessageService ==> etMutex leave(thread=7076)
+Supervisor <== SecurityProtocolPort
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etPort <== etMessageService
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etMessageService <== etSema
+SecurityProtocolConjPort <== etPort
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+Join <== SecurityProtocolConjPort
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== etMessageQueue
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService <== etMessageQueue
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService ==> etSema wakeup(thread=1708)
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService <== etSema
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+SecurityProtocolPort <== etPort
+etMessageService ==> etMessageQueue pop(thread=7076)
+Supervisor <== SecurityProtocolPort
+etMessageService <== etMessageQueue
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+etMessageService <== etSema
+Join <== SecurityProtocolConjPort
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService <== etMutex
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMutex
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etPort <== etMessageService
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService pushMessage(thread=1708)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etSema
+etPort <== etMessageService
+etMessageService ==> etMutex leave(thread=1708)
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+SecurityProtocolPort <== etPort
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+Join <== SecurityProtocolConjPort
+Supervisor <== SecurityProtocolPort
+MsgDispatcher_PhysicalThread2 <== Join
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+SecurityProtocolPort <== etPort
+etMessageService ==> etMutex leave(thread=7076)
+Supervisor <== SecurityProtocolPort
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService <== etMessageService
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etMessageService <== etMutex
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etPort <== etMessageService
+etMessageService <== etMessageQueue
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+Join <== SecurityProtocolConjPort
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etSema
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=1708)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etSema
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etPort <== etMessageService
+etMessageService <== etMutex
+SecurityProtocolPort <== etPort
+etMessageService <== etMessageService
+Supervisor <== SecurityProtocolPort
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService <== etMessageQueue
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+Join ==> SecurityProtocolConjPort ping(thread=7076)
+etMessageService ==> etSema waitForWakeup(thread=1708)
+SecurityProtocolConjPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+SecurityProtocolConjPort <== etPort
+Join <== SecurityProtocolConjPort
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService ==> etMessageService popMessage(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService ==> MsgDispatcher_PhysicalThread3 receiveMessage(thread=1708)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread3 ==> Supervisor _receiveMessage(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+Supervisor ==> SecurityProtocolPort pong(thread=1708)
+etMessageService <== etMessageQueue
+SecurityProtocolPort ==> etPort sendMessage(thread=1708)
+etMessageService ==> etMutex leave(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=1708)
+etMessageService <== etMutex
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageService
+etMessageService <== etMutex
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService ==> etMessageQueue pop(thread=1708)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etSema wakeup(thread=1708)
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etPort <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+SecurityProtocolPort <== etPort
+etMessageService <== etMessageQueue
+Supervisor <== SecurityProtocolPort
+etMessageService ==> etMessageService popMessage(thread=7076)
+MsgDispatcher_PhysicalThread3 <== Supervisor
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== MsgDispatcher_PhysicalThread3
+etMessageService <== etMutex
+etMessageService ==> etMessageService returnMessageBuffer(thread=1708)
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService ==> etMutex enter(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService <== etMutex
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService ==> etMessageQueue push(thread=1708)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService <== etMessageService
+etMessageService ==> etMutex leave(thread=1708)
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+etMessageService <== etMutex
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=1708)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=1708)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread2 receiveMessage(thread=7076)
+MsgDispatcher_PhysicalThread2 ==> Join _receiveMessage(thread=7076)
+Join ==> CommunicationProtocolConjPort sendData(thread=7076)
+CommunicationProtocolConjPort ==> etPort sendMessage(thread=7076)
+etPort ==> etMessageService getMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etPort <== etMessageService
+CommunicationProtocolConjPort <== etPort
+Join <== CommunicationProtocolConjPort
+MsgDispatcher_PhysicalThread2 <== Join
+etMessageService <== MsgDispatcher_PhysicalThread2
+etMessageService ==> etMessageService returnMessageBuffer(thread=7076)
+etMessageService ==> etMutex enter(thread=7076)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7076)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMessageQueue isNotEmpty(thread=7076)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=7076)
+etMessageService <== etSema
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService popMessage(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7720)
+MsgDispatcher_PhysicalThread1 ==> Tester _receiveMessage(thread=7720)
+MsgDispatcher_PhysicalThread1 <== Tester
+etMessageService <== MsgDispatcher_PhysicalThread1
+etMessageService ==> etMessageService returnMessageBuffer(thread=7720)
+etMessageService ==> etMutex enter(thread=7720)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=7720)
+etMessageService <== etMutex
+etMessageService <== etMessageService
+etMessageService ==> etMessageQueue isNotEmpty(thread=7720)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=7720)
+node1_sys1 <== etThread
+main <== node1_sys1
+main ==> node1_sys1 stop(thread=5740)
+node1_sys1 ==> node1_sys1 stopMessageServices(thread=5740)
+node1_sys1 ==> etMessageService stop(thread=5740)
+etMessageService ==> etThread destruct(thread=5740)
+etMessageService <== etThread
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService stop(thread=5740)
+etMessageService ==> etThread destruct(thread=5740)
+etMessageService <== etThread
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService stop(thread=5740)
+etMessageService ==> etThread destruct(thread=5740)
+etMessageService <== etThread
+node1_sys1 <== etMessageService
+node1_sys1 <== node1_sys1
+main <== node1_sys1
+main ==> node1_sys1 destroy(thread=5740)
+node1_sys1 ==> node1_sys1 destroyMessageServices(thread=5740)
+node1_sys1 ==> etMessageService destroy(thread=5740)
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema destruct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService destroy(thread=5740)
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema destruct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 ==> etMessageService destroy(thread=5740)
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etMutex destruct(thread=5740)
+etMessageService <== etMutex
+etMessageService ==> etSema destruct(thread=5740)
+etMessageService <== etSema
+node1_sys1 <== etMessageService
+node1_sys1 <== node1_sys1
+main <== node1_sys1

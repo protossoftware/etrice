@@ -365,10 +365,10 @@ class GenericStateMachineGenerator {
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
 							switch(trigger) {
-							case POLLING:
+								case POLLING:
 									«genDataDrivenTriggers(xpac, state, usesHdlr)»
-								break;
-									«genEventDrivenTriggers(xpac, state, atlist, usesHdlr)»
+									break;
+								«genEventDrivenTriggers(xpac, state, atlist, usesHdlr)»
 							}
 						«ELSE»
 								«genDataDrivenTriggers(xpac, state, usesHdlr)»

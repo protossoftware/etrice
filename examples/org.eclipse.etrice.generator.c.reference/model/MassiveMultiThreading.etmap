@@ -1,0 +1,14 @@
+MappingModel MassiveMultiThreading {
+	
+	import cGenRef from "MassiveMultiThreading.room"
+	import cGenRef from "MassiveMultiThreading.etphys"
+	
+	Mapping MassiveMultiThreading.LS -> MassiveMultiThreading.Sys {
+		SubSystemMapping sys1 -> node1 {
+			ThreadMapping logical_thread1 -> PhysicalThread1
+			ThreadMapping logical_thread2 -> PhysicalThread2
+			ThreadMapping logical_thread3 -> PhysicalThread2
+			ThreadMapping logical_thread4 -> PhysicalThread3
+		}
+	}
+}

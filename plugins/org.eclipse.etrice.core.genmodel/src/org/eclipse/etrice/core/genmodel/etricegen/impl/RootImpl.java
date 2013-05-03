@@ -40,7 +40,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
@@ -489,6 +491,50 @@ public class RootImpl extends EObjectImpl implements Root {
 			if (xpac.getActorClass()==ai.getActorClass())
 				return xpac;
 		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public StructureInstance getInstance(String path) {
+		if (!path.startsWith(Character.toString(InstanceBase.pathDelim)))
+			return null;
+		
+		path = path.substring(1);
+		String[] segments = path.split(Character.toString(InstanceBase.pathDelim));
+		if (segments.length<=1)
+			return null;
+
+		String seg = segments[0];
+		for (SystemInstance si : getSystemInstances()) {
+			if (si.getName().equals(seg)) {
+				seg = segments[1];
+				for (SubSystemInstance ssi : si.getInstances()) {
+					if (ssi.getName().equals(seg)) {
+						StructureInstance inst = ssi;
+						int i = 2;
+						while (i<segments.length && inst!=null) {
+							boolean found = false;
+							for (ActorInstance ai : inst.getInstances()) {
+								if (ai.getName().equals(segments[i])) {
+									inst = ai;
+									++i;
+									found = true;
+									break;
+								}
+							}
+							if (!found)
+								return null;
+						}
+						return inst;
+					}
+				}
+			}
+		}
+		
 		return null;
 	}
 

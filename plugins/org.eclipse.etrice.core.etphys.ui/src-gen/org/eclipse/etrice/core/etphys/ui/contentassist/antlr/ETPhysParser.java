@@ -41,6 +41,7 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPhysicalThreadAccess().getAlternatives_0(), "rule__PhysicalThread__Alternatives_0");
 					put(grammarAccess.getPRIOAccess().getAlternatives_0(), "rule__PRIO__Alternatives_0");
 					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
+					put(grammarAccess.getTIMEAccess().getAlternatives(), "rule__TIME__Alternatives");
 					put(grammarAccess.getExecModeAccess().getAlternatives(), "rule__ExecMode__Alternatives");
 					put(grammarAccess.getThreadModelAccess().getAlternatives(), "rule__ThreadModel__Alternatives");
 					put(grammarAccess.getPhysicalModelAccess().getGroup(), "rule__PhysicalModel__Group__0");
@@ -48,6 +49,7 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNodeRefAccess().getGroup(), "rule__NodeRef__Group__0");
 					put(grammarAccess.getNodeClassAccess().getGroup(), "rule__NodeClass__Group__0");
 					put(grammarAccess.getPhysicalThreadAccess().getGroup(), "rule__PhysicalThread__Group__0");
+					put(grammarAccess.getPhysicalThreadAccess().getGroup_6(), "rule__PhysicalThread__Group_6__0");
 					put(grammarAccess.getRuntimeClassAccess().getGroup(), "rule__RuntimeClass__Group__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
 					put(grammarAccess.getPRIOAccess().getGroup(), "rule__PRIO__Group__0");
@@ -56,6 +58,10 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
+					put(grammarAccess.getTIMEAccess().getGroup_0(), "rule__TIME__Group_0__0");
+					put(grammarAccess.getTIMEAccess().getGroup_1(), "rule__TIME__Group_1__0");
+					put(grammarAccess.getTIMEAccess().getGroup_2(), "rule__TIME__Group_2__0");
+					put(grammarAccess.getTIMEAccess().getGroup_3(), "rule__TIME__Group_3__0");
 					put(grammarAccess.getPhysicalModelAccess().getNameAssignment_1(), "rule__PhysicalModel__NameAssignment_1");
 					put(grammarAccess.getPhysicalModelAccess().getImportsAssignment_3(), "rule__PhysicalModel__ImportsAssignment_3");
 					put(grammarAccess.getPhysicalModelAccess().getSystemsAssignment_4_0(), "rule__PhysicalModel__SystemsAssignment_4_0");
@@ -76,10 +82,11 @@ public class ETPhysParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPhysicalThreadAccess().getDefaultAssignment_0_0(), "rule__PhysicalThread__DefaultAssignment_0_0");
 					put(grammarAccess.getPhysicalThreadAccess().getNameAssignment_1(), "rule__PhysicalThread__NameAssignment_1");
 					put(grammarAccess.getPhysicalThreadAccess().getExecmodeAssignment_5(), "rule__PhysicalThread__ExecmodeAssignment_5");
-					put(grammarAccess.getPhysicalThreadAccess().getPrioAssignment_8(), "rule__PhysicalThread__PrioAssignment_8");
-					put(grammarAccess.getPhysicalThreadAccess().getStacksizeAssignment_11(), "rule__PhysicalThread__StacksizeAssignment_11");
-					put(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeAssignment_14(), "rule__PhysicalThread__MsgblocksizeAssignment_14");
-					put(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeAssignment_17(), "rule__PhysicalThread__MsgpoolsizeAssignment_17");
+					put(grammarAccess.getPhysicalThreadAccess().getTimeAssignment_6_2(), "rule__PhysicalThread__TimeAssignment_6_2");
+					put(grammarAccess.getPhysicalThreadAccess().getPrioAssignment_9(), "rule__PhysicalThread__PrioAssignment_9");
+					put(grammarAccess.getPhysicalThreadAccess().getStacksizeAssignment_12(), "rule__PhysicalThread__StacksizeAssignment_12");
+					put(grammarAccess.getPhysicalThreadAccess().getMsgblocksizeAssignment_15(), "rule__PhysicalThread__MsgblocksizeAssignment_15");
+					put(grammarAccess.getPhysicalThreadAccess().getMsgpoolsizeAssignment_18(), "rule__PhysicalThread__MsgpoolsizeAssignment_18");
 					put(grammarAccess.getRuntimeClassAccess().getNameAssignment_1(), "rule__RuntimeClass__NameAssignment_1");
 					put(grammarAccess.getRuntimeClassAccess().getDocuAssignment_2(), "rule__RuntimeClass__DocuAssignment_2");
 					put(grammarAccess.getRuntimeClassAccess().getThreadModelAssignment_6(), "rule__RuntimeClass__ThreadModelAssignment_6");

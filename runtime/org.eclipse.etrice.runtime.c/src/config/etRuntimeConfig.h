@@ -25,9 +25,7 @@
 #define ET_RUNTIME_MAXLOOP 100
 /*#define ET_RUNTIME_ENDLESS*/
 
-/* pool and block size */
-#define MESSAGE_POOL_MAX 50
-#define MESSAGE_BLOCK_SIZE 64
-
+/* enable multi threading (e.g. for protection of message queues) */
+#define ET_MULTI_THREADING
 
 #endif /* ETGLOBALFLAGS_H_ */

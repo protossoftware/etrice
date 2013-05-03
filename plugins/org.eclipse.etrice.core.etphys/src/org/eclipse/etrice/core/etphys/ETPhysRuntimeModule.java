@@ -12,7 +12,9 @@
 
 package org.eclipse.etrice.core.etphys;
 
+import org.eclipse.etrice.core.etphys.converters.ETPhysConverter;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
@@ -33,5 +35,9 @@ public class ETPhysRuntimeModule extends org.eclipse.etrice.core.etphys.Abstract
 
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
 		return PlatformRelativeUriResolver.class;
+	}
+	
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return ETPhysConverter.class;
 	}
 }

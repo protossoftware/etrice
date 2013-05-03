@@ -419,7 +419,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysicalThread_Prio()
+  public EAttribute getPhysicalThread_Time()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(3);
   }
@@ -429,7 +429,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysicalThread_Stacksize()
+  public EAttribute getPhysicalThread_Prio()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(4);
   }
@@ -439,7 +439,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysicalThread_Msgblocksize()
+  public EAttribute getPhysicalThread_Stacksize()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(5);
   }
@@ -449,9 +449,19 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPhysicalThread_Msgpoolsize()
+  public EAttribute getPhysicalThread_Msgblocksize()
   {
     return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getPhysicalThread_Msgpoolsize()
+  {
+    return (EAttribute)physicalThreadEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -623,6 +633,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__DEFAULT);
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__NAME);
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__EXECMODE);
+    createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__TIME);
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__PRIO);
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__STACKSIZE);
     createEAttribute(physicalThreadEClass, PHYSICAL_THREAD__MSGBLOCKSIZE);
@@ -705,6 +716,7 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     initEAttribute(getPhysicalThread_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPhysicalThread_Name(), ecorePackage.getEString(), "name", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPhysicalThread_Execmode(), this.getExecMode(), "execmode", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPhysicalThread_Time(), ecorePackage.getEInt(), "time", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPhysicalThread_Prio(), ecorePackage.getEInt(), "prio", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPhysicalThread_Stacksize(), ecorePackage.getEInt(), "stacksize", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPhysicalThread_Msgblocksize(), ecorePackage.getEInt(), "msgblocksize", null, 0, 1, PhysicalThread.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

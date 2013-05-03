@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#isDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getExecmode <em>Execmode</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getPrio <em>Prio</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getStacksize <em>Stacksize</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getMsgblocksize <em>Msgblocksize</em>}</li>
@@ -113,6 +114,32 @@ public interface PhysicalThread extends EObject
    * @generated
    */
   void setExecmode(ExecMode value);
+
+  /**
+   * Returns the value of the '<em><b>Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Time</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Time</em>' attribute.
+   * @see #setTime(int)
+   * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Time()
+   * @model
+   * @generated
+   */
+  int getTime();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Time</em>' attribute.
+   * @see #getTime()
+   * @generated
+   */
+  void setTime(int value);
 
   /**
    * Returns the value of the '<em><b>Prio</b></em>' attribute.

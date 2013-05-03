@@ -11,12 +11,14 @@
  *******************************************************************************/
 
 #include "debugging/etMSCLogger.h"
-
 #include "debugging/etLogger.h"
+
+#include "osal/etThread.h"
 
 static etFileHandle etMSCLogger_fileHandle = NULL;
 static char* etMSCLogger_objectName = "";
 
+/*TODO: move or replace ET_MAX_FILENAME_LEN */
 #define ET_MAX_FILENAME_LEN 256
 
 void etMSCLogger_open(char* logPath, char* mscName){
@@ -42,7 +44,7 @@ char* etMSCLogger_getObjectName(void){
 
 void etMSCLogger_syncCall(char* sourceName, char* messageName, char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
-		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s\n", sourceName, targetName, messageName);
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s(thread=%ld)\n", sourceName, targetName, messageName, etThread_self_id());
 	}
 }
 
@@ -61,5 +63,11 @@ void etMSCLogger_asyncOut(char* sourceName, char* messageName, char* targetName)
 void etMSCLogger_asyncIn(char* sourceName, char* messageName, char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
+	}
+}
+
+void etMSCLogger_setState(char* objectName, char* stateName){
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
 	}
 }

@@ -1,0 +1,34 @@
+PhysicalModel cGenRef {
+	
+	PhysicalSystem Sys {
+		NodeRef node1: PC
+//		NodeRef node2: PC
+	}
+	
+	NodeClass PC {
+		runtime = PC
+		priomin = 1
+		priomax = 5
+		
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 100 ms
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 32
+			msgpoolsize = 5
+		}
+		
+//		Thread PhysicalThread2 {
+//			execmode = blocked
+//			prio = 5
+//			stacksize = 1024
+//			msgblocksize = 64
+//			msgpoolsize = 3
+//		}
+	}
+	
+	RuntimeClass PC {
+		model = multiThreaded
+	}
+}

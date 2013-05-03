@@ -1143,6 +1143,7 @@ public class GenericStateMachineGenerator {
                   _builder.newLine();
                   _builder.append("\t");
                   _builder.append("\t");
+                  _builder.append("\t");
                   _builder.append("case POLLING:");
                   _builder.newLine();
                   _builder.append("\t");
@@ -1153,14 +1154,14 @@ public class GenericStateMachineGenerator {
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   _builder.append("\t");
-                  _builder.append("\t");
+                  _builder.append("\t\t");
                   _builder.append("break;");
                   _builder.newLine();
                   _builder.append("\t");
                   _builder.append("\t");
-                  _builder.append("\t\t");
+                  _builder.append("\t");
                   CharSequence _genEventDrivenTriggers = this.genEventDrivenTriggers(xpac, state, atlist, usesHdlr);
-                  _builder.append(_genEventDrivenTriggers, "				");
+                  _builder.append(_genEventDrivenTriggers, "			");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   _builder.append("\t");

@@ -13,7 +13,7 @@
 #include "modelbase/etPort.h"
 
 #include "debugging/etMSCLogger.h"
-#include "platform/etMemory.h"
+#include "osal/etMemory.h"
 #include <string.h>
 
 /*
@@ -28,7 +28,9 @@ void etPort_receive(const etPort* self, const etMessage* msg) {
 void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data) {
 	int offset = MEM_CEIL(sizeof(etMessage));
 	int totalSize = offset+size;
-	etMessage* msg = etMessageService_getMessageBuffer(self->msgService, totalSize);
+	etMessage* msg = NULL;
+	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "sendMessage")
+	msg = etMessageService_getMessageBuffer(self->msgService, totalSize);
 	if (msg!=NULL) {
 		msg->address = self->peerAddress;
 		msg->evtID = evtId;
@@ -39,4 +41,5 @@ void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data)
 
 		etMessageService_pushMessage(self->msgService, msg);
 	}
+	ET_MSC_LOGGER_SYNC_EXIT
 }

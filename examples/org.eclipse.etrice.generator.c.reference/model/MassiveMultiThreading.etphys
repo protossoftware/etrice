@@ -1,0 +1,40 @@
+PhysicalModel MassiveMultiThreading {
+	
+	PhysicalSystem Sys {
+		NodeRef node1: PC
+	}
+	
+	NodeClass PC {
+		runtime = PC
+		priomin = 1
+		priomax = 10
+		
+		DefaultThread PhysicalThread1 {
+			execmode = blocked
+			prio = 1
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+		
+		Thread PhysicalThread2 {
+			execmode = blocked
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+
+		Thread PhysicalThread3 {
+			execmode = blocked
+			prio = 10
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+	}
+	
+	RuntimeClass PC {
+		model = multiThreaded
+	}
+}

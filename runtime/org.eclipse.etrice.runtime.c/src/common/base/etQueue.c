@@ -26,7 +26,6 @@ void etQueue_init(etQueue* self){
 
 
 void etQueue_push(etQueue* self, etQueueObj* obj){
-	// TODO: optimize queue for concurrent push / pop
 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "push")
 
 	if (self->first == NULL) {

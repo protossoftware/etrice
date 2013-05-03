@@ -15,6 +15,7 @@ package org.eclipse.etrice.generator.c;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
@@ -207,6 +208,13 @@ public class Main extends AbstractGenerator {
 		
 		if (!validator.validate(genModel))
 			return false;
+		
+		ETMapUtil.processModels(genModel, getResourceSet());
+//		if (debug) {
+//			logger.logInfo("-- begin dump of mappings");
+//			logger.logInfo(ETMapUtil.dumpMappings());
+//			logger.logInfo("-- end dump of mappings");
+//		}
 		
 		logger.logInfo("-- starting code generation");
 		fileAccess.setOutputPath("src-gen/");

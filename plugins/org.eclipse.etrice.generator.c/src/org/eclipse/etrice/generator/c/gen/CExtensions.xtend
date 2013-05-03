@@ -21,7 +21,9 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
@@ -30,12 +32,12 @@ import org.eclipse.etrice.core.room.LiteralType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.RoomModel
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -92,6 +94,23 @@ class CExtensions implements ILanguageExtension {
 	def String getDispSourceFileName(RoomClass rc) {
 		return rc.name+"_Disp.h";
 	}
+	
+	// used
+	def String getCHeaderFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+".h";
+	}
+
+	def String getCSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+".c";
+	}
+
+	def String getInstSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+"_Inst.h";
+	}
+
+	def String getDispSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		return nr.name+"_"+ssi.name+"_Disp.h";
+	}
 
 	def getIncludeGuardString(String filename){
 		'''_«filename.toUpperCase»_H_'''
@@ -99,15 +118,23 @@ class CExtensions implements ILanguageExtension {
 
 	def generateIncludeGuardBegin(RoomClass rc) {
 		val filename = (rc.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+rc.name
-	'''
+		filename.generateIncludeGuardBegin
+	}
+
+	def generateIncludeGuardEnd(RoomClass rc) {
+		val filename = (rc.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+rc.name
+		filename.generateIncludeGuardEnd
+	}
+
+	def generateIncludeGuardBegin(String filename) {
+		'''
 		#ifndef «filename.getIncludeGuardString»
 		#define «filename.getIncludeGuardString»
 		'''
 	}
 
-	def generateIncludeGuardEnd(RoomClass rc) {
-		val filename = (rc.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+rc.name
-	'''
+	def generateIncludeGuardEnd(String filename) {
+		'''
 		#endif /* «filename.getIncludeGuardString» */
 		'''
 	}

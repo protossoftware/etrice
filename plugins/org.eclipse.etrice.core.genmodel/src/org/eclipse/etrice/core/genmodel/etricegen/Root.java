@@ -284,5 +284,12 @@ public interface Root extends EObject {
 	 */
 	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
 
-	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	StructureInstance getInstance(String path);
+
 } // Root

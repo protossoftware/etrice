@@ -1,0 +1,10 @@
+Platform: MT_POSIX_GENERIC_GCC
+
+Threading:         Multi Threaded 
+Processor:         -
+Operating System:  POSIX 
+Compiler:          GCC
+Board:             -
+
+Description: 
+This platform should work for all Posix systems with a GCC compiler

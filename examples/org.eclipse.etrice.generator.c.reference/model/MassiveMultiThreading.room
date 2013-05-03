@@ -1,0 +1,248 @@
+RoomModel MassiveMultiThreading {
+
+	import room.basic.types.* from "Types.room"
+
+	LogicalSystem LS {
+		SubSystemRef sys1: SubSys
+	}
+
+	SubSystemClass SubSys {
+		ActorRef tester: Tester
+		ActorRef fork: Fork
+		ActorRef redirect1: Redirect
+		ActorRef redirect2: Redirect
+		ActorRef redirect3: Redirect
+		ActorRef redirect4: Redirect
+		ActorRef redirect5: Redirect
+		ActorRef redirect6: Redirect
+		ActorRef redirect7: Redirect
+		ActorRef redirect8: Redirect
+		ActorRef redirect9: Redirect
+		ActorRef redirect10: Redirect
+		ActorRef join: Join
+		ActorRef supervisor: Supervisor
+		Binding tester.outport and fork.inport
+		Binding tester.inport and join.outport
+		Binding supervisor.application and join.security
+		Binding fork.broadcast and redirect1.inport
+		Binding fork.broadcast and redirect2.inport
+		Binding fork.broadcast and redirect3.inport
+		Binding fork.broadcast and redirect4.inport
+		Binding fork.broadcast and redirect5.inport
+		Binding fork.broadcast and redirect6.inport
+		Binding fork.broadcast and redirect7.inport
+		Binding fork.broadcast and redirect8.inport
+		Binding fork.broadcast and redirect9.inport
+		Binding fork.broadcast and redirect10.inport
+		Binding join.inport and redirect1.outport
+		Binding join.inport and redirect2.outport
+		Binding join.inport and redirect3.outport
+		Binding join.inport and redirect4.outport
+		Binding join.inport and redirect5.outport
+		Binding join.inport and redirect6.outport
+		Binding join.inport and redirect7.outport
+		Binding join.inport and redirect8.outport
+		Binding join.inport and redirect9.outport
+		Binding join.inport and redirect10.outport
+		
+		LogicalThread logical_thread2
+		LogicalThread logical_thread1
+		LogicalThread logical_thread3
+		LogicalThread logical_thread4
+
+		ActorInstanceMapping tester -> logical_thread1
+		ActorInstanceMapping fork -> logical_thread2
+		ActorInstanceMapping redirect1 -> logical_thread2
+		ActorInstanceMapping redirect2 -> logical_thread3
+		ActorInstanceMapping join -> logical_thread3
+		ActorInstanceMapping supervisor -> logical_thread4
+	}
+
+	ActorClass Tester {
+		Interface {
+			conjugated Port outport: CommunicationProtocol
+			Port inport: CommunicationProtocol
+		}
+		Structure {
+			external Port outport
+			external Port inport
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Started { }
+				Transition tr0: Started -> Done {
+					triggers {
+						<sendData: inport>
+					}
+				}
+				State Started {
+					entry {
+						"outport.sendData();"
+					}
+				}
+				State Done {
+					entry {
+						"etLogger_logInfo(\"+++   Test Done   +++\");"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Fork {
+		Interface {
+			conjugated Port broadcast [*]: CommunicationProtocol
+			Port inport: CommunicationProtocol
+		}
+		Structure {
+			external Port broadcast
+			external Port inport
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Fork { }
+				Transition tr0: Fork -> Fork {
+					triggers {
+						<sendData: inport>
+					}
+					action {
+						"broadcast.sendData();"
+					}
+				}
+				State Fork
+			}
+		}
+	}
+
+	ActorClass Redirect {
+		Interface {
+			Port inport: CommunicationProtocol
+			conjugated Port outport: CommunicationProtocol
+		}
+		Structure {
+			external Port inport
+			external Port outport
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Redirect { }
+				Transition tr0: Redirect -> Redirect {
+					triggers {
+						<sendData: inport>
+					}
+					action {
+						"outport.sendData();"
+						"etLogger_logInfo(\"+++   Redirect: sendData  +++\");"
+					}
+				}
+				State Redirect
+			}
+		}
+	}
+
+	ActorClass Join {
+		Interface {
+			Port inport [*]: CommunicationProtocol
+			conjugated Port outport: CommunicationProtocol
+			conjugated Port security: SecurityProtocol
+		}
+		Structure {
+			external Port inport
+			external Port outport
+			external Port security
+			Attribute counter: int32
+			
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Count {
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr0: Count -> cp cp0 {
+					triggers {
+						<pong: security>
+					}
+					action {
+						"counter++;"
+						"etLogger_logInfo(\"+++   Join: received pong  +++\");"
+					}
+				}
+				Transition tr1: cp cp0 -> Done {
+					action {
+						"outport.sendData();"
+					}
+				}
+				Transition tr2: cp cp0 -> Count {
+					cond {
+						"counter<10"
+					}
+				}
+				Transition tr3: Count -> Count {
+					triggers {
+						<sendData: inport>
+					}
+					action {
+						"security.ping();"
+						"etLogger_logInfo(\"+++   Join: sent ping  +++\");"
+					}
+				}
+				ChoicePoint cp0
+				State Count
+				State Done
+			}
+		}
+	}
+
+	ActorClass Supervisor {
+		Interface {
+			Port application: SecurityProtocol
+		}
+		Structure {
+			external Port application
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> PingPongActive { }
+				Transition tr0: PingPongActive -> PingPongActive {
+					triggers {
+						<ping: application>
+					}
+					action {
+						"application.pong();"
+					}
+				}
+				State PingPongActive
+			}
+		}
+	}
+
+	ProtocolClass CommunicationProtocol {
+		incoming {
+			Message sendData()
+		}
+	}
+
+	ProtocolClass SecurityProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+	
+	DataClass DataClass1 {
+		Attribute Attr1: int32
+		Attribute ComplexAttr: DataClass2
+		Attribute Attr3: float32
+	}
+
+	DataClass DataClass2 {
+		Attribute Attr1: int32
+		Attribute Attr2: float32
+		Attribute Attr3: int32
+	}
+
+}

@@ -21,7 +21,7 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.lib.debug.897987799" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.lib.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.lib.debug.1195644765" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.lib.debug"/>
-							<builder buildPath="${workspace_loc:/org.eclipse.etrice.runtime.c/Debug}" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1199468624" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base">
+							<builder buildPath="${workspace_loc:/org.eclipse.etrice.runtime.c/Debug}" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1199468624" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" parallelBuildOn="false" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
@@ -39,7 +39,7 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.lib.debug.option.optimization.level.157947957" name="Optimization Level" superClass="gnu.c.compiler.mingw.lib.debug.option.optimization.level" valueType="enumerated"/>
 								<option id="gnu.c.compiler.mingw.lib.debug.option.debugging.level.1083191317" name="Debug Level" superClass="gnu.c.compiler.mingw.lib.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.790097072" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/generic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_WIN_MinGW}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 								</option>
@@ -49,12 +49,19 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.278235928" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637.1524681419" name="etTcpSockets_Posix.c" rcbsApplicability="disable" resourcePath="src/platforms/generic/etTcpSockets_Posix.c" toolsToInvoke="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1185604346.925003970">
-						<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1185604346.925003970" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1185604346"/>
-					</fileInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637.1480114047" name="/" resourcePath="src/platforms/MT_POSIX_GENERIC_GCC">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.lib.debug.482193188" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.lib.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug.1613201823" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug.806687472"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug.1912281256" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug.1896612237"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug.1703441571" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug.1813889263"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.438507749" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.1185604346"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.base.2043229911" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.base.597146923"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.58720581" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.278235928"/>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
 						<entry excluding="test|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="platforms/generic/etTcpSockets_Posix.c|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="platforms/MT_POSIX_GENERIC_GCC|platforms/generic/etTcpSockets_Posix.c|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -100,7 +107,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="test|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="platforms/MT_POSIX_GENERIC_GCC|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_G2553_CCS5_LaunchPad" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
