@@ -20,6 +20,7 @@ typedef struct etMessageQueue {
 	etMessage* first;
 	etMessage* last;
 	etInt16 highWaterMark;
+	etInt16 lowWaterMark;
 	etInt16 size;
 
 } etMessageQueue;
@@ -27,19 +28,17 @@ typedef struct etMessageQueue {
 void etMessageQueue_init(etMessageQueue* self);
 
 void etMessageQueue_push(etMessageQueue* self, etMessage* msg);
-
 etMessage* etMessageQueue_pop(etMessageQueue* self);
 
 etMessage* etMessageQueue_getFirst(etMessageQueue* self);
-
 etMessage* etMessageQueue_getLast(etMessageQueue* self);
 
 etBool etMessageQueue_isNotEmpty(etMessageQueue* self);
 
-etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self);
-
 etInt16 etMessageQueue_getSize(etMessageQueue* self);
-
+etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self);
+etInt16 etMessageQueue_getLowWaterMark(etMessageQueue* self);
+void etMessageQueue_resetLowWaterMark(etMessageQueue* self);
 
 
 #endif /* _RMESSAGEQUEUE_H_ */

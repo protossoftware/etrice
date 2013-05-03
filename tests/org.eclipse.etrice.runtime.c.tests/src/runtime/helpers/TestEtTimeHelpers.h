@@ -10,13 +10,10 @@
  *
  *******************************************************************************/
 
-#include "helpers/etTimeHelpers.h"
+#ifndef _TESTETTIMEHELPERS_H_
+#define _TESTETTIMEHELPERS_H_
 
-etInt32 etTimeHelpers_convertToMSec(etTime *time){
-	return time->sec * 1000 + time->nSec / 1000000;
-}
+void TestEtTimeHelpers_runSuite(void);
 
-void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds){
-	result->sec = milliSeconds/1000;
-	result->nSec = milliSeconds%1000 * 1000000;
-}
+
+#endif /* _TESTETTIMEHELPERS_H_ */

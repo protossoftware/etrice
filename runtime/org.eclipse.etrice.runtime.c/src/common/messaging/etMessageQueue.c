@@ -19,6 +19,7 @@ void etMessageQueue_init(etMessageQueue* self){
 	self->first = NULL;
 	self->last = NULL;
 	self->highWaterMark = 0;
+	self->lowWaterMark = 0;
 	self->size = 0;
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -64,6 +65,9 @@ etMessage* etMessageQueue_pop(etMessageQueue* self){
 	pop_msg->next=NULL;
 	self->size--;
 
+	if (self->size < self->lowWaterMark)
+		self->lowWaterMark--;
+
 	ET_MSC_LOGGER_SYNC_EXIT
 	return pop_msg;
 }
@@ -93,7 +97,19 @@ etBool etMessageQueue_isNotEmpty(etMessageQueue* self){
 }
 
 etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHightWaterMark")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getHighWaterMark")
 	ET_MSC_LOGGER_SYNC_EXIT
 	return self->highWaterMark;
+}
+
+etInt16 etMessageQueue_getLowWaterMark(etMessageQueue* self) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "getLowWaterMark")
+	ET_MSC_LOGGER_SYNC_EXIT
+	return self->lowWaterMark;
+}
+
+void etMessageQueue_resetLowWaterMark(etMessageQueue* self) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageQueue", "resetLowWaterMark")
+	self->lowWaterMark = self->size;
+	ET_MSC_LOGGER_SYNC_EXIT
 }
