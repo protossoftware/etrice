@@ -21,11 +21,14 @@
 #include "osal/etMutex.h"
 #include "osal/etThread.h"
 #include "osal/etSema.h"
+#include "osal/etTimer.h"
 
+#define MESSAGESERVICE_ADDRESS		1
+#define BASE_ADDRESS				32
 
-enum etMessageService_execmode {
+typedef enum etMessageService_execmode {
 	EXECMODE_POLLED, EXECMODE_BLOCKED, EXECMODE_MIXED
-};
+} etMessageService_execmode;
 
 typedef struct etBuffer{
 	etUInt8 *buffer;		/** buffer points to the actual memory position for the message pool */
@@ -38,16 +41,25 @@ typedef struct etMessageService {
 	etMessageQueue messagePool;					/** message pool that holds all free messages */
 	etBuffer messageBuffer;						/** information about the message buffer that holds information about the actual memory position and size for the message pool */
 	etDispatcherReceiveMessage msgDispatcher;	/** function pointer to the generated message dispatcher function */
-	etDispatcherExecute executeFct;				/** function pointer to the generated message execute function */
 	etThread thread;							/** thread for the execution of the message service */
 	etMutex poolMutex;							/** mutex for synchronizing the access to the message pool */
 	etMutex queueMutex;							/** mutex for synchronizing the access to the message queue */
-	etSema executionSemaphore; 					/** sempahore for waiting and waking up the execution */
-	enum etMessageService_execmode execmode;	/** execution mode*/
+	etSema executionSemaphore; 					/** semaphore for waiting and waking up the execution */
+	etTimer timer;								/** timer for cyclic calls */
+	etMessageService_execmode execmode;			/** execution mode*/
 } etMessageService;
 
 /* lifecycle functions to startup, execute and shutdown the message service */
-void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher, etDispatcherExecute executeFct, enum etMessageService_execmode execmode);
+void etMessageService_init(
+		etMessageService* self,
+		etUInt8* buffer,
+		etUInt16 maxBlocks,
+		etUInt16 blockSize,
+		etStacksize stacksize,
+		etPriority priority,
+		etTime interval,
+		etDispatcherReceiveMessage msgDispatcher,
+		etMessageService_execmode execmode);
 void etMessageService_start(etMessageService* self);
 void etMessageService_execute(etMessageService* self);
 void etMessageService_stop(etMessageService* self);

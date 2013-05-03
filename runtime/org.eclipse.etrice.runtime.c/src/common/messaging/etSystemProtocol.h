@@ -15,14 +15,31 @@
 enum etSystemProtocol_msg_ids {
 	etSystemProtocol_MSG_MIN = 0,
 	etSystemProtocol_IN_poll = 1,
-	etSystemProtocol_MSG_MAX = 2
+	etSystemProtocol_IN_terminate = 2,
+	etSystemProtocol_MSG_MAX = 3
 };
 
 /*--------------------- port structs and methods */
+typedef etPort etSystemProtocolPort;
+typedef etReplPort etSystemProtocolReplPort;
+
+
+
+
+etInt32 etSystemProtocolReplPort_getReplication(const etSystemProtocolReplPort* self);
 typedef etPort etSystemProtocolConjPort;
+typedef etReplPort etSystemProtocolConjReplPort;
 
 
 void etSystemProtocolConjPort_poll(const etSystemProtocolConjPort* self);
+void etSystemProtocolConjReplPort_poll_broadcast(const etSystemProtocolConjReplPort* self);
+void etSystemProtocolConjReplPort_poll(const etSystemProtocolConjReplPort* self, int idx);
+void etSystemProtocolConjPort_terminate(const etSystemProtocolConjPort* self);
+void etSystemProtocolConjReplPort_terminate_broadcast(const etSystemProtocolConjReplPort* self);
+void etSystemProtocolConjReplPort_terminate(const etSystemProtocolConjReplPort* self, int idx);
+
+
+etInt32 etSystemProtocolConjReplPort_getReplication(const etSystemProtocolConjReplPort* self);
 
 /*--------------------- debug helpers */
 

@@ -97,8 +97,4 @@ typedef HANDLE etOSSemaData;
 typedef HANDLE etOSTimerData;
 typedef DWORD etOSTimerId;
 
-typedef VOID(CALLBACK *etTimerFunction)(PVOID lpParam, BOOLEAN TimerOrWaitFired);
-#define etTimerFunction_RETURN_VALUE VOID CALLBACK
-#define etTimerFunction_ARGUMENT_LIST PVOID lpParam, BOOLEAN TimerOrWaitFired
-
 #endif /* _DATATYPES_H_ */

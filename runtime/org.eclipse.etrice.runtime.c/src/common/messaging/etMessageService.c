@@ -14,16 +14,26 @@
 #include "etMessageService.h"
 
 
+#include "etSystemProtocol.h"
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
-
+static void etMessageService_timerCallback(void* data);
 
 /*
  * initialize message service with all needed data and initialize message queue and message pool
  *
  */
-void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 maxBlocks, etUInt16 blockSize, etDispatcherReceiveMessage msgDispatcher, etDispatcherExecute executeFct, enum etMessageService_execmode execmode){
+void etMessageService_init(
+		etMessageService* self,
+		etUInt8* buffer,
+		etUInt16 maxBlocks,
+		etUInt16 blockSize,
+		etStacksize stacksize,
+		etPriority priority,
+		etTime interval,
+		etDispatcherReceiveMessage msgDispatcher,
+		etMessageService_execmode execmode){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
 
 	/* copy init data to self */
@@ -31,10 +41,9 @@ void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 max
 	self->messageBuffer.maxBlocks = maxBlocks;
 	self->messageBuffer.blockSize = blockSize;
 	self->msgDispatcher = msgDispatcher;
-	self->executeFct = executeFct;
 	self->execmode = execmode;
 
-	/* copy init queue and pool */
+	/* init queue and pool */
 	etMessageQueue_init( &(self->messagePool) ); 	/* the pool is also a queue*/
 	etMessageQueue_init( &(self->messageQueue) );
 	etMessageService_initMessagePool(self);
@@ -44,18 +53,40 @@ void etMessageService_init(etMessageService* self, etUInt8* buffer, etUInt16 max
 	etMutex_construct( &(self->queueMutex) );
 	etSema_construct( &(self->executionSemaphore) );
 
+	/* init thread */
+	etThread_construct(&self->thread, stacksize, priority, "MessageService", (etThreadFunction) etMessageService_execute, self);
+
+	if (execmode==EXECMODE_POLLED || execmode==EXECMODE_MIXED) {
+		/* init timer */
+		etTimer_construct(&self->timer, &interval, etMessageService_timerCallback, self);
+	}
+
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etMessageService_start(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "start")
-	etThread_construct( &(self->thread) );
+	etThread_start( &(self->thread) );
+	if (self->execmode==EXECMODE_POLLED || self->execmode==EXECMODE_MIXED) {
+		etTimer_start(&self->timer);
+	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etMessageService_stop(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "stop")
-	etThread_destruct( &(self->thread) );
+
+	if (self->execmode==EXECMODE_POLLED || self->execmode==EXECMODE_MIXED) {
+		etTimer_stop(&self->timer);
+	}
+
+	/* create a temporary port struct and send the terminate message */
+	etSystemProtocolConjPort port;
+	port.localId = 0;
+	port.msgService = self;
+	port.peerAddress = MESSAGESERVICE_ADDRESS;
+	etSystemProtocolConjPort_terminate(&port);
+
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
@@ -134,13 +165,18 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 
 void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
-	while (TRUE){
-		while (etMessageQueue_isNotEmpty(&self->messageQueue)){
-			etMessage* msg = etMessageService_popMessage(self);
-			self->msgDispatcher(msg);
-			etMessageService_returnMessageBuffer(self, msg);
+	{
+		etBool cont = TRUE;
+		while (cont){
+			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
+				etMessage* msg = etMessageService_popMessage(self);
+				if (!self->msgDispatcher(msg))
+					cont = FALSE;
+				etMessageService_returnMessageBuffer(self, msg);
+			}
+			if (cont)
+				etSema_waitForWakeup(&self->executionSemaphore);
 		}
-		etSema_waitForWakeup(&self->executionSemaphore);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -156,4 +192,19 @@ etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self){
 	etInt16 lowWaterMark = self->messageBuffer.maxBlocks - etMessageQueue_getHighWaterMark(&self->messageQueue);
 	ET_MSC_LOGGER_SYNC_EXIT
 	return lowWaterMark;
+}
+
+static void etMessageService_timerCallback(void* data) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "timerCallback")
+	{
+		etMessageService* self = (etMessageService*) data;
+
+		/* create a temporary port struct and send the terminate message */
+		etSystemProtocolConjPort port;
+		port.localId = 0;
+		port.msgService = self;
+		port.peerAddress = MESSAGESERVICE_ADDRESS;
+		etSystemProtocolConjPort_poll(&port);
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
 }

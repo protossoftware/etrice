@@ -18,7 +18,7 @@
 #include "messaging/etMessage.h"
 
 typedef void (*etActorReceiveMessage)(void* self, void* ifitem, const etMessage*  msg);
-typedef void (*etDispatcherReceiveMessage)(const etMessage* msg);
+typedef etBool (*etDispatcherReceiveMessage)(const etMessage* msg);
 typedef void (*etDispatcherExecute)(void);
 
 #endif /* _ETMESSAGERECEIVER_H_ */

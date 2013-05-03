@@ -33,7 +33,7 @@ typedef void (*etThreadFunction)(void *);
 /**
  * etThread holds all data needed to handle a thread instance
  * the struct has to be filled before calling etThread_construct except for osData and osId
- **/
+ */
 typedef struct etThread{
 	etOSThreadData osData;		/**< OS specific thread data (e.g. handle or id) -> is filled in by etThread_construct **/
 	etOSThreadId osId;			/**< integer thread id (used e.g. for debugging)  -> is filled in by etThread_construct **/
@@ -47,10 +47,27 @@ typedef struct etThread{
 // TODO: add return values for error handling
 
 /**
- * create and start a new thread
+ * initialize the thread data
+ * \param (uninitialized) self pointer to thread instance
+ * \param stacksize the size of the thread's stack
+ * \param prioritiy the thread priority
+ * \param threadName the name of the thread
+ * \param threadFunction the thread function
+ * \param threadFunctionData the data will be passed to the thread function
+ */
+void etThread_construct(
+		etThread* self,
+		etStacksize stacksize,
+		etPriority priority,
+		etThreadname threadName,
+		etThreadFunction threadFunction,
+		void* threadFunctionData);
+
+/**
+ * start a new thread
  * \param self pointer to thread instance
  */
-void etThread_construct(etThread* self); /*TODO: add all neededarguments to constructor arguments */
+void etThread_start(etThread* self); /*TODO: add all neededarguments to constructor arguments */
 
 /**
  * stop and destroy a new thread

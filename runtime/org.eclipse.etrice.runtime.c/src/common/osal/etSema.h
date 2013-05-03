@@ -15,22 +15,39 @@
 
 /**
  * etSema.h defines a generic interface for platform specific implementations of a semaphore
- *
- * */
+ */
 
 #include "etDatatypes.h"
 
 /**
  * etSema holds the object data for a semaphore (for self pointer)
- *
- * */
+ */
 typedef struct etSema {
 	etOSSemaData osData;
 } etSema;
 
+/**
+ * initializes the semaphore
+ * \param self the 'this' pointer of the semaphore
+ */
 void etSema_construct(etSema* self);
+
+/**
+ * destroys the semaphore
+ * \param self the 'this' pointer of the semaphore
+ */
 void etSema_destruct(etSema* self);
+
+/**
+ * wakes up the semaphore
+ * \param self the 'this' pointer of the semaphore
+ */
 void etSema_wakeup(etSema* self);
+
+/**
+ * make the semaphore waiting for a wakeup
+ * \param self the 'this' pointer of the semaphore
+ */
 void etSema_waitForWakeup(etSema* self);
 
 

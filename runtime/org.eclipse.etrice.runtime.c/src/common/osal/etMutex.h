@@ -23,16 +23,33 @@
 
 /**
  * etMutex holds the object data for a mutex (for self pointer)
- *
- * */
+ */
 typedef struct etMutex {
 	etOSMutexData osData;
 } etMutex;
 
+/**
+ * initializes the mutex
+ * \param self the 'this' pointer of the mutex
+ */
 void etMutex_construct(etMutex* self);
-void etMutex_destruct(etMutex* self);
-void etMutex_enter(etMutex* self);
-void etMutex_leave(etMutex* self);
 
+/**
+ * destroys the mutex
+ * \param self the 'this' pointer of the mutex
+ */
+void etMutex_destruct(etMutex* self);
+
+/**
+ * lock the mutex
+ * \param self the 'this' pointer of the mutex
+ */
+void etMutex_enter(etMutex* self);
+
+/**
+ * unlock the mutex
+ * \param self the 'this' pointer of the mutex
+ */
+void etMutex_leave(etMutex* self);
 
 #endif /* _ETMUTEX_H_ */

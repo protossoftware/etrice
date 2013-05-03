@@ -15,8 +15,8 @@
 
 /**
  * etTime.h defines a generic interface for platform specific implementations of services around time
- *
- * */
+ */
+
 #include "etDatatypes.h"
 
 /**
@@ -31,20 +31,8 @@ typedef struct etTime {
  * get current time from target hardware
  * this is no real world clock time and date
  * should be used only for relative time measurement
- * @return current target time as etTime*
+ * \param current target time as etTime*
  */
 void getTimeFromTarget(etTime *t);
-
-/*
- * TODO: remove old API functions
-int isTimeGreaterThanActualTime(const etTime *t);
-etBool etTimer_executeNeeded(void);
-uint32 getTimeBaseNS(void);
-
-uint32 getTimeBaseUS(void);
-
-uint32 getTimeBaseMS(void);
-*/
-
 
 #endif /* _ETTIME_H_ */

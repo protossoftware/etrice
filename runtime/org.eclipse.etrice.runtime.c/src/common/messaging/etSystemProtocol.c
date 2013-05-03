@@ -9,16 +9,74 @@
 #include "debugging/etMSCLogger.h"
 
 
+/*--------------------- port methods */
+
+
+// getReplication
+etInt32 etSystemProtocolReplPort_getReplication(const etSystemProtocolReplPort* self) {
+	return ((etReplPort*)self)->size;
+}
+
+
+
 void etSystemProtocolConjPort_poll(const etSystemProtocolConjPort* self) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjPort", "poll")
 		etPort_sendMessage(self, etSystemProtocol_IN_poll, 0, NULL);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+void etSystemProtocolConjReplPort_poll_broadcast(const etSystemProtocolConjReplPort* self) {
+	int i;
+	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjReplPort", "poll")
+	for (i=0; i<((etReplPort*)self)->size; ++i) {
+		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[i]), etSystemProtocol_IN_poll, 0, NULL);
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etSystemProtocolConjReplPort_poll(const etSystemProtocolConjReplPort* self, int idx) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjReplPort", "poll")
+	if (0<=idx && idx<((etReplPort*)self)->size) {
+		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[idx]), etSystemProtocol_IN_poll, 0, NULL);
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etSystemProtocolConjPort_terminate(const etSystemProtocolConjPort* self) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjPort", "terminate")
+		etPort_sendMessage(self, etSystemProtocol_IN_terminate, 0, NULL);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etSystemProtocolConjReplPort_terminate_broadcast(const etSystemProtocolConjReplPort* self) {
+	int i;
+	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjReplPort", "terminate")
+	for (i=0; i<((etReplPort*)self)->size; ++i) {
+		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[i]), etSystemProtocol_IN_terminate, 0, NULL);
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etSystemProtocolConjReplPort_terminate(const etSystemProtocolConjReplPort* self, int idx) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etSystemProtocolConjReplPort", "terminate")
+	if (0<=idx && idx<((etReplPort*)self)->size) {
+		etPort_sendMessage(((etPort*)&((etReplPort*)self)->ports[idx]), etSystemProtocol_IN_terminate, 0, NULL);
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+
+// getReplication
+etInt32 etSystemProtocolConjReplPort_getReplication(const etSystemProtocolConjReplPort* self) {
+	return ((etReplPort*)self)->size;
+}
+
+
+
 /*--------------------- debug helpers */
 
 /* message names as strings for debugging (generate MSC) */
-static const char* const etSystemProtocol_messageStrings[] = {"MIN", "poll", "MAX"};
+static const char* const etSystemProtocol_messageStrings[] = {"MIN", "poll", "terminate", "MAX"};
 
 const char* etSystemProtocol_getMessageString(int msg_id) {
 	if (msg_id<etSystemProtocol_MSG_MIN || msg_id>etSystemProtocol_MSG_MAX+1){

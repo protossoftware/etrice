@@ -18,19 +18,47 @@
 
 
 /**
+ * the prototype for the time callback function
+ */
+typedef void (*etTimerFunction)(void* data);
+
+/**
  * etThread holds all data needed to handle a thread instance
  * the struct has to be filled before calling etThread_construct except for osData and osId
  **/
 typedef struct etTimer{
 	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
-	etTime timerInterval;			/**< timer interval **/
-	etTimerFunction timerFunction; /**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct **/
+	etTime timerInterval;				/**< timer interval **/
+	etTimerFunction timerFunction;		/**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct **/
+	void* timerFunctionData;			/**< the data that are passed to the timer function **/
 } etTimer;
 
+/**
+ * This method initializes the etTimer struct with the user settings
+ *
+ * \param self the 'this' pointer of the timer
+ * \param timerInterval the interval to be used for the timer
+ * \param timerFunction the user supplied callback function
+ * \param timerFunctionData the data that will be passed to the user callback function
+ */
+void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* timerFunctionData);
 
-void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction);
+/**
+ * starts the timer
+ * \param self the 'this' pointer of the timer
+ */
 void etTimer_start(etTimer* self);
+
+/**
+ * stops the timer
+ * \param self the 'this' pointer of the timer
+ */
 void etTimer_stop(etTimer* self);
+
+/**
+ * destroys the timer
+ * \param self the 'this' pointer of the timer
+ */
 void etTimer_destruct(etTimer* self);
 
 

@@ -25,8 +25,28 @@
 
 void etThread_execute(etThread* self);
 
-void etThread_construct(etThread* self){
+void etThread_construct(
+		etThread* self,
+		etStacksize stacksize,
+		etPriority priority,
+		etThreadname threadName,
+		etThreadFunction threadFunction,
+		void* threadFunctionData)
+{
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "construct")
+
+	/* fill in data */
+	self->stacksize = stacksize;
+	self->priority = priority;
+	self->threadName = threadName;
+	self->threadFunction = threadFunction;
+	self->threadFunctionData = threadFunctionData;
+
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etThread_start(etThread* self) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "start")
 	self->osData = (HANDLE)_beginthread( (etThreadFunction)etThread_execute, self->stacksize, self );
 	SetThreadPriority(self->osData, self->priority);
 	ET_MSC_LOGGER_SYNC_EXIT
