@@ -40,7 +40,7 @@ class Initialization {
 		'''		
 	}
 	
-	def private initAttributeArray(InstanceBase instance, List<Attribute> path){
+	def private String initAttributeArray(InstanceBase instance, List<Attribute> path){
 		var a = path.last
 		var COMMENT = '''		/* «a.name»«IF a.size>1»[«a.size»]«ENDIF» */'''.toString
 		if(a.size == 0 || (!a.refType.ref && a.refType.type.primitive))

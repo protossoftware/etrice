@@ -33,6 +33,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 
 @Singleton
 class NodeGen {
@@ -128,12 +129,9 @@ class NodeGen {
 		
 		#include "«nr.getCHeaderFileName(ssi)»"
 
-		/* include instances for all classes */
-		#include "«nr.getInstSourceFileName(ssi)»"
-		#include "«nr.getDispSourceFileName(ssi)»"
-
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
+		#include "messaging/etSystemProtocol.h"
 		
 		#include "osal/etTimer.h"
 		#include "etRuntimeConfig.h"
@@ -149,25 +147,38 @@ class NodeGen {
 		
 		static «clsname» «clsname»Inst = {"«clsname»", 0};
 		
-		void «clsname»_initActorInstances(void);
-		void «clsname»_constructActorInstances(void);
+		static void «clsname»_initActorInstances(void);
+		static void «clsname»_constructActorInstances(void);
+		
+		/* include instances for all classes */
+		#include "«nr.getInstSourceFileName(ssi)»"
+		#include "«nr.getDispSourceFileName(ssi)»"
 
 		static void «clsname»_initMessageServices(void) {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "initMessageServices")
-			
-			/* filling all message service threads with data */
-			«FOR thread: nr.type.threads SEPARATOR "\n"»
-				msgService_«thread.name».thread.stacksize = «thread.stacksize»;
-				msgService_«thread.name».thread.priority = «thread.prio»;
-				msgService_«thread.name».thread.threadName = "«thread.name»";
-				msgService_«thread.name».thread.threadFunction = (etThreadFunction) etMessageService_execute;
-				msgService_«thread.name».thread.threadFunctionData = &msgService_«thread.name»;
+			{
+				etTime interval;
 				
-			«ENDFOR»
-			/* initialization of all message services */
-			«FOR thread: nr.type.threads»
-				etMessageService_init(&msgService_«thread.name», msgBuffer_«thread.name», «thread.msgpoolsize», «thread.msgblocksize», MsgDispatcher_«thread.name»_receiveMessage, MsgDispatcher_«thread.name»_execute, EXECMODE_«thread.execmode.toString.toUpperCase»);
-			«ENDFOR»
+				/* initialization of all message services */
+				«FOR thread: nr.type.threads»
+					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
+«««						interval.sec = «thread.sec» <-- use convenience functions to split time in sec and nsec
+						interval.sec = 0;
+						interval.nSec = «thread.time»;
+					«ENDIF»
+					etMessageService_init(
+						&msgService_«thread.name»,
+						msgBuffer_«thread.name»,
+						«thread.name.toUpperCase»_POOL_SIZE,
+						«thread.name.toUpperCase»_BLOCK_SIZE,
+						«thread.stacksize»,
+						«thread.prio»,
+						interval,
+						MsgDispatcher_«thread.name»_receiveMessage,
+						EXECMODE_«thread.execmode.toString.toUpperCase»);
+						
+				«ENDFOR»
+			}
 			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
@@ -288,7 +299,7 @@ class NodeGen {
 		}
 
 
-		void «clsname»_constructActorInstances(void){
+		static void «clsname»_constructActorInstances(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "constructActorInstances")
 			
 			«FOR ai : ssi.allContainedInstances»
@@ -300,7 +311,7 @@ class NodeGen {
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
 
-		void «clsname»_initActorInstances(void){
+		static void «clsname»_initActorInstances(void){
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "initActorInstances")
 			
 			«FOR ai : ssi.allContainedInstances»
@@ -309,7 +320,6 @@ class NodeGen {
 			
 			ET_MSC_LOGGER_SYNC_EXIT
 		}
-		
 	'''
 	}
 
@@ -339,7 +349,9 @@ class NodeGen {
 		/* instantiation of message services and message buffers */
 		«FOR thread: nr.type.threads»
 			/* «thread.name» */
-			static uint8 msgBuffer_«thread.name»[«thread.msgpoolsize» * «thread.msgblocksize»]; /* msgBuffer_<threadname>[<msgpoolsize> * <msgblocksize>] */ 
+			#define «thread.name.toUpperCase»_POOL_SIZE		«thread.msgpoolsize»
+			#define «thread.name.toUpperCase»_BLOCK_SIZE	«thread.msgblocksize»
+			static uint8 msgBuffer_«thread.name»[«thread.name.toUpperCase»_POOL_SIZE * «thread.name.toUpperCase»_BLOCK_SIZE]; 
 			static etMessageService msgService_«thread.name»;
 		«ENDFOR»
 		
@@ -350,7 +362,7 @@ class NodeGen {
 			static «ai.actorClass.name» «ai.path.getPathName()»;
 		«ENDFOR»
 		
-		/* forward declaration of variable port structs */		
+		/* forward declaration of variable port structs */
 		«FOR ai: ssi.allContainedInstances»
 			«IF ai.orderedIfItemInstances.empty»
 				/*nothing to do */
@@ -456,7 +468,7 @@ class NodeGen {
 		
 		"{"+getInterfaceItemInstanceData(pi)+", " 
 		+msgSvc+", "
-		+(objId+idx)+", "
+		+(objId+idx)+"+BASE_ADDRESS, "
 		+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 		+"} /* Port "+pi.name+" */"
 	}
@@ -506,7 +518,7 @@ class NodeGen {
 			result = result +
 				"{"+iiiD 
 				+"&msgService_"+thread+", "
-				+p.objId+", "
+				+p.objId+"+BASE_ADDRESS, "
 				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
 				+idx
 				+"}"+comma+" /* Repl Sub Port "+pi.name+" idx +"+idx+"*/\n"
@@ -517,7 +529,6 @@ class NodeGen {
 	
 	def private generateDispatcherFile(Root root, SubSystemInstance ssi) {
 	val nr = ETMapUtil::getNodeRef(ssi)
-	
 	
 	'''
 		/**
@@ -533,24 +544,46 @@ class NodeGen {
 		#include "debugging/etMSCLogger.h"
 		
 		«FOR thread: nr.type.threads SEPARATOR "\n"»
-			«var instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)»
-			
+			«val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)»
 			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
+			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
+
+			«IF executedInstances.size > 0»
+				/**
+				 * generated execute function for all cyclic execute calls for the async or datadriven actor instances of thread "«thread.name»"
+				 */
+				static void MsgDispatcher_«thread.name»_execute(void){
+					ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_«thread.name»", "execute")
+					«FOR ai : executedInstances»
+						«ai.actorClass.name»_execute((void*)&«ai.path.pathName»);
+					«ENDFOR»
+					ET_MSC_LOGGER_SYNC_EXIT
+				}
+			«ENDIF»
 			
 			/**
-			 * generated dispatch function all messages for the tread "«thread.name»"
+			 * generated dispatch function for all messages for the thread "«thread.name»"
 			 */
-			static void MsgDispatcher_«thread.name»_receiveMessage(const etMessage* msg){
-				«IF dispatchedInstances.size > 0»
+			static etBool MsgDispatcher_«thread.name»_receiveMessage(const etMessage* msg){
 				ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_«thread.name»", "receiveMessage")
 				switch(msg->address){
 				
-					«FOR ai : ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)»
+					case MESSAGESERVICE_ADDRESS:
+						«IF !executedInstances.empty»
+							if (msg->evtID == etSystemProtocol_IN_poll)
+								MsgDispatcher_«thread.name»_execute();
+							else
+						«ENDIF»
+						if (msg->evtID == etSystemProtocol_IN_terminate)
+							return FALSE;
+						break;
+					«FOR ai : dispatchedInstances»
+						
 						/* interface items of «ai.path» */
 						«FOR pi : ai. orderedIfItemInstances.filter(p|p.protocol.commType==CommunicationType::EVENT_DRIVEN)»
 							«IF pi.replicated»
 								«FOR peer: pi.peers»
-									case «pi.objId+pi.peers.indexOf(peer)»:
+									case «pi.objId+pi.peers.indexOf(peer)»+BASE_ADDRESS:
 										«IF (pi.protocol.handlesReceive(pi.isConjugated()))»
 											switch (msg->evtID){
 												«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
@@ -559,7 +592,7 @@ class NodeGen {
 													break;
 												«ENDFOR»
 												default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
-												break;
+													break;
 												}										
 										«ELSE»
 											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
@@ -567,61 +600,34 @@ class NodeGen {
 									break;
 								«ENDFOR»
 							«ELSE»
-								case «pi.objId»:
-								«IF (pi.protocol.handlesReceive(pi.isConjugated()))» 
-									switch (msg->evtID){
-									«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
-										case «pi.protocol.name»_«h.msg.codeName»:
-											«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
-										break;
-									«ENDFOR»
-									default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
+								case «pi.objId»+BASE_ADDRESS:
+									«IF (pi.protocol.handlesReceive(pi.isConjugated()))» 
+										switch (msg->evtID){
+											«FOR h:getReceiveHandlers(pi.protocol,pi.isConjugated())»
+												case «pi.protocol.name»_«h.msg.codeName»:
+													«pi.protocol.getPortClassName(pi.isConjugated)»_«h.msg.name»_receiveHandler((etPort *)&«ai.path.pathName»_const.«pi.name»,msg,(void*)&«ai.path.pathName»,«ai.actorClass.name»_receiveMessage);
+													break;
+											«ENDFOR»
+											default: «ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
+												break;
+										}
+									«ELSE»
+										«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
+									«ENDIF»
 									break;
-									}
-								«ELSE»
-									«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name», msg);
-								«ENDIF»
-								break;
 							«ENDIF»
 						«ENDFOR»
 					«ENDFOR»
 					
 					default:
 						etLogger_logErrorF("MessageService_«thread.name»_receiveMessage: address %d does not exist ", msg->address);
-					break;
+						break;
 				}
 				ET_MSC_LOGGER_SYNC_EXIT
-				«ELSE»
-				/* nothing to dispatch -> empty function generated to satisfy interface of message service */
-				«ENDIF»
-			}
-
-			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
-			/**
-			 * generated execute function for all cyclic execute calls for the async or datadriven actor instances of thread "«thread.name»"
-			 */
-			static void MsgDispatcher_«thread.name»_execute(void){
-				«IF executedInstances.size > 0»
-				ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_«thread.name»", "execute")
-				«FOR ai : executedInstances»
-					«ai.actorClass.name»_execute((void*)&«ai.path.pathName»);
-				«ENDFOR»
-				ET_MSC_LOGGER_SYNC_EXIT
-				«ELSE»
-				/* nothing to execute -> empty function generated to satisfy interface of message service */
-				«ENDIF»
+				return TRUE;
 			}
 		«ENDFOR»
 		'''
-	}
-	
-	def private generateDatadrivenExecutes(Root root, SubSystemInstance ssi) {'''
-		«FOR ai : ssi.allContainedInstances»
-			«IF ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS || ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN»
-				«ai.actorClass.name»_execute(&«ai.path.getPathName()»);
-			«ENDIF»
-		«ENDFOR»
-	'''
 	}
 	
 }

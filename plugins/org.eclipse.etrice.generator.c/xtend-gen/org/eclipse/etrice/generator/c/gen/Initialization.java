@@ -60,7 +60,7 @@ public class Initialization {
         }
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
-        CharSequence _initAttributeArray = this.initAttributeArray(instance, _union);
+        String _initAttributeArray = this.initAttributeArray(instance, _union);
         _builder.append(_initAttributeArray, "");
         _builder.newLineIfNotEmpty();
       }
@@ -68,8 +68,8 @@ public class Initialization {
     return _builder;
   }
   
-  private CharSequence initAttributeArray(final InstanceBase instance, final List<Attribute> path) {
-    CharSequence _xblockexpression = null;
+  private String initAttributeArray(final InstanceBase instance, final List<Attribute> path) {
+    String _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
       StringConcatenation _builder = new StringConcatenation();
@@ -89,7 +89,7 @@ public class Initialization {
       }
       _builder.append(" */");
       String COMMENT = _builder.toString();
-      CharSequence _xifexpression = null;
+      String _xifexpression = null;
       boolean _or = false;
       int _size_2 = a.getSize();
       boolean _equals = (_size_2 == 0);
@@ -134,7 +134,7 @@ public class Initialization {
         _builder_1.append(" } ");
         _builder_1.append(COMMENT, "");
         _builder_1.newLineIfNotEmpty();
-        _xifexpression = _builder_1;
+        _xifexpression = _builder_1.toString();
       }
       _xblockexpression = (_xifexpression);
     }
@@ -182,7 +182,7 @@ public class Initialization {
               }
               _builder.append("\t");
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, subA);
-              Object _initAttributeArray = this.initAttributeArray(instance, _union);
+              String _initAttributeArray = this.initAttributeArray(instance, _union);
               _builder.append(_initAttributeArray, "	");
               _builder.newLineIfNotEmpty();
             }
