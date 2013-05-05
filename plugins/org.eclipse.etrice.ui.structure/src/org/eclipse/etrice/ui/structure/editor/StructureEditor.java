@@ -37,6 +37,7 @@ public class StructureEditor extends RoomDiagramEditor {
 	/**
 	 * @return the actor class of this editor
 	 */
+	@Override
 	public StructureClass getStructureClass() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
@@ -44,6 +45,12 @@ public class StructureEditor extends RoomDiagramEditor {
 			return (StructureClass) bo;
 		
 		return null;
+	}
+
+	@Override
+	protected void superClassChanged() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
