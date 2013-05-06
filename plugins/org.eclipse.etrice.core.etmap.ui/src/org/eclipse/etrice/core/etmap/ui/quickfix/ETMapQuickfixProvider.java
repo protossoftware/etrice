@@ -75,4 +75,15 @@ public class ETMapQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 	}
+	
+	@Fix(ETMapJavaValidator.WRONG_NAMESPACE)
+	public void fixWrongNamespace(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Replace with correct namespace", issue.getData()[0], "add.gif", new IModification() {
+			public void apply(IModificationContext context) throws BadLocationException {
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				String replacement = issue.getData()[0];
+				xtextDocument.replace(issue.getOffset(), issue.getLength(), replacement);
+			}
+		});
+	}
 }

@@ -14,13 +14,23 @@ package org.eclipse.etrice.core.etmap.validation;
 
 import java.util.HashSet;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
+import org.eclipse.etrice.core.etmap.eTMap.Import;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.room.LogicalThread;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
+
+import com.google.inject.Inject;
 
 
 public class ETMapJavaValidator extends AbstractETMapJavaValidator {
@@ -29,8 +39,11 @@ public class ETMapJavaValidator extends AbstractETMapJavaValidator {
 	public static final String UNMAPPED_SUBSYS_REFS = "ETMapJavaValidator.UnmappedSubSysRefs";
 	public static final String DUPLICATE_THREAD_MAPPING = "ETMapJavaValidator.DulicateThreadMapping";
 	public static final String UNMAPPED_THREAD_REFS = "ETMapJavaValidator.UnmappedThreadRefs";
+	public static final String WRONG_NAMESPACE = "ETMapJavaValidator.WrongNamespace";
 	public static final String NOT_EMPTY = "empty";
 	public static final String EMPTY = "not-empty";
+	
+	@Inject ImportUriResolver importUriResolver;
 	
 	@Check
 	public void checkMapping(Mapping mp) {
@@ -88,5 +101,60 @@ public class ETMapJavaValidator extends AbstractETMapJavaValidator {
 					UNMAPPED_THREAD_REFS,
 					fix.toString(),
 					mapped.isEmpty()? EMPTY:NOT_EMPTY);
+	}
+	
+	@Check
+	public void checkImportedNamespace(Import imp) {
+		if (imp.getImportedNamespace()==null)
+			return;
+		
+		if (imp.getImportURI()==null)
+			return;
+		
+		String uriString = importUriResolver.resolve(imp);
+		
+		URI uri = URI.createURI(uriString);
+		ResourceSet rs = new ResourceSetImpl();
+
+		try {
+			Resource res = rs.getResource(uri, true);
+			if (res==null)
+				return;
+			
+			if (res.getContents().isEmpty()) {
+				error("referenced model is empty", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+				return;
+			}
+			
+			if (uri.lastSegment().endsWith(".room")) {
+				if (!(res.getContents().get(0) instanceof RoomModel)) {
+					error("referenced model is no ROOM model (but has .room extension)", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+					return;
+				}
+				
+				RoomModel model = (RoomModel) res.getContents().get(0);
+				if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
+					error("the imported namespace should be '"+model.getName()+".*'", ETMapPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
+				}
+			}
+			else if (uri.lastSegment().endsWith(".etphys")) {
+				if (!(res.getContents().get(0) instanceof PhysicalModel)) {
+					error("referenced model is no eTrice physical model (but has .etphys extension)", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+					return;
+				}
+				
+				PhysicalModel model = (PhysicalModel) res.getContents().get(0);
+				if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
+					error("the imported namespace should be '"+model.getName()+".*'", ETMapPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
+				}
+			}
+			else {
+				error("referenced model has unexpected file extension", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+			}
+		}
+		catch (RuntimeException re) {
+			warning("could not load referenced model", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+			return;
+		}
 	}
 }
