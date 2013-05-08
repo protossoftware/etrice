@@ -1,15 +1,11 @@
 RoomModel HandlerTest {
 
 	import room.basic.types.* from "Types.room"
-	
-	LogicalSystem System_HandlerTest {
-		SubSystemRef SubSystem_HandlerTest: SubSystem_HandlerTest
-	}
 
 	SubSystemClass SubSystem_HandlerTest {
 		ActorRef HandlerTest_Top: HandlerTest_Top
-//		LogicalThread t1 prio=5 {HandlerTest_Top.tester}
-//		LogicalThread t2 prio=5 {HandlerTest_Top.handlerUser}
+	
+		LogicalThread dflt_thread
 	}
 
 	ActorClass HandlerTest_Top {

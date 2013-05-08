@@ -195,6 +195,7 @@ RoomModel cGenRef {
 					}
 					do {
 						"etLogger_logInfo(\">>> done tick\");"
+						"if (++counter>20) etUnit_testFinished();"
 					}
 				}
 			}

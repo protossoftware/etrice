@@ -2,10 +2,6 @@ RoomModel ChoicePointTest {
 
 	import room.basic.types.* from "Types.room"
 
-	LogicalSystem System_ChoicePointTest {
-		SubSystemRef SubSystem_CPTest: SubSystem_CPTest
-	}
-
 	SubSystemClass SubSystem_CPTest {
 		ActorRef ChoicePointTest_Top: CPTest_Top
 	

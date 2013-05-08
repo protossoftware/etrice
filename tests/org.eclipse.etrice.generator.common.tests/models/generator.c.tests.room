@@ -1,0 +1,16 @@
+RoomModel CGenTests {
+	
+	import ChoicePointTest.* from "ChoicePointTest.room"
+	import DataDrivenTest.* from "DataDrivenTest.room"
+	import HandlerTest.* from "HandlerTest.room"
+	import SendingDataTestC.* from "SendingDataTestC.room"
+	import StaticConfigTest.* from "StaticConfigTest.room"
+	
+	LogicalSystem CGenTests {
+		SubSystemRef cpTest: SubSystem_CPTest
+		SubSystemRef ddTest: SubSystem_DataDriven
+		SubSystemRef hdTest: SubSystem_HandlerTest
+		SubSystemRef sdTest: SubSys_SendingData
+		SubSystemRef scTest: SubSystem_StaticConfigTest
+	}
+}

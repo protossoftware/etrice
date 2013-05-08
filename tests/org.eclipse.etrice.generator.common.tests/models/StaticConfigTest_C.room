@@ -2,12 +2,9 @@ RoomModel StaticConfigTest {
 
 	import room.basic.types.* from "Types.room"
 
-	LogicalSystem System_StaticConfigTest {
-		SubSystemRef subSystem: SubSystem_StaticConfigTest
-	}
-
 	SubSystemClass SubSystem_StaticConfigTest {
 		ActorRef top: Top_ac
+		
 		LogicalThread dflt_thread
 	}
 

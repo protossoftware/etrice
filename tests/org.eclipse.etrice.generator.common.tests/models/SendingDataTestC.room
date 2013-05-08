@@ -3,12 +3,10 @@ RoomModel SendingDataTestC {
 	import room.basic.types.* from "Types.room"
 	import room.basic.language.* from "Language.room"
 
-	LogicalSystem LogSys_SendingData {
-		SubSystemRef application: SubSys_SendingData
-	}
-
 	SubSystemClass SubSys_SendingData {
 		ActorRef top: SendingDataTop
+	
+		LogicalThread dflt_thread
 	}
 
 	ActorClass SendingDataTop {

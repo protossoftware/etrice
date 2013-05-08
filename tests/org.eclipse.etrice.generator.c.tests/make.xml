@@ -45,11 +45,27 @@
 	</target>
 
 	<!--
+		set_platform: sets the runtime.platform property if not set already
+	-->
+	<target name="set_platform" unless="runtime.platform">
+		<echo>using MinGW runtime platform</echo>
+		<property name="runtime.platform" value="MT_WIN_MinGW"/>
+	</target>
+
+	<!--
 		set_rp: sets the runtime.path from the ETRICE_C_RUNTIME environment variable property if not set already
 	-->
 	<target name="set_rp" unless="c-runtime.path">
 		<echo>using local runtime folder</echo>
 		<property name="c-runtime.path" value="${env.ETRICE_C_RUNTIME}"/>
+	</target>
+
+	<!--
+		set_gcc_path: sets the gcc.path property from the ETRICE_GCC_PATH environment variable property if not set already
+	-->
+	<target name="set_gcc_path" unless="gcc.path">
+		<echo>using gcc from path</echo>
+		<property name="gcc.path" value="${env.ETRICE_GCC_PATH}"/>
 	</target>
 	
 	<!--
@@ -72,6 +88,8 @@
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
 				<include name="*.config"/>
+				<include name="*.etmap"/>
+				<include name="*.etphys"/>
 			</fileset>
 			<fileset dir="${modellib.path}/model">
 				<include name="TimingService.room"/>
@@ -115,16 +133,8 @@
 		</path>
 
 		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.c.Main" fork="true" failonerror="true">
-			<arg value="${c.tests.model.path}/ChoicePointTest.room"/>
-			<arg value="${c.tests.model.path}/HandlerTest.room"/>
-			<arg value="${c.tests.model.path}/SendingDataTestC.room"/>
-			<arg value="${c.tests.model.path}/StaticConfigTest.room"/>
-			<arg value="${c.tests.model.path}/StaticConfigTest.config"/>
-			<arg value="${c.tests.model.path}/DataDrivenTest.room"/>
-			
-			<!-- modelib.c -->
-			<arg value="${modellib.path}/model/TimingService.room"/>
-			<arg value="${modellib.path}/model/Types.room"/>
+			<arg value="${c.tests.model.path}/generator.c.tests.etmap"/>
+			<arg value="${c.tests.model.path}/generator.c.tests.config"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -132,13 +142,13 @@
 	<!--
 		compile_runtime: compiles the C runtime library
 	-->
-	<target name="compile_runtime" depends="clean,set_rp">
+	<target name="compile_runtime" depends="clean,set_rp,set_gcc_path,set_platform">
 		<mkdir dir="${c-runtime.path}/bin"/>
 		<mkdir dir="${output}"/>
-		<exec dir="${c-runtime.path}/bin" executable="gcc" failonerror="true" output="${output}/compile_runtime.txt">
+		<exec dir="${c-runtime.path}/bin" executable="${gcc.path}/gcc" failonerror="true" output="${output}/compile_runtime.txt">
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -149,40 +159,55 @@
 			<arg value="../src/common/messaging/etMessage.c"/>
 			<arg value="../src/common/messaging/etMessageQueue.c"/>
 			<arg value="../src/common/messaging/etMessageService.c"/>
+			<arg value="../src/common/messaging/etSystemProtocol.c"/>
+			<arg value="../src/common/helpers/etTimeHelpers.c"/>
+			<arg value="../src/common/runtime/etRuntime.c"/>
 			<arg value="../src/common/modelbase/etActor.c"/>
 			<arg value="../src/common/modelbase/etPort.c"/>
-			<arg value="../src/platforms/generic/etLogger.c"/>
-			<arg value="../src/platforms/generic/etPlatform.c"/>
-			<arg value="../src/platforms/generic/etTimer.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etLogger.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etMutex.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etPlatformLifecycle.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etSema.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etThread.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etTime.c"/>
+			<arg value="../src/platforms/${runtime.platform}/etTimer.c"/>
 		</exec>
 		<exec dir="${c-runtime.path}/bin" executable="ar" failonerror="true" output="${output}/compile_runtime.txt" append="true">
 			<arg value="-r"/>
 			<arg value="liborg.eclipse.etrice.runtime.c.a"/>
-			<arg value="etMSCLogger.o"/>
-			<arg value="etUnit.o"/>
+			<arg value="etActor.o"/>
+			<arg value="etLogger.o"/>
 			<arg value="etMessage.o"/>
 			<arg value="etMessageQueue.o"/>
 			<arg value="etMessageService.o"/>
-			<arg value="etActor.o"/>
+			<arg value="etSystemProtocol.o"/>
+			<arg value="etTimeHelpers.o"/>
+			<arg value="etRuntime.o"/>
+			<arg value="etMSCLogger.o"/>
+			<arg value="etMutex.o"/>
+			<arg value="etPlatformLifecycle.o"/>
 			<arg value="etPort.o"/>
-			<arg value="etLogger.o"/>
-			<arg value="etPlatform.o"/>
+			<arg value="etSema.o"/>
+			<arg value="etThread.o"/>
+			<arg value="etTime.o"/>
 			<arg value="etTimer.o"/>
+			<arg value="etUnit.o"/>
 		</exec>
 	</target>
 	
 	<!--
-		compile: compiles the generated C sources
+		build: compiles and links the generated C sources
 	-->
-	<target name="build" depends="set_rp,compile_runtime,generate">
+	<target name="build" depends="set_rp,set_gcc_path,set_platform,compile_runtime,generate">
 
 		<!-- compile and link HandlerTest -->
 		<mkdir dir="bin/HandlerTest"/>
-		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt">
+		<exec dir="bin/HandlerTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt">
 			<arg value="-I../../src-gen/"/>
+			<arg value="-I../../src-gen/room/basic/service/timing/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -190,20 +215,22 @@
 			<arg value="-ansi"/>
 			<arg value="../../src-gen/HandlerTest/HandlerTest_Top.c"/>
 			<arg value="../../src-gen/HandlerTest/HandlerUser.c"/>
-			<arg value="../../src-gen/HandlerTest/SubSystem_HandlerTest.c"/>
-			<arg value="../../src-gen/HandlerTest/SubSystem_HandlerTest_Runner.c"/>
+			<arg value="../../src-gen/HandlerTest/node3_hdTest.c"/>
+			<arg value="../../src-gen/HandlerTest/node3_hdTest_Runner.c"/>
 			<arg value="../../src-gen/HandlerTest/Tester.c"/>
 			<arg value="../../src-gen/HandlerTest/TestProtocol.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/ATimingService.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/PTimer.c"/>
 		</exec>
-		<exec dir="bin/HandlerTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/HandlerTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oHandlerTest.exe"/>
 			<arg value="HandlerTest_Top.o"/>
 			<arg value="HandlerUser.o"/>
-			<arg value="SubSystem_HandlerTest.o"/>
 			<arg value="Tester.o"/>
 			<arg value="TestProtocol.o"/>
-			<arg value="SubSystem_HandlerTest_Runner.o"/>
+			<arg value="node3_hdTest.o"/>
+			<arg value="node3_hdTest_Runner.o"/>
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
@@ -212,11 +239,11 @@
 		
 		<!-- compile and link ChoicepointTest -->
 		<mkdir dir="bin/ChoicePointTest"/>
-		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/ChoicePointTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -225,18 +252,18 @@
 			<arg value="../../src-gen/ChoicePointTest/CPTest_Top.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPTester.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPUser.c"/>
-			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest.c"/>
-			<arg value="../../src-gen/ChoicePointTest/SubSystem_CPTest_Runner.c"/>
+			<arg value="../../src-gen/ChoicePointTest/node1_cpTest.c"/>
+			<arg value="../../src-gen/ChoicePointTest/node1_cpTest_Runner.c"/>
 			<arg value="../../src-gen/ChoicePointTest/TestProtocol.c"/>
 		</exec>
-		<exec dir="bin/ChoicePointTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/ChoicePointTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oChoicePointTest.exe"/>
 			<arg value="CPTest_Top.o"/>
 			<arg value="CPTester.o"/>
 			<arg value="CPUser.o"/>
-			<arg value="SubSystem_CPTest.o"/>
-			<arg value="SubSystem_CPTest_Runner.o"/>
+			<arg value="node1_cpTest.o"/>
+			<arg value="node1_cpTest_Runner.o"/>
 			<arg value="TestProtocol.o"/>
 			
 			<!-- library has to be in the last position -->
@@ -246,11 +273,11 @@
 		
 		<!-- compile and link SendingDataTestC -->
 		<mkdir dir="bin/SendingDataTestC"/>
-		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/SendingDataTestC" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -263,10 +290,10 @@
 			<arg value="../../src-gen/SendingDataTestC/PingPongDataDerived.c"/>
 			<arg value="../../src-gen/SendingDataTestC/PingPongProtocol.c"/>
 			<arg value="../../src-gen/SendingDataTestC/SendingDataTop.c"/>
-			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData.c"/>
-			<arg value="../../src-gen/SendingDataTestC/SubSys_SendingData_Runner.c"/>
+			<arg value="../../src-gen/SendingDataTestC/node4_sdTest.c"/>
+			<arg value="../../src-gen/SendingDataTestC/node4_sdTest_Runner.c"/>
 		</exec>
-		<exec dir="bin/SendingDataTestC" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/SendingDataTestC" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L${c-runtime.path}/bin"/>
 			<arg value="-oSendingDataTestC.exe"/>
 			<arg value="MrPing.o"/>
@@ -276,8 +303,8 @@
 			<arg value="PingPongDataDerived.o"/>
 			<arg value="PingPongProtocol.o"/>
 			<arg value="SendingDataTop.o"/>
-			<arg value="SubSys_SendingData.o"/>
-			<arg value="SubSys_SendingData_Runner.o"/>
+			<arg value="node4_sdTest.o"/>
+			<arg value="node4_sdTest_Runner.o"/>
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
@@ -286,11 +313,11 @@
 		
 		<!-- compile and link StaticConfigTest-->
 		<mkdir dir="bin/StaticConfigTest"/>
-		<exec dir="bin/StaticConfigTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/StaticConfigTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -307,10 +334,10 @@
 			<arg value="../../src-gen/StaticConfigTest/TestProtocolAttributes.c"/>
 			<arg value="../../src-gen/StaticConfigTest/TestProtocolWithDataClass.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Top_ac.c"/>
-			<arg value="../../src-gen/StaticConfigTest/SubSystem_StaticConfigTest.c"/>
-			<arg value="../../src-gen/StaticConfigTest/SubSystem_StaticConfigTest_Runner.c"/>
+			<arg value="../../src-gen/StaticConfigTest/node5_scTest.c"/>
+			<arg value="../../src-gen/StaticConfigTest/node5_scTest_Runner.c"/>
 		</exec>
-		<exec dir="bin/StaticConfigTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/StaticConfigTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
 			<arg value="-oStaticConfigTest.exe"/>
 			<arg value="Tester_ac.o"/>
@@ -324,8 +351,8 @@
 			<arg value="TestProtocolAttributes.o"/>
 			<arg value="TestProtocolWithDataClass.o"/>
 			<arg value="Top_ac.o"/>
-			<arg value="SubSystem_StaticConfigTest.o"/>
-			<arg value="SubSystem_StaticConfigTest_Runner.o"/>
+			<arg value="node5_scTest.o"/>
+			<arg value="node5_scTest_Runner.o"/>
 			
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
@@ -334,11 +361,11 @@
 		
 		<!-- compile and link DataDrivenTest-->
 		<mkdir dir="bin/DataDrivenTest"/>
-		<exec dir="bin/DataDrivenTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/DataDrivenTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-I../../src-gen/"/>
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
-			<arg value="-I${c-runtime.path}/src/platforms/generic"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
@@ -349,12 +376,12 @@
 			<arg value="../../src-gen/DataDrivenTest/Appl.c"/>
 			<arg value="../../src-gen/DataDrivenTest/DC.c"/>
 			<arg value="../../src-gen/DataDrivenTest/PC.c"/>
-			<arg value="../../src-gen/DataDrivenTest/SubSystem.c"/>
-			<arg value="../../src-gen/DataDrivenTest/SubSystem_Runner.c"/>
+			<arg value="../../src-gen/DataDrivenTest/node2_ddTest.c"/>
+			<arg value="../../src-gen/DataDrivenTest/node2_ddTest_Runner.c"/>
 			<arg value="../../src-gen/room/basic/service/timing/ATimingService.c"/>
 			<arg value="../../src-gen/room/basic/service/timing/PTimer.c"/>
 		</exec>
-		<exec dir="bin/DataDrivenTest" executable="gcc" failonerror="true" output="${output}/build.txt" append="true">
+		<exec dir="bin/DataDrivenTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L../../../../runtime/org.eclipse.etrice.runtime.c/bin"/>
 			<arg value="-oDataDrivenTest.exe"/>
 			<arg value="Tester.o"/>
@@ -362,8 +389,8 @@
 			<arg value="Appl.o"/>
 			<arg value="DC.o"/>
 			<arg value="PC.o"/>
-			<arg value="SubSystem.o"/>
-			<arg value="SubSystem_Runner.o"/>
+			<arg value="node2_ddTest.o"/>
+			<arg value="node2_ddTest_Runner.o"/>
 			<arg value="ATimingService.o"/>
 			<arg value="PTimer.o"/>
 			
@@ -379,19 +406,29 @@
 	<target name="run" depends="build">
 		<mkdir dir="tmp/log"/>
 		<echo>start HandlerTest</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/HandlerTest/HandlerTest.exe">
+			<arg value="-run_as_test"/>
+		</exec>
 		<echo>end   HandlerTest</echo>
 		<echo>start ChoicePointTest</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/ChoicePointTest/ChoicePointTest.exe">
+			<arg value="-run_as_test"/>
+		</exec>
 		<echo>end   ChoicePointTest</echo>
 		<echo>start SendingDataTestC</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe">
+			<arg value="-run_as_test"/>
+		</exec>
 		<echo>end   SendingDataTestC</echo>
 		<echo>start StaticConfigTest</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe">
+			<arg value="-run_as_test"/>
+		</exec>
 		<echo>end   StaticConfigTest</echo>
 		<echo>start DataDrivenTest</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/DataDrivenTest/DataDrivenTest.exe"/>
+		<exec dir="./" resolveexecutable="true" executable="./bin/DataDrivenTest/DataDrivenTest.exe">
+			<arg value="-run_as_test"/>
+		</exec>
 		<echo>end   DataDrivenTest</echo>
 	</target>
 	

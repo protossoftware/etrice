@@ -1,7 +1,7 @@
 MappingModel MassiveMultiThreading {
 	
-	import cGenRef from "MassiveMultiThreading.room"
-	import cGenRef from "MassiveMultiThreading.etphys"
+	import MassiveMultiThreading.* from "MassiveMultiThreading.room"
+	import MassiveMultiThreading.* from "MassiveMultiThreading.etphys"
 	
 	Mapping MassiveMultiThreading.LS -> MassiveMultiThreading.Sys {
 		SubSystemMapping sys1 -> node1 {

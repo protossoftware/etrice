@@ -1,7 +1,7 @@
 MappingModel cgenRef {
 	
-	import cGenRef from "cGenRef.room"
-	import cGenRef from "cGenRef.etphys"
+	import cGenRef.* from "cGenRef.room"
+	import cGenRef.* from "cGenRef.etphys"
 	
 	Mapping cGenRef.LS -> cGenRef.Sys {
 		SubSystemMapping sys1 -> node1 {

@@ -3,15 +3,15 @@ RoomModel DataDrivenTest {
 	import room.basic.types.* from "Types.room"
 	import room.basic.service.timing.* from "TimingService.room"
 	
-	LogicalSystem LS {
-		SubSystemRef subsys: SubSystem
-	}	
-	
-	SubSystemClass SubSystem {
+	SubSystemClass SubSystem_DataDriven {
 		ActorRef appl: Appl
 		ActorRef timing: ATimingService
 		LayerConnection ref appl satisfied_by timing.timer
+		
+		// all unmapped instances are mapped to the default *physical* thread
 		LogicalThread dflt_thread
+		ActorInstanceMapping appl -> dflt_thread
+		ActorInstanceMapping timing -> dflt_thread
 	}
 
 	ActorClass Appl {
