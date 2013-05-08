@@ -15,9 +15,12 @@ package org.eclipse.etrice.generator.java;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
@@ -178,11 +181,30 @@ public class Main extends AbstractGenerator {
 
 		setupRoomModel();
 		dataConfig.doSetup();
+		setupMappingModel();
+		setupPhysicalModel();
 
 		if (!runGenerator(uriList, genModelPath, genDocumentation, asLibrary, debug))
 			return GENERATOR_ERROR;
 		
 		return GENERATOR_OK;
+	}
+
+	/**
+	 * setup the eTrice mapping model plug-in
+	 */
+	protected void setupMappingModel() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			ETMapStandaloneSetup.doSetup();
+		}
+	}
+
+	/**
+	 * setup the eTrice mapping model plug-in
+	 */
+	protected void setupPhysicalModel() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING)
+			ETPhysStandaloneSetup.doSetup();
 	}
 
 	protected int usageError(String text) {
