@@ -29,7 +29,7 @@ void etSema_construct(etSema* self){
 }
 void etSema_destruct(etSema* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "destruct")
-	// TODO: implement this function
+	/* TODO: implement this function */
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 

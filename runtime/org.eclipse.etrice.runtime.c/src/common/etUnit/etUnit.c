@@ -15,6 +15,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include "debugging/etLogger.h"
+#include "osal/etSema.h"
+#include "runtime/etRuntime.h"
 
 
 /*** member variables */
@@ -95,7 +97,10 @@ void etUnit_close(void) {
 		etUnit_reportfile = NULL;
 	}
 	etLogger_logInfoF("End Time: %ld", clock());
-	etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
+	if (etUnit_errorCounter==0)
+		etLogger_logInfoF("Error Counter: %ld", etUnit_errorCounter);
+	else
+		etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
 	etLogger_logInfoF("************* TEST END **************");
 }
 
@@ -145,6 +150,7 @@ void etUnit_closeAll(etInt16 id){
 }
 
 void etUnit_testFinished(etInt16 id) {
+	etSema_wakeup(etRuntime_getTerminateSemaphore());
 }
 
 void expectTrue(etInt16 id, const char* message, etBool condition, const char* file, int line) {

@@ -14,4 +14,15 @@
 #include "runtime/etRuntime.h"
 
 
+static etSema terminateSemaphore;
 
+etSema* etRuntime_getTerminateSemaphore() {
+	static etBool initialized = FALSE;
+
+	if (!initialized) {
+		initialized = TRUE;
+		etSema_construct(&terminateSemaphore);
+	}
+
+	return &terminateSemaphore;
+}

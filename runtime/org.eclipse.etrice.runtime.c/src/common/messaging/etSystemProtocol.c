@@ -12,7 +12,7 @@
 /*--------------------- port methods */
 
 
-// getReplication
+/* getReplication */
 etInt32 etSystemProtocolReplPort_getReplication(const etSystemProtocolReplPort* self) {
 	return ((etReplPort*)self)->size;
 }
@@ -66,7 +66,7 @@ void etSystemProtocolConjReplPort_terminate(const etSystemProtocolConjReplPort* 
 }
 
 
-// getReplication
+/* getReplication */
 etInt32 etSystemProtocolConjReplPort_getReplication(const etSystemProtocolConjReplPort* self) {
 	return ((etReplPort*)self)->size;
 }

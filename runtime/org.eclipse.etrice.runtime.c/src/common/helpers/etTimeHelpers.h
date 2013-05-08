@@ -15,6 +15,8 @@
 
 #include "osal/etTime.h"
 
+void etTime_subtract(etTime *self, etTime* subtractValue);
+void etTime_add(etTime *self, etTime* addValue);
 etInt32 etTimeHelpers_convertToMSec(etTime *time);
 void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds);
 

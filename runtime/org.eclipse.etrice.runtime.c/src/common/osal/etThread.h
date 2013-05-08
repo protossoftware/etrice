@@ -44,7 +44,7 @@ typedef struct etThread{
 	void* threadFunctionData;	/**< data for call back function to be called by thread -> has to be filled in by caller of etThread_construct **/
 } etThread;
 
-// TODO: add return values for error handling
+/* TODO: add return values for error handling */
 
 /**
  * initialize the thread data

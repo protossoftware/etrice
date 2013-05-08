@@ -13,6 +13,8 @@
 #ifndef _ETRUNTIME_H_
 #define _ETRUNTIME_H_
 
+#include "osal/etSema.h"
 
+etSema* etRuntime_getTerminateSemaphore();
 
 #endif /* _ETRUNTIME_H_ */

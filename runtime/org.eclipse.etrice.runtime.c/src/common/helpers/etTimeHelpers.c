@@ -12,6 +12,14 @@
 
 #include "helpers/etTimeHelpers.h"
 
+void etTimeHelpers_subtract(etTime *first, etTime* second){
+	/* TODO: implement */
+}
+
+void etTimeHelpers_add(etTime *first, etTime* second){
+	/* TODO: implement */
+}
+
 etInt32 etTimeHelpers_convertToMSec(etTime *time){
 	return time->sec * 1000 + time->nSec / 1000000;
 }
