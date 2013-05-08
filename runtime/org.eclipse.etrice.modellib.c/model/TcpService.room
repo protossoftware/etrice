@@ -10,7 +10,7 @@ RoomModel room.basic.service.tcp {
 		}
 		Structure {
 			usercode1 {
-				"#include \"platform/etTcpSockets.h\""
+				"#include \"osal/etTcpSockets.h\""
 			}
 			usercode3 {
 				"/* user code 3 */"
