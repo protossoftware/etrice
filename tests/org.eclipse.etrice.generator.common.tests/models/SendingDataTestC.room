@@ -3,7 +3,7 @@ RoomModel SendingDataTestC {
 	import room.basic.types.* from "Types.room"
 	import room.basic.language.* from "Language.room"
 
-	SubSystemClass SubSys_SendingData {
+	SubSystemClass SubSystem_SendingData {
 		ActorRef top: SendingDataTop
 	
 		LogicalThread dflt_thread

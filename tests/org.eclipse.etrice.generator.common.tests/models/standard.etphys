@@ -7,6 +7,9 @@ PhysicalModel Standard {
 		NodeRef node4: PC
 		NodeRef node5: PC
 		NodeRef node6: PC
+		NodeRef node7: PC
+		NodeRef node8: PC
+		NodeRef node9: PC
 	}
 	
 	NodeClass PC {
@@ -15,6 +18,30 @@ PhysicalModel Standard {
 		priomax = 5
 		
 		DefaultThread DfltThread {
+			execmode = blocked
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 32
+		}
+		
+		Thread Thread1 {
+			execmode = blocked
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 32
+		}
+		
+		Thread Thread2 {
+			execmode = blocked
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 32
+		}
+		
+		Thread Thread3 {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024

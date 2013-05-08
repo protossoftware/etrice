@@ -10,7 +10,7 @@ RoomModel CGenTests {
 		SubSystemRef cpTest: SubSystem_CPTest
 		SubSystemRef ddTest: SubSystem_DataDriven
 		SubSystemRef hdTest: SubSystem_HandlerTest
-		SubSystemRef sdTest: SubSys_SendingData
+		SubSystemRef sdTest: SubSystem_SendingData
 		SubSystemRef scTest: SubSystem_StaticConfigTest
 	}
 }

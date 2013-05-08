@@ -1,0 +1,24 @@
+RoomModel JavaGenTests {
+	
+	import HandlerTest.* from "HandlerTest.room"
+	import ChoicePointTest.* from "ChoicePointTest.room"
+	import PingPongThreadTest.* from "PingPongThreadTest.room"
+	import PingPongThreadTestReplPort.* from "PingPongThreadReplPortTest.room"
+	import SendingDataTestJava.* from "SendingDataTestJava.room"
+	import TCPTest.* from "TCPTest.room"
+	import StaticConfigTest.* from "StaticConfigTest.room"
+	import DynamicConfigTest.* from "DynamicConfigTest_Java.room"
+	import DataDrivenTest.* from "DataDrivenTest.room"
+	
+	LogicalSystem JavaGenTests {
+		SubSystemRef hdTest: SubSystem_HandlerTest
+		SubSystemRef cpTest: SubSystem_CPTest
+		SubSystemRef ppTest: SubSystem_PingPong
+		SubSystemRef prTest: SubSystem_PingPongReplPort
+		SubSystemRef sdTest: SubSystem_SendingData
+		SubSystemRef tcTest: SubSystem_TCPTest
+		SubSystemRef scTest: SubSystem_StaticConfigTest
+		SubSystemRef dcTest: SubSystem_DynamicConfigTest
+		SubSystemRef ddTest: SubSystem_DataDriven
+	}
+}

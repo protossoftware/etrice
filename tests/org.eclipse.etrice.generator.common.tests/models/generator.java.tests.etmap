@@ -1,0 +1,41 @@
+MappingModel JavaGenTest {
+	
+	import JavaGenTests.* from "generator.java.tests.room"
+	import Standard.* from "standard.etphys"
+	
+	Mapping JavaGenTests -> Sys {
+		SubSystemMapping cpTest -> node1 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping ddTest -> node2 {
+			ThreadMapping dflt_thread -> MixedThread
+		}
+		SubSystemMapping hdTest -> node3 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping sdTest -> node4 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping scTest -> node5 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping ppTest -> node6 {
+			ThreadMapping mrPingThread -> DfltThread
+			ThreadMapping mrPong1Thread -> Thread1
+			ThreadMapping mrPong2Thread -> Thread2
+			ThreadMapping mrPong3Thread -> Thread3
+		}
+		SubSystemMapping prTest -> node7 {
+			ThreadMapping mrPingThread -> DfltThread
+			ThreadMapping mrPong1Thread -> Thread1
+			ThreadMapping mrPong2Thread -> Thread2
+			ThreadMapping mrPong3Thread -> Thread3
+		}
+		SubSystemMapping tcTest -> node8 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping dcTest -> node9 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+	}
+}

@@ -2,13 +2,12 @@ RoomModel TCPTest {
 	import room.basic.types.* from "Types.room"
 	import room.basic.service.tcp.* from "TcpService.room"
 	
-	LogicalSystem System_TCPTest {
-		SubSystemRef SubSystem_TCPTest: TCPTestSubSys
+	SubSystemClass SubSystem_TCPTest {
+		ActorRef TCPTestTopRef:TCPTestTop
+	
+		LogicalThread dflt_thread
 	}
 	
-	SubSystemClass TCPTestSubSys {
-		ActorRef TCPTestTopRef:TCPTestTop
-	}
 	ActorClass TCPTestTop {
 		Structure {
 			ActorRef ref0: ATcpServer

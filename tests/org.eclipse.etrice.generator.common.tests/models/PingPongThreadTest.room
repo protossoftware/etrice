@@ -3,10 +3,6 @@ RoomModel PingPongThreadTest {
 	import room.basic.service.timing.* from "TimingService.room"
 	import room.basic.types.* from "Types.room"
 
-	LogicalSystem System_PingPong {
-		SubSystemRef subsystem: SubSystem_PingPong
-	}
-
 	SubSystemClass SubSystem_PingPong {
 		ActorRef application: PingPongTop
 		ActorRef services: ATimingService

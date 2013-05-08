@@ -4,14 +4,11 @@ RoomModel DynamicConfigTest {
 
 	import room.basic.service.timing.* from "TimingService.room"
 
-	LogicalSystem System_DynConfigTest {
-		SubSystemRef subSystem: SubSystem
-	}
-
-	SubSystemClass SubSystem {
+	SubSystemClass SubSystem_DynamicConfigTest {
 		ActorRef testee: Testee_ac
 		ActorRef timingService: ATimingService
 		LayerConnection ref testee satisfied_by timingService.timer
+		
 		LogicalThread dflt_thread
 	}
 
