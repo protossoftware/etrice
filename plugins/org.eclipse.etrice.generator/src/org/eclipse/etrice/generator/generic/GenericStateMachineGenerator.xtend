@@ -263,7 +263,7 @@ class GenericStateMachineGenerator {
 		«privAccess»«stateType» «opScopePriv»enterHistory(«self»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
 			«boolType» skip_entry = «langExt.booleanConstant(false)»;
 			if (state >= STATE_MAX) {
-				state = state - STATE_MAX;
+				state = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state - STATE_MAX);
 				skip_entry = «langExt.booleanConstant(true)»;
 			}
 			while («langExt.booleanConstant(true)») {

@@ -676,8 +676,19 @@ public class GenericStateMachineGenerator {
       _builder.append("if (state >= STATE_MAX) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("state = state - STATE_MAX;");
-      _builder.newLine();
+      _builder.append("state = ");
+      {
+        boolean _usesInheritance_5 = this.langExt.usesInheritance();
+        boolean _not_3 = (!_usesInheritance_5);
+        if (_not_3) {
+          _builder.append("(");
+          String _stateType_5 = this.stateType();
+          _builder.append(_stateType_5, "		");
+          _builder.append(")");
+        }
+      }
+      _builder.append(" (state - STATE_MAX);");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("skip_entry = ");
       String _booleanConstant_1 = this.langExt.booleanConstant(true);
@@ -892,8 +903,8 @@ public class GenericStateMachineGenerator {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      String _stateType_5 = this.stateType();
-      _builder.append(_stateType_5, "	");
+      String _stateType_6 = this.stateType();
+      _builder.append(_stateType_6, "	");
       _builder.append(" next = ");
       _builder.append(opScopePriv, "	");
       _builder.append("executeTransitionChain(");
@@ -981,8 +992,8 @@ public class GenericStateMachineGenerator {
       _builder.append("int chain = NOT_CAUGHT;");
       _builder.newLine();
       _builder.append("\t");
-      String _stateType_6 = this.stateType();
-      _builder.append(_stateType_6, "	");
+      String _stateType_7 = this.stateType();
+      _builder.append(_stateType_7, "	");
       _builder.append(" catching_state = NO_STATE;");
       _builder.newLineIfNotEmpty();
       {
@@ -1042,8 +1053,8 @@ public class GenericStateMachineGenerator {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t\t\t");
-      String _stateType_7 = this.stateType();
-      _builder.append(_stateType_7, "			");
+      String _stateType_8 = this.stateType();
+      _builder.append(_stateType_8, "			");
       _builder.append(" next = ");
       _builder.append(opScopePriv, "			");
       _builder.append("executeTransitionChain(");
