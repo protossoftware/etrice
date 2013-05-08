@@ -36,8 +36,8 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	protected static final int IFITEM_RTSystemPort = 0;
 	
 	// for tests only
-	private TestSemaphore testSem=null;
-	private int testErrorCode;
+	private TestSemaphore terminateSem=null;
+	private int terminateCode;
 	
 	public SubSystemClassBase(IRTObject parent, String name) {
 		super(parent, name);
@@ -137,24 +137,24 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	}
 	
 	// this is to run integration tests
-	public synchronized void setTestSemaphore(TestSemaphore sem){
-		testErrorCode = -1;
-		testSem=sem;
+	public synchronized void setTerminateSemaphore(TestSemaphore sem){
+		terminateCode = -1;
+		terminateSem=sem;
 	}
 	
-	public synchronized int getTestErrorCode(){
-		return testErrorCode;
+	public synchronized int getTerminateCode(){
+		return terminateCode;
 	}
 	
-	public void testFinished(int errorCode){
-		if (testSem != null) {
-			System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore");
+	public void terminate(int errorCode){
+		if (terminateSem != null) {
+			//System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore");
 			//testSem.printWaitingThreads();
 			synchronized (this) {
-				testErrorCode = errorCode;
-				testSem.release(1);
+				terminateCode = errorCode;
+				terminateSem.release(1);
 			}
-			System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): semaphore released");
+			//System.out.println("org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase.testFinished(int): semaphore released");
 			//testSem.printWaitingThreads();
 			Thread.yield();
 		}

@@ -13,9 +13,10 @@ import java.io.InputStreamReader;
 public class SubSystemRunnerBase {
 
 	private static final String OPTION_RUN_AS_TEST = "-run_as_test";
+	private static final String OPTION_HEADLESS = "-headless";
 	
-	private static boolean test = false;
-	protected static TestSemaphore testSem = new TestSemaphore(0);
+	private static boolean headless = false;
+	protected static TestSemaphore terminateSem = new TestSemaphore(0);
 
 	protected static void run(SubSystemClassBase main_component, String[] args) {
 		
@@ -23,21 +24,24 @@ public class SubSystemRunnerBase {
 
 		for (String arg : args) {
 			if (arg.equals(OPTION_RUN_AS_TEST)) {
-				
 				System.out.println("*** running as test");
-				test = true;
+				headless = true;
+			}
+			else if (arg.equals(OPTION_HEADLESS)) {
+				System.out.println("*** running headless");
+				headless = true;
 			}
 		}
 
-		if (test)
-			main_component.setTestSemaphore(testSem);
+		if (headless)
+			main_component.setTerminateSemaphore(terminateSem);
 		
 		main_component.init(); // lifecycle init
 		main_component.start(); // lifecycle start
 
 		// application runs until quit
-		if (test)
-			waitForTestcase();
+		if (headless)
+			waitForTerminate();
 		else
 			waitForQuit();
 		
@@ -67,10 +71,10 @@ public class SubSystemRunnerBase {
 		}
 	}
 
-	public static void waitForTestcase() {
+	public static void waitForTerminate() {
 		try{
 			System.out.println("=== waitForTestcase: before acq. semaphore, thread "+Thread.currentThread().getName());
-			testSem.acquire(1);
+			terminateSem.acquire(1);
 			System.out.println("=== waitForTestcase: after acq. semaphore, thread "+Thread.currentThread().getName());
 		}catch(InterruptedException e){
 			System.out.println("Semaphore fault !");

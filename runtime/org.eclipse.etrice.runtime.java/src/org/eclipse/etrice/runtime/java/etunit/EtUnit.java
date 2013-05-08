@@ -289,7 +289,7 @@ public class EtUnit {
 	}
 	
 	public static void etUnit_testFinished(int id) {
-		RTServices.getInstance().getSubSystem().testFinished(etUnit_isSuccess(id)?0:1);
+		RTServices.getInstance().getSubSystem().terminate(etUnit_isSuccess(id)?0:1);
 	}
 	
 	private static void etUnit_handleExpect(int id, boolean result, String resulttext, String exp, String act) {
