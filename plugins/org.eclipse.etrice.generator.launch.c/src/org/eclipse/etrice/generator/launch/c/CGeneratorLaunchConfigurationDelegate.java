@@ -43,6 +43,9 @@ public class CGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfig
 		if (configuration.getAttribute(CGeneratorConfigTab.GEN_DOCUMENTATION, false)
 				|| configuration.getAttribute(CGeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
 			argString.append(" "+Main.OPTION_GEN_INST_DIAG);
+		if (configuration.getAttribute(CGeneratorConfigTab.DEBUG, false)) {
+			argString.append(" "+Main.OPTION_DEBUG);
+		}
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {
