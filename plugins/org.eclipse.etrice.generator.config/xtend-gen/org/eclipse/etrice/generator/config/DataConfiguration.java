@@ -14,6 +14,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -55,7 +56,10 @@ public class DataConfiguration implements IDataConfiguration {
   protected ImportUriResolver uriResolver;
   
   public void doSetup() {
-    ConfigStandaloneSetup.doSetup();
+    boolean _not = (!EMFPlugin.IS_ECLIPSE_RUNNING);
+    if (_not) {
+      ConfigStandaloneSetup.doSetup();
+    }
   }
   
   public boolean setResources(final ResourceSet resource, final ILogger logger) {

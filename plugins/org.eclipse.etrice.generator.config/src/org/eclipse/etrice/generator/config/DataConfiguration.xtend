@@ -36,6 +36,7 @@ import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import org.eclipse.emf.common.EMFPlugin
 
 class DataConfiguration implements IDataConfiguration {
 	
@@ -46,7 +47,9 @@ class DataConfiguration implements IDataConfiguration {
 	protected ImportUriResolver uriResolver;
 
 	override doSetup() {
-		ConfigStandaloneSetup::doSetup()
+		if (!EMFPlugin::IS_ECLIPSE_RUNNING)
+			ConfigStandaloneSetup::doSetup()
+			
 	}
 	
 	override setResources(ResourceSet resource, ILogger logger) {
