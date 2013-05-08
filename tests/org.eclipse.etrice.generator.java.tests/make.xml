@@ -61,6 +61,8 @@
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
 				<include name="*.room"/>
 				<include name="*.config"/>
+				<include name="*.etmap"/>
+				<include name="*.etphys"/>
 				<include name="*.rt-config"/>
 			</fileset>
 			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/models">
@@ -107,17 +109,8 @@
 		</path>
 
 		<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
-			<arg value="${java.tests.model.path}/HandlerTest.room"/>
-			<arg value="${java.tests.model.path}/ChoicePointTest.room"/>
-			<arg value="${java.tests.model.path}/PingPongThreadTest.room"/>
-			<arg value="${java.tests.model.path}/PingPongThreadReplPortTest.room"/>
-			<arg value="${java.tests.model.path}/SendingDataTestJava.room"/>
-			<arg value="${java.tests.model.path}/TCPTest.room"/>
-			<arg value="${java.tests.model.path}/StaticConfigTest.room"/>
-			<arg value="${java.tests.model.path}/StaticConfigTest.config"/>
-			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.room"/>
-			<arg value="${java.tests.model.path}/DynamicConfigTest_Java.config"/>
-			<arg value="${java.tests.model.path}/DataDrivenTest.room"/>
+			<arg value="${java.tests.model.path}/generator.java.tests.config"/>
+			<arg value="${java.tests.model.path}/generator.java.tests.etmap"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -126,7 +119,7 @@
 		compile: compiles the generated Java sources
 	-->
 	<target name="compile" depends="generate">
-		<!-- introduced this indiraction to be able to log the output -->
+		<!-- introduced this indirection to be able to log the output -->
 		<ant antfile="make.xml" target="logged_compile" output="${output}/compile.txt">
 		</ant>
 	</target>
@@ -166,19 +159,19 @@
 		</java>
 		<echo>end   PingPongThreadTest</echo>
 		<echo>start PingPongThreadTestReplPort</echo>
-		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.SubSystem_PingPongRunner" fork="true" failonerror="true">
+		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.SubSystem_PingPongReplPortRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   PingPongThreadTestReplPort</echo>
 		<echo>start SendingDataTestJava</echo>
-		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.SubSys_SendingDataRunner" fork="true" failonerror="true">
+		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.SubSystem_SendingDataRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   SendingDataTestJava</echo>
 		<echo>start TCPTest</echo>
-		<java output="${output}/runTCPTest.txt" classname="TCPTest.TCPTestSubSysRunner" fork="true" failonerror="true">
+		<java output="${output}/runTCPTest.txt" classname="TCPTest.SubSystem_TCPTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
@@ -190,13 +183,13 @@
 		</java>
 		<echo>end   StaticConfigTest</echo>
 		<echo>start DynamicConfigTest</echo>
-		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystemRunner" fork="true" failonerror="true">
+		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystem_DynamicConfigTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicConfigTest</echo>
 		<echo>start DataDrivenTest</echo>
-		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.SubSystemRunner" fork="true" failonerror="true">
+		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.SubSystem_DataDrivenRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
