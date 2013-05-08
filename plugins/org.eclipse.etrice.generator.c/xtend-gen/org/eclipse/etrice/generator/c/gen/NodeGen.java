@@ -18,9 +18,11 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
@@ -29,6 +31,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -48,10 +51,13 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -93,6 +99,9 @@ public class NodeGen {
   @Inject
   private ILogger logger;
   
+  @Inject
+  private IDiagnostician diagnostician;
+  
   public void doGenerate(final Root root) {
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
@@ -107,6 +116,29 @@ public class NodeGen {
           String _path = this._roomExtensions.getPath(_subSystemClass_1);
           String filepath = (_generationTargetPath + _path);
           String file = this._cExtensions.getCHeaderFileName(nr, ssi);
+          this.checkDataPorts(ssi);
+          HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
+          final HashSet<PhysicalThread> usedThreads = _hashSet;
+          NodeClass _type = nr.getType();
+          EList<PhysicalThread> _threads = _type.getThreads();
+          for (final PhysicalThread thread : _threads) {
+            {
+              EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+              final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
+                  public Boolean apply(final ActorInstance ai) {
+                    PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
+                    boolean _equals = Objects.equal(_physicalThread, thread);
+                    return Boolean.valueOf(_equals);
+                  }
+                };
+              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
+              boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
+              boolean _not = (!_isEmpty);
+              if (_not) {
+                usedThreads.add(thread);
+              }
+            }
+          }
           String _plus = ("generating Node declaration: \'" + file);
           String _plus_1 = (_plus + "\' in \'");
           String _plus_2 = (_plus_1 + filepath);
@@ -123,7 +155,7 @@ public class NodeGen {
           String _plus_7 = (_plus_6 + "\'");
           this.logger.logInfo(_plus_7);
           this.fileAccess.setOutputPath(filepath);
-          CharSequence _generateSourceFile = this.generateSourceFile(root, ssi);
+          CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, usedThreads);
           this.fileAccess.generateFile(file, _generateSourceFile);
           String _instSourceFileName = this._cExtensions.getInstSourceFileName(nr, ssi);
           file = _instSourceFileName;
@@ -133,7 +165,7 @@ public class NodeGen {
           String _plus_11 = (_plus_10 + "\'");
           this.logger.logInfo(_plus_11);
           this.fileAccess.setOutputPath(filepath);
-          CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi);
+          CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi, usedThreads);
           this.fileAccess.generateFile(file, _generateInstanceFile);
           String _dispSourceFileName = this._cExtensions.getDispSourceFileName(nr, ssi);
           file = _dispSourceFileName;
@@ -143,7 +175,7 @@ public class NodeGen {
           String _plus_15 = (_plus_14 + "\'");
           this.logger.logInfo(_plus_15);
           this.fileAccess.setOutputPath(filepath);
-          CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi);
+          CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi, usedThreads);
           this.fileAccess.generateFile(file, _generateDispatcherFile);
         }
       }
@@ -187,6 +219,9 @@ public class NodeGen {
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      _builder.append("#include \"etDatatypes.h\"");
+      _builder.newLine();
+      _builder.newLine();
       DetailCode _userCode1 = ssc.getUserCode1();
       CharSequence _userCode = this.helpers.userCode(_userCode1);
       _builder.append(_userCode, "");
@@ -213,7 +248,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("void ");
       _builder.append(clsname, "");
-      _builder.append("_run(void);\t\t/* lifecycle run \t */");
+      _builder.append("_run(etBool runAsTest);\t\t/* lifecycle run \t */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("void ");
@@ -245,7 +280,7 @@ public class NodeGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi) {
+  private CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
@@ -254,6 +289,15 @@ public class NodeGen {
       String _plus = (_name + "_");
       String _name_1 = ssi.getName();
       final String clsname = (_plus + _name_1);
+      NodeClass _type = nr.getType();
+      EList<PhysicalThread> _threads = _type.getThreads();
+      final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
+          public Boolean apply(final PhysicalThread t) {
+            boolean _contains = usedThreads.contains(t);
+            return Boolean.valueOf(_contains);
+          }
+        };
+      final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -278,6 +322,9 @@ public class NodeGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("#include <stdio.h>");
+      _builder.newLine();
+      _builder.newLine();
       _builder.append("#include \"");
       String _cHeaderFileName = this._cExtensions.getCHeaderFileName(nr, ssi);
       _builder.append(_cHeaderFileName, "");
@@ -290,8 +337,11 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include \"messaging/etSystemProtocol.h\"");
       _builder.newLine();
-      _builder.newLine();
       _builder.append("#include \"osal/etTimer.h\"");
+      _builder.newLine();
+      _builder.append("#include \"osal/etSema.h\"");
+      _builder.newLine();
+      _builder.append("#include \"runtime/etRuntime.h\"");
       _builder.newLine();
       _builder.append("#include \"etRuntimeConfig.h\"");
       _builder.newLine();
@@ -304,7 +354,7 @@ public class NodeGen {
       _builder.append("/* data for Node ");
       String _name_4 = nr.getName();
       _builder.append(_name_4, "");
-      _builder.append(" with SubSytsem ");
+      _builder.append(" with SubSystem ");
       String _name_5 = ssi.getName();
       _builder.append(_name_5, "");
       _builder.append(" */");
@@ -376,9 +426,7 @@ public class NodeGen {
       _builder.append("/* initialization of all message services */");
       _builder.newLine();
       {
-        NodeClass _type = nr.getType();
-        EList<PhysicalThread> _threads = _type.getThreads();
-        for(final PhysicalThread thread : _threads) {
+        for(final PhysicalThread thread : threads) {
           {
             boolean _or = false;
             ExecMode _execmode = thread.getExecmode();
@@ -493,9 +541,7 @@ public class NodeGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        NodeClass _type_1 = nr.getType();
-        EList<PhysicalThread> _threads_1 = _type_1.getThreads();
-        for(final PhysicalThread thread_1 : _threads_1) {
+        for(final PhysicalThread thread_1 : threads) {
           _builder.append("\t");
           _builder.append("etMessageService_start(&msgService_");
           String _name_11 = thread_1.getName();
@@ -524,9 +570,7 @@ public class NodeGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        NodeClass _type_2 = nr.getType();
-        EList<PhysicalThread> _threads_2 = _type_2.getThreads();
-        for(final PhysicalThread thread_2 : _threads_2) {
+        for(final PhysicalThread thread_2 : threads) {
           _builder.append("\t");
           _builder.append("etMessageService_stop(&msgService_");
           String _name_12 = thread_2.getName();
@@ -555,9 +599,7 @@ public class NodeGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        NodeClass _type_3 = nr.getType();
-        EList<PhysicalThread> _threads_3 = _type_3.getThreads();
-        for(final PhysicalThread thread_3 : _threads_3) {
+        for(final PhysicalThread thread_3 : threads) {
           _builder.append("\t");
           _builder.append("etMessageService_destroy(&msgService_");
           String _name_13 = thread_3.getName();
@@ -649,7 +691,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("void ");
       _builder.append(clsname, "");
-      _builder.append("_run(void) {");
+      _builder.append("_run(etBool runAsTest) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
@@ -659,9 +701,53 @@ public class NodeGen {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("etThread_sleep(1000);");
+      _builder.append("if (runAsTest) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("etSema_waitForWakeup(etRuntime_getTerminateSemaphore());");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("else {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("printf(\"type quit to exit\\n\");");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while (TRUE) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("char line[64];");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("if (fgets(line, 64, stdin) == NULL) {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("printf(\"got NULL\\n\");");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("break;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("else if (strncmp(line, \"quit\", 4)==0){");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("break;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -719,13 +805,13 @@ public class NodeGen {
           {
             ActorClass _actorClass = ai.getActorClass();
             EList<StandardOperation> _operations = _actorClass.getOperations();
-            final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+            final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
                 public Boolean apply(final StandardOperation op) {
                   boolean _isDestructor = op.isDestructor();
                   return Boolean.valueOf(_isDestructor);
                 }
               };
-            Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
+            Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function_1);
             boolean _isEmpty = IterableExtensions.isEmpty(_filter);
             boolean _not = (!_isEmpty);
             if (_not) {
@@ -807,13 +893,13 @@ public class NodeGen {
           {
             ActorClass _actorClass_3 = ai_1.getActorClass();
             EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
-            final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+            final Function1<StandardOperation,Boolean> _function_2 = new Function1<StandardOperation,Boolean>() {
                 public Boolean apply(final StandardOperation op) {
                   boolean _isConstructor = RoomHelpers.isConstructor(op);
                   return Boolean.valueOf(_isConstructor);
                 }
               };
-            Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
+            Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_2);
             boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
             boolean _not_1 = (!_isEmpty_1);
             if (_not_1) {
@@ -881,7 +967,7 @@ public class NodeGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateInstanceFile(final Root root, final SubSystemInstance ssi) {
+  private CharSequence generateInstanceFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
@@ -915,28 +1001,28 @@ public class NodeGen {
       _builder.append("#include \"messaging/etMessageService.h\"");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("/* include all used ActorClasses */");
+      _builder.append("/* include all referenced ActorClasses */");
       _builder.newLine();
       {
-        EList<ActorClass> _usedActorClasses = root.getUsedActorClasses();
-        for(final ActorClass actorClass : _usedActorClasses) {
-          _builder.append("#include \"");
-          String _name_2 = actorClass.getName();
-          _builder.append(_name_2, "");
-          _builder.append(".h\"");
+        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+        EList<ActorClass> _referencedActorClasses = root.getReferencedActorClasses(_subSystemClass);
+        for(final ActorClass actorClass : _referencedActorClasses) {
+          _builder.append("#include ");
+          String _includePath = this._cExtensions.getIncludePath(actorClass);
+          _builder.append(_includePath, "");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
-      _builder.append("/* include all used ProtcolClasses */");
+      _builder.append("/* include all referenced ProtcolClasses */");
       _builder.newLine();
       {
-        EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-        for(final ProtocolClass protocolClass : _usedProtocolClasses) {
-          _builder.append("#include \"");
-          String _name_3 = protocolClass.getName();
-          _builder.append(_name_3, "");
-          _builder.append(".h\"");
+        SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+        EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(_subSystemClass_1);
+        for(final ProtocolClass protocolClass : _referencedProtocolClasses) {
+          _builder.append("#include ");
+          String _includePath_1 = this._cExtensions.getIncludePath(protocolClass);
+          _builder.append(_includePath_1, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -946,44 +1032,51 @@ public class NodeGen {
       {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
-        for(final PhysicalThread thread : _threads) {
+        final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
+            public Boolean apply(final PhysicalThread t) {
+              boolean _contains = usedThreads.contains(t);
+              return Boolean.valueOf(_contains);
+            }
+          };
+        Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
+        for(final PhysicalThread thread : _filter) {
           _builder.append("/* ");
-          String _name_4 = thread.getName();
-          _builder.append(_name_4, "");
+          String _name_2 = thread.getName();
+          _builder.append(_name_2, "");
           _builder.append(" */");
           _builder.newLineIfNotEmpty();
           _builder.append("#define ");
-          String _name_5 = thread.getName();
-          String _upperCase = _name_5.toUpperCase();
+          String _name_3 = thread.getName();
+          String _upperCase = _name_3.toUpperCase();
           _builder.append(_upperCase, "");
           _builder.append("_POOL_SIZE\t\t");
           int _msgpoolsize = thread.getMsgpoolsize();
           _builder.append(_msgpoolsize, "");
           _builder.newLineIfNotEmpty();
           _builder.append("#define ");
-          String _name_6 = thread.getName();
-          String _upperCase_1 = _name_6.toUpperCase();
+          String _name_4 = thread.getName();
+          String _upperCase_1 = _name_4.toUpperCase();
           _builder.append(_upperCase_1, "");
           _builder.append("_BLOCK_SIZE\t");
           int _msgblocksize = thread.getMsgblocksize();
           _builder.append(_msgblocksize, "");
           _builder.newLineIfNotEmpty();
           _builder.append("static uint8 msgBuffer_");
-          String _name_7 = thread.getName();
-          _builder.append(_name_7, "");
+          String _name_5 = thread.getName();
+          _builder.append(_name_5, "");
           _builder.append("[");
-          String _name_8 = thread.getName();
-          String _upperCase_2 = _name_8.toUpperCase();
+          String _name_6 = thread.getName();
+          String _upperCase_2 = _name_6.toUpperCase();
           _builder.append(_upperCase_2, "");
           _builder.append("_POOL_SIZE * ");
-          String _name_9 = thread.getName();
-          String _upperCase_3 = _name_9.toUpperCase();
+          String _name_7 = thread.getName();
+          String _upperCase_3 = _name_7.toUpperCase();
           _builder.append(_upperCase_3, "");
           _builder.append("_BLOCK_SIZE]; ");
           _builder.newLineIfNotEmpty();
           _builder.append("static etMessageService msgService_");
-          String _name_10 = thread.getName();
-          _builder.append(_name_10, "");
+          String _name_8 = thread.getName();
+          _builder.append(_name_8, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -999,8 +1092,8 @@ public class NodeGen {
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("static ");
           ActorClass _actorClass = ai.getActorClass();
-          String _name_11 = _actorClass.getName();
-          _builder.append(_name_11, "");
+          String _name_9 = _actorClass.getName();
+          _builder.append(_name_9, "");
           _builder.append(" ");
           String _path = ai.getPath();
           String _pathName = this._roomExtensions.getPathName(_path);
@@ -1019,7 +1112,7 @@ public class NodeGen {
             EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
             boolean _isEmpty = _orderedIfItemInstances.isEmpty();
             if (_isEmpty) {
-              _builder.append("/*nothing to do */");
+              _builder.append("/* nothing to do */");
               _builder.newLine();
             } else {
               {
@@ -1130,9 +1223,9 @@ public class NodeGen {
     CharSequence _xblockexpression = null;
     {
       String _path = ai.getPath();
-      String instName = this._roomExtensions.getPathName(_path);
+      final String instName = this._roomExtensions.getPathName(_path);
       ArrayList<InterfaceItemInstance> _arrayList = new ArrayList<InterfaceItemInstance>();
-      ArrayList<InterfaceItemInstance> replPorts = _arrayList;
+      final ArrayList<InterfaceItemInstance> replEventItems = _arrayList;
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
@@ -1141,7 +1234,7 @@ public class NodeGen {
           }
         };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
-      Iterables.<InterfaceItemInstance>addAll(replPorts, _filter);
+      Iterables.<InterfaceItemInstance>addAll(replEventItems, _filter);
       final Function1<InterfaceItemInstance,Boolean> _function_1 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
             EList<InterfaceItemInstance> _peers = e.getPeers();
@@ -1150,19 +1243,33 @@ public class NodeGen {
             return Boolean.valueOf(_not);
           }
         };
-      InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replPorts, _function_1);
-      boolean haveReplSubPorts = (!Objects.equal(_findFirst, null));
-      EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
+      InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replEventItems, _function_1);
+      final boolean haveReplSubItems = (!Objects.equal(_findFirst, null));
       final Function1<InterfaceItemInstance,Boolean> _function_2 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof Port));
+          }
+        };
+      final Iterable<InterfaceItemInstance> replEventPorts = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_2);
+      final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof SPPRef));
+          }
+        };
+      final Iterable<InterfaceItemInstance> replEventSPPs = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_3);
+      EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
+      final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance e) {
             boolean _isSimple = e.isSimple();
             return Boolean.valueOf(_isSimple);
           }
         };
-      Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_2);
+      final Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_4);
       ArrayList<InterfaceItemInstance> _arrayList_1 = new ArrayList<InterfaceItemInstance>();
-      ArrayList<InterfaceItemInstance> eventPorts = _arrayList_1;
-      final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
+      final ArrayList<InterfaceItemInstance> simpleEventItems = _arrayList_1;
+      final Function1<InterfaceItemInstance,Boolean> _function_5 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
@@ -1170,10 +1277,23 @@ public class NodeGen {
             return Boolean.valueOf(_equals);
           }
         };
-      Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_3);
-      List<InterfaceItemInstance> _union = this._roomExtensions.<InterfaceItemInstance>union(_filter_1, replPorts);
-      eventPorts.addAll(_union);
-      final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
+      Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_5);
+      Iterables.<InterfaceItemInstance>addAll(simpleEventItems, _filter_1);
+      final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof Port));
+          }
+        };
+      final Iterable<InterfaceItemInstance> simpleEventPorts = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_6);
+      final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof SAPRef));
+          }
+        };
+      final Iterable<InterfaceItemInstance> simpleEventSAPs = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_7);
+      final Function1<InterfaceItemInstance,Boolean> _function_8 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             ProtocolClass _protocol = p.getProtocol();
             CommunicationType _commType = _protocol.getCommType();
@@ -1181,8 +1301,8 @@ public class NodeGen {
             return Boolean.valueOf(_equals);
           }
         };
-      Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_4);
-      final Function1<InterfaceItemInstance,Boolean> _function_5 = new Function1<InterfaceItemInstance,Boolean>() {
+      final Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_8);
+      final Function1<InterfaceItemInstance,Boolean> _function_9 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             boolean _and = false;
             if (!(p instanceof PortInstance)) {
@@ -1196,8 +1316,8 @@ public class NodeGen {
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_5);
-      final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
+      final Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_9);
+      final Function1<InterfaceItemInstance,Boolean> _function_10 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance p) {
             boolean _and = false;
             if (!(p instanceof PortInstance)) {
@@ -1210,11 +1330,11 @@ public class NodeGen {
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_6);
+      final Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_10);
       HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
-      HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
+      final HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
-      for (final InterfaceItemInstance p : replPorts) {
+      for (final InterfaceItemInstance p : replEventItems) {
         {
           offsets.put(p, Integer.valueOf(offset));
           EList<InterfaceItemInstance> _peers = p.getPeers();
@@ -1224,16 +1344,37 @@ public class NodeGen {
         }
       }
       String _xifexpression = null;
-      if (haveReplSubPorts) {
+      if (haveReplSubItems) {
         String _plus = (instName + "_repl_sub_ports");
         _xifexpression = _plus;
       } else {
         _xifexpression = "NULL";
       }
       String replSubPortsArray = _xifexpression;
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _isEmpty = simpleEventItems.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _or_1 = true;
+      } else {
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
+        boolean _not_1 = (!_isEmpty_1);
+        _or_1 = (_not || _not_1);
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        boolean _isEmpty_2 = replEventItems.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        _or = (_or_1 || _not_2);
+      }
+      final boolean haveConstData = _or;
+      IntelligentSeparator _intelligentSeparator = new IntelligentSeparator(",");
+      final IntelligentSeparator sep = _intelligentSeparator;
       StringConcatenation _builder = new StringConcatenation();
       {
-        if (haveReplSubPorts) {
+        if (haveReplSubItems) {
           _builder.append("static const etReplSubPort ");
           _builder.append(replSubPortsArray, "");
           _builder.append("[");
@@ -1244,7 +1385,7 @@ public class NodeGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
-            final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
+            final Function1<InterfaceItemInstance,Boolean> _function_11 = new Function1<InterfaceItemInstance,Boolean>() {
                 public Boolean apply(final InterfaceItemInstance e) {
                   EList<InterfaceItemInstance> _peers = e.getPeers();
                   boolean _isEmpty = _peers.isEmpty();
@@ -1252,7 +1393,7 @@ public class NodeGen {
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replPorts, _function_7);
+            Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_11);
             boolean _hasElements = false;
             for(final InterfaceItemInstance pi : _filter_2) {
               if (!_hasElements) {
@@ -1271,16 +1412,7 @@ public class NodeGen {
         }
       }
       {
-        boolean _and = false;
-        boolean _isEmpty = eventPorts.isEmpty();
-        if (!_isEmpty) {
-          _and = false;
-        } else {
-          boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
-          _and = (_isEmpty && _isEmpty_1);
-        }
-        boolean _not = (!_and);
-        if (_not) {
+        if (haveConstData) {
           _builder.append("static const ");
           ActorClass _actorClass = ai.getActorClass();
           String _name = _actorClass.getName();
@@ -1292,84 +1424,105 @@ public class NodeGen {
           _builder.append("\t");
           _builder.append("/* Ports: {varData, msgService, peerAddress, localId} */");
           _builder.newLine();
-          {
-            boolean _hasElements_1 = false;
-            for(final InterfaceItemInstance pi_1 : eventPorts) {
-              if (!_hasElements_1) {
-                _hasElements_1 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
-              {
-                boolean _isSimple = pi_1.isSimple();
-                if (_isSimple) {
-                  _builder.append("\t");
-                  String _genPortInitializer = this.genPortInitializer(root, ai, pi_1);
-                  _builder.append(_genPortInitializer, "	");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  _builder.append("\t");
-                  _builder.append("{");
-                  EList<InterfaceItemInstance> _peers = pi_1.getPeers();
-                  int _size = _peers.size();
-                  _builder.append(_size, "	");
-                  _builder.append(", ");
-                  _builder.append(replSubPortsArray, "	");
-                  _builder.append("+");
-                  Integer _get = offsets.get(pi_1);
-                  _builder.append(_get, "	");
-                  _builder.append("}");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
           _builder.append("\t");
+          _builder.append("/* simple ports */");
+          _builder.newLine();
           {
-            boolean _and_1 = false;
-            boolean _isEmpty_2 = eventPorts.isEmpty();
-            boolean _not_1 = (!_isEmpty_2);
-            if (!_not_1) {
-              _and_1 = false;
-            } else {
-              boolean _isEmpty_3 = IterableExtensions.isEmpty(recvPorts);
-              boolean _not_2 = (!_isEmpty_3);
-              _and_1 = (_not_1 && _not_2);
-            }
-            if (_and_1) {
-              _builder.append(",");
+            for(final InterfaceItemInstance pi_1 : simpleEventPorts) {
+              _builder.append("\t");
+              _builder.append(sep, "	");
+              String _genPortInitializer = this.genPortInitializer(root, ai, pi_1);
+              _builder.append(_genPortInitializer, "	");
+              _builder.newLineIfNotEmpty();
             }
           }
-          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* data receive ports */");
           _builder.newLine();
           {
-            boolean _hasElements_2 = false;
             for(final InterfaceItemInstance pi_2 : recvPorts) {
-              if (!_hasElements_2) {
-                _hasElements_2 = true;
-              } else {
-                _builder.appendImmediate(",", "	");
-              }
               _builder.append("\t");
+              _builder.append(sep, "	");
               String _genRecvPortInitializer = this.genRecvPortInitializer(root, ai, pi_2);
               _builder.append(_genRecvPortInitializer, "	");
               _builder.newLineIfNotEmpty();
             }
           }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* saps */");
+          _builder.newLine();
+          {
+            for(final InterfaceItemInstance pi_3 : simpleEventSAPs) {
+              _builder.append("\t");
+              _builder.append(sep, "	");
+              String _genPortInitializer_1 = this.genPortInitializer(root, ai, pi_3);
+              _builder.append(_genPortInitializer_1, "	");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* replicated ports */");
+          _builder.newLine();
+          {
+            for(final InterfaceItemInstance pi_4 : replEventPorts) {
+              _builder.append("\t");
+              _builder.append(sep, "	");
+              _builder.append("{");
+              EList<InterfaceItemInstance> _peers = pi_4.getPeers();
+              int _size = _peers.size();
+              _builder.append(_size, "	");
+              _builder.append(", ");
+              _builder.append(replSubPortsArray, "	");
+              _builder.append("+");
+              Integer _get = offsets.get(pi_4);
+              _builder.append(_get, "	");
+              _builder.append("}");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("/* services */");
+          _builder.newLine();
+          {
+            for(final InterfaceItemInstance pi_5 : replEventSPPs) {
+              _builder.append("\t");
+              _builder.append(sep, "	");
+              _builder.append("{");
+              EList<InterfaceItemInstance> _peers_1 = pi_5.getPeers();
+              int _size_1 = _peers_1.size();
+              _builder.append(_size_1, "	");
+              _builder.append(", ");
+              _builder.append(replSubPortsArray, "	");
+              _builder.append("+");
+              Integer _get_1 = offsets.get(pi_5);
+              _builder.append(_get_1, "	");
+              _builder.append("}");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("};");
           _builder.newLine();
-          _builder.append("static ");
-          ActorClass _actorClass_1 = ai.getActorClass();
-          String _name_1 = _actorClass_1.getName();
-          _builder.append(_name_1, "");
-          _builder.append(" ");
-          _builder.append(instName, "");
-          _builder.append(" = {");
-          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t");
+      _builder.append("static ");
+      ActorClass _actorClass_1 = ai.getActorClass();
+      String _name_1 = _actorClass_1.getName();
+      _builder.append(_name_1, "	");
+      _builder.append(" ");
+      _builder.append(instName, "	");
+      _builder.append(" = {");
+      _builder.newLineIfNotEmpty();
+      {
+        if (haveConstData) {
           _builder.append("\t");
           _builder.append("&");
           _builder.append(instName, "	");
@@ -1377,38 +1530,39 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("/* data send ports */");
-          _builder.newLine();
-          {
-            for(final InterfaceItemInstance pi_3 : sendPorts) {
-              _builder.append("\t");
-              CharSequence _genSendPortInitializer = this.genSendPortInitializer(pi_3);
-              _builder.append(_genSendPortInitializer, "	");
-              _builder.append(",");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("/* attributes */");
-          _builder.newLine();
-          _builder.append("\t");
-          ActorClass _actorClass_2 = ai.getActorClass();
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
-          CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
-          _builder.append(_generateAttributeInit, "	");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("/* state and history are initialized in init fuction */");
-          _builder.newLine();
-          _builder.append("};");
-          _builder.newLine();
         }
       }
+      _builder.append("\t\t");
+      _builder.append("/* data send ports */");
+      _builder.newLine();
+      {
+        for(final InterfaceItemInstance pi_6 : sendPorts) {
+          _builder.append("\t\t");
+          CharSequence _genSendPortInitializer = this.genSendPortInitializer(pi_6);
+          _builder.append(_genSendPortInitializer, "		");
+          _builder.append(",");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("/* attributes */");
+      _builder.newLine();
+      _builder.append("\t\t");
+      ActorClass _actorClass_2 = ai.getActorClass();
+      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
+      CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
+      _builder.append(_generateAttributeInit, "		");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("/* state and history are initialized in init fuction */");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("};");
+      _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -1506,8 +1660,11 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("}");
-      _builder.newLine();
+      _builder.append("} /* send port ");
+      String _name = pi.getName();
+      _builder.append(_name, "");
+      _builder.append(" */");
+      _builder.newLineIfNotEmpty();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -1626,7 +1783,7 @@ public class NodeGen {
     return result;
   }
   
-  private CharSequence generateDispatcherFile(final Root root, final SubSystemInstance ssi) {
+  private CharSequence generateDispatcherFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
@@ -1667,24 +1824,31 @@ public class NodeGen {
       {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
+        final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
+            public Boolean apply(final PhysicalThread t) {
+              boolean _contains = usedThreads.contains(t);
+              return Boolean.valueOf(_contains);
+            }
+          };
+        Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
         boolean _hasElements = false;
-        for(final PhysicalThread thread : _threads) {
+        for(final PhysicalThread thread : _filter) {
           if (!_hasElements) {
             _hasElements = true;
           } else {
             _builder.appendImmediate("\n", "");
           }
           EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-          final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
+          final Function1<ActorInstance,Boolean> _function_1 = new Function1<ActorInstance,Boolean>() {
               public Boolean apply(final ActorInstance ai) {
                 PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
                 boolean _equals = Objects.equal(_physicalThread, thread);
                 return Boolean.valueOf(_equals);
               }
             };
-          final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
+          final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_1);
           _builder.newLineIfNotEmpty();
-          final Function1<ActorInstance,Boolean> _function_1 = new Function1<ActorInstance,Boolean>() {
+          final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
               public Boolean apply(final ActorInstance ai) {
                 boolean _or = false;
                 ActorClass _actorClass = ai.getActorClass();
@@ -1701,9 +1865,9 @@ public class NodeGen {
                 return Boolean.valueOf(_or);
               }
             };
-          final Iterable<ActorInstance> dispatchedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_1);
+          final Iterable<ActorInstance> dispatchedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_2);
           _builder.newLineIfNotEmpty();
-          final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
+          final Function1<ActorInstance,Boolean> _function_3 = new Function1<ActorInstance,Boolean>() {
               public Boolean apply(final ActorInstance ai) {
                 boolean _or = false;
                 ActorClass _actorClass = ai.getActorClass();
@@ -1720,7 +1884,7 @@ public class NodeGen {
                 return Boolean.valueOf(_or);
               }
             };
-          final Iterable<ActorInstance> executedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_2);
+          final Iterable<ActorInstance> executedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_3);
           _builder.newLineIfNotEmpty();
           _builder.newLine();
           {
@@ -1741,7 +1905,7 @@ public class NodeGen {
               _builder.append("static void MsgDispatcher_");
               String _name_3 = thread.getName();
               _builder.append(_name_3, "");
-              _builder.append("_execute(void){");
+              _builder.append("_poll(void){");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"MsgDispatcher_");
@@ -1813,7 +1977,7 @@ public class NodeGen {
               _builder.append("MsgDispatcher_");
               String _name_9 = thread.getName();
               _builder.append(_name_9, "				");
-              _builder.append("_execute();");
+              _builder.append("_poll();");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t\t");
               _builder.append("else");
@@ -1841,7 +2005,7 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
               {
                 EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
-                final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
+                final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
                     public Boolean apply(final InterfaceItemInstance p) {
                       ProtocolClass _protocol = p.getProtocol();
                       CommunicationType _commType = _protocol.getCommType();
@@ -1849,8 +2013,8 @@ public class NodeGen {
                       return Boolean.valueOf(_equals);
                     }
                   };
-                Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function_3);
-                for(final InterfaceItemInstance pi : _filter) {
+                Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function_4);
+                for(final InterfaceItemInstance pi : _filter_1) {
                   {
                     boolean _isReplicated = pi.isReplicated();
                     if (_isReplicated) {
@@ -2158,5 +2322,60 @@ public class NodeGen {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  private void checkDataPorts(final SubSystemInstance comp) {
+    HashSet<String> _hashSet = new HashSet<String>();
+    final HashSet<String> found = _hashSet;
+    EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
+    for (final ActorInstance ai : _allContainedInstances) {
+      {
+        final int thread = ai.getThreadId();
+        EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+        for (final InterfaceItemInstance pi : _orderedIfItemInstances) {
+          ProtocolClass _protocol = pi.getProtocol();
+          CommunicationType _commType = _protocol.getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (_equals) {
+            EList<InterfaceItemInstance> _peers = pi.getPeers();
+            for (final InterfaceItemInstance peer : _peers) {
+              {
+                EObject _eContainer = peer.eContainer();
+                final ActorInstance peer_ai = ((ActorInstance) _eContainer);
+                final int peer_thread = peer_ai.getThreadId();
+                boolean _notEquals = (thread != peer_thread);
+                if (_notEquals) {
+                  final String path = pi.getPath();
+                  final String ppath = peer.getPath();
+                  String _xifexpression = null;
+                  int _compareTo = path.compareTo(ppath);
+                  boolean _lessThan = (_compareTo < 0);
+                  if (_lessThan) {
+                    String _plus = (path + " and ");
+                    String _plus_1 = (_plus + ppath);
+                    _xifexpression = _plus_1;
+                  } else {
+                    String _plus_2 = (ppath + " and ");
+                    String _plus_3 = (_plus_2 + path);
+                    _xifexpression = _plus_3;
+                  }
+                  final String pair = _xifexpression;
+                  boolean _contains = found.contains(pair);
+                  boolean _not = (!_contains);
+                  if (_not) {
+                    found.add(pair);
+                    String _plus_4 = (pair + ": data ports placed on different threads (not supported yet)");
+                    InterfaceItem _interfaceItem = pi.getInterfaceItem();
+                    InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
+                    EStructuralFeature _eContainingFeature = _interfaceItem_1.eContainingFeature();
+                    this.diagnostician.error(_plus_4, _interfaceItem, _eContainingFeature);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -135,15 +135,25 @@ public class NodeRunnerGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      {
-        if (first) {
-          _builder.append("int main(void) {");
-          _builder.newLine();
-        } else {
-          _builder.append("static int main_unused(void) {");
-          _builder.newLine();
-        }
-      }
+      _builder.append("int main(int argc, char** argv) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("etBool runAsTest = FALSE;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (argc>1 && strcmp(argv[1], \"-headless\")==0)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("runAsTest = TRUE;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (argc>1 && strcmp(argv[1], \"-run_as_test\")==0)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("runAsTest = TRUE;");
+      _builder.newLine();
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("etUserEntry(); /* platform specific */");
       _builder.newLine();
@@ -177,7 +187,7 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append(clsname, "	");
-      _builder.append("_run();");
+      _builder.append("_run(runAsTest);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");

@@ -65,11 +65,14 @@ class NodeRunnerGen {
 		 * creates component and starts and stops the lifecycle
 		 */
 		
-		«IF first»
-		int main(void) {
-		«ELSE»
-		static int main_unused(void) {
-		«ENDIF»
+		int main(int argc, char** argv) {
+			etBool runAsTest = FALSE;
+		
+			if (argc>1 && strcmp(argv[1], "-headless")==0)
+				runAsTest = TRUE;
+			if (argc>1 && strcmp(argv[1], "-run_as_test")==0)
+				runAsTest = TRUE;
+		
 			etUserEntry(); /* platform specific */
 			
 			etLogger_logInfo("***   T H E   B E G I N   ***");
@@ -82,7 +85,7 @@ class NodeRunnerGen {
 			etUserPreRun(); /* platform specific */
 
 			/* run Scheduler */
-			«clsname»_run();
+			«clsname»_run(runAsTest);
 		
 			etUserPostRun(); /* platform specific */
 

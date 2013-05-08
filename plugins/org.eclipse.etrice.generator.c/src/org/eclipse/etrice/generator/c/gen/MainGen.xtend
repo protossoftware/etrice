@@ -28,8 +28,8 @@ class MainGen implements IGenerator {
 	@Inject DataClassGen dataClassGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
-	@Inject NodeGen subsystemClassGen
-	@Inject NodeRunnerGen subsystemRunnerGen
+	@Inject NodeGen nodeGen
+	@Inject NodeRunnerGen nodeRunnerGen
 	@Inject PrepareFileSystem prepFS
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
@@ -45,10 +45,10 @@ class MainGen implements IGenerator {
 		dataClassGen.doGenerate(e);
 		protocolClassGen.doGenerate(e);
 		actorClassGen.doGenerate(e);
-		subsystemClassGen.doGenerate(e);
+		nodeGen.doGenerate(e);
 		
 		if (!e.library) {
-			subsystemRunnerGen.doGenerate(e);
+			nodeRunnerGen.doGenerate(e);
 		}
 	}
 }

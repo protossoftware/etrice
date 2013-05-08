@@ -39,10 +39,10 @@ public class MainGen implements IGenerator {
   private ActorClassGen actorClassGen;
   
   @Inject
-  private NodeGen subsystemClassGen;
+  private NodeGen nodeGen;
   
   @Inject
-  private NodeRunnerGen subsystemRunnerGen;
+  private NodeRunnerGen nodeRunnerGen;
   
   @Inject
   private PrepareFileSystem prepFS;
@@ -61,11 +61,11 @@ public class MainGen implements IGenerator {
     this.dataClassGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
     this.actorClassGen.doGenerate(e);
-    this.subsystemClassGen.doGenerate(e);
+    this.nodeGen.doGenerate(e);
     boolean _isLibrary = e.isLibrary();
     boolean _not = (!_isLibrary);
     if (_not) {
-      this.subsystemRunnerGen.doGenerate(e);
+      this.nodeRunnerGen.doGenerate(e);
     }
   }
 }

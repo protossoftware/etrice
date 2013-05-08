@@ -119,7 +119,10 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("void setState(");
       String _name = ac.getName();
       _builder.append(_name, "");
-      _builder.append("* self, int new_state) {");
+      _builder.append("* self, ");
+      String _stateType = this.stateType();
+      _builder.append(_stateType, "");
+      _builder.append(" new_state) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("self->state = new_state;");
@@ -129,7 +132,9 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       String _accessLevelPrivate_1 = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate_1, "");
-      _builder.append("int getState(");
+      String _stateType_1 = this.stateType();
+      _builder.append(_stateType_1, "");
+      _builder.append(" getState(");
       String _name_1 = ac.getName();
       _builder.append(_name_1, "");
       _builder.append("* self) {");

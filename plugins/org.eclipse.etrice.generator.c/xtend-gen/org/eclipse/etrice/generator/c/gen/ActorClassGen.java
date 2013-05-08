@@ -416,25 +416,24 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         if (hasVarData) {
-          _builder.append("\t");
           _builder.append("struct ");
           String _name_10 = ac.getName();
-          _builder.append(_name_10, "	");
+          _builder.append(_name_10, "");
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
             if (hasConstData) {
-              _builder.append("\t\t");
+              _builder.append("\t");
               _builder.append("const ");
               String _name_11 = ac.getName();
-              _builder.append(_name_11, "		");
+              _builder.append(_name_11, "	");
               _builder.append("_const* const constData;");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t\t");
+              _builder.append("\t");
               _builder.newLine();
             }
           }
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("/* data send ports */");
           _builder.newLine();
           {
@@ -443,41 +442,40 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 int _multiplicity_3 = ep_3.getMultiplicity();
                 boolean _equals_2 = (_multiplicity_3 == 1);
                 if (_equals_2) {
-                  _builder.append("\t\t");
+                  _builder.append("\t");
                   String _portClassName_3 = this._roomExtensions.getPortClassName(ep_3);
-                  _builder.append(_portClassName_3, "		");
+                  _builder.append(_portClassName_3, "	");
                   _builder.append(" ");
                   String _name_12 = ep_3.getName();
-                  _builder.append(_name_12, "		");
+                  _builder.append(_name_12, "	");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 }
               }
             }
           }
+          _builder.append("\t");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(ac);
           CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes_1);
-          _builder.append(_attributes, "		");
+          _builder.append(_attributes, "	");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.newLine();
           {
             StateGraph _stateMachine_2 = xpac.getStateMachine();
             boolean _isEmpty_8 = RoomHelpers.isEmpty(_stateMachine_2);
             boolean _not_2 = (!_isEmpty_8);
             if (_not_2) {
-              _builder.append("\t\t");
+              _builder.append("\t");
               _builder.newLine();
-              _builder.append("\t\t");
               _builder.append("\t");
               CharSequence _genDataMembers = this._stateMachineGen.genDataMembers(xpac);
-              _builder.append(_genDataMembers, "			");
+              _builder.append(_genDataMembers, "	");
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.append("};");
           _builder.newLine();
         } else {

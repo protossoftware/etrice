@@ -15,6 +15,7 @@ package org.eclipse.etrice.generator.c;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
@@ -24,6 +25,8 @@ import org.eclipse.etrice.generator.c.gen.Validator;
 import org.eclipse.etrice.generator.c.setup.GeneratorModule;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
+import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 
 import com.google.inject.Inject;
 
@@ -74,12 +77,13 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_GEN_DIR = "-genDir";
 	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
 	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
+	public static final String OPTION_DEBUG = "-debug";
 
 	/**
 	 * print usage message to stderr
 	 */
 	private static void printUsage() {
-		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] [-lib] [-inc] [-genDir <generation directory>] [-genInfoDir <generation info directory>] [-genInfoDir <gen documentation directory>] <list of model file paths>");
+		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] [-lib] [-inc] [-debug] [-genDir <generation directory>] [-genInfoDir <generation info directory>] [-genInfoDir <gen documentation directory>] <list of model file paths>");
 		output.println("      <list of model file paths>         # model file paths may be specified as");
 		output.println("                                         # e.g. C:\\path\\to\\model\\mymodel.room");
 		output.println("      -saveGenModel <genmodel path>      # if specified the generator model will be saved to this location");
@@ -121,6 +125,7 @@ public class Main extends AbstractGenerator {
 		List<String> uriList = new ArrayList<String>();
 		boolean genInstDiag = false;
 		boolean asLibrary = false;
+		boolean debug = false;
 		IncrementalGenerationFileIo.setGenerateIncremental(false);
 		RoomExtensions.setDefaultGenDir();
 		RoomExtensions.setDefaultGenInfoDir();
@@ -172,6 +177,9 @@ public class Main extends AbstractGenerator {
 			else if (args[i].equals(OPTION_NOEXIT)) {
 				setTerminateOnError(false);
 			}
+			else if (args[i].equals(OPTION_DEBUG)) {
+				debug = true;
+			}
 			else {
 				uriList.add(args[i]);
 			}
@@ -179,11 +187,30 @@ public class Main extends AbstractGenerator {
 
 		setupRoomModel();
 		dataConfig.doSetup();
+		setupMappingModel();
+		setupPhysicalModel();
 
-		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary))
+		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary, debug))
 			return GENERATOR_ERROR;
 		
 		return GENERATOR_OK;
+	}
+
+	/**
+	 * setup the eTrice mapping model plug-in
+	 */
+	protected void setupMappingModel() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			ETMapStandaloneSetup.doSetup();
+		}
+	}
+
+	/**
+	 * setup the eTrice mapping model plug-in
+	 */
+	protected void setupPhysicalModel() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING)
+			ETPhysStandaloneSetup.doSetup();
 	}
 
 	protected int usageError(String text) {
@@ -192,7 +219,7 @@ public class Main extends AbstractGenerator {
 		return GENERATOR_ERROR;
 	}
 
-	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary) {
+	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary, boolean debug) {
 		if (!loadModels(uriList))
 			return false;
 
@@ -210,11 +237,11 @@ public class Main extends AbstractGenerator {
 			return false;
 		
 		ETMapUtil.processModels(genModel, getResourceSet());
-//		if (debug) {
-//			logger.logInfo("-- begin dump of mappings");
-//			logger.logInfo(ETMapUtil.dumpMappings());
-//			logger.logInfo("-- end dump of mappings");
-//		}
+		if (debug) {
+			logger.logInfo("-- begin dump of mappings");
+			logger.logInfo(ETMapUtil.dumpMappings());
+			logger.logInfo("-- end dump of mappings");
+		}
 		
 		logger.logInfo("-- starting code generation");
 		fileAccess.setOutputPath("src-gen/");

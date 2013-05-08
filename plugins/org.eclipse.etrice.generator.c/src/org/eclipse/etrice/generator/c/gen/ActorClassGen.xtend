@@ -152,11 +152,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«ep.getPortClassName()» «ep.name»;
 					«ENDIF»
 				«ENDFOR»
-		
+				
 				«ac.allAttributes.attributes»
 				
 				«IF !xpac.stateMachine.empty»
-				
+					
 					«xpac.genDataMembers»
 				«ENDIF»
 			};
