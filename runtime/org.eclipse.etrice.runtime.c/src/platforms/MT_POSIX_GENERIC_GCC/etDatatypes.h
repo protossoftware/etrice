@@ -15,13 +15,14 @@
 
 /*
  * typedefs for platform specific datatypes
- * generic Version for most bigger 32 and 64 bit platforms like Linux an Windows
+ * POSIX version
  *
  * */
 
-/* TODO: implement for posix */
-
 #include <stdio.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <sys/types.h>
 
 /* unsigned integer datatypes */
 typedef unsigned char uint8;
@@ -90,12 +91,17 @@ typedef int16 etAddressId;
  * typedefs for OS-specific types
  */
 
-typedef int etOSMutexData;
-typedef int etOSThreadData;
-/*typedef int etOSThreadId;*/ /*TODO: check if correct */
-typedef int etOSSemaData;
-
-/*typedef int etOSTimerId;*/ /*TODO: check if correct */
+typedef pthread_mutex_t etOSMutexData;
+typedef pthread_t etOSThreadData;
+typedef pid_t etOSThreadId;
+typedef sem_t etOSSemaData;
+typedef struct {
+	void* next;
+	timer_t timerid;
+	etBool signaled;
+}
+etOSTimerData;
+typedef timer_t etOSTimerId;
 
 
 #endif /* _DATATYPES_H_ */

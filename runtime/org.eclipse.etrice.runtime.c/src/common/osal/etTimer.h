@@ -27,10 +27,10 @@ typedef void (*etTimerFunction)(void* data);
  * the struct has to be filled before calling etThread_construct except for osData and osId
  **/
 typedef struct etTimer{
-	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
 	etTime timerInterval;				/**< timer interval **/
 	etTimerFunction timerFunction;		/**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct **/
 	void* timerFunctionData;			/**< the data that are passed to the timer function **/
+	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
 } etTimer;
 
 /**
