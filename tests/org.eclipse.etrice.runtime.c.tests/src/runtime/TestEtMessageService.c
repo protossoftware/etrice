@@ -42,7 +42,7 @@ etBool DummyMessageDispatcher(const etMessage* msg){
 		default:
 			break;
 	}
-	return TRUE;
+	return FALSE;
 }
 
 void TestEtMessageService_init(etInt16 id){

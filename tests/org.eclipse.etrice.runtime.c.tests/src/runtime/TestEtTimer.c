@@ -10,6 +10,7 @@
  *
  *******************************************************************************/
 
+#include <stdio.h>
 
 #include "TestEtTimer.h"
 
@@ -51,11 +52,16 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 			NULL);
 
 	getTimeFromTarget(&startTime);
+	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // remove debug output
 	etTimer_start(&timer1);
+	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
+	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
 	etTimer_stop(&timer1);
 	getTimeFromTarget(&endTime);
+
+	printf("TestEtTimer_lifecycle: timer stopped\n"); fflush(stdout); // remove debug output
 
 	etInt32 elapsed = etTimeHelpers_convertToMSec(&endTime) - etTimeHelpers_convertToMSec(&startTime);
 	EXPECT_TRUE(id, "elapsed time wrong", (elapsed > 1400) && (elapsed < 1600));
@@ -78,7 +84,7 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 	interval.sec = 1; /* = 1000 milliseconds */
 	interval.nSec = 0; /* = 0 milliseconds */
 	etTimer_construct(&timer1, &interval, TestEtTimer_TimerCallback1, NULL);
-	interval.sec = 0; /* = 1000 milliseconds */
+	interval.sec = 0; /* = 0 seconds */
 	interval.nSec = 1000000; /* = 1 millisecond */
 	etTimer_construct(&timer2, &interval, TestEtTimer_TimerCallback2, NULL);
 
@@ -103,6 +109,6 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 void TestEtTimer_runSuite(void){
 	etUnit_openTestSuite("TestEtTimer");
 	ADD_TESTCASE(TestEtTimer_lifecycle);
-	ADD_TESTCASE(TestEtTimer_multiTimer);
+	//ADD_TESTCASE(TestEtTimer_multiTimer);
 	etUnit_closeTestSuite();
 }

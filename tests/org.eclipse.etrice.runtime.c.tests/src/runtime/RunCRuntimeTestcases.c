@@ -19,7 +19,6 @@
  */
 
 
-
 #include "RunCRuntimeTestcases.h"
 
 #include "TestEtMessage.h"
