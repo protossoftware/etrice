@@ -18,6 +18,7 @@
 
 #include "etDatatypes.h"
 #include "osal/etTimer.h"
+#include "helpers/etTimeHelpers.h"
 #include "osal/etThread.h"
 #include "osal/etSema.h"
 
@@ -43,8 +44,7 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	/* create semaphore */
 	etSema_construct(&GlobalSema);
 	/* create and start timer */
-	interval.sec = 1; /* = 1000 milliseconds */
-	interval.nSec = 500000000; /* = 50 milliseconds */
+	etTimeHelpers_convertToEtTime(&interval, 1050);
 	etTimer_construct(
 			&timer1,
 			&interval,
@@ -54,7 +54,7 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	getTimeFromTarget(&startTime);
 	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // remove debug output
 	etTimer_start(&timer1);
-	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // remove debug output
+	printf("TestEtTimer_lifecycle: wait for timer\n"); fflush(stdout); // remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
 	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
@@ -109,6 +109,6 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 void TestEtTimer_runSuite(void){
 	etUnit_openTestSuite("TestEtTimer");
 	ADD_TESTCASE(TestEtTimer_lifecycle);
-	//ADD_TESTCASE(TestEtTimer_multiTimer);
+	ADD_TESTCASE(TestEtTimer_multiTimer);
 	etUnit_closeTestSuite();
 }
