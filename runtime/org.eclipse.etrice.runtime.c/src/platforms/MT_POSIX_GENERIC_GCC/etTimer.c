@@ -14,6 +14,16 @@
  *
  * etTimer.c POSIX implementation of etTimer
  *
+ * We use standard POSIX timers and signal handlers for the implementation.
+ *
+ * The idea is that all timer data (of type etTimer) are added to a linked list.
+ * When a timer goes off the handler is called which sets the 'signaled' flag of the corresponding list element
+ * (all list access is guarded by a global mutex) and signals a global semaphore.
+ *
+ * The global timer thread (which together with the other global synchronization objects is started once and
+ * for all when the first timer is constructed) is waiting on this semaphore. When it is released it iterates
+ * the linked list and checks for signaled timers. For signaled timers it resets the signaled flag and
+ * calls the user function and retires again.
  */
 
 #include <signal.h>
@@ -29,6 +39,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
+/* the signal used for the timer */
 #define TIMER_SIGNAL				SIGRTMIN
 
 /* head of linked list of etTimer structs */
@@ -97,6 +108,10 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 		self->osTimerData.signaled = FALSE;
 
 		if (!timer_initialized) {
+			/*
+			 * All this is done once and for all.
+			 * The resources are never released again.
+			 */
 			struct sigaction sa;
 
 			timer_initialized = TRUE;
@@ -132,6 +147,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 		timers = self;
 		etMutex_leave(&timer_mutex);
 
+		/* create the timer (in disarmed state) */
 		{
 			struct sigevent te;
 
