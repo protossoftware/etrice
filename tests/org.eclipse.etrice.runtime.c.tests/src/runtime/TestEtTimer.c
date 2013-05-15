@@ -28,10 +28,12 @@ etSema GlobalSema;
 etInt32 counter;
 
 void TestEtTimer_TimerCallback1(void* data){
+	printf("TestEtTimer_TimerCallback1\n"); fflush(stdout); // TODO: remove debug output
 	etSema_wakeup(&GlobalSema);
 }
 
 void TestEtTimer_TimerCallback2(void* data){
+	printf("TestEtTimer_TimerCallback2\n"); fflush(stdout); // TODO: remove debug output
 	counter++;
 }
 
@@ -52,16 +54,16 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 			NULL);
 
 	getTimeFromTarget(&startTime);
-	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // remove debug output
+	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer1);
-	printf("TestEtTimer_lifecycle: wait for timer\n"); fflush(stdout); // remove debug output
+	printf("TestEtTimer_lifecycle: wait for timer\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
-	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // remove debug output
+	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
 	etTimer_stop(&timer1);
 	getTimeFromTarget(&endTime);
 
-	printf("TestEtTimer_lifecycle: timer stopped\n"); fflush(stdout); // remove debug output
+	printf("TestEtTimer_lifecycle: timer stopped\n"); fflush(stdout); // TODO: remove debug output
 
 	etInt32 elapsed = etTimeHelpers_convertToMSec(&endTime) - etTimeHelpers_convertToMSec(&startTime);
 	EXPECT_TRUE(id, "elapsed time wrong", (elapsed > 1400) && (elapsed < 1600));

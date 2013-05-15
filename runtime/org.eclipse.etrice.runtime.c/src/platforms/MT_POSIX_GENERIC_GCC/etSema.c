@@ -26,6 +26,7 @@ void etSema_construct(etSema* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "construct")
 	if (sem_init(&(self->osData), 0, 0) == -1) {
 		/* handle error */
+		printf("etSema_construct: error\n"); fflush(stdout); // TODO: remove debug output
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }

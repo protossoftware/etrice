@@ -92,6 +92,7 @@ static void timerHandler(int sig, siginfo_t *si, void *uc) {
 		if (&it->osTimerData.timerid==tid) {
 			it->osTimerData.signaled = TRUE;
 			etSema_wakeup(&timer_sema);
+			printf("timerHandler\n"); fflush(stdout); // TODO: remove debug output
 			break;
 		}
 	}
@@ -120,6 +121,16 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			etMutex_construct(&timer_mutex);
 			etSema_construct(&timer_sema);
 
+			/* we set up a signal handler */
+			sigemptyset(&sa.sa_mask);
+			sa.sa_flags = SA_SIGINFO;
+			sa.sa_sigaction = timerHandler;
+			if (sigaction(TIMER_SIGNAL, &sa, NULL) != 0) {
+				fprintf(stderr, "etTimer_construct: failed setting action handler\n");
+				fflush(stderr);
+				return;
+			}
+
 			/* we start the timer thread */
 			etThread_construct(
 					&timer_thread,
@@ -130,15 +141,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 					NULL);
 			etThread_start(&timer_thread);
 
-			/* we set up a signal handler */
-			sa.sa_flags = SA_SIGINFO;
-			sa.sa_sigaction = timerHandler;
-			sigemptyset(&sa.sa_mask);
-			if (sigaction(TIMER_SIGNAL, &sa, NULL) != 0) {
-				fprintf(stderr, "etTimer_construct: failed setting action handler\n");
-				fflush(stderr);
-				return;
-			}
+			printf("etTimer_construct: installed signal handler and started thread\n"); fflush(stdout); // TODO: remove debug output
 		}
 
 		/* place at list head */
