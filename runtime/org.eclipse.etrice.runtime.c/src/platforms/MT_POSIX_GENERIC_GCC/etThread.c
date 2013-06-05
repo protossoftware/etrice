@@ -6,13 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz, Thomas Jung (initial contribution)
+ * 		Henrik Rentz-Reichert (initial contribution)
  *
  *******************************************************************************/
 
 /**
  *
- * etThread.c MinGW implementation of etThread
+ * etThread.c POSIX implementation of etThread
  *
  */
 

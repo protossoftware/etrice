@@ -7,6 +7,7 @@
  *
  * CONTRIBUTORS:
  * 		Thomas Schuetz (initial contribution)
+ * 		Henrik Rentz-Reichert
  *
  *******************************************************************************/
 
@@ -22,6 +23,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <signal.h>
 #include <sys/types.h>
 
 /* unsigned integer datatypes */
@@ -98,6 +100,7 @@ typedef sem_t etOSSemaData;
 typedef struct {
 	void* next;
 	timer_t timerid;
+	sigevent_t te;
 	etBool signaled;
 }
 etOSTimerData;

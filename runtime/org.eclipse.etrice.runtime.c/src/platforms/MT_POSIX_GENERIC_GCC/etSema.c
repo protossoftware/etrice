@@ -6,13 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz, Thomas Jung (initial contribution)
+ * 		Henrik Rentz-Reichert (initial contribution)
  *
  *******************************************************************************/
 
 /**
  *
- * etSema.c MinGW implementation of etSema
+ * etSema.c POSIX implementation of etSema
  *
  */
 

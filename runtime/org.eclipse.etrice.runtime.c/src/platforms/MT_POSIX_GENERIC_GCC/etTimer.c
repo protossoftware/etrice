@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz (initial contribution)
+ * 		Henrik Rentz-Reichert (initial contribution)
  *
  *******************************************************************************/
 
@@ -64,6 +64,7 @@ static void timerThreadFunction(void* data) {
 	while (TRUE) {
 		etTimer* it;
 		int idx;
+		int signaled = FALSE;
 
 		printf("timerThreadFunction: waiting\n"); fflush(stdout); // remove debug output
 		etSema_waitForWakeup(&timer_sema);
@@ -76,36 +77,46 @@ static void timerThreadFunction(void* data) {
 				printf("timerThreadFunction: signaled %d, calling user fct %p\n", idx, (void*)it->timerFunction); fflush(stdout); // remove debug output
 				it->osTimerData.signaled = FALSE;
 				it->timerFunction(it->timerFunctionData);
+				signaled = TRUE;
 			}
 		}
 		etMutex_leave(&timer_mutex);
+
+		if (!signaled) {
+			etLogger_logError("timerThreadFunction: signaled timer NOT found\n");
+		}
 	}
 }
 
 static void timerHandler(int sig, siginfo_t *si, void *uc) {
 	timer_t* tid = si->si_value.sival_ptr;
 	etTimer* it;
-
-	printf("timerHandler\n"); fflush(stdout); // TODO: remove debug output
+	int signaled = FALSE;
 
 	etMutex_enter(&timer_mutex);
 	for (it=timers; it!=NULL; it=(etTimer*) it->osTimerData.next) {
-		if (&it->osTimerData.timerid==tid) {
+		if (it->osTimerData.timerid==*tid) {
 			int sval = 0;
 			sem_getvalue(&(timer_sema.osData), &sval);
 			it->osTimerData.signaled = TRUE;
 			if (sval==0)
 				etSema_wakeup(&timer_sema);
-			printf("timerHandler signaled\n"); fflush(stdout); // TODO: remove debug output
-			break;
+			signaled = TRUE;
 		}
 	}
+
 	etMutex_leave(&timer_mutex);
+
+	if (!signaled) {
+		etLogger_logError("timerHandler: signaled timer NOT found\n");
+	}
 }
 
 void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* timerFunctionData){
 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "construct")
 	{
+		memset(self, 0, sizeof(etTimer));
+
 		self->timerInterval.sec = timerInterval->sec;
 		self->timerInterval.nSec = timerInterval->nSec;
 		self->timerFunction = timerFunction;
@@ -148,27 +159,25 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			printf("etTimer_construct: installed signal handler and started thread\n"); fflush(stdout); // TODO: remove debug output
 		}
 
-		/* place at list head */
-		etMutex_enter(&timer_mutex);
-		self->osTimerData.next = timers;
-		timers = self;
-		etMutex_leave(&timer_mutex);
-
 		/* create the timer (in disarmed state) */
 		{
-			struct sigevent te;
-
 			/* create timer */
-			te.sigev_notify = SIGEV_SIGNAL;
-			te.sigev_signo = TIMER_SIGNAL;
-			te.sigev_value.sival_ptr = &self->osTimerData.timerid;
-			if (timer_create(CLOCK_REALTIME, &te, &self->osTimerData.timerid) != 0) {
+			self->osTimerData.te.sigev_notify = SIGEV_SIGNAL;
+			self->osTimerData.te.sigev_signo = TIMER_SIGNAL;
+			self->osTimerData.te.sigev_value.sival_ptr = &self->osTimerData.timerid;
+			if (timer_create(CLOCK_REALTIME, &self->osTimerData.te, &self->osTimerData.timerid) != 0) {
 				fprintf(stderr, "etTimer_construct: failed creating a timer\n");
 				fflush(stderr);
 				return;
 			}
 			printf("etTimer_construct: user callback is %p\n", (void*)self->timerFunction); fflush(stdout); // TODO: remove debug output
 		}
+
+		/* place at list head */
+		etMutex_enter(&timer_mutex);
+		self->osTimerData.next = timers;
+		timers = self;
+		etMutex_leave(&timer_mutex);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -189,13 +198,13 @@ void etTimer_start(etTimer* self){
 			if (timer_settime(self->osTimerData.timerid, 0, &its, NULL) != 0) {
 				switch (errno) {
 				case EFAULT:
-					fprintf(stderr, "etTimer_start: failed starting a timer with errno EFAULT\n");
+					etLogger_logError("etTimer_start: failed starting a timer with errno EFAULT");
 					break;
 				case EINVAL:
-					fprintf(stderr, "etTimer_start: failed starting a timer with errno EINVAL\n");
+					etLogger_logError("etTimer_start: failed starting a timer with errno EINVAL");
 					break;
 				default:
-					fprintf(stderr, "etTimer_start: failed starting a timer with errno %d\n", errno);
+					etLogger_logErrorF("etTimer_start: failed starting a timer with errno %d", errno);
 					break;
 				}
 				fflush(stderr);
