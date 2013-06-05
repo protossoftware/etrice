@@ -54,7 +54,7 @@ static etBool timer_initialized = FALSE;
 
 static etThread timer_thread;
 
-/* semaphore used for signalling */
+/* semaphore used for signaling */
 static etSema timer_sema;
 
 /* mutex to guard linked list access */
@@ -63,6 +63,7 @@ static etMutex timer_mutex;
 static void timerThreadFunction(void* data) {
 	while (TRUE) {
 		etTimer* it;
+		int idx;
 
 		printf("timerThreadFunction: waiting\n"); fflush(stdout); // remove debug output
 		etSema_waitForWakeup(&timer_sema);
@@ -70,11 +71,11 @@ static void timerThreadFunction(void* data) {
 		printf("timerThreadFunction: checking\n"); fflush(stdout); // remove debug output
 
 		etMutex_enter(&timer_mutex);
-		for (it=timers; it!=NULL; it=(etTimer*) it->osTimerData.next) {
+		for (it=timers, idx=0; it!=NULL; it=(etTimer*) it->osTimerData.next, ++idx) {
 			if (it->osTimerData.signaled) {
+				printf("timerThreadFunction: signaled %d, calling user fct %p\n", idx, (void*)it->timerFunction); fflush(stdout); // remove debug output
 				it->osTimerData.signaled = FALSE;
 				it->timerFunction(it->timerFunctionData);
-				printf("timerThreadFunction: signaled\n"); fflush(stdout); // remove debug output
 			}
 		}
 		etMutex_leave(&timer_mutex);
@@ -90,9 +91,12 @@ static void timerHandler(int sig, siginfo_t *si, void *uc) {
 	etMutex_enter(&timer_mutex);
 	for (it=timers; it!=NULL; it=(etTimer*) it->osTimerData.next) {
 		if (&it->osTimerData.timerid==tid) {
+			int sval = 0;
+			sem_getvalue(&(timer_sema.osData), &sval);
 			it->osTimerData.signaled = TRUE;
-			etSema_wakeup(&timer_sema);
-			printf("timerHandler\n"); fflush(stdout); // TODO: remove debug output
+			if (sval==0)
+				etSema_wakeup(&timer_sema);
+			printf("timerHandler signaled\n"); fflush(stdout); // TODO: remove debug output
 			break;
 		}
 	}
@@ -163,6 +167,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 				fflush(stderr);
 				return;
 			}
+			printf("etTimer_construct: user callback is %p\n", (void*)self->timerFunction); fflush(stdout); // TODO: remove debug output
 		}
 	}
 	ET_MSC_LOGGER_SYNC_EXIT

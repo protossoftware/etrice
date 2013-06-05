@@ -93,7 +93,7 @@ typedef int16 etAddressId;
 
 typedef pthread_mutex_t etOSMutexData;
 typedef pthread_t etOSThreadData;
-typedef pid_t etOSThreadId;
+typedef pthread_t etOSThreadId;
 typedef sem_t etOSSemaData;
 typedef struct {
 	void* next;

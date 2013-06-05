@@ -21,7 +21,6 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
-#include <process.h>
 #include <time.h>
 #include <sys/unistd.h>
 
@@ -108,6 +107,6 @@ etOSThreadData etThread_self(void){
 }
 
 etOSThreadId etThread_self_id(void){
-	return 0;
+	return pthread_self();
 }
 

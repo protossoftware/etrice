@@ -88,7 +88,7 @@ static void listenerThreadFunc(void* threadData) {
 
 	while (self->data.maxConnections > self->nConnections) {
 		int slot;
-		int len;
+		socklen_t len;
 
 		/* find next free slot */
 		for (slot=0; slot<MAX_CONNECTIONS; ++slot)
