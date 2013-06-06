@@ -424,11 +424,13 @@
 			<arg value="-run_as_test"/>
 		</exec>
 		<echo>end   ChoicePointTest</echo>
+		<!--
 		<echo>start SendingDataTestC</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/SendingDataTestC/SendingDataTestC.exe">
 			<arg value="-run_as_test"/>
 		</exec>
 		<echo>end   SendingDataTestC</echo>
+		-->
 		<echo>start StaticConfigTest</echo>
 		<exec dir="./" resolveexecutable="true" executable="./bin/StaticConfigTest/StaticConfigTest.exe">
 			<arg value="-run_as_test"/>
@@ -469,13 +471,14 @@
 			<classpath refid="clspath"/>
 		</java>
 
+		<!--
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.c.tests.SendingDataTestC"/>
 			<arg value="./tmp/SendingDataTestC.etu"/>
 			<classpath refid="clspath"/>
 		</java>
-		
+		-->
 		
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
