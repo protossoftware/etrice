@@ -7,6 +7,7 @@
 	To work locally you should define in your environment
 	ETRICE_TARGET_PLATFORM=path to the eclipse folder of your Juno installation
 	ETRICE_C_RUNTIME=path to the org.eclipse.etrice.runtime.c folder (relative path doesn't work)
+	ETRICE_GCC_PATH=folder where gcc resides
 	
 	@author Henrik Rentz-Reichert
 -->
@@ -49,7 +50,10 @@
 	-->
 	<target name="set_platform" unless="runtime.platform">
 		<echo>using MinGW runtime platform</echo>
+		<!--
 		<property name="runtime.platform" value="MT_WIN_MinGW"/>
+		-->
+		<property name="runtime.platform" value="MT_POSIX_GENERIC_GCC"/>
 	</target>
 
 	<!--
@@ -153,7 +157,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../src/common/debugging/etMSCLogger.c"/>
 			<arg value="../src/common/etUnit/etUnit.c"/>
 			<arg value="../src/common/messaging/etMessage.c"/>
@@ -212,7 +216,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../../src-gen/HandlerTest/HandlerTest_Top.c"/>
 			<arg value="../../src-gen/HandlerTest/HandlerUser.c"/>
 			<arg value="../../src-gen/HandlerTest/node3_hdTest.c"/>
@@ -235,6 +239,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
 		</exec>
 		
 		<!-- compile and link ChoicepointTest -->
@@ -248,7 +253,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../../src-gen/ChoicePointTest/CPTest_Top.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPTester.c"/>
 			<arg value="../../src-gen/ChoicePointTest/CPUser.c"/>
@@ -269,6 +274,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
 		</exec>
 		
 		<!-- compile and link SendingDataTestC -->
@@ -282,7 +288,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../../src-gen/SendingDataTestC/MrPing.c"/>
 			<arg value="../../src-gen/SendingDataTestC/MrPong.c"/>
 			<arg value="../../src-gen/SendingDataTestC/PingPongData.c"/>
@@ -309,6 +315,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
 		</exec>
 		
 		<!-- compile and link StaticConfigTest-->
@@ -322,7 +329,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../../src-gen/StaticConfigTest/Tester_ac.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Testee_1_ac.c"/>
 			<arg value="../../src-gen/StaticConfigTest/Testee_2_ac.c"/>
@@ -357,6 +364,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
 		</exec>
 		
 		<!-- compile and link DataDrivenTest-->
@@ -370,7 +378,7 @@
 			<arg value="-g3"/>
 			<arg value="-O0"/>
 			<arg value="-Wall"/>
-			<arg value="-ansi"/>
+			<!--<arg value="-ansi"/>-->
 			<arg value="../../src-gen/DataDrivenTest/Tester.c"/>
 			<arg value="../../src-gen/DataDrivenTest/Testee.c"/>
 			<arg value="../../src-gen/DataDrivenTest/Appl.c"/>
@@ -397,6 +405,7 @@
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
 		</exec>
 	</target>
 
