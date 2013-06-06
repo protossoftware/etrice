@@ -1,5 +1,7 @@
 Debug
 Release
-src-gen/*
-!src-gen/readme.txt
+bin
+output
+results
 tmp/testlog/*.seq
+tmp/testlog/*.xml
