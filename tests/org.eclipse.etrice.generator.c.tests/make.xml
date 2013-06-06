@@ -501,7 +501,9 @@
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/CHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/CChoicePointTest.xml"/>
+		<!--
 		<move file="./tmp/SendingDataTestC.xml" tofile="./tmp/CSendingDataTest.xml"/>
+		-->
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/CStaticConfigTest.xml"/>
 		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/CDataDrivenTest.xml"/>
 		<copy todir="${test.results}" >
