@@ -38,6 +38,8 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "integration.model.path=${WORKSPACE}/etrice_local_repo/tests/org.eclipse.etrice.integration.tests/model"
 	echo "java.tests.model.path=${WORKSPACE}/etrice_local_repo/tests/org.eclipse.etrice.generator.java.tests/models"
 	echo "test.results=${WORKSPACE}/buildroot/test.results"
+	echo "runtime.platform=MT_POSIX_GENERIC_GCC"
+	echo "gcc.path=/usr/bin"
 	echo "c-runtime.path=${WORKSPACE}/etrice_local_repo/runtime/org.eclipse.etrice.runtime.c"
 	echo "cpp-runtime.path=${WORKSPACE}/etrice_local_repo/runtime/org.eclipse.etrice.runtime.cpp"
 	echo
