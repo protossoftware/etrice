@@ -3,5 +3,4 @@ Release
 bin
 output
 results
-tmp/testlog/*.seq
-tmp/testlog/*.xml
+tmp

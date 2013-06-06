@@ -1,4 +1,0 @@
-etUnit report
-ts start: etUnit
-tc start 18: openAll and closeAll
-tc end 18: 0
