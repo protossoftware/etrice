@@ -66,15 +66,21 @@ static void timerThreadFunction(void* data) {
 		int idx;
 		int signaled = FALSE;
 
-		printf("timerThreadFunction: waiting\n"); fflush(stdout); // remove debug output
+#ifdef DEBUG_TIMER
+		printf("timerThreadFunction: waiting\n"); fflush(stdout);
+#endif
 		etSema_waitForWakeup(&timer_sema);
 
-		printf("timerThreadFunction: checking\n"); fflush(stdout); // remove debug output
+#ifdef DEBUG_TIMER
+		printf("timerThreadFunction: checking\n"); fflush(stdout);
+#endif
 
 		etMutex_enter(&timer_mutex);
 		for (it=timers, idx=0; it!=NULL; it=(etTimer*) it->osTimerData.next, ++idx) {
 			if (it->osTimerData.signaled) {
-				printf("timerThreadFunction: signaled %d, calling user fct %p\n", idx, (void*)it->timerFunction); fflush(stdout); // remove debug output
+#ifdef DEBUG_TIMER
+				printf("timerThreadFunction: signaled %d, calling user fct %p\n", idx, (void*)it->timerFunction); fflush(stdout);
+#endif
 				it->osTimerData.signaled = FALSE;
 				it->timerFunction(it->timerFunctionData);
 				signaled = TRUE;
@@ -89,27 +95,16 @@ static void timerThreadFunction(void* data) {
 }
 
 static void timerHandler(int sig, siginfo_t *si, void *uc) {
-	timer_t* tid = si->si_value.sival_ptr;
-	etTimer* it;
-	int signaled = FALSE;
+	etTimer* timer = si->si_value.sival_ptr;
+	int sval = 0;
 
 	etMutex_enter(&timer_mutex);
-	for (it=timers; it!=NULL; it=(etTimer*) it->osTimerData.next) {
-		if (it->osTimerData.timerid==*tid) {
-			int sval = 0;
-			sem_getvalue(&(timer_sema.osData), &sval);
-			it->osTimerData.signaled = TRUE;
-			if (sval==0)
-				etSema_wakeup(&timer_sema);
-			signaled = TRUE;
-		}
-	}
-
+	timer->osTimerData.signaled = TRUE;
 	etMutex_leave(&timer_mutex);
 
-	if (!signaled) {
-		etLogger_logError("timerHandler: signaled timer NOT found\n");
-	}
+	sem_getvalue(&(timer_sema.osData), &sval);
+	if (sval==0)
+		etSema_wakeup(&timer_sema);
 }
 
 void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* timerFunctionData){
@@ -141,8 +136,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			sa.sa_flags = SA_SIGINFO;
 			sa.sa_sigaction = timerHandler;
 			if (sigaction(TIMER_SIGNAL, &sa, NULL) != 0) {
-				fprintf(stderr, "etTimer_construct: failed setting action handler\n");
-				fflush(stderr);
+				etLogger_logError("etTimer_construct: failed setting action handler\n");
 				return;
 			}
 
@@ -156,7 +150,9 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 					NULL);
 			etThread_start(&timer_thread);
 
-			printf("etTimer_construct: installed signal handler and started thread\n"); fflush(stdout); // TODO: remove debug output
+#ifdef DEBUG_TIMER
+			printf("etTimer_construct: installed signal handler and started thread\n"); fflush(stdout);
+#endif
 		}
 
 		/* create the timer (in disarmed state) */
@@ -164,13 +160,15 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			/* create timer */
 			self->osTimerData.te.sigev_notify = SIGEV_SIGNAL;
 			self->osTimerData.te.sigev_signo = TIMER_SIGNAL;
-			self->osTimerData.te.sigev_value.sival_ptr = &self->osTimerData.timerid;
+			self->osTimerData.te.sigev_value.sival_ptr = self;
 			if (timer_create(CLOCK_REALTIME, &self->osTimerData.te, &self->osTimerData.timerid) != 0) {
 				fprintf(stderr, "etTimer_construct: failed creating a timer\n");
 				fflush(stderr);
 				return;
 			}
-			printf("etTimer_construct: user callback is %p\n", (void*)self->timerFunction); fflush(stdout); // TODO: remove debug output
+#ifdef DEBUG_TIMER
+			printf("etTimer_construct: user callback is %p\n", (void*)self->timerFunction); fflush(stdout);
+#endif
 		}
 
 		/* place at list head */
@@ -222,8 +220,7 @@ void etTimer_stop(etTimer* self){
 		/* disarm the timer */
 		memset(&its, 0, sizeof(its));
 		if (timer_settime(self->osTimerData.timerid, 0, &its, NULL) != 0) {
-			fprintf(stderr, "etTimer_stop: failed stopping a timer with errno %d\n", errno);
-			fflush(stderr);
+			etLogger_logErrorF("etTimer_stop: failed stopping a timer with errno %d\n", errno);
 		}
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
@@ -237,8 +234,7 @@ void etTimer_destruct(etTimer* self){
 
 		/* delete timer */
 		if (timer_delete(self->osTimerData.timerid) != 0) {
-			fprintf(stderr, "etTimer_delete: failed deleting a timer\n");
-			fflush(stderr);
+			etLogger_logError("etTimer_delete: failed deleting a timer\n");
 		}
 
 		/* remove from queue */
