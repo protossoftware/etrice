@@ -216,6 +216,15 @@ RoomModel trafficlight.example {
 						<greenForPed: controller>
 					}
 				}
+				Transition tr9: my tp0 -> tp0 of Off_Blinking {
+					triggers {
+						<receive: tcpPayload>
+					}
+					action {
+						"// TODO"
+					}
+				}
+				TransitionPoint tp0
 				State OpenSocket {
 					entry {
 						"tcpCtrl.open(ipConfig);"

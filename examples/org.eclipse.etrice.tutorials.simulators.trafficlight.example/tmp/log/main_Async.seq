@@ -36,6 +36,7 @@
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
+	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
@@ -46,7 +47,6 @@
 	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
 	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
@@ -58,6 +58,7 @@
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
+	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
@@ -68,7 +69,6 @@
 	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
 	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
@@ -146,143 +146,6 @@
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/controller internalTimeout
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/controller internalTimeout
-	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light1 greenForCar
-	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light2 greenForPed
-	/LSTraffic/main/application/controller >>> SwitchToLight1GreenForCars
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >>> Off_Blinking_On
-	/LSTraffic/main/application/controller --> /LSTraffic/main/application/light1 greenForCar
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >>> PedRed
-	/LSTraffic/main/application/controller --> /LSTraffic/main/application/light2 greenForPed
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >>> CarYellow2
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >>> CarYellow
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >>> CarRed
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/controller greenForCarDone
-	/LSTraffic/main/application/light1 >>> CarGreen
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/controller greenForCarDone
-	/LSTraffic/main/application/controller >>> state0
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/controller greenForPedDone
-	/LSTraffic/main/application/light2 >>> PedGreen
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/controller greenForPedDone
-	/LSTraffic/main/application/controller >>> Light1GreenForCars
-	/LSTraffic/main/application/controller --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/controller internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/controller internalTimeout
-	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light1 greenForPed
-	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light2 greenForCar
-	/LSTraffic/main/application/controller >>> SwitchToLight2GreenForCars
-	/LSTraffic/main/application/controller --> /LSTraffic/main/application/light1 greenForPed
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >>> CarYellow2
-	/LSTraffic/main/application/controller --> /LSTraffic/main/application/light2 greenForCar
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >>> PedRed
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >>> CarRed
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >>> CarYellow
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/controller greenForPedDone
-	/LSTraffic/main/application/light1 >>> PedGreen
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/controller greenForPedDone
-	/LSTraffic/main/application/controller >>> state2
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/controller greenForCarDone
-	/LSTraffic/main/application/light2 >>> CarGreen
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
-	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/controller greenForCarDone
-	/LSTraffic/main/application/controller >>> Light2GreenForCars
-	/LSTraffic/main/application/controller --> /LSTraffic/main/TimingService internalStartTimeout
-	/LSTraffic/main/TimingService >>> Operational
-	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/controller internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/controller internalTimeout
 	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light1 greenForCar
 	/LSTraffic/main/application/controller >-- /LSTraffic/main/application/light2 greenForPed
@@ -307,6 +170,10 @@
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
+	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
+	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
+	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
+	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
 	/LSTraffic/main/application/light1 >>> CarYellow
 	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
@@ -321,19 +188,19 @@
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/TimingService internalStartTimeout
 	/LSTraffic/main/TimingService >>> Operational
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light1 internalTimeout
-	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/TimingService >-- /LSTraffic/main/application/light2 internalTimeout
+	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light1 internalTimeout
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/light1/trafficLightSocket send
 	/LSTraffic/main/application/light1 >-- /LSTraffic/main/application/controller greenForCarDone
 	/LSTraffic/main/application/light1 >>> CarGreen
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
-	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
-	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/controller greenForCarDone
-	/LSTraffic/main/application/controller >>> state0
 	/LSTraffic/main/TimingService --> /LSTraffic/main/application/light2 internalTimeout
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/light2/trafficLightSocket send
 	/LSTraffic/main/application/light2 >-- /LSTraffic/main/application/controller greenForPedDone
 	/LSTraffic/main/application/light2 >>> PedGreen
+	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/light1/trafficLightSocket send
+	/LSTraffic/main/application/light1/trafficLightSocket >>> opened
+	/LSTraffic/main/application/light1 --> /LSTraffic/main/application/controller greenForCarDone
+	/LSTraffic/main/application/controller >>> state0
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/light2/trafficLightSocket send
 	/LSTraffic/main/application/light2/trafficLightSocket >>> opened
 	/LSTraffic/main/application/light2 --> /LSTraffic/main/application/controller greenForPedDone
