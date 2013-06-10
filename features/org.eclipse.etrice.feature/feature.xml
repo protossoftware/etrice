@@ -23,7 +23,7 @@
       license-feature="org.eclipse.license"
       license-feature-version="1.0.0.qualifier">
 
-   <description>
+   <description url="http://www.eclipse.org/etrice">
       %description
    </description>
 
