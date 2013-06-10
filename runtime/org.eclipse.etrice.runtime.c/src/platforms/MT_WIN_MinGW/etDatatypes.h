@@ -82,7 +82,7 @@ typedef float64 etFloat64;
 typedef bool etBool;
 
 
-//typedef FILE* etFileHandle;
+typedef FILE* etFileHandle;
 
 typedef int16 etAddressId;
 
@@ -90,11 +90,11 @@ typedef int16 etAddressId;
  * typedefs for OS-specific types
  */
 
-//typedef CRITICAL_SECTION etOSMutexData;
-//typedef HANDLE etOSThreadData;
-//typedef DWORD etOSThreadId;
-//typedef HANDLE etOSSemaData;
-//typedef HANDLE etOSTimerData;
-//typedef DWORD etOSTimerId;
+typedef CRITICAL_SECTION etOSMutexData;
+typedef HANDLE etOSThreadData;
+typedef DWORD etOSThreadId;
+typedef HANDLE etOSSemaData;
+typedef HANDLE etOSTimerData;
+typedef DWORD etOSTimerId;
 
 #endif /* _DATATYPES_H_ */

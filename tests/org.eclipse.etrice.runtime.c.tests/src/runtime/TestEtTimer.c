@@ -56,7 +56,7 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	getTimeFromTarget(&startTime);
 	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer1);
-	printf("TestEtTimer_lifecycle: wait for timer %ld\n", pthread_self()); fflush(stdout); // TODO: remove debug output
+	printf("TestEtTimer_lifecycle: wait for timer %ld\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
 	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
@@ -98,12 +98,12 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 	printf("TestEtTimer_multiTimer: start timer2\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer2);
 
-	printf("TestEtTimer_multiTimer: wait for timer (sema %p, thread %ld)\n", (void*)&GlobalSema, pthread_self()); fflush(stdout); // TODO: remove debug output
+	printf("TestEtTimer_multiTimer: wait for timer (sema %p, thread %ld)\n", (void*)&GlobalSema, etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
-	printf("TestEtTimer_multiTimer: wait again for timer (thread %ld)\n", pthread_self()); fflush(stdout); // TODO: remove debug output
+	printf("TestEtTimer_multiTimer: wait again for timer (thread %ld)\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
 
-	printf("TestEtTimer_multiTimer: stop timers %ld\n", pthread_self()); fflush(stdout); // TODO: remove debug output
+	printf("TestEtTimer_multiTimer: stop timers %ld\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 
 	//sleep(10);
 

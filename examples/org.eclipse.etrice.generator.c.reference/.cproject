@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.54263550">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.54263550" moduleId="org.eclipse.cdt.core.settings" name="Debug">
@@ -42,9 +40,9 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.836528711" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" valueType="enumerated"/>
 								<option id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.1206340557" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.937550345" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/config}&quot;"/>
 								</option>
@@ -56,7 +54,7 @@
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="org.eclipse.etrice.runtime.c"/>
 								</option>
 								<option id="gnu.c.link.option.paths.1410926104" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/DebugMinGW}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1941302758" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -75,7 +73,7 @@
 				<externalSettings containerId="org.eclipse.etrice.runtime.c;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/org.eclipse.etrice.runtime.c"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/DebugMinGW"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>

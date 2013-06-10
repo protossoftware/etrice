@@ -56,8 +56,9 @@ static void readThreadFunc(void* threadData) {
 	while (TRUE) {
 		retval = recv(self->socket, buffer, len, 0);
 		if (retval<=0) {
+			/* TODO: call  WSAGetLastError and do error handling
 			int err = WSAGetLastError();
-			/* TODO: call  WSAGetLastError and do error handling */
+			*/
 			PRINT_DEBUG("connection thread: socket lost, exiting\n")
 			self->socket = INVALID_SOCKET;
 			return;

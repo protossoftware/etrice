@@ -1,5 +1,7 @@
-Debug
-Release
+DebugLinux
+ReleaseLinux
+DebugMinGW
+ReleaseMinGW
 bin
 output
 results
