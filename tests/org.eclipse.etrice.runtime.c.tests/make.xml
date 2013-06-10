@@ -199,7 +199,7 @@
 	<target name="run" depends="build">
 		<mkdir dir="tmp/testlog"/>
 		<echo>start RuntimeTest</echo>
-		<exec dir="./" resolveexecutable="true" executable="./bin/test/RuntimeTest.exe" />
+		<exec dir="./" resolveexecutable="true" executable="./bin/test/RuntimeTest.exe" output="${output}/run.txt" />
 		<echo>end   RuntimeTest</echo>
 	</target>
 	
