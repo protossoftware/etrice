@@ -8,8 +8,13 @@
      which accompanies this distribution, and is available at 
 	 www.eclipse.org/legal/epl-v10.html
 
+	 environment variables that are needed:
+	 ETRICE_SAXON_PATH the folder where the saxon9he.jar resides
+	 ETRICE_ANT_LATEX_PATH the folder where the ant_latex_0.0.9_1 resides
+	 
      CONTRIBUTORS:
      Frank Lippert (initial contribution)
+     Henrik Rentz-Reichert
 	 =========================================================== --> 
 <project name="ETRICE_HELP" basedir="." default="default">
 
@@ -29,25 +34,27 @@
 <property name="toc.file" 	value="toc.xml" />
 <property name="style.file" value="${styles.dir}\build_eclipse_toc.xsl" />
 
-<path id="project.class.path">
-	<pathelement path="${java.class.path}" />
-	<pathelement path="C:/Program Files/Saxonica/SaxonHE9.4N/lib/saxon9he.jar" />
-	<pathelement path="D:/setup/applications/software_engineering/apache/ant/extensions/ant_latex/ant_latex_0.0.9_1.jar" />
-</path>
-
+<property environment="env"/>
 
 <!-- ============ initialization ================== -->
 <target name="init" >
 	<tstamp/>
 	<mkdir dir="${manual.dir}" />
 	<mkdir dir="${image.dir}" />
+	
+	<property name="saxon.path" value="${env.ETRICE_SAXON_PATH}"/>
+	<property name="ant_latex.path" value="${env.ETRICE_ANT_LATEX_PATH}"/>
+	
+	<echo message="saxon path: ${saxon.path}" />
+	<echo message="ant_latex:  ${ant_latex.path}" />
+
+	<path id="project.class.path">
+		<pathelement path="${java.class.path}" />
+		<pathelement path="${saxon.path}/saxon9he.jar" />
+		<pathelement path="${ant_latex.path}/ant_latex_0.0.9_1.jar" />
+	</path>
 </target>
 
-
-<!-- ============ creating PDF manual ============= --> 
-<taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
-    classpathref="project.class.path"
-/> 
 
 <!-- do we actually need to run PDF creation? -->
 <target name="checkPdfCreationNeeded">
@@ -66,6 +73,12 @@
 <!-- the actual PDF creation task -->
 <target name="createEtricePDF" depends="init, checkPdfCreationNeeded" unless="pdfCreation.notNeeded"
 	description="creates PDF manual from TeX files for eTrice documentation">
+	
+	<!-- ============ creating PDF manual ============= --> 
+	<taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
+	    classpathref="project.class.path"
+	/>
+	
 	<property name="latex.tmp.dir" value="${java.io.tmpdir}miktex" />
 	<mkdir dir="${latex.tmp.dir}" />
 	<latex
@@ -139,7 +152,7 @@
 </target>
 
 <!-- the actual TOCs creation task --> 
-<target name="createEclipseTocFiles" depends="checkTocsCreationNeeded, createEtriceHTML" unless="tocsCreation.notNeeded" 
+<target name="createEclipseTocFiles" depends="init, checkTocsCreationNeeded, createEtriceHTML" unless="tocsCreation.notNeeded" 
 		description="creates Eclipse Table of Content files from HTML file as part of the eTrice documentation">
    <!-- Transform one file into an HTML file -->
    <xslt basedir="html" destdir="."

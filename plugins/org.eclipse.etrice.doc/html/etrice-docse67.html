@@ -10,27 +10,27 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-10 18:31:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 77--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse65.html" >prev</a>] [<a 
-href="etrice-docse65.html#tailetrice-docse65.html" >prev-tail</a>] [<a 
-href="#tailetrice-docse66.html">tail</a>] [<a 
-href="etrice-docch18.html#etrice-docse66.html" >up</a>] </p></div>
+href="etrice-docse66.html" >prev</a>] [<a 
+href="etrice-docse66.html#tailetrice-docse66.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse67.html">tail</a>] [<a 
+href="etrice-docch18.html#etrice-docse67.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">18.2   </span> <a 
- id="x86-14100018.2"></a>Component Overview</h3>
+ id="x87-14200018.2"></a>Component Overview</h3>
 <!--l. 79--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">18.2.1   </span> <a 
- id="x86-14200018.2.1"></a>Room Language Overview</h4>
+ id="x87-14300018.2.1"></a>Room Language Overview</h4>
 <!--l. 81--><p class="noindent" >We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our
 implementation that are worth to be pointed out.
 </p><!--l. 84--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14300018.2.1"></a>Model Tweaks</h5>
+ id="x87-14400018.2.1"></a>Model Tweaks</h5>
 <!--l. 86--><p class="noindent" >The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at
 some places. This is done in the <span 
 class="ecti-1000">/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext</span>
@@ -68,7 +68,7 @@ class="ectt-1000">InterfaceItem</span></li></ul>
 <!--l. 102--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14400018.2.1"></a>Imports by URI Using Namespaces</h5>
+ id="x87-14500018.2.1"></a>Imports by URI Using Namespaces</h5>
 <!--l. 104--><p class="noindent" >The import mechanism employed is based on URIs. This is configured for one part in the
 GenerateRoom.mwe2 model workflow by setting the fragments ImportURIScopingFragment and
 ImportUriValidator). For the other part it is configured in the Guice modules by binding
@@ -92,7 +92,7 @@ class="ectt-1000">ImportAwareHyperlinkHelper </span>&#8211; turns the URI part o
 <!--l. 117--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14500018.2.1"></a>Naming</h5>
+ id="x87-14600018.2.1"></a>Naming</h5>
 <!--l. 119--><p class="noindent" >Two classes provide object names used for link resolution and for labels. The <span 
 class="ectt-1000">RoomNameProvider </span>provides
 frequently used name strings, some of them are hierarchical like State paths. The <span 
@@ -104,7 +104,7 @@ editors) and the textual model representation used by Xtext.
 </p><!--l. 125--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14600018.2.1"></a>Helpers</h5>
+ id="x87-14700018.2.1"></a>Helpers</h5>
 <!--l. 127--><p class="noindent" >The <span 
 class="ectt-1000">RoomHelpers </span>class provides a great deal of static methods that help retrieve frequently used
 information from the model. Among many, many others </p>
@@ -123,7 +123,7 @@ class="ectt-1000">getSignature(Operation) </span>- returns a string representing
 <!--l. 139--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14700018.2.1"></a>Validation</h5>
+ id="x87-14800018.2.1"></a>Validation</h5>
 <!--l. 141--><p class="noindent" >Validation is used from various places. Therefore all validation code is accumulated in the
 @ValidationUtil@ class. All methods are static and many of them return a Result object which contains
 information about the problem detected as well as object and feature as suited for most validation
@@ -131,11 +131,11 @@ purposes.
 </p><!--l. 145--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">18.2.2   </span> <a 
- id="x86-14800018.2.2"></a>Config Language Overview</h4>
+ id="x87-14900018.2.2"></a>Config Language Overview</h4>
 <!--l. 147--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-14900018.2.2"></a>Model Tweaks</h5>
+ id="x87-15000018.2.2"></a>Model Tweaks</h5>
 <!--l. 149--><p class="noindent" >A couple of operations are added to the ConfigModel </p>
      <ul class="itemize1">
      <li class="itemize"><span 
@@ -154,19 +154,19 @@ class="ectt-1000">getSubSystemConfigs</span></li></ul>
 <!--l. 157--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15000018.2.2"></a>Imports by URI Using Namespaces</h5>
+ id="x87-15100018.2.2"></a>Imports by URI Using Namespaces</h5>
 <!--l. 159--><p class="noindent" >Imports are treated like in Room language, section <span 
 class="ecti-1000">Imports by URI Using Namespaces</span>.
 </p><!--l. 161--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15100018.2.2"></a>Util</h5>
+ id="x87-15200018.2.2"></a>Util</h5>
 <!--l. 163--><p class="noindent" >A set of static utility methods can be found in the <span 
 class="ectt-1000">ConfigUtil </span>class.
 </p><!--l. 165--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">18.2.3   </span> <a 
- id="x86-15200018.2.3"></a>Aggregation Layer Overview</h4>
+ id="x87-15300018.2.3"></a>Aggregation Layer Overview</h4>
 <!--l. 167--><p class="noindent" >The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access
 to information which is implicitly contained in the Room model but not simple to retrieve. Examples of
 this are the state machine with inherited items or a list of all triggers active at a state in the order in
@@ -198,14 +198,14 @@ class="ectt-1000">ExpandedActorClass </span>with an explicit state machine
 <!--l. 187--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15300018.2.3"></a>The Instance Model</h5>
+ id="x87-15400018.2.3"></a>The Instance Model</h5>
 <!--l. 189--><p class="noindent" >The instance model allows easy access to instances including their unique paths and object IDs. Also it is
 possible to get a list of all peer port instances for each port instance without having to bother about port
 and actor replication.
 </p><!--l. 193--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15400018.2.3"></a>The Expanded Actor Class</h5>
+ id="x87-15500018.2.3"></a>The Expanded Actor Class</h5>
 <!--l. 195--><p class="noindent" >The expanded actor class contains, as already mentioned, the complete state machine of the actor class.
 This considerably simplifies the task of state machine generation. Note that the generated code always
 contains the complete state machine of an actor. I.e. no target language inheritance is used to
@@ -235,7 +235,7 @@ class="ectt-1000">State </span>in the order they
 <!--l. 209--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15500018.2.3"></a>Transition Chains</h5>
+ id="x87-15600018.2.3"></a>Transition Chains</h5>
 <!--l. 211--><p class="noindent" >By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a
 transition starting at a state and continues over transitional state graph nodes (choice points and
 transition points) and continuation transitions until a state is reached. In general a transition chain starts
@@ -252,13 +252,13 @@ points.
 </p><!--l. 221--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">18.2.4   </span> <a 
- id="x86-15600018.2.4"></a>Generator Overview</h4>
+ id="x87-15700018.2.4"></a>Generator Overview</h4>
 <!--l. 223--><p class="noindent" >There is one plug-in that consists of base classes and some generic generator parts which are re-used by
 all language specific generators
 </p><!--l. 226--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15700018.2.4"></a>Base Classes and Interfaces</h5>
+ id="x87-15800018.2.4"></a>Base Classes and Interfaces</h5>
 <!--l. 228--><p class="noindent" >We just want to mention the most important classes and interfaces.
 </p>
      <ul class="itemize1">
@@ -294,7 +294,7 @@ class="ectt-1000">GeneratorBaseModule </span>&#8212; a Google Guice module that 
 <!--l. 242--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-15800018.2.4"></a>Generic Generator Parts</h5>
+ id="x87-15900018.2.4"></a>Generic Generator Parts</h5>
 <!--l. 244--><p class="noindent" >The generic generator parts provide code generation blocks on a medium granularity. The
 language dependent top level generators embed those blocks in a larger context (file, class, ...).
 Language dependent low level constructs are provided by means of an <span 
@@ -303,20 +303,20 @@ extension and other parts of the generator be configured using Google Guice depe
 injection.
 </p>
 <!--l. 249--><p class="noindent" ><span class="paragraphHead"><a 
- id="x86-15900018.2.4"></a><span 
+ id="x87-16000018.2.4"></a><span 
 class="ecbx-1000">GenericActorClassGenerator</span></span>
 The <span 
 class="ectt-1000">GenericActorClassGenerator </span>generates constants for the interface items of a actor. Those
 constants are used by the generated state machine.
 </p>
 <!--l. 254--><p class="noindent" ><span class="paragraphHead"><a 
- id="x86-16000018.2.4"></a><span 
+ id="x87-16100018.2.4"></a><span 
 class="ecbx-1000">GenericProtocolClassGenerator</span></span>
 The <span 
 class="ectt-1000">GenericProtocolClassGenerator </span>generates message ID constants for a protocol.
 </p>
 <!--l. 258--><p class="noindent" ><span class="paragraphHead"><a 
- id="x86-16100018.2.4"></a><span 
+ id="x87-16200018.2.4"></a><span 
 class="ecbx-1000">GenericStateMachineGenerator</span></span>
 </p>
 <div class="flushleft" 
@@ -365,7 +365,7 @@ class="ectt-1000">enterHistory</span>.
 </p><!--l. 283--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-16200018.2.4"></a>The Java Generator</h5>
+ id="x87-16300018.2.4"></a>The Java Generator</h5>
 <!--l. 285--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
 class="ectt-1000">JavaTranslationProvider </span>is
 very simple and only handles the case of sending a message from a distinct replicated port:
@@ -385,7 +385,7 @@ implementation.
 </p><!--l. 298--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-16300018.2.4"></a>The ANSI-C Generator</h5>
+ id="x87-16400018.2.4"></a>The ANSI-C Generator</h5>
 <!--l. 300--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods
 that operate on them and receive a pointer to those data (called <span 
 class="ectt-1000">self </span>in analogy to the implicit C++
@@ -397,17 +397,17 @@ controllers.
 </p><!--l. 307--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x86-16400018.2.4"></a>The Documentation Generator</h5>
+ id="x87-16500018.2.4"></a>The Documentation Generator</h5>
 <!--l. 309--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF
 and many other formats.
                                                                                  
                                                                                  
 </p>
 <!--l. 44--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse65.html" >prev</a>] [<a 
-href="etrice-docse65.html#tailetrice-docse65.html" >prev-tail</a>] [<a 
-href="etrice-docse66.html" >front</a>] [<a 
-href="etrice-docch18.html#etrice-docse66.html" >up</a>] </p></div>
+href="etrice-docse66.html" >prev</a>] [<a 
+href="etrice-docse66.html#tailetrice-docse66.html" >prev-tail</a>] [<a 
+href="etrice-docse67.html" >front</a>] [<a 
+href="etrice-docch18.html#etrice-docse67.html" >up</a>] </p></div>
 <!--l. 44--><p class="noindent" ><a 
- id="tailetrice-docse66.html"></a>  </p> 
+ id="tailetrice-docse67.html"></a>  </p> 
 </body></html> 
