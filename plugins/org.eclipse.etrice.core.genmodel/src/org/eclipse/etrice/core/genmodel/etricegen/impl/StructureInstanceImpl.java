@@ -267,7 +267,8 @@ public class StructureInstanceImpl extends InstanceBaseImpl implements Structure
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * for each base class, super classes first, (ports, saps and services) in this order
+	 * for each base class, super classes first, (ports, saps and services) in this order.
+	 * Relay ports are omitted.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
