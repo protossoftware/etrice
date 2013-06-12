@@ -1,0 +1,102 @@
+RoomModel XY {
+
+	import room.basic.types.* from "Types.room"
+
+	SubSystemClass XYSubSys {
+		ActorRef gui: GUI
+		ActorRef processController: ProcessController
+		ActorRef xyController: XY_Controller
+		Binding gui.process and processController.fct
+
+		LogicalThread defaultThread
+		LogicalThread processThread
+		LogicalThread servoThread
+
+		ActorInstanceMapping gui -> defaultThread
+		ActorInstanceMapping processController -> processThread
+		ActorInstanceMapping xyController -> servoThread
+	}
+
+	ActorClass GUI {
+		Interface {
+			conjugated Port process: P_Process
+		}
+		Structure {
+			external Port process
+		}
+		Behavior { }
+	}
+
+	ActorClass ProcessController {
+		Interface {
+			Port fct: P_Process
+			conjugated Port xy_controller: P_XY_Controller
+		}
+		Structure {
+			external Port fct
+			external Port xy_controller
+		}
+		Behavior { }
+	}
+
+	ActorClass XY_Controller {
+		Interface {
+			Port fct: P_XY_Controller
+		}
+		Structure {
+			external Port fct
+			conjugated Port x: P_ServoDrive
+			conjugated Port y: P_ServoDrive
+			ActorRef xAxis: ServoDrive
+			ActorRef yAxis: ServoDrive
+			Binding x and xAxis.fct
+			Binding y and yAxis.fct
+		}
+		Behavior { }
+	}
+
+	ActorClass ServoDrive {
+		Interface {
+			Port fct: P_ServoDrive
+		}
+		Structure {
+			external Port fct
+		}
+		Behavior { }
+	}
+
+	ProtocolClass P_Process {
+		incoming {
+			Message startProcess()
+		}
+		outgoing {
+			Message doneProcess()
+		}
+	}
+
+	eventdriven ProtocolClass P_ServoDrive {
+		incoming {
+			Message start(position: float32)
+			Message stop()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	ProtocolClass P_XY_Controller {
+		incoming {
+			Message start(position: D_XYPosition)
+			Message stop()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	DataClass D_XYPosition {
+		Attribute x: float32
+		Attribute y: float32
+	}
+
+}
