@@ -4,70 +4,68 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Testing the environment</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 19--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse30.html" >next</a>] [<a 
-href="etrice-docch8.html" >prev</a>] [<a 
-href="etrice-docch8.html#tailetrice-docch8.html" >prev-tail</a>] [<a 
+href="etrice-docch9.html" >prev</a>] [<a 
+href="etrice-docch9.html#tailetrice-docch9.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse29.html">tail</a>] [<a 
-href="etrice-docch8.html#etrice-docse29.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">8.1   </span> <a 
- id="x39-550008.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >The scope of this tutorial is to demonstrate how to receive model messages from outside the model.
-Calling methods which are not part of the model is simple and you have already done this within
-the blinky tutorial (this is the other way round: model =&#x003E; external code). Receiving events
-from outside the model is a very common problem and a very frequently asked question.
-Therefore this tutorial shows how an external event (outside the model) can be received by the
-model.
-</p><!--l. 11--><p class="noindent" >This tutorial is not like hello world or blinky. Being familiar with the basic tool features is
-mandatory for this tutorial. The goal is to understand the mechanism not to learn the tool
-features.
-</p><!--l. 14--><p class="noindent" >The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for
-the blinky tutorial but now we will use the <span 
-class="ecti-1000">REQUEST </span>button to start a FSM, which controls the traffic
-lights.
-</p><!--l. 18--><p class="noindent" ><img 
-src="images/020-Blinky08.png" alt="PIC"  
+href="etrice-docch9.html#etrice-docse29.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">9.1   </span> <a 
+ id="x40-610009.1"></a>Testing the environment</h3>
+<!--l. 21--><p class="noindent" >To verify the C tool chain you should generate and run the Hello World example program of the CDT. Activate
+the <span 
+class="ec-lmsso-10">C/C++ </span>perspective.
+</p><!--l. 24--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC03.png" alt="PIC"  
  />
-</p><!--l. 21--><p class="noindent" >The <span 
-class="ecti-1000">REQUEST </span>must lead to a model message which starts the activity of the lights.
-</p><!--l. 23--><p class="noindent" >There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging
-mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps
-are necessary:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x39-55002x1">specify the messages (within a protocol) which should be sent into the model
-     </li>
-     <li 
-  class="enumerate" id="x39-55004x2">model an actor with a port (which uses the specified protocol) and connect the port to the
-     receiver
-     </li>
-     <li 
-  class="enumerate" id="x39-55006x3">the external code should know the port (import of the port class)
-     </li>
-     <li 
-  class="enumerate" id="x39-55008x4">the external code should provide a registration method, so that the actor is able to allow
-     access to this port
-     </li>
-     <li 
-  class="enumerate" id="x39-55010x5">the port can be used from the external code</li></ol>
+</p><!--l. 27--><p class="noindent" >From the main menu select <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project</span>.
+</p><!--l. 29--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC02.png" alt="PIC"  
+ />
+</p><!--l. 32--><p class="noindent" >Name the project. Select an <span 
+class="ec-lmsso-10">Executable-&#x003E;Hello World ANSI C </span>as project type, <span 
+class="ec-lmsso-10">MinGW GCC </span>as tool chain and
+click <span 
+class="ec-lmsso-10">Finish</span>.
+</p><!--l. 35--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC04.png" alt="PIC"  
+ />
+</p><!--l. 38--><p class="noindent" >Select the new project and click the build button (or right click the project and select <span 
+class="ec-lmsso-10">Build Project</span>)
+</p><!--l. 41--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC05.png" alt="PIC"  
+ />
+</p><!--l. 44--><p class="noindent" >The binary should be generated. Run the binary as <span 
+class="ec-lmsso-10">Local C/C++ Application</span>.
+</p><!--l. 46--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC06.png" alt="PIC"  
+ />
+</p><!--l. 49--><p class="noindent" >Verify the output.
+</p><!--l. 51--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC07.png" alt="PIC"  
+ />
+</p><!--l. 54--><p class="noindent" >Remember these steps. In the following Tutorials these steps will be referenced as <span 
+class="ec-lmsso-10">build and run</span>.
                                                                                  
                                                                                  
-<!--l. 35--><div class="crosslinks"><p class="noindent">[<a 
+</p>
+<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse30.html" >next</a>] [<a 
-href="etrice-docch8.html" >prev</a>] [<a 
-href="etrice-docch8.html#tailetrice-docch8.html" >prev-tail</a>] [<a 
+href="etrice-docch9.html" >prev</a>] [<a 
+href="etrice-docch9.html#tailetrice-docch9.html" >prev-tail</a>] [<a 
 href="etrice-docse29.html" >front</a>] [<a 
-href="etrice-docch8.html#etrice-docse29.html" >up</a>] </p></div>
-<!--l. 35--><p class="noindent" ><a 
+href="etrice-docch9.html#etrice-docse29.html" >up</a>] </p></div>
+<!--l. 57--><p class="noindent" ><a 
  id="tailetrice-docse29.html"></a> </p> 
 </body></html> 

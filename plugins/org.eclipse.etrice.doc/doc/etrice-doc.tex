@@ -1,12 +1,16 @@
 \documentclass[a4paper,oneside,10pt]{book}
+\usepackage[english]{babel}
 \usepackage[portrait,a4paper,margin=3.0cm,headsep=5mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{longtable}
+\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage[font=footnotesize,labelfont=bf,singlelinecheck=false,format=plain,,justification=justified,indention=0cm]{caption}
 \setlength{\parindent}{0pt}  
 \setlength{\parskip}{4pt plus 1pt minus 0pt}  % Abstand zwischen Absaetzen
  \nonfrenchspacing
@@ -14,17 +18,27 @@
 
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}} 
+\DeclareRobustCommand{\eTrice}{{\color{blue}e}{\color{red}Trice}{}}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+%\newcommand{\room}[1]{\textcolor{RedViolet}{\texttt{#1}}}
+\newcommand{\room}[1]{\textcolor{Fuchsia}{\textbf{#1}}}
+\renewcommand{\familydefault}{\sfdefault}
  
- 
-\title{\Huge eTrice}
-\author{eTrice committers and contributors}
+\title{\Huge \eTrice}
+\author{\eTrice{} committers and contributors}
 \begin{document}
+
 \maketitle
 
 \tableofcontents
 
+\chapter{Introduction}
+
 \include{000-etrice-introduction}
 \include{010-room-introduction}
+
+\chapter{Tutorials}
+
 \include{012-working-with-tutorials}
 \include{013-setting-up-the-workspace}
 \include{015-getting-started}
@@ -35,10 +49,15 @@
 \include{034-getting-started_c}
 \include{036-tutorial-remove-comment_c}
 \include{040-room-concepts}
+
+\chapter{\eTrice{} Features}
+
 \include{043-layout-with-kieler}
-\include{050-etrice-features}
-\include{060-codegenerators}
-\include{070-runtimes}
+%\include{050-etrice-features}
+%\include{060-codegenerators}
+%\include{070-runtimes}
 \include{080-etrice-models}
+
 \include{200-dev-reference}
+
 \end{document}

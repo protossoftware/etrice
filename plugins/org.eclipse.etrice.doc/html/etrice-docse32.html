@@ -4,72 +4,80 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Testing the environment</title> 
+<head><title>Create a new model from scratch</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 19--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 23--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse33.html" >next</a>] [<a 
-href="etrice-docch9.html" >prev</a>] [<a 
-href="etrice-docch9.html#tailetrice-docch9.html" >prev-tail</a>] [<a 
+href="etrice-docse31.html" >prev</a>] [<a 
+href="etrice-docse31.html#tailetrice-docse31.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse32.html">tail</a>] [<a 
-href="etrice-docch9.html#etrice-docse32.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">9.1   </span> <a 
- id="x43-590009.1"></a>Testing the environment</h3>
-<!--l. 21--><p class="noindent" >To verify the C tool chain you should generate and run the Hello World example program of the CDT.
-Activate the <span 
-class="ecti-1000">C/C++ </span>perspective.
-</p><!--l. 24--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC03.png" alt="PIC"  
- />
-</p><!--l. 27--><p class="noindent" >From the main menu select <span 
-class="ecti-1000">File-&#x003E;New-&#x003E;C Project</span>.
-</p><!--l. 29--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC02.png" alt="PIC"  
- />
-</p><!--l. 32--><p class="noindent" >Name the project. Select an <span 
-class="ecti-1000">Executable-&#x003E;Hello World ANSI C </span>as project type, <span 
-class="ecti-1000">MinGW GCC </span>as tool
-chain and click <span 
-class="ecti-1000">Finish</span>.
-</p><!--l. 35--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC04.png" alt="PIC"  
- />
-</p><!--l. 38--><p class="noindent" >Select the new project and click the build button (or right click the project and select <span 
-class="ecti-1000">Build</span>
+href="etrice-docch10.html#etrice-docse32.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">10.2   </span> <a 
+ id="x44-6500010.2"></a>Create a new model from scratch</h3>
+<!--l. 25--><p class="noindent" >Before you can create a new C-model, you have to create a new C project as described in <span 
+class="ec-lmsso-10">Setting up the</span>
 <span 
-class="ecti-1000">Project</span>)
-</p><!--l. 41--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC05.png" alt="PIC"  
+class="ec-lmsso-10">Workspace for C Projects</span>. Remember: </p>
+     <ul class="itemize1">
+     <li class="itemize">select the <span 
+class="ec-lmsso-10">C/C++ </span>perspective
+     </li>
+     <li class="itemize">From the main menue select <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project</span>
+     </li>
+     <li class="itemize">Name the project <span 
+class="ec-lmsso-10">HelloWorldC</span>
+     </li>
+     <li class="itemize">Project type is <span 
+class="ec-lmsso-10">Executable / Empty C Project</span>
+     </li>
+     <li class="itemize">Toolchain is <span 
+class="ec-lmsso-10">MinGW</span></li></ul>
+<!--l. 36--><p class="noindent" >The workspace should look like this:
+</p><!--l. 38--><p class="noindent" ><img 
+src="images/034-HelloWorldC01.png" alt="PIC"  
  />
-</p><!--l. 44--><p class="noindent" >The binary should be generated. Run the binary as <span 
-class="ecti-1000">Local C/C++ Application</span>.
-</p><!--l. 46--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC06.png" alt="PIC"  
- />
-</p><!--l. 49--><p class="noindent" >Verify the output.
-</p><!--l. 51--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC07.png" alt="PIC"  
- />
-</p><!--l. 54--><p class="noindent" >Remember these steps. In the following Tutorials these steps will be referenced as <span 
-class="ecti-1000">build and</span>
+</p><!--l. 41--><p class="noindent" >The next step is to add the model folder: Right click on the new project. Select <span 
+class="ec-lmsso-10">New-&#x003E;Folder </span>and name it
 <span 
-class="ecti-1000">run</span>.
+class="ec-lmsso-10">model</span>.
+</p><!--l. 44--><p class="noindent" ><img 
+src="images/034-HelloWorldC02.png" alt="PIC"  
+ />
+</p><!--l. 47--><p class="noindent" >Add the model file to the folder. Right click on the new folder. Select <span 
+class="ec-lmsso-10">New-&#x003E;file </span>and name it
+<span 
+class="ec-lmsso-10">HelloWorldC.room</span>.
+</p><!--l. 50--><p class="noindent" ><img 
+src="images/034-HelloWorldC03.png" alt="PIC"  
+ />
+</p><!--l. 53--><p class="noindent" >Due to the file ending <span 
+class="ec-lmsso-10">.room</span>, the tool will ask you to add the Xtext nature. Answer with <span 
+class="ec-lmsso-10">Yes</span>.
+</p><!--l. 56--><p class="noindent" ><img 
+src="images/034-HelloWorldC04.png" alt="PIC"  
+ />
+</p><!--l. 59--><p class="noindent" >The workspace should look like this:
+</p><!--l. 61--><p class="noindent" ><img 
+src="images/034-HelloWorldC05.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
 </p>
-<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 66--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse33.html" >next</a>] [<a 
-href="etrice-docch9.html" >prev</a>] [<a 
-href="etrice-docch9.html#tailetrice-docch9.html" >prev-tail</a>] [<a 
+href="etrice-docse31.html" >prev</a>] [<a 
+href="etrice-docse31.html#tailetrice-docse31.html" >prev-tail</a>] [<a 
 href="etrice-docse32.html" >front</a>] [<a 
-href="etrice-docch9.html#etrice-docse32.html" >up</a>] </p></div>
-<!--l. 57--><p class="noindent" ><a 
+href="etrice-docch10.html#etrice-docse32.html" >up</a>] </p></div>
+<!--l. 66--><p class="noindent" ><a 
  id="tailetrice-docse32.html"></a> </p> 
 </body></html> 

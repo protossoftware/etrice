@@ -4,58 +4,82 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Create the model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse43.html" >next</a>] [<a 
-href="etrice-docch11.html" >prev</a>] [<a 
-href="etrice-docch11.html#tailetrice-docch11.html" >prev-tail</a>] [<a 
+href="etrice-docse41.html" >prev</a>] [<a 
+href="etrice-docse41.html#tailetrice-docse41.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse42.html">tail</a>] [<a 
 href="etrice-docch11.html#etrice-docse42.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">11.1   </span> <a 
- id="x55-7100011.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >In this tutorial you will create a more complex model. The model implements a simple parser that
-removes comments (block comments and line comments) from a C source file. Therefore we will create
-two actors. One actor is responsible to perform the file operations, while the second actor implements the
-parser.
-</p><!--l. 9--><p class="noindent" >You will perform the following steps:
-</p><!--l. 11--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x55-71002x1">create a new model from scratch for C
+<h3 class="sectionHead"><span class="titlemark">11.4   </span> <a 
+ id="x55-7600011.4"></a>Create the model</h3>
+<!--l. 87--><p class="noindent" >Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors
+and state machines.
+</p><!--l. 90--><p class="noindent" >The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read
+characters from the source file. Another actor receives the characters and filters the comments (parser). The
+remaining characters (pure source code) should be print out.
+</p><!--l. 94--><p class="noindent" >Remember the logical steps: </p>
+     <ul class="itemize1">
+     <li class="itemize">create the model by the help of content assist (CTRL Space)
      </li>
-     <li 
-  class="enumerate" id="x55-71004x2">define a protocol
+     <li class="itemize">name the model, subsystem and top level actor
      </li>
-     <li 
-  class="enumerate" id="x55-71006x3">define your own data type
+     <li class="itemize">define the protocol (in this case it should be able to send a char, and to request the next char
+     from the file reader)
      </li>
-     <li 
-  class="enumerate" id="x55-71008x4">create the structure and the behavior by yourself
+     <li class="itemize">create the structure (file reader and parser with an appropriate port, create the references and
+     connect the ports)
      </li>
-     <li 
-  class="enumerate" id="x55-71010x5">generate, build and run the model</li></ol>
-<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
-class="ecti-1000">Setting up the Workspace for C</span>
-<span 
-class="ecti-1000">Projects</span>.
+     <li class="itemize">create the state machines</li></ul>
+<!--l. 105--><p class="noindent" >Try to create the model by yourself and take the following solution as an example.
+</p><!--l. 107--><p class="noindent" >Structure:
+</p><!--l. 109--><p class="noindent" ><img 
+src="images/036-RemoveCommentC04.png" alt="PIC"  
+ />
+</p><!--l. 112--><p class="noindent" >File reader FSM:
+</p><!--l. 114--><p class="noindent" ><img 
+src="images/036-RemoveCommentC05.png" alt="PIC"  
+ />
+</p><!--l. 117--><p class="noindent" >Parser FSM:
+</p><!--l. 119--><p class="noindent" ><img 
+src="images/036-RemoveCommentC06.png" alt="PIC"  
+ />
+</p><!--l. 122--><p class="noindent" >The complete model can be found in <span 
+class="ec-lmsso-10">org.eclipse.etrice.tutorials.c</span>
+</p><!--l. 124--><p class="noindent" >Take a look at the file attribute of the file reader.
                                                                                  
                                                                                  
 </p>
-<!--l. 22--><div class="crosslinks"><p class="noindent">[<a 
+<div class="verbatim" id="verbatim-21">
+Attribute&#x00A0;f:file&#x00A0;ref
+</div>
+<!--l. 128--><p class="nopar" >
+</p><!--l. 130--><p class="noindent" ><span 
+class="ec-lmsso-10">fopen </span>expects a <span 
+class="ec-lmsso-10">FILE *</span>. <span 
+class="ec-lmsso-10">f:file ref  </span>declares a variable <span 
+class="ec-lmsso-10">f  </span>from type reference to <span 
+class="ec-lmsso-10">file</span>, which is a pointer to
+<span 
+class="ec-lmsso-10">FILE</span>.
+                                                                                 
+                                                                                 
+</p>
+<!--l. 134--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse43.html" >next</a>] [<a 
-href="etrice-docch11.html" >prev</a>] [<a 
-href="etrice-docch11.html#tailetrice-docch11.html" >prev-tail</a>] [<a 
+href="etrice-docse41.html" >prev</a>] [<a 
+href="etrice-docse41.html#tailetrice-docse41.html" >prev-tail</a>] [<a 
 href="etrice-docse42.html" >front</a>] [<a 
 href="etrice-docch11.html#etrice-docse42.html" >up</a>] </p></div>
-<!--l. 22--><p class="noindent" ><a 
+<!--l. 134--><p class="noindent" ><a 
  id="tailetrice-docse42.html"></a> </p> 
 </body></html> 

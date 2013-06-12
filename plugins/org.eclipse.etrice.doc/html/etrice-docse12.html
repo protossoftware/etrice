@@ -4,78 +4,49 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Create a new protocol</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 87--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse11.html" >prev</a>] [<a 
+href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse12.html">tail</a>] [<a 
 href="etrice-docch6.html#etrice-docse12.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
- id="x20-340006.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >This tutorial describes how to use the <span 
-class="ecti-1000">TimingService</span>, how to combine a generated model with manual
-code and how to model a hierarchical state machine. The idea of the tutorial is to switch
-a LED on and off. The behavior of the LED should be: blinking in a one second interval
-for 5 seconds, stop blinking for 5 seconds, blinking, stop,... For this exercise we will use a
-little GUI class that will be used in more sophisticated tutorials too. The GUI simulates
-a pedestrian traffic crossing. For now, just a simple LED simulation will be used from the
-GUI.
-</p><!--l. 13--><p class="noindent" >After the exercise is created you must copy the GUI to your src directory (see below).
-</p><!--l. 15--><p class="noindent" >The package contains four java classes which implements a small window with a 3-light traffic light which
-simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian
-signals.
-</p><!--l. 19--><p class="noindent" >The GUI looks like this:
-</p><!--l. 21--><p class="noindent" ><img 
-src="images/020-Blinky08.png" alt="PIC"  
+<h3 class="sectionHead"><span class="titlemark">6.4   </span> <a 
+ id="x20-390006.4"></a>Create a new protocol</h3>
+<!--l. 89--><p class="noindent" >With the help of <span 
+class="ec-lmsso-10">Content Assist </span>create a <span 
+class="ec-lmsso-10">ProtocolClass </span>and name it <span 
+class="ec-lmsso-10">BlinkyControlProtocol</span>. Inside the
+brackets use the <span 
+class="ec-lmsso-10">Content Assist </span>(CTRL+Space) to create two incoming messages called <span 
+class="ec-lmsso-10">start </span>and
+<span 
+class="ec-lmsso-10">stop</span>.
+</p><!--l. 94--><p class="noindent" >The resulting code should look like this:
+</p><!--l. 96--><p class="noindent" ><img 
+src="images/020-Blinky03.png" alt="PIC"  
  />
-</p><!--l. 24--><p class="noindent" >Within this tutorial we will just toggle the yellow light.
-</p><!--l. 26--><p class="noindent" >You will perform the following steps:
-</p><!--l. 28--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x20-34002x1">create a new model from scratch
-     </li>
-     <li 
-  class="enumerate" id="x20-34004x2">define a protocol
-     </li>
-     <li 
-  class="enumerate" id="x20-34006x3">create an actor structure
-     </li>
-     <li 
-  class="enumerate" id="x20-34008x4">create a hierarchical state machine
-     </li>
-     <li 
-  class="enumerate" id="x20-34010x5">use the predefined <span 
-class="ecti-1000">TimingService</span>
+</p><!--l. 99--><p class="noindent" >With Ctrl-Shift+F or selecting <span 
+class="ec-lmsso-10">Format </span>from the context menu you can format the text. Note that all elements
+are displayed in the outline view.
                                                                                  
                                                                                  
-     </li>
-     <li 
-  class="enumerate" id="x20-34012x6">combine manual code with generated code
-     </li>
-     <li 
-  class="enumerate" id="x20-34014x7">build and run the model
-     </li>
-     <li 
-  class="enumerate" id="x20-34016x8">open the message sequence chart</li></ol>
-                                                                                 
-                                                                                 
-<!--l. 39--><div class="crosslinks"><p class="noindent">[<a 
+</p>
+<!--l. 102--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse11.html" >prev</a>] [<a 
+href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="etrice-docse12.html" >front</a>] [<a 
 href="etrice-docch6.html#etrice-docse12.html" >up</a>] </p></div>
-<!--l. 39--><p class="noindent" ><a 
+<!--l. 102--><p class="noindent" ><a 
  id="tailetrice-docse12.html"></a> </p> 
 </body></html> 

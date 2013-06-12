@@ -1,17 +1,17 @@
 \chapter{ROOM Concepts}
+\label{sec:room_concepts}
 
 This chapter gives an overview over the ROOM language elements and their textual and graphical notation.
-The formal ROOM grammar based on Xtext (EBNF) you can find here: 
-\href{http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/tree/plugins/org.eclipse.etrice.core.room/src/o
-rg/eclipse/etrice/core/Room.xtext}{ROOM Grammar}
+The formal ROOM grammar based on Xtext (EBNF) you can find in the \eTrice{} repository:
+\url{http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext}
 
 \section{Actors}
 
 \subsection{Description}
  
 The actor is the basic structural building block for building systems with ROOM. An actor can be refined 
-hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An 
-Actor can also have a behavior usually defined by a finite state machine.
+hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor.
+An actor can also have a behavior usually defined by a finite state machine.
 
 \subsection{Motivation}
 
@@ -19,11 +19,10 @@ Actor can also have a behavior usually defined by a finite state machine.
 \item Actors enable the construction of hierarchical structures by composition and layering
 \item Actors have their own logical thread of execution
 \item Actors can be freely deployed
-\item Actors define potentially reusable blocks
+\item Actors define potentially re-usable blocks
 \end{itemize}
 
 \subsection{Notation}
-
 
 \begin{table}
 \caption{Actor Class Notation}
@@ -37,46 +36,30 @@ Actor can also have a behavior usually defined by a finite state machine.
 \end{tabular}
 \end{table}
 
-% <table title="Actor Class Notation" frame="box" border="2" cellpadding="3" cellspacing="0" >
-	% <tr>
-		% <td align="center"><em>Element</em></td>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
-	% </tr>
-	% <tr>
-		% <td>ActorClass</td>
-		% <td>!images/040-ActorClassNotation.png!</td>
-		% <td>!images/040-ActorClassTextualNotation.png!</td>
-	% </tr>
-	% <tr>
-		% <td>ActorRef</td>
-		% <td>!images/040-ActorReferenceNotation.png!</td>
-		% <td>!images/040-ActorReferenceTextualNotation.png!</td>
-	% </tr>
-% </table> 
-
 
 \subsection{Details}
 
 \subsubsection{Actor Classes, Actor References, Ports and Bindings}
 
-An \textbf{ActorClass} defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses 
-that contain \textbf{ActorReferences} which have another ActorClass as type. The interface of an 
-ActorClass is always defined by Ports. The ActorClass can also contain Attributes, Operations and a finite 
-state machine. 
+An \room{ActorClass} defines the type (or blueprint) of an actor. Hierarchies are built by \room{ActorClass}es
+that contain \room{ActorRef}erences which have another \room{ActorClass} as type. The interface of an 
+\room{ActorClass} is always defined by \room{Port}s. The \room{ActorClass} can also contain
+\room{Attribute}s, \room{Operation}s
+and a finite \room{StateMachine}. 
 
-\textbf{External Ports} define the external interface of an actor and are defined in the <em>Interface</em> 
-section of the ActorClass.
+External \room{Port}s define the external interface of an actor and are defined in the \room{Interface} 
+section of the \room{ActorClass}.
 
-\textbf{Internal Ports} define the internal interface of an actor and are defined in the <em>Structure</em> 
-section of the ActorClass.
+Internal \room{Port}s define the internal interface of an actor and are defined in the \room{Structure} 
+section of the \room{ActorClass}.
 
-\textbf{Bindings} connect Ports inside an ActorClass.
+\room{Binding}s connect \room{Port}s inside an \room{ActorClass}.
 
-Example:
+Let us have a look at example \ref{tab:actor_class_example}:
 
 \begin{table}
 \caption{Actor Class Example}
+\label{tab:actor_class_example}
 \begin{tabular}{|l|l|l|}
 \hline
  \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
@@ -84,88 +67,74 @@ Example:
 \includegraphics[scale=0.7]{images/040-ActorClassExampleTextualNotation.png} \\ \hline
  \end{tabular}
  \end{table}
- 
-% <table title="Actor Class Example" frame="box" border="2" cellpadding="3" cellspacing="0" >
-	% <tr>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
-	% </tr>
-	% <tr>
-		% <td>!images/040-ActorClass.png!</td>
-		% <td>!images/040-ActorClassExampleTextualNotation.png!</td>
-	% </tr>
-% </table> 
 
 \begin{itemize}
-\item \textbf{ActorClass1} contains two ActorReferences (of ActorClass2 and ActorClass3)
-\item \textit{port1} is a \textbf{External End Port}. Since it connects external Actors with the behavior 
-of the ActorClass, it is defined in the \textbf{Interface} section and the \textbf{Structure} section of 
-the ActorClass.
-\item \textit{port2} and \textit{port3} are \textbf{Internal End Ports} and can only be connected to the 
-ports of contained ActorReferences. Internal End Ports connect the Behavior of an ActorClass with its 
-contained ActorReferences.
-\item \textit{port4} is a relay port and connects external Actors to contained ActorReferences. This port 
-can not be accessed by the behavior of the ActorClass.
-\item \textit{port5} through \textit{port9} are Ports of contained ActorReferences. \textit{port8} and 
-\textit{port9} can communicate without interference with the containing ActorClass.
-\item \textbf{Bindings} can connect ports of the ActorClass and its contained ActorReferences. 
+\item \textit{ActorClass1} contains two \room{ActorRef}erences (of ActorClass2 and ActorClass3)
+\item \textit{port1} is an \textit{external end port}. Since it connects external actors with the behavior 
+of the \room{ActorClass}, it is defined in the \room{Interface} section and the \room{Structure} section of 
+the \room{ActorClass}.
+\item \textit{port2} and \textit{port3} are \textit{internal end ports} and can only be connected to the 
+ports of contained \room{ActorRef}erences. Internal end ports connect the behavior of an \room{ActorClass} with its 
+contained \room{ActorRef}erences.
+\item \textit{port4} is a relay port and connects external Actors to contained \room{ActorRef}erences. This port 
+can not be accessed by the behavior of the \room{ActorClass}.
+\item \textit{port5} through \textit{port9} are ports of contained actor references. \textit{port8} and 
+\textit{port9} can communicate without interference with the containing actor class.
+\item \room{Binding}s can connect ports of the actor class and its contained actor references. 
 \end{itemize}
 
 \subsubsection{Attributes}
 
-Attributes are part of the Structure of an ActorClass. They can be of a PrimitiveType or a DataClass.
+\room{Attribute}s are part of the \room{Structure} of an actor class.
+They can be of a \room{PrimitiveType} or a \room{DataClass}.
 
 Example:
 
 \includegraphics{images/040-ActorClassAttributes.png}
-% !images/040-ActorClassAttributes.png!
 
 \subsubsection{Operations}
 
-Operations are part of the Behavior of an ActorClass.  Arguments and return values can be of a 
-PrimitiveType or a DataClass. DataClasses can be passed by value (implicit) or by reference (keyword 
-\textbf{ref}).
+\room{Operation}s are part of the \room{Behavior} of an actor class.  Arguments and return values can be of a 
+\room{PrimitiveType} or a \room{DataClass}. Data classes can be passed by value (implicit) or by reference (\room{ref}).
 
 Example:
 
 \includegraphics{images/040-ActorClassOperations.png}
-% !images/040-ActorClassOperations.png!
 
 \section{Protocols}
 
 \subsection{Description}
 
-A ProtocolClass defines a set of incoming and outgoing messages that can be exchanged between two ports.
+A \room{ProtocolClass} defines a set of incoming and outgoing \room{Message}s that can be exchanged between two ports.
 The exact semantics of a message is defined by the execution model.
 
 \subsection{Motivation}
 
 \begin{itemize}
-\item ProtocolClasses provide a reusable interface specification for ports
-\item ProtocolClasses can optionally specify valid message exchange sequences
+\item Protocol classes provide a reusable interface specification for ports
+\item Protocol classes can optionally specify valid message exchange sequences
 \end{itemize}
 
 \subsection{Notation}
 
-ProtocolClasses have only textual notation. 
-The example defines a ProtocolClass with 2 incoming and two outgoing messages. Messages can have data 
-attached. The data can be of a primitive type (e.g. int32, float64, ...) or a DataClass.
+Protocol classes have only textual notation. 
+The example defines a protocol class with 2 incoming and two outgoing messages. Messages can have data 
+attached. The data can be of a primitive type (e.g. int32, float64, ...) or a data class.
 
 \includegraphics{images/040-ProtocolClassTextualNotation.png}
-% !images/040-ProtocolClassTextualNotation.png!
 
 \section{Ports}
 
 \subsection{Description}
 
-Ports are the only interfaces of actors. A port has always a protocol assigned. 
+\room{Port}s are the only interfaces of actors. A port has always a protocol assigned. 
 Service Access Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to 
 define layering.
 
 \subsection{Motivation}
 
 \begin{itemize}
-\item Ports decouple interface definition (Protocols) from interface usage
+\item Ports decouple interface definition (protocols) from interface usage
 \item Ports decouple the logical interface from the transport 
 \end{itemize}
 
@@ -173,31 +142,38 @@ define layering.
 
 \subsubsection{Class Ports}
 
-These symbols can only appear on the border of an actor class symbol. 
+These symbols can only appear on the border of an actor class symbol.
 
-Ports that define an external interface of the ActorClass, are defined in the \textit{Interface}. Ports 
-that define an internal interface are defined in the \textit{Structure} (e.g. internal ports).
+Ports that define an external interface of the actor class, are defined in the \room{Interface}. Ports 
+that define an internal interface are defined in the \room{Structure} (e.g. internal ports).
+
 \begin{itemize}
-\item \textbf{External End Ports} are defined in the Interface and the Structure
-\item \textbf{Internal End Ports} are only defined in the Structure
-\item \textbf{Relay Ports} are only defined in the Interface
-\item \textbf{End Ports} are always connected to the internal behavior of the ActorClass
-\item \textbf{Replicated Ports} can be defined with a fixed replication factor ( e.g. \textit{Port port18 
-[ 5 ]: ProtocolClass1} ) or a variable replication factor (e.g. \textit{Port port18[ * ]: ProtocolClass1} )
+\item \textit{External end ports} are defined in the Interface and the Structure
+\item \textit{Internal end ports} are only defined in the Structure
+\item \textit{Relay ports} are only defined in the Interface
+\item \textit{End ports} are always connected to the internal behavior of the ActorClass
+\item \textit{Replicated ports} can be defined with a fixed replication factor, e.g.\\
+\texttt{\room{Port} port18 [5]: ProtocolClass1}\\
+or a variable replication factor, e.g.\\
+\texttt{\room{Port} port18[*]: ProtocolClass1}
 \end{itemize}
+
+The table \ref{tab:class_port_notation} shows all kinds of class ports with textual and graphical notation.
+
 \begin{table}
 \caption{Class Port Notation}
+\label{tab:class_port_notation}
 \begin{longtable}{|b{2.5cm}|c|b{5.5cm}|}
 \hline
  \textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
  \raggedright Class End Port & \includegraphics[scale=0.7]{images/040-ClassEndPort.png} & 
-\begin{tabular}{c} \textbf{External Class End Port:} \\ 
-\includegraphics[scale=0.7]{images/040-ClassEndPortTextual.png} \\ \textbf{Internal Class End Port:} \\ 
+\begin{tabular}{c} \textit{External Class End Port:} \\ 
+\includegraphics[scale=0.7]{images/040-ClassEndPortTextual.png} \\ \textit{Internal Class End Port:} \\ 
 \includegraphics[scale=0.7]{images/040-ClassEndPortInternalTextual.png} \\ \end{tabular} \\ \hline
  \raggedright Conjugated Class End Port & 
 \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} 
-\textbf{External Conjugated Class End Port:} \\ 
-\includegraphics[scale=0.7]{images/040-ConjugatedClassEndPortTextual.png}\\ \textbf{Internal Conjugated 
+\textit{External Conjugated Class End Port:} \\ 
+\includegraphics[scale=0.7]{images/040-ConjugatedClassEndPortTextual.png}\\ \textit{Internal Conjugated 
 Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPortInternalTextual.png} \\ 
 \end{tabular} \\ \hline
  \raggedright Class Relay Port & \includegraphics[scale=0.7]{images/040-ClassRelayPort.png} & 
@@ -207,14 +183,14 @@ Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ConjugatedClassEndPor
 \includegraphics[scale=0.7]{images/040-ConjugatedClassRelayPortTextual.png} \\ \hline
  \raggedright Replicated Class End Port & 
 \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} 
-\textbf{External Replicated Class End Port:} \\ 
-\includegraphics[scale=0.7]{images/040-ReplicatedClassEndPortTextual.png} \\ \textbf{Internal Replicated 
+\textit{External Replicated Class End Port:} \\ 
+\includegraphics[scale=0.7]{images/040-ReplicatedClassEndPortTextual.png} \\ \textit{Internal Replicated 
 Class End Port:} \\ \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPortInternalTextual.png} \\ 
 \end{tabular} \\ \hline
  \raggedright Conjugated Replicated Class End Port & 
 \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPort.png} & \begin{tabular}{b{5.5cm}} 
-\textbf{External Conjugated Replicated Class End Port:} \\ 
-\includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPortTextual.png} \\ \textbf{Internal 
+\textit{External Conjugated Replicated Class End Port:} \\ 
+\includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPortTextual.png} \\ \textit{Internal 
 Conjugated Replicated Class End Port:} \\ 
 \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPortInternalTextual.png} \\ 
 \end{tabular} \\ \hline
@@ -227,89 +203,16 @@ Conjugated Replicated Class End Port:} \\
 \end{longtable}
 \end{table}
 
-% <table title="Class Port Notation" frame="box" border="2" cellpadding="3" cellspacing="0">
-	% <tr>
-		% <td align="center"><em>Element</em></td>
-		% <td align="center" width="15%"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
-	% </tr>
-	% <tr>
-		% <td>Class End Port</td>
-		% <td align="center">!images/040-ClassEndPort.png!</td>
-		% <td>
-			% <em>External Class End Port:</em>
-			% !images/040-ClassEndPortTextual.png!
-			% <em>Internal Class End Port:</em>
-			% !images/040-ClassEndPortInternalTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Class End Port</td>
-		% <td align="center">!images/040-ConjugatedClassEndPort.png!</td>
-		% <td>
-			% <em>External Conjugated Class End Port:</em>
-			% !images/040-ConjugatedClassEndPortTextual.png!
-			% <em>Internal Conjugated Class End Port:</em>
-			% !images/040-ConjugatedClassEndPortInternalTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Class Relay Port</td>
-		% <td align="center">!images/040-ClassRelayPort.png!</td>
-		% <td>
-			% !images/040-ClassRelayPortTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Class Relay Port</td>
-		% <td align="center">!images/040-ConjugatedClassRelayPort.png!</td>
-		% <td>
-			% !images/040-ConjugatedClassRelayPortTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Replicated Class End Port</td>
-		% <td align="center">!images/040-ReplicatedClassEndPort.png!</td>
-		% <td>
-			% <em>External Replicated Class End Port:</em>
-			% !images/040-ReplicatedClassEndPortTextual.png!
-			% <em>Internal Replicated Class End Port:</em>
-			% !images/040-ReplicatedClassEndPortInternalTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Replicated Class End Port</td>
-		% <td align="center">!images/040-ConjugatedReplicatedClassEndPort.png!</td>
-		% <td>
-			% <em>External Conjugated Replicated Class End Port:</em>
-			% !images/040-ConjugatedReplicatedClassEndPortTextual.png!
-			% <em>Internal Conjugated Replicated Class End Port:</em>
-			% !images/040-ConjugatedReplicatedClassEndPortInternalTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Replicated Class Relay Port</td>
-		% <td align="center">!images/040-ReplicatedClassRelayPort.png!</td>
-		% <td>
-			% !images/040-ReplicatedClassRelayPortTextual.png!
-		% </td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Replicated Class Relay Port</td>
-		% <td align="center">!images/040-ConjugatedReplicatedClassRelayPort.png!</td>
-		% <td>
-			% !images/040-ConjugatedReplicatedClassRelayPortTextual.png!
-		% </td>
-	% </tr>
-% </table>
-
 \subsubsection{Reference Ports}
 
-These symbols can only appear on the border of an ActorReference symbol. Since the type of port is defined 
-in the ActorClass, no textual notation for the Reference Ports exists.
+These symbols can only appear on the border of an actor class. Since the type of port is defined 
+in the actor class, no textual notation for the Reference Ports exists.
+
+The table \ref{tab:reference_port_notation} shows all kinds of reference ports with textual and graphical notation.
 
 \begin{table}
-\caption{Title}
+\caption{Reference Port Notation}
+\label{tab:reference_port_notation}
 \begin{tabular}{|c|c|c|}
 \hline
  \textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
@@ -323,60 +226,29 @@ in the ActorClass, no textual notation for the Reference Ports exists.
 \end{tabular}
 \end{table}
 
-
-% <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
-	% <tr>
-		% <td align="center"><em>Element</em></td>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
-	% </tr>
-	% <tr>
-		% <td>Reference Port</td>
-		% <td align="center">!images/040-ReferencePort.png!</td>
-		% <td align="center">_implicit_</td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Reference Port</td>
-		% <td align="center">!images/040-ConjugatedReferencePort.png!</td>
-		% <td align="center">_implicit_</td>
-	% </tr>
-	% <tr>
-		% <td>Replicated Reference Port</td>
-		% <td align="center">!images/040-ReplicatedReferencePort.png!</td>
-		% <td align="center">_implicit_</td>
-	% </tr>
-	% <tr>
-		% <td>Conjugated Replicated Reference Port</td>
-		% <td align="center">!images/040-ConjugatedReplicatedReferencePort.png!</td>
-		% <td align="center">_implicit_</td>
-	% </tr>
-% </table>
-
 \section{DataClass}
 
 \subsection{Description}
 
-The DataClass enables the modeling of hierarchical complex datatypes and operations on them. The DataClass 
-is the equivalent to a Class in languages like Java or C++, but has less features. The content of a 
-DataClass can always be sent via message between actors (defined as message data in ProtocolClass).
+The \room{DataClass} enables the modeling of hierarchical complex data types and operations on them.
+The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a 
+data class can always be sent via message between actors (defined as message data in a \room{ProtocolClass}).
 
 \subsection{Notation}
   
 Example: DataClass using PrimitiveTypes
 
 \includegraphics{images/040-DataClass1.png}
-% !images/040-DataClass1.png!
 
 Example: DataClass using other DataClasses:
 
 \includegraphics{images/040-DataClass2.png}
-% !images/040-DataClass2.png!
 
 \section{Layering}
 
 \subsection{Description}
 
-In addition to the Actor containment hierarchies, Layering provides another method to hierarchically 
+In addition to the actor containment hierarchies, layering provides another method to hierarchically 
 structure a software system. Layering and actor hierarchies with port to port connections can be mixed on 
 every level of granularity.
 \begin{enumerate}
@@ -409,33 +281,6 @@ Protocol as \textit{timer} or \textit{digitalIO} will be connected to the specif
 \includegraphics[scale=0.5]{images/040-LayeringApplicationLayerTextual.png} \\ \hline
 \end{tabular}
 \end{table}
-
-% <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
-	% <tr>
-		% <td align="center"><em>Description</em></td>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
-	% </tr>
-	% <tr>
-		% <td>The Layer Connections in this model define which services are provided by the 
-_ServiceLayer_  (_digitalIO_ and _timer_)</td>
-		% <td>!images/040-LayeringModel.png!</td>
-		% <td>!images/040-LayeringModelTextual.png!</td>
-	% </tr>
-	% <tr>
-		% <td>The implementation of the services (SPPs) can be delegated to sub actors. In this case the 
-actor _ServiceLayer_ relays (delegates) the implementation services _digitalIO_ and _timer_ to sub 
-actors</td>
-		% <td>!images/040-LayeringServiceLayer.png!</td>
-		% <td>!images/040-LayeringServiceLayerTextual.png!</td>
-	% </tr>
-	% <tr>
-		% <td>Every Actor inside the _ApplicationLayer_ that contains an SAP with the same Protocol as 
-_timer_ or _digitalIO_ will be connected to the specified SPP</td>
-		% <td>!images/040-LayeringApplicationLayer.png!</td>
-		% <td>!images/040-LayeringApplicationLayerTextual.png!</td>
-	% </tr>
-% </table>
 
 \section{Finite State Machines}
 
@@ -490,9 +335,9 @@ The simpler flat finite state machines are composed of the following elements:
 \end{table}
 % <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 	% <tr>
-		% <td align="center"><em>Description</em></td>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
+		% <td align="center">\emph{Description}</td>
+		% <td align="center">\emph{Graphical Notation}</td>
+		% <td align="center">\emph{Textual Notation}</td>
 	% </tr>
 	% <tr>
 		% <td>State</td>
@@ -549,9 +394,9 @@ A few modeling elements are added to the set listed above:
 
 % <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
 	% <tr>
-		% <td align="center"><em>Description</em></td>
-		% <td align="center"><em>Graphical Notation</em></td>
-		% <td align="center"><em>Textual Notation</em></td>
+		% <td align="center">\emph{Description}</td>
+		% <td align="center">\emph{Graphical Notation}</td>
+		% <td align="center">\emph{Textual Notation}</td>
 	% </tr>
 	% <tr>
 		% <td>State with sub state machine</td>

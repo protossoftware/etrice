@@ -4,168 +4,120 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Layering</title> 
+<head><title>eTrice Models and Their Relations</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 375--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse53.html" >next</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch14.html" >next</a>] [<a 
 href="etrice-docse51.html" >prev</a>] [<a 
 href="etrice-docse51.html#tailetrice-docse51.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse52.html">tail</a>] [<a 
-href="etrice-docch12.html#etrice-docse52.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">12.5   </span> <a 
- id="x66-9900012.5"></a>Layering</h3>
-<!--l. 377--><p class="noindent" >
+href="etrice-docch13.html#etrice-docse52.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">13.2   </span> <a 
+ id="x67-12700013.2"></a>eTrice Models and Their Relations</h3>
+<!--l. 3--><p class="noindent" >eTrice comprises several models:
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.5.1   </span> <a 
- id="x66-10000012.5.1"></a>Description</h4>
-<!--l. 379--><p class="noindent" >In addition to the Actor containment hierarchies, Layering provides another method to hierarchically
-structure a software system. Layering and actor hierarchies with port to port connections can be mixed
-on every level of granularity.
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x66-100002x1">an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined
-     by a ProtocolClass
+     <ul class="itemize1">
+     <li class="itemize">the ROOM model (*.room) &#8211; defines model classes and the logical structure of the model
      </li>
-     <li 
-  class="enumerate" id="x66-100004x2">an ActorClass can define a Service Access Point (SAP) if it needs a service, defined by a
-     ProtocolClass
+     <li class="itemize">Config model (*.config) &#8211; defines configuration values for attributes
      </li>
-     <li 
-  class="enumerate" id="x66-100006x3">for  a  given  Actor  hierarchy,  a  LayerConnection  defines  which  SAP  will  be  satisfied  by
-     (connected to) which SPP</li></ol>
-<!--l. 391--><p class="noindent" >
+     <li class="itemize">Physical model (*.etphys) &#8211; defines the structure and properties of the physical system
+     </li>
+     <li class="itemize">Mapping model (*.etmap) &#8211; defines a mapping from logical elements to physical elements</li></ul>
+<!--l. 12--><p class="noindent" >In the following diagram the models and their relations are depicted. The meaning of the arrows is:
+uses/references.
+</p><!--l. 15--><p class="noindent" ><img 
+src="images/080-models.jpg" alt="PIC"  
+ />
+</p><!--l. 18--><p class="noindent" >In the following sections we will describe those models with emphasis of their cross relations.
+</p><!--l. 20--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.5.2   </span> <a 
- id="x66-10100012.5.2"></a>Notation</h4>
-<div class="table">
+<h4 class="subsectionHead"><span class="titlemark">13.2.1   </span> <a 
+ id="x67-12800013.2.1"></a>The ROOM Model</h4>
+<!--l. 22--><p class="noindent" >The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems. Thereby the
+three latter form a hierarchy. The @LogicalSystem@ is the top level element of the structure. It contains
+references to <span 
+class="ec-lmtt-10">SubSystemClass </span>elements. The <span 
+class="ec-lmtt-10">SubSystemClass </span>in turn contain references to <span 
+class="ec-lmtt-10">ActorClass</span>
+elements which again contain (recursively) references to <span 
+class="ec-lmtt-10">ActorClass </span>elements. The complete structural
+hierarchy implies a tree which has the <span 
+class="ec-lmtt-10">LogicalSystem </span>as root and where each reference stands for a new node
+with possibly further branches.
+</p><!--l. 30--><p class="noindent" >Let&#8217;s consider a simple example. It doesn&#8217;t implement any meaningful and completely omits behavioral and
+other aspects.
+</p><!--l. 33--><p class="noindent" ><img 
+src="images/080-room.jpg" alt="PIC"  
+ />
+</p><!--l. 36--><p class="noindent" >When a <span 
+class="ec-lmtt-10">LogicalSystem </span>is instantiated then recursively all of the contained referenced elements are
+instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this
+(the third line in the white boxes shows some mapping information, s.b.):
+</p><!--l. 40--><p class="noindent" ><img 
+src="images/080-instances.jpg" alt="PIC"  
+ />
                                                                                  
                                                                                  
-<!--l. 394--><p class="noindent" ></p><hr class="float" /><div class="float" 
->
+</p><!--l. 44--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">13.2.2   </span> <a 
+ id="x67-12900013.2.2"></a>The Config Model</h4>
+<!--l. 46--><p class="noindent" >Once we have the ROOM class model we can configure values using the Config model. This can be done on
+the class level and/or on the instance level. Values defined for class attributes are used for all instances unless
+there is an instance value configured for the same attribute.
+</p><!--l. 50--><p class="noindent" ><img 
+src="images/080-config.jpg" alt="PIC"  
+ />
+</p><!--l. 53--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">13.2.3   </span> <a 
+ id="x67-13000013.2.3"></a>The Physical Model</h4>
+<!--l. 55--><p class="noindent" >The physical model defines the physical resources onto which the logical system will be deployed. It is
+possible to define runtime classes which (currently) only defines the overall execution model of the
+platform.
+</p><!--l. 59--><p class="noindent" ><img 
+src="images/080-runtimes.jpg" alt="PIC"  
+ />
+</p><!--l. 62--><p class="noindent" >The physical system is composed of @Node@ references where each @Node@ is defined as a class referencing a
+@RuntimeClass@ and defining @Threads@.
+</p><!--l. 65--><p class="noindent" ><img 
+src="images/080-phys.jpg" alt="PIC"  
+ />
+</p><!--l. 68--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">13.2.4   </span> <a 
+ id="x67-13100013.2.4"></a>The Mapping Model</h4>
+<!--l. 70--><p class="noindent" >The last model finally combines all this information by mapping logical to physical entities.
+</p><!--l. 72--><p class="noindent" ><img 
+src="images/080-map.jpg" alt="PIC"  
+ />
+</p><!--l. 75--><p class="noindent" >The result of the mapping is also depicted in above tree diagram of the instances. All actor instances
+(the white boxes) are mapped to a node and a thread running on this node (shown as @ <span 
+class="ec-lmsso-10">node </span>:
+<span 
+class="ec-lmsso-10">thread</span>).
                                                                                  
                                                                                  
-<div class="tabular"> <table id="TBL-11" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-11-1g"><col 
-id="TBL-11-1" /></colgroup><colgroup id="TBL-11-2g"><col 
-id="TBL-11-2" /></colgroup><colgroup id="TBL-11-3g"><col 
-id="TBL-11-3" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-1-1"  
-class="td11"> <!--l. 396--><p class="noindent" ><span 
-class="ecbx-1000">Description</span>         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-1-2"  
-class="td11"> <span 
-class="ecbx-1000">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-1-3"  
-class="td11"> <span 
-class="ecbx-1000">Textual Notation  </span></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-2-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 397--><p class="noindent" >
- The Layer
-  Connections in this
-  model define which
-  services are
-  provided by the
-  <span 
-class="ecti-1000">ServiceLayer</span>
-  (<span 
-class="ecti-1000">digitalIO </span>and
-  <span 
-class="ecti-1000">timer</span>)</p></div>
-  <!--l. 398--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-2"  
-class="td11">         <img 
-src="images/040-LayeringModel.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-3"  
-class="td11">        <img 
-src="images/040-LayeringModelTextual.png" alt="PIC"  
- />            </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-3-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 401--><p class="noindent" >
- The
-  implementation of
-  the services (SPPs)
-  can be delegated to
-  sub actors. In this
-  case the actor
-  <span 
-class="ecti-1000">ServiceLayer </span>relays
-  (delegates) the
-  implementation
-  services <span 
-class="ecti-1000">digitalIO</span>
-  and <span 
-class="ecti-1000">timer </span>to sub
-  actors</p></div>
-  <!--l. 403--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-2"  
-class="td11">         <img 
-src="images/040-LayeringServiceLayer.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-3"  
-class="td11">        <img 
-src="images/040-LayeringServiceLayerTextual.png" alt="PIC"  
- />            </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-4-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 406--><p class="noindent" >
- Every Actor inside
-  the
-  <span 
-class="ecti-1000">ApplicationLayer</span>
-  that contains an
-  SAP with the same
-  Protocol as <span 
-class="ecti-1000">timer</span>
-  or <span 
-class="ecti-1000">digitalIO </span>will be
-  connected to the
-  specified SPP</p></div>
-  <!--l. 407--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-2"  
-class="td11">         <img 
-src="images/040-LayeringApplicationLayer.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-3"  
-class="td11">        <img 
-src="images/040-LayeringApplicationLayerTextual.png" alt="PIC"  
- />            </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-5-1"  
-class="td11">                   </td></tr></table></div>
                                                                                  
                                                                                  
-</div><hr class="endfloat" />
-</div>
-<!--l. 421--><p class="noindent" >_ServiceLayer_ (_digitalIO_ and _timer_)&#x003C;/td&#x003E; actor _ServiceLayer_ relays (delegates) the
-implementation services _digitalIO_ and _timer_ to sub actors&#x003C;/td&#x003E; _timer_ or _digitalIO_ will be
-connected to the specified SPP&#x003C;/td&#x003E;
                                                                                  
                                                                                  
 </p>
-<!--l. 440--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse53.html" >next</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch14.html" >next</a>] [<a 
 href="etrice-docse51.html" >prev</a>] [<a 
 href="etrice-docse51.html#tailetrice-docse51.html" >prev-tail</a>] [<a 
 href="etrice-docse52.html" >front</a>] [<a 
-href="etrice-docch12.html#etrice-docse52.html" >up</a>] </p></div>
-<!--l. 440--><p class="noindent" ><a 
+href="etrice-docch13.html#etrice-docse52.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse52.html"></a> </p> 
 </body></html> 

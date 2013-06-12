@@ -4,57 +4,118 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Add a data class</title> 
+<head><title>Define Actor Structure and Behavior</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 41--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 138--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse23.html" >next</a>] [<a 
 href="etrice-docse21.html" >prev</a>] [<a 
 href="etrice-docse21.html#tailetrice-docse21.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse22.html">tail</a>] [<a 
 href="etrice-docch7.html#etrice-docse22.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.3   </span> <a 
- id="x31-450007.3"></a>Add a data class</h3>
-<!--l. 43--><p class="noindent" >Position the cursor outside any class definition and right click the mouse within the editor window. From
-the context menu select <span 
-class="ecti-1000">Content Assist </span>(or Ctrl+Space).
-</p><!--l. 46--><p class="noindent" ><img 
-src="images/025-SendingData01.png" alt="PIC"  
+<h3 class="sectionHead"><span class="titlemark">7.6   </span> <a 
+ id="x31-500007.6"></a>Define Actor Structure and Behavior</h3>
+<!--l. 140--><p class="noindent" >Save the model and visit the outline view. Within the outline view, right click on the <span 
+class="ec-lmsso-10">MrPong </span>actor and select
+<span 
+class="ec-lmsso-10">Edit Structure</span>. Select an <span 
+class="ec-lmsso-10">Interface Port </span>from the toolbox and add it to MrPong. Name the Port <span 
+class="ec-lmsso-10">PingPongPort</span>
+and select the <span 
+class="ec-lmsso-10">PingPongProtocol</span>.
+</p><!--l. 144--><p class="noindent" ><img 
+src="images/025-SendingData02.png" alt="PIC"  
  />
-</p><!--l. 49--><p class="noindent" >Select <span 
-class="ecti-1000">DataClass - data class skeleton </span>and name it <span 
-class="ecti-1000">DemoData</span>. Remove the operations and add the
-following Attributes:
+</p><!--l. 147--><p class="noindent" >Do the same with MrPing but mark the port as <span 
+class="ec-lmsso-10">conjugated</span>
+</p><!--l. 149--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">7.6.1   </span> <a 
+ id="x31-510007.6.1"></a>Define MrPongs behavior</h4>
+<!--l. 151--><p class="noindent" >Within the outline view, right click MrPong and select <span 
+class="ec-lmsso-10">Edit Behavior</span>. Create the following state
+machine:
+</p><!--l. 154--><p class="noindent" ><img 
+src="images/025-SendingData04.png" alt="PIC"  
+ />
+</p><!--l. 157--><p class="noindent" >The transition dialogues should look like this: For <span 
+class="ec-lmsso-10">ping</span>:
+</p><!--l. 160--><p class="noindent" ><img 
+src="images/025-SendingData05.png" alt="PIC"  
+ />
+</p><!--l. 163--><p class="noindent" >For <span 
+class="ec-lmsso-10">pingSimple</span>:
+</p><!--l. 165--><p class="noindent" ><img 
+src="images/025-SendingData06.png" alt="PIC"  
+ />
+</p><!--l. 169--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">7.6.2   </span> <a 
+ id="x31-520007.6.2"></a>Define MrPing behavior</h4>
+<!--l. 171--><p class="noindent" >Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of
+content assist create a new operation.
+</p><!--l. 174--><p class="noindent" ><img 
+src="images/025-SendingData07.png" alt="PIC"  
+ />
+</p><!--l. 177--><p class="noindent" >Name the operation <span 
+class="ec-lmsso-10">printData </span>and define the DemoData as a parameter.
+</p><!--l. 179--><p class="noindent" >Fill in the following code:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-11">
-DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
+<div class="verbatim" id="verbatim-14">
+Operation&#x00A0;printData(d:&#x00A0;DemoData)&#x00A0;:&#x00A0;void&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int32Val:&#x00A0;%d\\n\",d.int32Val);"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.float64Val:&#x00A0;%f\\n\",d.float64Val);"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int8Array:&#x00A0;\");"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"for(int&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x003C;d.int8Array.length;&#x00A0;i++)&#x00A0;{"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"%d&#x00A0;\",d.int8Array[i]);}"
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"\\nd.stringVal:&#x00A0;%s\\n\",d.stringVal);"
 &#x00A0;<br />}
 </div>
-<!--l. 59--><p class="nopar" >
-</p><!--l. 61--><p class="noindent" >Save the model and visit the outline view. Note that the outline view contains all data elements as
-defined in the model.
+<!--l. 191--><p class="nopar" >
+</p><!--l. 194--><p class="noindent" >For MrPing create the following state machine: (Remember that you can copy and paste the action code from
+the tutorial directory.)
+</p><!--l. 197--><p class="noindent" ><img 
+src="images/025-SendingData08.png" alt="PIC"  
+ />
+</p><!--l. 200--><p class="noindent" >The transition dialogues should look like this:
+</p><!--l. 202--><p class="noindent" >For <span 
+class="ec-lmsso-10">init</span>:
+</p><!--l. 204--><p class="noindent" ><img 
+src="images/025-SendingData09.png" alt="PIC"  
+ />
+</p><!--l. 207--><p class="noindent" >For <span 
+class="ec-lmsso-10">wait1</span>:
+</p><!--l. 209--><p class="noindent" ><img 
+src="images/025-SendingData10.png" alt="PIC"  
+ />
+</p><!--l. 212--><p class="noindent" >For <span 
+class="ec-lmsso-10">next</span>:
+</p><!--l. 214--><p class="noindent" ><img 
+src="images/025-SendingData11.png" alt="PIC"  
+ />
+</p><!--l. 217--><p class="noindent" >For <span 
+class="ec-lmsso-10">wait2</span>:
+</p><!--l. 219--><p class="noindent" ><img 
+src="images/025-SendingData12.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
 </p>
-<!--l. 64--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 222--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse23.html" >next</a>] [<a 
 href="etrice-docse21.html" >prev</a>] [<a 
 href="etrice-docse21.html#tailetrice-docse21.html" >prev-tail</a>] [<a 
 href="etrice-docse22.html" >front</a>] [<a 
 href="etrice-docch7.html#etrice-docse22.html" >up</a>] </p></div>
-<!--l. 64--><p class="noindent" ><a 
+<!--l. 222--><p class="noindent" ><a 
  id="tailetrice-docse22.html"></a> </p> 
 </body></html> 

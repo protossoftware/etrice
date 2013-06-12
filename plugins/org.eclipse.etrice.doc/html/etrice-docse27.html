@@ -4,90 +4,121 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Generate and run the model</title> 
+<head><title>Setup the model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 232--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 35--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse28.html" >next</a>] [<a 
 href="etrice-docse26.html" >prev</a>] [<a 
 href="etrice-docse26.html#tailetrice-docse26.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse27.html">tail</a>] [<a 
-href="etrice-docch7.html#etrice-docse27.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.8   </span> <a 
- id="x36-520007.8"></a>Generate and run the model</h3>
-<!--l. 234--><p class="noindent" >Generate the code by right click to <span 
-class="ecbx-1000">gen_SendingData.launch </span>and run it as <span 
-class="ecbx-1000">gen_SendingData</span>. Run
-the model. The output should look like this:
+href="etrice-docch8.html#etrice-docse27.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">8.2   </span> <a 
+ id="x37-580008.2"></a>Setup the model</h3>
+     <ul class="itemize1">
+     <li class="itemize">Use the <span 
+class="ec-lmsso-10">New Model Wizzard </span>to create a new eTrice project and name it <span 
+class="ec-lmsso-10">PedLightsController</span>.
+     </li>
+     <li class="itemize">Copy  the  package  <span 
+class="ec-lmsso-10">org.eclipse.etrice.tutorials.PedLightGUI  </span>to  your  <span 
+class="ec-lmsso-10">src  </span>directory  (see  blinky
+     tutorial).
+     </li>
+     <li class="itemize">In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134
+     (registration). The error markers will disappear after the code is generated from the model.
+     </li>
+     <li class="itemize">
+     <div class="flushleft" 
+>
+<!--l. 44--><p class="noindent" >
+Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run
+the model directly in the tutorial directory.</p></div>
+     </li>
+     <li class="itemize">Adapt the import statement to your path.</li></ul>
                                                                                  
                                                                                  
-</p>
-<div class="verbatim" id="verbatim-15">
-type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;1
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;2
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;3
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;4
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;5
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;6
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;7
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;8
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;9
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;10
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />d.int32Val:&#x00A0;4711
-&#x00A0;<br />d.float64Val:&#x00A0;0,000000
-&#x00A0;<br />d.int8Array:&#x00A0;1&#x00A0;2&#x00A0;3&#x00A0;4&#x00A0;5&#x00A0;6&#x00A0;7&#x00A0;8&#x00A0;9&#x00A0;10
-&#x00A0;<br />d.stringVal:&#x00A0;empty
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />d.int32Val:&#x00A0;815
-&#x00A0;<br />d.float64Val:&#x00A0;3,141234
-&#x00A0;<br />d.int8Array:&#x00A0;100&#x00A0;101&#x00A0;102&#x00A0;103&#x00A0;104&#x00A0;105&#x00A0;106&#x00A0;107&#x00A0;108&#x00A0;109
-&#x00A0;<br />d.stringVal:&#x00A0;some&#x00A0;contents
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />quit
-&#x00A0;<br />echo:&#x00A0;quit
+<div class="verbatim" id="verbatim-17">
+import&#x00A0;room.basic.service.timing.*&#x00A0;from
+&#x00A0;<br />"../../org.eclipse.etrice.modellib/models/TimingService.room"
 </div>
-<!--l. 286--><p class="nopar" >
+<!--l. 53--><p class="nopar" >
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Generate the code from the model.
+     </li>
+     <li class="itemize">Add the org.eclipse.etrice.modellib to the Java Class Path of your project.
+     </li>
+     <li class="itemize">All error markers should be disappeared and the model should be operable.
+     </li>
+     <li class="itemize">Arrange the Structure and the Statemachines to understand the model</li></ul>
+
+<!--l. 63--><p class="noindent" ><img 
+src="images/030-PedLights01.png" alt="PIC"  
+ /> The <span 
+class="ec-lmsso-10">GuiAdapter </span>represents the interface to the external code. It registers its <span 
+class="ec-lmsso-10">ControlPort </span>by the external
+code.
+</p><!--l. 68--><p class="noindent" ><img 
+src="images/030-PedLights02.png" alt="PIC"  
+ /> Visit the initial transition to understand the registration. The actor handles the incoming messages as
+usual and controls the traffic lights as known from blinky.
+</p><!--l. 73--><p class="noindent" ><img 
+src="images/030-PedLights03.png" alt="PIC"  
+ /> The <span 
+class="ec-lmsso-10">Controller </span>receives the <span 
+class="ec-lmsso-10">start </span>message and controls the timing of the lights. Note that the <span 
+class="ec-lmsso-10">start</span>
+message will be sent from the external code whenever the <span 
+class="ec-lmsso-10">REQUEST </span>button is pressed.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Visit the model and take a closer look to the following elements:
+         <ol  class="enumerate1" >
+         <li 
+  class="enumerate" id="x37-58002x1">PedControlProtocol =&#x003E; notice that the start message is defined as usual
+         </li>
+         <li 
+  class="enumerate" id="x37-58004x2">Initial transition of the <span 
+class="ec-lmsso-10">GuiAdapter </span>=&#x003E; see the registration
+         </li>
+         <li 
+  class="enumerate" id="x37-58006x3">The  <span 
+class="ec-lmsso-10">Controller  </span>=&#x003E;  notice  that  the  <span 
+class="ec-lmsso-10">Controller  </span>receives  the  external  message  (not  the
+         <span 
+class="ec-lmsso-10">GuiAdapter</span>). The <span 
+class="ec-lmsso-10">GuiAdapter </span>just provides its port and handles the incoming messages.
+         </li>
+         <li 
+  class="enumerate" id="x37-58008x4">Visit the hand written code =&#x003E; see the import statement of the protocol class and the
+         usage of the port.</li></ol>
+     </li>
+     <li class="itemize">Generate and test the model
+     </li>
+     <li class="itemize">Take a look at the generated MSC =&#x003E; notice that the start message will shown as if the <span 
+class="ec-lmsso-10">GuiAdapter</span>
+     had sent it.</li></ul>
+
+<!--l. 94--><p class="noindent" ><img 
+src="images/030-PedLights04.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
 </p>
-<!--l. 288--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse28.html" >next</a>] [<a 
 href="etrice-docse26.html" >prev</a>] [<a 
 href="etrice-docse26.html#tailetrice-docse26.html" >prev-tail</a>] [<a 
 href="etrice-docse27.html" >front</a>] [<a 
-href="etrice-docch7.html#etrice-docse27.html" >up</a>] </p></div>
-<!--l. 288--><p class="noindent" ><a 
+href="etrice-docch8.html#etrice-docse27.html" >up</a>] </p></div>
+<!--l. 97--><p class="noindent" ><a 
  id="tailetrice-docse27.html"></a> </p> 
 </body></html> 

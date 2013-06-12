@@ -4,122 +4,83 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Setup the model</title> 
+<head><title>Building the C runtime system</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 35--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse31.html" >next</a>] [<a 
+<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch10.html" >next</a>] [<a 
 href="etrice-docse29.html" >prev</a>] [<a 
 href="etrice-docse29.html#tailetrice-docse29.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse30.html">tail</a>] [<a 
-href="etrice-docch8.html#etrice-docse30.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">8.2   </span> <a 
- id="x40-560008.2"></a>Setup the model</h3>
-     <ul class="itemize1">
-     <li class="itemize">Use the <span 
-class="ecti-1000">New Model Wizzard </span>to create a new eTrice project and name it <span 
-class="ecti-1000">PedLightsController</span>.
-     </li>
-     <li class="itemize">Copy the package <span 
-class="ecti-1000">org.eclipse.etrice.tutorials.PedLightGUI </span>to your <span 
-class="ecti-1000">src </span>directory (see blinky
-     tutorial).
-     </li>
-     <li class="itemize">In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134
-     (registration). The error markers will disappear after the code is generated from the model.
-     </li>
-     <li class="itemize">
-     <div class="flushleft" 
->
-<!--l. 44--><p class="noindent" >
-Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file,
-or run the model directly in the tutorial directory.</p></div>
-     </li>
-     <li class="itemize">Adapt the import statement to your path.</li></ul>
-                                                                                 
-                                                                                 
-<div class="verbatim" id="verbatim-17">
-import&#x00A0;room.basic.service.timing.*&#x00A0;from
-&#x00A0;<br />"../../org.eclipse.etrice.modellib/models/TimingService.room"
-</div>
-<!--l. 53--><p class="nopar" >
-</p>
-     <ul class="itemize1">
-     <li class="itemize">Generate the code from the model.
-     </li>
-     <li class="itemize">Add the org.eclipse.etrice.modellib to the Java Class Path of your project.
-     </li>
-     <li class="itemize">All error markers should be disappeared and the model should be operable.
-     </li>
-     <li class="itemize">Arrange the Structure and the Statemachines to understand the model</li></ul>
-
-<!--l. 63--><p class="noindent" ><img 
-src="images/030-PedLights01.png" alt="PIC"  
- /> The <span 
-class="ecti-1000">GuiAdapter </span>represents the interface to the external code. It registers its <span 
-class="ecti-1000">ControlPort </span>by the
-external code.
-</p><!--l. 68--><p class="noindent" ><img 
-src="images/030-PedLights02.png" alt="PIC"  
- /> Visit the initial transition to understand the registration. The actor handles the incoming messages
-as usual and controls the traffic lights as known from blinky.
-</p><!--l. 73--><p class="noindent" ><img 
-src="images/030-PedLights03.png" alt="PIC"  
- /> The <span 
-class="ecti-1000">Controller </span>receives the <span 
-class="ecti-1000">start </span>message and controls the timing of the lights. Note that
-the <span 
-class="ecti-1000">start </span>message will be sent from the external code whenever the <span 
-class="ecti-1000">REQUEST </span>button is
-pressed.
-</p>
-     <ul class="itemize1">
-     <li class="itemize">Visit the model and take a closer look to the following elements:
-         <ol  class="enumerate1" >
-         <li 
-  class="enumerate" id="x40-56002x1">PedControlProtocol =&#x003E; notice that the start message is defined as usual
-         </li>
-         <li 
-  class="enumerate" id="x40-56004x2">Initial transition of the <span 
-class="ecti-1000">GuiAdapter </span>=&#x003E; see the registration
-         </li>
-         <li 
-  class="enumerate" id="x40-56006x3">The <span 
-class="ecti-1000">Controller </span>=&#x003E; notice that the <span 
-class="ecti-1000">Controller </span>receives the external message (not the
-         <span 
-class="ecti-1000">GuiAdapter</span>). The <span 
-class="ecti-1000">GuiAdapter </span>just provides its port and handles the incoming messages.
-         </li>
-         <li 
-  class="enumerate" id="x40-56008x4">Visit the hand written code =&#x003E; see the import statement of the protocol class and the
-         usage of the port.</li></ol>
-     </li>
-     <li class="itemize">Generate and test the model
-     </li>
-     <li class="itemize">Take a look at the generated MSC =&#x003E; notice that the start message will shown as if the
-     <span 
-class="ecti-1000">GuiAdapter </span>had sent it.</li></ul>
-
-<!--l. 94--><p class="noindent" ><img 
-src="images/030-PedLights04.png" alt="PIC"  
+href="etrice-docch9.html#etrice-docse30.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">9.2   </span> <a 
+ id="x41-620009.2"></a>Building the C runtime system</h3>
+<!--l. 59--><p class="noindent" >The C runtime system contains some basic functionalities to run the generated models. The so called runtime
+is common for all C projects. The requirements for several projects may differ depending on the functionality of
+the model or the resources of the different platforms. Therefore the runtime is configurable in terms of
+message queue size, frequency and memory alignment. The configuration file <span 
+class="ec-lmsso-10">etRuntimeConfig.h </span>is located in
+<span 
+class="ec-lmsso-10">src/config</span>.
+</p><!--l. 65--><p class="noindent" >After changing the configuration, the runtime must be built.
+</p><!--l. 67--><p class="noindent" >Open the properties of the <span 
+class="ec-lmsso-10">org.eclipse.runtime.c </span>project and select <span 
+class="ec-lmsso-10">C/C++ Build-&#x003E;Settings-&#x003E;Tool Settings</span>
+and select <span 
+class="ec-lmsso-10">Includes</span>.
+</p><!--l. 70--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC08.png" alt="PIC"  
  />
+</p><!--l. 73--><p class="noindent" >Verify the include paths
+</p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmsso-10">src/config</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">src/common</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">src/platforms/generic</span></li></ul>
+<!--l. 81--><p class="noindent" >Within the Setting dialog select the tab <span 
+class="ec-lmsso-10">Build Artefact </span>and select <span 
+class="ec-lmsso-10">Static Library</span>
+</p><!--l. 83--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC09.png" alt="PIC"  
+ />
+</p><!--l. 86--><p class="noindent" >Build the runtime by clicking
+</p><!--l. 88--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC10.png" alt="PIC"  
+ />
+</p><!--l. 91--><p class="noindent" >The runtime library should be created.
+</p><!--l. 93--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC11.png" alt="PIC"  
+ />
+</p><!--l. 96--><p class="noindent" >For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build
+project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic
+links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A
+specific library file must exist within the project. Such specific runtime libraries might be referenced from
+several applications.
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
                                                                                  
                                                                                  
 </p>
-<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse31.html" >next</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch10.html" >next</a>] [<a 
 href="etrice-docse29.html" >prev</a>] [<a 
 href="etrice-docse29.html#tailetrice-docse29.html" >prev-tail</a>] [<a 
 href="etrice-docse30.html" >front</a>] [<a 
-href="etrice-docch8.html#etrice-docse30.html" >up</a>] </p></div>
-<!--l. 97--><p class="noindent" ><a 
+href="etrice-docch9.html#etrice-docse30.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse30.html"></a> </p> 
 </body></html> 

@@ -4,60 +4,74 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Create a launch configuration to start the C code generator</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 103--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse35.html" >next</a>] [<a 
-href="etrice-docch10.html" >prev</a>] [<a 
-href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
+href="etrice-docse33.html" >prev</a>] [<a 
+href="etrice-docse33.html#tailetrice-docse33.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse34.html">tail</a>] [<a 
 href="etrice-docch10.html#etrice-docse34.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">10.1   </span> <a 
- id="x46-6200010.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >In this tutorial you will learn how to create a model for C from scratch. There are some more
-steps to do in C compared to Java. The goal is to get familiar with the additional steps. The
-Java tutorial is a prerequisite for the following explanations. You will perform the following
-steps:
-</p><!--l. 10--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x46-62002x1">create a new model from scratch for C
-     </li>
-     <li 
-  class="enumerate" id="x46-62004x2">create structure and behavior similar to Java
-     </li>
-     <li 
-  class="enumerate" id="x46-62006x3">create a launch configuration for the C code generator
-     </li>
-     <li 
-  class="enumerate" id="x46-62008x4">setup the C environment
-     </li>
-     <li 
-  class="enumerate" id="x46-62010x5">generate the source code
-     </li>
-     <li 
-  class="enumerate" id="x46-62012x6">run the model</li></ol>
-<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
-class="ecti-1000">Setting up the Workspace for C</span>
-<span 
-class="ecti-1000">Projects</span>.
+<h3 class="sectionHead"><span class="titlemark">10.4   </span> <a 
+ id="x46-6700010.4"></a>Create a launch configuration to start the C code generator</h3>
+<!--l. 105--><p class="noindent" >Other than in Java a launch configuration for the C code generator must be created.
+</p><!--l. 107--><p class="noindent" >From the <span 
+class="ec-lmsso-10">Run </span>menu select <span 
+class="ec-lmsso-10">Run Configurations</span>
+</p><!--l. 109--><p class="noindent" ><img 
+src="images/034-HelloWorldC06.png" alt="PIC"  
+ />
+</p><!--l. 112--><p class="noindent" >Within the dialog select <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">C Generator </span>and click the <span 
+class="ec-lmsso-10">New </span>button to create a new launch
+configuration.
+</p><!--l. 115--><p class="noindent" ><img 
+src="images/034-HelloWorldC07.png" alt="PIC"  
+ />
+</p><!--l. 118--><p class="noindent" >A new configuration should be created. Name it <span 
+class="ec-lmsso-10">gen_HelloWorldC </span>and add the model via one of the <span 
+class="ec-lmsso-10">add</span>
+buttons.
+</p><!--l. 121--><p class="noindent" ><img 
+src="images/034-HelloWorldC08.png" alt="PIC"  
+ />
+</p><!--l. 124--><p class="noindent" >In the <span 
+class="ec-lmsso-10">Refresh </span>tab select <span 
+class="ec-lmsso-10">The entire workspace</span>
+</p><!--l. 126--><p class="noindent" ><img 
+src="images/034-HelloWorldC09.png" alt="PIC"  
+ />
+</p><!--l. 129--><p class="noindent" >In the <span 
+class="ec-lmsso-10">Common </span>tab select <span 
+class="ec-lmsso-10">Shared file </span>and add the <span 
+class="ec-lmsso-10">HelloWorldC </span>project via the <span 
+class="ec-lmsso-10">Browse </span>button.
+</p><!--l. 132--><p class="noindent" ><img 
+src="images/034-HelloWorldC10.png" alt="PIC"  
+ />
+</p><!--l. 135--><p class="noindent" >Apply your changes. The new configuration should now exist in your workspace.
+</p><!--l. 137--><p class="noindent" ><img 
+src="images/034-HelloWorldC11.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
 </p>
-<!--l. 23--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 141--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse35.html" >next</a>] [<a 
-href="etrice-docch10.html" >prev</a>] [<a 
-href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
+href="etrice-docse33.html" >prev</a>] [<a 
+href="etrice-docse33.html#tailetrice-docse33.html" >prev-tail</a>] [<a 
 href="etrice-docse34.html" >front</a>] [<a 
 href="etrice-docch10.html#etrice-docse34.html" >up</a>] </p></div>
-<!--l. 23--><p class="noindent" ><a 
+<!--l. 141--><p class="noindent" ><a 
  id="tailetrice-docse34.html"></a> </p> 
 </body></html> 

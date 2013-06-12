@@ -1,6 +1,6 @@
-\chapter{eTrice Models and Their Relations}
+\section{\eTrice{} Models and Their Relations}
 
-eTrice comprises several models:
+\eTrice{} comprises several models:
 
 \begin{itemize}
 \item the ROOM model (*.room) -- defines model classes and the logical structure of the model
@@ -17,7 +17,7 @@ uses/references.
 
 In the following sections we will describe those models with emphasis of their cross relations.
 
-\section{The ROOM Model}
+\subsection{The ROOM Model}
 
 The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems.
 Thereby the three latter form a hierarchy. The @LogicalSystem@ is the top level element of the structure. 
@@ -41,7 +41,7 @@ this (the third line in the white boxes shows some mapping information, s.b.):
 % !{width:40%}images/080-instances.jpg!
 
 
-\section{The Config Model}
+\subsection{The Config Model}
 
 Once we have the ROOM class model we can configure values using the Config model. This can be done on the 
 class level and/or on the instance level. Values defined for class attributes are used for all instances 
@@ -50,7 +50,7 @@ unless there is an instance value configured for the same attribute.
 \includegraphics{images/080-config.jpg}
 % !images/080-config.jpg!
 
-\section{The Physical Model}
+\subsection{The Physical Model}
 
 The physical model defines the physical resources onto which the logical system will be deployed. It is 
 possible to define runtime classes which (currently) only defines the overall execution model of the 
@@ -65,7 +65,7 @@ The physical system is composed of @Node@ references where each @Node@ is define
 \includegraphics{images/080-phys.jpg}
 % !images/080-phys.jpg!
 
-\section{The Mapping Model}
+\subsection{The Mapping Model}
 
 The last model finally combines all this information by mapping logical to physical entities.
 

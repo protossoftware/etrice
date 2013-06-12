@@ -4,48 +4,58 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Setup the include path</title> 
+<head><title>Scope</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 154--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse40.html" >next</a>] [<a 
-href="etrice-docse38.html" >prev</a>] [<a 
-href="etrice-docse38.html#tailetrice-docse38.html" >prev-tail</a>] [<a 
+href="etrice-docch11.html" >prev</a>] [<a 
+href="etrice-docch11.html#tailetrice-docch11.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse39.html">tail</a>] [<a 
-href="etrice-docch10.html#etrice-docse39.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">10.6   </span> <a 
- id="x51-6700010.6"></a>Setup the include path</h3>
-<!--l. 156--><p class="noindent" >Before you can build the application you must setup the include path for the runtime system. Right
-click the project and select <span 
-class="ecti-1000">Properties</span>. Add the include path as described in <span 
-class="ecti-1000">setting up the</span>
+href="etrice-docch11.html#etrice-docse39.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">11.1   </span> <a 
+ id="x52-7300011.1"></a>Scope</h3>
+<!--l. 5--><p class="noindent" >In this tutorial you will create a more complex model. The model implements a simple parser that removes
+comments (block comments and line comments) from a C source file. Therefore we will create two actors.
+One actor is responsible to perform the file operations, while the second actor implements the
+parser.
+</p><!--l. 9--><p class="noindent" >You will perform the following steps:
+</p><!--l. 11--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x52-73002x1">create a new model from scratch for C
+     </li>
+     <li 
+  class="enumerate" id="x52-73004x2">define a protocol
+     </li>
+     <li 
+  class="enumerate" id="x52-73006x3">define your own data type
+     </li>
+     <li 
+  class="enumerate" id="x52-73008x4">create the structure and the behavior by yourself
+     </li>
+     <li 
+  class="enumerate" id="x52-73010x5">generate, build and run the model</li></ol>
+<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
+class="ec-lmsso-10">Setting up the Workspace for C</span>
 <span 
-class="ecti-1000">workspace</span>.
-</p><!--l. 160--><p class="noindent" ><img 
-src="images/034-HelloWorldC14.png" alt="PIC"  
- />
-</p><!--l. 163--><p class="noindent" >Add the runtime library.
-</p><!--l. 165--><p class="noindent" ><img 
-src="images/034-HelloWorldC15.png" alt="PIC"  
- />
-</p><!--l. 168--><p class="noindent" >Recognize the name of the library ("org.eclipse.etrice.runtime.c"). The library file on your disk is
-"liborg.eclipse.etrice.runtime.c.a".
+class="ec-lmsso-10">Projects</span>.
                                                                                  
                                                                                  
 </p>
-<!--l. 171--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 22--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse40.html" >next</a>] [<a 
-href="etrice-docse38.html" >prev</a>] [<a 
-href="etrice-docse38.html#tailetrice-docse38.html" >prev-tail</a>] [<a 
+href="etrice-docch11.html" >prev</a>] [<a 
+href="etrice-docch11.html#tailetrice-docch11.html" >prev-tail</a>] [<a 
 href="etrice-docse39.html" >front</a>] [<a 
-href="etrice-docch10.html#etrice-docse39.html" >up</a>] </p></div>
-<!--l. 171--><p class="noindent" ><a 
+href="etrice-docch11.html#etrice-docse39.html" >up</a>] </p></div>
+<!--l. 22--><p class="noindent" ><a 
  id="tailetrice-docse39.html"></a> </p> 
 </body></html> 

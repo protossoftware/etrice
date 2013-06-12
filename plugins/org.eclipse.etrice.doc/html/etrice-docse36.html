@@ -4,69 +4,48 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create the HelloWorld model</title> 
+<head><title>Setup the include path</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 66--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 154--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse37.html" >next</a>] [<a 
 href="etrice-docse35.html" >prev</a>] [<a 
 href="etrice-docse35.html#tailetrice-docse35.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse36.html">tail</a>] [<a 
 href="etrice-docch10.html#etrice-docse36.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">10.3   </span> <a 
- id="x48-6400010.3"></a>Create the HelloWorld model</h3>
-<!--l. 68--><p class="noindent" >Once the model file is created and the Xtext nature is added, you can create the model as you did it for
-Java. Creating the model is not the focus of this tutorial. Therefore copy and paste the following code
-into your model file. Optionally you can open and layout the diagrams. Recognize the C specific parts:
-</p>
-     <ul class="itemize1">
-     <li class="itemize">The action code contains C instead of Java. Later versions will contain a common action
-     language, but for the moment the action language is target specific.
-     </li>
-     <li class="itemize">The application must be shutdown on model level (see also <span 
-class="ecti-1000">etRuntimeConfig.h</span>).</li></ul>
-                                                                                 
-                                                                                 
-<div class="verbatim" id="verbatim-19">
-RoomModel&#x00A0;HelloWorldCModel&#x00A0;{
-&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from&#x00A0;"../../org.eclipse.etrice.modellib.c/model/Types.room"
-&#x00A0;<br />SubSystemClass&#x00A0;HelloWorldCSubSysClass&#x00A0;{
-&#x00A0;<br />ActorRef&#x00A0;HelloETriceTopRef:AHelloWorldCTop
-&#x00A0;<br />}
-&#x00A0;<br />ActorClass&#x00A0;AHelloWorldCTop&#x00A0;{
-&#x00A0;<br />Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />Behavior&#x00A0;{
-&#x00A0;<br />StateMachine&#x00A0;{
-&#x00A0;<br />Transition&#x00A0;init:&#x00A0;initial&#x00A0;-&#x003E;&#x00A0;state0&#x00A0;{&#x00A0;}
-&#x00A0;<br />State&#x00A0;state0&#x00A0;{
-&#x00A0;<br />entry&#x00A0;{
-&#x00A0;<br />"printf(\"HelloWorldC&#x00A0;!\\n\");"
-&#x00A0;<br />"SubSysClass_shutdown();"
-&#x00A0;<br />"\t\t\t\t\t\t"
-&#x00A0;<br />}
-&#x00A0;<br />}
-&#x00A0;<br />}
-&#x00A0;<br />}
-&#x00A0;<br />}
-&#x00A0;<br />}
-</div>
-<!--l. 101--><p class="nopar" >
+<h3 class="sectionHead"><span class="titlemark">10.6   </span> <a 
+ id="x48-6900010.6"></a>Setup the include path</h3>
+<!--l. 156--><p class="noindent" >Before you can build the application you must setup the include path for the runtime system.
+Right click the project and select <span 
+class="ec-lmsso-10">Properties</span>. Add the include path as described in <span 
+class="ec-lmsso-10">setting up the</span>
+<span 
+class="ec-lmsso-10">workspace</span>.
+</p><!--l. 160--><p class="noindent" ><img 
+src="images/034-HelloWorldC14.png" alt="PIC"  
+ />
+</p><!--l. 163--><p class="noindent" >Add the runtime library.
+</p><!--l. 165--><p class="noindent" ><img 
+src="images/034-HelloWorldC15.png" alt="PIC"  
+ />
+</p><!--l. 168--><p class="noindent" >Recognize the name of the library ("org.eclipse.etrice.runtime.c"). The library file on your disk is
+"liborg.eclipse.etrice.runtime.c.a".
                                                                                  
                                                                                  
 </p>
-<!--l. 103--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 171--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse37.html" >next</a>] [<a 
 href="etrice-docse35.html" >prev</a>] [<a 
 href="etrice-docse35.html#tailetrice-docse35.html" >prev-tail</a>] [<a 
 href="etrice-docse36.html" >front</a>] [<a 
 href="etrice-docch10.html#etrice-docse36.html" >up</a>] </p></div>
-<!--l. 103--><p class="noindent" ><a 
+<!--l. 171--><p class="noindent" ><a 
  id="tailetrice-docse36.html"></a> </p> 
 </body></html> 

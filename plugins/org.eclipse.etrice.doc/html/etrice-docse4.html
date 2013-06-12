@@ -4,175 +4,102 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Basic Concepts</title> 
+<head><title>Create a new model from scratch</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 122--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse5.html" >next</a>] [<a 
 href="etrice-docse3.html" >prev</a>] [<a 
 href="etrice-docse3.html#tailetrice-docse3.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse4.html">tail</a>] [<a 
-href="etrice-docch2.html#etrice-docse4.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">2.2   </span> <a 
- id="x8-120002.2"></a>Basic Concepts</h3>
-<!--l. 124--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.2.1   </span> <a 
- id="x8-130002.2.1"></a>Actor, Port, Protocol</h4>
-<!--l. 126--><p class="noindent" >The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a
-formal interface description. The port is an interaction point where the actor interacts with its outside
-world. Each port has exactly one protocol attached. The sum of all ports builds up the complete interface
-of an actor. Each port can receive messages, with or without data, which are defined in the attached
-protocol. Each message will be handled by the actor&#8217;s behavior (state machine) or will be delegated to the
-actor&#8217;s internal structure.
-</p>
-<div class="table">
-                                                                                 
-                                                                                 
-<!--l. 134--><p class="noindent" ><a 
- id="x8-130011"></a></p><hr class="float" /><div class="float" 
->
-                                                                                 
-                                                                                 
- <div class="caption" 
-><span class="id">Table&#x00A0;2.1: </span><span  
-class="content">Actor and Protocol Example</span></div><!--tex4ht:label?: x8-130011 -->
-<div class="tabular"> <table id="TBL-2" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-2-1g"><col 
-id="TBL-2-1" /></colgroup><colgroup id="TBL-2-2g"><col 
-id="TBL-2-2" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-1-1"  
-class="td11"> <img 
-src="images/040-ActorClass.png" alt="PIC"  
- />                            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-1-2"  
-class="td11"> <img 
-src="images/040-ProtocolClassTextualNotation.png" alt="PIC"  
- />                          </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
-class="td11"> <span 
-class="ecbx-1000">Actor with Subactors  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
-class="td11"> <span 
-class="ecbx-1000">Protocol Definition  </span></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
-class="td11">                       </td></tr></table>
-</div>
-                                                                                 
-                                                                                 
-</div><hr class="endfloat" />
-</div>
-<!--l. 153--><p class="noindent" >The actor provides access protection for its own attributes (including complex types (classical objects)),
-including concurrency protection. An actor has neither public attributes nor public operations. The only
-interaction with the outside world takes place via interface ports. This ensures a high degree
-of re-usability on actor level and provides an effective and safe programming model to the
-developer.
-</p><!--l. 158--><p class="noindent" >Receiving a message via a port will trigger the internal state machine. A transition will be executed
-depending on the message and the current state. Within this transition, detail level code will be executed
-and response messages can be sent.
-</p><!--l. 164--><p class="noindent" >With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it
-the other way round: The complex behavior will be provided by a network of relatively simple
-components which are communicating with each other via well defined interfaces.
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.2.2   </span> <a 
- id="x8-140002.2.2"></a>Hierarchy in Structure and Behavior</h4>
-<!--l. 171--><p class="noindent" >ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural
-hierarchy means that actors can be nested to arbitrary depth. Usually you will add more and more details
-to your application with each nesting level. That means you can focus yourself on any level of abstraction
-with always the same element, the actor. Structural hierarchy provides a powerful mechanism to divide
-your problem in smaller pieces, so that you can focus on the level of abstraction you want to work
-on.
-</p><!--l. 177--><p class="noindent" >The actor&#8217;s behavior will be described with a state machine. A state in turn may contain sub states. This
-is another possibility to focus on an abstraction level. Take the simple FSM from the blinky actor from
-the blinky tutorial.
-</p><!--l. 181--><p class="noindent" >Top level:
-</p><!--l. 183--><p class="noindent" ><img 
-src="images/020-Blinky15.png" alt="PIC"  
+href="etrice-docch5.html#etrice-docse4.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x11-300005.2"></a>Create a new model from scratch</h3>
+<!--l. 20--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu
+select <span 
+class="ec-lmssbx-10">File-&#x003E;New-&#x003E;Project </span>and create a new eTrice project and name it <span 
+class="ec-lmssbx-10">HelloWorld</span>.
+</p><!--l. 23--><p class="noindent" ><img 
+src="images/015-HelloWorld10.png" alt="PIC"  
  />
-</p><!--l. 186--><p class="noindent" ><span 
-class="ecti-1000">blinking </span>Sub machine:
-</p><!--l. 188--><p class="noindent" ><img 
-src="images/020-Blinky151.png" alt="PIC"  
+</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project
+should look like this:
+</p><!--l. 29--><p class="noindent" ><img 
+src="images/015-HelloWorld11.png" alt="PIC"  
  />
-</p><!--l. 191--><p class="noindent" >From an abstract point of view there is a state <span 
-class="ecti-1000">blinking</span>. But a simple LED is not able to blink
-autonomously. Therefore you have to add more details to your model to make a LED blinking, but for the
-current work it is not of interest how the blinking is realized. This will be done in the next lower level of
-the hierarchy.
-</p><!--l. 196--><p class="noindent" >This simple example might give an idea how powerful this mechanisms is.
-</p><!--l. 198--><p class="noindent" >The hierarchical FSM provides a rich tool box to describe real world problems (see <span 
-class="ecbx-1000">room</span>
+</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
+class="ec-lmsso-10">HelloWorld.room </span>was created. Open the <span 
+class="ec-lmsso-10">HelloWorld.room </span>file
+and delete the contents of the file. Open the content assist with Ctrl+Space and select <span 
+class="ec-lmsso-10">model</span>
 <span 
-class="ecbx-1000">concepts</span>).
-</p><!--l. 200--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.2.3   </span> <a 
- id="x8-150002.2.3"></a>Layering</h4>
-<!--l. 202--><p class="noindent" >Layering is another well known form of abstraction to reduce complexity in the structure of systems.
-ROOM is probably the only language that supports Layering directly as language feature. Layering
-can be expressed in ROOM by Actors with specialized Ports, called Service Access Points
-(&#x003C;em&#x003E;SAP&#x003C;/em&#x003E;) and Service Provision Points (&#x003C;em&#x003E;SPP&#x003C;/em&#x003E;).
-</p><!--l. 207--><p class="noindent" >The Actor that provides a service implements an SPP and the client of that service implements an SAP.
-The Layer Connection connects all SAPs of a specific Protocol within an Actor hierarchy with an SPP
-that implements the service. From the Actors point of view, SAPs and SPPs behave almost like regular
-                                                                                 
-                                                                                 
-ports.
-</p><!--l. 211--><p class="noindent" ><img 
-src="images/010-LayerExample.png" alt="PIC"  
+class="ec-lmsso-10">skeleton</span>.
+</p><!--l. 36--><p class="noindent" ><img 
+src="images/015-HelloWorld12.png" alt="PIC"  
  />
-</p><!--l. 214--><p class="noindent" >The Example shows a layered model. The Layer Connections define e.g. that the <span 
-class="ecti-1000">ApplicationLayer </span>can
-only use the services of the <span 
-class="ecti-1000">ServiceLayer </span>and the <span 
-class="ecti-1000">CommunicationLayer</span>. Actors inside the
+</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
+</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
+                                                                                 
+                                                                                 
+</p>
+<div class="verbatim" id="verbatim-1">
+RoomModel&#x00A0;HelloWorld&#x00A0;{
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_HelloWorld&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;subsystem&#x00A0;:&#x00A0;SubSystem_HelloWorld
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SubSystem_HelloWorld&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;application&#x00A0;:&#x00A0;HelloWorldTop
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;HelloWorldTop&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />}
+</div>
+<!--l. 57--><p class="nopar" >
+</p><!--l. 59--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
+elements will be used. But as prerequisite for further versions the following elements can be defined:
+</p>
+     <ul class="itemize1">
+     <li class="itemize">the <span 
+class="ec-lmsso-10">LogicalSystem </span>(currently optional)
+     </li>
+     <li class="itemize">at least one <span 
+class="ec-lmsso-10">SubSystemClass </span>(mandatory)
+     </li>
+     <li class="itemize">at least one <span 
+class="ec-lmsso-10">ActorClass </span>(mandatory)</li></ul>
+<!--l. 67--><p class="noindent" >The <span 
+class="ec-lmsso-10">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
+class="ec-lmsso-10">SubSystemRef</span>. The
 <span 
-class="ecti-1000">ApplicationLayer </span>that implement an SAP for those services are connected directly to the implementation
-of the services. Layering and actor hierarchies with port to port connections can be mixed on every level
-of granularity.
-</p><!--l. 220--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.2.4   </span> <a 
- id="x8-160002.2.4"></a>Run to Completion</h4>
-<!--l. 222--><p class="noindent" ><span 
-class="ecbx-1000">Run to completion </span>(RTC) is a very central concept of ROOM. It enables the developer to
-concentrate on the functional aspects of the system. The developer doesn&#8217;t have to care about
-concurrency issues all the time. This job is concentrated to the system designer in a very flexible
-way. What does <span 
-class="ecbx-1000">run to completion </span>mean: RTC means that an actor, which is processing a
-message, can not receive the next message as long as the processing of the current message has
-been finished. Receiving of the next message will be queued from the underlying run time
-system.
-</p><!--l. 230--><p class="noindent" >Note: It is very important not to confuse run to completion and preemption. Run to completion means
-that an actor will finish the processing of a message before he can receive a new one (regardless of its
-priority). That does not mean that an actor cannot be preempted from an higher priority thread of
-control. But even a message from this higher prior thread of control will be queued until the current
-processing has been finished.
-</p><!--l. 236--><p class="noindent" >With this mechanism all actor internal attributes and data structures are protected. Due to the fact
-that multiple actors share one thread of control, all objects are protected which are accessed
-from one thread of control but multiple actors. This provides the possibility to decompose
-complex functionality to several actors without the risk to produce access violations or dead
-locks.
+class="ec-lmsso-10">SubSystemClass </span>represents an address space and contains at least one <span 
+class="ec-lmsso-10">ActorRef</span>. The <span 
+class="ec-lmsso-10">ActorClass </span>is the
+building block of which an application will be built of. It is in general a good idea to define a top level actor
+that can be used as reference within the subsystem.
+</p><!--l. 72--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
+tree.
+</p><!--l. 74--><p class="noindent" ><img 
+src="images/015-HelloWorld02.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
 </p>
-<!--l. 241--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 78--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse5.html" >next</a>] [<a 
 href="etrice-docse3.html" >prev</a>] [<a 
 href="etrice-docse3.html#tailetrice-docse3.html" >prev-tail</a>] [<a 
 href="etrice-docse4.html" >front</a>] [<a 
-href="etrice-docch2.html#etrice-docse4.html" >up</a>] </p></div>
-<!--l. 241--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse4.html" >up</a>] </p></div>
+<!--l. 78--><p class="noindent" ><a 
  id="tailetrice-docse4.html"></a> </p> 
 </body></html> 

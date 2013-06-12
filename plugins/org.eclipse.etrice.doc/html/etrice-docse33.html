@@ -4,84 +4,69 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Building the C runtime system</title> 
+<head><title>Create the HelloWorld model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch10.html" >next</a>] [<a 
+<!--l. 66--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse34.html" >next</a>] [<a 
 href="etrice-docse32.html" >prev</a>] [<a 
 href="etrice-docse32.html#tailetrice-docse32.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse33.html">tail</a>] [<a 
-href="etrice-docch9.html#etrice-docse33.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">9.2   </span> <a 
- id="x44-600009.2"></a>Building the C runtime system</h3>
-<!--l. 59--><p class="noindent" >The C runtime system contains some basic functionalities to run the generated models. The so called
-runtime is common for all C projects. The requirements for several projects may differ depending on the
-functionality of the model or the resources of the different platforms. Therefore the runtime is
-configurable in terms of message queue size, frequency and memory alignment. The configuration file
-<span 
-class="ecti-1000">etRuntimeConfig.h </span>is located in <span 
-class="ecti-1000">src/config</span>.
-</p><!--l. 65--><p class="noindent" >After changing the configuration, the runtime must be built.
-</p><!--l. 67--><p class="noindent" >Open the properties of the <span 
-class="ecti-1000">org.eclipse.runtime.c </span>project and select <span 
-class="ecti-1000">C/C++ Build-&#x003E;Settings-&#x003E;Tool</span>
-<span 
-class="ecti-1000">Settings </span>and select <span 
-class="ecti-1000">Includes</span>.
-</p><!--l. 70--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC08.png" alt="PIC"  
- />
-</p><!--l. 73--><p class="noindent" >Verify the include paths
+href="etrice-docch10.html#etrice-docse33.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">10.3   </span> <a 
+ id="x45-6600010.3"></a>Create the HelloWorld model</h3>
+<!--l. 68--><p class="noindent" >Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
+Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your
+model file. Optionally you can open and layout the diagrams. Recognize the C specific parts:
 </p>
      <ul class="itemize1">
-     <li class="itemize"><span 
-class="ecti-1000">src/config</span>
+     <li class="itemize">The action code contains C instead of Java. Later versions will contain a common action language,
+     but for the moment the action language is target specific.
      </li>
-     <li class="itemize"><span 
-class="ecti-1000">src/common</span>
-     </li>
-     <li class="itemize"><span 
-class="ecti-1000">src/platforms/generic</span></li></ul>
-<!--l. 81--><p class="noindent" >Within the Setting dialog select the tab <span 
-class="ecti-1000">Build Artefact </span>and select <span 
-class="ecti-1000">Static Library</span>
-</p><!--l. 83--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC09.png" alt="PIC"  
- />
-</p><!--l. 86--><p class="noindent" >Build the runtime by clicking
-</p><!--l. 88--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC10.png" alt="PIC"  
- />
-</p><!--l. 91--><p class="noindent" >The runtime library should be created.
-</p><!--l. 93--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC11.png" alt="PIC"  
- />
-</p><!--l. 96--><p class="noindent" >For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to
-build project specific runtime libraries. In this case a separate project for the runtime should be created.
-Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file must be
-duplicated. A specific library file must exist within the project. Such specific runtime libraries might be
-referenced from several applications.
+     <li class="itemize">The application must be shutdown on model level (see also <span 
+class="ec-lmsso-10">etRuntimeConfig.h</span>).</li></ul>
                                                                                  
                                                                                  
-                                                                                 
-                                                                                 
+<div class="verbatim" id="verbatim-19">
+RoomModel&#x00A0;HelloWorldCModel&#x00A0;{
+&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from&#x00A0;"../../org.eclipse.etrice.modellib.c/model/Types.room"
+&#x00A0;<br />SubSystemClass&#x00A0;HelloWorldCSubSysClass&#x00A0;{
+&#x00A0;<br />ActorRef&#x00A0;HelloETriceTopRef:AHelloWorldCTop
+&#x00A0;<br />}
+&#x00A0;<br />ActorClass&#x00A0;AHelloWorldCTop&#x00A0;{
+&#x00A0;<br />Structure&#x00A0;{&#x00A0;}
+&#x00A0;<br />Behavior&#x00A0;{
+&#x00A0;<br />StateMachine&#x00A0;{
+&#x00A0;<br />Transition&#x00A0;init:&#x00A0;initial&#x00A0;-&#x003E;&#x00A0;state0&#x00A0;{&#x00A0;}
+&#x00A0;<br />State&#x00A0;state0&#x00A0;{
+&#x00A0;<br />entry&#x00A0;{
+&#x00A0;<br />"printf(\"HelloWorldC&#x00A0;!\\n\");"
+&#x00A0;<br />"SubSysClass_shutdown();"
+&#x00A0;<br />"\t\t\t\t\t\t"
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+</div>
+<!--l. 101--><p class="nopar" >
                                                                                  
                                                                                  
 </p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch10.html" >next</a>] [<a 
+<!--l. 103--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse34.html" >next</a>] [<a 
 href="etrice-docse32.html" >prev</a>] [<a 
 href="etrice-docse32.html#tailetrice-docse32.html" >prev-tail</a>] [<a 
 href="etrice-docse33.html" >front</a>] [<a 
-href="etrice-docch9.html#etrice-docse33.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch10.html#etrice-docse33.html" >up</a>] </p></div>
+<!--l. 103--><p class="noindent" ><a 
  id="tailetrice-docse33.html"></a> </p> 
 </body></html> 

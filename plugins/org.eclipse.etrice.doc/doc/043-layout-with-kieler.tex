@@ -1,8 +1,8 @@
-\chapter{Automatic Diagram Layout with KIELER}
+\section{Automatic Diagram Layout with KIELER}
 
-\section{Overview}
+\subsection{Overview}
 
-eTrice now provides a new feature of automatic layout of the ROOM diagrams in its graphical editors. This 
+\eTrice{} now provides a new feature of automatic layout of the ROOM diagrams in its graphical editors. This 
 helps in improving the pragmatics of the diagrams and frees the user from the burden of manually 
 lay-outing the diagrams on the canvas. 
 
@@ -12,7 +12,7 @@ development and maintenance time, and improve the analysis of dynamic behavior.
 
 This chapter will answer the following questions
 \begin{itemize}
-\item \hyperref[performLayout]{''How to perform automatic layout in the graphical editors of eTrice?''}
+\item \hyperref[performLayout]{''How to perform automatic layout in the graphical editors of \eTrice{}?''}
 \item \hyperref[layoutOptions]{''What are layout options?''}
 \item \hyperref[configureOptions]{''How to configure the layout options to alter the diagram layout as 
 desired?''}
@@ -20,10 +20,10 @@ desired?''}
 
 Moreover, some \hyperref[specialOptions]{''special layout options''} will also be discussed.
 
-\section{\label{performLayout}Performing Automatic Layout} 
+\subsection{\label{performLayout}Performing Automatic Layout} 
 % h2(#performLayout). Performing Automatic Layout
 
-Automatic layout could be performed in eTrice graphical editors using the command to layout the current 
+Automatic layout could be performed in \eTrice{} graphical editors using the command to layout the current 
 diagram.
 
 This command is available in
@@ -34,7 +34,7 @@ This command is available in
 
 Additionally, an entry in the context menu allows to layout only a selected part of the diagram.
 
-\section{\label{layoutOptions}Layout Options}
+\subsection{\label{layoutOptions}Layout Options}
 % h2(#layoutOptions). Layout Options
 
 A layout option is a customization point for the layout algorithms, with a specific data type and 
@@ -51,23 +51,23 @@ available in the footer of eclipse SDK. This is shown below:
 \includegraphics[width=0.8\textwidth]{images/043-LayoutOptionDescription.png}
 % !images/043-LayoutOptionDescription.png!
 
-\section{\label{configureOptions}Configuring Layout Options}
+\subsection{\label{configureOptions}Configuring Layout Options}
 % h2(#configureOptions). Configuring Layout Options 
 
 The values of the layout options for a particular diagram object (in the visible diagram) can be changed 
-using the Layout View of that diagram object. The initial values are the predefined <em>default</em> values. 
+using the Layout View of that diagram object. The initial values are the predefined \emph{default} values. 
 These defaults can be changed using the context menu in Layout View as well as the Layout preference pages 
-provided by eTrice.
+provided by \eTrice{}.
 
-\subsection{\label{layoutView}The Layout View}
+\subsubsection{\label{layoutView}The Layout View}
 % h3(#layoutView). The Layout View
 
 \includegraphics[width=0.8\textwidth]{images/043-LayoutView.png}
 % !images/043-LayoutView.png!
 
-The Layout view allows flexible customization of layout options for the selected objects in the eTrice 
+The Layout view allows flexible customization of layout options for the selected objects in the \eTrice{} 
 diagram. If no object is selected, the view shows the options for the top-level container of the diagram. 
-Options are stored persistently in diagram file (<em>.structure file / </em>.behavior file) of the eTrice 
+Options are stored persistently in diagram file (\emph{.structure file / }.behavior file) of the \eTrice{} 
 diagram, so that they are still available after the next Eclipse restart. Of course this requires the 
 diagram to be saved after an option was changed.
 
@@ -103,7 +103,7 @@ as \textbf{default} value:
 applied to all similar objects (edit parts) of that diagram.
 
 \item \textit{Set as Default for ... in this Context}: Applies the value to all similar objects that are 
-displayed with the any of the eTrice editors (the option is linked to the edit part class of the selected 
+displayed with the any of the \eTrice{} editors (the option is linked to the edit part class of the selected 
 object).
 
 \item \textit{Set as Default for all ...}: Links the option value with the domain model element or the 
@@ -118,28 +118,28 @@ Tips:
 \begin{itemize}
 \item The information button of the view toolbar can be used to display some useful details on the current 
 selection, such as the edit part and domain model classes.
-\item Default values for layout options can most easily be manipulated based on the eTrice domain model 
+\item Default values for layout options can most easily be manipulated based on the \eTrice{} domain model 
 elements.
 \end{itemize}
 
-\subsection{\label{preferencePage}Preference Page}
+\subsubsection{\label{preferencePage}Preference Page}
 % h3(#preferencePage). Preference Pages
 
-The user-defined <em>default</em> values for layout options can also be set using the preference pages provided 
-in eTrice. Three preference pages have been provided for this purpose
+The user-defined \emph{default} values for layout options can also be set using the preference pages provided 
+in \eTrice{}. Three preference pages have been provided for this purpose
 \begin{itemize}
 \item \textit{Layout}: for general preferences regarding layout
-\item \textit{Behavior}: for setting default values of layout options for eTrice behavior diagrams
-\item \textit{Structure}: for setting default values of layout options for eTrice structure diagrams
+\item \textit{Behavior}: for setting default values of layout options for \eTrice{} behavior diagrams
+\item \textit{Structure}: for setting default values of layout options for \eTrice{} structure diagrams
 \end{itemize}
 
-These preference pages can be accessed via \textit{Windows > Preferences > eTrice > Layout}.
+These preference pages can be accessed via \textit{Windows > Preferences > \eTrice{} > Layout}.
 
 Note that the contents of these preference pages are in sync with the \textit{KIELER > Layout} preference 
 page provided by the KIELER. Relevant entries in the \textit{KIELER > Layout} page are shown in the above 
 preference pages.
 
-\subsubsection{\textit{Layout} Preference Page}
+\myparagraph{\textit{Layout} Preference Page}
 % h4. _Layout_ Preference Page
 
 The \textit{Layout} preference page is meant to configure general options regarding the layout. 
@@ -148,7 +148,7 @@ If \textit{Set routing style of all edges to oblique} is active, all routing sty
 settings of edges are removed when automatic layout is performed. Since most layouters compute the routing 
 of edges as part of their algorithm, these styles usually do not yield the expected results.
 
-\subsubsection{\textit{Behavior} and \textit{Structure} Preference Page}
+\myparagraph{\textit{Behavior} and \textit{Structure} Preference Page}
 % h4. _Behavior_ and _Structure_ Preference Pages
 
 The \textit{Behavior} and \textit{Structure} sub-preference pages help in setting up the default values of 
@@ -177,51 +177,51 @@ diagrams. Moreover, it will allow setting default values of layout options for o
 elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for 
 the \textit{Structure} preference page.
 
-\section{\label{specialOptions}Special Layout Options}
+\subsection{\label{specialOptions}Special Layout Options}
 % h2(#specialOptions). Special Layout Options
 
 While most layout options are used to affect how the active layout algorithm computes concrete coordinates 
 for the graph elements, there are some layout options that have a special role.
 
-\subsection{Layout Algorithm}
+\subsubsection{Layout Algorithm}
 % h3. Layout Algorithm
 
 The option with identifier de.cau.cs.kieler.algorithm specifies which layout algorithm to use for the 
 content of a composite node. The value can be either the identifier of a layout algorithm or the 
 identifier of a layout type. In the latter case the algorithm with highest priority of that type is applied.
 
-For the purpose of automatic diagram layout in eTrice, we use the \textit{Layered} algorithms which are 
+For the purpose of automatic diagram layout in \eTrice{}, we use the \textit{Layered} algorithms which are 
 meant for lay-outing hierarchical diagrams and are best suited for behavior and structure diagrams in 
-eTrice. For the behavior diagrams we have used the \textit{Graphviz Dot} algorithm whereas for the 
+\eTrice{}. For the behavior diagrams we have used the \textit{Graphviz Dot} algorithm whereas for the 
 structure diagrams we have used the \textit{KLay Layered} algorithm. Though the layout algorithm being 
 used for performing layout can be changed at ones own will, it is recommended to use the defaults.  
 
-\subsection{Diagram Type}
+\subsubsection{Diagram Type}
 % h3. Diagram Type
 
 Diagram types are used to classify graphical diagrams for setting default layout option values for a set 
 of similar diagrams. The diagram type of an element is specified with the layout option 
 de.cau.cs.kieler.diagramType. Thus, these help in 
 
-The following diagram types have been defined and used in eTrice:
+The following diagram types have been defined and used in \eTrice{}:
 \begin{itemize}
 \item \textit{General} - This type is automatically assigned to all diagrams for which no specific type is 
 declared. (Predefined in KIELER)
-\item \textit{eTrice Behavior Diagrams} - This type has been assigned to the diagram objects in eTrice 
+\item \textit{\eTrice{} Behavior Diagrams} - This type has been assigned to the diagram objects in \eTrice{} 
 Behavior Diagrams. 
-\item \textit{eTrice Structure Diagrams} - This type has been assigned to the diagram objects in eTrice 
+\item \textit{\eTrice{} Structure Diagrams} - This type has been assigned to the diagram objects in \eTrice{} 
 Structurer Diagrams.
 \end{itemize}
 Note that not all diagrams objects in the behavior and structure diagrams are assigned the last two 
 diagram types. Only the top-level container and the visible bounding box has been assigned these diagram 
 types in respective editors.
 
-\section{Further References}
+\subsection{Further References}
 % h2. Further References
 
 Most parts of the above documentation have been taken from the "KIML 
 wiki":http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078 and have been 
-modified for automatic layout in eTrice. A more detailed description about the layout algorithms, 
+modified for automatic layout in \eTrice{}. A more detailed description about the layout algorithms, 
 predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout(KIML) can be 
 found at the "KIML 
 wiki":http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078 .

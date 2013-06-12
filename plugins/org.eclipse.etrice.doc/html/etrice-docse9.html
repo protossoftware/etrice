@@ -4,55 +4,77 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Build and run the model</title> 
+<head><title>Scope</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 109--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse10.html" >next</a>] [<a 
-href="etrice-docse8.html" >prev</a>] [<a 
-href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse9.html">tail</a>] [<a 
-href="etrice-docch5.html#etrice-docse9.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">5.4   </span> <a 
- id="x16-300005.4"></a>Build and run the model</h3>
-<!--l. 111--><p class="noindent" >Now the model is finished and source code can be generated. The project wizard has created a launch
-configuration that is responsible for generating the source code. From <span 
-class="ecti-1000">HelloWorld/ </span>right click
-<span 
-class="ecbx-1000">gen_HelloWorld.launch </span>and run it as gen_HelloWorld. All model files in the model directory will be
-generated.
-</p><!--l. 116--><p class="noindent" ><img 
-src="images/015-HelloWorld06.png" alt="PIC"  
+href="etrice-docch6.html#etrice-docse9.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+ id="x17-360006.1"></a>Scope</h3>
+<!--l. 5--><p class="noindent" >This tutorial describes how to use the <span 
+class="ec-lmsso-10">TimingService</span>, how to combine a generated model with manual code
+and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The
+behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds,
+blinking, stop,... For this exercise we will use a little GUI class that will be used in more sophisticated tutorials
+too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from
+the GUI.
+</p><!--l. 13--><p class="noindent" >After the exercise is created you must copy the GUI to your src directory (see below).
+</p><!--l. 15--><p class="noindent" >The package contains four java classes which implements a small window with a 3-light traffic light which
+simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian
+signals.
+</p><!--l. 19--><p class="noindent" >The GUI looks like this:
+</p><!--l. 21--><p class="noindent" ><img 
+src="images/020-Blinky08.png" alt="PIC"  
  />
-</p><!--l. 119--><p class="noindent" >The code will be generated to the src-gen directory. The main function will be contained in
-<span 
-class="ecbx-1000">SubSystem_HelloWorldRunner.java</span>. Select this file and run it as Java application.
-
-</p><!--l. 122--><p class="noindent" ><img 
-src="images/015-HelloWorld07.png" alt="PIC"  
- />
-</p><!--l. 126--><p class="noindent" >The Hello World application starts and the string will be printed on the console window. To stop the
-application the user must type <span 
-class="ecbx-1000">quit </span>in the console window.
-</p><!--l. 129--><p class="noindent" ><img 
-src="images/015-HelloWorld08.png" alt="PIC"  
- />
+</p><!--l. 24--><p class="noindent" >Within this tutorial we will just toggle the yellow light.
+</p><!--l. 26--><p class="noindent" >You will perform the following steps:
+</p><!--l. 28--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x17-36002x1">create a new model from scratch
+     </li>
+     <li 
+  class="enumerate" id="x17-36004x2">define a protocol
+     </li>
+     <li 
+  class="enumerate" id="x17-36006x3">create an actor structure
+     </li>
+     <li 
+  class="enumerate" id="x17-36008x4">create a hierarchical state machine
+     </li>
+     <li 
+  class="enumerate" id="x17-36010x5">use the predefined <span 
+class="ec-lmsso-10">TimingService</span>
                                                                                  
                                                                                  
-</p>
-<!--l. 132--><div class="crosslinks"><p class="noindent">[<a 
+     </li>
+     <li 
+  class="enumerate" id="x17-36012x6">combine manual code with generated code
+     </li>
+     <li 
+  class="enumerate" id="x17-36014x7">build and run the model
+     </li>
+     <li 
+  class="enumerate" id="x17-36016x8">open the message sequence chart</li></ol>
+                                                                                 
+                                                                                 
+<!--l. 39--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse10.html" >next</a>] [<a 
-href="etrice-docse8.html" >prev</a>] [<a 
-href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
 href="etrice-docse9.html" >front</a>] [<a 
-href="etrice-docch5.html#etrice-docse9.html" >up</a>] </p></div>
-<!--l. 132--><p class="noindent" ><a 
+href="etrice-docch6.html#etrice-docse9.html" >up</a>] </p></div>
+<!--l. 39--><p class="noindent" ><a 
  id="tailetrice-docse9.html"></a> </p> 
 </body></html> 

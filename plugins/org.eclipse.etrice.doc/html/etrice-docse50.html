@@ -4,404 +4,285 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Ports</title> 
+<head><title>Finite State Machines</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 157--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse51.html" >next</a>] [<a 
+<!--l. 285--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch13.html" >next</a>] [<a 
 href="etrice-docse49.html" >prev</a>] [<a 
 href="etrice-docse49.html#tailetrice-docse49.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse50.html">tail</a>] [<a 
 href="etrice-docch12.html#etrice-docse50.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">12.3   </span> <a 
- id="x64-9000012.3"></a>Ports</h3>
-<!--l. 159--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">12.6   </span> <a 
+ id="x64-10400012.6"></a>Finite State Machines</h3>
+<!--l. 287--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.1   </span> <a 
- id="x64-9100012.3.1"></a>Description</h4>
-<!--l. 161--><p class="noindent" >Ports are the only interfaces of actors. A port has always a protocol assigned. Service Access
-Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define
-layering.
-</p><!--l. 165--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">12.6.1   </span> <a 
+ id="x64-10500012.6.1"></a>Description</h4>
+<!--l. 289--><p class="noindent" >Definition from <a 
+href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
+</p><!--l. 291--><p class="noindent" >
+     </p><div class="quote">
+     <!--l. 292--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a
+     state machine, is a mathematical model used to design computer programs and digital logic
+     circuits. It is conceived as an abstract machine that can be in one of a finite number of
+     states. The machine is in only one state at a time; the state it is in at any given time
+     is called the current state. It can change from one state to another when initiated by a
+     triggering event or condition, this is called a transition. A particular FSM is defined by a
+     list of the possible states it can transition to from each state, and the triggering condition
+     for each transition.
+     </p><!--l. 300--><p class="noindent" >In  ROOM  each  actor  class  can  implement  its  behavior  using  a  state  machine.  Events
+     occurring at the end ports of an actor will be forwarded to and processed by the state
+     machine. Events possibly trigger state transitions.</p></div>
+<!--l. 305--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.2   </span> <a 
- id="x64-9200012.3.2"></a>Motivation</h4>
-     <ul class="itemize1">
-     <li class="itemize">Ports decouple interface definition (Protocols) from interface usage
-     </li>
-     <li class="itemize">Ports decouple the logical interface from the transport</li></ul>
-<!--l. 172--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">12.6.2   </span> <a 
+ id="x64-10600012.6.2"></a>Motivation</h4>
+<!--l. 307--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically during
+processing new events are produced which are sent to peer actors.
+</p><!--l. 310--><p class="noindent" >We distinguish flat and hierarchical state machines.
+</p><!--l. 312--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.3   </span> <a 
- id="x64-9300012.3.3"></a>Notation</h4>
-<!--l. 174--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">12.6.3   </span> <a 
+ id="x64-10700012.6.3"></a>Notation</h4>
+                                                                                 
+                                                                                 
+<!--l. 314--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x64-9400012.3.3"></a>Class Ports</h5>
-<!--l. 176--><p class="noindent" >These symbols can only appear on the border of an actor class symbol.
-</p><!--l. 178--><p class="noindent" >Ports that define an external interface of the ActorClass, are defined in the <span 
-class="ecti-1000">Interface</span>. Ports that define an
-internal interface are defined in the <span 
-class="ecti-1000">Structure </span>(e.g. internal ports). </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ecbx-1000">External End Ports </span>are defined in the Interface and the Structure
-     </li>
-     <li class="itemize"><span 
-class="ecbx-1000">Internal End Ports </span>are only defined in the Structure
-                                                                                 
-                                                                                 
-     </li>
-     <li class="itemize"><span 
-class="ecbx-1000">Relay Ports </span>are only defined in the Interface
-     </li>
-     <li class="itemize"><span 
-class="ecbx-1000">End Ports </span>are always connected to the internal behavior of the ActorClass
-     </li>
-     <li class="itemize"><span 
-class="ecbx-1000">Replicated Ports </span>can be defined with a fixed replication factor ( e.g. <span 
-class="ecti-1000">Port port18 [ 5 ]:</span>
-     <span 
-class="ecti-1000">ProtocolClass1 </span>) or a variable replication factor (e.g. <span 
-class="ecti-1000">Port port18[ * ]: ProtocolClass1 </span>)</li></ul>
+ id="x64-10800012.6.3"></a>Flat Finite State Machine</h5>
+<!--l. 316--><p class="noindent" >The simpler flat finite state machines are composed of the following elements:
+</p>
 <div class="table">
-<!--l. 189--><p class="noindent" ><a 
- id="x64-940013"></a></p><hr class="float" /><div class="float" 
+                                                                                 
+                                                                                 
+<!--l. 319--><p class="noindent" ><a 
+ id="x64-1080016"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
                                                                                  
  <div class="caption" 
-><span class="id">Table&#x00A0;12.3: </span><span  
-class="content">Class Port Notation</span></div><!--tex4ht:label?: x64-940013 -->
-<a 
- id="x64-94002r4"></a><!--l. 192--><div class="longtable"> <table id="TBL-5" class="longtable" 
+><span class="id">Table&#x00A0;12.6: </span><span  
+class="content">Title</span></div><!--tex4ht:label?: x64-1080016 -->
+<div class="tabular"> <table id="TBL-12" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-5-1g"><col 
-id="TBL-5-1" /></colgroup><colgroup id="TBL-5-2g"><col 
-id="TBL-5-2" /></colgroup><colgroup id="TBL-5-3g"><col 
-id="TBL-5-3" /></colgroup>
-<tr 
+><colgroup id="TBL-12-1g"><col 
+id="TBL-12-1" /></colgroup><colgroup id="TBL-12-2g"><col 
+id="TBL-12-2" /></colgroup><colgroup id="TBL-12-3g"><col 
+id="TBL-12-3" /></colgroup><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-1-1"  
-class="td11"> <!--l. 192--><p class="noindent" ><span 
-class="ecbx-1000">Element</span>         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-2"  
+ style="vertical-align:baseline;" id="TBL-12-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-1-1"  
+class="td11">    <span 
+class="ec-lmssbx-10">Description      </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-1-2"  
 class="td11"> <span 
-class="ecbx-1000">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-1-3"  
-class="td11"> <!--l. 192--><p class="noindent" ><span 
-class="ecbx-1000">Textual Notation</span>                    </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-2-1"  
-class="td11"> <!--l. 193--><p class="noindent" >Class
-  End
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-2"  
-class="td11">         <img 
-src="images/040-ClassEndPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-2-3"  
-class="td11"> <div class="tabular"> <table id="TBL-6" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-6-1g"><col 
-id="TBL-6-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-1-1"  
-class="td11"><span 
-class="ecbx-1000">External Class End Port:</span></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-2-1"  
-class="td11"> <img 
-src="images/040-ClassEndPortTextual.png" alt="PIC"  
- /></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-3-1"  
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-1-3"  
 class="td11"> <span 
-class="ecbx-1000">Internal Class End Port: </span></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-4-1"  
+class="ec-lmssbx-10">Textual Notation  </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-2-1"  
+class="td11">       State           </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-2-2"  
+class="td11">        <img 
+src="images/040-State.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-2-3"  
+class="td11">       <img 
+src="images/040-StateTextual.jpg" alt="PIC"  
+ />           </td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-3-1"  
+class="td11"> InitialPoint </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-3-2"  
 class="td11"> <img 
-src="images/040-ClassEndPortInternalTextual.png" alt="PIC"  
- /></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-5-1"  
-class="td11">                         </td></tr></table> </div>    </td>
+src="images/040-InitialPoint.jpg" alt="PIC"  
+ /> </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-3-3"  
+class="td11"> <span 
+class="ec-lmsso-10">implicit</span></td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-3-1"  
-class="td11"> <!--l. 197--><p class="noindent" >Conjugated
-  Class
-  End
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-2"  
-class="td11">         <img 
-src="images/040-ConjugatedClassEndPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-3-3"  
-class="td11"> <div class="tabular"> <table id="TBL-7" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-7-1g"><col 
-id="TBL-7-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-7-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-1-1"  
-class="td11"><!--l. 199--><p class="noindent" ><span 
-class="ecbx-1000">External Conjugated Class End</span>
-<span 
-class="ecbx-1000">Port:</span>                                  </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-2-1"  
-class="td11"><!--l. 200--><p class="noindent" ><img 
-src="images/040-ConjugatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-3-1"  
-class="td11"><!--l. 201--><p class="noindent" ><span 
-class="ecbx-1000">Internal Conjugated Class End</span>
-<span 
-class="ecbx-1000">Port:</span>                                   </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-4-1"  
-class="td11"><!--l. 201--><p class="noindent" ><img 
-src="images/040-ConjugatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
+ style="vertical-align:baseline;" id="TBL-12-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-4-1"  
+class="td11">   TransitionPoint     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-4-2"  
+class="td11">        <img 
+src="images/040-TransitionPoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-4-3"  
+class="td11">       <img 
+src="images/040-TransitionPointTextual.jpg" alt="PIC"  
+ />           </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-4-1"  
-class="td11"> <!--l. 203--><p class="noindent" >Class
-  Relay
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-2"  
-class="td11">         <img 
-src="images/040-ClassRelayPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-4-3"  
-class="td11"> <!--l. 204--><p class="noindent" ><img 
-src="images/040-ClassRelayPortTextual.png" alt="PIC"  
- />                                           </p></td>
+ style="vertical-align:baseline;" id="TBL-12-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-5-1"  
+class="td11">    ChoicePoint       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-5-2"  
+class="td11">        <img 
+src="images/040-ChoicePoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-5-3"  
+class="td11">       <img 
+src="images/040-ChoicePointTextual.jpg" alt="PIC"  
+ />           </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-5-1"  
-class="td11"> <!--l. 205--><p class="noindent" >Conjugated
-  Class
-  Relay
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-2"  
-class="td11">         <img 
-src="images/040-ConjugatedClassRelayPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-5-3"  
-class="td11"> <!--l. 207--><p class="noindent" ><img 
-src="images/040-ConjugatedClassRelayPortTextual.png" alt="PIC"  
- />                                           </p></td>
+ style="vertical-align:baseline;" id="TBL-12-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-6-1"  
+class="td11">   Initial Transition    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-6-2"  
+class="td11">        <img 
+src="images/040-InitialTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-6-3"  
+class="td11">       <img 
+src="images/040-InitialTransitionTextual.jpg" alt="PIC"  
+ />           </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-6-1"  
-class="td11"> <!--l. 208--><p class="noindent" >Replicated
-  Class
-  End
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-2"  
-class="td11">         <img 
-src="images/040-ReplicatedClassEndPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-6-3"  
-class="td11"> <div class="tabular"> <table id="TBL-8" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-8-1g"><col 
-id="TBL-8-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-8-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-1-1"  
-class="td11"><!--l. 210--><p class="noindent" ><span 
-class="ecbx-1000">External Replicated Class End</span>
-<span 
-class="ecbx-1000">Port:</span>                                  </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-2-1"  
-class="td11"><!--l. 211--><p class="noindent" ><img 
-src="images/040-ReplicatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-3-1"  
-class="td11"><!--l. 212--><p class="noindent" ><span 
-class="ecbx-1000">Internal Replicated Class End</span>
-<span 
-class="ecbx-1000">Port:</span>                                   </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-4-1"  
-class="td11"><!--l. 212--><p class="noindent" ><img 
-src="images/040-ReplicatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
+ style="vertical-align:baseline;" id="TBL-12-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-7-1"  
+class="td11"> Triggered Transition  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-7-2"  
+class="td11">        <img 
+src="images/040-TriggeredTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-7-3"  
+class="td11">       <img 
+src="images/040-TriggeredTransitionTextual.jpg" alt="PIC"  
+ />           </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-7-1"  
-class="td11"> <!--l. 214--><p class="noindent" >Conjugated
-  Replicated
-  Class
-  End
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-7-2"  
-class="td11">         <img 
-src="images/040-ConjugatedReplicatedClassEndPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-7-3"  
-class="td11"> <div class="tabular"> <table id="TBL-9" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-9-1g"><col 
-id="TBL-9-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-9-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-1-1"  
-class="td11"><!--l. 216--><p class="noindent" ><span 
-class="ecbx-1000">External              Conjugated</span>
-<span 
-class="ecbx-1000">Replicated Class End Port:</span>     </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-2-1"  
-class="td11"><!--l. 217--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-3-1"  
-class="td11"><!--l. 218--><p class="noindent" ><span 
-class="ecbx-1000">Internal Conjugated Replicated</span>
-<span 
-class="ecbx-1000">Class End Port:</span>                     </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-4-1"  
-class="td11"><!--l. 219--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-8-1"  
-class="td11"> <!--l. 221--><p class="noindent" >Replicated
-  Class
-  Relay
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-8-2"  
-class="td11">         <img 
-src="images/040-ReplicatedClassRelayPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-8-3"  
-class="td11"> <!--l. 223--><p class="noindent" ><img 
-src="images/040-ReplicatedClassRelayPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-9-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-9-1"  
-class="td11"> <!--l. 224--><p class="noindent" >Conjugated
-  Replicated
-  Class
-  Relay
-  Port                 </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-9-2"  
-class="td11">         <img 
-src="images/040-ConjugatedReplicatedClassRelayPort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-9-3"  
-class="td11"> <!--l. 226--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassRelayPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-10-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-10-1"  
-class="td11">                </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-11-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-11-1"  
-class="td11">                </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-12-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-12-1"  
-class="td11"> <!--l. 227--><p class="noindent" >               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-13-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-13-1"  
-class="td11"> <!--l. 227--><p class="noindent" >               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-14-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-14-1"  
-class="td11">                </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-14-2"  
-class="td11">                     </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-14-3"  
-class="td11"></td></tr>
-</table></div>
+ style="vertical-align:baseline;" id="TBL-12-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-12-8-1"  
+class="td11">                  </td></tr></table></div>
                                                                                  
                                                                                  
 </div><hr class="endfloat" />
 </div>
 <h5 class="subsubsectionHead"><a 
- id="x64-9500012.3.3"></a>Reference Ports</h5>
-<!--l. 308--><p class="noindent" >These symbols can only appear on the border of an ActorReference symbol. Since the type of port is
-defined in the ActorClass, no textual notation for the Reference Ports exists.
+ id="x64-10900012.6.3"></a>Hierarchical Finite State Machine</h5>
+<!--l. 377--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling
+elements are added to the set listed above:
 </p>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 312--><p class="noindent" ><a 
- id="x64-950015"></a></p><hr class="float" /><div class="float" 
+<!--l. 381--><p class="noindent" ><a 
+ id="x64-1090017"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
                                                                                  
  <div class="caption" 
-><span class="id">Table&#x00A0;12.5: </span><span  
-class="content">Title</span></div><!--tex4ht:label?: x64-950015 -->
-<div class="tabular"> <table id="TBL-10" class="tabular" 
+><span class="id">Table&#x00A0;12.7: </span><span  
+class="content">Title</span></div><!--tex4ht:label?: x64-1090017 -->
+<div class="tabular"> <table id="TBL-13" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-10-1g"><col 
-id="TBL-10-1" /></colgroup><colgroup id="TBL-10-2g"><col 
-id="TBL-10-2" /></colgroup><colgroup id="TBL-10-3g"><col 
-id="TBL-10-3" /></colgroup><tr 
+><colgroup id="TBL-13-1g"><col 
+id="TBL-13-1" /></colgroup><colgroup id="TBL-13-2g"><col 
+id="TBL-13-2" /></colgroup><colgroup id="TBL-13-3g"><col 
+id="TBL-13-3" /></colgroup><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-1"  
-class="td11">        <span 
-class="ecbx-1000">Element           </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-2"  
-class="td11"> <span 
-class="ecbx-1000">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-3"  
-class="td11"> <span 
-class="ecbx-1000">Textual Notation  </span></td>
+ style="vertical-align:baseline;" id="TBL-13-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-1-1"  
+class="td11"> <!--l. 384--><p class="noindent" ><span 
+class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-2"  
+class="td11">                                  <span 
+class="ec-lmssbx-10">Graphical Notation                                                </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-3"  
+class="td11">                                  <span 
+class="ec-lmssbx-10">Textual Notation                                                 </span></td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-1"  
-class="td11">      Reference Port          </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-2"  
-class="td11">         <img 
-src="images/040-ReferencePort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-3"  
-class="td11">      <span 
-class="ecti-1000">implicit         </span></td>
+ style="vertical-align:baseline;" id="TBL-13-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-2-1"  
+class="td11"> <!--l. 385--><p class="noindent" >State with sub state
+  machine                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-14" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-14-1g"><col 
+id="TBL-14-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-14-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-1-1"  
+class="td00">Parent State</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-2-1"  
+class="td00"> <img 
+src="images/040-StateWithSubFSM.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                            </div>  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-3"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-15" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-15-1g"><col 
+id="TBL-15-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-15-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-15-1-1"  
+class="td00">Sub state machine</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-15-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-15-2-1"  
+class="td00"> <img 
+src="images/040-StateWithSubFSMTextual.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                     </div>  </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-1"  
-class="td11"> Conjugated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-2"  
-class="td11">         <img 
-src="images/040-ConjugatedReferencePort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-3"  
-class="td11">      <span 
-class="ecti-1000">implicit         </span></td>
+ style="vertical-align:baseline;" id="TBL-13-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-3-1"  
+class="td11"> <!--l. 388--><p class="noindent" >Entry Point              </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-16" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-16-1g"><col 
+id="TBL-16-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-16-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-1-1"  
+class="td00">In sub state machine</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-16-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-2-1"  
+class="td00"> <img 
+src="images/040-EntryPoint.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                  </div>  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-3"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-17" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-17-1g"><col 
+id="TBL-17-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-17-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-17-1-1"  
+class="td00">  </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-17-2-1"  
+class="td00"><img 
+src="images/040-EntryPointTextual.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                                        </div>  </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-1"  
-class="td11">  Replicated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-2"  
-class="td11">         <img 
-src="images/040-ReplicatedReferencePort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-3"  
-class="td11">      <span 
-class="ecti-1000">implicit         </span></td>
+ style="vertical-align:baseline;" id="TBL-13-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-4-1"  
+class="td11"> <!--l. 391--><p class="noindent" >Exit Point                </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
+class="td11">                                                                                    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-3"  
+class="td11">                                        <img 
+src="images/040-ExitPointTextual.jpg" alt="PIC"  
+ />                                                               </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-5-1"  
-class="td11">   Conjugated Replicated     </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-10-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-1"  
-class="td11">      Reference Port          </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-2"  
-class="td11">         <img 
-src="images/040-ConjugatedReplicatedReferencePort.png" alt="PIC"  
- />              </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-3"  
-class="td11">      <span 
-class="ecti-1000">implicit         </span></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-7-1"  
-class="td11">                         </td></tr></table></div>
+ style="vertical-align:baseline;" id="TBL-13-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-13-5-1"  
+class="td11">                   </td></tr></table>
+</div>
                                                                                  
                                                                                  
 </div><hr class="endfloat" />
 </div>
+<h4 class="subsectionHead"><span class="titlemark">12.6.4   </span> <a 
+ id="x64-11000012.6.4"></a>Examples</h4>
+<!--l. 430--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x64-11100012.6.4"></a>Example of a flat finite state machine:</h5>
+<!--l. 433--><p class="noindent" ><img 
+src="images/040-FlatFSM.jpg" alt="PIC"  
+ />
+</p><!--l. 435--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x64-11200012.6.4"></a>Example of a hierarchical finite state machine:</h5>
+<!--l. 437--><p class="noindent" >Top level
+</p><!--l. 440--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMTop.jpg" alt="PIC"  
+ />
+</p><!--l. 442--><p class="noindent" >Sub state machine of Initializing
+</p><!--l. 445--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMInitializing.jpg" alt="PIC"  
+ />
+</p><!--l. 447--><p class="noindent" >Sub state machine of Running
+</p><!--l. 450--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMRunning.jpg" alt="PIC"  
+ />
                                                                                  
                                                                                  
-<!--l. 355--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse51.html" >next</a>] [<a 
+                                                                                 
+                                                                                 
+</p>
+<!--l. 53--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch13.html" >next</a>] [<a 
 href="etrice-docse49.html" >prev</a>] [<a 
 href="etrice-docse49.html#tailetrice-docse49.html" >prev-tail</a>] [<a 
 href="etrice-docse50.html" >front</a>] [<a 
 href="etrice-docch12.html#etrice-docse50.html" >up</a>] </p></div>
-<!--l. 355--><p class="noindent" ><a 
+<!--l. 53--><p class="noindent" ><a 
  id="tailetrice-docse50.html"></a>  </p> 
 </body></html> 

@@ -4,71 +4,41 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create your own data type</title> 
+<head><title>Summary</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 52--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse45.html" >next</a>] [<a 
+<!--l. 150--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch12.html" >next</a>] [<a 
 href="etrice-docse43.html" >prev</a>] [<a 
 href="etrice-docse43.html#tailetrice-docse43.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse44.html">tail</a>] [<a 
 href="etrice-docch11.html#etrice-docse44.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">11.3   </span> <a 
- id="x57-7300011.3"></a>Create your own data type</h3>
-<!--l. 54--><p class="noindent" >The planed application should read a C source file and remove the comments. Therefore we need
-a file descriptor which is not part of the basic C types. The type for the file descriptor for
-MinGW is <span 
-class="ecti-1000">FILE</span>. To make this type available on the model level, you have to declare the
-type.
-</p><!--l. 58--><p class="noindent" >Open the file <span 
-class="ecti-1000">Types.room </span>from <span 
-class="ecti-1000">org.eclipse.modellib.c </span>and take a look at the declaration of <span 
-class="ecti-1000">string </span>(last
-line) which is not a basic C type.
-</p><!--l. 61--><p class="noindent" ><span 
-class="ecti-1000">PrimitiveType string:ptCharacter -&#x003E; charPtr default "0"</span>
-</p><!--l. 63--><p class="noindent" >With this declaration, you make the <span 
-class="ecti-1000">string </span>keyword available on model level as a primitive type. This
-type will be translated to <span 
-class="ecti-1000">charPtr </span>in your C sources. <span 
-class="ecti-1000">charPtr </span>is defined in <span 
-class="ecti-1000">etDatatypes.h</span>. This header file
-is platform specific (<span 
-class="ecti-1000">generic</span>). With this mechanism you can define your own type system on model level
-and map the model types to specific target/platform types.
-</p><!--l. 68--><p class="noindent" >To not interfere with other models, we will declare the type direct in the model. Add the following line to
-your model:
+<h3 class="sectionHead"><span class="titlemark">11.6   </span> <a 
+ id="x57-7800011.6"></a>Summary</h3>
+<!--l. 152--><p class="noindent" >This tutorial should help you to train the necessary steps to create a C model. By the way you have seen how
+to create your own type system for a real embedded project. An additional aspect was to show how simple it is
+to separate different aspects of the required functionality by the use of actors and protocols and make them
+reusable.
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-20">
-RoomModel&#x00A0;RemoveComment&#x00A0;{
-&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from
-&#x00A0;<br />"../../../org.eclipse.etrice.modellib.c/model/Types.room"
-&#x00A0;<br />
-&#x00A0;<br />PrimitiveType&#x00A0;file:ptInteger&#x00A0;-&#x003E;&#x00A0;FILE&#x00A0;default&#x00A0;"0"
-</div>
-<!--l. 78--><p class="nopar" >
-</p><!--l. 81--><p class="noindent" ><span 
-class="ecti-1000">FILE </span>is the native type for MinGW. Therefore you don&#8217;t need a mapping within <span 
-class="ecti-1000">etDatatypes.h</span>. If your
-model should be portable across different platforms you should not take this shortcut.
-                                                                                 
-                                                                                 
-</p>
-<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse45.html" >next</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch12.html" >next</a>] [<a 
 href="etrice-docse43.html" >prev</a>] [<a 
 href="etrice-docse43.html#tailetrice-docse43.html" >prev-tail</a>] [<a 
 href="etrice-docse44.html" >front</a>] [<a 
 href="etrice-docch11.html#etrice-docse44.html" >up</a>] </p></div>
-<!--l. 85--><p class="noindent" ><a 
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse44.html"></a> </p> 
 </body></html> 

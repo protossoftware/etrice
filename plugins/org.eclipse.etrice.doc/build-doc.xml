@@ -183,4 +183,15 @@
 		/>
 	</delete>
 </target>
+
+
+<!-- ============ TARGET: clean_tmp ================== -->
+<target name="clean_tmp" description="deletes all tmporary files for eTrice documentation">
+	<delete>
+		<fileset dir="${doc.dir}"
+			includes="*.aux *.toc *.dvi *.out *.log *.gz *.pdf"
+		/>
+	</delete>
+</target>
+
 </project>

@@ -4,55 +4,49 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Summary</title> 
+<head><title>Why does it work and why is it safe?</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 288--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch8.html" >next</a>] [<a 
+<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch9.html" >next</a>] [<a 
 href="etrice-docse27.html" >prev</a>] [<a 
 href="etrice-docse27.html#tailetrice-docse27.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse28.html">tail</a>] [<a 
-href="etrice-docch7.html#etrice-docse28.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.9   </span> <a 
- id="x37-530007.9"></a>Summary</h3>
-<!--l. 290--><p class="noindent" >Within the first loop an integer value will be incremented by <span 
-class="ecti-1000">MrPong </span>and sent back to <span 
-class="ecti-1000">MrPing</span>. As long
-as the guard is true <span 
-class="ecti-1000">MrPing </span>sends back the value.
-</p><!--l. 293--><p class="noindent" >Within the <span 
-class="ecti-1000">next </span>transition, <span 
-class="ecti-1000">MrPing </span>creates a data class and sends the default values. Then <span 
-class="ecti-1000">MrPing</span>
-changes the values and sends the class again. At this point you should note that during the
-send operation, a copy of the data class will be created and sent. Otherwise it would not
-be possible to send the same object two times, even more it would not be possible to send
-a stack object at all. This type of data passing is called <span 
-class="ecti-1000">sending data by value</span>. However,
-for performance reasons some applications requires <span 
-class="ecti-1000">sending data by reference</span>. In this case
-the user is responsible for the life cycle of the object. In Java the VM takes care of the life
-cycle of an object. This is not the case for C/C++. Consider that a object which is created
-within a transition of a state machine will be destroyed when the transition is finished. The
-receiving FSM would receive an invalid reference. Therefore care must be taken when sending
-references.
-</p><!--l. 304--><p class="noindent" >For sending data by reference you simply have to add the keyword <span 
-class="ecti-1000">ref  </span>to the protocol definition.
+href="etrice-docch8.html#etrice-docse28.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">8.3   </span> <a 
+ id="x38-590008.3"></a>Why does it work and why is it safe?</h3>
+<!--l. 99--><p class="noindent" >The tutorial shows that it is generally possible to use every port from outside the model as long as the port
+knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings)
+within the model. The only remaining question is: Why is it safe and does not violate the <span 
+class="ec-lmssbx-10">run to</span>
+<span 
+class="ec-lmssbx-10">completion </span>semantic. To answer this question, take a look at the <span 
+class="ec-lmsso-10">MessageService.java </span>from the
+runtime environment. There you will find the receive method which puts each message into the
+queue.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-16">
-Message&#x00A0;ping(data:&#x00A0;DemoData&#x00A0;ref)
+<div class="verbatim" id="verbatim-18">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;public&#x00A0;synchronized&#x00A0;void&#x00A0;receive(Message&#x00A0;msg)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;(msg!=null)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;messageQueue.push(msg);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;notifyAll();&#x00A0;//&#x00A0;wake&#x00A0;up&#x00A0;thread&#x00A0;to&#x00A0;compute&#x00A0;message
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
 </div>
-<!--l. 306--><p class="nopar" >
-</p><!--l. 308--><p class="noindent" >Make the test and inspect the console output.
+<!--l. 114--><p class="nopar" >
+</p><!--l. 116--><p class="noindent" >This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later
+on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or
+not), care must be taken to use the external (secure) queue.
                                                                                  
                                                                                  
                                                                                  
@@ -61,11 +55,11 @@ Message&#x00A0;ping(data:&#x00A0;DemoData&#x00A0;ref)
                                                                                  
 </p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch8.html" >next</a>] [<a 
+href="etrice-docch9.html" >next</a>] [<a 
 href="etrice-docse27.html" >prev</a>] [<a 
 href="etrice-docse27.html#tailetrice-docse27.html" >prev-tail</a>] [<a 
 href="etrice-docse28.html" >front</a>] [<a 
-href="etrice-docch7.html#etrice-docse28.html" >up</a>] </p></div>
+href="etrice-docch8.html#etrice-docse28.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse28.html"></a> </p> 
 </body></html> 

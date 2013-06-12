@@ -4,104 +4,39 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create a new model from scratch</title> 
+<head><title>Open the Message Sequence Chart</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-10 18:33:00" /> 
+<meta name="date" content="2013-06-12 17:51:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 132--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse7.html">tail</a>] [<a 
 href="etrice-docch5.html#etrice-docse7.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
- id="x14-280005.2"></a>Create a new model from scratch</h3>
-<!--l. 20--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the
-eclipse file menu select <span 
-class="ecbx-1000">File-&#x003E;New-&#x003E;Project </span>and create a new eTrice project and name it
-<span 
-class="ecbx-1000">HelloWorld</span>.
-</p><!--l. 23--><p class="noindent" ><img 
-src="images/015-HelloWorld10.png" alt="PIC"  
- />
-</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting
-project should look like this:
-</p><!--l. 29--><p class="noindent" ><img 
-src="images/015-HelloWorld11.png" alt="PIC"  
- />
-</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
-class="ecti-1000">HelloWorld.room </span>was created. Open the <span 
-class="ecti-1000">HelloWorld.room </span>file
-and delete the contents of the file. Open the content assist with Ctrl+Space and select <span 
-class="ecti-1000">model</span>
-<span 
-class="ecti-1000">skeleton</span>.
-</p><!--l. 36--><p class="noindent" ><img 
-src="images/015-HelloWorld12.png" alt="PIC"  
- />
-</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to
-name.
-</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-1">
-RoomModel&#x00A0;HelloWorld&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_HelloWorld&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;subsystem&#x00A0;:&#x00A0;SubSystem_HelloWorld
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SubSystem_HelloWorld&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;application&#x00A0;:&#x00A0;HelloWorldTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;HelloWorldTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 57--><p class="nopar" >
-</p><!--l. 59--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
-elements will be used. But as prerequisite for further versions the following elements can be defined:
-</p>
-     <ul class="itemize1">
-     <li class="itemize">the <span 
-class="ecti-1000">LogicalSystem </span>(currently optional)
-     </li>
-     <li class="itemize">at least one <span 
-class="ecti-1000">SubSystemClass </span>(mandatory)
-     </li>
-     <li class="itemize">at least one <span 
-class="ecti-1000">ActorClass </span>(mandatory)</li></ul>
-<!--l. 67--><p class="noindent" >The <span 
-class="ecti-1000">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
-class="ecti-1000">SubSystemRef</span>.
-The <span 
-class="ecti-1000">SubSystemClass </span>represents an address space and contains at least one <span 
-class="ecti-1000">ActorRef</span>. The <span 
-class="ecti-1000">ActorClass </span>is
-the building block of which an application will be built of. It is in general a good idea to define a top level
-actor that can be used as reference within the subsystem.
-</p><!--l. 72--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
-tree.
-</p><!--l. 74--><p class="noindent" ><img 
-src="images/015-HelloWorld02.png" alt="PIC"  
+<h3 class="sectionHead"><span class="titlemark">5.5   </span> <a 
+ id="x14-330005.5"></a>Open the Message Sequence Chart</h3>
+<!--l. 134--><p class="noindent" >During runtime the application produced a MSC and wrote it to a file. Open
+HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be
+obtained from http://trace2uml.tigris.org/). You should see something like this:
+</p><!--l. 138--><p class="noindent" ><img 
+src="images/015-HelloWorld09.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 78--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 142--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="etrice-docse7.html" >front</a>] [<a 
 href="etrice-docch5.html#etrice-docse7.html" >up</a>] </p></div>
-<!--l. 78--><p class="noindent" ><a 
+<!--l. 142--><p class="noindent" ><a 
  id="tailetrice-docse7.html"></a> </p> 
 </body></html> 

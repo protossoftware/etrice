@@ -1,13 +1,13 @@
-\chapter{eTrice Developer's Reference}
+\chapter{\eTrice{} Tool Developer's Reference}
 
 \section{Architecture}
 
-The basic components of eTrice are depicted in the following diagram.
+The basic components of \eTrice{} are depicted in the following diagram.
 
 \includegraphics[scale=0.5]{images/200-components.jpg}
 % !{width:50%}images/200-components.jpg!
 
-Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in 
+Additional to that the \eTrice{} project comprises runtime libraries and unit tests which are treated in 
 subsequent sections.
 
 \subsection{Editor and Generator Components}
@@ -17,7 +17,7 @@ subsequent sections.
 
 \begin{itemize}
 \item core.room is an Xtext based language called Room. It consists of the plug-in 
-\textit{org.eclipse.etrice.core.room}. Room is the basic modeling language of eTrice.
+\textit{org.eclipse.etrice.core.room}. Room is the basic modeling language of \eTrice{}.
 \item core.config is an Xtext based language called Config. It consists of the plug-in 
 \textit{org.eclipse.etrice.core.config}. Config is a language designed for the data configuration of model 
 elements. E.g. class and instance attributes can be specified.
@@ -43,7 +43,7 @@ markers and navigation by hyper links for the Config language.
 \begin{itemize}
 \item ui.common is a set of common code for the two diagram editors. It consists of the plug-in 
 \textit{org.eclipse.etrice.ui.common}.
-\item ui.commands encapsulates some commands related to the navigation between eTrice editors. It consists 
+\item ui.commands encapsulates some commands related to the navigation between \eTrice{} editors. It consists 
 of the plug-in \textit{org.eclipse.etrice.ui.commands}.
 \item ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in 
 \textit{org.eclipse.etrice.ui.structure}.
@@ -67,7 +67,7 @@ of the plug-in \textit{org.eclipse.etrice.generator}.
 
 \subsection{Runtimes}
 
-Currently eTrice ships with a C and a Java runtime. The runtimes are libraries written in the target 
+Currently \eTrice{} ships with a C and a Java runtime. The runtimes are libraries written in the target 
 language against which the generated code is compiled.
 
 \subsection{Unit Tests}
@@ -164,7 +164,7 @@ A set of static utility methods can be found in the \texttt{ConfigUtil} class.
 
 \subsection{Aggregation Layer Overview}
 
-The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access 
+The \eTrice{} Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access 
 to information which is implicitly contained in the Room model but not simple to retrieve.
 Examples of this are the state machine with inherited items or a list of all triggers active at a state in 
 the order in which they will be evaluated or the actual peer port of an end port (following bindings 
