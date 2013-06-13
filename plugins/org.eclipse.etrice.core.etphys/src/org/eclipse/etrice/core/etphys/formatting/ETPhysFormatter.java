@@ -33,6 +33,11 @@ public class ETPhysFormatter extends AbstractDeclarativeFormatter {
 		ETPhysGrammarAccess f = (ETPhysGrammarAccess) getGrammarAccess();
 
 		// general
+//		Set<String> keywords = GrammarUtil.getAllKeywords(grammar.getGrammar());
+//		System.out.println("etPhys keywords:");
+//		for (String kw : keywords) {
+//			System.out.println(kw+",");
+//		}
 		
 		c.setAutoLinewrap(120);
 		c.setLinewrap(1).before(f.getSL_COMMENTRule());

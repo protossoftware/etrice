@@ -33,6 +33,11 @@ public class ETMapFormatter extends AbstractDeclarativeFormatter {
 		ETMapGrammarAccess f = (ETMapGrammarAccess) getGrammarAccess();
 
 		// general
+//		Set<String> keywords = GrammarUtil.getAllKeywords(grammar.getGrammar());
+//		System.out.println("etMap keywords:");
+//		for (String kw : keywords) {
+//			System.out.println(kw+",");
+//		}
 		
 		c.setAutoLinewrap(120);
 		c.setLinewrap(1).before(f.getSL_COMMENTRule());
