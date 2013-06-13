@@ -237,6 +237,10 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline hr, .cline hr{ height : 1px; margin:0px; }
 div.array {text-align:center;}
 .figure img.graphics {margin-left:10%;}
+.lstlisting .label{margin-right:0.5em; }
+div.lstlisting{font-family: monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
+div.lstinputlisting{ font-family: monospace; white-space: nowrap; }
+.lstinputlisting .label{margin-right:0.5em;}
 span#textcolor1{color:rgb(0,0,235)}
 span#textcolor2{color:rgb(0,0,235)}
 span#textcolor3{color:rgb(0,0,235)}

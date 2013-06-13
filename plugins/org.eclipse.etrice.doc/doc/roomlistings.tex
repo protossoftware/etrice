@@ -1,0 +1,123 @@
+
+\definecolor{background}{RGB}{255,255,255}
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{RGB}{127,0,85}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{RGB}{63,127,95}
+\definecolor{colString}{RGB}{42,0,255}
+
+% for all listings
+\lstset{%
+    float=hbp,%
+    basicstyle=\ttfamily\small, %
+    identifierstyle=\color{colIdentifier}, %
+    keywordstyle=\color{colKeys}\bf, %
+    stringstyle=\color{colString}, %
+    commentstyle=\color{colComments}, %
+    columns=flexible, %
+    tabsize=2, %
+    frame=none, %
+    extendedchars=true, %
+    showspaces=false, %
+    showstringspaces=false, %
+    numbers=left, %
+    numberstyle=\tiny, %
+    breaklines=true, %
+    backgroundcolor=\color{background}, %
+    breakautoindent=true, %
+    captionpos=b%
+}
+
+\lstdefinelanguage{ROOM}
+{morekeywords={
+handle,
+usercode,
+external,
+outgoing,
+ChoicePoint,
+of,
+semantics,
+initial,
+Attribute,
+import,
+SPP,
+Binding,
+ExitPoint,
+or,
+exit,
+Port,
+ptReal,
+usercode3,
+incoming,
+usercode2,
+usercode1,
+ExternalType,
+SubSystemRef,
+cond,
+conjugated,
+private,
+PrimitiveType,
+SAP,
+PortClass,
+SubSystemClass,
+DataClass,
+sync,
+ActorClass,
+guard,
+ptCharacter,
+ptInteger,
+do,
+LayerConnection,
+TransitionPoint,
+Message,
+relay_sap,
+void,
+LogicalSystem,
+my,
+CompoundProtocolClass,
+ref,
+Behavior,
+ActorInstanceMapping,
+Structure,
+triggers,
+EntryPoint,
+Operation,
+SubProtocol,
+action,
+RefinedState,
+extends,
+conjugate,
+and,
+Interface,
+default,
+cp,
+StateMachine,
+satisfied_by,
+Transition,
+ptBoolean,
+sub,
+model,
+from,
+sends,
+RoomModel,
+ActorRef,
+RefinedTransition,
+LogicalThread,
+ServiceImplementation,
+ProtocolClass,
+abstract,
+regular,
+in,
+async,
+subgraph,
+State,
+entry,
+datadriven,
+eventdriven,
+out,
+handler}
+sensitive=false,
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morestring=[b]",
+} 

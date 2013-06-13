@@ -12,11 +12,10 @@
 
 package org.eclipse.etrice.core.formatting;
 
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.util.Pair;
-
-import org.eclipse.xtext.Keyword;
 
 
 /**
@@ -31,7 +30,11 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		org.eclipse.etrice.core.services.RoomGrammarAccess f = (org.eclipse.etrice.core.services.RoomGrammarAccess) getGrammarAccess();
 
 		// general
-		
+//		Set<String> keywords = GrammarUtil.getAllKeywords(grammar.getGrammar());
+//		for (String kw : keywords) {
+//			System.out.println(kw+",");
+//		}
+		 
 		c.setAutoLinewrap(120);
 		c.setLinewrap(2).before(f.getSL_COMMENTRule());
 		c.setLinewrap(2).before(f.getML_COMMENTRule());
