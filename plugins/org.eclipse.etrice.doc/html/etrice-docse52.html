@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-12 17:51:00" /> 
+<meta name="date" content="2013-06-13 09:38:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,87 +21,115 @@ href="etrice-docse51.html#tailetrice-docse51.html" >prev-tail</a>] [<a
 href="#tailetrice-docse52.html">tail</a>] [<a 
 href="etrice-docch13.html#etrice-docse52.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">13.2   </span> <a 
- id="x67-12700013.2"></a>eTrice Models and Their Relations</h3>
+ id="x67-12500013.2"></a>eTrice Models and Their Relations</h3>
 <!--l. 3--><p class="noindent" >eTrice comprises several models:
 </p>
      <ul class="itemize1">
      <li class="itemize">the ROOM model (*.room) &#8211; defines model classes and the logical structure of the model
      </li>
-     <li class="itemize">Config model (*.config) &#8211; defines configuration values for attributes
+     <li class="itemize">the Config model (*.config) &#8211; defines configuration values for attributes
      </li>
-     <li class="itemize">Physical model (*.etphys) &#8211; defines the structure and properties of the physical system
+     <li class="itemize">the Physical model (*.etphys) &#8211; defines the structure and properties of the physical system
      </li>
-     <li class="itemize">Mapping model (*.etmap) &#8211; defines a mapping from logical elements to physical elements</li></ul>
+     <li class="itemize">the Mapping model (*.etmap) &#8211; defines a mapping from logical elements to physical elements</li></ul>
 <!--l. 12--><p class="noindent" >In the following diagram the models and their relations are depicted. The meaning of the arrows is:
 uses/references.
 </p><!--l. 15--><p class="noindent" ><img 
 src="images/080-models.jpg" alt="PIC"  
  />
-</p><!--l. 18--><p class="noindent" >In the following sections we will describe those models with emphasis of their cross relations.
-</p><!--l. 20--><p class="noindent" >
+</p><!--l. 17--><p class="noindent" >In the following sections we will describe those models with emphasis of their cross relations.
+</p><!--l. 19--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">13.2.1   </span> <a 
- id="x67-12800013.2.1"></a>The ROOM Model</h4>
-<!--l. 22--><p class="noindent" >The ROOM model defines classes for Data, Protocols, Actors, SubSystems and LogicalSystems. Thereby the
-three latter form a hierarchy. The @LogicalSystem@ is the top level element of the structure. It contains
-references to <span 
-class="ec-lmtt-10">SubSystemClass </span>elements. The <span 
-class="ec-lmtt-10">SubSystemClass </span>in turn contain references to <span 
-class="ec-lmtt-10">ActorClass</span>
-elements which again contain (recursively) references to <span 
-class="ec-lmtt-10">ActorClass </span>elements. The complete structural
-hierarchy implies a tree which has the <span 
-class="ec-lmtt-10">LogicalSystem </span>as root and where each reference stands for a new node
-with possibly further branches.
-</p><!--l. 30--><p class="noindent" >Let&#8217;s consider a simple example. It doesn&#8217;t implement any meaningful and completely omits behavioral and
-other aspects.
-</p><!--l. 33--><p class="noindent" ><img 
+ id="x67-12600013.2.1"></a>The ROOM Model</h4>
+<!--l. 21--><p class="noindent" >The ROOM model defines <span id="textcolor52"><span 
+class="ec-lmssbx-10">DataClass</span></span>es, <span id="textcolor53"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span>es, <span id="textcolor54"><span 
+class="ec-lmssbx-10">ActorClass</span></span>es, <span id="textcolor55"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span>es and
+<span id="textcolor56"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span>s. Thereby the three latter form a hierarchy. The <span id="textcolor57"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> is the top level element of the
+structure. It contains references to <span id="textcolor58"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span> elements. The <span id="textcolor59"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span> in turn contains
+references to <span id="textcolor60"><span 
+class="ec-lmssbx-10">ActorClass</span></span> elements which again contain (recursively) references to <span id="textcolor61"><span 
+class="ec-lmssbx-10">ActorClass</span></span> elements. The
+complete structural hierarchy implies a tree which has the <span id="textcolor62"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> as root and where each reference
+stands for a new node with possibly further branches.
+</p><!--l. 29--><p class="noindent" >Let&#8217;s consider a simple example. It doesn&#8217;t implement anything meaningful and completely omits behavioral
+and other aspects.
+</p><!--l. 32--><p class="noindent" ><img 
 src="images/080-room.jpg" alt="PIC"  
  />
-</p><!--l. 36--><p class="noindent" >When a <span 
-class="ec-lmtt-10">LogicalSystem </span>is instantiated then recursively all of the contained referenced elements are
-instantiated as instances of the corresponding class. Thus the instance tree of above example looks like this
-(the third line in the white boxes shows some mapping information, s.b.):
-</p><!--l. 40--><p class="noindent" ><img 
+</p><!--l. 34--><p class="noindent" >When a <span id="textcolor63"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> is instantiated then recursively all of the contained referenced elements are
+instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in
+figure <a 
+href="#x67-1260015">13.5<!--tex4ht:ref: fig:instance_tree --></a> (the third line in the white boxes shows some mapping information, see section <a 
+href="#x67-12900013.2.4">13.2.4<!--tex4ht:ref: sec:mapping_model --></a> <a 
+href="#x67-12900013.2.4">The
+Mapping Model<!--tex4ht:ref: sec:mapping_model --></a>):
+</p>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                 
+                                                                                 
+<a 
+ id="x67-1260015"></a>
+                                                                                 
+                                                                                 
+<!--l. 40--><p class="noindent" ><img 
 src="images/080-instances.jpg" alt="PIC"  
  />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;13.5: </span><span  
+class="content">Instances of a ROOM system</span></div><!--tex4ht:label?: x67-1260015 -->
                                                                                  
                                                                                  
-</p><!--l. 44--><p class="noindent" >
-</p>
+</div><hr class="endfigure" />
 <h4 class="subsectionHead"><span class="titlemark">13.2.2   </span> <a 
- id="x67-12900013.2.2"></a>The Config Model</h4>
-<!--l. 46--><p class="noindent" >Once we have the ROOM class model we can configure values using the Config model. This can be done on
+ id="x67-12700013.2.2"></a>The Config Model</h4>
+<!--l. 47--><p class="noindent" >Once we have the ROOM class model we can configure values using the Config model. This can be done on
 the class level and/or on the instance level. Values defined for class attributes are used for all instances unless
 there is an instance value configured for the same attribute.
-</p><!--l. 50--><p class="noindent" ><img 
+</p><!--l. 51--><p class="noindent" ><img 
 src="images/080-config.jpg" alt="PIC"  
  />
 </p><!--l. 53--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">13.2.3   </span> <a 
- id="x67-13000013.2.3"></a>The Physical Model</h4>
+ id="x67-12800013.2.3"></a>The Physical Model</h4>
 <!--l. 55--><p class="noindent" >The physical model defines the physical resources onto which the logical system will be deployed. It is
-possible to define runtime classes which (currently) only defines the overall execution model of the
+possible to define runtime classes which (currently) only define the overall execution model of the
 platform.
 </p><!--l. 59--><p class="noindent" ><img 
 src="images/080-runtimes.jpg" alt="PIC"  
  />
-</p><!--l. 62--><p class="noindent" >The physical system is composed of @Node@ references where each @Node@ is defined as a class referencing a
-@RuntimeClass@ and defining @Threads@.
+</p><!--l. 61--><p class="noindent" >The <span id="textcolor64"><span 
+class="ec-lmssbx-10">PhysicalSystem</span></span> is composed of <span id="textcolor65"><span 
+class="ec-lmssbx-10">NodeRef</span></span>erences which are instances of <span id="textcolor66"><span 
+class="ec-lmssbx-10">NodeClass</span></span>es. Each <span id="textcolor67"><span 
+class="ec-lmssbx-10">NodeClass</span></span>
+os referencing a <span id="textcolor68"><span 
+class="ec-lmssbx-10">RuntimeClass</span></span> and is defining <span id="textcolor69"><span 
+class="ec-lmssbx-10">Threads</span></span>.
 </p><!--l. 65--><p class="noindent" ><img 
 src="images/080-phys.jpg" alt="PIC"  
  />
-</p><!--l. 68--><p class="noindent" >
+</p><!--l. 67--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">13.2.4   </span> <a 
- id="x67-13100013.2.4"></a>The Mapping Model</h4>
+ id="x67-12900013.2.4"></a>The Mapping Model</h4>
 <!--l. 70--><p class="noindent" >The last model finally combines all this information by mapping logical to physical entities.
 </p><!--l. 72--><p class="noindent" ><img 
 src="images/080-map.jpg" alt="PIC"  
  />
-</p><!--l. 75--><p class="noindent" >The result of the mapping is also depicted in above tree diagram of the instances. All actor instances
-(the white boxes) are mapped to a node and a thread running on this node (shown as @ <span 
+</p><!--l. 74--><p class="noindent" >The result of the mapping is also depicted in above tree diagram (figure <a 
+href="#x67-1260015">13.5<!--tex4ht:ref: fig:instance_tree --></a>) of the instances. All actor
+instances (the white boxes) are mapped to a node and a thread running on this node (shown as @<span 
 class="ec-lmsso-10">node </span>:
 <span 
 class="ec-lmsso-10">thread</span>).

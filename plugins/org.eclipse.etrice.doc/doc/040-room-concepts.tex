@@ -251,34 +251,50 @@ Example: DataClass using other DataClasses:
 In addition to the actor containment hierarchies, layering provides another method to hierarchically 
 structure a software system. Layering and actor hierarchies with port to port connections can be mixed on 
 every level of granularity.
+
 \begin{enumerate}
-\item an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined by a 
-ProtocolClass
-\item an ActorClass can define a Service Access Point (SAP) if it needs a service, defined by a 
-ProtocolClass
-\item for a given Actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) 
+\item an actor class can define a Service Provision Point (\room{SPPRef}) to publish a specific service, defined by a 
+protocol class
+\item an actor class can define a Service Access Point (\room{SAPRef}) if it needs a service, defined by a 
+protocol class
+\item for a given actor hierarchy, a \room{LayerConnection} defines which SAP will be satisfied by (connected to) 
 which SPP
 \end{enumerate}
 
 \subsection{Notation}
 
+For the graphical and textual notation refer to table \ref{tab:layering_notation}
+
 \begin{table}
-\begin{tabular}{|m{3cm}|c|c|}
+\caption{Layering Notation}
+\label{tab:layering_notation}
+\begin{tabular}{|m{3cm}|c|l|}
 \hline
- \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- \begin{flushleft}The Layer Connections in this model define which services are provided by the 
-\textit{ServiceLayer} (\textit{digitalIO} and \textit{timer})\end{flushleft} & 
-\includegraphics[scale=0.5]{images/040-LayeringModel.png} & 
-\includegraphics[scale=0.5]{images/040-LayeringModelTextual.png}  \\ \hline
- \begin{flushleft}The implementation of the services (SPPs) can be delegated to sub actors. In this case 
-the actor \textit{ServiceLayer} relays (delegates) the implementation services \textit{digitalIO} and 
-\textit{timer} to sub actors\end{flushleft} & 
+\textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\
+\hline
+\begin{flushleft}
+	The layer connections in this model define which services are provided by the 
+	\textit{ServiceLayer} (\textit{digitalIO} and \textit{timer})
+\end{flushleft} &
+% the raisebox centers the image vertically
+\raisebox{-.5\height}{\includegraphics[scale=0.5]{images/040-LayeringModel.png}} & 
+\raisebox{-.5\height}{\includegraphics[scale=0.8]{images/040-LayeringModelTextual.png}} \\
+\hline
+\begin{flushleft}
+	The implementation of the services (SPPs) can be delegated to sub actors. In this case 
+	the actor \textit{ServiceLayer} relays (delegates) the implementation services \textit{digitalIO} and 
+	\textit{timer} to sub actors
+\end{flushleft} & 
 \includegraphics[scale=0.5]{images/040-LayeringServiceLayer.png} & 
-\includegraphics[scale=0.5]{images/040-LayeringServiceLayerTextual.png} \\ \hline
- \begin{flushleft}Every Actor inside the \textit{ApplicationLayer} that contains an SAP with the same 
-Protocol as \textit{timer} or \textit{digitalIO} will be connected to the specified SPP\end{flushleft} & 
-\includegraphics[scale=0.5]{images/040-LayeringApplicationLayer.png} & 
-\includegraphics[scale=0.5]{images/040-LayeringApplicationLayerTextual.png} \\ \hline
+\raisebox{-.5\height}{\includegraphics[scale=0.8]{images/040-LayeringServiceLayerTextual.png}} \\
+\hline
+\begin{flushleft}
+	Every Actor inside the \textit{ApplicationLayer} that contains an SAP with the same 
+	protocol as \textit{timer} or \textit{digitalIO} will be connected to the specified SPP
+\end{flushleft} & 
+\raisebox{-.5\height}{\includegraphics[scale=0.5]{images/040-LayeringApplicationLayer.png}} & 
+\raisebox{-.5\height}{\includegraphics[scale=0.8]{images/040-LayeringApplicationLayerTextual.png}} \\
+\hline
 \end{tabular}
 \end{table}
 
@@ -311,140 +327,82 @@ We distinguish flat and hierarchical state machines.
 
 \subsection{Notation}
 
+We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
+
 \subsubsection{Flat Finite State Machine}
 
-The simpler flat finite state machines are composed of the following elements:
+The simpler flat finite state machines are composed of the elements shown in table \ref{tab:flat_fsm_notation}.
 
 \begin{table}
-\caption{Title}
-\begin{tabular}{|c|c|c|}
+\caption{Flat finite state machine notation}
+\label{tab:flat_fsm_notation}
+\begin{tabular}{|l|c|l|}
 \hline
- \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
- State & \includegraphics{images/040-State.jpg} & \includegraphics[scale=0.7]{images/040-StateTextual.jpg} 
-\\ \hline
- InitialPoint & \includegraphics{images/040-InitialPoint.jpg} & \textit{implicit} \\ \hline
- TransitionPoint & \includegraphics{images/040-TransitionPoint.jpg} & 
-\includegraphics[scale=0.7]{images/040-TransitionPointTextual.jpg} \\ \hline
- ChoicePoint & \includegraphics{images/040-ChoicePoint.jpg} & 
-\includegraphics[scale=0.7]{images/040-ChoicePointTextual.jpg} \\ \hline
- Initial Transition & \includegraphics[scale=0.7]{images/040-InitialTransition.jpg} & 
-\includegraphics[scale=0.7]{images/040-InitialTransitionTextual.jpg} \\ \hline
+\textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\
+\hline
+State & \includegraphics[scale=0.7]{images/040-State.jpg} & \includegraphics[scale=0.7]{images/040-StateTextual.jpg} \\
+\hline
+ InitialPoint & \includegraphics[scale=0.7]{images/040-InitialPoint.jpg} & \textit{implicit} \\
+\hline
+ TransitionPoint & \includegraphics[scale=0.7]{images/040-TransitionPoint.jpg} & 
+\includegraphics[scale=0.7]{images/040-TransitionPointTextual.jpg} \\
+\hline
+ ChoicePoint & \includegraphics[scale=0.7]{images/040-ChoicePoint.jpg} & 
+\includegraphics[scale=0.7]{images/040-ChoicePointTextual.jpg} \\
+\hline
+ Initial Transition & \raisebox{-.5\height}{\includegraphics[scale=0.7]{images/040-InitialTransition.jpg}} & 
+\includegraphics[scale=0.7]{images/040-InitialTransitionTextual.jpg} \\
+\hline
  Triggered Transition & \includegraphics[scale=0.7]{images/040-TriggeredTransition.jpg} & 
-\includegraphics[scale=0.5]{images/040-TriggeredTransitionTextual.jpg} \\ \hline
+\includegraphics[scale=0.7]{images/040-TriggeredTransitionTextual.jpg} \\
+\hline
 \end{tabular}
 \end{table}
-% <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
-	% <tr>
-		% <td align="center">\emph{Description}</td>
-		% <td align="center">\emph{Graphical Notation}</td>
-		% <td align="center">\emph{Textual Notation}</td>
-	% </tr>
-	% <tr>
-		% <td>State</td>
-		% <td>!images/040-State.jpg!</td>
-		% <td>!images/040-StateTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>InitialPoint</td>
-		% <td>!images/040-InitialPoint.jpg!</td>
-		% <td>_implicit_</td>
-	% </tr>
-	% <tr>
-		% <td>TransitionPoint</td>
-		% <td>!images/040-TransitionPoint.jpg!</td>
-		% <td>!images/040-TransitionPointTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>ChoicePoint</td>
-		% <td>!images/040-ChoicePoint.jpg!</td>
-		% <td>!images/040-ChoicePointTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>Initial Transition</td>
-		% <td>!images/040-InitialTransition.jpg!</td>
-		% <td>!images/040-InitialTransitionTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>Triggered Transition</td>
-		% <td>!images/040-TriggeredTransition.jpg!</td>
-		% <td>!images/040-TriggeredTransitionTextual.jpg!</td>
-	% </tr>
-% </table>
 
 
 \subsubsection{Hierarchical Finite State Machine}
 
 The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
-A few modeling elements are added to the set listed above:
+A few modeling elements listed in table \ref{tab:hier_fsm_notation} are added to the set listed above.
 
 \begin{table}
-\caption{Title}
-\begin{tabular}{|b{3cm}|c|c|}
+\caption{Additional notation elements of hierarchical finite state machines}
+\label{tab:hier_fsm_notation}
+\begin{tabular}{|b{3cm}|c|l|}
 \hline
- \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\ \hline
+ \textbf{Description} & \textbf{Graphical Notation} & \textbf{Textual Notation} \\
+\hline
  State with sub state machine & \specialcell{Parent State \\ 
 \includegraphics[scale=0.7]{images/040-StateWithSubFSM.jpg}} & \specialcell{Sub state machine \\ 
-\includegraphics[scale=0.5]{images/040-StateWithSubFSMTextual.jpg}} \\ \hline
+\includegraphics[scale=0.7]{images/040-StateWithSubFSMTextual.jpg}} \\
+\hline
  Entry Point & \specialcell{In sub state machine \\ 
 \includegraphics[scale=0.7]{images/040-EntryPoint.jpg}} & \specialcell{ \\ 
-\includegraphics{images/040-EntryPointTextual.jpg}} \\ \hline
- Exit Point & & \includegraphics{images/040-ExitPointTextual.jpg} \\ \hline
+\includegraphics[scale=0.7]{images/040-EntryPointTextual.jpg}}
+\\ \hline
+ Exit Point & \includegraphics[scale=0.7]{images/040-ExitPoint.jpg} &
+ \includegraphics[scale=0.7]{images/040-ExitPointTextual.jpg} \\ \hline
 \end{tabular}
 \end{table}
 
-% <table title="Title" frame="box" border="2" cellpadding="3" cellspacing="0">
-	% <tr>
-		% <td align="center">\emph{Description}</td>
-		% <td align="center">\emph{Graphical Notation}</td>
-		% <td align="center">\emph{Textual Notation}</td>
-	% </tr>
-	% <tr>
-		% <td>State with sub state machine</td>
-		% <td>Parent State
-		% !images/040-StateWithSubFSM.jpg!
-		% Sub state machine
-		% !images/040-SubFSM.jpg!</td>
-		% <td>!images/040-StateWithSubFSMTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>Entry Point</td>
-		% <td>In sub state machine
-		% !images/040-EntryPoint.jpg!
-		% On parent state
-		% !images/040-EntryPointRef.jpg!</td>
-		% <td>!images/040-EntryPointTextual.jpg!</td>
-	% </tr>
-	% <tr>
-		% <td>Exit Point</td>
-		% <td>In sub state machine
-		% !images/040-ExitPoint.jpg!
-		% On parent state
-		% !images/040-ExitPointRef.jpg!</td>
-		% <td>!images/040-ExitPointTextual.jpg!</td>
-	% </tr>
-% </table>
-
-
 \subsection{Examples}
 
-\subsubsection{Example of a flat finite state machine:}
-
-% !images/040-FlatFSM.jpg!
+\begin{figure}
 \includegraphics[scale=0.7]{images/040-FlatFSM.jpg}
+\caption{Example of a flat finite state machine}
+\end{figure}
 
-\subsubsection{Example of a hierarchical finite state machine:}
-
-Top level
-
-% !images/040-HierarchicalFSMTop.jpg!
+\begin{figure}
 \includegraphics[scale=0.7]{images/040-HierarchicalFSMTop.jpg}
+\caption{Example of a hierarchical finite state machine -- top level}
+\end{figure}
 
-Sub state machine of Initializing
-
-% !images/040-HierarchicalFSMInitializing.jpg!
+\begin{figure}
 \includegraphics[scale=0.7]{images/040-HierarchicalFSMInitializing.jpg}
+\caption{Hierarchical finite state machine -- sub state machine of \emph{Initializing}}
+\end{figure}
 
-Sub state machine of Running
-
-% !images/040-HierarchicalFSMRunning.jpg!
+\begin{figure}
 \includegraphics[scale=0.7]{images/040-HierarchicalFSMRunning.jpg}
+\caption{Hierarchical finite state machine -- sub state machine of \emph{Running}}
+\end{figure}

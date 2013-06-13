@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-12 17:51:00" /> 
+<meta name="date" content="2013-06-13 09:38:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -29,29 +29,40 @@ href="etrice-docch12.html#etrice-docse49.html" >up</a>] </p></div>
 <!--l. 251--><p class="noindent" >In addition to the actor containment hierarchies, layering provides another method to hierarchically structure a
 software system. Layering and actor hierarchies with port to port connections can be mixed on every level of
 granularity.
+</p><!--l. 255--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x63-102002x1">an ActorClass can define a Service Provision Point (SPP) to publish a specific service, defined by
-     a ProtocolClass
+  class="enumerate" id="x63-102002x1">an actor class can define a Service Provision Point (<span id="textcolor49"><span 
+class="ec-lmssbx-10">SPPRef</span></span>) to publish a specific service, defined
+     by a protocol class
      </li>
      <li 
-  class="enumerate" id="x63-102004x2">an  ActorClass  can  define  a  Service  Access  Point  (SAP)  if  it  needs  a  service,  defined  by  a
-     ProtocolClass
+  class="enumerate" id="x63-102004x2">an actor class can define a Service Access Point (<span id="textcolor50"><span 
+class="ec-lmssbx-10">SAPRef</span></span>) if it needs a service, defined by a
+     protocol class
      </li>
      <li 
-  class="enumerate" id="x63-102006x3">for a given Actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected
+  class="enumerate" id="x63-102006x3">for a given actor hierarchy, a <span id="textcolor51"><span 
+class="ec-lmssbx-10">LayerConnection</span></span> defines which SAP will be satisfied by (connected
      to) which SPP</li></ol>
-<!--l. 263--><p class="noindent" >
+<!--l. 264--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">12.5.2   </span> <a 
  id="x63-10300012.5.2"></a>Notation</h4>
+<!--l. 266--><p class="noindent" >For the graphical and textual notation refer to table <a 
+href="#x63-1030016">12.6<!--tex4ht:ref: tab:layering_notation --></a>
+</p>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 266--><p class="noindent" ></p><hr class="float" /><div class="float" 
+<!--l. 269--><p class="noindent" ><a 
+ id="x63-1030016"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
                                                                                  
+ <div class="caption" 
+><span class="id">Table&#x00A0;12.6: </span><span  
+class="content">Layering Notation</span></div><!--tex4ht:label?: x63-1030016 -->
 <div class="tabular"> <table id="TBL-11" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-11-1g"><col 
@@ -60,10 +71,10 @@ id="TBL-11-2" /></colgroup><colgroup id="TBL-11-3g"><col
 id="TBL-11-3" /></colgroup><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-11-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-1-1"  
-class="td11"> <!--l. 268--><p class="noindent" ><span 
+class="td11"> <!--l. 273--><p class="noindent" ><span 
 class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-1-2"  
 class="td11"> <span 
-class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-1-3"  
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-11-1-3"  
 class="td11"> <span 
 class="ec-lmssbx-10">Textual Notation  </span></td>
 </tr><tr 
@@ -72,9 +83,9 @@ class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr
 class="td11">
  <div class="flushleft" 
 >
- <!--l. 269--><p class="noindent" >
- The Layer
-  Connections in this
+ <!--l. 275--><p class="noindent" >
+  The layer
+  connections in this
   model define which
   services are provided
   by the <span 
@@ -83,26 +94,26 @@ class="ec-lmsso-10">ServiceLayer</span>
 class="ec-lmsso-10">digitalIO </span>and
   <span 
 class="ec-lmsso-10">timer</span>)</p></div>
-  <!--l. 270--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-2"  
+  <!--l. 278--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-2"  
 class="td11">        <img 
 src="images/040-LayeringModel.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-3"  
-class="td11">       <img 
+ />            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-11-2-3"  
+class="td11"> <img 
 src="images/040-LayeringModelTextual.png" alt="PIC"  
- />           </td>
+ />                     </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-11-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-3-1"  
 class="td11">
  <div class="flushleft" 
 >
- <!--l. 273--><p class="noindent" >
- The implementation
-  of the services
-  (SPPs) can be
-  delegated to sub
-  actors. In this case
-  the actor
+ <!--l. 283--><p class="noindent" >
+  The
+  implementation of
+  the services (SPPs)
+  can be delegated to
+  sub actors. In this
+  case the actor
   <span 
 class="ec-lmsso-10">ServiceLayer </span>relays
   (delegates) the
@@ -112,39 +123,39 @@ class="ec-lmsso-10">digitalIO</span>
   and <span 
 class="ec-lmsso-10">timer </span>to sub
   actors</p></div>
-  <!--l. 275--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-2"  
+  <!--l. 287--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-2"  
 class="td11">        <img 
 src="images/040-LayeringServiceLayer.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-3"  
-class="td11">       <img 
+ />            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-11-3-3"  
+class="td11"> <img 
 src="images/040-LayeringServiceLayerTextual.png" alt="PIC"  
- />           </td>
+ />                     </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-11-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-4-1"  
 class="td11">
  <div class="flushleft" 
 >
- <!--l. 278--><p class="noindent" >
- Every Actor inside
+ <!--l. 291--><p class="noindent" >
+  Every Actor inside
   the
   <span 
 class="ec-lmsso-10">ApplicationLayer</span>
   that contains an
   SAP with the same
-  Protocol as <span 
+  protocol as <span 
 class="ec-lmsso-10">timer </span>or
   <span 
 class="ec-lmsso-10">digitalIO </span>will be
   connected to the
   specified SPP</p></div>
-  <!--l. 279--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-2"  
+  <!--l. 294--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-2"  
 class="td11">        <img 
 src="images/040-LayeringApplicationLayer.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-3"  
-class="td11">       <img 
+ />            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-11-4-3"  
+class="td11"> <img 
 src="images/040-LayeringApplicationLayerTextual.png" alt="PIC"  
- />           </td>
+ />                     </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-11-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-5-1"  
@@ -155,12 +166,12 @@ class="td11">                   </td></tr></table></div>
 </div>
                                                                                  
                                                                                  
-<!--l. 285--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 301--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse50.html" >next</a>] [<a 
 href="etrice-docse48.html" >prev</a>] [<a 
 href="etrice-docse48.html#tailetrice-docse48.html" >prev-tail</a>] [<a 
 href="etrice-docse49.html" >front</a>] [<a 
 href="etrice-docch12.html#etrice-docse49.html" >up</a>] </p></div>
-<!--l. 285--><p class="noindent" ><a 
+<!--l. 301--><p class="noindent" ><a 
  id="tailetrice-docse49.html"></a> </p> 
 </body></html> 

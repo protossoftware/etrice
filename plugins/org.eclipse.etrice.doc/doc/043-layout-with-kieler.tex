@@ -20,13 +20,14 @@ desired?''}
 
 Moreover, some \hyperref[specialOptions]{''special layout options''} will also be discussed.
 
-\subsection{\label{performLayout}Performing Automatic Layout} 
-% h2(#performLayout). Performing Automatic Layout
+\subsection{Performing Automatic Layout}
+\label{performLayout}
 
 Automatic layout could be performed in \eTrice{} graphical editors using the command to layout the current 
 diagram.
 
 This command is available in
+
 \begin{itemize}
 \item The context menu of the diagrams
 \item Using the \textit{Ctrl+R L} shortcut.
@@ -34,8 +35,8 @@ This command is available in
 
 Additionally, an entry in the context menu allows to layout only a selected part of the diagram.
 
-\subsection{\label{layoutOptions}Layout Options}
-% h2(#layoutOptions). Layout Options
+\subsection{Layout Options}
+\label{layoutOptions}
 
 A layout option is a customization point for the layout algorithms, with a specific data type and 
 optionally a default value, used to affect how the active layout algorithm computes concrete coordinates 
@@ -46,26 +47,32 @@ Layout View.The Layout View can be opened from the context menu of a selected di
 the \textit{Show Layout View} entry. 
 
 On opening the layout view, and selecting any layout option, a description of the layout option is 
-available in the footer of eclipse SDK. This is shown below:
+available in the footer of eclipse SDK. This is shown in figure \ref{fig:layout_options}.
 
+\begin{figure}
 \includegraphics[width=0.8\textwidth]{images/043-LayoutOptionDescription.png}
-% !images/043-LayoutOptionDescription.png!
+\caption{Layout options}
+\label{fig:layout_options}
+\end{figure}
 
-\subsection{\label{configureOptions}Configuring Layout Options}
-% h2(#configureOptions). Configuring Layout Options 
+\subsection{Configuring Layout Options}
+\label{configureOptions}
 
 The values of the layout options for a particular diagram object (in the visible diagram) can be changed 
 using the Layout View of that diagram object. The initial values are the predefined \emph{default} values. 
 These defaults can be changed using the context menu in Layout View as well as the Layout preference pages 
 provided by \eTrice{}.
 
-\subsubsection{\label{layoutView}The Layout View}
-% h3(#layoutView). The Layout View
+\subsubsection{The Layout View}
+\label{layoutView}
 
-\includegraphics[width=0.8\textwidth]{images/043-LayoutView.png}
-% !images/043-LayoutView.png!
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{images/043-LayoutView.png}
+\caption{Layout view}
+\label{fig:layout_view}
+\end{figure}
 
-The Layout view allows flexible customization of layout options for the selected objects in the \eTrice{} 
+The Layout view (figure \ref{fig:layout_view}) allows flexible customization of layout options for the selected objects in the \eTrice{} 
 diagram. If no object is selected, the view shows the options for the top-level container of the diagram. 
 Options are stored persistently in diagram file (\emph{.structure file / }.behavior file) of the \eTrice{} 
 diagram, so that they are still available after the next Eclipse restart. Of course this requires the 
@@ -88,25 +95,30 @@ in the latter case, the most suitable layout algorithm of the given type is take
 layout algorithm, the content of the layout view is updated to display only those options that are 
 supported by the new layout algorithm.
 
-Selecting Restore Default Value in the context menu or the view toolbar removes any value for the 
+Selecting \textit{Restore Default Value} in the context menu or the view toolbar (figure \ref{fig:layout_context_menu})
+removes any value for the 
 currently selected option that is stored in the current model file, thus resetting the option to its 
 default value. The view menu has an entry Remove all Layout Options which resets all options of the 
 current model by removing persistent data in the model file.
 
-\includegraphics[width=0.8\textwidth]{images/043-ContextMenu.png}
-% !images/043-ContextMenu.png!
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{images/043-ContextMenu.png}
+\caption{Layout in context menu}
+\label{fig:layout_context_menu}
+\end{figure}
 
 The context menu for a specific layout option has different alternatives to set the currently active value 
-as \textbf{default} value:
+as \emph{default} value:
+
 \begin{itemize}
-\item \textit{Set as Default for this Diagram}: Changes the open diagram file so that the same value is 
+\item \emph{Set as Default for this Diagram}: Changes the open diagram file so that the same value is 
 applied to all similar objects (edit parts) of that diagram.
 
-\item \textit{Set as Default for ... in this Context}: Applies the value to all similar objects that are 
+\item \emph{Set as Default for ... in this Context}: Applies the value to all similar objects that are 
 displayed with the any of the \eTrice{} editors (the option is linked to the edit part class of the selected 
 object).
 
-\item \textit{Set as Default for all ...}: Links the option value with the domain model element or the 
+\item \emph{Set as Default for all ...}: Links the option value with the domain model element or the 
 diagram type of the selected object (see the context menu depicted above).
 \end{itemize}
 
@@ -122,8 +134,8 @@ selection, such as the edit part and domain model classes.
 elements.
 \end{itemize}
 
-\subsubsection{\label{preferencePage}Preference Page}
-% h3(#preferencePage). Preference Pages
+\subsubsection{Preference Page}
+\label{preferencePage}
 
 The user-defined \emph{default} values for layout options can also be set using the preference pages provided 
 in \eTrice{}. Three preference pages have been provided for this purpose
@@ -140,7 +152,6 @@ page provided by the KIELER. Relevant entries in the \textit{KIELER > Layout} pa
 preference pages.
 
 \myparagraph{\textit{Layout} Preference Page}
-% h4. _Layout_ Preference Page
 
 The \textit{Layout} preference page is meant to configure general options regarding the layout. 
 
@@ -149,7 +160,7 @@ settings of edges are removed when automatic layout is performed. Since most lay
 of edges as part of their algorithm, these styles usually do not yield the expected results.
 
 \myparagraph{\textit{Behavior} and \textit{Structure} Preference Page}
-% h4. _Behavior_ and _Structure_ Preference Pages
+
 
 The \textit{Behavior} and \textit{Structure} sub-preference pages help in setting up the default values of 
 layout options in behavior and structure diagrams respectively.
@@ -162,29 +173,32 @@ diagram type. The Element column shows the class name for options that relate to
 model elements, and the diagram type name for options that relate to diagram types. Option is the name of 
 the layout option, and Value is the currently set value of the option.
 
-Creating a new entry requires the selection of the type of related element and entering its class name or 
+Creating a new entry requires the selection of the type of related element (figure \ref{fig_layout_preference_page})
+and entering its class name or 
 identifier. Class names of edit parts can be explored using the information button of the layout view, 
 while the class names for the domain model elements and the diagram type identifiers for the diagram types 
 can be selected with the Browse button. After that, a layout option has to be selected from the list using 
 the corresponding Browse button. Hitting OK creates an entry, and its value can then be set using the Edit 
 button.
 
+\begin{figure}
 \includegraphics[width=0.8\textwidth]{images/043-PreferencePage.png}
-% !images/043-PreferencePage.png!
+\caption{Layout preference page}
+\label{fig_layout_preference_page}
+\end{figure}
 
 Note that the \textit{Behavior} preference page will show only those entries which hold for the behavior 
 diagrams. Moreover, it will allow setting default values of layout options for only those domain model 
 elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for 
 the \textit{Structure} preference page.
 
-\subsection{\label{specialOptions}Special Layout Options}
-% h2(#specialOptions). Special Layout Options
+\subsection{Special Layout Options}
+\label{specialOptions}
 
 While most layout options are used to affect how the active layout algorithm computes concrete coordinates 
 for the graph elements, there are some layout options that have a special role.
 
 \subsubsection{Layout Algorithm}
-% h3. Layout Algorithm
 
 The option with identifier de.cau.cs.kieler.algorithm specifies which layout algorithm to use for the 
 content of a composite node. The value can be either the identifier of a layout algorithm or the 
@@ -197,11 +211,10 @@ structure diagrams we have used the \textit{KLay Layered} algorithm. Though the 
 used for performing layout can be changed at ones own will, it is recommended to use the defaults.  
 
 \subsubsection{Diagram Type}
-% h3. Diagram Type
 
 Diagram types are used to classify graphical diagrams for setting default layout option values for a set 
 of similar diagrams. The diagram type of an element is specified with the layout option 
-de.cau.cs.kieler.diagramType. Thus, these help in 
+\texttt{de.cau.cs.kieler.diagramType}. Thus, these help in 
 
 The following diagram types have been defined and used in \eTrice{}:
 \begin{itemize}
@@ -210,18 +223,17 @@ declared. (Predefined in KIELER)
 \item \textit{\eTrice{} Behavior Diagrams} - This type has been assigned to the diagram objects in \eTrice{} 
 Behavior Diagrams. 
 \item \textit{\eTrice{} Structure Diagrams} - This type has been assigned to the diagram objects in \eTrice{} 
-Structurer Diagrams.
+Structure Diagrams.
 \end{itemize}
 Note that not all diagrams objects in the behavior and structure diagrams are assigned the last two 
 diagram types. Only the top-level container and the visible bounding box has been assigned these diagram 
 types in respective editors.
 
 \subsection{Further References}
-% h2. Further References
 
-Most parts of the above documentation have been taken from the "KIML 
-wiki":http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078 and have been 
+Most parts of the above documentation have been taken from the "KIML wiki"
+(\url{http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078}
+and have been 
 modified for automatic layout in \eTrice{}. A more detailed description about the layout algorithms, 
-predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout(KIML) can be 
-found at the "KIML 
-wiki":http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078 .
+predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout (KIML) can be 
+found there.
