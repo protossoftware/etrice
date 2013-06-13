@@ -170,7 +170,7 @@
 
  
 <!-- ============ TARGET: DEFAULT ================== -->
-<target name="default" depends="createEtricePDF, createEclipseTocFiles"/>
+<target name="default" depends="clean_tmp,createEtricePDF, createEclipseTocFiles"/>
 
 
 <!-- ============ TARGET: clean ================== -->

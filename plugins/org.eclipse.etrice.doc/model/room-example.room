@@ -1,0 +1,47 @@
+RoomModel test {
+	LogicalSystem Main {
+		SubSystemRef subA: SubA
+		SubSystemRef subB: SubB
+	}
+	
+	SubSystemClass SubA {
+		ActorRef actA: ActA
+		ActorRef actB: ActB
+		
+		LogicalThread dflt
+		LogicalThread extra
+		ActorInstanceMapping actA/actB1 -> extra {
+			ActorInstanceMapping actC1 -> dflt
+		}
+		ActorInstanceMapping actA/actB2 -> extra
+	}
+	
+	SubSystemClass SubB {
+		ActorRef actA: ActA
+		ActorRef actB: ActB
+		
+		LogicalThread dflt
+		LogicalThread extra
+		ActorInstanceMapping actB -> extra
+	}
+		
+	ActorClass ActA {
+		Structure {
+			Attribute val: int
+			ActorRef actB1: ActB
+			ActorRef actB2: ActB
+		}
+	}
+	
+	ActorClass ActB {
+		Structure {
+			Attribute val: int
+			ActorRef actC1: ActC
+			ActorRef actC2: ActC
+		}
+	}
+	
+	ActorClass ActC {}
+	
+	PrimitiveType int: ptInteger -> int (Integer) default "0"
+}

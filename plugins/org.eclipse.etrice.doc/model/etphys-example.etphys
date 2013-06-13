@@ -1,0 +1,45 @@
+PhysicalModel test {
+	
+	import test.* from "etphys-runtimes.etphys"
+	
+	PhysicalSystem MainPhys {
+		NodeRef pc1: PC_Node
+		NodeRef pc2: PC_Node
+		NodeRef mc: MSP430_Node
+	}
+	
+	NodeClass PC_Node {
+		runtime = runtimes.PCRuntime
+		priomin = 1
+		priomax = 10
+		DefaultThread thread1 {
+			execmode = blocked
+			prio = 10
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+		Thread thread2 {
+			execmode = polled
+			interval = 1 ms
+			prio = 10
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+	}
+	
+	NodeClass MSP430_Node {
+		runtime = runtimes.MSP430Runtime
+		priomin = 1
+		priomax = 10
+		DefaultThread main {
+			execmode = polled
+			interval = 10 us
+			prio = 10
+			stacksize = 256
+			msgblocksize = 64
+			msgpoolsize = 50
+		}
+	}
+}

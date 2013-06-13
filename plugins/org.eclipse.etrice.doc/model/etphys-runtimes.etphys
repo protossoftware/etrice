@@ -1,0 +1,10 @@
+PhysicalModel runtimes {
+	
+	RuntimeClass PCRuntime {
+		model = multiThreaded
+	}
+	
+	RuntimeClass MSP430Runtime {
+		model = singleThreaded
+	}
+}
