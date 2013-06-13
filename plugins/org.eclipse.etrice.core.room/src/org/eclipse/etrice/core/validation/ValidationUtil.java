@@ -200,7 +200,7 @@ public class ValidationUtil {
 			return true;
 		
 		for (ActorRef ar : ref.getActorRefs()) {
-			if (isKindOf(ar.getType(), ac))
+			if (isKindOf(ar.getType(), ac) || isKindOf(ref, ar.getType()))
 				return true;
 			else if (isReferencing(ar.getType(), ac))
 				return true;
