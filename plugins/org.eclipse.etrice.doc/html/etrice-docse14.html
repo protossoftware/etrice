@@ -4,76 +4,80 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Finish the model structure</title> 
+<head><title>Create a new model from scratch</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 161--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 23--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse15.html" >next</a>] [<a 
 href="etrice-docse13.html" >prev</a>] [<a 
 href="etrice-docse13.html#tailetrice-docse13.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse14.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse14.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.6   </span> <a 
- id="x22-410006.6"></a>Finish the model structure</h3>
-<!--l. 163--><p class="noindent" >From the outline view right click to <span 
-class="ec-lmsso-10">Blinky </span>and select <span 
-class="ec-lmsso-10">Edit Structure</span>. Drag and Drop an <span 
-class="ec-lmsso-10">Interface Port </span>to the
-boarder of the <span 
-class="ec-lmsso-10">Blinky </span>actor. Note that an interface port is not possible inside the actor. Name the port
+href="etrice-docch5.html#etrice-docse14.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x21-650005.2"></a>Create a new model from scratch</h3>
+<!--l. 25--><p class="noindent" >Before you can create a new C-model, you have to create a new C project as described in <span 
+class="ec-lmsso-10">Setting up the</span>
 <span 
-class="ec-lmsso-10">ControlPort </span>and select <span 
-class="ec-lmsso-10">BlinkyControlProtocol </span>from the drop down list. Uncheck <span 
-class="ec-lmsso-10">Conjugated </span>and <span 
-class="ec-lmsso-10">Is Relay Port</span>.
-Click <span 
-class="ec-lmsso-10">ok</span>. The resulting structure should look like this:
-</p><!--l. 169--><p class="noindent" ><img 
-src="images/020-Blinky04.png" alt="PIC"  
+class="ec-lmsso-10">Workspace for C Projects</span>. Remember: </p>
+     <ul class="itemize1">
+     <li class="itemize">select the <span 
+class="ec-lmsso-10">C/C++ </span>perspective
+     </li>
+     <li class="itemize">From the main menue select <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project</span>
+     </li>
+     <li class="itemize">Name the project <span 
+class="ec-lmsso-10">HelloWorldC</span>
+     </li>
+     <li class="itemize">Project type is <span 
+class="ec-lmsso-10">Executable / Empty C Project</span>
+     </li>
+     <li class="itemize">Toolchain is <span 
+class="ec-lmsso-10">MinGW</span></li></ul>
+<!--l. 36--><p class="noindent" >The workspace should look like this:
+</p><!--l. 38--><p class="noindent" ><img 
+src="images/034-HelloWorldC01.png" alt="PIC"  
  />
-</p><!--l. 172--><p class="noindent" >Repeat the above steps for the <span 
-class="ec-lmsso-10">BlinkyController</span>. Make the port <span 
-class="ec-lmsso-10">Conjugated</span>
-</p><!--l. 174--><p class="noindent" >Keep in mind that the protocol defines <span 
-class="ec-lmsso-10">start </span>and <span 
-class="ec-lmsso-10">stop </span>as incoming messages. <span 
-class="ec-lmsso-10">Blinky </span>receives this messages and
-therefore <span 
-class="ec-lmsso-10">Blinky</span>&#8217;s <span 
-class="ec-lmsso-10">ControlPort </span>must be a regular port and <span 
-class="ec-lmsso-10">BlinkyController</span>&#8217;s <span 
-class="ec-lmsso-10">ControlPort </span>must be a
-conjugated port.
-</p><!--l. 179--><p class="noindent" >From the outline view right click <span 
-class="ec-lmsso-10">BlinkyTop </span>and select <span 
-class="ec-lmsso-10">Edit Structure</span>.
-</p><!--l. 181--><p class="noindent" >Drag and Drop an <span 
-class="ec-lmsso-10">ActorRef  </span>inside the <span 
-class="ec-lmsso-10">BlinkyTop </span>actor. Name it <span 
-class="ec-lmsso-10">blinky</span>. From the actor class drop down list
-select <span 
-class="ec-lmsso-10">Blinky</span>. Do the same for <span 
-class="ec-lmsso-10">controller</span>. Connect the ports via the binding tool. The resulting structure
-should look like this:
-</p><!--l. 185--><p class="noindent" ><img 
-src="images/020-Blinky05.png" alt="PIC"  
+</p><!--l. 41--><p class="noindent" >The next step is to add the model folder: Right click on the new project. Select <span 
+class="ec-lmsso-10">New-&#x003E;Folder </span>and name it
+<span 
+class="ec-lmsso-10">model</span>.
+</p><!--l. 44--><p class="noindent" ><img 
+src="images/034-HelloWorldC02.png" alt="PIC"  
+ />
+</p><!--l. 47--><p class="noindent" >Add the model file to the folder. Right click on the new folder. Select <span 
+class="ec-lmsso-10">New-&#x003E;file </span>and name it
+<span 
+class="ec-lmsso-10">HelloWorldC.room</span>.
+</p><!--l. 50--><p class="noindent" ><img 
+src="images/034-HelloWorldC03.png" alt="PIC"  
+ />
+</p><!--l. 53--><p class="noindent" >Due to the file ending <span 
+class="ec-lmsso-10">.room</span>, the tool will ask you to add the Xtext nature. Answer with <span 
+class="ec-lmsso-10">Yes</span>.
+</p><!--l. 56--><p class="noindent" ><img 
+src="images/034-HelloWorldC04.png" alt="PIC"  
+ />
+</p><!--l. 59--><p class="noindent" >The workspace should look like this:
+</p><!--l. 61--><p class="noindent" ><img 
+src="images/034-HelloWorldC05.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 188--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 66--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse15.html" >next</a>] [<a 
 href="etrice-docse13.html" >prev</a>] [<a 
 href="etrice-docse13.html#tailetrice-docse13.html" >prev-tail</a>] [<a 
 href="etrice-docse14.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse14.html" >up</a>] </p></div>
-<!--l. 188--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse14.html" >up</a>] </p></div>
+<!--l. 66--><p class="noindent" ><a 
  id="tailetrice-docse14.html"></a> </p> 
 </body></html> 

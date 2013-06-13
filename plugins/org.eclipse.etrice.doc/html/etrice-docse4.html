@@ -4,102 +4,103 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create a new model from scratch</title> 
+<head><title>Setting up the Workspace for Java Projects</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse5.html" >next</a>] [<a 
 href="etrice-docse3.html" >prev</a>] [<a 
 href="etrice-docse3.html#tailetrice-docse3.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse4.html">tail</a>] [<a 
-href="etrice-docch5.html#etrice-docse4.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
- id="x11-300005.2"></a>Create a new model from scratch</h3>
-<!--l. 20--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu
-select <span 
-class="ec-lmssbx-10">File-&#x003E;New-&#x003E;Project </span>and create a new eTrice project and name it <span 
-class="ec-lmssbx-10">HelloWorld</span>.
-</p><!--l. 23--><p class="noindent" ><img 
-src="images/015-HelloWorld10.png" alt="PIC"  
+href="etrice-docch2.html#etrice-docse4.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x8-270002.2"></a>Setting up the Workspace for Java Projects</h3>
+<!--l. 3--><p class="noindent" >After installation of eclipse and the eTrice plug in, your workspace should look like this:
+</p><!--l. 5--><p class="noindent" ><img 
+src="images/013-SetupWorkspace01.png" alt="PIC"  
  />
-</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project
-should look like this:
-</p><!--l. 29--><p class="noindent" ><img 
-src="images/015-HelloWorld11.png" alt="PIC"  
+</p><!--l. 8--><p class="noindent" >Just the <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> menu item is visible of the installed eTrice plugins.
+</p><!--l. 10--><p class="noindent" >Select the menu <span 
+class="ec-lmssbx-10">File-&#x003E;New-&#x003E;Other</span>
+</p><!--l. 12--><p class="noindent" ><img 
+src="images/013-SetupWorkspace02.png" alt="PIC"  
  />
-</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
-class="ec-lmsso-10">HelloWorld.room </span>was created. Open the <span 
-class="ec-lmsso-10">HelloWorld.room </span>file
-and delete the contents of the file. Open the content assist with Ctrl+Space and select <span 
-class="ec-lmsso-10">model</span>
+</p><!--l. 15--><p class="noindent" >Open the <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> tab and select <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">Java Runtime</span>
+</p><!--l. 17--><p class="noindent" >Press <span 
+class="ec-lmsso-10">Next </span>and <span 
+class="ec-lmsso-10">Finish </span>to install the Runtime into your workspace.
+</p><!--l. 19--><p class="noindent" ><img 
+src="images/013-SetupWorkspace03.png" alt="PIC"  
+ />
+</p><!--l. 22--><p class="noindent" >Do the same steps for <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">Java Modellib </span>and <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">Java Tutorials</span>. To avoid temporary error
+markers you should keep the proposed order of installation. The resulting workspace should look like
+this:
+</p><!--l. 26--><p class="noindent" ><img 
+src="images/013-SetupWorkspace04.png" alt="PIC"  
+ />
+</p><!--l. 29--><p class="noindent" >Now workspace is set up and you can perform the tutorials or start with your work.
+</p><!--l. 31--><p class="noindent" >The tutorial models are available in the <span 
+class="ec-lmsso-10">org.eclipse.etrice.tutorials.java </span>project. All tutorials
+are ready to generate and run without any changes. To start the code generator simply run
 <span 
-class="ec-lmsso-10">skeleton</span>.
-</p><!--l. 36--><p class="noindent" ><img 
-src="images/015-HelloWorld12.png" alt="PIC"  
+class="ec-lmssbx-10">gen_org.eclipse.etrice.tutorials.java.launch </span>as <span 
+class="ec-lmssbx-10">gen_org.eclipse.etrice.tutorials.java</span>:
+</p><!--l. 35--><p class="noindent" ><img 
+src="images/013-SetupWorkspace05.png" alt="PIC"  
  />
-</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
-</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-1">
-RoomModel&#x00A0;HelloWorld&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_HelloWorld&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;subsystem&#x00A0;:&#x00A0;SubSystem_HelloWorld
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SubSystem_HelloWorld&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;application&#x00A0;:&#x00A0;HelloWorldTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;HelloWorldTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 57--><p class="nopar" >
-</p><!--l. 59--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
-elements will be used. But as prerequisite for further versions the following elements can be defined:
-</p>
-     <ul class="itemize1">
-     <li class="itemize">the <span 
-class="ec-lmsso-10">LogicalSystem </span>(currently optional)
-     </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">SubSystemClass </span>(mandatory)
-     </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">ActorClass </span>(mandatory)</li></ul>
-<!--l. 67--><p class="noindent" >The <span 
-class="ec-lmsso-10">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
-class="ec-lmsso-10">SubSystemRef</span>. The
+</p><!--l. 38--><p class="noindent" >The successful generation ends with <span 
+class="ec-lmsso-10">Info: &#8211; finished code generation </span>in the Console.
+</p><!--l. 40--><p class="noindent" ><img 
+src="images/013-SetupWorkspace051.png" alt="PIC"  
+ />
+</p><!--l. 44--><p class="noindent" >For each tutorial in the folder src-gen a java package is generated including a java file called
 <span 
-class="ec-lmsso-10">SubSystemClass </span>represents an address space and contains at least one <span 
-class="ec-lmsso-10">ActorRef</span>. The <span 
-class="ec-lmsso-10">ActorClass </span>is the
-building block of which an application will be built of. It is in general a good idea to define a top level actor
-that can be used as reference within the subsystem.
-</p><!--l. 72--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
-tree.
-</p><!--l. 74--><p class="noindent" ><img 
-src="images/015-HelloWorld02.png" alt="PIC"  
+class="ec-lmssbx-10">SubSystem_&#x003C;Modelname&#x003E;Runner.java </span>. To run the a generated application simply run this file as a java
+application:
+</p><!--l. 47--><p class="noindent" ><img 
+src="images/013-SetupWorkspace06.png" alt="PIC"  
  />
+</p><!--l. 50--><p class="noindent" >To stop the application type <span 
+class="ec-lmsso-10">quit </span>in the console window.
+</p><!--l. 52--><p class="noindent" ><img 
+src="images/013-SetupWorkspace07.png" alt="PIC"  
+ />
+</p><!--l. 55--><p class="noindent" >Performing the tutorials will setup a dedicated project for each tutorial. Therefore there are some slight
+changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is
+described in the tutorials.
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
                                                                                  
                                                                                  
 </p>
-<!--l. 78--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse5.html" >next</a>] [<a 
 href="etrice-docse3.html" >prev</a>] [<a 
 href="etrice-docse3.html#tailetrice-docse3.html" >prev-tail</a>] [<a 
 href="etrice-docse4.html" >front</a>] [<a 
-href="etrice-docch5.html#etrice-docse4.html" >up</a>] </p></div>
-<!--l. 78--><p class="noindent" ><a 
+href="etrice-docch2.html#etrice-docse4.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse4.html"></a> </p> 
 </body></html> 

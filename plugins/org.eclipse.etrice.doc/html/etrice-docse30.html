@@ -4,83 +4,55 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Building the C runtime system</title> 
+<head><title>DataClass</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch10.html" >next</a>] [<a 
+<!--l. 229--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse31.html" >next</a>] [<a 
 href="etrice-docse29.html" >prev</a>] [<a 
 href="etrice-docse29.html#tailetrice-docse29.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse30.html">tail</a>] [<a 
-href="etrice-docch9.html#etrice-docse30.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">9.2   </span> <a 
- id="x41-620009.2"></a>Building the C runtime system</h3>
-<!--l. 59--><p class="noindent" >The C runtime system contains some basic functionalities to run the generated models. The so called runtime
-is common for all C projects. The requirements for several projects may differ depending on the functionality of
-the model or the resources of the different platforms. Therefore the runtime is configurable in terms of
-message queue size, frequency and memory alignment. The configuration file <span 
-class="ec-lmsso-10">etRuntimeConfig.h </span>is located in
-<span 
-class="ec-lmsso-10">src/config</span>.
-</p><!--l. 65--><p class="noindent" >After changing the configuration, the runtime must be built.
-</p><!--l. 67--><p class="noindent" >Open the properties of the <span 
-class="ec-lmsso-10">org.eclipse.runtime.c </span>project and select <span 
-class="ec-lmsso-10">C/C++ Build-&#x003E;Settings-&#x003E;Tool Settings</span>
-and select <span 
-class="ec-lmsso-10">Includes</span>.
-</p><!--l. 70--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC08.png" alt="PIC"  
- />
-</p><!--l. 73--><p class="noindent" >Verify the include paths
+href="etrice-docch7.html#etrice-docse30.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">7.4   </span> <a 
+ id="x39-980007.4"></a>DataClass</h3>
+<!--l. 231--><p class="noindent" >
 </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmsso-10">src/config</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">src/common</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">src/platforms/generic</span></li></ul>
-<!--l. 81--><p class="noindent" >Within the Setting dialog select the tab <span 
-class="ec-lmsso-10">Build Artefact </span>and select <span 
-class="ec-lmsso-10">Static Library</span>
-</p><!--l. 83--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC09.png" alt="PIC"  
+<h4 class="subsectionHead"><span class="titlemark">7.4.1   </span> <a 
+ id="x39-990007.4.1"></a>Description</h4>
+<!--l. 233--><p class="noindent" >The <span id="textcolor47"><span 
+class="ec-lmssbx-10">DataClass</span></span> enables the modeling of hierarchical complex data types and operations on them. The data
+class is the equivalent to a class in languages like Java or C++, but has less features. The content
+of a data class can always be sent via message between actors (defined as message data in a
+<span id="textcolor48"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span>).
+</p><!--l. 237--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">7.4.2   </span> <a 
+ id="x39-1000007.4.2"></a>Notation</h4>
+<!--l. 239--><p class="noindent" >Example: DataClass using PrimitiveTypes
+</p><!--l. 241--><p class="noindent" ><img 
+src="images/040-DataClass1.png" alt="PIC"  
  />
-</p><!--l. 86--><p class="noindent" >Build the runtime by clicking
-</p><!--l. 88--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC10.png" alt="PIC"  
+</p><!--l. 243--><p class="noindent" >Example: DataClass using other DataClasses:
+</p><!--l. 245--><p class="noindent" ><img 
+src="images/040-DataClass2.png" alt="PIC"  
  />
-</p><!--l. 91--><p class="noindent" >The runtime library should be created.
-</p><!--l. 93--><p class="noindent" ><img 
-src="images/032-SetupWorkspaceC11.png" alt="PIC"  
- />
-</p><!--l. 96--><p class="noindent" >For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to build
-project specific runtime libraries. In this case a separate project for the runtime should be created. Symbolic
-links to the sources might be used to avoid duplicate files. Just the configuration file must be duplicated. A
-specific library file must exist within the project. Such specific runtime libraries might be referenced from
-several applications.
-                                                                                 
-                                                                                 
-                                                                                 
-                                                                                 
                                                                                  
                                                                                  
 </p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch10.html" >next</a>] [<a 
+<!--l. 247--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse31.html" >next</a>] [<a 
 href="etrice-docse29.html" >prev</a>] [<a 
 href="etrice-docse29.html#tailetrice-docse29.html" >prev-tail</a>] [<a 
 href="etrice-docse30.html" >front</a>] [<a 
-href="etrice-docch9.html#etrice-docse30.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch7.html#etrice-docse30.html" >up</a>] </p></div>
+<!--l. 247--><p class="noindent" ><a 
  id="tailetrice-docse30.html"></a> </p> 
 </body></html> 

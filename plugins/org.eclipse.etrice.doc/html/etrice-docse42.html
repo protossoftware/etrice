@@ -4,82 +4,69 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create the model</title> 
+<head><title>Create a new model from scratch</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:07:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 22--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse43.html" >next</a>] [<a 
 href="etrice-docse41.html" >prev</a>] [<a 
 href="etrice-docse41.html#tailetrice-docse41.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse42.html">tail</a>] [<a 
-href="etrice-docch11.html#etrice-docse42.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">11.4   </span> <a 
- id="x55-7600011.4"></a>Create the model</h3>
-<!--l. 87--><p class="noindent" >Due to the former tutorials you should be familiar with the steps to create the model with protocols, actors
-and state machines.
-</p><!--l. 90--><p class="noindent" >The basic idea of the exercise is to create a file reader actor, which is responsible to open, close and read
-characters from the source file. Another actor receives the characters and filters the comments (parser). The
-remaining characters (pure source code) should be print out.
-</p><!--l. 94--><p class="noindent" >Remember the logical steps: </p>
+href="etrice-docch9.html#etrice-docse42.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">9.2   </span> <a 
+ id="x53-750009.2"></a>Create a new model from scratch</h3>
+<!--l. 24--><p class="noindent" >Remember the following steps from the previous tutorials: </p>
      <ul class="itemize1">
-     <li class="itemize">create the model by the help of content assist (CTRL Space)
+     <li class="itemize">select the <span 
+class="ec-lmsso-10">C/C++ </span>perspective
      </li>
-     <li class="itemize">name the model, subsystem and top level actor
+     <li class="itemize">From the main menue select <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project</span>
      </li>
-     <li class="itemize">define the protocol (in this case it should be able to send a char, and to request the next char
-     from the file reader)
+     <li class="itemize">Name the project <span 
+class="ec-lmsso-10">RemoveComment</span>
      </li>
-     <li class="itemize">create the structure (file reader and parser with an appropriate port, create the references and
-     connect the ports)
+     <li class="itemize">Project type is <span 
+class="ec-lmsso-10">Executable / Empty C Project</span>
      </li>
-     <li class="itemize">create the state machines</li></ul>
-<!--l. 105--><p class="noindent" >Try to create the model by yourself and take the following solution as an example.
-</p><!--l. 107--><p class="noindent" >Structure:
-</p><!--l. 109--><p class="noindent" ><img 
-src="images/036-RemoveCommentC04.png" alt="PIC"  
+     <li class="itemize">Toolchain is <span 
+class="ec-lmsso-10">MinGW</span>
+     </li>
+     <li class="itemize">Add the folder <span 
+class="ec-lmsso-10">model</span>
+     </li>
+     <li class="itemize">Add the model file and name it <span 
+class="ec-lmsso-10">RemoveComment.room</span>
+     </li>
+     <li class="itemize">Add the Xtext nature.</li></ul>
+<!--l. 36--><p class="noindent" >The workspace should look like this:
+</p><!--l. 38--><p class="noindent" ><img 
+src="images/036-RemoveCommentC01.png" alt="PIC"  
  />
-</p><!--l. 112--><p class="noindent" >File reader FSM:
-</p><!--l. 114--><p class="noindent" ><img 
-src="images/036-RemoveCommentC05.png" alt="PIC"  
- />
-</p><!--l. 117--><p class="noindent" >Parser FSM:
-</p><!--l. 119--><p class="noindent" ><img 
-src="images/036-RemoveCommentC06.png" alt="PIC"  
- />
-</p><!--l. 122--><p class="noindent" >The complete model can be found in <span 
-class="ec-lmsso-10">org.eclipse.etrice.tutorials.c</span>
-</p><!--l. 124--><p class="noindent" >Take a look at the file attribute of the file reader.
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-21">
-Attribute&#x00A0;f:file&#x00A0;ref
-</div>
-<!--l. 128--><p class="nopar" >
-</p><!--l. 130--><p class="noindent" ><span 
-class="ec-lmsso-10">fopen </span>expects a <span 
-class="ec-lmsso-10">FILE *</span>. <span 
-class="ec-lmsso-10">f:file ref  </span>declares a variable <span 
-class="ec-lmsso-10">f  </span>from type reference to <span 
-class="ec-lmsso-10">file</span>, which is a pointer to
+</p><!--l. 41--><p class="noindent" >Create a launch configuration for the C generator and add the include path and library as described in
 <span 
-class="ec-lmsso-10">FILE</span>.
+class="ec-lmsso-10">HelloWorldC</span>.
+</p><!--l. 44--><p class="noindent" >The workspace should look like this:
+</p><!--l. 46--><p class="noindent" ><img 
+src="images/036-RemoveCommentC02.png" alt="PIC"  
+ />
+</p><!--l. 49--><p class="noindent" >Now the model is created and all settings for the code generator, compiler and linker are done.
                                                                                  
                                                                                  
 </p>
-<!--l. 134--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 52--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse43.html" >next</a>] [<a 
 href="etrice-docse41.html" >prev</a>] [<a 
 href="etrice-docse41.html#tailetrice-docse41.html" >prev-tail</a>] [<a 
 href="etrice-docse42.html" >front</a>] [<a 
-href="etrice-docch11.html#etrice-docse42.html" >up</a>] </p></div>
-<!--l. 134--><p class="noindent" ><a 
+href="etrice-docch9.html#etrice-docse42.html" >up</a>] </p></div>
+<!--l. 52--><p class="noindent" ><a 
  id="tailetrice-docse42.html"></a> </p> 
 </body></html> 

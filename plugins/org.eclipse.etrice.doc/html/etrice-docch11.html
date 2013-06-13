@@ -4,49 +4,59 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>11 Tutorial Remove C-Comment ( C )</title> 
+<head><title>11 eTrice Features</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:07:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse39.html" >next</a>] [<a 
-href="etrice-docse38.html" >prev</a>] [<a 
-href="etrice-docse38.html#tailetrice-docse38.html" >prev-tail</a>] [<a 
+<!--l. 57--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse53.html" >next</a>] [<a 
+href="etrice-docse52.html" >prev</a>] [<a 
+href="etrice-docse52.html#tailetrice-docse52.html" >prev-tail</a>] [<a 
 href="#tailetrice-docch11.html">tail</a>] [<a 
 href="etrice-doc.html#etrice-docch11.html" >up</a>] </p></div>
 <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;11</span><br /><a 
- id="x51-7200011"></a>Tutorial Remove C-Comment ( C )</h2>
+ id="x65-11200011"></a>eTrice Features</h2>
+                                                                                 
+                                                                                 
 <div class="sectionTOCS">
 &#x00A0;<span class="sectionToc" >11.1 <a 
-href="etrice-docse39.html#x52-7300011.1">Scope</a></span>
+href="etrice-docse53.html#x66-11300011.1">Automatic Diagram Layout with KIELER</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.1 <a 
+href="etrice-docse53.html#x66-11400011.1.1">Overview</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.2 <a 
+href="etrice-docse53.html#x66-11500011.1.2">Performing Automatic Layout</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.3 <a 
+href="etrice-docse53.html#x66-11600011.1.3">Layout Options</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.4 <a 
+href="etrice-docse53.html#x66-11700011.1.4">Configuring Layout Options</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.5 <a 
+href="etrice-docse53.html#x66-12200011.1.5">Special Layout Options</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.1.6 <a 
+href="etrice-docse53.html#x66-12500011.1.6">Further References</a></span>
 <br />&#x00A0;<span class="sectionToc" >11.2 <a 
-href="etrice-docse40.html#x53-7400011.2">Create a new model from scratch</a></span>
-<br />&#x00A0;<span class="sectionToc" >11.3 <a 
-href="etrice-docse41.html#x54-7500011.3">Create your own data type</a></span>
-<br />&#x00A0;<span class="sectionToc" >11.4 <a 
-href="etrice-docse42.html#x55-7600011.4">Create the model</a></span>
-<br />&#x00A0;<span class="sectionToc" >11.5 <a 
-href="etrice-docse43.html#x56-7700011.5">Generate, build and run the model</a></span>
-<br />&#x00A0;<span class="sectionToc" >11.6 <a 
-href="etrice-docse44.html#x57-7800011.6">Summary</a></span>
+href="etrice-docse54.html#x67-12600011.2">eTrice Models and Their Relations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.1 <a 
+href="etrice-docse54.html#x67-12700011.2.1">The ROOM Model</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.2 <a 
+href="etrice-docse54.html#x67-12800011.2.2">The Config Model</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.3 <a 
+href="etrice-docse54.html#x67-12900011.2.3">The Physical Model</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.4 <a 
+href="etrice-docse54.html#x67-13000011.2.4">The Mapping Model</a></span>
 </div>
-
-
-
-
 
                                                                                  
                                                                                  
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse39.html" >next</a>] [<a 
-href="etrice-docse38.html" >prev</a>] [<a 
-href="etrice-docse38.html#tailetrice-docse38.html" >prev-tail</a>] [<a 
+href="etrice-docse53.html" >next</a>] [<a 
+href="etrice-docse52.html" >prev</a>] [<a 
+href="etrice-docse52.html#tailetrice-docse52.html" >prev-tail</a>] [<a 
 href="etrice-docch11.html" >front</a>] [<a 
 href="etrice-doc.html#etrice-docch11.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 

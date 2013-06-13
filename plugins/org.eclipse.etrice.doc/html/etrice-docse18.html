@@ -4,55 +4,48 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create a new model from scratch</title> 
+<head><title>Setup the include path</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 20--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 154--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse19.html" >next</a>] [<a 
 href="etrice-docse17.html" >prev</a>] [<a 
 href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse18.html">tail</a>] [<a 
-href="etrice-docch7.html#etrice-docse18.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
- id="x27-460007.2"></a>Create a new model from scratch</h3>
-<!--l. 22--><p class="noindent" >Remember exercise <span 
-class="ec-lmsso-10">HelloWorld</span>. Create a new eTrice project and name it <span 
-class="ec-lmsso-10">SendingData</span>. Open the
+href="etrice-docch5.html#etrice-docse18.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.6   </span> <a 
+ id="x25-690005.6"></a>Setup the include path</h3>
+<!--l. 156--><p class="noindent" >Before you can build the application you must setup the include path for the runtime system.
+Right click the project and select <span 
+class="ec-lmsso-10">Properties</span>. Add the include path as described in <span 
+class="ec-lmsso-10">setting up the</span>
 <span 
-class="ec-lmsso-10">SendingData.room </span>file and copy the following code into the file or use content assist to create the
-model.
+class="ec-lmsso-10">workspace</span>.
+</p><!--l. 160--><p class="noindent" ><img 
+src="images/034-HelloWorldC14.png" alt="PIC"  
+ />
+</p><!--l. 163--><p class="noindent" >Add the runtime library.
+</p><!--l. 165--><p class="noindent" ><img 
+src="images/034-HelloWorldC15.png" alt="PIC"  
+ />
+</p><!--l. 168--><p class="noindent" >Recognize the name of the library ("org.eclipse.etrice.runtime.c"). The library file on your disk is
+"liborg.eclipse.etrice.runtime.c.a".
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-10">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 39--><p class="nopar" >
-                                                                                 
-                                                                                 
-</p>
-<!--l. 41--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 171--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse19.html" >next</a>] [<a 
 href="etrice-docse17.html" >prev</a>] [<a 
 href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
 href="etrice-docse18.html" >front</a>] [<a 
-href="etrice-docch7.html#etrice-docse18.html" >up</a>] </p></div>
-<!--l. 41--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse18.html" >up</a>] </p></div>
+<!--l. 171--><p class="noindent" ><a 
  id="tailetrice-docse18.html"></a> </p> 
 </body></html> 

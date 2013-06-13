@@ -4,106 +4,60 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>4 Setting up the Workspace for Java Projects</title> 
+<head><title>4 Setting up the Workspace for C Projects</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
-href="etrice-docch3.html" >prev</a>] [<a 
-href="etrice-docch3.html#tailetrice-docch3.html" >prev-tail</a>] [<a 
+href="etrice-docse11.html" >next</a>] [<a 
+href="etrice-docse10.html" >prev</a>] [<a 
+href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docch4.html">tail</a>] [<a 
 href="etrice-doc.html#etrice-docch4.html" >up</a>] </p></div>
 <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;4</span><br /><a 
- id="x8-270004"></a>Setting up the Workspace for Java Projects</h2>
-<!--l. 3--><p class="noindent" >ETrice generates code out of ROOM models. The code generator and the generated code relies on a runtime
-framework and on some ready to use model parts. This parts provide services like:
+ id="x16-600004"></a>Setting up the Workspace for C Projects</h2>
+<!--l. 3--><p class="noindent" >Before you can start with C, some preconditions must be fulfilled:
+     </p><dl class="description"><dt class="description">
+ </dt><dd 
+class="description">A C compiler must be installed on your machine (all tests and tutorials are based on MinGW)
+     </dd><dt class="description">
+ </dt><dd 
+class="description">The CDT-Eclipse plugin must be installed as the C development environment.</dd></dl>
+<!--l. 10--><p class="noindent" >Once the CDT is installed, the C runtime and model library must be imported. (<span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;Project-&#x003E;</span><span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span>
+select <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">C runtime </span>/ <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">C modellib</span>)
+</p><!--l. 13--><p class="noindent" >The resulting workspace should look like this:
+</p><!--l. 15--><p class="noindent" ><img 
+src="images/032-SetupWorkspaceC01.png" alt="PIC"  
+ />
 </p>
-     <ul class="itemize1">
-     <li class="itemize">messaging
-     </li>
-     <li class="itemize">logging
-     </li>
-     <li class="itemize">timing</li></ul>
-<!--l. 12--><p class="noindent" >Additionally some tutorial models will be provided to make it easy to start with eTrice. All this parts must be
-available in our workspace before you can start working. After installation of eclipse (juno) and the eTrice plug
-in, your workspace should look like this:
-</p><!--l. 16--><p class="noindent" ><img 
-src="images/013-SetupWorkspace01.png" alt="PIC"  
- />
-</p><!--l. 19--><p class="noindent" >Just the <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> menu item is visible from the eTrice tool. From the <span 
-class="ec-lmsso-10">File </span>menu select <span 
-class="ec-lmssbx-10">File-&#x003E;New-&#x003E;Project</span>
-</p><!--l. 22--><p class="noindent" ><img 
-src="images/013-SetupWorkspace02.png" alt="PIC"  
- />
-</p><!--l. 25--><p class="noindent" >Open the <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> tab and select <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> <span 
-class="ec-lmsso-10">Java Runtime</span>
-</p><!--l. 27--><p class="noindent" >Press <span 
-class="ec-lmsso-10">Next </span>and <span 
-class="ec-lmsso-10">Finish </span>to install the Runtime into your workspace.
-</p><!--l. 29--><p class="noindent" ><img 
-src="images/013-SetupWorkspace03.png" alt="PIC"  
- />
-</p><!--l. 32--><p class="noindent" >Do the same steps for <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> <span 
-class="ec-lmsso-10">Java Modellib </span>and <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> <span 
-class="ec-lmsso-10">Java Tutorials</span>. To avoid temporary error
-markers you should keep the proposed order of installation. The resulting workspace should look like
-this:
-</p><!--l. 36--><p class="noindent" ><img 
-src="images/013-SetupWorkspace04.png" alt="PIC"  
- />
-</p><!--l. 39--><p class="noindent" >Now workspace is set up and you can perform the tutorials or start with your work.
-</p><!--l. 41--><p class="noindent" >The tutorial models are available in the <span 
-class="ec-lmsso-10">org.eclipse.etrice.tutorials </span>project. All tutorials are ready to generate
-and run without any changes. To start the code generator simply run <span 
-class="ec-lmssbx-10">gen_org.eclipse.etrice.tutorials.launch</span>
-as <span 
-class="ec-lmssbx-10">gen_org.eclipse.etrice.tutorials.launch</span>:
-</p><!--l. 45--><p class="noindent" ><img 
-src="images/013-SetupWorkspace05.png" alt="PIC"  
- />
-</p><!--l. 48--><p class="noindent" >After generation for each tutorial a java file called <span 
-class="ec-lmssbx-10">SubSystem_ModelnameRunner.java </span>is generated. To run
-the model simply run this file as a java application:
-</p><!--l. 51--><p class="noindent" ><img 
-src="images/013-SetupWorkspace06.png" alt="PIC"  
- />
-</p><!--l. 54--><p class="noindent" >To stop the application type <span 
-class="ec-lmsso-10">quit </span>in the console window.
-</p><!--l. 56--><p class="noindent" ><img 
-src="images/013-SetupWorkspace07.png" alt="PIC"  
- />
-</p><!--l. 59--><p class="noindent" >Performing the tutorials will setup an dedicated project for each tutorial. Therefore there are some slight
-changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is
-described in the tutorials.
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >4.1 <a 
+href="etrice-docse11.html#x17-610004.1">Testing the environment</a></span>
+<br />&#x00A0;<span class="sectionToc" >4.2 <a 
+href="etrice-docse12.html#x18-620004.2">Building the C runtime system</a></span>
+</div>
+
                                                                                  
                                                                                  
-                                                                                 
-                                                                                 
-                                                                                 
-                                                                                 
-</p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
-href="etrice-docch3.html" >prev</a>] [<a 
-href="etrice-docch3.html#tailetrice-docch3.html" >prev-tail</a>] [<a 
+href="etrice-docse11.html" >next</a>] [<a 
+href="etrice-docse10.html" >prev</a>] [<a 
+href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="etrice-docch4.html" >front</a>] [<a 
 href="etrice-doc.html#etrice-docch4.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 

@@ -4,67 +4,62 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create a new model from scratch</title> 
+<head><title>Why does it work and why is it safe?</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 39--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse11.html" >next</a>] [<a 
+<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse10.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse10.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x18-370006.2"></a>Create a new model from scratch</h3>
-<!--l. 41--><p class="noindent" >Remember the exercise <span 
-class="ec-lmsso-10">HelloWorld</span>. Create a new eTrice project and name it <span 
-class="ec-lmsso-10">Blinky</span>.
-</p><!--l. 44--><p class="noindent" >To use the GUI please copy the package <span 
-class="ec-lmsso-10">org.eclipse.etrice.tutorials.PedLightGUI </span>from <span 
-class="ec-lmsso-10">org.eclipse.etrice.tutorials/src</span>
-to your <span 
-class="ec-lmsso-10">src </span>directory <span 
-class="ec-lmsso-10">Blinky/src</span>. For this tutorial you must remove the error markers by editing the file
+href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x15-590003.3"></a>Why does it work and why is it safe?</h3>
+<!--l. 99--><p class="noindent" >The tutorial shows that it is generally possible to use every port from outside the model as long as the port
+knows its peer. This is guaranteed by describing protocol and the complete structure (especially the bindings)
+within the model. The only remaining question is: Why is it safe and does not violate the <span 
+class="ec-lmssbx-10">run to</span>
 <span 
-class="ec-lmsso-10">PedestrianLightWndNoTcp.java</span>. Appropriate comments are provided to remove the error markers for this
-turorial.
-</p><!--l. 49--><p class="noindent" >Open the <span 
-class="ec-lmsso-10">Blinky.room </span>file and copy the following code into the file or use content assist to create the
-model.
+class="ec-lmssbx-10">completion </span>semantic. To answer this question, take a look at the <span 
+class="ec-lmsso-10">MessageService.java </span>from the
+runtime environment. There you will find the receive method which puts each message into the
+queue.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-3">
-RoomModel&#x00A0;Blinky&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_Blinky&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;subsystem&#x00A0;:&#x00A0;SubSystem_Blinky
+<div class="verbatim" id="verbatim-18">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;public&#x00A0;synchronized&#x00A0;void&#x00A0;receive(Message&#x00A0;msg)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;(msg!=null)&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;messageQueue.push(msg);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;notifyAll();&#x00A0;//&#x00A0;wake&#x00A0;up&#x00A0;thread&#x00A0;to&#x00A0;compute&#x00A0;message
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SubSystem_Blinky&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;application&#x00A0;:&#x00A0;BlinkyTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;BlinkyTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
 </div>
-<!--l. 66--><p class="nopar" >
+<!--l. 114--><p class="nopar" >
+</p><!--l. 116--><p class="noindent" >This method is synchronized. That means, regardless who sends the message, the queue is secured. If we later
+on (e.g. for performance reasons in C/C++) distinguish between internal and external senders (same thread or
+not), care must be taken to use the external (secure) queue.
+                                                                                 
+                                                                                 
+                                                                                 
+                                                                                 
                                                                                  
                                                                                  
 </p>
-<!--l. 68--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse11.html" >next</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="etrice-docse10.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse10.html" >up</a>] </p></div>
-<!--l. 68--><p class="noindent" ><a 
+href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse10.html"></a> </p> 
 </body></html> 

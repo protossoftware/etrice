@@ -4,91 +4,58 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Create MrPing and MrPong Actors</title> 
+<head><title>Scope</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 82--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse22.html" >next</a>] [<a 
-href="etrice-docse20.html" >prev</a>] [<a 
-href="etrice-docse20.html#tailetrice-docse20.html" >prev-tail</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse21.html">tail</a>] [<a 
-href="etrice-docch7.html#etrice-docse21.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.5   </span> <a 
- id="x30-490007.5"></a>Create MrPing and MrPong Actors</h3>
-<!--l. 84--><p class="noindent" >With the help of <span 
-class="ec-lmsso-10">Content Assist </span>create two new actor classes and name them <span 
-class="ec-lmsso-10">MrPing </span>and <span 
-class="ec-lmsso-10">MrPong</span>. The
-resulting model should look like this:
+href="etrice-docch6.html#etrice-docse21.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+ id="x29-730006.1"></a>Scope</h3>
+<!--l. 5--><p class="noindent" >In this tutorial you will create a more complex model. The model implements a simple parser that removes
+comments (block comments and line comments) from a C source file. Therefore we will create two actors.
+One actor is responsible to perform the file operations, while the second actor implements the
+parser.
+</p><!--l. 9--><p class="noindent" >You will perform the following steps:
+</p><!--l. 11--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x29-73002x1">create a new model from scratch for C
+     </li>
+     <li 
+  class="enumerate" id="x29-73004x2">define a protocol
+     </li>
+     <li 
+  class="enumerate" id="x29-73006x3">define your own data type
+     </li>
+     <li 
+  class="enumerate" id="x29-73008x4">create the structure and the behavior by yourself
+     </li>
+     <li 
+  class="enumerate" id="x29-73010x5">generate, build and run the model</li></ol>
+<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
+class="ec-lmsso-10">Setting up the Workspace for C</span>
+<span 
+class="ec-lmsso-10">Projects</span>.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-13">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:&#x00A0;SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:&#x00A0;SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pingSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;outgoing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pong(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pongSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPong&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-&#x00A0;<br />
-</div>
-<!--l. 131--><p class="nopar" >
-</p><!--l. 133--><p class="noindent" >The outline view should look like this:
-</p><!--l. 135--><p class="noindent" ><img 
-src="images/025-SendingData03.png" alt="PIC"  
- />
-                                                                                 
-                                                                                 
-</p>
-<!--l. 138--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 22--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse22.html" >next</a>] [<a 
-href="etrice-docse20.html" >prev</a>] [<a 
-href="etrice-docse20.html#tailetrice-docse20.html" >prev-tail</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
 href="etrice-docse21.html" >front</a>] [<a 
-href="etrice-docch7.html#etrice-docse21.html" >up</a>] </p></div>
-<!--l. 138--><p class="noindent" ><a 
+href="etrice-docch6.html#etrice-docse21.html" >up</a>] </p></div>
+<!--l. 22--><p class="noindent" ><a 
  id="tailetrice-docse21.html"></a> </p> 
 </body></html> 

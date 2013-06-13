@@ -1,6 +1,6 @@
-\chapter{Tutorial Sending Data (Java)}
+\section{Tutorial Sending Data (Java)}
 
-\section{Scope}
+\subsection{Scope}
 
 This tutorial shows how data will be sent in a \eTrice{} model. Within the example you will create two actors 
 (MrPing and MrPong). MrPong will simply loop back every data it received.
@@ -17,7 +17,7 @@ You will perform the following steps:
 \item build and run the model
 \end{enumerate}
 
-\section{Create a new model from scratch}
+\subsection{Create a new model from scratch}
 
 Remember exercise \textit{HelloWorld}.
 Create a new \eTrice{} project and name it \textit{SendingData}.
@@ -38,7 +38,7 @@ RoomModel SendingData {
 }
 \end{verbatim}
 
-\section{Add a data class}
+\subsection{Add a data class}
 
 Position the cursor outside any class definition and right click the mouse within the editor window. From 
 the context menu select \textit{Content Assist} (or Ctrl+Space).  
@@ -61,7 +61,7 @@ DataClass DemoData {
 Save the model and visit the outline view.
 Note that the outline view contains all data elements as defined in the model. 
 
-\section{Create a new protocol}
+\subsection{Create a new protocol}
 
 With the help of \textit{Content Assist} create a \textit{ProtocolClass} and name it 
 \textit{PingPongProtocol}. Create the following messages:
@@ -79,7 +79,7 @@ ProtocolClass PingPongProtocol {
 }    
 \end{verbatim}
 
-\section{Create MrPing and MrPong Actors}
+\subsection{Create MrPing and MrPong Actors}
 
 With the help of \textit{Content Assist} create two new actor classes and name them \textit{MrPing} and 
 \textit{MrPong}. The resulting model should look like this:
@@ -135,7 +135,7 @@ The outline view should look like this:
 \includegraphics{images/025-SendingData03.png}
 % !images/025-SendingData03.png!
 
-\section{Define Actor Structure and Behavior}
+\subsection{Define Actor Structure and Behavior}
 
 Save the model and visit the outline view. Within the outline view, right click on the \textit{MrPong} 
 actor and select \textit{Edit Structure}. Select an \textit{Interface Port} from the toolbox and add it to 
@@ -219,7 +219,7 @@ For \textit{wait2}:
 \includegraphics[width=0.8\textwidth]{images/025-SendingData12.png}
 % !images/025-SendingData12.png!
 
-\section{Define the top level}
+\subsection{Define the top level}
 
 Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the ports.
 
@@ -229,7 +229,7 @@ Open the Structure from SendingDataTop and add MrPing and MrPong as a reference.
 \begin{flushleft}The model is finished now and can be found in 
 /org.eclipse.etrice.tutorials/model/SendingData.\end{flushleft}
 
-\section{Generate and run the model}
+\subsection{Generate and run the model}
 
 Generate the code by right click to \textbf{gen\_SendingData.launch} and run it as 
 \textbf{gen\_SendingData}. Run the model. 
@@ -285,7 +285,7 @@ quit
 echo: quit
 \end{verbatim}
 
-\section{Summary}
+\subsection{Summary}
 
 Within the first loop an integer value will be incremented by \textit{MrPong} and sent back to 
 \textit{MrPing}. As long as the guard is true \textit{MrPing} sends back the value.

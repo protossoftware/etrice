@@ -4,102 +4,59 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Import the Timing Service</title> 
+<head><title>Scope</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 102--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse14.html" >next</a>] [<a 
-href="etrice-docse12.html" >prev</a>] [<a 
-href="etrice-docse12.html#tailetrice-docse12.html" >prev-tail</a>] [<a 
+href="etrice-docch5.html" >prev</a>] [<a 
+href="etrice-docch5.html#tailetrice-docch5.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse13.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse13.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.5   </span> <a 
- id="x21-400006.5"></a>Import the Timing Service</h3>
-<!--l. 104--><p class="noindent" >Switching on and off the LED is timing controlled. The timing service is provided from the model library and
-must be imported before it can be used from the model.
-</p><!--l. 107--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path has the
-appropriate entry to the modellib. Otherwise the jave code, which will be generated from the modellib,
-can not be referenced. (right click to <span 
-class="ec-lmsso-10">Blinky </span>and select properties. Select the <span 
-class="ec-lmsso-10">Java Build Path</span>
-tab)
-</p><!--l. 112--><p class="noindent" ><img 
-src="images/020-Blinky16.png" alt="PIC"  
- />
-</p><!--l. 115--><p class="noindent" >After the build path is set up return to the model and navigate the cursor at the beginning of the model and
-import the timing service:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-4">
-RoomModel&#x00A0;Blinky&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;import&#x00A0;room.basic.service.timing.*&#x00A0;from
-&#x00A0;<br />"../../org.eclipse.etrice.modellib/models/TimingService.room"
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_Blinky&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;subsystem:&#x00A0;SubSystem\_Blinky
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-&#x00A0;<br />...
-</div>
-<!--l. 130--><p class="nopar" >
-</p><!--l. 133--><p class="noindent" >Make sure that the path fits to your folder structure. The original tutorial code is different due to the folder
-structure.
-</p><!--l. 136--><p class="noindent" >Now it can be used within the model. Right click to <span 
-class="ec-lmssbx-10">SubSystem_Blinky </span>within the outline view.
-Select <span 
-class="ec-lmsso-10">Edit Structure</span>. The <span 
-class="ec-lmsso-10">application </span>is already referenced in the subsystem. Drag and Drop an
+href="etrice-docch5.html#etrice-docse13.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x20-640005.1"></a>Scope</h3>
+<!--l. 5--><p class="noindent" >In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C
+compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for
+the following explanations. You will perform the following steps:
+</p><!--l. 10--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x20-64002x1">create a new model from scratch for C
+     </li>
+     <li 
+  class="enumerate" id="x20-64004x2">create structure and behavior similar to Java
+     </li>
+     <li 
+  class="enumerate" id="x20-64006x3">create a launch configuration for the C code generator
+     </li>
+     <li 
+  class="enumerate" id="x20-64008x4">setup the C environment
+     </li>
+     <li 
+  class="enumerate" id="x20-64010x5">generate the source code
+     </li>
+     <li 
+  class="enumerate" id="x20-64012x6">run the model</li></ol>
+<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
+class="ec-lmsso-10">Setting up the Workspace for C</span>
 <span 
-class="ec-lmsso-10">ActorRef  </span>to the <span 
-class="ec-lmssbx-10">SubSystem_Blinky </span>and name it <span 
-class="ec-lmsso-10">timingService</span>. From the actor class drop down list
-select <span 
-class="ec-lmsso-10">room.basic.service.timing.ATimingService</span>. Draw a <span 
-class="ec-lmsso-10">LayerConnection </span>from <span 
-class="ec-lmsso-10">application </span>to
-each service provision point (SPP) of the <span 
-class="ec-lmsso-10">timingService</span>. The resulting structure should look like
-this:
-</p><!--l. 143--><p class="noindent" ><img 
-src="images/020-Blinky06.png" alt="PIC"  
- />
-</p><!--l. 146--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point
-(SAP). Therefore the SAPs to access the timing service must be added in the .room file. Open the
-<span 
-class="ec-lmsso-10">Blinky.room </span>file and navigate to the <span 
-class="ec-lmsso-10">Blinky </span>actor. Add the following line to the structure of the
-actor:
+class="ec-lmsso-10">Projects</span>.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-5">
-SAP&#x00A0;timer:&#x00A0;room.basic.service.timing.PTimeout&#x00A0;
-</div>
-<!--l. 151--><p class="nopar" >
-</p><!--l. 153--><p class="noindent" >Do the same thing for <span 
-class="ec-lmsso-10">BlinkyController</span>.
-</p><!--l. 155--><p class="noindent" >The resulting code should look like this:
-</p><!--l. 157--><p class="noindent" ><img 
-src="images/020-Blinky07.png" alt="PIC"  
- />
-                                                                                 
-                                                                                 
-</p>
-<!--l. 161--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 23--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse14.html" >next</a>] [<a 
-href="etrice-docse12.html" >prev</a>] [<a 
-href="etrice-docse12.html#tailetrice-docse12.html" >prev-tail</a>] [<a 
+href="etrice-docch5.html" >prev</a>] [<a 
+href="etrice-docch5.html#tailetrice-docch5.html" >prev-tail</a>] [<a 
 href="etrice-docse13.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse13.html" >up</a>] </p></div>
-<!--l. 161--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse13.html" >up</a>] </p></div>
+<!--l. 23--><p class="noindent" ><a 
  id="tailetrice-docse13.html"></a> </p> 
 </body></html> 

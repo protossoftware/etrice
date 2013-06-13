@@ -4,55 +4,59 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>DataClass</title> 
+<head><title>Protocols</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:07:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 229--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 104--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse49.html" >next</a>] [<a 
 href="etrice-docse47.html" >prev</a>] [<a 
 href="etrice-docse47.html#tailetrice-docse47.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse48.html">tail</a>] [<a 
-href="etrice-docch12.html#etrice-docse48.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">12.4   </span> <a 
- id="x62-9800012.4"></a>DataClass</h3>
-<!--l. 231--><p class="noindent" >
+href="etrice-docch10.html#etrice-docse48.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">10.2   </span> <a 
+ id="x60-8900010.2"></a>Protocols</h3>
+<!--l. 106--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.4.1   </span> <a 
- id="x62-9900012.4.1"></a>Description</h4>
-<!--l. 233--><p class="noindent" >The <span id="textcolor47"><span 
-class="ec-lmssbx-10">DataClass</span></span> enables the modeling of hierarchical complex data types and operations on them. The data
-class is the equivalent to a class in languages like Java or C++, but has less features. The content
-of a data class can always be sent via message between actors (defined as message data in a
-<span id="textcolor48"><span 
-class="ec-lmssbx-10">ProtocolClass</span></span>).
-</p><!--l. 237--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">10.2.1   </span> <a 
+ id="x60-9000010.2.1"></a>Description</h4>
+<!--l. 108--><p class="noindent" >A <span id="textcolor40"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
+class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports.
+The exact semantics of a message is defined by the execution model.
+</p><!--l. 111--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.4.2   </span> <a 
- id="x62-10000012.4.2"></a>Notation</h4>
-<!--l. 239--><p class="noindent" >Example: DataClass using PrimitiveTypes
-</p><!--l. 241--><p class="noindent" ><img 
-src="images/040-DataClass1.png" alt="PIC"  
- />
-</p><!--l. 243--><p class="noindent" >Example: DataClass using other DataClasses:
-</p><!--l. 245--><p class="noindent" ><img 
-src="images/040-DataClass2.png" alt="PIC"  
+<h4 class="subsectionHead"><span class="titlemark">10.2.2   </span> <a 
+ id="x60-9100010.2.2"></a>Motivation</h4>
+     <ul class="itemize1">
+     <li class="itemize">Protocol classes provide a reusable interface specification for ports
+     </li>
+     <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
+<!--l. 118--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">10.2.3   </span> <a 
+ id="x60-9200010.2.3"></a>Notation</h4>
+<!--l. 120--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two
+outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64,
+...) or a data class.
+</p><!--l. 124--><p class="noindent" ><img 
+src="images/040-ProtocolClassTextualNotation.png" alt="PIC"  
  />
                                                                                  
                                                                                  
 </p>
-<!--l. 247--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 126--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse49.html" >next</a>] [<a 
 href="etrice-docse47.html" >prev</a>] [<a 
 href="etrice-docse47.html#tailetrice-docse47.html" >prev-tail</a>] [<a 
 href="etrice-docse48.html" >front</a>] [<a 
-href="etrice-docch12.html#etrice-docse48.html" >up</a>] </p></div>
-<!--l. 247--><p class="noindent" ><a 
+href="etrice-docch10.html#etrice-docse48.html" >up</a>] </p></div>
+<!--l. 126--><p class="noindent" ><a 
  id="tailetrice-docse48.html"></a> </p> 
 </body></html> 

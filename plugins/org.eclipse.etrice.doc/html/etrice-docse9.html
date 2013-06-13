@@ -4,77 +4,121 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Setup the model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 35--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse10.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse8.html" >prev</a>] [<a 
+href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse9.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse9.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
- id="x17-360006.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >This tutorial describes how to use the <span 
-class="ec-lmsso-10">TimingService</span>, how to combine a generated model with manual code
-and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on and off. The
-behavior of the LED should be: blinking in a one second interval for 5 seconds, stop blinking for 5 seconds,
-blinking, stop,... For this exercise we will use a little GUI class that will be used in more sophisticated tutorials
-too. The GUI simulates a pedestrian traffic crossing. For now, just a simple LED simulation will be used from
-the GUI.
-</p><!--l. 13--><p class="noindent" >After the exercise is created you must copy the GUI to your src directory (see below).
-</p><!--l. 15--><p class="noindent" >The package contains four java classes which implements a small window with a 3-light traffic light which
-simulates the signals for the car traffic and a 2-light traffic light which simulates the pedestrian
-signals.
-</p><!--l. 19--><p class="noindent" >The GUI looks like this:
-</p><!--l. 21--><p class="noindent" ><img 
-src="images/020-Blinky08.png" alt="PIC"  
+href="etrice-docch3.html#etrice-docse9.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x14-580003.2"></a>Setup the model</h3>
+     <ul class="itemize1">
+     <li class="itemize">Use the <span 
+class="ec-lmsso-10">New Model Wizzard </span>to create a new eTrice project and name it <span 
+class="ec-lmsso-10">PedLightsController</span>.
+     </li>
+     <li class="itemize">Copy  the  package  <span 
+class="ec-lmsso-10">org.eclipse.etrice.tutorials.PedLightGUI  </span>to  your  <span 
+class="ec-lmsso-10">src  </span>directory  (see  blinky
+     tutorial).
+     </li>
+     <li class="itemize">In PedestrianLightWndNoTcp.jav uncomment line 15 (import), 36, 122 (usage) and 132-134
+     (registration). The error markers will disappear after the code is generated from the model.
+     </li>
+     <li class="itemize">
+     <div class="flushleft" 
+>
+<!--l. 44--><p class="noindent" >
+Copy the model from /org.eclipse.etrice.tutorials/model/PedLightsController to your model file, or run
+the model directly in the tutorial directory.</p></div>
+     </li>
+     <li class="itemize">Adapt the import statement to your path.</li></ul>
+                                                                                 
+                                                                                 
+<div class="verbatim" id="verbatim-17">
+import&#x00A0;room.basic.service.timing.*&#x00A0;from
+&#x00A0;<br />"../../org.eclipse.etrice.modellib/models/TimingService.room"
+</div>
+<!--l. 53--><p class="nopar" >
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Generate the code from the model.
+     </li>
+     <li class="itemize">Add the org.eclipse.etrice.modellib to the Java Class Path of your project.
+     </li>
+     <li class="itemize">All error markers should be disappeared and the model should be operable.
+     </li>
+     <li class="itemize">Arrange the Structure and the Statemachines to understand the model</li></ul>
+
+<!--l. 63--><p class="noindent" ><img 
+src="images/030-PedLights01.png" alt="PIC"  
+ /> The <span 
+class="ec-lmsso-10">GuiAdapter </span>represents the interface to the external code. It registers its <span 
+class="ec-lmsso-10">ControlPort </span>by the external
+code.
+</p><!--l. 68--><p class="noindent" ><img 
+src="images/030-PedLights02.png" alt="PIC"  
+ /> Visit the initial transition to understand the registration. The actor handles the incoming messages as
+usual and controls the traffic lights as known from blinky.
+</p><!--l. 73--><p class="noindent" ><img 
+src="images/030-PedLights03.png" alt="PIC"  
+ /> The <span 
+class="ec-lmsso-10">Controller </span>receives the <span 
+class="ec-lmsso-10">start </span>message and controls the timing of the lights. Note that the <span 
+class="ec-lmsso-10">start</span>
+message will be sent from the external code whenever the <span 
+class="ec-lmsso-10">REQUEST </span>button is pressed.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Visit the model and take a closer look to the following elements:
+         <ol  class="enumerate1" >
+         <li 
+  class="enumerate" id="x14-58002x1">PedControlProtocol =&#x003E; notice that the start message is defined as usual
+         </li>
+         <li 
+  class="enumerate" id="x14-58004x2">Initial transition of the <span 
+class="ec-lmsso-10">GuiAdapter </span>=&#x003E; see the registration
+         </li>
+         <li 
+  class="enumerate" id="x14-58006x3">The  <span 
+class="ec-lmsso-10">Controller  </span>=&#x003E;  notice  that  the  <span 
+class="ec-lmsso-10">Controller  </span>receives  the  external  message  (not  the
+         <span 
+class="ec-lmsso-10">GuiAdapter</span>). The <span 
+class="ec-lmsso-10">GuiAdapter </span>just provides its port and handles the incoming messages.
+         </li>
+         <li 
+  class="enumerate" id="x14-58008x4">Visit the hand written code =&#x003E; see the import statement of the protocol class and the
+         usage of the port.</li></ol>
+     </li>
+     <li class="itemize">Generate and test the model
+     </li>
+     <li class="itemize">Take a look at the generated MSC =&#x003E; notice that the start message will shown as if the <span 
+class="ec-lmsso-10">GuiAdapter</span>
+     had sent it.</li></ul>
+
+<!--l. 94--><p class="noindent" ><img 
+src="images/030-PedLights04.png" alt="PIC"  
  />
-</p><!--l. 24--><p class="noindent" >Within this tutorial we will just toggle the yellow light.
-</p><!--l. 26--><p class="noindent" >You will perform the following steps:
-</p><!--l. 28--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x17-36002x1">create a new model from scratch
-     </li>
-     <li 
-  class="enumerate" id="x17-36004x2">define a protocol
-     </li>
-     <li 
-  class="enumerate" id="x17-36006x3">create an actor structure
-     </li>
-     <li 
-  class="enumerate" id="x17-36008x4">create a hierarchical state machine
-     </li>
-     <li 
-  class="enumerate" id="x17-36010x5">use the predefined <span 
-class="ec-lmsso-10">TimingService</span>
                                                                                  
                                                                                  
-     </li>
-     <li 
-  class="enumerate" id="x17-36012x6">combine manual code with generated code
-     </li>
-     <li 
-  class="enumerate" id="x17-36014x7">build and run the model
-     </li>
-     <li 
-  class="enumerate" id="x17-36016x8">open the message sequence chart</li></ol>
-                                                                                 
-                                                                                 
-<!--l. 39--><div class="crosslinks"><p class="noindent">[<a 
+</p>
+<!--l. 97--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse10.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse8.html" >prev</a>] [<a 
+href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="etrice-docse9.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse9.html" >up</a>] </p></div>
-<!--l. 39--><p class="noindent" ><a 
+href="etrice-docch3.html#etrice-docse9.html" >up</a>] </p></div>
+<!--l. 97--><p class="noindent" ><a 
  id="tailetrice-docse9.html"></a> </p> 
 </body></html> 

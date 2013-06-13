@@ -1,6 +1,6 @@
-\chapter{Tutorial Blinky (Java)}
+\section{Tutorial Blinky (Java)}
 
-\section{Scope}
+\subsection{Scope}
 
 This tutorial describes how to use the \textit{TimingService}, how to combine a generated model with 
 manual code and how to model a hierarchical state machine. The idea of the tutorial is to switch a LED on 
@@ -36,7 +36,7 @@ You will perform the following steps:
 \item open the message sequence chart
 \end{enumerate}
 
-\section{Create a new model from scratch}
+\subsection{Create a new model from scratch}
 
 Remember the exercise \textit{HelloWorld}.
 Create a new \eTrice{} project and name it \textit{Blinky}.
@@ -65,7 +65,7 @@ RoomModel Blinky {
 }
 \end{verbatim}
 
-\section{Add two additional actor classes}
+\subsection{Add two additional actor classes}
 
 Position the cursor outside any class definition and right click the mouse within the editor window. From 
 the context menu select \textit{Content Assist}  
@@ -84,7 +84,7 @@ With Ctrl+Shift+F you can beautify the model code.
 
 Save the model and visit the outline view.
 
-\section{Create a new protocol}
+\subsection{Create a new protocol}
 
 With the help of \textit{Content Assist} create a \textit{ProtocolClass} and name it 
 \textit{BlinkyControlProtocol}.
@@ -99,7 +99,7 @@ The resulting code should look like this:
 With Ctrl-Shift+F or selecting \textit{Format} from the context menu you can format the text. Note that 
 all elements are displayed in the outline view.
 
-\section{Import the Timing Service}
+\subsection{Import the Timing Service}
 
 Switching on and off the LED is timing controlled. The timing service is provided from the model library 
 and must be imported before it can be used from the model.
@@ -158,7 +158,7 @@ The resulting code should look like this:
 % !images/020-Blinky07.png!
 
 
-\section{Finish the model structure}
+\subsection{Finish the model structure}
 
 From the outline view right click to \textit{Blinky} and select \textit{Edit Structure}. Drag and Drop an 
 \textit{Interface Port} to the boarder of the \textit{Blinky} actor. Note that an interface port is not 
@@ -185,7 +185,7 @@ via the binding tool. The resulting structure should look like this:
 \includegraphics[width=0.8\textwidth]{images/020-Blinky05.png}
 % !images/020-Blinky05.png!
 
-\section{Implement the Behavior}
+\subsection{Implement the Behavior}
 
 The application should switch on and off the LED for 5 seconds in a 1 second interval, then stop blinking 
 for 5 seconds and start again. To implement this behavior we will implement two FSMs. One for the 1 second 
@@ -314,7 +314,7 @@ The model is complete now. You can run and debug the model as described in getti
 
 The complete model can be found in /org.eclipse.etrice.tutorials/model/Blinky.
 
-\section{Summary}
+\subsection{Summary}
 
 Run the model and take a look at the generated MSCs. Inspect the generated code to understand the runtime 
 model of \eTrice{}. Within this tutorial you have learned how to create a hierarchical FSM with group 

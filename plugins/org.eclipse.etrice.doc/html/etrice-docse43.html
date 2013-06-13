@@ -4,44 +4,70 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Generate, build and run the model</title> 
+<head><title>Create your own data type</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:07:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 134--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 52--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse44.html" >next</a>] [<a 
 href="etrice-docse42.html" >prev</a>] [<a 
 href="etrice-docse42.html#tailetrice-docse42.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse43.html">tail</a>] [<a 
-href="etrice-docch11.html#etrice-docse43.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">11.5   </span> <a 
- id="x56-7700011.5"></a>Generate, build and run the model</h3>
-<!--l. 136--><p class="noindent" >Before you can run the model you should copy one of the generated C source files into the project folder and
-name it <span 
-class="ec-lmsso-10">test.txt</span>.
-</p><!--l. 139--><p class="noindent" ><img 
-src="images/036-RemoveCommentC07.png" alt="PIC"  
- />
-</p><!--l. 142--><p class="noindent" >Generate, build and run the model.
-</p><!--l. 144--><p class="noindent" >Your output should start like this:
-</p><!--l. 146--><p class="noindent" ><img 
-src="images/036-RemoveCommentC08.png" alt="PIC"  
- />
+href="etrice-docch9.html#etrice-docse43.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">9.3   </span> <a 
+ id="x54-760009.3"></a>Create your own data type</h3>
+<!--l. 54--><p class="noindent" >The planed application should read a C source file and remove the comments. Therefore we need a file
+descriptor which is not part of the basic C types. The type for the file descriptor for MinGW is <span 
+class="ec-lmsso-10">FILE</span>. To make
+this type available on the model level, you have to declare the type.
+</p><!--l. 58--><p class="noindent" >Open the file <span 
+class="ec-lmsso-10">Types.room </span>from <span 
+class="ec-lmsso-10">org.eclipse.modellib.c </span>and take a look at the declaration of <span 
+class="ec-lmsso-10">string </span>(last line)
+which is not a basic C type.
+</p><!--l. 61--><p class="noindent" ><span 
+class="ec-lmsso-10">PrimitiveType string:ptCharacter -&#x003E; charPtr default "0"</span>
+</p><!--l. 63--><p class="noindent" >With this declaration, you make the <span 
+class="ec-lmsso-10">string </span>keyword available on model level as a primitive type. This type will
+be translated to <span 
+class="ec-lmsso-10">charPtr </span>in your C sources. <span 
+class="ec-lmsso-10">charPtr </span>is defined in <span 
+class="ec-lmsso-10">etDatatypes.h</span>. This header file is platform
+specific (<span 
+class="ec-lmsso-10">generic</span>). With this mechanism you can define your own type system on model level and map the
+model types to specific target/platform types.
+</p><!--l. 68--><p class="noindent" >To not interfere with other models, we will declare the type direct in the model. Add the following line to your
+model:
                                                                                  
                                                                                  
 </p>
-<!--l. 150--><div class="crosslinks"><p class="noindent">[<a 
+<div class="verbatim" id="verbatim-20">
+RoomModel&#x00A0;RemoveComment&#x00A0;{
+&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from
+&#x00A0;<br />"../../../org.eclipse.etrice.modellib.c/model/Types.room"
+&#x00A0;<br />
+&#x00A0;<br />PrimitiveType&#x00A0;file:ptInteger&#x00A0;-&#x003E;&#x00A0;FILE&#x00A0;default&#x00A0;"0"
+</div>
+<!--l. 78--><p class="nopar" >
+</p><!--l. 81--><p class="noindent" ><span 
+class="ec-lmsso-10">FILE </span>is the native type for MinGW. Therefore you don&#8217;t need a mapping within <span 
+class="ec-lmsso-10">etDatatypes.h</span>. If your model
+should be portable across different platforms you should not take this shortcut.
+                                                                                 
+                                                                                 
+</p>
+<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse44.html" >next</a>] [<a 
 href="etrice-docse42.html" >prev</a>] [<a 
 href="etrice-docse42.html#tailetrice-docse42.html" >prev-tail</a>] [<a 
 href="etrice-docse43.html" >front</a>] [<a 
-href="etrice-docch11.html#etrice-docse43.html" >up</a>] </p></div>
-<!--l. 150--><p class="noindent" ><a 
+href="etrice-docch9.html#etrice-docse43.html" >up</a>] </p></div>
+<!--l. 85--><p class="noindent" ><a 
  id="tailetrice-docse43.html"></a> </p> 
 </body></html> 

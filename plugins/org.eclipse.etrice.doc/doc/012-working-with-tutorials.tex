@@ -1,11 +1,27 @@
-\chapter{Working with the \eTrice{} Tutorials}
+\section{Working with the tutorials}
 
-The \eTrice{} Tutorials will help you to learn and understand the \eTrice{} tool and concepts. \eTrice{} supports 
-several target languages. The concepts will not be explained for each language. 
+The \eTrice{} tutorials will help you to learn and understand the \eTrice{} tool and concepts. \eTrice{} supports 
+several target languages. 
+The chapter setting up the workspace exists for each target language. Those are currently Java and C. The C++ generator 
+and runtime are currently prototypes with no tutorials. 
 
-Most of the common concepts will be described for Java as target language. To start with a new language the 
-first steps to setup the workspace and to generate and run the first model will be described also. Target 
-language specific aspects will be described as well.
+The other tutorials work for all target languages. Target language specific aspects are explained for all languages. 
 
-Therefore the best way to start with \eTrice{} is to follow the Java Tutorials and after that switch to your 
-target language.  
+\eTrice{} generates code out of ROOM models. The generated code relies on the services of a runtime 
+framework:
+\begin{itemize}
+\item execution
+\item communication (e.g. messaging)
+\item logging
+\item operating system abstraction (osal)
+\end{itemize}
+
+Additional functionality is provided as model library:
+\begin{itemize}
+\item socket server and client
+\item timing service
+\item standard types
+\end{itemize}
+
+Additionally the tutorial models are be provided to make it easy to start with \eTrice{}. All those projects 
+should be available in our workspace before you start working with the tutorials. 

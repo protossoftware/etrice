@@ -4,207 +4,69 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Implement the Behavior</title> 
+<head><title>Create the HelloWorld model</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:19:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 188--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 66--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse16.html" >next</a>] [<a 
 href="etrice-docse14.html" >prev</a>] [<a 
 href="etrice-docse14.html#tailetrice-docse14.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse15.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse15.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.7   </span> <a 
- id="x23-420006.7"></a>Implement the Behavior</h3>
-<!--l. 190--><p class="noindent" >The application should switch on and off the LED for 5 seconds in a 1 second interval, then stop blinking for 5
-seconds and start again. To implement this behavior we will implement two FSMs. One for the 1
-second interval and one for the 5 second interval. The 1 second blinking should be implemented in
-<span 
-class="ec-lmsso-10">Blinky</span>. The 5 second interval should be implemented in <span 
-class="ec-lmsso-10">BlinkyController</span>. First implement the
-Controller.
-</p><!--l. 196--><p class="noindent" >Right click to <span 
-class="ec-lmsso-10">BlinkyController </span>and select <span 
-class="ec-lmsso-10">Edit Behavior</span>. Drag and Drop the <span 
-class="ec-lmsso-10">Initial Point </span>and two <span 
-class="ec-lmsso-10">States </span>into
-the top state. Name the states <span 
-class="ec-lmsso-10">on </span>and <span 
-class="ec-lmsso-10">off</span>. Use the <span 
-class="ec-lmsso-10">Transition </span>tool to draw transitions from <span 
-class="ec-lmsso-10">init </span>to <span 
-class="ec-lmsso-10">on </span>from <span 
-class="ec-lmsso-10">on</span>
-to <span 
-class="ec-lmsso-10">off  </span>and from <span 
-class="ec-lmsso-10">off  </span>to <span 
-class="ec-lmsso-10">on</span>.
-</p><!--l. 202--><p class="noindent" >Open the transition dialog by double click the arrow to specify the trigger event and the action code of each
-transition. Note that the initial transition does not have a trigger event.
-</p><!--l. 205--><p class="noindent" >The transition dialog should look like this:
-</p><!--l. 207--><p class="noindent" ><img 
-src="images/020-Blinky09.png" alt="PIC"  
- />
-</p><!--l. 210--><p class="noindent" >The defined ports will be generated as a member attribute of the actor class from type of the attached
-protocol. So, to send e message you must state <span 
-class="ec-lmsso-10">port.message(param);</span>. In this example <span 
-class="ec-lmsso-10">ControlPort.start()</span>
-sends the <span 
-class="ec-lmsso-10">start </span>message via the <span 
-class="ec-lmsso-10">ControlPort </span>to the outside world. Assuming that <span 
-class="ec-lmsso-10">Blinky </span>is connected to this
-port, the message will start the one second blinking FSM. It is the same thing with the <span 
-class="ec-lmsso-10">timer</span>. The SAP is
-also a port and follows the same rules. So it is clear that <span 
-class="ec-lmsso-10">timer.Start(5000); </span>will send the <span 
-class="ec-lmsso-10">Start</span>
-message to the timing service. The timing service will send a <span 
-class="ec-lmsso-10">timeoutTick </span>message back after
-5000ms.
-</p><!--l. 218--><p class="noindent" >Within each transition the timer will be restarted and the appropriate message will be sent via the
-<span 
-class="ec-lmsso-10">ControlPort</span>.
-</p><!--l. 221--><p class="noindent" >The resulting state machine should look like this: (Note that the arrows peak changes if the transition contains
-action code.)
-</p><!--l. 224--><p class="noindent" ><img 
-src="images/020-Blinky10.png" alt="PIC"  
- />
-</p><!--l. 227--><p class="noindent" >Save the diagram and inspect the <span 
-class="ec-lmsso-10">Blinky.room </span>file. The <span 
-class="ec-lmsso-10">BlinkyController </span>should look like this:
-</p><!--l. 230--><p class="noindent" ><img 
-src="images/020-Blinky11.png" alt="PIC"  
- />
-</p><!--l. 233--><p class="noindent" >Now we will implement <span 
-class="ec-lmsso-10">Blinky</span>. Due to the fact that <span 
-class="ec-lmsso-10">Blinky </span>interacts with the GUI class a view things must to
-be done in the model file.
-</p><!--l. 236--><p class="noindent" >Double click <span 
-class="ec-lmsso-10">Blinky </span>in the outline view to navigate to <span 
-class="ec-lmsso-10">Blinky </span>within the model file. Add the following code:
-(type it or simply copy it from the tutorial project)
-</p><!--l. 240--><p class="noindent" ><img 
-src="images/020-Blinky12.png" alt="PIC"  
- />
-</p><!--l. 243--><p class="noindent" ><span 
-class="ec-lmsso-10">usercode1 </span>will be generated at the beginning of the file, outside the class definition. <span 
-class="ec-lmsso-10">usercode2 </span>will
-be generated within the class definition. The code imports the GUI class and instantiates the
-window class. Attributes for the carLights and pedLights will be declared to easily access the lights
-in the state machine. The Operation <span 
-class="ec-lmsso-10">destroyUser() </span>is a predefined operation that will be called
-during shutdown of the application. Within this operation, cleanup of manual coded classes can be
-done.
-</p><!--l. 250--><p class="noindent" >Now design the FSM of <span 
-class="ec-lmsso-10">Blinky</span>. Remember, as the name suggested <span 
-class="ec-lmsso-10">blinking </span>is a state in which the LED must
-be switched on and off. We will realize that by an hierarchical FSM in which the <span 
-class="ec-lmsso-10">blinking </span>state has two sub
-states.
-                                                                                 
-                                                                                 
-</p><!--l. 254--><p class="noindent" >Open the behavior diagram of <span 
-class="ec-lmsso-10">Blinky </span>by right clicking the <span 
-class="ec-lmsso-10">Blinky </span>actor in the outline view. Create two states
-named <span 
-class="ec-lmsso-10">blinking </span>and <span 
-class="ec-lmsso-10">off</span>. Right click to <span 
-class="ec-lmsso-10">blinking </span>and create a subgraph.
-</p><!--l. 258--><p class="noindent" ><img 
-src="images/020-Blinky13.png" alt="PIC"  
- />
-</p><!--l. 261--><p class="noindent" >Create the following state machine. The trigger events between <span 
-class="ec-lmsso-10">on </span>and <span 
-class="ec-lmsso-10">off  </span>are the <span 
-class="ec-lmsso-10">timeoutTick </span>from the <span 
-class="ec-lmsso-10">timer</span>
-port.
-</p><!--l. 264--><p class="noindent" ><img 
-src="images/020-Blinky14.png" alt="PIC"  
- />
-</p><!--l. 267--><p class="noindent" >Create entry code for both states by right clicking the state and select <span 
-class="ec-lmsso-10">Edit State...</span>
-</p><!--l. 269--><p class="noindent" >Entry code of <span 
-class="ec-lmsso-10">on </span>is:
-                                                                                 
-                                                                                 
+href="etrice-docch5.html#etrice-docse15.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.3   </span> <a 
+ id="x22-660005.3"></a>Create the HelloWorld model</h3>
+<!--l. 68--><p class="noindent" >Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
+Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your
+model file. Optionally you can open and layout the diagrams. Recognize the C specific parts:
 </p>
-<div class="verbatim" id="verbatim-6">
-timer.Start(1000);
-&#x00A0;<br />carLights.setState(TrafficLight3.YELLOW);
+     <ul class="itemize1">
+     <li class="itemize">The action code contains C instead of Java. Later versions will contain a common action language,
+     but for the moment the action language is target specific.
+     </li>
+     <li class="itemize">The application must be shutdown on model level (see also <span 
+class="ec-lmsso-10">etRuntimeConfig.h</span>).</li></ul>
+                                                                                 
+                                                                                 
+<div class="verbatim" id="verbatim-19">
+RoomModel&#x00A0;HelloWorldCModel&#x00A0;{
+&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from&#x00A0;"../../org.eclipse.etrice.modellib.c/model/Types.room"
+&#x00A0;<br />SubSystemClass&#x00A0;HelloWorldCSubSysClass&#x00A0;{
+&#x00A0;<br />ActorRef&#x00A0;HelloETriceTopRef:AHelloWorldCTop
+&#x00A0;<br />}
+&#x00A0;<br />ActorClass&#x00A0;AHelloWorldCTop&#x00A0;{
+&#x00A0;<br />Structure&#x00A0;{&#x00A0;}
+&#x00A0;<br />Behavior&#x00A0;{
+&#x00A0;<br />StateMachine&#x00A0;{
+&#x00A0;<br />Transition&#x00A0;init:&#x00A0;initial&#x00A0;-&#x003E;&#x00A0;state0&#x00A0;{&#x00A0;}
+&#x00A0;<br />State&#x00A0;state0&#x00A0;{
+&#x00A0;<br />entry&#x00A0;{
+&#x00A0;<br />"printf(\"HelloWorldC&#x00A0;!\\n\");"
+&#x00A0;<br />"SubSysClass_shutdown();"
+&#x00A0;<br />"\t\t\t\t\t\t"
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
 </div>
-<!--l. 274--><p class="nopar" >
-</p><!--l. 277--><p class="noindent" >Entry code of <span 
-class="ec-lmsso-10">off  </span>is:
+<!--l. 101--><p class="nopar" >
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-7">
-timer.Start(1000);
-&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
-</div>
-<!--l. 282--><p class="nopar" >
-</p><!--l. 284--><p class="noindent" >Navigate to the Top level state by double clicking the <span 
-class="ec-lmsso-10">/blinking </span>state. Create the following state
-machine:
-</p><!--l. 287--><p class="noindent" ><img 
-src="images/020-Blinky15.png" alt="PIC"  
- />
-</p><!--l. 290--><p class="noindent" >The trigger event from <span 
-class="ec-lmsso-10">off  </span>to <span 
-class="ec-lmsso-10">blinking </span>is the <span 
-class="ec-lmsso-10">start </span>event from the <span 
-class="ec-lmsso-10">ControlPort</span>.The trigger event from <span 
-class="ec-lmsso-10">blinking</span>
-to <span 
-class="ec-lmsso-10">off  </span>is the <span 
-class="ec-lmsso-10">stop </span>event from the <span 
-class="ec-lmsso-10">ControlPort</span>. Note: The transition from <span 
-class="ec-lmsso-10">blinking </span>to <span 
-class="ec-lmsso-10">off  </span>is a so called group
-transition. This is a outgoing transition from a super state (state with sub states) without specifying the
-concrete leave state (state without sub states). An incoming transition to a super state is called history
-transition.
-</p><!--l. 297--><p class="noindent" >Action code of the init transition is:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-8">
-carLights&#x00A0;=&#x00A0;light.getCarLights();
-&#x00A0;<br />pedLights&#x00A0;=&#x00A0;light.getPedLights();
-&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
-&#x00A0;<br />pedLights.setState(TrafficLight2.OFF);
-</div>
-<!--l. 304--><p class="nopar" >
-</p><!--l. 306--><p class="noindent" >Action code from <span 
-class="ec-lmsso-10">blinking </span>to <span 
-class="ec-lmsso-10">off  </span>is:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-9">
-timer.Kill();
-&#x00A0;<br />carLights.setState(TrafficLight3.OFF);
-</div>
-<!--l. 311--><p class="nopar" >
-</p><!--l. 313--><p class="noindent" >The model is complete now. You can run and debug the model as described in getting started. Have
-fun.
-</p><!--l. 315--><p class="noindent" >The complete model can be found in /org.eclipse.etrice.tutorials/model/Blinky.
-                                                                                 
-                                                                                 
-</p>
-<!--l. 317--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 103--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse16.html" >next</a>] [<a 
 href="etrice-docse14.html" >prev</a>] [<a 
 href="etrice-docse14.html#tailetrice-docse14.html" >prev-tail</a>] [<a 
 href="etrice-docse15.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse15.html" >up</a>] </p></div>
-<!--l. 317--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse15.html" >up</a>] </p></div>
+<!--l. 103--><p class="noindent" ><a 
  id="tailetrice-docse15.html"></a> </p> 
 </body></html> 

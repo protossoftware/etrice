@@ -4,408 +4,256 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Ports</title> 
+<head><title>Actors</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-13 15:30:00" /> 
+<meta name="date" content="2013-06-14 00:07:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 126--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 8--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse48.html" >next</a>] [<a 
-href="etrice-docse46.html" >prev</a>] [<a 
-href="etrice-docse46.html#tailetrice-docse46.html" >prev-tail</a>] [<a 
+href="etrice-docch10.html" >prev</a>] [<a 
+href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse47.html">tail</a>] [<a 
-href="etrice-docch12.html#etrice-docse47.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">12.3   </span> <a 
- id="x61-9200012.3"></a>Ports</h3>
-<!--l. 128--><p class="noindent" >
+href="etrice-docch10.html#etrice-docse47.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">10.1   </span> <a 
+ id="x59-8100010.1"></a>Actors</h3>
+<!--l. 10--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.1   </span> <a 
- id="x61-9300012.3.1"></a>Description</h4>
-<!--l. 130--><p class="noindent" ><span id="textcolor42"><span 
-class="ec-lmssbx-10">Port</span></span>s are the only interfaces of actors. A port has always a protocol assigned. Service Access
-Points (SAP) and Service Provision Points (SPP) are specialized ports that are used to define
-layering.
-</p><!--l. 134--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.2   </span> <a 
- id="x61-9400012.3.2"></a>Motivation</h4>
-     <ul class="itemize1">
-     <li class="itemize">Ports decouple interface definition (protocols) from interface usage
-     </li>
-     <li class="itemize">Ports decouple the logical interface from the transport</li></ul>
-<!--l. 141--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">12.3.3   </span> <a 
- id="x61-9500012.3.3"></a>Notation</h4>
-<!--l. 143--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x61-9600012.3.3"></a>Class Ports</h5>
-<!--l. 145--><p class="noindent" >These symbols can only appear on the border of an actor class symbol.
-</p><!--l. 147--><p class="noindent" >Ports that define an external interface of the actor class, are defined in the <span id="textcolor43"><span 
-class="ec-lmssbx-10">Interface</span></span>. Ports that define an
-internal interface are defined in the <span id="textcolor44"><span 
-class="ec-lmssbx-10">Structure</span></span> (e.g. internal ports).
-</p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmsso-10">External end ports </span>are defined in the Interface and the Structure
+<h4 class="subsectionHead"><span class="titlemark">10.1.1   </span> <a 
+ id="x59-8200010.1.1"></a>Description</h4>
                                                                                  
                                                                                  
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">Internal end ports </span>are only defined in the Structure
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">Relay ports </span>are only defined in the Interface
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">End ports </span>are always connected to the internal behavior of the ActorClass
-     </li>
-     <li class="itemize"><span 
-class="ec-lmsso-10">Replicated ports </span>can be defined with a fixed replication factor, e.g.<br 
-class="newline" /><span id="textcolor45"><span 
-class="ec-lmtk-10">Port</span></span> <span 
-class="ec-lmtt-10">port18 [5]: ProtocolClass1</span><br 
-class="newline" />or a variable replication factor, e.g.<br 
-class="newline" /><span id="textcolor46"><span 
-class="ec-lmtk-10">Port</span></span> <span 
-class="ec-lmtt-10">port18[*]: ProtocolClass1</span></li></ul>
-<!--l. 161--><p class="noindent" >The table <a 
-href="#x61-960013">12.3<!--tex4ht:ref: tab:class_port_notation --></a> shows all kinds of class ports with textual and graphical notation.
+<!--l. 12--><p class="noindent" >The actor is the basic structural building block for building systems with ROOM. An actor can be refined
+hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can
+also have a behavior usually defined by a finite state machine.
+</p><!--l. 16--><p class="noindent" >
 </p>
+<h4 class="subsectionHead"><span class="titlemark">10.1.2   </span> <a 
+ id="x59-8300010.1.2"></a>Motivation</h4>
+     <ul class="itemize1">
+     <li class="itemize">Actors enable the construction of hierarchical structures by composition and layering
+     </li>
+     <li class="itemize">Actors have their own logical thread of execution
+     </li>
+     <li class="itemize">Actors can be freely deployed
+     </li>
+     <li class="itemize">Actors define potentially re-usable blocks</li></ul>
+<!--l. 25--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">10.1.3   </span> <a 
+ id="x59-8400010.1.3"></a>Notation</h4>
 <div class="table">
                                                                                  
                                                                                  
-<!--l. 164--><p class="noindent" ><a 
- id="x61-960013"></a></p><hr class="float" /><div class="float" 
+<!--l. 28--><p class="noindent" ><a 
+ id="x59-840011"></a></p><hr class="float" /><div class="float" 
 >
                                                                                  
                                                                                  
  <div class="caption" 
-><span class="id">Table&#x00A0;12.3: </span><span  
-class="content">Class Port Notation</span></div><!--tex4ht:label?: x61-960013 -->
-<a 
- id="x61-96002r4"></a><!--l. 168--><div class="longtable"> <table id="TBL-5" class="longtable" 
+><span class="id">Table&#x00A0;10.1: </span><span  
+class="content">Actor Class Notation</span></div><!--tex4ht:label?: x59-840011 -->
+<div class="tabular"> <table id="TBL-3" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-5-1g"><col 
-id="TBL-5-1" /></colgroup><colgroup id="TBL-5-2g"><col 
-id="TBL-5-2" /></colgroup><colgroup id="TBL-5-3g"><col 
-id="TBL-5-3" /></colgroup>
-<tr 
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1" /></colgroup><colgroup id="TBL-3-2g"><col 
+id="TBL-3-2" /></colgroup><colgroup id="TBL-3-3g"><col 
+id="TBL-3-3" /></colgroup><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-1-1"  
-class="td11"> <!--l. 168--><p class="noindent" ><span 
-class="ec-lmssbx-10">Element</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-2"  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-1"  
 class="td11"> <span 
-class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-1-3"  
-class="td11"> <!--l. 168--><p class="noindent" ><span 
-class="ec-lmssbx-10">Textual Notation</span>                       </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-2-1"  
-class="td11"> <!--l. 169--><p class="noindent" >Class
-  End
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-2"  
-class="td11">        <img 
-src="images/040-ClassEndPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-2-3"  
-class="td11"> <div class="tabular"> <table id="TBL-6" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-6-1g"><col 
-id="TBL-6-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-1-1"  
-class="td11"><span 
-class="ec-lmsso-10">External Class End Port:</span></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-2-1"  
-class="td11"> <img 
-src="images/040-ClassEndPortTextual.png" alt="PIC"  
- /></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-3-1"  
+class="ec-lmssbx-10">Element  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-2"  
 class="td11"> <span 
-class="ec-lmsso-10">Internal Class End Port: </span></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-4-1"  
-class="td11"> <img 
-src="images/040-ClassEndPortInternalTextual.png" alt="PIC"  
- /></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-6-5-1"  
-class="td11">                    </td></tr></table> </div>         </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-3-1"  
-class="td11"> <!--l. 173--><p class="noindent" >Conjugated
-  Class
-  End
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-2"  
-class="td11">        <img 
-src="images/040-ConjugatedClassEndPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-3-3"  
-class="td11"> <div class="tabular"> <table id="TBL-7" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-7-1g"><col 
-id="TBL-7-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-7-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-1-1"  
-class="td11"><!--l. 175--><p class="noindent" ><span 
-class="ec-lmsso-10">External Conjugated Class End Port:</span> </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-2-1"  
-class="td11"><!--l. 176--><p class="noindent" ><img 
-src="images/040-ConjugatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-3-1"  
-class="td11"><!--l. 177--><p class="noindent" ><span 
-class="ec-lmsso-10">Internal Conjugated Class End Port:</span>   </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-4-1"  
-class="td11"><!--l. 177--><p class="noindent" ><img 
-src="images/040-ConjugatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-7-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-4-1"  
-class="td11"> <!--l. 179--><p class="noindent" >Class
-  Relay
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-2"  
-class="td11">        <img 
-src="images/040-ClassRelayPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-4-3"  
-class="td11"> <!--l. 180--><p class="noindent" ><img 
-src="images/040-ClassRelayPortTextual.png" alt="PIC"  
- />                                            </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-5-1"  
-class="td11"> <!--l. 181--><p class="noindent" >Conjugated
-  Class
-  Relay
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-2"  
-class="td11">        <img 
-src="images/040-ConjugatedClassRelayPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-5-3"  
-class="td11"> <!--l. 183--><p class="noindent" ><img 
-src="images/040-ConjugatedClassRelayPortTextual.png" alt="PIC"  
- />                                            </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-6-1"  
-class="td11"> <!--l. 184--><p class="noindent" >Replicated
-  Class
-  End
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-2"  
-class="td11">        <img 
-src="images/040-ReplicatedClassEndPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-6-3"  
-class="td11"> <div class="tabular"> <table id="TBL-8" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-8-1g"><col 
-id="TBL-8-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-8-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-1-1"  
-class="td11"><!--l. 186--><p class="noindent" ><span 
-class="ec-lmsso-10">External Replicated Class End Port:</span>  </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-2-1"  
-class="td11"><!--l. 187--><p class="noindent" ><img 
-src="images/040-ReplicatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-3-1"  
-class="td11"><!--l. 188--><p class="noindent" ><span 
-class="ec-lmsso-10">Internal Replicated Class End Port:</span>    </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-4-1"  
-class="td11"><!--l. 188--><p class="noindent" ><img 
-src="images/040-ReplicatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-8-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-7-1"  
-class="td11"> <!--l. 190--><p class="noindent" >Conjugated
-  Replicated
-  Class
-  End
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-7-2"  
-class="td11">        <img 
-src="images/040-ConjugatedReplicatedClassEndPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-7-3"  
-class="td11"> <div class="tabular"> <table id="TBL-9" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-9-1g"><col 
-id="TBL-9-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-9-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-1-1"  
-class="td11"><!--l. 192--><p class="noindent" ><span 
-class="ec-lmsso-10">External Conjugated Replicated Class</span>
-<span 
-class="ec-lmsso-10">End Port:</span>                                   </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-2-1"  
-class="td11"><!--l. 193--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassEndPortTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-3-1"  
-class="td11"><!--l. 194--><p class="noindent" ><span 
-class="ec-lmsso-10">Internal Conjugated Replicated Class</span>
-<span 
-class="ec-lmsso-10">End Port:</span>                                    </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-4-1"  
-class="td11"><!--l. 195--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassEndPortInternalTextual.png" alt="PIC"  
- />                                           </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-9-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-5-1"  
-class="td11">                              </td></tr></table> </div> </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-8-1"  
-class="td11"> <!--l. 197--><p class="noindent" >Replicated
-  Class
-  Relay
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-8-2"  
-class="td11">        <img 
-src="images/040-ReplicatedClassRelayPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-8-3"  
-class="td11"> <!--l. 199--><p class="noindent" ><img 
-src="images/040-ReplicatedClassRelayPortTextual.png" alt="PIC"  
- />                                            </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-9-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-9-1"  
-class="td11"> <!--l. 200--><p class="noindent" >Conjugated
-  Replicated
-  Class
-  Relay
-  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-9-2"  
-class="td11">        <img 
-src="images/040-ConjugatedReplicatedClassRelayPort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-9-3"  
-class="td11"> <!--l. 202--><p class="noindent" ><img 
-src="images/040-ConjugatedReplicatedClassRelayPortTextual.png" alt="PIC"  
- />                                            </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-5-10-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-10-1"  
-class="td11">                </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-11-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-11-1"  
-class="td11">                </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-12-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-12-1"  
-class="td11"> <!--l. 203--><p class="noindent" >               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-13-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-13-1"  
-class="td11"> <!--l. 203--><p class="noindent" >               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-5-14-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-14-1"  
-class="td11">                </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-14-2"  
-class="td11">                   </td><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-5-14-3"  
-class="td11"></td></tr>
-</table></div>
-                                                                                 
-                                                                                 
-</div><hr class="endfloat" />
-</div>
-<h5 class="subsubsectionHead"><a 
- id="x61-9700012.3.3"></a>Reference Ports</h5>
-<!--l. 208--><p class="noindent" >These symbols can only appear on the border of an actor class. Since the type of port is defined in the actor
-class, no textual notation for the Reference Ports exists.
-</p><!--l. 211--><p class="noindent" >The table <a 
-href="#x61-970015">12.5<!--tex4ht:ref: tab:reference_port_notation --></a> shows all kinds of reference ports with textual and graphical notation.
-</p>
-<div class="table">
-                                                                                 
-                                                                                 
-<!--l. 214--><p class="noindent" ><a 
- id="x61-970015"></a></p><hr class="float" /><div class="float" 
->
-                                                                                 
-                                                                                 
- <div class="caption" 
-><span class="id">Table&#x00A0;12.5: </span><span  
-class="content">Reference Port Notation</span></div><!--tex4ht:label?: x61-970015 -->
-<div class="tabular"> <table id="TBL-10" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-10-1g"><col 
-id="TBL-10-1" /></colgroup><colgroup id="TBL-10-2g"><col 
-id="TBL-10-2" /></colgroup><colgroup id="TBL-10-3g"><col 
-id="TBL-10-3" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-1"  
-class="td11">        <span 
-class="ec-lmssbx-10">Element           </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-2"  
-class="td11"> <span 
-class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-3"  
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-3"  
 class="td11"> <span 
 class="ec-lmssbx-10">Textual Notation  </span></td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-1"  
-class="td11">      Reference Port         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-2"  
-class="td11">        <img 
-src="images/040-ReferencePort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-3"  
-class="td11">      <span 
-class="ec-lmsso-10">implicit         </span></td>
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-1"  
+class="td11"> ActorClass  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-2"  
+class="td11"> <img 
+src="images/040-ActorClassNotation.png" alt="PIC"  
+ />                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-3"  
+class="td11"> <img 
+src="images/040-ActorClassTextualNotation.png" alt="PIC"  
+ />                     </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-1"  
-class="td11"> Conjugated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-2"  
-class="td11">        <img 
-src="images/040-ConjugatedReferencePort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-3"  
-class="td11">      <span 
-class="ec-lmsso-10">implicit         </span></td>
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-1"  
+class="td11"> ActorRef    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-2"  
+class="td11"> <img 
+src="images/040-ActorReferenceNotation.png" alt="PIC"  
+ />                       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-3"  
+class="td11"> <img 
+src="images/040-ActorReferenceTextualNotation.png" alt="PIC"  
+ />                     </td>
 </tr><tr 
 class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-1"  
-class="td11">  Replicated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-2"  
-class="td11">        <img 
-src="images/040-ReplicatedReferencePort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-3"  
-class="td11">      <span 
-class="ec-lmsso-10">implicit         </span></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-5-1"  
-class="td11">   Conjugated Replicated     </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-10-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-1"  
-class="td11">      Reference Port         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-2"  
-class="td11">        <img 
-src="images/040-ConjugatedReplicatedReferencePort.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-3"  
-class="td11">      <span 
-class="ec-lmsso-10">implicit         </span></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-10-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-7-1"  
-class="td11">                        </td></tr></table></div>
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-1"  
+class="td11">           </td></tr></table></div>
                                                                                  
                                                                                  
 </div><hr class="endfloat" />
 </div>
+<h4 class="subsectionHead"><span class="titlemark">10.1.4   </span> <a 
+ id="x59-8500010.1.4"></a>Details</h4>
+<!--l. 42--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x59-8600010.1.4"></a>Actor Classes, Actor References, Ports and Bindings</h5>
+<!--l. 44--><p class="noindent" >An <span id="textcolor1"><span 
+class="ec-lmssbx-10">ActorClass</span></span> defines the type (or blueprint) of an actor. Hierarchies are built by <span id="textcolor2"><span 
+class="ec-lmssbx-10">ActorClass</span></span>es that contain
+<span id="textcolor3"><span 
+class="ec-lmssbx-10">ActorRef</span></span>erences which have another <span id="textcolor4"><span 
+class="ec-lmssbx-10">ActorClass</span></span> as type. The interface of an <span id="textcolor5"><span 
+class="ec-lmssbx-10">ActorClass</span></span> is
+always defined by <span id="textcolor6"><span 
+class="ec-lmssbx-10">Port</span></span>s. The <span id="textcolor7"><span 
+class="ec-lmssbx-10">ActorClass</span></span> can also contain <span id="textcolor8"><span 
+class="ec-lmssbx-10">Attribute</span></span>s, <span id="textcolor9"><span 
+class="ec-lmssbx-10">Operation</span></span>s and a finite
+<span id="textcolor10"><span 
+class="ec-lmssbx-10">StateMachine</span></span>.
+</p><!--l. 50--><p class="noindent" >External <span id="textcolor11"><span 
+class="ec-lmssbx-10">Port</span></span>s define the external interface of an actor and are defined in the <span id="textcolor12"><span 
+class="ec-lmssbx-10">Interface</span></span> section of the
+<span id="textcolor13"><span 
+class="ec-lmssbx-10">ActorClass</span></span>.
+</p><!--l. 53--><p class="noindent" >Internal <span id="textcolor14"><span 
+class="ec-lmssbx-10">Port</span></span>s define the internal interface of an actor and are defined in the <span id="textcolor15"><span 
+class="ec-lmssbx-10">Structure</span></span> section of the
+<span id="textcolor16"><span 
+class="ec-lmssbx-10">ActorClass</span></span>.
+</p><!--l. 56--><p class="noindent" ><span id="textcolor17"><span 
+class="ec-lmssbx-10">Binding</span></span>s connect <span id="textcolor18"><span 
+class="ec-lmssbx-10">Port</span></span>s inside an <span id="textcolor19"><span 
+class="ec-lmssbx-10">ActorClass</span></span>.
+</p><!--l. 58--><p class="noindent" >Let us have a look at example <a 
+href="#x59-860012">10.2<!--tex4ht:ref: tab:actor_class_example --></a>:
+</p>
+<div class="table">
                                                                                  
                                                                                  
-<!--l. 229--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 61--><p class="noindent" ><a 
+ id="x59-860012"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                 
+                                                                                 
+ <div class="caption" 
+><span class="id">Table&#x00A0;10.2: </span><span  
+class="content">Actor Class Example</span></div><!--tex4ht:label?: x59-860012 -->
+<div class="tabular"> <table id="TBL-4" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1" /></colgroup><colgroup id="TBL-4-2g"><col 
+id="TBL-4-2" /></colgroup><colgroup id="TBL-4-3g"><col 
+id="TBL-4-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-1"  
+class="td11"> <span 
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-2"  
+class="td11"> <span 
+class="ec-lmssbx-10">Textual Notation  </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-1"  
+class="td11"> <img 
+src="images/040-ActorClass.png" alt="PIC"  
+ />                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-2"  
+class="td11"> <img 
+src="images/040-ActorClassExampleTextualNotation.png" alt="PIC"  
+ />                     </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-1"  
+class="td11">                   </td></tr></table>
+</div>
+                                                                                 
+                                                                                 
+</div><hr class="endfloat" />
+</div>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmsso-10">ActorClass1 </span>contains two <span id="textcolor20"><span 
+class="ec-lmssbx-10">ActorRef</span></span>erences (of ActorClass2 and ActorClass3)
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">port1  </span>is  an  <span 
+class="ec-lmsso-10">external  end  port</span>.  Since  it  connects  external  actors  with  the  behavior  of  the
+     <span id="textcolor21"><span 
+class="ec-lmssbx-10">ActorClass</span></span>, it is defined in the <span id="textcolor22"><span 
+class="ec-lmssbx-10">Interface</span></span> section and the <span id="textcolor23"><span 
+class="ec-lmssbx-10">Structure</span></span> section of the <span id="textcolor24"><span 
+class="ec-lmssbx-10">ActorClass</span></span>.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">port2  </span>and <span 
+class="ec-lmsso-10">port3  </span>are <span 
+class="ec-lmsso-10">internal end ports  </span>and can only be connected to the ports of contained
+     <span id="textcolor25"><span 
+class="ec-lmssbx-10">ActorRef</span></span>erences. Internal end ports connect the behavior of an <span id="textcolor26"><span 
+class="ec-lmssbx-10">ActorClass</span></span> with its contained
+     <span id="textcolor27"><span 
+class="ec-lmssbx-10">ActorRef</span></span>erences.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">port4 </span>is a relay port and connects external Actors to contained <span id="textcolor28"><span 
+class="ec-lmssbx-10">ActorRef</span></span>erences. This port can
+     not be accessed by the behavior of the <span id="textcolor29"><span 
+class="ec-lmssbx-10">ActorClass</span></span>.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">port5 </span>through <span 
+class="ec-lmsso-10">port9 </span>are ports of contained actor references. <span 
+class="ec-lmsso-10">port8 </span>and <span 
+class="ec-lmsso-10">port9 </span>can communicate
+     without interference with the containing actor class.
+     </li>
+     <li class="itemize"><span id="textcolor30"><span 
+class="ec-lmssbx-10">Binding</span></span>s can connect ports of the actor class and its contained actor references.</li></ul>
+<h5 class="subsubsectionHead"><a 
+ id="x59-8700010.1.4"></a>Attributes</h5>
+<!--l. 88--><p class="noindent" ><span id="textcolor31"><span 
+class="ec-lmssbx-10">Attribute</span></span>s are part of the <span id="textcolor32"><span 
+class="ec-lmssbx-10">Structure</span></span> of an actor class. They can be of a <span id="textcolor33"><span 
+class="ec-lmssbx-10">PrimitiveType</span></span> or a
+<span id="textcolor34"><span 
+class="ec-lmssbx-10">DataClass</span></span>.
+</p><!--l. 91--><p class="noindent" >Example:
+</p><!--l. 93--><p class="noindent" ><img 
+src="images/040-ActorClassAttributes.png" alt="PIC"  
+ />
+</p><!--l. 95--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x59-8800010.1.4"></a>Operations</h5>
+<!--l. 97--><p class="noindent" ><span id="textcolor35"><span 
+class="ec-lmssbx-10">Operation</span></span>s are part of the <span id="textcolor36"><span 
+class="ec-lmssbx-10">Behavior</span></span> of an actor class. Arguments and return values can be of a
+<span id="textcolor37"><span 
+class="ec-lmssbx-10">PrimitiveType</span></span> or a <span id="textcolor38"><span 
+class="ec-lmssbx-10">DataClass</span></span>. Data classes can be passed by value (implicit) or by reference
+(<span id="textcolor39"><span 
+class="ec-lmssbx-10">ref</span></span>).
+</p><!--l. 100--><p class="noindent" >Example:
+</p><!--l. 102--><p class="noindent" ><img 
+src="images/040-ActorClassOperations.png" alt="PIC"  
+ />
+                                                                                 
+                                                                                 
+</p>
+<!--l. 104--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse48.html" >next</a>] [<a 
-href="etrice-docse46.html" >prev</a>] [<a 
-href="etrice-docse46.html#tailetrice-docse46.html" >prev-tail</a>] [<a 
+href="etrice-docch10.html" >prev</a>] [<a 
+href="etrice-docch10.html#tailetrice-docch10.html" >prev-tail</a>] [<a 
 href="etrice-docse47.html" >front</a>] [<a 
-href="etrice-docch12.html#etrice-docse47.html" >up</a>] </p></div>
-<!--l. 229--><p class="noindent" ><a 
+href="etrice-docch10.html#etrice-docse47.html" >up</a>] </p></div>
+<!--l. 104--><p class="noindent" ><a 
  id="tailetrice-docse47.html"></a>  </p> 
 </body></html> 

@@ -1,6 +1,6 @@
-\chapter{Tutorial HelloWorld for Java}
+\section{Tutorial HelloWorld for Java}
 
-\section{Scope}
+\subsection{Scope}
 
 In this tutorial you will build your first very simple \eTrice{} model. The goal is to learn the work flow of 
 \eTrice{} and to understand a few basic features of ROOM. You will perform the following steps:
@@ -15,7 +15,7 @@ In this tutorial you will build your first very simple \eTrice{} model. The goal
 
 Make sure that you have set up the workspace as described in \textit{Setting up the workspace}.
 
-\section{Create a new model from scratch}
+\subsection{Create a new model from scratch}
 
 The easiest way to create a new \eTrice{} Project is to use the eclipse project wizard. From the eclipse file 
 menu select \textbf{File->New->Project} and create a new \eTrice{} project and name it \textbf{HelloWorld}.
@@ -75,7 +75,7 @@ The outline view of the textual ROOM editor shows the main modeling elements in 
 % !images/015-HelloWorld02.png!
 
 
-\section{Create a state machine}
+\subsection{Create a state machine}
 
 We will implement the Hello World code on the initial transition of the \textit{HelloWorldTop} actor. 
 Therefore open the state machine editor by right clicking the \textit{HelloWorldTop} actor in the outline 
@@ -106,7 +106,7 @@ the diagram.
 % !images/015-HelloWorld05.png!
 
 
-\section{Build and run the model}
+\subsection{Build and run the model}
 
 Now the model is finished and source code can be generated. The project wizard has created a launch 
 configuration that is responsible for generating the source code. From \textit{HelloWorld/} right click 
@@ -129,7 +129,7 @@ application the user must type \textbf{quit} in the console window.
 \includegraphics[width=0.8\textwidth]{images/015-HelloWorld08.png}
 % !images/015-HelloWorld08.png!
 
-\section{Open the Message Sequence Chart}
+\subsection{Open the Message Sequence Chart}
 
 During runtime the application produced a MSC and wrote it to a file. Open 
 HelloWorld/tmp/log/SubSystem\_HelloWorld\_Async.seq using Trace2UML (it is open source and can be obtained 
@@ -139,7 +139,7 @@ from  http://trace2uml.tigris.org/). You should see something like this:
 % !images/015-HelloWorld09.png!
 
 
-\section{Summary}
+\subsection{Summary}
 
 Now you have generated your first \eTrice{} model from scratch. You can switch between diagram editor and 
 model (.room file) and you can see what will be generated during editing and saving the diagram files. 
