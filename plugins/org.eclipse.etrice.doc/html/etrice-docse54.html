@@ -10,7 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 <meta name="date" content="2013-06-14 00:07:00" /> 
+=======
+<meta name="date" content="2013-06-14 08:45:00" /> 
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -1512,6 +1516,7 @@ href="#x67-1270505">11.5<!--tex4ht:ref: fig:instance_tree --></a>) of the instan
 instances (the white boxes) are mapped to a node and a thread running on this node (shown as @<span 
 class="ec-lmsso-10">node </span>:
 <span 
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 class="ec-lmsso-10">thread</span>).
                                                                                  
                                                                                  
@@ -1519,13 +1524,65 @@ class="ec-lmsso-10">thread</span>).
                                                                                  
                                                                                  
                                                                                  
+=======
+class="ec-lmtt-10">executeTransitionChain </span>method. Finally the history of the state where the chain ends is entered and all
+entry codes are executed by <span 
+class="ec-lmtt-10">enterHistory</span>.
+</p><!--l. 300--><p class="noindent" >
 </p>
+<h5 class="subsubsectionHead"><a 
+ id="x70-15600014.2.4"></a>The Java Generator</h5>
+<!--l. 302--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
+class="ec-lmtt-10">JavaTranslationProvider</span>
+is very simple and only handles the case of sending a message from a distinct replicated port:
+<span 
+class="ec-lmtt-10">replPort[2].message()</span>. Other cases are handled by the base class by returning the original
+text.
+</p><!--l. 306--><p class="noindent" >The <span 
+class="ec-lmtt-10">DataClassGen </span>uses Java inheritance for the generated data classes. Otherwise it is pretty much straight
+forward.
+</p><!--l. 309--><p class="noindent" >The <span 
+class="ec-lmtt-10">ProtocolClassGen </span>generates a class for the protocol with nested static classes for regular and
+conjugated ports and similar for replicated ports.
+</p><!--l. 312--><p class="noindent" >The <span 
+class="ec-lmtt-10">ActorClassGen </span>uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and
+detail code methods are inherited. Not inherited is the state machine implementation.
+</p><!--l. 315--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x70-15700014.2.4"></a>The ANSI-C Generator</h5>
+<!--l. 317--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods
+that operate on them and receive a pointer to those data (called <span 
+class="ec-lmtt-10">self </span>in analogy to the implicit
+C++ <span 
+class="ec-lmtt-10">this </span>pointer). No dynamic memory allocation is employed. All actor instances are statically
+initialized. One of the design goals for the generated C code was an optimized footprint in terms of
+memory and performance to be able to utilize modeling with ROOM also for tiny low end micro
+controllers.
+</p><!--l. 324--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x70-15800014.2.4"></a>The Documentation Generator</h5>
+<!--l. 326--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF and
+many other formats.
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
+</p>
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch12.html" >next</a>] [<a 
+=======
+<!--l. 82--><div class="crosslinks"><p class="noindent">[<a 
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
 href="etrice-docse53.html" >prev</a>] [<a 
 href="etrice-docse53.html#tailetrice-docse53.html" >prev-tail</a>] [<a 
 href="etrice-docse54.html" >front</a>] [<a 
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 href="etrice-docch11.html#etrice-docse54.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse54.html"></a> </p> 
+=======
+href="etrice-docch14.html#etrice-docse54.html" >up</a>] </p></div>
+<!--l. 82--><p class="noindent" ><a 
+ id="tailetrice-docse54.html"></a>  </p> 
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
 </body></html> 

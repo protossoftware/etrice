@@ -11,79 +11,72 @@
              label="Setting up the Workspace for Java Projects"/>
       <topic href="html/etrice-docse5.html#x9-280002.3"
              label="Tutorial HelloWorld for Java"/>
-      <topic href="html/etrice-docse6.html#x10-310002.4"
-             label="Create a state machine"/>
-      <topic href="html/etrice-docse7.html#x11-320002.5"
-             label="Build and run the model"/>
-      <topic href="html/etrice-docse8.html#x12-330002.6"
-             label="Open the Message Sequence Chart"/>
-      <topic href="html/etrice-docse9.html#x13-340002.7" label="Summary"/>
-      <topic href="html/etrice-docse10.html#x14-350002.8"
+      <topic href="html/etrice-docse6.html#x10-350002.4"
              label="Tutorial Blinky (Java)"/>
-      <topic href="html/etrice-docse11.html#x15-440002.9"
+      <topic href="html/etrice-docse7.html#x11-440002.5"
              label="Tutorial Sending Data (Java)"/>
    </topic>
-   <topic href="html/etrice-docch3.html#x16-560003"
+   <topic href="html/etrice-docch3.html#x12-560003"
           label="Tutorial Pedestrian Lights (Java)">
-      <topic href="html/etrice-docse12.html#x17-570003.1" label="Scope"/>
-      <topic href="html/etrice-docse13.html#x18-580003.2" label="Setup the model"/>
-      <topic href="html/etrice-docse14.html#x19-590003.3"
+      <topic href="html/etrice-docse8.html#x13-570003.1" label="Scope"/>
+      <topic href="html/etrice-docse9.html#x14-580003.2" label="Setup the model"/>
+      <topic href="html/etrice-docse10.html#x15-590003.3"
              label="Why does it work and why is it safe?"/>
    </topic>
-   <topic href="html/etrice-docch4.html#x20-600004"
+   <topic href="html/etrice-docch4.html#x16-600004"
           label="Setting up the Workspace for C Projects">
-      <topic href="html/etrice-docse15.html#x21-610004.1"
+      <topic href="html/etrice-docse11.html#x17-610004.1"
              label="Testing the environment"/>
-      <topic href="html/etrice-docse16.html#x22-620004.2"
+      <topic href="html/etrice-docse12.html#x18-620004.2"
              label="Building the C runtime system"/>
    </topic>
-   <topic href="html/etrice-docch5.html#x23-630005"
+   <topic href="html/etrice-docch5.html#x19-630005"
           label="Tutorial HelloWorld for C">
-      <topic href="html/etrice-docse17.html#x24-640005.1" label="Scope"/>
-      <topic href="html/etrice-docse18.html#x25-650005.2"
+      <topic href="html/etrice-docse13.html#x20-640005.1" label="Scope"/>
+      <topic href="html/etrice-docse14.html#x21-650005.2"
              label="Create a new model from scratch"/>
-      <topic href="html/etrice-docse19.html#x26-660005.3"
+      <topic href="html/etrice-docse15.html#x22-660005.3"
              label="Create the HelloWorld model"/>
-      <topic href="html/etrice-docse20.html#x27-670005.4"
+      <topic href="html/etrice-docse16.html#x23-670005.4"
              label="Create a launch configuration to start the C code generator"/>
-      <topic href="html/etrice-docse21.html#x28-680005.5" label="Generate the code"/>
-      <topic href="html/etrice-docse22.html#x29-690005.6"
+      <topic href="html/etrice-docse17.html#x24-680005.5" label="Generate the code"/>
+      <topic href="html/etrice-docse18.html#x25-690005.6"
              label="Setup the include path"/>
-      <topic href="html/etrice-docse23.html#x30-700005.7"
+      <topic href="html/etrice-docse19.html#x26-700005.7"
              label="Build and run the model"/>
-      <topic href="html/etrice-docse24.html#x31-710005.8" label="Summary"/>
+      <topic href="html/etrice-docse20.html#x27-710005.8" label="Summary"/>
    </topic>
-   <topic href="html/etrice-docch6.html#x32-720006"
+   <topic href="html/etrice-docch6.html#x28-720006"
           label="Tutorial Remove C-Comment ( C )">
-      <topic href="html/etrice-docse25.html#x33-730006.1" label="Scope"/>
-      <topic href="html/etrice-docse26.html#x34-740006.2"
+      <topic href="html/etrice-docse21.html#x29-730006.1" label="Scope"/>
+      <topic href="html/etrice-docse22.html#x30-740006.2"
              label="Create a new model from scratch"/>
-      <topic href="html/etrice-docse27.html#x35-750006.3"
+      <topic href="html/etrice-docse23.html#x31-750006.3"
              label="Create your own data type"/>
-      <topic href="html/etrice-docse28.html#x36-760006.4" label="Create the model"/>
-      <topic href="html/etrice-docse29.html#x37-770006.5"
+      <topic href="html/etrice-docse24.html#x32-760006.4" label="Create the model"/>
+      <topic href="html/etrice-docse25.html#x33-770006.5"
              label="Generate, build and run the model"/>
-      <topic href="html/etrice-docse30.html#x38-780006.6" label="Summary"/>
+      <topic href="html/etrice-docse26.html#x34-780006.6" label="Summary"/>
    </topic>
-   <topic href="html/etrice-docch7.html#x39-790007" label="ROOM Concepts">
-      <topic href="html/etrice-docse31.html#x40-800007.1" label="Actors"/>
-      <topic href="html/etrice-docse32.html#x41-880007.2" label="Protocols"/>
-      <topic href="html/etrice-docse33.html#x42-920007.3" label="Ports"/>
-      <topic href="html/etrice-docse34.html#x43-980007.4" label="DataClass"/>
-      <topic href="html/etrice-docse35.html#x44-1010007.5" label="Layering"/>
-      <topic href="html/etrice-docse36.html#x45-1040007.6"
+   <topic href="html/etrice-docch7.html#x35-790007" label="ROOM Concepts">
+      <topic href="html/etrice-docse27.html#x36-800007.1" label="Actors"/>
+      <topic href="html/etrice-docse28.html#x37-880007.2" label="Protocols"/>
+      <topic href="html/etrice-docse29.html#x38-920007.3" label="Ports"/>
+      <topic href="html/etrice-docse30.html#x39-980007.4" label="DataClass"/>
+      <topic href="html/etrice-docse31.html#x40-1010007.5" label="Layering"/>
+      <topic href="html/etrice-docse32.html#x41-1040007.6"
              label="Finite State Machines"/>
    </topic>
-   <topic href="html/etrice-docch8.html#x46-1110008" label="eTrice Features">
-      <topic href="html/etrice-docse37.html#x47-1120008.1"
+   <topic href="html/etrice-docch8.html#x42-1110008" label="eTrice Features">
+      <topic href="html/etrice-docse33.html#x43-1120008.1"
              label="Automatic Diagram Layout with KIELER"/>
-      <topic href="html/etrice-docse38.html#x48-1250008.2"
+      <topic href="html/etrice-docse34.html#x44-1250008.2"
              label="eTrice Models and Their Relations"/>
    </topic>
-   <topic href="html/etrice-docch9.html#x49-1300009"
+   <topic href="html/etrice-docch9.html#x45-1300009"
           label="eTrice Tool Developer’s Reference">
-      <topic href="html/etrice-docse39.html#x50-1310009.1" label="Architecture"/>
-      <topic href="html/etrice-docse40.html#x51-1350009.2"
+      <topic href="html/etrice-docse35.html#x46-1310009.1" label="Architecture"/>
+      <topic href="html/etrice-docse36.html#x47-1350009.2"
              label="Component Overview"/>
    </topic>
 </toc>

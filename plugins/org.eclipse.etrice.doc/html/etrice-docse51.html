@@ -10,7 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 <meta name="date" content="2013-06-14 00:07:00" /> 
+=======
+<meta name="date" content="2013-06-14 08:45:00" /> 
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -166,7 +170,92 @@ class="td11">                   </td></tr></table></div>
 </div>
                                                                                  
                                                                                  
+<<<<<<< Upstream, based on branch 'master' of ssh://hrentzreich@git.eclipse.org:29418/etrice/org.eclipse.etrice.git
 <!--l. 301--><div class="crosslinks"><p class="noindent">[<a 
+=======
+
+<!--l. 185--><p class="noindent" ><img 
+src="images/043-PreferencePage.png" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;13.4: </span><span  
+class="content">Layout preference page</span></div><!--tex4ht:label?: x66-1200014 -->
+                                                                                 
+                                                                                 
+</div><hr class="endfigure" />
+<!--l. 190--><p class="noindent" >Note that the <span 
+class="ec-lmsso-10">Behavior </span>preference page will show only those entries which hold for the behavior diagrams.
+Moreover, it will allow setting default values of layout options for only those domain model elements and
+diagram types which could be present in the behavior editor diagrams. Similar thing holds for the <span 
+class="ec-lmsso-10">Structure</span>
+preference page.
+</p>
+<h4 class="subsectionHead"><span class="titlemark">13.1.5   </span> <a 
+ id="x66-12100013.1.5"></a>Special Layout Options</h4>
+<!--l. 198--><p class="noindent" >While most layout options are used to affect how the active layout algorithm computes concrete coordinates
+for the graph elements, there are some layout options that have a special role.
+</p><!--l. 201--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x66-12200013.1.5"></a>Layout Algorithm</h5>
+<!--l. 203--><p class="noindent" >The option with identifier de.cau.cs.kieler.algorithm specifies which layout algorithm to use for the
+content of a composite node. The value can be either the identifier of a layout algorithm or the
+identifier of a layout type. In the latter case the algorithm with highest priority of that type is
+applied.
+</p><!--l. 207--><p class="noindent" >For the purpose of automatic diagram layout in eTrice, we use the <span 
+class="ec-lmsso-10">Layered </span>algorithms which are meant for
+lay-outing hierarchical diagrams and are best suited for behavior and structure diagrams in eTrice. For the
+behavior diagrams we have used the <span 
+class="ec-lmsso-10">Graphviz Dot </span>algorithm whereas for the structure diagrams we have used
+the <span 
+class="ec-lmsso-10">KLay Layered </span>algorithm. Though the layout algorithm being used for performing layout can be changed at
+ones own will, it is recommended to use the defaults.
+</p><!--l. 213--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x66-12300013.1.5"></a>Diagram Type</h5>
+<!--l. 215--><p class="noindent" >Diagram types are used to classify graphical diagrams for setting default layout option values for
+a set of similar diagrams. The diagram type of an element is specified with the layout option
+<span 
+class="ec-lmtt-10">de.cau.cs.kieler.diagramType</span>. Thus, these help in
+</p><!--l. 219--><p class="noindent" >The following diagram types have been defined and used in eTrice: </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmsso-10">General </span>- This type is automatically assigned to all diagrams for which no specific type is declared.
+     (Predefined in KIELER)
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">Behavior Diagrams </span>- This type has been assigned to the diagram objects in eTrice Behavior
+     Diagrams.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">Structure Diagrams </span>- This type has been assigned to the diagram objects in eTrice Structure
+     Diagrams.</li></ul>
+<!--l. 228--><p class="noindent" >Note that not all diagrams objects in the behavior and structure diagrams are assigned the last two diagram
+types. Only the top-level container and the visible bounding box has been assigned these diagram types in
+respective editors.
+                                                                                 
+                                                                                 
+</p><!--l. 232--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">13.1.6   </span> <a 
+ id="x66-12400013.1.6"></a>Further References</h4>
+<!--l. 234--><p class="noindent" >Most parts of the above documentation have been taken from the "KIML wiki"
+(<a 
+href="http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078" class="url" ><span 
+class="ec-lmtt-10">http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078</span></a> and
+have been modified for automatic layout in eTrice. A more detailed description about the layout algorithms,
+predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout (KIML) can be
+found there.
+                                                                                 
+                                                                                 
+</p>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+>>>>>>> 1fbdb27 [doc] fixed problem with colored eTrice in headings
 href="etrice-docse52.html" >next</a>] [<a 
 href="etrice-docse50.html" >prev</a>] [<a 
 href="etrice-docse50.html#tailetrice-docse50.html" >prev-tail</a>] [<a 
