@@ -66,6 +66,7 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IShapeSelectionInfo;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ShapeSelectionInfoImpl;
@@ -460,6 +461,18 @@ public class ProviderDispatcher {
 	        	return super.getToolTip(ga);
 	        else
 	        	return bp.getToolTip(ga);
+		}
+		
+		/** 
+		 * @author jayant
+		 **/
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			IToolBehaviorProvider bp = getToolBehaviorProvider(pe);
+			if (bp==null)
+				return super.getDecorators(pe);
+			else
+				return bp.getDecorators(pe);
 		}
 	}
 	
