@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+                                         
+	<template autoinsert="true" context="org.eclipse.etrice.core.etmap.ETMap.MappingModel"
+		deleted="false" description="model skeleton" enabled="true" id="mapping_model"
+		name="MappingModel">MappingModel ${MappingModel1} {&#13;
+	import ${RoomModel1}.* from "${RoomModelFile1}.room"
+	import ${PhysicalModel1}.* from "${PhysicalModelFile1}.etphys"
+	Mapping ${LogSys1} -> ${PhysSys1} {
+		SubSystemMapping ${SubSysRef1} -> ${nodeRef1} {
+			ThreadMapping defaultThread -> ${PhysicalThread1}
+		}
+	}
+	${cursor}
+}&#13;</template>
+
+
+</templates>
