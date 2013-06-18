@@ -51,7 +51,7 @@ public class ETPhysFormatter extends AbstractDeclarativeFormatter {
 			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
 		}		
 		
-		for (Keyword k: f.findKeywords("runtime","execmode", "prio", "stacksize")) {
+		for (Keyword k: f.findKeywords("runtime","priomin", "priomax", "execmode", "prio", "stacksize", "msgblocksize", "msgpoolsize")) {
 			c.setLinewrap().before(k);
 		}
 		

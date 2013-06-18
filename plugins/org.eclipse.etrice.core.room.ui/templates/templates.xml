@@ -3,14 +3,15 @@
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.RoomModel"
 	deleted="false" description="model skeleton" enabled="true"
-	id="model" name="RoomModel">RoomModel ${ModelName} {&#13;
-	LogicalSystem ${LogSysName} {&#13;
-		SubSystemRef ${SubSysRefName}:${SubSysClassName} &#13;
+	id="model" name="RoomModel">RoomModel ${RoomModel1} {&#13;
+	LogicalSystem ${LogSys1} {&#13;
+		SubSystemRef ${SubSysRef1}:${SubSysClass1} &#13;
 	}&#13;
-	SubSystemClass ${SubSysClassName} {&#13;
-		ActorRef ${ActorRefName}:${ActorClassName} &#13;
+	SubSystemClass ${SubSysClass1} {&#13;
+		ActorRef ${ActorRef1}:${ActorClass1} &#13;
+		LogicalThread defaultThread&#13;
 	}&#13;
-	ActorClass ${ActorClassName} {&#13;
+	ActorClass ${ActorClass1} {&#13;
 	}&#13;
 	${cursor}
 }</template>
