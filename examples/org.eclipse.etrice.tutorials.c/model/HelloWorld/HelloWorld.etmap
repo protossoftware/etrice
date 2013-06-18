@@ -1,0 +1,9 @@
+MappingModel cgenRef {
+	import RoomModel1.* from "HelloWorld.room"
+	import PhysicalModel1.* from "HelloWorld.etphys"
+	Mapping LogSys1 -> PhysSys1 {
+		SubSystemMapping SubSysRef1 -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

@@ -1,0 +1,16 @@
+RoomModel wer {
+		LogicalSystem LogSysName {
+		SubSystemRef SubSysRefName:SubSysClassName
+		
+		}
+		SubSystemClass SubSysClassName {
+		ActorRef ActorRefName:ActorClassName
+		
+		}
+		ActorClass ActorClassName {
+		}
+		
+		}
+		
+		
+	

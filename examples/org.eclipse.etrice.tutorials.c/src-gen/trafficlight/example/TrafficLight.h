@@ -43,19 +43,19 @@ typedef struct TrafficLight_const {
 #define TRAFFICLIGHT_HISTORY_SIZE 3
 
 /* variable part of ActorClass (RAM) */
-	struct TrafficLight {
-		const TrafficLight_const* const constData;
-		
-		/* data send ports */
-
-		/*--------------------- attributes ---------------------*/
-		DTcpControl ipConfig;
-		
-		
-			/* state machine variables */
-			etInt16 state;
-			etInt16 history[TRAFFICLIGHT_HISTORY_SIZE];
-	};
+struct TrafficLight {
+	const TrafficLight_const* const constData;
+	
+	/* data send ports */
+	
+	/*--------------------- attributes ---------------------*/
+	DTcpControl ipConfig;
+	
+	
+	/* state machine variables */
+	etInt16 state;
+	etInt16 history[TRAFFICLIGHT_HISTORY_SIZE];
+};
 
 void TrafficLight_init(TrafficLight* self);
 

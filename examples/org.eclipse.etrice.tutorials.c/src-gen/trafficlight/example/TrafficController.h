@@ -41,18 +41,18 @@ typedef struct TrafficController_const {
 #define TRAFFICCONTROLLER_HISTORY_SIZE 2
 
 /* variable part of ActorClass (RAM) */
-	struct TrafficController {
-		const TrafficController_const* const constData;
-		
-		/* data send ports */
-
-		/*--------------------- attributes ---------------------*/
-		
-		
-			/* state machine variables */
-			etInt16 state;
-			etInt16 history[TRAFFICCONTROLLER_HISTORY_SIZE];
-	};
+struct TrafficController {
+	const TrafficController_const* const constData;
+	
+	/* data send ports */
+	
+	/*--------------------- attributes ---------------------*/
+	
+	
+	/* state machine variables */
+	etInt16 state;
+	etInt16 history[TRAFFICCONTROLLER_HISTORY_SIZE];
+};
 
 void TrafficController_init(TrafficController* self);
 

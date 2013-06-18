@@ -11,7 +11,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 #include "etUnit/etUnit.h"
-#include "platform/etMemory.h"
+#include "osal/etMemory.h"
 
 #include "room/basic/service/timing/PTimer.h"
 #include "trafficlight/example/PTrafficLight.h"
@@ -62,16 +62,16 @@ enum triggers {
 	TRIG_light1__greenForCarDone = IFITEM_light1 + EVT_SHIFT*PTrafficLight_OUT_greenForCarDone,
 	TRIG_light2__greenForCarDone = IFITEM_light2 + EVT_SHIFT*PTrafficLight_OUT_greenForCarDone,
 	TRIG_timeout__timeout = IFITEM_timeout + EVT_SHIFT*PTimer_OUT_timeout,
-	TRIG_light1__greenForPedDone = IFITEM_light1 + EVT_SHIFT*PTrafficLight_OUT_greenForPedDone,
-	TRIG_light2__greenForPedDone = IFITEM_light2 + EVT_SHIFT*PTrafficLight_OUT_greenForPedDone
+	TRIG_light2__greenForPedDone = IFITEM_light2 + EVT_SHIFT*PTrafficLight_OUT_greenForPedDone,
+	TRIG_light1__greenForPedDone = IFITEM_light1 + EVT_SHIFT*PTrafficLight_OUT_greenForPedDone
 };
 
 
-static void setState(TrafficController* self, int new_state) {
+static void setState(TrafficController* self, etInt16 new_state) {
 	self->state = new_state;
 }
 
-static int getState(TrafficController* self) {
+static etInt16 getState(TrafficController* self) {
 	return self->state;
 }
 
@@ -220,7 +220,7 @@ static etInt16 executeTransitionChain(TrafficController* self, int chain, const 
 static etInt16 enterHistory(TrafficController* self, etInt16 state) {
 	boolean skip_entry = FALSE;
 	if (state >= STATE_MAX) {
-		state = state - STATE_MAX;
+		state = (etInt16) (state - STATE_MAX);
 		skip_entry = TRUE;
 	}
 	while (TRUE) {

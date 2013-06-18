@@ -1,1 +1,5 @@
-Debug
+PosixDebug
+PosixRelease
+MinGWDebug
+MinGWRelease
+src-gen-info

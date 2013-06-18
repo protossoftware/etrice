@@ -11,7 +11,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 #include "etUnit/etUnit.h"
-#include "platform/etMemory.h"
+#include "osal/etMemory.h"
 
 #include "room/basic/service/tcp/PTcpControl.h"
 #include "room/basic/service/tcp/PTcpPayload.h"
@@ -72,11 +72,11 @@ enum triggers {
 };
 
 
-static void setState(TrafficLight* self, int new_state) {
+static void setState(TrafficLight* self, etInt16 new_state) {
 	self->state = new_state;
 }
 
-static int getState(TrafficLight* self) {
+static etInt16 getState(TrafficLight* self) {
 	return self->state;
 }
 
@@ -253,7 +253,7 @@ static etInt16 executeTransitionChain(TrafficLight* self, int chain, const Inter
 static etInt16 enterHistory(TrafficLight* self, etInt16 state) {
 	boolean skip_entry = FALSE;
 	if (state >= STATE_MAX) {
-		state = state - STATE_MAX;
+		state = (etInt16) (state - STATE_MAX);
 		skip_entry = TRUE;
 	}
 	while (TRUE) {

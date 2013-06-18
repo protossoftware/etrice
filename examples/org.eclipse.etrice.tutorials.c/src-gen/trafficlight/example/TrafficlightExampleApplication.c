@@ -11,7 +11,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 #include "etUnit/etUnit.h"
-#include "platform/etMemory.h"
+#include "osal/etMemory.h"
 
 #include "room/basic/service/tcp/PTcpControl.h"
 #include "room/basic/service/tcp/PTcpPayload.h"
