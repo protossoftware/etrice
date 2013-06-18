@@ -8,6 +8,7 @@
 <booleanAttribute key="MSC" value="false"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TimingService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TcpService.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

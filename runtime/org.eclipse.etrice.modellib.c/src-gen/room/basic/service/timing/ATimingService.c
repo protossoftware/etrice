@@ -11,7 +11,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 #include "etUnit/etUnit.h"
-#include "platform/etMemory.h"
+#include "osal/etMemory.h"
 
 #include "room/basic/service/timing/PTimer.h"
 
@@ -51,11 +51,11 @@ enum triggers {
 };
 
 
-static void setState(ATimingService* self, int new_state) {
+static void setState(ATimingService* self, etInt16 new_state) {
 	self->state = new_state;
 }
 
-static int getState(ATimingService* self) {
+static etInt16 getState(ATimingService* self) {
 	return self->state;
 }
 
@@ -66,7 +66,7 @@ static void entry_Operational(ATimingService* self) {
 static  void do_Operational(ATimingService* self) {
 	/* maintain timers */
 	etTimerControlBlock* temp;
-	etTargetTime_t t;
+	etTime t;
 	
 	getTimeFromTarget(&t);
 	while (usedTcbsRoot !=0 ){
@@ -100,7 +100,7 @@ static void action_TRANS_INITIAL_TO__Operational(ATimingService* self) {
 }
 static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ATimingService* self, const InterfaceItemBase* ifitem, uint32 time) {
 	etTimerControlBlock* timer = ATimingService_getTcb(self) /* ORIG: getTcb() */;
-	etTargetTime_t t;
+	etTime t;
 	if (timer!= 0){
 		t.sec=time/1000;
 		t.nSec=(time%1000)*1000000L;
@@ -114,7 +114,7 @@ static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttime
 }
 static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ATimingService* self, const InterfaceItemBase* ifitem, uint32 time) {
 	etTimerControlBlock* timer = ATimingService_getTcb(self) /* ORIG: getTcb() */;
-	etTargetTime_t t;
+	etTime t;
 	if (timer!= 0){
 		t.sec=time/1000;
 		t.nSec=(time%1000)*1000000L;
@@ -195,7 +195,7 @@ static etInt16 executeTransitionChain(ATimingService* self, int chain, const Int
 static etInt16 enterHistory(ATimingService* self, etInt16 state) {
 	boolean skip_entry = FALSE;
 	if (state >= STATE_MAX) {
-		state = state - STATE_MAX;
+		state = (etInt16) (state - STATE_MAX);
 		skip_entry = TRUE;
 	}
 	while (TRUE) {
@@ -233,30 +233,30 @@ static void ATimingService_receiveEvent(ATimingService* self, InterfaceItemBase*
 		switch (getState(self)) {
 			case STATE_Operational:
 				switch(trigger) {
-				case POLLING:
+					case POLLING:
 						do_Operational(self);
+						break;
+					case TRIG_timer__startTimeout:
+						{
+							chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
+							catching_state = STATE_TOP;
+						}
 					break;
-						case TRIG_timer__startTimeout:
-							{
-								chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
-								catching_state = STATE_TOP;
-							}
+					case TRIG_timer__startTimer:
+						{
+							chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
+							catching_state = STATE_TOP;
+						}
+					break;
+					case TRIG_timer__kill:
+						{
+							chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
+							catching_state = STATE_TOP;
+						}
+					break;
+					default:
+						/* should not occur */
 						break;
-						case TRIG_timer__startTimer:
-							{
-								chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
-								catching_state = STATE_TOP;
-							}
-						break;
-						case TRIG_timer__kill:
-							{
-								chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
-								catching_state = STATE_TOP;
-							}
-						break;
-						default:
-							/* should not occur */
-							break;
 				}
 				break;
 			default:
@@ -382,14 +382,14 @@ void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* 
 					}
 				}
 }
-boolean ATimingService_isTimeGreater(ATimingService* self, etTargetTime_t* t1, etTargetTime_t* t2) {
+boolean ATimingService_isTimeGreater(ATimingService* self, etTime* t1, etTime* t2) {
 	
 					if (t1->sec > t2->sec) return TRUE;
 					if (t1->sec < t2->sec) return FALSE;
 					if (t1->nSec > t2->nSec) return TRUE;
 					return FALSE;
 }
-void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTime_t* t2) {
+void ATimingService_addTime(ATimingService* self, etTime* t1, etTime* t2) {
 	
 					t1->sec += t2->sec;
 					t1->nSec += t2->nSec;

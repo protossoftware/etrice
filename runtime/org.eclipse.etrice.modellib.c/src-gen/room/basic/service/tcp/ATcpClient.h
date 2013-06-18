@@ -11,11 +11,12 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+#include "room/basic/service/tcp/DTcpPayload.h"
 #include "room/basic/service/tcp/PTcpControl.h"
 #include "room/basic/service/tcp/PTcpPayload.h"
 
 /*--------------------- begin user code ---------------------*/
-#include "platform/etTcpSockets.h"
+#include "osal/etTcpSockets.h"
 /*--------------------- end user code ---------------------*/
 
 typedef struct ATcpClient ATcpClient;
@@ -40,21 +41,21 @@ typedef struct ATcpClient_const {
 #define ATCPCLIENT_HISTORY_SIZE 2
 
 /* variable part of ActorClass (RAM) */
-	struct ATcpClient {
-		const ATcpClient_const* const constData;
-		
-		/* data send ports */
-
-		/*--------------------- attributes ---------------------*/
-		int32 lastError;
-		DTcpPayload payload;
-		etSocketConnectionData* client;
-		
-		
-			/* state machine variables */
-			etInt16 state;
-			etInt16 history[ATCPCLIENT_HISTORY_SIZE];
-	};
+struct ATcpClient {
+	const ATcpClient_const* const constData;
+	
+	/* data send ports */
+	
+	/*--------------------- attributes ---------------------*/
+	int32 lastError;
+	DTcpPayload payload;
+	etSocketConnectionData* client;
+	
+	
+	/* state machine variables */
+	etInt16 state;
+	etInt16 history[ATCPCLIENT_HISTORY_SIZE];
+};
 
 void ATcpClient_init(ATcpClient* self);
 

@@ -15,12 +15,12 @@
 
 /*--------------------- begin user code ---------------------*/
 
-			#include "platform/etTimer.h" 
+			#include "osal/etTime.h" 
 			#define ET_NB_OF_TCBS 30
 			typedef struct etTCB etTimerControlBlock; 
 			struct etTCB {
-				etTargetTime_t expTime;
-				etTargetTime_t pTime;
+				etTime expTime;
+				etTime pTime;
 				int32 portIdx;
 				etTimerControlBlock* next;
 				};
@@ -48,18 +48,18 @@ typedef struct ATimingService_const {
 #define ATIMINGSERVICE_HISTORY_SIZE 2
 
 /* variable part of ActorClass (RAM) */
-	struct ATimingService {
-		const ATimingService_const* const constData;
-		
-		/* data send ports */
-
-		/*--------------------- attributes ---------------------*/
-		
-		
-			/* state machine variables */
-			etInt16 state;
-			etInt16 history[ATIMINGSERVICE_HISTORY_SIZE];
-	};
+struct ATimingService {
+	const ATimingService_const* const constData;
+	
+	/* data send ports */
+	
+	/*--------------------- attributes ---------------------*/
+	
+	
+	/* state machine variables */
+	etInt16 state;
+	etInt16 history[ATIMINGSERVICE_HISTORY_SIZE];
+};
 
 void ATimingService_init(ATimingService* self);
 
@@ -72,8 +72,8 @@ etTimerControlBlock* ATimingService_getTcb(ATimingService* self);
 void ATimingService_returnTcb(ATimingService* self, etTimerControlBlock* block);
 void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx);
 void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* block);
-boolean ATimingService_isTimeGreater(ATimingService* self, etTargetTime_t* t1, etTargetTime_t* t2);
-void ATimingService_addTime(ATimingService* self, etTargetTime_t* t1, etTargetTime_t* t2);
+boolean ATimingService_isTimeGreater(ATimingService* self, etTime* t1, etTime* t2);
+void ATimingService_addTime(ATimingService* self, etTime* t1, etTime* t2);
 void ATimingService_printList(ATimingService* self);
 
 /*--------------------- begin user code ---------------------*/

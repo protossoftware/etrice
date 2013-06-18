@@ -1,5 +1,7 @@
-Debug
-Release
+PosixDebug
+PosixRelease
+MinGWDebug
+MinGWRelease
 src-gen-info
 *.aux
 *.lof

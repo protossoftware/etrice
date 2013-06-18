@@ -1,5 +1,6 @@
 bin
-DebugLinux
-ReleaseLinux
-DebugMinGW
-ReleaseMinGW
+PosixDebug
+PosixRelease
+MinGWDebug
+MinGWRelease
+src-gen-info
