@@ -55,10 +55,9 @@ public class ETMapFormatter extends AbstractDeclarativeFormatter {
 			c.setNoSpace().around(k);
 		}
 		
-		c.setLinewrap(1).after(f.getImportRule());
-
-		c.setLinewrap(1).after(f.getMappingRule());
-		c.setLinewrap(1).after(f.getSubSystemMappingRule());
-		c.setLinewrap(1).after(f.getThreadMappingRule());
+		c.setLinewrap(2).around(f.getMappingRule());
+		c.setLinewrap(1).around(f.getImportRule());
+		c.setLinewrap(1).around(f.getSubSystemMappingRule());
+		c.setLinewrap(1).around(f.getThreadMappingRule());
 	}
 }
