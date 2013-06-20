@@ -7,7 +7,7 @@ import -P "${WORKSPACE}/buildroot/build.properties" "${checkout.location}/org.ec
 # clean build
 build -c
 
-#perform -D WORKSPACE=${WORKSPACE} org.eclipse.etrice.releng#create.javadoc
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#create.javadoc
 #perform org.eclipse.etrice.releng#create.doc
 
 perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.site#site.p2.zip

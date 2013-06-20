@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="project">
 	
-	<target name="create.javadoc">
+	<target name="create.javadoc" depends="-setup.javadoc" if="run.javadoc">
 
 			<property name="projectName" value="eTrice" />
 
@@ -61,6 +61,12 @@
 				<exclude name="*.zip" />
 			</zip>
 		</target>
+	
+	<target name="-setup.javadoc">
+		<condition property="run.javadoc">
+			<equals arg1="${mustCreateJavadoc}" arg2="true"/>
+		</condition>
+	</target>
 	
 	<!--
 	<target name="create.javadoc" description="Generate the JavaDoc for the sources">

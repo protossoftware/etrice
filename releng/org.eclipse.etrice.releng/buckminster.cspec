@@ -42,6 +42,7 @@
             </cs:actorProperties>
             <cs:properties>
                 <cs:property key="root" value="${WORKSPACE}"/>
+                <cs:property key="mustCreateJavadoc" value="${manage.javadoc}"/>
             </cs:properties>
             <cs:products>
                 <cs:public name="javadoc.output" base="plugins/org.eclipse.graphiti.doc/javadoc/"/>
