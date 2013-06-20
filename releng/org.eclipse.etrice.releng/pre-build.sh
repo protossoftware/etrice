@@ -13,10 +13,10 @@
 rm -rf buildroot
 mkdir buildroot
 mkdir buildroot/test.results
-:
+
 COMPACT_BUILD_ID="${BUILD_ID//[-_]}"
 COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
-:
+
 {
 	cat "${WORKSPACE}/etrice_local_repo/releng/org.eclipse.etrice.releng/build.properties"
 
@@ -62,10 +62,10 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "site.signing=${SITE_SIGNING}"
 
 } > buildroot/build.properties
-:
+
 {
 	echo "# Define the Build ID to use for tagging (added by Hudson job definition)"
 	echo "build.id=${COMPACT_BUILD_ID}"
 
 } > buildroot/tagging.properties
-:
+
