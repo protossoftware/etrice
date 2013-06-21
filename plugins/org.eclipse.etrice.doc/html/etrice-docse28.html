@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-14 10:06:00" /> 
+<meta name="date" content="2013-06-21 12:20:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 104--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 167--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse29.html" >next</a>] [<a 
 href="etrice-docse27.html" >prev</a>] [<a 
 href="etrice-docse27.html#tailetrice-docse27.html" >prev-tail</a>] [<a 
@@ -22,15 +22,15 @@ href="#tailetrice-docse28.html">tail</a>] [<a
 href="etrice-docch7.html#etrice-docse28.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
  id="x37-880007.2"></a>Protocols</h3>
-<!--l. 106--><p class="noindent" >
+<!--l. 169--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.2.1   </span> <a 
  id="x37-890007.2.1"></a>Description</h4>
-<!--l. 108--><p class="noindent" >A <span id="textcolor40"><span 
+<!--l. 171--><p class="noindent" >A <span id="textcolor40"><span 
 class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
 class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports.
 The exact semantics of a message is defined by the execution model.
-</p><!--l. 111--><p class="noindent" >
+</p><!--l. 174--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.2.2   </span> <a 
  id="x37-900007.2.2"></a>Motivation</h4>
@@ -38,25 +38,100 @@ The exact semantics of a message is defined by the execution model.
      <li class="itemize">Protocol classes provide a reusable interface specification for ports
      </li>
      <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
-<!--l. 118--><p class="noindent" >
+<!--l. 181--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.2.3   </span> <a 
  id="x37-910007.2.3"></a>Notation</h4>
-<!--l. 120--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two
+<!--l. 183--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two
 outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64,
 ...) or a data class.
-</p><!--l. 124--><p class="noindent" ><img 
-src="images/040-ProtocolClassTextualNotation.png" alt="PIC"  
- />
-                                                                                 
-                                                                                 
 </p>
-<!--l. 126--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 188-->
+<div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x37-91001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91002r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">incoming</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91003r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m1</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">data</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91004r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m2</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91005r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91006r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">outgoing</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91007r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m3</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">data</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91008r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m4</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91009r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x37-91010r10"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+                                                                                 
+                                                                                 
+<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse29.html" >next</a>] [<a 
 href="etrice-docse27.html" >prev</a>] [<a 
 href="etrice-docse27.html#tailetrice-docse27.html" >prev-tail</a>] [<a 
 href="etrice-docse28.html" >front</a>] [<a 
 href="etrice-docch7.html#etrice-docse28.html" >up</a>] </p></div>
-<!--l. 126--><p class="noindent" ><a 
+<!--l. 201--><p class="noindent" ><a 
  id="tailetrice-docse28.html"></a> </p> 
 </body></html> 

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-14 10:06:00" /> 
+<meta name="date" content="2013-06-21 12:20:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -62,7 +62,7 @@ model.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-10">
+<div class="verbatim" id="verbatim-9">
 RoomModel&#x00A0;SendingData&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:SendingData_SubSystem
@@ -92,7 +92,7 @@ Attributes:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-11">
+<div class="verbatim" id="verbatim-10">
 DataClass&#x00A0;DemoData&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
@@ -115,7 +115,7 @@ messages:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-12">
+<div class="verbatim" id="verbatim-11">
 ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
@@ -140,7 +140,7 @@ resulting model should look like this:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-13">
+<div class="verbatim" id="verbatim-12">
 RoomModel&#x00A0;SendingData&#x00A0;{
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
@@ -244,7 +244,7 @@ class="ec-lmsso-10">printData </span>and define the DemoData as a parameter.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-14">
+<div class="verbatim" id="verbatim-13">
 Operation&#x00A0;printData(d:&#x00A0;DemoData)&#x00A0;:&#x00A0;void&#x00A0;{
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int32Val:&#x00A0;%d\\n\",d.int32Val);"
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.float64Val:&#x00A0;%f\\n\",d.float64Val);"
@@ -306,7 +306,7 @@ model. The output should look like this:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-15">
+<div class="verbatim" id="verbatim-14">
 type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
 &#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
 &#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
@@ -388,7 +388,7 @@ class="ec-lmsso-10">ref  </span>to the protocol definition.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-16">
+<div class="verbatim" id="verbatim-15">
 Message&#x00A0;ping(data:&#x00A0;DemoData&#x00A0;ref)
 </div>
 <!--l. 306--><p class="nopar" >

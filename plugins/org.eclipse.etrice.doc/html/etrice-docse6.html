@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-14 10:06:00" /> 
+<meta name="date" content="2013-06-21 12:20:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -93,7 +93,7 @@ model.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-3">
+<div class="verbatim" id="verbatim-2">
 RoomModel&#x00A0;Blinky&#x00A0;{
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;System_Blinky&#x00A0;{
@@ -171,7 +171,7 @@ import the timing service:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-4">
+<div class="verbatim" id="verbatim-3">
 RoomModel&#x00A0;Blinky&#x00A0;{
 &#x00A0;<br />
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;import&#x00A0;room.basic.service.timing.*&#x00A0;from
@@ -214,7 +214,7 @@ actor:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-5">
+<div class="verbatim" id="verbatim-4">
 SAP&#x00A0;timer:&#x00A0;room.basic.service.timing.PTimeout&#x00A0;
 </div>
 <!--l. 151--><p class="nopar" >
@@ -388,7 +388,7 @@ class="ec-lmsso-10">on </span>is:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-6">
+<div class="verbatim" id="verbatim-5">
 timer.Start(1000);
 &#x00A0;<br />carLights.setState(TrafficLight3.YELLOW);
 </div>
@@ -398,7 +398,7 @@ class="ec-lmsso-10">off  </span>is:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-7">
+<div class="verbatim" id="verbatim-6">
 timer.Start(1000);
 &#x00A0;<br />carLights.setState(TrafficLight3.OFF);
 </div>
@@ -428,7 +428,7 @@ transition.
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-8">
+<div class="verbatim" id="verbatim-7">
 carLights&#x00A0;=&#x00A0;light.getCarLights();
 &#x00A0;<br />pedLights&#x00A0;=&#x00A0;light.getPedLights();
 &#x00A0;<br />carLights.setState(TrafficLight3.OFF);
@@ -441,7 +441,7 @@ class="ec-lmsso-10">off  </span>is:
                                                                                  
                                                                                  
 </p>
-<div class="verbatim" id="verbatim-9">
+<div class="verbatim" id="verbatim-8">
 timer.Kill();
 &#x00A0;<br />carLights.setState(TrafficLight3.OFF);
 </div>
