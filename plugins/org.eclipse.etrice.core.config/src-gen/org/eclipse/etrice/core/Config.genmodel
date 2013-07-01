@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.config.editor/src" modelPluginID="org.eclipse.etrice.core.config"
     forceOverwrite="true" modelName="Config" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.config.edit"
-    editorPluginID="org.eclipse.etrice.core.config.editor" runtimeVersion="2.8" usedGenPackages="../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
+    editorPluginID="org.eclipse.etrice.core.config.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
   <genPackages prefix="Config" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Config.ecore#/">
     <genClasses ecoreClass="Config.ecore#//ConfigModel">

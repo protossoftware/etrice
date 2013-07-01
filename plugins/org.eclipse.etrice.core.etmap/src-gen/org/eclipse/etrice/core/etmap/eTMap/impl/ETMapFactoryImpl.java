@@ -30,7 +30,7 @@ public class ETMapFactoryImpl extends EFactoryImpl implements ETMapFactory
   {
     try
     {
-      ETMapFactory theETMapFactory = (ETMapFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/etrice/core/etmap/ETMap"); 
+      ETMapFactory theETMapFactory = (ETMapFactory)EPackage.Registry.INSTANCE.getEFactory(ETMapPackage.eNS_URI);
       if (theETMapFactory != null)
       {
         return theETMapFactory;

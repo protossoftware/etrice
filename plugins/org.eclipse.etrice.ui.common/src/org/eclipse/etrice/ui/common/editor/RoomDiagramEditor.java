@@ -63,7 +63,7 @@ public class RoomDiagramEditor extends DiagramEditor {
 	}
 	
 	@Override
-	protected void initializeGraphicalViewer() {
+	public void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		
 		Map<EObject, Collection<Setting>> result = EcoreUtil.UnresolvedProxyCrossReferencer.find(getEditingDomain().getResourceSet());

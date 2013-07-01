@@ -201,6 +201,18 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ETriceGenPackage.ITRANSITION_CHAIN_VISITOR: {
+				ITransitionChainVisitor iTransitionChainVisitor = (ITransitionChainVisitor)theEObject;
+				T result = caseITransitionChainVisitor(iTransitionChainVisitor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ETriceGenPackage.IDIAGNOSTICIAN: {
+				IDiagnostician iDiagnostician = (IDiagnostician)theEObject;
+				T result = caseIDiagnostician(iDiagnostician);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: {
 				ExpandedActorClass expandedActorClass = (ExpandedActorClass)theEObject;
 				T result = caseExpandedActorClass(expandedActorClass);

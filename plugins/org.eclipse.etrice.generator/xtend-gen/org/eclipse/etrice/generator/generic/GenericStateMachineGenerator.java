@@ -375,7 +375,11 @@ public class GenericStateMachineGenerator {
             }
             if (_and) {
               TransitionChain _chain = xpac.getChain(tr);
-              Transition start = _chain==null?(Transition)null:_chain.getTransition();
+              Transition _transition = null;
+              if (_chain!=null) {
+                _transition=_chain.getTransition();
+              }
+              Transition start = _transition;
               _builder.newLineIfNotEmpty();
               boolean _and_1 = false;
               if (!(start instanceof NonInitialTransition)) {

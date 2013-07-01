@@ -67,7 +67,7 @@ class ConfigGenAddon {
 //		return result
 //	}
 	
-	def private applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
+	def private String applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
 		var aType = a.refType.type
 		if(aType.primitive){
@@ -136,7 +136,7 @@ class ConfigGenAddon {
 		return result
 	}
 	
-	def private genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
+	def private String genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
 		var temp = null as String
 		if (path.last.refType.type.dataClass)
 			'''

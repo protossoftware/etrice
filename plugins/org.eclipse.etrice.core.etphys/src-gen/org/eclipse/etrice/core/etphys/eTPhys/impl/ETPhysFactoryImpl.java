@@ -31,7 +31,7 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
   {
     try
     {
-      ETPhysFactory theETPhysFactory = (ETPhysFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/etrice/core/etphys/ETPhys"); 
+      ETPhysFactory theETPhysFactory = (ETPhysFactory)EPackage.Registry.INSTANCE.getEFactory(ETPhysPackage.eNS_URI);
       if (theETPhysFactory != null)
       {
         return theETPhysFactory;

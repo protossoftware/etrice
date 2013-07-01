@@ -126,7 +126,7 @@ public abstract class ETriceDiagramLayoutManager extends
 				return ((DiagramEditor) object).getEditingDomain();
 			} else if (object instanceof IPictogramElementEditPart) {
 				return ((IPictogramElementEditPart) object)
-						.getConfigurationProvider().getDiagramEditor()
+						.getConfigurationProvider().getDiagramBehavior()
 						.getEditingDomain();
 			}
 		}

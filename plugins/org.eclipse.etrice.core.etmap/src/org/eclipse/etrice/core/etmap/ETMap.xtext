@@ -15,8 +15,8 @@ grammar org.eclipse.etrice.core.etmap.ETMap with org.eclipse.xtext.common.Termin
 generate eTMap "http://www.eclipse.org/etrice/core/etmap/ETMap"
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore" as room
-import "platform:/resource/org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.ecore" as phys
+import "http://www.eclipse.org/etrice/Room" as room
+import "http://www.eclipse.org/etrice/core/etphys/ETPhys" as phys
 
 MappingModel:
 	'MappingModel' name=FQN '{'

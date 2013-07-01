@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.etmap.editor/src" modelPluginID="org.eclipse.etrice.core.etmap"
     forceOverwrite="true" modelName="ETMap" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.etmap.edit"
-    editorPluginID="org.eclipse.etrice.core.etmap.editor" runtimeVersion="2.8" usedGenPackages="../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.genmodel#//eTPhys ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
+    editorPluginID="org.eclipse.etrice.core.etmap.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.genmodel#//eTPhys ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
   <genPackages prefix="ETMap" basePackage="org.eclipse.etrice.core.etmap" disposableProviderFactory="true"
       ecorePackage="ETMap.ecore#/">
     <genClasses ecoreClass="ETMap.ecore#//MappingModel">

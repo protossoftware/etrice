@@ -66,9 +66,9 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
-import org.eclipse.graphiti.tb.ISelectionInfo;
+import org.eclipse.graphiti.tb.IShapeSelectionInfo;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-import org.eclipse.graphiti.tb.SelectionInfoImpl;
+import org.eclipse.graphiti.tb.ShapeSelectionInfoImpl;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.IColorConstant;
 
@@ -442,16 +442,19 @@ public class ProviderDispatcher {
 	        	return bp.getContextButtonPad(context);
 		}
 
-		public ISelectionInfo getSelectionInfoForShape(Shape shape) {
-			ISelectionInfo si = new SelectionInfoImpl(IColorConstant.SHAPE_SELECTION_FG, IColorConstant.HANDLE_FG, IColorConstant.HANDLE_BG,
-					LineStyle.DASH);
-			si.setPrimarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
-			si.setSecondarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
-			return si;
+		public IShapeSelectionInfo getSelectionInfoForShape(Shape shape) {
+			IShapeSelectionInfo ssi = new ShapeSelectionInfoImpl();
+			ssi.setColor(IColorConstant.SHAPE_SELECTION_FG);
+			ssi.setPrimarySelectionHandleForegroundColor(IColorConstant.HANDLE_FG);
+			ssi.setPrimarySelectionHandleBackgroundColor(IColorConstant.HANDLE_BG);
+			ssi.setLineStyle(LineStyle.DASH);
+			ssi.setPrimarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
+			ssi.setSecondarySelectionBackgroundColor(IColorConstant.LIGHT_ORANGE);
+			return ssi;
 		}
 		
 		@Override
-		public String getToolTip(GraphicsAlgorithm ga) {
+		public Object getToolTip(GraphicsAlgorithm ga) {
 	        IToolBehaviorProvider bp = getToolBehaviorProvider(ga.getPictogramElement());
 	        if (bp==null)
 	        	return super.getToolTip(ga);

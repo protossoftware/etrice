@@ -30,7 +30,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     try
     {
-      ConfigFactory theConfigFactory = (ConfigFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/etrice/core/Config"); 
+      ConfigFactory theConfigFactory = (ConfigFactory)EPackage.Registry.INSTANCE.getEFactory(ConfigPackage.eNS_URI);
       if (theConfigFactory != null)
       {
         return theConfigFactory;

@@ -463,7 +463,7 @@ public class StateSupport {
 			
 			@Override
 			public void execute(ICustomContext context) {
-				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+				getDiagramBehavior().getDiagramContainer().selectPictogramElements(new PictogramElement[] {});
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof State) {
@@ -518,7 +518,7 @@ public class StateSupport {
 			
 			@Override
 			public void execute(ICustomContext context) {
-				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+				getDiagramBehavior().getDiagramContainer().selectPictogramElements(new PictogramElement[] {});
 
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
@@ -587,7 +587,7 @@ public class StateSupport {
 			
 			@Override
 			public void execute(ICustomContext context) {
-				getDiagramEditor().selectPictogramElements(new PictogramElement[] {});
+				getDiagramBehavior().getDiagramContainer().selectPictogramElements(new PictogramElement[] {});
 
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
@@ -968,7 +968,7 @@ public class StateSupport {
 		}
 		
 		@Override
-		public String getToolTip(GraphicsAlgorithm ga) {
+		public Object getToolTip(GraphicsAlgorithm ga) {
 			// if this is called we know there is a business object!=null
 			PictogramElement pe = ga.getPictogramElement();
 			

@@ -58,8 +58,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 	
 	def private generateHeaderFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
-		val ctor = ac.operations.filter(op|op.constructor).head
-		val dtor = ac.operations.filter(op|op.destructor).head
+//		val ctor = ac.operations.filter(op|op.constructor).head
+//		val dtor = ac.operations.filter(op|op.destructor).head
 		
 	'''
 		/**
@@ -238,11 +238,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		void «ac.name»::init(){
 			initUser();
 		}
-	
+		
 		void «ac.name»::start(){
 			startUser();
 		}
-	
+		
 		«IF !ac.overridesStop()»
 		void «ac.name»::stop(){
 			stopUser();

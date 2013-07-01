@@ -38,7 +38,7 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 */
 	public static ETriceGenFactory init() {
 		try {
-			ETriceGenFactory theETriceGenFactory = (ETriceGenFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/etrice/generator"); 
+			ETriceGenFactory theETriceGenFactory = (ETriceGenFactory)EPackage.Registry.INSTANCE.getEFactory(ETriceGenPackage.eNS_URI);
 			if (theETriceGenFactory != null) {
 				return theETriceGenFactory;
 			}

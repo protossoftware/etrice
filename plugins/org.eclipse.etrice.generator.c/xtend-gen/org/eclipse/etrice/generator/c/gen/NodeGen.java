@@ -1122,8 +1122,14 @@ public class NodeGen {
                     ProtocolClass _protocol = pi.getProtocol();
                     boolean _isConjugated = this._roomExtensions.isConjugated(pi);
                     PortClass _portClass = this._roomExtensions.getPortClass(_protocol, _isConjugated);
-                    EList<Attribute> _attributes = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
-                    int _size = _attributes==null?0:_attributes.size();
+                    EList<Attribute> _attributes = null;
+                    if (_portClass!=null) {
+                      _attributes=_portClass.getAttributes();
+                    }
+                    int _size = 0;
+                    if (_attributes!=null) {
+                      _size=_attributes.size();
+                    }
                     boolean _greaterThan = (_size > 0);
                     if (_greaterThan) {
                       _builder.append("static ");

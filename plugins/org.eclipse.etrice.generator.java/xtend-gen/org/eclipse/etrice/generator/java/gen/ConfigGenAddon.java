@@ -80,7 +80,11 @@ public class ConfigGenAddon {
       for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
         InterfaceItem _interfaceItem = pi.getInterfaceItem();
         PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
-        EList<Attribute> attribs = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
+        EList<Attribute> _attributes = null;
+        if (_portClass!=null) {
+          _attributes=_portClass.getAttributes();
+        }
+        EList<Attribute> attribs = _attributes;
         _builder.newLineIfNotEmpty();
         {
           boolean _notEquals = (!Objects.equal(attribs, null));

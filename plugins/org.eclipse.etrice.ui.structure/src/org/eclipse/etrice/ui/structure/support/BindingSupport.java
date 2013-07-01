@@ -215,7 +215,7 @@ public class BindingSupport {
 					if (bo instanceof Port) {
 						if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, null, null, sc, null, false).isOk()) {
 							DecorationProvider.addAllowedPortShape(subShape);
-							getDiagramEditor().refreshRenderingDecorators(subShape);
+							getDiagramBehavior().refreshRenderingDecorators(subShape);
 						}
 					}
 					else if (bo instanceof ActorContainerRef) {
@@ -225,7 +225,7 @@ public class BindingSupport {
 							if (bo instanceof Port) {
 								if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, tgtRef, null, sc, null, false).isOk()) {
 									DecorationProvider.addAllowedPortShape(subSubShape);
-									getDiagramEditor().refreshRenderingDecorators(subSubShape);
+									getDiagramBehavior().refreshRenderingDecorators(subSubShape);
 								}
 							}
 						}
@@ -236,7 +236,7 @@ public class BindingSupport {
 
 			private void endHighLightMatches() {
 				DecorationProvider.clearAllowedPortShapes();
-				getDiagramEditor().refresh();
+				getDiagramBehavior().refresh();
 			}
 			
 			@Override
@@ -552,7 +552,7 @@ public class BindingSupport {
 	class BehaviorProvider extends DefaultToolBehaviorProvider {
 		
 		@Override
-		public String getToolTip(GraphicsAlgorithm ga) {
+		public Object getToolTip(GraphicsAlgorithm ga) {
 			// if this is called we know there is a business object!=null
 			PictogramElement pe = ga.getPictogramElement();
 			if (pe instanceof ConnectionDecorator)

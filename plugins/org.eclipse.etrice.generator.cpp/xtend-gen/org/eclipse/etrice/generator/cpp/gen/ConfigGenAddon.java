@@ -69,7 +69,7 @@ public class ConfigGenAddon {
       for(final Attribute a : _allAttributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
-        CharSequence _applyInstanceConfig = this.applyInstanceConfig(ai, aiVariableName, _union);
+        String _applyInstanceConfig = this.applyInstanceConfig(ai, aiVariableName, _union);
         _builder.append(_applyInstanceConfig, "");
         _builder.newLineIfNotEmpty();
       }
@@ -79,7 +79,11 @@ public class ConfigGenAddon {
       for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
         InterfaceItem _interfaceItem = pi.getInterfaceItem();
         PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
-        EList<Attribute> attribs = _portClass==null?(EList<Attribute>)null:_portClass.getAttributes();
+        EList<Attribute> _attributes = null;
+        if (_portClass!=null) {
+          _attributes=_portClass.getAttributes();
+        }
+        EList<Attribute> attribs = _attributes;
         _builder.newLineIfNotEmpty();
         {
           boolean _notEquals = (!Objects.equal(attribs, null));
@@ -92,7 +96,7 @@ public class ConfigGenAddon {
                 String _plus_1 = (_plus + _invokeGetter);
                 ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
                 List<Attribute> _union_1 = this._roomExtensions.<Attribute>union(_arrayList_1, a_1);
-                CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
+                String _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
                 _builder.append(_applyInstanceConfig_1, "");
                 _builder.newLineIfNotEmpty();
               }
@@ -104,25 +108,25 @@ public class ConfigGenAddon {
     return _builder;
   }
   
-  private CharSequence applyInstanceConfig(final InstanceBase instance, final String invokes, final List<Attribute> path) {
-    CharSequence _xblockexpression = null;
+  private String applyInstanceConfig(final InstanceBase instance, final String invokes, final List<Attribute> path) {
+    String _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
       RefableType _refType = a.getRefType();
       DataType aType = _refType.getType();
-      CharSequence _xifexpression = null;
+      String _xifexpression = null;
       boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
       if (_isPrimitive) {
-        CharSequence _xblockexpression_1 = null;
+        String _xblockexpression_1 = null;
         {
           String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
-          CharSequence _xifexpression_1 = null;
+          String _xifexpression_1 = null;
           boolean _equals = Objects.equal(value, null);
           if (_equals) {
             StringConcatenation _builder = new StringConcatenation();
-            _xifexpression_1 = _builder;
+            _xifexpression_1 = _builder.toString();
           } else {
-            CharSequence _xifexpression_2 = null;
+            String _xifexpression_2 = null;
             boolean _or = false;
             int _size = a.getSize();
             boolean _equals_1 = (_size == 0);
@@ -141,15 +145,15 @@ public class ConfigGenAddon {
               CharSequence _invokeSetter = this.helpers.invokeSetter(_name, null, _valueLiteral);
               _builder_1.append(_invokeSetter, "");
               _builder_1.append(";");
-              _xifexpression_2 = _builder_1;
+              _xifexpression_2 = _builder_1.toString();
             } else {
-              CharSequence _xifexpression_3 = null;
+              String _xifexpression_3 = null;
               int _size_1 = a.getSize();
               String[] _split = value.split(",");
               int _size_2 = ((List<String>)Conversions.doWrapArray(_split)).size();
               boolean _equals_2 = (_size_1 == _size_2);
               if (_equals_2) {
-                CharSequence _xblockexpression_2 = null;
+                String _xblockexpression_2 = null;
                 {
                   StringConcatenation _builder_2 = new StringConcatenation();
                   _builder_2.append("{ ");
@@ -183,7 +187,7 @@ public class ConfigGenAddon {
                   CharSequence _invokeSetter_1 = this.helpers.invokeSetter(_name_1, null, _string);
                   _builder_3.append(_invokeSetter_1, "");
                   _builder_3.append(";");
-                  _xblockexpression_2 = (_builder_3);
+                  _xblockexpression_2 = (_builder_3.toString());
                 }
                 _xifexpression_3 = _xblockexpression_2;
               } else {
@@ -214,7 +218,7 @@ public class ConfigGenAddon {
                 _builder_2.append(";");
                 _builder_2.newLineIfNotEmpty();
                 _builder_2.append("}");
-                _xifexpression_3 = _builder_2;
+                _xifexpression_3 = _builder_2.toString();
               }
               _xifexpression_2 = _xifexpression_3;
             }
@@ -224,7 +228,7 @@ public class ConfigGenAddon {
         }
         _xifexpression = _xblockexpression_1;
       } else {
-        CharSequence _xifexpression_1 = null;
+        String _xifexpression_1 = null;
         boolean _isDataClass = this.typeHelpers.isDataClass(aType);
         if (_isDataClass) {
           StringConcatenation _builder = new StringConcatenation();
@@ -236,12 +240,12 @@ public class ConfigGenAddon {
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
               String _plus_1 = (_plus + _invokeGetter);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              Object _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
+              String _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
             }
           }
-          _xifexpression_1 = _builder;
+          _xifexpression_1 = _builder.toString();
         }
         _xifexpression = _xifexpression_1;
       }
@@ -438,7 +442,7 @@ public class ConfigGenAddon {
         String _name = a.getName();
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
-        CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _name, _union);
+        String _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _name, _union);
         _builder.append(_genMinMaxConstantsRec, "");
         _builder.newLineIfNotEmpty();
       }
@@ -455,11 +459,11 @@ public class ConfigGenAddon {
     return result;
   }
   
-  private CharSequence genMinMaxConstantsRec(final ActorClass ac, final String varNamePath, final List<Attribute> path) {
-    CharSequence _xblockexpression = null;
+  private String genMinMaxConstantsRec(final ActorClass ac, final String varNamePath, final List<Attribute> path) {
+    String _xblockexpression = null;
     {
       String temp = ((String) null);
-      CharSequence _xifexpression = null;
+      String _xifexpression = null;
       Attribute _last = IterableExtensions.<Attribute>last(path);
       RefableType _refType = _last.getRefType();
       DataType _type = _refType.getType();
@@ -476,21 +480,21 @@ public class ConfigGenAddon {
             String _name = e.getName();
             String _plus_1 = (_plus + _name);
             List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-            Object _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
+            String _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
             _builder.append(_genMinMaxConstantsRec, "");
             _builder.newLineIfNotEmpty();
           }
         }
-        _xifexpression = _builder;
+        _xifexpression = _builder.toString();
       } else {
-        CharSequence _xifexpression_1 = null;
+        String _xifexpression_1 = null;
         Attribute _last_2 = IterableExtensions.<Attribute>last(path);
         RefableType _refType_2 = _last_2.getRefType();
         DataType _type_2 = _refType_2.getType();
         if ((_type_2 instanceof ExternalType)) {
           _xifexpression_1 = null;
         } else {
-          CharSequence _xblockexpression_1 = null;
+          String _xblockexpression_1 = null;
           {
             Attribute _last_3 = IterableExtensions.<Attribute>last(path);
             RefableType _refType_3 = _last_3.getRefType();
@@ -531,7 +535,7 @@ public class ConfigGenAddon {
                 _builder_1.newLineIfNotEmpty();
               }
             }
-            _xblockexpression_1 = (_builder_1);
+            _xblockexpression_1 = (_builder_1.toString());
           }
           _xifexpression_1 = _xblockexpression_1;
         }

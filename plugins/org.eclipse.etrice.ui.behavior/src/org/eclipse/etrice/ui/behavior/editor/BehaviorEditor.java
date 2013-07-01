@@ -48,7 +48,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	}
 
 	@Override
-	protected void initializeGraphicalViewer() {
+	public void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		
 		Command cmd = new RecordingCommand(getEditingDomain()) {

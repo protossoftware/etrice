@@ -30,7 +30,7 @@ import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
-import org.eclipse.graphiti.platform.IDiagramEditor;
+import org.eclipse.graphiti.platform.IDiagramBehavior;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -148,9 +148,9 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		}
 		
 		// if we inserted states they have been selected: reset the selection
-		IDiagramEditor diagramEditor = getFeatureProvider().getDiagramTypeProvider().getDiagramEditor();
-		if (diagramEditor != null)
-			diagramEditor.setPictogramElementForSelection(null);
+		IDiagramBehavior diagramBehavior = getFeatureProvider().getDiagramTypeProvider().getDiagramBehavior();
+		if (diagramBehavior != null)
+			diagramBehavior.getDiagramContainer().setPictogramElementForSelection(null);
 		
 		return changed;
 	}

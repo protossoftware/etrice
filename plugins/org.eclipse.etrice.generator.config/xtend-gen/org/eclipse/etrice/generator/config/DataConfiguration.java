@@ -68,23 +68,41 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public String getAttrClassConfigValue(final ActorClass actor, final List<Attribute> path) {
+    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    LiteralArray _value = _attrClassConfig==null?(LiteralArray)null:_attrClassConfig.getValue();
-    String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
+    LiteralArray _value = null;
+    if (_attrClassConfig!=null) {
+      _value=_attrClassConfig.getValue();
+    }
+    if (_value!=null) {
+      _stringExpr=this.toStringExpr(_value);
+    }
     return _stringExpr;
   }
   
   public String getAttrClassConfigMaxValue(final ActorClass actor, final List<Attribute> path) {
+    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    NumberLiteral _max = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMax();
-    String _stringExpr = _max==null?(String)null:this.toStringExpr(_max);
+    NumberLiteral _max = null;
+    if (_attrClassConfig!=null) {
+      _max=_attrClassConfig.getMax();
+    }
+    if (_max!=null) {
+      _stringExpr=this.toStringExpr(_max);
+    }
     return _stringExpr;
   }
   
   public String getAttrClassConfigMinValue(final ActorClass actor, final List<Attribute> path) {
+    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    NumberLiteral _min = _attrClassConfig==null?(NumberLiteral)null:_attrClassConfig.getMin();
-    String _stringExpr = _min==null?(String)null:this.toStringExpr(_min);
+    NumberLiteral _min = null;
+    if (_attrClassConfig!=null) {
+      _min=_attrClassConfig.getMin();
+    }
+    if (_min!=null) {
+      _stringExpr=this.toStringExpr(_min);
+    }
     return _stringExpr;
   }
   
@@ -124,9 +142,15 @@ public class DataConfiguration implements IDataConfiguration {
       String _stringPath = this.toStringPath(path);
       _builder.append(_stringPath, "");
       String id = _builder.toString();
+      String _stringExpr = null;
       AttrClassConfig _get = DataConfigurationHelper.protocolClassAttrMap.get(id);
-      LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
-      String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
+      LiteralArray _value = null;
+      if (_get!=null) {
+        _value=_get.getValue();
+      }
+      if (_value!=null) {
+        _stringExpr=this.toStringExpr(_value);
+      }
       _xblockexpression = (_stringExpr);
     }
     return _xblockexpression;
@@ -157,22 +181,34 @@ public class DataConfiguration implements IDataConfiguration {
       String _plus = (_path + "/");
       String _stringPath = this.toStringPath(path);
       String id = (_plus + _stringPath);
+      String _stringExpr = null;
       AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
-      LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
-      String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
+      LiteralArray _value = null;
+      if (_get!=null) {
+        _value=_get.getValue();
+      }
+      if (_value!=null) {
+        _stringExpr=this.toStringExpr(_value);
+      }
       _xblockexpression = (_stringExpr);
     }
     return _xblockexpression;
   }
   
   public String getAttrInstanceConfigValue(final InterfaceItemInstance item, final List<Attribute> path) {
+    String _stringExpr = null;
     String _path = item.getPath();
     String _plus = (_path + "/");
     String _stringPath = this.toStringPath(path);
     String _plus_1 = (_plus + _stringPath);
     AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(_plus_1);
-    LiteralArray _value = _get==null?(LiteralArray)null:_get.getValue();
-    String _stringExpr = _value==null?(String)null:this.toStringExpr(_value);
+    LiteralArray _value = null;
+    if (_get!=null) {
+      _value=_get.getValue();
+    }
+    if (_value!=null) {
+      _stringExpr=this.toStringExpr(_value);
+    }
     return _stringExpr;
   }
   
@@ -180,7 +216,11 @@ public class DataConfiguration implements IDataConfiguration {
     int _xblockexpression = (int) 0;
     {
       SubSystemConfig _config = this.getConfig(subsystem);
-      final DynamicConfig dynConf = _config==null?(DynamicConfig)null:_config.getDynConfig();
+      DynamicConfig _dynConfig = null;
+      if (_config!=null) {
+        _dynConfig=_config.getDynConfig();
+      }
+      final DynamicConfig dynConf = _dynConfig;
       int _xifexpression = (int) 0;
       boolean _equals = Objects.equal(dynConf, null);
       if (_equals) {
@@ -196,14 +236,24 @@ public class DataConfiguration implements IDataConfiguration {
   
   public String getUserCode1(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
-    DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    DynamicConfig _dynConfig = null;
+    if (_config!=null) {
+      _dynConfig=_config.getDynConfig();
+    }
+    DynamicConfig dynConfig = _dynConfig;
     String _xifexpression = null;
-    String _filePath = dynConfig==null?(String)null:dynConfig.getFilePath();
+    String _filePath = null;
+    if (dynConfig!=null) {
+      _filePath=dynConfig.getFilePath();
+    }
     boolean _notEquals = (!Objects.equal(_filePath, null));
     if (_notEquals) {
       _xifexpression = "import org.eclipse.etrice.runtime.java.config.ConfigSourceFile;";
     } else {
-      String _userCode1 = dynConfig==null?(String)null:dynConfig.getUserCode1();
+      String _userCode1 = null;
+      if (dynConfig!=null) {
+        _userCode1=dynConfig.getUserCode1();
+      }
       _xifexpression = _userCode1;
     }
     return _xifexpression;
@@ -211,9 +261,16 @@ public class DataConfiguration implements IDataConfiguration {
   
   public String getUserCode2(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
-    DynamicConfig dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    DynamicConfig _dynConfig = null;
+    if (_config!=null) {
+      _dynConfig=_config.getDynConfig();
+    }
+    DynamicConfig dynConfig = _dynConfig;
     String _xifexpression = null;
-    String _filePath = dynConfig==null?(String)null:dynConfig.getFilePath();
+    String _filePath = null;
+    if (dynConfig!=null) {
+      _filePath=dynConfig.getFilePath();
+    }
     boolean _notEquals = (!Objects.equal(_filePath, null));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
@@ -223,7 +280,10 @@ public class DataConfiguration implements IDataConfiguration {
       _builder.append("\")");
       _xifexpression = _builder.toString();
     } else {
-      String _userCode2 = dynConfig==null?(String)null:dynConfig.getUserCode2();
+      String _userCode2 = null;
+      if (dynConfig!=null) {
+        _userCode2=dynConfig.getUserCode2();
+      }
       _xifexpression = _userCode2;
     }
     return _xifexpression;
@@ -234,16 +294,18 @@ public class DataConfiguration implements IDataConfiguration {
     final ArrayList<Attribute> result = _arrayList;
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
-    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
-        public void apply(final AttrInstanceConfig c) {
-          boolean _isReadOnly = c.isReadOnly();
-          if (_isReadOnly) {
-            Attribute _attribute = c.getAttribute();
-            result.add(_attribute);
+    if (configs!=null) {
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+          public void apply(final AttrInstanceConfig c) {
+            boolean _isReadOnly = c.isReadOnly();
+            if (_isReadOnly) {
+              Attribute _attribute = c.getAttribute();
+              result.add(_attribute);
+            }
           }
-        }
-      };
-    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+        };
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    }
     return result;
   }
   
@@ -252,23 +314,28 @@ public class DataConfiguration implements IDataConfiguration {
     final ArrayList<Attribute> result = _arrayList;
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
-    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
-        public void apply(final AttrInstanceConfig c) {
-          boolean _isReadOnly = c.isReadOnly();
-          boolean _not = (!_isReadOnly);
-          if (_not) {
-            Attribute _attribute = c.getAttribute();
-            result.add(_attribute);
+    if (configs!=null) {
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+          public void apply(final AttrInstanceConfig c) {
+            boolean _isReadOnly = c.isReadOnly();
+            boolean _not = (!_isReadOnly);
+            if (_not) {
+              Attribute _attribute = c.getAttribute();
+              result.add(_attribute);
+            }
           }
-        }
-      };
-    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+        };
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    }
     return result;
   }
   
   public boolean hasVariableService(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
-    DynamicConfig _dynConfig = _config==null?(DynamicConfig)null:_config.getDynConfig();
+    DynamicConfig _dynConfig = null;
+    if (_config!=null) {
+      _dynConfig=_config.getDynConfig();
+    }
     boolean _notEquals = (!Objects.equal(_dynConfig, null));
     return _notEquals;
   }
@@ -344,16 +411,18 @@ public class DataConfiguration implements IDataConfiguration {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
     final ArrayList<Attribute> result = _arrayList;
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
-    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
-        public void apply(final AttrInstanceConfig c) {
-          boolean _isReadOnly = c.isReadOnly();
-          if (_isReadOnly) {
-            Attribute _attribute = c.getAttribute();
-            result.add(_attribute);
+    if (configs!=null) {
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+          public void apply(final AttrInstanceConfig c) {
+            boolean _isReadOnly = c.isReadOnly();
+            if (_isReadOnly) {
+              Attribute _attribute = c.getAttribute();
+              result.add(_attribute);
+            }
           }
-        }
-      };
-    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+        };
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    }
     return result;
   }
   
@@ -361,17 +430,19 @@ public class DataConfiguration implements IDataConfiguration {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
     final ArrayList<Attribute> result = _arrayList;
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
-    final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
-        public void apply(final AttrInstanceConfig c) {
-          boolean _isReadOnly = c.isReadOnly();
-          boolean _not = (!_isReadOnly);
-          if (_not) {
-            Attribute _attribute = c.getAttribute();
-            result.add(_attribute);
+    if (configs!=null) {
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+          public void apply(final AttrInstanceConfig c) {
+            boolean _isReadOnly = c.isReadOnly();
+            boolean _not = (!_isReadOnly);
+            if (_not) {
+              Attribute _attribute = c.getAttribute();
+              result.add(_attribute);
+            }
           }
-        }
-      };
-    if (configs!=null) IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+        };
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
+    }
     return result;
   }
   

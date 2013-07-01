@@ -879,7 +879,7 @@ public class TransitionSupport {
 		}
 		
 		@Override
-		public String getToolTip(GraphicsAlgorithm ga) {
+		public Object getToolTip(GraphicsAlgorithm ga) {
 			// if this is called we know there is a business object!=null
 			PictogramElement pe = ga.getPictogramElement();
 			if (pe instanceof ConnectionDecorator)

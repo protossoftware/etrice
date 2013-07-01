@@ -31,7 +31,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     try
     {
-      RoomFactory theRoomFactory = (RoomFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/etrice/Room"); 
+      RoomFactory theRoomFactory = (RoomFactory)EPackage.Registry.INSTANCE.getEFactory(RoomPackage.eNS_URI);
       if (theRoomFactory != null)
       {
         return theRoomFactory;

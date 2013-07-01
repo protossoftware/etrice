@@ -542,7 +542,7 @@ public class ChoicePointSupport {
 		}
 		
 		@Override
-		public String getToolTip(GraphicsAlgorithm ga) {
+		public Object getToolTip(GraphicsAlgorithm ga) {
 			PictogramElement pe = ga.getPictogramElement();
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof ChoicePoint) {

@@ -26,6 +26,7 @@ Workflow {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
         registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel"
+        registerGeneratedEPackage = "org.eclipse.etrice.core.room.RoomPackage"
     }
 
     component = DirectoryCleaner {
