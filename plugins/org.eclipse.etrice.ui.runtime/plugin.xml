@@ -138,4 +138,21 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.tutorials.simulators.trafficlight ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" 
+			name="eTrice Trafficlight for Tutorials" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.wizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice traffic light GUI used in tutorials</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.tutorials.simulators.trafficlight" contentURI="contents/org.eclipse.etrice.tutorials.simulators.trafficlight.zip" description="eTrice Traffic Light GUI"/>
+	  </example>
+	</extension>   
+
 </plugin>

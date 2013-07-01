@@ -210,10 +210,10 @@
 		<path id="clspath">
 			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
 			<fileset dir="${target.platform}/plugins/">
-				<include name="org.eclipse.core.runtime_3.8*.jar" />
-				<include name="org.eclipse.emf.ecore_2.8*.jar" />
-				<include name="org.eclipse.emf.ecore.xmi_2.8*.jar" />
-				<include name="org.eclipse.emf.common_2.8*.jar" />
+				<include name="org.eclipse.core.runtime_3.9*.jar" />
+				<include name="org.eclipse.emf.ecore_2.9*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.9*.jar" />
+				<include name="org.eclipse.emf.common_2.9*.jar" />
 			</fileset>
 		</path>
 
