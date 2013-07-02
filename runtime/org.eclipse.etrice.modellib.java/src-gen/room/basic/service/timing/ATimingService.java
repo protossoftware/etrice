@@ -193,7 +193,7 @@ public class ATimingService extends ActorClassBase {
 	private int enterHistory(int state) {
 		boolean skip_entry = false;
 		if (state >= STATE_MAX) {
-			state = state - STATE_MAX;
+			state =  (state - STATE_MAX);
 			skip_entry = true;
 		}
 		while (true) {
