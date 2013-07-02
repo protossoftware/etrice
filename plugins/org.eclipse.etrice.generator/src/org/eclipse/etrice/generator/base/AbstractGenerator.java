@@ -13,6 +13,7 @@
 package org.eclipse.etrice.generator.base;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -363,10 +364,10 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			}
 			catch (Exception e) {
 				ok = false;
-				if (e instanceof IllegalArgumentException)
-					logger.logError(e.getMessage(), null);
+				if (e instanceof FileNotFoundException)
+					logger.logError("couldn't load '"+uri+"' (file not found)", null);
 				else
-					logger.logError("couldn't load '"+uri+"'", null);
+					logger.logError(e.getMessage(), null);
 			}
 			modelURIs.remove(uri);
 		}
