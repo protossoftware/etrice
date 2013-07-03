@@ -12,7 +12,10 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.EList;
@@ -38,6 +41,13 @@ import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
+import org.eclipse.etrice.ui.structure.support.context.InitialAddShapeContext;
+import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
+import org.eclipse.etrice.ui.structure.support.feature.ShapeUpdateFeature;
+import org.eclipse.etrice.ui.structure.support.provider.DefaultPositionProvider;
+import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider;
+import org.eclipse.etrice.ui.structure.support.provider.SuperDiagramPositionProvider;
+import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider.PosAndSize;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -62,13 +72,11 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
-import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
-import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
@@ -245,18 +253,15 @@ public class ActorContainerRefSupport {
 							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 	
 					createRefFigure(ar, getDiagram(), containerShape, invisibleRectangle, lineColor, manageColor(BACKGROUND));
-					}
+				}
 					
-					// create link and wire it
-					link(containerShape, ar);
+				// create link and wire it
+				link(containerShape, ar);
 				
-				// other child shapes may follow
-				if (inherited) {
-					InterfaceItemSupport.createInheritedRefItems(ar, containerShape, fp);
-				}
-				else {
-					InterfaceItemSupport.createRefItems(ar, containerShape, fp);
-				}
+				// do not update in first place, because there are no positions
+				// therefore default positions for children interface items are needed -> expensive
+				if(!(context instanceof InitialAddShapeContext))
+					updatePictogramElement(containerShape);		
 	
 				// call the layout feature
 				layoutPictogramElement(containerShape);
@@ -524,27 +529,19 @@ public class ActorContainerRefSupport {
 			}
 		}
 		
-		private class UpdateFeature extends AbstractUpdateFeature {
+		private class UpdateFeature extends ShapeUpdateFeature {
 
 			public UpdateFeature(IFeatureProvider fp) {
 				super(fp);
 			}
 
 			@Override
-			public boolean canUpdate(IUpdateContext context) {
-				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
-				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
-					return true;
-				
+			protected boolean canUpdate(EObject bo, PictogramElement pe) {
 				return bo instanceof ActorContainerRef;
 			}
-
+			
 			@Override
-			public IReason updateNeeded(IUpdateContext context) {
-				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
-				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
-					return Reason.createTrueReason("Ref deleted from model");
-				}
+			protected IReason updateNeeded(EObject bo, IUpdateContext context) {
 				ActorContainerRef acr = (ActorContainerRef) bo;
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
@@ -568,9 +565,9 @@ public class ActorContainerRefSupport {
 				}
 				
 				// check if ref still owned/inherited anymore
-				bo = getBusinessObjectForPictogramElement(containerShape);
-				if (bo instanceof ActorClass) {
-					ActorClass ac = (ActorClass) bo;
+				Object containerBo = getBusinessObjectForPictogramElement(containerShape);
+				if (containerBo instanceof ActorClass) {
+					ActorClass ac = (ActorClass) containerBo;
 					boolean found = false;
 					do {
 						if (ac==acr.eContainer())
@@ -642,23 +639,14 @@ public class ActorContainerRefSupport {
 			}
 
 			@Override
-			public boolean update(IUpdateContext context) {
-				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				Object bo = getBusinessObjectForPictogramElement(containerShape);
-				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
-					IRemoveContext rc = new RemoveContext(containerShape);
-					IFeatureProvider featureProvider = getFeatureProvider();
-					IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
-					if (removeFeature != null) {
-						removeFeature.remove(rc);
-					}
-					EcoreUtil.delete((EObject) bo);
-					return true;
-				}
-				
+			protected boolean update(EObject bo, IUpdateContext context) {
+				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();				
 				GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 				ActorContainerRef acr = (ActorContainerRef) bo;
 				int borderRectId = 0;
+				
+				if(context instanceof PositionUpdateContext)
+					setPosition(acr, containerShape, (PositionUpdateContext) context);
 				
 				// check replicated
 				if(acr instanceof ActorRef){
@@ -668,8 +656,7 @@ public class ActorContainerRefSupport {
 							IGaService gaService = Graphiti.getGaService();
 							int width = invisibleRect.getWidth()-2*MARGIN;
 							int height = invisibleRect.getHeight()-2*MARGIN;
-							EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
-							Color lineColor = manageColor(isInherited(acr, parent)?INHERITED_COLOR:LINE_COLOR);
+							Color lineColor = manageColor(isInherited(acr, acr.eContainer())?INHERITED_COLOR:LINE_COLOR);
 							
 							Rectangle replRect = gaService.createRectangle(invisibleRect);
 							replRect.setForeground(lineColor);
@@ -713,10 +700,46 @@ public class ActorContainerRefSupport {
 
 				updateLabel(acr, context.getPictogramElement());
 				
-				InterfaceItemSupport.createRefItems(acr, containerShape, fp);
+				GraphicsAlgorithm innerRect = containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(borderRectId);
+				IPositionProvider positionProvider = null;
+				if(context instanceof PositionUpdateContext){
+					positionProvider = ((PositionUpdateContext)context).getPositionProvider();
+					positionProvider = positionProvider.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(innerRect));
+				}
 				
-				return true;
+				Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
+				ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
+				List<InterfaceItem> expected = new ArrayList<InterfaceItem>(RoomHelpers.getInterfaceItems(acc, true));
+				
+				expected.removeAll(present.keySet());
+				Map<EObject, Shape> newShapes = addShapesInitial(expected, containerShape);
+				
+				if(positionProvider != null)
+					updatePictogramElements(newShapes.values(), positionProvider);
+				// handle new shapes without position
+				Map<EObject, Shape> withoutPosition = new HashMap<EObject, Shape>();
+				if(positionProvider != null){
+					for(EObject obj : newShapes.keySet())
+						if(!positionProvider.contains(obj))
+							withoutPosition.put(obj, newShapes.get(obj));
+				} else if(!newShapes.isEmpty())
+					withoutPosition.putAll(newShapes);
+				
+				if(!withoutPosition.isEmpty()){
+					IPositionProvider defaultPP = new DefaultPositionProvider(acr);
+					defaultPP = defaultPP.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(innerRect));
+					updatePictogramElements(newShapes.values(), defaultPP);
+				}
+				
+				// only update positions if inherited
+				if(positionProvider instanceof SuperDiagramPositionProvider)
+					updatePictogramElements(present.values(), positionProvider);
+				else
+					updatePictogramElements(present.values());
+				
+				return true;				
 			}
+				
 		}
 		
 		private class RemoveFeature extends DefaultRemoveFeature {
@@ -816,26 +839,48 @@ public class ActorContainerRefSupport {
 			
 			@Override
 			public void resizeShape(IResizeShapeContext context) {
-				Shape shape = context.getShape();
+				ContainerShape containerShape = (ContainerShape) context.getShape();
+				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
+				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				
-				if (shape.getGraphicsAlgorithm()!=null) {
-					GraphicsAlgorithm containerGa = shape.getGraphicsAlgorithm();
-					double sx = (context.getWidth()-2*MARGIN)/(double)(containerGa.getWidth()-2*MARGIN);
-					double sy = (context.getHeight()-2*MARGIN)/(double)(containerGa.getHeight()-2*MARGIN);
-					
-					GraphicsAlgorithm ga;
-					for (Shape childShape : ((ContainerShape)context.getShape()).getChildren()) {
-						Object childBo = getBusinessObjectForPictogramElement(childShape);
-						if (childBo instanceof InterfaceItem) {
-							ga = childShape.getGraphicsAlgorithm();
-							ga.setX((int) (ga.getX()*sx));
-							ga.setY((int) (ga.getY()*sy));
-						}
-						
-					}
-				}
+				if(bo instanceof ActorRef && ((ActorRef)bo).getSize() > 1)
+					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(1));
+				else
+					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(0));
+				
 				super.resizeShape(context);
 			}
+			
+			private void resizeChildrenInterfaceItems(IResizeShapeContext context, GraphicsAlgorithm innerRect){
+				PosAndSize innerRectPos = DiagramUtil.getPosAndSize(innerRect);
+				
+				double sx = (double)(context.getWidth() - 2*innerRectPos.getX()) / innerRectPos.getW();
+				double sy = (double)(context.getHeight() - 2*innerRectPos.getY()) / innerRectPos.getH();
+				
+				for (Shape childShape : ((ContainerShape)context.getPictogramElement()).getChildren()) {
+					Object childBo = getBusinessObjectForPictogramElement(childShape);
+					if (childBo instanceof InterfaceItem) {
+						GraphicsAlgorithm childGa = childShape.getGraphicsAlgorithm();
+						
+						PosAndSize childPos = DiagramUtil.getPosAndSize(childGa);
+						// calc mid point & align to inner rect
+						int midX = childPos.getX() + childPos.getW()/2 - innerRectPos.getX();
+						int midY = childPos.getY() + childPos.getH()/2 - innerRectPos.getY();
+						// scale
+						midX = (int) (sx*midX);
+						midY = (int) (sy*midY);
+						// first step reverse
+						midX = midX - childPos.getW()/2 + innerRectPos.getX();
+						midY = midY - childPos.getH()/2 + innerRectPos.getY();
+						
+						Graphiti.getGaService().setLocation(childGa, midX, midY);
+						updatePictogramElement(childShape);
+					}
+					
+				}
+				
+			}
+			
 		}
 		
 		private IFeatureProvider fp;

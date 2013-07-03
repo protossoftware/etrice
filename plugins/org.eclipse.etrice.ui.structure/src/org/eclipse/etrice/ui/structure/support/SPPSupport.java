@@ -402,7 +402,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			GraphicsAlgorithm invisibleRect = pe.getGraphicsAlgorithm();
 			invisibleRect.getGraphicsAlgorithmChildren().clear();
 			
-			createSPPFigure(spp, false, container, invisibleRect, dark, bright);
+			createSPPFigure(spp, isRefItem(pe), container, invisibleRect, dark, bright);
 			
 			GraphicsAlgorithm ga = container.getChildren().get(0).getGraphicsAlgorithm();
 			if (ga instanceof Text) {
