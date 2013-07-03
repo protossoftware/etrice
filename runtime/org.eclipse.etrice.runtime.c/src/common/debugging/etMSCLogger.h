@@ -36,19 +36,35 @@ void etMSCLogger_setState(char* objectName, char* stateName);
 
 	#define ET_MSC_LOGGER_CLOSE etMSCLogger_close();
 
-	#define ET_MSC_LOGGER_SYNC_ENTRY(object, message) 			\
-		char* sourceName = etMSCLogger_getObjectName(); 	\
-		char* targetName = object;							\
-		etMSCLogger_syncCall(sourceName, message, targetName); 	\
-		etMSCLogger_setObjectName(targetName);
-
-
-	#define ET_MSC_LOGGER_SYNC_EXIT \
-		etMSCLogger_syncReturn(sourceName, targetName); \
-		etMSCLogger_setObjectName(sourceName);
-
 	#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName) \
 		etMSCLogger_setState(objectName, stateName);
+
+	#ifdef ET_SYNC_MSC_LOGGER_ACTIVATE
+		#define ET_MSC_LOGGER_SYNC_ENTRY(object, message) 			\
+			char* sourceName = etMSCLogger_getObjectName(); 	\
+			char* targetName = object;							\
+			etMSCLogger_syncCall(sourceName, message, targetName); 	\
+			etMSCLogger_setObjectName(targetName);
+		#define ET_MSC_LOGGER_SYNC_EXIT \
+			etMSCLogger_syncReturn(sourceName, targetName); \
+			etMSCLogger_setObjectName(sourceName);
+	#else
+		#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
+		#define ET_MSC_LOGGER_SYNC_EXIT
+	#endif
+
+
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+		#define ET_MSC_LOGGER_ASYNC_OUT(sourceName, message, targetName) 			\
+			etMSCLogger_asyncOut(sourceName, message, targetName);
+
+		#define ET_MSC_LOGGER_ASYNC_IN(sourceName, message, targetName) 			\
+			etMSCLogger_asyncIn(sourceName, message, targetName);
+	#else
+		#define ET_MSC_LOGGER_ASYNC_OUT(sourceName, message, targetName)
+		#define ET_MSC_LOGGER_ASYNC_IN(sourceName, message, targetName)
+	#endif
+
 
 #else
 	#define ET_MSC_LOGGER_OPEN
@@ -56,6 +72,10 @@ void etMSCLogger_setState(char* objectName, char* stateName);
 
 	#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
 	#define ET_MSC_LOGGER_SYNC_EXIT
+
+	#define ET_MSC_LOGGER_ASYNC_OUT(sourceName, message, targetName)
+	#define ET_MSC_LOGGER_ASYNC_IN(sourceName, message, targetName)
+
 	#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
 #endif
 
