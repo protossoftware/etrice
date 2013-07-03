@@ -3,12 +3,11 @@ PhysicalModel PhysicalModel1 {
 	PhysicalSystem PhysSys1 {
 		NodeRef nodeRef1 : NodeClass1
 	}
-	
+
 	NodeClass NodeClass1 {
 		runtime = RuntimeClass1
 		priomin = -10
 		priomax = 10
-		
 		DefaultThread PhysicalThread1 {
 			execmode = blocked
 			prio = 0
@@ -20,6 +19,6 @@ PhysicalModel PhysicalModel1 {
 
 	RuntimeClass RuntimeClass1 {
 		model = multiThreaded
-	} 
-	
-}
+	}
+
+}
