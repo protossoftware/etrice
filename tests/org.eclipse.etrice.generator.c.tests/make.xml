@@ -136,7 +136,7 @@
 			</fileset>
 		</path>
 
-		<java output="${output}/generate.txt" classname="org.eclipse.etrice.generator.c.Main" fork="true" failonerror="true">
+		<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.c.Main" fork="true" failonerror="true">
 			<arg value="${c.tests.model.path}/generator.c.tests.etmap"/>
 			<arg value="${c.tests.model.path}/generator.c.tests.config"/>
 			<classpath refid="clspath"/>
