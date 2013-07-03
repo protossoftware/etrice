@@ -28,7 +28,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -57,6 +56,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
@@ -64,7 +64,6 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -74,10 +73,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class NodeGen {
-  @Inject
-  @Extension
-  private JavaIoFileSystemAccess fileAccess;
-  
   @Inject
   @Extension
   private CExtensions _cExtensions;
@@ -91,13 +86,13 @@ public class NodeGen {
   private ProcedureHelpers helpers;
   
   @Inject
+  private IGeneratorFileIo fileIO;
+  
+  @Inject
   private Initialization attrInitGenAddon;
   
   @Inject
   private ILanguageExtension languageExt;
-  
-  @Inject
-  private ILogger logger;
   
   @Inject
   private IDiagnostician diagnostician;
@@ -114,7 +109,12 @@ public class NodeGen {
           String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
           SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
           String _path = this._roomExtensions.getPath(_subSystemClass_1);
-          String filepath = (_generationTargetPath + _path);
+          final String filepath = (_generationTargetPath + _path);
+          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
+          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+          String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
+          final String infopath = (_generationInfoPath + _path_1);
           String file = this._cExtensions.getCHeaderFileName(nr, ssi);
           this.checkDataPorts(ssi);
           HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
@@ -139,44 +139,20 @@ public class NodeGen {
               }
             }
           }
-          String _plus = ("generating Node declaration: \'" + file);
-          String _plus_1 = (_plus + "\' in \'");
-          String _plus_2 = (_plus_1 + filepath);
-          String _plus_3 = (_plus_2 + "\'");
-          this.logger.logInfo(_plus_3);
-          this.fileAccess.setOutputPath(filepath);
           CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi);
-          this.fileAccess.generateFile(file, _generateHeaderFile);
+          this.fileIO.generateFile("generating Node declaration", filepath, infopath, file, _generateHeaderFile);
           String _cSourceFileName = this._cExtensions.getCSourceFileName(nr, ssi);
           file = _cSourceFileName;
-          String _plus_4 = ("generating Node implementation: \'" + file);
-          String _plus_5 = (_plus_4 + "\' in \'");
-          String _plus_6 = (_plus_5 + filepath);
-          String _plus_7 = (_plus_6 + "\'");
-          this.logger.logInfo(_plus_7);
-          this.fileAccess.setOutputPath(filepath);
           CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, usedThreads);
-          this.fileAccess.generateFile(file, _generateSourceFile);
+          this.fileIO.generateFile("generating Node implementation", filepath, infopath, file, _generateSourceFile);
           String _instSourceFileName = this._cExtensions.getInstSourceFileName(nr, ssi);
           file = _instSourceFileName;
-          String _plus_8 = ("generating Node instance file: \'" + file);
-          String _plus_9 = (_plus_8 + "\' in \'");
-          String _plus_10 = (_plus_9 + filepath);
-          String _plus_11 = (_plus_10 + "\'");
-          this.logger.logInfo(_plus_11);
-          this.fileAccess.setOutputPath(filepath);
           CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi, usedThreads);
-          this.fileAccess.generateFile(file, _generateInstanceFile);
+          this.fileIO.generateFile("generating Node instance file", filepath, infopath, file, _generateInstanceFile);
           String _dispSourceFileName = this._cExtensions.getDispSourceFileName(nr, ssi);
           file = _dispSourceFileName;
-          String _plus_12 = ("generating Node dispatcher file: \'" + file);
-          String _plus_13 = (_plus_12 + "\' in \'");
-          String _plus_14 = (_plus_13 + filepath);
-          String _plus_15 = (_plus_14 + "\'");
-          this.logger.logInfo(_plus_15);
-          this.fileAccess.setOutputPath(filepath);
           CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi, usedThreads);
-          this.fileAccess.generateFile(file, _generateDispatcherFile);
+          this.fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, _generateDispatcherFile);
         }
       }
     }
