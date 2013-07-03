@@ -17,6 +17,7 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
@@ -59,9 +60,13 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	override protected genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
+			/* state names */
+			static char* stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
+			«ENDFOR»};
 			
 			«langExt.accessLevelPrivate»void setState(«ac.name»* self, «stateType» new_state) {
 				self->state = new_state;
+				ET_MSC_LOGGER_CHANGE_STATE("«ac.name»", stateStrings[new_state])
 			}
 			
 			«langExt.accessLevelPrivate»«stateType» getState(«ac.name»* self) {

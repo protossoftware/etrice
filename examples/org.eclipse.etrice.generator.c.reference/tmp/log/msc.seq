@@ -1,0 +1,42 @@
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Actor1 >-- Actor2 sendData
+Sender >>> SendingData
+Actor1 >-- Actor2 receivedData
+Receiver >>> WaitingForData
+Sender >>> Done

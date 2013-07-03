@@ -24,21 +24,34 @@ RoomModel RoomModel1 {
 		}
 		Structure {
 			external Port receiver
+			Attribute counter: int32
+			
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> SendingData { }
-				Transition tr0: SendingData -> Received {
+				Transition init: initial -> SendingData {
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr0: SendingData -> cp cp0 {
 					triggers {
 						<receivedData: receiver>
 					}
 				}
+				Transition tr1: cp cp0 -> Done
+				Transition tr2: cp cp0 -> SendingData {
+					cond {
+						"++counter<10"
+					}
+				}
+				ChoicePoint cp0
 				State SendingData {
 					entry {
 						"receiver.sendData(1234);"
 					}
 				}
-				State Received
+				State Done
 			}
 		}
 	}
@@ -53,7 +66,7 @@ RoomModel RoomModel1 {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> WaitingForData { }
-				Transition tr0: WaitingForData -> Received {
+				Transition tr0: WaitingForData -> WaitingForData {
 					triggers {
 						<sendData: sender>
 					}
@@ -62,11 +75,6 @@ RoomModel RoomModel1 {
 					}
 				}
 				State WaitingForData
-				State Received {
-					entry {
-						"printf(\"Receiver - Received\");"
-					}
-				}
 			}
 		}
 	}

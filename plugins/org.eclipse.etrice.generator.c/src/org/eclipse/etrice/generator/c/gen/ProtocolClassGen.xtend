@@ -253,6 +253,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
@@ -268,6 +269,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
 							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -280,6 +282,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						if (0<=idx && idx<((etReplPort*)self)->size) {
 							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -323,7 +326,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def private messageGetterSignature(String className, String messageName, String type) {
 		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
 	}
-	
+
+// TODO: can this be deleted?
 //	def sendMessage(Message m, boolean conj) {'''
 //	«var dir = if (conj) "IN" else "OUT"»
 //	«var hdlr = m.getSendHandler(conj)»

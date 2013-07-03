@@ -31,7 +31,7 @@ void etMSCLogger_setState(char* objectName, char* stateName);
 
 #ifdef ET_MSC_LOGGER_ACTIVATE
 	#define ET_MSC_LOGGER_OPEN(object) \
-		etMSCLogger_open("tmp", "msc"); \
+		etMSCLogger_open("tmp/log", "msc"); \
 		etMSCLogger_setObjectName(object);
 
 	#define ET_MSC_LOGGER_CLOSE etMSCLogger_close();

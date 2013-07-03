@@ -17,6 +17,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -113,6 +114,27 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/* state names */");
+      _builder.newLine();
+      _builder.append("static char* stateStrings[] = {\"<no state>\",\"<top>\",");
+      {
+        List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
+        boolean _hasElements = false;
+        for(final State state : _allBaseStatesLeavesLast) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate(",", "");
+          }
+          _builder.append("\"");
+          String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+          _builder.append(_genStatePathName, "");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("};");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       String _accessLevelPrivate = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate, "");
@@ -127,6 +149,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("\t");
       _builder.append("self->state = new_state;");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("ET_MSC_LOGGER_CHANGE_STATE(\"");
+      String _name_1 = ac.getName();
+      _builder.append(_name_1, "	");
+      _builder.append("\", stateStrings[new_state])");
+      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
@@ -135,8 +163,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       String _stateType_1 = this.stateType();
       _builder.append(_stateType_1, "");
       _builder.append(" getState(");
-      String _name_1 = ac.getName();
-      _builder.append(_name_1, "");
+      String _name_2 = ac.getName();
+      _builder.append(_name_2, "");
       _builder.append("* self) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
