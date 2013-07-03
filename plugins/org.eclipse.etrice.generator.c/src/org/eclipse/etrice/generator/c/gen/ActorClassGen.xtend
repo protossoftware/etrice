@@ -51,7 +51,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 			fileIO.generateFile("generating ActorClass header", path, infopath, file, root.generateHeaderFile(xpac))
 
 			// source file
-			fileIO.generateFile("generating ActorClass header", path, infopath, file, root.generateHeaderFile(xpac))
 			if (xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")) {
 				logger.logInfo("omitting ActorClass source for '"+xpac.actorClass.name+"' since @BehaviorManual is specified")
 			}
