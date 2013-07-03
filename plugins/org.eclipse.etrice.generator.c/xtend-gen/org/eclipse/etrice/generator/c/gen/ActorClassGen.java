@@ -91,8 +91,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String file = this._cExtensions.getCHeaderFileName(_actorClass_4);
         CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac);
         this.fileIO.generateFile("generating ActorClass header", path, infopath, file, _generateHeaderFile);
-        CharSequence _generateHeaderFile_1 = this.generateHeaderFile(root, xpac);
-        this.fileIO.generateFile("generating ActorClass header", path, infopath, file, _generateHeaderFile_1);
         ActorClass _actorClass_5 = xpac.getActorClass();
         boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_5, "BehaviorManual");
         if (_isBehaviorAnnotationPresent) {

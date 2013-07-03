@@ -17,48 +17,48 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.HashMap
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import java.util.HashSet
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.core.room.SAPRef
+import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
-import org.eclipse.etrice.core.room.Port
-import org.eclipse.etrice.core.room.SPPRef
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.generator.base.IntelligentSeparator
-import java.util.HashSet
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 
 @Singleton
 class NodeGen {
 	
-	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers helpers
+	
+	@Inject IGeneratorFileIo fileIO
 	@Inject Initialization attrInitGenAddon
 	@Inject ILanguageExtension languageExt
-	@Inject ILogger logger
 	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				var filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+				val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+				val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
 				var file = nr.getCHeaderFileName(ssi)
 			
 				checkDataPorts(ssi)
@@ -70,24 +70,16 @@ class NodeGen {
 						usedThreads.add(thread)
 				}
 				
-				logger.logInfo("generating Node declaration: '"+file+"' in '"+filepath+"'")
-				fileAccess.setOutputPath(filepath)
-				fileAccess.generateFile(file, root.generateHeaderFile(ssi))
+				fileIO.generateFile("generating Node declaration", filepath, infopath, file, root.generateHeaderFile(ssi))
 				
 				file = nr.getCSourceFileName(ssi)
-				logger.logInfo("generating Node implementation: '"+file+"' in '"+filepath+"'")
-				fileAccess.setOutputPath(filepath)
-				fileAccess.generateFile(file, root.generateSourceFile(ssi, usedThreads))
+				fileIO.generateFile("generating Node implementation", filepath, infopath, file, root.generateSourceFile(ssi, usedThreads))
 				
 				file = nr.getInstSourceFileName(ssi)
-				logger.logInfo("generating Node instance file: '"+file+"' in '"+filepath+"'")
-				fileAccess.setOutputPath(filepath)
-				fileAccess.generateFile(file, root.generateInstanceFile(ssi, usedThreads))
+				fileIO.generateFile("generating Node instance file", filepath, infopath, file, root.generateInstanceFile(ssi, usedThreads))
 	
 				file = nr.getDispSourceFileName(ssi)
-				logger.logInfo("generating Node dispatcher file: '"+file+"' in '"+filepath+"'")
-				fileAccess.setOutputPath(filepath)
-				fileAccess.generateFile(file, root.generateDispatcherFile(ssi, usedThreads))
+				fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, root.generateDispatcherFile(ssi, usedThreads))
 			}
 		}
 	}
