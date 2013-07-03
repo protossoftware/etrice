@@ -25,16 +25,18 @@ import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;
 
 public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 
-	public DiagramRefreshBehavior(StructureEditor diagramEditor) {
-		super(diagramEditor);
+	private StructureEditor structureEditor;
+
+	public DiagramRefreshBehavior(StructureEditor structureEditor) {
+		super(structureEditor.getDiagramBehavior());
+		this.structureEditor = structureEditor;
 	}
 	
 	@Override
 	protected void handleAutoUpdateAtStartup() {
-		IDiagramTypeProvider diagramTypeProvider = diagramEditor.getDiagramTypeProvider();
+		IDiagramTypeProvider diagramTypeProvider = diagramBehavior.getDiagramTypeProvider();
 		if (diagramTypeProvider.isAutoUpdateAtStartup()) {
-			StructureEditor editor = (StructureEditor)diagramEditor;
-			StructureClass sc = editor.getStructureClass();
+			StructureClass sc = structureEditor.getStructureClass();
 			Diagram diagram = diagramTypeProvider.getDiagram();
 			if(sc instanceof ActorClass && ((ActorClass)sc).getBase() != null)
 				autoUpdate(new PositionUpdateContext(diagram, new SuperDiagramPositionProvider(sc)));
@@ -45,7 +47,7 @@ public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 	}
 
 	public void autoUpdate(IUpdateContext updateCtx) {
-		IDiagramTypeProvider diagramTypeProvider = diagramEditor.getDiagramTypeProvider();
+		IDiagramTypeProvider diagramTypeProvider = diagramBehavior.getDiagramTypeProvider();
 		IFeatureProvider featureProvider = diagramTypeProvider.getFeatureProvider();
 		featureProvider.updateIfPossible(updateCtx);
 		refresh();

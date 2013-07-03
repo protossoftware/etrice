@@ -24,6 +24,7 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;
+import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.swt.graphics.Image;
 
 
@@ -60,12 +61,18 @@ public class StructureEditor extends RoomDiagramEditor {
 		IFeatureProvider featureProvider = diagramTypeProvider.getFeatureProvider();
 		IUpdateContext updateCtx = new PositionUpdateContext(diagram, new SuperDiagramPositionProvider(getStructureClass()));
 		featureProvider.updateIfPossible(updateCtx);
-		refresh();
+		getDiagramBehavior().refresh();
 	}
 	
 	@Override
-	protected DefaultRefreshBehavior createRefreshBehavior() {
-		return new DiagramRefreshBehavior(this);
+	protected DiagramBehavior createDiagramBehavior() {
+		final StructureEditor editor = this;
+		return new DiagramBehavior(this) {
+			protected DefaultRefreshBehavior createRefreshBehavior() {
+				return new DiagramRefreshBehavior(editor);
+			}
+		};
 	}
+	
 	
 }

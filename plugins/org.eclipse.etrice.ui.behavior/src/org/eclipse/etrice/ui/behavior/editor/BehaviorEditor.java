@@ -209,7 +209,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		IFeatureProvider featureProvider = diagramTypeProvider.getFeatureProvider();
 		IUpdateContext updateCtx = new UpdateContext(diagram);
 		featureProvider.updateIfPossible(updateCtx);
-		refresh();
+		diagramTypeProvider.getDiagramBehavior().refresh();
 	}
 
 	@Override
