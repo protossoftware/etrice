@@ -1,0 +1,117 @@
+main ==> nodeRef1_SubSysRef1 init(thread=6928)
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 constructActorInstances(thread=6928)
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 initMessageServices(thread=6928)
+nodeRef1_SubSysRef1 ==> etMessageService init(thread=6928)
+etMessageService ==> etMessageQueue init(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue init(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageService initMessagePool(thread=6928)
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMessageQueue resetLowWaterMark(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService <== etMessageService
+etMessageService ==> etMutex construct(thread=6928)
+etMessageService <== etMutex
+etMessageService ==> etMutex construct(thread=6928)
+etMessageService <== etMutex
+etMessageService ==> etSema construct(thread=6928)
+etMessageService <== etSema
+etMessageService ==> etThread construct(thread=6928)
+etMessageService <== etThread
+nodeRef1_SubSysRef1 <== etMessageService
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 initActorInstances(thread=6928)
+nodeRef1_SubSysRef1 ==> ActorClass1 init(thread=6928)
+nodeRef1_SubSysRef1 <== ActorClass1
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+main <== nodeRef1_SubSysRef1
+main ==> nodeRef1_SubSysRef1 start(thread=6928)
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 startMessageServices(thread=6928)
+nodeRef1_SubSysRef1 ==> etMessageService start(thread=6928)
+etMessageService ==> etThread start(thread=6928)
+etMessageService <== etThread
+nodeRef1_SubSysRef1 <== etMessageService
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+main <== nodeRef1_SubSysRef1
+main ==> nodeRef1_SubSysRef1 run(thread=6928)
+nodeRef1_SubSysRef1 ==> etThread execute(thread=7712)
+etThread ==> etMessageService deliverAllMessages(thread=7712)
+etMessageService ==> etMessageQueue isNotEmpty(thread=7712)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema waitForWakeup(thread=7712)
+main <== nodeRef1_SubSysRef1
+main ==> nodeRef1_SubSysRef1 stop(thread=6928)
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 stopMessageServices(thread=6928)
+nodeRef1_SubSysRef1 ==> etMessageService stop(thread=6928)
+etMessageService ==> etSystemProtocolConjPort terminate(thread=6928)
+etSystemProtocolConjPort ==> etPort sendMessage(thread=6928)
+etPort ==> etMessageService getMessageBuffer(thread=6928)
+etMessageService ==> etMutex enter(thread=6928)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue pop(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex leave(thread=6928)
+etMessageService <== etMutex
+etPort <== etMessageService
+etPort ==> etMessageService pushMessage(thread=6928)
+etMessageService ==> etMutex enter(thread=6928)
+etMessageService <== etMutex
+etMessageService ==> etMessageQueue push(thread=6928)
+etMessageService <== etMessageQueue
+etMessageService ==> etSema wakeup(thread=6928)
+etMessageService <== etSema
+etMessageService ==> etMutex leave(thread=6928)
+etMessageService <== etMutex
+etPort <== etMessageService
+etSystemProtocolConjPort <== etPort
+etMessageService <== etSystemProtocolConjPort
+nodeRef1_SubSysRef1 <== etMessageService
+etMessageService <== etSema
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+etMessageService ==> etMessageQueue isNotEmpty(thread=7712)
+main <== nodeRef1_SubSysRef1
+etMessageService <== etMessageQueue
+main ==> nodeRef1_SubSysRef1 destroy(thread=6928)
+etMessageService ==> etMessageService popMessage(thread=7712)
+nodeRef1_SubSysRef1 ==> nodeRef1_SubSysRef1 destroyMessageServices(thread=6928)
+etMessageService ==> etMutex enter(thread=7712)
+nodeRef1_SubSysRef1 ==> etMessageService destroy(thread=6928)
+etMessageService <== etMutex
+etMessageService ==> etMutex destruct(thread=6928)
+etMessageService ==> etMessageQueue pop(thread=7712)
+etMessageService <== etMutex
+etMessageService <== etMessageQueue
+etMessageService ==> etMutex destruct(thread=6928)
+etMessageService ==> etMutex leave(thread=7712)
+etMessageService <== etMutex
+etMessageService <== etMutex
+etMessageService ==> etSema destruct(thread=6928)
+etMessageService <== etMessageService
+etMessageService <== etSema
+etMessageService ==> MsgDispatcher_PhysicalThread1 receiveMessage(thread=7712)
+nodeRef1_SubSysRef1 <== etMessageService
+MsgDispatcher_PhysicalThread1 ==> etMessageService returnMessageBuffer(thread=7712)
+nodeRef1_SubSysRef1 <== nodeRef1_SubSysRef1
+etMessageService ==> etMutex enter(thread=7712)
+main <== nodeRef1_SubSysRef1

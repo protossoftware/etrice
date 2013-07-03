@@ -1,14 +1,12 @@
 RoomModel RoomModel1 {
-
 	LogicalSystem LogSys1 {
-		SubSystemRef SubSysRef1: SubSysClass1
+		SubSystemRef subSysRef1:SubSysClass1 
 	}
-
 	SubSystemClass SubSysClass1 {
-		ActorRef ActorRef1: ActorClass1
+		ActorRef actorRef1:ActorClass1 
 		LogicalThread defaultThread
 	}
-
-	ActorClass ActorClass1 { }
-
+	ActorClass ActorClass1 {
+	}
+	
 }

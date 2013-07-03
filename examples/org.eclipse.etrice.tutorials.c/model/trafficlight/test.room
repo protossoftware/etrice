@@ -1,16 +1,17 @@
 RoomModel wer {
-		LogicalSystem LogSysName {
-		SubSystemRef SubSysRefName:SubSysClassName
-		
-		}
-		SubSystemClass SubSysClassName {
-		ActorRef ActorRefName:ActorClassName
-		
-		}
-		ActorClass ActorClassName {
-		}
-		
-		}
+
+	LogicalSystem LogSysName {
+		SubSystemRef SubSysRefName: SubSysClassName
+	}
+
+	SubSystemClass SubSysClassName {
+		ActorRef ActorRefName: ActorClassName
+		LogicalThread dflt_thread
+	}
+
+	ActorClass ActorClassName { }
+
+}
 		
 		
 	
