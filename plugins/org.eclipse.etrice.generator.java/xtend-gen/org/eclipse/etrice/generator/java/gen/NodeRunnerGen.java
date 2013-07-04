@@ -12,46 +12,59 @@ package org.eclipse.etrice.generator.java.gen;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.eclipse.emf.common.util.EList;
+import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
-public class SubSystemRunnerGen {
-  @Inject
-  private IGeneratorFileIo fileIO;
-  
+public class NodeRunnerGen {
   @Inject
   @Extension
   private RoomExtensions roomExt;
   
+  @Inject
+  @Extension
+  private JavaExtensions _javaExtensions;
+  
+  @Inject
+  private IGeneratorFileIo fileIO;
+  
   public void doGenerate(final Root root) {
-    EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (final SubSystemInstance sc : _subSystemInstances) {
-      {
-        SubSystemClass _subSystemClass = sc.getSubSystemClass();
-        String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = sc.getSubSystemClass();
-        String _path = this.roomExt.getPath(_subSystemClass_1);
-        final String path = (_generationTargetPath + _path);
-        SubSystemClass _subSystemClass_2 = sc.getSubSystemClass();
-        String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
-        SubSystemClass _subSystemClass_3 = sc.getSubSystemClass();
-        String _path_1 = this.roomExt.getPath(_subSystemClass_3);
-        final String infopath = (_generationInfoPath + _path_1);
-        SubSystemClass _subSystemClass_4 = sc.getSubSystemClass();
-        String _name = _subSystemClass_4.getName();
-        final String file = (_name + "Runner.java");
-        CharSequence _generate = this.generate(root, sc);
-        this.fileIO.generateFile("generating SubSystemRunner implementation", path, infopath, file, _generate);
+    Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
+    for (final NodeRef nr : _nodeRefs) {
+      List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
+      for (final String instpath : _subSystemInstancePaths) {
+        {
+          StructureInstance _instance = root.getInstance(instpath);
+          final SubSystemInstance ssi = ((SubSystemInstance) _instance);
+          String _javaFileName = this._javaExtensions.getJavaFileName(nr, ssi);
+          final String file = (_javaFileName + "_Runner.java");
+          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+          String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
+          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+          String _path = this.roomExt.getPath(_subSystemClass_1);
+          final String filepath = (_generationTargetPath + _path);
+          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+          String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
+          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+          String _path_1 = this.roomExt.getPath(_subSystemClass_3);
+          final String infopath = (_generationInfoPath + _path_1);
+          CharSequence _generate = this.generate(root, ssi);
+          this.fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, _generate);
+        }
       }
     }
   }
@@ -60,6 +73,8 @@ public class SubSystemRunnerGen {
     CharSequence _xblockexpression = null;
     {
       final SubSystemClass cc = ssc.getSubSystemClass();
+      final NodeRef nr = ETMapUtil.getNodeRef(ssc);
+      final String clsname = this._javaExtensions.getJavaClassName(nr, ssc);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -96,8 +111,7 @@ public class SubSystemRunnerGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("class ");
-      String _name_2 = cc.getName();
-      String _plus = (_name_2 + "Runner");
+      String _plus = (clsname + "Runner");
       _builder.append(_plus, "");
       _builder.append(" extends SubSystemRunnerBase {");
       _builder.newLineIfNotEmpty();
@@ -127,8 +141,8 @@ public class SubSystemRunnerGen {
         if ((_eContainer instanceof SystemInstance)) {
           _builder.append("new RTSystem(\"");
           EObject _eContainer_1 = ssc.eContainer();
-          String _name_3 = ((SystemInstance) _eContainer_1).getName();
-          _builder.append(_name_3, "		");
+          String _name_2 = ((SystemInstance) _eContainer_1).getName();
+          _builder.append(_name_2, "		");
           _builder.append("\")");
         } else {
           _builder.append("null");
@@ -137,14 +151,12 @@ public class SubSystemRunnerGen {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      String _name_4 = cc.getName();
-      _builder.append(_name_4, "		");
+      _builder.append(clsname, "		");
       _builder.append(" main_component = new ");
-      String _name_5 = cc.getName();
-      _builder.append(_name_5, "		");
+      _builder.append(clsname, "		");
       _builder.append("(sys, \"");
-      String _name_6 = ssc.getName();
-      _builder.append(_name_6, "		");
+      String _name_3 = ssc.getName();
+      _builder.append(_name_3, "		");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");

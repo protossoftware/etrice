@@ -141,55 +141,55 @@
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
 		<echo>start HandlerTest</echo>
-		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.SubSystem_HandlerTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.Node_node3_hdTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   HandlerTest</echo>
 		<echo>start ChoicePointTest</echo>
-		<java output="${output}/runChoicePointTest.txt" classname="ChoicePointTest.SubSystem_CPTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runChoicePointTest.txt" classname="ChoicePointTest.Node_node1_cpTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   ChoicePointTest</echo>
 		<echo>start PingPongThreadTest</echo>
-		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.SubSystem_PingPongRunner" fork="true" failonerror="true">
+		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.Node_node6_ppTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   PingPongThreadTest</echo>
 		<echo>start PingPongThreadTestReplPort</echo>
-		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.SubSystem_PingPongReplPortRunner" fork="true" failonerror="true">
+		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.Node_node7_prTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   PingPongThreadTestReplPort</echo>
 		<echo>start SendingDataTestJava</echo>
-		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.SubSystem_SendingDataRunner" fork="true" failonerror="true">
+		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.Node_node4_sdTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   SendingDataTestJava</echo>
 		<echo>start TCPTest</echo>
-		<java output="${output}/runTCPTest.txt" classname="TCPTest.SubSystem_TCPTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runTCPTest.txt" classname="TCPTest.Node_node8_tcTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   TCPTest</echo>
 		<echo>start StaticConfigTest</echo>
-		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.SubSystem_StaticConfigTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.Node_node5_scTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   StaticConfigTest</echo>
 		<echo>start DynamicConfigTest</echo>
-		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.SubSystem_DynamicConfigTestRunner" fork="true" failonerror="true">
+		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.Node_node9_dcTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicConfigTest</echo>
 		<echo>start DataDrivenTest</echo>
-		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.SubSystem_DataDrivenRunner" fork="true" failonerror="true">
+		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.Node_node2_ddTestRunner" fork="true" failonerror="true">
 			<arg value="-run_as_test"/>
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>

@@ -30,6 +30,8 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -41,7 +43,15 @@ class JavaExtensions implements ILanguageExtension {
 	}
 
 	def String getJavaFileName(RoomClass rc) {rc.name+".java"}
-	
+
+	def String getJavaClassName(NodeRef nr, SubSystemInstance ssi) {
+		"Node_"+nr.name+"_"+ssi.name;
+	}
+
+	def String getJavaFileName(NodeRef nr, SubSystemInstance ssi) {
+		nr.getJavaClassName(ssi)+".java";
+	}
+		
 	def String toWrapper(String type){
 		switch(type){
 			case "int": "Integer"

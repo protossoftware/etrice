@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.etrice.runtime.java.messaging.AbstractMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
+import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
@@ -39,7 +40,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 		
 		int thread = RTServices.getInstance().getMsgSvcCtrl().getThreadForPath(getParent().getInstancePath());
 		if (thread>=0) {
-			MessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
+			IMessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 			Address addr = msgSvc.getFreeAddress();
 			setAddress(addr);
 			

@@ -11,8 +11,8 @@ package org.eclipse.etrice.runtime.java.modelbase;
 import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
+import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
@@ -119,7 +119,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		System.out.println("=== done destroy RTServices\n\n\n");
 	}
 	
-	public MessageService getMsgService(int idx) {
+	public IMessageService getMsgService(int idx) {
 		return RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(idx);
 	}
 	

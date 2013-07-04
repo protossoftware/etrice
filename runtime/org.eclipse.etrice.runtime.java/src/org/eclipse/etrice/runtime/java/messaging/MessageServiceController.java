@@ -59,7 +59,7 @@ public class MessageServiceController {
 		}
 	}
 	
-	private List<MessageService> messageServiceList = null;
+	private List<IMessageService> messageServiceList = null;
 	private PathToThread path2thread = new PathToThread();
 	private PathToPeers path2peers = new PathToPeers();
 	private boolean running = false;
@@ -67,10 +67,10 @@ public class MessageServiceController {
 	public MessageServiceController(/*IRTObject parent*/){
 		// TODOTS: Who is parent of MessageServices and Controller?
 		// this.parent = parent;
-		messageServiceList = new ArrayList<MessageService>();
+		messageServiceList = new ArrayList<IMessageService>();
 	}
 
-	public void addMsgSvc(MessageService msgSvc){
+	public void addMsgSvc(IMessageService msgSvc){
 		// TODOTS: Who is parent of MessageServices ?
 		assert(msgSvc.getAddress().threadID == messageServiceList.size());
 		messageServiceList.add(msgSvc);
@@ -80,14 +80,14 @@ public class MessageServiceController {
 		return messageServiceList.size();
 	}
 	
-	public MessageService getMsgSvc(int threadID){
+	public IMessageService getMsgSvc(int threadID){
 		assert(threadID < messageServiceList.size());
 		return messageServiceList.get(threadID);
 	}
 	
 	public void start() {
 		// start all message services
-		for (MessageService msgSvc : messageServiceList){
+		for (IMessageService msgSvc : messageServiceList){
 			Thread thread = new Thread(msgSvc, msgSvc.getName());
 			msgSvc.setThread(thread);
 			thread.start();
@@ -130,7 +130,7 @@ public class MessageServiceController {
 
 	private void terminate() {
 		// terminate all message services
-		for (MessageService msgSvc : messageServiceList){
+		for (IMessageService msgSvc : messageServiceList){
 			msgSvc.terminate();
 			// TODOTS: stop in order of priorities
 		}
@@ -141,7 +141,7 @@ public class MessageServiceController {
 	 * ! not threadsafe !
 	 */
 	public void waitTerminate() {
-		for (MessageService msgSvc : messageServiceList) {
+		for (IMessageService msgSvc : messageServiceList) {
 			try {
 				msgSvc.getThread().join(1000);	// wait at most 1000ms
 				if (msgSvc.getThread().isAlive())

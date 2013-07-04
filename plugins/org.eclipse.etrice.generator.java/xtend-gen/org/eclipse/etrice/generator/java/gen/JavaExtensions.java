@@ -14,6 +14,8 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -46,6 +48,21 @@ public class JavaExtensions implements ILanguageExtension {
   public String getJavaFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _plus = (_name + ".java");
+    return _plus;
+  }
+  
+  public String getJavaClassName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _name = nr.getName();
+    String _plus = ("Node_" + _name);
+    String _plus_1 = (_plus + "_");
+    String _name_1 = ssi.getName();
+    String _plus_2 = (_plus_1 + _name_1);
+    return _plus_2;
+  }
+  
+  public String getJavaFileName(final NodeRef nr, final SubSystemInstance ssi) {
+    String _javaClassName = this.getJavaClassName(nr, ssi);
+    String _plus = (_javaClassName + ".java");
     return _plus;
   }
   

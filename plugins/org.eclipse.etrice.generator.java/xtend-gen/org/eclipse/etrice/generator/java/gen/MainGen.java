@@ -19,9 +19,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.etrice.generator.java.gen.ActorClassGen;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
+import org.eclipse.etrice.generator.java.gen.NodeGen;
+import org.eclipse.etrice.generator.java.gen.NodeRunnerGen;
 import org.eclipse.etrice.generator.java.gen.ProtocolClassGen;
-import org.eclipse.etrice.generator.java.gen.SubSystemClassGen;
-import org.eclipse.etrice.generator.java.gen.SubSystemRunnerGen;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 
@@ -38,10 +38,10 @@ public class MainGen implements IGenerator {
   private ActorClassGen actorClassGen;
   
   @Inject
-  private SubSystemClassGen subsystemClassGen;
+  private NodeGen nodeGen;
   
   @Inject
-  private SubSystemRunnerGen subsystemRunnerGen;
+  private NodeRunnerGen nodeRunnerGen;
   
   @Inject
   private PrepareFileSystem prepFS;
@@ -60,11 +60,11 @@ public class MainGen implements IGenerator {
     this.dataClassGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
     this.actorClassGen.doGenerate(e);
-    this.subsystemClassGen.doGenerate(e);
+    this.nodeGen.doGenerate(e);
     boolean _isLibrary = e.isLibrary();
     boolean _not = (!_isLibrary);
     if (_not) {
-      this.subsystemRunnerGen.doGenerate(e);
+      this.nodeRunnerGen.doGenerate(e);
     }
   }
 }

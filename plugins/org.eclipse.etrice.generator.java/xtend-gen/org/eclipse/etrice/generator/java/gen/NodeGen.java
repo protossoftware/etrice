@@ -13,20 +13,27 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -40,13 +47,12 @@ import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.VariableServiceGen;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class SubSystemClassGen {
-  @Inject
-  private IGeneratorFileIo fileIO;
-  
+public class NodeGen {
   @Inject
   @Extension
   private JavaExtensions _javaExtensions;
@@ -66,43 +72,83 @@ public class SubSystemClassGen {
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
+  private IGeneratorFileIo fileIO;
+  
+  @Inject
   private VariableServiceGen varService;
   
   @Inject
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
-    EList<SubSystemInstance> _subSystemInstances = root.getSubSystemInstances();
-    for (final SubSystemInstance ssi : _subSystemInstances) {
-      {
-        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
-        SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-        String _path = this._roomExtensions.getPath(_subSystemClass_1);
-        final String path = (_generationTargetPath + _path);
-        SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
-        SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-        String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
-        final String infopath = (_generationInfoPath + _path_1);
-        SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
-        final String file = this._javaExtensions.getJavaFileName(_subSystemClass_4);
-        this.checkDataPorts(ssi);
-        CharSequence _generate = this.generate(root, ssi);
-        this.fileIO.generateFile("generating SubSystemClass implementation", path, infopath, file, _generate);
-        boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
-        if (_hasVariableService) {
-          this.varService.doGenerate(root, ssi);
+    Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
+    for (final NodeRef nr : _nodeRefs) {
+      List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
+      for (final String instpath : _subSystemInstancePaths) {
+        {
+          StructureInstance _instance = root.getInstance(instpath);
+          final SubSystemInstance ssi = ((SubSystemInstance) _instance);
+          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
+          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+          String _path = this._roomExtensions.getPath(_subSystemClass_1);
+          final String path = (_generationTargetPath + _path);
+          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
+          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+          String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
+          final String infopath = (_generationInfoPath + _path_1);
+          final String file = this._javaExtensions.getJavaFileName(nr, ssi);
+          this.checkDataPorts(ssi);
+          HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
+          final HashSet<PhysicalThread> usedThreads = _hashSet;
+          NodeClass _type = nr.getType();
+          EList<PhysicalThread> _threads = _type.getThreads();
+          for (final PhysicalThread thread : _threads) {
+            {
+              EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+              final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
+                  public Boolean apply(final ActorInstance ai) {
+                    PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
+                    boolean _equals = Objects.equal(_physicalThread, thread);
+                    return Boolean.valueOf(_equals);
+                  }
+                };
+              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
+              boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
+              boolean _not = (!_isEmpty);
+              if (_not) {
+                usedThreads.add(thread);
+              }
+            }
+          }
+          CharSequence _generate = this.generate(root, ssi, usedThreads);
+          this.fileIO.generateFile("generating Node implementation", path, infopath, file, _generate);
+          boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
+          if (_hasVariableService) {
+            this.varService.doGenerate(root, ssi);
+          }
         }
       }
     }
   }
   
-  public CharSequence generate(final Root root, final SubSystemInstance comp) {
+  public CharSequence generate(final Root root, final SubSystemInstance comp, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final SubSystemClass cc = comp.getSubSystemClass();
       final EList<RoomModel> models = root.getReferencedModels(cc);
+      final NodeRef nr = ETMapUtil.getNodeRef(comp);
+      final String clsname = this._javaExtensions.getJavaClassName(nr, comp);
+      NodeClass _type = nr.getType();
+      EList<PhysicalThread> _threads = _type.getThreads();
+      final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
+          public Boolean apply(final PhysicalThread t) {
+            boolean _contains = usedThreads.contains(t);
+            return Boolean.valueOf(_contains);
+          }
+        };
+      final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(cc);
@@ -113,6 +159,8 @@ public class SubSystemClassGen {
       _builder.append("import org.eclipse.etrice.runtime.java.config.IVariableService;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.messaging.IMessageService;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.MessageService;");
       _builder.newLine();
@@ -142,27 +190,22 @@ public class SubSystemClassGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("public class ");
-      String _name_1 = cc.getName();
-      _builder.append(_name_1, "");
+      _builder.append(clsname, "");
       _builder.append(" extends SubSystemClassBase {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public final int THREAD__DEFAULT = 0;");
-      _builder.newLine();
       {
-        EList<LogicalThread> _threads = cc.getThreads();
-        Iterable<Indexed<LogicalThread>> _indexed = Indexed.<LogicalThread>indexed(_threads);
-        for(final Indexed<LogicalThread> thread : _indexed) {
+        Iterable<Indexed<PhysicalThread>> _indexed = Indexed.<PhysicalThread>indexed(threads);
+        for(final Indexed<PhysicalThread> thread : _indexed) {
           _builder.append("\t");
           _builder.append("public final int ");
-          LogicalThread _value = thread.getValue();
+          PhysicalThread _value = thread.getValue();
           String _threadId = this.getThreadId(_value);
           _builder.append(_threadId, "	");
           _builder.append(" = ");
-          int _index1 = thread.getIndex1();
-          _builder.append(_index1, "	");
+          int _index0 = thread.getIndex0();
+          _builder.append(_index0, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -176,8 +219,7 @@ public class SubSystemClassGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_2 = cc.getName();
-      _builder.append(_name_2, "	");
+      _builder.append(clsname, "	");
       _builder.append("(IRTObject parent, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -208,20 +250,57 @@ public class SubSystemClassGen {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, THREAD__DEFAULT, \"MessageService_Main\"));");
+      _builder.append("IMessageService msgService;");
       _builder.newLine();
       {
-        EList<LogicalThread> _threads_1 = cc.getThreads();
-        for(final LogicalThread thread_1 : _threads_1) {
+        for(final PhysicalThread thread_1 : threads) {
+          {
+            boolean _or = false;
+            ExecMode _execmode = thread_1.getExecmode();
+            boolean _equals = Objects.equal(_execmode, ExecMode.POLLED);
+            if (_equals) {
+              _or = true;
+            } else {
+              ExecMode _execmode_1 = thread_1.getExecmode();
+              boolean _equals_1 = Objects.equal(_execmode_1, ExecMode.MIXED);
+              _or = (_equals || _equals_1);
+            }
+            if (_or) {
+              _builder.append("\t\t");
+              _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
+              ExecMode _execmode_2 = thread_1.getExecmode();
+              String _name_1 = _execmode_2.name();
+              _builder.append(_name_1, "		");
+              _builder.append(", ");
+              int _time = thread_1.getTime();
+              _builder.append(_time, "		");
+              _builder.append(", 0, ");
+              String _threadId_1 = this.getThreadId(thread_1);
+              _builder.append(_threadId_1, "		");
+              _builder.append(", \"MessageService_");
+              String _name_2 = thread_1.getName();
+              _builder.append(_name_2, "		");
+              _builder.append("\" /*, thread_prio */);");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
+              ExecMode _execmode_3 = thread_1.getExecmode();
+              String _name_3 = _execmode_3.name();
+              _builder.append(_name_3, "		");
+              _builder.append(", 0, ");
+              String _threadId_2 = this.getThreadId(thread_1);
+              _builder.append(_threadId_2, "		");
+              _builder.append(", \"MessageService_");
+              String _name_4 = thread_1.getName();
+              _builder.append(_name_4, "		");
+              _builder.append("\" /*, thread_prio */);");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t\t");
-          _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(new MessageService(this, 0, ");
-          String _threadId_1 = this.getThreadId(thread_1);
-          _builder.append(_threadId_1, "		");
-          _builder.append(", \"MessageService_");
-          String _name_3 = thread_1.getName();
-          _builder.append(_name_3, "		");
-          _builder.append("\" /*, thread_prio */));");
-          _builder.newLineIfNotEmpty();
+          _builder.append("RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(msgService);");
+          _builder.newLine();
         }
       }
       _builder.append("\t");
@@ -243,34 +322,19 @@ public class SubSystemClassGen {
       _builder.append("\t\t");
       _builder.append("// thread mappings");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("msgSvcCtrl.addPathToThread(\"");
-      String _path = comp.getPath();
-      _builder.append(_path, "		");
-      _builder.append("\", THREAD__DEFAULT);");
-      _builder.newLineIfNotEmpty();
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
-          {
-            int _threadId_2 = ai.getThreadId();
-            boolean _notEquals = (_threadId_2 != 0);
-            if (_notEquals) {
-              _builder.append("\t\t");
-              _builder.append("msgSvcCtrl.addPathToThread(\"");
-              String _path_1 = ai.getPath();
-              _builder.append(_path_1, "		");
-              _builder.append("\", ");
-              EList<LogicalThread> _threads_2 = cc.getThreads();
-              int _threadId_3 = ai.getThreadId();
-              int _minus = (_threadId_3 - 1);
-              LogicalThread _get = _threads_2.get(_minus);
-              String _threadId_4 = this.getThreadId(_get);
-              _builder.append(_threadId_4, "		");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t\t");
+          _builder.append("msgSvcCtrl.addPathToThread(\"");
+          String _path = ai.getPath();
+          _builder.append(_path, "		");
+          _builder.append("\", ");
+          PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
+          String _threadId_3 = this.getThreadId(_physicalThread);
+          _builder.append(_threadId_3, "		");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t\t");
@@ -291,8 +355,8 @@ public class SubSystemClassGen {
                 if (_greaterThan) {
                   _builder.append("\t\t");
                   _builder.append("msgSvcCtrl.addPathToPeers(\"");
-                  String _path_2 = pi.getPath();
-                  _builder.append(_path_2, "		");
+                  String _path_1 = pi.getPath();
+                  _builder.append(_path_1, "		");
                   _builder.append("\", ");
                   {
                     EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
@@ -304,8 +368,8 @@ public class SubSystemClassGen {
                         _builder.appendImmediate(",", "		");
                       }
                       _builder.append("\"");
-                      String _path_3 = peer.getPath();
-                      _builder.append(_path_3, "		");
+                      String _path_2 = peer.getPath();
+                      _builder.append(_path_2, "		");
                       _builder.append("\"");
                     }
                   }
@@ -337,23 +401,23 @@ public class SubSystemClassGen {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("new ");
-              ActorClass _type = sub.getType();
-              String _name_4 = _type.getName();
-              _builder.append(_name_4, "			");
-              _builder.append("(this, \"");
-              String _name_5 = sub.getName();
+              ActorClass _type_1 = sub.getType();
+              String _name_5 = _type_1.getName();
               _builder.append(_name_5, "			");
+              _builder.append("(this, \"");
+              String _name_6 = sub.getName();
+              _builder.append(_name_6, "			");
               _builder.append("_\"+i); ");
               _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t\t");
               _builder.append("new ");
-              ActorClass _type_1 = sub.getType();
-              String _name_6 = _type_1.getName();
-              _builder.append(_name_6, "		");
-              _builder.append("(this, \"");
-              String _name_7 = sub.getName();
+              ActorClass _type_2 = sub.getType();
+              String _name_7 = _type_2.getName();
               _builder.append(_name_7, "		");
+              _builder.append("(this, \"");
+              String _name_8 = sub.getName();
+              _builder.append(_name_8, "		");
               _builder.append("\"); ");
               _builder.newLineIfNotEmpty();
             }
@@ -381,15 +445,15 @@ public class SubSystemClassGen {
               _builder.append("\t\t");
               _builder.append("\t");
               ActorClass _actorClass = ai_2.getActorClass();
-              String _name_8 = _actorClass.getName();
-              _builder.append(_name_8, "			");
+              String _name_9 = _actorClass.getName();
+              _builder.append(_name_9, "			");
               _builder.append(" inst = (");
               ActorClass _actorClass_1 = ai_2.getActorClass();
-              String _name_9 = _actorClass_1.getName();
-              _builder.append(_name_9, "			");
+              String _name_10 = _actorClass_1.getName();
+              _builder.append(_name_10, "			");
               _builder.append(") getObject(\"");
-              String _path_4 = ai_2.getPath();
-              _builder.append(_path_4, "			");
+              String _path_3 = ai_2.getPath();
+              _builder.append(_path_3, "			");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -427,8 +491,7 @@ public class SubSystemClassGen {
         if (_hasVariableService) {
           _builder.append("\t\t");
           _builder.append("variableService = new ");
-          String _name_10 = cc.getName();
-          _builder.append(_name_10, "		");
+          _builder.append(clsname, "		");
           _builder.append("VariableService(this);");
           _builder.newLineIfNotEmpty();
         }
@@ -478,7 +541,7 @@ public class SubSystemClassGen {
     return _xblockexpression;
   }
   
-  private String getThreadId(final LogicalThread thread) {
+  private String getThreadId(final PhysicalThread thread) {
     String _name = thread.getName();
     String _upperCase = _name.toUpperCase();
     String _plus = ("THREAD_" + _upperCase);
