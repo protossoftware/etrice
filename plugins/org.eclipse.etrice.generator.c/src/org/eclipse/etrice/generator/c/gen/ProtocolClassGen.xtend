@@ -92,10 +92,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 «««			«portClass(pc, false)»
 «««			«portClass(pc, true)»
 
-		/*--------------------- debug helpers */
-		
-		/* get message string for message id */
-		const char* «pc.name»_getMessageString(int msg_id);
+		«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+			/*--------------------- debug helpers */
+			
+			/* get message string for message id */
+			const char* «pc.name»_getMessageString(int msg_id);
+		«ENDIF»
 
 		«pc.userCode(2)»
 		
@@ -122,8 +124,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«portClassSource(pc, false)»
 			«portClassSource(pc, true)»
 			
-			/*--------------------- debug helpers */
-			«generateDebugHelpersImplementation(root, pc)»
+			«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				/*--------------------- debug helpers */
+				«generateDebugHelpersImplementation(root, pc)»
+			«ENDIF»
 		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
 			«pc.genDataDrivenPortSources»
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»

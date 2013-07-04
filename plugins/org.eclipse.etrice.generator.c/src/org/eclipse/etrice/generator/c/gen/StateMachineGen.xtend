@@ -61,9 +61,11 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	override protected genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			/* state names */
-			static char* stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
-			«ENDFOR»};
+			«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				/* state names */
+				static char* stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
+				«ENDFOR»};
+			«ENDIF»
 			
 			«langExt.accessLevelPrivate»void setState(«ac.name»* self, «stateType» new_state) {
 				self->state = new_state;

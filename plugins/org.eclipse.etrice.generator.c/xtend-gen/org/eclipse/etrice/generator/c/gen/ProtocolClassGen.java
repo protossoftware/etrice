@@ -175,16 +175,21 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
     }
     _builder.newLine();
-    _builder.append("/*--------------------- debug helpers */");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("/* get message string for message id */");
-    _builder.newLine();
-    _builder.append("const char* ");
-    String _name_1 = pc.getName();
-    _builder.append(_name_1, "");
-    _builder.append("_getMessageString(int msg_id);");
-    _builder.newLineIfNotEmpty();
+    {
+      boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+      if (_generateMSCInstrumentation) {
+        _builder.append("/*--------------------- debug helpers */");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("/* get message string for message id */");
+        _builder.newLine();
+        _builder.append("const char* ");
+        String _name_1 = pc.getName();
+        _builder.append(_name_1, "");
+        _builder.append("_getMessageString(int msg_id);");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.newLine();
     CharSequence _userCode_1 = this._procedureHelpers.userCode(pc, 2);
     _builder.append(_userCode_1, "");
@@ -244,11 +249,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _builder.append(_portClassSource_1, "");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
-        _builder.append("/*--------------------- debug helpers */");
-        _builder.newLine();
-        CharSequence _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
-        _builder.append(_generateDebugHelpersImplementation, "");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+          if (_generateMSCInstrumentation) {
+            _builder.append("/*--------------------- debug helpers */");
+            _builder.newLine();
+            CharSequence _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
+            _builder.append(_generateDebugHelpersImplementation, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       } else {
         CommunicationType _commType_1 = pc.getCommType();
         boolean _equals_1 = Objects.equal(_commType_1, CommunicationType.DATA_DRIVEN);
