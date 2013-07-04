@@ -46,6 +46,12 @@ public class CGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfig
 		if (configuration.getAttribute(CGeneratorConfigTab.DEBUG, false)) {
 			argString.append(" "+Main.OPTION_DEBUG);
 		}
+		if (configuration.getAttribute(CGeneratorConfigTab.MSC, false)) {
+			argString.append(" "+Main.OPTION_MSC);
+		}
+		if (configuration.getAttribute(CGeneratorConfigTab.VERBOSE, false)) {
+			argString.append(" "+Main.OPTION_VERBOSE_RT);
+		}
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {

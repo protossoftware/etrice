@@ -19,6 +19,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IncrementalGenerationFileIo;
 import org.eclipse.etrice.generator.c.gen.Validator;
@@ -78,6 +79,8 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
 	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
 	public static final String OPTION_DEBUG = "-debug";
+	public static final String OPTION_MSC = "-msc_instr";
+	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 
 	/**
 	 * print usage message to stderr
@@ -176,6 +179,12 @@ public class Main extends AbstractGenerator {
 			}
 			else if (args[i].equals(OPTION_NOEXIT)) {
 				setTerminateOnError(false);
+			}
+			else if (args[i].equals(OPTION_MSC)) {
+				GlobalGeneratorSettings.setGenerateMSCInstrumentation(true);
+			}
+			else if (args[i].equals(OPTION_VERBOSE_RT)) {
+				GlobalGeneratorSettings.setGenerateWithVerboseOutput(true);
 			}
 			else if (args[i].equals(OPTION_DEBUG)) {
 				debug = true;

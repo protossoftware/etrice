@@ -12,30 +12,12 @@
 
 package org.eclipse.etrice.generator.java.gen;
 
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
+
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class GlobalSettings {
-
-	private static boolean generateMSCInstrumentation = false;
-	private static boolean generateWithVerboseOutput = false;
-
-	public static boolean generateMSCInstrumentation() {
-		return generateMSCInstrumentation;
-	}
-
-	public static void setGenerateMSCInstrumentation(
-			boolean generateMSCInstrumentation) {
-		GlobalSettings.generateMSCInstrumentation = generateMSCInstrumentation;
-	}
-
-	public static boolean generateWithVerboseOutput() {
-		return generateWithVerboseOutput;
-	}
-
-	public static void setGenerateWithVerboseOutput(boolean generateWithVerboseOutput) {
-		GlobalSettings.generateWithVerboseOutput = generateWithVerboseOutput;
-	}
+public class GlobalSettings extends GlobalGeneratorSettings {
 	
 }

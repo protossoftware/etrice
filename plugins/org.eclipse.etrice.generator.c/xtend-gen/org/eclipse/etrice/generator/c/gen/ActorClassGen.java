@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
@@ -163,6 +164,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
       ActorCommunicationType _commType_1 = ac.getCommType();
       final boolean async = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+      boolean _or = false;
       boolean _and = false;
       boolean _and_1 = false;
       boolean _and_2 = false;
@@ -187,7 +189,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
         _and = (_and_1 && _isEmpty_3);
       }
-      final boolean hasConstData = (!_and);
+      boolean _not = (!_and);
+      if (_not) {
+        _or = true;
+      } else {
+        boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+        _or = (_not || _generateMSCInstrumentation);
+      }
+      final boolean hasConstData = _or;
       boolean _and_3 = false;
       boolean _and_4 = false;
       boolean _and_5 = false;
@@ -209,8 +218,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (!_and_4) {
         _and_3 = false;
       } else {
-        boolean _not = (!hasConstData);
-        _and_3 = (_and_4 && _not);
+        boolean _not_1 = (!hasConstData);
+        _and_3 = (_and_4 && _not_1);
       }
       final boolean hasVarData = (!_and_3);
       StringConcatenation _builder = new StringConcatenation();
@@ -284,6 +293,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_name_3, "");
           _builder.append("_const {");
           _builder.newLineIfNotEmpty();
+          {
+            boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+            if (_generateMSCInstrumentation_1) {
+              _builder.append("\t");
+              _builder.append("const char* instName;");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("/* simple ports */");
           _builder.newLine();
@@ -401,8 +420,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
         boolean _isEmpty_7 = RoomHelpers.isEmpty(_stateMachine_1);
-        boolean _not_1 = (!_isEmpty_7);
-        if (_not_1) {
+        boolean _not_2 = (!_isEmpty_7);
+        if (_not_2) {
           _builder.newLine();
           CharSequence _genHeaderConstants = this._stateMachineGen.genHeaderConstants(xpac);
           _builder.append(_genHeaderConstants, "");
@@ -464,8 +483,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           {
             StateGraph _stateMachine_2 = xpac.getStateMachine();
             boolean _isEmpty_8 = RoomHelpers.isEmpty(_stateMachine_2);
-            boolean _not_2 = (!_isEmpty_8);
-            if (_not_2) {
+            boolean _not_3 = (!_isEmpty_8);
+            if (_not_3) {
               _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");
@@ -518,13 +537,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _or = false;
+        boolean _or_1 = false;
         if (dataDriven) {
-          _or = true;
+          _or_1 = true;
         } else {
-          _or = (dataDriven || async);
+          _or_1 = (dataDriven || async);
         }
-        if (_or) {
+        if (_or_1) {
           _builder.append("void ");
           String _name_17 = ac.getName();
           _builder.append(_name_17, "");

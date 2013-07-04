@@ -1,42 +1,62 @@
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Actor1 >-- Actor2 sendData
-Sender >>> SendingData
-Actor1 >-- Actor2 receivedData
-Receiver >>> WaitingForData
-Sender >>> Done
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >-- /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/sender >>> SendingData
+/LogSys1/subSysRef1/actorRef1/sender --> /LogSys1/subSysRef1/actorRef1/receiver sendData
+/LogSys1/subSysRef1/actorRef1/receiver >-- /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/receiver >>> WaitingForData
+/LogSys1/subSysRef1/actorRef1/receiver --> /LogSys1/subSysRef1/actorRef1/sender receivedData
+/LogSys1/subSysRef1/actorRef1/sender >>> Done

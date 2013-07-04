@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -253,7 +254,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, "«message.name»", self->peerInstName )
+							«ENDIF»
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
@@ -269,7 +272,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
 							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(((etPort*)&((etReplPort*)self)->ports[i])->myInstName, "«message.name»", ((etPort*)&((etReplPort*)self)->ports[i])->peerInstName )
+							«ENDIF»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -282,7 +287,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						if (0<=idx && idx<((etReplPort*)self)->size) {
 							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
-							ET_MSC_LOGGER_ASYNC_OUT("Actor1", "«message.name»", "Actor2" )
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(((etPort*)&((etReplPort*)self)->ports[idx])->myInstName, "«message.name»", ((etPort*)&((etReplPort*)self)->ports[idx])->peerInstName )
+							«ENDIF»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»

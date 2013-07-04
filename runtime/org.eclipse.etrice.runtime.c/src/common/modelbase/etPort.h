@@ -19,6 +19,7 @@
 #include "messaging/etMessage.h"
 #include "messaging/etMessageReceiver.h"
 #include "messaging/etMessageService.h"
+#include "etRuntimeConfig.h"
 
 typedef struct {
 	void* varData;
@@ -26,6 +27,10 @@ typedef struct {
 	etAddressId peerAddress;
 	etAddressId localId;
 
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+		const char* myInstName;
+		const char* peerInstName;
+	#endif
 	#ifdef etDEBUG
 	etAddressId address;
 	/* thread ID from msg service: msgService->threadId */
@@ -39,6 +44,10 @@ typedef struct {
 	etAddressId localId;
 	etAddressId index;
 
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+		const char* myInstName;
+		const char* peerInstName;
+	#endif
 	#ifdef etDEBUG
 	etAddressId address;
 	/* thread ID from msg service: msgService->threadId */
