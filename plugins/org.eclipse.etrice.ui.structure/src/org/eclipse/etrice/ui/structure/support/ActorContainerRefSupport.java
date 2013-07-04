@@ -105,7 +105,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 public class ActorContainerRefSupport {
 	
 	private static final int LINE_WIDTH = 1;
-	public static final int DEFAULT_SIZE_X = 180;
+	public static final int DEFAULT_SIZE_X = 120;
 	public static final int DEFAULT_SIZE_Y = 80;
 	public static final int MIN_SIZE_X = 100;
 	public static final int MIN_SIZE_Y = 60;
