@@ -14,9 +14,7 @@
 RoomModel trafficlight.example {
 
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/models/Types.room"
-
 	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/models/TimingService.room"
-
 	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
 
 	LogicalSystem LSTraffic {

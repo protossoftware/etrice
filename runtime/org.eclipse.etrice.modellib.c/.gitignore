@@ -2,7 +2,12 @@ PosixDebug
 PosixRelease
 MinGWDebug
 MinGWRelease
-src-gen-info
+
+src-gen/*
+!src-gen/readme.txt
+src-gen-info/*
+!src-gen-info/readme.txt
+
 *.aux
 *.lof
 *.gz

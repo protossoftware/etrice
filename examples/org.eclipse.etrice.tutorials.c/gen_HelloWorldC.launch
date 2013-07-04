@@ -5,9 +5,9 @@
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="false"/>
-<booleanAttribute key="MSC" value="false"/>
+<booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.c.reference/model/MSCgen/MSCgen.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/HelloWorld/HelloWorld.etmap}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

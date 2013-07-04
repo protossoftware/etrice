@@ -1,14 +1,23 @@
-RoomModel RoomModel1 {
-
+RoomModel HelloWorld_Model {
 	LogicalSystem LogSys1 {
-		SubSystemRef SubSysRef1: SubSysClass1
+		SubSystemRef subSysRef1:SubSysClass1 
 	}
-
 	SubSystemClass SubSysClass1 {
-		ActorRef ActorRef1: ActorClass1
+		ActorRef actorRef1:HelloWorldTop 
 		LogicalThread defaultThread
 	}
-
-	ActorClass ActorClass1 { }
-
+	ActorClass HelloWorldTop {
+		Structure { }
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"printf(\"Hello World\");"
+					}
+				}
+				State state0
+			}
+		}
+	}
+	
 }
