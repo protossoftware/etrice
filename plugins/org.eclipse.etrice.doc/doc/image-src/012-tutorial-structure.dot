@@ -1,0 +1,17 @@
+digraph TutorialStructure {
+
+	node [style=filled color=chocolate3]
+	SetupForJava[label="Setting up the workspace for Java" ];
+	HelloWorldForJava[label="Hello World for Java"];
+	SetupForC[label="Setting up the workspace for C" ];
+	HelloWorldForC[label="Hello World for C"];
+	PingPong [label="Ping Pong"];
+	TrafficLight [label="Traffic Light"];
+
+	SetupForJava -> HelloWorldForJava;
+	SetupForC -> HelloWorldForC;
+	HelloWorldForJava -> PingPong;
+	HelloWorldForC -> PingPong;
+	PingPong -> TrafficLight
+
+}

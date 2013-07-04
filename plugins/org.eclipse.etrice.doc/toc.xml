@@ -9,26 +9,26 @@
              label="Working with the tutorials"/>
       <topic href="html/etrice-docse4.html#x8-270002.2"
              label="Setting up the Workspace for Java Projects"/>
-      <topic href="html/etrice-docse5.html#x9-280002.3"
+   </topic>
+   <topic href="html/etrice-docch3.html#x9-280003"
+          label="Setting up the Workspace for C Projects">
+      <topic href="html/etrice-docse5.html#x10-290003.1"
+             label="Testing the environment"/>
+      <topic href="html/etrice-docse6.html#x11-300003.2"
+             label="Building the C runtime system"/>
+      <topic href="html/etrice-docse7.html#x12-310003.3"
              label="Tutorial HelloWorld for Java"/>
-      <topic href="html/etrice-docse6.html#x10-350002.4"
+      <topic href="html/etrice-docse8.html#x13-380003.4"
              label="Tutorial Blinky (Java)"/>
-      <topic href="html/etrice-docse7.html#x11-440002.5"
+      <topic href="html/etrice-docse9.html#x14-470003.5"
              label="Tutorial Sending Data (Java)"/>
    </topic>
-   <topic href="html/etrice-docch3.html#x12-560003"
+   <topic href="html/etrice-docch4.html#x15-590004"
           label="Tutorial Pedestrian Lights (Java)">
-      <topic href="html/etrice-docse8.html#x13-570003.1" label="Scope"/>
-      <topic href="html/etrice-docse9.html#x14-580003.2" label="Setup the model"/>
-      <topic href="html/etrice-docse10.html#x15-590003.3"
+      <topic href="html/etrice-docse10.html#x16-600004.1" label="Scope"/>
+      <topic href="html/etrice-docse11.html#x17-610004.2" label="Setup the model"/>
+      <topic href="html/etrice-docse12.html#x18-620004.3"
              label="Why does it work and why is it safe?"/>
-   </topic>
-   <topic href="html/etrice-docch4.html#x16-600004"
-          label="Setting up the Workspace for C Projects">
-      <topic href="html/etrice-docse11.html#x17-610004.1"
-             label="Testing the environment"/>
-      <topic href="html/etrice-docse12.html#x18-620004.2"
-             label="Building the C runtime system"/>
    </topic>
    <topic href="html/etrice-docch5.html#x19-630005"
           label="Tutorial HelloWorld for C">

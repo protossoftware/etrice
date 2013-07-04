@@ -4,400 +4,250 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Tutorial Sending Data (Java)</title> 
+<head><title>HelloWorld for C</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-21 12:20:00" /> 
+<meta name="date" content="2013-07-04 15:04:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse7.html">tail</a>] [<a 
 href="etrice-docch2.html#etrice-docse7.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">2.5   </span> <a 
- id="x11-440002.5"></a>Tutorial Sending Data (Java)</h3>
+ id="x11-380002.5"></a>HelloWorld for C</h3>
 <!--l. 3--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.1   </span> <a 
- id="x11-450002.5.1"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors
-(MrPing and MrPong). MrPong will simply loop back every data it received. MrPing will send data and verify
-the result.
-</p><!--l. 9--><p class="noindent" >You will perform the following steps:
-</p><!--l. 11--><p class="noindent" >
+ id="x11-390002.5.1"></a>Scope</h4>
+<!--l. 5--><p class="noindent" >In this tutorial you will learn how to create a model for C from scratch. There are some more steps to do in C
+compared to Java. The goal is to get familiar with the additional steps. The Java tutorial is a prerequisite for
+the following explanations. You will perform the following steps:
+</p><!--l. 10--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x11-45002x1">create a new model from scratch
+  class="enumerate" id="x11-39002x1">create a new model from scratch for C
      </li>
      <li 
-  class="enumerate" id="x11-45004x2">create a data class
+  class="enumerate" id="x11-39004x2">create structure and behavior similar to Java
      </li>
      <li 
-  class="enumerate" id="x11-45006x3">define a protocol with attached data
+  class="enumerate" id="x11-39006x3">create a launch configuration for the C code generator
      </li>
      <li 
-  class="enumerate" id="x11-45008x4">create an actor structure
+  class="enumerate" id="x11-39008x4">setup the C environment
      </li>
      <li 
-  class="enumerate" id="x11-45010x5">create two simple state machines
+  class="enumerate" id="x11-39010x5">generate the source code
      </li>
      <li 
-  class="enumerate" id="x11-45012x6">build and run the model</li></ol>
-<!--l. 20--><p class="noindent" >
+  class="enumerate" id="x11-39012x6">run the model</li></ol>
+<!--l. 19--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
+class="ec-lmsso-10">Setting up the Workspace for C</span>
+<span 
+class="ec-lmsso-10">Projects</span>.
+</p><!--l. 23--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.2   </span> <a 
- id="x11-460002.5.2"></a>Create a new model from scratch</h4>
-<!--l. 22--><p class="noindent" >Remember exercise <span 
-class="ec-lmsso-10">HelloWorld</span>. Create a new eTrice project and name it <span 
-class="ec-lmsso-10">SendingData</span>. Open the
+ id="x11-400002.5.2"></a>Create a new model from scratch</h4>
+<!--l. 25--><p class="noindent" >Before you can create a new C-model, you have to create a new C project as described in <span 
+class="ec-lmsso-10">Setting up the</span>
 <span 
-class="ec-lmsso-10">SendingData.room </span>file and copy the following code into the file or use content assist to create the
-model.
+class="ec-lmsso-10">Workspace for C Projects</span>. Remember: </p>
+     <ul class="itemize1">
+     <li class="itemize">select the <span 
+class="ec-lmsso-10">C/C++ </span>perspective
+     </li>
+     <li class="itemize">From the main menue select <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project</span>
                                                                                  
                                                                                  
-</p>
-<div class="verbatim" id="verbatim-9">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 39--><p class="nopar" >
-</p><!--l. 41--><p class="noindent" >
+     </li>
+     <li class="itemize">Name the project <span 
+class="ec-lmsso-10">HelloWorldC</span>
+     </li>
+     <li class="itemize">Project type is <span 
+class="ec-lmsso-10">Executable / Empty C Project</span>
+     </li>
+     <li class="itemize">Toolchain is <span 
+class="ec-lmsso-10">MinGW</span></li></ul>
+<!--l. 36--><p class="noindent" >The workspace should look like this:
+</p><!--l. 38--><p class="noindent" ><img 
+src="images/016-HelloWorldC01.png" alt="PIC"  
+ />
+</p><!--l. 41--><p class="noindent" >The next step is to add the model folder: Right click on the new project. Select <span 
+class="ec-lmsso-10">New-&#x003E;Folder </span>and name it
+<span 
+class="ec-lmsso-10">model</span>.
+</p><!--l. 44--><p class="noindent" ><img 
+src="images/016-HelloWorldC02.png" alt="PIC"  
+ />
+</p><!--l. 47--><p class="noindent" >Add the model file to the folder. Right click on the new folder. Select <span 
+class="ec-lmsso-10">New-&#x003E;file </span>and name it
+<span 
+class="ec-lmsso-10">HelloWorldC.room</span>.
+</p><!--l. 50--><p class="noindent" ><img 
+src="images/016-HelloWorldC03.png" alt="PIC"  
+ />
+</p><!--l. 53--><p class="noindent" >Due to the file ending <span 
+class="ec-lmsso-10">.room</span>, the tool will ask you to add the Xtext nature. Answer with <span 
+class="ec-lmsso-10">Yes</span>.
+</p><!--l. 56--><p class="noindent" ><img 
+src="images/016-HelloWorldC04.png" alt="PIC"  
+ />
+</p><!--l. 59--><p class="noindent" >The workspace should look like this:
+</p><!--l. 61--><p class="noindent" ><img 
+src="images/016-HelloWorldC05.png" alt="PIC"  
+ />
+</p><!--l. 66--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.3   </span> <a 
- id="x11-470002.5.3"></a>Add a data class</h4>
-<!--l. 43--><p class="noindent" >Position the cursor outside any class definition and right click the mouse within the editor window. From the
-context menu select <span 
-class="ec-lmsso-10">Content Assist </span>(or Ctrl+Space).
-</p><!--l. 46--><p class="noindent" ><img 
-src="images/025-SendingData01.png" alt="PIC"  
- />
-</p><!--l. 49--><p class="noindent" >Select <span 
-class="ec-lmsso-10">DataClass - data class skeleton </span>and name it <span 
-class="ec-lmsso-10">DemoData</span>. Remove the operations and add the following
-Attributes:
-                                                                                 
-                                                                                 
+ id="x11-410002.5.3"></a>Create the HelloWorld model</h4>
+<!--l. 68--><p class="noindent" >Once the model file is created and the Xtext nature is added, you can create the model as you did it for Java.
+Creating the model is not the focus of this tutorial. Therefore copy and paste the following code into your
+model file. Optionally you can open and layout the diagrams. Recognize the C specific parts:
 </p>
-<div class="verbatim" id="verbatim-10">
-DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
+     <ul class="itemize1">
+     <li class="itemize">The action code contains C instead of Java. Later versions will contain a common action language,
+     but for the moment the action language is target specific.
+     </li>
+     <li class="itemize">The application must be shutdown on model level (see also <span 
+class="ec-lmsso-10">etRuntimeConfig.h</span>).</li></ul>
+                                                                                 
+                                                                                 
+<div class="verbatim" id="verbatim-2">
+RoomModel&#x00A0;HelloWorldCModel&#x00A0;{
+&#x00A0;<br />import&#x00A0;room.basic.types.*&#x00A0;from&#x00A0;"../../org.eclipse.etrice.modellib.c/model/Types.room"
+&#x00A0;<br />SubSystemClass&#x00A0;HelloWorldCSubSysClass&#x00A0;{
+&#x00A0;<br />ActorRef&#x00A0;HelloETriceTopRef:AHelloWorldCTop
+&#x00A0;<br />}
+&#x00A0;<br />ActorClass&#x00A0;AHelloWorldCTop&#x00A0;{
+&#x00A0;<br />Structure&#x00A0;{&#x00A0;}
+&#x00A0;<br />Behavior&#x00A0;{
+&#x00A0;<br />StateMachine&#x00A0;{
+&#x00A0;<br />Transition&#x00A0;init:&#x00A0;initial&#x00A0;-&#x003E;&#x00A0;state0&#x00A0;{&#x00A0;}
+&#x00A0;<br />State&#x00A0;state0&#x00A0;{
+&#x00A0;<br />entry&#x00A0;{
+&#x00A0;<br />"printf(\"HelloWorldC&#x00A0;!\\n\");"
+&#x00A0;<br />"SubSysClass_shutdown();"
+&#x00A0;<br />"\t\t\t\t\t\t"
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
+&#x00A0;<br />}
 &#x00A0;<br />}
 </div>
-<!--l. 59--><p class="nopar" >
-</p><!--l. 61--><p class="noindent" >Save the model and visit the outline view. Note that the outline view contains all data elements as defined in
-the model.
-</p><!--l. 64--><p class="noindent" >
+<!--l. 101--><p class="nopar" >
+</p><!--l. 103--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.4   </span> <a 
- id="x11-480002.5.4"></a>Create a new protocol</h4>
-<!--l. 66--><p class="noindent" >With the help of <span 
-class="ec-lmsso-10">Content Assist </span>create a <span 
-class="ec-lmsso-10">ProtocolClass </span>and name it <span 
-class="ec-lmsso-10">PingPongProtocol</span>. Create the following
-messages:
+ id="x11-420002.5.4"></a>Create a launch configuration to start the C code generator</h4>
+<!--l. 105--><p class="noindent" >Other than in Java a launch configuration for the C code generator must be created.
+</p><!--l. 107--><p class="noindent" >From the <span 
+class="ec-lmsso-10">Run </span>menu select <span 
+class="ec-lmsso-10">Run Configurations</span>
+</p><!--l. 109--><p class="noindent" ><img 
+src="images/016-HelloWorldC06.png" alt="PIC"  
+ />
+</p><!--l. 112--><p class="noindent" >Within the dialog select <span 
+class="ec-lmsso-10">e</span><span 
+class="ec-lmsso-10">Trice</span> <span 
+class="ec-lmsso-10">C Generator </span>and click the <span 
+class="ec-lmsso-10">New </span>button to create a new launch
+configuration.
+</p><!--l. 115--><p class="noindent" ><img 
+src="images/016-HelloWorldC07.png" alt="PIC"  
+ />
+</p><!--l. 118--><p class="noindent" >A new configuration should be created. Name it <span 
+class="ec-lmsso-10">gen_HelloWorldC </span>and add the model via one of the <span 
+class="ec-lmsso-10">add</span>
+buttons.
+</p><!--l. 121--><p class="noindent" ><img 
+src="images/016-HelloWorldC08.png" alt="PIC"  
+ />
+</p><!--l. 124--><p class="noindent" >In the <span 
+class="ec-lmsso-10">Refresh </span>tab select <span 
+class="ec-lmsso-10">The entire workspace</span>
+</p><!--l. 126--><p class="noindent" ><img 
+src="images/016-HelloWorldC09.png" alt="PIC"  
+ />
+</p><!--l. 129--><p class="noindent" >In the <span 
+class="ec-lmsso-10">Common </span>tab select <span 
+class="ec-lmsso-10">Shared file </span>and add the <span 
+class="ec-lmsso-10">HelloWorldC </span>project via the <span 
+class="ec-lmsso-10">Browse </span>button.
+</p><!--l. 132--><p class="noindent" ><img 
+src="images/016-HelloWorldC10.png" alt="PIC"  
+ />
+</p><!--l. 135--><p class="noindent" >Apply your changes. The new configuration should now exist in your workspace.
+</p><!--l. 137--><p class="noindent" ><img 
+src="images/016-HelloWorldC11.png" alt="PIC"  
+ />
                                                                                  
                                                                                  
-</p>
-<div class="verbatim" id="verbatim-11">
-ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pingSimple(data:int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;outgoing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pong(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pongSimple(data:int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 80--><p class="nopar" >
-</p><!--l. 82--><p class="noindent" >
+</p><!--l. 141--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.5   </span> <a 
- id="x11-490002.5.5"></a>Create MrPing and MrPong Actors</h4>
-<!--l. 84--><p class="noindent" >With the help of <span 
-class="ec-lmsso-10">Content Assist </span>create two new actor classes and name them <span 
-class="ec-lmsso-10">MrPing </span>and <span 
-class="ec-lmsso-10">MrPong</span>. The
-resulting model should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-12">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:&#x00A0;SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:&#x00A0;SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pingSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;outgoing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pong(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pongSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPong&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-&#x00A0;<br />
-</div>
-<!--l. 131--><p class="nopar" >
-</p><!--l. 133--><p class="noindent" >The outline view should look like this:
-</p><!--l. 135--><p class="noindent" ><img 
-src="images/025-SendingData03.png" alt="PIC"  
+ id="x11-430002.5.5"></a>Generate the code</h4>
+<!--l. 143--><p class="noindent" >Now you can generate the code as you know it from Java. Right click on the launch configuration and run it as
+<span 
+class="ec-lmsso-10">gen_HelloWorldC</span>.
+</p><!--l. 146--><p class="noindent" ><img 
+src="images/016-HelloWorldC12.png" alt="PIC"  
  />
-                                                                                 
-                                                                                 
-</p><!--l. 138--><p class="noindent" >
+</p><!--l. 149--><p class="noindent" >The code should be generated.
+</p><!--l. 151--><p class="noindent" ><img 
+src="images/016-HelloWorldC13.png" alt="PIC"  
+ />
+</p><!--l. 154--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.6   </span> <a 
- id="x11-500002.5.6"></a>Define Actor Structure and Behavior</h4>
-<!--l. 140--><p class="noindent" >Save the model and visit the outline view. Within the outline view, right click on the <span 
-class="ec-lmsso-10">MrPong </span>actor and select
+ id="x11-440002.5.6"></a>Setup the include path</h4>
+<!--l. 156--><p class="noindent" >Before you can build the application you must setup the include path for the runtime system.
+Right click the project and select <span 
+class="ec-lmsso-10">Properties</span>. Add the include path as described in <span 
+class="ec-lmsso-10">setting up the</span>
 <span 
-class="ec-lmsso-10">Edit Structure</span>. Select an <span 
-class="ec-lmsso-10">Interface Port </span>from the toolbox and add it to MrPong. Name the Port <span 
-class="ec-lmsso-10">PingPongPort</span>
-and select the <span 
-class="ec-lmsso-10">PingPongProtocol</span>.
-</p><!--l. 144--><p class="noindent" ><img 
-src="images/025-SendingData02.png" alt="PIC"  
+class="ec-lmsso-10">workspace</span>.
+</p><!--l. 160--><p class="noindent" ><img 
+src="images/016-HelloWorldC14.png" alt="PIC"  
  />
-</p><!--l. 147--><p class="noindent" >Do the same with MrPing but mark the port as <span 
-class="ec-lmsso-10">conjugated</span>
-</p><!--l. 149--><p class="noindent" >
+</p><!--l. 163--><p class="noindent" >Add the runtime library.
+</p><!--l. 165--><p class="noindent" ><img 
+src="images/016-HelloWorldC15.png" alt="PIC"  
+ />
+</p><!--l. 168--><p class="noindent" >Recognize the name of the library ("org.eclipse.etrice.runtime.c"). The library file on your disk is
+"liborg.eclipse.etrice.runtime.c.a".
+</p><!--l. 171--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.7   </span> <a 
- id="x11-510002.5.7"></a>Define MrPongs behavior</h4>
-<!--l. 151--><p class="noindent" >Within the outline view, right click MrPong and select <span 
-class="ec-lmsso-10">Edit Behavior</span>. Create the following state
-machine:
-</p><!--l. 154--><p class="noindent" ><img 
-src="images/025-SendingData04.png" alt="PIC"  
+ id="x11-450002.5.7"></a>Build and run the model</h4>
+<!--l. 173--><p class="noindent" >Now you can build the application. Click the build button to build the application. Run the application as
+<span 
+class="ec-lmsso-10">Local C/C++ Application</span>. Verify the output.
+</p><!--l. 177--><p class="noindent" ><img 
+src="images/016-HelloWorldC16.png" alt="PIC"  
  />
-</p><!--l. 157--><p class="noindent" >The transition dialogues should look like this: For <span 
-class="ec-lmsso-10">ping</span>:
-</p><!--l. 160--><p class="noindent" ><img 
-src="images/025-SendingData05.png" alt="PIC"  
- />
-</p><!--l. 163--><p class="noindent" >For <span 
-class="ec-lmsso-10">pingSimple</span>:
-</p><!--l. 165--><p class="noindent" ><img 
-src="images/025-SendingData06.png" alt="PIC"  
- />
-</p><!--l. 169--><p class="noindent" >
+</p><!--l. 180--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.5.8   </span> <a 
- id="x11-520002.5.8"></a>Define MrPing behavior</h4>
-<!--l. 171--><p class="noindent" >Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of
-content assist create a new operation.
-</p><!--l. 174--><p class="noindent" ><img 
-src="images/025-SendingData07.png" alt="PIC"  
- />
-</p><!--l. 177--><p class="noindent" >Name the operation <span 
-class="ec-lmsso-10">printData </span>and define the DemoData as a parameter.
-</p><!--l. 179--><p class="noindent" >Fill in the following code:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-13">
-Operation&#x00A0;printData(d:&#x00A0;DemoData)&#x00A0;:&#x00A0;void&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int32Val:&#x00A0;%d\\n\",d.int32Val);"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.float64Val:&#x00A0;%f\\n\",d.float64Val);"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int8Array:&#x00A0;\");"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"for(int&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x003C;d.int8Array.length;&#x00A0;i++)&#x00A0;{"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"%d&#x00A0;\",d.int8Array[i]);}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"\\nd.stringVal:&#x00A0;%s\\n\",d.stringVal);"
-&#x00A0;<br />}
-</div>
-<!--l. 191--><p class="nopar" >
-</p><!--l. 194--><p class="noindent" >For MrPing create the following state machine: (Remember that you can copy and paste the action code from
-the tutorial directory.)
-</p><!--l. 197--><p class="noindent" ><img 
-src="images/025-SendingData08.png" alt="PIC"  
- />
-</p><!--l. 200--><p class="noindent" >The transition dialogues should look like this:
-</p><!--l. 202--><p class="noindent" >For <span 
-class="ec-lmsso-10">init</span>:
-</p><!--l. 204--><p class="noindent" ><img 
-src="images/025-SendingData09.png" alt="PIC"  
- />
-</p><!--l. 207--><p class="noindent" >For <span 
-class="ec-lmsso-10">wait1</span>:
-</p><!--l. 209--><p class="noindent" ><img 
-src="images/025-SendingData10.png" alt="PIC"  
- />
-</p><!--l. 212--><p class="noindent" >For <span 
-class="ec-lmsso-10">next</span>:
-</p><!--l. 214--><p class="noindent" ><img 
-src="images/025-SendingData11.png" alt="PIC"  
- />
-</p><!--l. 217--><p class="noindent" >For <span 
-class="ec-lmsso-10">wait2</span>:
-</p><!--l. 219--><p class="noindent" ><img 
-src="images/025-SendingData12.png" alt="PIC"  
- />
-</p><!--l. 222--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.9   </span> <a 
- id="x11-530002.5.9"></a>Define the top level</h4>
-<!--l. 224--><p class="noindent" >Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the
-ports.
-</p><!--l. 226--><p class="noindent" ><img 
-src="images/025-SendingData13.png" alt="PIC"  
- />
-</p>
-<div class="flushleft" 
->
-<!--l. 229--><p class="noindent" >
-The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.</p></div>
-<!--l. 232--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.10   </span> <a 
- id="x11-540002.5.10"></a>Generate and run the model</h4>
-<!--l. 234--><p class="noindent" >Generate the code by right click to <span 
-class="ec-lmssbx-10">gen_SendingData.launch </span>and run it as <span 
-class="ec-lmssbx-10">gen_SendingData</span>. Run the
-model. The output should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-14">
-type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;1
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;2
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;3
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;4
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;5
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;6
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;7
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;8
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;9
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;10
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />d.int32Val:&#x00A0;4711
-&#x00A0;<br />d.float64Val:&#x00A0;0,000000
-&#x00A0;<br />d.int8Array:&#x00A0;1&#x00A0;2&#x00A0;3&#x00A0;4&#x00A0;5&#x00A0;6&#x00A0;7&#x00A0;8&#x00A0;9&#x00A0;10
-&#x00A0;<br />d.stringVal:&#x00A0;empty
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />d.int32Val:&#x00A0;815
-&#x00A0;<br />d.float64Val:&#x00A0;3,141234
-&#x00A0;<br />d.int8Array:&#x00A0;100&#x00A0;101&#x00A0;102&#x00A0;103&#x00A0;104&#x00A0;105&#x00A0;106&#x00A0;107&#x00A0;108&#x00A0;109
-&#x00A0;<br />d.stringVal:&#x00A0;some&#x00A0;contents
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />quit
-&#x00A0;<br />echo:&#x00A0;quit
-</div>
-<!--l. 286--><p class="nopar" >
-                                                                                 
-                                                                                 
-</p><!--l. 288--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.11   </span> <a 
- id="x11-550002.5.11"></a>Summary</h4>
-<!--l. 290--><p class="noindent" >Within the first loop an integer value will be incremented by <span 
-class="ec-lmsso-10">MrPong </span>and sent back to <span 
-class="ec-lmsso-10">MrPing</span>. As long as the
-guard is true <span 
-class="ec-lmsso-10">MrPing </span>sends back the value.
-</p><!--l. 293--><p class="noindent" >Within the <span 
-class="ec-lmsso-10">next </span>transition, <span 
-class="ec-lmsso-10">MrPing </span>creates a data class and sends the default values. Then <span 
-class="ec-lmsso-10">MrPing </span>changes
-the values and sends the class again. At this point you should note that during the send operation, a copy of
-the data class will be created and sent. Otherwise it would not be possible to send the same object two times,
-even more it would not be possible to send a stack object at all. This type of data passing is called <span 
-class="ec-lmsso-10">sending</span>
-<span 
-class="ec-lmsso-10">data by value</span>. However, for performance reasons some applications requires <span 
-class="ec-lmsso-10">sending data by reference</span>.
-In this case the user is responsible for the life cycle of the object. In Java the VM takes care
-of the life cycle of an object. This is not the case for C/C++. Consider that a object which is
-created within a transition of a state machine will be destroyed when the transition is finished. The
-receiving FSM would receive an invalid reference. Therefore care must be taken when sending
-references.
-</p><!--l. 304--><p class="noindent" >For sending data by reference you simply have to add the keyword <span 
-class="ec-lmsso-10">ref  </span>to the protocol definition.
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-15">
-Message&#x00A0;ping(data:&#x00A0;DemoData&#x00A0;ref)
-</div>
-<!--l. 306--><p class="nopar" >
-</p><!--l. 308--><p class="noindent" >Make the test and inspect the console output.
+ id="x11-460002.5.8"></a>Summary</h4>
+<!--l. 182--><p class="noindent" >You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are
+able to create a launch configuration to start the code generator and to perform all necessary settings to
+compile and link the application.
+</p><!--l. 186--><p class="noindent" >The next tutorial provides an exercise to get more familiar with these working steps.
                                                                                  
                                                                                  
 </p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+href="etrice-docse8.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="etrice-docse7.html" >front</a>] [<a 
