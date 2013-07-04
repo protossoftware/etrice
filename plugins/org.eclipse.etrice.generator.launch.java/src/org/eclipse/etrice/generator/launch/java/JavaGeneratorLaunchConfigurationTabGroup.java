@@ -5,7 +5,7 @@ import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.EnvironmentTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
-import org.eclipse.debug.ui.RefreshTab;
+import org.eclipse.etrice.generator.launch.GeneratorRefreshTab;
 
 public class JavaGeneratorLaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabGroup {
 
@@ -14,7 +14,7 @@ public class JavaGeneratorLaunchConfigurationTabGroup extends AbstractLaunchConf
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
 				new JavaGeneratorMainTab(),
 				new JavaGeneratorConfigTab(),
-				new RefreshTab(),
+				new GeneratorRefreshTab(),
 				new EnvironmentTab(),
 				new CommonTab()
 			};
