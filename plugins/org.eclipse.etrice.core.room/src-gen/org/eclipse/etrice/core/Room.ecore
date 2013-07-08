@@ -962,6 +962,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will&#xD;&#xA;be turned into an actor instance of the referenced type.&#xD;&#xA;"/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refType" eType="#//ReferenceType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -973,6 +974,10 @@
         <details key="documentation" value="&lt;br>This is the type (i.e. actor class) of the actor ref.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ReferenceType">
+    <eLiterals name="FIXED" literal="fixed"/>
+    <eLiterals name="OPTIONAL" value="1" literal="optional"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraphNode" eSuperTypes="#//StateGraphItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

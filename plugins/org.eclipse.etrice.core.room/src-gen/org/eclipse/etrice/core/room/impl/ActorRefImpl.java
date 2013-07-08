@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -20,6 +21,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getRefType <em>Ref Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getType <em>Type</em>}</li>
  * </ul>
@@ -29,6 +31,26 @@ import org.eclipse.etrice.core.room.RoomPackage;
  */
 public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
 {
+  /**
+   * The default value of the '{@link #getRefType() <em>Ref Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefType()
+   * @generated
+   * @ordered
+   */
+  protected static final ReferenceType REF_TYPE_EDEFAULT = ReferenceType.FIXED;
+
+  /**
+   * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefType()
+   * @generated
+   * @ordered
+   */
+  protected ReferenceType refType = REF_TYPE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -78,6 +100,29 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   protected EClass eStaticClass()
   {
     return RoomPackage.Literals.ACTOR_REF;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceType getRefType()
+  {
+    return refType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRefType(ReferenceType newRefType)
+  {
+    ReferenceType oldRefType = refType;
+    refType = newRefType == null ? REF_TYPE_EDEFAULT : newRefType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_REF__REF_TYPE, oldRefType, refType));
   }
 
   /**
@@ -156,6 +201,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_REF__REF_TYPE:
+        return getRefType();
       case RoomPackage.ACTOR_REF__SIZE:
         return getSize();
       case RoomPackage.ACTOR_REF__TYPE:
@@ -175,6 +222,9 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_REF__REF_TYPE:
+        setRefType((ReferenceType)newValue);
+        return;
       case RoomPackage.ACTOR_REF__SIZE:
         setSize((Integer)newValue);
         return;
@@ -195,6 +245,9 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_REF__REF_TYPE:
+        setRefType(REF_TYPE_EDEFAULT);
+        return;
       case RoomPackage.ACTOR_REF__SIZE:
         setSize(SIZE_EDEFAULT);
         return;
@@ -215,6 +268,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_REF__REF_TYPE:
+        return refType != REF_TYPE_EDEFAULT;
       case RoomPackage.ACTOR_REF__SIZE:
         return size != SIZE_EDEFAULT;
       case RoomPackage.ACTOR_REF__TYPE:
@@ -234,7 +289,9 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (size: ");
+    result.append(" (refType: ");
+    result.append(refType);
+    result.append(", size: ");
     result.append(size);
     result.append(')');
     return result.toString();

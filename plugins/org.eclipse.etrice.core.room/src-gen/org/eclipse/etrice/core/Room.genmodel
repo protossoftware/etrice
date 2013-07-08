@@ -24,6 +24,10 @@
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/ASYNCHRONOUS"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ActorCommunicationType/SYNCHRONOUS"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//ReferenceType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/FIXED"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/OPTIONAL"/>
+    </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
@@ -240,6 +244,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPoint/service"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/refType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/size"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorRef/type"/>
     </genClasses>

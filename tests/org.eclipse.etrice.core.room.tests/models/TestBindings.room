@@ -1,64 +1,146 @@
 RoomModel TestBindings {
-	LogicalSystem Sys {
-		SubSystemRef main: Application
+	
+	ActorClass Example1 {
+		Structure {
+			ActorRef ref1: AC1
+			ActorRef ref2: AC2
+			
+			// no self connection allowed, ports are identical
+			Binding ref1.reg and ref1.reg
+		}
 	}
 	
-	SubSystemClass Application {
-		ActorRef ref1: AC1
-		ActorRef ref2: AC2
-		
-		// no self connection allowed, ports are indentical
-		Binding ref1.reg and ref1.reg
-		
-		// port with multiplicity 1 is already connected
-		Binding ref1.reg and ref2.conj
-		Binding ref1.reg and ref2.conj
-		
-		// protocols don't match
-		Binding ref1.reg and ref2.other
-		
-		// protocol extends incoming
-		Binding ref1.base and ref2.extin
-		
-		// ok
-		Binding ref1.base2 and ref2.extout
-
-		// protocol extends outgoing
-		Binding ref1.base3 and ref2.extout2
-
-		// derived protocols not connectable (both directions extended)
-		Binding ref1.base4 and ref2.extinout 
-
-		LogicalThread dflt_thread
+	ActorClass Example1a {
+		Structure {
+			ActorRef ref1: AC1
+			ActorRef ref2: AC2
+			
+			// ports are already bound
+			Binding ref1.reg and ref2.conj
+			Binding ref1.reg and ref2.conj
+		}
 	}
 	
+	ActorClass Example2 {
+		Structure {
+			ActorRef ref1: AC1
+			ActorRef ref2: AC2
+			ActorRef ref3: AC2
+			
+			// port with multiplicity 1 is already connected
+			Binding ref1.reg and ref2.conj
+			Binding ref1.reg and ref3.conj
+		}
+	}
+	
+	ActorClass Example3 {
+		Structure {
+			ActorRef ref1: AC1
+			ActorRef ref2: AC2
+			
+			// protocols don't match
+			Binding ref1.reg and ref2.other
+		}
+	}
+	
+	ActorClass Example4 {
+		Structure {
+			ActorRef ref1: AC3
+			ActorRef ref2: AC4
+			
+			// protocol extends incoming
+			Binding ref1.base and ref2.extin
+		}
+	}
+	
+	ActorClass Example5 {
+		Structure {
+			ActorRef ref1: AC3
+			ActorRef ref2: AC4
+			
+			// ok
+			Binding ref1.base2 and ref2.extout
+		}
+	}
+	
+	ActorClass Example6 {
+		Structure {
+			ActorRef ref1: AC3
+			ActorRef ref2: AC4
+	
+			// protocol extends outgoing
+			Binding ref1.base3 and ref2.extout2
+		}
+	}
+	
+	ActorClass Example7 {
+		Structure {
+			ActorRef ref1: AC3
+			ActorRef ref2: AC4
+	
+			// derived protocols not connectable (both directions extended)
+			Binding ref1.base4 and ref2.extinout 
+		}
+	}
+	
+	ActorClass Example8 {
+		Structure {
+			ActorRef ref1: AC5
+			ActorRef ref2: AC6
+			ActorRef ref3: AC5
+			ActorRef ref4: AC6
+	
+			// a replicated port must have at most one replicated peer
+			Binding ref1.p and ref2.pc 
+			Binding ref2.pc and ref3.p 
+			Binding ref3.p and ref4.pc 
+		}
+	}
+
+
+	// helper actor classes
+		
 	ActorClass AC1 {
 		Interface {
 			Port reg: PC1
-			Port base: PCBase
-			Port base2: PCBase
-			conjugated Port base3: PCBase
-			conjugated Port base4: PCBase
 		}
-		Structure {
-			external Port reg
-		}
-		Behavior { }
 	}
 	
 	ActorClass AC2 {
 		Interface {
 			conjugated Port conj: PC1
 			conjugated Port other: PC2
+		}
+	}
+		
+	ActorClass AC3 {
+		Interface {
+			Port base: PCBase
+			Port base2: PCBase
+			conjugated Port base3: PCBase
+			conjugated Port base4: PCBase
+		}
+	}
+	
+	ActorClass AC4 {
+		Interface {
 			conjugated Port extout: PCExtendOut
 			conjugated Port extin: PCExtendIn
 			Port extout2: PCExtendOut
 			Port extinout: PCExtendInOut
 		}
-		Structure {
-			external Port conj
+	}
+	
+	ActorClass AC5 {
+		Interface {
+			Port p[2]: PC1
 		}
-		Behavior { }
+	}
+	
+	ActorClass AC6 {
+		Interface {
+			conjugated Port pc[2]: PC1
+		}
 	}
 	
 	ProtocolClass PC1 {

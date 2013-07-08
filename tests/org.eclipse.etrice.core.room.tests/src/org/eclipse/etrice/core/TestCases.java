@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,10 +27,6 @@ import org.junit.Test;
  */
 public class TestCases extends TestBase {
 
-	/**
-	 * 
-	 */
-	private static final String MSG1 = "connected sub component ports must be conjugated to each other";
 	private Resource resource;
 
 	@Before
@@ -44,7 +41,8 @@ public class TestCases extends TestBase {
 		Diagnostic diag = getDiag(resource.getContents().get(0));
 		HashMap<String, Diagnostic> msg2diag = getMappedDiagnostics(diag);
 		assertEquals("number of problems", 1, msg2diag.size());
-		assertNotNull(MSG1, msg2diag.get(MSG1));
+		assertNotNull(ValidationUtil.CONNECTED_SUB_COMPONENT_PORTS_MUST_BE_CONJUGATED_TO_EACH_OTHER,
+				msg2diag.get(ValidationUtil.CONNECTED_SUB_COMPONENT_PORTS_MUST_BE_CONJUGATED_TO_EACH_OTHER));
 	}
 
 	/**

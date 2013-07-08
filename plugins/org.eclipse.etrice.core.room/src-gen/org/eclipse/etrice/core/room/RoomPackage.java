@@ -2772,13 +2772,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_REF__DOCU = ACTOR_CONTAINER_REF__DOCU;
 
   /**
+   * The feature id for the '<em><b>Ref Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_REF__REF_TYPE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Size</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_REF__SIZE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 0;
+  int ACTOR_REF__SIZE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -2787,7 +2796,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_REF__TYPE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 1;
+  int ACTOR_REF__TYPE = ACTOR_CONTAINER_REF_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Actor Ref</em>' class.
@@ -2796,7 +2805,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_REF_FEATURE_COUNT = ACTOR_CONTAINER_REF_FEATURE_COUNT + 2;
+  int ACTOR_REF_FEATURE_COUNT = ACTOR_CONTAINER_REF_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphItemImpl <em>State Graph Item</em>}' class.
@@ -4273,6 +4282,16 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   int ACTOR_COMMUNICATION_TYPE = 85;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.room.ReferenceType
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getReferenceType()
+   * @generated
+   */
+  int REFERENCE_TYPE = 86;
 
 
   /**
@@ -6118,6 +6137,17 @@ public interface RoomPackage extends EPackage
   EClass getActorRef();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorRef#getRefType <em>Ref Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ref Type</em>'.
+   * @see org.eclipse.etrice.core.room.ActorRef#getRefType()
+   * @see #getActorRef()
+   * @generated
+   */
+  EAttribute getActorRef_RefType();
+
+  /**
    * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorRef#getSize <em>Size</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6993,6 +7023,16 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EEnum getActorCommunicationType();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Reference Type</em>'.
+   * @see org.eclipse.etrice.core.room.ReferenceType
+   * @generated
+   */
+  EEnum getReferenceType();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -8494,6 +8534,14 @@ public interface RoomPackage extends EPackage
     EClass ACTOR_REF = eINSTANCE.getActorRef();
 
     /**
+     * The meta object literal for the '<em><b>Ref Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTOR_REF__REF_TYPE = eINSTANCE.getActorRef_RefType();
+
+    /**
      * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9228,6 +9276,16 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EEnum ACTOR_COMMUNICATION_TYPE = eINSTANCE.getActorCommunicationType();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.room.ReferenceType
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getReferenceType()
+     * @generated
+     */
+    EEnum REFERENCE_TYPE = eINSTANCE.getReferenceType();
 
   }
 

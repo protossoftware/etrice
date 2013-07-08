@@ -169,6 +169,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
         return createCommunicationTypeFromString(eDataType, initialValue);
       case RoomPackage.ACTOR_COMMUNICATION_TYPE:
         return createActorCommunicationTypeFromString(eDataType, initialValue);
+      case RoomPackage.REFERENCE_TYPE:
+        return createReferenceTypeFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -190,6 +192,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
         return convertCommunicationTypeToString(eDataType, instanceValue);
       case RoomPackage.ACTOR_COMMUNICATION_TYPE:
         return convertActorCommunicationTypeToString(eDataType, instanceValue);
+      case RoomPackage.REFERENCE_TYPE:
+        return convertReferenceTypeToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -1170,6 +1174,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * @generated
    */
   public String convertActorCommunicationTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceType createReferenceTypeFromString(EDataType eDataType, String initialValue)
+  {
+    ReferenceType result = ReferenceType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertReferenceTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

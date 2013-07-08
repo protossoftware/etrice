@@ -72,6 +72,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLiteralTypeAccess().getAlternatives(), "rule__LiteralType__Alternatives");
 					put(grammarAccess.getCommunicationTypeAccess().getAlternatives(), "rule__CommunicationType__Alternatives");
 					put(grammarAccess.getActorCommunicationTypeAccess().getAlternatives(), "rule__ActorCommunicationType__Alternatives");
+					put(grammarAccess.getReferenceTypeAccess().getAlternatives(), "rule__ReferenceType__Alternatives");
 					put(grammarAccess.getRoomModelAccess().getGroup(), "rule__RoomModel__Group__0");
 					put(grammarAccess.getVarDeclAccess().getGroup(), "rule__VarDecl__Group__0");
 					put(grammarAccess.getRefableTypeAccess().getGroup(), "rule__RefableType__Group__0");
@@ -154,7 +155,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRelaySAPointAccess().getGroup(), "rule__RelaySAPoint__Group__0");
 					put(grammarAccess.getSPPointAccess().getGroup(), "rule__SPPoint__Group__0");
 					put(grammarAccess.getActorRefAccess().getGroup(), "rule__ActorRef__Group__0");
-					put(grammarAccess.getActorRefAccess().getGroup_2(), "rule__ActorRef__Group_2__0");
 					put(grammarAccess.getStateGraphAccess().getGroup(), "rule__StateGraph__Group__0");
 					put(grammarAccess.getStateMachineAccess().getGroup(), "rule__StateMachine__Group__0");
 					put(grammarAccess.getSimpleStateAccess().getGroup(), "rule__SimpleState__Group__0");
@@ -370,10 +370,11 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRelaySAPointAccess().getRelayAssignment_1(), "rule__RelaySAPoint__RelayAssignment_1");
 					put(grammarAccess.getSPPointAccess().getRefAssignment_0(), "rule__SPPoint__RefAssignment_0");
 					put(grammarAccess.getSPPointAccess().getServiceAssignment_2(), "rule__SPPoint__ServiceAssignment_2");
-					put(grammarAccess.getActorRefAccess().getNameAssignment_1(), "rule__ActorRef__NameAssignment_1");
-					put(grammarAccess.getActorRefAccess().getSizeAssignment_2_1(), "rule__ActorRef__SizeAssignment_2_1");
-					put(grammarAccess.getActorRefAccess().getTypeAssignment_4(), "rule__ActorRef__TypeAssignment_4");
-					put(grammarAccess.getActorRefAccess().getDocuAssignment_5(), "rule__ActorRef__DocuAssignment_5");
+					put(grammarAccess.getActorRefAccess().getRefTypeAssignment_0(), "rule__ActorRef__RefTypeAssignment_0");
+					put(grammarAccess.getActorRefAccess().getNameAssignment_2(), "rule__ActorRef__NameAssignment_2");
+					put(grammarAccess.getActorRefAccess().getSizeAssignment_3(), "rule__ActorRef__SizeAssignment_3");
+					put(grammarAccess.getActorRefAccess().getTypeAssignment_5(), "rule__ActorRef__TypeAssignment_5");
+					put(grammarAccess.getActorRefAccess().getDocuAssignment_6(), "rule__ActorRef__DocuAssignment_6");
 					put(grammarAccess.getStateGraphAccess().getStatesAssignment_2_0(), "rule__StateGraph__StatesAssignment_2_0");
 					put(grammarAccess.getStateGraphAccess().getTrPointsAssignment_2_1(), "rule__StateGraph__TrPointsAssignment_2_1");
 					put(grammarAccess.getStateGraphAccess().getChPointsAssignment_2_2(), "rule__StateGraph__ChPointsAssignment_2_2");

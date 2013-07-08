@@ -3100,70 +3100,66 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class ActorRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActorRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cActorRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cSizeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cSizeINTTerminalRuleCall_2_1_0 = (RuleCall)cSizeAssignment_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cTypeActorClassCrossReference_4_0 = (CrossReference)cTypeAssignment_4.eContents().get(0);
-		private final RuleCall cTypeActorClassFQNParserRuleCall_4_0_1 = (RuleCall)cTypeActorClassCrossReference_4_0.eContents().get(1);
-		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
+		private final Assignment cRefTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cRefTypeReferenceTypeEnumRuleCall_0_0 = (RuleCall)cRefTypeAssignment_0.eContents().get(0);
+		private final Keyword cActorRefKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cSizeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSizeMULTIPLICITYParserRuleCall_3_0 = (RuleCall)cSizeAssignment_3.eContents().get(0);
+		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cTypeActorClassCrossReference_5_0 = (CrossReference)cTypeAssignment_5.eContents().get(0);
+		private final RuleCall cTypeActorClassFQNParserRuleCall_5_0_1 = (RuleCall)cTypeActorClassCrossReference_5_0.eContents().get(1);
+		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
 		//ActorRef:
 		//
-		//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
+		//	refType=ReferenceType? "ActorRef" name=ID size=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?
+		//refType=ReferenceType? "ActorRef" name=ID size=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
+		//refType=ReferenceType?
+		public Assignment getRefTypeAssignment_0() { return cRefTypeAssignment_0; }
+
+		//ReferenceType
+		public RuleCall getRefTypeReferenceTypeEnumRuleCall_0_0() { return cRefTypeReferenceTypeEnumRuleCall_0_0; }
+
 		//"ActorRef"
-		public Keyword getActorRefKeyword_0() { return cActorRefKeyword_0; }
+		public Keyword getActorRefKeyword_1() { return cActorRefKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//("[" size=INT "]")?
-		public Group getGroup_2() { return cGroup_2; }
+		//size=MULTIPLICITY?
+		public Assignment getSizeAssignment_3() { return cSizeAssignment_3; }
 
-		//"["
-		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
-
-		//size=INT
-		public Assignment getSizeAssignment_2_1() { return cSizeAssignment_2_1; }
-
-		//INT
-		public RuleCall getSizeINTTerminalRuleCall_2_1_0() { return cSizeINTTerminalRuleCall_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
+		//MULTIPLICITY
+		public RuleCall getSizeMULTIPLICITYParserRuleCall_3_0() { return cSizeMULTIPLICITYParserRuleCall_3_0; }
 
 		//":"
-		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
+		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
 
 		//type=[ActorClass|FQN]
-		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
+		public Assignment getTypeAssignment_5() { return cTypeAssignment_5; }
 
 		//[ActorClass|FQN]
-		public CrossReference getTypeActorClassCrossReference_4_0() { return cTypeActorClassCrossReference_4_0; }
+		public CrossReference getTypeActorClassCrossReference_5_0() { return cTypeActorClassCrossReference_5_0; }
 
 		//FQN
-		public RuleCall getTypeActorClassFQNParserRuleCall_4_0_1() { return cTypeActorClassFQNParserRuleCall_4_0_1; }
+		public RuleCall getTypeActorClassFQNParserRuleCall_5_0_1() { return cTypeActorClassFQNParserRuleCall_5_0_1; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_5() { return cDocuAssignment_5; }
+		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_5_0() { return cDocuDocumentationParserRuleCall_5_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
 	public class StateGraphNodeElements extends AbstractParserRuleElementFinder {
@@ -5104,6 +5100,37 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"sync"
 		public Keyword getSYNCHRONOUSSyncKeyword_3_0() { return cSYNCHRONOUSSyncKeyword_3_0; }
 	}
+
+	public class ReferenceTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "ReferenceType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cFIXEDEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cFIXEDFixedKeyword_0_0 = (Keyword)cFIXEDEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cOPTIONALEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cOPTIONALOptionalKeyword_1_0 = (Keyword)cOPTIONALEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//// IMPORTED='imported'
+		//
+		//enum ReferenceType:
+		//
+		//	FIXED="fixed" | OPTIONAL="optional";
+		public EnumRule getRule() { return rule; }
+
+		//FIXED="fixed" | OPTIONAL="optional"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//FIXED="fixed"
+		public EnumLiteralDeclaration getFIXEDEnumLiteralDeclaration_0() { return cFIXEDEnumLiteralDeclaration_0; }
+
+		//"fixed"
+		public Keyword getFIXEDFixedKeyword_0_0() { return cFIXEDFixedKeyword_0_0; }
+
+		//OPTIONAL="optional"
+		public EnumLiteralDeclaration getOPTIONALEnumLiteralDeclaration_1() { return cOPTIONALEnumLiteralDeclaration_1; }
+
+		//"optional"
+		public Keyword getOPTIONALOptionalKeyword_1_0() { return cOPTIONALOptionalKeyword_1_0; }
+	}
 	
 	private RoomModelElements pRoomModel;
 	private RoomClassElements pRoomClass;
@@ -5158,6 +5185,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private RelaySAPointElements pRelaySAPoint;
 	private SPPointElements pSPPoint;
 	private ActorRefElements pActorRef;
+	private ReferenceTypeElements unknownRuleReferenceType;
 	private StateGraphNodeElements pStateGraphNode;
 	private StateGraphItemElements pStateGraphItem;
 	private StateElements pState;
@@ -5896,13 +5924,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ActorRef:
 	//
-	//	"ActorRef" name=ID ("[" size=INT "]")? ":" type=[ActorClass|FQN] docu=Documentation?;
+	//	refType=ReferenceType? "ActorRef" name=ID size=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {
 		return (pActorRef != null) ? pActorRef : (pActorRef = new ActorRefElements());
 	}
 	
 	public ParserRule getActorRefRule() {
 		return getActorRefAccess().getRule();
+	}
+
+	//// IMPORTED='imported'
+	//
+	//enum ReferenceType:
+	//
+	//	FIXED="fixed" | OPTIONAL="optional";
+	public ReferenceTypeElements getReferenceTypeAccess() {
+		return (unknownRuleReferenceType != null) ? unknownRuleReferenceType : (unknownRuleReferenceType = new ReferenceTypeElements());
+	}
+	
+	public EnumRule getReferenceTypeRule() {
+		return getReferenceTypeAccess().getRule();
 	}
 
 	//// **************************************************************
