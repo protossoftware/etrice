@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -34,6 +35,7 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -52,6 +54,7 @@ import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -356,7 +359,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 
 	@Check
-	public void checkBinding(Binding bind) {
+	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);
 		if (!result.isOk()) {
 			EObject sc = bind.eContainer();
@@ -414,6 +417,52 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		Result result = ValidationUtil.checkState(state);
 		if (!result.isOk())
 			error(result);
+	}
+	
+	@Check
+	public void checkPortCommunicationCompatibility(ActorClass ac){
+		if(ac.getCommType() == ActorCommunicationType.SYNCHRONOUS){
+			// not supported yet
+			return;
+		}
+		
+		// check external ports
+		List<InterfaceItem> extPorts = new ArrayList<InterfaceItem>();
+		for(ExternalPort exPort : ac.getExtPorts())
+			extPorts.add(exPort.getIfport());
+		checkPortCommunicationCompatibility(ac, extPorts, RoomPackage.eINSTANCE.getActorClass_ExtPorts());
+		// check internal ports
+		checkPortCommunicationCompatibility(ac, ac.getIntPorts(), RoomPackage.eINSTANCE.getActorClass_IntPorts());
+		// check SAPs
+		checkPortCommunicationCompatibility(ac, ac.getStrSAPs(), RoomPackage.eINSTANCE.getActorClass_StrSAPs());
+		// check service implementations
+		List<InterfaceItem> serviceImpls = new ArrayList<InterfaceItem>();
+		for(ServiceImplementation si: ac.getServiceImplementations())
+			serviceImpls.add(si.getSpp());
+		checkPortCommunicationCompatibility(ac, serviceImpls, RoomPackage.eINSTANCE.getActorClass_ServiceImplementations());
+	}
+	
+	private void checkPortCommunicationCompatibility(ActorClass ac, List<? extends InterfaceItem> items, EReference ref){
+		boolean datadriven = ac.getCommType() == ActorCommunicationType.DATA_DRIVEN;
+		boolean eventdriven = ac.getCommType() == ActorCommunicationType.EVENT_DRIVEN;
+		boolean async = ac.getCommType() == ActorCommunicationType.ASYNCHRONOUS;
+		//boolean synchronous = ac.getCommType() == ActorCommunicationType.SYNCHRONOUS;
+		
+		for(InterfaceItem item : items){
+			ProtocolClass pc = RoomHelpers.getProtocol(item);
+			switch(pc.getCommType()){
+				case DATA_DRIVEN:
+					if(!datadriven && !async)
+						error("ports with datadriven protocols not allowed", ref, items.indexOf(item));
+					break;
+				case EVENT_DRIVEN:
+					if(!eventdriven && !async)
+						error("ports with eventdriven protocols not allowed", ref, items.indexOf(item));
+					break;
+				case SYNCHRONOUS:
+					// not supported yet
+			}
+		}
 	}
 	
 	@Check
