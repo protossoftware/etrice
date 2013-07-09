@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -196,6 +197,8 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 				createDecorator(size, "multiplicity");
 			}
 		}
+		
+		Combo refType = createCombo(body, "Reference &Type:", ref, ReferenceType.class, RoomPackage.Literals.ACTOR_REF__REF_TYPE, ReferenceType.VALUES);
 		
 		name.selectAll();
 		name.setFocus();

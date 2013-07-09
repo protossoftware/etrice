@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -82,10 +83,12 @@ import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
+import org.eclipse.graphiti.mm.algorithms.styles.Style;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.AnchorContainer;
 import org.eclipse.graphiti.mm.pictograms.ChopboxAnchor;
@@ -103,6 +106,7 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.graphiti.util.PredefinedColoredAreas;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -122,6 +126,7 @@ public class ActorContainerRefSupport {
 	private static final int REPLICATED_RECT_OFFSET = 3;
 	
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
+	public static final IColorConstant OPTIONAL_COLOR = new ColorConstant(0, 0, 255);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	public static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 
@@ -244,14 +249,19 @@ public class ActorContainerRefSupport {
 				EObject parent = (EObject) getBusinessObjectForPictogramElement(acShape);
 				boolean inherited = isInherited(ar, parent);
 			
-				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				boolean isOptional = false;
+				if (ar instanceof ActorRef) {
+					isOptional = ((ActorRef) ar).getRefType()==ReferenceType.OPTIONAL;
+				}
+				
+				Color lineColor = isOptional? manageColor(OPTIONAL_COLOR) : manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 				{
 					int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 					int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
 					final Rectangle invisibleRectangle = Graphiti.getGaService().createInvisibleRectangle(containerShape);
 					Graphiti.getGaService().setLocationAndSize(invisibleRectangle,
 							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
-	
+					
 					createRefFigure(ar, getDiagram(), containerShape, invisibleRectangle, lineColor, manageColor(BACKGROUND));
 				}
 					
@@ -402,9 +412,14 @@ public class ActorContainerRefSupport {
 				doneChanges   = true;
 				//updateLabel(acr, context.getPictogramElements()[0]);
 
+				boolean isOptional = false;
+				if (acr instanceof ActorRef) {
+					isOptional = ((ActorRef) acr).getRefType()==ReferenceType.OPTIONAL;
+				}
+				
 				EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
 				boolean inherited = isInherited(acr, parent);
-				Color lineColor = manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
+				Color lineColor = isOptional? manageColor(OPTIONAL_COLOR) : manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 				createRefFigure(acr, getDiagram(), containerShape, (Rectangle)containerShape.getGraphicsAlgorithm(), lineColor, manageColor(BACKGROUND));
 			}
 			
@@ -1066,6 +1081,8 @@ public class ActorContainerRefSupport {
 		borderRect.setLineWidth(LINE_WIDTH);
 		gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
 
+		//hatchRectangle(borderRect, lineColor);
+		
 		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()>1) {
 			Rectangle sizeFrame = gaService.createRectangle(invisibleRectangle);
 			sizeFrame.setForeground(lineColor);
@@ -1109,6 +1126,71 @@ public class ActorContainerRefSupport {
 			label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
 			gaService.setLocationAndSize(label, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
 		}
+	}
+
+	private static void hatchRectangle(Rectangle borderRect, Color lc) {
+		int x0=0, y0=0;
+		int x1=0, y1=0;
+		int step=15;
+		boolean down0=true;
+		boolean right1=true;
+		int width = borderRect.getWidth();
+		int height = borderRect.getHeight();
+		
+		IGaService gaService = Graphiti.getGaService();
+
+		while (true) {
+			if (down0) {
+				y0+=step;
+				if (y0>height) {
+					down0=false;
+					x0=y0-height;
+					y0=height;
+				}
+			}
+			else {
+				x0+=step;
+				if (x0>width)
+					break;
+			}
+			
+			if (right1) {
+				x1+=step;
+				if (x1>width) {
+					right1=false;
+					y1=x1-width;
+					x1=width;
+				}
+			}
+			else {
+				y1+=step;
+				if (y0>height)
+					break;
+			}
+			
+			Polyline line = gaService.createPlainPolyline(borderRect, new int[] {x0, y0, x1, y1});
+			line.setForeground(lc);
+		}
+	}
+
+	public static Style getStyle(Diagram diagram) {
+		IGaService gaService = Graphiti.getGaService();
+
+		// this is a child style of the common-values-style
+		Style style = null;//gaService.findStyle(diagram, "line");
+
+		if (style == null) { // style not found - create new style
+			style = gaService.createPlainStyle(diagram, "line");
+			style.setFilled(true);
+			style.setForeground(gaService.manageColor(diagram, LINE_COLOR));
+			// style.setBackground(gaService.manageColor(diagram,
+			// E_CLASS_BACKGROUND));
+
+			// no background color here, we have a gradient instead
+			// see chapter "Color Schemas" in Tutorial
+			gaService.setRenderingStyle(style, PredefinedColoredAreas.getBlueWhiteGlossAdaptions());
+		}
+		return style;
 	}
 	
 	private static void addSubStructureHint(ActorContainerRef acr,
