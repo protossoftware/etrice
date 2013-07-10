@@ -169,6 +169,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/behaviorAnnotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/operations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/stateMachine"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getExternalEndPorts"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getRelayPorts"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getImplementedSPPs"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//InterfaceItem/name"/>
