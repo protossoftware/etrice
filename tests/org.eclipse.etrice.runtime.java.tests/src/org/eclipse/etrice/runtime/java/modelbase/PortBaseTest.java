@@ -13,6 +13,7 @@ import junit.framework.TestCase;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.messaging.IMessageService.ExecMode;
 
 public class PortBaseTest extends TestCase {
 	protected void setUp() throws Exception {
@@ -28,9 +29,9 @@ public class PortBaseTest extends TestCase {
 		msgSvcCtrl.resetAll();
 
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_0", Thread.NORM_PRIORITY));
+				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_0", Thread.NORM_PRIORITY));
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
+				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
 
 		msgSvcCtrl.addPathToThread("/TOP/Rcv0", 0);
 		msgSvcCtrl.addPathToThread("/TOP/Rcv1", 1);
