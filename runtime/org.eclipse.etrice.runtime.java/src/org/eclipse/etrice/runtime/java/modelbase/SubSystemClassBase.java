@@ -116,7 +116,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		System.out.println("=== done close loggers");
 
 		RTServices.getInstance().destroy();
-		System.out.println("=== done destroy RTServices\n\n\n");
+		System.out.println("=== done destroy RTServices");
 	}
 	
 	public MessageService getMsgService(int idx) {
